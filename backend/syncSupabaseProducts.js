@@ -127,11 +127,18 @@ async function downloadProductImages(products) {
 
 async function uploadImageToGitHub(localFilePath, filename) {
   if (!octokit || !GITHUB_OWNER) {
+    console.warn(`⚠️ GitHub not configured (GITHUB_OWNER or PAT missing)`);
     return null;
   }
 
   try {
-    const imageBuffer = require('fs').readFileSync(localFilePath);
+    const fs = require('fs');
+    if (!fs.existsSync(localFilePath)) {
+      console.warn(`⚠️ Image file not found: ${localFilePath}`);
+      return null;
+    }
+
+    const imageBuffer = fs.readFileSync(localFilePath);
     const base64Content = imageBuffer.toString('base64');
     const gitPath = `images/${filename}`;
 
@@ -145,114 +152,118 @@ async function uploadImageToGitHub(localFilePath, filename) {
       });
       sha = data.sha;
     } catch (err) {
-      // File doesn't exist
+      // File doesn't exist, that's OK
     }
 
     // Upload or update
-    await octokit.repos.createOrUpdateFileContents({
+    const response = await octokit.repos.createOrUpdateFileContents({
       owner: GITHUB_OWNER,
       repo: IMAGES_REPO,
       path: gitPath,
-      message: `chore: sync image ${filename}`,
+      message: `chore: sync product image ${filename}`,
       content: base64Content,
       ...(sha ? { sha } : {})
     });
 
-    return `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/${gitPath}`;
+    const cdnUrl = `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/${gitPath}`;
+    console.log(`✅ Uploaded to GitHub: ${filename} → ${cdnUrl}`);
+    return cdnUrl;
   } catch (err) {
-    console.warn(`⚠️ Failed to upload ${filename} to GitHub:`, err.message);
+    console.error(`❌ Failed to upload ${filename} to GitHub:`, err.message);
     return null;
   }
 }
 
 async function convertImagesToGithubUrls(products, uploadedFilenames = new Set()) {
-  // Convert all Supabase image URLs to GitHub CDN URLs for free egress
-  // Upload images to GitHub first, then create URLs
+  if (!GITHUB_OWNER) {
+    console.warn('⚠️ GITHUB_OWNER not configured, skipping GitHub CDN conversion');
+    return;
+  }
+
+  // Collect all images (both http URLs and local paths)
+  const imagesToUpload = new Map();
 
   for (const product of products) {
-    // Convert thumbnail
-    if (product.thumbnail && product.thumbnail.startsWith('http')) {
+    // Collect thumbnail - handle both HTTP and local paths
+    if (product.thumbnail && typeof product.thumbnail === 'string') {
       const filename = extractImageFilename(product.thumbnail);
       const localPath = path.join(IMAGES_DIR, filename);
+      imagesToUpload.set(filename, { path: localPath, type: 'thumbnail' });
+    }
 
-      // Try to upload to GitHub if file exists locally
-      if (octokit && GITHUB_OWNER && !uploadedFilenames.has(filename)) {
-        try {
-          if (require('fs').existsSync(localPath)) {
+    // Collect images
+    if (Array.isArray(product.images)) {
+      product.images.forEach(img => {
+        if (typeof img === 'string') {
+          const filename = extractImageFilename(img);
+          const localPath = path.join(IMAGES_DIR, filename);
+          imagesToUpload.set(filename, { path: localPath, type: 'image' });
+        }
+      });
+    }
+
+    // Collect spec_images
+    if (Array.isArray(product.spec_images)) {
+      product.spec_images.forEach(img => {
+        if (typeof img === 'string') {
+          const filename = extractImageFilename(img);
+          const localPath = path.join(IMAGES_DIR, filename);
+          imagesToUpload.set(filename, { path: localPath, type: 'spec_image' });
+        }
+      });
+    }
+  }
+
+  // Upload all collected images to GitHub
+  if (imagesToUpload.size > 0) {
+    console.log(`\n📤 Uploading ${imagesToUpload.size} images to GitHub...`);
+    for (const [filename, { path: localPath }] of imagesToUpload.entries()) {
+      if (!uploadedFilenames.has(filename)) {
+        if (require('fs').existsSync(localPath)) {
+          try {
             const url = await uploadImageToGitHub(localPath, filename);
             if (url) {
-              product.thumbnail = url;
+              console.log(`✅ [UPLOADED] ${filename}`);
               uploadedFilenames.add(filename);
-            } else {
-              product.thumbnail = `/product-images/${filename}`;
             }
-          } else {
-            product.thumbnail = `/product-images/${filename}`;
+          } catch (err) {
+            console.warn(`⚠️ [UPLOAD FAILED] ${filename}: ${err.message}`);
           }
-        } catch (err) {
-          product.thumbnail = `/product-images/${filename}`;
+        } else {
+          console.warn(`⚠️ [NOT FOUND] ${filename}`);
         }
-      } else if (GITHUB_OWNER) {
-        product.thumbnail = `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/images/${filename}`;
-      } else {
-        product.thumbnail = `/product-images/${filename}`;
       }
+    }
+  }
+
+  // Now convert ALL image URLs (http or local) to GitHub CDN
+  for (const product of products) {
+    // Convert thumbnail
+    if (product.thumbnail && typeof product.thumbnail === 'string') {
+      const filename = extractImageFilename(product.thumbnail);
+      product.thumbnail = `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/images/${filename}`;
     }
 
     // Convert images array
     if (Array.isArray(product.images)) {
-      product.images = await Promise.all(product.images.map(async img => {
-        if (typeof img === 'string' && img.startsWith('http')) {
+      product.images = product.images.map(img => {
+        if (typeof img === 'string') {
           const filename = extractImageFilename(img);
-          const localPath = path.join(IMAGES_DIR, filename);
-
-          if (octokit && GITHUB_OWNER && !uploadedFilenames.has(filename)) {
-            try {
-              if (require('fs').existsSync(localPath)) {
-                const url = await uploadImageToGitHub(localPath, filename);
-                if (url) {
-                  uploadedFilenames.add(filename);
-                  return url;
-                }
-              }
-            } catch (err) {}
-          }
-
-          if (GITHUB_OWNER) {
-            return `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/images/${filename}`;
-          }
-          return `/product-images/${filename}`;
+          return `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/images/${filename}`;
         }
         return img;
-      }));
+      });
     }
 
     // Convert spec_images array
     if (Array.isArray(product.spec_images)) {
-      product.spec_images = await Promise.all(product.spec_images.map(async img => {
-        if (typeof img === 'string' && img.startsWith('http')) {
+      product.spec_images = product.spec_images.map(img => {
+        if (typeof img === 'string') {
           const filename = extractImageFilename(img);
-          const localPath = path.join(IMAGES_DIR, filename);
-
-          if (octokit && GITHUB_OWNER && !uploadedFilenames.has(filename)) {
-            try {
-              if (require('fs').existsSync(localPath)) {
-                const url = await uploadImageToGitHub(localPath, filename);
-                if (url) {
-                  uploadedFilenames.add(filename);
-                  return url;
-                }
-              }
-            } catch (err) {}
-          }
-
-          if (GITHUB_OWNER) {
-            return `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/images/${filename}`;
-          }
-          return `/product-images/${filename}`;
+          return `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${IMAGES_REPO}@main/images/${filename}`;
         }
         return img;
-      }));
+      });
     }
   }
 }
@@ -484,18 +495,20 @@ async function syncProducts() {
     await fs.writeFile(PRODUCTS_FILE, JSON.stringify(newData, null, 2), 'utf8');
     console.log('✅ products.json updated with local image paths\n');
 
-    // Step 8: Commit image changes to saworepo2
-    const commitResult = await commitChanges(imageDownloadStats.downloadedFiles, unusedImages);
-    if (commitResult.committed) {
-      syncResult.images_downloaded = imageDownloadStats.downloaded;
-      syncResult.images_removed = unusedImages.length;
-    }
-
-    // Step 9: Commit products.json to main repo
+    // Step 8: Commit products.json to main repo
+    onProgress?.({ type: 'progress', step: 'commit', message: 'Committing products.json to GitHub...' });
     const productsCommitResult = await commitProductsJson(stats.added, stats.updated);
     if (productsCommitResult.committed) {
       syncResult.products_committed = true;
+      onProgress?.({ type: 'progress', step: 'commit', message: 'Committed successfully' });
+    } else {
+      onProgress?.({ type: 'progress', step: 'commit', message: 'No changes to commit' });
     }
+
+    // Store image stats
+    syncResult.images_downloaded = imageDownloadStats.downloaded;
+    syncResult.images_uploaded = imageDownloadStats.downloaded;
+    syncResult.images_removed = unusedImages.length;
 
     // Step 10: Print summary
     printSummary(currentProducts, supabaseProducts, mergedProducts, stats, imageDownloadStats, unusedImages);
@@ -782,15 +795,15 @@ async function syncProductsInternal(onProgress) {
     syncResult.updated_products = stats.updatedList;
     syncResult.kept_products = stats.keptList;
 
-    // Step 4: Download images
-    onProgress?.({ type: 'progress', step: 'download-images', message: 'Downloading product images...' });
+    // Step 4: Download images from Supabase
+    onProgress?.({ type: 'progress', step: 'download-images', message: 'Downloading images from Supabase...' });
     const imageDownloadStats = await downloadProductImages(mergedProducts);
     onProgress?.({ type: 'progress', step: 'download-images', message: `Downloaded: ${imageDownloadStats.downloaded}, Skipped: ${imageDownloadStats.skipped}` });
 
-    // Step 5: Convert URLs
-    onProgress?.({ type: 'progress', step: 'convert-urls', message: 'Converting image URLs to GitHub CDN...' });
+    // Step 5: Upload images to GitHub and convert URLs
+    onProgress?.({ type: 'progress', step: 'upload-github', message: 'Uploading images to GitHub...' });
     await convertImagesToGithubUrls(mergedProducts);
-    onProgress?.({ type: 'progress', step: 'convert-urls', message: 'URLs converted' });
+    onProgress?.({ type: 'progress', step: 'upload-github', message: 'Images uploaded to GitHub CDN' });
 
     // Step 6: Detect unused
     onProgress?.({ type: 'progress', step: 'cleanup', message: 'Detecting unused images...' });
