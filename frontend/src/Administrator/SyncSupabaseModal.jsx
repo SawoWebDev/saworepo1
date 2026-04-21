@@ -4,35 +4,64 @@ export default function SyncSupabaseModal({ open, onClose, onSync }) {
   const [syncing, setSyncing] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
-
   const [syncMode, setSyncMode] = React.useState(null);
+  const [progress, setProgress] = useState([]);
+  const [stats, setStats] = useState({ added: 0, updated: 0 });
 
   const handleSync = async (isFull = false) => {
     setSyncing(true);
     setError(null);
     setResult(null);
+    setProgress([]);
+    setStats({ added: 0, updated: 0 });
 
     try {
       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      const endpoint = isFull ? '/api/products/sync-full' : '/api/products/sync-supabase';
+      const endpoint = isFull ? '/api/products/sync-full' : '/api/products/sync-supabase-stream';
       console.log(`🔄 Starting ${isFull ? 'full' : 'quick'} sync...`);
 
-      const res = await fetch(`${API_URL}${endpoint}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
+      const eventSource = new EventSource(`${API_URL}${endpoint}`);
 
-      if (!res.ok) throw new Error('Sync failed');
+      eventSource.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          console.log('📨 Progress event:', data);
 
-      const data = await res.json();
-      console.log(`✅ Sync completed:`, data);
-      setResult(data);
-      setSyncing(false);
+          if (data.type === 'product-add') {
+            setProgress(p => [...p, { type: 'add', name: data.name }]);
+            setStats(s => ({ ...s, added: s.added + 1 }));
+          } else if (data.type === 'product-update') {
+            setProgress(p => [...p, { type: 'update', name: data.name }]);
+            setStats(s => ({ ...s, updated: s.updated + 1 }));
+          } else if (data.type === 'progress') {
+            setProgress(p => [...p, { type: 'step', message: data.message, step: data.step }]);
+          } else if (data.type === 'complete') {
+            setResult(data.result);
+            setSyncing(false);
+            eventSource.close();
+            // Auto-close after 3 seconds
+            setTimeout(() => onSync?.(), 2000);
+          } else if (data.type === 'error') {
+            setError(data.message);
+            setSyncing(false);
+            eventSource.close();
+          } else if (data.type === 'success') {
+            setResult(data.result);
+            setSyncing(false);
+            eventSource.close();
+            setTimeout(() => onSync?.(), 2000);
+          }
+        } catch (err) {
+          console.error('Error parsing progress event:', err);
+        }
+      };
 
-      // Auto-close after 3 seconds if successful
-      setTimeout(() => {
-        onSync?.();
-      }, 2000);
+      eventSource.onerror = (err) => {
+        console.error('❌ Sync stream error:', err);
+        setError('Connection lost during sync');
+        setSyncing(false);
+        eventSource.close();
+      };
     } catch (err) {
       console.error('❌ Sync error:', err);
       setError(err.message);
@@ -89,6 +118,45 @@ export default function SyncSupabaseModal({ open, onClose, onSync }) {
             <div style={styles.syncing}>
               <i className="fa-solid fa-spinner" style={styles.spinner} />
               <p style={styles.syncingText}>Syncing products from Supabase...</p>
+
+              {/* Live stats */}
+              <div style={styles.liveStats}>
+                <div style={styles.statMini}>
+                  <span style={{ fontSize: '1.2rem' }}>✨</span>
+                  <span>{stats.added} Added</span>
+                </div>
+                <div style={styles.statMini}>
+                  <span style={{ fontSize: '1.2rem' }}>🔄</span>
+                  <span>{stats.updated} Updated</span>
+                </div>
+              </div>
+
+              {/* Progress list */}
+              <div style={styles.progressList}>
+                {progress.slice(-5).map((item, i) => (
+                  <div key={i} style={styles.progressItem}>
+                    {item.type === 'add' && (
+                      <>
+                        <span>✨</span>
+                        <span style={{fontSize: '0.85rem'}}>Adding: {item.name}</span>
+                      </>
+                    )}
+                    {item.type === 'update' && (
+                      <>
+                        <span>🔄</span>
+                        <span style={{fontSize: '0.85rem'}}>Updating: {item.name}</span>
+                      </>
+                    )}
+                    {item.type === 'step' && (
+                      <>
+                        <span>📋</span>
+                        <span style={{fontSize: '0.85rem'}}>{item.message}</span>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+
               <div style={styles.progressBar}>
                 <div style={styles.progressFill} />
               </div>
@@ -503,5 +571,40 @@ const styles = {
   syncingFooter: {
     color: '#666',
     fontSize: '0.9rem'
+  },
+  liveStats: {
+    display: 'flex',
+    gap: '12px',
+    justifyContent: 'center',
+    marginBottom: '16px',
+    marginTop: '-10px'
+  },
+  statMini: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    backgroundColor: '#f0f0f0',
+    padding: '6px 12px',
+    borderRadius: '4px',
+    fontSize: '0.85rem',
+    fontWeight: '500'
+  },
+  progressList: {
+    backgroundColor: '#f9f9f9',
+    borderRadius: '4px',
+    padding: '8px',
+    marginBottom: '12px',
+    maxHeight: '120px',
+    overflowY: 'auto',
+    border: '1px solid #e0e0e0'
+  },
+  progressItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '4px 0',
+    fontSize: '0.85rem',
+    color: '#666',
+    borderBottom: '1px solid #f0f0f0'
   }
 };

@@ -276,7 +276,33 @@ app.post('/api/products/restore/:sha', async (req, res) => {
   }
 });
 
-// Sync products from Supabase (manual trigger)
+// Sync products from Supabase with streaming progress
+app.post('/api/products/sync-supabase-stream', async (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+
+  try {
+    const { syncProductsWithProgress } = require('./syncSupabaseProducts');
+
+    const progressHandler = (event) => {
+      res.write(`data: ${JSON.stringify(event)}\n\n`);
+    };
+
+    const result = await syncProductsWithProgress(progressHandler);
+
+    if (!result.error) {
+      res.write(`data: ${JSON.stringify({ type: 'success', result })}\n\n`);
+    }
+    res.end();
+  } catch (err) {
+    console.error('[API] Sync stream error:', err.message);
+    res.write(`data: ${JSON.stringify({ type: 'error', message: err.message })}\n\n`);
+    res.end();
+  }
+});
+
+// Sync products from Supabase (manual trigger - legacy)
 app.post('/api/products/sync-supabase', async (req, res) => {
   try {
     console.log('[API] Starting Supabase sync...');

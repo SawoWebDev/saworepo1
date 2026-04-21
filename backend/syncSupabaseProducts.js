@@ -720,8 +720,158 @@ async function checkImageSetup() {
   }
 }
 
-// Export for use as module
-module.exports = { syncProducts };
+// Export for use as module with progress callback support
+function syncProductsWithProgress(onProgress) {
+  return syncProductsInternal(onProgress);
+}
+
+async function syncProductsInternal(onProgress) {
+  const syncResult = {
+    scanned: 0,
+    added: 0,
+    updated: 0,
+    kept: 0,
+    added_products: [],
+    updated_products: [],
+    kept_products: [],
+    error: null
+  };
+
+  try {
+    if (!supabase) {
+      const msg = 'Supabase credentials not configured. Add SUPABASE_URL and SUPABASE_SERVICE_KEY to .env';
+      onProgress?.({ type: 'error', message: msg });
+      syncResult.error = msg;
+      return syncResult;
+    }
+
+    onProgress?.({ type: 'start', message: 'Starting product sync from Supabase...' });
+
+    // Step 1: Read current products.json
+    onProgress?.({ type: 'progress', step: 'read-local', message: 'Reading current products.json...' });
+    let currentData;
+    try {
+      const content = await fs.readFile(PRODUCTS_FILE, 'utf8');
+      currentData = JSON.parse(content);
+    } catch (err) {
+      currentData = { updatedAt: new Date().toISOString(), products: [] };
+    }
+    const currentProducts = currentData.products || [];
+    onProgress?.({ type: 'progress', step: 'read-local', message: `Loaded ${currentProducts.length} products` });
+
+    // Step 2: Fetch from Supabase
+    onProgress?.({ type: 'progress', step: 'fetch-supabase', message: 'Fetching products from Supabase...' });
+    const { data: supabaseProducts, error } = await supabase.from('products').select('*');
+
+    if (error) {
+      onProgress?.({ type: 'error', message: `Failed to fetch from Supabase: ${error.message}` });
+      syncResult.error = error.message;
+      return syncResult;
+    }
+
+    syncResult.scanned = supabaseProducts.length;
+    onProgress?.({ type: 'progress', step: 'fetch-supabase', message: `Loaded ${supabaseProducts.length} products from Supabase` });
+
+    // Step 3: Merge with progress
+    onProgress?.({ type: 'progress', step: 'merge', message: 'Merging products...' });
+    const { mergedProducts, stats } = mergeProductsWithProgress(currentProducts, supabaseProducts, onProgress);
+    syncResult.added = stats.added;
+    syncResult.updated = stats.updated;
+    syncResult.kept = stats.kept;
+    syncResult.added_products = stats.addedList;
+    syncResult.updated_products = stats.updatedList;
+    syncResult.kept_products = stats.keptList;
+
+    // Step 4: Download images
+    onProgress?.({ type: 'progress', step: 'download-images', message: 'Downloading product images...' });
+    const imageDownloadStats = await downloadProductImages(mergedProducts);
+    onProgress?.({ type: 'progress', step: 'download-images', message: `Downloaded: ${imageDownloadStats.downloaded}, Skipped: ${imageDownloadStats.skipped}` });
+
+    // Step 5: Convert URLs
+    onProgress?.({ type: 'progress', step: 'convert-urls', message: 'Converting image URLs to GitHub CDN...' });
+    await convertImagesToGithubUrls(mergedProducts);
+    onProgress?.({ type: 'progress', step: 'convert-urls', message: 'URLs converted' });
+
+    // Step 6: Detect unused
+    onProgress?.({ type: 'progress', step: 'cleanup', message: 'Detecting unused images...' });
+    const unusedImages = await detectUnusedImages(mergedProducts);
+    if (unusedImages.length > 0) {
+      const removeStats = await removeUnusedImages(unusedImages);
+      onProgress?.({ type: 'progress', step: 'cleanup', message: `Removed ${removeStats.removed} unused images` });
+    }
+
+    // Step 7: Save
+    onProgress?.({ type: 'progress', step: 'save', message: 'Saving products to products.json...' });
+    const newData = {
+      updatedAt: new Date().toISOString(),
+      products: mergedProducts,
+      syncSource: 'supabase-merge',
+      syncedAt: new Date().toISOString()
+    };
+    await fs.writeFile(PRODUCTS_FILE, JSON.stringify(newData, null, 2), 'utf8');
+    onProgress?.({ type: 'progress', step: 'save', message: `Saved ${mergedProducts.length} products` });
+
+    // Step 8-9: Commit
+    onProgress?.({ type: 'progress', step: 'commit', message: 'Committing changes...' });
+    await commitChanges(imageDownloadStats.downloadedFiles, unusedImages);
+    await commitProductsJson(stats.added, stats.updated);
+    onProgress?.({ type: 'progress', step: 'commit', message: 'Committed successfully' });
+
+    onProgress?.({ type: 'complete', message: 'Sync completed successfully', result: syncResult });
+    return syncResult;
+
+  } catch (err) {
+    onProgress?.({ type: 'error', message: `Sync failed: ${err.message}` });
+    syncResult.error = err.message;
+    return syncResult;
+  }
+}
+
+function mergeProductsWithProgress(currentProducts, supabaseProducts, onProgress) {
+  const merged = [...currentProducts];
+  let addedCount = 0;
+  const addedList = [];
+  const skippedList = [];
+  const existingIds = new Set(currentProducts.map(p => p.id));
+
+  for (const supProduct of supabaseProducts) {
+    if (existingIds.has(supProduct.id)) {
+      const existing = currentProducts.find(p => p.id === supProduct.id);
+      if (existing.source === 'supabase') {
+        if (!productsAreEqual(existing, supProduct)) {
+          const updated = enrichSupabaseProduct(existing, supProduct);
+          const idx = merged.findIndex(p => p.id === supProduct.id);
+          merged[idx] = updated;
+          onProgress?.({ type: 'product-update', name: updated.name || updated.slug });
+        }
+      }
+      skippedList.push({ id: supProduct.id, name: supProduct.name, slug: supProduct.slug });
+    } else {
+      const newProduct = normalizeSupabaseProduct(supProduct);
+      merged.push(newProduct);
+      onProgress?.({ type: 'product-add', name: newProduct.name || newProduct.slug });
+      addedCount++;
+      addedList.push({ id: newProduct.id, name: newProduct.name, slug: newProduct.slug });
+    }
+  }
+
+  const keptProducts = currentProducts.filter(p => !supabaseProducts.find(sp => sp.id === p.id));
+  const keptList = keptProducts.map(p => ({ id: p.id, name: p.name, slug: p.slug }));
+
+  return {
+    mergedProducts: merged,
+    stats: {
+      added: addedCount,
+      updated: 0,
+      kept: keptProducts.length + skippedList.length,
+      addedList,
+      updatedList: [],
+      keptList: [...keptList, ...skippedList]
+    }
+  };
+}
+
+module.exports = { syncProducts, syncProductsWithProgress };
 
 // Run the sync if called directly
 if (require.main === module) {
