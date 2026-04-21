@@ -4,7 +4,7 @@ import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
-import { getAllProducts } from "../local-storage/cacheReader";
+import { getCachedProducts } from "../local-storage/cacheReader";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1682,7 +1682,7 @@ export default function Products({ currentUser }) {
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
-      let data = dataSource === "live" ? await getAllProductsLive() : getAllProducts();
+      let data = dataSource === "live" ? await getAllProductsLive() : await getCachedProducts();
       if (filterStatus) data = data.filter(p => p.status === filterStatus);
       data.sort((a, b) => {
         const aTime = new Date(a.created_at).getTime();
@@ -1697,7 +1697,7 @@ export default function Products({ currentUser }) {
 
   const fetchMeta = useCallback(async () => {
     try {
-      const prods = dataSource === "live" ? await getAllProductsLive() : getAllProducts();
+      const prods = dataSource === "live" ? await getAllProductsLive() : await getCachedProducts();
       const cats = dataSource === "live" ? await getAllCategoriesLive() : [...new Set(prods.flatMap(p => p.categories || []))];
       const tags = dataSource === "live" ? await getAllTagsLive() : [...new Set(prods.flatMap(p => p.tags || []))];
       setAllCats(dataSource === "live" ? cats.map(c => c.name) : cats);

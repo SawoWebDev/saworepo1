@@ -63,7 +63,6 @@ export function getPerms(user) {
  */
 export const NAV_ITEMS = [
   { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view"      },
-  { to: "/admin/products/local",  label: "Products (Local)", icon: "fa-solid fa-folder-plus",   cap: "page.products_local" },
   { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",   cap: "page.models"        },
   { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",          cap: "page.taxonomy"      },
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",      cap: "page.logs"          },

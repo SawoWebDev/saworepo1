@@ -39,8 +39,6 @@ const menuPaths = {
 
   contact: "/contact",
 
-  adminLocalProducts: "/admin/products/local",
-
   about: {
     parent: "/about",
     news: "/about/news",
