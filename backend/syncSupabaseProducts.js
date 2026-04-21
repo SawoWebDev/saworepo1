@@ -353,6 +353,44 @@ async function commitChanges(downloadedFiles, removedFiles) {
   }
 }
 
+async function commitProductsJson(addedCount, updatedCount) {
+  try {
+    const mainRepoPath = path.join(__dirname, '..');
+
+    console.log('\n📤 Committing products.json to GitHub...');
+
+    // Stage products.json
+    execSync('git add products.json', { cwd: mainRepoPath });
+
+    // Create commit message
+    const summary = [];
+    if (addedCount > 0) {
+      summary.push(`Added: ${addedCount} product(s)`);
+    }
+    if (updatedCount > 0) {
+      summary.push(`Updated: ${updatedCount} product(s)`);
+    }
+
+    const commitMsg = `chore: sync products from supabase\n\n${summary.join('\n')}`;
+
+    // Use git commit with message file
+    const msgFile = path.join(mainRepoPath, '.git', 'COMMIT_EDITMSG');
+    require('fs').writeFileSync(msgFile, commitMsg, 'utf8');
+    execSync(`git commit -F "${msgFile}"`, { cwd: mainRepoPath });
+
+    console.log('✅ products.json committed to GitHub');
+    return { committed: true };
+  } catch (err) {
+    const errMsg = err.message || err.toString();
+    if (errMsg.includes('nothing to commit') || errMsg.includes('no changes added')) {
+      console.log('📌 No changes to commit');
+      return { committed: false };
+    }
+    console.error('⚠️ Could not commit products.json:', errMsg);
+    return { committed: false, error: errMsg };
+  }
+}
+
 async function syncProducts() {
   const syncResult = {
     scanned: 0,
@@ -453,7 +491,13 @@ async function syncProducts() {
       syncResult.images_removed = unusedImages.length;
     }
 
-    // Step 9: Print summary
+    // Step 9: Commit products.json to main repo
+    const productsCommitResult = await commitProductsJson(stats.added, stats.updated);
+    if (productsCommitResult.committed) {
+      syncResult.products_committed = true;
+    }
+
+    // Step 10: Print summary
     printSummary(currentProducts, supabaseProducts, mergedProducts, stats, imageDownloadStats, unusedImages);
     return syncResult;
 
