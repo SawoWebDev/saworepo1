@@ -329,7 +329,7 @@ export default function LocalProductsPage() {
                         src={
                           product.thumbnail.includes("://")
                             ? product.thumbnail
-                            : `https://cdn.jsdelivr.net/gh/jmesrafael/saworepo2@main/${product.thumbnail}`
+                            : `https://raw.githubusercontent.com/jmesrafael/saworepo2/main/${product.thumbnail}`
                         }
                         alt={product.name}
                         onError={(e) => {

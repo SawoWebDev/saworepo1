@@ -1,6 +1,6 @@
 import React from "react";
 
-const CDN_BASE = "https://cdn.jsdelivr.net/gh/jmesrafael/saworepo2@main/";
+const CDN_BASE = "https://raw.githubusercontent.com/jmesrafael/saworepo2/main/";
 
 export function ProductModal({ product, onClose, categories, tags }) {
   if (!product) return null;

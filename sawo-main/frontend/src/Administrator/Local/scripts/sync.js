@@ -22,11 +22,17 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 const DATA_DIR = path.join(__dirname, "..", "data");
-const IMAGES_DIR = path.join(__dirname, "../../../../../../../saworepo2/images");
-const FILES_DIR = path.join(__dirname, "../../../../../../../saworepo2/files");
+// Correct path: go up 6 levels to git-sawo, then into saworepo2
+const IMAGES_DIR = path.join(__dirname, "../../../../../../", "saworepo2", "images");
+const FILES_DIR = path.join(__dirname, "../../../../../../", "saworepo2", "files");
+
+console.log("Debug: IMAGES_DIR =", IMAGES_DIR);
+console.log("Debug: FILES_DIR =", FILES_DIR);
 
 // Ensure directories exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
+if (!fs.existsSync(FILES_DIR)) fs.mkdirSync(FILES_DIR, { recursive: true });
 
 let statsDownloaded = { images: 0, files: 0 };
 
@@ -85,13 +91,22 @@ async function downloadImage(url, outputPath) {
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
-    const buffer = await response.buffer();
+    // Use arrayBuffer() for node-fetch v3+
+    const arrayBuf = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuf);
+
     const dir = path.dirname(outputPath);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
     fs.writeFileSync(outputPath, buffer);
-    return true;
+    // Debug: confirm file was written
+    const stats = fs.statSync(outputPath);
+    if (stats.size > 0) {
+      return true;
+    } else {
+      throw new Error("File written but size is 0");
+    }
   } catch (err) {
     console.warn(`⚠️  Failed to download ${url}: ${err.message}`);
     return false;
