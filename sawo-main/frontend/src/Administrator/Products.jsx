@@ -14,6 +14,13 @@ function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
+function getImageUrl(product, field, dataSource) {
+  const imgPath = localOrRemote(product, field);
+  if (!imgPath) return null;
+  if (dataSource === "live" || imgPath.includes("://")) return imgPath;
+  return `https://raw.githubusercontent.com/jmesrafael/saworepo2/main/${imgPath}`;
+}
+
 function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -1550,7 +1557,7 @@ function ProductAuditStrip({ product }) {
 }
 
 // ─── Grid Card ────────────────────────────────────────────────────────────────
-function ProductCard({ p, onEdit, onDelete, onDuplicate, perms }) {
+function ProductCard({ p, onEdit, onDelete, onDuplicate, perms, dataSource = "live" }) {
   const [hovered,  setHovered]  = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
@@ -1579,8 +1586,8 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, perms }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}>
       <div className="product-grid-thumb">
-        {localOrRemote(p, 'thumbnail')
-          ? <img src={localOrRemote(p, 'thumbnail')} alt={p.name} />
+        {getImageUrl(p, 'thumbnail', dataSource)
+          ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt={p.name} />
           : <i className="fa-regular fa-image" style={{ fontSize: "1.5rem", color: "var(--border)" }} />
         }
         {hovered && (perms.can("products.edit") || perms.can("products.duplicate") || perms.can("products.delete")) && (
@@ -2248,7 +2255,7 @@ export default function Products({ currentUser }) {
               {search ? `No products match "${search}"` : "No products yet — click New Product to create one."}
             </div>
           )}
-          {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} perms={perms} />)}
+          {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} perms={perms} dataSource={dataSource} />)}
         </div>
       )}
 
@@ -2294,8 +2301,8 @@ export default function Products({ currentUser }) {
                       </td>
                     )}
                     <td style={{ width: 44 }}>
-                      {localOrRemote(p, 'thumbnail')
-                        ? <img src={localOrRemote(p, 'thumbnail')} alt="" className="product-thumb" />
+                      {getImageUrl(p, 'thumbnail', dataSource)
+                        ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt="" className="product-thumb" />
                         : <div className="product-thumb-placeholder"><i className="fa-regular fa-image" /></div>
                       }
                     </td>
