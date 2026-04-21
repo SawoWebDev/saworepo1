@@ -1,0 +1,212 @@
+/* src/Administrator/Local/LocalProductsPage.css */
+/* Styles for the Local Products page - inherits from admin.css */
+
+.local-products-container {
+  padding: 1.5rem;
+  flex: 1;
+  overflow: auto;
+  background: var(--bg);
+}
+
+.local-products-header {
+  background: var(--info-bg);
+  color: var(--info);
+  padding: 1rem;
+  border-radius: var(--r);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.local-products-search {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 0.9rem;
+  background: var(--surface);
+  color: var(--text);
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+}
+
+.local-products-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.local-products-filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.local-products-filter-label {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.local-products-filter-select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.local-products-table-wrapper {
+  overflow-x: auto;
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.local-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.local-products-table thead tr {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.local-products-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.local-products-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--t);
+}
+
+.local-products-table tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.local-products-table td {
+  padding: 0.75rem;
+}
+
+.local-products-table img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+}
+
+.local-products-table-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-3);
+}
+
+.local-products-status-badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--r-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.local-products-status-published {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.local-products-status-draft {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.local-products-view-button {
+  padding: 0.4rem 0.8rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background var(--t);
+}
+
+.local-products-view-button:hover {
+  background: var(--brand-dark);
+}
+
+.local-products-count {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+/* Modal */
+.local-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.local-modal {
+  background: var(--surface);
+  border-radius: var(--r);
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: auto;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+.local-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.local-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-3);
+  padding: 0.25rem 0.5rem;
+}
+
+.local-modal-content {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.local-modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background: var(--surface-2);
+}
