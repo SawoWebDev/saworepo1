@@ -14,10 +14,12 @@ export function ProductModal({ product, onClose, categories, tags }) {
     return product.categories.map(cat => (typeof cat === 'string' ? cat : cat.name));
   };
 
-  const getImageUrl = (path) => {
-    if (!path) return "";
-    if (path.includes("://")) return path;
-    return CDN_BASE + path;
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "";
+    // If it's already a full URL, return as-is
+    if (imagePath.includes("://")) return imagePath;
+    // Otherwise, build CDN URL (imagePath already includes "images/" prefix from sync)
+    return CDN_BASE + imagePath;
   };
 
   return (

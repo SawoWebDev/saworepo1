@@ -22,7 +22,8 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 const DATA_DIR = path.join(__dirname, "..", "data");
-const IMAGES_DIR = path.join(__dirname, "../../../../../../../saworepo2");
+const IMAGES_DIR = path.join(__dirname, "../../../../../../../saworepo2/images");
+const FILES_DIR = path.join(__dirname, "../../../../../../../saworepo2/files");
 
 // Ensure directories exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -116,7 +117,7 @@ async function processImageField(value, productSlug, bucket = "product-images") 
     return value;
   }
 
-  // It's already a full URL, extract the filename and path
+  // It's already a full URL, extract the filename
   const filename = path.basename(value);
   let downloadUrl = value;
 
@@ -128,12 +129,12 @@ async function processImageField(value, productSlug, bucket = "product-images") 
     downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
   }
 
-  const outputPath = path.join(IMAGES_DIR, productSlug, filename);
+  const outputPath = path.join(IMAGES_DIR, filename);
 
   const success = await downloadImage(downloadUrl, outputPath);
   if (success) {
     statsDownloaded.images++;
-    return `${productSlug}/${filename}`;
+    return `images/${filename}`;
   }
 
   // If download fails, return original path
@@ -149,12 +150,12 @@ async function processFiles(filesArray, productSlug) {
     if (typeof file === "object" && file.path) {
       const filename = path.basename(file.path);
       const downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${file.path}`;
-      const outputPath = path.join(IMAGES_DIR, productSlug, "files", filename);
+      const outputPath = path.join(FILES_DIR, filename);
 
       const success = await downloadImage(downloadUrl, outputPath);
       if (success) {
         statsDownloaded.files++;
-        processed.push({ ...file, path: `${productSlug}/files/${filename}` });
+        processed.push({ ...file, path: `files/${filename}` });
       } else {
         processed.push(file);
       }

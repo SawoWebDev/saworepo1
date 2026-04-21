@@ -332,6 +332,9 @@ export default function LocalProductsPage() {
                             : `https://cdn.jsdelivr.net/gh/jmesrafael/saworepo2@main/${product.thumbnail}`
                         }
                         alt={product.name}
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
                         style={{
                           width: "40px",
                           height: "40px",
