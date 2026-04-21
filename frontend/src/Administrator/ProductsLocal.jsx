@@ -2,376 +2,331 @@
  * ProductsLocal.jsx
  *
  * Displays products from the local products.json file.
- * These are downloaded products with images stored in saworepo2/images/
- *
- * This is a read-only view of local products. To update products:
- * 1. Run the download script: node src/Administrator/scripts/downloadProductsLocal.js
- * 2. Refresh this page to see updates
+ * UI matches Products.jsx with grid/list view, search, filters.
+ * Read-only view - to update products, run: node src/Administrator/scripts/downloadProductsLocal.js
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { getLocalProducts, getLocalCategories, getLocalImageUrl } from '../local-storage/localProductsLoader';
 import '../Administrator/admin.css';
 
-export default function ProductsLocal() {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedProduct, setSelectedProduct] = useState(null);
+const FRONT_URL = process.env.REACT_APP_FRONT_URL || '';
 
+function Toast({ toasts, remove }) {
+  return (
+    <div className="toast-container">
+      {toasts.map((t, i) => (
+        <div key={i} className={`toast toast-${t.type}`} onClick={() => remove(i)}>
+          {t.message}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function useToast() {
+  const [toasts, setToasts] = useState([]);
+  const add = useCallback((message, type = 'info') => {
+    const id = toasts.length;
+    setToasts(t => [...t, { message, type, id }]);
+    setTimeout(() => remove(id), 4000);
+  }, [toasts.length]);
+  const remove = useCallback(id => setToasts(t => t.filter((_, i) => i !== id)), []);
+  return { toasts, add, remove };
+}
+
+function ProductCard({ p }) {
+  const [hovered, setHovered] = useState(false);
+  const productUrl = `${FRONT_URL || window.location.origin}/products/${p.slug}`;
+  const thumbnail = p.thumbnail?.startsWith('saworepo2/')
+    ? '/' + p.thumbnail
+    : p.thumbnail;
+
+  return (
+    <a
+      href={productUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="product-grid-card"
+      style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="product-grid-thumb">
+        {thumbnail ? (
+          <img src={thumbnail} alt={p.name} onError={e => { e.target.style.display = 'none'; }} />
+        ) : (
+          <i className="fa-regular fa-image" style={{ fontSize: '1.5rem', color: 'var(--border)' }} />
+        )}
+      </div>
+      <div className="product-grid-info">
+        <div className="product-grid-name product-name-link" style={{ textDecoration: 'none', color: 'inherit' }}>
+          {p.name}
+        </div>
+        {(p.categories || []).length > 0 && (
+          <div className="product-grid-pills">
+            {(p.categories || []).slice(0, 2).map(c => (
+              <span key={c} className="tbl-pill tbl-pill-cat">{c}</span>
+            ))}
+          </div>
+        )}
+        {(p.tags || []).length > 0 && (
+          <div className="product-grid-pills">
+            {(p.tags || []).slice(0, 3).map(t => (
+              <span key={t} className="tbl-pill tbl-pill-tag">{t}</span>
+            ))}
+            {(p.tags || []).length > 3 && <span className="tbl-pill tbl-pill-more">+{p.tags.length - 3}</span>}
+          </div>
+        )}
+      </div>
+    </a>
+  );
+}
+
+export default function ProductsLocal() {
+  const { toasts, add, remove } = useToast();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
+  const [sortDir, setSortDir] = useState('desc');
+  const [viewMode, setViewMode] = useState('grid');
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Load products on mount
   useEffect(() => {
-    loadData();
+    loadProducts();
   }, []);
 
-  async function loadData() {
+  const loadProducts = async () => {
     try {
       setLoading(true);
-      const [prods, cats] = await Promise.all([
-        getLocalProducts(),
-        getLocalCategories(),
-      ]);
+      const prods = await getLocalProducts();
       setProducts(prods);
-      setCategories(cats);
+      add(`Loaded ${prods.length} local products`, 'success');
     } catch (err) {
       console.error('Failed to load local products:', err);
+      add('Failed to load local products', 'error');
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  const filteredProducts = products.filter(p => {
-    const matchStatus = filter === 'all' || (filter === 'published' ? p.status === 'published' : p.status !== 'published');
-    const matchSearch = searchTerm === '' || p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.slug.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchStatus && matchSearch;
-  });
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate refresh
+      await loadProducts();
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
-  if (loading) {
-    return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <p>Loading local products...</p>
-      </div>
-    );
-  }
+  // Filter and sort products
+  const filtered = products
+    .filter(p => {
+      if (filterStatus && p.status !== filterStatus) return false;
+      if (!search) return true;
+      const q = search.toLowerCase();
+      return (
+        p.name?.toLowerCase().includes(q) ||
+        p.slug?.toLowerCase().includes(q) ||
+        p.brand?.toLowerCase().includes(q) ||
+        p.type?.toLowerCase().includes(q) ||
+        (p.categories || []).some(c => c.toLowerCase().includes(q)) ||
+        (p.tags || []).some(t => t.toLowerCase().includes(q))
+      );
+    })
+    .sort((a, b) => {
+      const cmp = new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      return sortDir === 'desc' ? cmp : -cmp;
+    });
 
   return (
-    <div className="products-container" style={{ padding: '20px' }}>
-      <style>{`
-        .local-products-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .local-controls { display: flex; gap: 10px; flex-wrap: wrap; }
-        .local-search { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; width: 250px; }
-        .local-filter { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; }
-        .local-products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-        .local-product-card { border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s; cursor: pointer; }
-        .local-product-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .local-product-image { width: 100%; aspect-ratio: 1; object-fit: cover; background: #f5f5f5; display: flex; align-items: center; justify-content: center; }
-        .local-product-info { padding: 12px; }
-        .local-product-name { font-weight: 600; margin: 0 0 4px; font-size: 14px; }
-        .local-product-slug { color: #666; font-size: 12px; margin: 0 0 8px; font-family: monospace; }
-        .local-product-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-        .local-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-        .local-badge-published { background: #e8f5e9; color: #2e7d32; }
-        .local-badge-draft { background: #fff3e0; color: #e65100; }
-        .local-badge-hidden { background: #ffebee; color: #c62828; }
-        .local-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .local-modal-content { background: white; border-radius: 8px; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .local-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .local-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #666; }
-        .local-sync-info { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 16px; border-radius: 4px; margin-bottom: 20px; }
-        .local-sync-info p { margin: 4px 0; font-size: 14px; }
-        .local-sync-code { background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; }
-      `}</style>
+    <div className="products-page">
+      <Toast toasts={toasts} remove={remove} />
 
-      <div className="local-products-header">
+      {/* Header */}
+      <div className="page-header" style={{ marginBottom: 14 }}>
         <div>
-          <h1 style={{ margin: 0 }}>Products (Local)</h1>
-          <p style={{ color: '#666', margin: '4px 0 0', fontSize: '14px' }}>
-            Displays products from local products.json with images from saworepo2/
+          <h1 className="page-title">
+            <i className="fa-solid fa-download" style={{ marginRight: '0.5rem', color: 'var(--brand)' }} />
+            Products (Local)
+          </h1>
+          <p className="products-subtitle">
+            {loading ? 'Loading...' : `${filtered.length} of ${products.length} products from local storage`}
           </p>
         </div>
-        <button
-          onClick={loadData}
-          style={{
-            padding: '8px 16px',
-            background: '#1976d2',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 600,
-          }}
+      </div>
+
+      {/* Toolbar */}
+      <div className="products-toolbar">
+        <div className="search-wrap">
+          <i className="fa-solid fa-magnifying-glass" />
+          <input
+            className="search-input"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search name, brand, tag..."
+            disabled={loading}
+          />
+        </div>
+        <select
+          className="filter-select"
+          value={filterStatus}
+          onChange={e => setFilterStatus(e.target.value)}
+          disabled={loading}
         >
-          🔄 Refresh
+          <option value="">All Status</option>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+        <select
+          className="filter-select"
+          value={sortDir}
+          onChange={e => setSortDir(e.target.value)}
+          disabled={loading}
+        >
+          <option value="desc">Newest first</option>
+          <option value="asc">Oldest first</option>
+        </select>
+        <div className="view-toggle">
+          {[
+            { mode: 'list', icon: 'fa-list' },
+            { mode: 'grid', icon: 'fa-grip' }
+          ].map(({ mode, icon }) => (
+            <button
+              key={mode}
+              type="button"
+              onClick={() => setViewMode(mode)}
+              className={`view-toggle-btn${viewMode === mode ? ' active' : ''}`}
+              disabled={loading}
+            >
+              <i className={`fa-solid ${icon}`} />
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="btn btn-sm"
+          onClick={handleRefresh}
+          disabled={loading || refreshing}
+          style={{ marginLeft: 'auto' }}
+        >
+          <i className={`fa-solid fa-sync${refreshing ? ' fa-spin' : ''}`} />
+          Refresh
         </button>
       </div>
 
-      {products.length === 0 ? (
-        <div className="local-sync-info">
-          <p><strong>No local products found.</strong></p>
-          <p>To sync products from the live source:</p>
-          <div className="local-sync-code">
-            cd frontend<br />
-            node src/Administrator/scripts/downloadProductsLocal.js
-          </div>
-          <p style={{ marginTop: '12px', fontSize: '13px' }}>This will:</p>
-          <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
-            <li>Download all products from products.json</li>
-            <li>Download images to saworepo2/images/</li>
-            <li>Update image URLs to point to local files</li>
-            <li>Save updated products.json</li>
-          </ul>
+      {/* Empty state */}
+      {!loading && products.length === 0 && (
+        <div style={{
+          gridColumn: '1/-1',
+          textAlign: 'center',
+          padding: 60,
+          color: 'var(--text-3)',
+          fontStyle: 'italic',
+          fontSize: '0.82rem'
+        }}>
+          <i className="fa-solid fa-folder-open" style={{ fontSize: '2rem', marginBottom: '1rem', display: 'block', color: 'var(--border)' }} />
+          <p>No local products found.</p>
+          <p style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>
+            Run: <code style={{ background: 'var(--surface-2)', padding: '2px 4px', borderRadius: 3 }}>node src/Administrator/scripts/downloadProductsLocal.js</code>
+          </p>
         </div>
-      ) : (
-        <>
-          <div className="local-controls">
-            <input
-              type="text"
-              className="local-search"
-              placeholder="Search by name or slug..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <select
-              className="local-filter"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="all">All Status</option>
-              <option value="published">Published</option>
-              <option value="draft">Draft</option>
-            </select>
-            <span style={{ color: '#666', fontSize: '14px', alignSelf: 'center' }}>
-              {filteredProducts.length} of {products.length} products
-            </span>
-          </div>
-
-          <div className="local-products-grid" style={{ marginTop: '20px' }}>
-            {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="local-product-card"
-                onClick={() => setSelectedProduct(product)}
-              >
-                <div className="local-product-image">
-                  {product.thumbnail ? (
-                    <img
-                      src={getLocalImageUrl(product.thumbnail)}
-                      alt={product.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = '<span style="color:#999;">No image</span>';
-                      }}
-                    />
-                  ) : (
-                    <span style={{ color: '#999' }}>No image</span>
-                  )}
-                </div>
-                <div className="local-product-info">
-                  <h3 className="local-product-name">{product.name}</h3>
-                  <p className="local-product-slug">{product.slug}</p>
-                  <div className="local-product-meta">
-                    <span
-                      className={`local-badge local-badge-${product.status === 'published' ? 'published' : 'draft'}`}
-                    >
-                      {product.status}
-                    </span>
-                    {product.visible === false && <span className="local-badge local-badge-hidden">Hidden</span>}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </>
       )}
 
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <div className="local-modal-overlay" onClick={() => setSelectedProduct(null)}>
-          <div className="local-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="local-modal-header">
-              <h2 style={{ margin: 0 }}>{selectedProduct.name}</h2>
-              <button className="local-modal-close" onClick={() => setSelectedProduct(null)}>
-                ✕
-              </button>
+      {/* Grid view */}
+      {!loading && viewMode === 'grid' && filtered.length > 0 && (
+        <div className="product-grid">
+          {filtered.length === 0 && (
+            <div style={{
+              gridColumn: '1/-1',
+              textAlign: 'center',
+              padding: 40,
+              color: 'var(--text-3)',
+              fontStyle: 'italic',
+              fontSize: '0.82rem'
+            }}>
+              {search ? `No products match "${search}"` : 'No products'}
             </div>
+          )}
+          {filtered.map(p => <ProductCard key={p.id} p={p} />)}
+        </div>
+      )}
 
-            {/* Product Details */}
-            <div style={{ display: 'grid', gap: '16px' }}>
-              {/* Images */}
-              {selectedProduct.thumbnail && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Thumbnail</h4>
-                  <img
-                    src={getLocalImageUrl(selectedProduct.thumbnail)}
-                    alt="Thumbnail"
-                    style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '4px' }}
-                  />
-                  <p style={{ margin: '4px 0 0', fontSize: '12px', color: '#666' }}>
-                    {selectedProduct.thumbnail}
-                  </p>
-                </div>
-              )}
-
-              {selectedProduct.images?.length > 0 && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Images ({selectedProduct.images.length})</h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-                    {selectedProduct.images.map((img, i) => (
-                      <div key={i}>
-                        <img
-                          src={getLocalImageUrl(img)}
-                          alt={`Product ${i}`}
-                          style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '4px' }}
-                          onError={(e) => {
-                            e.target.style.background = '#f0f0f0';
-                            e.target.style.opacity = '0.5';
-                          }}
-                        />
-                      </div>
+      {/* List view */}
+      {!loading && viewMode === 'list' && filtered.length > 0 && (
+        <div style={{ overflowX: 'auto', marginTop: 20 }}>
+          <table className="products-table">
+            <thead>
+              <tr>
+                <th style={{ width: '5%' }}>#</th>
+                <th style={{ width: '25%' }}>Name</th>
+                <th style={{ width: '15%' }}>Brand</th>
+                <th style={{ width: '15%' }}>Type</th>
+                <th style={{ width: '20%' }}>Categories</th>
+                <th style={{ width: '10%' }}>Status</th>
+                <th style={{ width: '10%' }}>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((p, idx) => (
+                <tr
+                  key={p.id}
+                  style={{ cursor: 'pointer', transition: 'background 0.15s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-2)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  onClick={() => window.open(`${FRONT_URL || window.location.origin}/products/${p.slug}`, '_blank')}
+                >
+                  <td style={{ color: 'var(--text-3)', fontSize: '0.85rem' }}>{idx + 1}</td>
+                  <td style={{ fontWeight: 500 }}>{p.name}</td>
+                  <td style={{ color: 'var(--text-2)' }}>{p.brand || '-'}</td>
+                  <td style={{ color: 'var(--text-2)' }}>{p.type || '-'}</td>
+                  <td>
+                    {(p.categories || []).slice(0, 2).map(c => (
+                      <span key={c} className="tbl-pill tbl-pill-cat" style={{ marginRight: 4 }}>
+                        {c}
+                      </span>
                     ))}
-                  </div>
-                </div>
-              )}
+                    {(p.categories || []).length > 2 && (
+                      <span className="tbl-pill tbl-pill-more">
+                        +{p.categories.length - 2}
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <span
+                      className={`tbl-badge ${p.status === 'published' ? 'tbl-badge-success' : 'tbl-badge-warning'}`}
+                    >
+                      {p.status}
+                    </span>
+                  </td>
+                  <td style={{ color: 'var(--text-3)', fontSize: '0.85rem' }}>
+                    {new Date(p.created_at).toLocaleDateString('en-PH', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-              {/* Basic Info */}
-              <div>
-                <h4 style={{ margin: '0 0 8px' }}>Basic Information</h4>
-                <dl style={{ margin: 0, fontSize: '14px' }}>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>Slug</dt>
-                  <dd style={{ margin: '0 0 8px', color: '#666', fontFamily: 'monospace' }}>
-                    {selectedProduct.slug}
-                  </dd>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>Brand</dt>
-                  <dd style={{ margin: '0 0 8px', color: '#666' }}>{selectedProduct.brand || 'N/A'}</dd>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>Type</dt>
-                  <dd style={{ margin: '0 0 8px', color: '#666' }}>{selectedProduct.type || 'N/A'}</dd>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>Status</dt>
-                  <dd style={{ margin: '0 0 8px', color: '#666' }}>
-                    {selectedProduct.status} {selectedProduct.visible === false && '(Hidden)'}
-                  </dd>
-                </dl>
-              </div>
-
-              {/* Categories & Tags */}
-              {(selectedProduct.categories?.length > 0 || selectedProduct.tags?.length > 0) && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Categories & Tags</h4>
-                  {selectedProduct.categories?.length > 0 && (
-                    <div style={{ marginBottom: '8px' }}>
-                      <p style={{ margin: '0 0 4px', fontSize: '12px', color: '#666' }}>Categories:</p>
-                      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                        {selectedProduct.categories.map((cat) => (
-                          <span
-                            key={cat}
-                            style={{
-                              background: '#e3f2fd',
-                              color: '#1565c0',
-                              padding: '4px 8px',
-                              borderRadius: '4px',
-                              fontSize: '12px',
-                            }}
-                          >
-                            {cat}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {selectedProduct.tags?.length > 0 && (
-                    <div>
-                      <p style={{ margin: '0 0 4px', fontSize: '12px', color: '#666' }}>Tags:</p>
-                      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                        {selectedProduct.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            style={{
-                              background: '#f3e5f5',
-                              color: '#6a1b9a',
-                              padding: '4px 8px',
-                              borderRadius: '4px',
-                              fontSize: '12px',
-                            }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Features */}
-              {selectedProduct.features?.length > 0 && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Features</h4>
-                  <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px' }}>
-                    {selectedProduct.features.map((feat, i) => (
-                      <li key={i} style={{ margin: '4px 0' }}>
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Descriptions */}
-              {selectedProduct.short_description && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Short Description</h4>
-                  <div
-                    style={{ fontSize: '14px', lineHeight: '1.5', color: '#333' }}
-                    dangerouslySetInnerHTML={{ __html: selectedProduct.short_description }}
-                  />
-                </div>
-              )}
-
-              {selectedProduct.description && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Full Description</h4>
-                  <div
-                    style={{ fontSize: '14px', lineHeight: '1.5', color: '#333', maxHeight: '300px', overflow: 'auto' }}
-                    dangerouslySetInnerHTML={{ __html: selectedProduct.description }}
-                  />
-                </div>
-              )}
-
-              {/* Files */}
-              {selectedProduct.files?.length > 0 && (
-                <div>
-                  <h4 style={{ margin: '0 0 8px' }}>Resources</h4>
-                  <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px' }}>
-                    {selectedProduct.files.map((file, i) => (
-                      <li key={i} style={{ margin: '4px 0' }}>
-                        <a href={file.url} target="_blank" rel="noopener noreferrer">
-                          {file.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Metadata */}
-              <div style={{ borderTop: '1px solid #eee', paddingTop: '12px' }}>
-                <h4 style={{ margin: '0 0 8px', fontSize: '12px', color: '#999' }}>Metadata</h4>
-                <dl style={{ margin: 0, fontSize: '12px', color: '#666' }}>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>ID</dt>
-                  <dd style={{ margin: '0 0 8px', fontFamily: 'monospace' }}>{selectedProduct.id}</dd>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>Created</dt>
-                  <dd style={{ margin: '0 0 8px' }}>
-                    {new Date(selectedProduct.created_at).toLocaleString()}
-                  </dd>
-                  <dt style={{ fontWeight: 600, margin: '4px 0 2px' }}>Updated</dt>
-                  <dd style={{ margin: 0 }}>
-                    {new Date(selectedProduct.updated_at).toLocaleString()}
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
+      {/* Loading state */}
+      {loading && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '60px 20px',
+          color: 'var(--text-3)'
+        }}>
+          <i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '0.75rem', fontSize: '1.2rem' }} />
+          Loading local products...
         </div>
       )}
     </div>
