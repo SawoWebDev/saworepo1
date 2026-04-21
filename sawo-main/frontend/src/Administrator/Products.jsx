@@ -5,6 +5,7 @@ import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
+import { syncSupabaseToLocal } from "./Local/syncWithMerge";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1684,6 +1685,9 @@ export default function Products({ currentUser }) {
   const [showRevisions, setShowRevisions] = useState(false);
   const [revisions, setRevisions] = useState([]);
 
+  const [syncing, setSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState(null);
+
   const isDirty = !formsEqual(form, savedForm);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
@@ -1939,6 +1943,29 @@ export default function Products({ currentUser }) {
     } catch (err) { add(err.message, "error"); }
   };
 
+  // ── Sync from Supabase ─────────────────────────────────────────────────────
+  const handleSync = async () => {
+    setSyncing(true);
+    setSyncStatus(null);
+    try {
+      const result = await syncSupabaseToLocal();
+      setSyncStatus(result);
+      if (result.success) {
+        add(result.message, "success");
+        // Refresh products list
+        setTimeout(() => fetchProducts(), 1000);
+      } else {
+        add(result.message, "error");
+      }
+    } catch (err) {
+      const errorMsg = `Sync failed: ${err.message}`;
+      setSyncStatus({ success: false, message: errorMsg });
+      add(errorMsg, "error");
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   // ── Save ──────────────────────────────────────────────────────────────────
   const handleSave = async e => {
     e.preventDefault();
@@ -2174,6 +2201,34 @@ export default function Products({ currentUser }) {
                 </button>
               ))}
             </div>
+            {dataSource === "local" && (
+              <button
+                type="button"
+                onClick={handleSync}
+                disabled={syncing}
+                title="Sync new products from Supabase (only adds new items)"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "8px 12px",
+                  fontSize: "0.85rem",
+                  fontWeight: 500,
+                  border: "1px solid var(--border)",
+                  background: "var(--surface)",
+                  color: syncing ? "var(--text-3)" : "var(--text)",
+                  cursor: syncing ? "not-allowed" : "pointer",
+                  borderRadius: 4,
+                  transition: "all 0.2s ease",
+                  opacity: syncing ? 0.6 : 1,
+                }}
+                onMouseEnter={e => { if (!syncing) e.target.style.background = "var(--surface-2)"; }}
+                onMouseLeave={e => { e.target.style.background = "var(--surface)"; }}
+              >
+                <i className={`fa-solid ${syncing ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
+                {syncing ? "Syncing..." : "Sync"}
+              </button>
+            )}
             <p className="products-subtitle" style={{ margin: 0 }}>
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
             </p>
@@ -2197,6 +2252,33 @@ export default function Products({ currentUser }) {
         }}>
           <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
           <span>Viewing <strong>local products from saworepo2</strong> — this is read-only. Switch to Live to edit.</span>
+        </div>
+      )}
+
+      {/* Sync Status Message */}
+      {syncStatus && (
+        <div style={{
+          background: syncStatus.success ? "var(--success-bg)" : "var(--danger-bg)",
+          border: `1px solid ${syncStatus.success ? "var(--success)" : "var(--danger)"}`,
+          color: syncStatus.success ? "var(--success)" : "var(--danger)",
+          padding: "10px 14px",
+          borderRadius: 4,
+          marginBottom: 14,
+          fontSize: "0.85rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 8
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <i className={`fa-solid ${syncStatus.success ? "fa-check-circle" : "fa-exclamation-circle"}`} style={{ fontSize: "1em" }} />
+            <span>{syncStatus.message}</span>
+          </div>
+          {syncStatus.timestamp && (
+            <small style={{ opacity: 0.8 }}>
+              {new Date(syncStatus.timestamp).toLocaleTimeString()}
+            </small>
+          )}
         </div>
       )}
 
