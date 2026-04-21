@@ -1,72 +1,43 @@
 import React, { useState, useMemo } from "react";
 import { useLocalProducts } from "./useLocalProducts";
-import { ProductModal } from "./ProductModal";
-import "./LocalProductsPage.css";
+import { ProductDetailView } from "./ProductDetailView";
+import "../admin.css";
 
 export default function LocalProductsPage() {
   const { products, categories, tags, meta, loading, error } = useLocalProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState({
-    category: "",
-    status: "",
-    featured: "",
-    visible: "",
-  });
+  const [filterStatus, setFilterStatus] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
 
   // Filtering logic
   const filtered = useMemo(() => {
     return products.filter((product) => {
-      // Search by name, slug, brand
       const searchLower = searchTerm.toLowerCase();
       const matchesSearch =
         product.name.toLowerCase().includes(searchLower) ||
         product.slug.toLowerCase().includes(searchLower) ||
         (product.brand && product.brand.toLowerCase().includes(searchLower));
 
-      // Category filter
+      const matchesStatus = !filterStatus || product.status === filterStatus;
+
       let matchesCategory = true;
-      if (filters.category) {
+      if (filterCategory) {
         const productCats = product.categories || [];
         matchesCategory = productCats.some((cat) => {
           const catId = typeof cat === "string" ? cat : cat.id;
-          return catId === filters.category;
+          return catId === filterCategory;
         });
       }
 
-      // Status filter
-      const matchesStatus = !filters.status || product.status === filters.status;
-
-      // Featured filter
-      const matchesFeatured =
-        filters.featured === "" ||
-        String(product.featured) === String(filters.featured === "yes");
-
-      // Visible filter
-      const matchesVisible =
-        filters.visible === "" ||
-        String(product.visible) === String(filters.visible === "yes");
-
-      return (
-        matchesSearch &&
-        matchesCategory &&
-        matchesStatus &&
-        matchesFeatured &&
-        matchesVisible
-      );
+      return matchesSearch && matchesStatus && matchesCategory;
     });
-  }, [products, searchTerm, filters]);
+  }, [products, searchTerm, filterStatus, filterCategory]);
 
   if (loading) {
     return (
-      <div
-        style={{
-          padding: "2rem",
-          textAlign: "center",
-          color: "var(--text-3)",
-        }}
-      >
-        Loading products...
+      <div style={{ padding: "2rem", textAlign: "center", color: "var(--text-3)" }}>
+        <p>Loading local products...</p>
       </div>
     );
   }
@@ -75,84 +46,111 @@ export default function LocalProductsPage() {
     return (
       <div
         style={{
-          padding: "2rem",
+          padding: "1.5rem",
           background: "var(--danger-bg)",
           color: "var(--danger)",
           borderRadius: "var(--r)",
-          margin: "2rem",
+          border: "1px solid var(--danger)",
         }}
       >
-        Error loading products: {error}
+        <strong>Error loading products:</strong> {error}
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "1.5rem", flex: 1, overflow: "auto" }}>
-      {/* Header Banner */}
-      <div
-        style={{
-          background: "var(--info-bg)",
-          color: "var(--info)",
-          padding: "1rem",
-          borderRadius: "var(--r)",
-          marginBottom: "1.5rem",
-          fontSize: "0.9rem",
-          fontWeight: 500,
-        }}
-      >
-        📦 Last synced: <strong>{meta.last_synced}</strong> | ✅ Total products:{" "}
-        <strong>{meta.total_products}</strong>
-      </div>
-
-      {/* Search Bar */}
-      <div style={{ marginBottom: "1.5rem" }}>
-        <input
-          type="text"
-          placeholder="Search by name, slug, or brand..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+    <div>
+      {/* Header */}
+      <div style={{ marginBottom: "2rem" }}>
+        <h1 style={{ margin: "0 0 1rem 0", fontSize: "1.8rem", fontWeight: 600 }}>Local Products</h1>
+        <div
           style={{
-            width: "100%",
-            padding: "0.75rem",
-            border: "1px solid var(--border)",
-            borderRadius: "var(--r-sm)",
+            background: "var(--info-bg)",
+            color: "var(--info)",
+            padding: "0.9rem 1.25rem",
+            borderRadius: "var(--r)",
             fontSize: "0.9rem",
-            background: "var(--surface)",
-            color: "var(--text)",
-            boxSizing: "border-box",
+            fontWeight: 500,
+            border: "1px solid rgba(26,111,168,0.2)",
           }}
-        />
+        >
+          📦 Last synced: <strong>{meta?.last_synced || "Never"}</strong> | ✅ Total: <strong>{meta?.total_products || products.length}</strong> products
+        </div>
       </div>
 
-      {/* Filters */}
+      {/* Search & Filters */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gridTemplateColumns: "1fr repeat(3, 1fr)",
           gap: "1rem",
           marginBottom: "1.5rem",
+          alignItems: "flex-end",
         }}
       >
-        {/* Category Filter */}
         <div>
-          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600 }}>
+          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600, display: "block", marginBottom: "0.35rem" }}>
+            Search
+          </label>
+          <input
+            type="text"
+            placeholder="Name, slug, or brand..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "0.65rem",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--r-sm)",
+              fontSize: "0.9rem",
+              background: "var(--surface)",
+              color: "var(--text)",
+              fontFamily: "var(--font)",
+            }}
+          />
+        </div>
+
+        <div>
+          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600, display: "block", marginBottom: "0.35rem" }}>
+            Status
+          </label>
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "0.65rem",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--r-sm)",
+              fontSize: "0.9rem",
+              background: "var(--surface)",
+              color: "var(--text)",
+              fontFamily: "var(--font)",
+              cursor: "pointer",
+            }}
+          >
+            <option value="">All</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+
+        <div>
+          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600, display: "block", marginBottom: "0.35rem" }}>
             Category
           </label>
           <select
-            value={filters.category}
-            onChange={(e) =>
-              setFilters({ ...filters, category: e.target.value })
-            }
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
             style={{
               width: "100%",
-              padding: "0.5rem",
-              marginTop: "0.25rem",
+              padding: "0.65rem",
               border: "1px solid var(--border)",
               borderRadius: "var(--r-sm)",
+              fontSize: "0.9rem",
               background: "var(--surface)",
               color: "var(--text)",
-              fontSize: "0.85rem",
+              fontFamily: "var(--font)",
               cursor: "pointer",
             }}
           >
@@ -165,155 +163,63 @@ export default function LocalProductsPage() {
           </select>
         </div>
 
-        {/* Status Filter */}
         <div>
-          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600 }}>
-            Status
-          </label>
-          <select
-            value={filters.status}
-            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              marginTop: "0.25rem",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--r-sm)",
-              background: "var(--surface)",
-              color: "var(--text)",
-              fontSize: "0.85rem",
-              cursor: "pointer",
-            }}
-          >
-            <option value="">All</option>
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
-          </select>
-        </div>
-
-        {/* Featured Filter */}
-        <div>
-          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600 }}>
-            Featured
-          </label>
-          <select
-            value={filters.featured}
-            onChange={(e) => setFilters({ ...filters, featured: e.target.value })}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              marginTop: "0.25rem",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--r-sm)",
-              background: "var(--surface)",
-              color: "var(--text)",
-              fontSize: "0.85rem",
-              cursor: "pointer",
-            }}
-          >
-            <option value="">All</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-        </div>
-
-        {/* Visible Filter */}
-        <div>
-          <label style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600 }}>
-            Visible
-          </label>
-          <select
-            value={filters.visible}
-            onChange={(e) => setFilters({ ...filters, visible: e.target.value })}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              marginTop: "0.25rem",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--r-sm)",
-              background: "var(--surface)",
-              color: "var(--text)",
-              fontSize: "0.85rem",
-              cursor: "pointer",
-            }}
-          >
-            <option value="">All</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
+          <div style={{ fontSize: "0.8rem", color: "var(--text-3)", fontWeight: 600 }}>Results</div>
+          <div style={{ fontSize: "1.25rem", fontWeight: 600, color: "var(--brand)", marginTop: "0.35rem" }}>
+            {filtered.length}
+          </div>
         </div>
       </div>
 
       {/* Products Table */}
       <div
         style={{
-          overflowX: "auto",
           background: "var(--surface)",
           borderRadius: "var(--r)",
           border: "1px solid var(--border)",
           boxShadow: "var(--shadow-sm)",
+          overflow: "hidden",
         }}
       >
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            fontSize: "0.85rem",
-          }}
-        >
-          <thead>
-            <tr style={{ borderBottom: "1px solid var(--border)", background: "var(--surface-2)" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Thumb
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Name
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Slug
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Brand
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Type
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Status
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Visible
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Featured
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Categories
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
-                Updated At
-              </th>
-              <th style={{ padding: "0.75rem", textAlign: "center", fontWeight: 600, color: "var(--text-2)" }}>
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length === 0 ? (
-              <tr>
-                <td
-                  colSpan="11"
-                  style={{
-                    padding: "1.5rem",
-                    textAlign: "center",
-                    color: "var(--text-3)",
-                  }}
-                >
-                  No products found
-                </td>
+        {filtered.length === 0 ? (
+          <div style={{ padding: "3rem", textAlign: "center", color: "var(--text-3)" }}>
+            <p style={{ fontSize: "1rem", margin: 0 }}>No products found</p>
+          </div>
+        ) : (
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              fontSize: "0.9rem",
+            }}
+          >
+            <thead>
+              <tr style={{ background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
+                <th style={{ padding: "1rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)", width: "50px" }}>
+                  Thumb
+                </th>
+                <th style={{ padding: "1rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
+                  Name
+                </th>
+                <th style={{ padding: "1rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
+                  Brand
+                </th>
+                <th style={{ padding: "1rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
+                  Type
+                </th>
+                <th style={{ padding: "1rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
+                  Status
+                </th>
+                <th style={{ padding: "1rem", textAlign: "left", fontWeight: 600, color: "var(--text-2)" }}>
+                  Visible
+                </th>
+                <th style={{ padding: "1rem", textAlign: "center", fontWeight: 600, color: "var(--text-2)" }}>
+                  Action
+                </th>
               </tr>
-            ) : (
-              filtered.map((product) => (
+            </thead>
+            <tbody>
+              {filtered.map((product) => (
                 <tr
                   key={product.id}
                   style={{
@@ -323,7 +229,7 @@ export default function LocalProductsPage() {
                   onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-2)")}
                   onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                 >
-                  <td style={{ padding: "0.75rem" }}>
+                  <td style={{ padding: "0.75rem 1rem", verticalAlign: "middle" }}>
                     {product.thumbnail && (
                       <img
                         src={
@@ -332,9 +238,7 @@ export default function LocalProductsPage() {
                             : `https://raw.githubusercontent.com/jmesrafael/saworepo2/main/${product.thumbnail}`
                         }
                         alt={product.name}
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                        }}
+                        onError={(e) => { e.target.style.display = "none"; }}
                         style={{
                           width: "40px",
                           height: "40px",
@@ -345,104 +249,66 @@ export default function LocalProductsPage() {
                       />
                     )}
                   </td>
-                  <td style={{ padding: "0.75rem" }}>{product.name}</td>
-                  <td style={{ padding: "0.75rem", color: "var(--text-2)" }}>
-                    <code style={{ fontSize: "0.8rem" }}>{product.slug}</code>
+                  <td style={{ padding: "1rem", fontWeight: 500, color: "var(--text)" }}>
+                    {product.name}
                   </td>
-                  <td style={{ padding: "0.75rem" }}>{product.brand || "—"}</td>
-                  <td style={{ padding: "0.75rem" }}>{product.type || "—"}</td>
-                  <td style={{ padding: "0.75rem" }}>
+                  <td style={{ padding: "1rem", color: "var(--text-2)", fontSize: "0.9rem" }}>
+                    {product.brand}
+                  </td>
+                  <td style={{ padding: "1rem", color: "var(--text-2)", fontSize: "0.9rem" }}>
+                    {product.type}
+                  </td>
+                  <td style={{ padding: "1rem" }}>
                     <span
                       style={{
                         display: "inline-block",
-                        padding: "0.3rem 0.6rem",
-                        borderRadius: "var(--r-sm)",
-                        background:
-                          product.status === "published"
-                            ? "var(--success-bg)"
-                            : "var(--warning-bg)",
-                        color:
-                          product.status === "published"
-                            ? "var(--success)"
-                            : "var(--warning)",
-                        fontSize: "0.75rem",
+                        padding: "0.35rem 0.75rem",
+                        borderRadius: "4px",
+                        fontSize: "0.8rem",
                         fontWeight: 600,
+                        background: product.status === "published" ? "var(--success-bg)" : "var(--warning-bg)",
+                        color: product.status === "published" ? "var(--success)" : "var(--warning)",
                       }}
                     >
-                      {product.status || "draft"}
+                      {product.status}
                     </span>
                   </td>
-                  <td style={{ padding: "0.75rem" }}>
-                    {product.visible ? "✓" : "✗"}
+                  <td style={{ padding: "1rem", textAlign: "center", fontSize: "0.9rem", color: "var(--text-2)" }}>
+                    {product.visible ? "✓" : "—"}
                   </td>
-                  <td style={{ padding: "0.75rem" }}>
-                    {product.featured ? "⭐" : "—"}
-                  </td>
-                  <td style={{ padding: "0.75rem", fontSize: "0.8rem" }}>
-                    {product.categories && product.categories.length > 0
-                      ? product.categories
-                          .map((cat) =>
-                            typeof cat === "string" ? cat : cat.name
-                          )
-                          .join(", ")
-                      : "—"}
-                  </td>
-                  <td style={{ padding: "0.75rem", fontSize: "0.8rem", color: "var(--text-2)" }}>
-                    {product.updated_at
-                      ? new Date(product.updated_at).toLocaleDateString()
-                      : "—"}
-                  </td>
-                  <td style={{ padding: "0.75rem", textAlign: "center" }}>
+                  <td style={{ padding: "1rem", textAlign: "center" }}>
                     <button
                       onClick={() => setSelectedProduct(product)}
                       style={{
-                        padding: "0.4rem 0.8rem",
-                        background: "var(--brand)",
-                        color: "#fff",
+                        background: "none",
                         border: "none",
-                        borderRadius: "var(--r-sm)",
+                        color: "var(--brand)",
                         cursor: "pointer",
-                        fontSize: "0.8rem",
+                        fontSize: "0.9rem",
                         fontWeight: 600,
-                        transition: "background var(--t)",
+                        padding: "0.4rem 0.8rem",
+                        borderRadius: "4px",
+                        transition: "all var(--t)",
                       }}
-                      onMouseEnter={(e) =>
-                        (e.target.style.background = "var(--brand-dark)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.background = "var(--brand)")
-                      }
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "var(--brand-muted)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "none";
+                      }}
                     >
                       View
                     </button>
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
-      {/* Results Count */}
-      <div
-        style={{
-          marginTop: "1rem",
-          fontSize: "0.9rem",
-          color: "var(--text-2)",
-        }}
-      >
-        Showing {filtered.length} of {products.length} products
-      </div>
-
-      {/* Modal */}
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          categories={categories}
-          tags={tags}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
+      {/* Detail View Modal */}
+      <ProductDetailView product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   );
 }
