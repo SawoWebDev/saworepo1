@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-21T03:29:21.964Z",
+  "updatedAt": "2026-04-21T03:32:13.141Z",
   "products": [
     {
       "id": "50834970-4527-4954-9cd7-8ac89d7bd70f",
@@ -422,7 +422,7 @@
       "tags": [],
       "features": [],
       "auto_tag_columns": null,
-      "thumbnail": "/product-images/1776644962668_p9rdgmco1h.webp",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/undefined/saworepo2@main/images/1776644962668_p9rdgmco1h.webp",
       "images": [],
       "spec_images": [],
       "files": [],
@@ -5837,7 +5837,7 @@
       "tags": [],
       "features": [],
       "auto_tag_columns": null,
-      "thumbnail": "/product-images/1776739687490_nvelj6cjev8.webp",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/undefined/saworepo2@main/images/1776739687490_nvelj6cjev8.webp",
       "images": [],
       "spec_images": [],
       "files": [],
@@ -7821,10 +7821,10 @@
         "Automatic shut-off in case of overheating"
       ],
       "auto_tag_columns": null,
-      "thumbnail": "/product-images/1776739018866_u860efzg17f.webp",
+      "thumbnail": "https://cdn.jsdelivr.net/gh/undefined/saworepo2@main/images/1776739018866_u860efzg17f.webp",
       "images": [],
       "spec_images": [
-        "/product-images/1776739095755_g2n0nmtzdgg.webp"
+        "https://cdn.jsdelivr.net/gh/undefined/saworepo2@main/images/1776739095755_g2n0nmtzdgg.webp"
       ],
       "files": [
         {
@@ -8503,5 +8503,5 @@
     }
   ],
   "syncSource": "supabase-merge",
-  "syncedAt": "2026-04-21T03:29:21.964Z"
+  "syncedAt": "2026-04-21T03:32:13.141Z"
 }
