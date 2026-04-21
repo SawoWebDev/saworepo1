@@ -1,0 +1,59 @@
+Server running on http://localhost:5000
+✓ Loaded 140 products from local C:\Users\WEB.WEB-DEVPC1\Desktop\localgitimg-sawo\sawo-main\products.json
+⏭️  [SKIP] 1776157962269_nule0t7s5wb.webp
+⏭️  [SKIP] 1776158013988_88g9gjebkq.webp
+⏭️  [SKIP] 1776158019324_atvxelq0v0v.webp
+⏭️  [SKIP] 1776158024681_mf1ydrmyoqp.webp
+⏭️  [SKIP] 1776148326994_td5nd79kpql.webp
+⏭️  [SKIP] 1776148413525_jixtkgccve.webp
+⏭️  [SKIP] 1776148678891_izb9hvvcdjd.webp
+⏭️  [SKIP] 1776148687416_fxnummtrc3w.webp
+⏭️  [SKIP] 1776644962668_p9rdgmco1h.webp
+⏭️  [SKIP] 1776157282534_gossrniqfv5.webp
+⏭️  [SKIP] 1776157306566_aw8mxepjmyw.webp
+⏭️  [SKIP] 1776157678723_z80ftcrc17.webp
+⏭️  [SKIP] 1776157762150_hwe4tayiq2f.webp
+⏭️  [SKIP] 1776157767720_qpqpk68k2wb.webp
+⏭️  [SKIP] 1776157775142_a6046y1g4.webp
+⏭️  [SKIP] 1776062953014_kwfzo5hn0lc.webp
+⏭️  [SKIP] 1776152379967_wwye4l3puqq.webp
+⏭️  [SKIP] 1776157865393_iwhnamdhcg9.webp
+⏭️  [SKIP] 1776157917695_k7sv6rmo4u.webp
+⏭️  [SKIP] 1776157921814_uxpvwymrcsn.webp
+⏭️  [SKIP] 1776157928928_kk284kwb90c.webp
+⏭️  [SKIP] 1776317925994_amy2bxa9szr.webp
+⏭️  [SKIP] 1776317930539_9kis4prb5sq.webp
+⏭️  [SKIP] 1776317994258_q3em7enwcjb.webp
+⏭️  [SKIP] 1776318047599_ewco74txcoa.webp
+⏭️  [SKIP] 1776318131455_juavp2puce7.webp
+⏭️  [SKIP] 1776739687490_nvelj6cjev8.webp
+⏭️  [SKIP] 1776739018866_u860efzg17f.webp
+⏭️  [SKIP] 1776739095755_g2n0nmtzdgg.webp
+⬇️  [DOWNLOAD] 1776741522962_6nje64rn4gc.webp
+⬇️  [DOWNLOAD] 1776741526439_924k1x7x35v.webp
+⬇️  [DOWNLOAD] 1776741680674_ihqr8wfaa4.webp
+
+📤 Committing changes to saworepo2...
+✅ Changes committed to saworepo2
+
+📤 Committing products.json to GitHub...
+warning: in the working copy of 'products.json', LF will be replaced by CRLF the next time Git touches it
+✅ products.json committed to GitHub
+⏭️  [SKIP] 1776644962668_p9rdgmco1h.webp
+⏭️  [SKIP] 1776739687490_nvelj6cjev8.webp
+⏭️  [SKIP] 1776739018866_u860efzg17f.webp
+⏭️  [SKIP] 1776739095755_g2n0nmtzdgg.webp
+📌 No image changes to commit
+
+📤 Committing products.json to GitHub...
+warning: in the working copy of 'products.json', LF will be replaced by CRLF the next time Git touches it
+✅ products.json committed to GitHub
+⏭️  [SKIP] 1776644962668_p9rdgmco1h.webp
+⏭️  [SKIP] 1776739687490_nvelj6cjev8.webp
+⏭️  [SKIP] 1776739018866_u860efzg17f.webp
+⏭️  [SKIP] 1776739095755_g2n0nmtzdgg.webp
+📌 No image changes to commit
+
+📤 Committing products.json to GitHub...
+warning: in the working copy of 'products.json', LF will be replaced by CRLF the next time Git touches it
+✅ products.json committed to GitHub
