@@ -38,9 +38,16 @@ function useToast() {
 function ProductCard({ p }) {
   const [hovered, setHovered] = useState(false);
   const productUrl = `${FRONT_URL || window.location.origin}/products/${p.slug}`;
-  const thumbnail = p.thumbnail?.startsWith('saworepo2/')
-    ? '/' + p.thumbnail
-    : p.thumbnail;
+
+  // Convert local saworepo2 paths to public URLs
+  const getImageUrl = (url) => {
+    if (!url) return null;
+    if (url.startsWith('saworepo2/')) return '/' + url;
+    if (url.startsWith('/saworepo2/')) return url;
+    return url;
+  };
+
+  const thumbnail = getImageUrl(p.thumbnail);
 
   return (
     <a
