@@ -4,7 +4,7 @@ import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
-import { getCachedProducts } from "../local-storage/cacheReader";
+import { useLocalProducts } from "./Local/useLocalProducts";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1635,6 +1635,7 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, perms }) {
 export default function Products({ currentUser }) {
   const perms = getPerms(currentUser);
   const { toasts, add, remove } = useToast();
+  const { products: localProds, categories: localCats, tags: localTags, loading: localLoading } = useLocalProducts();
 
   const [products, setProducts]   = useState([]);
   const [loading,  setLoading]    = useState(true);
@@ -1682,7 +1683,7 @@ export default function Products({ currentUser }) {
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
-      let data = dataSource === "live" ? await getAllProductsLive() : await getCachedProducts();
+      let data = dataSource === "live" ? await getAllProductsLive() : localProds;
       if (filterStatus) data = data.filter(p => p.status === filterStatus);
       data.sort((a, b) => {
         const aTime = new Date(a.created_at).getTime();
@@ -1693,23 +1694,35 @@ export default function Products({ currentUser }) {
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
-  }, [filterStatus, sortDir, dataSource]); // eslint-disable-line
+  }, [filterStatus, sortDir, dataSource, localProds]); // eslint-disable-line
 
   const fetchMeta = useCallback(async () => {
     try {
-      const prods = dataSource === "live" ? await getAllProductsLive() : await getCachedProducts();
-      const cats = dataSource === "live" ? await getAllCategoriesLive() : [...new Set(prods.flatMap(p => p.categories || []))];
-      const tags = dataSource === "live" ? await getAllTagsLive() : [...new Set(prods.flatMap(p => p.tags || []))];
-      setAllCats(dataSource === "live" ? cats.map(c => c.name) : cats);
-      setAllTags(dataSource === "live" ? tags.map(t => t.name) : tags);
-      const models = [...new Set(prods.map(p => p.type).filter(Boolean))].sort();
-      setAllModels(models);
+      if (dataSource === "live") {
+        const cats = await getAllCategoriesLive();
+        const tags = await getAllTagsLive();
+        const prods = await getAllProductsLive();
+        setAllCats(cats.map(c => c.name));
+        setAllTags(tags.map(t => t.name));
+        const models = [...new Set(prods.map(p => p.type).filter(Boolean))].sort();
+        setAllModels(models);
+      } else {
+        setAllCats(localCats);
+        setAllTags(localTags);
+        const models = [...new Set(localProds.map(p => p.type).filter(Boolean))].sort();
+        setAllModels(models);
+      }
     } catch (err) {
       console.error("Failed to fetch metadata:", err);
     }
-  }, [dataSource]); // eslint-disable-line
+  }, [dataSource, localCats, localTags, localProds]); // eslint-disable-line
 
-  useEffect(() => { fetchProducts(); fetchMeta(); }, [fetchProducts, fetchMeta]);
+  useEffect(() => {
+    if (dataSource === "live" || (dataSource === "local" && !localLoading)) {
+      fetchProducts();
+      fetchMeta();
+    }
+  }, [fetchProducts, fetchMeta, dataSource, localLoading]); // eslint-disable-line
 
   // ── Set default view for read-only users ────────────────────────────────────
   useEffect(() => {
@@ -2125,8 +2138,8 @@ export default function Products({ currentUser }) {
           <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
             <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
               {[
-                { id: "live", label: "Live Products", icon: "fa-cloud" },
-                { id: "local", label: "Local Products", icon: "fa-folder" }
+                { id: "live", label: "Live", icon: "fa-cloud" },
+                { id: "local", label: "Local", icon: "fa-folder" }
               ].map(tab => (
                 <button
                   key={tab.id}
@@ -2155,7 +2168,7 @@ export default function Products({ currentUser }) {
               ))}
             </div>
             <p className="products-subtitle" style={{ margin: 0 }}>
-              {loading ? "Loading..." : `${filtered.length} of ${products.length} products`}
+              {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
             </p>
           </div>
         </div>
@@ -2176,7 +2189,7 @@ export default function Products({ currentUser }) {
           gap: 8
         }}>
           <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
-          <span>Viewing <strong>local cached products</strong> — this is read-only. Switch to Live Products to edit.</span>
+          <span>Viewing <strong>local products from saworepo2</strong> — this is read-only. Switch to Live to edit.</span>
         </div>
       )}
 
