@@ -1,68 +1,47 @@
 /**
- * Sync from Supabase to local products.json
- * Only adds NEW items (doesn't overwrite existing)
- * Used by the Products component's sync button
+ * Sync from Supabase via backend API
+ * Only adds NEW items to products.json and downloads images to saworepo2
+ * Calls backend /api/sync endpoint
  */
 
-import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive } from "../../local-storage/supabaseReader";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 export async function syncSupabaseToLocal() {
   try {
-    // Fetch current local data
-    const localModule = await import("./data/products.json");
-    const localProducts = localModule.default || [];
-    const localIds = new Set(localProducts.map(p => p.id));
+    const response = await fetch(`${BACKEND_URL}/api/sync`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
 
-    // Fetch fresh from Supabase
-    const supabaseProducts = await getAllProductsLive();
-    const supabaseCategories = await getAllCategoriesLive();
-    const supabaseTags = await getAllTagsLive();
-
-    // Find new products (not in local)
-    const newProducts = supabaseProducts.filter(p => !localIds.has(p.id));
-
-    if (newProducts.length === 0) {
+    if (!response.ok) {
+      const error = await response.json();
       return {
-        success: true,
-        message: "✅ Already up to date! No new products to sync.",
-        added: 0,
-        total: supabaseProducts.length,
+        success: false,
+        message: error.message || `Server error: ${response.status}`,
+        error: error.error,
       };
     }
 
-    // Merge: add new products to local
-    const mergedProducts = [...localProducts, ...newProducts].sort((a, b) => {
-      const aTime = new Date(a.created_at).getTime();
-      const bTime = new Date(b.created_at).getTime();
-      return bTime - aTime; // newest first
-    });
+    const result = await response.json();
 
-    // Prepare merged data for localStorage
-    const timestamp = new Date().toISOString();
-    const meta = {
-      last_synced: timestamp,
-      total_products: mergedProducts.length,
-      new_products_added: newProducts.length,
-    };
+    if (result.success) {
+      return {
+        success: true,
+        message: result.message,
+        added: result.added,
+        total: result.total,
+        imagesDownloaded: result.imagesDownloaded,
+        filesDownloaded: result.filesDownloaded,
+        timestamp: result.timestamp,
+      };
+    }
 
-    // Store in localStorage (simulating the JSON files)
-    localStorage.setItem("sawo_local_products", JSON.stringify(mergedProducts));
-    localStorage.setItem("sawo_local_categories", JSON.stringify(supabaseCategories));
-    localStorage.setItem("sawo_local_tags", JSON.stringify(supabaseTags));
-    localStorage.setItem("sawo_local_meta", JSON.stringify(meta));
-
-    return {
-      success: true,
-      message: `✅ Sync complete! Added ${newProducts.length} new product(s).`,
-      added: newProducts.length,
-      total: mergedProducts.length,
-      timestamp,
-    };
+    return result;
   } catch (err) {
     return {
       success: false,
       message: `❌ Sync failed: ${err.message}`,
-      error: err,
+      error: err.message,
     };
   }
 }
