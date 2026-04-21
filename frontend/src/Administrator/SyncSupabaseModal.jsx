@@ -8,6 +8,31 @@ export default function SyncSupabaseModal({ open, onClose, onSync }) {
   const [progress, setProgress] = useState([]);
   const [stats, setStats] = useState({ added: 0, updated: 0 });
 
+  const handleSyncLegacy = async (isFull = false) => {
+    try {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const endpoint = isFull ? '/api/products/sync-full' : '/api/products/sync-supabase';
+
+      const res = await fetch(`${API_URL}${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (!res.ok) throw new Error('Sync failed');
+
+      const data = await res.json();
+      console.log(`✅ Sync completed:`, data);
+      setResult(data);
+      setSyncing(false);
+
+      setTimeout(() => onSync?.(), 2000);
+    } catch (err) {
+      console.error('❌ Legacy sync error:', err);
+      setError(err.message);
+      setSyncing(false);
+    }
+  };
+
   const handleSync = async (isFull = false) => {
     setSyncing(true);
     setError(null);
@@ -17,51 +42,65 @@ export default function SyncSupabaseModal({ open, onClose, onSync }) {
 
     try {
       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-      const endpoint = isFull ? '/api/products/sync-full' : '/api/products/sync-supabase-stream';
       console.log(`🔄 Starting ${isFull ? 'full' : 'quick'} sync...`);
 
-      const eventSource = new EventSource(`${API_URL}${endpoint}`);
+      // Try streaming endpoint first
+      const streamUrl = `${API_URL}/api/products/sync-supabase-stream`;
+      const response = await fetch(streamUrl, { method: 'POST' });
 
-      eventSource.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          console.log('📨 Progress event:', data);
+      // If streaming endpoint doesn't exist, fall back to legacy
+      if (response.status === 404) {
+        console.log('⚠️ Streaming endpoint not available, using legacy sync...');
+        return await handleSyncLegacy(isFull);
+      }
 
-          if (data.type === 'product-add') {
-            setProgress(p => [...p, { type: 'add', name: data.name }]);
-            setStats(s => ({ ...s, added: s.added + 1 }));
-          } else if (data.type === 'product-update') {
-            setProgress(p => [...p, { type: 'update', name: data.name }]);
-            setStats(s => ({ ...s, updated: s.updated + 1 }));
-          } else if (data.type === 'progress') {
-            setProgress(p => [...p, { type: 'step', message: data.message, step: data.step }]);
-          } else if (data.type === 'complete') {
-            setResult(data.result);
-            setSyncing(false);
-            eventSource.close();
-            // Auto-close after 3 seconds
-            setTimeout(() => onSync?.(), 2000);
-          } else if (data.type === 'error') {
-            setError(data.message);
-            setSyncing(false);
-            eventSource.close();
-          } else if (data.type === 'success') {
-            setResult(data.result);
-            setSyncing(false);
-            eventSource.close();
-            setTimeout(() => onSync?.(), 2000);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n').filter(l => l.trim());
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6));
+              console.log('📨 Progress event:', data);
+
+              if (data.type === 'product-add') {
+                setProgress(p => [...p, { type: 'add', name: data.name }]);
+                setStats(s => ({ ...s, added: s.added + 1 }));
+              } else if (data.type === 'product-update') {
+                setProgress(p => [...p, { type: 'update', name: data.name }]);
+                setStats(s => ({ ...s, updated: s.updated + 1 }));
+              } else if (data.type === 'progress') {
+                setProgress(p => [...p, { type: 'step', message: data.message, step: data.step }]);
+              } else if (data.type === 'complete') {
+                setResult(data.result);
+                setSyncing(false);
+                reader.cancel();
+                setTimeout(() => onSync?.(), 2000);
+              } else if (data.type === 'error') {
+                setError(data.message);
+                setSyncing(false);
+                reader.cancel();
+              } else if (data.type === 'success') {
+                setResult(data.result);
+                setSyncing(false);
+                reader.cancel();
+                setTimeout(() => onSync?.(), 2000);
+              }
+            } catch (err) {
+              console.error('Error parsing progress event:', err);
+            }
           }
-        } catch (err) {
-          console.error('Error parsing progress event:', err);
         }
-      };
-
-      eventSource.onerror = (err) => {
-        console.error('❌ Sync stream error:', err);
-        setError('Connection lost during sync');
-        setSyncing(false);
-        eventSource.close();
-      };
+      }
     } catch (err) {
       console.error('❌ Sync error:', err);
       setError(err.message);
