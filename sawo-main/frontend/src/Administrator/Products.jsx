@@ -4,6 +4,7 @@ import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
+import { getAllProducts } from "../local-storage/cacheReader";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1645,6 +1646,7 @@ export default function Products({ currentUser }) {
   const [filterStatus, setFilterStatus] = useState("");
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("list");
+  const [dataSource,   setDataSource]   = useState("live"); // "live" or "local"
 
   const [selected,    setSelected]    = useState(new Set());
   const [bulkConfirm, setBulkConfirm] = useState(false);
@@ -1680,7 +1682,7 @@ export default function Products({ currentUser }) {
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
-      let data = await getAllProductsLive();
+      let data = dataSource === "live" ? await getAllProductsLive() : getAllProducts();
       if (filterStatus) data = data.filter(p => p.status === filterStatus);
       data.sort((a, b) => {
         const aTime = new Date(a.created_at).getTime();
@@ -1691,21 +1693,21 @@ export default function Products({ currentUser }) {
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
-  }, [filterStatus, sortDir]); // eslint-disable-line
+  }, [filterStatus, sortDir, dataSource]); // eslint-disable-line
 
   const fetchMeta = useCallback(async () => {
     try {
-      const cats = await getAllCategoriesLive();
-      const tags = await getAllTagsLive();
-      const prods = await getAllProductsLive();
-      setAllCats(cats.map(c => c.name));
-      setAllTags(tags.map(t => t.name));
+      const prods = dataSource === "live" ? await getAllProductsLive() : getAllProducts();
+      const cats = dataSource === "live" ? await getAllCategoriesLive() : [...new Set(prods.flatMap(p => p.categories || []))];
+      const tags = dataSource === "live" ? await getAllTagsLive() : [...new Set(prods.flatMap(p => p.tags || []))];
+      setAllCats(dataSource === "live" ? cats.map(c => c.name) : cats);
+      setAllTags(dataSource === "live" ? tags.map(t => t.name) : tags);
       const models = [...new Set(prods.map(p => p.type).filter(Boolean))].sort();
       setAllModels(models);
     } catch (err) {
       console.error("Failed to fetch metadata:", err);
     }
-  }, []);
+  }, [dataSource]); // eslint-disable-line
 
   useEffect(() => { fetchProducts(); fetchMeta(); }, [fetchProducts, fetchMeta]);
 
@@ -2120,11 +2122,63 @@ export default function Products({ currentUser }) {
             <i className="fa-solid fa-box" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
             Products
           </h1>
-          <p className="products-subtitle">
-            {loading ? "Loading..." : `${filtered.length} of ${products.length} products`}
-          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
+            <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
+              {[
+                { id: "live", label: "Live Products", icon: "fa-cloud" },
+                { id: "local", label: "Local Products", icon: "fa-folder" }
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setDataSource(tab.id)}
+                  style={{
+                    flex: 1,
+                    padding: "8px 16px",
+                    border: "none",
+                    background: dataSource === tab.id ? "var(--brand-bg)" : "transparent",
+                    color: dataSource === tab.id ? "var(--brand)" : "var(--text-2)",
+                    cursor: "pointer",
+                    fontSize: "0.85rem",
+                    fontWeight: dataSource === tab.id ? 600 : 500,
+                    borderRight: tab.id === "live" ? "1px solid var(--border)" : "none",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 6
+                  }}
+                >
+                  <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            <p className="products-subtitle" style={{ margin: 0 }}>
+              {loading ? "Loading..." : `${filtered.length} of ${products.length} products`}
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* Local Mode Notice */}
+      {dataSource === "local" && (
+        <div style={{
+          background: "var(--info-bg)",
+          border: "1px solid var(--info-border)",
+          color: "var(--info)",
+          padding: "10px 14px",
+          borderRadius: 4,
+          marginBottom: 14,
+          fontSize: "0.85rem",
+          display: "flex",
+          alignItems: "center",
+          gap: 8
+        }}>
+          <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
+          <span>Viewing <strong>local cached products</strong> — this is read-only. Switch to Live Products to edit.</span>
+        </div>
+      )}
 
       {/* Toolbar */}
       <div className="products-toolbar">
@@ -2150,7 +2204,7 @@ export default function Products({ currentUser }) {
             </button>
           ))}
         </div>
-        {perms.can("products.bulk_delete") && selected.size > 0 && (
+        {perms.can("products.bulk_delete") && dataSource === "live" && selected.size > 0 && (
           <button type="button" className="btn btn-sm"
             style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
             onClick={() => setBulkConfirm(true)}>
@@ -2168,7 +2222,7 @@ export default function Products({ currentUser }) {
             <i className="fa-solid fa-broom" style={{ fontSize: "0.85em" }} />
           </button>
         )}
-        {perms.can("products.create") && (
+        {perms.can("products.create") && dataSource === "live" && (
           <Btn icon="fa-plus" label="New Product" onClick={openCreate} style={{ marginLeft: "auto" }} />
         )}
       </div>
@@ -2196,7 +2250,7 @@ export default function Products({ currentUser }) {
             <table className="products-table">
               <thead>
                 <tr>
-                  {perms.can("products.bulk_delete") && (
+                  {perms.can("products.bulk_delete") && dataSource === "live" && (
                     <th style={{ width: 36, paddingRight: 0 }}>
                       <input type="checkbox" className="tbl-checkbox"
                         checked={filtered.length > 0 && selected.size === filtered.length}
@@ -2215,13 +2269,13 @@ export default function Products({ currentUser }) {
               </thead>
               <tbody>
                 {filtered.length === 0 && (
-                  <tr><td colSpan={perms.can("products.bulk_delete") ? 9 : 8} className="table-empty">
+                  <tr><td colSpan={perms.can("products.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
                     {search ? `No products match "${search}"` : "No products yet — click New Product to create one."}
                   </td></tr>
                 )}
                 {filtered.map(p => (
                   <tr key={p.id} className={selected.has(p.id) ? "row-selected" : ""}>
-                    {perms.can("products.bulk_delete") && (
+                    {perms.can("products.bulk_delete") && dataSource === "live" && (
                       <td style={{ paddingRight: 0 }}>
                         <input type="checkbox" className="tbl-checkbox" checked={selected.has(p.id)} onChange={() => toggleSelect(p.id)} />
                       </td>
@@ -2266,13 +2320,13 @@ export default function Products({ currentUser }) {
                     </td>
                     <td style={{ textAlign: "right" }}>
                       <div className="table-actions">
-                        {perms.can("products.edit") && (
+                        {perms.can("products.edit") && dataSource === "live" && (
                           <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
                         )}
-                        {perms.can("products.duplicate") && (
+                        {perms.can("products.duplicate") && dataSource === "live" && (
                           <IconBtn icon="fa-copy" title="Duplicate" onClick={() => openDuplicate(p)} />
                         )}
-                        {perms.can("products.delete") && (
+                        {perms.can("products.delete") && dataSource === "live" && (
                           <IconBtn icon="fa-trash" title="Delete" onClick={() => setConfirmDel(p)} danger />
                         )}
                       </div>
