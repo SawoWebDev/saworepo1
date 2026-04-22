@@ -19,26 +19,36 @@ export function SyncButton({ compact = false }) {
     try {
       const result = await queueAutoSync(true); // Force immediate sync
 
-      if (result?.changed) {
+      if (result?.success === false && result?.message === 'Daemon unavailable') {
+        setStatus({
+          type: "warning",
+          message: "⚠️ Daemon not running - start it for auto-sync",
+        });
+      } else if (result?.changed) {
         setStatus({
           type: "success",
           message: `✅ Synced! ${result.pushed ? "Pushed to GitHub" : "Ready to push"}`,
+        });
+        setLastSync(new Date().toLocaleTimeString());
+      } else if (result?.success === false) {
+        setStatus({
+          type: "info",
+          message: "💡 Sync queued (daemon may not be running)",
         });
       } else {
         setStatus({
           type: "info",
           message: "✓ No changes to sync",
         });
+        setLastSync(new Date().toLocaleTimeString());
       }
 
-      setLastSync(new Date().toLocaleTimeString());
-
-      // Auto-clear message after 4 seconds
-      setTimeout(() => setStatus(null), 4000);
+      // Auto-clear message after 4-5 seconds
+      setTimeout(() => setStatus(null), result?.success === false ? 5000 : 4000);
     } catch (err) {
       setStatus({
         type: "error",
-        message: `❌ Sync failed: ${err.message}`,
+        message: `❌ Error: ${err.message}`,
       });
       setTimeout(() => setStatus(null), 5000);
     } finally {
