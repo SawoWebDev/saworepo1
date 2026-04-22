@@ -2213,7 +2213,7 @@ export default function Products({ currentUser }) {
                 type="button"
                 onClick={handleSync}
                 disabled={syncing}
-                title="Sync new products from Supabase (only adds new items)"
+                title="Sync new products from cloud (only adds new items)"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -2238,7 +2238,7 @@ export default function Products({ currentUser }) {
               <button
                 type="button"
                 onClick={() => setInstructionsOpen(true)}
-                title="Sync help — make sure backend (port 5000) & daemon (port 3001) are running"
+                title="Sync help — backend running on cloud, pull new products to local storage"
                 style={{
                   display: "flex",
                   alignItems: "center",
