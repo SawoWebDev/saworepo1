@@ -2273,18 +2273,6 @@ export default function Products({ currentUser }) {
             fontSize: "0.85rem",
             lineHeight: 1.5
           }}>
-            <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-              <i className="fa-solid fa-server" style={{ fontSize: "1em", minWidth: "1em" }} />
-              <strong>To sync products from Supabase:</strong>
-            </div>
-            <ol style={{ margin: "8px 0 0 1.5em", paddingLeft: 0 }}>
-              <li>Open terminal and run: <code style={{ background: "var(--surface)", padding: "2px 6px", borderRadius: 3, fontFamily: "monospace", fontSize: "0.8rem" }}>cd backend && npm start</code></li>
-              <li>Wait for: <code style={{ background: "var(--surface)", padding: "2px 6px", borderRadius: 3, fontFamily: "monospace", fontSize: "0.8rem" }}>✅ SAWO Backend API running</code></li>
-              <li>Then click the <strong>Sync</strong> button above to download latest products</li>
-            </ol>
-            <div style={{ marginTop: 8, fontSize: "0.8rem", opacity: 0.7 }}>
-              📖 <a href="#" onClick={e => { e.preventDefault(); alert("See backend/README.md for detailed instructions"); }} style={{ color: "var(--brand)", textDecoration: "underline", cursor: "pointer" }}>View detailed setup guide</a>
-            </div>
           </div>
         </>
       )}
