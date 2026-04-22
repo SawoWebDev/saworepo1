@@ -7,6 +7,8 @@ import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByI
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { syncSupabaseToLocal } from "./Local/syncWithMerge";
 import { onImageUploadComplete, onProductSaveComplete } from "./Local/triggerAutoSync";
+import { SyncButton } from "./components/SyncButton";
+import { InstructionsModal } from "./Local/InstructionsModal";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1685,6 +1687,7 @@ export default function Products({ currentUser }) {
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
   const [revisions, setRevisions] = useState([]);
+  const [instructionsOpen, setInstructionsOpen] = useState(false);
 
   const [syncing, setSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState(null);
@@ -2480,6 +2483,37 @@ export default function Products({ currentUser }) {
         wide
         actions={(
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <SyncButton compact={true} />
+            <button
+              type="button"
+              onClick={() => setInstructionsOpen(true)}
+              title="How to sync from Supabase to local"
+              style={{
+                padding: "6px 10px",
+                borderRadius: "var(--r)",
+                border: "1px solid var(--border)",
+                background: "var(--surface-2)",
+                color: "var(--text)",
+                cursor: "pointer",
+                fontSize: "1rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "32px",
+                height: "32px",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = "var(--surface-3)";
+                e.target.style.borderColor = "var(--brand)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = "var(--surface-2)";
+                e.target.style.borderColor = "var(--border)";
+              }}
+            >
+              ?
+            </button>
             <button
               type="submit"
               form="product-form"
@@ -2823,6 +2857,8 @@ export default function Products({ currentUser }) {
         title="Delete Product?"
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
+
+      <InstructionsModal open={instructionsOpen} onClose={() => setInstructionsOpen(false)} />
     </div>
   );
 }
