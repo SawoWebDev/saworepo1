@@ -1,308 +1,228 @@
-# SAWO Backend API
+SAWO Backend API
 
-Backend server for syncing Supabase products with local products.json and downloading images to saworepo2.
+Backend server for syncing Supabase products with a local products.json file and downloading assets to saworepo2.
 
-## ⚡ Quick Start
+------------------------------------------------
 
-### 1. Install Dependencies
-```bash
+QUICK START
+
+Install dependencies
 npm install
-```
 
-### 2. Start the Server
-```bash
+Start the server
 npm start
-```
 
-You should see:
-```
-✅ SAWO Backend API running on http://localhost:5000
-📡 Sync endpoint: POST http://localhost:5000/api/sync
-```
+Expected output:
+SAWO Backend API running on http://localhost:5000
+Sync endpoint: POST http://localhost:5000/api/sync
 
-### 3. Verify It's Running
-Open in browser: `http://localhost:5000/health`
+Verify the server
+Open in browser:
+http://localhost:5000/health
 
-Should return:
-```json
+Expected response:
 {
   "status": "ok",
   "message": "SAWO Backend API running"
 }
-```
 
----
+------------------------------------------------
 
-## 📋 Requirements
+REQUIREMENTS
 
-### `.env` File
-The backend needs a `.env` file with Supabase credentials:
+Environment file (.env)
 
-```env
 SUPABASE_URL=https://qsdfdfuooeythaioucpx.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_ANON_KEY=your_key_here
 PORT=5000
-```
 
-✅ This file is already created in the backend folder.
+------------------------------------------------
 
----
+USING WITH FRONTEND
 
-## 🚀 How to Use with Frontend
+Run backend and frontend simultaneously
 
-### Keep Backend Running While Using Frontend
-
-**Terminal 1 (Backend):**
-```bash
+Terminal 1 (backend):
 cd backend
 npm start
-```
 
-Leave this running. You should see:
-```
-✅ SAWO Backend API running on http://localhost:5000
-📡 Sync endpoint: POST http://localhost:5000/api/sync
-```
-
-**Terminal 2 (Frontend):**
-```bash
+Terminal 2 (frontend):
 cd frontend
 npm start
-```
 
-### Sync Products in Admin Panel
+Sync products from admin panel
 
-1. Open **Products** page
-2. Go to **Local** tab
-3. Click **Sync** button
-4. Watch the status message:
-   - ✅ Sync complete! Added X new product(s).
-   - 🖼️ Images downloaded: X
-   - 📄 Files downloaded: X
+1. Open Products page
+2. Go to Local tab
+3. Click Sync
+4. Monitor status messages
 
----
+------------------------------------------------
 
-## 🔧 Running Backends
+RUNNING THE BACKEND
 
-### Option 1: Manual (Recommended for Development)
-
-**Terminal 1:**
-```bash
+Manual (recommended)
 npm start
-```
 
-Keep this terminal open. Backend runs on `http://localhost:5000`
+Server runs at:
+http://localhost:5000
 
----
+—
 
-### Option 2: Background (Windows PowerShell)
-
-```powershell
+Background process (Windows PowerShell)
 cd sawo-main\backend
 Start-Process npm -ArgumentList "start" -NoNewWindow
-```
 
----
+—
 
-### Option 3: PM2 (Keep Running After Close)
+Using PM2 (persistent process)
 
-Install PM2 (one time):
-```bash
+Install:
 npm install -g pm2
-```
 
-Start backend:
-```bash
+Start:
 cd sawo-main/backend
 pm2 start npm --name "sawo-backend" -- start
-```
 
 Monitor:
-```bash
 pm2 monit
-```
 
 Stop:
-```bash
 pm2 stop sawo-backend
-```
 
----
+------------------------------------------------
 
-## ❌ Troubleshooting
+TROUBLESHOOTING
 
-### Port 5000 Already in Use
+Port 5000 already in use
 
-**PowerShell (Windows):**
-```powershell
+Windows:
 Get-NetTCPConnection -LocalPort 5000 | ForEach-Object {Stop-Process -Id $_.OwningProcess -Force}
-```
 
-**Bash (Mac/Linux):**
-```bash
-lsof -i :5000 | grep -v COMMAND | awk '{print $2}' | xargs kill -9
-```
+Mac/Linux:
+lsof -i :5000 | awk '{print $2}' | xargs kill -9
 
-Or use a different port in `.env`:
-```env
+Or change port in .env:
 PORT=5001
-```
 
-Then update frontend `.env.local`:
-```env
+Update frontend:
 REACT_APP_BACKEND_URL=http://localhost:5001
-```
 
----
+—
 
-### SUPABASE_URL is Required Error
+Missing SUPABASE_URL
 
-Check `.env` file exists with:
-```bash
+Check .env:
 cat .env
-```
 
-Should show:
-```
-SUPABASE_URL=https://qsdfdfuooeythaioucpx.supabase.co
-SUPABASE_ANON_KEY=eyJhbGc...
-PORT=5000
-```
+—
 
----
+Invalid API key
 
-### Invalid API Key
+Ensure SUPABASE_ANON_KEY matches your Supabase project.
 
-The SUPABASE_ANON_KEY in `.env` must be correct. Check it matches the Supabase project settings.
+—
 
----
+Connection refused during sync
 
-### Connection Refused When Syncing
-
-**Means backend is NOT running.**
+This indicates the backend is not running.
 
 Solution:
-1. Open Terminal 1
-2. Run `npm start` in backend folder
-3. Wait for "✅ SAWO Backend API running..."
-4. Try Sync button again
+1. Start backend with npm start
+2. Wait for server confirmation
+3. Retry sync
 
----
+------------------------------------------------
 
-## 📊 What Sync Does
+SYNC PROCESS OVERVIEW
 
-When you click "Sync" in the Products → Local tab:
+When Sync is triggered:
 
-1. **Fetches** latest products from Supabase
-2. **Compares** with existing products.json
-3. **Finds** NEW products (not in local)
-4. **Downloads** images → `saworepo2/images/`
-5. **Downloads** files → `saworepo2/files/`
-6. **Updates** JSON files:
-   - `products.json` (merged)
-   - `categories.json`
-   - `tags.json`
-   - `meta.json`
-7. **Shows** status message
+1. Fetch products from Supabase
+2. Compare with local products.json
+3. Identify new products
+4. Download images to saworepo2/images/
+5. Download files to saworepo2/files/
+6. Update:
+   - products.json
+   - categories.json
+   - tags.json
+   - meta.json
+7. Return sync summary
 
-### Example:
-```
+Example:
 Before: 143 products
-After:  145 products (added 2 new)
-Images: 3 downloaded
-Files:  0 downloaded
-```
+After: 145 products (added 2)
+Images downloaded: 3
+Files downloaded: 0
 
----
+------------------------------------------------
 
-## 🔐 Environment Variables
+ENVIRONMENT VARIABLES
 
-### Backend `.env`
-```env
-# Supabase connection
+Backend:
 SUPABASE_URL=https://qsdfdfuooeythaioucpx.supabase.co
-SUPABASE_ANON_KEY=eyJhbGc...
-
-# Server port
+SUPABASE_ANON_KEY=your_key_here
 PORT=5000
-```
 
-### Frontend `.env.local`
-```env
-# Backend API URL
+Frontend:
 REACT_APP_BACKEND_URL=http://localhost:5000
-```
 
----
+------------------------------------------------
 
-## 📁 File Structure
+FILE STRUCTURE
 
-```
 backend/
-├── .env                 ← Supabase credentials (required)
-├── package.json         ← Dependencies
-├── server.js            ← Express API server
-├── syncApi.js           ← Merge & sync logic
-├── README.md            ← This file
-└── node_modules/        ← Installed packages
-```
+├── .env
+├── package.json
+├── server.js
+├── syncApi.js
+├── README.md
+└── node_modules/
 
----
+------------------------------------------------
 
-## 🛠️ API Endpoints
+API ENDPOINTS
 
-### Health Check
-```
-GET http://localhost:5000/health
-```
+Health check
+GET /health
 
 Response:
-```json
 {
   "status": "ok",
   "message": "SAWO Backend API running"
 }
-```
 
-### Sync Products
-```
-POST http://localhost:5000/api/sync
-```
+Sync products
+POST /api/sync
 
 Response:
-```json
 {
   "success": true,
-  "message": "✅ Sync complete! Added 2 new product(s).",
+  "message": "Sync complete. Added 2 new products.",
   "added": 2,
   "total": 145,
   "imagesDownloaded": 3,
   "filesDownloaded": 0,
   "timestamp": "2026-04-22T00:09:43.659Z"
 }
-```
 
----
+------------------------------------------------
 
-## 💡 Tips
+OPERATIONAL TIPS
 
-✅ **Keep Terminal Open** - Backend must be running while you use Sync button
+- Keep the backend running while using sync
+- Ensure port is available
+- Use /health to verify server
+- Monitor backend logs
+- Use PM2 for persistent environments
 
-✅ **Check Port 5000** - Make sure nothing else is using it
+------------------------------------------------
 
-✅ **Verify Connection** - Visit `http://localhost:5000/health` to test
+SUPPORT CHECKLIST
 
-✅ **Watch Console** - Backend terminal shows sync progress in real-time
-
-✅ **Use PM2** - For keeping backend running permanently (production)
-
----
-
-## 📞 Support
-
-If sync fails:
-1. Check backend is running (`http://localhost:5000/health`)
-2. Check `.env` file has credentials
-3. Check frontend `.env.local` has backend URL
-4. Check browser console for error details
-5. Check backend terminal for error logs
+1. Confirm backend is reachable via /health
+2. Validate .env configuration
+3. Verify frontend API URL
+4. Check browser console logs
+5. Inspect backend logs
