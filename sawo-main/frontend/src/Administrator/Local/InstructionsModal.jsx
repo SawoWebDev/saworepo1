@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 
-/**
- * Instructions Modal - Shows users how to sync from Supabase to Local
- * Click the question mark icon to open
- */
 export function InstructionsModal({ open, onClose }) {
-  const [activeTab, setActiveTab] = useState("quick");
+  const [activeTab, setActiveTab] = useState("sync");
 
   if (!open) return null;
 
@@ -27,7 +23,8 @@ export function InstructionsModal({ open, onClose }) {
           background: "var(--surface)",
           borderRadius: "var(--r)",
           boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
-          maxWidth: "700px",
+          maxWidth: "680px",
+          width: "100%",
           maxHeight: "85vh",
           overflow: "auto",
           padding: 0,
@@ -38,7 +35,7 @@ export function InstructionsModal({ open, onClose }) {
         {/* Header */}
         <div
           style={{
-            padding: "20px",
+            padding: "18px 20px",
             borderBottom: "1px solid var(--border)",
             display: "flex",
             justifyContent: "space-between",
@@ -46,20 +43,25 @@ export function InstructionsModal({ open, onClose }) {
             background: "var(--surface-2)",
             position: "sticky",
             top: 0,
+            zIndex: 1,
           }}
         >
-          <h2 style={{ margin: 0, fontSize: "1.2rem" }}>
-            📚 Sync Instructions
-          </h2>
+          <div>
+            <h2 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 600 }}>How Sync Works</h2>
+            <p style={{ margin: "4px 0 0", fontSize: "0.8rem", color: "var(--text-3)" }}>
+              What the Sync buttons do and what needs to be running
+            </p>
+          </div>
           <button
             type="button"
             onClick={onClose}
             style={{
               background: "none",
               border: "none",
-              fontSize: "1.5rem",
+              fontSize: "1.4rem",
               cursor: "pointer",
               color: "var(--text-2)",
+              lineHeight: 1,
             }}
           >
             ✕
@@ -70,18 +72,18 @@ export function InstructionsModal({ open, onClose }) {
         <div
           style={{
             display: "flex",
-            gap: "0",
             borderBottom: "1px solid var(--border)",
-            padding: "0",
             background: "var(--surface-2)",
             position: "sticky",
-            top: "68px",
+            top: "65px",
+            zIndex: 1,
           }}
         >
           {[
-            { id: "quick", label: "⚡ Quick Start" },
-            { id: "detailed", label: "📖 Detailed Guide" },
-            { id: "troubleshoot", label: "🔧 Troubleshooting" },
+            { id: "sync", label: "Sync Buttons" },
+            { id: "daemon", label: "Daemon Setup" },
+            { id: "backend", label: "Backend Setup" },
+            { id: "troubleshoot", label: "Troubleshooting" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -89,14 +91,14 @@ export function InstructionsModal({ open, onClose }) {
               onClick={() => setActiveTab(tab.id)}
               style={{
                 flex: 1,
-                padding: "12px 16px",
-                background: activeTab === tab.id ? "var(--surface)" : "transparent",
+                padding: "10px 8px",
+                background: "transparent",
                 border: "none",
+                borderBottom: activeTab === tab.id ? "2px solid var(--brand)" : "2px solid transparent",
                 color: activeTab === tab.id ? "var(--brand)" : "var(--text-2)",
                 cursor: "pointer",
-                fontSize: "0.85rem",
+                fontSize: "0.8rem",
                 fontWeight: activeTab === tab.id ? 600 : 400,
-                borderBottom: activeTab === tab.id ? "2px solid var(--brand)" : "none",
               }}
             >
               {tab.label}
@@ -105,413 +107,204 @@ export function InstructionsModal({ open, onClose }) {
         </div>
 
         {/* Content */}
-        <div style={{ padding: "24px" }}>
-          {activeTab === "quick" && (
+        <div style={{ padding: "20px 24px" }}>
+
+          {/* ── SYNC BUTTONS TAB ── */}
+          {activeTab === "sync" && (
             <div>
-              <h3 style={{ marginTop: 0, color: "var(--brand)" }}>
-                🚀 Get Started in 3 Steps
-              </h3>
-
-              {/* Step 1 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--success-bg, rgba(39, 174, 96, 0.1))",
-                    border: "1px solid var(--success, #27ae60)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--success, #27ae60)" }}>
-                    Step 1: Open Terminal in Frontend Directory
-                  </strong>
-                </div>
-                <code
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px",
-                    borderRadius: "var(--r)",
-                    display: "block",
-                    fontSize: "0.85rem",
-                    fontFamily: "monospace",
-                    border: "1px solid var(--border)",
-                    overflow: "auto",
-                  }}
-                >
-                  {`cd saworepo1/sawo-main/frontend`}
-                </code>
-              </div>
-
-              {/* Step 2 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--success-bg, rgba(39, 174, 96, 0.1))",
-                    border: "1px solid var(--success, #27ae60)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--success, #27ae60)" }}>
-                    Step 2: Run Sync Command
-                  </strong>
-                </div>
-                <code
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px",
-                    borderRadius: "var(--r)",
-                    display: "block",
-                    fontSize: "0.85rem",
-                    fontFamily: "monospace",
-                    border: "1px solid var(--border)",
-                    overflow: "auto",
-                    whiteSpace: "pre-wrap",
-                    wordBreak: "break-all",
-                  }}
-                >
-{`npm run sync:supabase`}
-                </code>
-              </div>
-
-              {/* Step 3 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--success-bg, rgba(39, 174, 96, 0.1))",
-                    border: "1px solid var(--success, #27ae60)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--success, #27ae60)" }}>
-                    Step 3: Done!
-                  </strong>
-                </div>
-                <div
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px 16px",
-                    borderRadius: "var(--r)",
-                    border: "1px solid var(--border)",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  Data syncs from Supabase → Local JSON files. Check terminal for success message.
-                </div>
-              </div>
-
-              <div
-                style={{
-                  background: "var(--info-bg, rgba(26, 111, 168, 0.08))",
-                  border: "1px solid var(--info, #1a6fa8)",
-                  borderRadius: "var(--r)",
-                  padding: "12px 16px",
-                  marginTop: "20px",
-                  fontSize: "0.85rem",
-                  color: "var(--info, #1a6fa8)",
-                }}
-              >
-                <strong>💡 Tip:</strong> Run this to refresh local data from Supabase whenever needed.
-              </div>
-            </div>
-          )}
-
-          {activeTab === "detailed" && (
-            <div>
-              <h3 style={{ marginTop: 0, color: "var(--brand)" }}>
-                📖 Complete Guide
-              </h3>
-
-              <h4 style={{ marginTop: "20px" }}>What is Sync?</h4>
-              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>
-                Syncing downloads your product data, categories, and tags from Supabase and
-                saves them as local JSON files. This keeps your local data up-to-date and enables offline access.
+              <p style={{ margin: "0 0 18px", color: "var(--text-2)", fontSize: "0.9rem", lineHeight: 1.6 }}>
+                There are <strong>two sync buttons</strong> on this page — they do different things and require different services to be running.
               </p>
 
-              <h4 style={{ marginTop: "20px" }}>Files That Get Synced</h4>
-              <ul style={{ color: "var(--text-2)", lineHeight: 1.8 }}>
-                <li>
-                  <strong>products.json</strong> - All product information
-                </li>
-                <li>
-                  <strong>categories.json</strong> - Product categories
-                </li>
-                <li>
-                  <strong>tags.json</strong> - Product tags
-                </li>
-                <li>
-                  <strong>Last sync timestamp</strong> - Tracks when data was updated
-                </li>
-              </ul>
-
-              <h4 style={{ marginTop: "20px" }}>Step-by-Step</h4>
-
-              <div
-                style={{
-                  background: "var(--surface-3)",
-                  padding: "16px",
-                  borderRadius: "var(--r)",
-                  marginTop: "12px",
-                  border: "1px solid var(--border)",
-                  fontSize: "0.9rem",
-                  lineHeight: 1.8,
-                }}
-              >
-                <strong>1. Navigate to frontend folder</strong>
-                <code
-                  style={{
-                    display: "block",
-                    background: "var(--surface)",
-                    padding: "8px",
-                    borderRadius: "4px",
-                    margin: "8px 0",
-                    fontSize: "0.85rem",
-                    overflow: "auto",
-                  }}
-                >
-                  cd saworepo1/sawo-main/frontend
-                </code>
-
-                <strong>2. Run sync command</strong>
-                <code
-                  style={{
-                    display: "block",
-                    background: "var(--surface)",
-                    padding: "8px",
-                    borderRadius: "4px",
-                    margin: "8px 0",
-                    fontSize: "0.85rem",
-                  }}
-                >
-                  npm run sync:supabase
-                </code>
-
-                <strong>3. Wait for completion</strong>
-                <p style={{ margin: "8px 0", color: "var(--text-3)" }}>
-                  Terminal will show: "✅ Sync completed successfully!"
-                </p>
-
-                <strong>4. Check synced data</strong>
-                <code
-                  style={{
-                    display: "block",
-                    background: "var(--surface)",
-                    padding: "8px",
-                    borderRadius: "4px",
-                    margin: "8px 0",
-                    fontSize: "0.85rem",
-                    overflow: "auto",
-                  }}
-                >
-                  src/Administrator/Local/data/
-                </code>
-                <p style={{ margin: "8px 0", color: "var(--text-3)" }}>
-                  Look for: products.json, categories.json, tags.json
-                </p>
+              {/* Sync button 1 */}
+              <div style={{ marginBottom: "20px", border: "1px solid var(--border)", borderRadius: "var(--r)", overflow: "hidden" }}>
+                <div style={{ padding: "12px 16px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ background: "var(--brand)", color: "#fff", borderRadius: 4, padding: "2px 8px", fontSize: "0.75rem", fontWeight: 700 }}>1</span>
+                  <strong style={{ fontSize: "0.95rem" }}>Header "Sync" button — Pull from Supabase</strong>
+                </div>
+                <div style={{ padding: "14px 16px", fontSize: "0.88rem", lineHeight: 1.7, color: "var(--text-2)" }}>
+                  <p style={{ margin: "0 0 10px" }}>
+                    Located in the <strong>Local tab header</strong> next to the Live/Local toggle. Pulls product data from Supabase and saves it to local JSON files.
+                  </p>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <div style={{ background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "6px 12px", fontSize: "0.82rem" }}>
+                      Calls: <code style={{ color: "var(--brand)" }}>POST localhost:5000/api/sync</code>
+                    </div>
+                    <div style={{ background: "var(--warning-bg, rgba(241,196,15,0.1))", border: "1px solid var(--warning, #f1c40f)", borderRadius: 4, padding: "6px 12px", fontSize: "0.82rem", color: "var(--warning, #b8860b)" }}>
+                      Requires: Backend server running on port 5000
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <h4 style={{ marginTop: "20px" }}>When to Sync?</h4>
-              <ul style={{ color: "var(--text-2)", lineHeight: 1.8 }}>
-                <li>🌅 Start of workday - Get latest data</li>
-                <li>📤 After adding products - Keep local data current</li>
-                <li>🌙 End of workday - Final sync before closing</li>
-              </ul>
+              {/* Sync button 2 */}
+              <div style={{ marginBottom: "20px", border: "1px solid var(--border)", borderRadius: "var(--r)", overflow: "hidden" }}>
+                <div style={{ padding: "12px 16px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ background: "var(--brand)", color: "#fff", borderRadius: 4, padding: "2px 8px", fontSize: "0.75rem", fontWeight: 700 }}>2</span>
+                  <strong style={{ fontSize: "0.95rem" }}>Modal "Sync" button — Push to GitHub</strong>
+                </div>
+                <div style={{ padding: "14px 16px", fontSize: "0.88rem", lineHeight: 1.7, color: "var(--text-2)" }}>
+                  <p style={{ margin: "0 0 10px" }}>
+                    Located inside the <strong>product edit modal</strong> toolbar. Pushes saved product data and images from local to the GitHub repo (saworepo2). Also triggers automatically after saving a product.
+                  </p>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <div style={{ background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "6px 12px", fontSize: "0.82rem" }}>
+                      Calls: <code style={{ color: "var(--brand)" }}>POST localhost:3001/api/sync-products</code>
+                    </div>
+                    <div style={{ background: "var(--warning-bg, rgba(241,196,15,0.1))", border: "1px solid var(--warning, #f1c40f)", borderRadius: 4, padding: "6px 12px", fontSize: "0.82rem", color: "var(--warning, #b8860b)" }}>
+                      Requires: Sync daemon running on port 3001
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ background: "var(--info-bg, rgba(26,111,168,0.08))", border: "1px solid var(--info, #1a6fa8)", borderRadius: "var(--r)", padding: "12px 16px", fontSize: "0.85rem", color: "var(--info, #1a6fa8)" }}>
+                <strong>Typical workflow:</strong> Start both services → edit/add products in Live → click header Sync to pull to local → changes auto-push to GitHub via daemon.
+              </div>
             </div>
           )}
 
+          {/* ── DAEMON SETUP TAB ── */}
+          {activeTab === "daemon" && (
+            <div>
+              <h3 style={{ marginTop: 0, fontSize: "1rem", color: "var(--brand)" }}>Sync Daemon — port 3001</h3>
+              <p style={{ color: "var(--text-2)", fontSize: "0.88rem", lineHeight: 1.7, marginBottom: 20 }}>
+                The sync daemon watches for product changes and auto-pushes them to GitHub. The modal Sync button won't work without it running.
+              </p>
+
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-3)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Step 1 — Open a terminal and navigate to the daemon folder</div>
+                <code style={{ display: "block", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 14px", fontSize: "0.85rem", fontFamily: "monospace" }}>
+                  cd saworepo1/sawo-main/sync-daemon
+                </code>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-3)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Step 2 — Install dependencies (first time only)</div>
+                <code style={{ display: "block", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 14px", fontSize: "0.85rem", fontFamily: "monospace" }}>
+                  npm install
+                </code>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-3)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Step 3 — Start the daemon</div>
+                <code style={{ display: "block", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 14px", fontSize: "0.85rem", fontFamily: "monospace" }}>
+                  npm start
+                </code>
+              </div>
+
+              <div style={{ background: "var(--success-bg, rgba(39,174,96,0.1))", border: "1px solid var(--success, #27ae60)", borderRadius: "var(--r)", padding: "12px 16px", fontSize: "0.85rem", color: "var(--success, #27ae60)", marginBottom: 16 }}>
+                <strong>Ready when you see:</strong> "Sync daemon listening on port 3001"
+              </div>
+
+              <div style={{ background: "var(--warning-bg, rgba(241,196,15,0.1))", border: "1px solid var(--warning, #f1c40f)", borderRadius: "var(--r)", padding: "12px 16px", fontSize: "0.85rem", color: "var(--warning, #b8860b)" }}>
+                <strong>Keep this terminal open</strong> — the daemon must stay running while you work. If you close it, the modal Sync button will show "Daemon not running".
+              </div>
+            </div>
+          )}
+
+          {/* ── BACKEND SETUP TAB ── */}
+          {activeTab === "backend" && (
+            <div>
+              <h3 style={{ marginTop: 0, fontSize: "1rem", color: "var(--brand)" }}>Backend Server — port 5000</h3>
+              <p style={{ color: "var(--text-2)", fontSize: "0.88rem", lineHeight: 1.7, marginBottom: 20 }}>
+                The backend server connects to Supabase and handles the pull sync. The header Sync button won't work without it running.
+              </p>
+
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-3)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Step 1 — Open a new terminal and navigate to the backend</div>
+                <code style={{ display: "block", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 14px", fontSize: "0.85rem", fontFamily: "monospace" }}>
+                  cd saworepo1/sawo-main/backend
+                </code>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-3)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Step 2 — Install dependencies (first time only)</div>
+                <code style={{ display: "block", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 14px", fontSize: "0.85rem", fontFamily: "monospace" }}>
+                  npm install
+                </code>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-3)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Step 3 — Start the backend</div>
+                <code style={{ display: "block", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 4, padding: "10px 14px", fontSize: "0.85rem", fontFamily: "monospace" }}>
+                  npm start
+                </code>
+              </div>
+
+              <div style={{ background: "var(--success-bg, rgba(39,174,96,0.1))", border: "1px solid var(--success, #27ae60)", borderRadius: "var(--r)", padding: "12px 16px", fontSize: "0.85rem", color: "var(--success, #27ae60)", marginBottom: 16 }}>
+                <strong>Ready when you see:</strong> "Backend server running on port 5000"
+              </div>
+
+              <div style={{ background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: "var(--r)", padding: "12px 16px", fontSize: "0.85rem", color: "var(--text-2)" }}>
+                <strong>Make sure your .env has:</strong>
+                <code style={{ display: "block", marginTop: 8, fontFamily: "monospace", fontSize: "0.82rem", lineHeight: 1.8 }}>
+                  SUPABASE_URL=your_supabase_url<br />
+                  SUPABASE_SERVICE_KEY=your_service_key
+                </code>
+              </div>
+            </div>
+          )}
+
+          {/* ── TROUBLESHOOTING TAB ── */}
           {activeTab === "troubleshoot" && (
             <div>
-              <h3 style={{ marginTop: 0, color: "var(--brand)" }}>
-                🔧 Troubleshooting
-              </h3>
+              <h3 style={{ marginTop: 0, fontSize: "1rem", color: "var(--brand)" }}>Troubleshooting</h3>
 
-              {/* Issue 1 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--error-bg, rgba(231, 76, 60, 0.1))",
-                    border: "1px solid var(--error, #e74c3c)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--error, #e74c3c)" }}>
-                    ❌ Command not found: npm
-                  </strong>
+              {[
+                {
+                  error: "Daemon not running / Sync queued",
+                  cause: "The sync daemon on port 3001 is not running.",
+                  fix: 'Start it: cd saworepo1/sawo-main/sync-daemon && npm start',
+                },
+                {
+                  error: "Sync failed: Failed to fetch (header Sync button)",
+                  cause: "The backend server on port 5000 is not running.",
+                  fix: 'Start it: cd saworepo1/sawo-main/backend && npm start',
+                },
+                {
+                  error: "Supabase connection error",
+                  cause: "Missing or incorrect Supabase credentials in .env",
+                  fix: 'Check that SUPABASE_URL and SUPABASE_SERVICE_KEY are set correctly in backend/.env',
+                },
+                {
+                  error: "EADDRINUSE: port already in use",
+                  cause: "A previous instance of the server/daemon is still running.",
+                  fix: 'Kill the process: On Windows: netstat -ano | findstr :3001  then  taskkill /PID <pid> /F',
+                },
+                {
+                  error: "No changes to sync (but data looks stale)",
+                  cause: "The daemon compares hashes — data may already be up to date.",
+                  fix: 'Try the header Sync button to force-pull the latest from Supabase first.',
+                },
+              ].map((item, i) => (
+                <div key={i} style={{ marginBottom: 16, border: "1px solid var(--border)", borderRadius: "var(--r)", overflow: "hidden" }}>
+                  <div style={{ padding: "10px 14px", background: "var(--error-bg, rgba(231,76,60,0.08))", borderBottom: "1px solid var(--border)" }}>
+                    <strong style={{ color: "var(--error, #e74c3c)", fontSize: "0.88rem" }}>❌ {item.error}</strong>
+                  </div>
+                  <div style={{ padding: "12px 14px", fontSize: "0.85rem", lineHeight: 1.7, color: "var(--text-2)" }}>
+                    <div><strong>Cause:</strong> {item.cause}</div>
+                    <div style={{ marginTop: 6 }}>
+                      <strong>Fix:</strong>{" "}
+                      <code style={{ background: "var(--surface-3)", padding: "2px 6px", borderRadius: 3, fontSize: "0.82rem", fontFamily: "monospace" }}>
+                        {item.fix}
+                      </code>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px 16px",
-                    borderRadius: "var(--r)",
-                    border: "1px solid var(--border)",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  <p style={{ margin: "0 0 10px" }}>
-                    <strong>Problem:</strong> Node.js/npm not installed
-                  </p>
-                  <p style={{ margin: "0" }}>
-                    <strong>Solution:</strong> Download Node.js from{" "}
-                    <code style={{ background: "var(--surface)", padding: "2px 6px" }}>
-                      nodejs.org
-                    </code>
-                    , install, then restart terminal
-                  </p>
-                </div>
-              </div>
-
-              {/* Issue 2 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--error-bg, rgba(231, 76, 60, 0.1))",
-                    border: "1px solid var(--error, #e74c3c)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--error, #e74c3c)" }}>
-                    ❌ Permission denied
-                  </strong>
-                </div>
-                <div
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px 16px",
-                    borderRadius: "var(--r)",
-                    border: "1px solid var(--border)",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  <p style={{ margin: "0 0 10px" }}>
-                    <strong>Problem:</strong> Missing file permissions
-                  </p>
-                  <p style={{ margin: "0 0 10px" }}>
-                    <strong>Solution:</strong> Run terminal as Administrator:
-                  </p>
-                  <code
-                    style={{
-                      display: "block",
-                      background: "var(--surface)",
-                      padding: "8px",
-                      borderRadius: "4px",
-                      fontSize: "0.85rem",
-                    }}
-                  >
-                    Right-click Terminal → Run as administrator
-                  </code>
-                </div>
-              </div>
-
-              {/* Issue 3 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--error-bg, rgba(231, 76, 60, 0.1))",
-                    border: "1px solid var(--error, #e74c3c)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--error, #e74c3c)" }}>
-                    ❌ Supabase connection error
-                  </strong>
-                </div>
-                <div
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px 16px",
-                    borderRadius: "var(--r)",
-                    border: "1px solid var(--border)",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  <p style={{ margin: "0 0 10px" }}>
-                    <strong>Problem:</strong> Can't reach Supabase (network issue)
-                  </p>
-                  <ul style={{ margin: "0", paddingLeft: "20px" }}>
-                    <li>Check internet connection</li>
-                    <li>Check if Supabase service is up</li>
-                    <li>Try again in 1 minute</li>
-                    <li>Check .env file has correct Supabase URL</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Issue 4 */}
-              <div style={{ marginBottom: "20px" }}>
-                <div
-                  style={{
-                    background: "var(--error-bg, rgba(231, 76, 60, 0.1))",
-                    border: "1px solid var(--error, #e74c3c)",
-                    borderRadius: "var(--r)",
-                    padding: "12px 16px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <strong style={{ color: "var(--error, #e74c3c)" }}>
-                    ❌ Sync seems stuck
-                  </strong>
-                </div>
-                <div
-                  style={{
-                    background: "var(--surface-3)",
-                    padding: "12px 16px",
-                    borderRadius: "var(--r)",
-                    border: "1px solid var(--border)",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  <p style={{ margin: "0 0 10px" }}>
-                    <strong>Problem:</strong> Large dataset or slow connection
-                  </p>
-                  <ul style={{ margin: "0", paddingLeft: "20px" }}>
-                    <li>Wait 2-5 minutes (may have lots of data)</li>
-                    <li>Check if it's actually downloading (watch CPU)</li>
-                    <li>If truly stuck, press Ctrl+C to cancel</li>
-                    <li>Try again or check internet speed</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  background: "var(--warning-bg, rgba(241, 196, 15, 0.1))",
-                  border: "1px solid var(--warning, #f1c40f)",
-                  borderRadius: "var(--r)",
-                  padding: "12px 16px",
-                  marginTop: "20px",
-                  fontSize: "0.85rem",
-                  color: "var(--warning, #f1c40f)",
-                }}
-              >
-                <strong>ℹ️ Still stuck?</strong> Check the terminal output for error
-                messages - they tell you exactly what's wrong!
-              </div>
+              ))}
             </div>
           )}
+
         </div>
 
         {/* Footer */}
         <div
           style={{
-            padding: "16px 24px",
+            padding: "14px 24px",
             borderTop: "1px solid var(--border)",
             background: "var(--surface-2)",
             display: "flex",
-            gap: "10px",
             justifyContent: "flex-end",
           }}
         >
@@ -519,7 +312,7 @@ export function InstructionsModal({ open, onClose }) {
             type="button"
             onClick={onClose}
             style={{
-              padding: "8px 16px",
+              padding: "7px 16px",
               background: "var(--surface-3)",
               border: "1px solid var(--border)",
               borderRadius: "var(--r)",

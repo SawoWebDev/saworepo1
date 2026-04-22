@@ -2240,7 +2240,7 @@ export default function Products({ currentUser }) {
               <button
                 type="button"
                 onClick={() => setInstructionsOpen(true)}
-                title="How to sync from Supabase to local"
+                title="Sync help — make sure backend (port 5000) & daemon (port 3001) are running"
                 style={{
                   display: "flex",
                   alignItems: "center",
