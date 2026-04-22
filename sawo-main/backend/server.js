@@ -1,8 +1,3 @@
-/**
- * Backend API Server for SAWO Admin
- * Provides sync endpoint to merge Supabase data with local products
- */
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -13,38 +8,41 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ── Health check ────────────────────────────────────────────────────────────
-app.get("/health", (req, res) => {
+app.get("/health", (_req, res) => {
   res.json({ status: "ok", message: "SAWO Backend API running" });
 });
 
-// ── Sync endpoint ───────────────────────────────────────────────────────────
-app.post("/api/sync", async (req, res) => {
+// ── Streaming sync (NDJSON) ─────────────────────────────────────────────────
+// Emits one JSON object per line so the frontend can render live progress.
+app.post("/api/sync", async (_req, res) => {
   console.log("\n📡 Sync request received at", new Date().toISOString());
 
-  try {
-    const result = await syncMerge();
+  res.setHeader("Content-Type", "application/x-ndjson");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("X-Accel-Buffering", "no");
+  if (typeof res.flushHeaders === "function") res.flushHeaders();
 
-    if (result.success) {
-      res.json(result);
-    } else {
-      res.status(500).json(result);
+  const emit = (event) => {
+    try {
+      res.write(JSON.stringify(event) + "\n");
+    } catch (e) {
+      console.warn("Failed to write stream event:", e.message);
     }
+  };
+
+  try {
+    await syncMerge(emit);
   } catch (err) {
     console.error("❌ Sync endpoint error:", err);
-    res.status(500).json({
-      success: false,
-      message: `Server error: ${err.message}`,
-      error: err.message,
-    });
+    emit({ phase: "error", success: false, message: err.message });
+  } finally {
+    res.end();
   }
 });
 
-// ── Start server ────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`\n✅ SAWO Backend API running on http://localhost:${PORT}`);
   console.log(`📡 Sync endpoint: POST http://localhost:${PORT}/api/sync\n`);

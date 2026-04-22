@@ -6,8 +6,6 @@ import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { syncSupabaseToLocal } from "./Local/syncWithMerge";
-import { onImageUploadComplete, onProductSaveComplete } from "./Local/triggerAutoSync";
-import { SyncButton } from "./components/SyncButton";
 import { InstructionsModal } from "./Local/InstructionsModal";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
@@ -1691,6 +1689,7 @@ export default function Products({ currentUser }) {
 
   const [syncing, setSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState(null);
+  const [syncEvents, setSyncEvents] = useState([]);
 
   const isDirty = !formsEqual(form, savedForm);
 
@@ -1781,7 +1780,6 @@ export default function Products({ currentUser }) {
       }
       setForm(f => ({ ...f, thumbnail: url }));
       add("Thumbnail converted to WebP and uploaded.", "success");
-      onImageUploadComplete();
     } catch (err) { add(err.message, "error"); }
     finally { setUpThumb(false); }
   };
@@ -1793,7 +1791,6 @@ export default function Products({ currentUser }) {
       const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "product-images")));
       setForm(f => ({ ...f, images: [...f.images, ...urls] }));
       add(`${urls.length} image(s) converted to WebP and uploaded.`, "success");
-      onImageUploadComplete();
     } catch (err) { add(err.message, "error"); }
     finally { setUpImgs(false); }
   };
@@ -1805,7 +1802,6 @@ export default function Products({ currentUser }) {
       const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "product-images")));
       setForm(f => ({ ...f, spec_images: [...f.spec_images, ...urls] }));
       add(`${urls.length} spec image(s) converted to WebP and uploaded.`, "success");
-      onImageUploadComplete();
     } catch (err) { add(err.message, "error"); }
     finally { setUpSpec(false); }
   };
@@ -1954,19 +1950,22 @@ export default function Products({ currentUser }) {
   const handleSync = async () => {
     setSyncing(true);
     setSyncStatus(null);
+    setSyncEvents([{ phase: "start", message: "Starting sync..." }]);
     try {
-      const result = await syncSupabaseToLocal();
+      const result = await syncSupabaseToLocal((event) => {
+        setSyncEvents(prev => [...prev, event]);
+      });
       setSyncStatus(result);
       if (result.success) {
-        add(result.message, "success");
-        // Refresh products list
-        setTimeout(() => fetchProducts(), 1000);
+        add(result.message || "Sync complete", "success");
+        setTimeout(() => fetchProducts(), 800);
       } else {
-        add(result.message, "error");
+        add(result.message || "Sync failed", "error");
       }
     } catch (err) {
       const errorMsg = `Sync failed: ${err.message}`;
       setSyncStatus({ success: false, message: errorMsg });
+      setSyncEvents(prev => [...prev, { phase: "error", message: errorMsg }]);
       add(errorMsg, "error");
     } finally {
       setSyncing(false);
@@ -2057,7 +2056,6 @@ export default function Products({ currentUser }) {
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
-      onProductSaveComplete();
       actualClose();
       fetchProducts();
     } catch (err) { add(err.message, "error"); }
@@ -2293,33 +2291,6 @@ export default function Products({ currentUser }) {
         </>
       )}
 
-      {/* Sync Status Message */}
-      {syncStatus && (
-        <div style={{
-          background: syncStatus.success ? "var(--success-bg)" : "var(--danger-bg)",
-          border: `1px solid ${syncStatus.success ? "var(--success)" : "var(--danger)"}`,
-          color: syncStatus.success ? "var(--success)" : "var(--danger)",
-          padding: "10px 14px",
-          borderRadius: 4,
-          marginBottom: 14,
-          fontSize: "0.85rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 8
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <i className={`fa-solid ${syncStatus.success ? "fa-check-circle" : "fa-exclamation-circle"}`} style={{ fontSize: "1em" }} />
-            <span>{syncStatus.message}</span>
-          </div>
-          {syncStatus.timestamp && (
-            <small style={{ opacity: 0.8 }}>
-              {new Date(syncStatus.timestamp).toLocaleTimeString()}
-            </small>
-          )}
-        </div>
-      )}
-
       {/* Toolbar */}
       <div className="products-toolbar">
         <div className="search-wrap">
@@ -2487,37 +2458,6 @@ export default function Products({ currentUser }) {
         wide
         actions={(
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <SyncButton compact={true} />
-            <button
-              type="button"
-              onClick={() => setInstructionsOpen(true)}
-              title="How to sync from Supabase to local"
-              style={{
-                padding: "6px 10px",
-                borderRadius: "var(--r)",
-                border: "1px solid var(--border)",
-                background: "var(--surface-2)",
-                color: "var(--text)",
-                cursor: "pointer",
-                fontSize: "1rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "32px",
-                height: "32px",
-                transition: "all 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.background = "var(--surface-3)";
-                e.target.style.borderColor = "var(--brand)";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.background = "var(--surface-2)";
-                e.target.style.borderColor = "var(--border)";
-              }}
-            >
-              ?
-            </button>
             <button
               type="submit"
               form="product-form"
@@ -2863,6 +2803,140 @@ export default function Products({ currentUser }) {
         confirmLabel="Delete" />
 
       <InstructionsModal open={instructionsOpen} onClose={() => setInstructionsOpen(false)} />
+      <SyncProgressOverlay
+        open={syncing || (syncEvents.length > 0 && syncStatus != null)}
+        events={syncEvents}
+        syncing={syncing}
+        status={syncStatus}
+        onClose={() => { setSyncEvents([]); setSyncStatus(null); }}
+      />
+    </div>
+  );
+}
+
+function SyncProgressOverlay({ open, events, syncing, status, onClose }) {
+  if (!open) return null;
+
+  const phaseIcon = (phase) => {
+    if (phase === "fetch") return "🌐";
+    if (phase === "images") return "🖼️";
+    if (phase === "write") return "💾";
+    if (phase === "git") return "📤";
+    if (phase === "complete") return "✅";
+    if (phase === "error") return "❌";
+    return "•";
+  };
+
+  const phaseLabel = (phase) => {
+    const map = {
+      start: "Starting",
+      fetch: "Supabase",
+      images: "Downloading",
+      write: "Saving local",
+      git: "Git commit & push",
+      complete: "Complete",
+      error: "Error",
+    };
+    return map[phase] || phase;
+  };
+
+  const lastEvent = events[events.length - 1];
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.6)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 10001,
+      }}
+    >
+      <div
+        style={{
+          background: "var(--surface)",
+          borderRadius: "var(--r)",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
+          maxWidth: "560px",
+          width: "92%",
+          maxHeight: "80vh",
+          display: "flex",
+          flexDirection: "column",
+          border: "1px solid var(--border)",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ padding: "16px 20px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ fontSize: "1.3rem" }}>
+              {syncing ? <i className="fa-solid fa-arrows-rotate fa-spin" style={{ color: "var(--brand)" }} /> : (status?.success ? "✅" : "❌")}
+            </div>
+            <div>
+              <div style={{ fontWeight: 600, fontSize: "1rem" }}>
+                {syncing ? "Syncing…" : (status?.success ? "Sync complete" : "Sync failed")}
+              </div>
+              <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginTop: 2 }}>
+                {syncing ? phaseLabel(lastEvent?.phase) : (status?.message || "")}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            padding: "14px 20px",
+            overflow: "auto",
+            flex: 1,
+            fontSize: "0.85rem",
+            fontFamily: "monospace",
+            lineHeight: 1.7,
+          }}
+        >
+          {events.map((ev, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                gap: 8,
+                padding: "4px 0",
+                color: ev.phase === "error" ? "var(--error, #e74c3c)" : ev.warning ? "var(--warning, #b8860b)" : "var(--text-2)",
+                borderBottom: i < events.length - 1 ? "1px dashed var(--border)" : "none",
+              }}
+            >
+              <span style={{ width: 20, flexShrink: 0 }}>{phaseIcon(ev.phase)}</span>
+              <span style={{ flex: 1, wordBreak: "break-word" }}>{ev.message}</span>
+            </div>
+          ))}
+          {syncing && (
+            <div style={{ color: "var(--text-3)", fontStyle: "italic", marginTop: 6 }}>
+              Working…
+            </div>
+          )}
+        </div>
+
+        {!syncing && (
+          <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-2)", display: "flex", justifyContent: "flex-end" }}>
+            <button
+              type="button"
+              onClick={onClose}
+              style={{
+                padding: "7px 16px",
+                background: status?.success ? "var(--brand)" : "var(--surface-3)",
+                color: status?.success ? "#fff" : "var(--text)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--r)",
+                cursor: "pointer",
+                fontSize: "0.85rem",
+                fontWeight: 500,
+              }}
+            >
+              Close
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

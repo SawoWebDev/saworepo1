@@ -1,18 +1,13 @@
-/**
- * Sync API - Merges Supabase data with local products.json
- * Only adds NEW items, downloads images to saworepo2
- */
-
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { execSync } from "child_process";
 import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import fetch from "node-fetch";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Load env from backend .env
 dotenv.config({ path: path.join(__dirname, ".env") });
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -26,229 +21,197 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Paths
-const PRODUCTS_JSON = path.join(__dirname, "../frontend/src/Administrator/Local/data/products.json");
-const CATEGORIES_JSON = path.join(__dirname, "../frontend/src/Administrator/Local/data/categories.json");
-const TAGS_JSON = path.join(__dirname, "../frontend/src/Administrator/Local/data/tags.json");
-const META_JSON = path.join(__dirname, "../frontend/src/Administrator/Local/data/meta.json");
-const IMAGES_DIR = path.join(__dirname, "../../saworepo2/images");
-const FILES_DIR = path.join(__dirname, "../../saworepo2/files");
+const DATA_DIR = path.join(__dirname, "../frontend/src/Administrator/Local/data");
+const PRODUCTS_JSON = path.join(DATA_DIR, "products.json");
+const CATEGORIES_JSON = path.join(DATA_DIR, "categories.json");
+const TAGS_JSON = path.join(DATA_DIR, "tags.json");
+const META_JSON = path.join(DATA_DIR, "meta.json");
+const SAWOREPO2 = path.join(__dirname, "../../../saworepo2");
+const IMAGES_DIR = path.join(SAWOREPO2, "images");
+const FILES_DIR = path.join(SAWOREPO2, "files");
 
-let statsDownloaded = { images: 0, files: 0 };
+// ── Progress-aware sync ──────────────────────────────────────────────────────
+// emit(event) is called at each phase so the frontend can show live progress.
+export async function syncMerge(emit = () => {}) {
+  const stats = { images: 0, files: 0, added: 0, total: 0 };
 
-// ── Fetch from Supabase ────────────────────────────────────────────────────
+  try {
+    emit({ phase: "start", message: "Starting sync..." });
+
+    // 1. Fetch from Supabase
+    emit({ phase: "fetch", message: "Connecting to Supabase..." });
+    const { products: supabaseProducts, categories, tags } = await fetchSupabaseData();
+    emit({ phase: "fetch", message: `Fetched ${supabaseProducts.length} products from Supabase` });
+
+    // 2. Diff against local
+    const existingProducts = fs.existsSync(PRODUCTS_JSON)
+      ? JSON.parse(fs.readFileSync(PRODUCTS_JSON, "utf-8"))
+      : [];
+    const existingIds = new Set(existingProducts.map(p => p.id));
+    const newProducts = supabaseProducts.filter(p => !existingIds.has(p.id));
+    stats.total = supabaseProducts.length;
+    stats.added = newProducts.length;
+
+    // 3. Download images & files for new products
+    if (newProducts.length === 0) {
+      emit({ phase: "images", message: "No new products — skipping downloads" });
+    } else {
+      emit({ phase: "images", message: `Downloading images for ${newProducts.length} new product(s)...` });
+      for (let i = 0; i < newProducts.length; i++) {
+        const p = newProducts[i];
+        if (p.thumbnail) p.thumbnail = await processImageField(p.thumbnail, "product-images", stats);
+        if (Array.isArray(p.images)) p.images = await processImageField(p.images, "product-images", stats);
+        if (Array.isArray(p.spec_images)) p.spec_images = await processImageField(p.spec_images, "product-images", stats);
+        if (Array.isArray(p.files)) p.files = await processFiles(p.files, stats);
+        emit({ phase: "images", message: `Processed ${i + 1}/${newProducts.length}: ${p.name || p.id}` });
+      }
+      emit({ phase: "images", message: `Downloaded ${stats.images} image(s), ${stats.files} file(s)` });
+    }
+
+    // 4. Write local JSON files
+    emit({ phase: "write", message: "Writing local JSON files..." });
+    ensureDirs();
+    const merged = [...existingProducts, ...newProducts].sort((a, b) => {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+    const timestamp = new Date().toISOString();
+    const meta = {
+      last_synced: timestamp,
+      total_products: merged.length,
+      new_products_added: newProducts.length,
+      total_images_downloaded: stats.images,
+      total_files_downloaded: stats.files,
+    };
+    fs.writeFileSync(PRODUCTS_JSON, JSON.stringify(merged, null, 2));
+    fs.writeFileSync(CATEGORIES_JSON, JSON.stringify(categories, null, 2));
+    fs.writeFileSync(TAGS_JSON, JSON.stringify(tags, null, 2));
+    fs.writeFileSync(META_JSON, JSON.stringify(meta, null, 2));
+
+    // 5. Mirror products.json into saworepo2 for git commit
+    emit({ phase: "write", message: "Mirroring products.json to saworepo2..." });
+    fs.writeFileSync(path.join(SAWOREPO2, "products.json"), JSON.stringify(merged, null, 2));
+
+    // 6. Commit and push saworepo2
+    emit({ phase: "git", message: "Committing changes in saworepo2..." });
+    const gitResult = commitAndPush(timestamp, stats);
+    if (gitResult.nothing) {
+      emit({ phase: "git", message: "Nothing to commit — repo already up to date" });
+    } else if (gitResult.committed) {
+      emit({ phase: "git", message: `Committed: ${gitResult.commitMsg}` });
+      if (gitResult.pushed) {
+        emit({ phase: "git", message: "Pushed to GitHub ✓" });
+      } else {
+        emit({ phase: "git", message: `Commit OK, push skipped: ${gitResult.pushError}`, warning: true });
+      }
+    }
+
+    emit({
+      phase: "complete",
+      success: true,
+      message: newProducts.length === 0
+        ? "Already up to date"
+        : `Added ${newProducts.length} product(s), ${stats.images} image(s), ${stats.files} file(s)`,
+      stats,
+      timestamp,
+      pushed: gitResult.pushed,
+    });
+
+    return { success: true, ...stats, timestamp, pushed: gitResult.pushed };
+  } catch (err) {
+    console.error("❌ Sync failed:", err);
+    emit({ phase: "error", success: false, message: err.message, stack: err.stack });
+    return { success: false, message: err.message, error: err.message };
+  }
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
 async function fetchSupabaseData() {
-  console.log("📦 Fetching from Supabase...");
-
   const [products, categories, tags] = await Promise.all([
-    supabase
-      .from("products")
-      .select("*")
-      .eq("is_deleted", false)
+    supabase.from("products").select("*").eq("is_deleted", false)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false }),
-    supabase
-      .from("categories")
-      .select("id, name, slug, description"),
-    supabase
-      .from("tags")
-      .select("id, name, slug"),
+    supabase.from("categories").select("id, name, slug, description"),
+    supabase.from("tags").select("id, name, slug"),
   ]);
-
   if (products.error) throw new Error(`Products fetch failed: ${products.error.message}`);
   if (categories.error) throw new Error(`Categories fetch failed: ${categories.error.message}`);
   if (tags.error) throw new Error(`Tags fetch failed: ${tags.error.message}`);
-
-  return {
-    products: products.data || [],
-    categories: categories.data || [],
-    tags: tags.data || [],
-  };
+  return { products: products.data || [], categories: categories.data || [], tags: tags.data || [] };
 }
 
-// ── Download image from URL ────────────────────────────────────────────────
 async function downloadImage(url, outputPath) {
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const arrayBuf = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuf);
-
+    const buffer = Buffer.from(await response.arrayBuffer());
     const dir = path.dirname(outputPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(outputPath, buffer);
-    const stats = fs.statSync(outputPath);
-    return stats.size > 0;
+    return fs.statSync(outputPath).size > 0;
   } catch (err) {
     console.warn(`⚠️  Failed to download ${url}: ${err.message}`);
     return false;
   }
 }
 
-// ── Process image field ────────────────────────────────────────────────────
-async function processImageField(value, bucket = "product-images") {
+async function processImageField(value, bucket, stats) {
   if (!value) return value;
-
   if (Array.isArray(value)) {
     const results = [];
-    for (const item of value) {
-      const processed = await processImageField(item, bucket);
-      results.push(processed);
-    }
+    for (const item of value) results.push(await processImageField(item, bucket, stats));
     return results;
   }
+  if (!value.includes("http") && !value.includes("://")) return value;
 
-  // Already a relative path, keep as-is
-  if (!value.includes("http") && !value.includes("://")) {
-    return value;
-  }
-
-  // It's a full URL, extract filename and download
   const filename = path.basename(value);
-  let downloadUrl = value;
-
-  if (value.includes(SUPABASE_URL)) {
-    downloadUrl = value;
-  } else {
-    downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
-  }
-
+  const downloadUrl = value.includes(SUPABASE_URL)
+    ? value
+    : `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
   const outputPath = path.join(IMAGES_DIR, filename);
-  const success = await downloadImage(downloadUrl, outputPath);
-
-  if (success) {
-    statsDownloaded.images++;
-    return `images/${filename}`;
-  }
-
-  return value; // Return original if download fails
+  const ok = await downloadImage(downloadUrl, outputPath);
+  if (ok) { stats.images++; return `images/${filename}`; }
+  return value;
 }
 
-// ── Process files array ────────────────────────────────────────────────────
-async function processFiles(filesArray) {
+async function processFiles(filesArray, stats) {
   if (!filesArray || !Array.isArray(filesArray)) return filesArray;
-
-  const processed = [];
-  for (const file of filesArray) {
-    if (typeof file === "object" && file.path) {
-      const filename = path.basename(file.path);
-      const downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${file.path}`;
-      const outputPath = path.join(FILES_DIR, filename);
-
-      const success = await downloadImage(downloadUrl, outputPath);
-      if (success) {
-        statsDownloaded.files++;
-        processed.push({ ...file, path: `files/${filename}` });
-      } else {
-        processed.push(file);
-      }
-    } else {
-      processed.push(file);
-    }
+  const out = [];
+  for (const f of filesArray) {
+    if (typeof f === "object" && f.path) {
+      const filename = path.basename(f.path);
+      const url = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${f.path}`;
+      const ok = await downloadImage(url, path.join(FILES_DIR, filename));
+      if (ok) { stats.files++; out.push({ ...f, path: `files/${filename}` }); }
+      else out.push(f);
+    } else out.push(f);
   }
-  return processed;
+  return out;
 }
 
-// ── Main merge sync function ───────────────────────────────────────────────
-export async function syncMerge() {
+function ensureDirs() {
+  for (const d of [DATA_DIR, IMAGES_DIR, FILES_DIR]) {
+    if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
+  }
+}
+
+function commitAndPush(timestamp, stats) {
+  const run = (cmd) => execSync(cmd, { cwd: SAWOREPO2, encoding: "utf-8", stdio: "pipe" });
   try {
-    statsDownloaded = { images: 0, files: 0 };
-    console.log("🚀 Starting merge sync...\n");
+    const status = run("git status --porcelain").trim();
+    if (!status) return { nothing: true };
 
-    // Load existing local products
-    const existingProducts = fs.existsSync(PRODUCTS_JSON)
-      ? JSON.parse(fs.readFileSync(PRODUCTS_JSON, "utf-8"))
-      : [];
-    const existingIds = new Set(existingProducts.map(p => p.id));
+    run("git add -A");
+    const ts = timestamp.replace("T", " ").split(".")[0];
+    const commitMsg = `Auto-sync: +${stats.added} products, +${stats.images} images [${ts}]`;
+    run(`git commit -m "${commitMsg}"`);
 
-    // Fetch from Supabase
-    const { products: supabaseProducts, categories, tags } = await fetchSupabaseData();
-
-    // Find NEW products (not in local)
-    const newProducts = supabaseProducts.filter(p => !existingIds.has(p.id));
-
-    if (newProducts.length === 0) {
-      return {
-        success: true,
-        message: "✅ Already up to date! No new products.",
-        added: 0,
-        total: existingProducts.length,
-        existing: existingProducts.length,
-      };
+    try {
+      run("git push origin main");
+      return { committed: true, pushed: true, commitMsg };
+    } catch (e) {
+      return { committed: true, pushed: false, commitMsg, pushError: e.message.split("\n")[0] };
     }
-
-    // Process images and files for new products
-    console.log(`🎨 Processing ${newProducts.length} new products...`);
-    for (const product of newProducts) {
-      if (product.thumbnail) {
-        product.thumbnail = await processImageField(product.thumbnail);
-      }
-      if (product.images && Array.isArray(product.images)) {
-        product.images = await processImageField(product.images);
-      }
-      if (product.spec_images && Array.isArray(product.spec_images)) {
-        product.spec_images = await processImageField(product.spec_images);
-      }
-      if (product.files && Array.isArray(product.files)) {
-        product.files = await processFiles(product.files);
-      }
-    }
-
-    // Merge: combine existing + new
-    const mergedProducts = [...existingProducts, ...newProducts].sort((a, b) => {
-      const aTime = new Date(a.created_at).getTime();
-      const bTime = new Date(b.created_at).getTime();
-      return bTime - aTime;
-    });
-
-    // Prepare meta
-    const timestamp = new Date().toISOString();
-    const meta = {
-      last_synced: timestamp,
-      total_products: mergedProducts.length,
-      new_products_added: newProducts.length,
-      total_images_downloaded: statsDownloaded.images,
-      total_files_downloaded: statsDownloaded.files,
-    };
-
-    // Ensure directories exist
-    const dataDir = path.dirname(PRODUCTS_JSON);
-    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-    if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
-    if (!fs.existsSync(FILES_DIR)) fs.mkdirSync(FILES_DIR, { recursive: true });
-
-    // Write updated JSON files
-    fs.writeFileSync(PRODUCTS_JSON, JSON.stringify(mergedProducts, null, 2));
-    fs.writeFileSync(CATEGORIES_JSON, JSON.stringify(categories, null, 2));
-    fs.writeFileSync(TAGS_JSON, JSON.stringify(tags, null, 2));
-    fs.writeFileSync(META_JSON, JSON.stringify(meta, null, 2));
-
-    console.log("\n✅ Sync complete!\n");
-    console.log(`✅ New products added: ${newProducts.length}`);
-    console.log(`📦 Total products: ${mergedProducts.length}`);
-    console.log(`🖼️  Images downloaded: ${statsDownloaded.images}`);
-    console.log(`📄 Files downloaded: ${statsDownloaded.files}`);
-
-    return {
-      success: true,
-      message: `✅ Sync complete! Added ${newProducts.length} new product(s).`,
-      added: newProducts.length,
-      total: mergedProducts.length,
-      existing: existingProducts.length,
-      imagesDownloaded: statsDownloaded.images,
-      filesDownloaded: statsDownloaded.files,
-      timestamp,
-    };
   } catch (err) {
-    console.error("❌ Sync failed:", err.message);
-    return {
-      success: false,
-      message: `❌ Sync failed: ${err.message}`,
-      error: err.message,
-    };
+    return { committed: false, pushed: false, error: err.message };
   }
 }
