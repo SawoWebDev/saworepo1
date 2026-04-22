@@ -1,5 +1,89 @@
 [
   {
+    "id": "f4d31120-d095-4f71-bb35-c9ac4589ebcb",
+    "name": "LIVE",
+    "slug": "live",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/1776815103743_wrrhm0hq3y.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [],
+    "tags": [],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-04-21T23:44:39.217638+00:00",
+    "updated_at": "2026-04-21T23:45:10.797+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false
+  },
+  {
+    "id": "f1471432-ae53-442b-8f8f-c6c78aa13691",
+    "name": "Minidragon Black NB",
+    "slug": "minidragon-black-nb",
+    "short_description": "<b style=\"text-align: justify;\">Minidragon</b><span style=\"text-align: justify;\"> </span><b style=\"text-align: justify;\">heater</b><span style=\"text-align: justify;\"> is boasts a sleek, compact design that fits seamlessly into suitable for smaller sauna spaces, making it perfect for sauna room. Its innovative fiber coating enhances heat retention while ensuring safety and durability.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Heater Model</th>\n  <th>kW</th>\n  <th>Sauna Room<br>min. (m3) max.</th>\n  <th>Size of Heater (mm)<br>Length Width Height</th>\n  <th>Stones<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"5\">Minimum Safety Distances<br>A | B | C | D | E</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MN-23NB-DRF-BL-P</td>\n  <td>2.3</td>\n  <td>1.3 – 2.5</td>\n  <td>215 x 435 x 455</td>\n  <td>8 – 11</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>20</td>\n  <td>40</td>\n  <td>140</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>MN-30NB-DRF-BL-P</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>215 x 435 x 455</td>\n  <td>8 – 11</td>\n  <td>Built-in (8+4h)</td>\n  <td>70</td>\n  <td>20</td>\n  <td>50</td>\n  <td>140</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>MN-36NB-DRF-BL-P</td>\n  <td>3.6</td>\n  <td>3 – 6</td>\n  <td>215 x 435 x 455</td>\n  <td>8 – 11</td>\n  <td>Built-in (8+4h)</td>\n  <td>90</td>\n  <td>20</td>\n  <td>50</td>\n  <td>140</td>\n  <td>155</td>\n</tr></tbody></table>",
+    "thumbnail": "images/1776762191160_xmbwby86mqa.webp",
+    "images": [],
+    "spec_images": [
+      "images/1776762351592_os94e39ktnd.webp"
+    ],
+    "categories": [
+      "Dragonfire"
+    ],
+    "tags": [
+      "Black",
+      "Fibercoated",
+      "Junglefire",
+      "NB",
+      "2.3 kW",
+      "3.0 kW",
+      "3.6 kW",
+      "MN-23NB-DRF-BL-P",
+      "MN-30NB-DRF-BL-P",
+      "MN-36NB-DRF-BL-P"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Power range: 2.3 – 3.6kW",
+      "Available controls: Built-in (NB)",
+      "Fibercoated casing with Junglefire pattern",
+      "Can fit 11kg of stones",
+      "Built-in models: Control knobs with light indicator"
+    ],
+    "brand": "SAWO",
+    "type": "Minidragon",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Edgar",
+    "created_at": "2026-04-21T09:05:39.881957+00:00",
+    "updated_at": "2026-04-21T09:06:10.744+00:00",
+    "files": [
+      {
+        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Dragonfire%20Series/Minidragon-NS-NB_FiEn-3P-1P.pdf",
+        "name": "Minidragon NS NB FiEn 3P 1P"
+      }
+    ],
+    "updated_by_username": "Edgar",
+    "is_deleted": false
+  },
+  {
     "id": "a029f5fd-02ef-4117-a19e-eb0d98e56006",
     "name": "Minidragon Red NB",
     "slug": "minidragon-red-nb",

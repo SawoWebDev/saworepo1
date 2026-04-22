@@ -3298,5 +3298,20 @@
     "id": "cf67dd8c-39f7-4fca-8600-8c8ef89ee5f2",
     "name": "MN-36NB-DRF-P",
     "slug": "mn-36nb-drf-p"
+  },
+  {
+    "id": "3abf775a-9ccb-4009-9721-40ce9ba3f9cc",
+    "name": "MN-23NB-DRF-BL-P",
+    "slug": "mn-23nb-drf-bl-p"
+  },
+  {
+    "id": "5aeb85cb-4c8a-4bfd-8742-70f0f2ba5889",
+    "name": "MN-30NB-DRF-BL-P",
+    "slug": "mn-30nb-drf-bl-p"
+  },
+  {
+    "id": "2a001a91-54fc-429d-b541-6bbc340f3966",
+    "name": "MN-36NB-DRF-BL-P",
+    "slug": "mn-36nb-drf-bl-p"
   }
 ]
