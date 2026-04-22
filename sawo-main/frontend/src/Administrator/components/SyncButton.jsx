@@ -64,7 +64,7 @@ export function SyncButton({ compact = false }) {
           type="button"
           onClick={handleSync}
           disabled={syncing}
-          title={lastSync ? `Last synced: ${lastSync}` : "Sync images & products to GitHub"}
+          title="Click to sync product images & data to GitHub"
           style={{
             padding: "6px 12px",
             borderRadius: "var(--r)",
@@ -79,6 +79,7 @@ export function SyncButton({ compact = false }) {
             gap: "6px",
             opacity: syncing ? 0.6 : 1,
             transition: "all 0.2s",
+            position: "relative",
           }}
           onMouseEnter={(e) => {
             if (!syncing) e.target.style.background = "var(--surface-3)";

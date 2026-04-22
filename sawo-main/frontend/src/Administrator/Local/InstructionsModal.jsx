@@ -124,7 +124,7 @@ export function InstructionsModal({ open, onClose }) {
                   }}
                 >
                   <strong style={{ color: "var(--success, #27ae60)" }}>
-                    Step 1: Open Terminal
+                    Step 1: Open Terminal in Frontend Directory
                   </strong>
                 </div>
                 <code
@@ -139,7 +139,7 @@ export function InstructionsModal({ open, onClose }) {
                     overflow: "auto",
                   }}
                 >
-                  # Windows Command Prompt or PowerShell
+                  {`cd saworepo1/sawo-main/frontend`}
                 </code>
               </div>
 
@@ -155,7 +155,7 @@ export function InstructionsModal({ open, onClose }) {
                   }}
                 >
                   <strong style={{ color: "var(--success, #27ae60)" }}>
-                    Step 2: Navigate & Sync
+                    Step 2: Run Sync Command
                   </strong>
                 </div>
                 <code
@@ -172,8 +172,7 @@ export function InstructionsModal({ open, onClose }) {
                     wordBreak: "break-all",
                   }}
                 >
-{`cd c:\\Users\\WEB.WEB-DEVPC1\\Desktop\\git-sawo\\saworepo1\\sawo-main\\frontend
-npm run sync:supabase`}
+{`npm run sync:supabase`}
                 </code>
               </div>
 
@@ -189,7 +188,7 @@ npm run sync:supabase`}
                   }}
                 >
                   <strong style={{ color: "var(--success, #27ae60)" }}>
-                    Step 3: Wait & Done!
+                    Step 3: Done!
                   </strong>
                 </div>
                 <div
@@ -201,8 +200,7 @@ npm run sync:supabase`}
                     fontSize: "0.9rem",
                   }}
                 >
-                  Data syncs from Supabase → Local JSON files. Look for success message
-                  in terminal.
+                  Data syncs from Supabase → Local JSON files. Check terminal for success message.
                 </div>
               </div>
 
@@ -217,8 +215,7 @@ npm run sync:supabase`}
                   color: "var(--info, #1a6fa8)",
                 }}
               >
-                <strong>💡 Tip:</strong> Run this daily to keep local data fresh from
-                Supabase, or whenever you upload new images/products.
+                <strong>💡 Tip:</strong> Run this to refresh local data from Supabase whenever needed.
               </div>
             </div>
           )}
@@ -231,9 +228,8 @@ npm run sync:supabase`}
 
               <h4 style={{ marginTop: "20px" }}>What is Sync?</h4>
               <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>
-                Syncing downloads your product data from Supabase (cloud database) and
-                saves it as JSON files on your computer. This creates a local backup and
-                enables offline access.
+                Syncing downloads your product data, categories, and tags from Supabase and
+                saves them as local JSON files. This keeps your local data up-to-date and enables offline access.
               </p>
 
               <h4 style={{ marginTop: "20px" }}>Files That Get Synced</h4>
@@ -265,12 +261,7 @@ npm run sync:supabase`}
                   lineHeight: 1.8,
                 }}
               >
-                <strong>1. Open Command Prompt or PowerShell</strong>
-                <p style={{ margin: "8px 0", color: "var(--text-3)" }}>
-                  Press Win+R, type "cmd" or "powershell", hit Enter
-                </p>
-
-                <strong>2. Navigate to project folder</strong>
+                <strong>1. Navigate to frontend folder</strong>
                 <code
                   style={{
                     display: "block",
@@ -282,10 +273,10 @@ npm run sync:supabase`}
                     overflow: "auto",
                   }}
                 >
-                  cd c:\Users\WEB.WEB-DEVPC1\Desktop\git-sawo\saworepo1\sawo-main\frontend
+                  cd saworepo1/sawo-main/frontend
                 </code>
 
-                <strong>3. Run sync command</strong>
+                <strong>2. Run sync command</strong>
                 <code
                   style={{
                     display: "block",
@@ -299,12 +290,12 @@ npm run sync:supabase`}
                   npm run sync:supabase
                 </code>
 
-                <strong>4. Watch for confirmation</strong>
+                <strong>3. Wait for completion</strong>
                 <p style={{ margin: "8px 0", color: "var(--text-3)" }}>
-                  Terminal shows: "✅ Sync completed successfully!"
+                  Terminal will show: "✅ Sync completed successfully!"
                 </p>
 
-                <strong>5. Check local files</strong>
+                <strong>4. Check synced data</strong>
                 <code
                   style={{
                     display: "block",
@@ -319,16 +310,15 @@ npm run sync:supabase`}
                   src/Administrator/Local/data/
                 </code>
                 <p style={{ margin: "8px 0", color: "var(--text-3)" }}>
-                  Look for updated JSON files with new timestamp
+                  Look for: products.json, categories.json, tags.json
                 </p>
               </div>
 
               <h4 style={{ marginTop: "20px" }}>When to Sync?</h4>
               <ul style={{ color: "var(--text-2)", lineHeight: 1.8 }}>
-                <li>🌅 Morning - Start of workday</li>
-                <li>📤 After upload - New images/products added</li>
-                <li>🔄 Mid-day - Every few hours</li>
-                <li>🌙 Before close - End of workday</li>
+                <li>🌅 Start of workday - Get latest data</li>
+                <li>📤 After adding products - Keep local data current</li>
+                <li>🌙 End of workday - Final sync before closing</li>
               </ul>
             </div>
           )}
