@@ -6,6 +6,7 @@ import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { syncSupabaseToLocal } from "./Local/syncWithMerge";
+import { onImageUploadComplete, onProductSaveComplete } from "./Local/triggerAutoSync";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1777,6 +1778,7 @@ export default function Products({ currentUser }) {
       }
       setForm(f => ({ ...f, thumbnail: url }));
       add("Thumbnail converted to WebP and uploaded.", "success");
+      onImageUploadComplete();
     } catch (err) { add(err.message, "error"); }
     finally { setUpThumb(false); }
   };
@@ -1788,6 +1790,7 @@ export default function Products({ currentUser }) {
       const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "product-images")));
       setForm(f => ({ ...f, images: [...f.images, ...urls] }));
       add(`${urls.length} image(s) converted to WebP and uploaded.`, "success");
+      onImageUploadComplete();
     } catch (err) { add(err.message, "error"); }
     finally { setUpImgs(false); }
   };
@@ -1799,6 +1802,7 @@ export default function Products({ currentUser }) {
       const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "product-images")));
       setForm(f => ({ ...f, spec_images: [...f.spec_images, ...urls] }));
       add(`${urls.length} spec image(s) converted to WebP and uploaded.`, "success");
+      onImageUploadComplete();
     } catch (err) { add(err.message, "error"); }
     finally { setUpSpec(false); }
   };
@@ -2050,6 +2054,7 @@ export default function Products({ currentUser }) {
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
+      onProductSaveComplete();
       actualClose();
       fetchProducts();
     } catch (err) { add(err.message, "error"); }
