@@ -2210,6 +2210,7 @@ export default function Products({ currentUser }) {
               ))}
             </div>
             {dataSource === "local" && (
+              <>
               <button
                 type="button"
                 onClick={handleSync}
@@ -2236,6 +2237,32 @@ export default function Products({ currentUser }) {
                 <i className={`fa-solid ${syncing ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
                 {syncing ? "Syncing..." : "Sync"}
               </button>
+              <button
+                type="button"
+                onClick={() => setInstructionsOpen(true)}
+                title="How to sync from Supabase to local"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "32px",
+                  height: "32px",
+                  padding: 0,
+                  border: "1px solid var(--border)",
+                  background: "var(--surface)",
+                  color: "var(--text)",
+                  cursor: "pointer",
+                  borderRadius: 4,
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "var(--surface-2)"; e.currentTarget.style.borderColor = "var(--brand)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; e.currentTarget.style.borderColor = "var(--border)"; }}
+              >
+                ?
+              </button>
+              </>
             )}
             <p className="products-subtitle" style={{ margin: 0 }}>
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
@@ -2263,17 +2290,6 @@ export default function Products({ currentUser }) {
             <span>Viewing <strong>local products from saworepo2</strong> — this is read-only. Switch to Live to edit.</span>
           </div>
 
-          <div style={{
-            background: "rgba(100, 150, 200, 0.1)",
-            border: "1px solid rgba(100, 150, 200, 0.3)",
-            color: "var(--text-2)",
-            padding: "12px 14px",
-            borderRadius: 4,
-            marginBottom: 14,
-            fontSize: "0.85rem",
-            lineHeight: 1.5
-          }}>
-          </div>
         </>
       )}
 
