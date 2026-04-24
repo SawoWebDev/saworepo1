@@ -131,10 +131,12 @@ export async function syncMerge(emit = () => {}) {
     // Also write to cloned saworepo1 for git commit
     const saworepo1DataDir = path.join(SAWOREPO1_DIR, "frontend/src/Administrator/Local/data");
     fs.mkdirSync(saworepo1DataDir, { recursive: true });
+    console.log(`📝 Writing data files to saworepo1: ${saworepo1DataDir}`);
     fs.writeFileSync(path.join(saworepo1DataDir, "products.json"), JSON.stringify(merged, null, 2));
     fs.writeFileSync(path.join(saworepo1DataDir, "categories.json"), JSON.stringify(categories, null, 2));
     fs.writeFileSync(path.join(saworepo1DataDir, "tags.json"), JSON.stringify(tags, null, 2));
     fs.writeFileSync(path.join(saworepo1DataDir, "meta.json"), JSON.stringify(meta, null, 2));
+    console.log(`✅ Wrote ${newProducts.length} products to saworepo1 data directory`);
 
     // 5. Mirror products.json into saworepo2 for git commit
     emit({ phase: "write", message: "Mirroring products.json to saworepo2..." });
