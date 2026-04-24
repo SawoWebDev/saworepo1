@@ -368,6 +368,12 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
     });
 
     onEvent({ phase: "writing", message: "Writing changes to backend..." });
+    console.log("[applyLocalChanges] Sending to backend:", {
+      productsCount: updatedProducts.length,
+      categoriesCount: updatedCategories.length,
+      tagsCount: updatedTags.length,
+      backendUrl: BACKEND_URL,
+    });
 
     // Call backend to persist the changes
     const response = await fetch(`${BACKEND_URL}/api/update-local-files`, {
@@ -382,10 +388,40 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error("[applyLocalChanges] Backend error:", response.status, errorText);
       throw new Error(`Backend error: ${response.status} - ${errorText}`);
     }
 
-    const result = await response.json();
+    // The response is NDJSON (newline-delimited JSON), not regular JSON
+    const responseText = await response.text();
+    console.log("[applyLocalChanges] Raw response:", responseText.substring(0, 200));
+
+    if (!responseText.trim()) {
+      throw new Error("Backend returned empty response");
+    }
+
+    // Parse NDJSON stream - each line is a JSON event
+    const lines = responseText.trim().split("\n");
+    console.log("[applyLocalChanges] Response lines:", lines.length);
+    let result = { success: false };
+    for (const line of lines) {
+      if (line.trim()) {
+        try {
+          const event = JSON.parse(line);
+          console.log("[applyLocalChanges] Event:", event.phase, event.message);
+          // Emit the event so frontend shows live progress
+          onEvent(event);
+          if (event.success === true) {
+            result = { success: true, message: event.message };
+          } else if (event.phase === "error") {
+            throw new Error(event.message || "Backend error");
+          }
+        } catch (parseErr) {
+          console.error("[applyLocalChanges] Failed to parse event:", parseErr, "Line:", line.substring(0, 100));
+          throw new Error(`Failed to parse backend response: ${parseErr.message}`);
+        }
+      }
+    }
 
     onEvent({
       phase: "complete",
