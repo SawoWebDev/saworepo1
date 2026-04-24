@@ -1,9 +1,6 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "buildEnv": {
-    "REACT_APP_BACKEND_URL": "https://sawo-backend.onrender.com"
-  },
   "headers": [
     {
       "source": "/static/(.*)",
