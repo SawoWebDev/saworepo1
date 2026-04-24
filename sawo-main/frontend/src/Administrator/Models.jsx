@@ -12,68 +12,30 @@ function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
-// ─── Status Badge ─────────────────────────────────────────────────────────
-function StatusBadge({ status, visible, featured }) {
-  const colors = {
-    published: { label: "Published", color: "#22c55e", bg: "rgba(34,197,94,0.1)" },
-    draft:     { label: "Draft",     color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
-  };
-  const cfg = colors[status] || { label: status, color: "var(--text-2)", bg: "var(--surface-2)" };
+// ─── Product Card (floating style with just image + name) ────────────────────
+function ProductCard({ product, onClick }) {
   return (
-    <div style={{
-      display: "inline-flex", alignItems: "center", gap: 4, flexWrap: "wrap",
-    }}>
-      <span style={{
-        padding: "2px 8px", borderRadius: 12, fontSize: "0.65rem", fontWeight: 700,
-        color: cfg.color, background: cfg.bg, border: `1px solid ${cfg.color}40`,
-      }}>
-        {cfg.label}
-      </span>
-      {!visible && (
-        <span style={{
-          padding: "2px 8px", borderRadius: 12, fontSize: "0.65rem", fontWeight: 700,
-          color: "#9ca3af", background: "rgba(156,163,175,0.1)", border: "1px solid rgba(156,163,175,0.3)",
-        }}>
-          Hidden
-        </span>
-      )}
-      {featured && (
-        <i className="fa-solid fa-star" style={{ fontSize: "0.75rem", color: "#f59e0b" }} title="Featured" />
-      )}
-    </div>
-  );
-}
-
-// ─── Product Card (within a model group) ──────────────────────────────────
-function ProductCard({ product }) {
-  const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
-  const productUrl = `${FRONT_URL || window.location.origin}/products/${product.slug}`;
-
-  return (
-    <a
-      href={productUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
+      onClick={() => onClick?.(product)}
       style={{
         display: "flex", flexDirection: "column", gap: 8,
-        padding: "12px", borderRadius: "var(--r)", background: "var(--surface)",
-        border: "1px solid var(--border)", textDecoration: "none",
-        cursor: "pointer", transition: "all 0.2s",
+        cursor: "pointer", transition: "all 0.2s ease",
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.background = "var(--surface-2)";
-        e.currentTarget.style.borderColor = "var(--brand)";
+        e.currentTarget.style.opacity = "0.85";
+        e.currentTarget.style.transform = "scale(1.02)";
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.background = "var(--surface)";
-        e.currentTarget.style.borderColor = "var(--border)";
+        e.currentTarget.style.opacity = "1";
+        e.currentTarget.style.transform = "scale(1)";
       }}
     >
-      {/* Thumbnail */}
+      {/* Thumbnail - Floating, no background */}
       <div style={{
-        width: "100%", aspectRatio: "1", background: "var(--surface-2)",
+        width: "100%", aspectRatio: "1",
         borderRadius: "var(--r-sm)", overflow: "hidden", display: "flex",
         alignItems: "center", justifyContent: "center",
+        background: "transparent", border: "none",
       }}>
         {localOrRemote(product, 'thumbnail') ? (
           <img
@@ -87,26 +49,33 @@ function ProductCard({ product }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
+              borderRadius: "var(--r-sm)",
             }}
           />
         ) : (
-          <i className="fa-solid fa-image" style={{ fontSize: "1.5rem", color: "var(--text-3)" }} />
+          <div style={{
+            width: "100%", height: "100%",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "var(--surface-2)", borderRadius: "var(--r-sm)",
+          }}>
+            <i className="fa-solid fa-image" style={{ fontSize: "1.5rem", color: "var(--text-3)" }} />
+          </div>
         )}
       </div>
 
-      {/* Product Name */}
-      <div style={{ fontWeight: 600, fontSize: "0.82rem", color: "var(--text)", lineHeight: 1.3 }}>
+      {/* Product Name - Centered */}
+      <div style={{
+        fontWeight: 600, fontSize: "0.82rem", color: "var(--text)",
+        lineHeight: 1.3, textAlign: "center",
+      }}>
         {product.name}
       </div>
-
-      {/* Status + Badges */}
-      <StatusBadge status={product.status} visible={product.visible} featured={product.featured} />
-    </a>
+    </div>
   );
 }
 
 // ─── Model Group (folder section) ─────────────────────────────────────────
-function ModelGroup({ modelName, products, expanded, onToggle }) {
+function ModelGroup({ modelName, products, expanded, onToggle, onProductClick }) {
   return (
     <div style={{
       borderRadius: "var(--r)", border: "1px solid var(--border)",
@@ -142,18 +111,109 @@ function ModelGroup({ modelName, products, expanded, onToggle }) {
           style={{ fontSize: "0.8rem", color: "var(--text-3)" }} />
       </button>
 
-      {/* Expanded Content */}
+      {/* Expanded Content - Grid Layout */}
       {expanded && (
         <div style={{
-          padding: "16px", borderTop: "1px solid var(--border)",
-          display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
-          gap: 12,
+          padding: "20px 16px", borderTop: "1px solid var(--border)",
+          display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+          gap: 16,
         }}>
           {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onClick={onProductClick} />
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+// ─── Product Detail Modal (Grid view) ─────────────────────────────────────
+function ProductDetailModal({ open, onClose, product }) {
+  if (!open || !product) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal modal-wide" onClick={e => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2 className="modal-title">{product.name}</h2>
+          <button className="modal-close-btn" onClick={onClose}></button>
+        </div>
+        <div className="modal-body">
+          <div style={{
+            display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+            gap: 12,
+          }}>
+            {/* Main product card */}
+            <div style={{
+              display: "flex", flexDirection: "column", gap: 8,
+              gridColumn: "span 1",
+            }}>
+              <div style={{
+                width: "100%", aspectRatio: "1",
+                borderRadius: "var(--r-sm)", overflow: "hidden",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                {localOrRemote(product, 'thumbnail') ? (
+                  <img
+                    src={localOrRemote(product, 'thumbnail')}
+                    alt={product.name}
+                    style={{
+                      width: "100%", height: "100%", objectFit: "cover",
+                      borderRadius: "var(--r-sm)",
+                    }}
+                  />
+                ) : (
+                  <div style={{
+                    width: "100%", height: "100%",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    background: "var(--surface-2)", borderRadius: "var(--r-sm)",
+                  }}>
+                    <i className="fa-solid fa-image" style={{ fontSize: "1.5rem", color: "var(--text-3)" }} />
+                  </div>
+                )}
+              </div>
+              <div style={{ fontWeight: 600, fontSize: "0.82rem", color: "var(--text)", textAlign: "center" }}>
+                {product.name}
+              </div>
+            </div>
+
+            {/* Gallery images if available */}
+            {Array.isArray(localOrRemote(product, 'images')) && localOrRemote(product, 'images').map((img, idx) => (
+              <div key={idx} style={{
+                display: "flex", flexDirection: "column", gap: 4,
+              }}>
+                <div style={{
+                  width: "100%", aspectRatio: "1",
+                  borderRadius: "var(--r-sm)", overflow: "hidden",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <img
+                    src={img}
+                    alt={`${product.name} ${idx + 1}`}
+                    style={{
+                      width: "100%", height: "100%", objectFit: "cover",
+                      borderRadius: "var(--r-sm)",
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Product Details */}
+          <div style={{ marginTop: 24, padding: 16, background: "var(--surface-2)", borderRadius: "var(--r)", fontSize: "0.85rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {product.slug && <div><strong>Slug:</strong> {product.slug}</div>}
+              {product.status && <div><strong>Status:</strong> {product.status}</div>}
+              {product.type && <div><strong>Model:</strong> {product.type}</div>}
+              {product.visible !== undefined && <div><strong>Visible:</strong> {product.visible ? "Yes" : "No"}</div>}
+            </div>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-ghost" onClick={onClose}>Close</button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -165,6 +225,7 @@ export default function Models() {
   const [error, setError]         = useState(null);
   const [search, setSearch]       = useState("");
   const [expanded, setExpanded]   = useState(new Set());
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Fetch products
   const fetchProducts = async () => {
@@ -285,10 +346,18 @@ export default function Models() {
               products={modelProducts}
               expanded={expanded.has(modelName)}
               onToggle={() => toggleExpanded(modelName)}
+              onProductClick={setSelectedProduct}
             />
           ))}
         </div>
       )}
+
+      {/* Product Detail Modal */}
+      <ProductDetailModal
+        open={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        product={selectedProduct}
+      />
     </div>
   );
 }
