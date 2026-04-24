@@ -6,7 +6,7 @@ import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { syncSupabaseToLocal } from "./Local/syncWithMerge";
-import { checkSupabaseSync } from "./Local/compareSupabaseWithLocal";
+import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
 import { InstructionsModal } from "./Local/InstructionsModal";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
@@ -1696,6 +1696,8 @@ export default function Products({ currentUser }) {
   const [syncCheckLoading, setSyncCheckLoading] = useState(false);
   const [syncCheckReport, setSyncCheckReport] = useState(null);
   const [syncCheckEvents, setSyncCheckEvents] = useState([]);
+  const [syncCheckApplying, setSyncCheckApplying] = useState(false);
+  const [expandedDiff, setExpandedDiff] = useState(null);
 
   const isDirty = !formsEqual(form, savedForm);
 
@@ -1998,6 +2000,28 @@ export default function Products({ currentUser }) {
       add(errorMsg, "error");
     } finally {
       setSyncCheckLoading(false);
+    }
+  };
+
+  const handleApplySyncChanges = async () => {
+    if (!syncCheckReport) return;
+    setSyncCheckApplying(true);
+    try {
+      const result = await applyLocalChanges(syncCheckReport, (event) => {
+        setSyncCheckEvents(prev => [...prev, event]);
+      });
+      if (result.success && result.changes) {
+        // Update local data - this will trigger a re-render
+        add("✓ Local files updated successfully!", "success");
+        // Refresh the products list
+        setTimeout(() => fetchProducts(), 500);
+      } else {
+        add("Changes prepared but not yet saved to files.", "info");
+      }
+    } catch (err) {
+      add(`Failed to apply changes: ${err.message}`, "error");
+    } finally {
+      setSyncCheckApplying(false);
     }
   };
 
@@ -2863,6 +2887,8 @@ export default function Products({ currentUser }) {
         report={syncCheckReport}
         events={syncCheckEvents}
         onClose={() => { setCheckSyncOpen(false); setSyncCheckEvents([]); setSyncCheckReport(null); }}
+        onApply={handleApplySyncChanges}
+        applying={syncCheckApplying}
       />
 
       <InstructionsModal open={instructionsOpen} onClose={() => setInstructionsOpen(false)} />
@@ -3004,10 +3030,53 @@ function SyncProgressOverlay({ open, events, syncing, status, onClose }) {
   );
 }
 
-function CheckSyncModal({ open, loading, report, events, onClose }) {
+function CheckSyncModal({ open, loading, report, events, onClose, onApply, applying }) {
+  const [expandedId, setExpandedId] = useState(null);
+
   if (!open) return null;
 
   const hasChanges = report && report.totalChanges > 0;
+
+  const DiffRow = ({ field, diff }) => {
+    const isExpanded = expandedId === field;
+    return (
+      <div style={{ marginBottom: 8, borderLeft: "2px solid var(--border)", paddingLeft: 8 }}>
+        <button
+          type="button"
+          onClick={() => setExpandedId(isExpanded ? null : field)}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "var(--text-2)",
+            cursor: "pointer",
+            fontSize: "0.8rem",
+            padding: "4px 0",
+            textAlign: "left",
+            width: "100%",
+          }}
+        >
+          <i className={`fa-solid fa-${isExpanded ? "chevron-down" : "chevron-right"}`} style={{ marginRight: 6, fontSize: "0.7em" }} />
+          {field}: {typeof diff[field].local === "string" && diff[field].local.length > 40 ? `${diff[field].local.substring(0, 40)}...` : String(diff[field].local).substring(0, 40)}
+        </button>
+        {isExpanded && (
+          <div style={{ padding: "8px", background: "var(--surface-3)", borderRadius: 4, marginTop: 4, fontSize: "0.75rem", fontFamily: "monospace" }}>
+            <div style={{ marginBottom: 6 }}>
+              <span style={{ color: "var(--text-3)" }}>Current (Local):</span>
+              <div style={{ color: "#ff6b6b", marginTop: 2, whiteSpace: "pre-wrap", wordBreak: "break-word", maxHeight: 100, overflow: "auto" }}>
+                {typeof diff[field].local === "object" ? JSON.stringify(diff[field].local, null, 2) : String(diff[field].local)}
+              </div>
+            </div>
+            <div>
+              <span style={{ color: "var(--text-3)" }}>New (Supabase):</span>
+              <div style={{ color: "#51cf66", marginTop: 2, whiteSpace: "pre-wrap", wordBreak: "break-word", maxHeight: 100, overflow: "auto" }}>
+                {typeof diff[field].supabase === "object" ? JSON.stringify(diff[field].supabase, null, 2) : String(diff[field].supabase)}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div
@@ -3026,7 +3095,7 @@ function CheckSyncModal({ open, loading, report, events, onClose }) {
           background: "var(--surface)",
           borderRadius: "var(--r)",
           boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
-          maxWidth: "640px",
+          maxWidth: "720px",
           width: "92%",
           maxHeight: "85vh",
           display: "flex",
@@ -3083,15 +3152,18 @@ function CheckSyncModal({ open, loading, report, events, onClose }) {
                     🔄 Updated Products ({report.products.updated.length})
                   </div>
                   {report.products.updated.slice(0, 5).map((item, i) => (
-                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
-                      • {item.item.name}
-                      {item.diff && (
-                        <div style={{ fontSize: "0.75rem", color: "var(--text-3)", marginLeft: 12, marginTop: 2 }}>
+                    <div key={i} style={{ padding: "8px 12px", backgroundColor: "var(--surface-3)", borderRadius: 4, marginBottom: 6 }}>
+                      <div style={{ fontWeight: 500, marginBottom: 6, color: "var(--text)" }}>
+                        {item.item.name}
+                      </div>
+                      {item.diff && Object.keys(item.diff).length > 0 ? (
+                        <div>
                           {Object.keys(item.diff).map(field => (
-                            <div key={field}>Changed: {field}</div>
-                          )).slice(0, 2)}
-                          {Object.keys(item.diff).length > 2 && <div>... and {Object.keys(item.diff).length - 2} more fields</div>}
+                            <DiffRow key={field} field={field} diff={item.diff} />
+                          ))}
                         </div>
+                      ) : (
+                        <div style={{ color: "var(--text-3)", fontSize: "0.75rem" }}>No visible differences</div>
                       )}
                     </div>
                   ))}
@@ -3102,7 +3174,7 @@ function CheckSyncModal({ open, loading, report, events, onClose }) {
               {report.products?.deleted?.length > 0 && (
                 <div style={{ marginBottom: 14 }}>
                   <div style={{ fontWeight: 600, color: "var(--error, #e74c3c)", marginBottom: 8 }}>
-                    🗑️ Deleted from Supabase ({report.products.deleted.length})
+                    🗑️ Deleted from Supabase ({report.products.deleted.length}) — Will be removed
                   </div>
                   {report.products.deleted.slice(0, 5).map((item, i) => (
                     <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
@@ -3113,25 +3185,39 @@ function CheckSyncModal({ open, loading, report, events, onClose }) {
                 </div>
               )}
 
-              {report.categories?.added?.length > 0 && (
-                <div style={{ marginBottom: 14 }}>
+              {(report.categories?.added?.length > 0 || report.categories?.updated?.length > 0) && (
+                <div style={{ marginBottom: 14, paddingTop: 8, borderTop: "1px dashed var(--border)" }}>
                   <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 6, fontSize: "0.9rem" }}>
-                    ✨ Added Categories ({report.categories.added.length})
+                    📁 Categories
                   </div>
-                  <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
-                    {report.categories.added.map(c => c.item.name).join(", ")}
-                  </div>
+                  {report.categories?.added?.length > 0 && (
+                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)", marginBottom: 4 }}>
+                      ✨ Added: {report.categories.added.map(c => c.item.name).join(", ")}
+                    </div>
+                  )}
+                  {report.categories?.updated?.length > 0 && (
+                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)" }}>
+                      🔄 Updated: {report.categories.updated.map(c => c.item.name).join(", ")}
+                    </div>
+                  )}
                 </div>
               )}
 
-              {report.tags?.added?.length > 0 && (
+              {(report.tags?.added?.length > 0 || report.tags?.updated?.length > 0) && (
                 <div style={{ marginBottom: 14 }}>
                   <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 6, fontSize: "0.9rem" }}>
-                    ✨ Added Tags ({report.tags.added.length})
+                    🏷️ Tags
                   </div>
-                  <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
-                    {report.tags.added.map(t => t.item.name).join(", ")}
-                  </div>
+                  {report.tags?.added?.length > 0 && (
+                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)", marginBottom: 4 }}>
+                      ✨ Added: {report.tags.added.map(t => t.item.name).join(", ")}
+                    </div>
+                  )}
+                  {report.tags?.updated?.length > 0 && (
+                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)" }}>
+                      🔄 Updated: {report.tags.updated.map(t => t.item.name).join(", ")}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -3150,19 +3236,54 @@ function CheckSyncModal({ open, loading, report, events, onClose }) {
           <button
             type="button"
             onClick={onClose}
+            disabled={applying}
             style={{
               padding: "7px 16px",
               background: "var(--surface-3)",
               color: "var(--text)",
               border: "1px solid var(--border)",
               borderRadius: "var(--r)",
-              cursor: "pointer",
+              cursor: applying ? "not-allowed" : "pointer",
               fontSize: "0.85rem",
               fontWeight: 500,
+              opacity: applying ? 0.6 : 1,
             }}
           >
             Close
           </button>
+          {hasChanges && (
+            <button
+              type="button"
+              onClick={onApply}
+              disabled={applying || !hasChanges}
+              style={{
+                padding: "7px 16px",
+                background: "var(--brand)",
+                color: "#fff",
+                border: "1px solid var(--brand)",
+                borderRadius: "var(--r)",
+                cursor: applying ? "not-allowed" : "pointer",
+                fontSize: "0.85rem",
+                fontWeight: 500,
+                opacity: applying ? 0.6 : 1,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              {applying ? (
+                <>
+                  <i className="fa-solid fa-circle-notch fa-spin" style={{ fontSize: "0.85em" }} />
+                  Applying...
+                </>
+              ) : (
+                <>
+                  <i className="fa-solid fa-check" style={{ fontSize: "0.85em" }} />
+                  Apply Changes
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -267,10 +267,11 @@ export async function checkSupabaseSync(onEvent = () => {}) {
 }
 
 /**
- * Apply changes to local JSON files
- * Only updates if changes are confirmed
+ * Apply changes to local JSON files via backend
  */
 export async function applyLocalChanges(report, onEvent = () => {}) {
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
   try {
     if (report.totalChanges === 0) {
       onEvent({ phase: "complete", message: "No changes to apply." });
@@ -333,20 +334,34 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
       }
     });
 
-    // Store the updated data for the component to handle persistence
-    onEvent({
-      phase: "complete",
-      message: "Changes prepared. Ready to update local files.",
-      changes: {
+    onEvent({ phase: "writing", message: "Writing changes to backend..." });
+
+    // Call backend to persist the changes
+    const response = await fetch(`${BACKEND_URL}/api/update-local-files`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         products: updatedProducts,
         categories: updatedCategories,
         tags: updatedTags,
-      },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Backend error: ${response.status} - ${errorText}`);
+    }
+
+    const result = await response.json();
+
+    onEvent({
+      phase: "complete",
+      message: "Changes applied successfully to local files.",
     });
 
     return {
       success: true,
-      message: "Changes prepared successfully.",
+      message: "Local files updated successfully.",
       changes: {
         products: updatedProducts,
         categories: updatedCategories,
