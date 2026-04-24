@@ -8,22 +8,63 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000"
  */
 export async function syncSupabaseToLocal(onEvent = () => {}) {
   let response;
+  const syncUrl = `${BACKEND_URL}/api/sync`;
+
   try {
-    response = await fetch(`${BACKEND_URL}/api/sync`, {
+    console.log(`🔗 Attempting to sync from: ${syncUrl}`);
+    console.log(`⚙️ REACT_APP_BACKEND_URL = ${process.env.REACT_APP_BACKEND_URL || "NOT SET"}`);
+
+    response = await fetch(syncUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
+    console.error("❌ Fetch Error:", err);
+    const errorMsg = `
+      🚨 Cannot reach backend at ${syncUrl}
+
+      Error: ${err.message}
+
+      📋 Troubleshooting:
+      • Check if backend is running: https://sawo-backend.onrender.com/health
+      • Verify REACT_APP_BACKEND_URL is set correctly
+      • Check browser Network tab for CORS errors
+      • Ensure backend CORS allows your frontend domain
+      • Try visiting the URL directly in your browser
+    `.trim();
+    console.error(errorMsg);
     return {
       success: false,
-      message: `Cannot reach backend — is it running on port 5000? (${err.message})`,
+      message: errorMsg,
     };
   }
 
   if (!response.ok || !response.body) {
+    const statusMsg = `Server error: ${response.status} ${response.statusText}`;
+    const debugMsg = `
+      ❌ ${statusMsg}
+
+      📋 Response Details:
+      • Status Code: ${response.status}
+      • Status Text: ${response.statusText}
+      • URL Requested: ${syncUrl}
+      • Headers: ${JSON.stringify([...response.headers.entries()])}
+
+      🔍 Common causes:
+      • Backend not deployed or crashed
+      • CORS misconfiguration
+      • Wrong backend URL in environment variables
+      • Backend endpoint doesn't exist
+
+      ✅ Quick checks:
+      1. Visit health check: https://sawo-backend.onrender.com/health
+      2. Check backend logs on Render dashboard
+      3. Verify CORS allows ${window.location.origin}
+    `.trim();
+    console.error(debugMsg);
     return {
       success: false,
-      message: `Server error: ${response.status} ${response.statusText}`,
+      message: debugMsg,
     };
   }
 
@@ -55,7 +96,21 @@ export async function syncSupabaseToLocal(onEvent = () => {}) {
       }
     }
   } catch (err) {
-    return { success: false, message: `Stream error: ${err.message}` };
+    const streamErrorMsg = `
+      ❌ Stream Error: ${err.message}
+
+      📋 This usually means:
+      • Backend connection was lost mid-sync
+      • Network timeout occurred
+      • Backend crashed during processing
+
+      🔍 Check:
+      1. Backend logs on Render dashboard
+      2. Network tab in DevTools for failed requests
+      3. Backend is still running: https://sawo-backend.onrender.com/health
+    `.trim();
+    console.error(streamErrorMsg);
+    return { success: false, message: streamErrorMsg };
   }
 
   if (final?.phase === "error") {
