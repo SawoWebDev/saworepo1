@@ -153,6 +153,19 @@ function deepEqual(obj1, obj2) {
 }
 
 /**
+ * Fields to ignore when comparing (metadata only)
+ */
+const IGNORED_FIELDS = new Set([
+  "updated_at",
+  "created_at",
+  "updated_by",
+  "updated_by_username",
+  "created_by",
+  "created_by_username",
+  "is_deleted",
+]);
+
+/**
  * Compare items and return differences
  */
 function compareItems(supabaseItems, localItems, itemType) {
@@ -177,9 +190,10 @@ function compareItems(supabaseItems, localItems, itemType) {
         item: supabaseItem,
       });
     } else if (!deepEqual(supabaseItem, localItem)) {
-      // Detailed comparison
+      // Detailed comparison - only include meaningful fields
       const diff = {};
       for (const field in supabaseItem) {
+        if (IGNORED_FIELDS.has(field)) continue; // Skip metadata fields
         if (!deepEqual(supabaseItem[field], localItem[field])) {
           diff[field] = {
             supabase: supabaseItem[field],
@@ -187,12 +201,16 @@ function compareItems(supabaseItems, localItems, itemType) {
           };
         }
       }
-      changes.updated.push({
-        type: itemType,
-        id: key,
-        item: supabaseItem,
-        diff,
-      });
+
+      // Only mark as updated if there are actual meaningful changes
+      if (Object.keys(diff).length > 0) {
+        changes.updated.push({
+          type: itemType,
+          id: key,
+          item: supabaseItem,
+          diff,
+        });
+      }
     }
   }
 
