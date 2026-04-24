@@ -91,17 +91,31 @@ export async function syncMerge(emit = () => {}) {
     emit({ phase: "write", message: "Mirroring products.json to saworepo2..." });
     fs.writeFileSync(path.join(SAWOREPO2, "products.json"), JSON.stringify(merged, null, 2));
 
-    // 6. Commit and push saworepo2
+    // 6. Commit and push saworepo1 (local data files)
+    emit({ phase: "git", message: "Committing changes in saworepo1..." });
+    const saworepo1Result = commitSaworepo1(timestamp, stats);
+    if (saworepo1Result.nothing) {
+      emit({ phase: "git", message: "saworepo1: Nothing to commit" });
+    } else if (saworepo1Result.committed) {
+      emit({ phase: "git", message: `saworepo1: ${saworepo1Result.commitMsg}` });
+      if (saworepo1Result.pushed) {
+        emit({ phase: "git", message: "saworepo1: Pushed to GitHub ✓" });
+      } else {
+        emit({ phase: "git", message: `saworepo1: Commit OK, push skipped: ${saworepo1Result.pushError}`, warning: true });
+      }
+    }
+
+    // 7. Commit and push saworepo2
     emit({ phase: "git", message: "Committing changes in saworepo2..." });
     const gitResult = commitAndPush(timestamp, stats);
     if (gitResult.nothing) {
-      emit({ phase: "git", message: "Nothing to commit — repo already up to date" });
+      emit({ phase: "git", message: "saworepo2: Nothing to commit" });
     } else if (gitResult.committed) {
-      emit({ phase: "git", message: `Committed: ${gitResult.commitMsg}` });
+      emit({ phase: "git", message: `saworepo2: ${gitResult.commitMsg}` });
       if (gitResult.pushed) {
-        emit({ phase: "git", message: "Pushed to GitHub ✓" });
+        emit({ phase: "git", message: "saworepo2: Pushed to GitHub ✓" });
       } else {
-        emit({ phase: "git", message: `Commit OK, push skipped: ${gitResult.pushError}`, warning: true });
+        emit({ phase: "git", message: `saworepo2: Commit OK, push skipped: ${gitResult.pushError}`, warning: true });
       }
     }
 
@@ -113,10 +127,10 @@ export async function syncMerge(emit = () => {}) {
         : `Added ${newProducts.length} product(s), ${stats.images} image(s), ${stats.files} file(s)`,
       stats,
       timestamp,
-      pushed: gitResult.pushed,
+      pushed: gitResult.pushed || saworepo1Result.pushed,
     });
 
-    return { success: true, ...stats, timestamp, pushed: gitResult.pushed };
+    return { success: true, ...stats, timestamp, pushed: gitResult.pushed || saworepo1Result.pushed, commits: { saworepo1: saworepo1Result, saworepo2: gitResult } };
   } catch (err) {
     console.error("❌ Sync failed:", err);
     emit({ phase: "error", success: false, message: err.message, stack: err.stack });
@@ -191,6 +205,29 @@ async function processFiles(filesArray, stats) {
 function ensureDirs() {
   for (const d of [DATA_DIR, IMAGES_DIR, FILES_DIR]) {
     if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
+  }
+}
+
+function commitSaworepo1(timestamp, stats) {
+  const saworepo1Dir = path.join(__dirname, "..");
+  const run = (cmd) => execSync(cmd, { cwd: saworepo1Dir, encoding: "utf-8", stdio: "pipe" });
+  try {
+    const status = run("git status --porcelain").trim();
+    if (!status) return { nothing: true };
+
+    run("git add -A");
+    const ts = timestamp.replace("T", " ").split(".")[0];
+    const commitMsg = `Auto-sync: +${stats.added} products, +${stats.images} images [${ts}]`;
+    run(`git commit -m "${commitMsg}"`);
+
+    try {
+      run("git push origin main");
+      return { committed: true, pushed: true, commitMsg };
+    } catch (e) {
+      return { committed: true, pushed: false, commitMsg, pushError: e.message.split("\n")[0] };
+    }
+  } catch (err) {
+    return { committed: false, pushed: false, error: err.message };
   }
 }
 
