@@ -308,3 +308,95 @@ function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
     return { committed: false, pushed: false, error: err.message };
   }
 }
+
+// ── Update local files from frontend changes ─────────────────────────────────
+// Receives updated products, categories, tags and commits them to GitHub
+export async function updateLocalFiles(products, categories, tags, emit = () => {}) {
+  const timestamp = new Date().toISOString();
+  const workDir = path.join("/tmp", "sawo-update-" + Date.now());
+
+  try {
+    emit({ phase: "start", message: "Starting local file update..." });
+
+    if (!GITHUB_PAT) throw new Error("GITHUB_PAT environment variable is not set");
+
+    // Clone repos
+    emit({ phase: "clone", message: "Cloning repositories from GitHub..." });
+    if (!fs.existsSync(workDir)) fs.mkdirSync(workDir, { recursive: true });
+
+    const gitUrl1 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`;
+    const saworepo1Dir = path.join(workDir, GITHUB_MAIN_REPO);
+
+    try {
+      execSync(`git clone ${gitUrl1} "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      console.log(`✅ Cloned ${GITHUB_MAIN_REPO}`);
+      emit({ phase: "clone", message: `Cloned ${GITHUB_MAIN_REPO}` });
+    } catch (e) {
+      console.error(`❌ Clone failed for ${GITHUB_MAIN_REPO}:`, e.message);
+      emit({ phase: "clone", message: `⚠️  Clone failed: ${e.message}` });
+      fs.mkdirSync(saworepo1Dir, { recursive: true });
+    }
+
+    configureGit(saworepo1Dir);
+
+    // Write JSON files to saworepo1
+    emit({ phase: "write", message: "Writing JSON files..." });
+    const dataDir = path.join(saworepo1Dir, "sawo-main/frontend/src/Administrator/Local/data");
+    fs.mkdirSync(dataDir, { recursive: true });
+
+    const meta = {
+      last_synced: timestamp,
+      total_products: products.length,
+      total_categories: categories.length,
+      total_tags: tags.length,
+    };
+
+    fs.writeFileSync(path.join(dataDir, "products.json"), JSON.stringify(products, null, 2));
+    fs.writeFileSync(path.join(dataDir, "categories.json"), JSON.stringify(categories, null, 2));
+    fs.writeFileSync(path.join(dataDir, "tags.json"), JSON.stringify(tags, null, 2));
+    fs.writeFileSync(path.join(dataDir, "meta.json"), JSON.stringify(meta, null, 2));
+    console.log(`✅ Wrote files to ${dataDir}`);
+    emit({ phase: "write", message: "JSON files written successfully" });
+
+    // Commit and push
+    emit({ phase: "git", message: "Committing changes..." });
+    const gitResult = commitAndPushRepo(saworepo1Dir, timestamp, {}, GITHUB_PAT);
+
+    if (gitResult.nothing) {
+      emit({ phase: "git", message: "No changes to commit" });
+    } else if (gitResult.committed) {
+      emit({ phase: "git", message: `${gitResult.commitMsg}` });
+      if (gitResult.pushed) {
+        emit({ phase: "git", message: "Pushed to GitHub ✓" });
+      } else {
+        emit({ phase: "git", message: `❌ Push failed: ${gitResult.pushError}`, warning: true });
+      }
+    } else {
+      emit({ phase: "git", message: `❌ Commit failed: ${gitResult.error}`, warning: true });
+    }
+
+    // Clean up
+    try {
+      execSync(`rm -rf "${workDir}"`, { stdio: "pipe" });
+    } catch (e) {
+      console.warn("⚠️  Failed to clean up temp directory:", e.message);
+    }
+
+    emit({
+      phase: "complete",
+      success: true,
+      message: "Local files updated and pushed to GitHub",
+      timestamp,
+      pushed: gitResult.pushed,
+    });
+
+    return { success: true, timestamp, pushed: gitResult.pushed };
+  } catch (err) {
+    console.error("❌ Update failed:", err);
+    emit({ phase: "error", success: false, message: err.message });
+    try {
+      execSync(`rm -rf "${workDir}"`, { stdio: "pipe" });
+    } catch (e) {}
+    return { success: false, message: err.message };
+  }
+}

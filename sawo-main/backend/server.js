@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { syncMerge } from "./syncApi.js";
+import { syncMerge, updateLocalFiles } from "./syncApi.js";
 
 dotenv.config();
 
@@ -126,9 +126,54 @@ app.post("/api/sync", async (_req, res) => {
   }
 });
 
+app.options("/api/update-local-files", cors());
+
+app.post("/api/update-local-files", async (_req, res) => {
+  const clientOrigin = _req.get("origin");
+  const startTime = new Date().toISOString();
+
+  console.log("\n📝 Update local files request received");
+  console.log(`   ⏰ Time: ${startTime}`);
+  console.log(`   🌐 Origin: ${clientOrigin}`);
+  console.log(`   IP: ${_req.ip}`);
+
+  res.setHeader("Content-Type", "application/x-ndjson");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("X-Accel-Buffering", "no");
+  res.setHeader("Connection", "keep-alive");
+
+  if (typeof res.flushHeaders === "function") res.flushHeaders();
+
+  const emit = (event) => {
+    try {
+      res.write(JSON.stringify(event) + "\n");
+    } catch (e) {
+      console.error("❌ Failed to write stream event:", e.message);
+    }
+  };
+
+  try {
+    const { products, categories, tags } = _req.body;
+
+    if (!products || !categories || !tags) {
+      throw new Error("Missing required fields: products, categories, tags");
+    }
+
+    await updateLocalFiles(products, categories, tags, emit);
+  } catch (err) {
+    console.error("❌ Update error:", err.message);
+    emit({ phase: "error", success: false, message: err.message });
+  } finally {
+    res.end();
+    const endTime = new Date().toISOString();
+    console.log(`✅ Update completed at ${endTime}\n`);
+  }
+});
+
 app.listen(PORT, () => {
   const isProduction = process.env.NODE_ENV === "production";
   const baseUrl = isProduction ? "https://sawo-backend.onrender.com" : `http://localhost:${PORT}`;
   console.log(`\n✅ SAWO Backend API running on ${baseUrl}`);
-  console.log(`📡 Sync endpoint: POST ${baseUrl}/api/sync\n`);
+  console.log(`📡 Sync endpoint: POST ${baseUrl}/api/sync`);
+  console.log(`📝 Update endpoint: POST ${baseUrl}/api/update-local-files\n`);
 });
