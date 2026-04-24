@@ -3037,6 +3037,23 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
 
   const hasChanges = report && report.totalChanges > 0;
 
+  // Phase indicators for progress bar
+  const phases = ["start", "clone", "write", "git", "complete"];
+  const getPhaseIcon = (phase) => {
+    const icons = {
+      start: "fa-play",
+      clone: "fa-code-branch",
+      write: "fa-file-pen",
+      git: "fa-code-commit",
+      complete: "fa-check",
+      error: "fa-circle-xmark",
+    };
+    return icons[phase] || "fa-circle";
+  };
+
+  const currentPhase = events.length > 0 ? events[events.length - 1].phase : "";
+  const currentPhaseIndex = phases.indexOf(currentPhase);
+
   const DiffRow = ({ field, diff }) => {
     const isExpanded = expandedId === field;
     return (
@@ -3257,6 +3274,52 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
             <div style={{ color: "var(--text-3)", textAlign: "center", padding: "20px" }}>No data yet</div>
           )}
         </div>
+
+        {applying && (
+          <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-3)" }}>
+            <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginBottom: 8 }}>Progress</div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
+              {phases.map((phase, idx) => (
+                <div key={phase} style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                  <div
+                    style={{
+                      width: 28,
+                      height: 28,
+                      borderRadius: "50%",
+                      background: currentPhaseIndex >= idx ? "var(--brand)" : "var(--surface-2)",
+                      border: `1px solid ${currentPhaseIndex >= idx ? "var(--brand)" : "var(--border)"}`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "0.7rem",
+                      color: currentPhaseIndex >= idx ? "#fff" : "var(--text-3)",
+                      animation: currentPhaseIndex === idx ? "pulse 1s ease-in-out infinite" : "none",
+                    }}
+                  >
+                    <i className={`fa-solid ${getPhaseIcon(phase)}`} />
+                  </div>
+                  {idx < phases.length - 1 && (
+                    <div
+                      style={{
+                        width: 20,
+                        height: 2,
+                        background: currentPhaseIndex > idx ? "var(--brand)" : "var(--border)",
+                        margin: "0 -2px",
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div style={{ fontSize: "0.8rem", color: "var(--text-2)", lineHeight: 1.5, maxHeight: 150, overflow: "auto" }}>
+              {events.slice(-3).map((ev, i) => (
+                <div key={i} style={{ padding: "4px 0", borderBottom: i < 2 ? "1px dashed var(--border)" : "none" }}>
+                  <span style={{ color: "var(--brand)", fontWeight: 500 }}>{ev.phase}</span>: {ev.message}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-2)", display: "flex", justifyContent: "flex-end", gap: 8 }}>
           <button
