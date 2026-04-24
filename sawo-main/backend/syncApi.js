@@ -128,8 +128,8 @@ export async function syncMerge(emit = () => {}) {
     fs.writeFileSync(TAGS_JSON, JSON.stringify(tags, null, 2));
     fs.writeFileSync(META_JSON, JSON.stringify(meta, null, 2));
 
-    // Also write to cloned saworepo1 for git commit
-    const saworepo1DataDir = path.join(SAWOREPO1_DIR, "frontend/src/Administrator/Local/data");
+    // Also write to cloned saworepo1 for git commit (inside sawo-main folder)
+    const saworepo1DataDir = path.join(SAWOREPO1_DIR, "sawo-main/frontend/src/Administrator/Local/data");
     fs.mkdirSync(saworepo1DataDir, { recursive: true });
     console.log(`📝 Writing data files to saworepo1: ${saworepo1DataDir}`);
     fs.writeFileSync(path.join(saworepo1DataDir, "products.json"), JSON.stringify(merged, null, 2));
