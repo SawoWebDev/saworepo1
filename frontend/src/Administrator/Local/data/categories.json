@@ -1,0 +1,56 @@
+[
+  {
+    "id": "6ea06d7d-1efd-44db-99c0-9338e556b432",
+    "name": "Wall-Mounted",
+    "slug": "wall-mounted",
+    "description": null
+  },
+  {
+    "id": "587ecc75-93cb-4b7e-9dc8-61ccde45a0df",
+    "name": "Stone",
+    "slug": "stone",
+    "description": null
+  },
+  {
+    "id": "f12ea757-1f92-4a8f-ad8c-9412fcbc3ca8",
+    "name": "Sauna Controls",
+    "slug": "sauna-controls",
+    "description": null
+  },
+  {
+    "id": "2cff2582-ce16-4dcf-ac8b-14db5392c6c0",
+    "name": "Spare Parts",
+    "slug": "spare-parts",
+    "description": null
+  },
+  {
+    "id": "1eb3d212-8a59-45a6-b773-416718ec3604",
+    "name": "Floor",
+    "slug": "floor",
+    "description": null
+  },
+  {
+    "id": "2b4adb69-d1eb-4c2d-af66-c0b9333fbdd7",
+    "name": "Tower",
+    "slug": "tower",
+    "description": null
+  },
+  {
+    "id": "066b0001-0c91-4178-b192-6946d022f699",
+    "name": "Towe",
+    "slug": "towe",
+    "description": null
+  },
+  {
+    "id": "b84fbf18-c89f-468c-aa4d-8dac73b1bca1",
+    "name": "Combi",
+    "slug": "combi",
+    "description": null
+  },
+  {
+    "id": "5e283f01-95fd-44b2-b316-a3507ed1dc2f",
+    "name": "Dragonfire",
+    "slug": "dragonfire",
+    "description": null
+  }
+]
