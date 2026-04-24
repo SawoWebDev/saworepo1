@@ -1,3 +1,4 @@
+//syncApi.js - Syncs product data from Supabase, downloads images/files, updates local JSON, and commits to GitHub repos.
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -107,9 +108,8 @@ export async function syncMerge(emit = () => {}) {
       emit({ phase: "images", message: `Downloaded ${stats.images} image(s), ${stats.files} file(s)` });
     }
 
-    // 4. Write local JSON files
-    emit({ phase: "write", message: "Writing local JSON files..." });
-    ensureDirs();
+    // 4. Prepare merged data
+    emit({ phase: "write", message: "Writing JSON files..." });
     const merged = [...existingProducts, ...newProducts].sort((a, b) => {
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
     });
@@ -122,13 +122,7 @@ export async function syncMerge(emit = () => {}) {
       total_files_downloaded: stats.files,
     };
 
-    // Write to local development directory
-    fs.writeFileSync(PRODUCTS_JSON, JSON.stringify(merged, null, 2));
-    fs.writeFileSync(CATEGORIES_JSON, JSON.stringify(categories, null, 2));
-    fs.writeFileSync(TAGS_JSON, JSON.stringify(tags, null, 2));
-    fs.writeFileSync(META_JSON, JSON.stringify(meta, null, 2));
-
-    // Also write to cloned saworepo1 for git commit (inside sawo-main folder)
+    // Write ONLY to cloned saworepo1 for git commit (inside sawo-main folder)
     const saworepo1DataDir = path.join(SAWOREPO1_DIR, "sawo-main/frontend/src/Administrator/Local/data");
     fs.mkdirSync(saworepo1DataDir, { recursive: true });
     console.log(`📝 Writing data files to saworepo1: ${saworepo1DataDir}`);
