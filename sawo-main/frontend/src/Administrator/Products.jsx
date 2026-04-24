@@ -6,6 +6,7 @@ import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { syncSupabaseToLocal } from "./Local/syncWithMerge";
+import { checkSupabaseSync } from "./Local/compareSupabaseWithLocal";
 import { InstructionsModal } from "./Local/InstructionsModal";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
@@ -1691,6 +1692,11 @@ export default function Products({ currentUser }) {
   const [syncStatus, setSyncStatus] = useState(null);
   const [syncEvents, setSyncEvents] = useState([]);
 
+  const [checkSyncOpen, setCheckSyncOpen] = useState(false);
+  const [syncCheckLoading, setSyncCheckLoading] = useState(false);
+  const [syncCheckReport, setSyncCheckReport] = useState(null);
+  const [syncCheckEvents, setSyncCheckEvents] = useState([]);
+
   const isDirty = !formsEqual(form, savedForm);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
@@ -1972,6 +1978,29 @@ export default function Products({ currentUser }) {
     }
   };
 
+  const handleCheckSync = async () => {
+    setSyncCheckLoading(true);
+    setSyncCheckReport(null);
+    setSyncCheckEvents([{ phase: "start", message: "Comparing Supabase with local files..." }]);
+    try {
+      const report = await checkSupabaseSync((event) => {
+        setSyncCheckEvents(prev => [...prev, event]);
+      });
+      setSyncCheckReport(report);
+      if (report.totalChanges === 0) {
+        add("✓ Local files are in sync with Supabase!", "success");
+      } else {
+        add(`Found ${report.totalChanges} changes to review.`, "info");
+      }
+    } catch (err) {
+      const errorMsg = `Sync check failed: ${err.message}`;
+      setSyncCheckEvents(prev => [...prev, { phase: "error", message: errorMsg }]);
+      add(errorMsg, "error");
+    } finally {
+      setSyncCheckLoading(false);
+    }
+  };
+
   // ── Save ──────────────────────────────────────────────────────────────────
   const handleSave = async e => {
     e.preventDefault();
@@ -2234,6 +2263,32 @@ export default function Products({ currentUser }) {
               >
                 <i className={`fa-solid ${syncing ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
                 {syncing ? "Syncing..." : "Sync"}
+              </button>
+              <button
+                type="button"
+                onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
+                disabled={syncCheckLoading}
+                title="Check if local files match Supabase (added/updated/deleted items)"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "8px 12px",
+                  fontSize: "0.85rem",
+                  fontWeight: 500,
+                  border: "1px solid var(--border)",
+                  background: "var(--surface)",
+                  color: syncCheckLoading ? "var(--text-3)" : "var(--text)",
+                  cursor: syncCheckLoading ? "not-allowed" : "pointer",
+                  borderRadius: 4,
+                  transition: "all 0.2s ease",
+                  opacity: syncCheckLoading ? 0.6 : 1,
+                }}
+                onMouseEnter={e => { if (!syncCheckLoading) e.target.style.background = "var(--surface-2)"; }}
+                onMouseLeave={e => { e.target.style.background = "var(--surface)"; }}
+              >
+                <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-check-double"}`} style={{ fontSize: "0.85em" }} />
+                {syncCheckLoading ? "Checking..." : "Check Sync"}
               </button>
               <button
                 type="button"
@@ -2802,6 +2857,14 @@ export default function Products({ currentUser }) {
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
 
+      <CheckSyncModal
+        open={checkSyncOpen}
+        loading={syncCheckLoading}
+        report={syncCheckReport}
+        events={syncCheckEvents}
+        onClose={() => { setCheckSyncOpen(false); setSyncCheckEvents([]); setSyncCheckReport(null); }}
+      />
+
       <InstructionsModal open={instructionsOpen} onClose={() => setInstructionsOpen(false)} />
       <SyncProgressOverlay
         open={syncing || (syncEvents.length > 0 && syncStatus != null)}
@@ -2936,6 +2999,171 @@ function SyncProgressOverlay({ open, events, syncing, status, onClose }) {
             </button>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+function CheckSyncModal({ open, loading, report, events, onClose }) {
+  if (!open) return null;
+
+  const hasChanges = report && report.totalChanges > 0;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.6)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 10001,
+      }}
+    >
+      <div
+        style={{
+          background: "var(--surface)",
+          borderRadius: "var(--r)",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
+          maxWidth: "640px",
+          width: "92%",
+          maxHeight: "85vh",
+          display: "flex",
+          flexDirection: "column",
+          border: "1px solid var(--border)",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ padding: "16px 20px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ fontSize: "1.3rem" }}>
+              {loading ? <i className="fa-solid fa-circle-notch fa-spin" style={{ color: "var(--brand)" }} /> : (hasChanges ? "⚠️" : "✅")}
+            </div>
+            <div>
+              <div style={{ fontWeight: 600, fontSize: "1rem" }}>
+                {loading ? "Checking Sync…" : (hasChanges ? "Changes Found" : "In Sync")}
+              </div>
+              <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginTop: 2 }}>
+                {loading ? "Comparing Supabase with local files..." : (report?.summary || "")}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ padding: "14px 20px", overflow: "auto", flex: 1, fontSize: "0.85rem" }}>
+          {loading && events.length > 0 ? (
+            <div>
+              {events.map((ev, i) => (
+                <div key={i} style={{ padding: "6px 0", color: "var(--text-2)", borderBottom: i < events.length - 1 ? "1px dashed var(--border)" : "none" }}>
+                  <i className="fa-solid fa-circle-notch fa-spin" style={{ fontSize: "0.7em", marginRight: 8, color: "var(--brand)" }} />
+                  {ev.message}
+                </div>
+              ))}
+            </div>
+          ) : report ? (
+            <div>
+              {report.products?.added?.length > 0 && (
+                <div style={{ marginBottom: 14 }}>
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8 }}>
+                    ✨ Added Products ({report.products.added.length})
+                  </div>
+                  {report.products.added.slice(0, 5).map((item, i) => (
+                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
+                      • {item.item.name}
+                    </div>
+                  ))}
+                  {report.products.added.length > 5 && <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-3)" }}>... and {report.products.added.length - 5} more</div>}
+                </div>
+              )}
+
+              {report.products?.updated?.length > 0 && (
+                <div style={{ marginBottom: 14 }}>
+                  <div style={{ fontWeight: 600, color: "var(--warning, #b8860b)", marginBottom: 8 }}>
+                    🔄 Updated Products ({report.products.updated.length})
+                  </div>
+                  {report.products.updated.slice(0, 5).map((item, i) => (
+                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
+                      • {item.item.name}
+                      {item.diff && (
+                        <div style={{ fontSize: "0.75rem", color: "var(--text-3)", marginLeft: 12, marginTop: 2 }}>
+                          {Object.keys(item.diff).map(field => (
+                            <div key={field}>Changed: {field}</div>
+                          )).slice(0, 2)}
+                          {Object.keys(item.diff).length > 2 && <div>... and {Object.keys(item.diff).length - 2} more fields</div>}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  {report.products.updated.length > 5 && <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-3)" }}>... and {report.products.updated.length - 5} more</div>}
+                </div>
+              )}
+
+              {report.products?.deleted?.length > 0 && (
+                <div style={{ marginBottom: 14 }}>
+                  <div style={{ fontWeight: 600, color: "var(--error, #e74c3c)", marginBottom: 8 }}>
+                    🗑️ Deleted from Supabase ({report.products.deleted.length})
+                  </div>
+                  {report.products.deleted.slice(0, 5).map((item, i) => (
+                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
+                      • {item.item.name}
+                    </div>
+                  ))}
+                  {report.products.deleted.length > 5 && <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-3)" }}>... and {report.products.deleted.length - 5} more</div>}
+                </div>
+              )}
+
+              {report.categories?.added?.length > 0 && (
+                <div style={{ marginBottom: 14 }}>
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 6, fontSize: "0.9rem" }}>
+                    ✨ Added Categories ({report.categories.added.length})
+                  </div>
+                  <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
+                    {report.categories.added.map(c => c.item.name).join(", ")}
+                  </div>
+                </div>
+              )}
+
+              {report.tags?.added?.length > 0 && (
+                <div style={{ marginBottom: 14 }}>
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 6, fontSize: "0.9rem" }}>
+                    ✨ Added Tags ({report.tags.added.length})
+                  </div>
+                  <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
+                    {report.tags.added.map(t => t.item.name).join(", ")}
+                  </div>
+                </div>
+              )}
+
+              {!hasChanges && (
+                <div style={{ padding: "12px", textAlign: "center", color: "var(--text-3)", fontStyle: "italic" }}>
+                  ✓ All local files match Supabase perfectly!
+                </div>
+              )}
+            </div>
+          ) : (
+            <div style={{ color: "var(--text-3)", textAlign: "center", padding: "20px" }}>No data yet</div>
+          )}
+        </div>
+
+        <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-2)", display: "flex", justifyContent: "flex-end", gap: 8 }}>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              padding: "7px 16px",
+              background: "var(--surface-3)",
+              color: "var(--text)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--r)",
+              cursor: "pointer",
+              fontSize: "0.85rem",
+              fontWeight: 500,
+            }}
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
