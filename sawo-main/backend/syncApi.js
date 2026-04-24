@@ -12,6 +12,10 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const GITHUB_PAT = process.env.GITHUB_PAT;
+const GITHUB_OWNER = process.env.GITHUB_OWNER || "jmesrafael";
+const GITHUB_MAIN_REPO = process.env.GITHUB_MAIN_REPO || "saworepo1";
+const GITHUB_IMAGES_REPO = process.env.GITHUB_IMAGES_REPO || "saworepo2";
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
   console.error("❌ Missing Supabase credentials in .env file");
@@ -21,14 +25,16 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+const WORK_DIR = path.join("/tmp", "sawo-sync-" + Date.now());
 const DATA_DIR = path.join(__dirname, "../frontend/src/Administrator/Local/data");
 const PRODUCTS_JSON = path.join(DATA_DIR, "products.json");
 const CATEGORIES_JSON = path.join(DATA_DIR, "categories.json");
 const TAGS_JSON = path.join(DATA_DIR, "tags.json");
 const META_JSON = path.join(DATA_DIR, "meta.json");
-const SAWOREPO2 = path.join(__dirname, "../../../saworepo2");
-const IMAGES_DIR = path.join(SAWOREPO2, "images");
-const FILES_DIR = path.join(SAWOREPO2, "files");
+const SAWOREPO1_DIR = path.join(WORK_DIR, GITHUB_MAIN_REPO);
+const SAWOREPO2_DIR = path.join(WORK_DIR, GITHUB_IMAGES_REPO);
+const IMAGES_DIR = path.join(SAWOREPO2_DIR, "images");
+const FILES_DIR = path.join(SAWOREPO2_DIR, "files");
 
 // ── Progress-aware sync ──────────────────────────────────────────────────────
 // emit(event) is called at each phase so the frontend can show live progress.
@@ -37,6 +43,33 @@ export async function syncMerge(emit = () => {}) {
 
   try {
     emit({ phase: "start", message: "Starting sync..." });
+
+    // Clone repos from GitHub
+    emit({ phase: "start", message: "Cloning repositories from GitHub..." });
+    if (!fs.existsSync(WORK_DIR)) fs.mkdirSync(WORK_DIR, { recursive: true });
+
+    const gitUrl1 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`;
+    const gitUrl2 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git`;
+
+    try {
+      execSync(`git clone ${gitUrl1} "${SAWOREPO1_DIR}"`, { stdio: "pipe" });
+      emit({ phase: "start", message: `Cloned ${GITHUB_MAIN_REPO}` });
+    } catch (e) {
+      emit({ phase: "start", message: `Note: ${GITHUB_MAIN_REPO} clone failed, will create new` });
+      fs.mkdirSync(SAWOREPO1_DIR, { recursive: true });
+    }
+
+    try {
+      execSync(`git clone ${gitUrl2} "${SAWOREPO2_DIR}"`, { stdio: "pipe" });
+      emit({ phase: "start", message: `Cloned ${GITHUB_IMAGES_REPO}` });
+    } catch (e) {
+      emit({ phase: "start", message: `Note: ${GITHUB_IMAGES_REPO} clone failed, will create new` });
+      fs.mkdirSync(SAWOREPO2_DIR, { recursive: true });
+    }
+
+    // Configure git
+    configureGit(SAWOREPO1_DIR);
+    configureGit(SAWOREPO2_DIR);
 
     // 1. Fetch from Supabase
     emit({ phase: "fetch", message: "Connecting to Supabase..." });
@@ -89,11 +122,11 @@ export async function syncMerge(emit = () => {}) {
 
     // 5. Mirror products.json into saworepo2 for git commit
     emit({ phase: "write", message: "Mirroring products.json to saworepo2..." });
-    fs.writeFileSync(path.join(SAWOREPO2, "products.json"), JSON.stringify(merged, null, 2));
+    fs.writeFileSync(path.join(SAWOREPO2_DIR, "products.json"), JSON.stringify(merged, null, 2));
 
     // 6. Commit and push saworepo1 (local data files)
     emit({ phase: "git", message: "Committing changes in saworepo1..." });
-    const saworepo1Result = commitSaworepo1(timestamp, stats);
+    const saworepo1Result = commitAndPushRepo(SAWOREPO1_DIR, timestamp, stats, GITHUB_PAT);
     if (saworepo1Result.nothing) {
       emit({ phase: "git", message: "saworepo1: Nothing to commit" });
     } else if (saworepo1Result.committed) {
@@ -107,7 +140,7 @@ export async function syncMerge(emit = () => {}) {
 
     // 7. Commit and push saworepo2
     emit({ phase: "git", message: "Committing changes in saworepo2..." });
-    const gitResult = commitAndPush(timestamp, stats);
+    const gitResult = commitAndPushRepo(SAWOREPO2_DIR, timestamp, stats, GITHUB_PAT);
     if (gitResult.nothing) {
       emit({ phase: "git", message: "saworepo2: Nothing to commit" });
     } else if (gitResult.committed) {
@@ -117,6 +150,13 @@ export async function syncMerge(emit = () => {}) {
       } else {
         emit({ phase: "git", message: `saworepo2: Commit OK, push skipped: ${gitResult.pushError}`, warning: true });
       }
+    }
+
+    // Clean up temp directory
+    try {
+      execSync(`rm -rf "${WORK_DIR}"`, { stdio: "pipe" });
+    } catch (e) {
+      console.warn("⚠️  Failed to clean up temp directory:", e.message);
     }
 
     emit({
@@ -208,31 +248,18 @@ function ensureDirs() {
   }
 }
 
-function commitSaworepo1(timestamp, stats) {
-  const saworepo1Dir = path.join(__dirname, "..");
-  const run = (cmd) => execSync(cmd, { cwd: saworepo1Dir, encoding: "utf-8", stdio: "pipe" });
+function configureGit(dir) {
+  const run = (cmd) => execSync(cmd, { cwd: dir, encoding: "utf-8", stdio: "pipe" });
   try {
-    const status = run("git status --porcelain").trim();
-    if (!status) return { nothing: true };
-
-    run("git add -A");
-    const ts = timestamp.replace("T", " ").split(".")[0];
-    const commitMsg = `Auto-sync: +${stats.added} products, +${stats.images} images [${ts}]`;
-    run(`git commit -m "${commitMsg}"`);
-
-    try {
-      run("git push origin main");
-      return { committed: true, pushed: true, commitMsg };
-    } catch (e) {
-      return { committed: true, pushed: false, commitMsg, pushError: e.message.split("\n")[0] };
-    }
-  } catch (err) {
-    return { committed: false, pushed: false, error: err.message };
+    run('git config user.name "SAWO Auto-Sync"');
+    run('git config user.email "sync@sawo.local"');
+  } catch (e) {
+    console.warn("⚠️  Failed to configure git in", dir, e.message);
   }
 }
 
-function commitAndPush(timestamp, stats) {
-  const run = (cmd) => execSync(cmd, { cwd: SAWOREPO2, encoding: "utf-8", stdio: "pipe" });
+function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
+  const run = (cmd) => execSync(cmd, { cwd: repoDir, encoding: "utf-8", stdio: "pipe" });
   try {
     const status = run("git status --porcelain").trim();
     if (!status) return { nothing: true };
@@ -243,7 +270,10 @@ function commitAndPush(timestamp, stats) {
     run(`git commit -m "${commitMsg}"`);
 
     try {
-      run("git push origin main");
+      // Get the current branch
+      const branch = run("git rev-parse --abbrev-ref HEAD").trim();
+      const pushUrl = `https://${githubPat}@github.com/${GITHUB_OWNER}/${path.basename(repoDir)}.git`;
+      run(`git push ${pushUrl} ${branch}`);
       return { committed: true, pushed: true, commitMsg };
     } catch (e) {
       return { committed: true, pushed: false, commitMsg, pushError: e.message.split("\n")[0] };
