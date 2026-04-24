@@ -261,24 +261,34 @@ function configureGit(dir) {
 function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
   const run = (cmd) => execSync(cmd, { cwd: repoDir, encoding: "utf-8", stdio: "pipe" });
   try {
+    // Check if git repo exists
+    if (!fs.existsSync(path.join(repoDir, ".git"))) {
+      console.error(`❌ Not a git repo: ${repoDir}`);
+      return { committed: false, pushed: false, error: "Not a git repository" };
+    }
+
     const status = run("git status --porcelain").trim();
     if (!status) return { nothing: true };
 
     run("git add -A");
     const ts = timestamp.replace("T", " ").split(".")[0];
-    const commitMsg = `Auto-sync: +${stats.added} products, +${stats.images} images [${ts}]`;
+    const commitMsg = `Auto-sync: Product images and data [${ts}]`;
     run(`git commit -m "${commitMsg}"`);
 
     try {
-      // Get the current branch
       const branch = run("git rev-parse --abbrev-ref HEAD").trim();
+      if (!githubPat) throw new Error("GITHUB_PAT is not set");
+
       const pushUrl = `https://${githubPat}@github.com/${GITHUB_OWNER}/${path.basename(repoDir)}.git`;
       run(`git push ${pushUrl} ${branch}`);
+      console.log(`✅ Pushed ${path.basename(repoDir)} to ${branch}`);
       return { committed: true, pushed: true, commitMsg };
     } catch (e) {
+      console.error(`❌ Push failed for ${path.basename(repoDir)}:`, e.message);
       return { committed: true, pushed: false, commitMsg, pushError: e.message.split("\n")[0] };
     }
   } catch (err) {
+    console.error(`❌ Commit failed for ${path.basename(repoDir)}:`, err.message);
     return { committed: false, pushed: false, error: err.message };
   }
 }
