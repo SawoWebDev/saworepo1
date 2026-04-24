@@ -3187,17 +3187,35 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
 
               {(report.categories?.added?.length > 0 || report.categories?.updated?.length > 0) && (
                 <div style={{ marginBottom: 14, paddingTop: 8, borderTop: "1px dashed var(--border)" }}>
-                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 6, fontSize: "0.9rem" }}>
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8, fontSize: "0.9rem" }}>
                     📁 Categories
                   </div>
                   {report.categories?.added?.length > 0 && (
-                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)", marginBottom: 4 }}>
-                      ✨ Added: {report.categories.added.map(c => c.item.name).join(", ")}
+                    <div style={{ marginBottom: 8 }}>
+                      <div style={{ fontSize: "0.8rem", color: "var(--brand)", marginBottom: 4 }}>✨ Added ({report.categories.added.length})</div>
+                      {report.categories.added.slice(0, 5).map((c, i) => (
+                        <div key={i} style={{ fontSize: "0.8rem", color: "var(--text-2)", padding: "2px 12px" }}>• {c.item.name}</div>
+                      ))}
                     </div>
                   )}
                   {report.categories?.updated?.length > 0 && (
-                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)" }}>
-                      🔄 Updated: {report.categories.updated.map(c => c.item.name).join(", ")}
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--warning, #b8860b)", marginBottom: 4 }}>🔄 Updated ({report.categories.updated.length})</div>
+                      {report.categories.updated.slice(0, 5).map((item, i) => (
+                        <div key={i} style={{ padding: "6px 12px", backgroundColor: "var(--surface-3)", borderRadius: 4, marginBottom: 4, fontSize: "0.8rem" }}>
+                          <div style={{ fontWeight: 500, marginBottom: 4 }}>{item.item.name}</div>
+                          {item.diff && Object.keys(item.diff).length > 0 ? (
+                            <div>
+                              {Object.keys(item.diff).slice(0, 3).map(field => (
+                                <div key={field} style={{ fontSize: "0.75rem", color: "var(--text-3)" }}>Changed: {field}</div>
+                              ))}
+                              {Object.keys(item.diff).length > 3 && <div style={{ fontSize: "0.75rem", color: "var(--text-3)" }}>... and {Object.keys(item.diff).length - 3} more</div>}
+                            </div>
+                          ) : (
+                            <div style={{ fontSize: "0.75rem", color: "var(--text-3)", fontStyle: "italic" }}>Minor metadata changes</div>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -3205,17 +3223,25 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
 
               {(report.tags?.added?.length > 0 || report.tags?.updated?.length > 0) && (
                 <div style={{ marginBottom: 14 }}>
-                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 6, fontSize: "0.9rem" }}>
-                    🏷️ Tags
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8, fontSize: "0.9rem" }}>
+                    🏷️ Tags ({(report.tags?.added?.length || 0) + (report.tags?.updated?.length || 0)})
                   </div>
                   {report.tags?.added?.length > 0 && (
-                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)", marginBottom: 4 }}>
-                      ✨ Added: {report.tags.added.map(t => t.item.name).join(", ")}
+                    <div style={{ marginBottom: 8 }}>
+                      <div style={{ fontSize: "0.8rem", color: "var(--brand)", marginBottom: 4 }}>✨ Added ({report.tags.added.length})</div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>
+                        {report.tags.added.map(t => t.item.name).join(", ")}
+                      </div>
                     </div>
                   )}
                   {report.tags?.updated?.length > 0 && (
-                    <div style={{ fontSize: "0.8rem", color: "var(--text-2)" }}>
-                      🔄 Updated: {report.tags.updated.map(t => t.item.name).join(", ")}
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--warning, #b8860b)", marginBottom: 4 }}>
+                        🔄 Updated ({report.tags.updated.length}) — {report.tags.updated.every(t => !t.diff || Object.keys(t.diff).length === 0) ? "metadata only" : "has meaningful changes"}
+                      </div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>
+                        {report.tags.updated.map(t => t.item.name).join(", ")}
+                      </div>
                     </div>
                   )}
                 </div>

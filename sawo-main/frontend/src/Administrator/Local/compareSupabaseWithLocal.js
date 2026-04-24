@@ -263,8 +263,23 @@ export async function checkSupabaseSync(onEvent = () => {}) {
     const totalUpdated = report.products.updated.length + report.categories.updated.length + report.tags.updated.length;
     const totalDeleted = report.products.deleted.length + report.categories.deleted.length + report.tags.deleted.length;
 
+    // Count items with meaningful changes vs metadata only
+    const itemsWithChanges = [
+      ...report.products.updated.filter(p => p.diff && Object.keys(p.diff).length > 0),
+      ...report.categories.updated.filter(c => c.diff && Object.keys(c.diff).length > 0),
+      ...report.tags.updated.filter(t => t.diff && Object.keys(t.diff).length > 0),
+    ].length;
+    const itemsMetadataOnly = totalUpdated - itemsWithChanges;
+
     report.totalChanges = totalAdded + totalUpdated + totalDeleted;
-    report.summary = `Found ${totalAdded} added, ${totalUpdated} updated, ${totalDeleted} deleted items.`;
+    report.itemsWithChanges = itemsWithChanges;
+    report.itemsMetadataOnly = itemsMetadataOnly;
+
+    if (itemsMetadataOnly > 0) {
+      report.summary = `Found ${totalAdded} added, ${totalUpdated} updated (${itemsMetadataOnly} metadata only), ${totalDeleted} deleted.`;
+    } else {
+      report.summary = `Found ${totalAdded} added, ${totalUpdated} updated, ${totalDeleted} deleted items.`;
+    }
 
     onEvent({
       phase: "complete",
