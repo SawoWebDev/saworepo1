@@ -8,17 +8,29 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "https://sawogitsrc.vercel.app",
+  "http://localhost:3000",
+  "http://localhost:5173"
+];
+
 app.use(cors({
-  origin: [
-    "https://sawogitsrc.vercel.app",
-    "http://localhost:3000",
-    "http://localhost:5173"
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn(`⚠️ CORS blocked request from origin: ${origin}`);
+      callback(new Error("CORS not allowed for this origin"));
+    }
+  },
   credentials: true,
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  maxAge: 86400
 }));
-app.use(express.json());
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.get("/", (_req, res) => {
   res.send(`
@@ -59,34 +71,58 @@ app.get("/", (_req, res) => {
 });
 
 app.get("/health", (_req, res) => {
-  res.json({ status: "ok", message: "SAWO Backend API running" });
+  res.json({
+    status: "ok",
+    message: "SAWO Backend API running",
+    corsEnabled: true,
+    allowedOrigins: allowedOrigins
+  });
 });
 
-// ── Streaming sync (NDJSON) ─────────────────────────────────────────────────
-// Emits one JSON object per line so the frontend can render live progress.
+app.get("/api/cors-test", (_req, res) => {
+  res.json({
+    success: true,
+    message: "CORS is working!",
+    origin: _req.get("origin"),
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.options("/api/sync", cors());
+
 app.post("/api/sync", async (_req, res) => {
-  console.log("\n📡 Sync request received at", new Date().toISOString());
+  const clientOrigin = _req.get("origin");
+  const startTime = new Date().toISOString();
+
+  console.log("\n📡 Sync request received");
+  console.log(`   ⏰ Time: ${startTime}`);
+  console.log(`   🌐 Origin: ${clientOrigin}`);
+  console.log(`   IP: ${_req.ip}`);
 
   res.setHeader("Content-Type", "application/x-ndjson");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("X-Accel-Buffering", "no");
+  res.setHeader("Connection", "keep-alive");
+
   if (typeof res.flushHeaders === "function") res.flushHeaders();
 
   const emit = (event) => {
     try {
       res.write(JSON.stringify(event) + "\n");
     } catch (e) {
-      console.warn("Failed to write stream event:", e.message);
+      console.error("❌ Failed to write stream event:", e.message);
     }
   };
 
   try {
     await syncMerge(emit);
   } catch (err) {
-    console.error("❌ Sync endpoint error:", err);
+    console.error("❌ Sync error:", err.message);
     emit({ phase: "error", success: false, message: err.message });
   } finally {
     res.end();
+    const endTime = new Date().toISOString();
+    console.log(`✅ Sync completed at ${endTime}\n`);
   }
 });
 
