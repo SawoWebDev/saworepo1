@@ -58,35 +58,6 @@
     "is_deleted": false
   },
   {
-    "id": "b2bfd0ec-36a8-43d5-8009-f3e73b815d7c",
-    "name": "SAWOO",
-    "slug": "sawoo",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1776999114309_dgtrfazk24u.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-24T02:51:43.417836+00:00",
-    "updated_at": "2026-04-24T02:52:16.12+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false
-  },
-  {
     "id": "9b4743c0-61fb-4529-ade3-de28c70d8b8c",
     "name": "STONEY",
     "slug": "stoney",
@@ -121,7 +92,7 @@
     "slug": "ph",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/1776995266130_y6g774g0qa.webp",
+    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1777010568706_mvzr181km4.webp",
     "images": [],
     "spec_images": [],
     "categories": [],
@@ -139,7 +110,7 @@
     "created_by": null,
     "created_by_username": "Rafael",
     "created_at": "2026-04-24T01:47:21.283698+00:00",
-    "updated_at": "2026-04-24T01:47:54.195+00:00",
+    "updated_at": "2026-04-24T06:02:51.181+00:00",
     "files": [],
     "updated_by_username": "Rafael",
     "is_deleted": false
@@ -406,151 +377,6 @@
     "is_deleted": false
   },
   {
-    "id": "411cf9f8-aa0b-43c8-8ef8-4b4e04debf99",
-    "name": "BADGE",
-    "slug": "badge",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1776827823445_reu57vfjwjg.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-22T03:16:43.475825+00:00",
-    "updated_at": "2026-04-22T03:17:15.192+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false
-  },
-  {
-    "id": "c889ebee-d666-4ea7-81ab-8753fc1e6e1b",
-    "name": "SAUNA",
-    "slug": "sauna",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1776826369146_42n5ds2vy84.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-22T02:52:22.462559+00:00",
-    "updated_at": "2026-04-22T02:52:54.181+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false
-  },
-  {
-    "id": "6d28545d-a655-4438-9d94-f0ace1543214",
-    "name": "DS",
-    "slug": "ds",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1776825466109_pni980mdeco.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-22T02:37:31.704067+00:00",
-    "updated_at": "2026-04-22T02:38:03.35+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false
-  },
-  {
-    "id": "37d75d8e-f22c-4ffd-8d3a-9244b20edebf",
-    "name": "MANDANI",
-    "slug": "mandani",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1776817639504_r0ro18303aq.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-22T00:26:52.393921+00:00",
-    "updated_at": "2026-04-22T00:27:23.913+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false
-  },
-  {
-    "id": "f4d31120-d095-4f71-bb35-c9ac4589ebcb",
-    "name": "LIVE",
-    "slug": "live",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1776815103743_wrrhm0hq3y.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-21T23:44:39.217638+00:00",
-    "updated_at": "2026-04-21T23:45:10.797+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false
-  },
-  {
     "id": "f1471432-ae53-442b-8f8f-c6c78aa13691",
     "name": "Minidragon Black NB",
     "slug": "minidragon-black-nb",
@@ -727,12 +553,12 @@
     "slug": "minidragon-red-ns",
     "short_description": "<strong style=\"text-align: justify;\">Minidragon</strong><span style=\"text-align: justify;\"> is the smallest design heater by Stefan Lindfors. Its innovative fiber coating stays cool throughout the sauna session, adding safety to layouts where space is limited.</span>",
     "description": "<table>\n  <thead>\n<tr>\n  <th>Heater Model</th>\n  <th>kW</th>\n  <th>Sauna Room<br>min. (m3) max.</th>\n  <th>Size of Heater (mm)<br>Length Width Height</th>\n  <th>Stones<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"5\">Minimum Safety Distances<br>A | B | C | D | E</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MN-23NS-DRF-P</td>\n  <td>2.3</td>\n  <td>1.3 – 2.5</td>\n  <td>215 x 435 x 455</td>\n  <td>8 – 11</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>20</td>\n  <td>40</td>\n  <td>90</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>MN-30NS-DRF-P</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>215 x 435 x 455</td>\n  <td>8 – 11</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>20</td>\n  <td>50</td>\n  <td>90</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>MN-36NS-DRF-P</td>\n  <td>3.6</td>\n  <td>3 – 6</td>\n  <td>215 x 435 x 455</td>\n  <td>8 – 11</td>\n  <td>Separate</td>\n  <td>90</td>\n  <td>20</td>\n  <td>50</td>\n  <td>90</td>\n  <td>155</td>\n</tr></tbody></table>",
-    "thumbnail": "images/1776741522962_6nje64rn4gc.webp",
+    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776741522962_6nje64rn4gc.webp",
     "images": [
-      "images/1776741526439_924k1x7x35v.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776741526439_924k1x7x35v.webp"
     ],
     "spec_images": [
-      "images/1776741680674_ihqr8wfaa4.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776741680674_ihqr8wfaa4.webp"
     ],
     "categories": [
       "Dragonfire"
@@ -771,8 +597,13 @@
     "created_by": null,
     "created_by_username": "Edgar",
     "created_at": "2026-04-21T03:21:42.955432+00:00",
-    "updated_at": "2026-04-21T03:22:13.633+00:00",
-    "files": [],
+    "updated_at": "2026-04-21T09:08:25.944+00:00",
+    "files": [
+      {
+        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Minidragon-NS-NB_FiEn-3P-1P.pdf",
+        "name": "Minidragon NS NB FiEn 3P 1P"
+      }
+    ],
     "updated_by_username": "Edgar",
     "is_deleted": false
   },
@@ -1262,13 +1093,13 @@
     "slug": "nordex-pro-combi-ns",
     "short_description": "<p style=\"text-align: justify;\">Building on the Nordex tradition, the <strong>Nordex Pro Combi</strong> introduces an enhanced design that combines efficient heating with the added comfort of steam. An integrated water tank delivers gentle humidity, while the separation of stones and heating elements enhances durability.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">The Nordex Pro Combi’s pull-out cassette tray simplifies maintenance, and the unit can be connected with another for more power in spacious sauna rooms.</p>",
     "description": "<table>\n  <thead>\n<tr>\n  <th>Heater Model</th>\n  <th>kW\n<br>Heater</th>\n  <th>kW\n<br>Tank</th>\n  <th>Sauna Room<br>min (m³) max</th>\n  <th>Size of Heater (mm)<br>Length Width Height</th>\n  <th>Stones<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"4\">Minimum Safety Distances<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-PRO-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 x 0.8</td>\n  <td>5 – 9</td>\n  <td>500 x 370 x 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 x 2.0</td>\n  <td>7 – 13</td>\n  <td>500 x 370 x 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 x 2.0</td>\n  <td>8 – 14</td>\n  <td>500 x 370 x 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr></tbody></table>",
-    "thumbnail": "images/1776735763374_a8cf4cdg8go.webp",
+    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776735763374_a8cf4cdg8go.webp",
     "images": [
-      "images/1776735753613_h7u9b9z0of9.webp",
-      "images/1776735757747_9ctphiyynj9.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776735753613_h7u9b9z0of9.webp",
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776735757747_9ctphiyynj9.webp"
     ],
     "spec_images": [
-      "images/1776735924515_3d36dtkbsi1.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776735924515_3d36dtkbsi1.webp"
     ],
     "categories": [
       "Floor",
@@ -1307,8 +1138,13 @@
     "created_by": null,
     "created_by_username": "Edgar",
     "created_at": "2026-04-21T01:45:12.496217+00:00",
-    "updated_at": "2026-04-21T06:17:41.786+00:00",
-    "files": [],
+    "updated_at": "2026-04-21T09:11:50.53+00:00",
+    "files": [
+      {
+        "url": "https://www.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-Pro-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "name": "Nordex Pro Combi NS NB FiEn 3P 1P"
+      }
+    ],
     "updated_by_username": "Edgar",
     "is_deleted": false
   },
@@ -1575,14 +1411,16 @@
     "slug": "phoenix-ni2",
     "short_description": "<span style=\"text-align: justify;\">The </span><strong style=\"text-align: justify;\">Phoenix</strong><span style=\"text-align: justify;\"> incorporates the shape of the Olympic torch into its elegant, minimalist design to signal vitality and renewal. Its broad top accommodates more stones, which enables it to generate a greater amount of pampering steam. It definitely calls to mind the metaphor of rising from the ashes, in this case after a long day (or night). The Phoenix also comes with a stone spacer, which prolongs the life span of its heating elements.</span>",
     "description": "<table>\n  <thead>\n<tr>\n  <th>Heater Model</th>\n  <th>kW</th>\n  <th>Sauna Room<br>min. (m³) max.</th>\n  <th>Size of Heater (mm)<br>Length Width Height</th>\n  <th>Stones<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"2\">Minimum Safety Distances<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>PNX3-45Ni2-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>340 x 375 x 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-60Ni2-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>340 x 375 x 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>125</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-75Ni2-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>340 x 375 x 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>125</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>340 x 375 x 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX6-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>475 x 525 x 1175</td>\n  <td>130</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr></tbody></table>",
-    "thumbnail": "images/1776733456705_rsjn6o1sywk.webp",
+    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776733456705_rsjn6o1sywk.webp",
     "images": [
-      "images/1776733461492_dkuykrvklnr.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776733461492_dkuykrvklnr.webp"
     ],
     "spec_images": [
-      "images/1776733733716_x57fzcl8ahc.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776733733716_x57fzcl8ahc.webp"
     ],
-    "categories": [],
+    "categories": [
+      "Tower"
+    ],
     "tags": [
       "4.5 – 9.0kW",
       "Ni2",
@@ -1618,7 +1456,7 @@
     "created_by": null,
     "created_by_username": "Edgar",
     "created_at": "2026-04-21T01:09:45.161674+00:00",
-    "updated_at": "2026-04-21T01:10:15.763+00:00",
+    "updated_at": "2026-04-21T09:00:51.422+00:00",
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/07/Phoenix-Ni2_FiEn-3P-1P-Edited.pdf",
@@ -3980,12 +3818,12 @@
     "slug": "tower-round-ni2",
     "short_description": "<span style=\"text-align: justify;\">The </span><strong style=\"text-align: justify;\">Tower Round</strong><span style=\"text-align: justify;\"> heater is a timeless, elegant design. Its height ensures even distribution of long-lasting humid heat for deeply satisfying sauna sessions. The Round model can be installed in the middle of the sauna room or embedded in a bench. It also comes with a removable stone spacer, which offers two setup options: (1) with the spacer for faster heating, energy efficiency, and a hotter sauna, or (2) without the spacer for room to accommodate more stones to generate more steam, a milder temperature, and energy savings in a commercial setup.</span>",
     "description": "<table>\n  <thead>\n<tr>\n  <th>Heater Model</th>\n  <th>kW</th>\n  <th>Sauna Room<br>min. (m3) max.</th>\n  <th>Size of Heater (mm)<br>Length Width Height</th>\n  <th>Stones<br>(kg)\nw/o Stone Spacer</th>\n  <th>Stones<br>(kg)\nwith Stone Spacer</th>\n  <th>Control</th>\n  <th colspan=\"2\">Minimum Safety Distances<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH2-30Ni2-P-C</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>260 x 260 x 1300</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-35Ni2-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>260 x 260 x 1300</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-45Ni2-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>260 x 260 x 1300</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-60Ni2-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>260 x 260 x 1300</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH4-60Ni2-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>315 x 315 x 1300</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-80Ni2-P-C</td>\n  <td>8.0</td>\n  <td>8 – 14</td>\n  <td>315 x 315 x 1300</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>315 x 315 x 1300</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-80Ni2-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>365 x 365 x 1300</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>365 x 365 x 1300</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr></tbody></table>",
-    "thumbnail": "images/1776673900583_whk27hdjiya.webp",
+    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776673900583_whk27hdjiya.webp",
     "images": [
-      "images/1776673904745_z6elh3ofyvr.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776673904745_z6elh3ofyvr.webp"
     ],
     "spec_images": [
-      "images/1776673991948_dnt6fgejixj.webp"
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1776673991948_dnt6fgejixj.webp"
     ],
     "categories": [
       "Tower"
@@ -4025,7 +3863,7 @@
       "Optional integration collar"
     ],
     "brand": "SAWO",
-    "type": "Tower",
+    "type": "Tower Round",
     "spec_table": null,
     "resources": null,
     "status": "published",
@@ -4035,7 +3873,7 @@
     "created_by": null,
     "created_by_username": "Edgar",
     "created_at": "2026-04-20T08:32:22.023019+00:00",
-    "updated_at": "2026-04-20T08:36:31.256+00:00",
+    "updated_at": "2026-04-21T09:14:48.825+00:00",
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Round-Ni2_FiEn-3P-1P.pdf",
