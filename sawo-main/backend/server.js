@@ -82,6 +82,8 @@ app.post("/api/sync", async (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n✅ SAWO Backend API running on http://localhost:${PORT}`);
-  console.log(`📡 Sync endpoint: POST http://localhost:${PORT}/api/sync\n`);
+  const isProduction = process.env.NODE_ENV === "production";
+  const baseUrl = isProduction ? "https://sawo-backend.onrender.com" : `http://localhost:${PORT}`;
+  console.log(`\n✅ SAWO Backend API running on ${baseUrl}`);
+  console.log(`📡 Sync endpoint: POST ${baseUrl}/api/sync\n`);
 });
