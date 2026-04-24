@@ -48,22 +48,28 @@ export async function syncMerge(emit = () => {}) {
     emit({ phase: "start", message: "Cloning repositories from GitHub..." });
     if (!fs.existsSync(WORK_DIR)) fs.mkdirSync(WORK_DIR, { recursive: true });
 
+    if (!GITHUB_PAT) throw new Error("GITHUB_PAT environment variable is not set");
+
     const gitUrl1 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`;
     const gitUrl2 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git`;
 
     try {
-      execSync(`git clone ${gitUrl1} "${SAWOREPO1_DIR}"`, { stdio: "pipe" });
+      const output1 = execSync(`git clone ${gitUrl1} "${SAWOREPO1_DIR}"`, { encoding: "utf-8" });
+      console.log(`✅ Cloned ${GITHUB_MAIN_REPO}`);
       emit({ phase: "start", message: `Cloned ${GITHUB_MAIN_REPO}` });
     } catch (e) {
-      emit({ phase: "start", message: `Note: ${GITHUB_MAIN_REPO} clone failed, will create new` });
+      console.error(`❌ Clone failed for ${GITHUB_MAIN_REPO}:`, e.message);
+      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
       fs.mkdirSync(SAWOREPO1_DIR, { recursive: true });
     }
 
     try {
-      execSync(`git clone ${gitUrl2} "${SAWOREPO2_DIR}"`, { stdio: "pipe" });
+      const output2 = execSync(`git clone ${gitUrl2} "${SAWOREPO2_DIR}"`, { encoding: "utf-8" });
+      console.log(`✅ Cloned ${GITHUB_IMAGES_REPO}`);
       emit({ phase: "start", message: `Cloned ${GITHUB_IMAGES_REPO}` });
     } catch (e) {
-      emit({ phase: "start", message: `Note: ${GITHUB_IMAGES_REPO} clone failed, will create new` });
+      console.error(`❌ Clone failed for ${GITHUB_IMAGES_REPO}:`, e.message);
+      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
       fs.mkdirSync(SAWOREPO2_DIR, { recursive: true });
     }
 
@@ -134,8 +140,10 @@ export async function syncMerge(emit = () => {}) {
       if (saworepo1Result.pushed) {
         emit({ phase: "git", message: "saworepo1: Pushed to GitHub ✓" });
       } else {
-        emit({ phase: "git", message: `saworepo1: Commit OK, push skipped: ${saworepo1Result.pushError}`, warning: true });
+        emit({ phase: "git", message: `saworepo1: ❌ Push failed: ${saworepo1Result.pushError}`, warning: true });
       }
+    } else {
+      emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${saworepo1Result.error}`, warning: true });
     }
 
     // 7. Commit and push saworepo2
@@ -148,8 +156,10 @@ export async function syncMerge(emit = () => {}) {
       if (gitResult.pushed) {
         emit({ phase: "git", message: "saworepo2: Pushed to GitHub ✓" });
       } else {
-        emit({ phase: "git", message: `saworepo2: Commit OK, push skipped: ${gitResult.pushError}`, warning: true });
+        emit({ phase: "git", message: `saworepo2: ❌ Push failed: ${gitResult.pushError}`, warning: true });
       }
+    } else {
+      emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${gitResult.error}`, warning: true });
     }
 
     // Clean up temp directory
