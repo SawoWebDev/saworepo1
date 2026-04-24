@@ -56,6 +56,49 @@ async function loadLocalData() {
 }
 
 /**
+ * Normalize URLs for comparison
+ * Extracts the meaningful part (filename/path) from both local paths and Supabase URLs
+ */
+function normalizeUrl(url) {
+  if (!url || typeof url !== "string") return url;
+
+  // If it's a Supabase URL, extract just the file path part
+  if (url.includes("supabase.co") || url.includes("storage/v1/object")) {
+    const parts = url.split("/");
+    const filename = parts[parts.length - 1];
+    return filename;
+  }
+
+  // If it's a GitHub raw URL
+  if (url.includes("raw.githubusercontent.com")) {
+    const parts = url.split("/");
+    const filename = parts[parts.length - 1];
+    return filename;
+  }
+
+  // If it's a relative path like "images/xxx.webp", extract just the filename
+  const pathParts = url.split("/");
+  return pathParts[pathParts.length - 1];
+}
+
+/**
+ * Compare two values, normalizing URLs
+ */
+function valueEqual(val1, val2) {
+  if (val1 === val2) return true;
+  if (val1 == null || val2 == null) return val1 === val2;
+
+  // If both are strings that look like URLs/paths, normalize and compare
+  if (typeof val1 === "string" && typeof val2 === "string") {
+    if (val1.includes("/") || val2.includes("/") || val1.includes(".") || val2.includes(".")) {
+      return normalizeUrl(val1) === normalizeUrl(val2);
+    }
+  }
+
+  return val1 === val2;
+}
+
+/**
  * Deep equality check for objects
  */
 function deepEqual(obj1, obj2) {
@@ -70,7 +113,40 @@ function deepEqual(obj1, obj2) {
 
   for (const key of keys1) {
     if (!keys2.includes(key)) return false;
-    if (!deepEqual(obj1[key], obj2[key])) return false;
+
+    const v1 = obj1[key];
+    const v2 = obj2[key];
+
+    // Special handling for URL fields (thumbnail, images, spec_images, files)
+    if (key === "thumbnail" || key === "images" || key === "spec_images" || key === "files") {
+      if (Array.isArray(v1) && Array.isArray(v2)) {
+        if (v1.length !== v2.length) return false;
+        for (let i = 0; i < v1.length; i++) {
+          // For file objects, compare normalized URLs
+          if (typeof v1[i] === "object" && typeof v2[i] === "object") {
+            const f1 = v1[i];
+            const f2 = v2[i];
+            if (f1.url && f2.url && !valueEqual(f1.url, f2.url)) return false;
+            if (f1.name && f2.name && f1.name !== f2.name) return false;
+          } else if (!valueEqual(v1[i], v2[i])) {
+            return false;
+          }
+        }
+      } else if (typeof v1 === "string" && typeof v2 === "string") {
+        if (!valueEqual(v1, v2)) return false;
+      } else if (v1 !== v2) {
+        return false;
+      }
+    } else if (Array.isArray(v1) && Array.isArray(v2)) {
+      if (v1.length !== v2.length) return false;
+      for (let i = 0; i < v1.length; i++) {
+        if (!deepEqual(v1[i], v2[i])) return false;
+      }
+    } else if (typeof v1 === "object" && typeof v2 === "object") {
+      if (!deepEqual(v1, v2)) return false;
+    } else if (!valueEqual(v1, v2)) {
+      return false;
+    }
   }
 
   return true;
