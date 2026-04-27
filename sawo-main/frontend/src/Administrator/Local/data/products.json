@@ -1,11 +1,11 @@
 [
   {
-    "id": "523f59c0-c224-4c14-af12-e164ddbfa352",
-    "name": "SOLAREGG",
-    "slug": "solaregg",
+    "id": "8f29dbf8-6b15-4a18-a562-0ed519a593a0",
+    "name": "80",
+    "slug": "80",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/1777332484407_2hti675q5hy.webp",
+    "thumbnail": "images/1777332783961_szqyy0d4duh.webp",
     "images": [],
     "spec_images": [],
     "categories": [],
@@ -22,8 +22,8 @@
     "sort_order": 0,
     "created_by": null,
     "created_by_username": "Rafael",
-    "created_at": "2026-04-27T23:27:34.767451+00:00",
-    "updated_at": "2026-04-27T23:28:10.095+00:00",
+    "created_at": "2026-04-27T23:32:32.90819+00:00",
+    "updated_at": "2026-04-27T23:33:08.477+00:00",
     "files": [],
     "updated_by_username": "Rafael",
     "is_deleted": false
