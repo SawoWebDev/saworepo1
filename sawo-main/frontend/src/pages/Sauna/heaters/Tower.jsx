@@ -1,16 +1,25 @@
 // Tower.jsx
+// See WallMounted.jsx for how to use local product data instead of Supabase.
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { getVisibleProductsCached } from "../../../local-storage/supabaseReader";
+import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/tower-hero.webp";
 import "./heaters.css";
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
+}
+
+function getImageUrl(product, field) {
+  const path = localOrRemote(product, field);
+  if (!path) return null;
+  if (path.includes("://")) return path;
+  return `${GITHUB_RAW}${path}`;
 }
 
 // ── Fixed group order ─────────────────────────────────────────────────
@@ -99,9 +108,9 @@ function ProductCard({ product }) {
         onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
         onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
       >
-        {localOrRemote(product, 'thumbnail') ? (
+        {getImageUrl(product, 'thumbnail') ? (
           <img
-            src={localOrRemote(product, 'thumbnail')}
+            src={getImageUrl(product, 'thumbnail')}
             alt={product.name}
             className="wm-product-img"
             onError={e => { e.currentTarget.style.display = "none"; }}
@@ -117,24 +126,15 @@ function ProductCard({ product }) {
 }
 
 const Tower = () => {
-  const [allProducts, setAllProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { products: localProds, loading } = useLocalProducts();
   const [activeGroup, setActiveGroup] = useState(null);
   const [activeType,  setActiveType]  = useState("All");
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await getVisibleProductsCached();
-        setAllProducts(filterTowerProducts(data));
-      } catch (err) {
-        console.error("Tower: fetch failed", err);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  const allProducts = useMemo(() => {
+    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    return filterTowerProducts(visible);
+  }, [localProds]);
 
   const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
   const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
