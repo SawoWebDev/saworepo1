@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
-import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
+import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
 
@@ -2119,7 +2119,7 @@ export default function Products({ currentUser }) {
   const [syncCheckReport, setSyncCheckReport] = useState(null);
   const [syncCheckEvents, setSyncCheckEvents] = useState([]);
   const [syncCheckApplying, setSyncCheckApplying] = useState(false);
-  const [expandedDiff, setExpandedDiff] = useState(null);
+
 
   const isDirty = !formsEqual(form, savedForm);
 
@@ -3248,27 +3248,186 @@ export default function Products({ currentUser }) {
 
 function CheckSyncModal({ open, loading, report, events, onClose, onApply, applying }) {
   const [expandedId, setExpandedId] = useState(null);
+  const logRef = useRef(null);
+
+  useEffect(() => {
+    if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
+  }, [events]);
+
+  // Auto-close modal after successful sync
+  useEffect(() => {
+    const hasChanges = report && report.totalChanges > 0;
+    const lastEvent = events[events.length - 1];
+    const wasApplied = !applying && !loading && hasChanges && events.some(e => e.phase === "applying") && lastEvent?.phase === "complete";
+
+    if (wasApplied) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 1800); // 1.8 seconds to show success message
+      return () => clearTimeout(timer);
+    }
+  }, [applying, loading, report, events, onClose]);
 
   if (!open) return null;
 
   const hasChanges = report && report.totalChanges > 0;
+  const lastEvent = events[events.length - 1];
+  const isError = lastEvent?.phase === "error";
 
-  // Phase indicators for progress bar
-  const phases = ["start", "clone", "write", "git", "complete"];
-  const getPhaseIcon = (phase) => {
-    const icons = {
-      start: "fa-play",
-      clone: "fa-code-branch",
-      write: "fa-file-pen",
-      git: "fa-code-commit",
-      complete: "fa-check",
-      error: "fa-circle-xmark",
-    };
-    return icons[phase] || "fa-circle";
+  // ── Check phase steps ─────────────────────────────────────────────────────
+  const checkSteps = [
+    { key: "fetching",  label: "Fetch Supabase data",  icon: "fa-cloud-arrow-down" },
+    { key: "loading",   label: "Load local files",      icon: "fa-folder-open" },
+    { key: "cmp_prods", label: "Compare products",      icon: "fa-box" },
+    { key: "cmp_cats",  label: "Compare categories",    icon: "fa-folder" },
+    { key: "cmp_tags",  label: "Compare tags",          icon: "fa-tag" },
+    { key: "complete",  label: "Analysis complete",     icon: "fa-circle-check" },
+  ];
+  const checkOrder = ["fetching", "loading", "cmp_prods", "cmp_cats", "cmp_tags", "complete"];
+  const checkPct   = { fetching: 15, loading: 35, cmp_prods: 58, cmp_cats: 75, cmp_tags: 90, complete: 100 };
+
+  const normCheckEvts = events.map(ev => {
+    if (ev.phase === "comparing") {
+      if (/product/i.test(ev.message))  return "cmp_prods";
+      if (/categor/i.test(ev.message))  return "cmp_cats";
+      if (/tag/i.test(ev.message))      return "cmp_tags";
+    }
+    return ev.phase;
+  });
+  let curCheckKey = "";
+  for (const k of checkOrder.slice().reverse()) {
+    if (normCheckEvts.includes(k)) { curCheckKey = k; break; }
+  }
+  if (isError && !applying) curCheckKey = "error";
+  const checkProgress = checkPct[curCheckKey] || 5;
+
+  const checkStepStatus = key => {
+    const ki = checkOrder.indexOf(key), ci = checkOrder.indexOf(curCheckKey);
+    if (isError && !applying && ki === ci) return "error";
+    if (ki < ci) return "done";
+    if (ki === ci) return "active";
+    return "pending";
   };
 
-  const currentPhase = events.length > 0 ? events[events.length - 1].phase : "";
-  const currentPhaseIndex = phases.indexOf(currentPhase);
+  // ── Apply phase steps ─────────────────────────────────────────────────────
+  const applySteps = [
+    { key: "applying",  label: "Process changes",        icon: "fa-gears" },
+    { key: "writing",   label: "Send to backend",         icon: "fa-upload" },
+    { key: "start",     label: "Initialize",              icon: "fa-play" },
+    { key: "clone",     label: "Clone repository",        icon: "fa-code-branch" },
+    { key: "write",     label: "Write files",             icon: "fa-file-pen" },
+    { key: "git",       label: "Commit & push",           icon: "fa-code-commit" },
+    { key: "complete",  label: "Complete",                icon: "fa-circle-check" },
+  ];
+  const applyOrder = ["applying", "writing", "start", "clone", "write", "git", "complete"];
+  const applyPct   = { applying: 10, writing: 26, start: 38, clone: 55, write: 73, git: 88, complete: 100 };
+
+  const applyStartIdx = events.findIndex(e => e.phase === "applying");
+  const applyEvts     = applyStartIdx >= 0 ? events.slice(applyStartIdx) : [];
+  const applyPhasesSeen = applyEvts.map(e => e.phase);
+  let curApplyKey = "";
+  for (const k of applyOrder.slice().reverse()) {
+    if (applyPhasesSeen.includes(k)) { curApplyKey = k; break; }
+  }
+  if (isError && applyEvts.length > 0) curApplyKey = "error";
+  const applyProgress = applyPct[curApplyKey] || 5;
+
+  const applyStepStatus = key => {
+    const ki = applyOrder.indexOf(key), ci = applyOrder.indexOf(curApplyKey);
+    if (isError && applyEvts.some(e => e.phase === "error") && ki === ci) return "error";
+    if (ki < ci) return "done";
+    if (ki === ci) return "active";
+    return "pending";
+  };
+
+  // Detect successful apply (for success banner after applying=false)
+  const wasApplied = !applying && !loading && applyEvts.length > 0 && lastEvent?.phase === "complete";
+
+  // ── Render helpers ────────────────────────────────────────────────────────
+  const renderProgressBar = (pct, err) => (
+    <div style={{ marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+        <span style={{ fontSize: "0.68rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.07em", color: "var(--text-3)" }}>Progress</span>
+        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: err ? "var(--danger)" : "var(--brand)", transition: "color 0.3s" }}>{pct}%</span>
+      </div>
+      <div style={{ height: 8, borderRadius: 4, background: "var(--surface-2)", overflow: "hidden" }}>
+        <div style={{
+          height: "100%", width: `${pct}%`,
+          background: err ? "var(--danger)" : "var(--brand)",
+          borderRadius: 4,
+          transition: "width 0.65s cubic-bezier(0.4,0,0.2,1)",
+          position: "relative", overflow: "hidden",
+        }}>
+          {!err && pct > 0 && pct < 100 && (
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.28) 50%,transparent 100%)", backgroundSize: "200% 100%", animation: "csmShimmer 1.6s infinite linear" }} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderSteps = (steps, getStatus, activeMsg) => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+      {steps.map(step => {
+        const st = getStatus(step.key);
+        const done = st === "done", active = st === "active", err = st === "error";
+        return (
+          <div key={step.key} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{
+              width: 26, height: 26, borderRadius: "50%", flexShrink: 0,
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.65rem",
+              background: done ? "var(--brand)" : err ? "var(--danger)" : active ? "var(--surface)" : "var(--surface-2)",
+              border: `2px solid ${done ? "var(--brand)" : err ? "var(--danger)" : active ? "var(--brand)" : "var(--border)"}`,
+              color: done ? "#fff" : err ? "#fff" : active ? "var(--brand)" : "var(--text-3)",
+              boxShadow: active ? "0 0 0 3px rgba(0,0,0,0.06)" : "none",
+              transition: "all 0.3s ease",
+            }}>
+              {done  ? <i className="fa-solid fa-check" /> :
+               active ? <i className="fa-solid fa-spinner" style={{ animation: "spin 1s linear infinite" }} /> :
+               err   ? <i className="fa-solid fa-xmark" /> :
+               <i className={`fa-solid ${step.icon}`} />}
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: "0.78rem", fontWeight: active ? 600 : 400, color: done ? "var(--text)" : err ? "var(--danger)" : active ? "var(--brand)" : "var(--text-3)", lineHeight: 1.3 }}>
+                {step.label}
+              </div>
+              {active && activeMsg && (
+                <div style={{ fontSize: "0.67rem", color: "var(--text-3)", marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  {activeMsg}
+                </div>
+              )}
+            </div>
+            {done && <i className="fa-solid fa-check" style={{ fontSize: "0.65rem", color: "var(--brand)", flexShrink: 0 }} />}
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  const renderLog = (evs) => (
+    <div>
+      <div style={{ fontSize: "0.67rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.07em", color: "var(--text-3)", marginBottom: 5 }}>
+        Activity log
+      </div>
+      <div ref={logRef} style={{ maxHeight: 150, overflowY: "auto", background: "var(--surface-3)", border: "1px solid var(--border)", borderRadius: 6, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 3 }}>
+        {evs.length === 0 && <span style={{ fontSize: "0.72rem", color: "var(--text-3)", fontStyle: "italic" }}>Waiting…</span>}
+        {evs.map((ev, i) => {
+          const evErr  = ev.phase === "error";
+          const evDone = ev.phase === "complete";
+          const evWarn = ev.warning;
+          return (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 7, fontSize: "0.72rem", lineHeight: 1.45 }}>
+              <i className={`fa-solid ${evErr ? "fa-circle-xmark" : evDone ? "fa-circle-check" : evWarn ? "fa-triangle-exclamation" : "fa-circle-dot"}`}
+                style={{ color: evErr ? "var(--danger)" : evDone ? "var(--success,#22c55e)" : evWarn ? "var(--warning,#f59e0b)" : "var(--text-3)", fontSize: "0.65em", marginTop: 3, flexShrink: 0 }} />
+              <span style={{ color: evErr ? "var(--danger)" : evWarn ? "var(--warning,#f59e0b)" : "var(--text-2)", wordBreak: "break-word", flex: 1 }}>
+                {ev.message}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 
   const DiffRow = ({ field, diff }) => {
     const isExpanded = expandedId === field;
@@ -3312,17 +3471,8 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
   };
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.6)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 10001,
-      }}
-    >
+    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10001 }}>
+      <style>{`@keyframes csmShimmer{from{transform:translateX(-100%)}to{transform:translateX(250%)}}`}</style>
       <div
         style={{
           background: "var(--surface)",
@@ -3337,92 +3487,84 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
           overflow: "hidden",
         }}
       >
+        {/* Header */}
         <div style={{ padding: "16px 20px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ fontSize: "1.3rem" }}>
-              {loading ? <i className="fa-solid fa-circle-notch fa-spin" style={{ color: "var(--brand)" }} /> : (hasChanges ? "⚠️" : "✅")}
+              {(loading || applying)
+                ? <i className="fa-solid fa-circle-notch fa-spin" style={{ color: "var(--brand)" }} />
+                : isError ? "❌" : (hasChanges ? "⚠️" : "✅")}
             </div>
-            <div>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 600, fontSize: "1rem" }}>
-                {loading ? "Checking Sync…" : (hasChanges ? "Changes Found" : "In Sync")}
+                {loading ? "Checking Sync…" : applying ? "Applying Changes…" : isError ? "Error" : (hasChanges ? "Changes Found" : "In Sync")}
               </div>
-              <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginTop: 2 }}>
-                {loading ? "Comparing Supabase with local files..." : (report?.summary || "")}
+              <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginTop: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                {(loading || applying)
+                  ? (lastEvent?.message || "Processing…")
+                  : (report?.summary || "")}
               </div>
             </div>
           </div>
         </div>
 
-        <div style={{ padding: "14px 20px", overflow: "auto", flex: 1, fontSize: "0.85rem" }}>
-          {loading && events.length > 0 ? (
+        {/* Body */}
+        <div style={{ padding: "16px 20px", overflow: "auto", flex: 1, fontSize: "0.85rem" }}>
+          {loading ? (
             <div>
-              {events.map((ev, i) => (
-                <div key={i} style={{ padding: "6px 0", color: "var(--text-2)", borderBottom: i < events.length - 1 ? "1px dashed var(--border)" : "none" }}>
-                  <i className="fa-solid fa-circle-notch fa-spin" style={{ fontSize: "0.7em", marginRight: 8, color: "var(--brand)" }} />
-                  {ev.message}
-                </div>
-              ))}
+              {renderProgressBar(checkProgress, isError)}
+              {renderSteps(checkSteps, checkStepStatus, lastEvent?.message)}
+              {renderLog(events)}
+            </div>
+          ) : applying ? (
+            <div>
+              {renderProgressBar(applyProgress, isError)}
+              {renderSteps(applySteps, applyStepStatus, applyEvts[applyEvts.length - 1]?.message)}
+              {renderLog(events)}
             </div>
           ) : report ? (
             <div>
+              {wasApplied && (
+                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", borderRadius: 6, marginBottom: 16 }}>
+                  <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1rem" }} />
+                  <span style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Changes applied successfully — local files are now up to date.</span>
+                </div>
+              )}
               {report.products?.added?.length > 0 && (
                 <div style={{ marginBottom: 14 }}>
-                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8 }}>
-                    ✨ Added Products ({report.products.added.length})
-                  </div>
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8 }}>✨ Added Products ({report.products.added.length})</div>
                   {report.products.added.slice(0, 5).map((item, i) => (
-                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
-                      • {item.item.name}
-                    </div>
+                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>• {item.item.name}</div>
                   ))}
                   {report.products.added.length > 5 && <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-3)" }}>... and {report.products.added.length - 5} more</div>}
                 </div>
               )}
-
               {report.products?.updated?.length > 0 && (
                 <div style={{ marginBottom: 14 }}>
-                  <div style={{ fontWeight: 600, color: "var(--warning, #b8860b)", marginBottom: 8 }}>
-                    🔄 Updated Products ({report.products.updated.length})
-                  </div>
+                  <div style={{ fontWeight: 600, color: "var(--warning,#b8860b)", marginBottom: 8 }}>🔄 Updated Products ({report.products.updated.length})</div>
                   {report.products.updated.slice(0, 5).map((item, i) => (
                     <div key={i} style={{ padding: "8px 12px", backgroundColor: "var(--surface-3)", borderRadius: 4, marginBottom: 6 }}>
-                      <div style={{ fontWeight: 500, marginBottom: 6, color: "var(--text)" }}>
-                        {item.item.name}
-                      </div>
-                      {item.diff && Object.keys(item.diff).length > 0 ? (
-                        <div>
-                          {Object.keys(item.diff).map(field => (
-                            <DiffRow key={field} field={field} diff={item.diff} />
-                          ))}
-                        </div>
-                      ) : (
-                        <div style={{ color: "var(--text-3)", fontSize: "0.75rem" }}>No visible differences</div>
-                      )}
+                      <div style={{ fontWeight: 500, marginBottom: 6, color: "var(--text)" }}>{item.item.name}</div>
+                      {item.diff && Object.keys(item.diff).length > 0
+                        ? Object.keys(item.diff).map(field => <DiffRow key={field} field={field} diff={item.diff} />)
+                        : <div style={{ color: "var(--text-3)", fontSize: "0.75rem" }}>No visible differences</div>}
                     </div>
                   ))}
                   {report.products.updated.length > 5 && <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-3)" }}>... and {report.products.updated.length - 5} more</div>}
                 </div>
               )}
-
               {report.products?.deleted?.length > 0 && (
                 <div style={{ marginBottom: 14 }}>
-                  <div style={{ fontWeight: 600, color: "var(--error, #e74c3c)", marginBottom: 8 }}>
-                    🗑️ Deleted from Supabase ({report.products.deleted.length}) — Will be removed
-                  </div>
+                  <div style={{ fontWeight: 600, color: "var(--error,#e74c3c)", marginBottom: 8 }}>🗑️ Deleted from Supabase ({report.products.deleted.length}) — Will be removed</div>
                   {report.products.deleted.slice(0, 5).map((item, i) => (
-                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>
-                      • {item.item.name}
-                    </div>
+                    <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>• {item.item.name}</div>
                   ))}
                   {report.products.deleted.length > 5 && <div style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-3)" }}>... and {report.products.deleted.length - 5} more</div>}
                 </div>
               )}
-
               {(report.categories?.added?.length > 0 || report.categories?.updated?.length > 0) && (
                 <div style={{ marginBottom: 14, paddingTop: 8, borderTop: "1px dashed var(--border)" }}>
-                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8, fontSize: "0.9rem" }}>
-                    📁 Categories
-                  </div>
+                  <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8, fontSize: "0.9rem" }}>📁 Categories</div>
                   {report.categories?.added?.length > 0 && (
                     <div style={{ marginBottom: 8 }}>
                       <div style={{ fontSize: "0.8rem", color: "var(--brand)", marginBottom: 4 }}>✨ Added ({report.categories.added.length})</div>
@@ -3433,27 +3575,20 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
                   )}
                   {report.categories?.updated?.length > 0 && (
                     <div>
-                      <div style={{ fontSize: "0.8rem", color: "var(--warning, #b8860b)", marginBottom: 4 }}>🔄 Updated ({report.categories.updated.length})</div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--warning,#b8860b)", marginBottom: 4 }}>🔄 Updated ({report.categories.updated.length})</div>
                       {report.categories.updated.slice(0, 5).map((item, i) => (
                         <div key={i} style={{ padding: "6px 12px", backgroundColor: "var(--surface-3)", borderRadius: 4, marginBottom: 4, fontSize: "0.8rem" }}>
                           <div style={{ fontWeight: 500, marginBottom: 4 }}>{item.item.name}</div>
-                          {item.diff && Object.keys(item.diff).length > 0 ? (
-                            <div>
-                              {Object.keys(item.diff).slice(0, 3).map(field => (
-                                <div key={field} style={{ fontSize: "0.75rem", color: "var(--text-3)" }}>Changed: {field}</div>
-                              ))}
-                              {Object.keys(item.diff).length > 3 && <div style={{ fontSize: "0.75rem", color: "var(--text-3)" }}>... and {Object.keys(item.diff).length - 3} more</div>}
-                            </div>
-                          ) : (
-                            <div style={{ fontSize: "0.75rem", color: "var(--text-3)", fontStyle: "italic" }}>Minor metadata changes</div>
-                          )}
+                          {item.diff && Object.keys(item.diff).length > 0
+                            ? Object.keys(item.diff).slice(0, 3).map(field => <div key={field} style={{ fontSize: "0.75rem", color: "var(--text-3)" }}>Changed: {field}</div>)
+                            : <div style={{ fontSize: "0.75rem", color: "var(--text-3)", fontStyle: "italic" }}>Minor metadata changes</div>}
+                          {item.diff && Object.keys(item.diff).length > 3 && <div style={{ fontSize: "0.75rem", color: "var(--text-3)" }}>... and {Object.keys(item.diff).length - 3} more</div>}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
               )}
-
               {(report.tags?.added?.length > 0 || report.tags?.updated?.length > 0) && (
                 <div style={{ marginBottom: 14 }}>
                   <div style={{ fontWeight: 600, color: "var(--brand)", marginBottom: 8, fontSize: "0.9rem" }}>
@@ -3462,28 +3597,21 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
                   {report.tags?.added?.length > 0 && (
                     <div style={{ marginBottom: 8 }}>
                       <div style={{ fontSize: "0.8rem", color: "var(--brand)", marginBottom: 4 }}>✨ Added ({report.tags.added.length})</div>
-                      <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>
-                        {report.tags.added.map(t => t.item.name).join(", ")}
-                      </div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>{report.tags.added.map(t => t.item.name).join(", ")}</div>
                     </div>
                   )}
                   {report.tags?.updated?.length > 0 && (
                     <div>
-                      <div style={{ fontSize: "0.8rem", color: "var(--warning, #b8860b)", marginBottom: 4 }}>
+                      <div style={{ fontSize: "0.8rem", color: "var(--warning,#b8860b)", marginBottom: 4 }}>
                         🔄 Updated ({report.tags.updated.length}) — {report.tags.updated.every(t => !t.diff || Object.keys(t.diff).length === 0) ? "metadata only" : "has meaningful changes"}
                       </div>
-                      <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>
-                        {report.tags.updated.map(t => t.item.name).join(", ")}
-                      </div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>{report.tags.updated.map(t => t.item.name).join(", ")}</div>
                     </div>
                   )}
                 </div>
               )}
-
               {!hasChanges && (
-                <div style={{ padding: "12px", textAlign: "center", color: "var(--text-3)", fontStyle: "italic" }}>
-                  ✓ All local files match Supabase perfectly!
-                </div>
+                <div style={{ padding: "12px", textAlign: "center", color: "var(--text-3)", fontStyle: "italic" }}>✓ All local files match Supabase perfectly!</div>
               )}
             </div>
           ) : (
@@ -3491,102 +3619,19 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
           )}
         </div>
 
-        {applying && (
-          <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-3)" }}>
-            <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginBottom: 8 }}>Progress</div>
-            <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
-              {phases.map((phase, idx) => (
-                <div key={phase} style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                  <div
-                    style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: "50%",
-                      background: currentPhaseIndex >= idx ? "var(--brand)" : "var(--surface-2)",
-                      border: `1px solid ${currentPhaseIndex >= idx ? "var(--brand)" : "var(--border)"}`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "0.7rem",
-                      color: currentPhaseIndex >= idx ? "#fff" : "var(--text-3)",
-                      animation: currentPhaseIndex === idx ? "pulse 1s ease-in-out infinite" : "none",
-                    }}
-                  >
-                    <i className={`fa-solid ${getPhaseIcon(phase)}`} />
-                  </div>
-                  {idx < phases.length - 1 && (
-                    <div
-                      style={{
-                        width: 20,
-                        height: 2,
-                        background: currentPhaseIndex > idx ? "var(--brand)" : "var(--border)",
-                        margin: "0 -2px",
-                      }}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-            <div style={{ fontSize: "0.8rem", color: "var(--text-2)", lineHeight: 1.5, maxHeight: 150, overflow: "auto" }}>
-              {events.slice(-3).map((ev, i) => (
-                <div key={i} style={{ padding: "4px 0", borderBottom: i < 2 ? "1px dashed var(--border)" : "none" }}>
-                  <span style={{ color: "var(--brand)", fontWeight: 500 }}>{ev.phase}</span>: {ev.message}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
+        {/* Footer */}
         <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-2)", display: "flex", justifyContent: "flex-end", gap: 8 }}>
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={applying}
-            style={{
-              padding: "7px 16px",
-              background: "var(--surface-3)",
-              color: "var(--text)",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--r)",
-              cursor: applying ? "not-allowed" : "pointer",
-              fontSize: "0.85rem",
-              fontWeight: 500,
-              opacity: applying ? 0.6 : 1,
-            }}
+          <button type="button" onClick={onClose} disabled={applying}
+            style={{ padding: "7px 16px", background: "var(--surface-3)", color: "var(--text)", border: "1px solid var(--border)", borderRadius: "var(--r)", cursor: applying ? "not-allowed" : "pointer", fontSize: "0.85rem", fontWeight: 500, opacity: applying ? 0.6 : 1 }}
           >
             Close
           </button>
-          {hasChanges && (
-            <button
-              type="button"
-              onClick={onApply}
-              disabled={applying || !hasChanges}
-              style={{
-                padding: "7px 16px",
-                background: "var(--brand)",
-                color: "#fff",
-                border: "1px solid var(--brand)",
-                borderRadius: "var(--r)",
-                cursor: applying ? "not-allowed" : "pointer",
-                fontSize: "0.85rem",
-                fontWeight: 500,
-                opacity: applying ? 0.6 : 1,
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-              }}
+          {hasChanges && !loading && !applying && !wasApplied && (
+            <button type="button" onClick={onApply}
+              style={{ padding: "7px 16px", background: "var(--brand)", color: "#fff", border: "1px solid var(--brand)", borderRadius: "var(--r)", cursor: "pointer", fontSize: "0.85rem", fontWeight: 500, display: "flex", alignItems: "center", gap: 6 }}
             >
-              {applying ? (
-                <>
-                  <i className="fa-solid fa-circle-notch fa-spin" style={{ fontSize: "0.85em" }} />
-                  Applying...
-                </>
-              ) : (
-                <>
-                  <i className="fa-solid fa-check" style={{ fontSize: "0.85em" }} />
-                  Apply Changes
-                </>
-              )}
+              <i className="fa-solid fa-check" style={{ fontSize: "0.85em" }} />
+              Apply Changes
             </button>
           )}
         </div>
