@@ -3,72 +3,54 @@
     "id": "6ea06d7d-1efd-44db-99c0-9338e556b432",
     "name": "Wall-Mounted",
     "slug": "wall-mounted",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-13T02:38:45.130164+00:00"
+    "description": null
   },
   {
     "id": "587ecc75-93cb-4b7e-9dc8-61ccde45a0df",
     "name": "Stone",
     "slug": "stone",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-13T05:13:59.163663+00:00"
+    "description": null
   },
   {
     "id": "f12ea757-1f92-4a8f-ad8c-9412fcbc3ca8",
     "name": "Sauna Controls",
     "slug": "sauna-controls",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-13T06:52:50.182396+00:00"
+    "description": null
   },
   {
     "id": "2cff2582-ce16-4dcf-ac8b-14db5392c6c0",
     "name": "Spare Parts",
     "slug": "spare-parts",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-14T09:04:06.716543+00:00"
+    "description": null
   },
   {
     "id": "1eb3d212-8a59-45a6-b773-416718ec3604",
     "name": "Floor",
     "slug": "floor",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-16T05:55:14.384883+00:00"
+    "description": null
   },
   {
     "id": "2b4adb69-d1eb-4c2d-af66-c0b9333fbdd7",
     "name": "Tower",
     "slug": "tower",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-20T07:08:05.317954+00:00"
+    "description": null
   },
   {
     "id": "066b0001-0c91-4178-b192-6946d022f699",
     "name": "Towe",
     "slug": "towe",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-20T08:32:21.55353+00:00"
+    "description": null
   },
   {
     "id": "b84fbf18-c89f-468c-aa4d-8dac73b1bca1",
     "name": "Combi",
     "slug": "combi",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-21T03:04:47.437772+00:00"
+    "description": null
   },
   {
     "id": "5e283f01-95fd-44b2-b316-a3507ed1dc2f",
     "name": "Dragonfire",
     "slug": "dragonfire",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-21T03:14:15.746352+00:00"
+    "description": null
   }
 ]
