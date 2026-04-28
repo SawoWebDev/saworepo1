@@ -224,11 +224,11 @@ async function downloadImage(url, outputPath) {
   }
 }
 
-async function processImageField(value, bucket, stats) {
+async function processImageField(value, bucket, stats, imagesDir = IMAGES_DIR) {
   if (!value) return value;
   if (Array.isArray(value)) {
     const results = [];
-    for (const item of value) results.push(await processImageField(item, bucket, stats));
+    for (const item of value) results.push(await processImageField(item, bucket, stats, imagesDir));
     return results;
   }
   if (!value.includes("http") && !value.includes("://")) return value;
@@ -237,20 +237,20 @@ async function processImageField(value, bucket, stats) {
   const downloadUrl = value.includes(SUPABASE_URL)
     ? value
     : `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
-  const outputPath = path.join(IMAGES_DIR, filename);
+  const outputPath = path.join(imagesDir, filename);
   const ok = await downloadImage(downloadUrl, outputPath);
   if (ok) { stats.images++; return `images/${filename}`; }
   return value;
 }
 
-async function processFiles(filesArray, stats) {
+async function processFiles(filesArray, stats, filesDir = FILES_DIR) {
   if (!filesArray || !Array.isArray(filesArray)) return filesArray;
   const out = [];
   for (const f of filesArray) {
     if (typeof f === "object" && f.path) {
       const filename = path.basename(f.path);
       const url = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${f.path}`;
-      const ok = await downloadImage(url, path.join(FILES_DIR, filename));
+      const ok = await downloadImage(url, path.join(filesDir, filename));
       if (ok) { stats.files++; out.push({ ...f, path: `files/${filename}` }); }
       else out.push(f);
     } else out.push(f);
@@ -310,7 +310,7 @@ function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
 }
 
 // ── Update local files from frontend changes ─────────────────────────────────
-// Receives updated products, categories, tags and commits them to GitHub
+// Receives updated products, categories, tags, downloads images, and commits to GitHub
 export async function updateLocalFiles(products, categories, tags, emit = () => {}) {
   const timestamp = new Date().toISOString();
   const workDir = path.join("/tmp", "sawo-update-" + Date.now());
@@ -320,12 +320,16 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
 
     if (!GITHUB_PAT) throw new Error("GITHUB_PAT environment variable is not set");
 
-    // Clone repos
+    // Clone both repos
     emit({ phase: "clone", message: "Cloning repositories from GitHub..." });
     if (!fs.existsSync(workDir)) fs.mkdirSync(workDir, { recursive: true });
 
     const gitUrl1 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`;
+    const gitUrl2 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git`;
     const saworepo1Dir = path.join(workDir, GITHUB_MAIN_REPO);
+    const saworepo2Dir = path.join(workDir, GITHUB_IMAGES_REPO);
+    const imagesDir = path.join(saworepo2Dir, "images");
+    const filesDir = path.join(saworepo2Dir, "files");
 
     try {
       execSync(`git clone ${gitUrl1} "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
@@ -337,7 +341,37 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
       fs.mkdirSync(saworepo1Dir, { recursive: true });
     }
 
+    try {
+      execSync(`git clone ${gitUrl2} "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      console.log(`✅ Cloned ${GITHUB_IMAGES_REPO}`);
+      emit({ phase: "clone", message: `Cloned ${GITHUB_IMAGES_REPO}` });
+    } catch (e) {
+      console.error(`❌ Clone failed for ${GITHUB_IMAGES_REPO}:`, e.message);
+      emit({ phase: "clone", message: `⚠️  Clone failed for images repo: ${e.message}`, warning: true });
+      fs.mkdirSync(imagesDir, { recursive: true });
+      fs.mkdirSync(filesDir, { recursive: true });
+    }
+
     configureGit(saworepo1Dir);
+    configureGit(saworepo2Dir);
+
+    // Download images for any products that still have Supabase URLs
+    const stats = { images: 0, files: 0 };
+    emit({ phase: "write", message: `Downloading images for ${products.length} products...` });
+
+    const processedProducts = [];
+    for (let i = 0; i < products.length; i++) {
+      const p = { ...products[i] };
+      if (p.thumbnail) p.thumbnail = await processImageField(p.thumbnail, "product-images", stats, imagesDir);
+      if (Array.isArray(p.images)) p.images = await processImageField(p.images, "product-images", stats, imagesDir);
+      if (Array.isArray(p.spec_images)) p.spec_images = await processImageField(p.spec_images, "product-images", stats, imagesDir);
+      if (Array.isArray(p.files)) p.files = await processFiles(p.files, stats, filesDir);
+      processedProducts.push(p);
+      if ((i + 1) % 20 === 0 || i === products.length - 1) {
+        emit({ phase: "write", message: `Processed ${i + 1}/${products.length} products (${stats.images} images downloaded)` });
+      }
+    }
+    emit({ phase: "write", message: `Images done: ${stats.images} downloaded, ${stats.files} files` });
 
     // Write JSON files to saworepo1
     emit({ phase: "write", message: "Writing JSON files..." });
@@ -346,33 +380,66 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
 
     const meta = {
       last_synced: timestamp,
-      total_products: products.length,
+      total_products: processedProducts.length,
       total_categories: categories.length,
       total_tags: tags.length,
     };
 
-    fs.writeFileSync(path.join(dataDir, "products.json"), JSON.stringify(products, null, 2));
+    fs.writeFileSync(path.join(dataDir, "products.json"), JSON.stringify(processedProducts, null, 2));
     fs.writeFileSync(path.join(dataDir, "categories.json"), JSON.stringify(categories, null, 2));
     fs.writeFileSync(path.join(dataDir, "tags.json"), JSON.stringify(tags, null, 2));
     fs.writeFileSync(path.join(dataDir, "meta.json"), JSON.stringify(meta, null, 2));
     console.log(`✅ Wrote files to ${dataDir}`);
     emit({ phase: "write", message: "JSON files written successfully" });
 
-    // Commit and push
-    emit({ phase: "git", message: "Committing changes..." });
-    const gitResult = commitAndPushRepo(saworepo1Dir, timestamp, {}, GITHUB_PAT);
+    // Mirror products.json to saworepo2
+    fs.writeFileSync(path.join(saworepo2Dir, "products.json"), JSON.stringify(processedProducts, null, 2));
 
-    if (gitResult.nothing) {
-      emit({ phase: "git", message: "No changes to commit" });
-    } else if (gitResult.committed) {
-      emit({ phase: "git", message: `${gitResult.commitMsg}` });
-      if (gitResult.pushed) {
-        emit({ phase: "git", message: "Pushed to GitHub ✓" });
+    // Commit and push saworepo1 (data files)
+    emit({ phase: "git", message: "Committing changes to saworepo1..." });
+    const gitResult1 = commitAndPushRepo(saworepo1Dir, timestamp, stats, GITHUB_PAT);
+
+    if (gitResult1.nothing) {
+      emit({ phase: "git", message: "saworepo1: No changes to commit" });
+    } else if (gitResult1.committed) {
+      emit({ phase: "git", message: `saworepo1: ${gitResult1.commitMsg}` });
+      if (gitResult1.pushed) {
+        emit({ phase: "git", message: "saworepo1: Pushed to GitHub ✓" });
       } else {
-        emit({ phase: "git", message: `❌ Push failed: ${gitResult.pushError}`, warning: true });
+        emit({ phase: "git", message: `saworepo1: ❌ Push failed: ${gitResult1.pushError}`, warning: true });
       }
     } else {
-      emit({ phase: "git", message: `❌ Commit failed: ${gitResult.error}`, warning: true });
+      emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${gitResult1.error}`, warning: true });
+    }
+
+    // Commit and push saworepo2 (images)
+    emit({ phase: "git", message: "Committing changes to saworepo2..." });
+    const gitResult2 = commitAndPushRepo(saworepo2Dir, timestamp, stats, GITHUB_PAT);
+
+    if (gitResult2.nothing) {
+      emit({ phase: "git", message: "saworepo2: No changes to commit" });
+    } else if (gitResult2.committed) {
+      emit({ phase: "git", message: `saworepo2: ${gitResult2.commitMsg}` });
+      if (gitResult2.pushed) {
+        emit({ phase: "git", message: "saworepo2: Pushed to GitHub ✓" });
+      } else {
+        emit({ phase: "git", message: `saworepo2: ❌ Push failed: ${gitResult2.pushError}`, warning: true });
+      }
+    } else {
+      emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${gitResult2.error}`, warning: true });
+    }
+
+    // Auto-pull only when saworepo1 had actual data file changes (products.json / meta.json)
+    if (gitResult1.pushed) {
+      try {
+        emit({ phase: "git", message: "Pulling changes to local development repo..." });
+        const devRepoDir = path.join(__dirname, "../..");
+        execSync("git pull origin HEAD", { cwd: devRepoDir, encoding: "utf-8", stdio: "pipe" });
+        emit({ phase: "git", message: "Pulled latest changes to local repo ✓" });
+      } catch (pullErr) {
+        console.warn("⚠️  Auto-pull failed:", pullErr.message);
+        emit({ phase: "git", message: `⚠️  Auto-pull failed: ${pullErr.message.split("\n")[0]}`, warning: true });
+      }
     }
 
     // Clean up
@@ -385,12 +452,12 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
     emit({
       phase: "complete",
       success: true,
-      message: "Local files updated and pushed to GitHub",
+      message: `Local files updated — ${stats.images} images downloaded, pushed to GitHub`,
       timestamp,
-      pushed: gitResult.pushed,
+      pushed: gitResult1.pushed || gitResult2.pushed,
     });
 
-    return { success: true, timestamp, pushed: gitResult.pushed };
+    return { success: true, timestamp, pushed: gitResult1.pushed || gitResult2.pushed };
   } catch (err) {
     console.error("❌ Update failed:", err);
     emit({ phase: "error", success: false, message: err.message });
