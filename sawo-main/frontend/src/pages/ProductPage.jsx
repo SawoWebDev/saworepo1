@@ -7,10 +7,36 @@
 // - Related Products: removed short_description
 // - Section 2 no longer shows spec images (they're now in Section 1)
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { supabase } from "../Administrator/supabase";
+import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../components/ImageWithLoader";
+
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function localOrRemote(product, field) {
+  return product?.[`local_${field}`] || product?.[field] || null;
+}
+function resolveUrl(pathOrUrl) {
+  if (!pathOrUrl) return null;
+  if (String(pathOrUrl).includes("://")) return pathOrUrl;
+  return `${GITHUB_RAW}${pathOrUrl}`;
+}
+function getImageUrl(product, field) {
+  return resolveUrl(localOrRemote(product, field));
+}
+function getImagesArray(product, field) {
+  const local = product?.[`local_${field}`];
+  const remote = product?.[field];
+  const arr = (local?.length ? local : remote) || [];
+  return arr.map(resolveUrl).filter(Boolean);
+}
+function getFilesArray(product) {
+  const local = product?.local_files;
+  const remote = product?.files;
+  if (local?.length) return local.map(f => ({ name: f.name, url: resolveUrl(f.path || f.url) }));
+  return (remote || []).map(f => ({ name: f.name, url: f.url }));
+}
 
 /* ── Lightbox ─────────────────────────────────────────────────────── */
 function Lightbox({ images, startIndex, onClose }) {
@@ -501,27 +527,18 @@ function Divider() {
 }
 
 /* ── Related Products ─────────────────────────────────────────────── */
-function RelatedProducts({ currentSlug, categories }) {
-  const [related, setRelated] = useState([]);
-
-  useEffect(() => {
-    if (!categories?.length) return;
-    let cancelled = false;
-    (async () => {
-      try {
-        const { data } = await supabase
-          .from("products")
-          .select("id,name,slug,thumbnail,categories")
-          .eq("status", "published")
-          .eq("visible", true)
-          .neq("slug", currentSlug)
-          .contains("categories", categories.slice(0, 1))
-          .limit(4);
-        if (!cancelled && data) setRelated(data);
-      } catch {}
-    })();
-    return () => { cancelled = true; };
-  }, [currentSlug, categories]);
+function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
+  const related = useMemo(() => {
+    if (!categories?.length || !allProducts.length) return [];
+    const cats = categories.slice(0, 1).map(c => c.toLowerCase());
+    return allProducts
+      .filter(p =>
+        p.status === "published" && p.visible !== false &&
+        p.slug !== currentSlug &&
+        (p.categories || []).some(c => cats.includes(c.toLowerCase()))
+      )
+      .slice(0, 4);
+  }, [currentSlug, categories, allProducts]);
 
   if (!related.length) return null;
 
@@ -580,9 +597,9 @@ function RelatedProducts({ currentSlug, categories }) {
                   padding: 12,
                   borderRadius: 8,
                 }}>
-                  {p.thumbnail ? (
+                  {getImageUrl(p, 'thumbnail') ? (
                     <ImageWithLoader
-                      src={p.thumbnail}
+                      src={getImageUrl(p, 'thumbnail')}
                       alt={p.name}
                       style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
                     />
@@ -652,45 +669,20 @@ function cleanHTMLStyles(html) {
 /* ── Main ─────────────────────────────────────────────────────────── */
 export default function ProductPage() {
   const { slug } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState(null);
   const [lightbox, setLightbox] = useState(null);
+  const { products: localProds, loading } = useLocalProducts();
+
+  const product = useMemo(() => {
+    if (!localProds.length) return null;
+    return localProds.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
+  }, [localProds, slug]);
+
+  const error = !loading && !product ? "Product not found." : null;
 
   const openLightbox = (images, index) => setLightbox({ images, index });
   const closeLightbox = () => setLightbox(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    setProduct(null);
-
-    (async () => {
-      try {
-        const { data, error: err } = await supabase
-          .from("products")
-          .select("*")
-          .eq("slug", slug)
-          .eq("status", "published")
-          .eq("visible", true)
-          .single();
-
-        if (err || !data) {
-          if (!cancelled) setError("Product not found.");
-        } else {
-          if (!cancelled) setProduct(data);
-        }
-      } catch {
-        if (!cancelled) setError("Connection error. Please try again.");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-
-    return () => { cancelled = true; };
-  }, [slug]);
+  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
   if (loading) return (
     <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 80 }}>
@@ -726,11 +718,14 @@ export default function ProductPage() {
     </div>
   );
 
-  const files        = product.files || [];
+  const files        = getFilesArray(product);
+  const images       = getImagesArray(product, 'images');
+  const thumbnail    = getImageUrl(product, 'thumbnail');
+  const specImages   = getImagesArray(product, 'spec_images');
   const hasShortDesc = !!product.short_description;
   const hasDesc      = !!product.description;
   const hasFeatures  = (product.features || []).length > 0;
-  const hasSpec      = (product.spec_images || []).length > 0;
+  const hasSpec      = specImages.length > 0;
   const hasSpecTable = product.spec_table?.headers?.length > 0;
   const hasResources = files.length > 0;
   const hasSection2  = hasDesc || hasSpecTable;
@@ -825,8 +820,8 @@ export default function ProductPage() {
             {/* LEFT: Carousel + Resources (only if Diagram exists) */}
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
               <Carousel
-                images={product.images}
-                thumbnail={product.thumbnail}
+                images={images}
+                thumbnail={thumbnail}
                 onImageClick={openLightbox}
               />
               {/* Resources — below images (only show on left if Diagram exists) */}
@@ -898,7 +893,7 @@ export default function ProductPage() {
               {hasSpec && (
                 <div>
                   <SectionLabel text="Diagram" />
-                  <CompactSpecImages images={product.spec_images} onImageClick={openLightbox} />
+                  <CompactSpecImages images={specImages} onImageClick={openLightbox} />
                 </div>
               )}
 
@@ -973,7 +968,7 @@ export default function ProductPage() {
         )}
 
         {/* ── SECTION 3: Related Products ───────────────────────────── */}
-        <RelatedProducts currentSlug={slug} categories={product.categories} />
+        <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={localProds} />
 
       </div>
     </>
