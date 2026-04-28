@@ -5,9 +5,7 @@ import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, bustProductCache } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
-import { syncSupabaseToLocal } from "./Local/syncWithMerge";
 import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
-import { InstructionsModal } from "./Local/InstructionsModal";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -1686,12 +1684,6 @@ export default function Products({ currentUser }) {
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
   const [revisions, setRevisions] = useState([]);
-  const [instructionsOpen, setInstructionsOpen] = useState(false);
-
-  const [syncing, setSyncing] = useState(false);
-  const [syncStatus, setSyncStatus] = useState(null);
-  const [syncEvents, setSyncEvents] = useState([]);
-
   const [checkSyncOpen, setCheckSyncOpen] = useState(false);
   const [syncCheckLoading, setSyncCheckLoading] = useState(false);
   const [syncCheckReport, setSyncCheckReport] = useState(null);
@@ -1955,31 +1947,6 @@ export default function Products({ currentUser }) {
   };
 
   // ── Sync from Supabase ─────────────────────────────────────────────────────
-  const handleSync = async () => {
-    setSyncing(true);
-    setSyncStatus(null);
-    setSyncEvents([{ phase: "start", message: "Starting sync..." }]);
-    try {
-      const result = await syncSupabaseToLocal((event) => {
-        setSyncEvents(prev => [...prev, event]);
-      });
-      setSyncStatus(result);
-      if (result.success) {
-        add(result.message || "Sync complete", "success");
-        setTimeout(() => fetchProducts(), 800);
-      } else {
-        add(result.message || "Sync failed", "error");
-      }
-    } catch (err) {
-      const errorMsg = `Sync failed: ${err.message}`;
-      setSyncStatus({ success: false, message: errorMsg });
-      setSyncEvents(prev => [...prev, { phase: "error", message: errorMsg }]);
-      add(errorMsg, "error");
-    } finally {
-      setSyncing(false);
-    }
-  };
-
   const handleCheckSync = async () => {
     setSyncCheckLoading(true);
     setSyncCheckReport(null);
@@ -2261,38 +2228,11 @@ export default function Products({ currentUser }) {
               ))}
             </div>
             {dataSource === "local" && (
-              <>
-              <button
-                type="button"
-                onClick={handleSync}
-                disabled={syncing}
-                title="Sync new products from cloud (only adds new items)"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "8px 12px",
-                  fontSize: "0.85rem",
-                  fontWeight: 500,
-                  border: "1px solid var(--border)",
-                  background: "var(--surface)",
-                  color: syncing ? "var(--text-3)" : "var(--text)",
-                  cursor: syncing ? "not-allowed" : "pointer",
-                  borderRadius: 4,
-                  transition: "all 0.2s ease",
-                  opacity: syncing ? 0.6 : 1,
-                }}
-                onMouseEnter={e => { if (!syncing) e.target.style.background = "var(--surface-2)"; }}
-                onMouseLeave={e => { e.target.style.background = "var(--surface)"; }}
-              >
-                <i className={`fa-solid ${syncing ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
-                {syncing ? "Syncing..." : "Sync"}
-              </button>
               <button
                 type="button"
                 onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
                 disabled={syncCheckLoading}
-                title="Check if local files match Supabase (added/updated/deleted items)"
+                title="Syncs products from Supabase to local — compares added, updated, and deleted items, then lets you apply the changes"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -2308,38 +2248,12 @@ export default function Products({ currentUser }) {
                   transition: "all 0.2s ease",
                   opacity: syncCheckLoading ? 0.6 : 1,
                 }}
-                onMouseEnter={e => { if (!syncCheckLoading) e.target.style.background = "var(--surface-2)"; }}
-                onMouseLeave={e => { e.target.style.background = "var(--surface)"; }}
+                onMouseEnter={e => { if (!syncCheckLoading) e.currentTarget.style.background = "var(--surface-2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; }}
               >
-                <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-check-double"}`} style={{ fontSize: "0.85em" }} />
-                {syncCheckLoading ? "Checking..." : "Check Sync"}
+                <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
+                {syncCheckLoading ? "Syncing..." : "Sync"}
               </button>
-              <button
-                type="button"
-                onClick={() => setInstructionsOpen(true)}
-                title="Sync help — backend running on cloud, pull new products to local storage"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "32px",
-                  height: "32px",
-                  padding: 0,
-                  border: "1px solid var(--border)",
-                  background: "var(--surface)",
-                  color: "var(--text)",
-                  cursor: "pointer",
-                  borderRadius: 4,
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = "var(--surface-2)"; e.currentTarget.style.borderColor = "var(--brand)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; e.currentTarget.style.borderColor = "var(--border)"; }}
-              >
-                ?
-              </button>
-              </>
             )}
             <p className="products-subtitle" style={{ margin: 0 }}>
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
@@ -2891,141 +2805,6 @@ export default function Products({ currentUser }) {
         applying={syncCheckApplying}
       />
 
-      <InstructionsModal open={instructionsOpen} onClose={() => setInstructionsOpen(false)} />
-      <SyncProgressOverlay
-        open={syncing || (syncEvents.length > 0 && syncStatus != null)}
-        events={syncEvents}
-        syncing={syncing}
-        status={syncStatus}
-        onClose={() => { setSyncEvents([]); setSyncStatus(null); }}
-      />
-    </div>
-  );
-}
-
-function SyncProgressOverlay({ open, events, syncing, status, onClose }) {
-  if (!open) return null;
-
-  const phaseIcon = (phase) => {
-    if (phase === "fetch") return "🌐";
-    if (phase === "images") return "🖼️";
-    if (phase === "write") return "💾";
-    if (phase === "git") return "📤";
-    if (phase === "complete") return "✅";
-    if (phase === "error") return "❌";
-    return "•";
-  };
-
-  const phaseLabel = (phase) => {
-    const map = {
-      start: "Starting",
-      fetch: "Supabase",
-      images: "Downloading",
-      write: "Saving local",
-      git: "Git commit & push",
-      complete: "Complete",
-      error: "Error",
-    };
-    return map[phase] || phase;
-  };
-
-  const lastEvent = events[events.length - 1];
-
-  return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.6)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 10001,
-      }}
-    >
-      <div
-        style={{
-          background: "var(--surface)",
-          borderRadius: "var(--r)",
-          boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
-          maxWidth: "560px",
-          width: "92%",
-          maxHeight: "80vh",
-          display: "flex",
-          flexDirection: "column",
-          border: "1px solid var(--border)",
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ padding: "16px 20px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ fontSize: "1.3rem" }}>
-              {syncing ? <i className="fa-solid fa-arrows-rotate fa-spin" style={{ color: "var(--brand)" }} /> : (status?.success ? "✅" : "❌")}
-            </div>
-            <div>
-              <div style={{ fontWeight: 600, fontSize: "1rem" }}>
-                {syncing ? "Syncing…" : (status?.success ? "Sync complete" : "Sync failed")}
-              </div>
-              <div style={{ fontSize: "0.8rem", color: "var(--text-3)", marginTop: 2 }}>
-                {syncing ? phaseLabel(lastEvent?.phase) : (status?.message || "")}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            padding: "14px 20px",
-            overflow: "auto",
-            flex: 1,
-            fontSize: "0.85rem",
-            fontFamily: "monospace",
-            lineHeight: 1.7,
-          }}
-        >
-          {events.map((ev, i) => (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                gap: 8,
-                padding: "4px 0",
-                color: ev.phase === "error" ? "var(--error, #e74c3c)" : ev.warning ? "var(--warning, #b8860b)" : "var(--text-2)",
-                borderBottom: i < events.length - 1 ? "1px dashed var(--border)" : "none",
-              }}
-            >
-              <span style={{ width: 20, flexShrink: 0 }}>{phaseIcon(ev.phase)}</span>
-              <span style={{ flex: 1, wordBreak: "break-word" }}>{ev.message}</span>
-            </div>
-          ))}
-          {syncing && (
-            <div style={{ color: "var(--text-3)", fontStyle: "italic", marginTop: 6 }}>
-              Working…
-            </div>
-          )}
-        </div>
-
-        {!syncing && (
-          <div style={{ padding: "12px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-2)", display: "flex", justifyContent: "flex-end" }}>
-            <button
-              type="button"
-              onClick={onClose}
-              style={{
-                padding: "7px 16px",
-                background: status?.success ? "var(--brand)" : "var(--surface-3)",
-                color: status?.success ? "#fff" : "var(--text)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--r)",
-                cursor: "pointer",
-                fontSize: "0.85rem",
-                fontWeight: 500,
-              }}
-            >
-              Close
-            </button>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
