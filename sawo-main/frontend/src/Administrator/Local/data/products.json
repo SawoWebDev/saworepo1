@@ -1,5 +1,42 @@
 [
   {
+    "id": "b86ab2e5-f4da-4a7a-a435-7f5b607b883b",
+    "name": "SAWOENSS",
+    "slug": "sawoens",
+    "short_description": "nEW",
+    "description": null,
+    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1777352137805_qs5zy0mydcs.webp",
+    "images": [
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1777352293047_dd1098n1mht.webp"
+    ],
+    "spec_images": [
+      "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1777352319069_7h5h5gfxv88.webp"
+    ],
+    "categories": [
+      "Dragonfire"
+    ],
+    "tags": [
+      "(INC-B)"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": "Aries Round",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-04-28T04:55:07.873567+00:00",
+    "updated_at": "2026-04-28T04:58:41.937+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false
+  },
+  {
     "id": "f1471432-ae53-442b-8f8f-c6c78aa13691",
     "name": "Minidragon Black NB",
     "slug": "minidragon-black-nb",
@@ -8453,35 +8490,6 @@
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
-  },
-  {
-    "id": "b86ab2e5-f4da-4a7a-a435-7f5b607b883b",
-    "name": "SAWOENS",
-    "slug": "sawoens",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/1777352137805_qs5zy0mydcs.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-28T04:55:07.873567+00:00",
-    "updated_at": "2026-04-28T04:55:44.219+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
     "is_deleted": false
   }
 ]
