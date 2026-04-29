@@ -1,38 +1,35 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import "./SaunaRooms.css";
+import { useLocalSaunaRooms } from "../../Administrator/Local/useLocalSaunaRooms";
+
+// ── IMAGE HELPERS ─────────────────────────────────────────────────────────────
+
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function resolveUrl(p) {
+  if (!p) return null;
+  if (String(p).includes("://")) return p;
+  return `${GITHUB_RAW}${p}`;
+}
+
+const SLUG_PREFIXES = [
+  { prefix: "standard-sauna-room-",    type: "standard"   },
+  { prefix: "glass-front-sauna-room-", type: "glassfront" },
+  { prefix: "infrared-sauna-room-",    type: "infrared"   },
+];
+
+function getRoomTypeAndModelKey(slug) {
+  for (const { prefix, type } of SLUG_PREFIXES) {
+    if (slug.startsWith(prefix)) {
+      return { type, modelKey: slug.slice(prefix.length).toUpperCase() };
+    }
+  }
+  return null;
+}
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
-const standardImageData = {
-  1214: { RS: { bench: "RS1214", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1214RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1214", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1214LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1215: { RS: { bench: "RS1215", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1215RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1215", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1215LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1414: { RS: { bench: "RS1414", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1414RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1414", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1414LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1415: { RS: { bench: "RS1415", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1415RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1415", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1415LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1515: { RS: { bench: "RS1515", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1515RS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1515L": { RL: { bench: "RL1515", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1515RL_PERSPECTIVE-VIEW.webp"] }, LL: { bench: "LL1515", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1515LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1419: { RS: { bench: "RS1419", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1419RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1419", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1419LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1420: { RS: { bench: "RS1420", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1420RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1420", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1420LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1519: { RS: { bench: "RS1519", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1519RS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1519L": { RL: { bench: "RL1519", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1519RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL1519", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1519LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1520: { RS: { bench: "RS1520", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1520RS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1520L": { RL: { bench: "RL1520", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1520RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL1520", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1520LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1522: { RS: { bench: "RS1522", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1522RS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1522L": { RL: { bench: "RL1522", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1522RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL1522", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1522LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1919: { RS: { bench: "RS1919", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1919RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1919", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1919LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1919L": { RL: { bench: "RL1919", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1919RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL1919", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1919LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  1920: { RS: { bench: "RS1920", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1920RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS1920", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1920LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1920L": { RL: { bench: "RL1920", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1920RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL1920", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1920LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1922L": { RL: { bench: "RL1922", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1922RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL1922", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1922LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1922MS": { MS: { bench: "MS1922", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1922MS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "1922MD": { MD: { bench: "MD1922", images: ["https://www.sawo.com/wp-content/uploads/2026/02/1922MD_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  2020: { RS: { bench: "RS2020", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2020RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS2020", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2020LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "2020L": { RL: { bench: "RL2020", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2020RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL2020", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2020LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  2022: { RS: { bench: "RS2022", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2022RS_LATEST-NEW-SAUNA-ROOM.webp"] }, LS: { bench: "LS2022", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2022LS_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "2022L": { RL: { bench: "RL2022", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2022RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL2022", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2022LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "2022MD": { MD: { bench: "MD2022", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2022MD_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "2222L": { RL: { bench: "RL2222", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2222RL_LATEST-NEW-SAUNA-ROOM.webp"] }, LL: { bench: "LL2222", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2222LL_LATEST-NEW-SAUNA-ROOM.webp"] } },
-  "2222MD": { MD: { bench: "MD2222", images: ["https://www.sawo.com/wp-content/uploads/2026/02/2222-MD_LATEST-NEW-SAUNA-ROOM.webp"] } },
-};
+const standardImageData = {};
 
 const standardSizeData = {
   1214: { w: "1.36m", d: "1.16m", h: "2.12m", c: "1-3 People" },
@@ -65,60 +62,7 @@ const standardSizeData = {
   "2222MD": { w: "2.21m", d: "2.21m", h: "2.12m", c: "6+ People" },
 };
 
-const standardBenchTypes = {
-  RS1214: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1214RS.webp" },
-  LS1214: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1214LS.webp" },
-  RS1215: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1215RS.webp" },
-  LS1215: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1215LS.webp" },
-  RS1414: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1414RS.webp" },
-  LS1414: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1414LS.webp" },
-  RS1415: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1415RS.webp" },
-  LS1415: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1415LS.webp" },
-  RS1515: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1515RS.webp" },
-  LS1515: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1515LS.webp" },
-  RL1515: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1515RL.webp" },
-  LL1515: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/03/Standard-Sauna-Room-Horizontal-Panel-1515LL.webp" },
-  RS1419: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1419RS.webp" },
-  LS1419: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1419LS.webp" },
-  RS1420: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1420RS.webp" },
-  LS1420: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1420LS.webp" },
-  RS1519: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519RS.webp" },
-  LS1519: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519LS.webp" },
-  RL1519: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519RL.webp" },
-  LL1519: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519LL.webp" },
-  RS1520: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520RS.webp" },
-  LS1520: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520LS.webp" },
-  RL1520: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520RL.webp" },
-  LL1520: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520LL.webp" },
-  RS1522: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522RS.webp" },
-  LS1522: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522LS.webp" },
-  RL1522: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522RL.webp" },
-  LL1522: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522LL.webp" },
-  RS1919: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919RS.webp" },
-  LS1919: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919LS.webp" },
-  RL1919: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919RL.webp" },
-  LL1919: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919LL.webp" },
-  RS1920: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920RS.webp" },
-  LS1920: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920LS.webp" },
-  RL1920: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920RL.webp" },
-  LL1920: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920LL.webp" },
-  RL1922: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922RL.webp" },
-  LL1922: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922LL.webp" },
-  MS1922: { name: "Single Straight Bench", title: "Standard Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922MS.webp" },
-  MD1922: { name: "Double Straight Bench", title: "Standard Sauna Room", class: "double", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922MD.webp" },
-  RS2020: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020RS.webp" },
-  LS2020: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020LS.webp" },
-  RL2020: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020RL.webp" },
-  LL2020: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020LL.webp" },
-  RS2022: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022RS.webp" },
-  LS2022: { name: "Straight Bench", title: "Standard Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022LS.webp" },
-  RL2022: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022RL.webp" },
-  LL2022: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022LL.webp" },
-  MD2022: { name: "Double Straight Bench", title: "Standard Sauna Room", class: "double", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022MD.webp" },
-  RL2222: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2222RL.webp" },
-  LL2222: { name: "L-Type Bench", title: "Standard Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2222LL.webp" },
-  MD2222: { name: "Double Straight Bench", title: "Standard Sauna Room", class: "double", image: "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2222MD.webp" },
-};
+const standardBenchTypes = {};
 
 const standardSizeCategories = {
   small: ["1214", "1215", "1414", "1415", "1515", "1515L"],
@@ -126,37 +70,7 @@ const standardSizeCategories = {
   large: ["1922L", "1922MS", "1922MD", "2020", "2020L", "2022", "2022L", "2022MD", "2222L", "2222MD"],
 };
 
-const glassFrontImageData = {
-  1414: { RS: { bench: "RS1414", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1414", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1414LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1415: { RS: { bench: "RS1415", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1415", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1415LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1419: { RS: { bench: "RS1419", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1419", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1419LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1419MS": { MS: { bench: "MS1419", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1515: { RS: { bench: "RS1515", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1515", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1515LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1519: { RS: { bench: "RS1519", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1519", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1519LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1519MS": { MS: { bench: "MS1519", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1420: { RS: { bench: "RS1420", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1420", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1420LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1420MS": { MS: { bench: "MS1420", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1520: { RS: { bench: "RS1520", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1520", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1520LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1520MS": { MS: { bench: "MS1520", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1522: { RS: { bench: "RS1522", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1522", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1522LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1522MS": { MS: { bench: "MS1522", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1919: { RS: { bench: "RS1919", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1919", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1919LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1919MS": { MS: { bench: "MS1919", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1919MRL": { MRL: { bench: "MRL1919", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, MIL: { bench: "MIL1919", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1919MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1920: { RS: { bench: "RS1920", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1920", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1920LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1920MS": { MS: { bench: "MS1920", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1920MRL": { MRL: { bench: "MRL1920", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, MIL: { bench: "MIL1920", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1920MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  1922: { RS: { bench: "RS1922", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS1922", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1922LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1922MS": { MS: { bench: "MS1922", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "1922MRL": { MRL: { bench: "MRL1922", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, MIL: { bench: "MIL1922", images: ["https://www.sawo.com/wp-content/uploads/2026/03/1922MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  2020: { RS: { bench: "RS2020", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LS: { bench: "LS2020", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2020LS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "2020MS": { MS: { bench: "MS2020", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "2020MRL": { MRL: { bench: "MRL2020", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, MIL: { bench: "MIL2020", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2020MiL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "2022L": { RL: { bench: "RL2022", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LL: { bench: "LL2022", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2022LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "2022MD": { MD: { bench: "MD2022", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "2222L": { RL: { bench: "RL2222", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] }, LL: { bench: "LL2222", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2222LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-  "2222MD": { MD: { bench: "MD2222", images: ["https://www.sawo.com/wp-content/uploads/2026/03/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"] } },
-};
+const glassFrontImageData = {};
 
 const glassFrontSizeData = {
   1414: { w: "1.36m", d: "1.37m", h: "2.12m", c: "1-3 People" },
@@ -190,55 +104,7 @@ const glassFrontSizeData = {
   "2222MD": { w: "2.23m", d: "2.25m", h: "2.12m", c: "6+ People" },
 };
 
-const glassFrontBenchTypes = {
-  RS1414: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1414RS.webp" },
-  LS1414: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1414LS.webp" },
-  RS1415: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1415RS.webp" },
-  LS1415: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1415LS.webp" },
-  RS1419: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1419RS.webp" },
-  LS1419: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1419LS.webp" },
-  MS1419: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1419MS.png" },
-  RS1515: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1515RS.webp" },
-  LS1515: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1515LS.webp" },
-  RS1519: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1519RS.webp" },
-  LS1519: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1519LS.webp" },
-  MS1519: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1519MS.png" },
-  RS1420: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1420RS.png" },
-  LS1420: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1420LS.webp" },
-  MS1420: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1420MS.png" },
-  RS1520: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1520RS.webp" },
-  LS1520: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1520LS.webp" },
-  MS1520: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1520MS.png" },
-  RS1522: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1522RS.webp" },
-  LS1522: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1522LS.webp" },
-  MS1522: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1522MS.webp" },
-  RS1919: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919RS.webp" },
-  LS1919: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919LS.webp" },
-  MS1919: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919MS.webp" },
-  MRL1919: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919MRL.webp" },
-  MIL1919: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919MLL.webp" },
-  RS1920: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920RS.webp" },
-  LS1920: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920LS.webp" },
-  MS1920: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.png" },
-  MRL1920: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920MRL.webp" },
-  MIL1920: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920MLL.webp" },
-  RS1922: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922RS.webp" },
-  LS1922: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922LS.webp" },
-  MS1922: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.png" },
-  MRL1922: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922MRL.webp" },
-  MIL1922: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922MLL.webp" },
-  RS2020: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020RS.webp" },
-  LS2020: { name: "Straight Bench", title: "Glass Front Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020LS.webp" },
-  MS2020: { name: "Single Straight Bench", title: "Glass Front Sauna Room", class: "single", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020MS.webp" },
-  MRL2020: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020MRL.webp" },
-  MIL2020: { name: "Middle L-Type Bench", title: "Glass Front Sauna Room", class: "middle-l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020MLL.webp" },
-  RL2022: { name: "L-Type Bench", title: "Glass Front Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2022RL.webp" },
-  LL2022: { name: "L-Type Bench", title: "Glass Front Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2022LL.webp" },
-  MD2022: { name: "Double Straight Bench", title: "Glass Front Sauna Room", class: "double", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2022MD.webp" },
-  RL2222: { name: "L-Type Bench", title: "Glass Front Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2222RL.webp" },
-  LL2222: { name: "L-Type Bench", title: "Glass Front Sauna Room", class: "l-type", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2222LL.webp" },
-  MD2222: { name: "Double Straight Bench", title: "Glass Front Sauna Room", class: "double", image: "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2222MD.webp" },
-};
+const glassFrontBenchTypes = {};
 
 const glassFrontSizeCategories = {
   small: ["1414", "1415", "1419", "1419MS", "1515", "1519", "1519MS"],
@@ -246,20 +112,14 @@ const glassFrontSizeCategories = {
   large: ["1922", "1922MS", "1922MRL", "2020", "2020MS", "2020MRL", "2022L", "2022MD", "2222L", "2222MD"],
 };
 
-const infraredImageData = {
-  "0908-IR-D": { bench: "0908-IR-D", images: ["https://www.sawo.com/wp-content/uploads/2026/02/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp"] },
-  "1111-IR-D": { bench: "1111-IR-D", images: ["https://www.sawo.com/wp-content/uploads/2026/02/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp"] },
-};
+const infraredImageData = {};
 
 const infraredSizeData = {
   "0908-IR-D": { w: "0.80m", d: "0.90m", h: "2.05m", c: "1 Person" },
   "1111-IR-D": { w: "1.10m", d: "1.10m", h: "2.05m", c: "2 Person" },
 };
 
-const infraredBenchTypes = {
-  "0908-IR-D": { name: "Straight Bench", title: "Infrared Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/0908MS-TOP-VIEW-with-DIMENSION.webp" },
-  "1111-IR-D": { name: "Straight Bench", title: "Infrared Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/02/1111RS-_TOP-VIEW-with-DIMENSION.webp" },
-};
+const infraredBenchTypes = {};
 
 const SFW_ITEMS = [
   {
@@ -885,7 +745,60 @@ const SaunaRooms = () => {
   const fadeTimer = useRef(null);
   const videoRef = useRef(null);
 
-  const cfg = ROOM_CONFIGS[activeRoom];
+  // ── Build image maps from local JSON (GitHub raw) ──────────────────────────
+  const { rooms: localRooms } = useLocalSaunaRooms();
+
+  const { imageDataMap, benchTypesMap } = useMemo(() => {
+    const imageDataMap  = { standard: {}, glassfront: {}, infrared: {} };
+    const benchTypesMap = { standard: {}, glassfront: {}, infrared: {} };
+
+    for (const room of localRooms) {
+      const parsed = getRoomTypeAndModelKey(room.slug);
+      if (!parsed) continue;
+      const { type, modelKey } = parsed;
+      const configs = room.configurations || {};
+
+      if (type === "infrared") {
+        const firstKey = Object.keys(configs)[0];
+        const cfg = configs[firstKey];
+        if (!cfg) continue;
+        imageDataMap[type][modelKey] = {
+          bench:  cfg.bench || modelKey,
+          images: (cfg.images || []).map(resolveUrl).filter(Boolean),
+        };
+        benchTypesMap[type][modelKey] = {
+          name:  cfg.bench_name || "Straight Bench",
+          title: room.name,
+          class: cfg.bench_class || "straight",
+          image: resolveUrl(cfg.panel_image),
+        };
+      } else {
+        imageDataMap[type][modelKey] = {};
+        for (const [sideKey, cfg] of Object.entries(configs)) {
+          imageDataMap[type][modelKey][sideKey] = {
+            bench:  cfg.bench,
+            images: (cfg.images || []).map(resolveUrl).filter(Boolean),
+          };
+          if (cfg.bench) {
+            benchTypesMap[type][cfg.bench] = {
+              name:  cfg.bench_name,
+              title: room.name,
+              class: cfg.bench_class,
+              image: resolveUrl(cfg.panel_image),
+            };
+          }
+        }
+      }
+    }
+
+    return { imageDataMap, benchTypesMap };
+  }, [localRooms]);
+
+  const cfg = useMemo(() => ({
+    ...ROOM_CONFIGS[activeRoom],
+    imageData:  imageDataMap[activeRoom]  || {},
+    benchTypes: benchTypesMap[activeRoom] || {},
+  }), [activeRoom, imageDataMap, benchTypesMap]);
 
   const currentImages = useMemo(
     () => buildImages(cfg, activeRoom, selectedSize, selectedSide, activeSizeCategory),
