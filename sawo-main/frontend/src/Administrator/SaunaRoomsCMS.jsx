@@ -1,4 +1,4 @@
-// src/Administrator/SaunaRooms.jsx
+// src/Administrator/SaunaRoomsCMS.jsx
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
