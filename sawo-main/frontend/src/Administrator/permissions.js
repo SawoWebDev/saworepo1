@@ -23,6 +23,15 @@ const CAPABILITY_MAP = {
   "products.upload_images":   ["admin", "superadmin"],
   "products.upload_files":    ["admin", "superadmin"],
 
+  // Sauna Rooms
+  "sauna_rooms.view":         ["viewer", "editor", "admin", "superadmin"],
+  "sauna_rooms.create":       ["editor", "admin", "superadmin"],
+  "sauna_rooms.edit":         ["editor", "admin", "superadmin"],
+  "sauna_rooms.delete":       ["admin", "superadmin"],
+  "sauna_rooms.bulk_delete":  ["admin", "superadmin"],
+  "sauna_rooms.duplicate":    ["admin", "superadmin"],
+  "sauna_rooms.upload_images": ["admin", "superadmin"],
+
   // Navigation / Pages
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
@@ -62,9 +71,10 @@ export function getPerms(user) {
  * Filter this array using: NAV_ITEMS.filter(item => can(userRole, item.cap))
  */
 export const NAV_ITEMS = [
-  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view"      },
-  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",   cap: "page.models"        },
-  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",          cap: "page.taxonomy"      },
-  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",      cap: "page.logs"          },
-  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",         cap: "page.users"         },
+  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view"       },
+  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",          cap: "sauna_rooms.view"    },
+  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",   cap: "page.models"         },
+  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",          cap: "page.taxonomy"       },
+  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",      cap: "page.logs"           },
+  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",         cap: "page.users"          },
 ];
