@@ -5,7 +5,8 @@
   "main": "sync.js",
   "type": "module",
   "scripts": {
-    "sync": "node sync.js"
+    "sync": "node sync.js",
+    "sync:rooms": "node sync-sauna-rooms.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",
