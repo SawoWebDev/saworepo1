@@ -234,16 +234,17 @@ async function processImageField(value, bucket, stats, imagesDir = IMAGES_DIR) {
     for (const item of value) results.push(await processImageField(item, bucket, stats, imagesDir));
     return results;
   }
+  // Return early if it's a relative path (already processed)
   if (!value.includes("http") && !value.includes("://")) return value;
 
+  // Only attempt to download from Supabase URLs; skip other URLs (already in GitHub, etc.)
+  if (!value.includes(SUPABASE_URL)) return value;
+
   const filename = path.basename(value);
-  const downloadUrl = value.includes(SUPABASE_URL)
-    ? value
-    : `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
   const outputPath = path.join(imagesDir, filename);
   // Skip download if the image already exists in the cloned repo
   if (fs.existsSync(outputPath)) return `images/${filename}`;
-  const ok = await downloadImage(downloadUrl, outputPath);
+  const ok = await downloadImage(value, outputPath);
   if (ok) { stats.images++; return `images/${filename}`; }
   return value;
 }
@@ -254,7 +255,12 @@ async function processFiles(filesArray, stats, filesDir = FILES_DIR) {
   for (const f of filesArray) {
     if (typeof f === "object" && f.path) {
       const filename = path.basename(f.path);
-      const url = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${f.path}`;
+      // Only attempt to download from Supabase URLs; skip other URLs (already in GitHub, etc.)
+      if (!f.path.includes(SUPABASE_URL) && (f.path.includes("http") || f.path.includes("://"))) {
+        out.push(f);
+        continue;
+      }
+      const url = f.path.includes(SUPABASE_URL) ? f.path : `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${f.path}`;
       const ok = await downloadImage(url, path.join(filesDir, filename));
       if (ok) { stats.files++; out.push({ ...f, path: `files/${filename}` }); }
       else out.push(f);
