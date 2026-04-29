@@ -83,34 +83,38 @@ export async function syncMerge(emit = () => {}) {
     const { products: supabaseProducts, categories, tags } = await fetchSupabaseData();
     emit({ phase: "fetch", message: `Fetched ${supabaseProducts.length} products from Supabase` });
 
-    // 2. Diff against local
-    const existingProducts = fs.existsSync(PRODUCTS_JSON)
-      ? JSON.parse(fs.readFileSync(PRODUCTS_JSON, "utf-8"))
+    // 2. Read existingProducts from CLONED saworepo1 (not Render's stale filesystem copy)
+    const saworepo1DataDir = path.join(SAWOREPO1_DIR, "sawo-main/frontend/src/Administrator/Local/data");
+    const clonedProductsJson = path.join(saworepo1DataDir, "products.json");
+    const existingProducts = fs.existsSync(clonedProductsJson)
+      ? JSON.parse(fs.readFileSync(clonedProductsJson, "utf-8"))
       : [];
     const existingIds = new Set(existingProducts.map(p => p.id));
     const newProducts = supabaseProducts.filter(p => !existingIds.has(p.id));
     stats.total = supabaseProducts.length;
     stats.added = newProducts.length;
+    emit({ phase: "fetch", message: `${existingProducts.length} existing, ${newProducts.length} new products to add` });
 
-    // 3. Download images & files for new products
-    if (newProducts.length === 0) {
-      emit({ phase: "images", message: "No new products — skipping downloads" });
-    } else {
-      emit({ phase: "images", message: `Downloading images for ${newProducts.length} new product(s)...` });
-      for (let i = 0; i < newProducts.length; i++) {
-        const p = newProducts[i];
-        if (p.thumbnail) p.thumbnail = await processImageField(p.thumbnail, "product-images", stats);
-        if (Array.isArray(p.images)) p.images = await processImageField(p.images, "product-images", stats);
-        if (Array.isArray(p.spec_images)) p.spec_images = await processImageField(p.spec_images, "product-images", stats);
-        if (Array.isArray(p.files)) p.files = await processFiles(p.files, stats);
-        emit({ phase: "images", message: `Processed ${i + 1}/${newProducts.length}: ${p.name || p.id}` });
+    // 3. Download images for ALL supabaseProducts
+    // Existing images in cloned saworepo2 are skipped automatically (existsSync check in processImageField)
+    emit({ phase: "images", message: `Processing images for ${supabaseProducts.length} products...` });
+    const processedMap = new Map(); // id → processed product
+    for (let i = 0; i < supabaseProducts.length; i++) {
+      const p = { ...supabaseProducts[i] };
+      if (p.thumbnail) p.thumbnail = await processImageField(p.thumbnail, "product-images", stats);
+      if (Array.isArray(p.images)) p.images = await processImageField(p.images, "product-images", stats);
+      if (Array.isArray(p.spec_images)) p.spec_images = await processImageField(p.spec_images, "product-images", stats);
+      if (Array.isArray(p.files)) p.files = await processFiles(p.files, stats);
+      processedMap.set(p.id, p);
+      if ((i + 1) % 20 === 0 || i === supabaseProducts.length - 1) {
+        emit({ phase: "images", message: `Processed ${i + 1}/${supabaseProducts.length} products (${stats.images} new images)` });
       }
-      emit({ phase: "images", message: `Downloaded ${stats.images} image(s), ${stats.files} file(s)` });
     }
+    emit({ phase: "images", message: `Images done: ${stats.images} downloaded, ${stats.files} files` });
 
-    // 4. Prepare merged data
+    // 4. Build merged list (all supabase products, fully processed)
     emit({ phase: "write", message: "Writing JSON files..." });
-    const merged = [...existingProducts, ...newProducts].sort((a, b) => {
+    const merged = [...processedMap.values()].sort((a, b) => {
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
     });
     const timestamp = new Date().toISOString();
@@ -122,15 +126,14 @@ export async function syncMerge(emit = () => {}) {
       total_files_downloaded: stats.files,
     };
 
-    // Write ONLY to cloned saworepo1 for git commit (inside sawo-main folder)
-    const saworepo1DataDir = path.join(SAWOREPO1_DIR, "sawo-main/frontend/src/Administrator/Local/data");
+    // Write to cloned saworepo1 for git commit
     fs.mkdirSync(saworepo1DataDir, { recursive: true });
     console.log(`📝 Writing data files to saworepo1: ${saworepo1DataDir}`);
     fs.writeFileSync(path.join(saworepo1DataDir, "products.json"), JSON.stringify(merged, null, 2));
     fs.writeFileSync(path.join(saworepo1DataDir, "categories.json"), JSON.stringify(categories, null, 2));
     fs.writeFileSync(path.join(saworepo1DataDir, "tags.json"), JSON.stringify(tags, null, 2));
     fs.writeFileSync(path.join(saworepo1DataDir, "meta.json"), JSON.stringify(meta, null, 2));
-    console.log(`✅ Wrote ${newProducts.length} products to saworepo1 data directory`);
+    console.log(`✅ Wrote ${merged.length} products to saworepo1 data directory`);
 
     // 5. Mirror products.json into saworepo2 for git commit
     emit({ phase: "write", message: "Mirroring products.json to saworepo2..." });
@@ -238,6 +241,8 @@ async function processImageField(value, bucket, stats, imagesDir = IMAGES_DIR) {
     ? value
     : `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
   const outputPath = path.join(imagesDir, filename);
+  // Skip download if the image already exists in the cloned repo
+  if (fs.existsSync(outputPath)) return `images/${filename}`;
   const ok = await downloadImage(downloadUrl, outputPath);
   if (ok) { stats.images++; return `images/${filename}`; }
   return value;
