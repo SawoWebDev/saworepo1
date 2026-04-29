@@ -897,13 +897,15 @@ const SaunaRooms = () => {
   }, [currentImages]);
 
   const navigate = useCallback((idx) => {
+    if (currentImages.length === 0) return;
+    const clamped = Math.max(0, Math.min(idx, currentImages.length - 1));
     clearTimeout(fadeTimer.current);
     setFadeOut(true);
     fadeTimer.current = setTimeout(() => {
-      setCurrentIndex(idx);
+      setCurrentIndex(clamped);
       setFadeOut(false);
     }, 150);
-  }, []);
+  }, [currentImages.length]);
 
   useEffect(() => {
     const handler = (e) => {
