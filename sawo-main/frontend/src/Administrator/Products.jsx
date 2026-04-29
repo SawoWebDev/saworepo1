@@ -19,8 +19,9 @@ function localOrRemote(product, field) {
 function getImageUrl(product, field, dataSource) {
   const imgPath = localOrRemote(product, field);
   if (!imgPath) return null;
-  if (dataSource === "live" || imgPath.includes("://")) return imgPath;
-  return `https://raw.githubusercontent.com/jmesrafael/saworepo2/main/${imgPath}`;
+  if (imgPath.includes("://")) return imgPath;
+  if (dataSource === "live") return imgPath;
+  return `${PREVIEW_GITHUB_RAW}${imgPath}`;
 }
 
 function slugify(str) {
