@@ -440,17 +440,9 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
       emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${gitResult2.error}`, warning: true });
     }
 
-    // Auto-pull only when saworepo1 had actual data file changes (products.json / meta.json)
+    // Commit created successfully; changes are pushed to GitHub repos
     if (gitResult1.pushed) {
-      try {
-        emit({ phase: "git", message: "Pulling changes to local development repo..." });
-        const devRepoDir = path.join(__dirname, "../..");
-        execSync("git pull origin HEAD", { cwd: devRepoDir, encoding: "utf-8", stdio: "pipe" });
-        emit({ phase: "git", message: "Pulled latest changes to local repo ✓" });
-      } catch (pullErr) {
-        console.warn("⚠️  Auto-pull failed:", pullErr.message);
-        emit({ phase: "git", message: `⚠️  Auto-pull failed: ${pullErr.message.split("\n")[0]}`, warning: true });
-      }
+      emit({ phase: "git", message: "Changes committed and pushed to GitHub ✓" });
     }
 
     // Clean up
