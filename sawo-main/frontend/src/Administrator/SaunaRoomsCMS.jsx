@@ -768,7 +768,7 @@ function RoomAuditStrip({ room }) {
 }
 
 // ─── Room Card (Grid view) ────────────────────────────────────────────────────
-function RoomCard({ room, onEdit, onDelete, onDuplicate, perms }) {
+function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
   const [hovered, setHovered]   = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
@@ -791,8 +791,8 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms }) {
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}
     >
       <div className="product-grid-thumb">
-        {room.thumbnail
-          ? <img src={room.thumbnail} alt={room.name} />
+        {getRoomImageUrl(room, "thumbnail", dataSource)
+          ? <img src={getRoomImageUrl(room, "thumbnail", dataSource)} alt={room.name} />
           : <i className="fa-regular fa-image" style={{ fontSize: "1.5rem", color: "var(--border)" }} />
         }
         {showMenu && (
@@ -854,7 +854,7 @@ export default function SaunaRooms({ currentUser }) {
   const [loading,    setLoading]    = useState(true);
   const [allCats,    setAllCats]    = useState([]);
   const [allTags,    setAllTags]    = useState([]);
-  const [dataSource, setDataSource] = useState("live");
+  const [dataSource, setDataSource] = useState("local");
 
   const [search,       setSearch]       = useState("");
   const [filterStatus, setFilterStatus] = useState("");
@@ -1585,7 +1585,7 @@ export default function SaunaRooms({ currentUser }) {
             </div>
           )}
           {filtered.map(r => (
-            <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} perms={perms} />
+            <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} perms={perms} dataSource={dataSource} />
           ))}
         </div>
       )}
