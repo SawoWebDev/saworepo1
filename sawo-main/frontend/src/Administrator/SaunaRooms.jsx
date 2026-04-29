@@ -769,7 +769,7 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms }) {
     return () => document.removeEventListener("mousedown", h);
   }, [menuOpen]);
 
-  const roomUrl = `${FRONT_URL || window.location.origin}/sauna-rooms/${room.slug}`;
+  const roomUrl = `${FRONT_URL || window.location.origin}/sauna/rooms/${room.slug}`;
   const showMenu = hovered && (perms.can("sauna_rooms.edit") || perms.can("sauna_rooms.duplicate") || perms.can("sauna_rooms.delete"));
 
   return (
@@ -1564,7 +1564,7 @@ export default function SaunaRooms({ currentUser }) {
                       }
                     </td>
                     <td>
-                      <a href={`${FRONT_URL}/sauna-rooms/${r.slug}`} target="_blank" rel="noopener noreferrer" className="product-name-link">{r.name}</a>
+                      <a href={`${FRONT_URL}/sauna/rooms/${r.slug}`} target="_blank" rel="noopener noreferrer" className="product-name-link">{r.name}</a>
                       <div className="product-meta">
                         {r.sku && <span className="product-meta-tag"><i className="fa-solid fa-barcode" style={{ marginRight: 3 }} />{r.sku}</span>}
                         {r.featured      && <span className="product-meta-tag featured"><i className="fa-solid fa-star" style={{ marginRight: 3 }} />Featured</span>}
