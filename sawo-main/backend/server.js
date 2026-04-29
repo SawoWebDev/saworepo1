@@ -69,7 +69,6 @@ app.get("/", (_req, res) => {
     </html>
   `);
 });
-
 app.get("/health", (_req, res) => {
   res.json({
     status: "ok",
