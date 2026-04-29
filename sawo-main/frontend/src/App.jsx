@@ -49,6 +49,7 @@ import Login     from "./Administrator/Login";
 import ResetPassword from "./Administrator/ResetPassword";
 import Users     from "./Administrator/Users";
 import Products  from "./Administrator/Products";
+import SaunaRoomsAdmin from "./Administrator/SaunaRooms";
 import Models    from "./Administrator/Models";
 import Taxonomy  from "./Administrator/Taxonomy";
 import Logs  from "./Administrator/Logs";
@@ -109,6 +110,9 @@ export default function App() {
           } />
           <Route path="/admin/products" element={
             <ProtectedRoute><AdminLayout><Products /></AdminLayout></ProtectedRoute>
+          } />
+          <Route path="/admin/sauna-rooms" element={
+            <ProtectedRoute requiredCap="sauna_rooms.view"><AdminLayout><SaunaRoomsAdmin /></AdminLayout></ProtectedRoute>
           } />
           <Route path="/admin/taxonomy" element={
             <ProtectedRoute requiredCap="page.taxonomy"><AdminLayout><Taxonomy /></AdminLayout></ProtectedRoute>

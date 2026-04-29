@@ -99,8 +99,8 @@ export async function logActivity({ action, entity, entity_id, entity_name, user
 
 // ─── Storage Orphan Cleaner ────────────────────────────────────────────────────
 //
-// Scans both storage buckets and deletes any file whose public URL is NOT
-// referenced by any product row in the database.
+// Scans storage buckets and deletes any file whose public URL is NOT
+// referenced by any product or sauna_room row in the database.
 //
 // Columns checked per product:
 //   thumbnail      → text
@@ -108,12 +108,18 @@ export async function logActivity({ action, entity, entity_id, entity_name, user
 //   spec_images    → text[]
 //   files          → jsonb[]  (each item has a `.url` string)
 //
+// Columns checked per sauna_room:
+//   thumbnail      → text
+//   images         → text[]
+//   spec_images    → text[]
+//   files          → jsonb[]  (each item has a `.url` string)
+//
 // Returns a result object:
 // {
-//   scanned:  { "product-images": N, "product-pdf": N },   // total files found in each bucket
-//   deleted:  { "product-images": [...paths], "product-pdf": [...paths] },
-//   failed:   { "product-images": [...paths], "product-pdf": [...paths] },
-//   kept:     { "product-images": N, "product-pdf": N },
+//   scanned:  { "product-images": N, "product-pdf": N, "sauna-room-images": N },
+//   deleted:  { "product-images": [...paths], ... },
+//   failed:   { "product-images": [...paths], ... },
+//   kept:     { "product-images": N, ... },
 //   errors:   string[]   // any non-fatal warnings
 // }
 //
@@ -122,7 +128,7 @@ export async function logActivity({ action, entity, entity_id, entity_name, user
 //   Storage → Buckets → [bucket] → Policies → New Policy → DELETE → true
 // ──────────────────────────────────────────────────────────────────────────────
 
-const STORAGE_BUCKETS = ["product-images", "product-pdf"];
+const STORAGE_BUCKETS = ["product-images", "product-pdf", "sauna-room-images"];
 
 // Supabase list() max is 1000 per call. We paginate until exhausted.
 async function listAllFiles(bucket) {
@@ -179,41 +185,69 @@ function fileNameFromUrl(url) {
   }
 }
 
-// Collect every storage URL referenced by any product row.
+// Collect every storage URL referenced by any product or sauna_room row.
 // Returns a Set of fully-qualified public URLs (with no query params).
 async function collectReferencedUrls() {
   const referenced = new Set();
   const errors = [];
 
-  // Select only the columns that can contain storage URLs
-  const { data: products, error } = await supabase
+  // ── Collect from products table ─────────────────────────────────────────────
+  const { data: products, error: productsError } = await supabase
     .from("products")
     .select("thumbnail, images, spec_images, files");
 
-  if (error) {
-    errors.push(`Failed to fetch products: ${error.message}`);
-    return { referenced, errors };
+  if (productsError) {
+    errors.push(`Failed to fetch products: ${productsError.message}`);
+  } else {
+    for (const p of products || []) {
+      // thumbnail — text
+      if (p.thumbnail) referenced.add(p.thumbnail.split("?")[0]);
+
+      // images — text[]
+      for (const url of p.images || []) {
+        if (url) referenced.add(url.split("?")[0]);
+      }
+
+      // spec_images — text[]
+      for (const url of p.spec_images || []) {
+        if (url) referenced.add(url.split("?")[0]);
+      }
+
+      // files — jsonb array, each item: { name, url }
+      for (const file of p.files || []) {
+        const url = typeof file === "string" ? file : file?.url;
+        if (url) referenced.add(url.split("?")[0]);
+      }
+    }
   }
 
-  for (const p of products || []) {
-    // thumbnail — text
-    if (p.thumbnail) referenced.add(p.thumbnail.split("?")[0]);
+  // ── Collect from sauna_rooms table ──────────────────────────────────────────
+  const { data: saunaRooms, error: saunaError } = await supabase
+    .from("sauna_rooms")
+    .select("thumbnail, images, spec_images, files");
 
-    // images — text[]
-    for (const url of p.images || []) {
-      if (url) referenced.add(url.split("?")[0]);
-    }
+  if (saunaError) {
+    errors.push(`Failed to fetch sauna_rooms: ${saunaError.message}`);
+  } else {
+    for (const room of saunaRooms || []) {
+      // thumbnail — text
+      if (room.thumbnail) referenced.add(room.thumbnail.split("?")[0]);
 
-    // spec_images — text[]
-    for (const url of p.spec_images || []) {
-      if (url) referenced.add(url.split("?")[0]);
-    }
+      // images — text[]
+      for (const url of room.images || []) {
+        if (url) referenced.add(url.split("?")[0]);
+      }
 
-    // files — jsonb array, each item: { name, url }
-    // Handles both the current shape { name, url } and legacy shapes gracefully
-    for (const file of p.files || []) {
-      const url = typeof file === "string" ? file : file?.url;
-      if (url) referenced.add(url.split("?")[0]);
+      // spec_images — text[]
+      for (const url of room.spec_images || []) {
+        if (url) referenced.add(url.split("?")[0]);
+      }
+
+      // files — jsonb array, each item: { name, url }
+      for (const file of room.files || []) {
+        const url = typeof file === "string" ? file : file?.url;
+        if (url) referenced.add(url.split("?")[0]);
+      }
     }
   }
 
@@ -235,8 +269,8 @@ export async function cleanOrphanedStorageFiles({ dryRun = false } = {}) {
   result.errors.push(...refErrors);
 
   if (refErrors.length && referenced.size === 0) {
-    // Could not read products at all — abort to avoid nuking everything
-    result.errors.push("Aborting: could not read product table. No files deleted.");
+    // Could not read products or sauna_rooms at all — abort to avoid nuking everything
+    result.errors.push("Aborting: could not read product or sauna_rooms tables. No files deleted.");
     return result;
   }
 
