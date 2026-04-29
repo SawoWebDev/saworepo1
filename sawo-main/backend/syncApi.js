@@ -36,6 +36,8 @@ const SAWOREPO1_DIR = path.join(WORK_DIR, GITHUB_MAIN_REPO);
 const SAWOREPO2_DIR = path.join(WORK_DIR, GITHUB_IMAGES_REPO);
 const IMAGES_DIR = path.join(SAWOREPO2_DIR, "images");
 const FILES_DIR = path.join(SAWOREPO2_DIR, "files");
+const SAUNA_ROOM_IMAGES_DIR = path.join(SAWOREPO2_DIR, "sauna-room-images");
+const SAUNA_ROOM_FILES_DIR = path.join(SAWOREPO2_DIR, "sauna-room-files");
 
 // ── Progress-aware sync ──────────────────────────────────────────────────────
 // emit(event) is called at each phase so the frontend can show live progress.
@@ -317,6 +319,243 @@ function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
   } catch (err) {
     console.error(`❌ Commit failed for ${path.basename(repoDir)}:`, err.message);
     return { committed: false, pushed: false, error: err.message };
+  }
+}
+
+// ── Sauna Rooms: full sync from Supabase ─────────────────────────────────────
+export async function syncSaunaRooms(emit = () => {}) {
+  const stats = { images: 0, files: 0, added: 0, total: 0 };
+  const workDir = path.join("/tmp", "sawo-rooms-sync-" + Date.now());
+
+  try {
+    emit({ phase: "start", message: "Starting sauna rooms sync..." });
+
+    if (!GITHUB_PAT) throw new Error("GITHUB_PAT environment variable is not set");
+    if (!fs.existsSync(workDir)) fs.mkdirSync(workDir, { recursive: true });
+
+    const saworepo1Dir = path.join(workDir, GITHUB_MAIN_REPO);
+    const saworepo2Dir = path.join(workDir, GITHUB_IMAGES_REPO);
+    const roomImagesDir = path.join(saworepo2Dir, "sauna-room-images");
+    const roomFilesDir  = path.join(saworepo2Dir, "sauna-room-files");
+
+    emit({ phase: "start", message: "Cloning repositories from GitHub..." });
+
+    try {
+      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      emit({ phase: "start", message: `Cloned ${GITHUB_MAIN_REPO}` });
+    } catch (e) {
+      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
+      fs.mkdirSync(saworepo1Dir, { recursive: true });
+    }
+
+    try {
+      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      emit({ phase: "start", message: `Cloned ${GITHUB_IMAGES_REPO}` });
+    } catch (e) {
+      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
+      fs.mkdirSync(saworepo2Dir, { recursive: true });
+    }
+
+    configureGit(saworepo1Dir);
+    configureGit(saworepo2Dir);
+
+    emit({ phase: "fetch", message: "Fetching sauna rooms from Supabase..." });
+    const { data: rooms, error } = await supabase
+      .from("sauna_rooms")
+      .select("*")
+      .eq("is_deleted", false)
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(`Sauna rooms fetch failed: ${error.message}`);
+    stats.total = rooms.length;
+    emit({ phase: "fetch", message: `Fetched ${rooms.length} sauna rooms` });
+
+    const saworepo1DataDir = path.join(saworepo1Dir, "sawo-main/frontend/src/Administrator/Local/data");
+    const clonedJson = path.join(saworepo1DataDir, "saunaroom-data.json");
+    const existingRooms = fs.existsSync(clonedJson) ? JSON.parse(fs.readFileSync(clonedJson, "utf-8")) : [];
+    const existingIds = new Set(existingRooms.map(r => r.id));
+    stats.added = rooms.filter(r => !existingIds.has(r.id)).length;
+    emit({ phase: "fetch", message: `${existingRooms.length} existing, ${stats.added} new rooms` });
+
+    emit({ phase: "images", message: `Processing images for ${rooms.length} rooms...` });
+    const processed = [];
+    for (let i = 0; i < rooms.length; i++) {
+      const r = { ...rooms[i] };
+      if (r.thumbnail)               r.thumbnail    = await processRoomImageField(r.thumbnail, "saunaroom-images", stats, roomImagesDir);
+      if (Array.isArray(r.images))   r.images       = await processRoomImageField(r.images, "saunaroom-images", stats, roomImagesDir);
+      if (Array.isArray(r.spec_images)) r.spec_images = await processRoomImageField(r.spec_images, "saunaroom-images", stats, roomImagesDir);
+      if (Array.isArray(r.files))    r.files        = await processRoomFiles(r.files, stats, roomFilesDir);
+      processed.push(r);
+      if ((i + 1) % 10 === 0 || i === rooms.length - 1) {
+        emit({ phase: "images", message: `Processed ${i + 1}/${rooms.length} rooms (${stats.images} new images)` });
+      }
+    }
+    emit({ phase: "images", message: `Images done: ${stats.images} downloaded, ${stats.files} files` });
+
+    emit({ phase: "write", message: "Writing saunaroom-data.json..." });
+    const timestamp = new Date().toISOString();
+    fs.mkdirSync(saworepo1DataDir, { recursive: true });
+    fs.writeFileSync(path.join(saworepo1DataDir, "saunaroom-data.json"), JSON.stringify(processed, null, 2));
+
+    fs.writeFileSync(path.join(saworepo2Dir, "saunaroom-data.json"), JSON.stringify(processed, null, 2));
+
+    emit({ phase: "git", message: "Committing changes in saworepo1..." });
+    const r1 = commitAndPushRepo(saworepo1Dir, timestamp, stats, GITHUB_PAT);
+    if (r1.nothing)       emit({ phase: "git", message: "saworepo1: Nothing to commit" });
+    else if (r1.committed) emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed });
+    else                   emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${r1.error}`, warning: true });
+
+    emit({ phase: "git", message: "Committing changes in saworepo2..." });
+    const r2 = commitAndPushRepo(saworepo2Dir, timestamp, stats, GITHUB_PAT);
+    if (r2.nothing)       emit({ phase: "git", message: "saworepo2: Nothing to commit" });
+    else if (r2.committed) emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed });
+    else                   emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${r2.error}`, warning: true });
+
+    try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
+
+    emit({
+      phase: "complete",
+      success: true,
+      message: stats.added === 0 ? "Already up to date" : `Added ${stats.added} room(s), ${stats.images} image(s)`,
+      stats,
+      timestamp,
+      pushed: r1.pushed || r2.pushed,
+    });
+
+    return { success: true, ...stats, timestamp, pushed: r1.pushed || r2.pushed };
+  } catch (err) {
+    console.error("❌ Sauna rooms sync failed:", err);
+    emit({ phase: "error", success: false, message: err.message });
+    try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
+    return { success: false, message: err.message };
+  }
+}
+
+async function processRoomImageField(value, bucket, stats, outDir) {
+  if (!value) return value;
+  if (Array.isArray(value)) {
+    const results = [];
+    for (const item of value) results.push(await processRoomImageField(item, bucket, stats, outDir));
+    return results;
+  }
+  if (!value.includes("http") && !value.includes("://")) return value;
+  if (!value.includes(SUPABASE_URL)) return value;
+  const filename = path.basename(value);
+  const outPath = path.join(outDir, filename);
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  if (fs.existsSync(outPath)) return `sauna-room-images/${filename}`;
+  const ok = await downloadImage(value, outPath);
+  if (ok) { stats.images++; return `sauna-room-images/${filename}`; }
+  return value;
+}
+
+async function processRoomFiles(filesArray, stats, outDir) {
+  if (!filesArray || !Array.isArray(filesArray)) return filesArray;
+  const out = [];
+  for (const f of filesArray) {
+    if (typeof f === "object" && f.path) {
+      const filename = path.basename(f.path);
+      if (!f.path.includes(SUPABASE_URL) && (f.path.includes("http") || f.path.includes("://"))) {
+        out.push(f); continue;
+      }
+      const url = f.path.includes(SUPABASE_URL) ? f.path : `${SUPABASE_URL}/storage/v1/object/public/sauna-pdf/${f.path}`;
+      if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+      const ok = await downloadImage(url, path.join(outDir, filename));
+      if (ok) { stats.files++; out.push({ ...f, path: `sauna-room-files/${filename}` }); }
+      else out.push(f);
+    } else out.push(f);
+  }
+  return out;
+}
+
+// ── Sauna Rooms: apply frontend changes ──────────────────────────────────────
+export async function updateLocalSaunaRooms(rooms, emit = () => {}) {
+  const timestamp = new Date().toISOString();
+  const workDir = path.join("/tmp", "sawo-rooms-update-" + Date.now());
+
+  try {
+    emit({ phase: "start", message: "Starting sauna rooms update..." });
+
+    if (!GITHUB_PAT) throw new Error("GITHUB_PAT environment variable is not set");
+    if (!fs.existsSync(workDir)) fs.mkdirSync(workDir, { recursive: true });
+
+    const saworepo1Dir = path.join(workDir, GITHUB_MAIN_REPO);
+    const saworepo2Dir = path.join(workDir, GITHUB_IMAGES_REPO);
+    const roomImagesDir = path.join(saworepo2Dir, "sauna-room-images");
+    const roomFilesDir  = path.join(saworepo2Dir, "sauna-room-files");
+
+    emit({ phase: "clone", message: "Cloning repositories from GitHub..." });
+
+    try {
+      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      emit({ phase: "clone", message: `Cloned ${GITHUB_MAIN_REPO}` });
+    } catch (e) {
+      emit({ phase: "clone", message: `⚠️  Clone failed: ${e.message}` });
+      fs.mkdirSync(saworepo1Dir, { recursive: true });
+    }
+
+    try {
+      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      emit({ phase: "clone", message: `Cloned ${GITHUB_IMAGES_REPO}` });
+    } catch (e) {
+      emit({ phase: "clone", message: `⚠️  Clone failed for images repo: ${e.message}`, warning: true });
+      fs.mkdirSync(roomImagesDir, { recursive: true });
+      fs.mkdirSync(roomFilesDir, { recursive: true });
+    }
+
+    configureGit(saworepo1Dir);
+    configureGit(saworepo2Dir);
+
+    const stats = { images: 0, files: 0 };
+    emit({ phase: "write", message: `Downloading images for ${rooms.length} rooms...` });
+
+    const processed = [];
+    for (let i = 0; i < rooms.length; i++) {
+      const r = { ...rooms[i] };
+      if (r.thumbnail)               r.thumbnail    = await processRoomImageField(r.thumbnail, "saunaroom-images", stats, roomImagesDir);
+      if (Array.isArray(r.images))   r.images       = await processRoomImageField(r.images, "saunaroom-images", stats, roomImagesDir);
+      if (Array.isArray(r.spec_images)) r.spec_images = await processRoomImageField(r.spec_images, "saunaroom-images", stats, roomImagesDir);
+      if (Array.isArray(r.files))    r.files        = await processRoomFiles(r.files, stats, roomFilesDir);
+      processed.push(r);
+      if ((i + 1) % 10 === 0 || i === rooms.length - 1) {
+        emit({ phase: "write", message: `Processed ${i + 1}/${rooms.length} rooms (${stats.images} images)` });
+      }
+    }
+
+    emit({ phase: "write", message: "Writing saunaroom-data.json..." });
+    const dataDir = path.join(saworepo1Dir, "sawo-main/frontend/src/Administrator/Local/data");
+    fs.mkdirSync(dataDir, { recursive: true });
+    fs.writeFileSync(path.join(dataDir, "saunaroom-data.json"), JSON.stringify(processed, null, 2));
+    fs.writeFileSync(path.join(saworepo2Dir, "saunaroom-data.json"), JSON.stringify(processed, null, 2));
+
+    emit({ phase: "git", message: "Committing changes to saworepo1..." });
+    const r1 = commitAndPushRepo(saworepo1Dir, timestamp, stats, GITHUB_PAT);
+    if (r1.nothing)       emit({ phase: "git", message: "saworepo1: No changes to commit" });
+    else if (r1.committed) emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed });
+    else                   emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${r1.error}`, warning: true });
+
+    emit({ phase: "git", message: "Committing changes to saworepo2..." });
+    const r2 = commitAndPushRepo(saworepo2Dir, timestamp, stats, GITHUB_PAT);
+    if (r2.nothing)       emit({ phase: "git", message: "saworepo2: No changes to commit" });
+    else if (r2.committed) emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed });
+    else                   emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${r2.error}`, warning: true });
+
+    try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
+
+    emit({
+      phase: "complete",
+      success: true,
+      message: `Sauna rooms updated — ${stats.images} images downloaded, pushed to GitHub`,
+      timestamp,
+      pushed: r1.pushed || r2.pushed,
+    });
+
+    return { success: true, timestamp, pushed: r1.pushed || r2.pushed };
+  } catch (err) {
+    console.error("❌ Sauna rooms update failed:", err);
+    emit({ phase: "error", success: false, message: err.message });
+    try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
+    return { success: false, message: err.message };
   }
 }
 

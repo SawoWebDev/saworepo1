@@ -2,11 +2,22 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
+import { checkSaunaRoomsSync, applyLocalRoomChanges } from "./Local/compareSupabaseWithLocalRooms";
+import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["sauna-images", "sauna-pdf"];
+const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
+function getRoomImageUrl(room, field, dataSource) {
+  const val = room?.[field];
+  if (!val) return null;
+  if (val.includes("://")) return val;
+  if (dataSource === "live") return val;
+  return `${PREVIEW_GITHUB_RAW}${val}`;
+}
+
 function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -837,11 +848,13 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms }) {
 export default function SaunaRooms({ currentUser }) {
   const perms = getPerms(currentUser);
   const { toasts, add, remove } = useToast();
+  const { rooms: localRooms, loading: localLoading } = useLocalSaunaRooms();
 
-  const [rooms,   setRooms]   = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [allCats, setAllCats] = useState([]);
-  const [allTags, setAllTags] = useState([]);
+  const [rooms,      setRooms]      = useState([]);
+  const [loading,    setLoading]    = useState(true);
+  const [allCats,    setAllCats]    = useState([]);
+  const [allTags,    setAllTags]    = useState([]);
+  const [dataSource, setDataSource] = useState("live");
 
   const [search,       setSearch]       = useState("");
   const [filterStatus, setFilterStatus] = useState("");
@@ -876,13 +889,31 @@ export default function SaunaRooms({ currentUser }) {
   const [revisions,     setRevisions]     = useState([]);
   const [realtimeActive, setRealtimeActive] = useState(true);
 
+  const [checkSyncOpen,    setCheckSyncOpen]    = useState(false);
+  const [syncCheckLoading, setSyncCheckLoading] = useState(false);
+  const [syncCheckReport,  setSyncCheckReport]  = useState(null);
+  const [syncCheckEvents,  setSyncCheckEvents]  = useState([]);
+  const [syncCheckApplying, setSyncCheckApplying] = useState(false);
+
   const isDirty = !formsEqual(form, savedForm);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchRooms = useCallback(async () => {
     setLoading(true);
-    console.log("[DEBUG] fetchRooms: Starting fetch...");
     try {
+      if (dataSource === "local") {
+        let data = localRooms;
+        if (filterStatus) data = data.filter(r => r.status === filterStatus);
+        if (filterType)   data = data.filter(r => r.room_type === filterType);
+        data = [...data].sort((a, b) => {
+          const at = new Date(a.created_at).getTime(), bt = new Date(b.created_at).getTime();
+          return sortDir === "asc" ? at - bt : bt - at;
+        });
+        setRooms(data);
+        setSelected(new Set());
+        return;
+      }
+
       let query = supabase
         .from("sauna_rooms")
         .select("*")
@@ -891,81 +922,25 @@ export default function SaunaRooms({ currentUser }) {
       if (filterType)   query = query.eq("room_type", filterType);
       query = query.order("created_at", { ascending: sortDir === "asc" });
       const { data, error } = await query;
-
-      console.log("[DEBUG] fetchRooms: Error?", error);
-      console.log("[DEBUG] fetchRooms: Data received:", data);
-
       if (error) throw error;
 
-      let filtered = (data || []).map(room => {
-        // Fix data type issues
+      let processed = (data || []).map(room => {
         const fixed = { ...room };
-
-        // Convert string booleans to actual booleans
         if (Array.isArray(fixed.wood_options_enabled)) {
           fixed.wood_options_enabled = fixed.wood_options_enabled.map(v =>
             v === 'true' ? true : v === 'false' ? false : v
           );
         }
-
-        // Parse JSONB fields if they're strings
-        if (typeof fixed.configurations === 'string') {
-          try {
-            fixed.configurations = JSON.parse(fixed.configurations);
-          } catch (e) {
-            console.warn("[DEBUG] Failed to parse configurations:", e);
-            fixed.configurations = {};
-          }
+        const jsonFields = { configurations: {}, door_options: [], feature_tabs: [], resources: [], files: [], spec_table: null };
+        for (const [f, fallback] of Object.entries(jsonFields)) {
+          if (typeof fixed[f] === 'string') { try { fixed[f] = JSON.parse(fixed[f]); } catch { fixed[f] = fallback; } }
         }
-
-        if (typeof fixed.door_options === 'string') {
-          try {
-            fixed.door_options = JSON.parse(fixed.door_options);
-          } catch (e) {
-            console.warn("[DEBUG] Failed to parse door_options:", e);
-            fixed.door_options = [];
-          }
-        }
-
-        if (typeof fixed.feature_tabs === 'string') {
-          try {
-            fixed.feature_tabs = JSON.parse(fixed.feature_tabs);
-          } catch (e) {
-            fixed.feature_tabs = [];
-          }
-        }
-
-        if (typeof fixed.resources === 'string') {
-          try {
-            fixed.resources = JSON.parse(fixed.resources);
-          } catch (e) {
-            fixed.resources = [];
-          }
-        }
-
-        if (typeof fixed.files === 'string') {
-          try {
-            fixed.files = JSON.parse(fixed.files);
-          } catch (e) {
-            fixed.files = [];
-          }
-        }
-
-        if (typeof fixed.spec_table === 'string') {
-          try {
-            fixed.spec_table = JSON.parse(fixed.spec_table);
-          } catch (e) {
-            fixed.spec_table = null;
-          }
-        }
-
         return fixed;
       });
 
-      // Apply search filter locally
       if (search) {
         const q = search.toLowerCase();
-        filtered = filtered.filter(r =>
+        processed = processed.filter(r =>
           r.name?.toLowerCase().includes(q) ||
           r.slug?.toLowerCase().includes(q) ||
           r.model_code?.toLowerCase().includes(q) ||
@@ -973,33 +948,41 @@ export default function SaunaRooms({ currentUser }) {
         );
       }
 
-      console.log("[DEBUG] fetchRooms: Setting rooms with", filtered.length, "items");
-      setRooms(filtered);
+      setRooms(processed);
       setSelected(new Set());
-    } catch (err) {
-      console.error("[DEBUG] fetchRooms: Exception:", err);
-      add(err.message, "error");
-    }
+    } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
-  }, [filterStatus, filterType, sortDir, search]); // eslint-disable-line
+  }, [dataSource, localRooms, filterStatus, filterType, sortDir, search]); // eslint-disable-line
 
   const fetchMeta = useCallback(async () => {
     try {
-      const { data: rooms } = await supabase.from("sauna_rooms").select("categories, tags").eq("is_deleted", false);
+      if (dataSource === "local") {
+        const cats = new Set(), tags = new Set();
+        localRooms.forEach(r => {
+          (r.categories || []).forEach(c => cats.add(c));
+          (r.tags       || []).forEach(t => tags.add(t));
+        });
+        setAllCats([...cats].sort());
+        setAllTags([...tags].sort());
+        return;
+      }
+      const { data: roomsMeta } = await supabase.from("sauna_rooms").select("categories, tags").eq("is_deleted", false);
       const cats = new Set(), tags = new Set();
-      (rooms || []).forEach(r => {
+      (roomsMeta || []).forEach(r => {
         (r.categories || []).forEach(c => cats.add(c));
         (r.tags       || []).forEach(t => tags.add(t));
       });
       setAllCats([...cats].sort());
       setAllTags([...tags].sort());
     } catch (err) { console.error("fetchMeta:", err); }
-  }, []);
+  }, [dataSource, localRooms]); // eslint-disable-line
 
   useEffect(() => {
-    fetchRooms();
-    fetchMeta();
-  }, [fetchRooms, fetchMeta]);
+    if (dataSource === "live" || (dataSource === "local" && !localLoading)) {
+      fetchRooms();
+      fetchMeta();
+    }
+  }, [fetchRooms, fetchMeta, dataSource, localLoading]); // eslint-disable-line
 
   // ── Real-time subscription ─────────────────────────────────────────────────
   useEffect(() => {
@@ -1109,6 +1092,47 @@ export default function SaunaRooms({ currentUser }) {
       if (error) throw error;
       setRevisions(data || []);
     } catch { setRevisions([]); }
+  };
+
+  // ── Sync from Supabase ─────────────────────────────────────────────────────
+  const handleCheckSync = async () => {
+    setSyncCheckLoading(true);
+    setSyncCheckReport(null);
+    setSyncCheckEvents([{ phase: "start", message: "Comparing Supabase with local files..." }]);
+    try {
+      const report = await checkSaunaRoomsSync((event) => {
+        setSyncCheckEvents(prev => [...prev, event]);
+      });
+      setSyncCheckReport(report);
+      if (report.totalChanges === 0) {
+        add("✓ Local files are in sync with Supabase!", "success");
+      } else {
+        add(`Found ${report.totalChanges} changes to review.`, "info");
+      }
+    } catch (err) {
+      const msg = `Sync check failed: ${err.message}`;
+      setSyncCheckEvents(prev => [...prev, { phase: "error", message: msg }]);
+      add(msg, "error");
+    } finally {
+      setSyncCheckLoading(false);
+    }
+  };
+
+  const handleApplySyncChanges = async () => {
+    if (!syncCheckReport) return;
+    setSyncCheckApplying(true);
+    try {
+      const result = await applyLocalRoomChanges(syncCheckReport, (event) => {
+        setSyncCheckEvents(prev => [...prev, event]);
+      });
+      if (result.success && result.changes) {
+        add("Sauna rooms synced to local files.", "success");
+      }
+    } catch (err) {
+      add(`Failed to apply changes: ${err.message}`, "error");
+    } finally {
+      setSyncCheckApplying(false);
+    }
   };
 
   // ── Image / File Uploads ───────────────────────────────────────────────────
@@ -1425,44 +1449,92 @@ export default function SaunaRooms({ currentUser }) {
           <h1 className="page-title">
             <i className="fa-solid fa-fire-flame-curved" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
             Sauna Rooms
-            <span style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              marginLeft: "0.8rem",
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              background: "rgba(34, 197, 94, 0.1)",
-              color: "#22c55e",
-              padding: "2px 8px",
-              borderRadius: "12px",
-              fontFamily: "monospace",
-            }}>
-              <span style={{
-                display: "inline-block",
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "#22c55e",
-                animation: "pulse 2s infinite",
-              }} />
-              LIVE
-            </span>
           </h1>
-          <p className="products-subtitle" style={{ marginTop: 6 }}>
-            {loading ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
-            <span style={{ marginLeft: "0.5rem", color: "var(--text-3)", fontSize: "0.8rem" }}>
-              (Real-time updates enabled)
-            </span>
-          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
+            <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
+              {[
+                { id: "live",  label: "Live",  icon: "fa-cloud" },
+                { id: "local", label: "Local", icon: "fa-folder" },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setDataSource(tab.id)}
+                  style={{
+                    flex: 1,
+                    padding: "8px 16px",
+                    border: "none",
+                    background: dataSource === tab.id ? "var(--brand-bg)" : "transparent",
+                    color: dataSource === tab.id ? "var(--brand)" : "var(--text-2)",
+                    cursor: "pointer",
+                    fontSize: "0.85rem",
+                    fontWeight: dataSource === tab.id ? 600 : 500,
+                    borderRight: tab.id === "live" ? "1px solid var(--border)" : "none",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 6,
+                  }}
+                >
+                  <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            {dataSource === "local" && (
+              <button
+                type="button"
+                onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
+                disabled={syncCheckLoading}
+                title="Syncs sauna rooms from Supabase to local — compares added, updated, and deleted items, then lets you apply the changes"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "8px 12px",
+                  fontSize: "0.85rem",
+                  fontWeight: 500,
+                  border: "1px solid var(--border)",
+                  background: "var(--surface)",
+                  color: syncCheckLoading ? "var(--text-3)" : "var(--text)",
+                  cursor: syncCheckLoading ? "not-allowed" : "pointer",
+                  borderRadius: 4,
+                  transition: "all 0.2s ease",
+                  opacity: syncCheckLoading ? 0.6 : 1,
+                }}
+                onMouseEnter={e => { if (!syncCheckLoading) e.currentTarget.style.background = "var(--surface-2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; }}
+              >
+                <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
+                {syncCheckLoading ? "Syncing..." : "Sync"}
+              </button>
+            )}
+            <p className="products-subtitle" style={{ margin: 0 }}>
+              {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
+            </p>
+          </div>
         </div>
       </div>
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-      `}</style>
+
+      {/* Local Mode Notice */}
+      {dataSource === "local" && (
+        <div style={{
+          background: "var(--info-bg)",
+          border: "1px solid var(--info-border)",
+          color: "var(--info)",
+          padding: "10px 14px",
+          borderRadius: 4,
+          marginBottom: 14,
+          fontSize: "0.85rem",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+        }}>
+          <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
+          <span>Viewing <strong>locally saved sauna rooms</strong> — this is read-only. Switch to Live to edit.</span>
+        </div>
+      )}
 
       {/* Toolbar */}
       <div className="products-toolbar">
@@ -1492,14 +1564,14 @@ export default function SaunaRooms({ currentUser }) {
             </button>
           ))}
         </div>
-        {perms.can("sauna_rooms.bulk_delete") && selected.size > 0 && (
+        {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && selected.size > 0 && (
           <button type="button" className="btn btn-sm"
             style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
             onClick={() => setBulkConfirm(true)}>
             <i className="fa-solid fa-trash" /> Delete {selected.size}
           </button>
         )}
-        {perms.can("sauna_rooms.create") && (
+        {perms.can("sauna_rooms.create") && dataSource === "live" && (
           <Btn icon="fa-plus" label="New Room" onClick={openCreate} style={{ marginLeft: "auto" }} />
         )}
       </div>
@@ -1527,7 +1599,7 @@ export default function SaunaRooms({ currentUser }) {
             <table className="products-table">
               <thead>
                 <tr>
-                  {perms.can("sauna_rooms.bulk_delete") && (
+                  {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && (
                     <th style={{ width: 36, paddingRight: 0 }}>
                       <input type="checkbox" className="tbl-checkbox"
                         checked={filtered.length > 0 && selected.size === filtered.length}
@@ -1546,20 +1618,24 @@ export default function SaunaRooms({ currentUser }) {
               </thead>
               <tbody>
                 {filtered.length === 0 && (
-                  <tr><td colSpan={perms.can("sauna_rooms.bulk_delete") ? 9 : 7} className="table-empty">
-                    {search ? `No rooms match "${search}"` : "No sauna rooms yet — click New Room to create one."}
+                  <tr><td colSpan={perms.can("sauna_rooms.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
+                    {search
+                      ? `No rooms match "${search}"`
+                      : dataSource === "local"
+                        ? "No locally saved rooms yet — sync from Supabase to populate."
+                        : "No sauna rooms yet — click New Room to create one."}
                   </td></tr>
                 )}
                 {filtered.map(r => (
                   <tr key={r.id} className={selected.has(r.id) ? "row-selected" : ""}>
-                    {perms.can("sauna_rooms.bulk_delete") && (
+                    {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && (
                       <td style={{ paddingRight: 0 }}>
                         <input type="checkbox" className="tbl-checkbox" checked={selected.has(r.id)} onChange={() => toggleSelect(r.id)} />
                       </td>
                     )}
                     <td style={{ width: 44 }}>
-                      {r.thumbnail
-                        ? <img src={r.thumbnail} alt="" className="product-thumb" />
+                      {getRoomImageUrl(r, "thumbnail", dataSource)
+                        ? <img src={getRoomImageUrl(r, "thumbnail", dataSource)} alt="" className="product-thumb" />
                         : <div className="product-thumb-placeholder"><i className="fa-regular fa-image" /></div>
                       }
                     </td>
@@ -1586,9 +1662,9 @@ export default function SaunaRooms({ currentUser }) {
                     <td style={{ fontSize: "0.75rem", color: "var(--text-2)" }}>{r.created_by_username ? `@${r.created_by_username}` : "-"}</td>
                     <td style={{ textAlign: "right" }}>
                       <div className="table-actions">
-                        {perms.can("sauna_rooms.edit") && <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(r)} />}
-                        {perms.can("sauna_rooms.duplicate") && <IconBtn icon="fa-copy" title="Duplicate" onClick={() => openDuplicate(r)} />}
-                        {perms.can("sauna_rooms.delete") && <IconBtn icon="fa-trash" title="Delete" onClick={() => setConfirmDel(r)} danger />}
+                        {perms.can("sauna_rooms.edit")      && dataSource === "live" && <IconBtn icon="fa-pen"   title="Edit"      onClick={() => openEdit(r)} />}
+                        {perms.can("sauna_rooms.duplicate") && dataSource === "live" && <IconBtn icon="fa-copy"  title="Duplicate" onClick={() => openDuplicate(r)} />}
+                        {perms.can("sauna_rooms.delete")    && dataSource === "live" && <IconBtn icon="fa-trash" title="Delete"    onClick={() => setConfirmDel(r)} danger />}
                       </div>
                     </td>
                   </tr>
@@ -1920,6 +1996,291 @@ export default function SaunaRooms({ currentUser }) {
         title="Delete Sauna Room?"
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
+
+      <CheckRoomsSyncModal
+        open={checkSyncOpen}
+        loading={syncCheckLoading}
+        report={syncCheckReport}
+        events={syncCheckEvents}
+        onClose={() => { setCheckSyncOpen(false); setSyncCheckEvents([]); setSyncCheckReport(null); }}
+        onApply={handleApplySyncChanges}
+        applying={syncCheckApplying}
+      />
+    </div>
+  );
+}
+
+function CheckRoomsSyncModal({ open, loading, report, events, onClose, onApply, applying }) {
+  const [expandedId, setExpandedId] = useState(null);
+  const logRef = useRef(null);
+
+  useEffect(() => {
+    if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
+  }, [events]);
+
+  useEffect(() => {
+    const lastEvent = events[events.length - 1];
+    const wasApplied = !applying && !loading && report?.totalChanges > 0
+      && events.some(e => e.phase === "applying") && lastEvent?.phase === "complete";
+    if (wasApplied) {
+      const t = setTimeout(onClose, 1800);
+      return () => clearTimeout(t);
+    }
+  }, [applying, loading, report, events, onClose]);
+
+  if (!open) return null;
+
+  const lastEvent = events[events.length - 1];
+  const isError   = lastEvent?.phase === "error";
+  const hasChanges = report && report.totalChanges > 0;
+
+  // ── Check phase ──────────────────────────────────────────────────────────────
+  const checkSteps = [
+    { key: "fetching",  label: "Fetch Supabase data", icon: "fa-cloud-arrow-down" },
+    { key: "loading",   label: "Load local file",     icon: "fa-folder-open" },
+    { key: "cmp_rooms", label: "Compare rooms",       icon: "fa-fire-flame-curved" },
+    { key: "complete",  label: "Analysis complete",   icon: "fa-circle-check" },
+  ];
+  const checkOrder = ["fetching", "loading", "cmp_rooms", "complete"];
+  const checkPct   = { fetching: 20, loading: 45, cmp_rooms: 75, complete: 100 };
+
+  const normCheckEvts = events.map(ev => {
+    if (ev.phase === "comparing") return "cmp_rooms";
+    return ev.phase;
+  });
+  let curCheckKey = "";
+  for (const k of checkOrder.slice().reverse()) {
+    if (normCheckEvts.includes(k)) { curCheckKey = k; break; }
+  }
+  if (isError && !applying) curCheckKey = "error";
+  const checkProgress = checkPct[curCheckKey] || 5;
+  const checkStepStatus = key => {
+    const ki = checkOrder.indexOf(key), ci = checkOrder.indexOf(curCheckKey);
+    if (isError && !applying && ki === ci) return "error";
+    if (ki < ci) return "done";
+    if (ki === ci) return "active";
+    return "pending";
+  };
+
+  // ── Apply phase ──────────────────────────────────────────────────────────────
+  const applySteps = [
+    { key: "applying",  label: "Process changes",   icon: "fa-gears" },
+    { key: "writing",   label: "Send to backend",   icon: "fa-upload" },
+    { key: "start",     label: "Initialize",        icon: "fa-play" },
+    { key: "clone",     label: "Clone repository",  icon: "fa-code-branch" },
+    { key: "write",     label: "Write files",       icon: "fa-file-pen" },
+    { key: "git",       label: "Commit & push",     icon: "fa-code-commit" },
+    { key: "complete",  label: "Complete",          icon: "fa-circle-check" },
+  ];
+  const applyOrder = ["applying", "writing", "start", "clone", "write", "git", "complete"];
+  const applyPct   = { applying: 10, writing: 26, start: 38, clone: 55, write: 73, git: 88, complete: 100 };
+
+  const applyStartIdx   = events.findIndex(e => e.phase === "applying");
+  const applyEvts       = applyStartIdx >= 0 ? events.slice(applyStartIdx) : [];
+  const applyPhasesSeen = applyEvts.map(e => e.phase);
+  let curApplyKey = "";
+  for (const k of applyOrder.slice().reverse()) {
+    if (applyPhasesSeen.includes(k)) { curApplyKey = k; break; }
+  }
+  if (isError && applyEvts.length > 0) curApplyKey = "error";
+  const applyProgress   = applyPct[curApplyKey] || 5;
+  const applyStepStatus = key => {
+    const ki = applyOrder.indexOf(key), ci = applyOrder.indexOf(curApplyKey);
+    if (isError && applyEvts.some(e => e.phase === "error") && ki === ci) return "error";
+    if (ki < ci) return "done";
+    if (ki === ci) return "active";
+    return "pending";
+  };
+
+  const wasApplied = !applying && !loading && applyEvts.length > 0 && lastEvent?.phase === "complete";
+
+  const renderProgressBar = (pct, err) => (
+    <div style={{ marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+        <span style={{ fontSize: "0.68rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.07em", color: "var(--text-3)" }}>Progress</span>
+        <span style={{ fontSize: "0.75rem", fontWeight: 700, color: err ? "var(--danger)" : "var(--brand)" }}>{pct}%</span>
+      </div>
+      <div style={{ height: 8, borderRadius: 4, background: "var(--surface-2)", overflow: "hidden" }}>
+        <div style={{
+          height: "100%", width: `${pct}%`,
+          background: err ? "var(--danger)" : "var(--brand)",
+          borderRadius: 4, transition: "width 0.65s cubic-bezier(0.4,0,0.2,1)",
+          position: "relative", overflow: "hidden",
+        }}>
+          {!err && pct > 0 && pct < 100 && (
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.28) 50%,transparent 100%)", backgroundSize: "200% 100%", animation: "csmShimmer 1.6s infinite linear" }} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderSteps = (steps, getStatus, activeMsg) => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+      {steps.map(step => {
+        const st = getStatus(step.key);
+        const done = st === "done", active = st === "active", err = st === "error";
+        return (
+          <div key={step.key} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{
+              width: 26, height: 26, borderRadius: "50%", flexShrink: 0,
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.65rem",
+              background: done ? "var(--brand)" : err ? "var(--danger)" : active ? "var(--surface)" : "var(--surface-2)",
+              border: `2px solid ${done ? "var(--brand)" : err ? "var(--danger)" : active ? "var(--brand)" : "var(--border)"}`,
+              color: done ? "#fff" : err ? "#fff" : active ? "var(--brand)" : "var(--text-3)",
+            }}>
+              {done ? <i className="fa-solid fa-check" /> : err ? <i className="fa-solid fa-xmark" /> : active ? <i className={`fa-solid ${step.icon} fa-spin`} style={{ animationDuration: "1.2s" }} /> : <i className={`fa-solid ${step.icon}`} />}
+            </div>
+            <span style={{ fontSize: "0.8rem", color: done ? "var(--text)" : err ? "var(--danger)" : active ? "var(--text)" : "var(--text-3)", fontWeight: active ? 500 : 400 }}>
+              {step.label}
+              {active && activeMsg && <span style={{ color: "var(--text-3)", fontWeight: 400 }}> — {activeMsg}</span>}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  const isApplying = applyEvts.length > 0;
+  const currentPhaseMsg = lastEvent?.message || "";
+
+  return (
+    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }} onClick={e => { if (e.target === e.currentTarget && !loading && !applying) onClose(); }}>
+      <style>{`@keyframes csmShimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }`}</style>
+      <div style={{ background: "var(--surface)", borderRadius: 8, padding: 28, width: "100%", maxWidth: 520, maxHeight: "85vh", overflowY: "auto", boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <div>
+            <h2 style={{ margin: 0, fontSize: "1rem", fontWeight: 700 }}>
+              <i className="fa-solid fa-arrows-rotate" style={{ marginRight: 8, color: "var(--brand)" }} />
+              Sync Sauna Rooms
+            </h2>
+            <p style={{ margin: "4px 0 0", fontSize: "0.75rem", color: "var(--text-3)" }}>
+              {isApplying ? "Applying changes to local files..." : "Comparing Supabase with local saunaroom-data.json"}
+            </p>
+          </div>
+          {!loading && !applying && (
+            <button type="button" onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.1rem", color: "var(--text-3)", padding: 4 }}>
+              <i className="fa-solid fa-xmark" />
+            </button>
+          )}
+        </div>
+
+        {/* Progress */}
+        {isApplying
+          ? renderProgressBar(applyProgress, isError && applyEvts.some(e => e.phase === "error"))
+          : renderProgressBar(checkProgress, isError && !applying)
+        }
+
+        {/* Steps */}
+        {!isApplying && renderSteps(checkSteps, checkStepStatus, loading ? currentPhaseMsg : "")}
+        {isApplying  && renderSteps(applySteps, applyStepStatus, applying ? currentPhaseMsg : "")}
+
+        {/* Success banner after apply */}
+        {wasApplied && (
+          <div style={{ padding: "12px 16px", background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 6, marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
+            <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1.1rem" }} />
+            <div>
+              <div style={{ fontWeight: 600, fontSize: "0.85rem", color: "#16a34a" }}>Changes applied successfully!</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: 2 }}>Local files updated and pushed to GitHub.</div>
+            </div>
+          </div>
+        )}
+
+        {/* Report: no changes */}
+        {!loading && !isApplying && report && report.totalChanges === 0 && (
+          <div style={{ padding: "12px 16px", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: 6, marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
+            <i className="fa-solid fa-circle-check" style={{ color: "#22c55e" }} />
+            <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "#16a34a" }}>Local files are already in sync with Supabase.</span>
+          </div>
+        )}
+
+        {/* Report: changes found */}
+        {!loading && !isApplying && hasChanges && (
+          <div style={{ marginBottom: 16 }}>
+            <div style={{ fontSize: "0.78rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--text-3)", marginBottom: 10 }}>Changes Found</div>
+            {[
+              { label: "Rooms", data: report.rooms, icon: "fa-fire-flame-curved" },
+            ].map(({ label, data, icon }) => (
+              (data.added.length + data.updated.length + data.deleted.length) > 0 && (
+                <div key={label} style={{ marginBottom: 12 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6, fontSize: "0.8rem", fontWeight: 600 }}>
+                    <i className={`fa-solid ${icon}`} style={{ color: "var(--brand)", fontSize: "0.8em" }} />{label}
+                  </div>
+                  {[
+                    { items: data.added,   color: "#22c55e", label: "Added" },
+                    { items: data.updated, color: "var(--brand)", label: "Updated" },
+                    { items: data.deleted, color: "var(--danger)", label: "Deleted" },
+                  ].map(({ items, color, label: changeLabel }) => items.length > 0 && (
+                    <div key={changeLabel} style={{ marginBottom: 6 }}>
+                      <div style={{ fontSize: "0.72rem", color, fontWeight: 600, marginBottom: 4 }}>{changeLabel} ({items.length})</div>
+                      {items.map(change => (
+                        <div key={change.item?.id || change.item?.slug} style={{ marginBottom: 4 }}>
+                          <div
+                            style={{ fontSize: "0.75rem", padding: "6px 10px", background: "var(--surface-2)", borderRadius: 4, cursor: change.diff ? "pointer" : "default", display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                            onClick={() => change.diff && setExpandedId(expandedId === change.item?.id ? null : change.item?.id)}
+                          >
+                            <span style={{ fontWeight: 500 }}>{change.item?.name || change.item?.slug || change.item?.id}</span>
+                            {change.diff && <i className={`fa-solid fa-chevron-${expandedId === change.item?.id ? "up" : "down"}`} style={{ fontSize: "0.65rem", color: "var(--text-3)" }} />}
+                          </div>
+                          {change.diff && expandedId === change.item?.id && (
+                            <div style={{ padding: "8px 10px", background: "var(--surface-3, var(--surface-2))", borderRadius: "0 0 4px 4px", borderTop: "1px solid var(--border)" }}>
+                              {Object.entries(change.diff).map(([field, { supabase: sv, local: lv }]) => (
+                                <div key={field} style={{ marginBottom: 6, fontSize: "0.72rem" }}>
+                                  <div style={{ fontWeight: 600, color: "var(--text-2)", marginBottom: 2 }}>{field}</div>
+                                  <div style={{ display: "flex", gap: 8 }}>
+                                    <div style={{ flex: 1, padding: "3px 6px", background: "rgba(34,197,94,0.08)", borderRadius: 3 }}>
+                                      <div style={{ color: "#16a34a", fontWeight: 600, fontSize: "0.65rem", marginBottom: 1 }}>SUPABASE</div>
+                                      <div style={{ wordBreak: "break-all", color: "var(--text-2)" }}>{JSON.stringify(sv)?.slice(0, 100)}</div>
+                                    </div>
+                                    <div style={{ flex: 1, padding: "3px 6px", background: "rgba(239,68,68,0.08)", borderRadius: 3 }}>
+                                      <div style={{ color: "#dc2626", fontWeight: 600, fontSize: "0.65rem", marginBottom: 1 }}>LOCAL</div>
+                                      <div style={{ wordBreak: "break-all", color: "var(--text-2)" }}>{JSON.stringify(lv)?.slice(0, 100)}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )
+            ))}
+          </div>
+        )}
+
+        {/* Event log */}
+        <div ref={logRef} style={{ background: "var(--surface-2)", borderRadius: 4, padding: "10px 12px", maxHeight: 120, overflowY: "auto", marginBottom: 16, fontFamily: "monospace", fontSize: "0.72rem", lineHeight: 1.6 }}>
+          {events.map((e, i) => (
+            <div key={i} style={{ color: e.phase === "error" ? "var(--danger)" : e.warning ? "#f59e0b" : "var(--text-2)" }}>
+              {e.phase === "error" ? "✗" : e.warning ? "⚠" : "›"} {e.message}
+            </div>
+          ))}
+          {(loading || applying) && <div style={{ color: "var(--brand)" }}>›<span style={{ display: "inline-block", animation: "csmShimmer 1s infinite" }}>_</span></div>}
+        </div>
+
+        {/* Actions */}
+        <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+          {!loading && !applying && (
+            <button type="button" onClick={onClose} style={{ padding: "8px 14px", fontSize: "0.8rem", border: "1px solid var(--border)", background: "var(--surface)", borderRadius: 4, cursor: "pointer", color: "var(--text-2)" }}>
+              Close
+            </button>
+          )}
+          {!loading && !isApplying && hasChanges && !wasApplied && (
+            <button
+              type="button"
+              onClick={onApply}
+              disabled={applying}
+              style={{ padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, border: "none", background: "var(--brand)", color: "#fff", borderRadius: 4, cursor: applying ? "not-allowed" : "pointer", opacity: applying ? 0.6 : 1, display: "flex", alignItems: "center", gap: 6 }}
+            >
+              <i className={`fa-solid ${applying ? "fa-circle-notch fa-spin" : "fa-download"}`} />
+              {applying ? "Applying..." : `Apply ${report.totalChanges} Change${report.totalChanges !== 1 ? "s" : ""}`}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
