@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { syncMerge, updateLocalFiles } from "./syncApi.js";
+import { syncMerge, updateLocalFiles, syncSaunaRooms, updateLocalSaunaRooms } from "./syncApi.js";
 
 dotenv.config();
 
@@ -167,6 +167,46 @@ app.post("/api/update-local-files", async (_req, res) => {
     res.end();
     const endTime = new Date().toISOString();
     console.log(`✅ Update completed at ${endTime}\n`);
+  }
+});
+
+app.options("/api/sync-sauna-rooms", cors());
+
+app.post("/api/sync-sauna-rooms", async (_req, res) => {
+  console.log("\n📡 Sauna rooms sync request received");
+  res.setHeader("Content-Type", "application/x-ndjson");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("X-Accel-Buffering", "no");
+  res.setHeader("Connection", "keep-alive");
+  if (typeof res.flushHeaders === "function") res.flushHeaders();
+  const emit = (event) => { try { res.write(JSON.stringify(event) + "\n"); } catch {} };
+  try {
+    await syncSaunaRooms(emit);
+  } catch (err) {
+    emit({ phase: "error", success: false, message: err.message });
+  } finally {
+    res.end();
+  }
+});
+
+app.options("/api/update-local-sauna-rooms", cors());
+
+app.post("/api/update-local-sauna-rooms", async (_req, res) => {
+  console.log("\n📝 Update local sauna rooms request received");
+  res.setHeader("Content-Type", "application/x-ndjson");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("X-Accel-Buffering", "no");
+  res.setHeader("Connection", "keep-alive");
+  if (typeof res.flushHeaders === "function") res.flushHeaders();
+  const emit = (event) => { try { res.write(JSON.stringify(event) + "\n"); } catch {} };
+  try {
+    const { rooms } = _req.body;
+    if (!rooms) throw new Error("Missing required field: rooms");
+    await updateLocalSaunaRooms(rooms, emit);
+  } catch (err) {
+    emit({ phase: "error", success: false, message: err.message });
+  } finally {
+    res.end();
   }
 });
 
