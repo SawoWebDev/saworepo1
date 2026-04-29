@@ -6,7 +6,7 @@ import { checkSaunaRoomsSync, applyLocalRoomChanges } from "./Local/compareSupab
 import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
-const STORAGE_BUCKETS = ["sauna-images", "sauna-pdf"];
+const STORAGE_BUCKETS = ["saunaroom-images", "sauna-pdf"];
 const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -104,7 +104,7 @@ function convertToWebP(file, maxDim = WEBP_MAX_DIM, quality = WEBP_QUALITY) {
   });
 }
 
-async function uploadFileToSupabase(file, bucket = "sauna-images") {
+async function uploadFileToSupabase(file, bucket = "saunaroom-images") {
   let uploadBlob, fileName;
   if (file.type.startsWith("image/")) {
     try {
@@ -1140,7 +1140,7 @@ export default function SaunaRooms({ currentUser }) {
     setUpThumb(true);
     try {
       if (form.thumbnail) await deleteStorageUrls([form.thumbnail]).catch(console.warn);
-      const url = await uploadFileToSupabase(file, "sauna-images");
+      const url = await uploadFileToSupabase(file, "saunaroom-images");
       setForm(f => ({ ...f, thumbnail: url }));
       add("Thumbnail uploaded.", "success");
     } catch (err) { add(err.message, "error"); }
@@ -1151,7 +1151,7 @@ export default function SaunaRooms({ currentUser }) {
     setUpImgs(true);
     try {
       const arr  = Array.isArray(files) ? files : [files];
-      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "sauna-images")));
+      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "saunaroom-images")));
       setForm(f => ({ ...f, images: [...f.images, ...urls] }));
       add(`${urls.length} image(s) uploaded.`, "success");
     } catch (err) { add(err.message, "error"); }
@@ -1162,7 +1162,7 @@ export default function SaunaRooms({ currentUser }) {
     setUpSpec(true);
     try {
       const arr  = Array.isArray(files) ? files : [files];
-      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "sauna-images")));
+      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "saunaroom-images")));
       setForm(f => ({ ...f, spec_images: [...f.spec_images, ...urls] }));
       add(`${urls.length} spec image(s) uploaded.`, "success");
     } catch (err) { add(err.message, "error"); }
