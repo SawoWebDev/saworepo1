@@ -4,7 +4,7 @@ import sLogo from "../../assets/SAWO-logo.webp";
 export default function Footer() {
   return (
     <footer
-      className="bg-[#1a1a1a] text-white py-12 mt-16"
+      className="bg-[#1a1a1a] text-white py-12"
       style={{ fontFamily: "Montserrat, sans-serif" }}
     >
       <div className="max-w-screen-2xl mx-auto px-6">
