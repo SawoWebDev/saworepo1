@@ -122,16 +122,19 @@ const SaunaRoomViewer = () => {
     }, 150);
   }, [currentImages.length]);
 
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.key === "ArrowLeft") setCurrentIndex((i) => { const n = Math.max(0, i - 1); if (n !== i) navigate(n); return i; });
-      if (e.key === "ArrowRight") setCurrentIndex((i) => { const n = Math.min(currentImages.length - 1, i + 1); if (n !== i) navigate(n); return i; });
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, [currentImages.length, navigate]);
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === "ArrowLeft" && currentIndex > 0) navigate(currentIndex - 1);
+    if (e.key === "ArrowRight" && currentIndex < currentImages.length - 1) navigate(currentIndex + 1);
+  }, [currentIndex, currentImages.length, navigate]);
 
-  useEffect(() => () => clearTimeout(fadeTimer.current), []);
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
+  useEffect(() => {
+    return () => clearTimeout(fadeTimer.current);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -211,15 +214,14 @@ const SaunaRoomViewer = () => {
 
   const isBestSeller = current && cfg.bestSellers && cfg.bestSellers.has(current.size);
 
-  const inquiryHref = current
-    ? (() => {
-        const model = cfg.isFlat ? current.size : cleanModelNumber(current.size, cfg);
-        const benchType = cfg.benchTypes[current.bench]?.name || "Standard Bench";
-        const sideStr = cfg.isFlat ? "" : current.side;
-        const subject = `Customize My Sauna — Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
-        return `https://www.sawo.com/contact/?subject=${encodeURIComponent(subject)}`;
-      })()
-    : "https://www.sawo.com/contact/";
+  const inquiryHref = useMemo(() => {
+    if (!current) return "https://www.sawo.com/contact/";
+    const model = cfg.isFlat ? current.size : cleanModelNumber(current.size, cfg);
+    const benchType = cfg.benchTypes[current.bench]?.name || "Standard Bench";
+    const sideStr = cfg.isFlat ? "" : current.side;
+    const subject = `Customize My Sauna — Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
+    return `https://www.sawo.com/contact/?subject=${encodeURIComponent(subject)}`;
+  }, [current, cfg]);
 
   const galleryModels = useMemo(() => {
     const side = cfg.hasDoorFilter ? selectedSide : "all";
@@ -401,7 +403,7 @@ const SaunaRoomViewer = () => {
             </div>
             <div className="spec-item">
               <div className="spec-label">Capacity</div>
-              <div className="spec-value">{currentSizeData ? currentSizeData.c : "—"}</div>
+              <div className="spec-value">{currentSizeData ? currentSizeData.capacity : "—"}</div>
             </div>
           </div>
 
@@ -409,15 +411,15 @@ const SaunaRoomViewer = () => {
             <div className="dimensions-title">Dimensions</div>
             <div className="dimension-grid">
               <div className="dimension-box">
-                <div className="value">{currentSizeData ? currentSizeData.w : "—"}</div>
+                <div className="value">{currentSizeData ? currentSizeData.width : "—"}</div>
                 <div className="label">Width</div>
               </div>
               <div className="dimension-box">
-                <div className="value">{currentSizeData ? currentSizeData.d : "—"}</div>
+                <div className="value">{currentSizeData ? currentSizeData.depth : "—"}</div>
                 <div className="label">Depth</div>
               </div>
               <div className="dimension-box">
-                <div className="value">{currentSizeData ? currentSizeData.h : "—"}</div>
+                <div className="value">{currentSizeData ? currentSizeData.height : "—"}</div>
                 <div className="label">Height</div>
               </div>
             </div>
