@@ -1,11 +1,12 @@
 import React from "react";
 
-const ButtonClear = ({ text, href, download }) => {
+const ButtonClear = ({ text, href, download, target }) => {
   return (
     <a
       href={href}
       download={download}
-      rel="noopener"
+      target={target}
+      rel="noopener noreferrer"
       className="inline-flex items-center gap-2 px-8 py-3 border-2 rounded transition-all duration-300"
       style={{
         borderColor: "#ffffff",
