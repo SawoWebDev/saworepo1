@@ -1,43 +1,43 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY } from "./SaunaRoomData";
+import { SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY, wrapIndex } from "./SaunaRoomData";
 
 const SaunaFeatures = () => {
-  const [sfwIndex, setSfwIndex] = useState(0);
-  const sfwAutoRef   = useRef(null);
-  const sfwResumeRef = useRef(null);
+  const [index, setIndex] = useState(0);
+  const autoRef   = useRef(null);
+  const resumeRef = useRef(null);
 
-  const sfwStopAuto = useCallback(() => {
-    if (sfwAutoRef.current) { clearInterval(sfwAutoRef.current); sfwAutoRef.current = null; }
+  const stopAuto = useCallback(() => {
+    if (autoRef.current) { clearInterval(autoRef.current); autoRef.current = null; }
   }, []);
 
-  const sfwStartAuto = useCallback(() => {
-    sfwStopAuto();
-    sfwAutoRef.current = setInterval(
-      () => setSfwIndex((i) => (i + 1) % SFW_ITEMS.length),
+  const startAuto = useCallback(() => {
+    stopAuto();
+    autoRef.current = setInterval(
+      () => setIndex((i) => (i + 1) % SFW_ITEMS.length),
       SFW_AUTO_DELAY
     );
-  }, [sfwStopAuto]);
+  }, [stopAuto]);
 
-  const sfwGoTo = useCallback((idx) => {
-    setSfwIndex(((idx % SFW_ITEMS.length) + SFW_ITEMS.length) % SFW_ITEMS.length);
-    sfwStopAuto();
-    if (sfwResumeRef.current) clearTimeout(sfwResumeRef.current);
-    sfwResumeRef.current = setTimeout(sfwStartAuto, SFW_RESUME_DELAY);
-  }, [sfwStopAuto, sfwStartAuto]);
+  const goTo = useCallback((idx) => {
+    setIndex(wrapIndex(idx, SFW_ITEMS.length));
+    stopAuto();
+    if (resumeRef.current) clearTimeout(resumeRef.current);
+    resumeRef.current = setTimeout(startAuto, SFW_RESUME_DELAY);
+  }, [stopAuto, startAuto]);
 
   useEffect(() => {
-    sfwStartAuto();
+    startAuto();
     return () => {
-      sfwStopAuto();
-      if (sfwResumeRef.current) clearTimeout(sfwResumeRef.current);
+      stopAuto();
+      if (resumeRef.current) clearTimeout(resumeRef.current);
     };
-  }, [sfwStartAuto, sfwStopAuto]);
+  }, [startAuto, stopAuto]);
 
   return (
     <div
       className="sfw"
-      onMouseEnter={sfwStopAuto}
-      onMouseLeave={sfwStartAuto}
+      onMouseEnter={stopAuto}
+      onMouseLeave={startAuto}
     >
       <div className="sfw-inner">
         <div className="sfw-heading">What Makes Our Sauna Different</div>
@@ -46,8 +46,8 @@ const SaunaFeatures = () => {
           {SFW_ITEMS.map((item, i) => (
             <button
               key={item.tab}
-              className={`sfw-tab${sfwIndex === i ? " active" : ""}`}
-              onClick={() => sfwGoTo(i)}
+              className={`sfw-tab${index === i ? " active" : ""}`}
+              onClick={() => goTo(i)}
             >
               <span className="sfw-chk">
                 <svg viewBox="0 0 12 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none">
@@ -63,18 +63,18 @@ const SaunaFeatures = () => {
           <div className="sfw-carousel">
             <div className="sfw-slides">
               {SFW_ITEMS.map((item, i) => (
-                <div key={item.tab} className={`sfw-slide${sfwIndex === i ? " active" : ""}`}>
+                <div key={item.tab} className={`sfw-slide${index === i ? " active" : ""}`}>
                   <img src={item.image} alt={item.tab} />
                 </div>
               ))}
             </div>
 
-            <button className="sfw-arr sfw-arr-prev" onClick={() => sfwGoTo(sfwIndex - 1)} aria-label="Previous">
+            <button className="sfw-arr sfw-arr-prev" onClick={() => goTo(index - 1)} aria-label="Previous">
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path d="M7 1L1 7L7 13" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <button className="sfw-arr sfw-arr-next" onClick={() => sfwGoTo(sfwIndex + 1)} aria-label="Next">
+            <button className="sfw-arr sfw-arr-next" onClick={() => goTo(index + 1)} aria-label="Next">
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path d="M1 1L7 7L1 13" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -84,8 +84,8 @@ const SaunaFeatures = () => {
               {SFW_ITEMS.map((item, i) => (
                 <button
                   key={item.tab}
-                  className={`sfw-dot${sfwIndex === i ? " active" : ""}`}
-                  onClick={() => sfwGoTo(i)}
+                  className={`sfw-dot${index === i ? " active" : ""}`}
+                  onClick={() => goTo(i)}
                   aria-label={item.tab}
                 />
               ))}
@@ -94,7 +94,7 @@ const SaunaFeatures = () => {
 
           <div className="sfw-content">
             {SFW_ITEMS.map((item, i) => (
-              <div key={item.tab} className={`sfw-pane${sfwIndex === i ? " active" : ""}`}>
+              <div key={item.tab} className={`sfw-pane${index === i ? " active" : ""}`}>
                 <div className="sfw-pane-title">{item.title}</div>
                 {item.paragraphs.map((p, j) => (
                   <div key={j} className="sfw-pane-text">{p}</div>

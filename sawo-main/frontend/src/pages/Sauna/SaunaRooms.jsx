@@ -1,73 +1,68 @@
 import React from "react";
 import "./SaunaRooms.css";
-import { MATS_ITEMS } from "./rooms/SaunaRoomData";
-import SaunaRoomViewer    from "./rooms/SaunaRoomViewer";
-import SaunaFeatures      from "./rooms/SaunaFeatures";
+import ButtonClear from "../../components/Buttons/ButtonClear";
+import SaunaRoomViewer from "./rooms/SaunaRoomViewer";
+import SaunaFeatures from "./rooms/SaunaFeatures";
 import SaunaProductDetails from "./rooms/SaunaProductDetails";
-import SaunaRoomDetails   from "./rooms/SaunaRoomDetails";
-import Sauna3DTeaser      from "./rooms/Sauna3DTeaser";
-import SaunaConfigurator  from "./rooms/SaunaConfigurator";
+import SaunaRoomDetails from "./rooms/SaunaRoomDetails";
+import Sauna3DTeaser from "./rooms/Sauna3DTeaser";
+import SaunaWoodMaterials from "./rooms/SaunaWoodMaterials";
+import SaunaConfigurator from "./rooms/SaunaConfigurator";
+import SaunaCallToAction from "./rooms/SaunaCallToAction";
+
+const CATALOGUE_URL = "https://heyzine.com/flip-book/524075b3c1.html";
+const HERO_IMAGE = "https://www.sawo.com/wp-content/uploads/2025/11/1620ML_scene1.webp";
 
 const SaunaRooms = () => (
   <div>
+    <section className="relative w-full min-h-[95vh] flex flex-col justify-center px-5 md:px-10 overflow-hidden">
+      <a
+        href={CATALOGUE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0 -z-10"
+        style={{ backgroundColor: "#3a3a3a" }}
+        aria-label="View Sauna Rooms Catalogue"
+      >
+        <img
+          src={HERO_IMAGE}
+          alt="SAWO Sauna Room - 1620ML"
+          className="w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
+          loading="eager"
+          style={{ display: "block" }}
+        />
+      </a>
+
+      <div className="flex flex-col items-center text-center">
+        <h1
+          className="font-bold text-white text-2xl sm:text-4xl md:text-5xl lg:text-[60px] leading-tight mb-4"
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            textShadow: "4px 6px 7px rgba(0,0,0,0.5)",
+            textTransform: "uppercase",
+          }}
+        >
+          Sauna Rooms
+        </h1>
+
+        <ButtonClear
+          text="VIEW CATALOGUE"
+          href={CATALOGUE_URL}
+          target="_blank"
+        />
+      </div>
+    </section>
+
     <SaunaRoomViewer />
     <SaunaFeatures />
     <SaunaProductDetails />
     <SaunaRoomDetails />
     <Sauna3DTeaser />
-
-    {/* MATS — Choose Your Wood */}
-    <div className="sawo-materials">
-      <div className="sawo-materials-header">
-        <div className="sawo-materials-title">Choose Your Wood</div>
-        <p>Each wood type brings its own character, scent, and warmth to your sauna experience.</p>
-      </div>
-      <div className="sawo-materials-grid">
-        {MATS_ITEMS.map((mat) => (
-          <div key={mat.name} className="sawo-mat-card">
-            <div className="sawo-mat-card-img">
-              <img src={mat.image} alt={mat.alt} />
-            </div>
-            <div className="sawo-mat-card-body">
-              <div className="sawo-mat-name">{mat.name}</div>
-              <p>{mat.description}</p>
-              <div className="wood-traits">
-                {mat.traits.map((t) => <span key={t}>{t}</span>)}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
+    <SaunaWoodMaterials />
     <SaunaConfigurator />
-
-    {/* CTA */}
-    <div className="sawo-cta">
-      <div className="sawo-cta-container">
-        <div className="sawo-cta-icon">
-          <svg width="32" height="32" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="12" width="29" height="4" fill="white" rx="1" />
-            <rect x="10" y="16" width="25" height="21" fill="white" rx="1" />
-            <rect x="18" y="26" width="9" height="11" fill="#8b5e3c" rx="0.5" />
-          </svg>
-        </div>
-        <div className="sawo-cta-label">Your Wellness Awaits</div>
-        <div className="sawo-cta-title">Ready to Build Your Dream Sauna?</div>
-        <div className="sawo-cta-description">
-          Let our sauna specialists guide you through every step. From design consultation to installation support, we're here to bring the ultimate relaxation experience to your home.
-        </div>
-        <a href="https://www.sawo.com/contact/" className="sawo-cta-btn">
-          <span className="sawo-cta-btn-content">
-            Inquire Today
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
+    <SaunaCallToAction />
   </div>
 );
 

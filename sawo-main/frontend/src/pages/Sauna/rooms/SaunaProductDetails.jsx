@@ -5,58 +5,56 @@ import {
 } from "./SaunaRoomData";
 
 const SaunaProductDetails = () => {
-  const [spdIndex, setSpdIndex]               = useState(0);
-  const [spdLoaderHidden, setSpdLoaderHidden] = useState(false);
-  const [spdImagesLoaded, setSpdImagesLoaded] = useState(() => new Array(SPD_SLIDES.length).fill(false));
-  const [spdAccordionOpen, setSpdAccordionOpen] = useState(
-    () => new Array(SPD_ACCORDION_ITEMS.length).fill(false)
-  );
-  const spdTimerRef      = useRef(null);
-  const spdLoadedRef     = useRef(0);
-  const spdTimerStarted  = useRef(false);
+  const [index, setIndex]                     = useState(0);
+  const [loaderHidden, setLoaderHidden]       = useState(false);
+  const [imagesLoaded, setImagesLoaded]       = useState(() => new Array(SPD_SLIDES.length).fill(false));
+  const [accordionOpen, setAccordionOpen]     = useState(() => new Array(SPD_ACCORDION_ITEMS.length).fill(false));
+  const timerRef      = useRef(null);
+  const loadedRef     = useRef(0);
+  const timerStarted  = useRef(false);
 
-  const spdStartTimer = useCallback(() => {
-    if (spdTimerStarted.current) return;
-    spdTimerStarted.current = true;
-    spdTimerRef.current = setInterval(
-      () => setSpdIndex((i) => (i + 1) % SPD_SLIDES.length),
+  const startTimer = useCallback(() => {
+    if (timerStarted.current) return;
+    timerStarted.current = true;
+    timerRef.current = setInterval(
+      () => setIndex((i) => (i + 1) % SPD_SLIDES.length),
       SPD_SLIDE_DELAY
     );
   }, []);
 
-  const spdHandleImageLoad = useCallback((idx) => {
-    setSpdImagesLoaded((prev) => { const n = [...prev]; n[idx] = true; return n; });
-    spdLoadedRef.current += 1;
-    if (spdLoadedRef.current === 1) {
-      setSpdLoaderHidden(true);
-      spdStartTimer();
+  const handleImageLoad = useCallback((idx) => {
+    setImagesLoaded((prev) => { const n = [...prev]; n[idx] = true; return n; });
+    loadedRef.current += 1;
+    if (loadedRef.current === 1) {
+      setLoaderHidden(true);
+      startTimer();
     }
-  }, [spdStartTimer]);
+  }, [startTimer]);
 
-  const spdHandleDotClick = useCallback((idx) => {
-    clearInterval(spdTimerRef.current);
-    spdTimerRef.current = null;
-    spdTimerStarted.current = false;
-    setSpdIndex(idx);
-    spdStartTimer();
-  }, [spdStartTimer]);
+  const handleDotClick = useCallback((idx) => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+    timerStarted.current = false;
+    setIndex(idx);
+    startTimer();
+  }, [startTimer]);
 
-  const spdToggleAccordion = useCallback((idx) => {
-    setSpdAccordionOpen((prev) => { const n = [...prev]; n[idx] = !n[idx]; return n; });
+  const toggleAccordion = useCallback((idx) => {
+    setAccordionOpen((prev) => { const n = [...prev]; n[idx] = !n[idx]; return n; });
   }, []);
 
   useEffect(() => {
     const fallback = setTimeout(() => {
-      if (!spdLoaderHidden) {
-        setSpdLoaderHidden(true);
-        spdStartTimer();
+      if (!loaderHidden) {
+        setLoaderHidden(true);
+        startTimer();
       }
     }, SPD_LOADER_TIMEOUT);
     return () => {
       clearTimeout(fallback);
-      clearInterval(spdTimerRef.current);
+      clearInterval(timerRef.current);
     };
-  }, [spdLoaderHidden, spdStartTimer]);
+  }, [loaderHidden, startTimer]);
 
   return (
     <div className="sawo-product-details">
@@ -68,18 +66,18 @@ const SaunaProductDetails = () => {
         <div className="sawo-product-story">
           <div className="sawo-product-image">
             <div className="sawo-slideshow">
-              <div className={`sawo-loader${spdLoaderHidden ? " hidden" : ""}`}>
+              <div className={`sawo-loader${loaderHidden ? " hidden" : ""}`}>
                 <div className="sawo-loader-ring"></div>
                 <div className="sawo-loader-text">Loading</div>
               </div>
               {SPD_SLIDES.map((slide, i) => (
-                <div key={slide.alt} className={`sawo-slide${spdIndex === i ? " active" : ""}`}>
+                <div key={slide.alt} className={`sawo-slide${index === i ? " active" : ""}`}>
                   <img
                     src={slide.src}
                     alt={slide.alt}
-                    className={spdImagesLoaded[i] ? "loaded" : ""}
-                    onLoad={() => spdHandleImageLoad(i)}
-                    onError={() => spdHandleImageLoad(i)}
+                    className={imagesLoaded[i] ? "loaded" : ""}
+                    onLoad={() => handleImageLoad(i)}
+                    onError={() => handleImageLoad(i)}
                   />
                 </div>
               ))}
@@ -87,8 +85,8 @@ const SaunaProductDetails = () => {
                 {SPD_SLIDES.map((slide, i) => (
                   <button
                     key={slide.alt}
-                    className={`sawo-dot${spdIndex === i ? " active" : ""}`}
-                    onClick={() => spdHandleDotClick(i)}
+                    className={`sawo-dot${index === i ? " active" : ""}`}
+                    onClick={() => handleDotClick(i)}
                     aria-label={slide.alt}
                   />
                 ))}
@@ -102,8 +100,6 @@ const SaunaProductDetails = () => {
               {section.paragraphs.map((p, j) => <p key={j}>{p}</p>)}
             </div>
           ))}
-
-          <div style={{ clear: "both" }} />
 
           <div className="sawo-product-features">
             <p>{SPD_FEATURE_TEXT}</p>
@@ -127,8 +123,8 @@ const SaunaProductDetails = () => {
 
       <div className="sawo-accordion-section">
         {SPD_ACCORDION_ITEMS.map((item, i) => (
-          <div key={item.title} className={`sawo-accordion-item${spdAccordionOpen[i] ? " active" : ""}`}>
-            <button className="sawo-accordion-header" onClick={() => spdToggleAccordion(i)}>
+          <div key={item.title} className={`sawo-accordion-item${accordionOpen[i] ? " active" : ""}`}>
+            <button className="sawo-accordion-header" onClick={() => toggleAccordion(i)}>
               <span className="accordion-title-text">{item.title}</span>
               <span className="sawo-accordion-icon">+</span>
             </button>

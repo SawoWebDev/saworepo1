@@ -1,33 +1,32 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { SRD_PANELS, SRD_AUTO_DELAY } from "./SaunaRoomData";
+import { SRD_PANELS, SRD_AUTO_DELAY, wrapIndex } from "./SaunaRoomData";
 
 const SaunaRoomDetails = () => {
-  const [srdIndex, setSrdIndex] = useState(0);
-  const srdTimerRef = useRef(null);
+  const [index, setIndex] = useState(0);
+  const timerRef = useRef(null);
 
-  const srdStopTimer = useCallback(() => {
-    clearInterval(srdTimerRef.current);
-    srdTimerRef.current = null;
+  const stopTimer = useCallback(() => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
   }, []);
 
-  const srdStartTimer = useCallback(() => {
-    srdStopTimer();
-    srdTimerRef.current = setInterval(
-      () => setSrdIndex((i) => (i + 1) % SRD_PANELS.length),
+  const startTimer = useCallback(() => {
+    stopTimer();
+    timerRef.current = setInterval(
+      () => setIndex((i) => (i + 1) % SRD_PANELS.length),
       SRD_AUTO_DELAY
     );
-  }, [srdStopTimer]);
+  }, [stopTimer]);
 
-  const srdGoTo = useCallback((idx) => {
-    setSrdIndex(((idx % SRD_PANELS.length) + SRD_PANELS.length) % SRD_PANELS.length);
-    srdStopTimer();
-    srdStartTimer();
-  }, [srdStopTimer, srdStartTimer]);
+  const goTo = useCallback((idx) => {
+    setIndex(wrapIndex(idx, SRD_PANELS.length));
+    startTimer();
+  }, [startTimer]);
 
   useEffect(() => {
-    srdStartTimer();
-    return () => srdStopTimer();
-  }, [srdStartTimer, srdStopTimer]);
+    startTimer();
+    return () => stopTimer();
+  }, [startTimer, stopTimer]);
 
   return (
     <div className="srd">
@@ -35,10 +34,10 @@ const SaunaRoomDetails = () => {
 
         <div
           className="srd-nav"
-          onMouseEnter={srdStopTimer}
-          onMouseLeave={srdStartTimer}
+          onMouseEnter={stopTimer}
+          onMouseLeave={startTimer}
         >
-          <button className="srd-nav-arrow" onClick={() => srdGoTo(srdIndex - 1)} aria-label="Previous">
+          <button className="srd-nav-arrow" onClick={() => goTo(index - 1)} aria-label="Previous">
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
               <path d="M7 1L1 7L7 13" stroke="#af8564" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -48,15 +47,15 @@ const SaunaRoomDetails = () => {
             {SRD_PANELS.map((panel, i) => (
               <button
                 key={panel.pill}
-                className={`srd-nav-pill${srdIndex === i ? " active" : ""}`}
-                onClick={() => srdGoTo(i)}
+                className={`srd-nav-pill${index === i ? " active" : ""}`}
+                onClick={() => goTo(i)}
               >
                 {panel.pill}
               </button>
             ))}
           </div>
 
-          <button className="srd-nav-arrow" onClick={() => srdGoTo(srdIndex + 1)} aria-label="Next">
+          <button className="srd-nav-arrow" onClick={() => goTo(index + 1)} aria-label="Next">
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
               <path d="M1 1L7 7L1 13" stroke="#af8564" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -65,7 +64,7 @@ const SaunaRoomDetails = () => {
 
         <div className="srd-panels">
           {SRD_PANELS.map((panel, i) => (
-            <div key={panel.pill} className={`srd-panel${srdIndex === i ? " active" : ""}`}>
+            <div key={panel.pill} className={`srd-panel${index === i ? " active" : ""}`}>
               <div>
                 <div className="srd-label">{panel.label}</div>
                 <div className="srd-title">{panel.title}</div>
@@ -92,7 +91,7 @@ const SaunaRoomDetails = () => {
           ))}
         </div>
 
-        <div className="srd-counter">{srdIndex + 1} / {SRD_PANELS.length}</div>
+        <div className="srd-counter">{index + 1} / {SRD_PANELS.length}</div>
 
       </div>
     </div>
