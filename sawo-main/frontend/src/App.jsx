@@ -50,7 +50,7 @@ import Login     from "./Administrator/Login";
 import ResetPassword from "./Administrator/ResetPassword";
 import Users     from "./Administrator/Users";
 import Products  from "./Administrator/Products";
-import SaunaRoomsAdmin from "./Administrator/SaunaRooms";
+import SaunaRoomsAdmin from "./Administrator/SaunaRoomsCMS";
 import Models    from "./Administrator/Models";
 import Taxonomy  from "./Administrator/Taxonomy";
 import Logs  from "./Administrator/Logs";
