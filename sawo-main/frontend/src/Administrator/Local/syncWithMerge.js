@@ -9,6 +9,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000"
 export async function syncSupabaseToLocal(onEvent = () => {}) {
   let response;
   const syncUrl = `${BACKEND_URL}/api/sync`;
+  const healthUrl = `${BACKEND_URL}/health`;
 
   try {
     console.log(`🔗 Attempting to sync from: ${syncUrl}`);
@@ -26,7 +27,7 @@ export async function syncSupabaseToLocal(onEvent = () => {}) {
       Error: ${err.message}
 
       📋 Troubleshooting:
-      • Check if backend is running: https://sawo-backend.onrender.com/health
+      • Check if backend is running: ${healthUrl}
       • Verify REACT_APP_BACKEND_URL is set correctly
       • Check browser Network tab for CORS errors
       • Ensure backend CORS allows your frontend domain
@@ -57,8 +58,8 @@ export async function syncSupabaseToLocal(onEvent = () => {}) {
       • Backend endpoint doesn't exist
 
       ✅ Quick checks:
-      1. Visit health check: https://sawo-backend.onrender.com/health
-      2. Check backend logs on Render dashboard
+      1. Visit health check: ${healthUrl}
+      2. Check backend logs in your deployment platform dashboard
       3. Verify CORS allows ${window.location.origin}
     `.trim();
     console.error(debugMsg);
@@ -105,9 +106,9 @@ export async function syncSupabaseToLocal(onEvent = () => {}) {
       • Backend crashed during processing
 
       🔍 Check:
-      1. Backend logs on Render dashboard
+      1. Backend logs in your deployment platform dashboard
       2. Network tab in DevTools for failed requests
-      3. Backend is still running: https://sawo-backend.onrender.com/health
+      3. Backend is still running: ${healthUrl}
     `.trim();
     console.error(streamErrorMsg);
     return { success: false, message: streamErrorMsg };
@@ -116,6 +117,7 @@ export async function syncSupabaseToLocal(onEvent = () => {}) {
   if (final?.phase === "error") {
     return { success: false, message: final.message || "Sync failed" };
   }
+
   if (final?.phase === "complete") {
     return {
       success: true,
@@ -125,5 +127,6 @@ export async function syncSupabaseToLocal(onEvent = () => {}) {
       pushed: final.pushed,
     };
   }
+
   return { success: false, message: "Sync ended unexpectedly" };
 }
