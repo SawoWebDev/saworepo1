@@ -6,7 +6,6 @@ import { checkSaunaRoomsSync, applyLocalRoomChanges } from "./Local/compareSupab
 import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
-const STORAGE_BUCKETS = ["saunaroom-images", "sauna-pdf"];
 const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -887,7 +886,6 @@ export default function SaunaRooms({ currentUser }) {
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
   const [revisions,     setRevisions]     = useState([]);
-  const [realtimeActive, setRealtimeActive] = useState(true);
 
   const [checkSyncOpen,    setCheckSyncOpen]    = useState(false);
   const [syncCheckLoading, setSyncCheckLoading] = useState(false);

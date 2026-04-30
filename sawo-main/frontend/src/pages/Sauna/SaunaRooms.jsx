@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import "./SaunaRooms.css";
+import SaunaRoomViewer from "./rooms/SaunaRoomViewer";
+import SaunaFeatures from "./rooms/SaunaFeatures";
+import SaunaProductDetails from "./rooms/SaunaProductDetails";
+import SaunaRoomDetails from "./rooms/SaunaRoomDetails";
+import Sauna3DTeaser from "./rooms/Sauna3DTeaser";
+import SaunaWoodMaterials from "./rooms/SaunaWoodMaterials";
+import SaunaCallToAction from "./rooms/SaunaCallToAction";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
@@ -447,30 +454,6 @@ const SRD_AUTO_DELAY = 8000;
 
 const S3T_VIEWER_URL  = "https://www.sawo.com/3d-viewer/";
 const S3T_MODEL_LABEL = "1414RS · Glass Front";
-
-const MATS_ITEMS = [
-  {
-    name: "Cedar",
-    image: "https://www.sawo.com/wp-content/uploads/2025/11/Cedar-Panels.webp",
-    alt: "Cedar wood",
-    description: "Rich, aromatic wood with natural resistance to moisture. Known for its warm reddish-brown tones and distinctive scent.",
-    traits: ["Aromatic", "Moisture-Resistant", "Warm Tones"],
-  },
-  {
-    name: "Aspen",
-    image: "https://www.sawo.com/wp-content/uploads/2025/11/Aspen-Panels.webp",
-    alt: "Aspen wood",
-    description: "Light, hypoallergenic wood with a smooth finish. Cool to the touch and perfect for those with sensitivities.",
-    traits: ["Hypoallergenic", "Cool Touch", "Light Grain"],
-  },
-  {
-    name: "Pinaceae",
-    image: "https://www.sawo.com/wp-content/uploads/2026/02/HEMLOCK-PANELS.webp",
-    alt: "Pinaceae wood",
-    description: "Traditional Nordic sauna wood with a clean, natural grain. Excellent heat properties and timeless aesthetic appeal.",
-    traits: ["Traditional", "Heat-Efficient", "Natural Grain"],
-  },
-];
 
 const HASH_MAP = {
   "standard-sauna-room": "standard",
@@ -1799,5 +1782,6 @@ const SaunaRooms = () => {
     <SaunaCallToAction />
   </div>
 );
+};
 
 export default SaunaRooms;
