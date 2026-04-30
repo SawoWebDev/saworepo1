@@ -5,7 +5,7 @@
     "slug": "standard-sauna-room-1214",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1214/1214RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1214RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1214",
@@ -30,20 +30,20 @@
       "LS": {
         "bench": "LS1214",
         "images": [
-          "images/standard-sauna-room-1214/1214LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1214LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1214/Standard-Sauna-Room-Horizontal-Panel-1214LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1214LS.webp"
       },
       "RS": {
         "bench": "RS1214",
         "images": [
-          "images/standard-sauna-room-1214/1214RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1214RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1214/Standard-Sauna-Room-Horizontal-Panel-1214RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1214RS.webp"
       }
     },
     "door_options": [
@@ -112,7 +112,7 @@
     "slug": "standard-sauna-room-1215",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1215/1215RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1215RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1215",
@@ -137,20 +137,20 @@
       "LS": {
         "bench": "LS1215",
         "images": [
-          "images/standard-sauna-room-1215/1215LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1215LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1215/Standard-Sauna-Room-Horizontal-Panel-1215LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1215LS.webp"
       },
       "RS": {
         "bench": "RS1215",
         "images": [
-          "images/standard-sauna-room-1215/1215RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1215RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1215/Standard-Sauna-Room-Horizontal-Panel-1215RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1215RS.webp"
       }
     },
     "door_options": [
@@ -219,7 +219,7 @@
     "slug": "standard-sauna-room-1414",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1414/1414RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1414RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1414",
@@ -244,20 +244,20 @@
       "LS": {
         "bench": "LS1414",
         "images": [
-          "images/standard-sauna-room-1414/1414LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1414LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1414/Standard-Sauna-Room-Horizontal-Panel-1414LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1414LS.webp"
       },
       "RS": {
         "bench": "RS1414",
         "images": [
-          "images/standard-sauna-room-1414/1414RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1414RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1414/Standard-Sauna-Room-Horizontal-Panel-1414RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1414RS.webp"
       }
     },
     "door_options": [
@@ -326,7 +326,7 @@
     "slug": "standard-sauna-room-1415",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1415/1415RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1415RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1415",
@@ -351,20 +351,20 @@
       "LS": {
         "bench": "LS1415",
         "images": [
-          "images/standard-sauna-room-1415/1415LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1415LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1415/Standard-Sauna-Room-Horizontal-Panel-1415LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1415LS.webp"
       },
       "RS": {
         "bench": "RS1415",
         "images": [
-          "images/standard-sauna-room-1415/1415RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1415RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1415/Standard-Sauna-Room-Horizontal-Panel-1415RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1415RS.webp"
       }
     },
     "door_options": [
@@ -433,7 +433,7 @@
     "slug": "standard-sauna-room-1515",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1515/1515RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1515RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1515",
@@ -458,11 +458,11 @@
       "RS": {
         "bench": "RS1515",
         "images": [
-          "images/standard-sauna-room-1515/1515RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1515RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1515/Standard-Sauna-Room-Horizontal-Panel-1515RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1515RS.webp"
       }
     },
     "door_options": [
@@ -531,7 +531,7 @@
     "slug": "standard-sauna-room-1515l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1515l/1515RL_PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1515RL_PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1515L",
@@ -556,20 +556,20 @@
       "LL": {
         "bench": "LL1515",
         "images": [
-          "images/standard-sauna-room-1515l/1515LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1515LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1515l/Standard-Sauna-Room-Horizontal-Panel-1515LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/03/Standard-Sauna-Room-Horizontal-Panel-1515LL.webp"
       },
       "RL": {
         "bench": "RL1515",
         "images": [
-          "images/standard-sauna-room-1515l/1515RL_PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1515RL_PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1515l/Standard-Sauna-Room-Horizontal-Panel-1515RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1515RL.webp"
       }
     },
     "door_options": [
@@ -638,7 +638,7 @@
     "slug": "standard-sauna-room-1419",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1419/1419RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1419RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1419",
@@ -663,20 +663,20 @@
       "LS": {
         "bench": "LS1419",
         "images": [
-          "images/standard-sauna-room-1419/1419LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1419LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1419/Standard-Sauna-Room-Horizontal-Panel-1419LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1419LS.webp"
       },
       "RS": {
         "bench": "RS1419",
         "images": [
-          "images/standard-sauna-room-1419/1419RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1419RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1419/Standard-Sauna-Room-Horizontal-Panel-1419RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1419RS.webp"
       }
     },
     "door_options": [
@@ -745,7 +745,7 @@
     "slug": "standard-sauna-room-1420",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1420/1420RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1420RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1420",
@@ -770,20 +770,20 @@
       "LS": {
         "bench": "LS1420",
         "images": [
-          "images/standard-sauna-room-1420/1420LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1420LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1420/Standard-Sauna-Room-Horizontal-Panel-1420LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1420LS.webp"
       },
       "RS": {
         "bench": "RS1420",
         "images": [
-          "images/standard-sauna-room-1420/1420RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1420RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1420/Standard-Sauna-Room-Horizontal-Panel-1420RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1420RS.webp"
       }
     },
     "door_options": [
@@ -852,7 +852,7 @@
     "slug": "standard-sauna-room-1519",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1519/1519RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1519RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1519",
@@ -877,11 +877,11 @@
       "RS": {
         "bench": "RS1519",
         "images": [
-          "images/standard-sauna-room-1519/1519RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1519RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1519/Standard-Sauna-Room-Horizontal-Panel-1519RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519RS.webp"
       }
     },
     "door_options": [
@@ -950,7 +950,7 @@
     "slug": "standard-sauna-room-1519l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1519l/1519RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1519RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1519L",
@@ -975,20 +975,20 @@
       "LL": {
         "bench": "LL1519",
         "images": [
-          "images/standard-sauna-room-1519l/1519LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1519LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1519l/Standard-Sauna-Room-Horizontal-Panel-1519LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519LL.webp"
       },
       "RL": {
         "bench": "RL1519",
         "images": [
-          "images/standard-sauna-room-1519l/1519RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1519RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1519l/Standard-Sauna-Room-Horizontal-Panel-1519RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1519RL.webp"
       }
     },
     "door_options": [
@@ -1057,7 +1057,7 @@
     "slug": "standard-sauna-room-1520",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1520/1520RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1520RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1520",
@@ -1082,11 +1082,11 @@
       "RS": {
         "bench": "RS1520",
         "images": [
-          "images/standard-sauna-room-1520/1520RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1520RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1520/Standard-Sauna-Room-Horizontal-Panel-1520RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520RS.webp"
       }
     },
     "door_options": [
@@ -1155,7 +1155,7 @@
     "slug": "standard-sauna-room-1520l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1520l/1520RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1520RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1520L",
@@ -1180,20 +1180,20 @@
       "LL": {
         "bench": "LL1520",
         "images": [
-          "images/standard-sauna-room-1520l/1520LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1520LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1520l/Standard-Sauna-Room-Horizontal-Panel-1520LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520LL.webp"
       },
       "RL": {
         "bench": "RL1520",
         "images": [
-          "images/standard-sauna-room-1520l/1520RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1520RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1520l/Standard-Sauna-Room-Horizontal-Panel-1520RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1520RL.webp"
       }
     },
     "door_options": [
@@ -1262,7 +1262,7 @@
     "slug": "standard-sauna-room-1522",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1522/1522RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1522RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1522",
@@ -1287,11 +1287,11 @@
       "RS": {
         "bench": "RS1522",
         "images": [
-          "images/standard-sauna-room-1522/1522RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1522RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1522/Standard-Sauna-Room-Horizontal-Panel-1522RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522RS.webp"
       }
     },
     "door_options": [
@@ -1360,7 +1360,7 @@
     "slug": "standard-sauna-room-1522l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1522l/1522RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1522RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1522L",
@@ -1385,20 +1385,20 @@
       "LL": {
         "bench": "LL1522",
         "images": [
-          "images/standard-sauna-room-1522l/1522LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1522LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1522l/Standard-Sauna-Room-Horizontal-Panel-1522LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522LL.webp"
       },
       "RL": {
         "bench": "RL1522",
         "images": [
-          "images/standard-sauna-room-1522l/1522RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1522RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1522l/Standard-Sauna-Room-Horizontal-Panel-1522RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1522RL.webp"
       }
     },
     "door_options": [
@@ -1467,7 +1467,7 @@
     "slug": "standard-sauna-room-1919",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1919/1919RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1919RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1919",
@@ -1492,20 +1492,20 @@
       "LS": {
         "bench": "LS1919",
         "images": [
-          "images/standard-sauna-room-1919/1919LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1919LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1919/Standard-Sauna-Room-Horizontal-Panel-1919LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919LS.webp"
       },
       "RS": {
         "bench": "RS1919",
         "images": [
-          "images/standard-sauna-room-1919/1919RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1919RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1919/Standard-Sauna-Room-Horizontal-Panel-1919RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919RS.webp"
       }
     },
     "door_options": [
@@ -1574,7 +1574,7 @@
     "slug": "standard-sauna-room-1919l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1919l/1919RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1919RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1919L",
@@ -1599,20 +1599,20 @@
       "LL": {
         "bench": "LL1919",
         "images": [
-          "images/standard-sauna-room-1919l/1919LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1919LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1919l/Standard-Sauna-Room-Horizontal-Panel-1919LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919LL.webp"
       },
       "RL": {
         "bench": "RL1919",
         "images": [
-          "images/standard-sauna-room-1919l/1919RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1919RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1919l/Standard-Sauna-Room-Horizontal-Panel-1919RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1919RL.webp"
       }
     },
     "door_options": [
@@ -1681,7 +1681,7 @@
     "slug": "standard-sauna-room-1920",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1920/1920RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1920RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1920",
@@ -1706,20 +1706,20 @@
       "LS": {
         "bench": "LS1920",
         "images": [
-          "images/standard-sauna-room-1920/1920LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1920LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1920/Standard-Sauna-Room-Horizontal-Panel-1920LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920LS.webp"
       },
       "RS": {
         "bench": "RS1920",
         "images": [
-          "images/standard-sauna-room-1920/1920RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1920RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-1920/Standard-Sauna-Room-Horizontal-Panel-1920RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920RS.webp"
       }
     },
     "door_options": [
@@ -1788,7 +1788,7 @@
     "slug": "standard-sauna-room-1920l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1920l/1920RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1920RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1920L",
@@ -1813,20 +1813,20 @@
       "LL": {
         "bench": "LL1920",
         "images": [
-          "images/standard-sauna-room-1920l/1920LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1920LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1920l/Standard-Sauna-Room-Horizontal-Panel-1920LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920LL.webp"
       },
       "RL": {
         "bench": "RL1920",
         "images": [
-          "images/standard-sauna-room-1920l/1920RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1920RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1920l/Standard-Sauna-Room-Horizontal-Panel-1920RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1920RL.webp"
       }
     },
     "door_options": [
@@ -1895,7 +1895,7 @@
     "slug": "standard-sauna-room-1922l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1922l/1922RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1922RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1922L",
@@ -1920,20 +1920,20 @@
       "LL": {
         "bench": "LL1922",
         "images": [
-          "images/standard-sauna-room-1922l/1922LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1922LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1922l/Standard-Sauna-Room-Horizontal-Panel-1922LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922LL.webp"
       },
       "RL": {
         "bench": "RL1922",
         "images": [
-          "images/standard-sauna-room-1922l/1922RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1922RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-1922l/Standard-Sauna-Room-Horizontal-Panel-1922RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922RL.webp"
       }
     },
     "door_options": [
@@ -2002,7 +2002,7 @@
     "slug": "standard-sauna-room-1922ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1922ms/1922MS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1922MS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1922MS",
@@ -2027,11 +2027,11 @@
       "MS": {
         "bench": "MS1922",
         "images": [
-          "images/standard-sauna-room-1922ms/1922MS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1922MS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/standard-sauna-room-1922ms/Standard-Sauna-Room-Horizontal-Panel-1922MS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922MS.webp"
       }
     },
     "door_options": [
@@ -2100,7 +2100,7 @@
     "slug": "standard-sauna-room-1922md",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-1922md/1922MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/1922MD_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1922MD",
@@ -2125,11 +2125,11 @@
       "MD": {
         "bench": "MD1922",
         "images": [
-          "images/standard-sauna-room-1922md/1922MD_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/1922MD_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "images/standard-sauna-room-1922md/Standard-Sauna-Room-Horizontal-Panel-1922MD.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-1922MD.webp"
       }
     },
     "door_options": [
@@ -2198,7 +2198,7 @@
     "slug": "standard-sauna-room-2020",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2020/2020RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2020RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2020",
@@ -2223,20 +2223,20 @@
       "LS": {
         "bench": "LS2020",
         "images": [
-          "images/standard-sauna-room-2020/2020LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2020LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-2020/Standard-Sauna-Room-Horizontal-Panel-2020LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020LS.webp"
       },
       "RS": {
         "bench": "RS2020",
         "images": [
-          "images/standard-sauna-room-2020/2020RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2020RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-2020/Standard-Sauna-Room-Horizontal-Panel-2020RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020RS.webp"
       }
     },
     "door_options": [
@@ -2305,7 +2305,7 @@
     "slug": "standard-sauna-room-2020l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2020l/2020RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2020RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2020L",
@@ -2330,20 +2330,20 @@
       "LL": {
         "bench": "LL2020",
         "images": [
-          "images/standard-sauna-room-2020l/2020LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2020LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-2020l/Standard-Sauna-Room-Horizontal-Panel-2020LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020LL.webp"
       },
       "RL": {
         "bench": "RL2020",
         "images": [
-          "images/standard-sauna-room-2020l/2020RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2020RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-2020l/Standard-Sauna-Room-Horizontal-Panel-2020RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2020RL.webp"
       }
     },
     "door_options": [
@@ -2412,7 +2412,7 @@
     "slug": "standard-sauna-room-2022",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2022/2022RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2022RS_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2022",
@@ -2437,20 +2437,20 @@
       "LS": {
         "bench": "LS2022",
         "images": [
-          "images/standard-sauna-room-2022/2022LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2022LS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-2022/Standard-Sauna-Room-Horizontal-Panel-2022LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022LS.webp"
       },
       "RS": {
         "bench": "RS2022",
         "images": [
-          "images/standard-sauna-room-2022/2022RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2022RS_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/standard-sauna-room-2022/Standard-Sauna-Room-Horizontal-Panel-2022RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022RS.webp"
       }
     },
     "door_options": [
@@ -2519,7 +2519,7 @@
     "slug": "standard-sauna-room-2022l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2022l/2022RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2022RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2022L",
@@ -2544,20 +2544,20 @@
       "LL": {
         "bench": "LL2022",
         "images": [
-          "images/standard-sauna-room-2022l/2022LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2022LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-2022l/Standard-Sauna-Room-Horizontal-Panel-2022LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022LL.webp"
       },
       "RL": {
         "bench": "RL2022",
         "images": [
-          "images/standard-sauna-room-2022l/2022RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2022RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-2022l/Standard-Sauna-Room-Horizontal-Panel-2022RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022RL.webp"
       }
     },
     "door_options": [
@@ -2626,7 +2626,7 @@
     "slug": "standard-sauna-room-2022md",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2022md/2022MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2022MD_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2022MD",
@@ -2651,11 +2651,11 @@
       "MD": {
         "bench": "MD2022",
         "images": [
-          "images/standard-sauna-room-2022md/2022MD_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2022MD_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "images/standard-sauna-room-2022md/Standard-Sauna-Room-Horizontal-Panel-2022MD.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2022MD.webp"
       }
     },
     "door_options": [
@@ -2724,7 +2724,7 @@
     "slug": "standard-sauna-room-2222l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2222l/2222RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2222RL_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2222L",
@@ -2749,20 +2749,20 @@
       "LL": {
         "bench": "LL2222",
         "images": [
-          "images/standard-sauna-room-2222l/2222LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2222LL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-2222l/Standard-Sauna-Room-Horizontal-Panel-2222LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2222LL.webp"
       },
       "RL": {
         "bench": "RL2222",
         "images": [
-          "images/standard-sauna-room-2222l/2222RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2222RL_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/standard-sauna-room-2222l/Standard-Sauna-Room-Horizontal-Panel-2222RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2222RL.webp"
       }
     },
     "door_options": [
@@ -2831,7 +2831,7 @@
     "slug": "standard-sauna-room-2222md",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/standard-sauna-room-2222md/2222-MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/2222-MD_LATEST-NEW-SAUNA-ROOM.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2222MD",
@@ -2856,11 +2856,11 @@
       "MD": {
         "bench": "MD2222",
         "images": [
-          "images/standard-sauna-room-2222md/2222-MD_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/2222-MD_LATEST-NEW-SAUNA-ROOM.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "images/standard-sauna-room-2222md/Standard-Sauna-Room-Horizontal-Panel-2222MD.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Standard-Sauna-Room-Horizontal-Panel-2222MD.webp"
       }
     },
     "door_options": [
@@ -2929,7 +2929,7 @@
     "slug": "glass-front-sauna-room-1414",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1414/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1414",
@@ -2954,20 +2954,20 @@
       "LS": {
         "bench": "LS1414",
         "images": [
-          "images/glass-front-sauna-room-1414/1414LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1414LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1414/Glass-Front-Sauna-Room-1414LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1414LS.webp"
       },
       "RS": {
         "bench": "RS1414",
         "images": [
-          "images/glass-front-sauna-room-1414/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1414/Glass-Front-Sauna-Room-1414RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1414RS.webp"
       }
     },
     "door_options": [
@@ -3046,7 +3046,7 @@
     "slug": "glass-front-sauna-room-1415",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1415/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1415",
@@ -3071,20 +3071,20 @@
       "LS": {
         "bench": "LS1415",
         "images": [
-          "images/glass-front-sauna-room-1415/1415LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1415LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1415/Glass-Front-Sauna-Room-1415LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1415LS.webp"
       },
       "RS": {
         "bench": "RS1415",
         "images": [
-          "images/glass-front-sauna-room-1415/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1415/Glass-Front-Sauna-Room-1415RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1415RS.webp"
       }
     },
     "door_options": [
@@ -3163,7 +3163,7 @@
     "slug": "glass-front-sauna-room-1419",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1419/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1419",
@@ -3188,20 +3188,20 @@
       "LS": {
         "bench": "LS1419",
         "images": [
-          "images/glass-front-sauna-room-1419/1419LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1419LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1419/Glass-Front-Sauna-Room-1419LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1419LS.webp"
       },
       "RS": {
         "bench": "RS1419",
         "images": [
-          "images/glass-front-sauna-room-1419/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1419/Glass-Front-Sauna-Room-1419RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1419RS.webp"
       }
     },
     "door_options": [
@@ -3280,7 +3280,7 @@
     "slug": "glass-front-sauna-room-1419ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1419ms/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1419MS",
@@ -3305,11 +3305,11 @@
       "MS": {
         "bench": "MS1419",
         "images": [
-          "images/glass-front-sauna-room-1419ms/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1419ms/Glass-Front-Sauna-Room-1419MS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1419MS.png"
       }
     },
     "door_options": [
@@ -3388,7 +3388,7 @@
     "slug": "glass-front-sauna-room-1515",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1515/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1515",
@@ -3413,20 +3413,20 @@
       "LS": {
         "bench": "LS1515",
         "images": [
-          "images/glass-front-sauna-room-1515/1515LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1515LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1515/Glass-Front-Sauna-Room-1515LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1515LS.webp"
       },
       "RS": {
         "bench": "RS1515",
         "images": [
-          "images/glass-front-sauna-room-1515/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1515/Glass-Front-Sauna-Room-1515RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1515RS.webp"
       }
     },
     "door_options": [
@@ -3505,7 +3505,7 @@
     "slug": "glass-front-sauna-room-1519",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1519/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1519",
@@ -3530,20 +3530,20 @@
       "LS": {
         "bench": "LS1519",
         "images": [
-          "images/glass-front-sauna-room-1519/1519LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1519LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1519/Glass-Front-Sauna-Room-1519LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1519LS.webp"
       },
       "RS": {
         "bench": "RS1519",
         "images": [
-          "images/glass-front-sauna-room-1519/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1519/Glass-Front-Sauna-Room-1519RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1519RS.webp"
       }
     },
     "door_options": [
@@ -3622,7 +3622,7 @@
     "slug": "glass-front-sauna-room-1519ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1519ms/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1519MS",
@@ -3647,11 +3647,11 @@
       "MS": {
         "bench": "MS1519",
         "images": [
-          "images/glass-front-sauna-room-1519ms/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1519ms/Glass-Front-Sauna-Room-1519MS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1519MS.png"
       }
     },
     "door_options": [
@@ -3730,7 +3730,7 @@
     "slug": "glass-front-sauna-room-1420",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1420/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1420",
@@ -3755,20 +3755,20 @@
       "LS": {
         "bench": "LS1420",
         "images": [
-          "images/glass-front-sauna-room-1420/1420LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1420LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1420/Glass-Front-Sauna-Room-1420LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1420LS.webp"
       },
       "RS": {
         "bench": "RS1420",
         "images": [
-          "images/glass-front-sauna-room-1420/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1420/Glass-Front-Sauna-Room-1420RS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1420RS.png"
       }
     },
     "door_options": [
@@ -3847,7 +3847,7 @@
     "slug": "glass-front-sauna-room-1420ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1420ms/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1420MS",
@@ -3872,11 +3872,11 @@
       "MS": {
         "bench": "MS1420",
         "images": [
-          "images/glass-front-sauna-room-1420ms/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1420ms/Glass-Front-Sauna-Room-1420MS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1420MS.png"
       }
     },
     "door_options": [
@@ -3955,7 +3955,7 @@
     "slug": "glass-front-sauna-room-1520",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1520/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1520",
@@ -3980,20 +3980,20 @@
       "LS": {
         "bench": "LS1520",
         "images": [
-          "images/glass-front-sauna-room-1520/1520LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1520LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1520/Glass-Front-Sauna-Room-1520LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1520LS.webp"
       },
       "RS": {
         "bench": "RS1520",
         "images": [
-          "images/glass-front-sauna-room-1520/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1520/Glass-Front-Sauna-Room-1520RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1520RS.webp"
       }
     },
     "door_options": [
@@ -4072,7 +4072,7 @@
     "slug": "glass-front-sauna-room-1520ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1520ms/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1520MS",
@@ -4097,11 +4097,11 @@
       "MS": {
         "bench": "MS1520",
         "images": [
-          "images/glass-front-sauna-room-1520ms/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1520ms/Glass-Front-Sauna-Room-1520MS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1520MS.png"
       }
     },
     "door_options": [
@@ -4180,7 +4180,7 @@
     "slug": "glass-front-sauna-room-1522",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1522/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1522",
@@ -4205,20 +4205,20 @@
       "LS": {
         "bench": "LS1522",
         "images": [
-          "images/glass-front-sauna-room-1522/1522LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1522LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1522/Glass-Front-Sauna-Room-1522LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1522LS.webp"
       },
       "RS": {
         "bench": "RS1522",
         "images": [
-          "images/glass-front-sauna-room-1522/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1522/Glass-Front-Sauna-Room-1522RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1522RS.webp"
       }
     },
     "door_options": [
@@ -4297,7 +4297,7 @@
     "slug": "glass-front-sauna-room-1522ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1522ms/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1522MS",
@@ -4322,11 +4322,11 @@
       "MS": {
         "bench": "MS1522",
         "images": [
-          "images/glass-front-sauna-room-1522ms/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1522ms/Glass-Front-Sauna-Room-1522MS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1522MS.webp"
       }
     },
     "door_options": [
@@ -4405,7 +4405,7 @@
     "slug": "glass-front-sauna-room-1919",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1919/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1919",
@@ -4430,20 +4430,20 @@
       "LS": {
         "bench": "LS1919",
         "images": [
-          "images/glass-front-sauna-room-1919/1919LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1919LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1919/Glass-Front-Sauna-Room-1919LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919LS.webp"
       },
       "RS": {
         "bench": "RS1919",
         "images": [
-          "images/glass-front-sauna-room-1919/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1919/Glass-Front-Sauna-Room-1919RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919RS.webp"
       }
     },
     "door_options": [
@@ -4522,7 +4522,7 @@
     "slug": "glass-front-sauna-room-1919ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1919ms/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1919MS",
@@ -4547,11 +4547,11 @@
       "MS": {
         "bench": "MS1919",
         "images": [
-          "images/glass-front-sauna-room-1919ms/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1919ms/Glass-Front-Sauna-Room-1919MS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919MS.webp"
       }
     },
     "door_options": [
@@ -4630,7 +4630,7 @@
     "slug": "glass-front-sauna-room-1919mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1919mrl/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1919MRL",
@@ -4655,20 +4655,20 @@
       "MIL": {
         "bench": "MIL1919",
         "images": [
-          "images/glass-front-sauna-room-1919mrl/1919MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1919MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-1919mrl/Glass-Front-Sauna-Room-1919MLL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919MLL.webp"
       },
       "MRL": {
         "bench": "MRL1919",
         "images": [
-          "images/glass-front-sauna-room-1919mrl/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-1919mrl/Glass-Front-Sauna-Room-1919MRL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1919MRL.webp"
       }
     },
     "door_options": [
@@ -4747,7 +4747,7 @@
     "slug": "glass-front-sauna-room-1920",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1920/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1920",
@@ -4772,20 +4772,20 @@
       "LS": {
         "bench": "LS1920",
         "images": [
-          "images/glass-front-sauna-room-1920/1920LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1920LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1920/Glass-Front-Sauna-Room-1920LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920LS.webp"
       },
       "RS": {
         "bench": "RS1920",
         "images": [
-          "images/glass-front-sauna-room-1920/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1920/Glass-Front-Sauna-Room-1920RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920RS.webp"
       }
     },
     "door_options": [
@@ -4864,7 +4864,7 @@
     "slug": "glass-front-sauna-room-1920ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1920ms/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1920MS",
@@ -4889,11 +4889,11 @@
       "MS": {
         "bench": "MS1920",
         "images": [
-          "images/glass-front-sauna-room-1920ms/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1920ms/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.png"
       }
     },
     "door_options": [
@@ -4972,7 +4972,7 @@
     "slug": "glass-front-sauna-room-1920mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1920mrl/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1920MRL",
@@ -4997,20 +4997,20 @@
       "MIL": {
         "bench": "MIL1920",
         "images": [
-          "images/glass-front-sauna-room-1920mrl/1920MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1920MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-1920mrl/Glass-Front-Sauna-Room-1920MLL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920MLL.webp"
       },
       "MRL": {
         "bench": "MRL1920",
         "images": [
-          "images/glass-front-sauna-room-1920mrl/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-1920mrl/Glass-Front-Sauna-Room-1920MRL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1920MRL.webp"
       }
     },
     "door_options": [
@@ -5089,7 +5089,7 @@
     "slug": "glass-front-sauna-room-1922",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1922/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1922",
@@ -5114,20 +5114,20 @@
       "LS": {
         "bench": "LS1922",
         "images": [
-          "images/glass-front-sauna-room-1922/1922LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1922LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1922/Glass-Front-Sauna-Room-1922LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922LS.webp"
       },
       "RS": {
         "bench": "RS1922",
         "images": [
-          "images/glass-front-sauna-room-1922/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-1922/Glass-Front-Sauna-Room-1922RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922RS.webp"
       }
     },
     "door_options": [
@@ -5206,7 +5206,7 @@
     "slug": "glass-front-sauna-room-1922ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1922ms/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1922MS",
@@ -5231,11 +5231,11 @@
       "MS": {
         "bench": "MS1922",
         "images": [
-          "images/glass-front-sauna-room-1922ms/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-1922ms/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.png"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.png"
       }
     },
     "door_options": [
@@ -5314,7 +5314,7 @@
     "slug": "glass-front-sauna-room-1922mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-1922mrl/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1922MRL",
@@ -5339,20 +5339,20 @@
       "MIL": {
         "bench": "MIL1922",
         "images": [
-          "images/glass-front-sauna-room-1922mrl/1922MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1922MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-1922mrl/Glass-Front-Sauna-Room-1922MLL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922MLL.webp"
       },
       "MRL": {
         "bench": "MRL1922",
         "images": [
-          "images/glass-front-sauna-room-1922mrl/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-1922mrl/Glass-Front-Sauna-Room-1922MRL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-1922MRL.webp"
       }
     },
     "door_options": [
@@ -5431,7 +5431,7 @@
     "slug": "glass-front-sauna-room-2020",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2020/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2020",
@@ -5456,20 +5456,20 @@
       "LS": {
         "bench": "LS2020",
         "images": [
-          "images/glass-front-sauna-room-2020/2020LS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2020LS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-2020/Glass-Front-Sauna-Room-2020LS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020LS.webp"
       },
       "RS": {
         "bench": "RS2020",
         "images": [
-          "images/glass-front-sauna-room-2020/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/glass-front-sauna-room-2020/Glass-Front-Sauna-Room-2020RS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020RS.webp"
       }
     },
     "door_options": [
@@ -5548,7 +5548,7 @@
     "slug": "glass-front-sauna-room-2020ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2020ms/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2020MS",
@@ -5573,11 +5573,11 @@
       "MS": {
         "bench": "MS2020",
         "images": [
-          "images/glass-front-sauna-room-2020ms/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "images/glass-front-sauna-room-2020ms/Glass-Front-Sauna-Room-2020MS.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020MS.webp"
       }
     },
     "door_options": [
@@ -5656,7 +5656,7 @@
     "slug": "glass-front-sauna-room-2020mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2020mrl/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2020MRL",
@@ -5681,20 +5681,20 @@
       "MIL": {
         "bench": "MIL2020",
         "images": [
-          "images/glass-front-sauna-room-2020mrl/2020MiL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2020MiL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-2020mrl/Glass-Front-Sauna-Room-2020MLL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020MLL.webp"
       },
       "MRL": {
         "bench": "MRL2020",
         "images": [
-          "images/glass-front-sauna-room-2020mrl/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "images/glass-front-sauna-room-2020mrl/Glass-Front-Sauna-Room-2020MRL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2020MRL.webp"
       }
     },
     "door_options": [
@@ -5773,7 +5773,7 @@
     "slug": "glass-front-sauna-room-2022l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2022l/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2022L",
@@ -5798,20 +5798,20 @@
       "LL": {
         "bench": "LL2022",
         "images": [
-          "images/glass-front-sauna-room-2022l/2022LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2022LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/glass-front-sauna-room-2022l/Glass-Front-Sauna-Room-2022LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2022LL.webp"
       },
       "RL": {
         "bench": "RL2022",
         "images": [
-          "images/glass-front-sauna-room-2022l/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/glass-front-sauna-room-2022l/Glass-Front-Sauna-Room-2022RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2022RL.webp"
       }
     },
     "door_options": [
@@ -5890,7 +5890,7 @@
     "slug": "glass-front-sauna-room-2022md",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2022md/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2022MD",
@@ -5915,11 +5915,11 @@
       "MD": {
         "bench": "MD2022",
         "images": [
-          "images/glass-front-sauna-room-2022md/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "images/glass-front-sauna-room-2022md/Glass-Front-Sauna-Room-2022MD.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2022MD.webp"
       }
     },
     "door_options": [
@@ -5998,7 +5998,7 @@
     "slug": "glass-front-sauna-room-2222l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2222l/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2222L",
@@ -6023,20 +6023,20 @@
       "LL": {
         "bench": "LL2222",
         "images": [
-          "images/glass-front-sauna-room-2222l/2222LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2222LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/glass-front-sauna-room-2222l/Glass-Front-Sauna-Room-2222LL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2222LL.webp"
       },
       "RL": {
         "bench": "RL2222",
         "images": [
-          "images/glass-front-sauna-room-2222l/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "images/glass-front-sauna-room-2222l/Glass-Front-Sauna-Room-2222RL.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2222RL.webp"
       }
     },
     "door_options": [
@@ -6115,7 +6115,7 @@
     "slug": "glass-front-sauna-room-2222md",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/glass-front-sauna-room-2222md/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/03/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2222MD",
@@ -6140,11 +6140,11 @@
       "MD": {
         "bench": "MD2222",
         "images": [
-          "images/glass-front-sauna-room-2222md/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/03/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "images/glass-front-sauna-room-2222md/Glass-Front-Sauna-Room-2222MD.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/Glass-Front-Sauna-Room-2222MD.webp"
       }
     },
     "door_options": [
@@ -6223,7 +6223,7 @@
     "slug": "infrared-sauna-room-0908-ir-d",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/infrared-sauna-room-0908-ir-d/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "infrared",
     "model_code": "0908-IR-D",
@@ -6246,11 +6246,11 @@
       "0908-IR-D": {
         "bench": "0908-IR-D",
         "images": [
-          "images/infrared-sauna-room-0908-ir-d/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/infrared-sauna-room-0908-ir-d/0908MS-TOP-VIEW-with-DIMENSION.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/0908MS-TOP-VIEW-with-DIMENSION.webp"
       }
     },
     "door_options": [],
@@ -6287,7 +6287,7 @@
     "slug": "infrared-sauna-room-1111-ir-d",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/infrared-sauna-room-1111-ir-d/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/02/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp",
     "sku": null,
     "room_type": "infrared",
     "model_code": "1111-IR-D",
@@ -6310,11 +6310,11 @@
       "1111-IR-D": {
         "bench": "1111-IR-D",
         "images": [
-          "images/infrared-sauna-room-1111-ir-d/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/02/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "images/infrared-sauna-room-1111-ir-d/1111RS-_TOP-VIEW-with-DIMENSION.webp"
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/02/1111RS-_TOP-VIEW-with-DIMENSION.webp"
       }
     },
     "door_options": [],
