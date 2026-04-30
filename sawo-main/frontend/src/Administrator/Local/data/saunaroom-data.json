@@ -1,1 +1,6396 @@
-[]
+[
+  {
+    "id": "384eda45-8376-44ae-8a2f-b86ac559424a",
+    "name": "SAUNA MAN",
+    "slug": "sauna-man",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1777509395695_1ovkbxsnu6d.webp",
+    "sku": null,
+    "room_type": "traditional",
+    "model_code": "1234",
+    "size_category": null,
+    "width_m": null,
+    "depth_m": null,
+    "height_m": null,
+    "capacity_label": null,
+    "capacity_min": null,
+    "capacity_max": null,
+    "wood_options": [],
+    "wood_options_enabled": [],
+    "configurations": {},
+    "door_options": [],
+    "side_order": [],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": [],
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": [],
+    "spec_images": [],
+    "resources": [],
+    "files": [],
+    "tags": [],
+    "categories": [],
+    "status": "draft",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 0,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "updated_by_username": "Rafael",
+    "created_at": "2026-04-30T00:36:20.723503+00:00",
+    "updated_at": "2026-04-30T00:36:57.441+00:00"
+  },
+  {
+    "id": "bc830154-75f3-4b2f-b730-76c29c54f4c3",
+    "name": "Standard Sauna Room 1515",
+    "slug": "standard-sauna-room-1515",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1515RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1515",
+    "size_category": "small",
+    "width_m": 1.54,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "RS": {
+        "bench": "RS1515",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1515/1515RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1515/Standard-Sauna-Room-Horizontal-Panel-1515RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 5,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "beb9aac1-0f73-4202-8022-6a2a8391438b",
+    "name": "Standard Sauna Room 1515L",
+    "slug": "standard-sauna-room-1515l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1515RL_PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1515L",
+    "size_category": "small",
+    "width_m": 1.54,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1515",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1515l/1515LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1515l/Standard-Sauna-Room-Horizontal-Panel-1515LL.webp"
+      },
+      "RL": {
+        "bench": "RL1515",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1515l/1515RL_PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1515l/Standard-Sauna-Room-Horizontal-Panel-1515RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 6,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "666528a9-5923-423d-abdf-3c2cf7d8c337",
+    "name": "Standard Sauna Room 1420",
+    "slug": "standard-sauna-room-1420",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1420RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1420",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.36,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1420",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1420/1420LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1420/Standard-Sauna-Room-Horizontal-Panel-1420LS.webp"
+      },
+      "RS": {
+        "bench": "RS1420",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1420/1420RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1420/Standard-Sauna-Room-Horizontal-Panel-1420RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 8,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "786bfd49-af63-4178-94d8-bf97361b3c45",
+    "name": "Standard Sauna Room 1519",
+    "slug": "standard-sauna-room-1519",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1519RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1519",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "RS": {
+        "bench": "RS1519",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1519/1519RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1519/Standard-Sauna-Room-Horizontal-Panel-1519RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 9,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "304ff632-7998-49d3-98a7-7fd11e9665ac",
+    "name": "Standard Sauna Room 1520",
+    "slug": "standard-sauna-room-1520",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1520RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1520",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "RS": {
+        "bench": "RS1520",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1520/1520RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1520/Standard-Sauna-Room-Horizontal-Panel-1520RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 11,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "a609adaf-a117-4e68-b952-a4db646e0432",
+    "name": "Standard Sauna Room 1919",
+    "slug": "standard-sauna-room-1919",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1919RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1919",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919/1919LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919/Standard-Sauna-Room-Horizontal-Panel-1919LS.webp"
+      },
+      "RS": {
+        "bench": "RS1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919/1919RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919/Standard-Sauna-Room-Horizontal-Panel-1919RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 15,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "a6a9f553-8cc9-4307-977d-4586022e4560",
+    "name": "Standard Sauna Room 1919L",
+    "slug": "standard-sauna-room-1919l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1919RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1919L",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919l/1919LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919l/Standard-Sauna-Room-Horizontal-Panel-1919LL.webp"
+      },
+      "RL": {
+        "bench": "RL1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919l/1919RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1919l/Standard-Sauna-Room-Horizontal-Panel-1919RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 16,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "0b8d1327-d80c-4b85-bf24-f98ff9c91830",
+    "name": "Standard Sauna Room 1920",
+    "slug": "standard-sauna-room-1920",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1920RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1920",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920/1920LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920/Standard-Sauna-Room-Horizontal-Panel-1920LS.webp"
+      },
+      "RS": {
+        "bench": "RS1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920/1920RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920/Standard-Sauna-Room-Horizontal-Panel-1920RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 17,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "07e5d3e8-d744-413b-b91c-3e7970272153",
+    "name": "Standard Sauna Room 1922MS",
+    "slug": "standard-sauna-room-1922ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1922MS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1922MS",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922ms/1922MS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922ms/Standard-Sauna-Room-Horizontal-Panel-1922MS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 20,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "321fb4ab-7e7a-4e61-8826-6570d40ea3a3",
+    "name": "Standard Sauna Room 1922MD",
+    "slug": "standard-sauna-room-1922md",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1922MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1922MD",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MD": {
+        "bench": "MD1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922md/1922MD_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Double Straight Bench",
+        "bench_class": "double",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922md/Standard-Sauna-Room-Horizontal-Panel-1922MD.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 21,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "837705ed-48f7-4b6d-84e0-a90a9a66bec4",
+    "name": "Standard Sauna Room 2020L",
+    "slug": "standard-sauna-room-2020l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2020RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2020L",
+    "size_category": "large",
+    "width_m": 2.04,
+    "depth_m": 2.04,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020l/2020LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020l/Standard-Sauna-Room-Horizontal-Panel-2020LL.webp"
+      },
+      "RL": {
+        "bench": "RL2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020l/2020RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020l/Standard-Sauna-Room-Horizontal-Panel-2020RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 23,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "eefb25b3-6374-438e-8397-18fa45223741",
+    "name": "Standard Sauna Room 2022MD",
+    "slug": "standard-sauna-room-2022md",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2022MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2022MD",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.04,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MD": {
+        "bench": "MD2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022md/2022MD_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Double Straight Bench",
+        "bench_class": "double",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022md/Standard-Sauna-Room-Horizontal-Panel-2022MD.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 26,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "78f5007a-2982-4d9d-b9a8-e5126f1f9c2c",
+    "name": "Standard Sauna Room 2222MD",
+    "slug": "standard-sauna-room-2222md",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2222-MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2222MD",
+    "size_category": "large",
+    "width_m": 2.21,
+    "depth_m": 2.21,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MD": {
+        "bench": "MD2222",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2222md/2222-MD_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Double Straight Bench",
+        "bench_class": "double",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2222md/Standard-Sauna-Room-Horizontal-Panel-2222MD.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 28,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "748a86e7-4ebb-4972-bdf5-184b180410b4",
+    "name": "Glass Front Sauna Room 1415",
+    "slug": "glass-front-sauna-room-1415",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1415",
+    "size_category": "small",
+    "width_m": 1.54,
+    "depth_m": 1.37,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1415",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1415/1415LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1415/Glass-Front-Sauna-Room-1415LS.webp"
+      },
+      "RS": {
+        "bench": "RS1415",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1415/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1415/Glass-Front-Sauna-Room-1415RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 30,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "bdb3ceee-7df9-446e-a87c-8b959135a121",
+    "name": "Glass Front Sauna Room 1419MS",
+    "slug": "glass-front-sauna-room-1419ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1419MS",
+    "size_category": "small",
+    "width_m": 1.85,
+    "depth_m": 1.37,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1419",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1419ms/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1419ms/Glass-Front-Sauna-Room-1419MS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 32,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "a38a262b-629f-4e50-8fa7-0719c2ecacc5",
+    "name": "Glass Front Sauna Room 1519",
+    "slug": "glass-front-sauna-room-1519",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1519",
+    "size_category": "small",
+    "width_m": 1.85,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1519",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1519/1519LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1519/Glass-Front-Sauna-Room-1519LS.webp"
+      },
+      "RS": {
+        "bench": "RS1519",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1519/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1519/Glass-Front-Sauna-Room-1519RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 34,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "de3e4e22-fdcc-4a43-8a0a-d9ca5ebef3eb",
+    "name": "Glass Front Sauna Room 1519MS",
+    "slug": "glass-front-sauna-room-1519ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1519MS",
+    "size_category": "small",
+    "width_m": 1.85,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1519",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1519ms/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1519ms/Glass-Front-Sauna-Room-1519MS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 35,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "3ba11463-fcc8-43af-83e5-f81ce14ba993",
+    "name": "Glass Front Sauna Room 1420MS",
+    "slug": "glass-front-sauna-room-1420ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1420MS",
+    "size_category": "medium",
+    "width_m": 2.06,
+    "depth_m": 1.37,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1420",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1420ms/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1420ms/Glass-Front-Sauna-Room-1420MS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 37,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "2c3c861b-d1aa-4c55-832f-c0fa6fcf1905",
+    "name": "Glass Front Sauna Room 1520MS",
+    "slug": "glass-front-sauna-room-1520ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1520MS",
+    "size_category": "medium",
+    "width_m": 2.06,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1520",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1520ms/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1520ms/Glass-Front-Sauna-Room-1520MS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 39,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "8b2aee06-6811-4d91-8e1a-0b53c0686010",
+    "name": "Glass Front Sauna Room 1522",
+    "slug": "glass-front-sauna-room-1522",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1522",
+    "size_category": "medium",
+    "width_m": 2.23,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1522",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1522/1522LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1522/Glass-Front-Sauna-Room-1522LS.webp"
+      },
+      "RS": {
+        "bench": "RS1522",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1522/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1522/Glass-Front-Sauna-Room-1522RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 40,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "8e18c669-77f4-42f3-86ae-4bacef9f9c04",
+    "name": "Glass Front Sauna Room 1919",
+    "slug": "glass-front-sauna-room-1919",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1919",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919/1919LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919/Glass-Front-Sauna-Room-1919LS.webp"
+      },
+      "RS": {
+        "bench": "RS1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919/Glass-Front-Sauna-Room-1919RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 42,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "d037c2e9-069a-4fdc-b90b-3965e807502d",
+    "name": "Glass Front Sauna Room 1919MS",
+    "slug": "glass-front-sauna-room-1919ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1919MS",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919ms/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919ms/Glass-Front-Sauna-Room-1919MS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 43,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "58788511-4ee3-47ad-a32c-7d7b7d7ddb67",
+    "name": "Glass Front Sauna Room 1920",
+    "slug": "glass-front-sauna-room-1920",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1920",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920/1920LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920/Glass-Front-Sauna-Room-1920LS.webp"
+      },
+      "RS": {
+        "bench": "RS1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920/Glass-Front-Sauna-Room-1920RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 45,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "07156a10-a0c8-4978-8bcc-758f9e8a2b55",
+    "name": "Glass Front Sauna Room 1920MRL",
+    "slug": "glass-front-sauna-room-1920mrl",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1920MRL",
+    "size_category": "medium",
+    "width_m": 2.06,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MIL": {
+        "bench": "MIL1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920mrl/1920MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920mrl/Glass-Front-Sauna-Room-1920MLL.webp"
+      },
+      "MRL": {
+        "bench": "MRL1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920mrl/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920mrl/Glass-Front-Sauna-Room-1920MRL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 47,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "e5faabfe-920e-40bc-9764-20ae573d3dc5",
+    "name": "Glass Front Sauna Room 1922",
+    "slug": "glass-front-sauna-room-1922",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1922",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922/1922LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922/Glass-Front-Sauna-Room-1922LS.webp"
+      },
+      "RS": {
+        "bench": "RS1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922/Glass-Front-Sauna-Room-1922RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 48,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "ac7c451c-2a28-4fa4-822d-0213dd76f13e",
+    "name": "Glass Front Sauna Room 1922MS",
+    "slug": "glass-front-sauna-room-1922ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1922MS",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922ms/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922ms/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 49,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "0cb6deac-735d-46ea-9f57-2775190179a9",
+    "name": "Glass Front Sauna Room 2020MS",
+    "slug": "glass-front-sauna-room-2020ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2020MS",
+    "size_category": "large",
+    "width_m": 2.06,
+    "depth_m": 2.06,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020ms/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020ms/Glass-Front-Sauna-Room-2020MS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 52,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "e11ab49b-2be8-4e4d-83a8-1db89e0060d2",
+    "name": "Glass Front Sauna Room 2022L",
+    "slug": "glass-front-sauna-room-2022l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2022L",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.06,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2022l/2022LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2022l/Glass-Front-Sauna-Room-2022LL.webp"
+      },
+      "RL": {
+        "bench": "RL2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2022l/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2022l/Glass-Front-Sauna-Room-2022RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 54,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "7efc8fd0-9a7a-4ad6-93f7-6032e21f6e44",
+    "name": "Glass Front Sauna Room 2022MD",
+    "slug": "glass-front-sauna-room-2022md",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2022MD",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.06,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MD": {
+        "bench": "MD2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2022md/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Double Straight Bench",
+        "bench_class": "double",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2022md/Glass-Front-Sauna-Room-2022MD.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 55,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "26946a94-f373-4b6d-902a-5d6dcbf18fa6",
+    "name": "Standard Sauna Room 1214",
+    "slug": "standard-sauna-room-1214",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1214RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1214",
+    "size_category": "small",
+    "width_m": 1.36,
+    "depth_m": 1.16,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1214",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1214/1214LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1214/Standard-Sauna-Room-Horizontal-Panel-1214LS.webp"
+      },
+      "RS": {
+        "bench": "RS1214",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1214/1214RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1214/Standard-Sauna-Room-Horizontal-Panel-1214RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 1,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "b740bac6-c401-478b-914c-0ec037f80d09",
+    "name": "Standard Sauna Room 1215",
+    "slug": "standard-sauna-room-1215",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1215RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1215",
+    "size_category": "small",
+    "width_m": 1.54,
+    "depth_m": 1.16,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1215",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1215/1215LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1215/Standard-Sauna-Room-Horizontal-Panel-1215LS.webp"
+      },
+      "RS": {
+        "bench": "RS1215",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1215/1215RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1215/Standard-Sauna-Room-Horizontal-Panel-1215RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 2,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "303ee8bb-176c-4e32-8826-7269e1168795",
+    "name": "Glass Front Sauna Room 2222MD",
+    "slug": "glass-front-sauna-room-2222md",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2222MD",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.25,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MD": {
+        "bench": "MD2222",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2222md/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Double Straight Bench",
+        "bench_class": "double",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2222md/Glass-Front-Sauna-Room-2222MD.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 57,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "20e9509d-bb79-4a91-8fd7-bf9d839997c1",
+    "name": "Infrared Sauna Room 0908-IR-D",
+    "slug": "infrared-sauna-room-0908-ir-d",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "infrared",
+    "model_code": "0908-IR-D",
+    "size_category": "small",
+    "width_m": 0.8,
+    "depth_m": 0.9,
+    "height_m": 2.05,
+    "capacity_label": "1 Person",
+    "capacity_min": 1,
+    "capacity_max": 1,
+    "wood_options": [
+      "Cedar",
+      "Hemlock"
+    ],
+    "wood_options_enabled": [
+      true,
+      false
+    ],
+    "configurations": {
+      "0908-IR-D": {
+        "bench": "0908-IR-D",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/infrared-sauna-room-0908-ir-d/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/infrared-sauna-room-0908-ir-d/0908MS-TOP-VIEW-with-DIMENSION.webp"
+      }
+    },
+    "door_options": [],
+    "side_order": [],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": 1200,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": false,
+    "sort_order": 58,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "2b888274-e49b-4ba7-9ddd-12f32da31aaf",
+    "name": "Standard Sauna Room 1415",
+    "slug": "standard-sauna-room-1415",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1415RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1415",
+    "size_category": "small",
+    "width_m": 1.54,
+    "depth_m": 1.36,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1415",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1415/1415LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1415/Standard-Sauna-Room-Horizontal-Panel-1415LS.webp"
+      },
+      "RS": {
+        "bench": "RS1415",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1415/1415RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1415/Standard-Sauna-Room-Horizontal-Panel-1415RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 4,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "ec61bc4d-cb44-4494-b340-33de8f5d40ea",
+    "name": "Standard Sauna Room 1519L",
+    "slug": "standard-sauna-room-1519l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1519RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1519L",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1519",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1519l/1519LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1519l/Standard-Sauna-Room-Horizontal-Panel-1519LL.webp"
+      },
+      "RL": {
+        "bench": "RL1519",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1519l/1519RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1519l/Standard-Sauna-Room-Horizontal-Panel-1519RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 10,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "4d984c2e-a95f-43ea-b30a-1eef9171472d",
+    "name": "Standard Sauna Room 1520L",
+    "slug": "standard-sauna-room-1520l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1520RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1520L",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1520",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1520l/1520LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1520l/Standard-Sauna-Room-Horizontal-Panel-1520LL.webp"
+      },
+      "RL": {
+        "bench": "RL1520",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1520l/1520RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1520l/Standard-Sauna-Room-Horizontal-Panel-1520RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 12,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "96186a70-220d-4343-ba13-0227d07b3a3a",
+    "name": "Standard Sauna Room 1522L",
+    "slug": "standard-sauna-room-1522l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1522RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1522L",
+    "size_category": "medium",
+    "width_m": 2.23,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1522",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1522l/1522LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1522l/Standard-Sauna-Room-Horizontal-Panel-1522LL.webp"
+      },
+      "RL": {
+        "bench": "RL1522",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1522l/1522RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1522l/Standard-Sauna-Room-Horizontal-Panel-1522RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 14,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "e6545510-b7db-4c29-8d59-1e361d99dc8f",
+    "name": "Standard Sauna Room 1419",
+    "slug": "standard-sauna-room-1419",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1419RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1419",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.36,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1419",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1419/1419LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1419/Standard-Sauna-Room-Horizontal-Panel-1419LS.webp"
+      },
+      "RS": {
+        "bench": "RS1419",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1419/1419RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1419/Standard-Sauna-Room-Horizontal-Panel-1419RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 7,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "843b8cd6-2779-4b52-b81a-8d5afd8de4c3",
+    "name": "Standard Sauna Room 1522",
+    "slug": "standard-sauna-room-1522",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1522RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1522",
+    "size_category": "medium",
+    "width_m": 2.23,
+    "depth_m": 1.54,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "RS": {
+        "bench": "RS1522",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1522/1522RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1522/Standard-Sauna-Room-Horizontal-Panel-1522RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 13,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "3acd93b2-9e20-4e4f-985e-fc0377e81c98",
+    "name": "Standard Sauna Room 1922L",
+    "slug": "standard-sauna-room-1922l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1922RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1922L",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922l/1922LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922l/Standard-Sauna-Room-Horizontal-Panel-1922LL.webp"
+      },
+      "RL": {
+        "bench": "RL1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922l/1922RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1922l/Standard-Sauna-Room-Horizontal-Panel-1922RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 19,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "d5b0aba1-22f1-4538-916a-884206564ff5",
+    "name": "Standard Sauna Room 2022L",
+    "slug": "standard-sauna-room-2022l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2022RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2022L",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.04,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022l/2022LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022l/Standard-Sauna-Room-Horizontal-Panel-2022LL.webp"
+      },
+      "RL": {
+        "bench": "RL2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022l/2022RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022l/Standard-Sauna-Room-Horizontal-Panel-2022RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 25,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "d565ec93-e0e5-4684-b49f-b126ad8f1774",
+    "name": "Standard Sauna Room 2222L",
+    "slug": "standard-sauna-room-2222l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2222RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2222L",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.23,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL2222",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2222l/2222LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2222l/Standard-Sauna-Room-Horizontal-Panel-2222LL.webp"
+      },
+      "RL": {
+        "bench": "RL2222",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2222l/2222RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2222l/Standard-Sauna-Room-Horizontal-Panel-2222RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 27,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "95a14fcd-cb05-4769-8f0e-7442f415c022",
+    "name": "Standard Sauna Room 1920L",
+    "slug": "standard-sauna-room-1920l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1920RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1920L",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920l/1920LL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920l/Standard-Sauna-Room-Horizontal-Panel-1920LL.webp"
+      },
+      "RL": {
+        "bench": "RL1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920l/1920RL_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1920l/Standard-Sauna-Room-Horizontal-Panel-1920RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 18,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "0bb74f6f-1f39-4855-add6-bfa42eb099b2",
+    "name": "Standard Sauna Room 2020",
+    "slug": "standard-sauna-room-2020",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2020RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2020",
+    "size_category": "large",
+    "width_m": 2.04,
+    "depth_m": 2.04,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020/2020LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020/Standard-Sauna-Room-Horizontal-Panel-2020LS.webp"
+      },
+      "RS": {
+        "bench": "RS2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020/2020RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2020/Standard-Sauna-Room-Horizontal-Panel-2020RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 22,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "e524ef24-99bb-4cb4-b8cf-760f3833e39a",
+    "name": "Standard Sauna Room 2022",
+    "slug": "standard-sauna-room-2022",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2022RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "2022",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.04,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022/2022LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022/Standard-Sauna-Room-Horizontal-Panel-2022LS.webp"
+      },
+      "RS": {
+        "bench": "RS2022",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022/2022RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-2022/Standard-Sauna-Room-Horizontal-Panel-2022RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 24,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "ea3ab8ef-8f83-43fc-b84e-5852f9199184",
+    "name": "Glass Front Sauna Room 1420",
+    "slug": "glass-front-sauna-room-1420",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1420",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.37,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1420",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1420/1420LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1420/Glass-Front-Sauna-Room-1420LS.webp"
+      },
+      "RS": {
+        "bench": "RS1420",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1420/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1420/Glass-Front-Sauna-Room-1420RS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 36,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "14a828d1-36d9-4c9d-9837-724b20d79782",
+    "name": "Glass Front Sauna Room 1414",
+    "slug": "glass-front-sauna-room-1414",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1414",
+    "size_category": "small",
+    "width_m": 1.36,
+    "depth_m": 1.37,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1414",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1414/1414LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1414/Glass-Front-Sauna-Room-1414LS.webp"
+      },
+      "RS": {
+        "bench": "RS1414",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1414/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1414/Glass-Front-Sauna-Room-1414RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": true,
+    "has_door_filter": true,
+    "sort_order": 29,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "5561d409-3201-4fd0-85b8-c04e0e9dd820",
+    "name": "Glass Front Sauna Room 1419",
+    "slug": "glass-front-sauna-room-1419",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1419",
+    "size_category": "small",
+    "width_m": 1.85,
+    "depth_m": 1.37,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1419",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1419/1419LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1419/Glass-Front-Sauna-Room-1419LS.webp"
+      },
+      "RS": {
+        "bench": "RS1419",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1419/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1419/Glass-Front-Sauna-Room-1419RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 31,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "efb51778-3fdc-47b2-9673-662edab7c676",
+    "name": "Glass Front Sauna Room 1515",
+    "slug": "glass-front-sauna-room-1515",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1515",
+    "size_category": "small",
+    "width_m": 1.54,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1515",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1515/1515LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1515/Glass-Front-Sauna-Room-1515LS.webp"
+      },
+      "RS": {
+        "bench": "RS1515",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1515/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1515/Glass-Front-Sauna-Room-1515RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 33,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "0491a0e5-e37e-47c2-a4e4-a585aef247b0",
+    "name": "Glass Front Sauna Room 1522MS",
+    "slug": "glass-front-sauna-room-1522ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1522MS",
+    "size_category": "medium",
+    "width_m": 2.23,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1522",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1522ms/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1522ms/Glass-Front-Sauna-Room-1522MS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 41,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "46d50f0b-7d8a-4e3f-a810-438a620265f6",
+    "name": "Glass Front Sauna Room 1520",
+    "slug": "glass-front-sauna-room-1520",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1520",
+    "size_category": "medium",
+    "width_m": 2.04,
+    "depth_m": 1.56,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1520",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1520/1520LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1520/Glass-Front-Sauna-Room-1520LS.webp"
+      },
+      "RS": {
+        "bench": "RS1520",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1520/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1520/Glass-Front-Sauna-Room-1520RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 38,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "723b0765-46cf-4349-8f19-d4102337b552",
+    "name": "Standard Sauna Room 1414",
+    "slug": "standard-sauna-room-1414",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1414RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "sku": null,
+    "room_type": "standard",
+    "model_code": "1414",
+    "size_category": "small",
+    "width_m": 1.36,
+    "depth_m": 1.36,
+    "height_m": 2.12,
+    "capacity_label": "1-3 People",
+    "capacity_min": 1,
+    "capacity_max": 3,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS1414",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1414/1414LS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1414/Standard-Sauna-Room-Horizontal-Panel-1414LS.webp"
+      },
+      "RS": {
+        "bench": "RS1414",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1414/1414RS_LATEST-NEW-SAUNA-ROOM.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/standard-sauna-room-1414/Standard-Sauna-Room-Horizontal-Panel-1414RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "RL",
+      "LL",
+      "MS",
+      "MD"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 3,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "1f82b0ba-448f-4c3c-bfd8-b881348d532c",
+    "name": "Glass Front Sauna Room 1920MS",
+    "slug": "glass-front-sauna-room-1920ms",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1920MS",
+    "size_category": "medium",
+    "width_m": 2.06,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MS": {
+        "bench": "MS1920",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920ms/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Single Straight Bench",
+        "bench_class": "single",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1920ms/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.png"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 46,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "35101468-cbe8-4fc9-8d75-7ee5bf1d8d7d",
+    "name": "Glass Front Sauna Room 1922MRL",
+    "slug": "glass-front-sauna-room-1922mrl",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1922MRL",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 1.85,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MIL": {
+        "bench": "MIL1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922mrl/1922MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922mrl/Glass-Front-Sauna-Room-1922MLL.webp"
+      },
+      "MRL": {
+        "bench": "MRL1922",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922mrl/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1922mrl/Glass-Front-Sauna-Room-1922MRL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 50,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "b676cb72-da2a-4336-9f6b-994a0005b2d0",
+    "name": "Glass Front Sauna Room 2020",
+    "slug": "glass-front-sauna-room-2020",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2020",
+    "size_category": "large",
+    "width_m": 2.04,
+    "depth_m": 2.06,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LS": {
+        "bench": "LS2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020/2020LS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020/Glass-Front-Sauna-Room-2020LS.webp"
+      },
+      "RS": {
+        "bench": "RS2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020/Glass-Front-Sauna-Room-2020RS.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 51,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "523267e1-39fc-4493-9f34-5d8cda622226",
+    "name": "Glass Front Sauna Room 2020MRL",
+    "slug": "glass-front-sauna-room-2020mrl",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2020MRL",
+    "size_category": "large",
+    "width_m": 2.06,
+    "depth_m": 2.06,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MIL": {
+        "bench": "MIL2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020mrl/2020MiL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020mrl/Glass-Front-Sauna-Room-2020MLL.webp"
+      },
+      "MRL": {
+        "bench": "MRL2020",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020mrl/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2020mrl/Glass-Front-Sauna-Room-2020MRL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 53,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "86352dad-a77c-4354-8d93-d8da349b38e7",
+    "name": "Glass Front Sauna Room 2222L",
+    "slug": "glass-front-sauna-room-2222l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "2222L",
+    "size_category": "large",
+    "width_m": 2.23,
+    "depth_m": 2.25,
+    "height_m": 2.12,
+    "capacity_label": "6+ People",
+    "capacity_min": 6,
+    "capacity_max": null,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "LL": {
+        "bench": "LL2222",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2222l/2222LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2222l/Glass-Front-Sauna-Room-2222LL.webp"
+      },
+      "RL": {
+        "bench": "RL2222",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2222l/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "L-Type Bench",
+        "bench_class": "l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-2222l/Glass-Front-Sauna-Room-2222RL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 56,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "7ff5ef62-1060-49e9-8003-8c023672ee40",
+    "name": "Infrared Sauna Room 1111-IR-D",
+    "slug": "infrared-sauna-room-1111-ir-d",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "infrared",
+    "model_code": "1111-IR-D",
+    "size_category": "small",
+    "width_m": 1.1,
+    "depth_m": 1.1,
+    "height_m": 2.05,
+    "capacity_label": "2 Person",
+    "capacity_min": 2,
+    "capacity_max": 2,
+    "wood_options": [
+      "Cedar",
+      "Hemlock"
+    ],
+    "wood_options_enabled": [
+      true,
+      false
+    ],
+    "configurations": {
+      "1111-IR-D": {
+        "bench": "1111-IR-D",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/infrared-sauna-room-1111-ir-d/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/infrared-sauna-room-1111-ir-d/1111RS-_TOP-VIEW-with-DIMENSION.webp"
+      }
+    },
+    "door_options": [],
+    "side_order": [],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": 1400,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": false,
+    "sort_order": 59,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "2be3d3b6-5d7c-4885-8a3c-ac2434263d48",
+    "name": "Glass Front Sauna Room 1919MRL",
+    "slug": "glass-front-sauna-room-1919mrl",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "sauna-room-images/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "sku": null,
+    "room_type": "glassfront",
+    "model_code": "1919MRL",
+    "size_category": "medium",
+    "width_m": 1.85,
+    "depth_m": 1.87,
+    "height_m": 2.12,
+    "capacity_label": "4-6 People",
+    "capacity_min": 4,
+    "capacity_max": 6,
+    "wood_options": [
+      "Cedar",
+      "Aspen",
+      "Pinaceae"
+    ],
+    "wood_options_enabled": [
+      true,
+      false,
+      false
+    ],
+    "configurations": {
+      "MIL": {
+        "bench": "MIL1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919mrl/1919MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919mrl/Glass-Front-Sauna-Room-1919MLL.webp"
+      },
+      "MRL": {
+        "bench": "MRL1919",
+        "images": [
+          "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919mrl/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+        ],
+        "bench_name": "Middle L-Type Bench",
+        "bench_class": "middle-l-type",
+        "panel_image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/saunaroom-images/glass-front-sauna-room-1919mrl/Glass-Front-Sauna-Room-1919MRL.webp"
+      }
+    },
+    "door_options": [
+      {
+        "label": "Right Side",
+        "value": "RS"
+      },
+      {
+        "label": "Left Side",
+        "value": "LS"
+      },
+      {
+        "label": "Middle",
+        "value": "MS"
+      },
+      {
+        "label": "Middle Right (L-Type)",
+        "value": "MRL"
+      },
+      {
+        "label": "Middle Left (L-Type)",
+        "value": "MIL"
+      },
+      {
+        "label": "Middle (Double)",
+        "value": "MD"
+      },
+      {
+        "label": "Right Side (L-Type)",
+        "value": "RL"
+      },
+      {
+        "label": "Left Side (L-Type)",
+        "value": "LL"
+      }
+    ],
+    "side_order": [
+      "RS",
+      "LS",
+      "MS",
+      "MRL",
+      "MIL",
+      "MD",
+      "RL",
+      "LL"
+    ],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": null,
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": true,
+    "sort_order": 44,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-04-29T01:33:53.784107+00:00",
+    "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  }
+]
