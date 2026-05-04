@@ -9,10 +9,12 @@ import Combi from "../../assets/Home/Section2/COMBI-SERIES-600x360-1.webp";
 import Stone from "../../assets/Home/Section2/STONE-SERIES-3-600x320-new-.webp";
 import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-1-600x360-1.webp";
 
+import menuPaths from "../../menuPaths";
+
 const saunaHeaters = [
   {
     title: "TOWER",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/tower-series/",
+    href: menuPaths.sauna.heaters.tower,
     img: Tower,
     alt: "SAWO Tower Sauna Heater Series with elegant vertical design",
     caption:
@@ -20,7 +22,7 @@ const saunaHeaters = [
   },
   {
     title: "WALL-MOUNTED",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/wall-mounted-series/",
+    href: menuPaths.sauna.heaters.wallMounted,
     img: WallMounted,
     alt: "SAWO Wall-Mounted Sauna Heater Series for compact sauna rooms",
     caption:
@@ -28,7 +30,7 @@ const saunaHeaters = [
   },
   {
     title: "FLOOR",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/floor-series/",
+    href: menuPaths.sauna.heaters.floor,
     img: Floor,
     alt: "SAWO Floor-Mounted Sauna Heater Series for commercial saunas",
     caption:
@@ -36,7 +38,7 @@ const saunaHeaters = [
   },
   {
     title: "COMBI",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/combi-series/",
+    href: menuPaths.sauna.heaters.combi,
     img: Combi,
     alt: "SAWO Combi Sauna Heater Series with steam and heat combination",
     caption:
@@ -44,7 +46,7 @@ const saunaHeaters = [
   },
   {
     title: "STONE",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/stone-series/",
+    href: menuPaths.sauna.heaters.stone,
     img: Stone,
     alt: "SAWO Stone Sauna Heater Series with stainless steel and soapstone",
     caption:
@@ -52,7 +54,7 @@ const saunaHeaters = [
   },
   {
     title: "DRAGONFIRE",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/dragonfire-series/",
+    href: menuPaths.sauna.heaters.dragonfire,
     img: Dragonfire,
     alt: "SAWO Dragonfire Sauna Heater Series with artistic design by Stefan Lindfors",
     caption:

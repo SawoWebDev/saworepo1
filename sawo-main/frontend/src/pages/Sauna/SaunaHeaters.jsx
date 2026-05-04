@@ -4,6 +4,7 @@ import React from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import CirclesInfo from "../../components/CirclesInfo";
+import menuPaths from "../../menuPaths";
 
 const SaunaHeaters = () => {
   return (
@@ -151,7 +152,7 @@ const SaunaHeaters = () => {
         <div className="sawo-sec heaters">
           <div className="sawo-grid">
 
-            <a className="sawo-card" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/tower-series/">
+            <a className="sawo-card" href={menuPaths.sauna.heaters.tower}>
               <figure>
                 <img
                   src="https://www.sawo.com/wp-content/uploads/2025/04/TOWER-SERIES-2-600x360-1.webp"
@@ -166,7 +167,7 @@ const SaunaHeaters = () => {
               </figure>
             </a>
 
-            <a className="sawo-card" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/floor-series/">
+            <a className="sawo-card" href={menuPaths.sauna.heaters.floor}>
               <figure>
                 <img
                   src="https://www.sawo.com/wp-content/uploads/2025/05/FLOOR-MOUNTED-SERIES1-1024x614-1.webp"
@@ -181,7 +182,7 @@ const SaunaHeaters = () => {
               </figure>
             </a>
 
-            <a className="sawo-card" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/wall-mounted-series/">
+            <a className="sawo-card" href={menuPaths.sauna.heaters.wallMounted}>
               <figure>
                 <img
                   src="https://www.sawo.com/wp-content/uploads/2025/09/WALL-MOUNTED-SERIES-v2-1.webp"
@@ -196,7 +197,7 @@ const SaunaHeaters = () => {
               </figure>
             </a>
 
-            <a className="sawo-card" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/combi-series/">
+            <a className="sawo-card" href={menuPaths.sauna.heaters.combi}>
               <figure>
                 <img
                   src="https://www.sawo.com/wp-content/uploads/2025/04/COMBI-SERIES-600x360-1.webp"
@@ -211,7 +212,7 @@ const SaunaHeaters = () => {
               </figure>
             </a>
 
-            <a className="sawo-card" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/dragonfire-series/">
+            <a className="sawo-card" href={menuPaths.sauna.heaters.dragonfire}>
               <figure>
                 <img
                   src="https://www.sawo.com/wp-content/uploads/2025/04/DRAGON-SERIES-1-600x360-1.webp"
@@ -226,7 +227,7 @@ const SaunaHeaters = () => {
               </figure>
             </a>
 
-            <a className="sawo-card" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/stone-series/">
+            <a className="sawo-card" href={menuPaths.sauna.heaters.stone}>
               <figure>
                 <img
                   src="https://www.sawo.com/wp-content/uploads/2025/06/STONE-SERIES-3-600x320-new-.webp"

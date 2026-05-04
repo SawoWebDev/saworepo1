@@ -235,6 +235,7 @@ export async function getVisibleProductsCached(force = false) {
   return fetchPromise;
 }
 
+
 /**
  * Bust the cached products (call after admin sync to force refresh)
  */

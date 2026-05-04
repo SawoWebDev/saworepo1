@@ -2086,8 +2086,9 @@ export default function Products({ currentUser }) {
   const [viewMode,     setViewMode]     = useState("list");
   const [dataSource,   setDataSource]   = useState("live"); // "live" or "local"
 
-  const [selected,    setSelected]    = useState(new Set());
-  const [bulkConfirm, setBulkConfirm] = useState(false);
+  const [selected,              setSelected]              = useState(new Set());
+  const [bulkConfirm,           setBulkConfirm]           = useState(false);
+  const [bulkStatusValue,       setBulkStatusValue]       = useState("");
 
   const [modalOpen,   setModalOpen]   = useState(false);
   const [editing,     setEditing]     = useState(null);
@@ -2575,6 +2576,39 @@ export default function Products({ currentUser }) {
     finally { setSelected(new Set()); fetchProducts(); }
   };
 
+  // ── Bulk status change ─────────────────────────────────────────────────────────
+  const handleBulkStatusChange = async () => {
+    const ids = Array.from(selected);
+    try {
+      const { error } = await supabase
+        .from("products")
+        .update({ status: bulkStatusValue })
+        .in("id", ids);
+      if (error) throw error;
+
+      const changedBy = currentUser?.username || "unknown";
+      const changedById = currentUser?.id || null;
+
+      await Promise.allSettled(ids.map(id => {
+        const prod = products.find(p => p.id === id);
+        return logActivity({
+          action: "update", entity: "product",
+          entity_id: id, entity_name: prod?.name || "Unknown",
+          username: changedBy, user_id: changedById,
+          meta: {
+            bulk: true,
+            field: "status",
+            old_value: prod?.status,
+            new_value: bulkStatusValue,
+          },
+        });
+      }));
+
+      add(`${ids.length} product(s) status changed to ${bulkStatusValue}.`, "success");
+    } catch (err) { add(err.message, "error"); }
+    finally { setSelected(new Set()); setBulkStatusValue(""); fetchProducts(); }
+  };
+
   const toggleSelect = id => {
     setSelected(prev => {
       const next = new Set(prev);
@@ -2740,11 +2774,21 @@ export default function Products({ currentUser }) {
           ))}
         </div>
         {perms.can("products.bulk_delete") && dataSource === "live" && selected.size > 0 && (
-          <button type="button" className="btn btn-sm"
-            style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
-            onClick={() => setBulkConfirm(true)}>
-            <i className="fa-solid fa-trash" /> Delete {selected.size}
-          </button>
+          <>
+            <select className="filter-select" value={bulkStatusValue} onChange={e => {
+              setBulkStatusValue(e.target.value);
+              handleBulkStatusChange();
+            }}>
+              <option value="" disabled>Change Status ({selected.size})</option>
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+            </select>
+            <button type="button" className="btn btn-sm"
+              style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
+              onClick={() => setBulkConfirm(true)}>
+              <i className="fa-solid fa-trash" /> Delete {selected.size}
+            </button>
+          </>
         )}
         {perms.can("products.storage_cleanup") && (
           <button

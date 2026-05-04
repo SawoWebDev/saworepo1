@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ButtonClear from "../../components/Buttons/ButtonClear";
+import menuPaths from "../../menuPaths";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
@@ -276,42 +277,42 @@ const Sauna = () => {
         <div className="sawo-sec heaters">
           <div className="sawo-grid">
             <div className="sawo-card">
-              <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/tower-series/">
+              <a href={menuPaths.sauna.heaters.tower}>
                 <img src="https://www.sawo.com/wp-content/uploads/2025/04/TOWER-SERIES-2-600x360-1.webp" alt="Tower Series" />
               </a>
               <div className="sawo-title">Tower Series</div>
               <div className="sawo-caption">SAWO Tower Series a sauna stone pillar design for full-body steam distribution, ensuring a luxurious and immersive steam experience from floor to ceiling.</div>
             </div>
             <div className="sawo-card">
-              <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/stone-series/">
+              <a href={menuPaths.sauna.heaters.stone}>
                 <img src="https://www.sawo.com/wp-content/uploads/2025/06/STONE-SERIES-3-600x320-new-.webp" alt="Stone Series" />
               </a>
               <div className="sawo-title">Stone Series</div>
               <div className="sawo-caption">SAWO Stone Series features a durable stainless steel body with heat-conducting Finnish soapstone, ensuring efficient heating and quick drying after use.</div>
             </div>
             <div className="sawo-card">
-              <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/wall-mounted-series/">
+              <a href={menuPaths.sauna.heaters.wallMounted}>
                 <img src="https://www.sawo.com/wp-content/uploads/2025/09/WALL-MOUNTED-SERIES-v2-1.webp" alt="Wall Mounted Series" />
               </a>
               <div className="sawo-title">Wall Mounted Series</div>
               <div className="sawo-caption">SAWO Wall-Mounted Series features sleek, space-saving heaters that blend efficiency with modern design for optimal warmth and comfort.</div>
             </div>
             <div className="sawo-card">
-              <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/floor-series/">
+              <a href={menuPaths.sauna.heaters.floor}>
                 <img src="https://www.sawo.com/wp-content/uploads/2025/05/FLOOR-MOUNTED-SERIES1-1024x614-1.webp" alt="Floor Series" />
               </a>
               <div className="sawo-title">Floor Series</div>
               <div className="sawo-caption">SAWO Floor Series offers movable, high-performance stand-alone heaters for optimal heat distribution and lasting comfort.</div>
             </div>
             <div className="sawo-card">
-              <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/dragonfire-series/">
+              <a href={menuPaths.sauna.heaters.dragonfire}>
                 <img src="https://www.sawo.com/wp-content/uploads/2025/04/DRAGON-SERIES-1-600x360-1.webp" alt="Dragonfire Series" />
               </a>
               <div className="sawo-title">Dragonfire Series</div>
               <div className="sawo-caption">Elevate your sauna experience with the SAWO Dragonfire series, crafted by renowned Finnish designer Stefan Lindfors for modern living.</div>
             </div>
             <div className="sawo-card">
-              <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/combi-series/">
+              <a href={menuPaths.sauna.heaters.combi}>
                 <img src="https://www.sawo.com/wp-content/uploads/2025/04/COMBI-SERIES-600x360-1.webp" alt="Combi Series" />
               </a>
               <div className="sawo-title">Combi Series</div>
