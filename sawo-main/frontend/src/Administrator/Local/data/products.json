@@ -30,7 +30,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "f1471432-ae53-442b-8f8f-c6c78aa13691",
@@ -91,7 +92,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a029f5fd-02ef-4117-a19e-eb0d98e56006",
@@ -155,7 +157,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b130cb86-90cf-4141-a4e3-0cab79685e52",
@@ -217,7 +220,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "fcf9ea8a-2b5c-4e48-9456-1ddb5a692d64",
@@ -283,7 +287,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2fcb7b83-c383-4a2b-89c0-53987e5453c9",
@@ -357,7 +362,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "eeaf0536-113d-4df2-a79a-f293d5207ff4",
@@ -434,7 +440,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "bad59c23-c327-4690-a324-4a00084e9281",
@@ -510,7 +517,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "cc3cb0d3-c79c-4c4f-818e-4370f09148f2",
@@ -579,7 +587,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "eb0a637d-39a1-4d81-a73e-af677b46b208",
@@ -643,7 +652,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2e691db6-5da4-4ea0-92b1-27d2a99f9cfa",
@@ -709,7 +719,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "0f45ed72-d70b-4dcf-9d06-c78c7aa04064",
@@ -774,7 +785,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "524d4f69-8864-4b00-a174-2e0c2179f89f",
@@ -841,7 +853,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b819ed43-288c-4a66-8279-15dc3ab9207c",
@@ -904,7 +917,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "c8c26a29-daf3-4fd9-9bd5-50f5b3c084b9",
@@ -975,7 +989,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "fe13bcbb-0dc8-4140-b069-ee4d6c9c0c45",
@@ -1046,7 +1061,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "74bd6255-103e-44b5-908d-bd36c90724dc",
@@ -1122,7 +1138,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b675e512-24e0-4a11-b734-1ef04a84c42d",
@@ -1189,7 +1206,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "f6609553-4d69-4edf-9395-c43afd0a0aa6",
@@ -1285,7 +1303,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "358faebf-1aba-47d6-9cfd-1fc7a725ab08",
@@ -1376,7 +1395,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "26c9e85d-8efe-4d8d-97b7-606bb9e3a771",
@@ -1450,7 +1470,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7078d72f-2c37-445d-9fa1-12f331e2fec9",
@@ -1515,7 +1536,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "180af7f6-1c1c-44db-94cd-cd88070811b6",
@@ -1584,7 +1606,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "91852d8f-7bfe-4abc-a779-78ee65950793",
@@ -1652,7 +1675,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "242d9eb5-907f-4be2-a371-5db18c96d548",
@@ -1718,7 +1742,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "abe3f7fb-2725-4d68-bc6b-dff65be81afc",
@@ -1783,7 +1808,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2c58be55-d48a-4fb1-8a58-6b8fd732366b",
@@ -1851,7 +1877,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "610ca97f-a7f1-49fb-bcbf-69bcfa2caff6",
@@ -1918,7 +1945,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "3f34ef40-0f99-40ff-ab1d-da83361431a5",
@@ -1985,7 +2013,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "e131f1cf-5a02-4d41-abe9-8e990a97e814",
@@ -2051,7 +2080,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "ad273de0-e0db-4ad0-9c2f-0bf05bde124c",
@@ -2118,7 +2148,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "3d301d55-2051-4eec-aca0-12d80e38cf44",
@@ -2184,7 +2215,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "0d3cd79f-d62b-4deb-88d2-fb7d9ee0ac3c",
@@ -2253,7 +2285,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b3bf4540-8e2f-4e88-b0d3-1e1c8118e243",
@@ -2322,7 +2355,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "ff6700d7-45c9-4fc0-a58e-114029d6b0cb",
@@ -2390,7 +2424,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "37e47747-7f5e-4fb6-9410-883771d00c5f",
@@ -2457,7 +2492,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a0144bd6-29ce-43c1-89d8-cb6110b98ca9",
@@ -2527,7 +2563,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "e5ed7b73-5325-4303-8612-cd060cfbfb5d",
@@ -2594,7 +2631,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "653321e2-0c80-44d2-af2b-53fe4d15bd6d",
@@ -2674,7 +2712,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2420cbc5-5922-4f1d-af39-7382f6f8369e",
@@ -2753,7 +2792,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "280b0032-8d29-42a9-a908-94e742f12461",
@@ -2823,7 +2863,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "6157a803-8f82-47eb-9702-8d0cf3b8c797",
@@ -2893,7 +2934,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "315dce17-ca0b-47cc-b5f0-78dbc77cbe38",
@@ -2966,7 +3008,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "8cb8bfc8-b0fd-41fb-bfe5-7b296bd23dcc",
@@ -3044,7 +3087,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "eb2f918f-25a3-4859-96c5-fd115e68f911",
@@ -3106,7 +3150,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "4e2b9b0c-e677-4209-8d39-ca7d4dc123ce",
@@ -3181,7 +3226,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2934addc-75e6-440c-b10f-17d871849112",
@@ -3252,7 +3298,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "cc9d275d-680e-4b72-975d-061e24e125b1",
@@ -3344,7 +3391,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "5fa90bf8-772f-4308-b4e5-a271c19a822f",
@@ -3419,7 +3467,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "3b7587a5-a121-4083-bf71-d57932a31794",
@@ -3490,7 +3539,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "913351e5-3edf-4639-87b8-a4839b69249a",
@@ -3565,7 +3615,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9b84a078-a112-41c7-a6dc-148ed87fd110",
@@ -3656,7 +3707,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "fbd415e6-6d42-4871-9fa1-83ca329d8583",
@@ -3733,7 +3785,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "fd3bd27f-960e-4e5a-9cc1-d60f4a68bd92",
@@ -3808,7 +3861,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a03e4667-e189-4355-bf55-bc82170c0a72",
@@ -3873,7 +3927,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "34ca7aa4-28a9-48f5-8810-f6342a016c76",
@@ -3939,7 +3994,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "480eecb7-c3f6-4cb9-9f5c-59e05fa77e90",
@@ -4010,7 +4066,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b8d6cf7a-8f33-4b6e-a997-8d27f70b5daf",
@@ -4080,7 +4137,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "110b7078-89f5-4b02-94bc-c8daabace407",
@@ -4146,7 +4204,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7fd6691d-c5a8-43dd-bf19-b2bff37417b3",
@@ -4211,7 +4270,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "09471c44-08ae-4599-b18b-763d2f02e897",
@@ -4277,7 +4337,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2509d358-23f4-46f6-84c0-630627b9e1ac",
@@ -4341,7 +4402,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9d3e6567-abb3-4b17-ab12-64d761839481",
@@ -4417,7 +4479,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "195c0643-d606-4438-bd45-cf70aabaa6d4",
@@ -4493,7 +4556,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a1a2fa6d-2cb1-426f-983a-7f40751c828e",
@@ -4558,7 +4622,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "09e827c4-45c9-44c8-87dd-1086227821b2",
@@ -4624,7 +4689,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "68d24877-e300-4c6b-841e-5a35a1ffd362",
@@ -4690,7 +4756,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7b40ea61-5549-4d5b-b0eb-7549d91205cd",
@@ -4761,7 +4828,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "05da80c7-f31c-4155-ab9b-b98fcff27650",
@@ -4843,7 +4911,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "fbd6f67e-993e-477d-b784-32b7b3020d10",
@@ -4920,7 +4989,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "92c04293-bfed-442b-ac05-09e612a7347c",
@@ -4991,7 +5061,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "ea0d5fe0-d1bd-495b-91cb-cf88b7b9aaba",
@@ -5062,7 +5133,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "853702cf-2a61-4294-9f40-6f41cbfe7583",
@@ -5095,7 +5167,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "745f4b48-fcfe-4e0f-9646-aba34b4891af",
@@ -5164,7 +5237,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "dc28e725-ee4a-4fbe-99ee-170c98ecf47b",
@@ -5234,7 +5308,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "d907fcce-67c3-4b27-b33f-98debe0102ce",
@@ -5297,7 +5372,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "da0f187e-cc5d-4283-8a34-249974c01c97",
@@ -5367,7 +5443,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "15024010-24cd-4cf2-ab01-7e4281cc5603",
@@ -5432,7 +5509,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "0fcd7adc-bc93-44b2-81af-5c17c1ee557e",
@@ -5498,7 +5576,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "c0873514-0f6b-41ef-874c-cc17e0b480d9",
@@ -5567,7 +5646,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "eb3f427e-371c-4aa3-af40-42ac6ca03d19",
@@ -5641,7 +5721,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "c18f7676-a199-4e7e-b092-02c81217afbd",
@@ -5716,7 +5797,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "52e29aa8-8493-4915-a9f9-88eabc6e43ae",
@@ -5789,7 +5871,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "0f409779-f47d-4136-8328-ec47fda7e077",
@@ -5859,7 +5942,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a9719e36-47cc-4a94-8436-8c8d9c3c94ff",
@@ -5923,7 +6007,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "cf6cb129-2203-4e33-be48-6d7d1336dd85",
@@ -5989,7 +6074,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "1daf49dc-68d7-49ec-8041-65bbcc142133",
@@ -6054,7 +6140,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "ef8e7e21-b129-4dfb-9edc-81c466bff91e",
@@ -6116,7 +6203,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b2f2f483-9304-43ce-ac3a-cf18a7949903",
@@ -6177,7 +6265,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "00fb6d76-ed0b-4850-b411-b601ab3388e9",
@@ -6236,7 +6325,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "eee8fddc-0ad2-49b3-8a54-714eec91136a",
@@ -6296,7 +6386,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "4a4c1eb7-1713-47e1-b5f7-9060355180d0",
@@ -6355,7 +6446,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9dac0470-40f9-4ce4-945c-eee43f19f4aa",
@@ -6415,7 +6507,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9974c209-5962-4256-9d17-aaceaeda1046",
@@ -6477,7 +6570,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "e710befd-a4e8-4027-9b11-ca8c672a8659",
@@ -6537,7 +6631,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a7606e01-3b76-4c9a-ae0b-cda7eedf7a55",
@@ -6598,7 +6693,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "36e15cc0-7a21-4161-922c-d8aa08e820bc",
@@ -6657,7 +6753,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a8b064aa-cfff-40cc-816a-160372fbd0a3",
@@ -6717,7 +6814,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "15dff165-8128-49f2-b760-9553be5cff00",
@@ -6775,7 +6873,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7ebdcf49-d5da-412f-bd72-255628e97314",
@@ -6836,7 +6935,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "b5149a8b-acf3-4ef3-8d04-61be17c724d3",
@@ -6902,7 +7002,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "8d388b31-c36e-4456-8420-2cb4ee0edd89",
@@ -6966,7 +7067,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "960809d7-d1b5-473f-b4a0-af7b982f10d1",
@@ -7027,7 +7129,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "635100f3-f058-4fbb-befc-743534b956d9",
@@ -7089,7 +7192,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "8dbd6c07-1dd1-47e1-b9a8-ef22cd47641b",
@@ -7154,7 +7258,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "39b92ea9-2b0e-43a2-9a3c-25c3e1b95b63",
@@ -7213,7 +7318,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "0fbd2098-f824-4f48-9fec-a36a75b0c471",
@@ -7279,7 +7385,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "d93eb2cf-d29a-47be-8212-c0d3b05fce0b",
@@ -7344,7 +7451,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "bc55562a-f390-4481-a5b9-da85b7553878",
@@ -7384,7 +7492,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "3ec10896-68a3-4450-8b24-a35b50a1c6c7",
@@ -7423,7 +7532,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "96070ec2-7666-4b98-8ab2-068f595a91d3",
@@ -7462,7 +7572,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
@@ -7504,7 +7615,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "092c7d32-3510-4cab-8f16-10db6e6b5599",
@@ -7546,7 +7658,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "96c70250-e9a0-4dd4-8e0d-c4a5552f292f",
@@ -7591,7 +7704,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7db07a84-cc67-482e-8933-1903e8111e6e",
@@ -7632,7 +7746,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
@@ -7676,7 +7791,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "8a27b22f-0506-478c-a207-2484c68cfdfb",
@@ -7718,7 +7834,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "50834970-4527-4954-9cd7-8ac89d7bd70f",
@@ -7772,7 +7889,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "bab85c05-e589-45bf-b634-8a4f62d8db6b",
@@ -7825,7 +7943,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9b16757e-fc42-4213-b33f-07a48edc4e2e",
@@ -7880,7 +7999,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "16492285-3ef7-436b-9606-9a01304cf309",
@@ -7928,7 +8048,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7fc76dd6-2520-4759-a7d1-59b6d22e20b9",
@@ -7986,7 +8107,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "19063a1d-6d6a-463d-a24c-ac50b43d18e6",
@@ -8041,7 +8163,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9d43ef15-615c-4354-aa32-8463fa50d186",
@@ -8095,7 +8218,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "cd47764f-9156-400f-af7d-b3e1f3f48d1c",
@@ -8143,7 +8267,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9d7a2dce-595f-4391-82fc-cd7cbcc72a1c",
@@ -8191,7 +8316,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2fbd56fa-6c44-47af-b463-d738580ff741",
@@ -8245,7 +8371,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "2f5d7d0c-a9cf-44f0-bc72-36968d5602ad",
@@ -8296,7 +8423,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "7ed5a5f1-e3e5-4601-8b86-bc606f91e392",
@@ -8351,7 +8479,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "f42926da-8a5f-4e67-a095-7d165da3c1b4",
@@ -8395,7 +8524,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "d46fa703-6662-4caa-b0d2-d9f648d0f779",
@@ -8451,7 +8581,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
@@ -8499,7 +8630,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "a2c06d94-9bc9-4c7a-aabe-45cd6cec7326",
@@ -8568,7 +8700,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "02d375d6-19ae-4f40-ac11-5187ae4a7549",
@@ -8631,7 +8764,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "cbba2e49-2e8e-43b8-877e-c23eaf7a14e5",
@@ -8692,7 +8826,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "55b7ac59-128f-4f7f-ab2b-45d7e1a3b48a",
@@ -8746,7 +8881,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "49825108-e558-40a2-87d4-7e5d837cb07c",
@@ -8805,7 +8941,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "ae72cb7e-7891-48ca-a72b-17195a40a16b",
@@ -8865,7 +9002,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "261b4c86-973f-434a-ba15-740ad0b16a20",
@@ -8922,7 +9060,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "ace7c2a9-0c4c-45f3-8dd3-ca9d494dce17",
@@ -8981,7 +9120,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "e8372b04-0cd3-4490-a09d-4ca7457132e0",
@@ -9043,7 +9183,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "3c509fa8-2425-4a77-97f3-60628fd09779",
@@ -9103,7 +9244,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "84781ed8-1c12-4fa7-bf75-4162b4580f34",
@@ -9164,7 +9306,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "9a0558ad-bde6-4530-bd3a-674e205f67bf",
@@ -9222,7 +9365,8 @@
     "capacity_liters": null,
     "variant_type": null,
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": []
   },
   {
     "id": "1ed85c0e-c299-4d03-8d2a-19623c3bda37",
@@ -9261,7 +9405,42 @@
     "capacity_liters": 40,
     "variant_type": "material",
     "product_family": "wooden-pail-392",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "51a7218a-41e5-4b89-82c5-21e47f6c9eb6",
+        "sku": "392-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/392-PC.webp",
+        "capacity_liters": 40,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "33f64477-032b-4995-bd9e-c5100442ed00",
+        "sku": "392-A",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/392-A.webp",
+        "capacity_liters": 40,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "5b51308a-b1a7-46da-8cd5-a268ab8257d3",
+        "sku": "392-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/392-D.webp",
+        "capacity_liters": 40,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "a294fd69-a89b-415c-b3a5-2d346abcde12",
@@ -9302,7 +9481,42 @@
     "capacity_liters": null,
     "variant_type": "material",
     "product_family": "wooden-pail-392",
-    "parent_product_id": "1ed85c0e-c299-4d03-8d2a-19623c3bda37"
+    "parent_product_id": "1ed85c0e-c299-4d03-8d2a-19623c3bda37",
+    "local_variants": [
+      {
+        "id": "4b0b79fa-afac-452d-85d0-6fe5c475e622",
+        "sku": "392-PC-COV",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/392-P-COV.webp",
+        "capacity_liters": null,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "12f804e4-8ebb-4c9e-a99e-f442dbc262f4",
+        "sku": "392-A-COV",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/392-A-COV.webp",
+        "capacity_liters": null,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "87141028-8d39-45f3-95a0-4ae44ed7c9e1",
+        "sku": "392-D-COV",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/392-D-COV.webp",
+        "capacity_liters": null,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "06ca05ac-5ca3-4d26-9628-83ae10df591f",
@@ -9343,7 +9557,42 @@
     "capacity_liters": null,
     "variant_type": "material",
     "product_family": "wooden-pail-391",
-    "parent_product_id": "c7a17501-a7b4-4d31-8cc6-5034e420a502"
+    "parent_product_id": "c7a17501-a7b4-4d31-8cc6-5034e420a502",
+    "local_variants": [
+      {
+        "id": "56594d10-89bf-49e1-8ce2-3635bda9e6ae",
+        "sku": "391-PC-COV",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/391-P-COV.webp",
+        "capacity_liters": null,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "0d7770dc-e505-4125-b8a6-3dc77e82d14e",
+        "sku": "391-A-COV",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/391-A-COV.webp",
+        "capacity_liters": null,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "b35affc5-7a20-4ede-85be-4bed1928ee77",
+        "sku": "391-D-COV",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/391-D-COV.webp",
+        "capacity_liters": null,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "a01af5c6-e7f9-47db-b544-9e61cc0a9b90",
@@ -9382,7 +9631,42 @@
     "capacity_liters": 4,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "21e06468-c30b-4a93-9348-085634a9c38b",
+        "sku": "347-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_347-PC.webp",
+        "capacity_liters": 4,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "6f1bf0b2-fb2e-43dd-9c02-b09d8ff5252e",
+        "sku": "347-WH",
+        "label": "White",
+        "color_key": "white",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_347-WH.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "de26899c-114d-481b-bb83-c7e559b714d5",
+        "sku": "347-BL",
+        "label": "Black",
+        "color_key": "black",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_347-BL.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "2ccc31aa-6956-4e3e-8fda-35abf368370d",
@@ -9421,7 +9705,42 @@
     "capacity_liters": 4,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "79a76415-c1b0-4bf3-8227-64b1be126478",
+        "sku": "346-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_346-PC.webp",
+        "capacity_liters": 4,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "61194fe3-b106-4ba7-ae8a-0149428caafb",
+        "sku": "346-WH",
+        "label": "White",
+        "color_key": "white",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_346-WH.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "9195ee56-2520-4c24-af08-066e188bd7e0",
+        "sku": "346-BL",
+        "label": "Black",
+        "color_key": "black",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_346-BL.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "0c6762d6-6c05-414b-aaf1-f67d6c2e64a9",
@@ -9461,7 +9780,42 @@
     "capacity_liters": 4,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "17f5f961-a503-4243-bf71-46c735ba8084",
+        "sku": "341-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_341-PC.webp",
+        "capacity_liters": 4,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "50711796-3da4-4d85-98a0-21ce30e448e4",
+        "sku": "341-A",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_341-A.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "8d679d60-bd41-483d-b9b8-76af52b5e549",
+        "sku": "341-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_341-D.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "8a57f91e-ca30-4303-a9fd-c53dd61152ee",
@@ -9503,7 +9857,42 @@
     "capacity_liters": 4,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "9fe59730-2ece-47b2-8f88-043ff24a9803",
+        "sku": "340-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_340-PC.webp",
+        "capacity_liters": 4,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "9824233b-227d-4a7e-84a4-cdd9c78d153d",
+        "sku": "340-A",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_340-A.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "563c5963-4883-463b-8d9d-1a11aab1621f",
+        "sku": "340-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_340-D.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "c382d3da-b9b8-492f-b64a-e87efbd604ce",
@@ -9542,7 +9931,42 @@
     "capacity_liters": 18,
     "variant_type": "material",
     "product_family": "wooden-pail-381",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "f66f10da-f2cb-402a-baa6-840d875519a9",
+        "sku": "381-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/381-PC.webp",
+        "capacity_liters": 18,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "fff81b1e-af54-4f8e-b7fa-d53021273857",
+        "sku": "381-A",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/381-A.webp",
+        "capacity_liters": 18,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "327e91bc-fb03-44e3-8f93-a8d1270a9413",
+        "sku": "381-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/381-D.webp",
+        "capacity_liters": 18,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "e1717b3b-e079-46bd-8fd4-9be0e70c5718",
@@ -9582,7 +10006,42 @@
     "capacity_liters": 9,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "5fbc2cb0-2c39-4d23-98e0-b680d24c0838",
+        "sku": "300-HPC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-HPC.webp",
+        "capacity_liters": 9,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "04e438cc-b4e4-41a5-a0d0-cb958f7d11f0",
+        "sku": "300-HA",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-HA.webp",
+        "capacity_liters": 9,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "6fd994a8-f41e-4053-9a99-c1a5236f4289",
+        "sku": "300-HD",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-HD.webp",
+        "capacity_liters": 9,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "34f7b95a-0407-436d-b5f7-7d131de6ce8c",
@@ -9623,7 +10082,42 @@
     "capacity_liters": 5,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "811bdad9-2eca-48f7-bda9-abb477266171",
+        "sku": "371-MPC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_371-MPC.webp",
+        "capacity_liters": 5,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "c7787039-f7a6-4399-8f4b-671016b50018",
+        "sku": "371-MA",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_371-MA.webp",
+        "capacity_liters": 5,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "9fdaf4ee-3173-464b-b1a4-4310c353a692",
+        "sku": "371-MD",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_371-MD.webp",
+        "capacity_liters": 5,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "6232d3be-6b92-4580-a5c1-77ff43e93ebb",
@@ -9664,7 +10158,42 @@
     "capacity_liters": 5,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "73caf8b4-ed31-4dc9-a32d-d5915c338788",
+        "sku": "375-MPC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/375-MPC.webp",
+        "capacity_liters": 5,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "4bcf8682-90cb-484e-8f76-f5c4cf909956",
+        "sku": "375-MA",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/375-MA.webp",
+        "capacity_liters": 5,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "3b60bbd2-d2c4-4937-971e-afd5247a0886",
+        "sku": "375-MD",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/375-MD.webp",
+        "capacity_liters": 5,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "f23c2ac1-c662-400d-ba3c-52f0839e3415",
@@ -9706,7 +10235,42 @@
     "capacity_liters": null,
     "variant_type": "material",
     "product_family": "wooden-pail-381",
-    "parent_product_id": "c382d3da-b9b8-492f-b64a-e87efbd604ce"
+    "parent_product_id": "c382d3da-b9b8-492f-b64a-e87efbd604ce",
+    "local_variants": [
+      {
+        "id": "b4c63042-ce8e-4564-8300-1d768ab4b05a",
+        "sku": "381-PC-COV",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/381-P-COV.webp",
+        "capacity_liters": null,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "48507abb-27b0-4b32-9eaf-55364fbb92a1",
+        "sku": "381-A-COV",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/381-A-COV.webp",
+        "capacity_liters": null,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "d4b78186-4f93-4048-b6b0-db7ba1590d6e",
+        "sku": "381-D-COV",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/381-D-COV.webp",
+        "capacity_liters": null,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "b900890f-9f2c-4e25-8f0c-bcc1014781e2",
@@ -9746,7 +10310,42 @@
     "capacity_liters": 9,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "373e846c-3def-4a0a-8fc9-3d515a8885ec",
+        "sku": "300-TPC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-TPC.webp",
+        "capacity_liters": 9,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "3ee94853-d2c5-47d7-b63b-94509254fc79",
+        "sku": "300-TA",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-TA.webp",
+        "capacity_liters": 9,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "97a3e25e-5883-45cb-90ad-3cc07b897b13",
+        "sku": "300-TD",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-TD.webp",
+        "capacity_liters": 9,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "72556cac-3de5-4db3-ad7f-b6b4d78f30ea",
@@ -9786,7 +10385,31 @@
     "capacity_liters": 5,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "e7739f7c-e253-43bb-8adc-b083cf866503",
+        "sku": "373-MA",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/373-MA.webp",
+        "capacity_liters": 5,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "72a6ddb2-fbda-441f-8900-57708d19ec48",
+        "sku": "373-MD",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/373-MD.webp",
+        "capacity_liters": 5,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "982a99b3-c50a-432f-bcc9-7591eb3556cb",
@@ -9825,7 +10448,31 @@
     "capacity_liters": 5,
     "variant_type": "material",
     "product_family": null,
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "897b1edc-2a5e-4c12-bac2-fe341db7e649",
+        "sku": "374-MA",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/374-MA.webp",
+        "capacity_liters": 5,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "c87fddaf-dc6c-430a-9707-1e632d9d5bcf",
+        "sku": "374-MD",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/374-MD.webp",
+        "capacity_liters": 5,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "7d24f346-c029-479e-9f9a-fcdbd1ff226d",
@@ -9866,7 +10513,31 @@
     "capacity_liters": 4,
     "variant_type": "material",
     "product_family": "steamwater-pail",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "d3f17c9e-bdd5-442d-b365-ede0cd02b522",
+        "sku": "342-D-DRF",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2025/11/SAWO_sauna_accessories_pails_342-D-DRF.webp",
+        "capacity_liters": 4,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "53a14778-54a5-4eb4-9a53-5cf17aa1a3b2",
+        "sku": "342-BL-DRF",
+        "label": "Black",
+        "color_key": "black",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2025/11/SAWO_sauna_accessories_pails_342-BL-DRF.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "729c1739-5a49-490a-b364-c290666f683e",
@@ -9906,7 +10577,31 @@
     "capacity_liters": 4,
     "variant_type": "material",
     "product_family": "dragon-pail",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "c97240d9-1398-4470-ace1-9fa2d65ffdc2",
+        "sku": "342-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2025/11/SAWO_sauna_accessories_pails_342-D.webp",
+        "capacity_liters": 4,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "1f46495f-0e69-4af9-93c0-e854632ccd6b",
+        "sku": "342-BL",
+        "label": "Black",
+        "color_key": "black",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2025/11/SAWO_sauna_accessories_pails_342-BL.webp",
+        "capacity_liters": 4,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "9321835d-c4e1-490b-823f-b5c89c2ca742",
@@ -9947,7 +10642,31 @@
     "capacity_liters": 9,
     "variant_type": "material",
     "product_family": "steamwater-pail",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "ef87acd0-c334-4b5a-993a-623b9223e22c",
+        "sku": "300-D-DRF",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-D-DRF.png",
+        "capacity_liters": 9,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "bf0b3957-198d-48a9-bdea-df58d2d4e5f1",
+        "sku": "300-BL-DRF",
+        "label": "Black",
+        "color_key": "black",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-BL-DRF.png",
+        "capacity_liters": 9,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "c7a17501-a7b4-4d31-8cc6-5034e420a502",
@@ -9986,7 +10705,42 @@
     "capacity_liters": 28,
     "variant_type": "material",
     "product_family": "wooden-pail-391",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "7ed28f15-077e-4a01-81d3-9e051b55a916",
+        "sku": "391-PC",
+        "label": "Pinaceae",
+        "color_key": "pine",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/391-PC.png",
+        "capacity_liters": 28,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "752992fe-e90f-4a88-ac74-775c6dff61dc",
+        "sku": "391-A",
+        "label": "Aspen",
+        "color_key": "aspen",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/391-A.png",
+        "capacity_liters": 28,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      },
+      {
+        "id": "dbff4f99-1dd3-418c-896e-a346fd7d280d",
+        "sku": "391-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/391-D.png",
+        "capacity_liters": 28,
+        "is_default": false,
+        "sort_order": 3,
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "dadf52a2-8535-45e5-bfa0-4689778eff1d",
@@ -10026,6 +10780,30 @@
     "capacity_liters": 9,
     "variant_type": "material",
     "product_family": "dragon-pail",
-    "parent_product_id": null
+    "parent_product_id": null,
+    "local_variants": [
+      {
+        "id": "b8cab632-6b0a-4bec-bb5c-8f939e21e0c3",
+        "sku": "300-D",
+        "label": "Cedar",
+        "color_key": "cedar",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-D.png",
+        "capacity_liters": 9,
+        "is_default": true,
+        "sort_order": 1,
+        "status": "active"
+      },
+      {
+        "id": "e7e12e08-6e53-4335-a9fd-a03320603cfe",
+        "sku": "300-BL",
+        "label": "Black",
+        "color_key": "black",
+        "image": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2026/03/SAWO_sauna_accessories_pails_300-BL.png",
+        "capacity_liters": 9,
+        "is_default": false,
+        "sort_order": 2,
+        "status": "active"
+      }
+    ]
   }
 ]

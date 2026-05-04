@@ -41,8 +41,8 @@ import FAQ              from "./pages/Support/FAQ";
 import UserManuals      from "./pages/Support/UserManuals";
 import ProductCatalogue from "./pages/Support/ProductCatalogue";
 
-// Dynamic product detail page
-import ProductPage from "./pages/ProductPage";
+// Dynamic product detail pages
+import ProductPageRouter from "./pages/ProductPageRouter";
 import SaunaRoomDisplay from "./pages/SaunaRoomDisplay";
 
 // Admin pages
@@ -97,7 +97,7 @@ export default function App() {
                 <Route path={menuPaths.support.catalogue}       element={<ProductCatalogue />} />
 
                 {/* Single product detail page */}
-                <Route path="/products/:slug" element={<ProductPage />} />
+                <Route path="/products/:slug" element={<ProductPageRouter />} />
 
                 {/* Single sauna room detail page */}
                 <Route path="/sauna/rooms/:slug" element={<SaunaRoomDisplay />} />

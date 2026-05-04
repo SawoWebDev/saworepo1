@@ -27,6 +27,16 @@ function getImageUrl(product, field, dataSource) {
 function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
+
+// Convert Supabase URL to relative path for GitHub storage
+// e.g., https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/file.webp → products/file.webp
+function supabaseUrlToRelativePath(url) {
+  if (!url) return null;
+  if (!url.includes("/object/public/")) return url; // Not a Supabase URL, return as-is
+  const match = url.match(/\/object\/public\/product-images\/(.+)$/);
+  return match ? match[1] : url;
+}
+
 function formsEqual(a, b) {
   for (const k of Object.keys(EMPTY_FORM)) {
     const av = a[k], bv = b[k];
@@ -2083,12 +2093,14 @@ function VariantManager({ variants, onChange, addToast }) {
     setUploadingIdx(idx);
     try {
       const url = await uploadFileToSupabase(file, "product-images");
+      // Convert Supabase URL to relative path for local storage
+      const relativePath = supabaseUrlToRelativePath(url);
       if (idx === -1) {
-        setNewVariant(v => ({ ...v, image: url }));
+        setNewVariant(v => ({ ...v, image: relativePath }));
       } else {
-        onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
+        onChange(variants.map((v, i) => i === idx ? { ...v, image: relativePath } : v));
       }
-      addToast("✓ Image uploaded to Supabase.", "success");
+      addToast("✓ Image uploaded and synced to local data.", "success");
     } catch (err) {
       addToast("❌ Upload failed: " + err.message, "error");
     } finally {
@@ -2652,8 +2664,23 @@ export default function Products({ currentUser }) {
           }
         }
       } else {
+        // For new products, include local_variants in initial payload
+        const newPayload = {
+          ...payload,
+          local_variants: variants.filter(v => v.sku).map(v => ({
+            sku: v.sku?.trim(),
+            label: v.label?.trim() || null,
+            color_key: v.color_key || null,
+            image: v.image || null,
+            capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
+            is_default: !!v.is_default,
+            sort_order: v.sort_order || 0,
+            status: v.status || "active"
+          }))
+        };
+
         const { data: inserted, error } = await supabase
-          .from("products").insert([payload]).select("id").single();
+          .from("products").insert([newPayload]).select("id").single();
         if (error) throw error;
 
         await logActivity({
@@ -2714,6 +2741,25 @@ export default function Products({ currentUser }) {
           }
         }
         setLoadedVariants(JSON.parse(JSON.stringify(variants)));
+      }
+
+      // Sync local_variants to product for frontend access (no Supabase egress needed)
+      if (variants.length > 0) {
+        const localVariants = variants.map(v => ({
+          id: v.id,
+          sku: v.sku?.trim(),
+          label: v.label?.trim() || null,
+          color_key: v.color_key || null,
+          image: v.image || null, // Already a relative path from upload conversion
+          capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
+          is_default: !!v.is_default,
+          sort_order: v.sort_order || 0,
+          status: v.status || "active"
+        }));
+        const productId = editing?.id;
+        if (productId) {
+          await supabase.from("products").update({ local_variants: localVariants }).eq("id", productId);
+        }
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
