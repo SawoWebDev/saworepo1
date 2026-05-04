@@ -368,8 +368,15 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
     });
 
     onEvent({ phase: "writing", message: "Writing changes to backend..." });
+
+    // Strip out local_variants (frontend-only field not in Supabase schema)
+    const productsForBackend = updatedProducts.map(p => {
+      const { local_variants, ...rest } = p;
+      return rest;
+    });
+
     console.log("[applyLocalChanges] Sending to backend:", {
-      productsCount: updatedProducts.length,
+      productsCount: productsForBackend.length,
       categoriesCount: updatedCategories.length,
       tagsCount: updatedTags.length,
       backendUrl: BACKEND_URL,
@@ -380,7 +387,7 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        products: updatedProducts,
+        products: productsForBackend,
         categories: updatedCategories,
         tags: updatedTags,
       }),

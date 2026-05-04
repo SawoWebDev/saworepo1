@@ -2664,19 +2664,9 @@ export default function Products({ currentUser }) {
           }
         }
       } else {
-        // For new products, include local_variants in initial payload
+        // For new products, send payload without local_variants (frontend-only field)
         const newPayload = {
           ...payload,
-          local_variants: variants.filter(v => v.sku).map(v => ({
-            sku: v.sku?.trim(),
-            label: v.label?.trim() || null,
-            color_key: v.color_key || null,
-            image: v.image || null,
-            capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
-            is_default: !!v.is_default,
-            sort_order: v.sort_order || 0,
-            status: v.status || "active"
-          }))
         };
 
         const { data: inserted, error } = await supabase
@@ -2741,25 +2731,6 @@ export default function Products({ currentUser }) {
           }
         }
         setLoadedVariants(JSON.parse(JSON.stringify(variants)));
-      }
-
-      // Sync local_variants to product for frontend access (no Supabase egress needed)
-      if (variants.length > 0) {
-        const localVariants = variants.map(v => ({
-          id: v.id,
-          sku: v.sku?.trim(),
-          label: v.label?.trim() || null,
-          color_key: v.color_key || null,
-          image: v.image || null, // Already a relative path from upload conversion
-          capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
-          is_default: !!v.is_default,
-          sort_order: v.sort_order || 0,
-          status: v.status || "active"
-        }));
-        const productId = editing?.id;
-        if (productId) {
-          await supabase.from("products").update({ local_variants: localVariants }).eq("id", productId);
-        }
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
