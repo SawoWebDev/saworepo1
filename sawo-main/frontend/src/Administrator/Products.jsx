@@ -2069,6 +2069,145 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
   );
 }
 
+// ─── Variant Manager Component ────────────────────────────────────────────────
+function VariantManager({ variants, onChange, addToast }) {
+  const [isAdding, setIsAdding] = useState(false);
+  const [newVariant, setNewVariant] = useState({
+    sku: "", label: "", color_key: "", image: "", capacity_liters: "", is_default: false, status: "active"
+  });
+  const [uploadingIdx, setUploadingIdx] = useState(null);
+
+  const colorOptions = ["pine", "aspen", "cedar", "black", "white", "red"];
+
+  const handleImageUpload = async (file, idx) => {
+    setUploadingIdx(idx);
+    try {
+      const url = await uploadFileToSupabase(file, "product-images");
+      if (idx === -1) {
+        setNewVariant(v => ({ ...v, image: url }));
+      } else {
+        onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
+      }
+      addToast("✓ Image uploaded to Supabase.", "success");
+    } catch (err) {
+      addToast("❌ Upload failed: " + err.message, "error");
+    } finally {
+      setUploadingIdx(null);
+    }
+  };
+
+  const handleAddVariant = () => {
+    if (!newVariant.sku.trim()) {
+      addToast("⚠️ SKU is required", "warning");
+      return;
+    }
+    const variant = {
+      ...newVariant,
+      id: `new-${Date.now()}`,
+      capacity_liters: parseFloat(newVariant.capacity_liters) || null,
+    };
+    onChange([...variants, variant]);
+    setNewVariant({ sku: "", label: "", color_key: "", image: "", capacity_liters: "", is_default: false, status: "active" });
+    setIsAdding(false);
+    addToast("✓ Variant added.", "success");
+  };
+
+  const handleDeleteVariant = (idx) => {
+    onChange(variants.filter((_, i) => i !== idx));
+    addToast("✓ Variant removed.", "success");
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      {variants.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {variants.map((v, idx) => (
+            <div key={v.id || idx} style={{
+              background: "var(--surface-2)", border: "1px solid var(--border)",
+              borderRadius: "var(--r-sm)", padding: 12, display: "grid",
+              gridTemplateColumns: "80px 1fr 1fr 1fr 1fr 80px", gap: 10, alignItems: "center"
+            }}>
+              {/* Image */}
+              <div style={{ position: "relative" }}>
+                {v.image ? (
+                  <div style={{ position: "relative", width: 60, height: 60, borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)" }}>
+                    <img src={v.image} alt="variant" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
+                    <label style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, hover: { opacity: 1 }, cursor: "pointer", fontSize: "0.7rem", color: "white" }}>
+                      <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
+                      Change
+                    </label>
+                  </div>
+                ) : (
+                  <label style={{ width: 60, height: 60, border: "1px dashed var(--border)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.7rem", color: "var(--text-3)" }}>
+                    <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
+                    Upload
+                  </label>
+                )}
+              </div>
+
+              {/* SKU */}
+              <input type="text" value={v.sku} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, sku: e.target.value } : x))} placeholder="SKU (e.g., 347-PC)" className="form-input" style={{ fontSize: "0.8rem" }} />
+
+              {/* Label */}
+              <input type="text" value={v.label || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, label: e.target.value } : x))} placeholder="Label (e.g., Pine)" className="form-input" style={{ fontSize: "0.8rem" }} />
+
+              {/* Color */}
+              <select value={v.color_key || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, color_key: e.target.value || null } : x))} className="form-select" style={{ fontSize: "0.8rem" }}>
+                <option value="">Color</option>
+                {colorOptions.map(c => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
+              </select>
+
+              {/* Capacity & Default */}
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <input type="number" value={v.capacity_liters || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, capacity_liters: parseFloat(e.target.value) || null } : x))} placeholder="Cap" className="form-input" style={{ fontSize: "0.8rem", flex: 1 }} />
+                <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: "0.8rem", cursor: "pointer", whiteSpace: "nowrap" }}>
+                  <input type="checkbox" checked={v.is_default} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, is_default: e.target.checked } : x))} />
+                  Default
+                </label>
+              </div>
+
+              {/* Delete */}
+              <button type="button" onClick={() => handleDeleteVariant(idx)} style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
+                <i className="fa-solid fa-trash" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Add Variant Form */}
+      {isAdding ? (
+        <div style={{
+          background: "var(--surface-2)", border: "2px dashed var(--border)",
+          borderRadius: "var(--r-sm)", padding: 12, display: "grid",
+          gridTemplateColumns: "80px 1fr 1fr 1fr 1fr 80px", gap: 10, alignItems: "center"
+        }}>
+          {/* Image upload */}
+          <label style={{ width: 60, height: 60, border: "1px dashed var(--border)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.7rem", color: "var(--text-3)" }}>
+            <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === -1} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], -1)} />
+            {uploadingIdx === -1 ? "Uploading..." : "Image"}
+          </label>
+
+          <input type="text" value={newVariant.sku} onChange={e => setNewVariant(v => ({ ...v, sku: e.target.value }))} placeholder="SKU" className="form-input" style={{ fontSize: "0.8rem" }} />
+          <input type="text" value={newVariant.label} onChange={e => setNewVariant(v => ({ ...v, label: e.target.value }))} placeholder="Label" className="form-input" style={{ fontSize: "0.8rem" }} />
+          <select value={newVariant.color_key} onChange={e => setNewVariant(v => ({ ...v, color_key: e.target.value || "" }))} className="form-select" style={{ fontSize: "0.8rem" }}>
+            <option value="">Color</option>
+            {colorOptions.map(c => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
+          </select>
+          <input type="number" value={newVariant.capacity_liters} onChange={e => setNewVariant(v => ({ ...v, capacity_liters: e.target.value }))} placeholder="Capacity" className="form-input" style={{ fontSize: "0.8rem" }} />
+
+          <div style={{ display: "flex", gap: 6 }}>
+            <button type="button" onClick={handleAddVariant} style={{ background: "var(--brand)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem", flex: 1 }}>Save</button>
+            <button type="button" onClick={() => setIsAdding(false)} style={{ background: "var(--text-3)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>×</button>
+          </div>
+        </div>
+      ) : (
+        <Btn label="+ Add Variant" variant="secondary" size="sm" onClick={() => setIsAdding(true)} />
+      )}
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Products({ currentUser }) {
   const perms = getPerms(currentUser);
@@ -2123,8 +2262,10 @@ export default function Products({ currentUser }) {
   const [syncCheckEvents, setSyncCheckEvents] = useState([]);
   const [syncCheckApplying, setSyncCheckApplying] = useState(false);
 
+  const [variants, setVariants] = useState([]);
+  const [loadedVariants, setLoadedVariants] = useState([]);
 
-  const isDirty = !formsEqual(form, savedForm);
+  const isDirty = !formsEqual(form, savedForm) || JSON.stringify(variants) !== JSON.stringify(loadedVariants);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchProducts = useCallback(async () => {
@@ -2294,6 +2435,7 @@ export default function Products({ currentUser }) {
     setModalOpen(false); setEditing(null); setEditingFull(null);
     setShowRevisions(false); setModalMenuOpen(false);
     setUnsavedOpen(false); pendingClose.current = null;
+    setVariants([]); setLoadedVariants([]);
   };
   const handleModalClose = () => { if (isDirty) { pendingClose.current = actualClose; setUnsavedOpen(true); } else actualClose(); };
   const handleUnsavedStay    = () => { setUnsavedOpen(false); pendingClose.current = null; };
@@ -2340,6 +2482,10 @@ export default function Products({ currentUser }) {
       setEditingFull(data);   // full row → audit strip
       setShowRevisions(false);
       setModalMenuOpen(false);
+      // Load variants for this product
+      const { data: vData } = await supabase.from("product_variants").select("*").eq("product_id", row.id).order("sort_order");
+      setVariants(vData || []);
+      setLoadedVariants(JSON.parse(JSON.stringify(vData || [])));
       setModalOpen(true);
     } catch (err) { add(err.message, "error"); }
   };
@@ -2518,6 +2664,56 @@ export default function Products({ currentUser }) {
           username:    currentUser?.username,
           user_id:     currentUser?.id,
         });
+
+        // Add variants for new product
+        const productId = inserted?.id;
+        for (const v of variants) {
+          if (v.sku) {
+            const variantRow = {
+              product_id: productId,
+              sku: v.sku.trim(),
+              label: v.label?.trim() || null,
+              color_key: v.color_key || null,
+              image: v.image || null,
+              capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
+              is_default: !!v.is_default,
+              sort_order: v.sort_order || 0,
+              status: v.status || "active"
+            };
+            await supabase.from("product_variants").insert([variantRow]);
+          }
+        }
+        setLoadedVariants(JSON.parse(JSON.stringify(variants)));
+      }
+
+      // Update variants for edited product
+      if (editing && variants.length > 0) {
+        const removedIds = loadedVariants.filter(v => !variants.find(nv => nv.id === v.id)).map(v => v.id).filter(id => !id.startsWith("new-"));
+        if (removedIds.length) {
+          await supabase.from("product_variants").delete().in("id", removedIds);
+        }
+
+        for (const v of variants) {
+          if (!v.sku) continue;
+          const variantRow = {
+            product_id: editing.id,
+            sku: v.sku.trim(),
+            label: v.label?.trim() || null,
+            color_key: v.color_key || null,
+            image: v.image || null,
+            capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
+            is_default: !!v.is_default,
+            sort_order: v.sort_order || 0,
+            status: v.status || "active"
+          };
+
+          if (v.id && !v.id.startsWith("new-")) {
+            await supabase.from("product_variants").update(variantRow).eq("id", v.id);
+          } else {
+            await supabase.from("product_variants").insert([variantRow]);
+          }
+        }
+        setLoadedVariants(JSON.parse(JSON.stringify(variants)));
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
@@ -3178,6 +3374,10 @@ export default function Products({ currentUser }) {
             <Field label="Product Family" value={form.product_family} onChange={e => setForm(f => ({ ...f, product_family: e.target.value }))} placeholder="e.g. dragon-pail, wooden-pail-381" helper="Group related product variants" />
             <Field label="Parent Product ID" value={form.parent_product_id} onChange={e => setForm(f => ({ ...f, parent_product_id: e.target.value }))} placeholder="UUID of parent product" helper="For accessories linked to parent product" />
           </div>
+
+          {/* Variants */}
+          <SectionLabel label="Variants" />
+          <VariantManager variants={variants} onChange={setVariants} addToast={add} />
 
           {/* Features ← above Short Description */}
           <SectionLabel label="Features" />
