@@ -48,14 +48,6 @@
     "created_at": "2026-04-20T07:08:05.317954+00:00"
   },
   {
-    "id": "066b0001-0c91-4178-b192-6946d022f699",
-    "name": "Towe",
-    "slug": "towe",
-    "description": null,
-    "usage_count": 0,
-    "created_at": "2026-04-20T08:32:21.55353+00:00"
-  },
-  {
     "id": "b84fbf18-c89f-468c-aa4d-8dac73b1bca1",
     "name": "Combi",
     "slug": "combi",
@@ -70,5 +62,21 @@
     "description": null,
     "usage_count": 0,
     "created_at": "2026-04-21T03:14:15.746352+00:00"
+  },
+  {
+    "id": "3810d08a-a3f3-4282-897f-7fe97625b4af",
+    "name": "accessories",
+    "slug": "accessories",
+    "description": null,
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:16.851363+00:00"
+  },
+  {
+    "id": "a7fda416-a233-4d86-aa25-5945dad2b34d",
+    "name": "pails",
+    "slug": "pails",
+    "description": null,
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:16.851363+00:00"
   }
 ]

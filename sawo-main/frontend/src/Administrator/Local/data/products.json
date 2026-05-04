@@ -1,5 +1,38 @@
 [
   {
+    "id": "c5c0377d-2616-471a-bbf7-66c8b5f45b93",
+    "name": "DS",
+    "slug": "ds",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/1777422737925_hczdrvxkhh4.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [],
+    "tags": [],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-04-29T00:31:44.886113+00:00",
+    "updated_at": "2026-04-29T00:32:21.21+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
     "id": "f1471432-ae53-442b-8f8f-c6c78aa13691",
     "name": "Minidragon Black NB",
     "slug": "minidragon-black-nb",
@@ -48,11 +81,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Dragonfire%20Series/Minidragon-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Minidragon NS NB FiEn 3P 1P"
+        "name": "Minidragon NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Dragonfire%20Series/Minidragon-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a029f5fd-02ef-4117-a19e-eb0d98e56006",
@@ -106,11 +145,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Dragonfire%20Series/Minidragon-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Minidragon NS NB FiEn 3P 1P"
+        "name": "Minidragon NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Dragonfire%20Series/Minidragon-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b130cb86-90cf-4141-a4e3-0cab79685e52",
@@ -163,12 +208,16 @@
     "updated_at": "2026-04-21T03:29:03.623+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Minidragon-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Minidragon-NS-NB_FiEn-3P-1P.pdf",
         "name": "Minidragon NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "fcf9ea8a-2b5c-4e48-9456-1ddb5a692d64",
@@ -224,11 +273,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Minidragon-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Minidragon NS NB FiEn 3P 1P"
+        "name": "Minidragon NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Minidragon-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2fcb7b83-c383-4a2b-89c0-53987e5453c9",
@@ -292,11 +347,17 @@
     "files": [
       {
         "url": "https://docs.google.com/viewer?url=https://s.sawo.com/wp-content/uploads/Manuals/Combi%20Series/Taurus-D-Combi_FiEn-3P-1P.pdf&embedded=true",
-        "name": "Taurus D Combi FiEn 3P 1P.Pdf&Embedded=True"
+        "name": "Taurus D Combi FiEn 3P 1P.Pdf&Embedded=True",
+        "original": "https://docs.google.com/viewer?url=https://s.sawo.com/wp-content/uploads/Manuals/Combi%20Series/Taurus-D-Combi_FiEn-3P-1P.pdf&embedded=true",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "eeaf0536-113d-4df2-a79a-f293d5207ff4",
@@ -363,11 +424,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Floor-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Floor NS NB FiEn 3P 1P"
+        "name": "Nordex Floor NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Floor-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "bad59c23-c327-4690-a324-4a00084e9281",
@@ -433,11 +500,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Floor-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Floor NS NB FiEn 3P 1P"
+        "name": "Nordex Floor NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Floor-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "cc3cb0d3-c79c-4c4f-818e-4370f09148f2",
@@ -496,11 +569,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-S-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex S Combi NS NB FiEn 3P 1P"
+        "name": "Nordex S Combi NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-S-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "eb0a637d-39a1-4d81-a73e-af677b46b208",
@@ -555,12 +634,16 @@
     "updated_at": "2026-04-21T06:20:41.539+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-S-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-S-Combi-NS-NB_FiEn-3P-1P.pdf",
         "name": "Nordex S Combi NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2e691db6-5da4-4ea0-92b1-27d2a99f9cfa",
@@ -616,11 +699,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-S-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex S NS NB FiEn 3P 1P"
+        "name": "Nordex S NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-S-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "0f45ed72-d70b-4dcf-9d06-c78c7aa04064",
@@ -675,11 +764,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-S-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex S NS NB FiEn 3P 1P"
+        "name": "Nordex S NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-S-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "524d4f69-8864-4b00-a174-2e0c2179f89f",
@@ -736,11 +831,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-Pro-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Pro Combi NS NB FiEn 3P 1P"
+        "name": "Nordex Pro Combi NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/Manuals/Floor%20Series/Nordex-Pro-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b819ed43-288c-4a66-8279-15dc3ab9207c",
@@ -793,11 +894,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2026/03/NRN-PRO-FiEn_3P-1P-0326.pdf",
-        "name": "NRN PRO FiEn 3P 1P 0326"
+        "name": "NRN PRO FiEn 3P 1P 0326",
+        "original": "https://www.sawo.com/wp-content/uploads/2026/03/NRN-PRO-FiEn_3P-1P-0326.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "c8c26a29-daf3-4fd9-9bd5-50f5b3c084b9",
@@ -858,11 +965,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Savonia-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Savonia Combi NS NB FiEn 3P 1P"
+        "name": "Savonia Combi NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Savonia-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "fe13bcbb-0dc8-4140-b069-ee4d6c9c0c45",
@@ -923,11 +1036,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Fiberjungle-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Fiberjungle NS NB FiEn 3P 1P"
+        "name": "Fiberjungle NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Fiberjungle-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "74bd6255-103e-44b5-908d-bd36c90724dc",
@@ -993,11 +1112,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Phoenix-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Phoenix NS NB FiEn 3P 1P"
+        "name": "Phoenix NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Phoenix-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b675e512-24e0-4a11-b734-1ef04a84c42d",
@@ -1054,11 +1179,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/07/Phoenix-Ni2_FiEn-3P-1P-Edited.pdf",
-        "name": "Phoenix Ni2 FiEn 3P 1P Edited"
+        "name": "Phoenix Ni2 FiEn 3P 1P Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/07/Phoenix-Ni2_FiEn-3P-1P-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "f6609553-4d69-4edf-9395-c43afd0a0aa6",
@@ -1144,11 +1275,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Heaterking-Round-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Heaterking Round NS NB FiEn 3P 1P"
+        "name": "Heaterking Round NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Heaterking-Round-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "358faebf-1aba-47d6-9cfd-1fc7a725ab08",
@@ -1229,11 +1366,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Heaterking-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Heaterking Wall NS NB FiEn 3P 1P"
+        "name": "Heaterking Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Heaterking-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "26c9e85d-8efe-4d8d-97b7-606bb9e3a771",
@@ -1298,12 +1441,16 @@
     "updated_at": "2026-04-21T03:15:01.747+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/Heaterking-Corner-NS_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Heaterking-Corner-NS_FiEn-3P-1P.pdf",
         "name": "Heaterking Corner NS FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7078d72f-2c37-445d-9fa1-12f331e2fec9",
@@ -1359,12 +1506,16 @@
     "updated_at": "2026-04-21T00:31:31.854+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Cubos-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Cubos-NS-NB_FiEn-3P-1P.pdf",
         "name": "Cubos NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "180af7f6-1c1c-44db-94cd-cd88070811b6",
@@ -1423,11 +1574,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Cubos-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Cubos NS NB FiEn 3P 1P"
+        "name": "Cubos NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Cubos-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "91852d8f-7bfe-4abc-a779-78ee65950793",
@@ -1485,11 +1642,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Cubos-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Cubos NS NB FiEn 3P 1P"
+        "name": "Cubos NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Cubos-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "242d9eb5-907f-4be2-a371-5db18c96d548",
@@ -1545,11 +1708,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Aries Corner NS NB FiEn 3P 1P"
+        "name": "Aries Corner NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "abe3f7fb-2725-4d68-bc6b-dff65be81afc",
@@ -1604,11 +1773,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P-.pdf",
-        "name": "Aries Corner NS NB FiEn 3P 1P "
+        "name": "Aries Corner NS NB FiEn 3P 1P ",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P-.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2c58be55-d48a-4fb1-8a58-6b8fd732366b",
@@ -1666,11 +1841,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P-1.pdf",
-        "name": "Aries Corner NS NB FiEn 3P 1P 1"
+        "name": "Aries Corner NS NB FiEn 3P 1P 1",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P-1.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "610ca97f-a7f1-49fb-bcbf-69bcfa2caff6",
@@ -1727,11 +1908,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P-1-1.pdf",
-        "name": "Aries Corner NS NB FiEn 3P 1P 1 1"
+        "name": "Aries Corner NS NB FiEn 3P 1P 1 1",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-NS-NB_FiEn-3P-1P-1-1.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "3f34ef40-0f99-40ff-ab1d-da83361431a5",
@@ -1788,11 +1975,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-Ni2_FiEn-3P-1P-Edited.pdf",
-        "name": "Aries Corner Ni2 FiEn 3P 1P Edited"
+        "name": "Aries Corner Ni2 FiEn 3P 1P Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-Ni2_FiEn-3P-1P-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "e131f1cf-5a02-4d41-abe9-8e990a97e814",
@@ -1848,11 +2041,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-Ni2_FiEn-3P-1P-Edited.pdf",
-        "name": "Aries Corner Ni2 FiEn 3P 1P Edited"
+        "name": "Aries Corner Ni2 FiEn 3P 1P Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Corner-Ni2_FiEn-3P-1P-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "ad273de0-e0db-4ad0-9c2f-0bf05bde124c",
@@ -1909,11 +2108,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Aries Wall NS NB FiEn 3P 1P"
+        "name": "Aries Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "3d301d55-2051-4eec-aca0-12d80e38cf44",
@@ -1969,11 +2174,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Aries Wall NS NB FiEn 3P 1P"
+        "name": "Aries Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "0d3cd79f-d62b-4deb-88d2-fb7d9ee0ac3c",
@@ -2032,11 +2243,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P-2.pdf",
-        "name": "Aries Wall NS NB FiEn 3P 1P 2"
+        "name": "Aries Wall NS NB FiEn 3P 1P 2",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P-2.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b3bf4540-8e2f-4e88-b0d3-1e1c8118e243",
@@ -2095,11 +2312,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P-1-1.pdf",
-        "name": "Aries Wall NS NB FiEn 3P 1P 1 1"
+        "name": "Aries Wall NS NB FiEn 3P 1P 1 1",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-NS-NB_FiEn-3P-1P-1-1.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "ff6700d7-45c9-4fc0-a58e-114029d6b0cb",
@@ -2157,11 +2380,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-Ni2_FiEn-3P-1P-1-Edited.pdf",
-        "name": "Aries Wall Ni2 FiEn 3P 1P 1 Edited"
+        "name": "Aries Wall Ni2 FiEn 3P 1P 1 Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-Ni2_FiEn-3P-1P-1-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "37e47747-7f5e-4fb6-9410-883771d00c5f",
@@ -2218,11 +2447,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-Ni2_FiEn-3P-1P-1-Edited.pdf",
-        "name": "Aries Wall Ni2 FiEn 3P 1P 1 Edited"
+        "name": "Aries Wall Ni2 FiEn 3P 1P 1 Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Wall-Ni2_FiEn-3P-1P-1-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a0144bd6-29ce-43c1-89d8-cb6110b98ca9",
@@ -2282,11 +2517,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P-2.pdf",
-        "name": "Aries Round NS NB FiEn 3P 1P 2"
+        "name": "Aries Round NS NB FiEn 3P 1P 2",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P-2.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "e5ed7b73-5325-4303-8612-cd060cfbfb5d",
@@ -2344,12 +2585,16 @@
     "updated_at": "2026-04-20T09:56:04.796+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P-1.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Aries-Round-NS-NB_FiEn-3P-1P-1.pdf",
         "name": "Aries Round NS NB FiEn 3P 1P 1"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "653321e2-0c80-44d2-af2b-53fe4d15bd6d",
@@ -2419,11 +2664,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P-3.pdf",
-        "name": "Aries Round NS NB FiEn 3P 1P 3"
+        "name": "Aries Round NS NB FiEn 3P 1P 3",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P-3.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2420cbc5-5922-4f1d-af39-7382f6f8369e",
@@ -2492,11 +2743,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Aries Round NS NB FiEn 3P 1P"
+        "name": "Aries Round NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "280b0032-8d29-42a9-a908-94e742f12461",
@@ -2556,11 +2813,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-Ni2_FiEn-3P-1P-1-Edited.pdf",
-        "name": "Aries Round Ni2 FiEn 3P 1P 1 Edited"
+        "name": "Aries Round Ni2 FiEn 3P 1P 1 Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-Ni2_FiEn-3P-1P-1-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "6157a803-8f82-47eb-9702-8d0cf3b8c797",
@@ -2620,11 +2883,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-Ni2_FiEn-3P-1P-Edited.pdf",
-        "name": "Aries Round Ni2 FiEn 3P 1P Edited"
+        "name": "Aries Round Ni2 FiEn 3P 1P Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Aries-Round-Ni2_FiEn-3P-1P-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "315dce17-ca0b-47cc-b5f0-78dbc77cbe38",
@@ -2687,11 +2956,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Corner-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Tower Corner NS NB FiEn 3P 1P"
+        "name": "Tower Corner NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "8cb8bfc8-b0fd-41fb-bfe5-7b296bd23dcc",
@@ -2759,11 +3034,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Corner-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Tower Corner NS NB FiEn 3P 1P"
+        "name": "Tower Corner NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "eb2f918f-25a3-4859-96c5-fd115e68f911",
@@ -2816,12 +3097,16 @@
     "updated_at": "2026-04-20T09:09:48.917+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Corner-Ni_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Tower-Corner-Ni_FiEn-3P-1P.pdf",
         "name": "Tower Corner Ni FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "4e2b9b0c-e677-4209-8d39-ca7d4dc123ce",
@@ -2886,11 +3171,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Corner-Ni2_FiEn-3P-1P-Edited.pdf",
-        "name": "Tower Corner Ni2 FiEn 3P 1P Edited"
+        "name": "Tower Corner Ni2 FiEn 3P 1P Edited",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Corner-Ni2_FiEn-3P-1P-Edited.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2934addc-75e6-440c-b10f-17d871849112",
@@ -2951,11 +3242,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Tower Wall NS NB FiEn 3P 1P"
+        "name": "Tower Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "cc9d275d-680e-4b72-975d-061e24e125b1",
@@ -3037,11 +3334,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Tower Wall NS NB FiEn 3P 1P"
+        "name": "Tower Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "5fa90bf8-772f-4308-b4e5-a271c19a822f",
@@ -3106,11 +3409,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Wall-Ni_FiEn-3P-1P.pdf",
-        "name": "Tower Wall Ni FiEn 3P 1P"
+        "name": "Tower Wall Ni FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Wall-Ni_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "3b7587a5-a121-4083-bf71-d57932a31794",
@@ -3172,12 +3481,16 @@
     "updated_at": "2026-04-20T08:43:59.4+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Wall-Ni2_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Tower-Wall-Ni2_FiEn-3P-1P.pdf",
         "name": "Tower Wall Ni2 FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "913351e5-3edf-4639-87b8-a4839b69249a",
@@ -3242,11 +3555,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Round-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Tower Round NS NB FiEn 3P 1P"
+        "name": "Tower Round NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Round-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9b84a078-a112-41c7-a6dc-148ed87fd110",
@@ -3328,12 +3647,16 @@
     "updated_at": "2026-04-20T08:47:25.436+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Round-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Tower-Round-NS-NB_FiEn-3P-1P.pdf",
         "name": "Tower Round NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "fbd415e6-6d42-4871-9fa1-83ca329d8583",
@@ -3400,11 +3723,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Round-Ni_FiEn-3P-1P.pdf",
-        "name": "Tower Round Ni FiEn 3P 1P"
+        "name": "Tower Round Ni FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Round-Ni_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "fd3bd27f-960e-4e5a-9cc1-d60f4a68bd92",
@@ -3470,12 +3799,16 @@
     "updated_at": "2026-04-21T09:14:48.825+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/Tower-Round-Ni2_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Tower-Round-Ni2_FiEn-3P-1P.pdf",
         "name": "Tower Round Ni2 FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a03e4667-e189-4355-bf55-bc82170c0a72",
@@ -3531,12 +3864,16 @@
     "updated_at": "2026-04-20T08:44:40.08+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
         "name": "SAWO30 Corner NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "34ca7aa4-28a9-48f5-8810-f6342a016c76",
@@ -3592,11 +3929,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Corner NS NB FiEn 3P 1P"
+        "name": "SAWO30 Corner NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "480eecb7-c3f6-4cb9-9f5c-59e05fa77e90",
@@ -3657,11 +4000,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Corner NS NB FiEn 3P 1P"
+        "name": "SAWO30 Corner NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b8d6cf7a-8f33-4b6e-a997-8d27f70b5daf",
@@ -3721,11 +4070,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Corner NS NB FiEn 3P 1P"
+        "name": "SAWO30 Corner NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Corner-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "110b7078-89f5-4b02-94bc-c8daabace407",
@@ -3782,12 +4137,16 @@
     "updated_at": "2026-04-20T08:46:46.605+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/SAWO30-Corner-Ni2_FiEn-3P-1P-.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Corner-Ni2_FiEn-3P-1P-.pdf",
         "name": "SAWO30 Corner Ni2 FiEn 3P 1P "
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7fd6691d-c5a8-43dd-bf19-b2bff37417b3",
@@ -3843,12 +4202,16 @@
     "updated_at": "2026-04-20T08:46:40.702+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/SAWO30-Corner-Ni2_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Corner-Ni2_FiEn-3P-1P.pdf",
         "name": "SAWO30 Corner Ni2 FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "09471c44-08ae-4599-b18b-763d2f02e897",
@@ -3904,11 +4267,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Wall NS NB FiEn 3P 1P"
+        "name": "SAWO30 Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2509d358-23f4-46f6-84c0-630627b9e1ac",
@@ -3963,12 +4332,16 @@
     "updated_at": "2026-04-20T08:46:28.666+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
         "name": "SAWO30 Wall NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9d3e6567-abb3-4b17-ab12-64d761839481",
@@ -4034,11 +4407,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Wall NS NB FiEn 3P 1P"
+        "name": "SAWO30 Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "195c0643-d606-4438-bd45-cf70aabaa6d4",
@@ -4104,11 +4483,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Wall NS NB FiEn 3P 1P"
+        "name": "SAWO30 Wall NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Wall-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a1a2fa6d-2cb1-426f-983a-7f40751c828e",
@@ -4164,12 +4549,16 @@
     "updated_at": "2026-04-20T08:46:06.817+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/SAWO30-Wall-Ni2_FiEn-3P-1P-.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Wall-Ni2_FiEn-3P-1P-.pdf",
         "name": "SAWO30 Wall Ni2 FiEn 3P 1P "
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "09e827c4-45c9-44c8-87dd-1086227821b2",
@@ -4226,12 +4615,16 @@
     "updated_at": "2026-04-20T08:46:00.831+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/SAWO30-Wall-Ni2_FiEn-3P-1P-2025.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Wall-Ni2_FiEn-3P-1P-2025.pdf",
         "name": "SAWO30 Wall Ni2 FiEn 3P 1P 2025"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "68d24877-e300-4c6b-841e-5a35a1ffd362",
@@ -4287,11 +4680,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Round NS NB FiEn 3P 1P"
+        "name": "SAWO30 Round NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7b40ea61-5549-4d5b-b0eb-7549d91205cd",
@@ -4346,15 +4745,23 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Round NS NB FiEn 3P 1P"
+        "name": "SAWO30 Round NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       },
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
-        "name": "Stone Spacer Flyer English V2"
+        "name": "Stone Spacer Flyer English V2",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "05da80c7-f31c-4155-ab9b-b98fcff27650",
@@ -4420,15 +4827,23 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
-        "name": "SAWO30 Round NS NB FiEn 3P 1P"
+        "name": "SAWO30 Round NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       },
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
-        "name": "Stone Spacer Flyer English V2"
+        "name": "Stone Spacer Flyer English V2",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "fbd6f67e-993e-477d-b784-32b7b3020d10",
@@ -4492,16 +4907,20 @@
     "updated_at": "2026-04-20T08:45:25.401+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Round-NS-NB_FiEn-3P-1P.pdf",
         "name": "SAWO30 Round NS NB FiEn 3P 1P"
       },
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Stone-Spacer-Flyer-English_V2.pdf",
         "name": "Stone Spacer Flyer English V2"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "92c04293-bfed-442b-ac05-09e612a7347c",
@@ -4557,16 +4976,22 @@
     "updated_at": "2026-04-20T08:45:20.011+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/SAWO30-Round-Ni2_FiEn-3P-1P-.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Round-Ni2_FiEn-3P-1P-.pdf",
         "name": "SAWO30 Round Ni2 FiEn 3P 1P "
       },
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
-        "name": "Stone Spacer Flyer English V2"
+        "name": "Stone Spacer Flyer English V2",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "ea0d5fe0-d1bd-495b-91cb-cf88b7b9aaba",
@@ -4622,16 +5047,22 @@
     "updated_at": "2026-04-20T08:44:17.745+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/SAWO30-Round-Ni2_FiEn-3P-1P-1.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/SAWO30-Round-Ni2_FiEn-3P-1P-1.pdf",
         "name": "SAWO30 Round Ni2 FiEn 3P 1P 1"
       },
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
-        "name": "Stone Spacer Flyer English V2"
+        "name": "Stone Spacer Flyer English V2",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/08/Stone-Spacer-Flyer-English_V2.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "853702cf-2a61-4294-9f40-6f41cbfe7583",
@@ -4660,7 +5091,11 @@
     "updated_at": "2026-04-20T00:29:28.836+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "745f4b48-fcfe-4e0f-9646-aba34b4891af",
@@ -4720,12 +5155,16 @@
     "updated_at": "2026-04-21T03:11:29.676+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Savonia-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Savonia-Combi-NS-NB_FiEn-3P-1P.pdf",
         "name": "Savonia Combi NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "dc28e725-ee4a-4fbe-99ee-170c98ecf47b",
@@ -4785,11 +5224,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Savonia-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Savonia NS NB FiEn 3P 1P"
+        "name": "Savonia NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Savonia-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "d907fcce-67c3-4b27-b33f-98debe0102ce",
@@ -4843,12 +5288,16 @@
     "updated_at": "2026-04-16T08:27:18.879+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Savonia-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Savonia-NS-NB_FiEn-3P-1P.pdf",
         "name": "Savonia NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "da0f187e-cc5d-4283-8a34-249974c01c97",
@@ -4909,12 +5358,16 @@
     "updated_at": "2026-04-16T08:19:50.31+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Krios-Floor-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Krios-Floor-NS-NB_FiEn-3P-1P.pdf",
         "name": "Krios Floor NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "15024010-24cd-4cf2-ab01-7e4281cc5603",
@@ -4970,12 +5423,16 @@
     "updated_at": "2026-04-16T08:13:17.01+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Helius-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Helius-NS-NB_FiEn-3P-1P.pdf",
         "name": "Helius NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "0fcd7adc-bc93-44b2-81af-5c17c1ee557e",
@@ -5032,12 +5489,16 @@
     "updated_at": "2026-04-16T05:55:42.367+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/09/TRD-FiEn.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/TRD-FiEn.pdf",
         "name": "TRD FiEn"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "c0873514-0f6b-41ef-874c-cc17e0b480d9",
@@ -5097,12 +5558,16 @@
     "updated_at": "2026-04-21T03:18:02.634+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Scandifire-NS-NB_FiEn-3P-1P.pdf",
         "name": "Scandifire NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "eb3f427e-371c-4aa3-af40-42ac6ca03d19",
@@ -5166,11 +5631,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandifire NS NB FiEn 3P 1P"
+        "name": "Scandifire NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "c18f7676-a199-4e7e-b092-02c81217afbd",
@@ -5235,11 +5706,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandifire NS NB FiEn 3P 1P"
+        "name": "Scandifire NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "52e29aa8-8493-4915-a9f9-88eabc6e43ae",
@@ -5302,11 +5779,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandifire NS NB FiEn 3P 1P"
+        "name": "Scandifire NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Scandifire-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "0f409779-f47d-4136-8328-ec47fda7e077",
@@ -5366,11 +5849,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Krios-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Krios NS NB FiEn 3P 1P"
+        "name": "Krios NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Krios-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a9719e36-47cc-4a94-8436-8c8d9c3c94ff",
@@ -5425,12 +5914,16 @@
     "updated_at": "2026-04-15T09:30:17.079+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Krios-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Krios-NS-NB_FiEn-3P-1P.pdf",
         "name": "Krios NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "cf6cb129-2203-4e33-be48-6d7d1336dd85",
@@ -5487,12 +5980,16 @@
     "updated_at": "2026-04-15T09:25:48.327+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/07/Krios-Ni2_FiEn-3P-1P-Edited.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Krios-Ni2_FiEn-3P-1P-Edited.pdf",
         "name": "Krios Ni2 FiEn 3P 1P Edited"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "1daf49dc-68d7-49ec-8041-65bbcc142133",
@@ -5547,11 +6044,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandia Combi NS NB FiEn 3P 1P"
+        "name": "Scandia Combi NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "ef8e7e21-b129-4dfb-9edc-81c466bff91e",
@@ -5604,12 +6107,16 @@
     "updated_at": "2026-04-21T03:12:13.107+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/06/Scandia-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Scandia-Combi-NS-NB_FiEn-3P-1P.pdf",
         "name": "Scandia Combi NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b2f2f483-9304-43ce-ac3a-cf18a7949903",
@@ -5660,11 +6167,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandia NS NB FiEn 3P 1P"
+        "name": "Scandia NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "00fb6d76-ed0b-4850-b411-b601ab3388e9",
@@ -5713,11 +6226,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandia NS NB FiEn 3P 1P"
+        "name": "Scandia NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "eee8fddc-0ad2-49b3-8a54-714eec91136a",
@@ -5767,11 +6286,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Scandia NS NB FiEn 3P 1P"
+        "name": "Scandia NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "4a4c1eb7-1713-47e1-b5f7-9060355180d0",
@@ -5821,12 +6346,16 @@
     "updated_at": "2026-04-15T03:14:53.037+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Scandia-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Scandia-NS-NB_FiEn-3P-1P.pdf",
         "name": "Scandia NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9dac0470-40f9-4ce4-945c-eee43f19f4aa",
@@ -5877,12 +6406,16 @@
     "updated_at": "2026-04-21T03:09:36.43+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
         "name": "Mini Combi NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9974c209-5962-4256-9d17-aaceaeda1046",
@@ -5934,11 +6467,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Mini Combi NS NB FiEn 3P 1P"
+        "name": "Mini Combi NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "e710befd-a4e8-4027-9b11-ca8c672a8659",
@@ -5989,12 +6528,16 @@
     "updated_at": "2026-04-21T06:01:38.361+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Mini-X-NS-NB_FiEn-3P-1P.pdf",
         "name": "Mini X NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a7606e01-3b76-4c9a-ae0b-cda7eedf7a55",
@@ -6045,11 +6588,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Mini X NS NB FiEn 3P 1P"
+        "name": "Mini X NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "36e15cc0-7a21-4161-922c-d8aa08e820bc",
@@ -6098,11 +6647,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Mini X NS NB FiEn 3P 1P"
+        "name": "Mini X NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a8b064aa-cfff-40cc-816a-160372fbd0a3",
@@ -6152,11 +6707,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Mini X NS NB FiEn 3P 1P"
+        "name": "Mini X NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Mini-X-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "15dff165-8128-49f2-b760-9553be5cff00",
@@ -6205,12 +6766,16 @@
     "updated_at": "2026-04-15T03:04:29.765+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Mini-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Mini-NS-NB_FiEn-3P-1P.pdf",
         "name": "Mini NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7ebdcf49-d5da-412f-bd72-255628e97314",
@@ -6261,11 +6826,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Mini-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Mini NS NB FiEn 3P 1P"
+        "name": "Mini NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Mini-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "b5149a8b-acf3-4ef3-8d04-61be17c724d3",
@@ -6321,11 +6892,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Mini Combi NS NB FiEn 3P 1P"
+        "name": "Nordex Mini Combi NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "8d388b31-c36e-4456-8420-2cb4ee0edd89",
@@ -6380,12 +6957,16 @@
     "updated_at": "2026-04-21T03:07:50.001+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-Mini-Combi-NS-NB_FiEn-3P-1P.pdf",
         "name": "Nordex Mini Combi NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "960809d7-d1b5-473f-b4a0-af7b982f10d1",
@@ -6436,11 +7017,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/nordex-combi-black-ns/#70aaa2ffbbba5f183",
-        "name": "#70aaa2ffbbba5f183"
+        "name": "#70aaa2ffbbba5f183",
+        "original": "https://www.sawo.com/nordex-combi-black-ns/#70aaa2ffbbba5f183",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "635100f3-f058-4fbb-befc-743534b956d9",
@@ -6493,12 +7080,16 @@
     "updated_at": "2026-04-21T03:07:09.513+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-Combi-NS-NB_FiEn-3P-1P.pdf",
         "name": "Nordex Combi NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "8dbd6c07-1dd1-47e1-b9a8-ef22cd47641b",
@@ -6553,11 +7144,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Mini NS NB FiEn 3P 1P"
+        "name": "Nordex Mini NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "39b92ea9-2b0e-43a2-9a3c-25c3e1b95b63",
@@ -6607,12 +7204,16 @@
     "updated_at": "2026-04-15T00:26:02.534+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
         "name": "Nordex Mini NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "0fbd2098-f824-4f48-9fec-a36a75b0c471",
@@ -6668,11 +7269,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Mini NS NB FiEn 3P 1P"
+        "name": "Nordex Mini NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "d93eb2cf-d29a-47be-8212-c0d3b05fce0b",
@@ -6727,11 +7334,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex Mini NS NB FiEn 3P 1P"
+        "name": "Nordex Mini NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-Mini-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "bc55562a-f390-4481-a5b9-da85b7553878",
@@ -6767,7 +7380,11 @@
     "updated_at": "2026-04-14T09:24:00.276+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "3ec10896-68a3-4450-8b24-a35b50a1c6c7",
@@ -6802,7 +7419,11 @@
     "updated_at": "2026-04-14T09:20:11.508+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "96070ec2-7666-4b98-8ab2-068f595a91d3",
@@ -6837,7 +7458,11 @@
     "updated_at": "2026-04-14T09:16:01.713+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
@@ -6875,7 +7500,11 @@
     "updated_at": "2026-04-14T09:13:48.993+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "092c7d32-3510-4cab-8f16-10db6e6b5599",
@@ -6913,7 +7542,11 @@
     "updated_at": "2026-04-14T09:12:15.117+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "96c70250-e9a0-4dd4-8e0d-c4a5552f292f",
@@ -6954,7 +7587,11 @@
     "updated_at": "2026-04-14T09:10:39.916+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7db07a84-cc67-482e-8933-1903e8111e6e",
@@ -6991,7 +7628,11 @@
     "updated_at": "2026-04-14T09:07:11.49+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
@@ -7031,7 +7672,11 @@
     "updated_at": "2026-04-14T09:04:33.501+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "8a27b22f-0506-478c-a207-2484c68cfdfb",
@@ -7069,7 +7714,11 @@
     "updated_at": "2026-04-14T09:04:40.747+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "50834970-4527-4954-9cd7-8ac89d7bd70f",
@@ -7114,12 +7763,16 @@
     "updated_at": "2026-04-14T08:54:06.877+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Innova%20Series/Innova-Classic-Built-In_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-Classic-Built-In_En.pdf",
         "name": "Innova Classic Built In En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "bab85c05-e589-45bf-b634-8a4f62d8db6b",
@@ -7163,12 +7816,16 @@
     "updated_at": "2026-04-14T08:55:22.396+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Innova%20Series/Innova-Classic_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-Classic_En.pdf",
         "name": "Innova Classic En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9b16757e-fc42-4213-b33f-07a48edc4e2e",
@@ -7214,12 +7871,16 @@
     "updated_at": "2026-04-14T08:26:31.536+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Innova%20Series/Innova-Stainless-Steel-Touch_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-Stainless-Steel-Touch_En.pdf",
         "name": "Innova Stainless Steel Touch En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "16492285-3ef7-436b-9606-9a01304cf309",
@@ -7258,12 +7919,16 @@
     "updated_at": "2026-04-14T08:22:04.147+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/04/Innova-2.0-Contactor-Unit_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-2.0-Contactor-Unit_En.pdf",
         "name": "Innova 2.0 Contactor Unit En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7fc76dd6-2520-4759-a7d1-59b6d22e20b9",
@@ -7312,12 +7977,16 @@
     "updated_at": "2026-04-14T08:17:18.971+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Innova%20Series/Innova-2.0-Power-Controller_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-2.0-Power-Controller_En.pdf",
         "name": "Innova 2.0 Power Controller En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "19063a1d-6d6a-463d-a24c-ac50b43d18e6",
@@ -7363,12 +8032,16 @@
     "updated_at": "2026-04-14T08:16:52.961+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Innova%20Series/Innova-Classic-2.0-Built-In_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-Classic-2.0-Built-In_En.pdf",
         "name": "Innova Classic 2.0 Built In En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9d43ef15-615c-4354-aa32-8463fa50d186",
@@ -7413,12 +8086,16 @@
     "updated_at": "2026-04-14T08:17:04.656+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Innova%20Series/Innova-Classic-2.0_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Innova-Classic-2.0_En.pdf",
         "name": "Innova Classic 2.0 En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "cd47764f-9156-400f-af7d-b3e1f3f48d1c",
@@ -7457,12 +8134,16 @@
     "updated_at": "2026-04-14T07:42:36.111+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/04/Saunova-Simple-SAU-UI-S_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Saunova-Simple-SAU-UI-S_En.pdf",
         "name": "Saunova Simple SAU UI S En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9d7a2dce-595f-4391-82fc-cd7cbcc72a1c",
@@ -7501,12 +8182,16 @@
     "updated_at": "2026-04-14T07:42:52.455+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Saunova%20Series/Saunova-2.0-Contactor-Unit_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Saunova-2.0-Contactor-Unit_En.pdf",
         "name": "Saunova 2.0 Contactor Unit En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2fbd56fa-6c44-47af-b463-d738580ff741",
@@ -7551,12 +8236,16 @@
     "updated_at": "2026-04-14T07:37:18.737+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2026/03/Saunova-2.0-Power-Controller_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Saunova-2.0-Power-Controller_En.pdf",
         "name": "Saunova 2.0 Power Controller En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "2f5d7d0c-a9cf-44f0-bc72-36968d5602ad",
@@ -7598,12 +8287,16 @@
     "updated_at": "2026-04-14T07:12:02.782+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Saunova%20Series/Saunova-2.0-Built-In_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Saunova-2.0-Built-In_En.pdf",
         "name": "Saunova 2.0 Built In En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "7ed5a5f1-e3e5-4601-8b86-bc606f91e392",
@@ -7649,12 +8342,16 @@
     "updated_at": "2026-04-14T06:44:28.666+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2026/03/Saunova_2.0_En.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Saunova_2.0_En.pdf",
         "name": "Saunova 2.0 En"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "f42926da-8a5f-4e67-a095-7d165da3c1b4",
@@ -7694,7 +8391,11 @@
     "updated_at": "2026-04-14T06:39:14.887+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "d46fa703-6662-4caa-b0d2-d9f648d0f779",
@@ -7741,12 +8442,16 @@
     "updated_at": "2026-04-14T05:53:10.129+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/07/Nordex-Mini-Ni2_FiEn-3P-1P-Edited-1.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-Mini-Ni2_FiEn-3P-1P-Edited-1.pdf",
         "name": "Nordex Mini Ni2 FiEn 3P 1P Edited 1"
       }
     ],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
@@ -7790,7 +8495,11 @@
     "updated_at": "2026-04-13T06:53:16.293+00:00",
     "files": [],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "a2c06d94-9bc9-4c7a-aabe-45cd6cec7326",
@@ -7849,11 +8558,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nimbus-Combi-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nimbus Combi NS NB FiEn 3P 1P"
+        "name": "Nimbus Combi NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Nimbus-Combi-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": "Edgar",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "02d375d6-19ae-4f40-ac11-5187ae4a7549",
@@ -7907,12 +8622,16 @@
     "updated_at": "2026-04-13T05:30:37.967161+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nimbus-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nimbus-NS-NB_FiEn-3P-1P.pdf",
         "name": "Nimbus NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "cbba2e49-2e8e-43b8-877e-c23eaf7a14e5",
@@ -7963,11 +8682,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Cumulus-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Cumulus NS NB FiEn 3P 1P"
+        "name": "Cumulus NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Cumulus-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "55b7ac59-128f-4f7f-ab2b-45d7e1a3b48a",
@@ -8012,12 +8737,16 @@
     "updated_at": "2026-04-13T05:18:25.720767+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/07/Nordex-Mini-Ni2_FiEn-3P-1P-Edited.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-Mini-Ni2_FiEn-3P-1P-Edited.pdf",
         "name": "Nordex Mini Ni2 FiEn 3P 1P Edited"
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "49825108-e558-40a2-87d4-7e5d837cb07c",
@@ -8067,12 +8796,16 @@
     "updated_at": "2026-04-13T05:13:59.604888+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/10/Cumulus-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Cumulus-NS-NB_FiEn-3P-1P.pdf",
         "name": "Cumulus NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "ae72cb7e-7891-48ca-a72b-17195a40a16b",
@@ -8122,11 +8855,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex NS NB FiEn 3P 1P"
+        "name": "Nordex NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "261b4c86-973f-434a-ba15-740ad0b16a20",
@@ -8174,12 +8913,16 @@
     "updated_at": "2026-04-13T05:09:58.809231+00:00",
     "files": [
       {
-        "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-NS-NB_FiEn-3P-1P.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-NS-NB_FiEn-3P-1P.pdf",
         "name": "Nordex NS NB FiEn 3P 1P"
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "ace7c2a9-0c4c-45f3-8dd3-ca9d494dce17",
@@ -8229,12 +8972,16 @@
     "updated_at": "2026-04-13T05:09:58.794355+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/07/Cumulus-Ni2_FiEn-3P-1P-Edited.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Cumulus-Ni2_FiEn-3P-1P-Edited.pdf",
         "name": "Cumulus Ni2 FiEn 3P 1P Edited"
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "e8372b04-0cd3-4490-a09d-4ca7457132e0",
@@ -8286,11 +9033,17 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex NS NB FiEn 3P 1P"
+        "name": "Nordex NS NB FiEn 3P 1P",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/10/Nordex-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "3c509fa8-2425-4a77-97f3-60628fd09779",
@@ -8340,11 +9093,17 @@
     "files": [
       {
         "url": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-NS-NB_FiEn-3P-1P.pdf",
-        "name": "Nordex NS NB FiEn 3P 1P"
+        "name": "Nordex NS NB FiEn 3P 1P",
+        "original": "https://secret-newsite.sawo.com/wp-content/uploads/Manuals/Wall%20Mounted%20Series/Nordex-NS-NB_FiEn-3P-1P.pdf",
+        "needsMigration": true
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "84781ed8-1c12-4fa7-bf75-4162b4580f34",
@@ -8396,12 +9155,16 @@
     "updated_at": "2026-04-13T01:32:41.894499+00:00",
     "files": [
       {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/07/Nordex-Ni2_FiEn-3P-1P-Edited.pdf",
+        "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/Nordex-Ni2_FiEn-3P-1P-Edited.pdf",
         "name": "Nordex Ni2 FiEn 3P 1P Edited"
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
     "id": "9a0558ad-bde6-4530-bd3a-674e205f67bf",
@@ -8445,7 +9208,9 @@
     "files": [
       {
         "url": "https://www.sawo.com/wp-content/uploads/2025/07/Nordex-Ni2_FiEn-3P-1P-Edited.pdf",
-        "name": "Nordex Ni2 FiEn 3P 1P LINK"
+        "name": "Nordex Ni2 FiEn 3P 1P LINK",
+        "original": "https://www.sawo.com/wp-content/uploads/2025/07/Nordex-Ni2_FiEn-3P-1P-Edited.pdf",
+        "needsMigration": true
       },
       {
         "url": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-pdf/1776039143115_ryrbg787vwi.pdf",
@@ -8453,19 +9218,70 @@
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   },
   {
-    "id": "c5c0377d-2616-471a-bbf7-66c8b5f45b93",
-    "name": "DS",
-    "slug": "ds",
+    "id": "1ed85c0e-c299-4d03-8d2a-19623c3bda37",
+    "name": "Wooden Pail 40L",
+    "slug": "wooden-pail-40l",
     "short_description": null,
     "description": null,
-    "thumbnail": "images/1777422737925_hczdrvxkhh4.webp",
+    "thumbnail": "images/SAWO_sauna_accessories_pails_392.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "40L"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 40,
+    "variant_type": "material",
+    "product_family": "wooden-pail-392",
+    "parent_product_id": null
+  },
+  {
+    "id": "a294fd69-a89b-415c-b3a5-2d346abcde12",
+    "name": "Wooden Cover for 392",
+    "slug": "wooden-cover-392",
+    "short_description": "Matching wooden cover for the Wooden Pail 40L (392)",
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_392-COV.webp",
     "images": [],
     "spec_images": [],
-    "categories": [],
-    "tags": [],
+    "categories": [
+      "pails",
+      "accessories"
+    ],
+    "tags": [
+      "sauna",
+      "cover",
+      "accessory",
+      "40L"
+    ],
     "auto_tag_columns": null,
     "features": [],
     "brand": "SAWO",
@@ -8477,11 +9293,739 @@
     "featured": false,
     "sort_order": 0,
     "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-29T00:31:44.886113+00:00",
-    "updated_at": "2026-04-29T00:32:21.21+00:00",
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
     "files": [],
     "updated_by_username": "Rafael",
-    "is_deleted": false
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": "material",
+    "product_family": "wooden-pail-392",
+    "parent_product_id": "1ed85c0e-c299-4d03-8d2a-19623c3bda37"
+  },
+  {
+    "id": "06ca05ac-5ca3-4d26-9628-83ae10df591f",
+    "name": "Wooden Cover for 391",
+    "slug": "wooden-cover-391",
+    "short_description": "Matching wooden cover for the Wooden Pail 28L (391)",
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_391-COV.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "pails",
+      "accessories"
+    ],
+    "tags": [
+      "sauna",
+      "cover",
+      "accessory",
+      "28L"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": "material",
+    "product_family": "wooden-pail-391",
+    "parent_product_id": "c7a17501-a7b4-4d31-8cc6-5034e420a502"
+  },
+  {
+    "id": "a01af5c6-e7f9-47db-b544-9e61cc0a9b90",
+    "name": "Kanto",
+    "slug": "kanto-pail",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_347.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "4L"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": 4,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "2ccc31aa-6956-4e3e-8fda-35abf368370d",
+    "name": "Lovi",
+    "slug": "lovi-pail",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_346.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "4L"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 4,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "0c6762d6-6c05-414b-aaf1-f67d6c2e64a9",
+    "name": "Wooden Pail Rattan 4L",
+    "slug": "wooden-pail-rattan-4l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_341.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "4L",
+      "rattan"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 4,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "8a57f91e-ca30-4303-a9fd-c53dd61152ee",
+    "name": "Wooden Pail Classic",
+    "slug": "wooden-pail-classic",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_340.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "4L",
+      "classic"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": {
+      "video": "https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/2025/07/PAIL.mp4"
+    },
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T02:40:43.99+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": 4,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "c382d3da-b9b8-492f-b64a-e87efbd604ce",
+    "name": "Wooden Pail 18L",
+    "slug": "wooden-pail-18l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_381.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "18L"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 18,
+    "variant_type": "material",
+    "product_family": "wooden-pail-381",
+    "parent_product_id": null
+  },
+  {
+    "id": "e1717b3b-e079-46bd-8fd4-9be0e70c5718",
+    "name": "Wooden Pail Rattan",
+    "slug": "wooden-pail-rattan-9l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_300-H.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "9L",
+      "rattan"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 9,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "34f7b95a-0407-436d-b5f7-7d131de6ce8c",
+    "name": "Wooden Pail Rattan with Stainless Steel Insert",
+    "slug": "wooden-pail-rattan-ss-insert",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_371.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "5L",
+      "rattan",
+      "stainless-steel"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 5,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "6232d3be-6b92-4580-a5c1-77ff43e93ebb",
+    "name": "Stainless Steel Pail with Wooden Handle",
+    "slug": "ss-pail-wooden-handle",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_375.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "5L",
+      "stainless-steel",
+      "wooden-handle"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 5,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "f23c2ac1-c662-400d-ba3c-52f0839e3415",
+    "name": "Wooden Cover for 381",
+    "slug": "wooden-cover-381",
+    "short_description": "Matching wooden cover for the Wooden Pail 18L (381)",
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_381-COV.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "pails",
+      "accessories"
+    ],
+    "tags": [
+      "sauna",
+      "cover",
+      "accessory",
+      "18L",
+      "pail"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T02:32:35.641+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": "material",
+    "product_family": "wooden-pail-381",
+    "parent_product_id": "c382d3da-b9b8-492f-b64a-e87efbd604ce"
+  },
+  {
+    "id": "b900890f-9f2c-4e25-8f0c-bcc1014781e2",
+    "name": "Wooden Pail Traditional",
+    "slug": "wooden-pail-traditional",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_300-T.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "9L",
+      "traditional"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 9,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "72556cac-3de5-4db3-ad7f-b6b4d78f30ea",
+    "name": "Stainless Steel Pail with Curved Handle",
+    "slug": "ss-pail-curved-handle",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_373.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "5L",
+      "stainless-steel"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 5,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "982a99b3-c50a-432f-bcc9-7591eb3556cb",
+    "name": "Usva",
+    "slug": "usva-pail",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_374.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "5L"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 5,
+    "variant_type": "material",
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "7d24f346-c029-479e-9f9a-fcdbd1ff226d",
+    "name": "Steamwater Pail 4L",
+    "slug": "steamwater-pail-4l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_342-DRF.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "4L",
+      "steam",
+      "diffuser"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 4,
+    "variant_type": "material",
+    "product_family": "steamwater-pail",
+    "parent_product_id": null
+  },
+  {
+    "id": "729c1739-5a49-490a-b364-c290666f683e",
+    "name": "Dragon Pail 4L",
+    "slug": "dragon-pail-4l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_342.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "4L",
+      "dragon"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 4,
+    "variant_type": "material",
+    "product_family": "dragon-pail",
+    "parent_product_id": null
+  },
+  {
+    "id": "9321835d-c4e1-490b-823f-b5c89c2ca742",
+    "name": "Steamwater Pail 9L",
+    "slug": "steamwater-pail-9l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_300-DRF-group.png",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "9L",
+      "steam",
+      "diffuser"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 9,
+    "variant_type": "material",
+    "product_family": "steamwater-pail",
+    "parent_product_id": null
+  },
+  {
+    "id": "c7a17501-a7b4-4d31-8cc6-5034e420a502",
+    "name": "Wooden Pail 28L",
+    "slug": "wooden-pail-28l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_391.png",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "28L"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": null,
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "files": [],
+    "updated_by_username": null,
+    "is_deleted": false,
+    "capacity_liters": 28,
+    "variant_type": "material",
+    "product_family": "wooden-pail-391",
+    "parent_product_id": null
+  },
+  {
+    "id": "dadf52a2-8535-45e5-bfa0-4689778eff1d",
+    "name": "Dragon Pail 9L",
+    "slug": "dragon-pail-9l",
+    "short_description": null,
+    "description": null,
+    "thumbnail": "images/SAWO_sauna_accessories_pails_300.png",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "pails"
+    ],
+    "tags": [
+      "sauna",
+      "pail",
+      "9L",
+      "dragon"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": null,
+    "created_at": "2026-05-04T00:21:02.439033+00:00",
+    "updated_at": "2026-05-04T02:32:11.1+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": 9,
+    "variant_type": "material",
+    "product_family": "dragon-pail",
+    "parent_product_id": null
   }
 ]

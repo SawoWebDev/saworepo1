@@ -4639,5 +4639,82 @@
     "slug": "mn-36nb-drf-bl-p",
     "usage_count": 0,
     "created_at": "2026-04-21T09:05:39.568907+00:00"
+  },
+  {
+    "id": "5c533db1-c288-4af3-8434-86aa46e7fc85",
+    "name": "18L",
+    "slug": "18l",
+    "usage_count": 0,
+    "created_at": "2026-05-04T02:31:55.472989+00:00"
+  },
+  {
+    "id": "32513d0b-aac5-4b17-bb22-92f1217e977b",
+    "name": "28L",
+    "slug": "28l",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:17.126605+00:00"
+  },
+  {
+    "id": "c8506b98-bed2-47fa-9583-18ef729cfd72",
+    "name": "40L",
+    "slug": "40l",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:26.229884+00:00"
+  },
+  {
+    "id": "6767670d-0f9c-4625-bba0-c093a05bd627",
+    "name": "4L",
+    "slug": "4l",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:30:55.01867+00:00"
+  },
+  {
+    "id": "1f9df40d-8601-4d45-8533-f5f7236c77a4",
+    "name": "9L",
+    "slug": "9l",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:51.418631+00:00"
+  },
+  {
+    "id": "c4c00742-d01c-43af-baf6-d5eafca2804c",
+    "name": "accessory",
+    "slug": "accessory",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:17.126605+00:00"
+  },
+  {
+    "id": "0e00a8a2-9da6-4044-92c4-bcf187e226be",
+    "name": "classic",
+    "slug": "classic",
+    "usage_count": 0,
+    "created_at": "2026-05-04T02:40:03.879352+00:00"
+  },
+  {
+    "id": "3402e1b2-6a94-41d5-9eab-89950c7ba08e",
+    "name": "cover",
+    "slug": "cover",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:17.126605+00:00"
+  },
+  {
+    "id": "4f560415-5067-48c2-9ff6-05dad4f3b6a7",
+    "name": "dragon",
+    "slug": "dragon",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:51.418631+00:00"
+  },
+  {
+    "id": "58bff814-6ee0-4073-86df-6164af1d9050",
+    "name": "pail",
+    "slug": "pail",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:51.418631+00:00"
+  },
+  {
+    "id": "62527649-1f42-42a3-bd6f-0bf07afc7fee",
+    "name": "sauna",
+    "slug": "sauna",
+    "usage_count": 0,
+    "created_at": "2026-05-04T00:25:17.126605+00:00"
   }
 ]
