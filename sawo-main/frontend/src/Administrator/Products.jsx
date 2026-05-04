@@ -43,6 +43,7 @@ const EMPTY_FORM = {
   thumbnail: "", images: [], spec_images: [], files: [],
   categories: [], tags: [], features: [],
   brand: "SAWO", type: "",
+  capacity_liters: "", variant_type: "", product_family: "", parent_product_id: "",
   status: "published",
   visible: true, featured: false, sort_order: 0,
 };
@@ -2323,6 +2324,10 @@ export default function Products({ currentUser }) {
         features:          data.features          || [],
         brand:             data.brand             || "SAWO",
         type:              data.type              || "",
+        capacity_liters:   data.capacity_liters ? String(data.capacity_liters) : "",
+        variant_type:      data.variant_type      || "",
+        product_family:    data.product_family    || "",
+        parent_product_id: data.parent_product_id || "",
         status:            data.status            || "published",
         visible:           data.visible           !== false,
         featured:          data.featured          || false,
@@ -2361,6 +2366,10 @@ export default function Products({ currentUser }) {
         features:          data.features          || [],
         brand:             data.brand             || "SAWO",
         type:              data.type              || "",
+        capacity_liters:   data.capacity_liters ? String(data.capacity_liters) : "",
+        variant_type:      data.variant_type      || "",
+        product_family:    data.product_family    || "",
+        parent_product_id: data.parent_product_id || "",
         status:            "draft",  // Set to draft for review
         visible:           true,
         featured:          false,
@@ -2459,6 +2468,10 @@ export default function Products({ currentUser }) {
         features:          form.features,
         brand:             form.brand.trim()  || null,
         type:              form.type.trim()   || null,
+        capacity_liters:   form.capacity_liters ? parseFloat(form.capacity_liters) : null,
+        variant_type:      form.variant_type.trim() || null,
+        product_family:    form.product_family.trim() || null,
+        parent_product_id: form.parent_product_id.trim() || null,
         status:            form.status,
         visible:           form.visible,
         featured:          form.featured,
@@ -3154,6 +3167,16 @@ export default function Products({ currentUser }) {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <Field label="Brand" value={form.brand} onChange={e => setForm(f => ({ ...f, brand: e.target.value }))} placeholder="SAWO" />
             <ModelSelect label="Type / Model" value={form.type} onChange={v => setForm(f => ({ ...f, type: v }))} placeholder="Premium Series" suggestions={allModels} />
+          </div>
+
+          {/* Variant fields */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <Field label="Capacity (liters)" type="number" value={form.capacity_liters} onChange={e => setForm(f => ({ ...f, capacity_liters: e.target.value }))} placeholder="e.g. 4, 9, 18" />
+            <Field label="Variant Type" value={form.variant_type} onChange={e => setForm(f => ({ ...f, variant_type: e.target.value }))} placeholder="e.g. material, color, size" />
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <Field label="Product Family" value={form.product_family} onChange={e => setForm(f => ({ ...f, product_family: e.target.value }))} placeholder="e.g. dragon-pail, wooden-pail-381" helper="Group related product variants" />
+            <Field label="Parent Product ID" value={form.parent_product_id} onChange={e => setForm(f => ({ ...f, parent_product_id: e.target.value }))} placeholder="UUID of parent product" helper="For accessories linked to parent product" />
           </div>
 
           {/* Features ← above Short Description */}
