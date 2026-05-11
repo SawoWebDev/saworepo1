@@ -570,8 +570,12 @@
     "short_description": null,
     "description": null,
     "thumbnail": "images/SAWO_sauna_accessories_pails_374.webp",
-    "images": null,
-    "spec_images": null,
+    "images": [
+      "images/1778490656176_gnm63ffo8yd.webp"
+    ],
+    "spec_images": [
+      "images/1778490669385_tubqbpktel.webp"
+    ],
     "categories": [
       "pails"
     ],
@@ -581,8 +585,8 @@
       "5L"
     ],
     "auto_tag_columns": null,
-    "features": null,
-    "brand": null,
+    "features": [],
+    "brand": "SAWO",
     "type": null,
     "spec_table": null,
     "resources": null,
@@ -593,9 +597,9 @@
     "created_by": null,
     "created_by_username": null,
     "created_at": "2026-05-04T00:21:02.439033+00:00",
-    "updated_at": "2026-05-04T01:38:52.989063+00:00",
+    "updated_at": "2026-05-11T09:11:12.334+00:00",
     "files": [],
-    "updated_by_username": null,
+    "updated_by_username": "Rafael",
     "is_deleted": false,
     "capacity_liters": 5,
     "variant_type": "material",
@@ -801,39 +805,6 @@
     "capacity_liters": 9,
     "variant_type": "material",
     "product_family": "dragon-pail",
-    "parent_product_id": null
-  },
-  {
-    "id": "c5c0377d-2616-471a-bbf7-66c8b5f45b93",
-    "name": "DS",
-    "slug": "ds",
-    "short_description": null,
-    "description": null,
-    "thumbnail": "images/1777422737925_hczdrvxkhh4.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [],
-    "tags": [],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-04-29T00:31:44.886113+00:00",
-    "updated_at": "2026-04-29T00:32:21.21+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
     "parent_product_id": null
   },
   {
