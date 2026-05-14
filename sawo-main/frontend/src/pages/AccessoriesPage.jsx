@@ -10,6 +10,22 @@ import { ImageWithLoader } from "../components/ImageWithLoader";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
+// Accessory categories that should be displayed in the Accessories page
+export const ACCESSORY_CATEGORIES = [
+  "pails", "ladles", "pail shower", "thermometers",
+  "clocks & timers", "sauna lights", "headrest & backrest",
+  "doors & handles", "benches", "cloth hangers",
+  "wooden floor mats", "kivistone", "ventilation & miscellaneous"
+];
+
+// Helper to check if a product is an accessory
+export function isAccessoryProduct(product) {
+  if (!product?.categories || !Array.isArray(product.categories)) return false;
+  return product.categories.some(c =>
+    ACCESSORY_CATEGORIES.includes(c.toLowerCase())
+  );
+}
+
 // ─ Helpers ─────────────────────────────────────────────────────────────
 
 function localOrRemote(product, field) {
@@ -749,12 +765,12 @@ export default function AccessoriesPage() {
     return localProds.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
   }, [localProds, slug]);
 
-  // Fetch variants from Supabase as fallback (skip for pails/thermometers - use images array instead)
+  // Fetch variants from Supabase as fallback (skip for accessories that use images array instead)
   useEffect(() => {
     if (!product?.id) return;
 
-    // Skip variant loading for pail/thermometer products - they use images array instead
-    const skipVariants = product.categories?.some(c => ["pails", "thermometers"].includes(c));
+    // Skip variant loading for accessory products that use images array instead
+    const skipVariants = isAccessoryProduct(product);
     if (skipVariants) {
       setSupabaseVariants([]);
       return;
@@ -783,7 +799,7 @@ export default function AccessoriesPage() {
     };
 
     loadVariants();
-  }, [product?.id, product?.categories]);
+  }, [product]);
 
   const variants = useMemo(() => {
     if (!product) return [];

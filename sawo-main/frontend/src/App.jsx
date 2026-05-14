@@ -43,6 +43,7 @@ import ProductCatalogue from "./pages/Support/ProductCatalogue";
 
 // Dynamic product detail pages
 import ProductPageRouter from "./pages/ProductPageRouter";
+import AccessoriesPage from "./pages/AccessoriesPage";
 import SaunaRoomDisplay from "./pages/SaunaRoomDisplay";
 
 // Admin pages
@@ -98,6 +99,9 @@ export default function App() {
 
                 {/* Single product detail page */}
                 <Route path="/products/:slug" element={<ProductPageRouter />} />
+
+                {/* Single accessory product detail page */}
+                <Route path="/accessories/:slug" element={<AccessoriesPage />} />
 
                 {/* Single sauna room detail page */}
                 <Route path="/sauna/rooms/:slug" element={<SaunaRoomDisplay />} />

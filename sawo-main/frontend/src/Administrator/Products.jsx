@@ -6,6 +6,7 @@ import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
+import { isAccessoryProduct } from "../pages/AccessoriesPage";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
@@ -2012,7 +2013,9 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
     return () => document.removeEventListener("mousedown", handler);
   }, [menuOpen]);
 
-  const productUrl = `${FRONT_URL || window.location.origin}/products/${p.slug}`;
+  const productUrl = isAccessoryProduct(p)
+    ? `${FRONT_URL || window.location.origin}/accessories/${p.slug}`
+    : `${FRONT_URL || window.location.origin}/products/${p.slug}`;
   const showMenu = hovered && (dataSource === "local" || perms.can("products.edit") || perms.can("products.duplicate") || perms.can("products.delete"));
 
   return (
@@ -2880,7 +2883,17 @@ export default function Products({ currentUser }) {
     setForm(f => ({ ...f, name, slug: slugEdited ? f.slug : slugify(name) }));
   };
 
-  const productUrl = slug => `${FRONT_URL || window.location.origin}/products/${slug}`;
+  const productUrl = (slugOrProduct) => {
+    const slug = typeof slugOrProduct === "string" ? slugOrProduct : slugOrProduct?.slug;
+    const product = typeof slugOrProduct === "string" ? null : slugOrProduct;
+    const baseUrl = FRONT_URL || window.location.origin;
+
+    // Redirect to accessories page if product belongs to an accessory category
+    if (product && isAccessoryProduct(product)) {
+      return `${baseUrl}/accessories/${slug}`;
+    }
+    return `${baseUrl}/products/${slug}`;
+  };
 
   const formatDate = d => d
     ? new Date(d).toLocaleDateString("en-PH", { month: "short", day: "numeric", year: "numeric" })
@@ -3118,7 +3131,7 @@ export default function Products({ currentUser }) {
                       }
                     </td>
                     <td>
-                      <a href={productUrl(p.slug)} target="_blank" rel="noopener noreferrer" className="product-name-link">
+                      <a href={productUrl(p)} target="_blank" rel="noopener noreferrer" className="product-name-link">
                         {p.name}
                       </a>
                       <div className="product-meta">
