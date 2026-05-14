@@ -44,6 +44,7 @@ import ProductCatalogue from "./pages/Support/ProductCatalogue";
 // Dynamic product detail pages
 import ProductPageRouter from "./pages/ProductPageRouter";
 import AccessoriesPage from "./pages/AccessoriesPage";
+import AccessoriesCatalog from "./pages/AccessoriesCatalog";
 import SaunaRoomDisplay from "./pages/SaunaRoomDisplay";
 
 // Admin pages
@@ -99,6 +100,9 @@ export default function App() {
 
                 {/* Single product detail page */}
                 <Route path="/products/:slug" element={<ProductPageRouter />} />
+
+                {/* Accessories catalog (all accessories listing) */}
+                <Route path="/accessories" element={<AccessoriesCatalog />} />
 
                 {/* Single accessory product detail page */}
                 <Route path="/accessories/:slug" element={<AccessoriesPage />} />

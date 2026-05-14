@@ -1020,7 +1020,7 @@
         "id":  "4b5d8a0c-a130-4296-b29d-5855e60ffe69",
         "name":  "Moisture Paper",
         "slug":  "moisture-paper",
-        "short_description":  "Code: SP02-900",
+        "short_description":  "Code: SP02-900<br>Size: 1200 x 77 x 77mm",
         "description":  null,
         "thumbnail":  "images/Moisture-Paper-1200x24mm.webp",
         "images":  [
@@ -1064,7 +1064,7 @@
         "id":  "d3ae3a53-cbd3-4555-8de7-63e1963d92d7",
         "name":  "Sauna Signage",
         "slug":  "sauna-signage-950",
-        "short_description":  "Code: 950-PC | 950-A | 950-D | 950-BL",
+        "short_description":  "Code: 950-PC | 950-A | 950-D | 950-BL<br>Size: 150 x 80mm<br>Option: Pinaceae | Aspen | Cedar | Black",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_add_ons_950-P.webp",
         "images":  [
@@ -1111,7 +1111,7 @@
         "id":  "04c27b7a-ab62-4427-89c4-a62a16ffa6e9",
         "name":  "Display Stand Wall 3",
         "slug":  "display-stand-wall-3",
-        "short_description":  "Code: DP-17",
+        "short_description":  "Code: DP-17<br>Size: (L)630 x (W)3400 x (H)2000mm",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_DP17.webp",
         "images":  [
@@ -1155,7 +1155,7 @@
         "id":  "428b1474-abeb-4066-984c-9b96acf1999b",
         "name":  "Display Stand Wall 2",
         "slug":  "display-stand-wall-2",
-        "short_description":  "Code: DP-16",
+        "short_description":  "Code: DP-16<br>Size: (L)630 x (W)2300 x (H)2000mm",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_DP16.webp",
         "images":  [
@@ -1199,7 +1199,7 @@
         "id":  "71217047-1794-42bc-81d6-45522426afa7",
         "name":  "Display Stand Wall 1",
         "slug":  "display-stand-wall-1",
-        "short_description":  "Code: DP-15",
+        "short_description":  "Code: DP-15<br>Size: (L)630 x (W)1110 x (H)2000mm",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_DP15.webp",
         "images":  [
@@ -1243,7 +1243,7 @@
         "id":  "68fede56-88e5-403b-8945-d489bd024e81",
         "name":  "Ventilation Louver Circle 170mm",
         "slug":  "ventilation-louver-circle-639",
-        "short_description":  "Code: 639-PC | 639-A | 639-D | 639-BL",
+        "short_description":  "Code: 639-PC | 639-A | 639-D | 639-BL<br>Size: Ø170mm<br>Ducting Hole: 125mm<br>Option: Pinaceae | Aspen | Cedar | Black",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_639-P.webp",
         "images":  [
@@ -1290,7 +1290,7 @@
         "id":  "5ec640a8-b0a9-493e-9800-08c6be60e3b7",
         "name":  "Ventilation Louver Circle 145mm",
         "slug":  "ventilation-louver-circle-638",
-        "short_description":  "Code: 638-PC | 638-A | 638-D | 638-BL",
+        "short_description":  "Code: 638-PC | 638-A | 638-D | 638-BL<br>Size: Ø145mm<br>Ducting Hole: 100mm<br>Option: Pinaceae | Aspen | Cedar | Black",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_638-P.webp",
         "images":  [
@@ -1337,7 +1337,7 @@
         "id":  "eaec1be6-143c-4f73-a737-5e5c11d1c919",
         "name":  "Ventilation Louver Square",
         "slug":  "ventilation-louver-square-620",
-        "short_description":  "Code: 620-PC | 620-A | 620-D",
+        "short_description":  "Code: 620-PC | 620-A | 620-D<br>Size: 215 x 170mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_620-P.webp",
         "images":  [
@@ -1383,7 +1383,7 @@
         "id":  "47386780-7f60-4af7-91b3-29021b52322d",
         "name":  "Ventilation Louver Circle v2",
         "slug":  "ventilation-louver-circle-634",
-        "short_description":  "Code: 634-PC | 634-A | 634-D",
+        "short_description":  "Code: 634-PC | 634-A | 634-D<br>Size: Ø170mm<br>Ducting Hole: 125mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_634-P.webp",
         "images":  [
@@ -1429,7 +1429,7 @@
         "id":  "c73f2b01-389d-4772-b065-4bbbb4a092be",
         "name":  "Ventilation Louver Circle",
         "slug":  "ventilation-louver-circle-631",
-        "short_description":  "Code: 631-PC | 631-A | 631-D",
+        "short_description":  "Code: 631-PC | 631-A | 631-D<br>Size: Ø145mm<br>Ducting Hole: 100mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_631-P.webp",
         "images":  [
@@ -1475,7 +1475,7 @@
         "id":  "b86e4177-8e23-4aaf-b015-f8f6ae7602ca",
         "name":  "Ventilation Cover Circle v2",
         "slug":  "ventilation-cover-circle-641",
-        "short_description":  "Code: 641-D",
+        "short_description":  "Code: 641-D<br>Size: Ø160mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_641-D.webp",
         "images":  [
@@ -1519,7 +1519,7 @@
         "id":  "c57d0f80-a938-47fc-b7a6-78ef8f17838b",
         "name":  "Ventilation Cover Circle",
         "slug":  "ventilation-cover-circle-640",
-        "short_description":  "Code: 640-MBR",
+        "short_description":  "Code: 640-MBR<br>Size: Ø160mm<br>Option: Metallic Brown",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_ventilations_640-BR.webp",
         "images":  [
@@ -1563,7 +1563,7 @@
         "id":  "ef8dc156-1821-4061-b674-94cef0914c42",
         "name":  "Soap Holder",
         "slug":  "soap-holder",
-        "short_description":  "Code: R-116",
+        "short_description":  "Code: R-116<br>Size: 180 x 100 x 30mm<br>Weight: 0.9kg",
         "description":  null,
         "thumbnail":  "images/R-116-300x300.webp",
         "images":  [
@@ -1606,7 +1606,7 @@
         "id":  "e3e21678-53b0-4bc1-9c25-bc50ce037647",
         "name":  "Stone Plate Large",
         "slug":  "stone-plate-large",
-        "short_description":  "Code: R-153",
+        "short_description":  "Code: R-153<br>Size: 305 x 200 x 15mm<br>Weight: 2.8kg",
         "description":  null,
         "thumbnail":  "images/R-153_C_and_D.webp",
         "images":  [
@@ -1650,7 +1650,7 @@
         "id":  "94424f4f-e239-4c32-9b90-b4934e356dbd",
         "name":  "Stone Plate Small",
         "slug":  "stone-plate-small",
-        "short_description":  "Code: R-152",
+        "short_description":  "Code: R-152<br>Size: 240 x 170 x 25mm<br>Weight: 2.8kg",
         "description":  null,
         "thumbnail":  "images/R-152-300x300.webp",
         "images":  [
@@ -1694,7 +1694,7 @@
         "id":  "498d2d30-fbc9-4ba6-b0c7-1aa53c1f3a86",
         "name":  "Candle Holder Straight",
         "slug":  "candle-holder-straight",
-        "short_description":  "Code: R-105",
+        "short_description":  "Code: R-105<br>Size: 265 x 60 x 30mm<br>Weight: 1.3kg",
         "description":  null,
         "thumbnail":  "images/R-105-300x300.webp",
         "images":  [
@@ -1738,7 +1738,7 @@
         "id":  "35783457-5362-4e48-af12-c07971c4642d",
         "name":  "Tower Set 3",
         "slug":  "tower-set-3",
-        "short_description":  "Code: R-125",
+        "short_description":  "Code: R-125<br>Size: 180 x 60 x 180mm<br>Weight: 1.8kg",
         "description":  null,
         "thumbnail":  "images/R-125-300x300.webp",
         "images":  [
@@ -1782,7 +1782,7 @@
         "id":  "b9bfa340-5b1d-4749-8199-69d119ccdf27",
         "name":  "Candle Holder Tower v3",
         "slug":  "candle-holder-tower-v3",
-        "short_description":  "Code: R-133",
+        "short_description":  "Code: R-133<br>Size: 60 x 60 x 120mm<br>Weight: 1.2kg",
         "description":  null,
         "thumbnail":  "images/R-133-300x300.webp",
         "images":  [
@@ -1826,7 +1826,7 @@
         "id":  "015761d4-50ae-4246-b361-6667b972159c",
         "name":  "Candle Holder Tower v2",
         "slug":  "candle-holder-tower-v2",
-        "short_description":  "Code: R-132",
+        "short_description":  "Code: R-132<br>Size: 60 x 60 x 90mm<br>Weight: 0.9kg",
         "description":  null,
         "thumbnail":  "images/R-132-300x300.webp",
         "images":  [
@@ -1870,7 +1870,7 @@
         "id":  "e27e313f-54bb-40e0-afdb-fb0e08de5e83",
         "name":  "Candle Holder Tower",
         "slug":  "candle-holder-tower",
-        "short_description":  "Code: R-131",
+        "short_description":  "Code: R-131<br>Size: 60 x 60 x 60mm<br>Weight: 0.6kg",
         "description":  null,
         "thumbnail":  "images/R-131-300x300.webp",
         "images":  [
@@ -1914,7 +1914,7 @@
         "id":  "6b66beca-8063-4019-b048-939d45865b53",
         "name":  "Cooler w/ 4 shot glasses",
         "slug":  "cooler-4-shot-glasses",
-        "short_description":  "Code: R-206",
+        "short_description":  "Code: R-206<br>Size: 190 x 120 x 70mm<br>Weight: 2.3kg",
         "description":  null,
         "thumbnail":  "images/R-206-300x300.webp",
         "images":  [
@@ -1957,7 +1957,7 @@
         "id":  "400e6a4b-70fc-41e4-861e-7c30ae54265a",
         "name":  "Cooler w/ 2 shot glasses",
         "slug":  "cooler-2-shot-glasses",
-        "short_description":  "Code: R-205",
+        "short_description":  "Code: R-205<br>Size: 135 x 100 x 70mm<br>Weight: 1.8kg",
         "description":  null,
         "thumbnail":  "images/R-205-300x300.webp",
         "images":  [
@@ -2000,7 +2000,7 @@
         "id":  "76df2c37-67c6-40ac-8bb0-c67cd2c908fb",
         "name":  "Cooler (2 hole)",
         "slug":  "cooler-2-hole",
-        "short_description":  "Code: R-92",
+        "short_description":  "Code: R-92<br>Size: 185 x 100 x 75mm<br>Weight: 4.1kg",
         "description":  null,
         "thumbnail":  "images/R-92-300x300.webp",
         "images":  [
@@ -2043,7 +2043,7 @@
         "id":  "f3d338ca-313a-44b5-ab4e-65f6e2395051",
         "name":  "Cooler (1 hole)",
         "slug":  "cooler-1-hole",
-        "short_description":  "Code: R-141",
+        "short_description":  "Code: R-141<br>Size: 100 x 100 x 75mm<br>Weight: 1.3kg",
         "description":  null,
         "thumbnail":  "images/R-141-300x300.webp",
         "images":  [
@@ -2086,7 +2086,7 @@
         "id":  "18c41bf9-fe1c-4cc2-8398-9b5083651525",
         "name":  "Spa Stones Set",
         "slug":  "spa-stones-set",
-        "short_description":  "Code: R-500-D",
+        "short_description":  "Code: R-500-D<br>Size: 90 x 128 x 178mm<br>Material: Soapstone | Cedar",
         "description":  null,
         "thumbnail":  "images/R-500-D-300x300.webp",
         "images":  [
@@ -2130,7 +2130,7 @@
         "id":  "098665ed-a665-4f4f-b4a4-710bc5dacaa9",
         "name":  "Wine Cooler Stone",
         "slug":  "wine-cooler-stone",
-        "short_description":  "Code: R-93-D",
+        "short_description":  "Code: R-93-D<br>Size: 230 x 155 x 84mm<br>Material: Soapstone | Cedar",
         "description":  null,
         "thumbnail":  "images/R-93-D-300x300-1.webp",
         "images":  [
@@ -2174,7 +2174,7 @@
         "id":  "c25b2d96-a115-43c4-8289-d74d6f7f5df8",
         "name":  "Scent Warmer",
         "slug":  "scent-warmer",
-        "short_description":  "Code: R-123",
+        "short_description":  "Code: R-123<br>Size: 75 x 75 x 80mm<br>Weight: 0.7kg",
         "description":  null,
         "thumbnail":  "images/R-123-300x300.webp",
         "images":  [
@@ -2217,7 +2217,7 @@
         "id":  "bae2b3c3-18be-4244-bc02-7339878c26d7",
         "name":  "Aroma Spirit Cup",
         "slug":  "aroma-spirit-cup",
-        "short_description":  "Code: R-501",
+        "short_description":  "Code: R-501<br>Size: 75 x 75 x 120mm<br>Weight: 0.7kg",
         "description":  null,
         "thumbnail":  "images/R-501-300x300.webp",
         "images":  [
@@ -2260,7 +2260,7 @@
         "id":  "e3e8e724-cb61-4725-9875-bd5572cff024",
         "name":  "Aroma Cup (ø)50",
         "slug":  "aroma-cup-50",
-        "short_description":  "Code: R-100",
+        "short_description":  "Code: R-100<br>Size: 50 x 50 x 60mm<br>Weight: 0.3kg",
         "description":  null,
         "thumbnail":  "images/R-100-300x300.webp",
         "images":  [
@@ -2303,7 +2303,7 @@
         "id":  "5b835995-5c90-4efd-99ce-80cede81b62c",
         "name":  "Luxury Aroma Cup (ø)50",
         "slug":  "luxury-aroma-cup-50",
-        "short_description":  "Code: R-160",
+        "short_description":  "Code: R-160<br>Size: 50 x 50 x 50mm<br>Weight: 0.2kg",
         "description":  null,
         "thumbnail":  "images/R-160-300x300.webp",
         "images":  [
@@ -2346,7 +2346,7 @@
         "id":  "18a6d709-c807-4383-a63e-3e86c2aff182",
         "name":  "Wooden Floor Mat Sides",
         "slug":  "wooden-floor-mat-sides",
-        "short_description":  "Code: 595-SID",
+        "short_description":  "Code: 595-PC-SID | 595-A-SID | 595-D-SID<br>Size: 285 x 115mm<br>Thickness: 22mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_floor-mat-tiles_595-SID.webp",
         "images":  [
@@ -2390,7 +2390,7 @@
         "id":  "dfb82eca-e781-4cb0-80fb-2156383773f8",
         "name":  "Wooden Floor Mat Corner Frame",
         "slug":  "wooden-floor-mat-corner-frame",
-        "short_description":  "Code: 595-CNR",
+        "short_description":  "Code: 595-PC-CNR | 595-A-CNR | 595-D-CNR<br>Size: 390 x 115mm<br>Thickness: 22mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_floor-mat-tiles_595-CNR.webp",
         "images":  [
@@ -2434,7 +2434,7 @@
         "id":  "da15601c-e1d2-4366-bc90-4c0836e92906",
         "name":  "Wooden Floor Mat Block",
         "slug":  "wooden-floor-mat-block",
-        "short_description":  "Code: 595-BC",
+        "short_description":  "Code: 595-PC-BC | 595-A-BC | 595-D-BC<br>Size: 285 x 285mm<br>Thickness: 22mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_floor-mat-tiles_595-BC.webp",
         "images":  [
@@ -2478,7 +2478,7 @@
         "id":  "5897e664-3a2d-4d37-b5e8-13114efd9e0b",
         "name":  "Wooden Curve Towel Hanger",
         "slug":  "wooden-curve-towel-hanger",
-        "short_description":  "Code: 589",
+        "short_description":  "Code: 589–A | 589–D | 589–BL<br>Size: 42 x 240mm<br>Option: Aspen | Cedar | Black",
         "description":  null,
         "thumbnail":  "images/Wooden-Curve-Towel-Hanger-589.webp",
         "images":  [
@@ -2522,7 +2522,7 @@
         "id":  "f63161ef-e45f-49d3-a4f0-e6776325196d",
         "name":  "Wooden Hook Rack (5 Hooks)",
         "slug":  "wooden-hook-rack-5-hooks",
-        "short_description":  "Code: 583",
+        "short_description":  "Code: 583–PC | 583–A | 583–D<br>Size: 42 x 440mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_hook_racks_583.webp",
         "images":  [
@@ -2566,7 +2566,7 @@
         "id":  "cb0fa953-f11c-40c2-9765-7f48ca264d17",
         "name":  "Wooden Hook Rack (4 Hooks)",
         "slug":  "wooden-hook-rack-4-hooks",
-        "short_description":  "Code: 586",
+        "short_description":  "Code: 586–PC | 586–A | 586–D<br>Size: 42 x 340mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_hook_racks_586.webp",
         "images":  [
@@ -2610,7 +2610,7 @@
         "id":  "c582ff8e-234c-4cb9-a990-a8f3f44e10c2",
         "name":  "Wooden Hook Rack (3 Hooks)",
         "slug":  "wooden-hook-rack-3-hooks",
-        "short_description":  "Code: 582",
+        "short_description":  "Code: 582–PC | 582–A | 582–D<br>Size: 42 x 240mm<br>Option: Pinaceae | Aspen | Cedar",
         "description":  null,
         "thumbnail":  "images/SAWO_sauna_accessories_hook_racks_582.webp",
         "images":  [
@@ -2654,7 +2654,7 @@
         "id":  "2b390c3f-15c4-4a79-9b78-6ef30846a90d",
         "name":  "Sauna Bench 2-Steps",
         "slug":  "sauna-bench-2-steps-524",
-        "short_description":  "Code: 524",
+        "short_description":  "Code: 524–D<br>Size: 760 x 534 x 562mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/524-D.jpg",
         "images":  [
@@ -2695,7 +2695,7 @@
         "id":  "dcb9b0af-70de-495d-95d3-125fb8c64f2d",
         "name":  "Sauna Bench v4",
         "slug":  "sauna-bench-523",
-        "short_description":  "Code: 523",
+        "short_description":  "Code: 523–D<br>Size: 500 x 1200 x 510mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/523-D.jpg",
         "images":  [
@@ -2736,7 +2736,7 @@
         "id":  "295de80a-9155-473b-bca2-7ff1e1b4950e",
         "name":  "Sauna Bench v3",
         "slug":  "sauna-bench-522",
-        "short_description":  "Code: 522",
+        "short_description":  "Code: 522–D<br>Size: 500 x 870 x 510mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/522-D.jpg",
         "images":  [
@@ -2777,7 +2777,7 @@
         "id":  "3be3dbe3-a320-4f3a-b590-e5d71a912a6f",
         "name":  "Sauna Bench v2",
         "slug":  "sauna-bench-521",
-        "short_description":  "Code: 521",
+        "short_description":  "Code: 521–D<br>Size: 430 x 870 x 412mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/521-D.jpg",
         "images":  [
@@ -2818,7 +2818,7 @@
         "id":  "b6caea0c-d102-492d-a930-e6089fb7c5cd",
         "name":  "Sauna Bench",
         "slug":  "sauna-bench-520",
-        "short_description":  "Code: 520",
+        "short_description":  "Code: 520–D<br>Size: 430 x 534 x 412mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/520-D.jpg",
         "images":  [
@@ -2859,7 +2859,7 @@
         "id":  "c56b9284-af30-44f5-8315-a84af7508b13",
         "name":  "Siro Sauna Bench v3",
         "slug":  "siro-sauna-bench-529-l",
-        "short_description":  "Code: 529-L",
+        "short_description":  "Code: 529–L-D<br>Size: 290 x 1200 x 420mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/120-x-29-x-42cm-Siro-bench-scaled.webp",
         "images":  [
@@ -2900,7 +2900,7 @@
         "id":  "945f355c-e52c-4c4d-a372-d5f2304622bf",
         "name":  "Siro Sauna Bench v2",
         "slug":  "siro-sauna-bench-529",
-        "short_description":  "Code: 529",
+        "short_description":  "Code: 529–D<br>Size: 290 x 850 x 420mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/Siro-Sauna-Bench-750x290x400mm.png",
         "images":  [
@@ -2941,7 +2941,7 @@
         "id":  "b0be3b7f-1163-46dc-807c-45e7ce80d0f9",
         "name":  "Siro Sauna Bench",
         "slug":  "siro-sauna-bench-528",
-        "short_description":  "Code: 528",
+        "short_description":  "Code: 528–D<br>Size: 290 x 420 x 420mm<br>Option: Cedar",
         "description":  null,
         "thumbnail":  "images/Siro-Sauna-Bench-528.png",
         "images":  [

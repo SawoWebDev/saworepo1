@@ -60,6 +60,7 @@ export default function Header() {
       ],
     },
     { name: "Infrared", path: menuPaths.infrared },
+    { name: "Accessories", path: menuPaths.accessories },
     {
       name: "Support",
       path: menuPaths.support.parent,

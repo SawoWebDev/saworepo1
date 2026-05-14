@@ -47,6 +47,7 @@ const menuPaths = {
 
   careers: "/careers",
   products: "/products",
+  accessories: "/accessories",
   adminDashboard:"/admin/dashboard",
 };
 
