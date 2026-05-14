@@ -192,16 +192,17 @@ function Lightbox({ images, startIndex, onClose }) {
 }
 
 /* ── Image Carousel ───────────────────────────────────────────────── */
-function Carousel({ images, thumbnail, onImageClick }) {
-  const all = [
-    ...(thumbnail ? [thumbnail] : []),
-    ...(images || []).filter(u => u !== thumbnail),
+function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
+  const items = [
+    ...(thumbnail ? [{ type: 'image', url: thumbnail }] : []),
+    ...(images || []).filter(u => u !== thumbnail).map(u => ({ type: 'image', url: u })),
+    ...(videoUrl ? [{ type: 'video', url: videoUrl }] : []),
   ].filter(Boolean);
 
   const [idx, setIdx] = useState(0);
   const [err, setErr] = useState({});
 
-  if (!all.length) {
+  if (!items.length) {
     return (
       <div style={{
         width: "100%", aspectRatio: "1/1", background: "#faf7f4",
@@ -213,43 +214,60 @@ function Carousel({ images, thumbnail, onImageClick }) {
     );
   }
 
-  const prev = () => setIdx(i => (i - 1 + all.length) % all.length);
-  const next = () => setIdx(i => (i + 1) % all.length);
+  const prev = () => setIdx(i => (i - 1 + items.length) % items.length);
+  const next = () => setIdx(i => (i + 1) % items.length);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       <div style={{
-        position: "relative", borderRadius: 0, overflow: "visible",
+        position: "relative", borderRadius: 0, overflow: "hidden",
         background: "transparent", border: "none",
         aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "zoom-in",
+        cursor: items[idx]?.type === 'image' ? "zoom-in" : "default",
+        width: "100%",
       }}
-        onClick={() => onImageClick(all, idx)}
+        onClick={() => items[idx]?.type === 'image' && onImageClick([items[idx].url], 0)}
       >
-        {!err[idx] && (
-          <ImageWithLoader
-            key={idx}
-            src={all[idx]}
-            alt=""
-            onError={() => setErr(e => ({ ...e, [idx]: true }))}
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              objectFit: "contain",
-              padding: 0,
-              animation: "ppFadeIn 0.25s ease",
-              width: "100%",
-              height: "100%",
-            }}
-          />
-        )}
-        {err[idx] && (
-          <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
+        {items[idx]?.type === 'image' ? (
+          <>
+            {!err[idx] && (
+              <ImageWithLoader
+                key={idx}
+                src={items[idx].url}
+                alt=""
+                onError={() => setErr(e => ({ ...e, [idx]: true }))}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  padding: 0,
+                  animation: "ppFadeIn 0.25s ease",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            )}
+            {err[idx] && (
+              <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
+            )}
+          </>
+        ) : (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#000", overflow: "hidden" }}>
+            <video
+              src={items[idx]?.url}
+              autoPlay
+              muted
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                animation: "ppFadeIn 0.25s ease",
+              }}
+            />
+          </div>
         )}
 
-        {/* REMOVED: "Click to zoom" overlay */}
-
-        {all.length > 1 && (
+        {items.length > 1 && (
           <>
             {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
               <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{
@@ -257,7 +275,7 @@ function Carousel({ images, thumbnail, onImageClick }) {
                 background: "transparent", border: "none",
                 borderRadius: "50%", width: 34, height: 34, cursor: "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: "none", transition: "all 0.2s", color: "#a67853",
+                boxShadow: "none", transition: "all 0.2s", color: "#a67853", zIndex: 10,
               }}
                 onMouseEnter={e => { e.currentTarget.style.color = "#8b5e3c"; e.currentTarget.style.transform = "translateY(-50%) scale(1.15)"; }}
                 onMouseLeave={e => { e.currentTarget.style.color = "#a67853"; e.currentTarget.style.transform = "translateY(-50%)"; }}
@@ -266,7 +284,7 @@ function Carousel({ images, thumbnail, onImageClick }) {
               </button>
             ))}
             <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5 }}>
-              {all.map((_, i) => (
+              {items.map((_, i) => (
                 <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
                   style={{ width: i === idx ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none", cursor: "pointer", transition: "all 0.22s", background: i === idx ? "#a67853" : "rgba(139,94,60,0.25)" }} />
               ))}
@@ -277,30 +295,33 @@ function Carousel({ images, thumbnail, onImageClick }) {
               fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif",
               fontWeight: 600, padding: "2px 8px", borderRadius: 20,
             }}>
-              {idx + 1} / {all.length}
+              {idx + 1} / {items.length}
             </span>
           </>
         )}
       </div>
 
-      {all.length > 1 && (
+      {items.length > 1 && (
         <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 2 }}>
-          {all.map((url, i) => (
+          {items.map((item, i) => (
             <button key={i} onClick={() => setIdx(i)}
               style={{
                 flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden",
                 border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`,
                 background: "#faf7f4", cursor: "pointer", padding: 0, transition: "border-color 0.18s",
               }}>
-              {!err[i] && (
+              {item.type === 'video' ? (
+                <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#edddd0" }}>
+                  <i className="fa-solid fa-play" style={{ color: "#a67853", fontSize: "1rem" }} />
+                </div>
+              ) : !err[i] ? (
                 <ImageWithLoader
-                  src={url}
+                  src={item.url}
                   alt=""
                   onError={() => setErr(e => ({ ...e, [i]: true }))}
                   style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }}
                 />
-              )}
-              {err[i] && (
+              ) : (
                 <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "1rem" }} />
               )}
             </button>
@@ -722,6 +743,7 @@ export default function ProductPage() {
   const images       = getImagesArray(product, 'images');
   const thumbnail    = getImageUrl(product, 'thumbnail');
   const specImages   = getImagesArray(product, 'spec_images');
+  const videoUrl     = product?.resources?.video || null;
   const hasShortDesc = !!product.short_description;
   const hasDesc      = !!product.description;
   const hasFeatures  = (product.features || []).length > 0;
@@ -822,6 +844,7 @@ export default function ProductPage() {
               <Carousel
                 images={images}
                 thumbnail={thumbnail}
+                videoUrl={videoUrl}
                 onImageClick={openLightbox}
               />
               {/* Resources — below images (only show on left if Diagram exists) */}

@@ -1,31 +1,36 @@
 // src/pages/AccessoriesPage.jsx
-// Dedicated page for products with variants (pails, accessories, etc.)
-// Uses local product data with variant images synced from Supabase to GitHub
+// Full ProductPage-style layout with accessories-specific features
+// (variant swatches + video modal + supabase product_variants fallback)
 
-import React, { useEffect, useState, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { supabase } from "../Administrator/supabase";
 import { ImageWithLoader } from "../components/ImageWithLoader";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
-// Helper: prefer local data over remote, with fallback
+// ─ Helpers ─────────────────────────────────────────────────────────────
+
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
-// Convert path to full URL (GitHub raw or direct URL)
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
   if (String(pathOrUrl).includes("://")) return pathOrUrl;
   return `${GITHUB_RAW}${pathOrUrl}`;
 }
 
-// Get image URL from product field, preferring local data
 function getImageUrl(product, field) {
-  const url = localOrRemote(product, field);
-  return resolveUrl(url);
+  return resolveUrl(localOrRemote(product, field));
+}
+
+function getImagesArray(product, field) {
+  const local = product?.[`local_${field}`];
+  const remote = product?.[field];
+  const arr = (local?.length ? local : remote) || [];
+  return arr.map(resolveUrl).filter(Boolean);
 }
 
 function getFilesArray(product) {
@@ -35,7 +40,6 @@ function getFilesArray(product) {
   return (remote || []).map(f => ({ name: f.name, url: f.url }));
 }
 
-// Get variants from local product data
 function getVariantsArray(product) {
   const local = product?.local_variants;
   const remote = product?.variants;
@@ -46,18 +50,31 @@ function getVariantsArray(product) {
   }));
 }
 
-/* ── Video Modal ─────────────────────────────────────────────────────── */
+function cleanHTMLStyles(html) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  const allElements = temp.querySelectorAll("*");
+  allElements.forEach(el => {
+    if (el.tagName === "BR") {
+      el.removeAttribute("style");
+      return;
+    }
+    el.removeAttribute("style");
+  });
+  let result = temp.innerHTML;
+  result = result.replace(/<p>/g, '<p margin-top: 0;">');
+  return result;
+}
+
+/* ── Video Modal ────────────────────────────────────────────────────── */
 function VideoModal({ videoUrl, onClose }) {
   useEffect(() => {
-    const handleEscape = (e) => {
+    const h = e => {
       if (e.key === "Escape") onClose();
     };
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("keydown", h);
     document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
+    return () => { document.removeEventListener("keydown", h); document.body.style.overflow = ""; };
   }, [onClose]);
 
   return (
@@ -96,25 +113,652 @@ function VideoModal({ videoUrl, onClose }) {
   );
 }
 
-/* ── Main Component ──────────────────────────────────────────────── */
+/* ── Lightbox ─────────────────────────────────────────────────────── */
+function Lightbox({ images, startIndex, onClose }) {
+  const [idx, setIdx] = useState(startIndex);
+  const [scale, setScale] = useState(1);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
+  const dragStart = useRef(null);
+
+  const prev = useCallback(() => { setIdx(i => (i - 1 + images.length) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
+  const next = useCallback(() => { setIdx(i => (i + 1) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
+
+  useEffect(() => {
+    const h = e => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    document.addEventListener("keydown", h);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", h); document.body.style.overflow = ""; };
+  }, [onClose, prev, next]);
+
+  const handleWheel = e => {
+    e.preventDefault();
+    setScale(s => Math.min(Math.max(s - e.deltaY * 0.001, 1), 4));
+  };
+
+  const handleMouseDown = e => {
+    if (scale <= 1) return;
+    setDragging(true);
+    dragStart.current = { x: e.clientX - offset.x, y: e.clientY - offset.y };
+  };
+  const handleMouseMove = e => {
+    if (!dragging || !dragStart.current) return;
+    setOffset({ x: e.clientX - dragStart.current.x, y: e.clientY - dragStart.current.y });
+  };
+  const handleMouseUp = () => setDragging(false);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9999,
+        background: "rgba(0,0,0,0.92)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        animation: "ppFadeIn 0.2s ease",
+      }}
+    >
+      <button onClick={onClose} style={{
+        position: "absolute", top: 18, right: 18,
+        background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%",
+        width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        transition: "background 0.2s", zIndex: 10,
+      }}
+        onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
+        onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
+      >
+        <i className="fa-solid fa-xmark" />
+      </button>
+
+      {images.length > 1 && (
+        <div style={{
+          position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)",
+          background: "rgba(255,255,255,0.12)", color: "#fff",
+          padding: "4px 14px", borderRadius: 20,
+          fontFamily: "'Montserrat',sans-serif", fontSize: "0.72rem", fontWeight: 600,
+        }}>
+          {idx + 1} / {images.length}
+        </div>
+      )}
+
+      <div style={{
+        position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)",
+        background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)",
+        padding: "4px 14px", borderRadius: 20,
+        fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem",
+        pointerEvents: "none",
+      }}>
+        Scroll to zoom · Drag to pan · Esc to close
+      </div>
+
+      {images.length > 1 && (
+        <>
+          {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
+            <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{
+              position: "absolute", [side]: 16, top: "50%", transform: "translateY(-50%)",
+              background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%",
+              width: 44, height: 44, cursor: "pointer", color: "#fff",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "0.85rem", transition: "background 0.2s", zIndex: 10,
+            }}
+              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
+              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
+            >
+              <i className={`fa-solid ${icon}`} />
+            </button>
+          ))}
+        </>
+      )}
+
+      <div
+        onClick={e => e.stopPropagation()}
+        onWheel={handleWheel}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        style={{
+          maxWidth: "88vw", maxHeight: "88vh",
+          cursor: scale > 1 ? (dragging ? "grabbing" : "grab") : "default",
+          userSelect: "none",
+        }}
+      >
+        <ImageWithLoader
+          src={images[idx]}
+          alt=""
+          style={{
+            maxWidth: "88vw", maxHeight: "88vh",
+            objectFit: "contain", borderRadius: 10,
+            transform: `scale(${scale}) translate(${offset.x / scale}px, ${offset.y / scale}px)`,
+            transition: dragging ? "none" : "transform 0.15s ease",
+            display: "block",
+          }}
+        />
+      </div>
+
+      {images.length > 1 && (
+        <div style={{
+          position: "absolute", bottom: 52, left: "50%", transform: "translateX(-50%)",
+          display: "flex", gap: 6,
+        }} onClick={e => e.stopPropagation()}>
+          {images.map((url, i) => (
+            <button key={i} onClick={() => { setIdx(i); setScale(1); setOffset({ x: 0, y: 0 }); }}
+              style={{
+                width: 44, height: 44, borderRadius: 6, overflow: "hidden",
+                border: `2px solid ${i === idx ? "#a67853" : "rgba(255,255,255,0.25)"}`,
+                background: "rgba(0,0,0,0.4)", cursor: "pointer", padding: 0,
+                transition: "border-color 0.18s", flexShrink: 0,
+              }}>
+              <ImageWithLoader
+                src={url}
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Carousel ──────────────────────────────────────────────────────── */
+function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
+  const items = [
+    ...(thumbnail ? [{ type: 'image', url: thumbnail }] : []),
+    ...(images || []).filter(u => u !== thumbnail).map(u => ({ type: 'image', url: u })),
+    ...(videoUrl ? [{ type: 'video', url: videoUrl }] : []),
+  ].filter(Boolean);
+
+  const [idx, setIdx] = useState(0);
+  const [err, setErr] = useState({});
+
+  if (!items.length) {
+    return (
+      <div style={{
+        width: "100%", aspectRatio: "1/1", background: "#faf7f4",
+        borderRadius: 14, display: "flex", alignItems: "center",
+        justifyContent: "center", border: "1px solid #edddd0",
+      }}>
+        <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
+      </div>
+    );
+  }
+
+  const prev = () => setIdx(i => (i - 1 + items.length) % items.length);
+  const next = () => setIdx(i => (i + 1) % items.length);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <div style={{
+        position: "relative", borderRadius: 0, overflow: "hidden",
+        background: "transparent", border: "none",
+        aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: items[idx]?.type === 'image' ? "zoom-in" : "default",
+        width: "100%",
+      }}
+        onClick={() => items[idx]?.type === 'image' && onImageClick([items[idx].url], 0)}
+      >
+        {items[idx]?.type === 'image' ? (
+          <>
+            {!err[idx] && (
+              <ImageWithLoader
+                key={idx}
+                src={items[idx].url}
+                alt=""
+                onError={() => setErr(e => ({ ...e, [idx]: true }))}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  padding: 0,
+                  animation: "ppFadeIn 0.25s ease",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            )}
+            {err[idx] && (
+              <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
+            )}
+          </>
+        ) : (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#000", overflow: "hidden" }}>
+            <video
+              src={items[idx]?.url}
+              autoPlay
+              muted
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                animation: "ppFadeIn 0.25s ease",
+              }}
+            />
+          </div>
+        )}
+
+        {items.length > 1 && (
+          <>
+            {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
+              <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{
+                position: "absolute", [side]: 10, top: "50%", transform: "translateY(-50%)",
+                background: "transparent", border: "none",
+                borderRadius: "50%", width: 34, height: 34, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "none", transition: "all 0.2s", color: "#a67853", zIndex: 10,
+              }}
+                onMouseEnter={e => { e.currentTarget.style.color = "#8b5e3c"; e.currentTarget.style.transform = "translateY(-50%) scale(1.15)"; }}
+                onMouseLeave={e => { e.currentTarget.style.color = "#a67853"; e.currentTarget.style.transform = "translateY(-50%)"; }}
+              >
+                <i className={`fa-solid ${icon}`} style={{ fontSize: "1.2rem", fontWeight: "bold" }} />
+              </button>
+            ))}
+            <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5 }}>
+              {items.map((_, i) => (
+                <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
+                  style={{ width: i === idx ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none", cursor: "pointer", transition: "all 0.22s", background: i === idx ? "#a67853" : "rgba(139,94,60,0.25)" }} />
+              ))}
+            </div>
+            <span style={{
+              position: "absolute", top: 10, right: 10,
+              background: "rgba(44,26,14,0.55)", color: "#fff",
+              fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif",
+              fontWeight: 600, padding: "2px 8px", borderRadius: 20,
+            }}>
+              {idx + 1} / {items.length}
+            </span>
+          </>
+        )}
+      </div>
+
+      {items.length > 1 && (
+        <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 2 }}>
+          {items.map((item, i) => (
+            <button key={i} onClick={() => setIdx(i)}
+              style={{
+                flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden",
+                border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`,
+                background: "#faf7f4", cursor: "pointer", padding: 0, transition: "border-color 0.18s",
+              }}>
+              {item.type === 'video' ? (
+                <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#edddd0" }}>
+                  <i className="fa-solid fa-play" style={{ color: "#a67853", fontSize: "1rem" }} />
+                </div>
+              ) : !err[i] ? (
+                <ImageWithLoader
+                  src={item.url}
+                  alt=""
+                  onError={() => setErr(e => ({ ...e, [i]: true }))}
+                  style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }}
+                />
+              ) : (
+                <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "1rem" }} />
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Compact Spec Images ───────────────────────────────────────────── */
+function CompactSpecImages({ images, onImageClick }) {
+  const [idx, setIdx] = useState(0);
+  if (!images || !images.length) return null;
+  const single = images.length === 1;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <div style={{
+        position: "relative",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: "pointer",
+        minHeight: 100,
+      }} onClick={() => onImageClick(images, idx)}>
+        <ImageWithLoader
+          key={idx}
+          src={images[idx]}
+          alt=""
+          style={{
+            width: "100%", objectFit: "contain",
+            display: "block", animation: "ppFadeIn 0.2s ease",
+          }}
+        />
+        {!single && (
+          <>
+            <span style={{
+              position: "absolute", top: 4, right: 4,
+              background: "rgba(44,26,14,0.45)", color: "#fff",
+              fontSize: "0.6rem", fontFamily: "'Montserrat',sans-serif",
+              fontWeight: 600, padding: "2px 7px", borderRadius: 20, pointerEvents: "none",
+            }}>
+              {idx + 1} / {images.length}
+            </span>
+            {[
+              { fn: () => setIdx(i => (i - 1 + images.length) % images.length), side: "left", icon: "fa-chevron-left" },
+              { fn: () => setIdx(i => (i + 1) % images.length), side: "right", icon: "fa-chevron-right" },
+            ].map(({ fn, side, icon }) => (
+              <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{
+                position: "absolute", [side]: 2, top: "50%", transform: "translateY(-50%)",
+                background: "transparent", border: "none",
+                borderRadius: "50%", width: 26, height: 26, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "#a67853", transition: "all 0.2s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.color = "#8b5e3c"; e.currentTarget.style.transform = "translateY(-50%) scale(1.2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.color = "#a67853"; e.currentTarget.style.transform = "translateY(-50%)"; }}
+              >
+                <i className={`fa-solid ${icon}`} style={{ fontSize: "0.9rem" }} />
+              </button>
+            ))}
+          </>
+        )}
+      </div>
+
+      {!single && (
+        <div style={{ display: "flex", gap: 5, overflowX: "auto", paddingBottom: 2 }}>
+          {images.map((url, i) => (
+            <button key={i} onClick={() => setIdx(i)}
+              style={{
+                flexShrink: 0, width: 40, height: 40, borderRadius: 6, overflow: "hidden",
+                border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`,
+                background: "transparent", cursor: "pointer", padding: 0, transition: "border-color 0.18s",
+              }}>
+              <ImageWithLoader
+                src={url}
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Resources Panel ───────────────────────────────────────────────── */
+function ResourcesPanel({ files }) {
+  const [expanded, setExpanded] = useState(false);
+  const isMultiple = files?.length > 1;
+
+  if (!files?.length) return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+      height: "100%", minHeight: 180, color: "#c4a882",
+      fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem", textAlign: "center", gap: 10,
+    }}>
+      <i className="fa-regular fa-folder-open" style={{ fontSize: "2rem", color: "#ddc9b4" }} />
+      No resources available
+    </div>
+  );
+
+  if (!isMultiple) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        {files.map((f, i) => (
+          <a key={i} href={f.url} target="_blank" rel="noopener noreferrer"
+            style={{
+              display: "flex", alignItems: "center", gap: 14, padding: "14px 16px",
+              background: "#faf7f4", borderRadius: 10, border: "1px solid #edddd0",
+              color: "#2c1a0e", textDecoration: "none",
+              fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#f5ede3"; e.currentTarget.style.borderColor = "#d4b896"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "#faf7f4"; e.currentTarget.style.borderColor = "#edddd0"; }}
+          >
+            <div style={{
+              width: 40, height: 40, borderRadius: 9,
+              background: "linear-gradient(135deg,#8b5e3c,#a67853)",
+              display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+            }}>
+              <i className="fa-solid fa-file-pdf" style={{ color: "#fff", fontSize: "1rem" }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</div>
+              <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>PDF · Click to open</div>
+            </div>
+            <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0 }} />
+          </a>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        style={{
+          display: "flex", alignItems: "center", gap: 12, padding: "12px 14px",
+          background: "#faf7f4", borderRadius: expanded ? "10px 10px 0 0" : 10,
+          border: "1px solid #edddd0", borderBottom: expanded ? "1px solid #edddd0" : "1px solid #edddd0",
+          color: "#2c1a0e", cursor: "pointer", textDecoration: "none",
+          fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem", fontWeight: 700,
+          transition: "all 0.2s",
+        }}
+        onMouseEnter={e => { e.currentTarget.style.background = "#f5ede3"; e.currentTarget.style.borderColor = "#d4b896"; }}
+        onMouseLeave={e => { e.currentTarget.style.background = "#faf7f4"; e.currentTarget.style.borderColor = "#edddd0"; }}
+      >
+        <div style={{
+          width: 40, height: 40, borderRadius: 9,
+          background: "linear-gradient(135deg,#8b5e3c,#a67853)",
+          display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+        }}>
+          <i className="fa-solid fa-file-pdf" style={{ color: "#fff", fontSize: "0.9rem" }} />
+        </div>
+        <div style={{ flex: 1, textAlign: "left" }}>
+          <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e" }}>
+            {files.length} Documents
+          </div>
+          <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>Click to {expanded ? "collapse" : "expand"}</div>
+        </div>
+        <i
+          className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`}
+          style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0, transition: "transform 0.2s" }}
+        />
+      </button>
+
+      {expanded && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: "10px 0", borderTop: "1px solid #edddd0" }}>
+          {files.map((f, i) => (
+            <a key={i} href={f.url} target="_blank" rel="noopener noreferrer"
+              style={{
+                display: "flex", alignItems: "center", gap: 14, padding: "12px 14px",
+                background: "#fdf8f5", borderRadius: 8,
+                color: "#2c1a0e", textDecoration: "none",
+                fontFamily: "'Montserrat',sans-serif", fontSize: "0.80rem",
+                transition: "all 0.2s",
+                marginLeft: 8,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#f5ede3"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#fdf8f5"; }}
+            >
+              <i className="fa-solid fa-file-pdf" style={{ color: "#a67853", fontSize: "0.85rem", flexShrink: 0 }} />
+              <div style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                {f.name}
+              </div>
+              <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.65rem", flexShrink: 0 }} />
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Section Label ─────────────────────────────────────────────────── */
+function SectionLabel({ icon, text }) {
+  return (
+    <h3 style={{
+      fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+      fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase",
+      color: "#8b5e3c", margin: "0 0 10px",
+      display: "flex", alignItems: "center", gap: 6,
+    }}>
+      {icon && <i className={icon} style={{ opacity: 0.75 }} />}
+      {text}
+    </h3>
+  );
+}
+
+/* ── Divider ───────────────────────────────────────────────────────── */
+function Divider() {
+  return (
+    <div style={{ maxWidth: 1140, margin: "0 auto", padding: "0 32px" }}>
+      <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)" }} />
+    </div>
+  );
+}
+
+/* ── Related Products ──────────────────────────────────────────────── */
+function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
+  const related = useMemo(() => {
+    if (!categories?.length || !allProducts.length) return [];
+    const cats = categories.slice(0, 1).map(c => c.toLowerCase());
+    return allProducts
+      .filter(p =>
+        p.status === "published" && p.visible !== false &&
+        p.slug !== currentSlug &&
+        (p.categories || []).some(c => cats.includes(c.toLowerCase()))
+      )
+      .slice(0, 4);
+  }, [currentSlug, categories, allProducts]);
+
+  if (!related.length) return null;
+
+  return (
+    <>
+      <Divider />
+      <section style={{ maxWidth: 1140, margin: "0 auto", padding: "52px 32px 80px" }}>
+        <div style={{ marginBottom: 36 }}>
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+            fontSize: "0.67rem", letterSpacing: "0.14em", textTransform: "uppercase",
+            color: "#a67853", margin: "0 0 6px",
+          }}>
+            You might also like
+          </p>
+          <h2 style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+            fontSize: "1.5rem", color: "#2c1a0e", margin: 0, lineHeight: 1.2,
+          }}>
+            Related Products
+          </h2>
+        </div>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+          gap: 24,
+        }}>
+          {related.map(p => (
+            <Link
+              key={p.id || p.slug}
+              to={`/products/${p.slug}`}
+              style={{ textDecoration: "none", cursor: "pointer" }}
+            >
+              <div
+                style={{
+                  display: "flex", flexDirection: "column", gap: 12,
+                  transition: "all 0.25s ease",
+                  padding: 12,
+                  borderRadius: 12,
+                  border: "2px solid transparent",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.border = "2px solid #a67853";
+                  e.currentTarget.style.background = "rgba(246, 242, 237, 0.5)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.border = "2px solid transparent";
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                <div style={{
+                  aspectRatio: "1/1",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  padding: 12,
+                  borderRadius: 8,
+                }}>
+                  {getImageUrl(p, 'thumbnail') ? (
+                    <ImageWithLoader
+                      src={getImageUrl(p, 'thumbnail')}
+                      alt={p.name}
+                      style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+                    />
+                  ) : (
+                    <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "2rem" }} />
+                  )}
+                </div>
+
+                <p style={{
+                  fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                  fontSize: "0.82rem", color: "#2c1a0e", margin: 0, lineHeight: 1.4,
+                  textAlign: "center",
+                }}>
+                  {p.name}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ── Skeleton ──────────────────────────────────────────────────────── */
+function SkeletonPage() {
+  return (
+    <div style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px 60px" }}>
+      <style>{`@keyframes skS{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 }}>
+        <div style={{ aspectRatio: "1/1", borderRadius: 14, background: "linear-gradient(90deg,#f5ede3 25%,#fdf8f4 50%,#f5ede3 75%)", backgroundSize: "200% 100%", animation: "skS 1.4s infinite" }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 14, justifyContent: "center" }}>
+          {[35, 55, 80, 70, 60, 90, 55].map((w, i) => (
+            <div key={i} style={{ height: i === 0 ? 26 : 12, width: `${w}%`, borderRadius: 6, background: "linear-gradient(90deg,#f5ede3 25%,#fdf8f4 50%,#f5ede3 75%)", backgroundSize: "200% 100%", animation: "skS 1.4s infinite" }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main Component ────────────────────────────────────────────────── */
 export default function AccessoriesPage() {
   const { slug } = useParams();
-  const { products: localProds, loading: productsLoading } = useLocalProducts();
+  const [lightbox, setLightbox] = useState(null);
+  const [videoModal, setVideoModal] = useState(null);
+  const { products: localProds, loading } = useLocalProducts();
 
   const [selectedVariant, setSelectedVariant] = useState(null);
-  const [videoModal, setVideoModal] = useState(null);
-  const [imageErrors, setImageErrors] = useState({});
   const [supabaseVariants, setSupabaseVariants] = useState([]);
   const [loadingVariants, setLoadingVariants] = useState(false);
+  const [imageErrors, setImageErrors] = useState({});
 
   const product = useMemo(() => {
     if (!localProds.length) return null;
     return localProds.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
   }, [localProds, slug]);
 
-  // Fetch variants from Supabase as fallback if not in local data
+  // Fetch variants from Supabase as fallback (skip for pails/thermometers - use images array instead)
   useEffect(() => {
     if (!product?.id) return;
+
+    // Skip variant loading for pail/thermometer products - they use images array instead
+    const skipVariants = product.categories?.some(c => ["pails", "thermometers"].includes(c));
+    if (skipVariants) {
+      setSupabaseVariants([]);
+      return;
+    }
 
     const loadVariants = async () => {
       setLoadingVariants(true);
@@ -126,10 +770,9 @@ export default function AccessoriesPage() {
           .order("sort_order");
 
         if (!error && data) {
-          // Convert Supabase URLs to GitHub URLs
           setSupabaseVariants(data.map(v => ({
             ...v,
-            image: v.image ? resolveUrl(supabaseUrlToRelativePath(v.image)) : null
+            image: v.image ? resolveUrl(v.image.match(/\/object\/public\/product-images\/(.+)$/)?.[1] || v.image) : null
           })));
         }
       } catch (err) {
@@ -140,278 +783,430 @@ export default function AccessoriesPage() {
     };
 
     loadVariants();
-  }, [product?.id]);
+  }, [product?.id, product?.categories]);
 
-  // Get variants from local product data first, fallback to Supabase
   const variants = useMemo(() => {
     if (!product) return [];
     const localVariants = getVariantsArray(product);
-    // If local variants exist, use them; otherwise use Supabase fallback
     return localVariants.length > 0 ? localVariants : supabaseVariants;
   }, [product, supabaseVariants]);
 
-  // Helper to convert Supabase URLs to relative paths
-  function supabaseUrlToRelativePath(url) {
-    if (!url || !url.includes("/object/public/")) return url;
-    const match = url.match(/\/object\/public\/product-images\/(.+)$/);
-    return match ? match[1] : url;
-  }
-
-  // Select first variant on mount, with thumbnail as fallback
   useEffect(() => {
     if (variants.length > 0 && !selectedVariant) {
       setSelectedVariant(variants[0]);
     }
   }, [variants, selectedVariant]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
-  if (productsLoading) {
-    return (
-      <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ textAlign: "center", fontFamily: "'Montserrat',sans-serif" }}>
-          <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: "2rem", color: "#a67853" }} />
-        </div>
-      </div>
-    );
-  }
+  const error = !loading && !product ? "Product not found." : null;
 
-  if (!product) {
-    return (
+  const files        = getFilesArray(product);
+  const images       = product ? getImagesArray(product, 'images') : [];
+  const thumbnail    = product ? getImageUrl(product, 'thumbnail') : null;
+  const specImages   = product ? getImagesArray(product, 'spec_images') : [];
+  const videoUrl     = product?.resources?.video || null;
+  const hasShortDesc = !!product?.short_description;
+  const hasDesc      = !!product?.description;
+  const hasFeatures  = (product?.features || []).length > 0;
+  const hasSpec      = specImages.length > 0;
+  const hasSpecTable = product?.spec_table?.headers?.length > 0;
+  const hasResources = files.length > 0;
+  const hasSection2  = hasDesc || hasSpecTable;
+  const hasVideo     = !!product?.resources?.video;
+  const displayImage = selectedVariant?.image || thumbnail;
+
+  const openLightbox = (imgs, index) => setLightbox({ images: imgs, index });
+  const closeLightbox = () => setLightbox(null);
+
+  if (loading) return (
+    <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 80 }}>
+      <SkeletonPage />
+    </div>
+  );
+
+  if (error || !product) return (
+    <div style={{
+      minHeight: "70vh", display: "flex", flexDirection: "column",
+      alignItems: "center", justifyContent: "center", background: "#fff",
+      fontFamily: "'Montserrat',sans-serif", textAlign: "center", padding: "100px 24px 60px",
+    }}>
       <div style={{
-        minHeight: "70vh", display: "flex", flexDirection: "column",
-        alignItems: "center", justifyContent: "center", background: "#fff",
-        fontFamily: "'Montserrat',sans-serif", textAlign: "center", padding: "100px 24px 60px",
+        width: 72, height: 72, background: "linear-gradient(135deg,#8b5e3c,#a67853)",
+        borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
+        margin: "0 auto 20px", boxShadow: "0 8px 28px rgba(139,94,60,0.28)",
       }}>
-        <h1 style={{ fontSize: "1.5rem", color: "#2c1a0e", marginBottom: 10 }}>Product not found</h1>
-        <p style={{ color: "#666", fontSize: "0.95rem" }}>The product you're looking for doesn't exist or is not available.</p>
+        <i className="fa-solid fa-magnifying-glass" style={{ color: "#fff", fontSize: "1.6rem" }} />
       </div>
-    );
-  }
-
-  const productThumbnail = getImageUrl(product, "thumbnail");
-  const videoResource = product?.resources?.video;
-  // Use selected variant image, or fall back to thumbnail
-  const displayImage = selectedVariant?.image || productThumbnail;
+      <h2 style={{ color: "#2c1a0e", margin: "0 0 8px" }}>Product Not Found</h2>
+      <p style={{ color: "#a67853", margin: "0 0 24px", fontStyle: "italic", fontSize: "0.88rem" }}>
+        {error || "This product doesn't exist or isn't published yet."}
+      </p>
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+        <Link to="/products" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
+          Browse Products
+        </Link>
+        <Link to="/" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", border: "1.5px solid #a67853", color: "#a67853", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
+          Home
+        </Link>
+      </div>
+    </div>
+  );
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 80 }}>
-      <div style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px 60px" }}>
-        <style>{`
-          .accessories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-          .accessories-image-container { display: flex; flexDirection: column; gap: 10px; }
-          .accessories-main-image { aspectRatio: "1/1"; borderRadius: 14; overflow: hidden; background: #faf7f4; display: flex; alignItems: center; justifyContent: center; cursor: zoom-in; }
-          .accessories-variants { display: flex; gap: 12px; flexWrap: wrap; }
-          .accessories-variant-swatch { width: 60px; height: 60px; borderRadius: 8; border: 2px solid #edddd0; overflow: hidden; cursor: pointer; transition: all 0.2s; flexShrink: 0; }
-          .accessories-variant-swatch.active { borderColor: #a67853; }
-          .accessories-variant-swatch:hover { borderColor: #a67853; }
-          .accessories-variant-info { display: flex; flexDirection: column; gap: 16px; }
-          .accessories-title { fontSize: 28px; fontWeight: 700; color: #2c1a0e; margin: 0; fontFamily: "'Montserrat',sans-serif"; }
-          .accessories-codes { fontSize: 13px; color: #666; fontFamily: "'Montserrat',sans-serif"; lineHeight: 1.6; }
-          .accessories-capacity { fontSize: 14px; color: #333; fontFamily: "'Montserrat',sans-serif"; margin: 8px 0; }
-          .accessories-options { fontSize: 13px; color: #666; fontFamily: "'Montserrat',sans-serif"; }
-          .accessories-description { fontSize: 14px; lineHeight: 1.6; color: #333; }
-          .accessories-video-btn { background: #a67853; color: #fff; border: none; padding: 12px 24px; borderRadius: 6px; cursor: pointer; fontSize: 14px; fontFamily: "'Montserrat',sans-serif"; fontWeight: 600; transition: background 0.2s; }
-          .accessories-video-btn:hover { background: #8b5e3c; }
-          @media (max-width: 768px) { .accessories-grid { gridTemplateColumns: 1fr; gap: 24px; } }
-        `}</style>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+        @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 
-        {/* Image and Variants Section */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 }}>
-          {/* Left: Product Image */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{
-              aspectRatio: "1/1", borderRadius: 14, overflow: "hidden",
-              background: "#faf7f4", display: "flex", alignItems: "center",
-              justifyContent: "center", cursor: videoResource ? "pointer" : "default",
-              position: "relative"
-            }}
-              onClick={() => videoResource && setVideoModal(videoResource)}
-            >
-              {/* Display variant image or product thumbnail */}
-              {displayImage && !imageErrors[selectedVariant?.id] ? (
-                <ImageWithLoader
-                  src={displayImage}
-                  alt={selectedVariant?.label || selectedVariant?.sku || product.name}
-                  onError={() => selectedVariant && setImageErrors(e => ({ ...e, [selectedVariant.id]: true }))}
-                  style={{
-                    maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
-                    animation: "ppFadeIn 0.25s ease",
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 12px 0;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.78rem;
+          background-color: #fff;
+          border: 1px solid #d5b99a;
+        }
+
+        table th {
+          background-color: #f0e8df;
+          color: #5a4030;
+          font-weight: 600;
+          padding: 8px 10px;
+          text-align: center;
+          border-bottom: 1px solid #ddc9b4;
+          font-size: 0.68rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          line-height: 1.2;
+          white-space: normal;
+          word-break: break-word;
+        }
+
+        table td {
+          padding: 8px 10px;
+          color: #5a4030;
+          border-bottom: 1px solid #edddd0;
+          background-color: transparent;
+          text-align: center;
+          font-size: 0.77rem;
+        }
+
+        table td:first-child {
+          white-space: nowrap;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        table tbody tr:nth-child(odd) {
+          background-color: #fdfaf7;
+        }
+
+        table tbody tr:hover {
+          background-color: #f5ede3;
+        }
+
+        table tbody tr:last-child td {
+          border-bottom: none;
+        }
+
+        @media(max-width: 768px) {
+          table { font-size: 0.72rem; }
+          table th, table td { padding: 7px 8px; }
+        }
+
+        @media(max-width:900px){
+          .pp-s1-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+          .pp-s3-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+        }
+        @media(max-width:600px){
+          .pp-outer { padding-left: 16px !important; padding-right: 16px !important; }
+        }
+      `}</style>
+
+      {lightbox && (
+        <Lightbox images={lightbox.images} startIndex={lightbox.index} onClose={closeLightbox} />
+      )}
+
+      {videoModal && (
+        <VideoModal videoUrl={videoModal} onClose={() => setVideoModal(null)} />
+      )}
+
+      <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
+
+        {/* ── SECTION 1: Images + Info ─────────────────────────────── */}
+        <div
+          className="pp-outer"
+          style={{ maxWidth: 1140, margin: "0 auto", padding: "10px 8px 13px", paddingTop: 160 }}
+        >
+          <div
+            className="pp-s1-grid"
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}
+          >
+            {/* LEFT: Image Display (Carousel or Variant Switcher) */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              {variants.length > 0 ? (
+                // Variant switcher mode (legacy pail-style)
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{
+                    position: "relative", aspectRatio: "1/1", borderRadius: 14,
+                    background: "#faf7f4", display: "flex", alignItems: "center",
+                    justifyContent: "center", cursor: displayImage ? "zoom-in" : "default",
+                    overflow: "hidden"
                   }}
-                />
-              ) : (
-                <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
-              )}
-
-              {videoResource && (
-                <div style={{
-                  position: "absolute", display: "flex", alignItems: "center",
-                  justifyContent: "center", width: 60, height: 60,
-                  background: "rgba(166,120,83,0.9)", borderRadius: "50%",
-                }}>
-                  <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "1.5rem", marginLeft: "4px" }} />
-                </div>
-              )}
-            </div>
-
-            {/* Variant Swatches */}
-            {variants.length > 0 && (
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                {variants.map((variant) => (
-                  <button
-                    key={variant.id}
-                    onClick={() => {
-                      setSelectedVariant(variant);
-                      setImageErrors(e => {
-                        const updated = { ...e };
-                        delete updated[variant.id];
-                        return updated;
-                      });
-                    }}
-                    title={variant.label || variant.sku}
-                    style={{
-                      width: 60, height: 60, borderRadius: 8,
-                      border: `2px solid ${selectedVariant?.id === variant.id ? "#a67853" : "#edddd0"}`,
-                      overflow: "hidden", cursor: "pointer", padding: 0,
-                      background: "#faf7f4", transition: "all 0.2s",
-                      flexShrink: 0,
-                    }}
+                    onClick={() => displayImage && openLightbox([displayImage], 0)}
                   >
-                    {variant.image && !imageErrors[variant.id] ? (
+                    {displayImage && !imageErrors[selectedVariant?.id] ? (
                       <ImageWithLoader
-                        src={variant.image}
-                        alt={variant.label || variant.sku}
-                        onError={() => setImageErrors(e => ({ ...e, [variant.id]: true }))}
+                        src={displayImage}
+                        alt={selectedVariant?.label || selectedVariant?.sku || product.name}
+                        onError={() => selectedVariant && setImageErrors(e => ({ ...e, [selectedVariant.id]: true }))}
                         style={{
-                          width: "100%", height: "100%", objectFit: "contain",
-                          padding: 2,
+                          maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+                          animation: "ppFadeIn 0.25s ease",
                         }}
                       />
                     ) : (
+                      <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
+                    )}
+
+                    {hasVideo && (
                       <div style={{
-                        width: "100%", height: "100%",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        background: "#edddd0",
-                      }}>
-                        <i className="fa-regular fa-image" style={{ fontSize: "1rem", color: "#a67853" }} />
+                        position: "absolute", display: "flex", alignItems: "center",
+                        justifyContent: "center", width: 60, height: 60,
+                        background: "rgba(166,120,83,0.9)", borderRadius: "50%",
+                        cursor: "pointer",
+                      }}
+                        onClick={(e) => { e.stopPropagation(); setVideoModal(product.resources.video); }}
+                      >
+                        <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "1.5rem", marginLeft: "4px" }} />
                       </div>
                     )}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Right: Product Info */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, justifyContent: "flex-start" }}>
-            <h1 style={{
-              fontSize: 28, fontWeight: 700, color: "#2c1a0e", margin: 0,
-              fontFamily: "'Montserrat',sans-serif",
-            }}>
-              {product.name}
-            </h1>
-
-            {/* SKU Codes */}
-            {variants.length > 0 && (
-              <div style={{
-                fontSize: 13, color: "#666",
-                fontFamily: "'Montserrat',sans-serif", lineHeight: 1.6,
-              }}>
-                <div style={{ fontWeight: 600, color: "#2c1a0e", marginBottom: 4 }}>Available Codes:</div>
-                <div>{variants.map(v => v.sku || v.label).filter(Boolean).join(" | ")}</div>
-              </div>
-            )}
-
-            {/* Capacity */}
-            {selectedVariant?.capacity_liters && (
-              <div style={{
-                fontSize: 14, color: "#333",
-                fontFamily: "'Montserrat',sans-serif", margin: "8px 0",
-              }}>
-                <strong>Capacity:</strong> {selectedVariant.capacity_liters}L
-              </div>
-            )}
-
-            {/* Material/Color Options */}
-            {selectedVariant?.color_key && (
-              <div style={{
-                fontSize: 13, color: "#666",
-                fontFamily: "'Montserrat',sans-serif",
-              }}>
-                <strong style={{ color: "#2c1a0e" }}>Material:</strong> {selectedVariant.color_key}
-              </div>
-            )}
-
-            {/* Description */}
-            {product.description && (
-              <div style={{
-                fontSize: 14, lineHeight: 1.6, color: "#333",
-                fontFamily: "'Montserrat',sans-serif",
-              }}>
-                <div dangerouslySetInnerHTML={{ __html: product.description }} />
-              </div>
-            )}
-
-            {/* Video Button */}
-            {videoResource && (
-              <div>
-                <button
-                  onClick={() => setVideoModal(videoResource)}
-                  style={{
-                    background: "#a67853", color: "#fff", border: "none",
-                    padding: "12px 24px", borderRadius: 6, cursor: "pointer",
-                    fontSize: 14, fontFamily: "'Montserrat',sans-serif",
-                    fontWeight: 600, transition: "background 0.2s",
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = "#8b5e3c"}
-                  onMouseLeave={e => e.currentTarget.style.background = "#a67853"}
-                >
-                  <i className="fa-solid fa-play" style={{ marginRight: 8 }} />
-                  Watch Video
-                </button>
-              </div>
-            )}
-
-            {/* Resources/Files */}
-            {getFilesArray(product).length > 0 && (
-              <div style={{
-                paddingTop: 16, borderTop: "1px solid #edddd0",
-              }}>
-                <h3 style={{
-                  fontSize: 13, fontWeight: 600, color: "#2c1a0e",
-                  margin: "0 0 8px", fontFamily: "'Montserrat',sans-serif",
-                }}>Resources</h3>
-                {getFilesArray(product).map((file, i) => (
-                  <div key={i} style={{ marginBottom: 6 }}>
-                    <a
-                      href={file.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: "#a67853", textDecoration: "none",
-                        fontSize: 13, fontFamily: "'Montserrat',sans-serif",
-                      }}
-                    >
-                      <i className="fa-solid fa-download" style={{ marginRight: 6 }} />
-                      {file.name}
-                    </a>
                   </div>
-                ))}
-              </div>
-            )}
+
+                  {/* Variant Swatch Buttons */}
+                  <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                    {variants.map((variant) => (
+                      <button
+                        key={variant.id}
+                        onClick={() => {
+                          setSelectedVariant(variant);
+                          setImageErrors(e => {
+                            const updated = { ...e };
+                            delete updated[variant.id];
+                            return updated;
+                          });
+                        }}
+                        title={variant.label || variant.sku}
+                        style={{
+                          width: 60, height: 60, borderRadius: 8,
+                          border: `2px solid ${selectedVariant?.id === variant.id ? "#a67853" : "#edddd0"}`,
+                          overflow: "hidden", cursor: "pointer", padding: 0,
+                          background: "#faf7f4", transition: "all 0.2s",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {variant.image && !imageErrors[variant.id] ? (
+                          <ImageWithLoader
+                            src={variant.image}
+                            alt={variant.label || variant.sku}
+                            onError={() => setImageErrors(e => ({ ...e, [variant.id]: true }))}
+                            style={{
+                              width: "100%", height: "100%", objectFit: "contain",
+                              padding: 2,
+                            }}
+                          />
+                        ) : (
+                          <div style={{
+                            width: "100%", height: "100%",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            background: "#edddd0",
+                          }}>
+                            <i className="fa-regular fa-image" style={{ fontSize: "1rem", color: "#a67853" }} />
+                          </div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Gallery Thumbnail Strip (if product has images array) */}
+                  {images.length > 0 && (
+                    <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 2, marginTop: 8 }}>
+                      {images.map((url, i) => (
+                        <button key={i} onClick={() => openLightbox(images, i)}
+                          style={{
+                            flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden",
+                            border: "2px solid #edddd0",
+                            background: "#faf7f4", cursor: "pointer", padding: 0, transition: "border-color 0.18s",
+                          }}>
+                          <ImageWithLoader
+                            src={url}
+                            alt=""
+                            style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                // Standard carousel (ladle-style)
+                <>
+                  <Carousel
+                    images={images}
+                    thumbnail={thumbnail}
+                    videoUrl={videoUrl}
+                    onImageClick={openLightbox}
+                  />
+                  {/* Resources below carousel (only if Diagram exists) */}
+                  {hasResources && hasSpec && (
+                    <div>
+                      <SectionLabel text="Resources" />
+                      <ResourcesPanel files={files} />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+
+            {/* RIGHT: Info Column */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              {(product.brand || product.type) && (
+                <p style={{
+                  fontFamily: "'Montserrat',sans-serif", fontSize: "0.62rem", fontWeight: 700,
+                  letterSpacing: "0.14em", textTransform: "uppercase", color: "#a67853", margin: 0,
+                }}>
+                  {[product.brand, product.type].filter(Boolean).join(" · ")}
+                </p>
+              )}
+
+              <h1 style={{
+                fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                fontSize: "clamp(1.2rem,2.2vw,1.6rem)", color: "#2c1a0e",
+                margin: 0, lineHeight: 1.2,
+              }}>
+                {product.name}
+              </h1>
+
+              {hasShortDesc && (
+                <div style={{ paddingBottom: 16, borderBottom: "1px solid #edddd0", textAlign: "left" }}>
+                  <div
+                    style={{
+                      fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem",
+                      color: "#7a5c45", lineHeight: 1.6, margin: 0,
+                      whiteSpace: "pre-wrap", wordWrap: "break-word",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.short_description) }}
+                  />
+                </div>
+              )}
+
+              {hasFeatures && (
+                <div>
+                  <SectionLabel text="Features" />
+                  <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 5 }}>
+                    {product.features.map((f, i) => (
+                      <li key={i} style={{
+                        fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
+                        fontSize: "0.78rem", lineHeight: 1.4,
+                        display: "flex", alignItems: "flex-start", gap: 7,
+                      }}>
+                        <i className="fa-solid fa-check" style={{ color: "#a67853", fontSize: "0.68rem", marginTop: 4, flexShrink: 0 }} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {!hasShortDesc && !hasFeatures && (
+                <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#a67853", fontStyle: "italic", fontSize: "0.86rem", margin: 0 }}>
+                  More details coming soon.
+                </p>
+              )}
+
+              {/* Spec Images / Diagram */}
+              {hasSpec && (
+                <div>
+                  <SectionLabel text="Diagram" />
+                  <CompactSpecImages images={specImages} onImageClick={openLightbox} />
+                </div>
+              )}
+
+
+              {/* Resources (only show on right if no Diagram) */}
+              {hasResources && !hasSpec && (
+                <div>
+                  <SectionLabel text="Resources" />
+                  <ResourcesPanel files={files} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Video Modal */}
-      {videoModal && (
-        <VideoModal
-          videoUrl={videoModal}
-          onClose={() => setVideoModal(null)}
-        />
-      )}
-    </div>
+        {/* ── SECTION 2: Specifications ─────────────────────────────── */}
+        {hasSection2 && (
+          <>
+            <Divider />
+            <div
+              className="pp-outer"
+              style={{ maxWidth: 1140, margin: "0 auto", padding: "12px 8px" }}
+            >
+              <SectionLabel text="Specifications" />
+
+              {hasDesc && (
+                <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
+                  <div
+                    style={{
+                      fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
+                      lineHeight: 1.7, fontSize: "0.82rem",
+                      maxWidth: "100%",
+                      whiteSpace: "pre-wrap", wordWrap: "break-word",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description) }}
+                  />
+                </div>
+              )}
+
+              {hasSpecTable && (
+                <div>
+                  <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
+                  <div style={{ overflowX: "auto", borderRadius: 10, border: "2px solid #d5b99a", background: "#fafaf8" }}>
+                    <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                      <thead>
+                        <tr style={{ background: "#faf7f4" }}>
+                          {product.spec_table.headers.map((h, i) => (
+                            <th key={i} style={{
+                              padding: "9px 14px", textAlign: "left", color: "#8b5e3c",
+                              fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase",
+                              letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap",
+                            }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(product.spec_table.rows || []).map((row, ri) => (
+                          <tr key={ri} style={{ borderBottom: ri < product.spec_table.rows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                            {product.spec_table.headers.map((h, ci) => (
+                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[h] || "–"}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* ── SECTION 3: Related Products ────────────────────────────── */}
+        <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={localProds} />
+
+      </div>
+    </>
   );
 }
