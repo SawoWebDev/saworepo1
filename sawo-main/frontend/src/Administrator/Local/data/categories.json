@@ -78,5 +78,13 @@
     "description": null,
     "usage_count": 0,
     "created_at": "2026-05-04T00:25:16.851363+00:00"
+  },
+  {
+    "id": "b477be09-ce54-475b-b243-231bb9c995a7",
+    "name": "sauna-lights",
+    "slug": "sauna-lights",
+    "description": null,
+    "usage_count": 0,
+    "created_at": "2026-05-14T06:26:57.25725+00:00"
   }
 ]
