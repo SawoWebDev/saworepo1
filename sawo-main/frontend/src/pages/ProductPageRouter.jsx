@@ -11,7 +11,7 @@ import { isAccessoryProduct } from "./AccessoriesPage";
 export default function ProductPageRouter() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { products: localProds, loading } = useLocalProducts();
+  const { products: localProds } = useLocalProducts();
 
   const product = useMemo(() => {
     if (!localProds.length) return null;

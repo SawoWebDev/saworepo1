@@ -757,7 +757,6 @@ export default function AccessoriesPage() {
 
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [supabaseVariants, setSupabaseVariants] = useState([]);
-  const [loadingVariants, setLoadingVariants] = useState(false);
   const [imageErrors, setImageErrors] = useState({});
 
   const product = useMemo(() => {
@@ -777,7 +776,6 @@ export default function AccessoriesPage() {
     }
 
     const loadVariants = async () => {
-      setLoadingVariants(true);
       try {
         const { data, error } = await supabase
           .from("product_variants")
@@ -793,8 +791,6 @@ export default function AccessoriesPage() {
         }
       } catch (err) {
         console.error("Error loading variants:", err);
-      } finally {
-        setLoadingVariants(false);
       }
     };
 

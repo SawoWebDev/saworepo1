@@ -215,18 +215,6 @@ export default function SaunaControls() {
     [activeGroup, groupNames]
   );
 
-  // ── Client-side search filter ────────────────────────────────────────────
-  const displayed = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return allProducts;
-    return allProducts.filter(p =>
-      p.name?.toLowerCase().includes(q) ||
-      p.short_description?.toLowerCase().includes(q) ||
-      (p.categories || []).some(c => c.toLowerCase().includes(q)) ||
-      (p.tags || []).some(t => t.toLowerCase().includes(q))
-    );
-  }, [allProducts, search]);
-
   return (
     <div className="relative">
       <style>{`

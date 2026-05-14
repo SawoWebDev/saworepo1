@@ -180,14 +180,12 @@ export async function applyLocalRoomChanges(report, onEvent = () => {}) {
     if (!responseText.trim()) throw new Error("Backend returned empty response");
 
     const lines = responseText.trim().split("\n");
-    let result = { success: false };
     for (const line of lines) {
       if (line.trim()) {
         try {
           const event = JSON.parse(line);
           onEvent(event);
-          if (event.success === true) result = { success: true, message: event.message };
-          else if (event.phase === "error") throw new Error(event.message || "Backend error");
+          if (event.phase === "error") throw new Error(event.message || "Backend error");
         } catch (parseErr) {
           throw new Error(`Failed to parse backend response: ${parseErr.message}`);
         }

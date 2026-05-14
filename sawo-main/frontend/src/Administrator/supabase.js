@@ -170,20 +170,6 @@ function buildPublicUrl(bucket, fileName) {
   return data.publicUrl;
 }
 
-// Extract just the filename from a full Supabase public URL.
-// Handles transform query params (?width=... etc.) by stripping them first.
-// e.g. "https://xxx.supabase.co/storage/v1/object/public/product-images/abc.webp?t=123"
-// → "abc.webp"
-function fileNameFromUrl(url) {
-  if (!url) return null;
-  try {
-    const clean = url.split("?")[0];
-    const match = clean.match(/\/storage\/v1\/object\/public\/[^/]+\/(.+)/);
-    return match ? decodeURIComponent(match[1]) : null;
-  } catch {
-    return null;
-  }
-}
 
 // Collect every storage URL referenced by any product or sauna_room row.
 // Returns a Set of fully-qualified public URLs (with no query params).

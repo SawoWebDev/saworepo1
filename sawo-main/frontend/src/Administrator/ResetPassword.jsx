@@ -22,7 +22,7 @@ export default function ResetPassword() {
     // Supabase automatically handles the token in the URL
     // and fires PASSWORD_RECOVERY when the user lands on this page
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (event, _session) => {
         console.log("Auth event:", event);
         if (event === "PASSWORD_RECOVERY") {
           setSessionReady(true);

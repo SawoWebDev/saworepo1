@@ -371,7 +371,7 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
 
     // Strip out local_variants (frontend-only field not in Supabase schema)
     const productsForBackend = updatedProducts.map(p => {
-      const { local_variants, ...rest } = p;
+      const { local_variants: _local_variants, ...rest } = p;
       return rest;
     });
 
@@ -410,7 +410,6 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
     // Parse NDJSON stream - each line is a JSON event
     const lines = responseText.trim().split("\n");
     console.log("[applyLocalChanges] Response lines:", lines.length);
-    let result = { success: false };
     for (const line of lines) {
       if (line.trim()) {
         try {
@@ -418,9 +417,7 @@ export async function applyLocalChanges(report, onEvent = () => {}) {
           console.log("[applyLocalChanges] Event:", event.phase, event.message);
           // Emit the event so frontend shows live progress
           onEvent(event);
-          if (event.success === true) {
-            result = { success: true, message: event.message };
-          } else if (event.phase === "error") {
+          if (event.phase === "error") {
             throw new Error(event.message || "Backend error");
           }
         } catch (parseErr) {
