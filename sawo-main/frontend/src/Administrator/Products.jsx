@@ -2237,6 +2237,8 @@ export default function Products({ currentUser }) {
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("list");
   const [dataSource,   setDataSource]   = useState("live"); // "live" or "local"
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [currentPage,  setCurrentPage]  = useState(1);
 
   const [selected,              setSelected]              = useState(new Set());
   const [bulkConfirm,           setBulkConfirm]           = useState(false);
@@ -2862,6 +2864,17 @@ export default function Products({ currentUser }) {
     );
   });
 
+  // Reset to page 1 when search/filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filterStatus]);
+
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const startIdx = (currentPage - 1) * itemsPerPage;
+  const endIdx = startIdx + itemsPerPage;
+  const paginatedProducts = filtered.slice(startIdx, endIdx);
+
+
   const handleNameChange = e => {
     const name = e.target.value;
     setForm(f => ({ ...f, name, slug: slugEdited ? f.slug : slugify(name) }));
@@ -3016,17 +3029,24 @@ export default function Products({ currentUser }) {
             </button>
           </>
         )}
-        {perms.can("products.storage_cleanup") && (
-          <button
-            type="button"
-            onClick={() => setCleanupOpen(true)}
-            title="Storage Cleanup — Remove orphaned files. Scans both image and PDF storage buckets to find and delete files that aren't attached to any product. Safe to run anytime."
-            className="icon-btn"
-            style={{ marginLeft: 4 }}
-          >
-            <i className="fa-solid fa-broom" style={{ fontSize: "0.85em" }} />
-          </button>
-        )}
+        <label style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 500, fontSize: "0.85rem" }}>
+          Show:
+          <select value={itemsPerPage} onChange={e => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
+            style={{
+              padding: "6px 8px",
+              border: "1px solid var(--border)",
+              borderRadius: 4,
+              background: "var(--surface)",
+              color: "var(--text)",
+              fontSize: "0.85rem",
+              cursor: "pointer"
+            }}>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+        </label>
         {perms.can("products.create") && dataSource === "live" && (
           <Btn icon="fa-plus" label="New Product" onClick={openCreate} style={{ marginLeft: "auto" }} />
         )}
@@ -3046,39 +3066,45 @@ export default function Products({ currentUser }) {
 
       {/* List View */}
       {viewMode === "list" && (
-        <div className="products-table-wrap">
-          {loading ? (
-            <div className="table-loading">
-              <i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: "0.5rem" }} /> Loading...
+        <>
+          {filtered.length > 0 && (
+            <div style={{ fontSize: "0.85rem", color: "var(--text-2)", marginBottom: 12 }}>
+              Showing {startIdx + 1}-{Math.min(endIdx, filtered.length)} of {filtered.length} product{filtered.length !== 1 ? 's' : ''}
             </div>
-          ) : (
-            <table className="products-table">
-              <thead>
-                <tr>
-                  {perms.can("products.bulk_delete") && dataSource === "live" && (
-                    <th style={{ width: 36, paddingRight: 0 }}>
-                      <input type="checkbox" className="tbl-checkbox"
-                        checked={filtered.length > 0 && selected.size === filtered.length}
-                        onChange={toggleSelectAll} />
-                    </th>
+          )}
+          <div className="products-table-wrap" style={{ position: "relative" }}>
+            {loading ? (
+              <div className="table-loading">
+                <i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: "0.5rem" }} /> Loading...
+              </div>
+            ) : (
+              <table className="products-table">
+                <thead style={{ position: "sticky", top: 0, background: "var(--surface)", zIndex: 10, boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }}>
+                  <tr>
+                    {perms.can("products.bulk_delete") && dataSource === "live" && (
+                      <th style={{ width: 36, paddingRight: 0 }}>
+                        <input type="checkbox" className="tbl-checkbox"
+                          checked={paginatedProducts.length > 0 && selected.size === paginatedProducts.length}
+                          onChange={toggleSelectAll} />
+                      </th>
+                    )}
+                    <th style={{ width: 44 }}></th>
+                    <th>Product</th>
+                    <th>Categories</th>
+                    <th>Tags</th>
+                    <th>Status</th>
+                    <th style={{ width: 100 }}>Created Date</th>
+                    <th style={{ width: 110 }}>Created By</th>
+                    <th className="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paginatedProducts.length === 0 && (
+                    <tr><td colSpan={perms.can("products.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
+                      {search ? `No products match "${search}"` : "No products yet — click New Product to create one."}
+                    </td></tr>
                   )}
-                  <th style={{ width: 44 }}></th>
-                  <th>Product</th>
-                  <th>Categories</th>
-                  <th>Tags</th>
-                  <th>Status</th>
-                  <th style={{ width: 100 }}>Created Date</th>
-                  <th style={{ width: 110 }}>Created By</th>
-                  <th className="text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.length === 0 && (
-                  <tr><td colSpan={perms.can("products.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
-                    {search ? `No products match "${search}"` : "No products yet — click New Product to create one."}
-                  </td></tr>
-                )}
-                {filtered.map(p => (
+                  {paginatedProducts.map(p => (
                   <tr key={p.id} className={selected.has(p.id) ? "row-selected" : ""}>
                     {perms.can("products.bulk_delete") && dataSource === "live" && (
                       <td style={{ paddingRight: 0 }}>
@@ -3143,8 +3169,60 @@ export default function Products({ currentUser }) {
                 ))}
               </tbody>
             </table>
+            )}
+          </div>
+          {filtered.length > 0 && totalPages > 1 && (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginTop: 16, paddingTop: 12, borderTop: "1px solid var(--border)" }}>
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                title="Previous page"
+                style={{
+                  padding: "8px 12px",
+                  fontSize: "0.9rem",
+                  border: "1px solid var(--border)",
+                  background: currentPage === 1 ? "var(--surface-2)" : "var(--surface)",
+                  color: currentPage === 1 ? "var(--text-3)" : "var(--text)",
+                  cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                  borderRadius: 4,
+                  transition: "all 0.2s ease",
+                  opacity: currentPage === 1 ? 0.5 : 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6
+                }}
+              >
+                <i className="fa-solid fa-chevron-left" />
+              </button>
+
+              <span style={{ fontSize: "0.85rem", fontWeight: 500, minWidth: "80px", textAlign: "center" }}>
+                {currentPage} / {totalPages}
+              </span>
+
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                title="Next page"
+                style={{
+                  padding: "8px 12px",
+                  fontSize: "0.9rem",
+                  border: "1px solid var(--border)",
+                  background: currentPage === totalPages ? "var(--surface-2)" : "var(--surface)",
+                  color: currentPage === totalPages ? "var(--text-3)" : "var(--text)",
+                  cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+                  borderRadius: 4,
+                  transition: "all 0.2s ease",
+                  opacity: currentPage === totalPages ? 0.5 : 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6
+                }}
+              >
+                <i className="fa-solid fa-chevron-right" />
+              </button>
+            </div>
           )}
-        </div>
+        </>
       )}
 
       {/* ── Product Form Modal ── */}
