@@ -2739,6 +2739,7 @@ export default function Products({ currentUser }) {
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
+      add("💡 Click 'Sync' button to update local data so changes appear on the frontend.", "info");
       actualClose();
       fetchProducts();
     } catch (err) { add(err.message, "error"); }
