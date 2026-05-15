@@ -13,6 +13,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [forceMobile, setForceMobile] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
+  const [layoutMode, setLayoutMode] = useState("l1"); // "l1", "l2", or "l3"
 
   const lastScrollY = useRef(0);
   const navRef = useRef(null);
@@ -20,7 +21,8 @@ export default function Header() {
   const subMenuTimeout = useRef(null);
   const mobileMenuRef = useRef(null);
 
-  const navItems = [
+  // Layout 1: Full product range (current)
+  const navItemsL1 = [
     { name: "Home", path: menuPaths.home },
     {
       name: "Sauna",
@@ -82,6 +84,119 @@ export default function Header() {
     },
     { name: "Careers", path: menuPaths.careers },
   ];
+
+  // Layout 2: Clean & less cluttered
+  const navItemsL2 = [
+    { name: "Home", path: menuPaths.home },
+    {
+      name: "Sauna",
+      path: menuPaths.sauna.parent,
+      submenu: [
+        {
+          name: "Sauna Heaters",
+          path: menuPaths.sauna.heaters.parent,
+          submenu: [
+            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
+            { name: "Tower", path: menuPaths.sauna.heaters.tower },
+            { name: "Stone", path: menuPaths.sauna.heaters.stone },
+            { name: "Floor", path: menuPaths.sauna.heaters.floor },
+            { name: "Combi", path: menuPaths.sauna.heaters.combi },
+            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+          ],
+        },
+        { name: "Sauna Controls", path: menuPaths.sauna.controls },
+        { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
+        {
+          name: "Sauna Rooms",
+          path: menuPaths.sauna.rooms,
+          submenu: [
+            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
+            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Steam",
+      path: menuPaths.steam.parent,
+      submenu: [
+        { name: "Steam Generators", path: menuPaths.steam.generators },
+        { name: "Steam Controls", path: menuPaths.steam.controls },
+        { name: "Accessories", path: menuPaths.steam.accessories },
+      ],
+    },
+    { name: "Infrared", path: menuPaths.infrared },
+    {
+      name: "Support",
+      path: menuPaths.support.parent,
+      submenu: [
+        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
+        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
+        { name: "User Manuals", path: menuPaths.support.manuals },
+        { name: "Product Catalogue", path: menuPaths.support.catalogue },
+      ],
+    },
+    { name: "About", path: menuPaths.about.parent },
+    { name: "Contact", path: menuPaths.contact },
+  ];
+
+  // Layout 3: Products-focused (all products in single dropdown)
+  const navItemsL3 = [
+    { name: "Home", path: menuPaths.home },
+    {
+      name: "Products",
+      submenu: [
+        {
+          name: "Sauna Heaters",
+          path: menuPaths.sauna.heaters.parent,
+          submenu: [
+            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
+            { name: "Tower", path: menuPaths.sauna.heaters.tower },
+            { name: "Stone", path: menuPaths.sauna.heaters.stone },
+            { name: "Floor", path: menuPaths.sauna.heaters.floor },
+            { name: "Combi", path: menuPaths.sauna.heaters.combi },
+            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+          ],
+        },
+        { name: "Sauna Controls", path: menuPaths.sauna.controls },
+        { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
+        {
+          name: "Sauna Rooms",
+          path: menuPaths.sauna.rooms,
+          submenu: [
+            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
+            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
+          ],
+        },
+        { name: "Steam Generators", path: menuPaths.steam.generators },
+        { name: "Steam Controls", path: menuPaths.steam.controls },
+        { name: "Steam Accessories", path: menuPaths.steam.accessories },
+        { name: "Infrared", path: menuPaths.infrared },
+      ],
+    },
+    {
+      name: "Support",
+      path: menuPaths.support.parent,
+      submenu: [
+        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
+        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
+        { name: "User Manuals", path: menuPaths.support.manuals },
+        { name: "Product Catalogue", path: menuPaths.support.catalogue },
+      ],
+    },
+    {
+      name: "About Us",
+      path: menuPaths.about.parent,
+      submenu: [
+        { name: "Latest News", path: menuPaths.about.news },
+        { name: "Sustainability", path: menuPaths.about.sustainability },
+      ],
+    },
+    { name: "Contact Us", path: menuPaths.contact },
+    { name: "Careers", path: menuPaths.careers },
+  ];
+
+  const navItems = layoutMode === "l1" ? navItemsL1 : layoutMode === "l2" ? navItemsL2 : navItemsL3;
 
   // --- Active helpers ---
   const isActive = (item) => {
@@ -324,7 +439,7 @@ export default function Header() {
 
             {/* Search Bar - Icon or Expanded */}
             <div
-              className="ml-auto pr-2 md:pr-4 flex items-center transition-all duration-300"
+              className="ml-auto pr-2 md:pr-4 flex items-center gap-3 transition-all duration-300"
               id="search-container"
               style={{
                 opacity: searchExpanded ? 1 : 1,
@@ -360,6 +475,43 @@ export default function Header() {
                   <i className="fa-solid fa-search text-lg"></i>
                 </button>
               )}
+
+              {/* Layout Toggle - Temporary */}
+              <div className="flex items-center gap-2 border-l border-gray-300 pl-3">
+                <button
+                  onClick={() => setLayoutMode("l1")}
+                  className={`px-2 py-1 text-xs font-semibold rounded transition-colors ${
+                    layoutMode === "l1"
+                      ? "bg-[#af8564] text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                  title="Layout 1: Full Product Range"
+                >
+                  L1
+                </button>
+                <button
+                  onClick={() => setLayoutMode("l2")}
+                  className={`px-2 py-1 text-xs font-semibold rounded transition-colors ${
+                    layoutMode === "l2"
+                      ? "bg-[#af8564] text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                  title="Layout 2: Clean & Less Cluttered"
+                >
+                  L2
+                </button>
+                <button
+                  onClick={() => setLayoutMode("l3")}
+                  className={`px-2 py-1 text-xs font-semibold rounded transition-colors ${
+                    layoutMode === "l3"
+                      ? "bg-[#af8564] text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
+                  title="Layout 3: Product-Focused"
+                >
+                  L3
+                </button>
+              </div>
             </div>
 
             {/* CSS Animations */}

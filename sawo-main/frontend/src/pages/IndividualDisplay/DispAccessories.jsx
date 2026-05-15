@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
-import { supabase } from "../../Administrator/supabase";
+import productsData from "../../Administrator/Local/data/products.json";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
@@ -13,7 +12,8 @@ export const ACCESSORY_CATEGORIES = [
   "pails", "ladles", "pail shower", "thermometers",
   "clocks & timers", "sauna lights", "headrest & backrest",
   "doors & handles", "benches", "cloth hangers",
-  "wooden floor mats", "kivistone", "ventilation & miscellaneous"
+  "wooden floor mats", "kivistone", "ventilation & miscellaneous",
+  "steam accessories"
 ];
 
 // Helper to check if a product is an accessory
@@ -751,55 +751,21 @@ export default function AccessoriesPage() {
   const { slug } = useParams();
   const [lightbox, setLightbox] = useState(null);
   const [videoModal, setVideoModal] = useState(null);
-  const { products: localProds, loading } = useLocalProducts();
 
   const [selectedVariant, setSelectedVariant] = useState(null);
-  const [supabaseVariants, setSupabaseVariants] = useState([]);
   const [imageErrors, setImageErrors] = useState({});
 
   const product = useMemo(() => {
-    if (!localProds.length) return null;
-    return localProds.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
-  }, [localProds, slug]);
+    return productsData.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
+  }, [slug]);
 
-  // Fetch variants from Supabase as fallback (skip for accessories that use images array instead)
-  useEffect(() => {
-    if (!product?.id) return;
-
-    // Skip variant loading for accessory products that use images array instead
-    const skipVariants = isAccessoryProduct(product);
-    if (skipVariants) {
-      setSupabaseVariants([]);
-      return;
-    }
-
-    const loadVariants = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("product_variants")
-          .select("*")
-          .eq("product_id", product.id)
-          .order("sort_order");
-
-        if (!error && data) {
-          setSupabaseVariants(data.map(v => ({
-            ...v,
-            image: v.image ? resolveUrl(v.image.match(/\/object\/public\/product-images\/(.+)$/)?.[1] || v.image) : null
-          })));
-        }
-      } catch (err) {
-        console.error("Error loading variants:", err);
-      }
-    };
-
-    loadVariants();
-  }, [product]);
+  const loading = false;
 
   const variants = useMemo(() => {
     if (!product) return [];
     const localVariants = getVariantsArray(product);
-    return localVariants.length > 0 ? localVariants : supabaseVariants;
-  }, [product, supabaseVariants]);
+    return localVariants.length > 0 ? localVariants : [];
+  }, [product]);
 
   useEffect(() => {
     if (variants.length > 0 && !selectedVariant) {
@@ -1214,7 +1180,7 @@ export default function AccessoriesPage() {
         )}
 
         {/* ── SECTION 3: Related Products ────────────────────────────── */}
-        <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={localProds} />
+        <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={productsData} />
 
       </div>
     </>
