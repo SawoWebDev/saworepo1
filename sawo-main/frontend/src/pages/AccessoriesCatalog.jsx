@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
-import { isAccessoryProduct } from "./AccessoriesPage";
+import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 

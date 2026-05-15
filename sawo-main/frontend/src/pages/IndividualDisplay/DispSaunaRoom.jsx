@@ -1,9 +1,9 @@
-// src/pages/SaunaRoomDisplay.jsx
+// Displays the individual sauna room detail page when clicked from the sauna rooms listing
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useLocalSaunaRooms } from "../Administrator/Local/useLocalSaunaRooms";
-import { ImageWithLoader } from "../components/ImageWithLoader";
+import saunaRoomsData from "../../Administrator/Local/data/saunaroom-data.json";
+import { ImageWithLoader } from "../../components/ImageWithLoader";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -306,14 +306,13 @@ export default function SaunaRoomDisplay() {
   const { slug } = useParams();
   const [lightbox, setLightbox] = useState(null);
   const [activeConfig, setActiveConfig] = useState(null);
-  const { rooms: allRooms, loading } = useLocalSaunaRooms();
 
   const room = useMemo(() => {
-    if (!allRooms.length) return null;
-    return allRooms.find(r => r.slug === slug && r.status === "published" && r.visible !== false) || null;
-  }, [allRooms, slug]);
+    return saunaRoomsData.find(r => r.slug === slug && r.status === "published" && r.visible !== false) || null;
+  }, [slug]);
 
-  const error = !loading && !room;
+  const loading = false;
+  const error = !room;
 
   // Parse JSONB fields
   const configurations = useMemo(() => parseJsonField(room?.configurations, {}), [room]);
@@ -653,7 +652,7 @@ export default function SaunaRoomDisplay() {
         )}
 
         {/* ── SECTION 3: Related by type ── */}
-        <RelatedRooms currentSlug={slug} roomType={room.room_type} allRooms={allRooms} />
+        <RelatedRooms currentSlug={slug} roomType={room.room_type} allRooms={saunaRoomsData} />
 
       </div>
     </>

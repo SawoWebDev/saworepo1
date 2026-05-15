@@ -40,12 +40,13 @@ import SaunaCalculator  from "./pages/Support/SaunaCalculator";
 import FAQ              from "./pages/Support/FAQ";
 import UserManuals      from "./pages/Support/UserManuals";
 import ProductCatalogue from "./pages/Support/ProductCatalogue";
+import AllProducts      from "./pages/AllProducts";
 
 // Dynamic product detail pages
 import ProductPageRouter from "./pages/ProductPageRouter";
-import AccessoriesPage from "./pages/AccessoriesPage";
+import DispAccessories from "./pages/IndividualDisplay/DispAccessories";
 import AccessoriesCatalog from "./pages/AccessoriesCatalog";
-import SaunaRoomDisplay from "./pages/SaunaRoomDisplay";
+import DispSaunaRoom from "./pages/IndividualDisplay/DispSaunaRoom";
 
 // Admin pages
 import Login     from "./Administrator/Login";
@@ -97,6 +98,7 @@ export default function App() {
                 <Route path={menuPaths.support.saunaCalculator} element={<SaunaCalculator />} />
                 <Route path={menuPaths.support.manuals}         element={<UserManuals />} />
                 <Route path={menuPaths.support.catalogue}       element={<ProductCatalogue />} />
+                <Route path="/products" element={<AllProducts />} />
 
                 {/* Single product detail page */}
                 <Route path="/products/:slug" element={<ProductPageRouter />} />
@@ -105,10 +107,10 @@ export default function App() {
                 <Route path="/accessories" element={<AccessoriesCatalog />} />
 
                 {/* Single accessory product detail page */}
-                <Route path="/accessories/:slug" element={<AccessoriesPage />} />
+                <Route path="/accessories/:slug" element={<DispAccessories />} />
 
                 {/* Single sauna room detail page */}
-                <Route path="/sauna/rooms/:slug" element={<SaunaRoomDisplay />} />
+                <Route path="/sauna/rooms/:slug" element={<DispSaunaRoom />} />
               </Routes>
             </MainLayout>
           } />

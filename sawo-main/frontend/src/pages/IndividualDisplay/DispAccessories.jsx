@@ -1,41 +1,130 @@
-// src/pages/ProductPage.jsx
-// Changes:
-// - Right column: top-aligned (not centered)
-// - Removed categories/tags display from left column
-// - Removed "Click to zoom" overlay on carousel images
-// - Spec images moved to Section 1 right side, above Resources (compact, no bg, no zoom label, still clickable)
-// - Related Products: removed short_description
-// - Section 2 no longer shows spec images (they're now in Section 1)
+// Displays the individual accessory product detail page when clicked from the accessories catalog or products listing
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
-import { ImageWithLoader } from "../components/ImageWithLoader";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
+import { supabase } from "../../Administrator/supabase";
+import { ImageWithLoader } from "../../components/ImageWithLoader";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+// Accessory categories that should be displayed in the Accessories page
+export const ACCESSORY_CATEGORIES = [
+  "pails", "ladles", "pail shower", "thermometers",
+  "clocks & timers", "sauna lights", "headrest & backrest",
+  "doors & handles", "benches", "cloth hangers",
+  "wooden floor mats", "kivistone", "ventilation & miscellaneous"
+];
+
+// Helper to check if a product is an accessory
+export function isAccessoryProduct(product) {
+  if (!product?.categories || !Array.isArray(product.categories)) return false;
+  return product.categories.some(c =>
+    ACCESSORY_CATEGORIES.includes(c.toLowerCase())
+  );
+}
+
+// ─ Helpers ─────────────────────────────────────────────────────────────
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
+
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
   if (String(pathOrUrl).includes("://")) return pathOrUrl;
   return `${GITHUB_RAW}${pathOrUrl}`;
 }
+
 function getImageUrl(product, field) {
   return resolveUrl(localOrRemote(product, field));
 }
+
 function getImagesArray(product, field) {
   const local = product?.[`local_${field}`];
   const remote = product?.[field];
   const arr = (local?.length ? local : remote) || [];
   return arr.map(resolveUrl).filter(Boolean);
 }
+
 function getFilesArray(product) {
   const local = product?.local_files;
   const remote = product?.files;
   if (local?.length) return local.map(f => ({ name: f.name, url: resolveUrl(f.path || f.url) }));
   return (remote || []).map(f => ({ name: f.name, url: f.url }));
+}
+
+function getVariantsArray(product) {
+  const local = product?.local_variants;
+  const remote = product?.variants;
+  const arr = (local?.length ? local : remote) || [];
+  return arr.map(v => ({
+    ...v,
+    image: v.image ? resolveUrl(v.image) : null
+  }));
+}
+
+function cleanHTMLStyles(html) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  const allElements = temp.querySelectorAll("*");
+  allElements.forEach(el => {
+    if (el.tagName === "BR") {
+      el.removeAttribute("style");
+      return;
+    }
+    el.removeAttribute("style");
+  });
+  let result = temp.innerHTML;
+  result = result.replace(/<p>/g, '<p margin-top: 0;">');
+  return result;
+}
+
+/* ── Video Modal ────────────────────────────────────────────────────── */
+function VideoModal({ videoUrl, onClose }) {
+  useEffect(() => {
+    const h = e => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", h);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", h); document.body.style.overflow = ""; };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9999,
+        background: "rgba(0,0,0,0.92)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <button onClick={onClose} style={{
+        position: "absolute", top: 18, right: 18,
+        background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%",
+        width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        transition: "background 0.2s", zIndex: 10,
+      }}
+        onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
+        onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
+      >
+        <i className="fa-solid fa-xmark" />
+      </button>
+
+      <video
+        onClick={e => e.stopPropagation()}
+        src={videoUrl}
+        controls
+        autoPlay
+        style={{
+          maxWidth: "90vw", maxHeight: "85vh",
+          objectFit: "contain", borderRadius: 10,
+        }}
+      />
+    </div>
+  );
 }
 
 /* ── Lightbox ─────────────────────────────────────────────────────── */
@@ -191,7 +280,7 @@ function Lightbox({ images, startIndex, onClose }) {
   );
 }
 
-/* ── Image Carousel ───────────────────────────────────────────────── */
+/* ── Carousel ──────────────────────────────────────────────────────── */
 function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
   const items = [
     ...(thumbnail ? [{ type: 'image', url: thumbnail }] : []),
@@ -332,7 +421,7 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
   );
 }
 
-/* ── Compact Spec Image Strip (for Section 1 right column) ────────── */
+/* ── Compact Spec Images ───────────────────────────────────────────── */
 function CompactSpecImages({ images, onImageClick }) {
   const [idx, setIdx] = useState(0);
   if (!images || !images.length) return null;
@@ -408,7 +497,7 @@ function CompactSpecImages({ images, onImageClick }) {
   );
 }
 
-/* ── PDF Resources Panel ──────────────────────────────────────────── */
+/* ── Resources Panel ───────────────────────────────────────────────── */
 function ResourcesPanel({ files }) {
   const [expanded, setExpanded] = useState(false);
   const isMultiple = files?.length > 1;
@@ -424,7 +513,6 @@ function ResourcesPanel({ files }) {
     </div>
   );
 
-  // Single file: show normally
   if (!isMultiple) {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -458,10 +546,8 @@ function ResourcesPanel({ files }) {
     );
   }
 
-  // Multiple files: show with dropdown toggle
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-      {/* Dropdown toggle button */}
       <button
         onClick={() => setExpanded(!expanded)}
         style={{
@@ -494,7 +580,6 @@ function ResourcesPanel({ files }) {
         />
       </button>
 
-      {/* Expanded list */}
       {expanded && (
         <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: "10px 0", borderTop: "1px solid #edddd0" }}>
           {files.map((f, i) => (
@@ -523,7 +608,7 @@ function ResourcesPanel({ files }) {
   );
 }
 
-/* ── Section Label ────────────────────────────────────────────────── */
+/* ── Section Label ─────────────────────────────────────────────────── */
 function SectionLabel({ icon, text }) {
   return (
     <h3 style={{
@@ -538,7 +623,7 @@ function SectionLabel({ icon, text }) {
   );
 }
 
-/* ── Divider ──────────────────────────────────────────────────────── */
+/* ── Divider ───────────────────────────────────────────────────────── */
 function Divider() {
   return (
     <div style={{ maxWidth: 1140, margin: "0 auto", padding: "0 32px" }}>
@@ -547,7 +632,7 @@ function Divider() {
   );
 }
 
-/* ── Related Products ─────────────────────────────────────────────── */
+/* ── Related Products ──────────────────────────────────────────────── */
 function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
   const related = useMemo(() => {
     if (!categories?.length || !allProducts.length) return [];
@@ -611,7 +696,6 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
                   e.currentTarget.style.background = "transparent";
                 }}
               >
-                {/* Image */}
                 <div style={{
                   aspectRatio: "1/1",
                   display: "flex", alignItems: "center", justifyContent: "center",
@@ -629,7 +713,6 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
                   )}
                 </div>
 
-                {/* Name - Centered */}
                 <p style={{
                   fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
                   fontSize: "0.82rem", color: "#2c1a0e", margin: 0, lineHeight: 1.4,
@@ -646,7 +729,7 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
   );
 }
 
-/* ── Skeleton ─────────────────────────────────────────────────────── */
+/* ── Skeleton ──────────────────────────────────────────────────────── */
 function SkeletonPage() {
   return (
     <div style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px 60px" }}>
@@ -663,47 +746,88 @@ function SkeletonPage() {
   );
 }
 
-/* ── Utility: Clean inline styles from HTML ────────────────────────── */
-function cleanHTMLStyles(html) {
-  const temp = document.createElement("div");
-  temp.innerHTML = html;
-
-  // Remove all style attributes from all elements, but preserve br tags
-  const allElements = temp.querySelectorAll("*");
-  allElements.forEach(el => {
-    // Keep br tags without any attributes
-    if (el.tagName === "BR") {
-      el.removeAttribute("style");
-      return;
-    }
-    el.removeAttribute("style");
-  });
-
-  // Ensure proper spacing between paragraphs
-  let result = temp.innerHTML;
-  // Add margin-bottom to paragraphs for spacing
-  result = result.replace(/<p>/g, '<p margin-top: 0;">');
-
-  return result;
-}
-
-/* ── Main ─────────────────────────────────────────────────────────── */
-export default function ProductPage() {
+/* ── Main Component ────────────────────────────────────────────────── */
+export default function AccessoriesPage() {
   const { slug } = useParams();
   const [lightbox, setLightbox] = useState(null);
+  const [videoModal, setVideoModal] = useState(null);
   const { products: localProds, loading } = useLocalProducts();
+
+  const [selectedVariant, setSelectedVariant] = useState(null);
+  const [supabaseVariants, setSupabaseVariants] = useState([]);
+  const [imageErrors, setImageErrors] = useState({});
 
   const product = useMemo(() => {
     if (!localProds.length) return null;
     return localProds.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
   }, [localProds, slug]);
 
-  const error = !loading && !product ? "Product not found." : null;
+  // Fetch variants from Supabase as fallback (skip for accessories that use images array instead)
+  useEffect(() => {
+    if (!product?.id) return;
 
-  const openLightbox = (images, index) => setLightbox({ images, index });
-  const closeLightbox = () => setLightbox(null);
+    // Skip variant loading for accessory products that use images array instead
+    const skipVariants = isAccessoryProduct(product);
+    if (skipVariants) {
+      setSupabaseVariants([]);
+      return;
+    }
+
+    const loadVariants = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("product_variants")
+          .select("*")
+          .eq("product_id", product.id)
+          .order("sort_order");
+
+        if (!error && data) {
+          setSupabaseVariants(data.map(v => ({
+            ...v,
+            image: v.image ? resolveUrl(v.image.match(/\/object\/public\/product-images\/(.+)$/)?.[1] || v.image) : null
+          })));
+        }
+      } catch (err) {
+        console.error("Error loading variants:", err);
+      }
+    };
+
+    loadVariants();
+  }, [product]);
+
+  const variants = useMemo(() => {
+    if (!product) return [];
+    const localVariants = getVariantsArray(product);
+    return localVariants.length > 0 ? localVariants : supabaseVariants;
+  }, [product, supabaseVariants]);
+
+  useEffect(() => {
+    if (variants.length > 0 && !selectedVariant) {
+      setSelectedVariant(variants[0]);
+    }
+  }, [variants, selectedVariant]);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+
+  const error = !loading && !product ? "Product not found." : null;
+
+  const files        = getFilesArray(product);
+  const images       = product ? getImagesArray(product, 'images') : [];
+  const thumbnail    = product ? getImageUrl(product, 'thumbnail') : null;
+  const specImages   = product ? getImagesArray(product, 'spec_images') : [];
+  const videoUrl     = product?.resources?.video || null;
+  const hasShortDesc = !!product?.short_description;
+  const hasDesc      = !!product?.description;
+  const hasFeatures  = (product?.features || []).length > 0;
+  const hasSpec      = specImages.length > 0;
+  const hasSpecTable = product?.spec_table?.headers?.length > 0;
+  const hasResources = files.length > 0;
+  const hasSection2  = hasDesc || hasSpecTable;
+  const hasVideo     = !!product?.resources?.video;
+  const displayImage = selectedVariant?.image || thumbnail;
+
+  const openLightbox = (imgs, index) => setLightbox({ images: imgs, index });
+  const closeLightbox = () => setLightbox(null);
 
   if (loading) return (
     <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 80 }}>
@@ -738,19 +862,6 @@ export default function ProductPage() {
       </div>
     </div>
   );
-
-  const files        = getFilesArray(product);
-  const images       = getImagesArray(product, 'images');
-  const thumbnail    = getImageUrl(product, 'thumbnail');
-  const specImages   = getImagesArray(product, 'spec_images');
-  const videoUrl     = product?.resources?.video || null;
-  const hasShortDesc = !!product.short_description;
-  const hasDesc      = !!product.description;
-  const hasFeatures  = (product.features || []).length > 0;
-  const hasSpec      = specImages.length > 0;
-  const hasSpecTable = product.spec_table?.headers?.length > 0;
-  const hasResources = files.length > 0;
-  const hasSection2  = hasDesc || hasSpecTable;
 
   return (
     <>
@@ -828,6 +939,10 @@ export default function ProductPage() {
         <Lightbox images={lightbox.images} startIndex={lightbox.index} onClose={closeLightbox} />
       )}
 
+      {videoModal && (
+        <VideoModal videoUrl={videoModal} onClose={() => setVideoModal(null)} />
+      )}
+
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
 
         {/* ── SECTION 1: Images + Info ─────────────────────────────── */}
@@ -839,24 +954,133 @@ export default function ProductPage() {
             className="pp-s1-grid"
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}
           >
-            {/* LEFT: Carousel + Resources (only if Diagram exists) */}
+            {/* LEFT: Image Display (Carousel or Variant Switcher) */}
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              <Carousel
-                images={images}
-                thumbnail={thumbnail}
-                videoUrl={videoUrl}
-                onImageClick={openLightbox}
-              />
-              {/* Resources — below images (only show on left if Diagram exists) */}
-              {hasResources && hasSpec && (
-                <div>
-                  <SectionLabel text="Resources" />
-                  <ResourcesPanel files={files} />
+              {variants.length > 0 ? (
+                // Variant switcher mode (legacy pail-style)
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{
+                    position: "relative", aspectRatio: "1/1", borderRadius: 14,
+                    background: "#faf7f4", display: "flex", alignItems: "center",
+                    justifyContent: "center", cursor: displayImage ? "zoom-in" : "default",
+                    overflow: "hidden"
+                  }}
+                    onClick={() => displayImage && openLightbox([displayImage], 0)}
+                  >
+                    {displayImage && !imageErrors[selectedVariant?.id] ? (
+                      <ImageWithLoader
+                        src={displayImage}
+                        alt={selectedVariant?.label || selectedVariant?.sku || product.name}
+                        onError={() => selectedVariant && setImageErrors(e => ({ ...e, [selectedVariant.id]: true }))}
+                        style={{
+                          maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+                          animation: "ppFadeIn 0.25s ease",
+                        }}
+                      />
+                    ) : (
+                      <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
+                    )}
+
+                    {hasVideo && (
+                      <div style={{
+                        position: "absolute", display: "flex", alignItems: "center",
+                        justifyContent: "center", width: 60, height: 60,
+                        background: "rgba(166,120,83,0.9)", borderRadius: "50%",
+                        cursor: "pointer",
+                      }}
+                        onClick={(e) => { e.stopPropagation(); setVideoModal(product.resources.video); }}
+                      >
+                        <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "1.5rem", marginLeft: "4px" }} />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Variant Swatch Buttons */}
+                  <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                    {variants.map((variant) => (
+                      <button
+                        key={variant.id}
+                        onClick={() => {
+                          setSelectedVariant(variant);
+                          setImageErrors(e => {
+                            const updated = { ...e };
+                            delete updated[variant.id];
+                            return updated;
+                          });
+                        }}
+                        title={variant.label || variant.sku}
+                        style={{
+                          width: 60, height: 60, borderRadius: 8,
+                          border: `2px solid ${selectedVariant?.id === variant.id ? "#a67853" : "#edddd0"}`,
+                          overflow: "hidden", cursor: "pointer", padding: 0,
+                          background: "#faf7f4", transition: "all 0.2s",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {variant.image && !imageErrors[variant.id] ? (
+                          <ImageWithLoader
+                            src={variant.image}
+                            alt={variant.label || variant.sku}
+                            onError={() => setImageErrors(e => ({ ...e, [variant.id]: true }))}
+                            style={{
+                              width: "100%", height: "100%", objectFit: "contain",
+                              padding: 2,
+                            }}
+                          />
+                        ) : (
+                          <div style={{
+                            width: "100%", height: "100%",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            background: "#edddd0",
+                          }}>
+                            <i className="fa-regular fa-image" style={{ fontSize: "1rem", color: "#a67853" }} />
+                          </div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Gallery Thumbnail Strip (if product has images array) */}
+                  {images.length > 0 && (
+                    <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 2, marginTop: 8 }}>
+                      {images.map((url, i) => (
+                        <button key={i} onClick={() => openLightbox(images, i)}
+                          style={{
+                            flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden",
+                            border: "2px solid #edddd0",
+                            background: "#faf7f4", cursor: "pointer", padding: 0, transition: "border-color 0.18s",
+                          }}>
+                          <ImageWithLoader
+                            src={url}
+                            alt=""
+                            style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
+              ) : (
+                // Standard carousel (ladle-style)
+                <>
+                  <Carousel
+                    images={images}
+                    thumbnail={thumbnail}
+                    videoUrl={videoUrl}
+                    onImageClick={openLightbox}
+                  />
+                  {/* Resources below carousel (only if Diagram exists) */}
+                  {hasResources && hasSpec && (
+                    <div>
+                      <SectionLabel text="Resources" />
+                      <ResourcesPanel files={files} />
+                    </div>
+                  )}
+                </>
               )}
             </div>
 
-            {/* RIGHT: Brand, Name, Short Desc, Features, Spec Images — top aligned */}
+            {/* RIGHT: Info Column */}
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
               {(product.brand || product.type) && (
                 <p style={{
@@ -912,7 +1136,7 @@ export default function ProductPage() {
                 </p>
               )}
 
-              {/* Spec Images — compact, no bg, no zoom label, still clickable */}
+              {/* Spec Images / Diagram */}
               {hasSpec && (
                 <div>
                   <SectionLabel text="Diagram" />
@@ -920,7 +1144,8 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Resources — on right side if no Diagram */}
+
+              {/* Resources (only show on right if no Diagram) */}
               {hasResources && !hasSpec && (
                 <div>
                   <SectionLabel text="Resources" />
@@ -931,7 +1156,7 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* ── SECTION 2: Specifications (Full Description + Spec Table) ── */}
+        {/* ── SECTION 2: Specifications ─────────────────────────────── */}
         {hasSection2 && (
           <>
             <Divider />
@@ -941,7 +1166,6 @@ export default function ProductPage() {
             >
               <SectionLabel text="Specifications" />
 
-              {/* Full Description */}
               {hasDesc && (
                 <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
                   <div
@@ -956,7 +1180,6 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Technical Data Table */}
               {hasSpecTable && (
                 <div>
                   <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
@@ -990,7 +1213,7 @@ export default function ProductPage() {
           </>
         )}
 
-        {/* ── SECTION 3: Related Products ───────────────────────────── */}
+        {/* ── SECTION 3: Related Products ────────────────────────────── */}
         <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={localProds} />
 
       </div>

@@ -4,9 +4,9 @@
 import React, { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
-import ProductPage from "./ProductPage";
-import AccessoriesPage from "./AccessoriesPage";
-import { isAccessoryProduct } from "./AccessoriesPage";
+import DispProduct from "./IndividualDisplay/DispProduct";
+import DispAccessories from "./IndividualDisplay/DispAccessories";
+import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 
 export default function ProductPageRouter() {
   const { slug } = useParams();
@@ -22,9 +22,9 @@ export default function ProductPageRouter() {
   if (product && isAccessoryProduct(product)) {
     // Redirect to accessories route
     navigate(`/accessories/${slug}`, { replace: true });
-    return <AccessoriesPage />;
+    return <DispAccessories />;
   }
 
   // Otherwise, render standard ProductPage
-  return <ProductPage />;
+  return <DispProduct />;
 }
