@@ -1,5 +1,47 @@
 // Floor.jsx
 // See WallMounted.jsx for how to use local product data instead of Supabase.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDITOR GUIDE — Floor-Mounted Heaters page
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// This page displays floor-mounted sauna heaters (Taurus D, Helius, Krios,
+// Savonia, and Nordex families). Products are loaded from the local CMS and
+// grouped automatically.
+//
+// ── STEP 1: Open the CMS ────────────────────────────────────────────────────
+//   Go to /admin → Products → click "Add Product" (or open an existing one).
+//
+// ── STEP 2: Fill in the required fields ─────────────────────────────────────
+//   • Name       — Product name (see group rules below)
+//   • Category   — MUST include "Floor"   ← this routes the product to this page
+//                  Alternatively, add the tag "floor" (lowercase) — either works.
+//   • Status     — Set to "published"
+//   • Visible    — Must be ON (true)
+//   • Thumbnail  — Upload the product image or paste its URL
+//   • Slug       — URL-friendly ID, e.g. "nordex-pro-ns" (auto-generated if blank)
+//
+// ── STEP 3: Naming rules — which group the product lands in ─────────────────
+//   The product name determines which labelled group it appears under:
+//
+//   Name contains…          → Group shown on page
+//   ──────────────────────────────────────────────
+//   "Taurus D" or "Taurus"  → Taurus D
+//   "Helius"                → HELIUS
+//   "Krios Floor" or "Krios"→ Krios
+//   "Savonia"               → Savonia
+//   "Nordex"                → Nordex
+//
+//   Groups are checked in that exact order — the first match wins.
+//   Example: "Krios Floor NS" matches "Krios Floor" and lands in Krios.
+//
+// ── STEP 4: Save and verify ─────────────────────────────────────────────────
+//   After saving in the CMS, reload this page in the browser.
+//   The product card will appear in the correct group section.
+//   If it doesn't show: check that Status = published, Visible = ON,
+//   and that Category = "Floor" OR the Tags field contains "floor".
+//
+// ═══════════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";

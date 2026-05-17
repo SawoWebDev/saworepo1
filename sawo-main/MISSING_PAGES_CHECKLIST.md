@@ -4,10 +4,10 @@
 
 ### ✅ LEGAL & POLICY PAGES (Need to Create)
 
-- [ ] **Privacy Policy** (`/privacy-policy`)
+- [x] **Privacy Policy** (`/privacy-policy`) ✅ COMPLETED
   - Referenced in: Footer.jsx
-  - Status: Not routed
-  - Current link: `href="#"` (placeholder)
+  - Status: Routed & Functional
+  - Component: src/pages/PrivacyPolicy.jsx
 
 - [ ] **Sitemap** (`/sitemap`)
   - Referenced in: Footer.jsx
@@ -152,4 +152,20 @@ Once new pages are created, update:
 2. `src/App.jsx` - Add new Route components
 3. `src/components/Footer/Footer.jsx` - Update placeholder links
 4. Individual product pages - Update external links to internal routes
+
+---
+
+## 🎯 NEXT PAGE TO CREATE: **Sitemap** (`/sitemap`)
+
+**Why Sitemap first?**
+- ✅ Simple to build (just list all routes from menuPaths.js)
+- ✅ SEO best practice - helps search engines crawl the site
+- ✅ Improves navigation for users
+- ✅ No product data needed
+- ✅ Quick win before tackling product-detail pages
+
+**After Sitemap:**
+1. Social media links in Footer (just update URLs, no new pages)
+2. Infrared Backrest detail page
+3. Infrared Panels detail page
 

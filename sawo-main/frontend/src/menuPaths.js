@@ -46,6 +46,8 @@ const menuPaths = {
   },
 
   careers: "/careers",
+  privacy: "/privacy-policy",
+  sitemap: "/sitemap",
   products: "/products",
   accessories: "/accessories",
   adminDashboard:"/admin/dashboard",

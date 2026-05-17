@@ -68,8 +68,8 @@ export default function Footer() {
               <Link to={menuPaths.about.parent} className="hover:text-gray-300">About Us</Link>
               <Link to={menuPaths.contact} className="hover:text-gray-300">Contact Us</Link>
               <Link to={menuPaths.careers} className="hover:text-gray-300">Careers</Link>
-              <a href="#" className="hover:text-gray-300">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-300">Sitemap</a>
+              <Link to={menuPaths.privacy} className="hover:text-gray-300">Privacy Policy</Link>
+              <Link to={menuPaths.sitemap} className="hover:text-gray-300">Sitemap</Link>
             </div>
           </div>
 

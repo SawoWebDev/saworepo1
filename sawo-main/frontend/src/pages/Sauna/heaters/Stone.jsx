@@ -1,5 +1,49 @@
 // Stone.jsx
 // See WallMounted.jsx for how to use local product data instead of Supabase.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDITOR GUIDE — Stone Series Heaters page
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// This page displays Stone-series sauna heaters (Cumulus and Nimbus families).
+// Products are loaded from the local CMS and grouped automatically.
+//
+// ── STEP 1: Open the CMS ────────────────────────────────────────────────────
+//   Go to /admin → Products → click "Add Product" (or open an existing one).
+//
+// ── STEP 2: Fill in the required fields ─────────────────────────────────────
+//   • Name       — Product name (see group rules below)
+//   • Category   — MUST include "Stones"  ← note: plural, not "Stone"
+//                  This routes the product to this page.
+//   • Status     — Set to "published"
+//   • Visible    — Must be ON (true)
+//   • Thumbnail  — Upload the product image or paste its URL
+//   • Slug       — URL-friendly ID, e.g. "cumulus-ni2" (auto-generated if blank)
+//
+// ── STEP 3: Naming rules — which group the product lands in ─────────────────
+//   The product name determines which labelled group it appears under:
+//
+//   Name contains…   → Group shown on page
+//   ──────────────────────────────────────────
+//   "Cumulus"        → CUMULUS
+//   "Nimbus"         → NIMBUS
+//
+//   Examples:
+//     "Cumulus Ni2"           → CUMULUS group  ✓
+//     "Cumulus NS"            → CUMULUS group  ✓
+//     "Nimbus NS"             → NIMBUS group   ✓
+//     "Nimbus Combi NS"       → NIMBUS group   ✓
+//
+//   If the name contains neither "Cumulus" nor "Nimbus", the product won't
+//   be assigned to any group and will not appear on the page.
+//
+// ── STEP 4: Save and verify ─────────────────────────────────────────────────
+//   After saving in the CMS, reload this page in the browser.
+//   The product card will appear in the correct group section.
+//   If it doesn't show: check that Status = published, Visible = ON,
+//   and that the Category field contains exactly "Stones" (with the 's').
+//
+// ═══════════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
@@ -33,11 +77,17 @@ const GROUP_KEYWORDS = {
 
 // ── Filter Stone products dynamically ────────────────────────────────
 function filterStoneProducts(allProducts) {
-  return allProducts.filter(
-    (p) =>
-      p.categories?.includes("Stone") || // category contains Stone
-      p.name?.toLowerCase().includes("stone") // name contains "stone"
-  );
+  return allProducts.filter((p) => {
+    const name = (p.name || "").toUpperCase();
+    const cats = p.categories || [];
+    return (
+      name.includes("CUMULUS") ||
+      name.includes("NIMBUS") ||
+      cats.includes("Stone") ||
+      cats.includes("Stones") ||
+      name.includes("STONE")
+    );
+  });
 }
 
 // ── Group products dynamically ───────────────────────────────────────

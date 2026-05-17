@@ -1,5 +1,48 @@
 // Tower.jsx
 // See WallMounted.jsx for how to use local product data instead of Supabase.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDITOR GUIDE — Tower Sauna Heaters page
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// This page displays Tower-series sauna heaters. Products are loaded from the
+// local CMS and filtered/grouped automatically — no code change needed when
+// adding new products, as long as the rules below are followed.
+//
+// ── STEP 1: Open the CMS ────────────────────────────────────────────────────
+//   Go to /admin → Products → click "Add Product" (or open an existing one).
+//
+// ── STEP 2: Fill in the required fields ─────────────────────────────────────
+//   • Name       — Product name (see group rules below)
+//   • Category   — MUST include "Tower"  ← this routes the product to this page
+//   • Status     — Set to "published"
+//   • Visible    — Must be ON (true)
+//   • Thumbnail  — Upload the product image or paste its URL
+//   • Slug       — URL-friendly ID, e.g. "sw3-round-ni2" (auto-generated if left blank)
+//
+// ── STEP 3: Naming rules — which group the product lands in ─────────────────
+//   The product name determines which labelled group it appears under:
+//
+//   Name contains…      → Group shown on page
+//   ─────────────────────────────────────────
+//   "SAWO30"            → SAWO30
+//   "Tower"             → Tower
+//   "Aries"             → Aries
+//   "Cubos"             → Cubos
+//   "Heaterking"        → Heaterking
+//   "Phoenix"           → Phoenix
+//   "Fiberjungle NS"    → Fiberjungle
+//
+//   If no keyword matches, the product won't appear in any group.
+//   Tip: the match is case-insensitive — "tower", "TOWER", and "Tower" all work.
+//
+// ── STEP 4: Save and verify ─────────────────────────────────────────────────
+//   After saving in the CMS, reload this page in the browser.
+//   The product card will appear in the correct group section.
+//   If it doesn't show: check that Status = published, Visible = ON,
+//   and that the Category field contains exactly "Tower".
+//
+// ═══════════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";

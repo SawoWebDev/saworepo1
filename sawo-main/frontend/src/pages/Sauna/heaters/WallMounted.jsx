@@ -1,6 +1,60 @@
 // src/pages/Sauna/heaters/WallMounted.jsx
 //
-// ─── TEMPLATE: HOW TO BUILD A PRODUCT DISPLAY PAGE ───────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDITOR GUIDE — Wall-Mounted Heaters page
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// This page displays wall-mounted sauna heaters (Nordex, Mini, Scandia, Krios,
+// Scandifire families). Products are loaded from the local CMS and grouped
+// automatically.
+//
+// ── STEP 1: Open the CMS ────────────────────────────────────────────────────
+//   Go to /admin → Products → click "Add Product" (or open an existing one).
+//
+// ── STEP 2: Fill in the required fields ─────────────────────────────────────
+//   • Name       — Product name (see group rules below)
+//   • Category   — MUST include "Wall-Mounted" or "Wall Mounted"
+//                  ← this routes the product to this page
+//   • Status     — Set to "published"
+//   • Visible    — Must be ON (true)
+//   • Thumbnail  — Upload the product image or paste its URL
+//   • Slug       — URL-friendly ID, e.g. "scandia-ns" (auto-generated if blank)
+//
+// ── STEP 3: Naming rules — which group the product lands in ─────────────────
+//   Groups are matched in strict order — the FIRST match wins:
+//
+//   Name / tag contains…              → Group shown on page
+//   ─────────────────────────────────────────────────────────
+//   "Nordex Mini Combi" or "NRMC"    → Nordex Mini Combi
+//   "Nordex Combi" or "NRNC"         → Nordex Combi
+//   "Nordex Mini" or "NRM-"          → Nordex Mini
+//   "Nordex" or "NRN-"               → Nordex
+//   "Mini Combi" or "MNC"            → Mini Combi
+//   "Mini X" or "MX "                → Mini X
+//   "Mini NB" or "MN "               → Mini
+//   "Scandia Combi" or "SCAC"        → Scandia Combi
+//   "Scandia" or "SCA-"              → Scandia
+//   "Krios" or "KRI"                 → Krios
+//   "Scandifire"                     → Scandifire
+//
+//   IMPORTANT — order matters: "Nordex Mini Combi" must be listed before
+//   "Nordex Mini" and "Nordex", otherwise the shorter keyword would match first.
+//
+// ── STEP 4: Save and verify ─────────────────────────────────────────────────
+//   After saving in the CMS, reload this page in the browser.
+//   The product card will appear in the correct group section.
+//   If it doesn't show: check that Status = published, Visible = ON,
+//   and that Category = "Wall-Mounted" or "Wall Mounted".
+//
+// ── TO ADD A NEW GROUP ──────────────────────────────────────────────────────
+//   If you need a brand new group that doesn't exist yet, a developer must:
+//   1. Add the group name to FIXED_ORDER (controls display order)
+//   2. Add the group's matching keywords to GROUP_KEYWORDS
+//   The DISPLAY_CATEGORIES array at the top controls which categories are shown.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// ─── DEVELOPER TEMPLATE: HOW TO BUILD A PRODUCT DISPLAY PAGE ─────────────────
 //
 // This file is the reference template for any page that displays products.
 // Copy this pattern when building new product listing pages.

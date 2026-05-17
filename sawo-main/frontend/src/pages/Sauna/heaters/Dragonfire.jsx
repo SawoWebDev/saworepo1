@@ -1,5 +1,48 @@
 // Dragonfire.jsx
 // See WallMounted.jsx for how to use local product data instead of Supabase.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDITOR GUIDE — Dragonfire Heaters page
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// This page displays Dragonfire-series sauna heaters (Heaterking, Fiberjungle,
+// Scandifire, Minidragon). Products are loaded from the local CMS and grouped
+// automatically.
+//
+// ── STEP 1: Open the CMS ────────────────────────────────────────────────────
+//   Go to /admin → Products → click "Add Product" (or open an existing one).
+//
+// ── STEP 2: Fill in the required fields ─────────────────────────────────────
+//   • Name       — Product name (see group rules below)
+//   • Category   — MUST include "Dragonfire"  ← this routes the product to this page
+//                  Products are also matched if the name itself contains "Dragonfire"
+//                  or matches a group keyword (Heaterking, Fiberjungle, etc.)
+//   • Status     — Set to "published"
+//   • Visible    — Must be ON (true)
+//   • Thumbnail  — Upload the product image or paste its URL
+//   • Slug       — URL-friendly ID, e.g. "heaterking-bk" (auto-generated if blank)
+//
+// ── STEP 3: Naming rules — which group the product lands in ─────────────────
+//   The product name determines the group:
+//
+//   Name contains…    → Group shown on page
+//   ──────────────────────────────────────────
+//   "Heaterking"      → Heaterking
+//   "Fiberjungle"     → Fiberjungle
+//   "Scandifire"      → Scandifire
+//   "Minidragon"      → Minidragon
+//
+//   The match is also checked against product tags, so adding a tag with
+//   the group name (e.g. tag "Heaterking") also works.
+//
+// ── STEP 4: Save and verify ─────────────────────────────────────────────────
+//   After saving in the CMS, reload this page in the browser.
+//   The product card will appear in the correct group section.
+//   If it doesn't show: check that Status = published, Visible = ON,
+//   and that Category = "Dragonfire" OR the product name/tags match a
+//   group keyword (Heaterking, Fiberjungle, Scandifire, or Minidragon).
+//
+// ═══════════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";

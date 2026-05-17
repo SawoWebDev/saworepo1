@@ -1,5 +1,51 @@
 // Combi.jsx
 // See WallMounted.jsx for how to use local product data instead of Supabase.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// EDITOR GUIDE — Combi Heaters page
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// This page displays Combi sauna heaters — heaters that can also produce steam.
+// Products are loaded from the local CMS and grouped automatically.
+//
+// ── STEP 1: Open the CMS ────────────────────────────────────────────────────
+//   Go to /admin → Products → click "Add Product" (or open an existing one).
+//
+// ── STEP 2: Fill in the required fields ─────────────────────────────────────
+//   • Name       — Product name (see group rules below)
+//   • Category   — MUST include "Combi"  ← this routes the product to this page
+//   • Status     — Set to "published"
+//   • Visible    — Must be ON (true)
+//   • Thumbnail  — Upload the product image or paste its URL
+//   • Slug       — URL-friendly ID, e.g. "nordex-combi-ns" (auto-generated if blank)
+//
+// ── STEP 3: Naming rules — which group the product lands in ─────────────────
+//   The product name (or SKU/tag) determines the group. They are checked in
+//   strict order — the FIRST match wins, so be precise:
+//
+//   Name / tag contains…          → Group shown on page
+//   ──────────────────────────────────────────────────────
+//   "Taurus D Combi" or "TRDC-NS" → Taurus D Combi
+//   "Nordex Pro Combi" or "NRNC-PRO" → Nordex Pro Combi
+//   "Nordex S Combi" or "NRNSC"   → Nordex S Combi
+//   "Nordex Combi" or "NRNC"      → Nordex Combi
+//   "Nordex Mini Combi" or "NRMC" → Nordex Mini Combi
+//   "Mini Combi" or "MNC"         → Mini Combi
+//   "Savonia Combi" or "SAVC"     → Savonia Combi
+//   "Scandia Combi" or "SCAC"     → Scandia Combi
+//   "Nimbus Combi" or "NIMC"      → Nimbus Combi
+//
+//   IMPORTANT — order matters: "Nordex Pro Combi" must be matched before
+//   "Nordex Combi", otherwise "Nordex Combi" would catch it first.
+//   The order above matches the code exactly.
+//
+// ── STEP 4: Save and verify ─────────────────────────────────────────────────
+//   After saving in the CMS, reload this page in the browser.
+//   The product card will appear in the correct group section.
+//   If it doesn't show: check that Status = published, Visible = ON,
+//   and that the Category field contains exactly "Combi".
+//
+// ═══════════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";

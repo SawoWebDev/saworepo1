@@ -41,6 +41,8 @@ import FAQ              from "./pages/Support/FAQ";
 import UserManuals      from "./pages/Support/UserManuals";
 import ProductCatalogue from "./pages/Support/ProductCatalogue";
 import AllProducts      from "./pages/AllProducts";
+import PrivacyPolicy   from "./pages/PrivacyPolicy";
+import Sitemap         from "./pages/Sitemap";
 
 // Dynamic product detail pages
 import ProductPageRouter from "./pages/ProductPageRouter";
@@ -99,6 +101,8 @@ export default function App() {
                 <Route path={menuPaths.support.manuals}         element={<UserManuals />} />
                 <Route path={menuPaths.support.catalogue}       element={<ProductCatalogue />} />
                 <Route path="/products" element={<AllProducts />} />
+                <Route path={menuPaths.privacy}              element={<PrivacyPolicy />} />
+                <Route path={menuPaths.sitemap}              element={<Sitemap />} />
 
                 {/* Single product detail page */}
                 <Route path="/products/:slug" element={<ProductPageRouter />} />
