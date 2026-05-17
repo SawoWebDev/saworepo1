@@ -1,6 +1,8 @@
 ﻿import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import menuPaths from "../../menuPaths";
 
 // ===== Import local images =====
 // Steam
@@ -44,160 +46,160 @@ const Section3 = () => {
       <h2 className="section-title">STEAM</h2>
 
       <div className="steam-grid">
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/sawo-products/steam-sauna/steam-generators/"
+          to={menuPaths.steam.generators}
         >
           <img src={steamGenerator} alt="Steam Generators" />
           <div className="steam-title">Steam Generators</div>
           <div className="steam-caption">
             The luxury of tailored steam from advanced steam generators for a spa-like experience. Customized settings and overall exceptional performance.
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/sawo-products/steam-sauna/steam-controls/"
+          to={menuPaths.steam.controls}
         >
           <img src={steamControl} alt="Steam Controls" />
           <div className="steam-title">Steam Controls</div>
           <div className="steam-caption">
             Precision, effortlessness, and personalization: Precise steam settings, effortless operation, and a personalized sauna experience from our Saunova and Innova control series.
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/sawo-products/steam-sauna/steam-accessories/"
+          to={menuPaths.steam.accessories}
         >
           <img src={steamAccessories} alt="Steam Accessories" />
           <div className="steam-title">Steam Accessories</div>
           <div className="steam-caption">
             Premium accessories designed to enhance functionality and maximize comfort. Consistently extraordinary wellness and relaxation experience.
           </div>
-        </a>
+        </Link>
       </div>
 
       <div className="text-center mt-6">
-        <a
-          href="https://www.sawo.com/sawo-products/steam-sauna/"
+        <Link
+          to={menuPaths.steam.parent}
           style={exploreBtnStyle}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#af8564")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "#333333")}
         >
           Explore More <FontAwesomeIcon icon={faChevronRight} />
-        </a>
+        </Link>
       </div>
 
       {/* ================= SAUNA ROOMS ================= */}
       <h2 className="section-title">SAUNA ROOMS</h2>
 
       <div className="steam-grid">
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-rooms/standard-sauna-rooms/"
+          to={menuPaths.sauna.rooms}
         >
           <img src={standardSauna} alt="Standard Sauna" />
           <div className="steam-title">Standard Sauna</div>
           <div className="steam-caption">
             Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/glass-front-sauna-rooms/"
+          to={menuPaths.sauna.rooms}
         >
           <img src={glassFrontSauna} alt="Glass Front Sauna" />
           <div className="steam-title">Glass Front Sauna</div>
           <div className="steam-caption">
             Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/outdoor-sauna-rooms/"
+          to={menuPaths.sauna.rooms}
         >
           <img src={outdoorSauna} alt="Outdoor Sauna" />
           <div className="steam-title">Outdoor Sauna</div>
           <div className="steam-caption">
             Engineered to withstand severe weather. Top-coated walls and durable asphalt-shingle roof for maximum protection from the sun and rain.
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="steam-card has-caption"
-          href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-rooms/infrared-sauna-rooms/"
+          to={menuPaths.sauna.rooms}
         >
           <img src={infraredSaunaRoom} alt="Infrared Sauna" />
           <div className="steam-title">Infrared Sauna</div>
           <div className="steam-caption">
             Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.
           </div>
-        </a>
+        </Link>
       </div>
 
       <div className="text-center mt-6">
-        <a
-          href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-rooms/"
+        <Link
+          to={menuPaths.sauna.rooms}
           style={exploreBtnStyle}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#af8564")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "#333333")}
         >
           Explore More <FontAwesomeIcon icon={faChevronRight} />
-        </a>
+        </Link>
       </div>
 
       {/* ================= INFRARED ================= */}
       <h2 className="section-title">INFRARED</h2>
 
       <div className="image-grid">
-        <a href="https://www.sawo.com/infrared-sauna-rooms/" className="image-card">
+        <Link to={menuPaths.infrared} className="image-card">
           <img src={infraredRooms} alt="Infrared Rooms" />
           <div className="title">Infrared Rooms</div>
-        </a>
+        </Link>
 
-        <a href="https://www.sawo.com/infrared-panels/" className="image-card">
+        <Link to={menuPaths.infrared} className="image-card">
           <img src={infraredPanels} alt="Infrared Panels" />
           <div className="title">Infrared Panels</div>
-        </a>
+        </Link>
 
-        <a href="https://www.sawo.com/infrared-2-0-built-in-control/" className="image-card">
+        <Link to={menuPaths.infrared} className="image-card">
           <img src={infraredControls} alt="Infrared Controls" />
           <div className="title">Infrared Controls</div>
-        </a>
+        </Link>
       </div>
 
       <div className="text-center mt-6">
-        <a
-          href="https://www.sawo.com/infrared-sauna/"
+        <Link
+          to={menuPaths.infrared}
           style={exploreBtnStyle}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#af8564")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "#333333")}
         >
           Explore More <FontAwesomeIcon icon={faChevronRight} />
-        </a>
+        </Link>
       </div>
 
       {/* ================= SAUNA CONTROL ================= */}
       <h2 className="section-title">SAUNA CONTROL</h2>
 
       <div className="image-grid">
-        <a href="https://www.sawo.com/sawo-products/finnish-sauna/saunova-series/" className="image-card">
+        <Link to={menuPaths.sauna.controls} className="image-card">
           <img src={saunovaSeries} alt="Saunova Series" />
           <div className="title">Saunova Series</div>
-        </a>
+        </Link>
 
-        <a href="https://www.sawo.com/sawo-products/finnish-sauna/innova-series/" className="image-card">
+        <Link to={menuPaths.sauna.controls} className="image-card">
           <img src={innovaSeries} alt="Innova Series" />
           <div className="title">Innova Series</div>
-        </a>
+        </Link>
 
-        <a href="https://www.sawo.com/sawo-products/finnish-sauna/control-accessories/" className="image-card">
+        <Link to={menuPaths.sauna.accessories} className="image-card">
           <img src={controlAccessories} alt="Control Accessories" />
           <div className="title">Control Accessories</div>
-        </a>
+        </Link>
       </div>
 
       <style jsx>{`

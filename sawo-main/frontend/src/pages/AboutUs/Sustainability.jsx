@@ -5,6 +5,11 @@ import heroBg from "../../assets/About/Sustainability-hero.webp";
 import practicesBg from "../../assets/About/Sustainability.webp";
 import menuPaths from "../../menuPaths";
 import { Link } from "react-router-dom";
+import img_sustainability_image from "../../assets/sustainability-image.webp";
+import img_SAWO_Cumulus_Wall_NS from "../../assets/SAWO_Cumulus_Wall_NS.webp";
+import img_health_well_being from "../../assets/health-well-being.webp";
+import img_Wood_Pattern_Brown_03 from "../../assets/Wood-Pattern-Brown-03.png";
+import img_waste_hierarchy_sustainability from "../../assets/waste-hierarchy-sustainability.png";
 
 const Sustainability = () => {
   useEffect(() => {
@@ -213,7 +218,7 @@ const Sustainability = () => {
         {/* Image */}
         <div className="hero-image w-full max-w-[450px] h-[450px] rounded-lg overflow-hidden shadow-lg mx-auto">
           <img
-            src="https://www.sawo.com/wp-content/uploads/2026/01/sustainability-image.webp"
+            src={img_sustainability_image}
             alt="SAWO Sustainability"
             className="w-full h-full object-cover"
           />
@@ -470,7 +475,7 @@ const Sustainability = () => {
             {/* Image */}
             <div className="energy-image-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl">
               <img
-                src="https://www.sawo.com/wp-content/uploads/2025/05/SAWO_Cumulus_Wall_NS.webp"
+                src={img_SAWO_Cumulus_Wall_NS}
                 alt="Energy Smart Sauna Design"
                 className="w-full h-full object-cover"
               />
@@ -515,7 +520,7 @@ const Sustainability = () => {
           {/* Info Banner */}
           <div className="info-banner relative flex items-center justify-center bg-gradient-to-tr from-[#8B5E3C] to-[#A67853] rounded-xl shadow-lg p-8 mt-6">
             <img
-              src="https://www.sawo.com/wp-content/uploads/2026/02/Wood-Pattern-Brown-03.png"
+              src={img_Wood_Pattern_Brown_03}
               alt="Sustainable Wood"
               className="absolute left-10 top-1/2 transform -translate-y-1/2 h-[75px] w-auto"
             />
@@ -604,7 +609,7 @@ const Sustainability = () => {
           <div className="waste-image-col">
             <div className="waste-image-wrapper">
               <img
-                src="https://www.sawo.com/wp-content/uploads/2026/01/waste-hierarchy-sustainability.png"
+                src={img_waste_hierarchy_sustainability}
                 alt="Waste Hierarchy"
               />
             </div>
@@ -820,7 +825,7 @@ const Sustainability = () => {
           <div className="unique-wellbeing-quote-image-wrapper">
             <img
               className="unique-wellbeing-quote-image"
-              src="https://www.sawo.com/wp-content/uploads/2026/01/health-well-being.webp"
+              src={img_health_well_being}
               alt="Sauna in a sustainable setting"
             />
           </div>

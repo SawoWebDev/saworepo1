@@ -1,5 +1,7 @@
 // src/pages/Section1.jsx
 import React from "react";
+import { Link } from "react-router-dom";
+import menuPaths from "../../menuPaths";
 
 // Import local images from assets/Home
 import SteamGenerator from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
@@ -15,7 +17,7 @@ const Section1 = () => {
       title: "SAUNA HEATERS",
       caption:
         "Rejuvenate in the warmth of a traditional Finnish sauna with SAWO's premium heaters.",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/",
+      href: menuPaths.sauna.heaters.parent,
       imgWebp: FinnishSauna,
       imgJpg: FinnishSauna,
       alt: "Finnish sauna heater collection by SAWO for efficient sauna heating",
@@ -24,7 +26,7 @@ const Section1 = () => {
       title: "STEAM GENERATORS",
       caption:
         "Relieve your stress and tension with healing steam powered by SAWO generators.",
-      href: "https://www.sawo.com/sawo-products/steam-sauna/steam-generators/",
+      href: menuPaths.steam.generators,
       imgWebp: SteamGenerator,
       imgJpg: SteamGenerator,
       alt: "SAWO steam generator for modern sauna and spa steam rooms",
@@ -33,7 +35,7 @@ const Section1 = () => {
       title: "SAUNA ROOMS",
       caption:
         "Relax, detox, and rejuvenate in a SAWO-designed sauna room with therapeutic heat.",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-rooms/",
+      href: menuPaths.sauna.rooms,
       imgWebp: SaunaRoom,
       imgJpg: SaunaRoom,
       alt: "Standard Finnish sauna room by SAWO with natural wood design",
@@ -42,7 +44,7 @@ const Section1 = () => {
       title: "INFRARED SAUNA",
       caption:
         "Experience deep relaxation with advanced infrared sauna technology.",
-      href: "https://www.sawo.com/sawo-products/infrared-sauna/",
+      href: menuPaths.infrared,
       imgWebp: InfraredSauna,
       imgJpg: InfraredSauna,
       alt: "Infrared sauna with cedar wood interior by SAWO",
@@ -51,7 +53,7 @@ const Section1 = () => {
       title: "SAUNA ACCESSORIES",
       caption:
         "Enhance your sauna with thoughtfully designed SAWO accessories.",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/",
+      href: menuPaths.sauna.accessories,
       imgWebp: SaunaAccessories,
       imgJpg: SaunaAccessories,
       alt: "SAWO sauna accessories collection including buckets, ladles, and thermometers",
@@ -60,7 +62,7 @@ const Section1 = () => {
       title: "SAUNA CONTROLS",
       caption:
         "Precise temperature and time control for total comfort.",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-controls/",
+      href: menuPaths.sauna.controls,
       imgWebp: SaunovaSeries,
       imgJpg: SaunovaSeries,
       alt: "SAWO sauna control system for ultimate comfort",
@@ -99,7 +101,7 @@ const Section1 = () => {
                   key={index}
                   role="listitem"
                 >
-                  <a href={item.href} className="relative block text-white">
+                  <Link to={item.href} className="relative block text-white">
                     <picture>
                       <source srcSet={item.imgWebp} type="image/webp" />
                       <img
@@ -118,7 +120,7 @@ const Section1 = () => {
                         {item.caption}
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>

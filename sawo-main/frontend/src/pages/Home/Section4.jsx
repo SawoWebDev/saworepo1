@@ -1,4 +1,6 @@
 ﻿import React, { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import menuPaths from "../../menuPaths";
 
 // Import all images locally
 import imgPailsLadles from "../../assets/Home/Section4/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE.webp";
@@ -14,55 +16,55 @@ import imgVentilation from "../../assets/Home/Section4/Ventilation.webp";
 const accessories = [
   {
     title: "PAILS and LADLES",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/pails-ladles/",
+    href: menuPaths.sauna.accessories,
     img: imgPailsLadles,
     alt: "Sauna pails and ladles",
   },
   {
     title: "THERMOMETERS and COMBINED METERS",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/thermometers-combined-meters/",
+    href: menuPaths.sauna.accessories,
     img: imgThermometers,
     alt: "Sauna thermometers and combined meters",
   },
   {
     title: "CLOCKS and SANDTIMERS",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/clocks-sandtimers/",
+    href: menuPaths.sauna.accessories,
     img: imgSandTimers,
     alt: "Sauna clocks and sand timers",
   },
   {
     title: "SAUNA LIGHTS and COVERS",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/sauna-light/",
+    href: menuPaths.sauna.accessories,
     img: imgSaunaLights,
     alt: "Sauna light covers",
   },
   {
     title: "HEADRESTS and BACKRESTS",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/headrests-backrests/",
+    href: menuPaths.sauna.accessories,
     img: imgHeadrests,
     alt: "Sauna headrests and backrests",
   },
   {
     title: "DOORS and HANDLES",
-    href: "https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/doors-handles/",
+    href: menuPaths.sauna.accessories,
     img: imgDoorsHandles,
     alt: "Sauna doors and handles",
   },
   {
     title: "BENCHES and FLOOR TILES",
-    href: "https://www.sawo.com/benches-and-floor-tiles/",
+    href: menuPaths.sauna.accessories,
     img: imgBenches,
     alt: "Sauna benches and floor tiles",
   },
   {
     title: "KIVISTONE",
-    href: "https://www.sawo.com/kivistone/",
+    href: menuPaths.sauna.accessories,
     img: imgKivistone,
     alt: "Kivistone sauna stones",
   },
   {
     title: "VENTILATION and ADD-ONS",
-    href: "https://www.sawo.com/ventilations-and-add-ons/",
+    href: menuPaths.sauna.accessories,
     img: imgVentilation,
     alt: "Sauna ventilation and add-ons",
   },
@@ -142,8 +144,8 @@ const Section4 = () => {
           ref={carouselRef}
         >
           {loopedItems.map((item, idx) => (
-            <a
-              href={item.href}
+            <Link
+              to={item.href}
               key={idx}
               className="carousel-item relative flex-shrink-0 snap-start rounded overflow-hidden group"
             >
@@ -167,7 +169,7 @@ const Section4 = () => {
               >
                 {item.title}
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -182,8 +184,8 @@ const Section4 = () => {
 
       {/* Explore More Button */}
       <div className="text-center mt-6">
-        <a
-          href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/"
+        <Link
+          to={menuPaths.sauna.accessories}
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 500,
@@ -200,7 +202,7 @@ const Section4 = () => {
           onMouseLeave={(e) => (e.currentTarget.style.color = "#333333")}
         >
           Explore More &#8250;
-        </a>
+        </Link>
       </div>
 
       <style jsx>{`

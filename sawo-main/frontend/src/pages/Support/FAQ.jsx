@@ -2,10 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import heroBg from "../../assets/Support/FAQ/hero.webp";
-import faq1 from "../../assets/Support/FAQ/faq1.webp";
-import faq2 from "../../assets/Support/FAQ/faq2.webp";
-import faq3 from "../../assets/Support/FAQ/faq3.webp";
-import faq4 from "../../assets/Support/FAQ/faq4.webp";
+import faqImage from "../../assets/Support/FAQ/faq1.webp";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -14,7 +11,6 @@ const faqSections = [
     id: "finnish-sauna",
     title: "Finnish Sauna",
     icon: "fas fa-fire",
-    image: faq1,
     items: [
       {
         question: "What is the heat source in sauna?",
@@ -37,7 +33,6 @@ const faqSections = [
     id: "building-installation",
     title: "Building & Installation",
     icon: "fas fa-hammer",
-    image: faq2,
     items: [
       {
         question: "Where is the ideal sauna location?",
@@ -70,7 +65,6 @@ const faqSections = [
     id: "sauna-heater",
     title: "Sauna Heater",
     icon: "fas fa-bolt",
-    image: faq3,
     items: [
       {
         question: "Can I get electric shock from heater?",
@@ -83,7 +77,6 @@ const faqSections = [
     id: "using-sauna",
     title: "Using Sauna",
     icon: "fas fa-spa",
-    image: faq4,
     items: [
       {
         question: "How long is the heating time?",
@@ -291,18 +284,13 @@ function AccordionItem({ question, answer, isOpen, onToggle, index }) {
 export default function FAQ() {
   const [activeTab, setActiveTab] = useState(0);
   const [openIndex, setOpenIndex] = useState(null);
-  const [imgFading, setImgFading] = useState(false);
 
   const section = faqSections[activeTab];
 
   const handleTabChange = (i) => {
     if (i === activeTab) return;
-    setImgFading(true);
     setOpenIndex(null);
-    setTimeout(() => {
-      setActiveTab(i);
-      setImgFading(false);
-    }, 280);
+    setActiveTab(i);
   };
 
   const handleToggle = (i) => {
@@ -342,28 +330,11 @@ export default function FAQ() {
           box-shadow: 0 6px 18px rgba(139,94,60,0.28);
         }
 
-        .faq-gallery-thumb {
-          border-radius: 10px;
-          overflow: hidden;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          border: 2.5px solid transparent;
-          flex: 1;
-        }
-        .faq-gallery-thumb:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(139,94,60,0.2); }
-        .faq-gallery-thumb.active { border-color: #a67853; box-shadow: 0 6px 16px rgba(139,94,60,0.25); }
-        .faq-gallery-thumb img { width:100%; height:58px; object-fit:cover; display:block; }
-
         .faq-main-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
-          transition: opacity 0.28s ease, transform 0.28s ease;
-        }
-        .faq-main-img.fading {
-          opacity: 0;
-          transform: scale(0.97);
         }
 
         @media (max-width: 960px) {
@@ -523,29 +494,15 @@ export default function FAQ() {
                 borderRadius: 18,
                 overflow: "hidden",
                 boxShadow: "0 12px 36px rgba(139,94,60,0.18)",
-                marginBottom: 12,
+                marginBottom: 20,
                 aspectRatio: "4/3",
               }}
             >
               <img
-                src={section.image}
-                alt={section.title}
-                className={`faq-main-img${imgFading ? " fading" : ""}`}
+                src={faqImage}
+                alt="FAQ"
+                className="faq-main-img"
               />
-            </div>
-
-            {/* Thumbnail strip — all 4 images, click to switch */}
-            <div style={{ display:"flex", gap:8, marginBottom:14 }}>
-              {faqSections.map((s, i) => (
-                <div
-                  key={s.id}
-                  className={`faq-gallery-thumb${activeTab === i ? " active" : ""}`}
-                  onClick={() => handleTabChange(i)}
-                  title={s.title}
-                >
-                  <img src={s.image} alt={s.title} />
-                </div>
-              ))}
             </div>
 
             {/* Info card */}
@@ -558,13 +515,13 @@ export default function FAQ() {
               }}
             >
               <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:8 }}>
-                <i className={section.icon} style={{ color:"rgba(255,255,255,0.85)", fontSize:"1rem" }} />
+                <i className="fas fa-lightbulb" style={{ color:"rgba(255,255,255,0.85)", fontSize:"1rem" }} />
                 <span style={{ fontFamily:"Montserrat,sans-serif", fontWeight:700, fontSize:"0.9rem", color:"#fff", letterSpacing:"0.3px" }}>
-                  {section.title}
+                  Quick Help
                 </span>
               </div>
               <p style={{ fontFamily:"Montserrat,sans-serif", fontWeight:300, fontSize:"0.82rem", color:"rgba(255,255,255,0.82)", lineHeight:1.6, margin:0 }}>
-                Click any question to expand the answer. Use the thumbnails or tabs above to switch categories.
+                Click any question to expand the answer. Switch between categories using the tabs above.
               </p>
             </div>
           </div>

@@ -143,7 +143,7 @@ const Careers = () => {
                   fontFamily: "Montserrat, sans-serif",
                   fontSize: "1.8rem",
                   fontWeight: 700,
-                  color: "#000",
+                  color: "#af8564",
                 }}
               >
                 Open Positions
@@ -270,10 +270,10 @@ const Careers = () => {
                     fontFamily: "Montserrat, sans-serif",
                     fontSize: "1.8rem",
                     fontWeight: 700,
-                    color: "#000",
+                    color: "#af8564",
                   }}
                 >
-                  We Are <span style={{ color: "#D32F2F" }}>Hiring!</span>
+                  We Are <span style={{ color: "#af8564" }}>Hiring!</span>
                 </h2>
                 <p
                   className="mb-6"
@@ -362,7 +362,7 @@ const Careers = () => {
           .position-icon-wrapper {
             width: 40px;
             height: 40px;
-            background: #e8e8e8;
+            background: #e8ddd2;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -371,7 +371,7 @@ const Careers = () => {
           }
           .position-icon-wrapper i {
             font-size: 1.5rem;
-            color: #999;
+            color: #af8564;
           }
           .position-info h3 {
             font-family: "Montserrat", sans-serif;
@@ -473,10 +473,10 @@ const Careers = () => {
               fontFamily: "Montserrat, sans-serif",
               fontSize: "2rem",
               fontWeight: 700,
-              color: "#000",
+              color: "#af8564",
             }}
           >
-            Why Work for <span style={{ color: "#A67853" }}>SAWO</span>?
+            Why Work for <span style={{ color: "#af8564" }}>SAWO</span>?
           </h2>
 
           {/* Benefits Cards */}
@@ -544,7 +544,7 @@ const Careers = () => {
         <style jsx>{`
           .why-benefit-card {
             background: white;
-            border-left: 4px solid #a67853;
+            border-left: 4px solid #af8564;
             border-radius: 8px;
             padding: 25px;
             display: flex;
@@ -560,7 +560,7 @@ const Careers = () => {
           .why-icon-circle {
             width: 50px;
             height: 50px;
-            background: #000;
+            background: #af8564;
             border-radius: 50%;
             display: flex;
             align-items: center;

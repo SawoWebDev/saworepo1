@@ -5,6 +5,13 @@ import ButtonClear from "../../components/Buttons/ButtonClear";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import CirclesInfo from "../../components/CirclesInfo";
 import menuPaths from "../../menuPaths";
+import img_NRM_NB_BL1 from "../../assets/NRM-NB-BL1.webp";
+import img_TOWER_SERIES_2_600x360_1 from "../../assets/TOWER-SERIES-2-600x360-1.webp";
+import img_FLOOR_MOUNTED_SERIES1_1024x614_1 from "../../assets/FLOOR-MOUNTED-SERIES1-1024x614-1.webp";
+import img_WALL_MOUNTED_SERIES_v2_1 from "../../assets/WALL-MOUNTED-SERIES-v2-1.webp";
+import img_COMBI_SERIES_600x360_1 from "../../assets/COMBI-SERIES-600x360-1.webp";
+import img_DRAGON_SERIES_1_600x360_1 from "../../assets/DRAGON-SERIES-1-600x360-1.webp";
+import img_STONE_SERIES_3_600x320_new from "../../assets/STONE-SERIES-3-600x320-new-.webp";
 
 const SaunaHeaters = () => {
   return (
@@ -16,7 +23,7 @@ const SaunaHeaters = () => {
       <section
         className="sh-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
         style={{
-          backgroundImage: `url(https://www.sawo.com/wp-content/uploads/2025/02/NRM-NB-BL1.webp)`,
+          backgroundImage: `url(${img_NRM_NB_BL1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -155,7 +162,7 @@ const SaunaHeaters = () => {
             <a className="sawo-card" href={menuPaths.sauna.heaters.tower}>
               <figure>
                 <img
-                  src="https://www.sawo.com/wp-content/uploads/2025/04/TOWER-SERIES-2-600x360-1.webp"
+                  src={img_TOWER_SERIES_2_600x360_1}
                   alt="SAWO Tower Series sauna heater stone pillar design"
                   title="SAWO Tower Series Sauna Heater"
                   loading="lazy"
@@ -170,7 +177,7 @@ const SaunaHeaters = () => {
             <a className="sawo-card" href={menuPaths.sauna.heaters.floor}>
               <figure>
                 <img
-                  src="https://www.sawo.com/wp-content/uploads/2025/05/FLOOR-MOUNTED-SERIES1-1024x614-1.webp"
+                  src={img_FLOOR_MOUNTED_SERIES1_1024x614_1}
                   alt="SAWO Floor Series stand-alone sauna heater"
                   title="SAWO Floor Series Sauna Heater"
                   loading="lazy"
@@ -185,7 +192,7 @@ const SaunaHeaters = () => {
             <a className="sawo-card" href={menuPaths.sauna.heaters.wallMounted}>
               <figure>
                 <img
-                  src="https://www.sawo.com/wp-content/uploads/2025/09/WALL-MOUNTED-SERIES-v2-1.webp"
+                  src={img_WALL_MOUNTED_SERIES_v2_1}
                   alt="SAWO Wall Mounted Series compact sauna heater modern design"
                   title="SAWO Wall Mounted Sauna Heater"
                   loading="lazy"
@@ -200,7 +207,7 @@ const SaunaHeaters = () => {
             <a className="sawo-card" href={menuPaths.sauna.heaters.combi}>
               <figure>
                 <img
-                  src="https://www.sawo.com/wp-content/uploads/2025/04/COMBI-SERIES-600x360-1.webp"
+                  src={img_COMBI_SERIES_600x360_1}
                   alt="SAWO Combi Series sauna heater with integrated steamer"
                   title="SAWO Combi Series Sauna Heater"
                   loading="lazy"
@@ -215,7 +222,7 @@ const SaunaHeaters = () => {
             <a className="sawo-card" href={menuPaths.sauna.heaters.dragonfire}>
               <figure>
                 <img
-                  src="https://www.sawo.com/wp-content/uploads/2025/04/DRAGON-SERIES-1-600x360-1.webp"
+                  src={img_DRAGON_SERIES_1_600x360_1}
                   alt="SAWO Dragonfire Series sauna heater designed by Stefan Lindfors"
                   title="SAWO Dragonfire Sauna Heater"
                   loading="lazy"
@@ -230,7 +237,7 @@ const SaunaHeaters = () => {
             <a className="sawo-card" href={menuPaths.sauna.heaters.stone}>
               <figure>
                 <img
-                  src="https://www.sawo.com/wp-content/uploads/2025/06/STONE-SERIES-3-600x320-new-.webp"
+                  src={img_STONE_SERIES_3_600x320_new}
                   alt="SAWO Stone Series sauna heater stainless steel with Finnish soapstone"
                   title="SAWO Stone Series Sauna Heater"
                   loading="lazy"

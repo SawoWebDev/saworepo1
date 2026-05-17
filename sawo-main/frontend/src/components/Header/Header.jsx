@@ -13,7 +13,6 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [forceMobile, setForceMobile] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
-  const [layoutMode, setLayoutMode] = useState("l1"); // "l1", "l2", or "l3"
 
   const lastScrollY = useRef(0);
   const navRef = useRef(null);
@@ -21,157 +20,50 @@ export default function Header() {
   const subMenuTimeout = useRef(null);
   const mobileMenuRef = useRef(null);
 
-  // Layout 1: Full product range (current)
-  const navItemsL1 = [
-    { name: "Home", path: menuPaths.home },
-    {
-      name: "Sauna",
-      path: menuPaths.sauna.parent,
-      submenu: [
-        {
-          name: "Sauna Heaters",
-          path: menuPaths.sauna.heaters.parent,
-          submenu: [
-            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
-            { name: "Tower", path: menuPaths.sauna.heaters.tower },
-            { name: "Stone", path: menuPaths.sauna.heaters.stone },
-            { name: "Floor", path: menuPaths.sauna.heaters.floor },
-            { name: "Combi", path: menuPaths.sauna.heaters.combi },
-            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
-          ],
-        },
-        { name: "Sauna Controls", path: menuPaths.sauna.controls },
-        { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
-        {
-          name: "Sauna Rooms",
-          path: menuPaths.sauna.rooms,
-          submenu: [
-            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
-            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
-          ],
-        },
-      ],
-    },
-    {
-      name: "Steam",
-      path: menuPaths.steam.parent,
-      submenu: [
-        { name: "Steam Generators", path: menuPaths.steam.generators },
-        { name: "Steam Controls", path: menuPaths.steam.controls },
-        { name: "Accessories", path: menuPaths.steam.accessories },
-      ],
-    },
-    { name: "Infrared", path: menuPaths.infrared },
-    { name: "Products", path: menuPaths.products },
-    {
-      name: "Support",
-      path: menuPaths.support.parent,
-      submenu: [
-        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
-        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
-        { name: "User Manuals", path: menuPaths.support.manuals },
-        { name: "Product Catalogue", path: menuPaths.support.catalogue },
-      ],
-    },
-    { name: "Contact Us", path: menuPaths.contact },
-    {
-      name: "About Us",
-      path: menuPaths.about.parent,
-      submenu: [
-        { name: "Latest News", path: menuPaths.about.news },
-        { name: "Sustainability", path: menuPaths.about.sustainability },
-      ],
-    },
-    { name: "Careers", path: menuPaths.careers },
-  ];
-
-  // Layout 2: Clean & less cluttered
-  const navItemsL2 = [
-    { name: "Home", path: menuPaths.home },
-    {
-      name: "Sauna",
-      path: menuPaths.sauna.parent,
-      submenu: [
-        {
-          name: "Sauna Heaters",
-          path: menuPaths.sauna.heaters.parent,
-          submenu: [
-            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
-            { name: "Tower", path: menuPaths.sauna.heaters.tower },
-            { name: "Stone", path: menuPaths.sauna.heaters.stone },
-            { name: "Floor", path: menuPaths.sauna.heaters.floor },
-            { name: "Combi", path: menuPaths.sauna.heaters.combi },
-            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
-          ],
-        },
-        { name: "Sauna Controls", path: menuPaths.sauna.controls },
-        { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
-        {
-          name: "Sauna Rooms",
-          path: menuPaths.sauna.rooms,
-          submenu: [
-            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
-            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
-          ],
-        },
-      ],
-    },
-    {
-      name: "Steam",
-      path: menuPaths.steam.parent,
-      submenu: [
-        { name: "Steam Generators", path: menuPaths.steam.generators },
-        { name: "Steam Controls", path: menuPaths.steam.controls },
-        { name: "Accessories", path: menuPaths.steam.accessories },
-      ],
-    },
-    { name: "Infrared", path: menuPaths.infrared },
-    {
-      name: "Support",
-      path: menuPaths.support.parent,
-      submenu: [
-        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
-        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
-        { name: "User Manuals", path: menuPaths.support.manuals },
-        { name: "Product Catalogue", path: menuPaths.support.catalogue },
-      ],
-    },
-    { name: "About", path: menuPaths.about.parent },
-    { name: "Contact", path: menuPaths.contact },
-  ];
-
-  // Layout 3: Products-focused (all products in single dropdown)
-  const navItemsL3 = [
+  const navItems = [
     { name: "Home", path: menuPaths.home },
     {
       name: "Products",
-      submenu: [
+      path: menuPaths.products,
+      megaMenu: true,
+      megaColumns: [
         {
-          name: "Sauna Heaters",
-          path: menuPaths.sauna.heaters.parent,
-          submenu: [
-            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
-            { name: "Tower", path: menuPaths.sauna.heaters.tower },
-            { name: "Stone", path: menuPaths.sauna.heaters.stone },
-            { name: "Floor", path: menuPaths.sauna.heaters.floor },
-            { name: "Combi", path: menuPaths.sauna.heaters.combi },
-            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+          groupHeading: "Sauna",
+          columns: [
+            {
+              items: [
+                { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
+                { name: "Tower", path: menuPaths.sauna.heaters.tower },
+                { name: "Stone", path: menuPaths.sauna.heaters.stone },
+                { name: "Floor", path: menuPaths.sauna.heaters.floor },
+                { name: "Combi", path: menuPaths.sauna.heaters.combi },
+                { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+              ],
+            },
+            {
+              items: [
+                { name: "Sauna Heaters", path: menuPaths.sauna.heaters.parent, matchExact: true },
+                { name: "Sauna Controls", path: menuPaths.sauna.controls },
+                { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
+                { name: "Sauna Rooms", path: menuPaths.sauna.rooms, matchExact: true },
+                { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns, matchExact: true },
+                { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels, matchExact: true },
+              ],
+            },
           ],
         },
-        { name: "Sauna Controls", path: menuPaths.sauna.controls },
-        { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
         {
-          name: "Sauna Rooms",
-          path: menuPaths.sauna.rooms,
-          submenu: [
-            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
-            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
+          heading: "Steam",
+          items: [
+            { name: "Steam Generators", path: menuPaths.steam.generators },
+            { name: "Steam Controls", path: menuPaths.steam.controls },
+            { name: "Steam Accessories", path: menuPaths.steam.accessories },
           ],
         },
-        { name: "Steam Generators", path: menuPaths.steam.generators },
-        { name: "Steam Controls", path: menuPaths.steam.controls },
-        { name: "Steam Accessories", path: menuPaths.steam.accessories },
-        { name: "Infrared", path: menuPaths.infrared },
+        {
+          heading: "Infrared",
+          items: [{ name: "Infrared", path: menuPaths.infrared }],
+        },
       ],
     },
     {
@@ -190,16 +82,38 @@ export default function Header() {
       submenu: [
         { name: "Latest News", path: menuPaths.about.news },
         { name: "Sustainability", path: menuPaths.about.sustainability },
+        { name: "Careers", path: menuPaths.careers },
       ],
     },
     { name: "Contact Us", path: menuPaths.contact },
-    { name: "Careers", path: menuPaths.careers },
   ];
-
-  const navItems = layoutMode === "l1" ? navItemsL1 : layoutMode === "l2" ? navItemsL2 : navItemsL3;
 
   // --- Active helpers ---
   const isActive = (item) => {
+    if (item.megaMenu && item.megaColumns) {
+      return item.megaColumns.some((col) => {
+        // Handle grouped columns (Sauna with 2 sub-columns)
+        if (col.columns) {
+          return col.columns.some((subCol) => {
+            const allItems = subCol.items || [];
+            return allItems.some(
+              (i) =>
+                (i.path && (i.matchExact ? location.pathname === i.path : location.pathname.startsWith(i.path))) ||
+                (i.children && i.children.some((c) => c.path && location.pathname.startsWith(c.path)))
+            );
+          });
+        }
+        // Handle regular columns (Steam, Infrared)
+        const allItems = col.sections
+          ? col.sections.flatMap((s) => s.items)
+          : col.items || [];
+        return allItems.some(
+          (i) =>
+            (i.path && location.pathname.startsWith(i.path)) ||
+            (i.children && i.children.some((c) => c.path && location.pathname.startsWith(c.path)))
+        );
+      });
+    }
     if (item.path && location.pathname === item.path) return true;
     if (item.submenu) {
       return item.submenu.some((sub) => {
@@ -322,14 +236,22 @@ export default function Header() {
                   onMouseLeave={handleMouseLeaveMenu}
                 >
                   {/* Top-level link or button */}
-                  {item.submenu ? (
+                  {item.megaMenu ? (
+                    <Link
+                      to={item.path}
+                      className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                        isActive(item) ? "active" : ""
+                      }`}
+                    >
+                      <span className="menu-text">{item.name}</span>{" "}
+                      <i className="fa-solid fa-chevron-down text-[10px]"></i>
+                    </Link>
+                  ) : item.submenu ? (
                     item.path ? (
                       <Link
                         to={item.path}
-                        className={`flex items-center gap-1 transition-colors ${
-                          isActive(item)
-                            ? "text-[#af8564] font-semibold"
-                            : "hover:text-[#af8564]"
+                        className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                          isActive(item) ? "active" : ""
                         }`}
                       >
                         {item.name}{" "}
@@ -337,10 +259,8 @@ export default function Header() {
                       </Link>
                     ) : (
                       <button
-                        className={`flex items-center gap-1 transition-colors ${
-                          isActive(item)
-                            ? "text-[#af8564] font-semibold"
-                            : "hover:text-[#af8564]"
+                        className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                          isActive(item) ? "active" : ""
                         }`}
                       >
                         {item.name}{" "}
@@ -350,19 +270,92 @@ export default function Header() {
                   ) : (
                     <Link
                       to={item.path}
-                      className={`flex items-center gap-1 transition-colors ${
-                        isActive(item)
-                          ? "text-[#af8564] font-semibold"
-                          : "hover:text-[#af8564]"
+                      className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                        isActive(item) ? "active" : ""
                       }`}
                     >
                       {item.name}
                     </Link>
                   )}
 
-                  {/* Submenu — Level 1 */}
+                  {/* Mega Menu — Products */}
+                  {item.megaMenu && hoveredMenu === item.name && (
+                    <div
+                      className="absolute top-full mt-2 bg-white rounded-xl shadow-2xl z-50 py-4 px-4 border border-gray-100 flex gap-0"
+                      style={{ minWidth: "min(90vw, 720px)", left: "50%", transform: "translateX(-50%)" }}
+                    >
+                      {item.megaColumns.map((col, ci) => (
+                        col.groupHeading ? (
+                          <div key={ci} className={`flex-1 ${ci < item.megaColumns.length - 1 ? "border-r border-gray-100" : ""}`}>
+                            <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-3 pr-4">
+                              {col.groupHeading}
+                            </p>
+                            <div className="flex gap-0">
+                              <div className="flex-1 px-4">
+                                {col.columns[0].items.map((it) => (
+                                  <Link
+                                    key={it.path}
+                                    to={it.path}
+                                    onClick={() => setHoveredMenu(null)}
+                                    className={`menu-item block px-2 py-1.5 text-[13px] rounded-lg transition-colors text-[rgb(51,51,51)] ${
+                                      (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
+                                        ? "active"
+                                        : ""
+                                    }`}
+                                  >
+                                    {it.name}
+                                  </Link>
+                                ))}
+                              </div>
+                              <div className="flex-1 px-4">
+                                {col.columns[1].items.map((it) => (
+                                  <Link
+                                    key={it.path}
+                                    to={it.path}
+                                    onClick={() => setHoveredMenu(null)}
+                                    className={`menu-item block px-2 py-1.5 text-[13px] rounded-lg transition-colors text-[rgb(51,51,51)] ${
+                                      (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
+                                        ? "active"
+                                        : ""
+                                    }`}
+                                  >
+                                    {it.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div
+                            key={ci}
+                            className={`flex-1 px-4 ${ci < item.megaColumns.length - 1 ? "border-r border-gray-100" : ""}`}
+                          >
+                            <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-3">
+                              {col.heading}
+                            </p>
+                            {col.items.map((it) => (
+                              <Link
+                                key={it.path}
+                                to={it.path}
+                                onClick={() => setHoveredMenu(null)}
+                                className={`menu-item block px-2 py-1.5 text-[13px] rounded-lg transition-colors text-[rgb(51,51,51)] ${
+                                  location.pathname.startsWith(it.path)
+                                    ? "active"
+                                    : ""
+                                }`}
+                              >
+                                {it.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Submenu — Level 1 (Support, About Us) */}
                   {item.submenu && hoveredMenu === item.name && (
-                    <div className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-xl min-w-[220px] z-50 py-3 px-2 border border-gray-100">
+                    <div className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-2xl min-w-[220px] z-50 py-3 px-2 border border-gray-100">
                       {item.submenu.map((sub) =>
                         sub.submenu ? (
                           <div
@@ -376,39 +369,39 @@ export default function Header() {
                             {sub.path ? (
                               <Link
                                 to={sub.path}
-                                className={`w-full text-left px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg flex justify-between items-center ${
+                                className={`menu-item w-full text-left px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg flex justify-between items-center text-[rgb(51,51,51)] ${
                                   isSubActive(sub)
-                                    ? "bg-[#af8564] text-white font-semibold"
-                                    : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
+                                    ? "active"
+                                    : ""
                                 }`}
                               >
-                                {sub.name}{" "}
+                                <span className="menu-text">{sub.name}</span>{" "}
                                 <i className="fa-solid fa-chevron-right text-[9px]"></i>
                               </Link>
                             ) : (
                               <button
-                                className={`w-full text-left px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg flex justify-between items-center ${
+                                className={`menu-item w-full text-left px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg flex justify-between items-center text-[rgb(51,51,51)] ${
                                   isSubActive(sub)
-                                    ? "bg-[#af8564] text-white font-semibold"
-                                    : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
+                                    ? "active"
+                                    : ""
                                 }`}
                               >
-                                {sub.name}{" "}
+                                <span className="menu-text">{sub.name}</span>{" "}
                                 <i className="fa-solid fa-chevron-right text-[9px]"></i>
                               </button>
                             )}
 
                             {/* Submenu — Level 2 */}
                             {hoveredSubmenu === sub.name && (
-                              <div className="absolute top-0 left-full ml-1 bg-white rounded-xl shadow-xl min-w-[180px] z-50 py-3 px-2 border border-gray-100">
+                              <div className="absolute top-0 left-full ml-1 bg-white rounded-xl shadow-2xl min-w-[180px] z-50 py-3 px-2 border border-gray-100">
                                 {sub.submenu.map((item2) => (
                                   <Link
                                     key={item2.name || item2}
                                     to={item2.path || "#"}
-                                    className={`block px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg ${
+                                    className={`menu-item block px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg text-[rgb(51,51,51)] ${
                                       isSub2Active(item2)
-                                        ? "bg-[#af8564] text-white font-semibold"
-                                        : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
+                                        ? "active"
+                                        : ""
                                     }`}
                                   >
                                     {item2.name || item2}
@@ -421,10 +414,10 @@ export default function Header() {
                           <Link
                             key={sub.name || sub}
                             to={sub.path || "#"}
-                            className={`block px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg ${
+                            className={`menu-item block px-4 py-2.5 text-[13px] font-normal transition-colors rounded-lg text-[rgb(51,51,51)] ${
                               isSubActive(sub)
-                                ? "bg-[#af8564] text-white font-semibold"
-                                : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
+                                ? "active"
+                                : ""
                             }`}
                           >
                             {sub.name || sub}
@@ -476,42 +469,6 @@ export default function Header() {
                 </button>
               )}
 
-              {/* Layout Toggle - Temporary */}
-              <div className="flex items-center gap-2 border-l border-gray-300 pl-3">
-                <button
-                  onClick={() => setLayoutMode("l1")}
-                  className={`px-2 py-1 text-xs font-semibold rounded transition-colors ${
-                    layoutMode === "l1"
-                      ? "bg-[#af8564] text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
-                  title="Layout 1: Full Product Range"
-                >
-                  L1
-                </button>
-                <button
-                  onClick={() => setLayoutMode("l2")}
-                  className={`px-2 py-1 text-xs font-semibold rounded transition-colors ${
-                    layoutMode === "l2"
-                      ? "bg-[#af8564] text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
-                  title="Layout 2: Clean & Less Cluttered"
-                >
-                  L2
-                </button>
-                <button
-                  onClick={() => setLayoutMode("l3")}
-                  className={`px-2 py-1 text-xs font-semibold rounded transition-colors ${
-                    layoutMode === "l3"
-                      ? "bg-[#af8564] text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
-                  title="Layout 3: Product-Focused"
-                >
-                  L3
-                </button>
-              </div>
             </div>
 
             {/* CSS Animations */}
@@ -536,6 +493,44 @@ export default function Header() {
                   transform: translateX(0);
                 }
               }
+              @keyframes growLine {
+                from {
+                  width: 0;
+                }
+                to {
+                  width: 100%;
+                }
+              }
+              .menu-item {
+                position: relative;
+              }
+              .menu-item::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 3px;
+                background-color: #af8564;
+              }
+              .menu-item:hover::after,
+              .menu-item.active::after {
+                animation: growLine 0.3s ease forwards;
+              }
+              .menu-item.active,
+              .menu-item:hover {
+                color: #af8564;
+              }
+              .menu-item.active {
+                font-weight: 600;
+              }
+              .menu-text {
+                display: inline;
+              }
+              .menu-item.active .menu-text,
+              .menu-item:hover .menu-text {
+                color: #af8564;
+              }
             `}</style>
           </div>
           )}
@@ -554,13 +549,29 @@ export default function Header() {
           <div ref={mobileMenuRef} className="md:hidden bg-white shadow-lg">
             {navItems.map((item) => (
               <div key={item.name} className="border-b border-gray-200">
-                {/* Top-level toggle (FIXED) */}
-                {item.submenu ? (
+                {/* Products row — split label + chevron */}
+                {item.megaMenu ? (
+                  <div className={`w-full flex items-center justify-between ${isActive(item) ? "bg-[#af8564] text-white font-semibold" : "text-gray-800"}`}>
+                    <Link
+                      to={item.path}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex-1 px-4 py-3 text-[15px] font-normal"
+                    >
+                      {item.name}
+                    </Link>
+                    <button
+                      className="px-4 py-3"
+                      onClick={() => setHoveredMenu(hoveredMenu === item.name ? null : item.name)}
+                    >
+                      <i className="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                  </div>
+                ) : item.submenu ? (
                   <button
-                    className={`w-full px-4 py-3 flex justify-between items-center text-[15px] font-normal transition-colors ${
+                    className={`menu-item w-full px-4 py-3 flex justify-between items-center text-[15px] font-normal transition-colors text-gray-800 ${
                       isActive(item)
-                        ? "bg-[#af8564] text-white font-semibold"
-                        : "text-gray-800 hover:bg-[#af8564] hover:text-white"
+                        ? "active"
+                        : ""
                     }`}
                     onClick={() =>
                       setHoveredMenu(
@@ -568,16 +579,16 @@ export default function Header() {
                       )
                     }
                   >
-                    {item.name}{" "}
+                    <span className="menu-text">{item.name}</span>{" "}
                     <i className="fa-solid fa-chevron-down text-[10px]"></i>
                   </button>
                 ) : (
                   <Link
                     to={item.path}
-                    className={`w-full px-4 py-3 flex items-center text-[15px] font-normal transition-colors ${
+                    className={`menu-item w-full px-4 py-3 flex items-center text-[15px] font-normal transition-colors text-gray-800 ${
                       isActive(item)
-                        ? "bg-[#af8564] text-white font-semibold"
-                        : "text-gray-800 hover:bg-[#af8564] hover:text-white"
+                        ? "active"
+                        : ""
                     }`}
                     onClick={() => setMobileOpen(false)}
                   >
@@ -585,7 +596,76 @@ export default function Header() {
                   </Link>
                 )}
 
-                {/* Mobile Submenu — Level 1 */}
+                {/* Mobile Mega Menu accordion — Products */}
+                {item.megaMenu && hoveredMenu === item.name && (
+                  <div className="bg-gray-50">
+                    {item.megaColumns.map((col, ci) => (
+                      col.groupHeading ? (
+                        <div key={ci} className="border-t border-gray-200 px-4 py-2">
+                          <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-3">
+                            {col.groupHeading}
+                          </p>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              {col.columns[0].items.map((it) => (
+                                <Link
+                                  key={it.path}
+                                  to={it.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={`menu-item block px-3 py-2 text-[13px] transition-colors text-gray-800 ${
+                                    (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
+                                      ? "active"
+                                      : ""
+                                  }`}
+                                >
+                                  {it.name}
+                                </Link>
+                              ))}
+                            </div>
+                            <div>
+                              {col.columns[1].items.map((it) => (
+                                <Link
+                                  key={it.path}
+                                  to={it.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={`menu-item block px-3 py-2 text-[13px] transition-colors text-gray-800 ${
+                                    (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
+                                      ? "active"
+                                      : ""
+                                  }`}
+                                >
+                                  {it.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div key={ci} className="border-t border-gray-200 px-4 py-2">
+                          <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-2">
+                            {col.heading}
+                          </p>
+                          {col.items.map((it) => (
+                            <Link
+                              key={it.path}
+                              to={it.path}
+                              onClick={() => setMobileOpen(false)}
+                              className={`menu-item block px-6 py-2 text-[13px] transition-colors text-gray-800 ${
+                                location.pathname.startsWith(it.path)
+                                  ? "active"
+                                  : ""
+                              }`}
+                            >
+                              {it.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )
+                    ))}
+                  </div>
+                )}
+
+                {/* Mobile Submenu — Level 1 (Support, About Us) */}
                 {item.submenu && hoveredMenu === item.name && (
                   <div className="bg-gray-50">
                     {item.submenu.map((sub) =>
@@ -596,10 +676,10 @@ export default function Header() {
                         >
                           {/* Sub toggle (FIXED) */}
                           <button
-                            className={`w-full px-6 py-2 flex justify-between items-center text-[13px] font-normal transition-colors ${
+                            className={`menu-item w-full px-6 py-2 flex justify-between items-center text-[13px] font-normal transition-colors text-gray-800 ${
                               isSubActive(sub)
-                                ? "bg-[#af8564] text-white font-semibold"
-                                : "text-gray-800 hover:bg-[#af8564] hover:text-white"
+                                ? "active"
+                                : ""
                             }`}
                             onClick={() =>
                               setHoveredSubmenu(
@@ -618,10 +698,10 @@ export default function Header() {
                                 <Link
                                   key={item2.name || item2}
                                   to={item2.path || "#"}
-                                  className={`block px-8 py-2 text-[12px] transition-colors ${
+                                  className={`menu-item block px-8 py-2 text-[12px] transition-colors text-gray-800 ${
                                     isSub2Active(item2)
-                                      ? "bg-[#af8564] text-white font-semibold"
-                                      : "text-gray-800 hover:bg-[#af8564] hover:text-white"
+                                      ? "active"
+                                      : ""
                                   }`}
                                   onClick={() => setMobileOpen(false)}
                                 >
@@ -635,10 +715,10 @@ export default function Header() {
                         <Link
                           key={sub.name || sub}
                           to={sub.path || "#"}
-                          className={`block px-6 py-2 text-[13px] transition-colors ${
+                          className={`menu-item block px-6 py-2 text-[13px] transition-colors text-gray-800 ${
                             isSubActive(sub)
-                              ? "bg-[#af8564] text-white font-semibold"
-                              : "text-gray-800 hover:bg-[#af8564] hover:text-white"
+                              ? "active"
+                              : ""
                           }`}
                           onClick={() => setMobileOpen(false)}
                         >

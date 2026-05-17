@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
+import menuPaths from "../../menuPaths";
 
 export default function Footer() {
   return (
@@ -14,10 +16,10 @@ export default function Footer() {
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
             <h3 className="font-bold text-lg mb-2">FINNISH SAUNA</h3>
             <ul className="space-y-1 text-sm">
-              <li><a href="#" className="hover:text-gray-300">Sauna Heaters</a></li>
-              <li><a href="#" className="hover:text-gray-300">Sauna Controls</a></li>
-              <li><a href="#" className="hover:text-gray-300">Sauna Accessories</a></li>
-              <li><a href="#" className="hover:text-gray-300">Sauna Rooms</a></li>
+              <li><Link to={menuPaths.sauna.heaters.parent} className="hover:text-gray-300">Sauna Heaters</Link></li>
+              <li><Link to={menuPaths.sauna.controls} className="hover:text-gray-300">Sauna Controls</Link></li>
+              <li><Link to={menuPaths.sauna.accessories} className="hover:text-gray-300">Sauna Accessories</Link></li>
+              <li><Link to={menuPaths.sauna.rooms} className="hover:text-gray-300">Sauna Rooms</Link></li>
             </ul>
           </div>
 
@@ -25,9 +27,9 @@ export default function Footer() {
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
             <h3 className="font-bold text-lg mb-2">STEAM ROOM</h3>
             <ul className="space-y-1 text-sm">
-              <li><a href="#" className="hover:text-gray-300">Steam Generators</a></li>
-              <li><a href="#" className="hover:text-gray-300">Steam Controls</a></li>
-              <li><a href="#" className="hover:text-gray-300">Steam Accessories</a></li>
+              <li><Link to={menuPaths.steam.generators} className="hover:text-gray-300">Steam Generators</Link></li>
+              <li><Link to={menuPaths.steam.controls} className="hover:text-gray-300">Steam Controls</Link></li>
+              <li><Link to={menuPaths.steam.accessories} className="hover:text-gray-300">Steam Accessories</Link></li>
             </ul>
           </div>
 
@@ -35,7 +37,7 @@ export default function Footer() {
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
             <h3 className="font-bold text-lg mb-2">INFRARED SAUNA</h3>
             <ul className="space-y-1 text-sm">
-              <li><a href="#" className="hover:text-gray-300">Infrared Sauna Rooms</a></li>
+              <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Sauna Rooms</Link></li>
               <li><a href="#" className="hover:text-gray-300">Infrared Backrest</a></li>
               <li><a href="#" className="hover:text-gray-300">Infrared Panels</a></li>
             </ul>
@@ -62,10 +64,10 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-2">SUPPORT</h3>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 text-sm leading-[.9]">
-              <a href="#" className="hover:text-gray-300">Frequently Asked Questions</a>
-              <a href="#" className="hover:text-gray-300">About Us</a>
-              <a href="#" className="hover:text-gray-300">Contact Us</a>
-              <a href="#" className="hover:text-gray-300">Careers</a>
+              <Link to={menuPaths.support.faq} className="hover:text-gray-300">Frequently Asked Questions</Link>
+              <Link to={menuPaths.about.parent} className="hover:text-gray-300">About Us</Link>
+              <Link to={menuPaths.contact} className="hover:text-gray-300">Contact Us</Link>
+              <Link to={menuPaths.careers} className="hover:text-gray-300">Careers</Link>
               <a href="#" className="hover:text-gray-300">Privacy Policy</a>
               <a href="#" className="hover:text-gray-300">Sitemap</a>
             </div>
@@ -74,8 +76,8 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-2">DOWNLOAD</h3>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 text-sm">
-              <a href="#" className="hover:text-gray-300">Product Catalogue</a>
-              <a href="#" className="hover:text-gray-300">User Manuals</a>
+              <Link to={menuPaths.support.catalogue} className="hover:text-gray-300">Product Catalogue</Link>
+              <Link to={menuPaths.support.manuals} className="hover:text-gray-300">User Manuals</Link>
             </div>
           </div>
         </div>
@@ -103,6 +105,7 @@ export default function Footer() {
                 address: ["Mactan Economic Zone 2, Mactan,", "Cebu 6015, Philippines"],
                 tel: "+63 32 341 2233",
                 email: "info@sawo.com",
+                mapsLink: "https://www.google.com/maps/place/SAWO+Inc./@10.2908545,123.9474748,20678m/data=!3m1!1e3!4m6!3m5!1s0x33a999f9aaaaaaab:0x638e93b7abe9d209!8m2!3d10.3065109!4d123.9662661!16s%2Fg%2F11xbg6w1q?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
               },
               {
                 icon: "fas fa-warehouse",
@@ -111,6 +114,7 @@ export default function Footer() {
                 address: ["Hampuntie 18, 36220 Kangasala,", "Finland"],
                 tel: "+358 40 038 3265",
                 email: "finland@sawo.com",
+                mapsLink: "https://www.google.com/maps/place/Sawo+Nordic+Oy/@61.4682459,23.8889861,40152m/data=!3m1!1e3!4m6!3m5!1s0x468f1ff184c90c83:0xe1681d5d0909096b!8m2!3d61.4996934!4d23.7501876!16s%2Fg%2F1q675ymsx?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
               },
               {
                 icon: "fas fa-warehouse",
@@ -119,6 +123,7 @@ export default function Footer() {
                 address: ["2302, 23rd Floor, Cable TV Tower 9", "Hoi Shing Road, Tsuen Wan, Hong Kong"],
                 tel: "+852 2417 1188",
                 email: "hongkong@sawo.com",
+                mapsLink: "https://www.google.com/maps/place/Cable+T+V+Tower,+9+Hoi+Shing+Rd,+Chai+Wan+Kok,+Hong+Kong/@22.3720256,114.1051012,1215m/data=!3m1!1e3!4m6!3m5!1s0x3403f8e56f3381c9:0xbdbb69dc3fa013e4!8m2!3d22.3727747!4d114.1073972!16s%2Fg%2F12j799c55?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
               },
               {
                 icon: "fas fa-warehouse",
@@ -127,6 +132,7 @@ export default function Footer() {
                 address: ["De Vest 24, 5555 XL Valkenswaard", "Netherlands"],
                 tel: "+358 40 016 8269",
                 email: "europehub@sawo.com",
+                mapsLink: "https://www.google.com/maps/place/SAWO+Sauna+Europe+B.V./@51.347626,5.4851098,820m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47c6d7006fe0a9bb:0x95ddf180c98d0533!8m2!3d51.347626!4d5.4876847!16s%2Fg%2F11nbg5c2pp?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
               },
             ].map((office, idx) => (
               <div
@@ -136,8 +142,15 @@ export default function Footer() {
                 <i className={`${office.icon} text-xl mt-1 sm:mt-0`}></i>
                 <div className="flex-1">
                   <h4 className="font-bold text-lg mb-1 leading-[1.3]">{office.title}</h4>
-                  <p className="font-semibold">{office.company}</p>
-                  {office.address.map((line, i) => <p key={i}>{line}</p>)}
+                  <a
+                    href={office.mapsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer block"
+                  >
+                    <p className="font-semibold">{office.company}</p>
+                    {office.address.map((line, i) => <p key={i}>{line}</p>)}
+                  </a>
                   <p>Tel: <a href={`tel:${office.tel}`} className="hover:text-gray-300">{office.tel}</a></p>
                   <p><a href={`mailto:${office.email}`} className="hover:text-gray-300">{office.email}</a></p>
                 </div>

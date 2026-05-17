@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faMapMarkerAlt, faPhone, faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import heroBg from "../../assets/About/Sustainability-hero.webp";
+import menuPaths from "../../menuPaths";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -26,95 +29,156 @@ const Contact = () => {
   return (
     <div className="relative">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
-        /* ── MAIN SECTION ── */
+        /* HERO SECTION */
+        .ct-hero {
+          min-h-60vh flex flex-col justify-center items-center text-center px-6 relative;
+          background-image: url('${heroBg}');
+          background-size: cover;
+          background-position: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .ct-hero h1 {
+          color: white;
+          font-family: Montserrat, sans-serif;
+          font-size: 38px;
+          line-height: 42px;
+          font-weight: 700;
+          margin: 0;
+        }
+        .ct-hero p {
+          color: white;
+          font-family: Montserrat, sans-serif;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 28px;
+          margin-top: 12px;
+          margin-bottom: 0;
+        }
+
+        /* MAIN SECTION */
         .ct-section {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 60px 20px;
+          padding: 50px 30px;
         }
-        .ct-section:first-of-type {
-          padding-top: 130px;
-        }
-        .ct-section--dark {
-        }
+
+        /* INTRO */
         .ct-intro {
           text-align: center;
-          margin-bottom: 60px;
+          margin-bottom: 50px;
         }
         .ct-intro-title {
           font-family: 'Montserrat', sans-serif;
-          font-size: 2.8rem;
+          font-size: 2.2rem;
           font-weight: 700;
-          color: #2c1f13;
-          margin-bottom: 16px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 12px;
+          letter-spacing: 0.5px;
         }
         .ct-intro-subtitle {
           font-family: 'Montserrat', sans-serif;
           font-size: 1rem;
-          color: #666;
-          line-height: 1.7;
-          max-width: 600px;
+          color: #000;
+          line-height: 1.6;
+          max-width: 700px;
           margin: 0 auto;
+          font-weight: 300;
         }
 
-        /* ── CONTACT GRID ── */
+        /* CONTACT GRID */
         .ct-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          grid-template-columns: 1fr;
+          gap: 50px;
           align-items: start;
         }
 
-        /* ── SECTION TITLE ── */
+        /* CONTACT CARDS GRID */
+        .ct-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+          margin-bottom: 50px;
+        }
+
+        /* OFFICES GRID */
+        .ct-offices-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+
+        /* SECTION TITLE */
         .ct-section-title {
           font-family: 'Montserrat', sans-serif;
-          font-size: 2.2rem;
+          font-size: 1.6rem;
           font-weight: 700;
-          color: #2c1f13;
-          margin-bottom: 40px;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 30px;
           line-height: 1.3;
         }
 
-        /* ── CONTACT CARDS ── */
+        /* CONTACT CARDS */
         .ct-contact-card {
-          padding: 28px;
-          background: #fff;
-          border-radius: 8px;
-          margin-bottom: 24px;
-          border: 1px solid #e0d5c7;
+          padding: 25px 22px;
+          background: #ffffff;
+          border-radius: 14px;
+          margin-bottom: 20px;
+          border-left: 4px solid #a67853;
+          box-shadow: 0 8px 20px rgba(139, 94, 60, 0.1);
           transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
         }
         .ct-contact-card:hover {
-          border-color: #a67853;
-          box-shadow: 0 8px 24px rgba(139, 94, 60, 0.1);
-          transform: translateY(-2px);
+          transform: translateY(-5px);
+          box-shadow: 0 15px 40px rgba(139, 94, 60, 0.15);
         }
         .ct-contact-card-icon {
           font-size: 1.4rem;
-          color: #a67853;
-          margin-right: 12px;
-          margin-bottom: 12px;
-          display: inline-block;
+          background: linear-gradient(135deg, #a67853 0%, #c4a574 100%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          margin-bottom: 14px;
+          box-shadow: 0 4px 12px rgba(166, 120, 83, 0.25);
+          transition: all 0.3s ease;
+        }
+        .ct-contact-card:hover .ct-contact-card-icon {
+          transform: scale(1.08);
+          box-shadow: 0 6px 20px rgba(166, 120, 83, 0.35);
         }
         .ct-contact-card h3 {
           font-family: 'Montserrat', sans-serif;
-          font-size: 1.1rem;
+          font-size: 1.15rem;
           font-weight: 700;
-          color: #2c1f13;
-          margin-bottom: 12px;
-          display: flex;
-          align-items: center;
+          background: linear-gradient(135deg, #a67853 0%, #8b5e3c 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 10px;
+          margin-top: 0;
+          letter-spacing: 0.2px;
         }
         .ct-contact-card p {
           font-family: 'Montserrat', sans-serif;
           font-size: 0.9rem;
-          color: #666;
-          margin-bottom: 8px;
-          line-height: 1.6;
+          color: #000;
+          margin-bottom: 6px;
+          margin-top: 0;
+          line-height: 1.5;
+          font-weight: 300;
         }
         .ct-contact-card a {
           font-family: 'Montserrat', sans-serif;
@@ -122,90 +186,93 @@ const Contact = () => {
           text-decoration: none;
           font-weight: 600;
           font-size: 0.9rem;
-          transition: color 0.3s;
           display: inline-block;
+          transition: color 0.3s;
         }
         .ct-contact-card a:hover {
           color: #8b5e3c;
         }
-        /* ── SOCIAL MEDIA SECTION ── */
+
+        /* SOCIAL SECTION */
         .ct-social-section {
-          margin-top: 32px;
-          padding-top: 24px;
+          margin-top: 25px;
+          padding-top: 25px;
           border-top: 1px solid #e0d5c7;
-        }
-        .ct-social-title {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: #a67853;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          margin-bottom: 16px;
         }
         .ct-social-links {
           display: flex;
-          gap: 16px;
+          gap: 12px;
           flex-wrap: wrap;
         }
         .ct-social-link {
-          width: 40px;
-          height: 40px;
+          width: 45px;
+          height: 45px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: #a67853;
+          color: #fff;
           text-decoration: none;
           transition: all 0.3s ease;
-          border-radius: 4px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #a67853 0%, #8b5e3c 100%);
+          box-shadow: 0 4px 15px rgba(139, 94, 60, 0.2);
         }
         .ct-social-link:hover {
-          color: #fff;
-          background: #a67853;
-          transform: translateY(-2px);
+          transform: translateY(-4px) scale(1.1);
+          box-shadow: 0 8px 25px rgba(139, 94, 60, 0.3);
         }
         .ct-social-link i {
           font-size: 1.1rem;
         }
 
-        /* ── CONTACT FORM ── */
+        /* CONTACT FORM */
         .ct-form {
-          padding: 40px;
-          background: #fff;
-          border-radius: 8px;
-          border: 1px solid #e0d5c7;
+          padding: 35px 30px;
+          background: #ffffff;
+          border-radius: 14px;
+          box-shadow: 0 8px 20px rgba(139, 94, 60, 0.1);
+          border-left: 4px solid #a67853;
+          transition: all 0.3s ease;
+        }
+        .ct-form:hover {
+          box-shadow: 0 12px 35px rgba(139, 94, 60, 0.15);
         }
         .ct-form-title {
           font-family: 'Montserrat', sans-serif;
-          font-size: 1.4rem;
+          font-size: 1.35rem;
           font-weight: 700;
-          color: #2c1f13;
-          margin-bottom: 28px;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 25px;
+          margin-top: 0;
+          letter-spacing: 0.3px;
         }
         .ct-form-group {
-          margin-bottom: 24px;
+          margin-bottom: 18px;
         }
         .ct-form-label {
           display: block;
           font-family: 'Montserrat', sans-serif;
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           font-weight: 600;
-          color: #2c1f13;
-          margin-bottom: 8px;
+          color: #8b5e3c;
+          margin-bottom: 6px;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.3px;
         }
         .ct-form-input,
         .ct-form-textarea {
           width: 100%;
-          padding: 12px 14px;
+          padding: 11px 13px;
           border: 1.5px solid #e0d5c7;
-          border-radius: 4px;
+          border-radius: 8px;
           font-family: 'Montserrat', sans-serif;
           font-size: 0.9rem;
-          color: #2c1f13;
+          color: #000;
           transition: all 0.3s ease;
           background: #fafaf9;
+          box-sizing: border-box;
         }
         .ct-form-input::placeholder,
         .ct-form-textarea::placeholder {
@@ -220,19 +287,19 @@ const Contact = () => {
         }
         .ct-form-textarea {
           resize: vertical;
-          min-height: 140px;
+          min-height: 120px;
         }
         .ct-form-submit {
           width: 100%;
-          padding: 14px;
-          background-color: #a67853;
+          padding: 12px;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
           color: #fff;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           font-family: 'Montserrat', sans-serif;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 700;
-          letter-spacing: 1px;
+          letter-spacing: 0.4px;
           text-transform: uppercase;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -240,155 +307,219 @@ const Contact = () => {
           align-items: center;
           justify-content: center;
           gap: 8px;
+          box-shadow: 0 6px 15px rgba(139, 94, 60, 0.25);
         }
         .ct-form-submit:hover {
-          background-color: #8b5e3c;
           transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(139, 94, 60, 0.25);
+          box-shadow: 0 8px 25px rgba(139, 94, 60, 0.35);
         }
 
-        /* ── CTA BANNER ── */
+        /* CTA SECTION */
         .ct-cta-section {
-          text-align: center;
-          padding: 80px 20px;
-          max-width: 1200px;
+          max-width: 950px;
           margin: 0 auto;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          border-radius: 16px;
+          padding: 40px 35px;
+          text-align: center;
+          box-shadow: 0 12px 40px rgba(139, 94, 60, 0.25);
+          transition: all 0.3s ease;
+        }
+        .ct-cta-section:hover {
+          box-shadow: 0 16px 50px rgba(139, 94, 60, 0.35);
+          transform: translateY(-3px);
+        }
+        .ct-cta-icon {
+          width: 65px;
+          height: 65px;
+          border-radius: 50%;
+          background: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 20px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+          transition: all 0.3s ease;
+        }
+        .ct-cta-section:hover .ct-cta-icon {
+          transform: scale(1.1);
+        }
+        .ct-cta-icon i {
+          font-size: 1.7rem;
+          color: #a67853;
         }
         .ct-cta-title {
           font-family: 'Montserrat', sans-serif;
-          font-size: 2rem;
+          font-size: 1.6rem;
           font-weight: 700;
-          color: #2c1f13;
-          margin-bottom: 16px;
+          color: #ffffff;
+          margin-bottom: 12px;
+          margin-top: 0;
           line-height: 1.3;
         }
         .ct-cta-desc {
           font-family: 'Montserrat', sans-serif;
-          font-size: 1rem;
-          color: #666;
-          margin-bottom: 32px;
+          font-size: 0.95rem;
+          color: #ffffff;
+          margin-bottom: 22px;
           max-width: 600px;
           margin-left: auto;
           margin-right: auto;
-          line-height: 1.7;
+          line-height: 1.6;
+          font-weight: 300;
         }
         .ct-cta-btn {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          justify-content: center;
+          gap: 6px;
           font-family: 'Montserrat', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 700;
-          letter-spacing: 1px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 0.3px;
           text-transform: uppercase;
-          padding: 12px 28px;
-          background-color: #a67853;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
+          padding: 10px 26px;
+          background: #ffffff;
+          color: #a67853;
+          border: 2px solid transparent;
+          border-radius: 6px;
           cursor: pointer;
           text-decoration: none;
           transition: all 0.3s ease;
+          line-height: 1;
+          box-sizing: border-box;
         }
         .ct-cta-btn:hover {
-          background-color: transparent;
-          color: #a67853;
-          border: 2px solid #a67853;
+          background: transparent;
+          color: #ffffff;
+          border: 2px solid #ffffff;
         }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 1024px) {
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+          .ct-hero {
+            min-height: 50vh;
+            padding: 40px 20px;
+          }
+          .ct-hero h1 {
+            font-size: 24px;
+            line-height: 28px;
+          }
+          .ct-hero p {
+            font-size: 14px;
+            line-height: 22px;
+            margin-top: 8px;
+          }
+          .ct-section {
+            padding: 40px 20px;
+          }
+          .ct-intro-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+          }
+          .ct-intro-subtitle {
+            font-size: 0.95rem;
+          }
           .ct-grid {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 35px;
           }
-          .ct-hero-title {
-            font-size: 2.5rem;
+          .ct-cards-grid {
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
           }
-        }
-        @media (max-width: 768px) {
-          .ct-hero-title {
-            font-size: 2rem;
-          }
-          .ct-hero-subtitle {
-            font-size: 1rem;
+          .ct-offices-grid {
+            grid-template-columns: 1fr;
+            gap: 25px;
           }
           .ct-section-title {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+          }
+          .ct-contact-card {
+            padding: 18px 16px;
+            margin-bottom: 15px;
+            border-left-width: 3px;
+          }
+          .ct-contact-card h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+          }
+          .ct-contact-card p {
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+          }
+          .ct-contact-card-icon {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
           }
           .ct-form {
-            padding: 28px;
+            padding: 25px 20px;
+          }
+          .ct-form-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+          }
+          .ct-form-group {
+            margin-bottom: 14px;
+          }
+          .ct-form-input,
+          .ct-form-textarea {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+          }
+          .ct-form-textarea {
+            min-height: 100px;
+          }
+          .ct-form-submit {
+            padding: 10px;
+            font-size: 0.8rem;
+          }
+          .ct-cta-section {
+            padding: 28px 22px;
+            margin: 0 15px;
+            border-radius: 12px;
+          }
+          .ct-cta-icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 15px;
+            font-size: 1.4rem;
           }
           .ct-cta-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+          }
+          .ct-cta-desc {
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+          }
+          .ct-cta-btn {
+            font-size: 0.75rem;
+            padding: 8px 20px;
           }
         }
       `}</style>
 
-      {/* ── CONTACT INFO + FORM ─────────────────────────────────────────── */}
-      <section className="ct-section ct-section--dark">
-        <div className="ct-intro">
-          <h1 className="ct-intro-title">Get In Touch</h1>
-          <p className="ct-intro-subtitle">We'd love to hear from you. Reach out with any questions or inquiries about our sauna solutions.</p>
+      {/* HERO SECTION */}
+      <section className="ct-hero">
+        <div>
+          <h1>Get In Touch</h1>
+          <p>We're here to help. Connect with our team.</p>
         </div>
+      </section>
+
+      {/* CONTACT INFO + FORM */}
+      <section className="ct-section">
+        <div className="ct-intro">
+          <h2 className="ct-intro-title">We'd Love to Hear From You</h2>
+          <p className="ct-intro-subtitle">Have questions about our saunas or sustainability initiatives? Reach out and our team will be happy to assist you.</p>
+        </div>
+        {/* Contact Form Section */}
         <div className="ct-grid">
-          {/* Left: Contact Info */}
-          <div>
-            <h2 className="ct-section-title">Contact Information</h2>
-
-            <div className="ct-contact-card">
-              <h3>
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="ct-contact-card-icon" />
-                Address
-              </h3>
-              <p>SAWO Corporation</p>
-              <p>Bringing Finnish tradition to the world</p>
-              <a href="https://www.sawo.com" target="_blank" rel="noopener noreferrer">
-                Visit Website <FontAwesomeIcon icon={faChevronRight} style={{ fontSize: "0.7rem", marginLeft: "4px" }} />
-              </a>
-            </div>
-
-            <div className="ct-contact-card">
-              <h3>
-                <FontAwesomeIcon icon={faEnvelope} className="ct-contact-card-icon" />
-                Email
-              </h3>
-              <p>For product inquiries, technical support, and general questions</p>
-              <a href="mailto:info@sawo.com">info@sawo.com</a>
-            </div>
-
-            <div className="ct-contact-card">
-              <h3>
-                <FontAwesomeIcon icon={faPhone} className="ct-contact-card-icon" />
-                Phone
-              </h3>
-              <p>Call us during business hours</p>
-              <a href="tel:+358123456789">+358 (0) 1 234 56789</a>
-            </div>
-
-            <div className="ct-contact-card">
-              <h3>
-                <FontAwesomeIcon icon={faGlobe} className="ct-contact-card-icon" />
-                Follow Us
-              </h3>
-              <p>Connect with SAWO on social media</p>
-              <div className="ct-social-section">
-                <div className="ct-social-links">
-                  <a href="https://www.facebook.com/sawo" target="_blank" rel="noopener noreferrer" className="ct-social-link" title="Facebook">
-                    <i className="fab fa-facebook-f" />
-                  </a>
-                  <a href="https://www.instagram.com/sawo" target="_blank" rel="noopener noreferrer" className="ct-social-link" title="Instagram">
-                    <i className="fab fa-instagram" />
-                  </a>
-                  <a href="https://www.linkedin.com/company/sawo" target="_blank" rel="noopener noreferrer" className="ct-social-link" title="LinkedIn">
-                    <i className="fab fa-linkedin-in" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Contact Form */}
           <div className="ct-form">
             <h3 className="ct-form-title">Send us a Message</h3>
             <form onSubmit={handleSubmit}>
@@ -467,18 +598,77 @@ const Contact = () => {
             </form>
           </div>
         </div>
+
+        {/* Technical Support Card */}
+        <div style={{ marginTop: "50px" }}>
+          <div className="ct-contact-card">
+            <h3>TECHNICAL SUPPORT</h3>
+            <p>For technical support and reclamations, please contact:</p>
+            <p style={{ marginBottom: "12px", marginTop: "12px" }}>
+              <strong>Whatsapp:</strong> <a href="https://wa.me/63949759450" target="_blank" rel="noopener noreferrer">+63 949 759 4450</a>
+            </p>
+            <a href="mailto:help@sawo.com">help@sawo.com</a>
+          </div>
+        </div>
+
+        {/* Offices Section */}
+        <div style={{ marginTop: "50px" }}>
+          <h2 className="ct-section-title" style={{ marginBottom: "30px", textAlign: "center" }}>OFFICES</h2>
+          <div className="ct-offices-grid">
+            {/* Office 1 */}
+            <div className="ct-contact-card">
+              <h3 style={{ fontSize: "0.95rem", marginBottom: "15px" }}>GLOBAL SALES & GENERAL INQUIRIES</h3>
+              <p style={{ marginBottom: "6px", fontWeight: "600" }}>SAWO Inc.</p>
+              <a href="https://www.google.com/maps/place/SAWO+Inc./@10.2908545,123.9474748,20678m/data=!3m1!1e3!4m6!3m5!1s0x33a999f9aaaaaaab:0x638e93b7abe9d209!8m2!3d10.3065109!4d123.9662661!16s%2Fg%2F11xbg6w1q?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: "12px", marginTop: "6px", color: "#000", fontWeight: "300" }}>Mactan Economic Zone 2, Mactan,<br/>Cebu 6015, Philippines</a>
+              <p style={{ marginBottom: "6px" }}><a href="tel:+63323412233">Tel: +63 32 341 2233</a></p>
+              <a href="mailto:info@sawo.com">info@sawo.com</a>
+            </div>
+
+            {/* Office 2 */}
+            <div className="ct-contact-card">
+              <h3 style={{ fontSize: "0.95rem", marginBottom: "15px" }}>SALES & WAREHOUSE FOR THE NORDICS</h3>
+              <p style={{ marginBottom: "6px", fontWeight: "600" }}>SAWO Nordic Oy.</p>
+              <a href="https://www.google.com/maps/place/Sawo+Nordic+Oy/@61.4682459,23.8889861,40152m/data=!3m1!1e3!4m6!3m5!1s0x468f1ff184c90c83:0xe1681d5d0909096b!8m2!3d61.4996934!4d23.7501876!16s%2Fg%2F1q675ymsx?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: "12px", marginTop: "6px", color: "#000", fontWeight: "300" }}>Hampuntie 18, 36220 Kangasala,<br/>Finland</a>
+              <p style={{ marginBottom: "6px" }}><a href="tel:+358400383265">Tel: +358 40 038 3265</a></p>
+              <a href="mailto:finland@sawo.com">finland@sawo.com</a>
+            </div>
+
+            {/* Office 3 */}
+            <div className="ct-contact-card">
+              <h3 style={{ fontSize: "0.95rem", marginBottom: "15px" }}>SALES & WAREHOUSE FOR ASIA</h3>
+              <p style={{ marginBottom: "6px", fontWeight: "600" }}>F.E.M. Ltd</p>
+              <a href="https://www.google.com/maps/place/Cable+T+V+Tower,+9+Hoi+Shing+Rd,+Chai+Wan+Kok,+Hong+Kong/@22.3720256,114.1051012,1215m/data=!3m1!1e3!4m6!3m5!1s0x3403f8e56f3381c9:0xbdbb69dc3fa013e4!8m2!3d22.3727747!4d114.1073972!16s%2Fg%2F12j799c55?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: "12px", marginTop: "6px", color: "#000", fontWeight: "300" }}>2302, 23rd Floor, Cable TV Tower 9<br/>Hoi Shing Road, Tsuen Wan, Hong Kong</a>
+              <p style={{ marginBottom: "6px" }}><a href="tel:+85224171188">Tel: +852 2417 1188</a></p>
+              <a href="mailto:hongkong@sawo.com">hongkong@sawo.com</a>
+            </div>
+
+            {/* Office 4 */}
+            <div className="ct-contact-card">
+              <h3 style={{ fontSize: "0.95rem", marginBottom: "15px" }}>SALES & WAREHOUSE FOR EUROPE</h3>
+              <p style={{ marginBottom: "6px", fontWeight: "600" }}>SAWO EUROPE HUB</p>
+              <a href="https://www.google.com/maps/place/SAWO+Sauna+Europe+B.V./@51.347626,5.4851098,820m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47c6d7006fe0a9bb:0x95ddf180c98d0533!8m2!3d51.347626!4d5.4876847!16s%2Fg%2F11nbg5c2pp?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: "12px", marginTop: "6px", color: "#000", fontWeight: "300" }}>De Vest 24, 5555 XL Valkenswaard<br/>Netherlands</a>
+              <p style={{ marginBottom: "6px" }}><a href="tel:+358400168269">Tel: +358 40 016 8269</a></p>
+              <a href="mailto:europehub@sawo.com">europehub@sawo.com</a>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ── CTA SECTION ─────────────────────────────────────────────────── */}
-      <section className="ct-cta-section">
-        <h2 className="ct-cta-title">Questions About Our Products?</h2>
-        <p className="ct-cta-desc">
-          Browse our product catalogues or speak with a specialist to find the perfect sauna solution for your needs.
-        </p>
-        <a href="/sauna-products" className="ct-cta-btn">
-          Explore Products
-          <FontAwesomeIcon icon={faChevronRight} />
-        </a>
+      {/* CTA SECTION */}
+      <section style={{ padding: "25px 30px 50px 30px", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="ct-cta-section">
+          <div className="ct-cta-icon">
+            <i className="fas fa-spa"></i>
+          </div>
+          <h2 className="ct-cta-title">Explore Our Sauna Solutions</h2>
+          <p className="ct-cta-desc">
+            Discover our range of sustainable, energy-efficient saunas designed to enhance your wellness journey while respecting the environment.
+          </p>
+          <Link to={menuPaths.products} className="ct-cta-btn">
+            View Products
+            <FontAwesomeIcon icon={faChevronRight} />
+          </Link>
+        </div>
       </section>
     </div>
   );

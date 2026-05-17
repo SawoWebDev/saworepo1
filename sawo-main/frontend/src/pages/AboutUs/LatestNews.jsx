@@ -1,6 +1,8 @@
 // LatestNews.jsx
 
 import React from "react";
+import { Link } from "react-router-dom";
+import menuPaths from "../../menuPaths";
 
 // Image imports
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
@@ -455,7 +457,7 @@ const LatestNews = () => {
               </div>
 
               <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
-                <a href="/careers" className="ln-btn ln-btn-brown">Job Openings</a>
+                <Link to={menuPaths.careers} className="ln-btn ln-btn-brown">Job Openings</Link>
               </div>
             </div>
 
@@ -513,7 +515,7 @@ const LatestNews = () => {
               every chapter is a reflection of who we are and what we stand for.
             </p>
             <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
-              <a href="/sauna-products" className="ln-btn ln-btn-white">Explore Products</a>
+              <Link to={menuPaths.products} className="ln-btn ln-btn-white">Explore Products</Link>
             </div>
           </div>
         </div>

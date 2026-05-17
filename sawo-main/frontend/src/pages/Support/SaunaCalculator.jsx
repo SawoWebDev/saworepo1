@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { getVisibleProductsCached } from "../../local-storage/supabaseReader";
+import img_CUB3_Ni2_InsideSaunaRoom from "../../assets/CUB3-Ni2_InsideSaunaRoom.webp";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -648,7 +649,7 @@ export default function SaunaCalculator() {
             style={leftHeight ? { height: leftHeight } : {}}
           >
             <img
-              src="https://www.sawo.com/wp-content/uploads/2026/03/CUB3-Ni2_InsideSaunaRoom.webp"
+              src={img_CUB3_Ni2_InsideSaunaRoom}
               alt="Inside a SAWO sauna room"
             />
             <div className="sawo-hc-dim-image-overlay" />

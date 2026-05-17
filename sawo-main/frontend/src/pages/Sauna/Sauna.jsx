@@ -3,6 +3,25 @@
 import React, { useEffect } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import menuPaths from "../../menuPaths";
+import img_INNOVA_CLASSIC_1000X1000 from "../../assets/INNOVA-CLASSIC-1000X1000.webp";
+import img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled from "../../assets/SAWO_Finnish_Sauna_Room_Cedar_Cover-scaled.webp";
+import img_TOWER_SERIES_2_600x360_1 from "../../assets/TOWER-SERIES-2-600x360-1.webp";
+import img_STONE_SERIES_3_600x320_new from "../../assets/STONE-SERIES-3-600x320-new-.webp";
+import img_WALL_MOUNTED_SERIES_v2_1 from "../../assets/WALL-MOUNTED-SERIES-v2-1.webp";
+import img_FLOOR_MOUNTED_SERIES1_1024x614_1 from "../../assets/FLOOR-MOUNTED-SERIES1-1024x614-1.webp";
+import img_DRAGON_SERIES_1_600x360_1 from "../../assets/DRAGON-SERIES-1-600x360-1.webp";
+import img_COMBI_SERIES_600x360_1 from "../../assets/COMBI-SERIES-600x360-1.webp";
+import img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1 from "../../assets/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE-600x600-1.webp";
+import img_siro_bench from "../../assets/siro-bench.webp";
+import img_R_500_D_Scene2 from "../../assets/R-500-D_Scene2.webp";
+import img_Ventilation from "../../assets/Ventilation.webp";
+import img_Innova_Classic_2_0 from "../../assets/Innova-Classic-2.0.png";
+import img_saunova_2_0_user_interface from "../../assets/saunova-2.0_user-interface.png";
+import img_BoxType2_copy_new from "../../assets/BoxType2-copy-new.jpg";
+import img_sand_timer_copy_new from "../../assets/sand-timer-copy-new.jpg";
+import img_917_D_Display_new from "../../assets/917-D_Display_new-.jpg";
+import img_506_2_D from "../../assets/506-2-D.jpg";
+import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.jpg";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
@@ -84,19 +103,19 @@ const Sauna = () => {
 
   const controlCards = [
     {
-      img: "https://secret-newsite.sawo.com/wp-content/uploads/2024/11/Innova-Classic-2.0.png",
+      img: img_Innova_Classic_2_0,
       title: "Innova Series",
       href: "https://www.sawo.com/sawo-products/finnish-sauna/innova-series/",
       desc: "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface—no separate power controller needed.",
     },
     {
-      img: "https://secret-newsite.sawo.com/wp-content/uploads/2024/11/saunova-2.0_user-interface.png",
+      img: img_saunova_2_0_user_interface,
       title: "Saunova Series",
       href: "https://www.sawo.com/sawo-products/finnish-sauna/saunova-series/",
       desc: "Versatile control for sauna temperature, humidity, ventilation, and lighting, featuring Smart Controlling, Door Sensor, Prerun Timer, and optional Fan, Dimmer, and Combi functions.",
     },
     {
-      img: "https://www.sawo.com/wp-content/uploads/2024/10/INNOVA-CLASSIC-1000X1000.webp",
+      img: img_INNOVA_CLASSIC_1000X1000,
       title: "Control Accessories",
       href: "https://www.sawo.com/sawo-products/finnish-sauna/control-accessories/",
       desc: "Modern sauna control systems enhance your experience by managing heat, adjusting ambiance, monitoring energy usage, and providing maintenance alerts.",
@@ -111,7 +130,7 @@ const Sauna = () => {
       <section
         className="sauna-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
         style={{
-          backgroundImage: `url(https://www.sawo.com/wp-content/uploads/2025/06/SAWO_Finnish_Sauna_Room_Cedar_Cover-scaled.webp)`,
+          backgroundImage: `url(${img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -277,42 +296,42 @@ const Sauna = () => {
           <div className="sawo-grid">
             <div className="sawo-card">
               <a href={menuPaths.sauna.heaters.tower}>
-                <img src="https://www.sawo.com/wp-content/uploads/2025/04/TOWER-SERIES-2-600x360-1.webp" alt="Tower Series" />
+                <img src={img_TOWER_SERIES_2_600x360_1} alt="Tower Series" />
               </a>
               <div className="sawo-title">Tower Series</div>
               <div className="sawo-caption">SAWO Tower Series a sauna stone pillar design for full-body steam distribution, ensuring a luxurious and immersive steam experience from floor to ceiling.</div>
             </div>
             <div className="sawo-card">
               <a href={menuPaths.sauna.heaters.stone}>
-                <img src="https://www.sawo.com/wp-content/uploads/2025/06/STONE-SERIES-3-600x320-new-.webp" alt="Stone Series" />
+                <img src={img_STONE_SERIES_3_600x320_new} alt="Stone Series" />
               </a>
               <div className="sawo-title">Stone Series</div>
               <div className="sawo-caption">SAWO Stone Series features a durable stainless steel body with heat-conducting Finnish soapstone, ensuring efficient heating and quick drying after use.</div>
             </div>
             <div className="sawo-card">
               <a href={menuPaths.sauna.heaters.wallMounted}>
-                <img src="https://www.sawo.com/wp-content/uploads/2025/09/WALL-MOUNTED-SERIES-v2-1.webp" alt="Wall Mounted Series" />
+                <img src={img_WALL_MOUNTED_SERIES_v2_1} alt="Wall Mounted Series" />
               </a>
               <div className="sawo-title">Wall Mounted Series</div>
               <div className="sawo-caption">SAWO Wall-Mounted Series features sleek, space-saving heaters that blend efficiency with modern design for optimal warmth and comfort.</div>
             </div>
             <div className="sawo-card">
               <a href={menuPaths.sauna.heaters.floor}>
-                <img src="https://www.sawo.com/wp-content/uploads/2025/05/FLOOR-MOUNTED-SERIES1-1024x614-1.webp" alt="Floor Series" />
+                <img src={img_FLOOR_MOUNTED_SERIES1_1024x614_1} alt="Floor Series" />
               </a>
               <div className="sawo-title">Floor Series</div>
               <div className="sawo-caption">SAWO Floor Series offers movable, high-performance stand-alone heaters for optimal heat distribution and lasting comfort.</div>
             </div>
             <div className="sawo-card">
               <a href={menuPaths.sauna.heaters.dragonfire}>
-                <img src="https://www.sawo.com/wp-content/uploads/2025/04/DRAGON-SERIES-1-600x360-1.webp" alt="Dragonfire Series" />
+                <img src={img_DRAGON_SERIES_1_600x360_1} alt="Dragonfire Series" />
               </a>
               <div className="sawo-title">Dragonfire Series</div>
               <div className="sawo-caption">Elevate your sauna experience with the SAWO Dragonfire series, crafted by renowned Finnish designer Stefan Lindfors for modern living.</div>
             </div>
             <div className="sawo-card">
               <a href={menuPaths.sauna.heaters.combi}>
-                <img src="https://www.sawo.com/wp-content/uploads/2025/04/COMBI-SERIES-600x360-1.webp" alt="Combi Series" />
+                <img src={img_COMBI_SERIES_600x360_1} alt="Combi Series" />
               </a>
               <div className="sawo-title">Combi Series</div>
               <div className="sawo-caption">Versatile electric heaters with integrated steamers, offering traditional and steam sauna options with aroma oil basins for added luxury.</div>
@@ -636,47 +655,47 @@ const Sauna = () => {
 
         <div className="custom-product-grid">
           <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/pails-ladles/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/04/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE-600x600-1.webp" alt="Pails & Ladles" />
+            <img src={img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1} alt="Pails & Ladles" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Pails & Ladles</h3>
             <p>Essential to Finnish saunas, our SAWO selection offers pails ranging from 2 to 40 liters. Choose from traditional cedar, aspen, and pine or modern stainless steel options. Complete your set with ladles.</p>
           </a>
           <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/thermometers-combined-meters/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/09/BoxType2-copy-new.jpg" alt="Thermometers & Combined meters" />
+            <img src={img_BoxType2_copy_new} alt="Thermometers & Combined meters" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Thermometers & Combined meters</h3>
             <p>Traditional Thermo and Hygrometers signal sauna readiness. Explore diverse shapes and styles. Enhance your lounge with wooden clocks and try our 15-minute sand timers for socializing or newcomers.</p>
           </a>
           <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/thermometers-combined-meters/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/09/sand-timer-copy-new.jpg" alt="Clocks & Timers" />
+            <img src={img_sand_timer_copy_new} alt="Clocks & Timers" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Clocks & Timers</h3>
             <p>Want to see who lasts the longest in sauna? Our 15min sand timers are a great way to create conversation or perfect for those who are new to Finnish sauna.</p>
           </a>
           <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-light/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/09/917-D_Display_new-.jpg" alt="Sauna Lights" />
+            <img src={img_917_D_Display_new} alt="Sauna Lights" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Sauna Lights</h3>
             <p>Create the perfect ambience with a proper play of lighting. Our different light shades allow you to create the feel of soothing and warm.</p>
           </a>
           <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/headrests-backrests/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/09/506-2-D.jpg" alt="Headrests & Backrests" />
+            <img src={img_506_2_D} alt="Headrests & Backrests" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Headrests & Backrests</h3>
             <p>Wooden headrests and backrests, along with lounge backrests, made from durable materials like wood, memory foam, or fabric, offer comfort in the sauna and lounge with moisture-resistant upholstery for durability.</p>
           </a>
           <a href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-accessories/doors-handles/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/09/DOORS-AND-HANDLES-copy.jpg" alt="Doors & Handles" />
+            <img src={img_DOORS_AND_HANDLES_copy} alt="Doors & Handles" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Doors & Handles</h3>
             <p>Elevate your sauna with SAWO's sauna doors. Crafted for durability, they feature rubber lining, magnetic lock, stainless hinges, and laminated jambs. Choose from glass options for a light-filled, spacious feel.</p>
           </a>
           <a href="https://www.sawo.com/benches-cloth-hangers-and-floor-mat-tiles/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/08/siro-bench.webp" alt="Benches" />
+            <img src={img_siro_bench} alt="Benches" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Benches & Floor Tiles</h3>
             <p>Upgrade your sauna experience with comfy, stylish benches that support and enhance relaxation. Choose from various high-quality designs to suit your taste and space, creating a wellness sanctuary for your body and mind.</p>
           </a>
           <a href="https://www.sawo.com/kivistone/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/08/R-500-D_Scene2.webp" alt="Kivistone" />
+            <img src={img_R_500_D_Scene2} alt="Kivistone" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Kivistone</h3>
             <p>Kivistone offers a variety of unique soapstone products for homes, gifts, and corporate use, featuring a wide range of innovative designs.</p>
           </a>
           <a href="https://www.sawo.com/ventilations-miscellaneous-items/" className="product">
-            <img src="https://www.sawo.com/wp-content/uploads/2025/08/Ventilation.webp" alt="Ventilations & Miscellaneous Items" />
+            <img src={img_Ventilation} alt="Ventilations & Miscellaneous Items" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Ventilations & Add-Ons</h3>
             <p>Explore your sauna experience with our range of ventilations and essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!</p>
           </a>

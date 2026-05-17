@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   const handleScroll = () => {
     if (window.scrollY > 300) {
@@ -17,6 +19,10 @@ export default function ScrollToTop() {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

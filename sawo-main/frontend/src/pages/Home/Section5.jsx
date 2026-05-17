@@ -3,6 +3,7 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
+import menuPaths from "../../menuPaths";
 
 // Import local images
 import imgCustomizedSolutions from "../../assets/Home/Section5/Customized-Solutions_1.webp";
@@ -101,7 +102,7 @@ const Section5 = () => {
             >
               Call us or send us a message.
             </p>
-            <ButtonBrown text="INQUIRE TODAY" href="#inquire" />
+            <ButtonBrown text="INQUIRE TODAY" href={menuPaths.contact} />
           </div>
 
           {/* Right Image Comparison Slider */}

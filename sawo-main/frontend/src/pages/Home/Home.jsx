@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Hero from "./Hero";
@@ -7,6 +8,7 @@ import Section2 from "./Section2";
 import Section3 from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
+import menuPaths from "../../menuPaths";
 
 const Home = () => {
   return (
@@ -24,8 +26,8 @@ const Home = () => {
 
         {/* Explore More Button */}
         <div className="text-center mt-6">
-          <a
-            href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/"
+          <Link
+            to={menuPaths.sauna.heaters.parent}
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 500,
@@ -43,7 +45,7 @@ const Home = () => {
           >
             Explore More
             <FontAwesomeIcon icon={faChevronRight} />
-          </a>
+          </Link>
         </div>
       </div>
 
