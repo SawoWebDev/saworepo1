@@ -2,12 +2,21 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { getVisibleProductsCached } from "../../local-storage/supabaseReader";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import img_CUB3_Ni2_InsideSaunaRoom from "../../assets/CUB3-Ni2_InsideSaunaRoom.webp";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
+}
+
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function getImageUrl(product, field) {
+  const path = localOrRemote(product, field);
+  if (!path) return null;
+  if (path.includes("://")) return path;
+  return `${GITHUB_RAW}${path}`;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -96,9 +105,9 @@ function ProductCard({ product, matchKw }) {
   return (
     <Link to={`/products/${product.slug}`} className="sawo-hc-product-card">
       <div className="sawo-hc-img-wrap">
-        {localOrRemote(product, 'thumbnail') ? (
+        {getImageUrl(product, 'thumbnail') ? (
           <img
-            src={localOrRemote(product, 'thumbnail')}
+            src={getImageUrl(product, 'thumbnail')}
             alt={product.name}
             className="sawo-hc-product-img"
             onError={e => { e.currentTarget.style.display = "none"; }}
@@ -128,14 +137,12 @@ function ProductCard({ product, matchKw }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function SaunaCalculator() {
+  const { products: localProds, loading: loadingProducts } = useLocalProducts();
   const [width,  setWidth]  = useState("");
   const [height, setHeight] = useState("");
   const [depth,  setDepth]  = useState("");
   const [volume,  setVolume]  = useState(null);
   const [matchKw, setMatchKw] = useState(null);
-
-  const [allProducts,     setAllProducts]     = useState(() => getCached() || []);
-  const [loadingProducts, setLoadingProducts] = useState(allProducts.length === 0);
 
   // Track left column height so image always matches it
   const leftColRef   = useRef(null);
@@ -151,36 +158,15 @@ export default function SaunaCalculator() {
     return () => obs.disconnect();
   }, []);
 
-  // ── Fetch products ─────────────────────────────────────────────────────────
-  useEffect(() => {
-    async function fetchProducts() {
-      const cached = getCached();
-      if (cached) {
-        setAllProducts(cached);
-        setLoadingProducts(false);
-      } else {
-        setLoadingProducts(true);
-      }
-      try {
-        let data = await getVisibleProductsCached();
-        // Sort by sort_order first, then by created_at descending
-        data.sort((a, b) => {
-          const sortA = a.sort_order ?? 999;
-          const sortB = b.sort_order ?? 999;
-          if (sortA !== sortB) return sortA - sortB;
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        });
-        const raw = data || [];
-        setCache(raw);
-        setAllProducts(raw);
-      } catch (err) {
-        console.error("SaunaCalculator: Supabase fetch failed", err);
-      } finally {
-        setLoadingProducts(false);
-      }
-    }
-    fetchProducts();
-  }, []);
+  const allProducts = useMemo(() => {
+    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    return [...visible].sort((a, b) => {
+      const sortA = a.sort_order ?? 999;
+      const sortB = b.sort_order ?? 999;
+      if (sortA !== sortB) return sortA - sortB;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }, [localProds]);
 
   // ── Auto-calculate whenever inputs change ──────────────────────────────────
   useEffect(() => {

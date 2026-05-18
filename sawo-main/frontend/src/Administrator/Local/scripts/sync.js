@@ -162,7 +162,10 @@ async function processFiles(filesArray, productSlug) {
 
   const processed = [];
   for (const file of filesArray) {
-    if (typeof file === "object" && file.path) {
+    if (typeof file !== "object") { processed.push(file); continue; }
+
+    // ── existing: handle f.path (Supabase bucket path or already-relative) ──
+    if (file.path) {
       const filename = path.basename(file.path);
       const downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${file.path}`;
       const outputPath = path.join(FILES_DIR, filename);
@@ -174,9 +177,60 @@ async function processFiles(filesArray, productSlug) {
       } else {
         processed.push(file);
       }
-    } else {
-      processed.push(file);
+      continue;
     }
+
+    // ── NEW: handle f.url (CMS-saved entries, including external URLs) ──
+    if (file.url) {
+      // Already a relative path — already synced, leave as-is
+      if (!file.url.includes("://")) { processed.push(file); continue; }
+
+      // Supabase storage URL → download from bucket
+      if (file.url.includes(SUPABASE_URL)) {
+        const filename = path.basename(file.url);
+        const outputPath = path.join(FILES_DIR, filename);
+        const success = await downloadImage(file.url, outputPath);
+        if (success) {
+          statsDownloaded.files++;
+          processed.push({ ...file, url: `files/${filename}` });
+        } else {
+          processed.push(file);
+        }
+        continue;
+      }
+
+      // External URL (www.sawo.com, etc.) → download directly
+      let filename;
+      try {
+        filename = path.basename(new URL(file.url).pathname);
+        if (!filename || filename === "/") {
+          const parts = file.url.split("/");
+          filename = parts[parts.length - 1] || "document.pdf";
+        }
+      } catch (e) {
+        // Invalid URL → keep as-is
+        processed.push(file);
+        continue;
+      }
+
+      const outputPath = path.join(FILES_DIR, filename);
+      // Skip if already downloaded
+      if (!fs.existsSync(outputPath)) {
+        const success = await downloadImage(file.url, outputPath);
+        if (success) {
+          statsDownloaded.files++;
+          processed.push({ ...file, url: `files/${filename}` });
+        } else {
+          processed.push(file); // keep original URL as fallback
+        }
+        continue;
+      }
+      // File already exists in repo
+      processed.push({ ...file, url: `files/${filename}` });
+      continue;
+    }
+
+    processed.push(file);
   }
   return processed;
 }

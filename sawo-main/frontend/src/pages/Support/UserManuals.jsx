@@ -1,16 +1,32 @@
 ﻿// src/pages/Support/UserManuals.jsx
 
 import React, { useState, useEffect, useMemo } from "react";
-import { getVisibleProducts } from "../../local-storage/cacheReader";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function getImageUrl(product, field) {
+  const path = localOrRemote(product, field);
+  if (!path) return null;
+  if (path.includes("://")) return path;
+  return `${GITHUB_RAW}${path}`;
+}
+
+function getFileUrl(file) {
+  const src = file?.url || file?.path;
+  if (!src) return null;
+  if (src.includes("://")) return src;
+  return `${GITHUB_RAW}${src}`;
+}
+
 // ─── PDF Modal ────────────────────────────────────────────────────────────────
 function PdfModal({ product, onClose }) {
-  const files = (product.files || []).filter(f => f?.url);
+  const files = (product.files || []).filter(f => getFileUrl(f));
 
   useEffect(() => {
     const h = e => { if (e.key === "Escape") onClose(); };
@@ -118,7 +134,7 @@ function PdfModal({ product, onClose }) {
               {files.map((f, i) => (
                 <a
                   key={i}
-                  href={f.url}
+                  href={getFileUrl(f)}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -209,7 +225,7 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product, onOpenManuals }) {
-  const fileCount = (product.files || []).filter(f => f?.url).length;
+  const fileCount = (product.files || []).filter(f => getFileUrl(f)).length;
 
   return (
     <div style={{
@@ -234,9 +250,9 @@ function ProductCard({ product, onOpenManuals }) {
         display: "flex", alignItems: "center", justifyContent: "center",
         padding: 8, position: "relative", overflow: "hidden",
       }}>
-        {localOrRemote(product, 'thumbnail') ? (
+        {getImageUrl(product, 'thumbnail') ? (
           <img
-            src={localOrRemote(product, 'thumbnail')}
+            src={getImageUrl(product, 'thumbnail')}
             alt={product.name}
             onError={e => { e.currentTarget.style.display = "none"; }}
             style={{
@@ -314,30 +330,19 @@ function ProductCard({ product, onOpenManuals }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function UserManuals() {
-  const [allProducts, setAllProducts] = useState([]);
-  const [loading,     setLoading]     = useState(true);
+  const { products: localProds, loading } = useLocalProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        let data = await getVisibleProducts();
-        // Sort by sort_order first, then by created_at descending
-        data.sort((a, b) => {
-          const sortA = a.sort_order ?? 999;
-          const sortB = b.sort_order ?? 999;
-          if (sortA !== sortB) return sortA - sortB;
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        });
-        setAllProducts(data);
-      } catch (err) {
-        console.error("UserManuals: fetch failed", err);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  const allProducts = useMemo(() => {
+    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    return [...visible].sort((a, b) => {
+      const sortA = a.sort_order ?? 999;
+      const sortB = b.sort_order ?? 999;
+      if (sortA !== sortB) return sortA - sortB;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }, [localProds]);
 
   const displayed = useMemo(() => {
     const q = search.trim().toLowerCase();

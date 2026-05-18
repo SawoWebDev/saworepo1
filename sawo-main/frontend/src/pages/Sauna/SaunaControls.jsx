@@ -2,9 +2,9 @@
 // Dynamic products from Supabase, filtered by the "Sauna Controls" category/tags, with search.
 // Converted from WallMounted.jsx — same structure, updated copy, categories, grouping, and hero image.
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { getVisibleProductsCached } from "../../local-storage/supabaseReader";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
@@ -13,6 +13,15 @@ import "./heaters/heaters.css"; // reuse existing heaters CSS
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
+}
+
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function getImageUrl(product, field) {
+  const path = localOrRemote(product, field);
+  if (!path) return null;
+  if (path.includes("://")) return path;
+  return `${GITHUB_RAW}${path}`;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -144,9 +153,9 @@ function ProductCard({ product }) {
         onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
         onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
       >
-        {localOrRemote(product, "thumbnail") ? (
+        {getImageUrl(product, "thumbnail") ? (
           <img
-            src={localOrRemote(product, "thumbnail")}
+            src={getImageUrl(product, "thumbnail")}
             alt={product.name}
             className="wm-product-img"
             onError={e => { e.currentTarget.style.display = "none"; }}
@@ -163,9 +172,7 @@ function ProductCard({ product }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function SaunaControls() {
-  const [allProducts, setAllProducts] = useState([]);
-  const [loading,  setLoading]  = useState(true);
-  const [offline,  setOffline]  = useState(!navigator.onLine);
+  const { products: localProds, loading } = useLocalProducts();
 
   // Search query for the displayed grid
   const [search, setSearch] = useState("");
@@ -173,39 +180,16 @@ export default function SaunaControls() {
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
 
-  // ── Online/offline listeners ────────────────────────────────────────────
-  useEffect(() => {
-    const onOnline  = () => { setOffline(false); fetchProducts(true); };
-    const onOffline = () => setOffline(true);
-    window.addEventListener("online",  onOnline);
-    window.addEventListener("offline", onOffline);
-    return () => {
-      window.removeEventListener("online",  onOnline);
-      window.removeEventListener("offline", onOffline);
-    };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // ── Initial fetch ────────────────────────────────────────────────────────
-  useEffect(() => { fetchProducts(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // ── Fetch from Supabase with smart caching ──────────────────────────────
-  async function fetchProducts() {
-    try {
-      let data = await getVisibleProductsCached();
-      // Sort by sort_order first, then by created_at descending
-      data.sort((a, b) => {
-        const sortA = a.sort_order ?? 999;
-        const sortB = b.sort_order ?? 999;
-        if (sortA !== sortB) return sortA - sortB;
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      });
-      setAllProducts(applyDisplayFilter(data));
-    } catch (err) {
-      console.error("SaunaControls: fetch failed", err);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const allProducts = useMemo(() => {
+    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const filtered = applyDisplayFilter(visible);
+    return [...filtered].sort((a, b) => {
+      const sortA = a.sort_order ?? 999;
+      const sortB = b.sort_order ?? 999;
+      if (sortA !== sortB) return sortA - sortB;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }, [localProds]);
 
   // ── Group and filter products ────────────────────────────────────────────
   const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
@@ -306,13 +290,6 @@ export default function SaunaControls() {
         </div>
       </section>
 
-      {/* ── Status banners ───────────────────────────────────────────────── */}
-      {offline && (
-        <div style={{ background: "#FEF5EC", borderTop: "1px solid #F5D5A0", borderBottom: "1px solid #F5D5A0", padding: "8px 24px", textAlign: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "0.78rem", color: "#9C6A10" }}>
-          <i className="fa-solid fa-wifi" style={{ marginRight: 6, opacity: 0.6 }} />
-          You are offline — showing last saved data
-        </div>
-      )}
 
       {/* ── FILTER + SEARCH ───────────────────────────────────────────────── */}
       {!loading && allProducts.length > 0 && (
@@ -401,7 +378,7 @@ export default function SaunaControls() {
           {/* ── Empty states ── */}
           {!loading && allProducts.length === 0 && (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No products available yet.{offline ? " Connect to the internet to load products." : ""}</p>
+              <p>No products available yet.</p>
             </div>
           )}
 

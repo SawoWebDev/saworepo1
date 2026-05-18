@@ -255,7 +255,10 @@ async function processFiles(filesArray, stats, filesDir = FILES_DIR) {
   if (!filesArray || !Array.isArray(filesArray)) return filesArray;
   const out = [];
   for (const f of filesArray) {
-    if (typeof f === "object" && f.path) {
+    if (typeof f !== "object") { out.push(f); continue; }
+
+    // ── existing: handle f.path (Supabase bucket path or already-relative) ──
+    if (f.path) {
       const filename = path.basename(f.path);
       // Only attempt to download from Supabase URLs; skip other URLs (already in GitHub, etc.)
       if (!f.path.includes(SUPABASE_URL) && (f.path.includes("http") || f.path.includes("://"))) {
@@ -266,7 +269,52 @@ async function processFiles(filesArray, stats, filesDir = FILES_DIR) {
       const ok = await downloadImage(url, path.join(filesDir, filename));
       if (ok) { stats.files++; out.push({ ...f, path: `files/${filename}` }); }
       else out.push(f);
-    } else out.push(f);
+      continue;
+    }
+
+    // ── NEW: handle f.url (CMS-saved entries, including external URLs) ──
+    if (f.url) {
+      // Already a relative path — already synced, leave as-is
+      if (!f.url.includes("://")) { out.push(f); continue; }
+
+      // Supabase storage URL → download from bucket
+      if (f.url.includes(SUPABASE_URL)) {
+        const filename = path.basename(f.url);
+        const ok = await downloadImage(f.url, path.join(filesDir, filename));
+        if (ok) { stats.files++; out.push({ ...f, url: `files/${filename}` }); }
+        else out.push(f);
+        continue;
+      }
+
+      // External URL (www.sawo.com, etc.) → download directly
+      let filename;
+      try {
+        filename = path.basename(new URL(f.url).pathname);
+        if (!filename || filename === "/") {
+          // Fallback if pathname is empty
+          const parts = f.url.split("/");
+          filename = parts[parts.length - 1] || "document.pdf";
+        }
+      } catch (e) {
+        // Invalid URL → keep as-is
+        out.push(f);
+        continue;
+      }
+
+      const destPath = path.join(filesDir, filename);
+      // Skip if already downloaded
+      if (!fs.existsSync(destPath)) {
+        const ok = await downloadImage(f.url, destPath);
+        if (ok) { stats.files++; out.push({ ...f, url: `files/${filename}` }); }
+        else out.push(f); // keep original URL as fallback
+        continue;
+      }
+      // File already exists in repo
+      out.push({ ...f, url: `files/${filename}` });
+      continue;
+    }
+
+    out.push(f);
   }
   return out;
 }
