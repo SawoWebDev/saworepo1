@@ -1,5 +1,275 @@
 [
   {
+    "id": "90bc9fd9-8f93-4c62-b465-95a636a0819b",
+    "name": "Steam Head Cover",
+    "slug": "steam-head-cover",
+    "short_description": "<span style=\"text-align: justify;\">Our protective </span><strong style=\"text-align: justify;\"><b>Steam Head Cover</b></strong><span style=\"text-align: justify;\"> is designed to deflect and diffuse steam for safe, even, and comfortable steam distribution in steam rooms.</span>",
+    "description": null,
+    "thumbnail": "images/1778825179841_zvj2k24j18d.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "Steam Accessories"
+    ],
+    "tags": [
+      "cover",
+      "Steam"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Deflects direct steam flow to reduce scalding risk and improve user safety.",
+      "Distributes steam evenly for a more comfortable steam experience.",
+      "Minimizes hot water droplets and steam jetting at the outlet.",
+      "Protects the steam outlet from impacts and debris for added durability."
+    ],
+    "brand": "SAWO",
+    "type": "Steam Accessories",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-05-15T06:06:34.966097+00:00",
+    "updated_at": "2026-05-15T06:06:30.842+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "32128110-1359-4cc0-af9a-162f9afc6777",
+    "name": "Demand Button",
+    "slug": "demand-button",
+    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Demand Button</b><span style=\"text-align: justify;\"> activates steam generation instantly, so you can savor a thoroughly personalized wellness experience.</span>",
+    "description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Demand Button</b><span style=\"text-align: justify;\"> activates steam generation instantly, so you can savor a thoroughly personalized wellness experience.</span>",
+    "thumbnail": "images/1778825003180_2pfd4guzxut.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "Steam Accessories"
+    ],
+    "tags": [
+      "Steam",
+      "Button"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Efficient energy use and lower electricity cost with the press of a button",
+      "Quick access to steam for improved usability",
+      "User-friendly design: Strategically placed button for easy access",
+      "Button-activated steam generator for rapid steam production"
+    ],
+    "brand": "SAWO",
+    "type": "Steam Accessories",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-05-15T06:05:11.217651+00:00",
+    "updated_at": "2026-05-15T06:05:07.316+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
+    "name": "Venturi Pipe Straight",
+    "slug": "venturi-pipe-straight",
+    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Venturi Pipe</b><span style=\"text-align: justify;\"> draws air inside the tube, reducing the temperature by cooling the heated air molecules inside. This process produces a denser cloud of soft steam and prevents the hizzing sound from the steam pipe.</span>",
+    "description": null,
+    "thumbnail": "images/1778824871353_kycwgmcf63r.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "Steam Accessories"
+    ],
+    "tags": [
+      "Pipe",
+      "Steam",
+      "Temperature"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Produces milder, softer steam",
+      "Generates fuller steam clouds",
+      "Prevents hissing noise",
+      "Includes steam head for even steam dispersion",
+      "Made of thick stainless steel"
+    ],
+    "brand": "SAWO",
+    "type": "Steam Accessories",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-05-15T06:03:06.447478+00:00",
+    "updated_at": "2026-05-18T05:44:02.199+00:00",
+    "files": [
+      {
+        "url": "https://www.sawo.com/wp-content/uploads/2026/01/Venturi_Pipe_flyer.pdf",
+        "name": "Venturi Pipe Flyer"
+      },
+      {
+        "url": "https://www.sawo.com/wp-content/uploads/2026/01/Venturi_Pipe_flyer.pdf",
+        "name": "Venturi Pipe Flyer"
+      }
+    ],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "7c129d6e-3954-4f43-a787-9a0ac1e1b57e",
+    "name": "Venturi Pipe L-shape",
+    "slug": "venturi-pipe-l-shape",
+    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Venturi Pipe</b><span style=\"text-align: justify;\"> draws air inside the tube, reducing the temperature by cooling the heated air molecules inside. This process produces a denser cloud of soft steam and prevents the hizzing sound from the steam pipe. The L-shaped pipe is ideal for limited space and compact installation.</span>",
+    "description": null,
+    "thumbnail": "images/1778824725203_2in9kfk6phe.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "Steam Accessories"
+    ],
+    "tags": [
+      "Steam",
+      "Temperature",
+      "Pipe"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Produces milder, softer steam",
+      "Generates fuller steam clouds",
+      "Prevents hissing noise",
+      "Includes steam head for even steam dispersion",
+      "Made of thick stainless steel"
+    ],
+    "brand": "SAWO",
+    "type": "Steam Accessories",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-05-15T06:00:56.823175+00:00",
+    "updated_at": "2026-05-15T06:00:52.648+00:00",
+    "files": [
+      {
+        "url": "https://www.sawo.com/wp-content/uploads/2025/08/Venturi_Pipe_flyer.pdf",
+        "name": "Venturi Pipe Flyer"
+      }
+    ],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "2f48041e-6fcb-4609-9f21-a62352a3f127",
+    "name": "Installation Stand",
+    "slug": "installation-stand",
+    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Installation Stand</b><span style=\"text-align: justify;\"> provides a sturdy, durable base for your steam generator, ensuring safe and efficient operation.</span>",
+    "description": null,
+    "thumbnail": "images/1778816662025_2ulzuaemhei.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "Steam Accessories"
+    ],
+    "tags": [
+      "Steam"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "For easier installation of STW steam generator",
+      "Adjustable height to fit different steam generators and suit different user preferences",
+      "Compatible with various steam generator models for diverse applications",
+      "User-friendly installation for various settings",
+      "Accommodates various steam generator models for diverse applications"
+    ],
+    "brand": "SAWO",
+    "type": "Steam Accessories",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-05-15T03:45:50.760039+00:00",
+    "updated_at": "2026-05-15T03:45:46.785+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "3edc6a58-f8cf-45dd-961f-1392046e862c",
+    "name": "Aroma Pump",
+    "slug": "aroma-pump",
+    "short_description": "<div><p><br></p></div><div style=\"text-align: justify;\"><p>Enhance your steam room experience with the <strong><b>Aroma Pump</b></strong>. Connected to the steam generator, it infuses the room with your choice of fragrance, bringing the benefits of aromatherapy—practiced for thousands of years to support mental and physical well-being—into every session. The advanced motor ensures even distribution of aroma, while integration with the steam controllers makes adjustment simple. Durable and precise, the Aroma Pump offers long-lasting performance and convenience.</p><p>SAWO’s Aroma Pump gives extremely even distribution of aroma scents, because of the advanced motor. It is very convenient to adjust with the Steam Controllers, and the pump is also very accurate and durable.</p></div>",
+    "description": null,
+    "thumbnail": "images/1778816559447_fv0atmi51jo.webp",
+    "images": [],
+    "spec_images": [],
+    "categories": [
+      "Steam Accessories"
+    ],
+    "tags": [
+      "Steam"
+    ],
+    "auto_tag_columns": null,
+    "features": [],
+    "brand": "SAWO",
+    "type": "Steam Accessories",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-05-15T03:44:08.315764+00:00",
+    "updated_at": "2026-05-15T03:44:04.296+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
     "id": "efc9e723-8d96-4d74-930c-85cadc12a79b",
     "name": "Steam Door",
     "slug": "steam-door",
@@ -16022,272 +16292,6 @@
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null
-  },
-  {
-    "id": "90bc9fd9-8f93-4c62-b465-95a636a0819b",
-    "name": "Steam Head Cover",
-    "slug": "steam-head-cover",
-    "short_description": "<span style=\"text-align: justify;\">Our protective </span><strong style=\"text-align: justify;\"><b>Steam Head Cover</b></strong><span style=\"text-align: justify;\"> is designed to deflect and diffuse steam for safe, even, and comfortable steam distribution in steam rooms.</span>",
-    "description": null,
-    "thumbnail": "images/1778825179841_zvj2k24j18d.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [
-      "Steam Accessories"
-    ],
-    "tags": [
-      "cover",
-      "Steam"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Deflects direct steam flow to reduce scalding risk and improve user safety.",
-      "Distributes steam evenly for a more comfortable steam experience.",
-      "Minimizes hot water droplets and steam jetting at the outlet.",
-      "Protects the steam outlet from impacts and debris for added durability."
-    ],
-    "brand": "SAWO",
-    "type": "Steam Accessories",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-05-15T06:06:34.966097+00:00",
-    "updated_at": "2026-05-15T06:06:30.842+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null
-  },
-  {
-    "id": "32128110-1359-4cc0-af9a-162f9afc6777",
-    "name": "Demand Button",
-    "slug": "demand-button",
-    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Demand Button</b><span style=\"text-align: justify;\"> activates steam generation instantly, so you can savor a thoroughly personalized wellness experience.</span>",
-    "description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Demand Button</b><span style=\"text-align: justify;\"> activates steam generation instantly, so you can savor a thoroughly personalized wellness experience.</span>",
-    "thumbnail": "images/1778825003180_2pfd4guzxut.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [
-      "Steam Accessories"
-    ],
-    "tags": [
-      "Steam",
-      "Button"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Efficient energy use and lower electricity cost with the press of a button",
-      "Quick access to steam for improved usability",
-      "User-friendly design: Strategically placed button for easy access",
-      "Button-activated steam generator for rapid steam production"
-    ],
-    "brand": "SAWO",
-    "type": "Steam Accessories",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-05-15T06:05:11.217651+00:00",
-    "updated_at": "2026-05-15T06:05:07.316+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null
-  },
-  {
-    "id": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
-    "name": "Venturi Pipe Straight",
-    "slug": "venturi-pipe-straight",
-    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Venturi Pipe</b><span style=\"text-align: justify;\"> draws air inside the tube, reducing the temperature by cooling the heated air molecules inside. This process produces a denser cloud of soft steam and prevents the hizzing sound from the steam pipe.</span>",
-    "description": null,
-    "thumbnail": "images/1778824871353_kycwgmcf63r.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [
-      "Steam Accessories"
-    ],
-    "tags": [
-      "Pipe",
-      "Steam",
-      "Temperature"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Produces milder, softer steam",
-      "Generates fuller steam clouds",
-      "Prevents hissing noise",
-      "Includes steam head for even steam dispersion",
-      "Made of thick stainless steel"
-    ],
-    "brand": "SAWO",
-    "type": "Steam Accessories",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-05-15T06:03:06.447478+00:00",
-    "updated_at": "2026-05-15T06:03:02.499+00:00",
-    "files": [
-      {
-        "url": "https://www.sawo.com/wp-content/uploads/2026/01/Venturi_Pipe_flyer.pdf",
-        "name": "Venturi Pipe Flyer"
-      }
-    ],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null
-  },
-  {
-    "id": "7c129d6e-3954-4f43-a787-9a0ac1e1b57e",
-    "name": "Venturi Pipe L-shape",
-    "slug": "venturi-pipe-l-shape",
-    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Venturi Pipe</b><span style=\"text-align: justify;\"> draws air inside the tube, reducing the temperature by cooling the heated air molecules inside. This process produces a denser cloud of soft steam and prevents the hizzing sound from the steam pipe. The L-shaped pipe is ideal for limited space and compact installation.</span>",
-    "description": null,
-    "thumbnail": "images/1778824725203_2in9kfk6phe.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [
-      "Steam Accessories"
-    ],
-    "tags": [
-      "Steam",
-      "Temperature",
-      "Pipe"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Produces milder, softer steam",
-      "Generates fuller steam clouds",
-      "Prevents hissing noise",
-      "Includes steam head for even steam dispersion",
-      "Made of thick stainless steel"
-    ],
-    "brand": "SAWO",
-    "type": "Steam Accessories",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-05-15T06:00:56.823175+00:00",
-    "updated_at": "2026-05-15T06:00:52.648+00:00",
-    "files": [
-      {
-        "url": "https://www.sawo.com/wp-content/uploads/2025/08/Venturi_Pipe_flyer.pdf",
-        "name": "Venturi Pipe Flyer"
-      }
-    ],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null
-  },
-  {
-    "id": "2f48041e-6fcb-4609-9f21-a62352a3f127",
-    "name": "Installation Stand",
-    "slug": "installation-stand",
-    "short_description": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Installation Stand</b><span style=\"text-align: justify;\"> provides a sturdy, durable base for your steam generator, ensuring safe and efficient operation.</span>",
-    "description": null,
-    "thumbnail": "images/1778816662025_2ulzuaemhei.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [
-      "Steam Accessories"
-    ],
-    "tags": [
-      "Steam"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "For easier installation of STW steam generator",
-      "Adjustable height to fit different steam generators and suit different user preferences",
-      "Compatible with various steam generator models for diverse applications",
-      "User-friendly installation for various settings",
-      "Accommodates various steam generator models for diverse applications"
-    ],
-    "brand": "SAWO",
-    "type": "Steam Accessories",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-05-15T03:45:50.760039+00:00",
-    "updated_at": "2026-05-15T03:45:46.785+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null
-  },
-  {
-    "id": "3edc6a58-f8cf-45dd-961f-1392046e862c",
-    "name": "Aroma Pump",
-    "slug": "aroma-pump",
-    "short_description": "<div><p><br></p></div><div style=\"text-align: justify;\"><p>Enhance your steam room experience with the <strong><b>Aroma Pump</b></strong>. Connected to the steam generator, it infuses the room with your choice of fragrance, bringing the benefits of aromatherapy—practiced for thousands of years to support mental and physical well-being—into every session. The advanced motor ensures even distribution of aroma, while integration with the steam controllers makes adjustment simple. Durable and precise, the Aroma Pump offers long-lasting performance and convenience.</p><p>SAWO’s Aroma Pump gives extremely even distribution of aroma scents, because of the advanced motor. It is very convenient to adjust with the Steam Controllers, and the pump is also very accurate and durable.</p></div>",
-    "description": null,
-    "thumbnail": "images/1778816559447_fv0atmi51jo.webp",
-    "images": [],
-    "spec_images": [],
-    "categories": [
-      "Steam Accessories"
-    ],
-    "tags": [
-      "Steam"
-    ],
-    "auto_tag_columns": null,
-    "features": [],
-    "brand": "SAWO",
-    "type": "Steam Accessories",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-05-15T03:44:08.315764+00:00",
-    "updated_at": "2026-05-15T03:44:04.296+00:00",
-    "files": [],
-    "updated_by_username": "Rafael",
     "is_deleted": false,
     "capacity_liters": null,
     "variant_type": null,
