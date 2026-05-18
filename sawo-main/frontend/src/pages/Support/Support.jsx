@@ -3,43 +3,382 @@ import { Link } from 'react-router-dom';
 import menuPaths from '../../menuPaths';
 import ButtonClear from '../../components/Buttons/ButtonClear';
 
+import supportHeroImg from '../../assets/CUB3-Ni2_InsideSaunaRoom.webp';
+
 const Support = () => {
   return (
     <div className="relative">
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
         .support-hero {
-          min-height: 95vh;
+          min-height: 550px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding: 48px 24px;
-          background: linear-gradient(135deg, #2c1f13 0%, #5c3d2a 50%, #2c1f13 100%);
+          padding: 100px 24px;
+          margin-top: 80px;
+          margin-bottom: 40px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
           color: white;
+          font-family: 'Montserrat', sans-serif;
+          position: relative;
         }
-        .support-hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; font-family: 'Montserrat', sans-serif; }
-        .support-hero p { font-size: 20px; opacity: 0.9; margin-bottom: 32px; max-width: 600px; }
-        .support-section { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
-        .support-section h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; color: #2c1f13; }
-        .support-section p { font-size: 16px; line-height: 1.6; color: #666; margin-bottom: 24px; }
-        .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin: 32px 0; }
-        .support-card { padding: 32px 24px; border: 1px solid #e0d5c7; border-radius: 8px; background: #fafaf8; transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
-        .support-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-color: #a67853; transform: translateY(-4px); }
-        .support-card-icon { font-size: 48px; color: #a67853; margin-bottom: 16px; }
-        .support-card h3 { font-size: 20px; font-weight: 600; color: #2c1f13; margin-bottom: 12px; }
-        .support-card p { font-size: 14px; line-height: 1.6; color: #666; flex-grow: 1; margin-bottom: 16px; }
-        .support-card-link { color: #a67853; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
-        .support-contact-box { background: #f9f7f5; padding: 32px; border-radius: 8px; margin-top: 32px; }
-        .support-contact-box h3 { font-size: 20px; font-weight: 600; color: #2c1f13; margin-bottom: 16px; }
-        .support-contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; font-size: 16px; }
-        .support-contact-item i { font-size: 24px; color: #a67853; width: 32px; }
-        .support-contact-item a { color: #a67853; text-decoration: none; font-weight: 500; }
-        .support-contact-item a:hover { text-decoration: underline; }
-        @media (max-width: 640px) { .support-hero h1 { font-size: 32px; } }
+
+        .support-hero::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.42);
+          z-index: 1;
+        }
+
+        .support-hero > div {
+          position: relative;
+          z-index: 2;
+        }
+
+        .support-hero h1 {
+          font-size: 36px;
+          font-weight: 700;
+          margin-bottom: 12px;
+          font-family: 'Montserrat', sans-serif;
+          letter-spacing: 0.5px;
+        }
+
+        .support-hero p {
+          font-size: 16px;
+          font-weight: 400;
+          opacity: 0.95;
+          margin-bottom: 0;
+          max-width: 600px;
+          line-height: 1.5;
+        }
+
+        .support-section {
+          padding: 80px 32px;
+          max-width: 1200px;
+          margin: 0 auto;
+          font-family: 'Montserrat', sans-serif;
+          background: transparent;
+        }
+
+        .support-section h2 {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 12px;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-align: center;
+        }
+
+        .support-section > p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: #333;
+          margin-bottom: 40px;
+          text-align: center;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .support-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+          margin: 48px 0;
+        }
+
+        .support-card {
+          padding: 28px 18px;
+          border: 2px solid rgba(175, 133, 100, 0.2);
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.5);
+          transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 4px 16px rgba(139, 94, 60, 0.08);
+          backdrop-filter: blur(8px);
+        }
+
+        .support-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(166, 120, 83, 0.08) 0%, rgba(166, 120, 83, 0.03) 100%);
+          transition: left 0.35s ease;
+          z-index: 0;
+        }
+
+        .support-card:hover {
+          transform: translateY(-8px);
+          border-color: #af8564;
+          box-shadow: 0 12px 32px rgba(175, 133, 100, 0.15);
+          background: rgba(255, 255, 255, 0.8);
+        }
+
+        .support-card:hover::before {
+          left: 0;
+        }
+
+        .support-card:hover::before {
+          left: 0;
+        }
+
+        .support-card > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .support-card-icon {
+          font-size: 36px;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 14px;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          background: rgba(175, 133, 100, 0.1);
+          -webkit-background-clip: unset;
+          -webkit-text-fill-color: #af8564;
+        }
+
+        .support-card:hover .support-card-icon {
+          transform: scale(1.1) rotate(5deg);
+          background: rgba(175, 133, 100, 0.2);
+        }
+
+        .support-card h3 {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #2c1a0e;
+          margin-bottom: 10px;
+          transition: color 0.3s ease;
+          letter-spacing: 0.3px;
+        }
+
+        .support-card:hover h3 {
+          color: #af8564;
+        }
+
+        .support-card p {
+          font-size: 0.85rem;
+          line-height: 1.5;
+          color: #666;
+          flex-grow: 1;
+          margin-bottom: 12px;
+        }
+
+        .support-card-link {
+          color: #af8564;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: all 0.3s ease;
+          font-size: 0.85rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          padding: 8px 16px;
+          border-radius: 20px;
+          background: rgba(175, 133, 100, 0.08);
+        }
+
+        .support-card:hover .support-card-link {
+          gap: 10px;
+          background: rgba(175, 133, 100, 0.15);
+          color: #8b5e3c;
+        }
+
+        .support-contact-section {
+          background: #fff;
+          padding: 0;
+        }
+
+        .support-contact-box {
+          background: transparent;
+          padding: 40px 0;
+          border-radius: 0;
+          margin-top: 40px;
+          border: none;
+          box-shadow: none;
+        }
+
+        .support-contact-box h3 {
+          font-size: 1.5rem;
+          font-weight: 700;
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 32px;
+          text-align: center;
+        }
+
+        .support-contact-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          margin-bottom: 32px;
+        }
+
+        .support-contact-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 28px 18px;
+          border: 2px solid rgba(175, 133, 100, 0.2);
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.5);
+          transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 16px rgba(139, 94, 60, 0.08);
+          backdrop-filter: blur(8px);
+        }
+
+        .support-contact-item:hover {
+          transform: translateY(-8px);
+          border-color: #af8564;
+          box-shadow: 0 12px 32px rgba(175, 133, 100, 0.15);
+          background: rgba(255, 255, 255, 0.8);
+        }
+
+        .support-contact-item i {
+          font-size: 40px;
+          color: #af8564;
+          width: 70px;
+          height: 70px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(175, 133, 100, 0.1);
+          border-radius: 50%;
+          margin-bottom: 14px;
+          transition: all 0.3s ease;
+        }
+
+        .support-contact-item:hover i {
+          transform: scale(1.1) rotate(-5deg);
+          background: rgba(175, 133, 100, 0.2);
+        }
+
+        .support-contact-item strong {
+          color: #2c1a0e;
+          font-weight: 700;
+          font-size: 1.05rem;
+          margin-bottom: 10px;
+          letter-spacing: 0.3px;
+        }
+
+        .support-contact-item a {
+          color: #af8564;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.9rem;
+          transition: all 0.3s ease;
+        }
+
+        .support-contact-item a:hover {
+          color: #8b5e3c;
+        }
+
+        .support-contact-note {
+          margin-top: 32px;
+          padding: 24px;
+          background: rgba(175, 133, 100, 0.06);
+          border-left: 4px solid #af8564;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          color: #2c1a0e;
+          line-height: 1.6;
+          width: 100%;
+        }
+
+        .support-cta-section {
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          color: white;
+          text-align: center;
+          padding: 48px 32px !important;
+          border-radius: 16px;
+          margin-top: 60px;
+          margin-bottom: 40px;
+          box-shadow: 0 20px 60px rgba(139, 94, 60, 0.25);
+        }
+
+        .support-cta-section h2 {
+          color: white;
+          background: none;
+          -webkit-text-fill-color: unset;
+          font-size: 1.8rem;
+          margin-bottom: 12px;
+        }
+
+        .support-cta-section p {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 0.95rem;
+          margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+          .support-hero h1 {
+            font-size: 28px;
+          }
+
+          .support-hero p {
+            font-size: 14px;
+          }
+
+          .support-section {
+            padding: 60px 24px;
+          }
+
+          .support-section h2 {
+            font-size: 2rem;
+          }
+
+          .support-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+
+          .support-contact-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+
+          .support-contact-box {
+            padding: 32px 24px;
+          }
+
+          .support-cta-section {
+            padding: 60px 24px !important;
+          }
+        }
       `}</style>
 
       {/* HERO */}
-      <section className="support-hero">
+      <section className="support-hero" style={{ backgroundImage: `url(${supportHeroImg})` }}>
         <div>
           <h1>SUPPORT CENTER</h1>
           <p>Everything you need to get the most out of your SAWO products</p>
@@ -47,7 +386,7 @@ const Support = () => {
       </section>
 
       {/* SUPPORT RESOURCES */}
-      <section className="support-section" style={{ backgroundColor: "#f9f7f5" }}>
+      <section className="support-section">
         <h2>How Can We Help?</h2>
         <p>
           Explore our comprehensive support resources, from detailed product guides to interactive tools and FAQs.
@@ -63,10 +402,10 @@ const Support = () => {
               </div>
               <h3>Frequently Asked Questions</h3>
               <p>
-                Find answers to common questions about Finnish saunas, steam rooms, installation, maintenance, and more.
+                Find answers to common sauna and product questions.
               </p>
               <span className="support-card-link">
-                Browse FAQ <i className="fas fa-arrow-right"></i>
+                Browse FAQ <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
@@ -82,7 +421,7 @@ const Support = () => {
                 Use our interactive tool to calculate the perfect sauna heater size for your space based on room dimensions.
               </p>
               <span className="support-card-link">
-                Use Calculator <i className="fas fa-arrow-right"></i>
+                Use Calculator <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
@@ -98,7 +437,7 @@ const Support = () => {
                 Download detailed instruction manuals for all SAWO products including heaters, controls, and accessories.
               </p>
               <span className="support-card-link">
-                Download Manuals <i className="fas fa-arrow-right"></i>
+                Download Manuals <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
@@ -107,14 +446,14 @@ const Support = () => {
           <Link to={menuPaths.support.catalogue} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="support-card">
               <div className="support-card-icon">
-                <i className="fas fa-catalog"></i>
+                <i className="fas fa-book-open"></i>
               </div>
               <h3>Product Catalogue</h3>
               <p>
                 Browse our complete product catalogue with specifications, pricing, and technical details for all offerings.
               </p>
               <span className="support-card-link">
-                View Catalogue <i className="fas fa-arrow-right"></i>
+                View Catalogue <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
@@ -122,7 +461,7 @@ const Support = () => {
       </section>
 
       {/* CONTACT SUPPORT */}
-      <section className="support-section">
+      <section className="support-section support-contact-section">
         <h2>Need Direct Support?</h2>
         <p>
           Our technical support team is ready to help with questions, troubleshooting, or special requests.
@@ -131,39 +470,36 @@ const Support = () => {
         <div className="support-contact-box">
           <h3>Technical Support</h3>
 
-          <div className="support-contact-item">
-            <i className="fas fa-envelope"></i>
-            <div>
-              <strong>Email:</strong>{' '}
+          <div className="support-contact-grid">
+            <div className="support-contact-item">
+              <i className="fas fa-envelope"></i>
+              <strong>Email</strong>
               <a href="mailto:help@sawo.com">help@sawo.com</a>
             </div>
-          </div>
 
-          <div className="support-contact-item">
-            <i className="fas fa-phone"></i>
-            <div>
-              <strong>Phone:</strong>{' '}
+            <div className="support-contact-item">
+              <i className="fas fa-phone"></i>
+              <strong>Phone</strong>
               <a href="tel:+63323412233">+63 323 412 233</a>
             </div>
-          </div>
 
-          <div className="support-contact-item">
-            <i className="fab fa-whatsapp"></i>
-            <div>
-              <strong>WhatsApp:</strong>{' '}
+            <div className="support-contact-item">
+              <i className="fab fa-whatsapp"></i>
+              <strong>WhatsApp</strong>
               <a href="tel:+639497594450">+63 949 759 4450</a>
             </div>
           </div>
 
-          <p style={{ marginTop: '24px', fontSize: '14px', color: '#666', borderTop: '1px solid #e0d5c7', paddingTop: '16px' }}>
+          <div className="support-contact-note">
+            <i className="fas fa-info-circle" style={{ marginRight: '12px', color: '#af8564' }}></i>
             For technical support and troubleshooting, we recommend reaching out via WhatsApp or email. Our team typically responds within 24 hours.
-          </p>
+          </div>
         </div>
       </section>
 
-      {/* GETTING STARTED */}
-      <section className="support-section" style={{ backgroundColor: "#2c1f13", color: "white", textAlign: "center" }}>
-        <h2 style={{ color: "white" }}>Ready to Explore Our Products?</h2>
+      {/* GETTING STARTED / CTA */}
+      <section className="support-section support-cta-section">
+        <h2>Ready to Explore Our Products?</h2>
         <p>Discover the perfect sauna, steam room, or infrared solution for your needs.</p>
         <div style={{ marginTop: "32px" }}>
           <ButtonClear

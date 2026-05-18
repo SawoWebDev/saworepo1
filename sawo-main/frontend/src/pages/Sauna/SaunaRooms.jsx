@@ -214,21 +214,21 @@ import img_SAWO_sauna_heaters_floor_Nordex_Pro_NS from "../../assets/SAWO_sauna_
 import img_SAWO_sauna_heaters_wall_KRI_Ni2 from "../../assets/SAWO_sauna_heaters_wall_KRI_Ni2.webp";
 import img_SAWO_sauna_series_tower_ARI_Round_Black_Ni2 from "../../assets/SAWO_sauna_series_tower_ARI_Round_Black_Ni2.webp";
 import img_SAWO_sauna_heaters_wall_SCA_NS from "../../assets/SAWO_sauna_heaters_wall_SCA_NS.webp";
-import img_Glass_Front_Sauna_Room_1419MS from "../../assets/Glass-Front-Sauna-Room-1419MS.png";
-import img_Glass_Front_Sauna_Room_1519MS from "../../assets/Glass-Front-Sauna-Room-1519MS.png";
-import img_Glass_Front_Sauna_Room_1420RS from "../../assets/Glass-Front-Sauna-Room-1420RS.png";
-import img_Glass_Front_Sauna_Room_1420MS from "../../assets/Glass-Front-Sauna-Room-1420MS.png";
-import img_Glass_Front_Sauna_Room_1520MS from "../../assets/Glass-Front-Sauna-Room-1520MS.png";
-import img_Glass_Front_Sauna_Room_Horizontal_Panel_1920MS from "../../assets/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.png";
-import img_Glass_Front_Sauna_Room_Horizontal_Panel_1922MS from "../../assets/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.png";
-import img_Ventilation_800x800_1 from "../../assets/Ventilation-800x800-1.png";
-import img_PREVENTIVE_MAINTENANCE from "../../assets/PREVENTIVE-MAINTENANCE.jpg";
-import img_2020ML_CD_G_SCENE from "../../assets/2020ML-CD-G-SCENE.png";
-import img_Tower_heaters_round_scene_with_steam from "../../assets/Tower-heaters-round-scene_with-steam.jpg";
-import img_Traditional from "../../assets/Traditional.jpg";
-import img_Essential_v3 from "../../assets/Essential-v3.png";
-import img_Signature_BL_v4_copy from "../../assets/Signature-BL-v4-copy.jpg";
-import img_Dragon_BL_v3 from "../../assets/Dragon-BL-v3.png";
+import img_Glass_Front_Sauna_Room_1419MS from "../../assets/Glass-Front-Sauna-Room-1419MS.webp";
+import img_Glass_Front_Sauna_Room_1519MS from "../../assets/Glass-Front-Sauna-Room-1519MS.webp";
+import img_Glass_Front_Sauna_Room_1420RS from "../../assets/Glass-Front-Sauna-Room-1420RS.webp";
+import img_Glass_Front_Sauna_Room_1420MS from "../../assets/Glass-Front-Sauna-Room-1420MS.webp";
+import img_Glass_Front_Sauna_Room_1520MS from "../../assets/Glass-Front-Sauna-Room-1520MS.webp";
+import img_Glass_Front_Sauna_Room_Horizontal_Panel_1920MS from "../../assets/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.webp";
+import img_Glass_Front_Sauna_Room_Horizontal_Panel_1922MS from "../../assets/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.webp";
+import img_Ventilation_800x800_1 from "../../assets/Ventilation-800x800-1.webp";
+import img_PREVENTIVE_MAINTENANCE from "../../assets/PREVENTIVE-MAINTENANCE.webp";
+import img_2020ML_CD_G_SCENE from "../../assets/2020ML-CD-G-SCENE.webp";
+import img_Tower_heaters_round_scene_with_steam from "../../assets/Tower-heaters-round-scene_with-steam.webp";
+import img_Traditional from "../../assets/Traditional.webp";
+import img_Essential_v3 from "../../assets/Essential-v3.webp";
+import img_Signature_BL_v4_copy from "../../assets/Signature-BL-v4-copy.webp";
+import img_Dragon_BL_v3 from "../../assets/Dragon-BL-v3.webp";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 

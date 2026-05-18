@@ -53,7 +53,9 @@ function getImageUrl(product) {
 
 function ProductCard({ product }) {
   const [imageLoaded, setImageLoaded] = React.useState(false);
+  const [imageSrc, setImageSrc] = React.useState(null);
   const [hovered, setHovered] = React.useState(false);
+  const imgRef = React.useRef(null);
   const isAccessory = isAccessoryProduct(product);
   let link;
   if (isAccessory) {
@@ -63,6 +65,32 @@ function ProductCard({ product }) {
   } else {
     link = `/products/${product.slug}`;
   }
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const fullUrl = getImageUrl(product);
+            if (fullUrl) {
+              setImageSrc(fullUrl);
+              const img = new Image();
+              img.onload = () => setImageLoaded(true);
+              img.src = fullUrl;
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "50px" }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [product]);
 
   return (
     <Link to={link} style={{ textDecoration: "none" }}>
@@ -81,28 +109,48 @@ function ProductCard({ product }) {
           cursor: "pointer",
         }}
       >
-        <div style={{
-          width: "100%",
-          height: 140,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}>
-          {getImageUrl(product) ? (
-            <img
-              src={getImageUrl(product)}
-              alt={product.name}
-              onLoad={() => setImageLoaded(true)}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                opacity: imageLoaded ? 1 : 0,
-                transition: "opacity 0.3s ease, transform 0.25s ease",
-                transform: hovered ? "scale(1.06)" : "scale(1)",
-              }}
-            />
+        <div
+          ref={imgRef}
+          style={{
+            width: "100%",
+            height: 140,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+            position: "relative",
+            background: "#fafaf8",
+          }}
+        >
+          {imageSrc ? (
+            <>
+              {!imageLoaded && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)",
+                    backgroundSize: "200% 100%",
+                    animation: "shimmer 2s infinite",
+                  }}
+                />
+              )}
+              <img
+                src={imageSrc}
+                alt={product.name}
+                onLoad={() => setImageLoaded(true)}
+                loading="lazy"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  opacity: imageLoaded ? 1 : 0.6,
+                  filter: imageLoaded ? "blur(0px)" : "blur(8px)",
+                  transition: "opacity 0.5s ease, filter 0.5s ease, transform 0.25s ease",
+                  transform: hovered ? "scale(1.06)" : "scale(1)",
+                }}
+              />
+            </>
           ) : (
             <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
           )}
@@ -281,6 +329,11 @@ export default function AllProducts() {
         @keyframes skS {
           0% { background-position: 200% 0; }
           100% { background-position: -200% 0; }
+        }
+
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
         }
 
         .tabs-container {

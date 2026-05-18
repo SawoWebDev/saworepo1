@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
-import heroImg from "../../../assets/sand-timer-copy-new.jpg";
+import heroImg from "../../../assets/sand-timer-copy-new.webp";
 import "../heaters/heaters.css";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;

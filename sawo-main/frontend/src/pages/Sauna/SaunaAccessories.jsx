@@ -11,10 +11,10 @@ import img_TR_LIGHT_COVER_SCENE1_copy from "../../assets/TR-LIGHT-COVER_SCENE1-c
 import img_siro_bench from "../../assets/siro-bench.webp";
 import img_R_500_D_Scene2 from "../../assets/R-500-D_Scene2.webp";
 import img_Ventilation from "../../assets/Ventilation.webp";
-import img_BoxType2_copy_new from "../../assets/BoxType2-copy-new.jpg";
-import img_sand_timer_copy_new from "../../assets/sand-timer-copy-new.jpg";
-import img_506_2_D from "../../assets/506-2-D.jpg";
-import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.jpg";
+import img_BoxType2_copy_new from "../../assets/BoxType2-copy-new.webp";
+import img_sand_timer_copy_new from "../../assets/sand-timer-copy-new.webp";
+import img_506_2_D from "../../assets/506-2-D.webp";
+import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp";
 
 const SaunaAccessories = () => {
   return (
