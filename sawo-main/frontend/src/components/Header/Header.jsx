@@ -11,7 +11,6 @@ export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [hoveredSubmenu, setHoveredSubmenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [forceMobile, setForceMobile] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
 
   const lastScrollY = useRef(0);
@@ -44,7 +43,7 @@ export default function Header() {
               items: [
                 { name: "Sauna Heaters", path: menuPaths.sauna.heaters.parent, matchExact: true },
                 { name: "Sauna Controls", path: menuPaths.sauna.controls },
-                { name: "Sauna Accessories", path: menuPaths.sauna.accessories },
+                { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent },
                 { name: "Sauna Rooms", path: menuPaths.sauna.rooms, matchExact: true },
                 { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns, matchExact: true },
                 { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels, matchExact: true },
@@ -150,18 +149,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [mobileOpen]);
 
-  // Force mobile if nav overflows
-  useEffect(() => {
-    const checkWrap = () => {
-      if (!navRef.current) return;
-      const isWrapped = navRef.current.scrollWidth > navRef.current.clientWidth;
-      setForceMobile(isWrapped);
-      if (isWrapped) setMobileOpen(false);
-    };
-    checkWrap();
-    window.addEventListener("resize", checkWrap);
-    return () => window.removeEventListener("resize", checkWrap);
-  }, []);
 
   // Close mobile menu on outside click
   useEffect(() => {
@@ -222,8 +209,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav + Search (grouped on right) */}
-          {!forceMobile && (
-            <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
               <nav
                 ref={navRef}
                 className="flex gap-6 whitespace-nowrap text-[16px] font-normal text-[rgb(51,51,51)]"
@@ -533,7 +519,6 @@ export default function Header() {
               }
             `}</style>
           </div>
-          )}
 
           {/* Mobile toggle */}
           <button

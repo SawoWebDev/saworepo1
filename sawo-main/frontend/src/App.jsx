@@ -43,6 +43,16 @@ import ProductCatalogue from "./pages/Support/ProductCatalogue";
 import AllProducts      from "./pages/AllProducts";
 import PrivacyPolicy   from "./pages/PrivacyPolicy";
 import Sitemap         from "./pages/Sitemap";
+import PailsLadles        from "./pages/Sauna/accessories/PailsLadles";
+import Thermometers       from "./pages/Sauna/accessories/Thermometers";
+import ClocksSandtimers   from "./pages/Sauna/accessories/ClocksSandtimers";
+import SaunaLights        from "./pages/Sauna/accessories/SaunaLights";
+import HeadrestsBackrests from "./pages/Sauna/accessories/HeadrestsBackrests";
+import DoorsHandles       from "./pages/Sauna/accessories/DoorsHandles";
+import BenchesFloorTiles  from "./pages/Sauna/accessories/BenchesFloorTiles";
+import Kivistone          from "./pages/Sauna/accessories/Kivistone";
+import VentilationsAddOns from "./pages/Sauna/accessories/VentilationsAddOns";
+import AccessorySets from "./pages/Sauna/accessories/AccessorySets";
 
 // Dynamic product detail pages
 import ProductPageRouter from "./pages/ProductPageRouter";
@@ -89,7 +99,17 @@ export default function App() {
                 <Route path={menuPaths.sauna.heaters.combi}     element={<Combi />} />
                 <Route path={menuPaths.sauna.heaters.dragonfire} element={<Dragonfire />} />
                 <Route path={menuPaths.sauna.controls}          element={<SaunaControls />} />
-                <Route path={menuPaths.sauna.accessories}       element={<SaunaAccessories />} />
+                <Route path={menuPaths.sauna.accessories.parent} element={<SaunaAccessories />} />
+                <Route path={menuPaths.sauna.accessories.pailsLadles}        element={<PailsLadles />} />
+                <Route path={menuPaths.sauna.accessories.thermometers}       element={<Thermometers />} />
+                <Route path={menuPaths.sauna.accessories.clocksSandtimers}   element={<ClocksSandtimers />} />
+                <Route path={menuPaths.sauna.accessories.lightsCovers}       element={<SaunaLights />} />
+                <Route path={menuPaths.sauna.accessories.headrestsBackrests} element={<HeadrestsBackrests />} />
+                <Route path={menuPaths.sauna.accessories.doorsHandles}       element={<DoorsHandles />} />
+                <Route path={menuPaths.sauna.accessories.benches}            element={<BenchesFloorTiles />} />
+                <Route path={menuPaths.sauna.accessories.kivistone}          element={<Kivistone />} />
+                <Route path={menuPaths.sauna.accessories.ventilations}       element={<VentilationsAddOns />} />
+                <Route path={menuPaths.sauna.accessories.accessorySets}      element={<AccessorySets />} />
                 <Route path={menuPaths.sauna.rooms}             element={<SaunaRooms />} />
                 <Route path={menuPaths.sauna.interiorDesigns}   element={<InteriorDesign />} />
                 <Route path={menuPaths.sauna.woodPanels}        element={<WoodPanelAndTimbers />} />
