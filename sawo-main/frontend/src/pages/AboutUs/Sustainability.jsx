@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import img_sustainability_image from "../../assets/sustainability-image.webp";
 import img_SAWO_Cumulus_Wall_NS from "../../assets/SAWO_Cumulus_Wall_NS.webp";
 import img_health_well_being from "../../assets/health-well-being.webp";
-import img_Wood_Pattern_Brown_03 from "../../assets/Wood-Pattern-Brown-03.png";
-import img_waste_hierarchy_sustainability from "../../assets/waste-hierarchy-sustainability.png";
+import img_Wood_Pattern_Brown_03 from "../../assets/Wood-Pattern-Brown-03.webp";
+import img_waste_hierarchy_sustainability from "../../assets/waste-hierarchy-sustainability.webp";
 
 const Sustainability = () => {
   useEffect(() => {

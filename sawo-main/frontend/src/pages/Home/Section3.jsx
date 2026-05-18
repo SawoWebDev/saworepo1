@@ -202,6 +202,17 @@ const Section3 = () => {
         </Link>
       </div>
 
+      <div className="text-center mt-6">
+        <Link
+          to={menuPaths.sauna.controls}
+          style={exploreBtnStyle}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#af8564")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#333333")}
+        >
+          Explore More <FontAwesomeIcon icon={faChevronRight} />
+        </Link>
+      </div>
+
       <style jsx>{`
         .section3-wrapper {
           font-family: "Montserrat", sans-serif;

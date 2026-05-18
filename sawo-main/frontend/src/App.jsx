@@ -167,7 +167,7 @@ export default function App() {
             <Navigate to="/admin/products" replace />
           } />
 
-          {/* Redirect root /admin â†’ login */}
+          {/* Redirect root /admin login */}
           <Route path="/admin" element={<Navigate to="/login" replace />} />
 
         </Routes>
