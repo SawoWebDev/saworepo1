@@ -53,7 +53,7 @@ const Section1 = () => {
       title: "SAUNA ACCESSORIES",
       caption:
         "Enhance your sauna with thoughtfully designed SAWO accessories.",
-      href: menuPaths.sauna.accessories,
+      href: menuPaths.sauna.accessories.parent,
       imgWebp: SaunaAccessories,
       imgJpg: SaunaAccessories,
       alt: "SAWO sauna accessories collection including buckets, ladles, and thermometers",

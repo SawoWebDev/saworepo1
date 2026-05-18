@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import menuPaths from '../../menuPaths';
 import aboutusHero from '../../assets/About/aboutus-hero.webp';
 import aboutusEmployee from '../../assets/About/aboutus-employee.webp';
 import ISO9001 from '../../assets/About/aboutus-ISO-9001.webp';
@@ -424,10 +426,10 @@ const AboutUs = () => {
                 </div>
               </div>
 
-              <a href="/sauna-products" className="about-btn">
+              <Link to={menuPaths.sauna.parent} className="about-btn">
                 Explore Our Products
                 <FontAwesomeIcon icon={faChevronRight} />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -466,9 +468,9 @@ const AboutUs = () => {
                 <p className="news-card-desc">
                   This autumn, we took part in Europe's top wellness exhibitions—Aquanale in Cologne and Piscina Barcelona. A pleasure connecting with industry leaders and showcasing Finnish tradition and wellness.
                 </p>
-                <a href="/latest-news" className="news-card-link">
+                <Link to={menuPaths.about.news} className="news-card-link">
                   Read more <span>→</span>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -485,9 +487,9 @@ const AboutUs = () => {
                 <p className="news-card-desc">
                   When a 6.9 magnitude earthquake struck off the Northeast coast of Cebu, our team organized a company-wide relief effort, delivering mattresses, food, hygiene products, and essentials to affected families.
                 </p>
-                <a href="/latest-news" className="news-card-link">
+                <Link to={menuPaths.about.news} className="news-card-link">
                   Read more <span>→</span>
-                </a>
+                </Link>
               </div>
             </div>
 

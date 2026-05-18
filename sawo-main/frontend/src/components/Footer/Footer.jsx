@@ -18,7 +18,7 @@ export default function Footer() {
             <ul className="space-y-1 text-sm">
               <li><Link to={menuPaths.sauna.heaters.parent} className="hover:text-gray-300">Sauna Heaters</Link></li>
               <li><Link to={menuPaths.sauna.controls} className="hover:text-gray-300">Sauna Controls</Link></li>
-              <li><Link to={menuPaths.sauna.accessories} className="hover:text-gray-300">Sauna Accessories</Link></li>
+              <li><Link to={menuPaths.sauna.accessories.parent} className="hover:text-gray-300">Sauna Accessories</Link></li>
               <li><Link to={menuPaths.sauna.rooms} className="hover:text-gray-300">Sauna Rooms</Link></li>
             </ul>
           </div>
@@ -38,8 +38,8 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-2">INFRARED SAUNA</h3>
             <ul className="space-y-1 text-sm">
               <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Sauna Rooms</Link></li>
-              <li><a href="#" className="hover:text-gray-300">Infrared Backrest</a></li>
-              <li><a href="#" className="hover:text-gray-300">Infrared Panels</a></li>
+              <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Backrest</Link></li>
+              <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Panels</Link></li>
             </ul>
           </div>
 
@@ -48,13 +48,13 @@ export default function Footer() {
             <img src={sLogo} alt="SAWO" className="h-20 w-auto mb-4" />
             <h3 className="font-bold text-lg mb-2">Follow Us</h3>
             <div className="flex flex-wrap justify-center gap-4 text-xl">
-              <a href="#" className="hover:text-gray-300"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="hover:text-gray-300"><i className="fab fa-instagram"></i></a>
-              <a href="#" className="hover:text-gray-300"><i className="fab fa-linkedin-in"></i></a>
-              <a href="#" className="hover:text-gray-300"><i className="fab fa-youtube"></i></a>
-              <a href="#" className="hover:text-gray-300"><i className="fab fa-tiktok"></i></a>
-              <a href="#" className="hover:text-gray-300"><i className="fas fa-envelope"></i></a>
-              <a href="#" className="hover:text-gray-300"><i className="fas fa-phone"></i></a>
+              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-instagram"></i></a>
+              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-linkedin-in"></i></a>
+              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-youtube"></i></a>
+              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-tiktok"></i></a>
+              <a href="mailto:help@sawo.com" className="hover:text-gray-300"><i className="fas fa-envelope"></i></a>
+              <a href="tel:+63323412233" className="hover:text-gray-300"><i className="fas fa-phone"></i></a>
             </div>
           </div>
         </div>

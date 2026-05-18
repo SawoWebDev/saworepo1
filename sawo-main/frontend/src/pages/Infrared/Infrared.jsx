@@ -37,7 +37,7 @@ const Infrared = () => {
           <div style={{ marginTop: "24px" }}>
             <ButtonClear
               text="EXPLORE PRODUCTS"
-              href="https://www.sawo.com/sawo-products/infrared-sauna/"
+              href="/support/catalogue"
             />
           </div>
         </div>

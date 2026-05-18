@@ -7,7 +7,7 @@ const PAGE_RESULTS = [
   { name: "Home", path: menuPaths.home, category: "Pages" },
   { name: "Sauna Heaters", path: menuPaths.sauna.heaters.parent, category: "Pages" },
   { name: "Sauna Controls", path: menuPaths.sauna.controls, category: "Pages" },
-  { name: "Sauna Accessories", path: menuPaths.sauna.accessories, category: "Pages" },
+  { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent, category: "Pages" },
   { name: "Steam Generators", path: menuPaths.steam.generators, category: "Pages" },
   { name: "Steam Controls", path: menuPaths.steam.controls, category: "Pages" },
   { name: "Steam Accessories", path: menuPaths.steam.accessories, category: "Pages" },
@@ -19,6 +19,56 @@ const PAGE_RESULTS = [
   { name: "About Us", path: menuPaths.about.parent, category: "Pages" },
   { name: "Careers", path: menuPaths.careers, category: "Pages" },
 ];
+
+function ResultList({ results, loading, query, highlightedIndex, setHighlightedIndex, selectResult }) {
+  if (loading) {
+    return <div className="px-4 py-2 text-center text-gray-500 text-xs">Searching...</div>;
+  }
+  if (!loading && results.length === 0 && query) {
+    return <div className="px-4 py-2 text-center text-gray-500 text-xs">No results found</div>;
+  }
+  if (results.length === 0) return null;
+
+  const pages    = results.filter(r => r.resultType === "page");
+  const products = results.filter(r => r.resultType === "product").slice(0, 8);
+  const grouped  = [...pages, ...products];
+
+  return (
+    <div>
+      {pages.length > 0 && (
+        <p className="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Pages</p>
+      )}
+      {pages.map((result, idx) => (
+        <ResultRow key={`page-${result.path}`} result={result} idx={idx} highlightedIndex={highlightedIndex} setHighlightedIndex={setHighlightedIndex} selectResult={selectResult} grouped={grouped} />
+      ))}
+      {products.length > 0 && (
+        <p className="px-4 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Products</p>
+      )}
+      {products.map((result, idx) => (
+        <ResultRow key={`product-${result.slug}`} result={result} idx={pages.length + idx} highlightedIndex={highlightedIndex} setHighlightedIndex={setHighlightedIndex} selectResult={selectResult} grouped={grouped} />
+      ))}
+    </div>
+  );
+}
+
+function ResultRow({ result, idx, highlightedIndex, setHighlightedIndex, selectResult }) {
+  const active = highlightedIndex === idx;
+  return (
+    <button
+      onClick={() => selectResult(result)}
+      onMouseEnter={() => setHighlightedIndex(idx)}
+      className={`w-full text-left px-4 py-2.5 text-[13px] rounded-lg transition-colors flex items-center gap-2 ${
+        active ? "bg-[#af8564] text-white font-semibold" : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
+      }`}
+    >
+      {result.resultType === "product" && result.thumbnail
+        ? <img src={result.thumbnail} alt={result.name} className="w-8 h-8 rounded object-cover flex-shrink-0" />
+        : <i className={`fa-solid fa-${result.resultType === "page" ? "link" : "box"} text-xs flex-shrink-0 opacity-60`} />
+      }
+      <p className="truncate font-medium">{result.name}</p>
+    </button>
+  );
+}
 
 export default function SearchBar({ isNavIcon = false, isExpanded = false, isInline = false, onToggle = null, onBlur = null }) {
   const navigate = useNavigate();
@@ -196,47 +246,11 @@ export default function SearchBar({ isNavIcon = false, isExpanded = false, isInl
 
         {/* Dropdown Results below input */}
         {isOpen && (query || results.length > 0) && (
-          <div className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 w-full py-3 px-2 max-h-96 overflow-y-auto">
-            {loading && (
-              <div className="px-4 py-2 text-center text-gray-500 text-xs">
-                Searching...
-              </div>
-            )}
-
-            {!loading && results.length === 0 && query && (
-              <div className="px-4 py-2 text-center text-gray-500 text-xs">
-                No results found
-              </div>
-            )}
-
-            {!loading && results.length > 0 && (
-              <div>
-                {results.map((result, globalIdx) => (
-                  <button
-                    key={`${result.category}-${result.slug || result.path}`}
-                    onClick={() => selectResult(result)}
-                    onMouseEnter={() => setHighlightedIndex(globalIdx)}
-                    className={`w-full text-left px-4 py-2.5 text-[13px] rounded-lg transition-colors flex items-center gap-2 ${
-                      highlightedIndex === globalIdx
-                        ? "bg-[#af8564] text-white font-semibold"
-                        : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
-                    }`}
-                  >
-                    {result.resultType === "product" &&
-                      result.thumbnail && (
-                        <img
-                          src={result.thumbnail}
-                          alt={result.name}
-                          className="w-8 h-8 rounded object-cover flex-shrink-0"
-                        />
-                      )}
-                    <p className="truncate font-medium">
-                      {result.name}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            )}
+          <div
+            className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 w-full py-3 px-2 max-h-96 overflow-y-auto"
+            onMouseDown={e => e.preventDefault()}
+          >
+            <ResultList results={results} loading={loading} query={query} highlightedIndex={highlightedIndex} setHighlightedIndex={setHighlightedIndex} selectResult={selectResult} />
           </div>
         )}
       </div>
@@ -265,47 +279,8 @@ export default function SearchBar({ isNavIcon = false, isExpanded = false, isInl
 
         {/* Dropdown Results */}
         {(query || results.length > 0) && (
-          <div className="max-h-80 overflow-y-auto mt-2">
-            {loading && (
-              <div className="px-4 py-2 text-center text-gray-500 text-xs">
-                Searching...
-              </div>
-            )}
-
-            {!loading && results.length === 0 && query && (
-              <div className="px-4 py-2 text-center text-gray-500 text-xs">
-                No results found
-              </div>
-            )}
-
-            {!loading && results.length > 0 && (
-              <div>
-                {results.map((result, globalIdx) => (
-                  <button
-                    key={`${result.category}-${result.slug || result.path}`}
-                    onClick={() => selectResult(result)}
-                    onMouseEnter={() => setHighlightedIndex(globalIdx)}
-                    className={`w-full text-left px-4 py-2.5 text-[13px] rounded-lg transition-colors flex items-center gap-2 ${
-                      highlightedIndex === globalIdx
-                        ? "bg-[#af8564] text-white font-semibold"
-                        : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
-                    }`}
-                  >
-                    {result.resultType === "product" &&
-                      result.thumbnail && (
-                        <img
-                          src={result.thumbnail}
-                          alt={result.name}
-                          className="w-8 h-8 rounded object-cover flex-shrink-0"
-                        />
-                      )}
-                    <p className="truncate font-medium">
-                      {result.name}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            )}
+          <div className="max-h-80 overflow-y-auto mt-2" onMouseDown={e => e.preventDefault()}>
+            <ResultList results={results} loading={loading} query={query} highlightedIndex={highlightedIndex} setHighlightedIndex={setHighlightedIndex} selectResult={selectResult} />
           </div>
         )}
       </div>

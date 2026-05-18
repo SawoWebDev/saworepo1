@@ -196,7 +196,7 @@ const Section3 = () => {
           <div className="title">Innova Series</div>
         </Link>
 
-        <Link to={menuPaths.sauna.accessories} className="image-card">
+        <Link to={menuPaths.sauna.accessories.parent} className="image-card">
           <img src={controlAccessories} alt="Control Accessories" />
           <div className="title">Control Accessories</div>
         </Link>

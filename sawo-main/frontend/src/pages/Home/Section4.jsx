@@ -16,55 +16,55 @@ import imgVentilation from "../../assets/Home/Section4/Ventilation.webp";
 const accessories = [
   {
     title: "PAILS and LADLES",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.pailsLadles,
     img: imgPailsLadles,
     alt: "Sauna pails and ladles",
   },
   {
     title: "THERMOMETERS and COMBINED METERS",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.thermometers,
     img: imgThermometers,
     alt: "Sauna thermometers and combined meters",
   },
   {
     title: "CLOCKS and SANDTIMERS",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.clocksSandtimers,
     img: imgSandTimers,
     alt: "Sauna clocks and sand timers",
   },
   {
     title: "SAUNA LIGHTS and COVERS",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.lightsCovers,
     img: imgSaunaLights,
     alt: "Sauna light covers",
   },
   {
     title: "HEADRESTS and BACKRESTS",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.headrestsBackrests,
     img: imgHeadrests,
     alt: "Sauna headrests and backrests",
   },
   {
     title: "DOORS and HANDLES",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.doorsHandles,
     img: imgDoorsHandles,
     alt: "Sauna doors and handles",
   },
   {
     title: "BENCHES and FLOOR TILES",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.benches,
     img: imgBenches,
     alt: "Sauna benches and floor tiles",
   },
   {
     title: "KIVISTONE",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.kivistone,
     img: imgKivistone,
     alt: "Kivistone sauna stones",
   },
   {
     title: "VENTILATION and ADD-ONS",
-    href: menuPaths.sauna.accessories,
+    href: menuPaths.sauna.accessories.ventilations,
     img: imgVentilation,
     alt: "Sauna ventilation and add-ons",
   },
@@ -185,7 +185,7 @@ const Section4 = () => {
       {/* Explore More Button */}
       <div className="text-center mt-6">
         <Link
-          to={menuPaths.sauna.accessories}
+          to={menuPaths.sauna.accessories.parent}
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 500,
