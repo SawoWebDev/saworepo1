@@ -43,6 +43,7 @@ import ProductCatalogue from "./pages/Support/ProductCatalogue";
 import AllProducts      from "./pages/AllProducts";
 import PrivacyPolicy   from "./pages/PrivacyPolicy";
 import Sitemap         from "./pages/Sitemap";
+import NotFound        from "./pages/NotFound";
 import PailsLadles        from "./pages/Sauna/accessories/PailsLadles";
 import Thermometers       from "./pages/Sauna/accessories/Thermometers";
 import ClocksSandtimers   from "./pages/Sauna/accessories/ClocksSandtimers";
@@ -69,6 +70,7 @@ import SaunaRoomsAdmin from "./Administrator/SaunaRoomsCMS";
 import Models    from "./Administrator/Models";
 import Taxonomy  from "./Administrator/Taxonomy";
 import Logs  from "./Administrator/Logs";
+import Analytics from "./Administrator/Analytics";
 import ProtectedRoute from "./Administrator/ProtectedRoute";
 
 export default function App() {
@@ -135,6 +137,9 @@ export default function App() {
 
                 {/* Single sauna room detail page */}
                 <Route path="/sauna/rooms/:slug" element={<DispSaunaRoom />} />
+
+                {/* 404 Not Found page - must be last in nested routes */}
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </MainLayout>
           } />
@@ -160,6 +165,9 @@ export default function App() {
           } />
           <Route path="/admin/models" element={
             <ProtectedRoute requiredCap="page.models"><AdminLayout><Models /></AdminLayout></ProtectedRoute>
+          } />
+          <Route path="/admin/analytics" element={
+            <ProtectedRoute requiredCap="page.analytics"><AdminLayout><Analytics /></AdminLayout></ProtectedRoute>
           } />
 
           {/* Legacy editor products route — redirect to unified products page */}

@@ -1,26 +1,72 @@
 ﻿// SteamAccessories.jsx
 
-import React from "react";
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import heroBg from "../../assets/Steam/hero.webp";
-import steamDoor from "../../assets/Steam/steam-door.webp";
-import aromaPump from "../../assets/Steam/aroma-pump.webp";
-import installStand from "../../assets/Steam/Installation-stand.webp";
-import venturiL from "../../assets/Steam/venturi-pipe-L-shape.webp";
-import venturiStraight from "../../assets/Steam/venturi-pipe-straight.webp";
-import demandButton from "../../assets/Steam/demand-button.webp";
-import steamHeadCover from "../../assets/Steam/steam-head-cover.webp";
 
-const accessories = [
-  { img: steamDoor,       title: "Steam Door",             desc: "A steam door is essential for keeping steam in and preventing excess moisture from escaping, ensuring an optimal steam room experience." },
-  { img: aromaPump,       title: "Aroma Pump",             desc: "The pump can handle any aroma scent you would prefer to enjoy your tranquil steam room experience." },
-  { img: installStand,    title: "Installation Stand",     desc: "The steam generator installation stand provides a sturdy, durable base for secure support and efficient operation." },
-  { img: venturiL,        title: "Venturi Pipe L-shape",   desc: "The Venturi Pipe draws air inside the tube, reducing the temperature by cooling the heated air molecules inside. The L-shape is ideal for compact installation." },
-  { img: venturiStraight, title: "Venturi Pipe Straight",  desc: "The Venturi Pipe draws air inside the tube, reducing the temperature by cooling the heated air molecules inside." },
-  { img: demandButton,    title: "Demand Button",          desc: "The Demand Button lets users activate steam generation instantly, offering convenient control for a customized experience." },
-  { img: steamHeadCover,  title: "Steam Head Cover",       desc: "The Steam Head Cover provides a sleek protective casing for the steam head, enhancing both durability and the aesthetic of your steam room." },
-];
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function localOrRemote(product, field) {
+  return product?.[`local_${field}`] || product?.[field] || null;
+}
 
-const SteamAccessories = () => (
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function getImageUrl(product, field) {
+  const path = localOrRemote(product, field);
+  if (!path) return null;
+  if (path.includes("://")) return path;
+  return `${GITHUB_RAW}${path}`;
+}
+
+function stripHtml(html) {
+  if (!html) return "";
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+}
+
+function getFirstSentence(text) {
+  if (!text) return "";
+  const cleaned = stripHtml(text).trim();
+  const match = cleaned.match(/^[^.!?]*[.!?]/);
+  return match ? match[0] : cleaned.split(/\s+/).slice(0, 20).join(" ") + "...";
+}
+
+// ─── Display filter config ────────────────────────────────────────────────────
+const DISPLAY_CATEGORIES = ["Steam Accessories"];
+const DISPLAY_TAGS = ["Steam Accessories"];
+
+function arrayMatchesAny(arr = [], targets = []) {
+  if (!targets.length) return false;
+  const lower = targets.map(t => t.toLowerCase());
+  return arr.some(item => lower.includes(item.toLowerCase()));
+}
+
+function applyDisplayFilter(products) {
+  const noCat = DISPLAY_CATEGORIES.length === 0;
+  const noTag = DISPLAY_TAGS.length === 0;
+  if (noCat && noTag) return products;
+  return products.filter(p =>
+    arrayMatchesAny(p.categories, DISPLAY_CATEGORIES) ||
+    arrayMatchesAny(p.tags, DISPLAY_TAGS)
+  );
+}
+
+const SteamAccessories = () => {
+  const { products: localProds, loading } = useLocalProducts();
+
+  const accessories = useMemo(() => {
+    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const filtered = applyDisplayFilter(visible);
+    return [...filtered].sort((a, b) => {
+      const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;
+      if (sA !== sB) return sA - sB;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }, [localProds]);
+
+  return (
   <div className="relative">
 
     {/* ===================== */}
@@ -62,19 +108,39 @@ const SteamAccessories = () => (
     {/* ===================== */}
     <section className="sa-section">
       <div className="sa-container">
-        <div className="sa-grid">
-          {accessories.map((item, i) => (
-            <div className="sa-card" key={i}>
-              <div className="sa-img-wrap">
-                <img src={item.img} alt={item.title} className="sa-img" />
-              </div>
-              <div className="sa-card-body">
-                <h3 className="sa-card-title">{item.title}</h3>
-                <p className="sa-card-desc">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading accessories...</p>}
+        {!loading && accessories.length === 0 && (
+          <p style={{ textAlign: "center", color: "#999" }}>No steam accessories available yet.</p>
+        )}
+        {!loading && accessories.length > 0 && (
+          <div className="sa-grid">
+            {accessories.map((product) => (
+              <Link
+                key={product.id || product.slug}
+                to={`/products/${product.slug}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="sa-card">
+                  <div className="sa-img-wrap">
+                    {getImageUrl(product, "thumbnail") ? (
+                      <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="sa-img" />
+                    ) : (
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "120px", color: "#ccc" }}>
+                        <i className="fas fa-image" style={{ fontSize: "32px" }} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="sa-card-body">
+                    <h3 className="sa-card-title">{product.name}</h3>
+                    <p className="sa-card-desc">
+                      {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Premium steam accessory for optimal performance."}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
 
@@ -134,17 +200,21 @@ const SteamAccessories = () => (
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 24px;
+        grid-auto-rows: 1fr;
       }
       .sa-card {
         display: flex; flex-direction: column;
         border-radius: 16px; overflow: hidden;
-        border: 1px solid #ede5db; background: #fff;
+        background: #fff;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         text-align: center;
+        cursor: pointer;
+        height: 100%;
+        box-shadow: 0 8px 24px rgba(170,129,97,0.12);
       }
       .sa-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 16px 40px rgba(170,129,97,0.15);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 48px rgba(170,129,97,0.22);
       }
       .sa-img-wrap {
         display: flex; align-items: center; justify-content: center;
@@ -157,18 +227,25 @@ const SteamAccessories = () => (
       }
       .sa-card:hover .sa-img { transform: scale(1.08); }
       .sa-card-body {
-        padding: 14px 18px 20px;
-        border-top: 1px solid #ede5db; flex: 1;
+        padding: 18px 18px 24px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
       }
       .sa-card-title {
         font-family: 'Montserrat', sans-serif;
         font-size: 0.95rem; font-weight: 700;
-        color: #AA8161; margin-bottom: 8px;
+        color: #AA8161; margin: 0 0 10px 0;
+        min-height: 24px;
       }
       .sa-card-desc {
         font-family: 'Montserrat', sans-serif;
         font-size: 0.83rem; font-weight: 400;
-        color: #555; line-height: 1.65; margin: 0;
+        color: #666; line-height: 1.6; margin: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       /* ---- Responsive ---- */
@@ -189,6 +266,7 @@ const SteamAccessories = () => (
     `}</style>
 
   </div>
-);
+  );
+};
 
 export default SteamAccessories;

@@ -38,6 +38,7 @@ const CAPABILITY_MAP = {
   "page.logs":                ["admin", "superadmin"],
   "page.users":               ["superadmin"],
   "page.products_local":      ["editor", "admin", "superadmin"],
+  "page.analytics":           ["admin", "superadmin"],
 };
 
 /**
@@ -73,6 +74,7 @@ export function getPerms(user) {
 export const NAV_ITEMS = [
   { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view"       },
   { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",          cap: "sauna_rooms.view"    },
+  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",    cap: "page.analytics"      },
   { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",   cap: "page.models"         },
   { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",          cap: "page.taxonomy"       },
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",      cap: "page.logs"           },
