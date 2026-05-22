@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
 
-const Analytics = ({ currentUser }) => {
+const Analytics = () => {
   const [dateRange, setDateRange] = useState("7days"); // 7days, 30days, 90days
   const [stats, setStats] = useState({
     totalPageViews: 0,
@@ -17,19 +17,11 @@ const Analytics = ({ currentUser }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchAnalytics();
-  }, [dateRange]);
-
-  const getDaysFromRange = () => {
+  const fetchAnalytics = useCallback(async () => {
     const ranges = { "7days": 7, "30days": 30, "90days": 90 };
-    return ranges[dateRange] || 7;
-  };
-
-  const fetchAnalytics = async () => {
+    const days = ranges[dateRange] || 7;
     try {
       setLoading(true);
-      const days = getDaysFromRange();
       const startDate = new Date();
       startDate.setDate(startDate.getDate() - days);
 
@@ -144,7 +136,11 @@ const Analytics = ({ currentUser }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateRange]);
+
+  useEffect(() => {
+    fetchAnalytics();
+  }, [fetchAnalytics]);
 
   const formatTime = (seconds) => {
     if (seconds < 60) return `${seconds}s`;

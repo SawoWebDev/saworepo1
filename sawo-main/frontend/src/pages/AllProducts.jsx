@@ -113,13 +113,13 @@ function ProductCard({ product }) {
           ref={imgRef}
           style={{
             width: "100%",
-            height: 140,
+            height: 200,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             overflow: "hidden",
             position: "relative",
-            background: "#fafaf8",
+            background: "transparent",
           }}
         >
           {imageSrc ? (

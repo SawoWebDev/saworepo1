@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 // Components
 import ScrollToTop from "./components/ScrollToTop";
+import GDPRConsent from "./components/GDPRConsent";
 
 // Layouts
 import MainLayout  from "./layouts/MainLayout";
@@ -77,6 +78,7 @@ export default function App() {
   return (
       <Router>
         <ScrollToTop />
+        <GDPRConsent />
         <Routes>
 
           {/*  Public  */}

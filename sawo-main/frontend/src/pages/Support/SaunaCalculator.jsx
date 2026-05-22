@@ -43,30 +43,6 @@ function closestKw(targetKw, allProducts) {
   );
 }
 
-// ─── Local cache helpers (component-level, not Supabase cache) ─────────────────
-const HC_CACHE_KEY = "sawo_hc_products";
-const HC_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
-
-function getCached() {
-  try {
-    const stored = localStorage.getItem(HC_CACHE_KEY);
-    if (!stored) return null;
-    const { data, time } = JSON.parse(stored);
-    if (data && Date.now() - time < HC_CACHE_TTL) return data;
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-function setCache(data) {
-  try {
-    localStorage.setItem(HC_CACHE_KEY, JSON.stringify({ data, time: Date.now() }));
-  } catch {
-    // ignore quota errors
-  }
-}
-
 // Limit input: max 2 digits before decimal point
 function limitTwoDigits(val) {
   if (!val) return val;

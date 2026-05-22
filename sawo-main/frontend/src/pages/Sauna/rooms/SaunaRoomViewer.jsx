@@ -32,7 +32,7 @@ function getCategoryForModel(cfg, modelSize) {
 }
 
 function getAllModelsOrdered(cfg) {
-  if (!cfg.sizeCategories) return Object.keys(cfg.imageData);
+  if (!cfg.sizeCategories) return Object.keys(cfg.imageData); 
   return [...cfg.sizeCategories.small, ...cfg.sizeCategories.medium, ...cfg.sizeCategories.large];
 }
 
