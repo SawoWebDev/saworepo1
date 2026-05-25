@@ -14,6 +14,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
+import { getSiteContent, refreshSiteContent } from "../local-storage/cacheReader";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 const BUCKET      = "site-content-images";
@@ -330,6 +331,26 @@ const SECTION_EDITORS = {
   section5: Section5Editor,
 };
 
+// ── Preview Modal ─────────────────────────────────────────────────────────────
+function PreviewModal({ open, onClose, content }) {
+  if (!open || !content) return null;
+  return (
+    <div className="cms-sync-overlay" onClick={onClose}>
+      <div className="cms-sync-panel" onClick={e => e.stopPropagation()}>
+        <div className="cms-sync-header">
+          <span>👁️ Content Preview — What's on GitHub</span>
+          <button className="cms-btn cms-btn-secondary" onClick={onClose} style={{ fontSize: "12px", padding: "6px 12px" }}>Close</button>
+        </div>
+        <div className="cms-sync-log" style={{ maxHeight: "calc(80vh - 120px)", paddingTop: 12 }}>
+          <pre style={{ fontSize: "12px", lineHeight: 1.5, margin: 0, color: "#d4cfc9" }}>
+            {JSON.stringify(content, null, 2)}
+          </pre>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Sync Progress Panel ───────────────────────────────────────────────────────
 function SyncPanel({ onClose }) {
   const [lines, setLines] = useState([]);
@@ -420,11 +441,14 @@ export default function ContentCMS({ currentUser }) {
 
   const [selectedPage,    setSelectedPage]    = useState("home");
   const [selectedSection, setSelectedSection] = useState("hero");
-  const [contentMap,      setContentMap]      = useState({});  // { "home/hero": data }
-  const [dirty,           setDirty]           = useState({});  // which keys have unsaved changes
+  const [contentMap,      setContentMap]      = useState({});
+  const [dirty,           setDirty]           = useState({});
   const [saving,          setSaving]          = useState(false);
   const [saveMsg,         setSaveMsg]         = useState(null);
   const [showSync,        setShowSync]        = useState(false);
+  const [showPreview,     setShowPreview]     = useState(false);
+  const [previewContent,  setPreviewContent]  = useState(null);
+  const [cacheRefreshing, setCacheRefreshing] = useState(false);
   const [loading,         setLoading]         = useState(true);
 
   // Known sections per page (mirrors seed SQL)
@@ -495,6 +519,29 @@ export default function ContentCMS({ currentUser }) {
     }
   };
 
+  const handleShowPreview = async () => {
+    try {
+      const preview = await getSiteContent('home');
+      setPreviewContent(preview);
+      setShowPreview(true);
+    } catch (err) {
+      alert("Failed to load preview: " + err.message);
+    }
+  };
+
+  const handleRefreshCache = async () => {
+    setCacheRefreshing(true);
+    try {
+      await refreshSiteContent();
+      setSaveMsg("✅ Frontend cache refreshed! Changes will appear immediately on the live site.");
+      setTimeout(() => setSaveMsg(null), 4000);
+    } catch (err) {
+      setSaveMsg("❌ Cache refresh failed: " + err.message);
+    } finally {
+      setCacheRefreshing(false);
+    }
+  };
+
   const hasDirty     = Object.keys(dirty).length > 0;
   const thisDirty    = !!dirty[key];
   const SectionEditor = SECTION_EDITORS[selectedSection] || null;
@@ -502,6 +549,7 @@ export default function ContentCMS({ currentUser }) {
   return (
     <>
       {showSync && <SyncPanel onClose={() => setShowSync(false)} />}
+      {showPreview && <PreviewModal open={showPreview} onClose={() => setShowPreview(false)} content={previewContent} />}
 
       {/* ── Page header — matches Products.jsx / admin.css .page-header ── */}
       <div className="page-header">
@@ -510,6 +558,25 @@ export default function ContentCMS({ currentUser }) {
           {hasDirty && (
             <span className="cms-unsaved-badge">● Unsaved changes</span>
           )}
+          <button
+            className="cms-btn cms-btn-secondary"
+            onClick={handleShowPreview}
+            title="See what's currently on GitHub (live site)"
+            style={{ fontSize: "12px" }}
+          >
+            <i className="fa-solid fa-eye" style={{ marginRight: 6 }} />
+            Preview
+          </button>
+          <button
+            className="cms-btn cms-btn-secondary"
+            onClick={handleRefreshCache}
+            disabled={cacheRefreshing}
+            title="Force refresh frontend cache (use after sync)"
+            style={{ fontSize: "12px" }}
+          >
+            <i className={`fa-solid ${cacheRefreshing ? "fa-spinner fa-spin" : "fa-arrows-rotate"}`} style={{ marginRight: 6 }} />
+            {cacheRefreshing ? "Refreshing…" : "Refresh Cache"}
+          </button>
           <button
             className="cms-btn cms-btn-primary"
             onClick={() => setShowSync(true)}
