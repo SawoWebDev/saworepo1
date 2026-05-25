@@ -673,25 +673,23 @@ export default function ContentCMS({ currentUser }) {
           padding: 0;
         }
 
-        /* ── Inner sidebar — mirrors outer admin sidebar ──────────────────
-           Background:  var(--sidebar-bg)  = #141617 (dark)
-           Hover/Active: same dark-brown highlight + brand-light text        */
+        /* ── Inner sidebar — dark warm brown, matching brand theme ────────── */
         .cms-inner-sidebar {
           width: 220px;
           flex-shrink: 0;
-          background: var(--sidebar-bg, #141617);
-          border-right: 1px solid rgba(255,255,255,0.05);
+          background: #1e1410;
+          border-right: 1px solid rgba(175,133,100,0.12);
           overflow-y: auto;
           padding: 20px 0 16px;
         }
 
         .cms-page-label {
           padding: 6px 20px 10px;
-          font-size: 10.5px;
+          font-size: 10px;
           font-weight: 700;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.35);
+          color: rgba(175,133,100,0.5);
           font-family: var(--font);
           user-select: none;
         }
@@ -709,22 +707,22 @@ export default function ContentCMS({ currentUser }) {
           font-size: 13px;
           font-family: var(--font);
           font-weight: 500;
-          color: rgba(255,255,255,0.65);
+          color: rgba(201,168,130,0.7);
           display: flex;
           align-items: center;
           gap: 7px;
-          transition: background var(--t, 0.2s), color var(--t, 0.2s), border-color var(--t, 0.2s);
+          transition: background 0.18s, color 0.18s, border-color 0.18s;
           line-height: 1.4;
         }
-        /* Hover and Active use the same dark-brown brand highlight */
+        /* Hover and Active — same warm brown highlight */
         .cms-section-btn:hover,
         .cms-section-btn.active {
-          background: rgba(175, 133, 100, 0.15);
-          color: var(--brand-light, #c9a882);
-          border-left-color: var(--brand, #af8564);
+          background: rgba(175, 133, 100, 0.22);
+          color: #c9a882;
+          border-left-color: #af8564;
         }
         .cms-section-btn.active { font-weight: 600; }
-        .cms-section-btn.dirty  { color: var(--warning, #b8860b); }
+        .cms-section-btn.dirty  { color: #d4a017; }
         .cms-dirty-dot { font-size: 7px; flex-shrink: 0; }
 
         /* ── Editor main area ─────────────────────────────────────────────── */
