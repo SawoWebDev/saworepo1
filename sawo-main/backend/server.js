@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { syncMerge, updateLocalFiles, syncSaunaRooms, updateLocalSaunaRooms } from "./syncApi.js";
+import { syncMerge, updateLocalFiles, syncSaunaRooms, updateLocalSaunaRooms, syncSiteContent } from "./syncApi.js";
 
 dotenv.config();
 
@@ -182,6 +182,25 @@ app.post("/api/sync-sauna-rooms", async (_req, res) => {
   const emit = (event) => { try { res.write(JSON.stringify(event) + "\n"); } catch {} };
   try {
     await syncSaunaRooms(emit);
+  } catch (err) {
+    emit({ phase: "error", success: false, message: err.message });
+  } finally {
+    res.end();
+  }
+});
+
+app.options("/api/sync-site-content", cors());
+
+app.post("/api/sync-site-content", async (_req, res) => {
+  console.log("\n🖼️  Site content sync request received");
+  res.setHeader("Content-Type", "application/x-ndjson");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("X-Accel-Buffering", "no");
+  res.setHeader("Connection", "keep-alive");
+  if (typeof res.flushHeaders === "function") res.flushHeaders();
+  const emit = (event) => { try { res.write(JSON.stringify(event) + "\n"); } catch {} };
+  try {
+    await syncSiteContent(emit);
   } catch (err) {
     emit({ phase: "error", success: false, message: err.message });
   } finally {

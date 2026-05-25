@@ -1,24 +1,50 @@
-﻿// src/pages/Hero.jsx
+// src/pages/Hero.jsx
 import React, { useEffect, useRef } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 
-const sentences = [
+// ── Hardcoded fallbacks (used when CMS has no override) ──────────────────────
+const DEFAULT_SENTENCES = [
   "a rejuvenating escape",
   "wellness with ancient tradition",
   "an authentic Finnish sauna",
 ];
+const DEFAULT_BUTTON_TEXT = "VIEW CATALOGUE";
+const DEFAULT_BUTTON_URL  = "https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf";
+const DEFAULT_ALT         = "SAWO sauna heaters - Experience wellness and rejuvenation";
 
-const Hero = () => {
+/**
+ * Hero — receives `content` prop from Home.jsx (may be undefined/null initially).
+ * All values fall back to hardcoded defaults so the page never breaks.
+ *
+ * CMS-editable fields (from site_content table, home › hero):
+ *   image_640  / image_1024 / image_1920  — hero background at each breakpoint
+ *   alt_text                              — img alt attribute
+ *   typewriter_sentences                  — animated text lines array
+ *   button_text / button_url              — CTA button
+ */
+const Hero = ({ content = {} }) => {
   const typewriterRef = useRef(null);
 
+  // Resolve CMS values with fallbacks
+  const img640     = content.image_640  || "/640.webp";
+  const img1024    = content.image_1024 || "/1024.webp";
+  const img1920    = content.image_1920 || "/1920.webp";
+  const altText    = content.alt_text   || DEFAULT_ALT;
+  const sentences  = (content.typewriter_sentences?.length > 0)
+    ? content.typewriter_sentences
+    : DEFAULT_SENTENCES;
+  const buttonText = content.button_text || DEFAULT_BUTTON_TEXT;
+  const buttonUrl  = content.button_url  || DEFAULT_BUTTON_URL;
+
+  // Re-run typewriter when sentences change (e.g. CMS loaded after mount)
   useEffect(() => {
     const el = typewriterRef.current;
     if (!el) return;
 
-    let n = 0; // sentence index
-    let i = 0; // character index
+    let n = 0;
+    let i = 0;
     let isTyping = true;
-    let spans = [];
+    let spans    = [];
     let timeout;
 
     function setupSentence() {
@@ -28,8 +54,8 @@ const Hero = () => {
         .split("")
         .map((char) => `<span>${char}</span>`)
         .join("");
-      spans = el.querySelectorAll("span");
-      i = 0;
+      spans    = el.querySelectorAll("span");
+      i        = 0;
       isTyping = true;
     }
 
@@ -39,25 +65,24 @@ const Hero = () => {
         if (i < spans.length) {
           spans[i].style.opacity = 1;
           i++;
-          timeout = setTimeout(animate, 70); // faster typing
+          timeout = setTimeout(animate, 70);
         } else {
           isTyping = false;
-          timeout = setTimeout(animate, 900); // pause at sentence end
+          timeout  = setTimeout(animate, 900);
         }
       } else {
         if (i > 0) {
           i--;
           spans[i].style.opacity = 0;
-          timeout = setTimeout(animate, 50); // faster deleting
+          timeout = setTimeout(animate, 50);
         } else {
           n = (n + 1) % sentences.length;
           setupSentence();
-          timeout = setTimeout(animate, 500); // short pause before next
+          timeout = setTimeout(animate, 500);
         }
       }
     }
 
-    // Slight delay to ensure hero image paints first
     const start = setTimeout(() => {
       setupSentence();
       animate();
@@ -67,7 +92,8 @@ const Hero = () => {
       clearTimeout(timeout);
       clearTimeout(start);
     };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sentences.join("|")]); // re-run only when sentences actually change
 
   return (
     <section className="sauna-unique relative w-full min-h-[95vh] flex flex-col justify-center px-5 md:px-10 overflow-hidden">
@@ -78,21 +104,21 @@ const Hero = () => {
         <picture>
           <source
             media="(max-width: 640px)"
-            srcSet="/640.webp 1x"
+            srcSet={`${img640} 1x`}
             type="image/webp"
           />
           <source
             media="(max-width: 1024px)"
-            srcSet="/1024.webp 1x"
+            srcSet={`${img1024} 1x`}
             type="image/webp"
           />
           <source
-            srcSet="/1920.webp 1x"
+            srcSet={`${img1920} 1x`}
             type="image/webp"
           />
           <img
-            src="/1920.webp"
-            alt="SAWO sauna heaters - Experience wellness and rejuvenation"
+            src={img1920}
+            alt={altText}
             width="1920"
             height="1080"
             className="w-full h-full object-cover"
@@ -114,10 +140,10 @@ const Hero = () => {
         Experience . . .
       </h1>
 
+      {/* SEO fallback text (screen-reader only) */}
       <div className="sr-only">
-        a rejuvenating escape, wellness with ancient tradition, an authentic
-        Finnish sauna, SAWO sauna heaters, Finnish sauna, sauna accessories,
-        infrared sauna, steam generator
+        {sentences.join(", ")}, SAWO sauna heaters, Finnish sauna, sauna
+        accessories, infrared sauna, steam generator
       </div>
 
       <div className="stack flex flex-col items-center text-center">
@@ -129,11 +155,11 @@ const Hero = () => {
             textShadow: "0px 12px 10px rgba(0,0,0,0.9)",
             minHeight: "1.4em",
           }}
-        ></div>
+        />
 
         <ButtonClear
-          text="VIEW CATALOGUE"
-          href="https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf"
+          text={buttonText}
+          href={buttonUrl}
           download
         />
       </div>

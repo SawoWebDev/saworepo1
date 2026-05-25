@@ -2,21 +2,89 @@
  * cacheReader.js
  * src/local-storage/cacheReader.js
  *
- * Frontend cache for products and categories.
- * Fetches from Supabase once and caches in localStorage for 1 hour.
- * Zero egress for subsequent searches/views.
+ * Frontend cache for products, categories, and site content.
+ * Fetches from Supabase (products) or raw GitHub JSON (site_content) once,
+ * then caches in localStorage for 1 hour. Zero egress for subsequent views.
  *
  * ─── USAGE ────────────────────────────────────────────────────────────────────
  *  import { getVisibleProducts, getCachedProducts, refreshCache } from '../local-storage/cacheReader';
+ *  import { getSiteContent, refreshSiteContent }                  from '../local-storage/cacheReader';
  *
  *  // Get visible products (with auto-fetch if expired)
  *  const products = await getVisibleProducts();
  *
- *  // Force refresh cache
- *  await refreshCache();
+ *  // Get home page content (fetches raw GitHub JSON, caches 1 hour)
+ *  const homeContent = await getSiteContent('home');
+ *
+ *  // Force refresh site content cache
+ *  await refreshSiteContent();
  */
 
 import { getAllProductsLive } from "./supabaseReader";
+
+// ─── Site Content (from raw GitHub JSON, NOT Supabase) ────────────────────────
+// The sync script writes site_content.json to GitHub; the frontend reads from there.
+// This keeps the public site fast and avoids live Supabase reads per visitor.
+
+const GITHUB_OWNER    = process.env.REACT_APP_GITHUB_OWNER    || "jmesrafael";
+const GITHUB_MAIN_REPO = process.env.REACT_APP_MAIN_REPO      || "saworepo1";
+
+const SITE_CONTENT_URL =
+  `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}/main/sawo-main/frontend/src/Administrator/Local/data/site_content.json`;
+
+const SITE_CONTENT_CACHE_KEY       = "sawo_site_content_cache";
+const SITE_CONTENT_TIMESTAMP_KEY   = "sawo_site_content_timestamp";
+const SITE_CONTENT_CACHE_DURATION  = 60 * 60 * 1000; // 1 hour
+
+/**
+ * Fetch the full site_content.json from GitHub (or return localStorage cache).
+ * Returns the parsed JSON object  { home: { hero: {…}, section1: {…}, … }, … }
+ */
+export async function refreshSiteContent() {
+  try {
+    const res = await fetch(SITE_CONTENT_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    localStorage.setItem(SITE_CONTENT_CACHE_KEY,     JSON.stringify(json));
+    localStorage.setItem(SITE_CONTENT_TIMESTAMP_KEY, Date.now().toString());
+    return json;
+  } catch (err) {
+    console.warn("[cacheReader] Could not fetch site_content.json — using stale cache or empty.", err.message);
+    const stale = localStorage.getItem(SITE_CONTENT_CACHE_KEY);
+    return stale ? JSON.parse(stale) : {};
+  }
+}
+
+/**
+ * Get site content for a specific page (e.g. 'home').
+ * Returns an object keyed by section: { hero: {…}, section1: {…}, … }
+ * Falls back gracefully to {} so all components still work with fallback values.
+ *
+ * @param {string} page  - e.g. 'home', 'about'
+ */
+export async function getSiteContent(page = "home") {
+  const cached    = localStorage.getItem(SITE_CONTENT_CACHE_KEY);
+  const timestamp = localStorage.getItem(SITE_CONTENT_TIMESTAMP_KEY);
+  const now       = Date.now();
+
+  let allContent;
+
+  if (cached && timestamp && now - parseInt(timestamp) < SITE_CONTENT_CACHE_DURATION) {
+    allContent = JSON.parse(cached);
+  } else {
+    allContent = await refreshSiteContent();
+  }
+
+  return allContent?.[page] ?? {};
+}
+
+/**
+ * Force-clear the site content cache (useful after an admin sync).
+ */
+export function clearSiteContentCache() {
+  localStorage.removeItem(SITE_CONTENT_CACHE_KEY);
+  localStorage.removeItem(SITE_CONTENT_TIMESTAMP_KEY);
+}
 
 const CACHE_KEYS = {
   products: "sawo_products_cache",

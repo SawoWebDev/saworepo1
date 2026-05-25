@@ -3,71 +3,81 @@ import React from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 
-// Import local images from assets/Home
-import SteamGenerator from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
-import FinnishSauna from "../../assets/Home/Section1/FinnishSauna.webp";
-import SaunovaSeries from "../../assets/Home/Section1/INC-S-V2AspenSauna.webp";
-import InfraredSauna from "../../assets/Home/Section1/IR-SAUNA-1P-CEDAR.webp";
-import SaunaAccessories from "../../assets/Home/Section1/Sauna-Accessories.webp";
-import SaunaRoom from "../../assets/Home/Section1/Sauna-Room.webp";
+// Local images (used as fallbacks when CMS provides no image_url override)
+import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
+import SteamGenerator    from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
+import SaunaRoom         from "../../assets/Home/Section1/Sauna-Room.webp";
+import InfraredSauna     from "../../assets/Home/Section1/IR-SAUNA-1P-CEDAR.webp";
+import SaunaAccessories  from "../../assets/Home/Section1/Sauna-Accessories.webp";
+import SaunovaSeries     from "../../assets/Home/Section1/INC-S-V2AspenSauna.webp";
 
-const Section1 = () => {
-  const carouselItems = [
-    {
-      title: "SAUNA HEATERS",
-      caption:
-        "Rejuvenate in the warmth of a traditional Finnish sauna with SAWO's premium heaters.",
-      href: menuPaths.sauna.heaters.parent,
-      imgWebp: FinnishSauna,
-      imgJpg: FinnishSauna,
-      alt: "Finnish sauna heater collection by SAWO for efficient sauna heating",
-    },
-    {
-      title: "STEAM GENERATORS",
-      caption:
-        "Relieve your stress and tension with healing steam powered by SAWO generators.",
-      href: menuPaths.steam.generators,
-      imgWebp: SteamGenerator,
-      imgJpg: SteamGenerator,
-      alt: "SAWO steam generator for modern sauna and spa steam rooms",
-    },
-    {
-      title: "SAUNA ROOMS",
-      caption:
-        "Relax, detox, and rejuvenate in a SAWO-designed sauna room with therapeutic heat.",
-      href: menuPaths.sauna.rooms,
-      imgWebp: SaunaRoom,
-      imgJpg: SaunaRoom,
-      alt: "Standard Finnish sauna room by SAWO with natural wood design",
-    },
-    {
-      title: "INFRARED SAUNA",
-      caption:
-        "Experience deep relaxation with advanced infrared sauna technology.",
-      href: menuPaths.infrared,
-      imgWebp: InfraredSauna,
-      imgJpg: InfraredSauna,
-      alt: "Infrared sauna with cedar wood interior by SAWO",
-    },
-    {
-      title: "SAUNA ACCESSORIES",
-      caption:
-        "Enhance your sauna with thoughtfully designed SAWO accessories.",
-      href: menuPaths.sauna.accessories.parent,
-      imgWebp: SaunaAccessories,
-      imgJpg: SaunaAccessories,
-      alt: "SAWO sauna accessories collection including buckets, ladles, and thermometers",
-    },
-    {
-      title: "SAUNA CONTROLS",
-      caption:
-        "Precise temperature and time control for total comfort.",
-      href: menuPaths.sauna.controls,
-      imgWebp: SaunovaSeries,
-      imgJpg: SaunovaSeries,
-      alt: "SAWO sauna control system for ultimate comfort",
-    },
-  ];
+// ── Default carousel items (hardcoded fallbacks) ──────────────────────────────
+const DEFAULT_ITEMS = [
+  {
+    title:   "SAUNA HEATERS",
+    caption: "Rejuvenate in the warmth of a traditional Finnish sauna with SAWO's premium heaters.",
+    href:    menuPaths.sauna.heaters.parent,
+    img:     FinnishSauna,
+    alt:     "Finnish sauna heater collection by SAWO for efficient sauna heating",
+  },
+  {
+    title:   "STEAM GENERATORS",
+    caption: "Relieve your stress and tension with healing steam powered by SAWO generators.",
+    href:    menuPaths.steam.generators,
+    img:     SteamGenerator,
+    alt:     "SAWO steam generator for modern sauna and spa steam rooms",
+  },
+  {
+    title:   "SAUNA ROOMS",
+    caption: "Relax, detox, and rejuvenate in a SAWO-designed sauna room with therapeutic heat.",
+    href:    menuPaths.sauna.rooms,
+    img:     SaunaRoom,
+    alt:     "Standard Finnish sauna room by SAWO with natural wood design",
+  },
+  {
+    title:   "INFRARED SAUNA",
+    caption: "Experience deep relaxation with advanced infrared sauna technology.",
+    href:    menuPaths.infrared,
+    img:     InfraredSauna,
+    alt:     "Infrared sauna with cedar wood interior by SAWO",
+  },
+  {
+    title:   "SAUNA ACCESSORIES",
+    caption: "Enhance your sauna with thoughtfully designed SAWO accessories.",
+    href:    menuPaths.sauna.accessories.parent,
+    img:     SaunaAccessories,
+    alt:     "SAWO sauna accessories collection including buckets, ladles, and thermometers",
+  },
+  {
+    title:   "SAUNA CONTROLS",
+    caption: "Precise temperature and time control for total comfort.",
+    href:    menuPaths.sauna.controls,
+    img:     SaunovaSeries,
+    alt:     "SAWO sauna control system for ultimate comfort",
+  },
+];
+
+/**
+ * Section1 — Product category carousel.
+ * Accepts `content` prop from Home.jsx (site_content › home › section1).
+ * CMS-editable: heading, and per-item title / caption / image_url / alt.
+ * Local images are used as fallbacks when image_url is null.
+ */
+const Section1 = ({ content = {} }) => {
+  const cmsItems   = content.items   || [];
+  const heading    = content.heading || "Dive into our Sauna World";
+
+  // Merge hardcoded defaults with CMS overrides
+  const carouselItems = DEFAULT_ITEMS.map((def, i) => {
+    const cms = cmsItems[i] || {};
+    return {
+      ...def,
+      title:   cms.title   || def.title,
+      caption: cms.caption || def.caption,
+      alt:     cms.alt     || def.alt,
+      img:     cms.image_url || def.img,   // CMS URL overrides local import
+    };
+  });
 
   return (
     <div>
@@ -82,7 +92,7 @@ const Section1 = () => {
             fontSize: "35px",
           }}
         >
-          Dive into our Sauna World
+          {heading}
         </h2>
       </section>
 
@@ -103,15 +113,15 @@ const Section1 = () => {
                 >
                   <Link to={item.href} className="relative block text-white">
                     <picture>
-                      <source srcSet={item.imgWebp} type="image/webp" />
+                      <source srcSet={item.img} type="image/webp" />
                       <img
-                        src={item.imgJpg}
+                        src={item.img}
                         alt={item.alt}
                         title={item.title}
                         className="w-full h-auto block transition-transform duration-500 ease-in-out hover:scale-105"
                       />
                     </picture>
-                    <div className="sawo-carousel-overlay absolute inset-0 bg-black/30 z-10"></div>
+                    <div className="sawo-carousel-overlay absolute inset-0 bg-black/30 z-10" />
                     <div className="sawo-carousel-content absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent flex flex-col h-24 z-20">
                       <div className="sawo-carousel-title text-white text-base uppercase font-normal">
                         {item.title}
@@ -130,15 +140,9 @@ const Section1 = () => {
 
       {/* Styles */}
       <style jsx>{`
-        .sawo-carousel-container::-webkit-scrollbar {
-          display: none;
-        }
-        .sawo-carousel-container {
-          scrollbar-width: none;
-        }
-        .sawo-carousel-container:hover .sawo-carousel-track {
-          animation-play-state: paused;
-        }
+        .sawo-carousel-container::-webkit-scrollbar { display: none; }
+        .sawo-carousel-container { scrollbar-width: none; }
+        .sawo-carousel-container:hover .sawo-carousel-track { animation-play-state: paused; }
         .sawo-carousel-track {
           display: flex;
           gap: 20px;
@@ -149,32 +153,15 @@ const Section1 = () => {
           transform: translateY(0);
         }
         @keyframes sawo-scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-        @media (max-width: 1024px) {
-          .sawo-carousel-item {
-            flex: 0 0 calc(33.333% - 20px);
-          }
-        }
-        @media (max-width: 768px) {
-          .sawo-carousel-item {
-            flex: 0 0 calc(50% - 20px);
-          }
-        }
-        @media (max-width: 480px) {
-          .sawo-carousel-item {
-            flex: 0 0 100%;
-          }
-        }
+        @media (max-width: 1024px) { .sawo-carousel-item { flex: 0 0 calc(33.333% - 20px); } }
+        @media (max-width: 768px)  { .sawo-carousel-item { flex: 0 0 calc(50% - 20px); } }
+        @media (max-width: 480px)  { .sawo-carousel-item { flex: 0 0 100%; } }
       `}</style>
     </div>
   );
 };
 
 export default Section1;
-

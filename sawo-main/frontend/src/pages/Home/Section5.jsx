@@ -1,59 +1,59 @@
-﻿// src/pages/Section5.jsx
+// src/pages/Section5.jsx
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import menuPaths from "../../menuPaths";
 
-// Import local images
-import imgCustomizedSolutions from "../../assets/Home/Section5/Customized-Solutions_1.webp";
+// Local images (fallbacks when CMS provides no override)
+import imgCustomizedSolutions   from "../../assets/Home/Section5/Customized-Solutions_1.webp";
 import imgPreventiveMaintenance from "../../assets/Home/Section5/PREVENTIVE-MAINTENANCE_1.webp";
 
-const Section5 = () => {
+/**
+ * Section5 — Customized Solutions with image comparison slider.
+ * CMS-editable: heading, subtitle, body1, body2, button_text, image_left, image_right.
+ * All values fall back to the original hardcoded content when CMS override is null.
+ */
+const Section5 = ({ content = {} }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
+  const [isDragging,     setIsDragging]     = useState(false);
   const containerRef = useRef(null);
+
+  // Resolve values with fallbacks
+  const heading    = content.heading     || "Customized Solutions";
+  const subtitle   = content.subtitle   || "Let's bring your sauna vision to life.";
+  const body1      = content.body1      || "We craft sauna solutions tailored to your style and space. Whether for home or business, we've got you covered from design to installation to technical support.";
+  const body2      = content.body2      || "Call us or send us a message.";
+  const buttonText = content.button_text || "INQUIRE TODAY";
+  // Left = foreground (clipped side); Right = background (always visible)
+  const imgLeft    = content.image_left  || imgPreventiveMaintenance;
+  const imgRight   = content.image_right || imgCustomizedSolutions;
 
   const handleMove = useCallback((clientX) => {
     if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
+    const rect       = containerRef.current.getBoundingClientRect();
+    const x          = clientX - rect.left;
     const percentage = (x / rect.width) * 100;
     setSliderPosition(Math.min(Math.max(percentage, 0), 100));
   }, []);
 
   const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseUp   = () => setIsDragging(false);
 
-  const handleMouseMove = useCallback(
-    (e) => {
-      if (!isDragging) return;
-      handleMove(e.clientX);
-    },
-    [isDragging, handleMove],
-  );
-
-  const handleTouchMove = useCallback(
-    (e) => {
-      if (!isDragging) return;
-      handleMove(e.touches[0].clientX);
-    },
-    [isDragging, handleMove],
-  );
+  const handleMouseMove = useCallback((e) => { if (isDragging) handleMove(e.clientX); }, [isDragging, handleMove]);
+  const handleTouchMove = useCallback((e) => { if (isDragging) handleMove(e.touches[0].clientX); }, [isDragging, handleMove]);
 
   useEffect(() => {
     if (!isDragging) return;
-
     document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseup",   handleMouseUp);
     document.addEventListener("touchmove", handleTouchMove);
-    document.addEventListener("touchend", handleMouseUp);
-
+    document.addEventListener("touchend",  handleMouseUp);
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseup",   handleMouseUp);
       document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("touchend", handleMouseUp);
+      document.removeEventListener("touchend",  handleMouseUp);
     };
   }, [isDragging, handleMouseMove, handleTouchMove]);
 
@@ -65,44 +65,29 @@ const Section5 = () => {
           <div className="w-full lg:w-1/2 lg:pr-8">
             <h2
               className="text-4xl lg:text-5xl font-medium mb-4"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                color: "#141617",
-              }}
+              style={{ fontFamily: "Montserrat, sans-serif", color: "#141617" }}
             >
-              Customized Solutions
+              {heading}
             </h2>
             <p
               className="text-lg mb-6"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                color: "#AF8564",
-                fontWeight: 500,
-              }}
+              style={{ fontFamily: "Montserrat, sans-serif", color: "#AF8564", fontWeight: 500 }}
             >
-              Let's bring your sauna vision to life.
+              {subtitle}
             </p>
             <p
               className="text-base mb-8 leading-relaxed"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                color: "#141617",
-              }}
+              style={{ fontFamily: "Montserrat, sans-serif", color: "#141617" }}
             >
-              We craft sauna solutions tailored to your style and space. Whether
-              for home or business, we've got you covered from design to
-              installation to technical support.
+              {body1}
             </p>
             <p
               className="text-base mb-8"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                color: "#141617",
-              }}
+              style={{ fontFamily: "Montserrat, sans-serif", color: "#141617" }}
             >
-              Call us or send us a message.
+              {body2}
             </p>
-            <ButtonBrown text="INQUIRE TODAY" href={menuPaths.contact} />
+            <ButtonBrown text={buttonText} href={menuPaths.contact} />
           </div>
 
           {/* Right Image Comparison Slider */}
@@ -113,24 +98,24 @@ const Section5 = () => {
               onMouseDown={handleMouseDown}
               onTouchStart={handleMouseDown}
             >
-              {/* Background Image (Right side - Image 2) */}
+              {/* Background Image (always visible — right side) */}
               <div className="absolute inset-0">
                 <img
-                  src={imgCustomizedSolutions}
-                  alt="Customized sauna solutions"
+                  src={imgRight}
+                  alt="Sauna customized solutions"
                   className="w-full h-full object-cover"
                   draggable="false"
                   loading="eager"
                 />
               </div>
 
-              {/* Foreground Image (Left side - Image 1) */}
+              {/* Foreground Image (clipped — left side) */}
               <div
                 className="absolute inset-0"
                 style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
               >
                 <img
-                  src={imgPreventiveMaintenance}
+                  src={imgLeft}
                   alt="Preventive maintenance"
                   className="w-full h-full object-cover"
                   draggable="false"
@@ -144,15 +129,8 @@ const Section5 = () => {
                 style={{ left: `${sliderPosition}%` }}
               >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center gap-0.5">
-                  <FontAwesomeIcon
-                    icon={faChevronRight}
-                    className="rotate-180"
-                    style={{ color: "#AF8564" }}
-                  />
-                  <FontAwesomeIcon
-                    icon={faChevronRight}
-                    style={{ color: "#AF8564" }}
-                  />
+                  <FontAwesomeIcon icon={faChevronRight} className="rotate-180" style={{ color: "#AF8564" }} />
+                  <FontAwesomeIcon icon={faChevronRight} style={{ color: "#AF8564" }} />
                 </div>
               </div>
             </div>
@@ -161,12 +139,7 @@ const Section5 = () => {
       </div>
 
       <style jsx>{`
-        @media (max-width: 1024px) {
-          .container {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-          }
-        }
+        @media (max-width: 1024px) { .container { padding-left: 1.5rem; padding-right: 1.5rem; } }
       `}</style>
     </section>
   );

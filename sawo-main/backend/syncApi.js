@@ -757,3 +757,150 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
     return { success: false, message: err.message };
   }
 }
+
+// ── Site Content: full sync from Supabase ────────────────────────────────────
+// Fetches site_content rows, downloads any Supabase images to saworepo2/site-images/,
+// converts URLs to raw GitHub paths, and writes site_content.json to saworepo1.
+export async function syncSiteContent(emit = () => {}) {
+  const stats   = { images: 0, sections: 0 };
+  const workDir = path.join("/tmp", "sawo-site-content-sync-" + Date.now());
+
+  const GITHUB_RAW_SITE_IMAGES =
+    `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}/main/site-images/`;
+
+  // Process one image URL: if it's a Supabase URL, download it and return GitHub raw URL
+  async function processSiteImage(url, siteImagesDir) {
+    if (!url || typeof url !== "string") return url;
+    if (!url.includes(SUPABASE_URL))     return url; // external or already converted
+
+    const filename  = path.basename(new URL(url).pathname);
+    const outPath   = path.join(siteImagesDir, filename);
+    const githubUrl = `${GITHUB_RAW_SITE_IMAGES}${filename}`;
+
+    if (fs.existsSync(outPath) && fs.statSync(outPath).size > 0) return githubUrl;
+    const ok = await downloadImage(url, outPath);
+    if (ok) { stats.images++; return githubUrl; }
+    return url; // keep Supabase URL as fallback on failure
+  }
+
+  // Recursively walk a section's data JSONB and convert any image URLs
+  async function processSectionData(data, siteImagesDir) {
+    if (!data || typeof data !== "object") return data;
+    if (Array.isArray(data)) {
+      return Promise.all(data.map(item => processSectionData(item, siteImagesDir)));
+    }
+    const out = {};
+    const IMAGE_KEYS = new Set([
+      "image_url", "image_640", "image_1024", "image_1920",
+      "image_left", "image_right", "thumbnail",
+    ]);
+    for (const [key, val] of Object.entries(data)) {
+      if (IMAGE_KEYS.has(key) && typeof val === "string" && val.includes("://")) {
+        out[key] = await processSiteImage(val, siteImagesDir);
+      } else if (Array.isArray(val)) {
+        out[key] = await Promise.all(val.map(item => processSectionData(item, siteImagesDir)));
+      } else if (val && typeof val === "object") {
+        out[key] = await processSectionData(val, siteImagesDir);
+      } else {
+        out[key] = val;
+      }
+    }
+    return out;
+  }
+
+  try {
+    emit({ phase: "start", message: "Starting site content sync..." });
+
+    if (!GITHUB_PAT) throw new Error("GITHUB_PAT environment variable is not set");
+    if (!fs.existsSync(workDir)) fs.mkdirSync(workDir, { recursive: true });
+
+    const saworepo1Dir   = path.join(workDir, GITHUB_MAIN_REPO);
+    const saworepo2Dir   = path.join(workDir, GITHUB_IMAGES_REPO);
+    const siteImagesDir  = path.join(saworepo2Dir, "site-images");
+
+    // Clone repos
+    emit({ phase: "start", message: "Cloning repositories from GitHub..." });
+    try {
+      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      emit({ phase: "start", message: `Cloned ${GITHUB_MAIN_REPO}` });
+    } catch (e) {
+      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
+      fs.mkdirSync(saworepo1Dir, { recursive: true });
+    }
+    try {
+      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
+      emit({ phase: "start", message: `Cloned ${GITHUB_IMAGES_REPO}` });
+    } catch (e) {
+      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
+      fs.mkdirSync(saworepo2Dir, { recursive: true });
+    }
+
+    configureGit(saworepo1Dir);
+    configureGit(saworepo2Dir);
+    fs.mkdirSync(siteImagesDir, { recursive: true });
+
+    // Fetch site_content rows
+    emit({ phase: "fetch", message: "Fetching site_content from Supabase..." });
+    const { data: rows, error } = await supabase
+      .from("site_content")
+      .select("*")
+      .order("page")
+      .order("section");
+    if (error) throw new Error(`site_content fetch failed: ${error.message}`);
+    stats.sections = rows.length;
+    emit({ phase: "fetch", message: `Fetched ${rows.length} content sections` });
+
+    // Process images and build nested JSON
+    emit({ phase: "images", message: "Processing section images..." });
+    const result = {};
+    for (let i = 0; i < rows.length; i++) {
+      const { page, section, data } = rows[i];
+      if (!result[page]) result[page] = {};
+      result[page][section] = await processSectionData(data, siteImagesDir);
+      if ((i + 1) % 5 === 0 || i === rows.length - 1) {
+        emit({ phase: "images", message: `Processed ${i + 1}/${rows.length} sections (${stats.images} images)` });
+      }
+    }
+
+    // Write site_content.json to cloned saworepo1
+    emit({ phase: "write", message: "Writing site_content.json..." });
+    const timestamp      = new Date().toISOString();
+    const saworepo1DataDir = path.join(saworepo1Dir, "sawo-main/frontend/src/Administrator/Local/data");
+    fs.mkdirSync(saworepo1DataDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(saworepo1DataDir, "site_content.json"),
+      JSON.stringify(result, null, 2)
+    );
+
+    // Commit and push both repos
+    emit({ phase: "git", message: "Committing changes in saworepo1..." });
+    const r1 = commitAndPushRepo(saworepo1Dir, timestamp, stats, GITHUB_PAT);
+    if (r1.nothing)        emit({ phase: "git", message: "saworepo1: Nothing to commit" });
+    else if (r1.committed) emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed });
+    else                   emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${r1.error}`, warning: true });
+
+    emit({ phase: "git", message: "Committing changes in saworepo2..." });
+    const r2 = commitAndPushRepo(saworepo2Dir, timestamp, stats, GITHUB_PAT);
+    if (r2.nothing)        emit({ phase: "git", message: "saworepo2: Nothing to commit" });
+    else if (r2.committed) emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed });
+    else                   emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${r2.error}`, warning: true });
+
+    try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
+
+    emit({
+      phase: "complete",
+      success: true,
+      message: `Site content synced — ${rows.length} sections, ${stats.images} images`,
+      stats,
+      timestamp,
+      pushed: r1.pushed || r2.pushed,
+    });
+
+    return { success: true, ...stats, timestamp, pushed: r1.pushed || r2.pushed };
+  } catch (err) {
+    console.error("❌ Site content sync failed:", err);
+    emit({ phase: "error", success: false, message: err.message });
+    try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
+    return { success: false, message: err.message };
+  }
+}
