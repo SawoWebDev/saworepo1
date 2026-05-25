@@ -379,7 +379,12 @@ function SyncPanel({ onClose }) {
             try {
               const ev = JSON.parse(part);
               if (!cancelled) setLines(prev => [...prev, ev]);
-              if (ev.phase === "complete" || ev.phase === "error") setDone(true);
+              if (ev.phase === "complete") {
+                setDone(true);
+                // Auto-refresh frontend cache immediately after successful sync
+                setTimeout(() => refreshSiteContent(), 500);
+              }
+              if (ev.phase === "error") setDone(true);
             } catch {}
           }
         }
