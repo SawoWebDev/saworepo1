@@ -349,7 +349,7 @@ function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
 
     run("git add -A");
     const ts = timestamp.replace("T", " ").split(".")[0];
-    const commitMsg = `Auto-sync: Product images and data [${ts}]`;
+    const commitMsg = `Auto-sync: Site content sync [${ts}]`;
     run(`git commit -m "${commitMsg}"`);
 
     try {
@@ -357,6 +357,14 @@ function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
       if (!githubPat) throw new Error("GITHUB_PAT is not set");
 
       const pushUrl = `https://${githubPat}@github.com/${GITHUB_OWNER}/${path.basename(repoDir)}.git`;
+
+      // Pull latest changes before pushing to avoid conflicts
+      try {
+        run(`git pull --rebase ${pushUrl} ${branch}`);
+      } catch (e) {
+        console.warn(`⚠️  Pull/rebase warning for ${path.basename(repoDir)}:`, e.message);
+      }
+
       run(`git push ${pushUrl} ${branch}`);
       console.log(`✅ Pushed ${path.basename(repoDir)} to ${branch}`);
       return { committed: true, pushed: true, commitMsg };
