@@ -89,7 +89,7 @@ const Section4 = ({ content = {} }) => {
         <div className="accessories-carousel flex overflow-x-auto gap-6 scroll-smooth snap-x snap-mandatory px-2" ref={carouselRef}>
           {loopedItems.map((item, idx) => (
             <Link to={item.href} key={idx} className="carousel-item relative flex-shrink-0 snap-start rounded overflow-hidden group">
-              <img src={item.img} alt={item.alt} title={item.title} className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
+              <img src={item.img} alt={item.alt} title={item.title} loading="lazy" decoding="async" className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
               <div className="gradient-overlay absolute bottom-0 left-0 w-full h-2/3 z-10 pointer-events-none" />
               <div className="slide-title absolute bottom-0 w-full text-center p-2 z-20" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, color: "#fff", fontSize: "20px", lineHeight: "30px" }}>
                 {item.title}

@@ -118,6 +118,8 @@ const Section1 = ({ content = {} }) => {
                         src={item.img}
                         alt={item.alt}
                         title={item.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-auto block transition-transform duration-500 ease-in-out hover:scale-105"
                       />
                     </picture>

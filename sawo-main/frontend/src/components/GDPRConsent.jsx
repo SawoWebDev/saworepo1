@@ -8,7 +8,9 @@ export default function GDPRConsent() {
   useEffect(() => {
     const consentGiven = localStorage.getItem("gdpr-consent");
     if (!consentGiven) {
-      setShowBanner(true);
+      // Delay so the banner doesn't compete with critical page rendering
+      const t = setTimeout(() => setShowBanner(true), 1500);
+      return () => clearTimeout(t);
     }
   }, []);
 
