@@ -105,7 +105,8 @@ const Section5 = ({ content = {} }) => {
                   alt="Sauna customized solutions"
                   className="w-full h-full object-cover"
                   draggable="false"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -119,7 +120,8 @@ const Section5 = ({ content = {} }) => {
                   alt="Preventive maintenance"
                   className="w-full h-full object-cover"
                   draggable="false"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
