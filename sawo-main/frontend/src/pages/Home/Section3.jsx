@@ -84,7 +84,7 @@ const Section3 = ({ content = {} }) => {
       <div className="steam-grid">
         {steamItems.map((item, i) => (
           <Link key={i} className="steam-card has-caption" to={item.href}>
-            <img src={item.img} alt={item.title} />
+            <img src={item.img} alt={item.title} loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
           </Link>
@@ -101,7 +101,7 @@ const Section3 = ({ content = {} }) => {
       <div className="steam-grid">
         {roomItems.map((item, i) => (
           <Link key={i} className="steam-card has-caption" to={item.href}>
-            <img src={item.img} alt={item.title} />
+            <img src={item.img} alt={item.title} loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
           </Link>
@@ -118,7 +118,7 @@ const Section3 = ({ content = {} }) => {
       <div className="image-grid">
         {irItems.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
-            <img src={item.img} alt={item.title} />
+            <img src={item.img} alt={item.title} loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
         ))}
@@ -134,7 +134,7 @@ const Section3 = ({ content = {} }) => {
       <div className="image-grid">
         {controlItems.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
-            <img src={item.img} alt={item.title} />
+            <img src={item.img} alt={item.title} loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
         ))}

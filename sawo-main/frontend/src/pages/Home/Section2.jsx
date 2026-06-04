@@ -97,7 +97,7 @@ const Section2 = ({ content = {} }) => {
         <div className="sauna-carousel flex overflow-x-auto gap-6 scroll-smooth snap-x snap-mandatory px-2" ref={carouselRef}>
           {loopedItems.map((item, idx) => (
             <a href={item.href} key={idx} className="carousel-item relative flex-shrink-0 snap-start rounded overflow-hidden group">
-              <img src={item.img} alt={item.alt} title={item.title} className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
+              <img src={item.img} alt={item.alt} title={item.title} loading="lazy" decoding="async" className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
               <div className="overlay absolute inset-0 bg-black/10 transition duration-300 group-hover:bg-black/60" />
               <div className="content absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/70 to-transparent pointer-events-none">
                 <div className="title text-white text-base uppercase font-semibold text-center z-10 group-hover:opacity-0 transition-opacity duration-300">{item.title}</div>

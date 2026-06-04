@@ -1,8 +1,8 @@
 // src/App.jsx ThemeProvider wraps everything so CSS vars are available on ALL pages
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// Components
+// Components (always needed — small, no lazy needed)
 import ScrollToTop from "./components/ScrollToTop";
 import GDPRConsent from "./components/GDPRConsent";
 
@@ -11,180 +11,182 @@ import MainLayout  from "./layouts/MainLayout";
 import AdminLayout from "./Administrator/AdminLayout";
 import menuPaths   from "./menuPaths";
 
-// Public pages
-import Home             from "./pages/Home/Home";
-import Infrared         from "./pages/Infrared/Infrared";
-import About            from "./pages/AboutUs/About";
-import Sustainability   from "./pages/AboutUs/Sustainability";
-import LatestNews       from "./pages/AboutUs/LatestNews";
-import Careers          from "./pages/Careers/Careers";
-import Contact          from "./pages/Contact/Contact";
-import Sauna            from "./pages/Sauna/Sauna";
-import SaunaHeaters     from "./pages/Sauna/SaunaHeaters";
-import WallMounted      from "./pages/Sauna/heaters/WallMounted";
-import Tower            from "./pages/Sauna/heaters/Tower";
-import Stone            from "./pages/Sauna/heaters/Stone";
-import Floor            from "./pages/Sauna/heaters/Floor";
-import Combi            from "./pages/Sauna/heaters/Combi";
-import Dragonfire       from "./pages/Sauna/heaters/Dragonfire";
-import SaunaControls    from "./pages/Sauna/SaunaControls";
-import SaunaAccessories from "./pages/Sauna/SaunaAccessories";
-import SaunaRooms       from "./pages/Sauna/SaunaRooms";
-import InteriorDesign   from "./pages/Sauna/rooms/InteriorDesign";
-import WoodPanelAndTimbers from "./pages/Sauna/rooms/WoodPanelandTimbers";
-import Steam            from "./pages/Steam/Steam";
-import SteamGenerators  from "./pages/Steam/SteamGenerators";
-import SteamControls    from "./pages/Steam/SteamControls";
-import SteamAccessories from "./pages/Steam/SteamAccessories";
-import Support          from "./pages/Support/Support";
-import SaunaCalculator  from "./pages/Support/SaunaCalculator";
-import FAQ              from "./pages/Support/FAQ";
-import UserManuals      from "./pages/Support/UserManuals";
-import ProductCatalogue from "./pages/Support/ProductCatalogue";
-import AllProducts      from "./pages/AllProducts";
-import PrivacyPolicy   from "./pages/PrivacyPolicy";
-import Sitemap         from "./pages/Sitemap";
-import NotFound        from "./pages/NotFound";
-import PailsLadles        from "./pages/Sauna/accessories/PailsLadles";
-import Thermometers       from "./pages/Sauna/accessories/Thermometers";
-import ClocksSandtimers   from "./pages/Sauna/accessories/ClocksSandtimers";
-import SaunaLights        from "./pages/Sauna/accessories/SaunaLights";
-import HeadrestsBackrests from "./pages/Sauna/accessories/HeadrestsBackrests";
-import DoorsHandles       from "./pages/Sauna/accessories/DoorsHandles";
-import BenchesFloorTiles  from "./pages/Sauna/accessories/BenchesFloorTiles";
-import Kivistone          from "./pages/Sauna/accessories/Kivistone";
-import VentilationsAddOns from "./pages/Sauna/accessories/VentilationsAddOns";
-import AccessorySets from "./pages/Sauna/accessories/AccessorySets";
+// Public pages — lazy loaded so each route gets its own chunk
+const Home             = lazy(() => import("./pages/Home/Home"));
+const Infrared         = lazy(() => import("./pages/Infrared/Infrared"));
+const About            = lazy(() => import("./pages/AboutUs/About"));
+const Sustainability   = lazy(() => import("./pages/AboutUs/Sustainability"));
+const LatestNews       = lazy(() => import("./pages/AboutUs/LatestNews"));
+const Careers          = lazy(() => import("./pages/Careers/Careers"));
+const Contact          = lazy(() => import("./pages/Contact/Contact"));
+const Sauna            = lazy(() => import("./pages/Sauna/Sauna"));
+const SaunaHeaters     = lazy(() => import("./pages/Sauna/SaunaHeaters"));
+const WallMounted      = lazy(() => import("./pages/Sauna/heaters/WallMounted"));
+const Tower            = lazy(() => import("./pages/Sauna/heaters/Tower"));
+const Stone            = lazy(() => import("./pages/Sauna/heaters/Stone"));
+const Floor            = lazy(() => import("./pages/Sauna/heaters/Floor"));
+const Combi            = lazy(() => import("./pages/Sauna/heaters/Combi"));
+const Dragonfire       = lazy(() => import("./pages/Sauna/heaters/Dragonfire"));
+const SaunaControls    = lazy(() => import("./pages/Sauna/SaunaControls"));
+const SaunaAccessories = lazy(() => import("./pages/Sauna/SaunaAccessories"));
+const SaunaRooms       = lazy(() => import("./pages/Sauna/SaunaRooms"));
+const InteriorDesign   = lazy(() => import("./pages/Sauna/rooms/InteriorDesign"));
+const WoodPanelAndTimbers = lazy(() => import("./pages/Sauna/rooms/WoodPanelandTimbers"));
+const Steam            = lazy(() => import("./pages/Steam/Steam"));
+const SteamGenerators  = lazy(() => import("./pages/Steam/SteamGenerators"));
+const SteamControls    = lazy(() => import("./pages/Steam/SteamControls"));
+const SteamAccessories = lazy(() => import("./pages/Steam/SteamAccessories"));
+const Support          = lazy(() => import("./pages/Support/Support"));
+const SaunaCalculator  = lazy(() => import("./pages/Support/SaunaCalculator"));
+const FAQ              = lazy(() => import("./pages/Support/FAQ"));
+const UserManuals      = lazy(() => import("./pages/Support/UserManuals"));
+const ProductCatalogue = lazy(() => import("./pages/Support/ProductCatalogue"));
+const AllProducts      = lazy(() => import("./pages/AllProducts"));
+const PrivacyPolicy    = lazy(() => import("./pages/PrivacyPolicy"));
+const Sitemap          = lazy(() => import("./pages/Sitemap"));
+const NotFound         = lazy(() => import("./pages/NotFound"));
+const PailsLadles        = lazy(() => import("./pages/Sauna/accessories/PailsLadles"));
+const Thermometers       = lazy(() => import("./pages/Sauna/accessories/Thermometers"));
+const ClocksSandtimers   = lazy(() => import("./pages/Sauna/accessories/ClocksSandtimers"));
+const SaunaLights        = lazy(() => import("./pages/Sauna/accessories/SaunaLights"));
+const HeadrestsBackrests = lazy(() => import("./pages/Sauna/accessories/HeadrestsBackrests"));
+const DoorsHandles       = lazy(() => import("./pages/Sauna/accessories/DoorsHandles"));
+const BenchesFloorTiles  = lazy(() => import("./pages/Sauna/accessories/BenchesFloorTiles"));
+const Kivistone          = lazy(() => import("./pages/Sauna/accessories/Kivistone"));
+const VentilationsAddOns = lazy(() => import("./pages/Sauna/accessories/VentilationsAddOns"));
+const AccessorySets      = lazy(() => import("./pages/Sauna/accessories/AccessorySets"));
+const ProductPageRouter  = lazy(() => import("./pages/ProductPageRouter"));
+const DispAccessories    = lazy(() => import("./pages/IndividualDisplay/DispAccessories"));
+const AccessoriesCatalog = lazy(() => import("./pages/AccessoriesCatalog"));
+const DispSaunaRoom      = lazy(() => import("./pages/IndividualDisplay/DispSaunaRoom"));
 
-// Dynamic product detail pages
-import ProductPageRouter from "./pages/ProductPageRouter";
-import DispAccessories from "./pages/IndividualDisplay/DispAccessories";
-import AccessoriesCatalog from "./pages/AccessoriesCatalog";
-import DispSaunaRoom from "./pages/IndividualDisplay/DispSaunaRoom";
-
-// Admin pages
-import Login     from "./Administrator/Login";
-import ResetPassword from "./Administrator/ResetPassword";
-import Users     from "./Administrator/Users";
-import Products  from "./Administrator/Products";
-import SaunaRoomsAdmin from "./Administrator/SaunaRoomsCMS";
-import ContentCMS from "./Administrator/ContentCMS";
-import Models    from "./Administrator/Models";
-import Taxonomy  from "./Administrator/Taxonomy";
-import Logs  from "./Administrator/Logs";
-import Analytics from "./Administrator/Analytics";
-import ProtectedRoute from "./Administrator/ProtectedRoute";
+// Admin pages — separate chunks, only loaded when authenticated users visit /admin/*
+const Login          = lazy(() => import("./Administrator/Login"));
+const ResetPassword  = lazy(() => import("./Administrator/ResetPassword"));
+const Users          = lazy(() => import("./Administrator/Users"));
+const Products       = lazy(() => import("./Administrator/Products"));
+const SaunaRoomsAdmin = lazy(() => import("./Administrator/SaunaRoomsCMS"));
+const ContentCMS     = lazy(() => import("./Administrator/ContentCMS"));
+const Models         = lazy(() => import("./Administrator/Models"));
+const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
+const Logs           = lazy(() => import("./Administrator/Logs"));
+const Analytics      = lazy(() => import("./Administrator/Analytics"));
+const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
 
 export default function App() {
   return (
       <Router>
         <ScrollToTop />
         <GDPRConsent />
-        <Routes>
+        <Suspense fallback={null}>
+          <Routes>
 
-          {/*  Public  */}
-          <Route path="*" element={
-            <MainLayout>
-              <Routes>
-                <Route path={menuPaths.home}                    element={<Home />} />
-                <Route path={menuPaths.infrared}                element={<Infrared />} />
-                <Route path={menuPaths.about.parent}            element={<About />} />
-                <Route path={menuPaths.about.sustainability}    element={<Sustainability />} />
-                <Route path={menuPaths.about.news}              element={<LatestNews />} />
-                <Route path={menuPaths.sauna.parent}            element={<Sauna />} />
-                <Route path={menuPaths.steam.parent}            element={<Steam />} />
-                <Route path={menuPaths.support.parent}          element={<Support />} />
-                <Route path={menuPaths.careers}                 element={<Careers />} />
-                <Route path={menuPaths.contact}                 element={<Contact />} />
-                <Route path={menuPaths.sauna.heaters.parent}    element={<SaunaHeaters />} />
-                <Route path={menuPaths.sauna.heaters.wallMounted} element={<WallMounted />} />
-                <Route path={menuPaths.sauna.heaters.tower}     element={<Tower />} />
-                <Route path={menuPaths.sauna.heaters.stone}     element={<Stone />} />
-                <Route path={menuPaths.sauna.heaters.floor}     element={<Floor />} />
-                <Route path={menuPaths.sauna.heaters.combi}     element={<Combi />} />
-                <Route path={menuPaths.sauna.heaters.dragonfire} element={<Dragonfire />} />
-                <Route path={menuPaths.sauna.controls}          element={<SaunaControls />} />
-                <Route path={menuPaths.sauna.accessories.parent} element={<SaunaAccessories />} />
-                <Route path={menuPaths.sauna.accessories.pailsLadles}        element={<PailsLadles />} />
-                <Route path={menuPaths.sauna.accessories.thermometers}       element={<Thermometers />} />
-                <Route path={menuPaths.sauna.accessories.clocksSandtimers}   element={<ClocksSandtimers />} />
-                <Route path={menuPaths.sauna.accessories.lightsCovers}       element={<SaunaLights />} />
-                <Route path={menuPaths.sauna.accessories.headrestsBackrests} element={<HeadrestsBackrests />} />
-                <Route path={menuPaths.sauna.accessories.doorsHandles}       element={<DoorsHandles />} />
-                <Route path={menuPaths.sauna.accessories.benches}            element={<BenchesFloorTiles />} />
-                <Route path={menuPaths.sauna.accessories.kivistone}          element={<Kivistone />} />
-                <Route path={menuPaths.sauna.accessories.ventilations}       element={<VentilationsAddOns />} />
-                <Route path={menuPaths.sauna.accessories.accessorySets}      element={<AccessorySets />} />
-                <Route path={menuPaths.sauna.rooms}             element={<SaunaRooms />} />
-                <Route path={menuPaths.sauna.interiorDesigns}   element={<InteriorDesign />} />
-                <Route path={menuPaths.sauna.woodPanels}        element={<WoodPanelAndTimbers />} />
-                <Route path={menuPaths.steam.generators}        element={<SteamGenerators />} />
-                <Route path={menuPaths.steam.controls}          element={<SteamControls />} />
-                <Route path={menuPaths.steam.accessories}       element={<SteamAccessories />} />
-                <Route path={menuPaths.support.faq}             element={<FAQ />} />
-                <Route path={menuPaths.support.saunaCalculator} element={<SaunaCalculator />} />
-                <Route path={menuPaths.support.manuals}         element={<UserManuals />} />
-                <Route path={menuPaths.support.catalogue}       element={<ProductCatalogue />} />
-                <Route path="/products" element={<AllProducts />} />
-                <Route path={menuPaths.privacy}              element={<PrivacyPolicy />} />
-                <Route path={menuPaths.sitemap}              element={<Sitemap />} />
+            {/*  Public  */}
+            <Route path="*" element={
+              <MainLayout>
+                <Suspense fallback={null}>
+                  <Routes>
+                    <Route path={menuPaths.home}                    element={<Home />} />
+                    <Route path={menuPaths.infrared}                element={<Infrared />} />
+                    <Route path={menuPaths.about.parent}            element={<About />} />
+                    <Route path={menuPaths.about.sustainability}    element={<Sustainability />} />
+                    <Route path={menuPaths.about.news}              element={<LatestNews />} />
+                    <Route path={menuPaths.sauna.parent}            element={<Sauna />} />
+                    <Route path={menuPaths.steam.parent}            element={<Steam />} />
+                    <Route path={menuPaths.support.parent}          element={<Support />} />
+                    <Route path={menuPaths.careers}                 element={<Careers />} />
+                    <Route path={menuPaths.contact}                 element={<Contact />} />
+                    <Route path={menuPaths.sauna.heaters.parent}    element={<SaunaHeaters />} />
+                    <Route path={menuPaths.sauna.heaters.wallMounted} element={<WallMounted />} />
+                    <Route path={menuPaths.sauna.heaters.tower}     element={<Tower />} />
+                    <Route path={menuPaths.sauna.heaters.stone}     element={<Stone />} />
+                    <Route path={menuPaths.sauna.heaters.floor}     element={<Floor />} />
+                    <Route path={menuPaths.sauna.heaters.combi}     element={<Combi />} />
+                    <Route path={menuPaths.sauna.heaters.dragonfire} element={<Dragonfire />} />
+                    <Route path={menuPaths.sauna.controls}          element={<SaunaControls />} />
+                    <Route path={menuPaths.sauna.accessories.parent} element={<SaunaAccessories />} />
+                    <Route path={menuPaths.sauna.accessories.pailsLadles}        element={<PailsLadles />} />
+                    <Route path={menuPaths.sauna.accessories.thermometers}       element={<Thermometers />} />
+                    <Route path={menuPaths.sauna.accessories.clocksSandtimers}   element={<ClocksSandtimers />} />
+                    <Route path={menuPaths.sauna.accessories.lightsCovers}       element={<SaunaLights />} />
+                    <Route path={menuPaths.sauna.accessories.headrestsBackrests} element={<HeadrestsBackrests />} />
+                    <Route path={menuPaths.sauna.accessories.doorsHandles}       element={<DoorsHandles />} />
+                    <Route path={menuPaths.sauna.accessories.benches}            element={<BenchesFloorTiles />} />
+                    <Route path={menuPaths.sauna.accessories.kivistone}          element={<Kivistone />} />
+                    <Route path={menuPaths.sauna.accessories.ventilations}       element={<VentilationsAddOns />} />
+                    <Route path={menuPaths.sauna.accessories.accessorySets}      element={<AccessorySets />} />
+                    <Route path={menuPaths.sauna.rooms}             element={<SaunaRooms />} />
+                    <Route path={menuPaths.sauna.interiorDesigns}   element={<InteriorDesign />} />
+                    <Route path={menuPaths.sauna.woodPanels}        element={<WoodPanelAndTimbers />} />
+                    <Route path={menuPaths.steam.generators}        element={<SteamGenerators />} />
+                    <Route path={menuPaths.steam.controls}          element={<SteamControls />} />
+                    <Route path={menuPaths.steam.accessories}       element={<SteamAccessories />} />
+                    <Route path={menuPaths.support.faq}             element={<FAQ />} />
+                    <Route path={menuPaths.support.saunaCalculator} element={<SaunaCalculator />} />
+                    <Route path={menuPaths.support.manuals}         element={<UserManuals />} />
+                    <Route path={menuPaths.support.catalogue}       element={<ProductCatalogue />} />
+                    <Route path="/products" element={<AllProducts />} />
+                    <Route path={menuPaths.privacy}              element={<PrivacyPolicy />} />
+                    <Route path={menuPaths.sitemap}              element={<Sitemap />} />
 
-                {/* Single product detail page */}
-                <Route path="/products/:slug" element={<ProductPageRouter />} />
+                    {/* Single product detail page */}
+                    <Route path="/products/:slug" element={<ProductPageRouter />} />
 
-                {/* Accessories catalog (all accessories listing) */}
-                <Route path="/accessories" element={<AccessoriesCatalog />} />
+                    {/* Accessories catalog (all accessories listing) */}
+                    <Route path="/accessories" element={<AccessoriesCatalog />} />
 
-                {/* Single accessory product detail page */}
-                <Route path="/accessories/:slug" element={<DispAccessories />} />
+                    {/* Single accessory product detail page */}
+                    <Route path="/accessories/:slug" element={<DispAccessories />} />
 
-                {/* Single sauna room detail page */}
-                <Route path="/sauna/rooms/:slug" element={<DispSaunaRoom />} />
+                    {/* Single sauna room detail page */}
+                    <Route path="/sauna/rooms/:slug" element={<DispSaunaRoom />} />
 
-                {/* 404 Not Found page - must be last in nested routes */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </MainLayout>
-          } />
+                    {/* 404 Not Found page - must be last in nested routes */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
+              </MainLayout>
+            } />
 
-          {/*  Admin  */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin/reset-password" element={<ResetPassword />} />
+            {/*  Admin  */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin/reset-password" element={<ResetPassword />} />
 
-          <Route path="/admin/users" element={
-            <ProtectedRoute requiredCap="page.users"><AdminLayout><Users /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/products" element={
-            <ProtectedRoute><AdminLayout><Products /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/sauna-rooms" element={
-            <ProtectedRoute requiredCap="sauna_rooms.view"><AdminLayout><SaunaRoomsAdmin /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/content" element={
-            <ProtectedRoute requiredCap="page.content"><AdminLayout><ContentCMS /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/taxonomy" element={
-            <ProtectedRoute requiredCap="page.taxonomy"><AdminLayout><Taxonomy /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/logs" element={
-            <ProtectedRoute requiredCap="page.logs"><AdminLayout><Logs /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/models" element={
-            <ProtectedRoute requiredCap="page.models"><AdminLayout><Models /></AdminLayout></ProtectedRoute>
-          } />
-          <Route path="/admin/analytics" element={
-            <ProtectedRoute requiredCap="page.analytics"><AdminLayout><Analytics /></AdminLayout></ProtectedRoute>
-          } />
+            <Route path="/admin/users" element={
+              <ProtectedRoute requiredCap="page.users"><AdminLayout><Users /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/products" element={
+              <ProtectedRoute><AdminLayout><Products /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/sauna-rooms" element={
+              <ProtectedRoute requiredCap="sauna_rooms.view"><AdminLayout><SaunaRoomsAdmin /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/content" element={
+              <ProtectedRoute requiredCap="page.content"><AdminLayout><ContentCMS /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/taxonomy" element={
+              <ProtectedRoute requiredCap="page.taxonomy"><AdminLayout><Taxonomy /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/logs" element={
+              <ProtectedRoute requiredCap="page.logs"><AdminLayout><Logs /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/models" element={
+              <ProtectedRoute requiredCap="page.models"><AdminLayout><Models /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/analytics" element={
+              <ProtectedRoute requiredCap="page.analytics"><AdminLayout><Analytics /></AdminLayout></ProtectedRoute>
+            } />
 
-          {/* Legacy editor products route — redirect to unified products page */}
-          <Route path="/admin/editor/products" element={
-            <Navigate to="/admin/products" replace />
-          } />
+            {/* Legacy editor products route — redirect to unified products page */}
+            <Route path="/admin/editor/products" element={
+              <Navigate to="/admin/products" replace />
+            } />
 
-          {/* Redirect root /admin login */}
-          <Route path="/admin" element={<Navigate to="/login" replace />} />
+            {/* Redirect root /admin login */}
+            <Route path="/admin" element={<Navigate to="/login" replace />} />
 
-        </Routes>
+          </Routes>
+        </Suspense>
       </Router>
   );
 }
