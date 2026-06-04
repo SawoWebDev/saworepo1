@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 // Components (always needed — small, no lazy needed)
 import ScrollToTop from "./components/ScrollToTop";
-import GDPRConsent from "./components/GDPRConsent";
+// import GDPRConsent from "./components/GDPRConsent"; // temporarily disabled
 
 // Layouts
 import MainLayout  from "./layouts/MainLayout";
@@ -81,7 +81,8 @@ export default function App() {
   return (
       <Router>
         <ScrollToTop />
-        <GDPRConsent />
+        {/* Consent banner temporarily disabled — re-enable when ready */}
+        {/* <GDPRConsent /> */}
         <Suspense fallback={null}>
           <Routes>
 
