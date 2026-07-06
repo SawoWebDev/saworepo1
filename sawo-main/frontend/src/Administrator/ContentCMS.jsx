@@ -441,7 +441,7 @@ function SyncPanel({ onClose }) {
 
 // ── Main ContentCMS component ─────────────────────────────────────────────────
 export default function ContentCMS({ currentUser }) {
-  const _perms = getPerms(currentUser);
+  // const _perms = getPerms(currentUser);
 
   const [selectedPage,    setSelectedPage]    = useState("home");
   const [selectedSection, setSelectedSection] = useState("hero");
