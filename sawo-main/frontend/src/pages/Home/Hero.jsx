@@ -1,6 +1,7 @@
 // src/pages/Hero.jsx
 import React, { useEffect, useRef } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
+import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
 // ── Hardcoded fallbacks (used when CMS has no override) ──────────────────────
 const DEFAULT_SENTENCES = [
@@ -83,14 +84,23 @@ const Hero = ({ content = {} }) => {
       }
     }
 
-    const start = setTimeout(() => {
+    // Reduced motion: render the first sentence statically, no animation loop.
+    if (prefersReducedMotion()) {
+      el.textContent = sentences[0];
+      el.style.opacity = 1;
+      return;
+    }
+
+    // Defer the typewriter until after load + idle so Lighthouse can finalize
+    // LCP/TBT on a settled page (prevents the `NO_LCP` runtime error).
+    const cancelStart = afterPageLoad(() => {
       setupSentence();
       animate();
-    }, 300);
+    });
 
     return () => {
       clearTimeout(timeout);
-      clearTimeout(start);
+      cancelStart();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sentences.join("|")]); // re-run only when sentences actually change

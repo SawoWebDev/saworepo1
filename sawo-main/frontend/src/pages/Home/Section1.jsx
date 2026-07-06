@@ -1,7 +1,8 @@
 // src/pages/Section1.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
+import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
 // Local images (used as fallbacks when CMS provides no image_url override)
 import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
@@ -67,6 +68,14 @@ const Section1 = ({ content = {} }) => {
   const cmsItems   = content.items   || [];
   const heading    = content.heading || "Dive into our Sauna World";
 
+  // Keep the infinite scroll paused until after load so Lighthouse can settle
+  // the page and finalize LCP/TBT (prevents the `NO_LCP` runtime error).
+  const [isReady, setIsReady] = useState(false);
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    return afterPageLoad(() => setIsReady(true));
+  }, []);
+
   // Merge hardcoded defaults with CMS overrides
   const carouselItems = DEFAULT_ITEMS.map((def, i) => {
     const cms = cmsItems[i] || {};
@@ -104,7 +113,7 @@ const Section1 = ({ content = {} }) => {
             role="region"
             aria-label="SAWO Sauna Products Carousel"
           >
-            <div className="sawo-carousel-track flex gap-5">
+            <div className={`sawo-carousel-track flex gap-5${isReady ? " is-ready" : ""}`}>
               {[...carouselItems, ...carouselItems].map((item, index) => (
                 <div
                   className="sawo-carousel-item flex-shrink-0 w-[calc(25%-20px)] rounded overflow-hidden relative snap-start"
@@ -151,6 +160,10 @@ const Section1 = ({ content = {} }) => {
           display: flex;
           gap: 20px;
           animation: sawo-scroll 17s linear infinite;
+          animation-play-state: paused;
+        }
+        .sawo-carousel-track.is-ready {
+          animation-play-state: running;
         }
         .sawo-carousel-item:hover .sawo-carousel-caption {
           opacity: 1;

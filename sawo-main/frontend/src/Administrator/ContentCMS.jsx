@@ -13,7 +13,6 @@
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, logActivity } from "./supabase";
-import { getPerms } from "./permissions";
 import { getSiteContent, refreshSiteContent } from "../local-storage/cacheReader";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
@@ -442,7 +441,7 @@ function SyncPanel({ onClose }) {
 
 // ── Main ContentCMS component ─────────────────────────────────────────────────
 export default function ContentCMS({ currentUser }) {
-  const perms = getPerms(currentUser);
+  const _perms = getPerms(currentUser);
 
   const [selectedPage,    setSelectedPage]    = useState("home");
   const [selectedSection, setSelectedSection] = useState("hero");
@@ -461,7 +460,7 @@ export default function ContentCMS({ currentUser }) {
     home: ["hero", "section1", "section2", "section3", "section4", "section5"],
   };
 
-  const sections = PAGE_SECTIONS[selectedPage] || [];
+  // const sections = PAGE_SECTIONS[selectedPage] || [];
 
   // Load all site_content rows from Supabase
   const loadContent = useCallback(async () => {

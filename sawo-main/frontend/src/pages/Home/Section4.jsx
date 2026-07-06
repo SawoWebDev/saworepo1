@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
+import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
 // Local images (fallbacks)
 import imgPailsLadles        from "../../assets/Home/Section4/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE.webp";
@@ -45,17 +46,26 @@ const Section4 = ({ content = {} }) => {
   const loopedItems = [...accessories, ...accessories];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (carouselRef.current && !isHovered) {
-        const itemWidth = carouselRef.current.firstChild.offsetWidth + 24;
-        if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
-          carouselRef.current.scrollLeft = 0;
-        } else {
-          carouselRef.current.scrollBy({ left: itemWidth, behavior: "smooth" });
+    if (prefersReducedMotion()) return;
+    let interval;
+    // Defer the auto-scroll until after load + idle so Lighthouse can settle
+    // the page and finalize LCP/TBT (prevents the `NO_LCP` runtime error).
+    const cancelStart = afterPageLoad(() => {
+      interval = setInterval(() => {
+        if (carouselRef.current && !isHovered) {
+          const itemWidth = carouselRef.current.firstChild.offsetWidth + 24;
+          if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
+            carouselRef.current.scrollLeft = 0;
+          } else {
+            carouselRef.current.scrollBy({ left: itemWidth, behavior: "smooth" });
+          }
         }
-      }
-    }, 3000);
-    return () => clearInterval(interval);
+      }, 3000);
+    });
+    return () => {
+      cancelStart();
+      clearInterval(interval);
+    };
   }, [isHovered]);
 
   const scrollLeft = () => {
