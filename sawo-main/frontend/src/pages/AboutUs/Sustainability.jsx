@@ -618,7 +618,6 @@ const Sustainability = () => {
 
         {/* Styles */}
         <style jsx>{`
-          @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
 
           .waste-hierarchy-section {
             max-width: 1200px;
@@ -851,7 +850,6 @@ const Sustainability = () => {
 
         {/* Styles */}
         <style jsx>{`
-          @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
 
           .unique-wellbeing {
             max-width: 1200px;

@@ -182,16 +182,7 @@ export default function Header() {
 
   return (
     <>
-      {/* Preload Montserrat font */}
-      <link
-        rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap"
-        as="style"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap"
-        rel="stylesheet"
-      />
+      {/* Montserrat is loaded once in public/index.html */}
       <header
         className={`fixed top-0 left-0 w-full bg-white z-50 shadow-md transition-transform duration-500 font-sans ${
           hidden ? "-translate-y-full" : "translate-y-0"

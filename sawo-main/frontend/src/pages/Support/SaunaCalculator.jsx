@@ -167,7 +167,6 @@ export default function SaunaCalculator() {
   return (
     <div id="sawo-hc-wrap">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
         #sawo-hc-wrap,
         #sawo-hc-wrap * {

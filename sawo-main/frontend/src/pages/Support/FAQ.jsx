@@ -300,7 +300,6 @@ export default function FAQ() {
   return (
     <div style={{ fontFamily: "Montserrat, sans-serif" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
 
         .faq-tab-btn {
           display: flex;

@@ -396,7 +396,6 @@ export default function SaunaRoomDisplay() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
         @media(max-width:900px){ .pp-s1-grid { grid-template-columns: 1fr !important; gap: 28px !important; } }
         @media(max-width:600px){ .pp-outer { padding-left: 16px !important; padding-right: 16px !important; } }

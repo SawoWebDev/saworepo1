@@ -8,7 +8,6 @@ import ScrollToTop from "./components/ScrollToTop";
 
 // Layouts
 import MainLayout  from "./layouts/MainLayout";
-import AdminLayout from "./Administrator/AdminLayout";
 import menuPaths   from "./menuPaths";
 
 // Home is the landing page — keep it in the main bundle so it paints
@@ -65,6 +64,9 @@ const AccessoriesCatalog = lazy(() => import("./pages/AccessoriesCatalog"));
 const DispSaunaRoom      = lazy(() => import("./pages/IndividualDisplay/DispSaunaRoom"));
 
 // Admin pages — separate chunks, only loaded when authenticated users visit /admin/*
+// AdminLayout included: a static import would drag Administrator/supabase (the
+// whole supabase-js SDK) plus admin.css into the main bundle every visitor downloads.
+const AdminLayout    = lazy(() => import("./Administrator/AdminLayout"));
 const Login          = lazy(() => import("./Administrator/Login"));
 const ResetPassword  = lazy(() => import("./Administrator/ResetPassword"));
 const Users          = lazy(() => import("./Administrator/Users"));

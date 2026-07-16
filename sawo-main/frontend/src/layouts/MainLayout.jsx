@@ -1,7 +1,12 @@
   import Header from "../components/Header/Header";
   import Footer from "../components/Footer/Footer";
+  import { usePageTracking } from "../local-storage/track";
 
   export default function MainLayout({ children }) {
+    // Lightweight first-party page-view tracking (skips admins; ~300B POST
+    // per route change, feeds /admin/analytics). See local-storage/track.js.
+    usePageTracking();
+
     return (
       <div className="flex flex-col min-h-screen bg-white text-[#333] font-[Montserrat] transition-colors duration-300">
         {/* Fixed header with highest z-index */}

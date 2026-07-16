@@ -15,7 +15,7 @@
  * render, but short enough that a toggle takes effect within seconds.
  */
 
-import { supabase } from "../Administrator/supabase";
+import { getSupabase } from "./supabaseClient";
 
 const KEY = "data_source";
 const CACHE_STORAGE_KEY = "sawo_data_source_cache";
@@ -41,6 +41,7 @@ export async function getDataSource() {
   } catch {}
 
   try {
+    const supabase = await getSupabase();
     const { data, error } = await supabase
       .from("app_settings")
       .select("value")
@@ -64,6 +65,7 @@ export async function setDataSource(value, username = null) {
     throw new Error(`Invalid data source: ${value}`);
   }
 
+  const supabase = await getSupabase();
   const { error } = await supabase
     .from("app_settings")
     .upsert({ key: KEY, value, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });

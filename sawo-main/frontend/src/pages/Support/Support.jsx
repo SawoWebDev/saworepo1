@@ -9,7 +9,6 @@ const Support = () => {
   return (
     <div className="relative">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
         .support-hero {
           min-height: 550px;

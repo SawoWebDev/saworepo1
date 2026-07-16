@@ -52,7 +52,6 @@ const SaunaAccessories = () => {
         <h2 className="sa-section-title">Discover the Perfect Sauna Accessories</h2>
 
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
           .custom-product-grid,
           .custom-product-grid * {
@@ -187,7 +186,6 @@ const SaunaAccessories = () => {
       {/* GLOBAL STYLES         */}
       {/* ===================== */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
         .sa-hero-overlay {
           position: absolute;

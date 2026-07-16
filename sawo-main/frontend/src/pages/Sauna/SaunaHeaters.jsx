@@ -104,7 +104,6 @@ const SaunaHeaters = () => {
 
         {/* sawo-sec heaters grid */}
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
           .sawo-sec .sawo-grid {
             display: grid;
@@ -267,7 +266,6 @@ const SaunaHeaters = () => {
       {/* GLOBAL STYLES         */}
       {/* ===================== */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
         /* ---- Hero ---- */
         .sh-hero-overlay {

@@ -218,10 +218,6 @@ const Sauna = () => {
         </div>
 
         {/* Heaters Grid - sawo-sec */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
         <style>{`
           body { margin: 0; overflow-x: hidden; }
 
@@ -707,7 +703,6 @@ const Sauna = () => {
       {/* GLOBAL STYLES         */}
       {/* ===================== */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
 
         .sauna-hero {
           position: relative;

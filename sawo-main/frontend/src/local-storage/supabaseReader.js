@@ -17,14 +17,14 @@
  *  const products = getAllProducts();
  */
 
-import { supabase } from "../Administrator/supabase";
+import { getSupabase } from "./supabaseClient";
 
 /**
  * Fetch all products live from Supabase
  */
 export async function getAllProductsLive() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (await getSupabase())
       .from("products")
       .select("*")
       .order("created_at", { ascending: false });
@@ -42,7 +42,7 @@ export async function getAllProductsLive() {
  */
 export async function getAllCategoriesLive() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (await getSupabase())
       .from("categories")
       .select("*")
       .order("name", { ascending: true });
@@ -60,7 +60,7 @@ export async function getAllCategoriesLive() {
  */
 export async function getAllTagsLive() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (await getSupabase())
       .from("tags")
       .select("*")
       .order("name", { ascending: true });
@@ -78,7 +78,7 @@ export async function getAllTagsLive() {
  */
 export async function getProductByIdLive(id) {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (await getSupabase())
       .from("products")
       .select("*")
       .eq("id", id)
@@ -97,7 +97,7 @@ export async function getProductByIdLive(id) {
  */
 export async function getProductBySlugLive(slug) {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (await getSupabase())
       .from("products")
       .select("*")
       .eq("slug", slug)
@@ -117,7 +117,7 @@ export async function getProductBySlugLive(slug) {
  */
 export async function getAllSaunaRoomsLive() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (await getSupabase())
       .from("sauna_rooms")
       .select("*")
       .eq("is_deleted", false)
@@ -223,7 +223,7 @@ export async function getVisibleProductsCached(force = false) {
   // ─── Step 3: Fetch from Supabase (with selective fields to reduce egress) ───
   const fetchPromise = (async () => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (await getSupabase())
         .from("products")
         .select("id,name,slug,thumbnail,categories,tags,status,visible,sort_order,features,short_description,files")
         .eq("status", "published")

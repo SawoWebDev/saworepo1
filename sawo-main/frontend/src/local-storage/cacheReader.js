@@ -22,7 +22,7 @@
 
 import { getAllProductsLive } from "./supabaseReader";
 import { getDataSource } from "./dataSource";
-import { supabase } from "../Administrator/supabase";
+import { getSupabase } from "./supabaseClient";
 
 // ─── Site Content ───────────────────────────────────────────────────────────
 // Reads from the GitHub-synced site_content.json by default, or live Supabase
@@ -49,6 +49,7 @@ export async function refreshSiteContent() {
     let json;
 
     if (source === "supabase") {
+      const supabase = await getSupabase();
       const { data, error } = await supabase.from("site_content").select("page, section, data");
       if (error) throw new Error(error.message);
       json = {};
