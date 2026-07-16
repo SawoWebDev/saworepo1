@@ -112,6 +112,27 @@ export async function getProductBySlugLive(slug) {
 }
 
 /**
+ * Fetch all sauna rooms live from Supabase (mirrors the GitHub-synced
+ * saunaroom-data.json shape/filter used by useLocalSaunaRooms).
+ */
+export async function getAllSaunaRoomsLive() {
+  try {
+    const { data, error } = await supabase
+      .from("sauna_rooms")
+      .select("*")
+      .eq("is_deleted", false)
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch sauna rooms:", err);
+    return [];
+  }
+}
+
+/**
  * Get visible (published & visible) products live from Supabase
  */
 export async function getVisibleProductsLive() {

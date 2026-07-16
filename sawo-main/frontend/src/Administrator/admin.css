@@ -134,12 +134,26 @@ body {
 .sidebar-nav a i { width:18px; text-align:center; font-size:0.9rem; opacity:0.8; }
 
 .sidebar-footer {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1.25rem 1rem;
   border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sidebar-footer-row {
   display: flex;
   align-items: center;
   gap: 0.6rem;
 }
+.sidebar-datasource-btn {
+  width: 100% !important;
+  justify-content: center;
+  border-radius: var(--r-sm) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+.sidebar-datasource-btn:hover:not(:disabled) { background: rgba(255,255,255,0.09) !important; }
+.sidebar-datasource-btn:disabled { cursor: not-allowed; }
 .sidebar-footer-user { flex:1; min-width:0; }
 .sidebar-footer-username { font-size:0.8rem; font-weight:600; color:rgba(255,255,255,0.9); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .sidebar-footer-role { font-size:0.7rem; color:var(--brand-light); opacity:0.8; }

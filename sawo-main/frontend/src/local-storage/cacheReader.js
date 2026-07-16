@@ -21,10 +21,13 @@
  */
 
 import { getAllProductsLive } from "./supabaseReader";
+import { getDataSource } from "./dataSource";
+import { supabase } from "../Administrator/supabase";
 
-// ─── Site Content (from raw GitHub JSON, NOT Supabase) ────────────────────────
-// The sync script writes site_content.json to GitHub; the frontend reads from there.
-// This keeps the public site fast and avoids live Supabase reads per visitor.
+// ─── Site Content ───────────────────────────────────────────────────────────
+// Reads from the GitHub-synced site_content.json by default, or live Supabase
+// rows when the admin has flipped the "Live Data Source" toggle to Supabase
+// (see dataSource.js). Either way the result is cached in localStorage for 1hr.
 
 const GITHUB_OWNER    = process.env.REACT_APP_GITHUB_OWNER    || "jmesrafael";
 const GITHUB_MAIN_REPO = process.env.REACT_APP_MAIN_REPO      || "saworepo1";
@@ -42,9 +45,23 @@ const SITE_CONTENT_CACHE_DURATION  = 60 * 60 * 1000; // 1 hour
  */
 export async function refreshSiteContent() {
   try {
-    const res = await fetch(SITE_CONTENT_URL);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
+    const source = await getDataSource();
+    let json;
+
+    if (source === "supabase") {
+      const { data, error } = await supabase.from("site_content").select("page, section, data");
+      if (error) throw new Error(error.message);
+      json = {};
+      for (const row of data || []) {
+        if (!json[row.page]) json[row.page] = {};
+        json[row.page][row.section] = row.data;
+      }
+    } else {
+      const res = await fetch(SITE_CONTENT_URL);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      json = await res.json();
+    }
+
     localStorage.setItem(SITE_CONTENT_CACHE_KEY,     JSON.stringify(json));
     localStorage.setItem(SITE_CONTENT_TIMESTAMP_KEY, Date.now().toString());
     return json;

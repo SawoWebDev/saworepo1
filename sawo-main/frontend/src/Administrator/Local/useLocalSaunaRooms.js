@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { getDataSource } from "../../local-storage/dataSource";
+import { getAllSaunaRoomsLive } from "../../local-storage/supabaseReader";
 
 export function useLocalSaunaRooms() {
   const [rooms, setRooms] = useState([]);
@@ -9,17 +11,23 @@ export function useLocalSaunaRooms() {
     const load = async () => {
       try {
         setLoading(true);
-        const githubOwner = process.env.REACT_APP_GITHUB_OWNER || "jmesrafael";
-        const imagesRepo = process.env.REACT_APP_IMAGES_REPO || "saworepo2";
-        const url = `https://raw.githubusercontent.com/${githubOwner}/${imagesRepo}/main/saunaroom-data.json`;
+        const source = await getDataSource();
 
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
-        const data = await res.json();
-        setRooms(data || []);
+        if (source === "supabase") {
+          setRooms(await getAllSaunaRoomsLive());
+        } else {
+          const githubOwner = process.env.REACT_APP_GITHUB_OWNER || "jmesrafael";
+          const imagesRepo = process.env.REACT_APP_IMAGES_REPO || "saworepo2";
+          const url = `https://raw.githubusercontent.com/${githubOwner}/${imagesRepo}/main/saunaroom-data.json`;
+
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+          const data = await res.json();
+          setRooms(data || []);
+        }
       } catch (err) {
         setError(err.message);
-        console.error("Failed to load local sauna rooms:", err);
+        console.error("Failed to load sauna rooms:", err);
       } finally {
         setLoading(false);
       }

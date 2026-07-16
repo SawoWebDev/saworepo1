@@ -1,7 +1,8 @@
 ﻿// src/Administrator/AdminLayout.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { getSession, clearSession } from "./supabase";
+import { getSession, clearSession, logActivity } from "./supabase";
+import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
 import { NAV_ITEMS, can } from "./permissions";
 import logo from "./SAWO-logo.png";
 
@@ -20,8 +21,45 @@ const iconButtonStyle = {
   color: "rgba(255,255,255,0.7)",
 };
 
+// ─── Live Data Source toggle ────────────────────────────────────────────────
+// Controls whether the PUBLIC frontend reads products / sauna rooms / site
+// content from the GitHub-synced snapshot or live Supabase rows. See
+// src/local-storage/dataSource.js and Local/scripts/setup-app-settings.sql.
+function DataSourceToggle({ source, switching, onSwitch }) {
+  if (!source) return null;
+  const isSupabase = source === "supabase";
+
+  return (
+    <button
+      onClick={() => onSwitch(isSupabase ? "github" : "supabase")}
+      disabled={switching}
+      title={
+        isSupabase
+          ? "Frontend is reading LIVE from Supabase. Click to switch back to the GitHub-synced snapshot."
+          : "Frontend is reading the GitHub-synced snapshot. Click to switch to live Supabase (instant, no sync needed)."
+      }
+      className="sidebar-datasource-btn"
+      style={{
+        ...iconButtonStyle,
+        width: "auto",
+        gap: 6,
+        fontSize: "0.7rem",
+        fontWeight: 700,
+        letterSpacing: "0.04em",
+        textTransform: "uppercase",
+        padding: "0.35rem 0.6rem",
+        opacity: switching ? 0.5 : 1,
+        color: isSupabase ? "#7dd3a0" : "rgba(255,255,255,0.7)",
+      }}
+    >
+      <i className={`fa-solid ${switching ? "fa-spinner fa-spin" : "fa-satellite-dish"}`} />
+      {switching ? "Switching…" : isSupabase ? "Live: Supabase" : "Live: GitHub"}
+    </button>
+  );
+}
+
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose }) {
+function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, dataSource, switchingSource, onSwitchSource }) {
   return (
     <>
       {/* Mobile overlay */}
@@ -59,34 +97,39 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
 
         {/* Footer */}
         <div className="sidebar-footer">
-          {/* Logout */}
-          <button
-            onClick={handleLogout}
-            title="Sign Out"
-            className="sidebar-logout-btn"
-            style={iconButtonStyle}
-            onMouseEnter={e => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.background = "rgba(0,0,0,0.15)"; }}
-            onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.background = "transparent"; }}
-          >
-            <i className="fas fa-sign-out" style={{ transform: "rotateY(180deg)" }} />
-          </button>
+          {/* Live Data Source */}
+          <DataSourceToggle source={dataSource} switching={switchingSource} onSwitch={onSwitchSource} />
 
-          {/* Username / Role */}
-          <div className="sidebar-footer-user">
-            <div className="sidebar-footer-username">{session.user.username}</div>
-            <div className="sidebar-footer-role">{session.user.role || "admin"}</div>
+          <div className="sidebar-footer-row">
+            {/* Logout */}
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              className="sidebar-logout-btn"
+              style={iconButtonStyle}
+              onMouseEnter={e => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.background = "rgba(0,0,0,0.15)"; }}
+              onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.background = "transparent"; }}
+            >
+              <i className="fas fa-sign-out" style={{ transform: "rotateY(180deg)" }} />
+            </button>
+
+            {/* Username / Role */}
+            <div className="sidebar-footer-user">
+              <div className="sidebar-footer-username">{session.user.username}</div>
+              <div className="sidebar-footer-role">{session.user.role || "admin"}</div>
+            </div>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={() => setDark(d => !d)}
+              title={dark ? "Switch to light mode" : "Switch to dark mode"}
+              className="sidebar-theme-btn"
+              onMouseEnter={e => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.background = "rgba(0,0,0,0.15)"; }}
+              onMouseLeave={e => { e.currentTarget.style.color = ""; e.currentTarget.style.background = "transparent"; }}
+            >
+              <i className={dark ? "fa-solid fa-sun" : "fa-solid fa-moon"} />
+            </button>
           </div>
-
-          {/* Theme Toggle */}
-          <button
-            onClick={() => setDark(d => !d)}
-            title={dark ? "Switch to light mode" : "Switch to dark mode"}
-            className="sidebar-theme-btn"
-            onMouseEnter={e => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.background = "rgba(0,0,0,0.15)"; }}
-            onMouseLeave={e => { e.currentTarget.style.color = ""; e.currentTarget.style.background = "transparent"; }}
-          >
-            <i className={dark ? "fa-solid fa-sun" : "fa-solid fa-moon"} />
-          </button>
         </div>
       </aside>
     </>
@@ -101,6 +144,33 @@ export default function AdminLayout({ children }) {
 
   const [dark,        setDark]        = useState(() => localStorage.getItem("admin_theme") === "dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dataSource,      setDataSourceState] = useState(null);
+  const [switchingSource, setSwitchingSource] = useState(false);
+
+  // Load current live data source (github | supabase) once on mount
+  useEffect(() => {
+    getDataSource().then(setDataSourceState).catch(() => setDataSourceState("github"));
+  }, []);
+
+  const handleSwitchSource = async (next) => {
+    setSwitchingSource(true);
+    try {
+      await saveDataSource(next, session?.user?.username);
+      setDataSourceState(next);
+      await logActivity({
+        action:      "update",
+        entity:      "app_settings",
+        entity_id:   "data_source",
+        entity_name: `Live Data Source → ${next}`,
+        username:    session?.user?.username,
+        user_id:     session?.user?.id,
+      });
+    } catch (err) {
+      alert("Failed to switch data source: " + err.message);
+    } finally {
+      setSwitchingSource(false);
+    }
+  };
 
   // Close drawer on route change
   useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
@@ -164,6 +234,9 @@ export default function AdminLayout({ children }) {
         location={location}
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        dataSource={dataSource}
+        switchingSource={switchingSource}
+        onSwitchSource={handleSwitchSource}
       />
 
       {/* ── Main content ───────────────────────────────────────────────── */}
