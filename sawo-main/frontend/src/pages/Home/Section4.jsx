@@ -125,6 +125,12 @@ const Section4 = ({ content = {} }) => {
       <style jsx>{`
         .accessories-carousel::-webkit-scrollbar { display: none; }
         .accessories-carousel { scrollbar-width: none; }
+        /* Must match the container's px-2 padding. Without it, snap-mandatory puts
+           the first snap point at scrollLeft:8px, so the browser auto-snaps on
+           first layout. That scroll lands just before first paint, and Chrome
+           stops reporting LCP candidates at the first scroll — giving PageSpeed
+           the NO_LCP error on the homepage. */
+        .accessories-carousel { scroll-padding-left: 0.5rem; }
         .gradient-overlay { background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0)); }
         .carousel-item { flex: 0 0 calc((100% - 3*1.5rem)/4); }
         @media (max-width: 1024px) { .carousel-item { flex: 0 0 calc((100% - 1.5rem)/2); } }
