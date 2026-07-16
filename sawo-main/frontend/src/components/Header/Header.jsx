@@ -494,9 +494,11 @@ export default function Header() {
               .menu-item.active::after {
                 animation: growLine 0.3s ease forwards;
               }
+              /* #916e53 is the 4.5:1-contrast variant of the #af8564 brand brown
+                 (the original is 3.3:1 on white and fails WCAG AA / Lighthouse). */
               .menu-item.active,
               .menu-item:hover {
-                color: #af8564;
+                color: #916e53;
               }
               .menu-item.active {
                 font-weight: 600;
@@ -506,7 +508,7 @@ export default function Header() {
               }
               .menu-item.active .menu-text,
               .menu-item:hover .menu-text {
-                color: #af8564;
+                color: #916e53;
               }
             `}</style>
           </div>
@@ -515,8 +517,10 @@ export default function Header() {
           <button
             className="md:hidden text-2xl font-bold bg-transparent border-none cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
           >
-            <i className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars" aria-hidden="true"></i>
           </button>
         </div>
 

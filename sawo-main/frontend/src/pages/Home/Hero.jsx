@@ -105,8 +105,15 @@ const Hero = ({ content = {} }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sentences.join("|")]); // re-run only when sentences actually change
 
+  // Dark bg on the section itself (not just the -z-10 image div) so contrast
+  // checkers see white hero text against #3a3a3a instead of the page's white.
+  // `isolate` makes the section a stacking context so the -z-10 image still
+  // paints above this background.
   return (
-    <section className="sauna-unique relative w-full min-h-[95vh] flex flex-col justify-center px-5 md:px-10 overflow-hidden">
+    <section
+      className="sauna-unique relative isolate w-full min-h-[95vh] flex flex-col justify-center px-5 md:px-10 overflow-hidden"
+      style={{ backgroundColor: "#3a3a3a" }}
+    >
       <div
         className="absolute inset-0 -z-10"
         style={{ backgroundColor: "#3a3a3a" }}

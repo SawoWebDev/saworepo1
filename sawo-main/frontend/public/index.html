@@ -6,7 +6,14 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Google Fonts loaded async (media=print swap) so the CSS doesn't block first paint;
+       Montserrat swaps in via display=swap. Same pattern as Font Awesome below. -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+  </noscript>
   <!-- Font Awesome loaded async (media=print swap) so its ~100KB CSS doesn't block first paint; icons pop in just after. -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -18,9 +25,10 @@
   </noscript>
 
   <!-- Preload hero images for faster loading -->
-  <link rel="preload" as="image" href="/1920.webp" type="image/webp" media="(min-width: 1025px)" />
-  <link rel="preload" as="image" href="/1024.webp" type="image/webp" media="(max-width: 1024px)" />
-  <link rel="preload" as="image" href="/640.webp" type="image/webp" media="(max-width: 640px)" />
+  <!-- Media queries must be mutually exclusive or phones preload two hero images. -->
+  <link rel="preload" as="image" href="/1920.webp" type="image/webp" media="(min-width: 1025px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="/1024.webp" type="image/webp" media="(min-width: 641px) and (max-width: 1024px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="/640.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />

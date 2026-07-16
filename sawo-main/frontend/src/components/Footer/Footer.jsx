@@ -45,16 +45,17 @@ export default function Footer() {
 
           {/* Column 4 - Social Media */}
           <div className="flex flex-col items-center text-center">
-            <img src={sLogo} alt="SAWO" className="h-20 w-auto mb-4" />
+            <img src={sLogo} alt="SAWO" width="400" height="255" className="h-20 w-auto mb-4" />
             <h3 className="font-bold text-lg mb-2">Follow Us</h3>
-            <div className="flex flex-wrap justify-center gap-4 text-xl">
-              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-instagram"></i></a>
-              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-linkedin-in"></i></a>
-              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-youtube"></i></a>
-              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300"><i className="fab fa-tiktok"></i></a>
-              <a href="mailto:help@sawo.com" className="hover:text-gray-300"><i className="fas fa-envelope"></i></a>
-              <a href="tel:+63323412233" className="hover:text-gray-300"><i className="fas fa-phone"></i></a>
+            {/* w-11/h-11 keeps each icon a ≥44px touch target (Lighthouse target-size) */}
+            <div className="flex flex-wrap justify-center gap-2 text-xl">
+              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Facebook" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Instagram" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" aria-label="SAWO on LinkedIn" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on YouTube" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-youtube" aria-hidden="true"></i></a>
+              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on TikTok" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-tiktok" aria-hidden="true"></i></a>
+              <a href="mailto:help@sawo.com" aria-label="Email SAWO support" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fas fa-envelope" aria-hidden="true"></i></a>
+              <a href="tel:+63323412233" aria-label="Call SAWO" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fas fa-phone" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -88,8 +89,8 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-2">TECHNICAL SUPPORT</h3>
             <p className="text-sm mb-2">For technical support and reclamations, please contact:</p>
-            <p className="text-sm">Whatsapp: <a href="tel:+639497594450" className="hover:text-gray-300">+63 949 759 4450</a></p>
-            <p className="text-sm"><a href="mailto:help@sawo.com" className="hover:text-gray-300">help@sawo.com</a></p>
+            <p className="text-sm">Whatsapp: <a href="tel:+639497594450" className="hover:text-gray-300 inline-block py-1.5">+63 949 759 4450</a></p>
+            <p className="text-sm"><a href="mailto:help@sawo.com" className="hover:text-gray-300 inline-block py-1.5">help@sawo.com</a></p>
           </div>
         </div>
 
@@ -151,8 +152,8 @@ export default function Footer() {
                     <p className="font-semibold">{office.company}</p>
                     {office.address.map((line, i) => <p key={i}>{line}</p>)}
                   </a>
-                  <p>Tel: <a href={`tel:${office.tel}`} className="hover:text-gray-300">{office.tel}</a></p>
-                  <p><a href={`mailto:${office.email}`} className="hover:text-gray-300">{office.email}</a></p>
+                  <p>Tel: <a href={`tel:${office.tel}`} className="hover:text-gray-300 inline-block py-1.5">{office.tel}</a></p>
+                  <p><a href={`mailto:${office.email}`} className="hover:text-gray-300 inline-block py-1.5">{office.email}</a></p>
                 </div>
               </div>
             ))}
