@@ -113,7 +113,7 @@ const Section1 = ({ content = {} }) => {
             role="region"
             aria-label="SAWO Sauna Products Carousel"
           >
-            <div className={`sawo-carousel-track flex gap-5${isReady ? " is-ready" : ""}`}>
+            <div className={`sawo-carousel-track flex gap-5${isReady ? " is-ready" : ""}`} role="list">
               {[...carouselItems, ...carouselItems].map((item, index) => (
                 <div
                   className="sawo-carousel-item flex-shrink-0 w-[calc(25%-20px)] rounded overflow-hidden relative snap-start"
