@@ -140,21 +140,28 @@ async function main() {
     // the LCP window. public/index.html keeps them for the no-prerender path.
     out = out.replace(/<link rel="preload" as="image" href="\/(?:640|1024|1920)\.webp"[^>]*\/?>/g, "");
 
-    // Load the bundle AFTER first paint instead of `defer`. The prerendered
-    // page paints without JS, but a deferred script still executes at
-    // parse-end — often *before* the first paint opportunity — which makes
-    // Lighthouse's lantern simulation chain the whole bundle into LCP
-    // (pessimistic graph = all nodes before the observed LCP timestamp).
-    // rAF + setTimeout(0) queues the script right after the first frame is
-    // committed, taking main.js out of the LCP dependency graph on every
-    // device. Hydration starts one frame later — invisible to users.
+    // Load the bundle AFTER the hero image (the LCP element) has decoded and
+    // its frame committed — not merely after the first paint. Lighthouse's
+    // lantern simulation chains every request that starts before the observed
+    // LCP timestamp into simulated LCP; the first painted frame often lands
+    // before the hero finishes decoding, so a first-paint trigger still put
+    // main.js inside the LCP window on PSI (5.0s simulated vs 0.4s observed).
+    // img.decode() resolves once the hero is ready, double-rAF guarantees the
+    // frame that shows it is committed, then the script starts. 3s safety cap
+    // (and immediate start when the root was emptied by the route guard) so
+    // hydration can never hang on a broken image.
     const scriptMatch = out.match(/<script defer="defer" src="(\/static\/js\/main\.[^"]+\.js)"><\/script>/);
     if (!scriptMatch) throw new Error("main.js script tag not found for post-paint rewrite");
-    out = out.replace(
-      scriptMatch[0],
-      `<script>(function(){var l=function(){var s=document.createElement("script");s.src="${scriptMatch[1]}";document.body.appendChild(s)};` +
-        `"requestAnimationFrame"in window?requestAnimationFrame(function(){setTimeout(l,0)}):setTimeout(l,0)})()</script>`
-    );
+    const loader =
+      `<script>(function(){var d=false;` +
+      `var l=function(){if(d)return;d=true;var s=document.createElement("script");s.src="${scriptMatch[1]}";document.body.appendChild(s)};` +
+      `var r2=function(){if(!("requestAnimationFrame"in window))return setTimeout(l,0);` +
+      `requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(l,0)})})};` +
+      `var i=document.querySelector("#root section img");` +
+      `if(!i){r2()}else{setTimeout(l,3000);` +
+      `if(i.decode){i.decode().then(r2,r2)}else if(i.complete){r2()}else{i.addEventListener("load",r2);i.addEventListener("error",r2)}}` +
+      `})()</script>`;
+    out = out.replace(scriptMatch[0], loader);
 
     fs.writeFileSync(INDEX, out);
     console.log(`PRERENDERED: yes (root ${rootHtml.length} bytes, css inlined: ${!!cssMatch})`);

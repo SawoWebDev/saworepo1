@@ -29,7 +29,7 @@ function isAdmin() {
     return !!(localStorage.getItem("sawo_token") || sessionStorage.getItem("sawo_token"));
   } catch {
     return false;
-  }
+  } 
 }
 
 function getSessionId() {
