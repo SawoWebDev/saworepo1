@@ -1,0 +1,35 @@
+# SAWO
+
+> SAWO is a Finnish sauna manufacturer serving over 90 countries with premium sauna heaters, steam generators, sauna rooms, infrared solutions, sauna controls, and accessories. This site is the official SAWO product catalog and support hub.
+
+SAWO products combine traditional Finnish sauna craftsmanship with modern design. The main product families are electric sauna heaters (wall-mounted, tower, stone, floor-standing, combi, and the designer Dragonfire series), steam generators and steam-room controls, prefabricated sauna rooms, infrared saunas, and a full range of sauna accessories.
+
+## Products
+
+- [Sauna Heaters](https://saworeact.vercel.app/sauna/heaters): All electric sauna heater series — wall-mounted, tower, stone, floor, combi, and Dragonfire
+- [Sauna Rooms](https://saworeact.vercel.app/sauna/rooms): Prefabricated indoor and outdoor sauna rooms with a room configurator
+- [Sauna Controls](https://saworeact.vercel.app/sauna/controls): Saunova and Innova control units and control accessories
+- [Sauna Accessories](https://saworeact.vercel.app/sauna/accessories): Pails, ladles, thermometers, clocks, lights, headrests, doors, benches, and Kivi stones
+- [Steam Generators](https://saworeact.vercel.app/steam/generators): Steam generators for home and commercial steam rooms
+- [Steam Controls](https://saworeact.vercel.app/steam/controls): Controls for steam systems
+- [Infrared Saunas](https://saworeact.vercel.app/infrared): Infrared sauna rooms, panels, and controls
+- [All Products](https://saworeact.vercel.app/products): Complete browsable product listing
+
+## Support
+
+- [FAQ](https://saworeact.vercel.app/support/faq): Frequently asked questions about sauna sizing, installation, and maintenance
+- [Sauna Calculator](https://saworeact.vercel.app/support/sauna-calculator): Tool for choosing the right heater output for a sauna room
+- [User Manuals](https://saworeact.vercel.app/support/manuals): Downloadable installation and user manuals
+- [Product Catalogue](https://saworeact.vercel.app/support/catalogue): The complete SAWO product catalogue (PDF)
+
+## Company
+
+- [About SAWO](https://saworeact.vercel.app/about): Company history and worldwide presence
+- [Sustainability](https://saworeact.vercel.app/about/sustainability): Environmental commitments and materials
+- [Contact](https://saworeact.vercel.app/contact): Sales and technical support contacts for the Philippines, Finland, Hong Kong, and Europe
+- [Careers](https://saworeact.vercel.app/careers): Open positions
+
+## Optional
+
+- [Sitemap](https://saworeact.vercel.app/sitemap): Full page index
+- [News](https://saworeact.vercel.app/about/news): Latest company news

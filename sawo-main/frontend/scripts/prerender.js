@@ -51,7 +51,9 @@ function serveBuild() {
 async function findChrome() {
   if (process.env.CHROME_PATH) return { executablePath: process.env.CHROME_PATH, args: [] };
   if (process.platform === "linux") {
-    const chromium = require("@sparticuz/chromium");
+    // v149 ships transpiled ESM: require() returns { default: <api> }.
+    const mod = require("@sparticuz/chromium");
+    const chromium = mod.default || mod;
     return { executablePath: await chromium.executablePath(), args: chromium.args };
   }
   const candidates = process.platform === "darwin"
