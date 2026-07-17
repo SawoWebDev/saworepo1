@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ChevronRight from "../../components/icons/ChevronRight";
 import Hero from "./Hero";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
@@ -9,7 +8,8 @@ import Section3 from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
 import menuPaths from "../../menuPaths";
-import { getSiteContent } from "../../local-storage/cacheReader";
+import { getSiteContent, getCachedSiteContentSync } from "../../local-storage/cacheReader";
+import { afterPageLoad } from "../../utils/afterPageLoad";
 
 const Home = () => {
   // Fetch home page content once and pass it to all sections as a prop.
@@ -18,9 +18,21 @@ const Home = () => {
   const [content, setContent] = useState({});
 
   useEffect(() => {
-    getSiteContent("home")
-      .then(data => setContent(data || {}))
-      .catch(() => {}); // silently fall back to hardcoded defaults
+    // Stale-while-revalidate: paint cached CMS content immediately (zero
+    // network), and only when the cache is cold/stale schedule the refresh —
+    // after load+idle, so the fetch (and the Supabase SDK chunk it may pull)
+    // never competes with the hero LCP image on slow connections.
+    const { data, fresh } = getCachedSiteContentSync("home");
+    if (data) setContent(data);
+    if (fresh) return;
+
+    let alive = true;
+    const cancel = afterPageLoad(() => {
+      getSiteContent("home")
+        .then(d => { if (alive) setContent(d || {}); })
+        .catch(() => {}); // silently fall back to hardcoded defaults
+    });
+    return () => { alive = false; cancel(); };
   }, []);
 
   return (
@@ -56,7 +68,7 @@ const Home = () => {
             onMouseLeave={(e) => (e.currentTarget.style.color = "#333333")}
           >
             Explore More
-            <FontAwesomeIcon icon={faChevronRight} />
+            <ChevronRight />
           </Link>
         </div>
       </div>

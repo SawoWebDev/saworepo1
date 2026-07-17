@@ -5,6 +5,7 @@ import { getSession, clearSession, logActivity } from "./supabase";
 import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
 import { NAV_ITEMS, can } from "./permissions";
 import logo from "./SAWO-logo.png";
+import "./admin.css";
 
 // ── Shared icon-button style (sidebar footer)
 const iconButtonStyle = {

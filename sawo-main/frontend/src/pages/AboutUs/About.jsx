@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import ChevronRight from '../../components/icons/ChevronRight';
 import menuPaths from '../../menuPaths';
 import aboutusHero from '../../assets/About/aboutus-hero.webp';
 import aboutusEmployee from '../../assets/About/aboutus-employee.webp';
@@ -427,7 +426,7 @@ const AboutUs = () => {
 
               <Link to={menuPaths.sauna.parent} className="about-btn">
                 Explore Our Products
-                <FontAwesomeIcon icon={faChevronRight} />
+                <ChevronRight />
               </Link>
             </div>
           </div>

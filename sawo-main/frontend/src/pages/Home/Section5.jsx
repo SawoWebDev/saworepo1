@@ -1,7 +1,6 @@
 // src/pages/Section5.jsx
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ChevronRight from "../../components/icons/ChevronRight";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import menuPaths from "../../menuPaths";
 
@@ -131,8 +130,8 @@ const Section5 = ({ content = {} }) => {
                 style={{ left: `${sliderPosition}%` }}
               >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center gap-0.5">
-                  <FontAwesomeIcon icon={faChevronRight} className="rotate-180" style={{ color: "#AF8564" }} />
-                  <FontAwesomeIcon icon={faChevronRight} style={{ color: "#AF8564" }} />
+                  <ChevronRight className="rotate-180" style={{ color: "#AF8564" }} />
+                  <ChevronRight style={{ color: "#AF8564" }} />
                 </div>
               </div>
             </div>

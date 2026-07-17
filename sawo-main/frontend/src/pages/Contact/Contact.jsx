@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ChevronRight from "../../components/icons/ChevronRight";
 import heroBg from "../../assets/About/Sustainability-hero.webp";
 import menuPaths from "../../menuPaths";
 
@@ -665,7 +664,7 @@ const Contact = () => {
           </p>
           <Link to={menuPaths.products} className="ct-cta-btn">
             View Products
-            <FontAwesomeIcon icon={faChevronRight} />
+            <ChevronRight />
           </Link>
         </div>
       </section>

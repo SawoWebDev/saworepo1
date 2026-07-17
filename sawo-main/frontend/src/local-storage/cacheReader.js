@@ -97,6 +97,29 @@ export async function getSiteContent(page = "home") {
 }
 
 /**
+ * Synchronous, zero-network read of the localStorage site-content cache.
+ * Lets the homepage paint cached CMS content immediately while deferring any
+ * network refresh (and the Supabase SDK chunk it may pull) until after
+ * load+idle, so nothing competes with the LCP image on slow connections.
+ *
+ * @returns {{ data: object|null, fresh: boolean }}
+ *   data  — the page's section map, or null when nothing is cached
+ *   fresh — false means the caller should schedule a deferred getSiteContent()
+ */
+export function getCachedSiteContentSync(page = "home") {
+  try {
+    const cached    = localStorage.getItem(SITE_CONTENT_CACHE_KEY);
+    const timestamp = localStorage.getItem(SITE_CONTENT_TIMESTAMP_KEY);
+    if (!cached) return { data: null, fresh: false };
+    const fresh =
+      !!timestamp && Date.now() - parseInt(timestamp) < SITE_CONTENT_CACHE_DURATION;
+    return { data: JSON.parse(cached)?.[page] ?? {}, fresh };
+  } catch {
+    return { data: null, fresh: false };
+  }
+}
+
+/**
  * Force-clear the site content cache (useful after an admin sync).
  */
 export function clearSiteContentCache() {

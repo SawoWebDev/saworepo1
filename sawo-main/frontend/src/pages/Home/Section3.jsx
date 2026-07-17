@@ -1,8 +1,7 @@
 // src/pages/Home/Section3.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ChevronRight from "../../components/icons/ChevronRight";
 import menuPaths from "../../menuPaths";
 
 // Local images (fallbacks when CMS provides no image_url)
@@ -92,7 +91,7 @@ const Section3 = ({ content = {} }) => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.steam.parent} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <FontAwesomeIcon icon={faChevronRight} />
+          Explore More <ChevronRight />
         </Link>
       </div>
 
@@ -109,7 +108,7 @@ const Section3 = ({ content = {} }) => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.sauna.rooms} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <FontAwesomeIcon icon={faChevronRight} />
+          Explore More <ChevronRight />
         </Link>
       </div>
 
@@ -125,7 +124,7 @@ const Section3 = ({ content = {} }) => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.infrared} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <FontAwesomeIcon icon={faChevronRight} />
+          Explore More <ChevronRight />
         </Link>
       </div>
 
@@ -141,7 +140,7 @@ const Section3 = ({ content = {} }) => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.sauna.controls} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <FontAwesomeIcon icon={faChevronRight} />
+          Explore More <ChevronRight />
         </Link>
       </div>
 

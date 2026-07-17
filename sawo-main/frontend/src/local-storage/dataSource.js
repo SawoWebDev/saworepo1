@@ -41,15 +41,23 @@ export async function getDataSource() {
   } catch {}
 
   try {
-    const supabase = await getSupabase();
-    const { data, error } = await supabase
-      .from("app_settings")
-      .select("value")
-      .eq("key", KEY)
-      .single();
-    if (error) throw error;
+    // Plain REST fetch (same pattern as track.js) instead of the supabase-js
+    // SDK: this runs on every public page's cold visit, and going through
+    // getSupabase() would download the ~50KB-gzip SDK chunk just to read one
+    // settings row. The SDK stays admin-only (setDataSource / live reads).
+    const res = await fetch(
+      `${process.env.REACT_APP_SUPABASE_URL}/rest/v1/app_settings?key=eq.${KEY}&select=value`,
+      {
+        headers: {
+          apikey: process.env.REACT_APP_SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${process.env.REACT_APP_SUPABASE_ANON_KEY}`,
+        },
+      }
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const rows = await res.json();
 
-    const value = data?.value === "supabase" ? "supabase" : "github";
+    const value = rows?.[0]?.value === "supabase" ? "supabase" : "github";
     memCache = value;
     memCacheTime = now;
     localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value, time: now }));

@@ -1,6 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ChevronRight from "../icons/ChevronRight";
 
 const ButtonBrown = ({ text = "Click Here", href = "#", icon = true }) => {
   return (
@@ -26,7 +25,7 @@ const ButtonBrown = ({ text = "Click Here", href = "#", icon = true }) => {
     >
       {text}
 
-      {icon && <FontAwesomeIcon icon={faChevronRight} />}
+      {icon && <ChevronRight />}
     </a>
   );
 };
