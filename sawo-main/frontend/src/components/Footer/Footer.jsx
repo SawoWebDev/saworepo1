@@ -47,15 +47,15 @@ export default function Footer() {
           <div className="flex flex-col items-center text-center">
             <img src={sLogo} alt="SAWO" width="400" height="255" className="h-20 w-auto mb-4" />
             <h3 className="font-bold text-lg mb-2">Follow Us</h3>
-            {/* w-11/h-11 keeps each icon a ≥44px touch target (Lighthouse target-size) */}
-            <div className="flex flex-wrap justify-center gap-2 text-xl">
-              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Facebook" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
-              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Instagram" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-instagram" aria-hidden="true"></i></a>
-              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" aria-label="SAWO on LinkedIn" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
-              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on YouTube" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-youtube" aria-hidden="true"></i></a>
-              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on TikTok" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fab fa-tiktok" aria-hidden="true"></i></a>
-              <a href="mailto:help@sawo.com" aria-label="Email SAWO support" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fas fa-envelope" aria-hidden="true"></i></a>
-              <a href="tel:+63323412233" aria-label="Call SAWO" className="hover:text-gray-300 inline-flex items-center justify-center w-11 h-11"><i className="fas fa-phone" aria-hidden="true"></i></a>
+            {/* w-9/h-9 keeps each icon close to a 44px touch target while sitting tighter together */}
+            <div className="flex flex-wrap justify-center gap-1 text-xl">
+              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Facebook" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Instagram" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" aria-label="SAWO on LinkedIn" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on YouTube" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-youtube" aria-hidden="true"></i></a>
+              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on TikTok" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-tiktok" aria-hidden="true"></i></a>
+              <a href="mailto:help@sawo.com" aria-label="Email SAWO support" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fas fa-envelope" aria-hidden="true"></i></a>
+              <a href="tel:+63323412233" aria-label="Call SAWO" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fas fa-phone" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
