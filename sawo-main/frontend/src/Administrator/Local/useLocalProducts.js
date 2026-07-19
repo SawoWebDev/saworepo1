@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { getDataSource } from "../../local-storage/dataSource";
+import { getDataSource, getJsonSourceScope } from "../../local-storage/dataSource";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive } from "../../local-storage/supabaseReader";
+import { getJsonFileAccessories } from "../../local-storage/jsonFileProducts";
+import { OWNED_CATEGORIES } from "../../local-storage/accessoriesTransform";
 
 export function useLocalProducts() {
   const [products, setProducts] = useState([]);
@@ -33,10 +35,30 @@ export function useLocalProducts() {
             import("./data/tags.json"),
             import("./data/meta.json"),
           ]);
-          setProducts(productsRes.default || []);
+          let products = productsRes.default || [];
+          let effectiveSource = source; // "github" or "jsonfile"
+
+          if (source === "jsonfile") {
+            const scope = await getJsonSourceScope();
+            if (scope === "accessories" || scope === "all") {
+              try {
+                const jsonAccessories = await getJsonFileAccessories();
+                products = products
+                  .filter(p => !(p.categories || []).some(c => OWNED_CATEGORIES.has(c)))
+                  .concat(jsonAccessories);
+              } catch (err) {
+                console.warn("[useLocalProducts] Failed to load allaccs-data.json, using bundled snapshot:", err.message);
+                effectiveSource = "github";
+              }
+            } else {
+              effectiveSource = "github";
+            }
+          }
+
+          setProducts(products);
           setCategories(categoriesRes.default || []);
           setTags(tagsRes.default || []);
-          setMeta(metaRes.default || {});
+          setMeta({ ...(metaRes.default || {}), source: effectiveSource });
         }
       } catch (err) {
         setError(err.message);

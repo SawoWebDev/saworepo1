@@ -140,28 +140,47 @@ async function main() {
     // the LCP window. public/index.html keeps them for the no-prerender path.
     out = out.replace(/<link rel="preload" as="image" href="\/(?:640|1024|1920)\.webp"[^>]*\/?>/g, "");
 
-    // Load the bundle AFTER the hero image (the LCP element) has decoded and
-    // its frame committed — not merely after the first paint. Lighthouse's
-    // lantern simulation chains every request that starts before the observed
-    // LCP timestamp into simulated LCP; the first painted frame often lands
-    // before the hero finishes decoding, so a first-paint trigger still put
-    // main.js inside the LCP window on PSI (5.0s simulated vs 0.4s observed).
-    // img.decode() resolves once the hero is ready, double-rAF guarantees the
-    // frame that shows it is committed, then the script starts. 3s safety cap
-    // (and immediate start when the root was emptied by the route guard) so
-    // hydration can never hang on a broken image.
+    // Load the bundle AND activate the async font stylesheets only after the
+    // hero image (the LCP element) has loaded and its frame committed.
+    // Lighthouse's lantern simulation chains every request that starts before
+    // the observed LCP timestamp into simulated LCP, so anything heavy that
+    // begins earlier — the 84KB-gz bundle, or the ~300KB of FontAwesome +
+    // Montserrat woff2s the print-media swap triggers — inflates PSI's LCP by
+    // seconds even though the real paint never waited for them.
+    // The gate is the img `load` event (+ double-rAF so the frame showing the
+    // hero is committed first). NOT img.decode(): on a still-loading <picture>
+    // Chromium rejects decode() immediately, which un-gated main.js in
+    // production (started at 976ms vs LCP at 1773ms). 4s safety cap, and an
+    // immediate start when the route guard emptied the root, so hydration can
+    // never hang on a broken image.
     const scriptMatch = out.match(/<script defer="defer" src="(\/static\/js\/main\.[^"]+\.js)"><\/script>/);
     if (!scriptMatch) throw new Error("main.js script tag not found for post-paint rewrite");
+
+    // Strip the eager onload swap from the print-media stylesheets; the
+    // loader below flips them at the same post-LCP moment. (noscript
+    // fallbacks in the template still cover JS-disabled visitors.)
+    const swaps = out.match(/ onload='this\.media="all"'/g) || [];
+    if (swaps.length !== 2) throw new Error(`expected 2 stylesheet onload swaps, found ${swaps.length}`);
+    out = out.replace(/ onload='this\.media="all"'/g, "");
+
+    // The loader must live at the END of <body>: CRA's script tag sits in
+    // <head>, where #root doesn't exist yet — a querySelector there returns
+    // null and the gate silently never engages (this exact bug shipped once:
+    // main.js started before the hero request on slow 4G).
     const loader =
       `<script>(function(){var d=false;` +
-      `var l=function(){if(d)return;d=true;var s=document.createElement("script");s.src="${scriptMatch[1]}";document.body.appendChild(s)};` +
+      `var l=function(){if(d)return;d=true;` +
+      `document.querySelectorAll('link[media="print"]').forEach(function(x){x.media="all"});` +
+      `var s=document.createElement("script");s.src="${scriptMatch[1]}";document.body.appendChild(s)};` +
       `var r2=function(){if(!("requestAnimationFrame"in window))return setTimeout(l,0);` +
       `requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(l,0)})})};` +
       `var i=document.querySelector("#root section img");` +
-      `if(!i){r2()}else{setTimeout(l,3000);` +
-      `if(i.decode){i.decode().then(r2,r2)}else if(i.complete){r2()}else{i.addEventListener("load",r2);i.addEventListener("error",r2)}}` +
+      `if(!i){r2()}else{setTimeout(l,4000);` +
+      `if(i.complete&&i.naturalWidth>0){r2()}else{i.addEventListener("load",r2);i.addEventListener("error",r2)}}` +
       `})()</script>`;
-    out = out.replace(scriptMatch[0], loader);
+    out = out.replace(scriptMatch[0], "");
+    if (!out.includes("</body>")) throw new Error("no </body> to anchor the loader");
+    out = out.replace("</body>", `${loader}</body>`);
 
     fs.writeFileSync(INDEX, out);
     console.log(`PRERENDERED: yes (root ${rootHtml.length} bytes, css inlined: ${!!cssMatch})`);

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import productsData from "../../Administrator/Local/data/products.json";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
@@ -13,7 +13,7 @@ export const ACCESSORY_CATEGORIES = [
   "clocks & timers", "sauna lights", "headrest & backrest",
   "doors & handles", "benches", "cloth hangers",
   "wooden floor mats", "kivistone", "ventilation & miscellaneous",
-  "steam accessories"
+  "steam accessories", "accessory sets"
 ];
 
 // Helper to check if a product is an accessory
@@ -755,11 +755,11 @@ export default function AccessoriesPage() {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
 
+  const { products: productsData, loading } = useLocalProducts();
+
   const product = useMemo(() => {
     return productsData.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
-  }, [slug]);
-
-  const loading = false;
+  }, [slug, productsData]);
 
   const variants = useMemo(() => {
     if (!product) return [];

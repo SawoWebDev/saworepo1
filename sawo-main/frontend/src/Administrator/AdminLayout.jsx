@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSession, clearSession, logActivity } from "./supabase";
-import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
+import {
+  getDataSource, setDataSource as saveDataSource,
+  getJsonSourceScope, setJsonSourceScope as saveJsonSourceScope,
+} from "../local-storage/dataSource";
 import { NAV_ITEMS, can } from "./permissions";
 import logo from "./SAWO-logo.png";
 import "./admin.css";
@@ -24,43 +27,84 @@ const iconButtonStyle = {
 
 // ─── Live Data Source toggle ────────────────────────────────────────────────
 // Controls whether the PUBLIC frontend reads products / sauna rooms / site
-// content from the GitHub-synced snapshot or live Supabase rows. See
+// content from the GitHub-synced snapshot, live Supabase rows, or a single
+// hand-edited JSON file in the images repo (currently accessories only). See
 // src/local-storage/dataSource.js and Local/scripts/setup-app-settings.sql.
-function DataSourceToggle({ source, switching, onSwitch }) {
+const SOURCE_LABELS = { github: "Live: GitHub", supabase: "Live: Supabase", jsonfile: "Live: Json File" };
+const SOURCE_COLORS = { github: "rgba(255,255,255,0.7)", supabase: "#7dd3a0", jsonfile: "#e8c47a" };
+const SCOPE_OPTIONS = [
+  { value: "accessories", label: "Accessories" },
+  { value: "all", label: "All (coming soon)", disabled: true },
+  { value: "saunarooms", label: "Sauna Rooms (coming soon)", disabled: true },
+  { value: "heaters", label: "Heaters (coming soon)", disabled: true },
+];
+
+function DataSourceToggle({ source, scope, switching, onSwitchSource, onSwitchScope }) {
   if (!source) return null;
-  const isSupabase = source === "supabase";
+
+  const selectStyle = {
+    background: "none",
+    border: "1px solid rgba(255,255,255,0.2)",
+    borderRadius: 6,
+    fontSize: "0.7rem",
+    fontWeight: 700,
+    letterSpacing: "0.04em",
+    textTransform: "uppercase",
+    padding: "0.3rem 0.4rem",
+  };
 
   return (
-    <button
-      onClick={() => onSwitch(isSupabase ? "github" : "supabase")}
-      disabled={switching}
-      title={
-        isSupabase
-          ? "Frontend is reading LIVE from Supabase. Click to switch back to the GitHub-synced snapshot."
-          : "Frontend is reading the GitHub-synced snapshot. Click to switch to live Supabase (instant, no sync needed)."
-      }
-      className="sidebar-datasource-btn"
-      style={{
-        ...iconButtonStyle,
-        width: "auto",
-        gap: 6,
-        fontSize: "0.7rem",
-        fontWeight: 700,
-        letterSpacing: "0.04em",
-        textTransform: "uppercase",
-        padding: "0.35rem 0.6rem",
-        opacity: switching ? 0.5 : 1,
-        color: isSupabase ? "#7dd3a0" : "rgba(255,255,255,0.7)",
-      }}
-    >
-      <i className={`fa-solid ${switching ? "fa-spinner fa-spin" : "fa-satellite-dish"}`} />
-      {switching ? "Switching…" : isSupabase ? "Live: Supabase" : "Live: GitHub"}
-    </button>
+    <div style={{ display: "flex", flexDirection: "column", gap: 4, padding: "0.35rem 0.6rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <i
+          className={`fa-solid ${switching ? "fa-spinner fa-spin" : "fa-satellite-dish"}`}
+          style={{ color: SOURCE_COLORS[source], fontSize: "0.9rem" }}
+        />
+        <select
+          value={source}
+          disabled={switching}
+          onChange={(e) => onSwitchSource(e.target.value)}
+          title="Controls where the public frontend reads product / sauna room / site content data from."
+          className="sidebar-datasource-select"
+          style={{
+            ...selectStyle,
+            color: SOURCE_COLORS[source],
+            opacity: switching ? 0.5 : 1,
+            cursor: switching ? "default" : "pointer",
+          }}
+        >
+          {Object.entries(SOURCE_LABELS).map(([value, label]) => (
+            <option key={value} value={value}>{label}</option>
+          ))}
+        </select>
+      </div>
+
+      {source === "jsonfile" && (
+        <select
+          value={scope}
+          disabled={switching}
+          onChange={(e) => onSwitchScope(e.target.value)}
+          title="Which product group the Json File source applies to. Only Accessories is available today; edits to it live in the images repo's allaccs-data.json, not in this admin — the CMS's product editor does not affect it."
+          style={{
+            ...selectStyle,
+            color: "rgba(255,255,255,0.6)",
+            fontSize: "0.65rem",
+            padding: "0.25rem 0.35rem",
+            marginLeft: "1.3rem",
+            cursor: switching ? "default" : "pointer",
+          }}
+        >
+          {SCOPE_OPTIONS.map(opt => (
+            <option key={opt.value} value={opt.value} disabled={opt.disabled}>{opt.label}</option>
+          ))}
+        </select>
+      )}
+    </div>
   );
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, dataSource, switchingSource, onSwitchSource }) {
+function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, dataSource, jsonScope, switchingSource, onSwitchSource, onSwitchScope }) {
   return (
     <>
       {/* Mobile overlay */}
@@ -99,7 +143,13 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
         {/* Footer */}
         <div className="sidebar-footer">
           {/* Live Data Source */}
-          <DataSourceToggle source={dataSource} switching={switchingSource} onSwitch={onSwitchSource} />
+          <DataSourceToggle
+            source={dataSource}
+            scope={jsonScope}
+            switching={switchingSource}
+            onSwitchSource={onSwitchSource}
+            onSwitchScope={onSwitchScope}
+          />
 
           <div className="sidebar-footer-row">
             {/* Logout */}
@@ -146,11 +196,13 @@ export default function AdminLayout({ children }) {
   const [dark,        setDark]        = useState(() => localStorage.getItem("admin_theme") === "dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dataSource,      setDataSourceState] = useState(null);
+  const [jsonScope,       setJsonScopeState]  = useState("accessories");
   const [switchingSource, setSwitchingSource] = useState(false);
 
-  // Load current live data source (github | supabase) once on mount
+  // Load current live data source (github | supabase | jsonfile) + scope once on mount
   useEffect(() => {
     getDataSource().then(setDataSourceState).catch(() => setDataSourceState("github"));
+    getJsonSourceScope().then(setJsonScopeState).catch(() => setJsonScopeState("accessories"));
   }, []);
 
   const handleSwitchSource = async (next) => {
@@ -168,6 +220,26 @@ export default function AdminLayout({ children }) {
       });
     } catch (err) {
       alert("Failed to switch data source: " + err.message);
+    } finally {
+      setSwitchingSource(false);
+    }
+  };
+
+  const handleSwitchScope = async (next) => {
+    setSwitchingSource(true);
+    try {
+      await saveJsonSourceScope(next, session?.user?.username);
+      setJsonScopeState(next);
+      await logActivity({
+        action:      "update",
+        entity:      "app_settings",
+        entity_id:   "json_source_scope",
+        entity_name: `Json Source Scope → ${next}`,
+        username:    session?.user?.username,
+        user_id:     session?.user?.id,
+      });
+    } catch (err) {
+      alert("Failed to switch json source scope: " + err.message);
     } finally {
       setSwitchingSource(false);
     }
@@ -236,8 +308,10 @@ export default function AdminLayout({ children }) {
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         dataSource={dataSource}
+        jsonScope={jsonScope}
         switchingSource={switchingSource}
         onSwitchSource={handleSwitchSource}
+        onSwitchScope={handleSwitchScope}
       />
 
       {/* ── Main content ───────────────────────────────────────────────── */}
