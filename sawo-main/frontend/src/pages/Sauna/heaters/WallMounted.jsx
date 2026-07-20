@@ -106,6 +106,7 @@ import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/wall-hero.webp";
 import "./heaters.css";
+import PromoBanner from "../../../components/PromoBanner";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -534,13 +535,10 @@ export default function WallMounted() {
         </div>
       </section>
 
-      {/* ── BANNER ───────────────────────────────────────────────────────── */}
-      <section className="wm-banner">
-        <div className="wm-banner-content">
-          <h2 className="wm-banner-title">Experience Ultimate Relaxation</h2>
-          <p className="wm-banner-sub">Find your source of serenity from over 100 heater models</p>
-        </div>
-      </section>
+      <PromoBanner
+        title="Experience Ultimate Relaxation"
+        subtitle="Find your source of serenity from over 100 heater models"
+      />
     </div>
   );
 }

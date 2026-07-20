@@ -10,7 +10,8 @@ const defaultFeatures = [
 
 function EnergyLine({ x1, y1, isActive }) {
   const CX = 50, CY = 50;
-  const dots = [0, 0.33, 0.66];
+  const DUR = 3.6;
+  const dots = [0, 0.5];
   return (
     <g>
       <line
@@ -21,15 +22,34 @@ function EnergyLine({ x1, y1, isActive }) {
         style={{ transition: "stroke 0.5s, stroke-width 0.5s" }}
       />
       {isActive && dots.map((offset, k) => (
-        <circle key={k} r="0.9" fill="#af8564" opacity="0.9">
-          <animateMotion
-            dur="1.6s"
-            repeatCount="indefinite"
-            begin={`${offset * 1.6}s`}
-            path={`M ${x1},${y1} L ${CX},${CY}`}
-          />
-          <animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite" begin={`${offset * 1.6}s`} />
-        </circle>
+        <g key={k}>
+          <circle r="1.5" fill="url(#dotGlow)">
+            <animateMotion
+              dur={`${DUR}s`}
+              repeatCount="indefinite"
+              begin={`${offset * DUR}s`}
+              path={`M ${x1},${y1} L ${CX},${CY}`}
+              calcMode="spline"
+              keyPoints="0;1"
+              keyTimes="0;1"
+              keySplines="0.45 0 0.55 1"
+            />
+            <animate attributeName="opacity" values="0;0.55;0.55;0" keyTimes="0;0.2;0.8;1" dur={`${DUR}s`} repeatCount="indefinite" begin={`${offset * DUR}s`} />
+          </circle>
+          <circle r="0.55" fill="url(#dotCore)">
+            <animateMotion
+              dur={`${DUR}s`}
+              repeatCount="indefinite"
+              begin={`${offset * DUR}s`}
+              path={`M ${x1},${y1} L ${CX},${CY}`}
+              calcMode="spline"
+              keyPoints="0;1"
+              keyTimes="0;1"
+              keySplines="0.45 0 0.55 1"
+            />
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.2;0.8;1" dur={`${DUR}s`} repeatCount="indefinite" begin={`${offset * DUR}s`} />
+          </circle>
+        </g>
       ))}
     </g>
   );
@@ -45,19 +65,11 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
   const isPausedRef = useRef(false);
   const rafRef = useRef(null);
   const lastTimeRef = useRef(null);
+  const tapTimerRef = useRef(null);
 
-  // Track window width for responsive behavior
-  const [screenW, setScreenW] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
-  useEffect(() => {
-    const onResize = () => setScreenW(window.innerWidth);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  // ≥768 → desktop (wide orbit), 560–767 → tablet (tight orbit), <560 → mobile list
-  const isDesktop = screenW >= 768;
-  const isMobile  = screenW < 560;
-  const RADIUS     = isDesktop ? 43 : 33;
+  // Orbit geometry is a percentage of the stage, so the layout is identical at
+  // every screen size — only the stage itself scales.
+  const RADIUS = 41;
 
   const getActiveFromAngle = useCallback((angle) => {
     let best = 0, bestDist = Infinity;
@@ -89,8 +101,22 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
     return () => cancelAnimationFrame(rafRef.current);
   }, [rotationSpeed, getActiveFromAngle]);
 
-  const handleEnter = (i) => { isPausedRef.current = true; setHoveredIdx(i); setActiveIdx(i); setAnimKey(k => k + 1); };
+  useEffect(() => () => clearTimeout(tapTimerRef.current), []);
+
+  const handleEnter = (i) => {
+    clearTimeout(tapTimerRef.current);
+    isPausedRef.current = true;
+    setHoveredIdx(i);
+    setActiveIdx(i);
+    setAnimKey(k => k + 1);
+  };
   const handleLeave = () => { isPausedRef.current = false; setHoveredIdx(null); };
+
+  // Touch has no hover: hold the tapped feature briefly, then resume orbiting.
+  const handleTap = (i) => {
+    handleEnter(i);
+    tapTimerRef.current = setTimeout(handleLeave, 4000);
+  };
 
   const displayIdx = hoveredIdx !== null ? hoveredIdx : activeIdx;
 
@@ -114,19 +140,25 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 60px 20px;
-          min-height: 520px;
+          padding: clamp(28px, 6vw, 60px) clamp(12px, 4vw, 20px);
+          width: 100%;
+          min-width: 0;
+          box-sizing: border-box;
         }
 
-        /* Stage: full on desktop, compact on tablet */
+        /* One stage at every size. Everything inside is sized from the stage
+           (cqw / %), so the orbit keeps its exact proportions as it scales.
+           Width is % of ci-root, not vw — a vw-based width forces a fixed
+           min-content contribution that a narrow flex/grid ancestor (e.g. a
+           two-column "why choose" grid collapsed to one column on mobile)
+           can't shrink below, pushing the whole widget off-center/off-screen. */
         .ci-stage {
           position: relative;
-          width: min(520px, 90vw);
+          width: 100%;
+          max-width: 520px;
+          min-width: 0;
           aspect-ratio: 1;
-        }
-        @media (max-width: 767px) {
-          .ci-stage { width: min(360px, 90vw); }
-          .ci-root  { min-height: unset; padding: 40px 16px; }
+          container-type: inline-size;
         }
 
         .ci-svg {
@@ -138,13 +170,20 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
           overflow: visible;
         }
 
-        /* Center circle */
+        /* Center circle — soft sphere shading, same palette */
         .ci-center {
           position: absolute;
           inset: 24%;
           border-radius: 50%;
-          background: #af8564;
-          box-shadow: 0 8px 32px rgba(100, 70, 40, 0.18);
+          background:
+            radial-gradient(circle at 32% 26%, rgba(255,255,255,0.32), rgba(255,255,255,0) 52%),
+            radial-gradient(circle at 68% 82%, rgba(100,70,40,0.30), rgba(100,70,40,0) 58%),
+            #af8564;
+          box-shadow:
+            inset 0 -12px 26px rgba(100, 70, 40, 0.22),
+            inset 0 10px 22px rgba(255, 255, 255, 0.14),
+            0 22px 44px rgba(100, 70, 40, 0.20),
+            0 6px 14px rgba(100, 70, 40, 0.12);
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -154,27 +193,29 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
           overflow: hidden;
           z-index: 1;
         }
-        /* On tablet, expand center since icons are closer in */
-        @media (max-width: 767px) {
-          .ci-center { inset: 20%; padding: 10%; }
+        /* Small stage: give the copy a little more room inside the sphere */
+        @container (max-width: 400px) {
+          .ci-center { inset: 21%; padding: 9%; }
         }
 
         .ci-center-title {
           position: relative;
           color: #fff;
-          font-size: clamp(0.72rem, 2vw, 0.95rem);
+          font-size: clamp(0.6rem, 2.2vw, 0.95rem);
+          font-size: clamp(0.6rem, 2.9cqw, 0.95rem);
           font-weight: 700;
           letter-spacing: 0.07em;
           text-transform: uppercase;
-          margin-bottom: 0.45rem;
-          line-height: 1.2;
+          margin-bottom: 0.45em;
+          line-height: 1.25;
         }
         .ci-center-desc {
           position: relative;
           color: rgba(255, 235, 220, 0.85);
-          font-size: clamp(0.58rem, 1.3vw, 0.68rem);
+          font-size: clamp(0.52rem, 1.5vw, 0.68rem);
+          font-size: clamp(0.52rem, 1.95cqw, 0.68rem);
           font-weight: 300;
-          line-height: 1.7;
+          line-height: 1.6;
         }
 
         @keyframes ci-fadeUp {
@@ -186,47 +227,81 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
         /* Icon buttons */
         .ci-icon-btn {
           position: absolute;
-          width: clamp(58px, 13vw, 74px);
-          height: clamp(58px, 13vw, 74px);
+          /* % fallback keeps the orbit proportional if cqw is unsupported */
+          width: 14%;
+          height: 14%;
+          width: clamp(40px, 14cqw, 74px);
+          height: clamp(40px, 14cqw, 74px);
           border-radius: 50%;
           border: none;
-          background: #c9a48a;
-          box-shadow: 0 4px 14px rgba(100, 70, 40, 0.15);
+          background:
+            radial-gradient(circle at 32% 26%, rgba(255,255,255,0.38), rgba(255,255,255,0) 55%),
+            radial-gradient(circle at 68% 80%, rgba(100,70,40,0.28), rgba(100,70,40,0) 60%),
+            #c9a48a;
+          box-shadow:
+            inset 0 -4px 8px rgba(100, 70, 40, 0.18),
+            inset 0 3px 6px rgba(255, 255, 255, 0.22),
+            0 8px 18px rgba(100, 70, 40, 0.16),
+            0 2px 5px rgba(100, 70, 40, 0.10);
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           transform: translate(-50%, -50%);
-          transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s, background 0.35s;
+          transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s, background 0.45s;
           color: #fff;
-          font-size: clamp(1.15rem, 2.8vw, 1.4rem);
+          font-size: clamp(0.8rem, 3.4vw, 1.4rem);
+          font-size: clamp(0.8rem, 4.4cqw, 1.4rem);
           outline: none;
+          -webkit-tap-highlight-color: transparent;
           z-index: 3;
         }
-        @media (max-width: 767px) {
-          .ci-icon-btn {
-            width: clamp(44px, 10vw, 54px);
-            height: clamp(44px, 10vw, 54px);
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
+
+        .ci-icon-btn.active {
+          background:
+            radial-gradient(circle at 32% 26%, rgba(255,255,255,0.34), rgba(255,255,255,0) 55%),
+            radial-gradient(circle at 68% 80%, rgba(100,70,40,0.32), rgba(100,70,40,0) 60%),
+            #af8564;
+          box-shadow:
+            inset 0 -4px 10px rgba(100, 70, 40, 0.22),
+            inset 0 3px 6px rgba(255, 255, 255, 0.24),
+            0 0 0 5px rgba(175, 133, 100, 0.14),
+            0 14px 30px rgba(100, 70, 40, 0.26);
+          color: #fff;
+          transform: translate(-50%, -50%) scale(1.18) translateY(-3px);
+        }
+        /* Only real pointers get hover — avoids sticky states after a tap */
+        @media (hover: hover) {
+          .ci-icon-btn:hover {
+            background:
+              radial-gradient(circle at 32% 26%, rgba(255,255,255,0.34), rgba(255,255,255,0) 55%),
+              radial-gradient(circle at 68% 80%, rgba(100,70,40,0.32), rgba(100,70,40,0) 60%),
+              #af8564;
+            box-shadow:
+              inset 0 -4px 10px rgba(100, 70, 40, 0.22),
+              inset 0 3px 6px rgba(255, 255, 255, 0.24),
+              0 0 0 5px rgba(175, 133, 100, 0.14),
+              0 14px 30px rgba(100, 70, 40, 0.26);
+            color: #fff;
+            transform: translate(-50%, -50%) scale(1.18) translateY(-3px);
           }
         }
 
-        .ci-icon-btn:hover,
-        .ci-icon-btn.active {
-          background: #af8564;
-          box-shadow:
-            0 0 0 5px rgba(175, 133, 100, 0.18),
-            0 8px 24px rgba(100, 70, 40, 0.28);
-          color: #fff;
-          transform: translate(-50%, -50%) scale(1.22) translateY(-2px);
-        }
-
         @keyframes ci-orb-pulse {
-          0%   { box-shadow: 0 0 0 0   rgba(175,133,100,0.45), 0 8px 24px rgba(100,70,40,0.28); }
-          70%  { box-shadow: 0 0 0 14px rgba(175,133,100,0),   0 8px 24px rgba(100,70,40,0.28); }
-          100% { box-shadow: 0 0 0 0   rgba(175,133,100,0),   0 8px 24px rgba(100,70,40,0.28); }
+          0%   { transform: scale(1);    opacity: 0.45; }
+          80%  { transform: scale(1.55); opacity: 0; }
+          100% { transform: scale(1.55); opacity: 0; }
         }
-        .ci-icon-btn.active { animation: ci-orb-pulse 2.2s ease-out infinite; }
+        .ci-icon-btn::after {
+          content: "";
+          position: absolute;
+          inset: -4px;
+          border-radius: 50%;
+          border: 1.5px solid rgba(175, 133, 100, 0.55);
+          opacity: 0;
+          pointer-events: none;
+        }
+        .ci-icon-btn.active::after { animation: ci-orb-pulse 3s cubic-bezier(0.22,1,0.36,1) infinite; }
 
         .ci-tooltip {
           position: absolute;
@@ -248,136 +323,96 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
           transition: opacity 0.2s;
           box-shadow: 0 3px 12px rgba(100, 70, 40, 0.2);
         }
-        .ci-icon-btn:hover .ci-tooltip { opacity: 1; }
+        @media (hover: hover) {
+          .ci-icon-btn:hover .ci-tooltip { opacity: 1; }
+        }
+        /* No room (and no hover) on a small stage — the center already names it */
+        @container (max-width: 400px) {
+          .ci-tooltip { display: none; }
+        }
 
-        /* Mobile list */
-        .ci-mobile {
-          flex-direction: column;
-          align-items: center;
-          gap: 1.8rem;
-          width: 100%;
-          max-width: 380px;
-        }
-        .ci-mobile-center {
-          width: min(230px, 72vw);
-          aspect-ratio: 1;
-          border-radius: 50%;
-          background: #af8564;
-          box-shadow: 0 8px 28px rgba(100, 70, 40, 0.2);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 13%;
-          text-align: center;
-          position: relative;
-          overflow: hidden;
-        }
-        .ci-mobile-icons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-        .ci-mobile-icon-btn {
-          width: 60px; height: 60px;
-          border-radius: 50%;
-          border: none;
-          background: #c9a48a;
-          box-shadow: 0 4px 12px rgba(100, 70, 40, 0.15);
-          display: flex; align-items: center; justify-content: center;
-          cursor: pointer;
-          color: #fff;
-          font-size: 1.2rem;
-          transition: all 0.3s;
-          outline: none;
-        }
-        .ci-mobile-icon-btn.active, .ci-mobile-icon-btn:hover {
-          background: #af8564;
-          box-shadow: 0 0 0 4px rgba(175,133,100,0.18), 0 8px 20px rgba(100,70,40,0.25);
-          transform: scale(1.14) translateY(-2px);
+        @media (prefers-reduced-motion: reduce) {
+          .ci-icon-btn.active::after { animation: none; }
+          .ci-anim { animation-duration: 0.01ms; }
         }
       `}</style>
 
       <div className="ci-root">
-        {/* Orbit stage — desktop & tablet */}
-        {!isMobile && (
-          <div className="ci-stage">
-            <svg className="ci-svg" viewBox="0 0 100 100">
-              <defs>
-                <linearGradient id="lineGradActive" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#af8564" stopOpacity="0.9"/>
-                  <stop offset="100%" stopColor="#af8564" stopOpacity="0.15"/>
-                </linearGradient>
-                <linearGradient id="lineGradInactive" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#c9a48a" stopOpacity="0.3"/>
-                  <stop offset="100%" stopColor="#c9a48a" stopOpacity="0.05"/>
-                </linearGradient>
-                <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#af8564" stopOpacity="1"/>
-                  <stop offset="100%" stopColor="#af8564" stopOpacity="0"/>
-                </radialGradient>
-              </defs>
+        {/* One orbit stage at every breakpoint — it scales, it never re-flows */}
+        <div className="ci-stage">
+          <svg className="ci-svg" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="lineGradActive" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#af8564" stopOpacity="0.9"/>
+                <stop offset="100%" stopColor="#af8564" stopOpacity="0.15"/>
+              </linearGradient>
+              <linearGradient id="lineGradInactive" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#c9a48a" stopOpacity="0.3"/>
+                <stop offset="100%" stopColor="#c9a48a" stopOpacity="0.05"/>
+              </linearGradient>
+              <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#af8564" stopOpacity="1"/>
+                <stop offset="100%" stopColor="#af8564" stopOpacity="0"/>
+              </radialGradient>
+              <radialGradient id="dotCore" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stopColor="#fff" stopOpacity="0.95"/>
+                <stop offset="45%" stopColor="#c9a48a" stopOpacity="1"/>
+                <stop offset="100%" stopColor="#af8564" stopOpacity="1"/>
+              </radialGradient>
+            </defs>
 
-              {features.map((_, i) => {
-                const { lx, ly } = getPos(i, angleDeg);
-                return <EnergyLine key={i} x1={lx} y1={ly} isActive={displayIdx === i} />;
-              })}
+            {/* Orbit track — faint ring for depth */}
+            <circle
+              cx="50" cy="50" r={RADIUS}
+              fill="none"
+              stroke="#c9a48a"
+              strokeOpacity="0.22"
+              strokeWidth="0.35"
+            />
+            <circle
+              cx="50" cy="50" r={RADIUS + 1.4}
+              fill="none"
+              stroke="#c9a48a"
+              strokeOpacity="0.09"
+              strokeWidth="0.25"
+            />
 
-              {(() => {
-                const { lx, ly } = getPos(displayIdx, angleDeg);
-                return <circle cx={`${lx}%`} cy={`${ly}%`} r="3" fill="url(#dotGlow)" opacity="0.6" />;
-              })()}
-            </svg>
-
-            <div className="ci-center">
-              <div key={animKey} className="ci-anim">
-                <div className="ci-center-title">{features[displayIdx].title}</div>
-                <div className="ci-center-desc">{features[displayIdx].description}</div>
-              </div>
-            </div>
-
-            {features.map((feat, i) => {
-              const pos = getPos(i, angleDeg);
-              return (
-                <button
-                  key={feat.id}
-                  className={`ci-icon-btn${displayIdx === i ? " active" : ""}`}
-                  style={{ left: pos.left, top: pos.top }}
-                  onMouseEnter={() => handleEnter(i)}
-                  onMouseLeave={handleLeave}
-                  aria-label={feat.title}
-                >
-                  <i className={`fas ${feat.icon}`} />
-                  <span className="ci-tooltip">{feat.title}</span>
-                </button>
-              );
+            {features.map((_, i) => {
+              const { lx, ly } = getPos(i, angleDeg);
+              return <EnergyLine key={i} x1={lx} y1={ly} isActive={displayIdx === i} />;
             })}
-          </div>
-        )}
 
-        {/* Mobile list */}
-        {isMobile && (
-          <div className="ci-mobile" style={{ display: "flex" }}>
-            <div className="ci-mobile-center">
-              <div key={`m-${animKey}`} className="ci-anim">
-                <div style={{ color: "#fff", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "0.4rem", lineHeight: 1.2 }}>
-                  {features[displayIdx].title}
-                </div>
-                <div style={{ color: "rgba(255,235,220,0.85)", fontSize: "0.62rem", fontWeight: 300, lineHeight: 1.65 }}>
-                  {features[displayIdx].description}
-                </div>
-              </div>
-            </div>
-            <div className="ci-mobile-icons">
-              {features.map((feat, i) => (
-                <button
-                  key={feat.id}
-                  className={`ci-mobile-icon-btn${displayIdx === i ? " active" : ""}`}
-                  onClick={() => { setActiveIdx(i); setAnimKey(k => k + 1); }}
-                  aria-label={feat.title}
-                >
-                  <i className={`fas ${feat.icon}`} />
-                </button>
-              ))}
+            {(() => {
+              const { lx, ly } = getPos(displayIdx, angleDeg);
+              return <circle cx={`${lx}%`} cy={`${ly}%`} r="3.4" fill="url(#dotGlow)" opacity="0.45" />;
+            })()}
+          </svg>
+
+          <div className="ci-center">
+            <div key={animKey} className="ci-anim">
+              <div className="ci-center-title">{features[displayIdx].title}</div>
+              <div className="ci-center-desc">{features[displayIdx].description}</div>
             </div>
           </div>
-        )}
+
+          {features.map((feat, i) => {
+            const pos = getPos(i, angleDeg);
+            return (
+              <button
+                key={feat.id}
+                className={`ci-icon-btn${displayIdx === i ? " active" : ""}`}
+                style={{ left: pos.left, top: pos.top }}
+                onMouseEnter={() => handleEnter(i)}
+                onMouseLeave={handleLeave}
+                onClick={() => handleTap(i)}
+                aria-label={feat.title}
+              >
+                <i className={`fas ${feat.icon}`} />
+                <span className="ci-tooltip">{feat.title}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </>
   );

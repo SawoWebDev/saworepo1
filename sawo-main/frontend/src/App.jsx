@@ -140,7 +140,7 @@ export default function App() {
                     <Route path="/products/:slug" element={<ProductPageRouter />} />
 
                     {/* Accessories catalog (all accessories listing) */}
-                    <Route path="/accessories" element={<AccessoriesCatalog />} />
+                    <Route path={menuPaths.accessories} element={<AccessoriesCatalog />} />
 
                     {/* Single accessory product detail page */}
                     <Route path="/accessories/:slug" element={<DispAccessories />} />

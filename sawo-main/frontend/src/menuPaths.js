@@ -61,7 +61,7 @@ const menuPaths = {
   privacy: "/privacy-policy",
   sitemap: "/sitemap",
   products: "/products",
-  accessories: "/accessories",
+  accessories: "/sauna-accessories",
   adminDashboard:"/admin/dashboard",
 };
 

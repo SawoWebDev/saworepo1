@@ -30,29 +30,26 @@ function colorToClass(label) {
   return "default";
 }
 
-// Ported verbatim from IndividualPages/pails.html's <style> block (the
-// "sawo-av-*" design shared by every per-category WP display page), plus the
-// category-tab styles from the same file. One deliberate deviation: the
-// source pages are static (non-linking) displays, so their card/image rules
-// use cursor:default — here cards navigate to the product page, so those are
-// cursor:pointer instead. Everything else (colors, sizing, spacing, ribbon,
-// breakpoints) is unchanged.
+// Design ported from IndividualPages/pails.html's "sawo-av-*" style (colors,
+// ribbon, swatches). Sizing is deliberately smaller than the source page:
+// the WP pages are full-width standalone displays, while this grid runs
+// inside the narrower sidebar layout at up to 5 columns, so the image area
+// is height-capped (object-fit: contain) instead of height:auto, and text
+// sizes/padding are tightened to keep cards compact. One other deviation:
+// the source pages are static (non-linking) displays, so their card/image
+// rules use cursor:default — here cards navigate to the product page, so
+// those are cursor:pointer instead.
 export const ACCESSORY_CARD_CSS = `
-.sawo-av-category-buttons{display:flex;gap:10px;justify-content:center;align-items:center;margin:10px 0 30px;flex-wrap:wrap}
-.sawo-av-btn{padding:12px 18px;font-size:12px;font-family:'Montserrat',sans-serif;font-weight:500;text-decoration:none;border:1px solid #af8564;border-radius:5px;transition:all 0.3s ease;cursor:pointer;text-align:center;color:#af8564;background-color:transparent;user-select:none}
-.sawo-av-btn.sawo-av-active{background-color:#af8564!important;color:#ffffff!important;border:1px solid #af8564!important}
-.sawo-av-btn.sawo-av-active:hover{background-color:#af8564!important;color:#ffffff!important}
-.sawo-av-btn:hover{background-color:#af8564;color:#ffffff}
-.sawo-av-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;width:100%}
-.sawo-av-card{background-color:#ffffff;border:1px solid #e8e8e8;border-radius:12px;padding:16px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:box-shadow 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
+.sawo-av-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;width:100%}
+.sawo-av-card{background-color:#ffffff;border:1px solid #e8e8e8;border-radius:10px;padding:14px 12px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:box-shadow 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
 .sawo-av-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.12)}
-.sawo-av-image-container{position:relative;width:100%;text-align:center;margin-bottom:10px;cursor:pointer}
-.sawo-av-main-image{width:100%;height:auto;border-radius:8px;transition:transform 0.5s ease;cursor:pointer;pointer-events:none}
+.sawo-av-image-container{position:relative;width:100%;height:230px;text-align:center;margin-bottom:8px;cursor:pointer}
+.sawo-av-main-image{width:100%;height:100%;object-fit:contain;border-radius:6px;transition:transform 0.4s ease;cursor:pointer;pointer-events:none}
 .sawo-av-image-container:hover .sawo-av-main-image{transform:scale(1.05)}
-.sawo-av-overlay-text{position:absolute;top:8px;right:8px;background-color:rgba(0,0,0,0.7);color:#fff;padding:4px 8px;font-size:12px;border-radius:4px;font-family:'Montserrat',sans-serif;pointer-events:none}
-.sawo-av-choices{display:flex;justify-content:center;gap:8px;margin-bottom:8px;align-items:center;width:100%;user-select:none}
-.sawo-av-arrow{user-select:none;cursor:default;font-size:16px;line-height:1;pointer-events:none;color:#af8564}
-.sawo-av-choice{cursor:pointer;width:20px;height:20px;border:2px solid transparent;transition:border-color 0.3s ease,transform 0.3s ease;border-radius:50%;user-select:none;padding:0}
+.sawo-av-overlay-text{position:absolute;top:6px;right:6px;background-color:rgba(0,0,0,0.7);color:#fff;padding:3px 6px;font-size:10px;border-radius:4px;font-family:'Montserrat',sans-serif;pointer-events:none}
+.sawo-av-choices{display:flex;justify-content:center;gap:5px;margin-bottom:4px;align-items:center;width:100%;user-select:none}
+.sawo-av-arrow{user-select:none;cursor:default;font-size:13px;line-height:1;pointer-events:none;color:#af8564}
+.sawo-av-choice{cursor:pointer;width:14px;height:14px;border:2px solid transparent;transition:border-color 0.3s ease,transform 0.3s ease;border-radius:50%;user-select:none;padding:0}
 .sawo-av-choice:hover{border-color:#af8564;transform:scale(1.3)}
 .sawo-av-choice.pine,.sawo-av-choice.hemlock{background-color:#d9ad73}
 .sawo-av-choice.aspen{background-color:#c6c3bf}
@@ -64,18 +61,30 @@ export const ACCESSORY_CARD_CSS = `
 .sawo-av-choice.metalbrown{background-color:#7a5c3c}
 .sawo-av-choice.blackmetal{background-color:#2c2c2c}
 .sawo-av-choice.default{background-color:#bbb}
-.sawo-av-headtext{font-size:22px;line-height:35px;font-family:'Montserrat',sans-serif;text-align:center;width:100%;color:#af8564;font-weight:400}
-.sawo-av-code{font-size:15px;line-height:27px;font-family:'Montserrat',sans-serif;text-align:left;color:#333}
-.sawo-av-subtext{font-size:15px;line-height:27px;font-family:'Montserrat',sans-serif;text-align:left;color:#5a4030}
-.sawo-av-subtext strong,.sawo-av-code strong{font-weight:500}
-.sawo-av-best-seller-badge{position:absolute;top:18px;left:-30px;width:130px;background-color:#af8564;color:#fff;text-align:center;font-size:11px;font-weight:700;font-family:'Montserrat',sans-serif;letter-spacing:0.5px;padding:6px 0;transform:rotate(-45deg);z-index:10;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+.sawo-av-headtext{font-size:16px;line-height:1.3;font-family:'Montserrat',sans-serif;text-align:center;width:100%;color:#af8564;font-weight:600}
+.sawo-av-code{font-size:13.5px;line-height:1.45;font-family:'Montserrat',sans-serif;text-align:left;color:#333}
+.sawo-av-subtext{font-size:13.5px;line-height:1.45;font-family:'Montserrat',sans-serif;text-align:left;color:#5a4030}
+.sawo-av-subtext strong,.sawo-av-code strong{font-weight:600}
+.sawo-av-best-seller-badge{position:absolute;top:16px;left:-36px;width:140px;background-color:#af8564;color:#fff;text-align:center;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;letter-spacing:0.5px;padding:5px 0;transform:rotate(-45deg);z-index:10;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
 .sawo-av-video-modal{display:flex;position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);z-index:10;justify-content:center;align-items:center}
 .sawo-av-popup-video{width:100%;height:100%;object-fit:cover;background:#000;z-index:11}
-.sawo-av-close-video{position:absolute;top:10px;right:10px;background:#fff;border:none;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;z-index:12}
-.sawo-av-video-btn{background:none;border:none;cursor:pointer;margin-left:8px;padding:0;display:flex;align-items:center}
-@media(max-width:1024px){.sawo-av-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:768px){.sawo-av-grid{grid-template-columns:repeat(2,1fr)}.sawo-av-btn{font-size:8px;padding:10px 13px}.sawo-av-choice{width:16px;height:16px}.sawo-av-choices{gap:6px}.sawo-av-headtext{font-size:14px;line-height:24px}.sawo-av-code,.sawo-av-subtext{font-size:10px;line-height:20px}.sawo-av-overlay-text{font-size:9px;top:0;right:0;padding:2px 4px}}
-@media(max-width:480px){.sawo-av-grid{grid-template-columns:1fr}}
+.sawo-av-close-video{position:absolute;top:10px;right:10px;background:#fff;border:none;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;z-index:12}
+.sawo-av-video-btn{background:none;border:none;cursor:pointer;margin-left:6px;padding:0;display:flex;align-items:center}
+@media(max-width:1400px){.sawo-av-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:1100px){.sawo-av-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.sawo-av-grid{grid-template-columns:repeat(2,1fr);gap:12px}.sawo-av-image-container{height:200px}.sawo-av-choice{width:12px;height:12px}.sawo-av-headtext{font-size:13.5px}.sawo-av-code,.sawo-av-subtext{font-size:11.5px}.sawo-av-overlay-text{font-size:9px;top:0;right:0;padding:2px 4px}}
+@media(max-width:480px){.sawo-av-grid{grid-template-columns:1fr}.sawo-av-image-container{height:260px}}
+
+/* Grid variants — declared after the base media queries so they win at equal
+   specificity. The default 5-col grid suits the wide catalog page; the
+   per-category pages sit in a 1200px .wm-container where 5 columns is
+   cramped, and accessory-set photos are landscape so they need wide cards. */
+.sawo-av-grid--roomy{grid-template-columns:repeat(4,1fr);gap:20px}
+.sawo-av-grid--sets{grid-template-columns:repeat(2,1fr);gap:24px}
+.sawo-av-grid--sets .sawo-av-image-container{height:320px}
+@media(max-width:1100px){.sawo-av-grid--roomy{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.sawo-av-grid--roomy{grid-template-columns:repeat(2,1fr);gap:14px}.sawo-av-grid--sets{grid-template-columns:1fr}.sawo-av-grid--sets .sawo-av-image-container{height:240px}}
+@media(max-width:480px){.sawo-av-grid--roomy{grid-template-columns:1fr}.sawo-av-grid--roomy .sawo-av-image-container{height:260px}}
 `;
 
 export function AccessoryCard({ product }) {
