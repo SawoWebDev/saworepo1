@@ -1,0 +1,153 @@
+{
+  "hero": {
+    "experience": "Koe . . .",
+    "sentences": [
+      "virkistävä pakopaikka",
+      "hyvinvointia ikivanhasta perinteestä",
+      "aito suomalainen sauna"
+    ],
+    "alt": "SAWO-saunankiukaat – koe hyvinvointi ja virkistys",
+    "seoKeywords": "SAWO-saunankiukaat, suomalainen sauna, saunatarvikkeet, infrapunasauna, höyrynkehitin"
+  },
+  "section1": {
+    "heading": "Sukella saunamaailmaamme",
+    "carouselLabel": "SAWO-saunatuotteiden karuselli",
+    "items": {
+      "heaters": {
+        "title": "SAUNANKIUKAAT",
+        "caption": "Virkisty perinteisen suomalaisen saunan lämmössä SAWOn laadukkailla kiukailla.",
+        "alt": "SAWOn suomalaisten saunankiukaiden mallisto tehokkaaseen saunan lämmitykseen"
+      },
+      "steamGenerators": {
+        "title": "HÖYRYNKEHITTIMET",
+        "caption": "Vapaudu stressistä ja jännityksestä SAWOn höyrynkehittimien parantavan höyryn avulla.",
+        "alt": "SAWO-höyrynkehitin moderneihin sauna- ja kylpylähöyryhuoneisiin"
+      },
+      "rooms": {
+        "title": "SAUNAT",
+        "caption": "Rentoudu, puhdistu ja virkisty SAWOn suunnittelemassa saunassa terapeuttisen lämmön avulla.",
+        "alt": "SAWOn suomalainen vakiosauna luonnollisella puumuotoilulla"
+      },
+      "infrared": {
+        "title": "INFRAPUNASAUNA",
+        "caption": "Koe syvä rentoutuminen edistyneen infrapunasaunateknologian avulla.",
+        "alt": "SAWOn infrapunasauna setripuisella sisustuksella"
+      },
+      "accessories": {
+        "title": "SAUNATARVIKKEET",
+        "caption": "Täydennä saunasi huolella suunnitelluilla SAWO-tarvikkeilla.",
+        "alt": "SAWOn saunatarvikemallisto: kiulut, kauhat ja lämpömittarit"
+      },
+      "controls": {
+        "title": "SAUNAN OHJAUSKESKUKSET",
+        "caption": "Tarkka lämpötilan ja ajan säätö täydelliseen mukavuuteen.",
+        "alt": "SAWOn saunan ohjausjärjestelmä täydelliseen mukavuuteen"
+      }
+    }
+  },
+  "section2": {
+    "heading": "SAUNANKIUKAAT",
+    "items": {
+      "tower": {
+        "title": "TORNI",
+        "caption": "Korkeutta ja energiatehokkuutta tyylikkäässä, elegantissa muotoilussa. Tasainen lämpö saunan alaosasta yläosaan optimaalista rentoutumista ja hyvinvointia varten.",
+        "alt": "SAWO Tower -saunankiuassarja elegantilla pystymuotoilulla"
+      },
+      "wallMounted": {
+        "title": "SEINÄMALLI",
+        "caption": "Tilaa säästävät ja energiatehokkaat seinäkiukaat, jotka tuottavat tasaista ja voimakasta lämpöä. Tyylikäs, moderni muotoilu ja erinomainen mukavuus täydelliseen saunakokemukseen.",
+        "alt": "SAWOn seinäkiuassarja kompakteihin saunoihin"
+      },
+      "floor": {
+        "title": "LATTIAMALLI",
+        "caption": "Laadukkaat ja erittäin tehokkaat vapaasti seisovat kiukaat, joissa yhdistyvät voittamattomasti energiatehokkuus ja elegantti muotoilu. Ihanteellinen ammattikäyttöön.",
+        "alt": "SAWOn lattiakiuassarja ammattikäyttöön tarkoitettuihin saunoihin"
+      },
+      "combi": {
+        "title": "COMBI",
+        "caption": "Monipuolisuutta yhdessä modernissa, energiatehokkaassa laitteessa. Höyry ja lämpö yhdistettynä muokattavaan mukavuuteen, hyvinvointiin ja rentoutumiseen.",
+        "alt": "SAWO Combi -saunankiuassarja höyryn ja lämmön yhdistelmällä"
+      },
+      "stone": {
+        "title": "KIVI",
+        "caption": "Täydellinen kiuas jokaiseen saunaan: ruostumattoman teräksen kestävyys, suomalaisen vuolukiven erinomainen lämmönjohtavuus ja tyylikäs ulkonäkö.",
+        "alt": "SAWO Stone -saunankiuassarja ruostumattomasta teräksestä ja vuolukivestä"
+      },
+      "dragonfire": {
+        "title": "DRAGONFIRE",
+        "caption": "Taiteellisen näkemyksen ja huipputeknologian yhdistelmä, jonka on suunnitellut teollinen muotoilija ja sisustussuunnittelija Stefan Lindfors.",
+        "alt": "SAWO Dragonfire -saunankiuassarja, muotoilu Stefan Lindfors"
+      }
+    }
+  },
+  "section3": {
+    "steamHeading": "HÖYRY",
+    "saunaRoomsHeading": "SAUNAT",
+    "infraredHeading": "INFRAPUNA",
+    "saunaControlHeading": "SAUNAN OHJAUS",
+    "steam": {
+      "generators": {
+        "title": "Höyrynkehittimet",
+        "caption": "Räätälöidyn höyryn ylellisyyttä edistyneistä höyrynkehittimistä kylpylämäiseen kokemukseen. Mukautetut asetukset ja kauttaaltaan erinomainen suorituskyky."
+      },
+      "controls": {
+        "title": "Höyryn ohjauskeskukset",
+        "caption": "Tarkkuutta, vaivattomuutta ja yksilöllisyyttä: tarkat höyryasetukset, vaivaton käyttö ja yksilöllinen saunakokemus Saunova- ja Innova-ohjaussarjoistamme."
+      },
+      "accessories": {
+        "title": "Höyrytarvikkeet",
+        "caption": "Laadukkaat tarvikkeet, jotka on suunniteltu parantamaan toimivuutta ja maksimoimaan mukavuuden. Poikkeuksellinen hyvinvointi- ja rentoutumiskokemus kerta toisensa jälkeen."
+      }
+    },
+    "rooms": {
+      "standard": {
+        "title": "Vakiosauna",
+        "caption": "Ajatonta muotoilua ja laadukkaita materiaaleja. Klassinen sisäsaunakokemus jokaiseen kotiin tai hyvinvointitilaan."
+      },
+      "glassFront": {
+        "title": "Lasiseinäinen sauna",
+        "caption": "Moderni muotoilu kirkkailla karkaistuilla lasipaneeleilla esteettömään näkymään ulos. Puhdasta rauhaa ja rentoutumista."
+      },
+      "outdoor": {
+        "title": "Ulkosauna",
+        "caption": "Suunniteltu kestämään ankaria sääolosuhteita. Pinnoitetut seinät ja kestävä huopakatto suojaavat maksimaalisesti auringolta ja sateelta."
+      },
+      "infrared": {
+        "title": "Infrapunasauna",
+        "caption": "Taidokkaasti valmistettu setristä, haavasta ja kuusesta. Hellävarainen infrapunalämpö rauhoittavaan, terapeuttiseen mukavuuteen."
+      }
+    },
+    "infrared": {
+      "rooms": { "title": "Infrapunasaunat" },
+      "panels": { "title": "Infrapunapaneelit" },
+      "controls": { "title": "Infrapunaohjaimet" }
+    },
+    "controls": {
+      "saunova": { "title": "Saunova-sarja" },
+      "innova": { "title": "Innova-sarja" },
+      "accessories": { "title": "Ohjaustarvikkeet" }
+    }
+  },
+  "section4": {
+    "heading": "SAUNATARVIKKEET",
+    "items": {
+      "pailsLadles": { "title": "KIULUT ja KAUHAT", "alt": "Saunakiulut ja -kauhat" },
+      "thermometers": { "title": "LÄMPÖMITTARIT ja YHDISTELMÄMITTARIT", "alt": "Saunan lämpömittarit ja yhdistelmämittarit" },
+      "clocksSandtimers": { "title": "KELLOT ja TIIMALASIT", "alt": "Saunakellot ja tiimalasit" },
+      "lightsCovers": { "title": "SAUNAVALOT ja VALAISINSUOJAT", "alt": "Saunan valaisinsuojat" },
+      "headrestsBackrests": { "title": "NISKATUET ja SELKÄNOJAT", "alt": "Saunan niskatuet ja selkänojat" },
+      "doorsHandles": { "title": "OVET ja KAHVAT", "alt": "Saunan ovet ja kahvat" },
+      "benches": { "title": "LAUTEET ja LATTIALAATAT", "alt": "Saunan lauteet ja lattialaatat" },
+      "kivistone": { "title": "KIVISTONE", "alt": "Kivistone-kiuaskivet" },
+      "ventilations": { "title": "ILMANVAIHTO ja LISÄVARUSTEET", "alt": "Saunan ilmanvaihto ja lisävarusteet" }
+    }
+  },
+  "section5": {
+    "heading": "Räätälöidyt ratkaisut",
+    "subtitle": "Tehdään saunavisiostasi totta.",
+    "body1": "Suunnittelemme saunaratkaisuja, jotka on räätälöity tyyliisi ja tilaasi. Olipa kyseessä koti tai yritys, huolehdimme kaikesta suunnittelusta asennukseen ja tekniseen tukeen.",
+    "body2": "Soita meille tai lähetä viesti.",
+    "altRight": "Räätälöidyt saunaratkaisut",
+    "altLeft": "Ennakoiva huolto"
+  }
+}
