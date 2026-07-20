@@ -1,0 +1,51 @@
+{
+  "home": "Etusivu",
+  "products": "Tuotteet",
+  "support": "Tuki",
+  "aboutUs": "Tietoa meistä",
+  "contactUs": "Ota yhteyttä",
+  "search": "Haku",
+  "openMenu": "Avaa valikko",
+  "closeMenu": "Sulje valikko",
+  "searchBox": {
+    "placeholder": "Hae...",
+    "searching": "Haetaan...",
+    "noResults": "Ei tuloksia",
+    "pages": "Sivut",
+    "products": "Tuotteet"
+  },
+  "groups": {
+    "sauna": "Sauna",
+    "steam": "Höyry",
+    "infrared": "Infrapuna"
+  },
+  "items": {
+    "wallMounted": "Seinämalli",
+    "tower": "Torni",
+    "stone": "Kivi",
+    "floor": "Lattiamalli",
+    "combi": "Combi",
+    "dragonfire": "Dragonfire",
+    "saunaHeaters": "Saunankiukaat",
+    "saunaControls": "Saunan ohjauskeskukset",
+    "saunaAccessories": "Saunatarvikkeet",
+    "saunaRooms": "Saunat",
+    "interiorDesigns": "Sisustussuunnittelu",
+    "woodPanels": "Puupaneelit ja puutavara",
+    "steamGenerators": "Höyrynkehittimet",
+    "steamControls": "Höyryn ohjauskeskukset",
+    "steamAccessories": "Höyrytarvikkeet",
+    "infrared": "Infrapuna",
+    "faq": "Usein kysytyt kysymykset",
+    "saunaCalculator": "Saunalaskuri",
+    "userManuals": "Käyttöohjeet",
+    "productCatalogue": "Tuoteluettelo",
+    "latestNews": "Ajankohtaista",
+    "sustainability": "Vastuullisuus",
+    "careers": "Työpaikat"
+  },
+  "language": {
+    "label": "Kieli",
+    "switchTo": "Vaihda kieltä"
+  }
+}

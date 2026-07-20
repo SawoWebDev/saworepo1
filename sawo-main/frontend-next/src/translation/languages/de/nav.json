@@ -1,0 +1,51 @@
+{
+  "home": "Startseite",
+  "products": "Produkte",
+  "support": "Support",
+  "aboutUs": "Über uns",
+  "contactUs": "Kontakt",
+  "search": "Suche",
+  "openMenu": "Menü öffnen",
+  "closeMenu": "Menü schließen",
+  "searchBox": {
+    "placeholder": "Suchen...",
+    "searching": "Suche läuft...",
+    "noResults": "Keine Ergebnisse gefunden",
+    "pages": "Seiten",
+    "products": "Produkte"
+  },
+  "groups": {
+    "sauna": "Sauna",
+    "steam": "Dampf",
+    "infrared": "Infrarot"
+  },
+  "items": {
+    "wallMounted": "Wandmontage",
+    "tower": "Turm",
+    "stone": "Stein",
+    "floor": "Standmodell",
+    "combi": "Combi",
+    "dragonfire": "Dragonfire",
+    "saunaHeaters": "Saunaöfen",
+    "saunaControls": "Saunasteuerungen",
+    "saunaAccessories": "Saunazubehör",
+    "saunaRooms": "Saunakabinen",
+    "interiorDesigns": "Innenausstattung",
+    "woodPanels": "Holzpaneele & Hölzer",
+    "steamGenerators": "Dampfgeneratoren",
+    "steamControls": "Dampfsteuerungen",
+    "steamAccessories": "Dampfzubehör",
+    "infrared": "Infrarot",
+    "faq": "Häufig gestellte Fragen",
+    "saunaCalculator": "Sauna-Rechner",
+    "userManuals": "Bedienungsanleitungen",
+    "productCatalogue": "Produktkatalog",
+    "latestNews": "Aktuelles",
+    "sustainability": "Nachhaltigkeit",
+    "careers": "Karriere"
+  },
+  "language": {
+    "label": "Sprache",
+    "switchTo": "Sprache wechseln"
+  }
+}

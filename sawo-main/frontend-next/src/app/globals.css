@@ -1,0 +1,285 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * SHARED SITE STYLES
+ * ------------------
+ * Single source of visual truth, imported once in app/[locale]/layout.jsx and
+ * shared by every page and every locale. Component markup stays identical
+ * across languages — only the text (from translation/languages/<locale>/*.json)
+ * changes.
+ *
+ * These rules were global on the original CRA site (its <style jsx> blocks were
+ * unscoped because Create React App doesn't process styled-jsx). Keeping them
+ * global here reproduces the original look exactly and renders server-side
+ * (no flash of unstyled content that per-component styled-jsx caused).
+ */
+
+@layer base {
+  body, button, input, textarea, select {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* ── Header nav underline ─────────────────────────────────────────────── */
+.menu-item { position: relative; }
+.menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #af8564;
+}
+.menu-item:hover::after,
+.menu-item.active::after {
+  width: 100%;
+  transition: width 0.3s ease;
+}
+/* #916e53 is the 4.5:1-contrast variant of the #af8564 brand brown. */
+.menu-item.active,
+.menu-item:hover { color: #916e53; }
+.menu-item.active { font-weight: 600; }
+.menu-item.active .menu-text,
+.menu-item:hover .menu-text { color: #916e53; }
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.typewriter span {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* ── Section 1: product-category auto-scroll carousel ─────────────────── */
+.sawo-carousel-container::-webkit-scrollbar { display: none; }
+.sawo-carousel-container { scrollbar-width: none; }
+.sawo-carousel-container:hover .sawo-carousel-track { animation-play-state: paused; }
+.sawo-carousel-track {
+  display: flex;
+  gap: 20px;
+  animation: sawo-scroll 17s linear infinite;
+  animation-play-state: paused;
+}
+.sawo-carousel-track.is-ready { animation-play-state: running; }
+.sawo-carousel-item:hover .sawo-carousel-caption { opacity: 1; transform: translateY(0); }
+@keyframes sawo-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (max-width: 1024px) { .sawo-carousel-item { flex: 0 0 calc(33.333% - 20px); } }
+@media (max-width: 768px)  { .sawo-carousel-item { flex: 0 0 calc(50% - 20px); } }
+@media (max-width: 480px)  { .sawo-carousel-item { flex: 0 0 100%; } }
+
+/* ── Section 2 (heaters) & Section 4 (accessories): swipe carousels ───── */
+.sauna-carousel::-webkit-scrollbar,
+.accessories-carousel::-webkit-scrollbar { display: none; }
+.sauna-carousel,
+.accessories-carousel {
+  scrollbar-width: none;
+  scroll-padding-left: 0.5rem;
+}
+.carousel-item { flex: 0 0 calc((100% - 3 * 1.5rem) / 4); }
+@media (max-width: 1024px) { .carousel-item { flex: 0 0 calc((100% - 1.5rem) / 2); } }
+@media (max-width: 640px)  { .carousel-item { flex: 0 0 100%; } }
+
+/* Section 4 image gradient overlay */
+.gradient-overlay { background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0)); }
+
+/* ── Section 3: steam / rooms / infrared / control grids ─────────────── */
+.section3-wrapper { font-family: 'Montserrat', sans-serif; padding: 40px 0; }
+.section3-wrapper .section-title {
+  text-align: center;
+  font-size: 35px;
+  font-weight: 500;
+  color: rgb(175, 133, 100);
+  margin: 60px 0 30px;
+}
+.section3-wrapper .steam-grid,
+.section3-wrapper .image-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+.section3-wrapper .steam-card,
+.section3-wrapper .image-card {
+  flex: 1 1 calc(25% - 20px);
+  min-width: 220px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.section3-wrapper img { width: 100%; display: block; transition: transform 0.6s ease; }
+.section3-wrapper .steam-card:hover img,
+.section3-wrapper .image-card:hover img { transform: scale(1.08); }
+.section3-wrapper .steam-title,
+.section3-wrapper .image-card .title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  padding: 16px;
+  z-index: 2;
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 500;
+  text-transform: uppercase;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+}
+.section3-wrapper .steam-card.has-caption::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+.section3-wrapper .steam-card.has-caption:hover::before { opacity: 1; }
+.section3-wrapper .steam-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+.section3-wrapper .steam-card.has-caption:hover .steam-caption { opacity: 1; }
+.section3-wrapper .steam-card.has-caption:hover .steam-title { opacity: 0; }
+@media (max-width: 768px) {
+  .section3-wrapper .steam-card,
+  .section3-wrapper .image-card { flex: 1 1 100%; }
+}
+
+/* ── Section 5: customized-solutions responsive padding ──────────────── */
+@media (max-width: 1024px) {
+  .section5 .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+
+/* ── Back-to-top (bottom-right, mirrors the main site's ScrollToTop) ──── */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #af8564;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  font-family: 'Montserrat', sans-serif;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+.back-to-top:hover {
+  background: #9d7554;
+  transform: translateY(-2px);
+}
+@media (max-width: 640px) {
+  .back-to-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
+}
+
+/* ── Language switcher (bottom-left, mirrors back-to-top's placement) ─── */
+.lang-switcher {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 999;
+  font-family: 'Montserrat', sans-serif;
+}
+.lang-switcher-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px 0 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.lang-switcher-toggle:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+.lang-switcher .lang-flag {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.lang-switcher .lang-flag svg { width: 100%; height: 100%; display: block; }
+.lang-switcher-toggle .lang-code {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.03em;
+}
+.lang-switcher-menu {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  min-width: 180px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 6px;
+  list-style: none;
+  margin: 0;
+}
+.lang-switcher-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  color: #333;
+  transition: background-color 0.15s ease;
+}
+.lang-switcher-option:hover { background: #f5f0ec; }
+.lang-switcher-option.is-active { background: #af8564; color: #fff; }
+.lang-switcher-option .lang-name { white-space: nowrap; }
+
+/* Small screens: keep the flag tappable but drop the language-code text so the
+   pill doesn't crowd the back-to-top button on narrow layouts. */
+@media (max-width: 640px) {
+  .lang-switcher { bottom: 16px; left: 16px; }
+  .lang-switcher-toggle { width: 44px; height: 40px; padding: 0; justify-content: center; }
+  .lang-switcher-toggle .lang-code { display: none; }
+}
