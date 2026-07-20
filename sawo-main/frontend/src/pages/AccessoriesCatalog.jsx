@@ -1,111 +1,114 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
+import { AccessoryCard, ACCESSORY_CARD_CSS } from "./AccessoryCard";
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
-const CATEGORY_SECTIONS = [
-  { label: "Pails", id: "section-pails", category: "pails" },
-  { label: "Ladles", id: "section-ladles", category: "ladles" },
-  { label: "Pail Shower", id: "section-pail-shower", category: "pail shower" },
-  { label: "Thermometers & Combined Meters", id: "section-meters", category: "thermometers" },
-  { label: "Clocks & Timers", id: "section-clock-timer", category: "clocks & timers" },
-  { label: "Sauna Lights", id: "section-sauna-lights", category: "sauna lights" },
-  { label: "Headrest & Backrests", id: "section-headrest-backrest", category: "headrest & backrest" },
-  { label: "Doors & Handles", id: "section-doors-handles", category: "doors & handles" },
-  { label: "Benches", id: "section-benches", category: "benches" },
-  { label: "Hangers & Hook Racks", id: "section-cloth-hangers", category: "cloth hangers" },
-  { label: "Floor Mat Tiles", id: "section-wooden-floor-mats", category: "wooden floor mats" },
-  { label: "Kivistone", id: "section-kivistone", category: "kivistone" },
-  { label: "Ventilations & Miscellaneous Items", id: "section-vent-misc", category: "ventilation & miscellaneous" },
+// Groups that combine multiple data categories under one section with
+// internal tabs mirror the WordPress reference pages that do the same
+// (IndividualPages/pails.html -> Pails & Ladles, IndividualPages/benches.html
+// -> Benches, Hangers & Floor Mats). Every other category matches a single
+// WP display page 1:1 and gets one section, no tabs.
+const CATEGORY_GROUPS = [
+  {
+    id: "section-pails",
+    label: "Pails & Ladles",
+    tabs: [
+      { key: "pails", label: "Pails", category: "pails" },
+      { key: "ladles", label: "Ladles", category: "ladles" },
+      { key: "pail-shower", label: "Pail Shower", category: "pail shower" },
+    ],
+  },
+  {
+    id: "section-meters",
+    label: "Thermometers & Combined Meters",
+    tabs: [{ key: "meters", label: "Thermometers & Combined Meters", category: "thermometers" }],
+  },
+  {
+    id: "section-clock-timer",
+    label: "Clocks & Timers",
+    tabs: [{ key: "clocks", label: "Clocks & Timers", category: "clocks & timers" }],
+  },
+  {
+    id: "section-sauna-lights",
+    label: "Sauna Lights",
+    tabs: [{ key: "lights", label: "Sauna Lights", category: "sauna lights" }],
+  },
+  {
+    id: "section-headrest-backrest",
+    label: "Headrest & Backrests",
+    tabs: [{ key: "headrest", label: "Headrest & Backrests", category: "headrest & backrest" }],
+  },
+  {
+    id: "section-doors-handles",
+    label: "Doors & Handles",
+    tabs: [{ key: "doors", label: "Doors & Handles", category: "doors & handles" }],
+  },
+  {
+    id: "section-benches",
+    label: "Benches, Hangers & Floor Mats",
+    tabs: [
+      { key: "benches", label: "Benches", category: "benches" },
+      { key: "hooks", label: "Hangers & Hook Racks", category: "cloth hangers" },
+      { key: "floor-mats", label: "Floor Mat Tiles", category: "wooden floor mats" },
+    ],
+  },
+  {
+    id: "section-kivistone",
+    label: "Kivistone",
+    tabs: [{ key: "kivistone", label: "Kivistone", category: "kivistone" }],
+  },
+  {
+    id: "section-vent-misc",
+    label: "Ventilations & Miscellaneous Items",
+    tabs: [{ key: "vent", label: "Ventilations & Miscellaneous Items", category: "ventilation & miscellaneous" }],
+  },
+  {
+    id: "section-accessory-sets",
+    label: "Accessory Sets",
+    tabs: [{ key: "sets", label: "Accessory Sets", category: "accessory sets" }],
+  },
 ];
 
-function resolveUrl(pathOrUrl) {
-  if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${GITHUB_RAW}${pathOrUrl}`;
-}
-
-function getImageUrl(product) {
-  const local = product?.local_thumbnail;
-  const remote = product?.thumbnail;
-  const path = local || remote;
-  return resolveUrl(path);
-}
-
-function ProductCard({ product }) {
-  const [imageLoaded, setImageLoaded] = React.useState(false);
-  const [hovered, setHovered] = React.useState(false);
+function CategorySection({ group, productsByTab, activeTab, onTabChange }) {
+  const showTabs = group.tabs.length > 1;
+  const activeProducts = productsByTab[activeTab] || [];
 
   return (
-    <Link
-      to={`/accessories/${product.slug}`}
-      style={{ textDecoration: "none" }}
-    >
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 10,
-          padding: "12px 8px",
-          borderRadius: 10,
-          transition: "transform 0.25s ease",
-          transform: hovered ? "translateY(-4px)" : "translateY(0)",
-          cursor: "pointer",
-        }}
-      >
-        {/* Image */}
-        <div style={{
-          width: "100%",
-          height: 140,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}>
-          {getImageUrl(product) ? (
-            <img
-              src={getImageUrl(product)}
-              alt={product.name}
-              onLoad={() => setImageLoaded(true)}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                opacity: imageLoaded ? 1 : 0,
-                transition: "opacity 0.3s ease, transform 0.25s ease",
-                transform: hovered ? "scale(1.06)" : "scale(1)",
-              }}
-            />
-          ) : (
-            <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
-          )}
-        </div>
-
-        {/* Title */}
-        <p style={{
-          fontWeight: 600,
-          fontSize: "0.78rem",
-          color: hovered ? "#a67853" : "#af8564",
-          margin: 0,
-          lineHeight: 1.4,
-          textAlign: "center",
-          transition: "color 0.2s ease",
-        }}>
-          {product.name}
-        </p>
+    <div id={group.id} className="category-section">
+      <div className="category-section-title">
+        <h2>{group.label}</h2>
       </div>
-    </Link>
+
+      {showTabs && (
+        <div className="sawo-av-category-buttons">
+          {group.tabs.map(tab => (
+            <button
+              key={tab.key}
+              type="button"
+              className={`sawo-av-btn ${activeTab === tab.key ? "sawo-av-active" : ""}`}
+              onClick={() => onTabChange(group.id, tab.key)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="sawo-av-grid">
+        {activeProducts.map(product => (
+          <AccessoryCard key={product.id || product.slug} product={product} />
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default function AccessoriesCatalog() {
   const { products: localProds, loading } = useLocalProducts();
-  const [activeCategory, setActiveCategory] = useState("section-pails");
+  const [activeSection, setActiveSection] = useState(CATEGORY_GROUPS[0].id);
+  const [activeTabs, setActiveTabs] = useState(() =>
+    Object.fromEntries(CATEGORY_GROUPS.map(g => [g.id, g.tabs[0].key]))
+  );
 
   const accessories = useMemo(() => {
     if (!localProds.length) return [];
@@ -117,15 +120,43 @@ export default function AccessoriesCatalog() {
     );
   }, [localProds]);
 
-  const productsByCategory = useMemo(() => {
+  // Flat map of every tab's own product list, keyed by tab key.
+  const productsByTab = useMemo(() => {
     const grouped = {};
-    CATEGORY_SECTIONS.forEach(section => {
-      grouped[section.id] = accessories.filter(p =>
-        p.categories?.some(c => c.toLowerCase() === section.category)
-      );
+    CATEGORY_GROUPS.forEach(group => {
+      group.tabs.forEach(tab => {
+        grouped[tab.key] = accessories.filter(p =>
+          p.categories?.some(c => c.toLowerCase() === tab.category)
+        );
+      });
     });
     return grouped;
   }, [accessories]);
+
+  // Pick each group's default active tab as the first one with products,
+  // once data has loaded (avoids landing on an empty tab).
+  useEffect(() => {
+    if (!accessories.length) return;
+    setActiveTabs(prev => {
+      const next = { ...prev };
+      CATEGORY_GROUPS.forEach(group => {
+        const current = next[group.id];
+        if ((productsByTab[current] || []).length > 0) return;
+        const firstNonEmpty = group.tabs.find(t => (productsByTab[t.key] || []).length > 0);
+        if (firstNonEmpty) next[group.id] = firstNonEmpty.key;
+      });
+      return next;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessories.length]);
+
+  const groupCounts = useMemo(() => {
+    const counts = {};
+    CATEGORY_GROUPS.forEach(group => {
+      counts[group.id] = group.tabs.reduce((sum, tab) => sum + (productsByTab[tab.key] || []).length, 0);
+    });
+    return counts;
+  }, [productsByTab]);
 
   // Scroll tracking for sidebar
   useEffect(() => {
@@ -133,8 +164,8 @@ export default function AccessoriesCatalog() {
       let closestSection = null;
       let closestOffset = Infinity;
 
-      CATEGORY_SECTIONS.forEach(section => {
-        const element = document.getElementById(section.id);
+      CATEGORY_GROUPS.forEach(group => {
+        const element = document.getElementById(group.id);
         if (!element) return;
 
         const rect = element.getBoundingClientRect();
@@ -142,12 +173,12 @@ export default function AccessoriesCatalog() {
 
         if (rect.top <= window.innerHeight * 0.4 && offset < closestOffset) {
           closestOffset = offset;
-          closestSection = section.id;
+          closestSection = group.id;
         }
       });
 
       if (closestSection) {
-        setActiveCategory(closestSection);
+        setActiveSection(closestSection);
       }
     };
 
@@ -159,8 +190,12 @@ export default function AccessoriesCatalog() {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setActiveCategory(sectionId);
+      setActiveSection(sectionId);
     }
+  };
+
+  const handleTabChange = (groupId, tabKey) => {
+    setActiveTabs(prev => ({ ...prev, [groupId]: tabKey }));
   };
 
   if (loading) {
@@ -189,6 +224,8 @@ export default function AccessoriesCatalog() {
           0% { background-position: 200% 0; }
           100% { background-position: -200% 0; }
         }
+
+        ${ACCESSORY_CARD_CSS}
 
         .accessories-wrapper {
           display: grid;
@@ -343,7 +380,7 @@ export default function AccessoriesCatalog() {
         }
 
         .category-section-title {
-          margin-bottom: 40px;
+          margin-bottom: 24px;
         }
 
         .category-section-title h2 {
@@ -352,31 +389,7 @@ export default function AccessoriesCatalog() {
           color: #af8564;
           margin: 0 0 8px;
           line-height: 1.2;
-        }
-
-        .category-section-title .underline {
-          height: 3px;
-          width: 60px;
-          background: linear-gradient(90deg, #d9c4b0 0%, #d1bda6 100%);
-          border-radius: 3px;
-        }
-
-        .products-grid {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 24px 16px;
-        }
-
-        @media screen and (max-width: 1400px) {
-          .products-grid {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-
-        @media screen and (max-width: 1100px) {
-          .products-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
+          font-family: 'Montserrat', sans-serif;
         }
 
         @media screen and (max-width: 1024px) {
@@ -389,28 +402,11 @@ export default function AccessoriesCatalog() {
           .category-buttons-sidebar {
             display: none;
           }
-
-          .products-grid {
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px 14px;
-          }
         }
 
         @media screen and (max-width: 768px) {
           .accessories-wrapper {
             padding: 40px 24px 40px;
-          }
-
-          .products-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px 12px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .products-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px 10px;
           }
         }
       `}</style>
@@ -463,16 +459,16 @@ export default function AccessoriesCatalog() {
               <p className="sidebar-header-title">Categories</p>
             </div>
             <div className="sidebar-scroll">
-              {CATEGORY_SECTIONS.map(section => {
-                const count = (productsByCategory[section.id] || []).length;
+              {CATEGORY_GROUPS.map(group => {
+                const count = groupCounts[group.id] || 0;
                 if (count === 0) return null;
                 return (
                   <button
-                    key={section.id}
-                    className={`sidebar-btn ${activeCategory === section.id ? "active" : ""}`}
-                    onClick={() => handleSidebarClick(section.id)}
+                    key={group.id}
+                    className={`sidebar-btn ${activeSection === group.id ? "active" : ""}`}
+                    onClick={() => handleSidebarClick(group.id)}
                   >
-                    <span>{section.label}</span>
+                    <span>{group.label}</span>
                     <span className="sidebar-btn-count">{count}</span>
                   </button>
                 );
@@ -482,24 +478,16 @@ export default function AccessoriesCatalog() {
 
           {/* Main Content */}
           <div className="main-content">
-            {CATEGORY_SECTIONS.map(section => {
-              const products = productsByCategory[section.id] || [];
-              if (products.length === 0) return null;
-
+            {CATEGORY_GROUPS.map(group => {
+              if ((groupCounts[group.id] || 0) === 0) return null;
               return (
-                <div key={section.id} id={section.id} className="category-section">
-                  {/* Category Title */}
-                  <div className="category-section-title">
-                    <h2>{section.label}</h2>
-                  </div>
-
-                  {/* Products Grid */}
-                  <div className="products-grid">
-                    {products.map(product => (
-                      <ProductCard key={product.id || product.slug} product={product} />
-                    ))}
-                  </div>
-                </div>
+                <CategorySection
+                  key={group.id}
+                  group={group}
+                  productsByTab={productsByTab}
+                  activeTab={activeTabs[group.id]}
+                  onTabChange={handleTabChange}
+                />
               );
             })}
           </div>

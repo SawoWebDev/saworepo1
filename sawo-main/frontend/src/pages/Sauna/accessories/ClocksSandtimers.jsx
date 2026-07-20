@@ -1,22 +1,10 @@
 import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
+import { AccessoryCard, ACCESSORY_CARD_CSS } from "../../AccessoryCard";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/sand-timer-copy-new.webp";
 import "../heaters/heaters.css";
-
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
-function localOrRemote(product, field) {
-  return product?.[`local_${field}`] || product?.[field] || null;
-}
-function getImageUrl(product, field) {
-  const path = localOrRemote(product, field);
-  if (!path) return null;
-  if (path.includes("://")) return path;
-  return `${GITHUB_RAW}${path}`;
-}
 
 const DISPLAY_CATEGORIES = ["Clocks", "Sand Timers", "Clocks & Timers"];
 const DISPLAY_TAGS       = ["Clocks & Timers"];
@@ -74,20 +62,6 @@ function SkeletonCard() {
   );
 }
 
-function ProductCard({ product }) {
-  return (
-    <Link to={`/products/${product.slug}`} className="wm-product-item" style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}>
-      <div className="wm-product-img-wrap" style={{ transition: "transform 0.3s" }} onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }} onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}>
-        {getImageUrl(product, "thumbnail")
-          ? <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="wm-product-img" onError={e => { e.currentTarget.style.display = "none"; }} />
-          : <div className="wm-product-img-placeholder"><i className="fas fa-image" /></div>
-        }
-      </div>
-      <p className="wm-product-name" style={{ color: "#2c1f13" }}>{product.name}</p>
-    </Link>
-  );
-}
-
 export default function ClocksSandtimers() {
   const { products: localProds, loading } = useLocalProducts();
   const [search, setSearch]           = useState("");
@@ -121,6 +95,7 @@ export default function ClocksSandtimers() {
     <div className="relative">
       <style>{`
         @keyframes wm-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        ${ACCESSORY_CARD_CSS}
         .wm-search-wrap { display: flex; align-items: center; gap: 10px; max-width: 420px; margin: 0 auto 32px; background: #fff; border: 1.5px solid #e0cfc0; border-radius: 40px; padding: 9px 18px; box-shadow: 0 2px 12px rgba(139,94,60,0.07); transition: border-color 0.2s, box-shadow 0.2s; }
         .wm-search-wrap:focus-within { border-color: #a67853; box-shadow: 0 2px 18px rgba(139,94,60,0.13); }
         .wm-search-icon { color: #a67853; font-size: 0.85rem; flex-shrink: 0; }
@@ -191,7 +166,7 @@ export default function ClocksSandtimers() {
                   return (
                     <div className="wm-group" key={group}>
                       <h3 className="wm-group-title">{group.toUpperCase()}</h3>
-                      <div className="wm-products-grid">{items.map(product => <ProductCard key={product.id || product.slug} product={product} />)}</div>
+                      <div className="sawo-av-grid">{items.map(product => <AccessoryCard key={product.id || product.slug} product={product} />)}</div>
                     </div>
                   );
                 })

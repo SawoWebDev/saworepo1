@@ -623,6 +623,67 @@ function SectionLabel({ icon, text }) {
   );
 }
 
+/* ── Product Info Panel (sawo.com-style color/code/capacity summary) ─── */
+const VARIANT_COLOR_DOT = {
+  "hemlock": "#d9b98c",
+  "white": "#f7f5f1",
+  "black": "#1c1c1c",
+  "cedar": "#8b5a2b",
+  "aspen": "#ead9b0",
+  "aluminum": "#c7c9cc",
+  "black metal": "#3a3a3a",
+  "metallic brown": "#6e4a2e",
+};
+
+function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant }) {
+  const codes = variants.map(v => v.code).filter(Boolean);
+  const colors = variants.map(v => v.color).filter(Boolean);
+  const capacityRow = (product.spec_table?.rows || []).find(row =>
+    (Array.isArray(row) ? row[0] : row?.Specification) === "Capacity"
+  );
+  const capacity = capacityRow ? (Array.isArray(capacityRow) ? capacityRow[1] : capacityRow.Detail) : null;
+
+  const hasDots = colors.length > 1;
+  const hasLines = codes.length > 0 || !!capacity || colors.length > 1;
+  if (!hasDots && !hasLines) return null;
+
+  const lineStyle = { display: "flex", gap: 8, fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" };
+  const labelStyle = { color: "#a67853", fontWeight: 700, textTransform: "uppercase", fontSize: "0.66rem", letterSpacing: "0.06em", minWidth: 68, paddingTop: 2 };
+  const valueStyle = { color: "#5a4030", lineHeight: 1.5 };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      {hasDots && (
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          {variants.map(v => (
+            <button
+              key={v.key}
+              onClick={() => onSelectVariant(v)}
+              title={v.color}
+              style={{
+                width: 22, height: 22, borderRadius: "50%", padding: 0, cursor: "pointer",
+                background: VARIANT_COLOR_DOT[(v.color || "").toLowerCase()] || "#d5b99a",
+                border: v.color?.toLowerCase() === "white" ? "1px solid #d5b99a" : "none",
+                outline: selectedVariant?.key === v.key ? "2px solid #a67853" : "2px solid transparent",
+                outlineOffset: 2,
+              }}
+            />
+          ))}
+        </div>
+      )}
+      {codes.length > 0 && (
+        <div style={lineStyle}><span style={labelStyle}>Code</span><span style={valueStyle}>{codes.join(" | ")}</span></div>
+      )}
+      {capacity && (
+        <div style={lineStyle}><span style={labelStyle}>Capacity</span><span style={valueStyle}>{capacity}</span></div>
+      )}
+      {colors.length > 1 && (
+        <div style={lineStyle}><span style={labelStyle}>Option</span><span style={valueStyle}>{colors.join(" | ")}</span></div>
+      )}
+    </div>
+  );
+}
+
 /* ── Divider ───────────────────────────────────────────────────────── */
 function Divider() {
   return (
@@ -761,17 +822,16 @@ export default function AccessoriesPage() {
     return productsData.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
   }, [slug, productsData]);
 
+  // Variants carry no id from the data source — give each a stable key here
+  // (code when present, else index) for selection + image-error tracking.
   const variants = useMemo(() => {
     if (!product) return [];
-    const localVariants = getVariantsArray(product);
-    return localVariants.length > 0 ? localVariants : [];
+    return getVariantsArray(product).map((v, i) => ({ ...v, key: v.code || `variant-${i}` }));
   }, [product]);
 
-  useEffect(() => {
-    if (variants.length > 0 && !selectedVariant) {
-      setSelectedVariant(variants[0]);
-    }
-  }, [variants, selectedVariant]);
+  // Start on the grouped hero image (no variant selected); reset when
+  // navigating between products since the component doesn't remount.
+  useEffect(() => { setSelectedVariant(null); setImageErrors({}); }, [slug]);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -791,6 +851,8 @@ export default function AccessoriesPage() {
   const hasSection2  = hasDesc || hasSpecTable;
   const hasVideo     = !!product?.resources?.video;
   const displayImage = selectedVariant?.image || thumbnail;
+  const hasInfoPanel = variants.some(v => v.code) || variants.filter(v => v.color).length > 1
+    || (product?.spec_table?.rows || []).some(row => (Array.isArray(row) ? row[0] : row?.Specification) === "Capacity");
 
   const openLightbox = (imgs, index) => setLightbox({ images: imgs, index });
   const closeLightbox = () => setLightbox(null);
@@ -834,7 +896,7 @@ export default function AccessoriesPage() {
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 
-        table {
+        .pp-richtext table {
           width: 100%;
           border-collapse: collapse;
           margin: 12px 0;
@@ -844,7 +906,7 @@ export default function AccessoriesPage() {
           border: 1px solid #d5b99a;
         }
 
-        table th {
+        .pp-richtext table th {
           background-color: #f0e8df;
           color: #5a4030;
           font-weight: 600;
@@ -859,7 +921,7 @@ export default function AccessoriesPage() {
           word-break: break-word;
         }
 
-        table td {
+        .pp-richtext table td {
           padding: 8px 10px;
           color: #5a4030;
           border-bottom: 1px solid #edddd0;
@@ -868,27 +930,27 @@ export default function AccessoriesPage() {
           font-size: 0.77rem;
         }
 
-        table td:first-child {
+        .pp-richtext table td:first-child {
           white-space: nowrap;
           text-align: center;
           font-weight: 500;
         }
 
-        table tbody tr:nth-child(odd) {
+        .pp-richtext table tbody tr:nth-child(odd) {
           background-color: #fdfaf7;
         }
 
-        table tbody tr:hover {
+        .pp-richtext table tbody tr:hover {
           background-color: #f5ede3;
         }
 
-        table tbody tr:last-child td {
+        .pp-richtext table tbody tr:last-child td {
           border-bottom: none;
         }
 
         @media(max-width: 768px) {
-          table { font-size: 0.72rem; }
-          table th, table td { padding: 7px 8px; }
+          .pp-richtext table { font-size: 0.72rem; }
+          .pp-richtext table th, .pp-richtext table td { padding: 7px 8px; }
         }
 
         @media(max-width:900px){
@@ -932,11 +994,11 @@ export default function AccessoriesPage() {
                   }}
                     onClick={() => displayImage && openLightbox([displayImage], 0)}
                   >
-                    {displayImage && !imageErrors[selectedVariant?.id] ? (
+                    {displayImage && !imageErrors[selectedVariant?.key || "__main__"] ? (
                       <ImageWithLoader
                         src={displayImage}
-                        alt={selectedVariant?.label || selectedVariant?.sku || product.name}
-                        onError={() => selectedVariant && setImageErrors(e => ({ ...e, [selectedVariant.id]: true }))}
+                        alt={selectedVariant?.color || selectedVariant?.code || product.name}
+                        onError={() => setImageErrors(e => ({ ...e, [selectedVariant?.key || "__main__"]: true }))}
                         style={{
                           maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
                           animation: "ppFadeIn 0.25s ease",
@@ -960,33 +1022,59 @@ export default function AccessoriesPage() {
                     )}
                   </div>
 
-                  {/* Variant Swatch Buttons */}
+                  {/* Variant Swatch Buttons — grouped hero image first, then each color */}
                   <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                    {variants.map((variant) => (
+                    {variants.length > 1 && thumbnail && (
                       <button
-                        key={variant.id}
-                        onClick={() => {
-                          setSelectedVariant(variant);
-                          setImageErrors(e => {
-                            const updated = { ...e };
-                            delete updated[variant.id];
-                            return updated;
-                          });
-                        }}
-                        title={variant.label || variant.sku}
+                        onClick={() => { setSelectedVariant(null); setImageErrors(e => ({ ...e, __main__: false })); }}
+                        title="All colors"
                         style={{
                           width: 60, height: 60, borderRadius: 8,
-                          border: `2px solid ${selectedVariant?.id === variant.id ? "#a67853" : "#edddd0"}`,
+                          border: `2px solid ${!selectedVariant ? "#a67853" : "#edddd0"}`,
                           overflow: "hidden", cursor: "pointer", padding: 0,
                           background: "#faf7f4", transition: "all 0.2s",
                           flexShrink: 0,
                         }}
                       >
-                        {variant.image && !imageErrors[variant.id] ? (
+                        {!imageErrors.__main__ ? (
+                          <ImageWithLoader
+                            src={thumbnail}
+                            alt="All colors"
+                            onError={() => setImageErrors(e => ({ ...e, __main__: true }))}
+                            style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }}
+                          />
+                        ) : (
+                          <div style={{
+                            width: "100%", height: "100%",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            background: "#edddd0",
+                          }}>
+                            <i className="fa-regular fa-image" style={{ fontSize: "1rem", color: "#a67853" }} />
+                          </div>
+                        )}
+                      </button>
+                    )}
+                    {variants.map((variant) => (
+                      <button
+                        key={variant.key}
+                        onClick={() => {
+                          setSelectedVariant(variant);
+                          setImageErrors(e => ({ ...e, [variant.key]: false }));
+                        }}
+                        title={variant.color || variant.code}
+                        style={{
+                          width: 60, height: 60, borderRadius: 8,
+                          border: `2px solid ${selectedVariant?.key === variant.key ? "#a67853" : "#edddd0"}`,
+                          overflow: "hidden", cursor: "pointer", padding: 0,
+                          background: "#faf7f4", transition: "all 0.2s",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {variant.image && !imageErrors[variant.key] ? (
                           <ImageWithLoader
                             src={variant.image}
-                            alt={variant.label || variant.sku}
-                            onError={() => setImageErrors(e => ({ ...e, [variant.id]: true }))}
+                            alt={variant.color || variant.code}
+                            onError={() => setImageErrors(e => ({ ...e, [variant.key]: true }))}
                             style={{
                               width: "100%", height: "100%", objectFit: "contain",
                               padding: 2,
@@ -1064,9 +1152,19 @@ export default function AccessoriesPage() {
                 {product.name}
               </h1>
 
+              {hasInfoPanel && (
+                <ProductInfoPanel
+                  product={product}
+                  variants={variants}
+                  selectedVariant={selectedVariant}
+                  onSelectVariant={setSelectedVariant}
+                />
+              )}
+
               {hasShortDesc && (
                 <div style={{ paddingBottom: 16, borderBottom: "1px solid #edddd0", textAlign: "left" }}>
                   <div
+                    className="pp-richtext"
                     style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem",
                       color: "#7a5c45", lineHeight: 1.6, margin: 0,
@@ -1095,7 +1193,7 @@ export default function AccessoriesPage() {
                 </div>
               )}
 
-              {!hasShortDesc && !hasFeatures && (
+              {!hasShortDesc && !hasFeatures && !hasInfoPanel && (
                 <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#a67853", fontStyle: "italic", fontSize: "0.86rem", margin: 0 }}>
                   More details coming soon.
                 </p>
@@ -1134,6 +1232,7 @@ export default function AccessoriesPage() {
               {hasDesc && (
                 <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
                   <div
+                    className="pp-richtext"
                     style={{
                       fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
                       lineHeight: 1.7, fontSize: "0.82rem",
@@ -1148,7 +1247,7 @@ export default function AccessoriesPage() {
               {hasSpecTable && (
                 <div>
                   <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
-                  <div style={{ overflowX: "auto", borderRadius: 10, border: "2px solid #d5b99a", background: "#fafaf8" }}>
+                  <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a", background: "#fafaf8" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
                         <tr style={{ background: "#faf7f4" }}>
@@ -1165,7 +1264,9 @@ export default function AccessoriesPage() {
                         {(product.spec_table.rows || []).map((row, ri) => (
                           <tr key={ri} style={{ borderBottom: ri < product.spec_table.rows.length - 1 ? "1px solid #f5ede3" : "none" }}>
                             {product.spec_table.headers.map((h, ci) => (
-                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[h] || "–"}</td>
+                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>
+                                {(Array.isArray(row) ? row[ci] : row[h]) || "–"}
+                              </td>
                             ))}
                           </tr>
                         ))}
