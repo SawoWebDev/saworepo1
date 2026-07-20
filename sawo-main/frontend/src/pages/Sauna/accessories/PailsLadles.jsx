@@ -1,10 +1,13 @@
 import React, { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "../../AccessoryCard";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
-import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE-600x600-1.webp";
+import menuPaths from "../../../menuPaths";
 import "../heaters/heaters.css";
+import PromoBanner from "../../../components/PromoBanner";
+import WhyChooseSawo from "../../../components/WhyChooseSawo";
 
 // ─── Display filter ───────────────────────────────────────────────────────────
 const DISPLAY_CATEGORIES = ["Pails", "Ladles", "Pail Shower"];
@@ -52,8 +55,18 @@ function groupProducts(products) {
       if (assigned) break;
     }
     if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
+      // The keyword lists above only match on name/tags, but products are
+      // categorised — so fall back to the group whose name matches one of the
+      // product's categories. Without this, correctly-categorised products
+      // (e.g. accessory sets named "Traditional"/"Dragon") silently vanish.
+      const cats = (product.categories || []).map(c => c.toLowerCase());
+      const names = Object.keys(GROUP_KEYWORDS);
+      const target = names.find(g => {
+        const gl = g.toLowerCase();
+        return cats.some(c => c === gl || c.includes(gl) || gl.includes(c));
+      }) || names[0];
+      if (!groups[target]) groups[target] = [];
+      groups[target].push(product);
     }
     return groups;
   }, {});
@@ -265,7 +278,7 @@ export default function PailsLadles() {
                   return (
                     <div className="wm-group" key={group}>
                       <h3 className="wm-group-title">{group.toUpperCase()}</h3>
-                      <div className="sawo-av-grid">
+                      <div className="sawo-av-grid sawo-av-grid--roomy">
                         {items.map(product => (
                           <AccessoryCard key={product.id || product.slug} product={product} />
                         ))}
@@ -280,41 +293,23 @@ export default function PailsLadles() {
         </div>
       </section>
 
-      {/* ── WHY SAWO ─────────────────────────────────────────────────────── */}
-      <section className="wm-section">
-        <div className="wm-container">
-          <div className="wm-why-grid">
-            <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO ACCESSORIES</p>
-              <h2 className="wm-why-title">Why Choose SAWO Pails & Ladles</h2>
-              <p className="wm-why-desc">
-                SAWO pails and ladles are crafted from premium natural materials — cedar, aspen, and pine —
-                as well as modern stainless steel options. Designed for authentic Finnish sauna culture,
-                each piece is built to last and enhance your löyly ritual.
-              </p>
-              <div style={{ marginTop: "20px" }}>
-                <a
-                  href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="wm-brochure-btn"
-                >
-                  VIEW BROCHURE
-                </a>
-              </div>
-            </div>
-            <div className="wm-why-right"><CirclesInfo /></div>
-          </div>
-        </div>
+      {/* ── VIEW ALL ACCESSORIES ────────────────────────────────────────── */}
+      <section className="wm-section" style={{ textAlign: "center" }}>
+        <Link to={menuPaths.accessories} className="wm-brochure-btn">VIEW ALL ACCESSORIES</Link>
       </section>
 
-      {/* ── BANNER ───────────────────────────────────────────────────────── */}
-      <section className="wm-banner">
-        <div className="wm-banner-content">
-          <h2 className="wm-banner-title">Complete Your Sauna Experience</h2>
-          <p className="wm-banner-sub">Explore our full range of authentic Finnish sauna accessories</p>
-        </div>
-      </section>
+      <WhyChooseSawo
+        eyebrow="SAWO ACCESSORIES"
+        title="Why Choose SAWO Pails & Ladles"
+        description="SAWO pails and ladles are crafted from premium natural materials — cedar, aspen, and pine — as well as modern stainless steel options. Designed for authentic Finnish sauna culture, each piece is built to last and enhance your löyly ritual."
+        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureLabel="VIEW BROCHURE"
+      />
+
+      <PromoBanner
+        title="Complete Your Sauna Experience"
+        subtitle="Explore our full range of authentic Finnish sauna accessories"
+      />
     </div>
   );
 }

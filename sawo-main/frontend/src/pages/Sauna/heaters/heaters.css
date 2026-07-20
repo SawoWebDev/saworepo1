@@ -30,6 +30,7 @@
 .wm-section   { padding: 36px 0; }
 .wm-section--flush-bottom { padding-bottom: 0; }
 .wm-section--flush-top    { padding-top: 16px; }
+.wm-section--why          { padding: 80px 0; }
 
 /* ---- Intro desc (wide, tight) ---- */
 .wm-intro-desc {
@@ -166,10 +167,24 @@
 
 /* ---- Banner ---- */
 .wm-banner {
-  background: linear-gradient(135deg, #AA8161 0%, #c4a077 100%);
-  padding: 64px 24px; text-align: center;
+  position: relative;
+  background-color: #1a1512;
+  background-image: url("../../../assets/Dragon-Black.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 120px 24px; text-align: center;
+  min-height: 420px;
+  display: flex; align-items: center; justify-content: center;
 }
-.wm-banner-content { max-width: 700px; margin: 0 auto; }
+/* Darkening overlay so the banner copy stays legible over the image */
+.wm-banner::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.58) 100%);
+  pointer-events: none;
+}
+.wm-banner-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
 .wm-banner-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.2rem; font-weight: 700;
@@ -190,6 +205,8 @@
   .wm-products-grid { grid-template-columns: repeat(2, 1fr); }
   .wm-why-title     { font-size: 1.6rem; }
   .wm-section       { padding: 28px 0; }
+  .wm-section--why  { padding: 48px 0; }
+  .wm-banner        { padding: 72px 20px; min-height: 300px; }
   .wm-banner-title  { font-size: 1.7rem; }
 }
 @media (max-width: 480px) {

@@ -8,6 +8,7 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
+import PromoBanner from "../../components/PromoBanner";
 import "./heaters/heaters.css"; // reuse existing heaters CSS
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -453,13 +454,10 @@ export default function SaunaControls() {
         </div>
       </section>
 
-      {/* ── BANNER ───────────────────────────────────────────────────────── */}
-      <section className="wm-banner">
-        <div className="wm-banner-content">
-          <h2 className="wm-banner-title">Experience Ultimate Relaxation</h2>
-          <p className="wm-banner-sub">Find your perfect control from our full range of SAWO solutions</p>
-        </div>
-      </section>
+      <PromoBanner
+        title="Experience Ultimate Relaxation"
+        subtitle="Find your perfect control from our full range of SAWO solutions"
+      />
     </div>
   );
 }

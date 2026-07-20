@@ -3,11 +3,12 @@ import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "./AccessoryCard";
 
-// Groups that combine multiple data categories under one section with
-// internal tabs mirror the WordPress reference pages that do the same
-// (IndividualPages/pails.html -> Pails & Ladles, IndividualPages/benches.html
-// -> Benches, Hangers & Floor Mats). Every other category matches a single
-// WP display page 1:1 and gets one section, no tabs.
+// Groups that combine multiple data categories under one section (mirroring
+// the WordPress reference pages that group the same categories together —
+// IndividualPages/pails.html -> Pails & Ladles, IndividualPages/benches.html
+// -> Benches, Hangers & Floor Mats) simply merge every tab's products into
+// one flat grid — no tab switcher, matching allaccs-display.html's plain
+// per-section layout.
 const CATEGORY_GROUPS = [
   {
     id: "section-pails",
@@ -69,9 +70,8 @@ const CATEGORY_GROUPS = [
   },
 ];
 
-function CategorySection({ group, productsByTab, activeTab, onTabChange }) {
-  const showTabs = group.tabs.length > 1;
-  const activeProducts = productsByTab[activeTab] || [];
+function CategorySection({ group, productsByTab }) {
+  const products = group.tabs.flatMap(tab => productsByTab[tab.key] || []);
 
   return (
     <div id={group.id} className="category-section">
@@ -79,23 +79,8 @@ function CategorySection({ group, productsByTab, activeTab, onTabChange }) {
         <h2>{group.label}</h2>
       </div>
 
-      {showTabs && (
-        <div className="sawo-av-category-buttons">
-          {group.tabs.map(tab => (
-            <button
-              key={tab.key}
-              type="button"
-              className={`sawo-av-btn ${activeTab === tab.key ? "sawo-av-active" : ""}`}
-              onClick={() => onTabChange(group.id, tab.key)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      )}
-
       <div className="sawo-av-grid">
-        {activeProducts.map(product => (
+        {products.map(product => (
           <AccessoryCard key={product.id || product.slug} product={product} />
         ))}
       </div>
@@ -103,12 +88,9 @@ function CategorySection({ group, productsByTab, activeTab, onTabChange }) {
   );
 }
 
-export default function AccessoriesCatalog() {
+export default function AccessoriesCatalog({ showHero = true } = {}) {
   const { products: localProds, loading } = useLocalProducts();
   const [activeSection, setActiveSection] = useState(CATEGORY_GROUPS[0].id);
-  const [activeTabs, setActiveTabs] = useState(() =>
-    Object.fromEntries(CATEGORY_GROUPS.map(g => [g.id, g.tabs[0].key]))
-  );
 
   const accessories = useMemo(() => {
     if (!localProds.length) return [];
@@ -132,23 +114,6 @@ export default function AccessoriesCatalog() {
     });
     return grouped;
   }, [accessories]);
-
-  // Pick each group's default active tab as the first one with products,
-  // once data has loaded (avoids landing on an empty tab).
-  useEffect(() => {
-    if (!accessories.length) return;
-    setActiveTabs(prev => {
-      const next = { ...prev };
-      CATEGORY_GROUPS.forEach(group => {
-        const current = next[group.id];
-        if ((productsByTab[current] || []).length > 0) return;
-        const firstNonEmpty = group.tabs.find(t => (productsByTab[t.key] || []).length > 0);
-        if (firstNonEmpty) next[group.id] = firstNonEmpty.key;
-      });
-      return next;
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessories.length]);
 
   const groupCounts = useMemo(() => {
     const counts = {};
@@ -194,10 +159,6 @@ export default function AccessoriesCatalog() {
     }
   };
 
-  const handleTabChange = (groupId, tabKey) => {
-    setActiveTabs(prev => ({ ...prev, [groupId]: tabKey }));
-  };
-
   if (loading) {
     return (
       <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 120 }}>
@@ -230,143 +191,112 @@ export default function AccessoriesCatalog() {
         .accessories-wrapper {
           display: grid;
           grid-template-columns: 240px 1fr;
+          align-items: start;
           gap: 60px;
           width: 100%;
           padding: 60px 60px 40px;
           min-height: 100vh;
         }
 
+        /* Sidebar — ported from IndividualPages/allaccs-display.html's
+           .sawo-acc-sidebar / .acc-nav-btn design. */
         .category-buttons-sidebar {
-          display: flex;
-          flex-direction: column;
-          background: #ffffff;
-          border-radius: 16px;
-          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
-          border: 1px solid #edddd0;
-          height: fit-content;
           position: sticky;
           top: 160px;
+          flex-shrink: 0;
           max-height: calc(100vh - 180px);
-          overflow: hidden;
+          overflow-y: auto;
+          background: #ffffff;
+          padding: 20px 12px 16px;
+          border-radius: 12px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+          border: 1px solid rgba(0,0,0,0.07);
+          scrollbar-width: thin;
+          scrollbar-color: #d9c4b0 transparent;
         }
 
-        .sidebar-header {
-          padding: 18px 20px 14px;
-          border-bottom: 1px solid #f0e8df;
-        }
-
-        .sidebar-header-label {
-          font-size: 0.6rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #a67853;
-          font-family: 'Montserrat', sans-serif;
-          margin: 0 0 2px;
+        .category-buttons-sidebar::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #d9c4b0 0%, #c8aa88 100%);
+          border-radius: 12px 12px 0 0;
         }
 
         .sidebar-header-title {
-          font-size: 0.88rem;
-          font-weight: 700;
-          color: #af8564;
           font-family: 'Montserrat', sans-serif;
-          margin: 0;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          color: rgb(175, 133, 100);
+          text-align: center;
+          display: block;
+          width: 100%;
+          margin: 0 0 24px;
+          line-height: 1.3;
         }
 
         .sidebar-scroll {
-          overflow-y: auto;
-          padding: 10px 10px;
           display: flex;
           flex-direction: column;
-          gap: 2px;
-        }
-
-        .sidebar-scroll::-webkit-scrollbar {
-          width: 4px;
-        }
-
-        .sidebar-scroll::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        .sidebar-scroll::-webkit-scrollbar-thumb {
-          background: #e4d0bf;
-          border-radius: 4px;
-        }
-
-        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-          background: #b5886b;
         }
 
         .sidebar-btn {
           position: relative;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
           width: 100%;
-          padding: 9px 12px 9px 14px;
-          font-size: 0.75rem;
+          padding: 10px 14px;
+          margin-bottom: 6px;
+          font-size: 12px;
           font-weight: 500;
+          font-family: 'Montserrat', sans-serif;
           text-align: left;
           border-radius: 8px;
           border: none;
-          color: #5a4030;
-          background: transparent;
+          color: #2c3e50;
+          background-color: #f8f9fa;
           cursor: pointer;
-          transition: background 0.18s ease, color 0.18s ease;
-          font-family: 'Montserrat', sans-serif;
-          line-height: 1.35;
-          gap: 8px;
+          transition: color 0s, background 0s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          white-space: normal;
+          line-height: 1.3;
+          min-height: 42px;
+          overflow: hidden;
         }
 
         .sidebar-btn::before {
           content: '';
           position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%) scaleY(0);
-          width: 3px;
-          height: 60%;
-          background: #a67853;
+          left: 0; top: 50%;
+          transform: translateY(-50%);
+          width: 3px; height: 0;
+          background: #b5886b;
           border-radius: 0 3px 3px 0;
-          transition: transform 0.2s ease;
+          transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .sidebar-btn:hover {
-          background: #faf4ef;
-          color: #af8564;
+          background: linear-gradient(135deg, #d9c4b0 0%, #c8aa88 100%);
+          color: #ffffff;
+          transform: translateX(2px);
+          box-shadow: 0 4px 12px rgba(181,136,107,0.3);
         }
 
-        .sidebar-btn:hover::before {
-          transform: translateY(-50%) scaleY(0.6);
-        }
+        .sidebar-btn:hover::before { height: 60%; background: #fff; }
 
         .sidebar-btn.active {
-          background: #af8564;
+          background: linear-gradient(135deg, #af8564 0%, #9a7558 100%);
           color: #ffffff;
-          font-weight: 700;
+          box-shadow: 0 4px 12px rgba(175,133,100,0.4);
+          font-weight: 600;
         }
 
         .sidebar-btn.active::before {
-          transform: translateY(-50%) scaleY(1);
-          background: #d9c4b0;
-        }
-
-        .sidebar-btn-count {
-          font-size: 0.65rem;
-          font-weight: 600;
-          color: #c4a882;
-          background: #f5ede3;
-          padding: 2px 7px;
-          border-radius: 10px;
-          flex-shrink: 0;
-          transition: background 0.18s ease, color 0.18s ease;
-          font-family: 'Montserrat', sans-serif;
-        }
-
-        .sidebar-btn.active .sidebar-btn-count {
-          background: rgba(255,255,255,0.15);
-          color: #f0e0cc;
+          height: 100%;
+          background: #fff;
+          opacity: 0.4;
         }
 
         .main-content {
@@ -413,51 +343,50 @@ export default function AccessoriesCatalog() {
 
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
         {/* Header Section */}
-        <div style={{
-          width: "100%",
-          padding: "140px 60px 60px",
-          textAlign: "center",
-          borderBottom: "1px solid #edddd0",
-        }}>
-          <p style={{
-            fontSize: "0.67rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#a67853",
-            margin: "0 0 12px",
-          }}>
-            Premium Collection
-          </p>
-          <h1 style={{
-            fontSize: "2.4rem",
-            fontWeight: 700,
-            color: "#af8564",
-            margin: "0 0 16px",
-            lineHeight: 1.2,
-          }}>
-            Sauna & Steam Accessories
-          </h1>
-          <p style={{
-            fontSize: "1rem",
-            color: "#5a4030",
-            margin: "0 auto 12px",
-            maxWidth: 700,
-            lineHeight: 1.6,
+        {showHero && (
+          <div style={{
+            width: "100%",
+            padding: "140px 60px 60px",
             textAlign: "center",
+            borderBottom: "1px solid #edddd0",
           }}>
-            Discover our complete range of premium sauna and steam accessories designed to enhance your wellness experience. Browse through our carefully curated selection of high-quality products.
-          </p>
-        </div>
+            <p style={{
+              fontSize: "0.67rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "#a67853",
+              margin: "0 0 12px",
+            }}>
+              Premium Collection
+            </p>
+            <h1 style={{
+              fontSize: "2.4rem",
+              fontWeight: 700,
+              color: "#af8564",
+              margin: "0 0 16px",
+              lineHeight: 1.2,
+            }}>
+              Sauna & Steam Accessories
+            </h1>
+            <p style={{
+              fontSize: "1rem",
+              color: "#5a4030",
+              margin: "0 auto 12px",
+              maxWidth: 700,
+              lineHeight: 1.6,
+              textAlign: "center",
+            }}>
+              Discover our complete range of premium sauna and steam accessories designed to enhance your wellness experience. Browse through our carefully curated selection of high-quality products.
+            </p>
+          </div>
+        )}
 
         {/* Main Grid with Sidebar */}
-        <div className="accessories-wrapper">
+        <div className="accessories-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
           {/* Sidebar */}
           <div className="category-buttons-sidebar">
-            <div className="sidebar-header">
-              <p className="sidebar-header-label">Browse by</p>
-              <p className="sidebar-header-title">Categories</p>
-            </div>
+            <h1 className="sidebar-header-title">Sauna Accessories</h1>
             <div className="sidebar-scroll">
               {CATEGORY_GROUPS.map(group => {
                 const count = groupCounts[group.id] || 0;
@@ -468,8 +397,7 @@ export default function AccessoriesCatalog() {
                     className={`sidebar-btn ${activeSection === group.id ? "active" : ""}`}
                     onClick={() => handleSidebarClick(group.id)}
                   >
-                    <span>{group.label}</span>
-                    <span className="sidebar-btn-count">{count}</span>
+                    {group.label}
                   </button>
                 );
               })}
@@ -485,8 +413,6 @@ export default function AccessoriesCatalog() {
                   key={group.id}
                   group={group}
                   productsByTab={productsByTab}
-                  activeTab={activeTabs[group.id]}
-                  onTabChange={handleTabChange}
                 />
               );
             })}

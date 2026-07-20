@@ -52,6 +52,7 @@ import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/stone-hero.webp";
 import "./heaters.css";
+import PromoBanner from "../../../components/PromoBanner";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -399,13 +400,10 @@ const Stone = () => {
         </div>
       </section>
 
-      {/* BANNER */}
-      <section className="wm-banner">
-        <div className="wm-banner-content">
-          <h2 className="wm-banner-title">Experience Ultimate Relaxation</h2>
-          <p className="wm-banner-sub">Find your source of serenity from over 100 heater models</p>
-        </div>
-      </section>
+      <PromoBanner
+        title="Experience Ultimate Relaxation"
+        subtitle="Find your source of serenity from over 100 heater models"
+      />
     </div>
   );
 };

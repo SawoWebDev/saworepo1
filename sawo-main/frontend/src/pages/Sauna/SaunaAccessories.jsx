@@ -1,4 +1,7 @@
-﻿// SaunaAccessories.jsx
+// SaunaAccessories.jsx
+// Landing page for "/sauna/accessories" — hero + category tiles that each
+// link to a per-category page, plus a "View All Accessories" button that
+// opens the full all-accessories catalog (/accessories).
 
 import React from "react";
 import { Link } from "react-router-dom";
@@ -109,6 +112,28 @@ const SaunaAccessories = () => {
             transition: color 0.3s ease;
             text-transform: none;
           }
+          .sa-view-all-wrap {
+            text-align: center;
+            margin: 48px auto 0;
+          }
+          .sa-view-all-btn {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 14px 40px;
+            border: 2px solid #af8564;
+            border-radius: 6px;
+            color: #af8564;
+            background: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+          }
+          .sa-view-all-btn:hover {
+            background: #af8564;
+            color: #ffffff;
+          }
           @media (max-width: 1024px) {
             .custom-product-grid { grid-template-columns: repeat(2, 1fr); }
           }
@@ -179,6 +204,11 @@ const SaunaAccessories = () => {
             <p>Explore your sauna experience with our range of ventilations & essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!</p>
           </Link>
 
+        </div>
+
+        {/* View all accessories → full catalog */}
+        <div className="sa-view-all-wrap">
+          <Link to={menuPaths.accessories} className="sa-view-all-btn">VIEW ALL ACCESSORIES</Link>
         </div>
       </section>
 
