@@ -2,11 +2,18 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { syncMerge, updateLocalFiles, syncSaunaRooms, updateLocalSaunaRooms } from "./syncApi.js";
+import { handlePageView, handleDuration } from "./trackingApi.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Render sits behind a proxy — without this, req.ip is the proxy's IP, not
+// the visitor's. Only other current use of req.ip in this file is two
+// diagnostic console.log lines (see /api/sync, /api/update-local-files),
+// so this is safe app-wide: it just makes those logs accurate too.
+app.set("trust proxy", true);
 
 const allowedOrigins = [
   "https://sawogitsrc.vercel.app",
@@ -209,6 +216,14 @@ app.post("/api/update-local-sauna-rooms", async (_req, res) => {
     res.end();
   }
 });
+
+app.options("/api/track/pageview", cors());
+app.post("/api/track/pageview", handlePageView);
+
+// POST, not PATCH: navigator.sendBeacon (used by the browser for the
+// page-leave duration update) can only issue POST requests.
+app.options("/api/track/duration", cors());
+app.post("/api/track/duration", handleDuration);
 
 app.listen(PORT, () => {
   const isProduction = process.env.NODE_ENV === "production";

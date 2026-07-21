@@ -5,26 +5,20 @@
  * First-party visitor analytics feeding the existing /admin/analytics
  * dashboard (tables: analytics_page_views — see scripts/setup-analytics.sql).
  *
- * Deliberately tiny: talks to Supabase's REST endpoint with plain fetch()
- * (no supabase-js), fire-and-forget with try/catch so a failure can never
- * affect the page, and skips admins entirely. Total cost per page view is
- * one ~300-byte POST after render plus one PATCH when leaving the page.
+ * Talks to our own backend (backend/trackingApi.js), not Supabase directly —
+ * the backend holds the service-role key, does bot filtering, and looks up
+ * geo from the visitor's real IP. Fire-and-forget with try/catch so a
+ * failure can never affect the page, and skips admins entirely.
  */
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
-const ANON_KEY = process.env.REACT_APP_SUPABASE_ANON_KEY;
-const ENDPOINT = `${SUPABASE_URL}/rest/v1/analytics_page_views`;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const PAGEVIEW_ENDPOINT = `${BACKEND_URL}/api/track/pageview`;
+const DURATION_ENDPOINT = `${BACKEND_URL}/api/track/duration`;
 
-const HEADERS = {
-  apikey: ANON_KEY,
-  Authorization: `Bearer ${ANON_KEY}`,
-  "Content-Type": "application/json",
-};
-
-function isAdmin() {
+export function isAdmin() {
   try {
     return !!(localStorage.getItem("sawo_token") || sessionStorage.getItem("sawo_token"));
   } catch {
@@ -72,20 +66,30 @@ function finalizeCurrent() {
   const seconds = Math.round((Date.now() - current.start) / 1000);
   if (seconds < 1) return;
   try {
-    // keepalive lets this complete even during unload/navigation
-    fetch(`${ENDPOINT}?id=eq.${current.id}`, {
-      method: "PATCH",
-      keepalive: true,
-      headers: HEADERS,
-      body: JSON.stringify({ time_on_page: seconds }),
-    }).catch(() => {});
+    const blob = new Blob(
+      [JSON.stringify({ id: current.id, time_on_page: seconds })],
+      { type: "application/json" }
+    );
+    // sendBeacon survives page unload/navigation, unlike a regular fetch.
+    const sent = navigator.sendBeacon?.(DURATION_ENDPOINT, blob);
+    if (!sent) {
+      // Fallback for browsers without sendBeacon, or when it refuses the
+      // payload (e.g. queue full) — keepalive gives it a similar chance to
+      // complete during unload.
+      fetch(DURATION_ENDPOINT, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: current.id, time_on_page: seconds }),
+      }).catch(() => {});
+    }
   } catch {
     /* never let analytics break the page */
   }
 }
 
 async function trackPageView(path) {
-  if (!SUPABASE_URL || !ANON_KEY || isAdmin()) return;
+  if (!BACKEND_URL || isAdmin()) return;
   if (path.startsWith("/admin") || path === "/login") return;
 
   finalizeCurrent();
@@ -93,19 +97,19 @@ async function trackPageView(path) {
   const startedFor = current;
 
   try {
-    const res = await fetch(ENDPOINT, {
+    const res = await fetch(PAGEVIEW_ENDPOINT, {
       method: "POST",
       keepalive: true,
-      headers: { ...HEADERS, Prefer: "return=representation" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ session_id: getSessionId(), page_path: path, ...parseUA() }),
     });
     if (res.ok) {
-      const rows = await res.json();
+      const row = await res.json();
       // Only attach the id if the visitor hasn't already navigated on
-      if (current === startedFor && rows?.[0]?.id) current.id = rows[0].id;
+      if (current === startedFor && row?.id) current.id = row.id;
     }
   } catch {
-    /* offline / blocked / table missing — silently do nothing */
+    /* offline / blocked / backend down — silently do nothing */
   }
 }
 
