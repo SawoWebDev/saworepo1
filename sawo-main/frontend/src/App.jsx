@@ -72,11 +72,11 @@ const ResetPassword  = lazy(() => import("./Administrator/ResetPassword"));
 const Users          = lazy(() => import("./Administrator/Users"));
 const Products       = lazy(() => import("./Administrator/Products"));
 const SaunaRoomsAdmin = lazy(() => import("./Administrator/SaunaRoomsCMS"));
-const ContentCMS     = lazy(() => import("./Administrator/ContentCMS"));
 const Models         = lazy(() => import("./Administrator/Models"));
 const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
 const Logs           = lazy(() => import("./Administrator/Logs"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
+const LanguageSettings = lazy(() => import("./Administrator/LanguageSettings"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
 
 export default function App() {
@@ -168,9 +168,6 @@ export default function App() {
             <Route path="/admin/sauna-rooms" element={
               <ProtectedRoute requiredCap="sauna_rooms.view"><AdminLayout><SaunaRoomsAdmin /></AdminLayout></ProtectedRoute>
             } />
-            <Route path="/admin/content" element={
-              <ProtectedRoute requiredCap="page.content"><AdminLayout><ContentCMS /></AdminLayout></ProtectedRoute>
-            } />
             <Route path="/admin/taxonomy" element={
               <ProtectedRoute requiredCap="page.taxonomy"><AdminLayout><Taxonomy /></AdminLayout></ProtectedRoute>
             } />
@@ -182,6 +179,9 @@ export default function App() {
             } />
             <Route path="/admin/analytics" element={
               <ProtectedRoute requiredCap="page.analytics"><AdminLayout><Analytics /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/language" element={
+              <ProtectedRoute requiredCap="page.settings"><AdminLayout><LanguageSettings /></AdminLayout></ProtectedRoute>
             } />
 
             {/* Legacy editor products route — redirect to unified products page */}

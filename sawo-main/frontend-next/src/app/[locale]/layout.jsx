@@ -8,6 +8,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import BackToTop from '@/components/BackToTop';
 import LanguageSwitcher from '@/translation/LanguageSwitcher';
+import { getLanguageSwitcherSettings } from '@/translation/settings';
 import '../globals.css';
 
 export function generateStaticParams() {
@@ -50,6 +51,12 @@ export default async function LocaleLayout({ children, params }) {
   const t = await getTranslations({ locale, namespace: 'seo' });
   const messages = await getMessages();
 
+  const { enabled: langSwitcherEnabled, languages: enabledLanguages } = await getLanguageSwitcherSettings();
+  // Always let the current locale show in the switcher itself, even if an
+  // admin hid it from the "enabled" list — you're already looking at it, and
+  // this only affects the switcher's own option list, not routing/sitemap.
+  const switcherLocales = Array.from(new Set([...enabledLanguages, locale]));
+
   return (
     <html lang={locale}>
       <head>
@@ -82,7 +89,7 @@ export default async function LocaleLayout({ children, params }) {
           <Header />
           <main className="flex-1 relative z-0">{children}</main>
           <Footer />
-          <LanguageSwitcher />
+          {langSwitcherEnabled && <LanguageSwitcher locales={switcherLocales} />}
           <BackToTop />
         </NextIntlClientProvider>
       </body>

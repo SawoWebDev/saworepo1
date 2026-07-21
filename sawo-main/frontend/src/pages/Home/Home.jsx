@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
 import Hero from "./Hero";
@@ -8,45 +8,20 @@ import Section3 from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
 import menuPaths from "../../menuPaths";
-import { getSiteContent, getCachedSiteContentSync } from "../../local-storage/cacheReader";
-import { afterPageLoad } from "../../utils/afterPageLoad";
 
 const Home = () => {
-  // Fetch home page content once and pass it to all sections as a prop.
-  // Each section reads its own slice (e.g. content.section1) and falls back
-  // to its hardcoded defaults when the value is null or not yet synced.
-  const [content, setContent] = useState({});
-
-  useEffect(() => {
-    // Stale-while-revalidate: paint cached CMS content immediately (zero
-    // network), and only when the cache is cold/stale schedule the refresh —
-    // after load+idle, so the fetch (and the Supabase SDK chunk it may pull)
-    // never competes with the hero LCP image on slow connections.
-    const { data, fresh } = getCachedSiteContentSync("home");
-    if (data) setContent(data);
-    if (fresh) return;
-
-    let alive = true;
-    const cancel = afterPageLoad(() => {
-      getSiteContent("home")
-        .then(d => { if (alive) setContent(d || {}); })
-        .catch(() => {}); // silently fall back to hardcoded defaults
-    });
-    return () => { alive = false; cancel(); };
-  }, []);
-
   return (
     <div>
-      <Hero content={content.hero} />
+      <Hero />
 
       {/* Section 1 */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <Section1 content={content.section1} />
+        <Section1 />
       </div>
 
       {/* Section 2 */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <Section2 content={content.section2} />
+        <Section2 />
 
         {/* Explore More Button */}
         <div className="text-center mt-6">
@@ -75,15 +50,15 @@ const Home = () => {
 
       {/* Section 3 */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <Section3 content={content.section3} />
+        <Section3 />
       </div>
       {/* Section 4 */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <Section4 content={content.section4} />
+        <Section4 />
       </div>
       {/* Section 5 */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <Section5 content={content.section5} />
+        <Section5 />
       </div>
     </div>
   );

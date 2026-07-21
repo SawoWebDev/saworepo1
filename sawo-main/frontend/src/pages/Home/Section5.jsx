@@ -4,29 +4,22 @@ import ChevronRight from "../../components/icons/ChevronRight";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import menuPaths from "../../menuPaths";
 
-// Local images (fallbacks when CMS provides no override)
 import imgCustomizedSolutions   from "../../assets/Home/Section5/Customized-Solutions_1.webp";
 import imgPreventiveMaintenance from "../../assets/Home/Section5/PREVENTIVE-MAINTENANCE_1.webp";
 
+const HEADING     = "Customized Solutions";
+const SUBTITLE    = "Let's bring your sauna vision to life.";
+const BODY1       = "We craft sauna solutions tailored to your style and space. Whether for home or business, we've got you covered from design to installation to technical support.";
+const BODY2       = "Call us or send us a message.";
+const BUTTON_TEXT = "INQUIRE TODAY";
+
 /**
  * Section5 — Customized Solutions with image comparison slider.
- * CMS-editable: heading, subtitle, body1, body2, button_text, image_left, image_right.
- * All values fall back to the original hardcoded content when CMS override is null.
  */
-const Section5 = ({ content = {} }) => {
+const Section5 = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging,     setIsDragging]     = useState(false);
   const containerRef = useRef(null);
-
-  // Resolve values with fallbacks
-  const heading    = content.heading     || "Customized Solutions";
-  const subtitle   = content.subtitle   || "Let's bring your sauna vision to life.";
-  const body1      = content.body1      || "We craft sauna solutions tailored to your style and space. Whether for home or business, we've got you covered from design to installation to technical support.";
-  const body2      = content.body2      || "Call us or send us a message.";
-  const buttonText = content.button_text || "INQUIRE TODAY";
-  // Left = foreground (clipped side); Right = background (always visible)
-  const imgLeft    = content.image_left  || imgPreventiveMaintenance;
-  const imgRight   = content.image_right || imgCustomizedSolutions;
 
   const handleMove = useCallback((clientX) => {
     if (!containerRef.current) return;
@@ -66,27 +59,27 @@ const Section5 = ({ content = {} }) => {
               className="text-4xl lg:text-5xl font-medium mb-4"
               style={{ fontFamily: "Montserrat, sans-serif", color: "#141617" }}
             >
-              {heading}
+              {HEADING}
             </h2>
             <p
               className="text-lg mb-6"
               style={{ fontFamily: "Montserrat, sans-serif", color: "#916e53", fontWeight: 500 }}
             >
-              {subtitle}
+              {SUBTITLE}
             </p>
             <p
               className="text-base mb-8 leading-relaxed"
               style={{ fontFamily: "Montserrat, sans-serif", color: "#141617" }}
             >
-              {body1}
+              {BODY1}
             </p>
             <p
               className="text-base mb-8"
               style={{ fontFamily: "Montserrat, sans-serif", color: "#141617" }}
             >
-              {body2}
+              {BODY2}
             </p>
-            <ButtonBrown text={buttonText} href={menuPaths.contact} />
+            <ButtonBrown text={BUTTON_TEXT} href={menuPaths.contact} />
           </div>
 
           {/* Right Image Comparison Slider */}
@@ -100,7 +93,7 @@ const Section5 = ({ content = {} }) => {
               {/* Background Image (always visible — right side) */}
               <div className="absolute inset-0">
                 <img
-                  src={imgRight}
+                  src={imgCustomizedSolutions}
                   alt="Sauna customized solutions"
                   className="w-full h-full object-cover"
                   draggable="false"
@@ -115,7 +108,7 @@ const Section5 = ({ content = {} }) => {
                 style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
               >
                 <img
-                  src={imgLeft}
+                  src={imgPreventiveMaintenance}
                   alt="Preventive maintenance"
                   className="w-full h-full object-cover"
                   draggable="false"

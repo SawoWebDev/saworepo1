@@ -24,9 +24,6 @@ export default async function HomePage({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Dynamic CMS-driven home content (site_content table) is a follow-up:
-  // this Server Component ships the message-catalog copy as real, crawlable
-  // HTML for now, which already satisfies the SEO goal for en/fi/de.
   return (
     <div>
       <Hero />

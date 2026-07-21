@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
-// Local images (fallbacks)
 import imgPailsLadles        from "../../assets/Home/Section4/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE.webp";
 import imgThermometers       from "../../assets/Home/Section4/BoxType2-copy-new.webp";
 import imgSandTimers         from "../../assets/Home/Section4/sand-timer-copy-new.webp";
@@ -15,7 +14,7 @@ import imgBenches            from "../../assets/Home/Section4/siro-bench.webp";
 import imgKivistone          from "../../assets/Home/Section4/R-500-D_Scene2.webp";
 import imgVentilation        from "../../assets/Home/Section4/Ventilation.webp";
 
-const DEFAULT_ACCESSORIES = [
+const ACCESSORIES = [
   { title: "PAILS and LADLES",                href: menuPaths.sauna.accessories.pailsLadles,        img: imgPailsLadles,    alt: "Sauna pails and ladles" },
   { title: "THERMOMETERS and COMBINED METERS", href: menuPaths.sauna.accessories.thermometers,       img: imgThermometers,   alt: "Sauna thermometers and combined meters" },
   { title: "CLOCKS and SANDTIMERS",            href: menuPaths.sauna.accessories.clocksSandtimers,   img: imgSandTimers,     alt: "Sauna clocks and sand timers" },
@@ -29,21 +28,12 @@ const DEFAULT_ACCESSORIES = [
 
 /**
  * Section4 — Sauna Accessories carousel.
- * CMS-editable: heading, and per-card title / image_url / alt.
  */
-const Section4 = ({ content = {} }) => {
+const Section4 = () => {
   const carouselRef  = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const heading  = content.heading || "SAUNA ACCESSORIES";
-  const cmsItems = content.items   || [];
-
-  const accessories = DEFAULT_ACCESSORIES.map((def, i) => {
-    const cms = cmsItems[i] || {};
-    return { ...def, title: cms.title || def.title, alt: cms.alt || def.alt, img: cms.image_url || def.img };
-  });
-
-  const loopedItems = [...accessories, ...accessories];
+  const loopedItems = [...ACCESSORIES, ...ACCESSORIES];
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
@@ -90,7 +80,7 @@ const Section4 = ({ content = {} }) => {
         className="text-center mb-6"
         style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, color: "rgb(175, 133, 100)", fontSize: "35px" }}
       >
-        {heading}
+        SAUNA ACCESSORIES
       </h2>
 
       <div className="accessories-carousel-wrapper relative flex items-center" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>

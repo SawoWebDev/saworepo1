@@ -32,19 +32,14 @@ const CAPABILITY_MAP = {
   "sauna_rooms.duplicate":    ["admin", "superadmin"],
   "sauna_rooms.upload_images": ["admin", "superadmin"],
 
-  // Site Content CMS
-  "content.view":             ["editor", "admin", "superadmin"],
-  "content.edit":             ["editor", "admin", "superadmin"],
-  "content.sync":             ["admin", "superadmin"],
-
   // Navigation / Pages
-  "page.content":             ["editor", "admin", "superadmin"],
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
   "page.logs":                ["admin", "superadmin"],
   "page.users":               ["superadmin"],
   "page.products_local":      ["editor", "admin", "superadmin"],
   "page.analytics":           ["admin", "superadmin"],
+  "page.settings":            ["admin", "superadmin"],
 };
 
 /**
@@ -80,10 +75,10 @@ export function getPerms(user) {
 export const NAV_ITEMS = [
   { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view"       },
   { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view"    },
-  { to: "/admin/content",         label: "Page Content",     icon: "fa-solid fa-pen-to-square",  cap: "page.content"        },
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics"      },
   { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models"         },
   { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy"       },
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs"           },
+  { to: "/admin/language",        label: "Language",         icon: "fa-solid fa-language",       cap: "page.settings"       },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users"          },
 ];

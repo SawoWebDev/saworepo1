@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
 import menuPaths from "../../menuPaths";
 
-// Local images (fallbacks when CMS provides no image_url)
 import steamGenerator    from "../../assets/Home/Section3/steam-generator1.webp";
 import steamControl      from "../../assets/Home/Section3/SteamControlFinal.webp";
 import steamAccessories  from "../../assets/Home/Section3/ST-746-I_Display2.webp";
@@ -19,34 +18,27 @@ import saunovaSeries     from "../../assets/Home/Section3/SAU-UI-V2_AspenSauna.w
 import innovaSeries      from "../../assets/Home/Section3/INC-S-V2_SpruceSauna.webp";
 import controlAccessories from "../../assets/Home/Section3/sensor-holder.webp";
 
-const DEFAULT_STEAM_ITEMS = [
+const STEAM_ITEMS = [
   { title: "Steam Generators", caption: "The luxury of tailored steam from advanced steam generators for a spa-like experience. Customized settings and overall exceptional performance.",                                                                        img: steamGenerator,   href: menuPaths.steam.generators },
   { title: "Steam Controls",   caption: "Precision, effortlessness, and personalization: Precise steam settings, effortless operation, and a personalized sauna experience from our Saunova and Innova control series.",                                        img: steamControl,     href: menuPaths.steam.controls   },
   { title: "Steam Accessories",caption: "Premium accessories designed to enhance functionality and maximize comfort. Consistently extraordinary wellness and relaxation experience.",                                                                             img: steamAccessories, href: menuPaths.steam.accessories },
 ];
-const DEFAULT_ROOMS_ITEMS = [
+const ROOMS_ITEMS = [
   { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: menuPaths.sauna.rooms },
   { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: menuPaths.sauna.rooms },
   { title: "Outdoor Sauna",    caption: "Engineered to withstand severe weather. Top-coated walls and durable asphalt-shingle roof for maximum protection from the sun and rain.",                                                                               img: outdoorSauna,     href: menuPaths.sauna.rooms },
   { title: "Infrared Sauna",   caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: menuPaths.sauna.rooms },
 ];
-const DEFAULT_INFRARED_ITEMS = [
+const INFRARED_ITEMS = [
   { title: "Infrared Rooms",    img: infraredRooms,      href: menuPaths.infrared },
   { title: "Infrared Panels",   img: infraredPanels,     href: menuPaths.infrared },
   { title: "Infrared Controls", img: infraredControls,   href: menuPaths.infrared },
 ];
-const DEFAULT_CONTROL_ITEMS = [
+const CONTROL_ITEMS = [
   { title: "Saunova Series",       img: saunovaSeries,      href: menuPaths.sauna.controls },
   { title: "Innova Series",        img: innovaSeries,       href: menuPaths.sauna.controls },
   { title: "Control Accessories",  img: controlAccessories, href: menuPaths.sauna.accessories.parent },
 ];
-
-function mergeItems(defaults, cmsItems = []) {
-  return defaults.map((def, i) => {
-    const cms = cmsItems[i] || {};
-    return { ...def, title: cms.title || def.title, caption: cms.caption || def.caption, img: cms.image_url || def.img };
-  });
-}
 
 const exploreBtnStyle = {
   fontFamily: "'Montserrat', sans-serif",
@@ -63,25 +55,14 @@ const exploreBtnStyle = {
 
 /**
  * Section3 — Steam / Sauna Rooms / Infrared / Sauna Control grids.
- * CMS-editable: all 4 sub-section headings, and per-card title / caption / image.
  */
-const Section3 = ({ content = {} }) => {
-  const steamHeading        = content.steam_heading        || "STEAM";
-  const saunaRoomsHeading   = content.sauna_rooms_heading  || "SAUNA ROOMS";
-  const infraredHeading     = content.infrared_heading     || "INFRARED";
-  const saunaControlHeading = content.sauna_control_heading || "SAUNA CONTROL";
-
-  const steamItems   = mergeItems(DEFAULT_STEAM_ITEMS,    content.steam_items);
-  const roomItems    = mergeItems(DEFAULT_ROOMS_ITEMS,    content.sauna_rooms_items);
-  const irItems      = mergeItems(DEFAULT_INFRARED_ITEMS, content.infrared_items);
-  const controlItems = mergeItems(DEFAULT_CONTROL_ITEMS,  content.sauna_control_items);
-
+const Section3 = () => {
   return (
     <section className="section3-wrapper">
       {/* ── STEAM ── */}
-      <h2 className="section-title">{steamHeading}</h2>
+      <h2 className="section-title">STEAM</h2>
       <div className="steam-grid">
-        {steamItems.map((item, i) => (
+        {STEAM_ITEMS.map((item, i) => (
           <Link key={i} className="steam-card has-caption" to={item.href}>
             <img src={item.img} alt="" width="600" height="400" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
@@ -96,9 +77,9 @@ const Section3 = ({ content = {} }) => {
       </div>
 
       {/* ── SAUNA ROOMS ── */}
-      <h2 className="section-title">{saunaRoomsHeading}</h2>
+      <h2 className="section-title">SAUNA ROOMS</h2>
       <div className="steam-grid">
-        {roomItems.map((item, i) => (
+        {ROOMS_ITEMS.map((item, i) => (
           <Link key={i} className="steam-card has-caption" to={item.href}>
             <img src={item.img} alt="" width="700" height="525" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
@@ -113,9 +94,9 @@ const Section3 = ({ content = {} }) => {
       </div>
 
       {/* ── INFRARED ── */}
-      <h2 className="section-title">{infraredHeading}</h2>
+      <h2 className="section-title">INFRARED</h2>
       <div className="image-grid">
-        {irItems.map((item, i) => (
+        {INFRARED_ITEMS.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
             <img src={item.img} alt="" width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
@@ -129,9 +110,9 @@ const Section3 = ({ content = {} }) => {
       </div>
 
       {/* ── SAUNA CONTROL ── */}
-      <h2 className="section-title">{saunaControlHeading}</h2>
+      <h2 className="section-title">SAUNA CONTROL</h2>
       <div className="image-grid">
-        {controlItems.map((item, i) => (
+        {CONTROL_ITEMS.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
             <img src={item.img} alt="" width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>

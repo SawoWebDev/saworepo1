@@ -10,7 +10,11 @@ import Flag from './flags/Flag';
 // Floating language switcher, pinned bottom-left. Shows the current locale's
 // flag; clicking opens a small popup listing the other languages. Styles live
 // in globals.css (.lang-switcher*) so every page shares them — no per-page CSS.
-export default function LanguageSwitcher() {
+//
+// `locales` is passed down from the layout, which reads it from the CMS's
+// language-switcher config (app_settings) — it's the subset of built locales
+// an admin has chosen to show. Defaults to every built locale if omitted.
+export default function LanguageSwitcher({ locales = routing.locales }) {
   const t = useTranslations('nav');
   const locale = useLocale();
   const router = useRouter();
@@ -37,7 +41,7 @@ export default function LanguageSwitcher() {
     <div className="lang-switcher" ref={ref}>
       {open && (
         <ul className="lang-switcher-menu" role="listbox" aria-label={t('language.label')}>
-          {routing.locales.map((loc) => (
+          {locales.map((loc) => (
             <li key={loc}>
               <button
                 type="button"

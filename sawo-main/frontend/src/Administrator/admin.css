@@ -31,10 +31,17 @@
   --info:         #1a6fa8;
   --info-bg:      rgba(26,111,168,0.08);
 
-  --sidebar-bg:   #141617;
-  --sidebar-text: rgba(255,255,255,0.82);
-  --sidebar-hover:#1e2022;
-  --sidebar-active: rgba(175,133,100,0.15);
+  /* Sidebar keeps its own warm brand identity across both app themes — it's
+     a nav rail, not page content, so it doesn't need to go through the
+     bg/surface ramp above. Hover/active are translucent WHITE overlays (not
+     dark/black) so they lighten the brand gradient instead of clashing
+     with it — that clash is what read as "black" before. */
+  --sidebar-bg:     linear-gradient(180deg, #a67c52 0%, #8c5e38 100%);
+  --sidebar-text:   rgba(255,255,255,0.85);
+  --sidebar-hover:  rgba(255,255,255,0.14);
+  --sidebar-active: rgba(255,255,255,0.22);
+  --sidebar-active-border: #ffe9d1;
+  --sidebar-active-text:   #fff8f0;
   --sidebar-w:    200px;
 
   --shadow-sm:    0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
@@ -47,27 +54,50 @@
   --t:    0.2s ease;
 }
 
-/* ── Dark Mode ───────────────────────────────────────────────────────── */
+/* ── Dark Mode ───────────────────────────────────────────────────────────
+   Deliberately NOT near-black. A warm, muted charcoal-brown "abyss" tied to
+   the brand hue (not blue-black, not pure #000) — each surface step is a
+   visibly distinct lightness so cards/panels read as "raised" against the
+   page instead of blending into one flat black. Text opacities are raised
+   from the original pass (0.35/0.58 read as "too thin, barely visible" at
+   normal font-weight) and paired with a slightly heavier weight so labels
+   stay legible instead of washing out. ───────────────────────────────── */
 [data-theme="dark"] {
-  --bg:           #161412;
-  --surface:      #1e1b18;
-  --surface-2:    #252019;
-  --border:       #2e2a25;
-  --border-light: #282420;
-  --text:         rgba(255,255,255,0.92);
-  --text-2:       rgba(255,255,255,0.58);
-  --text-3:       rgba(255,255,255,0.35);
-  --danger-bg:    rgba(192,57,43,0.15);
-  --success-bg:   rgba(46,125,82,0.15);
-  --warning-bg:   rgba(184,134,11,0.15);
-  --info-bg:      rgba(26,111,168,0.15);
-  --sidebar-bg:   #0d0f10;
-  --sidebar-hover:#161819;
-  --sidebar-active: rgba(175,133,100,0.15);
-  --shadow-sm:    0 1px 3px rgba(0,0,0,0.3);
-  --shadow:       0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg:    0 8px 32px rgba(0,0,0,0.5);
+  --bg:           #221c17;
+  --surface:      #2c241d;
+  --surface-2:    #382e24;
+  --border:       #4a3c2e;
+  --border-light: #3c3226;
+  --text:         rgba(255,255,255,0.96);
+  --text-2:       rgba(255,255,255,0.74);
+  --text-3:       rgba(255,255,255,0.54);
+  --danger-bg:    rgba(192,57,43,0.2);
+  --success-bg:   rgba(46,125,82,0.2);
+  --warning-bg:   rgba(184,134,11,0.2);
+  --info-bg:      rgba(26,111,168,0.2);
+
+  /* Sidebar: a deeper, more muted version of the same brand gradient —
+     warm dark brown, not black — with brighter hover/active overlays so
+     they stay visible against the darker base. */
+  --sidebar-bg:     linear-gradient(180deg, #5c4128 0%, #3a2a1a 100%);
+  --sidebar-hover:  rgba(255,255,255,0.10);
+  --sidebar-active: rgba(255,255,255,0.16);
+  --sidebar-active-border: #e8c9a0;
+  --sidebar-active-text:   #ffe9d1;
+
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.35);
+  --shadow:       0 4px 14px rgba(0,0,0,0.45);
+  --shadow-lg:    0 10px 36px rgba(0,0,0,0.55);
 }
+
+/* Text weight compensates for the lower-opacity tokens above so secondary/
+   tertiary copy stays readable instead of thin-and-faint in dark mode. */
+[data-theme="dark"] body { font-weight: 500; }
+[data-theme="dark"] .form-helper,
+[data-theme="dark"] .tbl-date,
+[data-theme="dark"] .tax-card-date,
+[data-theme="dark"] .tax-card-count,
+[data-theme="dark"] .products-subtitle { font-weight: 500; }
 
 /* ── Reset & Base ────────────────────────────────────────────────────── */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
@@ -129,7 +159,12 @@ body {
   transition: background var(--t), color var(--t), border-color var(--t);
 }
 .sidebar-nav a:hover { background:var(--sidebar-hover); color:#fff; }
-.sidebar-nav a.active { background:var(--sidebar-active); border-left-color:var(--brand); color:var(--brand-light); }
+.sidebar-nav a.active {
+  background: var(--sidebar-active);
+  border-left-color: var(--sidebar-active-border);
+  color: var(--sidebar-active-text);
+  font-weight: 700;
+}
 .sidebar-nav a i { width:18px; text-align:center; font-size:0.9rem; opacity:0.8; }
 
 .sidebar-footer {
@@ -1681,15 +1716,12 @@ body {
   display: none;
 }
 
-/* ── Sidebar: always visible on desktop, drawer on mobile ────────────── */
-.admin-sidebar {
-  width: var(--sidebar-w, 220px);
-  background: linear-gradient(180deg, #a67c52 0%, #8c5e38 100%);
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  transition: background 0.2s;
-}
+/* Sidebar's real background/width/layout rule lives at the top of this file
+   (.admin-sidebar, ~line 124) driven by var(--sidebar-bg) so light/dark mode
+   both apply correctly — a duplicate hardcoded-gradient rule used to live
+   here and silently win the cascade over that one, which is why the sidebar
+   never actually responded to the dark-mode toggle. Removed; only the
+   mobile-drawer positioning override below (768px) is sidebar-specific here. */
 
 /* ───────────────────────────────────────────────────────────────────────
    768px — Tablet & Mobile
@@ -1717,6 +1749,9 @@ body {
     top: 0;
     z-index: 300;
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  [data-theme="dark"] .admin-topbar {
+    background: linear-gradient(90deg, #5c4128 0%, #3a2a1a 100%);
   }
 
   .admin-topbar-hamburger,

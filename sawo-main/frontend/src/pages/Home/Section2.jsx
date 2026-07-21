@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from "react";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
-// Local images (fallbacks when CMS provides no image_url)
 import Tower      from "../../assets/Home/Section2/TOWER-SERIES-2-600x360-1.webp";
 import WallMounted from "../../assets/Home/Section2/WALL-MOUNTED-SERIES-v2-1.webp";
 import Floor      from "../../assets/Home/Section2/FLOOR-MOUNTED-SERIES1-1024x614-1.webp";
@@ -11,7 +10,7 @@ import Combi      from "../../assets/Home/Section2/COMBI-SERIES-600x360-1.webp";
 import Stone      from "../../assets/Home/Section2/STONE-SERIES-3-600x320-new-.webp";
 import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-1-600x360-1.webp";
 
-const DEFAULT_HEATERS = [
+const SAUNA_HEATERS = [
   { title: "TOWER",        href: menuPaths.sauna.heaters.tower,       img: Tower,       alt: "SAWO Tower Sauna Heater Series with elegant vertical design",                    caption: "Height and energy efficiency in a sleek, elegant design. Consistent warmth delivered from the lowest to the highest parts of the sauna for optimal relaxation and wellness." },
   { title: "WALL-MOUNTED", href: menuPaths.sauna.heaters.wallMounted, img: WallMounted, alt: "SAWO Wall-Mounted Sauna Heater Series for compact sauna rooms",                  caption: "Space-saving and energy-efficient wall-mounted sauna heaters that generate steady, powerful heat. Sleek, modern design and superior comfort for the ultimate sauna experience." },
   { title: "FLOOR",        href: menuPaths.sauna.heaters.floor,       img: Floor,       alt: "SAWO Floor-Mounted Sauna Heater Series for commercial saunas",                   caption: "Premium, highly powerful standalone heaters that provide the unbeatable combination of energy efficiency and elegant design. Ideal for commercial use." },
@@ -22,26 +21,12 @@ const DEFAULT_HEATERS = [
 
 /**
  * Section2 — Sauna Heaters carousel.
- * CMS-editable: heading, and per-heater title / caption / image_url.
  */
-const Section2 = ({ content = {} }) => {
+const Section2 = () => {
   const carouselRef  = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const heading  = content.heading || "SAUNA HEATERS";
-  const cmsItems = content.items   || [];
-
-  const saunaHeaters = DEFAULT_HEATERS.map((def, i) => {
-    const cms = cmsItems[i] || {};
-    return {
-      ...def,
-      title:   cms.title   || def.title,
-      caption: cms.caption || def.caption,
-      img:     cms.image_url || def.img,
-    };
-  });
-
-  const loopedItems = [...saunaHeaters, ...saunaHeaters];
+  const loopedItems = [...SAUNA_HEATERS, ...SAUNA_HEATERS];
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
@@ -94,7 +79,7 @@ const Section2 = ({ content = {} }) => {
         className="text-center mb-6"
         style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, color: "#AF8564", fontSize: "2.2rem" }}
       >
-        {heading}
+        SAUNA HEATERS
       </h2>
 
       <div

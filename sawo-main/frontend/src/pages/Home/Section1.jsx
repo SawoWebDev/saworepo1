@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
-// Local images (used as fallbacks when CMS provides no image_url override)
 import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
 import SteamGenerator    from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
 import SaunaRoom         from "../../assets/Home/Section1/Sauna-Room.webp";
@@ -12,8 +11,7 @@ import InfraredSauna     from "../../assets/Home/Section1/IR-SAUNA-1P-CEDAR.webp
 import SaunaAccessories  from "../../assets/Home/Section1/Sauna-Accessories.webp";
 import SaunovaSeries     from "../../assets/Home/Section1/INC-S-V2AspenSauna.webp";
 
-// ── Default carousel items (hardcoded fallbacks) ──────────────────────────────
-const DEFAULT_ITEMS = [
+const CAROUSEL_ITEMS = [
   {
     title:   "SAUNA HEATERS",
     caption: "Rejuvenate in the warmth of a traditional Finnish sauna with SAWO's premium heaters.",
@@ -60,14 +58,8 @@ const DEFAULT_ITEMS = [
 
 /**
  * Section1 — Product category carousel.
- * Accepts `content` prop from Home.jsx (site_content › home › section1).
- * CMS-editable: heading, and per-item title / caption / image_url / alt.
- * Local images are used as fallbacks when image_url is null.
  */
-const Section1 = ({ content = {} }) => {
-  const cmsItems   = content.items   || [];
-  const heading    = content.heading || "Dive into our Sauna World";
-
+const Section1 = () => {
   // Keep the infinite scroll paused until after load so Lighthouse can settle
   // the page and finalize LCP/TBT (prevents the `NO_LCP` runtime error).
   const [isReady, setIsReady] = useState(false);
@@ -75,18 +67,6 @@ const Section1 = ({ content = {} }) => {
     if (prefersReducedMotion()) return;
     return afterPageLoad(() => setIsReady(true));
   }, []);
-
-  // Merge hardcoded defaults with CMS overrides
-  const carouselItems = DEFAULT_ITEMS.map((def, i) => {
-    const cms = cmsItems[i] || {};
-    return {
-      ...def,
-      title:   cms.title   || def.title,
-      caption: cms.caption || def.caption,
-      alt:     cms.alt     || def.alt,
-      img:     cms.image_url || def.img,   // CMS URL overrides local import
-    };
-  });
 
   return (
     <div>
@@ -101,7 +81,7 @@ const Section1 = ({ content = {} }) => {
             fontSize: "35px",
           }}
         >
-          {heading}
+          Dive into our Sauna World
         </h2>
       </section>
 
@@ -114,7 +94,7 @@ const Section1 = ({ content = {} }) => {
             aria-label="SAWO Sauna Products Carousel"
           >
             <div className={`sawo-carousel-track flex gap-5${isReady ? " is-ready" : ""}`} role="list">
-              {[...carouselItems, ...carouselItems].map((item, index) => (
+              {[...CAROUSEL_ITEMS, ...CAROUSEL_ITEMS].map((item, index) => (
                 <div
                   className="sawo-carousel-item flex-shrink-0 w-[calc(25%-20px)] rounded overflow-hidden relative snap-start"
                   key={index}

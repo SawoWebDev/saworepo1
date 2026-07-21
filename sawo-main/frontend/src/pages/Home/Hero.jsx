@@ -3,41 +3,18 @@ import React, { useEffect, useRef } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 
-// ── Hardcoded fallbacks (used when CMS has no override) ──────────────────────
-const DEFAULT_SENTENCES = [
+const SENTENCES = [
   "a rejuvenating escape",
   "wellness with ancient tradition",
   "an authentic Finnish sauna",
 ];
-const DEFAULT_BUTTON_TEXT = "VIEW CATALOGUE";
-const DEFAULT_BUTTON_URL  = "https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf";
-const DEFAULT_ALT         = "SAWO sauna heaters - Experience wellness and rejuvenation";
+const BUTTON_TEXT = "VIEW CATALOGUE";
+const BUTTON_URL  = "https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf";
+const ALT_TEXT    = "SAWO sauna heaters - Experience wellness and rejuvenation";
 
-/**
- * Hero — receives `content` prop from Home.jsx (may be undefined/null initially).
- * All values fall back to hardcoded defaults so the page never breaks.
- *
- * CMS-editable fields (from site_content table, home › hero):
- *   image_640  / image_1024 / image_1920  — hero background at each breakpoint
- *   alt_text                              — img alt attribute
- *   typewriter_sentences                  — animated text lines array
- *   button_text / button_url              — CTA button
- */
-const Hero = ({ content = {} }) => {
+const Hero = () => {
   const typewriterRef = useRef(null);
 
-  // Resolve CMS values with fallbacks
-  const img640     = content.image_640  || "/640.webp";
-  const img1024    = content.image_1024 || "/1024.webp";
-  const img1920    = content.image_1920 || "/1920.webp";
-  const altText    = content.alt_text   || DEFAULT_ALT;
-  const sentences  = (content.typewriter_sentences?.length > 0)
-    ? content.typewriter_sentences
-    : DEFAULT_SENTENCES;
-  const buttonText = content.button_text || DEFAULT_BUTTON_TEXT;
-  const buttonUrl  = content.button_url  || DEFAULT_BUTTON_URL;
-
-  // Re-run typewriter when sentences change (e.g. CMS loaded after mount)
   useEffect(() => {
     const el = typewriterRef.current;
     if (!el) return;
@@ -49,7 +26,7 @@ const Hero = ({ content = {} }) => {
     let timeout;
 
     function setupSentence() {
-      const current = sentences[n];
+      const current = SENTENCES[n];
       if (!el) return;
       el.innerHTML = current
         .split("")
@@ -77,7 +54,7 @@ const Hero = ({ content = {} }) => {
           spans[i].style.opacity = 0;
           timeout = setTimeout(animate, 50);
         } else {
-          n = (n + 1) % sentences.length;
+          n = (n + 1) % SENTENCES.length;
           setupSentence();
           timeout = setTimeout(animate, 500);
         }
@@ -86,7 +63,7 @@ const Hero = ({ content = {} }) => {
 
     // Reduced motion: render the first sentence statically, no animation loop.
     if (prefersReducedMotion()) {
-      el.textContent = sentences[0];
+      el.textContent = SENTENCES[0];
       el.style.opacity = 1;
       return;
     }
@@ -102,8 +79,7 @@ const Hero = ({ content = {} }) => {
       clearTimeout(timeout);
       cancelStart();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sentences.join("|")]); // re-run only when sentences actually change
+  }, []);
 
   // Dark bg on the section itself (not just the -z-10 image div) so contrast
   // checkers see white hero text against #3a3a3a instead of the page's white.
@@ -121,21 +97,21 @@ const Hero = ({ content = {} }) => {
         <picture>
           <source
             media="(max-width: 640px)"
-            srcSet={`${img640} 1x`}
+            srcSet="/640.webp 1x"
             type="image/webp"
           />
           <source
             media="(max-width: 1024px)"
-            srcSet={`${img1024} 1x`}
+            srcSet="/1024.webp 1x"
             type="image/webp"
           />
           <source
-            srcSet={`${img1920} 1x`}
+            srcSet="/1920.webp 1x"
             type="image/webp"
           />
           <img
-            src={img1920}
-            alt={altText}
+            src="/1920.webp"
+            alt={ALT_TEXT}
             width="1920"
             height="1080"
             className="w-full h-full object-cover"
@@ -159,7 +135,7 @@ const Hero = ({ content = {} }) => {
 
       {/* SEO fallback text (screen-reader only) */}
       <div className="sr-only">
-        {sentences.join(", ")}, SAWO sauna heaters, Finnish sauna, sauna
+        {SENTENCES.join(", ")}, SAWO sauna heaters, Finnish sauna, sauna
         accessories, infrared sauna, steam generator
       </div>
 
@@ -175,8 +151,8 @@ const Hero = ({ content = {} }) => {
         />
 
         <ButtonClear
-          text={buttonText}
-          href={buttonUrl}
+          text={BUTTON_TEXT}
+          href={BUTTON_URL}
           download
         />
       </div>

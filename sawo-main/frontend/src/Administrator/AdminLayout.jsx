@@ -104,7 +104,10 @@ function DataSourceToggle({ source, scope, switching, onSwitchSource, onSwitchSc
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, dataSource, jsonScope, switchingSource, onSwitchSource, onSwitchScope }) {
+function Sidebar({
+  session, dark, setDark, nav, handleLogout, location, open, onClose,
+  dataSource, jsonScope, switchingSource, onSwitchSource, onSwitchScope,
+}) {
   return (
     <>
       {/* Mobile overlay */}
