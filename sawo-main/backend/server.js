@@ -16,7 +16,9 @@ const PORT = process.env.PORT || 5000;
 app.set("trust proxy", true);
 
 const allowedOrigins = [
-  "https://sawogitsrc.vercel.app",
+  "https://saworeact.vercel.app", // actual production domain (confirmed via Vercel dashboard)
+  "https://reactsawo.vercel.app", // additional deployment domain
+  "https://sawogitsrc.vercel.app", // kept in case other deployments/previews still use it
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:5173"
