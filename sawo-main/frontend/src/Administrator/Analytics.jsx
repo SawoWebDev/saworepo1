@@ -417,13 +417,6 @@ const Analytics = () => {
         )}
       </div>
 
-      {/* Info Box */}
-      <div className="mt-8 bg-[var(--info-bg)] border border-[var(--info)] rounded p-4">
-        <p className="text-[var(--info)] text-sm">
-          <i className="fas fa-info-circle mr-2"></i>
-          <strong>Note:</strong> Analytics data is collected from page views and user events. Make sure Google Analytics 4 and custom tracking are properly configured in the application.
-        </p>
-      </div>
     </div>
   );
 };
