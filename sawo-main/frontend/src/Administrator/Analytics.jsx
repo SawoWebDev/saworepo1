@@ -2,6 +2,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
 import DailyTrafficChart from "./DailyTrafficChart";
 
+// Deep-links out to PostHog's Heatmaps tool (session replay + heatmaps live
+// there, not duplicated in this CMS — see lib/posthog.js). PostHog doesn't
+// document a reliable query param to auto-filter Heatmaps to one URL, so
+// this opens the tool and the page path is shown in the tooltip/title for
+// the admin to pick from PostHog's own page selector, rather than faking a
+// filter param that might silently not apply.
+const POSTHOG_PROJECT_URL = process.env.REACT_APP_POSTHOG_PROJECT_URL;
+
 const Analytics = () => {
   const [dateRange, setDateRange] = useState("7days"); // 7days, 30days, 90days
   const [stats, setStats] = useState({
@@ -271,10 +279,21 @@ const Analytics = () => {
             <div className="space-y-3">
               {stats.topPages.map((page, idx) => (
                 <div key={idx} className="flex items-center justify-between pb-3 border-b border-[var(--border-light)] last:border-b-0">
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-[var(--text)] truncate">{page.path}</p>
                     <p className="text-xs text-[var(--text-3)]">Avg. time: {formatTime(page.avgTime)}</p>
                   </div>
+                  {POSTHOG_PROJECT_URL && (
+                    <a
+                      href={`${POSTHOG_PROJECT_URL}/heatmaps`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Opens PostHog Heatmaps — select "${page.path}" from the page picker there`}
+                      className="ml-3 text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
+                    >
+                      <i className="fa-solid fa-fire"></i>
+                    </a>
+                  )}
                   <div className="ml-4 text-right">
                     <p className="text-lg font-bold text-[var(--brand)]">{page.views}</p>
                     <p className="text-xs text-[var(--text-3)]">views</p>
