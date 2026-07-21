@@ -1,15 +1,22 @@
 /**
  * lib/posthog.js
  *
- * PostHog, scoped deliberately to session replay + (future) funnel events.
- * NOT pageviews, NOT geo — the patched first-party tracker
- * (local-storage/track.js -> backend/trackingApi.js -> analytics_page_views)
- * already owns those. capture_pageview and autocapture are off here so the
- * two systems don't double up.
+ * PostHog, scoped deliberately to session replay, heatmaps/clickmaps, and
+ * (future) funnel events. NOT pageviews, NOT geo — the patched first-party
+ * tracker (local-storage/track.js -> backend/trackingApi.js ->
+ * analytics_page_views) already owns those, so capture_pageview stays off
+ * here regardless of anything else, to keep the two systems from doubling up.
+ *
+ * autocapture IS on (unlike the original session-replay-only setup) — it's
+ * required for PostHog's Clickmap ("most-clicked buttons") breakdown, not
+ * just the visual mouse-heatmap overlay (enable_heatmaps alone would cover
+ * that). This means every click/form interaction is now a billed
+ * $autocapture event against PostHog's event quota — deliberate trade-off,
+ * not an oversight.
  *
  * Gated the same way as the first-party tracker: production only, admins
  * excluded, /admin and /login excluded — admins must never appear in
- * session replay.
+ * session replay or heatmap/click data.
  */
 
 import { useEffect } from "react";
@@ -56,7 +63,13 @@ export function usePostHogTracking() {
       // Our own first-party tracker is the source of truth for
       // pageviews/top-pages/country — PostHog must not duplicate that.
       capture_pageview: false,
-      autocapture: false,
+      // Required for the Clickmap ("most-tapped buttons") breakdown — see
+      // file header comment for the event-quota trade-off this implies.
+      autocapture: true,
+      // Visual mouse-movement/click heatmap overlay per page. Rides along
+      // with other events, so it doesn't add to the event quota on its own
+      // (unlike autocapture above).
+      enable_heatmaps: true,
       session_recording: {
         maskAllInputs: true,
       },

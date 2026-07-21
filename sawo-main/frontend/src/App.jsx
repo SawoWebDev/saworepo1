@@ -77,6 +77,7 @@ const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
 const Logs           = lazy(() => import("./Administrator/Logs"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
 const LanguageSettings = lazy(() => import("./Administrator/LanguageSettings"));
+const Settings        = lazy(() => import("./Administrator/Settings"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
 
 export default function App() {
@@ -182,6 +183,9 @@ export default function App() {
             } />
             <Route path="/admin/language" element={
               <ProtectedRoute requiredCap="page.settings"><AdminLayout><LanguageSettings /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/settings" element={
+              <ProtectedRoute requiredCap="page.settings"><AdminLayout><Settings /></AdminLayout></ProtectedRoute>
             } />
 
             {/* Legacy editor products route — redirect to unified products page */}

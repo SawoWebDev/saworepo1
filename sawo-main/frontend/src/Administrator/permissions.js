@@ -69,16 +69,20 @@ export function getPerms(user) {
 }
 
 /**
- * Navigation items for the sidebar, filtered by role capability
+ * Navigation items for the sidebar, filtered by role capability and grouped
+ * by `section` for display (see AdminLayout.jsx's Sidebar).
  * Filter this array using: NAV_ITEMS.filter(item => can(userRole, item.cap))
  */
 export const NAV_ITEMS = [
-  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view"       },
-  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view"    },
-  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics"      },
-  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models"         },
-  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy"       },
-  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs"           },
-  { to: "/admin/language",        label: "Language",         icon: "fa-solid fa-language",       cap: "page.settings"       },
-  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users"          },
+  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    section: "Catalog"  },
+  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", section: "Catalog"  },
+  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      section: "Catalog"  },
+  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    section: "Catalog"  },
+
+  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights" },
+
+  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "System"   },
+  { to: "/admin/language",        label: "Language",         icon: "fa-solid fa-language",       cap: "page.settings",    section: "System"   },
+  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System"   },
+  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System"   },
 ];

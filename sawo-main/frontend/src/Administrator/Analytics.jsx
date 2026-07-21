@@ -93,17 +93,19 @@ const Analytics = () => {
           avgTime: Math.round(p.totalTime / p.views)
         }));
 
-      // Top countries
-      const countryMap = {};
+      // Top countries — unique visitors (sessions), not raw page views, so
+      // one visitor browsing 5 pages doesn't count as "5" for their country.
+      const countrySessionMap = {};
       pageViews?.forEach(pv => {
         const country = pv.country || "Unknown";
-        countryMap[country] = (countryMap[country] || 0) + 1;
+        if (!countrySessionMap[country]) countrySessionMap[country] = new Set();
+        countrySessionMap[country].add(pv.session_id);
       });
 
-      const topCountries = Object.entries(countryMap)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
-        .map(([country, count]) => ({ country, count }));
+      const topCountries = Object.entries(countrySessionMap)
+        .map(([country, sessions]) => ({ country, visitors: sessions.size }))
+        .sort((a, b) => b.visitors - a.visitors)
+        .slice(0, 10);
 
       // Device breakdown
       const deviceMap = {};
@@ -302,12 +304,13 @@ const Analytics = () => {
                     <div className="w-32 bg-[var(--surface-2)] rounded-full h-2">
                       <div
                         className="bg-[var(--brand)] h-2 rounded-full"
-                        style={{ width: `${(item.count / stats.topCountries[0].count) * 100}%` }}
+                        style={{ width: `${(item.visitors / stats.topCountries[0].visitors) * 100}%` }}
                       ></div>
                     </div>
                   </div>
                   <div className="ml-4 text-right min-w-[50px]">
-                    <p className="text-lg font-bold text-[var(--brand)]">{item.count}</p>
+                    <p className="text-lg font-bold text-[var(--brand)]">{item.visitors}</p>
+                    <p className="text-xs text-[var(--text-3)]">visitors</p>
                   </div>
                 </div>
               ))}

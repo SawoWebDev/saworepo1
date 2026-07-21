@@ -145,6 +145,16 @@ body {
 
 .sidebar-nav { flex:1; padding:0.75rem 0; overflow-y:auto; }
 
+.sidebar-section-label {
+  padding: 0.9rem 1.25rem 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.sidebar-section:first-child .sidebar-section-label { padding-top: 0.35rem; }
+
 .sidebar-nav a {
   display: flex;
   align-items: center;
