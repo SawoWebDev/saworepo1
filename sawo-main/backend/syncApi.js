@@ -15,6 +15,14 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const GITHUB_PAT = process.env.GITHUB_PAT;
 const GITHUB_OWNER = process.env.GITHUB_OWNER || "jmesrafael";
+// Every auto-sync push must land on every org that mirrors these repos, not
+// just GITHUB_OWNER — otherwise the two GitHub remotes silently diverge
+// (this is what caused saworepo1/saworepo2 on SawoWebDev to drift out of
+// sync with jmesrafael: this file used to push to GITHUB_OWNER only).
+// Comma-separated, defaults to the other known mirror; GITHUB_OWNER itself
+// is deduped out automatically below.
+const GITHUB_MIRROR_OWNERS = (process.env.GITHUB_MIRROR_OWNERS || "SawoWebDev")
+  .split(",").map(s => s.trim()).filter(o => o && o !== GITHUB_OWNER);
 const GITHUB_MAIN_REPO = process.env.GITHUB_MAIN_REPO || "saworepo1";
 const GITHUB_IMAGES_REPO = process.env.GITHUB_IMAGES_REPO || "saworepo2";
 
@@ -150,6 +158,7 @@ export async function syncMerge(emit = () => {}) {
       emit({ phase: "git", message: `saworepo1: ${saworepo1Result.commitMsg}` });
       if (saworepo1Result.pushed) {
         emit({ phase: "git", message: "saworepo1: Pushed to GitHub ✓" });
+        emitMirrors(emit, "saworepo1", saworepo1Result);
       } else {
         emit({ phase: "git", message: `saworepo1: ❌ Push failed: ${saworepo1Result.pushError}`, warning: true });
       }
@@ -166,6 +175,7 @@ export async function syncMerge(emit = () => {}) {
       emit({ phase: "git", message: `saworepo2: ${gitResult.commitMsg}` });
       if (gitResult.pushed) {
         emit({ phase: "git", message: "saworepo2: Pushed to GitHub ✓" });
+        emitMirrors(emit, "saworepo2", gitResult);
       } else {
         emit({ phase: "git", message: `saworepo2: ❌ Push failed: ${gitResult.pushError}`, warning: true });
       }
@@ -325,6 +335,15 @@ function ensureDirs() {
   }
 }
 
+function emitMirrors(emit, label, result) {
+  if (!result?.mirrors) return;
+  for (const [owner, m] of Object.entries(result.mirrors)) {
+    emit(m.pushed
+      ? { phase: "git", message: `${label}: Mirrored to ${owner} ✓` }
+      : { phase: "git", message: `${label}: ❌ Mirror to ${owner} failed: ${m.error}`, warning: true });
+  }
+}
+
 function configureGit(dir) {
   const run = (cmd) => execSync(cmd, { cwd: dir, encoding: "utf-8", stdio: "pipe" });
   try {
@@ -366,8 +385,25 @@ function commitAndPushRepo(repoDir, timestamp, stats, githubPat) {
       }
 
       run(`git push ${pushUrl} ${branch}`);
-      console.log(`✅ Pushed ${path.basename(repoDir)} to ${branch}`);
-      return { committed: true, pushed: true, commitMsg };
+      console.log(`✅ Pushed ${path.basename(repoDir)} to ${GITHUB_OWNER}/${branch}`);
+
+      // Mirror the same push to every other configured owner so the repos
+      // never drift apart. Best-effort: a mirror failure is logged but
+      // doesn't fail the sync — the primary push already succeeded.
+      const mirrors = {};
+      for (const owner of GITHUB_MIRROR_OWNERS) {
+        const mirrorUrl = `https://${githubPat}@github.com/${owner}/${path.basename(repoDir)}.git`;
+        try {
+          run(`git push ${mirrorUrl} ${branch}`);
+          console.log(`✅ Mirrored ${path.basename(repoDir)} to ${owner}/${branch}`);
+          mirrors[owner] = { pushed: true };
+        } catch (e) {
+          console.error(`❌ Mirror push failed for ${path.basename(repoDir)} → ${owner}:`, e.message.split("\n")[0]);
+          mirrors[owner] = { pushed: false, error: e.message.split("\n")[0] };
+        }
+      }
+
+      return { committed: true, pushed: true, commitMsg, mirrors };
     } catch (e) {
       console.error(`❌ Push failed for ${path.basename(repoDir)}:`, e.message);
       return { committed: true, pushed: false, commitMsg, pushError: e.message.split("\n")[0] };
@@ -458,13 +494,13 @@ export async function syncSaunaRooms(emit = () => {}) {
     emit({ phase: "git", message: "Committing changes in saworepo1..." });
     const r1 = commitAndPushRepo(saworepo1Dir, timestamp, stats, GITHUB_PAT);
     if (r1.nothing)       emit({ phase: "git", message: "saworepo1: Nothing to commit" });
-    else if (r1.committed) emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed });
+    else if (r1.committed) { emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed }); emitMirrors(emit, "saworepo1", r1); }
     else                   emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${r1.error}`, warning: true });
 
     emit({ phase: "git", message: "Committing changes in saworepo2..." });
     const r2 = commitAndPushRepo(saworepo2Dir, timestamp, stats, GITHUB_PAT);
     if (r2.nothing)       emit({ phase: "git", message: "saworepo2: Nothing to commit" });
-    else if (r2.committed) emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed });
+    else if (r2.committed) { emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed }); emitMirrors(emit, "saworepo2", r2); }
     else                   emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${r2.error}`, warning: true });
 
     try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
@@ -587,13 +623,13 @@ export async function updateLocalSaunaRooms(rooms, emit = () => {}) {
     emit({ phase: "git", message: "Committing changes to saworepo1..." });
     const r1 = commitAndPushRepo(saworepo1Dir, timestamp, stats, GITHUB_PAT);
     if (r1.nothing)       emit({ phase: "git", message: "saworepo1: No changes to commit" });
-    else if (r1.committed) emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed });
+    else if (r1.committed) { emit({ phase: "git", message: r1.pushed ? "saworepo1: Pushed to GitHub ✓" : `saworepo1: ❌ Push failed: ${r1.pushError}`, warning: !r1.pushed }); emitMirrors(emit, "saworepo1", r1); }
     else                   emit({ phase: "git", message: `saworepo1: ❌ Commit failed: ${r1.error}`, warning: true });
 
     emit({ phase: "git", message: "Committing changes to saworepo2..." });
     const r2 = commitAndPushRepo(saworepo2Dir, timestamp, stats, GITHUB_PAT);
     if (r2.nothing)       emit({ phase: "git", message: "saworepo2: No changes to commit" });
-    else if (r2.committed) emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed });
+    else if (r2.committed) { emit({ phase: "git", message: r2.pushed ? "saworepo2: Pushed to GitHub ✓" : `saworepo2: ❌ Push failed: ${r2.pushError}`, warning: !r2.pushed }); emitMirrors(emit, "saworepo2", r2); }
     else                   emit({ phase: "git", message: `saworepo2: ❌ Commit failed: ${r2.error}`, warning: true });
 
     try { execSync(`rm -rf "${workDir}"`, { stdio: "pipe" }); } catch {}
@@ -711,6 +747,7 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
       emit({ phase: "git", message: `saworepo1: ${gitResult1.commitMsg}` });
       if (gitResult1.pushed) {
         emit({ phase: "git", message: "saworepo1: Pushed to GitHub ✓" });
+        emitMirrors(emit, "saworepo1", gitResult1);
       } else {
         emit({ phase: "git", message: `saworepo1: ❌ Push failed: ${gitResult1.pushError}`, warning: true });
       }
@@ -728,6 +765,7 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
       emit({ phase: "git", message: `saworepo2: ${gitResult2.commitMsg}` });
       if (gitResult2.pushed) {
         emit({ phase: "git", message: "saworepo2: Pushed to GitHub ✓" });
+        emitMirrors(emit, "saworepo2", gitResult2);
       } else {
         emit({ phase: "git", message: `saworepo2: ❌ Push failed: ${gitResult2.pushError}`, warning: true });
       }
