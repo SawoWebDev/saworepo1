@@ -50,6 +50,7 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/dragonfire-hero.webp";
+import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 
@@ -334,6 +335,7 @@ const Dragonfire = () => {
       <PromoBanner
         title="Experience Ultimate Relaxation"
         subtitle="Find your source of serenity from over 100 heater models"
+        image={bannerImg}
       />
     </div>
   );

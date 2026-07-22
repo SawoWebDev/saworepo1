@@ -50,6 +50,7 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/tower-hero.webp";
+import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 
@@ -323,7 +324,7 @@ const Tower = () => {
               <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
               <p className="wm-why-desc">User-Friendly Controls — Easily adjust temperature and time settings for your perfect sauna experience.</p>
               <div style={{ marginTop: "20px" }}>
-                <a href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
+                <a href="https://www.sawo.com/wp-content/uploads/2026/07/Tower-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
               </div>
             </div>
             <div className="wm-why-right"><CirclesInfo /></div>
@@ -334,6 +335,7 @@ const Tower = () => {
       <PromoBanner
         title="Experience Ultimate Relaxation"
         subtitle="Find your source of serenity from over 100 heater models"
+        image={bannerImg}
       />
     </div>
   );
