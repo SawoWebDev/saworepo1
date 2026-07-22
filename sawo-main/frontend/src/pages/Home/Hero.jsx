@@ -157,6 +157,29 @@ const Hero = () => {
         />
       </div>
 
+      {/* Wave divider into the next section — decorative, so hidden from
+          screen readers and never intercepts clicks on the hero content. */}
+      <svg
+        className="hero-waves absolute bottom-0 left-0 w-full"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 24 150 28"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <path
+            id="hero-gentle-wave"
+            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+          />
+        </defs>
+        <g className="hero-waves-parallax">
+          <use xlinkHref="#hero-gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.5)" />
+          <use xlinkHref="#hero-gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.3)" />
+          <use xlinkHref="#hero-gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+      </svg>
+
       <style>{`
         .sr-only {
           position: absolute;
@@ -172,6 +195,28 @@ const Hero = () => {
         .typewriter span {
           opacity: 0;
           transition: opacity 0.2s ease-in-out;
+        }
+        .hero-waves {
+          height: 5vh;
+          min-height: 60px;
+          max-height: 110px;
+        }
+        .hero-waves-parallax > use {
+          animation: hero-wave-move 25s cubic-bezier(.55,.5,.45,.5) infinite;
+          transform: translate3d(0, 0, 0);
+        }
+        .hero-waves-parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 9s; }
+        .hero-waves-parallax > use:nth-child(2) { animation-delay: -4s; animation-duration: 14s; }
+        .hero-waves-parallax > use:nth-child(3) { animation-delay: -5s; animation-duration: 22s; }
+        @keyframes hero-wave-move {
+          0%   { transform: translate3d(-90px, 0, 0); }
+          100% { transform: translate3d(85px, 0, 0); }
+        }
+        @media (max-width: 768px) {
+          .hero-waves { height: 32px; min-height: 32px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-waves-parallax > use { animation: none; }
         }
       `}</style>
     </section>
