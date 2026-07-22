@@ -23,6 +23,7 @@ const SaunaHeaters = () => {
       <section
         className="sh-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
         style={{
+          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
           backgroundImage: `url(${img_NRM_NB_BL1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

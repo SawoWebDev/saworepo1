@@ -19515,5 +19515,293 @@
         "image": "images/SET-DRAGON-BLACK.jpg"
       }
     ]
+  },
+  {
+    "id": "7bac4219-f7b5-4523-9a69-6a4a9a7864ca",
+    "name": "Infrared Panels",
+    "slug": "infrared-panels-ir-panel-2",
+    "short_description": "Infrared radiant heating panels that deliver deep, gentle warmth for a comfortable infrared sauna experience.",
+    "description": null,
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2025/05/IR-PANEL-2-600x542-1-300x271.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "Infrared"
+    ],
+    "tags": [
+      "IR-PANEL-2"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": "SAWO",
+    "type": "Infrared Accessories",
+    "spec_table": {
+      "rows": [
+        [
+          "Product Code",
+          "IR-PANEL-2"
+        ]
+      ],
+      "headers": [
+        "Specification",
+        "Detail"
+      ]
+    },
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": "3884cdf9-51c4-47de-9c2e-f0f2381117a0",
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-22T07:12:43.702379+00:00",
+    "updated_at": "2026-07-22T07:12:43.702379+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "b3f6e11d-1caf-4b7c-8492-3cc8c79054f8",
+    "name": "Infrared Backrest",
+    "slug": "infrared-backrest-505-ir-a-d",
+    "short_description": "Ergonomic infrared backrest that emits soothing radiant heat directly to the back for targeted muscle relief.",
+    "description": null,
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2025/04/505-IR-A-D-300x300.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "Infrared"
+    ],
+    "tags": [
+      "505-IR-A-D"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": "SAWO",
+    "type": "Infrared Accessories",
+    "spec_table": {
+      "rows": [
+        [
+          "Product Code",
+          "505-IR-A-D"
+        ]
+      ],
+      "headers": [
+        "Specification",
+        "Detail"
+      ]
+    },
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 1,
+    "created_by": "3884cdf9-51c4-47de-9c2e-f0f2381117a0",
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-22T07:12:43.702379+00:00",
+    "updated_at": "2026-07-22T07:12:43.702379+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "8d4de984-382a-484c-88c7-738a2a274c89",
+    "name": "Interface Holder",
+    "slug": "interface-holder-saunova-2",
+    "short_description": "Wall-mounted holder for the Saunova 2.0 user interface, keeping controls neatly within reach.",
+    "description": null,
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2024/10/SAUNOVA-2-1000X1000PX-300x300.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "Infrared"
+    ],
+    "tags": [
+      "SAUNOVA-2"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": "SAWO",
+    "type": "Infrared Accessories",
+    "spec_table": {
+      "rows": [
+        [
+          "Product Code",
+          "SAUNOVA-2"
+        ]
+      ],
+      "headers": [
+        "Specification",
+        "Detail"
+      ]
+    },
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 2,
+    "created_by": "3884cdf9-51c4-47de-9c2e-f0f2381117a0",
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-22T07:12:43.702379+00:00",
+    "updated_at": "2026-07-22T07:12:43.702379+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "7298bfd7-c3df-403c-ae13-fd79133bd1a0",
+    "name": "Infrared 2.0 User Interface",
+    "slug": "infrared-2-0-user-interface-ir-ui-v2",
+    "short_description": "The Infrared 2.0 user interface offers intuitive touch control of temperature, time and lighting for your infrared sauna.",
+    "description": null,
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2025/05/IR-UI-V2_front-1024x1024-1.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "Infrared"
+    ],
+    "tags": [
+      "IR-UI-V2"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": "SAWO",
+    "type": "Infrared Controls",
+    "spec_table": {
+      "rows": [
+        [
+          "Product Code",
+          "IR-UI-V2"
+        ]
+      ],
+      "headers": [
+        "Specification",
+        "Detail"
+      ]
+    },
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 3,
+    "created_by": "3884cdf9-51c4-47de-9c2e-f0f2381117a0",
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-22T07:12:43.702379+00:00",
+    "updated_at": "2026-07-22T07:12:43.702379+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "5c2398a8-ecc5-4c24-8aaf-7032d2759e18",
+    "name": "Infrared 2.0 Power Controller",
+    "slug": "infrared-2-0-power-controller",
+    "short_description": "The Infrared 2.0 power controller manages the infrared heating panels with reliable, precise power delivery.",
+    "description": null,
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2024/10/Innova-Power-Controller_Perspective_Black2_Top-1-1024x1024-1-400x400-1.webp",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "Infrared"
+    ],
+    "tags": [
+      "INNOVA-POWER-CONTROLLER"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": "SAWO",
+    "type": "Infrared Controls",
+    "spec_table": {
+      "rows": [
+        [
+          "Product Code",
+          "INNOVA-POWER-CONTROLLER"
+        ]
+      ],
+      "headers": [
+        "Specification",
+        "Detail"
+      ]
+    },
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 4,
+    "created_by": "3884cdf9-51c4-47de-9c2e-f0f2381117a0",
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-22T07:12:43.702379+00:00",
+    "updated_at": "2026-07-22T07:12:43.702379+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
+  },
+  {
+    "id": "5dcd7d2c-a621-47e1-b9aa-1bf3242bb550",
+    "name": "Infrared 2.0 Built-In Control",
+    "slug": "infrared-2-0-built-in-control",
+    "short_description": "The Infrared 2.0 built-in control integrates directly into the sauna for seamless operation of your infrared session.",
+    "description": null,
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2023/11/Innova-Classic-2.0-Built-in-Control_Top_Black2-1-600x600-1.png",
+    "images": null,
+    "spec_images": null,
+    "categories": [
+      "Infrared"
+    ],
+    "tags": [
+      "INNOVA-CLASSIC-2.0"
+    ],
+    "auto_tag_columns": null,
+    "features": null,
+    "brand": "SAWO",
+    "type": "Infrared Controls",
+    "spec_table": {
+      "rows": [
+        [
+          "Product Code",
+          "INNOVA-CLASSIC-2.0"
+        ]
+      ],
+      "headers": [
+        "Specification",
+        "Detail"
+      ]
+    },
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 5,
+    "created_by": "3884cdf9-51c4-47de-9c2e-f0f2381117a0",
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-22T07:12:43.702379+00:00",
+    "updated_at": "2026-07-22T07:12:43.702379+00:00",
+    "files": [],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null
   }
 ]

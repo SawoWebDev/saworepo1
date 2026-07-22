@@ -377,7 +377,7 @@ const Support = () => {
       `}</style>
 
       {/* HERO */}
-      <section className="support-hero" style={{ backgroundImage: `url(${supportHeroImg})` }}>
+      <section className="support-hero" style={{ backgroundColor: "#241c17", backgroundImage: `url(${supportHeroImg})` }}>
         <div>
           <h1>SUPPORT CENTER</h1>
           <p>Everything you need to get the most out of your SAWO products</p>

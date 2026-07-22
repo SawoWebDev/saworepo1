@@ -267,7 +267,7 @@ export default function SaunaControls() {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         className="wm-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{ backgroundImage: `url(${heroImg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundColor: "#241c17", backgroundImage: `url(${heroImg})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="wm-hero-overlay" />
         <div className="wm-hero-content">

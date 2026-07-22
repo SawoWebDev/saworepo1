@@ -29,6 +29,7 @@ const SaunaAccessories = () => {
       <section
         className="sa-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
         style={{
+          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
           backgroundImage: `url(${img_Signature_BL_v2_1_scaled})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

@@ -32,6 +32,7 @@ const Contact = () => {
         /* HERO SECTION */
         .ct-hero {
           min-h-60vh flex flex-col justify-center items-center text-center px-6 relative;
+          background-color: #241c17; /* warm-dark placeholder so it doesn't flash gray before the hero image decodes */
           background-image: url('${heroBg}');
           background-size: cover;
           background-position: center;

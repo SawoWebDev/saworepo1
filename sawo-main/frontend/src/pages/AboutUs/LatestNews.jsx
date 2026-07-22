@@ -33,6 +33,7 @@ const LatestNews = () => {
         /* ── HERO ── */
         .ln-hero {
           min-height: 95vh;
+          background-color: #241c17; /* warm-dark placeholder so it doesn't flash gray before the hero <img> loads */
           display: flex;
           flex-direction: column;
           justify-content: center;

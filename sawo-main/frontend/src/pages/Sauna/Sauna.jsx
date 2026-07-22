@@ -131,6 +131,7 @@ const Sauna = () => {
       <section
         className="sauna-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
         style={{
+          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
           backgroundImage: `url(${img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

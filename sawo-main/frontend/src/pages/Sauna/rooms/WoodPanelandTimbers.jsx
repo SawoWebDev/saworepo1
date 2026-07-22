@@ -109,6 +109,7 @@ const WoodPanelandTimbers = () => {
       <section
         className="wpt-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
         style={{
+          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
           backgroundImage: `url(${heroBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

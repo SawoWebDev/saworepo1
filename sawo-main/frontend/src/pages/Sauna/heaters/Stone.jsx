@@ -260,7 +260,7 @@ const Stone = () => {
       `}</style>
 
       {/* HERO */}
-      <section className="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6">
+      <section className="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
           alt="Sauna Stone Series"

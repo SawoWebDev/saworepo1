@@ -2294,6 +2294,7 @@ export default function Products({ currentUser }) {
   const [syncCheckReport, setSyncCheckReport] = useState(null);
   const [syncCheckEvents, setSyncCheckEvents] = useState([]);
   const [syncCheckApplying, setSyncCheckApplying] = useState(false);
+  const [publishing, setPublishing] = useState(false);
 
   const [variants, setVariants] = useState([]);
   const [loadedVariants, setLoadedVariants] = useState([]);
@@ -2618,6 +2619,30 @@ export default function Products({ currentUser }) {
     }
   };
 
+  // One-click publish: runs the same Supabase→local sync as the "Sync" button,
+  // but auto-applies without the review modal, so newly created/edited products
+  // land in the local snapshot (and thus get their own page) in a single click.
+  const handlePublishChanges = async () => {
+    if (publishing) return;
+    setPublishing(true);
+    add("Syncing changes to local data…", "info");
+    try {
+      const report = await checkSupabaseSync(() => {});
+      if (report.totalChanges === 0) {
+        add("✓ Already up to date — nothing to publish.", "success");
+        return;
+      }
+      await applyLocalChanges(report, () => {});
+      const n = report.totalChanges;
+      add(`✓ Published ${n} change${n === 1 ? "" : "s"} to local data.`, "success");
+      setTimeout(() => fetchProducts(), 500);
+    } catch (err) {
+      add(`Publish failed: ${err.message}`, "error");
+    } finally {
+      setPublishing(false);
+    }
+  };
+
   // ── Save ──────────────────────────────────────────────────────────────────
   const handleSave = async e => {
     e.preventDefault();
@@ -2761,7 +2786,7 @@ export default function Products({ currentUser }) {
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
-      add("💡 Click 'Sync' button to update local data so changes appear on the frontend.", "info");
+      add("💡 Click 'Publish changes' to sync this to the local data so it appears (with its own page) on the frontend.", "info");
       actualClose();
       fetchProducts();
     } catch (err) { add(err.message, "error"); }
@@ -2991,6 +3016,34 @@ export default function Products({ currentUser }) {
               >
                 <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
                 {syncCheckLoading ? "Syncing..." : "Sync"}
+              </button>
+            )}
+            {dataSource === "local" && (
+              <button
+                type="button"
+                onClick={handlePublishChanges}
+                disabled={publishing || syncCheckLoading}
+                title="One-click publish: syncs all new and edited products from Supabase into the local data so they get their own page on the frontend. No review step."
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "8px 12px",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  border: "1px solid var(--primary, #af8564)",
+                  background: publishing ? "var(--surface-2)" : "var(--primary, #af8564)",
+                  color: publishing ? "var(--text-3)" : "#fff",
+                  cursor: publishing ? "not-allowed" : "pointer",
+                  borderRadius: 4,
+                  transition: "all 0.2s ease",
+                  opacity: publishing ? 0.7 : 1,
+                }}
+                onMouseEnter={e => { if (!publishing) e.currentTarget.style.filter = "brightness(0.95)"; }}
+                onMouseLeave={e => { e.currentTarget.style.filter = "none"; }}
+              >
+                <i className={`fa-solid ${publishing ? "fa-circle-notch fa-spin" : "fa-cloud-arrow-up"}`} style={{ fontSize: "0.85em" }} />
+                {publishing ? "Publishing..." : "Publish changes"}
               </button>
             )}
             <p className="products-subtitle" style={{ margin: 0 }}>
