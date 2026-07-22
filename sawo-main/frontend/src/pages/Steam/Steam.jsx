@@ -15,6 +15,7 @@ import aromaPump from "../../assets/Steam/aroma-pump.webp";
 import demandButton from "../../assets/Steam/demand-button.webp";
 import venturiL from "../../assets/Steam/venturi-pipe-L-shape.webp";
 import venturiStraight from "../../assets/Steam/venturi-pipe-straight.webp";
+import HeroWave from "../../components/HeroWave";
 
 const generators = [
   {
@@ -102,6 +103,7 @@ const Steam = () => {
             </a>
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

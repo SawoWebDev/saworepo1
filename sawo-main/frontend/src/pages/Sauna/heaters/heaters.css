@@ -67,6 +67,7 @@
 }
 .wm-filter-btn:hover   { border-color: #AA8161; color: #AA8161; }
 .wm-filter-btn--active { background: #AA8161; border-color: #AA8161; color: #fff; }
+.wm-filter-btn--active:hover { color: #fff; }
 
 /* ---- Filter + Search Row (reusable layout) ---- */
 .wm-filter-search-row {
@@ -195,7 +196,7 @@
 .wm-banner::before {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.58) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.32) 100%);
   pointer-events: none;
 }
 .wm-banner-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }

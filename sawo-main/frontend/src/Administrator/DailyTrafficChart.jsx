@@ -1,10 +1,17 @@
-import React, { useRef, useState, useMemo, useCallback } from "react";
+import React, { useRef, useState, useMemo, useCallback, useLayoutEffect } from "react";
 
 // Hand-rolled SVG line/area chart (equity-curve style) — no charting library,
 // consistent with the rest of this admin-only dashboard. `data` is an array
 // of { date: "YYYY-MM-DD", views: number, visitors: number }, already sorted
 // ascending and zero-filled for every day in the selected range.
-const CHART_W = 600;
+//
+// The viewBox width tracks the container's actual rendered pixel width (via
+// ResizeObserver below) instead of a fixed constant. With `preserveAspectRatio
+// ="none"` a fixed viewBox stretched to a wider container scales x and y by
+// different factors, which turns the hover <circle> markers into visibly
+// squashed/stretched ellipses. Keeping 1 viewBox unit == 1 real pixel makes
+// that scale factor 1:1 on both axes, so circles/strokes stay true.
+const DEFAULT_CHART_W = 600;
 const CHART_H = 220;
 const PAD_X = 8;
 const PAD_TOP = 14;
@@ -16,14 +23,50 @@ function formatDayLabel(dateStr) {
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
+function formatMonthLabel(dateStr) {
+  const d = new Date(dateStr + "T00:00:00");
+  return d.toLocaleDateString(undefined, { month: "long" });
+}
+
 function formatFullDate(dateStr) {
   const d = new Date(dateStr + "T00:00:00");
   return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
 }
 
+// Catmull-Rom -> cubic Bezier, so the line reads as a gentle curve through
+// each day's point instead of a sharp zig-zag between them.
+function smoothPath(points) {
+  if (points.length < 2) return points.length === 1 ? `M${points[0].x},${points[0].y}` : "";
+  let d = `M${points[0].x},${points[0].y}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i - 1] || points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] || p2;
+    const c1x = p1.x + (p2.x - p0.x) / 6;
+    const c1y = p1.y + (p2.y - p0.y) / 6;
+    const c2x = p2.x - (p3.x - p1.x) / 6;
+    const c2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C${c1x},${c1y} ${c2x},${c2y} ${p2.x},${p2.y}`;
+  }
+  return d;
+}
+
 export default function DailyTrafficChart({ data }) {
   const containerRef = useRef(null);
   const [hoverIndex, setHoverIndex] = useState(null);
+  const [chartW, setChartW] = useState(DEFAULT_CHART_W);
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect?.width;
+      if (w > 0) setChartW(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const n = data?.length || 0;
   const maxValue = useMemo(
@@ -32,8 +75,8 @@ export default function DailyTrafficChart({ data }) {
   );
 
   const x = useCallback(
-    (i) => (n <= 1 ? CHART_W / 2 : PAD_X + (i * (CHART_W - PAD_X * 2)) / (n - 1)),
-    [n]
+    (i) => (n <= 1 ? chartW / 2 : PAD_X + (i * (chartW - PAD_X * 2)) / (n - 1)),
+    [n, chartW]
   );
   const y = useCallback(
     (value) => PAD_TOP + (1 - value / maxValue) * PLOT_H,
@@ -42,14 +85,15 @@ export default function DailyTrafficChart({ data }) {
 
   const { viewsPath, viewsAreaPath, visitorsPath } = useMemo(() => {
     if (!data || data.length === 0) return {};
-    const viewsPts = data.map((d, i) => `${x(i)},${y(d.views)}`);
-    const visitorsPts = data.map((d, i) => `${x(i)},${y(d.visitors)}`);
+    const viewsPts = data.map((d, i) => ({ x: x(i), y: y(d.views) }));
+    const visitorsPts = data.map((d, i) => ({ x: x(i), y: y(d.visitors) }));
     const baseline = PAD_TOP + PLOT_H;
+    const viewsCurve = smoothPath(viewsPts);
 
     return {
-      viewsPath: `M${viewsPts.join(" L")}`,
-      viewsAreaPath: `M${x(0)},${baseline} L${viewsPts.join(" L")} L${x(n - 1)},${baseline} Z`,
-      visitorsPath: `M${visitorsPts.join(" L")}`,
+      viewsPath: viewsCurve,
+      viewsAreaPath: `${viewsCurve} L${x(n - 1)},${baseline} L${x(0)},${baseline} Z`,
+      visitorsPath: smoothPath(visitorsPts),
     };
   }, [data, x, y, n]);
 
@@ -64,11 +108,29 @@ export default function DailyTrafficChart({ data }) {
     [n]
   );
 
+  // Long ranges (90 days) don't have room for a label per day — "Jan 3",
+  // "Jan 10"... just truncates. Instead, show each month's full name once,
+  // positioned at that month's first day, like an axis section header.
+  const isLongRange = n > 31;
+  const monthLabels = useMemo(() => {
+    if (!isLongRange || !data) return [];
+    const out = [];
+    let lastMonth = null;
+    data.forEach((day, i) => {
+      const month = day.date.slice(0, 7); // "YYYY-MM"
+      if (month !== lastMonth) {
+        out.push({ i, label: formatMonthLabel(day.date) });
+        lastMonth = month;
+      }
+    });
+    return out;
+  }, [data, isLongRange]);
+
   if (!data || data.length === 0) {
     return <p className="text-[var(--text-3)] text-sm">No data available</p>;
   }
 
-  const labelEvery = n <= 10 ? 1 : n <= 31 ? 3 : 7;
+  const labelEvery = n <= 10 ? 1 : 3;
   const hovered = hoverIndex != null ? data[hoverIndex] : null;
   const tooltipLeftPct = hoverIndex != null ? Math.min(Math.max((hoverIndex / (n - 1)) * 100, 10), 90) : 0;
 
@@ -94,7 +156,7 @@ export default function DailyTrafficChart({ data }) {
         onTouchEnd={() => setHoverIndex(null)}
       >
         <svg
-          viewBox={`0 0 ${CHART_W} ${CHART_H}`}
+          viewBox={`0 0 ${chartW} ${CHART_H}`}
           preserveAspectRatio="none"
           style={{ width: "100%", height: CHART_H, display: "block" }}
         >
@@ -110,7 +172,7 @@ export default function DailyTrafficChart({ data }) {
             <line
               key={frac}
               x1={PAD_X}
-              x2={CHART_W - PAD_X}
+              x2={chartW - PAD_X}
               y1={PAD_TOP + PLOT_H * (1 - frac)}
               y2={PAD_TOP + PLOT_H * (1 - frac)}
               stroke="var(--border)"
@@ -156,16 +218,28 @@ export default function DailyTrafficChart({ data }) {
         )}
       </div>
 
-      <div className="flex mt-1">
-        {data.map((day, i) => (
-          <div
-            key={day.date}
-            style={{ width: `${100 / n}%` }}
-            className="text-center text-[10px] text-[var(--text-3)] truncate"
-          >
-            {i % labelEvery === 0 ? formatDayLabel(day.date) : ""}
-          </div>
-        ))}
+      <div className="relative mt-1" style={{ height: 14 }}>
+        {isLongRange
+          ? monthLabels.map(({ i, label }) => (
+              <span
+                key={i}
+                className="absolute text-[10px] text-[var(--text-3)] whitespace-nowrap"
+                style={{ left: x(i), top: 0 }}
+              >
+                {label}
+              </span>
+            ))
+          : data.map((day, i) =>
+              i % labelEvery === 0 ? (
+                <span
+                  key={day.date}
+                  className="absolute text-[10px] text-[var(--text-3)] whitespace-nowrap"
+                  style={{ left: x(i), top: 0, transform: "translateX(-50%)" }}
+                >
+                  {formatDayLabel(day.date)}
+                </span>
+              ) : null
+            )}
       </div>
     </div>
   );

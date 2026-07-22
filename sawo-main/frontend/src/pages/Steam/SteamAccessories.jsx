@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import heroBg from "../../assets/Steam/hero.webp";
+import HeroWave from "../../components/HeroWave";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -88,6 +89,7 @@ const SteamAccessories = () => {
           Complete your steam setup with premium accessories
         </p>
       </div>
+    <HeroWave />
     </section>
 
     {/* ===================== */}

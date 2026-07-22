@@ -13,8 +13,11 @@ const analyticsCacheKey = (dateRange) => `admin:analytics:${dateRange}`;
 // filter param that might silently not apply.
 const POSTHOG_PROJECT_URL = process.env.REACT_APP_POSTHOG_PROJECT_URL;
 
+const TOP_LIST_COLLAPSED_COUNT = 5;
+
 const Analytics = () => {
   const [dateRange, setDateRange] = useState("7days"); // 7days, 30days, 90days
+  const [expandedList, setExpandedList] = useState(null); // null | "pages" | "countries"
   const [stats, setStats] = useState(() => getCache(analyticsCacheKey("7days")) || {
     totalPageViews: 0,
     uniqueVisitors: 0,
@@ -191,11 +194,57 @@ const Analytics = () => {
     fetchAnalytics();
   }, [fetchAnalytics]);
 
+  useEffect(() => { setExpandedList(null); }, [dateRange]);
+
   const formatTime = (seconds) => {
     if (seconds < 60) return `${seconds}s`;
     const minutes = Math.floor(seconds / 60);
     return `${minutes}m ${seconds % 60}s`;
   };
+
+  const renderPageRow = (page, idx) => (
+    <div key={idx} className="flex items-center justify-between pb-3 border-b border-[var(--border-light)] last:border-b-0">
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-[var(--text)] truncate">{page.path}</p>
+        <p className="text-xs text-[var(--text-3)]">Avg. time: {formatTime(page.avgTime)}</p>
+      </div>
+      {POSTHOG_PROJECT_URL && (
+        <a
+          href={`${POSTHOG_PROJECT_URL}/heatmaps`}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`Opens PostHog Heatmaps. Select "${page.path}" from the page picker there`}
+          className="ml-3 text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
+        >
+          <i className="fa-solid fa-fire"></i>
+        </a>
+      )}
+      <div className="ml-4 text-right">
+        <p className="text-lg font-bold text-[var(--brand)]">{page.views}</p>
+        <p className="text-xs text-[var(--text-3)]">views</p>
+      </div>
+    </div>
+  );
+
+  const renderCountryRow = (item, idx) => (
+    <div key={idx} className="flex items-center justify-between pb-3 border-b border-[var(--border-light)] last:border-b-0">
+      <div className="flex-1">
+        <p className="text-sm font-medium text-[var(--text)]">{item.country}</p>
+      </div>
+      <div className="ml-4">
+        <div className="w-32 bg-[var(--surface-2)] rounded-full h-2">
+          <div
+            className="bg-[var(--brand)] h-2 rounded-full"
+            style={{ width: `${(item.visitors / stats.topCountries[0].visitors) * 100}%` }}
+          ></div>
+        </div>
+      </div>
+      <div className="ml-4 text-right min-w-[50px]">
+        <p className="text-lg font-bold text-[var(--brand)]">{item.visitors}</p>
+        <p className="text-xs text-[var(--text-3)]">visitors</p>
+      </div>
+    </div>
+  );
 
   if (loading) {
     return (
@@ -210,8 +259,11 @@ const Analytics = () => {
 
   return (
     <div className="w-full">
-      {/* Date Range Filter — pill tabs, same component as Taxonomy's tabs */}
-      <div className="tax-tabs mb-6">
+      {/* Date Range Filter — pill tabs, same component as Taxonomy's tabs.
+          .tax-tabs hardcodes margin-bottom:0 (Taxonomy sits it right above
+          its own toolbar), which silently cancelled the mb-6 here — hence
+          the inline override. */}
+      <div className="tax-tabs mb-6" style={{ marginBottom: 24 }}>
         {["7days", "30days", "90days"].map((range) => (
           <button
             key={range}
@@ -277,31 +329,21 @@ const Analytics = () => {
             Top Pages
           </h3>
           {stats.topPages.length > 0 ? (
-            <div className="space-y-3">
-              {stats.topPages.map((page, idx) => (
-                <div key={idx} className="flex items-center justify-between pb-3 border-b border-[var(--border-light)] last:border-b-0">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-[var(--text)] truncate">{page.path}</p>
-                    <p className="text-xs text-[var(--text-3)]">Avg. time: {formatTime(page.avgTime)}</p>
-                  </div>
-                  {POSTHOG_PROJECT_URL && (
-                    <a
-                      href={`${POSTHOG_PROJECT_URL}/heatmaps`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={`Opens PostHog Heatmaps. Select "${page.path}" from the page picker there`}
-                      className="ml-3 text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
-                    >
-                      <i className="fa-solid fa-fire"></i>
-                    </a>
-                  )}
-                  <div className="ml-4 text-right">
-                    <p className="text-lg font-bold text-[var(--brand)]">{page.views}</p>
-                    <p className="text-xs text-[var(--text-3)]">views</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="space-y-3">
+                {stats.topPages.slice(0, TOP_LIST_COLLAPSED_COUNT).map(renderPageRow)}
+              </div>
+              {stats.topPages.length > TOP_LIST_COLLAPSED_COUNT && (
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm w-full justify-center mt-3"
+                  onClick={() => setExpandedList("pages")}
+                >
+                  <i className="fa-solid fa-up-right-and-down-left-from-center" />
+                  Show all {stats.topPages.length}
+                </button>
+              )}
+            </>
           ) : (
             <p className="text-[var(--text-3)] text-sm">No data available</p>
           )}
@@ -314,32 +356,41 @@ const Analytics = () => {
             Top Countries
           </h3>
           {stats.topCountries.length > 0 ? (
-            <div className="space-y-3">
-              {stats.topCountries.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between pb-3 border-b border-[var(--border-light)] last:border-b-0">
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-[var(--text)]">{item.country}</p>
-                  </div>
-                  <div className="ml-4">
-                    <div className="w-32 bg-[var(--surface-2)] rounded-full h-2">
-                      <div
-                        className="bg-[var(--brand)] h-2 rounded-full"
-                        style={{ width: `${(item.visitors / stats.topCountries[0].visitors) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                  <div className="ml-4 text-right min-w-[50px]">
-                    <p className="text-lg font-bold text-[var(--brand)]">{item.visitors}</p>
-                    <p className="text-xs text-[var(--text-3)]">visitors</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="space-y-3">
+                {stats.topCountries.slice(0, TOP_LIST_COLLAPSED_COUNT).map(renderCountryRow)}
+              </div>
+              {stats.topCountries.length > TOP_LIST_COLLAPSED_COUNT && (
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm w-full justify-center mt-3"
+                  onClick={() => setExpandedList("countries")}
+                >
+                  <i className="fa-solid fa-up-right-and-down-left-from-center" />
+                  Show all {stats.topCountries.length}
+                </button>
+              )}
+            </>
           ) : (
             <p className="text-[var(--text-3)] text-sm">No data available</p>
           )}
         </div>
       </div>
+
+      {/* Show-all modals — Top Pages / Top Countries card lists stay capped
+          at TOP_LIST_COLLAPSED_COUNT rows so neither card stretches the
+          other via the grid row's equal-height stretch; the full top-10
+          list opens here instead of pushing the card taller. */}
+      {expandedList === "pages" && (
+        <Modal title="Top Pages" icon="fa-chart-bar" onClose={() => setExpandedList(null)}>
+          <div className="space-y-3">{stats.topPages.map(renderPageRow)}</div>
+        </Modal>
+      )}
+      {expandedList === "countries" && (
+        <Modal title="Top Countries" icon="fa-globe" onClose={() => setExpandedList(null)}>
+          <div className="space-y-3">{stats.topCountries.map(renderCountryRow)}</div>
+        </Modal>
+      )}
 
       {/* Device and Browser Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -443,6 +494,27 @@ const Analytics = () => {
     </div>
   );
 };
+
+function Modal({ title, icon, onClose, children }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 480 }}>
+        <div className="modal-header">
+          <h2 className="modal-title">
+            {icon && <i className={`fas ${icon} text-[var(--brand)]`} style={{ marginRight: 8 }}></i>}
+            {title}
+          </h2>
+          <button className="modal-close-btn" onClick={onClose} aria-label="Close">
+            <i className="fa-solid fa-xmark" />
+          </button>
+        </div>
+        <div className="modal-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function MetricCard({ icon, title, value, subtitle }) {
   return (

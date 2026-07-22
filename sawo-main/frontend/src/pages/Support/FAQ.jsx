@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import heroBg from "../../assets/Support/FAQ/hero.webp";
 import faqImage from "../../assets/Support/FAQ/faq1.webp";
+import HeroWave from "../../components/HeroWave";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -391,6 +392,7 @@ export default function FAQ() {
           <h1 className="faq-hero-title">FAQ</h1>
           <p className="faq-hero-subtitle">Frequently Asked Questions</p>
         </div>
+      <HeroWave />
       </section>
 
       {/* ── MAIN BODY ──────────────────────────────────────────── */}

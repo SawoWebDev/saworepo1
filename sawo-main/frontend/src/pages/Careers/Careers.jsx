@@ -8,6 +8,7 @@ import img1 from "../../assets/Careers/img1.webp";
 import img2 from "../../assets/Careers/img2.webp";
 import img3 from "../../assets/Careers/img3.webp";
 import img4 from "../../assets/Careers/img4.webp";
+import HeroWave from "../../components/HeroWave";
 
 const Careers = () => {
   useEffect(() => {
@@ -62,6 +63,7 @@ const Careers = () => {
             }
           }
         `}</style>
+      <HeroWave />
       </section>
 
       {/* Section 1: Join SAWO - Two Column Layout */}

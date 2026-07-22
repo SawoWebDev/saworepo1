@@ -108,6 +108,7 @@ import heroImg from "../../../assets/Sauna/Sauna Heaters/wall-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
+import HeroWave from "../../../components/HeroWave";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -367,7 +368,7 @@ export default function WallMounted() {
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
+      <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
           alt="Wall-Mounted Sauna Heaters"
@@ -384,6 +385,7 @@ export default function WallMounted() {
             <ButtonClear text="EXPLORE HEATERS" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/sauna-products/" />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ── INTRO ────────────────────────────────────────────────────────── */}

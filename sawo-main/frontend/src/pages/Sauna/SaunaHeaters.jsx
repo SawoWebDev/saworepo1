@@ -12,6 +12,7 @@ import img_WALL_MOUNTED_SERIES_v2_1 from "../../assets/WALL-MOUNTED-SERIES-v2-1.
 import img_COMBI_SERIES_600x360_1 from "../../assets/COMBI-SERIES-600x360-1.webp";
 import img_DRAGON_SERIES_1_600x360_1 from "../../assets/DRAGON-SERIES-1-600x360-1.webp";
 import img_STONE_SERIES_3_600x320_new from "../../assets/STONE-SERIES-3-600x320-new-.webp";
+import HeroWave from "../../components/HeroWave";
 
 const SaunaHeaters = () => {
   return (
@@ -39,6 +40,7 @@ const SaunaHeaters = () => {
             />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

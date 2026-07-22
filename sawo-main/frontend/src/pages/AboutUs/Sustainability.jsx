@@ -10,6 +10,7 @@ import img_SAWO_Cumulus_Wall_NS from "../../assets/SAWO_Cumulus_Wall_NS.webp";
 import img_health_well_being from "../../assets/health-well-being.webp";
 import img_Wood_Pattern_Brown_03 from "../../assets/Wood-Pattern-Brown-03.webp";
 import img_waste_hierarchy_sustainability from "../../assets/waste-hierarchy-sustainability.webp";
+import HeroWave from "../../components/HeroWave";
 
 const Sustainability = () => {
   useEffect(() => {
@@ -185,6 +186,7 @@ const Sustainability = () => {
             }
           }
         `}</style>
+      <HeroWave />
       </section>
 
       {/* Section 1: Commitment Hero */}

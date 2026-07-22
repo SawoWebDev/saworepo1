@@ -10,6 +10,7 @@ import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
 import PromoBanner from "../../components/PromoBanner";
 import "./heaters/heaters.css"; // reuse existing heaters CSS
+import HeroWave from "../../components/HeroWave";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -277,6 +278,7 @@ export default function SaunaControls() {
             <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ── INTRO ────────────────────────────────────────────────────────── */}

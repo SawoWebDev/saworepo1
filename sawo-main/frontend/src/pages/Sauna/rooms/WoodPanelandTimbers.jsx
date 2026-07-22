@@ -9,6 +9,7 @@ import benchCedar from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/
 import benchAspen from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-aspen-wood.webp";
 import benchSpruce from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-spruce-wood.webp";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
+import HeroWave from "../../../components/HeroWave";
 
 const panelData = [
   {
@@ -129,6 +130,7 @@ const WoodPanelandTimbers = () => {
             />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

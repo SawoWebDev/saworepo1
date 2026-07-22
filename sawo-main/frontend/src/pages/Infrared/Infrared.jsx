@@ -10,6 +10,7 @@ import interfaceHolder from "../../assets/Infrared/interface-holder.webp";
 import irUiV2 from "../../assets/Infrared/ir-ui-v2.webp";
 import irPowerController from "../../assets/Infrared/ir-power-controller.webp";
 import irBuiltinControl from "../../assets/Infrared/ir-builtin-control.webp";
+import HeroWave from "../../components/HeroWave";
 
 const accessories = [
   { img: irPanels, title: "Infrared Panels", slug: "infrared-panels-ir-panel-2" },
@@ -119,6 +120,7 @@ const Infrared = () => {
             </a>
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

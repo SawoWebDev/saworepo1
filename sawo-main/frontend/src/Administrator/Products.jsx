@@ -3091,14 +3091,14 @@ export default function Products({ currentUser }) {
           <option value="desc">Newest first</option>
           <option value="asc">Oldest first</option>
         </select>
-        <div className="view-toggle">
+        <div className="tax-tabs">
           {[
             { key: "all", label: "All" },
             { key: "accessories", label: "Accessories" },
             { key: "heaters", label: "Sauna Heaters" },
           ].map(({ key, label }) => (
             <button key={key} type="button" onClick={() => setQuickFilter(key)}
-              className={`view-toggle-btn${quickFilter === key ? " active" : ""}`}>
+              className={`tax-tab-btn${quickFilter === key ? " active" : ""}`}>
               {label}
             </button>
           ))}

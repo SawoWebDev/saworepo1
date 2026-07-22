@@ -23,6 +23,7 @@ import img_sand_timer_copy_new from "../../assets/sand-timer-copy-new.webp";
 import img_917_D_Display_new from "../../assets/917-D_Display_new-.webp";
 import img_506_2_D from "../../assets/506-2-D.webp";
 import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp";
+import HeroWave from "../../components/HeroWave";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
@@ -183,6 +184,7 @@ const Sauna = () => {
             />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

@@ -8,6 +8,7 @@ import "../heaters/heaters.css";
 import menuPaths from "../../../menuPaths";
 import PromoBanner from "../../../components/PromoBanner";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
+import HeroWave from "../../../components/HeroWave";
 
 const DISPLAY_CATEGORIES = ["Ventilation & Miscellaneous", "Ventilations", "Add-Ons", "Cloth Hangers"];
 const DISPLAY_TAGS       = ["Ventilation & Miscellaneous", "Cloth Hangers"];
@@ -120,7 +121,7 @@ export default function VentilationsAddOns() {
         .wm-search-count { text-align: center; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: #a67853; margin-bottom: 16px; }
       `}</style>
 
-      <section className="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
+      <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img src={heroImg} alt="Sauna Ventilation and Add-Ons" className="absolute inset-0 w-full h-full object-cover object-center -z-10" loading="eager" fetchPriority="high" decoding="sync" />
         <div className="absolute inset-0 bg-black/50 -z-10" />
         <div className="relative z-10">
@@ -130,6 +131,7 @@ export default function VentilationsAddOns() {
             <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       <section className="wm-section">

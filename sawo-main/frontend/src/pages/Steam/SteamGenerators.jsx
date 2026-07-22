@@ -6,6 +6,7 @@ import stnS from "../../assets/Steam/Steam Generators/STN-S.webp";
 import stnW from "../../assets/Steam/Steam Generators/STN-W.webp";
 import stn from "../../assets/Steam/Steam Generators/STN.webp";
 import ste from "../../assets/Steam/Steam Generators/STE.webp";
+import HeroWave from "../../components/HeroWave";
 
 const generators = [
   {
@@ -54,6 +55,7 @@ const SteamGenerators = () => {
         <div className="sg-hero-content">
           <h1 className="sg-hero-title">STEAM GENERATORS</h1>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

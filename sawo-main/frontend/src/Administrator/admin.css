@@ -70,8 +70,8 @@
   --border:       #4a3c2e;
   --border-light: #3c3226;
   --text:         rgba(255,255,255,0.96);
-  --text-2:       rgba(255,255,255,0.74);
-  --text-3:       rgba(255,255,255,0.54);
+  --text-2:       rgba(255,255,255,0.92);
+  --text-3:       rgba(255,255,255,0.68);
   --danger-bg:    rgba(192,57,43,0.2);
   --success-bg:   rgba(46,125,82,0.2);
   --warning-bg:   rgba(184,134,11,0.2);
@@ -1517,6 +1517,21 @@ body {
   display: none !important;
   flex-wrap: wrap;
   gap: 3px;
+}
+
+/* Dark mode: these three are large (140-220px tall) preview/upload boxes —
+   var(--surface-2) alone reads as a near-black void behind a product photo
+   at that size, so they get a distinctly lighter, still-warm fill instead. */
+[data-theme="dark"] .img-upload-zone,
+[data-theme="dark"] .thumb-upload-zone,
+[data-theme="dark"] .thumb-preview {
+  background: #574632;
+}
+[data-theme="dark"] .img-upload-zone:hover,
+[data-theme="dark"] .img-upload-zone.dragging,
+[data-theme="dark"] .thumb-upload-zone:hover,
+[data-theme="dark"] .thumb-upload-zone.dragging {
+  background: var(--brand-muted);
 }
 
 /* ── Image uploader / drag zone ──────────────────────────────────────── */

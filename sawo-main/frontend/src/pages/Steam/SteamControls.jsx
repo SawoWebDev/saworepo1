@@ -4,6 +4,7 @@ import React from "react";
 import stpV2 from "../../assets/Steam/STP-INFACE-V2-300x330.webp";
 import stpSST from "../../assets/Steam/STP-INFACE-SST-310x179.webp";
 import steControl from "../../assets/Steam/STE-INFACE-V2-150x150.webp";
+import HeroWave from "../../components/HeroWave";
 
 // Served from /public (not webpack-bundled) so its URL is stable at build time —
 // public/index.html preloads this exact path for this route, so by the time
@@ -53,6 +54,7 @@ const SteamControls = () => (
           Precision and ease, take full control of your steam experience
         </p>
       </div>
+    <HeroWave />
     </section>
 
     {/* ===================== */}

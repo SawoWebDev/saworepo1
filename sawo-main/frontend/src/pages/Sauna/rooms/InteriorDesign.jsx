@@ -5,6 +5,7 @@ import heroBg from "../../../assets/Sauna/Sauna Rooms/Interior Designs/hero.webp
 import classicBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/classic-bench.webp";
 import waveBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/wave-bench.webp";
 import pianoBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/piano-bench.webp";
+import HeroWave from "../../../components/HeroWave";
 
 const InteriorDesign = () => {
   const designs = [
@@ -50,6 +51,7 @@ const InteriorDesign = () => {
             Designed for both comfort and elegance
           </p>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}

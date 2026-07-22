@@ -53,6 +53,7 @@ import heroImg from "../../../assets/Sauna/Sauna Heaters/tower-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
+import HeroWave from "../../../components/HeroWave";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -220,7 +221,7 @@ const Tower = () => {
       `}</style>
 
       {/* HERO */}
-      <section className="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
+      <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
           alt="Tower Sauna Heaters"
@@ -237,6 +238,7 @@ const Tower = () => {
             <ButtonClear text="EXPLORE HEATERS" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/sauna-products/" />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* INTRODUCING */}

@@ -18,6 +18,7 @@ import img_BoxType2_copy_new from "../../assets/BoxType2-copy-new.webp";
 import img_sand_timer_copy_new from "../../assets/sand-timer-copy-new.webp";
 import img_506_2_D from "../../assets/506-2-D.webp";
 import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp";
+import HeroWave from "../../components/HeroWave";
 
 const SaunaAccessories = () => {
   return (
@@ -47,6 +48,7 @@ const SaunaAccessories = () => {
             />
           </div>
         </div>
+      <HeroWave />
       </section>
 
       {/* ===================== */}
