@@ -82,7 +82,6 @@ export const NAV_ITEMS = [
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
 
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "System",   description: "A record of every create, update, and delete made across the CMS." },
-  { to: "/admin/language",        label: "Language",         icon: "fa-solid fa-language",       cap: "page.settings",    section: "System",   description: "Control whether the public site's language switcher is shown, and which languages appear in it." },
-  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend." },
+  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
 ];

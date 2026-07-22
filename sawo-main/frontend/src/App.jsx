@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import ScrollToTop from "./components/ScrollToTop";
 // GDPRConsent itself is lazy-loaded inside the gate, only when the CMS
 // toggle (Settings page) is on — see components/GDPRConsentGate.jsx.
+// Mounted inside the public route below (not here at Router level) so it
+// never runs — no settings fetch, no banner — on /admin/* or /login.
 import GDPRConsentGate from "./components/GDPRConsentGate";
 
 // Layouts
@@ -78,7 +80,6 @@ const Models         = lazy(() => import("./Administrator/Models"));
 const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
 const Logs           = lazy(() => import("./Administrator/Logs"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
-const LanguageSettings = lazy(() => import("./Administrator/LanguageSettings"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
 
@@ -86,14 +87,18 @@ export default function App() {
   return (
       <Router>
         <ScrollToTop />
-        {/* Controlled by the "GDPR Consent Banner" toggle on /admin/settings */}
-        <GDPRConsentGate />
         <Suspense fallback={null}>
           <Routes>
 
             {/*  Public  */}
             <Route path="*" element={
-              <MainLayout>
+              <>
+                {/* Controlled by the "GDPR Consent Banner" toggle on
+                    /admin/settings. Sibling of MainLayout (not inside its
+                    <main>) so this fixed-position banner never mounts (no
+                    settings fetch, no banner code) on /admin/* or /login. */}
+                <GDPRConsentGate />
+                <MainLayout>
                 <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                   <Routes>
                     <Route path={menuPaths.home}                    element={<Home />} />
@@ -155,7 +160,8 @@ export default function App() {
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Suspense>
-              </MainLayout>
+                </MainLayout>
+              </>
             } />
 
             {/*  Admin  */}
@@ -183,9 +189,8 @@ export default function App() {
             <Route path="/admin/analytics" element={
               <ProtectedRoute requiredCap="page.analytics"><AdminLayout><Analytics /></AdminLayout></ProtectedRoute>
             } />
-            <Route path="/admin/language" element={
-              <ProtectedRoute requiredCap="page.settings"><AdminLayout><LanguageSettings /></AdminLayout></ProtectedRoute>
-            } />
+            {/* Language settings merged into Settings (below) */}
+            <Route path="/admin/language" element={<Navigate to="/admin/settings" replace />} />
             <Route path="/admin/settings" element={
               <ProtectedRoute requiredCap="page.settings"><AdminLayout><Settings /></AdminLayout></ProtectedRoute>
             } />
