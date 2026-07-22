@@ -14,6 +14,22 @@ const ALT_TEXT    = "SAWO sauna heaters - Experience wellness and rejuvenation";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
+  const wavesRef = useRef(null);
+
+  useEffect(() => {
+    const el = wavesRef.current;
+    if (!el || prefersReducedMotion()) return;
+
+    // Same idle-callback deferral as the typewriter below: the wave starts
+    // paused (see .hero-waves-parallax > use, animation-play-state: paused)
+    // so it costs nothing during initial load/LCP, then this just flips one
+    // class after the page has gone idle — no JS animation loop involved.
+    const cancelStart = afterPageLoad(() => {
+      el.classList.add("is-running");
+    });
+
+    return cancelStart;
+  }, []);
 
   useEffect(() => {
     const el = typewriterRef.current;
@@ -173,9 +189,8 @@ const Hero = () => {
             d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
           />
         </defs>
-        <g className="hero-waves-parallax">
-          <use xlinkHref="#hero-gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.5)" />
-          <use xlinkHref="#hero-gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.3)" />
+        <g ref={wavesRef} className="hero-waves-parallax">
+          <use xlinkHref="#hero-gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.4)" />
           <use xlinkHref="#hero-gentle-wave" x="48" y="7" fill="#fff" />
         </g>
       </svg>
@@ -203,11 +218,12 @@ const Hero = () => {
         }
         .hero-waves-parallax > use {
           animation: hero-wave-move 25s cubic-bezier(.55,.5,.45,.5) infinite;
+          animation-play-state: paused;
           transform: translate3d(0, 0, 0);
         }
-        .hero-waves-parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 9s; }
-        .hero-waves-parallax > use:nth-child(2) { animation-delay: -4s; animation-duration: 14s; }
-        .hero-waves-parallax > use:nth-child(3) { animation-delay: -5s; animation-duration: 22s; }
+        .hero-waves-parallax.is-running > use { animation-play-state: running; }
+        .hero-waves-parallax > use:nth-child(1) { animation-delay: -4s; animation-duration: 14s; }
+        .hero-waves-parallax > use:nth-child(2) { animation-delay: -5s; animation-duration: 22s; }
         @keyframes hero-wave-move {
           0%   { transform: translate3d(-90px, 0, 0); }
           100% { transform: translate3d(85px, 0, 0); }
