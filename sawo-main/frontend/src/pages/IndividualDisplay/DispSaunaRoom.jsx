@@ -390,7 +390,15 @@ export default function SaunaRoomDisplay() {
 
   const hasDesc      = !!room.description;
   const hasFeatures  = (room.features || []).length > 0;
-  const hasSpecTable = room.spec_table?.headers?.length > 0;
+  const specHeaders  = room.spec_table?.headers || [];
+  const specRows     = room.spec_table?.rows || [];
+  const specCell     = (row, h, ci) => Array.isArray(row) ? row[ci] : row?.[h];
+  const hasSpecTable = specHeaders.length > 0 && specRows.some(
+    row => specHeaders.some((h, ci) => {
+      const v = specCell(row, h, ci);
+      return v !== null && v !== undefined && String(v).trim() !== "" && String(v).trim() !== "–";
+    })
+  );
   const hasSection2  = hasDesc || hasFeatures || hasSpecTable || featureTabs.length > 0;
 
   return (
@@ -670,16 +678,16 @@ export default function SaunaRoomDisplay() {
                     <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
                         <tr style={{ background: "#faf7f4" }}>
-                          {room.spec_table.headers.map((h, i) => (
+                          {specHeaders.map((h, i) => (
                             <th key={i} style={{ padding: "9px 14px", textAlign: "left", color: "#8b5e3c", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap" }}>{h}</th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        {(room.spec_table.rows || []).map((row, ri) => (
-                          <tr key={ri} style={{ borderBottom: ri < room.spec_table.rows.length - 1 ? "1px solid #f5ede3" : "none" }}>
-                            {room.spec_table.headers.map((h, ci) => (
-                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[h] || "–"}</td>
+                        {specRows.map((row, ri) => (
+                          <tr key={ri} style={{ borderBottom: ri < specRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                            {specHeaders.map((h, ci) => (
+                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{specCell(row, h, ci) || "–"}</td>
                             ))}
                           </tr>
                         ))}

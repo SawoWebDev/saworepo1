@@ -647,23 +647,29 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant 
   const hasLines = codes.length > 0 || !!capacity || colors.length > 1;
   if (!hasDots && !hasLines) return null;
 
-  const lineStyle = { display: "flex", gap: 8, fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" };
-  const labelStyle = { color: "#a67853", fontWeight: 700, textTransform: "uppercase", fontSize: "0.66rem", letterSpacing: "0.06em", minWidth: 68, paddingTop: 2 };
-  const valueStyle = { color: "#5a4030", lineHeight: 1.5 };
+  const lineStyle = { display: "flex", gap: 10, fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem" };
+  const labelStyle = { color: "#a67853", fontWeight: 700, textTransform: "uppercase", fontSize: "0.66rem", letterSpacing: "0.06em", minWidth: 74, paddingTop: 2 };
+  const valueStyle = { color: "#5a4030", lineHeight: 1.5, fontWeight: 600 };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div style={{
+      display: "flex", flexDirection: "column", gap: 12,
+      background: "linear-gradient(135deg,#faf6f1,#f5ede3)",
+      border: "1px solid #edddd0", borderRadius: 12,
+      padding: "18px 20px",
+    }}>
       {hasDots && (
-        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
           {variants.map(v => (
             <button
               key={v.key}
               onClick={() => onSelectVariant(v)}
               title={v.color}
               style={{
-                width: 22, height: 22, borderRadius: "50%", padding: 0, cursor: "pointer",
+                width: 26, height: 26, borderRadius: "50%", padding: 0, cursor: "pointer",
                 background: VARIANT_COLOR_DOT[(v.color || "").toLowerCase()] || "#d5b99a",
                 border: v.color?.toLowerCase() === "white" ? "1px solid #d5b99a" : "none",
+                boxShadow: "0 1px 3px rgba(90,64,48,0.18)",
                 outline: selectedVariant?.key === v.key ? "2px solid #a67853" : "2px solid transparent",
                 outlineOffset: 2,
               }}
@@ -846,13 +852,30 @@ export default function AccessoriesPage() {
   const hasDesc      = !!product?.description;
   const hasFeatures  = (product?.features || []).length > 0;
   const hasSpec      = specImages.length > 0;
-  const hasSpecTable = product?.spec_table?.headers?.length > 0;
+  const specHeaders  = product?.spec_table?.headers || [];
+  const specRows     = product?.spec_table?.rows || [];
+  const specCell     = (row, h, ci) => Array.isArray(row) ? row[ci] : row?.[h];
   const hasResources = files.length > 0;
-  const hasSection2  = hasDesc || hasSpecTable;
   const hasVideo     = !!product?.resources?.video;
   const displayImage = selectedVariant?.image || thumbnail;
-  const hasInfoPanel = variants.some(v => v.code) || variants.filter(v => v.color).length > 1
-    || (product?.spec_table?.rows || []).some(row => (Array.isArray(row) ? row[0] : row?.Specification) === "Capacity");
+  // The Capacity row (if present) is already surfaced in the compact
+  // ProductInfoPanel above — don't repeat it as a whole separate
+  // "Technical Data" table/section below when it's the only row.
+  const capacityRow   = specRows.find(row => specCell(row, specHeaders[0], 0) === "Capacity");
+  const hasInfoPanel  = variants.some(v => v.code) || variants.filter(v => v.color).length > 1 || !!capacityRow;
+  const visibleSpecRows = specRows.filter(row => !(hasInfoPanel && row === capacityRow));
+  const hasVisibleSpecTable = specHeaders.length > 0 && visibleSpecRows.some(
+    row => specHeaders.some((h, ci) => {
+      const v = specCell(row, h, ci);
+      return v !== null && v !== undefined && String(v).trim() !== "" && String(v).trim() !== "–";
+    })
+  );
+  const hasSection2  = hasDesc || hasVisibleSpecTable;
+  // Sparse = the right column has nothing but brand/name/info-panel — no
+  // prose, features, diagram or resources. Only then do we center it
+  // against the image so it doesn't look stranded in empty space; a page
+  // with real content (description/features) stays top-aligned as-is.
+  const isSparse = !hasShortDesc && !hasFeatures && !hasSpec && !hasResources;
 
   const openLightbox = (imgs, index) => setLightbox({ images: imgs, index });
   const closeLightbox = () => setLightbox(null);
@@ -988,7 +1011,7 @@ export default function AccessoriesPage() {
         >
           <div
             className="pp-s1-grid"
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: isSparse ? "center" : "start" }}
           >
             {/* LEFT: Image Display (Carousel or Variant Switcher) */}
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
@@ -1239,7 +1262,7 @@ export default function AccessoriesPage() {
               <SectionLabel text="Specifications" />
 
               {hasDesc && (
-                <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
+                <div style={{ marginBottom: hasVisibleSpecTable ? 32 : 0 }}>
                   <div
                     className="pp-richtext"
                     style={{
@@ -1253,14 +1276,14 @@ export default function AccessoriesPage() {
                 </div>
               )}
 
-              {hasSpecTable && (
+              {hasVisibleSpecTable && (
                 <div>
                   <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
                   <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a", background: "#fafaf8" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
                         <tr style={{ background: "#faf7f4" }}>
-                          {product.spec_table.headers.map((h, i) => (
+                          {specHeaders.map((h, i) => (
                             <th key={i} style={{
                               padding: "9px 14px", textAlign: "left", color: "#8b5e3c",
                               fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase",
@@ -1270,11 +1293,11 @@ export default function AccessoriesPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {(product.spec_table.rows || []).map((row, ri) => (
-                          <tr key={ri} style={{ borderBottom: ri < product.spec_table.rows.length - 1 ? "1px solid #f5ede3" : "none" }}>
-                            {product.spec_table.headers.map((h, ci) => (
+                        {visibleSpecRows.map((row, ri) => (
+                          <tr key={ri} style={{ borderBottom: ri < visibleSpecRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                            {specHeaders.map((h, ci) => (
                               <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>
-                                {(Array.isArray(row) ? row[ci] : row[h]) || "–"}
+                                {specCell(row, h, ci) || "–"}
                               </td>
                             ))}
                           </tr>

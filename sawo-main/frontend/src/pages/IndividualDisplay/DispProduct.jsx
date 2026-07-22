@@ -741,7 +741,15 @@ export default function ProductPage() {
   const hasDesc      = !!product.description;
   const hasFeatures  = (product.features || []).length > 0;
   const hasSpec      = specImages.length > 0;
-  const hasSpecTable = product.spec_table?.headers?.length > 0;
+  const specHeaders  = product.spec_table?.headers || [];
+  const specRows     = product.spec_table?.rows || [];
+  const specCell     = (row, h, ci) => Array.isArray(row) ? row[ci] : row?.[h];
+  const hasSpecTable = specHeaders.length > 0 && specRows.some(
+    row => specHeaders.some((h, ci) => {
+      const v = specCell(row, h, ci);
+      return v !== null && v !== undefined && String(v).trim() !== "" && String(v).trim() !== "–";
+    })
+  );
   const hasResources = files.length > 0;
   const hasSection2  = hasDesc || hasSpecTable;
 
@@ -969,7 +977,7 @@ export default function ProductPage() {
                     <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
                         <tr style={{ background: "#faf7f4" }}>
-                          {product.spec_table.headers.map((h, i) => (
+                          {specHeaders.map((h, i) => (
                             <th key={i} style={{
                               padding: "9px 14px", textAlign: "left", color: "#8b5e3c",
                               fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase",
@@ -979,10 +987,10 @@ export default function ProductPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {(product.spec_table.rows || []).map((row, ri) => (
-                          <tr key={ri} style={{ borderBottom: ri < product.spec_table.rows.length - 1 ? "1px solid #f5ede3" : "none" }}>
-                            {product.spec_table.headers.map((h, ci) => (
-                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[h] || "–"}</td>
+                        {specRows.map((row, ri) => (
+                          <tr key={ri} style={{ borderBottom: ri < specRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                            {specHeaders.map((h, ci) => (
+                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{specCell(row, h, ci) || "–"}</td>
                             ))}
                           </tr>
                         ))}
