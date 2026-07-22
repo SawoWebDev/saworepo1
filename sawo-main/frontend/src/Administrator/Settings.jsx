@@ -219,7 +219,7 @@ export default function Settings({ currentUser }) {
   }
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full">
       {error && (
         <div className="mb-6 bg-[var(--danger-bg)] border border-[var(--danger)] rounded p-4 text-[var(--danger)]">
           <i className="fas fa-exclamation-circle mr-2"></i>
@@ -227,6 +227,7 @@ export default function Settings({ currentUser }) {
         </div>
       )}
 
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="card card-body">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-satellite-dish text-[var(--brand)]"></i>
@@ -286,7 +287,7 @@ export default function Settings({ currentUser }) {
         )}
       </div>
 
-      <div className="card card-body mt-6">
+      <div className="card card-body">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-bars text-[var(--brand)]"></i>
           Header Layout
@@ -324,7 +325,7 @@ export default function Settings({ currentUser }) {
         </div>
       </div>
 
-      <div className="card card-body mt-6">
+      <div className="card card-body">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
@@ -350,7 +351,7 @@ export default function Settings({ currentUser }) {
         </div>
       </div>
 
-      <div className="card card-body mt-6">
+      <div className="card card-body">
         <div className="flex items-center justify-between mb-1">
           <h3 className="text-lg font-bold text-[var(--text)] flex items-center gap-2">
             <i className="fas fa-language text-[var(--brand)]"></i>
@@ -410,6 +411,7 @@ export default function Settings({ currentUser }) {
           and remain in the sitemap. Adding a brand-new language still requires a build-time change
           in the site's codebase — it cannot be added from here.
         </p>
+      </div>
       </div>
     </div>
   );
