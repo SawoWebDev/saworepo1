@@ -7,7 +7,10 @@
 // same idea as the sidebar's shared nav-item styling.
 import React from "react";
 
-export default function PageHeader({ icon, title, description, actions, dark, setDark }) {
+// (dark/setDark props removed while the Day/Night switch below is commented
+// out — CI builds treat the unused-var warning as an error. Re-add them when
+// the switch returns.)
+export default function PageHeader({ icon, title, description, actions }) {
   return (
     <div className="page-header">
       <div className="page-header-main">
