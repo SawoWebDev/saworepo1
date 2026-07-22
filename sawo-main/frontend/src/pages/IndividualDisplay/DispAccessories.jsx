@@ -896,8 +896,18 @@ export default function AccessoriesPage() {
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 
+        .pp-richtext {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+
+        /* min-width: max-content — see DispProduct.jsx for why: lets the
+           table grow to its natural width so nowrap headers stay on one
+           line, and the wrapper above scrolls instead of the browser
+           force-compressing/breaking header text mid-word. */
         .pp-richtext table {
           width: 100%;
+          min-width: max-content;
           border-collapse: collapse;
           margin: 12px 0;
           font-family: 'Montserrat', sans-serif;
@@ -917,8 +927,7 @@ export default function AccessoriesPage() {
           text-transform: uppercase;
           letter-spacing: 0.05em;
           line-height: 1.2;
-          white-space: normal;
-          word-break: break-word;
+          white-space: nowrap;
         }
 
         .pp-richtext table td {

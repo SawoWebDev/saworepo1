@@ -74,15 +74,15 @@ export function getPerms(user) {
  * Filter this array using: NAV_ITEMS.filter(item => can(userRole, item.cap))
  */
 export const NAV_ITEMS = [
-  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    section: "Catalog"  },
-  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", section: "Catalog"  },
-  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      section: "Catalog"  },
-  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    section: "Catalog"  },
+  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    section: "Catalog",  description: "Manage your product catalog. Create, edit, and publish items across the site." },
+  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", section: "Catalog",  description: "Manage sauna room listings. Create, edit, and publish rooms across the site." },
+  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      section: "Catalog",  description: "Browse products grouped by model line. Click a folder to see everything in it." },
+  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    section: "Catalog",  description: "Manage the categories and tags products can be organized under." },
 
-  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights" },
+  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
 
-  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "System"   },
-  { to: "/admin/language",        label: "Language",         icon: "fa-solid fa-language",       cap: "page.settings",    section: "System"   },
-  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System"   },
-  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System"   },
+  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "System",   description: "A record of every create, update, and delete made across the CMS." },
+  { to: "/admin/language",        label: "Language",         icon: "fa-solid fa-language",       cap: "page.settings",    section: "System",   description: "Control whether the public site's language switcher is shown, and which languages appear in it." },
+  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend." },
+  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
 ];

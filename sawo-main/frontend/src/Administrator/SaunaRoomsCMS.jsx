@@ -4,6 +4,10 @@ import { supabase, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { checkSaunaRoomsSync, applyLocalRoomChanges } from "./Local/compareSupabaseWithLocalRooms";
 import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
+import { getCache, setCache } from "./adminCache";
+
+const ROOMS_CACHE_KEY = "admin:sauna-rooms:live";
+const ROOMS_META_CACHE_KEY = "admin:sauna-rooms:live:meta";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
@@ -288,7 +292,7 @@ function SelectField({ label, value, onChange, options = [], required }) {
         </label>
       )}
       <select value={value} onChange={onChange} className="form-select">
-        <option value="">— Select —</option>
+        <option value="">Select...</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
     </div>
@@ -851,10 +855,10 @@ export default function SaunaRooms({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const { rooms: localRooms, loading: localLoading } = useLocalSaunaRooms();
 
-  const [rooms,      setRooms]      = useState([]);
-  const [loading,    setLoading]    = useState(true);
-  const [allCats,    setAllCats]    = useState([]);
-  const [allTags,    setAllTags]    = useState([]);
+  const [rooms,      setRooms]      = useState(() => getCache(ROOMS_CACHE_KEY) || []);
+  const [loading,    setLoading]    = useState(() => !getCache(ROOMS_CACHE_KEY));
+  const [allCats,    setAllCats]    = useState(() => getCache(ROOMS_META_CACHE_KEY)?.cats || []);
+  const [allTags,    setAllTags]    = useState(() => getCache(ROOMS_META_CACHE_KEY)?.tags || []);
   const [dataSource, setDataSource] = useState("local");
 
   const [search,       setSearch]       = useState("");
@@ -899,7 +903,9 @@ export default function SaunaRooms({ currentUser }) {
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchRooms = useCallback(async () => {
-    setLoading(true);
+    // In live mode, cached data is already on screen — refresh quietly in
+    // the background instead of flashing the loading state.
+    if (!(dataSource === "live" && getCache(ROOMS_CACHE_KEY))) setLoading(true);
     try {
       if (dataSource === "local") {
         let data = localRooms;
@@ -949,6 +955,7 @@ export default function SaunaRooms({ currentUser }) {
       }
 
       setRooms(processed);
+      setCache(ROOMS_CACHE_KEY, processed);
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
@@ -972,8 +979,11 @@ export default function SaunaRooms({ currentUser }) {
         (r.categories || []).forEach(c => cats.add(c));
         (r.tags       || []).forEach(t => tags.add(t));
       });
-      setAllCats([...cats].sort());
-      setAllTags([...tags].sort());
+      const catList = [...cats].sort();
+      const tagList = [...tags].sort();
+      setAllCats(catList);
+      setAllTags(tagList);
+      setCache(ROOMS_META_CACHE_KEY, { cats: catList, tags: tagList });
     } catch (err) { console.error("fetchMeta:", err); }
   }, [dataSource, localRooms]); // eslint-disable-line
 
@@ -1443,14 +1453,9 @@ export default function SaunaRooms({ currentUser }) {
       <Toast toasts={toasts} remove={remove} />
       <UnsavedConfirm open={unsavedOpen} onStay={handleUnsavedStay} onDiscard={handleUnsavedDiscard} />
 
-      {/* Header */}
-      <div className="page-header" style={{ marginBottom: 14 }}>
+      <div style={{ marginBottom: 14 }}>
         <div>
-          <h1 className="page-title">
-            <i className="fa-solid fa-fire-flame-curved" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
-            Sauna Rooms
-          </h1>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 0 }}>
             <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
               {[
                 { id: "live",  label: "Live",  icon: "fa-cloud" },
@@ -1487,7 +1492,7 @@ export default function SaunaRooms({ currentUser }) {
                 type="button"
                 onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
                 disabled={syncCheckLoading}
-                title="Syncs sauna rooms from Supabase to local — compares added, updated, and deleted items, then lets you apply the changes"
+                title="Syncs sauna rooms from Supabase to local. Compares added, updated, and deleted items, then lets you apply the changes"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -1532,7 +1537,7 @@ export default function SaunaRooms({ currentUser }) {
           gap: 8,
         }}>
           <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
-          <span>Viewing <strong>locally saved sauna rooms</strong> — this is read-only. Switch to Live to edit.</span>
+          <span>Viewing <strong>locally saved sauna rooms</strong>. This is read-only. Switch to Live to edit.</span>
         </div>
       )}
 
@@ -1581,7 +1586,7 @@ export default function SaunaRooms({ currentUser }) {
         <div className="product-grid">
           {filtered.length === 0 && (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
-              {search ? `No rooms match "${search}"` : "No sauna rooms yet — click New Room to create one."}
+              {search ? `No rooms match "${search}"` : "No sauna rooms yet. Click New Room to create one."}
             </div>
           )}
           {filtered.map(r => (
@@ -1622,8 +1627,8 @@ export default function SaunaRooms({ currentUser }) {
                     {search
                       ? `No rooms match "${search}"`
                       : dataSource === "local"
-                        ? "No locally saved rooms yet — sync from Supabase to populate."
-                        : "No sauna rooms yet — click New Room to create one."}
+                        ? "No locally saved rooms yet. Sync from Supabase to populate."
+                        : "No sauna rooms yet. Click New Room to create one."}
                   </td></tr>
                 )}
                 {filtered.map(r => (
@@ -2133,7 +2138,7 @@ function CheckRoomsSyncModal({ open, loading, report, events, onClose, onApply, 
             </div>
             <span style={{ fontSize: "0.8rem", color: done ? "var(--text)" : err ? "var(--danger)" : active ? "var(--text)" : "var(--text-3)", fontWeight: active ? 500 : 400 }}>
               {step.label}
-              {active && activeMsg && <span style={{ color: "var(--text-3)", fontWeight: 400 }}> — {activeMsg}</span>}
+              {active && activeMsg && <span style={{ color: "var(--text-3)", fontWeight: 400 }}> ({activeMsg})</span>}
             </span>
           </div>
         );

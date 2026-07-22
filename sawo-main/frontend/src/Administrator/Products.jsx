@@ -7,10 +7,23 @@ import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByI
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
 import { isAccessoryProduct } from "../pages/IndividualDisplay/DispAccessories";
+import { getCache, setCache } from "./adminCache";
+
+const PRODUCTS_CACHE_KEY = "admin:products:live";
+const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
 const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+// Categories that route a product to one of the 6 heater pages (see each
+// page's "MUST include" comment, e.g. pages/Sauna/heaters/WallMounted.jsx) —
+// used only for the Products page's quick filter, not for actual routing.
+const HEATER_CATEGORIES = ["wall-mounted", "wall mounted", "tower", "stones", "floor", "dragonfire", "combi"];
+function isHeaterProduct(product) {
+  if (!product?.categories || !Array.isArray(product.categories)) return false;
+  return product.categories.some(c => HEATER_CATEGORIES.includes(c.toLowerCase()));
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -481,7 +494,7 @@ function RichField({ label, value, onChange, rows = 6, onNotify }) {
       {mode === "html" && (
         <>
           <div style={{ fontSize: "0.75rem", color: "#666", marginTop: 6 }}>
-            💡 Paste WordPress tables directly — they'll auto-format! kW values &amp; model codes will be auto-tagged on Save.
+            💡 Paste WordPress tables directly and they'll auto-format! kW values &amp; model codes will be auto-tagged on Save.
           </div>
           <div className="rich-field-preview" style={{ marginTop: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10, paddingBottom: 8, borderBottom: "1px solid var(--border)" }}>
@@ -620,7 +633,7 @@ function AutoTagPreview({ description, currentTags }) {
       <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 6, fontWeight: 700, color: "var(--text)", fontSize: "0.8rem" }}>
         <i className="fa-solid fa-wand-magic-sparkles" style={{ color: "var(--brand)" }} />
         Auto-tags detected in description
-        <span style={{ fontWeight: 400, color: "var(--text-3)", fontSize: "0.72rem" }}>— will be added on Save</span>
+        <span style={{ fontWeight: 400, color: "var(--text-3)", fontSize: "0.72rem" }}>(will be added on Save)</span>
       </div>
       {kwTags.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: modelTags.length > 0 ? 6 : 0 }}>
@@ -1387,7 +1400,7 @@ function StorageCleanupModal({ open, onClose, addToast }) {
             • Manual file uploads not linked to any product
           </div>
         </div>
-        <Toggle label="Dry Run (preview only — nothing will be deleted)" checked={dryRun} onChange={v => { setDryRun(v); setResult(null); }} />
+        <Toggle label="Dry Run (preview only, nothing will be deleted)" checked={dryRun} onChange={v => { setDryRun(v); setResult(null); }} />
         <Btn loading={loading}
           label={loading ? "Scanning…" : dryRun ? "Preview Orphaned Files" : "Delete Orphaned Files"}
           icon={dryRun ? "fa-magnifying-glass" : "fa-trash"}
@@ -1486,7 +1499,7 @@ function StorageCleanupModal({ open, onClose, addToast }) {
                   )}
                   {scanned > 0 && orphanList.length === 0 && failed === 0 && (
                     <div style={{ fontSize: "0.78rem", color: "#22c55e", display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
-                      <i className="fa-solid fa-circle-check" /> All {scanned} file(s) are referenced — nothing to clean.
+                      <i className="fa-solid fa-circle-check" /> All {scanned} file(s) are referenced. Nothing to clean.
                     </div>
                   )}
                   {scanned === 0 && <div style={{ fontSize: "0.78rem", color: "var(--text-3)", fontStyle: "italic" }}>Bucket is empty.</div>}
@@ -2231,14 +2244,15 @@ export default function Products({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const { products: localProds, categories: localCats, tags: localTags, loading: localLoading } = useLocalProducts();
 
-  const [products, setProducts]   = useState([]);
-  const [loading,  setLoading]    = useState(true);
-  const [allCats,    setAllCats]    = useState([]);
-  const [allTags,    setAllTags]    = useState([]);
-  const [allModels,  setAllModels]  = useState([]);
+  const [products, setProducts]   = useState(() => getCache(PRODUCTS_CACHE_KEY) || []);
+  const [loading,  setLoading]    = useState(() => !getCache(PRODUCTS_CACHE_KEY));
+  const [allCats,    setAllCats]    = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.cats || []);
+  const [allTags,    setAllTags]    = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.tags || []);
+  const [allModels,  setAllModels]  = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.models || []);
 
   const [search,       setSearch]       = useState("");
   const [filterStatus, setFilterStatus] = useState("");
+  const [quickFilter,  setQuickFilter]  = useState("all"); // "all" | "accessories" | "heaters"
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("grid");
   const [dataSource,   setDataSource]   = useState("live"); // "live" or "local"
@@ -2288,7 +2302,9 @@ export default function Products({ currentUser }) {
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchProducts = useCallback(async () => {
-    setLoading(true);
+    // In live mode, cached data is already on screen — refresh quietly in
+    // the background instead of flashing the loading state.
+    if (!(dataSource === "live" && getCache(PRODUCTS_CACHE_KEY))) setLoading(true);
     try {
       let data = dataSource === "live" ? await getAllProductsLive() : localProds;
       if (filterStatus) data = data.filter(p => p.status === filterStatus);
@@ -2298,6 +2314,7 @@ export default function Products({ currentUser }) {
         return sortDir === "asc" ? aTime - bTime : bTime - aTime;
       });
       setProducts(data || []);
+      if (dataSource === "live") setCache(PRODUCTS_CACHE_KEY, data || []);
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
@@ -2309,10 +2326,13 @@ export default function Products({ currentUser }) {
         const cats = await getAllCategoriesLive();
         const tags = await getAllTagsLive();
         const prods = await getAllProductsLive();
-        setAllCats(cats.map(c => c.name));
-        setAllTags(tags.map(t => t.name));
+        const catNames = cats.map(c => c.name);
+        const tagNames = tags.map(t => t.name);
         const models = [...new Set(prods.map(p => p.type).filter(Boolean))].sort();
+        setAllCats(catNames);
+        setAllTags(tagNames);
         setAllModels(models);
+        setCache(PRODUCTS_META_CACHE_KEY, { cats: catNames, tags: tagNames, models });
       } else {
         setAllCats(localCats);
         setAllTags(localTags);
@@ -2858,6 +2878,9 @@ export default function Products({ currentUser }) {
 
   // ── Filter ─────────────────────────────────────────────────────────────────
   const filtered = products.filter(p => {
+    if (quickFilter === "accessories" && !isAccessoryProduct(p)) return false;
+    if (quickFilter === "heaters" && !isHeaterProduct(p)) return false;
+
     if (!search) return true;
     const q = search.toLowerCase();
     return (
@@ -2873,7 +2896,7 @@ export default function Products({ currentUser }) {
   // Reset to page 1 when search/filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, filterStatus]);
+  }, [search, filterStatus, quickFilter]);
 
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   const startIdx = (currentPage - 1) * itemsPerPage;
@@ -2908,14 +2931,9 @@ export default function Products({ currentUser }) {
       <Toast toasts={toasts} remove={remove} />
       <UnsavedConfirm open={unsavedOpen} onStay={handleUnsavedStay} onDiscard={handleUnsavedDiscard} />
 
-      {/* Header */}
-      <div className="page-header" style={{ marginBottom: 14 }}>
+      <div style={{ marginBottom: 14 }}>
         <div>
-          <h1 className="page-title">
-            <i className="fa-solid fa-box" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
-            Products
-          </h1>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 0 }}>
             <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
               {[
                 { id: "live", label: "Live", icon: "fa-cloud" },
@@ -2952,7 +2970,7 @@ export default function Products({ currentUser }) {
                 type="button"
                 onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
                 disabled={syncCheckLoading}
-                title="Syncs products from Supabase to local — compares added, updated, and deleted items, then lets you apply the changes"
+                title="Syncs products from Supabase to local. Compares added, updated, and deleted items, then lets you apply the changes"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -2998,7 +3016,7 @@ export default function Products({ currentUser }) {
             gap: 8
           }}>
             <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
-            <span>Viewing <strong>locally saved products</strong> — this is read-only. Switch to Live to edit.</span>
+            <span>Viewing <strong>locally saved products</strong>. This is read-only. Switch to Live to edit.</span>
           </div>
 
         </>
@@ -3020,6 +3038,18 @@ export default function Products({ currentUser }) {
           <option value="desc">Newest first</option>
           <option value="asc">Oldest first</option>
         </select>
+        <div className="view-toggle">
+          {[
+            { key: "all", label: "All" },
+            { key: "accessories", label: "Accessories" },
+            { key: "heaters", label: "Sauna Heaters" },
+          ].map(({ key, label }) => (
+            <button key={key} type="button" onClick={() => setQuickFilter(key)}
+              className={`view-toggle-btn${quickFilter === key ? " active" : ""}`}>
+              {label}
+            </button>
+          ))}
+        </div>
         <div className="view-toggle">
           {[{ mode: "list", icon: "fa-list" }, { mode: "grid", icon: "fa-grip" }].map(({ mode, icon }) => (
             <button key={mode} type="button" onClick={() => setViewMode(mode)}
@@ -3073,7 +3103,7 @@ export default function Products({ currentUser }) {
         <div className="product-grid">
           {filtered.length === 0 && (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
-              {search ? `No products match "${search}"` : "No products yet — click New Product to create one."}
+              {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
             </div>
           )}
           {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} dataSource={dataSource} />)}
@@ -3117,7 +3147,7 @@ export default function Products({ currentUser }) {
                 <tbody>
                   {paginatedProducts.length === 0 && (
                     <tr><td colSpan={perms.can("products.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
-                      {search ? `No products match "${search}"` : "No products yet — click New Product to create one."}
+                      {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
                     </td></tr>
                   )}
                   {paginatedProducts.map(p => (
@@ -3906,7 +3936,7 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
               {wasApplied && (
                 <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", borderRadius: 6, marginBottom: 16 }}>
                   <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1rem" }} />
-                  <span style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Changes applied successfully — local files are now up to date.</span>
+                  <span style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Changes applied successfully. Local files are now up to date.</span>
                 </div>
               )}
               {report.products?.added?.length > 0 && (
@@ -3934,7 +3964,7 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
               )}
               {report.products?.deleted?.length > 0 && (
                 <div style={{ marginBottom: 14 }}>
-                  <div style={{ fontWeight: 600, color: "var(--error,#e74c3c)", marginBottom: 8 }}>🗑️ Deleted from Supabase ({report.products.deleted.length}) — Will be removed</div>
+                  <div style={{ fontWeight: 600, color: "var(--error,#e74c3c)", marginBottom: 8 }}>🗑️ Deleted from Supabase ({report.products.deleted.length}), will be removed</div>
                   {report.products.deleted.slice(0, 5).map((item, i) => (
                     <div key={i} style={{ padding: "4px 12px", fontSize: "0.8rem", color: "var(--text-2)" }}>• {item.item.name}</div>
                   ))}
@@ -3982,7 +4012,7 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
                   {report.tags?.updated?.length > 0 && (
                     <div>
                       <div style={{ fontSize: "0.8rem", color: "var(--warning,#b8860b)", marginBottom: 4 }}>
-                        🔄 Updated ({report.tags.updated.length}) — {report.tags.updated.every(t => !t.diff || Object.keys(t.diff).length === 0) ? "metadata only" : "has meaningful changes"}
+                        🔄 Updated ({report.tags.updated.length}), {report.tags.updated.every(t => !t.diff || Object.keys(t.diff).length === 0) ? "metadata only" : "has meaningful changes"}
                       </div>
                       <div style={{ fontSize: "0.75rem", color: "var(--text-2)", padding: "4px 12px", wordBreak: "break-word" }}>{report.tags.updated.map(t => t.item.name).join(", ")}</div>
                     </div>

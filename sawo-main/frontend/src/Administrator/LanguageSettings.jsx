@@ -5,16 +5,21 @@ import {
   getEnabledLanguages, setEnabledLanguages as saveEnabledLanguages,
   BUILT_LOCALES,
 } from "../local-storage/languageSettings";
+import { getCache, setCache } from "./adminCache";
 
-// Kept in sync by hand with frontend-next/src/translation/LanguageSwitcher.jsx —
+const LANGUAGE_SETTINGS_CACHE_KEY = "admin:language-settings";
+
+// Kept in sync by hand with frontend-next/src/translation/routing.js's
+// `localeNames` and frontend/src/i18n/translatedRoutes.js's LOCALES —
 // only cosmetic (label shown per locale row), not a source of truth.
 const LOCALE_LABELS = { en: "English", fi: "Suomi", de: "Deutsch" };
 
 export default function LanguageSettings({ currentUser }) {
-  const [enabled,   setEnabled]   = useState(null);
-  const [languages, setLanguages] = useState(BUILT_LOCALES);
+  const cachedSettings = getCache(LANGUAGE_SETTINGS_CACHE_KEY);
+  const [enabled,   setEnabled]   = useState(() => cachedSettings ? cachedSettings.enabled : null);
+  const [languages, setLanguages] = useState(() => cachedSettings ? cachedSettings.languages : BUILT_LOCALES);
   const [saving,    setSaving]    = useState(false);
-  const [loading,   setLoading]   = useState(true);
+  const [loading,   setLoading]   = useState(() => !cachedSettings);
   const [error,     setError]     = useState(null);
 
   useEffect(() => {
@@ -22,6 +27,7 @@ export default function LanguageSettings({ currentUser }) {
       .then(([e, l]) => {
         setEnabled(e);
         setLanguages(l);
+        setCache(LANGUAGE_SETTINGS_CACHE_KEY, { enabled: e, languages: l });
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -91,14 +97,6 @@ export default function LanguageSettings({ currentUser }) {
 
   return (
     <div className="w-full">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[var(--text)] mb-2">Language Settings</h1>
-        <p className="text-[var(--text-2)]">
-          Control whether the public site's language switcher is shown, and which languages appear in it.
-        </p>
-      </div>
-
       {error && (
         <div className="mb-6 bg-[var(--danger-bg)] border border-[var(--danger)] rounded p-4 text-[var(--danger)]">
           <i className="fas fa-exclamation-circle mr-2"></i>
@@ -107,7 +105,7 @@ export default function LanguageSettings({ currentUser }) {
       )}
 
       {/* Switcher visibility */}
-      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm mb-6">
+      <div className="card card-body mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <i
@@ -141,13 +139,13 @@ export default function LanguageSettings({ currentUser }) {
       </div>
 
       {/* Per-language visibility */}
-      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm mb-6">
+      <div className="card card-body mb-6">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fas fa-globe text-[var(--brand)]"></i>
           Languages Shown in the Switcher
         </h3>
         <p className="text-sm text-[var(--text-3)] mb-4">
-          Only affects the switcher itself — a hidden language's pages still exist, stay indexable, and remain in the sitemap.
+          Only affects the switcher itself. A hidden language's pages still exist, stay indexable, and remain in the sitemap.
         </p>
 
         <div className="space-y-3">
@@ -190,7 +188,7 @@ export default function LanguageSettings({ currentUser }) {
           <i className="fas fa-info-circle mr-2"></i>
           <strong>Note:</strong> this page only controls visibility of already-built languages
           (English, Finnish, German). Adding a brand-new language still requires a build-time
-          change in the site's codebase — it cannot be added from here.
+          change in the site's codebase. It cannot be added from here.
         </p>
       </div>
     </div>

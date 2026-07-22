@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import { getAllProductsLive } from "../local-storage/supabaseReader";
+import ProductsGridModal from "./ProductsGridModal";
+import { getCache, setCache } from "./adminCache";
+
+const taxCacheKey = (table) => `admin:taxonomy:${table}`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-function localOrRemote(product, field) {
-  return product?.[`local_${field}`] || product?.[field] || null;
-}
-
 function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -55,37 +55,14 @@ function TermProductsModal({ open, onClose, term, field }) {
   }, [open, term, field]);
 
   return (
-    <Modal open={open} onClose={onClose} title={`Products using "${term}"`} wide>
-      {loading ? (
-        <div className="table-loading"><i className="fa-solid fa-circle-notch fa-spin" /> Loading...</div>
-      ) : products.length === 0 ? (
-        <div className="empty-state">No products use this {field === "categories" ? "category" : "tag"} yet.</div>
-      ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: 12 }}>
-          {products.map(p => (
-            <div key={p.id} style={{ display: "flex", flexDirection: "column", gap: 6, padding: 10, background: "var(--surface-2)", borderRadius: "var(--r-sm)", border: "1px solid var(--border)" }}>
-              <div style={{ width: "100%", aspectRatio: "1", borderRadius: 6, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--surface)" }}>
-                {localOrRemote(p, 'thumbnail')
-                  ? <img
-                      src={localOrRemote(p, 'thumbnail')}
-                      alt={p.name}
-                      loading="lazy"
-                      decoding="async"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  : <i className="fa-regular fa-image" style={{ color: "var(--text-3)", fontSize: "1.3rem" }} />
-                }
-              </div>
-              <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 13, color: "var(--text)", lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{p.name}</span>
-              <span className="tbl-status">{p.status}</span>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className="modal-footer" style={{ marginTop: 16 }}>
-        <button type="button" className="btn btn-ghost" onClick={onClose}>Close</button>
-      </div>
-    </Modal>
+    <ProductsGridModal
+      open={open}
+      onClose={onClose}
+      title={`Products using "${term}"`}
+      products={products}
+      loading={loading}
+      emptyMessage={`No products use this ${field === "categories" ? "category" : "tag"} yet.`}
+    />
   );
 }
 
@@ -249,8 +226,9 @@ function TaxCard({ item, isCategory, productCount, selectMode, selected, onToggl
 
 // ── Tab section ───────────────────────────────────────────────────────────────
 function TaxTab({ table, label, hasDescription }) {
-  const [items, setItems]               = useState([]);
-  const [productCounts, setProductCounts] = useState({});
+  const cached = getCache(taxCacheKey(table));
+  const [items, setItems]               = useState(() => cached?.items || []);
+  const [productCounts, setProductCounts] = useState(() => cached?.counts || {});
   const [search, setSearch]             = useState("");
   const [selectMode, setSelectMode]     = useState(false);
   const [selected, setSelected]         = useState(new Set());
@@ -259,12 +237,14 @@ function TaxTab({ table, label, hasDescription }) {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [bulkConfirm, setBulkConfirm]   = useState(false);
   const [productsModal, setProductsModal] = useState(null);
-  const [loading, setLoading]           = useState(false);
+  const [loading, setLoading]           = useState(() => !cached);
 
   const field = table === "categories" ? "categories" : "tags";
 
   const fetchData = async () => {
-    setLoading(true);
+    // Cached data for this tab is already on screen — refresh quietly
+    // instead of flashing the loading state.
+    if (!getCache(taxCacheKey(table))) setLoading(true);
     try {
       const { data: termData } = await supabase.from(table).select("*").order("name");
       const terms = termData || [];
@@ -281,6 +261,7 @@ function TaxTab({ table, label, hasDescription }) {
         });
       });
       setProductCounts(counts);
+      setCache(taxCacheKey(table), { items: terms, counts });
       setSelected(new Set());
     } catch (err) {
       console.error("Failed to fetch data:", err);
@@ -472,13 +453,6 @@ export default function Taxonomy() {
 
   return (
     <div>
-      <div className="page-header" style={{ marginBottom: 20 }}>
-        <h1 className="page-title">
-          <i className="fa-solid fa-tags" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
-          Taxonomy
-        </h1>
-      </div>
-
       <div className="tax-tabs">
         <button
           type="button"

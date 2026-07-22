@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
+import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
 
 export default function Header() {
   const location = useLocation();
@@ -407,6 +408,8 @@ export default function Header() {
               ))}
             </nav>
 
+            <HeaderLanguageSwitcher />
+
             {/* Search Bar - Icon or Expanded */}
             <div
               className="ml-auto pr-2 md:pr-4 flex items-center gap-3 transition-all duration-300"
@@ -509,6 +512,98 @@ export default function Header() {
               .menu-item.active .menu-text,
               .menu-item:hover .menu-text {
                 color: #916e53;
+              }
+              .header-lang { position: relative; }
+              .header-lang-toggle {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                color: rgb(51, 51, 51);
+                font-family: 'Montserrat', sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                padding: 6px 4px;
+                transition: color 0.2s ease;
+              }
+              .header-lang-toggle:hover { color: #916e53; }
+              .header-lang-code { letter-spacing: 0.03em; }
+              .header-lang-flag {
+                display: inline-flex;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                overflow: hidden;
+                flex-shrink: 0;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+              }
+              .header-lang-flag svg { width: 100%; height: 100%; display: block; }
+              .header-lang-flag-sm {
+                display: inline-flex;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                overflow: hidden;
+                flex-shrink: 0;
+                margin-right: 8px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+              }
+              .header-lang-flag-sm svg { width: 100%; height: 100%; display: block; }
+              .header-lang-menu {
+                position: absolute;
+                right: 0;
+                top: calc(100% + 10px);
+                min-width: 160px;
+                background: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(0, 0, 0, 0.06);
+                padding: 6px;
+                list-style: none;
+                margin: 0;
+                z-index: 50;
+              }
+              .header-lang-option {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                padding: 8px 10px;
+                border-radius: 8px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                text-align: left;
+                font-size: 13px;
+                color: #333;
+                transition: background-color 0.15s ease;
+              }
+              .header-lang-option:hover { background: #f5f0ec; }
+              .header-lang-option.is-active { background: #af8564; color: #fff; }
+              .header-lang-mobile {
+                padding: 12px 16px;
+                font-family: 'Montserrat', sans-serif;
+              }
+              .header-lang-mobile-label {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #916e53;
+                margin-bottom: 8px;
+              }
+              .header-lang-mobile-options {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+              }
+              .header-lang-mobile-options .header-lang-option {
+                width: auto;
+                border: 1px solid rgba(0, 0, 0, 0.08);
               }
             `}</style>
           </div>
@@ -710,6 +805,7 @@ export default function Header() {
                 )}
               </div>
             ))}
+            <HeaderLanguageSwitcher variant="mobile" onNavigate={() => setMobileOpen(false)} />
           </div>
         )}
       </header>

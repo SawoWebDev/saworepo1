@@ -1,6 +1,9 @@
 ﻿// src/Administrator/Users.jsx
 import React, { useEffect, useState } from "react";
 import { supabase } from "./supabase";
+import { getCache, setCache } from "./adminCache";
+
+const USERS_CACHE_KEY = "admin:users";
 
 const emptyForm = {
   username: "",
@@ -26,7 +29,7 @@ function Modal({ open, onClose, title, children }) {
 }
 
 export default function Users() {
-  const [users, setUsers]           = useState([]);
+  const [users, setUsers]           = useState(() => getCache(USERS_CACHE_KEY) || []);
   const [search, setSearch]         = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [sortDir, setSortDir]       = useState("desc");
@@ -50,7 +53,7 @@ export default function Users() {
       .from("users")
       .select("id, username, full_name, email, role, created_at")
       .order("created_at", { ascending: sortDir === "asc" });
-    if (!error) { setUsers(data); setSelected(new Set()); }
+    if (!error) { setUsers(data); setCache(USERS_CACHE_KEY, data); setSelected(new Set()); }
   };
 
   useEffect(() => { fetchUsers(); }, [sortDir]); // eslint-disable-line
@@ -185,14 +188,6 @@ export default function Users() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="page-header" style={{ marginBottom: 14 }}>
-        <h1 className="page-title">
-          <i className="fa-solid fa-users" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
-          Users
-        </h1>
-      </div>
-
       {/* Toolbar */}
       <div className="products-toolbar">
         <div className="search-wrap">

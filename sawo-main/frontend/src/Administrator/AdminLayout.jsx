@@ -3,23 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSession, clearSession } from "./supabase";
 import { NAV_ITEMS, can } from "./permissions";
+import PageHeader from "./PageHeader";
 import logo from "./SAWO-logo.png";
 import "./admin.css";
-
-// ── Shared icon-button style (sidebar footer)
-const iconButtonStyle = {
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-  padding: "0.35rem",
-  fontSize: "1.1rem",
-  borderRadius: "6px",
-  transition: "color 0.2s, transform 0.2s, background 0.2s",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "rgba(255,255,255,0.7)",
-};
 
 // Order sections appear in — anything not listed falls back to alphabetical
 // order after these, so a stray/unlisted section never disappears silently.
@@ -43,8 +29,20 @@ function groupBySection(nav) {
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose }) {
+function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, collapsed, onToggleCollapse }) {
   const sections = groupBySection(nav);
+  const initial = (session.user.username || "?").charAt(0).toUpperCase();
+
+  // Section dropdowns — collapsed = hidden. Empty set = every section open
+  // by default.
+  const [closedSections, setClosedSections] = useState(() => new Set());
+  const toggleSection = (section) => {
+    setClosedSections(prev => {
+      const next = new Set(prev);
+      next.has(section) ? next.delete(section) : next.add(section);
+      return next;
+    });
+  };
 
   return (
     <>
@@ -55,7 +53,18 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
         aria-hidden="true"
       />
 
-      <aside className={`admin-sidebar${open ? " sidebar-open" : ""}`}>
+      <aside className={`admin-sidebar${open ? " sidebar-open" : ""}${collapsed ? " sidebar-collapsed" : ""}`}>
+        {/* Desktop collapse/expand toggle */}
+        <button
+          type="button"
+          className="sidebar-collapse-btn"
+          onClick={onToggleCollapse}
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          <i className={`fa-solid fa-chevron-${collapsed ? "right" : "left"}`} />
+        </button>
+
         {/* Logo — always the current app's own home page, whether that's
             localhost during dev or whichever domain this deploy is served
             from in production (not a hardcoded external URL). */}
@@ -65,60 +74,74 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
           </a>
         </div>
 
-        {/* Nav, grouped by section (Catalog / Insights / System) */}
+        {/* Nav, grouped by section (Catalog / Insights / System) — each
+            section is a collapsible dropdown. */}
         <nav className="sidebar-nav">
-          {sections.map(([section, items]) => (
-            <div className="sidebar-section" key={section}>
-              <div className="sidebar-section-label">{section}</div>
-              {items.map(({ to, label, icon }) => {
-                const active = location.pathname.startsWith(to);
-                return (
-                  <Link
-                    key={to}
-                    to={to}
-                    className={active ? "active" : ""}
-                    onClick={onClose}
-                  >
-                    <i className={icon} />
-                    {label}
-                  </Link>
-                );
-              })}
-            </div>
-          ))}
+          {sections.map(([section, items]) => {
+            const isClosed = closedSections.has(section);
+            return (
+              <div className="sidebar-section" key={section}>
+                <button
+                  type="button"
+                  className="sidebar-section-label"
+                  onClick={() => toggleSection(section)}
+                  aria-expanded={!isClosed}
+                >
+                  <span>{section}</span>
+                  <span className="sidebar-section-rule" />
+                  <i className={`fa-solid fa-chevron-down sidebar-section-chevron${isClosed ? " is-closed" : ""}`} />
+                </button>
+                <div className={`sidebar-section-items${isClosed ? " is-closed" : ""}`}>
+                  {items.map(({ to, label, icon }) => {
+                    const active = location.pathname.startsWith(to);
+                    return (
+                      <Link
+                        key={to}
+                        to={to}
+                        className={active ? "active" : ""}
+                        onClick={onClose}
+                        title={label}
+                      >
+                        <i className={icon} />
+                        <span className="sidebar-nav-label">{label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </nav>
 
-        {/* Footer */}
+        {/* Footer — frosted user card with avatar + actions */}
         <div className="sidebar-footer">
-          <div className="sidebar-footer-row">
-            {/* Logout */}
-            <button
-              onClick={handleLogout}
-              title="Sign Out"
-              className="sidebar-logout-btn"
-              style={iconButtonStyle}
-              onMouseEnter={e => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.background = "rgba(0,0,0,0.15)"; }}
-              onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.background = "transparent"; }}
-            >
-              <i className="fas fa-sign-out" style={{ transform: "rotateY(180deg)" }} />
-            </button>
-
-            {/* Username / Role */}
-            <div className="sidebar-footer-user">
-              <div className="sidebar-footer-username">{session.user.username}</div>
-              <div className="sidebar-footer-role">{session.user.role || "admin"}</div>
+          <div className="sidebar-footer-card">
+            <div className="sidebar-footer-id">
+              <div className="sidebar-footer-avatar">{initial}</div>
+              <div className="sidebar-footer-user">
+                <div className="sidebar-footer-username">{session.user.username}</div>
+                <div className="sidebar-footer-role">{session.user.role || "admin"}</div>
+              </div>
             </div>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={() => setDark(d => !d)}
-              title={dark ? "Switch to light mode" : "Switch to dark mode"}
-              className="sidebar-theme-btn"
-              onMouseEnter={e => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.background = "rgba(0,0,0,0.15)"; }}
-              onMouseLeave={e => { e.currentTarget.style.color = ""; e.currentTarget.style.background = "transparent"; }}
-            >
-              <i className={dark ? "fa-solid fa-sun" : "fa-solid fa-moon"} />
-            </button>
+            <div className="sidebar-footer-actions">
+              <button
+                type="button"
+                onClick={handleLogout}
+                title="Sign Out"
+                className="sidebar-footer-btn sidebar-footer-btn--logout"
+              >
+                <i className="fas fa-sign-out" style={{ transform: "rotateY(180deg)" }} />
+                <span>Logout</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDark(d => !d)}
+                title={dark ? "Switch to light mode" : "Switch to dark mode"}
+                className="sidebar-footer-btn sidebar-footer-btn--icon-only"
+              >
+                <i className={dark ? "fa-solid fa-sun" : "fa-solid fa-moon"} />
+              </button>
+            </div>
           </div>
         </div>
       </aside>
@@ -134,6 +157,7 @@ export default function AdminLayout({ children }) {
 
   const [dark,        setDark]        = useState(() => localStorage.getItem("admin_theme") === "dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed,   setCollapsed]   = useState(() => localStorage.getItem("admin_sidebar_collapsed") === "1");
 
   // Close drawer on route change
   useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
@@ -148,6 +172,10 @@ export default function AdminLayout({ children }) {
     document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
     localStorage.setItem("admin_theme", dark ? "dark" : "light");
   }, [dark]);
+
+  useEffect(() => {
+    localStorage.setItem("admin_sidebar_collapsed", collapsed ? "1" : "0");
+  }, [collapsed]);
 
   const handleLogout = () => {
     clearSession();
@@ -197,14 +225,27 @@ export default function AdminLayout({ children }) {
         location={location}
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        collapsed={collapsed}
+        onToggleCollapse={() => setCollapsed(c => !c)}
       />
 
       {/* ── Main content ───────────────────────────────────────────────── */}
-      <main
-        className="admin-main"
-        style={{ background: dark ? "#161412" : "#f7f5f2" }}
-      >
-        {React.cloneElement(children, { currentUser: session.user })}
+      <main className="admin-main">
+        {/* One shared header for every page — icon, title, and description
+            come from the matched NAV_ITEMS entry, so each page only needs
+            to render its own content below, not its own header. */}
+        {currentNav && (
+          <PageHeader
+            icon={currentNav.icon}
+            title={currentNav.label}
+            description={currentNav.description}
+            dark={dark}
+            setDark={setDark}
+          />
+        )}
+        <div className="admin-main-content" style={{ background: dark ? "#161412" : "#f7f5f2" }}>
+          {React.cloneElement(children, { currentUser: session.user })}
+        </div>
       </main>
     </div>
   );

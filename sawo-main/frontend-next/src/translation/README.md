@@ -13,8 +13,8 @@ translation/
                     import these instead of next/link, next/navigation
   request.js        loads the right JSON files for the current locale
                     (wired into next.config.mjs, you shouldn't need to touch it)
-  LanguageSwitcher.jsx   the floating flag picker (bottom-left on every page)
-  flags/Flag.jsx    inline SVG flag per locale
+  settings.js       reads the CMS (Supabase) toggle for switcher visibility
+                    and which locales it shows
   languages/
     en/             English — the source language, always complete
       common.json   short shared strings (buttons, prev/next, etc.)
@@ -47,8 +47,8 @@ the English value instead of breaking the page — see `request.js`.
 
 1. Add the locale code to `locales` in `routing.js`.
 2. Copy `languages/en/` to `languages/fr/` and translate every value.
-3. Add `fr` to `localeNames` in `routing.js` (used by the flag switcher).
-4. Add an `Fr` flag to `flags/Flag.jsx`.
+3. Add `fr` to `localeNames` in `routing.js` (used by the header language switcher,
+   `src/components/Header/HeaderLanguageSwitcher.jsx`).
 
 No page or component code needs to change — every page already reads
 copy through `useTranslations`, which just picks up the new locale.

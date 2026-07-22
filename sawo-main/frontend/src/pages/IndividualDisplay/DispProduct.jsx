@@ -750,8 +750,20 @@ export default function ProductPage() {
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 
+        .pp-richtext {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+
+        /* min-width: max-content lets the table grow to its natural content
+           width (so nowrap headers actually stay on one line) instead of
+           being force-compressed to width:100% — that compression was what
+           made narrow header text wrap letter-by-letter on mobile. The
+           .pp-richtext wrapper above scrolls horizontally when this
+           overflows, instead of squeezing the table into the page. */
         table {
           width: 100%;
+          min-width: max-content;
           border-collapse: collapse;
           margin: 12px 0;
           font-family: 'Montserrat', sans-serif;
@@ -771,8 +783,7 @@ export default function ProductPage() {
           text-transform: uppercase;
           letter-spacing: 0.05em;
           line-height: 1.2;
-          white-space: normal;
-          word-break: break-word;
+          white-space: nowrap;
         }
 
         table td {
@@ -870,6 +881,7 @@ export default function ProductPage() {
               {hasShortDesc && (
                 <div style={{ paddingBottom: 16, borderBottom: "1px solid #edddd0", textAlign: "left" }}>
                   <div
+                    className="pp-richtext"
                     style={{
                       fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem",
                       color: "#7a5c45", lineHeight: 1.6, margin: 0,
@@ -937,6 +949,7 @@ export default function ProductPage() {
               {hasDesc && (
                 <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
                   <div
+                    className="pp-richtext"
                     style={{
                       fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
                       lineHeight: 1.7, fontSize: "0.82rem",

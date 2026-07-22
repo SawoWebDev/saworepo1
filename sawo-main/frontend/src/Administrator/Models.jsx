@@ -1,210 +1,47 @@
 // src/Administrator/Models.jsx
 //
-// Models page — displays all products grouped by their "type" field,
-// with folder-style collapsible sections. Click a model folder to expand
-// and see all products within that model.
+// Models page — displays all products grouped by their "type" field, as a
+// grid of folder cards (same visual language as Taxonomy). Clicking a
+// folder opens ProductsGridModal (shared with Taxonomy) to show its
+// products, rather than expanding in place — the grid never restructures.
 //
 import React, { useEffect, useState } from "react";
 import { getAllProductsLive } from "../local-storage/supabaseReader";
+import ProductsGridModal from "./ProductsGridModal";
+import { getCache, setCache } from "./adminCache";
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-function localOrRemote(product, field) {
-  return product?.[`local_${field}`] || product?.[field] || null;
-}
+const MODELS_CACHE_KEY = "admin:models:products";
 
-// ─── Product Card (floating style with just image + name) ────────────────────
-function ProductCard({ product, onClick }) {
+// ─── Model Group card ──────────────────────────────────────────────────────
+function ModelGroup({ modelName, products, onOpen }) {
   return (
-    <div
-      onClick={() => onClick?.(product)}
-      style={{
-        display: "flex", flexDirection: "column", gap: 8,
-        cursor: "pointer", transition: "all 0.2s ease",
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.opacity = "0.85";
-        e.currentTarget.style.transform = "scale(1.02)";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.opacity = "1";
-        e.currentTarget.style.transform = "scale(1)";
-      }}
-    >
-      {/* Thumbnail - Floating, no background */}
-      <div style={{
-        width: "100%", aspectRatio: "1",
-        borderRadius: "var(--r-sm)", overflow: "hidden", display: "flex",
-        alignItems: "center", justifyContent: "center",
-        background: "transparent", border: "none",
-      }}>
-        {localOrRemote(product, 'thumbnail') ? (
-          <img
-            src={localOrRemote(product, 'thumbnail')}
-            alt={product.name}
-            width="300"
-            height="300"
-            loading="lazy"
-            decoding="async"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "var(--r-sm)",
-            }}
-          />
-        ) : (
-          <div style={{
-            width: "100%", height: "100%",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            background: "var(--surface-2)", borderRadius: "var(--r-sm)",
-          }}>
-            <i className="fa-solid fa-image" style={{ fontSize: "1.5rem", color: "var(--text-3)" }} />
-          </div>
-        )}
-      </div>
-
-      {/* Product Name - Centered */}
-      <div style={{
-        fontWeight: 600, fontSize: "0.82rem", color: "var(--text)",
-        lineHeight: 1.3, textAlign: "center",
-      }}>
-        {product.name}
-      </div>
-    </div>
-  );
-}
-
-// ─── Model Group (card that expands in place to show its products) ───────
-function ModelGroup({ modelName, products, expanded, onToggle, onProductClick }) {
-  return (
-    <div className={`model-grid-card${expanded ? " is-expanded" : ""}`}>
-      {/* Header — same card language as Taxonomy's TaxCard (icon, name, meta) */}
-      <button type="button" className="model-card-header" onClick={onToggle}>
+    <div className="model-grid-card">
+      <button type="button" className="model-card-header" onClick={onOpen}>
         <div className="model-card-icon">
-          <i className={`fa-solid fa-folder${expanded ? "-open" : ""}`} />
+          <i className="fa-solid fa-folder" />
         </div>
         <div className="model-card-name">{modelName || "Uncategorized"}</div>
         <div className="model-card-meta">
           <span><i className="fa-solid fa-box" style={{ fontSize: "0.7rem", marginRight: 5 }} />{products.length} Product{products.length !== 1 ? "s" : ""}</span>
-          <i className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`} />
         </div>
       </button>
-
-      {/* Expanded Content - Grid Layout */}
-      {expanded && (
-        <div className="model-card-content">
-          {products.map(product => (
-            <ProductCard key={product.id} product={product} onClick={onProductClick} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ─── Product Detail Modal (Grid view) ─────────────────────────────────────
-function ProductDetailModal({ open, onClose, product }) {
-  if (!open || !product) return null;
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal modal-wide" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2 className="modal-title">{product.name}</h2>
-          <button className="modal-close-btn" onClick={onClose}></button>
-        </div>
-        <div className="modal-body">
-          <div style={{
-            display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
-            gap: 12,
-          }}>
-            {/* Main product card */}
-            <div style={{
-              display: "flex", flexDirection: "column", gap: 8,
-              gridColumn: "span 1",
-            }}>
-              <div style={{
-                width: "100%", aspectRatio: "1",
-                borderRadius: "var(--r-sm)", overflow: "hidden",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                {localOrRemote(product, 'thumbnail') ? (
-                  <img
-                    src={localOrRemote(product, 'thumbnail')}
-                    alt={product.name}
-                    style={{
-                      width: "100%", height: "100%", objectFit: "cover",
-                      borderRadius: "var(--r-sm)",
-                    }}
-                  />
-                ) : (
-                  <div style={{
-                    width: "100%", height: "100%",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    background: "var(--surface-2)", borderRadius: "var(--r-sm)",
-                  }}>
-                    <i className="fa-solid fa-image" style={{ fontSize: "1.5rem", color: "var(--text-3)" }} />
-                  </div>
-                )}
-              </div>
-              <div style={{ fontWeight: 600, fontSize: "0.82rem", color: "var(--text)", textAlign: "center" }}>
-                {product.name}
-              </div>
-            </div>
-
-            {/* Gallery images if available */}
-            {Array.isArray(localOrRemote(product, 'images')) && localOrRemote(product, 'images').map((img, idx) => (
-              <div key={idx} style={{
-                display: "flex", flexDirection: "column", gap: 4,
-              }}>
-                <div style={{
-                  width: "100%", aspectRatio: "1",
-                  borderRadius: "var(--r-sm)", overflow: "hidden",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <img
-                    src={img}
-                    alt={`${product.name} ${idx + 1}`}
-                    style={{
-                      width: "100%", height: "100%", objectFit: "cover",
-                      borderRadius: "var(--r-sm)",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Product Details */}
-          <div style={{ marginTop: 24, padding: 16, background: "var(--surface-2)", borderRadius: "var(--r)", fontSize: "0.85rem" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-              {product.slug && <div><strong>Slug:</strong> {product.slug}</div>}
-              {product.status && <div><strong>Status:</strong> {product.status}</div>}
-              {product.type && <div><strong>Model:</strong> {product.type}</div>}
-              {product.visible !== undefined && <div><strong>Visible:</strong> {product.visible ? "Yes" : "No"}</div>}
-            </div>
-          </div>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-ghost" onClick={onClose}>Close</button>
-        </div>
-      </div>
     </div>
   );
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────
 export default function Models() {
-  const [products, setProducts]   = useState([]);
-  const [loading, setLoading]     = useState(true);
+  const [products, setProducts]   = useState(() => getCache(MODELS_CACHE_KEY) || []);
+  const [loading, setLoading]     = useState(() => !getCache(MODELS_CACHE_KEY));
   const [error, setError]         = useState(null);
   const [search, setSearch]       = useState("");
-  const [expanded, setExpanded]   = useState(new Set());
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [openModel, setOpenModel] = useState(null);
 
   // Fetch products
   const fetchProducts = async () => {
-    setLoading(true);
+    // Cached data is already on screen — refresh quietly in the background
+    // instead of flashing the loading state.
+    if (!getCache(MODELS_CACHE_KEY)) setLoading(true);
     setError(null);
     try {
       let data = await getAllProductsLive();
@@ -215,6 +52,7 @@ export default function Models() {
         return (a.name || "").localeCompare(b.name || "");
       });
       setProducts(data || []);
+      setCache(MODELS_CACHE_KEY, data || []);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -238,39 +76,12 @@ export default function Models() {
     return modelName.toLowerCase().includes(search.toLowerCase());
   });
 
-  const toggleExpanded = (modelName) => {
-    const next = new Set(expanded);
-    if (next.has(modelName)) {
-      next.delete(modelName);
-    } else {
-      next.add(modelName);
-    }
-    setExpanded(next);
-  };
-
   // ──────────────────────────────────────────────────────────────────────────
   return (
     <div className="products-page">
-      {/* Header */}
-      <div className="page-header" style={{ marginBottom: 14 }}>
-        <div>
-          <h1 className="page-title">
-            <i className="fa-solid fa-folder-open" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
-            Models
-          </h1>
-          <p className="products-subtitle">
-            {loading ? "Loading…" : `${filteredGroups.length} model${filteredGroups.length !== 1 ? "s" : ""} · ${products.length} product${products.length !== 1 ? "s" : ""}`}
-          </p>
-        </div>
-        <button
-          type="button"
-          className="btn btn-ghost btn-sm"
-          onClick={fetchProducts}
-          style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}
-        >
-          <i className="fa-solid fa-rotate" /> Refresh
-        </button>
-      </div>
+      <p className="products-subtitle" style={{ marginBottom: 14 }}>
+        {loading ? "Loading…" : `${filteredGroups.length} model${filteredGroups.length !== 1 ? "s" : ""} · ${products.length} product${products.length !== 1 ? "s" : ""}`}
+      </p>
 
       {/* Search */}
       <div className="products-toolbar">
@@ -283,6 +94,9 @@ export default function Models() {
             placeholder="Search models…"
           />
         </div>
+        <button type="button" className="btn btn-ghost btn-sm" onClick={fetchProducts} style={{ marginLeft: "auto" }}>
+          <i className="fa-solid fa-rotate" /> Refresh
+        </button>
       </div>
 
       {/* Error */}
@@ -319,19 +133,19 @@ export default function Models() {
               key={modelName}
               modelName={modelName}
               products={modelProducts}
-              expanded={expanded.has(modelName)}
-              onToggle={() => toggleExpanded(modelName)}
-              onProductClick={setSelectedProduct}
+              onOpen={() => setOpenModel(modelName)}
             />
           ))}
         </div>
       )}
 
-      {/* Product Detail Modal */}
-      <ProductDetailModal
-        open={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-        product={selectedProduct}
+      {/* Products-in-model modal — shared with Taxonomy's category/tag view */}
+      <ProductsGridModal
+        open={!!openModel}
+        onClose={() => setOpenModel(null)}
+        title={openModel || ""}
+        products={openModel ? (groups[openModel] || []) : []}
+        loading={false}
       />
     </div>
   );
