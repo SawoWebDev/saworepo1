@@ -40,7 +40,14 @@ export default function ScrollToTop() {
         height: "44px",
         borderRadius: "50%",
         background: "#af8564",
-        border: "none",
+        // borderStyle (not the `border` shorthand): different Chromium builds
+        // serialize `border: "none"` into the DOM style attribute differently
+        // (border-image: none vs border-image: initial), and this button is
+        // part of the prerendered homepage snapshot — a text mismatch here
+        // between the build-time browser and the visitor's browser causes a
+        // real hydration failure (React errors #418/#423). borderStyle only
+        // touches one longhand, avoiding the ambiguous border-image expansion.
+        borderStyle: "none",
         cursor: "pointer",
         display: "flex",
         alignItems: "center",

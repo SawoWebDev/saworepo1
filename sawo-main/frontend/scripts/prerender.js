@@ -5,8 +5,18 @@
  * ~80KB-gzip of JS downloads and executes (mobile FCP was 3.6s / LCP 4.2s).
  * This script renders "/" once in headless Chromium at build time and bakes
  * the resulting markup into build/index.html, so first paint needs no JS.
- * src/index.js hydrates when the root has children (hydrateRoot) and falls
- * back to normal client rendering otherwise.
+ *
+ * This is a paint accelerator only, NOT server-rendered markup — src/index.js
+ * deliberately uses createRoot() (not hydrateRoot) against it, because the
+ * snapshot is captured via element.innerHTML, which the browser re-serializes
+ * through its own CSSOM (hex colors -> rgb(), attribute casing, shorthand
+ * consolidation) in ways that don't match what React itself writes on a
+ * fresh render. hydrateRoot reliably throws "Hydration failed" against text
+ * that came from an innerHTML round-trip, for any element with an inline
+ * style or a camelCased DOM prop (fetchPriority, etc.) — confirmed with a
+ * dev-mode React build. createRoot just discards the snapshot and mounts
+ * fresh once main.js runs (gated on the hero image's own load event, so this
+ * happens after the snapshot has already delivered its FCP/LCP benefit).
  *
  * Only the homepage is prerendered. The SPA rewrite serves index.html for
  * every route, so a guard script empties #root on any other path — non-home

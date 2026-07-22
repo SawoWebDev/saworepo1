@@ -17,6 +17,7 @@ app.set("trust proxy", true);
 
 const allowedOrigins = [
   "https://saworeact.vercel.app", // actual production domain (confirmed via Vercel dashboard)
+  "https://sawocomreact.vercel.app", // current production domain (sawo.com cutover target)
   "https://reactsawo.vercel.app", // additional deployment domain
   "https://sawogitsrc.vercel.app", // kept in case other deployments/previews still use it
   "http://localhost:3000",
