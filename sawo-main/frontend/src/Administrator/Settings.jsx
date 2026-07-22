@@ -10,7 +10,13 @@ import {
   getEnabledLanguages, setEnabledLanguages as saveEnabledLanguages,
   BUILT_LOCALES,
 } from "../local-storage/languageSettings";
+import { getHeaderLayout, setHeaderLayout as saveHeaderLayout } from "../local-storage/headerLayout";
 import { getCache, setCache } from "./adminCache";
+
+const LAYOUT_OPTIONS = [
+  { value: "layout1", label: "Layout 1", description: "Sauna, Steam, Infrared, Support, Contact Us, About Us and Careers as separate top-level items — Sauna and Steam each have their own dropdown." },
+  { value: "layout2", label: "Layout 2", description: "Current header: a single \"Products\" mega-menu covers Sauna/Steam/Infrared, plus Support and About Us (Careers nested under About Us). Default." },
+];
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js's
 // `localeNames` and frontend/src/i18n/translatedRoutes.js's LOCALES —
@@ -46,18 +52,21 @@ export default function Settings({ currentUser }) {
   const [langEnabled, setLangEnabled] = useState(() => cachedSettings ? cachedSettings.langEnabled : null);
   const [languages, setLanguages] = useState(() => cachedSettings ? cachedSettings.languages : BUILT_LOCALES);
   const [langSaving, setLangSaving] = useState(false);
+  const [headerLayout, setHeaderLayoutState] = useState(() => cachedSettings ? cachedSettings.headerLayout : "layout2");
+  const [layoutSaving, setLayoutSaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     Promise.all([
       getDataSource(), getJsonSourceScope(), getGDPRBannerEnabled(),
-      getLanguageSwitcherEnabled(), getEnabledLanguages(),
+      getLanguageSwitcherEnabled(), getEnabledLanguages(), getHeaderLayout(),
     ])
-      .then(([s, sc, gdpr, langEn, langs]) => {
+      .then(([s, sc, gdpr, langEn, langs, hLayout]) => {
         setSource(s); setScope(sc); setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
-        setCache(SETTINGS_CACHE_KEY, { source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs });
+        setHeaderLayoutState(hLayout);
+        setCache(SETTINGS_CACHE_KEY, { source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs, headerLayout: hLayout });
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -132,6 +141,27 @@ export default function Settings({ currentUser }) {
       setError("Failed to update enabled languages: " + err.message);
     } finally {
       setLangSaving(false);
+    }
+  };
+
+  const handleSwitchHeaderLayout = async (next) => {
+    setLayoutSaving(true);
+    setError(null);
+    try {
+      await saveHeaderLayout(next, currentUser?.username);
+      setHeaderLayoutState(next);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "header_layout",
+        entity_name: `Header Layout → ${next}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+    } catch (err) {
+      setError("Failed to switch header layout: " + err.message);
+    } finally {
+      setLayoutSaving(false);
     }
   };
 
@@ -254,6 +284,44 @@ export default function Settings({ currentUser }) {
             </select>
           </div>
         )}
+      </div>
+
+      <div className="card card-body mt-6">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-bars text-[var(--brand)]"></i>
+          Header Layout
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          Controls the public site's header nav structure. Takes effect for visitors
+          within seconds, no redeploy needed.
+        </p>
+
+        <div className="space-y-2">
+          {LAYOUT_OPTIONS.map((opt) => (
+            <label
+              key={opt.value}
+              className={`flex items-start gap-3 p-3 rounded border cursor-pointer transition-colors ${
+                headerLayout === opt.value
+                  ? "border-[var(--brand)] bg-[var(--brand-muted)]"
+                  : "border-[var(--border)] hover:bg-[var(--surface-2)]"
+              } ${layoutSaving ? "opacity-60 pointer-events-none" : ""}`}
+            >
+              <input
+                type="radio"
+                name="header-layout"
+                value={opt.value}
+                checked={headerLayout === opt.value}
+                onChange={() => handleSwitchHeaderLayout(opt.value)}
+                disabled={layoutSaving}
+                className="mt-1"
+              />
+              <div>
+                <p className="text-sm font-medium text-[var(--text)]">{opt.label}</p>
+                <p className="text-xs text-[var(--text-3)]">{opt.description}</p>
+              </div>
+            </label>
+          ))}
+        </div>
       </div>
 
       <div className="card card-body mt-6">

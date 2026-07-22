@@ -4,6 +4,7 @@ import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
 import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
+import { getHeaderLayout } from "../../local-storage/headerLayout";
 
 export default function Header() {
   const location = useLocation();
@@ -13,6 +14,15 @@ export default function Header() {
   const [hoveredSubmenu, setHoveredSubmenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
+  // "layout2" (current default) until the admin setting resolves — see
+  // local-storage/headerLayout.js. Avoids a layout jump for the common case.
+  const [layout, setLayout] = useState("layout2");
+
+  useEffect(() => {
+    let cancelled = false;
+    getHeaderLayout().then((value) => { if (!cancelled) setLayout(value); });
+    return () => { cancelled = true; };
+  }, []);
 
   const lastScrollY = useRef(0);
   const navRef = useRef(null);
@@ -20,7 +30,72 @@ export default function Header() {
   const subMenuTimeout = useRef(null);
   const mobileMenuRef = useRef(null);
 
-  const navItems = [
+  // Layout 1 — Sauna / Steam / Infrared / Support / Contact Us / About Us /
+  // Careers as separate top-level items, each with its own dropdown.
+  const navItemsLayout1 = [
+    { name: "Home", path: menuPaths.home },
+    {
+      name: "Sauna",
+      path: menuPaths.sauna.parent,
+      submenu: [
+        {
+          name: "Sauna Heaters",
+          path: menuPaths.sauna.heaters.parent,
+          submenu: [
+            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
+            { name: "Tower", path: menuPaths.sauna.heaters.tower },
+            { name: "Stone", path: menuPaths.sauna.heaters.stone },
+            { name: "Floor", path: menuPaths.sauna.heaters.floor },
+            { name: "Combi", path: menuPaths.sauna.heaters.combi },
+            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+          ],
+        },
+        { name: "Sauna Controls", path: menuPaths.sauna.controls },
+        { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent },
+        {
+          name: "Sauna Rooms",
+          path: menuPaths.sauna.rooms,
+          submenu: [
+            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
+            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Steam",
+      path: menuPaths.steam.parent,
+      submenu: [
+        { name: "Steam Generators", path: menuPaths.steam.generators },
+        { name: "Steam Controls", path: menuPaths.steam.controls },
+        { name: "Steam Accessories", path: menuPaths.steam.accessories },
+      ],
+    },
+    { name: "Infrared", path: menuPaths.infrared },
+    {
+      name: "Support",
+      path: menuPaths.support.parent,
+      submenu: [
+        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
+        { name: "User Manuals", path: menuPaths.support.manuals },
+        { name: "Product Catalogue", path: menuPaths.support.catalogue },
+        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
+      ],
+    },
+    { name: "Contact Us", path: menuPaths.contact },
+    {
+      name: "About Us",
+      path: menuPaths.about.parent,
+      submenu: [
+        { name: "Latest News", path: menuPaths.about.news },
+        { name: "Sustainability", path: menuPaths.about.sustainability },
+      ],
+    },
+    { name: "Careers", path: menuPaths.careers },
+  ];
+
+  // Layout 2 — current default: single "Products" mega-menu.
+  const navItemsLayout2 = [
     { name: "Home", path: menuPaths.home },
     {
       name: "Products",
@@ -87,6 +162,8 @@ export default function Header() {
     },
     { name: "Contact Us", path: menuPaths.contact },
   ];
+
+  const navItems = layout === "layout1" ? navItemsLayout1 : navItemsLayout2;
 
   // --- Active helpers ---
   const isActive = (item) => {
