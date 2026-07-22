@@ -399,6 +399,48 @@ export default function SaunaRoomDisplay() {
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
         @media(max-width:900px){ .pp-s1-grid { grid-template-columns: 1fr !important; gap: 28px !important; } }
         @media(max-width:600px){ .pp-outer { padding-left: 16px !important; padding-right: 16px !important; } }
+
+        .pp-richtext { max-width: 100%; overflow-x: auto; }
+        /* min-width: max-content — see DispProduct.jsx for why: lets the
+           table grow to its natural width so nowrap headers stay on one
+           line, and the wrapper above scrolls instead of the browser
+           force-compressing/breaking header text mid-word. */
+        .pp-richtext table {
+          width: 100%;
+          min-width: max-content;
+          border-collapse: collapse;
+          margin: 12px 0;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.78rem;
+          background-color: #fff;
+          border: 1px solid #d5b99a;
+        }
+        .pp-richtext table th {
+          background-color: #f0e8df;
+          color: #5a4030;
+          font-weight: 600;
+          padding: 8px 10px;
+          text-align: center;
+          border-bottom: 1px solid #ddc9b4;
+          font-size: 0.68rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          line-height: 1.2;
+          white-space: nowrap;
+        }
+        .pp-richtext table td {
+          padding: 8px 10px;
+          color: #5a4030;
+          border-bottom: 1px solid #edddd0;
+          background-color: transparent;
+          text-align: center;
+          font-size: 0.77rem;
+        }
+        .pp-richtext table td:first-child {
+          white-space: nowrap;
+          text-align: center;
+          font-weight: 500;
+        }
       `}</style>
 
       {lightbox && <Lightbox images={lightbox.images} startIndex={lightbox.index} onClose={() => setLightbox(null)} />}
@@ -615,7 +657,7 @@ export default function SaunaRoomDisplay() {
               {hasDesc && (
                 <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
                   <SectionLabel icon="fa-solid fa-align-left" text="Description" />
-                  <div style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }}
+                  <div className="pp-richtext" style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }}
                     dangerouslySetInnerHTML={{ __html: room.description }} />
                 </div>
               )}
@@ -674,7 +716,7 @@ function FeatureTabs({ tabs }) {
         ))}
       </div>
       {tab?.content && (
-        <div style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap" }}
+        <div className="pp-richtext" style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap" }}
           dangerouslySetInnerHTML={{ __html: tab.content }} />
       )}
       {tab?.items?.length > 0 && (

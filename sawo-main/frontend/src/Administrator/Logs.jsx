@@ -5,10 +5,13 @@
 //
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
+import { getCache, setCache } from "./adminCache";
+
+const LOGS_CACHE_KEY = "admin:logs:default";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function formatDate(d) {
-  if (!d) return "—";
+  if (!d) return "-";
   return new Date(d).toLocaleString("en-PH", {
     month:  "short",
     day:    "numeric",
@@ -71,7 +74,7 @@ function EntityBadge({ entity }) {
 
 // ─── Simple username display ──────────────────────────────────────────────────
 function UserChip({ username }) {
-  if (!username) return <span style={{ color: "var(--text-3)", fontSize: "0.75rem" }}>—</span>;
+  if (!username) return <span style={{ color: "var(--text-3)", fontSize: "0.75rem" }}>-</span>;
   return (
     <span style={{ fontSize: "0.75rem", color: "var(--text-2)" }}>
       @{username}
@@ -81,8 +84,9 @@ function UserChip({ username }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Logs() {
-  const [logs,       setLogs]       = useState([]);
-  const [loading,    setLoading]    = useState(true);
+  const cachedLogs = getCache(LOGS_CACHE_KEY);
+  const [logs,       setLogs]       = useState(() => cachedLogs?.data || []);
+  const [loading,    setLoading]    = useState(() => !cachedLogs);
   const [error,      setError]      = useState(null);
 
   // Filters
@@ -94,11 +98,14 @@ export default function Logs() {
   // Pagination
   const PAGE_SIZE = 50;
   const [page,      setPage]      = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(() => cachedLogs?.count || 0);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchLogs = useCallback(async () => {
-    setLoading(true);
+    const isDefaultView = page === 0 && !filterAction && !filterEntity && !filterUser && !search;
+    // Default view already has cached data on screen (seeded at mount) —
+    // refetch quietly in the background instead of flashing the spinner.
+    if (!(isDefaultView && getCache(LOGS_CACHE_KEY))) setLoading(true);
     setError(null);
     try {
       let q = supabase
@@ -116,6 +123,7 @@ export default function Logs() {
       if (qErr) throw qErr;
       setLogs(data || []);
       setTotalCount(count || 0);
+      if (isDefaultView) setCache(LOGS_CACHE_KEY, { data: data || [], count: count || 0 });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -142,26 +150,9 @@ export default function Logs() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="products-page">
-      {/* Header */}
-      <div className="page-header" style={{ marginBottom: 14 }}>
-        <div>
-          <h1 className="page-title">
-            <i className="fa-solid fa-clock-rotate-left" style={{ marginRight: "0.5rem", color: "var(--brand)" }} />
-            Activity Logs
-          </h1>
-          <p className="products-subtitle">
-            {loading ? "Loading…" : `${totalCount.toLocaleString()} events recorded`}
-          </p>
-        </div>
-        <button
-          type="button"
-          className="btn btn-ghost btn-sm"
-          onClick={fetchLogs}
-          style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}
-        >
-          <i className="fa-solid fa-rotate" /> Refresh
-        </button>
-      </div>
+      <p className="products-subtitle" style={{ marginBottom: 14 }}>
+        {loading ? "Loading…" : `${totalCount.toLocaleString()} events recorded`}
+      </p>
 
       {/* Filters */}
       <div className="products-toolbar" style={{ flexWrap: "wrap" }}>
@@ -192,6 +183,10 @@ export default function Logs() {
           <option value="">All Users</option>
           {allUsers.map(u => <option key={u} value={u}>@{u}</option>)}
         </select>
+
+        <button type="button" className="btn btn-ghost btn-sm" onClick={fetchLogs} style={{ marginLeft: "auto" }}>
+          <i className="fa-solid fa-rotate" /> Refresh
+        </button>
       </div>
 
       {/* Error */}

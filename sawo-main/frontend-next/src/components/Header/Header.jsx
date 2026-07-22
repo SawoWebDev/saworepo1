@@ -5,8 +5,9 @@ import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/translation/navigation';
 import paths from '@/translation/routing';
 import SearchBar from './SearchBar';
+import HeaderLanguageSwitcher from './HeaderLanguageSwitcher';
 
-export default function Header() {
+export default function Header({ switcherLocales }) {
   const pathname = usePathname();
   const t = useTranslations('nav');
 
@@ -292,6 +293,8 @@ export default function Header() {
             ))}
           </nav>
 
+          <HeaderLanguageSwitcher locales={switcherLocales} />
+
           <div className="ml-auto pr-2 md:pr-4 flex items-center gap-3" id="search-container" ref={searchContainerRef}>
             {searchOpen ? (
               <div className="w-40 sm:w-44 md:w-48 lg:w-56">
@@ -365,6 +368,11 @@ export default function Header() {
               )}
             </div>
           ))}
+          <HeaderLanguageSwitcher
+            locales={switcherLocales}
+            variant="mobile"
+            onNavigate={() => setMobileOpen(false)}
+          />
         </div>
       )}
     </header>

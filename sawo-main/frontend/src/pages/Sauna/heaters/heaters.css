@@ -92,6 +92,20 @@
   /* Fallback minimum width on mobile */
 }
 
+@media (max-width: 768px) {
+  .wm-filter-search-row {
+    flex-wrap: wrap;
+  }
+  .wm-filter-pills-group {
+    flex: 1 1 100%;
+  }
+  .wm-search-bar-fixed {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 /* ---- Product groups ---- */
 .wm-group { margin-bottom: 40px; }
 .wm-group-title {

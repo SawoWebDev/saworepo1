@@ -5,6 +5,9 @@ import {
   getJsonSourceScope, setJsonSourceScope as saveJsonSourceScope,
 } from "../local-storage/dataSource";
 import { getGDPRBannerEnabled, setGDPRBannerEnabled as saveGDPRBannerEnabled } from "../local-storage/gdprSettings";
+import { getCache, setCache } from "./adminCache";
+
+const SETTINGS_CACHE_KEY = "admin:settings";
 
 // Moved out of the sidebar footer (was a bare <select> wedged next to
 // logout/theme) — this is a high-stakes, rarely-changed control (it changes
@@ -12,7 +15,7 @@ import { getGDPRBannerEnabled, setGDPRBannerEnabled as saveGDPRBannerEnabled } f
 // than one accidental click away at all times. See local-storage/dataSource.js.
 const SOURCE_OPTIONS = [
   { value: "github", label: "GitHub", description: "The GitHub-synced JSON snapshot (bundled products.json). Current default." },
-  { value: "supabase", label: "Supabase", description: "Live Supabase rows, direct and instant — no sync step needed." },
+  { value: "supabase", label: "Supabase", description: "Live Supabase rows, direct and instant. No sync step needed." },
   { value: "jsonfile", label: "Json File", description: "A single hand-edited JSON file in the images repo, scoped below. Falls back to the GitHub snapshot outside that scope." },
 ];
 
@@ -24,17 +27,21 @@ const SCOPE_OPTIONS = [
 ];
 
 export default function Settings({ currentUser }) {
-  const [source, setSource] = useState(null);
-  const [scope, setScope] = useState("accessories");
+  const cachedSettings = getCache(SETTINGS_CACHE_KEY);
+  const [source, setSource] = useState(() => cachedSettings ? cachedSettings.source : null);
+  const [scope, setScope] = useState(() => cachedSettings ? cachedSettings.scope : "accessories");
   const [switching, setSwitching] = useState(false);
-  const [gdprEnabled, setGdprEnabled] = useState(false);
+  const [gdprEnabled, setGdprEnabled] = useState(() => cachedSettings ? cachedSettings.gdprEnabled : false);
   const [gdprSaving, setGdprSaving] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     Promise.all([getDataSource(), getJsonSourceScope(), getGDPRBannerEnabled()])
-      .then(([s, sc, gdpr]) => { setSource(s); setScope(sc); setGdprEnabled(gdpr); })
+      .then(([s, sc, gdpr]) => {
+        setSource(s); setScope(sc); setGdprEnabled(gdpr);
+        setCache(SETTINGS_CACHE_KEY, { source: s, scope: sc, gdprEnabled: gdpr });
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
@@ -115,11 +122,6 @@ export default function Settings({ currentUser }) {
 
   return (
     <div className="w-full max-w-2xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[var(--text)] mb-2">Settings</h1>
-        <p className="text-[var(--text-2)]">Site-wide configuration for the public frontend</p>
-      </div>
-
       {error && (
         <div className="mb-6 bg-[var(--danger-bg)] border border-[var(--danger)] rounded p-4 text-[var(--danger)]">
           <i className="fas fa-exclamation-circle mr-2"></i>
@@ -127,14 +129,14 @@ export default function Settings({ currentUser }) {
         </div>
       )}
 
-      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm">
+      <div className="card card-body">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-satellite-dish text-[var(--brand)]"></i>
           Live Data Source
         </h3>
         <p className="text-sm text-[var(--text-3)] mb-4">
           Controls where the public site reads product / sauna room / site content
-          data from — takes effect for visitors within seconds, no redeploy needed.
+          data from. Takes effect for visitors within seconds, no redeploy needed.
         </p>
 
         <div className="space-y-2 mb-4">
@@ -174,7 +176,7 @@ export default function Settings({ currentUser }) {
               disabled={switching}
               onChange={(e) => handleSwitchScope(e.target.value)}
               title="Which product group the Json File source applies to. Only Accessories is available today; edits to it live in the images repo's allaccs-data.json, not in this admin."
-              className="text-sm border border-[var(--border)] rounded px-3 py-2 bg-[var(--surface)] text-[var(--text)]"
+              className="filter-select"
             >
               {SCOPE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value} disabled={opt.disabled}>
@@ -186,7 +188,7 @@ export default function Settings({ currentUser }) {
         )}
       </div>
 
-      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm mt-6">
+      <div className="card card-body mt-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
@@ -195,7 +197,7 @@ export default function Settings({ currentUser }) {
             </h3>
             <p className="text-sm text-[var(--text-3)]">
               Shows the cookie/data consent banner to public visitors. When off, the
-              banner's code isn't even loaded on the public site — zero page-speed cost.
+              banner's code isn't even loaded on the public site, so there is zero page-speed cost.
             </p>
           </div>
           <label className={`relative inline-flex items-center flex-shrink-0 ${gdprSaving ? "opacity-60 pointer-events-none" : "cursor-pointer"}`}>

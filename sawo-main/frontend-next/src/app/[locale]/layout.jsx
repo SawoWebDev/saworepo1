@@ -7,7 +7,6 @@ import { organizationJsonLd, websiteJsonLd } from '@/lib/seo/jsonld';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import BackToTop from '@/components/BackToTop';
-import LanguageSwitcher from '@/translation/LanguageSwitcher';
 import { getLanguageSwitcherSettings } from '@/translation/settings';
 import '../globals.css';
 
@@ -86,10 +85,9 @@ export default async function LocaleLayout({ children, params }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd(t('organization.description'))) }}
         />
         <NextIntlClientProvider messages={messages}>
-          <Header />
+          <Header switcherLocales={langSwitcherEnabled ? switcherLocales : null} />
           <main className="flex-1 relative z-0">{children}</main>
           <Footer />
-          {langSwitcherEnabled && <LanguageSwitcher locales={switcherLocales} />}
           <BackToTop />
         </NextIntlClientProvider>
       </body>

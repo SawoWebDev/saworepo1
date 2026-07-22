@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
 import DailyTrafficChart from "./DailyTrafficChart";
+import { getCache, setCache } from "./adminCache";
+
+const analyticsCacheKey = (dateRange) => `admin:analytics:${dateRange}`;
 
 // Deep-links out to PostHog's Heatmaps tool (session replay + heatmaps live
 // there, not duplicated in this CMS — see lib/posthog.js). PostHog doesn't
@@ -12,7 +15,7 @@ const POSTHOG_PROJECT_URL = process.env.REACT_APP_POSTHOG_PROJECT_URL;
 
 const Analytics = () => {
   const [dateRange, setDateRange] = useState("7days"); // 7days, 30days, 90days
-  const [stats, setStats] = useState({
+  const [stats, setStats] = useState(() => getCache(analyticsCacheKey("7days")) || {
     totalPageViews: 0,
     uniqueVisitors: 0,
     avgSessionDuration: 0,
@@ -24,14 +27,19 @@ const Analytics = () => {
     recentEvents: [],
     dailyStats: []
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !getCache(analyticsCacheKey("7days")));
   const [error, setError] = useState(null);
 
   const fetchAnalytics = useCallback(async () => {
     const ranges = { "7days": 7, "30days": 30, "90days": 90 };
     const days = ranges[dateRange] || 7;
+    const cacheKey = analyticsCacheKey(dateRange);
+    const cached = getCache(cacheKey);
+    // Already have this range's data on screen (seeded at mount, or from a
+    // prior visit to this tab within the session) — refresh quietly instead
+    // of flashing the full-page spinner.
+    if (cached) setStats(cached); else setLoading(true);
     try {
-      setLoading(true);
       const startDate = new Date();
       startDate.setDate(startDate.getDate() - days);
 
@@ -155,7 +163,7 @@ const Analytics = () => {
       const bouncedSessions = Object.values(sessionMap).filter(count => count === 1).length;
       const bounceRate = uniqueSessions > 0 ? Math.round((bouncedSessions / uniqueSessions) * 100) : 0;
 
-      setStats({
+      const newStats = {
         totalPageViews: pageViews?.length || 0,
         uniqueVisitors: uniqueSessions,
         avgSessionDuration: uniqueSessions > 0 ? Math.round(totalDuration / uniqueSessions) : 0,
@@ -166,7 +174,9 @@ const Analytics = () => {
         browserBreakdown,
         recentEvents: events || [],
         dailyStats
-      });
+      };
+      setStats(newStats);
+      setCache(cacheKey, newStats);
 
       setError(null);
     } catch (err) {
@@ -200,23 +210,14 @@ const Analytics = () => {
 
   return (
     <div className="w-full">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[var(--text)] mb-2">Analytics Dashboard</h1>
-        <p className="text-[var(--text-2)]">Track visitor behavior, page performance, and traffic sources</p>
-      </div>
-
-      {/* Date Range Filter */}
-      <div className="mb-6 flex gap-2">
+      {/* Date Range Filter — pill tabs, same component as Taxonomy's tabs */}
+      <div className="tax-tabs mb-6">
         {["7days", "30days", "90days"].map((range) => (
           <button
             key={range}
+            type="button"
             onClick={() => setDateRange(range)}
-            className={`px-4 py-2 rounded font-medium transition-colors ${
-              dateRange === range
-                ? "bg-[var(--brand)] text-white"
-                : "bg-[var(--surface-2)] text-[var(--text)] hover:bg-[var(--border)]"
-            }`}
+            className={`tax-tab-btn${dateRange === range ? " active" : ""}`}
           >
             {range === "7days" ? "Last 7 days" : range === "30days" ? "Last 30 days" : "Last 90 days"}
           </button>
@@ -259,7 +260,7 @@ const Analytics = () => {
       </div>
 
       {/* Daily Traffic Chart */}
-      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm mb-8">
+      <div className="card card-body mb-8">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
           <i className="fas fa-chart-column text-[var(--brand)]"></i>
           Traffic Over Time
@@ -270,7 +271,7 @@ const Analytics = () => {
       {/* Two-column layout for top pages and countries */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Top Pages */}
-        <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm">
+        <div className="card card-body">
           <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
             <i className="fas fa-chart-bar text-[var(--brand)]"></i>
             Top Pages
@@ -288,7 +289,7 @@ const Analytics = () => {
                       href={`${POSTHOG_PROJECT_URL}/heatmaps`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      title={`Opens PostHog Heatmaps — select "${page.path}" from the page picker there`}
+                      title={`Opens PostHog Heatmaps. Select "${page.path}" from the page picker there`}
                       className="ml-3 text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
                     >
                       <i className="fa-solid fa-fire"></i>
@@ -307,7 +308,7 @@ const Analytics = () => {
         </div>
 
         {/* Top Countries */}
-        <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm">
+        <div className="card card-body">
           <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
             <i className="fas fa-globe text-[var(--brand)]"></i>
             Top Countries
@@ -343,7 +344,7 @@ const Analytics = () => {
       {/* Device and Browser Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Device Breakdown */}
-        <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm">
+        <div className="card card-body">
           <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
             <i className="fas fa-mobile-alt text-[var(--brand)]"></i>
             Device Types
@@ -373,7 +374,7 @@ const Analytics = () => {
         </div>
 
         {/* Browser Breakdown */}
-        <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm">
+        <div className="card card-body">
           <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
             <i className="fas fa-compass text-[var(--brand)]"></i>
             Top Browsers
@@ -404,29 +405,29 @@ const Analytics = () => {
       </div>
 
       {/* Recent Events */}
-      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm">
+      <div className="card card-body">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
           <i className="fas fa-history text-[var(--brand)]"></i>
           Recent User Events
         </h3>
         {stats.recentEvents.length > 0 ? (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="products-table-wrap">
+            <table className="products-table">
               <thead>
-                <tr className="border-b border-[var(--border)]">
-                  <th className="text-left py-2 px-2 font-medium text-[var(--text-2)]">Event</th>
-                  <th className="text-left py-2 px-2 font-medium text-[var(--text-2)]">Page</th>
-                  <th className="text-left py-2 px-2 font-medium text-[var(--text-2)]">Time</th>
-                  <th className="text-left py-2 px-2 font-medium text-[var(--text-2)]">Details</th>
+                <tr>
+                  <th>Event</th>
+                  <th>Page</th>
+                  <th>Time</th>
+                  <th>Details</th>
                 </tr>
               </thead>
               <tbody>
                 {stats.recentEvents.slice(0, 10).map((event, idx) => (
-                  <tr key={idx} className="border-b border-[var(--border-light)] hover:bg-[var(--brand-muted)]">
-                    <td className="py-2 px-2 text-[var(--text)] font-medium">{event.event_name}</td>
-                    <td className="py-2 px-2 text-[var(--text-2)]">{event.page_path || "-"}</td>
-                    <td className="py-2 px-2 text-[var(--text-3)]">{new Date(event.timestamp).toLocaleString()}</td>
-                    <td className="py-2 px-2 text-[var(--text-3)]">
+                  <tr key={idx}>
+                    <td style={{ color: "var(--text)", fontWeight: 500 }}>{event.event_name}</td>
+                    <td style={{ color: "var(--text-2)" }}>{event.page_path || "-"}</td>
+                    <td style={{ color: "var(--text-3)" }}>{new Date(event.timestamp).toLocaleString()}</td>
+                    <td style={{ color: "var(--text-3)" }}>
                       {event.event_data ? JSON.stringify(event.event_data).substring(0, 50) : "-"}
                     </td>
                   </tr>
@@ -445,7 +446,7 @@ const Analytics = () => {
 
 function MetricCard({ icon, title, value, subtitle }) {
   return (
-    <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="card card-body hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-2">
         <div>
           <p className="text-[var(--text-3)] text-sm font-medium mb-1">{title}</p>
