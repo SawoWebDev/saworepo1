@@ -176,6 +176,16 @@ body {
 .sidebar-nav::-webkit-scrollbar { width: 4px; }
 .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 4px; }
 
+/* Each section (Catalog / Insights / System) sits on its own subtle card so
+   its items read as visually grouped under that category, instead of
+   blending into the plain sidebar gradient. */
+.sidebar-section {
+  margin: 0 0.55rem;
+  padding: 0.65rem 0 0.7rem;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
 .sidebar-section:not(:first-child) { margin-top: 1.1rem; }
 
 /* Section headings: bright white small-caps (always in contrast with the
@@ -409,6 +419,7 @@ body {
   .admin-sidebar.sidebar-collapsed .sidebar-logo { padding: 2.4rem 0.5rem 0.9rem; height: 84px; }
   .admin-sidebar.sidebar-collapsed .sidebar-logo-img { width: 44px; }
   .admin-sidebar.sidebar-collapsed .sidebar-nav-label { display: none; }
+  .admin-sidebar.sidebar-collapsed .sidebar-section { margin-left: 0.45rem; margin-right: 0.45rem; }
   .admin-sidebar.sidebar-collapsed .sidebar-section-label {
     padding: 0 1rem 0.45rem;
     pointer-events: none;

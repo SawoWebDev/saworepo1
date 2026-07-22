@@ -57,6 +57,7 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
   const [langs, setLangs] = useState(LOCALES.map((l) => l.code));
   const [enabled, setEnabled] = useState(true);
   const ref = useRef(null);
+  const hoverTimeout = useRef(null);
 
   useEffect(() => {
     if (variant !== "desktop") return undefined;
@@ -64,7 +65,10 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
     document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+    };
   }, [variant]);
 
   const loadSettings = () => {
@@ -83,6 +87,20 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
       if (!v) loadSettings();
       return !v;
     });
+  };
+
+  // Hover open/close — same delayed-close pattern as the other nav dropdowns
+  // (Header.jsx's handleMouseEnterMenu/handleMouseLeaveMenu), so this behaves
+  // identically to Sauna/Steam/Support/About Us on hover.
+  const handleMouseEnter = () => {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+    setOpen((v) => {
+      if (!v) loadSettings();
+      return true;
+    });
+  };
+  const handleMouseLeave = () => {
+    hoverTimeout.current = setTimeout(() => setOpen(false), 200);
   };
 
   const go = (code) => {
@@ -123,7 +141,12 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
   }
 
   return (
-    <div className="header-lang" ref={ref}>
+    <div
+      className="header-lang"
+      ref={ref}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button
         type="button"
         className="header-lang-toggle"
