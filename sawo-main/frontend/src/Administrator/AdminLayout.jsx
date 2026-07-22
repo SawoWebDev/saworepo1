@@ -243,7 +243,7 @@ export default function AdminLayout({ children }) {
             setDark={setDark}
           />
         )}
-        <div className="admin-main-content" style={{ background: dark ? "#161412" : "#f7f5f2" }}>
+        <div className="admin-main-content" style={{ background: dark ? "#241d16" : "#f7f5f2" }}>
           {React.cloneElement(children, { currentUser: session.user })}
         </div>
       </main>

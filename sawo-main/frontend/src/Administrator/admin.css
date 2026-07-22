@@ -64,7 +64,10 @@
    normal font-weight) and paired with a slightly heavier weight so labels
    stay legible instead of washing out. ───────────────────────────────── */
 [data-theme="dark"] {
-  --bg:           #221c17;
+  /* Cocoa — one clean step below --surface so cards read as raised instead
+     of blending into a near-black void (was #161412, darker than the cards
+     themselves). */
+  --bg:           #241d16;
   --surface:      #2c241d;
   --surface-2:    #382e24;
   --border:       #4a3c2e;
@@ -658,9 +661,44 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--r);
   box-shadow: var(--shadow-sm);
-  transition: background var(--t), border-color var(--t);
+  transition: background var(--t), border-color var(--t), box-shadow var(--t);
 }
 .card-body { padding:1.5rem; }
+
+/* Beveled, dark mode only — a bright inset top edge + a dark inset bottom
+   edge reads as a pressed, physical rim around the card. Applied to every
+   card-like surface across the admin (Settings/Analytics's .card, the
+   Products/Sauna Rooms table wrap, and the Taxonomy/Models/Products/Sauna
+   Rooms grid cards) so the treatment is consistent everywhere, not just
+   where it was first added. */
+[data-theme="dark"] .card,
+[data-theme="dark"] .products-table-wrap,
+[data-theme="dark"] .tax-grid-card,
+[data-theme="dark"] .model-grid-card {
+  background: var(--surface);
+  border-color: #211a13;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.13),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 6px 16px rgba(0,0,0,0.4);
+}
+[data-theme="dark"] .tax-grid-card:hover,
+[data-theme="dark"] .model-grid-card:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 12px 26px rgba(0,0,0,0.5);
+}
+/* .product-grid-card (Products + Sauna Rooms grid view) is transparent until
+   hovered by design — only its hover surface gets the beveled treatment,
+   so the resting grid stays minimal. */
+[data-theme="dark"] .product-grid-card:hover {
+  border-color: #211a13;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.13),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 6px 16px rgba(0,0,0,0.4);
+}
 
 /* ── Table (admin-table — legacy, kept for compatibility) ────────────── */
 .admin-table { width:100%; border-collapse:collapse; font-size:0.875rem; }
