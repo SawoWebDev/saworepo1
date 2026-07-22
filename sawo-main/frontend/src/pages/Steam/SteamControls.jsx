@@ -1,10 +1,14 @@
 ﻿// SteamControls.jsx
 
 import React from "react";
-import heroBg from "../../assets/Steam/controls-hero.webp";
 import stpV2 from "../../assets/Steam/STP-INFACE-V2-300x330.webp";
 import stpSST from "../../assets/Steam/STP-INFACE-SST-310x179.webp";
 import steControl from "../../assets/Steam/STE-INFACE-V2-150x150.webp";
+
+// Served from /public (not webpack-bundled) so its URL is stable at build time —
+// public/index.html preloads this exact path for this route, so by the time
+// this component mounts and applies it, the browser already has it cached.
+const heroBg = "/hero/steam-controls.webp";
 
 const controls = [
   {

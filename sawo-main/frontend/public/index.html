@@ -30,6 +30,27 @@
   <link rel="preload" as="image" href="/1024.webp" type="image/webp" media="(min-width: 641px) and (max-width: 1024px)" fetchpriority="high" />
   <link rel="preload" as="image" href="/640.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high" />
 
+  <!-- Non-home routes are lazy-loaded JS chunks (see src/App.jsx), so their
+       hero image would otherwise only start downloading after the chunk
+       fetches, parses, and renders — a visible blank/placeholder gap on
+       every visit. This map preloads the hero for the CURRENT path only
+       (document.write during head parsing lands before the preload scanner
+       finishes, so the fetch starts in parallel with main.js, not after it),
+       so by the time the route's own component applies the image, the
+       browser already has it cached. Add one entry per route as its hero
+       gets moved to /public (see /hero/steam-controls.webp for the pattern). -->
+  <script>
+    (function () {
+      var heroMap = {
+        "/steam/controls": "/hero/steam-controls.webp"
+      };
+      var href = heroMap[location.pathname];
+      if (href) {
+        document.write('<link rel="preload" as="image" href="' + href + '" fetchpriority="high">');
+      }
+    })();
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description"
