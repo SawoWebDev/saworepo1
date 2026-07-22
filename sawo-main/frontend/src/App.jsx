@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 // Components (always needed — small, no lazy needed)
 import ScrollToTop from "./components/ScrollToTop";
-// import GDPRConsent from "./components/GDPRConsent"; // temporarily disabled
+// GDPRConsent itself is lazy-loaded inside the gate, only when the CMS
+// toggle (Settings page) is on — see components/GDPRConsentGate.jsx.
+import GDPRConsentGate from "./components/GDPRConsentGate";
 
 // Layouts
 import MainLayout  from "./layouts/MainLayout";
@@ -84,8 +86,8 @@ export default function App() {
   return (
       <Router>
         <ScrollToTop />
-        {/* Consent banner temporarily disabled — re-enable when ready */}
-        {/* <GDPRConsent /> */}
+        {/* Controlled by the "GDPR Consent Banner" toggle on /admin/settings */}
+        <GDPRConsentGate />
         <Suspense fallback={null}>
           <Routes>
 

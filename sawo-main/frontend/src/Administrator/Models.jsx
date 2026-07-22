@@ -74,50 +74,25 @@ function ProductCard({ product, onClick }) {
   );
 }
 
-// ─── Model Group (folder section) ─────────────────────────────────────────
+// ─── Model Group (card that expands in place to show its products) ───────
 function ModelGroup({ modelName, products, expanded, onToggle, onProductClick }) {
   return (
-    <div style={{
-      borderRadius: "var(--r)", border: "1px solid var(--border)",
-      overflow: "hidden", background: "var(--surface-2)",
-      marginBottom: 12,
-    }}>
-      {/* Header */}
-      <button
-        type="button"
-        onClick={onToggle}
-        style={{
-          width: "100%", padding: "14px 16px", display: "flex",
-          alignItems: "center", justifyContent: "space-between",
-          gap: 12, background: "var(--surface-2)", border: "none",
-          cursor: "pointer", transition: "background 0.2s",
-          fontSize: "0.95rem", fontWeight: 700, color: "var(--text)",
-        }}
-        onMouseEnter={e => e.currentTarget.style.background = "var(--surface-3)"}
-        onMouseLeave={e => e.currentTarget.style.background = "var(--surface-2)"}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <i className={`fa-solid fa-folder${expanded ? "-open" : ""}`}
-            style={{ fontSize: "1rem", color: "var(--brand)" }} />
-          <span>{modelName || "Uncategorized"}</span>
-          <span style={{
-            padding: "2px 8px", borderRadius: 12, fontSize: "0.7rem",
-            background: "var(--brand)", color: "#fff", fontWeight: 700,
-          }}>
-            {products.length}
-          </span>
+    <div className={`model-grid-card${expanded ? " is-expanded" : ""}`}>
+      {/* Header — same card language as Taxonomy's TaxCard (icon, name, meta) */}
+      <button type="button" className="model-card-header" onClick={onToggle}>
+        <div className="model-card-icon">
+          <i className={`fa-solid fa-folder${expanded ? "-open" : ""}`} />
         </div>
-        <i className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`}
-          style={{ fontSize: "0.8rem", color: "var(--text-3)" }} />
+        <div className="model-card-name">{modelName || "Uncategorized"}</div>
+        <div className="model-card-meta">
+          <span><i className="fa-solid fa-box" style={{ fontSize: "0.7rem", marginRight: 5 }} />{products.length} Product{products.length !== 1 ? "s" : ""}</span>
+          <i className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`} />
+        </div>
       </button>
 
       {/* Expanded Content - Grid Layout */}
       {expanded && (
-        <div style={{
-          padding: "20px 16px", borderTop: "1px solid var(--border)",
-          display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
-          gap: 16,
-        }}>
+        <div className="model-card-content">
           {products.map(product => (
             <ProductCard key={product.id} product={product} onClick={onProductClick} />
           ))}
@@ -338,7 +313,7 @@ export default function Models() {
           {search ? "No models match your search." : "No products found. Create products in the Products page to see them grouped here."}
         </div>
       ) : (
-        <div>
+        <div className="model-grid">
           {filteredGroups.map(([modelName, modelProducts]) => (
             <ModelGroup
               key={modelName}

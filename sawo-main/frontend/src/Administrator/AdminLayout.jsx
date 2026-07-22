@@ -56,9 +56,11 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
       />
 
       <aside className={`admin-sidebar${open ? " sidebar-open" : ""}`}>
-        {/* Logo */}
+        {/* Logo — always the current app's own home page, whether that's
+            localhost during dev or whichever domain this deploy is served
+            from in production (not a hardcoded external URL). */}
         <div className="sidebar-logo">
-          <a href="https://www.sawo.com" target="_blank" rel="noopener noreferrer">
+          <a href={`${window.location.origin}/`} target="_blank" rel="noopener noreferrer">
             <img src={logo} alt="SAWO" className="sidebar-logo-img" />
           </a>
         </div>

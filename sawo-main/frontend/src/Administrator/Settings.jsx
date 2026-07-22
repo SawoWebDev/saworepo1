@@ -4,6 +4,7 @@ import {
   getDataSource, setDataSource as saveDataSource,
   getJsonSourceScope, setJsonSourceScope as saveJsonSourceScope,
 } from "../local-storage/dataSource";
+import { getGDPRBannerEnabled, setGDPRBannerEnabled as saveGDPRBannerEnabled } from "../local-storage/gdprSettings";
 
 // Moved out of the sidebar footer (was a bare <select> wedged next to
 // logout/theme) — this is a high-stakes, rarely-changed control (it changes
@@ -26,15 +27,38 @@ export default function Settings({ currentUser }) {
   const [source, setSource] = useState(null);
   const [scope, setScope] = useState("accessories");
   const [switching, setSwitching] = useState(false);
+  const [gdprEnabled, setGdprEnabled] = useState(false);
+  const [gdprSaving, setGdprSaving] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    Promise.all([getDataSource(), getJsonSourceScope()])
-      .then(([s, sc]) => { setSource(s); setScope(sc); })
+    Promise.all([getDataSource(), getJsonSourceScope(), getGDPRBannerEnabled()])
+      .then(([s, sc, gdpr]) => { setSource(s); setScope(sc); setGdprEnabled(gdpr); })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleToggleGDPR = async (next) => {
+    setGdprSaving(true);
+    setError(null);
+    try {
+      await saveGDPRBannerEnabled(next, currentUser?.username);
+      setGdprEnabled(next);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "gdpr_banner_enabled",
+        entity_name: `GDPR Consent Banner → ${next ? "enabled" : "disabled"}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+    } catch (err) {
+      setError("Failed to toggle GDPR banner: " + err.message);
+    } finally {
+      setGdprSaving(false);
+    }
+  };
 
   const handleSwitchSource = async (next) => {
     setSwitching(true);
@@ -160,6 +184,32 @@ export default function Settings({ currentUser }) {
             </select>
           </div>
         )}
+      </div>
+
+      <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] p-6 shadow-sm mt-6">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+              <i className="fa-solid fa-cookie-bite text-[var(--brand)]"></i>
+              GDPR Consent Banner
+            </h3>
+            <p className="text-sm text-[var(--text-3)]">
+              Shows the cookie/data consent banner to public visitors. When off, the
+              banner's code isn't even loaded on the public site — zero page-speed cost.
+            </p>
+          </div>
+          <label className={`relative inline-flex items-center flex-shrink-0 ${gdprSaving ? "opacity-60 pointer-events-none" : "cursor-pointer"}`}>
+            <input
+              type="checkbox"
+              checked={gdprEnabled}
+              disabled={gdprSaving}
+              onChange={(e) => handleToggleGDPR(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-[var(--surface-2)] border border-[var(--border)] rounded-full peer peer-checked:bg-[var(--brand)] transition-colors"></div>
+            <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+          </label>
+        </div>
       </div>
     </div>
   );

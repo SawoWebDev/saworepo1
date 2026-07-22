@@ -2017,13 +2017,15 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
     ? `${FRONT_URL || window.location.origin}/accessories/${p.slug}`
     : `${FRONT_URL || window.location.origin}/products/${p.slug}`;
   const showMenu = hovered && (dataSource === "local" || perms.can("products.edit") || perms.can("products.duplicate") || perms.can("products.delete"));
+  const isUnpublished = p.status === "draft" || p.visible === false;
 
   return (
     <a href={dataSource === "local" ? undefined : productUrl} target={dataSource === "local" ? undefined : "_blank"} rel="noopener noreferrer"
-      className="product-grid-card"
+      className={`product-grid-card${isUnpublished ? " is-unpublished" : ""}`}
       style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: dataSource === "local" ? "default" : "pointer" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}>
+      {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
       <div className="product-grid-thumb">
         {getImageUrl(p, 'thumbnail', dataSource)
           ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt={p.name} />
@@ -2238,7 +2240,7 @@ export default function Products({ currentUser }) {
   const [search,       setSearch]       = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const [sortDir,      setSortDir]      = useState("desc");
-  const [viewMode,     setViewMode]     = useState("list");
+  const [viewMode,     setViewMode]     = useState("grid");
   const [dataSource,   setDataSource]   = useState("live"); // "live" or "local"
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage,  setCurrentPage]  = useState(1);

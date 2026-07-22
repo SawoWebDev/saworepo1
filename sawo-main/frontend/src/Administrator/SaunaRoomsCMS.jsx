@@ -781,14 +781,16 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
 
   const roomUrl = `${FRONT_URL || window.location.origin}/sauna/rooms/${room.slug}`;
   const showMenu = hovered && (perms.can("sauna_rooms.edit") || perms.can("sauna_rooms.duplicate") || perms.can("sauna_rooms.delete"));
+  const isUnpublished = room.status === "draft" || room.visible === false;
 
   return (
     <a href={roomUrl} target="_blank" rel="noopener noreferrer"
-      className="product-grid-card"
+      className={`product-grid-card${isUnpublished ? " is-unpublished" : ""}`}
       style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}
     >
+      {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
       <div className="product-grid-thumb">
         {getRoomImageUrl(room, "thumbnail", dataSource)
           ? <img src={getRoomImageUrl(room, "thumbnail", dataSource)} alt={room.name} />
@@ -859,7 +861,7 @@ export default function SaunaRooms({ currentUser }) {
   const [filterStatus, setFilterStatus] = useState("");
   const [filterType,   setFilterType]   = useState("");
   const [sortDir,      setSortDir]      = useState("desc");
-  const [viewMode,     setViewMode]     = useState("list");
+  const [viewMode,     setViewMode]     = useState("grid");
 
   const [selected,    setSelected]    = useState(new Set());
   const [bulkConfirm, setBulkConfirm] = useState(false);

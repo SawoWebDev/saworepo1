@@ -171,7 +171,7 @@ export default function Users() {
   const roleBadge = role => {
     if (role === "superadmin") return <span className="tbl-pill tbl-pill-cat">{role}</span>;
     if (role === "editor")     return <span className="tbl-pill tbl-pill-tag">{role}</span>;
-    if (role === "viewer")     return <span className="tbl-pill" style={{ background: "#e0e7ff", color: "#4f46e5", border: "1px solid #c7d2fe" }}>viewer</span>;
+    if (role === "viewer")     return <span className="tbl-pill tbl-pill-info">viewer</span>;
     return <span className="tbl-pill tbl-pill-more">{role}</span>;
   };
 
@@ -251,10 +251,10 @@ export default function Users() {
                   <input type="checkbox" className="tbl-checkbox" checked={selected.has(u.id)} onChange={() => toggleSelect(u.id)} />
                 </td>
                 <td>
-                  <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 14, color: "rgb(20,22,23)" }}>{u.username}</span>
+                  <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 14, color: "var(--text)" }}>{u.username}</span>
                 </td>
-                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "rgb(90,85,80)" }}>{u.full_name || "-"}</td>
-                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "rgb(90,85,80)" }}>{u.email || "-"}</td>
+                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.full_name || "-"}</td>
+                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.email || "-"}</td>
                 <td>{roleBadge(u.role)}</td>
                 <td className="tbl-date">{formatDate(u.created_at)}</td>
                 <td style={{ textAlign: "right" }}>

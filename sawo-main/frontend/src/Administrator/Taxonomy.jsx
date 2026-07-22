@@ -61,23 +61,23 @@ function TermProductsModal({ open, onClose, term, field }) {
       ) : products.length === 0 ? (
         <div className="empty-state">No products use this {field === "categories" ? "category" : "tag"} yet.</div>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: 12 }}>
           {products.map(p => (
-            <div key={p.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 10px", background: "var(--surface-2)", borderRadius: "var(--r-sm)", border: "1px solid var(--border)" }}>
-              {localOrRemote(p, 'thumbnail')
-                ? <img
-                    src={localOrRemote(p, 'thumbnail')}
-                    alt={p.name}
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    decoding="async"
-                    style={{ width: 40, height: 40, borderRadius: 6, objectFit: "cover", border: "1px solid var(--border)", flexShrink: 0 }}
-                  />
-                : <div style={{ width: 40, height: 40, borderRadius: 6, background: "var(--border)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="fa-regular fa-image" style={{ color: "var(--text-3)" }} /></div>
-              }
-              <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 14, color: "rgb(20,22,23)" }}>{p.name}</span>
-              <span className="tbl-status" style={{ marginLeft: "auto" }}>{p.status}</span>
+            <div key={p.id} style={{ display: "flex", flexDirection: "column", gap: 6, padding: 10, background: "var(--surface-2)", borderRadius: "var(--r-sm)", border: "1px solid var(--border)" }}>
+              <div style={{ width: "100%", aspectRatio: "1", borderRadius: 6, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--surface)" }}>
+                {localOrRemote(p, 'thumbnail')
+                  ? <img
+                      src={localOrRemote(p, 'thumbnail')}
+                      alt={p.name}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  : <i className="fa-regular fa-image" style={{ color: "var(--text-3)", fontSize: "1.3rem" }} />
+                }
+              </div>
+              <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 13, color: "var(--text)", lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{p.name}</span>
+              <span className="tbl-status">{p.status}</span>
             </div>
           ))}
         </div>
