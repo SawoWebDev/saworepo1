@@ -37,11 +37,14 @@ function formsEqual(a, b) {
   return true;
 }
 
+// Matches the actual room_type values in the data (verified against
+// saunaroom-data.json) — "traditional/steam/combo" never existed here and
+// meant Standard/Glassfront rooms couldn't be filtered or correctly
+// labeled in the admin.
 const ROOM_TYPES = [
-  { value: "traditional", label: "Traditional" },
-  { value: "infrared",    label: "Infrared" },
-  { value: "steam",       label: "Steam" },
-  { value: "combo",       label: "Combo" },
+  { value: "standard",   label: "Standard" },
+  { value: "glassfront", label: "Glassfront" },
+  { value: "infrared",   label: "Infrared" },
 ];
 
 const SIZE_CATEGORIES = [
@@ -57,7 +60,7 @@ const EMPTY_FORM = {
   // Core identity
   name: "", slug: "", short_description: "", description: "", thumbnail: "", sku: "",
   // Classification
-  room_type: "traditional", model_code: "", size_category: "",
+  room_type: "standard", model_code: "", size_category: "",
   // Dimensions
   width_m: "", depth_m: "", height_m: "",
   // Capacity
@@ -229,11 +232,11 @@ function IconBtn({ icon, onClick, title, danger }) {
   );
 }
 
-function Modal({ open, onClose, title, children, wide, actions }) {
+function Modal({ open, onClose, title, children, wide, actions, fixedHeight }) {
   if (!open) return null;
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className={`modal${wide ? " modal-wide" : ""}`} onClick={e => e.stopPropagation()}>
+      <div className={`modal${wide ? " modal-wide" : ""}${fixedHeight ? " modal-fixed-height" : ""}`} onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
           {actions && (
@@ -378,6 +381,60 @@ function PillInput({ label, value = [], onChange, placeholder, suggestions = [] 
         </div>
       )}
       <p className="pill-hint">Press Enter to add · Backspace to remove last · paste lists (» • - *)</p>
+    </div>
+  );
+}
+
+// ─── Smart Tag Suggestions from Name & Description ───────────────────────────
+// Same idea as Products.jsx's TagSuggestions: scans existing tags for ones
+// that already appear in this room's own name/description/features, so
+// editors have a reference instead of guessing which tags apply.
+function TagSuggestions({ name, description, features = [], currentTags, allTags, onAddTags }) {
+  const suggestedTags = allTags.filter(tag => {
+    if (currentTags.includes(tag)) return false;
+    const escaped = tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`\\b${escaped}\\b`, 'i');
+    return pattern.test(name || "") || pattern.test(description || "") || pattern.test((features || []).join(" "));
+  });
+
+  if (!suggestedTags.length) return null;
+
+  return (
+    <div style={{
+      background: "var(--surface-2)",
+      border: "1px solid rgba(245,157,11,0.25)",
+      borderRadius: "var(--r)", padding: "12px 14px",
+      fontSize: "0.78rem", color: "var(--text-2)", lineHeight: 1.7, marginTop: 8,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 8, fontWeight: 700, color: "var(--text)", fontSize: "0.8rem" }}>
+        <i className="fa-solid fa-lightbulb" style={{ color: "#f59d0b" }} />
+        Found matching keywords in your content
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
+        {suggestedTags.map(t => (
+          <span key={t} style={{
+            fontSize: "0.72rem", fontWeight: 600,
+            background: "rgba(245,157,11,0.1)",
+            color: "#92400e",
+            border: "1px solid rgba(245,157,11,0.3)",
+            borderRadius: 4, padding: "3px 8px",
+          }}>+ {t}</span>
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={() => onAddTags(suggestedTags)}
+        style={{
+          background: "#f59d0b", color: "#fff", border: "none",
+          padding: "6px 12px", borderRadius: 4, fontSize: "0.75rem",
+          fontWeight: 600, cursor: "pointer", transition: "all 0.2s",
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = "#d97706"}
+        onMouseLeave={e => e.currentTarget.style.background = "#f59d0b"}
+      >
+        <i className="fa-solid fa-check" style={{ marginRight: 4 }} />
+        Add these tags
+      </button>
     </div>
   );
 }
@@ -1237,7 +1294,7 @@ export default function SaunaRooms({ currentUser }) {
     description:       data.description       || "",
     thumbnail:         data.thumbnail         || "",
     sku:               data.sku               || "",
-    room_type:         data.room_type         || "traditional",
+    room_type:         data.room_type         || "standard",
     model_code:        data.model_code        || "",
     size_category:     data.size_category     || "",
     width_m:           data.width_m           ?? "",
@@ -1455,8 +1512,8 @@ export default function SaunaRooms({ currentUser }) {
 
       <div style={{ marginBottom: 14 }}>
         <div>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 0 }}>
-            <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
+          <div className="data-source-row">
+            <div className="tax-tabs">
               {[
                 { id: "live",  label: "Live",  icon: "fa-cloud" },
                 { id: "local", label: "Local", icon: "fa-folder" },
@@ -1465,22 +1522,7 @@ export default function SaunaRooms({ currentUser }) {
                   key={tab.id}
                   type="button"
                   onClick={() => setDataSource(tab.id)}
-                  style={{
-                    flex: 1,
-                    padding: "8px 16px",
-                    border: "none",
-                    background: dataSource === tab.id ? "var(--brand-bg)" : "transparent",
-                    color: dataSource === tab.id ? "var(--brand)" : "var(--text-2)",
-                    cursor: "pointer",
-                    fontSize: "0.85rem",
-                    fontWeight: dataSource === tab.id ? 600 : 500,
-                    borderRight: tab.id === "live" ? "1px solid var(--border)" : "none",
-                    transition: "all 0.2s ease",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 6,
-                  }}
+                  className={`tax-tab-btn${dataSource === tab.id ? " active" : ""}`}
                 >
                   <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
                   {tab.label}
@@ -1493,23 +1535,7 @@ export default function SaunaRooms({ currentUser }) {
                 onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
                 disabled={syncCheckLoading}
                 title="Syncs sauna rooms from Supabase to local. Compares added, updated, and deleted items, then lets you apply the changes"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "8px 12px",
-                  fontSize: "0.85rem",
-                  fontWeight: 500,
-                  border: "1px solid var(--border)",
-                  background: "var(--surface)",
-                  color: syncCheckLoading ? "var(--text-3)" : "var(--text)",
-                  cursor: syncCheckLoading ? "not-allowed" : "pointer",
-                  borderRadius: 4,
-                  transition: "all 0.2s ease",
-                  opacity: syncCheckLoading ? 0.6 : 1,
-                }}
-                onMouseEnter={e => { if (!syncCheckLoading) e.currentTarget.style.background = "var(--surface-2)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; }}
+                className="btn btn-primary"
               >
                 <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
                 {syncCheckLoading ? "Syncing..." : "Sync"}
@@ -1518,67 +1544,65 @@ export default function SaunaRooms({ currentUser }) {
             <p className="products-subtitle" style={{ margin: 0 }}>
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
             </p>
+            {dataSource === "local" && (
+              <span style={{
+                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem", color: "var(--info)",
+                background: "var(--info-bg)", border: "1px solid var(--info-border)",
+                padding: "6px 12px", borderRadius: 20,
+              }}>
+                <i className="fa-solid fa-circle-info" />
+                Viewing <strong>locally saved sauna rooms</strong>. Read-only — switch to Live to edit.
+              </span>
+            )}
+            {perms.can("sauna_rooms.create") && dataSource === "live" && (
+              <Btn icon="fa-plus" label="New Room" onClick={openCreate} style={{ marginLeft: "auto" }} />
+            )}
           </div>
         </div>
       </div>
 
-      {/* Local Mode Notice */}
-      {dataSource === "local" && (
-        <div style={{
-          background: "var(--info-bg)",
-          border: "1px solid var(--info-border)",
-          color: "var(--info)",
-          padding: "10px 14px",
-          borderRadius: 4,
-          marginBottom: 14,
-          fontSize: "0.85rem",
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}>
-          <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
-          <span>Viewing <strong>locally saved sauna rooms</strong>. This is read-only. Switch to Live to edit.</span>
-        </div>
-      )}
-
       {/* Toolbar */}
       <div className="products-toolbar">
-        <div className="search-wrap">
-          <i className="fa-solid fa-magnifying-glass" />
-          <input className="search-input" value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="Search name, model, tag..." />
-        </div>
-        <select className="filter-select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
-          <option value="">All Status</option>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
-        </select>
-        <select className="filter-select" value={filterType} onChange={e => setFilterType(e.target.value)}>
-          <option value="">All Types</option>
-          {ROOM_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
-        </select>
-        <select className="filter-select" value={sortDir} onChange={e => setSortDir(e.target.value)}>
-          <option value="desc">Newest first</option>
-          <option value="asc">Oldest first</option>
-        </select>
-        <div className="view-toggle">
-          {[{ mode: "list", icon: "fa-list" }, { mode: "grid", icon: "fa-grip" }].map(({ mode, icon }) => (
-            <button key={mode} type="button" onClick={() => setViewMode(mode)}
-              className={`view-toggle-btn${viewMode === mode ? " active" : ""}`}>
-              <i className={`fa-solid ${icon}`} />
+        <div className="tax-tabs">
+          {[{ key: "", label: "All" }, ...ROOM_TYPES.map(t => ({ key: t.value, label: t.label }))].map(({ key, label }) => (
+            <button key={key || "all"} type="button" onClick={() => setFilterType(key)}
+              className={`tax-tab-btn${filterType === key ? " active" : ""}`}>
+              {label}
             </button>
           ))}
         </div>
-        {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && selected.size > 0 && (
-          <button type="button" className="btn btn-sm"
-            style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
-            onClick={() => setBulkConfirm(true)}>
-            <i className="fa-solid fa-trash" /> Delete {selected.size}
-          </button>
-        )}
-        {perms.can("sauna_rooms.create") && dataSource === "live" && (
-          <Btn icon="fa-plus" label="New Room" onClick={openCreate} style={{ marginLeft: "auto" }} />
-        )}
+
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "nowrap", marginLeft: "auto", flex: "1 1 auto", justifyContent: "flex-end", minWidth: 0 }}>
+          <select className="filter-select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+            <option value="">All Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+          <select className="filter-select" value={sortDir} onChange={e => setSortDir(e.target.value)}>
+            <option value="desc">Newest first</option>
+            <option value="asc">Oldest first</option>
+          </select>
+          <div className="tax-tabs">
+            {[{ mode: "list", icon: "fa-list" }, { mode: "grid", icon: "fa-grip" }].map(({ mode, icon }) => (
+              <button key={mode} type="button" onClick={() => setViewMode(mode)}
+                className={`tax-tab-btn${viewMode === mode ? " active" : ""}`}>
+                <i className={`fa-solid ${icon}`} />
+              </button>
+            ))}
+          </div>
+          {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && selected.size > 0 && (
+            <button type="button" className="btn btn-sm"
+              style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
+              onClick={() => setBulkConfirm(true)}>
+              <i className="fa-solid fa-trash" /> Delete {selected.size}
+            </button>
+          )}
+          <div className="search-wrap">
+            <i className="fa-solid fa-magnifying-glass" />
+            <input className="search-input" value={search} onChange={e => setSearch(e.target.value)}
+              placeholder="Search name, model, tag..." />
+          </div>
+        </div>
       </div>
 
       {/* Grid View */}
@@ -1686,6 +1710,7 @@ export default function SaunaRooms({ currentUser }) {
         onClose={handleModalClose}
         title={editing ? `Edit: ${editing.name}` : "New Sauna Room"}
         wide
+        fixedHeight
         actions={(
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <button type="submit" form="room-form" disabled={saving}
@@ -1949,6 +1974,18 @@ export default function SaunaRooms({ currentUser }) {
                     <PillInput label="Tags" value={form.tags} onChange={v => setForm(f => ({ ...f, tags: v }))}
                       placeholder="e.g. 4-person, hemlock, infrared" suggestions={allTags} />
                   </div>
+
+                  <TagSuggestions
+                    name={form.name}
+                    description={form.short_description}
+                    features={form.features}
+                    currentTags={form.tags}
+                    allTags={allTags}
+                    onAddTags={suggestedTags => {
+                      setForm(f => ({ ...f, tags: [...new Set([...f.tags, ...suggestedTags])] }));
+                      add(`✓ Added ${suggestedTags.length} matching tag(s) from content`, "success");
+                    }}
+                  />
                 </>
               )}
 

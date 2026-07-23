@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import { getCache, setCache } from "./adminCache";
+import { getPerms } from "./permissions";
 
 const USERS_CACHE_KEY = "admin:users";
 
@@ -28,7 +29,12 @@ function Modal({ open, onClose, title, children }) {
   );
 }
 
-export default function Users() {
+export default function Users({ currentUser }) {
+  const perms = getPerms(currentUser);
+  const canCreate = perms.can("users.create");
+  const canEdit   = perms.can("users.edit");
+  const canDelete = perms.can("users.delete");
+
   const [users, setUsers]           = useState(() => getCache(USERS_CACHE_KEY) || []);
   const [search, setSearch]         = useState("");
   const [roleFilter, setRoleFilter] = useState("");
@@ -210,15 +216,17 @@ export default function Users() {
           </select>
         </div>
 
-        {selected.size > 0 && (
+        {canDelete && selected.size > 0 && (
           <button type="button" className="btn btn-sm" style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }} onClick={() => setBulkConfirm(true)}>
             <i className="fa-solid fa-trash" /> Delete {selected.size}
           </button>
         )}
 
-        <button type="button" className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openAdd}>
-          <i className="fa-solid fa-plus" /> Add User
-        </button>
+        {canCreate && (
+          <button type="button" className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openAdd}>
+            <i className="fa-solid fa-plus" /> Add User
+          </button>
+        )}
       </div>
 
       {/* Table */}
@@ -226,11 +234,13 @@ export default function Users() {
         <table className="products-table">
           <thead>
             <tr>
-              <th style={{ width: 36, paddingRight: 0 }}>
-                <input type="checkbox" className="tbl-checkbox"
-                  checked={filtered.length > 0 && selected.size === filtered.length}
-                  onChange={toggleSelectAll} />
-              </th>
+              {canDelete && (
+                <th style={{ width: 36, paddingRight: 0 }}>
+                  <input type="checkbox" className="tbl-checkbox"
+                    checked={filtered.length > 0 && selected.size === filtered.length}
+                    onChange={toggleSelectAll} />
+                </th>
+              )}
               <th>Username</th>
               <th>Full Name</th>
               <th>Email</th>
@@ -242,9 +252,11 @@ export default function Users() {
           <tbody>
             {filtered.map(u => (
               <tr key={u.id} className={selected.has(u.id) ? "row-selected" : ""}>
-                <td style={{ paddingRight: 0 }}>
-                  <input type="checkbox" className="tbl-checkbox" checked={selected.has(u.id)} onChange={() => toggleSelect(u.id)} />
-                </td>
+                {canDelete && (
+                  <td style={{ paddingRight: 0 }}>
+                    <input type="checkbox" className="tbl-checkbox" checked={selected.has(u.id)} onChange={() => toggleSelect(u.id)} />
+                  </td>
+                )}
                 <td>
                   <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 14, color: "var(--text)" }}>{u.username}</span>
                 </td>
@@ -261,12 +273,16 @@ export default function Users() {
                       </>
                     ) : (
                       <>
-                        <button type="button" className="icon-btn" title="Edit" onClick={() => openEdit(u)}>
-                          <i className="fa-solid fa-pen" />
-                        </button>
-                        <button type="button" className="icon-btn danger" title="Delete" onClick={() => setDeleteConfirm(u.id)}>
-                          <i className="fa-solid fa-trash" />
-                        </button>
+                        {canEdit && (
+                          <button type="button" className="icon-btn" title="Edit" onClick={() => openEdit(u)}>
+                            <i className="fa-solid fa-pen" />
+                          </button>
+                        )}
+                        {canDelete && (
+                          <button type="button" className="icon-btn danger" title="Delete" onClick={() => setDeleteConfirm(u.id)}>
+                            <i className="fa-solid fa-trash" />
+                          </button>
+                        )}
                       </>
                     )}
                   </div>
@@ -274,7 +290,7 @@ export default function Users() {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={7} className="table-empty">No users found.</td></tr>
+              <tr><td colSpan={canDelete ? 7 : 6} className="table-empty">No users found.</td></tr>
             )}
           </tbody>
         </table>
@@ -309,7 +325,7 @@ export default function Users() {
                 </button>
               </div>
             </div>
-          ) : (
+          ) : canEdit && (
             <button
               type="button"
               className="btn btn-sm"

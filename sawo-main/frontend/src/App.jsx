@@ -81,6 +81,7 @@ const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
 const Logs           = lazy(() => import("./Administrator/Logs"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
+const RolesPermissions = lazy(() => import("./Administrator/RolesPermissions"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
 
 export default function App() {
@@ -170,6 +171,9 @@ export default function App() {
 
             <Route path="/admin/users" element={
               <ProtectedRoute requiredCap="page.users"><AdminLayout><Users /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/permissions" element={
+              <ProtectedRoute requiredCap="page.permissions"><AdminLayout><RolesPermissions /></AdminLayout></ProtectedRoute>
             } />
             <Route path="/admin/products" element={
               <ProtectedRoute><AdminLayout><Products /></AdminLayout></ProtectedRoute>

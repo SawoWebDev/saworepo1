@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSession, clearSession } from "./supabase";
 import { NAV_ITEMS, can } from "./permissions";
+import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
 import PageHeader from "./PageHeader";
+import CmsSearch from "./CmsSearch.jsx";
 import logo from "./SAWO-logo.png";
 import "./admin.css";
 
@@ -159,6 +161,15 @@ export default function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed,   setCollapsed]   = useState(() => localStorage.getItem("admin_sidebar_collapsed") === "1");
 
+  // permissions.js's can() reads capability overrides synchronously from a
+  // module-level cache that's populated asynchronously (see
+  // rolePermissions.js) — force one re-render once it resolves so the
+  // sidebar reflects a superadmin's toggle without needing a manual refresh.
+  const [, forceRerender] = useState(0);
+  useEffect(() => {
+    getRoleCapabilityOverrides().then(() => forceRerender((n) => n + 1));
+  }, []);
+
   // Close drawer on route change
   useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
 
@@ -241,6 +252,7 @@ export default function AdminLayout({ children }) {
             description={currentNav.description}
             dark={dark}
             setDark={setDark}
+            actions={<CmsSearch role={role} />}
           />
         )}
         <div className="admin-main-content" style={{ background: dark ? "#241d16" : "#f7f5f2" }}>

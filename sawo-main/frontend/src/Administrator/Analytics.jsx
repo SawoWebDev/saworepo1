@@ -312,7 +312,7 @@ const Analytics = () => {
       </div>
 
       {/* Daily Traffic Chart */}
-      <div className="card card-body mb-8">
+      <div id="analytics-traffic-chart" className="card card-body mb-8">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
           <i className="fas fa-chart-column text-[var(--brand)]"></i>
           Traffic Over Time
@@ -323,7 +323,7 @@ const Analytics = () => {
       {/* Two-column layout for top pages and countries */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Top Pages */}
-        <div className="card card-body">
+        <div id="analytics-top-pages" className="card card-body">
           <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
             <i className="fas fa-chart-bar text-[var(--brand)]"></i>
             Top Pages
@@ -350,7 +350,7 @@ const Analytics = () => {
         </div>
 
         {/* Top Countries */}
-        <div className="card card-body">
+        <div id="analytics-top-countries" className="card card-body">
           <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
             <i className="fas fa-globe text-[var(--brand)]"></i>
             Top Countries

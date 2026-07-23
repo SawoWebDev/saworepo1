@@ -1,9 +1,10 @@
 // src/Administrator/Taxonomy.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
 import { supabase } from "./supabase";
 import { getAllProductsLive } from "../local-storage/supabaseReader";
 import ProductsGridModal from "./ProductsGridModal";
 import { getCache, setCache } from "./adminCache";
+import { getPerms } from "./permissions";
 
 const taxCacheKey = (table) => `admin:taxonomy:${table}`;
 
@@ -154,7 +155,7 @@ function TaxFormModal({ open, onClose, editItem, table, hasDescription, onSaved 
 }
 
 // ── Tax Card ──────────────────────────────────────────────────────────────────
-function TaxCard({ item, isCategory, productCount, selectMode, selected, onToggleSelect, onEdit, onDelete, onViewProducts }) {
+function TaxCard({ item, isCategory, productCount, selectMode, selected, onToggleSelect, onEdit, onDelete, onViewProducts, canEdit, canDelete }) {
   const [hovered, setHovered] = useState(false);
 
   const createdDate = new Date(item.created_at).toLocaleDateString("en-PH", {
@@ -192,14 +193,18 @@ function TaxCard({ item, isCategory, productCount, selectMode, selected, onToggl
             onChange={() => onToggleSelect(item.id)}
           />
         </div>
-      ) : hovered ? (
+      ) : hovered && (canEdit || canDelete) ? (
         <div className="tax-card-corner" onClick={e => e.stopPropagation()}>
-          <button type="button" className="icon-btn" title="Edit" onClick={() => onEdit(item)}>
-            <i className="fa-solid fa-pen" />
-          </button>
-          <button type="button" className="icon-btn danger" title="Delete" onClick={() => onDelete(item)}>
-            <i className="fa-solid fa-trash" />
-          </button>
+          {canEdit && (
+            <button type="button" className="icon-btn" title="Edit" onClick={() => onEdit(item)}>
+              <i className="fa-solid fa-pen" />
+            </button>
+          )}
+          {canDelete && (
+            <button type="button" className="icon-btn danger" title="Delete" onClick={() => onDelete(item)}>
+              <i className="fa-solid fa-trash" />
+            </button>
+          )}
         </div>
       ) : null}
 
@@ -225,7 +230,13 @@ function TaxCard({ item, isCategory, productCount, selectMode, selected, onToggl
 }
 
 // ── Tab section ───────────────────────────────────────────────────────────────
-function TaxTab({ table, label, hasDescription }) {
+// forwardRef so the parent (which owns the Categories/Tags tab switcher) can
+// trigger "open the add modal" from a button placed next to that switcher,
+// instead of duplicating this tab's create logic up there.
+const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, perms }, ref) {
+  const canEdit   = perms.can("taxonomy.edit");
+  const canDelete = perms.can("taxonomy.delete");
+
   const cached = getCache(taxCacheKey(table));
   const [items, setItems]               = useState(() => cached?.items || []);
   const [productCounts, setProductCounts] = useState(() => cached?.counts || {});
@@ -273,6 +284,7 @@ function TaxTab({ table, label, hasDescription }) {
   useEffect(() => { fetchData(); }, [table]); // eslint-disable-line
 
   const openAdd  = () => { setEditItem(null); setFormOpen(true); };
+  useImperativeHandle(ref, () => ({ openAdd }));
   const openEdit = item => { setEditItem(item); setFormOpen(true); };
 
   const handleDelete = async () => {
@@ -348,18 +360,13 @@ function TaxTab({ table, label, hasDescription }) {
                 Cancel
               </button>
             </>
-          ) : (
-            <>
-              <button type="button" className="btn btn-ghost btn-sm" onClick={() => setSelectMode(true)}>
-                <i className="fa-solid fa-check-square" /> Select
-              </button>
-            </>
+          ) : canDelete && (
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setSelectMode(true)}>
+              <i className="fa-solid fa-check-square" /> Select
+            </button>
           )}
         </div>
 
-        <button type="button" className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openAdd}>
-          <i className="fa-solid fa-plus" /> Add {entityLabel}
-        </button>
       </div>
 
       {/* Grid */}
@@ -381,6 +388,8 @@ function TaxTab({ table, label, hasDescription }) {
               onEdit={openEdit}
               onDelete={setDeleteTarget}
               onViewProducts={name => setProductsModal(name)}
+              canEdit={canEdit}
+              canDelete={canDelete}
             />
           ))}
         </div>
@@ -445,37 +454,48 @@ function TaxTab({ table, label, hasDescription }) {
       )}
     </div>
   );
-}
+});
 
 // ── Main ──────────────────────────────────────────────────────────────────────
-export default function Taxonomy() {
+export default function Taxonomy({ currentUser }) {
+  const perms = getPerms(currentUser);
   const [tab, setTab] = useState("categories");
+  const tabRef = useRef(null);
+  const canCreate = perms.can("taxonomy.create");
 
   return (
     <div>
-      <div className="tax-tabs">
-        <button
-          type="button"
-          className={`tax-tab-btn${tab === "categories" ? " active" : ""}`}
-          onClick={() => setTab("categories")}
-        >
-          <i className="fa-solid fa-folder" /> Categories
-        </button>
-        <button
-          type="button"
-          className={`tax-tab-btn${tab === "tags" ? " active" : ""}`}
-          onClick={() => setTab("tags")}
-        >
-          <i className="fa-solid fa-tag" /> Tags
-        </button>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+        <div className="tax-tabs">
+          <button
+            type="button"
+            className={`tax-tab-btn${tab === "categories" ? " active" : ""}`}
+            onClick={() => setTab("categories")}
+          >
+            <i className="fa-solid fa-folder" /> Categories
+          </button>
+          <button
+            type="button"
+            className={`tax-tab-btn${tab === "tags" ? " active" : ""}`}
+            onClick={() => setTab("tags")}
+          >
+            <i className="fa-solid fa-tag" /> Tags
+          </button>
+        </div>
+
+        {canCreate && (
+          <button type="button" className="btn btn-primary" onClick={() => tabRef.current?.openAdd()}>
+            <i className="fa-solid fa-plus" /> Add {tab === "categories" ? "Category" : "Tag"}
+          </button>
+        )}
       </div>
 
       <div style={{ marginTop: 20 }}>
         {tab === "categories" && (
-          <TaxTab table="categories" label="Categories" hasDescription />
+          <TaxTab ref={tabRef} table="categories" label="Categories" hasDescription perms={perms} />
         )}
         {tab === "tags" && (
-          <TaxTab table="tags" label="Tags" hasDescription={false} />
+          <TaxTab ref={tabRef} table="tags" label="Tags" hasDescription={false} perms={perms} />
         )}
       </div>
     </div>
