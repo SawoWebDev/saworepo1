@@ -2,6 +2,8 @@
 // Centralized role-based access control (RBAC)
 // Single source of truth for all capabilities and role logic
 
+import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
+
 export const ROLES = {
   SUPERADMIN: "superadmin",
   ADMIN:      "admin",
@@ -9,9 +11,14 @@ export const ROLES = {
   VIEWER:     "viewer",
 };
 
-// Capability-to-roles mapping
-// Each capability is an array of roles that possess it
-const CAPABILITY_MAP = {
+// Capability-to-roles mapping — the static DEFAULT for every capability.
+// A superadmin can override any of these at runtime from the Roles &
+// Permissions page (/admin/permissions), except "page.permissions" itself
+// (see below) — that one is permanently hardcoded so a superadmin can never
+// lock themselves out of the page that controls locking-out.
+//
+// Each capability is an array of roles that possess it by default.
+export const CAPABILITY_MAP = {
   // Products
   "products.view":            ["viewer", "editor", "admin", "superadmin"],
   "products.create":          ["editor", "admin", "superadmin"],
@@ -32,6 +39,16 @@ const CAPABILITY_MAP = {
   "sauna_rooms.duplicate":    ["admin", "superadmin"],
   "sauna_rooms.upload_images": ["admin", "superadmin"],
 
+  // Taxonomy (categories & tags)
+  "taxonomy.create":          ["editor", "admin", "superadmin"],
+  "taxonomy.edit":            ["editor", "admin", "superadmin"],
+  "taxonomy.delete":          ["admin", "superadmin"],
+
+  // Users (admin accounts)
+  "users.create":             ["superadmin"],
+  "users.edit":               ["superadmin"],
+  "users.delete":             ["superadmin"],
+
   // Navigation / Pages
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
@@ -40,7 +57,29 @@ const CAPABILITY_MAP = {
   "page.products_local":      ["editor", "admin", "superadmin"],
   "page.analytics":           ["admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
+  // Gates the Roles & Permissions page itself — deliberately NOT part of
+  // the dynamic override system (see setCapabilityOverrides below).
+  "page.permissions":         ["superadmin"],
 };
+
+// Dynamic, admin-configurable overrides — see local-storage/rolePermissions.js.
+// Starts empty (every capability falls back to its CAPABILITY_MAP default)
+// and is populated in the background as soon as this module loads. There's
+// a brief window on a fresh tab's very first render where the static
+// default is used instead of a freshly-granted role's access — the same
+// tradeoff every other CMS-wide toggle in this app makes (see dataSource.js,
+// headerLayout.js).
+let capabilityOverrides = {};
+
+export function setCapabilityOverrides(overrides) {
+  // "page.permissions" can never be overridden, at the call site too, not
+  // just by omission from the editor UI — belt and suspenders against ever
+  // locking a superadmin out of the permissions page.
+  const { "page.permissions": _ignored, ...rest } = overrides || {};
+  capabilityOverrides = rest;
+}
+
+getRoleCapabilityOverrides().then(setCapabilityOverrides);
 
 /**
  * Check if a role has a specific capability
@@ -49,7 +88,8 @@ const CAPABILITY_MAP = {
  * @returns {boolean} True if the role has the capability
  */
 export function can(role, cap) {
-  return !!(CAPABILITY_MAP[cap]?.includes(role));
+  const roles = capabilityOverrides[cap] || CAPABILITY_MAP[cap];
+  return !!(roles?.includes(role));
 }
 
 /**
@@ -84,4 +124,5 @@ export const NAV_ITEMS = [
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "System",   description: "A record of every create, update, and delete made across the CMS." },
   { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
+  { to: "/admin/permissions",     label: "Roles & Permissions", icon: "fa-solid fa-user-lock",   cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
 ];

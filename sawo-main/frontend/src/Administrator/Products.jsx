@@ -16,13 +16,43 @@ const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
 const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
-// Categories that route a product to one of the 6 heater pages (see each
-// page's "MUST include" comment, e.g. pages/Sauna/heaters/WallMounted.jsx) —
-// used only for the Products page's quick filter, not for actual routing.
-const HEATER_CATEGORIES = ["wall-mounted", "wall mounted", "tower", "stones", "floor", "dragonfire", "combi"];
-function isHeaterProduct(product) {
-  if (!product?.categories || !Array.isArray(product.categories)) return false;
-  return product.categories.some(c => HEATER_CATEGORIES.includes(c.toLowerCase()));
+// The 6 heater subcategories, in the fixed display order requested for the
+// "Sauna Heaters" quick filter — used to group products and to drive the
+// multi-select subcategory pills. Order matters: it's the render order.
+const HEATER_SUBCATEGORIES = [
+  { key: "wall-mounted", label: "Wall-Mounted", match: c => ["wall-mounted", "wall mounted"].includes(c.toLowerCase()) },
+  { key: "tower",        label: "Tower",        match: c => ["tower", "towers"].includes(c.toLowerCase()) },
+  { key: "stone",        label: "Stone",        match: c => ["stone", "stones"].includes(c.toLowerCase()) },
+  { key: "floor",        label: "Floor",        match: c => c.toLowerCase() === "floor" },
+  { key: "combi",        label: "Combi",        match: c => c.toLowerCase() === "combi" },
+  { key: "dragonfire",   label: "Dragonfire",   match: c => c.toLowerCase() === "dragonfire" },
+];
+function getHeaterSubcategory(product) {
+  const cats = product?.categories;
+  if (!Array.isArray(cats)) return null;
+  const sub = HEATER_SUBCATEGORIES.find(s => cats.some(c => s.match(c)));
+  return sub ? sub.key : null;
+}
+
+// The 10 accessory subcategories, in the fixed display order requested for
+// the "Accessories" quick filter — mirrors HEATER_SUBCATEGORIES above.
+const ACCESSORY_SUBCATEGORIES = [
+  { key: "pails-ladles",   label: "Pails & Ladles",                   match: c => ["pails", "ladles", "pail shower"].includes(c.toLowerCase()) },
+  { key: "thermometers",   label: "Thermometers & Combined Meters",   match: c => c.toLowerCase() === "thermometers" },
+  { key: "clocks-timers",  label: "Clocks & Timers",                  match: c => c.toLowerCase() === "clocks & timers" },
+  { key: "sauna-lights",   label: "Sauna Lights",                     match: c => c.toLowerCase() === "sauna lights" },
+  { key: "headrest",       label: "Headrest & Backrests",             match: c => c.toLowerCase() === "headrest & backrest" },
+  { key: "doors-handles",  label: "Doors & Handles",                  match: c => c.toLowerCase() === "doors & handles" },
+  { key: "benches-hangers",label: "Benches, Hangers & Floor Mats",    match: c => ["benches", "cloth hangers", "wooden floor mats"].includes(c.toLowerCase()) },
+  { key: "kivistone",      label: "Kivistone",                        match: c => c.toLowerCase() === "kivistone" },
+  { key: "ventilation",    label: "Ventilations & Miscellaneous Items", match: c => c.toLowerCase() === "ventilation & miscellaneous" },
+  { key: "accessory-sets", label: "Accessory Sets",                   match: c => c.toLowerCase() === "accessory sets" },
+];
+function getAccessorySubcategory(product) {
+  const cats = product?.categories;
+  if (!Array.isArray(cats)) return null;
+  const sub = ACCESSORY_SUBCATEGORIES.find(s => cats.some(c => s.match(c)));
+  return sub ? sub.key : null;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -2253,10 +2283,12 @@ export default function Products({ currentUser }) {
   const [search,       setSearch]       = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const [quickFilter,  setQuickFilter]  = useState("all"); // "all" | "accessories" | "heaters"
+  const [activeHeaterSubcats, setActiveHeaterSubcats] = useState([]); // multi-select pills, only used when quickFilter === "heaters"
+  const [activeAccessorySubcats, setActiveAccessorySubcats] = useState([]); // multi-select pills, only used when quickFilter === "accessories"
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("grid");
-  const [dataSource,   setDataSource]   = useState("live"); // "live" or "local"
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [dataSource,   setDataSource]   = useState(() => perms.can("products.edit") ? "live" : "local"); // "live" or "local"
+  const itemsPerPage = 20; // "Show" limit selector removed — fixed page size
   const [currentPage,  setCurrentPage]  = useState(1);
 
   const [selected,              setSelected]              = useState(new Set());
@@ -2294,7 +2326,6 @@ export default function Products({ currentUser }) {
   const [syncCheckReport, setSyncCheckReport] = useState(null);
   const [syncCheckEvents, setSyncCheckEvents] = useState([]);
   const [syncCheckApplying, setSyncCheckApplying] = useState(false);
-  const [publishing, setPublishing] = useState(false);
 
   const [variants, setVariants] = useState([]);
   const [loadedVariants, setLoadedVariants] = useState([]);
@@ -2619,30 +2650,6 @@ export default function Products({ currentUser }) {
     }
   };
 
-  // One-click publish: runs the same Supabase→local sync as the "Sync" button,
-  // but auto-applies without the review modal, so newly created/edited products
-  // land in the local snapshot (and thus get their own page) in a single click.
-  const handlePublishChanges = async () => {
-    if (publishing) return;
-    setPublishing(true);
-    add("Syncing changes to local data…", "info");
-    try {
-      const report = await checkSupabaseSync(() => {});
-      if (report.totalChanges === 0) {
-        add("✓ Already up to date — nothing to publish.", "success");
-        return;
-      }
-      await applyLocalChanges(report, () => {});
-      const n = report.totalChanges;
-      add(`✓ Published ${n} change${n === 1 ? "" : "s"} to local data.`, "success");
-      setTimeout(() => fetchProducts(), 500);
-    } catch (err) {
-      add(`Publish failed: ${err.message}`, "error");
-    } finally {
-      setPublishing(false);
-    }
-  };
-
   // ── Save ──────────────────────────────────────────────────────────────────
   const handleSave = async e => {
     e.preventDefault();
@@ -2903,8 +2910,16 @@ export default function Products({ currentUser }) {
 
   // ── Filter ─────────────────────────────────────────────────────────────────
   const filtered = products.filter(p => {
-    if (quickFilter === "accessories" && !isAccessoryProduct(p)) return false;
-    if (quickFilter === "heaters" && !isHeaterProduct(p)) return false;
+    if (quickFilter === "accessories") {
+      const sub = getAccessorySubcategory(p);
+      if (!sub) return false;
+      if (activeAccessorySubcats.length > 0 && !activeAccessorySubcats.includes(sub)) return false;
+    }
+    if (quickFilter === "heaters") {
+      const sub = getHeaterSubcategory(p);
+      if (!sub) return false;
+      if (activeHeaterSubcats.length > 0 && !activeHeaterSubcats.includes(sub)) return false;
+    }
 
     if (!search) return true;
     const q = search.toLowerCase();
@@ -2921,12 +2936,40 @@ export default function Products({ currentUser }) {
   // Reset to page 1 when search/filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, filterStatus, quickFilter]);
+  }, [search, filterStatus, quickFilter, activeHeaterSubcats, activeAccessorySubcats]);
 
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   const startIdx = (currentPage - 1) * itemsPerPage;
   const endIdx = startIdx + itemsPerPage;
   const paginatedProducts = filtered.slice(startIdx, endIdx);
+
+  // When browsing Sauna Heaters or Accessories, group products under fixed
+  // subcategory labels instead of the normal flat/paginated list. Only
+  // groups with matching products show. At most one of these is active at
+  // a time (quickFilter can only be one value), so `groups` picks whichever.
+  const heaterGroups = quickFilter === "heaters"
+    ? HEATER_SUBCATEGORIES
+        .filter(sub => activeHeaterSubcats.length === 0 || activeHeaterSubcats.includes(sub.key))
+        .map(sub => ({ ...sub, products: filtered.filter(p => getHeaterSubcategory(p) === sub.key) }))
+        .filter(group => group.products.length > 0)
+    : null;
+
+  const accessoryGroups = quickFilter === "accessories"
+    ? ACCESSORY_SUBCATEGORIES
+        .filter(sub => activeAccessorySubcats.length === 0 || activeAccessorySubcats.includes(sub.key))
+        .map(sub => ({ ...sub, products: filtered.filter(p => getAccessorySubcategory(p) === sub.key) }))
+        .filter(group => group.products.length > 0)
+    : null;
+
+  const groups = heaterGroups || accessoryGroups;
+
+  const toggleHeaterSubcat = (key) => {
+    setActiveHeaterSubcats(prev => prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]);
+  };
+
+  const toggleAccessorySubcat = (key) => {
+    setActiveAccessorySubcats(prev => prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]);
+  };
 
 
   const handleNameChange = e => {
@@ -2958,217 +3001,242 @@ export default function Products({ currentUser }) {
 
       <div style={{ marginBottom: 14 }}>
         <div>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 0 }}>
-            <div style={{ display: "flex", gap: 0, borderRadius: 4, border: "1px solid var(--border)" }}>
-              {[
-                { id: "live", label: "Live", icon: "fa-cloud" },
-                { id: "local", label: "Local", icon: "fa-folder" }
-              ].map(tab => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setDataSource(tab.id)}
-                  style={{
-                    flex: 1,
-                    padding: "8px 16px",
-                    border: "none",
-                    background: dataSource === tab.id ? "var(--brand-bg)" : "transparent",
-                    color: dataSource === tab.id ? "var(--brand)" : "var(--text-2)",
-                    cursor: "pointer",
-                    fontSize: "0.85rem",
-                    fontWeight: dataSource === tab.id ? 600 : 500,
-                    borderRight: tab.id === "live" ? "1px solid var(--border)" : "none",
-                    transition: "all 0.2s ease",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 6
-                  }}
-                >
-                  <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-            {dataSource === "local" && (
+          <div className="data-source-row">
+            {perms.can("products.edit") && (
+              <div className="tax-tabs">
+                {[
+                  { id: "live", label: "Live", icon: "fa-cloud" },
+                  { id: "local", label: "Local", icon: "fa-folder" }
+                ].map(tab => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setDataSource(tab.id)}
+                    className={`tax-tab-btn${dataSource === tab.id ? " active" : ""}`}
+                  >
+                    <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            )}
+            {perms.can("products.edit") && dataSource === "local" && (
               <button
                 type="button"
                 onClick={() => { setCheckSyncOpen(true); handleCheckSync(); }}
                 disabled={syncCheckLoading}
                 title="Syncs products from Supabase to local. Compares added, updated, and deleted items, then lets you apply the changes"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "8px 12px",
-                  fontSize: "0.85rem",
-                  fontWeight: 500,
-                  border: "1px solid var(--border)",
-                  background: "var(--surface)",
-                  color: syncCheckLoading ? "var(--text-3)" : "var(--text)",
-                  cursor: syncCheckLoading ? "not-allowed" : "pointer",
-                  borderRadius: 4,
-                  transition: "all 0.2s ease",
-                  opacity: syncCheckLoading ? 0.6 : 1,
-                }}
-                onMouseEnter={e => { if (!syncCheckLoading) e.currentTarget.style.background = "var(--surface-2)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; }}
+                className="btn btn-primary"
               >
                 <i className={`fa-solid ${syncCheckLoading ? "fa-circle-notch fa-spin" : "fa-arrows-rotate"}`} style={{ fontSize: "0.85em" }} />
                 {syncCheckLoading ? "Syncing..." : "Sync"}
               </button>
             )}
-            {dataSource === "local" && (
-              <button
-                type="button"
-                onClick={handlePublishChanges}
-                disabled={publishing || syncCheckLoading}
-                title="One-click publish: syncs all new and edited products from Supabase into the local data so they get their own page on the frontend. No review step."
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "8px 12px",
-                  fontSize: "0.85rem",
-                  fontWeight: 600,
-                  border: "1px solid var(--primary, #af8564)",
-                  background: publishing ? "var(--surface-2)" : "var(--primary, #af8564)",
-                  color: publishing ? "var(--text-3)" : "#fff",
-                  cursor: publishing ? "not-allowed" : "pointer",
-                  borderRadius: 4,
-                  transition: "all 0.2s ease",
-                  opacity: publishing ? 0.7 : 1,
-                }}
-                onMouseEnter={e => { if (!publishing) e.currentTarget.style.filter = "brightness(0.95)"; }}
-                onMouseLeave={e => { e.currentTarget.style.filter = "none"; }}
-              >
-                <i className={`fa-solid ${publishing ? "fa-circle-notch fa-spin" : "fa-cloud-arrow-up"}`} style={{ fontSize: "0.85em" }} />
-                {publishing ? "Publishing..." : "Publish changes"}
-              </button>
-            )}
             <p className="products-subtitle" style={{ margin: 0 }}>
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
             </p>
+            {dataSource === "local" && (
+              <span style={{
+                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem", color: "var(--info)",
+                background: "var(--info-bg)", border: "1px solid var(--info-border)",
+                padding: "6px 12px", borderRadius: 20,
+              }}>
+                <i className="fa-solid fa-circle-info" />
+                Viewing <strong>locally saved products</strong>. Read-only — switch to Live to edit.
+              </span>
+            )}
+            {perms.can("products.create") && dataSource === "live" && (
+              <Btn icon="fa-plus" label="New Product" onClick={openCreate} style={{ marginLeft: "auto" }} />
+            )}
           </div>
         </div>
       </div>
 
-      {/* Local Mode Notice */}
-      {dataSource === "local" && (
-        <>
-          <div style={{
-            background: "var(--info-bg)",
-            border: "1px solid var(--info-border)",
-            color: "var(--info)",
-            padding: "10px 14px",
-            borderRadius: 4,
-            marginBottom: 14,
-            fontSize: "0.85rem",
-            display: "flex",
-            alignItems: "center",
-            gap: 8
-          }}>
-            <i className="fa-solid fa-circle-info" style={{ fontSize: "1em" }} />
-            <span>Viewing <strong>locally saved products</strong>. This is read-only. Switch to Live to edit.</span>
-          </div>
-
-        </>
-      )}
-
       {/* Toolbar */}
       <div className="products-toolbar">
-        <div className="search-wrap">
-          <i className="fa-solid fa-magnifying-glass" />
-          <input className="search-input" value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="Search name, brand, tag..." />
-        </div>
-        <select className="filter-select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
-          <option value="">All Status</option>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
-        </select>
-        <select className="filter-select" value={sortDir} onChange={e => setSortDir(e.target.value)}>
-          <option value="desc">Newest first</option>
-          <option value="asc">Oldest first</option>
-        </select>
         <div className="tax-tabs">
           {[
             { key: "all", label: "All" },
-            { key: "accessories", label: "Accessories" },
             { key: "heaters", label: "Sauna Heaters" },
+            { key: "accessories", label: "Accessories" },
           ].map(({ key, label }) => (
-            <button key={key} type="button" onClick={() => setQuickFilter(key)}
+            <button key={key} type="button" onClick={() => { setQuickFilter(key); if (key !== "heaters") setActiveHeaterSubcats([]); if (key !== "accessories") setActiveAccessorySubcats([]); }}
               className={`tax-tab-btn${quickFilter === key ? " active" : ""}`}>
               {label}
             </button>
           ))}
         </div>
-        <div className="view-toggle">
-          {[{ mode: "list", icon: "fa-list" }, { mode: "grid", icon: "fa-grip" }].map(({ mode, icon }) => (
-            <button key={mode} type="button" onClick={() => setViewMode(mode)}
-              className={`view-toggle-btn${viewMode === mode ? " active" : ""}`}>
-              <i className={`fa-solid ${icon}`} />
+
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "nowrap", marginLeft: "auto", flex: "1 1 auto", justifyContent: "flex-end", minWidth: 0 }}>
+          <select className="filter-select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+            <option value="">All Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+          <select className="filter-select" value={sortDir} onChange={e => setSortDir(e.target.value)}>
+            <option value="desc">Newest first</option>
+            <option value="asc">Oldest first</option>
+          </select>
+          <div className="tax-tabs">
+            {[{ mode: "list", icon: "fa-list" }, { mode: "grid", icon: "fa-grip" }].map(({ mode, icon }) => (
+              <button key={mode} type="button" onClick={() => setViewMode(mode)}
+                className={`tax-tab-btn${viewMode === mode ? " active" : ""}`}>
+                <i className={`fa-solid ${icon}`} />
+              </button>
+            ))}
+          </div>
+          {perms.can("products.bulk_delete") && dataSource === "live" && selected.size > 0 && (
+            <>
+              <select className="filter-select" value={bulkStatusValue} onChange={e => {
+                setBulkStatusValue(e.target.value);
+                handleBulkStatusChange();
+              }}>
+                <option value="" disabled>Change Status ({selected.size})</option>
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
+              <button type="button" className="btn btn-sm"
+                style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
+                onClick={() => setBulkConfirm(true)}>
+                <i className="fa-solid fa-trash" /> Delete {selected.size}
+              </button>
+            </>
+          )}
+          <div className="search-wrap">
+            <i className="fa-solid fa-magnifying-glass" />
+            <input className="search-input" value={search} onChange={e => setSearch(e.target.value)}
+              placeholder="Search name, brand, tag..." />
+          </div>
+        </div>
+      </div>
+
+      {/* Sauna Heaters / Accessories subcategory pills — multi-select filter, visible to all roles */}
+      {quickFilter === "heaters" && (
+        <div className="tax-tabs" style={{ marginBottom: 14 }}>
+          {HEATER_SUBCATEGORIES.map(sub => (
+            <button key={sub.key} type="button" onClick={() => toggleHeaterSubcat(sub.key)}
+              className={`tax-tab-btn${activeHeaterSubcats.includes(sub.key) ? " active" : ""}`}>
+              {sub.label}
             </button>
           ))}
         </div>
-        {perms.can("products.bulk_delete") && dataSource === "live" && selected.size > 0 && (
-          <>
-            <select className="filter-select" value={bulkStatusValue} onChange={e => {
-              setBulkStatusValue(e.target.value);
-              handleBulkStatusChange();
-            }}>
-              <option value="" disabled>Change Status ({selected.size})</option>
-              <option value="published">Published</option>
-              <option value="draft">Draft</option>
-            </select>
-            <button type="button" className="btn btn-sm"
-              style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
-              onClick={() => setBulkConfirm(true)}>
-              <i className="fa-solid fa-trash" /> Delete {selected.size}
+      )}
+      {quickFilter === "accessories" && (
+        <div className="tax-tabs" style={{ marginBottom: 14 }}>
+          {ACCESSORY_SUBCATEGORIES.map(sub => (
+            <button key={sub.key} type="button" onClick={() => toggleAccessorySubcat(sub.key)}
+              className={`tax-tab-btn${activeAccessorySubcats.includes(sub.key) ? " active" : ""}`}>
+              {sub.label}
             </button>
-          </>
-        )}
-        <label style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 500, fontSize: "0.85rem" }}>
-          Show:
-          <select value={itemsPerPage} onChange={e => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
-            style={{
-              padding: "6px 8px",
-              border: "1px solid var(--border)",
-              borderRadius: 4,
-              background: "var(--surface)",
-              color: "var(--text)",
-              fontSize: "0.85rem",
-              cursor: "pointer"
-            }}>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-            <option value={100}>100</option>
-          </select>
-        </label>
-        {perms.can("products.create") && dataSource === "live" && (
-          <Btn icon="fa-plus" label="New Product" onClick={openCreate} style={{ marginLeft: "auto" }} />
-        )}
-      </div>
-
-      {/* Grid View */}
-      {!loading && viewMode === "grid" && (
-        <div className="product-grid">
-          {filtered.length === 0 && (
-            <div style={{ gridColumn: "1/-1", textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
-              {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
-            </div>
-          )}
-          {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} dataSource={dataSource} />)}
+          ))}
         </div>
       )}
 
+      {/* Grid View */}
+      {!loading && viewMode === "grid" && (
+        groups ? (
+          <>
+            {groups.length === 0 && (
+              <div style={{ textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
+                No products match this filter.
+              </div>
+            )}
+            {groups.map(group => (
+              <div key={group.key} style={{ marginBottom: 28 }}>
+                <h3 className="product-group-label">{group.label}</h3>
+                <div className="product-grid">
+                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} dataSource={dataSource} />)}
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="product-grid">
+            {filtered.length === 0 && (
+              <div style={{ gridColumn: "1/-1", textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
+                {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
+              </div>
+            )}
+            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} dataSource={dataSource} />)}
+          </div>
+        )
+      )}
+
       {/* List View */}
-      {viewMode === "list" && (
+      {viewMode === "list" && (() => {
+        const showCheckboxCol = perms.can("products.bulk_delete") && dataSource === "live";
+        const colCount = showCheckboxCol ? 9 : 8;
+        const visibleProducts = groups ? filtered : paginatedProducts;
+        const renderRow = p => (
+          <tr key={p.id} className={selected.has(p.id) ? "row-selected" : ""}>
+            {showCheckboxCol && (
+              <td style={{ paddingRight: 0 }}>
+                <input type="checkbox" className="tbl-checkbox" checked={selected.has(p.id)} onChange={() => toggleSelect(p.id)} />
+              </td>
+            )}
+            <td style={{ width: 44 }}>
+              {getImageUrl(p, 'thumbnail', dataSource)
+                ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt="" className="product-thumb" />
+                : <div className="product-thumb-placeholder"><i className="fa-regular fa-image" /></div>
+              }
+            </td>
+            <td>
+              <a href={productUrl(p)} target="_blank" rel="noopener noreferrer" className="product-name-link">
+                {p.name}
+              </a>
+              <div className="product-meta">
+                {p.featured && <span className="product-meta-tag featured"><i className="fa-solid fa-star" style={{ marginRight: 3 }} />Featured</span>}
+                {(p.files || []).length > 0 && <span className="product-meta-tag files"><i className="fa-solid fa-file-pdf" style={{ marginRight: 3 }} />{p.files.length} file(s)</span>}
+              </div>
+            </td>
+            <td>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+                {(p.categories || []).slice(0, 2).map(c => <span key={c} className="tbl-pill tbl-pill-cat">{c}</span>)}
+                {(p.categories || []).length > 2 && <span className="tbl-pill tbl-pill-more">+{p.categories.length - 2}</span>}
+                {!(p.categories || []).length && <span style={{ color: "var(--text-3)", fontSize: "0.72rem" }}>-</span>}
+              </div>
+            </td>
+            <td>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+                {(p.tags || []).slice(0, 3).map(t => <span key={t} className="tbl-pill tbl-pill-tag">{t}</span>)}
+                {(p.tags || []).length > 3 && <span className="tbl-pill tbl-pill-more">+{p.tags.length - 3}</span>}
+                {!(p.tags || []).length && <span style={{ color: "var(--text-3)", fontSize: "0.72rem" }}>-</span>}
+              </div>
+            </td>
+            <td>
+              <span className="tbl-status">{!p.visible ? "Hidden" : p.status === "published" ? "Published" : "Draft"}</span>
+            </td>
+            <td className="tbl-date" style={{ fontSize: "0.75rem" }}>
+              {formatDate(p.created_at)}
+            </td>
+            <td style={{ fontSize: "0.75rem", color: "var(--text-2)" }}>
+              {p.created_by_username ? `@${p.created_by_username}` : "-"}
+            </td>
+            <td style={{ textAlign: "right" }}>
+              <div className="table-actions">
+                {dataSource === "local" && (
+                  <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
+                )}
+                {perms.can("products.edit") && dataSource === "live" && (
+                  <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
+                )}
+                {perms.can("products.duplicate") && dataSource === "live" && (
+                  <IconBtn icon="fa-copy" title="Duplicate" onClick={() => openDuplicate(p)} />
+                )}
+                {perms.can("products.delete") && dataSource === "live" && (
+                  <IconBtn icon="fa-trash" title="Delete" onClick={() => setConfirmDel(p)} danger />
+                )}
+              </div>
+            </td>
+          </tr>
+        );
+        return (
         <>
-          {filtered.length > 0 && (
+          {visibleProducts.length > 0 && (
             <div style={{ fontSize: "0.85rem", color: "var(--text-2)", marginBottom: 12 }}>
-              Showing {startIdx + 1}-{Math.min(endIdx, filtered.length)} of {filtered.length} product{filtered.length !== 1 ? 's' : ''}
+              {groups
+                ? `Showing all ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`
+                : `Showing ${startIdx + 1}-${Math.min(endIdx, filtered.length)} of ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`}
             </div>
           )}
           <div className="products-table-wrap" style={{ position: "relative" }}>
@@ -3180,10 +3248,10 @@ export default function Products({ currentUser }) {
               <table className="products-table">
                 <thead style={{ position: "sticky", top: 0, background: "var(--surface)", zIndex: 10, boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }}>
                   <tr>
-                    {perms.can("products.bulk_delete") && dataSource === "live" && (
+                    {showCheckboxCol && (
                       <th style={{ width: 36, paddingRight: 0 }}>
                         <input type="checkbox" className="tbl-checkbox"
-                          checked={paginatedProducts.length > 0 && selected.size === paginatedProducts.length}
+                          checked={visibleProducts.length > 0 && selected.size === visibleProducts.length}
                           onChange={toggleSelectAll} />
                       </th>
                     )}
@@ -3198,79 +3266,36 @@ export default function Products({ currentUser }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {paginatedProducts.length === 0 && (
-                    <tr><td colSpan={perms.can("products.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
-                      {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
-                    </td></tr>
+                  {groups ? (
+                    groups.length === 0 ? (
+                      <tr><td colSpan={colCount} className="table-empty">No products match this filter.</td></tr>
+                    ) : (
+                      groups.map(group => (
+                        <React.Fragment key={group.key}>
+                          <tr>
+                            <td colSpan={colCount} className="product-group-label" style={{ background: "var(--surface-2)", padding: "8px 12px" }}>
+                              {group.label}
+                            </td>
+                          </tr>
+                          {group.products.map(renderRow)}
+                        </React.Fragment>
+                      ))
+                    )
+                  ) : (
+                    <>
+                      {paginatedProducts.length === 0 && (
+                        <tr><td colSpan={colCount} className="table-empty">
+                          {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
+                        </td></tr>
+                      )}
+                      {paginatedProducts.map(renderRow)}
+                    </>
                   )}
-                  {paginatedProducts.map(p => (
-                  <tr key={p.id} className={selected.has(p.id) ? "row-selected" : ""}>
-                    {perms.can("products.bulk_delete") && dataSource === "live" && (
-                      <td style={{ paddingRight: 0 }}>
-                        <input type="checkbox" className="tbl-checkbox" checked={selected.has(p.id)} onChange={() => toggleSelect(p.id)} />
-                      </td>
-                    )}
-                    <td style={{ width: 44 }}>
-                      {getImageUrl(p, 'thumbnail', dataSource)
-                        ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt="" className="product-thumb" />
-                        : <div className="product-thumb-placeholder"><i className="fa-regular fa-image" /></div>
-                      }
-                    </td>
-                    <td>
-                      <a href={productUrl(p)} target="_blank" rel="noopener noreferrer" className="product-name-link">
-                        {p.name}
-                      </a>
-                      <div className="product-meta">
-                        {p.featured && <span className="product-meta-tag featured"><i className="fa-solid fa-star" style={{ marginRight: 3 }} />Featured</span>}
-                        {(p.files || []).length > 0 && <span className="product-meta-tag files"><i className="fa-solid fa-file-pdf" style={{ marginRight: 3 }} />{p.files.length} file(s)</span>}
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-                        {(p.categories || []).slice(0, 2).map(c => <span key={c} className="tbl-pill tbl-pill-cat">{c}</span>)}
-                        {(p.categories || []).length > 2 && <span className="tbl-pill tbl-pill-more">+{p.categories.length - 2}</span>}
-                        {!(p.categories || []).length && <span style={{ color: "var(--text-3)", fontSize: "0.72rem" }}>-</span>}
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-                        {(p.tags || []).slice(0, 3).map(t => <span key={t} className="tbl-pill tbl-pill-tag">{t}</span>)}
-                        {(p.tags || []).length > 3 && <span className="tbl-pill tbl-pill-more">+{p.tags.length - 3}</span>}
-                        {!(p.tags || []).length && <span style={{ color: "var(--text-3)", fontSize: "0.72rem" }}>-</span>}
-                      </div>
-                    </td>
-                    <td>
-                      <span className="tbl-status">{!p.visible ? "Hidden" : p.status === "published" ? "Published" : "Draft"}</span>
-                    </td>
-                    <td className="tbl-date" style={{ fontSize: "0.75rem" }}>
-                      {formatDate(p.created_at)}
-                    </td>
-                    <td style={{ fontSize: "0.75rem", color: "var(--text-2)" }}>
-                      {p.created_by_username ? `@${p.created_by_username}` : "-"}
-                    </td>
-                    <td style={{ textAlign: "right" }}>
-                      <div className="table-actions">
-                        {dataSource === "local" && (
-                          <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
-                        )}
-                        {perms.can("products.edit") && dataSource === "live" && (
-                          <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
-                        )}
-                        {perms.can("products.duplicate") && dataSource === "live" && (
-                          <IconBtn icon="fa-copy" title="Duplicate" onClick={() => openDuplicate(p)} />
-                        )}
-                        {perms.can("products.delete") && dataSource === "live" && (
-                          <IconBtn icon="fa-trash" title="Delete" onClick={() => setConfirmDel(p)} danger />
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+                </tbody>
             </table>
             )}
           </div>
-          {filtered.length > 0 && totalPages > 1 && (
+          {!groups && filtered.length > 0 && totalPages > 1 && (
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginTop: 16, paddingTop: 12, borderTop: "1px solid var(--border)" }}>
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
@@ -3322,7 +3347,8 @@ export default function Products({ currentUser }) {
             </div>
           )}
         </>
-      )}
+        );
+      })()}
 
       {/* ── Product Form Modal ── */}
       <Modal
