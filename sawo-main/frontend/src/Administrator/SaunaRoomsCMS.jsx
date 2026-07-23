@@ -2075,16 +2075,6 @@ function CheckRoomsSyncModal({ open, loading, report, events, onClose, onApply, 
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [events]);
 
-  useEffect(() => {
-    const lastEvent = events[events.length - 1];
-    const wasApplied = !applying && !loading && report?.totalChanges > 0
-      && events.some(e => e.phase === "applying") && lastEvent?.phase === "complete";
-    if (wasApplied) {
-      const t = setTimeout(onClose, 1800);
-      return () => clearTimeout(t);
-    }
-  }, [applying, loading, report, events, onClose]);
-
   if (!open) return null;
 
   const lastEvent = events[events.length - 1];
@@ -2150,6 +2140,7 @@ function CheckRoomsSyncModal({ open, loading, report, events, onClose, onApply, 
   };
 
   const wasApplied = !applying && !loading && applyEvts.length > 0 && lastEvent?.phase === "complete";
+  const applyFailed = !applying && !loading && applyEvts.length > 0 && isError;
 
   const renderProgressBar = (pct, err) => (
     <div style={{ marginBottom: 20 }}>
@@ -2234,11 +2225,28 @@ function CheckRoomsSyncModal({ open, loading, report, events, onClose, onApply, 
 
         {/* Success banner after apply */}
         {wasApplied && (
-          <div style={{ padding: "12px 16px", background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 6, marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
-            <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1.1rem" }} />
+          <div style={{ padding: "12px 16px", background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 6, marginBottom: 16, display: "flex", alignItems: "flex-start", gap: 10 }}>
+            <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1.1rem", marginTop: 1 }} />
             <div>
               <div style={{ fontWeight: 600, fontSize: "0.85rem", color: "#16a34a" }}>Changes applied successfully!</div>
               <div style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: 2 }}>Local files updated and pushed to GitHub.</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-2)", marginTop: 6 }}>
+                <strong>What's next:</strong> the live site rebuilds automatically from this push — changes typically appear within a few minutes. You can safely close this window.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Failure banner after a failed apply */}
+        {applyFailed && (
+          <div style={{ padding: "12px 16px", background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: 6, marginBottom: 16, display: "flex", alignItems: "flex-start", gap: 10 }}>
+            <i className="fa-solid fa-circle-xmark" style={{ color: "var(--danger)", fontSize: "1.1rem", marginTop: 1 }} />
+            <div>
+              <div style={{ fontWeight: 600, fontSize: "0.85rem", color: "var(--danger)" }}>Apply failed.</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: 2 }}>No local files were changed. See the log below for details.</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-2)", marginTop: 6 }}>
+                <strong>What's next:</strong> check your connection and try clicking Sync again. If it keeps failing, contact whoever manages the GitHub integration.
+              </div>
             </div>
           </div>
         )}
