@@ -42,7 +42,34 @@ const SCOPE_OPTIONS = [
   { value: "heaters", label: "Heaters (coming soon)", disabled: true },
 ];
 
+function useToast() {
+  const [toasts, setToasts] = useState([]);
+  const add = (message, type = "info") => {
+    const id = Date.now();
+    setToasts((p) => [...p, { id, message, type }]);
+    setTimeout(() => setToasts((p) => p.filter((t) => t.id !== id)), 4500);
+  };
+  const remove = (id) => setToasts((p) => p.filter((t) => t.id !== id));
+  return { toasts, add, remove };
+}
+
+function Toast({ toasts, remove }) {
+  const icons = { error: "fa-circle-xmark", success: "fa-circle-check", info: "fa-circle-info", warning: "fa-triangle-exclamation" };
+  return (
+    <div className="toast-stack">
+      {toasts.map((t) => (
+        <div key={t.id} className={`toast toast-${t.type}`}>
+          <i className={`fa-solid ${icons[t.type]}`} style={{ flexShrink: 0 }} />
+          <span style={{ flex: 1, lineHeight: 1.4 }}>{t.message}</span>
+          <button className="toast-close" onClick={() => remove(t.id)}></button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Settings({ currentUser }) {
+  const { toasts, add, remove } = useToast();
   const cachedSettings = getCache(SETTINGS_CACHE_KEY);
   const [source, setSource] = useState(() => cachedSettings ? cachedSettings.source : null);
   const [scope, setScope] = useState(() => cachedSettings ? cachedSettings.scope : "accessories");
@@ -86,8 +113,10 @@ export default function Settings({ currentUser }) {
         username: currentUser?.username,
         user_id: currentUser?.id,
       });
+      add(`GDPR Consent Banner ${next ? "enabled" : "disabled"}`, "success");
     } catch (err) {
       setError("Failed to toggle GDPR banner: " + err.message);
+      add("Failed to toggle GDPR banner", "error");
     } finally {
       setGdprSaving(false);
     }
@@ -107,8 +136,10 @@ export default function Settings({ currentUser }) {
         username:    currentUser?.username,
         user_id:     currentUser?.id,
       });
+      add(`Language Switcher ${next ? "enabled" : "disabled"}`, "success");
     } catch (err) {
       setError("Failed to toggle language switcher: " + err.message);
+      add("Failed to toggle language switcher", "error");
     } finally {
       setLangSaving(false);
     }
@@ -137,8 +168,10 @@ export default function Settings({ currentUser }) {
         username:    currentUser?.username,
         user_id:     currentUser?.id,
       });
+      add("Enabled languages updated", "success");
     } catch (err) {
       setError("Failed to update enabled languages: " + err.message);
+      add("Failed to update enabled languages", "error");
     } finally {
       setLangSaving(false);
     }
@@ -158,8 +191,10 @@ export default function Settings({ currentUser }) {
         username: currentUser?.username,
         user_id: currentUser?.id,
       });
+      add(`Header Layout switched to ${next === "layout1" ? "Layout 1" : "Layout 2"}`, "success");
     } catch (err) {
       setError("Failed to switch header layout: " + err.message);
+      add("Failed to switch header layout", "error");
     } finally {
       setLayoutSaving(false);
     }
@@ -179,8 +214,10 @@ export default function Settings({ currentUser }) {
         username: currentUser?.username,
         user_id: currentUser?.id,
       });
+      add(`Live Data Source switched to ${next}`, "success");
     } catch (err) {
       setError("Failed to switch data source: " + err.message);
+      add("Failed to switch data source", "error");
     } finally {
       setSwitching(false);
     }
@@ -200,8 +237,10 @@ export default function Settings({ currentUser }) {
         username: currentUser?.username,
         user_id: currentUser?.id,
       });
+      add(`Json Source scope switched to ${next}`, "success");
     } catch (err) {
       setError("Failed to switch json source scope: " + err.message);
+      add("Failed to switch json source scope", "error");
     } finally {
       setSwitching(false);
     }
@@ -220,6 +259,7 @@ export default function Settings({ currentUser }) {
 
   return (
     <div className="w-full">
+      <Toast toasts={toasts} remove={remove} />
       {error && (
         <div className="mb-6 bg-[var(--danger-bg)] border border-[var(--danger)] rounded p-4 text-[var(--danger)]">
           <i className="fas fa-exclamation-circle mr-2"></i>
@@ -288,70 +328,6 @@ export default function Settings({ currentUser }) {
       </div>
 
       <div className="card card-body">
-        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
-          <i className="fa-solid fa-bars text-[var(--brand)]"></i>
-          Header Layout
-        </h3>
-        <p className="text-sm text-[var(--text-3)] mb-4">
-          Controls the public site's header nav structure. Takes effect for visitors
-          within seconds, no redeploy needed.
-        </p>
-
-        <div className="space-y-2">
-          {LAYOUT_OPTIONS.map((opt) => (
-            <label
-              key={opt.value}
-              className={`flex items-start gap-3 p-3 rounded border cursor-pointer transition-colors ${
-                headerLayout === opt.value
-                  ? "border-[var(--brand)] bg-[var(--brand-muted)]"
-                  : "border-[var(--border)] hover:bg-[var(--surface-2)]"
-              } ${layoutSaving ? "opacity-60 pointer-events-none" : ""}`}
-            >
-              <input
-                type="radio"
-                name="header-layout"
-                value={opt.value}
-                checked={headerLayout === opt.value}
-                onChange={() => handleSwitchHeaderLayout(opt.value)}
-                disabled={layoutSaving}
-                className="mt-1"
-              />
-              <div>
-                <p className="text-sm font-medium text-[var(--text)]">{opt.label}</p>
-                <p className="text-xs text-[var(--text-3)]">{opt.description}</p>
-              </div>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      <div className="card card-body">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
-              <i className="fa-solid fa-cookie-bite text-[var(--brand)]"></i>
-              GDPR Consent Banner
-            </h3>
-            <p className="text-sm text-[var(--text-3)]">
-              Shows the cookie/data consent banner to public visitors. When off, the
-              banner's code isn't even loaded on the public site, so there is zero page-speed cost.
-            </p>
-          </div>
-          <label className={`relative inline-flex items-center flex-shrink-0 ${gdprSaving ? "opacity-60 pointer-events-none" : "cursor-pointer"}`}>
-            <input
-              type="checkbox"
-              checked={gdprEnabled}
-              disabled={gdprSaving}
-              onChange={(e) => handleToggleGDPR(e.target.checked)}
-              className="sr-only peer"
-            />
-            <div className="w-11 h-6 bg-[var(--surface-2)] border border-[var(--border)] rounded-full peer peer-checked:bg-[var(--brand)] transition-colors"></div>
-            <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
-          </label>
-        </div>
-      </div>
-
-      <div className="card card-body">
         <div className="flex items-center justify-between mb-1">
           <h3 className="text-lg font-bold text-[var(--text)] flex items-center gap-2">
             <i className="fas fa-language text-[var(--brand)]"></i>
@@ -411,6 +387,70 @@ export default function Settings({ currentUser }) {
           and remain in the sitemap. Adding a brand-new language still requires a build-time change
           in the site's codebase — it cannot be added from here.
         </p>
+      </div>
+
+      <div className="card card-body">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+              <i className="fa-solid fa-cookie-bite text-[var(--brand)]"></i>
+              GDPR Consent Banner
+            </h3>
+            <p className="text-sm text-[var(--text-3)]">
+              Shows the cookie/data consent banner to public visitors. When off, the
+              banner's code isn't even loaded on the public site, so there is zero page-speed cost.
+            </p>
+          </div>
+          <label className={`relative inline-flex items-center flex-shrink-0 ${gdprSaving ? "opacity-60 pointer-events-none" : "cursor-pointer"}`}>
+            <input
+              type="checkbox"
+              checked={gdprEnabled}
+              disabled={gdprSaving}
+              onChange={(e) => handleToggleGDPR(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-[var(--surface-2)] border border-[var(--border)] rounded-full peer peer-checked:bg-[var(--brand)] transition-colors"></div>
+            <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+          </label>
+        </div>
+      </div>
+
+      <div className="card card-body">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-bars text-[var(--brand)]"></i>
+          Header Layout
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          Controls the public site's header nav structure. Takes effect for visitors
+          within seconds, no redeploy needed.
+        </p>
+
+        <div className="space-y-2">
+          {LAYOUT_OPTIONS.map((opt) => (
+            <label
+              key={opt.value}
+              className={`flex items-start gap-3 p-3 rounded border cursor-pointer transition-colors ${
+                headerLayout === opt.value
+                  ? "border-[var(--brand)] bg-[var(--brand-muted)]"
+                  : "border-[var(--border)] hover:bg-[var(--surface-2)]"
+              } ${layoutSaving ? "opacity-60 pointer-events-none" : ""}`}
+            >
+              <input
+                type="radio"
+                name="header-layout"
+                value={opt.value}
+                checked={headerLayout === opt.value}
+                onChange={() => handleSwitchHeaderLayout(opt.value)}
+                disabled={layoutSaving}
+                className="mt-1"
+              />
+              <div>
+                <p className="text-sm font-medium text-[var(--text)]">{opt.label}</p>
+                <p className="text-xs text-[var(--text-3)]">{opt.description}</p>
+              </div>
+            </label>
+          ))}
+        </div>
       </div>
       </div>
     </div>
