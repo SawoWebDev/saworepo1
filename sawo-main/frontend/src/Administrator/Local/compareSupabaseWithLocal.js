@@ -99,6 +99,47 @@ function valueEqual(val1, val2) {
 }
 
 /**
+ * Compare a single named field, applying URL-aware normalization for
+ * thumbnail/images/spec_images/files regardless of whether it's reached via
+ * a parent object's key loop or compared directly (e.g. per-field diffing in
+ * compareItems below) — keeping this logic in one place so both call sites
+ * agree on what "equal" means for these fields.
+ */
+function fieldEqual(key, v1, v2) {
+  if (key === "thumbnail" || key === "images" || key === "spec_images" || key === "files") {
+    if (Array.isArray(v1) && Array.isArray(v2)) {
+      if (v1.length !== v2.length) return false;
+      for (let i = 0; i < v1.length; i++) {
+        // For file objects, compare normalized URLs
+        if (v1[i] && v2[i] && typeof v1[i] === "object" && typeof v2[i] === "object") {
+          const f1 = v1[i];
+          const f2 = v2[i];
+          if (f1.url && f2.url && !valueEqual(f1.url, f2.url)) return false;
+          if (f1.name && f2.name && f1.name !== f2.name) return false;
+        } else if (!valueEqual(v1[i], v2[i])) {
+          return false;
+        }
+      }
+      return true;
+    } else if (typeof v1 === "string" && typeof v2 === "string") {
+      return valueEqual(v1, v2);
+    } else {
+      return v1 === v2;
+    }
+  }
+  if (Array.isArray(v1) && Array.isArray(v2)) {
+    if (v1.length !== v2.length) return false;
+    for (let i = 0; i < v1.length; i++) {
+      if (!deepEqual(v1[i], v2[i])) return false;
+    }
+    return true;
+  } else if (typeof v1 === "object" && typeof v2 === "object") {
+    return deepEqual(v1, v2);
+  }
+  return valueEqual(v1, v2);
+}
+
+/**
  * Deep equality check for objects
  */
 function deepEqual(obj1, obj2) {
@@ -113,40 +154,7 @@ function deepEqual(obj1, obj2) {
 
   for (const key of keys1) {
     if (!keys2.includes(key)) return false;
-
-    const v1 = obj1[key];
-    const v2 = obj2[key];
-
-    // Special handling for URL fields (thumbnail, images, spec_images, files)
-    if (key === "thumbnail" || key === "images" || key === "spec_images" || key === "files") {
-      if (Array.isArray(v1) && Array.isArray(v2)) {
-        if (v1.length !== v2.length) return false;
-        for (let i = 0; i < v1.length; i++) {
-          // For file objects, compare normalized URLs
-          if (typeof v1[i] === "object" && typeof v2[i] === "object") {
-            const f1 = v1[i];
-            const f2 = v2[i];
-            if (f1.url && f2.url && !valueEqual(f1.url, f2.url)) return false;
-            if (f1.name && f2.name && f1.name !== f2.name) return false;
-          } else if (!valueEqual(v1[i], v2[i])) {
-            return false;
-          }
-        }
-      } else if (typeof v1 === "string" && typeof v2 === "string") {
-        if (!valueEqual(v1, v2)) return false;
-      } else if (v1 !== v2) {
-        return false;
-      }
-    } else if (Array.isArray(v1) && Array.isArray(v2)) {
-      if (v1.length !== v2.length) return false;
-      for (let i = 0; i < v1.length; i++) {
-        if (!deepEqual(v1[i], v2[i])) return false;
-      }
-    } else if (typeof v1 === "object" && typeof v2 === "object") {
-      if (!deepEqual(v1, v2)) return false;
-    } else if (!valueEqual(v1, v2)) {
-      return false;
-    }
+    if (!fieldEqual(key, obj1[key], obj2[key])) return false;
   }
 
   return true;
@@ -194,7 +202,7 @@ function compareItems(supabaseItems, localItems, itemType) {
       const diff = {};
       for (const field in supabaseItem) {
         if (IGNORED_FIELDS.has(field)) continue; // Skip metadata fields
-        if (!deepEqual(supabaseItem[field], localItem[field])) {
+        if (!fieldEqual(field, supabaseItem[field], localItem[field])) {
           diff[field] = {
             supabase: supabaseItem[field],
             local: localItem[field],

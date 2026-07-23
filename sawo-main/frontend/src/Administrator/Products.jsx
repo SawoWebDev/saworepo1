@@ -3998,7 +3998,11 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
           }}
         >
           <i className={`fa-solid fa-${isExpanded ? "chevron-down" : "chevron-right"}`} style={{ marginRight: 6, fontSize: "0.7em" }} />
-          {field}: {typeof diff[field].local === "string" && diff[field].local.length > 40 ? `${diff[field].local.substring(0, 40)}...` : String(diff[field].local).substring(0, 40)}
+          {field}: {(() => {
+            const local = diff[field].local;
+            const text = typeof local === "object" && local !== null ? JSON.stringify(local) : String(local);
+            return text.length > 40 ? `${text.substring(0, 40)}...` : text;
+          })()}
         </button>
         {isExpanded && (
           <div style={{ padding: "8px", background: "var(--surface-3)", borderRadius: 4, marginTop: 4, fontSize: "0.75rem", fontFamily: "monospace" }}>
