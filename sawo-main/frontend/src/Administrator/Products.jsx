@@ -2063,7 +2063,7 @@ function ProductPreviewModal({ product, onClose }) {
 }
 
 // ─── Grid Card ────────────────────────────────────────────────────────────────
-function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms, dataSource = "live" }) {
+function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiveAction, perms, dataSource = "live" }) {
   const [hovered,  setHovered]  = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
@@ -2082,9 +2082,9 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
   const isUnpublished = p.status === "draft" || p.visible === false;
 
   return (
-    <a href={dataSource === "local" ? undefined : productUrl} target={dataSource === "local" ? undefined : "_blank"} rel="noopener noreferrer"
+    <a href={productUrl} target="_blank" rel="noopener noreferrer"
       className={`product-grid-card${isUnpublished ? " is-unpublished" : ""}`}
-      style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: dataSource === "local" ? "default" : "pointer" }}
+      style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: "pointer" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}>
       {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
@@ -2104,6 +2104,16 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
                 {dataSource === "local" && (
                   <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onPreview(p); }}>
                     <i className="fa-solid fa-eye" /> View
+                  </button>
+                )}
+                {perms.can("products.edit") && dataSource === "local" && (
+                  <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onRequestLiveAction(p, "edit"); }}>
+                    <i className="fa-solid fa-pen" /> Edit
+                  </button>
+                )}
+                {perms.can("products.delete") && dataSource === "local" && (
+                  <button type="button" className="danger" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onRequestLiveAction(p, "delete"); }}>
+                    <i className="fa-solid fa-trash" /> Delete
                   </button>
                 )}
                 {perms.can("products.edit") && dataSource === "live" && (
@@ -2296,6 +2306,9 @@ export default function Products({ currentUser }) {
   // Switching to Live is gated behind a confirm dialog (egress warning) —
   // see confirmLiveOpen below.
   const [confirmLiveOpen, setConfirmLiveOpen] = useState(false);
+  // Edit/Delete clicked from a Local-mode card: remembers which product +
+  // action to resume once the user confirms the switch to Live.
+  const [pendingLiveAction, setPendingLiveAction] = useState(null);
   const [products, setProducts]   = useState(() => getCache(PRODUCTS_CACHE_KEY) || []);
   const [loading,  setLoading]    = useState(() => !getCache(PRODUCTS_CACHE_KEY));
   const [allCats,    setAllCats]    = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.cats || []);
@@ -2630,6 +2643,22 @@ export default function Products({ currentUser }) {
       setModalOpen(true);
       add("Duplicated! Remember to change the slug before saving.", "info");
     } catch (err) { add(err.message, "error"); }
+  };
+
+  // Local mode is read-only — Edit/Delete on a local card asks to switch to
+  // Live first, then resumes the requested action against the Supabase row.
+  const requestLiveAction = (row, action) => {
+    setPendingLiveAction({ row, action });
+    setConfirmLiveOpen(true);
+  };
+
+  const confirmSwitchToLive = () => {
+    const pending = pendingLiveAction;
+    setDataSource("live");
+    setConfirmLiveOpen(false);
+    setPendingLiveAction(null);
+    if (pending?.action === "edit") openEdit(pending.row);
+    else if (pending?.action === "delete") setConfirmDel(pending.row);
   };
 
   // ── Sync from Supabase ─────────────────────────────────────────────────────
@@ -3173,7 +3202,7 @@ export default function Products({ currentUser }) {
               <div key={group.key} style={{ marginBottom: 28 }}>
                 <h3 className="product-group-label">{group.label}</h3>
                 <div className="product-grid">
-                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} dataSource={dataSource} />)}
+                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} onRequestLiveAction={requestLiveAction} perms={perms} dataSource={dataSource} />)}
                 </div>
               </div>
             ))}
@@ -3185,7 +3214,7 @@ export default function Products({ currentUser }) {
                 {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
               </div>
             )}
-            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} dataSource={dataSource} />)}
+            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} onRequestLiveAction={requestLiveAction} perms={perms} dataSource={dataSource} />)}
           </div>
         )
       )}
@@ -3244,6 +3273,12 @@ export default function Products({ currentUser }) {
               <div className="table-actions">
                 {dataSource === "local" && (
                   <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
+                )}
+                {perms.can("products.edit") && dataSource === "local" && (
+                  <IconBtn icon="fa-pen" title="Edit" onClick={() => requestLiveAction(p, "edit")} />
+                )}
+                {perms.can("products.delete") && dataSource === "local" && (
+                  <IconBtn icon="fa-trash" title="Delete" onClick={() => requestLiveAction(p, "delete")} danger />
                 )}
                 {perms.can("products.edit") && dataSource === "live" && (
                   <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
@@ -3741,10 +3776,12 @@ export default function Products({ currentUser }) {
 
       <Confirm
         open={confirmLiveOpen}
-        onClose={() => setConfirmLiveOpen(false)}
-        onConfirm={() => { setDataSource("live"); setConfirmLiveOpen(false); }}
+        onClose={() => { setConfirmLiveOpen(false); setPendingLiveAction(null); }}
+        onConfirm={confirmSwitchToLive}
         title="Switch to Live?"
-        message="Live mode reads product data directly from Supabase, which consumes Supabase egress. Local mode (bundled/GitHub snapshot) doesn't."
+        message={pendingLiveAction
+          ? `To ${pendingLiveAction.action} "${pendingLiveAction.row?.name}", switch to Live mode, this reads/writes product data directly on Supabase, which consumes Supabase egress.`
+          : "Live mode reads product data directly from Supabase, which consumes Supabase egress. Local mode (bundled/GitHub snapshot) doesn't."}
         confirmLabel="Proceed"
         confirmVariant="primary"
       />
