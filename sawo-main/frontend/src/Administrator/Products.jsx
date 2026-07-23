@@ -3780,20 +3780,6 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [events]);
 
-  // Auto-close modal after successful sync
-  useEffect(() => {
-    const hasChanges = report && report.totalChanges > 0;
-    const lastEvent = events[events.length - 1];
-    const wasApplied = !applying && !loading && hasChanges && events.some(e => e.phase === "applying") && lastEvent?.phase === "complete";
-
-    if (wasApplied) {
-      const timer = setTimeout(() => {
-        onClose();
-      }, 1800); // 1.8 seconds to show success message
-      return () => clearTimeout(timer);
-    }
-  }, [applying, loading, report, events, onClose]);
-
   if (!open) return null;
 
   const hasChanges = report && report.totalChanges > 0;
@@ -3868,6 +3854,7 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
 
   // Detect successful apply (for success banner after applying=false)
   const wasApplied = !applying && !loading && applyEvts.length > 0 && lastEvent?.phase === "complete";
+  const applyFailed = !applying && !loading && applyEvts.length > 0 && isError;
 
   // ── Render helpers ────────────────────────────────────────────────────────
   const renderProgressBar = (pct, err) => (
@@ -4051,9 +4038,25 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
           ) : report ? (
             <div>
               {wasApplied && (
-                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", borderRadius: 6, marginBottom: 16 }}>
-                  <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1rem" }} />
-                  <span style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Changes applied successfully. Local files are now up to date.</span>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 14px", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", borderRadius: 6, marginBottom: 16 }}>
+                  <i className="fa-solid fa-circle-check" style={{ color: "#22c55e", fontSize: "1rem", marginTop: 1 }} />
+                  <div>
+                    <div style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Changes applied successfully. Local files are now up to date.</div>
+                    <div style={{ fontSize: "0.78rem", color: "var(--text-2)", marginTop: 6 }}>
+                      <strong>What's next:</strong> the live site rebuilds automatically from this push — changes typically appear within a few minutes. You can safely close this window.
+                    </div>
+                  </div>
+                </div>
+              )}
+              {applyFailed && (
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 14px", background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: 6, marginBottom: 16 }}>
+                  <i className="fa-solid fa-circle-xmark" style={{ color: "var(--danger)", fontSize: "1rem", marginTop: 1 }} />
+                  <div>
+                    <div style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Apply failed. No local files were changed.</div>
+                    <div style={{ fontSize: "0.78rem", color: "var(--text-2)", marginTop: 6 }}>
+                      <strong>What's next:</strong> check your connection and try clicking Sync again. If it keeps failing, contact whoever manages the GitHub integration.
+                    </div>
+                  </div>
                 </div>
               )}
               {report.products?.added?.length > 0 && (
