@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
+import HeroWave from "../../components/HeroWave";
+
+const USER_MANUALS_HERO_IMG = "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Series-background-1.webp";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -391,11 +394,41 @@ export default function UserManuals() {
         }
         .um-search-clear:hover { color: #8b5e3c; }
 
+        .um-hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.38);
+          z-index: 0;
+        }
+        .um-hero-content {
+          position: relative;
+          z-index: 1;
+        }
+        .um-hero-title {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 45px;
+          line-height: 52px;
+          font-weight: 700;
+          color: #ffffff;
+        }
+        .um-hero-subtitle {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 22px;
+          font-weight: 400;
+          color: #ffffff;
+          margin-top: 12px;
+          line-height: 38px;
+        }
+        @media (max-width: 768px) {
+          .um-hero-title { font-size: 28px; line-height: 36px; }
+          .um-hero-subtitle { font-size: 16px; line-height: 28px; }
+        }
+
         @media (max-width: 900px) {
           .um-header-row { flex-direction: column !important; align-items: flex-start !important; }
         }
         @media (max-width: 600px) {
-          .um-outer { padding: 80px 20px 60px !important; }
+          .um-outer { padding: 40px 20px 60px !important; }
           .um-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; gap: 16px !important; }
         }
       `}</style>
@@ -404,39 +437,23 @@ export default function UserManuals() {
         <PdfModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
       )}
 
-      {/* ── Intro ─────────────────────────────────────────────────────── */}
-      <div style={{
-        color: "rgb(51,51,51)",
-        width: "100%",
-        maxWidth: 1200,
-        margin: "0 auto",
-        padding: "140px 40px 40px",
-        textAlign: "center",
-      }}>
-        <h2 style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontSize: "32px",
-          fontWeight: 700,
-          fontStyle: "normal",
-          color: "rgb(175,133,100)",
-          margin: "0 0 12px",
-          lineHeight: 1.2,
-        }}>
-          User Manuals
-        </h2>
-        <p style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontSize: "20px",
-          fontWeight: 400,
-          fontStyle: "normal",
-          color: "rgb(51,51,51)",
-          lineHeight: 1.55,
-          maxWidth: 800,
-          margin: "0 auto",
-        }}>
-          Find installation guides, operating manuals, and technical documentation for all SAWO products.
-        </p>
-      </div>
+      {/* ── HERO ──────────────────────────────────────────────────────── */}
+      <section
+        className="um-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
+        style={{
+          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
+          backgroundImage: `url(${USER_MANUALS_HERO_IMG})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="um-hero-overlay" />
+        <div className="um-hero-content">
+          <h1 className="um-hero-title">USER MANUALS</h1>
+          <p className="um-hero-subtitle">Installation guides, manuals, and technical documentation for every SAWO product</p>
+        </div>
+      <HeroWave />
+      </section>
 
       {/* ── Main body ─────────────────────────────────────────────────────── */}
       <div

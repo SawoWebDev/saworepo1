@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import menuPaths from '../../menuPaths';
 import ButtonClear from '../../components/Buttons/ButtonClear';
+import HeroWave from '../../components/HeroWave';
 
 import supportHeroImg from '../../assets/CUB3-Ni2_InsideSaunaRoom.webp';
 
@@ -10,51 +11,22 @@ const Support = () => {
     <div className="relative">
       <style>{`
 
-        .support-hero {
-          min-height: 550px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          padding: 100px 24px;
-          margin-top: 80px;
-          margin-bottom: 40px;
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          color: white;
+        /* Hero follows the same template as the heater pages (see
+           pages/Sauna/heaters/WallMounted.jsx) — full-bleed image from y=0,
+           no external margin pushing it down (that gap is what let the
+           page's white background show through the transparent header). */
+        .support-hero-title {
           font-family: 'Montserrat', sans-serif;
-          position: relative;
-        }
-
-        .support-hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.42);
-          z-index: 1;
-        }
-
-        .support-hero > div {
-          position: relative;
-          z-index: 2;
-        }
-
-        .support-hero h1 {
-          font-size: 36px;
-          font-weight: 700;
-          margin-bottom: 12px;
-          font-family: 'Montserrat', sans-serif;
+          font-size: 45px; line-height: 52px;
+          font-weight: 700; color: #fff; margin: 0 0 12px;
           letter-spacing: 0.5px;
         }
 
-        .support-hero p {
-          font-size: 16px;
-          font-weight: 400;
-          opacity: 0.95;
-          margin-bottom: 0;
-          max-width: 600px;
-          line-height: 1.5;
+        .support-hero-subtitle {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 20px; font-weight: 300;
+          color: rgba(255,255,255,0.88); margin: 0 auto;
+          max-width: 600px; line-height: 1.5;
         }
 
         .support-section {
@@ -340,12 +312,13 @@ const Support = () => {
         }
 
         @media (max-width: 768px) {
-          .support-hero h1 {
+          .support-hero-title {
             font-size: 28px;
+            line-height: 36px;
           }
 
-          .support-hero p {
-            font-size: 14px;
+          .support-hero-subtitle {
+            font-size: 16px;
           }
 
           .support-section {
@@ -377,11 +350,21 @@ const Support = () => {
       `}</style>
 
       {/* HERO */}
-      <section className="support-hero" style={{ backgroundColor: "#241c17", backgroundImage: `url(${supportHeroImg})` }}>
-        <div>
-          <h1>SUPPORT CENTER</h1>
-          <p>Everything you need to get the most out of your SAWO products</p>
+      <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
+        <img
+          src={supportHeroImg}
+          alt="Support Center"
+          className="absolute inset-0 w-full h-full object-cover object-center -z-10"
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
+        />
+        <div className="absolute inset-0 bg-black/40 -z-10" />
+        <div className="relative z-10">
+          <h1 className="support-hero-title">SUPPORT CENTER</h1>
+          <p className="support-hero-subtitle">Everything you need to get the most out of your SAWO products</p>
         </div>
+        <HeroWave />
       </section>
 
       {/* SUPPORT RESOURCES */}

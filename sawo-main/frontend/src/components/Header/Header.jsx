@@ -10,6 +10,9 @@ export default function Header() {
   const location = useLocation();
 
   const [hidden, setHidden] = useState(false);
+  // Transparent (with a dark-to-clear scrim) at the very top of the page,
+  // solid white once the user has scrolled away from the top.
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 8);
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [hoveredSubmenu, setHoveredSubmenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -215,11 +218,13 @@ export default function Header() {
   const isSub2Active = (item2) =>
     !!(item2.path && location.pathname === item2.path);
 
-  // Hide header on scroll down + close mobile menu
+  // Hide header on scroll down, show on scroll up; separately track whether
+  // we've left the very top of the page for the transparent-to-white swap.
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
       setHidden(currentScroll > lastScrollY.current && currentScroll > 80);
+      setScrolled(currentScroll > 8);
       lastScrollY.current = currentScroll;
       if (mobileOpen) setMobileOpen(false);
     };
@@ -261,11 +266,30 @@ export default function Header() {
   return (
     <>
       {/* Montserrat is loaded once in public/index.html */}
+      {/* Scrim — a separate, taller layer behind the header so the dark-to-
+          clear fade has room to breathe past the header's own (much
+          shorter) box instead of cutting off right at its edge. Sits one
+          z-index below the header so header content/links stay on top and
+          clickable; fades out entirely once scrolled. */}
+      {!scrolled && (
+        <div
+          aria-hidden="true"
+          className="fixed top-0 left-0 w-full z-40 pointer-events-none transition-opacity duration-300"
+          style={{
+            height: 160,
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.22) 40%, rgba(0,0,0,0.06) 55%, rgba(0,0,0,0) 68%)",
+          }}
+        />
+      )}
       <header
-        className={`fixed top-0 left-0 w-full bg-white z-50 shadow-md transition-transform duration-500 font-sans ${
+        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 font-sans ${
           hidden ? "-translate-y-full" : "translate-y-0"
-        }`}
-        style={{ fontFamily: `"Montserrat"` }}
+        } ${scrolled ? "shadow-md header--solid" : "header--transparent"}`}
+        style={{
+          fontFamily: `"Montserrat"`,
+          background: scrolled ? "#ffffff" : "transparent",
+          transition: "background 0.35s ease, box-shadow 0.35s ease, transform 0.5s ease",
+        }}
       >
         <div className="w-full flex items-center justify-between py-3 px-6 md:px-8">
           {/* Logo with left padding */}
@@ -294,7 +318,7 @@ export default function Header() {
                   {item.megaMenu ? (
                     <Link
                       to={item.path}
-                      className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                      className={`menu-item nav-toplevel flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
                         isActive(item) ? "active" : ""
                       }`}
                     >
@@ -305,7 +329,7 @@ export default function Header() {
                     item.path ? (
                       <Link
                         to={item.path}
-                        className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                        className={`menu-item nav-toplevel flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
                           isActive(item) ? "active" : ""
                         }`}
                       >
@@ -314,7 +338,7 @@ export default function Header() {
                       </Link>
                     ) : (
                       <button
-                        className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                        className={`menu-item nav-toplevel flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
                           isActive(item) ? "active" : ""
                         }`}
                       >
@@ -325,7 +349,7 @@ export default function Header() {
                   ) : (
                     <Link
                       to={item.path}
-                      className={`menu-item flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
+                      className={`menu-item nav-toplevel flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
                         isActive(item) ? "active" : ""
                       }`}
                     >
@@ -485,8 +509,6 @@ export default function Header() {
               ))}
             </nav>
 
-            <HeaderLanguageSwitcher />
-
             {/* Search Bar - Icon or Expanded */}
             <div
               className="ml-auto pr-2 md:pr-4 flex items-center gap-3 transition-all duration-300"
@@ -516,7 +538,7 @@ export default function Header() {
                 // Search icon only
                 <button
                   onClick={() => setSearchExpanded(true)}
-                  className="p-2 hover:text-[#af8564] transition-colors text-[rgb(51,51,51)]"
+                  className="header-icon-btn p-2 hover:text-[#af8564] transition-colors text-[rgb(51,51,51)]"
                   aria-label="Search"
                   style={{
                     animation: searchExpanded ? 'none' : 'slideInLeft 0.3s ease-out'
@@ -527,6 +549,8 @@ export default function Header() {
               )}
 
             </div>
+
+            <HeaderLanguageSwitcher />
 
             {/* CSS Animations */}
             <style>{`
@@ -589,6 +613,26 @@ export default function Header() {
               .menu-item.active .menu-text,
               .menu-item:hover .menu-text {
                 color: #916e53;
+              }
+              /* Transparent header sits over a dark scrim (see Header.jsx's
+                 inline gradient) — top-level nav text, the language toggle,
+                 and the search/hamburger icons need to flip to white here,
+                 and STAY white on hover/active (the existing underline
+                 growLine effect below is the only hover/active indicator —
+                 no color swap). Scoped to .nav-toplevel (not the shared
+                 .menu-item class) so the white-background dropdown/mega-menu
+                 panels underneath — which also use .menu-item — are never
+                 affected; they keep their normal dark-on-white styling. */
+              .header--transparent .nav-toplevel,
+              .header--transparent .nav-toplevel .menu-text,
+              .header--transparent .nav-toplevel.active,
+              .header--transparent .nav-toplevel:hover,
+              .header--transparent .nav-toplevel.active .menu-text,
+              .header--transparent .nav-toplevel:hover .menu-text,
+              .header--transparent .header-lang-toggle,
+              .header--transparent .header-icon-btn,
+              .header--transparent .header-icon-btn:hover {
+                color: #ffffff;
               }
               .header-lang { position: relative; }
               .header-lang-toggle {
@@ -687,7 +731,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden text-2xl font-bold bg-transparent border-none cursor-pointer"
+            className="header-icon-btn md:hidden text-2xl font-bold bg-transparent border-none cursor-pointer text-[rgb(51,51,51)]"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}

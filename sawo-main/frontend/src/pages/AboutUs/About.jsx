@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ChevronRight from '../../components/icons/ChevronRight';
 import menuPaths from '../../menuPaths';
@@ -10,8 +10,45 @@ import SaunaSupport from '../../assets/About/aboutus-Sauna-Support_LOGO-EN-sinin
 import LN1 from '../../assets/About/Latest News/LN1.webp';
 import LN3 from '../../assets/About/Latest News/LN3.jpg';
 import LN4 from '../../assets/About/Latest News/LN4.jpg';
+import newsBg from '../../assets/Contacts-bg.webp';
+import HeroWave from '../../components/HeroWave';
 
 const AboutUs = () => {
+  const certRef = useRef(null);
+
+  // Staggered "gleam" sweep across the ISO/Sauna-from-Finland badges once
+  // they scroll into view — ported from the reference vanilla-JS snippet,
+  // scoped to this component's container instead of a global querySelector.
+  useEffect(() => {
+    const container = certRef.current;
+    if (!container) return undefined;
+
+    const items = container.querySelectorAll('.certification-item');
+    const gleamDuration = 1200;
+    const stagger = 420;
+
+    const runOnce = () => {
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('gleam-active');
+          setTimeout(() => item.classList.remove('gleam-active'), gleamDuration);
+        }, index * stagger);
+      });
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runOnce();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="relative">
       <style>{`
@@ -109,11 +146,85 @@ const AboutUs = () => {
         }
         .about-badges {
           display: flex;
-          flex-direction: row;
-          gap: 24px;
+          justify-content: center;
           position: sticky;
           top: 80px;
-          align-items: flex-start;
+        }
+
+        /* ── CERTIFICATION RIBBON (ISO 9001 / ISO 14001 / Sauna from Finland) ── */
+        .cert-ribbon {
+          position: relative;
+          background: linear-gradient(135deg, #346096 0%, #042349 100%);
+          border-radius: 18px;
+          box-shadow: 0 25px 60px rgba(4, 35, 73, 0.45);
+        }
+        .certifications-container-portrait {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 24px;
+          padding: 36px 32px;
+        }
+        .cert-link {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+        }
+        .certification-item {
+          width: 240px;
+          padding: 12px 16px;
+          text-align: center;
+          position: relative;
+          background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+          border-radius: 12px;
+          border: 1px solid rgba(255,255,255,0.12);
+          overflow: hidden;
+          transition: transform 0.3s ease;
+        }
+        .certification-item:hover {
+          transform: scale(1.03);
+        }
+        .cert-icon {
+          width: 120px;
+          margin: 0 auto 8px;
+          position: relative;
+          z-index: 1;
+        }
+        .cert-icon img {
+          width: 100%;
+          border-radius: 0;
+          box-shadow: none;
+        }
+        .cert-caption {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: rgba(255,255,255,0.85);
+        }
+        .cert-label {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 12px;
+          color: rgba(255,255,255,0.65);
+        }
+        .cert-gleam {
+          position: absolute;
+          top: 0;
+          left: -75%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(120deg, rgba(255,255,255,0), rgba(255,255,255,0.18), rgba(255,255,255,0));
+          transform: skewX(-20deg);
+          pointer-events: none;
+        }
+        .certification-item.gleam-active .cert-gleam,
+        .certification-item:hover .cert-gleam {
+          animation: gleamMove 1.2s ease forwards;
+        }
+        @keyframes gleamMove {
+          from { left: -75%; }
+          to { left: 125%; }
         }
 
         /* ── INNOVATION SECTION ── */
@@ -121,7 +232,7 @@ const AboutUs = () => {
           font-family: 'Montserrat', sans-serif;
           font-size: 2.5rem;
           font-weight: 700;
-          color: #d35444;
+          color: #D32F2F;
           margin-bottom: 30px;
           line-height: 1.3;
         }
@@ -137,26 +248,6 @@ const AboutUs = () => {
         }
         .about-text p:last-child {
           margin-bottom: 0;
-        }
-
-        /* ── CERTIFICATIONS ── */
-        .certs-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-        .cert-item {
-          text-align: center;
-          flex: 1;
-          min-width: 120px;
-        }
-        .cert-item img {
-          width: 100%;
-          max-width: 160px;
-          margin: 0 auto;
-          object-fit: contain;
-          height: auto;
-          filter: none;
         }
 
         /* ── STATS SECTION ── */
@@ -185,8 +276,13 @@ const AboutUs = () => {
           font-family: 'Montserrat', sans-serif;
           font-size: 2rem;
           font-weight: 700;
-          color: #d35444;
           display: inline;
+        }
+        .stat-number-value {
+          color: #D32F2F;
+        }
+        .stat-number-suffix {
+          color: #000;
         }
 
         /* ── CTA BUTTON ── */
@@ -217,11 +313,20 @@ const AboutUs = () => {
 
         /* ── LATEST NEWS SECTION ── */
         .news-section {
-          background: #000;
+          position: relative;
+          background: #000 url(${newsBg}) center / cover no-repeat;
           padding: 80px 20px;
           margin-top: 80px;
         }
+        .news-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.7);
+        }
         .news-container {
+          position: relative;
+          z-index: 1;
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -331,12 +436,6 @@ const AboutUs = () => {
           .about-badges {
             position: static;
           }
-          .cert-item img {
-            max-width: 120px;
-          }
-          .certs-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
           .news-grid {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -366,6 +465,9 @@ const AboutUs = () => {
           .news-title {
             font-size: 1.8rem;
           }
+          .certification-item {
+            width: 240px;
+          }
         }
       `}</style>
 
@@ -387,6 +489,7 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
+        <HeroWave />
       </section>
 
       {/* ════════════════════════════
@@ -416,11 +519,17 @@ const AboutUs = () => {
               <div className="about-stats">
                 <div className="stat-item">
                   <div className="stat-label">Established excellence</div>
-                  <div className="stat-number">30+ years</div>
+                  <div className="stat-number">
+                    <span className="stat-number-value">30+</span>{" "}
+                    <span className="stat-number-suffix">years</span>
+                  </div>
                 </div>
                 <div className="stat-item">
                   <div className="stat-label">Global reach</div>
-                  <div className="stat-number">90+ countries worldwide</div>
+                  <div className="stat-number">
+                    <span className="stat-number-value">90+</span>{" "}
+                    <span className="stat-number-suffix">countries worldwide</span>
+                  </div>
                 </div>
               </div>
 
@@ -432,14 +541,41 @@ const AboutUs = () => {
           </div>
 
           <div className="about-badges">
-            <div className="cert-item">
-              <img src={ISO9001} alt="ISO 9001" />
-            </div>
-            <div className="cert-item">
-              <img src={ISO14001} alt="ISO 14001" />
-            </div>
-            <div className="cert-item">
-              <img src={SaunaSupport} alt="Sauna from Finland" />
+            <div className="cert-ribbon">
+              <div className="certifications-container-portrait" ref={certRef}>
+                <a className="cert-link" href="https://www.iso.org/standard/62085.html" target="_blank" rel="noopener noreferrer">
+                  <div className="certification-item">
+                    <div className="cert-icon">
+                      <img src={ISO9001} alt="ISO 9001" />
+                    </div>
+                    <div className="cert-caption">ISO 9001</div>
+                    <div className="cert-label">Quality Management</div>
+                    <div className="cert-gleam" />
+                  </div>
+                </a>
+
+                <a className="cert-link" href="https://www.iso.org/standard/60857.html" target="_blank" rel="noopener noreferrer">
+                  <div className="certification-item">
+                    <div className="cert-icon">
+                      <img src={ISO14001} alt="ISO 14001" />
+                    </div>
+                    <div className="cert-caption">ISO 14001</div>
+                    <div className="cert-label">Environmental Management</div>
+                    <div className="cert-gleam" />
+                  </div>
+                </a>
+
+                <a className="cert-link" href="https://saunafromfinland.com/" target="_blank" rel="noopener noreferrer">
+                  <div className="certification-item">
+                    <div className="cert-icon">
+                      <img src={SaunaSupport} alt="Sauna from Finland" />
+                    </div>
+                    <div className="cert-caption">Sauna from Finland</div>
+                    <div className="cert-label">Official Member</div>
+                    <div className="cert-gleam" />
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>

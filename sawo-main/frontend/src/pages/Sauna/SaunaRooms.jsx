@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import "./SaunaRooms.css";
+import "./heaters/heaters.css";
+import ButtonClear from "../../components/Buttons/ButtonClear";
+import HeroWave from "../../components/HeroWave";
 import SaunaRoomViewer from "./rooms/SaunaRoomViewer";
 import SaunaFeatures from "./rooms/SaunaFeatures";
 import SaunaProductDetails from "./rooms/SaunaProductDetails";
@@ -231,6 +234,9 @@ import img_Signature_BL_v4_copy from "../../assets/Signature-BL-v4-copy.webp";
 import img_Dragon_BL_v3 from "../../assets/Dragon-BL-v3.webp";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
+
+const SAUNA_ROOMS_HERO_IMG = "https://www.sawo.com/wp-content/uploads/2025/11/1620ML_scene1.webp";
+const SAUNA_ROOMS_BROCHURE_URL = "https://heyzine.com/flip-book/576de453b2.html";
 
 const standardImageData = {
   1214: { RS: { bench: "RS1214", images: [img_1214RS_LATEST_NEW_SAUNA_ROOM] }, LS: { bench: "LS1214", images: [img_1214LS_LATEST_NEW_SAUNA_ROOM] } },
@@ -1361,6 +1367,22 @@ const SaunaRooms = () => {
 
   return (
     <div>
+      {/* HERO */}
+      <section
+        className="wm-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
+        style={{ backgroundColor: "#241c17", backgroundImage: `url(${SAUNA_ROOMS_HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        <div className="wm-hero-overlay" />
+        <div className="wm-hero-content">
+          <h1 className="wm-hero-title">SAUNA ROOMS</h1>
+          <p className="wm-hero-subtitle">Custom-built Finnish sauna rooms crafted for comfort, durability, and timeless design.</p>
+          <div style={{ marginTop: "32px" }}>
+            <ButtonClear text="VIEW BROCHURE" href={SAUNA_ROOMS_BROCHURE_URL} target="_blank" />
+          </div>
+        </div>
+        <HeroWave />
+      </section>
+
       {/* TABS */}
       <div className="sauna-tabs-wrapper">
         <div className="sauna-room-tabs">
