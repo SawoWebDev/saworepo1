@@ -38,6 +38,32 @@ export async function getAllProductsLive() {
 }
 
 /**
+ * Fetch only recently-created products live from Supabase — the admin
+ * Products list's default view. products.select("*") pulls every row's
+ * images/spec_images/description/spec_table/etc, so pulling the whole
+ * table on every visit is real egress; most admin visits only care about
+ * what was just added. Filtering server-side (not fetch-all-then-slice)
+ * is what actually avoids downloading the rest of the table.
+ */
+export async function getRecentProductsLive(days = 7) {
+  try {
+    const since = new Date();
+    since.setDate(since.getDate() - days);
+    const { data, error } = await (await getSupabase())
+      .from("products")
+      .select("*")
+      .gte("created_at", since.toISOString())
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch recent products:", err);
+    return [];
+  }
+}
+
+/**
  * Fetch all categories live from Supabase
  */
 export async function getAllCategoriesLive() {
@@ -128,6 +154,30 @@ export async function getAllSaunaRoomsLive() {
     return data || [];
   } catch (err) {
     console.error("[supabaseReader] Failed to fetch sauna rooms:", err);
+    return [];
+  }
+}
+
+/**
+ * Fetch only recently-created sauna rooms live from Supabase — same egress
+ * rationale as getRecentProductsLive above; sauna_rooms rows are just as
+ * heavy (images, spec_images, configurations, door_options, feature_tabs).
+ */
+export async function getRecentSaunaRoomsLive(days = 7) {
+  try {
+    const since = new Date();
+    since.setDate(since.getDate() - days);
+    const { data, error } = await (await getSupabase())
+      .from("sauna_rooms")
+      .select("*")
+      .eq("is_deleted", false)
+      .gte("created_at", since.toISOString())
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch recent sauna rooms:", err);
     return [];
   }
 }

@@ -5,12 +5,9 @@
 // folder opens ProductsGridModal (shared with Taxonomy) to show its
 // products, rather than expanding in place — the grid never restructures.
 //
-import React, { useEffect, useState } from "react";
-import { getAllProductsLive } from "../local-storage/supabaseReader";
+import React, { useState } from "react";
+import { useLocalProducts } from "./Local/useLocalProducts";
 import ProductsGridModal from "./ProductsGridModal";
-import { getCache, setCache } from "./adminCache";
-
-const MODELS_CACHE_KEY = "admin:models:products";
 
 // ─── Model Group card ──────────────────────────────────────────────────────
 function ModelGroup({ modelName, products, onOpen }) {
@@ -31,36 +28,19 @@ function ModelGroup({ modelName, products, onOpen }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────
 export default function Models() {
-  const [products, setProducts]   = useState(() => getCache(MODELS_CACHE_KEY) || []);
-  const [loading, setLoading]     = useState(() => !getCache(MODELS_CACHE_KEY));
-  const [error, setError]         = useState(null);
+  // Sourced locally (bundled/GitHub snapshot, or Supabase only if the
+  // site's Live Data Source setting is explicitly "supabase") instead of
+  // always hitting Supabase live — grouping by model doesn't need
+  // real-time accuracy, so there's no reason it should cost egress.
+  const { products: rawProducts, loading, error } = useLocalProducts();
   const [search, setSearch]       = useState("");
   const [openModel, setOpenModel] = useState(null);
 
-  // Fetch products
-  const fetchProducts = async () => {
-    // Cached data is already on screen — refresh quietly in the background
-    // instead of flashing the loading state.
-    if (!getCache(MODELS_CACHE_KEY)) setLoading(true);
-    setError(null);
-    try {
-      let data = await getAllProductsLive();
-      // Sort by type then by name
-      data.sort((a, b) => {
-        const typeCompare = (a.type || "").localeCompare(b.type || "");
-        if (typeCompare !== 0) return typeCompare;
-        return (a.name || "").localeCompare(b.name || "");
-      });
-      setProducts(data || []);
-      setCache(MODELS_CACHE_KEY, data || []);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => { fetchProducts(); }, []);
+  const products = [...rawProducts].sort((a, b) => {
+    const typeCompare = (a.type || "").localeCompare(b.type || "");
+    if (typeCompare !== 0) return typeCompare;
+    return (a.name || "").localeCompare(b.name || "");
+  });
 
   // Group products by type
   const groups = {};
@@ -94,9 +74,6 @@ export default function Models() {
             placeholder="Search models…"
           />
         </div>
-        <button type="button" className="btn btn-ghost btn-sm" onClick={fetchProducts} style={{ marginLeft: "auto" }}>
-          <i className="fa-solid fa-rotate" /> Refresh
-        </button>
       </div>
 
       {/* Error */}

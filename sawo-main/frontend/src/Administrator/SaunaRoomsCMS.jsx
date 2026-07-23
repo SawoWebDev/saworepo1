@@ -252,13 +252,13 @@ function Modal({ open, onClose, title, children, wide, actions, fixedHeight }) {
   );
 }
 
-function Confirm({ open, onClose, onConfirm, title, message, confirmLabel = "Delete" }) {
+function Confirm({ open, onClose, onConfirm, title, message, confirmLabel = "Delete", confirmVariant = "danger" }) {
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <p className="confirm-msg">{message}</p>
       <div className="confirm-actions">
         <Btn label="Cancel" variant="ghost" onClick={onClose} />
-        <Btn label={confirmLabel} variant="danger" onClick={onConfirm} />
+        <Btn label={confirmLabel} variant={confirmVariant} onClick={onConfirm} />
       </div>
     </Modal>
   );
@@ -578,7 +578,10 @@ function ThumbnailUploader({ onUpload, uploading }) {
       onMouseEnter={() => { setHovering(true); divRef.current?.focus(); }}
       onMouseLeave={() => setHovering(false)}
       onClick={() => !uploading && ref.current?.click()}
-      tabIndex="0" style={{ outline: "none" }}
+      tabIndex="0"
+      contentEditable={hovering && !uploading}
+      suppressContentEditableWarning
+      style={{ outline: "none" }}
     >
       <input ref={ref} type="file" accept="image/*" style={{ display: "none" }}
         onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
@@ -613,6 +616,8 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
         onPaste={handlePaste}
         onClick={() => !uploading && replaceRef.current?.click()}
         tabIndex="0"
+        contentEditable={hovered && !uploading}
+        suppressContentEditableWarning
       >
         <img src={url} alt="Thumbnail" style={{ display: "block", maxHeight: 220, maxWidth: "100%", borderRadius: "var(--r)", objectFit: "contain", opacity: uploading ? 0.5 : hovered ? 0.8 : 1, transition: "opacity 0.18s" }} />
         {hovered && !uploading && (
@@ -654,7 +659,10 @@ function ImageUploader({ onUpload, label = "Upload Images", multiple = false, up
       onMouseEnter={() => { setHovering(true); divRef.current?.focus(); }}
       onMouseLeave={() => setHovering(false)}
       onClick={() => !uploading && ref.current?.click()}
-      tabIndex="0" style={{ outline: "none" }}
+      tabIndex="0"
+      contentEditable={hovering && !uploading}
+      suppressContentEditableWarning
+      style={{ outline: "none" }}
     >
       <input ref={ref} type="file" accept="image/*" multiple={multiple} style={{ display: "none" }}
         onChange={e => handleFiles(multiple ? e.target.files : e.target.files[0])} />
@@ -910,6 +918,9 @@ export default function SaunaRooms({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const { rooms: localRooms, loading: localLoading } = useLocalSaunaRooms();
 
+  // Switching to Live is gated behind a confirm dialog (egress warning) —
+  // see confirmLiveOpen below.
+  const [confirmLiveOpen, setConfirmLiveOpen] = useState(false);
   const [rooms,      setRooms]      = useState(() => getCache(ROOMS_CACHE_KEY) || []);
   const [loading,    setLoading]    = useState(() => !getCache(ROOMS_CACHE_KEY));
   const [allCats,    setAllCats]    = useState(() => getCache(ROOMS_META_CACHE_KEY)?.cats || []);
@@ -957,6 +968,12 @@ export default function SaunaRooms({ currentUser }) {
   const isDirty = !formsEqual(form, savedForm);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
+  // `search` is deliberately NOT a dependency here — it's applied purely
+  // client-side against whatever's already in `rooms` (see the `filtered`
+  // memo below), so typing a search query never re-triggers a full-table
+  // refetch. It used to: this function pre-filtered by search and stored
+  // the *shrunk* result into `rooms` state, which both wasted egress on
+  // every keystroke and silently dropped the non-matching rows from state.
   const fetchRooms = useCallback(async () => {
     // In live mode, cached data is already on screen — refresh quietly in
     // the background instead of flashing the loading state.
@@ -985,7 +1002,7 @@ export default function SaunaRooms({ currentUser }) {
       const { data, error } = await query;
       if (error) throw error;
 
-      let processed = (data || []).map(room => {
+      const processed = (data || []).map(room => {
         const fixed = { ...room };
         if (Array.isArray(fixed.wood_options_enabled)) {
           fixed.wood_options_enabled = fixed.wood_options_enabled.map(v =>
@@ -999,22 +1016,12 @@ export default function SaunaRooms({ currentUser }) {
         return fixed;
       });
 
-      if (search) {
-        const q = search.toLowerCase();
-        processed = processed.filter(r =>
-          r.name?.toLowerCase().includes(q) ||
-          r.slug?.toLowerCase().includes(q) ||
-          r.model_code?.toLowerCase().includes(q) ||
-          r.room_type?.toLowerCase().includes(q)
-        );
-      }
-
       setRooms(processed);
       setCache(ROOMS_CACHE_KEY, processed);
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
-  }, [dataSource, localRooms, filterStatus, filterType, sortDir, search]); // eslint-disable-line
+  }, [dataSource, localRooms, filterStatus, filterType, sortDir]); // eslint-disable-line
 
   const fetchMeta = useCallback(async () => {
     try {
@@ -1519,7 +1526,7 @@ export default function SaunaRooms({ currentUser }) {
                 <button
                   key={tab.id}
                   type="button"
-                  onClick={() => setDataSource(tab.id)}
+                  onClick={() => tab.id === "live" ? setConfirmLiveOpen(true) : setDataSource(tab.id)}
                   className={`tax-tab-btn${dataSource === tab.id ? " active" : ""}`}
                 >
                   <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
@@ -1549,7 +1556,7 @@ export default function SaunaRooms({ currentUser }) {
                 padding: "6px 12px", borderRadius: 20,
               }}>
                 <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved sauna rooms</strong>. Read-only,switch to Live to edit.
+                Viewing <strong>locally saved sauna rooms</strong>. Read-only — switch to Live to create, edit, or delete rooms.
               </span>
             )}
             {perms.can("sauna_rooms.create") && dataSource === "live" && (
@@ -2036,6 +2043,16 @@ export default function SaunaRooms({ currentUser }) {
         title="Delete Sauna Room?"
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
+
+      <Confirm
+        open={confirmLiveOpen}
+        onClose={() => setConfirmLiveOpen(false)}
+        onConfirm={() => { setDataSource("live"); setConfirmLiveOpen(false); }}
+        title="Switch to Live?"
+        message="Live mode reads sauna room data directly from Supabase, which consumes Supabase egress. Local mode (bundled/GitHub snapshot) doesn't."
+        confirmLabel="Proceed"
+        confirmVariant="primary"
+      />
 
       <CheckRoomsSyncModal
         open={checkSyncOpen}

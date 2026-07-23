@@ -345,13 +345,13 @@ function Modal({ open, onClose, title, children, wide, actions }) {
   );
 }
 
-function Confirm({ open, onClose, onConfirm, title, message, confirmLabel = "Delete" }) {
+function Confirm({ open, onClose, onConfirm, title, message, confirmLabel = "Delete", confirmVariant = "danger" }) {
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <p className="confirm-msg">{message}</p>
       <div className="confirm-actions">
         <Btn label="Cancel" variant="ghost" onClick={onClose} />
-        <Btn label={confirmLabel} variant="danger" onClick={onConfirm} />
+        <Btn label={confirmLabel} variant={confirmVariant} onClick={onConfirm} />
       </div>
     </Modal>
   );
@@ -383,6 +383,19 @@ function RichField({ label, value, onChange, rows = 6, onNotify }) {
   const [mode, setMode] = useState("text");
   const textareaRef = useRef(null);
   const editorRef = useRef(null);
+
+  // dangerouslySetInnerHTML on a contentEditable re-applies the HTML on
+  // every render, which resets the caret to the start of the element even
+  // when the content hasn't actually changed — every keystroke landed back
+  // at position 0. Set the DOM imperatively instead, and only when the
+  // value actually differs from what's already there (i.e. it changed from
+  // outside — switching products, or the html/text mode sync buttons —
+  // not from this element's own onInput echoing straight back).
+  useEffect(() => {
+    if (editorRef.current && (value || "") !== editorRef.current.innerHTML) {
+      editorRef.current.innerHTML = value || "";
+    }
+  }, [value]);
 
   const cleanPastedHTML = (html) => {
     const temp = document.createElement("div");
@@ -561,10 +574,10 @@ function RichField({ label, value, onChange, rows = 6, onNotify }) {
             <div
               ref={editorRef}
               contentEditable
+              suppressContentEditableWarning
               onInput={handleEditorChange}
               onBlur={handleEditorChange}
               onPaste={handlePaste}
-              dangerouslySetInnerHTML={{ __html: value }}
               style={{
                 padding: 12,
                 borderRadius: "var(--r)",
@@ -1044,7 +1057,10 @@ function ImageUploader({ onUpload, label = "Upload Image", multiple = false, upl
       onMouseEnter={() => { setHovering(true); divRef.current?.focus(); }}
       onMouseLeave={() => setHovering(false)}
       onClick={() => !uploading && ref.current?.click()}
-      tabIndex="0" style={{ outline: "none" }}
+      tabIndex="0"
+      contentEditable={hovering && !uploading}
+      suppressContentEditableWarning
+      style={{ outline: "none" }}
     >
       <input ref={ref} type="file" accept="image/*" multiple={multiple} style={{ display: "none" }}
         onChange={e => handleFiles(multiple ? e.target.files : e.target.files[0])} />
@@ -1101,6 +1117,8 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
         onPaste={handlePaste}
         onClick={() => !uploading && replaceRef.current?.click()}
         tabIndex="0"
+        contentEditable={hovered && !uploading}
+        suppressContentEditableWarning
       >
         <img src={url} alt="Featured" style={{
           display: "block", maxHeight: 220, maxWidth: "100%",
@@ -1186,7 +1204,10 @@ function ThumbnailUploader({ onUpload, uploading }) {
       onMouseEnter={() => { setHovering(true); divRef.current?.focus(); }}
       onMouseLeave={() => setHovering(false)}
       onClick={() => !uploading && ref.current?.click()}
-      tabIndex="0" style={{ outline: "none" }}
+      tabIndex="0"
+      contentEditable={hovering && !uploading}
+      suppressContentEditableWarning
+      style={{ outline: "none" }}
     >
       <input ref={ref} type="file" accept="image/*" style={{ display: "none" }}
         onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
@@ -2272,6 +2293,9 @@ export default function Products({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const { products: localProds, categories: localCats, tags: localTags, loading: localLoading } = useLocalProducts();
 
+  // Switching to Live is gated behind a confirm dialog (egress warning) —
+  // see confirmLiveOpen below.
+  const [confirmLiveOpen, setConfirmLiveOpen] = useState(false);
   const [products, setProducts]   = useState(() => getCache(PRODUCTS_CACHE_KEY) || []);
   const [loading,  setLoading]    = useState(() => !getCache(PRODUCTS_CACHE_KEY));
   const [allCats,    setAllCats]    = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.cats || []);
@@ -2350,29 +2374,35 @@ export default function Products({ currentUser }) {
     finally { setLoading(false); }
   }, [filterStatus, sortDir, dataSource, localProds]); // eslint-disable-line
 
+  // Categories/tags only — the "Model" autocomplete suggestions are derived
+  // from whatever's already loaded in `products` below instead of a separate
+  // full-table fetch (that used to duplicate fetchProducts' own request on
+  // every visit for no reason beyond listing distinct product types).
   const fetchMeta = useCallback(async () => {
     try {
       if (dataSource === "live") {
         const cats = await getAllCategoriesLive();
         const tags = await getAllTagsLive();
-        const prods = await getAllProductsLive();
         const catNames = cats.map(c => c.name);
         const tagNames = tags.map(t => t.name);
-        const models = [...new Set(prods.map(p => p.type).filter(Boolean))].sort();
         setAllCats(catNames);
         setAllTags(tagNames);
-        setAllModels(models);
-        setCache(PRODUCTS_META_CACHE_KEY, { cats: catNames, tags: tagNames, models });
+        setCache(PRODUCTS_META_CACHE_KEY, { cats: catNames, tags: tagNames });
       } else {
         setAllCats(localCats);
         setAllTags(localTags);
-        const models = [...new Set(localProds.map(p => p.type).filter(Boolean))].sort();
-        setAllModels(models);
       }
     } catch (err) {
       console.error("Failed to fetch metadata:", err);
     }
-  }, [dataSource, localCats, localTags, localProds]); // eslint-disable-line
+  }, [dataSource, localCats, localTags]); // eslint-disable-line
+
+  // Model autocomplete suggestions — recomputed from whatever's currently
+  // loaded (recent-only by default, everything once "Show All" is clicked).
+  useEffect(() => {
+    const source = dataSource === "live" ? products : localProds;
+    setAllModels([...new Set(source.map(p => p.type).filter(Boolean))].sort());
+  }, [dataSource, products, localProds]);
 
   useEffect(() => {
     if (dataSource === "live" || (dataSource === "local" && !localLoading)) {
@@ -3009,7 +3039,7 @@ export default function Products({ currentUser }) {
                   <button
                     key={tab.id}
                     type="button"
-                    onClick={() => setDataSource(tab.id)}
+                    onClick={() => tab.id === "live" ? setConfirmLiveOpen(true) : setDataSource(tab.id)}
                     className={`tax-tab-btn${dataSource === tab.id ? " active" : ""}`}
                   >
                     <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
@@ -3040,7 +3070,7 @@ export default function Products({ currentUser }) {
                 padding: "6px 12px", borderRadius: 20,
               }}>
                 <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved products</strong>. Read-only, switch to Live to edit.
+                Viewing <strong>locally saved products</strong>. Read-only — switch to Live to create, edit, or delete products.
               </span>
             )}
             {perms.can("products.create") && dataSource === "live" && (
@@ -3708,6 +3738,16 @@ export default function Products({ currentUser }) {
         title="Delete Selected?"
         message={`Delete ${selected.size} selected product(s)? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete All" />
+
+      <Confirm
+        open={confirmLiveOpen}
+        onClose={() => setConfirmLiveOpen(false)}
+        onConfirm={() => { setDataSource("live"); setConfirmLiveOpen(false); }}
+        title="Switch to Live?"
+        message="Live mode reads product data directly from Supabase, which consumes Supabase egress. Local mode (bundled/GitHub snapshot) doesn't."
+        confirmLabel="Proceed"
+        confirmVariant="primary"
+      />
 
       <Confirm open={!!confirmDel} onClose={() => setConfirmDel(null)} onConfirm={handleDelete}
         title="Delete Product?"

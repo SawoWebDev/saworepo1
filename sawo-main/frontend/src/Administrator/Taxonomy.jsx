@@ -1,7 +1,7 @@
 // src/Administrator/Taxonomy.jsx
 import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
 import { supabase } from "./supabase";
-import { getAllProductsLive } from "../local-storage/supabaseReader";
+import { useLocalProducts } from "./Local/useLocalProducts";
 import ProductsGridModal from "./ProductsGridModal";
 import { getCache, setCache } from "./adminCache";
 import { getPerms } from "./permissions";
@@ -30,38 +30,24 @@ function Modal({ open, onClose, title, children, wide }) {
 }
 
 // ── Products-for-term drawer ──────────────────────────────────────────────────
-function TermProductsModal({ open, onClose, term, field }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading]   = useState(false);
-
-  useEffect(() => {
-    if (!open || !term) return;
-    setLoading(true);
-    (async () => {
-      try {
-        const allProducts = await getAllProductsLive();
-        // Filter products that contain the term in the specified field
-        const filtered = allProducts.filter(p => {
-          const fieldArray = p[field] || [];
-          return Array.isArray(fieldArray) && fieldArray.includes(term);
-        });
-        setProducts(filtered);
-      } catch (err) {
-        console.error("Failed to fetch products for term:", err);
-        setProducts([]);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [open, term, field]);
+// Filters the already-loaded local product list (see useLocalProducts in the
+// Taxonomy component below) instead of fetching from Supabase — filtering a
+// small in-memory array is instant, no loading state needed.
+function TermProductsModal({ open, onClose, term, field, products }) {
+  const filtered = term
+    ? (products || []).filter(p => {
+        const fieldArray = p[field] || [];
+        return Array.isArray(fieldArray) && fieldArray.includes(term);
+      })
+    : [];
 
   return (
     <ProductsGridModal
       open={open}
       onClose={onClose}
       title={`Products using "${term}"`}
-      products={products}
-      loading={loading}
+      products={filtered}
+      loading={false}
       emptyMessage={`No products use this ${field === "categories" ? "category" : "tag"} yet.`}
     />
   );
@@ -233,7 +219,7 @@ function TaxCard({ item, isCategory, productCount, selectMode, selected, onToggl
 // forwardRef so the parent (which owns the Categories/Tags tab switcher) can
 // trigger "open the add modal" from a button placed next to that switcher,
 // instead of duplicating this tab's create logic up there.
-const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, perms }, ref) {
+const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, perms, products }, ref) {
   const canEdit   = perms.can("taxonomy.edit");
   const canDelete = perms.can("taxonomy.delete");
 
@@ -258,21 +244,7 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
     if (!getCache(taxCacheKey(table))) setLoading(true);
     try {
       const { data: termData } = await supabase.from(table).select("*").order("name");
-      const terms = termData || [];
-      setItems(terms);
-
-      // Build product counts using live data
-      const products = await getAllProductsLive();
-      const counts = {};
-      terms.forEach(t => { counts[t.id] = 0; });
-      (products || []).forEach(p => {
-        (p[field] || []).forEach(termName => {
-          const found = terms.find(t => t.name === termName);
-          if (found) counts[found.id] = (counts[found.id] || 0) + 1;
-        });
-      });
-      setProductCounts(counts);
-      setCache(taxCacheKey(table), { items: terms, counts });
+      setItems(termData || []);
       setSelected(new Set());
     } catch (err) {
       console.error("Failed to fetch data:", err);
@@ -282,6 +254,25 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
   };
 
   useEffect(() => { fetchData(); }, [table]); // eslint-disable-line
+
+  // Product counts per term — recomputed from the already-loaded local
+  // product list (see useLocalProducts in the Taxonomy component below)
+  // whenever the term list or that product list changes. No Supabase fetch
+  // here: this used to call getAllProductsLive() (full products table) on
+  // every tab switch just to count references, which was pure egress this
+  // page didn't need — a category/tag count doesn't need to be live-fresh.
+  useEffect(() => {
+    const counts = {};
+    items.forEach(t => { counts[t.id] = 0; });
+    (products || []).forEach(p => {
+      (p[field] || []).forEach(termName => {
+        const found = items.find(t => t.name === termName);
+        if (found) counts[found.id] = (counts[found.id] || 0) + 1;
+      });
+    });
+    setProductCounts(counts);
+    setCache(taxCacheKey(table), { items, counts });
+  }, [items, products, field, table]); // eslint-disable-line
 
   const openAdd  = () => { setEditItem(null); setFormOpen(true); };
   useImperativeHandle(ref, () => ({ openAdd }));
@@ -411,6 +402,7 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
         onClose={() => setProductsModal(null)}
         term={productsModal}
         field={field}
+        products={products}
       />
 
       {/* Single delete confirm */}
@@ -459,6 +451,11 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function Taxonomy({ currentUser }) {
   const perms = getPerms(currentUser);
+  // Sourced locally (bundled/GitHub snapshot, or Supabase only if the site's
+  // Live Data Source setting is explicitly "supabase") instead of always
+  // hitting Supabase live — this page only needs product counts/lookups,
+  // not real-time accuracy, so there's no reason it should cost egress.
+  const { products: localProducts } = useLocalProducts();
   const [tab, setTab] = useState("categories");
   const tabRef = useRef(null);
   const canCreate = perms.can("taxonomy.create");
@@ -492,10 +489,10 @@ export default function Taxonomy({ currentUser }) {
 
       <div style={{ marginTop: 20 }}>
         {tab === "categories" && (
-          <TaxTab ref={tabRef} table="categories" label="Categories" hasDescription perms={perms} />
+          <TaxTab ref={tabRef} table="categories" label="Categories" hasDescription perms={perms} products={localProducts} />
         )}
         {tab === "tags" && (
-          <TaxTab ref={tabRef} table="tags" label="Tags" hasDescription={false} perms={perms} />
+          <TaxTab ref={tabRef} table="tags" label="Tags" hasDescription={false} perms={perms} products={localProducts} />
         )}
       </div>
     </div>
