@@ -2,10 +2,13 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { execSync } from "child_process";
+import { execSync, exec } from "child_process";
+import { promisify } from "util";
 import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import fetch from "node-fetch";
+
+const execAsync = promisify(exec);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -64,25 +67,10 @@ export async function syncMerge(emit = () => {}) {
     const gitUrl1 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`;
     const gitUrl2 = `https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git`;
 
-    try {
-      const output1 = execSync(`git clone ${gitUrl1} "${SAWOREPO1_DIR}"`, { encoding: "utf-8" });
-      console.log(`✅ Cloned ${GITHUB_MAIN_REPO}`);
-      emit({ phase: "start", message: `Cloned ${GITHUB_MAIN_REPO}` });
-    } catch (e) {
-      console.error(`❌ Clone failed for ${GITHUB_MAIN_REPO}:`, e.message);
-      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
-      fs.mkdirSync(SAWOREPO1_DIR, { recursive: true });
-    }
-
-    try {
-      const output2 = execSync(`git clone ${gitUrl2} "${SAWOREPO2_DIR}"`, { encoding: "utf-8" });
-      console.log(`✅ Cloned ${GITHUB_IMAGES_REPO}`);
-      emit({ phase: "start", message: `Cloned ${GITHUB_IMAGES_REPO}` });
-    } catch (e) {
-      console.error(`❌ Clone failed for ${GITHUB_IMAGES_REPO}:`, e.message);
-      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
-      fs.mkdirSync(SAWOREPO2_DIR, { recursive: true });
-    }
+    await Promise.all([
+      cloneRepoShallow(gitUrl1, SAWOREPO1_DIR, GITHUB_MAIN_REPO, emit, "start"),
+      cloneRepoShallow(gitUrl2, SAWOREPO2_DIR, GITHUB_IMAGES_REPO, emit, "start"),
+    ]);
 
     // Configure git
     configureGit(SAWOREPO1_DIR);
@@ -109,17 +97,19 @@ export async function syncMerge(emit = () => {}) {
     // Existing images in cloned saworepo2 are skipped automatically (existsSync check in processImageField)
     emit({ phase: "images", message: `Processing images for ${supabaseProducts.length} products...` });
     const processedMap = new Map(); // id → processed product
-    for (let i = 0; i < supabaseProducts.length; i++) {
-      const p = { ...supabaseProducts[i] };
+    let doneCount = 0;
+    await mapConcurrent(supabaseProducts, 12, async (item) => {
+      const p = { ...item };
       if (p.thumbnail) p.thumbnail = await processImageField(p.thumbnail, "product-images", stats);
       if (Array.isArray(p.images)) p.images = await processImageField(p.images, "product-images", stats);
       if (Array.isArray(p.spec_images)) p.spec_images = await processImageField(p.spec_images, "product-images", stats);
       if (Array.isArray(p.files)) p.files = await processFiles(p.files, stats);
       processedMap.set(p.id, p);
-      if ((i + 1) % 20 === 0 || i === supabaseProducts.length - 1) {
-        emit({ phase: "images", message: `Processed ${i + 1}/${supabaseProducts.length} products (${stats.images} new images)` });
+      doneCount++;
+      if (doneCount % 20 === 0 || doneCount === supabaseProducts.length) {
+        emit({ phase: "images", message: `Processed ${doneCount}/${supabaseProducts.length} products (${stats.images} new images)` });
       }
-    }
+    });
     emit({ phase: "images", message: `Images done: ${stats.images} downloaded, ${stats.files} files` });
 
     // 4. Build merged list (all supabase products, fully processed)
@@ -210,6 +200,43 @@ export async function syncMerge(emit = () => {}) {
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
+
+// Shallow clone (--depth 1): we only ever read/write the current tree and
+// commit on top of it, never touch history, so pulling the full repo history
+// (which is what made these clones slow — saworepo2 especially, after many
+// auto-sync commits with binary images) is pure waste.
+async function cloneRepoShallow(gitUrl, dir, label, emit, phase) {
+  try {
+    await execAsync(`git clone --depth 1 ${gitUrl} "${dir}"`);
+    console.log(`✅ Cloned ${label}`);
+    emit({ phase, message: `Cloned ${label}` });
+    return true;
+  } catch (e) {
+    console.error(`❌ Clone failed for ${label}:`, e.message);
+    emit({ phase, message: `⚠️  Clone failed: ${e.message}` });
+    fs.mkdirSync(dir, { recursive: true });
+    return false;
+  }
+}
+
+// Runs `fn` over `items` with at most `limit` in flight at once, instead of
+// one-at-a-time — the image-download loops were awaiting each item in
+// sequence, turning what should be a few parallel HTTP round-trips into a
+// long serial chain once there are more than a handful of new images/files.
+async function mapConcurrent(items, limit, fn) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  async function worker() {
+    while (nextIndex < items.length) {
+      const i = nextIndex++;
+      results[i] = await fn(items[i], i);
+    }
+  }
+  const workers = Array.from({ length: Math.min(limit, items.length) }, worker);
+  await Promise.all(workers);
+  return results;
+}
+
 async function fetchSupabaseData() {
   const [products, categories, tags] = await Promise.all([
     supabase.from("products").select("*").eq("is_deleted", false)
@@ -432,21 +459,10 @@ export async function syncSaunaRooms(emit = () => {}) {
 
     emit({ phase: "start", message: "Cloning repositories from GitHub..." });
 
-    try {
-      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
-      emit({ phase: "start", message: `Cloned ${GITHUB_MAIN_REPO}` });
-    } catch (e) {
-      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
-      fs.mkdirSync(saworepo1Dir, { recursive: true });
-    }
-
-    try {
-      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
-      emit({ phase: "start", message: `Cloned ${GITHUB_IMAGES_REPO}` });
-    } catch (e) {
-      emit({ phase: "start", message: `⚠️  Clone failed: ${e.message}` });
-      fs.mkdirSync(saworepo2Dir, { recursive: true });
-    }
+    await Promise.all([
+      cloneRepoShallow(`https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`, saworepo1Dir, GITHUB_MAIN_REPO, emit, "start"),
+      cloneRepoShallow(`https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git`, saworepo2Dir, GITHUB_IMAGES_REPO, emit, "start"),
+    ]);
 
     configureGit(saworepo1Dir);
     configureGit(saworepo2Dir);
@@ -470,18 +486,19 @@ export async function syncSaunaRooms(emit = () => {}) {
     emit({ phase: "fetch", message: `${existingRooms.length} existing, ${stats.added} new rooms` });
 
     emit({ phase: "images", message: `Processing images for ${rooms.length} rooms...` });
-    const processed = [];
-    for (let i = 0; i < rooms.length; i++) {
-      const r = { ...rooms[i] };
+    let doneRooms = 0;
+    const processed = await mapConcurrent(rooms, 12, async (item) => {
+      const r = { ...item };
       if (r.thumbnail)               r.thumbnail    = await processRoomImageField(r.thumbnail, "saunaroom-images", stats, roomImagesDir);
       if (Array.isArray(r.images))   r.images       = await processRoomImageField(r.images, "saunaroom-images", stats, roomImagesDir);
       if (Array.isArray(r.spec_images)) r.spec_images = await processRoomImageField(r.spec_images, "saunaroom-images", stats, roomImagesDir);
       if (Array.isArray(r.files))    r.files        = await processRoomFiles(r.files, stats, roomFilesDir);
-      processed.push(r);
-      if ((i + 1) % 10 === 0 || i === rooms.length - 1) {
-        emit({ phase: "images", message: `Processed ${i + 1}/${rooms.length} rooms (${stats.images} new images)` });
+      doneRooms++;
+      if (doneRooms % 10 === 0 || doneRooms === rooms.length) {
+        emit({ phase: "images", message: `Processed ${doneRooms}/${rooms.length} rooms (${stats.images} new images)` });
       }
-    }
+      return r;
+    });
     emit({ phase: "images", message: `Images done: ${stats.images} downloaded, ${stats.files} files` });
 
     emit({ phase: "write", message: "Writing saunaroom-data.json..." });
@@ -578,22 +595,10 @@ export async function updateLocalSaunaRooms(rooms, emit = () => {}) {
 
     emit({ phase: "clone", message: "Cloning repositories from GitHub..." });
 
-    try {
-      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
-      emit({ phase: "clone", message: `Cloned ${GITHUB_MAIN_REPO}` });
-    } catch (e) {
-      emit({ phase: "clone", message: `⚠️  Clone failed: ${e.message}` });
-      fs.mkdirSync(saworepo1Dir, { recursive: true });
-    }
-
-    try {
-      execSync(`git clone https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
-      emit({ phase: "clone", message: `Cloned ${GITHUB_IMAGES_REPO}` });
-    } catch (e) {
-      emit({ phase: "clone", message: `⚠️  Clone failed for images repo: ${e.message}`, warning: true });
-      fs.mkdirSync(roomImagesDir, { recursive: true });
-      fs.mkdirSync(roomFilesDir, { recursive: true });
-    }
+    await Promise.all([
+      cloneRepoShallow(`https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_MAIN_REPO}.git`, saworepo1Dir, GITHUB_MAIN_REPO, emit, "clone"),
+      cloneRepoShallow(`https://${GITHUB_PAT}@github.com/${GITHUB_OWNER}/${GITHUB_IMAGES_REPO}.git`, saworepo2Dir, GITHUB_IMAGES_REPO, emit, "clone"),
+    ]);
 
     configureGit(saworepo1Dir);
     configureGit(saworepo2Dir);
@@ -601,18 +606,19 @@ export async function updateLocalSaunaRooms(rooms, emit = () => {}) {
     const stats = { images: 0, files: 0 };
     emit({ phase: "write", message: `Downloading images for ${rooms.length} rooms...` });
 
-    const processed = [];
-    for (let i = 0; i < rooms.length; i++) {
-      const r = { ...rooms[i] };
+    let doneRooms = 0;
+    const processed = await mapConcurrent(rooms, 12, async (item) => {
+      const r = { ...item };
       if (r.thumbnail)               r.thumbnail    = await processRoomImageField(r.thumbnail, "saunaroom-images", stats, roomImagesDir);
       if (Array.isArray(r.images))   r.images       = await processRoomImageField(r.images, "saunaroom-images", stats, roomImagesDir);
       if (Array.isArray(r.spec_images)) r.spec_images = await processRoomImageField(r.spec_images, "saunaroom-images", stats, roomImagesDir);
       if (Array.isArray(r.files))    r.files        = await processRoomFiles(r.files, stats, roomFilesDir);
-      processed.push(r);
-      if ((i + 1) % 10 === 0 || i === rooms.length - 1) {
-        emit({ phase: "write", message: `Processed ${i + 1}/${rooms.length} rooms (${stats.images} images)` });
+      doneRooms++;
+      if (doneRooms % 10 === 0 || doneRooms === rooms.length) {
+        emit({ phase: "write", message: `Processed ${doneRooms}/${rooms.length} rooms (${stats.images} images)` });
       }
-    }
+      return r;
+    });
 
     emit({ phase: "write", message: "Writing saunaroom-data.json..." });
     const dataDir = path.join(saworepo1Dir, "sawo-main/frontend/src/Administrator/Local/data");
@@ -673,26 +679,10 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
     const imagesDir = path.join(saworepo2Dir, "images");
     const filesDir = path.join(saworepo2Dir, "files");
 
-    try {
-      execSync(`git clone ${gitUrl1} "${saworepo1Dir}"`, { encoding: "utf-8", stdio: "pipe" });
-      console.log(`✅ Cloned ${GITHUB_MAIN_REPO}`);
-      emit({ phase: "clone", message: `Cloned ${GITHUB_MAIN_REPO}` });
-    } catch (e) {
-      console.error(`❌ Clone failed for ${GITHUB_MAIN_REPO}:`, e.message);
-      emit({ phase: "clone", message: `⚠️  Clone failed: ${e.message}` });
-      fs.mkdirSync(saworepo1Dir, { recursive: true });
-    }
-
-    try {
-      execSync(`git clone ${gitUrl2} "${saworepo2Dir}"`, { encoding: "utf-8", stdio: "pipe" });
-      console.log(`✅ Cloned ${GITHUB_IMAGES_REPO}`);
-      emit({ phase: "clone", message: `Cloned ${GITHUB_IMAGES_REPO}` });
-    } catch (e) {
-      console.error(`❌ Clone failed for ${GITHUB_IMAGES_REPO}:`, e.message);
-      emit({ phase: "clone", message: `⚠️  Clone failed for images repo: ${e.message}`, warning: true });
-      fs.mkdirSync(imagesDir, { recursive: true });
-      fs.mkdirSync(filesDir, { recursive: true });
-    }
+    await Promise.all([
+      cloneRepoShallow(gitUrl1, saworepo1Dir, GITHUB_MAIN_REPO, emit, "clone"),
+      cloneRepoShallow(gitUrl2, saworepo2Dir, GITHUB_IMAGES_REPO, emit, "clone"),
+    ]);
 
     configureGit(saworepo1Dir);
     configureGit(saworepo2Dir);
@@ -701,18 +691,19 @@ export async function updateLocalFiles(products, categories, tags, emit = () => 
     const stats = { images: 0, files: 0 };
     emit({ phase: "write", message: `Downloading images for ${products.length} products...` });
 
-    const processedProducts = [];
-    for (let i = 0; i < products.length; i++) {
-      const p = { ...products[i] };
+    let doneProducts = 0;
+    const processedProducts = await mapConcurrent(products, 12, async (item) => {
+      const p = { ...item };
       if (p.thumbnail) p.thumbnail = await processImageField(p.thumbnail, "product-images", stats, imagesDir);
       if (Array.isArray(p.images)) p.images = await processImageField(p.images, "product-images", stats, imagesDir);
       if (Array.isArray(p.spec_images)) p.spec_images = await processImageField(p.spec_images, "product-images", stats, imagesDir);
       if (Array.isArray(p.files)) p.files = await processFiles(p.files, stats, filesDir);
-      processedProducts.push(p);
-      if ((i + 1) % 20 === 0 || i === products.length - 1) {
-        emit({ phase: "write", message: `Processed ${i + 1}/${products.length} products (${stats.images} images downloaded)` });
+      doneProducts++;
+      if (doneProducts % 20 === 0 || doneProducts === products.length) {
+        emit({ phase: "write", message: `Processed ${doneProducts}/${products.length} products (${stats.images} images downloaded)` });
       }
-    }
+      return p;
+    });
     emit({ phase: "write", message: `Images done: ${stats.images} downloaded, ${stats.files} files` });
 
     // Write JSON files to saworepo1
