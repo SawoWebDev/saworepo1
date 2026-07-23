@@ -169,7 +169,7 @@ export default function RolesPermissions({ currentUser }) {
       )}
 
       <p style={{ fontSize: "0.82rem", color: "var(--text-3)", marginBottom: 20, maxWidth: 720 }}>
-        Superadmin always has every permission — its column can't be unchecked, so you can never lock
+        Superadmin always has every permission. Its column can't be unchecked, so you can never lock
         yourself out. Toggling a box here takes effect for other logged-in sessions within seconds.
       </p>
 

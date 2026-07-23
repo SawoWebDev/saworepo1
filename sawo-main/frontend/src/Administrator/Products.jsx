@@ -620,10 +620,8 @@ function TagSuggestions({ name, description, features = [], currentTags, allTags
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
         {suggestedTags.map(t => (
-          <span key={t} style={{
+          <span key={t} className="suggested-tag-pill" style={{
             fontSize: "0.72rem", fontWeight: 600,
-            background: "rgba(245,157,11,0.1)",
-            color: "#92400e",
             border: "1px solid rgba(245,157,11,0.3)",
             borderRadius: 4, padding: "3px 8px",
           }}>+ {t}</span>
@@ -2287,7 +2285,7 @@ export default function Products({ currentUser }) {
   const [activeAccessorySubcats, setActiveAccessorySubcats] = useState([]); // multi-select pills, only used when quickFilter === "accessories"
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("grid");
-  const [dataSource,   setDataSource]   = useState(() => perms.can("products.edit") ? "live" : "local"); // "live" or "local"
+  const [dataSource,   setDataSource]   = useState("local"); // "live" or "local" — local shown first, switch to Live manually
   const itemsPerPage = 20; // "Show" limit selector removed — fixed page size
   const [currentPage,  setCurrentPage]  = useState(1);
 
@@ -3036,13 +3034,13 @@ export default function Products({ currentUser }) {
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
             </p>
             {dataSource === "local" && (
-              <span style={{
-                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem", color: "var(--info)",
+              <span className="local-mode-notice" style={{
+                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem",
                 background: "var(--info-bg)", border: "1px solid var(--info-border)",
                 padding: "6px 12px", borderRadius: 20,
               }}>
                 <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved products</strong>. Read-only — switch to Live to edit.
+                Viewing <strong>locally saved products</strong>. Read-only, switch to Live to edit.
               </span>
             )}
             {perms.can("products.create") && dataSource === "live" && (

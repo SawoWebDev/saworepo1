@@ -412,10 +412,8 @@ function TagSuggestions({ name, description, features = [], currentTags, allTags
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
         {suggestedTags.map(t => (
-          <span key={t} style={{
+          <span key={t} className="suggested-tag-pill" style={{
             fontSize: "0.72rem", fontWeight: 600,
-            background: "rgba(245,157,11,0.1)",
-            color: "#92400e",
             border: "1px solid rgba(245,157,11,0.3)",
             borderRadius: 4, padding: "3px 8px",
           }}>+ {t}</span>
@@ -1545,13 +1543,13 @@ export default function SaunaRooms({ currentUser }) {
               {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
             </p>
             {dataSource === "local" && (
-              <span style={{
-                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem", color: "var(--info)",
+              <span className="local-mode-notice" style={{
+                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem",
                 background: "var(--info-bg)", border: "1px solid var(--info-border)",
                 padding: "6px 12px", borderRadius: 20,
               }}>
                 <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved sauna rooms</strong>. Read-only — switch to Live to edit.
+                Viewing <strong>locally saved sauna rooms</strong>. Read-only,switch to Live to edit.
               </span>
             )}
             {perms.can("sauna_rooms.create") && dataSource === "live" && (

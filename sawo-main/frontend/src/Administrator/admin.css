@@ -904,9 +904,31 @@ body {
 
 .btn-danger { background:var(--danger); color:#fff; }
 .btn-danger:hover:not(:disabled) { background:#a93226; }
+[data-theme="dark"] .btn-danger {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    inset 0 -1px 0 rgba(0,0,0,0.35),
+    0 2px 6px rgba(0,0,0,0.35);
+}
+[data-theme="light"] .btn-danger {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 -1px 0 rgba(0,0,0,0.12),
+    0 2px 6px rgba(192,57,43,0.25);
+}
 
 .btn-ghost { background:var(--surface-2); color:var(--text-2); border:1px solid var(--border); }
 .btn-ghost:hover:not(:disabled) { background:var(--border); color:var(--text); }
+[data-theme="dark"] .btn-ghost {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+[data-theme="light"] .btn-ghost {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    inset 0 -1px 0 rgba(0,0,0,0.05);
+}
 
 .btn-sm { padding:0.32rem 0.7rem; font-size:0.78rem; border-radius:8px; }
 .btn-icon { padding:0.35rem 0.5rem; }
@@ -1015,6 +1037,22 @@ body {
   transition: border-color var(--t), box-shadow var(--t), background var(--t);
   line-height: 1.5;
 }
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .form-textarea {
+  background-color: var(--surface-2);
+  border-color: #211a13;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.35);
+}
+[data-theme="light"] .form-input,
+[data-theme="light"] .form-select,
+[data-theme="light"] .form-textarea {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    inset 0 -1px 0 rgba(140,101,64,0.06);
+}
 .form-textarea { resize:vertical; min-height:80px; }
 .form-input:focus,
 .form-select:focus,
@@ -1055,8 +1093,11 @@ body {
   position: relative;
   transition: background var(--t);
   flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
 }
-.toggle-track.on { background:var(--brand); }
+.toggle-track.on { background:var(--brand); box-shadow: inset 0 1px 2px rgba(0,0,0,0.25); }
+[data-theme="dark"] .toggle-track { box-shadow: inset 0 1px 3px rgba(0,0,0,0.45); }
+[data-theme="dark"] .toggle-track.on { box-shadow: inset 0 1px 3px rgba(0,0,0,0.35); }
 .toggle-thumb {
   position: absolute;
   top: 2px;
@@ -1086,6 +1127,16 @@ body {
   transition: border-color var(--t);
 }
 .pill-input-wrap:focus-within { border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-muted); }
+[data-theme="dark"] .pill-input-wrap {
+  background-color: var(--surface-2);
+  border-color: #211a13;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.35);
+}
+[data-theme="light"] .pill-input-wrap {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -1px 0 rgba(140,101,64,0.06);
+}
+[data-theme="dark"] .pill-input-wrap:focus-within,
+[data-theme="light"] .pill-input-wrap:focus-within { box-shadow: 0 0 0 3px var(--brand-muted); }
 .pill-item {
   display: inline-flex;
   align-items: center;
@@ -1191,6 +1242,21 @@ body {
   max-height: 90vh;
   overflow-y: auto;
   animation: fadeIn 0.18s ease;
+}
+/* Bevel the modal itself — same pressed-rim language as the cards/toolbar,
+   layered on top of its existing drop shadow. */
+[data-theme="dark"] .modal {
+  border-color: #211a13;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    var(--shadow-lg);
+}
+[data-theme="light"] .modal {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    inset 0 -1px 0 rgba(140,101,64,0.08),
+    var(--shadow-lg);
 }
 .modal-wide {
   max-width: 1000px;
@@ -1345,6 +1411,16 @@ body {
   font-size: 0.75rem;
   color: var(--warning);
 }
+
+/* ── Local-mode notice (Products / Sauna Rooms, next to Live/Local) ───── */
+.local-mode-notice { color: var(--info); }
+[data-theme="dark"] .local-mode-notice { color: #fff; }
+
+/* ── "Found matching keywords" suggested-tag pill (Products + Sauna Rooms
+   TagSuggestions) — was a hardcoded dark brown, fine on light, unreadable
+   on a dark surface since it never adapted. ──────────────────────────── */
+.suggested-tag-pill { background: rgba(245,157,11,0.1); color: #92400e; }
+[data-theme="dark"] .suggested-tag-pill { background: rgba(245,157,11,0.18); color: #fbbf6a; }
 
 /* ── Unsaved Confirm Overlay ─────────────────────────────────────────── */
 .unsaved-overlay {
