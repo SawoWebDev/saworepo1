@@ -1,5 +1,185 @@
 [
   {
+    "id": "3fd0cdb2-adf7-4c97-8287-51e6c5a8c702",
+    "name": "Steam STE",
+    "slug": "steam-ste",
+    "short_description": "T\n\n<span style=\"text-align: justify;\">The Steam STE. control combines the familiar operation of its predecessor with a modernized design and refined dimensions for easier, more reliable use.</span>",
+    "description": null,
+    "thumbnail": "images/1784793088803_7zp3gzb3u62.webp",
+    "images": [
+      "images/1784793127948_rqr326gs44h.webp"
+    ],
+    "spec_images": [],
+    "categories": [
+      "Steam Controls"
+    ],
+    "tags": [
+      "(STE-INFACE-V2)",
+      "Stainless-steel",
+      "STE",
+      "Steam"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Thick stainless-steel casing",
+      "LED digital display",
+      "Optional features: light dimmer, scent pump and fan",
+      "7.5m RJ12 cable with connectors included"
+    ],
+    "brand": "SAWO",
+    "type": null,
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-23T07:57:02.244527+00:00",
+    "updated_at": "2026-07-23T07:57:01.514+00:00",
+    "files": [
+      {
+        "url": "files/STE-INFACE-V2_En_2026.pdf",
+        "name": "STE INFACE V2 En 2026"
+      }
+    ],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null,
+    "variants": []
+  },
+  {
+    "id": "20f895bb-31e0-4a02-8802-9768d7180345",
+    "name": "Steam Stainless Touch Control",
+    "slug": "steam-stainless-touch-control",
+    "short_description": "<p style=\"text-align: justify;\">The latest touch screen STN steam generator is now available.</p><p style=\"text-align: justify;\">The <b>Steam Stainless Touch Control</b> offers effortless control of steam, temperature, and time through a user-friendly interface, ensuring a personalized sauna or steam room experience.</p>",
+    "description": null,
+    "thumbnail": "images/1784792935127_o3xr79lwrs.webp",
+    "images": [
+      "images/1784792941048_6rzt0jpq3a3.webp"
+    ],
+    "spec_images": [],
+    "categories": [
+      "Steam Controls"
+    ],
+    "tags": [
+      "(STP-INFACE-SST)",
+      "Interface Holder",
+      "sauna",
+      "Sensor",
+      "Stainless-steel",
+      "Steam",
+      "STN",
+      "Temperature"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Thick stainless-steel casing",
+      "Animated buttons",
+      "Compatible for automated household component",
+      "Emergency alarm provision",
+      "Standby mode to keep the water warm until the next session",
+      "Displays error code",
+      "Autodrain function",
+      "Key lock",
+      "Easy mode available",
+      "Date and time setup",
+      "Kilowatt usage counter",
+      "Decalcifying function",
+      "Heating Element fail detect",
+      "Blackout memory",
+      "Celsius or Fahrenheit temperature unit",
+      "Autolight",
+      "Autofan",
+      "LCD contrast adjustment",
+      "Optional scent pump, light dimmer and fan",
+      "Temperature sensor with wire",
+      "Optional interface holder",
+      "7.5m RJ12 cable with connectors included"
+    ],
+    "brand": "SAWO",
+    "type": "Steam Controls",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-23T07:51:01.594629+00:00",
+    "updated_at": "2026-07-23T07:51:00.8+00:00",
+    "files": [
+      {
+        "url": "files/STP-INFACE-SST_En_2026.pdf",
+        "name": "STP INFACE SST En 2026"
+      }
+    ],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null,
+    "variants": []
+  },
+  {
+    "id": "da98177f-d5d9-4a2c-b9e7-b7260ebece87",
+    "name": "Steam 2.0",
+    "slug": "steam-2-0",
+    "short_description": "<span style=\"text-align: justify;\">The <b>Steam 2.0</b> (STP-INFACE-V2) control is the latest addition to our steam generator control lineup, delivering reliable performance with a modernized design.</span>",
+    "description": null,
+    "thumbnail": "images/1784792621671_1uxhed1csrd.webp",
+    "images": [
+      "images/1784792882432_6o7d8ftqb2i.webp"
+    ],
+    "spec_images": [],
+    "categories": [
+      "Steam Controls",
+      "Controls"
+    ],
+    "tags": [
+      "(STP-INFACE-V2)",
+      "Steam"
+    ],
+    "auto_tag_columns": null,
+    "features": [
+      "Thick stainless-steel casing",
+      "LED digital display",
+      "Optional features: light dimmer, scent pump and fan",
+      "7.5m RJ12 cable with connectors included"
+    ],
+    "brand": "SAWO",
+    "type": "Steam Controls",
+    "spec_table": null,
+    "resources": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "sort_order": 0,
+    "created_by": null,
+    "created_by_username": "Rafael",
+    "created_at": "2026-07-23T07:48:34.099095+00:00",
+    "updated_at": "2026-07-23T07:48:33.311+00:00",
+    "files": [
+      {
+        "url": "files/STP-INFACE-V2_En_2026.pdf",
+        "name": "STP INFACE V2 En 2026"
+      }
+    ],
+    "updated_by_username": "Rafael",
+    "is_deleted": false,
+    "capacity_liters": null,
+    "variant_type": null,
+    "product_family": null,
+    "parent_product_id": null,
+    "variants": []
+  },
+  {
     "id": "7bac4219-f7b5-4523-9a69-6a4a9a7864ca",
     "name": "Infrared Panels",
     "slug": "infrared-panels-ir-panel-2",
@@ -19953,186 +20133,6 @@
       }
     ],
     "updated_by_username": null,
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null,
-    "variants": []
-  },
-  {
-    "id": "3fd0cdb2-adf7-4c97-8287-51e6c5a8c702",
-    "name": "Steam STE",
-    "slug": "steam-ste",
-    "short_description": "T\n\n<span style=\"text-align: justify;\">The Steam STE. control combines the familiar operation of its predecessor with a modernized design and refined dimensions for easier, more reliable use.</span>",
-    "description": null,
-    "thumbnail": "images/1784793088803_7zp3gzb3u62.webp",
-    "images": [
-      "images/1784793127948_rqr326gs44h.webp"
-    ],
-    "spec_images": [],
-    "categories": [
-      "Steam Controls"
-    ],
-    "tags": [
-      "(STE-INFACE-V2)",
-      "Stainless-steel",
-      "STE",
-      "Steam"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Thick stainless-steel casing",
-      "LED digital display",
-      "Optional features: light dimmer, scent pump and fan",
-      "7.5m RJ12 cable with connectors included"
-    ],
-    "brand": "SAWO",
-    "type": null,
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-07-23T07:57:02.244527+00:00",
-    "updated_at": "2026-07-23T07:57:01.514+00:00",
-    "files": [
-      {
-        "url": "files/STE-INFACE-V2_En_2026.pdf",
-        "name": "STE INFACE V2 En 2026"
-      }
-    ],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null,
-    "variants": []
-  },
-  {
-    "id": "20f895bb-31e0-4a02-8802-9768d7180345",
-    "name": "Steam Stainless Touch Control",
-    "slug": "steam-stainless-touch-control",
-    "short_description": "<p style=\"text-align: justify;\">The latest touch screen STN steam generator is now available.</p><p style=\"text-align: justify;\">The <b>Steam Stainless Touch Control</b> offers effortless control of steam, temperature, and time through a user-friendly interface, ensuring a personalized sauna or steam room experience.</p>",
-    "description": null,
-    "thumbnail": "images/1784792935127_o3xr79lwrs.webp",
-    "images": [
-      "images/1784792941048_6rzt0jpq3a3.webp"
-    ],
-    "spec_images": [],
-    "categories": [
-      "Steam Controls"
-    ],
-    "tags": [
-      "(STP-INFACE-SST)",
-      "Interface Holder",
-      "sauna",
-      "Sensor",
-      "Stainless-steel",
-      "Steam",
-      "STN",
-      "Temperature"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Thick stainless-steel casing",
-      "Animated buttons",
-      "Compatible for automated household component",
-      "Emergency alarm provision",
-      "Standby mode to keep the water warm until the next session",
-      "Displays error code",
-      "Autodrain function",
-      "Key lock",
-      "Easy mode available",
-      "Date and time setup",
-      "Kilowatt usage counter",
-      "Decalcifying function",
-      "Heating Element fail detect",
-      "Blackout memory",
-      "Celsius or Fahrenheit temperature unit",
-      "Autolight",
-      "Autofan",
-      "LCD contrast adjustment",
-      "Optional scent pump, light dimmer and fan",
-      "Temperature sensor with wire",
-      "Optional interface holder",
-      "7.5m RJ12 cable with connectors included"
-    ],
-    "brand": "SAWO",
-    "type": "Steam Controls",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-07-23T07:51:01.594629+00:00",
-    "updated_at": "2026-07-23T07:51:00.8+00:00",
-    "files": [
-      {
-        "url": "files/STP-INFACE-SST_En_2026.pdf",
-        "name": "STP INFACE SST En 2026"
-      }
-    ],
-    "updated_by_username": "Rafael",
-    "is_deleted": false,
-    "capacity_liters": null,
-    "variant_type": null,
-    "product_family": null,
-    "parent_product_id": null,
-    "variants": []
-  },
-  {
-    "id": "da98177f-d5d9-4a2c-b9e7-b7260ebece87",
-    "name": "Steam 2.0",
-    "slug": "steam-2-0",
-    "short_description": "<span style=\"text-align: justify;\">The <b>Steam 2.0</b> (STP-INFACE-V2) control is the latest addition to our steam generator control lineup, delivering reliable performance with a modernized design.</span>",
-    "description": null,
-    "thumbnail": "images/1784792621671_1uxhed1csrd.webp",
-    "images": [
-      "images/1784792882432_6o7d8ftqb2i.webp"
-    ],
-    "spec_images": [],
-    "categories": [
-      "Steam Controls",
-      "Controls"
-    ],
-    "tags": [
-      "(STP-INFACE-V2)",
-      "Steam"
-    ],
-    "auto_tag_columns": null,
-    "features": [
-      "Thick stainless-steel casing",
-      "LED digital display",
-      "Optional features: light dimmer, scent pump and fan",
-      "7.5m RJ12 cable with connectors included"
-    ],
-    "brand": "SAWO",
-    "type": "Steam Controls",
-    "spec_table": null,
-    "resources": null,
-    "status": "published",
-    "visible": true,
-    "featured": false,
-    "sort_order": 0,
-    "created_by": null,
-    "created_by_username": "Rafael",
-    "created_at": "2026-07-23T07:48:34.099095+00:00",
-    "updated_at": "2026-07-23T07:48:33.311+00:00",
-    "files": [
-      {
-        "url": "files/STP-INFACE-V2_En_2026.pdf",
-        "name": "STP INFACE V2 En 2026"
-      }
-    ],
-    "updated_by_username": "Rafael",
     "is_deleted": false,
     "capacity_liters": null,
     "variant_type": null,
