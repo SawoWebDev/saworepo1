@@ -85,10 +85,10 @@ const Careers = () => {
                 className="join-highlight mb-4"
                 style={{
                   fontFamily: "Montserrat, sans-serif",
-                  fontSize: "1rem",
+                  fontSize: "1.5rem",
                   color: "#D32F2F",
-                  fontWeight: 600,
-                  lineHeight: "1.6",
+                  fontWeight: 700,
+                  lineHeight: "1.4",
                 }}
               >
                 We are looking for individuals with prior experience in the
@@ -135,18 +135,18 @@ const Careers = () => {
       </section>
 
       {/* Section 2: Two Column - Open Positions & We Are Hiring */}
-      <section className="careers-main-section py-20 px-6 bg-white">
+      <section className="careers-main-section pt-6 pb-20 px-6 bg-white">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             {/* LEFT COLUMN - Open Positions */}
-            <div className="open-positions-column">
+            <div className="open-positions-column open-positions-card">
               <h2
                 className="mb-6"
                 style={{
                   fontFamily: "Montserrat, sans-serif",
                   fontSize: "1.8rem",
                   fontWeight: 700,
-                  color: "#af8564",
+                  color: "#ffffff",
                 }}
               >
                 Open Positions
@@ -156,7 +156,7 @@ const Careers = () => {
                 style={{
                   fontFamily: "Montserrat, sans-serif",
                   fontSize: "0.95rem",
-                  color: "#666",
+                  color: "rgba(255,255,255,0.85)",
                   lineHeight: "1.6",
                 }}
               >
@@ -355,17 +355,27 @@ const Careers = () => {
 
         {/* Styles */}
         <style jsx>{`
+          .open-positions-card {
+            background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+            border-radius: 16px;
+            padding: 34px 32px;
+            box-shadow: 0 10px 28px rgba(139,94,60,0.22);
+          }
           .position-item {
             display: flex;
             align-items: flex-start;
             gap: 15px;
             padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid rgba(255,255,255,0.22);
+          }
+          .position-item:last-child {
+            border-bottom: none;
           }
           .position-icon-wrapper {
             width: 40px;
             height: 40px;
-            background: #e8ddd2;
+            background: rgba(255,255,255,0.14);
+            border: 1.5px solid rgba(255,255,255,0.28);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -374,24 +384,25 @@ const Careers = () => {
           }
           .position-icon-wrapper i {
             font-size: 1.5rem;
-            color: #af8564;
+            color: #ffffff;
           }
           .position-info h3 {
             font-family: "Montserrat", sans-serif;
             font-size: 1rem;
             font-weight: 600;
-            color: #000;
+            color: #ffffff;
             margin-bottom: 4px;
           }
           .position-info p {
             font-family: "Montserrat", sans-serif;
             font-size: 0.85rem;
-            color: #666;
+            color: rgba(255,255,255,0.8);
             margin: 0;
           }
           .badge-fulltime,
           .badge-onsite {
-            font-weight: 500;
+            font-weight: 600;
+            color: #ffffff;
           }
           .hiring-box {
             background: #fff;

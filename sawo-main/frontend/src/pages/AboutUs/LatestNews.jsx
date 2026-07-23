@@ -3,6 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
+import HeroWave from "../../components/HeroWave";
 
 // Image imports
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
@@ -332,6 +333,7 @@ const LatestNews = () => {
           <div className="ln-hero-overlay" />
           <h1>Latest News</h1>
           <p>Stay updated with SAWO stories, events, and milestones</p>
+          <HeroWave />
         </section>
 
         {/* ════════════════════════════
