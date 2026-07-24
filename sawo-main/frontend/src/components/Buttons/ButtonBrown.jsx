@@ -9,16 +9,19 @@ const ButtonBrown = ({ text = "Click Here", href = "#", icon = true }) => {
       style={{
         // #916e53 = 4.5:1-contrast variant of the #af8564 brand brown; white text
         // on the original fails WCAG AA (3.3:1) and Lighthouse color-contrast.
-        backgroundColor: "#916e53",
+        background: "linear-gradient(145deg, #a17f60 0%, #916e53 45%, #7c5d46 100%)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 3px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15)",
         fontFamily: "Montserrat, sans-serif",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = "transparent";
+        e.currentTarget.style.background = "transparent";
+        e.currentTarget.style.boxShadow = "none";
         e.currentTarget.style.color = "#916e53";
         e.currentTarget.style.borderColor = "#916e53";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = "#916e53";
+        e.currentTarget.style.background = "linear-gradient(145deg, #a17f60 0%, #916e53 45%, #7c5d46 100%)";
+        e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 3px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15)";
         e.currentTarget.style.color = "#ffffff";
         e.currentTarget.style.borderColor = "transparent";
       }}
