@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { TRANSLATED_PATHS, LOCALES } from "../../i18n/translatedRoutes";
+import { afterPageLoad } from "../../utils/afterPageLoad";
 
 // Inline SVG flags — kept in sync by hand with
 // frontend-next/src/components/Header/HeaderLanguageSwitcher.jsx's flag set.
@@ -47,10 +48,15 @@ function Flag({ code, className }) {
 }
 
 // Header globe dropdown, right of "Contact Us". First render is fully static
-// (closed, "EN") so it's identical in the prerendered snapshot and after
-// hydration — no hydration mismatch, no layout shift. The CMS-driven
-// enabled-languages setting is only read lazily on first click, never during
-// render/mount, so it never touches the critical rendering path.
+// (closed, "EN") so it's identical in the prerendered snapshot — no layout
+// shift during the paint/LCP window Lighthouse measures. The CMS-driven
+// enabled-languages setting used to be read lazily on first click only,
+// which meant disabling the switcher in the CMS never took effect until a
+// visitor happened to hover/click it (and even then it would visibly vanish
+// mid-interaction). It's now also loaded once via afterPageLoad — same
+// deferred-until-idle pattern as HeroWave — so a disabled switcher actually
+// disappears shortly after the page settles, without reintroducing it into
+// the critical rendering path.
 export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate }) {
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -81,6 +87,8 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
         .catch(() => {});
     });
   };
+
+  useEffect(() => afterPageLoad(loadSettings), []);
 
   const toggleOpen = () => {
     setOpen((v) => {
