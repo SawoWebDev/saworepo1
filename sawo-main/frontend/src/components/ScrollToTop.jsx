@@ -57,7 +57,7 @@ export default function ScrollToTop() {
         visibility: isVisible ? "visible" : "hidden",
         transition: "all 0.3s ease",
         zIndex: 999,
-        boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.15), 0 6px 16px rgba(0, 0, 0, 0.2)",
         fontFamily: "'Montserrat', sans-serif",
       }}
       title="Scroll to top"
