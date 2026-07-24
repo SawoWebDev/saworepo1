@@ -199,7 +199,7 @@ export default function BenchesFloorTiles() {
       <WhyChooseSawo
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Benches & Accessories"
-        description="SAWO benches and floor accessories are crafted from premium wood — durable, heat-resistant, and beautifully finished. Designed to complement any sauna interior while providing lasting comfort and practicality."
+        description="SAWO benches and floor accessories are crafted from premium wood, durable, heat-resistant, and beautifully finished. Designed to complement any sauna interior while providing lasting comfort and practicality."
         brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
         brochureLabel="VIEW BROCHURE"
       />
