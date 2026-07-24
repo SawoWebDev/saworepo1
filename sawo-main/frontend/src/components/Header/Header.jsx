@@ -811,6 +811,45 @@ export default function Header() {
               }
               .header-lang-option:hover { background: #f5f0ec; }
               .header-lang-option.is-active { background: #af8564; color: #fff; }
+              /* Nav Style 2 — the language dropdown panel (EN/FI/DE) wasn't
+                 covered by the .menu-item bevel rules above (it's a separate
+                 component, HeaderLanguageSwitcher.jsx, that doesn't use the
+                 .menu-item class), so it stayed flat/grayish. Bevel the panel
+                 itself plus give each option the same brown-pill hover/active
+                 treatment as every other dropdown in Style 2. */
+              .nav-style-style2 .header-lang-menu {
+                box-shadow:
+                  inset 0 1px 0 rgba(255,255,255,0.6),
+                  0 10px 30px rgba(0,0,0,0.2);
+              }
+              .nav-style-style2 .header-lang-option {
+                transition: none;
+              }
+              .nav-style-style2 .header-lang-option:hover,
+              .nav-style-style2 .header-lang-option.is-active {
+                background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
+                color: #ffffff !important;
+                box-shadow:
+                  inset 0 1px 0 rgba(255,255,255,0.3),
+                  inset 0 -1px 0 rgba(0,0,0,0.12),
+                  0 2px 6px rgba(139,94,60,0.22);
+              }
+              /* Search suggestion dropdown (SearchBar.jsx's ResultRow) — same
+                 bevel family as everything above. Not gated behind
+                 .nav-style-style2 since the search UI is independent of the
+                 nav hover-style toggle. */
+              .search-result-item {
+                transition: none;
+              }
+              .search-result-item:hover,
+              .search-result-item.is-active {
+                background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
+                color: #ffffff !important;
+                box-shadow:
+                  inset 0 1px 0 rgba(255,255,255,0.3),
+                  inset 0 -1px 0 rgba(0,0,0,0.12),
+                  0 2px 6px rgba(139,94,60,0.22);
+              }
               .header-lang-mobile {
                 padding: 12px 16px;
                 font-family: 'Montserrat', sans-serif;
