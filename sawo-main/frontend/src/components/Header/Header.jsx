@@ -652,6 +652,30 @@ export default function Header() {
               .nav-style-style2 .nav-toplevel.active .menu-text {
                 color: #ffffff !important;
               }
+              /* Same Style 2 treatment for the white-background dropdown/
+                 mega-menu panels — mega-menu columns, the Support/About Us
+                 submenu, and its nested level-2 submenu. Excludes
+                 .nav-toplevel (already handled above) via :not() rather than
+                 duplicating the rule. Their existing Tailwind padding/
+                 rounded-lg stays as-is — only background/color/shadow change
+                 here, so nesting indentation (px-2/px-4/px-6/px-8 per level)
+                 is untouched. */
+              .nav-style-style2 .menu-item:not(.nav-toplevel)::after {
+                content: none;
+              }
+              .nav-style-style2 .menu-item:not(.nav-toplevel):hover,
+              .nav-style-style2 .menu-item:not(.nav-toplevel).active {
+                background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+                color: #ffffff !important;
+                box-shadow:
+                  inset 0 1px 0 rgba(255,255,255,0.25),
+                  inset 0 -1px 0 rgba(0,0,0,0.25),
+                  0 2px 8px rgba(139,94,60,0.35);
+              }
+              .nav-style-style2 .menu-item:not(.nav-toplevel):hover .menu-text,
+              .nav-style-style2 .menu-item:not(.nav-toplevel).active .menu-text {
+                color: #ffffff !important;
+              }
               /* Transparent header sits over a dark scrim (see Header.jsx's
                  inline gradient) — top-level nav text, the language toggle,
                  and the search/hamburger icons need to flip to white here,
