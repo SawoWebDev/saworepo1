@@ -18,6 +18,13 @@
   --border:       #e3ddd6;
   --border-light: #ede9e3;
 
+  /* World map (Analytics → Locations): --border is too close to --surface
+     (white) to read as a country boundary, so the map gets its own
+     higher-contrast line color. (The "no visitors" land fill is a brand
+     wash computed in WorldMap.jsx, not a CSS token — it needs to match
+     --brand exactly, which isn't itself remapped between themes.) */
+  --map-border:   #b5aa96;
+
   --text:         rgb(20,22,23);
   --text-2:       #5a5550;
   --text-3:       #9a918a;
@@ -75,6 +82,10 @@
   --text:         rgba(255,255,255,0.96);
   --text-2:       rgba(255,255,255,0.92);
   --text-3:       rgba(255,255,255,0.68);
+
+  /* World map: a shade lighter than --surface-2 so country boundaries read
+     as lines against the dark card instead of blending into it. */
+  --map-border:   #6e5c43;
   --danger-bg:    rgba(192,57,43,0.2);
   --success-bg:   rgba(46,125,82,0.2);
   --warning-bg:   rgba(184,134,11,0.2);

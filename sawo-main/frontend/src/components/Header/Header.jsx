@@ -5,6 +5,7 @@ import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
 import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
 import { getHeaderLayout } from "../../local-storage/headerLayout";
+import { getHeaderNavStyle } from "../../local-storage/headerNavStyle";
 
 export default function Header() {
   const location = useLocation();
@@ -20,10 +21,14 @@ export default function Header() {
   // "layout2" (current default) until the admin setting resolves — see
   // local-storage/headerLayout.js. Avoids a layout jump for the common case.
   const [layout, setLayout] = useState("layout2");
+  // "style1" (underline, current default) until the admin setting resolves —
+  // see local-storage/headerNavStyle.js.
+  const [navStyle, setNavStyle] = useState("style1");
 
   useEffect(() => {
     let cancelled = false;
     getHeaderLayout().then((value) => { if (!cancelled) setLayout(value); });
+    getHeaderNavStyle().then((value) => { if (!cancelled) setNavStyle(value); });
     return () => { cancelled = true; };
   }, []);
 
@@ -282,7 +287,7 @@ export default function Header() {
         />
       )}
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 font-sans ${
+        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 font-sans nav-style-${navStyle} ${
           hidden ? "-translate-y-full" : "translate-y-0"
         } ${scrolled ? "shadow-md header--solid" : "header--transparent"}`}
         style={{
@@ -613,6 +618,39 @@ export default function Header() {
               .menu-item.active .menu-text,
               .menu-item:hover .menu-text {
                 color: #916e53;
+              }
+              /* Nav Style 2 (see local-storage/headerNavStyle.js, toggled from
+                 the admin CMS's Settings page) — swaps the growing-underline
+                 hover/active indicator for a solid brand-brown pill, beveled
+                 like the admin CMS's .btn-primary buttons (inset top
+                 highlight + inset bottom shadow + a soft drop shadow so it
+                 reads as a raised, physical button rather than a flat tint).
+                 Scoped to .nav-toplevel only — the white-background dropdown/
+                 mega-menu panels underneath keep the underline treatment
+                 regardless of this setting. Higher specificity here (plus
+                 !important on color) intentionally wins over both the base
+                 .menu-item hover color and the transparent-header override
+                 below, since the pill needs white text in every header state. */
+              .nav-style-2 .nav-toplevel::after {
+                content: none;
+              }
+              .nav-style-2 .nav-toplevel {
+                padding: 7px 14px;
+                border-radius: 6px;
+                transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+              }
+              .nav-style-2 .nav-toplevel:hover,
+              .nav-style-2 .nav-toplevel.active {
+                background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+                color: #ffffff !important;
+                box-shadow:
+                  inset 0 1px 0 rgba(255,255,255,0.25),
+                  inset 0 -1px 0 rgba(0,0,0,0.25),
+                  0 2px 8px rgba(139,94,60,0.35);
+              }
+              .nav-style-2 .nav-toplevel:hover .menu-text,
+              .nav-style-2 .nav-toplevel.active .menu-text {
+                color: #ffffff !important;
               }
               /* Transparent header sits over a dark scrim (see Header.jsx's
                  inline gradient) — top-level nav text, the language toggle,

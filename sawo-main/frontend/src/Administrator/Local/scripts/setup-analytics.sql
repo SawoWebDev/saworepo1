@@ -9,14 +9,30 @@ create table if not exists public.analytics_page_views (
   page_path    text not null,
   time_on_page integer,           -- seconds; patched when the visitor leaves the page
   country      text,              -- looked up server-side from the visitor's IP via ipapi.co
+  region       text,              -- looked up server-side from the visitor's IP via ipapi.co
   city         text,              -- looked up server-side from the visitor's IP via ipapi.co
   device_type  text,              -- mobile | tablet | desktop
   browser      text,              -- Chrome | Safari | Firefox | Edge | Other
+  os           text,              -- Windows | macOS | iOS | Android | GNU/Linux | Other
+  screen_size  text,              -- Mobile | Tablet | Laptop | Desktop (viewport-width buckets)
+  referrer     text,              -- external referrer hostname; null = direct visit
+  utm_source   text,
+  utm_medium   text,
+  utm_campaign text,
   "timestamp"  timestamptz not null default now()
 );
 
 -- Existing deployments: add the new column if the table already exists.
 alter table public.analytics_page_views add column if not exists city text;
+
+-- Plausible-style dashboard upgrade: acquisition + richer device/geo dimensions.
+alter table public.analytics_page_views add column if not exists referrer     text;
+alter table public.analytics_page_views add column if not exists utm_source   text;
+alter table public.analytics_page_views add column if not exists utm_medium   text;
+alter table public.analytics_page_views add column if not exists utm_campaign text;
+alter table public.analytics_page_views add column if not exists region       text;
+alter table public.analytics_page_views add column if not exists os           text;
+alter table public.analytics_page_views add column if not exists screen_size  text;
 
 create table if not exists public.analytics_events (
   id          uuid primary key default gen_random_uuid(),

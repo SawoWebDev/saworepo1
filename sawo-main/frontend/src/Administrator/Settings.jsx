@@ -11,11 +11,17 @@ import {
   BUILT_LOCALES,
 } from "../local-storage/languageSettings";
 import { getHeaderLayout, setHeaderLayout as saveHeaderLayout } from "../local-storage/headerLayout";
+import { getHeaderNavStyle, setHeaderNavStyle as saveHeaderNavStyle } from "../local-storage/headerNavStyle";
 import { getCache, setCache } from "./adminCache";
 
 const LAYOUT_OPTIONS = [
   { value: "layout1", label: "Layout 1", description: "Sauna, Steam, Infrared, Support, Contact Us, About Us and Careers as separate top-level items — Sauna and Steam each have their own dropdown." },
   { value: "layout2", label: "Layout 2", description: "Current header: a single \"Products\" mega-menu covers Sauna/Steam/Infrared, plus Support and About Us (Careers nested under About Us). Default." },
+];
+
+const NAV_STYLE_OPTIONS = [
+  { value: "style1", label: "Style 1 — Underline", description: "Top-level nav items get a growing underline on hover/active. Default." },
+  { value: "style2", label: "Style 2 — Brown Background", description: "Top-level nav items get a solid brand-brown pill (beveled like the CMS's primary buttons) on hover/active instead of an underline." },
 ];
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js's
@@ -81,19 +87,22 @@ export default function Settings({ currentUser }) {
   const [langSaving, setLangSaving] = useState(false);
   const [headerLayout, setHeaderLayoutState] = useState(() => cachedSettings ? cachedSettings.headerLayout : "layout2");
   const [layoutSaving, setLayoutSaving] = useState(false);
+  const [navStyle, setNavStyleState] = useState(() => cachedSettings ? cachedSettings.navStyle : "style1");
+  const [navStyleSaving, setNavStyleSaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     Promise.all([
       getDataSource(), getJsonSourceScope(), getGDPRBannerEnabled(),
-      getLanguageSwitcherEnabled(), getEnabledLanguages(), getHeaderLayout(),
+      getLanguageSwitcherEnabled(), getEnabledLanguages(), getHeaderLayout(), getHeaderNavStyle(),
     ])
-      .then(([s, sc, gdpr, langEn, langs, hLayout]) => {
+      .then(([s, sc, gdpr, langEn, langs, hLayout, navSty]) => {
         setSource(s); setScope(sc); setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
         setHeaderLayoutState(hLayout);
-        setCache(SETTINGS_CACHE_KEY, { source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs, headerLayout: hLayout });
+        setNavStyleState(navSty);
+        setCache(SETTINGS_CACHE_KEY, { source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs, headerLayout: hLayout, navStyle: navSty });
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -197,6 +206,29 @@ export default function Settings({ currentUser }) {
       add("Failed to switch header layout", "error");
     } finally {
       setLayoutSaving(false);
+    }
+  };
+
+  const handleSwitchNavStyle = async (next) => {
+    setNavStyleSaving(true);
+    setError(null);
+    try {
+      await saveHeaderNavStyle(next, currentUser?.username);
+      setNavStyleState(next);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "header_nav_style",
+        entity_name: `Header Nav Style → ${next}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add(`Header Nav Style switched to ${next === "style1" ? "Style 1 — Underline" : "Style 2 — Brown Background"}`, "success");
+    } catch (err) {
+      setError("Failed to switch header nav style: " + err.message);
+      add("Failed to switch header nav style", "error");
+    } finally {
+      setNavStyleSaving(false);
     }
   };
 
@@ -442,6 +474,45 @@ export default function Settings({ currentUser }) {
                 checked={headerLayout === opt.value}
                 onChange={() => handleSwitchHeaderLayout(opt.value)}
                 disabled={layoutSaving}
+                className="mt-1"
+              />
+              <div>
+                <p className="text-sm font-medium text-[var(--text)]">{opt.label}</p>
+                <p className="text-xs text-[var(--text-3)]">{opt.description}</p>
+              </div>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="card card-body">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-swatchbook text-[var(--brand)]"></i>
+          Header Nav Style
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          Controls the hover/active look of the header's top-level nav items. Takes
+          effect for visitors within seconds, no redeploy needed. Switch back anytime
+          if you don't like it.
+        </p>
+
+        <div className="space-y-2">
+          {NAV_STYLE_OPTIONS.map((opt) => (
+            <label
+              key={opt.value}
+              className={`flex items-start gap-3 p-3 rounded border cursor-pointer transition-colors ${
+                navStyle === opt.value
+                  ? "border-[var(--brand)] bg-[var(--brand-muted)]"
+                  : "border-[var(--border)] hover:bg-[var(--surface-2)]"
+              } ${navStyleSaving ? "opacity-60 pointer-events-none" : ""}`}
+            >
+              <input
+                type="radio"
+                name="header-nav-style"
+                value={opt.value}
+                checked={navStyle === opt.value}
+                onChange={() => handleSwitchNavStyle(opt.value)}
+                disabled={navStyleSaving}
                 className="mt-1"
               />
               <div>

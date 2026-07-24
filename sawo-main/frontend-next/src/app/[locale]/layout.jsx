@@ -7,6 +7,7 @@ import { organizationJsonLd, websiteJsonLd } from '@/lib/seo/jsonld';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import BackToTop from '@/components/BackToTop';
+import AnalyticsTracker from '@/components/AnalyticsTracker';
 import { getLanguageSwitcherSettings } from '@/translation/settings';
 import '../globals.css';
 
@@ -89,6 +90,7 @@ export default async function LocaleLayout({ children, params }) {
           <main className="flex-1 relative z-0">{children}</main>
           <Footer />
           <BackToTop />
+          <AnalyticsTracker />
         </NextIntlClientProvider>
       </body>
     </html>

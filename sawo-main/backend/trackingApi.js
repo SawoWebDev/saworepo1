@@ -34,24 +34,24 @@ async function lookupGeoFromIpapiCo(ip) {
   if (!res.ok) return null;
   const data = await res.json();
   if (data.error) return null;
-  return { country: data.country_name || null, city: data.city || null };
+  return { country: data.country_name || null, region: data.region || null, city: data.city || null };
 }
 
 // Fallback provider — different vendor, different quota, so a rate limit or
 // outage on ipapi.co doesn't take down geolocation entirely. No API key/HTTPS
 // on the free tier, but this is a server-to-server call, so that's fine.
 async function lookupGeoFromIpApiCom(ip) {
-  const res = await fetch(`http://ip-api.com/json/${ip}?fields=status,country,city`);
+  const res = await fetch(`http://ip-api.com/json/${ip}?fields=status,country,regionName,city`);
   if (!res.ok) return null;
   const data = await res.json();
   if (data.status !== "success") return null;
-  return { country: data.country || null, city: data.city || null };
+  return { country: data.country || null, region: data.regionName || null, city: data.city || null };
 }
 
 async function lookupGeo(ip) {
   const cached = geoCache.get(ip);
   if (cached && cached.expiresAt > Date.now()) {
-    return { country: cached.country, city: cached.city };
+    return { country: cached.country, region: cached.region, city: cached.city };
   }
 
   let result = null;
@@ -65,14 +65,20 @@ async function lookupGeo(ip) {
       try {
         result = await lookupGeoFromIpApiCom(ip);
       } catch {
-        // both providers down/rate-limited — country/city stay null
+        // both providers down/rate-limited — country/region/city stay null
       }
     }
   }
 
-  const { country = null, city = null } = result || {};
-  geoCache.set(ip, { country, city, expiresAt: Date.now() + GEO_CACHE_TTL_MS });
-  return { country, city };
+  const { country = null, region = null, city = null } = result || {};
+  geoCache.set(ip, { country, region, city, expiresAt: Date.now() + GEO_CACHE_TTL_MS });
+  return { country, region, city };
+}
+
+// Body fields come straight from the browser — cap length and normalize
+// empties to null so junk/oversized values can't bloat the table.
+function clean(v, max = 200) {
+  return typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null;
 }
 
 export async function handlePageView(req, res) {
@@ -90,18 +96,33 @@ export async function handlePageView(req, res) {
     return res.status(503).json({ error: "Analytics not configured" });
   }
 
-  const { session_id, page_path, device_type, browser } = req.body || {};
+  const {
+    session_id, page_path, device_type, browser, os, screen_size,
+    referrer, utm_source, utm_medium, utm_campaign,
+  } = req.body || {};
   if (!session_id || !page_path) {
     return res.status(400).json({ error: "Missing session_id or page_path" });
   }
 
   const ip = getClientIp(req);
-  const { country, city } = await lookupGeo(ip);
+  const { country, region, city } = await lookupGeo(ip);
 
   try {
     const { data, error } = await supabaseAdmin
       .from("analytics_page_views")
-      .insert({ session_id, page_path, device_type, browser, country, city })
+      .insert({
+        session_id: clean(session_id),
+        page_path: clean(page_path, 500),
+        device_type: clean(device_type, 40),
+        browser: clean(browser, 40),
+        os: clean(os, 40),
+        screen_size: clean(screen_size, 40),
+        referrer: clean(referrer),
+        utm_source: clean(utm_source),
+        utm_medium: clean(utm_medium),
+        utm_campaign: clean(utm_campaign),
+        country, region, city,
+      })
       .select("id")
       .single();
 
