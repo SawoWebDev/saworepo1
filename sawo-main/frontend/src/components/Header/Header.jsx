@@ -631,16 +631,16 @@ export default function Header() {
                  !important on color) intentionally wins over both the base
                  .menu-item hover color and the transparent-header override
                  below, since the pill needs white text in every header state. */
-              .nav-style-2 .nav-toplevel::after {
+              .nav-style-style2 .nav-toplevel::after {
                 content: none;
               }
-              .nav-style-2 .nav-toplevel {
+              .nav-style-style2 .nav-toplevel {
                 padding: 7px 14px;
                 border-radius: 6px;
                 transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
               }
-              .nav-style-2 .nav-toplevel:hover,
-              .nav-style-2 .nav-toplevel.active {
+              .nav-style-style2 .nav-toplevel:hover,
+              .nav-style-style2 .nav-toplevel.active {
                 background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
                 color: #ffffff !important;
                 box-shadow:
@@ -648,8 +648,8 @@ export default function Header() {
                   inset 0 -1px 0 rgba(0,0,0,0.25),
                   0 2px 8px rgba(139,94,60,0.35);
               }
-              .nav-style-2 .nav-toplevel:hover .menu-text,
-              .nav-style-2 .nav-toplevel.active .menu-text {
+              .nav-style-style2 .nav-toplevel:hover .menu-text,
+              .nav-style-style2 .nav-toplevel.active .menu-text {
                 color: #ffffff !important;
               }
               /* Transparent header sits over a dark scrim (see Header.jsx's
