@@ -642,7 +642,7 @@ export default function Header() {
               }
               .nav-style-style2 .nav-toplevel:hover,
               .nav-style-style2 .nav-toplevel.active {
-                background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+                background: #af8564;
                 color: #ffffff !important;
                 box-shadow:
                   inset 0 1px 0 rgba(255,255,255,0.25),
@@ -666,7 +666,7 @@ export default function Header() {
               }
               .nav-style-style2 .menu-item:not(.nav-toplevel):hover,
               .nav-style-style2 .menu-item:not(.nav-toplevel).active {
-                background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+                background: #af8564;
                 color: #ffffff !important;
                 box-shadow:
                   inset 0 1px 0 rgba(255,255,255,0.25),
