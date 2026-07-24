@@ -22,7 +22,11 @@ const allowedOrigins = [
   "https://sawogitsrc.vercel.app", // kept in case other deployments/previews still use it
   "http://localhost:3000",
   "http://localhost:3001",
-  "http://localhost:5173"
+  "http://localhost:5173",
+  // Extra origins (e.g. the frontend-next i18n app's Vercel domain) can be
+  // added without a code change: ALLOWED_ORIGINS="https://a.com,https://b.com"
+  ...(process.env.ALLOWED_ORIGINS || "")
+    .split(",").map(s => s.trim()).filter(Boolean),
 ];
 
 app.use(cors({

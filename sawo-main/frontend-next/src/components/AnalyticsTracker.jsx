@@ -1,91 +1,86 @@
+'use client';
+
 /**
- * track.js
- * src/local-storage/track.js
+ * AnalyticsTracker.jsx
  *
- * First-party visitor analytics feeding the existing /admin/analytics
- * dashboard (tables: analytics_page_views — see scripts/setup-analytics.sql).
+ * First-party visitor analytics for the i18n (Next.js) site — a direct port
+ * of the CRA app's src/local-storage/track.js, so translated pages land in
+ * the same analytics_page_views table and show up in the same /admin/analytics
+ * dashboard. The locale prefix in the pathname (/en/…, /fi/…, /de/…) is what
+ * distinguishes them in Top Pages.
  *
- * Talks to our own backend (backend/trackingApi.js), not Supabase directly —
- * the backend holds the service-role key, does bot filtering, and looks up
- * geo from the visitor's real IP. Fire-and-forget with try/catch so a
- * failure can never affect the page, and skips admins entirely.
+ * Talks to the shared backend (backend/trackingApi.js), never Supabase
+ * directly. Fire-and-forget with try/catch so a failure can never affect the
+ * page. No admin-skip here: this app has no admin area or login.
+ *
+ * Requires NEXT_PUBLIC_BACKEND_URL (set in Vercel env) — without it the
+ * component renders null and tracks nothing.
  */
 
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const PAGEVIEW_ENDPOINT = `${BACKEND_URL}/api/track/pageview`;
 const DURATION_ENDPOINT = `${BACKEND_URL}/api/track/duration`;
 
-export function isAdmin() {
-  try {
-    return !!(localStorage.getItem("sawo_token") || sessionStorage.getItem("sawo_token"));
-  } catch {
-    return false;
-  } 
-}
-
 function getSessionId() {
   try {
-    let sid = sessionStorage.getItem("sawo_sid");
+    let sid = sessionStorage.getItem('sawo_sid');
     if (!sid) {
       sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
-      sessionStorage.setItem("sawo_sid", sid);
+      sessionStorage.setItem('sawo_sid', sid);
     }
     return sid;
   } catch {
-    return "anon";
+    return 'anon';
   }
 }
 
 function parseUA() {
   const ua = navigator.userAgent;
   const device_type = /Mobi|Android.*Mobile|iPhone/i.test(ua)
-    ? "mobile"
+    ? 'mobile'
     : /iPad|Tablet|Android/i.test(ua)
-      ? "tablet"
-      : "desktop";
+      ? 'tablet'
+      : 'desktop';
   const browser = /Edg\//.test(ua)
-    ? "Edge"
+    ? 'Edge'
     : /Chrome\//.test(ua)
-      ? "Chrome"
+      ? 'Chrome'
       : /Safari\//.test(ua) && !/Chrome/.test(ua)
-        ? "Safari"
+        ? 'Safari'
         : /Firefox\//.test(ua)
-          ? "Firefox"
-          : "Other";
+          ? 'Firefox'
+          : 'Other';
   // iOS before Mac: iPads can report "Mac OS X" alongside iPad in the UA.
   const os = /iPhone|iPad|iPod/.test(ua)
-    ? "iOS"
+    ? 'iOS'
     : /Android/.test(ua)
-      ? "Android"
+      ? 'Android'
       : /Windows/.test(ua)
-        ? "Windows"
+        ? 'Windows'
         : /Mac OS X/.test(ua)
-          ? "macOS"
+          ? 'macOS'
           : /Linux/.test(ua)
-            ? "GNU/Linux"
-            : "Other";
+            ? 'GNU/Linux'
+            : 'Other';
   return { device_type, browser, os };
 }
 
 // Plausible's viewport-width buckets.
 function getScreenSize() {
   const w = window.innerWidth;
-  return w < 576 ? "Mobile" : w < 992 ? "Tablet" : w < 1440 ? "Laptop" : "Desktop";
+  return w < 576 ? 'Mobile' : w < 992 ? 'Tablet' : w < 1440 ? 'Laptop' : 'Desktop';
 }
 
 /**
- * Where this visit came from — external referrer hostname + utm params.
- * Computed once on the visit's landing page and pinned in sessionStorage,
- * then sent with every pageview of the session (first-touch attribution,
- * matching Plausible's per-visit model). Pinning matters because after the
- * first SPA navigation document.referrer/location.search no longer describe
- * the visit's origin.
+ * Where this visit came from — external referrer hostname + utm params,
+ * computed once on the landing page and pinned in sessionStorage
+ * (first-touch attribution per visit, matching Plausible's model).
  */
 function getAttribution() {
-  const KEY = "sawo_attr";
+  const KEY = 'sawo_attr';
   try {
     const stored = sessionStorage.getItem(KEY);
     if (stored) return JSON.parse(stored);
@@ -101,9 +96,9 @@ function getAttribution() {
   let utm_source = null, utm_medium = null, utm_campaign = null;
   try {
     const params = new URLSearchParams(window.location.search);
-    utm_source = params.get("utm_source") || null;
-    utm_medium = params.get("utm_medium") || null;
-    utm_campaign = params.get("utm_campaign") || null;
+    utm_source = params.get('utm_source') || null;
+    utm_medium = params.get('utm_medium') || null;
+    utm_campaign = params.get('utm_campaign') || null;
   } catch { /* ignore */ }
 
   const attr = { referrer, utm_source, utm_medium, utm_campaign };
@@ -114,10 +109,12 @@ function getAttribution() {
 // The page view currently being timed: { id, start }
 let current = null;
 
-// Input events that only a real visitor produces. Deliberately no "scroll" —
-// viewport/screenshot work by an automated runner can synthesize that — and
-// deliberately no timer: see gating comment on queuePageView below.
-const INTERACTION_EVENTS = ["pointerdown", "pointermove", "keydown", "touchstart", "wheel"];
+// Input events only a real visitor produces — same gating rationale as the
+// CRA tracker: the backend (Render free tier) can be cold, and a timed-out
+// request during a Lighthouse lab run logs a console error the audit scores
+// against us. A lab run never touches the page; a real visitor does within
+// seconds.
+const INTERACTION_EVENTS = ['pointerdown', 'pointermove', 'keydown', 'touchstart', 'wheel'];
 const LISTENER_OPTS = { passive: true, capture: true };
 
 let hasInteracted = false;
@@ -144,21 +141,6 @@ function removeInteractionListeners() {
   );
 }
 
-/**
- * Hold the very first page view until the visitor actually touches the page.
- *
- * The backend lives on Render's free tier, which spins down when idle: a
- * request that lands on a cold instance can hang until it times out, and the
- * browser logs that as "Failed to load resource: net::ERR_TIMED_OUT" no matter
- * how the request was sent (a caught fetch and even sendBeacon both surface
- * it). Lighthouse's Best Practices "errors in console" audit scores that
- * against us. A lab run loads the page and never touches it, so gating on real
- * input means no request is made during an audit — while any actual visitor
- * fires one of these within seconds and is tracked normally. No timers here on
- * purpose: a delay would still fire inside the audit window.
- *
- * Once the visitor has interacted, later route changes track immediately.
- */
 function queuePageView(path) {
   if (hasInteracted) {
     trackPageView(path);
@@ -174,18 +156,15 @@ function finalizeCurrent() {
   try {
     const blob = new Blob(
       [JSON.stringify({ id: current.id, time_on_page: seconds })],
-      { type: "application/json" }
+      { type: 'application/json' }
     );
     // sendBeacon survives page unload/navigation, unlike a regular fetch.
     const sent = navigator.sendBeacon?.(DURATION_ENDPOINT, blob);
     if (!sent) {
-      // Fallback for browsers without sendBeacon, or when it refuses the
-      // payload (e.g. queue full) — keepalive gives it a similar chance to
-      // complete during unload.
       fetch(DURATION_ENDPOINT, {
-        method: "POST",
+        method: 'POST',
         keepalive: true,
-        headers: { "Content-Type": "application/json" },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: current.id, time_on_page: seconds }),
       }).catch(() => {});
     }
@@ -195,8 +174,7 @@ function finalizeCurrent() {
 }
 
 async function trackPageView(path) {
-  if (!BACKEND_URL || isAdmin()) return;
-  if (path.startsWith("/admin") || path === "/login") return;
+  if (!BACKEND_URL) return;
 
   finalizeCurrent();
   current = { id: null, start: Date.now() };
@@ -204,9 +182,9 @@ async function trackPageView(path) {
 
   try {
     const res = await fetch(PAGEVIEW_ENDPOINT, {
-      method: "POST",
+      method: 'POST',
       keepalive: true,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         session_id: getSessionId(),
         page_path: path,
@@ -225,28 +203,26 @@ async function trackPageView(path) {
   }
 }
 
-/**
- * Mount once inside the router (MainLayout) — records a page view per
- * route change and patches time-on-page when the visitor leaves.
- */
-export function usePageTracking() {
-  const location = useLocation();
+export default function AnalyticsTracker() {
+  const pathname = usePathname();
 
   useEffect(() => {
-    queuePageView(location.pathname);
-  }, [location.pathname]);
+    if (pathname) queuePageView(pathname);
+  }, [pathname]);
 
   useEffect(() => {
     if (!hasInteracted) addInteractionListeners();
     const onHide = () => {
-      if (document.visibilityState === "hidden") finalizeCurrent();
+      if (document.visibilityState === 'hidden') finalizeCurrent();
     };
-    document.addEventListener("visibilitychange", onHide);
-    window.addEventListener("pagehide", finalizeCurrent);
+    document.addEventListener('visibilitychange', onHide);
+    window.addEventListener('pagehide', finalizeCurrent);
     return () => {
       removeInteractionListeners();
-      document.removeEventListener("visibilitychange", onHide);
-      window.removeEventListener("pagehide", finalizeCurrent);
+      document.removeEventListener('visibilitychange', onHide);
+      window.removeEventListener('pagehide', finalizeCurrent);
     };
   }, []);
+
+  return null;
 }
