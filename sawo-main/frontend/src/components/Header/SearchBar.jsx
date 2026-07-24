@@ -57,8 +57,8 @@ function ResultRow({ result, idx, highlightedIndex, setHighlightedIndex, selectR
     <button
       onClick={() => selectResult(result)}
       onMouseEnter={() => setHighlightedIndex(idx)}
-      className={`w-full text-left px-4 py-2.5 text-[13px] rounded-lg transition-colors flex items-center gap-2 ${
-        active ? "bg-[#af8564] text-white font-semibold" : "text-[rgb(51,51,51)] hover:bg-[#af8564] hover:text-white"
+      className={`search-result-item w-full text-left px-4 py-2.5 text-[13px] rounded-lg flex items-center gap-2 ${
+        active ? "is-active text-white font-semibold" : "text-[rgb(51,51,51)]"
       }`}
     >
       {result.resultType === "product" && result.thumbnail
