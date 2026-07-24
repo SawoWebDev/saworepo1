@@ -635,19 +635,28 @@ export default function Header() {
               .nav-style-style2 .nav-toplevel::after {
                 content: none;
               }
+              /* transition: none — background-image (the gradient) can't be
+                 smoothly interpolated by any browser, so animating it (or the
+                 Tailwind transition-colors class already on every .menu-item)
+                 caused color/background to visibly desync: text would fade
+                 toward white first, then the pill would pop in a beat later.
+                 Switching instantly avoids that mismatch, especially when
+                 moving the mouse quickly across several nav items. */
+              .nav-style-style2 .menu-item {
+                transition: none;
+              }
               .nav-style-style2 .nav-toplevel {
                 padding: 7px 14px;
                 border-radius: 6px;
-                transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
               }
               .nav-style-style2 .nav-toplevel:hover,
               .nav-style-style2 .nav-toplevel.active {
-                background: #af8564;
+                background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
                 color: #ffffff !important;
                 box-shadow:
-                  inset 0 1px 0 rgba(255,255,255,0.25),
-                  inset 0 -1px 0 rgba(0,0,0,0.25),
-                  0 2px 8px rgba(139,94,60,0.35);
+                  inset 0 1px 0 rgba(255,255,255,0.3),
+                  inset 0 -1px 0 rgba(0,0,0,0.12),
+                  0 2px 6px rgba(139,94,60,0.22);
               }
               .nav-style-style2 .nav-toplevel:hover .menu-text,
               .nav-style-style2 .nav-toplevel.active .menu-text {
@@ -666,16 +675,32 @@ export default function Header() {
               }
               .nav-style-style2 .menu-item:not(.nav-toplevel):hover,
               .nav-style-style2 .menu-item:not(.nav-toplevel).active {
-                background: #af8564;
+                background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
                 color: #ffffff !important;
                 box-shadow:
-                  inset 0 1px 0 rgba(255,255,255,0.25),
-                  inset 0 -1px 0 rgba(0,0,0,0.25),
-                  0 2px 8px rgba(139,94,60,0.35);
+                  inset 0 1px 0 rgba(255,255,255,0.3),
+                  inset 0 -1px 0 rgba(0,0,0,0.12),
+                  0 2px 6px rgba(139,94,60,0.22);
               }
               .nav-style-style2 .menu-item:not(.nav-toplevel):hover .menu-text,
               .nav-style-style2 .menu-item:not(.nav-toplevel).active .menu-text {
                 color: #ffffff !important;
+              }
+              /* Same pill treatment on the language toggle and search icon —
+                 transition: none for the same reason as .menu-item above. */
+              .nav-style-style2 .header-lang-toggle,
+              .nav-style-style2 .header-icon-btn {
+                border-radius: 6px;
+                transition: none;
+              }
+              .nav-style-style2 .header-lang-toggle:hover,
+              .nav-style-style2 .header-icon-btn:hover {
+                background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
+                color: #ffffff !important;
+                box-shadow:
+                  inset 0 1px 0 rgba(255,255,255,0.3),
+                  inset 0 -1px 0 rgba(0,0,0,0.12),
+                  0 2px 6px rgba(139,94,60,0.22);
               }
               /* Transparent header sits over a dark scrim (see Header.jsx's
                  inline gradient) — top-level nav text, the language toggle,
