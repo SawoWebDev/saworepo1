@@ -57,7 +57,7 @@ export const CAPABILITY_MAP = {
   "page.products_local":      ["editor", "admin", "superadmin"],
   "page.analytics":           ["admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
-  // Gates the Roles & Permissions page itself — deliberately NOT part of
+  // Gates the Permissions page itself — deliberately NOT part of
   // the dynamic override system (see setCapabilityOverrides below).
   "page.permissions":         ["superadmin"],
 };
@@ -118,11 +118,10 @@ export const NAV_ITEMS = [
   { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", section: "Catalog",  description: "Manage sauna room listings. Create, edit, and publish rooms across the site." },
   { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      section: "Catalog",  description: "Browse products grouped by model line. Click a folder to see everything in it." },
   { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    section: "Catalog",  description: "Manage the categories and tags products can be organized under." },
+  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "Catalog",   description: "A record of every create, update, and delete made across the CMS." },
 
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
-
-  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "System",   description: "A record of every create, update, and delete made across the CMS." },
-  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
-  { to: "/admin/permissions",     label: "Roles & Permissions", icon: "fa-solid fa-user-lock",   cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
+  { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
+  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },
 ];
