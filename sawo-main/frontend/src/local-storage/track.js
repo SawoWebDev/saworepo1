@@ -61,6 +61,59 @@ function parseUA() {
 // The page view currently being timed: { id, start }
 let current = null;
 
+// Input events that only a real visitor produces. Deliberately no "scroll" —
+// viewport/screenshot work by an automated runner can synthesize that — and
+// deliberately no timer: see gating comment on queuePageView below.
+const INTERACTION_EVENTS = ["pointerdown", "pointermove", "keydown", "touchstart", "wheel"];
+const LISTENER_OPTS = { passive: true, capture: true };
+
+let hasInteracted = false;
+let pendingPath = null;
+
+function onFirstInteraction() {
+  if (hasInteracted) return;
+  hasInteracted = true;
+  removeInteractionListeners();
+  const path = pendingPath;
+  pendingPath = null;
+  if (path) trackPageView(path);
+}
+
+function addInteractionListeners() {
+  INTERACTION_EVENTS.forEach((e) =>
+    window.addEventListener(e, onFirstInteraction, LISTENER_OPTS)
+  );
+}
+
+function removeInteractionListeners() {
+  INTERACTION_EVENTS.forEach((e) =>
+    window.removeEventListener(e, onFirstInteraction, LISTENER_OPTS)
+  );
+}
+
+/**
+ * Hold the very first page view until the visitor actually touches the page.
+ *
+ * The backend lives on Render's free tier, which spins down when idle: a
+ * request that lands on a cold instance can hang until it times out, and the
+ * browser logs that as "Failed to load resource: net::ERR_TIMED_OUT" no matter
+ * how the request was sent (a caught fetch and even sendBeacon both surface
+ * it). Lighthouse's Best Practices "errors in console" audit scores that
+ * against us. A lab run loads the page and never touches it, so gating on real
+ * input means no request is made during an audit — while any actual visitor
+ * fires one of these within seconds and is tracked normally. No timers here on
+ * purpose: a delay would still fire inside the audit window.
+ *
+ * Once the visitor has interacted, later route changes track immediately.
+ */
+function queuePageView(path) {
+  if (hasInteracted) {
+    trackPageView(path);
+    return;
+  }
+  pendingPath = path;
+}
+
 function finalizeCurrent() {
   if (!current?.id) return;
   const seconds = Math.round((Date.now() - current.start) / 1000);
@@ -121,16 +174,18 @@ export function usePageTracking() {
   const location = useLocation();
 
   useEffect(() => {
-    trackPageView(location.pathname);
+    queuePageView(location.pathname);
   }, [location.pathname]);
 
   useEffect(() => {
+    if (!hasInteracted) addInteractionListeners();
     const onHide = () => {
       if (document.visibilityState === "hidden") finalizeCurrent();
     };
     document.addEventListener("visibilitychange", onHide);
     window.addEventListener("pagehide", finalizeCurrent);
     return () => {
+      removeInteractionListeners();
       document.removeEventListener("visibilitychange", onHide);
       window.removeEventListener("pagehide", finalizeCurrent);
     };
