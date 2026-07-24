@@ -7,21 +7,24 @@ const ButtonBrown = ({ text = "Click Here", href = "#", icon = true }) => {
       href={href}
       className="inline-flex items-center gap-2 px-6 py-3 rounded font-medium transition-all duration-300 border-4 border-transparent text-white"
       style={{
-        // #916e53 = 4.5:1-contrast variant of the #af8564 brand brown; white text
-        // on the original fails WCAG AA (3.3:1) and Lighthouse color-contrast.
-        background: "linear-gradient(145deg, #a17f60 0%, #916e53 45%, #7c5d46 100%)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 3px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15)",
+        // Same gradient/shadow as the header's Nav Style 2 active/hover pill
+        // (Header.jsx) — kept byte-identical so every "brown pill" on the
+        // site reads as the same element. Note: #af8564 is 3.3:1 contrast
+        // with white text, below WCAG AA's 4.5:1 (this used to be #916e53,
+        // a 4.5:1-contrast variant, before this request).
+        background: "linear-gradient(135deg, #af8564 0%, #c9a97e 100%)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.12), 0 2px 6px rgba(139,94,60,0.22)",
         fontFamily: "Montserrat, sans-serif",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.background = "transparent";
         e.currentTarget.style.boxShadow = "none";
-        e.currentTarget.style.color = "#916e53";
-        e.currentTarget.style.borderColor = "#916e53";
+        e.currentTarget.style.color = "#af8564";
+        e.currentTarget.style.borderColor = "#af8564";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background = "linear-gradient(145deg, #a17f60 0%, #916e53 45%, #7c5d46 100%)";
-        e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 3px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15)";
+        e.currentTarget.style.background = "linear-gradient(135deg, #af8564 0%, #c9a97e 100%)";
+        e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.12), 0 2px 6px rgba(139,94,60,0.22)";
         e.currentTarget.style.color = "#ffffff";
         e.currentTarget.style.borderColor = "transparent";
       }}
