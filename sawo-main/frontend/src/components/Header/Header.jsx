@@ -712,7 +712,7 @@ export default function Header() {
                 padding: 6px 4px;
                 transition: color 0.2s ease;
               }
-              .header-lang-toggle:hover { color: #af8564; }
+              .header-lang-toggle:hover { color: #916e53; }
               .header-lang-code { letter-spacing: 0.03em; }
               .header-lang-flag {
                 display: inline-flex;
@@ -777,7 +777,7 @@ export default function Header() {
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
-                color: #af8564;
+                color: #916e53;
                 margin-bottom: 8px;
               }
               .header-lang-mobile-options {

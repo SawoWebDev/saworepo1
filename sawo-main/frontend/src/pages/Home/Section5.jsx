@@ -63,7 +63,7 @@ const Section5 = () => {
             </h2>
             <p
               className="text-lg mb-6"
-              style={{ fontFamily: "Montserrat, sans-serif", color: "#af8564", fontWeight: 500 }}
+              style={{ fontFamily: "Montserrat, sans-serif", color: "#916e53", fontWeight: 500 }}
             >
               {SUBTITLE}
             </p>
