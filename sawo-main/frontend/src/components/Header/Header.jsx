@@ -603,11 +603,12 @@ export default function Header() {
               .menu-item.active::after {
                 animation: growLine 0.3s ease forwards;
               }
-              /* #916e53 is the 4.5:1-contrast variant of the #af8564 brand brown
-                 (the original is 3.3:1 on white and fails WCAG AA / Lighthouse). */
+              /* Brand brown #af8564 — note: this is 3.3:1 contrast on white,
+                 below WCAG AA's 4.5:1 for normal text (was #916e53, a 4.5:1
+                 variant, before this test). */
               .menu-item.active,
               .menu-item:hover {
-                color: #916e53;
+                color: #af8564;
               }
               .menu-item.active {
                 font-weight: 600;
@@ -617,7 +618,7 @@ export default function Header() {
               }
               .menu-item.active .menu-text,
               .menu-item:hover .menu-text {
-                color: #916e53;
+                color: #af8564;
               }
               /* Nav Style 2 (see local-storage/headerNavStyle.js, toggled from
                  the admin CMS's Settings page) — swaps the growing-underline
@@ -711,7 +712,7 @@ export default function Header() {
                 padding: 6px 4px;
                 transition: color 0.2s ease;
               }
-              .header-lang-toggle:hover { color: #916e53; }
+              .header-lang-toggle:hover { color: #af8564; }
               .header-lang-code { letter-spacing: 0.03em; }
               .header-lang-flag {
                 display: inline-flex;
@@ -776,7 +777,7 @@ export default function Header() {
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
-                color: #916e53;
+                color: #af8564;
                 margin-bottom: 8px;
               }
               .header-lang-mobile-options {
