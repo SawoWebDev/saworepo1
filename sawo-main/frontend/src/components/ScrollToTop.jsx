@@ -39,7 +39,7 @@ export default function ScrollToTop() {
         width: "44px",
         height: "44px",
         borderRadius: "50%",
-        background: "#af8564",
+        background: "linear-gradient(145deg, #bd9873 0%, #af8564 45%, #96704f 100%)",
         // borderStyle (not the `border` shorthand): different Chromium builds
         // serialize `border: "none"` into the DOM style attribute differently
         // (border-image: none vs border-image: initial), and this button is
@@ -57,16 +57,16 @@ export default function ScrollToTop() {
         visibility: isVisible ? "visible" : "hidden",
         transition: "all 0.3s ease",
         zIndex: 999,
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -1px 0 rgba(0,0,0,0.15), 0 6px 16px rgba(0, 0, 0, 0.2)",
+        boxShadow: "inset 0 2px 3px rgba(255,255,255,0.4), inset 0 -3px 4px rgba(0,0,0,0.28), 0 6px 16px rgba(0, 0, 0, 0.25)",
         fontFamily: "'Montserrat', sans-serif",
       }}
       title="Scroll to top"
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = "#9d7554";
+        e.currentTarget.style.background = "linear-gradient(145deg, #a9835f 0%, #9d7554 45%, #855f40 100%)";
         e.currentTarget.style.transform = isVisible ? "translateY(-2px)" : "translateY(20px)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background = "#af8564";
+        e.currentTarget.style.background = "linear-gradient(145deg, #bd9873 0%, #af8564 45%, #96704f 100%)";
         e.currentTarget.style.transform = isVisible ? "translateY(0)" : "translateY(20px)";
       }}
     >
