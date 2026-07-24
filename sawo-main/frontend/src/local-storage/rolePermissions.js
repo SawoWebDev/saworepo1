@@ -3,7 +3,7 @@
  * src/local-storage/rolePermissions.js
  *
  * Admin-configurable overrides for permissions.js's CAPABILITY_MAP, edited
- * from the Roles & Permissions page (Administrator/RolesPermissions.jsx).
+ * from the Permissions page (Administrator/RolesPermissions.jsx).
  * Stored as one JSON object, sparse — only capabilities a superadmin has
  * actually toggled are present; every other capability keeps falling
  * through to its static CAPABILITY_MAP default.
