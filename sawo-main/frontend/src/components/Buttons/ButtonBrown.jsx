@@ -17,10 +17,14 @@ const ButtonBrown = ({ text = "Click Here", href = "#", icon = true }) => {
         fontFamily: "Montserrat, sans-serif",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = "transparent";
-        e.currentTarget.style.boxShadow = "none";
-        e.currentTarget.style.color = "#af8564";
-        e.currentTarget.style.borderColor = "#af8564";
+        // Darken the fill instead of clearing it — the old transparent-bg
+        // hover put brown text on white (3.3:1, barely legible) plus a
+        // visible border ring. Staying filled with white text keeps it
+        // readable and removes the border entirely.
+        e.currentTarget.style.background = "linear-gradient(135deg, #8f6c4d 0%, #a9835f 100%)";
+        e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.2), 0 3px 8px rgba(0,0,0,0.25)";
+        e.currentTarget.style.color = "#ffffff";
+        e.currentTarget.style.borderColor = "transparent";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.background = "linear-gradient(135deg, #af8564 0%, #c9a97e 100%)";
