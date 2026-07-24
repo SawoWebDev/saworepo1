@@ -240,7 +240,11 @@ export default function SearchBar({ isNavIcon = false, isExpanded = false, isInl
             onFocus={() => setIsOpen(true)}
             onKeyDown={handleKeyDown}
             autoFocus
-            className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#af8564] focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 text-sm rounded-lg border-none outline-none focus:ring-2 focus:ring-[#af8564]"
+            style={{
+              boxShadow: "inset 0 1px 3px rgba(0,0,0,0.15), inset 0 -1px 0 rgba(255,255,255,0.6)",
+              background: "#f7f4f1",
+            }}
           />
         </div>
 
@@ -274,7 +278,11 @@ export default function SearchBar({ isNavIcon = false, isExpanded = false, isInl
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           autoFocus
-          className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#af8564] focus:border-transparent"
+          className="w-full px-4 py-2.5 text-[13px] rounded-lg border-none outline-none focus:ring-2 focus:ring-[#af8564]"
+          style={{
+            boxShadow: "inset 0 1px 3px rgba(0,0,0,0.15), inset 0 -1px 0 rgba(255,255,255,0.6)",
+            background: "#f7f4f1",
+          }}
         />
 
         {/* Dropdown Results */}

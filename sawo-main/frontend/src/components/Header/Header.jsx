@@ -687,14 +687,35 @@ export default function Header() {
                 color: #ffffff !important;
               }
               /* Same pill treatment on the language toggle and search icon —
-                 transition: none for the same reason as .menu-item above. */
-              .nav-style-style2 .header-lang-toggle,
-              .nav-style-style2 .header-icon-btn {
+                 transition: none for the same reason as .menu-item above.
+                 Lang toggle gets the exact same padding as .nav-toplevel so
+                 the two pills are visibly the same size. The search icon has
+                 no text, just an <i>, and Tailwind's text-lg utility sets a
+                 1.75rem line-height on it — taller than the glyph itself —
+                 which made its padding box read as a vertical rectangle
+                 instead of a square; fixed with an explicit flex-centered
+                 square instead of relying on padding + line-height.
+                 Scoped to [aria-label="Search"] specifically — .header-icon-btn
+                 is shared with the mobile hamburger toggle (md:hidden), and an
+                 unscoped rule here was overriding its display/sizing at every
+                 viewport width, breaking its responsive show/hide. */
+              .nav-style-style2 .header-lang-toggle {
+                padding: 7px 14px;
+                border-radius: 6px;
+                transition: none;
+              }
+              .nav-style-style2 .header-icon-btn[aria-label="Search"] {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                padding: 0;
                 border-radius: 6px;
                 transition: none;
               }
               .nav-style-style2 .header-lang-toggle:hover,
-              .nav-style-style2 .header-icon-btn:hover {
+              .nav-style-style2 .header-icon-btn[aria-label="Search"]:hover {
                 background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
                 color: #ffffff !important;
                 box-shadow:
