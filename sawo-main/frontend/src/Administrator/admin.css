@@ -474,6 +474,10 @@ body {
 .admin-main-content {
   flex: 1;
   overflow-y: auto;
+  /* Safety net: wide inner content (a table, a fixed-width chart) must only
+     ever scroll inside its own overflow-x:auto container (e.g.
+     .products-table-wrap) — never the whole page sideways. */
+  overflow-x: hidden;
   padding: 2rem 2.5rem;
   background: var(--bg);
   transition: background var(--t);
@@ -1578,6 +1582,50 @@ body {
   flex-wrap: wrap;
 }
 
+/* ── Toolbar filters row (Products/Sauna Rooms) ──────────────────────────
+   Status select + sort select + view-mode toggle + search, right-aligned.
+   Desktop layout unchanged from before; mobile behavior below turns this
+   into "3 compact controls in one row" + a search icon that expands into
+   the search input in place of those controls (see .search-open). */
+.toolbar-filters-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-left: auto;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 0;
+}
+.mobile-search-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+/* ── Logs toolbar row (summary text + Action/Type/User filters + Refresh,
+   all in one row; search gets its own row below) ─────────────────────── */
+.logs-toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.logs-toolbar-row .products-subtitle {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 /* ── View toggle ─────────────────────────────────────────────────────── */
 .view-toggle {
   display: flex;
@@ -1701,8 +1749,8 @@ body {
 /* ── Product Grid ────────────────────────────────────────────────────── */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 22px 18px;
   padding: 8px;
 }
 
@@ -1726,7 +1774,7 @@ body {
   overflow: visible;
   cursor: pointer;
   transition: border-color var(--t), background var(--t);
-  padding: 12px;
+  padding: 14px;
 }
 .product-grid-card:hover {
   background: var(--surface);
@@ -1842,12 +1890,14 @@ body {
 .product-grid-name {
   font-family: var(--font);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 13.5px;
   color: rgb(20,22,23);
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.45;
+  /* Wrap instead of ellipsis-truncating — a cut-off product/room name is
+     unreadable, and cards already have room to grow a line or two. */
+  overflow: visible;
+  white-space: normal;
+  word-wrap: break-word;
   text-align: center;
   width: 100%;
   transition: font-weight var(--t);
@@ -2554,6 +2604,15 @@ body {
   padding: 8px;
   border-radius: var(--r-sm);
   transition: background var(--t);
+  /* Now a <button> (opens the quick-preview modal instead of navigating) —
+     reset native button chrome so it still looks like the plain card it
+     was as an <a>. */
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
 }
 .products-grid-modal-card:hover { background: var(--surface-2); }
 .products-grid-modal-thumb {
@@ -2746,19 +2805,26 @@ body {
   /* ── Main content area ──────────────────────────────────────────── */
   .admin-main {
     flex: 1;
-    padding: 1.25rem 1rem 2rem;
+    /* No padding here — .admin-topbar (above, sticky) already carries the
+       page title/logo/hamburger/theme toggle, and .admin-main-content below
+       owns its own mobile padding. Padding on both used to stack, eating
+       ~110px of a phone's width before any content rendered. */
+    padding: 0;
     overflow-y: auto;
     min-height: 0;
   }
-
-  /* ── Page header ─────────────────────────────────────────────────── */
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 1rem;
+  .admin-main-content {
+    padding: 1rem 0.85rem 1.5rem;
   }
-  .page-header .btn { width: 100%; justify-content: center; }
+
+  /* ── Page header — hidden on mobile ──────────────────────────────────
+     .admin-topbar (the sticky mobile bar) already shows the page title,
+     hamburger, logo, and theme toggle. Showing this full icon+title+
+     description header underneath it was pure duplication that ate
+     vertical space for no reason. */
+  .page-header {
+    display: none;
+  }
 
   /* ── Products / Users header ─────────────────────────────────────── */
   .products-header {
@@ -2787,6 +2853,87 @@ body {
     flex: 1 1 130px;
   }
 
+  /* ── Toolbar filters row — status + sort + view-toggle stay in ONE
+     compact row; the search input is hidden by default and swapped for
+     just an icon button, which expands the input in place of the other
+     controls when tapped (.search-open). ─────────────────────────────── */
+  .toolbar-filters-row {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  .toolbar-filters-row .filter-select {
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 0.72rem;
+    padding: 6px 8px;
+  }
+  .toolbar-filters-row .tax-tabs {
+    flex-shrink: 0;
+  }
+  .mobile-search-toggle {
+    display: flex;
+  }
+  .toolbar-filters-row .search-wrap {
+    display: none;
+  }
+  .toolbar-filters-row.search-open > *:not(.mobile-search-toggle):not(.search-wrap) {
+    display: none;
+  }
+  .toolbar-filters-row.search-open .search-wrap {
+    display: flex;
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  /* ── Logs toolbar row — compact selects, icon-only Refresh, and (as a
+     fallback for the narrowest phones, where 3 selects + summary text +
+     a button genuinely can't all shrink further) horizontal scroll rather
+     than an overlapping/broken layout. ─────────────────────────────────── */
+  .logs-toolbar-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .logs-toolbar-row .products-subtitle {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .logs-toolbar-row .filter-select {
+    flex: 0 0 auto;
+    min-width: 0;
+    font-size: 0.72rem;
+    padding: 6px 8px;
+  }
+  .logs-toolbar-row .btn {
+    flex-shrink: 0;
+  }
+  .btn-label-full {
+    display: none;
+  }
+
+  /* ── Users page: Add User to the very top, above the filter row —
+     order alone (no DOM change) so desktop's right-aligned placement is
+     untouched. ──────────────────────────────────────────────────────── */
+  .add-user-btn {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    margin-left: 0 !important;
+    margin-bottom: 8px;
+  }
+
+  /* ── Sauna Heaters / Accessories subcategory pills — wrap into a pill
+     grid instead of horizontal-scrolling like the generic .tax-tabs; there
+     can be a dozen+ of these (Pails, Ladles, …) and scrolling sideways to
+     find one is worse than just letting them stack. ───────────────────── */
+  .subcat-pills {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    padding-bottom: 0 !important;
+  }
+
   /* ── View toggle — push to end of filter group ───────────────────── */
   .view-toggle { margin-left: auto; }
 
@@ -2795,8 +2942,15 @@ body {
   .card .admin-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   /* ── Product grid — tighter on small screens ─────────────────────── */
+  /* auto-fill + minmax (same philosophy as .model-grid, which never has
+     this problem) — the browser recalculates how many columns actually fit
+     as the viewport shrinks, instead of a hard-coded column count forcing
+     cards to squeeze/overlap below the width they need. 165px keeps cards
+     big enough to read on mobile; naturally settles to 1 column on the
+     narrowest phones and 2 once there's room, with no separate breakpoint
+     needed for that. */
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
     gap: 12px 10px;
     padding: 6px;
   }
@@ -2848,13 +3002,11 @@ body {
    ─────────────────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
 
-  .admin-main { padding: 1rem 0.75rem 2.5rem; }
+  .admin-main-content { padding: 0.85rem 0.65rem 2rem; }
 
-  /* 2-column grids on very small screens */
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 8px;
-  }
+  /* .product-grid intentionally NOT overridden here — its auto-fill +
+     minmax(165px,1fr) from the 768px block already settles to the right
+     column count on its own as the viewport keeps shrinking. */
   .tax-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
@@ -2865,18 +3017,20 @@ body {
 
   /* Toolbar: stack search + each filter */
   .filter-select { width: 100%; flex: 1 1 100%; }
+  /* ...except inside the compact 3-control row, which must stay one row
+     even on the smallest phones. */
+  .toolbar-filters-row .filter-select { width: auto; flex: 1 1 0; }
 
-  /* Buttons in page header stack full-width */
-  .products-header > *,
-  .page-header > * { width: 100%; }
-  .products-header .btn,
-  .page-header .btn { justify-content: center; }
+  /* Buttons in products header stack full-width — .page-header is hidden
+     entirely below 768px (see that breakpoint), so no rule needed for it. */
+  .products-header > * { width: 100%; }
+  .products-header .btn { justify-content: center; }
 
   /* Page title sizing */
-  .page-title { font-size: 1.15rem; }
   .products-title { font-size: 1.05rem; }
 
   /* Modal padding reduction */
   .modal-body { padding: 14px 14px 18px; }
   .modal-header { padding: 12px 14px; }
 }
+

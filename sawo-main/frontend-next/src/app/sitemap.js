@@ -1,13 +1,14 @@
-import { routing, pathnames } from '@/translation/routing';
+import { routing } from '@/translation/routing';
 import { getPathname } from '@/translation/navigation';
 import { SITE_URL } from '@/lib/seo/alternates';
+import { BUILT_ROUTES } from '@/lib/routes/built';
 
-// Static routes only for now — product/accessory/sauna-room slugs get added
-// once the Supabase-backed [slug] pages exist (see Phase 0 remaining work).
+// Only routes with an actual page.jsx (BUILT_ROUTES) — routing.js `pathnames`
+// declares ~40 routes for the whole eventual site, most not built yet;
+// enumerating all of them here would emit sitemap URLs that 404.
+// Product/accessory/sauna-room slugs get added once those [slug] pages exist.
 export default function sitemap() {
-  const staticPaths = Object.keys(pathnames).filter((p) => !p.includes('['));
-
-  return staticPaths.map((pathname) => {
+  return BUILT_ROUTES.map((pathname) => {
     const languages = {};
     for (const locale of routing.locales) {
       languages[locale] = `${SITE_URL}${getPathname({ locale, href: pathname })}`;

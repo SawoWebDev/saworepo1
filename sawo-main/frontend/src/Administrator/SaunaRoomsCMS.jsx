@@ -833,8 +833,439 @@ function RoomAuditStrip({ room }) {
   );
 }
 
+// ─── Room Preview Modal ─────────────────────────────────────────────────────
+// Ported from Products.jsx's ProductPreviewModal (see that file for the
+// original) — same read-only detail view + Visit URL/Edit footer, adapted
+// to the room object's field names. Rooms have no local_-prefixed fields
+// (unlike products), so the resolve helpers are simpler.
+function previewRoomResolveUrl(pathOrUrl) {
+  if (!pathOrUrl) return null;
+  if (String(pathOrUrl).includes("://")) return pathOrUrl;
+  return `${PREVIEW_GITHUB_RAW}${pathOrUrl}`;
+}
+function previewRoomImgsArr(room, field) {
+  const arr = room?.[field];
+  if (!Array.isArray(arr)) return [];
+  return arr.map(previewRoomResolveUrl).filter(Boolean);
+}
+function previewRoomGetFiles(room) {
+  return (room?.files || []).map(f => ({ name: f.name, url: f.path ? previewRoomResolveUrl(f.path) : f.url }));
+}
+function cleanRoomPreviewHTML(html) {
+  if (!html) return "";
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+  temp.querySelectorAll("*").forEach(el => el.removeAttribute("style"));
+  return temp.innerHTML;
+}
+function RoomPreviewSectionLabel({ text }) {
+  return (
+    <h3 style={{
+      fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+      fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase",
+      color: "#8b5e3c", margin: "0 0 10px", display: "flex", alignItems: "center", gap: 6,
+    }}>
+      {text}
+    </h3>
+  );
+}
+function RoomPreviewLightbox({ images, startIndex, onClose }) {
+  const [idx, setIdx] = useState(startIndex);
+  const [scale, setScale] = useState(1);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
+  const dragStart = useRef(null);
+
+  const prev = useCallback(() => { setIdx(i => (i - 1 + images.length) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
+  const next = useCallback(() => { setIdx(i => (i + 1) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
+
+  useEffect(() => {
+    const h = e => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    document.addEventListener("keydown", h);
+    return () => document.removeEventListener("keydown", h);
+  }, [onClose, prev, next]);
+
+  const handleWheel = e => { e.preventDefault(); setScale(s => Math.min(Math.max(s - e.deltaY * 0.001, 1), 4)); };
+  const handleMouseDown = e => { if (scale <= 1) return; setDragging(true); dragStart.current = { x: e.clientX - offset.x, y: e.clientY - offset.y }; };
+  const handleMouseMove = e => { if (!dragging || !dragStart.current) return; setOffset({ x: e.clientX - dragStart.current.x, y: e.clientY - dragStart.current.y }); };
+  const handleMouseUp = () => setDragging(false);
+
+  return (
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 20000, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <button onClick={onClose} style={{ position: "absolute", top: 18, right: 18, background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <i className="fa-solid fa-xmark" />
+      </button>
+      {images.length > 1 && (
+        <div style={{ position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.12)", color: "#fff", padding: "4px 14px", borderRadius: 20, fontSize: "0.72rem", fontWeight: 600, fontFamily: "'Montserrat',sans-serif" }}>
+          {idx + 1} / {images.length}
+        </div>
+      )}
+      <div style={{ position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)", padding: "4px 14px", borderRadius: 20, fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", pointerEvents: "none" }}>
+        Scroll to zoom · Drag to pan · Esc to close
+      </div>
+      {images.length > 1 && (
+        <>
+          {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
+            <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{ position: "absolute", [side]: 16, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%", width: 44, height: 44, cursor: "pointer", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", zIndex: 10 }}>
+              <i className={`fa-solid ${icon}`} />
+            </button>
+          ))}
+        </>
+      )}
+      <div onClick={e => e.stopPropagation()} onWheel={handleWheel} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} style={{ maxWidth: "88vw", maxHeight: "88vh", cursor: scale > 1 ? (dragging ? "grabbing" : "grab") : "default", userSelect: "none" }}>
+        <img src={images[idx]} alt="" style={{ maxWidth: "88vw", maxHeight: "88vh", objectFit: "contain", borderRadius: 10, transform: `scale(${scale}) translate(${offset.x / scale}px, ${offset.y / scale}px)`, transition: dragging ? "none" : "transform 0.15s ease", display: "block" }} />
+      </div>
+      {images.length > 1 && (
+        <div style={{ position: "absolute", bottom: 52, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 6 }} onClick={e => e.stopPropagation()}>
+          {images.map((url, i) => (
+            <button key={i} onClick={() => { setIdx(i); setScale(1); setOffset({ x: 0, y: 0 }); }} style={{ width: 44, height: 44, borderRadius: 6, overflow: "hidden", border: `2px solid ${i === idx ? "#a67853" : "rgba(255,255,255,0.25)"}`, background: "rgba(0,0,0,0.4)", cursor: "pointer", padding: 0 }}>
+              <img src={url} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }} />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+function RoomPreviewCarousel({ images, thumbnail, onImageClick }) {
+  const all = [...(thumbnail ? [thumbnail] : []), ...(images || []).filter(u => u !== thumbnail)].filter(Boolean);
+  const [idx, setIdx] = useState(0);
+  const [err, setErr] = useState({});
+
+  if (!all.length) return (
+    <div style={{ width: "100%", aspectRatio: "1/1", background: "#faf7f4", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #edddd0" }}>
+      <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
+    </div>
+  );
+
+  const prev = () => setIdx(i => (i - 1 + all.length) % all.length);
+  const next = () => setIdx(i => (i + 1) % all.length);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <div style={{ position: "relative", aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center", cursor: "zoom-in" }} onClick={() => onImageClick(all, idx)}>
+        {!err[idx] && (
+          <img key={idx} src={all[idx]} alt="" onError={() => setErr(e => ({ ...e, [idx]: true }))} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", width: "100%", height: "100%" }} />
+        )}
+        {err[idx] && <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />}
+        {all.length > 1 && (
+          <>
+            {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
+              <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{ position: "absolute", [side]: 10, top: "50%", transform: "translateY(-50%)", background: "transparent", border: "none", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#a67853" }}
+                onMouseEnter={e => { e.currentTarget.style.color = "#8b5e3c"; e.currentTarget.style.transform = "translateY(-50%) scale(1.15)"; }}
+                onMouseLeave={e => { e.currentTarget.style.color = "#a67853"; e.currentTarget.style.transform = "translateY(-50%)"; }}
+              >
+                <i className={`fa-solid ${icon}`} style={{ fontSize: "1.2rem" }} />
+              </button>
+            ))}
+            <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5 }}>
+              {all.map((_, i) => (
+                <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }} style={{ width: i === idx ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none", cursor: "pointer", transition: "all 0.22s", background: i === idx ? "#a67853" : "rgba(139,94,60,0.25)" }} />
+              ))}
+            </div>
+            <span style={{ position: "absolute", top: 10, right: 10, background: "rgba(44,26,14,0.55)", color: "#fff", fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, padding: "2px 8px", borderRadius: 20 }}>
+              {idx + 1} / {all.length}
+            </span>
+          </>
+        )}
+      </div>
+      {all.length > 1 && (
+        <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 2 }}>
+          {all.map((url, i) => (
+            <button key={i} onClick={() => setIdx(i)} style={{ flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden", border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`, background: "#faf7f4", cursor: "pointer", padding: 0 }}>
+              {!err[i] && <img src={url} alt="" onError={() => setErr(e => ({ ...e, [i]: true }))} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }} />}
+              {err[i] && <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "1rem" }} />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+function RoomPreviewCompactSpecImages({ images, onImageClick }) {
+  const [idx, setIdx] = useState(0);
+  if (!images?.length) return null;
+  const single = images.length === 1;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", minHeight: 100 }} onClick={() => onImageClick(images, idx)}>
+        <img key={idx} src={images[idx]} alt="" style={{ width: "100%", objectFit: "contain", display: "block" }} />
+        {!single && (
+          <>
+            <span style={{ position: "absolute", top: 4, right: 4, background: "rgba(44,26,14,0.45)", color: "#fff", fontSize: "0.6rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, padding: "2px 7px", borderRadius: 20, pointerEvents: "none" }}>
+              {idx + 1} / {images.length}
+            </span>
+            {[{ fn: () => setIdx(i => (i - 1 + images.length) % images.length), side: "left", icon: "fa-chevron-left" }, { fn: () => setIdx(i => (i + 1) % images.length), side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
+              <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{ position: "absolute", [side]: 2, top: "50%", transform: "translateY(-50%)", background: "transparent", border: "none", width: 26, height: 26, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#a67853" }}>
+                <i className={`fa-solid ${icon}`} style={{ fontSize: "0.9rem" }} />
+              </button>
+            ))}
+          </>
+        )}
+      </div>
+      {!single && (
+        <div style={{ display: "flex", gap: 5, overflowX: "auto", paddingBottom: 2 }}>
+          {images.map((url, i) => (
+            <button key={i} onClick={() => setIdx(i)} style={{ flexShrink: 0, width: 40, height: 40, borderRadius: 6, overflow: "hidden", border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`, background: "transparent", cursor: "pointer", padding: 0 }}>
+              <img src={url} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }} />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+function RoomPreviewResourcesPanel({ files }) {
+  const [expanded, setExpanded] = useState(false);
+  if (!files?.length) return null;
+  const isMultiple = files.length > 1;
+
+  if (!isMultiple) {
+    return (
+      <div>
+        {files.map((f, i) => (
+          <a key={i} href={f.url} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", background: "#faf7f4", borderRadius: 10, border: "1px solid #edddd0", color: "#2c1a0e", textDecoration: "none", fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem", transition: "all 0.2s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#f5ede3"; e.currentTarget.style.borderColor = "#d4b896"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "#faf7f4"; e.currentTarget.style.borderColor = "#edddd0"; }}
+          >
+            <div style={{ width: 40, height: 40, borderRadius: 9, background: "linear-gradient(135deg,#8b5e3c,#a67853)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <i className="fa-solid fa-file-pdf" style={{ color: "#fff", fontSize: "1rem" }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 700, fontSize: "0.82rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</div>
+              <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>PDF · Click to open</div>
+            </div>
+            <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0 }} />
+          </a>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <button onClick={() => setExpanded(!expanded)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", background: "#faf7f4", borderRadius: expanded ? "10px 10px 0 0" : 10, border: "1px solid #edddd0", color: "#2c1a0e", cursor: "pointer", fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem", fontWeight: 700, width: "100%", transition: "all 0.2s" }}
+        onMouseEnter={e => { e.currentTarget.style.background = "#f5ede3"; }}
+        onMouseLeave={e => { e.currentTarget.style.background = "#faf7f4"; }}
+      >
+        <div style={{ width: 40, height: 40, borderRadius: 9, background: "linear-gradient(135deg,#8b5e3c,#a67853)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <i className="fa-solid fa-file-pdf" style={{ color: "#fff", fontSize: "0.9rem" }} />
+        </div>
+        <div style={{ flex: 1, textAlign: "left" }}>
+          <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e" }}>{files.length} Documents</div>
+          <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>Click to {expanded ? "collapse" : "expand"}</div>
+        </div>
+        <i className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`} style={{ color: "#a67853", fontSize: "0.7rem" }} />
+      </button>
+      {expanded && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: "10px 0", border: "1px solid #edddd0", borderTop: "none", borderRadius: "0 0 10px 10px" }}>
+          {files.map((f, i) => (
+            <a key={i} href={f.url} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 14, padding: "10px 14px", background: "#fdf8f5", borderRadius: 8, color: "#2c1a0e", textDecoration: "none", fontFamily: "'Montserrat',sans-serif", fontSize: "0.80rem", marginLeft: 8, transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#f5ede3"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#fdf8f5"; }}
+            >
+              <i className="fa-solid fa-file-pdf" style={{ color: "#a67853", fontSize: "0.85rem", flexShrink: 0 }} />
+              <div style={{ flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</div>
+              <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.65rem", flexShrink: 0 }} />
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RoomPreviewModal({ room, onClose, onEdit, liveUrl, dataSource }) {
+  const [lightbox, setLightbox] = useState(null);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  useEffect(() => {
+    const h = e => { if (e.key === "Escape" && !lightbox) onClose(); };
+    document.addEventListener("keydown", h);
+    return () => document.removeEventListener("keydown", h);
+  }, [onClose, lightbox]);
+
+  const thumb      = getRoomImageUrl(room, "thumbnail", dataSource);
+  const images     = previewRoomImgsArr(room, "images");
+  const specImages = previewRoomImgsArr(room, "spec_images");
+  const files       = previewRoomGetFiles(room);
+
+  const hasShortDesc = !!room.short_description;
+  const hasDesc      = !!room.description;
+  const hasFeatures  = (room.features || []).length > 0;
+  const hasSpec      = specImages.length > 0;
+  const hasResources = files.length > 0;
+  const cats         = room.categories || [];
+  const tags         = room.tags || [];
+  const hasMeta      = cats.length > 0 || tags.length > 0;
+  const roomTypeLabel = ROOM_TYPES.find(t => t.value === room.room_type)?.label || room.room_type;
+
+  const openLightbox = (imgs, i) => setLightbox({ images: imgs, index: i });
+
+  return (
+    <div
+      style={{ position: "fixed", inset: 0, zIndex: 10002, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "flex-start", justifyContent: "center", overflowY: "auto", padding: "40px 16px 60px" }}
+      onClick={onClose}
+    >
+      <style>{`
+        @keyframes rpmPreviewFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .rpm-preview-modal { animation: rpmPreviewFade 0.2s ease; }
+        @media(max-width:720px) { .rpm-preview-s1 { grid-template-columns: 1fr !important; gap: 20px !important; } }
+      `}</style>
+
+      <div
+        className="rpm-preview-modal"
+        style={{ background: "#fff", borderRadius: 14, boxShadow: "0 24px 64px rgba(0,0,0,0.28)", width: "100%", maxWidth: 1060, position: "relative", fontFamily: "'Montserrat',sans-serif", overflow: "hidden" }}
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", background: "#faf7f4", borderBottom: "1px solid #edddd0" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
+            <i className="fa-solid fa-eye" style={{ color: "#a67853", fontSize: "0.85rem", flexShrink: 0 }} />
+            <span style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{room.name}</span>
+            <span style={{ fontSize: "0.7rem", color: "#a67853", background: "rgba(166,120,83,0.1)", padding: "2px 8px", borderRadius: 20, flexShrink: 0 }}>Preview</span>
+          </div>
+          <button onClick={onClose} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#8b5e3c", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: "50%", transition: "background 0.15s", flexShrink: 0 }}
+            onMouseEnter={e => e.currentTarget.style.background = "rgba(139,94,60,0.1)"}
+            onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+          >
+            <i className="fa-solid fa-xmark" />
+          </button>
+        </div>
+
+        {/* Section 1: Images + Info */}
+        <div style={{ padding: "28px 32px 24px" }}>
+          <div className="rpm-preview-s1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "center" }}>
+
+            {/* Left: Carousel + Resources (only when Diagram also exists) */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <RoomPreviewCarousel images={images} thumbnail={thumb} onImageClick={openLightbox} />
+              {hasResources && hasSpec && (
+                <div>
+                  <RoomPreviewSectionLabel text="Resources" />
+                  <RoomPreviewResourcesPanel files={files} />
+                </div>
+              )}
+            </div>
+
+            {/* Right: Type/Model, Name, Short Desc, Features, Diagram, Resources (if no Diagram) */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              {(roomTypeLabel || room.model_code) && (
+                <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#a67853", margin: 0 }}>
+                  {[roomTypeLabel, room.model_code].filter(Boolean).join(" · ")}
+                </p>
+              )}
+              <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "clamp(1.1rem,2vw,1.5rem)", color: "#2c1a0e", margin: 0, lineHeight: 1.2 }}>
+                {room.name}
+              </h2>
+              {hasShortDesc && (
+                <div style={{ paddingBottom: 16, borderBottom: "1px solid #edddd0" }}>
+                  <div style={{ fontSize: "0.82rem", color: "#7a5c45", lineHeight: 1.6, whiteSpace: "pre-wrap", wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: cleanRoomPreviewHTML(room.short_description) }} />
+                </div>
+              )}
+              {hasFeatures && (
+                <div>
+                  <RoomPreviewSectionLabel text="Features" />
+                  <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 5 }}>
+                    {room.features.map((f, i) => (
+                      <li key={i} style={{ color: "#5a4030", fontSize: "0.78rem", lineHeight: 1.4, display: "flex", alignItems: "flex-start", gap: 7 }}>
+                        <i className="fa-solid fa-check" style={{ color: "#a67853", fontSize: "0.68rem", marginTop: 4, flexShrink: 0 }} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {hasSpec && (
+                <div>
+                  <RoomPreviewSectionLabel text="Diagram" />
+                  <RoomPreviewCompactSpecImages images={specImages} onImageClick={openLightbox} />
+                </div>
+              )}
+              {hasResources && !hasSpec && (
+                <div>
+                  <RoomPreviewSectionLabel text="Resources" />
+                  <RoomPreviewResourcesPanel files={files} />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Section 2: Full Description */}
+        {hasDesc && (
+          <>
+            <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 32px" }} />
+            <div style={{ padding: "20px 32px" }}>
+              <RoomPreviewSectionLabel text="Specifications" />
+              <div style={{ color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: cleanRoomPreviewHTML(room.description) }} />
+            </div>
+          </>
+        )}
+
+        {/* Categories + Tags */}
+        {hasMeta && (
+          <>
+            <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 32px" }} />
+            <div style={{ padding: "20px 32px 32px", display: "flex", flexDirection: "column", gap: 16 }}>
+              {cats.length > 0 && (
+                <div>
+                  <RoomPreviewSectionLabel text="Categories" />
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {cats.map(c => (
+                      <span key={c} style={{ padding: "4px 12px", background: "rgba(166,120,83,0.12)", color: "#7a5234", borderRadius: 20, fontSize: "0.73rem", fontWeight: 600, border: "1px solid rgba(166,120,83,0.25)" }}>{c}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {tags.length > 0 && (
+                <div>
+                  <RoomPreviewSectionLabel text="Tags" />
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                    {tags.map(t => (
+                      <span key={t} style={{ padding: "3px 10px", background: "rgba(139,94,60,0.08)", color: "#6b4c30", borderRadius: 20, fontSize: "0.70rem", border: "1px solid rgba(139,94,60,0.18)", wordBreak: "break-word" }}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* Footer: Visit URL + Edit */}
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, padding: "16px 32px", borderTop: "1px solid #edddd0", background: "#faf7f4" }}>
+          {liveUrl && (
+            <a href={liveUrl} target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#7a5234", background: "transparent", border: "1px solid rgba(166,120,83,0.35)", borderRadius: 6, textDecoration: "none" }}>
+              <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.75rem" }} /> Visit URL
+            </a>
+          )}
+          {onEdit && (
+            <button type="button" onClick={onEdit}
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#fff", background: "#a67853", border: "none", borderRadius: 6, cursor: "pointer" }}>
+              <i className="fa-solid fa-pen" style={{ fontSize: "0.75rem" }} /> Edit
+            </button>
+          )}
+        </div>
+      </div>
+
+      {lightbox && (
+        <RoomPreviewLightbox images={lightbox.images} startIndex={lightbox.index} onClose={() => setLightbox(null)} />
+      )}
+    </div>
+  );
+}
+
 // ─── Room Card (Grid view) ────────────────────────────────────────────────────
-function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
+function RoomCard({ room, onEdit, onDelete, onDuplicate, onPreview, perms, dataSource }) {
   const [hovered, setHovered]   = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
@@ -846,14 +1277,15 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
     return () => document.removeEventListener("mousedown", h);
   }, [menuOpen]);
 
-  const roomUrl = `${FRONT_URL || window.location.origin}/sauna/rooms/${room.slug}`;
   const showMenu = hovered && (perms.can("sauna_rooms.edit") || perms.can("sauna_rooms.duplicate") || perms.can("sauna_rooms.delete"));
   const isUnpublished = room.status === "draft" || room.visible === false;
 
   return (
-    <a href={roomUrl} target="_blank" rel="noopener noreferrer"
+    <div role="button" tabIndex={0}
+      onClick={() => onPreview(room)}
+      onKeyDown={e => { if (e.key === "Enter") onPreview(room); }}
       className={`product-grid-card${isUnpublished ? " is-unpublished" : ""}`}
-      style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column" }}
+      style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: "pointer" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}
     >
@@ -864,7 +1296,7 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
           : <i className="fa-regular fa-image" style={{ fontSize: "1.5rem", color: "var(--border)" }} />
         }
         {showMenu && (
-          <div className="product-grid-options" ref={menuRef} onClick={e => e.preventDefault()}>
+          <div className="product-grid-options" ref={menuRef} onClick={e => e.stopPropagation()}>
             <button type="button" className="product-grid-opts-btn"
               onClick={e => { e.preventDefault(); e.stopPropagation(); setMenuOpen(m => !m); }}>
               <i className="fa-solid fa-ellipsis-vertical" />
@@ -893,7 +1325,7 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
       </div>
       <div className="product-grid-info">
         <div className="product-grid-name">{room.name}</div>
-        <div style={{ fontSize: "0.72rem", color: "var(--text-3)", marginTop: 2 }}>
+        <div style={{ fontSize: "0.72rem", color: "var(--text-3)", marginTop: 2, textAlign: "center" }}>
           {[room.room_type, room.model_code].filter(Boolean).join(" · ")}
         </div>
         {(room.categories || []).length > 0 && (
@@ -908,7 +1340,7 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, perms, dataSource }) {
           </div>
         )}
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -928,6 +1360,7 @@ export default function SaunaRooms({ currentUser }) {
   const [dataSource, setDataSource] = useState("local");
 
   const [search,       setSearch]       = useState("");
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState("");
   const [filterType,   setFilterType]   = useState("");
   const [sortDir,      setSortDir]      = useState("desc");
@@ -949,6 +1382,7 @@ export default function SaunaRooms({ currentUser }) {
   const pendingClose = useRef(null);
 
   const [confirmDel, setConfirmDel] = useState(null);
+  const [previewRoom, setPreviewRoom] = useState(null);
 
   const [upThumb, setUpThumb] = useState(false);
   const [upImgs,  setUpImgs]  = useState(false);
@@ -1577,7 +2011,7 @@ export default function SaunaRooms({ currentUser }) {
           ))}
         </div>
 
-        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "nowrap", marginLeft: "auto", flex: "1 1 auto", justifyContent: "flex-end", minWidth: 0 }}>
+        <div className={`toolbar-filters-row${mobileSearchOpen ? " search-open" : ""}`}>
           <select className="filter-select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
             <option value="">All Status</option>
             <option value="published">Published</option>
@@ -1602,6 +2036,11 @@ export default function SaunaRooms({ currentUser }) {
               <i className="fa-solid fa-trash" /> Delete {selected.size}
             </button>
           )}
+          <button type="button" className="mobile-search-toggle"
+            onClick={() => setMobileSearchOpen(o => !o)}
+            aria-label={mobileSearchOpen ? "Close search" : "Open search"}>
+            <i className={`fa-solid ${mobileSearchOpen ? "fa-xmark" : "fa-magnifying-glass"}`} />
+          </button>
           <div className="search-wrap">
             <i className="fa-solid fa-magnifying-glass" />
             <input className="search-input" value={search} onChange={e => setSearch(e.target.value)}
@@ -1619,7 +2058,7 @@ export default function SaunaRooms({ currentUser }) {
             </div>
           )}
           {filtered.map(r => (
-            <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} perms={perms} dataSource={dataSource} />
+            <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} onPreview={setPreviewRoom} perms={perms} dataSource={dataSource} />
           ))}
         </div>
       )}
@@ -1674,7 +2113,10 @@ export default function SaunaRooms({ currentUser }) {
                       }
                     </td>
                     <td>
-                      <a href={`${FRONT_URL}/sauna/rooms/${r.slug}`} target="_blank" rel="noopener noreferrer" className="product-name-link">{r.name}</a>
+                      <button type="button" className="product-name-link" onClick={() => setPreviewRoom(r)}
+                        style={{ background: "none", border: "none", padding: 0, cursor: "pointer", textAlign: "left" }}>
+                        {r.name}
+                      </button>
                       <div className="product-meta">
                         {r.sku && <span className="product-meta-tag"><i className="fa-solid fa-barcode" style={{ marginRight: 3 }} />{r.sku}</span>}
                         {r.featured      && <span className="product-meta-tag featured"><i className="fa-solid fa-star" style={{ marginRight: 3 }} />Featured</span>}
@@ -1696,6 +2138,7 @@ export default function SaunaRooms({ currentUser }) {
                     <td style={{ fontSize: "0.75rem", color: "var(--text-2)" }}>{r.created_by_username ? `@${r.created_by_username}` : "-"}</td>
                     <td style={{ textAlign: "right" }}>
                       <div className="table-actions">
+                        <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewRoom(r)} />
                         {perms.can("sauna_rooms.edit")      && dataSource === "live" && <IconBtn icon="fa-pen"   title="Edit"      onClick={() => openEdit(r)} />}
                         {perms.can("sauna_rooms.duplicate") && dataSource === "live" && <IconBtn icon="fa-copy"  title="Duplicate" onClick={() => openDuplicate(r)} />}
                         {perms.can("sauna_rooms.delete")    && dataSource === "live" && <IconBtn icon="fa-trash" title="Delete"    onClick={() => setConfirmDel(r)} danger />}
@@ -2063,6 +2506,16 @@ export default function SaunaRooms({ currentUser }) {
         onApply={handleApplySyncChanges}
         applying={syncCheckApplying}
       />
+
+      {previewRoom && (
+        <RoomPreviewModal
+          room={previewRoom}
+          dataSource={dataSource}
+          onClose={() => setPreviewRoom(null)}
+          onEdit={() => { const r = previewRoom; setPreviewRoom(null); openEdit(r); }}
+          liveUrl={`${FRONT_URL || window.location.origin}/sauna/rooms/${previewRoom.slug}`}
+        />
+      )}
     </div>
   );
 }

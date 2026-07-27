@@ -1,12 +1,13 @@
 // src/Administrator/Products.jsx
 import React, { useEffect, useState, useCallback, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
-import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive } from "../local-storage/supabaseReader";
+import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, getProductBySlugLive } from "../local-storage/supabaseReader";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
-import { isAccessoryProduct } from "../pages/IndividualDisplay/DispAccessories";
+import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDisplay/DispAccessories";
 import { getCache, setCache } from "./adminCache";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
@@ -94,7 +95,8 @@ function formsEqual(a, b) {
 // Matches the real products schema (no "model" column — use type for that).
 const EMPTY_FORM = {
   name: "", slug: "", short_description: "", description: "",
-  thumbnail: "", images: [], spec_images: [], files: [],
+  thumbnail: "", images: [], spec_images: [], files: [], variants: [],
+  spec_table: null,
   categories: [], tags: [], features: [],
   brand: "SAWO", type: "",
   capacity_liters: "", variant_type: "", product_family: "", parent_product_id: "",
@@ -608,6 +610,7 @@ function RichField({ label, value, onChange, rows = 6, onNotify }) {
 function TagSuggestions({ name, description, features = [], currentTags, allTags, onAddTags }) {
   // Find tags that appear in name, description, or features
   const suggestedTags = allTags.filter(tag => {
+    if (typeof tag !== "string") return false; // Guard against non-string entries
     if (currentTags.includes(tag)) return false; // Already added
     const nameLower = (name || "").toLowerCase();
     const descLower = (description || "").toLowerCase();
@@ -736,7 +739,10 @@ function Toggle({ label, checked, onChange, helper }) {
 function PillInput({ label, value = [], onChange, placeholder, suggestions = [] }) {
   const [input, setInput]     = useState("");
   const [showSug, setShowSug] = useState(false);
-  const filtered = suggestions.filter(s => s.toLowerCase().includes(input.toLowerCase()) && !value.includes(s)).slice(0, 8);
+  const filtered = suggestions
+    .filter(s => typeof s === "string")
+    .filter(s => s.toLowerCase().includes(input.toLowerCase()) && !value.includes(s))
+    .slice(0, 8);
   const add = v => { const t = v.trim(); if (!t || value.includes(t)) return; onChange([...value, t]); setInput(""); setShowSug(false); };
   const remove = i => onChange(value.filter((_, idx) => idx !== i));
   const handleKey = e => {
@@ -1741,28 +1747,59 @@ function PreviewLightbox({ images, startIndex, onClose }) {
   );
 }
 
-function PreviewCarousel({ images, thumbnail, onImageClick }) {
+// activeIndex/onIndexChange make the displayed image controllable from a
+// parent (e.g. a variant-color swatch) — when passed, they REPLACE internal
+// state entirely so there's one single source of truth for "which image is
+// showing", instead of a separate effect trying to reconcile two states
+// (which is what let the carousel's own thumbnail clicks silently fall out
+// of sync with the swatches). Falls back to internal state when omitted.
+//
+// videoUrl, if given, is one more slide appended after all images — its
+// slot is index `all.length` (never a real array entry, just a virtual
+// position both idx and the thumbnail strip understand).
+function PreviewCarousel({ images, thumbnail, onImageClick, activeIndex, onIndexChange, videoUrl }) {
   const all = [...(thumbnail ? [thumbnail] : []), ...(images || []).filter(u => u !== thumbnail)].filter(Boolean);
-  const [idx, setIdx] = useState(0);
+  const total = all.length + (videoUrl ? 1 : 0);
+  const [internalIdx, setInternalIdx] = useState(0);
+  const controlled = activeIndex !== undefined && !!onIndexChange;
+  const idx    = controlled ? activeIndex   : internalIdx;
+  const setIdx = controlled ? onIndexChange : setInternalIdx;
   const [err, setErr] = useState({});
+  const onVideo = videoUrl && idx === all.length;
 
-  if (!all.length) return (
+  if (!total) return (
     <div style={{ width: "100%", aspectRatio: "1/1", background: "#faf7f4", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #edddd0" }}>
       <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
     </div>
   );
 
-  const prev = () => setIdx(i => (i - 1 + all.length) % all.length);
-  const next = () => setIdx(i => (i + 1) % all.length);
+  const prev = () => setIdx(i => (i - 1 + total) % total);
+  const next = () => setIdx(i => (i + 1) % total);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      <div style={{ position: "relative", aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center", cursor: "zoom-in" }} onClick={() => onImageClick(all, idx)}>
-        {!err[idx] && (
-          <img key={idx} src={all[idx]} alt="" onError={() => setErr(e => ({ ...e, [idx]: true }))} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", width: "100%", height: "100%" }} />
+      <div style={{ position: "relative", aspectRatio: "1/1", width: "100%", overflow: "hidden", borderRadius: 14, background: "#faf7f4", display: "flex", alignItems: "center", justifyContent: "center", cursor: onVideo ? "default" : "zoom-in" }} onClick={() => !onVideo && onImageClick(all, idx)}>
+        {onVideo ? (
+          <video
+            src={videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            // "contain", not "cover" — a vertical video must not be cropped
+            // to fill the square box; it letterboxes instead, fitting
+            // whatever the source resolution actually is.
+            style={{ maxWidth: "100%", maxHeight: "100%", width: "100%", height: "100%", objectFit: "contain" }}
+          />
+        ) : (
+          <>
+            {!err[idx] && (
+              <img key={idx} src={all[idx]} alt="" onError={() => setErr(e => ({ ...e, [idx]: true }))} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", width: "100%", height: "100%" }} />
+            )}
+            {err[idx] && <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />}
+          </>
         )}
-        {err[idx] && <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />}
-        {all.length > 1 && (
+        {total > 1 && (
           <>
             {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
               <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{ position: "absolute", [side]: 10, top: "50%", transform: "translateY(-50%)", background: "transparent", border: "none", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#a67853" }}
@@ -1773,17 +1810,17 @@ function PreviewCarousel({ images, thumbnail, onImageClick }) {
               </button>
             ))}
             <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5 }}>
-              {all.map((_, i) => (
+              {Array.from({ length: total }).map((_, i) => (
                 <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }} style={{ width: i === idx ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none", cursor: "pointer", transition: "all 0.22s", background: i === idx ? "#a67853" : "rgba(139,94,60,0.25)" }} />
               ))}
             </div>
             <span style={{ position: "absolute", top: 10, right: 10, background: "rgba(44,26,14,0.55)", color: "#fff", fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", fontWeight: 600, padding: "2px 8px", borderRadius: 20 }}>
-              {idx + 1} / {all.length}
+              {idx + 1} / {total}
             </span>
           </>
         )}
       </div>
-      {all.length > 1 && (
+      {total > 1 && (
         <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 2 }}>
           {all.map((url, i) => (
             <button key={i} onClick={() => setIdx(i)} style={{ flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden", border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`, background: "#faf7f4", cursor: "pointer", padding: 0 }}>
@@ -1791,6 +1828,11 @@ function PreviewCarousel({ images, thumbnail, onImageClick }) {
               {err[i] && <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "1rem" }} />}
             </button>
           ))}
+          {videoUrl && (
+            <button onClick={() => setIdx(all.length)} title="Watch video" style={{ flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden", border: `2px solid ${onVideo ? "#a67853" : "#edddd0"}`, background: "#2c1a0e", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "1rem" }} />
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -1891,8 +1933,12 @@ function PreviewResourcesPanel({ files }) {
   );
 }
 
-function ProductPreviewModal({ product, onClose }) {
+function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
   const [lightbox, setLightbox] = useState(null);
+  // Single source of truth for "which image is showing" — shared by the
+  // carousel's own controls (arrows/dots/thumbnails) AND the variant-color
+  // swatches, so either one moving it keeps the other in sync.
+  const [carouselIdx, setCarouselIdx] = useState(0);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -1906,18 +1952,33 @@ function ProductPreviewModal({ product, onClose }) {
   }, [onClose, lightbox]);
 
   const thumb      = previewResolveUrl(previewGetField(product, 'thumbnail'));
-  const images     = previewGetImgsArr(product, 'images');
+  const videoUrl   = product?.resources?.video || null;
+  const variantColors = (product.variants || []).filter(v => v.color || v.code);
+  const variantImages = variantColors.map(v => previewResolveUrl(v.image)).filter(Boolean);
+  const images     = [...new Set([...previewGetImgsArr(product, 'images'), ...variantImages])];
   const specImages = previewGetImgsArr(product, 'spec_images');
   const files      = previewGetFiles(product);
+
+  // Same combine order as PreviewCarousel itself uses — kept identical here
+  // so an index computed against this array always lands on the same image
+  // the carousel shows. The video, if any, is a virtual slide right after
+  // the last image (index === carouselAll.length) — not a real array entry.
+  const carouselAll = [...(thumb ? [thumb] : []), ...images.filter(u => u !== thumb)].filter(Boolean);
+  const onVideoSlide = videoUrl && carouselIdx === carouselAll.length;
+  const activeImageUrl = onVideoSlide ? null : carouselAll[carouselIdx];
 
   const hasShortDesc = !!product.short_description;
   const hasDesc      = !!product.description;
   const hasFeatures  = (product.features || []).length > 0;
+  const hasVariantColors = variantColors.length > 0;
   const hasSpec      = specImages.length > 0;
   const hasResources = files.length > 0;
   const cats         = product.categories || [];
   const tags         = product.tags || [];
   const hasMeta      = cats.length > 0 || tags.length > 0;
+  const specHeaders  = product.spec_table?.headers || [];
+  const specRows     = product.spec_table?.rows || [];
+  const hasSpecTable = specHeaders.length > 0 && specRows.length > 0;
 
   const openLightbox = (imgs, i) => setLightbox({ images: imgs, index: i });
 
@@ -1954,11 +2015,11 @@ function ProductPreviewModal({ product, onClose }) {
 
         {/* Section 1: Images + Info */}
         <div style={{ padding: "28px 32px 24px" }}>
-          <div className="pp-preview-s1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}>
+          <div className="pp-preview-s1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "center" }}>
 
             {/* Left: Carousel + Resources (only when Diagram also exists) */}
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              <PreviewCarousel images={images} thumbnail={thumb} onImageClick={openLightbox} />
+              <PreviewCarousel images={images} thumbnail={thumb} onImageClick={openLightbox} activeIndex={carouselIdx} onIndexChange={setCarouselIdx} videoUrl={videoUrl} />
               {hasResources && hasSpec && (
                 <div>
                   <PreviewSectionLabel text="Resources" />
@@ -1977,6 +2038,59 @@ function ProductPreviewModal({ product, onClose }) {
               <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "clamp(1.1rem,2vw,1.5rem)", color: "#2c1a0e", margin: 0, lineHeight: 1.2 }}>
                 {product.name}
               </h2>
+              {(hasVariantColors || videoUrl) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 12, background: "#faf7f4", borderRadius: 10, border: "1px solid #edddd0" }}>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    {variantColors.map((v, i) => {
+                      const vImg = previewResolveUrl(v.image);
+                      const active = vImg && vImg === activeImageUrl;
+                      return (
+                        <button key={i} type="button" title={v.color}
+                          onClick={() => {
+                            if (!vImg) return;
+                            const target = carouselAll.indexOf(vImg);
+                            if (target !== -1) setCarouselIdx(target);
+                          }}
+                          style={{
+                            width: 22, height: 22, borderRadius: "50%", padding: 0,
+                            cursor: vImg ? "pointer" : "default",
+                            background: VARIANT_COLOR_DOT[(v.color || "").toLowerCase()] || "#d5b99a",
+                            border: (v.color || "").toLowerCase() === "white" ? "1px solid #d5b99a" : "1px solid rgba(0,0,0,0.1)",
+                            boxShadow: "0 1px 3px rgba(90,64,48,0.18)",
+                            outline: active ? "2px solid #a67853" : "2px solid transparent",
+                            outlineOffset: 2,
+                          }} />
+                      );
+                    })}
+                    {videoUrl && (
+                      <button type="button" title="Watch video"
+                        onClick={() => setCarouselIdx(carouselAll.length)}
+                        style={{
+                          width: 22, height: 22, borderRadius: "50%", padding: 0, cursor: "pointer",
+                          background: "#2c1a0e", display: "flex", alignItems: "center", justifyContent: "center",
+                          border: "none",
+                          boxShadow: "0 1px 3px rgba(90,64,48,0.18)",
+                          outline: onVideoSlide ? "2px solid #a67853" : "2px solid transparent",
+                          outlineOffset: 2,
+                        }}>
+                        <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "0.55rem" }} />
+                      </button>
+                    )}
+                  </div>
+                  {hasVariantColors && (
+                    <>
+                      <div style={{ display: "flex", gap: 10, fontSize: "0.72rem" }}>
+                        <span style={{ color: "#a67853", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", minWidth: 46 }}>Code</span>
+                        <span style={{ color: "#5a4030" }}>{variantColors.map(v => v.code).filter(Boolean).join(" | ")}</span>
+                      </div>
+                      <div style={{ display: "flex", gap: 10, fontSize: "0.72rem" }}>
+                        <span style={{ color: "#a67853", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", minWidth: 46 }}>Option</span>
+                        <span style={{ color: "#5a4030" }}>{variantColors.map(v => v.color).filter(Boolean).join(" | ")}</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
               {hasShortDesc && (
                 <div style={{ paddingBottom: 16, borderBottom: "1px solid #edddd0" }}>
                   <div style={{ fontSize: "0.82rem", color: "#7a5c45", lineHeight: 1.6, whiteSpace: "pre-wrap", wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: cleanPreviewHTML(product.short_description) }} />
@@ -1994,9 +2108,6 @@ function ProductPreviewModal({ product, onClose }) {
                     ))}
                   </ul>
                 </div>
-              )}
-              {!hasShortDesc && !hasFeatures && (
-                <p style={{ color: "#a67853", fontStyle: "italic", fontSize: "0.86rem", margin: 0 }}>More details coming soon.</p>
               )}
               {hasSpec && (
                 <div>
@@ -2021,6 +2132,38 @@ function ProductPreviewModal({ product, onClose }) {
             <div style={{ padding: "20px 32px" }}>
               <PreviewSectionLabel text="Specifications" />
               <div style={{ color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: cleanPreviewHTML(product.description) }} />
+            </div>
+          </>
+        )}
+
+        {/* Technical Data table — same rendering as the live product page,
+            wrapped in its own horizontal scroller so a wide table never
+            widens the modal (or page) itself. */}
+        {hasSpecTable && (
+          <>
+            <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 32px" }} />
+            <div style={{ padding: "20px 32px" }}>
+              <PreviewSectionLabel text="Technical Data" />
+              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a", background: "#fafaf8" }}>
+                <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 160), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                  <thead>
+                    <tr style={{ background: "#faf7f4" }}>
+                      {specHeaders.map((h, i) => (
+                        <th key={i} style={{ padding: "9px 14px", textAlign: "left", color: "#8b5e3c", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap" }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {specRows.map((row, ri) => (
+                      <tr key={ri} style={{ borderBottom: ri < specRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                        {specHeaders.map((h, ci) => (
+                          <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[ci] || "–"}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </>
         )}
@@ -2053,6 +2196,22 @@ function ProductPreviewModal({ product, onClose }) {
             </div>
           </>
         )}
+
+        {/* Footer: Visit URL + Edit */}
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, padding: "16px 32px", borderTop: "1px solid #edddd0", background: "#faf7f4" }}>
+          {liveUrl && (
+            <a href={liveUrl} target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#7a5234", background: "transparent", border: "1px solid rgba(166,120,83,0.35)", borderRadius: 6, textDecoration: "none" }}>
+              <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.75rem" }} /> Visit URL
+            </a>
+          )}
+          {onEdit && (
+            <button type="button" onClick={onEdit}
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#fff", background: "#a67853", border: "none", borderRadius: 6, cursor: "pointer" }}>
+              <i className="fa-solid fa-pen" style={{ fontSize: "0.75rem" }} /> Edit
+            </button>
+          )}
+        </div>
       </div>
 
       {lightbox && (
@@ -2075,14 +2234,13 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
     return () => document.removeEventListener("mousedown", handler);
   }, [menuOpen]);
 
-  const productUrl = isAccessoryProduct(p)
-    ? `${FRONT_URL || window.location.origin}/accessories/${p.slug}`
-    : `${FRONT_URL || window.location.origin}/products/${p.slug}`;
   const showMenu = hovered && (dataSource === "local" || perms.can("products.edit") || perms.can("products.duplicate") || perms.can("products.delete"));
   const isUnpublished = p.status === "draft" || p.visible === false;
 
   return (
-    <a href={productUrl} target="_blank" rel="noopener noreferrer"
+    <div role="button" tabIndex={0}
+      onClick={() => onPreview(p)}
+      onKeyDown={e => { if (e.key === "Enter") onPreview(p); }}
       className={`product-grid-card${isUnpublished ? " is-unpublished" : ""}`}
       style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: "pointer" }}
       onMouseEnter={() => setHovered(true)}
@@ -2094,20 +2252,15 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
           : <i className="fa-regular fa-image" style={{ fontSize: "1.5rem", color: "var(--border)" }} />
         }
         {showMenu && (
-          <div className="product-grid-options" ref={menuRef} onClick={e => e.preventDefault()}>
+          <div className="product-grid-options" ref={menuRef} onClick={e => e.stopPropagation()}>
             <button type="button" className="product-grid-opts-btn"
               onClick={e => { e.preventDefault(); e.stopPropagation(); setMenuOpen(m => !m); }}>
               <i className="fa-solid fa-ellipsis-vertical" />
             </button>
             {menuOpen && (
               <div className="product-grid-menu">
-                {dataSource === "local" && (
-                  <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onPreview(p); }}>
-                    <i className="fa-solid fa-eye" /> View
-                  </button>
-                )}
                 {perms.can("products.edit") && dataSource === "local" && (
-                  <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onRequestLiveAction(p, "edit"); }}>
+                  <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onEdit(p); }}>
                     <i className="fa-solid fa-pen" /> Edit
                   </button>
                 )}
@@ -2152,7 +2305,7 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
           </div>
         )}
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -2297,9 +2450,158 @@ function VariantManager({ variants, onChange, addToast }) {
   );
 }
 
+// ─── Variant Colors Manager ─────────────────────────────────────────────────
+// Edits the `variants` JSONB column on `products` — { color, code, image }
+// per row. This is UNRELATED to the "Variants" section above (which manages
+// the separate `product_variants` TABLE, keyed by SKU/capacity, used for
+// heaters). Accessories carry their color/code/image options here instead —
+// e.g. a pail's Cedar/Aspen/Hemlock options each with their own photo.
+function VariantColorsManager({ variants, onChange, addToast }) {
+  const [uploadingIdx, setUploadingIdx] = useState(null);
+
+  const handleImageUpload = async (file, idx) => {
+    setUploadingIdx(idx);
+    try {
+      const url = await uploadFileToSupabase(file, "product-images");
+      onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
+      addToast("✓ Variant image uploaded.", "success");
+    } catch (err) {
+      addToast("❌ Upload failed: " + err.message, "error");
+    } finally {
+      setUploadingIdx(null);
+    }
+  };
+
+  const handleAdd = () => onChange([...variants, { color: "", code: "", image: "" }]);
+  const handleRemove = idx => onChange(variants.filter((_, i) => i !== idx));
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      {variants.map((v, idx) => (
+        <div key={idx} style={{
+          background: "var(--surface-2)", border: "1px solid var(--border)",
+          borderRadius: "var(--r-sm)", padding: 12, display: "grid",
+          gridTemplateColumns: "60px 1fr 1fr 40px", gap: 10, alignItems: "center"
+        }}>
+          <div style={{ position: "relative" }}>
+            {v.image ? (
+              <div style={{ position: "relative", width: 48, height: 48, borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)" }}>
+                <img src={v.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
+                <label style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.6rem", color: "white" }}>
+                  <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
+                  {uploadingIdx === idx ? "..." : "Change"}
+                </label>
+              </div>
+            ) : (
+              <label style={{ width: 48, height: 48, border: "1px dashed var(--border)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.6rem", color: "var(--text-3)" }}>
+                <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
+                {uploadingIdx === idx ? "..." : "Upload"}
+              </label>
+            )}
+          </div>
+          <input type="text" value={v.color || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, color: e.target.value } : x))} placeholder="Color (e.g. Cedar)" className="form-input" style={{ fontSize: "0.8rem" }} />
+          <input type="text" value={v.code || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, code: e.target.value } : x))} placeholder="Code (e.g. 341-D)" className="form-input" style={{ fontSize: "0.8rem" }} />
+          <button type="button" onClick={() => handleRemove(idx)} style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
+            <i className="fa-solid fa-trash" />
+          </button>
+        </div>
+      ))}
+      <Btn label="+ Add Color" variant="secondary" size="sm" onClick={handleAdd} />
+    </div>
+  );
+}
+
+// ─── Spec Table Manager ─────────────────────────────────────────────────────
+// Edits the `spec_table` JSONB column — { headers: [...], rows: [[...],...] }
+// — rendered on the live product page as the "Technical Data" table (see
+// DispAccessories.jsx). Rows are arrays parallel to headers, matching every
+// real row already seeded in the database. Wrapped in its own horizontal
+// scroller so a table with many columns never widens the page itself.
+function SpecTableManager({ specTable, onChange }) {
+  const headers = specTable?.headers || [];
+  const rows = specTable?.rows || [];
+
+  if (!specTable) {
+    return (
+      <Btn label="+ Add Specifications Table" variant="secondary" size="sm"
+        onClick={() => onChange({ headers: ["Specification", "Detail"], rows: [] })} />
+    );
+  }
+
+  const setHeaders = next => onChange({ headers: next, rows });
+  const setRows = next => onChange({ headers, rows: next });
+
+  const addColumn = () => setHeaders([...headers, `Column ${headers.length + 1}`]);
+  const removeColumn = ci => {
+    setHeaders(headers.filter((_, i) => i !== ci));
+    setRows(rows.map(row => row.filter((_, i) => i !== ci)));
+  };
+  const addRow = () => setRows([...rows, headers.map(() => "")]);
+  const removeRow = ri => setRows(rows.filter((_, i) => i !== ri));
+  const setCell = (ri, ci, value) => setRows(rows.map((row, i) => i === ri ? row.map((c, j) => j === ci ? value : c) : row));
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <div style={{ overflowX: "auto", border: "1px solid var(--border)", borderRadius: "var(--r-sm)" }}>
+        {/* min-width scales with column count so the table keeps its real
+            width instead of squishing inputs unreadably on a narrow
+            screen — the overflow-x:auto wrapper then does the scrolling,
+            same pattern as .products-table (min-width:700px). */}
+        <table style={{ borderCollapse: "collapse", width: "100%", minWidth: Math.max(320, headers.length * 160) }}>
+          <thead>
+            <tr>
+              {headers.map((h, ci) => (
+                <th key={ci} style={{ padding: "8px 10px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
+                  <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                    <input type="text" value={h} onChange={e => setHeaders(headers.map((x, i) => i === ci ? e.target.value : x))}
+                      className="form-input" style={{ fontSize: "0.78rem", fontWeight: 600, minWidth: 100 }} />
+                    <button type="button" onClick={() => removeColumn(ci)} title="Remove column"
+                      style={{ background: "none", border: "none", color: "var(--danger)", cursor: "pointer", flexShrink: 0 }}>
+                      <i className="fa-solid fa-xmark" />
+                    </button>
+                  </div>
+                </th>
+              ))}
+              <th style={{ padding: "8px 10px", background: "var(--surface-2)", borderBottom: "1px solid var(--border)" }}>
+                <button type="button" onClick={addColumn} title="Add column" className="btn btn-ghost btn-sm">
+                  <i className="fa-solid fa-plus" />
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, ri) => (
+              <tr key={ri}>
+                {headers.map((_, ci) => (
+                  <td key={ci} style={{ padding: "6px 10px", borderBottom: "1px solid var(--border-light)" }}>
+                    <input type="text" value={row[ci] ?? ""} onChange={e => setCell(ri, ci, e.target.value)}
+                      className="form-input" style={{ fontSize: "0.78rem", minWidth: 100 }} />
+                  </td>
+                ))}
+                <td style={{ padding: "6px 10px", borderBottom: "1px solid var(--border-light)" }}>
+                  <button type="button" onClick={() => removeRow(ri)} style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "4px 7px", cursor: "pointer", fontSize: "0.75rem" }}>
+                    <i className="fa-solid fa-trash" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <Btn label="+ Add Row" variant="secondary" size="sm" onClick={addRow} />
+        <button type="button" onClick={() => onChange(null)} className="btn btn-ghost btn-sm" style={{ color: "var(--danger)" }}>
+          Remove table
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Products({ currentUser }) {
   const perms = getPerms(currentUser);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { toasts, add, remove } = useToast();
   const { products: localProds, categories: localCats, tags: localTags, loading: localLoading } = useLocalProducts();
 
@@ -2316,6 +2618,7 @@ export default function Products({ currentUser }) {
   const [allModels,  setAllModels]  = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.models || []);
 
   const [search,       setSearch]       = useState("");
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState("");
   const [quickFilter,  setQuickFilter]  = useState("all"); // "all" | "accessories" | "heaters"
   const [activeHeaterSubcats, setActiveHeaterSubcats] = useState([]); // multi-select pills, only used when quickFilter === "heaters"
@@ -2402,8 +2705,12 @@ export default function Products({ currentUser }) {
         setAllTags(tagNames);
         setCache(PRODUCTS_META_CACHE_KEY, { cats: catNames, tags: tagNames });
       } else {
-        setAllCats(localCats);
-        setAllTags(localTags);
+        // Local snapshots store categories/tags as row objects ({ name, slug, … }),
+        // whereas the PillInput/TagSuggestions autocomplete expects plain strings.
+        // Normalize to names (string entries pass through untouched).
+        const toName = x => (typeof x === "string" ? x : x?.name);
+        setAllCats((localCats || []).map(toName).filter(Boolean));
+        setAllTags((localTags || []).map(toName).filter(Boolean));
       }
     } catch (err) {
       console.error("Failed to fetch metadata:", err);
@@ -2562,7 +2869,7 @@ export default function Products({ currentUser }) {
 
   const openEdit = async row => {
     try {
-      const data = await getProductByIdLive(row.id);
+      const data = (await getProductByIdLive(row.id)) || (row.slug ? await getProductBySlugLive(row.slug) : null);
       if (!data) throw new Error("Product not found");
       const loaded = {
         name:              data.name              || "",
@@ -2573,6 +2880,8 @@ export default function Products({ currentUser }) {
         images:            data.images            || [],
         spec_images:       data.spec_images       || [],
         files:             data.files             || [],
+        variants:          data.variants          || [],
+        spec_table:        data.spec_table        || null,
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -2602,6 +2911,18 @@ export default function Products({ currentUser }) {
     } catch (err) { add(err.message, "error"); }
   };
 
+  // Deep-link from Taxonomy/Models' quick-preview "Edit" button —
+  // /admin/products?edit=<id> auto-opens that product's edit modal, then
+  // strips the param so a refresh doesn't reopen it.
+  useEffect(() => {
+    const editId = searchParams.get("edit");
+    if (editId) {
+      openEdit({ id: editId });
+      setSearchParams(prev => { prev.delete("edit"); return prev; }, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const openDuplicate = async row => {
     try {
       const data = await getProductByIdLive(row.id);
@@ -2619,6 +2940,8 @@ export default function Products({ currentUser }) {
         images:            data.images            || [],
         spec_images:       data.spec_images       || [],
         files:             data.files             || [],
+        variants:          data.variants          || [],
+        spec_table:        data.spec_table        || null,
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -2737,6 +3060,8 @@ export default function Products({ currentUser }) {
         images:            form.images,
         spec_images:       form.spec_images,
         files:             form.files,
+        variants:          form.variants,
+        spec_table:        form.spec_table,
         categories:        form.categories,
         tags:              mergedTags,
         features:          form.features,
@@ -3124,7 +3449,7 @@ export default function Products({ currentUser }) {
           ))}
         </div>
 
-        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "nowrap", marginLeft: "auto", flex: "1 1 auto", justifyContent: "flex-end", minWidth: 0 }}>
+        <div className={`toolbar-filters-row${mobileSearchOpen ? " search-open" : ""}`}>
           <select className="filter-select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
             <option value="">All Status</option>
             <option value="published">Published</option>
@@ -3159,6 +3484,11 @@ export default function Products({ currentUser }) {
               </button>
             </>
           )}
+          <button type="button" className="mobile-search-toggle"
+            onClick={() => setMobileSearchOpen(o => !o)}
+            aria-label={mobileSearchOpen ? "Close search" : "Open search"}>
+            <i className={`fa-solid ${mobileSearchOpen ? "fa-xmark" : "fa-magnifying-glass"}`} />
+          </button>
           <div className="search-wrap">
             <i className="fa-solid fa-magnifying-glass" />
             <input className="search-input" value={search} onChange={e => setSearch(e.target.value)}
@@ -3169,7 +3499,7 @@ export default function Products({ currentUser }) {
 
       {/* Sauna Heaters / Accessories subcategory pills — multi-select filter, visible to all roles */}
       {quickFilter === "heaters" && (
-        <div className="tax-tabs" style={{ marginBottom: 14 }}>
+        <div className="tax-tabs subcat-pills" style={{ marginBottom: 14 }}>
           {HEATER_SUBCATEGORIES.map(sub => (
             <button key={sub.key} type="button" onClick={() => toggleHeaterSubcat(sub.key)}
               className={`tax-tab-btn${activeHeaterSubcats.includes(sub.key) ? " active" : ""}`}>
@@ -3179,7 +3509,7 @@ export default function Products({ currentUser }) {
         </div>
       )}
       {quickFilter === "accessories" && (
-        <div className="tax-tabs" style={{ marginBottom: 14 }}>
+        <div className="tax-tabs subcat-pills" style={{ marginBottom: 14 }}>
           {ACCESSORY_SUBCATEGORIES.map(sub => (
             <button key={sub.key} type="button" onClick={() => toggleAccessorySubcat(sub.key)}
               className={`tax-tab-btn${activeAccessorySubcats.includes(sub.key) ? " active" : ""}`}>
@@ -3238,9 +3568,10 @@ export default function Products({ currentUser }) {
               }
             </td>
             <td>
-              <a href={productUrl(p)} target="_blank" rel="noopener noreferrer" className="product-name-link">
+              <button type="button" className="product-name-link" onClick={() => setPreviewProduct(p)}
+                style={{ background: "none", border: "none", padding: 0, cursor: "pointer", textAlign: "left" }}>
                 {p.name}
-              </a>
+              </button>
               <div className="product-meta">
                 {p.featured && <span className="product-meta-tag featured"><i className="fa-solid fa-star" style={{ marginRight: 3 }} />Featured</span>}
                 {(p.files || []).length > 0 && <span className="product-meta-tag files"><i className="fa-solid fa-file-pdf" style={{ marginRight: 3 }} />{p.files.length} file(s)</span>}
@@ -3271,11 +3602,9 @@ export default function Products({ currentUser }) {
             </td>
             <td style={{ textAlign: "right" }}>
               <div className="table-actions">
-                {dataSource === "local" && (
-                  <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
-                )}
+                <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
                 {perms.can("products.edit") && dataSource === "local" && (
-                  <IconBtn icon="fa-pen" title="Edit" onClick={() => requestLiveAction(p, "edit")} />
+                  <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
                 )}
                 {perms.can("products.delete") && dataSource === "local" && (
                   <IconBtn icon="fa-trash" title="Delete" onClick={() => requestLiveAction(p, "delete")} danger />
@@ -3662,6 +3991,17 @@ export default function Products({ currentUser }) {
           <SectionLabel label="Variants" />
           <VariantManager variants={variants} onChange={setVariants} addToast={add} />
 
+          {/* Variant Colors — separate from "Variants" above: this manages
+              a product's color/code/image options (e.g. an accessory's
+              Cedar/Aspen/Hemlock choices), shown on the live product page's
+              color swatches. Unrelated to the SKU-based variants above. */}
+          <SectionLabel label="Variant Colors" />
+          <VariantColorsManager variants={form.variants} onChange={v => setForm(f => ({ ...f, variants: v }))} addToast={add} />
+
+          {/* Specifications Table — the live page's "Technical Data" table */}
+          <SectionLabel label="Specifications Table" />
+          <SpecTableManager specTable={form.spec_table} onChange={t => setForm(f => ({ ...f, spec_table: t }))} />
+
           {/* Features ← above Short Description */}
           <SectionLabel label="Features" />
           <PillInput label="Features" value={form.features}
@@ -3792,7 +4132,12 @@ export default function Products({ currentUser }) {
         confirmLabel="Delete" />
 
       {previewProduct && (
-        <ProductPreviewModal product={previewProduct} onClose={() => setPreviewProduct(null)} />
+        <ProductPreviewModal
+          product={previewProduct}
+          onClose={() => setPreviewProduct(null)}
+          onEdit={() => { const p = previewProduct; setPreviewProduct(null); openEdit(p); }}
+          liveUrl={productUrl(previewProduct)}
+        />
       )}
 
       <CheckSyncModal

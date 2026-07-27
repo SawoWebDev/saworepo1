@@ -150,21 +150,13 @@ export default function Logs() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="products-page">
-      <p className="products-subtitle" style={{ marginBottom: 14 }}>
-        {loading ? "Loading…" : `${totalCount.toLocaleString()} events recorded`}
-      </p>
-
-      {/* Filters */}
-      <div className="products-toolbar" style={{ flexWrap: "wrap" }}>
-        <div className="search-wrap">
-          <i className="fa-solid fa-magnifying-glass" />
-          <input
-            className="search-input"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search by product name…"
-          />
-        </div>
+      {/* Summary + filters share one row (see .logs-toolbar-row mobile
+          compacting in admin.css) — search gets its own row below since it
+          needs more breathing room than a select. */}
+      <div className="logs-toolbar-row">
+        <p className="products-subtitle" style={{ margin: 0 }}>
+          {loading ? "Loading…" : `${totalCount.toLocaleString()} events recorded`}
+        </p>
 
         <select className="filter-select" value={filterAction} onChange={e => setFilterAction(e.target.value)}>
           <option value="">All Actions</option>
@@ -184,9 +176,21 @@ export default function Logs() {
           {allUsers.map(u => <option key={u} value={u}>@{u}</option>)}
         </select>
 
-        <button type="button" className="btn btn-ghost btn-sm" onClick={fetchLogs} style={{ marginLeft: "auto" }}>
-          <i className="fa-solid fa-rotate" /> Refresh
+        <button type="button" className="btn btn-ghost btn-sm" onClick={fetchLogs}>
+          <i className="fa-solid fa-rotate" /> <span className="btn-label-full">Refresh</span>
         </button>
+      </div>
+
+      <div className="products-toolbar" style={{ flexWrap: "wrap" }}>
+        <div className="search-wrap">
+          <i className="fa-solid fa-magnifying-glass" />
+          <input
+            className="search-input"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search by product name…"
+          />
+        </div>
       </div>
 
       {/* Error */}

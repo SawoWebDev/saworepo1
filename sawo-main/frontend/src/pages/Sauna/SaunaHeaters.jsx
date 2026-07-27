@@ -36,7 +36,7 @@ const SaunaHeaters = () => {
           <div style={{ marginTop: "32px" }}>
             <ButtonClear
               text="EXPLORE PRODUCTS"
-              href="https://www.sawo.com/sauna-products/"
+              href="#sh-heaters"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ const SaunaHeaters = () => {
       {/* ===================== */}
       {/* SECTION 3: HEATERS    */}
       {/* ===================== */}
-      <section className="sh-heaters-section max-w-[1200px] mx-auto px-6 pb-20">
+      <section id="sh-heaters" className="sh-heaters-section max-w-[1200px] mx-auto px-6 pb-20">
 
         {/* sawo-sec heaters grid */}
         <style>{`

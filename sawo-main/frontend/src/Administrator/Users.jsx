@@ -37,6 +37,7 @@ export default function Users({ currentUser }) {
 
   const [users, setUsers]           = useState(() => getCache(USERS_CACHE_KEY) || []);
   const [search, setSearch]         = useState("");
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [roleFilter, setRoleFilter] = useState("");
   const [sortDir, setSortDir]       = useState("desc");
   const [selected, setSelected]     = useState(new Set());
@@ -196,12 +197,12 @@ export default function Users({ currentUser }) {
     <div>
       {/* Toolbar */}
       <div className="products-toolbar">
-        <div className="search-wrap">
-          <i className="fa-solid fa-magnifying-glass" />
-          <input className="search-input" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search username, email..." />
-        </div>
+        <div className={`toolbar-filters-row${mobileSearchOpen ? " search-open" : ""}`} style={{ marginLeft: 0 }}>
+          <div className="search-wrap">
+            <i className="fa-solid fa-magnifying-glass" />
+            <input className="search-input" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search username, email..." />
+          </div>
 
-        <div className="filter-group">
           <select className="filter-select" value={roleFilter} onChange={e => setRoleFilter(e.target.value)}>
             <option value="">All Roles</option>
             <option value="admin">admin</option>
@@ -214,16 +215,22 @@ export default function Users({ currentUser }) {
             <option value="desc">Newest first</option>
             <option value="asc">Oldest first</option>
           </select>
+
+          {canDelete && selected.size > 0 && (
+            <button type="button" className="btn btn-sm" style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }} onClick={() => setBulkConfirm(true)}>
+              <i className="fa-solid fa-trash" /> Delete {selected.size}
+            </button>
+          )}
+
+          <button type="button" className="mobile-search-toggle"
+            onClick={() => setMobileSearchOpen(o => !o)}
+            aria-label={mobileSearchOpen ? "Close search" : "Open search"}>
+            <i className={`fa-solid ${mobileSearchOpen ? "fa-xmark" : "fa-magnifying-glass"}`} />
+          </button>
         </div>
 
-        {canDelete && selected.size > 0 && (
-          <button type="button" className="btn btn-sm" style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }} onClick={() => setBulkConfirm(true)}>
-            <i className="fa-solid fa-trash" /> Delete {selected.size}
-          </button>
-        )}
-
         {canCreate && (
-          <button type="button" className="btn btn-primary" style={{ marginLeft: "auto" }} onClick={openAdd}>
+          <button type="button" className="btn btn-primary add-user-btn" style={{ marginLeft: "auto" }} onClick={openAdd}>
             <i className="fa-solid fa-plus" /> Add User
           </button>
         )}

@@ -104,6 +104,7 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
+import menuPaths from "../../../menuPaths";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/wall-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -382,7 +383,7 @@ export default function WallMounted() {
           <h1 className="wm-hero-title">WALL-MOUNTED SAUNA HEATERS</h1>
           <p className="wm-hero-subtitle">Space-saving sleek modern designs</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="EXPLORE HEATERS" href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/sauna-products/" />
+            <ButtonClear text="EXPLORE HEATERS" href={menuPaths.sauna.heaters.parent} />
           </div>
         </div>
       <HeroWave />

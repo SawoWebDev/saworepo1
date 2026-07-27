@@ -107,19 +107,19 @@ const Sauna = () => {
     {
       img: img_Innova_Classic_2_0,
       title: "Innova Series",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/innova-series/",
+      href: menuPaths.sauna.controls,
       desc: "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface—no separate power controller needed.",
     },
     {
       img: img_saunova_2_0_user_interface,
       title: "Saunova Series",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/saunova-series/",
+      href: menuPaths.sauna.controls,
       desc: "Versatile control for sauna temperature, humidity, ventilation, and lighting, featuring Smart Controlling, Door Sensor, Prerun Timer, and optional Fan, Dimmer, and Combi functions.",
     },
     {
       img: img_INNOVA_CLASSIC_1000X1000,
       title: "Control Accessories",
-      href: "https://www.sawo.com/sawo-products/finnish-sauna/control-accessories/",
+      href: menuPaths.sauna.controls,
       desc: "Modern sauna control systems enhance your experience by managing heat, adjusting ambiance, monitoring energy usage, and providing maintenance alerts.",
     },
   ];
