@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { ROOM_CONFIGS, HASH_MAP } from "./SaunaRoomData";
+import menuPaths from "../../../menuPaths";
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
@@ -215,12 +216,12 @@ const SaunaRoomViewer = () => {
   const isBestSeller = current && cfg.bestSellers && cfg.bestSellers.has(current.size);
 
   const inquiryHref = useMemo(() => {
-    if (!current) return "https://www.sawo.com/contact/";
+    if (!current) return menuPaths.contact;
     const model = cfg.isFlat ? current.size : cleanModelNumber(current.size, cfg);
     const benchType = cfg.benchTypes[current.bench]?.name || "Standard Bench";
     const sideStr = cfg.isFlat ? "" : current.side;
     const subject = `Customize My Sauna — Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
-    return `https://www.sawo.com/contact/?subject=${encodeURIComponent(subject)}`;
+    return `${menuPaths.contact}?subject=${encodeURIComponent(subject)}`;
   }, [current, cfg]);
 
   const galleryModels = useMemo(() => {

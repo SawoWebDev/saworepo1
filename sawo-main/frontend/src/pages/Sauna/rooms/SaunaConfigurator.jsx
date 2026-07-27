@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import { CONFIGURATOR_STEPS } from "./SaunaRoomData";
+import menuPaths from "../../../menuPaths";
 
 const SaunaConfigurator = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -37,7 +38,7 @@ const SaunaConfigurator = () => {
     const parts = ["Room: " + roomSel.name];
     if (selections.heater) parts.push("Heater: " + heaterSel.name);
     if (accessoryNames.length > 0) parts.push("Accessories: " + accessoryNames.join(", "));
-    return "https://www.sawo.com/contact/?subject=" + encodeURIComponent("Customize My Sauna — " + parts.join(" | "));
+    return menuPaths.contact + "?subject=" + encodeURIComponent("Customize My Sauna — " + parts.join(" | "));
   }, [selections.room, selections.heater, accessoryNames, roomSel, heaterSel]);
 
   const firstAccessoryImg = selections.accessory.length > 0

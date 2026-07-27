@@ -81,52 +81,6 @@ function cleanHTMLStyles(html) {
 }
 
 /* ── Video Modal ────────────────────────────────────────────────────── */
-function VideoModal({ videoUrl, onClose }) {
-  useEffect(() => {
-    const h = e => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", h);
-    document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", h); document.body.style.overflow = ""; };
-  }, [onClose]);
-
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed", inset: 0, zIndex: 9999,
-        background: "rgba(0,0,0,0.92)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}
-    >
-      <button onClick={onClose} style={{
-        position: "absolute", top: 18, right: 18,
-        background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%",
-        width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        transition: "background 0.2s", zIndex: 10,
-      }}
-        onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
-        onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
-      >
-        <i className="fa-solid fa-xmark" />
-      </button>
-
-      <video
-        onClick={e => e.stopPropagation()}
-        src={videoUrl}
-        controls
-        autoPlay
-        style={{
-          maxWidth: "90vw", maxHeight: "85vh",
-          objectFit: "contain", borderRadius: 10,
-        }}
-      />
-    </div>
-  );
-}
-
 /* ── Lightbox ─────────────────────────────────────────────────────── */
 function Lightbox({ images, startIndex, onClose }) {
   const [idx, setIdx] = useState(startIndex);
@@ -345,11 +299,15 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
             <video
               src={items[idx]?.url}
               autoPlay
+              loop
               muted
+              playsInline
               style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+                objectFit: "contain",
                 animation: "ppFadeIn 0.25s ease",
               }}
             />
@@ -624,7 +582,7 @@ function SectionLabel({ icon, text }) {
 }
 
 /* ── Product Info Panel (sawo.com-style color/code/capacity summary) ─── */
-const VARIANT_COLOR_DOT = {
+export const VARIANT_COLOR_DOT = {
   "hemlock": "#d9b98c",
   "white": "#f7f5f1",
   "black": "#1c1c1c",
@@ -635,7 +593,7 @@ const VARIANT_COLOR_DOT = {
   "metallic brown": "#6e4a2e",
 };
 
-function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant }) {
+function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant, hasVideo, showVideo, onSelectVideo }) {
   const codes = variants.map(v => v.code).filter(Boolean);
   const colors = variants.map(v => v.color).filter(Boolean);
   const capacityRow = (product.spec_table?.rows || []).find(row =>
@@ -643,7 +601,7 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant 
   );
   const capacity = capacityRow ? (Array.isArray(capacityRow) ? capacityRow[1] : capacityRow.Detail) : null;
 
-  const hasDots = colors.length > 1;
+  const hasDots = colors.length > 1 || hasVideo;
   const hasLines = codes.length > 0 || !!capacity || colors.length > 1;
   if (!hasDots && !hasLines) return null;
 
@@ -670,11 +628,30 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant 
                 background: VARIANT_COLOR_DOT[(v.color || "").toLowerCase()] || "#d5b99a",
                 border: v.color?.toLowerCase() === "white" ? "1px solid #d5b99a" : "none",
                 boxShadow: "0 1px 3px rgba(90,64,48,0.18)",
-                outline: selectedVariant?.key === v.key ? "2px solid #a67853" : "2px solid transparent",
+                outline: !showVideo && selectedVariant?.key === v.key ? "2px solid #a67853" : "2px solid transparent",
                 outlineOffset: 2,
               }}
             />
           ))}
+          {/* Video option — sits at the end of the color dots, same click
+              pattern, so switching between colors and the video is one
+              consistent row instead of a separate overlay button. */}
+          {hasVideo && (
+            <button
+              onClick={onSelectVideo}
+              title="Watch video"
+              style={{
+                width: 26, height: 26, borderRadius: "50%", padding: 0, cursor: "pointer",
+                background: "#2c1a0e", display: "flex", alignItems: "center", justifyContent: "center",
+                border: "none",
+                boxShadow: "0 1px 3px rgba(90,64,48,0.18)",
+                outline: showVideo ? "2px solid #a67853" : "2px solid transparent",
+                outlineOffset: 2,
+              }}
+            >
+              <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "0.6rem" }} />
+            </button>
+          )}
         </div>
       )}
       {codes.length > 0 && (
@@ -817,7 +794,10 @@ function SkeletonPage() {
 export default function AccessoriesPage() {
   const { slug } = useParams();
   const [lightbox, setLightbox] = useState(null);
-  const [videoModal, setVideoModal] = useState(null);
+  // Video is one more selectable option alongside the color dots (see
+  // ProductInfoPanel) — not a separate modal — so it's a simple boolean
+  // toggle in sync with which color/image is currently displayed.
+  const [showVideo, setShowVideo] = useState(false);
 
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
@@ -837,7 +817,7 @@ export default function AccessoriesPage() {
 
   // Start on the grouped hero image (no variant selected); reset when
   // navigating between products since the component doesn't remount.
-  useEffect(() => { setSelectedVariant(null); setImageErrors({}); }, [slug]);
+  useEffect(() => { setSelectedVariant(null); setImageErrors({}); setShowVideo(false); }, [slug]);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -862,7 +842,7 @@ export default function AccessoriesPage() {
   // ProductInfoPanel above — don't repeat it as a whole separate
   // "Technical Data" table/section below when it's the only row.
   const capacityRow   = specRows.find(row => specCell(row, specHeaders[0], 0) === "Capacity");
-  const hasInfoPanel  = variants.some(v => v.code) || variants.filter(v => v.color).length > 1 || !!capacityRow;
+  const hasInfoPanel  = variants.some(v => v.code) || variants.filter(v => v.color).length > 1 || !!capacityRow || hasVideo;
   const visibleSpecRows = specRows.filter(row => !(hasInfoPanel && row === capacityRow));
   const hasVisibleSpecTable = specHeaders.length > 0 && visibleSpecRows.some(
     row => specHeaders.some((h, ci) => {
@@ -998,10 +978,6 @@ export default function AccessoriesPage() {
         <Lightbox images={lightbox.images} startIndex={lightbox.index} onClose={closeLightbox} />
       )}
 
-      {videoModal && (
-        <VideoModal videoUrl={videoModal} onClose={() => setVideoModal(null)} />
-      )}
-
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
 
         {/* ── SECTION 1: Images + Info ─────────────────────────────── */}
@@ -1024,9 +1000,21 @@ export default function AccessoriesPage() {
                     justifyContent: "center", cursor: displayImage ? "zoom-in" : "default",
                     overflow: "hidden"
                   }}
-                    onClick={() => displayImage && openLightbox([displayImage], 0)}
+                    onClick={() => !showVideo && displayImage && openLightbox([displayImage], 0)}
                   >
-                    {displayImage && !imageErrors[selectedVariant?.key || "__main__"] ? (
+                    {showVideo ? (
+                      <video
+                        src={product.resources.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        // "contain" (not "cover") so a vertical video isn't
+                        // cropped to fill the square box — it letterboxes
+                        // instead, fitting whatever the source resolution is.
+                        style={{ maxWidth: "100%", maxHeight: "100%", width: "100%", height: "100%", objectFit: "contain", animation: "ppFadeIn 0.25s ease" }}
+                      />
+                    ) : displayImage && !imageErrors[selectedVariant?.key || "__main__"] ? (
                       <ImageWithLoader
                         src={displayImage}
                         alt={selectedVariant?.color || selectedVariant?.code || product.name}
@@ -1039,30 +1027,17 @@ export default function AccessoriesPage() {
                     ) : (
                       <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
                     )}
-
-                    {hasVideo && (
-                      <div style={{
-                        position: "absolute", display: "flex", alignItems: "center",
-                        justifyContent: "center", width: 60, height: 60,
-                        background: "rgba(166,120,83,0.9)", borderRadius: "50%",
-                        cursor: "pointer",
-                      }}
-                        onClick={(e) => { e.stopPropagation(); setVideoModal(product.resources.video); }}
-                      >
-                        <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "1.5rem", marginLeft: "4px" }} />
-                      </div>
-                    )}
                   </div>
 
-                  {/* Variant Swatch Buttons — grouped hero image first, then each color */}
+                  {/* Variant Swatch Buttons — grouped hero image first, then each color, then video (if any) — all one row, one shared "what's showing" state. */}
                   <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                     {variants.length > 1 && thumbnail && (
                       <button
-                        onClick={() => { setSelectedVariant(null); setImageErrors(e => ({ ...e, __main__: false })); }}
+                        onClick={() => { setSelectedVariant(null); setImageErrors(e => ({ ...e, __main__: false })); setShowVideo(false); }}
                         title="All colors"
                         style={{
                           width: 60, height: 60, borderRadius: 8,
-                          border: `2px solid ${!selectedVariant ? "#a67853" : "#edddd0"}`,
+                          border: `2px solid ${!showVideo && !selectedVariant ? "#a67853" : "#edddd0"}`,
                           overflow: "hidden", cursor: "pointer", padding: 0,
                           background: "#faf7f4", transition: "all 0.2s",
                           flexShrink: 0,
@@ -1092,11 +1067,12 @@ export default function AccessoriesPage() {
                         onClick={() => {
                           setSelectedVariant(variant);
                           setImageErrors(e => ({ ...e, [variant.key]: false }));
+                          setShowVideo(false);
                         }}
                         title={variant.color || variant.code}
                         style={{
                           width: 60, height: 60, borderRadius: 8,
-                          border: `2px solid ${selectedVariant?.key === variant.key ? "#a67853" : "#edddd0"}`,
+                          border: `2px solid ${!showVideo && selectedVariant?.key === variant.key ? "#a67853" : "#edddd0"}`,
                           overflow: "hidden", cursor: "pointer", padding: 0,
                           background: "#faf7f4", transition: "all 0.2s",
                           flexShrink: 0,
@@ -1123,6 +1099,21 @@ export default function AccessoriesPage() {
                         )}
                       </button>
                     ))}
+                    {hasVideo && (
+                      <button
+                        onClick={() => setShowVideo(true)}
+                        title="Watch video"
+                        style={{
+                          width: 60, height: 60, borderRadius: 8,
+                          border: `2px solid ${showVideo ? "#a67853" : "#edddd0"}`,
+                          overflow: "hidden", cursor: "pointer", padding: 0,
+                          background: "#2c1a0e", transition: "all 0.2s",
+                          flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                        }}
+                      >
+                        <i className="fa-solid fa-play" style={{ color: "#fff", fontSize: "1.1rem" }} />
+                      </button>
+                    )}
                   </div>
 
                   {/* Gallery Thumbnail Strip (if product has images array) */}
@@ -1189,7 +1180,10 @@ export default function AccessoriesPage() {
                   product={product}
                   variants={variants}
                   selectedVariant={selectedVariant}
-                  onSelectVariant={setSelectedVariant}
+                  onSelectVariant={v => { setSelectedVariant(v); setShowVideo(false); }}
+                  hasVideo={hasVideo}
+                  showVideo={showVideo}
+                  onSelectVideo={() => setShowVideo(true)}
                 />
               )}
 

@@ -3,6 +3,7 @@ import "./SaunaRooms.css";
 import "./heaters/heaters.css";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import HeroWave from "../../components/HeroWave";
+import menuPaths from "../../menuPaths";
 import SaunaRoomViewer from "./rooms/SaunaRoomViewer";
 import SaunaFeatures from "./rooms/SaunaFeatures";
 import SaunaProductDetails from "./rooms/SaunaProductDetails";
@@ -943,7 +944,7 @@ const SaunaConfigurator = () => {
     if (selections.heater) parts.push('Heater: ' + heaterSel.name);
     if (accessoryNames.length > 0) parts.push('Accessories: ' + accessoryNames.join(', '));
     const subject = 'Customize My Sauna — ' + parts.join(' | ');
-    return 'https://www.sawo.com/contact/?subject=' + encodeURIComponent(subject);
+    return menuPaths.contact + '?subject=' + encodeURIComponent(subject);
   })();
 
   return (
@@ -1332,9 +1333,9 @@ const SaunaRooms = () => {
         const benchType = cfg.benchTypes[current.bench]?.name || "Standard Bench";
         const sideStr = cfg.isFlat ? "" : current.side;
         const subject = `Customize My Sauna — Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
-        return `https://www.sawo.com/contact/?subject=${encodeURIComponent(subject)}`;
+        return `${menuPaths.contact}?subject=${encodeURIComponent(subject)}`;
       })()
-    : "https://www.sawo.com/contact/";
+    : menuPaths.contact;
 
   // Gallery models
   const galleryModels = useMemo(() => {

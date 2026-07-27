@@ -48,6 +48,7 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../../components/CirclesInfo";
+import menuPaths from "../../../menuPaths";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/floor-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -220,7 +221,7 @@ const Floor = () => {
           <div style={{ marginTop: "32px" }}>
             <ButtonClear
               text="EXPLORE HEATERS"
-              href="https://www.sawo.com/sawo-products/finnish-sauna/sauna-heaters/sauna-products/"
+              href={menuPaths.sauna.heaters.parent}
             />
           </div>
         </div>
