@@ -37,3 +37,7 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Internal documentation — kept local only, not published to GitHub
+docs/
+sawo-main/docs/
