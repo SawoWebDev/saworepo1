@@ -4,8 +4,8 @@ import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
 import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
-import { getHeaderLayout } from "../../local-storage/headerLayout";
-import { getHeaderNavStyle } from "../../local-storage/headerNavStyle";
+import { getHeaderLayout, getCachedHeaderLayout } from "../../local-storage/headerLayout";
+import { getHeaderNavStyle, getCachedHeaderNavStyle } from "../../local-storage/headerNavStyle";
 
 export default function Header() {
   const location = useLocation();
@@ -18,12 +18,14 @@ export default function Header() {
   const [hoveredSubmenu, setHoveredSubmenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
-  // "layout2" (current default) until the admin setting resolves — see
-  // local-storage/headerLayout.js. Avoids a layout jump for the common case.
-  const [layout, setLayout] = useState("layout2");
-  // "style1" (underline, current default) until the admin setting resolves —
-  // see local-storage/headerNavStyle.js.
-  const [navStyle, setNavStyle] = useState("style1");
+  // Paint the admin's selected values immediately from cache rather than
+  // starting at the built-in default and swapping once the async read
+  // resolves — that swap is what made a selected layout1/style2 visibly
+  // flash layout2/style1 first. The hardcoded strings below are now only
+  // reached on a genuine first visit, when nothing has ever been cached.
+  // See local-storage/headerLayout.js + headerNavStyle.js.
+  const [layout, setLayout] = useState(() => getCachedHeaderLayout() || "layout2");
+  const [navStyle, setNavStyle] = useState(() => getCachedHeaderNavStyle() || "style1");
 
   useEffect(() => {
     let cancelled = false;

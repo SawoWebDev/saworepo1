@@ -7,11 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Google Fonts loaded async (media=print swap) so the CSS doesn't block first paint;
-       Montserrat swaps in via display=swap. Same pattern as Font Awesome below. -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
+       Montserrat swaps in via display=swap. Same pattern as Font Awesome below.
+       Weight 200 is deliberately NOT requested — nothing in the codebase uses
+       font-extralight/font-weight:200, and every extra weight is another font
+       file to fetch. Weights here must stay in sync with what's actually used
+       (300/400/500/600/700 widely; 800 only in admin.css + SaunaCalculator). -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet" />
   </noscript>
   <!-- Font Awesome loaded async (media=print swap) so its ~100KB CSS doesn't block first paint; icons pop in just after. -->

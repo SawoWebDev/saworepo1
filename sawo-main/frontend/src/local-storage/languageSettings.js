@@ -21,17 +21,13 @@
  */
 
 import { getSupabase } from "./supabaseClient";
+import { getSettings, primeSetting } from "./appSettings";
 
 const KEY_ENABLED = "language_switcher_enabled";
 const KEY_LANGUAGES = "enabled_languages";
-const CACHE_STORAGE_KEY = "sawo_language_settings_cache_v1";
-const CACHE_MS = 30 * 1000; // 30s
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js `locales`.
 export const BUILT_LOCALES = ["en", "fi", "de"];
-
-let memCache = null; // { enabled, languages }
-let memCacheTime = 0;
 
 function sanitizeLanguages(value) {
   if (!Array.isArray(value)) return [...BUILT_LOCALES];
@@ -39,50 +35,16 @@ function sanitizeLanguages(value) {
   return filtered.length > 0 ? filtered : [...BUILT_LOCALES];
 }
 
+// Reading is delegated to appSettings.js, which batches these two keys with
+// every other public setting into ONE request per page load (this used to be
+// its own separate round trip). Validation and the default-to-all-enabled
+// behaviour below are unchanged.
 async function readSettings() {
-  const now = Date.now();
-  if (memCache && now - memCacheTime < CACHE_MS) return memCache;
-
-  try {
-    const cached = localStorage.getItem(CACHE_STORAGE_KEY);
-    if (cached) {
-      const { value, time } = JSON.parse(cached);
-      if (now - time < CACHE_MS) {
-        memCache = value;
-        memCacheTime = time;
-        return value;
-      }
-    }
-  } catch {}
-
-  try {
-    // Plain REST fetch (same pattern as dataSource.js) so public pages don't
-    // pull the supabase-js SDK just to read two settings rows.
-    const res = await fetch(
-      `${process.env.REACT_APP_SUPABASE_URL}/rest/v1/app_settings?key=in.(${KEY_ENABLED},${KEY_LANGUAGES})&select=key,value`,
-      {
-        headers: {
-          apikey: process.env.REACT_APP_SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.REACT_APP_SUPABASE_ANON_KEY}`,
-        },
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows = await res.json();
-    const byKey = Object.fromEntries((rows || []).map((r) => [r.key, r.value]));
-
-    const enabled = typeof byKey[KEY_ENABLED] === "boolean" ? byKey[KEY_ENABLED] : true;
-    const languages = sanitizeLanguages(byKey[KEY_LANGUAGES]);
-
-    const value = { enabled, languages };
-    memCache = value;
-    memCacheTime = now;
-    localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value, time: now }));
-    return value;
-  } catch (err) {
-    console.warn("[languageSettings] Failed to read settings, defaulting to all-enabled:", err.message);
-    return memCache || { enabled: true, languages: [...BUILT_LOCALES] };
-  }
+  const all = await getSettings();
+  return {
+    enabled: typeof all?.[KEY_ENABLED] === "boolean" ? all[KEY_ENABLED] : true,
+    languages: sanitizeLanguages(all?.[KEY_LANGUAGES]),
+  };
 }
 
 export async function getLanguageSwitcherEnabled() {
@@ -95,13 +57,6 @@ export async function getEnabledLanguages() {
   return languages;
 }
 
-function updateCache(partial) {
-  const value = { enabled: true, languages: [...BUILT_LOCALES], ...(memCache || {}), ...partial };
-  memCache = value;
-  memCacheTime = Date.now();
-  localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value, time: memCacheTime }));
-}
-
 export async function setLanguageSwitcherEnabled(value, username = null) {
   const supabase = await getSupabase();
   const { error } = await supabase
@@ -109,7 +64,7 @@ export async function setLanguageSwitcherEnabled(value, username = null) {
     .upsert({ key: KEY_ENABLED, value: !!value, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });
   if (error) throw new Error(error.message);
 
-  updateCache({ enabled: !!value });
+  primeSetting(KEY_ENABLED, !!value);
 }
 
 export async function setEnabledLanguages(value, username = null) {
@@ -124,5 +79,5 @@ export async function setEnabledLanguages(value, username = null) {
     .upsert({ key: KEY_LANGUAGES, value: languages, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });
   if (error) throw new Error(error.message);
 
-  updateCache({ languages });
+  primeSetting(KEY_LANGUAGES, languages);
 }

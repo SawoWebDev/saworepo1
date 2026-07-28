@@ -25,64 +25,25 @@
  */
 
 import { getSupabase } from "./supabaseClient";
+import { getSettings, primeSetting } from "./appSettings";
 
 const KEY_SOURCE = "data_source";
 const KEY_SCOPE = "json_source_scope";
-const CACHE_STORAGE_KEY = "sawo_data_source_cache_v2";
-const CACHE_MS = 30 * 1000; // 30s
 
 const VALID_SOURCES = ["github", "supabase", "jsonfile"];
 const VALID_SCOPES = ["all", "saunarooms", "heaters", "accessories"];
 
-let memCache = null; // { source, scope }
-let memCacheTime = 0;
-
+// Reading is delegated to appSettings.js, which batches these two keys with
+// every other public setting into ONE request per page load (this used to be
+// its own separate round trip). Validation and the fall-back-to-"github"
+// behaviour below are unchanged — appSettings returns raw rows and each
+// consumer still applies its own allowlist and default.
 async function readSettings() {
-  const now = Date.now();
-  if (memCache && now - memCacheTime < CACHE_MS) return memCache;
-
-  try {
-    const cached = localStorage.getItem(CACHE_STORAGE_KEY);
-    if (cached) {
-      const { value, time } = JSON.parse(cached);
-      if (now - time < CACHE_MS) {
-        memCache = value;
-        memCacheTime = time;
-        return value;
-      }
-    }
-  } catch {}
-
-  try {
-    // Plain REST fetch (same pattern as track.js) instead of the supabase-js
-    // SDK: this runs on every public page's cold visit, and going through
-    // getSupabase() would download the ~50KB-gzip SDK chunk just to read
-    // two settings rows. The SDK stays admin-only (setters / live reads).
-    const res = await fetch(
-      `${process.env.REACT_APP_SUPABASE_URL}/rest/v1/app_settings?key=in.(${KEY_SOURCE},${KEY_SCOPE})&select=key,value`,
-      {
-        headers: {
-          apikey: process.env.REACT_APP_SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.REACT_APP_SUPABASE_ANON_KEY}`,
-        },
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows = await res.json();
-    const byKey = Object.fromEntries((rows || []).map(r => [r.key, r.value]));
-
-    const source = VALID_SOURCES.includes(byKey[KEY_SOURCE]) ? byKey[KEY_SOURCE] : "github";
-    const scope = VALID_SCOPES.includes(byKey[KEY_SCOPE]) ? byKey[KEY_SCOPE] : "accessories";
-
-    const value = { source, scope };
-    memCache = value;
-    memCacheTime = now;
-    localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value, time: now }));
-    return value;
-  } catch (err) {
-    console.warn("[dataSource] Failed to read settings, defaulting to 'github':", err.message);
-    return memCache || { source: "github", scope: "accessories" };
-  }
+  const all = await getSettings();
+  return {
+    source: VALID_SOURCES.includes(all?.[KEY_SOURCE]) ? all[KEY_SOURCE] : "github",
+    scope: VALID_SCOPES.includes(all?.[KEY_SCOPE]) ? all[KEY_SCOPE] : "accessories",
+  };
 }
 
 export async function getDataSource() {
@@ -93,13 +54,6 @@ export async function getDataSource() {
 export async function getJsonSourceScope() {
   const { scope } = await readSettings();
   return scope;
-}
-
-function updateCache(partial) {
-  const value = { source: "github", scope: "accessories", ...(memCache || {}), ...partial };
-  memCache = value;
-  memCacheTime = Date.now();
-  localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value, time: memCacheTime }));
 }
 
 export async function setDataSource(value, username = null) {
@@ -113,7 +67,7 @@ export async function setDataSource(value, username = null) {
     .upsert({ key: KEY_SOURCE, value, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });
   if (error) throw new Error(error.message);
 
-  updateCache({ source: value });
+  primeSetting(KEY_SOURCE, value);
 }
 
 export async function setJsonSourceScope(value, username = null) {
@@ -127,5 +81,5 @@ export async function setJsonSourceScope(value, username = null) {
     .upsert({ key: KEY_SCOPE, value, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });
   if (error) throw new Error(error.message);
 
-  updateCache({ scope: value });
+  primeSetting(KEY_SCOPE, value);
 }

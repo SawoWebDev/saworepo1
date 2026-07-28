@@ -15,58 +15,18 @@
  */
 
 import { getSupabase } from "./supabaseClient";
+import { getSettings, primeSetting } from "./appSettings";
 
 const KEY_ENABLED = "gdpr_banner_enabled";
-const CACHE_STORAGE_KEY = "sawo_gdpr_settings_cache_v1";
-const CACHE_MS = 30 * 1000; // 30s
 
-let memCache = null; // boolean
-let memCacheTime = 0;
-
-async function readEnabled() {
-  const now = Date.now();
-  if (memCache !== null && now - memCacheTime < CACHE_MS) return memCache;
-
-  try {
-    const cached = localStorage.getItem(CACHE_STORAGE_KEY);
-    if (cached) {
-      const { value, time } = JSON.parse(cached);
-      if (now - time < CACHE_MS) {
-        memCache = value;
-        memCacheTime = time;
-        return value;
-      }
-    }
-  } catch {}
-
-  try {
-    // Plain REST fetch (same pattern as dataSource.js / languageSettings.js)
-    // so public pages don't pull the supabase-js SDK just to read one flag.
-    const res = await fetch(
-      `${process.env.REACT_APP_SUPABASE_URL}/rest/v1/app_settings?key=eq.${KEY_ENABLED}&select=value`,
-      {
-        headers: {
-          apikey: process.env.REACT_APP_SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.REACT_APP_SUPABASE_ANON_KEY}`,
-        },
-      }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows = await res.json();
-    const enabled = typeof rows?.[0]?.value === "boolean" ? rows[0].value : false;
-
-    memCache = enabled;
-    memCacheTime = now;
-    localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value: enabled, time: now }));
-    return enabled;
-  } catch (err) {
-    console.warn("[gdprSettings] Failed to read setting, defaulting to disabled:", err.message);
-    return memCache ?? false;
-  }
-}
-
+// Reading is delegated to appSettings.js, which batches this key with every
+// other public setting into ONE request per page load (this used to be its
+// own separate round trip). The default-to-disabled behaviour is unchanged:
+// anything that isn't an explicit boolean true/false reads as false.
 export async function getGDPRBannerEnabled() {
-  return readEnabled();
+  const all = await getSettings();
+  const raw = all?.[KEY_ENABLED];
+  return typeof raw === "boolean" ? raw : false;
 }
 
 export async function setGDPRBannerEnabled(value, username = null) {
@@ -76,7 +36,5 @@ export async function setGDPRBannerEnabled(value, username = null) {
     .upsert({ key: KEY_ENABLED, value: !!value, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });
   if (error) throw new Error(error.message);
 
-  memCache = !!value;
-  memCacheTime = Date.now();
-  localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value: memCache, time: memCacheTime }));
+  primeSetting(KEY_ENABLED, !!value);
 }
