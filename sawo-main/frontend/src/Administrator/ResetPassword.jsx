@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase, resetPassword } from "./supabase";
 import "./admin.css";
-import logo from "./SAWO-logo.png";
+import logo from "./SAWO-logo.webp";
 
 export default function ResetPassword() {
   const navigate = useNavigate();

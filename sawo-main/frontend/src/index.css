@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  /* Guards against full-bleed sections (100vw + negative margin, the usual
+     way to break a section out of a max-width container) overflowing by the
+     scrollbar's own width — vw includes the scrollbar gutter, so a 100vw
+     element is slightly wider than the actually-visible viewport whenever a
+     vertical scrollbar is present, which otherwise creates a real (tiny)
+     horizontal scrollbar site-wide. Same fix already used ad hoc in
+     Sauna.jsx; this makes it permanent and global instead of per-page. */
+  html, body {
+    overflow-x: hidden;
+  }
+
   body, button, input, textarea, select {
     font-family: 'Montserrat', sans-serif;
   }

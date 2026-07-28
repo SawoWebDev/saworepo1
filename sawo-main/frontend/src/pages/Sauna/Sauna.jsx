@@ -13,6 +13,7 @@ import img_FLOOR_MOUNTED_SERIES1_1024x614_1 from "../../assets/FLOOR-MOUNTED-SER
 import img_DRAGON_SERIES_1_600x360_1 from "../../assets/DRAGON-SERIES-1-600x360-1.webp";
 import img_COMBI_SERIES_600x360_1 from "../../assets/COMBI-SERIES-600x360-1.webp";
 import img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1 from "../../assets/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE-600x600-1.webp";
+import img_Signature_D_v4_scaled from "../../assets/Signature-D-v4-scaled.webp";
 import img_siro_bench from "../../assets/siro-bench.webp";
 import img_R_500_D_Scene2 from "../../assets/R-500-D_Scene2.webp";
 import img_Ventilation from "../../assets/Ventilation.webp";
@@ -107,19 +108,19 @@ const Sauna = () => {
     {
       img: img_Innova_Classic_2_0,
       title: "Innova Series",
-      href: menuPaths.sauna.controls,
+      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Innova Series")}`,
       desc: "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface—no separate power controller needed.",
     },
     {
       img: img_saunova_2_0_user_interface,
       title: "Saunova Series",
-      href: menuPaths.sauna.controls,
+      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Saunova Series")}`,
       desc: "Versatile control for sauna temperature, humidity, ventilation, and lighting, featuring Smart Controlling, Door Sensor, Prerun Timer, and optional Fan, Dimmer, and Combi functions.",
     },
     {
       img: img_INNOVA_CLASSIC_1000X1000,
       title: "Control Accessories",
-      href: menuPaths.sauna.controls,
+      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Control Spare Parts")}`,
       desc: "Modern sauna control systems enhance your experience by managing heat, adjusting ambiance, monitoring energy usage, and providing maintenance alerts.",
     },
   ];
@@ -179,7 +180,7 @@ const Sauna = () => {
           <div style={{ marginTop: "32px" }}>
             <ButtonClear
               text="EXPLORE HEATERS"
-              href="https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf"
+              href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
               download
             />
           </div>
@@ -214,9 +215,10 @@ const Sauna = () => {
               margin: "0 auto",
             }}
           >
-            Called the "heart of sauna," we have over 100 different heater
-            models to choose from. SAWO heaters are designed with strong
-            expertise to fit both residential and commercial saunas.
+            Called the <strong>"heart of sauna,"</strong> we have over 100
+            different heater models to choose from. SAWO heaters are designed
+            with strong expertise to fit both residential and commercial
+            saunas.
           </p>
         </div>
 
@@ -344,16 +346,16 @@ const Sauna = () => {
       {/* SECTION 2: BENEFITS   */}
       {/* ===================== */}
       <section
-        className="sauna-benefits-section relative w-full py-16"
+        className="sauna-benefits-section relative w-full py-6"
         style={{ background: "#AF8564" }}
       >
         <style>{`
           *{ box-sizing: border-box; }
-          .sauna-card-unique-section { max-width: 100%; margin: 0 auto; overflow: hidden; padding: 14px 0; }
+          .sauna-card-unique-section { max-width: 100%; margin: 0 auto; overflow: hidden; padding: 0; }
           .sauna-carousel-wrapper { position: relative; overflow: hidden; }
           .sauna-card-unique-grid {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             animation: scroll-carousel 60s linear infinite;
             width: max-content;
           }
@@ -517,21 +519,35 @@ const Sauna = () => {
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(139,94,60,0.10);
+            box-shadow:
+              inset 0 1px 0 rgba(255,255,255,0.85),
+              inset 0 -1px 0 rgba(90,60,30,0.08),
+              0 6px 20px rgba(139,94,60,0.10);
             transition: all 0.35s ease;
             border: 1px solid #f0e8e0;
           }
           .control-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(139,94,60,0.18);
+            box-shadow:
+              inset 0 1px 0 rgba(255,255,255,0.9),
+              inset 0 -1px 0 rgba(90,60,30,0.10),
+              0 16px 40px rgba(139,94,60,0.18);
+          }
+          .control-card-img-wrap {
+            width: 100%;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
           }
           .control-card img {
             width: 100%;
-            height: 260px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: contain;
             transition: transform 0.5s ease;
           }
-          .control-card:hover img { transform: scale(1.04); }
+          .control-card:hover img { transform: scale(1.06); }
           .control-card-body { padding: 20px 22px 24px; }
           .control-card-title {
             font-family: 'Montserrat', sans-serif;
@@ -558,7 +574,9 @@ const Sauna = () => {
         <div className="controls-grid">
           {controlCards.map((card, i) => (
             <a href={card.href} className="control-card" key={i} style={{ textDecoration: "none" }}>
-              <img src={card.img} alt={card.title} />
+              <div className="control-card-img-wrap">
+                <img src={card.img} alt={card.title} />
+              </div>
               <div className="control-card-body">
                 <div className="control-card-title">{card.title}</div>
                 <div className="control-card-desc">{card.desc}</div>
@@ -615,13 +633,19 @@ const Sauna = () => {
             border-radius: 12px;
             overflow: hidden;
             background: #fff;
-            box-shadow: 0 4px 16px rgba(139,94,60,0.08);
+            box-shadow:
+              inset 0 1px 0 rgba(255,255,255,0.85),
+              inset 0 -1px 0 rgba(90,60,30,0.08),
+              0 4px 16px rgba(139,94,60,0.08);
             border: 1px solid #f0e8e0;
             transition: all 0.35s ease;
           }
           .custom-product-grid .product:hover {
             transform: translateY(-5px);
-            box-shadow: 0 14px 36px rgba(139,94,60,0.16);
+            box-shadow:
+              inset 0 1px 0 rgba(255,255,255,0.9),
+              inset 0 -1px 0 rgba(90,60,30,0.10),
+              0 14px 36px rgba(139,94,60,0.16);
           }
           .custom-product-grid .product img {
             width: 100%;
@@ -632,8 +656,8 @@ const Sauna = () => {
           .custom-product-grid .product:hover img { transform: scale(1.05); }
           .custom-product-grid .product h3 {
             font-family: 'Montserrat', sans-serif !important;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #8b5e3c;
             margin: 14px 16px 8px;
           }
@@ -645,6 +669,28 @@ const Sauna = () => {
             margin: 0 16px 16px;
             font-weight: 400;
           }
+          .sauna-view-all-wrap {
+            text-align: center;
+            margin: 40px auto 0;
+          }
+          .sauna-view-all-btn {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 14px 40px;
+            border: 2px solid #af8564;
+            border-radius: 6px;
+            color: #af8564;
+            background: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+          }
+          .sauna-view-all-btn:hover {
+            background: #af8564;
+            color: #ffffff;
+          }
           @media (max-width: 992px) {
             .custom-product-grid { grid-template-columns: repeat(2, 1fr); }
           }
@@ -654,6 +700,11 @@ const Sauna = () => {
         `}</style>
 
         <div className="custom-product-grid">
+          <Link to={menuPaths.sauna.accessories.accessorySets} className="product">
+            <img src={img_Signature_D_v4_scaled} alt="Accessory Sets" />
+            <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Accessory Sets</h3>
+            <p>Our carefully curated accessory sets offer something for everyone. From natural, zero-waste options to bold & sophisticated designs, the sets enhance your sauna enjoyment in every possible way.</p>
+          </Link>
           <Link to={menuPaths.sauna.accessories.pailsLadles} className="product">
             <img src={img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1} alt="Pails & Ladles" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Pails & Ladles</h3>
@@ -698,6 +749,12 @@ const Sauna = () => {
             <img src={img_Ventilation} alt="Ventilations & Miscellaneous Items" />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>Ventilations & Add-Ons</h3>
             <p>Explore your sauna experience with our range of ventilations and essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!</p>
+          </Link>
+        </div>
+
+        <div className="sauna-view-all-wrap">
+          <Link to={menuPaths.sauna.accessories.parent} className="sauna-view-all-btn">
+            VIEW ALL ACCESSORIES
           </Link>
         </div>
       </section>

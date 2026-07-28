@@ -2,8 +2,8 @@
 // Dynamic products from Supabase, filtered by the "Sauna Controls" category/tags, with search.
 // Converted from WallMounted.jsx — same structure, updated copy, categories, grouping, and hero image.
 
-import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import CirclesInfo from "../../components/CirclesInfo";
@@ -175,12 +175,23 @@ function ProductCard({ product }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function SaunaControls() {
   const { products: localProds, loading } = useLocalProducts();
+  const [searchParams] = useSearchParams();
 
   // Search query for the displayed grid
   const [search, setSearch] = useState("");
 
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
+
+  // Auto-filter to the group requested via ?group=<name> (e.g. links from the
+  // Sauna landing page's control cards), once the matching group exists.
+  const groupParam = searchParams.get("group");
+  useEffect(() => {
+    if (!groupParam) return;
+    if (FIXED_ORDER.includes(groupParam)) {
+      setActiveGroup(groupParam);
+    }
+  }, [groupParam]);
 
   const allProducts = useMemo(() => {
     const visible = localProds.filter(p => p.status === "published" && p.visible !== false);

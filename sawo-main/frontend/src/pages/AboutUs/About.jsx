@@ -8,8 +8,8 @@ import ISO9001 from '../../assets/About/aboutus-ISO-9001.webp';
 import ISO14001 from '../../assets/About/aboutus-ISO-14001.webp';
 import SaunaSupport from '../../assets/About/aboutus-Sauna-Support_LOGO-EN-sininen.webp';
 import LN1 from '../../assets/About/Latest News/LN1.webp';
-import LN3 from '../../assets/About/Latest News/LN3.jpg';
-import LN4 from '../../assets/About/Latest News/LN4.jpg';
+import LN3 from '../../assets/About/Latest News/LN3.webp';
+import LN4 from '../../assets/About/Latest News/LN4.webp';
 import newsBg from '../../assets/Contacts-bg.webp';
 import HeroWave from '../../components/HeroWave';
 
