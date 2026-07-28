@@ -2,9 +2,9 @@
 
 import React from "react";
 import heroBg from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/hero.webp";
-import cedarWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/cedar-wood.png";
-import aspenWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/aspen-wood.png";
-import spruceWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/spruce-wood.png";
+import cedarWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/cedar-wood.webp";
+import aspenWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/aspen-wood.webp";
+import spruceWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/spruce-wood.webp";
 import benchCedar from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-cedar-wood.webp";
 import benchAspen from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-aspen-wood.webp";
 import benchSpruce from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-spruce-wood.webp";

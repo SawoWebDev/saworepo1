@@ -6,7 +6,7 @@ import { NAV_ITEMS, can } from "./permissions";
 import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
 import PageHeader from "./PageHeader";
 import CmsSearch from "./CmsSearch.jsx";
-import logo from "./SAWO-logo.png";
+import logo from "./SAWO-logo.webp";
 import "./admin.css";
 
 // Order sections appear in — anything not listed falls back to alphabetical

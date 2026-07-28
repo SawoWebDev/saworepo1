@@ -9,8 +9,8 @@ import HeroWave from "../../components/HeroWave";
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
 import LN1 from "../../assets/About/Latest News/LN1.webp";
 import LN2 from "../../assets/About/Latest News/LN2.webp";
-import LN3 from "../../assets/About/Latest News/LN3.jpg";
-import LN4 from "../../assets/About/Latest News/LN4.jpg";
+import LN3 from "../../assets/About/Latest News/LN3.webp";
+import LN4 from "../../assets/About/Latest News/LN4.webp";
 import AquanaleLogo from "../../assets/About/Latest News/Aquanale-logo.webp";
 import PiscinaLogo from "../../assets/About/Latest News/piscina-logo.webp";
 

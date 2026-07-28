@@ -1,5 +1,5 @@
 // src/pages/Section1.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
@@ -56,16 +56,149 @@ const CAROUSEL_ITEMS = [
   },
 ];
 
+const SPEED_PX_PER_SEC = 40;
+
 /**
  * Section1 — Product category carousel.
+ *
+ * Autoplays via requestAnimationFrame + CSS transform (not a CSS @keyframes
+ * loop), wrapping the translateX value modulo half the track width so the
+ * loop is truly seamless — never resets/jumps. Same rAF loop also drives
+ * pointer-drag scrubbing (mouse + touch), pausing autoplay while dragging or
+ * hovered. The track is duplicated once (CAROUSEL_ITEMS x2) so the wrap point
+ * always lands on a matching item.
  */
 const Section1 = () => {
-  // Keep the infinite scroll paused until after load so Lighthouse can settle
-  // the page and finalize LCP/TBT (prevents the `NO_LCP` runtime error).
+  const containerRef = useRef(null);
+  const trackRef = useRef(null);
+
+  // Keep autoplay paused until after load so Lighthouse can settle the page
+  // and finalize LCP/TBT (prevents the `NO_LCP` runtime error). Dragging still
+  // works before this flips true.
   const [isReady, setIsReady] = useState(false);
+  const isReadyRef = useRef(false);
+  useEffect(() => {
+    isReadyRef.current = isReady;
+  }, [isReady]);
+
   useEffect(() => {
     if (prefersReducedMotion()) return;
     return afterPageLoad(() => setIsReady(true));
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const container = containerRef.current;
+    if (!track || !container) return;
+
+    let x = 0;
+    let half = 0;
+    let isHover = false;
+    let isDragging = false;
+    let dragMoved = false;
+    let startX = 0;
+    let startXPos = 0;
+    let lastTime = null;
+    let rafId = null;
+
+    const measure = () => {
+      half = track.scrollWidth / 2;
+    };
+
+    const wrap = (val) => {
+      if (half <= 0) return val;
+      val = val % half;
+      if (val > 0) val -= half;
+      return val;
+    };
+
+    const apply = () => {
+      track.style.transform = `translateX(${x}px)`;
+    };
+
+    const tick = (time) => {
+      if (lastTime === null) lastTime = time;
+      const dt = (time - lastTime) / 1000;
+      lastTime = time;
+
+      if (isReadyRef.current && !isDragging && !isHover && half > 0) {
+        x -= SPEED_PX_PER_SEC * dt;
+        x = wrap(x);
+        apply();
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const getClientX = (e) => {
+      if (e.touches && e.touches.length) return e.touches[0].clientX;
+      if (e.changedTouches && e.changedTouches.length) return e.changedTouches[0].clientX;
+      return e.clientX;
+    };
+
+    const dragStart = (e) => {
+      isDragging = true;
+      dragMoved = false;
+      startX = getClientX(e);
+      startXPos = x;
+      track.classList.add("sawo-dragging");
+      window.addEventListener("pointermove", dragMove);
+      window.addEventListener("pointerup", dragEnd);
+      window.addEventListener("pointercancel", dragEnd);
+    };
+
+    const dragMove = (e) => {
+      if (!isDragging) return;
+      const clientX = getClientX(e);
+      const dx = clientX - startX;
+      if (Math.abs(dx) > 3) dragMoved = true;
+      x = wrap(startXPos + dx);
+      apply();
+    };
+
+    const dragEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.classList.remove("sawo-dragging");
+      window.removeEventListener("pointermove", dragMove);
+      window.removeEventListener("pointerup", dragEnd);
+      window.removeEventListener("pointercancel", dragEnd);
+    };
+
+    // Prevent link navigation from firing right after a drag.
+    const onClickCapture = (e) => {
+      if (dragMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragMoved = false;
+      }
+    };
+
+    const onNativeDragStart = (e) => e.preventDefault();
+    const onPointerEnter = () => { isHover = true; };
+    const onPointerLeave = () => { isHover = false; };
+
+    track.addEventListener("pointerdown", dragStart);
+    track.addEventListener("dragstart", onNativeDragStart);
+    track.addEventListener("click", onClickCapture, true);
+    container.addEventListener("pointerenter", onPointerEnter);
+    container.addEventListener("pointerleave", onPointerLeave);
+    window.addEventListener("resize", measure);
+
+    measure();
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("pointermove", dragMove);
+      window.removeEventListener("pointerup", dragEnd);
+      window.removeEventListener("pointercancel", dragEnd);
+      track.removeEventListener("pointerdown", dragStart);
+      track.removeEventListener("dragstart", onNativeDragStart);
+      track.removeEventListener("click", onClickCapture, true);
+      container.removeEventListener("pointerenter", onPointerEnter);
+      container.removeEventListener("pointerleave", onPointerLeave);
+    };
   }, []);
 
   return (
@@ -87,72 +220,127 @@ const Section1 = () => {
 
       {/* Carousel Section */}
       <section className="pb-12 bg-gray-50">
-        <div>
-          <div
-            className="sawo-carousel-container overflow-x-auto overflow-y-hidden flex gap-5 snap-x scroll-smooth"
-            role="region"
-            aria-label="SAWO Sauna Products Carousel"
-          >
-            <div className={`sawo-carousel-track flex gap-5${isReady ? " is-ready" : ""}`} role="list">
-              {[...CAROUSEL_ITEMS, ...CAROUSEL_ITEMS].map((item, index) => (
-                <div
-                  className="sawo-carousel-item flex-shrink-0 w-[calc(25%-20px)] rounded overflow-hidden relative snap-start"
-                  key={index}
-                  role="listitem"
-                >
-                  <Link to={item.href} className="relative block text-white">
-                    <picture>
-                      <source srcSet={item.img} type="image/webp" />
-                      <img
-                        src={item.img}
-                        alt={item.alt}
-                        title={item.title}
-                        width="350"
-                        height="350"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-auto block transition-transform duration-500 ease-in-out hover:scale-105"
-                      />
-                    </picture>
-                    <div className="sawo-carousel-overlay absolute inset-0 bg-black/30 z-10" />
-                    <div className="sawo-carousel-content absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent flex flex-col h-24 z-20">
-                      <div className="sawo-carousel-title text-white text-base uppercase font-normal">
-                        {item.title}
-                      </div>
-                      <div className="sawo-carousel-caption text-white text-xs sm:text-sm md:text-sm opacity-0 translate-y-2 transition-all duration-300">
-                        {item.caption}
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
+        <div
+          className="sawo-carousel-container"
+          role="region"
+          aria-label="SAWO Sauna Products Carousel"
+          ref={containerRef}
+        >
+          <div className="sawo-carousel-track" role="list" ref={trackRef}>
+            {[...CAROUSEL_ITEMS, ...CAROUSEL_ITEMS].map((item, index) => (
+              <div className="sawo-carousel-item" key={index} role="listitem" aria-hidden={index >= CAROUSEL_ITEMS.length}>
+                <Link to={item.href}>
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    title={item.title}
+                    width="350"
+                    height="350"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="sawo-carousel-overlay" />
+                  <div className="sawo-carousel-content">
+                    <div className="sawo-carousel-title">{item.title}</div>
+                    <div className="sawo-carousel-caption">{item.caption}</div>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Styles */}
       <style jsx>{`
-        .sawo-carousel-container::-webkit-scrollbar { display: none; }
-        .sawo-carousel-container { scrollbar-width: none; }
-        .sawo-carousel-container:hover .sawo-carousel-track { animation-play-state: paused; }
+        .sawo-carousel-container {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          padding: 20px 0;
+        }
         .sawo-carousel-track {
           display: flex;
           gap: 20px;
-          animation: sawo-scroll 17s linear infinite;
-          animation-play-state: paused;
+          will-change: transform;
+          cursor: grab;
+          user-select: none;
         }
-        .sawo-carousel-track.is-ready {
-          animation-play-state: running;
+        .sawo-carousel-track.sawo-dragging { cursor: grabbing; }
+        .sawo-carousel-track.sawo-dragging * { pointer-events: none; }
+
+        .sawo-carousel-item {
+          flex: 0 0 calc(25% - 20px);
+          border-radius: 4px;
+          overflow: hidden;
+          position: relative;
+          font-family: 'Montserrat', sans-serif;
         }
+        .sawo-carousel-item a {
+          display: block;
+          position: relative;
+          text-decoration: none;
+          color: #fff;
+        }
+        .sawo-carousel-item img {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform .6s ease;
+        }
+        .sawo-carousel-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,.3);
+          z-index: 1;
+        }
+        .sawo-carousel-content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 14px 16px;
+          background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          height: 100px;
+          overflow: hidden;
+          z-index: 2;
+        }
+        .sawo-carousel-title, .sawo-carousel-caption {
+          position: relative;
+          z-index: 3;
+          color: #fff !important;
+          font-family: 'Montserrat', sans-serif;
+        }
+        .sawo-carousel-title {
+          font-size: clamp(12px, 3vw, 20px);
+          margin: 0;
+          text-transform: uppercase;
+          font-weight: 500;
+          line-height: 1.2;
+          flex-shrink: 0;
+          text-shadow: 2px 3px 5px rgba(0,0,0,.7);
+        }
+        .sawo-carousel-caption {
+          font-size: clamp(10px, 1.2vw, 14px);
+          line-height: 1.4;
+          opacity: 0;
+          transform: translateY(10px);
+          transition: opacity .4s ease, transform .4s ease;
+          margin-top: 4px;
+          flex-shrink: 0;
+          font-weight: 400;
+          text-align: left;
+          text-shadow: 1px 2px 4px rgba(0,0,0,.6);
+        }
+        .sawo-carousel-item:hover img { transform: scale(1.08); }
         .sawo-carousel-item:hover .sawo-carousel-caption {
           opacity: 1;
           transform: translateY(0);
         }
-        @keyframes sawo-scroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
+
         @media (max-width: 1024px) { .sawo-carousel-item { flex: 0 0 calc(33.333% - 20px); } }
         @media (max-width: 768px)  { .sawo-carousel-item { flex: 0 0 calc(50% - 20px); } }
         @media (max-width: 480px)  { .sawo-carousel-item { flex: 0 0 100%; } }

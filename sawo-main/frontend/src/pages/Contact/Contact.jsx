@@ -8,13 +8,17 @@ import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import HeroWave from "../../components/HeroWave";
 import woodBg from "../../assets/SaunaCalculator-bg.webp";
+import officeSawoInc from "../../assets/Contact/offices/sawo-inc-plant.webp";
+import officeSawoNordic from "../../assets/Contact/offices/sawo-nordic.webp";
+import officeFem from "../../assets/Contact/offices/fem-cable-tower.webp";
+import officeEuropeHub from "../../assets/Contact/offices/sawo-europe-hub.webp";
 
 // ─── Office data ──────────────────────────────────────────────────────────────
 const OFFICES = [
   {
     name: "SAWO Inc.",
     role: "Global Sales & General Inquiries",
-    image: "https://secret-newsite.sawo.com/wp-content/uploads/2021/03/sawobuilding_plant1.jpg",
+    image: officeSawoInc,
     address: ["Mactan Economic Zone 2, Mactan,", "Cebu 6015, Philippines"],
     mapUrl: "https://www.google.com/maps/place/SAWO+Inc./@10.2908545,123.9474748,20678m/data=!3m1!1e3!4m6!3m5!1s0x33a999f9aaaaaaab:0x638e93b7abe9d209!8m2!3d10.3065109!4d123.9662661!16s%2Fg%2F11xbg6w1q",
     tel: "+63 32 341 2233",
@@ -24,7 +28,7 @@ const OFFICES = [
   {
     name: "SAWO Nordic Oy",
     role: "Sales & Warehouse for the Nordics",
-    image: "https://secret-newsite.sawo.com/wp-content/uploads/2021/03/nordic3.jpg",
+    image: officeSawoNordic,
     address: ["Hampuntie 18, 36220 Kangasala,", "Finland"],
     mapUrl: "https://www.google.com/maps/place/Sawo+Nordic+Oy/@61.4682459,23.8889861,40152m/data=!3m1!1e3!4m6!3m5!1s0x468f1ff184c90c83:0xe1681d5d0909096b!8m2!3d61.4996934!4d23.7501876!16s%2Fg%2F1q675ymsx",
     tel: "+358 40 038 3265",
@@ -34,7 +38,7 @@ const OFFICES = [
   {
     name: "F.E.M. Ltd",
     role: "Sales & Warehouse for Asia",
-    image: "https://www.sawo.com/wp-content/uploads/2026/04/cable-tower.jpeg",
+    image: officeFem,
     address: ["2302, 23rd Floor, Cable TV Tower 9", "Hoi Shing Road, Tsuen Wan, Hong Kong"],
     mapUrl: "https://www.google.com/maps/place/Cable+T+V+Tower,+9+Hoi+Shing+Rd,+Chai+Wan+Kok,+Hong+Kong/@22.3720256,114.1051012,1215m/data=!3m1!1e3!4m6!3m5!1s0x3403f8e56f3381c9:0xbdbb69dc3fa013e4!8m2!3d22.3727747!4d114.1073972!16s%2Fg%2F12j799c55",
     tel: "+852 2417 1188",
@@ -44,7 +48,7 @@ const OFFICES = [
   {
     name: "SAWO Sauna Europe Hub B.V.",
     role: "Sales & Warehouse for Europe",
-    image: "https://www.sawo.com/wp-content/uploads/2026/02/De-Vest.png",
+    image: officeEuropeHub,
     address: ["De Vest 24, 5555 XL Valkenswaard", "Netherlands"],
     mapUrl: "https://www.google.com/maps/place/SAWO+Sauna+Europe+B.V./@51.347626,5.4851098,820m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47c6d7006fe0a9bb:0x95ddf180c98d0533!8m2!3d51.347626!4d5.4876847!16s%2Fg%2F11nbg5c2pp",
     tel: "+358 40 016 8269",

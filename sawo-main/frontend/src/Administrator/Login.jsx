@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiLogin, saveSession, forgotPassword, getSession } from "./supabase";
 import "./admin.css";
-import logo from "./SAWO-logo.png";
+import logo from "./SAWO-logo.webp";
 
 export default function Login() {
   const [username, setUsername] = useState("");
