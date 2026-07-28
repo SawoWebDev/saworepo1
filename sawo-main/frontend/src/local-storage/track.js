@@ -5,18 +5,17 @@
  * First-party visitor analytics feeding the existing /admin/analytics
  * dashboard (tables: analytics_page_views — see scripts/setup-analytics.sql).
  *
- * Talks to our own backend (backend/trackingApi.js), not Supabase directly —
- * the backend holds the service-role key, does bot filtering, and looks up
- * geo from the visitor's real IP. Fire-and-forget with try/catch so a
- * failure can never affect the page, and skips admins entirely.
+ * Talks to same-origin Cloudflare Pages Functions (functions/api/track/*.js),
+ * not Supabase directly — the function holds the service-role key, does bot
+ * filtering, and reads geo off Cloudflare's request.cf. Fire-and-forget with
+ * try/catch so a failure can never affect the page, and skips admins entirely.
  */
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const PAGEVIEW_ENDPOINT = `${BACKEND_URL}/api/track/pageview`;
-const DURATION_ENDPOINT = `${BACKEND_URL}/api/track/duration`;
+const PAGEVIEW_ENDPOINT = "/api/track/pageview";
+const DURATION_ENDPOINT = "/api/track/duration";
 
 export function isAdmin() {
   try {
@@ -147,15 +146,13 @@ function removeInteractionListeners() {
 /**
  * Hold the very first page view until the visitor actually touches the page.
  *
- * The backend lives on Render's free tier, which spins down when idle: a
- * request that lands on a cold instance can hang until it times out, and the
- * browser logs that as "Failed to load resource: net::ERR_TIMED_OUT" no matter
- * how the request was sent (a caught fetch and even sendBeacon both surface
- * it). Lighthouse's Best Practices "errors in console" audit scores that
- * against us. A lab run loads the page and never touches it, so gating on real
- * input means no request is made during an audit — while any actual visitor
- * fires one of these within seconds and is tracked normally. No timers here on
- * purpose: a delay would still fire inside the audit window.
+ * A Lighthouse/PageSpeed run loads the page and never touches it, so gating
+ * on real input means no tracking request fires during an audit — while any
+ * actual visitor fires one of these within seconds and is tracked normally.
+ * No timers here on purpose: a delay would still fire inside the audit
+ * window. This also used to matter for a cold-started Render backend timing
+ * out mid-audit; that no longer applies now that tracking is a same-origin
+ * Pages Function, but the audit-exclusion reason alone is enough to keep it.
  *
  * Once the visitor has interacted, later route changes track immediately.
  */
@@ -195,7 +192,7 @@ function finalizeCurrent() {
 }
 
 async function trackPageView(path) {
-  if (!BACKEND_URL || isAdmin()) return;
+  if (isAdmin()) return;
   if (path.startsWith("/admin") || path === "/login") return;
 
   finalizeCurrent();
