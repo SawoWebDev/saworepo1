@@ -127,7 +127,7 @@ export default function DoorsHandles() {
           <h1 className="wm-hero-title">SAUNA DOORS & HANDLES</h1>
           <p className="wm-hero-subtitle">Elevate your sauna entrance with quality and style</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -199,7 +199,7 @@ export default function DoorsHandles() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Doors & Handles"
         description="SAWO sauna doors and handles are engineered for the demanding sauna environment — heat-resistant, durable, and beautifully designed. From classic wooden frames to modern tempered glass, every door is built to last and impress."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

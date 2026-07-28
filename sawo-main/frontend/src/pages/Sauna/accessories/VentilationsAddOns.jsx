@@ -128,7 +128,7 @@ export default function VentilationsAddOns() {
           <h1 className="wm-hero-title">VENTILATIONS & ADD-ONS</h1>
           <p className="wm-hero-subtitle">Everything you need to complete your sauna setup</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -200,7 +200,7 @@ export default function VentilationsAddOns() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Ventilation & Add-Ons"
         description="SAWO ventilation and miscellaneous accessories are designed to optimise your sauna environment — ensuring proper airflow, safety, and convenience. Built to the same high standards as all SAWO products for lasting performance."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

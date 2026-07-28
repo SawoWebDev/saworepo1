@@ -128,7 +128,7 @@ export default function Thermometers() {
           <h1 className="wm-hero-title">THERMOMETERS & COMBINED METERS</h1>
           <p className="wm-hero-subtitle">Monitor your sauna with precision instruments</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -200,7 +200,7 @@ export default function Thermometers() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Thermometers"
         description="SAWO thermometers and hygrometers are crafted for accuracy and longevity in high-heat, high-humidity environments. Monitor your sauna with confidence using instruments built to last."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

@@ -321,7 +321,7 @@ const Floor = () => {
               </p>
               <div style={{ marginTop: "24px" }}>
                 <a
-                  href="https://www.sawo.com/wp-content/uploads/2026/07/Floor-Series-2026.pdf"
+                  href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Floor-Series-2026.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="wm-brochure-btn"

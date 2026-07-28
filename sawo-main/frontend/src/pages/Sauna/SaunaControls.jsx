@@ -286,7 +286,7 @@ export default function SaunaControls() {
           <h1 className="wm-hero-title">SAUNA CONTROLS</h1>
           <p className="wm-hero-subtitle">Precision control for the perfect sauna experience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
           </div>
         </div>
       <HeroWave />
@@ -453,7 +453,7 @@ export default function SaunaControls() {
               </p>
               <div style={{ marginTop: "20px" }}>
                 <a
-                  href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+                  href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="wm-brochure-btn"

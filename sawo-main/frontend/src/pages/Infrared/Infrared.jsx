@@ -111,7 +111,7 @@ const Infrared = () => {
           <h1 className="ir-hero-title">INFRARED SAUNA</h1>
           <div style={{ marginTop: "28px" }}>
             <a
-              href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Infrared-Brochure-2026.pdf"
+              href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Infrared-Brochure-2026-1.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="ir-brochure-btn"

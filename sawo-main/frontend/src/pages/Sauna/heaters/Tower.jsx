@@ -327,7 +327,7 @@ const Tower = () => {
               <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
               <p className="wm-why-desc">User-Friendly Controls — Easily adjust temperature and time settings for your perfect sauna experience.</p>
               <div style={{ marginTop: "20px" }}>
-                <a href="https://www.sawo.com/wp-content/uploads/2026/07/Tower-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
+                <a href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Tower-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
               </div>
             </div>
             <div className="wm-why-right"><CirclesInfo /></div>

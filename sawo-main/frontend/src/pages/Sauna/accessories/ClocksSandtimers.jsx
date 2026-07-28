@@ -127,7 +127,7 @@ export default function ClocksSandtimers() {
           <h1 className="wm-hero-title">CLOCKS & SANDTIMERS</h1>
           <p className="wm-hero-subtitle">Track your sauna session in style</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -199,7 +199,7 @@ export default function ClocksSandtimers() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Clocks & Timers"
         description="SAWO clocks and sand timers are crafted from natural wood for an authentic sauna aesthetic. Durable, heat-resistant, and beautifully designed to complement any sauna interior."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

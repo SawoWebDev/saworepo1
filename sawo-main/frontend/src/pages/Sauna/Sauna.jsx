@@ -1,6 +1,6 @@
 // Sauna.jsx
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import menuPaths from "../../menuPaths";
@@ -30,6 +30,22 @@ import HeroWave from "../../components/HeroWave";
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
 
 const Sauna = () => {
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    img.src = img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled;
+    const reveal = () => { if (!cancelled) setHeroLoaded(true); };
+    if (img.complete) {
+      reveal();
+    } else {
+      img.onload = reveal;
+      img.onerror = reveal; // don't leave the hero hidden forever if the image fails
+    }
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     // Inject Font Awesome if not already present
     if (!document.querySelector('link[href*="font-awesome"]')) {
@@ -132,13 +148,22 @@ const Sauna = () => {
       {/* ===================== */}
       <section
         className="sauna-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder, visible until the hero photo is fully loaded
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
+
         {/* Overlay */}
         <div
           style={{
@@ -149,7 +174,14 @@ const Sauna = () => {
           }}
         />
 
-        <div style={{ position: "relative", zIndex: 1 }}>
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+          }}
+        >
           <h1
             className="text-white font-bold hero-title"
             style={{

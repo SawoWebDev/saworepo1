@@ -128,7 +128,7 @@ export default function BenchesFloorTiles() {
           <h1 className="wm-hero-title">BENCHES & FLOOR TILES</h1>
           <p className="wm-hero-subtitle">Comfort and craftsmanship for your sauna interior</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -200,7 +200,7 @@ export default function BenchesFloorTiles() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Benches & Accessories"
         description="SAWO benches and floor accessories are crafted from premium wood, durable, heat-resistant, and beautifully finished. Designed to complement any sauna interior while providing lasting comfort and practicality."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 
