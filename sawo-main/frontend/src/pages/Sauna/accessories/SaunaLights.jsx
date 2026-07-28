@@ -127,7 +127,7 @@ export default function SaunaLights() {
           <h1 className="wm-hero-title">SAUNA LIGHTS & COVERS</h1>
           <p className="wm-hero-subtitle">Create the perfect sauna ambience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -199,7 +199,7 @@ export default function SaunaLights() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Lighting"
         description="SAWO sauna lights and covers are built for the demanding sauna environment — heat-resistant, moisture-proof, and beautifully designed to elevate your relaxation space."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

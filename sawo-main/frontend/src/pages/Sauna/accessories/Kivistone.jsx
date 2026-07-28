@@ -126,7 +126,7 @@ export default function Kivistone() {
           <h1 className="wm-hero-title">KIVISTONE</h1>
           <p className="wm-hero-subtitle">Unique soapstone products crafted with Nordic precision</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -198,7 +198,7 @@ export default function Kivistone() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose Kivistone"
         description="Kivistone soapstone products are renowned for their natural heat retention, durability, and timeless Nordic aesthetic. Each piece is uniquely crafted, making them ideal gifts and home accessories that last a lifetime."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

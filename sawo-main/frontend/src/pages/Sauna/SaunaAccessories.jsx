@@ -6,7 +6,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
-import ButtonClear from "../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import img_Signature_BL_v2_1_scaled from "../../assets/Signature-BL-v2-1-scaled.webp";
 import img_Signature_D_v4_scaled from "../../assets/Signature-D-v4-scaled.webp";
 import img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1 from "../../assets/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE-600x600-1.webp";
@@ -40,13 +40,16 @@ const SaunaAccessories = () => {
         <div className="sa-hero-content">
           <h1 className="sa-hero-title">SAUNA ACCESSORIES</h1>
           <p className="sa-hero-subtitle">Discover the Perfect Sauna Accessories</p>
-          <div style={{ marginTop: "32px" }}>
-            <ButtonClear
-              text="VIEW BROCHURE"
-              href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
-              download
-            />
-          </div>
+          <BrochureDropdownButton
+            text="VIEW BROCHURE"
+            items={[
+              { label: "Kivistone Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf" },
+              { label: "Sauna Lights Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" },
+              { label: "Accessory Sets Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" },
+              { label: "Accessories Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" },
+              { label: "Curve LED Lights Flyer", href: "https://www.sawo.com/wp-content/uploads/2026/07/Curve-LED-Lights-Flyer-for-USA-EU-2026.pdf" },
+            ]}
+          />
         </div>
       <HeroWave />
       </section>

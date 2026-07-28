@@ -169,7 +169,7 @@ export default function PailsLadles() {
           <div style={{ marginTop: "32px" }}>
             <ButtonClear
               text="VIEW BROCHURE"
-              href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+              href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
               download
             />
           </div>
@@ -304,7 +304,7 @@ export default function PailsLadles() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Pails & Ladles"
         description="SAWO pails and ladles are crafted from premium natural materials — cedar, aspen, and pine — as well as modern stainless steel options. Designed for authentic Finnish sauna culture, each piece is built to last and enhance your löyly ritual."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

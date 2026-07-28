@@ -126,7 +126,7 @@ export default function AccessorySets() {
           <h1 className="wm-hero-title">ACCESSORY SETS</h1>
           <p className="wm-hero-subtitle">Everything you need for the perfect sauna experience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -198,7 +198,7 @@ export default function AccessorySets() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Accessory Sets"
         description="SAWO accessory sets are thoughtfully curated to pair the finest pails, ladles, thermometers, and accessories in one complete package — saving you time and ensuring every piece works in perfect harmony."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 

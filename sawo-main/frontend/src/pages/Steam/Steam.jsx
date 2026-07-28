@@ -94,7 +94,7 @@ const Steam = () => {
           </p>
           <div style={{ marginTop: "32px" }}>
             <a
-              href="https://www.sawo.com/wp-content/uploads/2025/12/Steam-SaunaRV4_compressed.pdf"
+              href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Steam-Sauna-2026.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="stm-brochure-btn"

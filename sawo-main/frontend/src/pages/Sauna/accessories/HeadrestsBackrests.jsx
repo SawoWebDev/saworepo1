@@ -127,7 +127,7 @@ export default function HeadrestsBackrests() {
           <h1 className="wm-hero-title">HEADRESTS & BACKRESTS</h1>
           <p className="wm-hero-subtitle">Comfort and support for the ultimate sauna experience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" download />
+            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
           </div>
         </div>
       <HeroWave />
@@ -199,7 +199,7 @@ export default function HeadrestsBackrests() {
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Comfort Accessories"
         description="SAWO headrests and backrests are crafted from premium wood and moisture-resistant materials, designed to provide lasting comfort in the high-heat sauna environment without compromising on style."
-        brochureHref="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+        brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />
 
