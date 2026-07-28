@@ -3,9 +3,92 @@ import { Link, useLocation } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
-import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
-import { getHeaderLayout, getCachedHeaderLayout } from "../../local-storage/headerLayout";
-import { getHeaderNavStyle, getCachedHeaderNavStyle } from "../../local-storage/headerNavStyle";
+// Translation / language switcher temporarily disabled site-wide — see the
+// commented-out <HeaderLanguageSwitcher /> mounts further down. Even with the
+// CMS toggle off, the switcher's settings read ran after page load and made it
+// appear (then vanish) during the load window, so it's cut from the header
+// entirely for now rather than merely switched off.
+// import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
+
+/**
+ * The header's nav structure and hover style used to be two CMS settings
+ * (header_layout / header_nav_style in app_settings, read via
+ * local-storage/headerLayout.js + headerNavStyle.js). They are now fixed in
+ * code at Layout 1 + Style 2, and the matching Settings cards are gone.
+ *
+ * That's a speed change as much as a product one: the header no longer waits
+ * on — or re-renders for — an async settings read, the prerendered markup is
+ * byte-identical to what hydration produces (no post-paint swap), and the
+ * Layout 2 mega-menu markup is dropped from the bundle entirely.
+ */
+const NAV_STYLE = "style2";
+
+// Layout 1 — Sauna / Steam / Infrared / Support / Contact Us / About Us /
+// Careers as separate top-level items, each with its own dropdown.
+// Module scope, not a const inside the component: it's static data, so
+// rebuilding these ~30 objects on every render (every scroll tick fires a
+// setState) was pure waste.
+const navItems = [
+  { name: "Home", path: menuPaths.home },
+  {
+    name: "Sauna",
+    path: menuPaths.sauna.parent,
+    submenu: [
+      {
+        name: "Sauna Heaters",
+        path: menuPaths.sauna.heaters.parent,
+        submenu: [
+          { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
+          { name: "Tower", path: menuPaths.sauna.heaters.tower },
+          { name: "Stone", path: menuPaths.sauna.heaters.stone },
+          { name: "Floor", path: menuPaths.sauna.heaters.floor },
+          { name: "Combi", path: menuPaths.sauna.heaters.combi },
+          { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+        ],
+      },
+      { name: "Sauna Controls", path: menuPaths.sauna.controls },
+      { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent },
+      {
+        name: "Sauna Rooms",
+        path: menuPaths.sauna.rooms,
+        submenu: [
+          { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
+          { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Steam",
+    path: menuPaths.steam.parent,
+    submenu: [
+      { name: "Steam Generators", path: menuPaths.steam.generators },
+      { name: "Steam Controls", path: menuPaths.steam.controls },
+      { name: "Steam Accessories", path: menuPaths.steam.accessories },
+    ],
+  },
+  { name: "Infrared", path: menuPaths.infrared },
+  {
+    name: "Support",
+    path: menuPaths.support.parent,
+    submenu: [
+      { name: "Frequently Asked Questions", path: menuPaths.support.faq },
+      { name: "User Manuals", path: menuPaths.support.manuals },
+      { name: "Product Catalogue", path: menuPaths.support.catalogue },
+      { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
+    ],
+  },
+  { name: "Contact Us", path: menuPaths.contact },
+  {
+    name: "About Us",
+    path: menuPaths.about.parent,
+    submenu: [
+      { name: "Latest News", path: menuPaths.about.news },
+      { name: "Sustainability", path: menuPaths.about.sustainability },
+    ],
+  },
+  { name: "Careers", path: menuPaths.careers },
+];
 
 export default function Header() {
   const location = useLocation();
@@ -18,189 +101,15 @@ export default function Header() {
   const [hoveredSubmenu, setHoveredSubmenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
-  // Paint the admin's selected values immediately from cache rather than
-  // starting at the built-in default and swapping once the async read
-  // resolves — that swap is what made a selected layout1/style2 visibly
-  // flash layout2/style1 first. The hardcoded strings below are now only
-  // reached on a genuine first visit, when nothing has ever been cached.
-  // See local-storage/headerLayout.js + headerNavStyle.js.
-  const [layout, setLayout] = useState(() => getCachedHeaderLayout() || "layout2");
-  const [navStyle, setNavStyle] = useState(() => getCachedHeaderNavStyle() || "style1");
-
-  useEffect(() => {
-    let cancelled = false;
-    getHeaderLayout().then((value) => { if (!cancelled) setLayout(value); });
-    getHeaderNavStyle().then((value) => { if (!cancelled) setNavStyle(value); });
-    return () => { cancelled = true; };
-  }, []);
-
   const lastScrollY = useRef(0);
   const navRef = useRef(null);
   const menuTimeout = useRef(null);
   const subMenuTimeout = useRef(null);
   const mobileMenuRef = useRef(null);
 
-  // Layout 1 — Sauna / Steam / Infrared / Support / Contact Us / About Us /
-  // Careers as separate top-level items, each with its own dropdown.
-  const navItemsLayout1 = [
-    { name: "Home", path: menuPaths.home },
-    {
-      name: "Sauna",
-      path: menuPaths.sauna.parent,
-      submenu: [
-        {
-          name: "Sauna Heaters",
-          path: menuPaths.sauna.heaters.parent,
-          submenu: [
-            { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
-            { name: "Tower", path: menuPaths.sauna.heaters.tower },
-            { name: "Stone", path: menuPaths.sauna.heaters.stone },
-            { name: "Floor", path: menuPaths.sauna.heaters.floor },
-            { name: "Combi", path: menuPaths.sauna.heaters.combi },
-            { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
-          ],
-        },
-        { name: "Sauna Controls", path: menuPaths.sauna.controls },
-        { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent },
-        {
-          name: "Sauna Rooms",
-          path: menuPaths.sauna.rooms,
-          submenu: [
-            { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
-            { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
-          ],
-        },
-      ],
-    },
-    {
-      name: "Steam",
-      path: menuPaths.steam.parent,
-      submenu: [
-        { name: "Steam Generators", path: menuPaths.steam.generators },
-        { name: "Steam Controls", path: menuPaths.steam.controls },
-        { name: "Steam Accessories", path: menuPaths.steam.accessories },
-      ],
-    },
-    { name: "Infrared", path: menuPaths.infrared },
-    {
-      name: "Support",
-      path: menuPaths.support.parent,
-      submenu: [
-        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
-        { name: "User Manuals", path: menuPaths.support.manuals },
-        { name: "Product Catalogue", path: menuPaths.support.catalogue },
-        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
-      ],
-    },
-    { name: "Contact Us", path: menuPaths.contact },
-    {
-      name: "About Us",
-      path: menuPaths.about.parent,
-      submenu: [
-        { name: "Latest News", path: menuPaths.about.news },
-        { name: "Sustainability", path: menuPaths.about.sustainability },
-      ],
-    },
-    { name: "Careers", path: menuPaths.careers },
-  ];
-
-  // Layout 2 — current default: single "Products" mega-menu.
-  const navItemsLayout2 = [
-    { name: "Home", path: menuPaths.home },
-    {
-      name: "Products",
-      path: menuPaths.products,
-      megaMenu: true,
-      megaColumns: [
-        {
-          groupHeading: "Sauna",
-          columns: [
-            {
-              items: [
-                { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
-                { name: "Tower", path: menuPaths.sauna.heaters.tower },
-                { name: "Stone", path: menuPaths.sauna.heaters.stone },
-                { name: "Floor", path: menuPaths.sauna.heaters.floor },
-                { name: "Combi", path: menuPaths.sauna.heaters.combi },
-                { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
-              ],
-            },
-            {
-              items: [
-                { name: "Sauna Heaters", path: menuPaths.sauna.heaters.parent, matchExact: true },
-                { name: "Sauna Controls", path: menuPaths.sauna.controls },
-                { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent },
-                { name: "Sauna Rooms", path: menuPaths.sauna.rooms, matchExact: true },
-                { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns, matchExact: true },
-                { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels, matchExact: true },
-              ],
-            },
-          ],
-        },
-        {
-          heading: "Steam",
-          items: [
-            { name: "Steam Generators", path: menuPaths.steam.generators },
-            { name: "Steam Controls", path: menuPaths.steam.controls },
-            { name: "Steam Accessories", path: menuPaths.steam.accessories },
-          ],
-        },
-        {
-          heading: "Infrared",
-          items: [{ name: "Infrared", path: menuPaths.infrared }],
-        },
-      ],
-    },
-    {
-      name: "Support",
-      path: menuPaths.support.parent,
-      submenu: [
-        { name: "Frequently Asked Questions", path: menuPaths.support.faq },
-        { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
-        { name: "User Manuals", path: menuPaths.support.manuals },
-        { name: "Product Catalogue", path: menuPaths.support.catalogue },
-      ],
-    },
-    {
-      name: "About Us",
-      path: menuPaths.about.parent,
-      submenu: [
-        { name: "Latest News", path: menuPaths.about.news },
-        { name: "Sustainability", path: menuPaths.about.sustainability },
-        { name: "Careers", path: menuPaths.careers },
-      ],
-    },
-    { name: "Contact Us", path: menuPaths.contact },
-  ];
-
-  const navItems = layout === "layout1" ? navItemsLayout1 : navItemsLayout2;
 
   // --- Active helpers ---
   const isActive = (item) => {
-    if (item.megaMenu && item.megaColumns) {
-      return item.megaColumns.some((col) => {
-        // Handle grouped columns (Sauna with 2 sub-columns)
-        if (col.columns) {
-          return col.columns.some((subCol) => {
-            const allItems = subCol.items || [];
-            return allItems.some(
-              (i) =>
-                (i.path && (i.matchExact ? location.pathname === i.path : location.pathname.startsWith(i.path))) ||
-                (i.children && i.children.some((c) => c.path && location.pathname.startsWith(c.path)))
-            );
-          });
-        }
-        // Handle regular columns (Steam, Infrared)
-        const allItems = col.sections
-          ? col.sections.flatMap((s) => s.items)
-          : col.items || [];
-        return allItems.some(
-          (i) =>
-            (i.path && location.pathname.startsWith(i.path)) ||
-            (i.children && i.children.some((c) => c.path && location.pathname.startsWith(c.path)))
-        );
-      });
-    }
     if (item.path && location.pathname === item.path) return true;
     if (item.submenu) {
       return item.submenu.some((sub) => {
@@ -227,17 +136,35 @@ export default function Header() {
 
   // Hide header on scroll down, show on scroll up; separately track whether
   // we've left the very top of the page for the transparent-to-white swap.
+  //
+  // Coalesced into one rAF callback per frame and registered passive: the
+  // previous version ran on every scroll event (dozens per frame's worth of
+  // wheel/touch input) and called setHidden/setScrolled unconditionally, so a
+  // single flick re-rendered the entire header — every nav item, every
+  // dropdown — hundreds of times for values that had not changed. The
+  // useState setters below bail out when the value is identical, so React
+  // now re-renders only at the two thresholds that actually matter (8px and
+  // 80px). Deps are empty so the listener is attached once; mobileOpen is
+  // read through a ref-free functional setState instead of re-subscribing.
   useEffect(() => {
+    let frame = 0;
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      setHidden(currentScroll > lastScrollY.current && currentScroll > 80);
-      setScrolled(currentScroll > 8);
-      lastScrollY.current = currentScroll;
-      if (mobileOpen) setMobileOpen(false);
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const currentScroll = window.scrollY;
+        setHidden(currentScroll > lastScrollY.current && currentScroll > 80);
+        setScrolled(currentScroll > 8);
+        lastScrollY.current = currentScroll;
+        setMobileOpen((open) => (open ? false : open));
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [mobileOpen]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
 
   // Close mobile menu on outside click
@@ -289,7 +216,7 @@ export default function Header() {
         />
       )}
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 font-sans nav-style-${navStyle} ${
+        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 font-sans nav-style-${NAV_STYLE} ${
           hidden ? "-translate-y-full" : "translate-y-0"
         } ${scrolled ? "shadow-md header--solid" : "header--transparent"}`}
         style={{
@@ -309,10 +236,14 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav + Search (grouped on right) */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-3">
+              {/* gap-1 between items, not gap-6: Layout 1 puts eight top-level
+                  items on the bar, and Style 2's pill already adds 14px of
+                  padding either side of each label, so the old spacing read as
+                  a very sparse, disconnected row. */}
               <nav
                 ref={navRef}
-                className="flex gap-6 whitespace-nowrap text-[16px] font-normal text-[rgb(51,51,51)]"
+                className="flex gap-1 whitespace-nowrap text-[16px] font-normal text-[rgb(51,51,51)]"
               >
               {navItems.map((item) => (
                 <div
@@ -322,17 +253,7 @@ export default function Header() {
                   onMouseLeave={handleMouseLeaveMenu}
                 >
                   {/* Top-level link or button */}
-                  {item.megaMenu ? (
-                    <Link
-                      to={item.path}
-                      className={`menu-item nav-toplevel flex items-center gap-1 transition-colors text-[rgb(51,51,51)] ${
-                        isActive(item) ? "active" : ""
-                      }`}
-                    >
-                      <span className="menu-text">{item.name}</span>{" "}
-                      <i className="fa-solid fa-chevron-down text-[10px]"></i>
-                    </Link>
-                  ) : item.submenu ? (
+                  {item.submenu ? (
                     item.path ? (
                       <Link
                         to={item.path}
@@ -362,81 +283,6 @@ export default function Header() {
                     >
                       {item.name}
                     </Link>
-                  )}
-
-                  {/* Mega Menu — Products */}
-                  {item.megaMenu && hoveredMenu === item.name && (
-                    <div
-                      className="absolute top-full mt-2 bg-white rounded-xl shadow-2xl z-50 py-4 px-4 border border-gray-100 flex gap-0"
-                      style={{ minWidth: "min(90vw, 720px)", left: "50%", transform: "translateX(-50%)" }}
-                    >
-                      {item.megaColumns.map((col, ci) => (
-                        col.groupHeading ? (
-                          <div key={ci} className={`flex-1 ${ci < item.megaColumns.length - 1 ? "border-r border-gray-100" : ""}`}>
-                            <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-3 pr-4">
-                              {col.groupHeading}
-                            </p>
-                            <div className="flex gap-0">
-                              <div className="flex-1 px-4">
-                                {col.columns[0].items.map((it) => (
-                                  <Link
-                                    key={it.path}
-                                    to={it.path}
-                                    onClick={() => setHoveredMenu(null)}
-                                    className={`menu-item block px-2 py-1.5 text-[13px] rounded-lg transition-colors text-[rgb(51,51,51)] ${
-                                      (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
-                                        ? "active"
-                                        : ""
-                                    }`}
-                                  >
-                                    {it.name}
-                                  </Link>
-                                ))}
-                              </div>
-                              <div className="flex-1 px-4">
-                                {col.columns[1].items.map((it) => (
-                                  <Link
-                                    key={it.path}
-                                    to={it.path}
-                                    onClick={() => setHoveredMenu(null)}
-                                    className={`menu-item block px-2 py-1.5 text-[13px] rounded-lg transition-colors text-[rgb(51,51,51)] ${
-                                      (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
-                                        ? "active"
-                                        : ""
-                                    }`}
-                                  >
-                                    {it.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div
-                            key={ci}
-                            className={`flex-1 px-4 ${ci < item.megaColumns.length - 1 ? "border-r border-gray-100" : ""}`}
-                          >
-                            <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-3">
-                              {col.heading}
-                            </p>
-                            {col.items.map((it) => (
-                              <Link
-                                key={it.path}
-                                to={it.path}
-                                onClick={() => setHoveredMenu(null)}
-                                className={`menu-item block px-2 py-1.5 text-[13px] rounded-lg transition-colors text-[rgb(51,51,51)] ${
-                                  location.pathname.startsWith(it.path)
-                                    ? "active"
-                                    : ""
-                                }`}
-                              >
-                                {it.name}
-                              </Link>
-                            ))}
-                          </div>
-                        )
-                      ))}
-                    </div>
                   )}
 
                   {/* Submenu — Level 1 (Support, About Us) */}
@@ -557,7 +403,10 @@ export default function Header() {
 
             </div>
 
-            <HeaderLanguageSwitcher />
+            {/* Translation temporarily off — see the commented-out import at
+                the top of this file. Restore this line (and the mobile one
+                below) to bring the language switcher back. */}
+            {/* <HeaderLanguageSwitcher /> */}
 
             {/* CSS Animations */}
             <style>{`
@@ -895,24 +744,7 @@ export default function Header() {
           <div ref={mobileMenuRef} className="md:hidden bg-white shadow-lg">
             {navItems.map((item) => (
               <div key={item.name} className="border-b border-gray-200">
-                {/* Products row — split label + chevron */}
-                {item.megaMenu ? (
-                  <div className={`w-full flex items-center justify-between ${isActive(item) ? "bg-[#af8564] text-white font-semibold" : "text-gray-800"}`}>
-                    <Link
-                      to={item.path}
-                      onClick={() => setMobileOpen(false)}
-                      className="flex-1 px-4 py-3 text-[15px] font-normal"
-                    >
-                      {item.name}
-                    </Link>
-                    <button
-                      className="px-4 py-3"
-                      onClick={() => setHoveredMenu(hoveredMenu === item.name ? null : item.name)}
-                    >
-                      <i className="fa-solid fa-chevron-down text-[10px]"></i>
-                    </button>
-                  </div>
-                ) : item.submenu ? (
+                {item.submenu ? (
                   <button
                     className={`menu-item w-full px-4 py-3 flex justify-between items-center text-[15px] font-normal transition-colors text-gray-800 ${
                       isActive(item)
@@ -942,74 +774,6 @@ export default function Header() {
                   </Link>
                 )}
 
-                {/* Mobile Mega Menu accordion — Products */}
-                {item.megaMenu && hoveredMenu === item.name && (
-                  <div className="bg-gray-50">
-                    {item.megaColumns.map((col, ci) => (
-                      col.groupHeading ? (
-                        <div key={ci} className="border-t border-gray-200 px-4 py-2">
-                          <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-3">
-                            {col.groupHeading}
-                          </p>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              {col.columns[0].items.map((it) => (
-                                <Link
-                                  key={it.path}
-                                  to={it.path}
-                                  onClick={() => setMobileOpen(false)}
-                                  className={`menu-item block px-3 py-2 text-[13px] transition-colors text-gray-800 ${
-                                    (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
-                                      ? "active"
-                                      : ""
-                                  }`}
-                                >
-                                  {it.name}
-                                </Link>
-                              ))}
-                            </div>
-                            <div>
-                              {col.columns[1].items.map((it) => (
-                                <Link
-                                  key={it.path}
-                                  to={it.path}
-                                  onClick={() => setMobileOpen(false)}
-                                  className={`menu-item block px-3 py-2 text-[13px] transition-colors text-gray-800 ${
-                                    (it.matchExact ? location.pathname === it.path : location.pathname.startsWith(it.path))
-                                      ? "active"
-                                      : ""
-                                  }`}
-                                >
-                                  {it.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div key={ci} className="border-t border-gray-200 px-4 py-2">
-                          <p className="text-[12px] font-bold uppercase tracking-widest text-[#af8564] mb-2">
-                            {col.heading}
-                          </p>
-                          {col.items.map((it) => (
-                            <Link
-                              key={it.path}
-                              to={it.path}
-                              onClick={() => setMobileOpen(false)}
-                              className={`menu-item block px-6 py-2 text-[13px] transition-colors text-gray-800 ${
-                                location.pathname.startsWith(it.path)
-                                  ? "active"
-                                  : ""
-                              }`}
-                            >
-                              {it.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )
-                    ))}
-                  </div>
-                )}
 
                 {/* Mobile Submenu — Level 1 (Support, About Us) */}
                 {item.submenu && hoveredMenu === item.name && (
@@ -1076,7 +840,8 @@ export default function Header() {
                 )}
               </div>
             ))}
-            <HeaderLanguageSwitcher variant="mobile" onNavigate={() => setMobileOpen(false)} />
+            {/* Translation temporarily off — see the desktop mount above. */}
+            {/* <HeaderLanguageSwitcher variant="mobile" onNavigate={() => setMobileOpen(false)} /> */}
           </div>
         )}
       </header>

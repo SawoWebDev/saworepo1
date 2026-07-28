@@ -32,11 +32,13 @@ const CACHE_MS = 30 * 1000; // 30s — a CMS toggle takes effect within seconds
 
 // Every key any PUBLIC page reads. Admin-only settings (e.g. role_capabilities)
 // stay out: they'd add payload to every visitor's request for nothing.
+// header_layout / header_nav_style are deliberately absent: the public header
+// is fixed in code at Layout 1 + Style 2 (components/Header/Header.jsx), so
+// fetching them would be payload no one reads. The rows still exist in the
+// table if the CMS switch is ever restored.
 const PUBLIC_KEYS = [
   "data_source",
   "json_source_scope",
-  "header_layout",
-  "header_nav_style",
   "gdpr_banner_enabled",
   "language_switcher_enabled",
   "enabled_languages",
