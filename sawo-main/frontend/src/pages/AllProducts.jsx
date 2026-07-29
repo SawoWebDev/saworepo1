@@ -4,6 +4,7 @@ import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { useLocalSaunaRooms } from "../Administrator/Local/useLocalSaunaRooms";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 import ScrollToTop from "../components/ScrollToTop";
+import SEO from "../components/SEO";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -325,6 +326,11 @@ export default function AllProducts() {
 
   return (
     <>
+      <SEO
+        title="All Products"
+        description="Browse SAWO's complete product range — sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
+        path="/products"
+      />
       <style>{`
         @keyframes skS {
           0% { background-position: 200% 0; }

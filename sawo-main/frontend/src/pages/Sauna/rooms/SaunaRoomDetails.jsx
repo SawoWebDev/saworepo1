@@ -84,7 +84,7 @@ const SaunaRoomDetails = () => {
                   ))}
                 </ul>
               </div>
-              <div className="srd-img-wrap">
+              <div className={`srd-img-wrap${panel.imgPosition ? ` srd-img-${panel.imgPosition}` : ""}`}>
                 <img src={panel.image} alt={panel.imageAlt} />
               </div>
             </div>

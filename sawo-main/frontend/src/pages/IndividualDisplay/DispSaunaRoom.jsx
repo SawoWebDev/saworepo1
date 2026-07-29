@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from "react"
 import { useParams, Link } from "react-router-dom";
 import saunaRoomsData from "../../Administrator/Local/data/saunaroom-data.json";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
+import SEO from "../../components/SEO";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -401,8 +402,23 @@ export default function SaunaRoomDisplay() {
   );
   const hasSection2  = hasDesc || hasFeatures || hasSpecTable || featureTabs.length > 0;
 
+  // Plain-text meta description — room.description is HTML (rendered via
+  // dangerouslySetInnerHTML above), so strip tags before handing to <SEO>.
+  const seoDescription = (() => {
+    const raw = room.description || "";
+    const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    if (!text) return `${room.name} by SAWO — a premium Finnish sauna room.`;
+    return text.length > 160 ? `${text.slice(0, 157)}...` : text;
+  })();
+
   return (
     <>
+      <SEO
+        title={room.name}
+        description={seoDescription}
+        path={`/sauna/rooms/${slug}`}
+        image={carouselImages[0] || undefined}
+      />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
         @media(max-width:900px){ .pp-s1-grid { grid-template-columns: 1fr !important; gap: 28px !important; } }

@@ -110,6 +110,7 @@ import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -282,6 +283,7 @@ export default function WallMounted() {
 
   const [search, setSearch] = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
   // ── Filter to published+visible, then apply display categories/tags ──────
   const allProducts = useMemo(() => {
@@ -306,6 +308,11 @@ export default function WallMounted() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Wall-Mounted Sauna Heaters"
+        description="Browse SAWO wall-mounted sauna heaters — Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas."
+        path="/sauna/heaters/wall-mounted"
+      />
       <style>{`
         @keyframes wm-shimmer {
           0%   { background-position: 200% 0; }
@@ -377,6 +384,9 @@ export default function WallMounted() {
           loading="eager"
           fetchPriority="high"
           decoding="sync"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">

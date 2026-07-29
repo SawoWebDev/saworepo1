@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "./AccessoryCard";
+import SEO from "../components/SEO";
 
 // Groups that combine multiple data categories under one section (mirroring
 // the WordPress reference pages that group the same categories together —
@@ -180,6 +181,11 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
 
   return (
     <>
+      <SEO
+        title="Sauna Accessories"
+        description="Browse the full SAWO accessories catalog — pails, ladles, thermometers, benches, lighting, and more for every sauna."
+        path="/sauna-accessories"
+      />
       <style>{`
         @keyframes skS {
           0% { background-position: 200% 0; }

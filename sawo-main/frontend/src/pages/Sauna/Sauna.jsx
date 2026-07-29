@@ -1,6 +1,6 @@
 // Sauna.jsx
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import menuPaths from "../../menuPaths";
@@ -25,30 +25,14 @@ import img_917_D_Display_new from "../../assets/917-D_Display_new-.webp";
 import img_506_2_D from "../../assets/506-2-D.webp";
 import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp";
 import HeroWave from "../../components/HeroWave";
-import FlipbookModal from "../../components/FlipbookViewer/FlipbookModal";
-
-const CATALOGUE_PDF_URL = "https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import SEO from "../../components/SEO";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
 
 const Sauna = () => {
-  const [heroLoaded, setHeroLoaded] = useState(false);
-  const [catalogueOpen, setCatalogueOpen] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    const img = new Image();
-    img.src = img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled;
-    const reveal = () => { if (!cancelled) setHeroLoaded(true); };
-    if (img.complete) {
-      reveal();
-    } else {
-      img.onload = reveal;
-      img.onerror = reveal; // don't leave the hero hidden forever if the image fails
-    }
-    return () => { cancelled = true; };
-  }, []);
+  const heroLoaded = useHeroLoaded(img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled);
 
   useEffect(() => {
     // Inject Font Awesome if not already present
@@ -147,6 +131,11 @@ const Sauna = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Finnish Sauna Heaters, Controls & Accessories"
+        description="Explore SAWO's full Finnish sauna range — heaters, controls, and accessories engineered for over 30 years of authentic sauna warmth and comfort."
+        path="/sauna"
+      />
       {/* ===================== */}
       {/* HERO SECTION          */}
       {/* ===================== */}
@@ -216,19 +205,13 @@ const Sauna = () => {
           <div style={{ marginTop: "32px" }}>
             <ButtonClear
               text="EXPLORE HEATERS"
-              onClick={() => setCatalogueOpen(true)}
+              href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+              download
             />
           </div>
         </div>
       <HeroWave />
       </section>
-
-      <FlipbookModal
-        isOpen={catalogueOpen}
-        onClose={() => setCatalogueOpen(false)}
-        fileUrl={CATALOGUE_PDF_URL}
-        title="SAWO Product Catalogue 2025-2026"
-      />
 
       {/* ===================== */}
       {/* SECTION 1: HEATERS    */}

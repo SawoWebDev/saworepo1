@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
+import SEO from "../../components/SEO";
 import Hero from "./Hero";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
@@ -12,6 +13,9 @@ import menuPaths from "../../menuPaths";
 const Home = () => {
   return (
     <div>
+      {/* No title override — falls back to SEO.jsx's DEFAULT_TITLE/DEFAULT_DESCRIPTION,
+          which is also what's baked into public/index.html so both stay in sync. */}
+      <SEO path="/" />
       <Hero />
 
       {/* Section 1 */}

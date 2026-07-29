@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import heroBg from "../../assets/Support/FAQ/hero.webp";
 import faqImage from "../../assets/Support/FAQ/faq1.webp";
 import HeroWave from "../../components/HeroWave";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import SEO from "../../components/SEO";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -285,6 +287,7 @@ function AccordionItem({ question, answer, isOpen, onToggle, index }) {
 export default function FAQ() {
   const [activeTab, setActiveTab] = useState(0);
   const [openIndex, setOpenIndex] = useState(null);
+  const heroLoaded = useHeroLoaded(heroBg);
 
   const section = faqSections[activeTab];
 
@@ -300,6 +303,11 @@ export default function FAQ() {
 
   return (
     <div style={{ fontFamily: "Montserrat, sans-serif" }}>
+      <SEO
+        title="Frequently Asked Questions"
+        description="Answers to common questions about SAWO Finnish saunas, heaters, steam generators, and sauna care — from heat sources to wood types."
+        path="/support/faq"
+      />
       <style>{`
 
         .faq-tab-btn {
@@ -380,13 +388,21 @@ export default function FAQ() {
       {/* ── HERO ───────────────────────────────────────────────── */}
       <section
         className="faq-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="faq-hero-overlay" />
         <div className="faq-hero-content">
           <h1 className="faq-hero-title">FAQ</h1>

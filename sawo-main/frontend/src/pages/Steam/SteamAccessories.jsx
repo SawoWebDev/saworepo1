@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import heroBg from "../../assets/Steam/hero.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -56,6 +58,7 @@ function applyDisplayFilter(products) {
 
 const SteamAccessories = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const heroLoaded = useHeroLoaded(heroBg);
 
   const accessories = useMemo(() => {
     const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
@@ -69,19 +72,32 @@ const SteamAccessories = () => {
 
   return (
   <div className="relative">
+      <SEO
+        title="Steam Accessories"
+        description="Premium SAWO steam accessories designed to enhance functionality and comfort for a consistently exceptional steam sauna experience."
+        path="/steam/accessories"
+      />
 
     {/* ===================== */}
     {/* HERO                  */}
     {/* ===================== */}
     <section
       className="sa-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-      style={{
-        backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-        backgroundImage: `url(${heroBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
     >
+      {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: heroLoaded ? 1 : 0,
+          transition: "opacity 0.6s ease",
+          zIndex: 0,
+        }}
+      />
       <div className="sa-hero-overlay" />
       <div className="sa-hero-content">
         <h1 className="sa-hero-title">STEAM ACCESSORIES</h1>

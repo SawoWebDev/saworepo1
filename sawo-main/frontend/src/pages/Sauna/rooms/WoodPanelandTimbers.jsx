@@ -10,6 +10,8 @@ import benchAspen from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/
 import benchSpruce from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-spruce-wood.webp";
 import ButtonClear from "../../../components/Buttons/ButtonClear";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
+import { useHeroLoaded } from "../../../utils/useHeroLoaded";
 
 const panelData = [
   {
@@ -101,21 +103,36 @@ const WoodCard = ({ item, reverse }) => (
 );
 
 const WoodPanelandTimbers = () => {
+  const heroLoaded = useHeroLoaded(heroBg);
+
   return (
     <div className="relative">
+      <SEO
+        title="Wood Panels & Timbers"
+        description="SAWO wood panel and timber options — cedar, aspen, and spruce choices to craft the natural look and feel of your sauna room."
+        path="/sauna/rooms/wood-panels-timbers"
+      />
 
       {/* ===================== */}
       {/* HERO                  */}
       {/* ===================== */}
       <section
         className="wpt-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="wpt-hero-overlay" />
         <div className="wpt-hero-content">
           <h1 className="wpt-hero-title">WOOD PANELS & TIMBERS</h1>

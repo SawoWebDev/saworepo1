@@ -1,9 +1,10 @@
 // LatestNews.jsx
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
 
 // Image imports
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
@@ -15,8 +16,15 @@ import AquanaleLogo from "../../assets/About/Latest News/Aquanale-logo.webp";
 import PiscinaLogo from "../../assets/About/Latest News/piscina-logo.webp";
 
 const LatestNews = () => {
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
   return (
     <div className="relative">
+      <SEO
+        title="Latest News"
+        description="News, trade shows, and updates from SAWO — the latest on our Finnish sauna heaters, steam generators, and sauna room innovations."
+        path="/about/news"
+      />
       <style>{`
 
         /* ── BASE ── */
@@ -351,7 +359,14 @@ const LatestNews = () => {
              HERO
         ════════════════════════════ */}
         <section className="ln-hero">
-          <img src={LNhero} alt="SAWO sauna interior" className="ln-hero-img" />
+          <img
+            src={LNhero}
+            alt="SAWO sauna interior"
+            className="ln-hero-img"
+            onLoad={() => setHeroLoaded(true)}
+            onError={() => setHeroLoaded(true)}
+            style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+          />
           <div className="ln-hero-overlay" />
           <h1>Latest News</h1>
           <p>Stay updated with SAWO stories, events, and milestones</p>
