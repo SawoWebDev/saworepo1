@@ -188,6 +188,7 @@ const LatestNews = () => {
         /* ── LOGO BAR ── */
         .ln-logo-bar {
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
           justify-content: center;
           gap: 48px;
@@ -198,6 +199,7 @@ const LatestNews = () => {
         .ln-logo-bar img {
           height: 52px;
           width: auto;
+          max-width: 100%;
           object-fit: contain;
           filter: saturate(0.85);
           transition: filter 0.25s, transform 0.25s;
@@ -308,11 +310,31 @@ const LatestNews = () => {
             font-size: 16px !important;
             line-height: 28px !important;
           }
+          /* Stacked, not shrunk: side-by-side left both logos tiny to fit
+             the row in one line. Standing them one above the other means
+             each can stay a normal, legible size — neither is fighting the
+             other for horizontal room anymore. Container padding is cut
+             down too — the base 36px/20px was sized for the wide two-up
+             row and just read as dead space once stacked, making the logos
+             look smaller than they are. */
           .ln-logo-bar {
-            gap: 28px;
+            flex-direction: column;
+            gap: 24px;
+            padding: 20px 16px;
           }
           .ln-logo-bar img {
-            height: 38px;
+            height: 56px;
+          }
+          /* The base rules above carry !important + an extra class, so they
+             outrank the generic ".ln-logo-bar img" rule regardless of media
+             query order — these two logos stayed full-size (200px/130px
+             tall, correspondingly very wide) on every mobile width. Matching
+             specificity + !important here is required to actually win. */
+          .ln-logo-bar .aquanale-logo {
+            height: 120px !important;
+          }
+          .ln-logo-bar .piscina-logo {
+            height: 82px !important;
           }
           .ln-container {
             padding: 40px 20px;
