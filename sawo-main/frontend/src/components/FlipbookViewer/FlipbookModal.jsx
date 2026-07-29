@@ -11,6 +11,7 @@
 // which only happens once `isOpen` goes true. Closed = the chunk is never
 // requested, so it can't cost anything on Lighthouse's initial-load pass.
 import React, { Suspense, lazy, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 const FlipbookViewerInner = lazy(() => import("./FlipbookViewerInner"));
 
@@ -64,7 +65,17 @@ export default function FlipbookModal({ isOpen, onClose, fileUrl, title = "Catal
 
   if (!isOpen) return null;
 
-  return (
+  // Portaled straight to <body>: a position:fixed element still obeys any
+  // ancestor with transform/filter/perspective/contain (each of those
+  // creates a new containing block for fixed descendants), which silently
+  // shrinks or mispositions it to that ancestor's box instead of the real
+  // viewport — the near-opaque backdrop can end up not actually covering
+  // the page, letting whatever's underneath (e.g. the hero text) show
+  // through and visually collide with the modal's own text. A portal
+  // sidesteps that class of bug entirely by not being a descendant of any
+  // of this page's markup in the first place. Same pattern already used by
+  // BrochureDropdownButton.jsx in this codebase.
+  return createPortal(
     <div
       className="flipbook-overlay"
       role="dialog"
@@ -92,11 +103,12 @@ export default function FlipbookModal({ isOpen, onClose, fileUrl, title = "Catal
           position: fixed;
           inset: 0;
           z-index: 10000;
-          background: rgba(20, 16, 13, 0.94);
+          background: #14100d;
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 24px;
+          overflow: auto;
         }
         .flipbook-close-btn {
           position: fixed;
@@ -125,6 +137,7 @@ export default function FlipbookModal({ isOpen, onClose, fileUrl, title = "Catal
           .flipbook-close-btn { top: 12px; right: 12px; width: 38px; height: 38px; }
         }
       `}</style>
-    </div>
+    </div>,
+    document.body,
   );
 }
