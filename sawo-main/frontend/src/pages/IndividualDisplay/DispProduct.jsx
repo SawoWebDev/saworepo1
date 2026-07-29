@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from "react"
 import { useParams, Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
+import SEO from "../../components/SEO";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -753,8 +754,24 @@ export default function ProductPage() {
   const hasResources = files.length > 0;
   const hasSection2  = hasDesc || hasSpecTable;
 
+  // Plain-text meta description from whichever product copy is available —
+  // short_description/description are HTML (rendered via dangerouslySetInnerHTML
+  // above), so strip tags before handing to <SEO>.
+  const seoDescription = (() => {
+    const raw = product.short_description || product.description || "";
+    const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    if (!text) return `${product.name} by SAWO — premium Finnish sauna equipment.`;
+    return text.length > 160 ? `${text.slice(0, 157)}...` : text;
+  })();
+
   return (
     <>
+      <SEO
+        title={product.name}
+        description={seoDescription}
+        path={`/products/${product.slug}`}
+        image={thumbnail || undefined}
+      />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 

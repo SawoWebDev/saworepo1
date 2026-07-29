@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../menuPaths";
+import SEO from "../components/SEO";
 
 const linkClass = "text-amber-800 hover:text-amber-950 hover:underline";
 const headingClass = "text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-gray-300";
@@ -8,6 +9,11 @@ const headingClass = "text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 borde
 const Sitemap = () => {
   return (
     <div className="min-h-screen bg-white pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <SEO
+        title="Sitemap"
+        description="A complete guide to every page and section of the SAWO website — sauna heaters, steam generators, sauna rooms, and more."
+        path="/sitemap"
+      />
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-2 text-gray-900">Sitemap</h1>
         <p className="text-lg text-gray-600 mb-8">

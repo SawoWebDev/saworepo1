@@ -9,6 +9,7 @@ import "../heaters/heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
 
 // ─── Display filter ───────────────────────────────────────────────────────────
 const DISPLAY_CATEGORIES = ["Pails", "Ladles", "Pail Shower"];
@@ -96,6 +97,7 @@ export default function PailsLadles() {
   const { products: localProds, loading } = useLocalProducts();
   const [search, setSearch]       = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
+  const [heroLoaded, setHeroLoaded]   = useState(false);
 
   const allProducts = useMemo(() => {
     const visible  = localProds.filter(p => p.status === "published" && p.visible !== false);
@@ -129,6 +131,11 @@ export default function PailsLadles() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Sauna Pails & Ladles"
+        description="Shop SAWO sauna pails and ladles — durable, elegant water accessories for the perfect löyly steam experience."
+        path="/sauna/accessories/pails-ladles"
+      />
       <style>{`
         @keyframes wm-shimmer {
           0%   { background-position: 200% 0; }
@@ -161,6 +168,9 @@ export default function PailsLadles() {
           loading="eager"
           fetchPriority="high"
           decoding="sync"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
         />
         <div className="absolute inset-0 bg-black/50 -z-10" />
         <div className="relative z-10">

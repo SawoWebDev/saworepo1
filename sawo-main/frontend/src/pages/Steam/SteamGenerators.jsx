@@ -7,6 +7,8 @@ import stnW from "../../assets/Steam/Steam Generators/STN-W.webp";
 import stn from "../../assets/Steam/Steam Generators/STN.webp";
 import ste from "../../assets/Steam/Steam Generators/STE.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const generators = [
   {
@@ -36,21 +38,36 @@ const generators = [
 ];
 
 const SteamGenerators = () => {
+  const heroLoaded = useHeroLoaded(heroImg);
+
   return (
     <div className="relative">
+      <SEO
+        title="Steam Generators"
+        description="SAWO steam generators — the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance."
+        path="/steam/generators"
+      />
 
       {/* ===================== */}
       {/* HERO                  */}
       {/* ===================== */}
       <section
         className="sg-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="sg-hero-overlay" />
         <div className="sg-hero-content">
           <h1 className="sg-hero-title">STEAM GENERATORS</h1>

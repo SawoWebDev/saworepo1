@@ -6,8 +6,12 @@ import classicBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/cla
 import waveBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/wave-bench.webp";
 import pianoBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/piano-bench.webp";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
+import { useHeroLoaded } from "../../../utils/useHeroLoaded";
 
 const InteriorDesign = () => {
+  const heroLoaded = useHeroLoaded(heroBg);
+
   const designs = [
     {
       img: classicBench,
@@ -31,19 +35,32 @@ const InteriorDesign = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Sauna Interior Designs"
+        description="Explore SAWO sauna interior design options — wood finishes, layouts, and styling choices to personalize your sauna room."
+        path="/sauna/rooms/interior-designs"
+      />
 
       {/* ===================== */}
       {/* HERO                  */}
       {/* ===================== */}
       <section
         className="id-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="id-hero-overlay" />
         <div className="id-hero-content">
           <h1 className="id-hero-title">INTERIOR DESIGNS</h1>

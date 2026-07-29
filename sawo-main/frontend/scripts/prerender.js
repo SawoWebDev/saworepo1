@@ -115,10 +115,27 @@ async function main() {
     await page.waitForSelector("section.sauna-unique img", { timeout: 30000 });
     await new Promise((r) => setTimeout(r, 500)); // let React finish committing
 
-    const { rootHtml, typewriterText } = await page.evaluate(() => ({
-      rootHtml: document.getElementById("root").innerHTML,
-      typewriterText: document.querySelector(".typewriter")?.textContent || "",
-    }));
+    const { rootHtml, typewriterText, head } = await page.evaluate(() => {
+      const attr = (selector, attribute) => {
+        const el = document.querySelector(selector);
+        return el ? el.getAttribute(attribute) : null;
+      };
+      return {
+        rootHtml: document.getElementById("root").innerHTML,
+        typewriterText: document.querySelector(".typewriter")?.textContent || "",
+        // react-helmet-async (see src/components/SEO.jsx) sets these
+        // synchronously on mount, so by this point in the snapshot (after the
+        // 500ms settle below) they reflect whatever <SEO> Home actually
+        // rendered — captured here so the baked-in snapshot carries real
+        // per-page title/description/OG tags instead of only the static
+        // public/index.html placeholders.
+        head: {
+          title: document.title || null,
+          description: attr('meta[name="description"]', "content"),
+          canonical: attr('link[rel="canonical"]', "href"),
+        },
+      };
+    });
 
     // Sanity: snapshot must be the pristine initial render.
     if (typewriterText.trim() !== "") throw new Error("typewriter ran before capture — snapshot not pristine");
@@ -140,6 +157,25 @@ async function main() {
     if (cssMatch) {
       const css = fs.readFileSync(path.join(BUILD, cssMatch[1]), "utf8");
       out = out.replace(cssMatch[0], `<style>${css}</style>`);
+    }
+
+    // Bake the real <SEO> output into <head> so a non-JS crawler/link-preview
+    // bot sees Home's actual title/description/canonical, not just the static
+    // public/index.html placeholders (which stay in sync as the sane fallback
+    // for every OTHER route, which isn't prerendered).
+    const escapeHtml = (s) =>
+      String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    if (head.title) {
+      out = out.replace(/<title>.*?<\/title>/, `<title>${escapeHtml(head.title)}</title>`);
+    }
+    if (head.description) {
+      out = out.replace(
+        /<meta name="description"[^>]*\/>/,
+        `<meta name="description" content="${escapeHtml(head.description)}" />`
+      );
+    }
+    if (head.canonical && !out.includes('rel="canonical"')) {
+      out = out.replace("</head>", `<link rel="canonical" href="${escapeHtml(head.canonical)}" />\n</head>`);
     }
 
     // Drop the hero <link rel=preload> tags from the prerendered page: the

@@ -54,6 +54,7 @@ import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -175,6 +176,7 @@ const Floor = () => {
   const { products: localProds, loading } = useLocalProducts();
   const [activeGroup, setActiveGroup] = useState(null);
   const [search, setSearch] = useState("");
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
   const allProducts = useMemo(() => {
     const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
@@ -190,6 +192,11 @@ const Floor = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Floor Sauna Heaters"
+        description="SAWO Floor Series — powerful, movable stand-alone sauna heaters delivering optimal heat distribution and lasting comfort for commercial and home saunas."
+        path="/sauna/heaters/floor"
+      />
       <style>{`
         @keyframes wm-shimmer {
           0%   { background-position: 200% 0; }
@@ -213,6 +220,9 @@ const Floor = () => {
           loading="eager"
           fetchPriority="high"
           decoding="sync"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">

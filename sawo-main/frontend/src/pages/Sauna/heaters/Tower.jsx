@@ -55,6 +55,7 @@ import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -175,6 +176,7 @@ function ProductCard({ product }) {
 const Tower = () => {
   const { products: localProds, loading } = useLocalProducts();
   const [activeGroup, setActiveGroup] = useState(null);
+  const [heroLoaded, setHeroLoaded] = useState(false);
   const [activeType,  setActiveType]  = useState("All");
   const [search, setSearch] = useState("");
 
@@ -207,6 +209,11 @@ const Tower = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Tower Sauna Heaters"
+        description="Explore SAWO Tower Series sauna heaters — energy-efficient, sleek vertical designs with superior heat distribution for a modern wellness sauna experience."
+        path="/sauna/heaters/tower"
+      />
       <style>{`
         @keyframes wm-shimmer {
           0%   { background-position: 200% 0; }
@@ -230,6 +237,9 @@ const Tower = () => {
           loading="eager"
           fetchPriority="high"
           decoding="sync"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">

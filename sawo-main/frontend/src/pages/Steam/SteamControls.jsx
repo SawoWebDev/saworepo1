@@ -5,6 +5,8 @@ import stpV2 from "../../assets/Steam/STP-INFACE-V2-300x330.webp";
 import stpSST from "../../assets/Steam/STP-INFACE-SST-310x179.webp";
 import steControl from "../../assets/Steam/STE-INFACE-V2-150x150.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 // Served from /public (not webpack-bundled) so its URL is stable at build time —
 // public/index.html preloads this exact path for this route, so by the time
@@ -32,21 +34,37 @@ const controls = [
   },
 ];
 
-const SteamControls = () => (
+const SteamControls = () => {
+  const heroLoaded = useHeroLoaded(heroBg);
+
+  return (
   <div className="relative">
+      <SEO
+        title="Steam Controls"
+        description="Precision steam control from SAWO — Saunova and Innova control series for effortless operation and a personalized sauna experience."
+        path="/steam/controls"
+      />
 
     {/* ===================== */}
     {/* HERO                  */}
     {/* ===================== */}
     <section
       className="sc-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-      style={{
-        backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-        backgroundImage: `url(${heroBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
     >
+      {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: heroLoaded ? 1 : 0,
+          transition: "opacity 0.6s ease",
+          zIndex: 0,
+        }}
+      />
       <div className="sc-hero-overlay" />
       <div className="sc-hero-content">
         <h1 className="sc-hero-title">STEAM CONTROLS</h1>
@@ -235,6 +253,7 @@ const SteamControls = () => (
     `}</style>
 
   </div>
-);
+  );
+};
 
 export default SteamControls;

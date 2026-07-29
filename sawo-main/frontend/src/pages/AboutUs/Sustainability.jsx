@@ -11,8 +11,12 @@ import img_health_well_being from "../../assets/health-well-being.webp";
 import img_Wood_Pattern_Brown_03 from "../../assets/Wood-Pattern-Brown-03.webp";
 import img_waste_hierarchy_sustainability from "../../assets/waste-hierarchy-sustainability.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const Sustainability = () => {
+  const heroLoaded = useHeroLoaded(heroBg);
+
   useEffect(() => {
     // ==============================
     // FALLING LEAVES SCRIPT (UNCHANGED)
@@ -138,40 +142,63 @@ const Sustainability = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Sustainability"
+        description="How SAWO builds sustainably — responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room."
+        path="/about/sustainability"
+      />
       {/* Leaves container */}
       <div id="leavesContainer"></div>
       {/* HERO */}
       <section
         className="min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
-        <h1
-          className="text-white font-bold hero-title"
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
           style={{
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: "45px",
-            lineHeight: "45px",
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
           }}
-        >
-          SUSTAINABILITY
-        </h1>
+        />
 
-        <p
-          className="text-white mt-4 hero-subtitle"
+        <div
           style={{
-            fontFamily: "Montserrat, sans-serif",
-            fontWeight: 400,
-            fontSize: "22px",
-            lineHeight: "40px",
+            position: "relative",
+            zIndex: 1,
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
           }}
         >
-          We care for you and the Earth
-        </p>
+          <h1
+            className="text-white font-bold hero-title"
+            style={{
+              fontFamily: "Montserrat, sans-serif",
+              fontSize: "45px",
+              lineHeight: "45px",
+            }}
+          >
+            SUSTAINABILITY
+          </h1>
+
+          <p
+            className="text-white mt-4 hero-subtitle"
+            style={{
+              fontFamily: "Montserrat, sans-serif",
+              fontWeight: 400,
+              fontSize: "22px",
+              lineHeight: "40px",
+            }}
+          >
+            We care for you and the Earth
+          </p>
+        </div>
 
         {/* Mobile font adjustments */}
         <style jsx>{`

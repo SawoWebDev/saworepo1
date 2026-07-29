@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "../IndividualDisplay/DispAccessories";
+import SEO from "../../components/SEO";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -172,6 +173,11 @@ function ProductCatalogue() {
 
   return (
     <>
+      <SEO
+        title="Product Catalogue"
+        description="Browse the full SAWO product catalogue — sauna heaters, sauna rooms, and accessories in one searchable listing."
+        path="/support/catalogue"
+      />
       <style>{`
         @keyframes skS {
           0% { background-position: 200% 0; }

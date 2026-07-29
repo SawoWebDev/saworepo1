@@ -11,6 +11,8 @@ import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-back
 import PromoBanner from "../../components/PromoBanner";
 import "./heaters/heaters.css"; // reuse existing heaters CSS
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -179,6 +181,7 @@ export default function SaunaControls() {
 
   // Search query for the displayed grid
   const [search, setSearch] = useState("");
+  const heroLoaded = useHeroLoaded(heroImg);
 
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
@@ -214,6 +217,11 @@ export default function SaunaControls() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Sauna Controls"
+        description="Precise temperature, time, and lighting control for your sauna — explore SAWO's Innova and Saunova control series for total comfort."
+        path="/sauna/controls"
+      />
       <style>{`
         @keyframes wm-shimmer {
           0%   { background-position: 200% 0; }
@@ -279,8 +287,21 @@ export default function SaunaControls() {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         className="wm-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{ backgroundColor: "#241c17", backgroundImage: `url(${heroImg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundColor: "#241c17" }}
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="wm-hero-overlay" />
         <div className="wm-hero-content">
           <h1 className="wm-hero-title">SAUNA CONTROLS</h1>

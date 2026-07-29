@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
 import woodBg from "../../assets/SaunaCalculator-bg.webp";
 import officeSawoInc from "../../assets/Contact/offices/sawo-inc-plant.webp";
 import officeSawoNordic from "../../assets/Contact/offices/sawo-nordic.webp";
@@ -173,6 +174,11 @@ const Contact = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with SAWO — technical support, sales inquiries, and distributor contacts for our global network of representative offices."
+        path="/contact"
+      />
       <style>{`
 
         /* ══ FORM SECTION (dark wood) ══ */

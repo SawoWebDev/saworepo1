@@ -1,4 +1,5 @@
 import React from "react";
+import SEO from "../components/SEO";
 
 const SECTIONS = [
   {
@@ -119,6 +120,11 @@ const SECTIONS = [
 export default function PrivacyPolicy() {
   return (
     <div style={{ fontFamily: "Montserrat, sans-serif", color: "#1a1a1a" }}>
+      <SEO
+        title="Privacy Policy"
+        description="SAWO's privacy policy — how we collect, use, and protect your personal data across our website and services."
+        path="/privacy-policy"
+      />
       {/* Hero */}
       <section
         className="flex items-center justify-center text-center px-6 pb-20 pt-36"

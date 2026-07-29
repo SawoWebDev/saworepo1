@@ -13,23 +13,40 @@ import img_COMBI_SERIES_600x360_1 from "../../assets/COMBI-SERIES-600x360-1.webp
 import img_DRAGON_SERIES_1_600x360_1 from "../../assets/DRAGON-SERIES-1-600x360-1.webp";
 import img_STONE_SERIES_3_600x320_new from "../../assets/STONE-SERIES-3-600x320-new-.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const SaunaHeaters = () => {
+  const heroLoaded = useHeroLoaded(img_NRM_NB_BL1);
+
   return (
     <div className="relative">
+      <SEO
+        title="Sauna Heaters"
+        description="Browse SAWO's full Finnish sauna heater lineup — Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style."
+        path="/sauna/heaters"
+      />
 
       {/* ===================== */}
       {/* HERO SECTION          */}
       {/* ===================== */}
       <section
         className="sh-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${img_NRM_NB_BL1})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${img_NRM_NB_BL1})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="sh-hero-overlay" />
         <div className="sh-hero-content">
           <h1 className="sh-hero-title">SAUNA HEATERS</h1>

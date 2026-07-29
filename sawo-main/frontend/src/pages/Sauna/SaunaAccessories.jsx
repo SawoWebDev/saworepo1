@@ -19,23 +19,40 @@ import img_sand_timer_copy_new from "../../assets/sand-timer-copy-new.webp";
 import img_506_2_D from "../../assets/506-2-D.webp";
 import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const SaunaAccessories = () => {
+  const heroLoaded = useHeroLoaded(img_Signature_BL_v2_1_scaled);
+
   return (
     <div className="relative">
+      <SEO
+        title="Sauna Accessories"
+        description="Enhance your sauna with SAWO accessories — buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna."
+        path="/sauna/accessories"
+      />
 
       {/* ===================== */}
       {/* HERO SECTION          */}
       {/* ===================== */}
       <section
         className="sa-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${img_Signature_BL_v2_1_scaled})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${img_Signature_BL_v2_1_scaled})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="sa-hero-overlay" />
         <div className="sa-hero-content">
           <h1 className="sa-hero-title">SAUNA ACCESSORIES</h1>

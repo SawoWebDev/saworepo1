@@ -196,6 +196,7 @@ import img_GLASS_FRONT_SAUNA_ROOM_V3_scaled from "../../../assets/GLASS-FRONT-SA
 import img_IR_1111RS_SCENE from "../../../assets/IR-1111RS-_SCENE-.webp";
 import img_2560x1920 from "../../../assets/2560x1920.webp";
 import img_1420_Glass_Front_Sauna_Room_scaled_1 from "../../../assets/1420-Glass-Front-Sauna-Room-scaled-1.webp";
+import img_SR02_60001630_New_Compact_Sauna_Room_Scene_Cover_A1 from "../../../assets/SR02-60001630-New-Compact-Sauna-Room-SCENE-COVER-A1.webp";
 import img_Cedar_Panels from "../../../assets/Cedar-Panels.webp";
 import img_Aspen_Panels from "../../../assets/Aspen-Panels.webp";
 import img_HEMLOCK_PANELS from "../../../assets/HEMLOCK-PANELS.webp";
@@ -483,6 +484,48 @@ const infraredBenchTypes = {
   "1111-IR-D": { name: "Straight Bench", title: "Infrared Sauna Room", class: "straight", image: img_1111RS_TOP_VIEW_with_DIMENSION },
 };
 
+// Compact Sauna Room images are recent additions, not yet downloaded into
+// local assets — reference the WordPress media library directly, same as
+// SAUNA_ROOMS_HERO_IMG in SaunaRooms.jsx.
+const compactImageData = {
+  "1310MS": { bench: "1310MS", images: ["https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Actual-View-.webp"] },
+  "1313MS": { bench: "1313MS", images: ["https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Actual-View.webp"] },
+};
+
+const compactSizeData = {
+  "1310MS": { width: "0.95m", depth: "1.27m", height: "2.12m", capacity: "1 Person" },
+  "1313MS": { width: "1.27m", depth: "1.27m", height: "2.12m", capacity: "2 Person" },
+};
+
+const compactBenchTypes = {
+  "1310MS": { name: "Straight Bench", title: "Compact Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Bench-Design-.webp" },
+  "1313MS": { name: "Straight Bench", title: "Compact Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Bench-Design-v2.png" },
+};
+
+// Extra "angle" thumbnails shown beside the carousel — independent of the
+// model/size selector, just alternate photos of the room in general.
+// Clicking one swaps the main carousel image directly; it has no effect
+// on which model/size is selected.
+const SIDE_THUMBS = {
+  standard: [
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/1-0T0A6306-1.png", alt: "View 1" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/2-0T0A6315-1-scaled.webp", alt: "View 2" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/3-0T0A6349-NO-BG-scaled.webp", alt: "View 3" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/4-0T0A6331-1.webp", alt: "View 4" },
+  ],
+  compact: [
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/1313MS_Compact-Sauna-Room.webp", alt: "Compact View 1" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5714_RV1-scaled.webp", alt: "Compact View 2" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5718-1-scaled.webp", alt: "Compact View 3" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5715-1-scaled.webp", alt: "Compact View 4", zoom: 1.4 },
+  ],
+  infrared: [
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0908-IR-SAUNA-ROOM_V3-scaled.webp", alt: "Infrared View 1" },
+  ],
+};
+
+const COMPACT_VIDEO_SRC = "https://www.sawo.com/wp-content/uploads/2026/07/SR02-60001630-New-Compact-Sauna-Room-.mp4";
+
 const SFW_ITEMS = [
   {
     tab: "Ventilation",
@@ -643,6 +686,7 @@ const SRD_PANELS = [
     ],
     image: img_1420_Glass_Front_Sauna_Room_scaled_1,
     imageAlt: "Glass Front Sauna Room",
+    imgPosition: "left-10",
   },
   {
     pill: "Infrared",
@@ -662,6 +706,25 @@ const SRD_PANELS = [
     ],
     image: img_IR_1111RS_SCENE,
     imageAlt: "Infrared Sauna Room",
+    imgPosition: "left",
+  },
+  {
+    pill: "Compact",
+    label: "About This Room",
+    title: "Compact Sauna Room",
+    descriptions: [
+      "The Compact Sauna Room plug-and-play benefits offer instant use of stability, saving set-up cost and downtime.",
+      "Designed for single-person use, this space-saving sauna is available in two sizes and crafted from premium cedar, making it the perfect solution for smaller spaces without compromising on the authentic sauna experience.",
+    ],
+    features: [
+      "Plug-and-play — ready to use instantly",
+      "Space-saving compact design for 1 person",
+      "Saves set-up cost and minimises downtime",
+      "Premium cedar wood construction",
+      "Available in two sizes: 1310MS & 1313MS",
+    ],
+    image: img_SR02_60001630_New_Compact_Sauna_Room_Scene_Cover_A1,
+    imageAlt: "Compact Sauna Room",
   },
 ];
 
@@ -698,6 +761,7 @@ const HASH_MAP = {
   "standard-sauna-room": "standard",
   "glass-front-sauna-room": "glassfront",
   "infrared-sauna-room": "infrared",
+  "compact-sauna-room": "compact",
 };
 
 const ROOM_CONFIGS = {
@@ -795,6 +859,26 @@ const ROOM_CONFIGS = {
     woodEnabled: [true, false],
     bestSellers: null,
   },
+  compact: {
+    label: "Compact Sauna Room",
+    desc: "SAWO Compact Sauna Rooms offer an instant, stable, plug-and-play sauna setup for urban spaces while a hidden heater ensures safety and maximized views.",
+    imageData: compactImageData,
+    sizeData: compactSizeData,
+    benchTypes: compactBenchTypes,
+    sizeCategories: null,
+    hasDoorFilter: false,
+    isFlat: true,
+    suffixRegex: null,
+    sideOrder: [],
+    sizeOptions: [
+      { value: "1310MS", label: "1310MS Cedar (1 Person)" },
+      { value: "1313MS", label: "1313MS Cedar (2 Person)" },
+    ],
+    doorOptions: [],
+    woodOptions: ["Cedar"],
+    woodEnabled: [true],
+    bestSellers: null,
+  },
 };
 
 const wrapIndex = (idx, length) => ((idx % length) + length) % length;
@@ -849,6 +933,8 @@ export {
   standardImageData, standardSizeData, standardBenchTypes, standardSizeCategories,
   glassFrontImageData, glassFrontSizeData, glassFrontBenchTypes, glassFrontSizeCategories,
   infraredImageData, infraredSizeData, infraredBenchTypes,
+  compactImageData, compactSizeData, compactBenchTypes,
+  SIDE_THUMBS, COMPACT_VIDEO_SRC,
   ROOM_CONFIGS, HASH_MAP,
   SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY,
   SPD_SLIDES, SPD_STORY_SECTIONS, SPD_FEATURE_TEXT, SPD_PERF_CARDS,

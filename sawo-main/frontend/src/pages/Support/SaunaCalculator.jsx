@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import img_CUB3_Ni2_InsideSaunaRoom from "../../assets/CUB3-Ni2_InsideSaunaRoom.webp";
+import SEO from "../../components/SEO";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -166,6 +167,11 @@ export default function SaunaCalculator() {
 
   return (
     <div id="sawo-hc-wrap">
+      <SEO
+        title="Sauna Calculator"
+        description="Find the right SAWO heater for your sauna — use our calculator to match room size and volume to the ideal heater power output."
+        path="/support/sauna-calculator"
+      />
       <style>{`
 
         #sawo-hc-wrap,

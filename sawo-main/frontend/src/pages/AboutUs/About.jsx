@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ChevronRight from '../../components/icons/ChevronRight';
 import menuPaths from '../../menuPaths';
@@ -13,9 +13,11 @@ import LN3 from '../../assets/About/Latest News/LN3.webp';
 import LN4 from '../../assets/About/Latest News/LN4.webp';
 import newsBg from '../../assets/Contacts-bg.webp';
 import HeroWave from '../../components/HeroWave';
+import SEO from '../../components/SEO';
 
 const AboutUs = () => {
   const certRef = useRef(null);
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
   // Staggered "gleam" sweep across the ISO/Sauna-from-Finland badges once
   // they scroll into view — ported from the reference vanilla-JS snippet,
@@ -52,6 +54,11 @@ const AboutUs = () => {
 
   return (
     <div className="relative">
+      <SEO
+        title="About Us"
+        description="Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms — trusted by customers in 90+ countries."
+        path="/about"
+      />
       <style>{`
 
         /* ── HERO SECTION ── */
@@ -497,7 +504,14 @@ const AboutUs = () => {
            HERO SECTION
       ════════════════════════════ */}
       <section className="about-hero">
-        <img src={aboutusHero} alt="SAWO office" className="about-hero-img" />
+        <img
+          src={aboutusHero}
+          alt="SAWO office"
+          className="about-hero-img"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 0.3 : 0, transition: "opacity 0.6s ease" }}
+        />
         <div className="about-hero-overlay" />
         <div className="about-hero-content">
           <div className="about-hero-img-left">

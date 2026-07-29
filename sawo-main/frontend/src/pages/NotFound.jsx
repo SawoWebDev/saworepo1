@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import menuPaths from "../menuPaths";
+import SEO from "../components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
@@ -19,6 +20,12 @@ const NotFound = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col justify-center items-center bg-white px-6 py-12">
+      <SEO
+        title="Page Not Found"
+        description="The page you're looking for doesn't exist or has moved."
+        path={location.pathname}
+        noindex
+      />
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#af8564]/10 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#af8564]/5 rounded-full blur-3xl opacity-50"></div>

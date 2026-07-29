@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import menuPaths from '../../menuPaths';
 import ButtonClear from '../../components/Buttons/ButtonClear';
 import HeroWave from '../../components/HeroWave';
+import SEO from '../../components/SEO';
 
 import supportHeroImg from '../../assets/CUB3-Ni2_InsideSaunaRoom.webp';
 
 const Support = () => {
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
   return (
     <div className="relative">
+      <SEO
+        title="Support Center"
+        description="Get help with your SAWO products — FAQs, sauna calculator, user manuals, and product catalogue all in one place."
+        path="/support"
+      />
       <style>{`
 
         /* Hero follows the same template as the heater pages (see
@@ -358,6 +366,9 @@ const Support = () => {
           loading="eager"
           fetchPriority="high"
           decoding="sync"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">

@@ -16,6 +16,8 @@ import demandButton from "../../assets/Steam/demand-button.webp";
 import venturiL from "../../assets/Steam/venturi-pipe-L-shape.webp";
 import venturiStraight from "../../assets/Steam/venturi-pipe-straight.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const generators = [
   {
@@ -71,21 +73,36 @@ const accessories = [
 ];
 
 const Steam = () => {
+  const heroLoaded = useHeroLoaded(heroBg);
+
   return (
     <div className="relative">
+      <SEO
+        title="Steam Sauna"
+        description="Discover SAWO steam sauna solutions — generators, controls, and accessories delivering the luxury of tailored steam for a spa-like experience."
+        path="/steam"
+      />
 
       {/* ===================== */}
       {/* HERO                  */}
       {/* ===================== */}
       <section
         className="stm-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="stm-hero-overlay" />
         <div className="stm-hero-content">
           <h1 className="stm-hero-title">STEAM</h1>

@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const USER_MANUALS_HERO_IMG = "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Series-background-1.webp";
 
@@ -336,6 +338,7 @@ export default function UserManuals() {
   const { products: localProds, loading } = useLocalProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [search, setSearch] = useState("");
+  const heroLoaded = useHeroLoaded(USER_MANUALS_HERO_IMG);
 
   const allProducts = useMemo(() => {
     const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
@@ -359,6 +362,11 @@ export default function UserManuals() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
+      <SEO
+        title="User Manuals"
+        description="Download SAWO user manuals — installation guides and operating instructions for our sauna heaters, controls, and steam generators."
+        path="/support/manuals"
+      />
       <style>{`
         @keyframes umFadeIn  { from{opacity:0} to{opacity:1} }
         @keyframes umSlideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -440,13 +448,21 @@ export default function UserManuals() {
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section
         className="um-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${USER_MANUALS_HERO_IMG})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${USER_MANUALS_HERO_IMG})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
         <div className="um-hero-overlay" />
         <div className="um-hero-content">
           <h1 className="um-hero-title">USER MANUALS</h1>

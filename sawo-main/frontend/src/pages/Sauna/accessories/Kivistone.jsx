@@ -9,6 +9,7 @@ import menuPaths from "../../../menuPaths";
 import PromoBanner from "../../../components/PromoBanner";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
+import SEO from "../../../components/SEO";
 
 const DISPLAY_CATEGORIES = ["Kivistone"];
 const DISPLAY_TAGS       = ["Kivistone"];
@@ -79,6 +80,7 @@ export default function Kivistone() {
   const { products: localProds, loading } = useLocalProducts();
   const [search, setSearch]           = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
+  const [heroLoaded, setHeroLoaded]   = useState(false);
 
   const allProducts = useMemo(() => {
     const visible  = localProds.filter(p => p.status === "published" && p.visible !== false);
@@ -106,6 +108,11 @@ export default function Kivistone() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Kivistone Soapstone Collection"
+        description="SAWO Kivistone — a soapstone accessory collection combining natural Finnish stone with heat-retaining design for a refined sauna experience."
+        path="/sauna/accessories/kivistone"
+      />
       <style>{`
         @keyframes wm-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         ${ACCESSORY_CARD_CSS}
@@ -120,7 +127,17 @@ export default function Kivistone() {
       `}</style>
 
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
-        <img src={heroImg} alt="Kivistone Soapstone Products" className="absolute inset-0 w-full h-full object-cover object-center -z-10" loading="eager" fetchPriority="high" decoding="sync" />
+        <img
+          src={heroImg}
+          alt="Kivistone Soapstone Products"
+          className="absolute inset-0 w-full h-full object-cover object-center -z-10"
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
+          style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+        />
         <div className="absolute inset-0 bg-black/50 -z-10" />
         <div className="relative z-10">
           <h1 className="wm-hero-title">KIVISTONE</h1>

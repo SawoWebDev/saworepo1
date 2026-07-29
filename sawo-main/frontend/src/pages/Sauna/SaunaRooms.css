@@ -371,6 +371,152 @@
   opacity: 1;
 }
 
+/* ── Side thumbnail strip (angle previews, independent of size/side filters) ── */
+.room-wrapper .carousel-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.room-wrapper .carousel-row .carousel-container {
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.room-wrapper .carousel-row .carousel-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.room-wrapper .side-thumbnails {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.room-wrapper .side-thumb {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f4f0ec;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.room-wrapper .side-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.room-wrapper .side-thumb:hover {
+  transform: translateY(-2px);
+}
+
+.room-wrapper .side-thumb.active {
+  border-color: #af8564;
+}
+
+@media (max-width: 768px) {
+  .room-wrapper .carousel-row {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .room-wrapper .side-thumbnails {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-self: auto;
+  }
+  .room-wrapper .side-thumb {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ── Compact Sauna Room — video trigger tile + inline video swap ── */
+.room-wrapper .carousel-container img {
+  transition: opacity 0.35s ease;
+}
+
+.room-wrapper .compact-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 3;
+}
+
+.room-wrapper .carousel-container.video-on .compact-video {
+  opacity: 1;
+  pointer-events: auto;
+}
+.room-wrapper .carousel-container.video-on img {
+  opacity: 0;
+}
+.room-wrapper .carousel-container.video-on .image-tag,
+.room-wrapper .carousel-container.video-on .carousel-best-seller,
+.room-wrapper .carousel-container.video-on .carousel-nav {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes saunaCompactVideoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.45); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
+}
+
+.room-wrapper .gallery-item.video-trigger {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #af8564 0%, #8b6b52 100%) !important;
+  border-color: #af8564 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.room-wrapper .gallery-item.video-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(175, 133, 100, 0.4);
+}
+.room-wrapper .gallery-item.video-trigger .gallery-label {
+  color: #fff !important;
+}
+.room-wrapper .gallery-item.video-trigger .video-trigger-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  margin: 0 auto 6px;
+  animation: saunaCompactVideoPulse 1.8s ease-in-out infinite;
+}
+.room-wrapper .gallery-item.video-trigger.active .video-trigger-icon {
+  animation: none;
+}
+
 .room-wrapper .image-tag {
   position: absolute;
   top: 16px;
@@ -1959,6 +2105,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+}
+
+/* Subject sits toward the left in these two photos — crop from the left
+   instead of the center so it doesn't get cut off. */
+.srd-img-wrap.srd-img-left img {
+  object-position: 20% center;
+}
+
+.srd-img-wrap.srd-img-left-10 img {
+  object-position: 10% center;
 }
 
 .srd-counter {
@@ -1986,7 +2143,7 @@
 .sauna-tabs-wrapper {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
   max-width: 1400px;
-  margin: 0 auto 40px;
+  margin: 48px auto 40px;
   padding: 0 20px;
 }
 

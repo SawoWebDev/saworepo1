@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
-import { ROOM_CONFIGS, HASH_MAP } from "./SaunaRoomData";
+import { ROOM_CONFIGS, HASH_MAP, SIDE_THUMBS, COMPACT_VIDEO_SRC } from "./SaunaRoomData";
 import menuPaths from "../../../menuPaths";
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
@@ -85,6 +85,7 @@ const TABS = [
   { key: "standard",   label: "Standard Sauna Room" },
   { key: "glassfront", label: "Glass Front Sauna Room" },
   { key: "infrared",   label: "Infrared Sauna" },
+  { key: "compact",    label: "Compact Sauna Room" },
 ];
 
 const SaunaRoomViewer = () => {
@@ -101,6 +102,15 @@ const SaunaRoomViewer = () => {
   const fadeTimer = useRef(null);
   const videoRef = useRef(null);
 
+  // Side-thumbnail "angle" preview — independent of the model/size carousel,
+  // just swaps the displayed photo. Cleared whenever the carousel itself
+  // changes (nav, gallery click, room switch), same as the WordPress version.
+  const [preview, setPreview] = useState(null); // { src, zoom } | null
+  // Compact Sauna Room — inline video swapped in for the main photo.
+  const [videoOn, setVideoOn] = useState(false);
+  const compactVideoRef = useRef(null);
+  const videoReverseState = useRef({ raf: null, reversing: false, seekPending: false });
+
   const cfg = ROOM_CONFIGS[activeRoom];
 
   const currentImages = useMemo(
@@ -110,11 +120,17 @@ const SaunaRoomViewer = () => {
 
   useEffect(() => {
     setCurrentIndex(0);
+    // Any filter change (size/side/category) re-renders the carousel from
+    // scratch, so drop the side-thumbnail preview and video override too.
+    setPreview(null);
+    setVideoOn(false);
   }, [currentImages]);
 
   const navigate = useCallback((idx) => {
     if (currentImages.length === 0) return;
     const clamped = Math.max(0, Math.min(idx, currentImages.length - 1));
+    setPreview(null);
+    setVideoOn(false);
     clearTimeout(fadeTimer.current);
     setFadeOut(true);
     fadeTimer.current = setTimeout(() => {
@@ -156,6 +172,98 @@ const SaunaRoomViewer = () => {
     };
   }, []);
 
+  // Compact Sauna Room video — play/pause as the trigger tile is toggled.
+  useEffect(() => {
+    const v = compactVideoRef.current;
+    if (!v) return;
+    if (videoOn) {
+      v.currentTime = 0;
+      if (v.readyState >= 3) {
+        v.play().catch(() => {});
+      } else {
+        const onReady = () => { v.play().catch(() => {}); };
+        v.addEventListener("canplay", onReady, { once: true });
+        return () => v.removeEventListener("canplay", onReady);
+      }
+    } else {
+      v.pause();
+      v.currentTime = 0;
+    }
+  }, [videoOn]);
+
+  // Start buffering the compact video as soon as that tab opens, so it's
+  // ready by the time the user clicks the trigger tile.
+  useEffect(() => {
+    const v = compactVideoRef.current;
+    if (activeRoom === "compact" && v && v.readyState < 3) {
+      v.load();
+    }
+  }, [activeRoom]);
+
+  // On end, scrub backwards to the start (instead of a jump-cut) then play
+  // forward again — the "Scene 3" reverse-rewind loop pattern. Scrubbing
+  // currentTime is an async seek, so each frame waits for the previous
+  // "seeked" event instead of queuing seeks faster than the decoder can
+  // service them (which is what reads as stuck/laggy).
+  useEffect(() => {
+    const v = compactVideoRef.current;
+    if (!v) return;
+    const state = videoReverseState.current;
+
+    const stopReverse = () => {
+      state.reversing = false;
+      if (state.raf !== null) cancelAnimationFrame(state.raf);
+      state.raf = null;
+    };
+
+    const playReverse = () => {
+      v.pause();
+      state.reversing = true;
+      let last = performance.now();
+
+      const onSeeked = () => { state.seekPending = false; };
+      v.addEventListener("seeked", onSeeked);
+
+      const step = (now) => {
+        if (!state.reversing) { v.removeEventListener("seeked", onSeeked); return; }
+        const dt = (now - last) / 1000;
+        last = now;
+        if (!state.seekPending) {
+          const next = v.currentTime - dt;
+          if (next > 0.05) {
+            state.seekPending = true;
+            v.currentTime = next;
+            state.raf = requestAnimationFrame(step);
+          } else {
+            v.removeEventListener("seeked", onSeeked);
+            v.currentTime = 0;
+            state.raf = null;
+            state.reversing = false;
+            v.play().catch(() => {});
+          }
+        } else {
+          state.raf = requestAnimationFrame(step);
+        }
+      };
+      state.raf = requestAnimationFrame(step);
+    };
+
+    v.addEventListener("ended", playReverse);
+    return () => {
+      v.removeEventListener("ended", playReverse);
+      stopReverse();
+    };
+  }, []);
+
+  const toggleCompactVideo = useCallback(() => {
+    setVideoOn((v) => !v);
+  }, []);
+
+  const handleSideThumbClick = useCallback((thumb) => {
+    setVideoOn(false);
+    setPreview({ src: thumb.src, zoom: thumb.zoom || null });
+  }, []);
+
   const switchRoom = useCallback((roomKey) => {
     setActiveRoom(roomKey);
     setActiveSizeCategory(null);
@@ -163,6 +271,8 @@ const SaunaRoomViewer = () => {
     setSelectedSize("all");
     setSelectedSide("all");
     setFadeOut(false);
+    setPreview(null);
+    setVideoOn(false);
   }, []);
 
   const handleSizeChange = (value) => {
@@ -193,6 +303,8 @@ const SaunaRoomViewer = () => {
   };
 
   const handleGalleryClick = (modelSize) => {
+    setPreview(null);
+    setVideoOn(false);
     if (modelSize === selectedSize) {
       setSelectedSize("all");
       setActiveSizeCategory(null);
@@ -250,6 +362,10 @@ const SaunaRoomViewer = () => {
     ? Math.floor(total / 2)
     : currentIndex;
 
+  const sideThumbs = SIDE_THUMBS[activeRoom] || null;
+  const displayedSrc = preview ? preview.src : current?.imageUrl;
+  const displayedTransform = preview?.zoom ? `scale(${preview.zoom})` : "";
+
   return (
     <>
       {/* TABS */}
@@ -276,37 +392,65 @@ const SaunaRoomViewer = () => {
 
         {/* LEFT — Image + Gallery */}
         <div className="room-image">
-          <div className="carousel-container">
-            <div className="image-tag">{imageTag}</div>
-
-            {isBestSeller && (
-              <div className="carousel-best-seller">Best Seller</div>
+          <div className="carousel-row">
+            {sideThumbs && (
+              <div className="side-thumbnails">
+                {sideThumbs.map((thumb, i) => (
+                  <button
+                    key={thumb.src}
+                    type="button"
+                    className={`side-thumb${(preview ? preview.src === thumb.src : i === 0) ? " active" : ""}`}
+                    onClick={() => handleSideThumbClick(thumb)}
+                  >
+                    <img src={thumb.src} alt={thumb.alt} />
+                  </button>
+                ))}
+              </div>
             )}
 
-            {current && (
-              <img
-                src={current.imageUrl}
-                alt="Sauna Room"
-                className={fadeOut ? "fade-out" : ""}
-              />
-            )}
+            <div className={`carousel-container${videoOn ? " video-on" : ""}`}>
+              <div className="image-tag">{imageTag}</div>
 
-            <button
-              className="carousel-nav carousel-prev"
-              disabled={currentIndex === 0}
-              onClick={() => navigate(currentIndex - 1)}
-            >
-              ‹
-            </button>
-            <button
-              className="carousel-nav carousel-next"
-              disabled={currentIndex === total - 1}
-              onClick={() => navigate(currentIndex + 1)}
-            >
-              ›
-            </button>
+              {isBestSeller && (
+                <div className="carousel-best-seller">Best Seller</div>
+              )}
 
-            {total > 1 && (
+              {displayedSrc && (
+                <img
+                  src={displayedSrc}
+                  alt="Sauna Room"
+                  className={fadeOut ? "fade-out" : ""}
+                  style={displayedTransform ? { transform: displayedTransform } : undefined}
+                />
+              )}
+
+              {activeRoom === "compact" && (
+                <video
+                  ref={compactVideoRef}
+                  className="compact-video"
+                  playsInline
+                  preload="none"
+                  muted
+                  src={COMPACT_VIDEO_SRC}
+                />
+              )}
+
+              <button
+                className="carousel-nav carousel-prev"
+                disabled={currentIndex === 0}
+                onClick={() => navigate(currentIndex - 1)}
+              >
+                ‹
+              </button>
+              <button
+                className="carousel-nav carousel-next"
+                disabled={currentIndex === total - 1}
+                onClick={() => navigate(currentIndex + 1)}
+              >
+                ›
+              </button>
+
+              {total > 1 && (
               <div className="carousel-pagination">
                 <button
                   className={`page-number${currentIndex === 0 ? " active" : ""}`}
@@ -334,6 +478,7 @@ const SaunaRoomViewer = () => {
                 </button>
               </div>
             )}
+            </div>
           </div>
 
           <div className="gallery-section">
@@ -371,6 +516,15 @@ const SaunaRoomViewer = () => {
                   </div>
                 );
               })}
+              {activeRoom === "compact" && (
+                <div
+                  className={`gallery-item video-trigger${videoOn ? " active" : ""}`}
+                  onClick={toggleCompactVideo}
+                >
+                  <div className="video-trigger-icon">▶</div>
+                  <div className="gallery-label">Video</div>
+                </div>
+              )}
             </div>
           </div>
         </div>

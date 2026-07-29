@@ -9,24 +9,42 @@ import img2 from "../../assets/Careers/img2.webp";
 import img3 from "../../assets/Careers/img3.webp";
 import img4 from "../../assets/Careers/img4.webp";
 import HeroWave from "../../components/HeroWave";
+import SEO from "../../components/SEO";
+import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
 const Careers = () => {
+  const heroLoaded = useHeroLoaded(heroBg);
+
   useEffect(() => {
     // Component mounted
   }, []);
 
   return (
     <div className="relative">
+      <SEO
+        title="Careers"
+        description="Join the SAWO team — explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters."
+        path="/careers"
+      />
       {/* HERO */}
       <section
         className="min-h-[95vh] flex flex-col justify-end items-start text-left px-6 md:px-20 pb-20 md:pb-24 relative"
-        style={{
-          backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
       >
+        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: heroLoaded ? 1 : 0,
+            transition: "opacity 0.6s ease",
+            zIndex: 0,
+          }}
+        />
+
         {/* Dark scrim so the bottom-left text stays readable over any part
             of the photo, regardless of what's behind it. */}
         <div
