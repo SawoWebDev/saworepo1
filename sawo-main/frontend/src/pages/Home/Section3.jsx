@@ -233,7 +233,7 @@ const Section3 = () => {
         /* ── Sauna wellness benefits carousel ── */
         .sauna-benefits-section {
           margin-top: 80px;
-          padding: 28px 12px;
+          padding: 28px 0;
         }
         /* Break out of Home.jsx's max-w-[2000px] + px-4/6/8 wrapper so this
            carousel spans the full viewport width instead of being boxed in

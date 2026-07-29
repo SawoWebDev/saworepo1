@@ -25,12 +25,16 @@ import img_917_D_Display_new from "../../assets/917-D_Display_new-.webp";
 import img_506_2_D from "../../assets/506-2-D.webp";
 import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp";
 import HeroWave from "../../components/HeroWave";
+import FlipbookModal from "../../components/FlipbookViewer/FlipbookModal";
+
+const CATALOGUE_PDF_URL = "https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
 
 const Sauna = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const [catalogueOpen, setCatalogueOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -212,13 +216,19 @@ const Sauna = () => {
           <div style={{ marginTop: "32px" }}>
             <ButtonClear
               text="EXPLORE HEATERS"
-              href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
-              download
+              onClick={() => setCatalogueOpen(true)}
             />
           </div>
         </div>
       <HeroWave />
       </section>
+
+      <FlipbookModal
+        isOpen={catalogueOpen}
+        onClose={() => setCatalogueOpen(false)}
+        fileUrl={CATALOGUE_PDF_URL}
+        title="SAWO Product Catalogue 2025-2026"
+      />
 
       {/* ===================== */}
       {/* SECTION 1: HEATERS    */}

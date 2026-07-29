@@ -19,7 +19,7 @@ const Careers = () => {
     <div className="relative">
       {/* HERO */}
       <section
-        className="min-h-[95vh] flex flex-col justify-center items-center text-center px-6 md:px-20 relative"
+        className="min-h-[95vh] flex flex-col justify-end items-start text-left px-6 md:px-20 pb-20 md:pb-24 relative"
         style={{
           backgroundColor: "#241c17", // warm-dark placeholder so it doesn't flash gray before the hero image decodes
           backgroundImage: `url(${heroBg})`,
@@ -27,8 +27,18 @@ const Careers = () => {
           backgroundPosition: "center",
         }}
       >
+        {/* Dark scrim so the bottom-left text stays readable over any part
+            of the photo, regardless of what's behind it. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0) 100%)",
+          }}
+        />
+
         <h1
-          className="text-white font-bold hero-title"
+          className="text-white font-bold hero-title relative"
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontSize: "45px",
@@ -40,7 +50,7 @@ const Careers = () => {
         </h1>
 
         <p
-          className="text-white mt-4 hero-subtitle"
+          className="text-white mt-4 hero-subtitle relative"
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 400,

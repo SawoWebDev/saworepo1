@@ -9,9 +9,18 @@
      element is slightly wider than the actually-visible viewport whenever a
      vertical scrollbar is present, which otherwise creates a real (tiny)
      horizontal scrollbar site-wide. Same fix already used ad hoc in
-     Sauna.jsx; this makes it permanent and global instead of per-page. */
+     Sauna.jsx; this makes it permanent and global instead of per-page.
+
+     `clip`, not `hidden`: the CSS overflow spec computes overflow-y to
+     `auto` whenever overflow-x is any non-visible value OTHER than clip —
+     silently turning <body> into a scroll container. Every position:sticky
+     element on the site (e.g. About.jsx's cert-ribbon sidebar) computes its
+     stuck range against the nearest scroll container, so that coupling was
+     quietly breaking sticky everywhere. `clip` is exempted from the
+     auto-coupling rule, so it blocks the same horizontal overflow without
+     turning <body> into a scroll container. */
   html, body {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body, button, input, textarea, select {

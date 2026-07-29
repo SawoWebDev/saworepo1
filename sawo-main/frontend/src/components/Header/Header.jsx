@@ -106,6 +106,7 @@ export default function Header() {
   const menuTimeout = useRef(null);
   const subMenuTimeout = useRef(null);
   const mobileMenuRef = useRef(null);
+  const mobileToggleRef = useRef(null);
 
 
   // --- Active helpers ---
@@ -170,9 +171,18 @@ export default function Header() {
   // Close mobile menu on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Exclude the toggle button itself: it's a sibling of the dropdown
+      // panel, not inside it, so a click on it (while open) counted as
+      // "outside" and fired setMobileOpen(false) here on mousedown — then
+      // the button's own onClick fired setMobileOpen(!mobileOpen) right
+      // after, reading the pre-close value and flipping it straight back
+      // open. Net effect: clicking the hamburger to close a menu that was
+      // already open silently reopened it instead.
       if (
         mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target)
+        !mobileMenuRef.current.contains(event.target) &&
+        mobileToggleRef.current &&
+        !mobileToggleRef.current.contains(event.target)
       ) {
         setMobileOpen(false);
       }
@@ -197,6 +207,14 @@ export default function Header() {
     subMenuTimeout.current = setTimeout(() => setHoveredSubmenu(null), 200);
   };
 
+  // The mobile dropdown panel is always solid white, so a transparent header
+  // sitting directly above it (still at the top of the page, not yet
+  // scrolled) looked broken — dark scrim behind the logo/hamburger row, then
+  // a white panel snapping in right underneath. Forcing the header solid
+  // whenever the mobile menu is open makes it read as one continuous white
+  // surface instead, same as it already does once the user scrolls.
+  const headerSolid = scrolled || mobileOpen;
+
   return (
     <>
       {/* Montserrat is loaded once in public/index.html */}
@@ -204,8 +222,9 @@ export default function Header() {
           clear fade has room to breathe past the header's own (much
           shorter) box instead of cutting off right at its edge. Sits one
           z-index below the header so header content/links stay on top and
-          clickable; fades out entirely once scrolled. */}
-      {!scrolled && (
+          clickable; fades out entirely once scrolled (or once the solid
+          mobile panel is showing). */}
+      {!headerSolid && (
         <div
           aria-hidden="true"
           className="fixed top-0 left-0 w-full z-40 pointer-events-none transition-opacity duration-300"
@@ -218,10 +237,10 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 font-sans nav-style-${NAV_STYLE} ${
           hidden ? "-translate-y-full" : "translate-y-0"
-        } ${scrolled ? "shadow-md header--solid" : "header--transparent"}`}
+        } ${headerSolid ? "shadow-md header--solid" : "header--transparent"}`}
         style={{
           fontFamily: `"Montserrat"`,
-          background: scrolled ? "#ffffff" : "transparent",
+          background: headerSolid ? "#ffffff" : "transparent",
           transition: "background 0.35s ease, box-shadow 0.35s ease, transform 0.5s ease",
         }}
       >
@@ -730,6 +749,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <button
+            ref={mobileToggleRef}
             className="header-icon-btn md:hidden text-2xl font-bold bg-transparent border-none cursor-pointer text-[rgb(51,51,51)]"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -745,21 +765,36 @@ export default function Header() {
             {navItems.map((item) => (
               <div key={item.name} className="border-b border-gray-200">
                 {item.submenu ? (
-                  <button
-                    className={`menu-item w-full px-4 py-3 flex justify-between items-center text-[15px] font-normal transition-colors text-gray-800 ${
-                      isActive(item)
-                        ? "active"
-                        : ""
+                  <div
+                    className={`menu-item w-full flex items-center justify-between text-[15px] font-normal transition-colors text-gray-800 ${
+                      isActive(item) ? "active" : ""
                     }`}
-                    onClick={() =>
-                      setHoveredMenu(
-                        hoveredMenu === item.name ? null : item.name,
-                      )
-                    }
                   >
-                    <span className="menu-text">{item.name}</span>{" "}
-                    <i className="fa-solid fa-chevron-down text-[10px]"></i>
-                  </button>
+                    {/* Label navigates straight to the item's own page;
+                        only the chevron button opens/closes the dropdown —
+                        previously the whole row was one button that just
+                        toggled, so there was no way to reach e.g. /sauna
+                        itself from mobile without going through a submenu
+                        link. */}
+                    <Link
+                      to={item.path}
+                      className="menu-text flex-1 px-4 py-3"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                    <button
+                      className="px-4 py-3"
+                      aria-label={`${hoveredMenu === item.name ? "Collapse" : "Expand"} ${item.name} submenu`}
+                      onClick={() =>
+                        setHoveredMenu(
+                          hoveredMenu === item.name ? null : item.name,
+                        )
+                      }
+                    >
+                      <i className="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                  </div>
                 ) : (
                   <Link
                     to={item.path}
@@ -784,22 +819,37 @@ export default function Header() {
                           key={sub.name}
                           className="border-t border-gray-200"
                         >
-                          {/* Sub toggle (FIXED) */}
-                          <button
-                            className={`menu-item w-full px-6 py-2 flex justify-between items-center text-[13px] font-normal transition-colors text-gray-800 ${
-                              isSubActive(sub)
-                                ? "active"
-                                : ""
+                          {/* Same label/chevron split as the top-level row
+                              above: tapping the name navigates to sub.path,
+                              only the chevron expands the level-2 list. */}
+                          <div
+                            className={`menu-item w-full flex items-center justify-between text-[13px] font-normal transition-colors text-gray-800 ${
+                              isSubActive(sub) ? "active" : ""
                             }`}
-                            onClick={() =>
-                              setHoveredSubmenu(
-                                hoveredSubmenu === sub.name ? null : sub.name,
-                              )
-                            }
                           >
-                            {sub.name}{" "}
-                            <i className="fa-solid fa-chevron-down text-[9px]"></i>
-                          </button>
+                            {sub.path ? (
+                              <Link
+                                to={sub.path}
+                                className="flex-1 px-6 py-2"
+                                onClick={() => setMobileOpen(false)}
+                              >
+                                {sub.name}
+                              </Link>
+                            ) : (
+                              <span className="flex-1 px-6 py-2">{sub.name}</span>
+                            )}
+                            <button
+                              className="px-6 py-2"
+                              aria-label={`${hoveredSubmenu === sub.name ? "Collapse" : "Expand"} ${sub.name} submenu`}
+                              onClick={() =>
+                                setHoveredSubmenu(
+                                  hoveredSubmenu === sub.name ? null : sub.name,
+                                )
+                              }
+                            >
+                              <i className="fa-solid fa-chevron-down text-[9px]"></i>
+                            </button>
+                          </div>
 
                           {/* Mobile Submenu — Level 2 */}
                           {hoveredSubmenu === sub.name && (

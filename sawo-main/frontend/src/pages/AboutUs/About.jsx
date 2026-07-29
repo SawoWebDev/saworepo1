@@ -7,6 +7,7 @@ import aboutusEmployee from '../../assets/About/aboutus-employee.webp';
 import ISO9001 from '../../assets/About/aboutus-ISO-9001.webp';
 import ISO14001 from '../../assets/About/aboutus-ISO-14001.webp';
 import SaunaSupport from '../../assets/About/aboutus-Sauna-Support_LOGO-EN-sininen.webp';
+import PEFC from '../../assets/About/aboutus-PEFC.png';
 import LN1 from '../../assets/About/Latest News/LN1.webp';
 import LN3 from '../../assets/About/Latest News/LN3.webp';
 import LN4 from '../../assets/About/Latest News/LN4.webp';
@@ -171,7 +172,8 @@ const AboutUs = () => {
           color: inherit;
         }
         .certification-item {
-          width: 240px;
+          width: 100%;
+          max-width: 240px;
           padding: 12px 16px;
           text-align: center;
           position: relative;
@@ -232,9 +234,18 @@ const AboutUs = () => {
           font-family: 'Montserrat', sans-serif;
           font-size: 2.5rem;
           font-weight: 700;
-          color: #D32F2F;
           margin-bottom: 30px;
           line-height: 1.3;
+        }
+        .innovation-title-main {
+          display: block;
+          color: #000;
+        }
+        .innovation-title-sub {
+          display: block;
+          color: #D32F2F;
+          font-size: 0.72em;
+          margin-top: 6px;
         }
         .about-text {
           font-family: 'Montserrat', sans-serif;
@@ -465,8 +476,19 @@ const AboutUs = () => {
           .news-title {
             font-size: 1.8rem;
           }
-          .certification-item {
-            width: 240px;
+          .stat-item {
+            white-space: normal;
+          }
+          .about-stats {
+            gap: 32px;
+          }
+        }
+        @media (max-width: 400px) {
+          .certifications-container-portrait {
+            padding: 28px 16px;
+          }
+          .stat-number {
+            font-size: 1.6rem;
           }
         }
       `}</style>
@@ -498,22 +520,25 @@ const AboutUs = () => {
       <section className="about-section">
         <div className="about-grid">
           <div className="about-content">
-            <h2 className="innovation-title">Innovation and tradition</h2>
+            <h2 className="innovation-title">
+              <span className="innovation-title-main">Not Limited by Borders</span>
+              <span className="innovation-title-sub">Finnish Tradition Made Global</span>
+            </h2>
             <div className="about-text">
               <p>
                 We are a pioneering European sauna company with a manufacturing site in Asia – home to over 600 dedicated Filipino and Finnish professionals, and growing. Our success is built on a foundation of competitive pricing, exceptional product quality, and customer service that goes above and beyond.
               </p>
               <p>
-                SAWO is a result from fusing the two words Sauna and World. It accurately reflects us as a comprehensive sauna provider. Meeting all your sauna needs, from heaters to door handles and louvers. Driven by a passion for sauna and guided by an innovative company culture, we have become one of the world's leading sauna product manufacturers, serving over 90 countries around the globe, and counting. Our offering ranges from sauna heaters, accessories, and control units to sauna rooms, steam generators, and infrared solutions.
+                SAWO is a result from fusing the two words <b>Sa</b>una and <b>Wo</b>rld. It accurately reflects us as a comprehensive sauna provider. Meeting all your sauna needs, from heaters to door handles and louvers. Driven by a passion for sauna and guided by an innovative company culture, we have become one of the world's leading sauna product manufacturers, serving over 90 countries around the globe, and counting. Our offering ranges from sauna heaters, accessories, and control units to sauna rooms, steam generators, and infrared solutions.
               </p>
               <p>
                 We continue to expand our portfolio with thoughtfully designed, high-performing products that exceed customer expectations worldwide. Every item is crafted under Finnish management, ensuring authenticity and a deep respect for the rich heritage of Finnish sauna culture.
               </p>
               <p>
-                Our dedication to quality and sustainability is backed by internationally recognized certifications. We first obtained ISO 9001 for Quality Management in 2002 and ISO 14001 for Environmental Management in 2007, both of which were renewed in 2025 under the latest standards; ISO 9001:2015 and ISO 14001:2015. These certifications guarantee that every single product meets the highest global benchmarks for safety, quality, and environmental responsibility.
+                Our dedication to quality and sustainability is backed by internationally recognized certifications. We first obtained <b>ISO 9001 for Quality Management</b> in 2002 and <b>ISO 14001 for Environmental Management</b> in 2007, both of which were renewed in 2025 under the latest standards; <b>ISO 9001:2015</b> and <b>ISO 14001:2015</b>. Our <b>PEFC</b> certification further demonstrates our commitment to source from sustainably managed forests. These certifications guarantee that every single product meets the highest global benchmarks for safety, quality, and environmental responsibility.
               </p>
               <p>
-                As proud ambassadors of Finnish sauna culture, we are also a member of Sauna from Finland, an association dedicated to promoting the authentic Finnish sauna experience around the world.
+                As proud ambassadors of Finnish sauna culture, we are also a member of <b>Sauna from Finland</b>, an association dedicated to promoting the authentic Finnish sauna experience around the world.
               </p>
 
               <div className="about-stats">
@@ -572,6 +597,17 @@ const AboutUs = () => {
                     </div>
                     <div className="cert-caption">Sauna from Finland</div>
                     <div className="cert-label">Official Member</div>
+                    <div className="cert-gleam" />
+                  </div>
+                </a>
+
+                <a className="cert-link" href="https://www.pefc.org/" target="_blank" rel="noopener noreferrer">
+                  <div className="certification-item">
+                    <div className="cert-icon">
+                      <img src={PEFC} alt="PEFC / 01-31-1332" />
+                    </div>
+                    <div className="cert-caption">We Promote Sustainable Forestry</div>
+                    <div className="cert-label">www.pefc.org</div>
                     <div className="cert-gleam" />
                   </div>
                 </a>
