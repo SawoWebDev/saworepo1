@@ -19,7 +19,7 @@
 import { Helmet } from "react-helmet-async";
 
 const SITE_NAME = "SAWO";
-const DEFAULT_TITLE = "SAWO | Finnish Sauna Heaters, Steam Generators & Sauna Rooms";
+const DEFAULT_TITLE = "SAWO Inc. | Premium Sauna Heaters, Rooms and Accessories";
 const DEFAULT_DESCRIPTION =
   "SAWO designs premium Finnish sauna heaters, steam generators, infrared saunas & sauna rooms — trusted in 90+ countries. Explore the full range.";
 const DEFAULT_IMAGE = "/1920.webp"; // existing homepage hero, 1920x1080

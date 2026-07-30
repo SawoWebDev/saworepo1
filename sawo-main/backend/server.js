@@ -47,6 +47,44 @@ app.use(cors({
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+// Shared-secret auth for the write endpoints below. Without SYNC_API_KEY set,
+// these endpoints were reachable by anyone who found the URL (CORS only
+// checks the Origin header, which non-browser clients simply omit).
+const SYNC_API_KEY = process.env.SYNC_API_KEY;
+function requireApiKey(req, res, next) {
+  if (!SYNC_API_KEY) {
+    console.warn("⚠️ SYNC_API_KEY is not set — write endpoints are unauthenticated");
+    return next();
+  }
+  if (req.get("x-api-key") !== SYNC_API_KEY) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  next();
+}
+
+// Minimal in-memory rate limiter: N requests per IP per window.
+// Fine for a single Render instance; would need a shared store if this
+// backend ever scales to multiple instances.
+function rateLimit({ windowMs, max }) {
+  const hits = new Map();
+  return (req, res, next) => {
+    const now = Date.now();
+    const key = req.ip;
+    const entry = hits.get(key);
+    if (!entry || now - entry.start > windowMs) {
+      hits.set(key, { start: now, count: 1 });
+      return next();
+    }
+    entry.count += 1;
+    if (entry.count > max) {
+      return res.status(429).json({ error: "Too many requests" });
+    }
+    next();
+  };
+}
+const writeLimiter = rateLimit({ windowMs: 60_000, max: 10 });
+const trackLimiter = rateLimit({ windowMs: 60_000, max: 60 });
+
 app.get("/", (_req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -88,8 +126,7 @@ app.get("/health", (_req, res) => {
   res.json({
     status: "ok",
     message: "SAWO Backend API running",
-    corsEnabled: true,
-    allowedOrigins: allowedOrigins
+    corsEnabled: true
   });
 });
 
@@ -104,7 +141,7 @@ app.get("/api/cors-test", (_req, res) => {
 
 app.options("/api/sync", cors());
 
-app.post("/api/sync", async (_req, res) => {
+app.post("/api/sync", writeLimiter, requireApiKey, async (_req, res) => {
   const clientOrigin = _req.get("origin");
   const startTime = new Date().toISOString();
 
@@ -142,7 +179,7 @@ app.post("/api/sync", async (_req, res) => {
 
 app.options("/api/update-local-files", cors());
 
-app.post("/api/update-local-files", async (_req, res) => {
+app.post("/api/update-local-files", writeLimiter, requireApiKey, async (_req, res) => {
   const clientOrigin = _req.get("origin");
   const startTime = new Date().toISOString();
 
@@ -186,7 +223,7 @@ app.post("/api/update-local-files", async (_req, res) => {
 
 app.options("/api/sync-sauna-rooms", cors());
 
-app.post("/api/sync-sauna-rooms", async (_req, res) => {
+app.post("/api/sync-sauna-rooms", writeLimiter, requireApiKey, async (_req, res) => {
   console.log("\n📡 Sauna rooms sync request received");
   res.setHeader("Content-Type", "application/x-ndjson");
   res.setHeader("Cache-Control", "no-cache");
@@ -205,7 +242,7 @@ app.post("/api/sync-sauna-rooms", async (_req, res) => {
 
 app.options("/api/update-local-sauna-rooms", cors());
 
-app.post("/api/update-local-sauna-rooms", async (_req, res) => {
+app.post("/api/update-local-sauna-rooms", writeLimiter, requireApiKey, async (_req, res) => {
   console.log("\n📝 Update local sauna rooms request received");
   res.setHeader("Content-Type", "application/x-ndjson");
   res.setHeader("Cache-Control", "no-cache");
@@ -225,12 +262,12 @@ app.post("/api/update-local-sauna-rooms", async (_req, res) => {
 });
 
 app.options("/api/track/pageview", cors());
-app.post("/api/track/pageview", handlePageView);
+app.post("/api/track/pageview", trackLimiter, handlePageView);
 
 // POST, not PATCH: navigator.sendBeacon (used by the browser for the
 // page-leave duration update) can only issue POST requests.
 app.options("/api/track/duration", cors());
-app.post("/api/track/duration", handleDuration);
+app.post("/api/track/duration", trackLimiter, handleDuration);
 
 app.listen(PORT, () => {
   const isProduction = process.env.NODE_ENV === "production";

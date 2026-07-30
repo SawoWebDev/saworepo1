@@ -414,10 +414,10 @@ export default function SaunaRoomDisplay() {
   return (
     <>
       <SEO
-        title={room.name}
-        description={seoDescription}
+        title={room.meta_title || room.name}
+        description={room.meta_description || seoDescription}
         path={`/sauna/rooms/${slug}`}
-        image={carouselImages[0] || undefined}
+        image={room.og_image || carouselImages[0] || undefined}
       />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }

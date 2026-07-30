@@ -73,6 +73,7 @@ const DispSaunaRoom      = lazy(() => import("./pages/IndividualDisplay/DispSaun
 const AdminLayout    = lazy(() => import("./Administrator/AdminLayout"));
 const Login          = lazy(() => import("./Administrator/Login"));
 const ResetPassword  = lazy(() => import("./Administrator/ResetPassword"));
+const Dashboard      = lazy(() => import("./Administrator/Dashboard"));
 const Users          = lazy(() => import("./Administrator/Users"));
 const Products       = lazy(() => import("./Administrator/Products"));
 const SaunaRoomsAdmin = lazy(() => import("./Administrator/SaunaRoomsCMS"));
@@ -169,6 +170,9 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/admin/reset-password" element={<ResetPassword />} />
 
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute requiredCap="page.dashboard"><AdminLayout><Dashboard /></AdminLayout></ProtectedRoute>
+            } />
             <Route path="/admin/users" element={
               <ProtectedRoute requiredCap="page.users"><AdminLayout><Users /></AdminLayout></ProtectedRoute>
             } />
@@ -204,8 +208,10 @@ export default function App() {
               <Navigate to="/admin/products" replace />
             } />
 
-            {/* Redirect root /admin login */}
-            <Route path="/admin" element={<Navigate to="/login" replace />} />
+            {/* Root /admin — the dashboard is the landing page; ProtectedRoute
+                bounces unauthenticated visitors to /login same as any other
+                admin route. */}
+            <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
 
           </Routes>
         </Suspense>

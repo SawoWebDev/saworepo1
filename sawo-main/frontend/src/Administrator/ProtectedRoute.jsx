@@ -10,9 +10,9 @@ import { can } from "./permissions";
  * @param {React.ReactNode} children - The component to render if access is granted
  * @param {string} [requiredCap] - Optional capability required (e.g., "page.users")
  *                                 If not provided, only auth is checked
- * @param {string} [redirectTo="/admin/products"] - Where to redirect if capability check fails
+ * @param {string} [redirectTo="/admin/dashboard"] - Where to redirect if capability check fails
  */
-export default function ProtectedRoute({ children, requiredCap, redirectTo = "/admin/products" }) {
+export default function ProtectedRoute({ children, requiredCap, redirectTo = "/admin/dashboard" }) {
   const session = getSession();
 
   // Not authenticated — redirect to login

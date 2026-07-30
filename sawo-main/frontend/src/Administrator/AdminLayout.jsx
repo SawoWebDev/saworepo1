@@ -11,7 +11,7 @@ import "./admin.css";
 
 // Order sections appear in — anything not listed falls back to alphabetical
 // order after these, so a stray/unlisted section never disappears silently.
-const SECTION_ORDER = ["Catalog", "Insights", "System"];
+const SECTION_ORDER = ["Overview", "Catalog", "Insights", "System"];
 
 function groupBySection(nav) {
   const groups = new Map();

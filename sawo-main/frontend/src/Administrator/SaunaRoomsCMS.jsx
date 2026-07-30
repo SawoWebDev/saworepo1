@@ -25,6 +25,16 @@ function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+// Mirrors DispSaunaRoom.jsx's seoDescription fallback exactly, so the admin's
+// placeholder preview shows the real inherited value rather than an
+// approximation.
+function derivedSeoDescription(form) {
+  const raw = form.description || "";
+  const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  if (!text) return `${form.name || "Sauna room"} by SAWO — a premium Finnish sauna room.`;
+  return text.length > 160 ? `${text.slice(0, 157)}...` : text;
+}
+
 function formsEqual(a, b) {
   for (const k of Object.keys(EMPTY_FORM)) {
     const av = a[k], bv = b[k];
@@ -80,6 +90,7 @@ const EMPTY_FORM = {
   status: "draft", visible: true, featured: false,
   is_best_seller: false, has_door_filter: true,
   sort_order: 0,
+  meta_title: "", meta_description: "", og_image: "",
 };
 
 // ─── WebP conversion + resize ─────────────────────────────────────────────────
@@ -1385,6 +1396,7 @@ export default function SaunaRooms({ currentUser }) {
   const [previewRoom, setPreviewRoom] = useState(null);
 
   const [upThumb, setUpThumb] = useState(false);
+  const [upOg,    setUpOg]    = useState(false);
   const [upImgs,  setUpImgs]  = useState(false);
   const [upSpec,  setUpSpec]  = useState(false);
   const [upFile,  setUpFile]  = useState(false);
@@ -1653,6 +1665,17 @@ export default function SaunaRooms({ currentUser }) {
     finally { setUpThumb(false); }
   };
 
+  const handleOgUpload = async file => {
+    setUpOg(true);
+    try {
+      if (form.og_image) await deleteStorageUrls([form.og_image]).catch(console.warn);
+      const url = await uploadFileToSupabase(file, "saunaroom-images");
+      setForm(f => ({ ...f, og_image: url }));
+      add("OG image uploaded.", "success");
+    } catch (err) { add(err.message, "error"); }
+    finally { setUpOg(false); }
+  };
+
   const uploadMoreImages = async files => {
     setUpImgs(true);
     try {
@@ -1766,6 +1789,9 @@ export default function SaunaRooms({ currentUser }) {
     is_best_seller: data.is_best_seller || false,
     has_door_filter:data.has_door_filter !== false,
     sort_order:     data.sort_order     || 0,
+    meta_title:       data.meta_title       || "",
+    meta_description: data.meta_description || "",
+    og_image:         data.og_image         || "",
   });
 
   const openEdit = async row => {
@@ -1791,6 +1817,11 @@ export default function SaunaRooms({ currentUser }) {
       loaded.status     = "draft";
       loaded.featured   = false;
       loaded.is_best_seller = false;
+      // Not copied — name just changed to "(Copy)" so the derived fallback
+      // (recomputed from the new name/description) is more correct than a
+      // stale override. og_image is fine to carry over, same as thumbnail.
+      loaded.meta_title = "";
+      loaded.meta_description = "";
       setForm(loaded); setSavedForm(EMPTY_FORM);
       setSlugEdited(false); setEditing(null); setEditingFull(null);
       setShowRevisions(false); setModalMenuOpen(false); setActiveTab("basic");
@@ -1849,6 +1880,9 @@ export default function SaunaRooms({ currentUser }) {
         is_best_seller: form.is_best_seller,
         has_door_filter:form.has_door_filter,
         sort_order:     form.sort_order,
+        meta_title:       form.meta_title.trim() || null,
+        meta_description: form.meta_description.trim() || null,
+        og_image:         form.og_image || null,
         updated_at:             now,
         updated_by_username:    currentUser?.username || null,
         ...(editing ? {} : { created_by_username: currentUser?.username || null }),
@@ -2440,6 +2474,49 @@ export default function SaunaRooms({ currentUser }) {
               {/* ── TAB: Settings ── */}
               {activeTab === "settings" && (
                 <>
+                  {/* SEO — pure overrides. Empty = the frontend keeps deriving
+                      title/description/image from name + description +
+                      thumbnail (see DispSaunaRoom.jsx's seoDescription), so
+                      leaving these blank is never "broken", just inherited. */}
+                  <SectionLabel label="SEO" />
+                  <div style={{ display: "grid", gap: 12 }}>
+                    <div>
+                      <Field label="Meta Title" value={form.meta_title}
+                        onChange={e => setForm(f => ({ ...f, meta_title: e.target.value }))}
+                        placeholder={form.name || "Inherits room name"} />
+                      <p className="form-helper">
+                        {form.meta_title.length}/60 {form.meta_title.length > 60 && "— longer titles may get truncated in search results"}
+                      </p>
+                    </div>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label">Meta Description</label>
+                      <textarea
+                        value={form.meta_description}
+                        onChange={e => setForm(f => ({ ...f, meta_description: e.target.value }))}
+                        rows={3}
+                        placeholder={derivedSeoDescription(form) || "Inherits from Description"}
+                        className="form-textarea"
+                      />
+                      <p className="form-helper">
+                        {form.meta_description.length}/155 {form.meta_description.length > 155 && "— longer descriptions may get truncated in search results"}
+                      </p>
+                    </div>
+                    <div>
+                      <label className="form-label">OG Image (social share preview)</label>
+                      {form.og_image ? (
+                        <ThumbnailPreview
+                          url={form.og_image}
+                          onRemove={() => { deleteStorageUrls([form.og_image]).catch(console.warn); setForm(f => ({ ...f, og_image: "" })); }}
+                          onReplace={handleOgUpload}
+                          uploading={upOg}
+                        />
+                      ) : (
+                        <ThumbnailUploader onUpload={handleOgUpload} uploading={upOg} />
+                      )}
+                      <p className="form-helper">Inherits the Featured Image if left empty</p>
+                    </div>
+                  </div>
+
                   <SectionLabel label="Status & Visibility" />
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, alignItems: "start" }}>
                     <SelectField label="Status" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
