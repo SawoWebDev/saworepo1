@@ -29,6 +29,7 @@ export const CAPABILITY_MAP = {
   "products.storage_cleanup": ["admin", "superadmin"],
   "products.upload_images":   ["admin", "superadmin"],
   "products.upload_files":    ["admin", "superadmin"],
+  "products.csv_import":      ["admin", "superadmin"],
 
   // Sauna Rooms
   "sauna_rooms.view":         ["viewer", "editor", "admin", "superadmin"],
@@ -50,6 +51,7 @@ export const CAPABILITY_MAP = {
   "users.delete":             ["superadmin"],
 
   // Navigation / Pages
+  "page.dashboard":           ["viewer", "editor", "admin", "superadmin"],
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
   "page.logs":                ["admin", "superadmin"],
@@ -114,6 +116,7 @@ export function getPerms(user) {
  * Filter this array using: NAV_ITEMS.filter(item => can(userRole, item.cap))
  */
 export const NAV_ITEMS = [
+  { to: "/admin/dashboard",       label: "Dashboard",        icon: "fa-solid fa-gauge-high",     cap: "page.dashboard",   section: "Overview", description: "At-a-glance activity, traffic, and catalog status." },
   { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    section: "Catalog",  description: "Manage your product catalog. Create, edit, and publish items across the site." },
   { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", section: "Catalog",  description: "Manage sauna room listings. Create, edit, and publish rooms across the site." },
   { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      section: "Catalog",  description: "Browse products grouped by model line. Click a folder to see everything in it." },

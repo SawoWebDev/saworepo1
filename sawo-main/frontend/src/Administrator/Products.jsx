@@ -9,6 +9,8 @@ import { useLocalProducts } from "./Local/useLocalProducts";
 import { checkSupabaseSync, applyLocalChanges } from "./Local/compareSupabaseWithLocal";
 import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDisplay/DispAccessories";
 import { getCache, setCache } from "./adminCache";
+import { productsToCsvString, downloadCsv } from "./csv/productCsv";
+import CsvImportModal from "./csv/CsvImportModal";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
 const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
@@ -69,8 +71,53 @@ function getImageUrl(product, field, dataSource) {
   return `${PREVIEW_GITHUB_RAW}${imgPath}`;
 }
 
+// Mirrors DispProduct.jsx/DispAccessories.jsx/DispSaunaRoom.jsx's seoDescription
+// fallback exactly, so the admin's placeholder preview shows the real inherited
+// value rather than an approximation.
+function derivedSeoDescription(form) {
+  const raw = form.short_description || form.description || "";
+  const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  if (!text) return `${form.name || "Product"} by SAWO — premium Finnish sauna equipment.`;
+  return text.length > 160 ? `${text.slice(0, 157)}...` : text;
+}
+
 function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+// Pure payload builder shared by the form's handleSave and the CSV import
+// commit step, so the two paths can never drift on defaults/trimming rules.
+// `tags` is separate from `form.tags` because handleSave merges in
+// auto-extracted tags before saving; CSV import passes form.tags as-is.
+function buildProductPayload(form, tags) {
+  return {
+    name:              form.name.trim(),
+    slug:              form.slug.trim(),
+    short_description: form.short_description.trim() || null,
+    description:       form.description.trim() || null,
+    thumbnail:         form.thumbnail || null,
+    images:            form.images,
+    spec_images:       form.spec_images,
+    files:             form.files,
+    variants:          form.variants,
+    spec_table:        form.spec_table,
+    categories:        form.categories,
+    tags:              tags,
+    features:          form.features,
+    brand:             form.brand.trim()  || null,
+    type:              form.type.trim()   || null,
+    capacity_liters:   form.capacity_liters ? parseFloat(form.capacity_liters) : null,
+    variant_type:      form.variant_type.trim() || null,
+    product_family:    form.product_family.trim() || null,
+    parent_product_id: form.parent_product_id.trim() || null,
+    status:            form.status,
+    visible:           form.visible,
+    featured:          form.featured,
+    sort_order:        form.sort_order,
+    meta_title:        form.meta_title.trim() || null,
+    meta_description:  form.meta_description.trim() || null,
+    og_image:          form.og_image || null,
+  };
 }
 
 // Convert Supabase URL to relative path for GitHub storage
@@ -102,6 +149,7 @@ const EMPTY_FORM = {
   capacity_liters: "", variant_type: "", product_family: "", parent_product_id: "",
   status: "published",
   visible: true, featured: false, sort_order: 0,
+  meta_title: "", meta_description: "", og_image: "",
 };
 
 // ─── Auto-extract tags from description HTML ──────────────────────────────────
@@ -2632,6 +2680,7 @@ export default function Products({ currentUser }) {
   const [selected,              setSelected]              = useState(new Set());
   const [bulkConfirm,           setBulkConfirm]           = useState(false);
   const [bulkStatusValue,       setBulkStatusValue]       = useState("");
+  const [csvImportOpen,         setCsvImportOpen]         = useState(false);
 
   const [modalOpen,   setModalOpen]   = useState(false);
   const [editing,     setEditing]     = useState(null);
@@ -2648,6 +2697,7 @@ export default function Products({ currentUser }) {
   const [confirmDel, setConfirmDel] = useState(null);
 
   const [upThumb, setUpThumb] = useState(false);
+  const [upOg, setUpOg] = useState(false);
   const [upImgs,  setUpImgs]  = useState(false);
   const [upSpec,  setUpSpec]  = useState(false);
   const [upFile,  setUpFile]  = useState(false);
@@ -2777,6 +2827,21 @@ export default function Products({ currentUser }) {
     finally { setUpThumb(false); }
   };
 
+  const handleOgUpload = async file => {
+    setUpOg(true);
+    try {
+      const url = await uploadFileToSupabase(file, "product-images");
+      if (form.og_image && form.og_image !== url) {
+        await deleteStorageUrls([form.og_image]).catch(err => {
+          console.warn("[Products] Failed to delete old OG image:", err);
+        });
+      }
+      setForm(f => ({ ...f, og_image: url }));
+      add("OG image converted to WebP and uploaded.", "success");
+    } catch (err) { add(err.message, "error"); }
+    finally { setUpOg(false); }
+  };
+
   const uploadMoreImages = async files => {
     setUpImgs(true);
     try {
@@ -2895,6 +2960,9 @@ export default function Products({ currentUser }) {
         visible:           data.visible           !== false,
         featured:          data.featured          || false,
         sort_order:        data.sort_order        || 0,
+        meta_title:        data.meta_title        || "",
+        meta_description:  data.meta_description  || "",
+        og_image:          data.og_image          || "",
       };
       setForm(loaded);
       setSavedForm(loaded);
@@ -2955,6 +3023,12 @@ export default function Products({ currentUser }) {
         visible:           true,
         featured:          false,
         sort_order:        0,
+        // meta_title/meta_description deliberately NOT copied — the name
+        // just changed to "(Copy)" so the derived fallback (recomputed from
+        // the new name/description) is more correct than a stale override.
+        meta_title:        "",
+        meta_description:  "",
+        og_image:          data.og_image || "",
       };
       setForm(loaded);
       setSavedForm(EMPTY_FORM); // Not saved yet
@@ -3052,29 +3126,7 @@ export default function Products({ currentUser }) {
       const now = new Date().toISOString();
 
       const payload = {
-        name:              form.name.trim(),
-        slug:              form.slug.trim(),
-        short_description: form.short_description.trim() || null,
-        description:       form.description.trim() || null,
-        thumbnail:         form.thumbnail || null,
-        images:            form.images,
-        spec_images:       form.spec_images,
-        files:             form.files,
-        variants:          form.variants,
-        spec_table:        form.spec_table,
-        categories:        form.categories,
-        tags:              mergedTags,
-        features:          form.features,
-        brand:             form.brand.trim()  || null,
-        type:              form.type.trim()   || null,
-        capacity_liters:   form.capacity_liters ? parseFloat(form.capacity_liters) : null,
-        variant_type:      form.variant_type.trim() || null,
-        product_family:    form.product_family.trim() || null,
-        parent_product_id: form.parent_product_id.trim() || null,
-        status:            form.status,
-        visible:           form.visible,
-        featured:          form.featured,
-        sort_order:        form.sort_order,
+        ...buildProductPayload(form, mergedTags),
         updated_at:              now,
         updated_by_username:     currentUser?.username || null,
         ...(currentUser && !editing ? { created_by_username: currentUser.username } : {}),
@@ -3275,6 +3327,16 @@ export default function Products({ currentUser }) {
       add(`${ids.length} product(s) status changed to ${bulkStatusValue}.`, "success");
     } catch (err) { add(err.message, "error"); }
     finally { setSelected(new Set()); setBulkStatusValue(""); fetchProducts(); }
+  };
+
+  // ── CSV export — current filtered view, or just the selection if any is
+  // active. Read-only, so allowed regardless of dataSource.
+  const handleExportCsv = () => {
+    const source = dataSource === "live" ? products : localProds;
+    const rows = selected.size > 0 ? source.filter(p => selected.has(p.id)) : filtered;
+    if (rows.length === 0) return add("No products to export.", "error");
+    downloadCsv(`products-export-${new Date().toISOString().slice(0, 10)}.csv`, productsToCsvString(rows));
+    add(`Exported ${rows.length} product(s).`, "success");
   };
 
   const toggleSelect = id => {
@@ -3483,6 +3545,16 @@ export default function Products({ currentUser }) {
                 <i className="fa-solid fa-trash" /> Delete {selected.size}
               </button>
             </>
+          )}
+          <button type="button" className="btn btn-ghost btn-sm" onClick={handleExportCsv} title="Export the current view (or selection) to CSV">
+            <i className="fa-solid fa-file-arrow-down" style={{ marginRight: 5 }} />
+            Export CSV
+          </button>
+          {perms.can("products.csv_import") && dataSource === "live" && (
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setCsvImportOpen(true)} title="Bulk create/update products from a CSV file">
+              <i className="fa-solid fa-file-arrow-up" style={{ marginRight: 5 }} />
+              Import CSV
+            </button>
           )}
           <button type="button" className="mobile-search-toggle"
             onClick={() => setMobileSearchOpen(o => !o)}
@@ -4071,6 +4143,55 @@ export default function Products({ currentUser }) {
             </div>
           </div>
 
+          {/* SEO — pure overrides. Empty = the frontend keeps deriving title/
+              description/image from name + short_description/description +
+              thumbnail (see DispProduct.jsx's seoDescription), so leaving
+              these blank is never "broken", just inherited. */}
+          <SectionLabel label="SEO" />
+          <div style={{ display: "grid", gap: 12 }}>
+            <div>
+              <Field label="Meta Title" value={form.meta_title}
+                onChange={e => setForm(f => ({ ...f, meta_title: e.target.value }))}
+                placeholder={form.name || "Inherits product name"} />
+              <p className="form-helper">
+                {form.meta_title.length}/60 {form.meta_title.length > 60 && "— longer titles may get truncated in search results"}
+              </p>
+            </div>
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Meta Description</label>
+              <textarea
+                value={form.meta_description}
+                onChange={e => setForm(f => ({ ...f, meta_description: e.target.value }))}
+                rows={3}
+                placeholder={derivedSeoDescription(form) || "Inherits from Product Description"}
+                className="form-textarea"
+              />
+              <p className="form-helper">
+                {form.meta_description.length}/155 {form.meta_description.length > 155 && "— longer descriptions may get truncated in search results"}
+              </p>
+            </div>
+            <div>
+              <label className="form-label">OG Image (social share preview)</label>
+              {form.og_image ? (
+                <ThumbnailPreview
+                  url={form.og_image}
+                  onRemove={() => {
+                    deleteStorageUrls([form.og_image]).catch(err => {
+                      console.warn("[Products] Failed to delete OG image from storage:", err);
+                      add("⚠️ Failed to delete OG image from storage. It may need manual cleanup.", "warning");
+                    });
+                    setForm(f => ({ ...f, og_image: "" }));
+                  }}
+                  onReplace={handleOgUpload}
+                  uploading={upOg}
+                />
+              ) : (
+                <ThumbnailUploader onUpload={handleOgUpload} uploading={upOg} />
+              )}
+              <p className="form-helper">Inherits the Featured Image if left empty</p>
+            </div>
+          </div>
+
           {/* Status & Visibility */}
           <SectionLabel label="Status & Visibility" />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, alignItems: "start" }}>
@@ -4130,6 +4251,21 @@ export default function Products({ currentUser }) {
         title="Delete Product?"
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
+
+      {csvImportOpen && (
+        <CsvImportModal
+          open={csvImportOpen}
+          onClose={() => setCsvImportOpen(false)}
+          existingProducts={products}
+          currentUser={currentUser}
+          upsertTaxonomy={upsertTaxonomy}
+          buildProductPayload={buildProductPayload}
+          supabase={supabase}
+          logActivity={logActivity}
+          add={add}
+          onImported={fetchProducts}
+        />
+      )}
 
       {previewProduct && (
         <ProductPreviewModal

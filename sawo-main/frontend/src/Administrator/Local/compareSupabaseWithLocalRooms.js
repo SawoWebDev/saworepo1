@@ -167,7 +167,10 @@ export async function applyLocalRoomChanges(report, onEvent = () => {}) {
 
     const response = await fetch(`${BACKEND_URL}/api/update-local-sauna-rooms`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(process.env.REACT_APP_SYNC_API_KEY ? { "x-api-key": process.env.REACT_APP_SYNC_API_KEY } : {}),
+      },
       body: JSON.stringify({ rooms: updated }),
     });
 

@@ -767,10 +767,10 @@ export default function ProductPage() {
   return (
     <>
       <SEO
-        title={product.name}
-        description={seoDescription}
+        title={product.meta_title || product.name}
+        description={product.meta_description || seoDescription}
         path={`/products/${product.slug}`}
-        image={thumbnail || undefined}
+        image={product.og_image || thumbnail || undefined}
       />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
