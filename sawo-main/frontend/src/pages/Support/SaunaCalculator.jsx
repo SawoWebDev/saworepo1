@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import img_CUB3_Ni2_InsideSaunaRoom from "../../assets/CUB3-Ni2_InsideSaunaRoom.webp";
 import SEO from "../../components/SEO";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -136,7 +137,7 @@ export default function SaunaCalculator() {
   }, []);
 
   const allProducts = useMemo(() => {
-    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible = localProds.filter(p => isPubliclyVisible(p));
     return [...visible].sort((a, b) => {
       const sortA = a.sort_order ?? 999;
       const sortB = b.sort_order ?? 999;

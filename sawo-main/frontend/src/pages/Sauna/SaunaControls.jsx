@@ -13,6 +13,7 @@ import "./heaters/heaters.css"; // reuse existing heaters CSS
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -197,7 +198,7 @@ export default function SaunaControls() {
   }, [groupParam]);
 
   const allProducts = useMemo(() => {
-    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible = localProds.filter(p => isPubliclyVisible(p));
     const filtered = applyDisplayFilter(visible);
     return [...filtered].sort((a, b) => {
       const sortA = a.sort_order ?? 999;

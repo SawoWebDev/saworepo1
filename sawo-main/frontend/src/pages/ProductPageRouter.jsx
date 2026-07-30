@@ -7,6 +7,7 @@ import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import DispProduct from "./IndividualDisplay/DispProduct";
 import DispAccessories from "./IndividualDisplay/DispAccessories";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
+import { isPubliclyVisible } from "../local-storage/visibility";
 
 export default function ProductPageRouter() {
   const { slug } = useParams();
@@ -15,7 +16,7 @@ export default function ProductPageRouter() {
 
   const product = useMemo(() => {
     if (!localProds.length) return null;
-    return localProds.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
+    return localProds.find(p => p.slug === slug && isPubliclyVisible(p)) || null;
   }, [localProds, slug]);
 
   // If product is an accessory, redirect to /accessories/:slug

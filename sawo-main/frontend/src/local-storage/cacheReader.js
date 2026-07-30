@@ -14,6 +14,7 @@
  */
 
 import { getAllProductsLive } from "./supabaseReader";
+import { isPubliclyVisible } from "./visibility";
 
 const CACHE_KEYS = {
   products: "sawo_products_cache",
@@ -44,9 +45,7 @@ export async function getCachedProducts() {
  */
 export async function getVisibleProducts() {
   const products = await getCachedProducts();
-  return products.filter(
-    (p) => p.visible !== false && p.status === "published"
-  );
+  return products.filter(isPubliclyVisible);
 }
 
 /**

@@ -6,6 +6,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
 import { getCache, setCache } from "./adminCache";
+import RevisionFieldDiff from "./RevisionFieldDiff";
 
 const LOGS_CACHE_KEY = "admin:logs:default";
 
@@ -94,6 +95,8 @@ export default function Logs() {
   const [filterAction, setFilterAction] = useState("");
   const [filterEntity, setFilterEntity] = useState("");
   const [filterUser,   setFilterUser]   = useState("");
+
+  const [expandedLogId, setExpandedLogId] = useState(null);
 
   // Pagination
   const PAGE_SIZE = 50;
@@ -232,8 +235,11 @@ export default function Logs() {
               </tr>
             </thead>
             <tbody>
-              {logs.map(log => (
-                <tr key={log.id}>
+              {logs.map(log => {
+                const changeCount = log.changes ? Object.keys(log.changes).length : 0;
+                return (
+                <React.Fragment key={log.id}>
+                <tr>
                   {/* When */}
                   <td className="tbl-date" style={{ whiteSpace: "nowrap", paddingRight: 8 }}>
                     <div style={{ fontSize: "0.75rem", color: "var(--text-2)", lineHeight: 1.2 }}>{timeAgo(log.created_at)}</div>
@@ -256,14 +262,42 @@ export default function Logs() {
                         {log.meta.bulk && <span style={{ background: "var(--surface-2)", padding: "2px 6px", borderRadius: 3, fontWeight: 500 }}>bulk delete</span>}
                         {log.meta.deleted_files > 0 && <span style={{ background: "var(--surface-2)", padding: "2px 6px", borderRadius: 3 }}>📎 {log.meta.deleted_files} file{log.meta.deleted_files !== 1 ? 's' : ''}</span>}
                         {log.meta.had_images && <span style={{ background: "var(--surface-2)", padding: "2px 6px", borderRadius: 3 }}>🖼️ with images</span>}
+                        {log.meta.source === "csv_import" && <span style={{ background: "var(--surface-2)", padding: "2px 6px", borderRadius: 3 }}>CSV import</span>}
                       </div>
+                    )}
+                    {log.action === "update" && (
+                      changeCount > 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => setExpandedLogId(id => id === log.id ? null : log.id)}
+                          style={{ background: "none", border: "none", padding: 0, marginTop: 4, color: "var(--brand)", fontSize: "0.7rem", cursor: "pointer", fontWeight: 600 }}
+                        >
+                          <i className={`fa-solid fa-chevron-${expandedLogId === log.id ? "down" : "right"}`} style={{ marginRight: 4, fontSize: "0.6rem" }} />
+                          {changeCount} field{changeCount !== 1 ? "s" : ""} changed
+                        </button>
+                      ) : (
+                        <div style={{ marginTop: 4, fontSize: "0.65rem", color: "var(--text-3)", fontStyle: "italic" }}>
+                          Field details not recorded
+                        </div>
+                      )
                     )}
                   </td>
 
                   {/* By */}
                   <td><UserChip username={log.username} /></td>
                 </tr>
-              ))}
+                {expandedLogId === log.id && changeCount > 0 && (
+                  <tr>
+                    <td colSpan={5} style={{ background: "var(--surface-2)", padding: "12px 16px", fontSize: "0.75rem" }}>
+                      {Object.entries(log.changes).map(([field, change]) => (
+                        <RevisionFieldDiff key={field} field={field} change={change} />
+                      ))}
+                    </td>
+                  </tr>
+                )}
+                </React.Fragment>
+                );
+              })}
             </tbody>
           </table>
         )}

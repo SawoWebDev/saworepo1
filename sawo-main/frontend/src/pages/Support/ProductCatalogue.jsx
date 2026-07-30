@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "../IndividualDisplay/DispAccessories";
 import SEO from "../../components/SEO";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -104,7 +105,7 @@ function ProductCatalogue() {
 
   const publishedProducts = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => p.status === "published" && p.visible !== false);
+    return localProds.filter(p => isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByType = useMemo(() => {

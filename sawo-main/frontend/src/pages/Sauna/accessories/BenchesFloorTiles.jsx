@@ -10,6 +10,7 @@ import PromoBanner from "../../../components/PromoBanner";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
+import { isPubliclyVisible } from "../../../local-storage/visibility";
 
 const DISPLAY_CATEGORIES = ["Benches", "Wooden Floor Mats", "Cloth Hangers", "Benches & Floor Tiles"];
 const DISPLAY_TAGS       = ["Benches", "Wooden Floor Mats", "Cloth Hangers"];
@@ -85,7 +86,7 @@ export default function BenchesFloorTiles() {
   const [heroLoaded, setHeroLoaded]   = useState(false);
 
   const allProducts = useMemo(() => {
-    const visible  = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible  = localProds.filter(p => isPubliclyVisible(p));
     const filtered = applyDisplayFilter(visible);
     return [...filtered].sort((a, b) => {
       const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;

@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import saunaRoomsData from "../../Administrator/Local/data/saunaroom-data.json";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 import SEO from "../../components/SEO";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -244,7 +245,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
   const related = useMemo(() => {
     if (!roomType || !allRooms.length) return [];
     return allRooms
-      .filter(r => r.status === "published" && r.visible !== false && r.slug !== currentSlug && r.room_type === roomType)
+      .filter(r => isPubliclyVisible(r) && r.slug !== currentSlug && r.room_type === roomType)
       .slice(0, 4);
   }, [currentSlug, roomType, allRooms]);
 
@@ -309,7 +310,7 @@ export default function SaunaRoomDisplay() {
   const [activeConfig, setActiveConfig] = useState(null);
 
   const room = useMemo(() => {
-    return saunaRoomsData.find(r => r.slug === slug && r.status === "published" && r.visible !== false) || null;
+    return saunaRoomsData.find(r => r.slug === slug && isPubliclyVisible(r)) || null;
   }, [slug]);
 
   const loading = false;

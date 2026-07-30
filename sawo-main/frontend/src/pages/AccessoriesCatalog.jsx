@@ -3,6 +3,7 @@ import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "./AccessoryCard";
 import SEO from "../components/SEO";
+import { isPubliclyVisible } from "../local-storage/visibility";
 
 // Groups that combine multiple data categories under one section (mirroring
 // the WordPress reference pages that group the same categories together —
@@ -95,12 +96,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
 
   const accessories = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(
-      p =>
-        isAccessoryProduct(p) &&
-        p.status === "published" &&
-        p.visible !== false
-    );
+    return localProds.filter(p => isAccessoryProduct(p) && isPubliclyVisible(p));
   }, [localProds]);
 
   // Flat map of every tab's own product list, keyed by tab key.

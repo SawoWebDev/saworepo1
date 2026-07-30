@@ -72,7 +72,7 @@
 //   const { products: localProds, loading } = useLocalProducts();
 //
 // STEP 3 — Filter for published + visible only:
-//   const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+//   const visible = localProds.filter(p => isPubliclyVisible(p));
 //
 // STEP 4 — Narrow to your category/tag (optional):
 //   const myProducts = visible.filter(p => (p.categories || []).includes("Your Category"));
@@ -111,6 +111,7 @@ import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
+import { isPubliclyVisible } from "../../../local-storage/visibility";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -287,7 +288,7 @@ export default function WallMounted() {
 
   // ── Filter to published+visible, then apply display categories/tags ──────
   const allProducts = useMemo(() => {
-    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible = localProds.filter(p => isPubliclyVisible(p));
     const filtered = applyDisplayFilter(visible);
     return [...filtered].sort((a, b) => {
       const sortA = a.sort_order ?? 999;
