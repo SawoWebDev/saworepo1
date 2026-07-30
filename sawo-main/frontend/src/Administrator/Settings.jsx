@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { logActivity } from "./supabase";
+import { logActivity, supabase } from "./supabase";
 import {
   getDataSource, setDataSource as saveDataSource,
   getJsonSourceScope, setJsonSourceScope as saveJsonSourceScope,
@@ -10,15 +10,53 @@ import {
   getEnabledLanguages, setEnabledLanguages as saveEnabledLanguages,
   BUILT_LOCALES,
 } from "../local-storage/languageSettings";
+import { setHeaderLayout as saveHeaderLayout } from "../local-storage/headerLayout";
+import { setHeaderNavStyle as saveHeaderNavStyle } from "../local-storage/headerNavStyle";
 import { getCache, setCache } from "./adminCache";
+import HeaderPreview from "./HeaderPreview";
 
-// The "Header Layout" and "Header Nav Style" cards that used to live here are
-// gone: the public header is now fixed in code at Layout 1 + Style 2 (see
-// components/Header/Header.jsx). Reading those two settings cost every public
-// visitor an async settings round trip before the header could settle on its
-// final look, which is not a price worth paying for a toggle that was flipped
-// once. The header_layout / header_nav_style rows and their local-storage
-// modules are left in place, unused, in case the switch is ever wanted back.
+// Header Layout / Header Nav Style: the public header is fixed in code at
+// Layout 1 + Style 2 (components/Header/Header.jsx) — it does NOT read these
+// settings, so switching them here has no live effect on the public site.
+// That's deliberate: an earlier version had the public header read this pair
+// on every visit, which cost every visitor an extra async round trip before
+// the header could settle on its final look. Not worth it for a toggle that's
+// rarely touched.
+//
+// The choice is still saved (so it's not lost, and the option to wire it back
+// into the live header stays open later) and previewed live below via
+// HeaderPreview — a self-contained mock-up that only loads in this
+// lazy-loaded Settings chunk, so it never reaches the public homepage bundle.
+//
+// Also note: these two keys are deliberately absent from appSettings.js's
+// PUBLIC_KEYS, so we read them here with a small direct Supabase query
+// instead of the public getHeaderLayout()/getHeaderNavStyle() helpers — those
+// now always return their hardcoded default, since the public batched fetch
+// no longer includes these keys.
+const HEADER_PREF_KEYS = ["header_layout", "header_nav_style"];
+
+async function fetchHeaderPrefs() {
+  const { data, error } = await supabase
+    .from("app_settings")
+    .select("key,value")
+    .in("key", HEADER_PREF_KEYS);
+  if (error) throw new Error(error.message);
+  const byKey = Object.fromEntries((data || []).map((r) => [r.key, r.value]));
+  return {
+    headerLayout: byKey.header_layout === "layout1" ? "layout1" : "layout2",
+    navStyle: byKey.header_nav_style === "style2" ? "style2" : "style1",
+  };
+}
+
+const LAYOUT_OPTIONS = [
+  { value: "layout1", label: "Layout 1", description: "Sauna, Steam, Infrared, Support, Contact Us, About Us and Careers as separate top-level items — Sauna and Steam each have their own dropdown." },
+  { value: "layout2", label: "Layout 2", description: "Single \"Products\" mega-menu covers Sauna/Steam/Infrared, plus Support and About Us (Careers nested under About Us)." },
+];
+
+const NAV_STYLE_OPTIONS = [
+  { value: "style1", label: "Style 1 — Underline", description: "Top-level nav items get a growing underline on hover/active." },
+  { value: "style2", label: "Style 2 — Brown Background", description: "Top-level nav items get a solid brand-brown pill (beveled like the CMS's primary buttons) on hover/active instead of an underline." },
+];
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js's
 // `localeNames` and frontend/src/i18n/translatedRoutes.js's LOCALES —
@@ -81,18 +119,27 @@ export default function Settings({ currentUser }) {
   const [langEnabled, setLangEnabled] = useState(() => cachedSettings ? cachedSettings.langEnabled : null);
   const [languages, setLanguages] = useState(() => cachedSettings ? cachedSettings.languages : BUILT_LOCALES);
   const [langSaving, setLangSaving] = useState(false);
+  const [headerLayout, setHeaderLayoutState] = useState(() => cachedSettings ? cachedSettings.headerLayout : "layout2");
+  const [layoutSaving, setLayoutSaving] = useState(false);
+  const [navStyle, setNavStyleState] = useState(() => cachedSettings ? cachedSettings.navStyle : "style1");
+  const [navStyleSaving, setNavStyleSaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     Promise.all([
       getDataSource(), getJsonSourceScope(), getGDPRBannerEnabled(),
-      getLanguageSwitcherEnabled(), getEnabledLanguages(),
+      getLanguageSwitcherEnabled(), getEnabledLanguages(), fetchHeaderPrefs(),
     ])
-      .then(([s, sc, gdpr, langEn, langs]) => {
+      .then(([s, sc, gdpr, langEn, langs, headerPrefs]) => {
         setSource(s); setScope(sc); setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
-        setCache(SETTINGS_CACHE_KEY, { source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs });
+        setHeaderLayoutState(headerPrefs.headerLayout);
+        setNavStyleState(headerPrefs.navStyle);
+        setCache(SETTINGS_CACHE_KEY, {
+          source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
+          headerLayout: headerPrefs.headerLayout, navStyle: headerPrefs.navStyle,
+        });
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -173,6 +220,52 @@ export default function Settings({ currentUser }) {
       add("Failed to update enabled languages", "error");
     } finally {
       setLangSaving(false);
+    }
+  };
+
+  const handleSwitchHeaderLayout = async (next) => {
+    setLayoutSaving(true);
+    setError(null);
+    try {
+      await saveHeaderLayout(next, currentUser?.username);
+      setHeaderLayoutState(next);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "header_layout",
+        entity_name: `Header Layout → ${next}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add(`Header Layout saved as ${next === "layout1" ? "Layout 1" : "Layout 2"} (preview only — see note below)`, "success");
+    } catch (err) {
+      setError("Failed to save header layout: " + err.message);
+      add("Failed to save header layout", "error");
+    } finally {
+      setLayoutSaving(false);
+    }
+  };
+
+  const handleSwitchNavStyle = async (next) => {
+    setNavStyleSaving(true);
+    setError(null);
+    try {
+      await saveHeaderNavStyle(next, currentUser?.username);
+      setNavStyleState(next);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "header_nav_style",
+        entity_name: `Header Nav Style → ${next}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add(`Header Nav Style saved as ${next === "style1" ? "Style 1 — Underline" : "Style 2 — Brown Background"} (preview only — see note below)`, "success");
+    } catch (err) {
+      setError("Failed to save header nav style: " + err.message);
+      add("Failed to save header nav style", "error");
+    } finally {
+      setNavStyleSaving(false);
     }
   };
 
@@ -389,6 +482,70 @@ export default function Settings({ currentUser }) {
             <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
           </label>
         </div>
+      </div>
+
+      <div className="card card-body lg:col-span-2">
+        <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+              <i className="fa-solid fa-eye text-[var(--brand)]"></i>
+              Header Preview
+            </h3>
+            <p className="text-sm text-[var(--text-3)]">
+              Not live yet — the public header is fixed in code for page-speed reasons.
+              These picks are saved and shown below; hover the nav to see the
+              dropdown/mega-menu and hover style. Static look-alike, not the real header.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <div>
+              <p className="text-xs font-medium text-[var(--text-3)] mb-1">Layout</p>
+              <div className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-2)] p-0.5">
+                {LAYOUT_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    title={opt.description}
+                    disabled={layoutSaving}
+                    onClick={() => handleSwitchHeaderLayout(opt.value)}
+                    className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                      headerLayout === opt.value
+                        ? "bg-[var(--brand)] text-white"
+                        : "text-[var(--text-2)] hover:bg-[var(--surface)]"
+                    } ${layoutSaving ? "opacity-60 pointer-events-none" : ""}`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-medium text-[var(--text-3)] mb-1">Nav Style</p>
+              <div className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-2)] p-0.5">
+                {NAV_STYLE_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    title={opt.description}
+                    disabled={navStyleSaving}
+                    onClick={() => handleSwitchNavStyle(opt.value)}
+                    className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                      navStyle === opt.value
+                        ? "bg-[var(--brand)] text-white"
+                        : "text-[var(--text-2)] hover:bg-[var(--surface)]"
+                    } ${navStyleSaving ? "opacity-60 pointer-events-none" : ""}`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <HeaderPreview layout={headerLayout} navStyle={navStyle} />
       </div>
       </div>
     </div>

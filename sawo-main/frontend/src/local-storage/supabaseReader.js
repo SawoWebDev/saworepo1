@@ -18,6 +18,7 @@
  */
 
 import { getSupabase } from "./supabaseClient";
+import { isPubliclyVisible } from "./visibility";
 
 /**
  * Fetch all products live from Supabase
@@ -188,9 +189,7 @@ export async function getRecentSaunaRoomsLive(days = 7) {
 export async function getVisibleProductsLive() {
   try {
     const products = await getAllProductsLive();
-    return products.filter(p =>
-      p.visible !== false && p.status === 'published'
-    );
+    return products.filter(isPubliclyVisible);
   } catch (err) {
     console.error("[supabaseReader] Failed to fetch visible products:", err);
     return [];
@@ -273,16 +272,20 @@ export async function getVisibleProductsCached(force = false) {
   // ─── Step 3: Fetch from Supabase (with selective fields to reduce egress) ───
   const fetchPromise = (async () => {
     try {
+      // No server-side status filter — a scheduled draft (status="draft" +
+      // future publish_at) must still be fetched so it can flip visible at
+      // the right moment client-side; isPubliclyVisible() below is the
+      // actual gate. .eq("visible", true) alone is safe to keep server-side
+      // since that flag never interacts with scheduling.
       const { data, error } = await (await getSupabase())
         .from("products")
-        .select("id,name,slug,thumbnail,categories,tags,status,visible,sort_order,features,short_description,files")
-        .eq("status", "published")
+        .select("id,name,slug,thumbnail,categories,tags,status,visible,publish_at,sort_order,features,short_description,files")
         .eq("visible", true)
         .order("sort_order", { ascending: true });
 
       if (error) throw error;
 
-      const products = data || [];
+      const products = (data || []).filter(isPubliclyVisible);
 
       // ─── Write to both caches ───
       _cache = products;

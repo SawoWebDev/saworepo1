@@ -59,6 +59,7 @@ import "./heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
+import { isPubliclyVisible } from "../../../local-storage/visibility";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -198,7 +199,7 @@ const Combi = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
 
   const allProducts = useMemo(() => {
-    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible = localProds.filter(p => isPubliclyVisible(p));
     return filterCombiProducts(visible);
   }, [localProds]);
 

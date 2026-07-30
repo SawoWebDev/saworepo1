@@ -5,6 +5,7 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 const USER_MANUALS_HERO_IMG = "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Series-background-1.webp";
 
@@ -341,7 +342,7 @@ export default function UserManuals() {
   const heroLoaded = useHeroLoaded(USER_MANUALS_HERO_IMG);
 
   const allProducts = useMemo(() => {
-    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible = localProds.filter(p => isPubliclyVisible(p));
     return [...visible].sort((a, b) => {
       const sortA = a.sort_order ?? 999;
       const sortB = b.sort_order ?? 999;

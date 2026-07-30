@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 import SEO from "../../components/SEO";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -684,7 +685,7 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
     const cats = categories.slice(0, 1).map(c => c.toLowerCase());
     return allProducts
       .filter(p =>
-        p.status === "published" && p.visible !== false &&
+        isPubliclyVisible(p) &&
         p.slug !== currentSlug &&
         (p.categories || []).some(c => cats.includes(c.toLowerCase()))
       )
@@ -806,7 +807,7 @@ export default function AccessoriesPage() {
   const { products: productsData, loading } = useLocalProducts();
 
   const product = useMemo(() => {
-    return productsData.find(p => p.slug === slug && p.status === "published" && p.visible !== false) || null;
+    return productsData.find(p => p.slug === slug && isPubliclyVisible(p)) || null;
   }, [slug, productsData]);
 
   // Variants carry no id from the data source — give each a stable key here

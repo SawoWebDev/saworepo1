@@ -5,6 +5,7 @@ import { useLocalSaunaRooms } from "../Administrator/Local/useLocalSaunaRooms";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 import ScrollToTop from "../components/ScrollToTop";
 import SEO from "../components/SEO";
+import { isPubliclyVisible } from "../local-storage/visibility";
 
 const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
@@ -183,7 +184,7 @@ export default function AllProducts() {
 
   const saunaHeaters = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && p.status === "published" && p.visible !== false);
+    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByHeaterSection = useMemo(() => {
@@ -198,7 +199,7 @@ export default function AllProducts() {
 
   const saunaRooms = useMemo(() => {
     if (!localRooms.length) return [];
-    return localRooms.filter(r => r.status === "published" && r.visible !== false);
+    return localRooms.filter(r => isPubliclyVisible(r));
   }, [localRooms]);
 
   const productsByRoomSection = useMemo(() => {
@@ -211,7 +212,7 @@ export default function AllProducts() {
 
   const accessories = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => isAccessoryProduct(p) && p.status === "published" && p.visible !== false);
+    return localProds.filter(p => isAccessoryProduct(p) && isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByAccessoryCategory = useMemo(() => {

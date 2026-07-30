@@ -5,6 +5,8 @@ import { getPerms } from "./permissions";
 import { checkSaunaRoomsSync, applyLocalRoomChanges } from "./Local/compareSupabaseWithLocalRooms";
 import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
 import { getCache, setCache } from "./adminCache";
+import { diffFormFields } from "./diff";
+import RevisionFieldDiff from "./RevisionFieldDiff";
 
 const ROOMS_CACHE_KEY = "admin:sauna-rooms:live";
 const ROOMS_META_CACHE_KEY = "admin:sauna-rooms:live:meta";
@@ -25,6 +27,16 @@ function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+// datetime-local inputs need "YYYY-MM-DDTHH:mm" in the browser's local time,
+// not an ISO/UTC string — converts a stored publish_at back to that shape.
+function toDatetimeLocalValue(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
 // Mirrors DispSaunaRoom.jsx's seoDescription fallback exactly, so the admin's
 // placeholder preview shows the real inherited value rather than an
 // approximation.
@@ -33,6 +45,15 @@ function derivedSeoDescription(form) {
   const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
   if (!text) return `${form.name || "Sauna room"} by SAWO — a premium Finnish sauna room.`;
   return text.length > 160 ? `${text.slice(0, 157)}...` : text;
+}
+
+const LONG_TEXT_FIELDS = new Set(["description", "short_description"]);
+const SET_ARRAY_FIELDS = new Set(["images", "spec_images", "files", "resources"]);
+
+function diffRoomForms(before, after) {
+  return diffFormFields(before, after, Object.keys(EMPTY_FORM), {
+    longTextFields: LONG_TEXT_FIELDS, setArrayFields: SET_ARRAY_FIELDS,
+  });
 }
 
 function formsEqual(a, b) {
@@ -91,6 +112,7 @@ const EMPTY_FORM = {
   is_best_seller: false, has_door_filter: true,
   sort_order: 0,
   meta_title: "", meta_description: "", og_image: "",
+  publish_at: "",
 };
 
 // ─── WebP conversion + resize ─────────────────────────────────────────────────
@@ -1403,6 +1425,7 @@ export default function SaunaRooms({ currentUser }) {
 
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
+  const [expandedRevisionId, setExpandedRevisionId] = useState(null);
   const [revisions,     setRevisions]     = useState([]);
 
   const [checkSyncOpen,    setCheckSyncOpen]    = useState(false);
@@ -1792,6 +1815,7 @@ export default function SaunaRooms({ currentUser }) {
     meta_title:       data.meta_title       || "",
     meta_description: data.meta_description || "",
     og_image:         data.og_image         || "",
+    publish_at:       toDatetimeLocalValue(data.publish_at),
   });
 
   const openEdit = async row => {
@@ -1822,6 +1846,9 @@ export default function SaunaRooms({ currentUser }) {
       // stale override. og_image is fine to carry over, same as thumbnail.
       loaded.meta_title = "";
       loaded.meta_description = "";
+      // Never copy a schedule — a duplicate is already forced to "draft",
+      // so a leftover publish_at could otherwise reveal an unreviewed copy.
+      loaded.publish_at = "";
       setForm(loaded); setSavedForm(EMPTY_FORM);
       setSlugEdited(false); setEditing(null); setEditingFull(null);
       setShowRevisions(false); setModalMenuOpen(false); setActiveTab("basic");
@@ -1883,6 +1910,7 @@ export default function SaunaRooms({ currentUser }) {
         meta_title:       form.meta_title.trim() || null,
         meta_description: form.meta_description.trim() || null,
         og_image:         form.og_image || null,
+        publish_at:       form.publish_at ? new Date(form.publish_at).toISOString() : null,
         updated_at:             now,
         updated_by_username:    currentUser?.username || null,
         ...(editing ? {} : { created_by_username: currentUser?.username || null }),
@@ -1891,7 +1919,7 @@ export default function SaunaRooms({ currentUser }) {
       if (editing) {
         const { error } = await supabase.from("sauna_rooms").update(payload).eq("id", editing.id);
         if (error) throw error;
-        await logActivity({ action: "update", entity: "sauna_room", entity_id: editing.id, entity_name: form.name.trim(), username: currentUser?.username, user_id: currentUser?.id });
+        await logActivity({ action: "update", entity: "sauna_room", entity_id: editing.id, entity_name: form.name.trim(), username: currentUser?.username, user_id: currentUser?.id, changes: diffRoomForms(savedForm, form) });
         const orphans = findOrphanedUrls(savedForm, form);
         if (orphans.length) {
           await deleteStorageUrls(orphans).catch(console.warn);
@@ -2166,7 +2194,9 @@ export default function SaunaRooms({ currentUser }) {
                       {r.capacity_label && <div style={{ fontSize: "0.72rem", color: "var(--text-3)" }}>{r.capacity_label}</div>}
                     </td>
                     <td>
-                      <span className="tbl-status">{!r.visible ? "Hidden" : r.status === "published" ? "Published" : "Draft"}</span>
+                      <span className="tbl-status">
+                        {!r.visible ? "Hidden" : r.status === "published" ? "Published" : (r.publish_at && new Date(r.publish_at) > new Date()) ? "Scheduled" : "Draft"}
+                      </span>
                     </td>
                     <td className="tbl-date" style={{ fontSize: "0.75rem" }}>{formatDate(r.created_at)}</td>
                     <td style={{ fontSize: "0.75rem", color: "var(--text-2)" }}>{r.created_by_username ? `@${r.created_by_username}` : "-"}</td>
@@ -2253,6 +2283,31 @@ export default function SaunaRooms({ currentUser }) {
                         <span style={{ color: "var(--text-3)" }}>{new Date(rev.created_at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
                       </div>
                       <div style={{ color: "var(--text-2)", fontSize: "0.7rem" }}>@{rev.username || "unknown"}</div>
+                      {rev.action === "update" && (
+                        rev.changes && Object.keys(rev.changes).length > 0 ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => setExpandedRevisionId(id => id === rev.id ? null : rev.id)}
+                              style={{ marginTop: 6, background: "none", border: "none", padding: 0, color: "var(--brand)", fontSize: "0.7rem", cursor: "pointer", fontWeight: 600 }}
+                            >
+                              <i className={`fa-solid fa-chevron-${expandedRevisionId === rev.id ? "down" : "right"}`} style={{ marginRight: 4, fontSize: "0.6rem" }} />
+                              {Object.keys(rev.changes).length} field(s) changed
+                            </button>
+                            {expandedRevisionId === rev.id && (
+                              <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid var(--border)" }}>
+                                {Object.entries(rev.changes).map(([field, change]) => (
+                                  <RevisionFieldDiff key={field} field={field} change={change} />
+                                ))}
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <div style={{ marginTop: 4, color: "var(--text-3)", fontSize: "0.68rem", fontStyle: "italic" }}>
+                            Field details not recorded for this revision
+                          </div>
+                        )
+                      )}
                     </div>
                   ))}
                 </div>
@@ -2531,6 +2586,22 @@ export default function SaunaRooms({ currentUser }) {
                       onChange={e => setForm(f => ({ ...f, sort_order: parseInt(e.target.value) || 0 }))}
                       helper="Lower = shown first" />
                   </div>
+
+                  {/* Scheduled publishing — only meaningful for a draft. No
+                      server cron: goes live the moment a visitor's page load
+                      evaluates isPubliclyVisible() past this timestamp. */}
+                  {form.status === "draft" && (
+                    <div style={{ marginTop: 4 }}>
+                      <Field label="Publish At" type="datetime-local" value={form.publish_at}
+                        onChange={e => setForm(f => ({ ...f, publish_at: e.target.value }))}
+                        helper={form.publish_at
+                          ? new Date(form.publish_at) > new Date()
+                            ? `Scheduled — goes live ${new Date(form.publish_at).toLocaleString()}`
+                            : "This date is in the past — will go live on next page load"
+                          : "Leave empty to stay a draft indefinitely."}
+                      />
+                    </div>
+                  )}
 
                   {editing && editingFull && (
                     <>

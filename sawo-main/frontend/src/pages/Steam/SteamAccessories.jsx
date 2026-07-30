@@ -7,6 +7,7 @@ import heroBg from "../../assets/Steam/hero.webp";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -61,7 +62,7 @@ const SteamAccessories = () => {
   const heroLoaded = useHeroLoaded(heroBg);
 
   const accessories = useMemo(() => {
-    const visible = localProds.filter(p => p.status === "published" && p.visible !== false);
+    const visible = localProds.filter(p => isPubliclyVisible(p));
     const filtered = applyDisplayFilter(visible);
     return [...filtered].sort((a, b) => {
       const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;

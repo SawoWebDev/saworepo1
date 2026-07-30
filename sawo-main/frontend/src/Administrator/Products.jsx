@@ -11,6 +11,8 @@ import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDispla
 import { getCache, setCache } from "./adminCache";
 import { productsToCsvString, downloadCsv } from "./csv/productCsv";
 import CsvImportModal from "./csv/CsvImportModal";
+import { diffFormFields } from "./diff";
+import RevisionFieldDiff from "./RevisionFieldDiff";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
 const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
@@ -81,6 +83,16 @@ function derivedSeoDescription(form) {
   return text.length > 160 ? `${text.slice(0, 157)}...` : text;
 }
 
+// datetime-local inputs need "YYYY-MM-DDTHH:mm" in the browser's local time,
+// not an ISO/UTC string — converts a stored publish_at back to that shape.
+function toDatetimeLocalValue(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
 function slugify(str) {
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -117,6 +129,7 @@ function buildProductPayload(form, tags) {
     meta_title:        form.meta_title.trim() || null,
     meta_description:  form.meta_description.trim() || null,
     og_image:          form.og_image || null,
+    publish_at:        form.publish_at ? new Date(form.publish_at).toISOString() : null,
   };
 }
 
@@ -139,6 +152,22 @@ function formsEqual(a, b) {
   return true;
 }
 
+// Long HTML fields get stored as excerpts, not full bodies — a single
+// revision row would otherwise balloon past 100KB over a product's lifetime.
+const LONG_TEXT_FIELDS = new Set(["description", "short_description"]);
+// Array fields where only membership changes matter for a diff (image/file
+// lists) — recorded as added/removed rather than two full array dumps.
+const SET_ARRAY_FIELDS = new Set(["images", "spec_images", "files"]);
+
+// Field-level before/after diff between two form snapshots (the same
+// savedForm/form pair formsEqual and findOrphanedUrls already compare),
+// used to give logActivity()'s `changes` column real content.
+function diffForms(before, after) {
+  return diffFormFields(before, after, Object.keys(EMPTY_FORM), {
+    longTextFields: LONG_TEXT_FIELDS, setArrayFields: SET_ARRAY_FIELDS,
+  });
+}
+
 // Matches the real products schema (no "model" column — use type for that).
 const EMPTY_FORM = {
   name: "", slug: "", short_description: "", description: "",
@@ -150,6 +179,7 @@ const EMPTY_FORM = {
   status: "published",
   visible: true, featured: false, sort_order: 0,
   meta_title: "", meta_description: "", og_image: "",
+  publish_at: "",
 };
 
 // ─── Auto-extract tags from description HTML ──────────────────────────────────
@@ -2707,6 +2737,7 @@ export default function Products({ currentUser }) {
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
   const [revisions, setRevisions] = useState([]);
+  const [expandedRevisionId, setExpandedRevisionId] = useState(null);
   const [previewProduct, setPreviewProduct] = useState(null);
 
   const [checkSyncOpen, setCheckSyncOpen] = useState(false);
@@ -2963,6 +2994,7 @@ export default function Products({ currentUser }) {
         meta_title:        data.meta_title        || "",
         meta_description:  data.meta_description  || "",
         og_image:          data.og_image          || "",
+        publish_at:        toDatetimeLocalValue(data.publish_at),
       };
       setForm(loaded);
       setSavedForm(loaded);
@@ -3029,6 +3061,10 @@ export default function Products({ currentUser }) {
         meta_title:        "",
         meta_description:  "",
         og_image:          data.og_image || "",
+        // Never copy a schedule — a duplicate is already forced to "draft",
+        // so a leftover publish_at from the original could otherwise reveal
+        // an unreviewed copy the moment its clock ticks past.
+        publish_at:        "",
       };
       setForm(loaded);
       setSavedForm(EMPTY_FORM); // Not saved yet
@@ -3143,6 +3179,7 @@ export default function Products({ currentUser }) {
           entity_name: form.name.trim(),
           username:    currentUser?.username,
           user_id:     currentUser?.id,
+          changes:     diffForms(savedForm, form),
         });
 
         const orphans = findOrphanedUrls(savedForm, form);
@@ -3664,7 +3701,9 @@ export default function Products({ currentUser }) {
               </div>
             </td>
             <td>
-              <span className="tbl-status">{!p.visible ? "Hidden" : p.status === "published" ? "Published" : "Draft"}</span>
+              <span className="tbl-status">
+                {!p.visible ? "Hidden" : p.status === "published" ? "Published" : (p.publish_at && new Date(p.publish_at) > new Date()) ? "Scheduled" : "Draft"}
+              </span>
             </td>
             <td className="tbl-date" style={{ fontSize: "0.75rem" }}>
               {formatDate(p.created_at)}
@@ -3979,6 +4018,34 @@ export default function Products({ currentUser }) {
                       <div style={{ color: "var(--text-2)", fontSize: "0.7rem" }}>
                         @{rev.username || "unknown"}
                       </div>
+                      {rev.action === "update" && (
+                        rev.changes && Object.keys(rev.changes).length > 0 ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => setExpandedRevisionId(id => id === rev.id ? null : rev.id)}
+                              style={{
+                                marginTop: 6, background: "none", border: "none", padding: 0,
+                                color: "var(--brand)", fontSize: "0.7rem", cursor: "pointer", fontWeight: 600,
+                              }}
+                            >
+                              <i className={`fa-solid fa-chevron-${expandedRevisionId === rev.id ? "down" : "right"}`} style={{ marginRight: 4, fontSize: "0.6rem" }} />
+                              {Object.keys(rev.changes).length} field(s) changed
+                            </button>
+                            {expandedRevisionId === rev.id && (
+                              <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid var(--border)" }}>
+                                {Object.entries(rev.changes).map(([field, change]) => (
+                                  <RevisionFieldDiff key={field} field={field} change={change} />
+                                ))}
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <div style={{ marginTop: 4, color: "var(--text-3)", fontSize: "0.68rem", fontStyle: "italic" }}>
+                            Field details not recorded for this revision
+                          </div>
+                        )
+                      )}
                     </div>
                   ))}
                 </div>
@@ -4204,6 +4271,22 @@ export default function Products({ currentUser }) {
             <Field label="Sort Order" type="number" value={String(form.sort_order)}
               onChange={e => setForm(f => ({ ...f, sort_order: parseInt(e.target.value) || 0 }))} helper="Lower = shown first" />
           </div>
+
+          {/* Scheduled publishing — only meaningful for a draft. There is no
+              server cron: the product becomes visible the moment a visitor's
+              page load evaluates isPubliclyVisible() past this timestamp. */}
+          {form.status === "draft" && (
+            <div style={{ marginTop: 4 }}>
+              <Field label="Publish At" type="datetime-local" value={form.publish_at}
+                onChange={e => setForm(f => ({ ...f, publish_at: e.target.value }))}
+                helper={form.publish_at
+                  ? new Date(form.publish_at) > new Date()
+                    ? `Scheduled — goes live ${new Date(form.publish_at).toLocaleString()}`
+                    : "This date is in the past — will go live on next page load"
+                  : "Leave empty to stay a draft indefinitely. Under GitHub/JSON File mode the product must be synced before its publish date."}
+              />
+            </div>
+          )}
 
           {/* ── Record Info (audit trail) — only shown when editing ── */}
           {editing && editingFull && (
