@@ -140,7 +140,6 @@ const Section1 = () => {
       dragMoved = false;
       startX = getClientX(e);
       startXPos = x;
-      track.classList.add("sawo-dragging");
       window.addEventListener("pointermove", dragMove);
       window.addEventListener("pointerup", dragEnd);
       window.addEventListener("pointercancel", dragEnd);
@@ -150,7 +149,14 @@ const Section1 = () => {
       if (!isDragging) return;
       const clientX = getClientX(e);
       const dx = clientX - startX;
-      if (Math.abs(dx) > 3) dragMoved = true;
+      if (Math.abs(dx) > 3) {
+        // Only enter "dragging" visuals (and disable link pointer-events)
+        // once real movement is detected — never on a plain pointerdown,
+        // so a click that never moves can't have its <a> hit-tested with
+        // pointer-events already stripped.
+        dragMoved = true;
+        track.classList.add("sawo-dragging");
+      }
       x = wrap(startXPos + dx);
       apply();
     };

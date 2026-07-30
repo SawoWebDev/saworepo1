@@ -83,28 +83,47 @@ export default function Users({ currentUser }) {
     setFormLoading(true);
     try {
       if (editUser) {
+        // password_hash is no longer a directly-writable column (see
+        // supabase.js's apiLogin comment) — a changed password goes through
+        // the set_user_password RPC, hashed server-side, never sent as-is.
         const updates = {
           username: form.username.trim(),
           full_name: form.full_name.trim() || null,
           email: form.email.trim() || null,
           role: form.role,
         };
-        if (form.password_hash.trim()) updates.password_hash = form.password_hash.trim();
         const { error } = await supabase.from("users").update(updates).eq("id", editUser.id);
         if (error) throw new Error(error.message);
+        if (form.password_hash.trim()) {
+          const { error: pwError } = await supabase.rpc("set_user_password", {
+            p_user_id: editUser.id,
+            p_new_password: form.password_hash.trim(),
+          });
+          if (pwError) throw new Error("User updated but password change failed: " + pwError.message);
+        }
         if (form.email.trim() && form.email.trim() !== editUser.email) {
           const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
           if (fnError) console.warn("Auth email sync failed:", fnError.message);
         }
       } else {
+        // Omit password_hash entirely — the column DEFAULT fills in an
+        // unusable placeholder hash, then set_user_password_by_username
+        // immediately overwrites it with the real (hashed) password.
+        const newUsername = form.username.trim();
         const { error } = await supabase.from("users").insert([{
-          username: form.username.trim(),
-          password_hash: form.password_hash || crypto.randomUUID(),
+          username: newUsername,
           full_name: form.full_name.trim() || null,
           email: form.email.trim() || null,
           role: form.role,
         }]);
         if (error) throw new Error(error.message);
+
+        const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
+          p_username: newUsername,
+          p_new_password: form.password_hash || crypto.randomUUID(),
+        });
+        if (pwError) throw new Error("User created but setting the password failed: " + pwError.message);
+
         if (form.email.trim()) {
           const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
           if (fnError) console.warn("Auth user creation failed:", fnError.message);
@@ -150,10 +169,10 @@ export default function Users({ currentUser }) {
     }
 
     try {
-      const { error } = await supabase
-        .from("users")
-        .update({ password_hash: newPassword })
-        .eq("id", editUser.id);
+      const { error } = await supabase.rpc("set_user_password", {
+        p_user_id: editUser.id,
+        p_new_password: newPassword,
+      });
       if (error) throw error;
 
       setChangePassModal(false);

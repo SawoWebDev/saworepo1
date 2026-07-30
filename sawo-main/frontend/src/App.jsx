@@ -81,6 +81,7 @@ const Models         = lazy(() => import("./Administrator/Models"));
 const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
 const Logs           = lazy(() => import("./Administrator/Logs"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
+const PageSEO        = lazy(() => import("./Administrator/PageSEO"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
 const RolesPermissions = lazy(() => import("./Administrator/RolesPermissions"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
@@ -196,6 +197,9 @@ export default function App() {
             } />
             <Route path="/admin/analytics" element={
               <ProtectedRoute requiredCap="page.analytics"><AdminLayout><Analytics /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/seo" element={
+              <ProtectedRoute requiredCap="page.seo"><AdminLayout><PageSEO /></AdminLayout></ProtectedRoute>
             } />
             {/* Language settings merged into Settings (below) */}
             <Route path="/admin/language" element={<Navigate to="/admin/settings" replace />} />

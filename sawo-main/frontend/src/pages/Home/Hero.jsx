@@ -1,5 +1,5 @@
 // src/pages/Hero.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import HeroWave from "../../components/HeroWave";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
@@ -15,6 +15,19 @@ const ALT_TEXT    = "SAWO sauna heaters - Experience wellness and rejuvenation";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
+  const heroImgRef = useRef(null);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
+  // Fade the hero image in once it's actually painted instead of it popping
+  // in abruptly, without gating the real <img>'s fetch/paint behind JS —
+  // fetchPriority="high" + loading="eager" below stay untouched, this just
+  // listens on the same element. img.complete covers the cache-hit case
+  // (repeat visits) where the load event has already fired before mount.
+  useEffect(() => {
+    const img = heroImgRef.current;
+    if (!img) return;
+    if (img.complete) setHeroLoaded(true);
+  }, []);
 
   useEffect(() => {
     const el = typewriterRef.current;
@@ -111,6 +124,7 @@ const Hero = () => {
             type="image/webp"
           />
           <img
+            ref={heroImgRef}
             src="/1920.webp"
             alt={ALT_TEXT}
             width="1920"
@@ -119,43 +133,51 @@ const Hero = () => {
             fetchPriority="high"
             decoding="async"
             loading="eager"
-            style={{ display: "block" }}
+            onLoad={() => setHeroLoaded(true)}
+            onError={() => setHeroLoaded(true)}
+            style={{ display: "block", opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
           />
         </picture>
       </div>
 
-      <h1
-        className="font-bold text-white text-left whitespace-nowrap text-2xl mt-10 sm:text-4xl md:text-5xl lg:text-[60px] leading-tight"
-        style={{
-          fontFamily: "Montserrat, sans-serif",
-          textShadow: "4px 6px 7px rgba(0,0,0,0.5)",
-        }}
-      >
-        Experience . . .
-      </h1>
-
-      {/* SEO fallback text (screen-reader only) */}
+      {/* SEO fallback text (screen-reader only) — kept outside the fade so
+          screen readers always have it, regardless of image load state. */}
       <div className="sr-only">
         {SENTENCES.join(", ")}, SAWO sauna heaters, Finnish sauna, sauna
         accessories, infrared sauna, steam generator
       </div>
 
-      <div className="stack flex flex-col items-center text-center">
-        <div
-          ref={typewriterRef}
-          className="typewriter font-montserrat font-light text-white text-center mb-6 sm:mb-8 text-lg sm:text-2xl md:text-4xl lg:text-[46px] leading-snug"
+      {/* Text fades in alongside the hero image instead of popping in ahead
+          of it — synced to the same heroLoaded state, no opaque layer ever
+          sits on top of the image so this doesn't touch LCP occlusion. */}
+      <div style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}>
+        <h1
+          className="font-bold text-white text-left whitespace-nowrap text-2xl mt-10 sm:text-4xl md:text-5xl lg:text-[60px] leading-tight"
           style={{
-            letterSpacing: "0.2px",
-            textShadow: "0px 12px 10px rgba(0,0,0,0.9)",
-            minHeight: "1.4em",
+            fontFamily: "Montserrat, sans-serif",
+            textShadow: "4px 6px 7px rgba(0,0,0,0.5)",
           }}
-        />
+        >
+          Experience . . .
+        </h1>
 
-        <ButtonClear
-          text={BUTTON_TEXT}
-          href={BUTTON_URL}
-          download
-        />
+        <div className="stack flex flex-col items-center text-center">
+          <div
+            ref={typewriterRef}
+            className="typewriter font-montserrat font-light text-white text-center mb-6 sm:mb-8 text-lg sm:text-2xl md:text-4xl lg:text-[46px] leading-snug"
+            style={{
+              letterSpacing: "0.2px",
+              textShadow: "0px 12px 10px rgba(0,0,0,0.9)",
+              minHeight: "1.4em",
+            }}
+          />
+
+          <ButtonClear
+            text={BUTTON_TEXT}
+            href={BUTTON_URL}
+            download
+          />
+        </div>
       </div>
 
       {/* Wave divider into the next section — decorative, so hidden from

@@ -6,39 +6,49 @@ export const supabase = createClient(
   process.env.REACT_APP_SUPABASE_ANON_KEY
 );
 
+// Login/password verification goes through SECURITY DEFINER Postgres
+// functions (see Administrator/Local/scripts/setup-page-seo.sql's sibling
+// migration, "secure_users_table_bcrypt_and_rpc") instead of a direct table
+// query. Previously this fetched the FULL row (select("*"), including
+// password_hash) over the public anon key and compared it in plaintext in
+// the browser — anyone holding the anon key could read any user's password
+// by username, and passwords weren't even hashed at rest. Now: passwords are
+// bcrypt-hashed in the database, password_hash is not directly readable or
+// writable by the anon/authenticated roles at all (column-level grants), and
+// verification happens server-side inside the RPC, which only ever returns
+// the safe fields (id, username, full_name, email, role, dark_mode,
+// created_at) — never the hash.
 export async function apiLogin(username, password) {
-  const { data, error } = await supabase
-    .from("users")
-    .select("*")
-    .eq("username", username)
-    .single();
+  const { data, error } = await supabase.rpc("login_user", {
+    p_username: username,
+    p_password: password,
+  });
 
-  if (error || !data) throw new Error("User not found");
-  if (data.password_hash !== password) throw new Error("Incorrect password");
+  if (error) throw new Error(error.message);
+  if (!data || data.length === 0) throw new Error("Incorrect username or password");
 
+  const user = data[0];
   return {
-    user: data,
-    token: data.id,
+    user,
+    token: user.id,
   };
 }
 
 export async function forgotPassword(username) {
-  const { data: user, error } = await supabase
-    .from("users")
-    .select("id, email")
-    .eq("username", username)
-    .single();
+  const { data: email, error } = await supabase.rpc("get_email_for_username", {
+    p_username: username,
+  });
 
-  if (error || !user) throw new Error("No account found with that username");
-  if (!user.email) throw new Error("No email address associated with this account");
+  if (error) throw new Error(error.message);
+  if (!email) throw new Error("No account found with that username, or no email is associated with it");
 
   const { error: resetError } = await supabase.auth.resetPasswordForEmail(
-    user.email,
+    email,
     { redirectTo: `${window.location.origin}/admin/reset-password` }
   );
 
   if (resetError) throw new Error("Failed to send reset email: " + resetError.message);
-  return user.email;
+  return email;
 }
 
 export async function resetPassword(newPassword) {
@@ -47,11 +57,11 @@ export async function resetPassword(newPassword) {
 
   const { data: { user: authUser } } = await supabase.auth.getUser();
   if (authUser?.email) {
-    const { error: dbError } = await supabase
-      .from("users")
-      .update({ password_hash: newPassword })
-      .eq("email", authUser.email);
-    if (dbError) throw new Error("Password updated in Auth but failed to sync to users table");
+    const { error: dbError } = await supabase.rpc("set_user_password_by_email", {
+      p_email: authUser.email,
+      p_new_password: newPassword,
+    });
+    if (dbError) throw new Error("Password updated in Auth but failed to sync to users table: " + dbError.message);
   }
 }
 
