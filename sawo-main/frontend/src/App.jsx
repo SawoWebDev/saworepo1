@@ -10,6 +10,12 @@ import ScrollToTop from "./components/ScrollToTop";
 // never runs — no settings fetch, no banner — on /admin/* or /login.
 import GDPRConsentGate from "./components/GDPRConsentGate";
 
+// Small non-component admin helpers — imported eagerly (not lazily) because
+// AdminLanding below needs them synchronously to resolve a redirect target.
+import { getSession } from "./Administrator/supabase";
+import { getLandingPath } from "./Administrator/permissions";
+import { getEffectiveRole } from "./Administrator/previewRole";
+
 // Layouts
 import MainLayout  from "./layouts/MainLayout";
 import menuPaths   from "./menuPaths";
@@ -86,6 +92,16 @@ const PageSEO        = lazy(() => import("./Administrator/PageSEO"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
 const RolesPermissions = lazy(() => import("./Administrator/RolesPermissions"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
+
+// Resolves /admin to whichever page this role can actually see — Dashboard
+// for most roles, Products for a viewer (who has no page.dashboard). Kept as
+// a tiny component rather than a static <Navigate> so the target is computed
+// from the live session/preview role at render time.
+function AdminLanding() {
+  const session = getSession();
+  const role = getEffectiveRole(session?.user?.role);
+  return <Navigate to={getLandingPath(role)} replace />;
+}
 
 export default function App() {
   return (
@@ -216,10 +232,13 @@ export default function App() {
               <Navigate to="/admin/products" replace />
             } />
 
-            {/* Root /admin — the dashboard is the landing page; ProtectedRoute
-                bounces unauthenticated visitors to /login same as any other
-                admin route. */}
-            <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+            {/* Root /admin — lands on whatever page this role actually has.
+                Dashboard for most, Products for a viewer (no page.dashboard).
+                Wrapped in ProtectedRoute so unauthenticated visitors still go
+                to /login rather than resolving a landing path for nobody. */}
+            <Route path="/admin" element={
+              <ProtectedRoute><AdminLanding /></ProtectedRoute>
+            } />
 
           </Routes>
         </Suspense>

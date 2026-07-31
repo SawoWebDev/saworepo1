@@ -403,6 +403,54 @@ body {
 /* Theme toggle — icon only, compact square, doesn't stretch like Logout. */
 .sidebar-footer-btn--icon-only { flex: 0 0 34px; padding: 0.38rem; font-size: 0.8rem; }
 
+/* ── Preview-as-role (superadmin only) ───────────────────────────────────
+   The picker itself now lives on the Profile page. All that remains in the
+   sidebar is the exit affordance, which replaces the role line while a
+   preview is active — a full-width banner above the page header was too
+   heavy for something that's on-screen the whole time you're previewing. */
+.sidebar-footer-role--preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 1px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 233, 209, 0.55);
+  border-radius: 999px;
+  background: rgba(255, 233, 209, 0.18);
+  color: #ffe9d1;
+  font-family: var(--font);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background var(--t), border-color var(--t);
+}
+.sidebar-footer-role--preview:hover {
+  background: rgba(255, 233, 209, 0.32);
+  border-color: #ffe9d1;
+}
+.sidebar-footer-role--preview i { font-size: 0.58rem; }
+
+/* The footer identity block is the only way into My Profile (it's not a
+   sidebar nav item), so it needs to read as clickable. */
+.sidebar-footer-id--link {
+  border-radius: 10px;
+  padding: 4px;
+  margin: -4px;
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--t);
+}
+.sidebar-footer-id--link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.sidebar-footer-id--link:focus-visible {
+  outline: 2px solid #ffe9d1;
+  outline-offset: 1px;
+}
+
 /* ── Sidebar collapse toggle (desktop) ───────────────────────────────────
    Docked-panel style: vertically centered on the sidebar's right edge,
    straddling it — half the button sits inside the sidebar, half spills

@@ -7,7 +7,10 @@
 // page can't be used to smuggle a role change through even if someone
 // crafted the request by hand.
 import React, { useState } from "react";
-import { supabase } from "./supabase";
+import { useNavigate } from "react-router-dom";
+import { supabase, getSession } from "./supabase";
+import { getPreviewRole, setPreviewRole, PREVIEWABLE_ROLES } from "./previewRole";
+import { getLandingPath } from "./permissions";
 
 function Toast({ toasts, remove }) {
   const icons = { error: "fa-circle-xmark", success: "fa-circle-check", info: "fa-circle-info", warning: "fa-triangle-exclamation" };
@@ -41,6 +44,28 @@ export default function Profile({ currentUser }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+
+  // Preview-as-role (superadmin only) — moved here from the sidebar. Reads
+  // the REAL role from the session, not currentUser.role, which AdminLayout
+  // overwrites with the previewed role.
+  const navigate = useNavigate();
+  const realRole = getSession()?.user?.role;
+  const [previewRole, setPreviewRoleState] = useState(() => getPreviewRole());
+
+  const closePasswordModal = () => {
+    setPasswordModalOpen(false);
+    setNewPassword("");
+    setConfirmPassword("");
+    setShowPassword(false);
+  };
+
+  const handleChangePreview = (role) => {
+    setPreviewRole(role);
+    setPreviewRoleState(role);
+    // Land somewhere the newly-previewed role can actually see.
+    navigate(getLandingPath(role || realRole));
+  };
 
   const handleSaveDetails = async (e) => {
     e.preventDefault();
@@ -94,8 +119,7 @@ export default function Profile({ currentUser }) {
       });
       if (dbError) throw new Error("Password updated but failed to sync: " + dbError.message);
 
-      setNewPassword("");
-      setConfirmPassword("");
+      closePasswordModal();
       addToast("Password changed.", "success");
     } catch (err) {
       addToast(err.message || "Failed to change password", "error");
@@ -104,22 +128,12 @@ export default function Profile({ currentUser }) {
     }
   };
 
-  const roleBadge = role => {
-    if (role === "superadmin") return <span className="tbl-pill tbl-pill-cat">{role}</span>;
-    if (role === "editor")     return <span className="tbl-pill tbl-pill-tag">{role}</span>;
-    if (role === "viewer")     return <span className="tbl-pill tbl-pill-info">viewer</span>;
-    return <span className="tbl-pill tbl-pill-more">{role}</span>;
-  };
-
   return (
     <div style={{ maxWidth: 480, display: "flex", flexDirection: "column", gap: 20 }}>
       <Toast toasts={toasts} remove={removeToast} />
 
       <div className="card card-body" style={{ padding: 20 }}>
-        <h3 style={{ margin: "0 0 4px" }}>Account Details</h3>
-        <p style={{ fontSize: "0.8rem", color: "var(--text-3)", margin: "0 0 14px" }}>
-          Your role is {roleBadge(currentUser?.role)} — only a superadmin can change this.
-        </p>
+        <h3 style={{ margin: "0 0 14px" }}>Account Details</h3>
         <form onSubmit={handleSaveDetails} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label className="form-label">Username</label>
@@ -136,40 +150,99 @@ export default function Profile({ currentUser }) {
       </div>
 
       <div className="card card-body" style={{ padding: 20 }}>
-        <h3 style={{ margin: "0 0 4px" }}>Change Password</h3>
+        <h3 style={{ margin: "0 0 4px" }}>Password</h3>
         <p style={{ fontSize: "0.8rem", color: "var(--text-3)", margin: "0 0 14px" }}>
           Choose a new password for your account.
         </p>
-        <form onSubmit={handleChangePassword} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">New Password</label>
-            <div className="input-wrap">
-              <input
-                className="form-input"
-                type={showPassword ? "text" : "password"}
-                value={newPassword}
-                onChange={e => setNewPassword(e.target.value)}
-                style={{ paddingRight: "2.5rem" }}
-              />
-              <button type="button" className="input-eye-btn" onClick={() => setShowPassword(s => !s)}>
-                <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} />
+        <button
+          type="button"
+          className="btn btn-secondary"
+          style={{ width: "fit-content" }}
+          onClick={() => setPasswordModalOpen(true)}
+        >
+          <i className="fa-solid fa-key" /> Change Password
+        </button>
+      </div>
+
+      {/* Preview as role — superadmin only. Moved here from the sidebar so
+          the nav stays clean; the exit affordance lives on the sidebar's
+          role line while a preview is active. */}
+      {realRole === "superadmin" && (
+        <div className="card card-body" style={{ padding: 20 }}>
+          <h3 style={{ margin: "0 0 4px" }}>Preview as role</h3>
+          <p style={{ fontSize: "0.8rem", color: "var(--text-3)", margin: "0 0 14px" }}>
+            See the CMS the way another role would, without a second account.
+            This only changes what's shown — your real {realRole} access is
+            unchanged underneath.
+          </p>
+          <select
+            className="filter-select"
+            style={{ width: "fit-content", minWidth: 200 }}
+            value={previewRole || "superadmin"}
+            onChange={(e) => handleChangePreview(e.target.value === "superadmin" ? null : e.target.value)}
+          >
+            <option value="superadmin">Superadmin (you)</option>
+            {PREVIEWABLE_ROLES.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {passwordModalOpen && (
+        <div className="modal-overlay" onClick={closePasswordModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 420 }}>
+            <div className="modal-header">
+              <h2 className="modal-title">
+                <i className="fa-solid fa-key text-[var(--brand)]" style={{ marginRight: 8 }} />
+                Change Password
+              </h2>
+              <button className="modal-close-btn" onClick={closePasswordModal} aria-label="Close">
+                <i className="fa-solid fa-xmark" />
               </button>
             </div>
+            <form onSubmit={handleChangePassword}>
+              <div className="modal-body" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label className="form-label">New Password</label>
+                  <div className="input-wrap">
+                    <input
+                      className="form-input"
+                      type={showPassword ? "text" : "password"}
+                      value={newPassword}
+                      onChange={e => setNewPassword(e.target.value)}
+                      style={{ paddingRight: "2.5rem" }}
+                      autoFocus
+                    />
+                    <button type="button" className="input-eye-btn" onClick={() => setShowPassword(s => !s)}>
+                      <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} />
+                    </button>
+                  </div>
+                  <p className="form-helper">At least 6 characters.</p>
+                </div>
+                <div className="form-group" style={{ marginBottom: 0 }}>
+                  <label className="form-label">Confirm New Password</label>
+                  <input
+                    className="form-input"
+                    type={showPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-ghost" onClick={closePasswordModal}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary" disabled={passwordLoading}>
+                  {passwordLoading && <i className="fa-solid fa-circle-notch fa-spin" />}
+                  {passwordLoading ? "Updating..." : "Change Password"}
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Confirm New Password</label>
-            <input
-              className="form-input"
-              type={showPassword ? "text" : "password"}
-              value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={passwordLoading} style={{ width: "fit-content" }}>
-            {passwordLoading ? "Updating..." : "Change Password"}
-          </button>
-        </form>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
