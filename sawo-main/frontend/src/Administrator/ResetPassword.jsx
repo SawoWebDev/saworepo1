@@ -15,6 +15,7 @@ export default function ResetPassword() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [sessionReady, setSessionReady] = useState(false);
+  const [targetUsername, setTargetUsername] = useState("");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "light");
@@ -22,10 +23,18 @@ export default function ResetPassword() {
     // Supabase automatically handles the token in the URL
     // and fires PASSWORD_RECOVERY when the user lands on this page
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, _session) => {
-        console.log("Auth event:", event);
+      async (event, session) => {
         if (event === "PASSWORD_RECOVERY") {
           setSessionReady(true);
+          const email = session?.user?.email;
+          if (email) {
+            const { data } = await supabase
+              .from("users")
+              .select("username")
+              .eq("email", email)
+              .maybeSingle();
+            if (data?.username) setTargetUsername(data.username);
+          }
         }
       }
     );
@@ -59,6 +68,29 @@ export default function ResetPassword() {
     }
   };
 
+  // Same shared button/footer styling as Login.jsx so the two auth screens
+  // read as one flow. `.btn` is inline-flex with no justify-content, so a
+  // width:100% button would otherwise render its label left-aligned.
+  const centerButtonStyle = {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0.65rem 1rem",
+    marginTop: "0.6rem",
+    borderRadius: "6px",
+    fontWeight: 600,
+    cursor: "pointer",
+  };
+
+  const footerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "1rem",
+    gap: "0.5rem",
+  };
+
   return (
     <div className="login-page">
       <div className="login-card">
@@ -73,24 +105,27 @@ export default function ResetPassword() {
             <p className="login-sub">
               Your password has been reset. Redirecting to login...
             </p>
-            <button onClick={() => navigate("/login")}
-              className="link-btn back-btn">
-              <i className="fa-solid fa-chevron-left" /> Back to login
-            </button>
+            <div style={footerStyle}>
+              <button onClick={() => navigate("/login")}
+                className="link-btn back-btn">
+                <i className="fa-solid fa-chevron-left" /> Back to login
+              </button>
+            </div>
           </div>
         ) : (
           <>
             <div className="login-header">
               <img src={logo} alt="Logo" className="login-logo" />
               <h1 className="login-title">Set New Password</h1>
-              {!sessionReady && (
-                <p className="login-sub" style={{ color: "#f59e0b", fontSize: "0.85rem" }}>
-                  Å│ Verifying reset link...
+              {sessionReady ? (
+                <p className="login-status login-status--ready">
+                  <i className="fa-solid fa-circle-check" />
+                  Link verified — enter your new password{targetUsername ? ` for ${targetUsername}` : ""}
                 </p>
-              )}
-              {sessionReady && (
-                <p className="login-sub" style={{ color: "#16a34a", fontSize: "0.85rem" }}>
-                  £ Link verified - enter your new password
+              ) : (
+                <p className="login-status login-status--pending">
+                  <i className="fa-solid fa-circle-notch fa-spin" />
+                  Verifying reset link...
                 </p>
               )}
             </div>
@@ -140,12 +175,13 @@ export default function ResetPassword() {
 
               <button type="submit" className="btn btn-primary"
                 disabled={loading || !sessionReady}
-                style={{ width: "100%" }}>
+                style={centerButtonStyle}>
+                {loading && <i className="fa-solid fa-circle-notch fa-spin" />}
                 {loading ? "Updating..." : "Reset Password"}
               </button>
             </form>
 
-            <div className="login-footer">
+            <div style={footerStyle}>
               <button onClick={() => navigate("/login")}
                 className="link-btn back-btn">
                 <i className="fa-solid fa-chevron-left" /> Back to login

@@ -52,6 +52,7 @@ export const CAPABILITY_MAP = {
 
   // Navigation / Pages
   "page.dashboard":           ["viewer", "editor", "admin", "superadmin"],
+  "page.profile":             ["viewer", "editor", "admin", "superadmin"],
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
   "page.logs":                ["admin", "superadmin"],
@@ -126,6 +127,7 @@ export const NAV_ITEMS = [
 
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
   { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image — no redeploy needed." },
+  { to: "/admin/profile",         label: "My Profile",       icon: "fa-solid fa-user",           cap: "page.profile",     section: "System",   description: "Update your own username, name, and password." },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
   { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
   { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },

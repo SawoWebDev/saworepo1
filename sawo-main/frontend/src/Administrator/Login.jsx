@@ -1,6 +1,6 @@
-﻿// src/Administrator/Login.jsx
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// src/Administrator/Login.jsx
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { apiLogin, saveSession, forgotPassword, getSession } from "./supabase";
 import "./admin.css";
 import logo from "./SAWO-logo.webp";
@@ -11,6 +11,7 @@ export default function Login() {
   const [remember, setRemember] = useState(true);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const [showForgot, setShowForgot] = useState(false);
   const [forgotUsername, setForgotUsername] = useState("");
@@ -19,21 +20,64 @@ export default function Login() {
   const [forgotLoading, setForgotLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const autoReturnTimer = useRef(null);
 
-useEffect(() => {
-  document.documentElement.setAttribute("data-theme", "light");
-  if (getSession()) navigate("/admin/dashboard");
-}, [navigate]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "light");
+
+    // Arriving here with a username to prefill (e.g. redirected from a
+    // "you need to reset your password" prompt elsewhere in the CMS) — open
+    // straight to the forgot-password form instead of the login form.
+    if (location.state?.prefillForgotUsername) {
+      setForgotUsername(location.state.prefillForgotUsername);
+      setShowForgot(true);
+      return;
+    }
+
+    const session = getSession();
+    if (session) navigate("/admin/dashboard");
+  }, [navigate, location.state]);
+
+  // Once a reset link has been sent (either the user clicked "Forgot
+  // password?" themselves, or it was sent automatically after an
+  // unverified-account login attempt below), return to the plain login form
+  // on its own after a few seconds rather than leaving them stranded on the
+  // confirmation screen.
+  useEffect(() => {
+    if (!forgotStatus) return;
+    autoReturnTimer.current = setTimeout(() => {
+      setShowForgot(false);
+      setForgotStatus("");
+      setForgotUsername("");
+    }, 3000);
+    return () => clearTimeout(autoReturnTimer.current);
+  }, [forgotStatus]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoggingIn(true);
     try {
-      const { user, token } = await apiLogin(username, password);
+      const { user, token, viaLegacy } = await apiLogin(username, password);
+
+      if (viaLegacy) {
+        // Correct password, but this account hasn't set a real password yet
+        // — don't grant a session. Send them straight into the same
+        // email-link flow every other password change goes through.
+        const email = await forgotPassword(username);
+        setPassword("");
+        setForgotStatus(`This account needs to be verified. We've sent a password reset link to ${email} — check your inbox to finish signing in.`);
+        setShowForgot(true);
+        return;
+      }
+
       saveSession(token, user, remember);
       navigate("/admin/dashboard");
     } catch (err) {
       setError(err.message || "Login failed");
+    } finally {
+      setLoggingIn(false);
     }
   };
 
@@ -45,7 +89,6 @@ useEffect(() => {
     try {
       const email = await forgotPassword(forgotUsername);
       setForgotStatus(`Reset link sent to ${email}`);
-      setForgotUsername("");
     } catch (err) {
       setForgotError(err.message || "Failed to send reset email");
     } finally {
@@ -131,8 +174,8 @@ useEffect(() => {
               {error && <div className="alert alert-error">{error}</div>}
 
               {/* Centered Login Button */}
-              <button type="submit" className="btn btn-primary" style={centerButtonStyle}>
-                Login
+              <button type="submit" className="btn btn-primary" style={centerButtonStyle} disabled={loggingIn}>
+                {loggingIn ? "Signing in..." : "Login"}
               </button>
             </form>
 
@@ -153,6 +196,7 @@ useEffect(() => {
                   className="form-input"
                   value={forgotUsername}
                   onChange={(e) => setForgotUsername(e.target.value)}
+                  disabled={!!forgotStatus}
                   required
                 />
               </div>
@@ -160,19 +204,21 @@ useEffect(() => {
               {forgotStatus && <div className="alert alert-success">{forgotStatus}</div>}
               {forgotError && <div className="alert alert-error">{forgotError}</div>}
 
-              {/* Centered Send Reset Link Button */}
-              <button
-                className="btn btn-primary"
-                style={centerButtonStyle}
-                disabled={forgotLoading}
-              >
-                {forgotLoading ? "Sending..." : "Send Reset Link"}
-              </button>
+              {!forgotStatus && (
+                <button
+                  className="btn btn-primary"
+                  style={centerButtonStyle}
+                  disabled={forgotLoading}
+                >
+                  {forgotLoading ? "Sending..." : "Send Reset Link"}
+                </button>
+              )}
 
               <div style={footerStyle}>
                 {/* Back to Login */}
                 <button
-                  onClick={() => setShowForgot(false)}
+                  type="button"
+                  onClick={() => { setShowForgot(false); setForgotStatus(""); setForgotError(""); }}
                   className="link-btn back-btn"
                 >
                   Back to login
@@ -185,9 +231,3 @@ useEffect(() => {
     </div>
   );
 }
-
-
-
-
-
-

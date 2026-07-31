@@ -1,10 +1,38 @@
 ﻿// src/Administrator/Users.jsx
 import React, { useEffect, useState } from "react";
-import { supabase } from "./supabase";
+import { useNavigate } from "react-router-dom";
+import { supabase, isPasswordUpdateRequiredError, forgotPassword } from "./supabase";
 import { getCache, setCache } from "./adminCache";
 import { getPerms } from "./permissions";
 
 const USERS_CACHE_KEY = "admin:users";
+
+// ─── Toast ────────────────────────────────────────────────────────────────────
+function useToast() {
+  const [toasts, setToasts] = useState([]);
+  const add = (message, type = "info") => {
+    const id = Date.now();
+    setToasts(p => [...p, { id, message, type }]);
+    setTimeout(() => setToasts(p => p.filter(t => t.id !== id)), 8000);
+  };
+  const remove = id => setToasts(p => p.filter(t => t.id !== id));
+  return { toasts, add, remove };
+}
+
+function Toast({ toasts, remove }) {
+  const icons = { error: "fa-circle-xmark", success: "fa-circle-check", info: "fa-circle-info", warning: "fa-triangle-exclamation" };
+  return (
+    <div className="toast-stack">
+      {toasts.map(t => (
+        <div key={t.id} className={`toast toast-${t.type}`}>
+          <i className={`fa-solid ${icons[t.type]}`} style={{ flexShrink: 0 }} />
+          <span style={{ flex: 1, lineHeight: 1.4 }}>{t.message}</span>
+          <button className="toast-close" onClick={() => remove(t.id)}>×</button>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const emptyForm = {
   username: "",
@@ -30,10 +58,40 @@ function Modal({ open, onClose, title, children }) {
 }
 
 export default function Users({ currentUser }) {
+  const navigate = useNavigate();
+  const { toasts, add: addToast, remove: removeToast } = useToast();
   const perms = getPerms(currentUser);
   const canCreate = perms.can("users.create");
   const canEdit   = perms.can("users.edit");
   const canDelete = perms.can("users.delete");
+
+  // Shown when a write is blocked because the account hasn't set a real
+  // password yet — see isPasswordUpdateRequiredError in supabase.js.
+  const notifyPasswordUpdateRequired = () => {
+    addToast(
+      <>
+        You need to update your password before you can do this.{" "}
+        <button
+          type="button"
+          style={{
+            display: "inline",
+            padding: 0,
+            background: "none",
+            border: "none",
+            color: "#fff",
+            fontWeight: 700,
+            textDecoration: "underline",
+            cursor: "pointer",
+            fontSize: "inherit",
+          }}
+          onClick={() => navigate("/login", { state: { prefillForgotUsername: currentUser?.username } })}
+        >
+          Reset your password
+        </button>
+      </>,
+      "error"
+    );
+  };
 
   const [users, setUsers]           = useState(() => getCache(USERS_CACHE_KEY) || []);
   const [search, setSearch]         = useState("");
@@ -106,46 +164,81 @@ export default function Users({ currentUser }) {
           if (fnError) console.warn("Auth email sync failed:", fnError.message);
         }
       } else {
-        // Omit password_hash entirely — the column DEFAULT fills in an
-        // unusable placeholder hash, then set_user_password_by_username
-        // immediately overwrites it with the real (hashed) password.
+        // New users set their own password via email, the same way every
+        // other password change in the CMS works (see ResetPassword.jsx) —
+        // omit password_hash entirely so the column DEFAULT fills in an
+        // unusable placeholder until they do.
         const newUsername = form.username.trim();
+        const email = form.email.trim();
         const { error } = await supabase.from("users").insert([{
           username: newUsername,
           full_name: form.full_name.trim() || null,
-          email: form.email.trim() || null,
+          email: email || null,
           role: form.role,
         }]);
         if (error) throw new Error(error.message);
 
-        const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
-          p_username: newUsername,
-          p_new_password: form.password_hash || crypto.randomUUID(),
-        });
-        if (pwError) throw new Error("User created but setting the password failed: " + pwError.message);
+        // Optional: an admin can still set an initial password directly
+        // (e.g. for an account with no email) — but it's never required.
+        if (form.password_hash.trim()) {
+          const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
+            p_username: newUsername,
+            p_new_password: form.password_hash.trim(),
+          });
+          if (pwError) throw new Error("User created but setting the password failed: " + pwError.message);
+        }
 
-        if (form.email.trim()) {
-          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
+        if (email) {
+          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
           if (fnError) console.warn("Auth user creation failed:", fnError.message);
+
+          try {
+            await forgotPassword(newUsername);
+          } catch (mailErr) {
+            console.warn("Password-setup email failed to send:", mailErr.message);
+          }
         }
       }
       closeModal();
       fetchUsers();
+      if (!editUser && form.email.trim()) {
+        addToast(`User created. A password-setup link was sent to ${form.email.trim()}.`, "success");
+      }
     } catch (err) {
-      setFormError(err.message);
+      if (isPasswordUpdateRequiredError(err.message)) {
+        notifyPasswordUpdateRequired();
+      } else {
+        setFormError(err.message);
+      }
     } finally {
       setFormLoading(false);
     }
   };
 
   const handleDelete = async id => {
-    await supabase.from("users").delete().eq("id", id);
+    const { error } = await supabase.from("users").delete().eq("id", id);
+    if (error) {
+      if (isPasswordUpdateRequiredError(error.message)) {
+        notifyPasswordUpdateRequired();
+      } else {
+        addToast(error.message, "error");
+      }
+      return;
+    }
     setDeleteConfirm(null);
     fetchUsers();
   };
 
   const handleBulkDelete = async () => {
-    await supabase.from("users").delete().in("id", Array.from(selected));
+    const { error } = await supabase.from("users").delete().in("id", Array.from(selected));
+    if (error) {
+      if (isPasswordUpdateRequiredError(error.message)) {
+        notifyPasswordUpdateRequired();
+      } else {
+        addToast(error.message, "error");
+      }
+      return;
+    }
     setBulkConfirm(false);
     setSelected(new Set());
     fetchUsers();
@@ -180,7 +273,11 @@ export default function Users({ currentUser }) {
       setConfirmPassword("");
       fetchUsers();
     } catch (err) {
-      setPassError(err.message);
+      if (isPasswordUpdateRequiredError(err.message)) {
+        notifyPasswordUpdateRequired();
+      } else {
+        setPassError(err.message);
+      }
     }
   };
 
@@ -214,6 +311,8 @@ export default function Users({ currentUser }) {
 
   return (
     <div>
+      <Toast toasts={toasts} remove={removeToast} />
+
       {/* Toolbar */}
       <div className="products-toolbar">
         <div className={`toolbar-filters-row${mobileSearchOpen ? " search-open" : ""}`} style={{ marginLeft: 0 }}>
@@ -335,7 +434,7 @@ export default function Users({ currentUser }) {
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label">Password</label>
               <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 5px" }}>
-                Optional - user can set their own password via Forgot Password.
+                Optional — if an email is provided below, a link to set their own password is sent automatically. Only fill this in to set an initial password yourself.
               </p>
               <div className="input-wrap">
                 <input

@@ -27,13 +27,15 @@ export const supabase = createClient(
 //
 // TRANSITION: not every account has completed migration yet (each admin
 // needs to have used the password-reset email at least once since 2026-07-30
-// to have a working password on their real Auth account). So this tries the
-// real path first and falls back to the legacy RPC only if that fails —
-// nobody gets locked out mid-migration, but once every account has reset at
-// least once, the fallback branch simply stops ever being hit. Remove it
-// once that's confirmed true for every admin (check: does every row in
-// `users` have a non-null auth_user_id AND has that admin logged in
-// successfully via the real path at least once?).
+// to have a working password on their real Auth account). This still tries
+// the real path first; if it falls through to the legacy RPC, that's proof
+// the password is correct but the account isn't migrated — Login.jsx treats
+// `viaLegacy: true` as "don't grant a session," and instead auto-sends a
+// password-reset email so the account finishes migrating through the same
+// email-link flow every other password change goes through (see
+// ResetPassword.jsx). Remove the legacy branch entirely once every row in
+// `users` has a non-null auth_user_id and has signed in via the real path
+// at least once.
 export async function apiLogin(username, password) {
   const { data: email } = await supabase.rpc("get_email_for_username", { p_username: username });
 
@@ -46,7 +48,7 @@ export async function apiLogin(username, password) {
         .eq("auth_user_id", authData.user.id)
         .single();
       if (!profileError && profile) {
-        return { user: profile, token: profile.id };
+        return { user: profile, token: profile.id, viaLegacy: false };
       }
       // Real Auth succeeded but no linked `users` row was found — an
       // account that exists in Supabase Auth but was never linked. Fall
@@ -70,6 +72,7 @@ export async function apiLogin(username, password) {
   return {
     user,
     token: user.id,
+    viaLegacy: true,
   };
 }
 
@@ -102,6 +105,16 @@ export async function resetPassword(newPassword) {
     });
     if (dbError) throw new Error("Password updated in Auth but failed to sync to users table: " + dbError.message);
   }
+}
+
+// True when a write failed because the caller isn't a real, authenticated
+// superadmin session (e.g. an expired/stale session, or a role change that
+// hasn't been picked up yet). Used to show a helpful "reset your password"
+// prompt instead of the raw Postgres error. Should be rare in practice since
+// login itself no longer grants a session to an unmigrated account (see
+// apiLogin above), but stays as a safety net.
+export function isPasswordUpdateRequiredError(message) {
+  return typeof message === "string" && message.includes("row-level security policy");
 }
 
 export function saveSession(token, user, remember = true) {
