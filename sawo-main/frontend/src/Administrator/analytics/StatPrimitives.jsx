@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // Shared stat-tile building blocks — originally lived only in Analytics.jsx,
 // extracted so Dashboard.jsx (and any future stats page) can reuse them
@@ -73,6 +74,7 @@ export function CardHeader({ title, icon, tabs, activeTab, onTab }) {
 // (width = share of the list max), optional source icon, bold count on the
 // right. Text stays in the CMS text tokens; only the bar carries the hue.
 export function BreakdownList({ rows, valueLabel, showPct }) {
+  const navigate = useNavigate();
   if (!rows || rows.length === 0) {
     return <p className="text-[var(--text-3)] text-sm">No data available</p>;
   }
@@ -118,6 +120,17 @@ export function BreakdownList({ rows, valueLabel, showPct }) {
                 >
                   <i className="fa-solid fa-fire"></i>
                 </a>
+              )}
+              {row.pagePerf && (
+                <button
+                  type="button"
+                  onClick={() => navigate(`/admin/seo?open=${encodeURIComponent(row.name)}`)}
+                  title={`View "${row.name}" in Page Performance`}
+                  className="text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
+                  style={{ flexShrink: 0, background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                >
+                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
               )}
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 <span className="text-sm font-bold text-[var(--brand)]">{value}</span>
@@ -165,6 +178,30 @@ export function BreakdownCard({ id, title, icon, tabs, activeTab, onTab, onShowA
       <CardHeader title={title} icon={icon} tabs={tabs} activeTab={activeTab} onTab={onTab} />
       <div style={{ minHeight: CARD_CONTENT_HEIGHT }}>
         <TabbedList tab={tab} title={`${title} — ${tab.label}`} icon={icon} onShowAll={onShowAll} />
+      </div>
+    </div>
+  );
+}
+
+// Generic small modal used for BreakdownCard's "Show all N" expansion —
+// shared so any page using these primitives gets the same behavior instead
+// of each one growing its own copy.
+export function Modal({ title, icon, onClose, children }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 480 }}>
+        <div className="modal-header">
+          <h2 className="modal-title">
+            {icon && <i className={`fas ${icon} text-[var(--brand)]`} style={{ marginRight: 8 }}></i>}
+            {title}
+          </h2>
+          <button className="modal-close-btn" onClick={onClose} aria-label="Close">
+            <i className="fa-solid fa-xmark" />
+          </button>
+        </div>
+        <div className="modal-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -15,7 +15,10 @@ const DEFAULT_CHART_W = 600;
 const CHART_H = 220;
 const PAD_X = 8;
 const PAD_TOP = 14;
-const PAD_BOTTOM = 8;
+// Extra room below the lowest possible data point (value 0) so its line/dot
+// never sits flush against the chart's bottom edge, right above the date
+// labels — that read as the line being "cut off" against the axis.
+const PAD_BOTTOM = 24;
 const PLOT_H = CHART_H - PAD_TOP - PAD_BOTTOM;
 
 function formatDayLabel(dateStr) {
@@ -218,7 +221,7 @@ export default function DailyTrafficChart({ data }) {
         )}
       </div>
 
-      <div className="relative mt-1" style={{ height: 14 }}>
+      <div className="relative mt-3" style={{ height: 14 }}>
         {isLongRange
           ? monthLabels.map(({ i, label }) => (
               <span

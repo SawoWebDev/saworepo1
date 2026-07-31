@@ -11,6 +11,7 @@ import {
   BreakdownList,
   TabbedList,
   BreakdownCard,
+  Modal,
 } from "./analytics/StatPrimitives";
 
 // v2: cache shape changed with the Plausible-style rework (sources/entry-exit/
@@ -120,9 +121,9 @@ const Analytics = () => {
     campaigns: { label: "Campaigns", rows: stats.campaigns, valueLabel: "Visitors", showPct: false },
   };
   const pagesTabs = {
-    top:   { label: "Top pages",   rows: stats.topPages.map(p => ({ ...p, value: p.views, sub: `Avg. time: ${formatTime(p.avgTime)}`, posthog: true })), valueLabel: "Views", showPct: false },
-    entry: { label: "Entry pages", rows: stats.entryPages, valueLabel: "Visitors",     showPct: false },
-    exit:  { label: "Exit pages",  rows: stats.exitPages,  valueLabel: "Unique exits", showPct: false },
+    top:   { label: "Top pages",   rows: stats.topPages.map(p => ({ ...p, value: p.views, sub: `Avg. time: ${formatTime(p.avgTime)}`, posthog: true, pagePerf: true })), valueLabel: "Views", showPct: false },
+    entry: { label: "Entry pages", rows: stats.entryPages.map(r => ({ ...r, pagePerf: true })), valueLabel: "Visitors",     showPct: false },
+    exit:  { label: "Exit pages",  rows: stats.exitPages.map(r => ({ ...r, pagePerf: true })),  valueLabel: "Unique exits", showPct: false },
   };
   const locationsTabs = {
     map:       { label: "Map" },
@@ -153,7 +154,7 @@ const Analytics = () => {
           .tax-tabs hardcodes margin-bottom:0 (Taxonomy sits it right above
           its own toolbar), which silently cancelled the mb-6 here — hence
           the inline override. */}
-      <div className="tax-tabs mb-6" style={{ marginBottom: 24 }}>
+      <div className="tax-tabs mb-6" style={{ marginTop: 16, marginBottom: 24 }}>
         {["7days", "30days", "90days"].map((range) => (
           <button
             key={range}
@@ -333,70 +334,13 @@ const Analytics = () => {
         </div>
       )}
 
-      {/* Recent Events */}
-      <div className="card card-body">
-        <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
-          <i className="fas fa-history text-[var(--brand)]"></i>
-          Recent User Events
-        </h3>
-        {stats.recentEvents.length > 0 ? (
-          <div className="products-table-wrap">
-            <table className="products-table">
-              <thead>
-                <tr>
-                  <th>Event</th>
-                  <th>Page</th>
-                  <th>Time</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stats.recentEvents.slice(0, 10).map((event, idx) => (
-                  <tr key={idx}>
-                    <td style={{ color: "var(--text)", fontWeight: 500 }}>{event.event_name}</td>
-                    <td style={{ color: "var(--text-2)" }}>{event.page_path || "-"}</td>
-                    <td style={{ color: "var(--text-3)" }}>{new Date(event.timestamp).toLocaleString()}</td>
-                    <td style={{ color: "var(--text-3)" }}>
-                      {event.event_data ? JSON.stringify(event.event_data).substring(0, 50) : "-"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <p className="text-[var(--text-3)] text-sm">No recent events</p>
-        )}
-      </div>
 
     </div>
   );
 };
 
 // ── Card scaffolding ────────────────────────────────────────────────────────
-// MetricCard/CardHeader/BreakdownList/TabbedList/BreakdownCard now live in
-// ./analytics/StatPrimitives — Modal stays here as it's specific to this
-// page's "show all" list expansion.
-
-function Modal({ title, icon, onClose, children }) {
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 480 }}>
-        <div className="modal-header">
-          <h2 className="modal-title">
-            {icon && <i className={`fas ${icon} text-[var(--brand)]`} style={{ marginRight: 8 }}></i>}
-            {title}
-          </h2>
-          <button className="modal-close-btn" onClick={onClose} aria-label="Close">
-            <i className="fa-solid fa-xmark" />
-          </button>
-        </div>
-        <div className="modal-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
+// MetricCard/CardHeader/BreakdownList/TabbedList/BreakdownCard/Modal now live
+// in ./analytics/StatPrimitives, shared with PageSEO.jsx's drill-down.
 
 export default Analytics;
