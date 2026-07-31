@@ -2726,6 +2726,33 @@ body {
 .login-title { font-size:1.5rem; font-weight:700; color:var(--brand); margin-bottom:-5px; }
 .check-row { display:flex; align-items:center; gap:0.4rem; font-size:0.85rem; margin-bottom:1rem; color:var(--text-2); }
 .btn.btn-primary.btn-full { width:100%; justify-content:center; margin-top:0.4rem; }
+/* Subtitle under the login/reset title. Was referenced by ResetPassword.jsx
+   but never actually defined here, so it rendered unstyled. */
+.login-sub {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-2);
+  margin: 0.4rem 0 0;
+}
+
+/* Reset-link verification state (ResetPassword.jsx). inline-flex keeps the
+   icon on the same baseline as the label, and the pill centers as one unit
+   under the title instead of as a loose line of colored text. */
+.login-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0.6rem 0 0;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.login-status--pending { background: var(--warning-bg); color: var(--warning); }
+.login-status--ready   { background: var(--success-bg); color: var(--success); }
+
 .login-footer { text-align:center; margin-top:1rem; }
 .link-btn { background:none; border:none; color:var(--brand); cursor:pointer; font-size:0.85rem; }
 .link-btn:hover { text-decoration:underline; }

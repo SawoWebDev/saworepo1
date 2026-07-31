@@ -74,6 +74,7 @@ const AdminLayout    = lazy(() => import("./Administrator/AdminLayout"));
 const Login          = lazy(() => import("./Administrator/Login"));
 const ResetPassword  = lazy(() => import("./Administrator/ResetPassword"));
 const Dashboard      = lazy(() => import("./Administrator/Dashboard"));
+const Profile        = lazy(() => import("./Administrator/Profile"));
 const Users          = lazy(() => import("./Administrator/Users"));
 const Products       = lazy(() => import("./Administrator/Products"));
 const SaunaRoomsAdmin = lazy(() => import("./Administrator/SaunaRoomsCMS"));
@@ -173,6 +174,9 @@ export default function App() {
 
             <Route path="/admin/dashboard" element={
               <ProtectedRoute requiredCap="page.dashboard"><AdminLayout><Dashboard /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/profile" element={
+              <ProtectedRoute requiredCap="page.profile"><AdminLayout><Profile /></AdminLayout></ProtectedRoute>
             } />
             <Route path="/admin/users" element={
               <ProtectedRoute requiredCap="page.users"><AdminLayout><Users /></AdminLayout></ProtectedRoute>
