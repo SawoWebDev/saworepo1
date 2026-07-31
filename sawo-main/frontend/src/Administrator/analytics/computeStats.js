@@ -23,12 +23,43 @@ const OS_ICONS = {
   Other:        "fa-solid fa-desktop",
 };
 
+// Zero-filled daily views/visitors series across [startDate, endDate] —
+// shared by the account-wide chart (computeStats) and per-page
+// sparklines/charts (computePagePerformance), so both use identical
+// day-bucketing. endDate defaults to now for the common "…to today" ranges;
+// custom/bounded ranges (e.g. a picked date range) pass an explicit endDate
+// so the series doesn't keep zero-filling past it up to the real today.
+export function buildDailyStats(views, startDate, endDate = new Date()) {
+  const dailyViews = {};
+  const dailySessions = {};
+  (views || []).forEach(pv => {
+    const key = dayKey(pv.timestamp);
+    dailyViews[key] = (dailyViews[key] || 0) + 1;
+    if (!dailySessions[key]) dailySessions[key] = new Set();
+    dailySessions[key].add(pv.session_id);
+  });
+  const dailyStats = [];
+  const cursor = new Date(startDate);
+  const end = new Date(endDate);
+  while (cursor <= end) {
+    const key = dayKey(cursor.toISOString());
+    dailyStats.push({
+      date: key,
+      views: dailyViews[key] || 0,
+      visitors: dailySessions[key]?.size || 0,
+    });
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return dailyStats;
+}
+
 /**
  * @param {Array} pageViews rows from analytics_page_views for the date range
  * @param {Array} events    rows from analytics_events
  * @param {Date}  startDate start of the selected range (for zero-filled days)
+ * @param {Date}  [endDate]  end of the selected range, defaults to now
  */
-export function computeStats(pageViews, events, startDate) {
+export function computeStats(pageViews, events, startDate, endDate = new Date()) {
   const views = pageViews || [];
 
   // ── Session index: session_id → rows sorted by timestamp ─────────────────
@@ -44,26 +75,7 @@ export function computeStats(pageViews, events, startDate) {
   const totalDuration = views.reduce((sum, pv) => sum + (pv.time_on_page || 0), 0);
 
   // ── Daily views + unique visitors, zero-filled across the range ──────────
-  const dailyViews = {};
-  const dailySessions = {};
-  views.forEach(pv => {
-    const key = dayKey(pv.timestamp);
-    dailyViews[key] = (dailyViews[key] || 0) + 1;
-    if (!dailySessions[key]) dailySessions[key] = new Set();
-    dailySessions[key].add(pv.session_id);
-  });
-  const dailyStats = [];
-  const cursor = new Date(startDate);
-  const today = new Date();
-  while (cursor <= today) {
-    const key = dayKey(cursor.toISOString());
-    dailyStats.push({
-      date: key,
-      views: dailyViews[key] || 0,
-      visitors: dailySessions[key]?.size || 0,
-    });
-    cursor.setDate(cursor.getDate() + 1);
-  }
+  const dailyStats = buildDailyStats(views, startDate, endDate);
 
   // ── Bounce rate: sessions with a single page view ────────────────────────
   let bouncedSessions = 0;

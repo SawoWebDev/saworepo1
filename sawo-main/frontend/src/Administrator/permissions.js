@@ -125,7 +125,7 @@ export const NAV_ITEMS = [
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "Catalog",   description: "A record of every create, update, and delete made across the CMS." },
 
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
-  { to: "/admin/seo",             label: "Page SEO",         icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "Override the title, meta description, and social-share image for hub/category pages, no redeploy needed." },
+  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image — no redeploy needed." },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
   { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
   { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },

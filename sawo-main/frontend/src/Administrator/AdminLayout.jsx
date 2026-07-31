@@ -35,9 +35,34 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
   const sections = groupBySection(nav);
   const initial = (session.user.username || "?").charAt(0).toUpperCase();
 
-  // Section dropdowns — collapsed = hidden. Empty set = every section open
-  // by default.
-  const [closedSections, setClosedSections] = useState(() => new Set());
+  // Whichever section holds the page currently open (in the iframe/route) —
+  // recomputed from location on every render, so it's correct on first paint
+  // (including a hard reload) without waiting on an effect.
+  const activeSection = sections.find(([, items]) =>
+    items.some(({ to }) => location.pathname.startsWith(to))
+  )?.[0] ?? null;
+
+  // Section dropdowns — collapsed = hidden. Every section starts closed
+  // except the one holding the current page, so a reload never hides where
+  // you are; the admin opens/closes the rest as needed.
+  const [closedSections, setClosedSections] = useState(() => {
+    const all = sections.map(([section]) => section);
+    return new Set(activeSection ? all.filter(s => s !== activeSection) : all);
+  });
+
+  // If navigation lands on a different section (e.g. via search or a direct
+  // link) while that section happens to be collapsed, reopen it — the active
+  // page's dropdown should never be the one that's closed.
+  useEffect(() => {
+    if (!activeSection) return;
+    setClosedSections(prev => {
+      if (!prev.has(activeSection)) return prev;
+      const next = new Set(prev);
+      next.delete(activeSection);
+      return next;
+    });
+  }, [activeSection]);
+
   const toggleSection = (section) => {
     setClosedSections(prev => {
       const next = new Set(prev);
@@ -85,12 +110,11 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
               <div className="sidebar-section" key={section}>
                 <button
                   type="button"
-                  className="sidebar-section-label"
+                  className={`sidebar-section-label${section === activeSection ? " active" : ""}`}
                   onClick={() => toggleSection(section)}
                   aria-expanded={!isClosed}
                 >
                   <span>{section}</span>
-                  <span className="sidebar-section-rule" />
                   <i className={`fa-solid fa-chevron-down sidebar-section-chevron${isClosed ? " is-closed" : ""}`} />
                 </button>
                 <div className={`sidebar-section-items${isClosed ? " is-closed" : ""}`}>
