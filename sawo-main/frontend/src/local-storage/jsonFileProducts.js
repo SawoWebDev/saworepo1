@@ -8,7 +8,7 @@
  */
 import { transformAccessories } from "./accessoriesTransform";
 
-const CACHE_MS = 5 * 60 * 1000; // 5 min — matches GitHub raw's own CDN max-age
+const CACHE_MS = 5 * 60 * 1000; // 5 min, matches GitHub raw's own CDN max-age
 
 let cache = null;   // { records, time }
 let inflight = null; // in-flight fetch promise, deduped across simultaneous hook mounts

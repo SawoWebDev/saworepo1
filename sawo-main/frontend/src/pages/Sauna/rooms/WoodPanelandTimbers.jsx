@@ -109,7 +109,7 @@ const WoodPanelandTimbers = () => {
     <div className="relative">
       <SEO
         title="Wood Panels & Timbers"
-        description="SAWO wood panel and timber options — cedar, aspen, and spruce choices to craft the natural look and feel of your sauna room."
+        description="SAWO wood panel and timber options, cedar, aspen, and spruce choices to craft the natural look and feel of your sauna room."
         path="/sauna/rooms/wood-panels-timbers"
       />
 

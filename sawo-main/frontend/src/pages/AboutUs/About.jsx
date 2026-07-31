@@ -56,7 +56,7 @@ const AboutUs = () => {
     <div className="relative">
       <SEO
         title="About Us"
-        description="Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms — trusted by customers in 90+ countries."
+        description="Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms, trusted by customers in 90+ countries."
         path="/about"
       />
       <style>{`
@@ -521,7 +521,7 @@ const AboutUs = () => {
             <h1>We are SAWO</h1>
             <p>Bringing Finnish tradition to the world</p>
             <p className="about-hero-desc">
-              We are a customer-centric, excellence-driven company, consistently prioritizing the needs of our customers at every step—from product design to manufacturing to after-sales. We take pride in delivering only the finest products and the best service to our valued customers.
+              We are a customer-centric, excellence-driven company, consistently prioritizing the needs of our customers at every step, from product design to manufacturing to after-sales. We take pride in delivering only the finest products and the best service to our valued customers.
             </p>
           </div>
         </div>
@@ -650,7 +650,7 @@ const AboutUs = () => {
                 <span className="news-card-label">Exhibitions</span>
                 <h3 className="news-card-title">Recent Exhibitions</h3>
                 <p className="news-card-desc">
-                  This autumn, we took part in Europe's top wellness exhibitions—Aquanale in Cologne and Piscina Barcelona. A pleasure connecting with industry leaders and showcasing Finnish tradition and wellness.
+                  This autumn, we took part in Europe's top wellness exhibitions: Aquanale in Cologne and Piscina Barcelona. A pleasure connecting with industry leaders and showcasing Finnish tradition and wellness.
                 </p>
                 <Link to={menuPaths.about.news} className="news-card-link">
                   Read more <span>→</span>

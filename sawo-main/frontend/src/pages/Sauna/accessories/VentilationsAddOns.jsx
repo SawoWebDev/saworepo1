@@ -113,7 +113,7 @@ export default function VentilationsAddOns() {
     <div className="relative">
       <SEO
         title="Sauna Ventilation & Add-Ons"
-        description="SAWO sauna ventilation and add-on accessories — improve airflow and comfort in your sauna with our range of ventilation solutions."
+        description="SAWO sauna ventilation and add-on accessories, improve airflow and comfort in your sauna with our range of ventilation solutions."
         path="/sauna/accessories/ventilations-add-ons"
       />
       <style>{`
@@ -217,7 +217,7 @@ export default function VentilationsAddOns() {
       <WhyChooseSawo
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Ventilation & Add-Ons"
-        description="SAWO ventilation and miscellaneous accessories are designed to optimise your sauna environment — ensuring proper airflow, safety, and convenience. Built to the same high standards as all SAWO products for lasting performance."
+        description="SAWO ventilation and miscellaneous accessories are designed to optimise your sauna environment, ensuring proper airflow, safety, and convenience. Built to the same high standards as all SAWO products for lasting performance."
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />

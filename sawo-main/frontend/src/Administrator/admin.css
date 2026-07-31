@@ -433,6 +433,58 @@ body {
 }
 .sidebar-footer-role--preview i { font-size: 0.58rem; }
 
+/* Pulse on every role change: the picker lives on the Profile page, so
+   without this the badge could swap silently while you're looking elsewhere
+   on screen. The scale animation runs 3 times (~2s) then settles, while the
+   .is-pulsing class stays on for 5s total so the tooltip beside it stays
+   readable after the movement stops. */
+.sidebar-footer-role--preview.is-pulsing {
+  animation: preview-badge-pulse 0.7s ease-in-out 3;
+}
+@keyframes preview-badge-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 233, 209, 0); }
+  50%      { transform: scale(1.14); box-shadow: 0 0 0 4px rgba(255, 233, 209, 0.28); }
+}
+
+/* Tooltip. Uses data-tip rather than the native `title` so it can be styled,
+   wrap onto multiple lines, and appear instantly instead of after the
+   browser's ~1s delay. */
+.sidebar-footer-role--preview::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 60;
+  width: max-content;
+  max-width: 210px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #2c241d;
+  color: #fff;
+  border: 1px solid rgba(255, 233, 209, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.45;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(3px);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+  pointer-events: none;
+}
+.sidebar-footer-role--preview:hover::after,
+.sidebar-footer-role--preview:focus-visible::after,
+.sidebar-footer-role--preview.is-pulsing::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+/* Anchor for the tooltip's absolute positioning. */
+.sidebar-footer-user { position: relative; }
+
 /* The footer identity block is the only way into My Profile (it's not a
    sidebar nav item), so it needs to read as clickable. */
 .sidebar-footer-id--link {

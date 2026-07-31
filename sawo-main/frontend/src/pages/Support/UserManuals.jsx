@@ -365,7 +365,7 @@ export default function UserManuals() {
     <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
       <SEO
         title="User Manuals"
-        description="Download SAWO user manuals — installation guides and operating instructions for our sauna heaters, controls, and steam generators."
+        description="Download SAWO user manuals: installation guides and operating instructions for our sauna heaters, controls, and steam generators."
         path="/support/manuals"
       />
       <style>{`

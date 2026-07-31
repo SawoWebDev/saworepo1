@@ -23,7 +23,7 @@ const SaunaHeaters = () => {
     <div className="relative">
       <SEO
         title="Sauna Heaters"
-        description="Browse SAWO's full Finnish sauna heater lineup — Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style."
+        description="Browse SAWO's full Finnish sauna heater lineup: Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style."
         path="/sauna/heaters"
       />
 

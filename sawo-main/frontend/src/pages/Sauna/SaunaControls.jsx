@@ -220,7 +220,7 @@ export default function SaunaControls() {
     <div className="relative">
       <SEO
         title="Sauna Controls"
-        description="Precise temperature, time, and lighting control for your sauna — explore SAWO's Innova and Saunova control series for total comfort."
+        description="Precise temperature, time, and lighting control for your sauna, explore SAWO's Innova and Saunova control series for total comfort."
         path="/sauna/controls"
       />
       <style>{`

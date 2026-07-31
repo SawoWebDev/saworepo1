@@ -41,7 +41,7 @@ const SteamControls = () => {
   <div className="relative">
       <SEO
         title="Steam Controls"
-        description="Precision steam control from SAWO — Saunova and Innova control series for effortless operation and a personalized sauna experience."
+        description="Precision steam control from SAWO, with the Saunova and Innova control series for effortless operation and a personalized sauna experience."
         path="/steam/controls"
       />
 

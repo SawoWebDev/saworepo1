@@ -902,7 +902,7 @@ export default function AccessoriesPage() {
   const seoDescription = (() => {
     const raw = product.short_description || product.description || "";
     const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-    if (!text) return `${product.name} by SAWO — premium sauna accessory.`;
+    if (!text) return `${product.name} by SAWO, premium sauna accessory.`;
     return text.length > 160 ? `${text.slice(0, 157)}...` : text;
   })();
 

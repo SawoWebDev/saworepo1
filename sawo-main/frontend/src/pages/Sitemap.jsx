@@ -88,7 +88,7 @@ const Sitemap = () => {
     <div className="min-h-screen bg-white pt-32 pb-16 px-4 sm:px-6 lg:px-8">
       <SEO
         title="Sitemap"
-        description="A complete guide to every page and section of the SAWO website — sauna heaters, steam generators, sauna rooms, and more."
+        description="A complete guide to every page and section of the SAWO website: sauna heaters, steam generators, sauna rooms, and more."
         path="/sitemap"
       />
       <div className="max-w-7xl mx-auto">

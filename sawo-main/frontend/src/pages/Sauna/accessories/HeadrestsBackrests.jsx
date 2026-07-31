@@ -112,7 +112,7 @@ export default function HeadrestsBackrests() {
     <div className="relative">
       <SEO
         title="Sauna Headrests & Backrests"
-        description="SAWO sauna headrests and backrests — comfortable, heat-safe wood accessories that make longer sauna sessions more relaxing."
+        description="SAWO sauna headrests and backrests, comfortable, heat-safe wood accessories that make longer sauna sessions more relaxing."
         path="/sauna/accessories/headrests-backrests"
       />
       <style>{`
@@ -154,7 +154,7 @@ export default function HeadrestsBackrests() {
       <section className="wm-section">
         <div className="wm-container text-center">
           <h2 className="wm-products-title">Sauna Headrests & Backrests</h2>
-          <p className="wm-products-desc">Wooden headrests and backrests made from durable materials — wood, memory foam, or fabric — offer exceptional comfort in the sauna. Moisture-resistant upholstery ensures long-lasting quality.</p>
+          <p className="wm-products-desc">Wooden headrests and backrests made from durable materials, wood, memory foam, or fabric, offer exceptional comfort in the sauna. Moisture-resistant upholstery ensures long-lasting quality.</p>
         </div>
       </section>
 

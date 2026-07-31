@@ -405,7 +405,7 @@ const Stone = () => {
               <p className="wm-eyebrow">SAWO HEATERS</p>
               <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
               <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
-              <p className="wm-why-desc">Durable Construction — High-quality materials ensure long-lasting performance.</p>
+              <p className="wm-why-desc">Durable Construction: High-quality materials ensure long-lasting performance.</p>
               <div style={{ marginTop: "20px" }}>
                 <a href="https://www.sawo.com/wp-content/uploads/2026/07/Stone-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
               </div>

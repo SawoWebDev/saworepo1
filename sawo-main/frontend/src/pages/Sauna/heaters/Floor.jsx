@@ -195,7 +195,7 @@ const Floor = () => {
     <div className="relative">
       <SEO
         title="Floor Sauna Heaters"
-        description="SAWO Floor Series — powerful, movable stand-alone sauna heaters delivering optimal heat distribution and lasting comfort for commercial and home saunas."
+        description="SAWO Floor Series: powerful, movable stand-alone sauna heaters delivering optimal heat distribution and lasting comfort for commercial and home saunas."
         path="/sauna/heaters/floor"
       />
       <style>{`

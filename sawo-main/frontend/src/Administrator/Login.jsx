@@ -60,18 +60,10 @@ export default function Login() {
     setError("");
     setLoggingIn(true);
     try {
-      const { user, token, viaLegacy } = await apiLogin(username, password);
-
-      if (viaLegacy) {
-        // Correct password, but this account hasn't set a real password yet
-        // — don't grant a session. Send them straight into the same
-        // email-link flow every other password change goes through.
-        const email = await forgotPassword(username);
-        setPassword("");
-        setForgotStatus(`This account needs to be verified. We've sent a password reset link to ${email} — check your inbox to finish signing in.`);
-        setShowForgot(true);
-        return;
-      }
+      // A correct password now always results in a real session — apiLogin
+      // repairs an out-of-sync Auth password itself rather than bouncing a
+      // already-verified user into the reset-email flow.
+      const { user, token } = await apiLogin(username, password);
 
       saveSession(token, user, remember);
       // Role-aware landing — a viewer has no Dashboard and would otherwise

@@ -179,7 +179,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
     <>
       <SEO
         title="Sauna Accessories"
-        description="Browse the full SAWO accessories catalog — pails, ladles, thermometers, benches, lighting, and more for every sauna."
+        description="Browse the full SAWO accessories catalog: pails, ladles, thermometers, benches, lighting, and more for every sauna."
         path="/sauna-accessories"
       />
       <style>{`

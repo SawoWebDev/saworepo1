@@ -153,7 +153,7 @@ export function BreakdownCard({ id, title, icon, tabs, activeTab, onTab, onShowA
     <div id={id} className="card card-body card-lift">
       <CardHeader title={title} icon={icon} tabs={tabs} activeTab={activeTab} onTab={onTab} />
       <div style={{ minHeight: CARD_CONTENT_HEIGHT }}>
-        <TabbedList tab={tab} title={`${title} — ${tab.label}`} icon={icon} onShowAll={onShowAll} />
+        <TabbedList tab={tab} title={`${title}: ${tab.label}`} icon={icon} onShowAll={onShowAll} />
       </div>
     </div>
   );

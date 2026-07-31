@@ -311,7 +311,7 @@ const Analytics = () => {
             ) : (
               <TabbedList
                 tab={locationsTabs[cardTabs.locations]}
-                title={`Locations — ${locationsTabs[cardTabs.locations].label}`}
+                title={`Locations: ${locationsTabs[cardTabs.locations].label}`}
                 icon="fa-globe"
                 onShowAll={setExpandedList}
               />
@@ -359,7 +359,7 @@ const Analytics = () => {
             <div className="flex items-center justify-between mb-4" style={{ flexShrink: 0 }}>
               <h3 className="text-lg font-bold text-[var(--text)] flex items-center gap-2" style={{ margin: 0 }}>
                 <i className="fas fa-globe text-[var(--brand)]"></i>
-                Locations — Map
+                Locations: Map
               </h3>
               <button
                 type="button"

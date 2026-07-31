@@ -33,7 +33,7 @@ import { getCachedPageSeoMap, getPageSeoOverride } from "../local-storage/pageSe
 const SITE_NAME = "SAWO";
 const DEFAULT_TITLE = "SAWO Inc. | Premium Sauna Heaters, Rooms and Accessories";
 const DEFAULT_DESCRIPTION =
-  "SAWO designs premium Finnish sauna heaters, steam generators, infrared saunas & sauna rooms — trusted in 90+ countries. Explore the full range.";
+  "SAWO designs premium Finnish sauna heaters, steam generators, infrared saunas & sauna rooms, trusted in 90+ countries. Explore the full range.";
 const DEFAULT_IMAGE = "/1920.webp"; // existing homepage hero, 1920x1080
 const SITE_URL = "https://www.sawo.com";
 

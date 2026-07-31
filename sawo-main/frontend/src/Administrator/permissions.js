@@ -129,7 +129,7 @@ export const NAV_ITEMS = [
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "Catalog",   description: "A record of every create, update, and delete made across the CMS." },
 
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
-  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image — no redeploy needed." },
+  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
   // own name/avatar in the sidebar footer instead) while still being matched
   // for the shared PageHeader and the route's capability check.

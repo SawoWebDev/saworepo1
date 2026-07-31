@@ -533,7 +533,7 @@ const SFW_ITEMS = [
     title: "Ventilation",
     paragraphs: [
       "Proper ventilation is essential for removing CO₂, pathogens and equalising the temperature inside your sauna. Most sauna kits lack this entirely.",
-      "SAWO's built-in intake vent brings oxygen-rich air directly to the heater, mixing it into the rising airflow — allowing longer, more comfortable sessions without the sluggishness of CO₂ buildup.",
+      "SAWO's built-in intake vent brings oxygen-rich air directly to the heater, mixing it into the rising airflow, allowing longer, more comfortable sessions without the sluggishness of CO₂ buildup.",
       "The integrated exhaust vent equalises temperatures throughout the room while actively drying your sauna after each use, extending its lifespan significantly.",
     ],
     specs: null,
@@ -544,7 +544,7 @@ const SFW_ITEMS = [
     title: "Lighting",
     paragraphs: [
       "The right lighting transforms a sauna session into a complete sensory experience. SAWO's integrated LED system is designed to complement the warmth of the wood and the heat of the room.",
-      "Soft, low-glare positioning around the bench and ceiling creates a calm, immersive atmosphere — never harsh or clinical. Fully dimmable to suit any mood or time of day.",
+      "Soft, low-glare positioning around the bench and ceiling creates a calm, immersive atmosphere, never harsh or clinical. Fully dimmable to suit any mood or time of day.",
       "All components are rated for the heat and humidity of a sauna environment, ensuring safe and reliable performance for years of daily use.",
     ],
     specs: null,
@@ -565,7 +565,7 @@ const SFW_ITEMS = [
     image: img_SAWO_heater_accessories_Cozy_tank_on_th12_rnd,
     title: "Excellent Heat",
     paragraphs: [
-      "Even, consistent heat is what separates a great sauna from a good one. SAWO heaters are engineered to distribute warmth uniformly across the entire room — no cold corners, no hot spots.",
+      "Even, consistent heat is what separates a great sauna from a good one. SAWO heaters are engineered to distribute warmth uniformly across the entire room, no cold corners, no hot spots.",
       "Reaching target temperatures quickly and holding them precisely, our heaters are designed for efficiency without sacrificing the deep, penetrating heat that defines the Finnish experience.",
       "Compatible with both wet and dry sauna sessions, giving you full control over the intensity and character of every session.",
     ],
@@ -576,7 +576,7 @@ const SFW_ITEMS = [
     image: img_2020ML_CD_G_SCENE,
     title: "Room Sizes",
     paragraphs: [
-      "SAWO sauna rooms are available in three size categories, designed to fit any space — from a compact home bathroom to a dedicated wellness room.",
+      "SAWO sauna rooms are available in three size categories, designed to fit any space, from a compact home bathroom to a dedicated wellness room.",
     ],
     specs: [
       { key: "Small Rooms",   val: "1.16m–1.54m wide", note: "/ 1–3 people" },
@@ -593,7 +593,7 @@ const SFW_ITEMS = [
     title: "Insulation",
     paragraphs: [
       "Proper insulation is the foundation of an efficient sauna. SAWO rooms are built with high-performance insulation that retains heat inside the cabin and prevents energy loss through the walls, floor, and ceiling.",
-      "This means faster heat-up times, lower running costs, and a more consistent temperature throughout your session — regardless of the ambient conditions outside.",
+      "This means faster heat-up times, lower running costs, and a more consistent temperature throughout your session, regardless of the ambient conditions outside.",
       "SAWO's insulation is also moisture-resistant, protecting the structural integrity of the room over years of daily use and steam exposure.",
     ],
     specs: null,
@@ -613,20 +613,20 @@ const SPD_STORY_SECTIONS = [
   {
     title: "Your Own Private Retreat",
     paragraphs: [
-      "Imagine finishing a long day and stepping into your own sauna — heat rising, muscles unwinding, the world outside falling quiet. SAWO sauna rooms bring that experience home, available in sizes from compact 1–3 person rooms all the way up to spacious 6+ person suites, so there's a perfect fit for every space and every household.",
-      "Whether you're looking for a solo sanctuary or a place to unwind with family and friends, our rooms are designed to make that luxury effortless and permanent — no gym membership, no booking ahead, just pure Finnish heat whenever you need it.",
+      "Imagine finishing a long day and stepping into your own sauna, heat rising, muscles unwinding, the world outside falling quiet. SAWO sauna rooms bring that experience home, available in sizes from compact 1–3 person rooms all the way up to spacious 6+ person suites, so there's a perfect fit for every space and every household.",
+      "Whether you're looking for a solo sanctuary or a place to unwind with family and friends, our rooms are designed to make that luxury effortless and permanent, no gym membership, no booking ahead, just pure Finnish heat whenever you need it.",
     ],
   },
   {
     title: "Authentic Finnish Craftsmanship",
     paragraphs: [
-      "SAWO has been building saunas in Finland for over 30 years, and every room reflects that heritage. Each sauna is available in cedar, aspen, or pinaceae — each wood bringing its own natural character, aroma, and feel to your sessions.",
-      "Choose from straight bench or L-type bench configurations, with left and right-hand door options to suit your space. Every detail, from the bench layout to the panel joinery, is designed the way Finns have always done it — with simplicity, quality, and longevity in mind.",
+      "SAWO has been building saunas in Finland for over 30 years, and every room reflects that heritage. Each sauna is available in cedar, aspen, or pinaceae, each wood bringing its own natural character, aroma, and feel to your sessions.",
+      "Choose from straight bench or L-type bench configurations, with left and right-hand door options to suit your space. Every detail, from the bench layout to the panel joinery, is designed the way Finns have always done it, with simplicity, quality, and longevity in mind.",
     ],
   },
 ];
 
-const SPD_FEATURE_TEXT = "Regular sauna use detoxifies naturally, improves circulation, and accelerates muscle recovery after exercise. The warmth eases stress, deepens sleep, and leaves you feeling restored — session after session. And beyond the wellness benefits, a SAWO sauna room is a lasting addition to your home that increases its value and sets it apart.";
+const SPD_FEATURE_TEXT = "Regular sauna use detoxifies naturally, improves circulation, and accelerates muscle recovery after exercise. The warmth eases stress, deepens sleep, and leaves you feeling restored, session after session. And beyond the wellness benefits, a SAWO sauna room is a lasting addition to your home that increases its value and sets it apart.";
 
 const SPD_PERF_CARDS = [
   { label: "Cedar, Aspen or Pinaceae",    detail: "Naturally aromatic, sustainably sourced" },
@@ -717,7 +717,7 @@ const SRD_PANELS = [
       "Designed for single-person use, this space-saving sauna is available in two sizes and crafted from premium cedar, making it the perfect solution for smaller spaces without compromising on the authentic sauna experience.",
     ],
     features: [
-      "Plug-and-play — ready to use instantly",
+      "Plug-and-play, ready to use instantly",
       "Space-saving compact design for 1 person",
       "Saves set-up cost and minimises downtime",
       "Premium cedar wood construction",

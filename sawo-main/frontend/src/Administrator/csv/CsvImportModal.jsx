@@ -164,7 +164,7 @@ export default function CsvImportModal({
             <div>
               <p className="form-helper">
                 Upload a CSV exported from this page (or matching its column headers). Existing
-                products are matched by <strong>slug</strong> — nothing is written until you review
+                products are matched by <strong>slug</strong>. Nothing is written until you review
                 the changes and click Import.
               </p>
               <input
@@ -177,12 +177,12 @@ export default function CsvImportModal({
           {stage === "mapping" && (
             <div>
               <p className="form-helper">
-                {rawRows.length} row(s) found. Confirm which column each CSV header maps to —
+                {rawRows.length} row(s) found. Confirm which column each CSV header maps to.
                 unmapped columns are ignored.
               </p>
               {parseErrors.length > 0 && (
                 <div className="mb-4" style={{ color: "var(--danger)", fontSize: "0.8rem" }}>
-                  {parseErrors.length} row-parsing warning(s) — malformed rows will show as errors in the preview.
+                  {parseErrors.length} row-parsing warning(s). Malformed rows will show as errors in the preview.
                 </div>
               )}
               <table className="products-table">
@@ -197,7 +197,7 @@ export default function CsvImportModal({
                           value={mapping[h] || ""}
                           onChange={e => setMapping(m => ({ ...m, [h]: e.target.value }))}
                         >
-                          <option value="">— Ignore —</option>
+                          <option value="">Ignore this column</option>
                           {COLUMNS.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
                       </td>
@@ -207,7 +207,7 @@ export default function CsvImportModal({
               </table>
               {!Object.values(mapping).includes("slug") && (
                 <p style={{ color: "var(--danger)", fontSize: "0.8rem", marginTop: 8 }}>
-                  A column must be mapped to "slug" — it's how existing products are matched.
+                  A column must be mapped to "slug", which is how existing products are matched.
                 </p>
               )}
               <div className="confirm-actions" style={{ marginTop: 16 }}>

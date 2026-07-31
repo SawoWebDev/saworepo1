@@ -122,7 +122,7 @@ function valuesEqual(col, a, b) {
 export function diffProductRow(existing, incoming) {
   const changes = {};
   for (const col of COLUMNS) {
-    if (col === "slug") continue; // the match key — never itself a "change"
+    if (col === "slug") continue; // the match key, never itself a "change"
     const before = existing ? existing[col] : undefined;
     const after = incoming[col];
     if (!valuesEqual(col, before, after)) {

@@ -113,7 +113,7 @@ export default function Thermometers() {
     <div className="relative">
       <SEO
         title="Sauna Thermometers & Hygrometers"
-        description="SAWO sauna thermometers and hygrometers — precise temperature and humidity readings to help you dial in the perfect sauna session."
+        description="SAWO sauna thermometers and hygrometers, precise temperature and humidity readings to help you dial in the perfect sauna session."
         path="/sauna/accessories/thermometers"
       />
       <style>{`

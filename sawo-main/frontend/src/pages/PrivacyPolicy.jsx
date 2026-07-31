@@ -37,7 +37,7 @@ const SECTIONS = [
       {
         subtitle: "Embedded Content from Other Websites",
         content: [
-          "Articles on this site may include embedded content (e.g., videos, images, articles, etc.). Embedded content behaves the same way as if you visited the source website directly. These external sites may collect data about you, use cookies, and track your interaction with their content — especially if you're logged in to their platform.",
+          "Articles on this site may include embedded content (e.g., videos, images, articles, etc.). Embedded content behaves the same way as if you visited the source website directly. These external sites may collect data about you, use cookies, and track your interaction with their content, especially if you're logged in to their platform.",
         ],
       },
       {
@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
     <div style={{ fontFamily: "Montserrat, sans-serif", color: "#1a1a1a" }}>
       <SEO
         title="Privacy Policy"
-        description="SAWO's privacy policy — how we collect, use, and protect your personal data across our website and services."
+        description="SAWO's privacy policy, covering how we collect, use, and protect your personal data across our website and services."
         path="/privacy-policy"
       />
       {/* Hero */}

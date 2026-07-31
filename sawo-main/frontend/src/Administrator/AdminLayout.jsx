@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSession, clearSession } from "./supabase";
 import { NAV_ITEMS, can, getLandingPath } from "./permissions";
 import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
-import { getPreviewRole, setPreviewRole } from "./previewRole";
+import { setPreviewRole, usePreviewRole } from "./previewRole";
 import PageHeader from "./PageHeader";
 import CmsSearch from "./CmsSearch.jsx";
 import logo from "./SAWO-logo.webp";
@@ -65,6 +65,25 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
       return next;
     });
   }, [activeSection]);
+
+  // Switching roles rebuilds the whole nav — open every section so the
+  // difference is visible at a glance instead of having to expand each one
+  // again to see what that role gained or lost.
+  useEffect(() => {
+    setClosedSections(new Set());
+  }, [effectiveRole]);
+
+  // Pulse the role badge on each change so the switch is noticeable even
+  // though it happens on a different page (the Profile picker).
+  const [badgePulse, setBadgePulse] = useState(false);
+  useEffect(() => {
+    if (!isPreviewing) return;
+    setBadgePulse(true);
+    // 5s: long enough to actually read the tooltip that shows alongside the
+    // pulse before it fades. Hovering re-shows it any time after that.
+    const t = setTimeout(() => setBadgePulse(false), 5000);
+    return () => clearTimeout(t);
+  }, [effectiveRole, isPreviewing]);
 
   const toggleSection = (section) => {
     setClosedSections(prev => {
@@ -161,9 +180,10 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
                   // replaces the old full-width banner above the page header.
                   <button
                     type="button"
-                    className="sidebar-footer-role sidebar-footer-role--preview"
+                    className={`sidebar-footer-role sidebar-footer-role--preview${badgePulse ? " is-pulsing" : ""}`}
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); onChangePreview(null); }}
-                    title={`Previewing as ${effectiveRole} — this shows what that role can see, but you still have ${realRole} access underneath. Click to exit.`}
+                    aria-label={`Previewing as ${effectiveRole}. Click to exit and return to ${realRole}.`}
+                    data-tip={`Previewing as ${effectiveRole}. You still have ${realRole} access underneath. Click here to exit.`}
                   >
                     <i className="fa-solid fa-eye" />
                     Exit {effectiveRole}
@@ -212,11 +232,12 @@ export default function AdminLayout({ children }) {
   const [dark,        setDark]        = useState(() => localStorage.getItem("admin_theme") === "dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed,   setCollapsed]   = useState(() => localStorage.getItem("admin_sidebar_collapsed") === "1");
-  const [previewRole, setPreviewRoleState] = useState(() => getPreviewRole());
+  // Subscribed to the shared store, so switching the role from the Profile
+  // page updates this sidebar instantly — no navigation or remount needed.
+  const previewRole = usePreviewRole();
 
   const handleChangePreview = (role) => {
     setPreviewRole(role);
-    setPreviewRoleState(role);
     // Land on a page the *newly previewed* role can actually see, rather
     // than stranding them on one it can't — a viewer has no Dashboard, so a
     // hardcoded /admin/dashboard here would bounce straight back off.

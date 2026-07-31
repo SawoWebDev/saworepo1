@@ -25,55 +25,109 @@ export const supabase = createClient(
 // session via is_superadmin() / "is this your own account" instead of
 // trusting anything the client merely asserts.
 //
-// TRANSITION: not every account has completed migration yet (each admin
-// needs to have used the password-reset email at least once since 2026-07-30
-// to have a working password on their real Auth account). This still tries
-// the real path first; if it falls through to the legacy RPC, that's proof
-// the password is correct but the account isn't migrated — Login.jsx treats
-// `viaLegacy: true` as "don't grant a session," and instead auto-sends a
-// password-reset email so the account finishes migrating through the same
-// email-link flow every other password change goes through (see
-// ResetPassword.jsx). Remove the legacy branch entirely once every row in
-// `users` has a non-null auth_user_id and has signed in via the real path
-// at least once.
+// The migration to real Auth is complete: Supabase Auth is now the only way
+// to log in. The legacy login_user RPC is kept solely as a server-side
+// proof-of-password for repairing an account whose Auth password has drifted
+// out of sync — see apiLogin below. It no longer grants a session by itself.
+// Loads the CMS profile backing a signed-in Auth user. Falls back to an
+// email match when auth_user_id hasn't been linked yet, and repairs the link
+// so the lookup is direct next time.
+async function loadProfileForAuthUser(authUserId, email) {
+  const COLS = "id, username, full_name, email, role, dark_mode, created_at";
+
+  const { data: byLink } = await supabase
+    .from("users").select(COLS).eq("auth_user_id", authUserId).maybeSingle();
+  if (byLink) return byLink;
+
+  if (!email) return null;
+  const { data: byEmail } = await supabase
+    .from("users").select(COLS).eq("email", email).maybeSingle();
+  if (!byEmail) return null;
+
+  // Self-heal the missing link. Permitted by the users_update policy
+  // (auth_user_id = auth.uid()) once this session exists; if it somehow
+  // fails, logging in still works — it just re-heals on the next login.
+  await supabase.from("users").update({ auth_user_id: authUserId }).eq("id", byEmail.id);
+  return byEmail;
+}
+
+/**
+ * Logs in against real Supabase Auth.
+ *
+ * Supabase Auth is the ONLY source of truth for logging in. The legacy
+ * `login_user` RPC is no longer a login path — it survives here purely as a
+ * server-side proof-of-password used to repair an account whose Auth
+ * password has drifted out of sync with `users.password_hash`.
+ *
+ * That drift is real and used to be permanent: Users.jsx's admin-set
+ * password calls set_user_password*, which only rewrites
+ * `users.password_hash` — it cannot touch Supabase Auth from the client
+ * (that needs the service-role key). The account was then stuck: Auth
+ * rejected the new password, the legacy RPC accepted it, and login reported
+ * "this account needs to be verified" forever, even though the account was
+ * fully verified. Now that case self-heals silently via the
+ * migrate-auth-password edge function and the user just logs in.
+ */
 export async function apiLogin(username, password) {
   const { data: email } = await supabase.rpc("get_email_for_username", { p_username: username });
 
+  // 1. Normal path — real Auth accepts the password.
   if (email) {
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
     if (!authError && authData?.user) {
-      const { data: profile, error: profileError } = await supabase
-        .from("users")
-        .select("id, username, full_name, email, role, dark_mode, created_at")
-        .eq("auth_user_id", authData.user.id)
-        .single();
-      if (!profileError && profile) {
-        return { user: profile, token: profile.id, viaLegacy: false };
-      }
-      // Real Auth succeeded but no linked `users` row was found — an
-      // account that exists in Supabase Auth but was never linked. Fall
-      // through to the legacy path rather than leaving them stuck; sign out
-      // the orphaned Auth session first so it doesn't linger unused.
+      const profile = await loadProfileForAuthUser(authData.user.id, email);
+      if (profile) return { user: profile, token: profile.id };
+
+      // Authenticated against Supabase Auth, but there's no CMS account for
+      // them at all. Don't leave a half-session lying around.
       await supabase.auth.signOut();
+      throw new Error("This login isn't linked to a CMS account. Ask a superadmin to check your user record.");
     }
   }
 
-  // Legacy path — still real verification (bcrypt-hashed, server-side, via
-  // the login_user RPC), just not backed by a Supabase Auth session yet.
-  const { data, error } = await supabase.rpc("login_user", {
+  // 2. Auth rejected it. Before calling it a bad password, check whether the
+  //    CMS-side password matches — if it does, the password is correct and
+  //    only Auth is stale.
+  const { data: legacyRows, error: legacyError } = await supabase.rpc("login_user", {
     p_username: username,
     p_password: password,
   });
+  if (legacyError) throw new Error(legacyError.message);
+  if (!legacyRows || legacyRows.length === 0) {
+    throw new Error("Incorrect username or password");
+  }
 
-  if (error) throw new Error(error.message);
-  if (!data || data.length === 0) throw new Error("Incorrect username or password");
+  // 3. Password is correct but Auth is out of sync — resync and continue.
+  //    The edge function re-verifies the password server-side itself, so
+  //    this can't be used to set a password the caller doesn't already know.
+  const { error: syncError } = await supabase.functions.invoke("migrate-auth-password", {
+    body: { username, current_password: password, new_password: password },
+  });
+  if (syncError) {
+    throw new Error(
+      "Your password is correct, but this account's sign-in could not be repaired automatically. " +
+      "Use \"Forgot password?\" to finish setting it up."
+    );
+  }
 
-  const user = data[0];
-  return {
-    user,
-    token: user.id,
-    viaLegacy: true,
-  };
+  const resolvedEmail = email || legacyRows[0].email;
+  const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
+    email: resolvedEmail,
+    password,
+  });
+  if (retryError || !retryData?.user) {
+    throw new Error(
+      "Your password is correct, but signing in failed after repairing the account. " +
+      "Please try again, or use \"Forgot password?\"."
+    );
+  }
+
+  const profile = await loadProfileForAuthUser(retryData.user.id, resolvedEmail);
+  if (!profile) {
+    await supabase.auth.signOut();
+    throw new Error("This login isn't linked to a CMS account. Ask a superadmin to check your user record.");
+  }
+  return { user: profile, token: profile.id };
 }
 
 export async function forgotPassword(username) {

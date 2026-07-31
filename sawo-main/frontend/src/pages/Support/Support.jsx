@@ -14,7 +14,7 @@ const Support = () => {
     <div className="relative">
       <SEO
         title="Support Center"
-        description="Get help with your SAWO products — FAQs, sauna calculator, user manuals, and product catalogue all in one place."
+        description="Get help with your SAWO products: FAQs, sauna calculator, user manuals, and product catalogue all in one place."
         path="/support"
       />
       <style>{`

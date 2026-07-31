@@ -146,7 +146,7 @@ export default function WorldMap({ countries, height = 320 }) {
                       setTooltip({
                         x: e.clientX - bounds.left,
                         y: e.clientY - bounds.top,
-                        label: `${name} — ${visitors} visitor${visitors !== 1 ? "s" : ""}`,
+                        label: `${name}: ${visitors} visitor${visitors !== 1 ? "s" : ""}`,
                       });
                     }}
                     onMouseLeave={() => setTooltip(null)}

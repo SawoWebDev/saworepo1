@@ -38,7 +38,7 @@ const SaunaConfigurator = () => {
     const parts = ["Room: " + roomSel.name];
     if (selections.heater) parts.push("Heater: " + heaterSel.name);
     if (accessoryNames.length > 0) parts.push("Accessories: " + accessoryNames.join(", "));
-    return menuPaths.contact + "?subject=" + encodeURIComponent("Customize My Sauna — " + parts.join(" | "));
+    return menuPaths.contact + "?subject=" + encodeURIComponent("Customize My Sauna, " + parts.join(" | "));
   }, [selections.room, selections.heater, accessoryNames, roomSel, heaterSel]);
 
   const firstAccessoryImg = selections.accessory.length > 0
@@ -100,7 +100,7 @@ const SaunaConfigurator = () => {
     <div className="sawo-configurator">
       <div className="sawo-cfg-header">
         <div className="cfg-title">Customize Your Dream Sauna</div>
-        <p className="cfg-desc">Select your ideal room, heater, and accessories — then send us your configuration for a personalized quote.</p>
+        <p className="cfg-desc">Select your ideal room, heater, and accessories, then send us your configuration for a personalized quote.</p>
       </div>
 
       <div className="sawo-steps">

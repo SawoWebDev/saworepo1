@@ -44,7 +44,7 @@ const SteamGenerators = () => {
     <div className="relative">
       <SEO
         title="Steam Generators"
-        description="SAWO steam generators — the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance."
+        description="SAWO steam generators deliver the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance."
         path="/steam/generators"
       />
 

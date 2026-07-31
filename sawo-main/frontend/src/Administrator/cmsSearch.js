@@ -11,7 +11,7 @@ const EXTRA_SEARCH_ENTRIES = [
   {
     label: "Top Pages",
     keywords: ["top pages", "most visited", "popular pages", "page views"],
-    description: "See which pages get the most traffic — inside Analytics.",
+    description: "See which pages get the most traffic, inside Analytics.",
     path: "/admin/analytics",
     anchor: "analytics-top-pages",
     section: "Analytics",
@@ -20,7 +20,7 @@ const EXTRA_SEARCH_ENTRIES = [
   {
     label: "Top Countries",
     keywords: ["top countries", "visitor location", "geo", "country breakdown"],
-    description: "See where your visitors come from — inside Analytics.",
+    description: "See where your visitors come from, inside Analytics.",
     path: "/admin/analytics",
     anchor: "analytics-top-countries",
     section: "Analytics",
@@ -29,7 +29,7 @@ const EXTRA_SEARCH_ENTRIES = [
   {
     label: "Traffic Over Time",
     keywords: ["daily traffic", "traffic chart", "sessions over time", "visitors chart"],
-    description: "Daily visitor traffic chart — inside Analytics.",
+    description: "Daily visitor traffic chart, inside Analytics.",
     path: "/admin/analytics",
     anchor: "analytics-traffic-chart",
     section: "Analytics",
