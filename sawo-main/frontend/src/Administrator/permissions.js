@@ -51,7 +51,10 @@ export const CAPABILITY_MAP = {
   "users.delete":             ["superadmin"],
 
   // Navigation / Pages
-  "page.dashboard":           ["viewer", "editor", "admin", "superadmin"],
+  // Viewers deliberately have no Dashboard — they land straight on the
+  // Products catalog instead (see getLandingPath below). Nothing on the
+  // Dashboard is actionable for a read-only role, so it's noise for them.
+  "page.dashboard":           ["editor", "admin", "superadmin"],
   "page.profile":             ["viewer", "editor", "admin", "superadmin"],
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
@@ -127,8 +130,27 @@ export const NAV_ITEMS = [
 
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
   { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image — no redeploy needed." },
-  { to: "/admin/profile",         label: "My Profile",       icon: "fa-solid fa-user",           cap: "page.profile",     section: "System",   description: "Update your own username, name, and password." },
+  // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
+  // own name/avatar in the sidebar footer instead) while still being matched
+  // for the shared PageHeader and the route's capability check.
+  { to: "/admin/profile",         label: "My Profile",       icon: "fa-solid fa-user",           cap: "page.profile",     section: "System",   description: "Update your own username, name, and password.", hidden: true },
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
   { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
   { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },
 ];
+
+/**
+ * Where a given role should land when it has nowhere specific to go — the
+ * /admin index, or after being bounced off a page it can't access.
+ *
+ * This MUST be role-aware rather than a hardcoded "/admin/dashboard": viewers
+ * no longer have page.dashboard, so sending them there would bounce them
+ * straight back off it again, into an infinite redirect loop. Falls back
+ * through the nav in order (Products is first for a viewer), then to Profile,
+ * which every role can always reach.
+ */
+export function getLandingPath(role) {
+  if (can(role, "page.dashboard")) return "/admin/dashboard";
+  const first = NAV_ITEMS.find((item) => !item.hidden && can(role, item.cap));
+  return first ? first.to : "/admin/profile";
+}

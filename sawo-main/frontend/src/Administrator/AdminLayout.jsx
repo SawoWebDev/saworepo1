@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSession, clearSession } from "./supabase";
-import { NAV_ITEMS, can } from "./permissions";
+import { NAV_ITEMS, can, getLandingPath } from "./permissions";
 import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
+import { getPreviewRole, setPreviewRole } from "./previewRole";
 import PageHeader from "./PageHeader";
 import CmsSearch from "./CmsSearch.jsx";
 import logo from "./SAWO-logo.webp";
@@ -31,8 +32,10 @@ function groupBySection(nav) {
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, collapsed, onToggleCollapse }) {
-  const sections = groupBySection(nav);
+function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, collapsed, onToggleCollapse, realRole, effectiveRole, isPreviewing, onChangePreview }) {
+  // `hidden` items (My Profile) are routable and get a PageHeader, but are
+  // reached from the footer identity card instead of the nav list.
+  const sections = groupBySection(nav.filter((item) => !item.hidden));
   const initial = (session.user.username || "?").charAt(0).toUpperCase();
 
   // Whichever section holds the page currently open (in the iframe/route) —
@@ -139,16 +142,37 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
           })}
         </nav>
 
-        {/* Footer — frosted user card with avatar + actions */}
+        {/* Footer — frosted user card with avatar + actions. The identity
+            block is the way into My Profile (it's deliberately not a sidebar
+            nav item), hence the link + hover affordance. */}
         <div className="sidebar-footer">
           <div className="sidebar-footer-card">
-            <div className="sidebar-footer-id">
+            <Link
+              to="/admin/profile"
+              className="sidebar-footer-id sidebar-footer-id--link"
+              onClick={onClose}
+              title="View your profile"
+            >
               <div className="sidebar-footer-avatar">{initial}</div>
               <div className="sidebar-footer-user">
                 <div className="sidebar-footer-username">{session.user.username}</div>
-                <div className="sidebar-footer-role">{session.user.role || "admin"}</div>
+                {isPreviewing ? (
+                  // While previewing, the role line doubles as the way out —
+                  // replaces the old full-width banner above the page header.
+                  <button
+                    type="button"
+                    className="sidebar-footer-role sidebar-footer-role--preview"
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onChangePreview(null); }}
+                    title={`Previewing as ${effectiveRole} — this shows what that role can see, but you still have ${realRole} access underneath. Click to exit.`}
+                  >
+                    <i className="fa-solid fa-eye" />
+                    Exit {effectiveRole}
+                  </button>
+                ) : (
+                  <div className="sidebar-footer-role">{effectiveRole || "admin"}</div>
+                )}
               </div>
-            </div>
+            </Link>
             <div className="sidebar-footer-actions">
               <button
                 type="button"
@@ -169,6 +193,10 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
               </button>
             </div>
           </div>
+
+          {/* The "Preview as role" picker now lives on the Profile page
+              (Profile.jsx) — reachable by clicking your name above. Only the
+              exit affordance stays here, on the role line itself. */}
         </div>
       </aside>
     </>
@@ -184,6 +212,17 @@ export default function AdminLayout({ children }) {
   const [dark,        setDark]        = useState(() => localStorage.getItem("admin_theme") === "dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed,   setCollapsed]   = useState(() => localStorage.getItem("admin_sidebar_collapsed") === "1");
+  const [previewRole, setPreviewRoleState] = useState(() => getPreviewRole());
+
+  const handleChangePreview = (role) => {
+    setPreviewRole(role);
+    setPreviewRoleState(role);
+    // Land on a page the *newly previewed* role can actually see, rather
+    // than stranding them on one it can't — a viewer has no Dashboard, so a
+    // hardcoded /admin/dashboard here would bounce straight back off.
+    const nextRole = role || session?.user?.role;
+    navigate(getLandingPath(nextRole));
+  };
 
   // permissions.js's can() reads capability overrides synchronously from a
   // module-level cache that's populated asynchronously (see
@@ -219,8 +258,10 @@ export default function AdminLayout({ children }) {
 
   if (!session) return null;
 
-  const role = session.user.role;
-  const nav  = NAV_ITEMS.filter(item => can(role, item.cap));
+  const realRole = session.user.role;
+  const effectiveRole = realRole === "superadmin" && previewRole ? previewRole : realRole;
+  const isPreviewing = effectiveRole !== realRole;
+  const nav = NAV_ITEMS.filter(item => can(effectiveRole, item.cap));
 
   // Find current page label for mobile topbar
   const currentNav = nav.find(item => location.pathname.startsWith(item.to));
@@ -262,6 +303,10 @@ export default function AdminLayout({ children }) {
         onClose={() => setSidebarOpen(false)}
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed(c => !c)}
+        realRole={realRole}
+        effectiveRole={effectiveRole}
+        isPreviewing={isPreviewing}
+        onChangePreview={handleChangePreview}
       />
 
       {/* ── Main content ───────────────────────────────────────────────── */}
@@ -276,11 +321,16 @@ export default function AdminLayout({ children }) {
             description={currentNav.description}
             dark={dark}
             setDark={setDark}
-            actions={<CmsSearch role={role} />}
+            actions={<CmsSearch role={effectiveRole} />}
           />
         )}
         <div className="admin-main-content" style={{ background: dark ? "#241d16" : "#f7f5f2" }}>
-          {React.cloneElement(children, { currentUser: session.user })}
+          {/* currentUser.role reflects the preview (if any) — every page's
+              own getPerms(currentUser)/can() checks derive from this, so
+              buttons/actions hide correctly with no per-page changes needed.
+              currentUser.id stays the real user's, since a preview never
+              touches actual identity or database privilege. */}
+          {React.cloneElement(children, { currentUser: { ...session.user, role: effectiveRole } })}
         </div>
       </main>
     </div>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { apiLogin, saveSession, forgotPassword, getSession } from "./supabase";
+import { getLandingPath } from "./permissions";
 import "./admin.css";
 import logo from "./SAWO-logo.webp";
 
@@ -36,7 +37,7 @@ export default function Login() {
     }
 
     const session = getSession();
-    if (session) navigate("/admin/dashboard");
+    if (session) navigate(getLandingPath(session.user?.role));
   }, [navigate, location.state]);
 
   // Once a reset link has been sent (either the user clicked "Forgot
@@ -73,7 +74,9 @@ export default function Login() {
       }
 
       saveSession(token, user, remember);
-      navigate("/admin/dashboard");
+      // Role-aware landing — a viewer has no Dashboard and would otherwise
+      // get bounced off it straight to Products anyway.
+      navigate(getLandingPath(user?.role));
     } catch (err) {
       setError(err.message || "Login failed");
     } finally {
