@@ -113,7 +113,7 @@ const Sauna = () => {
       img: img_Innova_Classic_2_0,
       title: "Innova Series",
       href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Innova Series")}`,
-      desc: "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface—no separate power controller needed.",
+      desc: "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface, no separate power controller needed.",
     },
     {
       img: img_saunova_2_0_user_interface,
@@ -133,7 +133,7 @@ const Sauna = () => {
     <div className="relative">
       <SEO
         title="Finnish Sauna Heaters, Controls & Accessories"
-        description="Explore SAWO's full Finnish sauna range — heaters, controls, and accessories engineered for over 30 years of authentic sauna warmth and comfort."
+        description="Explore SAWO's full Finnish sauna range: heaters, controls, and accessories engineered for over 30 years of authentic sauna warmth and comfort."
         path="/sauna"
       />
       {/* ===================== */}
@@ -198,7 +198,7 @@ const Sauna = () => {
               margin: "16px auto 0",
             }}
           >
-            Experience the authentic Finnish sauna with our heaters — Smooth
+            Experience the authentic Finnish sauna with our heaters: Smooth
             heat, humidity, and the perfect balance for ultimate relaxation.
           </p>
 

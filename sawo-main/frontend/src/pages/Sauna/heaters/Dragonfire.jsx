@@ -201,7 +201,7 @@ const Dragonfire = () => {
     <div className="relative">
       <SEO
         title="Dragonfire Sauna Heaters"
-        description="SAWO Dragonfire Series — artistic sauna heaters designed by Stefan Lindfors, blending striking design with cutting-edge heating technology."
+        description="SAWO Dragonfire Series: artistic sauna heaters designed by Stefan Lindfors, blending striking design with cutting-edge heating technology."
         path="/sauna/heaters/dragonfire"
       />
       <style>{`
@@ -336,7 +336,7 @@ const Dragonfire = () => {
               <p className="wm-eyebrow">SAWO HEATERS</p>
               <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
               <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
-              <p className="wm-why-desc">User-Friendly Controls — Easily adjust temperature and time settings for your perfect sauna experience.</p>
+              <p className="wm-why-desc">User-Friendly Controls: Easily adjust temperature and time settings for your perfect sauna experience.</p>
               <div style={{ marginTop: "20px" }}>
                 <a href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
               </div>

@@ -144,7 +144,7 @@ const Sustainability = () => {
     <div className="relative">
       <SEO
         title="Sustainability"
-        description="How SAWO builds sustainably — responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room."
+        description="How SAWO builds sustainably, using responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room."
         path="/about/sustainability"
       />
       {/* Leaves container */}

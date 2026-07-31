@@ -112,7 +112,7 @@ export default function ClocksSandtimers() {
     <div className="relative">
       <SEO
         title="Sauna Clocks & Sand Timers"
-        description="SAWO sauna clocks and sand timers — classic timekeeping accessories to help you track your sauna sessions with ease."
+        description="SAWO sauna clocks and sand timers, classic timekeeping accessories to help you track your sauna sessions with ease."
         path="/sauna/accessories/clocks-sandtimers"
       />
       <style>{`

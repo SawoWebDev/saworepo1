@@ -329,7 +329,7 @@ export default function AllProducts() {
     <>
       <SEO
         title="All Products"
-        description="Browse SAWO's complete product range — sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
+        description="Browse SAWO's complete product range: sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
         path="/products"
       />
       <style>{`

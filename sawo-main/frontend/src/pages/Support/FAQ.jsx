@@ -28,7 +28,7 @@ const faqSections = [
       {
         question: "What is Finnish sauna?",
         answer:
-          "Finnish sauna basically is a room with wooden walls, ceiling and benches. The sauna has for centuries been a place for relaxation. The heart of the sauna is the heater, which is used to warm stones either by using electricity or by burning wood. Unquestionably, what makes a sauna — a Finnish sauna is the act of pouring water from pail to stones. This is called \"löyly\" in Finnish. Depending on how much water you will throw to the stones, the hotter the temperature will be before slowly getting cooler. The changes of temperatures, combined with regular sauna usage has been scientifically proven to have several health benefits. Regular sauna bathing will specifically improve brain and mental health, protect from cardiac health problems and boost immune system.",
+          "Finnish sauna basically is a room with wooden walls, ceiling and benches. The sauna has for centuries been a place for relaxation. The heart of the sauna is the heater, which is used to warm stones either by using electricity or by burning wood. Unquestionably, what makes a sauna, a Finnish sauna is the act of pouring water from pail to stones. This is called \"löyly\" in Finnish. Depending on how much water you will throw to the stones, the hotter the temperature will be before slowly getting cooler. The changes of temperatures, combined with regular sauna usage has been scientifically proven to have several health benefits. Regular sauna bathing will specifically improve brain and mental health, protect from cardiac health problems and boost immune system.",
       },
     ],
   },
@@ -305,7 +305,7 @@ export default function FAQ() {
     <div style={{ fontFamily: "Montserrat, sans-serif" }}>
       <SEO
         title="Frequently Asked Questions"
-        description="Answers to common questions about SAWO Finnish saunas, heaters, steam generators, and sauna care — from heat sources to wood types."
+        description="Answers to common questions about SAWO Finnish saunas, heaters, steam generators, and sauna care, from heat sources to wood types."
         path="/support/faq"
       />
       <style>{`

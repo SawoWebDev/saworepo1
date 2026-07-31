@@ -176,7 +176,7 @@ const Contact = () => {
     <div className="relative">
       <SEO
         title="Contact Us"
-        description="Get in touch with SAWO — technical support, sales inquiries, and distributor contacts for our global network of representative offices."
+        description="Get in touch with SAWO: technical support, sales inquiries, and distributor contacts for our global network of representative offices."
         path="/contact"
       />
       <style>{`
@@ -995,7 +995,7 @@ const Contact = () => {
         <div className="ct-support-header">
           <h2 className="ct-support-title">Looking for Answers First?</h2>
           <p className="ct-support-desc">
-            Many questions are already answered in our support resources — check them out before
+            Many questions are already answered in our support resources. Check them out before
             waiting for a reply.
           </p>
         </div>

@@ -176,7 +176,7 @@ function ProductCatalogue() {
     <>
       <SEO
         title="Product Catalogue"
-        description="Browse the full SAWO product catalogue — sauna heaters, sauna rooms, and accessories in one searchable listing."
+        description="Browse the full SAWO product catalogue, sauna heaters, sauna rooms, and accessories in one searchable listing."
         path="/support/catalogue"
       />
       <style>{`

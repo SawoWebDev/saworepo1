@@ -111,7 +111,7 @@ export default function Kivistone() {
     <div className="relative">
       <SEO
         title="Kivistone Soapstone Collection"
-        description="SAWO Kivistone — a soapstone accessory collection combining natural Finnish stone with heat-retaining design for a refined sauna experience."
+        description="SAWO Kivistone is a soapstone accessory collection combining natural Finnish stone with heat-retaining design for a refined sauna experience."
         path="/sauna/accessories/kivistone"
       />
       <style>{`

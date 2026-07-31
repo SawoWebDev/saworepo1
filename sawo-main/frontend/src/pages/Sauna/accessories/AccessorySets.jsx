@@ -111,7 +111,7 @@ export default function AccessorySets() {
     <div className="relative">
       <SEO
         title="Sauna Accessory Sets"
-        description="SAWO sauna accessory sets — curated collections pairing pails, ladles, thermometers, and more for a complete, coordinated sauna look."
+        description="SAWO sauna accessory sets, curated collections pairing pails, ladles, thermometers, and more for a complete, coordinated sauna look."
         path="/sauna/accessories/accessory-sets"
       />
       <style>{`
@@ -215,7 +215,7 @@ export default function AccessorySets() {
       <WhyChooseSawo
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Accessory Sets"
-        description="SAWO accessory sets are thoughtfully curated to pair the finest pails, ladles, thermometers, and accessories in one complete package — saving you time and ensuring every piece works in perfect harmony."
+        description="SAWO accessory sets are thoughtfully curated to pair the finest pails, ladles, thermometers, and accessories in one complete package, saving you time and ensuring every piece works in perfect harmony."
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />

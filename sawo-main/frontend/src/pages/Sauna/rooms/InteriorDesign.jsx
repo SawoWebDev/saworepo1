@@ -37,7 +37,7 @@ const InteriorDesign = () => {
     <div className="relative">
       <SEO
         title="Sauna Interior Designs"
-        description="Explore SAWO sauna interior design options — wood finishes, layouts, and styling choices to personalize your sauna room."
+        description="Explore SAWO sauna interior design options, wood finishes, layouts, and styling choices to personalize your sauna room."
         path="/sauna/rooms/interior-designs"
       />
 
@@ -155,7 +155,7 @@ const InteriorDesign = () => {
               <h3>Aspen</h3>
               <p>
                 Light in color and smooth to the touch, Aspen is hypoallergenic
-                and odorless — ideal for those who prefer a clean, neutral
+                and odorless, ideal for those who prefer a clean, neutral
                 sauna atmosphere.
               </p>
             </div>

@@ -170,7 +170,7 @@ export default function SaunaCalculator() {
     <div id="sawo-hc-wrap">
       <SEO
         title="Sauna Calculator"
-        description="Find the right SAWO heater for your sauna — use our calculator to match room size and volume to the ideal heater power output."
+        description="Find the right SAWO heater for your sauna by using our calculator to match room size and volume to the ideal heater power output."
         path="/support/sauna-calculator"
       />
       <style>{`
@@ -631,7 +631,7 @@ export default function SaunaCalculator() {
             <div className="sawo-hc-result-half">
               <div className="sawo-hc-result-card-label">Sauna Volume</div>
               <div className="sawo-hc-result-card-val">
-                {volume !== null ? volume : "—"}
+                {volume !== null ? volume : "-"}
                 <small>m³</small>
               </div>
             </div>
@@ -639,7 +639,7 @@ export default function SaunaCalculator() {
             <div className="sawo-hc-result-half">
               <div className="sawo-hc-result-card-label">Recommended Power</div>
               <div className="sawo-hc-result-card-val">
-                {matchKw !== null ? matchKw : "—"}
+                {matchKw !== null ? matchKw : "-"}
                 <small>kW</small>
               </div>
             </div>

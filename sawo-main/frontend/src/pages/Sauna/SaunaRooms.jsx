@@ -106,7 +106,7 @@ const SaunaConfigurator = () => {
     parts.push('Room: ' + roomSel.name);
     if (selections.heater) parts.push('Heater: ' + heaterSel.name);
     if (accessoryNames.length > 0) parts.push('Accessories: ' + accessoryNames.join(', '));
-    const subject = 'Customize My Sauna — ' + parts.join(' | ');
+    const subject = 'Customize My Sauna, ' + parts.join(' | ');
     return menuPaths.contact + '?subject=' + encodeURIComponent(subject);
   })();
 
@@ -114,7 +114,7 @@ const SaunaConfigurator = () => {
     <div className="sawo-configurator">
       <div className="sawo-cfg-header">
         <div className="cfg-title">Customize Your Dream Sauna</div>
-        <p className="cfg-desc">Select your ideal room, heater, and accessories — then send us your configuration for a personalized quote.</p>
+        <p className="cfg-desc">Select your ideal room, heater, and accessories, then send us your configuration for a personalized quote.</p>
       </div>
 
       <div className="sawo-steps">
@@ -254,7 +254,7 @@ const SaunaRooms = () => {
     <div>
       <SEO
         title="Sauna Rooms"
-        description="Explore SAWO sauna rooms — Standard, Glass Front, Outdoor, and Infrared designs crafted for a complete, therapeutic sauna experience."
+        description="Explore SAWO sauna rooms: Standard, Glass Front, Outdoor, and Infrared designs crafted for a complete, therapeutic sauna experience."
         path="/sauna/rooms"
       />
       {/* HERO */}

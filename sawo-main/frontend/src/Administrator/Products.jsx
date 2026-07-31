@@ -79,7 +79,7 @@ function getImageUrl(product, field, dataSource) {
 function derivedSeoDescription(form) {
   const raw = form.short_description || form.description || "";
   const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-  if (!text) return `${form.name || "Product"} by SAWO — premium Finnish sauna equipment.`;
+  if (!text) return `${form.name || "Product"} by SAWO. Premium Finnish sauna equipment.`;
   return text.length > 160 ? `${text.slice(0, 157)}...` : text;
 }
 
@@ -2703,8 +2703,8 @@ export default function Products({ currentUser }) {
   const [activeAccessorySubcats, setActiveAccessorySubcats] = useState([]); // multi-select pills, only used when quickFilter === "accessories"
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("grid");
-  const [dataSource,   setDataSource]   = useState("local"); // "live" or "local" — local shown first, switch to Live manually
-  const itemsPerPage = 20; // "Show" limit selector removed — fixed page size
+  const [dataSource,   setDataSource]   = useState("local"); // "live" or "local", local shown first, switch to Live manually
+  const itemsPerPage = 20; // "Show" limit selector removed, fixed page size
   const [currentPage,  setCurrentPage]  = useState(1);
 
   const [selected,              setSelected]              = useState(new Set());
@@ -3523,7 +3523,7 @@ export default function Products({ currentUser }) {
                 padding: "6px 12px", borderRadius: 20,
               }}>
                 <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved products</strong>. Read-only — switch to Live to create, edit, or delete products.
+                Viewing <strong>locally saved products</strong>. Read-only. Switch to Live to create, edit, or delete products.
               </span>
             )}
             {perms.can("products.create") && dataSource === "live" && (
@@ -4221,7 +4221,7 @@ export default function Products({ currentUser }) {
                 onChange={e => setForm(f => ({ ...f, meta_title: e.target.value }))}
                 placeholder={form.name || "Inherits product name"} />
               <p className="form-helper">
-                {form.meta_title.length}/60 {form.meta_title.length > 60 && "— longer titles may get truncated in search results"}
+                {form.meta_title.length}/60 {form.meta_title.length > 60 && "(longer titles may get truncated in search results)"}
               </p>
             </div>
             <div className="form-group" style={{ marginBottom: 0 }}>
@@ -4234,7 +4234,7 @@ export default function Products({ currentUser }) {
                 className="form-textarea"
               />
               <p className="form-helper">
-                {form.meta_description.length}/155 {form.meta_description.length > 155 && "— longer descriptions may get truncated in search results"}
+                {form.meta_description.length}/155 {form.meta_description.length > 155 && "(longer descriptions may get truncated in search results)"}
               </p>
             </div>
             <div>
@@ -4281,8 +4281,8 @@ export default function Products({ currentUser }) {
                 onChange={e => setForm(f => ({ ...f, publish_at: e.target.value }))}
                 helper={form.publish_at
                   ? new Date(form.publish_at) > new Date()
-                    ? `Scheduled — goes live ${new Date(form.publish_at).toLocaleString()}`
-                    : "This date is in the past — will go live on next page load"
+                    ? `Scheduled: goes live ${new Date(form.publish_at).toLocaleString()}`
+                    : "This date is in the past, so it will go live on next page load"
                   : "Leave empty to stay a draft indefinitely. Under GitHub/JSON File mode the product must be synced before its publish date."}
               />
             </div>
@@ -4648,7 +4648,7 @@ function CheckSyncModal({ open, loading, report, events, onClose, onApply, apply
                   <div>
                     <div style={{ fontSize: "0.82rem", color: "var(--text)", fontWeight: 500 }}>Changes applied successfully. Local files are now up to date.</div>
                     <div style={{ fontSize: "0.78rem", color: "var(--text-2)", marginTop: 6 }}>
-                      <strong>What's next:</strong> the live site rebuilds automatically from this push — changes typically appear within a few minutes. You can safely close this window.
+                      <strong>What's next:</strong> the live site rebuilds automatically from this push, so changes typically appear within a few minutes. You can safely close this window.
                     </div>
                   </div>
                 </div>

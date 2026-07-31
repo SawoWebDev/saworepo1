@@ -22,7 +22,7 @@ const LatestNews = () => {
     <div className="relative">
       <SEO
         title="Latest News"
-        description="News, trade shows, and updates from SAWO — the latest on our Finnish sauna heaters, steam generators, and sauna room innovations."
+        description="News, trade shows, and updates from SAWO, covering our Finnish sauna heaters, steam generators, and sauna room innovations."
         path="/about/news"
       />
       <style>{`
@@ -409,7 +409,7 @@ const LatestNews = () => {
                   This time around, our exhibition highlights have to do with exceptional innovation in sauna controls and heater design. For further information about these upcoming products, be on the lookout for updates on our website and in our social media channels.
                 </p>
                 <p>
-                  We'll also unveil our new accessory collections—from Essential and Rustic sets to Signature and Dragon designs. Each set is crafted to complement each sauna's aesthetic while focusing on the user's personal sauna experience.
+                  We'll also unveil our new accessory collections, from Essential and Rustic sets to Signature and Dragon designs. Each set is crafted to complement each sauna's aesthetic while focusing on the user's personal sauna experience.
                 </p>
                 <p>
                   Sauna is more than a room, it provides a wellness lifestyle. At both Aquanale and Piscina Barcelona, you will discover how our products blend authenticity, design, and modern innovations to transform everyday routines into moments of true wellness.
@@ -458,7 +458,7 @@ const LatestNews = () => {
                 <p>
                   We extend our thank you to the Aboitiz Group for their support throughout this journey, to our partners, and to every member of the SAWO community for making this possible.
                 </p>
-                <p>We look forward to shaping the next era of sauna innovation—together.</p>
+                <p>We look forward to shaping the next era of sauna innovation, together.</p>
               </div>
             </div>
 
@@ -485,7 +485,7 @@ const LatestNews = () => {
 
               <div className="ln-body">
                 <p>
-                  We believe that our people are the driving force behind every achievement. As we celebrate the expansion of Plant 4 in Cebu, we are opening a new chapter—not only for production, but also for people. We are now looking for passionate individuals to join our team in Cebu, Philippines.
+                  We believe that our people are the driving force behind every achievement. As we celebrate the expansion of Plant 4 in Cebu, we are opening a new chapter, not only for production, but also for people. We are now looking for passionate individuals to join our team in Cebu, Philippines.
                 </p>
                 <p>
                   We are looking for talents who bring experience in the sauna and wellness industry, and who are eager to contribute to a global brand that delivers authentic Finnish sauna experiences to over 90 countries and counting. If you are a self-starter that thrives in a dynamic, tropical setting and wants to be part of a company that blends tradition with innovation, we are the right fit for you.

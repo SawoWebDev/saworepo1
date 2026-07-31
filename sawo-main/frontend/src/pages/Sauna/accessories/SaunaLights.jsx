@@ -112,7 +112,7 @@ export default function SaunaLights() {
     <div className="relative">
       <SEO
         title="Sauna Lights & Covers"
-        description="SAWO sauna lights and light covers — safe, ambient lighting solutions designed to withstand high heat and humidity."
+        description="SAWO sauna lights and light covers, safe, ambient lighting solutions designed to withstand high heat and humidity."
         path="/sauna/accessories/lights-covers"
       />
       <style>{`
@@ -154,7 +154,7 @@ export default function SaunaLights() {
       <section className="wm-section">
         <div className="wm-container text-center">
           <h2 className="wm-products-title">Sauna Lighting & Light Covers</h2>
-          <p className="wm-products-desc">Create the perfect ambience with a proper play of lighting. Our different light shades allow you to create the feel of soothing and warm — from soft glows to warm golden tones.</p>
+          <p className="wm-products-desc">Create the perfect ambience with a proper play of lighting. Our different light shades allow you to create the feel of soothing and warm, from soft glows to warm golden tones.</p>
         </div>
       </section>
 
@@ -216,7 +216,7 @@ export default function SaunaLights() {
       <WhyChooseSawo
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Lighting"
-        description="SAWO sauna lights and covers are built for the demanding sauna environment — heat-resistant, moisture-proof, and beautifully designed to elevate your relaxation space."
+        description="SAWO sauna lights and covers are built for the demanding sauna environment, heat-resistant, moisture-proof, and beautifully designed to elevate your relaxation space."
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf"
         brochureLabel="VIEW BROCHURE"
       />

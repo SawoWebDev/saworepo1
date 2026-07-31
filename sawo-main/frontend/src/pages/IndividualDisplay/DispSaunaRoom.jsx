@@ -408,7 +408,7 @@ export default function SaunaRoomDisplay() {
   const seoDescription = (() => {
     const raw = room.description || "";
     const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-    if (!text) return `${room.name} by SAWO — a premium Finnish sauna room.`;
+    if (!text) return `${room.name} by SAWO. A premium Finnish sauna room.`;
     return text.length > 160 ? `${text.slice(0, 157)}...` : text;
   })();
 

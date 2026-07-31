@@ -332,7 +332,7 @@ const SaunaRoomViewer = () => {
     const model = cfg.isFlat ? current.size : cleanModelNumber(current.size, cfg);
     const benchType = cfg.benchTypes[current.bench]?.name || "Standard Bench";
     const sideStr = cfg.isFlat ? "" : current.side;
-    const subject = `Customize My Sauna — Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
+    const subject = `Customize My Sauna: Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
     return `${menuPaths.contact}?subject=${encodeURIComponent(subject)}`;
   }, [current, cfg]);
 
@@ -535,7 +535,7 @@ const SaunaRoomViewer = () => {
             <div className="bench-design-label">Bench Design</div>
             <div className="bench-design-visual">
               <div className="bench-design-name">
-                {currentBench ? currentBench.name : "—"}
+                {currentBench ? currentBench.name : "-"}
               </div>
               <div className={`bench-icon${currentBench ? " " + currentBench.class : ""}`}>
                 {currentBench && (
@@ -553,12 +553,12 @@ const SaunaRoomViewer = () => {
                   ? cfg.isFlat
                     ? current.size
                     : cleanModelNumber(current.size, cfg)
-                  : "—"}
+                  : "-"}
               </div>
             </div>
             <div className="spec-item">
               <div className="spec-label">Capacity</div>
-              <div className="spec-value">{currentSizeData ? currentSizeData.capacity : "—"}</div>
+              <div className="spec-value">{currentSizeData ? currentSizeData.capacity : "-"}</div>
             </div>
           </div>
 
@@ -566,15 +566,15 @@ const SaunaRoomViewer = () => {
             <div className="dimensions-title">Dimensions</div>
             <div className="dimension-grid">
               <div className="dimension-box">
-                <div className="value">{currentSizeData ? currentSizeData.width : "—"}</div>
+                <div className="value">{currentSizeData ? currentSizeData.width : "-"}</div>
                 <div className="label">Width</div>
               </div>
               <div className="dimension-box">
-                <div className="value">{currentSizeData ? currentSizeData.depth : "—"}</div>
+                <div className="value">{currentSizeData ? currentSizeData.depth : "-"}</div>
                 <div className="label">Depth</div>
               </div>
               <div className="dimension-box">
-                <div className="value">{currentSizeData ? currentSizeData.height : "—"}</div>
+                <div className="value">{currentSizeData ? currentSizeData.height : "-"}</div>
                 <div className="label">Height</div>
               </div>
             </div>

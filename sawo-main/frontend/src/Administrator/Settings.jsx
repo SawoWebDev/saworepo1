@@ -49,13 +49,13 @@ async function fetchHeaderPrefs() {
 }
 
 const LAYOUT_OPTIONS = [
-  { value: "layout1", label: "Layout 1", description: "Sauna, Steam, Infrared, Support, Contact Us, About Us and Careers as separate top-level items — Sauna and Steam each have their own dropdown." },
+  { value: "layout1", label: "Layout 1", description: "Sauna, Steam, Infrared, Support, Contact Us, About Us and Careers as separate top-level items. Sauna and Steam each have their own dropdown." },
   { value: "layout2", label: "Layout 2", description: "Single \"Products\" mega-menu covers Sauna/Steam/Infrared, plus Support and About Us (Careers nested under About Us)." },
 ];
 
 const NAV_STYLE_OPTIONS = [
-  { value: "style1", label: "Style 1 — Underline", description: "Top-level nav items get a growing underline on hover/active." },
-  { value: "style2", label: "Style 2 — Brown Background", description: "Top-level nav items get a solid brand-brown pill (beveled like the CMS's primary buttons) on hover/active instead of an underline." },
+  { value: "style1", label: "Style 1: Underline", description: "Top-level nav items get a growing underline on hover/active." },
+  { value: "style2", label: "Style 2: Brown Background", description: "Top-level nav items get a solid brand-brown pill (beveled like the CMS's primary buttons) on hover/active instead of an underline." },
 ];
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js's
@@ -237,7 +237,7 @@ export default function Settings({ currentUser }) {
         username: currentUser?.username,
         user_id: currentUser?.id,
       });
-      add(`Header Layout saved as ${next === "layout1" ? "Layout 1" : "Layout 2"} (preview only — see note below)`, "success");
+      add(`Header Layout saved as ${next === "layout1" ? "Layout 1" : "Layout 2"} (preview only, see note below)`, "success");
     } catch (err) {
       setError("Failed to save header layout: " + err.message);
       add("Failed to save header layout", "error");
@@ -260,7 +260,7 @@ export default function Settings({ currentUser }) {
         username: currentUser?.username,
         user_id: currentUser?.id,
       });
-      add(`Header Nav Style saved as ${next === "style1" ? "Style 1 — Underline" : "Style 2 — Brown Background"} (preview only — see note below)`, "success");
+      add(`Header Nav Style saved as ${next === "style1" ? "Style 1: Underline" : "Style 2: Brown Background"} (preview only, see note below)`, "success");
     } catch (err) {
       setError("Failed to save header nav style: " + err.message);
       add("Failed to save header nav style", "error");
@@ -454,7 +454,7 @@ export default function Settings({ currentUser }) {
         <p className="text-xs text-[var(--text-3)] mt-4">
           Only affects the switcher itself. A hidden language's pages still exist, stay indexable,
           and remain in the sitemap. Adding a brand-new language still requires a build-time change
-          in the site's codebase — it cannot be added from here.
+          in the site's codebase, so it cannot be added from here.
         </p>
       </div>
 
@@ -492,7 +492,7 @@ export default function Settings({ currentUser }) {
               Header Preview
             </h3>
             <p className="text-sm text-[var(--text-3)]">
-              Not live yet — the public header is fixed in code for page-speed reasons.
+              Not live yet. The public header is fixed in code for page-speed reasons.
               These picks are saved and shown below; hover the nav to see the
               dropdown/mega-menu and hover style. Static look-alike, not the real header.
             </p>

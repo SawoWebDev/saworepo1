@@ -79,7 +79,7 @@ const Steam = () => {
     <div className="relative">
       <SEO
         title="Steam Sauna"
-        description="Discover SAWO steam sauna solutions — generators, controls, and accessories delivering the luxury of tailored steam for a spa-like experience."
+        description="Discover SAWO steam sauna solutions: generators, controls, and accessories delivering the luxury of tailored steam for a spa-like experience."
         path="/steam"
       />
 

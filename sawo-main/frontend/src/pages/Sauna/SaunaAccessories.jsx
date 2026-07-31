@@ -29,7 +29,7 @@ const SaunaAccessories = () => {
     <div className="relative">
       <SEO
         title="Sauna Accessories"
-        description="Enhance your sauna with SAWO accessories — buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna."
+        description="Enhance your sauna with SAWO accessories: buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna."
         path="/sauna/accessories"
       />
 

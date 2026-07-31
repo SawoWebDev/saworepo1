@@ -189,7 +189,7 @@ export default function Dashboard({ currentUser }) {
       <div className="card card-body mb-8">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
           <i className="fas fa-chart-column text-[var(--brand)]"></i>
-          Traffic — Last 7 Days
+          Traffic: Last 7 Days
         </h3>
         {stats?.dailyStats?.length > 0 ? (
           <DailyTrafficChart data={stats.dailyStats} />

@@ -311,7 +311,7 @@ export default function WallMounted() {
     <div className="relative">
       <SEO
         title="Wall-Mounted Sauna Heaters"
-        description="Browse SAWO wall-mounted sauna heaters — Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas."
+        description="Browse SAWO wall-mounted sauna heaters: Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas."
         path="/sauna/heaters/wall-mounted"
       />
       <style>{`

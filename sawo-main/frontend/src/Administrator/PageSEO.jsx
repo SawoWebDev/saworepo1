@@ -38,52 +38,54 @@ import { MetricCard, BreakdownCard, BreakdownList, Modal } from "./analytics/Sta
 // neither — SEO.jsx's own DEFAULT_TITLE/DEFAULT_DESCRIPTION apply there.
 const STATIC_PAGES = [
   { path: "/", label: "Home", defaultTitle: null, defaultDescription: null },
-  { path: "/infrared", label: "Infrared Sauna", defaultTitle: "Infrared Sauna", defaultDescription: "Discover SAWO infrared saunas — cedar-crafted rooms with gentle, therapeutic infrared heat panels and controls for deep relaxation and wellness." },
-  { path: "/about", label: "About Us", defaultTitle: "About Us", defaultDescription: "Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms — trusted by customers in 90+ countries." },
-  { path: "/about/sustainability", label: "Sustainability", defaultTitle: "Sustainability", defaultDescription: "How SAWO builds sustainably — responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room." },
-  { path: "/about/news", label: "Latest News", defaultTitle: "Latest News", defaultDescription: "News, trade shows, and updates from SAWO — the latest on our Finnish sauna heaters, steam generators, and sauna room innovations." },
-  { path: "/careers", label: "Careers", defaultTitle: "Careers", defaultDescription: "Join the SAWO team — explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters." },
-  { path: "/contact", label: "Contact Us", defaultTitle: "Contact Us", defaultDescription: "Get in touch with SAWO — technical support, sales inquiries, and distributor contacts for our global network of representative offices." },
-  { path: "/sauna", label: "Sauna (hub)", defaultTitle: "Finnish Sauna Heaters, Controls & Accessories", defaultDescription: "Explore SAWO's full Finnish sauna range — heaters, controls, and accessories engineered for over 30 years of authentic sauna warmth and comfort." },
-  { path: "/sauna/heaters", label: "Sauna Heaters (hub)", defaultTitle: "Sauna Heaters", defaultDescription: "Browse SAWO's full Finnish sauna heater lineup — Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style." },
-  { path: "/sauna/heaters/wall-mounted", label: "Wall-Mounted Sauna Heaters", defaultTitle: "Wall-Mounted Sauna Heaters", defaultDescription: "Browse SAWO wall-mounted sauna heaters — Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas." },
-  { path: "/sauna/heaters/tower", label: "Tower Sauna Heaters", defaultTitle: "Tower Sauna Heaters", defaultDescription: "Explore SAWO Tower Series sauna heaters — energy-efficient, sleek vertical designs with superior heat distribution for a modern wellness sauna experience." },
+  { path: "/infrared", label: "Infrared Sauna", defaultTitle: "Infrared Sauna", defaultDescription: "Discover SAWO infrared saunas: cedar-crafted rooms with gentle, therapeutic infrared heat panels and controls for deep relaxation and wellness." },
+  { path: "/about", label: "About Us", defaultTitle: "About Us", defaultDescription: "Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms, trusted by customers in 90+ countries." },
+  { path: "/about/sustainability", label: "Sustainability", defaultTitle: "Sustainability", defaultDescription: "How SAWO builds sustainably, using responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room." },
+  { path: "/about/news", label: "Latest News", defaultTitle: "Latest News", defaultDescription: "News, trade shows, and updates from SAWO, covering our Finnish sauna heaters, steam generators, and sauna room innovations." },
+  { path: "/careers", label: "Careers", defaultTitle: "Careers", defaultDescription: "Join the SAWO team and explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters." },
+  { path: "/contact", label: "Contact Us", defaultTitle: "Contact Us", defaultDescription: "Get in touch with SAWO: technical support, sales inquiries, and distributor contacts for our global network of representative offices." },
+  { path: "/sauna", label: "Sauna (hub)", defaultTitle: "Finnish Sauna Heaters, Controls & Accessories", defaultDescription: "Explore SAWO's full Finnish sauna range: heaters, controls, and accessories engineered for over 30 years of authentic sauna warmth and comfort." },
+  { path: "/sauna/heaters", label: "Sauna Heaters (hub)", defaultTitle: "Sauna Heaters", defaultDescription: "Browse SAWO's full Finnish sauna heater lineup: Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style." },
+  { path: "/sauna/heaters/wall-mounted", label: "Wall-Mounted Sauna Heaters", defaultTitle: "Wall-Mounted Sauna Heaters", defaultDescription: "Browse SAWO wall-mounted sauna heaters: Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas." },
+  { path: "/sauna/heaters/tower", label: "Tower Sauna Heaters", defaultTitle: "Tower Sauna Heaters", defaultDescription: "Explore SAWO Tower Series sauna heaters: energy-efficient, sleek vertical designs with superior heat distribution for a modern wellness sauna experience." },
   { path: "/sauna/heaters/stone", label: "Stone Sauna Heaters", defaultTitle: "Stone Sauna Heaters", defaultDescription: "SAWO Stone Series heaters combine durable stainless steel with heat-conducting Finnish soapstone for efficient heating and quick drying after use." },
-  { path: "/sauna/heaters/floor", label: "Floor Sauna Heaters", defaultTitle: "Floor Sauna Heaters", defaultDescription: "SAWO Floor Series — powerful, movable stand-alone sauna heaters delivering optimal heat distribution and lasting comfort for commercial and home saunas." },
-  { path: "/sauna/heaters/combi", label: "Combi Sauna Heaters", defaultTitle: "Combi Sauna Heaters", defaultDescription: "SAWO Combi heaters combine sauna and steam in one powerful unit — versatile, energy-efficient warmth with an integrated steamer." },
-  { path: "/sauna/heaters/dragonfire", label: "Dragonfire Sauna Heaters", defaultTitle: "Dragonfire Sauna Heaters", defaultDescription: "SAWO Dragonfire Series — artistic sauna heaters designed by Stefan Lindfors, blending striking design with cutting-edge heating technology." },
-  { path: "/sauna/controls", label: "Sauna Controls", defaultTitle: "Sauna Controls", defaultDescription: "Precise temperature, time, and lighting control for your sauna — explore SAWO's Innova and Saunova control series for total comfort." },
-  { path: "/sauna/accessories", label: "Sauna Accessories (hub)", defaultTitle: "Sauna Accessories", defaultDescription: "Enhance your sauna with SAWO accessories — buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna." },
-  { path: "/sauna/accessories/pails-ladles", label: "Sauna Pails & Ladles", defaultTitle: "Sauna Pails & Ladles", defaultDescription: "Shop SAWO sauna pails and ladles — durable, elegant water accessories for the perfect löyly steam experience." },
-  { path: "/sauna/accessories/thermometers", label: "Sauna Thermometers & Hygrometers", defaultTitle: "Sauna Thermometers & Hygrometers", defaultDescription: "SAWO sauna thermometers and hygrometers — precise temperature and humidity readings to help you dial in the perfect sauna session." },
-  { path: "/sauna/accessories/clocks-sandtimers", label: "Sauna Clocks & Sand Timers", defaultTitle: "Sauna Clocks & Sand Timers", defaultDescription: "SAWO sauna clocks and sand timers — classic timekeeping accessories to help you track your sauna sessions with ease." },
-  { path: "/sauna/accessories/lights-covers", label: "Sauna Lights & Covers", defaultTitle: "Sauna Lights & Covers", defaultDescription: "SAWO sauna lights and light covers — safe, ambient lighting solutions designed to withstand high heat and humidity." },
-  { path: "/sauna/accessories/headrests-backrests", label: "Sauna Headrests & Backrests", defaultTitle: "Sauna Headrests & Backrests", defaultDescription: "SAWO sauna headrests and backrests — comfortable, heat-safe wood accessories that make longer sauna sessions more relaxing." },
-  { path: "/sauna/accessories/doors-handles", label: "Sauna Doors & Handles", defaultTitle: "Sauna Doors & Handles", defaultDescription: "SAWO sauna doors and handles — quality glass and wood doors with ergonomic handles, built for durability in high-heat environments." },
-  { path: "/sauna/accessories/benches-floor-tiles", label: "Sauna Benches & Floor Tiles", defaultTitle: "Sauna Benches & Floor Tiles", defaultDescription: "SAWO sauna benches and floor tiles — durable, heat-treated wood surfaces designed for comfort and longevity inside your sauna." },
-  { path: "/sauna/accessories/kivistone", label: "Kivistone Soapstone Collection", defaultTitle: "Kivistone Soapstone Collection", defaultDescription: "SAWO Kivistone — a soapstone accessory collection combining natural Finnish stone with heat-retaining design for a refined sauna experience." },
-  { path: "/sauna/accessories/ventilations-add-ons", label: "Sauna Ventilation & Add-Ons", defaultTitle: "Sauna Ventilation & Add-Ons", defaultDescription: "SAWO sauna ventilation and add-on accessories — improve airflow and comfort in your sauna with our range of ventilation solutions." },
-  { path: "/sauna/accessories/accessory-sets", label: "Sauna Accessory Sets", defaultTitle: "Sauna Accessory Sets", defaultDescription: "SAWO sauna accessory sets — curated collections pairing pails, ladles, thermometers, and more for a complete, coordinated sauna look." },
-  { path: "/sauna/rooms", label: "Sauna Rooms (hub)", defaultTitle: "Sauna Rooms", defaultDescription: "Explore SAWO sauna rooms — Standard, Glass Front, Outdoor, and Infrared designs crafted for a complete, therapeutic sauna experience." },
-  { path: "/sauna/rooms/interior-designs", label: "Sauna Interior Designs", defaultTitle: "Sauna Interior Designs", defaultDescription: "Explore SAWO sauna interior design options — wood finishes, layouts, and styling choices to personalize your sauna room." },
-  { path: "/sauna/rooms/wood-panels-timbers", label: "Wood Panels & Timbers", defaultTitle: "Wood Panels & Timbers", defaultDescription: "SAWO wood panel and timber options — cedar, aspen, and spruce choices to craft the natural look and feel of your sauna room." },
-  { path: "/steam", label: "Steam Sauna (hub)", defaultTitle: "Steam Sauna", defaultDescription: "Discover SAWO steam sauna solutions — generators, controls, and accessories delivering the luxury of tailored steam for a spa-like experience." },
-  { path: "/steam/generators", label: "Steam Generators", defaultTitle: "Steam Generators", defaultDescription: "SAWO steam generators — the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance." },
-  { path: "/steam/controls", label: "Steam Controls", defaultTitle: "Steam Controls", defaultDescription: "Precision steam control from SAWO — Saunova and Innova control series for effortless operation and a personalized sauna experience." },
+  { path: "/sauna/heaters/floor", label: "Floor Sauna Heaters", defaultTitle: "Floor Sauna Heaters", defaultDescription: "SAWO Floor Series: powerful, movable stand-alone sauna heaters delivering optimal heat distribution and lasting comfort for commercial and home saunas." },
+  { path: "/sauna/heaters/combi", label: "Combi Sauna Heaters", defaultTitle: "Combi Sauna Heaters", defaultDescription: "SAWO Combi heaters combine sauna and steam in one powerful unit, versatile, energy-efficient warmth with an integrated steamer." },
+  { path: "/sauna/heaters/dragonfire", label: "Dragonfire Sauna Heaters", defaultTitle: "Dragonfire Sauna Heaters", defaultDescription: "SAWO Dragonfire Series: artistic sauna heaters designed by Stefan Lindfors, blending striking design with cutting-edge heating technology." },
+  { path: "/sauna/controls", label: "Sauna Controls", defaultTitle: "Sauna Controls", defaultDescription: "Precise temperature, time, and lighting control for your sauna, explore SAWO's Innova and Saunova control series for total comfort." },
+  { path: "/sauna/accessories", label: "Sauna Accessories (hub)", defaultTitle: "Sauna Accessories", defaultDescription: "Enhance your sauna with SAWO accessories: buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna." },
+  { path: "/sauna/accessories/pails-ladles", label: "Sauna Pails & Ladles", defaultTitle: "Sauna Pails & Ladles", defaultDescription: "Shop SAWO sauna pails and ladles, durable, elegant water accessories for the perfect löyly steam experience." },
+  { path: "/sauna/accessories/thermometers", label: "Sauna Thermometers & Hygrometers", defaultTitle: "Sauna Thermometers & Hygrometers", defaultDescription: "SAWO sauna thermometers and hygrometers, precise temperature and humidity readings to help you dial in the perfect sauna session." },
+  { path: "/sauna/accessories/clocks-sandtimers", label: "Sauna Clocks & Sand Timers", defaultTitle: "Sauna Clocks & Sand Timers", defaultDescription: "SAWO sauna clocks and sand timers, classic timekeeping accessories to help you track your sauna sessions with ease." },
+  { path: "/sauna/accessories/lights-covers", label: "Sauna Lights & Covers", defaultTitle: "Sauna Lights & Covers", defaultDescription: "SAWO sauna lights and light covers, safe, ambient lighting solutions designed to withstand high heat and humidity." },
+  { path: "/sauna/accessories/headrests-backrests", label: "Sauna Headrests & Backrests", defaultTitle: "Sauna Headrests & Backrests", defaultDescription: "SAWO sauna headrests and backrests, comfortable, heat-safe wood accessories that make longer sauna sessions more relaxing." },
+  { path: "/sauna/accessories/doors-handles", label: "Sauna Doors & Handles", defaultTitle: "Sauna Doors & Handles", defaultDescription: "SAWO sauna doors and handles, quality glass and wood doors with ergonomic handles, built for durability in high-heat environments." },
+  { path: "/sauna/accessories/benches-floor-tiles", label: "Sauna Benches & Floor Tiles", defaultTitle: "Sauna Benches & Floor Tiles", defaultDescription: "SAWO sauna benches and floor tiles, durable, heat-treated wood surfaces designed for comfort and longevity inside your sauna." },
+  { path: "/sauna/accessories/kivistone", label: "Kivistone Soapstone Collection", defaultTitle: "Kivistone Soapstone Collection", defaultDescription: "SAWO Kivistone is a soapstone accessory collection combining natural Finnish stone with heat-retaining design for a refined sauna experience." },
+  { path: "/sauna/accessories/ventilations-add-ons", label: "Sauna Ventilation & Add-Ons", defaultTitle: "Sauna Ventilation & Add-Ons", defaultDescription: "SAWO sauna ventilation and add-on accessories, improve airflow and comfort in your sauna with our range of ventilation solutions." },
+  { path: "/sauna/accessories/accessory-sets", label: "Sauna Accessory Sets", defaultTitle: "Sauna Accessory Sets", defaultDescription: "SAWO sauna accessory sets, curated collections pairing pails, ladles, thermometers, and more for a complete, coordinated sauna look." },
+  { path: "/sauna/rooms", label: "Sauna Rooms (hub)", defaultTitle: "Sauna Rooms", defaultDescription: "Explore SAWO sauna rooms: Standard, Glass Front, Outdoor, and Infrared designs crafted for a complete, therapeutic sauna experience." },
+  { path: "/sauna/rooms/interior-designs", label: "Sauna Interior Designs", defaultTitle: "Sauna Interior Designs", defaultDescription: "Explore SAWO sauna interior design options, wood finishes, layouts, and styling choices to personalize your sauna room." },
+  { path: "/sauna/rooms/wood-panels-timbers", label: "Wood Panels & Timbers", defaultTitle: "Wood Panels & Timbers", defaultDescription: "SAWO wood panel and timber options, cedar, aspen, and spruce choices to craft the natural look and feel of your sauna room." },
+  { path: "/steam", label: "Steam Sauna (hub)", defaultTitle: "Steam Sauna", defaultDescription: "Discover SAWO steam sauna solutions: generators, controls, and accessories delivering the luxury of tailored steam for a spa-like experience." },
+  { path: "/steam/generators", label: "Steam Generators", defaultTitle: "Steam Generators", defaultDescription: "SAWO steam generators deliver the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance." },
+  { path: "/steam/controls", label: "Steam Controls", defaultTitle: "Steam Controls", defaultDescription: "Precision steam control from SAWO, with the Saunova and Innova control series for effortless operation and a personalized sauna experience." },
   { path: "/steam/accessories", label: "Steam Accessories", defaultTitle: "Steam Accessories", defaultDescription: "Premium SAWO steam accessories designed to enhance functionality and comfort for a consistently exceptional steam sauna experience." },
-  { path: "/support", label: "Support Center (hub)", defaultTitle: "Support Center", defaultDescription: "Get help with your SAWO products — FAQs, sauna calculator, user manuals, and product catalogue all in one place." },
-  { path: "/support/faq", label: "Frequently Asked Questions", defaultTitle: "Frequently Asked Questions", defaultDescription: "Answers to common questions about SAWO Finnish saunas, heaters, steam generators, and sauna care — from heat sources to wood types." },
-  { path: "/support/sauna-calculator", label: "Sauna Calculator", defaultTitle: "Sauna Calculator", defaultDescription: "Find the right SAWO heater for your sauna — use our calculator to match room size and volume to the ideal heater power output." },
-  { path: "/support/manuals", label: "User Manuals", defaultTitle: "User Manuals", defaultDescription: "Download SAWO user manuals — installation guides and operating instructions for our sauna heaters, controls, and steam generators." },
-  { path: "/support/catalogue", label: "Product Catalogue", defaultTitle: "Product Catalogue", defaultDescription: "Browse the full SAWO product catalogue — sauna heaters, sauna rooms, and accessories in one searchable listing." },
-  { path: "/products", label: "All Products", defaultTitle: "All Products", defaultDescription: "Browse SAWO's complete product range — sauna heaters, sauna rooms, and accessories, all in one searchable catalogue." },
-  { path: "/privacy-policy", label: "Privacy Policy", defaultTitle: "Privacy Policy", defaultDescription: "SAWO's privacy policy — how we collect, use, and protect your personal data across our website and services." },
-  { path: "/sitemap", label: "Sitemap", defaultTitle: "Sitemap", defaultDescription: "A complete guide to every page and section of the SAWO website — sauna heaters, steam generators, sauna rooms, and more." },
-  { path: "/sauna-accessories", label: "Sauna Accessories (catalog)", defaultTitle: "Sauna Accessories", defaultDescription: "Browse the full SAWO accessories catalog — pails, ladles, thermometers, benches, lighting, and more for every sauna." },
+  { path: "/support", label: "Support Center (hub)", defaultTitle: "Support Center", defaultDescription: "Get help with your SAWO products: FAQs, sauna calculator, user manuals, and product catalogue all in one place." },
+  { path: "/support/faq", label: "Frequently Asked Questions", defaultTitle: "Frequently Asked Questions", defaultDescription: "Answers to common questions about SAWO Finnish saunas, heaters, steam generators, and sauna care, from heat sources to wood types." },
+  { path: "/support/sauna-calculator", label: "Sauna Calculator", defaultTitle: "Sauna Calculator", defaultDescription: "Find the right SAWO heater for your sauna by using our calculator to match room size and volume to the ideal heater power output." },
+  { path: "/support/manuals", label: "User Manuals", defaultTitle: "User Manuals", defaultDescription: "Download SAWO user manuals: installation guides and operating instructions for our sauna heaters, controls, and steam generators." },
+  { path: "/support/catalogue", label: "Product Catalogue", defaultTitle: "Product Catalogue", defaultDescription: "Browse the full SAWO product catalogue, sauna heaters, sauna rooms, and accessories in one searchable listing." },
+  { path: "/products", label: "All Products", defaultTitle: "All Products", defaultDescription: "Browse SAWO's complete product range: sauna heaters, sauna rooms, and accessories, all in one searchable catalogue." },
+  { path: "/privacy-policy", label: "Privacy Policy", defaultTitle: "Privacy Policy", defaultDescription: "SAWO's privacy policy, covering how we collect, use, and protect your personal data across our website and services." },
+  { path: "/sitemap", label: "Sitemap", defaultTitle: "Sitemap", defaultDescription: "A complete guide to every page and section of the SAWO website: sauna heaters, steam generators, sauna rooms, and more." },
+  { path: "/sauna-accessories", label: "Sauna Accessories (catalog)", defaultTitle: "Sauna Accessories", defaultDescription: "Browse the full SAWO accessories catalog: pails, ladles, thermometers, benches, lighting, and more for every sauna." },
 ];
 
 const cacheKey = (range, customStart, customEnd) =>
   range === "custom" ? `admin:pagePerf:v2:custom:${customStart}:${customEnd}` : `admin:pagePerf:v2:${range}`;
+
+const SEO_ROWS_CACHE_KEY = "admin:pagePerf:seoRows";
 
 function formatTime(seconds) {
   if (!seconds) return "0s";
@@ -217,7 +219,7 @@ function SeoEditor({ page, row, currentUser, onSaved, onError }) {
     } catch (err) {
       onError(
         /relation .* does not exist/i.test(err.message)
-          ? "The page_seo table doesn't exist yet — run Administrator/Local/scripts/setup-page-seo.sql in the Supabase SQL editor first."
+          ? "The page_seo table doesn't exist yet. Run Administrator/Local/scripts/setup-page-seo.sql in the Supabase SQL editor first."
           : `Failed to save ${page.label}: ${err.message}`
       );
     } finally {
@@ -250,7 +252,7 @@ function SeoEditor({ page, row, currentUser, onSaved, onError }) {
           placeholder={page.defaultTitle || "Leave blank to keep the page's built-in default"}
         />
         <p className="form-helper">
-          {title.length}/60{title.length > 60 && " — longer titles may get truncated in search results"}
+          {title.length}/60{title.length > 60 && " (longer titles may get truncated in search results)"}
         </p>
         <p className="text-xs text-[var(--text-3)]" style={{ margin: "2px 0 0" }}>
           {existing.meta_title ? "Live override shown above. " : ""}
@@ -268,7 +270,7 @@ function SeoEditor({ page, row, currentUser, onSaved, onError }) {
           placeholder={page.defaultDescription || "Leave blank to keep the page's built-in default"}
         />
         <p className="form-helper">
-          {description.length}/155{description.length > 155 && " — longer descriptions may get truncated in search results"}
+          {description.length}/155{description.length > 155 && " (longer descriptions may get truncated in search results)"}
         </p>
         <p className="text-xs text-[var(--text-3)]" style={{ margin: "2px 0 0" }}>
           {existing.meta_description ? "Live override shown above. " : ""}
@@ -396,7 +398,7 @@ function PageDetailModal({ page, pageViews, events, startDate, seoRow, currentUs
 
               {detail.views === 0 ? (
                 <p className="text-[var(--text-3)] text-sm">
-                  No visits recorded for this page in the selected range — sources, locations, and device
+                  No visits recorded for this page in the selected range, so sources, locations, and device
                   breakdowns need at least one visit to show anything.
                 </p>
               ) : (
@@ -453,7 +455,7 @@ export default function PageSEO({ currentUser }) {
   const [customEnd, setCustomEnd] = useState("");
   const [raw, setRaw] = useState(() => getCache(cacheKey("30days")) || null); // { pageViews, events, startDate, endDate }
   const [loading, setLoading] = useState(() => !getCache(cacheKey("30days")));
-  const [seoRows, setSeoRows] = useState(null); // { [path]: row } | null while loading
+  const [seoRows, setSeoRows] = useState(() => getCache(SEO_ROWS_CACHE_KEY) || null); // { [path]: row } | null while loading
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [selectedPath, setSelectedPath] = useState(null);
@@ -522,13 +524,15 @@ export default function PageSEO({ currentUser }) {
         if (err) {
           setError((prev) => prev ||
             (/relation .* does not exist/i.test(err.message)
-              ? "The page_seo table doesn't exist yet — run Administrator/Local/scripts/setup-page-seo.sql in the Supabase SQL editor, then reload this page."
+              ? "The page_seo table doesn't exist yet. Run Administrator/Local/scripts/setup-page-seo.sql in the Supabase SQL editor, then reload this page."
               : `Failed to load page SEO overrides: ${err.message}`)
           );
           setSeoRows({});
           return;
         }
-        setSeoRows(Object.fromEntries((data || []).map((r) => [r.path, r])));
+        const rows = Object.fromEntries((data || []).map((r) => [r.path, r]));
+        setSeoRows(rows);
+        setCache(SEO_ROWS_CACHE_KEY, rows);
       });
   }, []);
 
@@ -636,7 +640,11 @@ export default function PageSEO({ currentUser }) {
           currentUser={currentUser}
           onClose={() => setSelectedPath(null)}
           onSeoSaved={(path, payload) => {
-            setSeoRows((r) => ({ ...r, [path]: payload }));
+            setSeoRows((r) => {
+              const next = { ...r, [path]: payload };
+              setCache(SEO_ROWS_CACHE_KEY, next);
+              return next;
+            });
             add(`Saved SEO for ${selected.label}`, "success");
           }}
           onSeoError={(message) => add(message, "error")}

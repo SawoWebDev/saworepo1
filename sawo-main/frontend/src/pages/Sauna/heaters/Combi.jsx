@@ -214,7 +214,7 @@ const Combi = () => {
     <div className="relative">
       <SEO
         title="Combi Sauna Heaters"
-        description="SAWO Combi heaters combine sauna and steam in one powerful unit — versatile, energy-efficient warmth with an integrated steamer."
+        description="SAWO Combi heaters combine sauna and steam in one powerful unit, versatile, energy-efficient warmth with an integrated steamer."
         path="/sauna/heaters/combi"
       />
       <style>{`
@@ -360,7 +360,7 @@ const Combi = () => {
                 sauna experience every time.
               </p>
               <p className="wm-why-desc">
-                Durable Construction — High-quality materials ensure long-lasting performance.
+                Durable Construction: High-quality materials ensure long-lasting performance.
               </p>
               <div style={{ marginTop: "20px" }}>
                 <a

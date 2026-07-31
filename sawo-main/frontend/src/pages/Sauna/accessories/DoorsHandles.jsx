@@ -112,7 +112,7 @@ export default function DoorsHandles() {
     <div className="relative">
       <SEO
         title="Sauna Doors & Handles"
-        description="SAWO sauna doors and handles — quality glass and wood doors with ergonomic handles, built for durability in high-heat environments."
+        description="SAWO sauna doors and handles, quality glass and wood doors with ergonomic handles, built for durability in high-heat environments."
         path="/sauna/accessories/doors-handles"
       />
       <style>{`
@@ -216,7 +216,7 @@ export default function DoorsHandles() {
       <WhyChooseSawo
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Doors & Handles"
-        description="SAWO sauna doors and handles are engineered for the demanding sauna environment — heat-resistant, durable, and beautifully designed. From classic wooden frames to modern tempered glass, every door is built to last and impress."
+        description="SAWO sauna doors and handles are engineered for the demanding sauna environment, heat-resistant, durable, and beautifully designed. From classic wooden frames to modern tempered glass, every door is built to last and impress."
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />

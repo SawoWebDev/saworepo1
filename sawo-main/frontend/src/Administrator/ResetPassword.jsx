@@ -120,7 +120,7 @@ export default function ResetPassword() {
               {sessionReady ? (
                 <p className="login-status login-status--ready">
                   <i className="fa-solid fa-circle-check" />
-                  Link verified — enter your new password{targetUsername ? ` for ${targetUsername}` : ""}
+                  Link verified. Enter your new password{targetUsername ? ` for ${targetUsername}` : ""}
                 </p>
               ) : (
                 <p className="login-status login-status--pending">

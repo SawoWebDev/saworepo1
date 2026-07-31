@@ -99,7 +99,7 @@ const Infrared = () => {
     <div className="relative">
       <SEO
         title="Infrared Sauna"
-        description="Discover SAWO infrared saunas — cedar-crafted rooms with gentle, therapeutic infrared heat panels and controls for deep relaxation and wellness."
+        description="Discover SAWO infrared saunas: cedar-crafted rooms with gentle, therapeutic infrared heat panels and controls for deep relaxation and wellness."
         path="/infrared"
       />
 

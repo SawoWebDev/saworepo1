@@ -9,7 +9,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase, getSession } from "./supabase";
-import { getPreviewRole, setPreviewRole, PREVIEWABLE_ROLES } from "./previewRole";
+import { setPreviewRole, usePreviewRole, PREVIEWABLE_ROLES } from "./previewRole";
 import { getLandingPath } from "./permissions";
 
 function Toast({ toasts, remove }) {
@@ -51,7 +51,9 @@ export default function Profile({ currentUser }) {
   // overwrites with the previewed role.
   const navigate = useNavigate();
   const realRole = getSession()?.user?.role;
-  const [previewRole, setPreviewRoleState] = useState(() => getPreviewRole());
+  // Shared store — the sidebar badge subscribes to the same value, so it
+  // updates the instant this select changes.
+  const previewRole = usePreviewRole();
 
   const closePasswordModal = () => {
     setPasswordModalOpen(false);
@@ -62,7 +64,6 @@ export default function Profile({ currentUser }) {
 
   const handleChangePreview = (role) => {
     setPreviewRole(role);
-    setPreviewRoleState(role);
     // Land somewhere the newly-previewed role can actually see.
     navigate(getLandingPath(role || realRole));
   };
@@ -133,7 +134,7 @@ export default function Profile({ currentUser }) {
       <Toast toasts={toasts} remove={removeToast} />
 
       <div className="card card-body" style={{ padding: 20 }}>
-        <h3 style={{ margin: "0 0 14px" }}>Account Details</h3>
+        <h3 style={{ margin: "0 0 14px", color: "var(--text)", fontSize: "1.05rem", fontWeight: 700 }}>Account Details</h3>
         <form onSubmit={handleSaveDetails} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label className="form-label">Username</label>
@@ -150,8 +151,8 @@ export default function Profile({ currentUser }) {
       </div>
 
       <div className="card card-body" style={{ padding: 20 }}>
-        <h3 style={{ margin: "0 0 4px" }}>Password</h3>
-        <p style={{ fontSize: "0.8rem", color: "var(--text-3)", margin: "0 0 14px" }}>
+        <h3 style={{ margin: "0 0 4px", color: "var(--text)", fontSize: "1.05rem", fontWeight: 700 }}>Password</h3>
+        <p style={{ fontSize: "0.82rem", color: "var(--text-2)", lineHeight: 1.55, margin: "0 0 14px" }}>
           Choose a new password for your account.
         </p>
         <button
@@ -169,10 +170,10 @@ export default function Profile({ currentUser }) {
           role line while a preview is active. */}
       {realRole === "superadmin" && (
         <div className="card card-body" style={{ padding: 20 }}>
-          <h3 style={{ margin: "0 0 4px" }}>Preview as role</h3>
-          <p style={{ fontSize: "0.8rem", color: "var(--text-3)", margin: "0 0 14px" }}>
+          <h3 style={{ margin: "0 0 4px", color: "var(--text)", fontSize: "1.05rem", fontWeight: 700 }}>Preview as role</h3>
+          <p style={{ fontSize: "0.82rem", color: "var(--text-2)", lineHeight: 1.55, margin: "0 0 14px" }}>
             See the CMS the way another role would, without a second account.
-            This only changes what's shown — your real {realRole} access is
+            This only changes what is shown. Your real {realRole} access is
             unchanged underneath.
           </p>
           <select

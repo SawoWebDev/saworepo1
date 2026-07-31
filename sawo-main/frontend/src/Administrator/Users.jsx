@@ -7,6 +7,32 @@ import { getPerms } from "./permissions";
 
 const USERS_CACHE_KEY = "admin:users";
 
+/**
+ * Pushes an admin-set password through to Supabase Auth.
+ *
+ * The set_user_password* RPCs only rewrite `users.password_hash`; changing
+ * another account's Auth password needs the service-role key, which lives
+ * only in this edge function. Without this step the two drift apart and the
+ * account's owner is locked out — Auth rejects the new password while the
+ * CMS accepts it.
+ *
+ * Call this AFTER the RPC has updated password_hash: the function re-verifies
+ * the password server-side against that hash before touching Auth, so
+ * `current_password` and `new_password` are intentionally the same value.
+ */
+async function syncAuthPassword(username, newPassword) {
+  const { error } = await supabase.functions.invoke("migrate-auth-password", {
+    body: { username, current_password: newPassword, new_password: newPassword },
+  });
+  if (error) {
+    throw new Error(
+      "The password was saved, but syncing it to the login system failed, so " +
+      "this user may not be able to sign in yet. Ask them to use \"Forgot password?\", " +
+      `or try again. (${error.message})`
+    );
+  }
+}
+
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function useToast() {
   const [toasts, setToasts] = useState([]);
@@ -153,11 +179,16 @@ export default function Users({ currentUser }) {
         const { error } = await supabase.from("users").update(updates).eq("id", editUser.id);
         if (error) throw new Error(error.message);
         if (form.password_hash.trim()) {
+          const newPassword = form.password_hash.trim();
           const { error: pwError } = await supabase.rpc("set_user_password", {
             p_user_id: editUser.id,
-            p_new_password: form.password_hash.trim(),
+            p_new_password: newPassword,
           });
           if (pwError) throw new Error("User updated but password change failed: " + pwError.message);
+          // set_user_password only rewrites users.password_hash — it cannot
+          // touch Supabase Auth from the client. Without this second step the
+          // account's Auth password stays stale and its owner can't log in.
+          await syncAuthPassword(form.username.trim(), newPassword);
         }
         if (form.email.trim() && form.email.trim() !== editUser.email) {
           const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
@@ -181,11 +212,14 @@ export default function Users({ currentUser }) {
         // Optional: an admin can still set an initial password directly
         // (e.g. for an account with no email) — but it's never required.
         if (form.password_hash.trim()) {
+          const newPassword = form.password_hash.trim();
           const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
             p_username: newUsername,
-            p_new_password: form.password_hash.trim(),
+            p_new_password: newPassword,
           });
           if (pwError) throw new Error("User created but setting the password failed: " + pwError.message);
+          // Keep Supabase Auth in step — see the note on the edit path above.
+          await syncAuthPassword(newUsername, newPassword);
         }
 
         if (email) {
@@ -267,6 +301,9 @@ export default function Users({ currentUser }) {
         p_new_password: newPassword,
       });
       if (error) throw error;
+      // Keep Supabase Auth in step, or this user can't sign in with the
+      // password that was just set for them.
+      await syncAuthPassword(editUser.username, newPassword);
 
       setChangePassModal(false);
       setNewPassword("");
@@ -434,7 +471,7 @@ export default function Users({ currentUser }) {
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label">Password</label>
               <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 5px" }}>
-                Optional — if an email is provided below, a link to set their own password is sent automatically. Only fill this in to set an initial password yourself.
+                Optional. If an email is provided below, a link to set their own password is sent automatically. Only fill this in to set an initial password yourself.
               </p>
               <div className="input-wrap">
                 <input

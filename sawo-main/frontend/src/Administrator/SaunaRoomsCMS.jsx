@@ -43,7 +43,7 @@ function toDatetimeLocalValue(iso) {
 function derivedSeoDescription(form) {
   const raw = form.description || "";
   const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-  if (!text) return `${form.name || "Sauna room"} by SAWO — a premium Finnish sauna room.`;
+  if (!text) return `${form.name || "Sauna room"} by SAWO. A premium Finnish sauna room.`;
   return text.length > 160 ? `${text.slice(0, 157)}...` : text;
 }
 
@@ -2052,7 +2052,7 @@ export default function SaunaRooms({ currentUser }) {
                 padding: "6px 12px", borderRadius: 20,
               }}>
                 <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved sauna rooms</strong>. Read-only — switch to Live to create, edit, or delete rooms.
+                Viewing <strong>locally saved sauna rooms</strong>. Read-only. Switch to Live to create, edit, or delete rooms.
               </span>
             )}
             {perms.can("sauna_rooms.create") && dataSource === "live" && (
@@ -2540,7 +2540,7 @@ export default function SaunaRooms({ currentUser }) {
                         onChange={e => setForm(f => ({ ...f, meta_title: e.target.value }))}
                         placeholder={form.name || "Inherits room name"} />
                       <p className="form-helper">
-                        {form.meta_title.length}/60 {form.meta_title.length > 60 && "— longer titles may get truncated in search results"}
+                        {form.meta_title.length}/60 {form.meta_title.length > 60 && "(longer titles may get truncated in search results)"}
                       </p>
                     </div>
                     <div className="form-group" style={{ marginBottom: 0 }}>
@@ -2553,7 +2553,7 @@ export default function SaunaRooms({ currentUser }) {
                         className="form-textarea"
                       />
                       <p className="form-helper">
-                        {form.meta_description.length}/155 {form.meta_description.length > 155 && "— longer descriptions may get truncated in search results"}
+                        {form.meta_description.length}/155 {form.meta_description.length > 155 && "(longer descriptions may get truncated in search results)"}
                       </p>
                     </div>
                     <div>
@@ -2596,8 +2596,8 @@ export default function SaunaRooms({ currentUser }) {
                         onChange={e => setForm(f => ({ ...f, publish_at: e.target.value }))}
                         helper={form.publish_at
                           ? new Date(form.publish_at) > new Date()
-                            ? `Scheduled — goes live ${new Date(form.publish_at).toLocaleString()}`
-                            : "This date is in the past — will go live on next page load"
+                            ? `Scheduled: goes live ${new Date(form.publish_at).toLocaleString()}`
+                            : "This date is in the past, so it will go live on next page load"
                           : "Leave empty to stay a draft indefinitely."}
                       />
                     </div>
@@ -2832,7 +2832,7 @@ function CheckRoomsSyncModal({ open, loading, report, events, onClose, onApply, 
               <div style={{ fontWeight: 600, fontSize: "0.85rem", color: "#16a34a" }}>Changes applied successfully!</div>
               <div style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: 2 }}>Local files updated and pushed to GitHub.</div>
               <div style={{ fontSize: "0.75rem", color: "var(--text-2)", marginTop: 6 }}>
-                <strong>What's next:</strong> the live site rebuilds automatically from this push — changes typically appear within a few minutes. You can safely close this window.
+                <strong>What's next:</strong> the live site rebuilds automatically from this push, so changes typically appear within a few minutes. You can safely close this window.
               </div>
             </div>
           </div>

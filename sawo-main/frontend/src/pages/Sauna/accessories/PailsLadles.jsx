@@ -134,7 +134,7 @@ export default function PailsLadles() {
     <div className="relative">
       <SEO
         title="Sauna Pails & Ladles"
-        description="Shop SAWO sauna pails and ladles — durable, elegant water accessories for the perfect löyly steam experience."
+        description="Shop SAWO sauna pails and ladles, durable, elegant water accessories for the perfect löyly steam experience."
         path="/sauna/accessories/pails-ladles"
       />
       <style>{`
@@ -314,7 +314,7 @@ export default function PailsLadles() {
       <WhyChooseSawo
         eyebrow="SAWO ACCESSORIES"
         title="Why Choose SAWO Pails & Ladles"
-        description="SAWO pails and ladles are crafted from premium natural materials — cedar, aspen, and pine — as well as modern stainless steel options. Designed for authentic Finnish sauna culture, each piece is built to last and enhance your löyly ritual."
+        description="SAWO pails and ladles are crafted from premium natural materials, cedar, aspen, and pine, as well as modern stainless steel options. Designed for authentic Finnish sauna culture, each piece is built to last and enhance your löyly ritual."
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
         brochureLabel="VIEW BROCHURE"
       />

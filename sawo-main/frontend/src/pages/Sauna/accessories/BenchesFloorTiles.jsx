@@ -113,7 +113,7 @@ export default function BenchesFloorTiles() {
     <div className="relative">
       <SEO
         title="Sauna Benches & Floor Tiles"
-        description="SAWO sauna benches and floor tiles — durable, heat-treated wood surfaces designed for comfort and longevity inside your sauna."
+        description="SAWO sauna benches and floor tiles, durable, heat-treated wood surfaces designed for comfort and longevity inside your sauna."
         path="/sauna/accessories/benches-floor-tiles"
       />
       <style>{`
@@ -155,7 +155,7 @@ export default function BenchesFloorTiles() {
       <section className="wm-section">
         <div className="wm-container text-center">
           <h2 className="wm-products-title">Sauna Benches, Floor Mats & Cloth Hangers</h2>
-          <p className="wm-products-desc">Upgrade your sauna experience with comfortable, stylish benches that support and enhance relaxation. Complete your sauna interior with wooden floor mats and practical cloth hangers — all crafted from premium natural materials.</p>
+          <p className="wm-products-desc">Upgrade your sauna experience with comfortable, stylish benches that support and enhance relaxation. Complete your sauna interior with wooden floor mats and practical cloth hangers, all crafted from premium natural materials.</p>
         </div>
       </section>
 

@@ -23,7 +23,7 @@ const Careers = () => {
     <div className="relative">
       <SEO
         title="Careers"
-        description="Join the SAWO team — explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters."
+        description="Join the SAWO team and explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters."
         path="/careers"
       />
       {/* HERO */}
