@@ -5,14 +5,6 @@ import { useNavigate } from "react-router-dom";
 // extracted so Dashboard.jsx (and any future stats page) can reuse them
 // without duplicating the Plausible-style card/list/tab markup.
 
-// Deep-links out to PostHog's Heatmaps tool (session replay + heatmaps live
-// there, not duplicated in this CMS — see lib/posthog.js). PostHog doesn't
-// document a reliable query param to auto-filter Heatmaps to one URL, so
-// this opens the tool and the page path is shown in the tooltip/title for
-// the admin to pick from PostHog's own page selector, rather than faking a
-// filter param that might silently not apply.
-const POSTHOG_PROJECT_URL = process.env.REACT_APP_POSTHOG_PROJECT_URL;
-
 export const TOP_LIST_COLLAPSED_COUNT = 5;
 
 // Fixed height for every breakdown card's tab content (matches WorldMap's own
@@ -22,7 +14,7 @@ export const CARD_CONTENT_HEIGHT = 320;
 
 export function MetricCard({ icon, title, value, subtitle }) {
   return (
-    <div className="card card-body hover:shadow-md transition-shadow">
+    <div className="card card-body card-lift hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-2">
         <div>
           <p className="text-[var(--text-3)] text-sm font-medium mb-1">{title}</p>
@@ -92,8 +84,15 @@ export function BreakdownList({ rows, valueLabel, showPct }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
         {rows.map((row, idx) => {
           const value = row.value ?? row.visitors ?? row.count ?? 0;
+          const clickable = !!row.pagePerf;
           return (
-            <div key={idx} style={{ position: "relative", display: "flex", alignItems: "center", gap: 10, padding: "5px 8px", borderRadius: 4 }}>
+            <div
+              key={idx}
+              className={clickable ? "breakdown-row breakdown-row--clickable" : "breakdown-row"}
+              style={{ position: "relative", display: "flex", alignItems: "center", gap: 10, padding: "5px 8px", borderRadius: 4 }}
+              onClick={clickable ? () => navigate(`/admin/seo?open=${encodeURIComponent(row.name)}`) : undefined}
+              title={clickable ? `View "${row.name}" in Page Performance` : undefined}
+            >
               <div
                 style={{
                   position: "absolute", left: 0, top: 0, bottom: 0,
@@ -109,29 +108,6 @@ export function BreakdownList({ rows, valueLabel, showPct }) {
                 <p className="text-sm font-medium text-[var(--text)] truncate" style={{ margin: 0 }}>{row.name}</p>
                 {row.sub && <p className="text-xs text-[var(--text-3)]" style={{ margin: 0 }}>{row.sub}</p>}
               </div>
-              {row.posthog && POSTHOG_PROJECT_URL && (
-                <a
-                  href={`${POSTHOG_PROJECT_URL}/heatmaps`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={`Opens PostHog Heatmaps. Select "${row.name}" from the page picker there`}
-                  className="text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
-                  style={{ flexShrink: 0 }}
-                >
-                  <i className="fa-solid fa-fire"></i>
-                </a>
-              )}
-              {row.pagePerf && (
-                <button
-                  type="button"
-                  onClick={() => navigate(`/admin/seo?open=${encodeURIComponent(row.name)}`)}
-                  title={`View "${row.name}" in Page Performance`}
-                  className="text-[var(--text-3)] hover:text-[var(--brand)] transition-colors"
-                  style={{ flexShrink: 0, background: "none", border: "none", padding: 0, cursor: "pointer" }}
-                >
-                  <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                </button>
-              )}
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 <span className="text-sm font-bold text-[var(--brand)]">{value}</span>
                 {showPct && typeof row.pct === "number" && (
@@ -174,7 +150,7 @@ export function TabbedList({ tab, title, icon, onShowAll }) {
 export function BreakdownCard({ id, title, icon, tabs, activeTab, onTab, onShowAll }) {
   const tab = tabs[activeTab];
   return (
-    <div id={id} className="card card-body">
+    <div id={id} className="card card-body card-lift">
       <CardHeader title={title} icon={icon} tabs={tabs} activeTab={activeTab} onTab={onTab} />
       <div style={{ minHeight: CARD_CONTENT_HEIGHT }}>
         <TabbedList tab={tab} title={`${title} — ${tab.label}`} icon={icon} onShowAll={onShowAll} />

@@ -22,6 +22,7 @@ import { logActivity, supabase } from "./supabase";
 import { primePageSeo } from "../local-storage/pageSeo";
 import { getCache, setCache } from "./adminCache";
 import { computeAllPagesSummary, computePageDetail } from "./analytics/computePagePerformance";
+import { DATE_RANGE_OPTIONS, resolveRange } from "./analytics/dateRange";
 import Sparkline from "./analytics/Sparkline";
 import DailyTrafficChart from "./DailyTrafficChart";
 import { MetricCard, BreakdownCard, BreakdownList, Modal } from "./analytics/StatPrimitives";
@@ -84,29 +85,6 @@ const STATIC_PAGES = [
 const cacheKey = (range, customStart, customEnd) =>
   range === "custom" ? `admin:pagePerf:v2:custom:${customStart}:${customEnd}` : `admin:pagePerf:v2:${range}`;
 
-// Resolves the active date-range selection into concrete { startDate, endDate }
-// Date objects, or null if a "custom" range is selected but not fully picked
-// yet (caller should hold off fetching in that case).
-function resolveRange(dateRange, customStart, customEnd) {
-  const endDate = new Date();
-  endDate.setHours(23, 59, 59, 999);
-
-  if (dateRange === "thisyear") {
-    return { startDate: new Date(endDate.getFullYear(), 0, 1), endDate };
-  }
-  if (dateRange === "custom") {
-    if (!customStart || !customEnd) return null;
-    const start = new Date(`${customStart}T00:00:00`);
-    const end = new Date(`${customEnd}T23:59:59.999`);
-    if (start > end) return null;
-    return { startDate: start, endDate: end };
-  }
-  const days = { "7days": 7, "30days": 30, "90days": 90 }[dateRange] || 30;
-  const startDate = new Date();
-  startDate.setDate(startDate.getDate() - days);
-  return { startDate, endDate };
-}
-
 function formatTime(seconds) {
   if (!seconds) return "0s";
   if (seconds < 60) return `${seconds}s`;
@@ -153,7 +131,7 @@ function PageCard({ page, onOpen }) {
   return (
     <div
       {...openProps}
-      className="card card-body hover:shadow-md transition-shadow"
+      className="card card-body card-lift hover:shadow-md transition-shadow"
       style={{ cursor: "pointer", display: "flex", flexDirection: "column", gap: 14 }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
@@ -468,14 +446,6 @@ function PageDetailModal({ page, pageViews, events, startDate, seoRow, currentUs
   );
 }
 
-const DATE_RANGE_OPTIONS = [
-  { key: "7days", label: "Last 7 days" },
-  { key: "30days", label: "Last 30 days" },
-  { key: "90days", label: "Last 90 days" },
-  { key: "thisyear", label: "This year" },
-  { key: "custom", label: "Custom" },
-];
-
 export default function PageSEO({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const [dateRange, setDateRange] = useState("30days");
@@ -597,7 +567,7 @@ export default function PageSEO({ currentUser }) {
         </div>
       )}
 
-      <div className="flex items-center justify-between mb-6" style={{ gap: 16, flexWrap: "wrap", marginTop: 16 }}>
+      <div className="flex items-center justify-between mb-6" style={{ gap: 16, flexWrap: "wrap" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
           <div className="tax-tabs" style={{ marginBottom: 0 }}>
             {DATE_RANGE_OPTIONS.map((opt) => (
