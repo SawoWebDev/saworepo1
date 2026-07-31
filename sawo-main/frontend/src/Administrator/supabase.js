@@ -6,19 +6,58 @@ export const supabase = createClient(
   process.env.REACT_APP_SUPABASE_ANON_KEY
 );
 
-// Login/password verification goes through SECURITY DEFINER Postgres
-// functions (see Administrator/Local/scripts/setup-page-seo.sql's sibling
-// migration, "secure_users_table_bcrypt_and_rpc") instead of a direct table
-// query. Previously this fetched the FULL row (select("*"), including
-// password_hash) over the public anon key and compared it in plaintext in
-// the browser — anyone holding the anon key could read any user's password
-// by username, and passwords weren't even hashed at rest. Now: passwords are
-// bcrypt-hashed in the database, password_hash is not directly readable or
-// writable by the anon/authenticated roles at all (column-level grants), and
-// verification happens server-side inside the RPC, which only ever returns
-// the safe fields (id, username, full_name, email, role, dark_mode,
-// created_at) — never the hash.
+// ── Login: real Supabase Auth session, with a legacy fallback during migration ──
+//
+// HISTORY: this used to fetch the FULL `users` row (select("*"), including
+// password_hash) over the public anon key and compare it in plaintext in the
+// browser — anyone holding the anon key could read any user's password by
+// username. That was fixed (2026-07-30) by moving verification into a
+// SECURITY DEFINER RPC (login_user) that hashes/compares server-side and
+// never returns the hash. That fix closed the READ hole, but the RPC itself
+// had no caller-authorization check, so a related WRITE hole remained: the
+// set_user_password* RPCs could be called by anyone with the anon key to
+// reset any account's password. See docs/cms/CMS-DOCUMENTATION.md Section 7
+// for the full history — this is the follow-up that closes that gap too.
+//
+// THE REAL FIX: login now goes through actual Supabase Auth
+// (signInWithPassword), which gives Postgres a genuine, cryptographically
+// verified session (auth.uid()) — RLS and the password RPCs now check that
+// session via is_superadmin() / "is this your own account" instead of
+// trusting anything the client merely asserts.
+//
+// TRANSITION: not every account has completed migration yet (each admin
+// needs to have used the password-reset email at least once since 2026-07-30
+// to have a working password on their real Auth account). So this tries the
+// real path first and falls back to the legacy RPC only if that fails —
+// nobody gets locked out mid-migration, but once every account has reset at
+// least once, the fallback branch simply stops ever being hit. Remove it
+// once that's confirmed true for every admin (check: does every row in
+// `users` have a non-null auth_user_id AND has that admin logged in
+// successfully via the real path at least once?).
 export async function apiLogin(username, password) {
+  const { data: email } = await supabase.rpc("get_email_for_username", { p_username: username });
+
+  if (email) {
+    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    if (!authError && authData?.user) {
+      const { data: profile, error: profileError } = await supabase
+        .from("users")
+        .select("id, username, full_name, email, role, dark_mode, created_at")
+        .eq("auth_user_id", authData.user.id)
+        .single();
+      if (!profileError && profile) {
+        return { user: profile, token: profile.id };
+      }
+      // Real Auth succeeded but no linked `users` row was found — an
+      // account that exists in Supabase Auth but was never linked. Fall
+      // through to the legacy path rather than leaving them stuck; sign out
+      // the orphaned Auth session first so it doesn't linger unused.
+      await supabase.auth.signOut();
+    }
+  }
+
+  // Legacy path — still real verification (bcrypt-hashed, server-side, via
+  // the login_user RPC), just not backed by a Supabase Auth session yet.
   const { data, error } = await supabase.rpc("login_user", {
     p_username: username,
     p_password: password,
@@ -85,6 +124,12 @@ export function clearSession() {
   localStorage.removeItem("sawo_user");
   sessionStorage.removeItem("sawo_token");
   sessionStorage.removeItem("sawo_user");
+  // Also end the real Supabase Auth session for accounts that logged in via
+  // the new path (apiLogin's signInWithPassword branch) — fire-and-forget,
+  // since clearing the custom tokens above (what the app's own route guards
+  // actually check) must stay synchronous and can't wait on a network call.
+  // A no-op if the session was only ever the legacy anon-key path.
+  supabase.auth.signOut().catch(() => {});
 }
 
 export async function logActivity({ action, entity, entity_id, entity_name, username, user_id, meta = null, changes = null }) {

@@ -225,7 +225,7 @@ const Section1 = () => {
       </section>
 
       {/* Carousel Section */}
-      <section className="pb-12 bg-gray-50">
+      <section className="pb-12">
         <div
           className="sawo-carousel-container"
           role="region"

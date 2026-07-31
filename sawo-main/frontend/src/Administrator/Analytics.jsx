@@ -3,6 +3,7 @@ import { supabase } from "./supabase";
 import DailyTrafficChart from "./DailyTrafficChart";
 import { getCache, setCache } from "./adminCache";
 import { computeStats } from "./analytics/computeStats";
+import { DATE_RANGE_OPTIONS, resolveRange } from "./analytics/dateRange";
 import WorldMap from "./analytics/WorldMap";
 import {
   CARD_CONTENT_HEIGHT,
@@ -14,10 +15,11 @@ import {
   Modal,
 } from "./analytics/StatPrimitives";
 
-// v2: cache shape changed with the Plausible-style rework (sources/entry-exit/
-// regions/os/size lists) — new key so a stale pre-rework cache object from an
-// earlier session can't render against the new card structure.
-const analyticsCacheKey = (dateRange) => `admin:analytics:v2:${dateRange}`;
+// v3: added This year/Custom ranges (endDate now matters, not just
+// startDate) — new key so a stale v2 cache entry can't be mistaken for a
+// range it wasn't actually computed for.
+const analyticsCacheKey = (dateRange, customStart, customEnd) =>
+  dateRange === "custom" ? `admin:analytics:v3:custom:${customStart}:${customEnd}` : `admin:analytics:v3:${dateRange}`;
 
 const EMPTY_STATS = {
   totalPageViews: 0,
@@ -42,7 +44,9 @@ const EMPTY_STATS = {
 };
 
 const Analytics = () => {
-  const [dateRange, setDateRange] = useState("7days"); // 7days, 30days, 90days
+  const [dateRange, setDateRange] = useState("7days");
+  const [customStart, setCustomStart] = useState("");
+  const [customEnd, setCustomEnd] = useState("");
   // Which tab is active inside each breakdown card. Switching tabs only
   // re-selects from the already-computed stats — zero extra fetches.
   const [cardTabs, setCardTabs] = useState({
@@ -57,24 +61,25 @@ const Analytics = () => {
   const [loading, setLoading] = useState(() => !getCache(analyticsCacheKey("7days")));
   const [error, setError] = useState(null);
 
+  // Custom range with either date not picked yet — nothing to fetch.
+  const range = resolveRange(dateRange, customStart, customEnd);
+
   const fetchAnalytics = useCallback(async () => {
-    const ranges = { "7days": 7, "30days": 30, "90days": 90 };
-    const days = ranges[dateRange] || 7;
-    const cacheKey = analyticsCacheKey(dateRange);
+    if (!range) return;
+    const { startDate, endDate } = range;
+    const cacheKey = analyticsCacheKey(dateRange, customStart, customEnd);
     const cached = getCache(cacheKey);
     // Already have this range's data on screen (seeded at mount, or from a
     // prior visit to this tab within the session) — refresh quietly instead
     // of flashing the full-page spinner.
     if (cached) setStats(cached); else setLoading(true);
     try {
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - days);
-
       // Fetch page views
       const { data: pageViews, error: pvError } = await supabase
         .from("analytics_page_views")
         .select("*")
-        .gte("timestamp", startDate.toISOString());
+        .gte("timestamp", startDate.toISOString())
+        .lte("timestamp", endDate.toISOString());
 
       if (pvError) throw pvError;
 
@@ -83,11 +88,12 @@ const Analytics = () => {
         .from("analytics_events")
         .select("*")
         .gte("timestamp", startDate.toISOString())
+        .lte("timestamp", endDate.toISOString())
         .limit(50);
 
       if (evError) throw evError;
 
-      const newStats = computeStats(pageViews, events, startDate);
+      const newStats = computeStats(pageViews, events, startDate, endDate);
       setStats(newStats);
       setCache(cacheKey, newStats);
 
@@ -98,7 +104,8 @@ const Analytics = () => {
     } finally {
       setLoading(false);
     }
-  }, [dateRange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateRange, customStart, customEnd]);
 
   useEffect(() => {
     fetchAnalytics();
@@ -121,7 +128,7 @@ const Analytics = () => {
     campaigns: { label: "Campaigns", rows: stats.campaigns, valueLabel: "Visitors", showPct: false },
   };
   const pagesTabs = {
-    top:   { label: "Top pages",   rows: stats.topPages.map(p => ({ ...p, value: p.views, sub: `Avg. time: ${formatTime(p.avgTime)}`, posthog: true, pagePerf: true })), valueLabel: "Views", showPct: false },
+    top:   { label: "Top pages",   rows: stats.topPages.map(p => ({ ...p, value: p.views, sub: `Avg. time: ${formatTime(p.avgTime)}`, pagePerf: true })), valueLabel: "Views", showPct: false },
     entry: { label: "Entry pages", rows: stats.entryPages.map(r => ({ ...r, pagePerf: true })), valueLabel: "Visitors",     showPct: false },
     exit:  { label: "Exit pages",  rows: stats.exitPages.map(r => ({ ...r, pagePerf: true })),  valueLabel: "Unique exits", showPct: false },
   };
@@ -137,6 +144,61 @@ const Analytics = () => {
     size:    { label: "Size",    rows: stats.screenSizes, valueLabel: "Visitors", showPct: true },
   };
 
+  // Date range filter — same options/behavior as Page Performance's, so the
+  // two pages' filters don't drift apart. .tax-tabs hardcodes
+  // margin-bottom:0 (Taxonomy sits it right above its own toolbar), which
+  // silently cancelled the mb-6 here — hence the inline override.
+  const dateRangeFilter = (
+    <div className="flex items-center justify-between mb-6" style={{ gap: 16, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+        <div className="tax-tabs" style={{ marginBottom: 0 }}>
+          {DATE_RANGE_OPTIONS.map((opt) => (
+            <button
+              key={opt.key}
+              type="button"
+              onClick={() => setDateRange(opt.key)}
+              className={`tax-tab-btn${dateRange === opt.key ? " active" : ""}`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+
+        {dateRange === "custom" && (
+          <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+            <input
+              type="date"
+              className="form-input"
+              style={{ width: "auto" }}
+              value={customStart}
+              max={customEnd || undefined}
+              onChange={(e) => setCustomStart(e.target.value)}
+            />
+            <span className="text-xs text-[var(--text-3)]">to</span>
+            <input
+              type="date"
+              className="form-input"
+              style={{ width: "auto" }}
+              value={customEnd}
+              min={customStart || undefined}
+              max={new Date().toISOString().slice(0, 10)}
+              onChange={(e) => setCustomEnd(e.target.value)}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  if (!range) {
+    return (
+      <div className="w-full">
+        {dateRangeFilter}
+        <p className="text-[var(--text-3)] text-sm">Pick a start and end date to load analytics for that range.</p>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -150,22 +212,7 @@ const Analytics = () => {
 
   return (
     <div className="w-full">
-      {/* Date Range Filter — pill tabs, same component as Taxonomy's tabs.
-          .tax-tabs hardcodes margin-bottom:0 (Taxonomy sits it right above
-          its own toolbar), which silently cancelled the mb-6 here — hence
-          the inline override. */}
-      <div className="tax-tabs mb-6" style={{ marginTop: 16, marginBottom: 24 }}>
-        {["7days", "30days", "90days"].map((range) => (
-          <button
-            key={range}
-            type="button"
-            onClick={() => setDateRange(range)}
-            className={`tax-tab-btn${dateRange === range ? " active" : ""}`}
-          >
-            {range === "7days" ? "Last 7 days" : range === "30days" ? "Last 30 days" : "Last 90 days"}
-          </button>
-        ))}
-      </div>
+      {dateRangeFilter}
 
       {error && (
         <div className="mb-6 bg-[var(--danger-bg)] border border-[var(--danger)] rounded p-4 text-[var(--danger)]">
@@ -203,7 +250,7 @@ const Analytics = () => {
       </div>
 
       {/* Daily Traffic Chart */}
-      <div id="analytics-traffic-chart" className="card card-body mb-8">
+      <div id="analytics-traffic-chart" className="card card-body card-lift mb-8">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
           <i className="fas fa-chart-column text-[var(--brand)]"></i>
           Traffic Over Time
@@ -235,7 +282,7 @@ const Analytics = () => {
 
       {/* Row 2: Locations | Devices */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <div id="analytics-locations" className="card card-body">
+        <div id="analytics-locations" className="card card-body card-lift">
           <CardHeader
             title="Locations"
             icon="fa-globe"
