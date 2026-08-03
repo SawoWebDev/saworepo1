@@ -3,7 +3,12 @@ import { getDataSource } from "../../local-storage/dataSource";
 import { getAllSaunaRoomsLive } from "../../local-storage/supabaseReader";
 import { getCache, setCache } from "../adminCache";
 
-const LOCAL_ROOMS_CACHE_KEY = "admin:sauna-rooms:local";
+// Public pages only (the admin CMS's own sauna rooms page reads Supabase
+// directly for editorial freshness) — session-cache-and-skip rather than
+// revalidate-in-background, so a repeat visit reuses the cached list with
+// zero requests instead of refetching every time. Cleared by any real page
+// reload (including Ctrl+Shift+R), since it lives only in JS memory.
+const LOCAL_ROOMS_CACHE_KEY = "public:sauna-rooms:data";
 
 export function useLocalSaunaRooms() {
   const cached = getCache(LOCAL_ROOMS_CACHE_KEY);
@@ -12,11 +17,11 @@ export function useLocalSaunaRooms() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (getCache(LOCAL_ROOMS_CACHE_KEY)) return;
+
     const load = async () => {
       try {
-        // Already showing cached rooms — refresh quietly instead of
-        // flashing the loading state.
-        if (!getCache(LOCAL_ROOMS_CACHE_KEY)) setLoading(true);
+        setLoading(true);
         const source = await getDataSource();
 
         let freshRooms;
