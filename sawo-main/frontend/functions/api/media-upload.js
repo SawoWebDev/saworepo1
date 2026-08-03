@@ -13,11 +13,18 @@
 // security.sql — login_user's "token" is just the user's id, not a JWT).
 // This endpoint matches that same existing security posture rather than
 // inventing a stronger one in isolation: it looks up the given user id in
-// `users` server-side (service-role key, never exposed to the client) and
-// requires role admin/superadmin, mirroring the products.upload_images /
-// sauna_rooms.upload_images capability gate the CMS UI already enforces.
-import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
-
+// `users` server-side and requires role admin/superadmin, mirroring the
+// products.upload_images / sauna_rooms.upload_images capability gate the
+// CMS UI already enforces.
+//
+// Uses the REACT_APP_SUPABASE_URL / REACT_APP_SUPABASE_ANON_KEY vars this
+// Pages project already has configured (there is no service-role key in
+// this project's env — deliberately not requesting one here). This is safe
+// because setup-users-security.sql already grants anon/authenticated a
+// column-scoped SELECT on users (id, username, full_name, email, role,
+// dark_mode, created_at — never password_hash) via a permissive `USING
+// (true)` policy, so an anon-key client can read exactly the `id, role`
+// pair this check needs and nothing more sensitive.
 const EXTENSION_CONTENT_TYPES = {
   webp: "image/webp", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", pdf: "application/pdf",
 };
@@ -28,10 +35,17 @@ const ENTITY_PREFIXES = new Set(["products", "sauna-rooms"]);
 
 async function requireUploader(env, userId) {
   if (!userId) return null;
-  const supabaseAdmin = getSupabaseAdmin(env);
-  if (!supabaseAdmin) return null;
-  const { data, error } = await supabaseAdmin.from("users").select("id, role").eq("id", userId).single();
-  if (error || !data) return null;
+  const url = env.REACT_APP_SUPABASE_URL;
+  const anonKey = env.REACT_APP_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) return null;
+
+  const res = await fetch(`${url}/rest/v1/users?id=eq.${encodeURIComponent(userId)}&select=id,role`, {
+    headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+  });
+  if (!res.ok) return null;
+  const rows = await res.json();
+  const data = rows?.[0];
+  if (!data) return null;
   if (data.role !== "admin" && data.role !== "superadmin") return null;
   return data;
 }
