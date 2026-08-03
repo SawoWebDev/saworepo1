@@ -7,12 +7,12 @@ import { getCache, setCache } from "../adminCache";
 // directly for editorial freshness). A repeat visit within CACHE_TTL_MS
 // paints the cached list instantly with zero requests; past that age it
 // still paints instantly from cache but quietly refetches in the
-// background, so a CMS edit reaches visitors who already have a tab open
-// within a bounded delay instead of only on their next hard reload. The
-// cache lives only in this JS module's memory, so any real page reload
-// (including Ctrl+Shift+R) clears it and the next visit fetches fresh again.
+// background, so a CMS edit eventually reaches a tab that's been left open.
+// To see an edit immediately, hard-reload (Ctrl+Shift+R): that clears this
+// in-memory cache outright and the next load always fetches fresh,
+// regardless of TTL.
 const LOCAL_ROOMS_CACHE_KEY = "public:sauna-rooms:data";
-const CACHE_TTL_MS = 5 * 60 * 1000;
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 1 day
 
 export function useLocalSaunaRooms() {
   const cached = getCache(LOCAL_ROOMS_CACHE_KEY);

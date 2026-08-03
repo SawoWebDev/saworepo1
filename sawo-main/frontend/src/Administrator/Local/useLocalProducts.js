@@ -10,12 +10,11 @@ import { getCache, setCache } from "../adminCache";
 // whole site. A repeat visit within CACHE_TTL_MS paints the cached list
 // instantly with zero Supabase/GitHub requests; past that age it still
 // paints instantly from cache but quietly refetches in the background, so a
-// CMS edit reaches visitors who already have a tab open within a bounded
-// delay instead of only on their next hard reload. The cache lives only in
-// this JS module's memory, so any real page reload (including a hard
-// Ctrl+Shift+R) clears it and the next visit fetches fresh again.
+// CMS edit eventually reaches a tab that's been left open. To see an edit
+// immediately, hard-reload (Ctrl+Shift+R): that clears this in-memory cache
+// outright and the next load always fetches fresh, regardless of TTL.
 const PRODUCTS_CACHE_KEY = "public:products:data";
-const CACHE_TTL_MS = 5 * 60 * 1000;
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 1 day
 
 export function useLocalProducts() {
   const cached = getCache(PRODUCTS_CACHE_KEY);
