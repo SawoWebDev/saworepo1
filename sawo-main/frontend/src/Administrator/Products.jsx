@@ -5,7 +5,6 @@ import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, getProductBySlugLive } from "../local-storage/supabaseReader";
-import { useLocalProducts } from "./Local/useLocalProducts";
 import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDisplay/DispAccessories";
 import { getCache, setCache } from "./adminCache";
 import { productsToCsvString, downloadCsv } from "./csv/productCsv";
@@ -65,12 +64,11 @@ function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
-function getImageUrl(product, field, dataSource) {
-  const imgPath = localOrRemote(product, field);
-  if (!imgPath) return null;
-  if (imgPath.includes("://")) return imgPath;
-  if (dataSource === "live") return imgPath;
-  return `${PREVIEW_GITHUB_RAW}${imgPath}`;
+// Every row is now a live Supabase row holding an absolute R2 URL (see the
+// R2 migration) — the PREVIEW_GITHUB_RAW prefix branch this used to have
+// for "local"/bundled-snapshot preview data is gone along with that mode.
+function getImageUrl(product, field) {
+  return localOrRemote(product, field) || null;
 }
 
 // Mirrors DispProduct.jsx/DispAccessories.jsx/DispSaunaRoom.jsx's seoDescription
@@ -2241,7 +2239,7 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
 }
 
 // ─── Grid Card ────────────────────────────────────────────────────────────────
-function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiveAction, perms, dataSource = "live" }) {
+function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms }) {
   const [hovered,  setHovered]  = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
@@ -2253,7 +2251,7 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
     return () => document.removeEventListener("mousedown", handler);
   }, [menuOpen]);
 
-  const showMenu = hovered && (dataSource === "local" || perms.can("products.edit") || perms.can("products.duplicate") || perms.can("products.delete"));
+  const showMenu = hovered && (perms.can("products.edit") || perms.can("products.duplicate") || perms.can("products.delete"));
   const isUnpublished = p.status === "draft" || p.visible === false;
 
   return (
@@ -2266,8 +2264,8 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}>
       {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
       <div className="product-grid-thumb">
-        {getImageUrl(p, 'thumbnail', dataSource)
-          ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt={p.name} />
+        {getImageUrl(p, 'thumbnail')
+          ? <img src={getImageUrl(p, 'thumbnail')} alt={p.name} />
           : <i className="fa-regular fa-image" style={{ fontSize: "1.5rem", color: "var(--border)" }} />
         }
         {showMenu && (
@@ -2278,27 +2276,17 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
             </button>
             {menuOpen && (
               <div className="product-grid-menu">
-                {perms.can("products.edit") && dataSource === "local" && (
+                {perms.can("products.edit") && (
                   <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onEdit(p); }}>
                     <i className="fa-solid fa-pen" /> Edit
                   </button>
                 )}
-                {perms.can("products.delete") && dataSource === "local" && (
-                  <button type="button" className="danger" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onRequestLiveAction(p, "delete"); }}>
-                    <i className="fa-solid fa-trash" /> Delete
-                  </button>
-                )}
-                {perms.can("products.edit") && dataSource === "live" && (
-                  <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onEdit(p); }}>
-                    <i className="fa-solid fa-pen" /> Edit
-                  </button>
-                )}
-                {perms.can("products.duplicate") && dataSource === "live" && (
+                {perms.can("products.duplicate") && (
                   <button type="button" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onDuplicate(p); }}>
                     <i className="fa-solid fa-copy" /> Duplicate
                   </button>
                 )}
-                {perms.can("products.delete") && dataSource === "live" && (
+                {perms.can("products.delete") && (
                   <button type="button" className="danger" onClick={(e) => { e.preventDefault(); setMenuOpen(false); onDelete(p); }}>
                     <i className="fa-solid fa-trash" /> Delete
                   </button>
@@ -2623,14 +2611,6 @@ export default function Products({ currentUser }) {
   const perms = getPerms(currentUser);
   const [searchParams, setSearchParams] = useSearchParams();
   const { toasts, add, remove } = useToast();
-  const { products: localProds, categories: localCats, tags: localTags, loading: localLoading } = useLocalProducts();
-
-  // Switching to Live is gated behind a confirm dialog (egress warning) —
-  // see confirmLiveOpen below.
-  const [confirmLiveOpen, setConfirmLiveOpen] = useState(false);
-  // Edit/Delete clicked from a Local-mode card: remembers which product +
-  // action to resume once the user confirms the switch to Live.
-  const [pendingLiveAction, setPendingLiveAction] = useState(null);
   const [products, setProducts]   = useState(() => getCache(PRODUCTS_CACHE_KEY) || []);
   const [loading,  setLoading]    = useState(() => !getCache(PRODUCTS_CACHE_KEY));
   const [allCats,    setAllCats]    = useState(() => getCache(PRODUCTS_META_CACHE_KEY)?.cats || []);
@@ -2645,7 +2625,6 @@ export default function Products({ currentUser }) {
   const [activeAccessorySubcats, setActiveAccessorySubcats] = useState([]); // multi-select pills, only used when quickFilter === "accessories"
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("grid");
-  const [dataSource,   setDataSource]   = useState("local"); // "live" or "local", local shown first, switch to Live manually
   const itemsPerPage = 20; // "Show" limit selector removed, fixed page size
   const [currentPage,  setCurrentPage]  = useState(1);
 
@@ -2689,11 +2668,11 @@ export default function Products({ currentUser }) {
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchProducts = useCallback(async () => {
-    // In live mode, cached data is already on screen — refresh quietly in
-    // the background instead of flashing the loading state.
-    if (!(dataSource === "live" && getCache(PRODUCTS_CACHE_KEY))) setLoading(true);
+    // Cached data is already on screen — refresh quietly in the background
+    // instead of flashing the loading state.
+    if (!getCache(PRODUCTS_CACHE_KEY)) setLoading(true);
     try {
-      let data = dataSource === "live" ? await getAllProductsLive() : localProds;
+      let data = await getAllProductsLive();
       if (filterStatus) data = data.filter(p => p.status === filterStatus);
       data.sort((a, b) => {
         const aTime = new Date(a.created_at).getTime();
@@ -2701,11 +2680,11 @@ export default function Products({ currentUser }) {
         return sortDir === "asc" ? aTime - bTime : bTime - aTime;
       });
       setProducts(data || []);
-      if (dataSource === "live") setCache(PRODUCTS_CACHE_KEY, data || []);
+      setCache(PRODUCTS_CACHE_KEY, data || []);
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
-  }, [filterStatus, sortDir, dataSource, localProds]); // eslint-disable-line
+  }, [filterStatus, sortDir]); // eslint-disable-line
 
   // Categories/tags only — the "Model" autocomplete suggestions are derived
   // from whatever's already loaded in `products` below instead of a separate
@@ -2713,40 +2692,28 @@ export default function Products({ currentUser }) {
   // every visit for no reason beyond listing distinct product types).
   const fetchMeta = useCallback(async () => {
     try {
-      if (dataSource === "live") {
-        const cats = await getAllCategoriesLive();
-        const tags = await getAllTagsLive();
-        const catNames = cats.map(c => c.name);
-        const tagNames = tags.map(t => t.name);
-        setAllCats(catNames);
-        setAllTags(tagNames);
-        setCache(PRODUCTS_META_CACHE_KEY, { cats: catNames, tags: tagNames });
-      } else {
-        // Local snapshots store categories/tags as row objects ({ name, slug, … }),
-        // whereas the PillInput/TagSuggestions autocomplete expects plain strings.
-        // Normalize to names (string entries pass through untouched).
-        const toName = x => (typeof x === "string" ? x : x?.name);
-        setAllCats((localCats || []).map(toName).filter(Boolean));
-        setAllTags((localTags || []).map(toName).filter(Boolean));
-      }
+      const cats = await getAllCategoriesLive();
+      const tags = await getAllTagsLive();
+      const catNames = cats.map(c => c.name);
+      const tagNames = tags.map(t => t.name);
+      setAllCats(catNames);
+      setAllTags(tagNames);
+      setCache(PRODUCTS_META_CACHE_KEY, { cats: catNames, tags: tagNames });
     } catch (err) {
       console.error("Failed to fetch metadata:", err);
     }
-  }, [dataSource, localCats, localTags]); // eslint-disable-line
+  }, []); // eslint-disable-line
 
   // Model autocomplete suggestions — recomputed from whatever's currently
   // loaded (recent-only by default, everything once "Show All" is clicked).
   useEffect(() => {
-    const source = dataSource === "live" ? products : localProds;
-    setAllModels([...new Set(source.map(p => p.type).filter(Boolean))].sort());
-  }, [dataSource, products, localProds]);
+    setAllModels([...new Set(products.map(p => p.type).filter(Boolean))].sort());
+  }, [products]);
 
   useEffect(() => {
-    if (dataSource === "live" || (dataSource === "local" && !localLoading)) {
-      fetchProducts();
-      fetchMeta();
-    }
-  }, [fetchProducts, fetchMeta, dataSource, localLoading]); // eslint-disable-line
+    fetchProducts();
+    fetchMeta();
+  }, [fetchProducts, fetchMeta]); // eslint-disable-line
 
   // ── Set default view for read-only users ────────────────────────────────────
   useEffect(() => {
@@ -3022,22 +2989,6 @@ export default function Products({ currentUser }) {
     } catch (err) { add(err.message, "error"); }
   };
 
-  // Local mode is read-only — Edit/Delete on a local card asks to switch to
-  // Live first, then resumes the requested action against the Supabase row.
-  const requestLiveAction = (row, action) => {
-    setPendingLiveAction({ row, action });
-    setConfirmLiveOpen(true);
-  };
-
-  const confirmSwitchToLive = () => {
-    const pending = pendingLiveAction;
-    setDataSource("live");
-    setConfirmLiveOpen(false);
-    setPendingLiveAction(null);
-    if (pending?.action === "edit") openEdit(pending.row);
-    else if (pending?.action === "delete") setConfirmDel(pending.row);
-  };
-
   // ── Save ──────────────────────────────────────────────────────────────────
   const handleSave = async e => {
     e.preventDefault();
@@ -3264,11 +3215,9 @@ export default function Products({ currentUser }) {
     finally { setSelected(new Set()); setBulkStatusValue(""); fetchProducts(); }
   };
 
-  // ── CSV export — current filtered view, or just the selection if any is
-  // active. Read-only, so allowed regardless of dataSource.
+  // ── CSV export — current filtered view, or just the selection if any is active.
   const handleExportCsv = () => {
-    const source = dataSource === "live" ? products : localProds;
-    const rows = selected.size > 0 ? source.filter(p => selected.has(p.id)) : filtered;
+    const rows = selected.size > 0 ? products.filter(p => selected.has(p.id)) : filtered;
     if (rows.length === 0) return add("No products to export.", "error");
     downloadCsv(`products-export-${new Date().toISOString().slice(0, 10)}.csv`, productsToCsvString(rows));
     add(`Exported ${rows.length} product(s).`, "success");
@@ -3381,38 +3330,10 @@ export default function Products({ currentUser }) {
       <div style={{ marginBottom: 14 }}>
         <div>
           <div className="data-source-row">
-            {perms.can("products.edit") && (
-              <div className="tax-tabs">
-                {[
-                  { id: "live", label: "Live", icon: "fa-cloud" },
-                  { id: "local", label: "Local", icon: "fa-folder" }
-                ].map(tab => (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => tab.id === "live" ? setConfirmLiveOpen(true) : setDataSource(tab.id)}
-                    className={`tax-tab-btn${dataSource === tab.id ? " active" : ""}`}
-                  >
-                    <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            )}
             <p className="products-subtitle" style={{ margin: 0 }}>
-              {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${products.length} products`}
+              {loading ? "Loading..." : `${filtered.length} of ${products.length} products`}
             </p>
-            {dataSource === "local" && (
-              <span className="local-mode-notice" style={{
-                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem",
-                background: "var(--info-bg)", border: "1px solid var(--info-border)",
-                padding: "6px 12px", borderRadius: 20,
-              }}>
-                <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved products</strong>. Read-only. Switch to Live to create, edit, or delete products.
-              </span>
-            )}
-            {perms.can("products.create") && dataSource === "live" && (
+            {perms.can("products.create") && (
               <Btn icon="fa-plus" label="New Product" onClick={openCreate} style={{ marginLeft: "auto" }} />
             )}
           </div>
@@ -3452,7 +3373,7 @@ export default function Products({ currentUser }) {
               </button>
             ))}
           </div>
-          {perms.can("products.bulk_delete") && dataSource === "live" && selected.size > 0 && (
+          {perms.can("products.bulk_delete") && selected.size > 0 && (
             <>
               <select className="filter-select" value={bulkStatusValue} onChange={e => {
                 setBulkStatusValue(e.target.value);
@@ -3473,7 +3394,7 @@ export default function Products({ currentUser }) {
             <i className="fa-solid fa-file-arrow-down" style={{ marginRight: 5 }} />
             Export CSV
           </button>
-          {perms.can("products.csv_import") && dataSource === "live" && (
+          {perms.can("products.csv_import") && (
             <button type="button" className="btn btn-ghost btn-sm" onClick={() => setCsvImportOpen(true)} title="Bulk create/update products from a CSV file">
               <i className="fa-solid fa-file-arrow-up" style={{ marginRight: 5 }} />
               Import CSV
@@ -3527,7 +3448,7 @@ export default function Products({ currentUser }) {
               <div key={group.key} style={{ marginBottom: 28 }}>
                 <h3 className="product-group-label">{group.label}</h3>
                 <div className="product-grid">
-                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} onRequestLiveAction={requestLiveAction} perms={perms} dataSource={dataSource} />)}
+                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
                 </div>
               </div>
             ))}
@@ -3539,14 +3460,14 @@ export default function Products({ currentUser }) {
                 {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
               </div>
             )}
-            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} onRequestLiveAction={requestLiveAction} perms={perms} dataSource={dataSource} />)}
+            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
           </div>
         )
       )}
 
       {/* List View */}
       {viewMode === "list" && (() => {
-        const showCheckboxCol = perms.can("products.bulk_delete") && dataSource === "live";
+        const showCheckboxCol = perms.can("products.bulk_delete");
         const colCount = showCheckboxCol ? 9 : 8;
         const visibleProducts = groups ? filtered : paginatedProducts;
         const renderRow = p => (
@@ -3557,8 +3478,8 @@ export default function Products({ currentUser }) {
               </td>
             )}
             <td style={{ width: 44 }}>
-              {getImageUrl(p, 'thumbnail', dataSource)
-                ? <img src={getImageUrl(p, 'thumbnail', dataSource)} alt="" className="product-thumb" />
+              {getImageUrl(p, 'thumbnail')
+                ? <img src={getImageUrl(p, 'thumbnail')} alt="" className="product-thumb" />
                 : <div className="product-thumb-placeholder"><i className="fa-regular fa-image" /></div>
               }
             </td>
@@ -3600,19 +3521,13 @@ export default function Products({ currentUser }) {
             <td style={{ textAlign: "right" }}>
               <div className="table-actions">
                 <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
-                {perms.can("products.edit") && dataSource === "local" && (
+                {perms.can("products.edit") && (
                   <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
                 )}
-                {perms.can("products.delete") && dataSource === "local" && (
-                  <IconBtn icon="fa-trash" title="Delete" onClick={() => requestLiveAction(p, "delete")} danger />
-                )}
-                {perms.can("products.edit") && dataSource === "live" && (
-                  <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
-                )}
-                {perms.can("products.duplicate") && dataSource === "live" && (
+                {perms.can("products.duplicate") && (
                   <IconBtn icon="fa-copy" title="Duplicate" onClick={() => openDuplicate(p)} />
                 )}
-                {perms.can("products.delete") && dataSource === "live" && (
+                {perms.can("products.delete") && (
                   <IconBtn icon="fa-trash" title="Delete" onClick={() => setConfirmDel(p)} danger />
                 )}
               </div>
@@ -4203,18 +4118,6 @@ export default function Products({ currentUser }) {
         title="Delete Selected?"
         message={`Delete ${selected.size} selected product(s)? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete All" />
-
-      <Confirm
-        open={confirmLiveOpen}
-        onClose={() => { setConfirmLiveOpen(false); setPendingLiveAction(null); }}
-        onConfirm={confirmSwitchToLive}
-        title="Switch to Live?"
-        message={pendingLiveAction
-          ? `To ${pendingLiveAction.action} "${pendingLiveAction.row?.name}", switch to Live mode, this reads/writes product data directly on Supabase, which consumes Supabase egress.`
-          : "Live mode reads product data directly from Supabase, which consumes Supabase egress. Local mode (bundled/GitHub snapshot) doesn't."}
-        confirmLabel="Proceed"
-        confirmVariant="primary"
-      />
 
       <Confirm open={!!confirmDel} onClose={() => setConfirmDel(null)} onConfirm={handleDelete}
         title="Delete Product?"

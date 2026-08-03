@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
-import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
 import { getCache, setCache } from "./adminCache";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
@@ -15,12 +14,8 @@ const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-function getRoomImageUrl(room, field, dataSource) {
-  const val = room?.[field];
-  if (!val) return null;
-  if (val.includes("://")) return val;
-  if (dataSource === "live") return val;
-  return `${PREVIEW_GITHUB_RAW}${val}`;
+function getRoomImageUrl(room, field) {
+  return room?.[field] || null;
 }
 
 function slugify(str) {
@@ -1062,7 +1057,7 @@ function RoomPreviewResourcesPanel({ files }) {
   );
 }
 
-function RoomPreviewModal({ room, onClose, onEdit, liveUrl, dataSource }) {
+function RoomPreviewModal({ room, onClose, onEdit, liveUrl }) {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
@@ -1076,7 +1071,7 @@ function RoomPreviewModal({ room, onClose, onEdit, liveUrl, dataSource }) {
     return () => document.removeEventListener("keydown", h);
   }, [onClose, lightbox]);
 
-  const thumb      = getRoomImageUrl(room, "thumbnail", dataSource);
+  const thumb      = getRoomImageUrl(room, "thumbnail");
   const images     = previewRoomImgsArr(room, "images");
   const specImages = previewRoomImgsArr(room, "spec_images");
   const files       = previewRoomGetFiles(room);
@@ -1248,7 +1243,7 @@ function RoomPreviewModal({ room, onClose, onEdit, liveUrl, dataSource }) {
 }
 
 // ─── Room Card (Grid view) ────────────────────────────────────────────────────
-function RoomCard({ room, onEdit, onDelete, onDuplicate, onPreview, perms, dataSource }) {
+function RoomCard({ room, onEdit, onDelete, onDuplicate, onPreview, perms }) {
   const [hovered, setHovered]   = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
@@ -1274,8 +1269,8 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
     >
       {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
       <div className="product-grid-thumb">
-        {getRoomImageUrl(room, "thumbnail", dataSource)
-          ? <img src={getRoomImageUrl(room, "thumbnail", dataSource)} alt={room.name} />
+        {getRoomImageUrl(room, "thumbnail")
+          ? <img src={getRoomImageUrl(room, "thumbnail")} alt={room.name} />
           : <i className="fa-regular fa-image" style={{ fontSize: "1.5rem", color: "var(--border)" }} />
         }
         {showMenu && (
@@ -1331,16 +1326,11 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, onPreview, perms, dataS
 export default function SaunaRooms({ currentUser }) {
   const perms = getPerms(currentUser);
   const { toasts, add, remove } = useToast();
-  const { rooms: localRooms, loading: localLoading } = useLocalSaunaRooms();
 
-  // Switching to Live is gated behind a confirm dialog (egress warning) —
-  // see confirmLiveOpen below.
-  const [confirmLiveOpen, setConfirmLiveOpen] = useState(false);
   const [rooms,      setRooms]      = useState(() => getCache(ROOMS_CACHE_KEY) || []);
   const [loading,    setLoading]    = useState(() => !getCache(ROOMS_CACHE_KEY));
   const [allCats,    setAllCats]    = useState(() => getCache(ROOMS_META_CACHE_KEY)?.cats || []);
   const [allTags,    setAllTags]    = useState(() => getCache(ROOMS_META_CACHE_KEY)?.tags || []);
-  const [dataSource, setDataSource] = useState("local");
 
   const [search,       setSearch]       = useState("");
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -1388,23 +1378,10 @@ export default function SaunaRooms({ currentUser }) {
   // the *shrunk* result into `rooms` state, which both wasted egress on
   // every keystroke and silently dropped the non-matching rows from state.
   const fetchRooms = useCallback(async () => {
-    // In live mode, cached data is already on screen — refresh quietly in
-    // the background instead of flashing the loading state.
-    if (!(dataSource === "live" && getCache(ROOMS_CACHE_KEY))) setLoading(true);
+    // Cached data is already on screen — refresh quietly in the background
+    // instead of flashing the loading state.
+    if (!getCache(ROOMS_CACHE_KEY)) setLoading(true);
     try {
-      if (dataSource === "local") {
-        let data = localRooms;
-        if (filterStatus) data = data.filter(r => r.status === filterStatus);
-        if (filterType)   data = data.filter(r => r.room_type === filterType);
-        data = [...data].sort((a, b) => {
-          const at = new Date(a.created_at).getTime(), bt = new Date(b.created_at).getTime();
-          return sortDir === "asc" ? at - bt : bt - at;
-        });
-        setRooms(data);
-        setSelected(new Set());
-        return;
-      }
-
       let query = supabase
         .from("sauna_rooms")
         .select("*")
@@ -1434,20 +1411,10 @@ export default function SaunaRooms({ currentUser }) {
       setSelected(new Set());
     } catch (err) { add(err.message, "error"); }
     finally { setLoading(false); }
-  }, [dataSource, localRooms, filterStatus, filterType, sortDir]); // eslint-disable-line
+  }, [filterStatus, filterType, sortDir]); // eslint-disable-line
 
   const fetchMeta = useCallback(async () => {
     try {
-      if (dataSource === "local") {
-        const cats = new Set(), tags = new Set();
-        localRooms.forEach(r => {
-          (r.categories || []).forEach(c => cats.add(c));
-          (r.tags       || []).forEach(t => tags.add(t));
-        });
-        setAllCats([...cats].sort());
-        setAllTags([...tags].sort());
-        return;
-      }
       const { data: roomsMeta } = await supabase.from("sauna_rooms").select("categories, tags").eq("is_deleted", false);
       const cats = new Set(), tags = new Set();
       (roomsMeta || []).forEach(r => {
@@ -1460,14 +1427,12 @@ export default function SaunaRooms({ currentUser }) {
       setAllTags(tagList);
       setCache(ROOMS_META_CACHE_KEY, { cats: catList, tags: tagList });
     } catch (err) { console.error("fetchMeta:", err); }
-  }, [dataSource, localRooms]); // eslint-disable-line
+  }, []); // eslint-disable-line
 
   useEffect(() => {
-    if (dataSource === "live" || (dataSource === "local" && !localLoading)) {
-      fetchRooms();
-      fetchMeta();
-    }
-  }, [fetchRooms, fetchMeta, dataSource, localLoading]); // eslint-disable-line
+    fetchRooms();
+    fetchMeta();
+  }, [fetchRooms, fetchMeta]); // eslint-disable-line
 
   // ── Real-time subscription ─────────────────────────────────────────────────
   useEffect(() => {
@@ -1923,36 +1888,10 @@ export default function SaunaRooms({ currentUser }) {
       <div style={{ marginBottom: 14 }}>
         <div>
           <div className="data-source-row">
-            <div className="tax-tabs">
-              {[
-                { id: "live",  label: "Live",  icon: "fa-cloud" },
-                { id: "local", label: "Local", icon: "fa-folder" },
-              ].map(tab => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => tab.id === "live" ? setConfirmLiveOpen(true) : setDataSource(tab.id)}
-                  className={`tax-tab-btn${dataSource === tab.id ? " active" : ""}`}
-                >
-                  <i className={`fa-solid ${tab.icon}`} style={{ fontSize: "0.9em" }} />
-                  {tab.label}
-                </button>
-              ))}
-            </div>
             <p className="products-subtitle" style={{ margin: 0 }}>
-              {(loading || (dataSource === "local" && localLoading)) ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
+              {loading ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
             </p>
-            {dataSource === "local" && (
-              <span className="local-mode-notice" style={{
-                display: "flex", alignItems: "center", gap: 6, fontSize: "0.85rem",
-                background: "var(--info-bg)", border: "1px solid var(--info-border)",
-                padding: "6px 12px", borderRadius: 20,
-              }}>
-                <i className="fa-solid fa-circle-info" />
-                Viewing <strong>locally saved sauna rooms</strong>. Read-only. Switch to Live to create, edit, or delete rooms.
-              </span>
-            )}
-            {perms.can("sauna_rooms.create") && dataSource === "live" && (
+            {perms.can("sauna_rooms.create") && (
               <Btn icon="fa-plus" label="New Room" onClick={openCreate} style={{ marginLeft: "auto" }} />
             )}
           </div>
@@ -1988,7 +1927,7 @@ export default function SaunaRooms({ currentUser }) {
               </button>
             ))}
           </div>
-          {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && selected.size > 0 && (
+          {perms.can("sauna_rooms.bulk_delete") && selected.size > 0 && (
             <button type="button" className="btn btn-sm"
               style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid var(--danger)", gap: 5 }}
               onClick={() => setBulkConfirm(true)}>
@@ -2017,7 +1956,7 @@ export default function SaunaRooms({ currentUser }) {
             </div>
           )}
           {filtered.map(r => (
-            <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} onPreview={setPreviewRoom} perms={perms} dataSource={dataSource} />
+            <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} onPreview={setPreviewRoom} perms={perms} />
           ))}
         </div>
       )}
@@ -2031,7 +1970,7 @@ export default function SaunaRooms({ currentUser }) {
             <table className="products-table">
               <thead>
                 <tr>
-                  {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && (
+                  {perms.can("sauna_rooms.bulk_delete") && (
                     <th style={{ width: 36, paddingRight: 0 }}>
                       <input type="checkbox" className="tbl-checkbox"
                         checked={filtered.length > 0 && selected.size === filtered.length}
@@ -2050,24 +1989,22 @@ export default function SaunaRooms({ currentUser }) {
               </thead>
               <tbody>
                 {filtered.length === 0 && (
-                  <tr><td colSpan={perms.can("sauna_rooms.bulk_delete") && dataSource === "live" ? 9 : 8} className="table-empty">
+                  <tr><td colSpan={perms.can("sauna_rooms.bulk_delete") ? 9 : 8} className="table-empty">
                     {search
                       ? `No rooms match "${search}"`
-                      : dataSource === "local"
-                        ? "No locally saved rooms yet. Sync from Supabase to populate."
-                        : "No sauna rooms yet. Click New Room to create one."}
+                      : "No sauna rooms yet. Click New Room to create one."}
                   </td></tr>
                 )}
                 {filtered.map(r => (
                   <tr key={r.id} className={selected.has(r.id) ? "row-selected" : ""}>
-                    {perms.can("sauna_rooms.bulk_delete") && dataSource === "live" && (
+                    {perms.can("sauna_rooms.bulk_delete") && (
                       <td style={{ paddingRight: 0 }}>
                         <input type="checkbox" className="tbl-checkbox" checked={selected.has(r.id)} onChange={() => toggleSelect(r.id)} />
                       </td>
                     )}
                     <td style={{ width: 44 }}>
-                      {getRoomImageUrl(r, "thumbnail", dataSource)
-                        ? <img src={getRoomImageUrl(r, "thumbnail", dataSource)} alt="" className="product-thumb" />
+                      {getRoomImageUrl(r, "thumbnail")
+                        ? <img src={getRoomImageUrl(r, "thumbnail")} alt="" className="product-thumb" />
                         : <div className="product-thumb-placeholder"><i className="fa-regular fa-image" /></div>
                       }
                     </td>
@@ -2100,9 +2037,9 @@ export default function SaunaRooms({ currentUser }) {
                     <td style={{ textAlign: "right" }}>
                       <div className="table-actions">
                         <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewRoom(r)} />
-                        {perms.can("sauna_rooms.edit")      && dataSource === "live" && <IconBtn icon="fa-pen"   title="Edit"      onClick={() => openEdit(r)} />}
-                        {perms.can("sauna_rooms.duplicate") && dataSource === "live" && <IconBtn icon="fa-copy"  title="Duplicate" onClick={() => openDuplicate(r)} />}
-                        {perms.can("sauna_rooms.delete")    && dataSource === "live" && <IconBtn icon="fa-trash" title="Delete"    onClick={() => setConfirmDel(r)} danger />}
+                        {perms.can("sauna_rooms.edit")      && <IconBtn icon="fa-pen"   title="Edit"      onClick={() => openEdit(r)} />}
+                        {perms.can("sauna_rooms.duplicate") && <IconBtn icon="fa-copy"  title="Duplicate" onClick={() => openDuplicate(r)} />}
+                        {perms.can("sauna_rooms.delete")    && <IconBtn icon="fa-trash" title="Delete"    onClick={() => setConfirmDel(r)} danger />}
                       </div>
                     </td>
                   </tr>
@@ -2532,20 +2469,9 @@ export default function SaunaRooms({ currentUser }) {
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
 
-      <Confirm
-        open={confirmLiveOpen}
-        onClose={() => setConfirmLiveOpen(false)}
-        onConfirm={() => { setDataSource("live"); setConfirmLiveOpen(false); }}
-        title="Switch to Live?"
-        message="Live mode reads sauna room data directly from Supabase, which consumes Supabase egress. Local mode (bundled/GitHub snapshot) doesn't."
-        confirmLabel="Proceed"
-        confirmVariant="primary"
-      />
-
       {previewRoom && (
         <RoomPreviewModal
           room={previewRoom}
-          dataSource={dataSource}
           onClose={() => setPreviewRoom(null)}
           onEdit={() => { const r = previewRoom; setPreviewRoom(null); openEdit(r); }}
           liveUrl={`${FRONT_URL || window.location.origin}/sauna/rooms/${previewRoom.slug}`}
