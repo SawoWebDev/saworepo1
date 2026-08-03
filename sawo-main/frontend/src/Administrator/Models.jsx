@@ -5,9 +5,12 @@
 // folder opens ProductsGridModal (shared with Taxonomy) to show its
 // products, rather than expanding in place — the grid never restructures.
 //
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import ProductsGridModal from "./ProductsGridModal";
+import { getCache, setCache } from "./adminCache";
+
+const MODELS_CACHE_KEY = "admin:models:products";
 
 // ─── Model Group card ──────────────────────────────────────────────────────
 function ModelGroup({ modelName, products, onOpen }) {
@@ -32,9 +35,23 @@ export default function Models() {
   // site's Live Data Source setting is explicitly "supabase") instead of
   // always hitting Supabase live — grouping by model doesn't need
   // real-time accuracy, so there's no reason it should cost egress.
-  const { products: rawProducts, loading, error } = useLocalProducts();
+  const { products: freshProducts, loading, error } = useLocalProducts();
+  const [cachedProducts, setCachedProducts] = useState(() => getCache(MODELS_CACHE_KEY));
   const [search, setSearch]       = useState("");
   const [openModel, setOpenModel] = useState(null);
+
+  // Shows the last-known list immediately on revisit while useLocalProducts
+  // quietly refetches in the background, instead of flashing "Loading…" every
+  // time this page remounts.
+  useEffect(() => {
+    if (!loading) {
+      setCache(MODELS_CACHE_KEY, freshProducts);
+      setCachedProducts(freshProducts);
+    }
+  }, [loading, freshProducts]);
+
+  const rawProducts = cachedProducts || freshProducts;
+  const showLoading = loading && !cachedProducts;
 
   const products = [...rawProducts].sort((a, b) => {
     const typeCompare = (a.type || "").localeCompare(b.type || "");
@@ -60,7 +77,7 @@ export default function Models() {
   return (
     <div className="products-page">
       <p className="products-subtitle" style={{ marginBottom: 14 }}>
-        {loading ? "Loading…" : `${filteredGroups.length} model${filteredGroups.length !== 1 ? "s" : ""} · ${products.length} product${products.length !== 1 ? "s" : ""}`}
+        {showLoading ? "Loading…" : `${filteredGroups.length} model${filteredGroups.length !== 1 ? "s" : ""} · ${products.length} product${products.length !== 1 ? "s" : ""}`}
       </p>
 
       {/* Search */}
@@ -92,7 +109,7 @@ export default function Models() {
       )}
 
       {/* Content */}
-      {loading ? (
+      {showLoading ? (
         <div className="table-loading">
           <i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: "0.5rem" }} /> Loading models…
         </div>
