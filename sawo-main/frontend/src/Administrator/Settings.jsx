@@ -62,6 +62,29 @@ const LOCALE_LABELS = { en: "English", fi: "Suomi", de: "Deutsch" };
 
 const SETTINGS_CACHE_KEY = "admin:settings";
 
+// Recipient for the public Contact form's email notification — read server-side
+// by helpdeskapi/send.php on sawo.com (not passed from the client) so this is
+// the only place that controls where inquiries land. See [[product_publish_pipeline]]
+// for the sibling "Publish changes" pattern this follows.
+const CONTACT_NOTIFY_EMAIL_KEY = "contact_notify_email";
+
+async function fetchContactNotifyEmail() {
+  const { data, error } = await supabase
+    .from("app_settings")
+    .select("value")
+    .eq("key", CONTACT_NOTIFY_EMAIL_KEY)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  return data?.value || "info@sawo.com";
+}
+
+async function saveContactNotifyEmail(email, username) {
+  const { error } = await supabase
+    .from("app_settings")
+    .upsert({ key: CONTACT_NOTIFY_EMAIL_KEY, value: email, updated_by: username || null });
+  if (error) throw new Error(error.message);
+}
+
 // Moved out of the sidebar footer (was a bare <select> wedged next to
 // logout/theme) — this is a high-stakes, rarely-changed control (it changes
 // what the PUBLIC site serves), so it belongs on a dedicated page rather
@@ -118,6 +141,9 @@ export default function Settings({ currentUser }) {
   const [layoutSaving, setLayoutSaving] = useState(false);
   const [navStyle, setNavStyleState] = useState(() => cachedSettings ? cachedSettings.navStyle : "style1");
   const [navStyleSaving, setNavStyleSaving] = useState(false);
+  const [notifyEmail, setNotifyEmailState] = useState(() => cachedSettings ? cachedSettings.notifyEmail : "");
+  const [notifyEmailInput, setNotifyEmailInput] = useState(() => cachedSettings ? cachedSettings.notifyEmail : "");
+  const [notifySaving, setNotifySaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
 
@@ -125,15 +151,19 @@ export default function Settings({ currentUser }) {
     Promise.all([
       getDataSource(), getGDPRBannerEnabled(),
       getLanguageSwitcherEnabled(), getEnabledLanguages(), fetchHeaderPrefs(),
+      fetchContactNotifyEmail(),
     ])
-      .then(([s, gdpr, langEn, langs, headerPrefs]) => {
+      .then(([s, gdpr, langEn, langs, headerPrefs, notifyEmailVal]) => {
         setSource(s); setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
         setHeaderLayoutState(headerPrefs.headerLayout);
         setNavStyleState(headerPrefs.navStyle);
+        setNotifyEmailState(notifyEmailVal);
+        setNotifyEmailInput(notifyEmailVal);
         setCache(SETTINGS_CACHE_KEY, {
           source: s, gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
           headerLayout: headerPrefs.headerLayout, navStyle: headerPrefs.navStyle,
+          notifyEmail: notifyEmailVal,
         });
       })
       .catch((err) => setError(err.message))
@@ -261,6 +291,34 @@ export default function Settings({ currentUser }) {
       add("Failed to save header nav style", "error");
     } finally {
       setNavStyleSaving(false);
+    }
+  };
+
+  const handleSaveNotifyEmail = async () => {
+    const trimmed = notifyEmailInput.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      add("Enter a valid email address", "error");
+      return;
+    }
+    setNotifySaving(true);
+    setError(null);
+    try {
+      await saveContactNotifyEmail(trimmed, currentUser?.username);
+      setNotifyEmailState(trimmed);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "contact_notify_email",
+        entity_name: `Contact Form Recipient → ${trimmed}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add("Contact form recipient saved", "success");
+    } catch (err) {
+      setError("Failed to save contact form recipient: " + err.message);
+      add("Failed to save contact form recipient", "error");
+    } finally {
+      setNotifySaving(false);
     }
   };
 
@@ -434,6 +492,38 @@ export default function Settings({ currentUser }) {
             <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
           </label>
         </div>
+      </div>
+
+      <div className="card card-body">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-inbox text-[var(--brand)]"></i>
+          Contact Form Recipient
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          Where the public Contact form's email notification is sent. Every submission is
+          also logged in the Inbox regardless of this setting, and (for all categories) creates
+          an Odoo helpdesk ticket. Read server-side by helpdeskapi/send.php — changes apply to
+          the very next submission, no redeploy needed.
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <input
+            type="email"
+            value={notifyEmailInput}
+            onChange={(e) => setNotifyEmailInput(e.target.value)}
+            disabled={notifySaving}
+            placeholder="info@sawo.com"
+            className="flex-1 min-w-[220px] px-3 py-2 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] text-sm"
+          />
+          <button
+            type="button"
+            onClick={handleSaveNotifyEmail}
+            disabled={notifySaving || notifyEmailInput.trim() === notifyEmail}
+            className="btn btn-primary text-sm px-4 py-2 disabled:opacity-50 disabled:pointer-events-none"
+          >
+            {notifySaving ? "Saving..." : "Save"}
+          </button>
+        </div>
+        <p className="text-xs text-[var(--text-3)] mt-3">Currently: {notifyEmail || "info@sawo.com"}</p>
       </div>
 
       <div className="card card-body lg:col-span-2">
