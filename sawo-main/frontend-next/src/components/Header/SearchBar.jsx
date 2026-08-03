@@ -44,7 +44,14 @@ function ResultRow({ result, idx, highlightedIndex, setHighlightedIndex, selectR
       ) : (
         <i className={`fa-solid fa-${result.resultType === 'page' ? 'link' : 'box'} text-xs flex-shrink-0 opacity-60`} />
       )}
-      <p className="truncate font-medium">{result.name}</p>
+      <span className="min-w-0">
+        <p className="truncate font-medium">{result.name}</p>
+        {result.matchedField && result.matchedField !== 'name' && result.matchedValue && (
+          <p className={`truncate text-[11px] ${active ? 'text-white/80' : 'text-gray-400'}`}>
+            {result.matchedValue}
+          </p>
+        )}
+      </span>
     </button>
   );
 }

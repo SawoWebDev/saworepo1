@@ -64,8 +64,7 @@ const SETTINGS_CACHE_KEY = "admin:settings";
 
 // Recipient for the public Contact form's email notification — read server-side
 // by helpdeskapi/send.php on sawo.com (not passed from the client) so this is
-// the only place that controls where inquiries land. See [[product_publish_pipeline]]
-// for the sibling "Publish changes" pattern this follows.
+// the only place that controls where inquiries land.
 const CONTACT_NOTIFY_EMAIL_KEY = "contact_notify_email";
 
 async function fetchContactNotifyEmail() {
