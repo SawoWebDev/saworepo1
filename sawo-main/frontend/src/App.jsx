@@ -87,6 +87,7 @@ const SaunaRoomsAdmin = lazy(() => import("./Administrator/SaunaRoomsCMS"));
 const Models         = lazy(() => import("./Administrator/Models"));
 const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
 const Logs           = lazy(() => import("./Administrator/Logs"));
+const Inbox          = lazy(() => import("./Administrator/Inbox"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
 const PageSEO        = lazy(() => import("./Administrator/PageSEO"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
@@ -211,6 +212,9 @@ export default function App() {
             } />
             <Route path="/admin/logs" element={
               <ProtectedRoute requiredCap="page.logs"><AdminLayout><Logs /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/inbox" element={
+              <ProtectedRoute requiredCap="page.inbox"><AdminLayout><Inbox /></AdminLayout></ProtectedRoute>
             } />
             <Route path="/admin/models" element={
               <ProtectedRoute requiredCap="page.models"><AdminLayout><Models /></AdminLayout></ProtectedRoute>

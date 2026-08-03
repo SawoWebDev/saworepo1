@@ -38,7 +38,7 @@ const SaunaConfigurator = () => {
     const parts = ["Room: " + roomSel.name];
     if (selections.heater) parts.push("Heater: " + heaterSel.name);
     if (accessoryNames.length > 0) parts.push("Accessories: " + accessoryNames.join(", "));
-    return menuPaths.contact + "?subject=" + encodeURIComponent("Customize My Sauna, " + parts.join(" | "));
+    return menuPaths.contact + "?addon_saved=1&subject=" + encodeURIComponent("Customize My Sauna, " + parts.join(" | "));
   }, [selections.room, selections.heater, accessoryNames, roomSel, heaterSel]);
 
   const firstAccessoryImg = selections.accessory.length > 0

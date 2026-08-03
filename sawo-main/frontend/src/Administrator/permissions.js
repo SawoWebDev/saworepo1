@@ -59,6 +59,7 @@ export const CAPABILITY_MAP = {
   "page.models":              ["editor", "admin", "superadmin"],
   "page.taxonomy":            ["editor", "admin", "superadmin"],
   "page.logs":                ["admin", "superadmin"],
+  "page.inbox":               ["editor", "admin", "superadmin"],
   "page.users":               ["superadmin"],
   "page.products_local":      ["editor", "admin", "superadmin"],
   "page.analytics":           ["admin", "superadmin"],
@@ -128,6 +129,7 @@ export const NAV_ITEMS = [
   { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    section: "Catalog",  description: "Manage the categories and tags products can be organized under." },
   { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "Catalog",   description: "A record of every create, update, and delete made across the CMS." },
 
+  { to: "/admin/inbox",           label: "Inbox",            icon: "fa-solid fa-inbox",          cap: "page.inbox",       section: "Insights", description: "Every Contact form submission — general inquiries, technical support, and customer support requests." },
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
   { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your

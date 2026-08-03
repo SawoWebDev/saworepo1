@@ -73,6 +73,12 @@ const SECTIONS = [
     name: "Insights",
     groups: [
       {
+        label: "Inbox",
+        rows: [
+          { cap: "page.inbox", label: "View page (sidebar)" },
+        ],
+      },
+      {
         label: "Analytics",
         rows: [
           { cap: "page.analytics", label: "View page (sidebar)" },

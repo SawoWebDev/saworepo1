@@ -31,6 +31,5 @@ export default function ProtectedRoute({ children, requiredCap, redirectTo }) {
   if (requiredCap && !can(effectiveRole, requiredCap)) {
     return <Navigate to={redirectTo || getLandingPath(effectiveRole)} replace />;
   }
-
   return children;
 }
