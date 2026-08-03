@@ -7,6 +7,7 @@ import { useLocalSaunaRooms } from "./Local/useLocalSaunaRooms";
 import { getCache, setCache } from "./adminCache";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
+import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
 
 const ROOMS_CACHE_KEY = "admin:sauna-rooms:live";
 const ROOMS_META_CACHE_KEY = "admin:sauna-rooms:live:meta";
@@ -115,58 +116,8 @@ const EMPTY_FORM = {
   publish_at: "",
 };
 
-// ─── WebP conversion + resize ─────────────────────────────────────────────────
-const WEBP_QUALITY = 0.82;
-const WEBP_MAX_DIM = 1800;
-
-function convertToWebP(file, maxDim = WEBP_MAX_DIM, quality = WEBP_QUALITY) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const objectUrl = URL.createObjectURL(file);
-    img.onload = () => {
-      URL.revokeObjectURL(objectUrl);
-      let { width, height } = img;
-      if (width > maxDim || height > maxDim) {
-        if (width >= height) { height = Math.round((height / width) * maxDim); width = maxDim; }
-        else { width = Math.round((width / height) * maxDim); height = maxDim; }
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = width; canvas.height = height;
-      canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-      canvas.toBlob(
-        blob => blob ? resolve(blob) : reject(new Error("WebP conversion failed")),
-        "image/webp", quality
-      );
-    };
-    img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error("Image load failed")); };
-    img.src = objectUrl;
-  });
-}
-
-async function uploadFileToSupabase(file, bucket = "saunaroom-images") {
-  let uploadBlob, fileName;
-  if (file.type.startsWith("image/")) {
-    try {
-      uploadBlob = await convertToWebP(file);
-      fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.webp`;
-    } catch {
-      uploadBlob = file;
-      const ext = file.name.split(".").pop();
-      fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-    }
-  } else {
-    uploadBlob = file;
-    const ext = file.name.split(".").pop();
-    fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-  }
-  const contentType = file.type.startsWith("image/") ? "image/webp" : file.type;
-  const { error } = await supabase.storage
-    .from(bucket)
-    .upload(fileName, uploadBlob, { cacheControl: "3600", upsert: false, contentType });
-  if (error) throw new Error(error.message);
-  const { data } = supabase.storage.from(bucket).getPublicUrl(fileName);
-  return data.publicUrl;
-}
+// Uploads now go through uploadFileToR2 (./mediaUpload.js), which does its
+// own WebP conversion via the same canvas approach.
 
 function parseStorageUrl(url) {
   if (!url) return null;
@@ -1680,8 +1631,9 @@ export default function SaunaRooms({ currentUser }) {
   const handleThumbUpload = async file => {
     setUpThumb(true);
     try {
-      if (form.thumbnail) await deleteStorageUrls([form.thumbnail]).catch(console.warn);
-      const url = await uploadFileToSupabase(file, "saunaroom-images");
+      const slug = effectiveSlug(form);
+      if (form.thumbnail) await Promise.allSettled([deleteStorageUrls([form.thumbnail]), deleteR2Urls([form.thumbnail], currentUser)]);
+      const url = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role: "thumbnail", currentUser });
       setForm(f => ({ ...f, thumbnail: url }));
       add("Thumbnail uploaded.", "success");
     } catch (err) { add(err.message, "error"); }
@@ -1691,8 +1643,9 @@ export default function SaunaRooms({ currentUser }) {
   const handleOgUpload = async file => {
     setUpOg(true);
     try {
-      if (form.og_image) await deleteStorageUrls([form.og_image]).catch(console.warn);
-      const url = await uploadFileToSupabase(file, "saunaroom-images");
+      const slug = effectiveSlug(form);
+      if (form.og_image) await Promise.allSettled([deleteStorageUrls([form.og_image]), deleteR2Urls([form.og_image], currentUser)]);
+      const url = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role: "og", currentUser });
       setForm(f => ({ ...f, og_image: url }));
       add("OG image uploaded.", "success");
     } catch (err) { add(err.message, "error"); }
@@ -1702,8 +1655,9 @@ export default function SaunaRooms({ currentUser }) {
   const uploadMoreImages = async files => {
     setUpImgs(true);
     try {
+      const slug = effectiveSlug(form);
       const arr  = Array.isArray(files) ? files : [files];
-      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "saunaroom-images")));
+      const urls = await Promise.all(arr.map(f => uploadFileToR2(f, { entityPrefix: "sauna-rooms", slug, role: "gallery", currentUser })));
       setForm(f => ({ ...f, images: [...f.images, ...urls] }));
       add(`${urls.length} image(s) uploaded.`, "success");
     } catch (err) { add(err.message, "error"); }
@@ -1713,8 +1667,9 @@ export default function SaunaRooms({ currentUser }) {
   const uploadSpecImages = async files => {
     setUpSpec(true);
     try {
+      const slug = effectiveSlug(form);
       const arr  = Array.isArray(files) ? files : [files];
-      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "saunaroom-images")));
+      const urls = await Promise.all(arr.map(f => uploadFileToR2(f, { entityPrefix: "sauna-rooms", slug, role: "spec", currentUser })));
       setForm(f => ({ ...f, spec_images: [...f.spec_images, ...urls] }));
       add(`${urls.length} spec image(s) uploaded.`, "success");
     } catch (err) { add(err.message, "error"); }
@@ -1724,9 +1679,11 @@ export default function SaunaRooms({ currentUser }) {
   const handleFileUpload = async file => {
     setUpFile(true);
     try {
-      const url  = await uploadFileToSupabase(file, "sauna-pdf");
+      const slug = effectiveSlug(form);
       const rawName = file.name.replace(/\.pdf$/i, "");
       const displayName = rawName.replace(/[-_]/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const role = `manual-${slugify(displayName).slice(0, 30)}`;
+      const url  = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role, currentUser });
       setForm(f => ({ ...f, files: [...f.files, { name: displayName, url }] }));
       add("File uploaded.", "success");
     } catch (err) { add("Upload failed: " + err.message, "error"); }

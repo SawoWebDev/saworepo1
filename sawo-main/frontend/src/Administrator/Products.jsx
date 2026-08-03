@@ -13,6 +13,7 @@ import { productsToCsvString, downloadCsv } from "./csv/productCsv";
 import CsvImportModal from "./csv/CsvImportModal";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
+import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
 const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
@@ -133,15 +134,6 @@ function buildProductPayload(form, tags) {
   };
 }
 
-// Convert Supabase URL to relative path for GitHub storage
-// e.g., https://qsdfdfuooeythaioucpx.supabase.co/storage/v1/object/public/product-images/products/file.webp → products/file.webp
-function supabaseUrlToRelativePath(url) {
-  if (!url) return null;
-  if (!url.includes("/object/public/")) return url; // Not a Supabase URL, return as-is
-  const match = url.match(/\/object\/public\/product-images\/(.+)$/);
-  return match ? match[1] : url;
-}
-
 function formsEqual(a, b) {
   for (const k of Object.keys(EMPTY_FORM)) {
     const av = a[k], bv = b[k];
@@ -256,59 +248,9 @@ function mergeAutoTags(existingTags, kwTags, modelTags) {
   return [...all];
 }
 
-// ─── WebP conversion + resize ─────────────────────────────────────────────────
-const WEBP_QUALITY = 0.82;
-const WEBP_MAX_DIM = 1800;
-
-function convertToWebP(file, maxDim = WEBP_MAX_DIM, quality = WEBP_QUALITY) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const objectUrl = URL.createObjectURL(file);
-    img.onload = () => {
-      URL.revokeObjectURL(objectUrl);
-      let { width, height } = img;
-      if (width > maxDim || height > maxDim) {
-        if (width >= height) { height = Math.round((height / width) * maxDim); width = maxDim; }
-        else { width = Math.round((width / height) * maxDim); height = maxDim; }
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = width; canvas.height = height;
-      canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-      canvas.toBlob(
-        blob => blob ? resolve(blob) : reject(new Error("WebP conversion failed")),
-        "image/webp", quality
-      );
-    };
-    img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error("Image load failed")); };
-    img.src = objectUrl;
-  });
-}
-
-async function uploadFileToSupabase(file, bucket = "product-images") {
-  let uploadBlob, fileName;
-  if (file.type.startsWith("image/")) {
-    try {
-      uploadBlob = await convertToWebP(file);
-      fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.webp`;
-    } catch (err) {
-      console.warn("WebP conversion failed, uploading original:", err);
-      uploadBlob = file;
-      const ext = file.name.split(".").pop();
-      fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-    }
-  } else {
-    uploadBlob = file;
-    const ext = file.name.split(".").pop();
-    fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-  }
-  const contentType = file.type.startsWith("image/") ? "image/webp" : file.type;
-  const { error } = await supabase.storage
-    .from(bucket)
-    .upload(fileName, uploadBlob, { cacheControl: "3600", upsert: false, contentType });
-  if (error) throw new Error(error.message);
-  const { data } = supabase.storage.from(bucket).getPublicUrl(fileName);
-  return data.publicUrl;
-}
+// Uploads now go through uploadFileToR2 (./mediaUpload.js), which does its
+// own WebP conversion via the same canvas approach. This Supabase-storage
+// path stayed only as long as new uploads still needed it.
 
 function parseStorageUrl(url) {
   if (!url) return null;
@@ -2388,7 +2330,7 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, onRequestLiv
 }
 
 // ─── Variant Manager Component ────────────────────────────────────────────────
-function VariantManager({ variants, onChange, addToast }) {
+function VariantManager({ variants, onChange, addToast, slug, currentUser }) {
   const [isAdding, setIsAdding] = useState(false);
   const [newVariant, setNewVariant] = useState({
     sku: "", label: "", color_key: "", image: "", capacity_liters: "", is_default: false, status: "active"
@@ -2400,15 +2342,14 @@ function VariantManager({ variants, onChange, addToast }) {
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
-      const url = await uploadFileToSupabase(file, "product-images");
-      // Convert Supabase URL to relative path for local storage
-      const relativePath = supabaseUrlToRelativePath(url);
+      const roleTag = idx === -1 ? `new-${Date.now()}` : (variants[idx]?.sku || idx);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `productvariant-${slugify(String(roleTag))}`, currentUser });
       if (idx === -1) {
-        setNewVariant(v => ({ ...v, image: relativePath }));
+        setNewVariant(v => ({ ...v, image: url }));
       } else {
-        onChange(variants.map((v, i) => i === idx ? { ...v, image: relativePath } : v));
+        onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
       }
-      addToast("✓ Image uploaded and synced to local data.", "success");
+      addToast("✓ Image uploaded.", "success");
     } catch (err) {
       addToast("❌ Upload failed: " + err.message, "error");
     } finally {
@@ -2534,13 +2475,15 @@ function VariantManager({ variants, onChange, addToast }) {
 // the separate `product_variants` TABLE, keyed by SKU/capacity, used for
 // heaters). Accessories carry their color/code/image options here instead —
 // e.g. a pail's Cedar/Aspen/Hemlock options each with their own photo.
-function VariantColorsManager({ variants, onChange, addToast }) {
+function VariantColorsManager({ variants, onChange, addToast, slug, currentUser }) {
   const [uploadingIdx, setUploadingIdx] = useState(null);
 
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
-      const url = await uploadFileToSupabase(file, "product-images");
+      const v = variants[idx];
+      const roleTag = slugify(String(v?.code || v?.color || idx));
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `variant-${roleTag}`, currentUser });
       onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
       addToast("✓ Variant image uploaded.", "success");
     } catch (err) {
@@ -2844,13 +2787,15 @@ export default function Products({ currentUser }) {
   const handleThumbUpload = async file => {
     setUpThumb(true);
     try {
-      const url = await uploadFileToSupabase(file, "product-images");
-      // Delete old thumbnail if exists
+      const slug = effectiveSlug(form);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: "thumbnail", currentUser });
+      // Clean up the old thumbnail if it existed (harmless no-op for
+      // whichever of R2/Supabase the old URL wasn't hosted on).
       if (form.thumbnail && form.thumbnail !== url) {
-        await deleteStorageUrls([form.thumbnail]).catch(err => {
-          console.warn("[Products] Failed to delete old thumbnail:", err);
-          // Don't fail the whole operation if deletion fails
-        });
+        await Promise.allSettled([
+          deleteStorageUrls([form.thumbnail]),
+          deleteR2Urls([form.thumbnail], currentUser),
+        ]);
       }
       setForm(f => ({ ...f, thumbnail: url }));
       add("Thumbnail converted to WebP and uploaded.", "success");
@@ -2861,11 +2806,13 @@ export default function Products({ currentUser }) {
   const handleOgUpload = async file => {
     setUpOg(true);
     try {
-      const url = await uploadFileToSupabase(file, "product-images");
+      const slug = effectiveSlug(form);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: "og", currentUser });
       if (form.og_image && form.og_image !== url) {
-        await deleteStorageUrls([form.og_image]).catch(err => {
-          console.warn("[Products] Failed to delete old OG image:", err);
-        });
+        await Promise.allSettled([
+          deleteStorageUrls([form.og_image]),
+          deleteR2Urls([form.og_image], currentUser),
+        ]);
       }
       setForm(f => ({ ...f, og_image: url }));
       add("OG image converted to WebP and uploaded.", "success");
@@ -2876,8 +2823,9 @@ export default function Products({ currentUser }) {
   const uploadMoreImages = async files => {
     setUpImgs(true);
     try {
+      const slug = effectiveSlug(form);
       const arr  = Array.isArray(files) ? files : [files];
-      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "product-images")));
+      const urls = await Promise.all(arr.map(f => uploadFileToR2(f, { entityPrefix: "products", slug, role: "gallery", currentUser })));
       setForm(f => ({ ...f, images: [...f.images, ...urls] }));
       add(`${urls.length} image(s) converted to WebP and uploaded.`, "success");
     } catch (err) { add(err.message, "error"); }
@@ -2887,8 +2835,9 @@ export default function Products({ currentUser }) {
   const uploadSpecImages = async files => {
     setUpSpec(true);
     try {
+      const slug = effectiveSlug(form);
       const arr  = Array.isArray(files) ? files : [files];
-      const urls = await Promise.all(arr.map(f => uploadFileToSupabase(f, "product-images")));
+      const urls = await Promise.all(arr.map(f => uploadFileToR2(f, { entityPrefix: "products", slug, role: "spec", currentUser })));
       setForm(f => ({ ...f, spec_images: [...f.spec_images, ...urls] }));
       add(`${urls.length} spec image(s) converted to WebP and uploaded.`, "success");
     } catch (err) { add(err.message, "error"); }
@@ -2898,9 +2847,11 @@ export default function Products({ currentUser }) {
   const handleFileUpload = async file => {
     setUpFile(true);
     try {
-      const url         = await uploadFileToSupabase(file, "product-pdf");
+      const slug        = effectiveSlug(form);
       const rawName     = file.name.replace(/\.pdf$/i, "");
       const displayName = rawName.replace(/[-_]/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const role        = `manual-${slugify(displayName).slice(0, 30)}`;
+      const url         = await uploadFileToR2(file, { entityPrefix: "products", slug, role, currentUser });
       setForm(f => ({ ...f, files: [...f.files, { name: displayName, url }] }));
       add("PDF uploaded.", "success");
     } catch (err) { add("PDF upload failed: " + err.message, "error"); }
@@ -4128,14 +4079,14 @@ export default function Products({ currentUser }) {
 
           {/* Variants */}
           <SectionLabel label="Variants" />
-          <VariantManager variants={variants} onChange={setVariants} addToast={add} />
+          <VariantManager variants={variants} onChange={setVariants} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
 
           {/* Variant Colors — separate from "Variants" above: this manages
               a product's color/code/image options (e.g. an accessory's
               Cedar/Aspen/Hemlock choices), shown on the live product page's
               color swatches. Unrelated to the SKU-based variants above. */}
           <SectionLabel label="Variant Colors" />
-          <VariantColorsManager variants={form.variants} onChange={v => setForm(f => ({ ...f, variants: v }))} addToast={add} />
+          <VariantColorsManager variants={form.variants} onChange={v => setForm(f => ({ ...f, variants: v }))} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
 
           {/* Specifications Table — the live page's "Technical Data" table */}
           <SectionLabel label="Specifications Table" />
