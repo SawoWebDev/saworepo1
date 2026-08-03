@@ -7,29 +7,32 @@ import { getCache, setCache } from "../adminCache";
 
 // Every public page (product lists, category pages, individual product
 // displays) reads through this one hook, so caching it here caches the
-// whole site. Deliberately session-cache-and-skip rather than the admin
-// CMS's cache-then-revalidate: once a visitor has loaded the catalog once,
-// later page visits reuse it with zero Supabase/GitHub requests instead of
-// refetching in the background every time. The cache lives only in this JS
-// module's memory, so any real page reload (including a hard Ctrl+Shift+R)
-// clears it and the next visit fetches fresh again.
+// whole site. A repeat visit within CACHE_TTL_MS paints the cached list
+// instantly with zero Supabase/GitHub requests; past that age it still
+// paints instantly from cache but quietly refetches in the background, so a
+// CMS edit reaches visitors who already have a tab open within a bounded
+// delay instead of only on their next hard reload. The cache lives only in
+// this JS module's memory, so any real page reload (including a hard
+// Ctrl+Shift+R) clears it and the next visit fetches fresh again.
 const PRODUCTS_CACHE_KEY = "public:products:data";
+const CACHE_TTL_MS = 5 * 60 * 1000;
 
 export function useLocalProducts() {
   const cached = getCache(PRODUCTS_CACHE_KEY);
-  const [products, setProducts] = useState(() => cached?.products || []);
-  const [categories, setCategories] = useState(() => cached?.categories || []);
-  const [tags, setTags] = useState(() => cached?.tags || []);
-  const [meta, setMeta] = useState(() => cached?.meta || {});
+  const [products, setProducts] = useState(() => cached?.data.products || []);
+  const [categories, setCategories] = useState(() => cached?.data.categories || []);
+  const [tags, setTags] = useState(() => cached?.data.tags || []);
+  const [meta, setMeta] = useState(() => cached?.data.meta || {});
   const [loading, setLoading] = useState(() => !cached);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (getCache(PRODUCTS_CACHE_KEY)) return;
+    const cached = getCache(PRODUCTS_CACHE_KEY);
+    if (cached && Date.now() - cached.time < CACHE_TTL_MS) return;
 
     const loadData = async () => {
       try {
-        setLoading(true);
+        if (!cached) setLoading(true);
         const source = await getDataSource();
 
         let result;
@@ -84,7 +87,7 @@ export function useLocalProducts() {
         setCategories(result.categories);
         setTags(result.tags);
         setMeta(result.meta);
-        setCache(PRODUCTS_CACHE_KEY, result);
+        setCache(PRODUCTS_CACHE_KEY, { data: result, time: Date.now() });
       } catch (err) {
         setError(err.message);
         console.error("Failed to load products:", err);
