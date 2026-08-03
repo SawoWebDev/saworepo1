@@ -12,9 +12,6 @@ import CsvImportModal from "./csv/CsvImportModal";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
-import { DndContext, closestCenter, PointerSensor, KeyboardSensor, useSensor, useSensors } from "@dnd-kit/core";
-import { SortableContext, rectSortingStrategy, arrayMove, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
-import { CSS as DndCSS } from "@dnd-kit/utilities";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
 const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
@@ -914,56 +911,11 @@ function ModelSelect({ label, value, onChange, placeholder, suggestions = [] }) 
   );
 }
 
-// Drag handle + remove button for one tile inside a sortable gallery. `id`
-// is index-qualified (not just the URL) so a gallery that happens to
-// contain the same image twice still gets unique, stable drag targets.
-function SortableImageTile({ id, url, onRemove, itemClassName, removeClassName }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
-  const style = {
-    transform: DndCSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.4 : 1,
-    cursor: "grab",
-    touchAction: "none",
-  };
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={itemClassName} title="Drag to reorder">
-      <img src={url} alt="" />
-      {onRemove && (
-        <button type="button" className={removeClassName}
-          onPointerDown={e => e.stopPropagation()}
-          onClick={e => { e.stopPropagation(); onRemove(); }}>
-          <i className="fa-solid fa-xmark" />
-        </button>
-      )}
-    </div>
-  );
-}
-
 // ─── Smart Image Gallery — adapts display based on count ────────────────────────
-// The gallery order here IS the public carousel order (after the separately
-// managed thumbnail) — see Carousel in DispProduct.jsx/DispAccessories.jsx,
-// which renders `images[]` in array order. Dragging to reorder and saving
-// persists that order straight into the `images` jsonb column, so no
-// frontend changes are needed for a reorder to show up live.
-function SmartImageGallery({ images = [], onRemove, onReorder, isSingle = false }) {
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-  );
-
+function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
   if (!images.length) return null;
 
-  const ids = images.map((url, i) => `${i}::${url}`);
-  const handleDragEnd = ({ active, over }) => {
-    if (!over || active.id === over.id) return;
-    const oldIndex = ids.indexOf(active.id);
-    const newIndex = ids.indexOf(over.id);
-    if (oldIndex === -1 || newIndex === -1) return;
-    onReorder?.(arrayMove(images, oldIndex, newIndex));
-  };
-
-  // Single image: display large — nothing to reorder
+  // Single image: display large
   if (isSingle && images.length === 1) {
     return (
       <div className="smart-image-single">
@@ -982,33 +934,35 @@ function SmartImageGallery({ images = [], onRemove, onReorder, isSingle = false 
   // 2-3 images: grid display
   if (isSingle && images.length <= 3) {
     return (
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={ids} strategy={rectSortingStrategy}>
-          <div className={`smart-image-grid grid-${images.length}`}>
-            {images.map((url, i) => (
-              <SortableImageTile key={ids[i]} id={ids[i]} url={url}
-                onRemove={onRemove ? () => onRemove(i) : null}
-                itemClassName="smart-image-item" removeClassName="smart-image-remove" />
-            ))}
+      <div className={`smart-image-grid grid-${images.length}`}>
+        {images.map((url, i) => (
+          <div key={i} className="smart-image-item">
+            <img src={url} alt="" />
+            {onRemove && (
+              <button type="button" className="smart-image-remove" onClick={() => onRemove(i)}>
+                <i className="fa-solid fa-xmark" />
+              </button>
+            )}
           </div>
-        </SortableContext>
-      </DndContext>
+        ))}
+      </div>
     );
   }
 
   // Many images: compact strip
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={ids} strategy={rectSortingStrategy}>
-        <div className="image-strip">
-          {images.map((url, i) => (
-            <SortableImageTile key={ids[i]} id={ids[i]} url={url}
-              onRemove={onRemove ? () => onRemove(i) : null}
-              itemClassName="image-strip-item" removeClassName="image-strip-remove" />
-          ))}
+    <div className="image-strip">
+      {images.map((url, i) => (
+        <div key={i} className="image-strip-item">
+          <img src={url} alt="" />
+          {onRemove && (
+            <button type="button" className="image-strip-remove" onClick={() => onRemove(i)}>
+              <i className="fa-solid fa-xmark" />
+            </button>
+          )}
         </div>
-      </SortableContext>
-    </DndContext>
+      ))}
+    </div>
   );
 }
 
@@ -3159,7 +3113,6 @@ export default function Products({ currentUser }) {
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
-      add("💡 Click 'Publish changes' to sync this to the local data so it appears (with its own page) on the frontend.", "info");
       actualClose();
       fetchProducts();
     } catch (err) { add(err.message, "error"); }
@@ -3940,8 +3893,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Gallery Images" />
               {form.images.length > 0 ? (
                 <>
-                  <SmartImageGallery images={form.images} isSingle onRemove={i => removeImageFile("images", i)}
-                    onReorder={next => setForm(f => ({ ...f, images: next }))} />
+                  <SmartImageGallery images={form.images} isSingle onRemove={i => removeImageFile("images", i)} />
                   <AddMoreImagesButton label="Add More Images" uploading={upImgs}
                     onChange={e => e.target.files?.length && uploadMoreImages(Array.from(e.target.files))} />
                 </>
@@ -4034,8 +3986,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Spec / Diagram Images" />
               {form.spec_images.length > 0 ? (
                 <>
-                  <SmartImageGallery images={form.spec_images} isSingle onRemove={i => removeImageFile("spec_images", i)}
-                    onReorder={next => setForm(f => ({ ...f, spec_images: next }))} />
+                  <SmartImageGallery images={form.spec_images} isSingle onRemove={i => removeImageFile("spec_images", i)} />
                   <AddMoreImagesButton label="Add More Spec Images" uploading={upSpec}
                     onChange={e => e.target.files?.length && uploadSpecImages(Array.from(e.target.files))} />
                 </>

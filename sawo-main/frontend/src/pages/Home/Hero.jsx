@@ -16,7 +16,20 @@ const ALT_TEXT    = "SAWO sauna heaters - Experience wellness and rejuvenation";
 const Hero = () => {
   const typewriterRef = useRef(null);
   const heroImgRef = useRef(null);
-  const [heroLoaded, setHeroLoaded] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(() => {
+    // On "/", main.js only executes after the *prerendered* hero <img>'s
+    // load event (scripts/prerender.js's post-LCP gate) — so by the time
+    // this component's render phase runs, that already-painted img is still
+    // in the DOM (createRoot hasn't committed the replacement yet). Starting
+    // heroLoaded at false here unconditionally meant the fresh mount always
+    // swapped in a brand-new <img> at opacity:0, which blanked the already-
+    // visible hero back to the dark placeholder for a frame before the
+    // effect below caught up — the "blinks twice" flash on homepage load.
+    // Checking the outgoing element's own load state up front skips that.
+    if (typeof document === "undefined") return false;
+    const existing = document.querySelector("section.sauna-unique img");
+    return !!(existing && existing.complete && existing.naturalWidth > 0);
+  });
 
   // Fade the hero image in once it's actually painted instead of it popping
   // in abruptly, without gating the real <img>'s fetch/paint behind JS —
