@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "sync": "node sync.js",
-    "sync:rooms": "node sync-sauna-rooms.js"
+    "sync:rooms": "node sync-sauna-rooms.js",
+    "migrate-to-r2": "node migrate-to-r2.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.600.0",
     "@supabase/supabase-js": "^2.38.4",
     "dotenv": "^16.3.1",
     "node-fetch": "^3.3.2"
