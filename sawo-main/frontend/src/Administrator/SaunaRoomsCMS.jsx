@@ -6,6 +6,9 @@ import { getCache, setCache } from "./adminCache";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
+import { DndContext, closestCenter, PointerSensor, KeyboardSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, rectSortingStrategy, arrayMove, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
+import { CSS as DndCSS } from "@dnd-kit/utilities";
 
 const ROOMS_CACHE_KEY = "admin:sauna-rooms:live";
 const ROOMS_META_CACHE_KEY = "admin:sauna-rooms:live:meta";
@@ -685,21 +688,65 @@ function AddMoreImagesButton({ label, uploading, onChange }) {
   );
 }
 
-function ImageStrip({ images = [], onRemove }) {
-  if (!images.length) return null;
+// Drag handle + remove button for one tile inside a sortable gallery. `id`
+// is index-qualified (not just the URL) so a gallery that happens to
+// contain the same image twice still gets unique, stable drag targets.
+function SortableImageStripTile({ id, url, onRemove }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const style = {
+    transform: DndCSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.4 : 1,
+    cursor: "grab",
+    touchAction: "none",
+  };
   return (
-    <div className="image-strip">
-      {images.map((url, i) => (
-        <div key={i} className="image-strip-item">
-          <img src={url} alt="" />
-          {onRemove && (
-            <button type="button" className="image-strip-remove" onClick={() => onRemove(i)}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          )}
-        </div>
-      ))}
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="image-strip-item" title="Drag to reorder">
+      <img src={url} alt="" />
+      {onRemove && (
+        <button type="button" className="image-strip-remove"
+          onPointerDown={e => e.stopPropagation()}
+          onClick={e => { e.stopPropagation(); onRemove(); }}>
+          <i className="fa-solid fa-xmark" />
+        </button>
+      )}
     </div>
+  );
+}
+
+// The strip order here IS the public carousel order for this room's own
+// gallery portion (see carouselImages in DispSaunaRoom.jsx, which renders
+// room.images in array order after config images + thumbnail). Dragging to
+// reorder and saving persists that order straight into the `images` jsonb
+// column, so no frontend changes are needed for a reorder to show up live.
+function ImageStrip({ images = [], onRemove, onReorder }) {
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  if (!images.length) return null;
+
+  const ids = images.map((url, i) => `${i}::${url}`);
+  const handleDragEnd = ({ active, over }) => {
+    if (!over || active.id === over.id) return;
+    const oldIndex = ids.indexOf(active.id);
+    const newIndex = ids.indexOf(over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+    onReorder?.(arrayMove(images, oldIndex, newIndex));
+  };
+
+  return (
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={ids} strategy={rectSortingStrategy}>
+        <div className="image-strip">
+          {images.map((url, i) => (
+            <SortableImageStripTile key={ids[i]} id={ids[i]} url={url}
+              onRemove={onRemove ? () => onRemove(i) : null} />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
   );
 }
 
@@ -2250,7 +2297,8 @@ export default function SaunaRooms({ currentUser }) {
                   <SectionLabel label="Gallery Images" />
                   {form.images.length > 0 ? (
                     <>
-                      <ImageStrip images={form.images} onRemove={i => removeImageFile("images", i)} />
+                      <ImageStrip images={form.images} onRemove={i => removeImageFile("images", i)}
+                        onReorder={next => setForm(f => ({ ...f, images: next }))} />
                       <AddMoreImagesButton label="Add More Images" uploading={upImgs}
                         onChange={e => e.target.files?.length && uploadMoreImages(Array.from(e.target.files))} />
                     </>
@@ -2261,7 +2309,8 @@ export default function SaunaRooms({ currentUser }) {
                   <SectionLabel label="Spec / Diagram Images" />
                   {form.spec_images.length > 0 ? (
                     <>
-                      <ImageStrip images={form.spec_images} onRemove={i => removeImageFile("spec_images", i)} />
+                      <ImageStrip images={form.spec_images} onRemove={i => removeImageFile("spec_images", i)}
+                        onReorder={next => setForm(f => ({ ...f, spec_images: next }))} />
                       <AddMoreImagesButton label="Add More Spec Images" uploading={upSpec}
                         onChange={e => e.target.files?.length && uploadSpecImages(Array.from(e.target.files))} />
                     </>
