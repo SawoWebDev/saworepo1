@@ -1,0 +1,254 @@
+# ============================================================================
+# SAWO.COM 301 REDIRECTS — Cloudflare Pages format
+# ----------------------------------------------------------------------------
+# HOW TO USE:
+#   Copy this file, as-is, to  frontend/public/_redirects
+#   Cloudflare Pages auto-discovers a file named exactly `_redirects` in the
+#   build output root (CRA copies everything in public/ into build/ unchanged,
+#   so putting it in public/ is sufficient — no build step needed for this).
+#   Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+#   Syntax per line:  <source>  <destination>  <status>
+#   Cloudflare reads these top-to-bottom and applies the FIRST match — order
+#   matters. All entries below are 301 (permanent), which is what preserves
+#   search-ranking signal from the old WordPress URLs. Do not change any of
+#   these to 302 later as a "quick fix."
+#
+# NOTE ON TRANSLATIONS: this file only contains English-site redirects. The
+# /fi and /de translated site (frontend-next) is DEFERRED — see the note in
+# GO-LIVE-INSTRUCTIONS.md section 1. No /fi or /de rewrite rules are included
+# here; add them back when translations resume.
+#
+# ----------------------------------------------------------------------------
+# 2026-08-03 UPDATE: every `# ??` open decision from section 3 of
+# GO-LIVE-INSTRUCTIONS.md has been resolved against the real route table
+# (frontend/src/menuPaths.js + App.jsx) and the real product/room data
+# (frontend/src/Administrator/Local/data/{products,saunaroom-data}.json).
+# Most got a confirmed real target. FIVE could not — no equivalent content
+# exists anywhere in this codebase for them. Those are marked `# GAP:` below
+# (not `# ??`) with the reasoning, and a same-topic fallback page chosen so
+# the URL still resolves to a 301 instead of a soft-404. See the go-live
+# report for the full list of these five — they need a real product decision
+# (build a page, keep serving old content some other way, or retire/410),
+# not a guess. Do not remove the `# GAP:` comments until each is deliberately
+# decided.
+# ============================================================================
+
+# ---- HIGH PRIORITY (external backlinks) ------------------------------------
+/contact/                                                301
+/privacy-policy/                                         301
+/finnish-sauna/sauna-heaters/            /sauna/heaters   301
+/careers/                                                301
+# NOTE: "/" needs no redirect — same URL on both sites.
+
+# ---- SAUNA / HEATERS --------------------------------------------------------
+/finnish-sauna/                                          /sauna                          301
+/finnish-sauna/sauna-heaters/wall-mounted-series/        /sauna/heaters/wall-mounted     301
+/finnish-sauna/sauna-heaters/tower-series/               /sauna/heaters/tower            301
+/finnish-sauna/sauna-heaters/stone-series/               /sauna/heaters/stone            301
+/finnish-sauna/sauna-heaters/floor-series/                /sauna/heaters/floor            301
+/finnish-sauna/sauna-heaters/combi-series/               /sauna/heaters/combi            301
+/finnish-sauna/sauna-heaters/dragonfire-series/          /sauna/heaters/dragonfire       301
+/finnish-sauna/sauna-heaters/infrared-sauna/             /infrared                       301
+# RESOLVED: "sauna-products" was a general listing page nested under
+# /sauna-heaters/ on WordPress. /products (AllProducts.jsx) is the site's
+# current general catalogue (heaters + rooms + accessories all in one
+# searchable page) and is the closest real equivalent. Confirmed it renders.
+/finnish-sauna/sauna-heaters/sauna-products/             /products                       301
+# RESOLVED: Innova is one of the two control-series groups rendered on
+# /sauna/controls (frontend/src/pages/Sauna/SaunaControls.jsx,
+# GROUP_KEYWORDS["Innova Series"]). That page reads a `?group=` query param
+# (useSearchParams, line ~192) to auto-filter to a series, and the Sauna
+# landing page already links to it exactly this way — reusing the same
+# pattern here.
+/finnish-sauna/innova-series/                            /sauna/controls?group=Innova+Series    301
+# RESOLVED (was WRONG before this pass): Saunova is the OTHER control-series
+# group on the SAME /sauna/controls page (GROUP_KEYWORDS["Saunova Series"]),
+# not a heater series — it was previously misrouted to
+# /sauna/heaters/combi, which is a different product line entirely. Fixed
+# using the same ?group= pattern as Innova above.
+/finnish-sauna/saunova-series/                           /sauna/controls?group=Saunova+Series   301
+
+# ---- SAUNA / CONTROLS + ACCESSORIES ----------------------------------------
+/finnish-sauna/sauna-controls/                           /sauna/controls                             301
+# RESOLVED (judgment call, no exact WP-era equivalent to check against):
+# "control-accessories" sat as a sibling URL to both /sauna-controls/ and
+# /sauna-accessories/ on WordPress, so its own target is genuinely
+# ambiguous between the two. Chose /sauna/accessories over /sauna/controls
+# because the accessories catalogue (frontend/src/pages/AllProducts.jsx +
+# AccessoriesCatalog.jsx) is where physical accessory products live, which
+# "accessories" more plausibly named than "controls" did. /sauna/controls
+# does have its own "Control Spare Parts" group if this turns out wrong —
+# easy to flip later, low backlink risk either way (P2, not P1).
+/finnish-sauna/control-accessories/                      /sauna/accessories                           301
+/finnish-sauna/sauna-accessories/                        /sauna/accessories                           301
+/finnish-sauna/sauna-accessories/accessorysets/          /sauna/accessories/accessory-sets            301
+/finnish-sauna/sauna-accessories/pails-ladles/           /sauna/accessories/pails-ladles              301
+/finnish-sauna/sauna-accessories/thermometers-combined-meters/  /sauna/accessories/thermometers       301
+/finnish-sauna/sauna-accessories/clocks-sandtimers/      /sauna/accessories/clocks-sandtimers         301
+/finnish-sauna/sauna-accessories/sauna-light/            /sauna/accessories/lights-covers             301
+/finnish-sauna/sauna-accessories/headrests-backrests/    /sauna/accessories/headrests-backrests       301
+/finnish-sauna/sauna-accessories/doors-handles/          /sauna/accessories/doors-handles             301
+# RESOLVED: confirmed against AllProducts.jsx's CATEGORY_SECTIONS — the
+# "ventilation & miscellaneous" category maps 1:1 to this route
+# (menuPaths.sauna.accessories.ventilations = /sauna/accessories/ventilations-add-ons,
+# routed to <VentilationsAddOns/> in App.jsx). Real match, not a guess.
+/finnish-sauna/accessory-add-ons/                        /sauna/accessories/ventilations-add-ons      301
+
+# ---- STEAM -------------------------------------------------------------------
+/steam-sauna/                                            /steam                          301
+/steam-sauna/steam-generators/                           /steam/generators               301
+/steam-sauna/steam-controls/                             /steam/controls                 301
+/steam-sauna/steam-accessories/                          /steam/accessories              301
+# RESOLVED: "STN-W" is a real generator, but it has no standalone detail
+# page/slug anywhere in products.json — it's one of four generators
+# (STN-S/STN-W/STN/STE) hardcoded directly into the /steam/generators hub
+# page (frontend/src/pages/Steam/SteamGenerators.jsx, `generators` array,
+# line ~22: "STN-W Steam Generator"). The hub page IS the real, correct,
+# already-rendering target — not a fallback.
+/stn-w-steam-generator-details/                          /steam/generators               301
+
+# ---- SAUNA ROOMS --------------------------------------------------------------
+/sauna-rooms/                                             /sauna/rooms                                 301
+/sauna-rooms/interior-designs/                            /sauna/rooms/interior-designs                301
+/sauna-rooms/wood-panels-timbers/                         /sauna/rooms/wood-panels-timbers             301
+# GAP: "Salt Sauna Jr" was a specific room design (likely featuring the
+# Himalayan Salt Wall tiles that DO still exist as accessory products —
+# see himalayan-salt-wall-* in products.json) but there is no room with
+# "salt" in its name/slug anywhere in saunaroom-data.json today — it was
+# not carried over as its own page. Falling through to the interior-designs
+# hub, the closest topical match, rather than a generic room. Flagging back:
+# decide whether "Salt Sauna Jr" needs to be rebuilt as a real room listing
+# (the salt-wall accessory content already exists to support it) or whether
+# this was already retired deliberately.
+/sauna-rooms/interior-designs-with-salt-sauna-jr/         /sauna/rooms/interior-designs                301
+# GAP: no room with model code "4244" (or anything close to it) exists in
+# saunaroom-data.json's glassfront set — checked every glass-front-* slug.
+# This may be a WordPress-era typo for a real code (2022MD/2222MD are the
+# nearest numeric neighbors) or a genuinely discontinued model. Falling
+# through to the rooms hub rather than guessing a specific wrong room.
+# Flagging back: need a human decision — is "4244MD" a typo for a live
+# model, or truly gone?
+/glass-front-sauna-room-4244md/                           /sauna/rooms                                 301
+# RESOLVED: real match confirmed in saunaroom-data.json — slug
+# "standard-sauna-room-1414" (model_code "1414", status "published",
+# visible: true), with an "RS" door_option, matching the old "-1414rs"
+# WordPress suffix. Renders on the real /sauna/rooms/[slug] detail route.
+/standard-sauna-room-1414rs/                              /sauna/rooms/standard-sauna-room-1414        301
+
+# ---- SUPPORT / INFO ------------------------------------------------------------
+/frequently-asked-questions/                             /support/faq                    301
+/user-manuals/                                           /support/manuals                301
+/sauna-calculator/                                       /support/sauna-calculator       301
+/about-us/                                                /about                          301
+/about-us/sustainability/                                /about/sustainability           301
+# RESOLVED: /sauna-accessories (AccessoriesCatalog.jsx, routed at
+# menuPaths.accessories) is the site's real accessories catalogue/listing
+# page — the direct equivalent of a WP "accessory-products" listing page.
+# /products is the broader all-categories catalogue instead; accessories
+# is the closer semantic match.
+/accessory-products/                                      /sauna-accessories              301
+# GAP: no "spare parts" page, product category, or data exists anywhere in
+# the codebase (checked products.json categories and grepped the whole
+# frontend/src tree). The closest partial equivalent is the "Control Spare
+# Parts" product group nested inside /sauna/controls (SaunaControls.jsx),
+# but that only covers controls hardware, not general heater/room spare
+# parts, so it isn't a real substitute. Falling through to the general
+# /support hub. Flagging back: decide whether spare parts need a real page
+# built, or whether this content is intentionally not being carried
+# forward.
+/spare-parts/                                             /support                        301
+# RESOLVED: Contact.jsx literally references "nearest SAWO distributor"
+# and its own <SEO> description mentions "distributor contacts for our
+# global network of representative offices" (line ~179) — /contact is a
+# genuine, not a guessed, equivalent for distributor inquiries.
+/distributors/                                            /contact                        301
+
+# ---- TOOLS / MEDIA (decide: build / redirect / retire) -------------------------
+# GAP — HIGHER PRIORITY THAN THE OTHERS BELOW: this is not just an old
+# external backlink target. frontend/src/pages/Sauna/rooms/SaunaRoomData.jsx
+# (S3T_VIEWER_URL, line ~733) hardcodes
+# "https://www.sawo.com/3d-viewer/" and that URL is rendered as a live
+# outbound link on the /sauna/rooms page itself (via Sauna3DTeaser.jsx,
+# "Launch 3D Viewer" / "Open 3D Viewer" buttons). Once sawo.com points at
+# THIS app, that link becomes a same-domain link to a path this app does
+# not implement anywhere — a real interactive 3D room viewer tool was never
+# migrated off WordPress. Today it silently 200s to WordPress; after
+# cutover it will 200-soft-404 to this SPA's catch-all (Scenario 13)
+# instead, and it's a link real visitors will click, not just a crawler
+# path. Redirecting the URL here is a stopgap so it lands somewhere real,
+# but the actual bug is the hardcoded self-link in SaunaRoomData.jsx —
+# flagging back: either restore the 3D viewer tool at this path (Cloudflare
+# Pages Function or an embedded iframe to wherever it's actually hosted),
+# or update SaunaRoomData.jsx to stop linking to a URL this app can't
+# serve, or remove the 3D-viewer teaser from the rooms page entirely.
+/3d-viewer/                                                /sauna/rooms                   301
+# GAP: zero references to "ai-cad" or "AI CAD" anywhere in this repo — no
+# internal link, no data entry, nothing that suggests a live feature was
+# ever built for this URL in the new site. Per GO-LIVE-INSTRUCTIONS.md
+# section 0, the full GSC "Links > Top linked pages" export still hasn't
+# been pulled (Scenario 3, open action item) — do that before deciding
+# whether this page has real backlinks worth protecting. Falling through
+# to /support as a safe default in the meantime; strong candidate for
+# retiring outright (410) once backlink status is confirmed.
+/ai-cad/                                                   /support                        301
+# GAP: no "Wood_Brochure.pdf" exists anywhere in this repo (checked both
+# frontend/public/pdfs and the saworepo2 asset store). The only real PDF
+# catalogue asset that exists today is
+# frontend/public/pdfs/SAWO-Product-Catalogue-2025-2026.pdf, served from
+# the /support/catalogue page — redirecting straight to that PDF file
+# (not the landing page) since the old URL itself was a direct PDF link,
+# so this preserves the "click a link, get a PDF" behavior third-party
+# spec-sheet sites are likely relying on. Content is NOT the same document
+# though — flagging back: if the original Wood Brochure content still
+# needs to exist standalone, it needs to be re-authored/re-uploaded.
+/brochure/Wood_Brochure.pdf                                /pdfs/SAWO-Product-Catalogue-2025-2026.pdf   301
+# GAP: no interactive HTML catalogue ("2020ML_gf") was migrated — nothing
+# under that name exists in frontend/public or frontend/src. Falling
+# through to the /support/catalogue page (the real, current catalogue
+# entry point) rather than the PDF directly, since the old URL was itself
+# an interactive HTML experience, not a flat file — a static PDF is a
+# closer content type match via the catalogue page's framing than linking
+# the bare PDF here too. Flagging back: same underlying question as the
+# brochure above — is the interactive catalogue tool coming back in some
+# form, or is a static PDF the deliberate downgrade?
+/pdf/interactive/2020ML_gf/2020ML/index.html               /support/catalogue             301
+
+# ---- JOB POSTINGS (all -> careers listing) --------------------------------------
+/buyer-logistics-specialist/                             /careers  301
+/electrical-engineer/                                    /careers  301
+/head-of-production/                                     /careers  301
+/international-sales-manager-german-speaker/             /careers  301
+/odoo-software-developer/                                /careers  301
+/process-engineer/                                       /careers  301
+/product-supervisor/                                     /careers  301
+
+# ---- VOLTAGE / HEATER-POWER PAGES (group -> heaters hub for launch) -------------
+/voltage/2-3kw/    /sauna/heaters  301
+/voltage/3-5kw/    /sauna/heaters  301
+/voltage/3-6kw/    /sauna/heaters  301
+/voltage/4-5kw/    /sauna/heaters  301
+/voltage/6-0kw/    /sauna/heaters  301
+/voltage/7-5kw/    /sauna/heaters  301
+/voltage/8-0kw/    /sauna/heaters  301
+/voltage/9-0kw/    /sauna/heaters  301
+/voltage/10-5kw/   /sauna/heaters  301
+/voltage/12-0kw/   /sauna/heaters  301
+/voltage/15-0kw/   /sauna/heaters  301
+/voltage/18-0kw/   /sauna/heaters  301
+/voltage/21-0kw/   /sauna/heaters  301
+/voltage/24-0kw/   /sauna/heaters  301
+/voltage/27-0kw/   /sauna/heaters  301
+/voltage/30-0kw/   /sauna/heaters  301
+/voltage/33-0kw/   /sauna/heaters  301
+/voltage/36-0kw/   /sauna/heaters  301
+
+# ---- SPA CATCH-ALL (must stay LAST — do not reorder above this line) -----------
+# Cloudflare Pages serves build/index.html for any unmatched static path by
+# default for SPA-shaped projects, but being explicit here avoids relying on
+# that default and keeps this file the single source of truth for routing.
+# Using 200 (not 301) — this is a REWRITE (serve index.html, keep the URL and
+# let React Router take over), not a redirect. See SEO-GO-LIVE-CHECKLIST.md
+# Scenario 13 for why this still returns unmatched paths as a 200 status
+# (soft-404 risk) and what to do about it.
+/*    /index.html   200
