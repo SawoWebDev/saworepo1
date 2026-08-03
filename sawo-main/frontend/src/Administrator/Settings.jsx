@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { logActivity, supabase } from "./supabase";
-import {
-  getDataSource, setDataSource as saveDataSource,
-  getJsonSourceScope, setJsonSourceScope as saveJsonSourceScope,
-} from "../local-storage/dataSource";
+import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
 import { getGDPRBannerEnabled, setGDPRBannerEnabled as saveGDPRBannerEnabled } from "../local-storage/gdprSettings";
 import {
   getLanguageSwitcherEnabled, setLanguageSwitcherEnabled as saveLanguageSwitcherEnabled,
@@ -69,17 +66,16 @@ const SETTINGS_CACHE_KEY = "admin:settings";
 // logout/theme) — this is a high-stakes, rarely-changed control (it changes
 // what the PUBLIC site serves), so it belongs on a dedicated page rather
 // than one accidental click away at all times. See local-storage/dataSource.js.
+//
+// "github" and "jsonfile" are deliberately NOT offered as choices anymore
+// (2026-08-03, R2/Render retirement): both depend on the Render sync
+// backend to keep the bundled/synced snapshot fresh, and that backend has
+// been retired. Selecting either now would silently freeze the public site
+// on stale data with no way to ever refresh it. "supabase" (live reads) is
+// the only supported source going forward — see [[r2-migration-live]] /
+// docs/go-live/R2-MIGRATION-PLAN.md §8 for the full context.
 const SOURCE_OPTIONS = [
-  { value: "github", label: "GitHub", description: "The GitHub-synced JSON snapshot (bundled products.json). Current default." },
-  { value: "supabase", label: "Supabase", description: "Live Supabase rows, direct and instant. No sync step needed." },
-  { value: "jsonfile", label: "Json File", description: "A single hand-edited JSON file in the images repo, scoped below. Falls back to the GitHub snapshot outside that scope." },
-];
-
-const SCOPE_OPTIONS = [
-  { value: "accessories", label: "Accessories" },
-  { value: "all", label: "All (coming soon)", disabled: true },
-  { value: "saunarooms", label: "Sauna Rooms (coming soon)", disabled: true },
-  { value: "heaters", label: "Heaters (coming soon)", disabled: true },
+  { value: "supabase", label: "Supabase", description: "Live Supabase rows, direct and instant. The only supported source since the GitHub/Render sync pipeline was retired." },
 ];
 
 function useToast() {
@@ -112,7 +108,6 @@ export default function Settings({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const cachedSettings = getCache(SETTINGS_CACHE_KEY);
   const [source, setSource] = useState(() => cachedSettings ? cachedSettings.source : null);
-  const [scope, setScope] = useState(() => cachedSettings ? cachedSettings.scope : "accessories");
   const [switching, setSwitching] = useState(false);
   const [gdprEnabled, setGdprEnabled] = useState(() => cachedSettings ? cachedSettings.gdprEnabled : false);
   const [gdprSaving, setGdprSaving] = useState(false);
@@ -128,16 +123,16 @@ export default function Settings({ currentUser }) {
 
   useEffect(() => {
     Promise.all([
-      getDataSource(), getJsonSourceScope(), getGDPRBannerEnabled(),
+      getDataSource(), getGDPRBannerEnabled(),
       getLanguageSwitcherEnabled(), getEnabledLanguages(), fetchHeaderPrefs(),
     ])
-      .then(([s, sc, gdpr, langEn, langs, headerPrefs]) => {
-        setSource(s); setScope(sc); setGdprEnabled(gdpr);
+      .then(([s, gdpr, langEn, langs, headerPrefs]) => {
+        setSource(s); setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
         setHeaderLayoutState(headerPrefs.headerLayout);
         setNavStyleState(headerPrefs.navStyle);
         setCache(SETTINGS_CACHE_KEY, {
-          source: s, scope: sc, gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
+          source: s, gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
           headerLayout: headerPrefs.headerLayout, navStyle: headerPrefs.navStyle,
         });
       })
@@ -292,29 +287,6 @@ export default function Settings({ currentUser }) {
     }
   };
 
-  const handleSwitchScope = async (next) => {
-    setSwitching(true);
-    setError(null);
-    try {
-      await saveJsonSourceScope(next, currentUser?.username);
-      setScope(next);
-      await logActivity({
-        action: "update",
-        entity: "app_settings",
-        entity_id: "json_source_scope",
-        entity_name: `Json Source Scope → ${next}`,
-        username: currentUser?.username,
-        user_id: currentUser?.id,
-      });
-      add(`Json Source scope switched to ${next}`, "success");
-    } catch (err) {
-      setError("Failed to switch json source scope: " + err.message);
-      add("Failed to switch json source scope", "error");
-    } finally {
-      setSwitching(false);
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -374,26 +346,6 @@ export default function Settings({ currentUser }) {
           ))}
         </div>
 
-        {source === "jsonfile" && (
-          <div className="pl-4 border-l-2 border-[var(--border)]">
-            <label className="block text-xs font-medium text-[var(--text-2)] mb-2">
-              Json File scope
-            </label>
-            <select
-              value={scope}
-              disabled={switching}
-              onChange={(e) => handleSwitchScope(e.target.value)}
-              title="Which product group the Json File source applies to. Only Accessories is available today; edits to it live in the images repo's allaccs-data.json, not in this admin."
-              className="filter-select"
-            >
-              {SCOPE_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value} disabled={opt.disabled}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
       </div>
 
       <div className="card card-body">
