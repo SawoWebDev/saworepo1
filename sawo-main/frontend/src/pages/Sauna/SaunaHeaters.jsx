@@ -52,11 +52,8 @@ const SaunaHeaters = () => {
           <h1 className="sh-hero-title">SAUNA HEATERS</h1>
           <div style={{ marginTop: "12px", display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
             <BrochureDropdownButton
-              text="VIEW CATALOGUE"
-              items={[{
-                label: "Product Catalogue",
-                href: "https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf",
-              }]}
+              text="PRODUCT CATALOGUE"
+              href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
             />
           </div>
         </div>
