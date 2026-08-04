@@ -64,6 +64,7 @@ export const CAPABILITY_MAP = {
   "page.products_local":      ["editor", "admin", "superadmin"],
   "page.analytics":           ["admin", "superadmin"],
   "page.seo":                 ["editor", "admin", "superadmin"],
+  "page.ci_status":           ["admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
   // Gates the Permissions page itself — deliberately NOT part of
   // the dynamic override system (see setCapabilityOverrides below).
@@ -117,28 +118,28 @@ export function getPerms(user) {
 }
 
 /**
- * Navigation items for the sidebar, filtered by role capability and grouped
- * by `section` for display (see AdminLayout.jsx's Sidebar).
+ * Navigation items for the sidebar, filtered by role capability and
+ * rendered as a flat list in this order (see AdminLayout.jsx's Sidebar).
  * Filter this array using: NAV_ITEMS.filter(item => can(userRole, item.cap))
  */
 export const NAV_ITEMS = [
-  { to: "/admin/dashboard",       label: "Dashboard",        icon: "fa-solid fa-gauge-high",     cap: "page.dashboard",   section: "Overview", description: "At-a-glance activity, traffic, and catalog status." },
-  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    section: "Catalog",  description: "Manage your product catalog. Create, edit, and publish items across the site." },
-  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", section: "Catalog",  description: "Manage sauna room listings. Create, edit, and publish rooms across the site." },
-  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      section: "Catalog",  description: "Browse products grouped by model line. Click a folder to see everything in it." },
-  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    section: "Catalog",  description: "Manage the categories and tags products can be organized under." },
-  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        section: "Catalog",   description: "A record of every create, update, and delete made across the CMS." },
-
-  { to: "/admin/inbox",           label: "Inbox",            icon: "fa-solid fa-inbox",          cap: "page.inbox",       section: "Insights", description: "Every Contact form submission — general inquiries, technical support, and customer support requests." },
-  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   section: "Insights", description: "Track visitor behavior, page performance, and traffic sources." },
-  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", section: "Insights", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
+  { to: "/admin/dashboard",       label: "Dashboard",        icon: "fa-solid fa-gauge-high",     cap: "page.dashboard",   description: "At-a-glance activity, traffic, and catalog status." },
+  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    description: "Manage your product catalog. Create, edit, and publish items across the site." },
+  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", description: "Manage sauna room listings. Create, edit, and publish rooms across the site." },
+  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      description: "Browse products grouped by model line. Click a folder to see everything in it." },
+  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    description: "Manage the categories and tags products can be organized under." },
+  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        description: "A record of every create, update, and delete made across the CMS." },
+  { to: "/admin/inbox",           label: "Inbox",            icon: "fa-solid fa-inbox",          cap: "page.inbox",       description: "Every Contact form submission — general inquiries, technical support, and customer support requests." },
+  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   description: "Track visitor behavior, page performance, and traffic sources." },
+  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
+  { to: "/admin/ci-status",       label: "CI Status",        icon: "fa-solid fa-list-check",     cap: "page.ci_status",   description: "Latest results from the GitHub Actions checks that run against this repo (SEO, sitemap, keep-alive, broken links)." },
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
   // own name/avatar in the sidebar footer instead) while still being matched
   // for the shared PageHeader and the route's capability check.
-  { to: "/admin/profile",         label: "My Profile",       icon: "fa-solid fa-user",           cap: "page.profile",     section: "System",   description: "Update your own username, name, and password.", hidden: true },
-  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       section: "System",   description: "Manage admin accounts and their access roles." },
-  { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", section: "System",   description: "Control which roles can see each page and perform create/edit/delete actions." },
-  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    section: "System",   description: "Site-wide configuration for the public frontend, including the language switcher." },
+  { to: "/admin/profile",         label: "My Profile",       icon: "fa-solid fa-user",           cap: "page.profile",     description: "Update your own username, name, and password.", hidden: true },
+  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       description: "Manage admin accounts and their access roles." },
+  { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", description: "Control which roles can see each page and perform create/edit/delete actions." },
+  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    description: "Site-wide configuration for the public frontend, including the language switcher." },
 ];
 
 /**

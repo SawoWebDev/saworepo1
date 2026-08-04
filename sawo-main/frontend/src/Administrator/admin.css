@@ -186,91 +186,25 @@ body {
 .sidebar-logo-img { width:100px; height:auto; display:block; transition: opacity 0.2s, transform 0.25s ease; }
 .sidebar-logo a:hover img { opacity:0.85; transform: scale(1.03); }
 
-.sidebar-nav { flex:1; padding:1rem 0 0.75rem; overflow-y:auto; }
+.sidebar-nav { flex:1; padding:0.6rem 0 0.5rem; overflow-y:auto; }
 .sidebar-nav::-webkit-scrollbar { width: 4px; }
 .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 4px; }
 
-/* Each section (Catalog / Insights / System) — no card background while
-   collapsed (that's most of the time, and it just adds height); the "grouped
-   under this category" card treatment now only applies to .sidebar-section-
-   items while it's actually expanded, see below. */
-.sidebar-section {
-  margin: 0 0.55rem;
-  padding: 0.3rem 0 0.2rem;
-}
-.sidebar-section:not(:first-child) { margin-top: 0.4rem; }
-
-/* Section headings: bright white small-caps (always in contrast with the
-   brown gradient behind them) and a chevron — each section is a clickable
-   dropdown that shows/hides what's below it. */
-.sidebar-section-label {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.55rem;
-  padding: 0.4rem 1.1rem 0.45rem 1.35rem;
-  border-radius: 10px;
-  font-family: var(--font);
-  font-size: 0.63rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.35);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: background var(--t), color var(--t), box-shadow var(--t);
-}
-.sidebar-section-chevron {
-  font-size: 0.55rem;
-  color: rgba(255,255,255,0.6);
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-.sidebar-section-chevron.is-closed { transform: rotate(-90deg); }
-
-/* Collapsible section body. max-height (not height) so it can transition
-   without JS-measuring — generous enough for any section's item count. The
-   "grouped card" background now lives here instead of on .sidebar-section
-   itself, so it's only visible while a section is actually expanded — a
-   closed section is just its label, no card box padding/height added. */
-.sidebar-section-items {
-  max-height: 600px;
-  overflow: hidden;
-  opacity: 1;
-  padding: 0.35rem 0;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.14);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-  transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
-  margin-top: 0.35rem;
-}
-.sidebar-section-items.is-closed {
-  max-height: 0;
-  opacity: 0;
-  padding: 0;
-  margin-top: 0;
-  background: transparent;
-  box-shadow: none;
-  transition: max-height 0.2s ease, opacity 0.1s ease;
-}
-
 /* Nav items float as soft rounded cards inset from the edges. Each icon
    sits in its own frosted chip; the active item raises up on a cream-lit
-   card with a glowing accent bar. */
+   card with a glowing accent bar. Flat list, no section grouping — spacing
+   kept tight so the full list stays compact. */
 .sidebar-nav a {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  margin: 2px 0.65rem;
-  padding: 0.5rem 0.6rem;
-  border-radius: 10px;
+  gap: 0.65rem;
+  margin: 1px 0.55rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 9px;
   color: #fff;
   text-decoration: none;
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.01em;
   transition: background var(--t), color var(--t), transform 0.18s ease, box-shadow var(--t);
@@ -289,29 +223,26 @@ body {
   transition: opacity var(--t);
 }
 .sidebar-nav a i {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.82rem;
-  border-radius: 8px;
+  font-size: 0.8rem;
+  border-radius: 7px;
   background: rgba(255,255,255,0.08);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
   opacity: 0.9;
   transition: background var(--t), color var(--t), transform 0.18s ease;
 }
-/* Hover previews the exact "active" look (gradient/color/shadow/icon) —
-   same rule for nav-link hover, nav-link active (current page), and section-
-   label hover/active (current page's section). The one thing hover does NOT
-   get is the left accent bar just below — that stays reserved for the
-   actual active page, so a plain hover never looks indistinguishable from
-   "you are here." */
+/* Hover previews the exact "active" look (gradient/color/shadow/icon) — same
+   rule for nav-link hover and nav-link active (current page). The one thing
+   hover does NOT get is the left accent bar just below — that stays reserved
+   for the actual active page, so a plain hover never looks indistinguishable
+   from "you are here." */
 .sidebar-nav a:hover,
-.sidebar-nav a.active,
-.sidebar-section-label:hover,
-.sidebar-section-label.active {
+.sidebar-nav a.active {
   background: linear-gradient(135deg, rgba(255,240,220,0.24) 0%, rgba(255,240,220,0.10) 100%);
   color: var(--sidebar-active-text);
   font-weight: 700;
@@ -536,30 +467,13 @@ body {
 .sidebar-collapse-btn:hover { transform: translateY(-50%) scale(1.1); }
 
 /* Collapsed mode — desktop only (mobile keeps the slide-in drawer). Rail of
-   icon chips; labels, section text, and footer details melt away. Every
-   nav item stays visible here regardless of that section's dropdown
-   state — an icon rail with hidden icons would be confusing. */
+   icon chips; labels and footer details melt away. */
 @media (min-width: 769px) {
   .admin-sidebar { transition: width 0.22s ease, background var(--t); }
   .admin-sidebar.sidebar-collapsed { width: var(--sidebar-w-collapsed); }
   .admin-sidebar.sidebar-collapsed .sidebar-logo { padding: 2.4rem 0.5rem 0.9rem; height: 84px; }
   .admin-sidebar.sidebar-collapsed .sidebar-logo-img { width: 44px; }
   .admin-sidebar.sidebar-collapsed .sidebar-nav-label { display: none; }
-  .admin-sidebar.sidebar-collapsed .sidebar-section { margin-left: 0.45rem; margin-right: 0.45rem; }
-  .admin-sidebar.sidebar-collapsed .sidebar-section-label {
-    padding: 0 1rem 0.45rem;
-    pointer-events: none;
-  }
-  .admin-sidebar.sidebar-collapsed .sidebar-section-label span,
-  .admin-sidebar.sidebar-collapsed .sidebar-section-chevron { display: none; }
-  .admin-sidebar.sidebar-collapsed .sidebar-section-items {
-    max-height: none !important;
-    opacity: 1 !important;
-    padding: 0.35rem 0 !important;
-    margin-top: 0.35rem !important;
-    background: rgba(0,0,0,0.14) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06) !important;
-  }
   .admin-sidebar.sidebar-collapsed .sidebar-nav a {
     justify-content: center;
     margin: 2px 0.45rem;

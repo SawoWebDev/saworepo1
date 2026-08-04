@@ -91,6 +91,7 @@ const Logs           = lazy(() => import("./Administrator/Logs"));
 const Inbox          = lazy(() => import("./Administrator/Inbox"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
 const PageSEO        = lazy(() => import("./Administrator/PageSEO"));
+const CIStatus       = lazy(() => import("./Administrator/CIStatus"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
 const RolesPermissions = lazy(() => import("./Administrator/RolesPermissions"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
@@ -226,6 +227,9 @@ export default function App() {
             } />
             <Route path="/admin/seo" element={
               <ProtectedRoute requiredCap="page.seo"><AdminLayout><PageSEO /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/ci-status" element={
+              <ProtectedRoute requiredCap="page.ci_status"><AdminLayout><CIStatus /></AdminLayout></ProtectedRoute>
             } />
             {/* Language settings merged into Settings (below) */}
             <Route path="/admin/language" element={<Navigate to="/admin/settings" replace />} />
