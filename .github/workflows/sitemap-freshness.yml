@@ -1,0 +1,35 @@
+name: Sitemap Freshness Check
+
+on:
+  pull_request:
+    paths:
+      - "sawo-main/frontend/src/menuPaths.js"
+      - "sawo-main/frontend/src/Administrator/Local/data/**"
+      - "sawo-main/frontend/scripts/generate-sitemap.js"
+      - "sawo-main/frontend/public/sitemap.xml"
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # generate-sitemap.js has zero npm dependencies (only Node's built-in
+      # fs/path) and does zero network calls — it just reads local JSON
+      # snapshots. No `npm ci` needed, nothing external that can flake.
+      - name: Regenerate sitemap.xml
+        working-directory: sawo-main/frontend
+        run: node scripts/generate-sitemap.js
+
+      - name: Fail if committed sitemap.xml is stale
+        working-directory: sawo-main/frontend
+        run: |
+          if ! git diff --exit-code -- public/sitemap.xml; then
+            echo "::error::public/sitemap.xml is out of date relative to menuPaths.js / product data. Run 'node scripts/generate-sitemap.js' locally and commit the regenerated file."
+            exit 1
+          fi
