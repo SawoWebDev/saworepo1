@@ -26,29 +26,40 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 
+// Document-type words that already tell the reader what kind of file this
+// is — if a derived label doesn't end in one of these, "Brochure" is
+// appended (see bottom of pdfLabelFromUrl) so every PDF label reads as a
+// real document title instead of a bare product/page name.
+const DOC_TYPE_WORDS = /\b(brochure|catalogue|catalog|flyer|guide|manual|datasheet|sheet)$/i;
+
 // Turns a PDF URL into a readable document title for the dropdown row, e.g.
-// ".../STP-INFACE-V2_En_2026.pdf" -> "STP INFACE V2",
+// ".../STP-INFACE-V2_En_2026.pdf" -> "STP INFACE V2 Brochure",
 // ".../SAWO-Product-Catalogue-2025-2026-web.pdf" -> "SAWO Product Catalogue".
 // Strips the file extension, a trailing locale+year stamp (a common WP-upload
-// naming convention: "_En_2026", "-De-2026", etc.), a trailing "web" tag, and
-// any trailing edition year(s)/revision number ("2026", "2025 2026", "2026 1")
-// — years are noise for a reader picking a document by name, not part of its
-// title — then swaps remaining hyphens/underscores for spaces. Falls back to
-// the raw filename if that leaves nothing usable.
+// naming convention: "_En_2026", "-De-2026", etc.), a trailing "web" tag,
+// stray "RV<n>" revision codes (e.g. "Sauna-Lights_RV15" -> "Sauna Lights"),
+// and any trailing edition year(s)/revision number ("2026", "2025 2026",
+// "2026 1") — years and revision codes are noise for a reader picking a
+// document by name, not part of its title — then swaps remaining
+// hyphens/underscores for spaces, and appends "Brochure" if what's left
+// doesn't already end in a recognizable document-type word. Falls back to
+// the raw filename if cleaning leaves nothing usable.
 function pdfLabelFromUrl(url) {
   if (!url) return "";
   const filename = decodeURIComponent(url.split("/").pop() || "");
   const base = filename.replace(/\.pdf$/i, "");
   let cleaned = base
     .replace(/[-_](en|de|fi|fr|es|it|nl|sv|se|no|dk)[-_]?\d{2,4}$/i, "")
+    .replace(/RV\d+/gi, "")
     .replace(/[-_]+/g, " ")
-    .replace(/\bweb$/i, "")
+    .replace(/\b(web|compressed|final|draft|copy)\b/gi, "")
     .replace(/\s+/g, " ")
     .trim();
   cleaned = cleaned
     .replace(/(\s(19|20)\d{2}){1,2}(\s\d{1,2})?$/, "")
     .trim();
-  return cleaned || base.replace(/[-_]+/g, " ").trim();
+  if (!cleaned) return base.replace(/[-_]+/g, " ").trim();
+  return DOC_TYPE_WORDS.test(cleaned) ? cleaned : `${cleaned} Brochure`;
 }
 
 const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href, redirect = false }) => {
@@ -216,11 +227,11 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href, redi
       .sawo-vb-dropdown a:hover i { color: #ffffff; }
 
       @media (max-width: 768px) {
-        .sawo-vb-btn { font-size: 12px; line-height: 16px; padding: 11px 26px; }
+        .sawo-vb-btn { font-size: 13px; line-height: 17px; padding: 12px 28px; }
         .sawo-vb-dropdown a { padding: 9px 12px; font-size: 12px; line-height: 16px; }
       }
       @media (max-width: 480px) {
-        .sawo-vb-btn { font-size: 11px; padding: 10px 22px; }
+        .sawo-vb-btn { font-size: 12px; padding: 11px 24px; }
         .sawo-vb-dropdown a { padding: 9px 10px; font-size: 12px; }
       }
     `}</style>

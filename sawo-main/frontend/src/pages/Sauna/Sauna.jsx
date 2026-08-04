@@ -204,7 +204,7 @@ const Sauna = () => {
 
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="EXPLORE HEATERS"
+              text="PRODUCT CATALOGUE"
               href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
             />
           </div>
