@@ -32,7 +32,12 @@ import img_Dragon_BL_v3 from "../../assets/Dragon-BL-v3.webp";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
-const SAUNA_ROOMS_HERO_IMG = "https://www.sawo.com/wp-content/uploads/2025/11/1620ML_scene1.webp";
+// Was a 2000x2000, 232KB image served straight from the WordPress media
+// library with no resizing/compression for a full-bleed CSS background —
+// resized to 1920x1920 and re-encoded at WebP q75 (down to ~95KB, ~59%
+// smaller) and hosted on R2 instead, since the hero sits under a dark
+// overlay + text scrim that already hides most fine detail loss.
+const SAUNA_ROOMS_HERO_IMG = "https://saworepo1.pages.dev/media/site-assets/sauna-rooms-hero-93a47116.webp";
 const SAUNA_ROOMS_BROCHURE_URL = "https://heyzine.com/flip-book/576de453b2.html";
 
 const CONFIGURATOR_STEPS = [
