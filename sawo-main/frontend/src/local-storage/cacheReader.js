@@ -62,7 +62,12 @@ export async function searchProducts(query) {
       p.name?.toLowerCase().includes(q) ||
       p.short_description?.toLowerCase().includes(q) ||
       p.slug?.toLowerCase().includes(q) ||
-      p.categories?.some((cat) => cat.toLowerCase().includes(q))
+      p.categories?.some((cat) => cat.toLowerCase().includes(q)) ||
+      // Model/variant codes (e.g. "NRMC-30NS-Z") live in tags, not name —
+      // without this a search for the code printed on the product itself
+      // (what a customer/rep actually has in hand) would find nothing.
+      p.tags?.some((tag) => tag.toLowerCase().includes(q)) ||
+      p.description?.toLowerCase().includes(q)
   );
 }
 
