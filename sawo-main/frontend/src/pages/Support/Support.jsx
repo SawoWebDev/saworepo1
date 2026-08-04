@@ -446,7 +446,7 @@ const Support = () => {
                 Browse our complete product catalogue with specifications, pricing, and technical details for all offerings.
               </p>
               <span className="support-card-link">
-                View Catalogue <i className="fas fa-chevron-right"></i>
+                VIEW CATALOGUE <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
