@@ -10,68 +10,13 @@ import CmsSearch from "./CmsSearch.jsx";
 import logo from "./SAWO-logo.webp";
 import "./admin.css";
 
-// Order sections appear in — anything not listed falls back to alphabetical
-// order after these, so a stray/unlisted section never disappears silently.
-const SECTION_ORDER = ["Overview", "Catalog", "Insights", "System"];
-
-function groupBySection(nav) {
-  const groups = new Map();
-  for (const item of nav) {
-    const section = item.section || "Other";
-    if (!groups.has(section)) groups.set(section, []);
-    groups.get(section).push(item);
-  }
-  return [...groups.entries()].sort(([a], [b]) => {
-    const ai = SECTION_ORDER.indexOf(a);
-    const bi = SECTION_ORDER.indexOf(b);
-    if (ai === -1 && bi === -1) return a.localeCompare(b);
-    if (ai === -1) return 1;
-    if (bi === -1) return -1;
-    return ai - bi;
-  });
-}
-
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, collapsed, onToggleCollapse, realRole, effectiveRole, isPreviewing, onChangePreview }) {
   // `hidden` items (My Profile) are routable and get a PageHeader, but are
-  // reached from the footer identity card instead of the nav list.
-  const sections = groupBySection(nav.filter((item) => !item.hidden));
+  // reached from the footer identity card instead of the nav list. Flat list,
+  // no section grouping — every item renders directly in nav order.
+  const items = nav.filter((item) => !item.hidden);
   const initial = (session.user.username || "?").charAt(0).toUpperCase();
-
-  // Whichever section holds the page currently open (in the iframe/route) —
-  // recomputed from location on every render, so it's correct on first paint
-  // (including a hard reload) without waiting on an effect.
-  const activeSection = sections.find(([, items]) =>
-    items.some(({ to }) => location.pathname.startsWith(to))
-  )?.[0] ?? null;
-
-  // Section dropdowns — collapsed = hidden. Every section starts closed
-  // except the one holding the current page, so a reload never hides where
-  // you are; the admin opens/closes the rest as needed.
-  const [closedSections, setClosedSections] = useState(() => {
-    const all = sections.map(([section]) => section);
-    return new Set(activeSection ? all.filter(s => s !== activeSection) : all);
-  });
-
-  // If navigation lands on a different section (e.g. via search or a direct
-  // link) while that section happens to be collapsed, reopen it — the active
-  // page's dropdown should never be the one that's closed.
-  useEffect(() => {
-    if (!activeSection) return;
-    setClosedSections(prev => {
-      if (!prev.has(activeSection)) return prev;
-      const next = new Set(prev);
-      next.delete(activeSection);
-      return next;
-    });
-  }, [activeSection]);
-
-  // Switching roles rebuilds the whole nav — open every section so the
-  // difference is visible at a glance instead of having to expand each one
-  // again to see what that role gained or lost.
-  useEffect(() => {
-    setClosedSections(new Set());
-  }, [effectiveRole]);
 
   // Pulse the role badge on each change so the switch is noticeable even
   // though it happens on a different page (the Profile picker).
@@ -84,14 +29,6 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
     const t = setTimeout(() => setBadgePulse(false), 5000);
     return () => clearTimeout(t);
   }, [effectiveRole, isPreviewing]);
-
-  const toggleSection = (section) => {
-    setClosedSections(prev => {
-      const next = new Set(prev);
-      next.has(section) ? next.delete(section) : next.add(section);
-      return next;
-    });
-  };
 
   return (
     <>
@@ -123,40 +60,22 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
           </a>
         </div>
 
-        {/* Nav, grouped by section (Catalog / Insights / System) — each
-            section is a collapsible dropdown. */}
+        {/* Flat nav — no section grouping/collapsing, just the list in
+            NAV_ITEMS order. */}
         <nav className="sidebar-nav">
-          {sections.map(([section, items]) => {
-            const isClosed = closedSections.has(section);
+          {items.map(({ to, label, icon }) => {
+            const active = location.pathname.startsWith(to);
             return (
-              <div className="sidebar-section" key={section}>
-                <button
-                  type="button"
-                  className={`sidebar-section-label${section === activeSection ? " active" : ""}`}
-                  onClick={() => toggleSection(section)}
-                  aria-expanded={!isClosed}
-                >
-                  <span>{section}</span>
-                  <i className={`fa-solid fa-chevron-down sidebar-section-chevron${isClosed ? " is-closed" : ""}`} />
-                </button>
-                <div className={`sidebar-section-items${isClosed ? " is-closed" : ""}`}>
-                  {items.map(({ to, label, icon }) => {
-                    const active = location.pathname.startsWith(to);
-                    return (
-                      <Link
-                        key={to}
-                        to={to}
-                        className={active ? "active" : ""}
-                        onClick={onClose}
-                        title={label}
-                      >
-                        <i className={icon} />
-                        <span className="sidebar-nav-label">{label}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
+              <Link
+                key={to}
+                to={to}
+                className={active ? "active" : ""}
+                onClick={onClose}
+                title={label}
+              >
+                <i className={icon} />
+                <span className="sidebar-nav-label">{label}</span>
+              </Link>
             );
           })}
         </nav>
