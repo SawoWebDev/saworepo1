@@ -13,30 +13,64 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase (lightweight read query)
+      - name: Create, read, then delete a keep-alive row
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           set -uo pipefail
 
-          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
-            echo "[Supabase Keep-Alive] FAILED: missing SUPABASE_URL or SUPABASE_ANON_KEY secret"
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_SERVICE_ROLE_KEY:-}" ]; then
+            echo "[Supabase Keep-Alive] FAILED: missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY secret"
             exit 1
           fi
 
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          AUTH_HEADERS=(-H "apikey: ${SUPABASE_SERVICE_ROLE_KEY}" -H "Authorization: Bearer ${SUPABASE_SERVICE_ROLE_KEY}")
 
-          HTTP_CODE=$(curl -s -o /tmp/keepalive_response.json -w "%{http_code}" \
-            "${SUPABASE_URL}/rest/v1/app_settings?select=key&limit=1" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+          # 1) CREATE — insert a row into the hidden _keepalive_pings table
+          #    (RLS-locked, no policies, so the public anon key can never see
+          #    it — this table is invisible to the live site).
+          CREATE_CODE=$(curl -s -o /tmp/keepalive_create.json -w "%{http_code}" \
+            -X POST "${SUPABASE_URL}/rest/v1/_keepalive_pings" \
+            "${AUTH_HEADERS[@]}" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=representation" \
+            -d '{}')
 
-          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
-            echo "[Supabase Keep-Alive] Ping successful at ${TIMESTAMP} (HTTP ${HTTP_CODE})"
-            cat /tmp/keepalive_response.json
-          else
-            echo "[Supabase Keep-Alive] Ping FAILED at ${TIMESTAMP} (HTTP ${HTTP_CODE})"
-            cat /tmp/keepalive_response.json
+          if [ "$CREATE_CODE" -lt 200 ] || [ "$CREATE_CODE" -ge 300 ]; then
+            echo "[Supabase Keep-Alive] FAILED at ${TIMESTAMP}: insert returned HTTP ${CREATE_CODE}"
+            cat /tmp/keepalive_create.json
             exit 1
           fi
+
+          ROW_ID=$(sed -n 's/.*"id"\s*:\s*"\([^"]*\)".*/\1/p' /tmp/keepalive_create.json | head -n1)
+          if [ -z "$ROW_ID" ]; then
+            echo "[Supabase Keep-Alive] FAILED at ${TIMESTAMP}: could not parse inserted row id"
+            cat /tmp/keepalive_create.json
+            exit 1
+          fi
+
+          # 2) READ — confirm the row is actually there
+          READ_CODE=$(curl -s -o /tmp/keepalive_read.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/_keepalive_pings?id=eq.${ROW_ID}&select=id" \
+            "${AUTH_HEADERS[@]}")
+
+          if [ "$READ_CODE" -lt 200 ] || [ "$READ_CODE" -ge 300 ]; then
+            echo "[Supabase Keep-Alive] FAILED at ${TIMESTAMP}: read-back returned HTTP ${READ_CODE}"
+            cat /tmp/keepalive_read.json
+            exit 1
+          fi
+
+          # 3) DELETE — clean up immediately so the table never accumulates rows
+          DELETE_CODE=$(curl -s -o /tmp/keepalive_delete.json -w "%{http_code}" \
+            -X DELETE "${SUPABASE_URL}/rest/v1/_keepalive_pings?id=eq.${ROW_ID}" \
+            "${AUTH_HEADERS[@]}")
+
+          if [ "$DELETE_CODE" -lt 200 ] || [ "$DELETE_CODE" -ge 300 ]; then
+            echo "[Supabase Keep-Alive] FAILED at ${TIMESTAMP}: delete returned HTTP ${DELETE_CODE}"
+            cat /tmp/keepalive_delete.json
+            exit 1
+          fi
+
+          echo "[Supabase Keep-Alive] Ping successful at ${TIMESTAMP} (created, read, deleted row ${ROW_ID})"
