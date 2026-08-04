@@ -8,7 +8,7 @@ import spruceWood from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/
 import benchCedar from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-cedar-wood.webp";
 import benchAspen from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-aspen-wood.webp";
 import benchSpruce from "../../../assets/Sauna/Sauna Rooms/Wood Panels & Timbers/bench-spruce-wood.webp";
-import ButtonClear from "../../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { useHeroLoaded } from "../../../utils/useHeroLoaded";
@@ -140,10 +140,9 @@ const WoodPanelandTimbers = () => {
             Premium wood materials for your perfect sauna
           </p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear
+            <BrochureDropdownButton
               text="VIEW BROCHURE"
               href="https://www.sawo.com/wp-content/uploads/2025/12/Panels-TimbersRV4_compressed.pdf"
-              download
             />
           </div>
         </div>

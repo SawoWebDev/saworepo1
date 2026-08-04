@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "../../AccessoryCard";
-import ButtonClear from "../../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import heroImg from "../../../assets/BoxType2-copy-new.webp";
 import "../heaters/heaters.css";
 import menuPaths from "../../../menuPaths";
@@ -146,7 +146,7 @@ export default function Thermometers() {
           <h1 className="wm-hero-title">THERMOMETERS & COMBINED METERS</h1>
           <p className="wm-hero-subtitle">Monitor your sauna with precision instruments</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
+            <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" />
           </div>
         </div>
       <HeroWave />

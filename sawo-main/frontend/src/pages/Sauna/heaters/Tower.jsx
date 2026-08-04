@@ -47,7 +47,7 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
-import ButtonClear from "../../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/tower-hero.webp";
@@ -247,7 +247,7 @@ const Tower = () => {
           <h1 className="wm-hero-title">TOWER SAUNA HEATERS</h1>
           <p className="wm-hero-subtitle">Efficient, Sleek, Wellness-Focused Saunas</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="EXPLORE HEATERS" href={menuPaths.sauna.heaters.parent} />
+            <BrochureDropdownButton text="EXPLORE HEATERS" href={menuPaths.sauna.heaters.parent} redirect />
           </div>
         </div>
       <HeroWave />
@@ -326,6 +326,11 @@ const Tower = () => {
             })
           )}
         </div>
+      </section>
+
+      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
+      <section className="wm-section" style={{ textAlign: "center" }}>
+        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
       </section>
 
       {/* WHY SAWO */}

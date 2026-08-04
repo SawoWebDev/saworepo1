@@ -16,6 +16,7 @@ import demandButton from "../../assets/Steam/demand-button.webp";
 import venturiL from "../../assets/Steam/venturi-pipe-L-shape.webp";
 import venturiStraight from "../../assets/Steam/venturi-pipe-straight.webp";
 import HeroWave from "../../components/HeroWave";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
@@ -110,14 +111,10 @@ const Steam = () => {
             Experience the luxury of pure steam therapy
           </p>
           <div style={{ marginTop: "32px" }}>
-            <a
+            <BrochureDropdownButton
+              text="VIEW BROCHURE"
               href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Steam-Sauna-2026.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="stm-brochure-btn"
-            >
-              VIEW BROCHURE
-            </a>
+            />
           </div>
         </div>
       <HeroWave />

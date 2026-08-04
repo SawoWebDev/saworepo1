@@ -5,7 +5,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
-import ButtonClear from "../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
 import PromoBanner from "../../components/PromoBanner";
@@ -308,7 +308,7 @@ export default function SaunaControls() {
           <h1 className="wm-hero-title">SAUNA CONTROLS</h1>
           <p className="wm-hero-subtitle">Precision control for the perfect sauna experience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
+            <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
           </div>
         </div>
       <HeroWave />

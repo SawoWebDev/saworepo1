@@ -593,7 +593,7 @@ body {
      ever scroll inside its own overflow-x:auto container (e.g.
      .products-table-wrap) — never the whole page sideways. */
   overflow-x: hidden;
-  padding: 2rem 2.5rem;
+  padding: 1rem 2.5rem 2rem;
   background: var(--bg);
   transition: background var(--t);
 }

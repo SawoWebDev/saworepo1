@@ -1,8 +1,8 @@
 // SaunaHeaters.jsx
 
 import React from "react";
-import ButtonClear from "../../components/Buttons/ButtonClear";
-import ButtonBrown from "../../components/Buttons/ButtonBrown";
+import { Link } from "react-router-dom";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../components/CirclesInfo";
 import menuPaths from "../../menuPaths";
 import img_NRM_NB_BL1 from "../../assets/NRM-NB-BL1.webp";
@@ -50,10 +50,13 @@ const SaunaHeaters = () => {
         <div className="sh-hero-overlay" />
         <div className="sh-hero-content">
           <h1 className="sh-hero-title">SAUNA HEATERS</h1>
-          <div style={{ marginTop: "32px" }}>
-            <ButtonClear
-              text="EXPLORE PRODUCTS"
-              href="#sh-heaters"
+          <div style={{ marginTop: "12px", display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+            <BrochureDropdownButton
+              text="View Catalogue"
+              items={[{
+                label: "Product Catalogue",
+                href: "https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf",
+              }]}
             />
           </div>
         </div>
@@ -271,13 +274,9 @@ const SaunaHeaters = () => {
           </div>
         </div>
 
-        {/* Centred catalogue button */}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "16px" }}>
-          <ButtonBrown
-            text="View Catalogue"
-            href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
-            download
-          />
+        {/* View all heaters → full catalog, same format as SaunaAccessories.jsx's "VIEW ALL ACCESSORIES" */}
+        <div className="sh-view-all-wrap">
+          <Link to={menuPaths.heaters} className="sh-view-all-btn">VIEW ALL HEATERS</Link>
         </div>
 
       </section>
@@ -303,6 +302,29 @@ const SaunaHeaters = () => {
           font-size: 45px;
           line-height: 52px;
           font-weight: 700;
+          color: #ffffff;
+        }
+
+        .sh-view-all-wrap {
+          text-align: center;
+          margin: 48px auto 0;
+        }
+        .sh-view-all-btn {
+          display: inline-block;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          letter-spacing: 1px;
+          padding: 14px 40px;
+          border: 2px solid #af8564;
+          border-radius: 6px;
+          color: #af8564;
+          background: transparent;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+        .sh-view-all-btn:hover {
+          background: #af8564;
           color: #ffffff;
         }
 

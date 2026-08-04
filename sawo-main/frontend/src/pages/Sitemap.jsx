@@ -185,6 +185,7 @@ const Sitemap = () => {
             <ul className="space-y-3">
               <li><Link to={menuPaths.products} className={linkClass}>All Products</Link></li>
               <li><Link to={menuPaths.accessories} className={linkClass}>Accessories Catalog</Link></li>
+              <li><Link to={menuPaths.heaters} className={linkClass}>Heaters Catalog</Link></li>
             </ul>
           </section>
 

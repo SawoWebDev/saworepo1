@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import ButtonClear from "../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import menuPaths from "../../menuPaths";
 import img_INNOVA_CLASSIC_1000X1000 from "../../assets/INNOVA-CLASSIC-1000X1000.webp";
 import img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled from "../../assets/SAWO_Finnish_Sauna_Room_Cedar_Cover-scaled.webp";
@@ -203,10 +203,9 @@ const Sauna = () => {
           </p>
 
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear
+            <BrochureDropdownButton
               text="EXPLORE HEATERS"
               href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
-              download
             />
           </div>
         </div>
@@ -364,6 +363,10 @@ const Sauna = () => {
               <div className="sawo-caption">Versatile electric heaters with integrated steamers, offering traditional and steam sauna options with aroma oil basins for added luxury.</div>
             </div>
           </div>
+        </div>
+
+        <div className="sauna-view-all-wrap">
+          <Link to={menuPaths.heaters} className="sauna-view-all-btn">VIEW ALL HEATERS</Link>
         </div>
       </section>
 
@@ -609,6 +612,10 @@ const Sauna = () => {
             </a>
           ))}
         </div>
+
+        <div className="sauna-view-all-wrap">
+          <Link to={menuPaths.sauna.controls} className="sauna-view-all-btn">VIEW SAUNA CONTROLS</Link>
+        </div>
       </section>
 
       {/* ======================= */}
@@ -778,7 +785,7 @@ const Sauna = () => {
         </div>
 
         <div className="sauna-view-all-wrap">
-          <Link to={menuPaths.sauna.accessories.parent} className="sauna-view-all-btn">
+          <Link to={menuPaths.accessories} className="sauna-view-all-btn">
             VIEW ALL ACCESSORIES
           </Link>
         </div>

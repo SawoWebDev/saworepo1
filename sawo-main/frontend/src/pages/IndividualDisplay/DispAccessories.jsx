@@ -1014,7 +1014,7 @@ export default function AccessoriesPage() {
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <div style={{
                     position: "relative", aspectRatio: "1/1", borderRadius: 14,
-                    background: "#faf7f4", display: "flex", alignItems: "center",
+                    background: "transparent", display: "flex", alignItems: "center",
                     justifyContent: "center", cursor: displayImage ? "zoom-in" : "default",
                     overflow: "hidden"
                   }}

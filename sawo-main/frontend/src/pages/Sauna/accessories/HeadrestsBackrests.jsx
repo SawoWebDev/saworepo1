@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "../../AccessoryCard";
-import ButtonClear from "../../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import heroImg from "../../../assets/506-2-D.webp";
 import "../heaters/heaters.css";
 import menuPaths from "../../../menuPaths";
@@ -145,7 +145,7 @@ export default function HeadrestsBackrests() {
           <h1 className="wm-hero-title">HEADRESTS & BACKRESTS</h1>
           <p className="wm-hero-subtitle">Comfort and support for the ultimate sauna experience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" download />
+            <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" />
           </div>
         </div>
       <HeroWave />
