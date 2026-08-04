@@ -1,0 +1,42 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Every 2 days at 03:00 UTC. GitHub Actions cron is POSIX-based and the
+    # day-of-month step resets at each month boundary, so the real-world gap
+    # can occasionally stretch to ~3 days there — still comfortably under
+    # Supabase's 7-day pause threshold.
+    - cron: "0 3 */2 * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase (lightweight read query)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -uo pipefail
+
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "[Supabase Keep-Alive] FAILED: missing SUPABASE_URL or SUPABASE_ANON_KEY secret"
+            exit 1
+          fi
+
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+          HTTP_CODE=$(curl -s -o /tmp/keepalive_response.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/app_settings?select=key&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "[Supabase Keep-Alive] Ping successful at ${TIMESTAMP} (HTTP ${HTTP_CODE})"
+            cat /tmp/keepalive_response.json
+          else
+            echo "[Supabase Keep-Alive] Ping FAILED at ${TIMESTAMP} (HTTP ${HTTP_CODE})"
+            cat /tmp/keepalive_response.json
+            exit 1
+          fi
