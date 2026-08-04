@@ -1,0 +1,38 @@
+name: Broken Link Checker
+
+on:
+  schedule:
+    # Weekly, Monday 04:00 UTC.
+    - cron: "0 4 * * 1"
+  workflow_dispatch: {}
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve target site
+        id: target
+        run: |
+          # SITE_URL repo variable lets us switch targets without touching
+          # this file. Defaults to the Cloudflare Pages app pre-go-live;
+          # flip the "site_url" repo variable to https://www.sawo.com once
+          # the domain cutover happens.
+          SITE_URL="${{ vars.SITE_URL }}"
+          if [ -z "$SITE_URL" ]; then
+            SITE_URL="https://saworepo1.pages.dev"
+          fi
+          echo "site_url=${SITE_URL}" >> "$GITHUB_OUTPUT"
+          echo "Checking: ${SITE_URL}"
+
+      - name: Check for broken links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --accept 200,204,206,301,302,303,307,308
+            --max-concurrency 8
+            --timeout 20
+            --retry-wait-time 5
+            --max-retries 2
+            ${{ steps.target.outputs.site_url }}
+          fail: true
