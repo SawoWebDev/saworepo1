@@ -69,17 +69,18 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [] }) => {
           background-color: white;
           color: #af8564;
           font-family: 'Montserrat', sans-serif;
-          font-weight: 700;
-          font-size: 20px;
-          line-height: 24px;
-          padding: 22px 70px;
+          font-weight: 600;
+          font-size: 13px;
+          line-height: 18px;
+          letter-spacing: 0.06em;
+          padding: 12px 32px;
           cursor: pointer;
           transition: all 0.3s ease;
-          border-radius: 5px;
+          border-radius: 4px;
           display: inline-block;
           border: none;
           margin-bottom: 5px;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         .sawo-vb-btn:hover,
         .sawo-vb-btn.sawo-vb-active {
@@ -120,13 +121,12 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [] }) => {
         .sawo-vb-dropdown a i { margin-right: 10px; font-size: 16px; }
 
         @media (max-width: 768px) {
-          .sawo-vb-btn { font-size: 15px; line-height: 18px; padding: 14px 40px; }
+          .sawo-vb-btn { font-size: 12px; line-height: 16px; padding: 11px 26px; }
           .sawo-vb-dropdown a { padding: 10px 16px; font-size: 13px; line-height: 18px; }
           .sawo-vb-dropdown a i { font-size: 13px; }
         }
         @media (max-width: 480px) {
-          .sawo-vb-wrap { width: 100%; padding: 0 15px; box-sizing: border-box; }
-          .sawo-vb-btn { width: 100%; font-size: 13px; padding: 12px 20px; }
+          .sawo-vb-btn { font-size: 11px; padding: 10px 22px; }
           .sawo-vb-dropdown a { padding: 10px 14px; font-size: 12px; }
         }
       `}</style>
@@ -146,7 +146,7 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [] }) => {
         <div
           ref={dropdownRef}
           className={`sawo-vb-dropdown${open ? " sawo-vb-open" : ""}`}
-          style={{ top: pos.top, left: pos.left, width: pos.width }}
+          style={{ top: pos.top, left: pos.left, minWidth: pos.width }}
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
