@@ -1,12 +1,23 @@
 // BrochureDropdownButton.jsx
-// Reusable "VIEW BROCHURE" CTA for hero sections. Pass `items` (an array of
-// {label, href}) for a hover/click dropdown of multiple PDFs — the panel
-// mirrors the header's own dropdowns (HeaderLanguageSwitcher's
-// .header-lang-menu/.header-lang-option: white rounded panel, soft shadow,
-// warm cream hover) so every dropdown on the site behaves and looks the
-// same. Pass just `href` (no items, or an empty items array) and it renders
-// as a single direct link instead — no dropdown machinery at all — so a
-// page with only one brochure doesn't get a pointless one-item menu.
+// The single hero-CTA button component for the whole site — every hero
+// button, whatever it does, renders through this so they all look and feel
+// identical. Two modes, chosen by what the button links to:
+//
+//   PDF/brochure (default): pass `items` (array of {label, href}) for a
+//   hover/click dropdown of multiple PDFs, or just `href` for a single PDF —
+//   either way it renders with the chevron + dropdown panel (even a single
+//   PDF gets the dropdown treatment, not a plain link, so every brochure
+//   button behaves identically regardless of how many PDFs it offers). The
+//   panel mirrors the header's own dropdowns (HeaderLanguageSwitcher's
+//   .header-lang-menu/.header-lang-option: white rounded panel, soft shadow,
+//   warm cream hover) so every dropdown on the site looks/feels the same.
+//   Links open in a new tab — leaving the page to grab a PDF shouldn't lose
+//   your place.
+//
+//   Redirect (`redirect` prop): for anchor scrolls (href="#section") or
+//   internal page navigation — same pill styling, but no chevron, no
+//   dropdown, and same-tab (no target="_blank", since you're not leaving
+//   the site).
 //
 // The dropdown is portaled to <body> and positioned with JS-computed pixel
 // coordinates from the button's on-screen position, so it is immune to any
@@ -15,14 +26,17 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href }) => {
+const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href, redirect = false }) => {
   const btnRef = useRef(null);
   const dropdownRef = useRef(null);
   const closeTimer = useRef(null);
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0, width: 0 });
 
-  const hasDropdown = items.length > 0;
+  // A bare `href` (no `items`) for a PDF/brochure button still gets the
+  // chevron + one-item dropdown treatment, not a plain link — see file header.
+  const resolvedItems = items.length > 0 ? items : (href ? [{ label: text, href }] : []);
+  const hasDropdown = !redirect && resolvedItems.length > 0;
 
   const positionDropdown = useCallback(() => {
     const btn = btnRef.current;
@@ -87,7 +101,11 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href }) =>
         letter-spacing: 0.06em;
         padding: 12px 32px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        /* Not transitioned — a gradient background can't be smoothly
+           interpolated by any browser, so animating it desyncs from the
+           text color swap (text fades first, pill pops in a beat later).
+           Same fix as Header.jsx's .nav-style-style2 .menu-item. */
+        transition: none;
         border-radius: 4px;
         display: inline-flex;
         align-items: center;
@@ -97,10 +115,19 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href }) =>
         box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         text-decoration: none;
       }
+      /* Bevel treatment matches the header's Nav Style 2 hover/active pill
+         (Header.jsx's .nav-style-style2 .nav-toplevel:hover) — a diagonal
+         brand-brown gradient with an inset top highlight + inset bottom
+         shadow + a soft drop shadow, so it reads as a raised, physical
+         button rather than a flat color swap. */
       .sawo-vb-btn:hover,
       .sawo-vb-btn.sawo-vb-active {
-        background-color: #af8564;
-        color: white;
+        background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
+        color: #ffffff;
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.3),
+          inset 0 -1px 0 rgba(0,0,0,0.12),
+          0 2px 6px rgba(139,94,60,0.22);
       }
       .sawo-vb-btn .sawo-vb-chevron {
         font-size: 10px;
@@ -146,10 +173,20 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href }) =>
         font-size: 13px;
         line-height: 18px;
         white-space: nowrap;
-        transition: background-color 0.15s ease, color 0.15s ease;
+        /* Not transitioned — same gradient-desync reasoning as .sawo-vb-btn
+           above. */
+        transition: none;
       }
-      .sawo-vb-dropdown a:hover { background-color: #f5f0ec; color: #af8564; }
-      .sawo-vb-dropdown a i { margin-right: 10px; font-size: 13px; color: #af8564; }
+      .sawo-vb-dropdown a:hover {
+        background: linear-gradient(135deg, #af8564 0%, #c9a97e 100%);
+        color: #ffffff;
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.3),
+          inset 0 -1px 0 rgba(0,0,0,0.12),
+          0 2px 6px rgba(139,94,60,0.22);
+      }
+      .sawo-vb-dropdown a i { margin-right: 10px; font-size: 13px; color: #af8564; transition: color 0.15s ease; }
+      .sawo-vb-dropdown a:hover i { color: #ffffff; }
 
       @media (max-width: 768px) {
         .sawo-vb-btn { font-size: 12px; line-height: 16px; padding: 11px 26px; }
@@ -162,17 +199,21 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href }) =>
     `}</style>
   );
 
-  // No items — just a plain link, no dropdown machinery at all.
-  if (!hasDropdown) {
+  // Redirect (anchor scroll / internal nav) — no chevron, no dropdown,
+  // same-tab, identical pill styling to the PDF buttons.
+  if (redirect) {
     return (
       <div className="sawo-vb-wrap">
         {sharedStyles}
-        <a href={href} target="_blank" rel="noopener noreferrer" className="sawo-vb-btn">
+        <a href={href} className="sawo-vb-btn">
           {text}
         </a>
       </div>
     );
   }
+
+  // Neither items nor href given — nothing to render.
+  if (!hasDropdown) return null;
 
   return (
     <div className="sawo-vb-wrap">
@@ -198,7 +239,7 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href }) =>
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
-          {items.map((item, i) => (
+          {resolvedItems.map((item, i) => (
             <a key={i} href={item.href} target="_blank" rel="noopener noreferrer">
               <i className="fa-solid fa-file-pdf" /> {item.label}
             </a>
