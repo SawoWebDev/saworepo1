@@ -1,0 +1,59 @@
+name: Sitemap Search-Engine Ping
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sawo-main/frontend/public/sitemap.xml"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ping search engines (no-ops safely before go-live)
+        env:
+          SITE_URL_VAR: ${{ vars.SITE_URL }}
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+        run: |
+          set -uo pipefail
+          PROD_URL="https://www.sawo.com"
+
+          # Deliberate safety gate: only ever ping search engines about the
+          # real production domain. Before domain cutover, SITE_URL points
+          # (or defaults) to the Cloudflare Pages preview — pinging search
+          # engines about that would risk getting the dev/staging URL
+          # indexed and competing with the eventual production domain.
+          if [ "${SITE_URL_VAR:-}" != "$PROD_URL" ]; then
+            echo "Skipping: SITE_URL repo variable is '${SITE_URL_VAR:-<unset>}', not '$PROD_URL' yet."
+            echo "This is expected pre-launch — see docs/SEO-AUTOMATION.md."
+            exit 0
+          fi
+
+          SITEMAP_URL="${PROD_URL}/sitemap.xml"
+
+          # Bing still supports the classic sitemap ping endpoint. Google
+          # deprecated theirs in June 2023 — there's no API for Google left
+          # to call from CI; Search Console handles that side manually.
+          BING_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://www.bing.com/ping?sitemap=${SITEMAP_URL}")
+          echo "Bing sitemap ping: HTTP ${BING_CODE}"
+
+          # IndexNow (adopted by Bing + Yandex, not Google) needs a one-time
+          # key file hosted at the site root first. Skips cleanly until that
+          # setup is done — see docs/SEO-AUTOMATION.md.
+          if [ -n "${INDEXNOW_KEY:-}" ]; then
+            HOST=$(echo "$PROD_URL" | sed -E 's#https?://##')
+            URLS_JSON=$(grep -oE '<loc>[^<]+</loc>' sawo-main/frontend/public/sitemap.xml \
+              | sed -E 's#</?loc>##g' \
+              | awk 'BEGIN{ORS=","} {gsub(/"/,"\\\""); print "\""$0"\""}' \
+              | sed 's/,$//')
+            INDEXNOW_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X POST "https://api.indexnow.org/indexnow" \
+              -H "Content-Type: application/json; charset=utf-8" \
+              -d "{\"host\":\"${HOST}\",\"key\":\"${INDEXNOW_KEY}\",\"keyLocation\":\"${PROD_URL}/${INDEXNOW_KEY}.txt\",\"urlList\":[${URLS_JSON}]}")
+            echo "IndexNow ping: HTTP ${INDEXNOW_CODE}"
+          else
+            echo "IndexNow: skipped — INDEXNOW_KEY repo variable not set yet."
+          fi

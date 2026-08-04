@@ -1,0 +1,62 @@
+name: Lighthouse SEO Check
+
+on:
+  pull_request:
+    paths:
+      - "sawo-main/frontend/src/**"
+      - "sawo-main/frontend/public/**"
+      - "sawo-main/frontend/package.json"
+      - "sawo-main/frontend/.lighthouserc.json"
+  workflow_dispatch: {}
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: sawo-main/frontend
+        run: npm ci
+
+      - name: Build
+        working-directory: sawo-main/frontend
+        env:
+          # CI=true (set automatically by GitHub Actions) makes CRA treat
+          # ESLint warnings as build-breaking errors. We only want an actual
+          # SEO problem to fail this check, not unrelated lint warnings.
+          CI: false
+          # Reuse the existing Supabase secrets (already public/anon-scoped)
+          # so CMS-driven page titles/descriptions render for real instead
+          # of falling back to defaults. Everything else (GitHub-hosted
+          # images, backend API) is fine left unset for this check — it
+          # only affects images/content, not the SEO audits below.
+          REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: npm run build
+
+      - name: Serve build (SPA fallback so client-side routes resolve)
+        working-directory: sawo-main/frontend
+        run: |
+          npx --yes serve -s build -l 4173 &
+          npx --yes wait-on http://localhost:4173
+
+      - name: Run Lighthouse (SEO category only)
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            http://localhost:4173/
+            http://localhost:4173/sauna
+            http://localhost:4173/sauna/heaters
+            http://localhost:4173/steam
+            http://localhost:4173/about
+            http://localhost:4173/contact
+            http://localhost:4173/support/faq
+            http://localhost:4173/products
+          configPath: ./sawo-main/frontend/.lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: false
