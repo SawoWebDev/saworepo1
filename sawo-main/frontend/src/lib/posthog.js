@@ -21,13 +21,13 @@
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import posthog from "posthog-js";
 import { isAdmin } from "../local-storage/track";
 
 const POSTHOG_KEY = process.env.REACT_APP_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.REACT_APP_POSTHOG_HOST || "https://us.i.posthog.com";
 
 let initialized = false;
+let posthogInstance = null;
 
 function isProduction() {
   const host = window.location.hostname;
@@ -46,35 +46,46 @@ function shouldInit(pathname) {
  * Mount once inside the router (MainLayout), alongside usePageTracking.
  * Initializes PostHog lazily on the first qualifying route — never for
  * admins, never on /admin or /login, never outside production.
+ *
+ * posthog-js itself is dynamically imported here (not a static top-level
+ * import) — MainLayout wraps every public page including Home, which is
+ * NOT lazy-loaded, so a static import would ship the ~15KB posthog-js
+ * parse/execution cost into every single visitor's critical bundle even
+ * when shouldInit() is about to say no (localhost, admin, no key). A
+ * dynamic import only pays that cost for the qualifying production
+ * pageviews that actually initialize it, keeping it off Home's LCP path.
  */
 export function usePostHogTracking() {
   const location = useLocation();
 
   useEffect(() => {
     if (initialized || !shouldInit(location.pathname)) return;
-
-    posthog.init(POSTHOG_KEY, {
-      api_host: POSTHOG_HOST,
-      defaults: "2026-05-30",
-      // We never call posthog.identify() (no visitor auth on the public
-      // site) — this stops PostHog from creating a person profile per
-      // anonymous visitor, which matters against the free-tier caps.
-      person_profiles: "identified_only",
-      // Our own first-party tracker is the source of truth for
-      // pageviews/top-pages/country — PostHog must not duplicate that.
-      capture_pageview: false,
-      // Required for the Clickmap ("most-tapped buttons") breakdown — see
-      // file header comment for the event-quota trade-off this implies.
-      autocapture: true,
-      // Visual mouse-movement/click heatmap overlay per page. Rides along
-      // with other events, so it doesn't add to the event quota on its own
-      // (unlike autocapture above).
-      enable_heatmaps: true,
-      session_recording: {
-        maskAllInputs: true,
-      },
-    });
     initialized = true;
+
+    import("posthog-js").then(({ default: posthog }) => {
+      posthogInstance = posthog;
+      posthog.init(POSTHOG_KEY, {
+        api_host: POSTHOG_HOST,
+        defaults: "2026-05-30",
+        // We never call posthog.identify() (no visitor auth on the public
+        // site) — this stops PostHog from creating a person profile per
+        // anonymous visitor, which matters against the free-tier caps.
+        person_profiles: "identified_only",
+        // Our own first-party tracker is the source of truth for
+        // pageviews/top-pages/country — PostHog must not duplicate that.
+        capture_pageview: false,
+        // Required for the Clickmap ("most-tapped buttons") breakdown — see
+        // file header comment for the event-quota trade-off this implies.
+        autocapture: true,
+        // Visual mouse-movement/click heatmap overlay per page. Rides along
+        // with other events, so it doesn't add to the event quota on its own
+        // (unlike autocapture above).
+        enable_heatmaps: true,
+        session_recording: {
+          maskAllInputs: true,
+        },
+      });
+    });
   }, [location.pathname]);
 }
 
@@ -84,6 +95,6 @@ export function usePostHogTracking() {
  * No-ops if PostHog was never initialized (admin/localhost/no key).
  */
 export function trackEvent(name, properties) {
-  if (!initialized) return;
-  posthog.capture(name, properties);
+  if (!posthogInstance) return;
+  posthogInstance.capture(name, properties);
 }
