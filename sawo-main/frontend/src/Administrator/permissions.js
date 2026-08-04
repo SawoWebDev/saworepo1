@@ -73,12 +73,22 @@ export const CAPABILITY_MAP = {
 
 // Dynamic, admin-configurable overrides — see local-storage/rolePermissions.js.
 // Starts empty (every capability falls back to its CAPABILITY_MAP default)
-// and is populated in the background as soon as this module loads. There's
-// a brief window on a fresh tab's very first render where the static
-// default is used instead of a freshly-granted role's access — the same
-// tradeoff every other CMS-wide toggle in this app makes (see dataSource.js,
-// headerLayout.js).
+// and is populated in the background the first time `can()` actually runs
+// — NOT at module-load time. This module is statically imported by
+// App.jsx (for getLandingPath, used only by the /admin redirect), which
+// means App.jsx — and every route it renders, including the public Home
+// page — pulls this module in on every visit. Firing the Supabase fetch
+// unconditionally at import time used to mean anonymous visitors to Home
+// paid for a role-overrides fetch (and the auth-js SDK chunk that comes
+// with it) they'd never use, hurting mobile LCP/TBT for no benefit. Gating
+// it behind first use means it only fires on an actual /admin visit, where
+// `can()` (via ProtectedRoute / NAV_ITEMS filtering / getLandingPath) is
+// always called anyway. There's still a brief window on a fresh /admin tab's
+// very first render where the static default is used instead of a
+// freshly-granted role's access — the same tradeoff every other CMS-wide
+// toggle in this app makes (see dataSource.js, headerLayout.js).
 let capabilityOverrides = {};
+let overridesFetchStarted = false;
 
 export function setCapabilityOverrides(overrides) {
   // "page.permissions" can never be overridden, at the call site too, not
@@ -88,7 +98,11 @@ export function setCapabilityOverrides(overrides) {
   capabilityOverrides = rest;
 }
 
-getRoleCapabilityOverrides().then(setCapabilityOverrides);
+function ensureOverridesLoading() {
+  if (overridesFetchStarted) return;
+  overridesFetchStarted = true;
+  getRoleCapabilityOverrides().then(setCapabilityOverrides);
+}
 
 /**
  * Check if a role has a specific capability
@@ -97,6 +111,7 @@ getRoleCapabilityOverrides().then(setCapabilityOverrides);
  * @returns {boolean} True if the role has the capability
  */
 export function can(role, cap) {
+  ensureOverridesLoading();
   const roles = capabilityOverrides[cap] || CAPABILITY_MAP[cap];
   return !!(roles?.includes(role));
 }
