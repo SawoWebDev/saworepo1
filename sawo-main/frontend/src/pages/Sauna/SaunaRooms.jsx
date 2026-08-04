@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./SaunaRooms.css";
 import "./heaters/heaters.css";
-import ButtonClear from "../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import menuPaths from "../../menuPaths";
@@ -285,7 +285,7 @@ const SaunaRooms = () => {
           <h1 className="wm-hero-title">SAUNA ROOMS</h1>
           <p className="wm-hero-subtitle">Custom-built Finnish sauna rooms crafted for comfort, durability, and timeless design.</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href={SAUNA_ROOMS_BROCHURE_URL} target="_blank" />
+            <BrochureDropdownButton text="VIEW BROCHURE" href={SAUNA_ROOMS_BROCHURE_URL} />
           </div>
         </div>
         <HeroWave />

@@ -6,8 +6,7 @@ import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
-
-const USER_MANUALS_HERO_IMG = "https://www.sawo.com/wp-content/uploads/2025/08/Tower-Series-background-1.webp";
+import USER_MANUALS_HERO_IMG from "../../assets/Support/UserManuals/hero.webp";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
