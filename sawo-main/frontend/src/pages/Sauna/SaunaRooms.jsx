@@ -285,7 +285,10 @@ const SaunaRooms = () => {
           <h1 className="wm-hero-title">SAUNA ROOMS</h1>
           <p className="wm-hero-subtitle">Custom-built Finnish sauna rooms crafted for comfort, durability, and timeless design.</p>
           <div style={{ marginTop: "32px" }}>
-            <BrochureDropdownButton text="VIEW BROCHURE" href={SAUNA_ROOMS_BROCHURE_URL} />
+            <BrochureDropdownButton
+              text="VIEW BROCHURE"
+              items={[{ label: "Product Catalogue", href: SAUNA_ROOMS_BROCHURE_URL }]}
+            />
           </div>
         </div>
         <HeroWave />

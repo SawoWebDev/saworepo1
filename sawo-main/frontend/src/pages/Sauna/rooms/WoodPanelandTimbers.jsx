@@ -142,7 +142,10 @@ const WoodPanelandTimbers = () => {
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
               text="VIEW BROCHURE"
-              href="https://www.sawo.com/wp-content/uploads/2025/12/Panels-TimbersRV4_compressed.pdf"
+              items={[{
+                label: "Panels & Timbers Brochure",
+                href: "https://www.sawo.com/wp-content/uploads/2025/12/Panels-TimbersRV4_compressed.pdf",
+              }]}
             />
           </div>
         </div>
