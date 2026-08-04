@@ -195,12 +195,15 @@ const AboutUs = () => {
         }
         .cert-icon {
           width: 120px;
+          height: 120px;
           margin: 0 auto 8px;
           position: relative;
           z-index: 1;
         }
         .cert-icon img {
           width: 100%;
+          height: 100%;
+          object-fit: contain;
           border-radius: 0;
           box-shadow: none;
         }

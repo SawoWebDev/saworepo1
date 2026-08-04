@@ -62,6 +62,7 @@ const menuPaths = {
   sitemap: "/sitemap",
   products: "/products",
   accessories: "/sauna-accessories",
+  heaters: "/sauna-heaters",
   adminDashboard:"/admin/dashboard",
 };
 

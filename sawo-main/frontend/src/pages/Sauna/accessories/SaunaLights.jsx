@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
 import { AccessoryCard, ACCESSORY_CARD_CSS } from "../../AccessoryCard";
-import ButtonClear from "../../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import heroImg from "../../../assets/TR-LIGHT-COVER_SCENE1-copy.webp";
 import "../heaters/heaters.css";
 import menuPaths from "../../../menuPaths";
@@ -145,7 +145,7 @@ export default function SaunaLights() {
           <h1 className="wm-hero-title">SAUNA LIGHTS & COVERS</h1>
           <p className="wm-hero-subtitle">Create the perfect sauna ambience</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" download />
+            <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" />
           </div>
         </div>
       <HeroWave />

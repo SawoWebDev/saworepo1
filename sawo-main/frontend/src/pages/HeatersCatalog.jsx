@@ -1,86 +1,62 @@
+// HeatersCatalog.jsx — "/sauna-heaters"
+// Full sidebar-navigable heaters catalog, structurally identical to
+// AccessoriesCatalog.jsx ("/sauna-accessories") — hero + sticky category
+// sidebar + one flat grid per series. This is the "View All Heaters"
+// destination linked from SaunaHeaters.jsx and each individual heater
+// series page, mirroring how AccessoriesCatalog.jsx is the "View All
+// Accessories" destination for SaunaAccessories.jsx and its series pages.
 import React, { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
-import { AccessoryCard, ACCESSORY_CARD_CSS } from "./AccessoryCard";
 import SEO from "../components/SEO";
 import { isPubliclyVisible } from "../local-storage/visibility";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
-import heroImg from "../assets/Home/Section1/Sauna-Accessories.webp";
+import heroImg from "../assets/NRM-NB-BL1.webp";
 import HeroWave from "../components/HeroWave";
 
-// Groups that combine multiple data categories under one section (mirroring
-// the WordPress reference pages that group the same categories together —
-// IndividualPages/pails.html -> Pails & Ladles, IndividualPages/benches.html
-// -> Benches, Hangers & Floor Mats) simply merge every tab's products into
-// one flat grid — no tab switcher, matching allaccs-display.html's plain
-// per-section layout.
-const CATEGORY_GROUPS = [
-  {
-    id: "section-pails",
-    label: "Pails & Ladles",
-    tabs: [
-      { key: "pails", label: "Pails", category: "pails" },
-      { key: "ladles", label: "Ladles", category: "ladles" },
-      { key: "pail-shower", label: "Pail Shower", category: "pail shower" },
-    ],
-  },
-  {
-    id: "section-meters",
-    label: "Thermometers & Combined Meters",
-    tabs: [{ key: "meters", label: "Thermometers & Combined Meters", category: "thermometers" }],
-  },
-  {
-    id: "section-clock-timer",
-    label: "Clocks & Timers",
-    tabs: [{ key: "clocks", label: "Clocks & Timers", category: "clocks & timers" }],
-  },
-  {
-    id: "section-sauna-lights",
-    label: "Sauna Lights",
-    tabs: [{ key: "lights", label: "Sauna Lights", category: "sauna lights" }],
-  },
-  {
-    id: "section-headrest-backrest",
-    label: "Headrest & Backrests",
-    tabs: [{ key: "headrest", label: "Headrest & Backrests", category: "headrest & backrest" }],
-  },
-  {
-    id: "section-doors-handles",
-    label: "Doors & Handles",
-    tabs: [{ key: "doors", label: "Doors & Handles", category: "doors & handles" }],
-  },
-  {
-    id: "section-benches",
-    label: "Benches, Hangers & Floor Mats",
-    tabs: [
-      { key: "benches", label: "Benches", category: "benches" },
-      { key: "hooks", label: "Hangers & Hook Racks", category: "cloth hangers" },
-      { key: "floor-mats", label: "Floor Mat Tiles", category: "wooden floor mats" },
-    ],
-  },
-  {
-    id: "section-kivistone",
-    label: "Kivistone",
-    tabs: [{ key: "kivistone", label: "Kivistone", category: "kivistone" }],
-  },
-  {
-    id: "section-vent-misc",
-    label: "Ventilations & Miscellaneous Items",
-    tabs: [{ key: "vent", label: "Ventilations & Miscellaneous Items", category: "ventilation & miscellaneous" }],
-  },
-  {
-    id: "section-accessory-sets",
-    label: "Accessory Sets",
-    tabs: [{ key: "sets", label: "Accessory Sets", category: "accessory sets" }],
-  },
+const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
+
+function getImageUrl(product, field) {
+  const path = product?.[`local_${field}`] || product?.[field] || null;
+  if (!path) return null;
+  return path.includes("://") ? path : `${GITHUB_RAW}${path}`;
+}
+
+// Series groups — same category keys AllProducts.jsx already uses for its
+// heater sidebar sections, kept lowercase/substring-matched so this reads
+// whatever the CMS "categories" field already carries per product.
+const HEATER_GROUPS = [
+  { id: "section-wall-mounted", label: "Wall-Mounted Series", category: "wall-mounted" },
+  { id: "section-tower",        label: "Tower Series",        category: "tower" },
+  { id: "section-stone",        label: "Stone Series",        category: "stone" },
+  { id: "section-floor",        label: "Floor Series",        category: "floor" },
+  { id: "section-combi",        label: "Combi Series",        category: "combi" },
+  { id: "section-dragonfire",   label: "Dragonfire Series",   category: "dragonfire" },
 ];
 
-function CategorySection({ group, productsByTab }) {
-  // Best sellers float to the top within this category's own grid only —
-  // .sort() is stable, so ties keep the existing sort_order among
-  // best-sellers and among non-best-sellers alike.
-  const products = group.tabs
-    .flatMap(tab => productsByTab[tab.key] || [])
+function HeaterCard({ product }) {
+  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const image = getImageUrl(product, "thumbnail");
+
+  return (
+    <Link to={`/products/${product.slug}`} className="hc-card">
+      <div className="hc-card-img-wrap">
+        {image ? (
+          <img src={image} alt={product.name} className="hc-card-img" loading="lazy" />
+        ) : (
+          <div className="hc-card-img-placeholder"><i className="fa-regular fa-image" /></div>
+        )}
+      </div>
+      <p className="hc-card-name">{product.name}</p>
+      {power && <p className="hc-card-power">{power}</p>}
+    </Link>
+  );
+}
+
+function CategorySection({ group, productsByGroup }) {
+  const products = (productsByGroup[group.id] || [])
+    .slice()
     .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
   return (
@@ -88,69 +64,58 @@ function CategorySection({ group, productsByTab }) {
       <div className="category-section-title">
         <h2>{group.label}</h2>
       </div>
-
-      <div className="sawo-av-grid">
+      <div className="hc-grid">
         {products.map(product => (
-          <AccessoryCard key={product.id || product.slug} product={product} />
+          <HeaterCard key={product.id || product.slug} product={product} />
         ))}
       </div>
     </div>
   );
 }
 
-export default function AccessoriesCatalog({ showHero = true } = {}) {
+export default function HeatersCatalog({ showHero = true } = {}) {
   const { products: localProds, loading } = useLocalProducts();
-  const [activeSection, setActiveSection] = useState(CATEGORY_GROUPS[0].id);
+  const [activeSection, setActiveSection] = useState(HEATER_GROUPS[0].id);
   const heroLoaded = useHeroLoaded(heroImg);
 
-  const accessories = useMemo(() => {
+  const heaters = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => isAccessoryProduct(p) && isPubliclyVisible(p));
+    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && isPubliclyVisible(p));
   }, [localProds]);
 
-  // Flat map of every tab's own product list, keyed by tab key.
-  const productsByTab = useMemo(() => {
+  const productsByGroup = useMemo(() => {
     const grouped = {};
-    CATEGORY_GROUPS.forEach(group => {
-      group.tabs.forEach(tab => {
-        grouped[tab.key] = accessories.filter(p =>
-          p.categories?.some(c => c.toLowerCase() === tab.category)
-        );
-      });
+    HEATER_GROUPS.forEach(group => {
+      grouped[group.id] = heaters.filter(p =>
+        p.categories?.some(c => c.toLowerCase().includes(group.category))
+      );
     });
     return grouped;
-  }, [accessories]);
+  }, [heaters]);
 
   const groupCounts = useMemo(() => {
     const counts = {};
-    CATEGORY_GROUPS.forEach(group => {
-      counts[group.id] = group.tabs.reduce((sum, tab) => sum + (productsByTab[tab.key] || []).length, 0);
-    });
+    HEATER_GROUPS.forEach(group => { counts[group.id] = (productsByGroup[group.id] || []).length; });
     return counts;
-  }, [productsByTab]);
+  }, [productsByGroup]);
 
-  // Scroll tracking for sidebar
   useEffect(() => {
     const handleScroll = () => {
       let closestSection = null;
       let closestOffset = Infinity;
 
-      CATEGORY_GROUPS.forEach(group => {
+      HEATER_GROUPS.forEach(group => {
         const element = document.getElementById(group.id);
         if (!element) return;
-
         const rect = element.getBoundingClientRect();
         const offset = Math.abs(rect.top);
-
         if (rect.top <= window.innerHeight * 0.4 && offset < closestOffset) {
           closestOffset = offset;
           closestSection = group.id;
         }
       });
 
-      if (closestSection) {
-        setActiveSection(closestSection);
-      }
+      if (closestSection) setActiveSection(closestSection);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -170,15 +135,12 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
       <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 120 }}>
         <div style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px", textAlign: "center" }}>
           <div style={{
-            height: 40,
-            width: 200,
+            height: 40, width: 200,
             background: "linear-gradient(90deg,#f5ede3 25%,#fdf8f4 50%,#f5ede3 75%)",
-            backgroundSize: "200% 100%",
-            animation: "skS 1.4s infinite",
-            borderRadius: 6,
-            margin: "0 auto 40px",
+            backgroundSize: "200% 100%", animation: "hcSkeleton 1.4s infinite",
+            borderRadius: 6, margin: "0 auto 40px",
           }} />
-          <p style={{ color: "#a67853" }}>Loading accessories...</p>
+          <p style={{ color: "#a67853" }}>Loading heaters...</p>
         </div>
       </div>
     );
@@ -187,19 +149,63 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
   return (
     <>
       <SEO
-        title="Sauna Accessories"
-        description="Browse the full SAWO accessories catalog: pails, ladles, thermometers, benches, lighting, and more for every sauna."
-        path="/sauna-accessories"
+        title="Sauna Heaters"
+        description="Browse the full SAWO heaters catalog: Tower, Wall-Mounted, Stone, Floor, Combi, and Dragonfire series for every sauna size and style."
+        path="/sauna-heaters"
       />
       <style>{`
-        @keyframes skS {
+        @keyframes hcSkeleton {
           0% { background-position: 200% 0; }
           100% { background-position: -200% 0; }
         }
 
-        ${ACCESSORY_CARD_CSS}
+        .hc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 24px;
+        }
+        .hc-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          text-decoration: none;
+          color: inherit;
+        }
+        .hc-card-img-wrap {
+          width: 100%;
+          aspect-ratio: 1/1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          transition: transform 0.3s;
+        }
+        .hc-card:hover .hc-card-img-wrap { transform: scale(1.04); }
+        .hc-card-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        .hc-card-img-placeholder {
+          color: #d5b99a;
+          font-size: 2.5rem;
+        }
+        .hc-card-name {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #2c1a0e;
+          margin: 12px 0 2px;
+        }
+        .hc-card-power {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.76rem;
+          color: #a67853;
+          margin: 0;
+        }
 
-        .accessories-wrapper {
+        .heaters-wrapper {
           display: grid;
           grid-template-columns: 240px 1fr;
           align-items: start;
@@ -209,8 +215,6 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
           min-height: 100vh;
         }
 
-        /* Sidebar — ported from IndividualPages/allaccs-display.html's
-           .sawo-acc-sidebar / .acc-nav-btn design. */
         .category-buttons-sidebar {
           position: sticky;
           top: 160px;
@@ -334,77 +338,53 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
         }
 
         @media screen and (max-width: 1024px) {
-          .accessories-wrapper {
+          .heaters-wrapper {
             grid-template-columns: 1fr;
             padding: 50px 40px 40px;
             gap: 24px;
           }
-
-          .category-buttons-sidebar {
-            display: none;
-          }
+          .category-buttons-sidebar { display: none; }
         }
 
         @media screen and (max-width: 768px) {
-          .accessories-wrapper {
-            padding: 40px 24px 40px;
-          }
+          .heaters-wrapper { padding: 40px 24px 40px; }
         }
       `}</style>
 
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
-        {/* Header Section — compact photo hero (bg image + dark overlay for
-            contrast), same treatment as the site's other page heroes, just
-            shorter than their usual min-h-[95vh]. */}
         {showHero && (
           <div style={{
-            position: "relative",
-            width: "100%",
-            padding: "140px 60px 60px",
-            textAlign: "center",
-            overflow: "hidden",
-            backgroundColor: "#241c17",
+            position: "relative", width: "100%", padding: "140px 60px 60px",
+            textAlign: "center", overflow: "hidden", backgroundColor: "#241c17",
           }}>
             <div style={{
-              position: "absolute",
-              inset: 0,
+              position: "absolute", inset: 0,
               backgroundImage: `url(${heroImg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity: heroLoaded ? 1 : 0,
-              transition: "opacity 0.6s ease",
+              backgroundSize: "cover", backgroundPosition: "center",
+              opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease",
             }} />
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
 
             <div style={{ position: "relative", zIndex: 1 }}>
               <p style={{
-                fontSize: "0.67rem",
-                fontWeight: 700,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#e8c8ab",
-                margin: "0 0 12px",
+                fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.14em",
+                textTransform: "uppercase", color: "#e8c8ab", margin: "0 0 12px",
               }}>
                 Premium Collection
               </p>
               <h1 style={{
-                fontSize: "2.4rem",
-                fontWeight: 700,
-                color: "#ffffff",
-                margin: "0 0 16px",
-                lineHeight: 1.2,
+                fontSize: "2.4rem", fontWeight: 700, color: "#ffffff",
+                margin: "0 0 16px", lineHeight: 1.2,
               }}>
-                Sauna Accessories
+                Sauna Heaters
               </h1>
               <p style={{
-                fontSize: "1rem",
-                color: "rgba(255,255,255,0.88)",
-                margin: "0 auto 12px",
-                maxWidth: 700,
-                lineHeight: 1.6,
-                textAlign: "center",
+                fontSize: "1rem", color: "rgba(255,255,255,0.88)",
+                margin: "0 auto 12px", maxWidth: 700, lineHeight: 1.6, textAlign: "center",
               }}>
-                Discover our complete range of premium sauna accessories designed to enhance your wellness experience. Browse through our carefully curated selection of high-quality products.
+                Discover our complete range of premium sauna heaters designed for every sauna size
+                and style. Browse through our carefully curated Tower, Wall-Mounted, Stone, Floor,
+                Combi, and Dragonfire series.
               </p>
             </div>
 
@@ -412,13 +392,11 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
           </div>
         )}
 
-        {/* Main Grid with Sidebar */}
-        <div className="accessories-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
-          {/* Sidebar */}
+        <div className="heaters-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
           <div className="category-buttons-sidebar">
-            <h1 className="sidebar-header-title">Sauna Accessories</h1>
+            <h1 className="sidebar-header-title">Sauna Heaters</h1>
             <div className="sidebar-scroll">
-              {CATEGORY_GROUPS.map(group => {
+              {HEATER_GROUPS.map(group => {
                 const count = groupCounts[group.id] || 0;
                 if (count === 0) return null;
                 return (
@@ -434,16 +412,11 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
             </div>
           </div>
 
-          {/* Main Content */}
           <div className="main-content">
-            {CATEGORY_GROUPS.map(group => {
+            {HEATER_GROUPS.map(group => {
               if ((groupCounts[group.id] || 0) === 0) return null;
               return (
-                <CategorySection
-                  key={group.id}
-                  group={group}
-                  productsByTab={productsByTab}
-                />
+                <CategorySection key={group.id} group={group} productsByGroup={productsByGroup} />
               );
             })}
           </div>

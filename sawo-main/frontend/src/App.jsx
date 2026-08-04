@@ -71,6 +71,7 @@ const AccessorySets      = lazy(() => import("./pages/Sauna/accessories/Accessor
 const ProductPageRouter  = lazy(() => import("./pages/ProductPageRouter"));
 const DispAccessories    = lazy(() => import("./pages/IndividualDisplay/DispAccessories"));
 const AccessoriesCatalog = lazy(() => import("./pages/AccessoriesCatalog"));
+const HeatersCatalog = lazy(() => import("./pages/HeatersCatalog"));
 const DispSaunaRoom      = lazy(() => import("./pages/IndividualDisplay/DispSaunaRoom"));
 
 // Admin pages — separate chunks, only loaded when authenticated users visit /admin/*
@@ -170,6 +171,7 @@ export default function App() {
 
                     {/* Accessories catalog (all accessories listing) */}
                     <Route path={menuPaths.accessories} element={<AccessoriesCatalog />} />
+                    <Route path={menuPaths.heaters} element={<HeatersCatalog />} />
 
                     {/* Single accessory product detail page */}
                     <Route path="/accessories/:slug" element={<DispAccessories />} />

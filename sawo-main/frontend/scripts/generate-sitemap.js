@@ -111,6 +111,7 @@ const STATIC_ROUTES = [
   { path: "/sitemap", priority: "0.3", changefreq: "monthly" },
   { path: "/products", priority: "0.9", changefreq: "weekly" },
   { path: "/sauna-accessories", priority: "0.8", changefreq: "weekly" },
+  { path: "/sauna-heaters", priority: "0.8", changefreq: "weekly" },
 ];
 
 function loadJson(file) {

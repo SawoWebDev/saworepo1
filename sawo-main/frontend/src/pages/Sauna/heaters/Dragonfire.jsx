@@ -47,7 +47,7 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts";
-import ButtonClear from "../../../components/Buttons/ButtonClear";
+import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/dragonfire-hero.webp";
@@ -236,9 +236,10 @@ const Dragonfire = () => {
           <h1 className="wm-hero-title">DRAGONFIRE SAUNA HEATERS</h1>
           <p className="wm-hero-subtitle">Artistic Flair Meets Cutting-Edge Technology</p>
           <div style={{ marginTop: "32px" }}>
-            <ButtonClear
+            <BrochureDropdownButton
               text="EXPLORE HEATERS"
               href={menuPaths.sauna.heaters.parent}
+              redirect
             />
           </div>
         </div>
@@ -326,6 +327,11 @@ const Dragonfire = () => {
             })
           )}
         </div>
+      </section>
+
+      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
+      <section className="wm-section" style={{ textAlign: "center" }}>
+        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
       </section>
 
       {/* WHY SAWO */}

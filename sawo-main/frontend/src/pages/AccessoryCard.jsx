@@ -48,7 +48,6 @@ export const ACCESSORY_CARD_CSS = `
 .sawo-av-image-container:hover .sawo-av-main-image{transform:scale(1.05)}
 .sawo-av-overlay-text{position:absolute;top:6px;right:6px;background-color:rgba(0,0,0,0.7);color:#fff;padding:3px 6px;font-size:10px;border-radius:4px;font-family:'Montserrat',sans-serif;pointer-events:none}
 .sawo-av-choices{display:flex;justify-content:center;gap:5px;margin-bottom:4px;align-items:center;width:100%;user-select:none}
-.sawo-av-arrow{user-select:none;cursor:default;font-size:13px;line-height:1;pointer-events:none;color:#af8564}
 .sawo-av-choice{cursor:pointer;width:14px;height:14px;border:2px solid transparent;transition:border-color 0.3s ease,transform 0.3s ease;border-radius:50%;user-select:none;padding:0}
 .sawo-av-choice:hover{border-color:#af8564;transform:scale(1.3)}
 .sawo-av-choice.pine,.sawo-av-choice.hemlock{background-color:#d9ad73}
@@ -69,7 +68,8 @@ export const ACCESSORY_CARD_CSS = `
 .sawo-av-video-modal{display:flex;position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);z-index:10;justify-content:center;align-items:center}
 .sawo-av-popup-video{width:100%;height:100%;object-fit:cover;background:#000;z-index:11}
 .sawo-av-close-video{position:absolute;top:10px;right:10px;background:#fff;border:none;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;z-index:12}
-.sawo-av-video-btn{background:none;border:none;cursor:pointer;margin-left:6px;padding:0;display:flex;align-items:center}
+.sawo-av-video-btn{background-color:#2c1a0e;cursor:pointer;width:14px;height:14px;border:2px solid transparent;transition:border-color 0.3s ease,transform 0.3s ease;border-radius:50%;user-select:none;padding:0;display:flex;align-items:center;justify-content:center}
+.sawo-av-video-btn:hover{border-color:#af8564;transform:scale(1.3)}
 @media(max-width:1400px){.sawo-av-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:1100px){.sawo-av-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:768px){.sawo-av-grid{grid-template-columns:repeat(2,1fr);gap:12px}.sawo-av-image-container{height:200px}.sawo-av-choice{width:12px;height:12px}.sawo-av-headtext{font-size:13.5px}.sawo-av-code,.sawo-av-subtext{font-size:11.5px}.sawo-av-overlay-text{font-size:9px;top:0;right:0;padding:2px 4px}}
@@ -125,7 +125,7 @@ export function AccessoryCard({ product }) {
 
         {video && videoOpen && (
           <div className="sawo-av-video-modal">
-            <video className="sawo-av-popup-video" loop autoPlay controls onClick={e => e.stopPropagation()}>
+            <video className="sawo-av-popup-video" loop autoPlay onClick={e => e.stopPropagation()}>
               <source src={video} type="video/mp4" />
             </video>
             <button
@@ -141,14 +141,13 @@ export function AccessoryCard({ product }) {
 
       {(hasSwatches || video) && (
         <div className="sawo-av-choices">
-          <span className="sawo-av-arrow">&#8249;</span>
           {hasSwatches && variants.map((v, i) => (
             <button
               key={v.code || i}
               type="button"
               className={`sawo-av-choice ${colorToClass(v.color)}`}
               title={v.color}
-              onClick={e => { e.stopPropagation(); setSelected(i); }}
+              onClick={e => { e.stopPropagation(); setVideoOpen(false); setSelected(i); }}
             />
           ))}
           {video && (
@@ -158,10 +157,9 @@ export function AccessoryCard({ product }) {
               title="Watch Video"
               onClick={e => { e.stopPropagation(); setVideoOpen(true); }}
             >
-              <i className="fa-solid fa-circle-play" style={{ fontSize: 22, color: "#af8564" }} />
+              <i className="fa-solid fa-play" style={{ fontSize: 7, color: "#fff" }} />
             </button>
           )}
-          <span className="sawo-av-arrow">&#8250;</span>
         </div>
       )}
 

@@ -26,6 +26,31 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 
+// Turns a PDF URL into a readable document title for the dropdown row, e.g.
+// ".../STP-INFACE-V2_En_2026.pdf" -> "STP INFACE V2",
+// ".../SAWO-Product-Catalogue-2025-2026-web.pdf" -> "SAWO Product Catalogue".
+// Strips the file extension, a trailing locale+year stamp (a common WP-upload
+// naming convention: "_En_2026", "-De-2026", etc.), a trailing "web" tag, and
+// any trailing edition year(s)/revision number ("2026", "2025 2026", "2026 1")
+// — years are noise for a reader picking a document by name, not part of its
+// title — then swaps remaining hyphens/underscores for spaces. Falls back to
+// the raw filename if that leaves nothing usable.
+function pdfLabelFromUrl(url) {
+  if (!url) return "";
+  const filename = decodeURIComponent(url.split("/").pop() || "");
+  const base = filename.replace(/\.pdf$/i, "");
+  let cleaned = base
+    .replace(/[-_](en|de|fi|fr|es|it|nl|sv|se|no|dk)[-_]?\d{2,4}$/i, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\bweb$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  cleaned = cleaned
+    .replace(/(\s(19|20)\d{2}){1,2}(\s\d{1,2})?$/, "")
+    .trim();
+  return cleaned || base.replace(/[-_]+/g, " ").trim();
+}
+
 const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href, redirect = false }) => {
   const btnRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -35,7 +60,9 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href, redi
 
   // A bare `href` (no `items`) for a PDF/brochure button still gets the
   // chevron + one-item dropdown treatment, not a plain link — see file header.
-  const resolvedItems = items.length > 0 ? items : (href ? [{ label: text, href }] : []);
+  // The dropdown row shows a name derived from the PDF's own filename
+  // (pdfLabelFromUrl), not the button's own CTA text ("VIEW BROCHURE" etc.).
+  const resolvedItems = items.length > 0 ? items : (href ? [{ label: pdfLabelFromUrl(href), href }] : []);
   const hasDropdown = !redirect && resolvedItems.length > 0;
 
   const positionDropdown = useCallback(() => {
@@ -89,17 +116,17 @@ const BrochureDropdownButton = ({ text = "VIEW BROCHURE", items = [], href, redi
       .sawo-vb-wrap {
         display: inline-flex;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 8px;
       }
       .sawo-vb-btn {
         background-color: white;
         color: #af8564;
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
-        font-size: 13px;
-        line-height: 18px;
+        font-size: 14px;
+        line-height: 19px;
         letter-spacing: 0.06em;
-        padding: 12px 32px;
+        padding: 13px 36px;
         cursor: pointer;
         /* Not transitioned — a gradient background can't be smoothly
            interpolated by any browser, so animating it desyncs from the
