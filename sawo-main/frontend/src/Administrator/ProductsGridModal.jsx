@@ -109,16 +109,16 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
           overflow: hidden;
         }
         .pgm-preview-richtext table th {
-          background: linear-gradient(135deg,#8b5e3c,#a67853);
+          background: #8b5e3c;
           color: #fff;
           font-weight: 700;
           padding: 10px 14px;
           text-align: center;
           border-right: 1px solid rgba(255,255,255,0.25);
-          font-size: 0.66rem;
+          font-size: 0.6rem;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          line-height: 1.4;
+          line-height: 1.2;
         }
         .pgm-preview-richtext table th:last-child { border-right: none; }
         .pgm-preview-richtext table td {
@@ -253,20 +253,28 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
             <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 28px" }} />
             <div style={{ padding: "18px 28px" }}>
               <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
-              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a", background: "#fafaf8" }}>
-                <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 160), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+                <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                   <thead>
-                    <tr style={{ background: "#faf7f4" }}>
+                    <tr style={{ background: "#8b5e3c" }}>
                       {specHeaders.map((h, i) => (
-                        <th key={i} style={{ padding: "9px 14px", textAlign: "left", color: "#8b5e3c", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap" }}>{h}</th>
+                        <th key={i} style={{
+                          padding: "10px 14px", textAlign: "center", color: "#fff",
+                          fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
+                          letterSpacing: "0.06em", lineHeight: 1.2,
+                          borderRight: i < specHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
+                        }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {specRows.map((row, ri) => (
-                      <tr key={ri} style={{ borderBottom: ri < specRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                      <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderBottom: ri < specRows.length - 1 ? "1px solid #f0e4d8" : "none" }}>
                         {specHeaders.map((h, ci) => (
-                          <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[ci] || "–"}</td>
+                          <td key={ci} style={{
+                            padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
+                            borderRight: ci < specHeaders.length - 1 ? "1px solid #edddd0" : "none",
+                          }}>{row[ci] || "–"}</td>
                         ))}
                       </tr>
                     ))}
