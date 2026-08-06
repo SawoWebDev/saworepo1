@@ -635,13 +635,22 @@ export default function ProductPage() {
           overflow-x: auto;
         }
 
-        /* min-width: max-content lets the table grow to its natural content
+        /* Scoped to .pp-richtext (the Description field's raw pasted HTML)
+           — these were previously bare "table"/"table th"/"table td"
+           selectors with no scoping, which leaked onto every table on the
+           page including the JSX-rendered Technical Data tables below,
+           silently overriding their own inline background/color styling
+           (table cell backgrounds paint over row backgrounds, so an
+           unscoped "table th { background-color }" rule always won
+           regardless of what the row's own inline background said).
+
+           min-width: max-content lets the table grow to its natural content
            width (so nowrap headers actually stay on one line) instead of
            being force-compressed to width:100% — that compression was what
            made narrow header text wrap letter-by-letter on mobile. The
            .pp-richtext wrapper above scrolls horizontally when this
            overflows, instead of squeezing the table into the page. */
-        table {
+        .pp-richtext table {
           width: 100%;
           min-width: max-content;
           border-collapse: collapse;
@@ -652,7 +661,7 @@ export default function ProductPage() {
           border: 1px solid #d5b99a;
         }
 
-        table th {
+        .pp-richtext table th {
           background-color: #f0e8df;
           color: #5a4030;
           font-weight: 600;
@@ -666,7 +675,7 @@ export default function ProductPage() {
           white-space: nowrap;
         }
 
-        table td {
+        .pp-richtext table td {
           padding: 8px 10px;
           color: #5a4030;
           border-bottom: 1px solid #edddd0;
@@ -675,27 +684,27 @@ export default function ProductPage() {
           font-size: 0.77rem;
         }
 
-        table td:first-child {
+        .pp-richtext table td:first-child {
           white-space: nowrap;
           text-align: center;
           font-weight: 500;
         }
 
-        table tbody tr:nth-child(odd) {
+        .pp-richtext table tbody tr:nth-child(odd) {
           background-color: #fdfaf7;
         }
 
-        table tbody tr:hover {
+        .pp-richtext table tbody tr:hover {
           background-color: #f5ede3;
         }
 
-        table tbody tr:last-child td {
+        .pp-richtext table tbody tr:last-child td {
           border-bottom: none;
         }
 
         @media(max-width: 768px) {
-          table { font-size: 0.72rem; }
-          table th, table td { padding: 7px 8px; }
+          .pp-richtext table { font-size: 0.72rem; }
+          .pp-richtext table th, .pp-richtext table td { padding: 7px 8px; }
         }
 
         @media(max-width:900px){
