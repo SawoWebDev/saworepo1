@@ -991,20 +991,45 @@ export default function ProductPage() {
                 fontWeight: 400, color: "#a67853", letterSpacing: "0.04em", textTransform: "uppercase",
                 margin: "0 0 36px",
               }}>Included in the Package</h3>
-              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "32px 24px" }}>
-                {includedItems.map((item, i) => (
-                  <div key={i} style={{ width: 160, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                    {item.image && (
-                      <img src={item.image} alt={item.title || ""} style={{ maxWidth: "100%", maxHeight: 110, objectFit: "contain", marginBottom: 14 }} />
-                    )}
-                    {item.title && (
-                      <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#2c1a0e", margin: 0, lineHeight: 1.4 }}>{item.title}</p>
-                    )}
-                    {item.note && (
-                      <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", color: "#a67853", margin: "2px 0 0", lineHeight: 1.4 }}>{item.note}</p>
-                    )}
-                  </div>
-                ))}
+              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "flex-start", gap: "32px 24px" }}>
+                {includedItems.map((item, i) => {
+                  const Wrapper = item.slug ? Link : "div";
+                  const wrapperProps = item.slug
+                    ? { to: `/products/${item.slug}`, style: { textDecoration: "none", color: "inherit", cursor: "pointer" } }
+                    : {};
+                  return (
+                    <Wrapper
+                      key={i}
+                      {...wrapperProps}
+                      className="pp-included-item"
+                      style={{
+                        ...(wrapperProps.style || {}),
+                        width: 160, display: "flex", flexDirection: "column",
+                        alignItems: "center", textAlign: "center",
+                        padding: 10, borderRadius: 12,
+                        border: "2px solid transparent", transition: "all 0.2s ease",
+                      }}
+                      onMouseEnter={item.slug ? e => { e.currentTarget.style.border = "2px solid #a67853"; e.currentTarget.style.background = "rgba(246, 242, 237, 0.5)"; } : undefined}
+                      onMouseLeave={item.slug ? e => { e.currentTarget.style.border = "2px solid transparent"; e.currentTarget.style.background = "transparent"; } : undefined}
+                    >
+                      <div style={{ height: 110, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+                        {item.image && (
+                          <img src={item.image} alt={item.title || ""} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                        )}
+                      </div>
+                      {item.title && (
+                        <p style={{
+                          fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#2c1a0e",
+                          margin: 0, lineHeight: 1.4, minHeight: "2.8em",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>{item.title}</p>
+                      )}
+                      {item.note && (
+                        <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", color: "#a67853", margin: "2px 0 0", lineHeight: 1.4 }}>{item.note}</p>
+                      )}
+                    </Wrapper>
+                  );
+                })}
               </div>
             </div>
           </>
