@@ -13,20 +13,16 @@ function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 function getImageUrl(product, field) {
   const path = localOrRemote(product, field);
   if (!path) return null;
-  if (path.includes("://")) return path;
-  return `${GITHUB_RAW}${path}`;
+  return path;
 }
 
 function getFileUrl(file) {
   const src = file?.url || file?.path;
   if (!src) return null;
-  if (src.includes("://")) return src;
-  return `${GITHUB_RAW}${src}`;
+  return src;
 }
 
 // ─── PDF Modal ────────────────────────────────────────────────────────────────

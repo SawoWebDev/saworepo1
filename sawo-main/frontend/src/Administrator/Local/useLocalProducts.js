@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
-import { getDataSource, getJsonSourceScope } from "../../local-storage/dataSource";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive } from "../../local-storage/supabaseReader";
-import { getJsonFileAccessories } from "../../local-storage/jsonFileProducts";
-import { OWNED_CATEGORIES } from "../../local-storage/accessoriesTransform";
 import { getCache, setCache } from "../adminCache";
 
 // Every public page (product lists, category pages, individual product
 // displays) reads through this one hook, so caching it here caches the
 // whole site. A repeat visit within CACHE_TTL_MS paints the cached list
-// instantly with zero Supabase/GitHub requests; past that age it still
+// instantly with zero Supabase requests; past that age it still
 // paints instantly from cache but quietly refetches in the background, so a
 // CMS edit eventually reaches a tab that's been left open. To see an edit
 // immediately, hard-reload (Ctrl+Shift+R): that clears this in-memory cache
@@ -32,55 +29,18 @@ export function useLocalProducts() {
     const loadData = async () => {
       try {
         if (!cached) setLoading(true);
-        const source = await getDataSource();
 
-        let result;
-        if (source === "supabase") {
-          const [productsRes, categoriesRes, tagsRes] = await Promise.all([
-            getAllProductsLive(),
-            getAllCategoriesLive(),
-            getAllTagsLive(),
-          ]);
-          result = {
-            products: productsRes,
-            categories: categoriesRes,
-            tags: tagsRes,
-            meta: { last_synced: new Date().toISOString(), total_products: productsRes.length, source: "supabase" },
-          };
-        } else {
-          const [productsRes, categoriesRes, tagsRes, metaRes] = await Promise.all([
-            import("./data/products.json"),
-            import("./data/categories.json"),
-            import("./data/tags.json"),
-            import("./data/meta.json"),
-          ]);
-          let products = productsRes.default || [];
-          let effectiveSource = source; // "github" or "jsonfile"
-
-          if (source === "jsonfile") {
-            const scope = await getJsonSourceScope();
-            if (scope === "accessories" || scope === "all") {
-              try {
-                const jsonAccessories = await getJsonFileAccessories();
-                products = products
-                  .filter(p => !(p.categories || []).some(c => OWNED_CATEGORIES.has(c)))
-                  .concat(jsonAccessories);
-              } catch (err) {
-                console.warn("[useLocalProducts] Failed to load allaccs-data.json, using bundled snapshot:", err.message);
-                effectiveSource = "github";
-              }
-            } else {
-              effectiveSource = "github";
-            }
-          }
-
-          result = {
-            products,
-            categories: categoriesRes.default || [],
-            tags: tagsRes.default || [],
-            meta: { ...(metaRes.default || {}), source: effectiveSource },
-          };
-        }
+        const [productsRes, categoriesRes, tagsRes] = await Promise.all([
+          getAllProductsLive(),
+          getAllCategoriesLive(),
+          getAllTagsLive(),
+        ]);
+        const result = {
+          products: productsRes,
+          categories: categoriesRes,
+          tags: tagsRes,
+          meta: { last_synced: new Date().toISOString(), total_products: productsRes.length, source: "supabase" },
+        };
 
         setProducts(result.products);
         setCategories(result.categories);

@@ -18,7 +18,6 @@ const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 const STORAGE_BUCKETS = ["product-images", "product-pdf"];
-const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 // The 6 heater subcategories, in the fixed display order requested for the
 // "Sauna Heaters" quick filter — used to group products and to drive the
@@ -65,8 +64,9 @@ function localOrRemote(product, field) {
 }
 
 // Every row is now a live Supabase row holding an absolute R2 URL (see the
-// R2 migration) — the PREVIEW_GITHUB_RAW prefix branch this used to have
-// for "local"/bundled-snapshot preview data is gone along with that mode.
+// R2 migration) — the GitHub-raw prefix branch this used to have for
+// "local"/bundled-snapshot preview data is gone along with that mode
+// (see the 2026-08-06 saworepo2 cleanup).
 function getImageUrl(product, field) {
   return localOrRemote(product, field) || null;
 }
@@ -1647,8 +1647,7 @@ function ProductAuditStrip({ product }) {
 
 function previewResolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${PREVIEW_GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 
 function previewGetField(product, field) {

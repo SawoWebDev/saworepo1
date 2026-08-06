@@ -1,41 +1,67 @@
 ﻿// SteamControls.jsx
 
-import React from "react";
-import stpV2 from "../../assets/Steam/STP-INFACE-V2-300x330.webp";
-import stpSST from "../../assets/Steam/STP-INFACE-SST-310x179.webp";
-import steControl from "../../assets/Steam/STE-INFACE-V2-150x150.webp";
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 
 // Served from /public (not webpack-bundled) so its URL is stable at build time —
 // public/index.html preloads this exact path for this route, so by the time
 // this component mounts and applies it, the browser already has it cached.
 const heroBg = "/hero/steam-controls.webp";
 
-const controls = [
-  {
-    img: stpV2,
-    title: "Steam 2.0",
-    subtitle: "STP-INFACE-V2",
-    desc: "The Steam 2.0 (STP-INFACE-V2) control is the latest addition to our steam generator control lineup, delivering reliable performance with a modernized design.",
-  },
-  {
-    img: stpSST,
-    title: "Steam Stainless Touch",
-    subtitle: "STP-INFACE-SST",
-    desc: "The Steam Stainless Touch offers effortless control of steam, temperature, and time through a user-friendly interface, ensuring a personalized sauna or steam room experience.",
-  },
-  {
-    img: steControl,
-    title: "Steam STE",
-    subtitle: "STE-INFACE-V2",
-    desc: "The Steam STE control combines the familiar operation of its predecessor with a modernized design and refined dimensions for easier, more reliable use.",
-  },
-];
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function localOrRemote(product, field) {
+  return product?.[`local_${field}`] || product?.[field] || null;
+}
+
+function getImageUrl(product, field) {
+  return localOrRemote(product, field) || null;
+}
+
+function stripHtml(html) {
+  if (!html) return "";
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+}
+
+function getFirstSentence(text) {
+  if (!text) return "";
+  const cleaned = stripHtml(text).replace(/\s+/g, " ").trim();
+  // Lookahead requires the punctuation to be followed by a space + capital
+  // letter (or the end of the string) so it doesn't stop early on periods
+  // inside things like "2.0" or abbreviations like "STE." mid-sentence.
+  const match = cleaned.match(/^[^.!?]*[.!?](?=\s+[A-Z]|\s*$)/);
+  return match ? match[0] : cleaned.split(/\s+/).slice(0, 20).join(" ") + "...";
+}
+
+// Model number lives as a "(STP-INFACE-V2)"-style tag rather than its own field.
+function getModelTag(product) {
+  const tag = (product.tags || []).find(t => /^\(.+\)$/.test(t));
+  return tag ? tag.slice(1, -1) : "";
+}
+
+const DISPLAY_CATEGORIES = ["Steam Controls"];
 
 const SteamControls = () => {
+  const { products: localProds, loading } = useLocalProducts();
   const heroLoaded = useHeroLoaded(heroBg);
+
+  const controls = useMemo(() => {
+    const visible = localProds.filter(p => isPubliclyVisible(p));
+    const filtered = visible.filter(p =>
+      (p.categories || []).some(c => DISPLAY_CATEGORIES.includes(c))
+    );
+    return [...filtered].sort((a, b) => {
+      const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;
+      if (sA !== sB) return sA - sB;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }, [localProds]);
 
   return (
   <div className="relative">
@@ -93,20 +119,34 @@ const SteamControls = () => {
     {/* ===================== */}
     <section className="sc-section">
       <div className="sc-container">
-        <div className="sc-grid">
-          {controls.map((item, i) => (
-            <div className="sc-card" key={i}>
-              <div className="sc-img-wrap">
-                <img src={item.img} alt={item.title} className="sc-img" />
-              </div>
-              <div className="sc-text">
-                <p className="sc-eyebrow">{item.subtitle}</p>
-                <h3 className="sc-card-title">{item.title}</h3>
-                <p className="sc-card-desc">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading controls...</p>}
+        {!loading && controls.length === 0 && (
+          <p style={{ textAlign: "center", color: "#999" }}>No steam controls available yet.</p>
+        )}
+        {!loading && controls.length > 0 && (
+          <div className="sc-grid">
+            {controls.map(product => (
+              <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="sc-card" style={{ textDecoration: "none", color: "inherit" }}>
+                <div className="sc-img-wrap">
+                  {getImageUrl(product, "thumbnail") ? (
+                    <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="sc-img" />
+                  ) : (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "160px", color: "#ccc" }}>
+                      <i className="fas fa-image" style={{ fontSize: "32px" }} />
+                    </div>
+                  )}
+                </div>
+                <div className="sc-text">
+                  {getModelTag(product) && <p className="sc-eyebrow">{getModelTag(product)}</p>}
+                  <h3 className="sc-card-title">{product.name}</h3>
+                  <p className="sc-card-desc">
+                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Precision steam control for a personalized sauna experience."}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
 

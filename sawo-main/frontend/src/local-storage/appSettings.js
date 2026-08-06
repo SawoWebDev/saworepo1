@@ -38,7 +38,6 @@ const CACHE_MS = 30 * 1000; // 30s — a CMS toggle takes effect within seconds
 // table if the CMS switch is ever restored.
 const PUBLIC_KEYS = [
   "data_source",
-  "json_source_scope",
   "gdpr_banner_enabled",
   "language_switcher_enabled",
   "enabled_languages",

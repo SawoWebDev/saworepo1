@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getDataSource } from "../../local-storage/dataSource";
 import { getAllSaunaRoomsLive } from "../../local-storage/supabaseReader";
 import { getCache, setCache } from "../adminCache";
 
@@ -27,20 +26,7 @@ export function useLocalSaunaRooms() {
     const load = async () => {
       try {
         if (!cached) setLoading(true);
-        const source = await getDataSource();
-
-        let freshRooms;
-        if (source === "supabase") {
-          freshRooms = await getAllSaunaRoomsLive();
-        } else {
-          const githubOwner = process.env.REACT_APP_GITHUB_OWNER || "jmesrafael";
-          const imagesRepo = process.env.REACT_APP_IMAGES_REPO || "saworepo2";
-          const url = `https://raw.githubusercontent.com/${githubOwner}/${imagesRepo}/main/saunaroom-data.json`;
-
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
-          freshRooms = (await res.json()) || [];
-        }
+        const freshRooms = await getAllSaunaRoomsLive();
         setRooms(freshRooms);
         setCache(LOCAL_ROOMS_CACHE_KEY, { data: freshRooms, time: Date.now() });
       } catch (err) {

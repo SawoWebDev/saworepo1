@@ -193,7 +193,8 @@
 # retiring outright (410) once backlink status is confirmed.
 /ai-cad/                                                   /support                        301
 # GAP: no "Wood_Brochure.pdf" exists anywhere in this repo (checked both
-# frontend/public/pdfs and the saworepo2 asset store). The only real PDF
+# frontend/public/pdfs and, before its 2026-08-06 deletion, the saworepo2 asset
+# store — see docs/go-live/STORAGE-CURRENT.txt). The only real PDF
 # catalogue asset that exists today is
 # frontend/public/pdfs/SAWO-Product-Catalogue-2025-2026.pdf, served from
 # the /support/catalogue page — redirecting straight to that PDF file

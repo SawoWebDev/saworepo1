@@ -22,3 +22,13 @@ the admin UI.
 be suspended/deleted from the Render dashboard directly — that's not something
 that can be done from this repo. See `docs/go-live/R2-MIGRATION-PLAN.md` for the
 full migration record.
+
+**2026-08-06 update:** `saworepo2` (the GitHub images repo this backend synced into)
+has now been deleted outright, after a file-by-file verification against the R2
+migration manifest confirmed nothing still in use would be lost — see
+`docs/go-live/STORAGE-CURRENT.txt` section 4A. `syncApi.js`, `sync.js`,
+`sync-sauna-rooms.js`, and `upload-accessories.js` (in
+`frontend/src/Administrator/Local/scripts/`) will now fail if ever invoked, since
+their `saworepo2/images` source no longer exists on disk. They were left as-is
+during that cleanup — retiring/rewriting them is still this same deferred
+Render-backend-retirement task, not done yet.

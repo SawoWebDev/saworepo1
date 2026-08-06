@@ -990,8 +990,7 @@ function RoomAuditStrip({ room }) {
 // (unlike products), so the resolve helpers are simpler.
 function previewRoomResolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${PREVIEW_GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 function previewRoomImgsArr(room, field) {
   const arr = room?.[field];
