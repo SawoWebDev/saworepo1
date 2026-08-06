@@ -828,30 +828,42 @@ export default function AccessoriesPage() {
           font-size: 0.78rem;
           background-color: #fff;
           border: 1px solid #d5b99a;
+          border-radius: 10px;
+          overflow: hidden;
         }
 
+        /* Same brand-gradient header treatment as the JSX-rendered
+           Technical Data table above, so a product whose spec table
+           happens to be raw pasted HTML (still true for many products
+           migrated from WordPress) looks identical to one using the
+           structured Specifications Table field. */
         .pp-richtext table th {
-          background-color: #f0e8df;
-          color: #5a4030;
-          font-weight: 600;
-          padding: 8px 10px;
+          background: linear-gradient(135deg,#8b5e3c,#a67853);
+          color: #fff;
+          font-weight: 700;
+          padding: 10px 14px;
           text-align: center;
-          border-bottom: 1px solid #ddc9b4;
-          font-size: 0.68rem;
+          border-bottom: none;
+          border-right: 1px solid rgba(255,255,255,0.25);
+          font-size: 0.66rem;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          line-height: 1.2;
-          white-space: nowrap;
+          letter-spacing: 0.06em;
+          line-height: 1.4;
         }
+
+        .pp-richtext table th:last-child { border-right: none; }
 
         .pp-richtext table td {
-          padding: 8px 10px;
+          padding: 8px 14px;
           color: #5a4030;
           border-bottom: 1px solid #edddd0;
+          border-right: 1px solid #edddd0;
           background-color: transparent;
           text-align: center;
-          font-size: 0.77rem;
+          font-size: 0.8rem;
         }
+
+        .pp-richtext table td:last-child { border-right: none; }
 
         .pp-richtext table td:first-child {
           white-space: nowrap;
@@ -859,8 +871,8 @@ export default function AccessoriesPage() {
           font-weight: 500;
         }
 
-        .pp-richtext table tbody tr:nth-child(odd) {
-          background-color: #fdfaf7;
+        .pp-richtext table tbody tr:nth-child(even) {
+          background-color: #faf7f4;
         }
 
         .pp-richtext table tbody tr:hover {

@@ -2070,6 +2070,50 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
         @keyframes ppPreviewFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         .pp-preview-modal { animation: ppPreviewFade 0.2s ease; }
         @media(max-width:720px) { .pp-preview-s1 { grid-template-columns: 1fr !important; gap: 20px !important; } }
+
+        /* The "Specifications" section below renders product.description's
+           raw HTML as-is (dangerouslySetInnerHTML, no wrapper styling) — for
+           ~130+ products migrated from WordPress, that HTML is itself a
+           pasted <table>, which previously rendered with zero styling
+           (browser table defaults: no borders/background, cramped columns).
+           Matches the live page's .pp-richtext table treatment (see
+           DispProduct.jsx) so the preview looks like what visitors see. */
+        .pp-preview-richtext table {
+          width: 100%;
+          min-width: max-content;
+          border-collapse: collapse;
+          margin: 12px 0;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.8rem;
+          background-color: #fff;
+          border: 1px solid #d5b99a;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .pp-preview-richtext table th {
+          background: linear-gradient(135deg,#8b5e3c,#a67853);
+          color: #fff;
+          font-weight: 700;
+          padding: 10px 14px;
+          text-align: center;
+          border-right: 1px solid rgba(255,255,255,0.25);
+          font-size: 0.66rem;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          line-height: 1.4;
+        }
+        .pp-preview-richtext table th:last-child { border-right: none; }
+        .pp-preview-richtext table td {
+          padding: 8px 14px;
+          color: #5a4030;
+          border-bottom: 1px solid #edddd0;
+          border-right: 1px solid #edddd0;
+          text-align: center;
+          font-size: 0.8rem;
+        }
+        .pp-preview-richtext table td:last-child { border-right: none; }
+        .pp-preview-richtext table tbody tr:nth-child(even) { background-color: #faf7f4; }
+        .pp-preview-richtext table tbody tr:last-child td { border-bottom: none; }
       `}</style>
 
       <div
@@ -2227,7 +2271,7 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
             <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 32px" }} />
             <div style={{ padding: "20px 32px" }}>
               <PreviewSectionLabel text="Specifications" />
-              <div style={{ color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: cleanPreviewHTML(product.description) }} />
+              <div className="pp-preview-richtext" style={{ color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word", maxWidth: "100%", overflowX: "auto" }} dangerouslySetInnerHTML={{ __html: cleanPreviewHTML(product.description) }} />
             </div>
           </>
         )}
