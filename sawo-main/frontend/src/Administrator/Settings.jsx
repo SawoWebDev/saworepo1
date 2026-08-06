@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { logActivity, supabase } from "./supabase";
-import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
 import { getGDPRBannerEnabled, setGDPRBannerEnabled as saveGDPRBannerEnabled } from "../local-storage/gdprSettings";
 import {
   getLanguageSwitcherEnabled, setLanguageSwitcherEnabled as saveLanguageSwitcherEnabled,
@@ -84,22 +83,6 @@ async function saveContactNotifyEmail(email, username) {
   if (error) throw new Error(error.message);
 }
 
-// Moved out of the sidebar footer (was a bare <select> wedged next to
-// logout/theme) — this is a high-stakes, rarely-changed control (it changes
-// what the PUBLIC site serves), so it belongs on a dedicated page rather
-// than one accidental click away at all times. See local-storage/dataSource.js.
-//
-// "github" and "jsonfile" are deliberately NOT offered as choices anymore
-// (2026-08-03, R2/Render retirement): both depend on the Render sync
-// backend to keep the bundled/synced snapshot fresh, and that backend has
-// been retired. Selecting either now would silently freeze the public site
-// on stale data with no way to ever refresh it. "supabase" (live reads) is
-// the only supported source going forward — see [[r2-migration-live]] /
-// docs/go-live/R2-MIGRATION-PLAN.md §8 for the full context.
-const SOURCE_OPTIONS = [
-  { value: "supabase", label: "Supabase", description: "Live Supabase rows, direct and instant. The only supported source since the GitHub/Render sync pipeline was retired." },
-];
-
 function useToast() {
   const [toasts, setToasts] = useState([]);
   const add = (message, type = "info") => {
@@ -129,8 +112,6 @@ function Toast({ toasts, remove }) {
 export default function Settings({ currentUser }) {
   const { toasts, add, remove } = useToast();
   const cachedSettings = getCache(SETTINGS_CACHE_KEY);
-  const [source, setSource] = useState(() => cachedSettings ? cachedSettings.source : null);
-  const [switching, setSwitching] = useState(false);
   const [gdprEnabled, setGdprEnabled] = useState(() => cachedSettings ? cachedSettings.gdprEnabled : false);
   const [gdprSaving, setGdprSaving] = useState(false);
   const [langEnabled, setLangEnabled] = useState(() => cachedSettings ? cachedSettings.langEnabled : null);
@@ -148,19 +129,19 @@ export default function Settings({ currentUser }) {
 
   useEffect(() => {
     Promise.all([
-      getDataSource(), getGDPRBannerEnabled(),
+      getGDPRBannerEnabled(),
       getLanguageSwitcherEnabled(), getEnabledLanguages(), fetchHeaderPrefs(),
       fetchContactNotifyEmail(),
     ])
-      .then(([s, gdpr, langEn, langs, headerPrefs, notifyEmailVal]) => {
-        setSource(s); setGdprEnabled(gdpr);
+      .then(([gdpr, langEn, langs, headerPrefs, notifyEmailVal]) => {
+        setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
         setHeaderLayoutState(headerPrefs.headerLayout);
         setNavStyleState(headerPrefs.navStyle);
         setNotifyEmailState(notifyEmailVal);
         setNotifyEmailInput(notifyEmailVal);
         setCache(SETTINGS_CACHE_KEY, {
-          source: s, gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
+          gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
           headerLayout: headerPrefs.headerLayout, navStyle: headerPrefs.navStyle,
           notifyEmail: notifyEmailVal,
         });
@@ -321,29 +302,6 @@ export default function Settings({ currentUser }) {
     }
   };
 
-  const handleSwitchSource = async (next) => {
-    setSwitching(true);
-    setError(null);
-    try {
-      await saveDataSource(next, currentUser?.username);
-      setSource(next);
-      await logActivity({
-        action: "update",
-        entity: "app_settings",
-        entity_id: "data_source",
-        entity_name: `Live Data Source → ${next}`,
-        username: currentUser?.username,
-        user_id: currentUser?.id,
-      });
-      add(`Live Data Source switched to ${next}`, "success");
-    } catch (err) {
-      setError("Failed to switch data source: " + err.message);
-      add("Failed to switch data source", "error");
-    } finally {
-      setSwitching(false);
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -366,45 +324,6 @@ export default function Settings({ currentUser }) {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="card card-body">
-        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
-          <i className="fa-solid fa-satellite-dish text-[var(--brand)]"></i>
-          Live Data Source
-        </h3>
-        <p className="text-sm text-[var(--text-3)] mb-4">
-          Controls where the public site reads product / sauna room / site content
-          data from. Takes effect for visitors within seconds, no redeploy needed.
-        </p>
-
-        <div className="space-y-2 mb-4">
-          {SOURCE_OPTIONS.map((opt) => (
-            <label
-              key={opt.value}
-              className={`flex items-start gap-3 p-3 rounded border cursor-pointer transition-colors ${
-                source === opt.value
-                  ? "border-[var(--brand)] bg-[var(--brand-muted)]"
-                  : "border-[var(--border)] hover:bg-[var(--surface-2)]"
-              } ${switching ? "opacity-60 pointer-events-none" : ""}`}
-            >
-              <input
-                type="radio"
-                name="data-source"
-                value={opt.value}
-                checked={source === opt.value}
-                onChange={() => handleSwitchSource(opt.value)}
-                disabled={switching}
-                className="mt-1"
-              />
-              <div>
-                <p className="text-sm font-medium text-[var(--text)]">{opt.label}</p>
-                <p className="text-xs text-[var(--text-3)]">{opt.description}</p>
-              </div>
-            </label>
-          ))}
-        </div>
-
-      </div>
-
       <div className="card card-body">
         <div className="flex items-center justify-between mb-1">
           <h3 className="text-lg font-bold text-[var(--text)] flex items-center gap-2">
