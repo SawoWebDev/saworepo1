@@ -2091,16 +2091,16 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
           overflow: hidden;
         }
         .pp-preview-richtext table th {
-          background: linear-gradient(135deg,#8b5e3c,#a67853);
+          background: #8b5e3c;
           color: #fff;
           font-weight: 700;
           padding: 10px 14px;
           text-align: center;
           border-right: 1px solid rgba(255,255,255,0.25);
-          font-size: 0.66rem;
+          font-size: 0.6rem;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          line-height: 1.4;
+          line-height: 1.2;
         }
         .pp-preview-richtext table th:last-child { border-right: none; }
         .pp-preview-richtext table td {
@@ -2287,9 +2287,9 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
               <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
                 <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 160), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                   <thead>
-                    <tr style={{ background: "linear-gradient(135deg,#8b5e3c,#a67853)" }}>
+                    <tr style={{ background: "#8b5e3c" }}>
                       {specHeaders.map((h, i) => (
-                        <th key={i} style={{ padding: "10px 14px", textAlign: "left", color: "#fff", fontWeight: 700, fontSize: "0.66rem", textTransform: "uppercase", letterSpacing: "0.07em", whiteSpace: "nowrap" }}>{h}</th>
+                        <th key={i} style={{ padding: "10px 14px", textAlign: "center", color: "#fff", fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: "0.07em", whiteSpace: "nowrap" }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -2297,7 +2297,7 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
                     {specRows.map((row, ri) => (
                       <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderBottom: ri < specRows.length - 1 ? "1px solid #f0e4d8" : "none" }}>
                         {specHeaders.map((h, ci) => (
-                          <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[ci] || "–"}</td>
+                          <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center" }}>{row[ci] || "–"}</td>
                         ))}
                       </tr>
                     ))}

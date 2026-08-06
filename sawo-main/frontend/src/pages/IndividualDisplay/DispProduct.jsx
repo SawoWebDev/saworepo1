@@ -669,17 +669,17 @@ export default function ProductPage() {
            WordPress) looks identical to one using the structured
            Specifications Table field. */
         .pp-richtext table th {
-          background: linear-gradient(135deg,#8b5e3c,#a67853);
+          background: #8b5e3c;
           color: #fff;
           font-weight: 700;
           padding: 10px 14px;
           text-align: center;
           border-bottom: none;
           border-right: 1px solid rgba(255,255,255,0.25);
-          font-size: 0.66rem;
+          font-size: 0.6rem;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          line-height: 1.4;
+          line-height: 1.2;
         }
 
         .pp-richtext table th:last-child { border-right: none; }
@@ -874,12 +874,12 @@ export default function ProductPage() {
                   <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
                     <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
-                        <tr style={{ background: "linear-gradient(135deg,#8b5e3c,#a67853)" }}>
+                        <tr style={{ background: "#8b5e3c" }}>
                           {specHeaders.map((h, i) => (
                             <th key={i} style={{
                               padding: "10px 14px", textAlign: "center", color: "#fff",
-                              fontWeight: 700, fontSize: "0.66rem", textTransform: "uppercase",
-                              letterSpacing: "0.06em", lineHeight: 1.4,
+                              fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
+                              letterSpacing: "0.06em", lineHeight: 1.2,
                               borderRight: i < specHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
                             }}>{h}</th>
                           ))}
@@ -941,12 +941,12 @@ export default function ProductPage() {
                           <div style={{ width: "100%", overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
                             <table style={{ width: "100%", minWidth: Math.max(360, gHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                               <thead>
-                                <tr style={{ background: "linear-gradient(135deg,#8b5e3c,#a67853)" }}>
+                                <tr style={{ background: "#8b5e3c" }}>
                                   {gHeaders.map((h, i) => (
                                     <th key={i} style={{
                                       padding: "10px 14px", textAlign: "center", color: "#fff",
-                                      fontWeight: 700, fontSize: "0.66rem", textTransform: "uppercase",
-                                      letterSpacing: "0.06em", lineHeight: 1.4,
+                                      fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
+                                      letterSpacing: "0.06em", lineHeight: 1.2,
                                       borderRight: i < gHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
                                     }}>{h}</th>
                                   ))}
