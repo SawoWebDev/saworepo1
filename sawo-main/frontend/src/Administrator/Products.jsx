@@ -111,6 +111,7 @@ function buildProductPayload(form, tags) {
     files:             form.files,
     variants:          form.variants,
     spec_table:        form.spec_table,
+    heating_element_groups: form.heating_element_groups,
     categories:        form.categories,
     tags:              tags,
     features:          form.features,
@@ -162,6 +163,7 @@ const EMPTY_FORM = {
   name: "", slug: "", short_description: "", description: "",
   thumbnail: "", images: [], spec_images: [], files: [], variants: [],
   spec_table: null,
+  heating_element_groups: [],
   categories: [], tags: [], features: [],
   brand: "SAWO", type: "",
   capacity_liters: "", variant_type: "", product_family: "", parent_product_id: "",
@@ -2302,6 +2304,74 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms }) {
   );
 }
 
+// ─── Small drag/drop/paste-capable image slot — shared by the variant editors
+// below, which previously only had a plain <input type=file> (no onDrop/
+// onPaste), unlike every other image field in this file (ImageUploader,
+// ThumbnailUploader, ThumbnailPreview all support all three).
+function VariantImageSlot({ image, uploading, onFile, size = 60 }) {
+  const [dragging, setDragging] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const ref = useRef();
+  const divRef = useRef();
+
+  const handlePaste = e => {
+    if (uploading) return;
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let item of items) {
+      if (item.kind === "file" && item.type.startsWith("image/")) {
+        const file = item.getAsFile();
+        if (file) { e.preventDefault(); onFile(file); return; }
+      }
+    }
+  };
+
+  return (
+    <div
+      ref={divRef}
+      style={{ position: "relative", width: size, height: size, outline: "none" }}
+      onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={e => { e.preventDefault(); setDragging(false); if (!uploading && e.dataTransfer.files?.[0]) onFile(e.dataTransfer.files[0]); }}
+      onPaste={handlePaste}
+      onMouseEnter={() => { setHovering(true); divRef.current?.focus(); }}
+      onMouseLeave={() => setHovering(false)}
+      onClick={() => !uploading && ref.current?.click()}
+      tabIndex="0"
+      contentEditable={hovering && !uploading}
+      suppressContentEditableWarning
+      title="Click to browse, drag & drop, or hover + Ctrl+V to paste"
+    >
+      {image ? (
+        <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)", border: dragging ? "2px solid var(--brand)" : "1px solid transparent" }}>
+          <img src={image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: uploading ? 0.5 : 1 }} onError={e => { e.target.style.display = "none"; }} />
+          {(hovering || dragging) && !uploading && (
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.62rem", color: "white", textAlign: "center", cursor: "pointer" }}>
+              {dragging ? "Drop" : "Change"}
+            </div>
+          )}
+          {uploading && (
+            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <i className="fa-solid fa-spinner" style={{ color: "var(--brand)", fontSize: "1rem", animation: "spin 1s linear infinite" }} />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div style={{
+          width: "100%", height: "100%", borderRadius: "var(--r-sm)",
+          border: dragging ? "2px solid var(--brand)" : "1px dashed var(--border)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: "pointer", fontSize: "0.65rem", color: "var(--text-3)", textAlign: "center",
+        }}>
+          {uploading ? "..." : dragging ? "Drop" : "Upload"}
+        </div>
+      )}
+      <input ref={ref} type="file" accept="image/*" style={{ display: "none" }} disabled={uploading}
+        onChange={e => { if (e.target.files?.[0]) onFile(e.target.files[0]); e.target.value = ""; }} />
+    </div>
+  );
+}
+
 // ─── Variant Manager Component ────────────────────────────────────────────────
 function VariantManager({ variants, onChange, addToast, slug, currentUser }) {
   const [isAdding, setIsAdding] = useState(false);
@@ -2362,22 +2432,7 @@ function VariantManager({ variants, onChange, addToast, slug, currentUser }) {
               gridTemplateColumns: "80px 1fr 1fr 1fr 1fr 80px", gap: 10, alignItems: "center"
             }}>
               {/* Image */}
-              <div style={{ position: "relative" }}>
-                {v.image ? (
-                  <div style={{ position: "relative", width: 60, height: 60, borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)" }}>
-                    <img src={v.image} alt="variant" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
-                    <label style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0, hover: { opacity: 1 }, cursor: "pointer", fontSize: "0.7rem", color: "white" }}>
-                      <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
-                      Change
-                    </label>
-                  </div>
-                ) : (
-                  <label style={{ width: 60, height: 60, border: "1px dashed var(--border)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.7rem", color: "var(--text-3)" }}>
-                    <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
-                    Upload
-                  </label>
-                )}
-              </div>
+              <VariantImageSlot image={v.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} />
 
               {/* SKU */}
               <input type="text" value={v.sku} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, sku: e.target.value } : x))} placeholder="SKU (e.g., 347-PC)" className="form-input" style={{ fontSize: "0.8rem" }} />
@@ -2417,10 +2472,7 @@ function VariantManager({ variants, onChange, addToast, slug, currentUser }) {
           gridTemplateColumns: "80px 1fr 1fr 1fr 1fr 80px", gap: 10, alignItems: "center"
         }}>
           {/* Image upload */}
-          <label style={{ width: 60, height: 60, border: "1px dashed var(--border)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.7rem", color: "var(--text-3)" }}>
-            <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === -1} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], -1)} />
-            {uploadingIdx === -1 ? "Uploading..." : "Image"}
-          </label>
+          <VariantImageSlot image={newVariant.image} uploading={uploadingIdx === -1} onFile={file => handleImageUpload(file, -1)} />
 
           <input type="text" value={newVariant.sku} onChange={e => setNewVariant(v => ({ ...v, sku: e.target.value }))} placeholder="SKU" className="form-input" style={{ fontSize: "0.8rem" }} />
           <input type="text" value={newVariant.label} onChange={e => setNewVariant(v => ({ ...v, label: e.target.value }))} placeholder="Label" className="form-input" style={{ fontSize: "0.8rem" }} />
@@ -2477,22 +2529,7 @@ function VariantColorsManager({ variants, onChange, addToast, slug, currentUser 
           borderRadius: "var(--r-sm)", padding: 12, display: "grid",
           gridTemplateColumns: "60px 1fr 1fr 40px", gap: 10, alignItems: "center"
         }}>
-          <div style={{ position: "relative" }}>
-            {v.image ? (
-              <div style={{ position: "relative", width: 48, height: 48, borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)" }}>
-                <img src={v.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} />
-                <label style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.6rem", color: "white" }}>
-                  <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
-                  {uploadingIdx === idx ? "..." : "Change"}
-                </label>
-              </div>
-            ) : (
-              <label style={{ width: 48, height: 48, border: "1px dashed var(--border)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "0.6rem", color: "var(--text-3)" }}>
-                <input type="file" accept="image/*" style={{ display: "none" }} disabled={uploadingIdx === idx} onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0], idx)} />
-                {uploadingIdx === idx ? "..." : "Upload"}
-              </label>
-            )}
-          </div>
+          <VariantImageSlot image={v.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={48} />
           <input type="text" value={v.color || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, color: e.target.value } : x))} placeholder="Color (e.g. Cedar)" className="form-input" style={{ fontSize: "0.8rem" }} />
           <input type="text" value={v.code || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, code: e.target.value } : x))} placeholder="Code (e.g. 341-D)" className="form-input" style={{ fontSize: "0.8rem" }} />
           <button type="button" onClick={() => handleRemove(idx)} style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
@@ -2588,6 +2625,67 @@ function SpecTableManager({ specTable, onChange }) {
           Remove table
         </button>
       </div>
+    </div>
+  );
+}
+
+// ─── Heating Element Groups Manager ─────────────────────────────────────────
+// Edits the `heating_element_groups` JSONB column — [{ label, image, features
+// (bullet list), spec_table: { headers, rows } }, ...]. For products whose
+// variants aren't simple SKU swaps (VariantManager) but grouped configurations
+// each with their own photo, marketing bullets, and technical-data table —
+// e.g. a steam generator's "2 / 3 / 6 Heating Elements" options, each with a
+// different power range and its own set of model rows. See DispProduct.jsx's
+// heatingGroups rendering for the live-page counterpart.
+function HeatingGroupsManager({ groups = [], onChange, addToast, slug, currentUser }) {
+  const [uploadingIdx, setUploadingIdx] = useState(null);
+
+  const setGroup = (idx, patch) => onChange(groups.map((g, i) => i === idx ? { ...g, ...patch } : g));
+  const addGroup = () => onChange([...groups, { label: "", image: "", features: [], spec_table: null }]);
+  const removeGroup = idx => onChange(groups.filter((_, i) => i !== idx));
+
+  const handleImageUpload = async (file, idx) => {
+    setUploadingIdx(idx);
+    try {
+      const roleTag = slugify(groups[idx]?.label || `group-${idx}`);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `heatinggroup-${roleTag}`, currentUser });
+      setGroup(idx, { image: url });
+      addToast("✓ Group image uploaded.", "success");
+    } catch (err) {
+      addToast("❌ Upload failed: " + err.message, "error");
+    } finally {
+      setUploadingIdx(null);
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      {groups.map((g, idx) => (
+        <div key={idx} style={{
+          background: "var(--surface-2)", border: "1px solid var(--border)",
+          borderRadius: "var(--r-sm)", padding: 14, display: "flex", flexDirection: "column", gap: 10,
+        }}>
+          <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+            <VariantImageSlot image={g.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={80} />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+              <input type="text" value={g.label || ""} placeholder="Group label (e.g., 3 Heating Elements)"
+                onChange={e => setGroup(idx, { label: e.target.value })}
+                className="form-input" style={{ fontSize: "0.85rem", fontWeight: 600 }} />
+              <textarea value={(g.features || []).join("\n")} placeholder={"One feature bullet per line, e.g.\nPower range: 4.5 – 7.5kW\nSteam output: up to 7.5kg/hr"}
+                onChange={e => setGroup(idx, { features: e.target.value.split("\n").map(s => s.trim()).filter(Boolean) })}
+                className="form-input" rows={4} style={{ fontSize: "0.78rem", resize: "vertical", fontFamily: "inherit" }} />
+            </div>
+            <button type="button" onClick={() => removeGroup(idx)} title="Remove group"
+              style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
+              <i className="fa-solid fa-trash" />
+            </button>
+          </div>
+          <div style={{ paddingLeft: 92 }}>
+            <SpecTableManager specTable={g.spec_table} onChange={t => setGroup(idx, { spec_table: t })} />
+          </div>
+        </div>
+      ))}
+      <Btn label="+ Add Heating Element Group" variant="secondary" size="sm" onClick={addGroup} />
     </div>
   );
 }
@@ -2875,6 +2973,7 @@ export default function Products({ currentUser }) {
         files:             data.files             || [],
         variants:          data.variants          || [],
         spec_table:        data.spec_table        || null,
+        heating_element_groups: data.heating_element_groups || [],
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -2939,6 +3038,7 @@ export default function Products({ currentUser }) {
         files:             data.files             || [],
         variants:          data.variants          || [],
         spec_table:        data.spec_table        || null,
+        heating_element_groups: data.heating_element_groups || [],
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -3926,6 +4026,13 @@ export default function Products({ currentUser }) {
           {/* Specifications Table — the live page's "Technical Data" table */}
           <SectionLabel label="Specifications Table" />
           <SpecTableManager specTable={form.spec_table} onChange={t => setForm(f => ({ ...f, spec_table: t }))} />
+
+          {/* Heating Element Groups — grouped configuration options (e.g. a
+              steam generator's "2 / 3 / 6 Heating Elements"), each with its
+              own photo, feature bullets, and technical-data table. Separate
+              from the single Specifications Table above. */}
+          <SectionLabel label="Heating Element Groups" />
+          <HeatingGroupsManager groups={form.heating_element_groups} onChange={v => setForm(f => ({ ...f, heating_element_groups: v }))} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
 
           {/* Features ← above Short Description */}
           <SectionLabel label="Features" />
