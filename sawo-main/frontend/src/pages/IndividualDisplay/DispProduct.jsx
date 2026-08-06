@@ -7,6 +7,7 @@ import { ImageWithLoader } from "../../components/ImageWithLoader";
 import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { getVariationsArray } from "./DispAccessories";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -598,7 +599,13 @@ export default function ProductPage() {
     })
   );
   const hasResources = files.length > 0;
-  const heatingGroups = (product.heating_element_groups || []).filter(g => g && (g.label || g.description || g.spec_table || g.features?.length));
+  // Reads through the unified `variations` column (falling back to the
+  // legacy `heating_element_groups`/`variants` columns for not-yet-migrated
+  // products) — see getVariationsArray() in DispAccessories.jsx. Filtered
+  // down to entries that actually carry config-group-style content
+  // (description/features/table), so a plain color/style variation with
+  // just a name+color doesn't render an empty-looking group card here.
+  const heatingGroups = getVariationsArray(product).filter(g => g && (g.description || g.spec_table || g.features?.length));
   const hasHeatingGroups = heatingGroups.length > 0;
   const hasSection2  = hasDesc || hasSpecTable || hasHeatingGroups;
 
@@ -879,12 +886,12 @@ export default function ProductPage() {
                     return (
                       <div key={gi} style={{ display: "flex", flexWrap: "wrap", gap: 28, alignItems: "flex-start" }}>
                         {group.image && (
-                          <img src={group.image} alt={group.label || `Heating element option ${gi + 1}`}
+                          <img src={group.image} alt={group.name || `Configuration option ${gi + 1}`}
                             style={{ width: 220, maxWidth: "100%", height: "auto", flexShrink: 0, margin: "0 auto" }} />
                         )}
                         <div style={{ flex: "1 1 260px", minWidth: 220 }}>
-                          {group.label && (
-                            <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 12px" }}>{group.label}</h4>
+                          {group.name && (
+                            <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 12px" }}>{group.name}</h4>
                           )}
                           {group.description && (
                             <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7, margin: "0 0 12px" }}>{group.description}</p>

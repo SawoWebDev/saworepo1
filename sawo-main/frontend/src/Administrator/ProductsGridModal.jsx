@@ -6,7 +6,7 @@
 // the grid/card styling.
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDisplay/DispAccessories";
+import { isAccessoryProduct, VARIANT_COLOR_DOT, getVariationsArray } from "../pages/IndividualDisplay/DispAccessories";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
 
@@ -63,7 +63,7 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
 
   const thumb = resolveImageUrl(product, "thumbnail");
   const gallery = resolveImgsArr(product, "images");
-  const variantColors = (product.variants || []).filter(v => v.color || v.code);
+  const variantColors = getVariationsArray(product).filter(v => v.color || v.code);
   const variantImages = variantColors
     .map(v => (v.image || null))
     .filter(Boolean);

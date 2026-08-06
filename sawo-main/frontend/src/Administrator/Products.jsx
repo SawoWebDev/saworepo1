@@ -5,7 +5,7 @@ import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, getProductBySlugLive } from "../local-storage/supabaseReader";
-import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDisplay/DispAccessories";
+import { isAccessoryProduct, VARIANT_COLOR_DOT, getVariationsArray } from "../pages/IndividualDisplay/DispAccessories";
 import { getCache, setCache } from "./adminCache";
 import { productsToCsvString, downloadCsv } from "./csv/productCsv";
 import CsvImportModal from "./csv/CsvImportModal";
@@ -109,9 +109,8 @@ function buildProductPayload(form, tags) {
     images:            form.images,
     spec_images:       form.spec_images,
     files:             form.files,
-    variants:          form.variants,
     spec_table:        form.spec_table,
-    heating_element_groups: form.heating_element_groups,
+    variations:        form.variations,
     categories:        form.categories,
     tags:              tags,
     features:          form.features,
@@ -161,9 +160,9 @@ function diffForms(before, after) {
 // Matches the real products schema (no "model" column — use type for that).
 const EMPTY_FORM = {
   name: "", slug: "", short_description: "", description: "",
-  thumbnail: "", images: [], spec_images: [], files: [], variants: [],
+  thumbnail: "", images: [], spec_images: [], files: [],
   spec_table: null,
-  heating_element_groups: [],
+  variations: [],
   categories: [], tags: [], features: [],
   brand: "SAWO", type: "",
   capacity_liters: "", variant_type: "", product_family: "", parent_product_id: "",
@@ -174,6 +173,68 @@ const EMPTY_FORM = {
 };
 
 // ─── Auto-extract tags from description HTML ──────────────────────────────────
+// Shared by extractTagsFromDescription (HTML) and extractTagsFromVariations
+// (structured JSON) so kW detection behaves identically no matter which
+// field the numbers were typed into.
+const POWER_RANGE_PATTERN = /(\d+(?:[.,]\d+)?)\s*(?:–|-|to)\s*(\d+(?:[.,]\d+)?)\s*k[wW]/gi;
+const SINGLE_KW_PATTERN   = /(\d+(?:[.,]\d+)?)\s*k[wW]\b/gi;
+
+function extractKwTagsFromText(text, kwTags) {
+  let match;
+  POWER_RANGE_PATTERN.lastIndex = 0;
+  while ((match = POWER_RANGE_PATTERN.exec(text)) !== null) {
+    const min = parseFloat(match[1].replace(",", "."));
+    const max = parseFloat(match[2].replace(",", "."));
+    if (!isNaN(min) && !isNaN(max) && min > 0 && max < 1000) {
+      kwTags.add(`${min.toFixed(1)} – ${max.toFixed(1)} kW`);
+    }
+  }
+  SINGLE_KW_PATTERN.lastIndex = 0;
+  while ((match = SINGLE_KW_PATTERN.exec(text)) !== null) {
+    const val = parseFloat(match[1].replace(",", "."));
+    if (!isNaN(val) && val > 0 && val < 1000) {
+      const formatted = `${val.toFixed(1)} kW`;
+      if (![...kwTags].some(t => t.includes(formatted))) kwTags.add(formatted);
+    }
+  }
+}
+
+// Scans a product's Variations (see VariationsManager) the same way
+// extractTagsFromDescription scans the Description field's HTML — kW values
+// from each variation's name/color/code/features text, plus kW/model
+// columns from each variation's own spec table. Keeps the "auto-detected
+// tags" behavior consistent regardless of which tab the data was typed into.
+function extractTagsFromVariations(variations = []) {
+  const kwTags    = new Set();
+  const modelTags = new Set();
+  for (const v of variations) {
+    if (!v) continue;
+    const text = [v.name, v.color, v.code, ...(v.features || [])].filter(Boolean).join(" ");
+    if (text) extractKwTagsFromText(text, kwTags);
+
+    const headers = (v.spec_table?.headers || []).map(h => String(h).toLowerCase());
+    const rows = v.spec_table?.rows || [];
+    const kwColIndex    = headers.findIndex(h => /\bkw\b/.test(h) || /kilowatt/.test(h));
+    const modelColIndex = headers.findIndex(h => /model/.test(h) || /heater\s*name/.test(h));
+    if (kwColIndex !== -1) {
+      for (const row of rows) {
+        const val = parseFloat(String(row[kwColIndex] ?? "").trim().replace(",", "."));
+        if (!isNaN(val) && val > 0 && val < 1000) kwTags.add(`${val.toFixed(1)} kW`);
+      }
+    }
+    if (modelColIndex !== -1) {
+      for (const row of rows) {
+        const model = String(row[modelColIndex] ?? "").trim();
+        if (model && model.length > 2 && !/^\d+(\.\d+)?$/.test(model)) modelTags.add(model);
+      }
+    }
+  }
+  return {
+    kwTags:    [...kwTags].sort((a, b) => parseFloat(a) - parseFloat(b)),
+    modelTags: [...modelTags],
+  };
+}
+
 function extractTagsFromDescription(html) {
   if (!html) return { kwTags: [], modelTags: [] };
   try {
@@ -183,29 +244,7 @@ function extractTagsFromDescription(html) {
 
     // Extract text content for power range patterns
     const textContent = doc.body.textContent;
-
-    // Pattern 1: Extract power ranges like "4.5 – 9.0kW" or "4.5-9.0 kW"
-    const powerRangePattern = /(\d+(?:[.,]\d+)?)\s*(?:–|-|to)\s*(\d+(?:[.,]\d+)?)\s*k[wW]/gi;
-    let match;
-    while ((match = powerRangePattern.exec(textContent)) !== null) {
-      const min = parseFloat(match[1].replace(",", "."));
-      const max = parseFloat(match[2].replace(",", "."));
-      if (!isNaN(min) && !isNaN(max) && min > 0 && max < 1000) {
-        kwTags.add(`${min.toFixed(1)} – ${max.toFixed(1)} kW`);
-      }
-    }
-
-    // Pattern 2: Extract single kW values like "9.0 kW"
-    const singleKwPattern = /(\d+(?:[.,]\d+)?)\s*k[wW]\b/gi;
-    while ((match = singleKwPattern.exec(textContent)) !== null) {
-      const val = parseFloat(match[1].replace(",", "."));
-      if (!isNaN(val) && val > 0 && val < 1000) {
-        const formatted = `${val.toFixed(1)} kW`;
-        if (![...kwTags].some(t => t.includes(formatted))) {
-          kwTags.add(formatted);
-        }
-      }
-    }
+    extractKwTagsFromText(textContent, kwTags);
 
     // Extract from tables (existing logic)
     const tables = doc.querySelectorAll("table");
@@ -382,14 +421,25 @@ function SectionLabel({ label }) {
   return <div className="section-label"><span>{label}</span></div>;
 }
 
-function Field({ label, type = "text", value, onChange, placeholder, required, helper, disabled }) {
+// `tip` renders a small hover-only (i) icon next to the label — for static
+// "what do I type here" instructions/examples, kept out of the form's
+// permanent vertical space. `helper` still renders inline below the input —
+// reserved for DYNAMIC live feedback (character counts, schedule previews)
+// that the editor needs to see without hovering.
+function FieldLabel({ label, required, tip }) {
+  if (!label) return null;
+  return (
+    <label className="form-label">
+      {label}{required && <span style={{ color: "var(--danger)", marginLeft: 3 }}>*</span>}
+      {tip && <span className="field-hint" data-tip={tip} tabIndex={0}>?</span>}
+    </label>
+  );
+}
+
+function Field({ label, type = "text", value, onChange, placeholder, required, helper, tip, disabled }) {
   return (
     <div className="form-group" style={{ marginBottom: 0 }}>
-      {label && (
-        <label className="form-label">
-          {label}{required && <span style={{ color: "var(--danger)", marginLeft: 3 }}>*</span>}
-        </label>
-      )}
+      <FieldLabel label={label} required={required} tip={tip} />
       <input
         type={type} value={value} onChange={onChange}
         placeholder={placeholder} required={required} disabled={disabled}
@@ -667,12 +717,16 @@ function TagSuggestions({ name, description, features = [], currentTags, allTags
   );
 }
 
-function AutoTagPreview({ description, currentTags }) {
-  const { kwTags, modelTags } = extractTagsFromDescription(description);
+function AutoTagPreview({ description, variations = [], currentTags }) {
+  const fromDescription = extractTagsFromDescription(description);
+  const fromVariations  = extractTagsFromVariations(variations);
+  const kwTags    = [...new Set([...fromDescription.kwTags, ...fromVariations.kwTags])].sort((a, b) => parseFloat(a) - parseFloat(b));
+  const modelTags = [...new Set([...fromDescription.modelTags, ...fromVariations.modelTags])];
   const newKw    = kwTags.filter(t => !currentTags.includes(t));
   const newModel = modelTags.filter(t => !currentTags.includes(t));
   const hasNew   = newKw.length > 0 || newModel.length > 0;
-  if (!description || (!hasNew && kwTags.length === 0)) return null;
+  if (!description && variations.length === 0) return null;
+  if (!hasNew && kwTags.length === 0) return null;
   return (
     <div style={{
       background: "var(--surface-2)",
@@ -682,7 +736,7 @@ function AutoTagPreview({ description, currentTags }) {
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 6, fontWeight: 700, color: "var(--text)", fontSize: "0.8rem" }}>
         <i className="fa-solid fa-wand-magic-sparkles" style={{ color: "var(--brand)" }} />
-        Auto-tags detected in description
+        Auto-tags detected in description &amp; variations
         <span style={{ fontWeight: 400, color: "var(--text-3)", fontSize: "0.72rem" }}>(will be added on Save)</span>
       </div>
       {kwTags.length > 0 && (
@@ -867,14 +921,14 @@ function PillInput({ label, value = [], onChange, placeholder, suggestions = [] 
 }
 
 // ─── Model Select — dropdown of existing models to prevent duplicates ─────────
-function ModelSelect({ label, value, onChange, placeholder, suggestions = [] }) {
+function ModelSelect({ label, value, onChange, placeholder, suggestions = [], tip }) {
   const [showSug, setShowSug] = useState(false);
   const inputRef = useRef();
   const filtered = suggestions.filter(s => s.toLowerCase().includes(value.toLowerCase())).slice(0, 8);
 
   return (
     <div className="form-group" style={{ marginBottom: 0, position: "relative" }}>
-      {label && <label className="form-label">{label}</label>}
+      <FieldLabel label={label} tip={tip} />
       <div style={{ position: "relative" }}>
         <input
           ref={inputRef}
@@ -1978,7 +2032,7 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
 
   const thumb      = previewResolveUrl(previewGetField(product, 'thumbnail'));
   const videoUrl   = product?.resources?.video || null;
-  const variantColors = (product.variants || []).filter(v => v.color || v.code);
+  const variantColors = getVariationsArray(product).filter(v => v.color || v.code);
   const variantImages = variantColors.map(v => previewResolveUrl(v.image)).filter(Boolean);
   const images     = [...new Set([...previewGetImgsArr(product, 'images'), ...variantImages])];
   const specImages = previewGetImgsArr(product, 'spec_images');
@@ -2023,19 +2077,36 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
         style={{ background: "#fff", borderRadius: 14, boxShadow: "0 24px 64px rgba(0,0,0,0.28)", width: "100%", maxWidth: 1060, position: "relative", fontFamily: "'Montserrat',sans-serif", overflow: "hidden" }}
         onClick={e => e.stopPropagation()}
       >
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", background: "#faf7f4", borderBottom: "1px solid #edddd0" }}>
+        {/* Header — Visit URL / Edit moved up here (same row as name and the
+            close button) so they're reachable without scrolling to the
+            bottom of a long preview; the footer that used to hold them is
+            gone. */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "14px 20px", background: "#faf7f4", borderBottom: "1px solid #edddd0" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
             <i className="fa-solid fa-eye" style={{ color: "#a67853", fontSize: "0.85rem", flexShrink: 0 }} />
             <span style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{product.name}</span>
             <span style={{ fontSize: "0.7rem", color: "#a67853", background: "rgba(166,120,83,0.1)", padding: "2px 8px", borderRadius: 20, flexShrink: 0 }}>Preview</span>
           </div>
-          <button onClick={onClose} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#8b5e3c", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: "50%", transition: "background 0.15s", flexShrink: 0 }}
-            onMouseEnter={e => e.currentTarget.style.background = "rgba(139,94,60,0.1)"}
-            onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-          >
-            <i className="fa-solid fa-xmark" />
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            {liveUrl && (
+              <a href={liveUrl} target="_blank" rel="noopener noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", fontSize: "0.76rem", fontWeight: 600, color: "#7a5234", background: "transparent", border: "1px solid rgba(166,120,83,0.35)", borderRadius: 6, textDecoration: "none", whiteSpace: "nowrap" }}>
+                <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.7rem" }} /> Visit URL
+              </a>
+            )}
+            {onEdit && (
+              <button type="button" onClick={onEdit}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", fontSize: "0.76rem", fontWeight: 600, color: "#fff", background: "#a67853", border: "none", borderRadius: 6, cursor: "pointer", whiteSpace: "nowrap" }}>
+                <i className="fa-solid fa-pen" style={{ fontSize: "0.7rem" }} /> Edit
+              </button>
+            )}
+            <button onClick={onClose} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#8b5e3c", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: "50%", transition: "background 0.15s", flexShrink: 0 }}
+              onMouseEnter={e => e.currentTarget.style.background = "rgba(139,94,60,0.1)"}
+              onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+            >
+              <i className="fa-solid fa-xmark" />
+            </button>
+          </div>
         </div>
 
         {/* Section 1: Images + Info */}
@@ -2169,18 +2240,18 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
             <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 32px" }} />
             <div style={{ padding: "20px 32px" }}>
               <PreviewSectionLabel text="Technical Data" />
-              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a", background: "#fafaf8" }}>
+              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
                 <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 160), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                   <thead>
-                    <tr style={{ background: "#faf7f4" }}>
+                    <tr style={{ background: "linear-gradient(135deg,#8b5e3c,#a67853)" }}>
                       {specHeaders.map((h, i) => (
-                        <th key={i} style={{ padding: "9px 14px", textAlign: "left", color: "#8b5e3c", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap" }}>{h}</th>
+                        <th key={i} style={{ padding: "10px 14px", textAlign: "left", color: "#fff", fontWeight: 700, fontSize: "0.66rem", textTransform: "uppercase", letterSpacing: "0.07em", whiteSpace: "nowrap" }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {specRows.map((row, ri) => (
-                      <tr key={ri} style={{ borderBottom: ri < specRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                      <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderBottom: ri < specRows.length - 1 ? "1px solid #f0e4d8" : "none" }}>
                         {specHeaders.map((h, ci) => (
                           <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{row[ci] || "–"}</td>
                         ))}
@@ -2222,21 +2293,6 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
           </>
         )}
 
-        {/* Footer: Visit URL + Edit */}
-        <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, padding: "16px 32px", borderTop: "1px solid #edddd0", background: "#faf7f4" }}>
-          {liveUrl && (
-            <a href={liveUrl} target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#7a5234", background: "transparent", border: "1px solid rgba(166,120,83,0.35)", borderRadius: 6, textDecoration: "none" }}>
-              <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.75rem" }} /> Visit URL
-            </a>
-          )}
-          {onEdit && (
-            <button type="button" onClick={onEdit}
-              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#fff", background: "#a67853", border: "none", borderRadius: 6, cursor: "pointer" }}>
-              <i className="fa-solid fa-pen" style={{ fontSize: "0.75rem" }} /> Edit
-            </button>
-          )}
-        </div>
       </div>
 
       {lightbox && (
@@ -2392,176 +2448,6 @@ function VariantImageSlot({ image, uploading, onFile, size = 60 }) {
   );
 }
 
-// ─── Variant Manager Component ────────────────────────────────────────────────
-function VariantManager({ variants, onChange, addToast, slug, currentUser }) {
-  const [isAdding, setIsAdding] = useState(false);
-  const [newVariant, setNewVariant] = useState({
-    sku: "", label: "", color_key: "", image: "", capacity_liters: "", is_default: false, status: "active"
-  });
-  const [uploadingIdx, setUploadingIdx] = useState(null);
-
-  const colorOptions = ["pine", "aspen", "cedar", "black", "white", "red"];
-
-  const handleImageUpload = async (file, idx) => {
-    setUploadingIdx(idx);
-    try {
-      const roleTag = idx === -1 ? `new-${Date.now()}` : (variants[idx]?.sku || idx);
-      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `productvariant-${slugify(String(roleTag))}`, currentUser });
-      if (idx === -1) {
-        setNewVariant(v => ({ ...v, image: url }));
-      } else {
-        onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
-      }
-      addToast("✓ Image uploaded.", "success");
-    } catch (err) {
-      addToast("❌ Upload failed: " + err.message, "error");
-    } finally {
-      setUploadingIdx(null);
-    }
-  };
-
-  const handleAddVariant = () => {
-    if (!newVariant.sku.trim()) {
-      addToast("⚠️ SKU is required", "warning");
-      return;
-    }
-    const variant = {
-      ...newVariant,
-      id: `new-${Date.now()}`,
-      capacity_liters: parseFloat(newVariant.capacity_liters) || null,
-    };
-    onChange([...variants, variant]);
-    setNewVariant({ sku: "", label: "", color_key: "", image: "", capacity_liters: "", is_default: false, status: "active" });
-    setIsAdding(false);
-    addToast("✓ Variant added.", "success");
-  };
-
-  const handleDeleteVariant = (idx) => {
-    onChange(variants.filter((_, i) => i !== idx));
-    addToast("✓ Variant removed.", "success");
-  };
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      {variants.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {variants.map((v, idx) => (
-            <div key={v.id || idx} style={{
-              background: "var(--surface-2)", border: "1px solid var(--border)",
-              borderRadius: "var(--r-sm)", padding: 12, display: "grid",
-              gridTemplateColumns: "80px 1fr 1fr 1fr 1fr 80px", gap: 10, alignItems: "center"
-            }}>
-              {/* Image */}
-              <VariantImageSlot image={v.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} />
-
-              {/* SKU */}
-              <input type="text" value={v.sku} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, sku: e.target.value } : x))} placeholder="SKU (e.g., 347-PC)" className="form-input" style={{ fontSize: "0.8rem" }} />
-
-              {/* Label */}
-              <input type="text" value={v.label || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, label: e.target.value } : x))} placeholder="Label (e.g., Pine)" className="form-input" style={{ fontSize: "0.8rem" }} />
-
-              {/* Color */}
-              <select value={v.color_key || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, color_key: e.target.value || null } : x))} className="form-select" style={{ fontSize: "0.8rem" }}>
-                <option value="">Color</option>
-                {colorOptions.map(c => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
-              </select>
-
-              {/* Capacity & Default */}
-              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                <input type="number" value={v.capacity_liters || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, capacity_liters: parseFloat(e.target.value) || null } : x))} placeholder="Cap" className="form-input" style={{ fontSize: "0.8rem", flex: 1 }} />
-                <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: "0.8rem", cursor: "pointer", whiteSpace: "nowrap" }}>
-                  <input type="checkbox" checked={v.is_default} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, is_default: e.target.checked } : x))} />
-                  Default
-                </label>
-              </div>
-
-              {/* Delete */}
-              <button type="button" onClick={() => handleDeleteVariant(idx)} style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
-                <i className="fa-solid fa-trash" />
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Add Variant Form */}
-      {isAdding ? (
-        <div style={{
-          background: "var(--surface-2)", border: "2px dashed var(--border)",
-          borderRadius: "var(--r-sm)", padding: 12, display: "grid",
-          gridTemplateColumns: "80px 1fr 1fr 1fr 1fr 80px", gap: 10, alignItems: "center"
-        }}>
-          {/* Image upload */}
-          <VariantImageSlot image={newVariant.image} uploading={uploadingIdx === -1} onFile={file => handleImageUpload(file, -1)} />
-
-          <input type="text" value={newVariant.sku} onChange={e => setNewVariant(v => ({ ...v, sku: e.target.value }))} placeholder="SKU" className="form-input" style={{ fontSize: "0.8rem" }} />
-          <input type="text" value={newVariant.label} onChange={e => setNewVariant(v => ({ ...v, label: e.target.value }))} placeholder="Label" className="form-input" style={{ fontSize: "0.8rem" }} />
-          <select value={newVariant.color_key} onChange={e => setNewVariant(v => ({ ...v, color_key: e.target.value || "" }))} className="form-select" style={{ fontSize: "0.8rem" }}>
-            <option value="">Color</option>
-            {colorOptions.map(c => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
-          </select>
-          <input type="number" value={newVariant.capacity_liters} onChange={e => setNewVariant(v => ({ ...v, capacity_liters: e.target.value }))} placeholder="Capacity" className="form-input" style={{ fontSize: "0.8rem" }} />
-
-          <div style={{ display: "flex", gap: 6 }}>
-            <button type="button" onClick={handleAddVariant} style={{ background: "var(--brand)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem", flex: 1 }}>Save</button>
-            <button type="button" onClick={() => setIsAdding(false)} style={{ background: "var(--text-3)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>×</button>
-          </div>
-        </div>
-      ) : (
-        <Btn label="+ Add Variant" variant="secondary" size="sm" onClick={() => setIsAdding(true)} />
-      )}
-    </div>
-  );
-}
-
-// ─── Variant Colors Manager ─────────────────────────────────────────────────
-// Edits the `variants` JSONB column on `products` — { color, code, image }
-// per row. This is UNRELATED to the "Variants" section above (which manages
-// the separate `product_variants` TABLE, keyed by SKU/capacity, used for
-// heaters). Accessories carry their color/code/image options here instead —
-// e.g. a pail's Cedar/Aspen/Hemlock options each with their own photo.
-function VariantColorsManager({ variants, onChange, addToast, slug, currentUser }) {
-  const [uploadingIdx, setUploadingIdx] = useState(null);
-
-  const handleImageUpload = async (file, idx) => {
-    setUploadingIdx(idx);
-    try {
-      const v = variants[idx];
-      const roleTag = slugify(String(v?.code || v?.color || idx));
-      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `variant-${roleTag}`, currentUser });
-      onChange(variants.map((v, i) => i === idx ? { ...v, image: url } : v));
-      addToast("✓ Variant image uploaded.", "success");
-    } catch (err) {
-      addToast("❌ Upload failed: " + err.message, "error");
-    } finally {
-      setUploadingIdx(null);
-    }
-  };
-
-  const handleAdd = () => onChange([...variants, { color: "", code: "", image: "" }]);
-  const handleRemove = idx => onChange(variants.filter((_, i) => i !== idx));
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      {variants.map((v, idx) => (
-        <div key={idx} style={{
-          background: "var(--surface-2)", border: "1px solid var(--border)",
-          borderRadius: "var(--r-sm)", padding: 12, display: "grid",
-          gridTemplateColumns: "60px 1fr 1fr 40px", gap: 10, alignItems: "center"
-        }}>
-          <VariantImageSlot image={v.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={48} />
-          <input type="text" value={v.color || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, color: e.target.value } : x))} placeholder="Color (e.g. Cedar)" className="form-input" style={{ fontSize: "0.8rem" }} />
-          <input type="text" value={v.code || ""} onChange={e => onChange(variants.map((x, i) => i === idx ? { ...x, code: e.target.value } : x))} placeholder="Code (e.g. 341-D)" className="form-input" style={{ fontSize: "0.8rem" }} />
-          <button type="button" onClick={() => handleRemove(idx)} style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
-            <i className="fa-solid fa-trash" />
-          </button>
-        </div>
-      ))}
-      <Btn label="+ Add Color" variant="secondary" size="sm" onClick={handleAdd} />
-    </div>
-  );
-}
-
 // ─── Spec Table Manager ─────────────────────────────────────────────────────
 // Edits the `spec_table` JSONB column — { headers: [...], rows: [[...],...] }
 // — rendered on the live product page as the "Technical Data" table (see
@@ -2649,31 +2535,71 @@ function SpecTableManager({ specTable, onChange }) {
   );
 }
 
-// ─── Configuration Groups Manager ───────────────────────────────────────────
-// Edits the `heating_element_groups` JSONB column — [{ label, image,
-// description, features (bullet list), spec_table: { headers, rows } }, ...].
-// Entirely optional (starts empty, nothing renders on the live page until a
-// group is added): for products whose variants aren't simple SKU swaps
-// (VariantManager) but grouped configurations, each with any mix of its own
-// photo, blurb, marketing bullets, and technical-data table — e.g. a steam
-// generator's "2 / 3 / 6 Heating Elements" options, each with a different
-// power range and its own set of model rows. Every field per group is
-// optional too — use only the ones a given group actually needs. See
-// DispProduct.jsx's heatingGroups rendering for the live-page counterpart.
-function HeatingGroupsManager({ groups = [], onChange, addToast, slug, currentUser }) {
+// ─── Color Swatch Picker ────────────────────────────────────────────────────
+// Free-text color/style/flavor name + a palette of known named colors
+// (VARIANT_COLOR_DOT, shared with the live page's swatch dots) so picking
+// "Cedar" or "Red" previews the same dot color shown on the site. Typing a
+// name not in the palette still works as free text, just with a neutral
+// (unfilled) preview dot instead of a matched color.
+function ColorSwatchPicker({ value, onChange }) {
+  const known = Object.keys(VARIANT_COLOR_DOT);
+  const previewColor = value ? VARIANT_COLOR_DOT[value.trim().toLowerCase()] : null;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{
+          width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
+          background: previewColor || "var(--surface)",
+          border: previewColor ? "1px solid rgba(0,0,0,0.15)" : "1px dashed var(--border)",
+        }} title={previewColor ? value : (value ? "No preview for this color name" : "")} />
+        <input type="text" value={value || ""} onChange={e => onChange(e.target.value)}
+          placeholder="Color / style / flavor (optional) — e.g. Cedar, Red, Stainless"
+          className="form-input" style={{ fontSize: "0.82rem", flex: 1 }} />
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+        {known.map(name => (
+          <button key={name} type="button" onClick={() => onChange(name.replace(/\b\w/g, c => c.toUpperCase()))}
+            title={name}
+            style={{
+              width: 18, height: 18, borderRadius: "50%", padding: 0, cursor: "pointer",
+              background: VARIANT_COLOR_DOT[name],
+              border: (value || "").trim().toLowerCase() === name ? "2px solid var(--brand)" : "1px solid rgba(0,0,0,0.15)",
+            }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Variations Manager ─────────────────────────────────────────────────────
+// Edits the unified `variations` JSONB column — one flexible concept that
+// replaces three previously-separate systems: SKU variants (VariantManager,
+// which nobody actually used — 0 rows in product_variants across the whole
+// DB), color variants (VariantColorsManager), and heating-element-style
+// configuration groups (HeatingGroupsManager). Every field on a variation is
+// independently optional — [{ name, description(html), color, code, image,
+// features(bullets), spec_table }, ...] — use whichever ones a given
+// variation actually needs: an accessory color option might only need
+// name/color/image, while a steam generator's "3 Heating Elements" only
+// needs name/features/spec_table/image. `code` (e.g. "341-D", "STP-
+// INFACE-V2") stays a plain visible field here, not tucked behind an
+// "advanced" toggle — it's load-bearing product-reference info for editors.
+// See DispProduct.jsx / DispAccessories.jsx for the live-page rendering
+// counterpart, and getVariationsArray() below for the legacy-data fallback.
+function VariationsManager({ variations = [], onChange, addToast, slug, currentUser }) {
   const [uploadingIdx, setUploadingIdx] = useState(null);
 
-  const setGroup = (idx, patch) => onChange(groups.map((g, i) => i === idx ? { ...g, ...patch } : g));
-  const addGroup = () => onChange([...groups, { label: "", image: "", description: "", features: [], spec_table: null }]);
-  const removeGroup = idx => onChange(groups.filter((_, i) => i !== idx));
+  const setVariation = (idx, patch) => onChange(variations.map((v, i) => i === idx ? { ...v, ...patch } : v));
+  const addVariation = () => onChange([...variations, { name: "", description: "", color: "", code: "", image: "", features: [], spec_table: null }]);
+  const removeVariation = idx => onChange(variations.filter((_, i) => i !== idx));
 
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
-      const roleTag = slugify(groups[idx]?.label || `group-${idx}`);
-      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `heatinggroup-${roleTag}`, currentUser });
-      setGroup(idx, { image: url });
-      addToast("✓ Group image uploaded.", "success");
+      const roleTag = slugify(variations[idx]?.name || variations[idx]?.color || `variation-${idx}`);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `variation-${roleTag}`, currentUser });
+      setVariation(idx, { image: url });
+      addToast("✓ Variation image uploaded.", "success");
     } catch (err) {
       addToast("❌ Upload failed: " + err.message, "error");
     } finally {
@@ -2683,35 +2609,40 @@ function HeatingGroupsManager({ groups = [], onChange, addToast, slug, currentUs
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      {groups.map((g, idx) => (
+      {variations.map((v, idx) => (
         <div key={idx} style={{
           background: "var(--surface-2)", border: "1px solid var(--border)",
           borderRadius: "var(--r-sm)", padding: 14, display: "flex", flexDirection: "column", gap: 12,
         }}>
           <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-            <VariantImageSlot image={g.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={80} />
+            <VariantImageSlot image={v.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={80} />
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
-              <input type="text" value={g.label || ""} placeholder="Group title (e.g., 3 Heating Elements) — optional"
-                onChange={e => setGroup(idx, { label: e.target.value })}
+              <input type="text" value={v.name || ""} placeholder={'Name (optional) — e.g. "Heating Element 2" or "Collar Guard (Cedar)"'}
+                onChange={e => setVariation(idx, { name: e.target.value })}
                 className="form-input" style={{ fontSize: "0.85rem", fontWeight: 600 }} />
-              <textarea value={g.description || ""} placeholder="Short description (optional) — free-text blurb shown above the feature list"
-                onChange={e => setGroup(idx, { description: e.target.value })}
-                className="form-input" rows={2} style={{ fontSize: "0.8rem", resize: "vertical", fontFamily: "inherit" }} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                <ColorSwatchPicker value={v.color} onChange={c => setVariation(idx, { color: c })} />
+                <input type="text" value={v.code || ""} placeholder="Code (optional) — e.g. 341-D, STP-INFACE-V2"
+                  onChange={e => setVariation(idx, { code: e.target.value })}
+                  className="form-input" style={{ fontSize: "0.82rem", alignSelf: "start" }} />
+              </div>
             </div>
-            <button type="button" onClick={() => removeGroup(idx)} title="Remove group"
+            <button type="button" onClick={() => removeVariation(idx)} title="Remove variation"
               style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
               <i className="fa-solid fa-trash" />
             </button>
           </div>
           <div style={{ paddingLeft: 92, display: "flex", flexDirection: "column", gap: 12 }}>
-            <PillInput label="Features (optional)" value={g.features || []}
-              onChange={v => setGroup(idx, { features: v })}
+            <RichField label="Description (optional)" value={v.description || ""}
+              onChange={e => setVariation(idx, { description: e.target.value })} rows={3} onNotify={addToast} />
+            <PillInput label="Features (optional)" value={v.features || []}
+              onChange={f => setVariation(idx, { features: f })}
               placeholder="Type and press Enter, or paste a bulleted list…" />
-            <SpecTableManager specTable={g.spec_table} onChange={t => setGroup(idx, { spec_table: t })} />
+            <SpecTableManager specTable={v.spec_table} onChange={t => setVariation(idx, { spec_table: t })} />
           </div>
         </div>
       ))}
-      <Btn label="+ Add Configuration Group" variant="secondary" size="sm" onClick={addGroup} />
+      <Btn label="+ Add Variation" variant="secondary" size="sm" onClick={addVariation} />
     </div>
   );
 }
@@ -2767,14 +2698,12 @@ export default function Products({ currentUser }) {
 
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
+  const [activeFormTab, setActiveFormTab] = useState("general"); // "general" | "variations" | "seo" | "addons"
   const [revisions, setRevisions] = useState([]);
   const [expandedRevisionId, setExpandedRevisionId] = useState(null);
   const [previewProduct, setPreviewProduct] = useState(null);
 
-  const [variants, setVariants] = useState([]);
-  const [loadedVariants, setLoadedVariants] = useState([]);
-
-  const isDirty = !formsEqual(form, savedForm) || JSON.stringify(variants) !== JSON.stringify(loadedVariants);
+  const isDirty = !formsEqual(form, savedForm);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchProducts = useCallback(async () => {
@@ -2971,7 +2900,6 @@ export default function Products({ currentUser }) {
     setModalOpen(false); setEditing(null); setEditingFull(null);
     setShowRevisions(false); setModalMenuOpen(false);
     setUnsavedOpen(false); pendingClose.current = null;
-    setVariants([]); setLoadedVariants([]);
   };
   const handleModalClose = () => { if (isDirty) { pendingClose.current = actualClose; setUnsavedOpen(true); } else actualClose(); };
   const handleUnsavedStay    = () => { setUnsavedOpen(false); pendingClose.current = null; };
@@ -2981,7 +2909,7 @@ export default function Products({ currentUser }) {
   const openCreate = () => {
     setEditing(null); setEditingFull(null);
     setForm({ ...EMPTY_FORM }); setSavedForm({ ...EMPTY_FORM });
-    setSlugEdited(false); setModalOpen(true);
+    setSlugEdited(false); setActiveFormTab("general"); setModalOpen(true);
   };
 
   const openEdit = async row => {
@@ -2997,9 +2925,8 @@ export default function Products({ currentUser }) {
         images:            data.images            || [],
         spec_images:       data.spec_images       || [],
         files:             data.files             || [],
-        variants:          data.variants          || [],
         spec_table:        data.spec_table        || null,
-        heating_element_groups: data.heating_element_groups || [],
+        variations:        data.variations        || [],
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -3025,10 +2952,7 @@ export default function Products({ currentUser }) {
       setEditingFull(data);   // full row → audit strip
       setShowRevisions(false);
       setModalMenuOpen(false);
-      // Load variants for this product
-      const { data: vData } = await supabase.from("product_variants").select("*").eq("product_id", row.id).order("sort_order");
-      setVariants(vData || []);
-      setLoadedVariants(JSON.parse(JSON.stringify(vData || [])));
+      setActiveFormTab("general");
       setModalOpen(true);
     } catch (err) { add(err.message, "error"); }
   };
@@ -3062,9 +2986,8 @@ export default function Products({ currentUser }) {
         images:            data.images            || [],
         spec_images:       data.spec_images       || [],
         files:             data.files             || [],
-        variants:          data.variants          || [],
         spec_table:        data.spec_table        || null,
-        heating_element_groups: data.heating_element_groups || [],
+        variations:        data.variations        || [],
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -3096,6 +3019,7 @@ export default function Products({ currentUser }) {
       setEditingFull(null);
       setShowRevisions(false);
       setModalMenuOpen(false);
+      setActiveFormTab("general");
       setModalOpen(true);
       add("Duplicated! Remember to change the slug before saving.", "info");
     } catch (err) { add(err.message, "error"); }
@@ -3108,7 +3032,10 @@ export default function Products({ currentUser }) {
     if (!form.slug) return add("Slug is required.", "error");
     setSaving(true);
     try {
-      const { kwTags, modelTags } = extractTagsFromDescription(form.description);
+      const fromDescription = extractTagsFromDescription(form.description);
+      const fromVariations  = extractTagsFromVariations(form.variations);
+      const kwTags    = [...new Set([...fromDescription.kwTags, ...fromVariations.kwTags])];
+      const modelTags = [...new Set([...fromDescription.modelTags, ...fromVariations.modelTags])];
       const mergedTags = mergeAutoTags(form.tags, kwTags, modelTags);
       const newAutoTags = mergedTags.filter(t => !form.tags.includes(t));
       if (newAutoTags.length > 0) {
@@ -3173,55 +3100,6 @@ export default function Products({ currentUser }) {
           user_id:     currentUser?.id,
         });
 
-        // Add variants for new product
-        const productId = inserted?.id;
-        for (const v of variants) {
-          if (v.sku) {
-            const variantRow = {
-              product_id: productId,
-              sku: v.sku.trim(),
-              label: v.label?.trim() || null,
-              color_key: v.color_key || null,
-              image: v.image || null,
-              capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
-              is_default: !!v.is_default,
-              sort_order: v.sort_order || 0,
-              status: v.status || "active"
-            };
-            await supabase.from("product_variants").insert([variantRow]);
-          }
-        }
-        setLoadedVariants(JSON.parse(JSON.stringify(variants)));
-      }
-
-      // Update variants for edited product
-      if (editing && variants.length > 0) {
-        const removedIds = loadedVariants.filter(v => !variants.find(nv => nv.id === v.id)).map(v => v.id).filter(id => !id.startsWith("new-"));
-        if (removedIds.length) {
-          await supabase.from("product_variants").delete().in("id", removedIds);
-        }
-
-        for (const v of variants) {
-          if (!v.sku) continue;
-          const variantRow = {
-            product_id: editing.id,
-            sku: v.sku.trim(),
-            label: v.label?.trim() || null,
-            color_key: v.color_key || null,
-            image: v.image || null,
-            capacity_liters: v.capacity_liters ? parseFloat(v.capacity_liters) : null,
-            is_default: !!v.is_default,
-            sort_order: v.sort_order || 0,
-            status: v.status || "active"
-          };
-
-          if (v.id && !v.id.startsWith("new-")) {
-            await supabase.from("product_variants").update(variantRow).eq("id", v.id);
-          } else {
-            await supabase.from("product_variants").insert([variantRow]);
-          }
-        }
-        setLoadedVariants(JSON.parse(JSON.stringify(variants)));
       }
 
       add(editing ? "Product saved." : "Product created.", "success");
@@ -3975,6 +3853,24 @@ export default function Products({ currentUser }) {
 
             <form id="product-form" onSubmit={handleSave} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
 
+          <div className="pp-tabs">
+            {[
+              { id: "general",    label: "General" },
+              { id: "variations", label: "Variations" },
+              { id: "seo",        label: "SEO" },
+              { id: "addons",     label: "Add-ons" },
+            ].map(t => (
+              <button key={t.id} type="button"
+                className={`pp-tab-btn${activeFormTab === t.id ? " active" : ""}`}
+                onClick={() => setActiveFormTab(t.id)}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ═══ GENERAL — the fields every product needs ═══ */}
+          {activeFormTab === "general" && (
+            <>
           {/* Featured Image & Gallery */}
           <div className="responsive-grid-2">
             {/* Featured Image — Left */}
@@ -4021,50 +3917,17 @@ export default function Products({ currentUser }) {
             <Field label="Product Name" value={form.name} onChange={handleNameChange} placeholder="e.g. Nordex 9kW" required />
             <Field label="Slug" value={form.slug}
               onChange={e => { setSlugEdited(true); setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "") })); }}
-              placeholder="nordex-9kw" required helper="Auto-generated and editable" />
+              placeholder="nordex-9kw" required
+              tip="Auto-generated from the product name, but editable — this becomes the page URL (e.g. /products/nordex-9kw). Lowercase letters, numbers, and dashes only." />
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <Field label="Brand" value={form.brand} onChange={e => setForm(f => ({ ...f, brand: e.target.value }))} placeholder="SAWO" />
-            <ModelSelect label="Type / Model" value={form.type} onChange={v => setForm(f => ({ ...f, type: v }))} placeholder="Premium Series" suggestions={allModels} />
+            <div />
+            <ModelSelect label="Model / Series" value={form.type} onChange={v => setForm(f => ({ ...f, type: v }))} placeholder="Premium Series"
+              suggestions={allModels}
+              tip="The product's model or series line, e.g. 'Premium Series', 'Nordex'. Not the same as Categories below — Categories control which browse/filter pages the product shows up on (e.g. 'Wall-Mounted Heaters'); Model/Series is just a descriptive label shown on the product page." />
           </div>
 
-          {/* Variant fields */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <Field label="Capacity (liters)" type="number" value={form.capacity_liters} onChange={e => setForm(f => ({ ...f, capacity_liters: e.target.value }))} placeholder="e.g. 4, 9, 18" />
-            <Field label="Variant Type" value={form.variant_type} onChange={e => setForm(f => ({ ...f, variant_type: e.target.value }))} placeholder="e.g. material, color, size" />
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <Field label="Product Family" value={form.product_family} onChange={e => setForm(f => ({ ...f, product_family: e.target.value }))} placeholder="e.g. dragon-pail, wooden-pail-381" helper="Group related product variants" />
-            <Field label="Parent Product ID" value={form.parent_product_id} onChange={e => setForm(f => ({ ...f, parent_product_id: e.target.value }))} placeholder="UUID of parent product" helper="For accessories linked to parent product" />
-          </div>
-
-          {/* Variants */}
-          <SectionLabel label="Variants" />
-          <VariantManager variants={variants} onChange={setVariants} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
-
-          {/* Variant Colors — separate from "Variants" above: this manages
-              a product's color/code/image options (e.g. an accessory's
-              Cedar/Aspen/Hemlock choices), shown on the live product page's
-              color swatches. Unrelated to the SKU-based variants above. */}
-          <SectionLabel label="Variant Colors" />
-          <VariantColorsManager variants={form.variants} onChange={v => setForm(f => ({ ...f, variants: v }))} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
-
-          {/* Specifications Table — the live page's "Technical Data" table */}
-          <SectionLabel label="Specifications Table" />
-          <SpecTableManager specTable={form.spec_table} onChange={t => setForm(f => ({ ...f, spec_table: t }))} />
-
-          {/* Configuration Groups — entirely optional grouped configuration
-              options (e.g. a steam generator's "2 / 3 / 6 Heating Elements"),
-              each with any mix of its own photo, blurb, feature bullets, and
-              technical-data table. Separate from the single Specifications
-              Table above, and from VariantManager's flat SKU list. */}
-          <SectionLabel label="Configuration Groups (optional)" />
-          <p style={{ fontSize: "0.78rem", color: "var(--text-3)", margin: "-6px 0 10px" }}>
-            Only needed for products with grouped configuration options (photo + bullets + table per option, e.g. heating-element counts). Leave empty otherwise.
-          </p>
-          <HeatingGroupsManager groups={form.heating_element_groups} onChange={v => setForm(f => ({ ...f, heating_element_groups: v }))} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
-
-          {/* Features ← above Short Description */}
+          {/* Features */}
           <SectionLabel label="Features" />
           <PillInput label="Features" value={form.features}
             onChange={v => setForm(f => ({ ...f, features: v }))} placeholder="e.g. Auto shutoff, Stainless steel" />
@@ -4098,9 +3961,11 @@ export default function Products({ currentUser }) {
           />
 
           {/* Specifications */}
+          <SectionLabel label="Specifications" />
           <RichField label="Specifications" value={form.description}
             onChange={e => setForm(f => ({ ...f, description: e.target.value }))} onNotify={add} />
-          <AutoTagPreview description={form.description} currentTags={form.tags} />
+          <AutoTagPreview description={form.description} variations={form.variations} currentTags={form.tags} />
+          <SpecTableManager specTable={form.spec_table} onChange={t => setForm(f => ({ ...f, spec_table: t }))} />
 
           {/* Spec Diagram Images & Resources (PDFs) */}
           <div className="responsive-grid-2">
@@ -4133,10 +3998,57 @@ export default function Products({ currentUser }) {
             </div>
           </div>
 
-          {/* SEO — pure overrides. Empty = the frontend keeps deriving title/
-              description/image from name + short_description/description +
-              thumbnail (see DispProduct.jsx's seoDescription), so leaving
-              these blank is never "broken", just inherited. */}
+          {/* Status & Visibility */}
+          <SectionLabel label="Status & Visibility" />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, alignItems: "start" }}>
+            <SelectField label="Status" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
+              options={[{ value: "published", label: "Published" }, { value: "draft", label: "Draft" }]} />
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingTop: 20 }}>
+              <Toggle label="Visible"  checked={form.visible}  onChange={v => setForm(f => ({ ...f, visible: v }))} helper="Show on website" />
+              <Toggle label="Featured" checked={form.featured} onChange={v => setForm(f => ({ ...f, featured: v }))} />
+            </div>
+            <Field label="Sort Order" type="number" value={String(form.sort_order)}
+              onChange={e => setForm(f => ({ ...f, sort_order: parseInt(e.target.value) || 0 }))}
+              tip="Controls display order within a category — lower numbers show first." />
+          </div>
+
+          {/* Scheduled publishing — only meaningful for a draft. There is no
+              server cron: the product becomes visible the moment a visitor's
+              page load evaluates isPubliclyVisible() past this timestamp. */}
+          {form.status === "draft" && (
+            <div style={{ marginTop: 4 }}>
+              <Field label="Publish At" type="datetime-local" value={form.publish_at}
+                onChange={e => setForm(f => ({ ...f, publish_at: e.target.value }))}
+                helper={form.publish_at
+                  ? new Date(form.publish_at) > new Date()
+                    ? `Scheduled: goes live ${new Date(form.publish_at).toLocaleString()}`
+                    : "This date is in the past, so it will go live on next page load"
+                  : "Leave empty to stay a draft indefinitely. Under GitHub/JSON File mode the product must be synced before its publish date."}
+              />
+            </div>
+          )}
+            </>
+          )}
+
+          {/* ═══ VARIATIONS — entirely optional ═══ */}
+          {activeFormTab === "variations" && (
+            <>
+              <SectionLabel label="Variations (optional)" />
+              <p className="form-helper" style={{ marginTop: -6, marginBottom: 10 }}>
+                Only needed for products with multiple named options — colors, styles, or configuration sets like a steam generator's "3 Heating Elements". Every field on a variation (description, color, code, features, table) is optional — fill in only what applies to that one.
+              </p>
+              <VariationsManager variations={form.variations}
+                onChange={v => setForm(f => ({ ...f, variations: v }))}
+                addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
+            </>
+          )}
+
+          {/* ═══ SEO — pure overrides. Empty = the frontend keeps deriving
+              title/description/image from name + short_description/
+              description + thumbnail (see DispProduct.jsx's seoDescription),
+              so leaving these blank is never "broken", just inherited. ═══ */}
+          {activeFormTab === "seo" && (
+            <>
           <SectionLabel label="SEO" />
           <div style={{ display: "grid", gap: 12 }}>
             <div>
@@ -4181,37 +4093,42 @@ export default function Products({ currentUser }) {
               <p className="form-helper">Inherits the Featured Image if left empty</p>
             </div>
           </div>
-
-          {/* Status & Visibility */}
-          <SectionLabel label="Status & Visibility" />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, alignItems: "start" }}>
-            <SelectField label="Status" value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
-              options={[{ value: "published", label: "Published" }, { value: "draft", label: "Draft" }]} />
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingTop: 20 }}>
-              <Toggle label="Visible"  checked={form.visible}  onChange={v => setForm(f => ({ ...f, visible: v }))} helper="Show on website" />
-              <Toggle label="Featured" checked={form.featured} onChange={v => setForm(f => ({ ...f, featured: v }))} />
-            </div>
-            <Field label="Sort Order" type="number" value={String(form.sort_order)}
-              onChange={e => setForm(f => ({ ...f, sort_order: parseInt(e.target.value) || 0 }))} helper="Lower = shown first" />
-          </div>
-
-          {/* Scheduled publishing — only meaningful for a draft. There is no
-              server cron: the product becomes visible the moment a visitor's
-              page load evaluates isPubliclyVisible() past this timestamp. */}
-          {form.status === "draft" && (
-            <div style={{ marginTop: 4 }}>
-              <Field label="Publish At" type="datetime-local" value={form.publish_at}
-                onChange={e => setForm(f => ({ ...f, publish_at: e.target.value }))}
-                helper={form.publish_at
-                  ? new Date(form.publish_at) > new Date()
-                    ? `Scheduled: goes live ${new Date(form.publish_at).toLocaleString()}`
-                    : "This date is in the past, so it will go live on next page load"
-                  : "Leave empty to stay a draft indefinitely. Under GitHub/JSON File mode the product must be synced before its publish date."}
-              />
-            </div>
+            </>
           )}
 
-          {/* ── Record Info (audit trail) — only shown when editing ── */}
+          {/* ═══ ADD-ONS — optional/advanced fields most products never touch ═══ */}
+          {activeFormTab === "addons" && (
+            <>
+          <SectionLabel label="Add-ons (optional)" />
+          <p className="form-helper" style={{ marginTop: -6, marginBottom: 10 }}>
+            Rarely-needed fields — most products can leave all of these empty.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <Field label="Brand" value={form.brand} onChange={e => setForm(f => ({ ...f, brand: e.target.value }))} placeholder="SAWO" />
+            <Field label="Capacity (liters)" type="number" value={form.capacity_liters} onChange={e => setForm(f => ({ ...f, capacity_liters: e.target.value }))}
+              placeholder="e.g. 4, 9, 18"
+              tip="For products sized by volume (e.g. water pails) — leave blank otherwise." />
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <Field label="Variant Type" value={form.variant_type} onChange={e => setForm(f => ({ ...f, variant_type: e.target.value }))}
+              placeholder="e.g. material, color, size"
+              tip="Legacy free-text label for what kind of variant grouping this product has. Most products can leave this blank — use the Variations tab instead." />
+            <Field label="Product Family" value={form.product_family} onChange={e => setForm(f => ({ ...f, product_family: e.target.value }))}
+              placeholder="e.g. dragon-pail, wooden-pail-381"
+              tip="Groups related product listings together under one family key. Rarely used — leave blank unless you know this product needs it." />
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <Field label="Parent Product ID" value={form.parent_product_id} onChange={e => setForm(f => ({ ...f, parent_product_id: e.target.value }))}
+              placeholder="UUID of parent product"
+              tip="Links an accessory to its parent product by UUID. Rarely used — leave blank unless you know this product needs it." />
+            <div />
+          </div>
+            </>
+          )}
+
+          {/* Record Info (audit trail) and the new-product notice stay visible
+              regardless of which tab is active — they're not form fields, just
+              context about the record itself. */}
           {editing && editingFull && (
             <>
               <SectionLabel label="Record Info" />
@@ -4219,7 +4136,6 @@ export default function Products({ currentUser }) {
             </>
           )}
 
-          {/* New product author notice */}
           {!editing && currentUser && (
             <div className="created-by-notice">
               <i className="fa-solid fa-pen-to-square" style={{ marginRight: 6 }} />

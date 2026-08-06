@@ -1183,6 +1183,85 @@ body {
 
 .form-helper { font-size:0.7rem; color:var(--text-3); margin-top:3px; }
 
+/* Label hint tooltip — a small (i) beside a field label, same data-tip
+   pattern as .sidebar-footer-role--preview above (instant on hover/focus,
+   not the browser's ~1s native delay). Used to move static "what do I type
+   here" instructions off the form (where they permanently ate vertical
+   space on every field) into an on-demand hover, while dynamic live
+   feedback (character counts, schedule previews) stays inline as-is. */
+.field-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: rgba(139, 94, 60, 0.15);
+  color: var(--text-3);
+  font-size: 0.62rem;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: help;
+  position: relative;
+  vertical-align: middle;
+}
+.field-hint::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(3px);
+  z-index: 60;
+  width: max-content;
+  max-width: 260px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #2c241d;
+  color: #fff;
+  border: 1px solid rgba(255, 233, 209, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.45;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+  pointer-events: none;
+}
+.field-hint:hover::after,
+.field-hint:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Product form tabs (General / Variations / SEO / Add-ons) */
+.pp-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.pp-tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 9px 4px;
+  margin-right: 18px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.pp-tab-btn:hover { color: var(--text-2); }
+.pp-tab-btn.active { color: var(--brand); border-bottom-color: var(--brand); }
+
 .input-wrap { position:relative; }
 .input-eye-btn {
   position: absolute;

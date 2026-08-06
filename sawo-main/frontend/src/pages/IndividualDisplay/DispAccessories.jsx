@@ -54,14 +54,42 @@ function getFilesArray(product) {
   return (remote || []).map(f => ({ name: f.name, url: f.url }));
 }
 
-function getVariantsArray(product) {
-  const local = product?.local_variants;
-  const remote = product?.variants;
-  const arr = (local?.length ? local : remote) || [];
-  return arr.map(v => ({
-    ...v,
-    image: v.image ? resolveUrl(v.image) : null
-  }));
+// Unifies the various shapes a product's variant/configuration data can be
+// in: the current `variations` column (VariationsManager, admin CMS), the
+// legacy `variants` (color swatches) + `heating_element_groups` columns
+// (pre-unification products, or anything imported through the offline
+// accessories pipeline that hasn't been migrated to `variations` yet), and
+// the `local_*` fallback fields used in local-storage/offline mode. Every
+// consumer rendering variant swatches/images/config-group content should go
+// through this rather than reading `product.variants` directly, so nothing
+// silently stops rendering for a product that hasn't been migrated.
+export function getVariationsArray(product) {
+  const raw =
+    (product?.local_variations?.length && product.local_variations) ||
+    (product?.variations?.length && product.variations) ||
+    null;
+
+  if (raw) {
+    return raw.map(v => ({ ...v, image: v.image ? resolveUrl(v.image) : null }));
+  }
+
+  // Legacy fallback — mirrors the exact shape the `variations` DB migration
+  // produced, so a not-yet-migrated product renders identically either way.
+  const legacyVariants = product?.local_variants?.length ? product.local_variants : (product?.variants || []);
+  const legacyGroups = product?.heating_element_groups || [];
+  return [
+    ...legacyVariants.map(v => ({
+      name: [v.color, v.code ? `(${v.code})` : ""].filter(Boolean).join(" ").trim() || null,
+      color: v.color || null, code: v.code || null,
+      image: v.image ? resolveUrl(v.image) : null,
+      description: "", features: [], spec_table: null,
+    })),
+    ...legacyGroups.map(g => ({
+      name: g.label || null, color: null, code: null,
+      image: g.image ? resolveUrl(g.image) : null,
+      description: g.description || "", features: g.features || [], spec_table: g.spec_table || null,
+    })),
+  ];
 }
 
 function cleanHTMLStyles(html) {
@@ -427,7 +455,10 @@ function SectionLabel({ icon, text }) {
   );
 }
 
-/* ── Product Info Panel (sawo.com-style color/code/capacity summary) ─── */
+/* ── Product Info Panel (sawo.com-style color/code/capacity summary) ───
+   Also the palette behind the admin CMS's Variations color picker (see
+   Products.jsx's VariationsManager) — typing a color name there previews
+   against this same map, so admin and live-page dots always match. */
 export const VARIANT_COLOR_DOT = {
   "hemlock": "#d9b98c",
   "white": "#f7f5f1",
@@ -437,6 +468,24 @@ export const VARIANT_COLOR_DOT = {
   "aluminum": "#c7c9cc",
   "black metal": "#3a3a3a",
   "metallic brown": "#6e4a2e",
+  "pine": "#e3c9a0",
+  "red": "#a33b2e",
+  "silver": "#c8ccd0",
+  "stainless": "#b8bcc0",
+  "stainless steel": "#b8bcc0",
+  "gray": "#8f9296",
+  "grey": "#8f9296",
+  "brown": "#6e4a2e",
+  "natural wood": "#c9a06a",
+  "walnut": "#5a3a24",
+  "oak": "#c9a86a",
+  "birch": "#e6d3a8",
+  "beige": "#e3d5bc",
+  "gold": "#c9a84c",
+  "bronze": "#8c6a3f",
+  "graphite": "#3f4144",
+  "blue": "#3a5a7a",
+  "green": "#4a6b4f",
 };
 
 function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant, hasVideo, showVideo, onSelectVideo }) {
@@ -658,7 +707,7 @@ export default function AccessoriesPage() {
   // (code when present, else index) for selection + image-error tracking.
   const variants = useMemo(() => {
     if (!product) return [];
-    return getVariantsArray(product).map((v, i) => ({ ...v, key: v.code || `variant-${i}` }));
+    return getVariationsArray(product).map((v, i) => ({ ...v, key: v.code || `variant-${i}` }));
   }, [product]);
 
   // Start on the grouped hero image (no variant selected); reset when
