@@ -29,8 +29,13 @@ function stripHtml(html) {
 
 function getFirstSentence(text) {
   if (!text) return "";
-  const cleaned = stripHtml(text).trim();
-  const match = cleaned.match(/^[^.!?]*[.!?]/);
+  const cleaned = stripHtml(text).replace(/\s+/g, " ").trim();
+  // Lookahead requires the punctuation to be followed by a space + capital
+  // letter (or the end of the string) so it doesn't stop early on periods
+  // inside things like "7.5m" or abbreviations mid-sentence — the previous
+  // version had no lookahead at all, so any decimal number at the start of
+  // a description (e.g. "7.5m RJ12 cable...") got truncated to just "7.".
+  const match = cleaned.match(/^[^.!?]*[.!?](?=\s+[A-Z]|\s*$)/);
   return match ? match[0] : cleaned.split(/\s+/).slice(0, 20).join(" ") + "...";
 }
 
@@ -211,12 +216,19 @@ const SteamAccessories = () => {
         max-width: 680px; margin: 0 auto;
       }
 
-      /* ---- Accessories grid ---- */
+      /* ---- Accessories grid ----
+         grid-auto-rows:1fr previously forced every card in a row to match
+         the row's tallest card, and .sa-card-desc vertically centered its
+         text inside that stretched space — so a short description ended up
+         with a big empty gap above/below it while its row-mate with a long
+         description filled the same height evenly, making gaps look
+         random. align-items:start + natural (non-stretched) card heights
+         fixes that: each card is only as tall as its own content. */
       .sa-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 24px;
-        grid-auto-rows: 1fr;
+        align-items: start;
       }
       .sa-card {
         display: flex; flex-direction: column;
@@ -225,7 +237,6 @@ const SteamAccessories = () => {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         text-align: center;
         cursor: pointer;
-        height: 100%;
         box-shadow: 0 8px 24px rgba(170,129,97,0.12);
       }
       .sa-card:hover {
@@ -244,24 +255,16 @@ const SteamAccessories = () => {
       .sa-card:hover .sa-img { transform: scale(1.08); }
       .sa-card-body {
         padding: 18px 18px 24px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
       }
       .sa-card-title {
         font-family: 'Montserrat', sans-serif;
         font-size: 0.95rem; font-weight: 700;
         color: #AA8161; margin: 0 0 10px 0;
-        min-height: 24px;
       }
       .sa-card-desc {
         font-family: 'Montserrat', sans-serif;
         font-size: 0.83rem; font-weight: 400;
         color: #666; line-height: 1.6; margin: 0;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
 
       /* ---- Responsive ---- */
