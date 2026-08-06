@@ -96,14 +96,24 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
         style={{ background: "#fff", borderRadius: 14, boxShadow: "0 24px 64px rgba(0,0,0,0.28)", width: "100%", maxWidth: 960, position: "relative", fontFamily: "'Montserrat',sans-serif", overflow: "hidden" }}
         onClick={e => e.stopPropagation()}
       >
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", background: "#faf7f4", borderBottom: "1px solid #edddd0" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "14px 20px", background: "#faf7f4", borderBottom: "1px solid #edddd0" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
             <i className="fa-solid fa-eye" style={{ color: "#a67853", fontSize: "0.85rem", flexShrink: 0 }} />
             <span style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{product.name}</span>
           </div>
-          <button onClick={onClose} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#8b5e3c", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: "50%", flexShrink: 0 }}>
-            <i className="fa-solid fa-xmark" />
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            <a href={productUrl(product)} target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", fontSize: "0.76rem", fontWeight: 600, color: "#7a5234", background: "transparent", border: "1px solid rgba(166,120,83,0.35)", borderRadius: 6, textDecoration: "none", whiteSpace: "nowrap" }}>
+              <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.7rem" }} /> Visit URL
+            </a>
+            <button type="button" onClick={onEdit}
+              style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", fontSize: "0.76rem", fontWeight: 600, color: "#fff", background: "#a67853", border: "none", borderRadius: 6, cursor: "pointer", whiteSpace: "nowrap" }}>
+              <i className="fa-solid fa-pen" style={{ fontSize: "0.7rem" }} /> Edit
+            </button>
+            <button onClick={onClose} style={{ background: "transparent", border: "none", cursor: "pointer", color: "#8b5e3c", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: "50%", flexShrink: 0 }}>
+              <i className="fa-solid fa-xmark" />
+            </button>
+          </div>
         </div>
 
         <div style={{ padding: "24px 28px 20px" }}>
@@ -238,16 +248,6 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
           </>
         )}
 
-        <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, padding: "16px 28px", borderTop: "1px solid #edddd0", background: "#faf7f4" }}>
-          <a href={productUrl(product)} target="_blank" rel="noopener noreferrer"
-            style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#7a5234", background: "transparent", border: "1px solid rgba(166,120,83,0.35)", borderRadius: 6, textDecoration: "none" }}>
-            <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.75rem" }} /> Visit URL
-          </a>
-          <button type="button" onClick={onEdit}
-            style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", fontSize: "0.8rem", fontWeight: 600, color: "#fff", background: "#a67853", border: "none", borderRadius: 6, cursor: "pointer" }}>
-            <i className="fa-solid fa-pen" style={{ fontSize: "0.75rem" }} /> Edit
-          </button>
-        </div>
       </div>
     </div>
   );
