@@ -111,6 +111,7 @@ function buildProductPayload(form, tags) {
     files:             form.files,
     spec_table:        form.spec_table,
     variations:        form.variations,
+    included_items:    form.included_items,
     categories:        form.categories,
     tags:              tags,
     features:          form.features,
@@ -163,6 +164,7 @@ const EMPTY_FORM = {
   thumbnail: "", images: [], spec_images: [], files: [],
   spec_table: null,
   variations: [],
+  included_items: [],
   categories: [], tags: [], features: [],
   brand: "SAWO", type: "",
   capacity_liters: "", variant_type: "", product_family: "", parent_product_id: "",
@@ -2691,6 +2693,61 @@ function VariationsManager({ variations = [], onChange, addToast, slug, currentU
   );
 }
 
+// ─── Included Items Manager ──────────────────────────────────────────────────
+// Edits the `included_items` JSONB column — [{ image, title, note }, ...],
+// an optional row of small accessory/part callouts rendered as "Included in
+// the Package" on the live page (see DispProduct.jsx) — e.g. a steam
+// generator's electronics compartment, autodrain, steam head, cables,
+// sensor. Simpler than VariationsManager on purpose: this is just a
+// product-wide illustrated list, not a per-option config with its own
+// description/features/table.
+function IncludedItemsManager({ items = [], onChange, addToast, slug, currentUser }) {
+  const [uploadingIdx, setUploadingIdx] = useState(null);
+
+  const setItem = (idx, patch) => onChange(items.map((it, i) => i === idx ? { ...it, ...patch } : it));
+  const addItem = () => onChange([...items, { image: "", title: "", note: "" }]);
+  const removeItem = idx => onChange(items.filter((_, i) => i !== idx));
+
+  const handleImageUpload = async (file, idx) => {
+    setUploadingIdx(idx);
+    try {
+      const roleTag = slugify(items[idx]?.title || `item-${idx}`);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `included-${roleTag}`, currentUser });
+      setItem(idx, { image: url });
+      addToast("✓ Image uploaded.", "success");
+    } catch (err) {
+      addToast("❌ Upload failed: " + err.message, "error");
+    } finally {
+      setUploadingIdx(null);
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      {items.map((item, idx) => (
+        <div key={idx} style={{
+          background: "var(--surface-2)", border: "1px solid var(--border)",
+          borderRadius: "var(--r-sm)", padding: 12, display: "grid",
+          gridTemplateColumns: "70px 1fr 1fr 40px", gap: 10, alignItems: "center"
+        }}>
+          <VariantImageSlot image={item.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={70} />
+          <input type="text" value={item.title || ""} placeholder="Title, e.g. Autodrain"
+            onChange={e => setItem(idx, { title: e.target.value })}
+            className="form-input" style={{ fontSize: "0.82rem" }} />
+          <input type="text" value={item.note || ""} placeholder="Note (optional), e.g. (Included for STN-S models only)"
+            onChange={e => setItem(idx, { note: e.target.value })}
+            className="form-input" style={{ fontSize: "0.82rem" }} />
+          <button type="button" onClick={() => removeItem(idx)} title="Remove item"
+            style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
+            <i className="fa-solid fa-trash" />
+          </button>
+        </div>
+      ))}
+      <Btn label="+ Add Included Item" variant="secondary" size="sm" onClick={addItem} />
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Products({ currentUser }) {
   const perms = getPerms(currentUser);
@@ -2971,6 +3028,7 @@ export default function Products({ currentUser }) {
         files:             data.files             || [],
         spec_table:        data.spec_table        || null,
         variations:        data.variations        || [],
+        included_items:    data.included_items    || [],
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -3032,6 +3090,7 @@ export default function Products({ currentUser }) {
         files:             data.files             || [],
         spec_table:        data.spec_table        || null,
         variations:        data.variations        || [],
+        included_items:    data.included_items    || [],
         categories:        data.categories        || [],
         tags:              data.tags              || [],
         features:          data.features          || [],
@@ -4041,6 +4100,15 @@ export default function Products({ currentUser }) {
               )}
             </div>
           </div>
+
+          {/* Included in the Package — optional row of small illustrated
+              callouts (image + title + note) for parts/accessories that
+              ship with the product, e.g. a steam generator's electronics
+              compartment, autodrain, steam head, cables, sensor. */}
+          <SectionLabel label="Included in the Package (optional)" />
+          <IncludedItemsManager items={form.included_items}
+            onChange={v => setForm(f => ({ ...f, included_items: v }))}
+            addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
 
           {/* Status & Visibility */}
           <SectionLabel label="Status & Visibility" />

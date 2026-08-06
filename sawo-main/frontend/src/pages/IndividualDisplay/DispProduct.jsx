@@ -608,6 +608,8 @@ export default function ProductPage() {
   const heatingGroups = getVariationsArray(product).filter(g => g && (g.description || g.spec_table || g.features?.length));
   const hasHeatingGroups = heatingGroups.length > 0;
   const hasSection2  = hasDesc || hasSpecTable || hasHeatingGroups;
+  const includedItems = (product.included_items || []).filter(i => i && (i.image || i.title));
+  const hasIncludedItems = includedItems.length > 0;
 
   // Plain-text meta description from whichever product copy is available —
   // short_description/description are HTML (rendered via dangerouslySetInnerHTML
@@ -972,6 +974,38 @@ export default function ProductPage() {
                   })}
                 </div>
               )}
+            </div>
+          </>
+        )}
+
+        {/* ── "Included in the Package" — product.included_items, an
+              optional row of {image, title, note} accessories/parts that
+              ship with the product (e.g. a steam generator's electronics
+              compartment, autodrain, steam head, cables, sensor). ───── */}
+        {hasIncludedItems && (
+          <>
+            <Divider />
+            <div className="pp-outer" style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 8px" }}>
+              <h3 style={{
+                textAlign: "center", fontFamily: "'Montserrat',sans-serif", fontSize: "1.4rem",
+                fontWeight: 400, color: "#a67853", letterSpacing: "0.04em", textTransform: "uppercase",
+                margin: "0 0 36px",
+              }}>Included in the Package</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "32px 24px" }}>
+                {includedItems.map((item, i) => (
+                  <div key={i} style={{ width: 160, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                    {item.image && (
+                      <img src={item.image} alt={item.title || ""} style={{ maxWidth: "100%", maxHeight: 110, objectFit: "contain", marginBottom: 14 }} />
+                    )}
+                    {item.title && (
+                      <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.85rem", color: "#2c1a0e", margin: 0, lineHeight: 1.4 }}>{item.title}</p>
+                    )}
+                    {item.note && (
+                      <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", color: "#a67853", margin: "2px 0 0", lineHeight: 1.4 }}>{item.note}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </>
         )}
