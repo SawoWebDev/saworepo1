@@ -4,6 +4,7 @@
 // the site's original per-category display pages.
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getVariationsArray } from "./IndividualDisplay/DispAccessories";
 
 export function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
@@ -86,7 +87,7 @@ export const ACCESSORY_CARD_CSS = `
 
 export function AccessoryCard({ product }) {
   const navigate = useNavigate();
-  const variants = product.variants || [];
+  const variants = getVariationsArray(product);
   const hasSwatches = variants.length > 1;
   const [selected, setSelected] = useState(null); // null = grouped/default thumbnail
   const [videoOpen, setVideoOpen] = useState(false);
