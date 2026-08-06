@@ -1,21 +1,19 @@
 // Displays the individual product (heater) detail page when clicked from the products listing or catalog
 
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
+import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
-
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 function getImageUrl(product, field) {
   return resolveUrl(localOrRemote(product, field));
@@ -31,159 +29,6 @@ function getFilesArray(product) {
   const remote = product?.files;
   if (local?.length) return local.map(f => ({ name: f.name, url: resolveUrl(f.path || f.url) }));
   return (remote || []).map(f => ({ name: f.name, url: f.url }));
-}
-
-/* ── Lightbox ─────────────────────────────────────────────────────── */
-function Lightbox({ images, startIndex, onClose }) {
-  const [idx, setIdx] = useState(startIndex);
-  const [scale, setScale] = useState(1);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [dragging, setDragging] = useState(false);
-  const dragStart = useRef(null);
-
-  const prev = useCallback(() => { setIdx(i => (i - 1 + images.length) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
-  const next = useCallback(() => { setIdx(i => (i + 1) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
-
-  useEffect(() => {
-    const h = e => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    };
-    document.addEventListener("keydown", h);
-    document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", h); document.body.style.overflow = ""; };
-  }, [onClose, prev, next]);
-
-  const handleWheel = e => {
-    e.preventDefault();
-    setScale(s => Math.min(Math.max(s - e.deltaY * 0.001, 1), 4));
-  };
-
-  const handleMouseDown = e => {
-    if (scale <= 1) return;
-    setDragging(true);
-    dragStart.current = { x: e.clientX - offset.x, y: e.clientY - offset.y };
-  };
-  const handleMouseMove = e => {
-    if (!dragging || !dragStart.current) return;
-    setOffset({ x: e.clientX - dragStart.current.x, y: e.clientY - dragStart.current.y });
-  };
-  const handleMouseUp = () => setDragging(false);
-
-  return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed", inset: 0, zIndex: 9999,
-        background: "rgba(0,0,0,0.92)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        animation: "ppFadeIn 0.2s ease",
-      }}
-    >
-      <button onClick={onClose} style={{
-        position: "absolute", top: 18, right: 18,
-        background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%",
-        width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        transition: "background 0.2s", zIndex: 10,
-      }}
-        onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
-        onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
-      >
-        <i className="fa-solid fa-xmark" />
-      </button>
-
-      {images.length > 1 && (
-        <div style={{
-          position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)",
-          background: "rgba(255,255,255,0.12)", color: "#fff",
-          padding: "4px 14px", borderRadius: 20,
-          fontFamily: "'Montserrat',sans-serif", fontSize: "0.72rem", fontWeight: 600,
-        }}>
-          {idx + 1} / {images.length}
-        </div>
-      )}
-
-      <div style={{
-        position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)",
-        background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)",
-        padding: "4px 14px", borderRadius: 20,
-        fontFamily: "'Montserrat',sans-serif", fontSize: "0.65rem",
-        pointerEvents: "none",
-      }}>
-        Scroll to zoom · Drag to pan · Esc to close
-      </div>
-
-      {images.length > 1 && (
-        <>
-          {[{ fn: prev, side: "left", icon: "fa-chevron-left" }, { fn: next, side: "right", icon: "fa-chevron-right" }].map(({ fn, side, icon }) => (
-            <button key={side} onClick={e => { e.stopPropagation(); fn(); }} style={{
-              position: "absolute", [side]: 16, top: "50%", transform: "translateY(-50%)",
-              background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%",
-              width: 44, height: 44, cursor: "pointer", color: "#fff",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "0.85rem", transition: "background 0.2s", zIndex: 10,
-            }}
-              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.25)"}
-              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
-            >
-              <i className={`fa-solid ${icon}`} />
-            </button>
-          ))}
-        </>
-      )}
-
-      <div
-        onClick={e => e.stopPropagation()}
-        onWheel={handleWheel}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        style={{
-          maxWidth: "88vw", maxHeight: "88vh",
-          cursor: scale > 1 ? (dragging ? "grabbing" : "grab") : "default",
-          userSelect: "none",
-        }}
-      >
-        <ImageWithLoader
-          src={images[idx]}
-          alt=""
-          style={{
-            maxWidth: "88vw", maxHeight: "88vh",
-            objectFit: "contain", borderRadius: 10,
-            transform: `scale(${scale}) translate(${offset.x / scale}px, ${offset.y / scale}px)`,
-            transition: dragging ? "none" : "transform 0.15s ease",
-            display: "block",
-          }}
-        />
-      </div>
-
-      {images.length > 1 && (
-        <div style={{
-          position: "absolute", bottom: 52, left: "50%", transform: "translateX(-50%)",
-          display: "flex", gap: 6,
-        }} onClick={e => e.stopPropagation()}>
-          {images.map((url, i) => (
-            <button key={i} onClick={() => { setIdx(i); setScale(1); setOffset({ x: 0, y: 0 }); }}
-              style={{
-                width: 44, height: 44, borderRadius: 6, overflow: "hidden",
-                border: `2px solid ${i === idx ? "#a67853" : "rgba(255,255,255,0.25)"}`,
-                background: "rgba(0,0,0,0.4)", cursor: "pointer", padding: 0,
-                transition: "border-color 0.18s", flexShrink: 0,
-              }}>
-              <ImageWithLoader
-                src={url}
-                alt=""
-                style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }}
-              />
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
 }
 
 /* ── Image Carousel ───────────────────────────────────────────────── */

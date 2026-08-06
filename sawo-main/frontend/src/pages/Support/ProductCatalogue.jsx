@@ -5,8 +5,6 @@ import { isAccessoryProduct } from "../IndividualDisplay/DispAccessories";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 const PRODUCT_TYPES = [
   { label: "Sauna Heaters", id: "heaters", type: "heater" },
   { label: "Sauna Rooms", id: "rooms", type: "room" },
@@ -15,8 +13,7 @@ const PRODUCT_TYPES = [
 
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 
 function getImageUrl(product) {

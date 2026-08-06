@@ -78,16 +78,15 @@
 //   const myProducts = visible.filter(p => (p.categories || []).includes("Your Category"));
 //
 // STEP 5 — Resolve image URLs with these helpers (copy into your file):
+//   (all product image fields are already absolute R2 URLs since the
+//   Supabase/R2 migration, so this is just a passthrough for the field-name
+//   fallback — no GITHUB_RAW prefixing needed anymore.)
 //
-//   const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 //   function localOrRemote(product, field) {
 //     return product?.[`local_${field}`] || product?.[field] || null;
 //   }
 //   function getImageUrl(product, field) {
-//     const path = localOrRemote(product, field);
-//     if (!path) return null;
-//     if (path.includes("://")) return path;
-//     return `${GITHUB_RAW}${path}`;
+//     return localOrRemote(product, field);
 //   }
 //
 //   Usage:
@@ -95,7 +94,6 @@
 //     getImageUrl(product, 'images')        → for single image fields
 //   For arrays (images, spec_images):
 //     const arr = product?.local_images || product?.images || [];
-//     const urls = arr.map(p => p.includes("://") ? p : `${GITHUB_RAW}${p}`);
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -269,13 +267,10 @@ function ProductCard({ product }) {
 }
 
 // ─── Build image URL from local path or full URL (mirrors Products.jsx) ───────
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 function getImageUrl(product, field) {
   const path = localOrRemote(product, field);
   if (!path) return null;
-  if (path.includes("://")) return path;
-  return `${GITHUB_RAW}${path}`;
+  return path;
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────

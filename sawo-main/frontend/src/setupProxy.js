@@ -52,4 +52,20 @@ module.exports = function(app) {
       logLevel: 'warn',
     })
   );
+
+  // functions/api/media-upload.js and functions/media/[[path]].js are
+  // Cloudflare Pages Functions — they don't exist under plain `react-scripts
+  // start`, which only serves static CRA output, so image upload/replace/
+  // drag-drop/paste in the CMS 404s with no local Functions runtime. Proxy
+  // them to a real deployed Pages environment instead of standing up
+  // wrangler locally. Override with REACT_APP_MEDIA_UPLOAD_ORIGIN if you
+  // want to point at a different deployment (e.g. a personal preview URL).
+  app.use(
+    ['/api/media-upload', '/media'],
+    createProxyMiddleware({
+      target: process.env.REACT_APP_MEDIA_UPLOAD_ORIGIN || 'https://staging.saworepo1.pages.dev',
+      changeOrigin: true,
+      logLevel: 'warn',
+    })
+  );
 };

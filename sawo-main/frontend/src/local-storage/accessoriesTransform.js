@@ -3,9 +3,13 @@
  *
  * Shared transform: allaccs-data category object -> products.json-shaped
  * accessory records. Pure CommonJS so it loads identically from webpack
- * (named-export interop) and from node (build-accessories.js `require()`),
- * keeping the runtime "jsonfile" source and the offline --merge build from
- * ever diverging.
+ * (named-export interop) and from node (build-accessories.js `require()`).
+ *
+ * Previously also shared with the runtime "jsonfile" data source
+ * (src/local-storage/jsonFileProducts.js), which was removed in the
+ * 2026-08-06 saworepo2 cleanup (see docs/go-live/STORAGE-CURRENT.txt) —
+ * this module's only consumer now is build-accessories.js's offline
+ * --merge build.
  *
  * allaccs category key -> site display category (must match the accessory
  * pages' DISPLAY_CATEGORIES so records show up in the right section).

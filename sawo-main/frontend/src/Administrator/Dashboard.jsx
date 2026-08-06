@@ -16,12 +16,9 @@ const DASHBOARD_CACHE_KEY = "admin:dashboard:v1";
 const RECENT_ACTIVITY_LIMIT = 10;
 const RECENT_PRODUCTS_LIMIT = 8;
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 function resolveImageUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 
 function getThumbnail(product) {

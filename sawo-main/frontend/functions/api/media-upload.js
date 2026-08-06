@@ -60,47 +60,69 @@ function buildKey({ entityPrefix, slug, role, ext, h }) {
 }
 
 export async function onRequestPost({ request, env }) {
-  const url = new URL(request.url);
-  const entityPrefix = url.searchParams.get("entityPrefix");
-  const slug = url.searchParams.get("slug");
-  const role = url.searchParams.get("role");
-  const ext = (url.searchParams.get("ext") || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-  const userId = url.searchParams.get("userId");
+  try {
+    // Misconfigured binding (e.g. R2 bucket attached to the Production
+    // environment only, not Preview/branch deployments) would otherwise
+    // throw deep inside .put() as an opaque, uncaught 500 — check up front
+    // so the client gets a message that actually says what's wrong.
+    if (!env.MEDIA_BUCKET) {
+      return Response.json({ error: "Server misconfigured: MEDIA_BUCKET R2 binding is missing for this environment" }, { status: 500 });
+    }
 
-  if (!ENTITY_PREFIXES.has(entityPrefix)) return Response.json({ error: "Invalid entityPrefix" }, { status: 400 });
-  if (!slug || !SLUG_RE.test(slug)) return Response.json({ error: "Invalid slug" }, { status: 400 });
-  if (!role || !ROLE_RE.test(role)) return Response.json({ error: "Invalid role" }, { status: 400 });
-  if (!ext) return Response.json({ error: "Missing ext" }, { status: 400 });
+    const url = new URL(request.url);
+    const entityPrefix = url.searchParams.get("entityPrefix");
+    const slug = url.searchParams.get("slug");
+    const role = url.searchParams.get("role");
+    const ext = (url.searchParams.get("ext") || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    const userId = url.searchParams.get("userId");
 
-  const uploader = await requireUploader(env, userId);
-  if (!uploader) return Response.json({ error: "Not authorized" }, { status: 403 });
+    if (!ENTITY_PREFIXES.has(entityPrefix)) return Response.json({ error: "Invalid entityPrefix" }, { status: 400 });
+    if (!slug || !SLUG_RE.test(slug)) return Response.json({ error: "Invalid slug" }, { status: 400 });
+    if (!role || !ROLE_RE.test(role)) return Response.json({ error: "Invalid role" }, { status: 400 });
+    if (!ext) return Response.json({ error: "Missing ext" }, { status: 400 });
 
-  const buf = await request.arrayBuffer();
-  if (buf.byteLength === 0) return Response.json({ error: "Empty upload" }, { status: 400 });
-  // 25MB ceiling — generous for a WebP image or a brochure PDF, cheap
-  // insurance against an accidental/abusive giant upload.
-  if (buf.byteLength > 25 * 1024 * 1024) return Response.json({ error: "File too large (25MB max)" }, { status: 413 });
+    const uploader = await requireUploader(env, userId);
+    if (!uploader) return Response.json({ error: "Not authorized" }, { status: 403 });
 
-  const h = await hash8(buf);
-  const key = buildKey({ entityPrefix, slug, role, ext, h });
-  const contentType = EXTENSION_CONTENT_TYPES[ext] || request.headers.get("content-type") || "application/octet-stream";
+    const buf = await request.arrayBuffer();
+    if (buf.byteLength === 0) return Response.json({ error: "Empty upload" }, { status: 400 });
+    // 25MB ceiling — generous for a WebP image or a brochure PDF, cheap
+    // insurance against an accidental/abusive giant upload.
+    if (buf.byteLength > 25 * 1024 * 1024) return Response.json({ error: "File too large (25MB max)" }, { status: 413 });
 
-  await env.MEDIA_BUCKET.put(key, buf, { httpMetadata: { contentType } });
+    const h = await hash8(buf);
+    const key = buildKey({ entityPrefix, slug, role, ext, h });
+    const contentType = EXTENSION_CONTENT_TYPES[ext] || request.headers.get("content-type") || "application/octet-stream";
 
-  const base = new URL(request.url);
-  const publicUrl = `${base.protocol}//${base.host}/media/${key}`;
-  return Response.json({ url: publicUrl, key });
+    await env.MEDIA_BUCKET.put(key, buf, { httpMetadata: { contentType } });
+
+    const base = new URL(request.url);
+    const publicUrl = `${base.protocol}//${base.host}/media/${key}`;
+    return Response.json({ url: publicUrl, key });
+  } catch (err) {
+    console.error("media-upload POST failed:", err);
+    return Response.json({ error: `Upload failed: ${err.message || err}` }, { status: 500 });
+  }
 }
 
 export async function onRequestDelete({ request, env }) {
-  const url = new URL(request.url);
-  const key = url.searchParams.get("key");
-  const userId = url.searchParams.get("userId");
+  try {
+    if (!env.MEDIA_BUCKET) {
+      return Response.json({ error: "Server misconfigured: MEDIA_BUCKET R2 binding is missing for this environment" }, { status: 500 });
+    }
 
-  if (!key) return Response.json({ error: "Missing key" }, { status: 400 });
-  const uploader = await requireUploader(env, userId);
-  if (!uploader) return Response.json({ error: "Not authorized" }, { status: 403 });
+    const url = new URL(request.url);
+    const key = url.searchParams.get("key");
+    const userId = url.searchParams.get("userId");
 
-  await env.MEDIA_BUCKET.delete(key);
-  return Response.json({ ok: true });
+    if (!key) return Response.json({ error: "Missing key" }, { status: 400 });
+    const uploader = await requireUploader(env, userId);
+    if (!uploader) return Response.json({ error: "Not authorized" }, { status: 403 });
+
+    await env.MEDIA_BUCKET.delete(key);
+    return Response.json({ ok: true });
+  } catch (err) {
+    console.error("media-upload DELETE failed:", err);
+    return Response.json({ error: `Delete failed: ${err.message || err}` }, { status: 500 });
+  }
 }

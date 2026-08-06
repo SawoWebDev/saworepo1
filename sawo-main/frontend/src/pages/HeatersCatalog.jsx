@@ -15,12 +15,10 @@ import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/NRM-NB-BL1.webp";
 import HeroWave from "../components/HeroWave";
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
   if (!path) return null;
-  return path.includes("://") ? path : `${GITHUB_RAW}${path}`;
+  return path;
 }
 
 // Series groups — same category keys AllProducts.jsx already uses for its

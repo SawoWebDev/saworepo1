@@ -5,12 +5,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 export function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 
 // Ported from IndividualPages/allaccs-display.html's colorToClass — order

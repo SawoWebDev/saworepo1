@@ -9,28 +9,19 @@ import { useNavigate } from "react-router-dom";
 import { isAccessoryProduct, VARIANT_COLOR_DOT } from "../pages/IndividualDisplay/DispAccessories";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
-// Local/GitHub-sourced products (see useLocalProducts — this modal is fed by
-// Taxonomy and Models, both local-only) store image fields as paths relative
-// to the images repo, not full URLs, same as Products.jsx's own local-mode
-// getImageUrl(). Without this prefix the <img> tag resolves against the
-// current page URL and just breaks.
-const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
 }
 
 function resolveImageUrl(product, field) {
-  const imgPath = localOrRemote(product, field);
-  if (!imgPath) return null;
-  if (imgPath.includes("://")) return imgPath;
-  return `${PREVIEW_GITHUB_RAW}${imgPath}`;
+  return localOrRemote(product, field);
 }
 
 function resolveImgsArr(product, field) {
   const val = localOrRemote(product, field);
   if (!val || !Array.isArray(val)) return [];
-  return val.map(u => (u.includes("://") ? u : `${PREVIEW_GITHUB_RAW}${u}`)).filter(Boolean);
+  return val.filter(Boolean);
 }
 
 function cleanHTML(html) {
@@ -74,7 +65,7 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
   const gallery = resolveImgsArr(product, "images");
   const variantColors = (product.variants || []).filter(v => v.color || v.code);
   const variantImages = variantColors
-    .map(v => (v.image ? (v.image.includes("://") ? v.image : `${PREVIEW_GITHUB_RAW}${v.image}`) : null))
+    .map(v => (v.image || null))
     .filter(Boolean);
   const all = [...new Set([...(thumb ? [thumb] : []), ...gallery, ...variantImages])].filter(Boolean);
 
@@ -149,7 +140,7 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 12, background: "#faf7f4", borderRadius: 10, border: "1px solid #edddd0" }}>
                   <div style={{ display: "flex", gap: 8 }}>
                     {variantColors.map((v, i) => {
-                      const vImg = v.image ? (v.image.includes("://") ? v.image : `${PREVIEW_GITHUB_RAW}${v.image}`) : null;
+                      const vImg = v.image || null;
                       const active = vImg && vImg === all[idx];
                       return (
                         <button key={i} type="button" title={v.color}

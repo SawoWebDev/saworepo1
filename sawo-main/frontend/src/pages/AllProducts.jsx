@@ -7,8 +7,6 @@ import ScrollToTop from "../components/ScrollToTop";
 import SEO from "../components/SEO";
 import { isPubliclyVisible } from "../local-storage/visibility";
 
-const GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
-
 const HEATER_SECTIONS = [
   { label: "Wall-Mounted", id: "heater-wall-mounted", category: "wall-mounted" },
   { label: "Tower",        id: "heater-tower",        category: "tower" },
@@ -42,8 +40,7 @@ const CATEGORY_SECTIONS = [
 
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
-  if (String(pathOrUrl).includes("://")) return pathOrUrl;
-  return `${GITHUB_RAW}${pathOrUrl}`;
+  return pathOrUrl;
 }
 
 function getImageUrl(product) {
