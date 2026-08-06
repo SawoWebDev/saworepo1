@@ -517,44 +517,32 @@ function RichField({ label, value, onChange, rows = 6, onNotify }) {
     }
   };
 
-  const syncFromTextarea = () => {
-    if (editorRef.current && textareaRef.current) {
-      editorRef.current.innerHTML = textareaRef.current.value;
-      setTimeout(autoExpandEditor, 0);
-    }
-  };
-
-  const syncToTextarea = () => {
-    if (textareaRef.current && editorRef.current) {
-      textareaRef.current.value = editorRef.current.innerHTML;
-    }
-  };
-
   return (
     <div className="form-group" style={{ marginBottom: 0 }}>
       <div className="rich-field-header">
         {label && <label className="form-label" style={{ marginBottom: 0 }}>{label}</label>}
         <div className="rich-field-modes">
           {["text", "html"].map(m => (
-            <button key={m} type="button" onClick={() => {
-              if (mode === "html" && m === "text") syncToTextarea();
-              if (mode === "text" && m === "html") syncFromTextarea();
-              setMode(m);
-            }}
+            <button key={m} type="button" onClick={() => setMode(m)}
               className={`rich-field-mode-btn${mode === m ? " active" : ""}`}>{m}</button>
           ))}
         </div>
       </div>
+      {/* Both stay mounted (CSS-toggled, not conditionally rendered) and share
+          the same value/onChange, so editing in either one flows through the
+          parent's state and back down to the other automatically — no manual
+          sync step needed when switching modes. "Text" is the default and
+          shows the rendered view (existing HTML content renders as actual
+          formatting, not visible tags); "HTML" shows the raw markup source. */}
       <textarea
         ref={textareaRef}
         value={value} onChange={onChange} rows={rows}
         onPaste={handlePaste}
-        placeholder={mode === "html" ? "<p>Enter HTML here...</p>" : "Enter plain text description..."}
+        placeholder="<p>Enter HTML here...</p>"
         className="form-textarea"
-        style={{ fontFamily: mode === "html" ? "monospace" : "var(--font)", marginTop: 4, display: mode === "text" ? "block" : "none" }}
+        style={{ fontFamily: "monospace", marginTop: 4, display: mode === "html" ? "block" : "none" }}
       />
-      {mode === "html" && (
-        <>
+      <div style={{ display: mode === "text" ? "block" : "none" }}>
           <div style={{ fontSize: "0.75rem", color: "#666", marginTop: 6 }}>
             💡 Paste WordPress tables directly and they'll auto-format! kW values &amp; model codes will be auto-tagged on Save.
           </div>
@@ -616,8 +604,7 @@ function RichField({ label, value, onChange, rows = 6, onNotify }) {
               }}
             />
           </div>
-        </>
-      )}
+      </div>
     </div>
   );
 }
