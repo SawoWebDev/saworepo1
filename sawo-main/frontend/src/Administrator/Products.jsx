@@ -742,6 +742,43 @@ function Toggle({ label, checked, onChange, helper }) {
   );
 }
 
+// Shared by every bullet-list paste target (PillInput's Features field, and
+// any other pasted list) — copy-pasted bullet text from a source site often
+// hard-wraps one bullet across two lines (no marker on the continuation
+// line), e.g.:
+//   » Piping and electrical cables can be
+//       installed in either side
+// A naive split-by-newline turns that into two broken half-features. This
+// walks lines and only starts a NEW item at a bullet marker; any line
+// without one gets merged onto the previous item instead.
+function parseBulletPaste(text, existingValues = []) {
+  const rawLines = text.split(/\r?\n/);
+  const bulletPattern = /^[»•\-*+]\s*/;
+  const hasBullets = rawLines.some(l => bulletPattern.test(l.trim()));
+
+  if (!hasBullets) {
+    return rawLines.map(l => l.trim()).filter(l => l && !existingValues.includes(l));
+  }
+
+  const items = [];
+  let current = null;
+  for (const raw of rawLines) {
+    const line = raw.trim();
+    if (!line) continue;
+    if (bulletPattern.test(line)) {
+      if (current !== null) items.push(current);
+      current = line.replace(bulletPattern, "").trim();
+    } else if (current !== null) {
+      current = `${current} ${line}`.replace(/\s+/g, " ").trim();
+    } else {
+      items.push(line);
+    }
+  }
+  if (current !== null) items.push(current);
+
+  return items.filter(l => l && !existingValues.includes(l));
+}
+
 function PillInput({ label, value = [], onChange, placeholder, suggestions = [] }) {
   const [input, setInput]     = useState("");
   const [showSug, setShowSug] = useState(false);
@@ -757,28 +794,11 @@ function PillInput({ label, value = [], onChange, placeholder, suggestions = [] 
     if (e.key === "Escape")   setShowSug(false);
   };
   const handlePaste = e => {
-    e.preventDefault();
     const text = e.clipboardData?.getData("text/plain") || "";
     if (!text.trim()) return;
+    e.preventDefault();
 
-    // Split by newlines and filter out empty lines
-    const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l);
-
-    // Check if lines have bullet points (», •, -, *, etc.)
-    const bulletPattern = /^[»•\-*+]\s+/;
-    const hasBullets = lines.some(l => bulletPattern.test(l));
-
-    let newFeatures = [];
-    if (hasBullets) {
-      // Parse lines with bullets
-      newFeatures = lines
-        .map(l => l.replace(bulletPattern, "").trim())
-        .filter(l => l && !value.includes(l));
-    } else {
-      // If no bullets, treat each non-empty line as a feature
-      newFeatures = lines.filter(l => l && !value.includes(l));
-    }
-
+    const newFeatures = parseBulletPaste(text, value);
     if (newFeatures.length > 0) {
       onChange([...value, ...newFeatures]);
       setInput("");
@@ -2629,19 +2649,22 @@ function SpecTableManager({ specTable, onChange }) {
   );
 }
 
-// ─── Heating Element Groups Manager ─────────────────────────────────────────
-// Edits the `heating_element_groups` JSONB column — [{ label, image, features
-// (bullet list), spec_table: { headers, rows } }, ...]. For products whose
-// variants aren't simple SKU swaps (VariantManager) but grouped configurations
-// each with their own photo, marketing bullets, and technical-data table —
-// e.g. a steam generator's "2 / 3 / 6 Heating Elements" options, each with a
-// different power range and its own set of model rows. See DispProduct.jsx's
-// heatingGroups rendering for the live-page counterpart.
+// ─── Configuration Groups Manager ───────────────────────────────────────────
+// Edits the `heating_element_groups` JSONB column — [{ label, image,
+// description, features (bullet list), spec_table: { headers, rows } }, ...].
+// Entirely optional (starts empty, nothing renders on the live page until a
+// group is added): for products whose variants aren't simple SKU swaps
+// (VariantManager) but grouped configurations, each with any mix of its own
+// photo, blurb, marketing bullets, and technical-data table — e.g. a steam
+// generator's "2 / 3 / 6 Heating Elements" options, each with a different
+// power range and its own set of model rows. Every field per group is
+// optional too — use only the ones a given group actually needs. See
+// DispProduct.jsx's heatingGroups rendering for the live-page counterpart.
 function HeatingGroupsManager({ groups = [], onChange, addToast, slug, currentUser }) {
   const [uploadingIdx, setUploadingIdx] = useState(null);
 
   const setGroup = (idx, patch) => onChange(groups.map((g, i) => i === idx ? { ...g, ...patch } : g));
-  const addGroup = () => onChange([...groups, { label: "", image: "", features: [], spec_table: null }]);
+  const addGroup = () => onChange([...groups, { label: "", image: "", description: "", features: [], spec_table: null }]);
   const removeGroup = idx => onChange(groups.filter((_, i) => i !== idx));
 
   const handleImageUpload = async (file, idx) => {
@@ -2663,29 +2686,32 @@ function HeatingGroupsManager({ groups = [], onChange, addToast, slug, currentUs
       {groups.map((g, idx) => (
         <div key={idx} style={{
           background: "var(--surface-2)", border: "1px solid var(--border)",
-          borderRadius: "var(--r-sm)", padding: 14, display: "flex", flexDirection: "column", gap: 10,
+          borderRadius: "var(--r-sm)", padding: 14, display: "flex", flexDirection: "column", gap: 12,
         }}>
           <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
             <VariantImageSlot image={g.image} uploading={uploadingIdx === idx} onFile={file => handleImageUpload(file, idx)} size={80} />
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
-              <input type="text" value={g.label || ""} placeholder="Group label (e.g., 3 Heating Elements)"
+              <input type="text" value={g.label || ""} placeholder="Group title (e.g., 3 Heating Elements) — optional"
                 onChange={e => setGroup(idx, { label: e.target.value })}
                 className="form-input" style={{ fontSize: "0.85rem", fontWeight: 600 }} />
-              <textarea value={(g.features || []).join("\n")} placeholder={"One feature bullet per line, e.g.\nPower range: 4.5 – 7.5kW\nSteam output: up to 7.5kg/hr"}
-                onChange={e => setGroup(idx, { features: e.target.value.split("\n").map(s => s.trim()).filter(Boolean) })}
-                className="form-input" rows={4} style={{ fontSize: "0.78rem", resize: "vertical", fontFamily: "inherit" }} />
+              <textarea value={g.description || ""} placeholder="Short description (optional) — free-text blurb shown above the feature list"
+                onChange={e => setGroup(idx, { description: e.target.value })}
+                className="form-input" rows={2} style={{ fontSize: "0.8rem", resize: "vertical", fontFamily: "inherit" }} />
             </div>
             <button type="button" onClick={() => removeGroup(idx)} title="Remove group"
               style={{ background: "var(--danger)", color: "white", border: "none", borderRadius: "var(--r-sm)", padding: "6px 8px", cursor: "pointer", fontSize: "0.8rem" }}>
               <i className="fa-solid fa-trash" />
             </button>
           </div>
-          <div style={{ paddingLeft: 92 }}>
+          <div style={{ paddingLeft: 92, display: "flex", flexDirection: "column", gap: 12 }}>
+            <PillInput label="Features (optional)" value={g.features || []}
+              onChange={v => setGroup(idx, { features: v })}
+              placeholder="Type and press Enter, or paste a bulleted list…" />
             <SpecTableManager specTable={g.spec_table} onChange={t => setGroup(idx, { spec_table: t })} />
           </div>
         </div>
       ))}
-      <Btn label="+ Add Heating Element Group" variant="secondary" size="sm" onClick={addGroup} />
+      <Btn label="+ Add Configuration Group" variant="secondary" size="sm" onClick={addGroup} />
     </div>
   );
 }
@@ -4027,11 +4053,15 @@ export default function Products({ currentUser }) {
           <SectionLabel label="Specifications Table" />
           <SpecTableManager specTable={form.spec_table} onChange={t => setForm(f => ({ ...f, spec_table: t }))} />
 
-          {/* Heating Element Groups — grouped configuration options (e.g. a
-              steam generator's "2 / 3 / 6 Heating Elements"), each with its
-              own photo, feature bullets, and technical-data table. Separate
-              from the single Specifications Table above. */}
-          <SectionLabel label="Heating Element Groups" />
+          {/* Configuration Groups — entirely optional grouped configuration
+              options (e.g. a steam generator's "2 / 3 / 6 Heating Elements"),
+              each with any mix of its own photo, blurb, feature bullets, and
+              technical-data table. Separate from the single Specifications
+              Table above, and from VariantManager's flat SKU list. */}
+          <SectionLabel label="Configuration Groups (optional)" />
+          <p style={{ fontSize: "0.78rem", color: "var(--text-3)", margin: "-6px 0 10px" }}>
+            Only needed for products with grouped configuration options (photo + bullets + table per option, e.g. heating-element counts). Leave empty otherwise.
+          </p>
           <HeatingGroupsManager groups={form.heating_element_groups} onChange={v => setForm(f => ({ ...f, heating_element_groups: v }))} addToast={add} slug={effectiveSlug(form)} currentUser={currentUser} />
 
           {/* Features ← above Short Description */}

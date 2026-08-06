@@ -598,7 +598,7 @@ export default function ProductPage() {
     })
   );
   const hasResources = files.length > 0;
-  const heatingGroups = (product.heating_element_groups || []).filter(g => g && (g.label || g.spec_table || g.features?.length));
+  const heatingGroups = (product.heating_element_groups || []).filter(g => g && (g.label || g.description || g.spec_table || g.features?.length));
   const hasHeatingGroups = heatingGroups.length > 0;
   const hasSection2  = hasDesc || hasSpecTable || hasHeatingGroups;
 
@@ -885,6 +885,9 @@ export default function ProductPage() {
                         <div style={{ flex: "1 1 260px", minWidth: 220 }}>
                           {group.label && (
                             <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 12px" }}>{group.label}</h4>
+                          )}
+                          {group.description && (
+                            <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7, margin: "0 0 12px" }}>{group.description}</p>
                           )}
                           {(group.features || []).length > 0 && (
                             <ul style={{ listStyle: "none", margin: "0 0 16px", padding: 0, fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7 }}>
