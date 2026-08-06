@@ -845,24 +845,33 @@ export default function ProductPage() {
               {hasSpecTable && (
                 <div>
                   <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
-                  <div style={{ overflowX: "auto" }}>
-                    <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                  {/* min-width scales with column count, same as the admin
+                      Specifications Table editor — long multi-word headers
+                      (e.g. "Minimum Safety Distances A|B|C|D") get room to
+                      wrap onto 2 lines instead of squeezing every column
+                      down to unreadable widths. */}
+                  <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+                    <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
-                        <tr style={{ background: "#faf7f4" }}>
+                        <tr style={{ background: "linear-gradient(135deg,#8b5e3c,#a67853)" }}>
                           {specHeaders.map((h, i) => (
                             <th key={i} style={{
-                              padding: "9px 14px", textAlign: "left", color: "#8b5e3c",
-                              fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase",
-                              letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap",
+                              padding: "10px 14px", textAlign: "center", color: "#fff",
+                              fontWeight: 700, fontSize: "0.66rem", textTransform: "uppercase",
+                              letterSpacing: "0.06em", lineHeight: 1.4,
+                              borderRight: i < specHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
                             }}>{h}</th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
                         {specRows.map((row, ri) => (
-                          <tr key={ri} style={{ borderBottom: ri < specRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                          <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
                             {specHeaders.map((h, ci) => (
-                              <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{specCell(row, h, ci) || "–"}</td>
+                              <td key={ci} style={{
+                                padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
+                                borderRight: ci < specHeaders.length - 1 ? "1px solid #edddd0" : "none",
+                              }}>{specCell(row, h, ci) || "–"}</td>
                             ))}
                           </tr>
                         ))}
@@ -908,24 +917,28 @@ export default function ProductPage() {
                           )}
                         </div>
                         {gHasTable && (
-                          <div style={{ width: "100%", overflowX: "auto" }}>
-                            <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                          <div style={{ width: "100%", overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+                            <table style={{ width: "100%", minWidth: Math.max(360, gHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                               <thead>
-                                <tr style={{ background: "#faf7f4" }}>
+                                <tr style={{ background: "linear-gradient(135deg,#8b5e3c,#a67853)" }}>
                                   {gHeaders.map((h, i) => (
                                     <th key={i} style={{
-                                      padding: "9px 14px", textAlign: "left", color: "#8b5e3c",
-                                      fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase",
-                                      letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap",
+                                      padding: "10px 14px", textAlign: "center", color: "#fff",
+                                      fontWeight: 700, fontSize: "0.66rem", textTransform: "uppercase",
+                                      letterSpacing: "0.06em", lineHeight: 1.4,
+                                      borderRight: i < gHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
                                     }}>{h}</th>
                                   ))}
                                 </tr>
                               </thead>
                               <tbody>
                                 {gRows.map((row, ri) => (
-                                  <tr key={ri} style={{ borderBottom: ri < gRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                                  <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
                                     {gHeaders.map((h, ci) => (
-                                      <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{specCell(row, h, ci) || "–"}</td>
+                                      <td key={ci} style={{
+                                        padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
+                                        borderRight: ci < gHeaders.length - 1 ? "1px solid #edddd0" : "none",
+                                      }}>{specCell(row, h, ci) || "–"}</td>
                                     ))}
                                   </tr>
                                 ))}
