@@ -6,12 +6,12 @@ import { getCache, setCache } from "./adminCache";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
+import { processPastedTableHTML } from "../utils/cleanTableHTML";
 
 const ROOMS_CACHE_KEY = "admin:sauna-rooms:live";
 const ROOMS_META_CACHE_KEY = "admin:sauna-rooms:live:meta";
 
 const FRONT_URL = process.env.REACT_APP_FRONT_URL || "";
-const PREVIEW_GITHUB_RAW = `https://raw.githubusercontent.com/${process.env.REACT_APP_GITHUB_OWNER || "jmesrafael"}/${process.env.REACT_APP_IMAGES_REPO || "saworepo2"}/main/`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function getRoomImageUrl(room, field) {
@@ -511,9 +511,113 @@ function JsonEditor({ label, value, onChange, placeholder, helper, rows = 6 }) {
   );
 }
 
-// ─── RichField (simple textarea + html mode) ──────────────────────────────────
-function RichField({ label, value, onChange, rows = 6 }) {
+// ─── RichField (WYSIWYG editor + raw HTML source toggle) ──────────────────────
+function RichField({ label, value, onChange, rows = 6, onNotify }) {
   const [mode, setMode] = useState("text");
+  const textareaRef = useRef(null);
+  const editorRef = useRef(null);
+
+  // dangerouslySetInnerHTML on a contentEditable re-applies the HTML on
+  // every render, which resets the caret to the start of the element even
+  // when the content hasn't actually changed — every keystroke landed back
+  // at position 0. Set the DOM imperatively instead, and only when the
+  // value actually differs from what's already there (i.e. it changed from
+  // outside — switching rooms, or typing in the raw-HTML textarea — not
+  // from this element's own onInput echoing straight back).
+  useEffect(() => {
+    if (editorRef.current && (value || "") !== editorRef.current.innerHTML) {
+      editorRef.current.innerHTML = value || "";
+    }
+  }, [value]);
+
+  const cleanPastedHTML = (html) => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+
+    const comments = temp.querySelectorAll("*");
+    comments.forEach(el => {
+      if (el.nodeType === 8) el.remove();
+    });
+
+    const allElements = temp.querySelectorAll("*");
+    allElements.forEach(el => {
+      const allowedTags = ["P", "DIV", "BR", "B", "STRONG", "I", "EM", "U", "H1", "H2", "H3", "H4", "H5", "H6", "OL", "UL", "LI", "TABLE", "THEAD", "TBODY", "TR", "TH", "TD", "SPAN"];
+
+      if (!allowedTags.includes(el.tagName)) {
+        const parent = el.parentNode;
+        while (el.firstChild) {
+          parent.insertBefore(el.firstChild, el);
+        }
+        parent.removeChild(el);
+      } else {
+        const oldStyle = el.getAttribute("style") || "";
+        const alignMatch = oldStyle.match(/text-align:\s*(left|center|right|justify)/);
+
+        Array.from(el.attributes).forEach(attr => {
+          el.removeAttribute(attr.name);
+        });
+
+        if (alignMatch) {
+          el.setAttribute("style", `text-align: ${alignMatch[1]};`);
+        }
+      }
+    });
+
+    let result = temp.innerHTML;
+    result = result.replace(/&nbsp;/g, " ");
+    result = result.replace(/<!--.*?-->/g, "");
+
+    return result;
+  };
+
+  const handlePaste = (e) => {
+    if (!editorRef.current?.contains(e.target)) return;
+
+    const html = e.clipboardData.getData("text/html");
+    const text = e.clipboardData.getData("text/plain");
+    if (!html && !text) return;
+
+    e.preventDefault();
+
+    let contentToInsert = html || text;
+
+    if (/<table/i.test(contentToInsert)) {
+      contentToInsert = processPastedTableHTML(contentToInsert);
+      if (onNotify) onNotify("✓ Table cleaned and formatted! kW tags will be auto-extracted on Save.", "success");
+    } else if (contentToInsert.includes("<")) {
+      contentToInsert = cleanPastedHTML(contentToInsert);
+    }
+
+    document.execCommand("insertHTML", false, contentToInsert);
+
+    setTimeout(() => {
+      if (editorRef.current) {
+        onChange({ target: { value: editorRef.current.innerHTML } });
+        autoExpandEditor();
+      }
+    }, 0);
+  };
+
+  const execCommand = (cmd, value = null) => {
+    document.execCommand(cmd, false, value);
+    editorRef.current?.focus();
+  };
+
+  const handleEditorChange = () => {
+    if (editorRef.current) {
+      onChange({ target: { value: editorRef.current.innerHTML } });
+      autoExpandEditor();
+    }
+  };
+
+  const autoExpandEditor = () => {
+    if (editorRef.current) {
+      editorRef.current.style.height = "auto";
+      const scrollHeight = editorRef.current.scrollHeight;
+      editorRef.current.style.height = Math.max(150, scrollHeight + 4) + "px";
+    }
+  };
+
   return (
     <div className="form-group" style={{ marginBottom: 0 }}>
       <div className="rich-field-header">
@@ -525,12 +629,80 @@ function RichField({ label, value, onChange, rows = 6 }) {
           ))}
         </div>
       </div>
+      {/* Both stay mounted (CSS-toggled, not conditionally rendered) and share
+          the same value/onChange, so editing in either one flows through the
+          parent's state and back down to the other automatically — no manual
+          sync step needed when switching modes. "Text" is the default and
+          shows the rendered view (existing HTML content renders as actual
+          formatting, not visible tags); "HTML" shows the raw markup source. */}
       <textarea
+        ref={textareaRef}
         value={value} onChange={onChange} rows={rows}
-        placeholder={mode === "html" ? "<p>Enter HTML here...</p>" : "Enter description..."}
+        onPaste={handlePaste}
+        placeholder="<p>Enter HTML here...</p>"
         className="form-textarea"
-        style={{ fontFamily: mode === "html" ? "monospace" : "var(--font)", marginTop: 4 }}
+        style={{ fontFamily: "monospace", marginTop: 4, display: mode === "html" ? "block" : "none" }}
       />
+      <div style={{ display: mode === "text" ? "block" : "none" }}>
+        <div className="rich-field-preview" style={{ marginTop: 4 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10, paddingBottom: 8, borderBottom: "1px solid var(--border)" }}>
+            <p className="rich-field-preview-label" style={{ margin: 0 }}>Editor</p>
+            <div style={{ display: "flex", gap: 4, flexWrap: "wrap", flex: 1 }}>
+              <button type="button" onClick={() => execCommand("bold")} title="Bold (Ctrl+B)" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-bold" />
+              </button>
+              <button type="button" onClick={() => execCommand("italic")} title="Italic (Ctrl+I)" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-italic" />
+              </button>
+              <button type="button" onClick={() => execCommand("underline")} title="Underline (Ctrl+U)" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-underline" />
+              </button>
+              <div style={{ width: 1, background: "var(--border)", margin: "0 4px" }} />
+              <button type="button" onClick={() => execCommand("justifyLeft")} title="Align Left" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-align-left" />
+              </button>
+              <button type="button" onClick={() => execCommand("justifyCenter")} title="Align Center" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-align-center" />
+              </button>
+              <button type="button" onClick={() => execCommand("justifyRight")} title="Align Right" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-align-right" />
+              </button>
+              <div style={{ width: 1, background: "var(--border)", margin: "0 4px" }} />
+              <button type="button" onClick={() => execCommand("insertUnorderedList")} title="Bullet List" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-list-ul" />
+              </button>
+              <button type="button" onClick={() => execCommand("insertOrderedList")} title="Numbered List" style={{ padding: "4px 8px", fontSize: "0.8rem", background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: "var(--r-sm)", cursor: "pointer" }}>
+                <i className="fa-solid fa-list-ol" />
+              </button>
+            </div>
+          </div>
+          <div
+            ref={editorRef}
+            contentEditable
+            suppressContentEditableWarning
+            onInput={handleEditorChange}
+            onBlur={handleEditorChange}
+            onPaste={handlePaste}
+            style={{
+              padding: 12,
+              borderRadius: "var(--r)",
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              minHeight: 150,
+              height: "auto",
+              fontFamily: "var(--font)",
+              fontSize: "0.95rem",
+              lineHeight: 1.6,
+              color: "var(--text)",
+              outline: "none",
+              overflowY: "auto",
+              resize: "none",
+              wordWrap: "break-word",
+              whiteSpace: "pre-wrap",
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -2201,7 +2373,7 @@ export default function SaunaRooms({ currentUser }) {
                   </div>
 
                   <SectionLabel label="Short Description" />
-                  <RichField value={form.short_description} onChange={e => setForm(f => ({ ...f, short_description: e.target.value }))} rows={3} />
+                  <RichField value={form.short_description} onChange={e => setForm(f => ({ ...f, short_description: e.target.value }))} rows={3} onNotify={add} />
                 </>
               )}
 
@@ -2283,7 +2455,7 @@ export default function SaunaRooms({ currentUser }) {
               {activeTab === "content" && (
                 <>
                   <SectionLabel label="Full Description / Specifications" />
-                  <RichField value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={10} />
+                  <RichField value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={10} onNotify={add} />
 
                   <SectionLabel label="Features" />
                   <PillInput label="Key Features" value={form.features} onChange={v => setForm(f => ({ ...f, features: v }))}
