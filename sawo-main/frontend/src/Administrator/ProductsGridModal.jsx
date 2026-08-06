@@ -89,6 +89,49 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
         @keyframes pgmPreviewFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         .pgm-preview-modal { animation: pgmPreviewFade 0.2s ease; }
         @media(max-width:720px) { .pgm-preview-s1 { grid-template-columns: 1fr !important; gap: 20px !important; } }
+
+        /* product.description's raw HTML renders as-is below (dangerously
+           SetInnerHTML, no wrapper styling) — for products migrated from
+           WordPress that HTML is often itself a pasted <table>, which
+           previously rendered with zero styling. Matches the live page's
+           .pp-richtext table treatment (see DispProduct.jsx) and the main
+           Products.jsx preview modal's .pp-preview-richtext. */
+        .pgm-preview-richtext table {
+          width: 100%;
+          min-width: max-content;
+          border-collapse: collapse;
+          margin: 12px 0;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.8rem;
+          background-color: #fff;
+          border: 1px solid #d5b99a;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .pgm-preview-richtext table th {
+          background: linear-gradient(135deg,#8b5e3c,#a67853);
+          color: #fff;
+          font-weight: 700;
+          padding: 10px 14px;
+          text-align: center;
+          border-right: 1px solid rgba(255,255,255,0.25);
+          font-size: 0.66rem;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          line-height: 1.4;
+        }
+        .pgm-preview-richtext table th:last-child { border-right: none; }
+        .pgm-preview-richtext table td {
+          padding: 8px 14px;
+          color: #5a4030;
+          border-bottom: 1px solid #edddd0;
+          border-right: 1px solid #edddd0;
+          text-align: center;
+          font-size: 0.8rem;
+        }
+        .pgm-preview-richtext table td:last-child { border-right: none; }
+        .pgm-preview-richtext table tbody tr:nth-child(even) { background-color: #faf7f4; }
+        .pgm-preview-richtext table tbody tr:last-child td { border-bottom: none; }
       `}</style>
 
       <div
@@ -201,7 +244,7 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
         {hasDesc && (
           <>
             <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 28px" }} />
-            <div style={{ padding: "18px 28px", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }} dangerouslySetInnerHTML={{ __html: cleanHTML(product.description) }} />
+            <div className="pgm-preview-richtext" style={{ padding: "18px 28px", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word", maxWidth: "100%", overflowX: "auto" }} dangerouslySetInnerHTML={{ __html: cleanHTML(product.description) }} />
           </>
         )}
 
