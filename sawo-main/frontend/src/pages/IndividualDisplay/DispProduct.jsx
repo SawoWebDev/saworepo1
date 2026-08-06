@@ -598,7 +598,9 @@ export default function ProductPage() {
     })
   );
   const hasResources = files.length > 0;
-  const hasSection2  = hasDesc || hasSpecTable;
+  const heatingGroups = (product.heating_element_groups || []).filter(g => g && (g.label || g.spec_table || g.features?.length));
+  const hasHeatingGroups = heatingGroups.length > 0;
+  const hasSection2  = hasDesc || hasSpecTable || hasHeatingGroups;
 
   // Plain-text meta description from whichever product copy is available —
   // short_description/description are HTML (rendered via dangerouslySetInnerHTML
@@ -860,6 +862,70 @@ export default function ProductPage() {
                       </tbody>
                     </table>
                   </div>
+                </div>
+              )}
+
+              {/* Heating Element Group Options — e.g. "2/3/6 Heating Elements"
+                  variants of a steam generator, each with its own photo,
+                  feature bullets, and technical-data table (product.heating_
+                  element_groups). Independent of the single spec_table above,
+                  which stays for products that only need one flat table. */}
+              {hasHeatingGroups && (
+                <div style={{ marginTop: hasDesc || hasSpecTable ? 40 : 0, display: "flex", flexDirection: "column", gap: 36 }}>
+                  {heatingGroups.map((group, gi) => {
+                    const gHeaders = group.spec_table?.headers || [];
+                    const gRows    = group.spec_table?.rows || [];
+                    const gHasTable = gHeaders.length > 0 && gRows.length > 0;
+                    return (
+                      <div key={gi} style={{ display: "flex", flexWrap: "wrap", gap: 28, alignItems: "flex-start" }}>
+                        {group.image && (
+                          <img src={group.image} alt={group.label || `Heating element option ${gi + 1}`}
+                            style={{ width: 220, maxWidth: "100%", height: "auto", flexShrink: 0, margin: "0 auto" }} />
+                        )}
+                        <div style={{ flex: "1 1 260px", minWidth: 220 }}>
+                          {group.label && (
+                            <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 12px" }}>{group.label}</h4>
+                          )}
+                          {(group.features || []).length > 0 && (
+                            <ul style={{ listStyle: "none", margin: "0 0 16px", padding: 0, fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7 }}>
+                              {group.features.map((f, fi) => (
+                                <li key={fi} style={{ display: "flex", gap: 8 }}>
+                                  <span style={{ color: "#8b5e3c", flexShrink: 0 }}>»</span>
+                                  <span>{f}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                        {gHasTable && (
+                          <div style={{ width: "100%", overflowX: "auto" }}>
+                            <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                              <thead>
+                                <tr style={{ background: "#faf7f4" }}>
+                                  {gHeaders.map((h, i) => (
+                                    <th key={i} style={{
+                                      padding: "9px 14px", textAlign: "left", color: "#8b5e3c",
+                                      fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase",
+                                      letterSpacing: "0.07em", borderBottom: "1px solid #edddd0", whiteSpace: "nowrap",
+                                    }}>{h}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {gRows.map((row, ri) => (
+                                  <tr key={ri} style={{ borderBottom: ri < gRows.length - 1 ? "1px solid #f5ede3" : "none" }}>
+                                    {gHeaders.map((h, ci) => (
+                                      <td key={ci} style={{ padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem" }}>{specCell(row, h, ci) || "–"}</td>
+                                    ))}
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
