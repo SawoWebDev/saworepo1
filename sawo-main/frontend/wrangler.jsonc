@@ -1,9 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sawo-frontend",
-  "compatibility_date": "2026-07-28",
+  "name": "saworeact",
+  "compatibility_date": "2026-08-06",
   "assets": {
     "directory": "./build",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "r2_buckets": [
+    { "binding": "MEDIA_BUCKET", "bucket_name": "sawo-media" }
+  ]
 }

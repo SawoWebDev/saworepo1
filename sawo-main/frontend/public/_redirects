@@ -35,10 +35,10 @@
 # ============================================================================
 
 # ---- HIGH PRIORITY (external backlinks) ------------------------------------
-/contact/                                                301
-/privacy-policy/                                         301
+/contact/                                                /contact                        301
+/privacy-policy/                                         /privacy-policy                 301
 /finnish-sauna/sauna-heaters/            /sauna/heaters   301
-/careers/                                                301
+/careers/                                                /careers                        301
 # NOTE: "/" needs no redirect — same URL on both sites.
 
 # ---- SAUNA / HEATERS --------------------------------------------------------
@@ -244,12 +244,13 @@
 /voltage/33-0kw/   /sauna/heaters  301
 /voltage/36-0kw/   /sauna/heaters  301
 
-# ---- SPA CATCH-ALL (must stay LAST — do not reorder above this line) -----------
-# Cloudflare Pages serves build/index.html for any unmatched static path by
-# default for SPA-shaped projects, but being explicit here avoids relying on
-# that default and keeps this file the single source of truth for routing.
-# Using 200 (not 301) — this is a REWRITE (serve index.html, keep the URL and
-# let React Router take over), not a redirect. See SEO-GO-LIVE-CHECKLIST.md
-# Scenario 13 for why this still returns unmatched paths as a 200 status
-# (soft-404 risk) and what to do about it.
-/*    /index.html   200
+# ---- SPA CATCH-ALL ---------------------------------------------------------
+# NOTE: this used to end with an explicit `/* /index.html 200` rewrite rule.
+# On the Workers Static Assets deploy target (see wrangler.jsonc), that rule
+# is not just redundant but actively rejected at deploy time — Cloudflare's
+# _redirects validator treats "strip .html/-index then re-match /*" as an
+# infinite loop. SPA fallback is instead handled by
+# `assets.not_found_handling: "single-page-application"` in wrangler.jsonc,
+# which serves index.html for any unmatched path without going through
+# _redirects at all. See SEO-GO-LIVE-CHECKLIST.md Scenario 13 for the
+# soft-404 tradeoff this still carries (same as before, different mechanism).

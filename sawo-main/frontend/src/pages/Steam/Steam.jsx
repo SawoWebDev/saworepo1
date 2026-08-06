@@ -1,86 +1,65 @@
 // Steam.jsx
 
-import React from "react";
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 import heroBg from "../../assets/Steam/hero.webp";
-import stnS from "../../assets/Steam/Steam Generators/STN-S.webp";
-import stnW from "../../assets/Steam/Steam Generators/STN-W.webp";
-import stn from "../../assets/Steam/Steam Generators/STN.webp";
-import ste from "../../assets/Steam/Steam Generators/STE.webp";
-import steControl from "../../assets/Steam/STE-INFACE-V2-150x150.webp";
-import stpV2 from "../../assets/Steam/STP-INFACE-V2-300x330.webp";
-import stpSST from "../../assets/Steam/STP-INFACE-SST-310x179.webp";
-import steamDoor from "../../assets/Steam/steam-door.webp";
-import installStand from "../../assets/Steam/Installation-stand.webp";
-import aromaPump from "../../assets/Steam/aroma-pump.webp";
-import demandButton from "../../assets/Steam/demand-button.webp";
-import venturiL from "../../assets/Steam/venturi-pipe-L-shape.webp";
-import venturiStraight from "../../assets/Steam/venturi-pipe-straight.webp";
 import HeroWave from "../../components/HeroWave";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import menuPaths from "../../menuPaths";
 
-const generators = [
-  {
-    img: stnS,
-    title: "STN-S Steam Generator",
-    desc: "The STN-S offers advanced steam control technology for residential and commercial steam rooms. Featuring precise digital controls and reliable performance, it delivers a consistently luxurious steam experience tailored to your needs.",
-  },
-  {
-    img: stnW,
-    title: "STN-W Steam Generator",
-    desc: "The STN-W steam generators, successors to STPs, feature a sleek, durable stainless steel casing for long-lasting performance.",
-  },
-  {
-    img: stn,
-    title: "STN Steam Generator",
-    desc: "The STN is engineered for consistent, dependable steam delivery across a wide range of room sizes. Built with durability in mind, it brings the authentic steam room experience to your space with effortless operation.",
-  },
-  {
-    img: ste,
-    title: "STE Steam Generator",
-    desc: "Our latest steam generator, STE is the easiest way to have a steam. Switch on and adjust the level of steam you like.",
-  },
-];
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function localOrRemote(product, field) {
+  return product?.[`local_${field}`] || product?.[field] || null;
+}
 
-const controls = [
-  {
-    img: steControl,
-    title: "Steam STE",
-    subtitle: "STE-INFACE-V2",
-    desc: "The Steam 2.0 control combines the familiar operation of its predecessor with a modernized design and refined dimensions for easier, more reliable use.",
-  },
-  {
-    img: stpV2,
-    title: "Steam 2.0",
-    subtitle: "STP-INFACE-V2",
-    desc: "The Steam 2.0 (STP-INFACE-V2) control is the latest addition to our steam generator control lineup, delivering reliable performance with a modernized design.",
-  },
-  {
-    img: stpSST,
-    title: "Steam Stainless Touch",
-    subtitle: "STP-INFACE-SST",
-    desc: "The Steam Stainless Touch offers effortless control of steam, temperature, and time through a user-friendly interface, ensuring a personalized sauna or steam room experience.",
-  },
-];
+function getImageUrl(product, field) {
+  return localOrRemote(product, field) || null;
+}
 
-const accessories = [
-  { img: steamDoor, title: "Steam Door", desc: "A steam door is essential for keeping steam in and preventing excess moisture from escaping, ensuring an optimal steam room experience." },
-  { img: installStand, title: "Installation Stand", desc: "The steam generator installation stand provides a sturdy, durable base for secure support and efficient operation." },
-  { img: aromaPump, title: "Aroma Pump", desc: "The pump can handle any aroma scent you would prefer to enjoy your tranquil steam room experience." },
-  { img: demandButton, title: "Demand Button", desc: "The Demand Button lets users activate steam generation instantly, offering convenient control for a customized experience." },
-  { img: venturiL, title: "Venturi Pipe L-shape", desc: "The Venturi Pipe draws air inside the tube, reducing the temperature by cooling the heated air molecules inside. The L-shape is ideal for compact installation." },
-  { img: venturiStraight, title: "Venturi Pipe Straight", desc: "The Venturi Pipe draws air inside the tube, reducing the temperature by cooling the heated air molecules inside." },
-];
+function stripHtml(html) {
+  if (!html) return "";
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+}
+
+function getFirstSentence(text) {
+  if (!text) return "";
+  const cleaned = stripHtml(text).replace(/\s+/g, " ").trim();
+  // Lookahead requires the punctuation to be followed by a space + capital
+  // letter (or the end of the string) so it doesn't stop early on periods
+  // inside things like "2.0" or abbreviations like "STE." mid-sentence.
+  const match = cleaned.match(/^[^.!?]*[.!?](?=\s+[A-Z]|\s*$)/);
+  return match ? match[0] : cleaned.split(/\s+/).slice(0, 20).join(" ") + "...";
+}
+
+function byCategory(products, category) {
+  const visible = products.filter(p => isPubliclyVisible(p));
+  const filtered = visible.filter(p => (p.categories || []).includes(category));
+  return [...filtered].sort((a, b) => {
+    const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;
+    if (sA !== sB) return sA - sB;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+}
 
 const Steam = () => {
+  const { products: localProds, loading } = useLocalProducts();
   const heroLoaded = useHeroLoaded(heroBg);
+
+  const generators = useMemo(() => byCategory(localProds, "Steam Generators"), [localProds]);
+  const controls = useMemo(() => byCategory(localProds, "Steam Controls"), [localProds]);
+  const accessories = useMemo(() => byCategory(localProds, "Steam Accessories").slice(0, 6), [localProds]);
 
   return (
     <div className="relative">
       <SEO
-        title="Steam Sauna"
-        description="Discover SAWO steam sauna solutions: generators, controls, and accessories delivering the luxury of tailored steam for a spa-like experience."
+        title="Steam Sauna — Generators, Controls & Accessories"
+        description="Shop SAWO steam sauna systems: stainless-steel steam generators, digital controls, and installation accessories engineered for a consistent, spa-quality steam experience at home or commercially."
         path="/steam"
       />
 
@@ -121,64 +100,145 @@ const Steam = () => {
       </section>
 
       {/* ===================== */}
+      {/* INTRO                 */}
+      {/* ===================== */}
+      <section className="max-w-[1200px] mx-auto px-6 pt-20">
+        <p className="stm-intro-text">
+          SAWO steam sauna systems bring the therapeutic power of moist heat to any space —
+          from compact home steam showers to large-scale commercial spas. Our complete steam
+          range covers everything you need: stainless-steel steam generators engineered for
+          years of reliable service, intuitive digital controls for precise temperature and
+          humidity, and a full line of accessories to finish the installation.
+        </p>
+      </section>
+
+      {/* ===================== */}
       {/* STEAM GENERATORS      */}
       {/* ===================== */}
-      <section className="max-w-[1200px] mx-auto px-6 py-20">
-        <h2 className="stm-group-title">Steam Generators</h2>
-        <div className="stm-gen-grid">
-          {generators.map((item, i) => (
-            <div className="stm-gen-card" key={i}>
-              <div className="stm-gen-img-wrap">
-                <img src={item.img} alt={item.title} className="stm-gen-img" />
-              </div>
-              <div className="stm-gen-body">
-                <h3 className="stm-gen-title">{item.title}</h3>
-                <p className="stm-gen-desc">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+      <section className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="stm-group-head">
+          <h2 className="stm-group-title">Steam Generators</h2>
+          <Link to={menuPaths.steam.generators} className="stm-view-all">View All Generators</Link>
         </div>
+        <p className="stm-group-desc">
+          A steam generator is the heart of every steam room, converting water into a
+          continuous, even flow of steam. SAWO's stainless-steel generators are built for
+          durability and easy maintenance, with models scaled from compact residential units
+          up to multi-unit commercial installations delivering up to 75kW.
+        </p>
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading generators...</p>}
+        {!loading && generators.length === 0 && (
+          <p style={{ textAlign: "center", color: "#999" }}>No steam generators available yet.</p>
+        )}
+        {!loading && generators.length > 0 && (
+          <div className="stm-gen-grid">
+            {generators.map(product => (
+              <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="stm-gen-card">
+                <div className="stm-gen-img-wrap">
+                  {getImageUrl(product, "thumbnail") ? (
+                    <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="stm-gen-img" />
+                  ) : (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", color: "#ccc" }}>
+                      <i className="fas fa-image" style={{ fontSize: "32px" }} />
+                    </div>
+                  )}
+                </div>
+                <div className="stm-gen-body">
+                  <h3 className="stm-gen-title">{product.name}</h3>
+                  <p className="stm-gen-desc">
+                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Premium SAWO steam generator built for reliable, everyday performance."}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ===================== */}
       {/* STEAM CONTROLS        */}
       {/* ===================== */}
-      <section className="stm-alt-section py-20 px-6">
+      <section className="stm-alt-section py-16 px-6">
         <div className="max-w-[1200px] mx-auto">
-          <h2 className="stm-group-title">Steam Controls</h2>
-          <div className="stm-cards-grid">
-            {controls.map((item, i) => (
-              <div className="stm-card" key={i}>
-                <div className="stm-card-img-wrap">
-                  <img src={item.img} alt={item.title} className="stm-card-img" />
-                </div>
-                <div className="stm-card-body">
-                  <p className="stm-card-sub">{item.subtitle}</p>
-                  <h3 className="stm-card-name">{item.title}</h3>
-                  <p className="stm-card-desc">{item.desc}</p>
-                </div>
-              </div>
-            ))}
+          <div className="stm-group-head">
+            <h2 className="stm-group-title">Steam Controls</h2>
+            <Link to={menuPaths.steam.controls} className="stm-view-all">View All Controls</Link>
           </div>
+          <p className="stm-group-desc">
+            Pair any SAWO steam generator with a dedicated control panel for precise command
+            over temperature, steam output, and session timing. From the essential Steam STE
+            dial to the touchscreen Steam Stainless Touch, every control is designed for
+            simple, reliable operation.
+          </p>
+          {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading controls...</p>}
+          {!loading && controls.length === 0 && (
+            <p style={{ textAlign: "center", color: "#999" }}>No steam controls available yet.</p>
+          )}
+          {!loading && controls.length > 0 && (
+            <div className="stm-cards-grid">
+              {controls.map(product => (
+                <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="stm-card">
+                  <div className="stm-card-img-wrap">
+                    {getImageUrl(product, "thumbnail") ? (
+                      <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="stm-card-img" />
+                    ) : (
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", color: "#ccc" }}>
+                        <i className="fas fa-image" style={{ fontSize: "32px" }} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="stm-card-body">
+                    <h3 className="stm-card-name">{product.name}</h3>
+                    <p className="stm-card-desc">
+                      {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Precision steam control for a personalized session."}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* ===================== */}
       {/* STEAM ACCESSORIES     */}
       {/* ===================== */}
-      <section className="max-w-[1200px] mx-auto px-6 py-20">
-        <h2 className="stm-group-title">Steam Accessories</h2>
-        <div className="stm-acc-grid">
-          {accessories.map((item, i) => (
-            <div className="stm-acc-card" key={i}>
-              <div className="stm-acc-img-wrap">
-                <img src={item.img} alt={item.title} className="stm-acc-img" />
-              </div>
-              <h3 className="stm-acc-title">{item.title}</h3>
-              <p className="stm-acc-desc">{item.desc}</p>
-            </div>
-          ))}
+      <section className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="stm-group-head">
+          <h2 className="stm-group-title">Steam Accessories</h2>
+          <Link to={menuPaths.steam.accessories} className="stm-view-all">View All Accessories</Link>
         </div>
+        <p className="stm-group-desc">
+          Complete your steam room with SAWO's range of accessories — from steam doors and
+          diffusing heads to aroma pumps and installation hardware — each engineered to work
+          seamlessly with our generators and controls for a fully finished, professional
+          installation.
+        </p>
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading accessories...</p>}
+        {!loading && accessories.length === 0 && (
+          <p style={{ textAlign: "center", color: "#999" }}>No steam accessories available yet.</p>
+        )}
+        {!loading && accessories.length > 0 && (
+          <div className="stm-acc-grid">
+            {accessories.map(product => (
+              <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="stm-acc-card">
+                <div className="stm-acc-img-wrap">
+                  {getImageUrl(product, "thumbnail") ? (
+                    <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="stm-acc-img" />
+                  ) : (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", color: "#ccc" }}>
+                      <i className="fas fa-image" style={{ fontSize: "32px" }} />
+                    </div>
+                  )}
+                </div>
+                <h3 className="stm-acc-title">{product.name}</h3>
+                <p className="stm-acc-desc">
+                  {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "SAWO steam accessory for a complete installation."}
+                </p>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ===================== */}
@@ -231,15 +291,58 @@ const Steam = () => {
           line-height: 38px;
         }
 
-        /* --- Group titles --- */
+        /* --- Intro --- */
+        .stm-intro-text {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1.05rem;
+          font-weight: 400;
+          color: #444;
+          line-height: 1.85;
+          max-width: 880px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        /* --- Group heads --- */
+        .stm-group-head {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+          padding-bottom: 12px;
+          border-bottom: 2px solid #e8d9cc;
+          margin-bottom: 16px;
+        }
         .stm-group-title {
           font-family: 'Montserrat', sans-serif;
           font-size: 1.8rem;
           font-weight: 700;
           color: #AA8161;
-          margin-bottom: 40px;
-          padding-bottom: 12px;
-          border-bottom: 2px solid #e8d9cc;
+          margin: 0;
+        }
+        .stm-view-all {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          color: #AA8161;
+          text-decoration: none;
+          white-space: nowrap;
+          border-bottom: 1px solid transparent;
+          transition: border-color 0.2s ease;
+        }
+        .stm-view-all:hover {
+          border-color: #AA8161;
+        }
+        .stm-group-desc {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 400;
+          color: #555;
+          line-height: 1.8;
+          max-width: 820px;
+          margin: 0 0 36px;
         }
 
         /* --- Generator card grid --- */
@@ -255,6 +358,7 @@ const Steam = () => {
           overflow: hidden;
           border: 1px solid #ede5db;
           background: #fff;
+          text-decoration: none;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
         .stm-gen-card:hover {
@@ -314,6 +418,8 @@ const Steam = () => {
           border-radius: 16px;
           overflow: hidden;
           border: 1px solid #ede5db;
+          text-decoration: none;
+          display: block;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
         .stm-card:hover {
@@ -356,6 +462,14 @@ const Steam = () => {
           color: #AA8161;
           margin-bottom: 10px;
         }
+        .stm-card-desc {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.88rem;
+          font-weight: 400;
+          color: #141617;
+          line-height: 1.7;
+          margin: 0;
+        }
 
         /* --- Accessories grid --- */
         .stm-acc-grid {
@@ -372,6 +486,7 @@ const Steam = () => {
           border-radius: 16px;
           border: 1px solid #ede5db;
           background: #ffffff;
+          text-decoration: none;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
         .stm-acc-card:hover {
@@ -420,6 +535,7 @@ const Steam = () => {
           .stm-cards-grid { grid-template-columns: 1fr; }
           .stm-acc-grid { grid-template-columns: repeat(2, 1fr); }
           .stm-group-title { font-size: 1.4rem; }
+          .stm-intro-text { font-size: 0.95rem; }
         }
         @media (max-width: 480px) {
           .stm-gen-grid { grid-template-columns: 1fr; }

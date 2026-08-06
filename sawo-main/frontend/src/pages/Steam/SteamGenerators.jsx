@@ -1,44 +1,50 @@
 // SteamGenerators.jsx
 
-import React from "react";
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
+import { isPubliclyVisible } from "../../local-storage/visibility";
 import heroImg from "../../assets/Steam/Steam Generators/STN-S.webp";
-import stnS from "../../assets/Steam/Steam Generators/STN-S.webp";
-import stnW from "../../assets/Steam/Steam Generators/STN-W.webp";
-import stn from "../../assets/Steam/Steam Generators/STN.webp";
-import ste from "../../assets/Steam/Steam Generators/STE.webp";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 
-const generators = [
-  {
-    img: stnS,
-    title: "STN-S Steam Generator",
-    subtitle: "Precision Steam Control",
-    desc: "The STN-S offers advanced steam control technology for residential and commercial steam rooms. Featuring precise digital controls and reliable performance, it delivers a consistently luxurious steam experience tailored to your needs.",
-  },
-  {
-    img: stnW,
-    title: "STN-W Steam Generator",
-    subtitle: "Compact & Powerful",
-    desc: "Designed for versatility, the STN-W combines a compact form factor with powerful steam output. Ideal for both home and professional installations, it ensures efficient performance and easy maintenance in any setting.",
-  },
-  {
-    img: stn,
-    title: "STN Steam Generator",
-    subtitle: "Reliable Performance",
-    desc: "The STN is engineered for consistent, dependable steam delivery across a wide range of room sizes. Built with durability in mind, it brings the authentic steam room experience to your space with effortless operation.",
-  },
-  {
-    img: ste,
-    title: "STE Steam Generator",
-    subtitle: "Energy Efficient Excellence",
-    desc: "The STE steam generator combines energy-efficient technology with premium performance. Its intelligent heating system minimises energy consumption while maximising steam output, making it the ideal choice for eco-conscious users.",
-  },
-];
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function localOrRemote(product, field) {
+  return product?.[`local_${field}`] || product?.[field] || null;
+}
+
+function getImageUrl(product, field) {
+  return localOrRemote(product, field) || null;
+}
+
+function stripHtml(html) {
+  if (!html) return "";
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+}
+
+function getFirstSentence(text) {
+  if (!text) return "";
+  const cleaned = stripHtml(text).replace(/\s+/g, " ").trim();
+  const match = cleaned.match(/^[^.!?]*[.!?](?=\s+[A-Z]|\s*$)/);
+  return match ? match[0] : cleaned.split(/\s+/).slice(0, 20).join(" ") + "...";
+}
 
 const SteamGenerators = () => {
   const heroLoaded = useHeroLoaded(heroImg);
+  const { products: localProds, loading } = useLocalProducts();
+
+  const generators = useMemo(() => {
+    const visible = localProds.filter(p => isPubliclyVisible(p));
+    const filtered = visible.filter(p => (p.categories || []).includes("Steam Generators"));
+    return [...filtered].sort((a, b) => {
+      const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;
+      if (sA !== sB) return sA - sB;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }, [localProds]);
 
   return (
     <div className="relative">
@@ -91,26 +97,42 @@ const SteamGenerators = () => {
       {/* GENERATORS            */}
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 pb-24">
-        <div className="sg-grid">
-          {generators.map((gen, i) => (
-            <div
-              className={`sg-row ${i % 2 === 1 ? "sg-row--reverse" : ""}`}
-              key={i}
-            >
-              {/* Image */}
-              <div className="sg-image-wrap">
-                <img src={gen.img} alt={gen.title} className="sg-image" />
-              </div>
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading generators...</p>}
+        {!loading && generators.length === 0 && (
+          <p style={{ textAlign: "center", color: "#999" }}>No steam generators available yet.</p>
+        )}
+        {!loading && generators.length > 0 && (
+          <div className="sg-grid">
+            {generators.map((product, i) => (
+              <Link
+                to={`/products/${product.slug}`}
+                className={`sg-row ${i % 2 === 1 ? "sg-row--reverse" : ""}`}
+                key={product.id || product.slug}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {/* Image */}
+                <div className="sg-image-wrap">
+                  {getImageUrl(product, "thumbnail") ? (
+                    <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="sg-image" />
+                  ) : (
+                    <div style={{ width: "100%", height: 380, display: "flex", alignItems: "center", justifyContent: "center", background: "#faf7f4", color: "#ccc" }}>
+                      <i className="fas fa-image" style={{ fontSize: "48px" }} />
+                    </div>
+                  )}
+                </div>
 
-              {/* Text */}
-              <div className="sg-text">
-                <p className="sg-eyebrow">{gen.subtitle}</p>
-                <h3 className="sg-card-title">{gen.title}</h3>
-                <p className="sg-card-desc">{gen.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+                {/* Text */}
+                <div className="sg-text">
+                  <p className="sg-eyebrow">Steam Generator</p>
+                  <h3 className="sg-card-title">{product.name}</h3>
+                  <p className="sg-card-desc">
+                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Premium SAWO steam generator built for reliable, everyday performance."}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ===================== */}
