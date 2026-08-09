@@ -416,7 +416,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
         <div className="accessories-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
           {/* Sidebar */}
           <div className="category-buttons-sidebar">
-            <h1 className="sidebar-header-title">Sauna Accessories</h1>
+            <h2 className="sidebar-header-title">Sauna Accessories</h2>
             <div className="sidebar-scroll">
               {CATEGORY_GROUPS.map(group => {
                 const count = groupCounts[group.id] || 0;

@@ -21,6 +21,9 @@ build/
 dist/
 out/
 
+# Wrangler local dev state (Miniflare R2/cache simulation) — never real content
+.wrangler/
+
 # IDE
 .vscode/
 .idea/

@@ -128,7 +128,7 @@ const Section3 = () => {
       <div className="steam-grid">
         {STEAM_ITEMS.map((item, i) => (
           <Link key={i} className="steam-card has-caption" to={item.href}>
-            <img src={item.img} alt="" width="600" height="400" loading="lazy" decoding="async" />
+            <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
           </Link>
@@ -145,7 +145,7 @@ const Section3 = () => {
       <div className="steam-grid">
         {ROOMS_ITEMS.map((item, i) => (
           <Link key={i} className="steam-card has-caption" to={item.href}>
-            <img src={item.img} alt="" width="700" height="525" loading="lazy" decoding="async" />
+            <img src={item.img} alt={item.title} width="700" height="525" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
           </Link>
@@ -188,7 +188,7 @@ const Section3 = () => {
       <div className="image-grid">
         {INFRARED_ITEMS.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
-            <img src={item.img} alt="" width="600" height="400" loading="lazy" decoding="async" />
+            <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
         ))}
@@ -204,7 +204,7 @@ const Section3 = () => {
       <div className="image-grid">
         {CONTROL_ITEMS.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
-            <img src={item.img} alt="" width="600" height="400" loading="lazy" decoding="async" />
+            <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
         ))}
