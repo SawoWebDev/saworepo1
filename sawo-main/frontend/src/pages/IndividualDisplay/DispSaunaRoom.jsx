@@ -35,7 +35,7 @@ function parseJsonField(val, fallback) {
 }
 
 /* ── Carousel ─────────────────────────────────────────────────────── */
-function Carousel({ images, onImageClick }) {
+function Carousel({ images, onImageClick, roomName }) {
   const [idx, setIdx] = useState(0);
   const [err, setErr] = useState({});
   useEffect(() => { setIdx(0); setErr({}); }, [images]);
@@ -51,7 +51,7 @@ function Carousel({ images, onImageClick }) {
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       <div style={{ position: "relative", borderRadius: 0, overflow: "visible", background: "transparent", border: "none", aspectRatio: "16/9", display: "flex", alignItems: "center", justifyContent: "center", cursor: "zoom-in" }} onClick={() => onImageClick(images, idx)}>
         {!err[idx] ? (
-          <ImageWithLoader key={`${images[idx]}-${idx}`} src={images[idx]} alt="" onError={() => setErr(e => ({ ...e, [idx]: true }))} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", width: "100%", height: "100%", animation: "ppFadeIn 0.25s ease" }} />
+          <ImageWithLoader key={`${images[idx]}-${idx}`} src={images[idx]} alt={roomName || ""} onError={() => setErr(e => ({ ...e, [idx]: true }))} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", width: "100%", height: "100%", animation: "ppFadeIn 0.25s ease" }} />
         ) : (
           <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
         )}
@@ -78,7 +78,7 @@ function Carousel({ images, onImageClick }) {
           {images.map((url, i) => (
             <button key={i} onClick={() => setIdx(i)} style={{ flexShrink: 0, width: 58, height: 58, borderRadius: 8, overflow: "hidden", border: `2px solid ${i === idx ? "#a67853" : "#edddd0"}`, background: "#faf7f4", cursor: "pointer", padding: 0, transition: "border-color 0.18s" }}>
               {!err[i] ? (
-                <ImageWithLoader src={url} alt="" onError={() => setErr(e => ({ ...e, [i]: true }))} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }} />
+                <ImageWithLoader src={url} alt={roomName ? `${roomName} thumbnail ${i + 1}` : ""} onError={() => setErr(e => ({ ...e, [i]: true }))} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }} />
               ) : (
                 <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "1rem" }} />
               )}
@@ -427,7 +427,7 @@ export default function SaunaRoomDisplay() {
 
             {/* LEFT: Carousel + Resources */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <Carousel images={carouselImages} onImageClick={(imgs, i) => setLightbox({ images: imgs, index: i })} />
+              <Carousel images={carouselImages} onImageClick={(imgs, i) => setLightbox({ images: imgs, index: i })} roomName={room.name} />
 
               {/* Resources */}
               {files.length > 0 && (

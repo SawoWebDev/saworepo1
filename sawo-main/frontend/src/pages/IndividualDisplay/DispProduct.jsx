@@ -33,7 +33,7 @@ function getFilesArray(product) {
 }
 
 /* ── Image Carousel ───────────────────────────────────────────────── */
-function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
+function Carousel({ images, thumbnail, videoUrl, onImageClick, productName }) {
   const items = [
     ...(thumbnail ? [{ type: 'image', url: thumbnail }] : []),
     ...(images || []).filter(u => u !== thumbnail).map(u => ({ type: 'image', url: u })),
@@ -75,7 +75,7 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
               <ImageWithLoader
                 key={idx}
                 src={items[idx].url}
-                alt=""
+                alt={productName || ""}
                 onError={() => setErr(e => ({ ...e, [idx]: true }))}
                 style={{
                   maxWidth: "100%",
@@ -158,7 +158,7 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
               ) : !err[i] ? (
                 <ImageWithLoader
                   src={item.url}
-                  alt=""
+                  alt={productName ? `${productName} thumbnail ${i + 1}` : ""}
                   onError={() => setErr(e => ({ ...e, [i]: true }))}
                   style={{ width: "100%", height: "100%", objectFit: "contain", padding: 3 }}
                 />
@@ -174,7 +174,7 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick }) {
 }
 
 /* ── Compact Spec Image Strip (for Section 1 right column) ────────── */
-function CompactSpecImages({ images, onImageClick }) {
+function CompactSpecImages({ images, onImageClick, productName }) {
   const [idx, setIdx] = useState(0);
   if (!images || !images.length) return null;
   const single = images.length === 1;
@@ -190,7 +190,7 @@ function CompactSpecImages({ images, onImageClick }) {
         <ImageWithLoader
           key={idx}
           src={images[idx]}
-          alt=""
+          alt={productName ? `${productName} diagram ${idx + 1}` : ""}
           style={{
             width: "100%", objectFit: "contain",
             display: "block", animation: "ppFadeIn 0.2s ease",
@@ -238,7 +238,7 @@ function CompactSpecImages({ images, onImageClick }) {
               }}>
               <ImageWithLoader
                 src={url}
-                alt=""
+                alt={productName ? `${productName} diagram ${i + 1}` : ""}
                 style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }}
               />
             </button>
@@ -752,6 +752,7 @@ export default function ProductPage() {
                 thumbnail={thumbnail}
                 videoUrl={videoUrl}
                 onImageClick={openLightbox}
+                productName={product.name}
               />
               {/* Resources — below images (only show on left if Diagram exists) */}
               {hasResources && hasSpec && (
@@ -823,7 +824,7 @@ export default function ProductPage() {
               {hasSpec && (
                 <div>
                   <SectionLabel text="Diagram" />
-                  <CompactSpecImages images={specImages} onImageClick={openLightbox} />
+                  <CompactSpecImages images={specImages} onImageClick={openLightbox} productName={product.name} />
                 </div>
               )}
 
