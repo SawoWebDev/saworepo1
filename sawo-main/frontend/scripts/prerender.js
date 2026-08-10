@@ -1,242 +1,136 @@
 /**
- * scripts/prerender.js — post-build homepage snapshot.
+ * scripts/prerender.js — post-build multi-page prerender orchestrator.
  *
  * CRA ships an empty <div id="root"> so on slow mobile nothing paints until
- * ~80KB-gzip of JS downloads and executes (mobile FCP was 3.6s / LCP 4.2s).
- * This script renders "/" once in headless Chromium at build time and bakes
- * the resulting markup into build/index.html, so first paint needs no JS.
+ * the JS bundle downloads and executes. This script renders each configured
+ * page once in headless Chromium at build time and bakes the resulting
+ * markup into its own static HTML file, so first paint needs no JS.
  *
- * This is a paint accelerator only, NOT server-rendered markup — src/index.js
- * deliberately uses createRoot() (not hydrateRoot) against it, because the
- * snapshot is captured via element.innerHTML, which the browser re-serializes
- * through its own CSSOM (hex colors -> rgb(), attribute casing, shorthand
- * consolidation) in ways that don't match what React itself writes on a
- * fresh render. hydrateRoot reliably throws "Hydration failed" against text
- * that came from an innerHTML round-trip, for any element with an inline
- * style or a camelCased DOM prop (fetchPriority, etc.) — confirmed with a
- * dev-mode React build. createRoot just discards the snapshot and mounts
- * fresh once main.js runs (gated on the hero image's own load event, so this
- * happens after the snapshot has already delivered its FCP/LCP benefit).
+ * Originally a single Home-only script; now a thin loop over
+ * scripts/prerender/pages/*.js (auto-discovered — adding a new page never
+ * requires editing this file), sharing one Chromium instance + one static
+ * file server across all of them. All the actual snapshot post-processing
+ * (CSS inlining, preload stripping, post-LCP loader injection, SEO head
+ * baking, pathname guard) lives in scripts/prerender/lib.js, unchanged from
+ * the original script's logic — see that file's header comment for why each
+ * step exists, and homepage_prerender_invariants for the invariants Home's
+ * page config (pages/home.js) must keep holding.
  *
- * Only the homepage is prerendered. The SPA rewrite serves index.html for
- * every route, so a guard script empties #root on any other path — non-home
- * routes behave exactly as before.
- *
- * FAIL-OPEN: any error leaves build/index.html untouched and exits 0, so a
- * flaky prerender can never break a deploy. Grep build logs for
- * "PRERENDERED:" to see which way it went.
+ * Each page's output is written to build/<outFile> (build/index.html for
+ * Home, build/<page>/index.html for everything else) with a matching
+ * explicit rewrite added to vercel.json. FAIL-OPEN, per page: a page whose
+ * snapshot throws is seeded with the plain (non-prerendered) template
+ * first, so a broken/flaky snapshot for one page can never 404 that route
+ * OR block any other page's prerender OR break a deploy. Grep build logs
+ * for "PRERENDERED:" to see how each page went.
  *
  * Browser: puppeteer-core + @sparticuz/chromium on Linux (Vercel's build
- * container — no system-deps install needed); local Chrome on Windows/macOS.
+ * container); local Chrome on Windows/macOS.
  */
 
 const fs = require("fs");
-const http = require("http");
 const path = require("path");
 const puppeteer = require("puppeteer-core");
+const lib = require("./prerender/lib");
 
-const BUILD = path.join(__dirname, "..", "build");
-const INDEX = path.join(BUILD, "index.html");
+const PAGES_DIR = path.join(__dirname, "prerender", "pages");
 
-const MIME = {
-  ".html": "text/html", ".js": "text/javascript", ".css": "text/css",
-  ".json": "application/json", ".webp": "image/webp", ".png": "image/png",
-  ".jpg": "image/jpeg", ".svg": "image/svg+xml", ".ico": "image/x-icon",
-  ".woff2": "font/woff2", ".map": "application/json",
-};
-
-function serveBuild() {
-  return new Promise((resolve) => {
-    const server = http.createServer((req, res) => {
-      const urlPath = decodeURIComponent(req.url.split("?")[0]);
-      let file = path.join(BUILD, urlPath);
-      if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) file = INDEX; // SPA fallback
-      res.setHeader("Content-Type", MIME[path.extname(file)] || "application/octet-stream");
-      fs.createReadStream(file).pipe(res);
-    });
-    server.listen(0, "127.0.0.1", () => resolve(server));
-  });
-}
-
-async function findChrome() {
-  if (process.env.CHROME_PATH) return { executablePath: process.env.CHROME_PATH, args: [] };
-  if (process.platform === "linux") {
-    // v149 ships transpiled ESM: require() returns { default: <api> }.
-    const mod = require("@sparticuz/chromium");
-    const chromium = mod.default || mod;
-    return { executablePath: await chromium.executablePath(), args: chromium.args };
-  }
-  const candidates = process.platform === "darwin"
-    ? ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
-    : [
-        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-      ];
-  const found = candidates.find((c) => fs.existsSync(c));
-  if (!found) throw new Error("No Chrome executable found; set CHROME_PATH");
-  return { executablePath: found, args: [] };
+function loadPages() {
+  return fs
+    .readdirSync(PAGES_DIR)
+    .filter((f) => f.endsWith(".js"))
+    .map((f) => require(path.join(PAGES_DIR, f)));
 }
 
 async function main() {
-  const html = fs.readFileSync(INDEX, "utf8");
-  if (!html.includes('<div id="root"></div>')) {
-    throw new Error('build/index.html has no empty <div id="root"></div> anchor (already prerendered?)');
+  let template;
+  try {
+    template = lib.readTemplate();
+  } catch (err) {
+    console.error("PRERENDERED: no (setup) —", err.message);
+    return; // fail-open: leave build/ untouched, exit cleanly below
   }
 
-  const server = await serveBuild();
-  const port = server.address().port;
-  const { executablePath, args } = await findChrome();
-  const browser = await puppeteer.launch({
-    executablePath,
-    args: [...args, "--headless=new", "--no-sandbox", "--disable-gpu"],
-  });
+  const pages = loadPages();
 
+  // Seed every non-Home page with the plain template BEFORE attempting any
+  // snapshot, so vercel.json's explicit rewrite to that path never 404s
+  // even if this run never gets to (or fails) that page's snapshot.
+  for (const config of pages) {
+    if (config.outFile !== "index.html") lib.seedFallback(template, config.outFile);
+  }
+
+  const server = await lib.serveBuild();
   try {
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1350, height: 940 });
-
-    // Freeze all afterPageLoad()-deferred work (typewriter, carousels, CMS
-    // refresh): stub requestIdleCallback so callbacks never fire. The snapshot
-    // must equal React's *initial* render or hydration would mismatch.
-    await page.evaluateOnNewDocument(() => {
-      window.requestIdleCallback = () => 1;
-      window.cancelIdleCallback = () => {};
+    const port = server.address().port;
+    const { executablePath, args } = await lib.findChrome();
+    const browser = await puppeteer.launch({
+      executablePath,
+      args: [...args, "--headless=new", "--no-sandbox", "--disable-gpu"],
     });
 
-    // Determinism: no CMS/analytics network in the snapshot environment.
-    await page.setRequestInterception(true);
-    page.on("request", (req) => {
-      const url = req.url();
-      if (/raw\.githubusercontent\.com|supabase\.co|googleapis|gstatic|cdnjs/.test(url)) req.abort();
-      else req.continue();
-    });
+    try {
+      for (const config of pages) {
+        try {
+          const page = await browser.newPage();
+          try {
+            await page.setViewport({ width: 1350, height: 940 });
 
-    await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: "load", timeout: 60000 });
-    await page.waitForSelector("section.sauna-unique img", { timeout: 30000 });
-    await new Promise((r) => setTimeout(r, 500)); // let React finish committing
+            // Freeze all afterPageLoad()-deferred work (typewriter,
+            // carousels, CMS refresh, scroll-triggered observers) so the
+            // snapshot equals React's untouched initial render.
+            await page.evaluateOnNewDocument(() => {
+              window.requestIdleCallback = () => 1;
+              window.cancelIdleCallback = () => {};
+              window.IntersectionObserver = class {
+                observe() {}
+                unobserve() {}
+                disconnect() {}
+              };
+            });
 
-    const { rootHtml, typewriterText, head } = await page.evaluate(() => {
-      const attr = (selector, attribute) => {
-        const el = document.querySelector(selector);
-        return el ? el.getAttribute(attribute) : null;
-      };
-      return {
-        rootHtml: document.getElementById("root").innerHTML,
-        typewriterText: document.querySelector(".typewriter")?.textContent || "",
-        // react-helmet-async (see src/components/SEO.jsx) sets these
-        // synchronously on mount, so by this point in the snapshot (after the
-        // 500ms settle below) they reflect whatever <SEO> Home actually
-        // rendered — captured here so the baked-in snapshot carries real
-        // per-page title/description/OG tags instead of only the static
-        // public/index.html placeholders.
-        head: {
-          title: document.title || null,
-          description: attr('meta[name="description"]', "content"),
-          canonical: attr('link[rel="canonical"]', "href"),
-        },
-      };
-    });
+            // Determinism by default: no CMS/analytics network in the
+            // snapshot environment. Pages whose real content depends on
+            // live data (e.g. Steam's useLocalProducts()) opt out via
+            // `blockNetwork: false` and wait for that data themselves.
+            if (config.blockNetwork !== false) {
+              await page.setRequestInterception(true);
+              page.on("request", (req) => {
+                const url = req.url();
+                if (/raw\.githubusercontent\.com|supabase\.co|googleapis|gstatic|cdnjs/.test(url)) req.abort();
+                else req.continue();
+              });
+            }
 
-    // Sanity: snapshot must be the pristine initial render.
-    if (typewriterText.trim() !== "") throw new Error("typewriter ran before capture — snapshot not pristine");
-    if (!rootHtml.includes("Experience")) throw new Error("hero heading missing from snapshot");
-    if (rootHtml.length < 10000) throw new Error(`snapshot suspiciously small (${rootHtml.length} bytes)`);
+            await page.goto(`http://127.0.0.1:${port}${config.path}`, { waitUntil: "load", timeout: 60000 });
+            await config.waitFor(page);
+            const captured = await config.capture(page);
+            config.sanityCheck(captured);
 
-    let out = html.replace(
-      '<div id="root"></div>',
-      `<div id="root">${rootHtml}</div>` +
-        // SPA rewrite serves this file for every path; only "/" may show the
-        // homepage snapshot. Other routes get an empty root (exactly the old
-        // behavior) and index.js then uses createRoot instead of hydrateRoot.
-        '<script>if(location.pathname!=="/"){var r=document.getElementById("root");if(r)r.innerHTML="";}</script>'
-    );
+            const opts = { template, rootHtml: captured.rootHtml, head: captured.head, pagePath: config.path, outFile: config.outFile };
+            if (config.loaderImgSelector) opts.loaderImgSelector = config.loaderImgSelector;
+            if (config.preloadStripPattern) opts.preloadStripPattern = config.preloadStripPattern;
+            const { bytes, cssInlined } = lib.buildOutputHtml(opts);
 
-    // Inline the main stylesheet: with markup in the HTML, this <link> is the
-    // last render-blocking request — inlining removes one RTT before FCP.
-    const cssMatch = out.match(/<link href="(\/static\/css\/main\.[^"]+\.css)" rel="stylesheet">/);
-    if (cssMatch) {
-      const css = fs.readFileSync(path.join(BUILD, cssMatch[1]), "utf8");
-      out = out.replace(cssMatch[0], `<style>${css}</style>`);
+            console.log(`PRERENDERED ${config.path}: yes (root ${bytes} bytes, css inlined: ${cssInlined})`);
+          } finally {
+            await page.close();
+          }
+        } catch (err) {
+          // Per-page fail-open: outFile already holds either a previous
+          // good snapshot or the plain-template fallback seeded above.
+          console.error(`PRERENDERED ${config.path}: no —`, err.message);
+        }
+      }
+    } finally {
+      await browser.close();
     }
-
-    // Bake the real <SEO> output into <head> so a non-JS crawler/link-preview
-    // bot sees Home's actual title/description/canonical, not just the static
-    // public/index.html placeholders (which stay in sync as the sane fallback
-    // for every OTHER route, which isn't prerendered).
-    const escapeHtml = (s) =>
-      String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-    if (head.title) {
-      out = out.replace(/<title>.*?<\/title>/, `<title>${escapeHtml(head.title)}</title>`);
-    }
-    if (head.description) {
-      out = out.replace(
-        /<meta name="description"[^>]*\/>/,
-        `<meta name="description" content="${escapeHtml(head.description)}" />`
-      );
-    }
-    if (head.canonical && !out.includes('rel="canonical"')) {
-      out = out.replace("</head>", `<link rel="canonical" href="${escapeHtml(head.canonical)}" />\n</head>`);
-    }
-
-    // Drop the hero <link rel=preload> tags from the prerendered page: the
-    // <picture> markup is now in the HTML, so the preload scanner discovers
-    // the correct source directly (with the img's fetchpriority=high). The
-    // preloads' media queries are evaluated against the pre-emulation window
-    // in Lighthouse/PSI, double-fetching a second hero variant (~77KB) into
-    // the LCP window. public/index.html keeps them for the no-prerender path.
-    out = out.replace(/<link rel="preload" as="image" href="\/(?:640|1024|1920)\.webp"[^>]*\/?>/g, "");
-
-    // Load the bundle AND activate the async font stylesheets only after the
-    // hero image (the LCP element) has loaded and its frame committed.
-    // Lighthouse's lantern simulation chains every request that starts before
-    // the observed LCP timestamp into simulated LCP, so anything heavy that
-    // begins earlier — the 84KB-gz bundle, or the ~300KB of FontAwesome +
-    // Montserrat woff2s the print-media swap triggers — inflates PSI's LCP by
-    // seconds even though the real paint never waited for them.
-    // The gate is the img `load` event (+ double-rAF so the frame showing the
-    // hero is committed first). NOT img.decode(): on a still-loading <picture>
-    // Chromium rejects decode() immediately, which un-gated main.js in
-    // production (started at 976ms vs LCP at 1773ms). 4s safety cap, and an
-    // immediate start when the route guard emptied the root, so hydration can
-    // never hang on a broken image.
-    const scriptMatch = out.match(/<script defer="defer" src="(\/static\/js\/main\.[^"]+\.js)"><\/script>/);
-    if (!scriptMatch) throw new Error("main.js script tag not found for post-paint rewrite");
-
-    // Strip the eager onload swap from the print-media stylesheets; the
-    // loader below flips them at the same post-LCP moment. (noscript
-    // fallbacks in the template still cover JS-disabled visitors.)
-    const swaps = out.match(/ onload='this\.media="all"'/g) || [];
-    if (swaps.length !== 2) throw new Error(`expected 2 stylesheet onload swaps, found ${swaps.length}`);
-    out = out.replace(/ onload='this\.media="all"'/g, "");
-
-    // The loader must live at the END of <body>: CRA's script tag sits in
-    // <head>, where #root doesn't exist yet — a querySelector there returns
-    // null and the gate silently never engages (this exact bug shipped once:
-    // main.js started before the hero request on slow 4G).
-    const loader =
-      `<script>(function(){var d=false;` +
-      `var l=function(){if(d)return;d=true;` +
-      `document.querySelectorAll('link[media="print"]').forEach(function(x){x.media="all"});` +
-      `var s=document.createElement("script");s.src="${scriptMatch[1]}";document.body.appendChild(s)};` +
-      `var r2=function(){if(!("requestAnimationFrame"in window))return setTimeout(l,0);` +
-      `requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(l,0)})})};` +
-      `var i=document.querySelector("#root section img");` +
-      `if(!i){r2()}else{setTimeout(l,4000);` +
-      `if(i.complete&&i.naturalWidth>0){r2()}else{i.addEventListener("load",r2);i.addEventListener("error",r2)}}` +
-      `})()</script>`;
-    out = out.replace(scriptMatch[0], "");
-    if (!out.includes("</body>")) throw new Error("no </body> to anchor the loader");
-    out = out.replace("</body>", `${loader}</body>`);
-
-    fs.writeFileSync(INDEX, out);
-    console.log(`PRERENDERED: yes (root ${rootHtml.length} bytes, css inlined: ${!!cssMatch})`);
   } finally {
-    await browser.close();
     server.close();
   }
 }
 
 main().catch((err) => {
-  console.error("PRERENDERED: no —", err.message);
-  process.exit(0); // fail-open: ship the normal CSR index.html
+  console.error("PRERENDERED: no (fatal) —", err.message);
+  process.exit(0); // fail-open: ship whatever build/ already has
 });
