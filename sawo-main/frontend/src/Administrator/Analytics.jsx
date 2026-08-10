@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { supabase } from "./supabase";
 import DailyTrafficChart from "./DailyTrafficChart";
 import { getCache, setCache } from "./adminCache";
@@ -52,9 +52,14 @@ const Analytics = () => {
   const [cardTabs, setCardTabs] = useState({
     sources: "sources",
     pages: "top",
+    products: "views",
     locations: "map",
     devices: "browser",
   });
+  // slug -> display name, for turning "/products/some-slug" (or /accessories/,
+  // /sauna/rooms/) into a human-readable row instead of a raw path. Static
+  // reference data — fetched once, not tied to the date range like `stats`.
+  const [nameBySlug, setNameBySlug] = useState({});
   const [expandedList, setExpandedList] = useState(null); // { title, icon, rows, valueLabel, showPct }
   const [mapFullscreen, setMapFullscreen] = useState(false);
   const [stats, setStats] = useState(() => getCache(analyticsCacheKey("7days")) || EMPTY_STATS);
@@ -113,6 +118,44 @@ const Analytics = () => {
 
   useEffect(() => { setExpandedList(null); }, [dateRange]);
 
+  // Products and sauna rooms both need a slug->name lookup for the "Top
+  // Products" card below; accessories live in the same `products` table
+  // (an accessory is just a product whose categories match ACCESSORY_
+  // CATEGORIES — see DispAccessories.jsx), so one products query covers
+  // both /products/:slug and /accessories/:slug.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const [{ data: products }, { data: rooms }] = await Promise.all([
+        supabase.from("products").select("slug, name"),
+        supabase.from("sauna_rooms").select("slug, name"),
+      ]);
+      if (cancelled) return;
+      const map = {};
+      (products || []).forEach(p => { map[p.slug] = p.name; });
+      (rooms || []).forEach(r => { map[r.slug] = r.name; });
+      setNameBySlug(map);
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  // Pulls product/accessory/sauna-room pageviews out of the generic
+  // topPages tally (already computed from the one analytics_page_views
+  // fetch — no extra query needed) and resolves each path's slug to a
+  // real product name, so this reads as "which products get views" rather
+  // than a list of raw URLs.
+  const topProducts = useMemo(() => {
+    const PRODUCT_PATH_RE = /^\/(products|accessories|sauna\/rooms)\/([^/]+)\/?$/;
+    return stats.topPages
+      .map(p => {
+        const match = p.name.match(PRODUCT_PATH_RE);
+        if (!match) return null;
+        const slug = match[2];
+        return { ...p, name: nameBySlug[slug] || slug };
+      })
+      .filter(Boolean);
+  }, [stats.topPages, nameBySlug]);
+
   const formatTime = (seconds) => {
     if (seconds < 60) return `${seconds}s`;
     const minutes = Math.floor(seconds / 60);
@@ -131,6 +174,13 @@ const Analytics = () => {
     top:   { label: "Top pages",   rows: stats.topPages.map(p => ({ ...p, value: p.views, sub: `Avg. time: ${formatTime(p.avgTime)}`, pagePerf: true })), valueLabel: "Views", showPct: false },
     entry: { label: "Entry pages", rows: stats.entryPages.map(r => ({ ...r, pagePerf: true })), valueLabel: "Visitors",     showPct: false },
     exit:  { label: "Exit pages",  rows: stats.exitPages.map(r => ({ ...r, pagePerf: true })),  valueLabel: "Unique exits", showPct: false },
+  };
+  // Not marked pagePerf — that flag makes BreakdownList rows navigate to
+  // /admin/seo (the static-page drill-down), which is the wrong target for
+  // a product row. These just aren't clickable for now.
+  const productsTabs = {
+    views: { label: "By views", rows: [...topProducts].sort((a, b) => b.views - a.views).map(p => ({ ...p, value: p.views, sub: `Avg. time: ${formatTime(p.avgTime)}` })), valueLabel: "Views", showPct: false },
+    time:  { label: "By time on page", rows: [...topProducts].sort((a, b) => b.avgTime - a.avgTime).map(p => ({ ...p, value: p.avgTime, sub: `${p.views} view${p.views === 1 ? "" : "s"}` })), valueLabel: "Avg. time (s)", showPct: false },
   };
   const locationsTabs = {
     map:       { label: "Map" },
@@ -276,6 +326,22 @@ const Analytics = () => {
           tabs={pagesTabs}
           activeTab={cardTabs.pages}
           onTab={(t) => setCardTab("pages", t)}
+          onShowAll={setExpandedList}
+        />
+      </div>
+
+      {/* Top Products — which products/accessories/sauna rooms get the most
+          views over the selected date range. Pulled from the same page-view
+          data as "Top pages" above (see the topProducts memo), just filtered
+          to product-detail paths and resolved to real names. */}
+      <div className="mb-8">
+        <BreakdownCard
+          id="analytics-top-products"
+          title="Top products"
+          icon="fa-box"
+          tabs={productsTabs}
+          activeTab={cardTabs.products}
+          onTab={(t) => setCardTab("products", t)}
           onShowAll={setExpandedList}
         />
       </div>
