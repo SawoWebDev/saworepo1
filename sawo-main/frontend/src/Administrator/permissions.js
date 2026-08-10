@@ -65,6 +65,7 @@ export const CAPABILITY_MAP = {
   "page.analytics":           ["admin", "superadmin"],
   "page.seo":                 ["editor", "admin", "superadmin"],
   "page.ci_status":           ["admin", "superadmin"],
+  "page.website_health":      ["editor", "admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
   // Gates the Permissions page itself — deliberately NOT part of
   // the dynamic override system (see setCapabilityOverrides below).
@@ -148,6 +149,7 @@ export const NAV_ITEMS = [
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   description: "Track visitor behavior, page performance, and traffic sources." },
   { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
   { to: "/admin/ci-status",       label: "CI Status",        icon: "fa-solid fa-list-check",     cap: "page.ci_status",   description: "Latest results from the GitHub Actions checks that run against this repo (SEO, sitemap, keep-alive, broken links)." },
+  { to: "/admin/website-health",  label: "Website Health",   icon: "fa-solid fa-heart-pulse",    cap: "page.website_health", description: "Genuinely-actionable SEO gaps (missing descriptions, categories, images) plus a condensed view of the automated broken-link/Lighthouse checks." },
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
   // own name/avatar in the sidebar footer instead) while still being matched
   // for the shared PageHeader and the route's capability check.
