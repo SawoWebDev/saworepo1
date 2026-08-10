@@ -244,13 +244,22 @@
 /voltage/33-0kw/   /sauna/heaters  301
 /voltage/36-0kw/   /sauna/heaters  301
 
-# ---- SPA CATCH-ALL ---------------------------------------------------------
-# NOTE: this used to end with an explicit `/* /index.html 200` rewrite rule.
-# On the Workers Static Assets deploy target (see wrangler.jsonc), that rule
-# is not just redundant but actively rejected at deploy time — Cloudflare's
-# _redirects validator treats "strip .html/-index then re-match /*" as an
-# infinite loop. SPA fallback is instead handled by
-# `assets.not_found_handling: "single-page-application"` in wrangler.jsonc,
-# which serves index.html for any unmatched path without going through
-# _redirects at all. See SEO-GO-LIVE-CHECKLIST.md Scenario 13 for the
-# soft-404 tradeoff this still carries (same as before, different mechanism).
+# ---- SPA CATCH-ALL (must stay LAST — do not reorder above this line) -----------
+# Cloudflare Pages serves build/index.html for any unmatched static path by
+# default for SPA-shaped projects, but being explicit here avoids relying on
+# that default and keeps this file the single source of truth for routing.
+# Using 200 (not 301) — this is a REWRITE (serve index.html, keep the URL and
+# let React Router take over), not a redirect. See SEO-GO-LIVE-CHECKLIST.md
+# Scenario 13 for why this still returns unmatched paths as a 200 status
+# (soft-404 risk) and what to do about it.
+#
+# NOTE (2026-08-10): this project briefly targeted Cloudflare Workers Static
+# Assets instead of Pages; that deploy target's stricter _redirects validator
+# rejects this exact rule as a false-positive "infinite loop" (SPA fallback
+# has to be done via wrangler.jsonc's assets.not_found_handling there
+# instead). The Workers migration was cancelled and Pages is the real target
+# again, so this rule is back. If Workers is ever revisited, remove this rule
+# and re-add `"not_found_handling": "single-page-application"` under
+# `assets` in wrangler.jsonc instead — don't have both, the validator will
+# reject the deploy.
+/*    /index.html   200
