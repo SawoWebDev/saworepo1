@@ -46,7 +46,7 @@ const DISPLAY_TAGS = ["Steam Accessories"];
 function arrayMatchesAny(arr = [], targets = []) {
   if (!targets.length) return false;
   const lower = targets.map(t => t.toLowerCase());
-  return arr.some(item => lower.includes(item.toLowerCase()));
+  return (arr || []).some(item => lower.includes(item.toLowerCase()));
 }
 
 function applyDisplayFilter(products) {
