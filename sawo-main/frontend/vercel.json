@@ -94,6 +94,34 @@
       "destination": "https://sawocom-next.vercel.app/assets/:path*"
     },
     {
+      "source": "/sauna",
+      "destination": "/sauna/index.html"
+    },
+    {
+      "source": "/steam",
+      "destination": "/steam/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/infrared",
+      "destination": "/infrared/index.html"
+    },
+    {
+      "source": "/support",
+      "destination": "/support/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
