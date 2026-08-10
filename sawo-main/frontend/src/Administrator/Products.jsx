@@ -3050,7 +3050,11 @@ export default function Products({ currentUser }) {
       setForm(loaded);
       setSavedForm(loaded);
       setSlugEdited(true);
-      setEditing(row);
+      // `data` (the freshly-fetched full row), not `row` — row is sometimes
+      // just { id } (deep-linked from Taxonomy/Models/Website Health, which
+      // only know the id), and the modal title reads editing.name, so that
+      // path rendered "Edit: undefined" instead of the product's name.
+      setEditing(data);
       setEditingFull(data);   // full row → audit strip
       setShowRevisions(false);
       setModalMenuOpen(false);
@@ -3750,7 +3754,20 @@ export default function Products({ currentUser }) {
       <Modal
         open={modalOpen}
         onClose={handleModalClose}
-        title={editing ? `Edit: ${editing.name}` : "New Product"}
+        title={editing ? (
+          <a
+            href={productUrl(editingFull || editing)}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open the live product page in a new tab"
+            style={{ color: "inherit", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}
+            onMouseEnter={e => e.currentTarget.style.textDecoration = "underline"}
+            onMouseLeave={e => e.currentTarget.style.textDecoration = "none"}
+          >
+            Edit: {editing.name}
+            <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.7rem", opacity: 0.6 }} />
+          </a>
+        ) : "New Product"}
         wide
         actions={(
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
