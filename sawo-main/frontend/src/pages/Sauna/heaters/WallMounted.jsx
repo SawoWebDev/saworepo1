@@ -197,7 +197,7 @@ function groupProducts(products) {
 function arrayMatchesAny(arr = [], targets = []) {
   if (!targets.length) return false;
   const lower = targets.map(t => t.toLowerCase());
-  return arr.some(item => lower.includes(item.toLowerCase()));
+  return (arr || []).some(item => lower.includes(item.toLowerCase()));
 }
 
 /** Filter the full product list to only those matching DISPLAY_CATEGORIES / DISPLAY_TAGS */
