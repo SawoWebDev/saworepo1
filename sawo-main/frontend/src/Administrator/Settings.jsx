@@ -8,6 +8,7 @@ import {
 } from "../local-storage/languageSettings";
 import { setHeaderLayout as saveHeaderLayout } from "../local-storage/headerLayout";
 import { setHeaderNavStyle as saveHeaderNavStyle } from "../local-storage/headerNavStyle";
+import { getDashboardTrafficWindow, setDashboardTrafficWindow as saveDashboardTrafficWindow, VALID_WINDOWS } from "../local-storage/dashboardSettings";
 import { getCache, setCache } from "./adminCache";
 import HeaderPreview from "./HeaderPreview";
 
@@ -53,6 +54,12 @@ const NAV_STYLE_OPTIONS = [
   { value: "style1", label: "Style 1: Underline", description: "Top-level nav items get a growing underline on hover/active." },
   { value: "style2", label: "Style 2: Brown Background", description: "Top-level nav items get a solid brand-brown pill (beveled like the CMS's primary buttons) on hover/active instead of an underline." },
 ];
+
+const TRAFFIC_WINDOW_OPTIONS = VALID_WINDOWS.map((days) => ({
+  value: days,
+  label: `${days}d`,
+  description: `Dashboard traffic tiles and chart cover the last ${days} days.`,
+}));
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js's
 // `localeNames` and frontend/src/i18n/translatedRoutes.js's LOCALES —
@@ -124,6 +131,8 @@ export default function Settings({ currentUser }) {
   const [notifyEmail, setNotifyEmailState] = useState(() => cachedSettings ? cachedSettings.notifyEmail : "");
   const [notifyEmailInput, setNotifyEmailInput] = useState(() => cachedSettings ? cachedSettings.notifyEmail : "");
   const [notifySaving, setNotifySaving] = useState(false);
+  const [trafficWindow, setTrafficWindowState] = useState(() => cachedSettings ? cachedSettings.trafficWindow : 30);
+  const [trafficWindowSaving, setTrafficWindowSaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
 
@@ -132,18 +141,20 @@ export default function Settings({ currentUser }) {
       getGDPRBannerEnabled(),
       getLanguageSwitcherEnabled(), getEnabledLanguages(), fetchHeaderPrefs(),
       fetchContactNotifyEmail(),
+      getDashboardTrafficWindow(),
     ])
-      .then(([gdpr, langEn, langs, headerPrefs, notifyEmailVal]) => {
+      .then(([gdpr, langEn, langs, headerPrefs, notifyEmailVal, trafficWindowVal]) => {
         setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
         setHeaderLayoutState(headerPrefs.headerLayout);
         setNavStyleState(headerPrefs.navStyle);
         setNotifyEmailState(notifyEmailVal);
         setNotifyEmailInput(notifyEmailVal);
+        setTrafficWindowState(trafficWindowVal);
         setCache(SETTINGS_CACHE_KEY, {
           gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
           headerLayout: headerPrefs.headerLayout, navStyle: headerPrefs.navStyle,
-          notifyEmail: notifyEmailVal,
+          notifyEmail: notifyEmailVal, trafficWindow: trafficWindowVal,
         });
       })
       .catch((err) => setError(err.message))
@@ -302,6 +313,29 @@ export default function Settings({ currentUser }) {
     }
   };
 
+  const handleSwitchTrafficWindow = async (days) => {
+    setTrafficWindowSaving(true);
+    setError(null);
+    try {
+      await saveDashboardTrafficWindow(days, currentUser?.username);
+      setTrafficWindowState(days);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "dashboard_traffic_window_days",
+        entity_name: `Dashboard Traffic Window → ${days} days`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add(`Dashboard now shows the last ${days} days`, "success");
+    } catch (err) {
+      setError("Failed to save dashboard traffic window: " + err.message);
+      add("Failed to save dashboard traffic window", "error");
+    } finally {
+      setTrafficWindowSaving(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -420,7 +454,7 @@ export default function Settings({ currentUser }) {
         <p className="text-sm text-[var(--text-3)] mb-4">
           Where the public Contact form's email notification is sent. Every submission is
           also logged in the Inbox regardless of this setting, and (for all categories) creates
-          an Odoo helpdesk ticket. Read server-side by helpdeskapi/send.php — changes apply to
+          an Odoo helpdesk ticket. Read server-side by helpdeskapi/send.php, changes apply to
           the very next submission, no redeploy needed.
         </p>
         <div className="flex flex-wrap items-center gap-3">
@@ -442,6 +476,35 @@ export default function Settings({ currentUser }) {
           </button>
         </div>
         <p className="text-xs text-[var(--text-3)] mt-3">Currently: {notifyEmail || "info@sawo.com"}</p>
+      </div>
+
+      <div className="card card-body">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-chart-column text-[var(--brand)]"></i>
+          Dashboard Traffic Window
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          How many days of analytics the Dashboard's traffic tiles and chart cover. Takes effect
+          next time the Dashboard loads, no redeploy needed.
+        </p>
+        <div className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-2)] p-0.5">
+          {TRAFFIC_WINDOW_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              title={opt.description}
+              disabled={trafficWindowSaving}
+              onClick={() => handleSwitchTrafficWindow(opt.value)}
+              className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                trafficWindow === opt.value
+                  ? "bg-[var(--brand)] text-white"
+                  : "text-[var(--text-2)] hover:bg-[var(--surface)]"
+              } ${trafficWindowSaving ? "opacity-60 pointer-events-none" : ""}`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="card card-body lg:col-span-2">
