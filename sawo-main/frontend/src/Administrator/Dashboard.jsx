@@ -8,6 +8,7 @@ import { supabase } from "./supabase";
 import { getCache, setCache } from "./adminCache";
 import { computeStats } from "./analytics/computeStats";
 import { getPerms } from "./permissions";
+import { getDashboardTrafficWindow } from "../local-storage/dashboardSettings";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import DailyTrafficChart from "./DailyTrafficChart";
 import { MetricCard } from "./analytics/StatPrimitives";
@@ -86,8 +87,11 @@ export default function Dashboard({ currentUser }) {
     const cached = getCache(DASHBOARD_CACHE_KEY);
     if (cached) setData(cached); else setLoading(true);
     try {
+      // Admin-configurable (Settings → Dashboard Traffic Window), 7/30/90
+      // days — defaults to 30 if never set.
+      const windowDays = await getDashboardTrafficWindow();
       const startDate = new Date();
-      startDate.setDate(startDate.getDate() - 7);
+      startDate.setDate(startDate.getDate() - windowDays);
 
       const [{ data: pageViews, error: pvErr }, { data: events, error: evErr }, { data: activity, error: actErr }] = await Promise.all([
         supabase.from("analytics_page_views").select("*").gte("timestamp", startDate.toISOString()),
@@ -100,7 +104,7 @@ export default function Dashboard({ currentUser }) {
       if (actErr) throw actErr;
 
       const stats = computeStats(pageViews || [], events || [], startDate);
-      const newData = { stats, activity: activity || [] };
+      const newData = { stats, activity: activity || [], windowDays };
       setData(newData);
       setCache(DASHBOARD_CACHE_KEY, newData);
       setError(null);
@@ -134,6 +138,9 @@ export default function Dashboard({ currentUser }) {
 
   const stats = data?.stats;
   const activity = data?.activity || [];
+  // Falls back to 30 only for the brief window before the first fetch
+  // resolves (no cached data yet) — matches dashboardSettings.js's default.
+  const windowDays = data?.windowDays ?? 30;
 
   return (
     <div className="w-full">
@@ -158,15 +165,15 @@ export default function Dashboard({ currentUser }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <MetricCard
           icon="fa-eye"
-          title="Page Views (7d)"
+          title={`Page Views (${windowDays}d)`}
           value={(stats?.totalPageViews ?? 0).toLocaleString()}
-          subtitle="Last 7 days"
+          subtitle={`Last ${windowDays} days`}
         />
         <MetricCard
           icon="fa-users"
-          title="Unique Visitors (7d)"
+          title={`Unique Visitors (${windowDays}d)`}
           value={(stats?.uniqueVisitors ?? 0).toLocaleString()}
-          subtitle="Last 7 days"
+          subtitle={`Last ${windowDays} days`}
         />
         <MetricCard
           icon="fa-box"
@@ -186,7 +193,7 @@ export default function Dashboard({ currentUser }) {
       <div className="card card-body mb-8">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
           <i className="fas fa-chart-column text-[var(--brand)]"></i>
-          Traffic: Last 7 Days
+          Traffic: Last {windowDays} Days
         </h3>
         {stats?.dailyStats?.length > 0 ? (
           <DailyTrafficChart data={stats.dailyStats} />

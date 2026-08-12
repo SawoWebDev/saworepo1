@@ -120,7 +120,7 @@ export default function WebsiteHealth() {
   return (
     <div>
       <p style={{ fontSize: "0.85rem", color: "var(--text-3)", margin: "0 0 20px", maxWidth: 720 }}>
-        Genuinely-actionable gaps only — this deliberately does not flag blank meta title/description
+        Genuinely-actionable gaps only, this deliberately does not flag blank meta title/description
         fields, since those are designed to fall back to the product name/description/thumbnail
         automatically. What's listed below actually needs attention.
       </p>
