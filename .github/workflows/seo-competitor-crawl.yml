@@ -1,0 +1,34 @@
+name: SEO - Competitor Crawl
+
+on:
+  schedule:
+    # Monthly, 1st at 06:00 UTC — this data doesn't need to be fresh (spec's
+    # own default cadence for content-theme crawling).
+    - cron: "0 6 1 * *"
+  workflow_dispatch: {}
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: sawo-main/frontend/src/Administrator/Local/scripts
+        run: npm install
+
+      - name: Run competitor crawl
+        working-directory: sawo-main/frontend/src/Administrator/Local/scripts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SEO_CRAWL_MAX_PAGES: ${{ vars.SEO_CRAWL_MAX_PAGES || '200' }}
+          SEO_CRAWL_DELAY_MS: ${{ vars.SEO_CRAWL_DELAY_MS || '1500' }}
+        run: node seo-competitor-crawl.js
+
+      # seo-competitor-crawl.js already records its own outcome via
+      # ciCheckRuns.js — no separate curl step needed.

@@ -91,6 +91,7 @@ const Logs           = lazy(() => import("./Administrator/Logs"));
 const Inbox          = lazy(() => import("./Administrator/Inbox"));
 const Analytics      = lazy(() => import("./Administrator/Analytics"));
 const PageSEO        = lazy(() => import("./Administrator/PageSEO"));
+const SeoKeywordIntelligence = lazy(() => import("./Administrator/SeoKeywordIntelligence"));
 const CIStatus       = lazy(() => import("./Administrator/CIStatus"));
 const WebsiteHealth  = lazy(() => import("./Administrator/WebsiteHealth"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
@@ -228,6 +229,9 @@ export default function App() {
             } />
             <Route path="/admin/seo" element={
               <ProtectedRoute requiredCap="page.seo"><AdminLayout><PageSEO /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/seo-keywords" element={
+              <ProtectedRoute requiredCap="page.seo_keyword_intel"><AdminLayout><SeoKeywordIntelligence /></AdminLayout></ProtectedRoute>
             } />
             <Route path="/admin/ci-status" element={
               <ProtectedRoute requiredCap="page.ci_status"><AdminLayout><CIStatus /></AdminLayout></ProtectedRoute>

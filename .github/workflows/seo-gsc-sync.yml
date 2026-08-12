@@ -1,0 +1,50 @@
+name: SEO - GSC Sync
+
+on:
+  schedule:
+    # Daily, 05:00 UTC — after GSC's ~2-3 day data lag settles for the
+    # previous day, well clear of the midnight boundary.
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Run the one-time historical backfill (~16 months) instead of the daily 3-day sync"
+        type: boolean
+        default: false
+
+jobs:
+  gsc-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: sawo-main/frontend/src/Administrator/Local/scripts
+        run: npm install
+
+      - name: Run GSC sync
+        working-directory: sawo-main/frontend/src/Administrator/Local/scripts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          # Existing, already-verified GSC property for the live sawo.com
+          # WordPress site. Flip this repo variable to the new domain's
+          # property at cutover — no code change needed, same pattern as
+          # the SITE_URL variable used by sitemap-ping.yml /
+          # broken-link-checker.yml.
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'sc-domain:sawo.com' }}
+        run: |
+          if [ "${{ github.event.inputs.backfill }}" = "true" ]; then
+            node seo-gsc-sync.js --backfill
+          else
+            node seo-gsc-sync.js
+          fi
+
+      # seo-gsc-sync.js already records its own outcome (with a descriptive
+      # message) via ciCheckRuns.js — no separate curl step needed here,
+      # unlike the simpler existing workflows.

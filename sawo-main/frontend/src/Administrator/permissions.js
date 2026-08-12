@@ -64,6 +64,7 @@ export const CAPABILITY_MAP = {
   "page.products_local":      ["editor", "admin", "superadmin"],
   "page.analytics":           ["admin", "superadmin"],
   "page.seo":                 ["editor", "admin", "superadmin"],
+  "page.seo_keyword_intel":   ["editor", "admin", "superadmin"],
   "page.ci_status":           ["admin", "superadmin"],
   "page.website_health":      ["editor", "admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
@@ -148,6 +149,7 @@ export const NAV_ITEMS = [
   { to: "/admin/inbox",           label: "Inbox",            icon: "fa-solid fa-inbox",          cap: "page.inbox",       description: "Every Contact form submission — general inquiries, technical support, and customer support requests." },
   { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   description: "Track visitor behavior, page performance, and traffic sources." },
   { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
+  { to: "/admin/seo-keywords",    label: "Keyword Intelligence", icon: "fa-solid fa-chess", cap: "page.seo_keyword_intel", description: "Own Search Console rankings, competitor content themes, and tracked SERP positions — combined without conflating real ranking data with inferred content themes." },
   { to: "/admin/ci-status",       label: "CI Status",        icon: "fa-solid fa-list-check",     cap: "page.ci_status",   description: "Latest results from the GitHub Actions checks that run against this repo (SEO, sitemap, keep-alive, broken links)." },
   { to: "/admin/website-health",  label: "Website Health",   icon: "fa-solid fa-heart-pulse",    cap: "page.website_health", description: "Genuinely-actionable SEO gaps (missing descriptions, categories, images) plus a condensed view of the automated broken-link/Lighthouse checks." },
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
