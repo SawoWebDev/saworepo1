@@ -1,0 +1,37 @@
+name: SEO - SERP Check
+
+on:
+  schedule:
+    # Weekly, Tuesday 07:00 UTC.
+    - cron: "0 7 * * 2"
+  workflow_dispatch: {}
+
+jobs:
+  serp-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: sawo-main/frontend/src/Administrator/Local/scripts
+        run: npm install
+
+      - name: Run SERP check
+        working-directory: sawo-main/frontend/src/Administrator/Local/scripts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SERP_PROVIDER: ${{ vars.SERP_PROVIDER || 'serpapi' }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          # 130/month enforced in code (seo_serp_usage) as a safety margin
+          # under the real 200/month SerpApi plan limit — see serpQuota.js.
+          SERPAPI_MONTHLY_LIMIT: ${{ vars.SERPAPI_MONTHLY_LIMIT || '130' }}
+          SERPAPI_PER_RUN_LIMIT: ${{ vars.SERPAPI_PER_RUN_LIMIT || '26' }}
+        run: node seo-serp-check.js
+
+      # seo-serp-check.js already records its own outcome via
+      # ciCheckRuns.js — no separate curl step needed.
