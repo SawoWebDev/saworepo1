@@ -139,26 +139,41 @@ export function getPerms(user) {
  * rendered as a flat list in this order (see AdminLayout.jsx's Sidebar).
  * Filter this array using: NAV_ITEMS.filter(item => can(userRole, item.cap))
  */
+// Every visible item now carries a `section` — the sidebar renders three
+// labeled groups, in this order: Product, Site, System (see Sidebar's
+// render in AdminLayout.jsx). Purely a rendering concern; array order below
+// is still what getLandingPath() walks for its fallback, and is kept
+// grouped-by-section here too so the two stay easy to reason about together.
 export const NAV_ITEMS = [
-  { to: "/admin/dashboard",       label: "Dashboard",        icon: "fa-solid fa-gauge-high",     cap: "page.dashboard",   description: "At-a-glance activity, traffic, and catalog status." },
-  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    description: "Manage your product catalog. Create, edit, and publish items across the site." },
-  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", description: "Manage sauna room listings. Create, edit, and publish rooms across the site." },
-  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      description: "Browse products grouped by model line. Click a folder to see everything in it." },
-  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    description: "Manage the categories and tags products can be organized under." },
-  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        description: "A record of every create, update, and delete made across the CMS." },
-  { to: "/admin/inbox",           label: "Inbox",            icon: "fa-solid fa-inbox",          cap: "page.inbox",       description: "Every Contact form submission — general inquiries, technical support, and customer support requests." },
-  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   description: "Track visitor behavior, page performance, and traffic sources." },
-  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed." },
-  { to: "/admin/seo-keywords",    label: "Keyword Intelligence", icon: "fa-solid fa-chess", cap: "page.seo_keyword_intel", description: "Own Search Console rankings, competitor content themes, and tracked SERP positions — combined without conflating real ranking data with inferred content themes." },
-  { to: "/admin/ci-status",       label: "CI Status",        icon: "fa-solid fa-list-check",     cap: "page.ci_status",   description: "Latest results from the GitHub Actions checks that run against this repo (SEO, sitemap, keep-alive, broken links)." },
-  { to: "/admin/website-health",  label: "Website Health",   icon: "fa-solid fa-heart-pulse",    cap: "page.website_health", description: "Genuinely-actionable SEO gaps (missing descriptions, categories, images) plus a condensed view of the automated broken-link/Lighthouse checks." },
+  // ── Product ──────────────────────────────────────────────────────────
+  { to: "/admin/dashboard",       label: "Dashboard",        icon: "fa-solid fa-gauge-high",     cap: "page.dashboard",   description: "At-a-glance activity, traffic, and catalog status.", section: "product" },
+  { to: "/admin/products",        label: "Products",         icon: "fa-solid fa-box",            cap: "products.view",    description: "Manage your product catalog. Create, edit, and publish items across the site.", section: "product" },
+  { to: "/admin/sauna-rooms",     label: "Sauna Rooms",      icon: "fa-solid fa-home",           cap: "sauna_rooms.view", description: "Manage sauna room listings. Create, edit, and publish rooms across the site.", section: "product" },
+  { to: "/admin/models",          label: "Models",           icon: "fa-solid fa-folder-open",    cap: "page.models",      description: "Browse products grouped by model line. Click a folder to see everything in it.", section: "product" },
+  { to: "/admin/taxonomy",        label: "Taxonomy",         icon: "fa-solid fa-tags",           cap: "page.taxonomy",    description: "Manage the categories and tags products can be organized under.", section: "product" },
+  { to: "/admin/logs",            label: "Logs",             icon: "fa-solid fa-file-alt",       cap: "page.logs",        description: "A record of every create, update, and delete made across the CMS.", section: "product" },
+  // Not in the user's original Product/Site/System list — placed here as
+  // the closest fit (contact submissions are a product/site-operations
+  // concern); move to a different section if that's wrong.
+  { to: "/admin/inbox",           label: "Inbox",            icon: "fa-solid fa-inbox",          cap: "page.inbox",       description: "Every Contact form submission — general inquiries, technical support, and customer support requests.", section: "product" },
+
+  // ── Site ─────────────────────────────────────────────────────────────
+  { to: "/admin/analytics",       label: "Analytics",        icon: "fa-solid fa-chart-line",     cap: "page.analytics",   description: "Track visitor behavior, page performance, and traffic sources.", section: "site" },
+  { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed.", section: "site" },
+  { to: "/admin/seo-keywords",    label: "Keywords",         icon: "fa-solid fa-chess", cap: "page.seo_keyword_intel", description: "Own Search Console rankings, competitor content themes, and tracked SERP positions — combined without conflating real ranking data with inferred content themes.", section: "site" },
+  { to: "/admin/website-health",  label: "Website Health",   icon: "fa-solid fa-heart-pulse",    cap: "page.website_health", description: "Genuinely-actionable SEO gaps (missing descriptions, categories, images) plus a condensed view of the automated broken-link/Lighthouse checks.", section: "site" },
+
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
-  // own name/avatar in the sidebar footer instead) while still being matched
-  // for the shared PageHeader and the route's capability check.
+  // own name/avatar in the sidebar footer instead) while still being
+  // matched for the shared PageHeader and the route's capability check. No
+  // `section` needed — hidden items are filtered out before grouping.
   { to: "/admin/profile",         label: "My Profile",       icon: "fa-solid fa-user",           cap: "page.profile",     description: "Update your own username, name, and password.", hidden: true },
-  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       description: "Manage admin accounts and their access roles." },
-  { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", description: "Control which roles can see each page and perform create/edit/delete actions." },
-  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    description: "Site-wide configuration for the public frontend, including the language switcher." },
+
+  // ── System ───────────────────────────────────────────────────────────
+  { to: "/admin/ci-status",       label: "CI Status",        icon: "fa-solid fa-list-check",     cap: "page.ci_status",   description: "Latest results from the GitHub Actions checks that run against this repo (SEO, sitemap, keep-alive, broken links).", section: "system" },
+  { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       description: "Manage admin accounts and their access roles.", section: "system" },
+  { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", description: "Control which roles can see each page and perform create/edit/delete actions.", section: "system" },
+  { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    description: "Site-wide configuration for the public frontend, including the language switcher.", section: "system" },
 ];
 
 /**

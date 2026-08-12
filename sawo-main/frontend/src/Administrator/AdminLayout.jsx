@@ -10,13 +10,45 @@ import CmsSearch from "./CmsSearch.jsx";
 import logo from "./SAWO-logo.webp";
 import "./admin.css";
 
+// A route is "active" (for both the sidebar highlight and picking which
+// NAV_ITEMS entry feeds the page header) when the path matches exactly, or
+// is a real sub-path of it (segment-boundary aware). Plain
+// `pathname.startsWith(to)` is NOT enough — "/admin/seo-keywords" starts
+// with the string "/admin/seo" even though they're unrelated routes, which
+// used to make Page Performance and Keyword Intelligence both light up
+// (and steal each other's page header) whenever either was open.
+const isNavActive = (pathname, to) => pathname === to || pathname.startsWith(`${to}/`);
+
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
+// Order here is the render order — see NAV_ITEMS in permissions.js for
+// which item carries which `section` value.
+const SECTION_ORDER = ["product", "site", "system"];
+const SECTION_LABELS = { product: "Product", site: "Site", system: "System" };
+
 function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, collapsed, onToggleCollapse, realRole, effectiveRole, isPreviewing, onChangePreview }) {
   // `hidden` items (My Profile) are routable and get a PageHeader, but are
-  // reached from the footer identity card instead of the nav list. Flat list,
-  // no section grouping — every item renders directly in nav order.
+  // reached from the footer identity card instead of the nav list.
   const items = nav.filter((item) => !item.hidden);
   const initial = (session.user.username || "?").charAt(0).toUpperCase();
+  // Group into the three named sections, each rendered under its own
+  // divider + label, in SECTION_ORDER. This only affects render order, not
+  // NAV_ITEMS array order itself, so getLandingPath() (which walks the
+  // source array) is unaffected.
+  const bySection = SECTION_ORDER.map((key) => ({
+    key,
+    label: SECTION_LABELS[key],
+    items: items.filter((item) => item.section === key),
+  })).filter((group) => group.items.length > 0);
+
+  const renderLink = ({ to, label, icon }) => {
+    const active = isNavActive(location.pathname, to);
+    return (
+      <Link key={to} to={to} className={active ? "active" : ""} onClick={onClose} title={label}>
+        <i className={icon} />
+        <span className="sidebar-nav-label">{label}</span>
+      </Link>
+    );
+  };
 
   // Pulse the role badge on each change so the switch is noticeable even
   // though it happens on a different page (the Profile picker).
@@ -60,24 +92,15 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
           </a>
         </div>
 
-        {/* Flat nav — no section grouping/collapsing, just the list in
-            NAV_ITEMS order. */}
+        {/* Product / Site / System, each under its own divider + label —
+            see `bySection` above. */}
         <nav className="sidebar-nav">
-          {items.map(({ to, label, icon }) => {
-            const active = location.pathname.startsWith(to);
-            return (
-              <Link
-                key={to}
-                to={to}
-                className={active ? "active" : ""}
-                onClick={onClose}
-                title={label}
-              >
-                <i className={icon} />
-                <span className="sidebar-nav-label">{label}</span>
-              </Link>
-            );
-          })}
+          {bySection.map((group) => (
+            <React.Fragment key={group.key}>
+              <div className="sidebar-nav-section-label">{group.label}</div>
+              {group.items.map(renderLink)}
+            </React.Fragment>
+          ))}
         </nav>
 
         {/* Footer — frosted user card with avatar + actions. The identity
@@ -132,10 +155,6 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
               </button>
             </div>
           </div>
-
-          {/* The "Preview as role" picker now lives on the Profile page
-              (Profile.jsx) — reachable by clicking your name above. Only the
-              exit affordance stays here, on the role line itself. */}
         </div>
       </aside>
     </>
@@ -204,7 +223,7 @@ export default function AdminLayout({ children }) {
   const nav = NAV_ITEMS.filter(item => can(effectiveRole, item.cap));
 
   // Find current page label for mobile topbar
-  const currentNav = nav.find(item => location.pathname.startsWith(item.to));
+  const currentNav = nav.find(item => isNavActive(location.pathname, item.to));
 
   return (
     <div className="admin-shell">
