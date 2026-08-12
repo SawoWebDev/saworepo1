@@ -15,7 +15,6 @@
 // (seo-gsc-sync.yml, seo-competitor-crawl.yml, seo-serp-check.yml) already
 // appears on /admin/ci-status automatically — nothing extra needed here.
 import React, { useEffect, useMemo, useState } from "react";
-import PageHeader from "./PageHeader";
 import { getCache, setCache } from "./adminCache";
 import { logActivity } from "./supabase";
 import { MetricCard } from "./analytics/StatPrimitives";
@@ -34,7 +33,7 @@ import {
   getTrackedKeywordHistory,
   getSerpUsageThisMonth,
   getSemrushRealGaps,
-} from "./seoKeywordIntelligence";
+} from "./seoKeywordIntelligenceData";
 
 const OWN_DOMAIN = "sawo.com";
 const TABS = [
@@ -56,12 +55,10 @@ export default function SeoKeywordIntelligence({ currentUser }) {
 
   return (
     <div>
-      <PageHeader
-        icon="fa-solid fa-magnifying-glass-chart"
-        title="SEO Keyword Intelligence"
-        description="Own rankings (Google Search Console), competitor content themes, and tracked SERP positions — combined without conflating real ranking data with inferred content themes."
-      />
-
+      {/* No page header here — AdminLayout already renders one shared
+          PageHeader per route from the matched NAV_ITEMS entry (icon/
+          title/description), same as every other admin page. This used to
+          render a second, duplicate header. */}
       <div className="tax-tabs" style={{ marginBottom: 16 }}>
         {TABS.map((t) => (
           <button
@@ -266,7 +263,8 @@ function ContentThemesTab({ currentUser }) {
     }
   };
 
-  useEffect(() => { loadCompetitors(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { loadCompetitors(); }, []);
 
   useEffect(() => {
     if (!selectedDomain) { setDetail(null); return; }

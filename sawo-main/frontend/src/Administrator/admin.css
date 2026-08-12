@@ -256,6 +256,24 @@ body {
 }
 .sidebar-nav a.active::before { opacity: 1; }
 
+/* ── Sidebar nav section grouping ────────────────────────────────────────
+   Divider + label above each of the three nav groups (Product/Site/System)
+   — see permissions.js's `section` field and AdminLayout.jsx's Sidebar
+   render. The first label (right under the logo) skips the top border/
+   margin — nothing to visually separate from up there. */
+.sidebar-nav-section-label {
+  margin: 0.7rem 0.9rem 0.35rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.sidebar-nav-section-label:first-child { margin-top: 0.3rem; padding-top: 0; border-top: none; }
+.admin-sidebar.sidebar-collapsed .sidebar-nav-section-label { display: none; }
+
 /* ── Sidebar footer: frosted user card ───────────────────────────────── */
 .sidebar-footer {
   position: relative;
@@ -631,6 +649,7 @@ body {
 @media (max-width: 720px) {
   .cms-search { display: none; }
 }
+
 
 /* ── Day/Night switcher — right side of every admin PageHeader ──
    Drawn at its native 90x40px size inside .ph-sw2, then shrunk with a
