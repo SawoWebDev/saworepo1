@@ -82,7 +82,7 @@ function readTemplate() {
 // template before a page's own snapshot is attempted, so a failed/skipped
 // snapshot for a NEW route (one that has no previously-generated file to
 // fall back to, unlike "/") still serves working client-side-rendered HTML
-// instead of a 404 from vercel.json's explicit rewrite to that path.
+// instead of a 404 from public/_redirects explicit rewrite to that path.
 function seedFallback(template, outFile) {
   const dest = path.join(BUILD, outFile);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
@@ -120,7 +120,7 @@ function buildOutputHtml({
   let out = template.replace(
     '<div id="root"></div>',
     `<div id="root">${rootHtml}</div>` +
-      // The SPA rewrite in vercel.json now points each configured path at
+      // The SPA rewrite in public/_redirects now points each configured path at
       // its OWN outFile, so this guard is defense-in-depth (misconfigured
       // rewrite, stale cache) rather than the only thing protecting other
       // routes, as it was when every route shared one build/index.html.

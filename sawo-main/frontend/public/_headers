@@ -1,0 +1,39 @@
+# ============================================================================
+# SAWO.COM RESPONSE HEADERS — Cloudflare Pages format
+# ----------------------------------------------------------------------------
+# Ported from the old frontend/vercel.json (Vercel-only config, never read by
+# Cloudflare Pages — the site's actual deploy target). vercel.json's rewrites
+# were removed for good (they pointed at the abandoned Next.js app), but
+# these headers were real, live behavior with no Cloudflare-native home until
+# now, so they're carried over as-is rather than dropped.
+#
+# Cloudflare Pages auto-discovers a file named exactly `_headers` in the
+# build output root (CRA copies public/ into build/ unchanged, so this file
+# living in public/ is sufficient — same convention as _redirects).
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+#
+# Syntax: a path pattern on its own line, followed by indented header lines
+# that apply to it. First-match-wins does NOT apply here the way it does in
+# _redirects — Cloudflare merges headers from every matching block, more
+# specific paths first.
+# ============================================================================
+
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
