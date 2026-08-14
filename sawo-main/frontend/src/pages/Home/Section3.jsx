@@ -88,8 +88,11 @@ const Section3 = () => {
   const CONTROL_ITEMS = CONTROL_KEYS.map((key) => ({
     key, title: t(`section3.controls.${key}.title`), img: CONTROL_IMAGES[key], href: CONTROL_HREFS[key],
   }));
+  // Shared across every page that uses this widget (Home, Sauna, Infrared)
+  // — lives in common.json, not this page's own file, so it's translated
+  // once instead of duplicated per page.
   const BENEFIT_CARDS = BENEFIT_KEYS.map(([key, icon]) => ({
-    key, icon, label: t(`section3.benefits.${key}.label`), desc: t(`section3.benefits.${key}.desc`),
+    key, icon, label: tc(`wellnessBenefits.${key}.label`), desc: tc(`wellnessBenefits.${key}.desc`),
   }));
 
   useEffect(() => {

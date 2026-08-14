@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Finnish Sauna Heaters, Controls & Accessories",
+    "description": "Explore SAWO's full Finnish sauna range: heaters, controls, and accessories engineered for over 30 years of authentic sauna warmth and comfort."
+  },
+  "hero": {
+    "heading": "FINNISH SAUNA",
+    "subtitle": "Experience the authentic Finnish sauna with our heaters: Smooth heat, humidity, and the perfect balance for ultimate relaxation.",
+    "catalogueButton": "PRODUCT CATALOGUE"
+  },
+  "heaters": {
+    "heading": "Sauna Heater",
+    "intro": "Called the <strong>\"heart of sauna,\"</strong> we have over 100 different heater models to choose from. SAWO heaters are designed with strong expertise to fit both residential and commercial saunas.",
+    "items": {
+      "tower": { "title": "Tower Series", "caption": "SAWO Tower Series a sauna stone pillar design for full-body steam distribution, ensuring a luxurious and immersive steam experience from floor to ceiling." },
+      "stone": { "title": "Stone Series", "caption": "SAWO Stone Series features a durable stainless steel body with heat-conducting Finnish soapstone, ensuring efficient heating and quick drying after use." },
+      "wallMounted": { "title": "Wall Mounted Series", "caption": "SAWO Wall-Mounted Series features sleek, space-saving heaters that blend efficiency with modern design for optimal warmth and comfort." },
+      "floor": { "title": "Floor Series", "caption": "SAWO Floor Series offers movable, high-performance stand-alone heaters for optimal heat distribution and lasting comfort." },
+      "dragonfire": { "title": "Dragonfire Series", "caption": "Elevate your sauna experience with the SAWO Dragonfire series, crafted by renowned Finnish designer Stefan Lindfors for modern living." },
+      "combi": { "title": "Combi Series", "caption": "Versatile electric heaters with integrated steamers, offering traditional and steam sauna options with aroma oil basins for added luxury." }
+    },
+    "viewAll": "VIEW ALL HEATERS"
+  },
+  "controls": {
+    "heading": "Sauna Controls",
+    "intro": "Using a separate control with SAWO heaters will let you decide what type of sauna experience you will have. Control features such as temperature, humidity, time, use of fan and light dimmer or even save energy with power consumption counter.",
+    "items": {
+      "innova": { "title": "Innova Series", "desc": "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface, no separate power controller needed." },
+      "saunova": { "title": "Saunova Series", "desc": "Versatile control for sauna temperature, humidity, ventilation, and lighting, featuring Smart Controlling, Door Sensor, Prerun Timer, and optional Fan, Dimmer, and Combi functions." },
+      "accessories": { "title": "Control Accessories", "desc": "Modern sauna control systems enhance your experience by managing heat, adjusting ambiance, monitoring energy usage, and providing maintenance alerts." }
+    },
+    "viewAll": "VIEW SAUNA CONTROLS"
+  },
+  "accessories": {
+    "heading": "Sauna Accessories",
+    "intro": "We have wide selection of timeless sauna accessories from Cedar, Aspen and Pine. Choose your favorites to customize the sauna to be exactly for your liking.",
+    "items": {
+      "accessorySets": { "title": "Accessory Sets", "desc": "Our carefully curated accessory sets offer something for everyone. From natural, zero-waste options to bold & sophisticated designs, the sets enhance your sauna enjoyment in every possible way." },
+      "pailsLadles": { "title": "Pails & Ladles", "desc": "Essential to Finnish saunas, our SAWO selection offers pails ranging from 2 to 40 liters. Choose from traditional cedar, aspen, and pine or modern stainless steel options. Complete your set with ladles." },
+      "thermometers": { "title": "Thermometers & Combined meters", "desc": "Traditional Thermo and Hygrometers signal sauna readiness. Explore diverse shapes and styles. Enhance your lounge with wooden clocks and try our 15-minute sand timers for socializing or newcomers." },
+      "clocksSandtimers": { "title": "Clocks & Timers", "desc": "Want to see who lasts the longest in sauna? Our 15min sand timers are a great way to create conversation or perfect for those who are new to Finnish sauna." },
+      "lightsCovers": { "title": "Sauna Lights", "desc": "Create the perfect ambience with a proper play of lighting. Our different light shades allow you to create the feel of soothing and warm." },
+      "headrestsBackrests": { "title": "Headrests & Backrests", "desc": "Wooden headrests and backrests, along with lounge backrests, made from durable materials like wood, memory foam, or fabric, offer comfort in the sauna and lounge with moisture-resistant upholstery for durability." },
+      "doorsHandles": { "title": "Doors & Handles", "desc": "Elevate your sauna with SAWO's sauna doors. Crafted for durability, they feature rubber lining, magnetic lock, stainless hinges, and laminated jambs. Choose from glass options for a light-filled, spacious feel." },
+      "benches": { "title": "Benches & Floor Tiles", "desc": "Upgrade your sauna experience with comfy, stylish benches that support and enhance relaxation. Choose from various high-quality designs to suit your taste and space, creating a wellness sanctuary for your body and mind." },
+      "kivistone": { "title": "Kivistone", "desc": "Kivistone offers a variety of unique soapstone products for homes, gifts, and corporate use, featuring a wide range of innovative designs." },
+      "ventilations": { "title": "Ventilations & Add-Ons", "desc": "Explore your sauna experience with our range of ventilations and essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!" }
+    },
+    "viewAll": "VIEW ALL ACCESSORIES"
+  }
+}
