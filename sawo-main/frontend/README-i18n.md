@@ -168,6 +168,29 @@ read-only and doesn't do that merge itself.
 
 Gitignored, like `i18n-handoff/` — regenerate anytime with
 `npm run i18n:scan-all`. Re-run after any content change to keep it current.
+Before sending `ENG_translations.json` anywhere: read every entry in its
+`needsReview` array — each one needs a resolution in `resolutions.js`
+(promoted into real copy, or confirmed non-copy with a specific reason).
+`apply-resolutions.js` (chained into `npm run i18n:scan-all`) enforces this —
+it errors loudly if any needsReview entry isn't accounted for, so a fresh
+scan can never silently ship an unreviewed batch.
+
+### `split-master.js` — break the master file into translator-sized chunks
+
+```
+npm run i18n:split
+```
+
+Splits the (fully-resolved) `ENG_translations.json` into `ENG_0_manifest.json`
+(instructions/doNotTranslate/hreflang/shared strings, referenced by every
+other file instead of repeated in each) plus 6 content-grouped files
+(`ENG_1_global.json` through `ENG_6_steam.json` — global chrome, core pages,
+heaters, accessories, rooms, steam) sized for one translation-AI conversation
+each instead of one 2000+-string monolith. Every page/shared key from the
+master lands in exactly one output file — the script errors loudly on any
+unassigned or double-assigned key, and prints a total-string reconciliation
+(master total vs. sum of all 7 output files) so a mismatch can never ship
+silently. Also gitignored, regenerable.
 
 ## The manual loop (what you actually do)
 
