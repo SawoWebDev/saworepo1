@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
 import menuPaths from "../../menuPaths";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
 import steamGenerator    from "../../assets/Home/Section3/steam-generator1.webp";
 import steamControl      from "../../assets/Home/Section3/SteamControlFinal.webp";
@@ -18,45 +19,39 @@ import saunovaSeries     from "../../assets/Home/Section3/SAU-UI-V2_AspenSauna.w
 import innovaSeries      from "../../assets/Home/Section3/INC-S-V2_SpruceSauna.webp";
 import controlAccessories from "../../assets/Home/Section3/sensor-holder.webp";
 
-const STEAM_ITEMS = [
-  { title: "Steam Generators", caption: "The luxury of tailored steam from advanced steam generators for a spa-like experience. Customized settings and overall exceptional performance.",                                                                        img: steamGenerator,   href: menuPaths.steam.generators },
-  { title: "Steam Controls",   caption: "Precision, effortlessness, and personalization: Precise steam settings, effortless operation, and a personalized sauna experience from our Saunova and Innova control series.",                                        img: steamControl,     href: menuPaths.steam.controls   },
-  { title: "Steam Accessories",caption: "Premium accessories designed to enhance functionality and maximize comfort. Consistently extraordinary wellness and relaxation experience.",                                                                             img: steamAccessories, href: menuPaths.steam.accessories },
-];
-const ROOMS_ITEMS = [
-  { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: menuPaths.sauna.rooms },
-  { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: menuPaths.sauna.rooms },
-  { title: "Outdoor Sauna",    caption: "Engineered to withstand severe weather. Top-coated walls and durable asphalt-shingle roof for maximum protection from the sun and rain.",                                                                               img: outdoorSauna,     href: menuPaths.sauna.rooms },
-  { title: "Infrared Sauna",   caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: menuPaths.sauna.rooms },
-];
-const INFRARED_ITEMS = [
-  { title: "Infrared Rooms",    img: infraredRooms,      href: menuPaths.infrared },
-  { title: "Infrared Panels",   img: infraredPanels,     href: menuPaths.infrared },
-  { title: "Infrared Controls", img: infraredControls,   href: menuPaths.infrared },
-];
-const CONTROL_ITEMS = [
-  { title: "Saunova Series",       img: saunovaSeries,      href: menuPaths.sauna.controls },
-  { title: "Innova Series",        img: innovaSeries,       href: menuPaths.sauna.controls },
-  { title: "Control Accessories",  img: controlAccessories, href: menuPaths.sauna.accessories.parent },
-];
+const STEAM_KEYS = ["generators", "controls", "accessories"];
+const STEAM_HREFS = { generators: menuPaths.steam.generators, controls: menuPaths.steam.controls, accessories: menuPaths.steam.accessories };
+const STEAM_IMAGES = { generators: steamGenerator, controls: steamControl, accessories: steamAccessories };
+
+const ROOMS_KEYS = ["standard", "glassFront", "outdoor", "infrared"];
+const ROOMS_HREFS = { standard: menuPaths.sauna.rooms, glassFront: menuPaths.sauna.rooms, outdoor: menuPaths.sauna.rooms, infrared: menuPaths.sauna.rooms };
+const ROOMS_IMAGES = { standard: standardSauna, glassFront: glassFrontSauna, outdoor: outdoorSauna, infrared: infraredSaunaRoom };
+
+const INFRARED_KEYS = ["rooms", "panels", "controls"];
+const INFRARED_HREFS = { rooms: menuPaths.infrared, panels: menuPaths.infrared, controls: menuPaths.infrared };
+const INFRARED_IMAGES = { rooms: infraredRooms, panels: infraredPanels, controls: infraredControls };
+
+const CONTROL_KEYS = ["saunova", "innova", "accessories"];
+const CONTROL_HREFS = { saunova: menuPaths.sauna.controls, innova: menuPaths.sauna.controls, accessories: menuPaths.sauna.accessories.parent };
+const CONTROL_IMAGES = { saunova: saunovaSeries, innova: innovaSeries, accessories: controlAccessories };
 
 // Same wellness-benefits widget used on the Sauna and Infrared pages (icon
 // cards, hover-to-reveal on desktop / tap-to-toggle on mobile, seamless
 // auto-scrolling loop). Kept as the same copy-per-page pattern those pages
 // use rather than a shared component, so it stays consistent with them.
-const BENEFIT_CARDS = [
-  { icon: "fas fa-spa", label: "Stress Relief", desc: "Reduces stress, promotes relaxation, and alleviates anxiety" },
-  { icon: "fas fa-heartbeat", label: "Heart Health", desc: "Enhances blood circulation, reduces arterial stiffness, and supports healthy blood pressure" },
-  { icon: "fas fa-lungs", label: "Respiratory Relief", desc: "Relieves nasal, sinus, and chest congestion" },
-  { icon: "fas fa-dumbbell", label: "Muscle Recovery", desc: "Accelerates muscle recovery following exercise" },
-  { icon: "fas fa-bed", label: "Better Sleep", desc: "Promotes deeper, more restorative sleep by extending REM sleep duration" },
-  { icon: "fas fa-heart", label: "Disease Prevention", desc: "Lowers risk of cardiovascular diseases, including stroke, hypertension, dementia, and Alzheimer's disease" },
-  { icon: "fas fa-droplet", label: "Skin Detox", desc: "Opens pores, reduces blackheads, eliminates toxins, and improves skin" },
-  { icon: "fas fa-wand-magic-sparkles", label: "Collagen Boost", desc: "Stimulates fibroblast activity to boost collagen production and enhance skin texture" },
-  { icon: "fas fa-hand-holding-droplet", label: "Skin Hydration", desc: "Improves skin hydration, stabilizes pH balance, and strengthens the skin's natural barrier" },
-  { icon: "fas fa-shield-alt", label: "Immune Support", desc: "Supports the body's natural immune defenses and aids recovery after illness" },
-  { icon: "fas fa-fire", label: "Metabolism Boost", desc: "Stimulates protein repair, improves insulin sensitivity, and enhances metabolic rate" },
-  { icon: "fas fa-smile", label: "Mental Wellness", desc: "Significantly reduces symptoms of depression with consistent use" },
+const BENEFIT_KEYS = [
+  ["stressRelief", "fas fa-spa"],
+  ["heartHealth", "fas fa-heartbeat"],
+  ["respiratoryRelief", "fas fa-lungs"],
+  ["muscleRecovery", "fas fa-dumbbell"],
+  ["betterSleep", "fas fa-bed"],
+  ["diseasePrevention", "fas fa-heart"],
+  ["skinDetox", "fas fa-droplet"],
+  ["collagenBoost", "fas fa-wand-magic-sparkles"],
+  ["skinHydration", "fas fa-hand-holding-droplet"],
+  ["immuneSupport", "fas fa-shield-alt"],
+  ["metabolismBoost", "fas fa-fire"],
+  ["mentalWellness", "fas fa-smile"],
 ];
 
 const exploreBtnStyle = {
@@ -76,6 +71,27 @@ const exploreBtnStyle = {
  * Section3 — Steam / Sauna Rooms / Infrared / Sauna Control grids.
  */
 const Section3 = () => {
+  const t = useLocaleT("home");
+  const tc = useLocaleT("common");
+
+  const STEAM_ITEMS = STEAM_KEYS.map((key) => ({
+    key, title: t(`section3.steam.${key}.title`), caption: t(`section3.steam.${key}.caption`),
+    img: STEAM_IMAGES[key], href: STEAM_HREFS[key],
+  }));
+  const ROOMS_ITEMS = ROOMS_KEYS.map((key) => ({
+    key, title: t(`section3.rooms.${key}.title`), caption: t(`section3.rooms.${key}.caption`),
+    img: ROOMS_IMAGES[key], href: ROOMS_HREFS[key],
+  }));
+  const INFRARED_ITEMS = INFRARED_KEYS.map((key) => ({
+    key, title: t(`section3.infrared.${key}.title`), img: INFRARED_IMAGES[key], href: INFRARED_HREFS[key],
+  }));
+  const CONTROL_ITEMS = CONTROL_KEYS.map((key) => ({
+    key, title: t(`section3.controls.${key}.title`), img: CONTROL_IMAGES[key], href: CONTROL_HREFS[key],
+  }));
+  const BENEFIT_CARDS = BENEFIT_KEYS.map(([key, icon]) => ({
+    key, icon, label: t(`section3.benefits.${key}.label`), desc: t(`section3.benefits.${key}.desc`),
+  }));
+
   useEffect(() => {
     const initCards = () => {
       const cards = document.querySelectorAll(".sauna-card-unique");
@@ -124,10 +140,10 @@ const Section3 = () => {
   return (
     <section className="section3-wrapper">
       {/* ── STEAM ── */}
-      <h2 className="section-title">STEAM</h2>
+      <h2 className="section-title">{t("section3.steamHeading")}</h2>
       <div className="steam-grid">
-        {STEAM_ITEMS.map((item, i) => (
-          <Link key={i} className="steam-card has-caption" to={item.href}>
+        {STEAM_ITEMS.map((item) => (
+          <Link key={item.key} className="steam-card has-caption" to={item.href}>
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
@@ -136,15 +152,15 @@ const Section3 = () => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.steam.parent} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <ChevronRight />
+          {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
 
       {/* ── SAUNA ROOMS ── */}
-      <h2 className="section-title">SAUNA ROOMS</h2>
+      <h2 className="section-title">{t("section3.saunaRoomsHeading")}</h2>
       <div className="steam-grid">
-        {ROOMS_ITEMS.map((item, i) => (
-          <Link key={i} className="steam-card has-caption" to={item.href}>
+        {ROOMS_ITEMS.map((item) => (
+          <Link key={item.key} className="steam-card has-caption" to={item.href}>
             <img src={item.img} alt={item.title} width="700" height="525" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
@@ -153,7 +169,7 @@ const Section3 = () => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.sauna.rooms} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <ChevronRight />
+          {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
 
@@ -164,7 +180,7 @@ const Section3 = () => {
             <div className="sauna-card-unique-grid">
               {/* Cards rendered twice for a seamless infinite loop */}
               {[...BENEFIT_CARDS, ...BENEFIT_CARDS].map((card, i) => (
-                <div className="sauna-card-unique" key={i}>
+                <div className="sauna-card-unique" key={`${card.key}-${i}`}>
                   <div className="sauna-card-unique-close">
                     <i className="fa-solid fa-times"></i>
                   </div>
@@ -184,10 +200,10 @@ const Section3 = () => {
       </section>
 
       {/* ── INFRARED ── */}
-      <h2 className="section-title">INFRARED</h2>
+      <h2 className="section-title">{t("section3.infraredHeading")}</h2>
       <div className="image-grid">
-        {INFRARED_ITEMS.map((item, i) => (
-          <Link key={i} to={item.href} className="image-card">
+        {INFRARED_ITEMS.map((item) => (
+          <Link key={item.key} to={item.href} className="image-card">
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
@@ -195,15 +211,15 @@ const Section3 = () => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.infrared} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <ChevronRight />
+          {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
 
       {/* ── SAUNA CONTROL ── */}
-      <h2 className="section-title">SAUNA CONTROL</h2>
+      <h2 className="section-title">{t("section3.saunaControlHeading")}</h2>
       <div className="image-grid">
-        {CONTROL_ITEMS.map((item, i) => (
-          <Link key={i} to={item.href} className="image-card">
+        {CONTROL_ITEMS.map((item) => (
+          <Link key={item.key} to={item.href} className="image-card">
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
@@ -211,7 +227,7 @@ const Section3 = () => {
       </div>
       <div className="text-center mt-6">
         <Link to={menuPaths.sauna.controls} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          Explore More <ChevronRight />
+          {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
 

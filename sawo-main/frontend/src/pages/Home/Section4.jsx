@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
 import imgPailsLadles        from "../../assets/Home/Section4/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE.webp";
 import imgThermometers       from "../../assets/Home/Section4/BoxType2-copy-new.webp";
@@ -14,22 +15,40 @@ import imgBenches            from "../../assets/Home/Section4/siro-bench.webp";
 import imgKivistone          from "../../assets/Home/Section4/R-500-D_Scene2.webp";
 import imgVentilation        from "../../assets/Home/Section4/Ventilation.webp";
 
-const ACCESSORIES = [
-  { title: "PAILS and LADLES",                href: menuPaths.sauna.accessories.pailsLadles,        img: imgPailsLadles,    alt: "Sauna pails and ladles" },
-  { title: "THERMOMETERS and COMBINED METERS", href: menuPaths.sauna.accessories.thermometers,       img: imgThermometers,   alt: "Sauna thermometers and combined meters" },
-  { title: "CLOCKS and SANDTIMERS",            href: menuPaths.sauna.accessories.clocksSandtimers,   img: imgSandTimers,     alt: "Sauna clocks and sand timers" },
-  { title: "SAUNA LIGHTS and COVERS",          href: menuPaths.sauna.accessories.lightsCovers,       img: imgSaunaLights,    alt: "Sauna light covers" },
-  { title: "HEADRESTS and BACKRESTS",          href: menuPaths.sauna.accessories.headrestsBackrests, img: imgHeadrests,      alt: "Sauna headrests and backrests" },
-  { title: "DOORS and HANDLES",                href: menuPaths.sauna.accessories.doorsHandles,       img: imgDoorsHandles,   alt: "Sauna doors and handles" },
-  { title: "BENCHES and FLOOR TILES",          href: menuPaths.sauna.accessories.benches,            img: imgBenches,        alt: "Sauna benches and floor tiles" },
-  { title: "KIVISTONE",                        href: menuPaths.sauna.accessories.kivistone,          img: imgKivistone,      alt: "Kivistone sauna stones" },
-  { title: "VENTILATION and ADD-ONS",          href: menuPaths.sauna.accessories.ventilations,       img: imgVentilation,    alt: "Sauna ventilation and add-ons" },
+const ACCESSORY_KEYS = [
+  "pailsLadles", "thermometers", "clocksSandtimers", "lightsCovers",
+  "headrestsBackrests", "doorsHandles", "benches", "kivistone", "ventilations",
 ];
+const ACCESSORY_HREFS = {
+  pailsLadles: menuPaths.sauna.accessories.pailsLadles,
+  thermometers: menuPaths.sauna.accessories.thermometers,
+  clocksSandtimers: menuPaths.sauna.accessories.clocksSandtimers,
+  lightsCovers: menuPaths.sauna.accessories.lightsCovers,
+  headrestsBackrests: menuPaths.sauna.accessories.headrestsBackrests,
+  doorsHandles: menuPaths.sauna.accessories.doorsHandles,
+  benches: menuPaths.sauna.accessories.benches,
+  kivistone: menuPaths.sauna.accessories.kivistone,
+  ventilations: menuPaths.sauna.accessories.ventilations,
+};
+const ACCESSORY_IMAGES = {
+  pailsLadles: imgPailsLadles, thermometers: imgThermometers, clocksSandtimers: imgSandTimers,
+  lightsCovers: imgSaunaLights, headrestsBackrests: imgHeadrests, doorsHandles: imgDoorsHandles,
+  benches: imgBenches, kivistone: imgKivistone, ventilations: imgVentilation,
+};
 
 /**
  * Section4 — Sauna Accessories carousel.
  */
 const Section4 = () => {
+  const t = useLocaleT("home");
+  const tc = useLocaleT("common");
+  const ACCESSORIES = ACCESSORY_KEYS.map((key) => ({
+    key,
+    title: t(`section4.items.${key}.title`),
+    alt: t(`section4.items.${key}.alt`),
+    href: ACCESSORY_HREFS[key],
+    img: ACCESSORY_IMAGES[key],
+  }));
   const carouselRef  = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -80,7 +99,7 @@ const Section4 = () => {
         className="text-center mb-6"
         style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, color: "rgb(175, 133, 100)", fontSize: "35px" }}
       >
-        SAUNA ACCESSORIES
+        {t("section4.heading")}
       </h2>
 
       <div className="accessories-carousel-wrapper relative flex items-center" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -108,7 +127,7 @@ const Section4 = () => {
           onMouseEnter={e => e.currentTarget.style.color = "#af8564"}
           onMouseLeave={e => e.currentTarget.style.color = "#333333"}
         >
-          Explore More &#8250;
+          {tc("exploreMore")} &#8250;
         </Link>
       </div>
 

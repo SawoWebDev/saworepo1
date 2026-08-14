@@ -3,20 +3,24 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import ChevronRight from "../../components/icons/ChevronRight";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import menuPaths from "../../menuPaths";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
 import imgCustomizedSolutions   from "../../assets/Home/Section5/Customized-Solutions_1.webp";
 import imgPreventiveMaintenance from "../../assets/Home/Section5/PREVENTIVE-MAINTENANCE_1.webp";
-
-const HEADING     = "Customized Solutions";
-const SUBTITLE    = "Let's bring your sauna vision to life.";
-const BODY1       = "We craft sauna solutions tailored to your style and space. Whether for home or business, we've got you covered from design to installation to technical support.";
-const BODY2       = "Call us or send us a message.";
-const BUTTON_TEXT = "INQUIRE TODAY";
 
 /**
  * Section5 — Customized Solutions with image comparison slider.
  */
 const Section5 = () => {
+  const t = useLocaleT("home");
+  const tc = useLocaleT("common");
+  const HEADING     = t("section5.heading");
+  const SUBTITLE    = t("section5.subtitle");
+  const BODY1       = t("section5.body1");
+  const BODY2       = t("section5.body2");
+  const BUTTON_TEXT = tc("inquireToday");
+  const ALT_RIGHT   = t("section5.altRight");
+  const ALT_LEFT    = t("section5.altLeft");
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging,     setIsDragging]     = useState(false);
   const containerRef = useRef(null);
@@ -94,7 +98,7 @@ const Section5 = () => {
               <div className="absolute inset-0">
                 <img
                   src={imgCustomizedSolutions}
-                  alt="Sauna customized solutions"
+                  alt={ALT_RIGHT}
                   className="w-full h-full object-cover"
                   draggable="false"
                   loading="lazy"
@@ -109,7 +113,7 @@ const Section5 = () => {
               >
                 <img
                   src={imgPreventiveMaintenance}
-                  alt="Preventive maintenance"
+                  alt={ALT_LEFT}
                   className="w-full h-full object-cover"
                   draggable="false"
                   loading="lazy"

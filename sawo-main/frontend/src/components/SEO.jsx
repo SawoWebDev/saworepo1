@@ -43,6 +43,16 @@ const SEO = ({
   path = "",
   image = DEFAULT_IMAGE,
   noindex = false,
+  // Already-complete title (e.g. from seo.json's "<Page> — <site>" copy) —
+  // rendered as-is, skipping the "<title> | SAWO" auto-suffix below. Used by
+  // locale routes whose translated title already includes the site name.
+  rawTitle,
+  // { en: "/", fi: "/fi", de: "/de" } — only pass this for a path that is
+  // GENUINELY translated in every listed locale (see
+  // i18n/translatedRoutes.js's TRANSLATED_PATHS comment). Asserting an
+  // hreflang alternate for a locale that doesn't have real copy is worse for
+  // SEO than omitting it (CRA-I18N-TRANSLATIONS-PLAN.md's hreflang gotcha).
+  hreflangAlternates,
 }) => {
   // Sync first (repeat visits paint the CMS override immediately, no flash
   // of the hard-coded default), then revalidate async — same two-phase
@@ -68,7 +78,9 @@ const SEO = ({
   const effectiveDescription = override?.description || description;
   const effectiveImage = override?.image || image;
 
-  const fullTitle = effectiveTitle ? `${effectiveTitle} | ${SITE_NAME}` : DEFAULT_TITLE;
+  const fullTitle = override?.title || rawTitle
+    ? (override?.title ? `${override.title} | ${SITE_NAME}` : rawTitle)
+    : effectiveTitle ? `${effectiveTitle} | ${SITE_NAME}` : DEFAULT_TITLE;
   const url = `${SITE_URL}${path}`;
   const absoluteImage = effectiveImage.startsWith("http") ? effectiveImage : `${SITE_URL}${effectiveImage}`;
 
@@ -78,6 +90,12 @@ const SEO = ({
       <meta name="description" content={effectiveDescription} />
       <link rel="canonical" href={url} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
+      {hreflangAlternates && Object.entries(hreflangAlternates).map(([hreflang, altPath]) => (
+        <link key={hreflang} rel="alternate" hrefLang={hreflang} href={`${SITE_URL}${altPath}`} />
+      ))}
+      {hreflangAlternates && (
+        <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${hreflangAlternates.en}`} />
+      )}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={SITE_NAME} />

@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
 import Tower      from "../../assets/Home/Section2/TOWER-SERIES-2-600x360-1.webp";
 import WallMounted from "../../assets/Home/Section2/WALL-MOUNTED-SERIES-v2-1.webp";
@@ -10,19 +11,31 @@ import Combi      from "../../assets/Home/Section2/COMBI-SERIES-600x360-1.webp";
 import Stone      from "../../assets/Home/Section2/STONE-SERIES-3-600x320-new-.webp";
 import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-1-600x360-1.webp";
 
-const SAUNA_HEATERS = [
-  { title: "TOWER",        href: menuPaths.sauna.heaters.tower,       img: Tower,       alt: "SAWO Tower Sauna Heater Series with elegant vertical design",                    caption: "Height and energy efficiency in a sleek, elegant design. Consistent warmth delivered from the lowest to the highest parts of the sauna for optimal relaxation and wellness." },
-  { title: "WALL-MOUNTED", href: menuPaths.sauna.heaters.wallMounted, img: WallMounted, alt: "SAWO Wall-Mounted Sauna Heater Series for compact sauna rooms",                  caption: "Space-saving and energy-efficient wall-mounted sauna heaters that generate steady, powerful heat. Sleek, modern design and superior comfort for the ultimate sauna experience." },
-  { title: "FLOOR",        href: menuPaths.sauna.heaters.floor,       img: Floor,       alt: "SAWO Floor-Mounted Sauna Heater Series for commercial saunas",                   caption: "Premium, highly powerful standalone heaters that provide the unbeatable combination of energy efficiency and elegant design. Ideal for commercial use." },
-  { title: "COMBI",        href: menuPaths.sauna.heaters.combi,       img: Combi,       alt: "SAWO Combi Sauna Heater Series with steam and heat combination",                 caption: "Versatility in one modern, energy-efficient unit. Steam and heat combined for customizable comfort, wellness, and relaxation." },
-  { title: "STONE",        href: menuPaths.sauna.heaters.stone,       img: Stone,       alt: "SAWO Stone Sauna Heater Series with stainless steel and soapstone",              caption: "The perfect heater for every type of sauna: stainless steel durability, superior Finnish soapstone heat conduction, and sleek aesthetics." },
-  { title: "DRAGONFIRE",   href: menuPaths.sauna.heaters.dragonfire,  img: Dragonfire,  alt: "SAWO Dragonfire Sauna Heater Series with artistic design by Stefan Lindfors",   caption: "A blend of artistic flair and cutting-edge technology designed by industrial and interior designer Stefan Lindfors." },
-];
+const HEATER_KEYS = ["tower", "wallMounted", "floor", "combi", "stone", "dragonfire"];
+const HEATER_HREFS = {
+  tower: menuPaths.sauna.heaters.tower,
+  wallMounted: menuPaths.sauna.heaters.wallMounted,
+  floor: menuPaths.sauna.heaters.floor,
+  combi: menuPaths.sauna.heaters.combi,
+  stone: menuPaths.sauna.heaters.stone,
+  dragonfire: menuPaths.sauna.heaters.dragonfire,
+};
+const HEATER_IMAGES = { tower: Tower, wallMounted: WallMounted, floor: Floor, combi: Combi, stone: Stone, dragonfire: Dragonfire };
 
 /**
  * Section2 — Sauna Heaters carousel.
  */
 const Section2 = () => {
+  const t = useLocaleT("home");
+  const tc = useLocaleT("common");
+  const SAUNA_HEATERS = HEATER_KEYS.map((key) => ({
+    key,
+    title: t(`section2.items.${key}.title`),
+    caption: t(`section2.items.${key}.caption`),
+    alt: t(`section2.items.${key}.alt`),
+    href: HEATER_HREFS[key],
+    img: HEATER_IMAGES[key],
+  }));
   const carouselRef  = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -79,7 +92,7 @@ const Section2 = () => {
         className="text-center mb-6"
         style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, color: "#AF8564", fontSize: "2.2rem" }}
       >
-        SAUNA HEATERS
+        {t("section2.heading")}
       </h2>
 
       <div
@@ -87,7 +100,7 @@ const Section2 = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <button className="arrow left-arrow text-3xl font-bold text-gray-700 hover:text-amber-600 mr-2 z-20" onClick={scrollLeft}>&#10094;</button>
+        <button className="arrow left-arrow text-3xl font-bold text-gray-700 hover:text-amber-600 mr-2 z-20" onClick={scrollLeft} aria-label={tc("previous")}>&#10094;</button>
 
         <div className="sauna-carousel flex overflow-x-auto gap-6 scroll-smooth snap-x snap-mandatory px-2" ref={carouselRef}>
           {loopedItems.map((item, idx) => (
@@ -102,7 +115,7 @@ const Section2 = () => {
           ))}
         </div>
 
-        <button className="arrow right-arrow text-3xl font-bold text-gray-700 hover:text-yellow-900 ml-2 z-20" onClick={scrollRight}>&#10095;</button>
+        <button className="arrow right-arrow text-3xl font-bold text-gray-700 hover:text-yellow-900 ml-2 z-20" onClick={scrollRight} aria-label={tc("next")}>&#10095;</button>
       </div>
 
       <style jsx>{`
