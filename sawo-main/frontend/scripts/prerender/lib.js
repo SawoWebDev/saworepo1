@@ -31,14 +31,33 @@ const MIME = {
   ".woff2": "font/woff2", ".map": "application/json",
 };
 
-function serveBuild() {
+// `fallbackHtml` is served verbatim for any request that doesn't resolve to
+// a real static file (the SPA-fallback case) — a FIXED string captured once
+// before the crawl loop starts, not a re-read of build/index.html. That
+// file gets overwritten mid-run by Home's own prerender pass (whichever
+// page's outFile is "index.html"), and every other page's *own* prerender
+// pass navigates fresh to its URL, hitting this same fallback branch for
+// its initial (pre-React) HTML. Serving a live re-read of the mutable file
+// meant every page processed after Home in the pages/*.js run order (loaded
+// alphabetically) silently inherited Home's already-baked canonical/
+// hreflang tags into ITS OWN initial DOM — React Helmet then adds its own
+// tags on top without removing the stale ones (it only manages tags it
+// itself rendered), so document.querySelector picked whichever tag came
+// first, which was the stale one. Fixed by decoupling "the shell every
+// page's crawl starts from" from "Home's finished, currently-on-disk
+// output" — every page now always starts from the one true pristine shell.
+function serveBuild(fallbackHtml) {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
       const urlPath = decodeURIComponent(req.url.split("?")[0]);
-      let file = path.join(BUILD, urlPath);
-      if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) file = INDEX; // SPA fallback
-      res.setHeader("Content-Type", MIME[path.extname(file)] || "application/octet-stream");
-      fs.createReadStream(file).pipe(res);
+      const file = path.join(BUILD, urlPath);
+      if (fs.existsSync(file) && !fs.statSync(file).isDirectory()) {
+        res.setHeader("Content-Type", MIME[path.extname(file)] || "application/octet-stream");
+        fs.createReadStream(file).pipe(res);
+        return;
+      }
+      res.setHeader("Content-Type", "text/html");
+      res.end(fallbackHtml);
     });
     server.listen(0, "127.0.0.1", () => resolve(server));
   });
@@ -216,8 +235,16 @@ function buildOutputHtml({
 // keeps working unchanged.
 async function standardCapture(page) {
   return page.evaluate(() => {
+    // Last match, not first: public/index.html bakes in a static default
+    // <meta name="description"> (and pages can inherit a stale <link
+    // rel="canonical">/hreflang from a previous page's finished output —
+    // see serveBuild's comment), and React Helmet APPENDS its own tags
+    // rather than replacing ones it doesn't recognize as its own. Helmet's
+    // real, page-specific tag is always the last one of its kind in the
+    // DOM once React has committed.
     const attr = (selector, attribute) => {
-      const el = document.querySelector(selector);
+      const matches = document.querySelectorAll(selector);
+      const el = matches[matches.length - 1];
       return el ? el.getAttribute(attribute) : null;
     };
     return {

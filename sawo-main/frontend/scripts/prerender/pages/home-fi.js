@@ -18,8 +18,12 @@ module.exports = {
 
   async capture(page) {
     return page.evaluate(() => {
+      // Last match, not first — see lib.js's standardCapture comment
+      // (static default <meta description> in public/index.html vs
+      // Helmet's own, appended not replaced).
       const attr = (selector, attribute) => {
-        const el = document.querySelector(selector);
+        const matches = document.querySelectorAll(selector);
+        const el = matches[matches.length - 1];
         return el ? el.getAttribute(attribute) : null;
       };
       return {
