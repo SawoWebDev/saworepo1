@@ -157,6 +157,15 @@ function extractFile(absPath, relPath) {
     },
     JSXExpressionContainer(p) {
       if (isInsideStyleOrScript(p)) return;
+      // JSXExpressionContainer is the AST node for BOTH `{expr}` as JSX
+      // children (real visible text) AND `attr={expr}` attribute values
+      // (routing fallbacks like `to={item.path || "#"}`, style values,
+      // etc.) — without this guard, a literal used only as a non-text
+      // attribute's fallback (e.g. that bare "#" href placeholder) gets
+      // misread as visible copy. Only scan the JSX-children case here;
+      // attribute values are handled separately by JSXAttribute below,
+      // which already has its own TEXT_ATTRS allowlist.
+      if (p.parentPath && p.parentPath.isJSXAttribute()) return;
       // Both branches of {cond ? "Yes" : "No"} and either side of
       // {cond && "text"} / {cond || "text"} are real, reachable copy — not
       // just the bare {"literal"} case.
