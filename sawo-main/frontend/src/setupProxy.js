@@ -34,25 +34,6 @@ module.exports = function(app) {
     })
   );
 
-  // Proxy /fi, /de, the Next.js build asset paths they depend on (/_next),
-  // and /assets — the frontend-next Home page images (Section1-5) reference
-  // /assets/Home/... as absolute paths, and CRA's own public/ has no
-  // /assets folder, so this is safe to hand entirely to frontend-next.
-  // Without this, /fi and /de pages resolve those image URLs against the
-  // CRA origin, which has no proxy rule for them and falls back to serving
-  // index.html (200 OK, wrong content) instead of the actual image.
-  // Override the target with REACT_APP_NEXT_DEV_ORIGIN if frontend-next runs
-  // on a different port.
-  app.use(
-    ['/fi', '/de', '/_next', '/assets'],
-    createProxyMiddleware({
-      target: process.env.REACT_APP_NEXT_DEV_ORIGIN || 'http://localhost:3002',
-      changeOrigin: true,
-      ws: true,
-      logLevel: 'warn',
-    })
-  );
-
   // functions/api/media-upload.js and functions/media/[[path]].js are
   // Cloudflare Pages Functions — they don't exist under plain `react-scripts
   // start`, which only serves static CRA output, so image upload/replace/
