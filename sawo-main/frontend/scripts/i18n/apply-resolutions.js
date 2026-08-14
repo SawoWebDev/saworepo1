@@ -45,7 +45,8 @@ let promotedCount = 0;
 
 for (const p of [...PROMOTED, ...PROMOTED_SHARED]) {
   if (p.page) setPath(data.pages, p.page, p.path, p.value);
-  else setPath(data.shared, "common", p.path.slice(1), p.value); // PROMOTED_SHARED paths are ["common", key]
+  else if (p.shared) setPath(data.shared, p.shared, p.path, p.value);
+  else setPath(data.shared, "common", p.path.slice(1), p.value); // legacy PROMOTED_SHARED paths of the form ["common", key]
   promotedCount++;
 
   for (const c of p.consumes || []) {
