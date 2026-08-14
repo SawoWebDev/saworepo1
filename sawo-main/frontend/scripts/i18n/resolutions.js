@@ -191,6 +191,21 @@ const PROMOTED = [
     note: "SaunaControls.jsx:424 — reconstructed; {search} is the dynamic search-term placeholder, preserve exactly.",
     consumes: [{ file: "pages/Sauna/SaunaControls.jsx", line: 424, value: "\"" }],
   },
+
+  {
+    shared: "headerSearchBar", path: ["copy", "faq_search_result_label"], value: "FAQ",
+    note: "SearchBar.jsx:15 — a { name: \"FAQ\", path: ... } entry in PAGE_RESULTS (the site-search page-results list), same word as FAQ.jsx's own title/alt and NotFound.jsx's nav link, same treatment.",
+    consumes: [{ file: "components/Header/SearchBar.jsx", line: 15, value: "FAQ" }],
+  },
+  {
+    shared: "header", path: ["copy", "toggle_submenu_aria_label"],
+    value: "{action} {itemName} submenu",
+    note: "Header.jsx:788 and :843 — both are the exact same shape (aria-label={`${hovered ? \"Collapse\" : \"Expand\"} ${item.name} submenu`}, once for top-level nav items, once for second-level submenu items), consolidated into one template key. {action} is \"Collapse\"/\"Expand\" (already promoted separately, see header.aria-label.collapse/expand), {itemName} is the dynamic nav item's own name. Preserve both placeholders exactly; translate \"submenu\" in context (e.g. Finnish \"alavalikko\").",
+    consumes: [
+      { file: "components/Header/Header.jsx", line: 788, value: "submenu" },
+      { file: "components/Header/Header.jsx", line: 843, value: "submenu" },
+    ],
+  },
 ];
 
 // Shared across all 10 accessory-category pages + UserManuals.jsx —

@@ -28,6 +28,12 @@ const TEXT_ATTRS = new Set([
   "text", "label", "heading", "subheading", "subtitle", "caption", "description",
   "buttonText", "ctaText", "linkText", "errorText", "helperText", "tooltip",
 ]);
+// The subset of TEXT_ATTRS that get special ConditionalExpression/
+// TemplateLiteral handling below — a screen reader announces whatever
+// string ends up in these regardless of locale, so a dynamically-computed
+// value (`aria-label={open ? "Close menu" : "Open menu"}`) can't be allowed
+// to silently vanish the way a plain isStringLiteralish check would miss it.
+const ARIA_CRITICAL_ATTRS = new Set(["alt", "aria-label", "title"]);
 // Object-literal field names worth pulling out of data arrays like
 // CAROUSEL_ITEMS = [{ title: "...", caption: "..." }, ...].
 const TEXT_FIELDS = new Set([
@@ -36,17 +42,22 @@ const TEXT_FIELDS = new Set([
   "quote", "tagline", "alt", "intro", "note", "message", "buttonText", "ctaText",
   "linkText", "errorText", "helperText", "tooltip", "placeholder",
 ]);
-// Never treat these as copy even if string-valued. "name" is deliberately
-// excluded from extraction (despite being in TEXT_FIELDS above) because in
-// this codebase it's ambiguous — sometimes real copy, often a product/brand
-// name or a form field's technical name — safer to leave it out than
-// silently extract non-copy data as if it were translatable.
+// Never treat these as copy even if string-valued.
 const NEVER_FIELDS = new Set([
   "href", "src", "icon", "key", "id", "path", "slug", "color", "img", "className",
-  "group", "type", "code", "value", "name", "images", "image", "urls", "url",
+  "group", "type", "code", "value", "images", "image", "urls", "url",
   "thumbnail", "thumbnails", "sizes", "width", "height", "model", "modelCode",
   "sku", "productCode",
 ]);
+// "name" is NOT blanket-excluded (it's real copy far more often than not —
+// e.g. Header.jsx's nav items are exactly { name: "...", path: ... }) but
+// it's also the field most likely to hold an internal id/SKU rather than
+// display text when there's no path/href sibling to confirm it's a nav-item
+// shape. Values matching this pattern (short, all-caps/hyphenated/digit-
+// heavy tokens — "TRDC-NS", "NRNSC") get routed to needsReview instead of
+// silently promoted, but ONLY when no path/href sibling exists; a name next
+// to a path/href is unambiguously a real link label regardless of shape.
+const SKU_LIKE_PATTERN = /^[A-Z0-9][A-Z0-9_-]*$/;
 // Function-call names whose string argument is user-facing copy — form
 // validation/error messages, toasts, confirmations — none of which live in
 // JSX at all, so the JSX-focused visitors above never see them.
@@ -222,6 +233,59 @@ function extractFile(absPath, relPath) {
 
       if (!isSeoMeta && !TEXT_ATTRS.has(name)) return;
       const valNode = p.node.value;
+
+      // Accessibility-critical attributes commonly compute their value
+      // dynamically — Header.jsx has both patterns:
+      //   aria-label={mobileOpen ? "Close menu" : "Open menu"}
+      //   aria-label={`${x ? "Collapse" : "Expand"} ${item.name} submenu`}
+      // A plain isStringLiteralish check misses both entirely (silently —
+      // no entry, no flag). Handle them explicitly for alt/aria-label/title
+      // specifically, since a screen reader announces whatever string ends
+      // up here regardless of which locale is active.
+      if (ARIA_CRITICAL_ATTRS.has(name) && valNode && valNode.type === "JSXExpressionContainer") {
+        const expr = valNode.expression;
+        if (expr.type === "ConditionalExpression") {
+          for (const branch of [expr.consequent, expr.alternate]) {
+            if (!isStringLiteralish(branch)) continue;
+            const val = cleanText(literalValue(branch) || "");
+            if (!val) continue;
+            entries.push({ value: val, keyParts: [name, slug(val)], line: p.node.loc?.start.line, kind: `attr-ternary:${name}` });
+          }
+          return;
+        }
+        if (expr.type === "TemplateLiteral" && expr.expressions.length > 0) {
+          // Real interpolation (dynamic parts mixed with static text) — not
+          // reconstructible into one clean string automatically. Surface
+          // every static text chunk AND any string-literal ternary branches
+          // nested inside the interpolated expressions, so nothing is lost,
+          // but as needsReview (translator must read the source to see how
+          // the pieces actually combine) rather than silently promoted.
+          const staticChunks = expr.quasis.map((q) => cleanText(q.value.cooked || "")).filter(Boolean);
+          for (const chunk of staticChunks) {
+            entries.push({
+              value: chunk, keyParts: [name, slug(chunk)], line: p.node.loc?.start.line,
+              kind: `attr-template-static:${name}`, templateFragment: true,
+            });
+          }
+          // Nested ternary branches ARE clean, complete, standalone strings
+          // ("Collapse" / "Expand") even though they live inside a
+          // template literal — promote these normally, same as a plain
+          // ternary attribute value; only the surrounding static TEXT
+          // (which only makes sense stitched together with the dynamic
+          // parts) goes to needsReview above.
+          for (const innerExpr of expr.expressions) {
+            if (innerExpr.type !== "ConditionalExpression") continue;
+            for (const branch of [innerExpr.consequent, innerExpr.alternate]) {
+              if (!isStringLiteralish(branch)) continue;
+              const val = cleanText(literalValue(branch) || "");
+              if (!val) continue;
+              entries.push({ value: val, keyParts: [name, slug(val)], line: p.node.loc?.start.line, kind: `attr-template-ternary:${name}` });
+            }
+          }
+          return;
+        }
+      }
+
       let raw = null;
       if (valNode && valNode.type === "StringLiteral") raw = valNode.value;
       else if (valNode && valNode.type === "JSXExpressionContainer" && isStringLiteralish(valNode.expression)) raw = literalValue(valNode.expression);
@@ -280,18 +344,26 @@ function extractFile(absPath, relPath) {
       // Walking only one level, or only handling arrays-of-objects, misses
       // both of those. keyPath mirrors the actual JS structure (varName.
       // index.fieldName.index...), always traceable back to source.
-      const walk = (node, keyPath) => {
+      const walk = (node, keyPath, ctx) => {
         if (!node) return;
         if (node.type === "ArrayExpression") {
-          node.elements.forEach((el, i) => walk(el, [...keyPath, String(i)]));
+          node.elements.forEach((el, i) => walk(el, [...keyPath, String(i)], ctx));
           return;
         }
         if (node.type === "ObjectExpression") {
+          // Needed so a `name` field two levels down can tell whether ITS
+          // OWN enclosing object has a path/href sibling (the nav-item
+          // shape) — computed fresh per object, not inherited from a
+          // parent's siblings.
+          const siblingKeys = new Set(
+            node.properties.filter((pr) => pr.type === "ObjectProperty").map((pr) => pr.key && (pr.key.name || pr.key.value))
+          );
+          const hasPathOrHref = siblingKeys.has("path") || siblingKeys.has("href");
           for (const prop of node.properties) {
             if (prop.type !== "ObjectProperty") continue;
             const fieldName = prop.key && (prop.key.name || prop.key.value);
             if (!fieldName || NEVER_FIELDS.has(fieldName)) continue; // e.g. don't descend into images:[...url...]
-            walk(prop.value, [...keyPath, fieldName]);
+            walk(prop.value, [...keyPath, fieldName], { hasPathOrHref });
           }
           return;
         }
@@ -307,11 +379,18 @@ function extractFile(absPath, relPath) {
           if (!isArrayIndex && (!TEXT_FIELDS.has(lastKey) || NEVER_FIELDS.has(lastKey))) return;
           const val = cleanText(literalValue(node) || "");
           if (!val) return;
-          entries.push({ value: val, keyParts: keyPath, line: node.loc?.start.line, kind: `field:${keyPath.join(".")}` });
+          // `name` is captured by default (Header.jsx's nav items are
+          // exactly { name: "...", path: ... }) — but WITHOUT a path/href
+          // sibling to confirm that shape, a name that looks like an
+          // internal id/SKU (short, all-caps/hyphenated/digit-heavy) is
+          // ambiguous enough to flag for review rather than silently
+          // promote as if it were display text.
+          const nameAmbiguous = !isArrayIndex && lastKey === "name" && !(ctx && ctx.hasPathOrHref) && SKU_LIKE_PATTERN.test(val);
+          entries.push({ value: val, keyParts: keyPath, line: node.loc?.start.line, kind: `field:${keyPath.join(".")}`, nameAmbiguous });
         }
       };
 
-      walk(p.node.init, [varName]);
+      walk(p.node.init, [varName], {});
     },
   });
 
@@ -346,6 +425,13 @@ function main() {
         result.doNotTranslate.add(e.value);
         continue;
       }
+      if (e.nameAmbiguous) {
+        result.needsReview.push({
+          value: e.value, file: relPath, line: e.line,
+          reason: "a 'name' field with no path/href sibling in the same object, and the value looks like an internal id/SKU code rather than display text — confirm before translating (a name NEXT TO a path/href, e.g. nav items, is captured automatically and never reaches this check)",
+        });
+        continue;
+      }
       if (e.value.length <= 1 || /^[A-Z0-9_-]{2,}$/.test(e.value) && e.value === e.value.toUpperCase() && e.value.split(" ").length === 1 && e.value.length < 6) {
         result.needsReview.push({ value: e.value, file: relPath, line: e.line, reason: "short/code-like token, unclear if copy" });
         continue;
@@ -354,6 +440,13 @@ function main() {
         result.needsReview.push({
           value: e.value, file: relPath, line: e.line,
           reason: "likely a mid-sentence fragment — inline JSX formatting (e.g. <b>/<strong>) probably split a full sentence into disconnected pieces; open the file at this line and translate the WHOLE sentence in context, not this fragment alone",
+        });
+        continue;
+      }
+      if (e.templateFragment) {
+        result.needsReview.push({
+          value: e.value, file: relPath, line: e.line,
+          reason: "a static text chunk from a template literal with real interpolation (e.g. `${x ? \"Collapse\" : \"Expand\"} ${item.name} submenu`) — this piece only makes sense combined with the dynamic parts around it; open the file at this line to see how it's actually assembled before translating",
         });
         continue;
       }
