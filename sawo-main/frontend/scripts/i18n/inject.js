@@ -5,8 +5,17 @@
  *
  * Usage:
  *   node scripts/i18n/inject.js <path-to-translated.json> [--dry-run]
+ *   node scripts/i18n/inject.js fi/sauna.json               # shorthand,
+ *                                                            # resolved against
+ *                                                            # i18n-handoff/
  *
- * The input file is expected to be exactly what extract.js produced,
+ * Expects the file at i18n-handoff/<lang>/<page>.json — the translator saves
+ * it there directly (extract.js's instructions field names this exact
+ * path), separate from i18n-handoff/en/ (the reference source, never
+ * written to by this script). Pass either that path directly or any other
+ * path on disk.
+ *
+ * The file itself is expected to be exactly what extract.js produced,
  * translated in place: { lang, page, instructions?, content }. `lang` in
  * the file determines which locale directory it's written to — the script
  * doesn't take locale as a separate argument, so a mislabeled file can't
@@ -18,6 +27,7 @@
  * write — never a partial file.
  */
 const fs = require("fs");
+const path = require("path");
 const lib = require("./lib");
 
 function diffKeys(sourceFlat, targetFlat) {
@@ -58,15 +68,20 @@ function validate(sourceContent, translatedContent) {
 function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
-  const inputPath = args.find((a) => !a.startsWith("--"));
+  const rawPath = args.find((a) => !a.startsWith("--"));
 
-  if (!inputPath) {
+  if (!rawPath) {
     console.error("Usage: node scripts/i18n/inject.js <path-to-translated.json> [--dry-run]");
     process.exitCode = 1;
     return;
   }
+
+  // Accept either a real path or the "<lang>/<page>.json" shorthand,
+  // resolved against i18n-handoff/ — matches exactly what extract.js's
+  // instructions field tells the translator to save the file as.
+  const inputPath = fs.existsSync(rawPath) ? rawPath : path.join(lib.HANDOFF_DIR, rawPath);
   if (!fs.existsSync(inputPath)) {
-    console.error(`inject: file not found: ${inputPath}`);
+    console.error(`inject: file not found: ${rawPath} (also checked ${inputPath})`);
     process.exitCode = 1;
     return;
   }
