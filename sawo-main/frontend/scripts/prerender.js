@@ -18,13 +18,13 @@
  *
  * Each page's output is written to build/<outFile> (build/index.html for
  * Home, build/<page>/index.html for everything else) with a matching
- * explicit rewrite added to vercel.json. FAIL-OPEN, per page: a page whose
+ * explicit rewrite added to public/_redirects. FAIL-OPEN, per page: a page whose
  * snapshot throws is seeded with the plain (non-prerendered) template
  * first, so a broken/flaky snapshot for one page can never 404 that route
  * OR block any other page's prerender OR break a deploy. Grep build logs
  * for "PRERENDERED:" to see how each page went.
  *
- * Browser: puppeteer-core + @sparticuz/chromium on Linux (Vercel's build
+ * Browser: puppeteer-core + @sparticuz/chromium on Linux (Cloudflare Pages' build
  * container); local Chrome on Windows/macOS.
  */
 
@@ -54,7 +54,7 @@ async function main() {
   const pages = loadPages();
 
   // Seed every non-Home page with the plain template BEFORE attempting any
-  // snapshot, so vercel.json's explicit rewrite to that path never 404s
+  // snapshot, so public/_redirects' explicit rewrite to that path never 404s
   // even if this run never gets to (or fails) that page's snapshot.
   for (const config of pages) {
     if (config.outFile !== "index.html") lib.seedFallback(template, config.outFile);

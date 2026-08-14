@@ -14,10 +14,12 @@
 #   search-ranking signal from the old WordPress URLs. Do not change any of
 #   these to 302 later as a "quick fix."
 #
-# NOTE ON TRANSLATIONS: this file only contains English-site redirects. The
-# /fi and /de translated site (frontend-next) is DEFERRED — see the note in
-# GO-LIVE-INSTRUCTIONS.md section 1. No /fi or /de rewrite rules are included
-# here; add them back when translations resume.
+# NOTE ON TRANSLATIONS (updated 2026-08-14): this file only contains
+# English-site redirects. The earlier plan to serve /fi and /de via a
+# separate Next.js app (frontend-next) has been abandoned — see
+# docs/🔴 GO-LIVE/CRA-I18N-TRANSLATIONS-PLAN.md for the current approach
+# (translations built directly into this app, prerendered per-locale). No
+# /fi or /de rules exist here yet; add them once that work lands.
 #
 # ----------------------------------------------------------------------------
 # 2026-08-03 UPDATE: every `# ??` open decision from section 3 of
@@ -243,6 +245,21 @@
 /voltage/30-0kw/   /sauna/heaters  301
 /voltage/33-0kw/   /sauna/heaters  301
 /voltage/36-0kw/   /sauna/heaters  301
+
+# ---- PRERENDERED PAGES (serve the static snapshot, not the SPA shell) ----------
+# Ported from the old frontend/vercel.json (Vercel-only rewrites, never read
+# by Cloudflare Pages, the real deploy target). These mirror
+# scripts/prerender/pages/*.js's outFile list exactly — each of these paths
+# has a real prerendered build/<page>/index.html, and this makes sure that
+# file is served instead of falling through to the generic SPA catch-all
+# below. Home needs no entry — build/index.html is already the default.
+/sauna      /sauna/index.html      200
+/steam      /steam/index.html      200
+/contact    /contact/index.html    200
+/infrared   /infrared/index.html   200
+/support    /support/index.html    200
+/about      /about/index.html      200
+/careers    /careers/index.html    200
 
 # ---- SPA CATCH-ALL (must stay LAST — do not reorder above this line) -----------
 # Cloudflare Pages serves build/index.html for any unmatched static path by

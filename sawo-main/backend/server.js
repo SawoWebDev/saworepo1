@@ -15,16 +15,20 @@ const PORT = process.env.PORT || 5000;
 // so this is safe app-wide: it just makes those logs accurate too.
 app.set("trust proxy", true);
 
+// 2026-08-14: Vercel is fully discarded — the site now deploys on Cloudflare
+// Pages. The previous allowlist named four *.vercel.app domains as
+// "production"; none of them are deployed anywhere anymore, so they were
+// removed rather than left as dead entries. If this backend service is
+// still actually in use (its own package.json describes it as handling
+// legacy sync/file operations — worth confirming it's not fully retired
+// itself), the real Cloudflare Pages domain is listed below instead.
 const allowedOrigins = [
-  "https://saworeact.vercel.app", // actual production domain (confirmed via Vercel dashboard)
-  "https://sawocomreact.vercel.app", // current production domain (sawo.com cutover target)
-  "https://reactsawo.vercel.app", // additional deployment domain
-  "https://sawogitsrc.vercel.app", // kept in case other deployments/previews still use it
+  "https://saworepo1.pages.dev", // Cloudflare Pages production domain
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:5173",
-  // Extra origins (e.g. the frontend-next i18n app's Vercel domain) can be
-  // added without a code change: ALLOWED_ORIGINS="https://a.com,https://b.com"
+  // Extra origins can be added without a code change:
+  // ALLOWED_ORIGINS="https://a.com,https://b.com"
   ...(process.env.ALLOWED_ORIGINS || "")
     .split(",").map(s => s.trim()).filter(Boolean),
 ];
