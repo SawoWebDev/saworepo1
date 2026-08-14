@@ -135,6 +135,40 @@ every locale directory that exists, with status `source` / `translated` /
 `stale (N key(s) behind source)` / `missing`. Run this after any
 extract/inject call, or any time you want to see what's left.
 
+### `scan-all.js` + `finalize-master.js` — whole-codebase bulk extraction
+
+```
+npm run i18n:scan-all
+```
+
+Different tool for a different job than `extract.js`. `extract.js` only
+reads pages already wired to `t()` calls (`locales/en/<page>.json` has to
+exist first). `scan-all.js` parses raw JSX **directly** via
+`@babel/parser`/`@babel/traverse` — real AST parsing, not regex — across
+every file in `src/pages/`, `src/components/`, `src/layouts/`, so it works
+whether or not a page has been migrated yet. Read-only, never touches
+source. `finalize-master.js` reshapes its output into one self-contained
+file at the repo root: **`ENG_translations.json`** — every string found,
+`doNotTranslate` (brand/product names, exact-match excluded), `needsReview`
+(short/ambiguous tokens, and mid-sentence fragments where inline `<b>`/
+`<strong>` formatting split one real sentence into disconnected JSX text
+siblings — each entry names the exact file/line to check before translating
+it), `hreflang` (reference-only locale/path data), and the translatable
+content itself under `pages.<pageKey>`/`shared.<componentKey>`.
+
+Use this when you want one locale translated across the **whole site** in a
+single handoff instead of page-by-page: send `ENG_translations.json` to a
+translator AI (its `instructions` field is self-contained — the file
+explains its own rules), get back `FI_translations.json` (or whatever
+`{LANG_CODE}_translations.json` the target language calls for), then merge
+each page's translated content into `locales/<lang>/<page>.json` — either
+by hand-copying per page through `inject.js`, or by writing a one-off
+splitter script if doing this for many pages at once. `scan-all.js` is
+read-only and doesn't do that merge itself.
+
+Gitignored, like `i18n-handoff/` — regenerate anytime with
+`npm run i18n:scan-all`. Re-run after any content change to keep it current.
+
 ## The manual loop (what you actually do)
 
 1. `npm run i18n:extract -- <page>`
