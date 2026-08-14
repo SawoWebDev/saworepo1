@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TRANSLATED_PATHS, LOCALES } from "../../i18n/translatedRoutes";
+import { isTranslated, LOCALES } from "../../i18n/translatedRoutes";
 import { afterPageLoad } from "../../utils/afterPageLoad";
 import { getCachedLanguageSwitcherEnabled, getCachedEnabledLanguages } from "../../local-storage/languageSettings";
 
@@ -127,15 +127,23 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
 
   // Routes internally (in-app, no full reload — every path is a real route
   // under every locale prefix, see App.jsx's PUBLIC_ROUTES x LOCALE_PREFIXES).
-  // Only mirrors 1:1 onto a path that actually has real translated copy
-  // (TRANSLATED_PATHS); everything else lands on that locale's home instead
-  // of a technically-live-but-untranslated page.
+  // Switching BACK to English always mirrors the current path 1:1 — English
+  // is the source content, it exists for every page, full stop, no gating
+  // needed. Switching INTO fi/de only mirrors 1:1 when that path has real
+  // translated copy in the TARGET locale specifically (isTranslated —
+  // per-locale, since e.g. Sauna is real in Finnish but not German yet);
+  // otherwise it lands on that locale's home instead of a technically-
+  // live-but-untranslated page.
   const go = (code) => {
     setOpen(false);
     onNavigate?.();
     if (code === currentLocale) return;
-    const target = TRANSLATED_PATHS.includes(basePath) ? basePath : "/";
-    navigate(code === "en" ? target : `/${code}${target === "/" ? "" : target}`);
+    if (code === "en") {
+      navigate(basePath);
+      return;
+    }
+    const target = isTranslated(basePath, code) ? basePath : "/";
+    navigate(`/${code}${target === "/" ? "" : target}`);
   };
 
   if (!enabled) return null;
