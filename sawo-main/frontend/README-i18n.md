@@ -47,13 +47,22 @@ src/i18n/
                        NOT per-page meta, that lives in each page's own file
     fi/            ← same filenames, translated (via inject.js only)
     de/
-  i18n.js          ← react-i18next init, static imports of every catalog
+  i18n.js          ← react-i18next init, auto-discovers every locale/*.json
+                       via require.context — no manual import list to
+                       maintain. A locale missing a given page's file falls
+                       back to English for that page automatically.
   LocaleContext.js ← useLocale() / useLocaleT(namespace) hooks
   LocaleRoute.jsx  ← wraps each route, provides locale via context
 
-i18n-handoff/      ← gitignored, regenerable. extract.js writes here;
-                       this is what you paste into the other AI.
-  <page>.en.json
+i18n-handoff/      ← gitignored, regenerable. One subfolder per locale, kept
+                       separate so it's never ambiguous which is the
+                       reference and which are translations.
+  en/              ← the reference/source, written ONLY by extract.js
+    <page>.json
+  fi/              ← translated bundles YOU save here (or hand to inject.js
+    <page>.json      directly) — never hand-write these, always through
+                       inject.js so they get validated
+  de/
   manifest.json
 ```
 
@@ -80,11 +89,12 @@ npm run i18n:extract -- home --dry-run    # preview, writes nothing
 
 Read-only — never touches `src/i18n/locales/`. Reads
 `src/i18n/locales/en/<page>.json`, wraps it with translation instructions
-and writes `i18n-handoff/<page>.en.json`. That file is self-contained: paste
-its entire contents into a translation AI and it has everything it needs
-(the rules are in the `instructions` field). Flags any string containing a
-`{placeholder}` or `<tag>` so you know to double-check those on the way back
-in.
+and writes `i18n-handoff/en/<page>.json`. That file is self-contained: paste
+its entire contents into a translation AI and it has everything it needs —
+the rules are in the `instructions` field, including the exact save path for
+the result (`i18n-handoff/<languageCode>/<page>.json`, e.g.
+`i18n-handoff/fi/sauna.json`). Flags any string containing a `{placeholder}`
+or `<tag>` so you know to double-check those on the way back in.
 
 **This does not scan JSX.** If a page hasn't been wired to `t()` calls yet,
 there's no `locales/en/<page>.json` for it to read — do the wiring first
@@ -93,8 +103,9 @@ there's no `locales/en/<page>.json` for it to read — do the wiring first
 ### `inject.js` — validate + write a translation
 
 ```
-npm run i18n:inject -- i18n-handoff/sauna.fi.json
-npm run i18n:inject -- i18n-handoff/sauna.fi.json --dry-run
+npm run i18n:inject -- i18n-handoff/fi/sauna.json
+npm run i18n:inject -- fi/sauna.json              # shorthand, same file
+npm run i18n:inject -- fi/sauna.json --dry-run
 ```
 
 Takes back exactly what a translation AI should return: the same
@@ -127,11 +138,12 @@ extract/inject call, or any time you want to see what's left.
 ## The manual loop (what you actually do)
 
 1. `npm run i18n:extract -- <page>`
-2. Open `i18n-handoff/<page>.en.json`, copy the whole file.
-3. Paste into a translation AI with: *"Translate this JSON to Finnish
-   per the instructions field. Return only valid JSON."*
-4. Save the response as `i18n-handoff/<page>.fi.json`.
-5. `npm run i18n:inject -- i18n-handoff/<page>.fi.json`
+2. Open `i18n-handoff/en/<page>.json`, copy the whole file.
+3. Paste into a translation AI — the file's own `instructions` field
+   already tells it what to do and where the result should be saved
+   (`i18n-handoff/<languageCode>/<page>.json`).
+4. Save the response there — `i18n-handoff/fi/<page>.json` for Finnish.
+5. `npm run i18n:inject -- fi/<page>.json`
 6. If it fails validation, fix the file (or re-prompt the translation AI
    with the specific error) and re-run step 5. Nothing is written until it
    passes.

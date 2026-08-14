@@ -15,24 +15,33 @@
  * — see README-i18n.md's "Adding a new page" section for why, and the
  * checklist to follow.
  *
- * Output: i18n-handoff/<page>.en.json — self-describing (lang/page fields),
- * with an `instructions` block restating the translation rules inline so
- * the file is complete context on its own when pasted into another AI.
+ * Output: i18n-handoff/en/<page>.json — the reference/source copy, kept in
+ * its own `en/` folder separate from every translated language. Each is
+ * self-describing (lang/page fields) with an `instructions` block that
+ * names the exact save path for the translated result
+ * (i18n-handoff/<targetLang>/<page>.json), so the file is complete context
+ * on its own when pasted into another AI — no separate instructions to
+ * remember or lose track of.
  */
 const fs = require("fs");
 const path = require("path");
 const lib = require("./lib");
 
-const INSTRUCTIONS =
-  "Translate every string value in `content` into the target language. " +
-  "Keep every key exactly as-is (same nesting, same array indices). " +
-  "Do not add, remove, or rename keys. Preserve any {placeholder} or " +
-  "<tag>...</tag> markers exactly, character-for-character, translating only " +
-  "the surrounding text. Do not translate `meta.title`/`meta.description` " +
-  "into marketing copy that changes length dramatically — keep them close " +
-  "to typical search-result title/description lengths. Return ONLY valid " +
-  "JSON, same shape as this file, with `lang` changed to the target " +
-  "language code and every string in `content` translated.";
+function instructionsFor(page) {
+  return (
+    "Translate every string value in `content` into the target language. " +
+    "Keep every key exactly as-is (same nesting, same array indices). " +
+    "Do not add, remove, or rename keys. Preserve any {placeholder} or " +
+    "<tag>...</tag> markers exactly, character-for-character, translating only " +
+    "the surrounding text. Do not translate `meta.title`/`meta.description` " +
+    "into marketing copy that changes length dramatically — keep them close " +
+    "to typical search-result title/description lengths. Return ONLY valid " +
+    "JSON, same shape as this file, with `lang` changed to the target " +
+    "language's code (e.g. \"fi\" for Finnish, \"de\" for German) and every " +
+    `string in \`content\` translated. Save the result as ` +
+    `i18n-handoff/<languageCode>/${page}.json — e.g. i18n-handoff/fi/${page}.json for Finnish.`
+  );
+}
 
 function extractOne(page, { dryRun }) {
   const srcFile = lib.localeFile(lib.SOURCE_LOCALE, page);
@@ -51,11 +60,11 @@ function extractOne(page, { dryRun }) {
   const bundle = {
     lang: lib.SOURCE_LOCALE,
     page,
-    instructions: INSTRUCTIONS,
+    instructions: instructionsFor(page),
     content,
   };
 
-  const outFile = path.join(lib.HANDOFF_DIR, `${page}.en.json`);
+  const outFile = path.join(lib.HANDOFF_DIR, lib.SOURCE_LOCALE, `${page}.json`);
   if (!dryRun) lib.writeJson(outFile, bundle);
 
   console.log(`extract ${page}: ${stringCount} strings${dryRun ? " (dry-run, not written)" : ` -> ${path.relative(process.cwd(), outFile)}`}`);
