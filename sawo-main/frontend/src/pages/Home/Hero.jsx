@@ -3,17 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import HeroWave from "../../components/HeroWave";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
-const SENTENCES = [
-  "a rejuvenating escape",
-  "wellness with ancient tradition",
-  "an authentic Finnish sauna",
-];
-const BUTTON_TEXT = "VIEW CATALOGUE";
-const BUTTON_URL  = "https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf";
-const ALT_TEXT    = "SAWO sauna heaters - Experience wellness and rejuvenation";
+const BUTTON_URL = "https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf";
 
 const Hero = () => {
+  const tHome = useLocaleT("home");
+  const tCommon = useLocaleT("common");
+  const SENTENCES = tHome("hero.sentences", { returnObjects: true });
+  const BUTTON_TEXT = tCommon("viewCatalogue");
+  const ALT_TEXT = tHome("hero.alt");
   const typewriterRef = useRef(null);
   const heroImgRef = useRef(null);
   const [heroLoaded, setHeroLoaded] = useState(() => {
@@ -106,6 +105,10 @@ const Hero = () => {
       clearTimeout(timeout);
       cancelStart();
     };
+    // SENTENCES is derived from the locale fixed at mount (LocaleContext
+    // doesn't change during Home's lifetime) — intentionally excluded so
+    // this effect runs once, not on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Dark bg on the section itself (not just the -z-10 image div) so contrast
@@ -156,8 +159,7 @@ const Hero = () => {
       {/* SEO fallback text (screen-reader only) — kept outside the fade so
           screen readers always have it, regardless of image load state. */}
       <div className="sr-only">
-        {SENTENCES.join(", ")}, SAWO sauna heaters, Finnish sauna, sauna
-        accessories, infrared sauna, steam generator
+        {SENTENCES.join(", ")}, {tHome("hero.seoKeywords")}
       </div>
 
       {/* Text fades in alongside the hero image instead of popping in ahead
@@ -171,7 +173,7 @@ const Hero = () => {
             textShadow: "4px 6px 7px rgba(0,0,0,0.5)",
           }}
         >
-          Experience . . .
+          {tHome("hero.experience")}
         </h1>
 
         <div className="stack flex flex-col items-center text-center">

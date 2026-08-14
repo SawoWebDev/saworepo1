@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
 import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
 import SteamGenerator    from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
@@ -11,50 +12,23 @@ import InfraredSauna     from "../../assets/Home/Section1/IR-SAUNA-1P-CEDAR.webp
 import SaunaAccessories  from "../../assets/Home/Section1/Sauna-Accessories.webp";
 import SaunovaSeries     from "../../assets/Home/Section1/INC-S-V2AspenSauna.webp";
 
-const CAROUSEL_ITEMS = [
-  {
-    title:   "SAUNA HEATERS",
-    caption: "Rejuvenate in the warmth of a traditional Finnish sauna with SAWO's premium heaters.",
-    href:    menuPaths.sauna.heaters.parent,
-    img:     FinnishSauna,
-    alt:     "Finnish sauna heater collection by SAWO for efficient sauna heating",
-  },
-  {
-    title:   "STEAM GENERATORS",
-    caption: "Relieve your stress and tension with healing steam powered by SAWO generators.",
-    href:    menuPaths.steam.generators,
-    img:     SteamGenerator,
-    alt:     "SAWO steam generator for modern sauna and spa steam rooms",
-  },
-  {
-    title:   "SAUNA ROOMS",
-    caption: "Relax, detox, and rejuvenate in a SAWO-designed sauna room with therapeutic heat.",
-    href:    menuPaths.sauna.rooms,
-    img:     SaunaRoom,
-    alt:     "Standard Finnish sauna room by SAWO with natural wood design",
-  },
-  {
-    title:   "INFRARED SAUNA",
-    caption: "Experience deep relaxation with advanced infrared sauna technology.",
-    href:    menuPaths.infrared,
-    img:     InfraredSauna,
-    alt:     "Infrared sauna with cedar wood interior by SAWO",
-  },
-  {
-    title:   "SAUNA ACCESSORIES",
-    caption: "Enhance your sauna with thoughtfully designed SAWO accessories.",
-    href:    menuPaths.sauna.accessories.parent,
-    img:     SaunaAccessories,
-    alt:     "SAWO sauna accessories collection including buckets, ladles, and thermometers",
-  },
-  {
-    title:   "SAUNA CONTROLS",
-    caption: "Precise temperature and time control for total comfort.",
-    href:    menuPaths.sauna.controls,
-    img:     SaunovaSeries,
-    alt:     "SAWO sauna control system for ultimate comfort",
-  },
-];
+const ITEM_KEYS = ["heaters", "steamGenerators", "rooms", "infrared", "accessories", "controls"];
+const ITEM_HREFS = {
+  heaters: menuPaths.sauna.heaters.parent,
+  steamGenerators: menuPaths.steam.generators,
+  rooms: menuPaths.sauna.rooms,
+  infrared: menuPaths.infrared,
+  accessories: menuPaths.sauna.accessories.parent,
+  controls: menuPaths.sauna.controls,
+};
+const ITEM_IMAGES = {
+  heaters: FinnishSauna,
+  steamGenerators: SteamGenerator,
+  rooms: SaunaRoom,
+  infrared: InfraredSauna,
+  accessories: SaunaAccessories,
+  controls: SaunovaSeries,
+};
 
 const SPEED_PX_PER_SEC = 40;
 
@@ -69,6 +43,15 @@ const SPEED_PX_PER_SEC = 40;
  * always lands on a matching item.
  */
 const Section1 = () => {
+  const t = useLocaleT("home");
+  const CAROUSEL_ITEMS = ITEM_KEYS.map((key) => ({
+    key,
+    title: t(`section1.items.${key}.title`),
+    caption: t(`section1.items.${key}.caption`),
+    alt: t(`section1.items.${key}.alt`),
+    href: ITEM_HREFS[key],
+    img: ITEM_IMAGES[key],
+  }));
   const containerRef = useRef(null);
   const trackRef = useRef(null);
 
@@ -220,7 +203,7 @@ const Section1 = () => {
             fontSize: "35px",
           }}
         >
-          Dive into our Sauna World
+          {t("section1.heading")}
         </h2>
       </section>
 
@@ -229,7 +212,7 @@ const Section1 = () => {
         <div
           className="sawo-carousel-container"
           role="region"
-          aria-label="SAWO Sauna Products Carousel"
+          aria-label={t("section1.carouselLabel")}
           ref={containerRef}
         >
           <div className="sawo-carousel-track" role="list" ref={trackRef}>
