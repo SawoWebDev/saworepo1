@@ -38,7 +38,7 @@
     "i18n:extract": "node scripts/i18n/extract.js",
     "i18n:inject": "node scripts/i18n/inject.js",
     "i18n:manifest": "node scripts/i18n/manifest.js",
-    "i18n:scan-all": "node scripts/i18n/scan-all.js && node scripts/i18n/finalize-master.js",
+    "i18n:scan-all": "node scripts/i18n/scan-all.js && node scripts/i18n/finalize-master.js && node scripts/i18n/apply-resolutions.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
