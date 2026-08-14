@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "title": "Saunankiukaat, ohjauskeskukset ja lisävarusteet",
+    "description": "Tutustu SAWOn kattavaan saunavalikoimaan: kiukaat, ohjauskeskukset ja tarvikkeet, joita on kehitetty yli 30 vuoden ajan aidon saunalämmön ja mukavuuden hyväksi."
+  },
+  "hero": {
+    "heading": "SUOMALAINEN SAUNA",
+    "subtitle": "Koe aito suomalainen sauna kiukaidemme avulla: tasainen lämpö, sopiva kosteus ja täydellinen tasapaino täydelliseen rentoutumiseen.",
+    "catalogueButton": "TUOTELUETTELO"
+  },
+  "heaters": {
+    "heading": "Saunankiuas",
+    "intro": "Kiuasta kutsutaan usein <strong>\"saunan sydämeksi\"</strong>, ja valikoimastamme löytyy yli 100 erilaista kiuasmallia. SAWOn kiukaat on suunniteltu vahvalla ammattitaidolla sopimaan sekä koti- että kaupallisiin saunoihin.",
+    "items": {
+      "tower": {
+        "title": "Tower-sarja",
+        "caption": "SAWO Tower -sarjan pylväsmäinen kivirakenne levittää löylyn tasaisesti koko keholle ja tarjoaa ylellisen, lattiasta kattoon ulottuvan löylykokemuksen."
+      },
+      "stone": {
+        "title": "Stone-sarja",
+        "caption": "SAWO Stone -sarjassa kestävä ruostumattomasta teräksestä valmistettu runko yhdistyy lämpöä johtavaan suomalaiseen vuolukiveen, mikä takaa tehokkaan lämmityksen ja nopean kuivumisen käytön jälkeen."
+      },
+      "wallMounted": {
+        "title": "Seinäkiuassarja",
+        "caption": "SAWOn seinäkiuassarjan tyylikkäät, tilaa säästävät kiukaat yhdistävät tehokkuuden ja modernin muotoilun optimaalisen lämmön ja mukavuuden saavuttamiseksi."
+      },
+      "floor": {
+        "title": "Lattiakiuassarja",
+        "caption": "SAWOn lattiakiuassarja tarjoaa siirrettäviä, tehokkaita erillisiä kiukaita optimaalista lämmönjakoa ja pitkäkestoista mukavuutta varten."
+      },
+      "dragonfire": {
+        "title": "Dragonfire-sarja",
+        "caption": "Kohota saunakokemustasi SAWO Dragonfire -sarjalla, jonka on suunnitellut tunnettu suomalainen muotoilija Stefan Lindfors nykyaikaiseen elämäntyyliin."
+      },
+      "combi": {
+        "title": "Combi-sarja",
+        "caption": "Monipuoliset sähkökiukaat, joissa on sisäänrakennettu höyrystin. Ne tarjoavat sekä perinteisen että höyrysaunan vaihtoehdot, ja aromiöljykuppi tuo lisää ylellisyyttä."
+      }
+    },
+    "viewAll": "KATSO KAIKKI KIUKAAT"
+  },
+  "controls": {
+    "heading": "Saunan ohjauskeskukset",
+    "intro": "Erillisen ohjauskeskuksen käyttäminen SAWOn kiukaiden kanssa antaa sinun päättää, millaisen saunakokemuksen haluat. Säädä lämpötilaa, kosteutta, aikaa, tuulettimen käyttöä ja valaistuksen himmennystä tai säästä energiaa kulutuslaskurin avulla.",
+    "items": {
+      "innova": {
+        "title": "Innova-sarja",
+        "desc": "Saunova 2.0 toimii saumattomasti enintään 9 kW:n kiukaiden kanssa. Siinä on älykäs lämpötilansäätö, tarkka lauteanturi ja monipuolinen käyttöliittymä, eikä erillistä tehonohjainta tarvita."
+      },
+      "saunova": {
+        "title": "Saunova-sarja",
+        "desc": "Monipuolinen ohjauskeskus saunan lämpötilan, kosteuden, ilmanvaihdon ja valaistuksen säätöön. Mukana älykäs ohjaus, oviasennon tunnistin ja ennakkoajastin sekä lisävarusteina saatavat tuuletin-, himmennin- ja Combi-toiminnot."
+      },
+      "accessories": {
+        "title": "Ohjauskeskusten lisävarusteet",
+        "desc": "Nykyaikaiset saunan ohjausjärjestelmät parantavat kokemustasi säätämällä lämpöä ja tunnelmaa, seuraamalla energiankulutusta ja ilmoittamalla huoltotarpeista."
+      }
+    },
+    "viewAll": "KATSO SAUNAN OHJAUSKESKUKSET"
+  },
+  "accessories": {
+    "heading": "Saunatarvikkeet",
+    "intro": "Meillä on laaja valikoima ajattomia saunatarvikkeita setristä, haavasta ja männystä. Valitse suosikkisi ja muokkaa saunastasi juuri omannäköisesi.",
+    "items": {
+      "accessorySets": {
+        "title": "Tarvikesarjat",
+        "desc": "Huolella kootut tarvikesarjamme tarjoavat jotain jokaiselle. Luonnollisista, jätteettömistä vaihtoehdoista rohkeisiin ja tyylikkäisiin muotoiluihin – sarjat lisäävät saunanautintoa kaikin mahdollisin tavoin."
+      },
+      "pailsLadles": {
+        "title": "Kiulut ja kauhat",
+        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy kiuluja 2–40 litran kokoisina. Valitse perinteinen setri, haapa tai mänty tai moderni ruostumaton teräs. Täydennä settisi kauhalla."
+      },
+      "thermometers": {
+        "title": "Lämpömittarit ja yhdistelmämittarit",
+        "desc": "Perinteiset lämpö- ja kosteusmittarit kertovat, milloin sauna on valmis. Tutustu erilaisiin muotoihin ja tyyleihin. Tuo oleskelutilaan tunnelmaa puisilla kelloilla ja kokeile 15 minuutin tiimalasiamme seurusteluun tai saunan aloittelijoille."
+      },
+      "clocksSandtimers": {
+        "title": "Kellot ja tiimalasit",
+        "desc": "Haluatko nähdä, kuka kestää saunassa pisimpään? 15 minuutin tiimalasimme herättävät hauskaa keskustelua ja sopivat erinomaisesti myös suomalaisen saunan uusille ystäville."
+      },
+      "lightsCovers": {
+        "title": "Saunavalaisimet",
+        "desc": "Luo täydellinen tunnelma oikeanlaisella valaistuksella. Erilaiset valaisinvarjostimemme mahdollistavat rauhoittavan ja lämpimän tunnelman luomisen."
+      },
+      "headrestsBackrests": {
+        "title": "Niska- ja selkätuet",
+        "desc": "Puiset niska- ja selkätuet sekä oleskelutilan selkänojat on valmistettu kestävistä materiaaleista, kuten puusta, muistivaahdosta tai kankaasta. Kosteutta kestävä verhoilu tuo mukavuutta ja kestävyyttä sekä saunaan että oleskelutilaan."
+      },
+      "doorsHandles": {
+        "title": "Ovet ja kahvat",
+        "desc": "Kohota saunasi tasoa SAWOn saunanovilla. Kestävyyttä varten valmistetut ovet sisältävät kumitiivisteen, magneettilukon, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
+      },
+      "benches": {
+        "title": "Lauteet ja lattialaatat",
+        "desc": "Paranna saunakokemustasi mukavilla ja tyylikkäillä lauteilla, jotka tukevat ja lisäävät rentoutumista. Valitse useista laadukkaista malleista makusi ja tilasi mukaan ja luo hyvinvoinnin tyyssija keholle ja mielelle."
+      },
+      "kivistone": {
+        "title": "Kivistone",
+        "desc": "Kivistone tarjoaa monipuolisen valikoiman ainutlaatuisia vuolukivituotteita koteihin, lahjoiksi ja yritysten käyttöön innovatiivisin muotoiluin."
+      },
+      "ventilations": {
+        "title": "Ilmanvaihto ja lisätarvikkeet",
+        "desc": "Tutustu saunakokemukseesi ilmanvaihtoratkaisujemme ja välttämättömien tarvikkeiden avulla. Kohota saunahetkeäsi SAWOn täydentävillä tuotteilla. Tutustu kiehtovaan valikoimaamme jo tänään!"
+      }
+    },
+    "viewAll": "KATSO KAIKKI TARVIKKEET"
+  }
+}

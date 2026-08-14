@@ -27,14 +27,16 @@ import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp
 import HeroWave from "../../components/HeroWave";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
 
 const Sauna = () => {
+  const locale = useLocale();
   const t = useLocaleT("sauna");
   const tc = useLocaleT("common");
+  const path = locale === "en" ? "/sauna" : `/${locale}/sauna`;
   const heroLoaded = useHeroLoaded(img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled);
 
   useEffect(() => {
@@ -133,7 +135,15 @@ const Sauna = () => {
 
   return (
     <div className="relative">
-      <SEO title={t("meta.title")} description={t("meta.description")} path="/sauna" />
+      <SEO
+        title={t("meta.title")}
+        description={t("meta.description")}
+        path={path}
+        // German isn't translated for this page yet — only list locales
+        // that actually have real Sauna copy (see SEO.jsx's prop comment
+        // and README-i18n.md). Add "de" here once its translation lands.
+        hreflangAlternates={{ en: "/sauna", fi: "/fi/sauna" }}
+      />
       {/* ===================== */}
       {/* HERO SECTION          */}
       {/* ===================== */}
