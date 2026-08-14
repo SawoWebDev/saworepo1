@@ -24,6 +24,12 @@ out/
 # Wrangler local dev state (Miniflare R2/cache simulation) — never real content
 .wrangler/
 
+# i18n extract/inject handoff working files (scripts/i18n/*.js) — transient,
+# regenerable from src/i18n/locales/ (the real source of truth) via
+# `npm run i18n:extract -- --all` and `npm run i18n:manifest`. See
+# frontend/README-i18n.md.
+**/frontend/i18n-handoff/
+
 # IDE
 .vscode/
 .idea/
