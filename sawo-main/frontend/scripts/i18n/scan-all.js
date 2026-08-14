@@ -51,6 +51,31 @@ const NEVER_FIELDS = new Set([
 // validation/error messages, toasts, confirmations — none of which live in
 // JSX at all, so the JSX-focused visitors above never see them.
 const MESSAGE_CALL_PATTERN = /^(set\w*(Error|Errors|Message|Status|Success|Warning|Notice|Toast)\w*|show\w*Toast\w*|toast\w*|alert|confirm)$/i;
+// A string-literal assignment/return "looks like a sentence" (see
+// AssignmentExpression/ReturnStatement below) whenever it has a space and
+// enough length — but CSS values assigned to style/animation variables
+// (`el.style.transform = "translateY(-50%) scale(1.15)"`) satisfy that same
+// shape. Reject anything that's actually CSS syntax before accepting it as
+// a message.
+const CSS_VALUE_PATTERN = /^(-?\d+(\.\d+)?(px|rem|em|%|vh|vw|s|ms)\b|rgba?\(|hsla?\(|#[0-9a-f]{3,8}\b|(translate|scale|rotate|skew|matrix)[XYZ]?\(|\d+px\s+(solid|dashed|dotted|none)\b)/i;
+function looksLikeCssValue(val) {
+  if (CSS_VALUE_PATTERN.test(val)) return true;
+  // Multiple space-separated CSS-function/unit tokens in one string, e.g.
+  // "0 14px 36px rgba(175,133,100,0.18)" or "2px solid #a67853".
+  const tokens = val.split(/\s+/);
+  const cssish = tokens.filter((t) => /^(-?\d+(\.\d+)?(px|rem|em|%)?|rgba?\([^)]*\)?|#[0-9a-f]{3,8}|solid|dashed|dotted|none|translateX?\(.*|translateY?\(.*|scale\(.*)$/i.test(t));
+  return tokens.length > 1 && cssish.length === tokens.length;
+}
+// Top-level const names that hold internal product-matching/classification
+// data (substring keyword lists like `{ "Taurus D Combi": ["Taurus D
+// Combi", "TRDC-NS"] }` used with .includes()-style matching against real
+// product names/model codes), not display copy — the whole variable is
+// skipped, not descended into at all. Swapping these for translated text
+// while the underlying product data stays in English would silently break
+// the matching logic (category pages would just come up empty), which is a
+// functional bug, not a translation-quality one — excluded categorically,
+// not filtered leaf-by-leaf like TEXT_FIELDS/NEVER_FIELDS below.
+const MATCHING_DATA_VAR_PATTERN = /_KEYWORDS$|^FIXED_ORDER$|_ORDER$/;
 // Known brand/product/series names — exact-match strings routed to
 // doNotTranslate instead of being extracted as copy.
 const BRAND_NAMES = new Set([
@@ -216,7 +241,7 @@ function extractFile(absPath, relPath) {
       for (const arg of p.node.arguments) {
         if (!isStringLiteralish(arg)) continue;
         const val = cleanText(literalValue(arg));
-        if (!val || val.length < 3) continue;
+        if (!val || val.length < 3 || looksLikeCssValue(val)) continue;
         entries.push({ value: val, keyParts: ["messages", slug(val)], line: p.node.loc?.start.line, kind: `call:${calleeName}` });
       }
     },
@@ -229,13 +254,13 @@ function extractFile(absPath, relPath) {
     AssignmentExpression(p) {
       if (!isStringLiteralish(p.node.right)) return;
       const val = cleanText(literalValue(p.node.right));
-      if (!val || !val.includes(" ") || val.length < 8) return;
+      if (!val || !val.includes(" ") || val.length < 8 || looksLikeCssValue(val)) return;
       entries.push({ value: val, keyParts: ["messages", slug(val)], line: p.node.loc?.start.line, kind: "assign" });
     },
     ReturnStatement(p) {
       if (!isStringLiteralish(p.node.argument)) return;
       const val = cleanText(literalValue(p.node.argument));
-      if (!val || !val.includes(" ") || val.length < 8) return;
+      if (!val || !val.includes(" ") || val.length < 8 || looksLikeCssValue(val)) return;
       entries.push({ value: val, keyParts: ["messages", slug(val)], line: p.node.loc?.start.line, kind: "return" });
     },
     VariableDeclarator(p) {
@@ -243,6 +268,10 @@ function extractFile(absPath, relPath) {
       const varName = p.node.id.name;
       if (!varName || seenVarNames.has(varName)) return;
       seenVarNames.add(varName);
+      // Internal product-matching/classification data (GROUP_KEYWORDS,
+      // FIXED_ORDER, etc.) — see MATCHING_DATA_VAR_PATTERN's comment.
+      // Skipped entirely, not descended into.
+      if (MATCHING_DATA_VAR_PATTERN.test(varName)) return;
 
       // Recursive: data arrays in this codebase nest arbitrarily deep —
       // FAQ.jsx's SECTIONS = [{ title, questions: [{ question, answer }] }],
