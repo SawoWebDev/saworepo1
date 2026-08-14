@@ -1,7 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TRANSLATED_PATHS, LOCALES } from "../../i18n/translatedRoutes";
 import { afterPageLoad } from "../../utils/afterPageLoad";
+
+// Splits a pathname like "/fi/sauna" into its locale ("fi") and the
+// unprefixed path ("/sauna"). Unprefixed paths (English) return locale "en".
+function splitLocale(pathname) {
+  const match = /^\/(fi|de)(\/.*)?$/.exec(pathname);
+  if (!match) return { locale: "en", path: pathname };
+  return { locale: match[1], path: match[2] || "/" };
+}
 
 // Inline SVG flags — kept in sync by hand with
 // frontend-next/src/components/Header/HeaderLanguageSwitcher.jsx's flag set.
@@ -59,6 +67,8 @@ function Flag({ code, className }) {
 // the critical rendering path.
 export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate }) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { locale: currentLocale, path: basePath } = splitLocale(location.pathname);
   const [open, setOpen] = useState(false);
   const [langs, setLangs] = useState(LOCALES.map((l) => l.code));
   const [enabled, setEnabled] = useState(true);
@@ -111,14 +121,17 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
     hoverTimeout.current = setTimeout(() => setOpen(false), 200);
   };
 
+  // Routes internally (in-app, no full reload — every path is a real route
+  // under every locale prefix, see App.jsx's PUBLIC_ROUTES x LOCALE_PREFIXES).
+  // Only mirrors 1:1 onto a path that actually has real translated copy
+  // (TRANSLATED_PATHS); everything else lands on that locale's home instead
+  // of a technically-live-but-untranslated page.
   const go = (code) => {
     setOpen(false);
     onNavigate?.();
-    if (code === "en") return;
-    const path = TRANSLATED_PATHS.includes(location.pathname) && location.pathname !== "/"
-      ? location.pathname
-      : "";
-    window.location.href = `/${code}${path}`;
+    if (code === currentLocale) return;
+    const target = TRANSLATED_PATHS.includes(basePath) ? basePath : "/";
+    navigate(code === "en" ? target : `/${code}${target === "/" ? "" : target}`);
   };
 
   if (!enabled) return null;
@@ -129,7 +142,7 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
     return (
       <div className="header-lang-mobile">
         <span className="header-lang-mobile-label">
-          <span className="header-lang-flag"><Flag code="en" /></span> Language
+          <span className="header-lang-flag"><Flag code={currentLocale} /></span> Language
         </span>
         <div className="header-lang-mobile-options">
           {visibleLocales.map((l) => (
@@ -137,7 +150,7 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
               key={l.code}
               type="button"
               onClick={() => go(l.code)}
-              className={`header-lang-option${l.code === "en" ? " is-active" : ""}`}
+              className={`header-lang-option${l.code === currentLocale ? " is-active" : ""}`}
             >
               <span className="header-lang-flag-sm"><Flag code={l.code} /></span>
               {l.label}
@@ -164,8 +177,8 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
         title="Switch language"
         onClick={toggleOpen}
       >
-        <span className="header-lang-flag"><Flag code="en" /></span>
-        <span className="header-lang-code">EN</span>
+        <span className="header-lang-flag"><Flag code={currentLocale} /></span>
+        <span className="header-lang-code">{currentLocale.toUpperCase()}</span>
         <i className="fa-solid fa-chevron-down text-[10px]" aria-hidden="true"></i>
       </button>
 
@@ -176,9 +189,9 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
               <button
                 type="button"
                 onClick={() => go(l.code)}
-                className={`header-lang-option${l.code === "en" ? " is-active" : ""}`}
+                className={`header-lang-option${l.code === currentLocale ? " is-active" : ""}`}
                 role="option"
-                aria-selected={l.code === "en"}
+                aria-selected={l.code === currentLocale}
               >
                 <span className="header-lang-flag-sm"><Flag code={l.code} /></span>
                 {l.label}
