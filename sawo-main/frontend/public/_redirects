@@ -14,12 +14,15 @@
 #   search-ranking signal from the old WordPress URLs. Do not change any of
 #   these to 302 later as a "quick fix."
 #
-# NOTE ON TRANSLATIONS (updated 2026-08-14): this file only contains
-# English-site redirects. The earlier plan to serve /fi and /de via a
-# separate Next.js app (frontend-next) has been abandoned — see
-# docs/🔴 GO-LIVE/CRA-I18N-TRANSLATIONS-PLAN.md for the current approach
-# (translations built directly into this app, prerendered per-locale). No
-# /fi or /de rules exist here yet; add them once that work lands.
+# NOTE ON TRANSLATIONS (updated 2026-08-14): the earlier plan to serve /fi
+# and /de via a separate Next.js app (frontend-next) has been abandoned —
+# see docs/🔴 GO-LIVE/CRA-I18N-TRANSLATIONS-PLAN.md for the current approach
+# (translations built directly into this app, prerendered per-locale). Only
+# Home has a real per-locale prerendered snapshot so far (Phase 1 of that
+# plan) — see the /fi and /de rules under "PRERENDERED PAGES" below. Every
+# other /fi/* and /de/* path is a real in-app route (App.jsx mirrors the
+# whole route tree per locale) but falls through to the SPA catch-all until
+# it gets both real translated copy and its own prerender config (Phase 2/3).
 #
 # ----------------------------------------------------------------------------
 # 2026-08-03 UPDATE: every `# ??` open decision from section 3 of
@@ -252,7 +255,7 @@
 # scripts/prerender/pages/*.js's outFile list exactly — each of these paths
 # has a real prerendered build/<page>/index.html, and this makes sure that
 # file is served instead of falling through to the generic SPA catch-all
-# below. Home needs no entry — build/index.html is already the default.
+# below. English Home needs no entry — build/index.html is already the default.
 /sauna      /sauna/index.html      200
 /steam      /steam/index.html      200
 /contact    /contact/index.html    200
@@ -260,6 +263,8 @@
 /support    /support/index.html    200
 /about      /about/index.html      200
 /careers    /careers/index.html    200
+/fi         /fi/index.html         200
+/de         /de/index.html         200
 
 # ---- SPA CATCH-ALL (must stay LAST — do not reorder above this line) -----------
 # Cloudflare Pages serves build/index.html for any unmatched static path by

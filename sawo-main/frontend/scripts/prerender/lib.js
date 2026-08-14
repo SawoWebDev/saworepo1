@@ -127,6 +127,12 @@ function buildOutputHtml({
       `<script>if(location.pathname!==${JSON.stringify(pagePath)}){var r=document.getElementById("root");if(r)r.innerHTML="";}</script>`
   );
 
+  // <html lang> — the template always ships "en"; a locale snapshot (e.g.
+  // /fi, /de) needs its own real value baked in, not left at the default.
+  if (head.htmlLang) {
+    out = out.replace(/<html lang="[^"]*"/, `<html lang="${escapeHtml(head.htmlLang)}"`);
+  }
+
   // Inline the main stylesheet: with markup in the HTML, this <link> is the
   // last render-blocking request — inlining removes one RTT before FCP.
   const cssMatch = out.match(/<link href="(\/static\/css\/main\.[^"]+\.css)" rel="stylesheet">/);
@@ -148,6 +154,22 @@ function buildOutputHtml({
   }
   if (head.canonical && !out.includes('rel="canonical"')) {
     out = out.replace("</head>", `<link rel="canonical" href="${escapeHtml(head.canonical)}" />\n</head>`);
+  }
+
+  // hreflang alternates (SEO.jsx's <SEO hreflangAlternates={...} /> prop) —
+  // only emitted by pages/locales that genuinely have real translated copy
+  // (see i18n/translatedRoutes.js's TRANSLATED_PATHS), so this stays empty
+  // for everything else. React Helmet renders these into the live <head>,
+  // but the static template's <head> otherwise only gets title/description/
+  // canonical patched above — without this, a non-JS crawler reading the
+  // prerendered file would see zero hreflang alternates regardless of what
+  // the live SPA renders, exactly the "asserting a translated version that
+  // isn't really there" bug in reverse (silently NOT asserting a real one).
+  if (Array.isArray(head.hreflangs) && head.hreflangs.length) {
+    const tags = head.hreflangs
+      .map(({ hreflang, href }) => `<link rel="alternate" hrefLang="${escapeHtml(hreflang)}" href="${escapeHtml(href)}" />`)
+      .join("\n");
+    out = out.replace("</head>", `${tags}\n</head>`);
   }
 
   // Strip preload tags that don't apply to this page (see param doc above).
@@ -204,6 +226,11 @@ async function standardCapture(page) {
         title: document.title || null,
         description: attr('meta[name="description"]', "content"),
         canonical: attr('link[rel="canonical"]', "href"),
+        htmlLang: document.documentElement.lang || null,
+        hreflangs: [...document.querySelectorAll('link[rel="alternate"][hreflang]')].map((el) => ({
+          hreflang: el.getAttribute("hreflang"),
+          href: el.getAttribute("href"),
+        })),
       },
     };
   });
