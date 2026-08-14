@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TRANSLATED_PATHS, LOCALES } from "../../i18n/translatedRoutes";
 import { afterPageLoad } from "../../utils/afterPageLoad";
+import { getCachedLanguageSwitcherEnabled, getCachedEnabledLanguages } from "../../local-storage/languageSettings";
 
 // Splits a pathname like "/fi/sauna" into its locale ("fi") and the
 // unprefixed path ("/sauna"). Unprefixed paths (English) return locale "en".
@@ -11,10 +12,9 @@ function splitLocale(pathname) {
   return { locale: match[1], path: match[2] || "/" };
 }
 
-// Inline SVG flags — kept in sync by hand with
-// frontend-next/src/components/Header/HeaderLanguageSwitcher.jsx's flag set.
-// Emoji flags don't render on Windows/some browsers, so these are drawn by
-// hand. Rendered inside a circular frame (.header-lang-flag*) below.
+// Inline SVG flags — emoji flags don't render on Windows/some browsers, so
+// these are drawn by hand. Rendered inside a circular frame
+// (.header-lang-flag*) below.
 function FlagEn(props) {
   return (
     <svg viewBox="0 0 60 30" {...props}>
@@ -55,23 +55,27 @@ function Flag({ code, className }) {
   return <Svg className={className} preserveAspectRatio="xMidYMid slice" />;
 }
 
-// Header globe dropdown, right of "Contact Us". First render is fully static
-// (closed, "EN") so it's identical in the prerendered snapshot — no layout
-// shift during the paint/LCP window Lighthouse measures. The CMS-driven
-// enabled-languages setting used to be read lazily on first click only,
-// which meant disabling the switcher in the CMS never took effect until a
-// visitor happened to hover/click it (and even then it would visibly vanish
-// mid-interaction). It's now also loaded once via afterPageLoad — same
-// deferred-until-idle pattern as HeroWave — so a disabled switcher actually
-// disappears shortly after the page settles, without reintroducing it into
-// the critical rendering path.
+// Header globe dropdown, right of "Contact Us". Initial state comes from
+// getCachedLanguageSwitcherEnabled()/getCachedEnabledLanguages() — a
+// SYNCHRONOUS localStorage read, not a hardcoded default — so a repeat
+// visitor (or same-session remount) paints the CORRECT enabled/disabled
+// state on first render, no flash. Only a genuine first-ever visit (or a
+// prerender snapshot, where the network fetch is deliberately blocked)
+// has no cached answer; those start hidden and pop in once afterPageLoad's
+// live fetch resolves, rather than the old behavior of starting shown and
+// vanishing if the CMS toggle turns out to be off — see
+// local-storage/languageSettings.js's comment for why that direction was
+// chosen. This is also why the switcher was pulled from Header.jsx
+// entirely for a while (see git history) rather than just left disabled —
+// re-mounted now that the actual flash source is fixed at the root, not
+// papered over.
 export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { locale: currentLocale, path: basePath } = splitLocale(location.pathname);
   const [open, setOpen] = useState(false);
-  const [langs, setLangs] = useState(LOCALES.map((l) => l.code));
-  const [enabled, setEnabled] = useState(true);
+  const [langs, setLangs] = useState(() => getCachedEnabledLanguages());
+  const [enabled, setEnabled] = useState(() => getCachedLanguageSwitcherEnabled());
   const ref = useRef(null);
   const hoverTimeout = useRef(null);
 

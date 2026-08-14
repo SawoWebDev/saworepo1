@@ -3,12 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
-// Translation / language switcher temporarily disabled site-wide — see the
-// commented-out <HeaderLanguageSwitcher /> mounts further down. Even with the
-// CMS toggle off, the switcher's settings read ran after page load and made it
-// appear (then vanish) during the load window, so it's cut from the header
-// entirely for now rather than merely switched off.
-// import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
+import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
 
 /**
  * The header's nav structure and hover style used to be two CMS settings
@@ -422,10 +417,7 @@ export default function Header() {
 
             </div>
 
-            {/* Translation temporarily off — see the commented-out import at
-                the top of this file. Restore this line (and the mobile one
-                below) to bring the language switcher back. */}
-            {/* <HeaderLanguageSwitcher /> */}
+            <HeaderLanguageSwitcher />
 
             {/* CSS Animations */}
             <style>{`
@@ -890,8 +882,7 @@ export default function Header() {
                 )}
               </div>
             ))}
-            {/* Translation temporarily off — see the desktop mount above. */}
-            {/* <HeaderLanguageSwitcher variant="mobile" onNavigate={() => setMobileOpen(false)} /> */}
+            <HeaderLanguageSwitcher variant="mobile" onNavigate={() => setMobileOpen(false)} />
           </div>
         )}
       </header>
