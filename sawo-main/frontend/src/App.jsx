@@ -20,6 +20,12 @@ import { getEffectiveRole } from "./Administrator/previewRole";
 import MainLayout  from "./layouts/MainLayout";
 import menuPaths   from "./menuPaths";
 
+// i18n — /fi/* and /de/* mirror the whole public route tree below (see
+// LOCALE_PREFIXES), each route wrapped in LocaleRoute so it renders with the
+// matching i18next language active.
+import { LOCALE_PREFIXES } from "./i18n/translatedRoutes";
+import LocaleRoute from "./i18n/LocaleRoute";
+
 // Home is the landing page — keep it in the main bundle so it paints
 // immediately (no chunk round-trip → fast, detectable LCP, no layout swap).
 import Home from "./pages/Home/Home";
@@ -108,6 +114,70 @@ function AdminLanding() {
   return <Navigate to={getLandingPath(role)} replace />;
 }
 
+// Prefixes a route path with a locale segment ("" = English, unprefixed).
+// "/" + "fi" -> "/fi" (not "/fi/"); "/sauna" + "fi" -> "/fi/sauna".
+function withLocale(prefix, routePath) {
+  if (!prefix) return routePath;
+  return routePath === "/" ? `/${prefix}` : `/${prefix}${routePath}`;
+}
+
+// The public route table — every entry here is mounted once per locale
+// prefix in LOCALE_PREFIXES (English unprefixed, plus /fi and /de), each
+// wrapped in LocaleRoute so the right i18next language is active. Only Home
+// has real fi/de copy today (see i18n/translatedRoutes.js's
+// TRANSLATED_PATHS); every other page renders its existing English content
+// under the locale prefix too, so a visitor never hits a 404 — it just
+// isn't advertised as translated yet.
+const PUBLIC_ROUTES = [
+  { path: menuPaths.home,                    element: <Home /> },
+  { path: menuPaths.infrared,                element: <Infrared /> },
+  { path: menuPaths.about.parent,            element: <About /> },
+  { path: menuPaths.about.sustainability,    element: <Sustainability /> },
+  { path: menuPaths.about.news,              element: <LatestNews /> },
+  { path: menuPaths.sauna.parent,            element: <Sauna /> },
+  { path: menuPaths.steam.parent,            element: <Steam /> },
+  { path: menuPaths.support.parent,          element: <Support /> },
+  { path: menuPaths.careers,                 element: <Careers /> },
+  { path: menuPaths.contact,                 element: <Contact /> },
+  { path: menuPaths.sauna.heaters.parent,    element: <SaunaHeaters /> },
+  { path: menuPaths.sauna.heaters.wallMounted, element: <WallMounted /> },
+  { path: menuPaths.sauna.heaters.tower,     element: <Tower /> },
+  { path: menuPaths.sauna.heaters.stone,     element: <Stone /> },
+  { path: menuPaths.sauna.heaters.floor,     element: <Floor /> },
+  { path: menuPaths.sauna.heaters.combi,     element: <Combi /> },
+  { path: menuPaths.sauna.heaters.dragonfire, element: <Dragonfire /> },
+  { path: menuPaths.sauna.controls,          element: <SaunaControls /> },
+  { path: menuPaths.sauna.accessories.parent, element: <SaunaAccessories /> },
+  { path: menuPaths.sauna.accessories.pailsLadles,        element: <PailsLadles /> },
+  { path: menuPaths.sauna.accessories.thermometers,       element: <Thermometers /> },
+  { path: menuPaths.sauna.accessories.clocksSandtimers,   element: <ClocksSandtimers /> },
+  { path: menuPaths.sauna.accessories.lightsCovers,       element: <SaunaLights /> },
+  { path: menuPaths.sauna.accessories.headrestsBackrests, element: <HeadrestsBackrests /> },
+  { path: menuPaths.sauna.accessories.doorsHandles,       element: <DoorsHandles /> },
+  { path: menuPaths.sauna.accessories.benches,            element: <BenchesFloorTiles /> },
+  { path: menuPaths.sauna.accessories.kivistone,          element: <Kivistone /> },
+  { path: menuPaths.sauna.accessories.ventilations,       element: <VentilationsAddOns /> },
+  { path: menuPaths.sauna.accessories.accessorySets,      element: <AccessorySets /> },
+  { path: menuPaths.sauna.rooms,             element: <SaunaRooms /> },
+  { path: menuPaths.sauna.interiorDesigns,   element: <InteriorDesign /> },
+  { path: menuPaths.sauna.woodPanels,        element: <WoodPanelAndTimbers /> },
+  { path: menuPaths.steam.generators,        element: <SteamGenerators /> },
+  { path: menuPaths.steam.controls,          element: <SteamControls /> },
+  { path: menuPaths.steam.accessories,       element: <SteamAccessories /> },
+  { path: menuPaths.support.faq,             element: <FAQ /> },
+  { path: menuPaths.support.saunaCalculator, element: <SaunaCalculator /> },
+  { path: menuPaths.support.manuals,         element: <UserManuals /> },
+  { path: menuPaths.support.catalogue,       element: <ProductCatalogue /> },
+  { path: "/products",                       element: <AllProducts /> },
+  { path: menuPaths.privacy,                 element: <PrivacyPolicy /> },
+  { path: menuPaths.sitemap,                 element: <Sitemap /> },
+  { path: "/products/:slug",                 element: <ProductPageRouter /> },
+  { path: menuPaths.accessories,             element: <AccessoriesCatalog /> },
+  { path: menuPaths.heaters,                 element: <HeatersCatalog /> },
+  { path: "/accessories/:slug",              element: <DispAccessories /> },
+  { path: "/sauna/rooms/:slug",              element: <DispSaunaRoom /> },
+];
+
 export default function App() {
   return (
       <Router>
@@ -126,63 +196,18 @@ export default function App() {
                 <MainLayout>
                 <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                   <Routes>
-                    <Route path={menuPaths.home}                    element={<Home />} />
-                    <Route path={menuPaths.infrared}                element={<Infrared />} />
-                    <Route path={menuPaths.about.parent}            element={<About />} />
-                    <Route path={menuPaths.about.sustainability}    element={<Sustainability />} />
-                    <Route path={menuPaths.about.news}              element={<LatestNews />} />
-                    <Route path={menuPaths.sauna.parent}            element={<Sauna />} />
-                    <Route path={menuPaths.steam.parent}            element={<Steam />} />
-                    <Route path={menuPaths.support.parent}          element={<Support />} />
-                    <Route path={menuPaths.careers}                 element={<Careers />} />
-                    <Route path={menuPaths.contact}                 element={<Contact />} />
-                    <Route path={menuPaths.sauna.heaters.parent}    element={<SaunaHeaters />} />
-                    <Route path={menuPaths.sauna.heaters.wallMounted} element={<WallMounted />} />
-                    <Route path={menuPaths.sauna.heaters.tower}     element={<Tower />} />
-                    <Route path={menuPaths.sauna.heaters.stone}     element={<Stone />} />
-                    <Route path={menuPaths.sauna.heaters.floor}     element={<Floor />} />
-                    <Route path={menuPaths.sauna.heaters.combi}     element={<Combi />} />
-                    <Route path={menuPaths.sauna.heaters.dragonfire} element={<Dragonfire />} />
-                    <Route path={menuPaths.sauna.controls}          element={<SaunaControls />} />
-                    <Route path={menuPaths.sauna.accessories.parent} element={<SaunaAccessories />} />
-                    <Route path={menuPaths.sauna.accessories.pailsLadles}        element={<PailsLadles />} />
-                    <Route path={menuPaths.sauna.accessories.thermometers}       element={<Thermometers />} />
-                    <Route path={menuPaths.sauna.accessories.clocksSandtimers}   element={<ClocksSandtimers />} />
-                    <Route path={menuPaths.sauna.accessories.lightsCovers}       element={<SaunaLights />} />
-                    <Route path={menuPaths.sauna.accessories.headrestsBackrests} element={<HeadrestsBackrests />} />
-                    <Route path={menuPaths.sauna.accessories.doorsHandles}       element={<DoorsHandles />} />
-                    <Route path={menuPaths.sauna.accessories.benches}            element={<BenchesFloorTiles />} />
-                    <Route path={menuPaths.sauna.accessories.kivistone}          element={<Kivistone />} />
-                    <Route path={menuPaths.sauna.accessories.ventilations}       element={<VentilationsAddOns />} />
-                    <Route path={menuPaths.sauna.accessories.accessorySets}      element={<AccessorySets />} />
-                    <Route path={menuPaths.sauna.rooms}             element={<SaunaRooms />} />
-                    <Route path={menuPaths.sauna.interiorDesigns}   element={<InteriorDesign />} />
-                    <Route path={menuPaths.sauna.woodPanels}        element={<WoodPanelAndTimbers />} />
-                    <Route path={menuPaths.steam.generators}        element={<SteamGenerators />} />
-                    <Route path={menuPaths.steam.controls}          element={<SteamControls />} />
-                    <Route path={menuPaths.steam.accessories}       element={<SteamAccessories />} />
-                    <Route path={menuPaths.support.faq}             element={<FAQ />} />
-                    <Route path={menuPaths.support.saunaCalculator} element={<SaunaCalculator />} />
-                    <Route path={menuPaths.support.manuals}         element={<UserManuals />} />
-                    <Route path={menuPaths.support.catalogue}       element={<ProductCatalogue />} />
-                    <Route path="/products" element={<AllProducts />} />
-                    <Route path={menuPaths.privacy}              element={<PrivacyPolicy />} />
-                    <Route path={menuPaths.sitemap}              element={<Sitemap />} />
+                    {LOCALE_PREFIXES.flatMap((prefix) => {
+                      const locale = prefix || "en";
+                      return PUBLIC_ROUTES.map(({ path, element }) => (
+                        <Route
+                          key={`${locale}:${path}`}
+                          path={withLocale(prefix, path)}
+                          element={<LocaleRoute locale={locale}>{element}</LocaleRoute>}
+                        />
+                      ));
+                    })}
 
-                    {/* Single product detail page */}
-                    <Route path="/products/:slug" element={<ProductPageRouter />} />
-
-                    {/* Accessories catalog (all accessories listing) */}
-                    <Route path={menuPaths.accessories} element={<AccessoriesCatalog />} />
-                    <Route path={menuPaths.heaters} element={<HeatersCatalog />} />
-
-                    {/* Single accessory product detail page */}
-                    <Route path="/accessories/:slug" element={<DispAccessories />} />
-
-                    {/* Single sauna room detail page */}
-                    <Route path="/sauna/rooms/:slug" element={<DispSaunaRoom />} />
-
-                    {/* 404 Not Found page - must be last in nested routes */}
+                    {/* 404 Not Found page - must be last */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Suspense>
