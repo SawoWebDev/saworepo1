@@ -35,6 +35,9 @@
     "dev": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build && node scripts/prerender.js",
     "sitemap": "node scripts/generate-sitemap.js",
+    "i18n:extract": "node scripts/i18n/extract.js",
+    "i18n:inject": "node scripts/i18n/inject.js",
+    "i18n:manifest": "node scripts/i18n/manifest.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -75,6 +78,7 @@
     "puppeteer-core": "^25.3.0",
     "stylelint": "^17.2.0",
     "stylelint-config-standard": "^40.0.0",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^3.4.19",
+    "typescript": "^4.9.5"
   }
 }

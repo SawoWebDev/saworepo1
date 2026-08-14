@@ -14,19 +14,20 @@ import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
 const Home = () => {
   const locale = useLocale();
   const tc = useLocaleT("common");
-  const tSeo = useLocaleT("seo");
+  const t = useLocaleT("home");
   const path = locale === "en" ? "/" : `/${locale}`;
   return (
     <div>
       {/* English keeps no title/description override — falls back to
           SEO.jsx's DEFAULT_TITLE/DEFAULT_DESCRIPTION, which is also what's
           baked into public/index.html so both stay in sync. fi/de pass
-          seo.json's real translated title/description explicitly, since
-          they have no such fallback baked into index.html. */}
+          home.json's meta.* block explicitly, since they have no such
+          fallback baked into index.html. Every page's meta lives alongside
+          its own copy in one file — see README-i18n.md. */}
       <SEO
         path={path}
-        rawTitle={locale === "en" ? undefined : tSeo("home.title")}
-        description={locale === "en" ? undefined : tSeo("home.description")}
+        rawTitle={locale === "en" ? undefined : t("meta.title")}
+        description={locale === "en" ? undefined : t("meta.description")}
         hreflangAlternates={{ en: "/", fi: "/fi", de: "/de" }}
       />
       <Hero />
