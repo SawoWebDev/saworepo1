@@ -3,5 +3,55 @@
   "inquireToday": "INQUIRE TODAY",
   "viewCatalogue": "VIEW CATALOGUE",
   "previous": "Previous",
-  "next": "Next"
+  "next": "Next",
+  "wellnessBenefits": {
+    "stressRelief": {
+      "label": "Stress Relief",
+      "desc": "Reduces stress, promotes relaxation, and alleviates anxiety"
+    },
+    "heartHealth": {
+      "label": "Heart Health",
+      "desc": "Enhances blood circulation, reduces arterial stiffness, and supports healthy blood pressure"
+    },
+    "respiratoryRelief": {
+      "label": "Respiratory Relief",
+      "desc": "Relieves nasal, sinus, and chest congestion"
+    },
+    "muscleRecovery": {
+      "label": "Muscle Recovery",
+      "desc": "Accelerates muscle recovery following exercise"
+    },
+    "betterSleep": {
+      "label": "Better Sleep",
+      "desc": "Promotes deeper, more restorative sleep by extending REM sleep duration"
+    },
+    "diseasePrevention": {
+      "label": "Disease Prevention",
+      "desc": "Lowers risk of cardiovascular diseases, including stroke, hypertension, dementia, and Alzheimer's disease"
+    },
+    "skinDetox": {
+      "label": "Skin Detox",
+      "desc": "Opens pores, reduces blackheads, eliminates toxins, and improves skin"
+    },
+    "collagenBoost": {
+      "label": "Collagen Boost",
+      "desc": "Stimulates fibroblast activity to boost collagen production and enhance skin texture"
+    },
+    "skinHydration": {
+      "label": "Skin Hydration",
+      "desc": "Improves skin hydration, stabilizes pH balance, and strengthens the skin's natural barrier"
+    },
+    "immuneSupport": {
+      "label": "Immune Support",
+      "desc": "Supports the body's natural immune defenses and aids recovery after illness"
+    },
+    "metabolismBoost": {
+      "label": "Metabolism Boost",
+      "desc": "Stimulates protein repair, improves insulin sensitivity, and enhances metabolic rate"
+    },
+    "mentalWellness": {
+      "label": "Mental Wellness",
+      "desc": "Significantly reduces symptoms of depression with consistent use"
+    }
+  }
 }

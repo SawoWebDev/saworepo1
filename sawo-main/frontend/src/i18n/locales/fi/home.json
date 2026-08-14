@@ -122,42 +122,67 @@
       }
     },
     "infrared": {
-      "rooms": { "title": "Infrapunasaunat" },
-      "panels": { "title": "Infrapunapaneelit" },
-      "controls": { "title": "Infrapunaohjaimet" }
+      "rooms": {
+        "title": "Infrapunasaunat"
+      },
+      "panels": {
+        "title": "Infrapunapaneelit"
+      },
+      "controls": {
+        "title": "Infrapunaohjaimet"
+      }
     },
     "controls": {
-      "saunova": { "title": "Saunova-sarja" },
-      "innova": { "title": "Innova-sarja" },
-      "accessories": { "title": "Ohjaustarvikkeet" }
-    },
-    "benefits": {
-      "stressRelief": { "label": "Stressin lievitys", "desc": "Vähentää stressiä, edistää rentoutumista ja lievittää ahdistusta" },
-      "heartHealth": { "label": "Sydänterveys", "desc": "Parantaa verenkiertoa, vähentää valtimoiden jäykkyyttä ja tukee tervettä verenpainetta" },
-      "respiratoryRelief": { "label": "Hengitysteiden helpotus", "desc": "Helpottaa nenän, poskionteloiden ja rintakehän tukkoisuutta" },
-      "muscleRecovery": { "label": "Lihasten palautuminen", "desc": "Nopeuttaa lihasten palautumista harjoittelun jälkeen" },
-      "betterSleep": { "label": "Parempi uni", "desc": "Edistää syvempää ja palauttavampaa unta pidentämällä REM-unen kestoa" },
-      "diseasePrevention": { "label": "Sairauksien ehkäisy", "desc": "Vähentää sydän- ja verisuonisairauksien, kuten aivohalvauksen, kohonneen verenpaineen, dementian ja Alzheimerin taudin, riskiä" },
-      "skinDetox": { "label": "Ihon puhdistus", "desc": "Avaa huokosia, vähentää mustapäitä, poistaa myrkkyjä ja parantaa ihoa" },
-      "collagenBoost": { "label": "Kollageenin lisäys", "desc": "Stimuloi fibroblastien toimintaa lisäten kollageenin tuotantoa ja parantaen ihon tekstuuria" },
-      "skinHydration": { "label": "Ihon kosteutus", "desc": "Parantaa ihon kosteutta, tasapainottaa pH-arvoa ja vahvistaa ihon luonnollista suojaa" },
-      "immuneSupport": { "label": "Immuunijärjestelmän tuki", "desc": "Tukee kehon luonnollista immuunipuolustusta ja auttaa toipumisessa sairauden jälkeen" },
-      "metabolismBoost": { "label": "Aineenvaihdunnan vauhditus", "desc": "Stimuloi proteiinien korjautumista, parantaa insuliiniherkkyyttä ja tehostaa aineenvaihduntaa" },
-      "mentalWellness": { "label": "Mielen hyvinvointi", "desc": "Vähentää merkittävästi masennuksen oireita säännöllisessä käytössä" }
+      "saunova": {
+        "title": "Saunova-sarja"
+      },
+      "innova": {
+        "title": "Innova-sarja"
+      },
+      "accessories": {
+        "title": "Ohjaustarvikkeet"
+      }
     }
   },
   "section4": {
     "heading": "SAUNATARVIKKEET",
     "items": {
-      "pailsLadles": { "title": "KIULUT ja KAUHAT", "alt": "Saunakiulut ja -kauhat" },
-      "thermometers": { "title": "LÄMPÖMITTARIT ja YHDISTELMÄMITTARIT", "alt": "Saunan lämpömittarit ja yhdistelmämittarit" },
-      "clocksSandtimers": { "title": "KELLOT ja TIIMALASIT", "alt": "Saunakellot ja tiimalasit" },
-      "lightsCovers": { "title": "SAUNAVALOT ja VALAISINSUOJAT", "alt": "Saunan valaisinsuojat" },
-      "headrestsBackrests": { "title": "NISKATUET ja SELKÄNOJAT", "alt": "Saunan niskatuet ja selkänojat" },
-      "doorsHandles": { "title": "OVET ja KAHVAT", "alt": "Saunan ovet ja kahvat" },
-      "benches": { "title": "LAUTEET ja LATTIALAATAT", "alt": "Saunan lauteet ja lattialaatat" },
-      "kivistone": { "title": "KIVISTONE", "alt": "Kivistone-kiuaskivet" },
-      "ventilations": { "title": "ILMANVAIHTO ja LISÄVARUSTEET", "alt": "Saunan ilmanvaihto ja lisävarusteet" }
+      "pailsLadles": {
+        "title": "KIULUT ja KAUHAT",
+        "alt": "Saunakiulut ja -kauhat"
+      },
+      "thermometers": {
+        "title": "LÄMPÖMITTARIT ja YHDISTELMÄMITTARIT",
+        "alt": "Saunan lämpömittarit ja yhdistelmämittarit"
+      },
+      "clocksSandtimers": {
+        "title": "KELLOT ja TIIMALASIT",
+        "alt": "Saunakellot ja tiimalasit"
+      },
+      "lightsCovers": {
+        "title": "SAUNAVALOT ja VALAISINSUOJAT",
+        "alt": "Saunan valaisinsuojat"
+      },
+      "headrestsBackrests": {
+        "title": "NISKATUET ja SELKÄNOJAT",
+        "alt": "Saunan niskatuet ja selkänojat"
+      },
+      "doorsHandles": {
+        "title": "OVET ja KAHVAT",
+        "alt": "Saunan ovet ja kahvat"
+      },
+      "benches": {
+        "title": "LAUTEET ja LATTIALAATAT",
+        "alt": "Saunan lauteet ja lattialaatat"
+      },
+      "kivistone": {
+        "title": "KIVISTONE",
+        "alt": "Kivistone-kiuaskivet"
+      },
+      "ventilations": {
+        "title": "ILMANVAIHTO ja LISÄVARUSTEET",
+        "alt": "Saunan ilmanvaihto ja lisävarusteet"
+      }
     }
   },
   "section5": {

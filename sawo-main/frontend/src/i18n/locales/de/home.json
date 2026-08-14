@@ -122,42 +122,67 @@
       }
     },
     "infrared": {
-      "rooms": { "title": "Infrarotkabinen" },
-      "panels": { "title": "Infrarotpaneele" },
-      "controls": { "title": "Infrarotsteuerungen" }
+      "rooms": {
+        "title": "Infrarotkabinen"
+      },
+      "panels": {
+        "title": "Infrarotpaneele"
+      },
+      "controls": {
+        "title": "Infrarotsteuerungen"
+      }
     },
     "controls": {
-      "saunova": { "title": "Saunova-Serie" },
-      "innova": { "title": "Innova-Serie" },
-      "accessories": { "title": "Steuerungszubehör" }
-    },
-    "benefits": {
-      "stressRelief": { "label": "Stressabbau", "desc": "Reduziert Stress, fördert Entspannung und lindert Angstzustände" },
-      "heartHealth": { "label": "Herzgesundheit", "desc": "Verbessert die Durchblutung, reduziert die Arteriensteifigkeit und unterstützt einen gesunden Blutdruck" },
-      "respiratoryRelief": { "label": "Atemwegs-Linderung", "desc": "Lindert verstopfte Nase, Nasennebenhöhlen und Brustkorb" },
-      "muscleRecovery": { "label": "Muskelregeneration", "desc": "Beschleunigt die Muskelregeneration nach dem Training" },
-      "betterSleep": { "label": "Besserer Schlaf", "desc": "Fördert tieferen, erholsameren Schlaf durch verlängerte REM-Schlafphasen" },
-      "diseasePrevention": { "label": "Krankheitsprävention", "desc": "Senkt das Risiko von Herz-Kreislauf-Erkrankungen, einschließlich Schlaganfall, Bluthochdruck, Demenz und Alzheimer" },
-      "skinDetox": { "label": "Haut-Entgiftung", "desc": "Öffnet die Poren, reduziert Mitesser, eliminiert Giftstoffe und verbessert die Haut" },
-      "collagenBoost": { "label": "Kollagen-Boost", "desc": "Stimuliert die Fibroblastenaktivität, um die Kollagenproduktion zu steigern und die Hautstruktur zu verbessern" },
-      "skinHydration": { "label": "Hautfeuchtigkeit", "desc": "Verbessert die Hautfeuchtigkeit, stabilisiert den pH-Wert und stärkt die natürliche Hautbarriere" },
-      "immuneSupport": { "label": "Immunsystem-Unterstützung", "desc": "Unterstützt die natürlichen Abwehrkräfte des Körpers und fördert die Genesung nach Krankheit" },
-      "metabolismBoost": { "label": "Stoffwechsel-Boost", "desc": "Stimuliert die Proteinreparatur, verbessert die Insulinsensitivität und steigert die Stoffwechselrate" },
-      "mentalWellness": { "label": "Mentales Wohlbefinden", "desc": "Reduziert signifikant Depressionssymptome bei regelmäßiger Anwendung" }
+      "saunova": {
+        "title": "Saunova-Serie"
+      },
+      "innova": {
+        "title": "Innova-Serie"
+      },
+      "accessories": {
+        "title": "Steuerungszubehör"
+      }
     }
   },
   "section4": {
     "heading": "SAUNAZUBEHÖR",
     "items": {
-      "pailsLadles": { "title": "KÜBEL und KELLEN", "alt": "Saunakübel und -kellen" },
-      "thermometers": { "title": "THERMOMETER und KOMBIMESSGERÄTE", "alt": "Sauna-Thermometer und Kombimessgeräte" },
-      "clocksSandtimers": { "title": "UHREN und SANDUHREN", "alt": "Saunauhren und Sanduhren" },
-      "lightsCovers": { "title": "SAUNALEUCHTEN und ABDECKUNGEN", "alt": "Sauna-Leuchtenabdeckungen" },
-      "headrestsBackrests": { "title": "KOPFSTÜTZEN und RÜCKENLEHNEN", "alt": "Sauna-Kopfstützen und Rückenlehnen" },
-      "doorsHandles": { "title": "TÜREN und GRIFFE", "alt": "Saunatüren und Griffe" },
-      "benches": { "title": "BÄNKE und BODENFLIESEN", "alt": "Saunabänke und Bodenfliesen" },
-      "kivistone": { "title": "KIVISTONE", "alt": "Kivistone Saunasteine" },
-      "ventilations": { "title": "BELÜFTUNG und ZUBEHÖR", "alt": "Saunabelüftung und Zubehör" }
+      "pailsLadles": {
+        "title": "KÜBEL und KELLEN",
+        "alt": "Saunakübel und -kellen"
+      },
+      "thermometers": {
+        "title": "THERMOMETER und KOMBIMESSGERÄTE",
+        "alt": "Sauna-Thermometer und Kombimessgeräte"
+      },
+      "clocksSandtimers": {
+        "title": "UHREN und SANDUHREN",
+        "alt": "Saunauhren und Sanduhren"
+      },
+      "lightsCovers": {
+        "title": "SAUNALEUCHTEN und ABDECKUNGEN",
+        "alt": "Sauna-Leuchtenabdeckungen"
+      },
+      "headrestsBackrests": {
+        "title": "KOPFSTÜTZEN und RÜCKENLEHNEN",
+        "alt": "Sauna-Kopfstützen und Rückenlehnen"
+      },
+      "doorsHandles": {
+        "title": "TÜREN und GRIFFE",
+        "alt": "Saunatüren und Griffe"
+      },
+      "benches": {
+        "title": "BÄNKE und BODENFLIESEN",
+        "alt": "Saunabänke und Bodenfliesen"
+      },
+      "kivistone": {
+        "title": "KIVISTONE",
+        "alt": "Kivistone Saunasteine"
+      },
+      "ventilations": {
+        "title": "BELÜFTUNG und ZUBEHÖR",
+        "alt": "Saunabelüftung und Zubehör"
+      }
     }
   },
   "section5": {

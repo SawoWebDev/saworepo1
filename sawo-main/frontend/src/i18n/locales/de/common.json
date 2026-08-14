@@ -3,5 +3,55 @@
   "inquireToday": "JETZT ANFRAGEN",
   "viewCatalogue": "KATALOG ANSEHEN",
   "previous": "Zurück",
-  "next": "Weiter"
+  "next": "Weiter",
+  "wellnessBenefits": {
+    "stressRelief": {
+      "label": "Stressabbau",
+      "desc": "Reduziert Stress, fördert Entspannung und lindert Angstzustände"
+    },
+    "heartHealth": {
+      "label": "Herzgesundheit",
+      "desc": "Verbessert die Durchblutung, reduziert die Arteriensteifigkeit und unterstützt einen gesunden Blutdruck"
+    },
+    "respiratoryRelief": {
+      "label": "Atemwegs-Linderung",
+      "desc": "Lindert verstopfte Nase, Nasennebenhöhlen und Brustkorb"
+    },
+    "muscleRecovery": {
+      "label": "Muskelregeneration",
+      "desc": "Beschleunigt die Muskelregeneration nach dem Training"
+    },
+    "betterSleep": {
+      "label": "Besserer Schlaf",
+      "desc": "Fördert tieferen, erholsameren Schlaf durch verlängerte REM-Schlafphasen"
+    },
+    "diseasePrevention": {
+      "label": "Krankheitsprävention",
+      "desc": "Senkt das Risiko von Herz-Kreislauf-Erkrankungen, einschließlich Schlaganfall, Bluthochdruck, Demenz und Alzheimer"
+    },
+    "skinDetox": {
+      "label": "Haut-Entgiftung",
+      "desc": "Öffnet die Poren, reduziert Mitesser, eliminiert Giftstoffe und verbessert die Haut"
+    },
+    "collagenBoost": {
+      "label": "Kollagen-Boost",
+      "desc": "Stimuliert die Fibroblastenaktivität, um die Kollagenproduktion zu steigern und die Hautstruktur zu verbessern"
+    },
+    "skinHydration": {
+      "label": "Hautfeuchtigkeit",
+      "desc": "Verbessert die Hautfeuchtigkeit, stabilisiert den pH-Wert und stärkt die natürliche Hautbarriere"
+    },
+    "immuneSupport": {
+      "label": "Immunsystem-Unterstützung",
+      "desc": "Unterstützt die natürlichen Abwehrkräfte des Körpers und fördert die Genesung nach Krankheit"
+    },
+    "metabolismBoost": {
+      "label": "Stoffwechsel-Boost",
+      "desc": "Stimuliert die Proteinreparatur, verbessert die Insulinsensitivität und steigert die Stoffwechselrate"
+    },
+    "mentalWellness": {
+      "label": "Mentales Wohlbefinden",
+      "desc": "Reduziert signifikant Depressionssymptome bei regelmäßiger Anwendung"
+    }
+  }
 }
