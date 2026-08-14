@@ -60,7 +60,7 @@ async function main() {
     if (config.outFile !== "index.html") lib.seedFallback(template, config.outFile);
   }
 
-  const server = await lib.serveBuild();
+  const server = await lib.serveBuild(template);
   try {
     const port = server.address().port;
     const { executablePath, args } = await lib.findChrome();
