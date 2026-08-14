@@ -1,21 +1,19 @@
 /**
- * Home ("/") page config — migrated verbatim from the original single-page
- * scripts/prerender.js. Same selectors, same sanity checks, same loader
- * selector ("#root section img") and 4s cap. This must stay behaviorally
- * identical to the pre-refactor script; see homepage_prerender_invariants
- * for why each of these choices exists (typewriter-must-be-empty, hero
- * heading present, size floor, etc.) — do not loosen any of these checks
- * without re-reading that context.
+ * Home ("/de") page config — same shape as pages/home.js, snapshotting the
+ * German locale instead of English. Locale is resolved entirely client-side
+ * (see i18n/LocaleContext.js — synchronous from the URL, no async
+ * i18n.changeLanguage race), so no extra waitFor step is needed beyond
+ * Home's own hero-image selector.
  */
 module.exports = {
-  path: "/",
-  outFile: "index.html",
+  path: "/de",
+  outFile: "de/index.html",
   blockNetwork: true,
   loaderImgSelector: "#root section img",
 
   async waitFor(page) {
     await page.waitForSelector("section.sauna-unique img", { timeout: 30000 });
-    await new Promise((r) => setTimeout(r, 500)); // let React finish committing
+    await new Promise((r) => setTimeout(r, 500));
   },
 
   async capture(page) {
@@ -43,8 +41,8 @@ module.exports = {
 
   sanityCheck(captured) {
     if (captured.typewriterText.trim() !== "") throw new Error("typewriter ran before capture — snapshot not pristine");
-    if (!captured.rootHtml.includes("Experience")) throw new Error("hero heading missing from snapshot");
-    if (captured.head.htmlLang !== "en") throw new Error(`<html lang> is "${captured.head.htmlLang}", expected "en"`);
+    if (!captured.rootHtml.includes("Erleben Sie")) throw new Error("German hero heading missing from snapshot");
+    if (captured.head.htmlLang !== "de") throw new Error(`<html lang> is "${captured.head.htmlLang}", expected "de"`);
     if (captured.rootHtml.length < 10000) throw new Error(`snapshot suspiciously small (${captured.rootHtml.length} bytes)`);
   },
 };
