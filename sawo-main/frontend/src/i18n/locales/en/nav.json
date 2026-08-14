@@ -1,0 +1,51 @@
+{
+  "home": "Home",
+  "products": "Products",
+  "support": "Support",
+  "aboutUs": "About Us",
+  "contactUs": "Contact Us",
+  "search": "Search",
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+  "searchBox": {
+    "placeholder": "Search...",
+    "searching": "Searching...",
+    "noResults": "No results found",
+    "pages": "Pages",
+    "products": "Products"
+  },
+  "groups": {
+    "sauna": "Sauna",
+    "steam": "Steam",
+    "infrared": "Infrared"
+  },
+  "items": {
+    "wallMounted": "Wall-Mounted",
+    "tower": "Tower",
+    "stone": "Stone",
+    "floor": "Floor",
+    "combi": "Combi",
+    "dragonfire": "Dragonfire",
+    "saunaHeaters": "Sauna Heaters",
+    "saunaControls": "Sauna Controls",
+    "saunaAccessories": "Sauna Accessories",
+    "saunaRooms": "Sauna Rooms",
+    "interiorDesigns": "Interior Designs",
+    "woodPanels": "Wood Panels & Timbers",
+    "steamGenerators": "Steam Generators",
+    "steamControls": "Steam Controls",
+    "steamAccessories": "Steam Accessories",
+    "infrared": "Infrared",
+    "faq": "Frequently Asked Questions",
+    "saunaCalculator": "Sauna Calculator",
+    "userManuals": "User Manuals",
+    "productCatalogue": "Product Catalogue",
+    "latestNews": "Latest News",
+    "sustainability": "Sustainability",
+    "careers": "Careers"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Switch language"
+  }
+}
