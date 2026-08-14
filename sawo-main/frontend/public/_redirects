@@ -265,6 +265,7 @@
 /careers    /careers/index.html    200
 /fi         /fi/index.html         200
 /de         /de/index.html         200
+/fi/sauna   /fi/sauna/index.html   200
 
 # ---- SPA CATCH-ALL (must stay LAST — do not reorder above this line) -----------
 # Cloudflare Pages serves build/index.html for any unmatched static path by
