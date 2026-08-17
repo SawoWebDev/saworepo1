@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getSession, clearSession } from "./supabase";
-import { NAV_ITEMS, can, getLandingPath } from "./permissions";
+import { NAV_ITEMS, canEffective, getLandingPath } from "./permissions";
 import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
 import { setPreviewRole, usePreviewRole } from "./previewRole";
 import PageHeader from "./PageHeader";
@@ -220,7 +220,7 @@ export default function AdminLayout({ children }) {
   const realRole = session.user.role;
   const effectiveRole = realRole === "superadmin" && previewRole ? previewRole : realRole;
   const isPreviewing = effectiveRole !== realRole;
-  const nav = NAV_ITEMS.filter(item => can(effectiveRole, item.cap));
+  const nav = NAV_ITEMS.filter(item => canEffective(session.user, effectiveRole, item.cap));
 
   // Find current page label for mobile topbar
   const currentNav = nav.find(item => isNavActive(location.pathname, item.to));
@@ -280,7 +280,7 @@ export default function AdminLayout({ children }) {
             description={currentNav.description}
             dark={dark}
             setDark={setDark}
-            actions={<CmsSearch role={effectiveRole} />}
+            actions={<CmsSearch role={effectiveRole} user={session.user} />}
           />
         )}
         <div className="admin-main-content" style={{ background: dark ? "#241d16" : "#f7f5f2" }}>

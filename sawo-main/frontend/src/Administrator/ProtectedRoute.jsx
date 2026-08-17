@@ -2,7 +2,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { getSession } from "./supabase";
-import { can, getLandingPath } from "./permissions";
+import { canEffective, getLandingPath } from "./permissions";
 import { getEffectiveRole } from "./previewRole";
 
 /**
@@ -28,7 +28,7 @@ export default function ProtectedRoute({ children, requiredCap, redirectTo }) {
   // previewed) role, so a superadmin previewing as "viewer" sees exactly
   // what a viewer would if they navigated straight to this URL.
   const effectiveRole = getEffectiveRole(session.user.role);
-  if (requiredCap && !can(effectiveRole, requiredCap)) {
+  if (requiredCap && !canEffective(session.user, effectiveRole, requiredCap)) {
     return <Navigate to={redirectTo || getLandingPath(effectiveRole)} replace />;
   }
   return children;

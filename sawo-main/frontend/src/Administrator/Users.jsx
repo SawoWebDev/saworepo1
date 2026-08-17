@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase, isPasswordUpdateRequiredError, forgotPassword } from "./supabase";
 import { getCache, setCache } from "./adminCache";
-import { getPerms } from "./permissions";
+import { getPerms, can, PERMISSION_SECTIONS } from "./permissions";
 
 const USERS_CACHE_KEY = "admin:users";
 
@@ -66,6 +66,11 @@ const emptyForm = {
   full_name: "",
   email: "",
   role: "admin",
+  // Individual grants on top of the role's own defaults — see
+  // PERMISSION_SECTIONS in permissions.js. Never includes a capability the
+  // selected role already grants by default (toggling the role checkbox
+  // clears it there instead — see the Permissions form-group below).
+  extra_permissions: [],
 };
 
 function Modal({ open, onClose, title, children }) {
@@ -142,7 +147,7 @@ export default function Users({ currentUser }) {
   const fetchUsers = async () => {
     const { data, error } = await supabase
       .from("users")
-      .select("id, username, full_name, email, role, created_at")
+      .select("id, username, full_name, email, role, extra_permissions, created_at")
       .order("created_at", { ascending: sortDir === "asc" });
     if (!error) { setUsers(data); setCache(USERS_CACHE_KEY, data); setSelected(new Set()); }
   };
@@ -155,8 +160,29 @@ export default function Users({ currentUser }) {
 
   const openEdit = u => {
     setEditUser(u);
-    setForm({ username: u.username, password_hash: "", full_name: u.full_name || "", email: u.email || "", role: u.role || "admin" });
+    setForm({
+      username: u.username,
+      password_hash: "",
+      full_name: u.full_name || "",
+      email: u.email || "",
+      role: u.role || "admin",
+      extra_permissions: u.extra_permissions || [],
+    });
     setFormError(""); setShowPassword(false); setShowModal(true);
+  };
+
+  // Toggles one extra-permission checkbox. Guards against ever storing a cap
+  // the currently-selected role already grants by default — if the admin
+  // flips Role after checking some extras, any that became redundant drop
+  // out silently next render (see the filter in the Permissions section
+  // below) rather than being saved as dead weight.
+  const toggleExtraPermission = (cap, checked) => {
+    setForm(f => ({
+      ...f,
+      extra_permissions: checked
+        ? [...f.extra_permissions, cap]
+        : f.extra_permissions.filter(c => c !== cap),
+    }));
   };
 
   const closeModal = () => { setShowModal(false); setEditUser(null); };
@@ -165,6 +191,11 @@ export default function Users({ currentUser }) {
     e.preventDefault();
     setFormError("");
     setFormLoading(true);
+    // Only persist caps the chosen role doesn't already grant by default —
+    // keeps extra_permissions a true diff from the role, not a redundant
+    // copy of it (and means switching Role never leaves stale dead grants
+    // behind that just happen to be harmless).
+    const extraPermissions = form.extra_permissions.filter(cap => !can(form.role, cap));
     try {
       if (editUser) {
         // password_hash is no longer a directly-writable column (see
@@ -175,6 +206,7 @@ export default function Users({ currentUser }) {
           full_name: form.full_name.trim() || null,
           email: form.email.trim() || null,
           role: form.role,
+          extra_permissions: extraPermissions,
         };
         const { error } = await supabase.from("users").update(updates).eq("id", editUser.id);
         if (error) throw new Error(error.message);
@@ -206,6 +238,7 @@ export default function Users({ currentUser }) {
           full_name: form.full_name.trim() || null,
           email: email || null,
           role: form.role,
+          extra_permissions: extraPermissions,
         }]);
         if (error) throw new Error(error.message);
 
@@ -424,7 +457,18 @@ export default function Users({ currentUser }) {
                 </td>
                 <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.full_name || "-"}</td>
                 <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.email || "-"}</td>
-                <td>{roleBadge(u.role)}</td>
+                <td>
+                  {roleBadge(u.role)}
+                  {u.extra_permissions?.length > 0 && (
+                    <span
+                      className="tbl-pill"
+                      title={`${u.extra_permissions.length} extra permission(s) added on top of the ${u.role} role's defaults`}
+                      style={{ marginLeft: 6, background: "var(--brand-muted)", color: "var(--brand)" }}
+                    >
+                      +{u.extra_permissions.length} extra
+                    </span>
+                  )}
+                </td>
                 <td className="tbl-date">{formatDate(u.created_at)}</td>
                 <td style={{ textAlign: "right" }}>
                   <div className="table-actions">
@@ -523,6 +567,65 @@ export default function Users({ currentUser }) {
               <option value="viewer">viewer</option>
             </select>
           </div>
+
+          {form.role === "superadmin" ? (
+            <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: 0 }}>
+              Superadmin already has every permission — extra permissions don't apply.
+            </p>
+          ) : (
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Permissions</label>
+              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 8px" }}>
+                Checked-and-locked boxes come from the <strong>{form.role}</strong> role's own defaults.
+                Check any other box to grant it to this user specifically, without changing the role itself.
+              </p>
+              <div className="products-table-wrap" style={{ maxHeight: 280, overflowY: "auto" }}>
+                {PERMISSION_SECTIONS.map(section => (
+                  <div key={section.name}>
+                    {section.groups.map(group => (
+                      <React.Fragment key={group.label}>
+                        <div style={{
+                          fontSize: "0.72rem", fontWeight: 700, color: "var(--brand)",
+                          background: "var(--brand-muted)", padding: "6px 12px",
+                        }}>
+                          {group.label}
+                        </div>
+                        {group.rows.map(row => {
+                          const fromRole = can(form.role, row.cap);
+                          const checked = fromRole || form.extra_permissions.includes(row.cap);
+                          return (
+                            <label
+                              key={row.cap}
+                              style={{
+                                display: "flex", alignItems: "center", gap: 8,
+                                padding: "6px 12px", fontSize: "0.82rem",
+                                color: fromRole ? "var(--text-3)" : "var(--text-2)",
+                                cursor: fromRole ? "default" : "pointer",
+                              }}
+                            >
+                              <input
+                                type="checkbox"
+                                className="tbl-checkbox"
+                                checked={checked}
+                                disabled={fromRole}
+                                onChange={e => toggleExtraPermission(row.cap, e.target.checked)}
+                              />
+                              {row.label}
+                              {fromRole && (
+                                <span style={{ fontSize: "0.68rem", color: "var(--text-3)", marginLeft: "auto" }}>
+                                  from role
+                                </span>
+                              )}
+                            </label>
+                          );
+                        })}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {formError && (
             <div className="alert alert-error">

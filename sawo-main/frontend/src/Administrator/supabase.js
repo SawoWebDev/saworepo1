@@ -33,7 +33,7 @@ export const supabase = createClient(
 // email match when auth_user_id hasn't been linked yet, and repairs the link
 // so the lookup is direct next time.
 async function loadProfileForAuthUser(authUserId, email) {
-  const COLS = "id, username, full_name, email, role, dark_mode, created_at";
+  const COLS = "id, username, full_name, email, role, extra_permissions, dark_mode, created_at";
 
   const { data: byLink } = await supabase
     .from("users").select(COLS).eq("auth_user_id", authUserId).maybeSingle();
