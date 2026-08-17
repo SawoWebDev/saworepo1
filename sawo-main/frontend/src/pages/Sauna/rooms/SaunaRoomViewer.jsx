@@ -88,6 +88,12 @@ const TABS = [
   { key: "compact",    label: "Compact Sauna Room" },
 ];
 
+// { standard: "standard-sauna-room", glassfront: "glass-front-sauna-room", ... }
+// — the DOM id the tabs-wrapper below takes on, so a link to
+// /sauna/rooms#glass-front-sauna-room lands on a real element (this is the
+// other half of HASH_MAP's existing hash->tab lookup on mount).
+const REVERSE_HASH_MAP = Object.fromEntries(Object.entries(HASH_MAP).map(([hash, key]) => [key, hash]));
+
 const SaunaRoomViewer = () => {
   const [activeRoom, setActiveRoom] = useState(() => {
     const hash = window.location.hash.replace("#", "");
@@ -369,7 +375,7 @@ const SaunaRoomViewer = () => {
   return (
     <>
       {/* TABS */}
-      <div className="sauna-tabs-wrapper">
+      <div className="sauna-tabs-wrapper" id={REVERSE_HASH_MAP[activeRoom]}>
         <div className="sauna-room-tabs">
           {TABS.map((tab) => (
             <button

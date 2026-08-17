@@ -28,6 +28,7 @@ import HeroWave from "../../components/HeroWave";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
 import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
+import { controlsPath } from "../../utils/anchoredLinks";
 
 // Import hero background - update path as needed
 // import heroBg from "assets/Sauna/Sauna-hero.webp";
@@ -116,19 +117,19 @@ const Sauna = () => {
     {
       img: img_Innova_Classic_2_0,
       title: t("controls.items.innova.title"),
-      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Innova Series")}`,
+      href: controlsPath("innova"),
       desc: t("controls.items.innova.desc"),
     },
     {
       img: img_saunova_2_0_user_interface,
       title: t("controls.items.saunova.title"),
-      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Saunova Series")}`,
+      href: controlsPath("saunova"),
       desc: t("controls.items.saunova.desc"),
     },
     {
       img: img_INNOVA_CLASSIC_1000X1000,
       title: t("controls.items.accessories.title"),
-      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Control Spare Parts")}`,
+      href: controlsPath("accessories"),
       desc: t("controls.items.accessories.desc"),
     },
   ];

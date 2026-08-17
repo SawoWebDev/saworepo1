@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
 import menuPaths from "../../menuPaths";
 import { useLocaleT } from "../../i18n/LocaleContext";
+import { roomsPath, controlsPath, infraredPath } from "../../utils/anchoredLinks";
 
 import steamGenerator    from "../../assets/Home/Section3/steam-generator1.webp";
 import steamControl      from "../../assets/Home/Section3/SteamControlFinal.webp";
 import steamAccessories  from "../../assets/Home/Section3/ST-746-I_Display2.webp";
 import standardSauna     from "../../assets/Home/Section3/700x525.webp";
 import glassFrontSauna   from "../../assets/Home/Section3/GLASS-FRONT.webp";
-import outdoorSauna      from "../../assets/Home/Section3/700x525-outdoor-2.webp";
+import compactSauna      from "../../assets/Home/Section3/700x525-compact.webp";
 import infraredSaunaRoom from "../../assets/Home/Section3/INFRARED-SAUNA-ROOM.webp";
 import infraredRooms     from "../../assets/Home/Section3/SR06-44710101-1313LS_PERSPECTIVE-VIEW-1.webp";
 import infraredPanels    from "../../assets/Home/Section3/infrared-panelss-400x600px.webp";
@@ -23,16 +24,19 @@ const STEAM_KEYS = ["generators", "controls", "accessories"];
 const STEAM_HREFS = { generators: menuPaths.steam.generators, controls: menuPaths.steam.controls, accessories: menuPaths.steam.accessories };
 const STEAM_IMAGES = { generators: steamGenerator, controls: steamControl, accessories: steamAccessories };
 
-const ROOMS_KEYS = ["standard", "glassFront", "outdoor", "infrared"];
-const ROOMS_HREFS = { standard: menuPaths.sauna.rooms, glassFront: menuPaths.sauna.rooms, outdoor: menuPaths.sauna.rooms, infrared: menuPaths.sauna.rooms };
-const ROOMS_IMAGES = { standard: standardSauna, glassFront: glassFrontSauna, outdoor: outdoorSauna, infrared: infraredSaunaRoom };
+// Each card links to its own specific tab/section on the destination page
+// (roomsPath/controlsPath/infraredPath — see utils/anchoredLinks.js), not
+// just the general hub page, wherever that target section actually exists.
+const ROOMS_KEYS = ["standard", "glassFront", "compact", "infrared"];
+const ROOMS_HREFS = { standard: roomsPath("standard"), glassFront: roomsPath("glassFront"), compact: roomsPath("compact"), infrared: roomsPath("infrared") };
+const ROOMS_IMAGES = { standard: standardSauna, glassFront: glassFrontSauna, compact: compactSauna, infrared: infraredSaunaRoom };
 
 const INFRARED_KEYS = ["rooms", "panels", "controls"];
-const INFRARED_HREFS = { rooms: menuPaths.infrared, panels: menuPaths.infrared, controls: menuPaths.infrared };
+const INFRARED_HREFS = { rooms: infraredPath("rooms"), panels: infraredPath("panels"), controls: infraredPath("controls") };
 const INFRARED_IMAGES = { rooms: infraredRooms, panels: infraredPanels, controls: infraredControls };
 
 const CONTROL_KEYS = ["saunova", "innova", "accessories"];
-const CONTROL_HREFS = { saunova: menuPaths.sauna.controls, innova: menuPaths.sauna.controls, accessories: menuPaths.sauna.accessories.parent };
+const CONTROL_HREFS = { saunova: controlsPath("saunova"), innova: controlsPath("innova"), accessories: controlsPath("accessories") };
 const CONTROL_IMAGES = { saunova: saunovaSeries, innova: innovaSeries, accessories: controlAccessories };
 
 // Same wellness-benefits widget used on the Sauna and Infrared pages (icon

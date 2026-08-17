@@ -112,9 +112,9 @@
         "title": "Glasfront-Sauna",
         "caption": "Modernes Design mit klaren, gehärteten Glasscheiben für einen ungehinderten Blick nach draußen. Pure Gelassenheit und Entspannung."
       },
-      "outdoor": {
-        "title": "Außensauna",
-        "caption": "Konstruiert, um extremen Wetterbedingungen standzuhalten. Beschichtete Wände und langlebiges Bitumenschindeldach für maximalen Schutz vor Sonne und Regen."
+      "compact": {
+        "title": "Kompaktsauna",
+        "caption": "Sofort einsatzbereite Plug-and-Play-Lösung für urbane Räume. Ein verborgener Ofen sorgt für Sicherheit und maximale Aussicht."
       },
       "infrared": {
         "title": "Infrarotsauna",

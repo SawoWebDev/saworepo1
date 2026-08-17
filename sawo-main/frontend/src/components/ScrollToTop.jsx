@@ -20,9 +20,35 @@ export default function ScrollToTop() {
     });
   };
 
+  // A route with a #hash (e.g. /sauna/rooms#glass-front-sauna-room, linked
+  // from Home/Footer's anchored links) must scroll to THAT element, not the
+  // top — this effect used to unconditionally force (0,0) on every route
+  // change, which silently defeated every hash-anchored link site-wide
+  // regardless of whether the target page actually had a matching element.
+  // React Router doesn't scroll to a hash on client-side navigation the way
+  // a full page load does, so this does it manually. The target element may
+  // not exist on the very first render after navigating (e.g.
+  // SaunaRoomViewer.jsx sets its section's id from the hash-selected tab
+  // during its own render) — one retry after a short delay covers that
+  // without polling indefinitely.
   useEffect(() => {
+    if (location.hash) {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const scrollToHash = () => {
+        const el = document.getElementById(id);
+        if (!el) return false;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      };
+      if (!scrollToHash()) {
+        const t = setTimeout(scrollToHash, 150);
+        return () => clearTimeout(t);
+      }
+      return undefined;
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+    return undefined;
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

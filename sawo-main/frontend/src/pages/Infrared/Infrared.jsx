@@ -140,7 +140,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA ROOM   */}
       {/* ===================== */}
-      <section className="max-w-[1000px] mx-auto px-6 py-20 text-center">
+      <section id="infrared-sauna-room" className="max-w-[1000px] mx-auto px-6 py-20 text-center">
         <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Room</h2>
         <div className="ir-room-img-wrap">
           <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
@@ -156,7 +156,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED ACCESSORIES  */}
       {/* ===================== */}
-      <section className="max-w-[1100px] mx-auto px-6 py-16">
+      <section id="infrared-accessories" className="max-w-[1100px] mx-auto px-6 py-16">
         <h2 className="ir-group-title ir-group-title--center">Infrared Accessories</h2>
         <div className="ir-acc-grid">
           {accessories.map((item, i) => (
@@ -194,7 +194,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA CONTROLS */}
       {/* ===================== */}
-      <section className="max-w-[1100px] mx-auto px-6 py-20">
+      <section id="infrared-sauna-controls" className="max-w-[1100px] mx-auto px-6 py-20">
         <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Controls</h2>
         <div className="ir-ctrl-grid">
           {controls.map((item, i) => (
