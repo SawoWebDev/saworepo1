@@ -73,11 +73,11 @@ const emptyForm = {
   extra_permissions: [],
 };
 
-function Modal({ open, onClose, title, children }) {
+function Modal({ open, onClose, title, wide, children }) {
   if (!open) return null;
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
+      <div className={`modal${wide ? " modal-wide" : ""}`} onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
           <button className="modal-close-btn" onClick={onClose}></button>
@@ -503,12 +503,47 @@ export default function Users({ currentUser }) {
       </div>
 
       {/* Add / Edit Modal */}
-      <Modal open={showModal} onClose={closeModal} title={editUser ? "Edit User" : "Add User"}>
+      <Modal open={showModal} onClose={closeModal} title={editUser ? "Edit User" : "Add User"} wide>
+        <style>{`
+          .user-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+          @media (max-width: 640px) {
+            .user-form-row { grid-template-columns: 1fr; gap: 14px; }
+          }
+        `}</style>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Username <span style={{ color: "var(--danger)" }}>*</span></label>
-            <input className="form-input" type="text" required value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} />
+          <div className="user-form-row">
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Username <span style={{ color: "var(--danger)" }}>*</span></label>
+              <input className="form-input" type="text" required value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} />
+            </div>
+
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Full Name</label>
+              <input className="form-input" type="text" value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} />
+            </div>
+          </div>
+
+          <div className="user-form-row">
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Email <span style={{ color: "var(--danger)" }}>*</span></label>
+              <input className="form-input" type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+              {!editUser && (
+                <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
+                  A Supabase Auth account will be created so the user can reset their password.
+                </p>
+              )}
+            </div>
+
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Role</label>
+              <select className="form-select" value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}>
+                <option value="admin">admin</option>
+                <option value="superadmin">superadmin</option>
+                <option value="editor">editor</option>
+                <option value="viewer">viewer</option>
+              </select>
+            </div>
           </div>
 
           {!editUser ? (
@@ -517,7 +552,7 @@ export default function Users({ currentUser }) {
               <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 5px" }}>
                 Optional. If an email is provided below, a link to set their own password is sent automatically. Only fill this in to set an initial password yourself.
               </p>
-              <div className="input-wrap">
+              <div className="input-wrap" style={{ maxWidth: 340 }}>
                 <input
                   className="form-input"
                   type={showPassword ? "text" : "password"}
@@ -542,31 +577,6 @@ export default function Users({ currentUser }) {
               Change Password
             </button>
           )}
-
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Full Name</label>
-            <input className="form-input" type="text" value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} />
-          </div>
-
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Email <span style={{ color: "var(--danger)" }}>*</span></label>
-            <input className="form-input" type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-            {!editUser && (
-              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
-                A Supabase Auth account will be created so the user can reset their password.
-              </p>
-            )}
-          </div>
-
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Role</label>
-            <select className="form-select" value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}>
-              <option value="admin">admin</option>
-              <option value="superadmin">superadmin</option>
-              <option value="editor">editor</option>
-              <option value="viewer">viewer</option>
-            </select>
-          </div>
 
           {form.role === "superadmin" ? (
             <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: 0 }}>
