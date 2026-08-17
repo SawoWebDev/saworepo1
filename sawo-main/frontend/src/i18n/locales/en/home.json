@@ -112,9 +112,9 @@
         "title": "Glass Front Sauna",
         "caption": "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation."
       },
-      "outdoor": {
-        "title": "Outdoor Sauna",
-        "caption": "Engineered to withstand severe weather. Top-coated walls and durable asphalt-shingle roof for maximum protection from the sun and rain."
+      "compact": {
+        "title": "Compact Sauna",
+        "caption": "Instant, plug-and-play design built for urban spaces. A hidden heater keeps the setup safe while maximizing your view."
       },
       "infrared": {
         "title": "Infrared Sauna",

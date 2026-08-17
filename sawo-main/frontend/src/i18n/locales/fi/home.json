@@ -112,9 +112,9 @@
         "title": "Lasiseinäinen sauna",
         "caption": "Moderni muotoilu kirkkailla karkaistuilla lasipaneeleilla esteettömään näkymään ulos. Puhdasta rauhaa ja rentoutumista."
       },
-      "outdoor": {
-        "title": "Ulkosauna",
-        "caption": "Suunniteltu kestämään ankaria sääolosuhteita. Pinnoitetut seinät ja kestävä huopakatto suojaavat maksimaalisesti auringolta ja sateelta."
+      "compact": {
+        "title": "Kompaktisauna",
+        "caption": "Välitön, liitä ja käytä -ratkaisu kaupunkitiloihin. Piilotettu kiuas pitää asennuksen turvallisena ja maksimoi näkymän."
       },
       "infrared": {
         "title": "Infrapunasauna",
