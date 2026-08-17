@@ -4,17 +4,17 @@
 // that section on arrival) — see cmsSearch.js for the searchable index.
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { can } from "./permissions";
+import { canEffective } from "./permissions";
 import { buildSearchIndex } from "./cmsSearch";
 
-export default function CmsSearch({ role }) {
+export default function CmsSearch({ role, user }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(0);
   const wrapRef = useRef(null);
 
-  const index = useMemo(() => buildSearchIndex().filter(e => can(role, e.cap)), [role]);
+  const index = useMemo(() => buildSearchIndex().filter(e => canEffective(user, role, e.cap)), [role, user]);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();

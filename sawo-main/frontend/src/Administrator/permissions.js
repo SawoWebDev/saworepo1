@@ -73,6 +73,109 @@ export const CAPABILITY_MAP = {
   "page.permissions":         ["superadmin"],
 };
 
+// Grouped, human-labeled subset of CAPABILITY_MAP — only capabilities that
+// are actually enforced somewhere in the UI (a few exist in CAPABILITY_MAP
+// but aren't wired to any real check yet — upload/storage-cleanup caps, an
+// unused local-products page flag — so showing checkboxes for those would
+// toggle nothing). Grouped the same way the sidebar groups pages (Catalog /
+// Insights / System).
+//
+// Single source of truth for two different checkbox matrices that both need
+// the exact same list, in the exact same grouping:
+//   - RolesPermissions.jsx: which ROLES get each capability by default.
+//   - Users.jsx: which EXTRA capabilities a specific user gets on top of
+//     their role's defaults (see canUser/getPerms above).
+// "page.permissions" is deliberately absent from this list in both places —
+// it's permanently hardcoded (see CAPABILITY_MAP above) and must never be
+// grantable to anyone, by role or by individual override.
+export const PERMISSION_SECTIONS = [
+  {
+    name: "Catalog",
+    groups: [
+      {
+        label: "Products",
+        rows: [
+          { cap: "products.view",        label: "View page (sidebar)" },
+          { cap: "products.create",      label: "Create" },
+          { cap: "products.edit",        label: "Edit" },
+          { cap: "products.delete",      label: "Delete" },
+          { cap: "products.duplicate",   label: "Duplicate" },
+          { cap: "products.bulk_delete", label: "Bulk delete" },
+        ],
+      },
+      {
+        label: "Sauna Rooms",
+        rows: [
+          { cap: "sauna_rooms.view",        label: "View page (sidebar)" },
+          { cap: "sauna_rooms.create",      label: "Create" },
+          { cap: "sauna_rooms.edit",        label: "Edit" },
+          { cap: "sauna_rooms.delete",      label: "Delete" },
+          { cap: "sauna_rooms.duplicate",   label: "Duplicate" },
+          { cap: "sauna_rooms.bulk_delete", label: "Bulk delete" },
+        ],
+      },
+      {
+        label: "Models",
+        rows: [
+          { cap: "page.models", label: "View page (sidebar)" },
+        ],
+      },
+      {
+        label: "Taxonomy",
+        rows: [
+          { cap: "page.taxonomy",   label: "View page (sidebar)" },
+          { cap: "taxonomy.create", label: "Create category/tag" },
+          { cap: "taxonomy.edit",   label: "Edit category/tag" },
+          { cap: "taxonomy.delete", label: "Delete category/tag" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Insights",
+    groups: [
+      {
+        label: "Inbox",
+        rows: [
+          { cap: "page.inbox", label: "View page (sidebar)" },
+        ],
+      },
+      {
+        label: "Analytics",
+        rows: [
+          { cap: "page.analytics", label: "View page (sidebar)" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "System",
+    groups: [
+      {
+        label: "Logs",
+        rows: [
+          { cap: "page.logs", label: "View page (sidebar)" },
+        ],
+      },
+      {
+        label: "Settings",
+        rows: [
+          { cap: "page.settings", label: "View page (sidebar)" },
+        ],
+      },
+      {
+        label: "Users",
+        rows: [
+          { cap: "page.users",   label: "View page (sidebar)" },
+          { cap: "users.create", label: "Create admin account" },
+          { cap: "users.edit",   label: "Edit admin account" },
+          { cap: "users.delete", label: "Delete admin account" },
+        ],
+      },
+    ],
+  },
+];
+
 // Dynamic, admin-configurable overrides — see local-storage/rolePermissions.js.
 // Starts empty (every capability falls back to its CAPABILITY_MAP default)
 // and is populated in the background the first time `can()` actually runs
@@ -119,6 +222,23 @@ export function can(role, cap) {
 }
 
 /**
+ * Check whether a specific USER (not just their role) has a capability —
+ * true if their role grants it by default, OR if it's been individually
+ * added to their account via `user.extra_permissions` (see Users.jsx's
+ * per-user permission checkboxes). Extra permissions are additive-only and
+ * scoped to that one account; they never modify what the role itself grants
+ * everyone else with that role.
+ *
+ * @param {object} user - User object with 'role' and optional 'extra_permissions' (string[])
+ * @param {string} cap  - The capability to check
+ */
+export function canUser(user, cap) {
+  if (!user) return false;
+  if (can(user.role, cap)) return true;
+  return !!(user.extra_permissions || []).includes(cap);
+}
+
+/**
  * Get a permissions object for a user
  * Usage: const perms = getPerms(session.user);
  *        if (perms.can("products.delete")) { ... }
@@ -130,8 +250,30 @@ export function getPerms(user) {
   const role = user?.role ?? "viewer";
   return {
     role,
-    can: (cap) => can(role, cap),
+    can: (cap) => canUser(user, cap),
   };
+}
+
+/**
+ * Like `can(role, cap)`, but also honors the real logged-in user's
+ * individual extra permissions — EXCEPT while a superadmin is actively
+ * previewing a different role (effectiveRole !== user.role), where extras
+ * are deliberately ignored so the preview stays a faithful simulation of
+ * what that role sees by default, instead of leaking the superadmin's own
+ * account-specific grants into it.
+ *
+ * Used by the handful of call sites that check a page/nav capability against
+ * an `effectiveRole` computed separately from the user object (AdminLayout's
+ * NAV_ITEMS filter, CmsSearch, ProtectedRoute) — everywhere else, prefer
+ * `getPerms(user).can(cap)`, which always reflects the user passed in.
+ *
+ * @param {object} user - The real logged-in user (session.user)
+ * @param {string} effectiveRole - role to check (possibly a previewed role)
+ * @param {string} cap
+ */
+export function canEffective(user, effectiveRole, cap) {
+  if (user && effectiveRole === user.role) return canUser(user, cap);
+  return can(effectiveRole, cap);
 }
 
 /**
