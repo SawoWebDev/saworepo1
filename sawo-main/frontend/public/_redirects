@@ -37,10 +37,21 @@
 # ============================================================================
 
 # ---- HIGH PRIORITY (external backlinks) ------------------------------------
-/contact/                                                /contact                        301
+# NOTE (2026-08-17): /contact/ and /careers/ used to redirect here to /contact
+# and /careers (no trailing slash). Removed — both are prerendered pages
+# (build/contact/index.html, build/careers/index.html exist), and Cloudflare
+# Pages automatically 308-redirects the bare path to its trailing-slash form
+# whenever a matching folder exists in the build output. That's built-in,
+# unconfigurable behavior — it can't be turned off from this file. With the
+# old rule also redirecting /contact/ back to /contact, the two fought each
+# other forever: /contact -> 308 -> /contact/ -> 301 -> /contact -> ...,
+# an infinite loop that made both pages completely inaccessible
+# (ERR_TOO_MANY_REDIRECTS). The other prerendered pages (/sauna, /steam,
+# /infrared, /support, /about) never had this extra rule and were always
+# fine settling at their trailing-slash URL — /contact and /careers now
+# behave the same way.
 /privacy-policy/                                         /privacy-policy                 301
 /finnish-sauna/sauna-heaters/            /sauna/heaters   301
-/careers/                                                /careers                        301
 # NOTE: "/" needs no redirect — same URL on both sites.
 
 # ---- SAUNA / HEATERS --------------------------------------------------------
