@@ -77,6 +77,7 @@ const emptyForm = {
   username: "",
   full_name: "",
   email: "",
+  password_hash: "",
   role: "admin",
   // Individual grants on top of the role's own defaults — see
   // PERMISSION_SECTIONS in permissions.js. Never includes a capability the
@@ -84,6 +85,27 @@ const emptyForm = {
   // clears it there instead — see the Permissions form-group below).
   extra_permissions: [],
 };
+
+// admin/superadmin have real reach into the CMS (data, other users' access,
+// site config), so they go through the email-invite flow only — no
+// admin-set-password shortcut, which is what caused the Editor/Rafael
+// account collision earlier. editor/viewer are lower-privilege, often
+// assigned in person like a WordPress account: email is optional for them,
+// and a superadmin can set their password directly instead.
+const EMAIL_REQUIRED_ROLES = new Set(["admin", "superadmin"]);
+const emailRequiredForRole = role => EMAIL_REQUIRED_ROLES.has(role);
+
+// Supabase Auth is inherently email-based — even a "no email" account still
+// needs one internally for a real Auth session to exist at all (this app
+// deliberately requires a real Auth session for every login now; see
+// apiLogin's comments for why that migration happened). Deriving a
+// placeholder from the username keeps it unique for free (usernames already
+// are) without ever asking the admin to think about it, and it's never
+// treated as a real, contactable address anywhere in this file.
+const NO_EMAIL_DOMAIN = "no-email.internal";
+const isSyntheticEmail = email => !!email && email.toLowerCase().endsWith(`@${NO_EMAIL_DOMAIN}`);
+const syntheticEmailFor = username =>
+  `${username.trim().toLowerCase().replace(/[^a-z0-9._-]/g, "") || "user"}@${NO_EMAIL_DOMAIN}`;
 
 function Modal({ open, onClose, title, wide, children }) {
   if (!open) return null;
@@ -174,7 +196,11 @@ export default function Users({ currentUser }) {
     setForm({
       username: u.username,
       full_name: u.full_name || "",
-      email: u.email || "",
+      // A synthetic placeholder is an internal implementation detail, not a
+      // real address — show the field blank rather than that generated
+      // string, so it doesn't get mistaken for something worth keeping.
+      email: isSyntheticEmail(u.email) ? "" : (u.email || ""),
+      password_hash: "",
       role: u.role || "admin",
       extra_permissions: u.extra_permissions || [],
     });
@@ -229,36 +255,50 @@ export default function Users({ currentUser }) {
     if (usernameDuplicate) { setFormError("That username is already taken."); return; }
     if (emailDuplicate) { setFormError("That email is already used by another account."); return; }
 
+    const requiresEmail = emailRequiredForRole(form.role);
+    const realEmail = form.email.trim();
+    const manualPassword = form.password_hash.trim();
+    if (requiresEmail && !realEmail) {
+      setFormError("Email is required for the admin and superadmin roles.");
+      return;
+    }
+    if (!requiresEmail && !editUser && !realEmail && !manualPassword) {
+      setFormError("Set a password for this user, or provide a real email so they can set their own.");
+      return;
+    }
+
     setFormLoading(true);
     // Only persist caps the chosen role doesn't already grant by default —
     // keeps extra_permissions a true diff from the role, not a redundant
     // copy of it (and means switching Role never leaves stale dead grants
     // behind that just happen to be harmless).
     const extraPermissions = form.extra_permissions.filter(cap => !can(form.role, cap));
+    // A blank email on a role that doesn't require one gets a deterministic
+    // internal placeholder instead of staying null — see NO_EMAIL_DOMAIN's
+    // comment for why a real (if synthetic) address is still needed here.
+    const usingSyntheticEmail = !requiresEmail && !realEmail;
+    const email = usingSyntheticEmail ? syntheticEmailFor(form.username.trim()) : realEmail;
     try {
       if (editUser) {
         const updates = {
           username: form.username.trim(),
           full_name: form.full_name.trim() || null,
-          email: form.email.trim() || null,
+          email,
           role: form.role,
           extra_permissions: extraPermissions,
         };
         const { error } = await supabase.from("users").update(updates).eq("id", editUser.id);
         if (error) throw new Error(friendlyDbError(error));
-        if (form.email.trim() && form.email.trim() !== editUser.email) {
-          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
+        // Only worth telling Auth about a REAL email change — a synthetic
+        // placeholder was never registered as a contactable address anywhere.
+        if (!usingSyntheticEmail && email !== editUser.email) {
+          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
           if (fnError) console.warn("Auth email sync failed:", fnError.message);
         }
+        closeModal();
+        fetchUsers();
       } else {
-        // New users always set their own password via the email-invite flow
-        // below — there's no admin-set-password shortcut here anymore. It
-        // used to exist for accounts with no email, but email is required
-        // to create a user at all now (see the form field below), so that
-        // case can't come up, and removing it closes off the confusing
-        // "two accounts sharing one email" state that shortcut enabled.
         const newUsername = form.username.trim();
-        const email = form.email.trim();
         const { error } = await supabase.from("users").insert([{
           username: newUsername,
           full_name: form.full_name.trim() || null,
@@ -269,32 +309,54 @@ export default function Users({ currentUser }) {
         if (error) throw new Error(friendlyDbError(error));
 
         // The account row now exists — close and refresh right away rather
-        // than waiting on the auth-invite step below. That used to be
-        // awaited inside this same try block, so a failure there (e.g. the
-        // invite email erroring) left the modal open with a blocking error
-        // even though the user had already been created; clicking "Create
-        // User" again to retry then hit a conflict on the username, since it
-        // already existed from the first attempt. Treating the invite as a
-        // best-effort follow-up (reported via toast, not a blocking form
-        // error) makes that retry-into-a-conflict impossible.
+        // than waiting on the steps below. Those used to be awaited inside
+        // this same try block, so a failure there (e.g. the invite email
+        // erroring) left the modal open with a blocking error even though
+        // the user had already been created; clicking "Create User" again to
+        // retry then hit a conflict on the username, since it already
+        // existed from the first attempt. Treating them as best-effort
+        // follow-ups (reported via toast, not a blocking form error) makes
+        // that retry-into-a-conflict impossible.
         closeModal();
         fetchUsers();
 
         (async () => {
           try {
-            const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
-            if (fnError) console.warn("Auth user creation failed:", fnError.message);
+            if (manualPassword) {
+              const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
+                p_username: newUsername,
+                p_new_password: manualPassword,
+              });
+              if (pwError) throw new Error("Setting the password failed: " + pwError.message);
+              // Creates (or updates) the real Auth account behind that email
+              // — synthetic placeholder or not, this is what actually makes
+              // the username+password combo work at login.
+              await syncAuthPassword(newUsername, manualPassword);
+            }
 
-            await forgotPassword(newUsername);
-            addToast(`User created. A password-setup link was sent to ${email}.`, "success");
-          } catch (mailErr) {
-            addToast(`User created, but the password-setup email failed to send: ${mailErr.message}`, "error");
+            if (usingSyntheticEmail) {
+              addToast(
+                manualPassword
+                  ? `User "${newUsername}" created. No email on file — share the password with them directly.`
+                  : `User "${newUsername}" created.`,
+                "success"
+              );
+            } else {
+              const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
+              if (fnError) console.warn("Auth user creation failed:", fnError.message);
+              await forgotPassword(newUsername);
+              addToast(`User created. A password-setup link was sent to ${email}.`, "success");
+            }
+          } catch (err) {
+            if (isPasswordUpdateRequiredError(err.message)) {
+              notifyPasswordUpdateRequired();
+            } else {
+              addToast(`User created, but: ${err.message}`, "error");
+            }
           }
         })();
         return;
       }
-      closeModal();
-      fetchUsers();
     } catch (err) {
       if (isPasswordUpdateRequiredError(err.message)) {
         notifyPasswordUpdateRequired();
@@ -480,7 +542,9 @@ export default function Users({ currentUser }) {
                   <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 14, color: "var(--text)" }}>{u.username}</span>
                 </td>
                 <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.full_name || "-"}</td>
-                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.email || "-"}</td>
+                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>
+                  {isSyntheticEmail(u.email) ? <span style={{ color: "var(--text-3)", fontStyle: "italic" }}>No email</span> : (u.email || "-")}
+                </td>
                 <td>
                   {roleBadge(u.role)}
                   {u.extra_permissions?.length > 0 && (
@@ -556,8 +620,11 @@ export default function Users({ currentUser }) {
 
           <div className="user-form-row">
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">Email <span style={{ color: "var(--danger)" }}>*</span></label>
-              <input className="form-input" type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+              <label className="form-label">
+                Email {emailRequiredForRole(form.role) && <span style={{ color: "var(--danger)" }}>*</span>}
+                {!emailRequiredForRole(form.role) && <span style={{ color: "var(--text-3)", fontWeight: 400 }}> (optional for this role)</span>}
+              </label>
+              <input className="form-input" type="email" required={emailRequiredForRole(form.role)} value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
               {emailDuplicate ? (
                 <p style={{ fontSize: "0.75rem", color: "var(--danger)", marginTop: "0.3rem" }}>
                   <i className="fa-solid fa-circle-exclamation" style={{ marginRight: 4 }} />
@@ -565,7 +632,9 @@ export default function Users({ currentUser }) {
                 </p>
               ) : !editUser && (
                 <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
-                  A password-setup link will be sent to this address once the account is created — that's the only way this user's password gets set.
+                  {emailRequiredForRole(form.role)
+                    ? "A password-setup link will be sent to this address once the account is created — that's the only way this user's password gets set."
+                    : "Leave blank to skip email entirely and set a password for them directly below — hand it to them yourself, like a WordPress account. Provide a real email instead if you'd rather they set their own password."}
                 </p>
               )}
             </div>
@@ -580,6 +649,25 @@ export default function Users({ currentUser }) {
               </select>
             </div>
           </div>
+
+          {!editUser && !emailRequiredForRole(form.role) && (
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">
+                Password {!form.email.trim() && <span style={{ color: "var(--danger)" }}>*</span>}
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                value={form.password_hash}
+                onChange={e => setForm({ ...form, password_hash: e.target.value })}
+                style={{ maxWidth: 340 }}
+                placeholder={form.email.trim() ? "Optional — leave blank to let them set it via email instead" : "Required — no email means no self-service reset"}
+              />
+              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
+                Shown in plain text here on purpose — you're meant to hand it to them yourself.
+              </p>
+            </div>
+          )}
 
           {editUser && canEdit && (
             <button

@@ -1982,32 +1982,43 @@ export default function SaunaRooms({ currentUser }) {
     finally { setSaving(false); }
   };
 
-  // ── Delete ─────────────────────────────────────────────────────────────────
+  // ── Delete (soft — moves to Trash, see Administrator/Trash.jsx) ────────────
+  // Storage files are deliberately left alone here now — this used to wipe
+  // them immediately, which meant a "deleted" room could never actually be
+  // restored with its images intact despite is_deleted being a soft flag.
+  // They're only removed on permanent delete (Trash page's "Delete Forever")
+  // or the 30-day auto-purge (purge_expired_trash(), scheduled via pg_cron —
+  // that job runs in Postgres and can't reach the R2 API deleteRoomStorageFiles
+  // uses, so auto-purged rows leave their files behind; only an
+  // admin-initiated "Delete Forever" actually cleans those up).
   const handleDelete = async () => {
     const target = confirmDel; setConfirmDel(null);
     try {
-      const { data: full } = await supabase.from("sauna_rooms").select("*").eq("id", target.id).single();
-      const { error } = await supabase.from("sauna_rooms").update({ is_deleted: true }).eq("id", target.id);
+      const { error } = await supabase
+        .from("sauna_rooms")
+        .update({ is_deleted: true, deleted_at: new Date().toISOString() })
+        .eq("id", target.id);
       if (error) throw error;
-      if (full) await deleteRoomStorageFiles(full);
-      await logActivity({ action: "delete", entity: "sauna_room", entity_id: target.id, entity_name: target.name, username: currentUser?.username, user_id: currentUser?.id });
-      add("Sauna room deleted.", "success");
+      await logActivity({ action: "delete", entity: "sauna_room", entity_id: target.id, entity_name: target.name, username: currentUser?.username, user_id: currentUser?.id, meta: { moved_to_trash: true } });
+      add("Sauna room moved to Trash. It'll be permanently deleted in 30 days unless restored.", "success");
     } catch (err) { add(err.message, "error"); }
     finally { fetchRooms(); }
   };
 
-  // ── Bulk delete ────────────────────────────────────────────────────────────
+  // ── Bulk delete (soft — same as above, all at once) ────────────────────────
   const handleBulkDelete = async () => {
     const ids = Array.from(selected); setBulkConfirm(false);
     try {
-      const { data: fullRooms } = await supabase.from("sauna_rooms").select("*").in("id", ids);
-      const { error } = await supabase.from("sauna_rooms").update({ is_deleted: true }).in("id", ids);
+      const targets = rooms.filter(r => ids.includes(r.id));
+      const { error } = await supabase
+        .from("sauna_rooms")
+        .update({ is_deleted: true, deleted_at: new Date().toISOString() })
+        .in("id", ids);
       if (error) throw error;
-      await Promise.allSettled((fullRooms || []).map(r => deleteRoomStorageFiles(r)));
-      await Promise.allSettled((fullRooms || []).map(r =>
-        logActivity({ action: "delete", entity: "sauna_room", entity_id: r.id, entity_name: r.name, username: currentUser?.username, user_id: currentUser?.id, meta: { bulk: true } })
+      await Promise.allSettled(targets.map(r =>
+        logActivity({ action: "delete", entity: "sauna_room", entity_id: r.id, entity_name: r.name, username: currentUser?.username, user_id: currentUser?.id, meta: { bulk: true, moved_to_trash: true } })
       ));
-      add(`${ids.length} room(s) deleted.`, "success");
+      add(`${ids.length} room(s) moved to Trash. They'll be permanently deleted in 30 days unless restored.`, "success");
     } catch (err) { add(err.message, "error"); }
     finally { setSelected(new Set()); fetchRooms(); }
   };

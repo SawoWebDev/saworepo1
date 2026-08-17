@@ -28,12 +28,34 @@ export async function getAllProductsLive() {
     const { data, error } = await (await getSupabase())
       .from("products")
       .select("*")
+      .eq("is_deleted", false)
       .order("created_at", { ascending: false });
 
     if (error) throw error;
     return data || [];
   } catch (err) {
     console.error("[supabaseReader] Failed to fetch products:", err);
+    return [];
+  }
+}
+
+/**
+ * Fetch soft-deleted products still within their retention window — backs
+ * the admin Trash page. See purge_expired_trash() (scheduled via pg_cron,
+ * daily) for what actually removes a row once its 30 days are up.
+ */
+export async function getTrashedProductsLive() {
+  try {
+    const { data, error } = await (await getSupabase())
+      .from("products")
+      .select("*")
+      .eq("is_deleted", true)
+      .order("deleted_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch trashed products:", err);
     return [];
   }
 }
@@ -53,6 +75,7 @@ export async function getRecentProductsLive(days = 7) {
     const { data, error } = await (await getSupabase())
       .from("products")
       .select("*")
+      .eq("is_deleted", false)
       .gte("created_at", since.toISOString())
       .order("created_at", { ascending: false });
 
@@ -155,6 +178,27 @@ export async function getAllSaunaRoomsLive() {
     return data || [];
   } catch (err) {
     console.error("[supabaseReader] Failed to fetch sauna rooms:", err);
+    return [];
+  }
+}
+
+/**
+ * Fetch soft-deleted sauna rooms still within their retention window — backs
+ * the admin Trash page. See purge_expired_trash() (scheduled via pg_cron,
+ * daily) for what actually removes a row once its 30 days are up.
+ */
+export async function getTrashedSaunaRoomsLive() {
+  try {
+    const { data, error } = await (await getSupabase())
+      .from("sauna_rooms")
+      .select("*")
+      .eq("is_deleted", true)
+      .order("deleted_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch trashed sauna rooms:", err);
     return [];
   }
 }

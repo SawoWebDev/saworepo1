@@ -3216,16 +3216,24 @@ export default function Products({ currentUser }) {
     finally { setSaving(false); }
   };
 
-  // ── Delete single ──────────────────────────────────────────────────────────
+  // ── Delete single (soft — moves to Trash, see Administrator/Trash.jsx) ─────
+  // Storage files are deliberately left untouched here: a trashed product can
+  // still be restored, and a restored product with its images already wiped
+  // would be worse than the storage cost of leaving them for now. They're
+  // only actually removed on permanent delete (Trash page's "Delete Forever")
+  // or by the 30-day auto-purge (see purge_expired_trash(), scheduled via
+  // pg_cron) — though that scheduled job runs in Postgres and has no way to
+  // call the R2 API this file uses, so auto-purged rows leave their storage
+  // files behind; only an admin-initiated "Delete Forever" cleans those up.
   const handleDelete = async () => {
     const target = confirmDel;
     setConfirmDel(null);
     try {
-      const fullProduct = await getProductByIdLive(target.id);
-      if (!fullProduct) throw new Error("Product not found");
-      const { error: delErr } = await supabase.from("products").delete().eq("id", target.id);
+      const { error: delErr } = await supabase
+        .from("products")
+        .update({ is_deleted: true, deleted_at: new Date().toISOString() })
+        .eq("id", target.id);
       if (delErr) throw delErr;
-      await deleteProductStorageFiles(fullProduct);
 
       const deletedBy = currentUser?.username || "unknown";
       const deletedById = currentUser?.id || null;
@@ -3237,43 +3245,38 @@ export default function Products({ currentUser }) {
         entity_name: target.name,
         username:    deletedBy,
         user_id:     deletedById,
-        meta:        {
-          deleted_files: (fullProduct?.files || []).length,
-          had_images: (fullProduct?.images || []).length > 0,
-        }
+        meta:        { moved_to_trash: true },
       });
 
-      add("Product and associated files deleted.", "success");
+      add("Product moved to Trash. It'll be permanently deleted in 30 days unless restored.", "success");
     } catch (err) { add(err.message, "error"); }
     finally { fetchProducts(); }
   };
 
-  // ── Bulk delete ────────────────────────────────────────────────────────────
+  // ── Bulk delete (soft — same as above, all at once) ────────────────────────
   const handleBulkDelete = async () => {
     const ids = Array.from(selected);
     setBulkConfirm(false);
     try {
-      const fullProducts = await Promise.all(ids.map(id => getProductByIdLive(id))).then(products => products.filter(p => p));
-      const { error: delErr } = await supabase.from("products").delete().in("id", ids);
+      const targets = products.filter(p => ids.includes(p.id));
+      const { error: delErr } = await supabase
+        .from("products")
+        .update({ is_deleted: true, deleted_at: new Date().toISOString() })
+        .in("id", ids);
       if (delErr) throw delErr;
-      await Promise.allSettled((fullProducts || []).map(p => deleteProductStorageFiles(p)));
 
       const deletedBy = currentUser?.username || "unknown";
       const deletedById = currentUser?.id || null;
 
-      await Promise.allSettled((fullProducts || []).map(p =>
+      await Promise.allSettled(targets.map(p =>
         logActivity({
           action: "delete", entity: "product",
           entity_id: p.id, entity_name: p.name,
           username: deletedBy, user_id: deletedById,
-          meta: {
-            bulk: true,
-            deleted_files: (p.files || []).length,
-            had_images: (p.images || []).length > 0,
-          },
+          meta: { bulk: true, moved_to_trash: true },
         })
       ));
-      add(`${ids.length} product(s) and their files deleted.`, "success");
+      add(`${ids.length} product(s) moved to Trash. They'll be permanently deleted in 30 days unless restored.`, "success");
     } catch (err) { add(err.message, "error"); }
     finally { setSelected(new Set()); fetchProducts(); }
   };

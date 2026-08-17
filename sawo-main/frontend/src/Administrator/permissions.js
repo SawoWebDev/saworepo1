@@ -68,6 +68,10 @@ export const CAPABILITY_MAP = {
   "page.ci_status":           ["admin", "superadmin"],
   "page.website_health":      ["editor", "admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
+  // Same roles as products.delete/sauna_rooms.delete — whoever can delete
+  // something is who should be able to see and manage what's sitting in
+  // Trash from having done that.
+  "page.trash":               ["admin", "superadmin"],
   // Gates the Permissions page itself — deliberately NOT part of
   // the dynamic override system (see setCapabilityOverrides below).
   "page.permissions":         ["superadmin"],
@@ -161,6 +165,12 @@ export const PERMISSION_SECTIONS = [
         label: "Settings",
         rows: [
           { cap: "page.settings", label: "View page (sidebar)" },
+        ],
+      },
+      {
+        label: "Trash",
+        rows: [
+          { cap: "page.trash", label: "View page (sidebar)" },
         ],
       },
       {
@@ -316,6 +326,7 @@ export const NAV_ITEMS = [
   { to: "/admin/users",           label: "Users",            icon: "fa-solid fa-users",          cap: "page.users",       description: "Manage admin accounts and their access roles.", section: "system" },
   { to: "/admin/permissions",     label: "Permissions",      icon: "fa-solid fa-user-lock",      cap: "page.permissions", description: "Control which roles can see each page and perform create/edit/delete actions.", section: "system" },
   { to: "/admin/settings",        label: "Settings",         icon: "fa-solid fa-gear",           cap: "page.settings",    description: "Site-wide configuration for the public frontend, including the language switcher.", section: "system" },
+  { to: "/admin/trash",           label: "Trash",            icon: "fa-solid fa-trash-can",      cap: "page.trash",       description: "Products and sauna rooms you've deleted, kept for 30 days before they're permanently removed. Restore or delete forever here.", section: "system" },
 ];
 
 /**
