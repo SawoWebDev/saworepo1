@@ -2,6 +2,10 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import { ROOM_CONFIGS, HASH_MAP, SIDE_THUMBS, COMPACT_VIDEO_SRC } from "./SaunaRoomData";
 import menuPaths from "../../../menuPaths";
 
+// Inverts HASH_MAP (hash -> tab key) so the currently-active tab's section
+// can carry a matching DOM id for ScrollToTop.jsx to scroll to.
+const REVERSE_HASH_MAP = Object.fromEntries(Object.entries(HASH_MAP).map(([hash, key]) => [key, hash]));
+
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
 function cleanModelNumber(modelSize, cfg) {
@@ -369,7 +373,7 @@ const SaunaRoomViewer = () => {
   return (
     <>
       {/* TABS */}
-      <div className="sauna-tabs-wrapper">
+      <div className="sauna-tabs-wrapper" id={REVERSE_HASH_MAP[activeRoom]}>
         <div className="sauna-room-tabs">
           {TABS.map((tab) => (
             <button

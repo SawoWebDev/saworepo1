@@ -2,7 +2,7 @@
 // Dynamic products from Supabase, filtered by the "Sauna Controls" category/tags, with search.
 // Converted from WallMounted.jsx — same structure, updated copy, categories, grouping, and hero image.
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
@@ -183,6 +183,7 @@ export default function SaunaControls() {
 
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
+  const filterSectionRef = useRef(null);
 
   // Auto-filter to the group requested via ?group=<name> (e.g. links from the
   // Sauna landing page's control cards), once the matching group exists.
@@ -193,6 +194,14 @@ export default function SaunaControls() {
       setActiveGroup(groupParam);
     }
   }, [groupParam]);
+
+  // Once the filter section has actually rendered (post-loading), jump the
+  // page to it so a ?group= link doesn't just silently filter off-screen.
+  useEffect(() => {
+    if (!groupParam || loading) return;
+    if (!FIXED_ORDER.includes(groupParam)) return;
+    filterSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [groupParam, loading]);
 
   const allProducts = useMemo(() => {
     const visible = localProds.filter(p => isPubliclyVisible(p));
@@ -326,7 +335,7 @@ export default function SaunaControls() {
 
       {/* ── FILTER + SEARCH ───────────────────────────────────────────────── */}
       {!loading && allProducts.length > 0 && (
-        <section className="wm-section wm-section--flush-bottom">
+        <section ref={filterSectionRef} className="wm-section wm-section--flush-bottom">
           <div className="wm-container">
             <div className="wm-filter-search-row">
               {/* ── Filter pills ── */}

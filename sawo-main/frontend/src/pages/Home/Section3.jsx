@@ -9,7 +9,7 @@ import steamControl      from "../../assets/Home/Section3/SteamControlFinal.webp
 import steamAccessories  from "../../assets/Home/Section3/ST-746-I_Display2.webp";
 import standardSauna     from "../../assets/Home/Section3/700x525.webp";
 import glassFrontSauna   from "../../assets/Home/Section3/GLASS-FRONT.webp";
-import outdoorSauna      from "../../assets/Home/Section3/700x525-outdoor-2.webp";
+import compactSauna      from "../../assets/Home/Section3/700x525-compact.webp";
 import infraredSaunaRoom from "../../assets/Home/Section3/INFRARED-SAUNA-ROOM.webp";
 import infraredRooms     from "../../assets/Home/Section3/SR06-44710101-1313LS_PERSPECTIVE-VIEW-1.webp";
 import infraredPanels    from "../../assets/Home/Section3/infrared-panelss-400x600px.webp";
@@ -23,21 +23,25 @@ const STEAM_ITEMS = [
   { title: "Steam Controls",   caption: "Precision, effortlessness, and personalization: Precise steam settings, effortless operation, and a personalized sauna experience from our Saunova and Innova control series.",                                        img: steamControl,     href: menuPaths.steam.controls   },
   { title: "Steam Accessories",caption: "Premium accessories designed to enhance functionality and maximize comfort. Consistently extraordinary wellness and relaxation experience.",                                                                             img: steamAccessories, href: menuPaths.steam.accessories },
 ];
+// Each card links to its own tab/section on the destination page (a hash for
+// the Sauna Rooms tabs and Infrared page sections, a ?group= filter for
+// Sauna Controls) instead of just the general hub page, wherever that
+// specific section actually exists.
 const ROOMS_ITEMS = [
-  { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: menuPaths.sauna.rooms },
-  { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: menuPaths.sauna.rooms },
-  { title: "Outdoor Sauna",    caption: "Engineered to withstand severe weather. Top-coated walls and durable asphalt-shingle roof for maximum protection from the sun and rain.",                                                                               img: outdoorSauna,     href: menuPaths.sauna.rooms },
-  { title: "Infrared Sauna",   caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: menuPaths.sauna.rooms },
+  { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: `${menuPaths.sauna.rooms}#standard-sauna-room` },
+  { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: `${menuPaths.sauna.rooms}#glass-front-sauna-room` },
+  { title: "Compact Sauna",    caption: "Instant, plug-and-play design built for urban spaces. A hidden heater keeps the setup safe while maximizing your view.",                                                                                                img: compactSauna,     href: `${menuPaths.sauna.rooms}#compact-sauna-room` },
+  { title: "Infrared Sauna",   caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: `${menuPaths.sauna.rooms}#infrared-sauna-room` },
 ];
 const INFRARED_ITEMS = [
-  { title: "Infrared Rooms",    img: infraredRooms,      href: menuPaths.infrared },
-  { title: "Infrared Panels",   img: infraredPanels,     href: menuPaths.infrared },
-  { title: "Infrared Controls", img: infraredControls,   href: menuPaths.infrared },
+  { title: "Infrared Rooms",    img: infraredRooms,      href: `${menuPaths.infrared}#infrared-room` },
+  { title: "Infrared Panels",   img: infraredPanels,     href: `${menuPaths.infrared}#infrared-accessories` },
+  { title: "Infrared Controls", img: infraredControls,   href: `${menuPaths.infrared}#infrared-controls` },
 ];
 const CONTROL_ITEMS = [
-  { title: "Saunova Series",       img: saunovaSeries,      href: menuPaths.sauna.controls },
-  { title: "Innova Series",        img: innovaSeries,       href: menuPaths.sauna.controls },
-  { title: "Control Accessories",  img: controlAccessories, href: menuPaths.sauna.accessories.parent },
+  { title: "Saunova Series",       img: saunovaSeries,      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Saunova Series")}` },
+  { title: "Innova Series",        img: innovaSeries,       href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Innova Series")}` },
+  { title: "Control Accessories",  img: controlAccessories, href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Control Spare Parts")}` },
 ];
 
 // Same wellness-benefits widget used on the Sauna and Infrared pages (icon
