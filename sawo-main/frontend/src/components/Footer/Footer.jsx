@@ -38,8 +38,8 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-2">INFRARED SAUNA</h3>
             <ul className="space-y-1 text-sm">
               <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Sauna Rooms</Link></li>
-              <li><Link to="/products/infrared-backrest-505-ir-a-d" className="hover:text-gray-300">Infrared Backrest</Link></li>
-              <li><Link to="/products/infrared-panels-ir-panel-2" className="hover:text-gray-300">Infrared Panels</Link></li>
+              <li><Link to="/products/infrared-backrest" className="hover:text-gray-300">Infrared Backrest</Link></li>
+              <li><Link to="/products/infrared-panels" className="hover:text-gray-300">Infrared Panels</Link></li>
             </ul>
           </div>
 
