@@ -7,6 +7,7 @@ import heroImg from "../../../assets/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE-600x600-1
 import menuPaths from "../../../menuPaths";
 import "../heaters/heaters.css";
 import PromoBanner from "../../../components/PromoBanner";
+import accessoriesBannerImg from "../../../assets/accessories-banner.webp";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
@@ -321,6 +322,7 @@ export default function PailsLadles() {
       <PromoBanner
         title="Complete Your Sauna Experience"
         subtitle="Explore our full range of authentic Finnish sauna accessories"
+        image={accessoriesBannerImg}
       />
     </div>
   );
