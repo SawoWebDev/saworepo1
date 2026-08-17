@@ -177,7 +177,7 @@ const Infrared = () => {
               soothing escape in the comfort of your own space. Our Infrared Sauna Room is available for
               single person and two people.
             </p>
-            <Link to="/sauna/rooms#infrared-sauna-room" className="ir-room-btn">
+            <Link to="/sauna/rooms#infrared-sauna-room" className="wm-brochure-btn">
               VIEW INFRARED SAUNA ROOM
             </Link>
           </div>
@@ -303,14 +303,16 @@ const Infrared = () => {
           font-size: 0.95rem; line-height: 1.8; color: #555;
           margin: 0 0 28px;
         }
-        .ir-room-btn {
-          display: inline-block; font-family: 'Montserrat', sans-serif;
-          font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;
-          padding: 13px 30px; border-radius: 6px; text-decoration: none;
-          background: var(--ir-primary); color: #ffffff; border: 2px solid var(--ir-primary);
+        .wm-brochure-btn {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.82rem; font-weight: 600;
+          letter-spacing: 1px; padding: 11px 30px;
+          border: 2px solid #AA8161; color: #AA8161;
+          background: transparent; border-radius: 6px;
+          text-decoration: none; display: inline-block;
           transition: all 0.3s ease;
         }
-        .ir-room-btn:hover { background: var(--ir-primary-dark); border-color: var(--ir-primary-dark); }
+        .wm-brochure-btn:hover { background: #AA8161; color: #fff; }
 
         /* --- Accessories --- */
         .ir-acc-grid {

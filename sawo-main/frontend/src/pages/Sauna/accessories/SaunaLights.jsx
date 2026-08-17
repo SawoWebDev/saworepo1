@@ -162,12 +162,14 @@ export default function SaunaLights() {
         <section className="wm-section wm-section--flush-bottom">
           <div className="wm-container">
             <div className="wm-filter-search-row">
-              <div className="wm-filter-pills-group">
-                <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
-                {groupNames.map(g => (
-                  <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{g}</button>
-                ))}
-              </div>
+              {groupNames.length > 1 && (
+                <div className="wm-filter-pills-group">
+                  <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+                  {groupNames.map(g => (
+                    <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{g}</button>
+                  ))}
+                </div>
+              )}
               <div className="wm-search-wrap wm-search-bar-fixed">
                 <i className="fa-solid fa-magnifying-glass wm-search-icon" />
                 <input className="wm-search-input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search lights & covers..." />

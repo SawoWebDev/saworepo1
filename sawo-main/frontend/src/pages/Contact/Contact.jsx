@@ -152,24 +152,28 @@ const Contact = () => {
   }, [step]);
 
   // Pre-fill from the sauna room configurator's "Customize My Sauna" link and show the add-on toast.
+  // Trigger on `subject` alone — `subject` is only ever set by the configurator
+  // link in the first place, so requiring a separate `addon_saved=1` flag on
+  // top of it was redundant, and meant the toast silently never fired for any
+  // link that only carried `subject` (e.g. one copied/shared without the
+  // second param).
   useEffect(() => {
     const urlSubject = searchParams.get("subject");
-    if (urlSubject) {
-      setCategory("general");
-      setForm(prev => ({ ...prev, subject: urlSubject }));
-      setStep(2);
-    }
-    if (searchParams.get("addon_saved") === "1" && urlSubject) {
-      const details = urlSubject
-        .split(" | ")
-        .map(p => p.trim())
-        .filter(p => /^Heater:/i.test(p) || /^Accessories:/i.test(p));
-      const showTimer = setTimeout(() => {
-        setToast({ show: true, details: details.join(" · ") });
-        setTimeout(() => setToast(t => ({ ...t, show: false })), 5000);
-      }, 600);
-      return () => clearTimeout(showTimer);
-    }
+    if (!urlSubject) return;
+
+    setCategory("general");
+    setForm(prev => ({ ...prev, subject: urlSubject }));
+    setStep(2);
+
+    const details = urlSubject
+      .split(" | ")
+      .map(p => p.trim())
+      .filter(p => /^Heater:/i.test(p) || /^Accessories:/i.test(p));
+    const showTimer = setTimeout(() => {
+      setToast({ show: true, details: details.join(" · ") });
+      setTimeout(() => setToast(t => ({ ...t, show: false })), 5000);
+    }, 600);
+    return () => clearTimeout(showTimer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -406,7 +410,7 @@ const Contact = () => {
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
         <span>
-          <span className="toast-title">Your add-ons are auto-filled in Request Details!</span>
+          <span className="toast-title">Your sauna selections have been saved to your message!</span>
           {toast.details && <span className="toast-details">{toast.details}</span>}
         </span>
       </div>
