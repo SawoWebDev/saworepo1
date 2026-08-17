@@ -1,7 +1,7 @@
 // Infrared.jsx
 
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import heroBg from "../../assets/Infrared/hero.webp";
 import saunaRoom from "../../assets/Infrared/sauna-room.webp";
 import irPanels from "../../assets/Infrared/ir-panels.webp";
@@ -44,6 +44,20 @@ const benefits = [
 
 const Infrared = () => {
   const heroLoaded = useHeroLoaded(heroBg);
+  const location = useLocation();
+
+  // Scroll to the target section when arriving via a hash link (e.g. /infrared#infrared-controls)
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   // Benefit-card interaction (hover on desktop, tap on touch devices)
   useEffect(() => {
@@ -104,6 +118,19 @@ const Infrared = () => {
         path="/infrared"
       />
 
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "SAWO Infrared Sauna",
+          description:
+            "Cedar-crafted infrared sauna room with therapeutic infrared heat panels, backrests, and digital controls for relaxation, muscle recovery, and skin wellness. Available in single- and two-person configurations.",
+          brand: { "@type": "Brand", name: "SAWO" },
+          category: "Infrared Sauna",
+          image: heroBg,
+        })}
+      </script>
+
       {/* ===================== */}
       {/* HERO                  */}
       {/* ===================== */}
@@ -140,7 +167,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA ROOM   */}
       {/* ===================== */}
-      <section className="max-w-[1000px] mx-auto px-6 py-20 text-center">
+      <section id="infrared-room" className="max-w-[1000px] mx-auto px-6 py-20 text-center">
         <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Room</h2>
         <div className="ir-room-img-wrap">
           <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
@@ -156,7 +183,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED ACCESSORIES  */}
       {/* ===================== */}
-      <section className="max-w-[1100px] mx-auto px-6 py-16">
+      <section id="infrared-accessories" className="max-w-[1100px] mx-auto px-6 py-16">
         <h2 className="ir-group-title ir-group-title--center">Infrared Accessories</h2>
         <div className="ir-acc-grid">
           {accessories.map((item, i) => (
@@ -194,7 +221,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA CONTROLS */}
       {/* ===================== */}
-      <section className="max-w-[1100px] mx-auto px-6 py-20">
+      <section id="infrared-controls" className="max-w-[1100px] mx-auto px-6 py-20">
         <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Controls</h2>
         <div className="ir-ctrl-grid">
           {controls.map((item, i) => (
@@ -217,6 +244,13 @@ const Infrared = () => {
           --ir-primary-dark: #9e7456;
           --ir-primary-light: #c79a77;
           --ir-text-dark: #2f2f2f;
+        }
+
+        /* Keeps anchor jumps from hiding under a fixed header. Adjust px to your nav height. */
+        #infrared-room,
+        #infrared-accessories,
+        #infrared-controls {
+          scroll-margin-top: 90px;
         }
 
         /* --- Hero --- */

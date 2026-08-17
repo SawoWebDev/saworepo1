@@ -21,8 +21,23 @@ export default function ScrollToTop() {
   };
 
   useEffect(() => {
+    if (location.hash) {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const scrollToHash = () => {
+        const el = document.getElementById(id);
+        if (!el) return false;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      };
+      if (!scrollToHash()) {
+        const t = setTimeout(scrollToHash, 150);
+        return () => clearTimeout(t);
+      }
+      return undefined;
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+    return undefined;
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
