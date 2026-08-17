@@ -14,6 +14,7 @@ import { isPubliclyVisible } from "../local-storage/visibility";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/NRM-NB-BL1.webp";
 import HeroWave from "../components/HeroWave";
+import { getPowerRange } from "../utils/productPower";
 
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
@@ -34,7 +35,7 @@ const HEATER_GROUPS = [
 ];
 
 function HeaterCard({ product }) {
-  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const power = getPowerRange(product.tags);
   const image = getImageUrl(product, "thumbnail");
 
   return (

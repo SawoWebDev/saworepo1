@@ -110,6 +110,7 @@ import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
+import { getPowerRange } from "../../../utils/productPower";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -234,8 +235,7 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
-  // Look for a kW power range tag (e.g. "3.5 – 9 kW")
-  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const power = getPowerRange(product.tags);
 
   return (
     <Link
