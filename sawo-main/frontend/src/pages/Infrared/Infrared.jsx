@@ -16,13 +16,13 @@ import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
 
 const accessories = [
-  { img: irPanels, title: "Infrared Panels", slug: "infrared-panels-ir-panel-2" },
-  { img: irBackrest, title: "Infrared Backrest", slug: "infrared-backrest-505-ir-a-d" },
-  { img: interfaceHolder, title: "Interface Holder", slug: "interface-holder-saunova-2" },
+  { img: irPanels, title: "Infrared Panels", slug: "infrared-panels" },
+  { img: irBackrest, title: "Infrared Backrest", slug: "infrared-backrest" },
+  { img: interfaceHolder, title: "Interface Holder", slug: "interface-holder" },
 ];
 
 const controls = [
-  { img: irUiV2, title: "Infrared 2.0 User Interface", slug: "infrared-2-0-user-interface-ir-ui-v2" },
+  { img: irUiV2, title: "Infrared 2.0 User Interface", slug: "infrared-2-0-user-interface" },
   { img: irPowerController, title: "Infrared 2.0 Power Controller", slug: "infrared-2-0-power-controller" },
   { img: irBuiltinControl, title: "Infrared 2.0 Built-In Control", slug: "infrared-2-0-built-in-control" },
 ];
@@ -167,17 +167,24 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA ROOM   */}
       {/* ===================== */}
-      <section id="infrared-room" className="max-w-[1000px] mx-auto px-6 py-20 text-center">
-        <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Room</h2>
-        <div className="ir-room-img-wrap">
-          <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
+      <section id="infrared-room" className="max-w-[1100px] mx-auto px-6 py-20">
+        <div className="ir-room-grid">
+          <div className="ir-room-left">
+            <h2 className="ir-group-title">Infrared Sauna Room</h2>
+            <p className="ir-room-desc">
+              Indulge in the therapeutic benefits of our Infrared Sauna Room, designed to promote
+              relaxation and well-being through the gentle warmth of infrared technology. Experience a
+              soothing escape in the comfort of your own space. Our Infrared Sauna Room is available for
+              single person and two people.
+            </p>
+            <Link to="/sauna/rooms#infrared-sauna-room" className="ir-room-btn">
+              VIEW INFRARED SAUNA ROOM
+            </Link>
+          </div>
+          <div className="ir-room-img-wrap">
+            <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
+          </div>
         </div>
-        <p className="ir-room-desc">
-          Indulge in the therapeutic benefits of our Infrared Sauna Room, designed to promote
-          relaxation and well-being through the gentle warmth of infrared technology. Experience a
-          soothing escape in the comfort of your own space. Our Infrared Sauna Room is available for
-          single person and two people.
-        </p>
       </section>
 
       {/* ===================== */}
@@ -279,9 +286,13 @@ const Infrared = () => {
         .ir-group-title--center { text-align: center; }
 
         /* --- Sauna room --- */
+        .ir-room-grid {
+          display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+        }
+        .ir-room-left { text-align: left; }
+        .ir-room-left .ir-group-title { margin-bottom: 20px; }
         .ir-room-img-wrap {
           display: flex; align-items: center; justify-content: center;
-          margin: 0 auto 28px; max-width: 640px;
         }
         .ir-room-img {
           width: 100%; height: auto; border-radius: 12px; display: block;
@@ -289,9 +300,17 @@ const Infrared = () => {
         }
         .ir-room-desc {
           font-family: 'Montserrat', sans-serif;
-          font-size: 0.95rem; line-height: 1.8; color: #555; max-width: 620px;
-          margin: 0 auto;
+          font-size: 0.95rem; line-height: 1.8; color: #555;
+          margin: 0 0 28px;
         }
+        .ir-room-btn {
+          display: inline-block; font-family: 'Montserrat', sans-serif;
+          font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;
+          padding: 13px 30px; border-radius: 6px; text-decoration: none;
+          background: var(--ir-primary); color: #ffffff; border: 2px solid var(--ir-primary);
+          transition: all 0.3s ease;
+        }
+        .ir-room-btn:hover { background: var(--ir-primary-dark); border-color: var(--ir-primary-dark); }
 
         /* --- Accessories --- */
         .ir-acc-grid {
@@ -408,6 +427,9 @@ const Infrared = () => {
         @media (max-width: 768px) {
           .ir-hero-title { font-size: 30px; line-height: 38px; }
           .ir-group-title { font-size: 1.4rem; }
+          .ir-room-grid { grid-template-columns: 1fr; gap: 28px; }
+          .ir-room-left { text-align: center; }
+          .ir-room-desc { text-align: center; }
           .ir-acc-grid { grid-template-columns: 1fr; }
           .ir-ctrl-grid { grid-template-columns: 1fr; }
           .sauna-card-unique { width: 200px; min-width: 200px; }

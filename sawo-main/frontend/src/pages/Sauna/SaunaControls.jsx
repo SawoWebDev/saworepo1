@@ -62,14 +62,29 @@ const FIXED_ORDER = [
   "Sensor",
 ];
 
+// Order matters: matching walks groups top-to-bottom and stops at the first
+// hit, so narrow/specific groups must come before the broad brand ones.
+// Reason: e.g. "Innova & Saunova 2.0 Spare Rj12 – Cables" and "Rectangular
+// Interface Holder for 2.0 Controls" both carry "Innova"/"Saunova"
+// cross-compatibility tags (they work with either control line) — if the
+// brand groups were checked first, every spare part/interface holder that's
+// compatible with Saunova/Innova would get swallowed into those groups
+// instead of their real category, leaving "Control Spare Parts" and
+// "Interface Holder" empty.
 const GROUP_KEYWORDS = {
   "Coming Soon":          ["SAWO Sense", "Saunova 2.0 PLUS", "Coming Soon"],
-  "Saunova Series":       ["Saunova", "SAU-"],
-  "Innova Series":        ["Innova", "INC-", "INP-", "INT-"],
   "Control Spare Parts":  ["Spare", "RJ12", "Extension Module", "Silicon Wire"],
   "Interface Holder":     ["Interface Holder", "Holder"],
   "Sensor":               ["Sensor", "Temperature", "Humidity"],
+  "Saunova Series":       ["Saunova", "SAU-"],
+  "Innova Series":        ["Innova", "INC-", "INP-", "INT-"],
 };
+
+// These two groups' keywords ("Saunova", "Innova") also appear as generic
+// cross-compatibility tags on unrelated accessories/heaters (e.g. a heater
+// tagged "Saunova" just means it can pair with a Saunova control, not that
+// it IS one) — so only the product's own name identifies real membership.
+const NAME_ONLY_GROUPS = new Set(["Saunova Series", "Innova Series"]);
 
 /** Group products by brand/type keywords */
 function groupProducts(products) {
@@ -78,7 +93,8 @@ function groupProducts(products) {
     for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
       for (const kw of keywords) {
         const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch  = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
+        const tagMatch  = !NAME_ONLY_GROUPS.has(group) &&
+          product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
         if (nameMatch || tagMatch) {
           if (!groups[group]) groups[group] = [];
           groups[group].push(product);
