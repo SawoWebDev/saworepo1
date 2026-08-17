@@ -75,7 +75,6 @@ function Toast({ toasts, remove }) {
 
 const emptyForm = {
   username: "",
-  password_hash: "",
   full_name: "",
   email: "",
   role: "admin",
@@ -151,7 +150,6 @@ export default function Users({ currentUser }) {
   const [formError, setFormError]   = useState("");
   const [formLoading, setFormLoading] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
-  const [showPassword, setShowPassword]   = useState(false);
   const [changePassModal, setChangePassModal] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -168,21 +166,34 @@ export default function Users({ currentUser }) {
   useEffect(() => { fetchUsers(); }, [sortDir]); // eslint-disable-line
 
   const openAdd = () => {
-    setEditUser(null); setForm(emptyForm); setFormError(""); setShowPassword(false); setShowModal(true);
+    setEditUser(null); setForm(emptyForm); setFormError(""); setShowModal(true);
   };
 
   const openEdit = u => {
     setEditUser(u);
     setForm({
       username: u.username,
-      password_hash: "",
       full_name: u.full_name || "",
       email: u.email || "",
       role: u.role || "admin",
       extra_permissions: u.extra_permissions || [],
     });
-    setFormError(""); setShowPassword(false); setShowModal(true);
+    setFormError(""); setShowModal(true);
   };
+
+  // Client-side duplicate check against the already-loaded user list —
+  // usernames and emails must both be unique (the database enforces this
+  // too, via users_username_key / users_email_key, so this is a friendlier
+  // early warning, not the only guard). Excludes the row being edited so
+  // saving a user without changing their own username/email doesn't flag
+  // itself as a duplicate.
+  const findDuplicate = (field, value) => {
+    const v = value.trim().toLowerCase();
+    if (!v) return null;
+    return users.find(u => u.id !== editUser?.id && (u[field] || "").toLowerCase() === v) || null;
+  };
+  const usernameDuplicate = findDuplicate("username", form.username);
+  const emailDuplicate = form.email ? findDuplicate("email", form.email) : null;
 
   // Toggles one extra-permission checkbox. Guards against ever storing a cap
   // the currently-selected role already grants by default — if the admin
@@ -200,9 +211,24 @@ export default function Users({ currentUser }) {
 
   const closeModal = () => { setShowModal(false); setEditUser(null); };
 
+  // Translates a raw Postgres unique-violation into the friendly message the
+  // inline duplicate check already shows — a backstop for the rare race
+  // where two admins save the same username/email at nearly the same time
+  // (the client-side check alone can't catch that, only the database can).
+  const friendlyDbError = err => {
+    const msg = err.message || String(err);
+    if (/users_username_key/.test(msg)) return "That username is already taken.";
+    if (/users_email_key/.test(msg)) return "That email is already used by another account.";
+    return msg;
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     setFormError("");
+
+    if (usernameDuplicate) { setFormError("That username is already taken."); return; }
+    if (emailDuplicate) { setFormError("That email is already used by another account."); return; }
+
     setFormLoading(true);
     // Only persist caps the chosen role doesn't already grant by default —
     // keeps extra_permissions a true diff from the role, not a redundant
@@ -211,9 +237,6 @@ export default function Users({ currentUser }) {
     const extraPermissions = form.extra_permissions.filter(cap => !can(form.role, cap));
     try {
       if (editUser) {
-        // password_hash is no longer a directly-writable column (see
-        // supabase.js's apiLogin comment) — a changed password goes through
-        // the set_user_password RPC, hashed server-side, never sent as-is.
         const updates = {
           username: form.username.trim(),
           full_name: form.full_name.trim() || null,
@@ -222,85 +245,50 @@ export default function Users({ currentUser }) {
           extra_permissions: extraPermissions,
         };
         const { error } = await supabase.from("users").update(updates).eq("id", editUser.id);
-        if (error) throw new Error(error.message);
-        if (form.password_hash.trim()) {
-          const newPassword = form.password_hash.trim();
-          const { error: pwError } = await supabase.rpc("set_user_password", {
-            p_user_id: editUser.id,
-            p_new_password: newPassword,
-          });
-          if (pwError) throw new Error("User updated but password change failed: " + pwError.message);
-          // set_user_password only rewrites users.password_hash — it cannot
-          // touch Supabase Auth from the client. Without this second step the
-          // account's Auth password stays stale and its owner can't log in.
-          await syncAuthPassword(form.username.trim(), newPassword);
-        }
+        if (error) throw new Error(friendlyDbError(error));
         if (form.email.trim() && form.email.trim() !== editUser.email) {
           const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
           if (fnError) console.warn("Auth email sync failed:", fnError.message);
         }
       } else {
-        // New users set their own password via email, the same way every
-        // other password change in the CMS works (see ResetPassword.jsx) —
-        // omit password_hash entirely so the column DEFAULT fills in an
-        // unusable placeholder until they do.
+        // New users always set their own password via the email-invite flow
+        // below — there's no admin-set-password shortcut here anymore. It
+        // used to exist for accounts with no email, but email is required
+        // to create a user at all now (see the form field below), so that
+        // case can't come up, and removing it closes off the confusing
+        // "two accounts sharing one email" state that shortcut enabled.
         const newUsername = form.username.trim();
         const email = form.email.trim();
-        const newPassword = form.password_hash.trim();
         const { error } = await supabase.from("users").insert([{
           username: newUsername,
           full_name: form.full_name.trim() || null,
-          email: email || null,
+          email,
           role: form.role,
           extra_permissions: extraPermissions,
         }]);
-        if (error) throw new Error(error.message);
+        if (error) throw new Error(friendlyDbError(error));
 
         // The account row now exists — close and refresh right away rather
-        // than waiting on the auth/password steps below. Those used to be
+        // than waiting on the auth-invite step below. That used to be
         // awaited inside this same try block, so a failure there (e.g. the
-        // login-sync edge function erroring) left the modal open with a
-        // blocking error even though the user had already been created;
-        // clicking "Create User" again to retry then hit a 409 conflict on
-        // the username, since it already existed from the first attempt.
-        // Treating them as best-effort follow-ups (reported via toast, not
-        // a blocking form error) makes that retry-into-a-conflict impossible.
+        // invite email erroring) left the modal open with a blocking error
+        // even though the user had already been created; clicking "Create
+        // User" again to retry then hit a conflict on the username, since it
+        // already existed from the first attempt. Treating the invite as a
+        // best-effort follow-up (reported via toast, not a blocking form
+        // error) makes that retry-into-a-conflict impossible.
         closeModal();
         fetchUsers();
 
         (async () => {
           try {
-            // Optional: an admin can still set an initial password directly
-            // (e.g. for an account with no email) — but it's never required.
-            if (newPassword) {
-              const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
-                p_username: newUsername,
-                p_new_password: newPassword,
-              });
-              if (pwError) throw new Error("Setting the password failed: " + pwError.message);
-              // Keep Supabase Auth in step — see the note on the edit path above.
-              await syncAuthPassword(newUsername, newPassword);
-            }
+            const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
+            if (fnError) console.warn("Auth user creation failed:", fnError.message);
 
-            if (email) {
-              const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
-              if (fnError) console.warn("Auth user creation failed:", fnError.message);
-
-              try {
-                await forgotPassword(newUsername);
-                addToast(`User created. A password-setup link was sent to ${email}.`, "success");
-              } catch (mailErr) {
-                console.warn("Password-setup email failed to send:", mailErr.message);
-              }
-            } else {
-              addToast("User created.", "success");
-            }
-          } catch (err) {
-            if (isPasswordUpdateRequiredError(err.message)) {
-              notifyPasswordUpdateRequired();
-            } else {
-              addToast(`User created, but: ${err.message}`, "error");
-            }
+            await forgotPassword(newUsername);
+            addToast(`User created. A password-setup link was sent to ${email}.`, "success");
+          } catch (mailErr) {
+            addToast(`User created, but the password-setup email failed to send: ${mailErr.message}`, "error");
           }
         })();
         return;
@@ -552,6 +540,12 @@ export default function Users({ currentUser }) {
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label">Username <span style={{ color: "var(--danger)" }}>*</span></label>
               <input className="form-input" type="text" required value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} />
+              {usernameDuplicate && (
+                <p style={{ fontSize: "0.75rem", color: "var(--danger)", marginTop: "0.3rem" }}>
+                  <i className="fa-solid fa-circle-exclamation" style={{ marginRight: 4 }} />
+                  Already taken by {usernameDuplicate.username}.
+                </p>
+              )}
             </div>
 
             <div className="form-group" style={{ marginBottom: 0 }}>
@@ -564,9 +558,14 @@ export default function Users({ currentUser }) {
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label">Email <span style={{ color: "var(--danger)" }}>*</span></label>
               <input className="form-input" type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-              {!editUser && (
+              {emailDuplicate ? (
+                <p style={{ fontSize: "0.75rem", color: "var(--danger)", marginTop: "0.3rem" }}>
+                  <i className="fa-solid fa-circle-exclamation" style={{ marginRight: 4 }} />
+                  Already used by {emailDuplicate.username}. Each account needs its own email — sign-in is matched by email, so two accounts can't share one.
+                </p>
+              ) : !editUser && (
                 <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
-                  A Supabase Auth account will be created so the user can reset their password.
+                  A password-setup link will be sent to this address once the account is created — that's the only way this user's password gets set.
                 </p>
               )}
             </div>
@@ -582,27 +581,7 @@ export default function Users({ currentUser }) {
             </div>
           </div>
 
-          {!editUser ? (
-            <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">Password</label>
-              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 5px" }}>
-                Optional. If an email is provided below, a link to set their own password is sent automatically. Only fill this in to set an initial password yourself.
-              </p>
-              <div className="input-wrap" style={{ maxWidth: 340 }}>
-                <input
-                  className="form-input"
-                  type={showPassword ? "text" : "password"}
-                  value={form.password_hash}
-                  onChange={e => setForm({ ...form, password_hash: e.target.value })}
-                  style={{ paddingRight: "2.5rem" }}
-                  placeholder="Optional"
-                />
-                <button type="button" className="input-eye-btn" onClick={() => setShowPassword(s => !s)}>
-                  <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} />
-                </button>
-              </div>
-            </div>
-          ) : canEdit && (
+          {editUser && canEdit && (
             <button
               type="button"
               className="btn btn-sm"
@@ -681,7 +660,7 @@ export default function Users({ currentUser }) {
 
           <div className="modal-footer">
             <button type="button" className="btn btn-ghost" onClick={closeModal}>Cancel</button>
-            <button type="submit" className="btn btn-primary" disabled={formLoading}>
+            <button type="submit" className="btn btn-primary" disabled={formLoading || !!usernameDuplicate || !!emailDuplicate}>
               {formLoading
                 ? <><i className="fa-solid fa-spinner" style={{ animation: "spin 1s linear infinite" }} /> {editUser ? "Saving..." : "Creating..."}</>
                 : <><i className={editUser ? "fa-solid fa-floppy-disk" : "fa-solid fa-user-plus"} /> {editUser ? "Save Changes" : "Create User"}</>
