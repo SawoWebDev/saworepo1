@@ -8,6 +8,7 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
+import promoBannerImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Sauna-Controls-Banner.webp";
 import PromoBanner from "../../components/PromoBanner";
 import "./heaters/heaters.css"; // reuse existing heaters CSS
 import HeroWave from "../../components/HeroWave";
@@ -515,6 +516,7 @@ export default function SaunaControls() {
       <PromoBanner
         title="Experience Ultimate Relaxation"
         subtitle="Find your perfect control from our full range of SAWO solutions"
+        image={promoBannerImg}
       />
     </div>
   );
