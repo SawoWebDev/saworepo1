@@ -7,6 +7,7 @@ import heroImg from "../../../assets/506-2-D.webp";
 import "../heaters/heaters.css";
 import menuPaths from "../../../menuPaths";
 import PromoBanner from "../../../components/PromoBanner";
+import accessoriesBannerImg from "../../../assets/accessories-banner.webp";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
@@ -224,6 +225,7 @@ export default function HeadrestsBackrests() {
       <PromoBanner
         title="Complete Your Sauna Experience"
         subtitle="Explore our full range of authentic Finnish sauna accessories"
+        image={accessoriesBannerImg}
       />
     </div>
   );
