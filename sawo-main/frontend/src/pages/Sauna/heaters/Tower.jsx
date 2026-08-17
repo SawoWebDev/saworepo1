@@ -57,6 +57,7 @@ import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
+import { getPowerRange } from "../../../utils/productPower";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -72,8 +73,14 @@ function getImageUrl(product, field) {
 const FIXED_ORDER = ["SAWO30", "Tower", "Aries", "Cubos", "Heaterking", "Phoenix", "Fiberjungle"];
 
 // ── Filter Tower products ─────────────────────────────────────────────
+// Requires the "Towers" category first — matching on name alone let
+// unrelated products whose name happens to contain "Tower" (e.g. the
+// Kivistone "Candle Holder Tower" and "Tower Set 3" accessories) leak onto
+// this heaters page. The name keywords below then only decide which *sub*
+// group a real Tower-category heater lands in.
 function filterTowerProducts(allProducts) {
   return allProducts.filter((p) => {
+    if (!p.categories?.includes("Towers")) return false;
     const name = (p.name || "").toUpperCase();
     return (
       name.includes("SAWO30") ||
@@ -82,8 +89,7 @@ function filterTowerProducts(allProducts) {
       name.includes("CUBOS") ||
       name.includes("HEATERKING") ||
       name.includes("PHOENIX") ||
-      name.includes("FIBERJUNGLE NS") ||
-      p.categories?.includes("Tower")
+      name.includes("FIBERJUNGLE NS")
     );
   });
 }
@@ -135,13 +141,8 @@ function SkeletonCard() {
   );
 }
 
-function getPower(tags) {
-  if (!tags) return "";
-  return tags.find((t) => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
-}
-
 function ProductCard({ product }) {
-  const power = getPower(product.tags);
+  const power = getPowerRange(product.tags);
   return (
     <Link
       to={`/products/${product.slug}`}

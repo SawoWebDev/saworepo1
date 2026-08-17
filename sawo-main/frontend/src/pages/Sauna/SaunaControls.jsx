@@ -2,7 +2,7 @@
 // Dynamic products from Supabase, filtered by the "Sauna Controls" category/tags, with search.
 // Converted from WallMounted.jsx — same structure, updated copy, categories, grouping, and hero image.
 
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
@@ -14,6 +14,7 @@ import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { getPowerRange } from "../../utils/productPower";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -113,6 +114,14 @@ function groupProducts(products) {
   return groupedProducts;
 }
 
+// DOM id for a group's section, used to jump straight to it from a
+// ?group=<name> link (see the groupParam effect in the component below) —
+// all FIXED_ORDER names are plain words/spaces, so a simple substitution
+// is safe here.
+function groupSectionId(name) {
+  return `group-${name.toLowerCase().replace(/\s+/g, "-")}`;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Case-insensitive check: does `arr` contain any item from `targets`? */
@@ -156,8 +165,7 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
-  // Look for a kW power range tag (e.g. "3.5 – 9 kW")
-  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const power = getPowerRange(product.tags);
 
   return (
     <Link
@@ -199,24 +207,17 @@ export default function SaunaControls() {
 
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
-  const filterSectionRef = useRef(null);
 
-  // Auto-filter to the group requested via ?group=<name> (e.g. links from the
-  // Sauna landing page's control cards), once the matching group exists.
+  // Jump to the group requested via ?group=<name> (e.g. links from the Sauna
+  // landing page's control cards) — scrolls straight to that section instead
+  // of filtering the rest away, so visitors can still browse everything else
+  // on the page. Same anchor-jump pattern as /infrared#infrared-controls.
   const groupParam = searchParams.get("group");
-  useEffect(() => {
-    if (!groupParam) return;
-    if (FIXED_ORDER.includes(groupParam)) {
-      setActiveGroup(groupParam);
-    }
-  }, [groupParam]);
-
-  // Once the filter section has actually rendered (post-loading), jump the
-  // page to it so a ?group= link doesn't just silently filter off-screen.
   useEffect(() => {
     if (!groupParam || loading) return;
     if (!FIXED_ORDER.includes(groupParam)) return;
-    filterSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(groupSectionId(groupParam));
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [groupParam, loading]);
 
   const allProducts = useMemo(() => {
@@ -351,7 +352,7 @@ export default function SaunaControls() {
 
       {/* ── FILTER + SEARCH ───────────────────────────────────────────────── */}
       {!loading && allProducts.length > 0 && (
-        <section ref={filterSectionRef} className="wm-section wm-section--flush-bottom">
+        <section className="wm-section wm-section--flush-bottom">
           <div className="wm-container">
             <div className="wm-filter-search-row">
               {/* ── Filter pills ── */}
@@ -466,7 +467,7 @@ export default function SaunaControls() {
                   );
                   if (items.length === 0) return null;
                   return (
-                    <div className="wm-group" key={brand}>
+                    <div className="wm-group" id={groupSectionId(brand)} key={brand}>
                       <h3 className="wm-group-title">{brand.toUpperCase()}</h3>
                       <div className="wm-products-grid">
                         {items.map((product) => (
