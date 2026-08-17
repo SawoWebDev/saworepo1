@@ -25,10 +25,23 @@ async function syncAuthPassword(username, newPassword) {
     body: { username, current_password: newPassword, new_password: newPassword },
   });
   if (error) {
+    // supabase-js's own error.message for a non-2xx function response is a
+    // generic "Edge Function returned a non-2xx status code" — it doesn't
+    // surface the function's own { error: "..." } JSON body, which is where
+    // the actually useful reason (e.g. "email already registered") lives.
+    // Read it straight from the failed response instead.
+    let detail = error.message;
+    try {
+      const body = await error.context?.json();
+      if (body?.error) detail = body.error;
+    } catch {
+      // Response body wasn't JSON (or already consumed) — fall back to the
+      // generic message rather than let this throw mask the original error.
+    }
     throw new Error(
       "The password was saved, but syncing it to the login system failed, so " +
       "this user may not be able to sign in yet. Ask them to use \"Forgot password?\", " +
-      `or try again. (${error.message})`
+      `or try again. (${detail})`
     );
   }
 }
@@ -233,6 +246,7 @@ export default function Users({ currentUser }) {
         // unusable placeholder until they do.
         const newUsername = form.username.trim();
         const email = form.email.trim();
+        const newPassword = form.password_hash.trim();
         const { error } = await supabase.from("users").insert([{
           username: newUsername,
           full_name: form.full_name.trim() || null,
@@ -242,35 +256,57 @@ export default function Users({ currentUser }) {
         }]);
         if (error) throw new Error(error.message);
 
-        // Optional: an admin can still set an initial password directly
-        // (e.g. for an account with no email) — but it's never required.
-        if (form.password_hash.trim()) {
-          const newPassword = form.password_hash.trim();
-          const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
-            p_username: newUsername,
-            p_new_password: newPassword,
-          });
-          if (pwError) throw new Error("User created but setting the password failed: " + pwError.message);
-          // Keep Supabase Auth in step — see the note on the edit path above.
-          await syncAuthPassword(newUsername, newPassword);
-        }
+        // The account row now exists — close and refresh right away rather
+        // than waiting on the auth/password steps below. Those used to be
+        // awaited inside this same try block, so a failure there (e.g. the
+        // login-sync edge function erroring) left the modal open with a
+        // blocking error even though the user had already been created;
+        // clicking "Create User" again to retry then hit a 409 conflict on
+        // the username, since it already existed from the first attempt.
+        // Treating them as best-effort follow-ups (reported via toast, not
+        // a blocking form error) makes that retry-into-a-conflict impossible.
+        closeModal();
+        fetchUsers();
 
-        if (email) {
-          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
-          if (fnError) console.warn("Auth user creation failed:", fnError.message);
-
+        (async () => {
           try {
-            await forgotPassword(newUsername);
-          } catch (mailErr) {
-            console.warn("Password-setup email failed to send:", mailErr.message);
+            // Optional: an admin can still set an initial password directly
+            // (e.g. for an account with no email) — but it's never required.
+            if (newPassword) {
+              const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
+                p_username: newUsername,
+                p_new_password: newPassword,
+              });
+              if (pwError) throw new Error("Setting the password failed: " + pwError.message);
+              // Keep Supabase Auth in step — see the note on the edit path above.
+              await syncAuthPassword(newUsername, newPassword);
+            }
+
+            if (email) {
+              const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
+              if (fnError) console.warn("Auth user creation failed:", fnError.message);
+
+              try {
+                await forgotPassword(newUsername);
+                addToast(`User created. A password-setup link was sent to ${email}.`, "success");
+              } catch (mailErr) {
+                console.warn("Password-setup email failed to send:", mailErr.message);
+              }
+            } else {
+              addToast("User created.", "success");
+            }
+          } catch (err) {
+            if (isPasswordUpdateRequiredError(err.message)) {
+              notifyPasswordUpdateRequired();
+            } else {
+              addToast(`User created, but: ${err.message}`, "error");
+            }
           }
-        }
+        })();
+        return;
       }
       closeModal();
       fetchUsers();
-      if (!editUser && form.email.trim()) {
-        addToast(`User created. A password-setup link was sent to ${form.email.trim()}.`, "success");
-      }
     } catch (err) {
       if (isPasswordUpdateRequiredError(err.message)) {
         notifyPasswordUpdateRequired();
