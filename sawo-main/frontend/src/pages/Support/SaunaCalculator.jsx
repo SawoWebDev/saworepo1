@@ -794,9 +794,9 @@ export default function SaunaCalculator() {
               placeholder={placeholders[2]} hint={dimHints.d} unit={lenUnit}
             />
             <DimField
-              label="Uninsulated Surfaces" subLabel="(glass, tile, stone or concrete walls)"
+              label="Uninsulated Surfaces" subLabel="(Leave 0 if fully wood-lined)"
               value={uninsulated} onChange={setUninsulated}
-              placeholder="0" hint="Leave 0 if fully wood-lined" unit={areaUnit}
+              placeholder="0" hint="glass, tile, stone or concrete walls, including glass walls, windows and doors" unit={areaUnit}
             />
           </div>
 
