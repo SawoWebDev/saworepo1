@@ -316,16 +316,6 @@ async function deleteStorageUrls(urls = []) {
   );
 }
 
-async function deleteProductStorageFiles(product) {
-  const urls = [
-    product.thumbnail,
-    ...(product.images      || []),
-    ...(product.spec_images || []),
-    ...(product.files       || []).map(f => f?.url),
-  ].filter(Boolean);
-  await deleteStorageUrls(urls);
-}
-
 function findOrphanedUrls(savedForm, currentForm) {
   const collect = f => [
     f.thumbnail,

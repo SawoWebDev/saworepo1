@@ -137,17 +137,6 @@ async function deleteStorageUrls(urls = []) {
   );
 }
 
-async function deleteRoomStorageFiles(room) {
-  const urls = [
-    room.thumbnail,
-    ...(room.images      || []),
-    ...(room.spec_images || []),
-    ...(room.files       || []).map(f => f?.url),
-    ...(room.resources   || []).map(f => f?.url),
-  ].filter(Boolean);
-  await deleteStorageUrls(urls);
-}
-
 function findOrphanedUrls(savedForm, currentForm) {
   const collect = f => [
     f.thumbnail,
