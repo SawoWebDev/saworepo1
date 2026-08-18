@@ -7,6 +7,8 @@
   "search": "Suche",
   "openMenu": "Menü öffnen",
   "closeMenu": "Menü schließen",
+  "collapse": "Zuklappen",
+  "expand": "Aufklappen",
   "searchBox": {
     "placeholder": "Suchen...",
     "searching": "Suche läuft...",

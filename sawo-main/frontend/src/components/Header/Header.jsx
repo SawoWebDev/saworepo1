@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
 import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
+import { useLocaleT } from "../../i18n/LocaleContext";
 
 /**
  * The header's nav structure and hover style used to be two CMS settings
@@ -23,70 +24,91 @@ const NAV_STYLE = "style2";
 // Module scope, not a const inside the component: it's static data, so
 // rebuilding these ~30 objects on every render (every scroll tick fires a
 // setState) was pure waste.
+// `nk` = the key into i18n/locales/<locale>/nav.json each item's display
+// name is translated from (see translateNavItems below). `name` stays as the
+// English fallback so this array works even before translation runs.
 const navItems = [
-  { name: "Home", path: menuPaths.home },
+  { name: "Home", nk: "home", path: menuPaths.home },
   {
     name: "Sauna",
+    nk: "groups.sauna",
     path: menuPaths.sauna.parent,
     submenu: [
       {
         name: "Sauna Heaters",
+        nk: "items.saunaHeaters",
         path: menuPaths.sauna.heaters.parent,
         submenu: [
-          { name: "Wall-Mounted", path: menuPaths.sauna.heaters.wallMounted },
-          { name: "Tower", path: menuPaths.sauna.heaters.tower },
-          { name: "Stone", path: menuPaths.sauna.heaters.stone },
-          { name: "Floor", path: menuPaths.sauna.heaters.floor },
-          { name: "Combi", path: menuPaths.sauna.heaters.combi },
-          { name: "Dragonfire", path: menuPaths.sauna.heaters.dragonfire },
+          { name: "Wall-Mounted", nk: "items.wallMounted", path: menuPaths.sauna.heaters.wallMounted },
+          { name: "Tower", nk: "items.tower", path: menuPaths.sauna.heaters.tower },
+          { name: "Stone", nk: "items.stone", path: menuPaths.sauna.heaters.stone },
+          { name: "Floor", nk: "items.floor", path: menuPaths.sauna.heaters.floor },
+          { name: "Combi", nk: "items.combi", path: menuPaths.sauna.heaters.combi },
+          { name: "Dragonfire", nk: "items.dragonfire", path: menuPaths.sauna.heaters.dragonfire },
         ],
       },
-      { name: "Sauna Controls", path: menuPaths.sauna.controls },
-      { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent },
+      { name: "Sauna Controls", nk: "items.saunaControls", path: menuPaths.sauna.controls },
+      { name: "Sauna Accessories", nk: "items.saunaAccessories", path: menuPaths.sauna.accessories.parent },
       {
         name: "Sauna Rooms",
+        nk: "items.saunaRooms",
         path: menuPaths.sauna.rooms,
         submenu: [
-          { name: "Interior Designs", path: menuPaths.sauna.interiorDesigns },
-          { name: "Wood Panels & Timbers", path: menuPaths.sauna.woodPanels },
+          { name: "Interior Designs", nk: "items.interiorDesigns", path: menuPaths.sauna.interiorDesigns },
+          { name: "Wood Panels & Timbers", nk: "items.woodPanels", path: menuPaths.sauna.woodPanels },
         ],
       },
     ],
   },
   {
     name: "Steam",
+    nk: "groups.steam",
     path: menuPaths.steam.parent,
     submenu: [
-      { name: "Steam Generators", path: menuPaths.steam.generators },
-      { name: "Steam Controls", path: menuPaths.steam.controls },
-      { name: "Steam Accessories", path: menuPaths.steam.accessories },
+      { name: "Steam Generators", nk: "items.steamGenerators", path: menuPaths.steam.generators },
+      { name: "Steam Controls", nk: "items.steamControls", path: menuPaths.steam.controls },
+      { name: "Steam Accessories", nk: "items.steamAccessories", path: menuPaths.steam.accessories },
     ],
   },
-  { name: "Infrared", path: menuPaths.infrared },
+  { name: "Infrared", nk: "groups.infrared", path: menuPaths.infrared },
   {
     name: "Support",
+    nk: "support",
     path: menuPaths.support.parent,
     submenu: [
-      { name: "Frequently Asked Questions", path: menuPaths.support.faq },
-      { name: "User Manuals", path: menuPaths.support.manuals },
-      { name: "Product Catalogue", path: menuPaths.support.catalogue },
-      { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
+      { name: "Frequently Asked Questions", nk: "items.faq", path: menuPaths.support.faq },
+      { name: "User Manuals", nk: "items.userManuals", path: menuPaths.support.manuals },
+      { name: "Product Catalogue", nk: "items.productCatalogue", path: menuPaths.support.catalogue },
+      { name: "Sauna Calculator", nk: "items.saunaCalculator", path: menuPaths.support.saunaCalculator },
     ],
   },
-  { name: "Contact Us", path: menuPaths.contact },
+  { name: "Contact Us", nk: "contactUs", path: menuPaths.contact },
   {
     name: "About Us",
+    nk: "aboutUs",
     path: menuPaths.about.parent,
     submenu: [
-      { name: "Latest News", path: menuPaths.about.news },
-      { name: "Sustainability", path: menuPaths.about.sustainability },
+      { name: "Latest News", nk: "items.latestNews", path: menuPaths.about.news },
+      { name: "Sustainability", nk: "items.sustainability", path: menuPaths.about.sustainability },
     ],
   },
-  { name: "Careers", path: menuPaths.careers },
+  { name: "Careers", nk: "items.careers", path: menuPaths.careers },
 ];
+
+// Recursively swaps each item's English `name` for t(item.nk), keeping every
+// other field (path, nested submenu) untouched.
+function translateNavItems(items, t) {
+  return items.map((item) => ({
+    ...item,
+    name: item.nk ? t(item.nk) : item.name,
+    submenu: item.submenu ? translateNavItems(item.submenu, t) : item.submenu,
+  }));
+}
 
 export default function Header() {
   const location = useLocation();
+  const t = useLocaleT("nav");
+  const translatedNavItems = useMemo(() => translateNavItems(navItems, t), [t]);
 
   const [hidden, setHidden] = useState(false);
   // Transparent (with a dark-to-clear scrim) at the very top of the page,
@@ -259,7 +281,7 @@ export default function Header() {
                 ref={navRef}
                 className="flex gap-1 whitespace-nowrap text-[16px] font-normal text-[rgb(51,51,51)]"
               >
-              {navItems.map((item) => (
+              {translatedNavItems.map((item) => (
                 <div
                   key={item.name}
                   className="relative"
@@ -406,7 +428,7 @@ export default function Header() {
                 <button
                   onClick={() => setSearchExpanded(true)}
                   className="header-icon-btn p-2 hover:text-[#af8564] transition-colors text-[rgb(51,51,51)]"
-                  aria-label="Search"
+                  aria-label={t("search")}
                   style={{
                     animation: searchExpanded ? 'none' : 'slideInLeft 0.3s ease-out'
                   }}
@@ -744,7 +766,7 @@ export default function Header() {
             ref={mobileToggleRef}
             className="header-icon-btn md:hidden text-2xl font-bold bg-transparent border-none cursor-pointer text-[rgb(51,51,51)]"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
             aria-expanded={mobileOpen}
           >
             <i className="fa-solid fa-bars" aria-hidden="true"></i>
@@ -754,7 +776,7 @@ export default function Header() {
         {/* Mobile menu */}
         {mobileOpen && (
           <div ref={mobileMenuRef} className="md:hidden bg-white shadow-lg">
-            {navItems.map((item) => (
+            {translatedNavItems.map((item) => (
               <div key={item.name} className="border-b border-gray-200">
                 {item.submenu ? (
                   <div
@@ -777,7 +799,7 @@ export default function Header() {
                     </Link>
                     <button
                       className="px-4 py-3"
-                      aria-label={`${hoveredMenu === item.name ? "Collapse" : "Expand"} ${item.name} submenu`}
+                      aria-label={`${hoveredMenu === item.name ? t("collapse") : t("expand")} ${item.name}`}
                       onClick={() =>
                         setHoveredMenu(
                           hoveredMenu === item.name ? null : item.name,
@@ -832,7 +854,7 @@ export default function Header() {
                             )}
                             <button
                               className="px-6 py-2"
-                              aria-label={`${hoveredSubmenu === sub.name ? "Collapse" : "Expand"} ${sub.name} submenu`}
+                              aria-label={`${hoveredSubmenu === sub.name ? t("collapse") : t("expand")} ${sub.name}`}
                               onClick={() =>
                                 setHoveredSubmenu(
                                   hoveredSubmenu === sub.name ? null : sub.name,
