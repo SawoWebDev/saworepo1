@@ -2762,7 +2762,7 @@ export default function Products({ currentUser }) {
   const [search,       setSearch]       = useState("");
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState("");
-  const [quickFilter,  setQuickFilter]  = useState("all"); // "all" | "accessories" | "heaters"
+  const [quickFilter,  setQuickFilter]  = useState("heaters"); // "all" | "accessories" | "heaters"
   const [activeHeaterSubcats, setActiveHeaterSubcats] = useState([]); // multi-select pills, only used when quickFilter === "heaters"
   const [activeAccessorySubcats, setActiveAccessorySubcats] = useState([]); // multi-select pills, only used when quickFilter === "accessories"
   const [sortDir,      setSortDir]      = useState("desc");
@@ -3440,9 +3440,9 @@ export default function Products({ currentUser }) {
       <div className="products-toolbar">
         <div className="tax-tabs">
           {[
-            { key: "all", label: "All" },
             { key: "heaters", label: "Sauna Heaters" },
             { key: "accessories", label: "Accessories" },
+            { key: "all", label: "All" },
           ].map(({ key, label }) => (
             <button key={key} type="button" onClick={() => { setQuickFilter(key); if (key !== "heaters") setActiveHeaterSubcats([]); if (key !== "accessories") setActiveAccessorySubcats([]); }}
               className={`tax-tab-btn${quickFilter === key ? " active" : ""}`}>
