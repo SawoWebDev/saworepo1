@@ -199,7 +199,8 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>Electrical Engineer</h3>
                     <p>
-                      Cebu / <span className="badge-fulltime">Full-Time</span> /{" "}
+                      Elektroniikkasuunnittelija – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
                       <span className="badge-onsite">On-Site</span>
                     </p>
                   </div>
@@ -212,8 +213,8 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>Production Supervisor, Woodworking</h3>
                     <p>
-                      Pampanga/Cebu /{" "}
-                      <span className="badge-fulltime">Full-Time</span> /{" "}
+                      Puutekniikan Osaaja – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
                       <span className="badge-onsite">On-Site</span>
                     </p>
                   </div>
@@ -226,8 +227,8 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>Marketing Specialist</h3>
                     <p>
-                      Pampanga/Cebu /{" "}
-                      <span className="badge-fulltime">Full-Time</span> /{" "}
+                      Markkinoinnin Osaaja – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
                       <span className="badge-onsite">On-Site</span>
                     </p>
                   </div>
@@ -240,8 +241,8 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>Buyer / Logistics Specialist</h3>
                     <p>
-                      Cebu / Logistics/Cebu /{" "}
-                      <span className="badge-fulltime">Full-Time</span> /{" "}
+                      Ostaja / Logistiikka-osaaja – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
                       <span className="badge-onsite">On-Site</span>
                     </p>
                   </div>
@@ -254,8 +255,8 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>Process Engineer</h3>
                     <p>
-                      Pampanga/Cebu /{" "}
-                      <span className="badge-fulltime">Full-Time</span> /{" "}
+                      Prosessi-insinööri – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
                       <span className="badge-onsite">On-Site</span>
                     </p>
                   </div>
@@ -268,8 +269,8 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>International Sales Manager</h3>
                     <p>
-                      Pampanga/Myyrmäkkialue / Cebu /{" "}
-                      <span className="badge-fulltime">Full-Time</span> /{" "}
+                      Kansainvälinen Myyntipäällikkö – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
                       <span className="badge-onsite">On-Site</span>
                     </p>
                   </div>
@@ -282,10 +283,47 @@ const Careers = () => {
                   <div className="position-info">
                     <h3>Odoo Software Developer</h3>
                     <p>
-                      Cebu /{" "}
-                      <span className="badge-fulltime">Full-Time(hybriid)</span>{" "}
-                      / Cebu / <span className="badge-fulltime">Full-Time</span>{" "}
-                      / <span className="badge-onsite">On-Site</span>
+                      Odoo Ohjelmistokehittäjä – Cebu |{" "}
+                      <span className="badge-fulltime">Full-Time</span> |{" "}
+                      <span className="badge-onsite">On-Site</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="position-item">
+                  <div className="position-icon-wrapper">
+                    <i className="fas fa-user-circle"></i>
+                  </div>
+                  <div className="position-info">
+                    <h3>International Sales Manager (German Speaker)</h3>
+                    <p>Kansainvälinen Myyntipäällikkö – Europe (Hybrid)</p>
+                  </div>
+                </div>
+
+                <div className="position-item">
+                  <div className="position-icon-wrapper">
+                    <i className="fas fa-user-circle"></i>
+                  </div>
+                  <div className="position-info">
+                    <h3>Head of Production</h3>
+                    <p>
+                      Cebu | <span className="badge-fulltime">Full-Time</span> |{" "}
+                      <span className="badge-onsite">On-Site</span> | 3–6 Years
+                      Experience
+                    </p>
+                  </div>
+                </div>
+
+                <div className="position-item">
+                  <div className="position-icon-wrapper">
+                    <i className="fas fa-user-circle"></i>
+                  </div>
+                  <div className="position-info">
+                    <h3>Production Manager</h3>
+                    <p>
+                      Cebu | <span className="badge-fulltime">Full-Time</span> |{" "}
+                      <span className="badge-onsite">On-Site</span> | 2–4 Years
+                      Experience
                     </p>
                   </div>
                 </div>
@@ -315,24 +353,26 @@ const Careers = () => {
                     lineHeight: "1.6",
                   }}
                 >
-                  Be an industry leader that blends Finnish expertise with
-                  world-class craftsmanship.
+                  Be part of an industry leader that blends Finnish expertise
+                  with world-class craftsmanship.
                 </p>
 
                 <div className="hiring-details mb-6">
                   <div className="hiring-detail-item">
-                    <i className="fas fa-circle" style={{ fontSize: "6px" }}></i>
+                    <i className="fas fa-envelope"></i>
                     <span>
                       Send your resume to:{" "}
                       <strong style={{ color: "#D32F2F" }}>
-                        reply@sawo.com
+                        rekry@sawo.com
                       </strong>
                     </span>
                   </div>
                   <div className="hiring-detail-item">
-                    <i className="fas fa-circle" style={{ fontSize: "6px" }}></i>
+                    <i className="fas fa-map-marker-alt"></i>
                     <span>
-                      Location: SAWO Manufacturing, MEE2, Cebu, Philippines
+                      Location: SAWO Inc.
+                      <br />
+                      MEZ2 Estate, Basak, Lapu-Lapu City 6015, Cebu, Philippines
                     </span>
                   </div>
                 </div>
@@ -355,24 +395,37 @@ const Careers = () => {
                     <img src={img1} alt="Manufacturing & Production" />
                     <div className="category-overlay">
                       <h3>Manufacturing & Production</h3>
+                      <p className="category-description">
+                        Woodworking, Metal Fabrication, Quality Control
+                      </p>
                     </div>
                   </div>
                   <div className="category-card">
                     <img src={img2} alt="Engineering & Design" />
                     <div className="category-overlay">
                       <h3>Engineering & Design</h3>
+                      <p className="category-description">
+                        Product Development, R&D, Sauna Technology
+                      </p>
                     </div>
                   </div>
                   <div className="category-card">
                     <img src={img3} alt="Sales & Marketing" />
                     <div className="category-overlay">
                       <h3>Sales & Marketing</h3>
+                      <p className="category-description">
+                        Local & International Sales, Digital Marketing,
+                        Customer Relations
+                      </p>
                     </div>
                   </div>
                   <div className="category-card">
                     <img src={img4} alt="Operations & Support" />
                     <div className="category-overlay">
                       <h3>Operations & Support</h3>
+                      <p className="category-description">
+                        Logistics, Finance, HR, DA, IT, Admin
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -477,8 +530,17 @@ const Careers = () => {
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.6);
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: rgba(0, 0, 0, 0.4);
             padding: 12px;
+            transition: background 0.3s ease;
+          }
+          .category-card:hover .category-overlay {
+            background: rgba(0, 0, 0, 0.72);
+            justify-content: center;
           }
           .category-overlay h3 {
             font-family: "Montserrat", sans-serif;
@@ -487,6 +549,22 @@ const Careers = () => {
             color: white;
             margin: 0;
             text-align: center;
+          }
+          .category-description {
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 8px 0 0;
+            text-align: center;
+            line-height: 1.4;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+          }
+          .category-card:hover .category-description {
+            max-height: 100px;
+            opacity: 1;
           }
           @media (max-width: 768px) {
             .careers-main-section .grid {
