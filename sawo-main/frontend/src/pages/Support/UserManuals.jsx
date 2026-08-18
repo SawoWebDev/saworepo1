@@ -25,6 +25,20 @@ function getFileUrl(file) {
   return src;
 }
 
+function hasManuals(product) {
+  return (product.files || []).some(f => getFileUrl(f));
+}
+
+// Tabs map to existing product category strings — a tab is hidden entirely
+// if no publicly-visible product with a manual falls into it.
+const CATEGORY_TABS = [
+  { id: "heaters", label: "Sauna Heaters", categories: ["Towers", "Wall-Mounted", "Floor", "Combi", "Dragonfire", "Stones"] },
+  { id: "sauna-controls", label: "Sauna Controls", categories: ["Sauna Controls"] },
+  { id: "steam-generators", label: "Steam Generators", categories: ["Steam Generators"] },
+  { id: "steam-controls", label: "Steam Generator Controls", categories: ["Steam Controls"] },
+  { id: "heater-accessories", label: "Heater Accessories", categories: ["Heater Accessories"] },
+];
+
 // ─── PDF Modal ────────────────────────────────────────────────────────────────
 function PdfModal({ product, onClose }) {
   const files = (product.files || []).filter(f => getFileUrl(f));
@@ -226,8 +240,6 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product, onOpenManuals }) {
-  const fileCount = (product.files || []).filter(f => getFileUrl(f)).length;
-
   return (
     <div style={{
       background: "#fff", borderRadius: 14, border: "1.5px solid rgba(175,133,100,0.18)",
@@ -280,7 +292,7 @@ function ProductCard({ product, onOpenManuals }) {
           {product.name}
         </p>
 
-        {/* User Manuals button */}
+        {/* View Manual button */}
         <div>
           <button
             onClick={() => onOpenManuals(product)}
@@ -288,11 +300,9 @@ function ProductCard({ product, onOpenManuals }) {
               width: "100%",
               display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
               padding: "9px 16px",
-              background: fileCount > 0
-                ? "linear-gradient(135deg,#8b5e3c,#b08560)"
-                : "transparent",
-              color: fileCount > 0 ? "#fff" : "#af8564",
-              border: fileCount > 0 ? "none" : "1.5px solid rgba(175,133,100,0.3)",
+              background: "transparent",
+              color: "#af8564",
+              border: "1.5px solid #af8564",
               borderRadius: 8, cursor: "pointer",
               fontFamily: "'Montserrat',sans-serif",
               fontSize: "0.72rem", fontWeight: 700,
@@ -300,28 +310,16 @@ function ProductCard({ product, onOpenManuals }) {
               transition: "all 0.22s",
             }}
             onMouseEnter={e => {
-              if (fileCount > 0) {
-                e.currentTarget.style.opacity = "0.88";
-                e.currentTarget.style.transform = "translateY(-1px)";
-                e.currentTarget.style.boxShadow = "0 6px 18px rgba(139,94,60,0.28)";
-              } else {
-                e.currentTarget.style.background = "rgba(175,133,100,0.06)";
-                e.currentTarget.style.borderColor = "#af8564";
-              }
+              e.currentTarget.style.background = "#af8564";
+              e.currentTarget.style.color = "#fff";
             }}
             onMouseLeave={e => {
-              if (fileCount > 0) {
-                e.currentTarget.style.opacity = "1";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-              } else {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(175,133,100,0.3)";
-              }
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "#af8564";
             }}
           >
-            <i className="fa-solid fa-book-open" style={{ fontSize: "0.7rem" }} />
-            User Manuals
+            <i className="fa-regular fa-file-lines" style={{ fontSize: "0.7rem" }} />
+            View Manual
           </button>
         </div>
       </div>
@@ -334,10 +332,12 @@ export default function UserManuals() {
   const { products: localProds, loading } = useLocalProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [search, setSearch] = useState("");
+  const [activeTab, setActiveTab] = useState(null);
   const heroLoaded = useHeroLoaded(USER_MANUALS_HERO_IMG);
 
+  // Only products that are publicly visible AND actually have a manual attached.
   const allProducts = useMemo(() => {
-    const visible = localProds.filter(p => isPubliclyVisible(p));
+    const visible = localProds.filter(p => isPubliclyVisible(p) && hasManuals(p));
     return [...visible].sort((a, b) => {
       const sortA = a.sort_order ?? 999;
       const sortB = b.sort_order ?? 999;
@@ -346,15 +346,33 @@ export default function UserManuals() {
     });
   }, [localProds]);
 
+  const tabs = useMemo(() => {
+    return CATEGORY_TABS
+      .map(tab => ({
+        ...tab,
+        count: allProducts.filter(p => (p.categories || []).some(c => tab.categories.includes(c))).length,
+      }))
+      .filter(tab => tab.count > 0);
+  }, [allProducts]);
+
+  useEffect(() => {
+    if (!activeTab && tabs.length > 0) setActiveTab(tabs[0].id);
+  }, [tabs, activeTab]);
+
   const displayed = useMemo(() => {
+    const tab = tabs.find(t => t.id === activeTab);
+    let list = tab
+      ? allProducts.filter(p => (p.categories || []).some(c => tab.categories.includes(c)))
+      : allProducts;
+
     const q = search.trim().toLowerCase();
-    if (!q) return allProducts;
-    return allProducts.filter(p =>
+    if (!q) return list;
+    return list.filter(p =>
       p.name?.toLowerCase().includes(q) ||
       p.short_description?.toLowerCase().includes(q) ||
       (p.categories || []).some(c => c.toLowerCase().includes(q))
     );
-  }, [allProducts, search]);
+  }, [allProducts, tabs, activeTab, search]);
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
@@ -435,6 +453,60 @@ export default function UserManuals() {
           .um-outer { padding: 40px 20px 60px !important; }
           .um-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; gap: 16px !important; }
         }
+
+        .um-section-title {
+          text-align: center;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          font-size: 1.5rem;
+          letter-spacing: 0.06em;
+          color: #af8564;
+          margin: 0 0 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+        }
+        .um-section-title::before,
+        .um-section-title::after {
+          content: '';
+          height: 1px;
+          width: 90px;
+          background: #e0cfc0;
+        }
+        @media (max-width: 600px) {
+          .um-section-title::before,
+          .um-section-title::after { width: 30px; }
+          .um-section-title { font-size: 1.15rem; gap: 12px; }
+        }
+
+        .um-tabs {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 32px;
+        }
+        .um-tab-btn {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          padding: 12px 22px;
+          border-radius: 8px;
+          border: 1.5px solid #af8564;
+          background: transparent;
+          color: #af8564;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .um-tab-btn:hover {
+          background: rgba(175,133,100,0.08);
+        }
+        .um-tab-btn.active {
+          background: #af8564;
+          color: #fff;
+        }
       `}</style>
 
       {selectedProduct && (
@@ -462,7 +534,7 @@ export default function UserManuals() {
         <div className="um-hero-overlay" />
         <div className="um-hero-content">
           <h1 className="um-hero-title">USER MANUALS</h1>
-          <p className="um-hero-subtitle">Installation guides, manuals, and technical documentation for every SAWO product</p>
+          <p className="um-hero-subtitle">Your complete guide to installation, operation, and maintenance</p>
         </div>
       <HeroWave />
       </section>
@@ -472,6 +544,26 @@ export default function UserManuals() {
         className="um-outer"
         style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px 80px" }}
       >
+        {/* Section title + category tabs */}
+        {!loading && allProducts.length > 0 && (
+          <>
+            <h2 className="um-section-title">SAWO PRODUCT RANGE</h2>
+            {tabs.length > 1 && (
+              <div className="um-tabs">
+                {tabs.map(tab => (
+                  <button
+                    key={tab.id}
+                    className={`um-tab-btn ${activeTab === tab.id ? "active" : ""}`}
+                    onClick={() => setActiveTab(tab.id)}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
         {/* Search bar */}
         {!loading && allProducts.length > 0 && (
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 36 }}>
