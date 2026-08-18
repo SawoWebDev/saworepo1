@@ -32,14 +32,38 @@ function extractKwFromTags(tags = []) {
   return results;
 }
 
-function closestKw(targetKw, allProducts) {
-  const allKws = [
-    ...new Set(allProducts.flatMap(p => extractKwFromTags(p.tags || []))),
-  ].sort((a, b) => a - b);
-  if (!allKws.length) return targetKw;
-  return allKws.reduce((prev, curr) =>
-    Math.abs(curr - targetKw) < Math.abs(prev - targetKw) ? curr : prev
-  );
+// Meters <-> feet
+const M_PER_FT = 1 / 3.28084;
+
+// Standard SAWO heater sizing table: kW rating -> min/max room volume (m³) it heats.
+// Sourced from SAWO heater spec sheets (matches the WordPress sauna calculator shortcode).
+const SAWO_RANGE_TABLE = [
+  { kw: 2.3, min: 1,  max: 3  },
+  { kw: 3.0, min: 2,  max: 4  },
+  { kw: 3.6, min: 3,  max: 5  },
+  { kw: 4.5, min: 3,  max: 6  },
+  { kw: 6.0, min: 5,  max: 9  },
+  { kw: 8.0, min: 7,  max: 13 },
+  { kw: 9.0, min: 8,  max: 14 },
+  { kw: 12.0, min: 11, max: 18 },
+];
+
+// Picks the smallest heater whose range covers the effective volume; if the
+// volume exceeds every range, returns the largest heater flagged as oversized.
+function sawoHcClosestKw(effectiveVolume) {
+  const byMax = SAWO_RANGE_TABLE.slice().sort((a, b) => a.max - b.max);
+  const fits = byMax.filter(e => effectiveVolume >= e.min && effectiveVolume <= e.max);
+  if (fits.length) {
+    const best = fits.reduce((a, b) => (a.max < b.max ? a : b));
+    return { match: best.kw, oversized: false };
+  }
+
+  const byKw = SAWO_RANGE_TABLE.slice().sort((a, b) => a.kw - b.kw);
+  const nextUp = byKw.find(e => e.min >= effectiveVolume);
+  if (nextUp) return { match: nextUp.kw, oversized: false };
+
+  const largest = byKw[byKw.length - 1];
+  return { match: largest.kw, oversized: true };
 }
 
 // Limit input: max 2 digits before decimal point
@@ -51,10 +75,12 @@ function limitTwoDigits(val) {
 }
 
 // ─── Input Field ──────────────────────────────────────────────────────────────
-function DimField({ label, value, onChange, placeholder, hint }) {
+function DimField({ label, subLabel, value, onChange, placeholder, hint, unit }) {
   return (
     <div className="sawo-hc-field">
-      <span className="sawo-hc-label">{label}</span>
+      <span className="sawo-hc-label">
+        {label} {subLabel && <span className="sawo-hc-label-note">{subLabel}</span>}
+      </span>
       <div className="sawo-hc-input-wrap">
         <input
           className="sawo-hc-inp"
@@ -66,9 +92,9 @@ function DimField({ label, value, onChange, placeholder, hint }) {
           value={value}
           onChange={e => onChange(limitTwoDigits(e.target.value))}
         />
-        <span className="sawo-hc-unit">m</span>
+        <span className="sawo-hc-unit">{unit}</span>
       </div>
-      <span className="sawo-hc-hint">{hint}</span>
+      {hint && <span className="sawo-hc-hint">{hint}</span>}
     </div>
   );
 }
@@ -113,11 +139,13 @@ function ProductCard({ product, matchKw }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function SaunaCalculator() {
   const { products: localProds, loading: loadingProducts } = useLocalProducts();
+  const [unit, setUnit] = useState("m"); // "m" | "ft"
   const [width,  setWidth]  = useState("");
   const [height, setHeight] = useState("");
   const [depth,  setDepth]  = useState("");
-  const [volume,  setVolume]  = useState(null);
-  const [matchKw, setMatchKw] = useState(null);
+  const [uninsulated, setUninsulated] = useState("");
+
+  const imperial = unit === "ft";
 
   // Track left column height so image always matches it
   const leftColRef   = useRef(null);
@@ -143,16 +171,60 @@ export default function SaunaCalculator() {
     });
   }, [localProds]);
 
-  // ── Auto-calculate whenever inputs change ──────────────────────────────────
-  useEffect(() => {
+  // ── Unit toggle: convert entered values in place ──────────────────────────
+  function handleUnitToggle(next) {
+    if (next === unit) return;
+    const toImperial = next === "ft";
+
+    const convertLen = v => {
+      if (!v) return v;
+      const n = parseFloat(v);
+      if (Number.isNaN(n)) return v;
+      return String(hcRound(toImperial ? n / M_PER_FT : n * M_PER_FT));
+    };
+    const convertArea = v => {
+      if (!v) return v;
+      const n = parseFloat(v);
+      if (Number.isNaN(n)) return v;
+      const f = 1 / M_PER_FT; // 3.28084
+      return String(hcRound(toImperial ? n * f * f : n / (f * f)));
+    };
+
+    setWidth(w => convertLen(w));
+    setHeight(h => convertLen(h));
+    setDepth(d => convertLen(d));
+    setUninsulated(u => convertArea(u));
+    setUnit(next);
+  }
+
+  function handleClear() {
+    setWidth("");
+    setHeight("");
+    setDepth("");
+    setUninsulated("");
+  }
+
+  // ── Derived calculation ─────────────────────────────────────────────────
+  const { volume, effectiveVolume, matchKw, oversized, showResult } = useMemo(() => {
     const w = parseFloat(width)  || 0;
     const h = parseFloat(height) || 0;
     const d = parseFloat(depth)  || 0;
-    if (!w || !h || !d) { setVolume(null); setMatchKw(null); return; }
-    const vol = hcRound(w * h * d);
-    setVolume(vol);
-    if (allProducts.length > 0) setMatchKw(closestKw(vol, allProducts));
-  }, [width, height, depth, allProducts]);
+    const u = parseFloat(uninsulated) || 0;
+
+    if (!w || !h || !d) {
+      return { volume: null, effectiveVolume: null, matchKw: null, oversized: false, showResult: false };
+    }
+
+    const factor = imperial ? M_PER_FT : 1;
+    const vol = hcRound(w * factor * h * factor * d * factor);
+    const uninsulatedM2 = hcRound(u * factor * factor);
+    // Every m² of uninsulated surface (glass, tile, stone, concrete) effectively
+    // adds 1.2 m³ to the volume the heater needs to warm.
+    const effVol = hcRound(vol + uninsulatedM2 * 1.2);
+    const { match, oversized: over } = sawoHcClosestKw(effVol);
+
+    return { volume: vol, effectiveVolume: effVol, matchKw: match, oversized: over, showResult: true };
+  }, [width, height, depth, uninsulated, imperial]);
 
   const matched = useMemo(() => {
     if (matchKw === null || allProducts.length === 0) return [];
@@ -161,7 +233,18 @@ export default function SaunaCalculator() {
     );
   }, [allProducts, matchKw]);
 
-  const showResult = volume !== null && matchKw !== null;
+  const lenUnit = imperial ? "ft" : "m";
+  const areaUnit = imperial ? "ft²" : "m²";
+  const placeholders = imperial ? ["7.9", "6.9", "5.9"] : ["2.4", "2.1", "1.8"];
+  const dimHints = imperial
+    ? { w: "typical sauna: 6–8 ft", h: "standard ceiling: 7 ft", d: "typical sauna: 6–8 ft" }
+    : { w: "typical sauna: 1.8–2.4 m", h: "standard ceiling: 2.1 m", d: "typical sauna: 1.8–2.4 m" };
+
+  const volSubParts = [];
+  if (showResult) {
+    if (imperial) volSubParts.push(`(${hcRound(volume * 35.3147)} ft³)`);
+    if (parseFloat(uninsulated) > 0) volSubParts.push(`Effective: ${effectiveVolume} m³`);
+  }
 
   return (
     <div id="sawo-hc-wrap">
@@ -223,22 +306,73 @@ export default function SaunaCalculator() {
         #sawo-hc-wrap .sawo-hc-card:hover {
           box-shadow: 0 8px 32px rgba(175,133,100,0.12);
         }
+        #sawo-hc-wrap .sawo-hc-card-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 28px;
+        }
         #sawo-hc-wrap .sawo-hc-card-title {
           font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.28em;
           text-transform: uppercase;
           color: #af8564;
-          margin-bottom: 28px;
           display: flex;
           align-items: center;
           gap: 10px;
         }
-        #sawo-hc-wrap .sawo-hc-card-title::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: rgba(175,133,100,0.16);
+        #sawo-hc-wrap .sawo-hc-card-controls {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-shrink: 0;
+        }
+        #sawo-hc-wrap .sawo-hc-unit-toggle {
+          display: flex;
+          align-items: center;
+          background: rgba(175,133,100,0.08);
+          border: 1.5px solid rgba(175,133,100,0.25);
+          border-radius: 6px;
+          overflow: hidden;
+        }
+        #sawo-hc-wrap .sawo-hc-unit-btn {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #af8564;
+          background: transparent;
+          border: none;
+          padding: 5px 12px;
+          cursor: pointer;
+          line-height: 1;
+          font-family: 'Montserrat', sans-serif;
+          transition: background 0.15s, color 0.15s;
+        }
+        #sawo-hc-wrap .sawo-hc-unit-btn.active {
+          background: #af8564;
+          color: #fff;
+        }
+        #sawo-hc-wrap .sawo-hc-unit-btn:hover:not(.active) {
+          background: rgba(175,133,100,0.15);
+        }
+        #sawo-hc-wrap .sawo-hc-clear-btn {
+          background: rgba(175,133,100,0.08);
+          border: 1.5px solid rgba(175,133,100,0.25);
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #af8564;
+          cursor: pointer;
+          padding: 5px 12px;
+          line-height: 1;
+          font-family: 'Montserrat', sans-serif;
+          transition: background 0.15s, color 0.15s;
+        }
+        #sawo-hc-wrap .sawo-hc-clear-btn:hover {
+          background: rgba(175,133,100,0.18);
         }
 
         /* ── Dim grid ── */
@@ -337,6 +471,14 @@ export default function SaunaCalculator() {
           color: rgba(255,255,255,0.58);
           margin-left: 6px;
         }
+        #sawo-hc-wrap .sawo-hc-vol-sub {
+          font-size: 12px;
+          font-weight: 500;
+          color: rgba(255,255,255,0.62);
+          margin-top: 6px;
+          min-height: 16px;
+          line-height: 1;
+        }
 
         /* ── Input fields ── */
         #sawo-hc-wrap .sawo-hc-field {
@@ -365,6 +507,12 @@ export default function SaunaCalculator() {
           text-transform: uppercase;
           color: rgba(255,255,255,0.72);
           margin-bottom: 8px;
+        }
+        #sawo-hc-wrap .sawo-hc-label-note {
+          font-weight: 500;
+          letter-spacing: normal;
+          text-transform: none;
+          color: rgba(255,255,255,0.5);
         }
         #sawo-hc-wrap .sawo-hc-input-wrap {
           position: relative;
@@ -450,6 +598,16 @@ export default function SaunaCalculator() {
           line-height: 1.6;
         }
         #sawo-hc-wrap .sawo-hc-reco-sub strong { font-weight: 700; color: #af8564; }
+        #sawo-hc-wrap .sawo-hc-reco-warn {
+          font-size: 13px;
+          font-weight: 600;
+          color: #b45309;
+          background: rgba(180,83,9,0.08);
+          border: 1px solid rgba(180,83,9,0.2);
+          border-radius: 8px;
+          padding: 10px 14px;
+          margin-bottom: 18px;
+        }
 
         /* ── Product grid ── */
         #sawo-hc-wrap .sawo-hc-grid {
@@ -596,16 +754,50 @@ export default function SaunaCalculator() {
 
       {/* ── Input card ────────────────────────────────────────────────────── */}
       <div className="sawo-hc-card">
-        <div className="sawo-hc-card-title">
-          Room Dimensions
+        <div className="sawo-hc-card-header">
+          <div className="sawo-hc-card-title">Room Dimensions</div>
+          <div className="sawo-hc-card-controls">
+            {(width || height || depth || uninsulated) && (
+              <button type="button" className="sawo-hc-clear-btn" onClick={handleClear}>Clear</button>
+            )}
+            <div className="sawo-hc-unit-toggle">
+              <button
+                type="button"
+                className={`sawo-hc-unit-btn${!imperial ? " active" : ""}`}
+                onClick={() => handleUnitToggle("m")}
+              >m</button>
+              <button
+                type="button"
+                className={`sawo-hc-unit-btn${imperial ? " active" : ""}`}
+                onClick={() => handleUnitToggle("ft")}
+              >ft</button>
+            </div>
+          </div>
         </div>
 
         <div className="sawo-hc-dim-row">
           {/* Left: inputs — ref tracked for height sync */}
           <div className="sawo-hc-dim-inputs" ref={leftColRef}>
-            <DimField label="Width"  value={width}  onChange={setWidth}  placeholder="2.4" hint="Wall to wall" />
-            <DimField label="Height" value={height} onChange={setHeight} placeholder="2.1" hint="Floor to ceiling" />
-            <DimField label="Depth"  value={depth}  onChange={setDepth}  placeholder="1.8" hint="Front to back" />
+            <DimField
+              label="Width" subLabel="(side to side)"
+              value={width} onChange={setWidth}
+              placeholder={placeholders[0]} hint={dimHints.w} unit={lenUnit}
+            />
+            <DimField
+              label="Height" subLabel="(floor to ceiling)"
+              value={height} onChange={setHeight}
+              placeholder={placeholders[1]} hint={dimHints.h} unit={lenUnit}
+            />
+            <DimField
+              label="Depth" subLabel="(door to back wall)"
+              value={depth} onChange={setDepth}
+              placeholder={placeholders[2]} hint={dimHints.d} unit={lenUnit}
+            />
+            <DimField
+              label="Uninsulated Surfaces" subLabel="(glass, tile, stone or concrete walls)"
+              value={uninsulated} onChange={setUninsulated}
+              placeholder="0" hint="Leave 0 if fully wood-lined" unit={areaUnit}
+            />
           </div>
 
           {/* Right: image — height synced to left column via ResizeObserver */}
@@ -631,14 +823,16 @@ export default function SaunaCalculator() {
                 {volume !== null ? volume : "-"}
                 <small>m³</small>
               </div>
+              <div className="sawo-hc-vol-sub">{volSubParts.join(" · ")}</div>
             </div>
             <div className="sawo-hc-result-sep" />
             <div className="sawo-hc-result-half">
-              <div className="sawo-hc-result-card-label">Recommended Power</div>
+              <div className="sawo-hc-result-card-label">Recommended Heater</div>
               <div className="sawo-hc-result-card-val">
                 {matchKw !== null ? matchKw : "-"}
                 <small>kW</small>
               </div>
+              <div className="sawo-hc-vol-sub">{oversized ? "Exceeds standard range, contact us for advice" : ""}</div>
             </div>
           </div>
         </div>
