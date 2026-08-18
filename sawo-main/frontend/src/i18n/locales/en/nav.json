@@ -7,6 +7,8 @@
   "search": "Search",
   "openMenu": "Open menu",
   "closeMenu": "Close menu",
+  "collapse": "Collapse",
+  "expand": "Expand",
   "searchBox": {
     "placeholder": "Search...",
     "searching": "Searching...",
