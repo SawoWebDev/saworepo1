@@ -1,0 +1,58 @@
+name: Uptime Check
+
+on:
+  schedule:
+    # Every 5 minutes. GitHub Actions cron can occasionally slip a few
+    # minutes under load — this is a "close to every 5 minutes" cadence,
+    # not a hard guarantee, which is fine for uptime monitoring.
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the live site and record the result
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          set -uo pipefail
+
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_SERVICE_ROLE_KEY:-}" ]; then
+            echo "[Uptime Check] FAILED: missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY secret"
+            exit 1
+          fi
+
+          # www.sawo.com is still the old WordPress site (the React app hasn't
+          # cut over yet) — this monitors the real target, the actual site
+          # this repo builds and deploys.
+          TARGET_URL="https://saworepo1.pages.dev/"
+
+          START_MS=$(date +%s%3N)
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "$TARGET_URL" || echo "000")
+          END_MS=$(date +%s%3N)
+          RESPONSE_MS=$((END_MS - START_MS))
+
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 400 ]; then
+            STATUS="up"
+          else
+            STATUS="down"
+          fi
+
+          echo "[Uptime Check] $TARGET_URL -> HTTP $HTTP_CODE ($STATUS) in ${RESPONSE_MS}ms"
+
+          curl -s -o /dev/null -X POST "${SUPABASE_URL}/rest/v1/uptime_checks" \
+            -H "apikey: ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=minimal" \
+            -d "{\"status\":\"${STATUS}\",\"http_status\":${HTTP_CODE},\"response_time_ms\":${RESPONSE_MS}}"
+
+          # Fail the workflow run itself on a down check — not required for
+          # the dashboard (which reads the logged row either way), but it
+          # means a down check also shows as a red X in the Actions tab,
+          # which is a second, independent place to notice an outage.
+          if [ "$STATUS" = "down" ]; then
+            exit 1
+          fi

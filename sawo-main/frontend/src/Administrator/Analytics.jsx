@@ -5,6 +5,7 @@ import { getCache, setCache } from "./adminCache";
 import { computeStats } from "./analytics/computeStats";
 import { DATE_RANGE_OPTIONS, resolveRange } from "./analytics/dateRange";
 import WorldMap from "./analytics/WorldMap";
+import UptimeStatus from "./analytics/UptimeStatus";
 import {
   CARD_CONTENT_HEIGHT,
   MetricCard,
@@ -298,6 +299,11 @@ const Analytics = () => {
           subtitle="Single-page sessions"
         />
       </div>
+
+      {/* Site Uptime — independent of the date-range picker above (always
+          shows the last 90 days, like Claude Status), and reads from tables
+          a GitHub Actions ping + Supabase cron job keep filled on their own. */}
+      <UptimeStatus />
 
       {/* Daily Traffic Chart */}
       <div id="analytics-traffic-chart" className="card card-body card-lift mb-8">
