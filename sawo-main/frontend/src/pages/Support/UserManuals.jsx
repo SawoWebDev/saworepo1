@@ -462,7 +462,7 @@ export default function UserManuals() {
         <div className="um-hero-overlay" />
         <div className="um-hero-content">
           <h1 className="um-hero-title">USER MANUALS</h1>
-          <p className="um-hero-subtitle">Installation guides, manuals, and technical documentation for every SAWO product</p>
+          <p className="um-hero-subtitle">Your complete guide to installation, operation, and maintenance</p>
         </div>
       <HeroWave />
       </section>
