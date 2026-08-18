@@ -300,11 +300,6 @@ const Analytics = () => {
         />
       </div>
 
-      {/* Site Uptime — independent of the date-range picker above (always
-          shows the last 90 days, like Claude Status), and reads from tables
-          a GitHub Actions ping + Supabase cron job keep filled on their own. */}
-      <UptimeStatus />
-
       {/* Daily Traffic Chart */}
       <div id="analytics-traffic-chart" className="card card-body card-lift mb-8">
         <h3 className="text-lg font-bold text-[var(--text)] mb-4 flex items-center gap-2">
@@ -400,6 +395,11 @@ const Analytics = () => {
           onShowAll={setExpandedList}
         />
       </div>
+
+      {/* Site Uptime — independent of the date-range picker above (always
+          shows the last 90 days, like Claude Status), and reads from tables
+          a GitHub Actions ping + Supabase cron job keep filled on their own. */}
+      <UptimeStatus />
 
       {/* Show-all modal — card lists stay capped at TOP_LIST_COLLAPSED_COUNT
           rows so no card stretches its grid partner; the full list opens here
