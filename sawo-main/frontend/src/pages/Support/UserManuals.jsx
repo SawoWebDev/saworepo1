@@ -438,7 +438,7 @@ export default function UserManuals() {
     const keys = order.length
       ? order.filter(c => groups.has(c))
       : [...groups.keys()].sort();
-    return keys.map(cat => ({ category: cat, products: groups.get(cat) }));
+    return keys.map(cat => ({ category: cat, products: [...groups.get(cat)].reverse() }));
   }, [displayed, tabs, activeTab]);
 
   return (
