@@ -511,11 +511,11 @@ const Careers = () => {
           }
           .category-card {
             position: relative;
+            aspect-ratio: 1 / 1;
             border-radius: 8px;
             overflow: hidden;
-            height: 140px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
           }
           .category-card:hover {
             transform: scale(1.03);
@@ -536,11 +536,10 @@ const Careers = () => {
             justify-content: flex-end;
             background: rgba(0, 0, 0, 0.4);
             padding: 12px;
-            transition: background 0.3s ease;
+            transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1);
           }
           .category-card:hover .category-overlay {
             background: rgba(0, 0, 0, 0.72);
-            justify-content: center;
           }
           .category-overlay h3 {
             font-family: "Montserrat", sans-serif;
@@ -554,17 +553,23 @@ const Careers = () => {
             font-family: "Montserrat", sans-serif;
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.9);
-            margin: 8px 0 0;
+            margin: 0;
             text-align: center;
             line-height: 1.4;
             max-height: 0;
             opacity: 0;
+            transform: translateY(6px);
             overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.35s ease-out 0.05s,
+              transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              margin-top 0.4s cubic-bezier(0.22, 1, 0.36, 1);
           }
           .category-card:hover .category-description {
             max-height: 100px;
+            margin-top: 8px;
             opacity: 1;
+            transform: translateY(0);
           }
           @media (max-width: 768px) {
             .careers-main-section .grid {
