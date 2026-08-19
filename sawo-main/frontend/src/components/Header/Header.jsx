@@ -78,16 +78,16 @@ const navItems = [
       { name: "Sauna Calculator", path: menuPaths.support.saunaCalculator },
     ],
   },
-  { name: "Contact Us", path: menuPaths.contact },
   {
     name: "About Us",
     path: menuPaths.about.parent,
     submenu: [
       { name: "Latest News", path: menuPaths.about.news },
       { name: "Sustainability", path: menuPaths.about.sustainability },
+      { name: "Contact Us", path: menuPaths.contact },
+      { name: "Careers", path: menuPaths.careers },
     ],
   },
-  { name: "Careers", path: menuPaths.careers },
 ];
 
 export default function Header() {
