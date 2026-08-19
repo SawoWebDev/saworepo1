@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.sawo.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/fi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/sauna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/fi/sauna</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/sauna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -127,6 +160,17 @@
   </url>
   <url>
     <loc>https://www.sawo.com/steam/generators</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/generators"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/fi/steam/generators</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/generators"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1129,6 +1173,48 @@
   <url>
     <loc>https://www.sawo.com/products/nordex-ni2</loc>
     <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/wooden-heater-guard-sawo30-wall</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/wooden-integration-collar-sawo30-wall</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/stainless-steel-integration-collar-sawo30-wall</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/cozy-tank-03l</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/cozy-tank-06l</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/sauna-stones-olivine-diabase-rounded-20kg</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/decorative-sauna-stones-white-quartz-rounded-10kg</loc>
+    <lastmod>2026-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

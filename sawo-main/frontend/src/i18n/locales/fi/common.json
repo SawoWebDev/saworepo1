@@ -4,6 +4,12 @@
   "viewCatalogue": "KATSO LUETTELO",
   "previous": "Edellinen",
   "next": "Seuraava",
+  "pageCTA": {
+    "defaultTitle": "Tarvitsetko apua valinnassa?",
+    "defaultDescription": "Tiimimme auttaa löytämään kotiisi tai liiketilaasi sopivan SAWO-ratkaisun.",
+    "contactUs": "Ota yhteyttä",
+    "viewManuals": "Käyttöohjeet"
+  },
   "wellnessBenefits": {
     "stressRelief": {
       "label": "Stressin lievitys",
