@@ -38,7 +38,7 @@
     "asia": "VERTRIEB & LAGER FÜR ASIEN",
     "europe": "VERTRIEB & LAGER FÜR EUROPA"
   },
-  "copyright": "© {year} Alle Rechte vorbehalten. · SAWO",
+  "copyright": "© {{year}} Alle Rechte vorbehalten. · SAWO",
   "social": {
     "facebook": "SAWO auf Facebook",
     "instagram": "SAWO auf Instagram",

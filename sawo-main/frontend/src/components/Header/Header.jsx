@@ -4,7 +4,7 @@ import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 import SearchBar from "./SearchBar";
 import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 /**
  * The header's nav structure and hover style used to be two CMS settings
@@ -95,20 +95,25 @@ const navItems = [
   { name: "Careers", nk: "items.careers", path: menuPaths.careers },
 ];
 
-// Recursively swaps each item's English `name` for t(item.nk), keeping every
-// other field (path, nested submenu) untouched.
-function translateNavItems(items, t) {
+// Recursively swaps each item's English `name` for t(item.nk) and its plain
+// `path` for its /fi or /de equivalent, keeping nested submenu untouched
+// otherwise. Path localization matters because every route in navItems is
+// built from menuPaths (English), so without it a click on ANY nav item
+// would silently drop a /fi or /de visitor back to English.
+function translateNavItems(items, t, localize) {
   return items.map((item) => ({
     ...item,
     name: item.nk ? t(item.nk) : item.name,
-    submenu: item.submenu ? translateNavItems(item.submenu, t) : item.submenu,
+    path: item.path ? localize(item.path) : item.path,
+    submenu: item.submenu ? translateNavItems(item.submenu, t, localize) : item.submenu,
   }));
 }
 
 export default function Header() {
   const location = useLocation();
   const t = useLocaleT("nav");
-  const translatedNavItems = useMemo(() => translateNavItems(navItems, t), [t]);
+  const localize = useLocalizedPath();
+  const translatedNavItems = useMemo(() => translateNavItems(navItems, t, localize), [t, localize]);
 
   const [hidden, setHidden] = useState(false);
   // Transparent (with a dark-to-clear scrim) at the very top of the page,
@@ -263,7 +268,7 @@ export default function Header() {
       >
         <div className="w-full flex items-center justify-between py-3 px-6 md:px-8">
           {/* Logo with left padding */}
-          <Link to="/" className="flex-shrink-0 pl-2">
+          <Link to={localize("/")} className="flex-shrink-0 pl-2">
             <img
               src={sLogo}
               alt="SAWO-logo"

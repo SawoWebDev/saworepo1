@@ -38,7 +38,7 @@
     "asia": "SALES & WAREHOUSE FOR ASIA",
     "europe": "SALES & WAREHOUSE FOR EUROPE"
   },
-  "copyright": "© {year} All rights reserved. · SAWO",
+  "copyright": "© {{year}} All rights reserved. · SAWO",
   "social": {
     "facebook": "SAWO on Facebook",
     "instagram": "SAWO on Instagram",
