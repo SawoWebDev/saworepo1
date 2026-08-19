@@ -61,6 +61,8 @@ import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
+import { variantRank } from "../../../utils/wallMountedGroups";
+import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -100,16 +102,20 @@ const GROUP_KEYWORDS = {
 
 // ── Filter Combi products dynamically ────────────────────────────────
 function filterCombiProducts(allProducts) {
-  return allProducts.filter(
-    (p) =>
+  return allProducts.filter((p) => {
+    // Admission gate first — category alone decides whether this is a
+    // heater at all, before the looser name-keyword check below runs.
+    if (!isHeaterProduct(p)) return false;
+    return (
       p.categories?.includes("Combi") ||
       p.name?.toLowerCase().includes("combi")
-  );
+    );
+  });
 }
 
 // ── Group products dynamically ───────────────────────────────────────
 function groupProducts(products) {
-  return products.reduce((groups, product) => {
+  const groups = products.reduce((groups, product) => {
     let assigned = false;
     for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
       for (const kw of keywords) {
@@ -130,6 +136,13 @@ function groupProducts(products) {
     }
     return groups;
   }, {});
+  // Within each group, plain/standard variant before its Black or
+  // Fiber-Coated counterpart (e.g. "Nordex S Combi NS" before "Nordex S
+  // Combi Black NS").
+  for (const group of Object.keys(groups)) {
+    groups[group].sort((a, b) => variantRank(a.name) - variantRank(b.name));
+  }
+  return groups;
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────────

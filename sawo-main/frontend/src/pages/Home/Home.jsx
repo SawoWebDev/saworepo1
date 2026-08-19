@@ -19,12 +19,12 @@ const Home = () => {
       <Hero />
 
       {/* Section 1 */}
-      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section1 />
       </div>
 
       {/* Section 2 */}
-      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section2 />
 
         {/* Explore More Button */}
@@ -53,15 +53,15 @@ const Home = () => {
       </div>
 
       {/* Section 3 */}
-      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section3 />
       </div>
       {/* Section 4 */}
-      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section4 />
       </div>
       {/* Section 5 */}
-      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section5 />
       </div>
     </div>

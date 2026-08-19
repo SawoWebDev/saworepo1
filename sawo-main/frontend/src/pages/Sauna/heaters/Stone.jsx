@@ -59,6 +59,7 @@ import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
+import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -82,6 +83,11 @@ const GROUP_KEYWORDS = {
 // ── Filter Stone products dynamically ────────────────────────────────
 function filterStoneProducts(allProducts) {
   return allProducts.filter((p) => {
+    // Admission gate first — category alone decides whether this is a
+    // heater at all. Without this, accessories like "Wine Cooler Stone" or
+    // "Aroma Cup" (whose category/name happen to contain "Stone") would
+    // leak onto this heaters page via the name-keyword check below.
+    if (!isHeaterProduct(p)) return false;
     const name = (p.name || "").toUpperCase();
     const cats = p.categories || [];
     return (
