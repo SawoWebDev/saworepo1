@@ -58,6 +58,7 @@ import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
+import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -80,6 +81,9 @@ const FIXED_ORDER = ["SAWO30", "Tower", "Aries", "Cubos", "Heaterking", "Phoenix
 // group a real Tower-category heater lands in.
 function filterTowerProducts(allProducts) {
   return allProducts.filter((p) => {
+    // Admission gate first — category alone decides whether this is a
+    // heater at all, before the name-keyword sub-grouping check below runs.
+    if (!isHeaterProduct(p)) return false;
     if (!p.categories?.includes("Towers")) return false;
     const name = (p.name || "").toUpperCase();
     return (

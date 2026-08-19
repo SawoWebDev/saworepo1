@@ -57,6 +57,7 @@ import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
+import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -69,12 +70,13 @@ function getImageUrl(product, field) {
 }
 
 // ── Fixed group order ───────────────────────────────────────────────
-const FIXED_ORDER = ["Taurus D", "HELIUS", "Krios", "Savonia", "Nordex"];
+// Krios is intentionally excluded — Floor Series no longer displays it.
+const FIXED_ORDER = ["Helius", "Taurus D", "Savonia", "Nordex"];
 
 // ── Keywords to detect group membership ────────────────────────────
 const GROUP_KEYWORDS = {
   "Taurus D": ["Taurus D", "Taurus"],
-  HELIUS: ["Helius", "HELIUS"],
+  Helius: ["Helius", "HELIUS"],
   Krios: ["Krios Floor", "Krios"],
   Savonia: ["Savonia"],
   Nordex: ["Nordex"],
@@ -82,10 +84,15 @@ const GROUP_KEYWORDS = {
 
 // ── Filter Floor products dynamically ───────────────────────────────
 function filterFloorProducts(allProducts) {
-  return allProducts.filter((p) =>
-    p.categories?.includes("Floor") ||
-    p.tags?.some(t => t.toLowerCase() === "floor")
-  );
+  return allProducts.filter((p) => {
+    // Admission gate first — category alone decides whether this is a
+    // heater at all, before the looser name/tag keyword check below runs.
+    if (!isHeaterProduct(p)) return false;
+    return (
+      p.categories?.includes("Floor") ||
+      p.tags?.some(t => t.toLowerCase() === "floor")
+    );
+  });
 }
 
 // ── Group products dynamically ──────────────────────────────────────
