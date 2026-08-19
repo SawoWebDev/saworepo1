@@ -28,12 +28,25 @@ const KEY_ENABLED = "language_switcher_enabled";
 const KEY_LANGUAGES = "enabled_languages";
 
 // Kept in sync by hand with src/i18n/translatedRoutes.js's LOCALE_PREFIXES.
+// German is still fully routed/built (its pages exist, stay in the
+// sitemap/hreflang) — see PILOT_ENABLED_LOCALES below for why it doesn't
+// show up in the public switcher right now.
 export const BUILT_LOCALES = ["en", "fi", "de"];
 
+// Finnish-first pilot (see docs/🔴 GO-LIVE/SAWO_Multilingual_Implementation_
+// Specification(1).md §74): until the Finnish rollout is validated, the
+// public switcher is HARD-CAPPED to English + Finnish, regardless of what's
+// stored in app_settings — a stray/legacy `enabled_languages` row containing
+// "de" (there was one) must not silently re-show it. This is deliberately
+// stricter than sanitizeLanguages used to be (DB value always won before);
+// once the Finnish pilot is validated, change this back to BUILT_LOCALES so
+// the admin CMS toggle (Settings.jsx) governs German again.
+const PILOT_ENABLED_LOCALES = ["en", "fi"];
+
 function sanitizeLanguages(value) {
-  if (!Array.isArray(value)) return [...BUILT_LOCALES];
-  const filtered = value.filter((loc) => BUILT_LOCALES.includes(loc));
-  return filtered.length > 0 ? filtered : [...BUILT_LOCALES];
+  if (!Array.isArray(value)) return [...PILOT_ENABLED_LOCALES];
+  const filtered = value.filter((loc) => PILOT_ENABLED_LOCALES.includes(loc));
+  return filtered.length > 0 ? filtered : [...PILOT_ENABLED_LOCALES];
 }
 
 // Reading is delegated to appSettings.js, which batches these two keys with

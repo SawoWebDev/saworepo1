@@ -38,7 +38,7 @@
     "asia": "MYYNTI JA VARASTO AASIASSA",
     "europe": "MYYNTI JA VARASTO EUROOPASSA"
   },
-  "copyright": "© {year} Kaikki oikeudet pidätetään. · SAWO",
+  "copyright": "© {{year}} Kaikki oikeudet pidätetään. · SAWO",
   "social": {
     "facebook": "SAWO Facebookissa",
     "instagram": "SAWO Instagramissa",

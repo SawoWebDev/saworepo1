@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchProducts } from "../../local-storage/cacheReader";
 import menuPaths from "../../menuPaths";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // `nk` = the nav.json key each page's search-result label is translated
 // from, so a Finnish visitor searches against (and sees) the Finnish name.
@@ -77,9 +77,10 @@ function ResultRow({ result, idx, highlightedIndex, setHighlightedIndex, selectR
 export default function SearchBar({ isNavIcon = false, isExpanded = false, isInline = false, onToggle = null, onBlur = null }) {
   const navigate = useNavigate();
   const t = useLocaleT("nav");
+  const localize = useLocalizedPath();
   const pageResultsForLocale = useMemo(
-    () => PAGE_RESULTS.map((p) => ({ ...p, name: t(p.nk) })),
-    [t]
+    () => PAGE_RESULTS.map((p) => ({ ...p, name: t(p.nk), path: localize(p.path) })),
+    [t, localize]
   );
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -175,8 +176,8 @@ export default function SearchBar({ isNavIcon = false, isExpanded = false, isInl
   // Navigate to result
   const selectResult = (result) => {
     const targetPath = result.resultType === "product"
-      ? `/products/${result.slug}`
-      : result.path || "/";
+      ? localize(`/products/${result.slug}`)
+      : result.path || localize("/");
     navigate(targetPath);
     setQuery("");
     setResults([]);

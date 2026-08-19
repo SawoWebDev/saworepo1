@@ -2,8 +2,12 @@
 import { Link } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 export default function Footer() {
+  const t = useLocaleT("footer");
+  const localize = useLocalizedPath();
+
   return (
     <footer
       className="bg-[#1a1a1a] text-white py-12"
@@ -14,48 +18,48 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-4 text-center sm:text-left">
           {/* Column 1 */}
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
-            <h3 className="font-bold text-lg mb-2">FINNISH SAUNA</h3>
+            <h3 className="font-bold text-lg mb-2">{t("headings.finnishSauna")}</h3>
             <ul className="space-y-1 text-sm">
-              <li><Link to={menuPaths.sauna.heaters.parent} className="hover:text-gray-300">Sauna Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.controls} className="hover:text-gray-300">Sauna Controls</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.parent} className="hover:text-gray-300">Sauna Accessories</Link></li>
-              <li><Link to={menuPaths.sauna.rooms} className="hover:text-gray-300">Sauna Rooms</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.parent)} className="hover:text-gray-300">{t("links.saunaHeaters")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.controls)} className="hover:text-gray-300">{t("links.saunaControls")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.parent)} className="hover:text-gray-300">{t("links.saunaAccessories")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.rooms)} className="hover:text-gray-300">{t("links.saunaRooms")}</Link></li>
             </ul>
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
-            <h3 className="font-bold text-lg mb-2">STEAM ROOM</h3>
+            <h3 className="font-bold text-lg mb-2">{t("headings.steamRoom")}</h3>
             <ul className="space-y-1 text-sm">
-              <li><Link to={menuPaths.steam.generators} className="hover:text-gray-300">Steam Generators</Link></li>
-              <li><Link to={menuPaths.steam.controls} className="hover:text-gray-300">Steam Controls</Link></li>
-              <li><Link to={menuPaths.steam.accessories} className="hover:text-gray-300">Steam Accessories</Link></li>
+              <li><Link to={localize(menuPaths.steam.generators)} className="hover:text-gray-300">{t("links.steamGenerators")}</Link></li>
+              <li><Link to={localize(menuPaths.steam.controls)} className="hover:text-gray-300">{t("links.steamControls")}</Link></li>
+              <li><Link to={localize(menuPaths.steam.accessories)} className="hover:text-gray-300">{t("links.steamAccessories")}</Link></li>
             </ul>
           </div>
 
           {/* Column 3 */}
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
-            <h3 className="font-bold text-lg mb-2">INFRARED SAUNA</h3>
+            <h3 className="font-bold text-lg mb-2">{t("headings.infraredSauna")}</h3>
             <ul className="space-y-1 text-sm">
-              <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Sauna Rooms</Link></li>
-              <li><Link to="/products/infrared-backrest-505-ir-a-d" className="hover:text-gray-300">Infrared Backrest</Link></li>
-              <li><Link to="/products/infrared-panels-ir-panel-2" className="hover:text-gray-300">Infrared Panels</Link></li>
+              <li><Link to={localize(menuPaths.infrared)} className="hover:text-gray-300">{t("links.infraredRooms")}</Link></li>
+              <li><Link to={localize("/products/infrared-backrest-505-ir-a-d")} className="hover:text-gray-300">{t("links.infraredBackrest")}</Link></li>
+              <li><Link to={localize("/products/infrared-panels-ir-panel-2")} className="hover:text-gray-300">{t("links.infraredPanels")}</Link></li>
             </ul>
           </div>
 
           {/* Column 4 - Social Media */}
           <div className="flex flex-col items-center text-center">
             <img src={sLogo} alt="SAWO" width="400" height="255" className="h-20 w-auto mb-4" />
-            <h3 className="font-bold text-lg mb-2">Follow Us</h3>
+            <h3 className="font-bold text-lg mb-2">{t("headings.followUs")}</h3>
             {/* w-9/h-9 keeps each icon close to a 44px touch target while sitting tighter together */}
             <div className="flex flex-wrap justify-center gap-1 text-xl">
-              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Facebook" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
-              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" aria-label="SAWO on Instagram" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-instagram" aria-hidden="true"></i></a>
-              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" aria-label="SAWO on LinkedIn" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
-              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on YouTube" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-youtube" aria-hidden="true"></i></a>
-              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" aria-label="SAWO on TikTok" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-tiktok" aria-hidden="true"></i></a>
-              <a href="mailto:help@sawo.com" aria-label="Email SAWO support" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fas fa-envelope" aria-hidden="true"></i></a>
-              <a href="tel:+63323412233" aria-label="Call SAWO" className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fas fa-phone" aria-hidden="true"></i></a>
+              <a href="http://facebook.com/SAWOsaunaworld" target="_blank" rel="noopener noreferrer" aria-label={t("social.facebook")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="https://www.instagram.com/sawosauna/" target="_blank" rel="noopener noreferrer" aria-label={t("social.instagram")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="https://ph.linkedin.com/company/sawo-inc" target="_blank" rel="noopener noreferrer" aria-label={t("social.linkedin")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="https://www.youtube.com/@SAWOsauna" target="_blank" rel="noopener noreferrer" aria-label={t("social.youtube")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-youtube" aria-hidden="true"></i></a>
+              <a href="https://www.tiktok.com/@sawosauna" target="_blank" rel="noopener noreferrer" aria-label={t("social.tiktok")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fab fa-tiktok" aria-hidden="true"></i></a>
+              <a href="mailto:help@sawo.com" aria-label={t("social.email")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fas fa-envelope" aria-hidden="true"></i></a>
+              <a href="tel:+63323412233" aria-label={t("social.phone")} className="hover:text-gray-300 inline-flex items-center justify-center w-9 h-9"><i className="fas fa-phone" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -63,22 +67,22 @@ export default function Footer() {
         {/* Support & Download */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 py-5 text-center sm:text-left">
           <div>
-            <h3 className="font-bold text-lg mb-2">SUPPORT</h3>
+            <h3 className="font-bold text-lg mb-2">{t("headings.support")}</h3>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 text-sm leading-[.9]">
-              <Link to={menuPaths.support.faq} className="hover:text-gray-300">Frequently Asked Questions</Link>
-              <Link to={menuPaths.about.parent} className="hover:text-gray-300">About Us</Link>
-              <Link to={menuPaths.contact} className="hover:text-gray-300">Contact Us</Link>
-              <Link to={menuPaths.careers} className="hover:text-gray-300">Careers</Link>
-              <Link to={menuPaths.privacy} className="hover:text-gray-300">Privacy Policy</Link>
-              <Link to={menuPaths.sitemap} className="hover:text-gray-300">Sitemap</Link>
+              <Link to={localize(menuPaths.support.faq)} className="hover:text-gray-300">{t("links.faq")}</Link>
+              <Link to={localize(menuPaths.about.parent)} className="hover:text-gray-300">{t("links.aboutUs")}</Link>
+              <Link to={localize(menuPaths.contact)} className="hover:text-gray-300">{t("links.contactUs")}</Link>
+              <Link to={localize(menuPaths.careers)} className="hover:text-gray-300">{t("links.careers")}</Link>
+              <Link to={localize(menuPaths.privacy)} className="hover:text-gray-300">{t("links.privacyPolicy")}</Link>
+              <Link to={localize(menuPaths.sitemap)} className="hover:text-gray-300">{t("links.sitemap")}</Link>
             </div>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-2">DOWNLOAD</h3>
+            <h3 className="font-bold text-lg mb-2">{t("headings.download")}</h3>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 text-sm">
-              <Link to={menuPaths.support.catalogue} className="hover:text-gray-300">Product Catalogue</Link>
-              <Link to={menuPaths.support.manuals} className="hover:text-gray-300">User Manuals</Link>
+              <Link to={localize(menuPaths.support.catalogue)} className="hover:text-gray-300">{t("links.productCatalogue")}</Link>
+              <Link to={localize(menuPaths.support.manuals)} className="hover:text-gray-300">{t("links.userManuals")}</Link>
             </div>
           </div>
         </div>
@@ -87,21 +91,21 @@ export default function Footer() {
         <div className="py-5 border-b border-white flex flex-col items-center sm:flex-row sm:items-start gap-4 text-center sm:text-left">
           <i className="fas fa-headset text-xl"></i>
           <div>
-            <h3 className="font-bold text-lg mb-2">TECHNICAL SUPPORT</h3>
-            <p className="text-sm mb-2">For technical support and reclamations, please contact:</p>
-            <p className="text-sm">Whatsapp: <a href="tel:+639497594450" className="hover:text-gray-300 inline-block py-1.5">+63 949 759 4450</a></p>
+            <h3 className="font-bold text-lg mb-2">{t("headings.technicalSupport")}</h3>
+            <p className="text-sm mb-2">{t("technicalSupportIntro")}</p>
+            <p className="text-sm">{t("whatsapp")}: <a href="tel:+639497594450" className="hover:text-gray-300 inline-block py-1.5">+63 949 759 4450</a></p>
             <p className="text-sm"><a href="mailto:help@sawo.com" className="hover:text-gray-300 inline-block py-1.5">help@sawo.com</a></p>
           </div>
         </div>
 
         {/* Offices */}
         <div className="py-8">
-          <h3 className="font-bold text-lg mb-6 text-center lg:text-left">OFFICES</h3>
+          <h3 className="font-bold text-lg mb-6 text-center lg:text-left">{t("headings.offices")}</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 icon: "fas fa-globe",
-                title: "GLOBAL SALES & GENERAL INQUIRIES",
+                titleKey: "global",
                 company: "SAWO Inc.",
                 address: ["Mactan Economic Zone 2, Mactan,", "Cebu 6015, Philippines"],
                 tel: "+63 32 341 2233",
@@ -110,7 +114,7 @@ export default function Footer() {
               },
               {
                 icon: "fas fa-warehouse",
-                title: "SALES & WAREHOUSE FOR THE NORDICS",
+                titleKey: "nordics",
                 company: "SAWO Nordic Oy.",
                 address: ["Hampuntie 18, 36220 Kangasala,", "Finland"],
                 tel: "+358 40 038 3265",
@@ -119,7 +123,7 @@ export default function Footer() {
               },
               {
                 icon: "fas fa-warehouse",
-                title: "SALES & WAREHOUSE FOR ASIA",
+                titleKey: "asia",
                 company: "F.E.M. Ltd",
                 address: ["2302, 23rd Floor, Cable TV Tower 9", "Hoi Shing Road, Tsuen Wan, Hong Kong"],
                 tel: "+852 2417 1188",
@@ -128,7 +132,7 @@ export default function Footer() {
               },
               {
                 icon: "fas fa-warehouse",
-                title: "SALES & WAREHOUSE FOR EUROPE",
+                titleKey: "europe",
                 company: "SAWO EUROPE HUB",
                 address: ["De Vest 24, 5555 XL Valkenswaard", "Netherlands"],
                 tel: "+358 40 016 8269",
@@ -142,7 +146,7 @@ export default function Footer() {
               >
                 <i className={`${office.icon} text-xl mt-1 sm:mt-0`}></i>
                 <div className="flex-1">
-                  <h4 className="font-bold text-lg mb-1 leading-[1.3]">{office.title}</h4>
+                  <h4 className="font-bold text-lg mb-1 leading-[1.3]">{t(`offices.${office.titleKey}`)}</h4>
                   <a
                     href={office.mapsLink}
                     target="_blank"
@@ -152,7 +156,7 @@ export default function Footer() {
                     <p className="font-semibold">{office.company}</p>
                     {office.address.map((line, i) => <p key={i}>{line}</p>)}
                   </a>
-                  <p>Tel: <a href={`tel:${office.tel}`} className="hover:text-gray-300 inline-block py-1.5">{office.tel}</a></p>
+                  <p>{t("tel")}: <a href={`tel:${office.tel}`} className="hover:text-gray-300 inline-block py-1.5">{office.tel}</a></p>
                   <p><a href={`mailto:${office.email}`} className="hover:text-gray-300 inline-block py-1.5">{office.email}</a></p>
                 </div>
               </div>
@@ -162,7 +166,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center text-sm pt-6">
-          <p>© 2026 All rights reserved. · SAWO</p>
+          <p>{t("copyright", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>
