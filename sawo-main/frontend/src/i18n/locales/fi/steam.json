@@ -1,0 +1,23 @@
+{
+  "generators": {
+    "meta": {
+      "title": "Höyrynkehittimet",
+      "description": "SAWOn höyrynkehittimet tarjoavat räätälöidyn höyryn ylellisyyttä edistyneistä kehittimistä mukautetuin asetuksin poikkeuksellisen kylpylämäisen kokemuksen saavuttamiseksi."
+    },
+    "hero": {
+      "title": "HÖYRYNKEHITTIMET"
+    },
+    "intro": {
+      "heading": "Esittelyssä höyrynkehittimemme",
+      "desc": "Koe räätälöidyn höyryn ylellisyys edistyneiden höyrynkehittimiemme avulla – luotettava suorituskyky, muokattavat asetukset ja virkistävä lämpö mihin tahansa tilaan."
+    },
+    "loading": "Ladataan kehittimiä...",
+    "empty": "Höyrynkehittimiä ei ole vielä saatavilla.",
+    "cardEyebrow": "Höyrynkehitin",
+    "cardFallbackDesc": "Laadukas SAWO-höyrynkehitin, joka on suunniteltu luotettavaan päivittäiseen käyttöön.",
+    "cta": {
+      "title": "Tarvitsetko apua kehittimen mitoituksessa?",
+      "description": "Kompakteista kotikäytön yksiköistä suuriin kaupallisiin asennuksiin – tiimimme auttaa löytämään tilaasi sopivan höyrynkehittimen."
+    }
+  }
+}

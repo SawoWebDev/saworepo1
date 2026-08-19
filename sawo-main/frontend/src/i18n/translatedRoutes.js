@@ -24,6 +24,7 @@
 export const TRANSLATED_PATHS = {
   "/": ["fi", "de"],
   "/sauna": ["fi"],
+  "/steam/generators": ["fi"],
 };
 
 // True if `path` has real, reviewed copy in `locale` — the single check

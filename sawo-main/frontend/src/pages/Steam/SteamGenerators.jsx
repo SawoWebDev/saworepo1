@@ -9,6 +9,7 @@ import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -36,6 +37,8 @@ function getFirstSentence(text) {
 const SteamGenerators = () => {
   const heroLoaded = useHeroLoaded(heroImg);
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("steam");
+  const localize = useLocalizedPath();
 
   const generators = useMemo(() => {
     const visible = localProds.filter(p => isPubliclyVisible(p));
@@ -50,9 +53,10 @@ const SteamGenerators = () => {
   return (
     <div className="relative">
       <SEO
-        title="Steam Generators"
-        description="SAWO steam generators deliver the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance."
+        title={t("generators.meta.title")}
+        description={t("generators.meta.description")}
         path="/steam/generators"
+        hreflangAlternates={{ en: "/steam/generators", fi: "/fi/steam/generators" }}
       />
 
       {/* ===================== */}
@@ -77,7 +81,7 @@ const SteamGenerators = () => {
         />
         <div className="sg-hero-overlay" />
         <div className="sg-hero-content">
-          <h1 className="sg-hero-title">STEAM GENERATORS</h1>
+          <h1 className="sg-hero-title">{t("generators.hero.title")}</h1>
         </div>
       <HeroWave />
       </section>
@@ -86,27 +90,23 @@ const SteamGenerators = () => {
       {/* INTRO                 */}
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 py-20 text-center">
-        <h2 className="sg-section-title">Introducing Our Steam Generators</h2>
-        <p className="sg-section-desc">
-          Experience the luxury of tailored steam with our advanced steam
-          generators, providing reliable performance, customizable settings,
-          and rejuvenating warmth for any space.
-        </p>
+        <h2 className="sg-section-title">{t("generators.intro.heading")}</h2>
+        <p className="sg-section-desc">{t("generators.intro.desc")}</p>
       </section>
 
       {/* ===================== */}
       {/* GENERATORS            */}
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 pb-24">
-        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading generators...</p>}
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>{t("generators.loading")}</p>}
         {!loading && generators.length === 0 && (
-          <p style={{ textAlign: "center", color: "#999" }}>No steam generators available yet.</p>
+          <p style={{ textAlign: "center", color: "#999" }}>{t("generators.empty")}</p>
         )}
         {!loading && generators.length > 0 && (
           <div className="sg-grid">
             {generators.map((product, i) => (
               <Link
-                to={`/products/${product.slug}`}
+                to={localize(`/products/${product.slug}`)}
                 className={`sg-row ${i % 2 === 1 ? "sg-row--reverse" : ""}`}
                 key={product.id || product.slug}
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -124,10 +124,10 @@ const SteamGenerators = () => {
 
                 {/* Text */}
                 <div className="sg-text">
-                  <p className="sg-eyebrow">Steam Generator</p>
+                  <p className="sg-eyebrow">{t("generators.cardEyebrow")}</p>
                   <h3 className="sg-card-title">{product.name}</h3>
                   <p className="sg-card-desc">
-                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Premium SAWO steam generator built for reliable, everyday performance."}
+                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || t("generators.cardFallbackDesc")}
                   </p>
                 </div>
               </Link>
@@ -140,8 +140,8 @@ const SteamGenerators = () => {
       {/* CTA                   */}
       {/* ===================== */}
       <PageCTA
-        title="Need Help Sizing a Generator?"
-        description="From compact residential units to large commercial installations, our team can help you find the right steam generator for your space."
+        title={t("generators.cta.title")}
+        description={t("generators.cta.description")}
       />
 
       {/* ===================== */}

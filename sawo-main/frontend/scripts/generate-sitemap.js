@@ -28,6 +28,24 @@ const path = require("path");
 const SITE_URL = "https://www.sawo.com"; // matches SEO.jsx's SITE_URL — keep these in sync
 const OUT_FILE = path.join(__dirname, "..", "public", "sitemap.xml");
 
+// Mirrors src/i18n/translatedRoutes.js's TRANSLATED_PATHS — which paths have
+// REAL, reviewed copy per locale (not just an English page rendered under a
+// /fi or /de prefix so it doesn't 404, see App.jsx). Same standalone-copy
+// reasoning as ACCESSORY_CATEGORIES/STATIC_ROUTES above: this script runs
+// via plain `node`, no ESM import available. Keep this in sync by hand
+// whenever translatedRoutes.js's TRANSLATED_PATHS changes.
+//
+// A path listed here gets its own /<locale><path> <url> entry PLUS
+// <xhtml:link rel="alternate"> tags on every locale variant pointing at
+// every other — the untranslated-locale gotcha from SEO.jsx applies here
+// too: a path NOT listed here only gets its English entry, never an
+// unreviewed /fi or /de alternate.
+const TRANSLATED_PATHS = {
+  "/": ["fi", "de"],
+  "/sauna": ["fi"],
+  "/steam/generators": ["fi"],
+};
+
 const PRODUCTS_JSON = path.join(__dirname, "..", "src", "Administrator", "Local", "data", "products.json");
 const ROOMS_JSON = path.join(__dirname, "..", "src", "Administrator", "Local", "data", "saunaroom-data.json");
 
@@ -122,16 +140,35 @@ function xmlEscape(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function urlEntry(loc, { changefreq, priority, lastmod }) {
+function urlEntry(loc, { changefreq, priority, lastmod, alternates }) {
   const lines = [
     "  <url>",
     `    <loc>${xmlEscape(SITE_URL + loc)}</loc>`,
   ];
+  if (alternates) {
+    for (const [hreflang, altPath] of Object.entries(alternates)) {
+      lines.push(`    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${xmlEscape(SITE_URL + altPath)}"/>`);
+    }
+    lines.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${xmlEscape(SITE_URL + alternates.en)}"/>`);
+  }
   if (lastmod) lines.push(`    <lastmod>${lastmod}</lastmod>`);
   if (changefreq) lines.push(`    <changefreq>${changefreq}</changefreq>`);
   if (priority) lines.push(`    <priority>${priority}</priority>`);
   lines.push("  </url>");
   return lines.join("\n");
+}
+
+// Builds { en: "/x", fi: "/fi/x", ... } for a translated path, or null if
+// `route.path` isn't in TRANSLATED_PATHS (untranslated paths get no
+// alternates block at all — see the gotcha noted above TRANSLATED_PATHS).
+function alternatesFor(routePath) {
+  const locales = TRANSLATED_PATHS[routePath];
+  if (!locales || locales.length === 0) return null;
+  const alternates = { en: routePath };
+  for (const locale of locales) {
+    alternates[locale] = routePath === "/" ? `/${locale}` : `/${locale}${routePath}`;
+  }
+  return alternates;
 }
 
 function toLastmod(isoString) {
@@ -153,7 +190,14 @@ function main() {
   const entries = [];
 
   for (const route of STATIC_ROUTES) {
-    entries.push(urlEntry(route.path, route));
+    const alternates = alternatesFor(route.path);
+    entries.push(urlEntry(route.path, { ...route, alternates }));
+
+    if (alternates) {
+      for (const locale of TRANSLATED_PATHS[route.path]) {
+        entries.push(urlEntry(alternates[locale], { ...route, alternates }));
+      }
+    }
   }
 
   for (const p of plainProducts) {
@@ -188,13 +232,14 @@ function main() {
 
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
     entries.join("\n") +
     "\n</urlset>\n";
 
   fs.writeFileSync(OUT_FILE, xml, "utf8");
+  const localeUrlCount = entries.length - STATIC_ROUTES.length - plainProducts.length - accessories.length - visibleRooms.length;
   console.log(
-    `SITEMAP: wrote ${entries.length} URLs (${STATIC_ROUTES.length} static + ${plainProducts.length} products + ${accessories.length} accessories + ${visibleRooms.length} rooms) to ${OUT_FILE}`
+    `SITEMAP: wrote ${entries.length} URLs (${STATIC_ROUTES.length} static + ${localeUrlCount} translated-locale variants + ${plainProducts.length} products + ${accessories.length} accessories + ${visibleRooms.length} rooms) to ${OUT_FILE}`
   );
 }
 

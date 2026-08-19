@@ -4,6 +4,12 @@
   "viewCatalogue": "KATALOG ANSEHEN",
   "previous": "Zurück",
   "next": "Weiter",
+  "pageCTA": {
+    "defaultTitle": "Brauchen Sie Hilfe bei der Auswahl?",
+    "defaultDescription": "Unser Team hilft Ihnen, die richtige SAWO-Lösung für Ihr Zuhause oder Gewerbe zu finden.",
+    "contactUs": "Kontakt",
+    "viewManuals": "Bedienungsanleitungen"
+  },
   "wellnessBenefits": {
     "stressRelief": {
       "label": "Stressabbau",

@@ -4,6 +4,12 @@
   "viewCatalogue": "VIEW CATALOGUE",
   "previous": "Previous",
   "next": "Next",
+  "pageCTA": {
+    "defaultTitle": "Need Help Choosing?",
+    "defaultDescription": "Our team can help you find the right SAWO setup for your home or commercial space.",
+    "contactUs": "Contact Us",
+    "viewManuals": "View Manuals"
+  },
   "wellnessBenefits": {
     "stressRelief": {
       "label": "Stress Relief",

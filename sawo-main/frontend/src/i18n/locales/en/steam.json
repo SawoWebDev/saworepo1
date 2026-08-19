@@ -1,0 +1,23 @@
+{
+  "generators": {
+    "meta": {
+      "title": "Steam Generators",
+      "description": "SAWO steam generators deliver the luxury of tailored steam from advanced generators with customized settings for exceptional spa-like performance."
+    },
+    "hero": {
+      "title": "STEAM GENERATORS"
+    },
+    "intro": {
+      "heading": "Introducing Our Steam Generators",
+      "desc": "Experience the luxury of tailored steam with our advanced steam generators, providing reliable performance, customizable settings, and rejuvenating warmth for any space."
+    },
+    "loading": "Loading generators...",
+    "empty": "No steam generators available yet.",
+    "cardEyebrow": "Steam Generator",
+    "cardFallbackDesc": "Premium SAWO steam generator built for reliable, everyday performance.",
+    "cta": {
+      "title": "Need Help Sizing a Generator?",
+      "description": "From compact residential units to large commercial installations, our team can help you find the right steam generator for your space."
+    }
+  }
+}

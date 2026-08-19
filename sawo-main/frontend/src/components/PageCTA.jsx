@@ -8,30 +8,41 @@ import React from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../menuPaths";
 import woodBg from "../assets/SaunaCalculator-bg.webp";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 const PageCTA = ({
-  title = "Need Help Choosing?",
-  description = "Our team can help you find the right SAWO setup for your home or commercial space.",
-  primaryLabel = "Contact Us",
+  title,
+  description,
+  primaryLabel,
   primaryTo = menuPaths.contact,
-  secondaryLabel = "View Manuals",
+  secondaryLabel,
   secondaryTo = menuPaths.support.manuals,
   className = "",
 }) => {
+  // Callers passing a custom title/description (most product-category pages
+  // do) win outright; anyone rendering <PageCTA /> bare gets the translated
+  // generic default instead of the old hardcoded English.
+  const t = useLocaleT("common");
+  const localize = useLocalizedPath();
+  const resolvedTitle = title ?? t("pageCTA.defaultTitle");
+  const resolvedDescription = description ?? t("pageCTA.defaultDescription");
+  const resolvedPrimaryLabel = primaryLabel ?? t("pageCTA.contactUs");
+  const resolvedSecondaryLabel = secondaryLabel ?? t("pageCTA.viewManuals");
+
   return (
     <section className={`max-w-[1200px] mx-auto px-6 pb-20 ${className}`}>
       <div className="pcta-card">
-        <h2 className="pcta-title">{title}</h2>
-        <p className="pcta-desc">{description}</p>
+        <h2 className="pcta-title">{resolvedTitle}</h2>
+        <p className="pcta-desc">{resolvedDescription}</p>
         <div className="pcta-actions">
-          {primaryLabel && primaryTo && (
-            <Link to={primaryTo} className="pcta-btn pcta-btn--solid">
-              {primaryLabel} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem" }} />
+          {resolvedPrimaryLabel && primaryTo && (
+            <Link to={localize(primaryTo)} className="pcta-btn pcta-btn--solid">
+              {resolvedPrimaryLabel} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem" }} />
             </Link>
           )}
-          {secondaryLabel && secondaryTo && (
-            <Link to={secondaryTo} className="pcta-btn pcta-btn--outline">
-              {secondaryLabel} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem" }} />
+          {resolvedSecondaryLabel && secondaryTo && (
+            <Link to={localize(secondaryTo)} className="pcta-btn pcta-btn--outline">
+              {resolvedSecondaryLabel} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem" }} />
             </Link>
           )}
         </div>
