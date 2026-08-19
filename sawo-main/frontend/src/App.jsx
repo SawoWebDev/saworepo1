@@ -1,6 +1,6 @@
 // src/App.jsx ThemeProvider wraps everything so CSS vars are available on ALL pages
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Components (always needed — small, no lazy needed)
 import ScrollToTop from "./components/ScrollToTop";
@@ -25,6 +25,7 @@ import menuPaths   from "./menuPaths";
 // matching i18next language active.
 import { LOCALE_PREFIXES } from "./i18n/translatedRoutes";
 import LocaleRoute from "./i18n/LocaleRoute";
+import { LocaleContext } from "./i18n/LocaleContext";
 
 // Home is the landing page — keep it in the main bundle so it paints
 // immediately (no chunk round-trip → fast, detectable LCP, no layout swap).
@@ -178,6 +179,24 @@ const PUBLIC_ROUTES = [
   { path: "/sauna/rooms/:slug",              element: <DispSaunaRoom /> },
 ];
 
+// MainLayout's Header/Footer render as siblings of the routed page content,
+// not descendants of it — so the per-route <LocaleRoute> provider (which
+// only wraps the matched page element) never reaches them, and any
+// useLocaleT() call inside Header/Footer silently falls back to the
+// LocaleContext default ("en") no matter what /fi or /de page is showing.
+// This derives the locale straight from the URL and provides it one level
+// up, wrapping MainLayout (Header + page + Footer) as a whole.
+function localeFromPathname(pathname) {
+  const seg = pathname.split("/")[1] || "";
+  return LOCALE_PREFIXES.includes(seg) ? seg || "en" : "en";
+}
+
+function RouteLocale({ children }) {
+  const location = useLocation();
+  const locale = localeFromPathname(location.pathname);
+  return <LocaleContext.Provider value={locale}>{children}</LocaleContext.Provider>;
+}
+
 export default function App() {
   return (
       <Router>
@@ -187,7 +206,7 @@ export default function App() {
 
             {/*  Public  */}
             <Route path="*" element={
-              <>
+              <RouteLocale>
                 {/* Controlled by the "GDPR Consent Banner" toggle on
                     /admin/settings. Sibling of MainLayout (not inside its
                     <main>) so this fixed-position banner never mounts (no
@@ -212,7 +231,7 @@ export default function App() {
                   </Routes>
                 </Suspense>
                 </MainLayout>
-              </>
+              </RouteLocale>
             } />
 
             {/*  Admin  */}
