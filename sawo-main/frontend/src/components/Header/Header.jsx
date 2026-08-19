@@ -82,7 +82,6 @@ const navItems = [
       { name: "Sauna Calculator", nk: "items.saunaCalculator", path: menuPaths.support.saunaCalculator },
     ],
   },
-  { name: "Contact Us", nk: "contactUs", path: menuPaths.contact },
   {
     name: "About Us",
     nk: "aboutUs",
@@ -90,9 +89,10 @@ const navItems = [
     submenu: [
       { name: "Latest News", nk: "items.latestNews", path: menuPaths.about.news },
       { name: "Sustainability", nk: "items.sustainability", path: menuPaths.about.sustainability },
+      { name: "Contact Us", nk: "contactUs", path: menuPaths.contact },
+      { name: "Careers", nk: "items.careers", path: menuPaths.careers },
     ],
   },
-  { name: "Careers", nk: "items.careers", path: menuPaths.careers },
 ];
 
 // Recursively swaps each item's English `name` for t(item.nk) and its plain
@@ -328,7 +328,14 @@ export default function Header() {
 
                   {/* Submenu — Level 1 (Support, About Us) */}
                   {item.submenu && hoveredMenu === item.name && (
-                    <div className="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-2xl min-w-[220px] z-50 py-3 px-2 border border-gray-100">
+                    <div
+                      className={`absolute top-full mt-2 bg-white rounded-xl shadow-2xl min-w-[220px] z-50 py-3 px-2 border border-gray-100 ${
+                        // Right-anchor the last nav item's dropdown (About Us) —
+                        // left-anchoring it here pushes the panel past the
+                        // viewport's right edge and causes horizontal overflow.
+                        item.name === "About Us" ? "right-0" : "left-0"
+                      }`}
+                    >
                       {item.submenu.map((sub) =>
                         sub.submenu ? (
                           <div
@@ -365,8 +372,14 @@ export default function Header() {
                             )}
 
                             {/* Submenu — Level 2 */}
+                            {/* -top-3 (not top-0): top-0 anchors to this row's
+                                own top, which sits py-3 (12px) below the outer
+                                panel's top edge, so the level-2 panel looked
+                                lowered against the level-1 panel beside it.
+                                Shifting up by that same 12px lines the two
+                                panels' top edges up exactly. */}
                             {hoveredSubmenu === sub.name && (
-                              <div className="absolute top-0 left-full ml-1 bg-white rounded-xl shadow-2xl min-w-[180px] z-50 py-3 px-2 border border-gray-100">
+                              <div className="absolute -top-3 left-full ml-1 bg-white rounded-xl shadow-2xl min-w-[180px] z-50 py-3 px-2 border border-gray-100">
                                 {sub.submenu.map((item2) => (
                                   <Link
                                     key={item2.name || item2}

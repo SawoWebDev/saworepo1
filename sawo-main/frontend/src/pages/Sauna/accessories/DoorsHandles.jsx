@@ -7,6 +7,7 @@ import heroImg from "../../../assets/DOORS-AND-HANDLES-copy.webp";
 import "../heaters/heaters.css";
 import menuPaths from "../../../menuPaths";
 import PromoBanner from "../../../components/PromoBanner";
+import accessoriesBannerImg from "../../../assets/accessories-banner.webp";
 import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
@@ -16,9 +17,15 @@ const DISPLAY_CATEGORIES = ["Doors & Handles", "Sauna Doors", "Sauna Handles"];
 const DISPLAY_TAGS       = ["Doors & Handles"];
 
 const FIXED_ORDER = ["Sauna Doors", "Handles"];
+// "Handles" must be checked before "Sauna Doors" — every standalone handle
+// product's name also contains "Door" (e.g. "Wooden Door Handle"), and doors
+// themselves often mention a handle style too (e.g. "...Sauna Door with Arc
+// Handle"). "Door Handle" as an exact phrase is what actually identifies a
+// standalone handle; a bare "Handle" keyword checked in either order would
+// misclassify one direction or the other.
 const GROUP_KEYWORDS = {
+  "Handles":     ["Door Handle"],
   "Sauna Doors": ["Door"],
-  "Handles":     ["Handle"],
 };
 
 function arrayMatchesAny(arr = [], targets = []) {
@@ -162,12 +169,14 @@ export default function DoorsHandles() {
         <section className="wm-section wm-section--flush-bottom">
           <div className="wm-container">
             <div className="wm-filter-search-row">
-              <div className="wm-filter-pills-group">
-                <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
-                {groupNames.map(g => (
-                  <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{g}</button>
-                ))}
-              </div>
+              {groupNames.length > 1 && (
+                <div className="wm-filter-pills-group">
+                  <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+                  {groupNames.map(g => (
+                    <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{g}</button>
+                  ))}
+                </div>
+              )}
               <div className="wm-search-wrap wm-search-bar-fixed">
                 <i className="fa-solid fa-magnifying-glass wm-search-icon" />
                 <input className="wm-search-input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search doors & handles..." />
@@ -224,6 +233,7 @@ export default function DoorsHandles() {
       <PromoBanner
         title="Complete Your Sauna Experience"
         subtitle="Explore our full range of authentic Finnish sauna accessories"
+        image={accessoriesBannerImg}
       />
     </div>
   );

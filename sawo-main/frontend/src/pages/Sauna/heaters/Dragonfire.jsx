@@ -57,6 +57,8 @@ import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
+import { getPowerRange } from "../../../utils/productPower";
+import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -81,8 +83,11 @@ const GROUP_KEYWORDS = {
 
 // ── Filter Dragonfire products dynamically ────────────────────────────
 function filterDragonfireProducts(allProducts) {
-  return allProducts.filter(
-    (p) =>
+  return allProducts.filter((p) => {
+    // Admission gate first — category alone decides whether this is a
+    // heater at all. Only real heaters make it past this point.
+    if (!isHeaterProduct(p)) return false;
+    return (
       p.categories?.includes("Dragonfire") ||
       p.name?.toLowerCase().includes("dragonfire") ||
       // Also include any product whose tags/name match one of the dragonfire group keywords
@@ -90,7 +95,8 @@ function filterDragonfireProducts(allProducts) {
         p.name?.toLowerCase().includes(kw.toLowerCase()) ||
         p.tags?.some(t => t.toLowerCase().includes(kw.toLowerCase()))
       )
-  );
+    );
+  });
 }
 
 // ── Group products dynamically ───────────────────────────────────────
@@ -136,15 +142,10 @@ function SkeletonCard() {
   );
 }
 
-// ── Extract power range from tags ─────────────────────────────────────
-function getPower(tags) {
-  if (!tags) return "";
-  return tags.find((t) => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
-}
 
 // ── Product card component ───────────────────────────────────────────
 function ProductCard({ product }) {
-  const power = getPower(product.tags);
+  const power = getPowerRange(product.tags);
 
   return (
     <Link

@@ -1,7 +1,9 @@
-﻿// src/pages/Support/UserManuals.jsx
+// src/pages/Support/UserManuals.jsx
 
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
+import { isAccessoryProduct } from "../IndividualDisplay/DispAccessories";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
@@ -36,8 +38,38 @@ const CATEGORY_TABS = [
   { id: "sauna-controls", label: "Sauna Controls", categories: ["Sauna Controls"] },
   { id: "steam-generators", label: "Steam Generators", categories: ["Steam Generators"] },
   { id: "steam-controls", label: "Steam Generator Controls", categories: ["Steam Controls"] },
-  { id: "heater-accessories", label: "Heater Accessories", categories: ["Heater Accessories"] },
+  {
+    id: "heater-accessories", label: "Heater Accessories", categories: ["Heater Accessories"],
+    // Every accessory carries the shared "Heater Accessories" tag (that's
+    // what makes the tab itself appear), so grouping on `categories` the
+    // way every other tab does would put them all in one flat, unsorted
+    // pile. groupOrder overrides just the sub-heading split below, keeping
+    // family members (guards / collars / tanks / safety) next to each other.
+    groupOrder: ["Heater Guard", "Integration Collar", "Humidifiers", "Sauna Accessories"],
+  },
 ];
+
+// Friendly sub-group headings shown within a tab, keyed by product category.
+const SERIES_LABELS = {
+  "Towers": "Tower Series",
+  "Wall-Mounted": "Wall Mounted Series",
+  "Floor": "Floor Series",
+  "Stones": "Stone Series",
+  "Dragonfire": "Dragonfire Series",
+  "Combi": "Combi Series",
+  "Sauna Controls": "Sauna Controls",
+  "Steam Controls": "Steam Generator Controls",
+  "Steam Generators": "Steam Generators",
+  "Heater Accessories": "Heater Accessories",
+  "Heater Guard": "Heater Guards",
+  "Integration Collar": "Collars",
+  "Humidifiers": "Cozy Tanks",
+  "Sauna Accessories": "Safety Accessories",
+};
+
+function seriesLabel(category) {
+  return SERIES_LABELS[category] || category;
+}
 
 // ─── PDF Modal ────────────────────────────────────────────────────────────────
 function PdfModal({ product, onClose }) {
@@ -239,91 +271,122 @@ function SkeletonCard() {
 }
 
 // ─── Product card ─────────────────────────────────────────────────────────────
-function ProductCard({ product, onOpenManuals }) {
+function ProductCard({ product, category, onOpenManuals }) {
+  const isAccessory = isAccessoryProduct(product);
+  let link;
+  if (isAccessory) {
+    link = `/accessories/${product.slug}`;
+  } else if (product.type === "room") {
+    link = `/sauna/rooms/${product.slug}`;
+  } else {
+    link = `/products/${product.slug}`;
+  }
+
   return (
-    <div style={{
-      background: "#fff", borderRadius: 14, border: "1.5px solid rgba(175,133,100,0.18)",
-      overflow: "hidden", display: "flex", flexDirection: "column",
-      transition: "all 0.22s", textAlign: "center",
-    }}
-      onMouseEnter={e => {
-        e.currentTarget.style.borderColor = "#af8564";
-        e.currentTarget.style.transform = "translateY(-5px)";
-        e.currentTarget.style.boxShadow = "0 14px 36px rgba(175,133,100,0.18)";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.borderColor = "rgba(175,133,100,0.18)";
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "none";
-      }}
+    <Link
+      to={link}
+      style={{ textDecoration: "none", color: "inherit", display: "block" }}
     >
-      {/* Image */}
       <div style={{
-        aspectRatio: "4/3", background: "#f7f5f2",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        padding: 8, position: "relative", overflow: "hidden",
-      }}>
-        {getImageUrl(product, 'thumbnail') ? (
-          <img
-            src={getImageUrl(product, 'thumbnail')}
-            alt={product.name}
-            onError={e => { e.currentTarget.style.display = "none"; }}
-            style={{
-              width: "100%", height: "100%",
-              objectFit: "contain", objectPosition: "center",
-              display: "block",
-              transition: "transform 0.35s ease"
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.06)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
-          />
-        ) : (
-          <i className="fa-regular fa-image" style={{ fontSize: "3rem", color: "#d5b99a" }} />
-        )}
-      </div>
-
-      {/* Body */}
-      <div style={{ padding: "14px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
-        <p style={{
-          fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-          fontSize: "13px", color: "rgb(51,51,51)", margin: 0, lineHeight: 1.35,
-          transition: "color 0.2s",
+        background: "#fff", borderRadius: 14, border: "1.5px solid rgba(175,133,100,0.18)",
+        overflow: "hidden", display: "flex", flexDirection: "column",
+        height: 336, transition: "all 0.22s", textAlign: "center", cursor: "pointer",
+      }}
+        onMouseEnter={e => {
+          e.currentTarget.style.borderColor = "#af8564";
+          e.currentTarget.style.transform = "translateY(-5px)";
+          e.currentTarget.style.boxShadow = "0 14px 36px rgba(175,133,100,0.18)";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.borderColor = "rgba(175,133,100,0.18)";
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "none";
+        }}
+      >
+        {/* Image */}
+        <div style={{
+          height: 160, flexShrink: 0, background: "#f7f5f2",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: 8, position: "relative", overflow: "hidden",
         }}>
-          {product.name}
-        </p>
+          {getImageUrl(product, 'thumbnail') ? (
+            <img
+              src={getImageUrl(product, 'thumbnail')}
+              alt={product.name}
+              onError={e => { e.currentTarget.style.display = "none"; }}
+              style={{
+                width: "100%", height: "100%",
+                objectFit: "contain", objectPosition: "center",
+                display: "block",
+                transition: "transform 0.35s ease"
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.06)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
+            />
+          ) : (
+            <i className="fa-regular fa-image" style={{ fontSize: "3rem", color: "#d5b99a" }} />
+          )}
+        </div>
 
-        {/* View Manual button */}
-        <div>
-          <button
-            onClick={() => onOpenManuals(product)}
-            style={{
-              width: "100%",
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              padding: "9px 16px",
-              background: "transparent",
-              color: "#af8564",
-              border: "1.5px solid #af8564",
-              borderRadius: 8, cursor: "pointer",
-              fontFamily: "'Montserrat',sans-serif",
-              fontSize: "0.72rem", fontWeight: 700,
-              letterSpacing: "0.04em",
-              transition: "all 0.22s",
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = "#af8564";
-              e.currentTarget.style.color = "#fff";
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = "#af8564";
-            }}
-          >
-            <i className="fa-regular fa-file-lines" style={{ fontSize: "0.7rem" }} />
-            View Manual
-          </button>
+        {/* Body */}
+        <div style={{ padding: "14px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: 6, minHeight: 0 }}>
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+            fontSize: "13px", color: "rgb(51,51,51)", margin: 0, lineHeight: 1.35,
+            height: "2.7em", transition: "color 0.2s",
+            display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
+            overflow: "hidden", textOverflow: "ellipsis",
+          }}>
+            {product.name}
+          </p>
+
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 600,
+            fontSize: "0.65rem", letterSpacing: "0.03em",
+            color: "#c4a882", margin: "0 0 4px", height: "1.4em",
+            overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis",
+          }}>
+            {category ? seriesLabel(category) : " "}
+          </p>
+
+          {/* View Manual button — sits above the card's Link so it opens the
+              modal instead of navigating (preventDefault + stopPropagation). */}
+          <div style={{ marginTop: "auto", position: "relative", zIndex: 1 }}>
+            <button
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                onOpenManuals(product);
+              }}
+              style={{
+                width: "100%",
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                padding: "9px 16px",
+                background: "transparent",
+                color: "#af8564",
+                border: "1.5px solid #af8564",
+                borderRadius: 8, cursor: "pointer",
+                fontFamily: "'Montserrat',sans-serif",
+                fontSize: "0.72rem", fontWeight: 700,
+                letterSpacing: "0.04em",
+                transition: "all 0.22s",
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = "#af8564";
+                e.currentTarget.style.color = "#fff";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#af8564";
+              }}
+            >
+              <i className="fa-regular fa-file-lines" style={{ fontSize: "0.7rem" }} />
+              View Manual
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -373,6 +436,38 @@ export default function UserManuals() {
       (p.categories || []).some(c => c.toLowerCase().includes(q))
     );
   }, [allProducts, tabs, activeTab, search]);
+
+  // Sub-group the active tab's products by series (Tower, Wall Mounted, Floor…)
+  // instead of one flat grid — order follows the tab's own category list.
+  const groupedDisplayed = useMemo(() => {
+    const tab = tabs.find(t => t.id === activeTab);
+    const order = tab ? (tab.groupOrder || tab.categories) : [];
+    const groups = new Map();
+    displayed.forEach(p => {
+      const cat = (p.categories || []).find(c => order.includes(c)) || (p.categories || [])[0] || "Other";
+      if (!groups.has(cat)) groups.set(cat, []);
+      groups.get(cat).push(p);
+    });
+    const keys = order.length
+      ? order.filter(c => groups.has(c))
+      : [...groups.keys()].sort();
+    // Within a group (e.g. all the Collars), cluster by material — Wooden
+    // together, then Stainless — so visually-similar items sit side by side
+    // instead of interleaving; falls back to name order within each cluster.
+    const materialRank = p => {
+      const n = (p.name || "").toLowerCase();
+      if (n.includes("wooden") || n.includes("wood")) return 0;
+      if (n.includes("stainless")) return 1;
+      return 2;
+    };
+    return keys.map(cat => ({
+      category: cat,
+      products: [...groups.get(cat)].sort((a, b) => {
+        const r = materialRank(a) - materialRank(b);
+        return r !== 0 ? r : (a.name || "").localeCompare(b.name || "");
+      }),
+    }));
+  }, [displayed, tabs, activeTab]);
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
@@ -506,6 +601,16 @@ export default function UserManuals() {
         .um-tab-btn.active {
           background: #af8564;
           color: #fff;
+        }
+
+        .um-group-title {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          font-size: 1rem;
+          color: #af8564;
+          margin: 0 0 18px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #edddd0;
         }
       `}</style>
 
@@ -643,22 +748,32 @@ export default function UserManuals() {
           </div>
         )}
 
-        {/* Product grid */}
+        {/* Product groups, sub-divided by series within the active tab */}
         {!loading && displayed.length > 0 && (
-          <div
-            className="um-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-              gap: 20,
-            }}
-          >
-            {displayed.map(p => (
-              <ProductCard
-                key={p.id || p.slug}
-                product={p}
-                onOpenManuals={setSelectedProduct}
-              />
+          <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+            {groupedDisplayed.map(group => (
+              <div key={group.category}>
+                {groupedDisplayed.length > 1 && (
+                  <h3 className="um-group-title">{seriesLabel(group.category)}</h3>
+                )}
+                <div
+                  className="um-grid"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                    gap: 20,
+                  }}
+                >
+                  {group.products.map(p => (
+                    <ProductCard
+                      key={p.id || p.slug}
+                      product={p}
+                      category={group.category}
+                      onOpenManuals={setSelectedProduct}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         )}

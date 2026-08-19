@@ -388,39 +388,429 @@ function Divider() {
   );
 }
 
-/* ── Related Products ─────────────────────────────────────────────── */
-function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
-  const related = useMemo(() => {
-    if (!categories?.length || !allProducts.length) return [];
-    const cats = categories.slice(0, 1).map(c => c.toLowerCase());
-    return allProducts
-      .filter(p =>
-        isPubliclyVisible(p) &&
-        p.slug !== currentSlug &&
-        (p.categories || []).some(c => cats.includes(c.toLowerCase()))
-      )
-      .slice(0, 4);
-  }, [currentSlug, categories, allProducts]);
+/* ── Curated accessory pairings ──────────────────────────────────────
+   Manual "goes with this heater" list — these accessories don't share a
+   category with the heater (Towers vs. Heater Guard/Sauna Accessories/
+   Humidifiers/Sauna Stones), so the category-match fallback below can't
+   find them on its own. Keyed by slug *prefix* so it covers every
+   NB/Ni2/NS + Black variant of the SAWO30 Wall heater. */
+const CURATED_RELATED_BY_SLUG_PREFIX = [
+  {
+    prefix: "sawo30-wall",
+    slugs: [
+      "heater-guard-sawo30-wall",
+      "integration-collar-wall-wooden",
+      "integration-collar-sawo30-wall-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "sawo30-round",
+    slugs: [
+      "heater-guard-sawo30-round",
+      "integration-collar-round-wooden",
+      "integration-collar-round-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "sawo30-corner",
+    slugs: [
+      "heater-guard-sawo30-corner",
+      "integration-collar-corner-wooden",
+      "integration-collar-sawo30-corner-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "tower-round",
+    slugs: [
+      "heater-guard-tower-round",
+      "integration-collar-round-wooden",
+      "integration-collar-round-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "tower-wall",
+    slugs: [
+      "heater-guard-tower-wall",
+      "integration-collar-wall-wooden",
+      "integration-collar-tower-wall-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "tower-corner",
+    slugs: [
+      "heater-guard-tower-corner",
+      "integration-collar-corner-wooden",
+      "integration-collar-tower-corner-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "aries-round",
+    slugs: [
+      "heater-guard-aries-round",
+      "integration-collar-round-wooden",
+      "integration-collar-round-stainless",
+      "integration-collar-round-v2-stainless",
+      "safety-switch-for-heaters",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "aries-wall",
+    slugs: [
+      "heater-guard-aries-wall",
+      "integration-collar-wall-wooden",
+      "integration-collar-tower-wall-stainless",
+      "safety-switch-for-heaters",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "aries-corner",
+    slugs: [
+      "heater-guard-aries-corner",
+      "integration-collar-corner-wooden",
+      "integration-collar-tower-corner-stainless",
+      "safety-switch-for-heaters",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "cubos",
+    slugs: [
+      "heater-guard-cubos-middle",
+      "heater-guard-cubos-wall",
+      "heater-guard-cubos-corner",
+      "integration-collar-cubos-middle-wooden",
+      "integration-collar-cubos-wall-wooden",
+      "integration-collar-cubos-corner-wooden",
+      "integration-collar-cubos-middle-stainless",
+      "integration-collar-cubos-wall-stainless",
+      "integration-collar-cubos-corner-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "heaterking-wall",
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "heaterking-corner",
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "heaterking-round",
+    slugs: [
+      "heater-guard-heaterking-round-w2",
+      "heater-guard-heaterking-round-w4",
+      "heater-guard-heaterking-round-w6",
+      "heater-guard-heaterking-round-w9",
+      "heater-guard-heaterking-round-w12",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "phoenix",
+    slugs: [
+      "heater-guard-phoenix",
+      "integration-collar-round-wooden",
+      "integration-collar-phoenix-stainless",
+      "integration-collar-round-v2-stainless",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "fiberjungle-ns",
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  ...["nordex-nb", "nordex-black-nb", "nordex-ni2", "nordex-black-ni2", "nordex-ns", "nordex-black-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "heater-guard-nordex-wall",
+      "safety-switch-for-heaters",
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  ...["nordex-mini-combi-ns", "nordex-mini-combi-black-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  {
+    prefix: "nordex-mini",
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  ...["nordex-combi-ns", "nordex-combi-black-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  ...["mini-nb", "mini-fibercoated-nb"].map(prefix => ({
+    prefix,
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  {
+    prefix: "mini-x",
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "mini-combi",
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  ...["scandia-nb", "scandia-ns", "scandia-fibercoated-nb", "scandia-fibercoated-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  {
+    prefix: "scandia-combi",
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+      "safety-switch-for-heaters",
+    ],
+  },
+  ...["krios-nb", "krios-ni2", "krios-ni2a", "krios-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "heater-guard-krios-wall",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+      "safety-switch-for-heaters",
+    ],
+  })),
+  {
+    prefix: "scandifire",
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "cumulus",
+    slugs: [
+      "cozy-tank-13l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "nimbus-ns",
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "helius",
+    slugs: [
+      "heater-guard-helius",
+      "helius-heater-hood",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "taurus-d-ns",
+    slugs: [
+      "heater-guard-taurus",
+      "cozy-tank-13l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  ...["savonia-ns", "savonia-fiber-coated-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  {
+    prefix: "nordex-pro-ns",
+    slugs: [
+      "heater-guard-nordex-pro",
+      "safety-switch-for-heaters",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "nordex-pro-combi-ns",
+    slugs: [
+      "heater-guard-nordex-pro-combi",
+      "safety-switch-for-heaters",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  ...["nordex-s-ns", "nordex-s-black-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "heater-guard-nordex-s",
+      "cozy-tank-13l",
+      "safety-switch-for-heaters",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  ...["nordex-s-combi-ns", "nordex-s-combi-black-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "heater-guard-nordex-s-combi",
+      "safety-switch-for-heaters",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  ...["nordex-floor-ns", "nordex-floor-black-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "cozy-tank-13l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  {
+    prefix: "taurus-d-combi-ns",
+    slugs: [
+      "heater-guard-taurus",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  ...["savonia-combi-ns", "savonia-combi-fiber-coated-ns"].map(prefix => ({
+    prefix,
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  })),
+  {
+    prefix: "nimbus-combi-ns",
+    slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "minidragon",
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+];
 
-  if (!related.length) return null;
-
+/* ── Related Products grid (shared by every group below) ────────────── */
+function RelatedProductsGrid({ eyebrow, title, items }) {
+  if (!items.length) return null;
   return (
     <>
       <Divider />
-      <section style={{ maxWidth: 1140, margin: "0 auto", padding: "52px 32px 80px" }}>
-        <div style={{ marginBottom: 36 }}>
+      {/* Symmetric top/bottom padding — this grid renders back-to-back with
+          another one of itself (Accessories, then Other Heaters), so a
+          lopsided bottom padding here would stack with this one's own top
+          padding and blow the gap between them out to ~130px. */}
+      <section style={{ maxWidth: 1140, margin: "0 auto", padding: "44px 32px" }}>
+        <div style={{ marginBottom: 28 }}>
           <p style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
             fontSize: "0.67rem", letterSpacing: "0.14em", textTransform: "uppercase",
             color: "#a67853", margin: "0 0 6px",
           }}>
-            You might also like
+            {eyebrow}
           </p>
           <h2 style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
             fontSize: "1.5rem", color: "#2c1a0e", margin: 0, lineHeight: 1.2,
           }}>
-            Related Products
+            {title}
           </h2>
         </div>
 
@@ -429,7 +819,7 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
           gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
           gap: 24,
         }}>
-          {related.map(p => (
+          {items.map(p => (
             <Link
               key={p.id || p.slug}
               to={`/products/${p.slug}`}
@@ -485,6 +875,50 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
       </section>
     </>
   );
+}
+
+/* ── Related Products ─────────────────────────────────────────────── */
+function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
+  const { accessories, otherHeaters, generic } = useMemo(() => {
+    const empty = { accessories: [], otherHeaters: [], generic: [] };
+    if (!allProducts.length) return empty;
+
+    const sameCategory = (cats) => {
+      if (!cats?.length) return [];
+      const lower = cats.slice(0, 1).map(c => c.toLowerCase());
+      return allProducts
+        .filter(p =>
+          isPubliclyVisible(p) &&
+          p.slug !== currentSlug &&
+          (p.categories || []).some(c => lower.includes(c.toLowerCase()))
+        )
+        .slice(0, 4);
+    };
+
+    const curated = CURATED_RELATED_BY_SLUG_PREFIX.find(c => currentSlug?.startsWith(c.prefix));
+    if (curated) {
+      const bySlug = new Map(allProducts.map(p => [p.slug, p]));
+      const accessories = curated.slugs
+        .map(s => bySlug.get(s))
+        .filter(p => p && isPubliclyVisible(p) && p.slug !== currentSlug);
+      return { accessories, otherHeaters: sameCategory(categories), generic: [] };
+    }
+
+    return { accessories: [], otherHeaters: [], generic: sameCategory(categories) };
+  }, [currentSlug, categories, allProducts]);
+
+  if (!accessories.length && !otherHeaters.length && !generic.length) return null;
+
+  if (accessories.length || otherHeaters.length) {
+    return (
+      <>
+        <RelatedProductsGrid eyebrow="You might also like" title="Sauna Accessories" items={accessories} />
+        <RelatedProductsGrid eyebrow="You might also like" title="Other Heaters" items={otherHeaters} />
+      </>
+    );
+  }
+
+  return <RelatedProductsGrid eyebrow="You might also like" title="Related Products" items={generic} />;
 }
 
 /* ── Skeleton ─────────────────────────────────────────────────────── */

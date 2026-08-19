@@ -108,7 +108,9 @@
 }
 
 /* ---- Product groups ---- */
-.wm-group { margin-bottom: 40px; }
+/* Offsets the ?group= anchor jump so a section title doesn't land under the
+   fixed header (same 90px used for the #infrared-* anchors on /infrared). */
+.wm-group { margin-bottom: 40px; scroll-margin-top: 90px; }
 .wm-group-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.9rem; font-weight: 700;

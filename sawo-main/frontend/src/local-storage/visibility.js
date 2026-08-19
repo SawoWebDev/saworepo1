@@ -9,6 +9,11 @@
 // Date.now() internally in a way that's hard to reason about.
 export function isPubliclyVisible(item, now = Date.now()) {
   if (!item) return false;
+  // A trashed item's own fetch (getAllProductsLive/getAllSaunaRoomsLive)
+  // already excludes it server-side — this is a second, independent check so
+  // a soft-deleted item can never leak onto the public site even if some
+  // future caller pulls from a query that forgot the is_deleted filter.
+  if (item.is_deleted) return false;
   if (item.visible === false) return false;
   if (item.status === "published") return true;
   if (item.publish_at && new Date(item.publish_at).getTime() <= now) return true;
