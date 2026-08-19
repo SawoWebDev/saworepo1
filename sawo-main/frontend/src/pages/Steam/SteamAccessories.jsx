@@ -6,6 +6,7 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import heroBg from "../../assets/Steam/hero.webp";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
+import PageCTA from "../../components/PageCTA";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 
@@ -165,6 +166,14 @@ const SteamAccessories = () => {
         )}
       </div>
     </section>
+
+    {/* ===================== */}
+    {/* CTA                   */}
+    {/* ===================== */}
+    <PageCTA
+      title="Complete Your Steam Setup"
+      description="From steam doors to aroma pumps, our team can help you pick the right accessories to finish your installation."
+    />
 
     {/* ===================== */}
     {/* STYLES                */}

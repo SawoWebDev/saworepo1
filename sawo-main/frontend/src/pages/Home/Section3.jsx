@@ -254,6 +254,7 @@ const Section3 = () => {
         .home-benefits-carousel-wrapper { position: relative; overflow: hidden; }
         .sauna-card-unique-grid {
           display: flex;
+          align-items: flex-start;
           gap: 24px;
           animation: sawo-benefits-scroll 60s linear infinite;
           width: max-content;
@@ -270,9 +271,11 @@ const Section3 = () => {
           border-radius: 20px;
           width: 250px;
           min-width: 250px;
+          height: 250px;
           aspect-ratio: 1/1;
+          flex-shrink: 0;
           text-align: center;
-          transition: .4s ease;
+          transition: height .4s ease, box-shadow .4s ease, border-color .4s ease, color .4s ease;
           position: relative;
           cursor: pointer;
           display: flex;
@@ -283,17 +286,14 @@ const Section3 = () => {
           overflow: hidden;
           color: #af8564;
         }
-        .sauna-card-unique::before {
-          content: "";
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 3px;
-          background: linear-gradient(90deg, #c79a77, #fff, #c79a77);
-          transform: scaleX(0);
-          transition: .4s ease;
-        }
-        .sauna-card-unique:hover::before { transform: scaleX(1); }
+        /* Grow to fit the description instead of clamping/truncating it —
+           .sauna-card-unique-grid uses align-items:flex-start so this
+           doesn't stretch the other cards in the row. */
         .sauna-card-unique.active {
+          height: auto;
+          min-height: 250px;
+          aspect-ratio: auto;
+          padding-bottom: 26px;
           box-shadow: 0 22px 50px rgba(139,94,60,.28);
           border-color: #c79a77;
           color: #9e7456;
@@ -304,15 +304,15 @@ const Section3 = () => {
           border-radius: 50%;
           background: radial-gradient(circle at 30% 25%, #e4c3a8 0%, #c79a77 35%, #af8564 65%, #9e7456 100%);
           display: flex; align-items: center; justify-content: center;
-          transition: .45s cubic-bezier(.68,-.55,.265,1.55);
+          transition: .45s cubic-bezier(.68,-.55,.265,1.55), width .3s ease, height .3s ease;
         }
         .sauna-card-unique-icon i { font-size: 2rem; color: #fff; transition: .4s ease; }
         .sauna-card-unique:hover .sauna-card-unique-icon { transform: rotate(10deg) scale(1.06); }
         .sauna-card-unique.active .sauna-card-unique-icon {
+          width: 44px; height: 44px;
           background: radial-gradient(circle at 30% 25%, #f1d7c2 0%, #c79a77 40%, #af8564 70%, #9e7456 100%);
-          transform: scale(.62);
         }
-        .sauna-card-unique.active .sauna-card-unique-icon i { font-size: 2.3rem; }
+        .sauna-card-unique.active .sauna-card-unique-icon i { font-size: 1.3rem; }
         .sauna-card-unique-label {
           font-family: 'Montserrat', sans-serif;
           font-weight: 700; font-size: 1.05rem;
@@ -326,7 +326,9 @@ const Section3 = () => {
           transition: .45s ease;
           text-align: center; padding: 4px 6px; color: #fff;
         }
-        .sauna-card-unique.active .sauna-card-unique-description { max-height: 160px; opacity: 1; color: #2f2f2f; }
+        .sauna-card-unique.active .sauna-card-unique-description {
+          max-height: 300px; opacity: 1; color: #2f2f2f;
+        }
         .sauna-card-unique-click { position: absolute; inset: 0; }
         .sauna-card-unique-close {
           position: absolute; top: 12px; right: 12px;
@@ -339,7 +341,8 @@ const Section3 = () => {
         .sauna-card-unique-close i { color: #fff; font-size: .8rem; }
 
         @media (max-width: 768px) {
-          .sauna-card-unique { width: 220px; min-width: 220px; }
+          .sauna-card-unique { width: 220px; min-width: 220px; height: 220px; }
+          .sauna-card-unique.active { min-height: 220px; }
           .sauna-card-unique-label { font-size: 0.9rem; }
           .sauna-card-unique-description { font-size: 0.8rem; line-height: 1.35; }
           .sauna-card-unique-icon i { font-size: 1.8rem; }

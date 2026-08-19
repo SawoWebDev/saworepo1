@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
+import PageCTA from "../../components/PageCTA";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 
@@ -149,6 +150,14 @@ const SteamControls = () => {
         )}
       </div>
     </section>
+
+    {/* ===================== */}
+    {/* CTA                   */}
+    {/* ===================== */}
+    <PageCTA
+      title="Need Help Choosing a Control?"
+      description="Pair the right control panel with your steam generator for precise, effortless operation. Our team is here to help."
+    />
 
     {/* ===================== */}
     {/* STYLES                */}
