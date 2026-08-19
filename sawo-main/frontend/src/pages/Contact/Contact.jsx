@@ -416,6 +416,11 @@ const Contact = () => {
       </div>
       <style>{`
 
+        /* Shared fine-grain texture that gives the cards a subtle material feel */
+        :root {
+          --ct-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='ctn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23ctn)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
         /* ══ FORM SECTION (dark wood) ══ */
         .ct-form-section {
           position: relative;
@@ -447,10 +452,14 @@ const Contact = () => {
         /* Form card */
         .ct-form-wrapper { max-width: 620px; margin: 0 auto; font-family: 'Montserrat', sans-serif; }
         .ct-form-card {
-          background: #faf8f6;
+          background-color: #faf8f6;
+          background-image: var(--ct-grain);
           border-radius: 10px;
           padding: 45px 40px;
-          box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.95),
+            inset 0 -1px 0 rgba(120,90,66,0.09),
+            0 12px 40px rgba(0,0,0,0.35);
         }
 
         /* Progress */
@@ -504,14 +513,29 @@ const Contact = () => {
           cursor: pointer;
           transition: all 0.3s ease;
           text-align: center;
-          background: #ffffff;
+          background-color: #ffffff;
+          background-image: var(--ct-grain);
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.9),
+            inset 0 -2px 3px rgba(120,90,66,0.07),
+            0 2px 3px rgba(90,63,42,0.07);
         }
         .ct-category-card:hover {
           border-color: #af8564;
           transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(175,133,100,0.15);
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.9),
+            inset 0 -2px 3px rgba(120,90,66,0.08),
+            0 6px 12px rgba(175,133,100,0.2);
         }
-        .ct-category-card.selected { border-color: #af8564; background: #af8564; }
+        .ct-category-card.selected {
+          border-color: #af8564;
+          background-color: #af8564;
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.28),
+            inset 0 -2px 4px rgba(80,52,32,0.22),
+            0 3px 6px rgba(139,94,60,0.22);
+        }
         .ct-category-card i {
           font-size: 38px;
           color: #af8564;
@@ -841,18 +865,26 @@ const Contact = () => {
           gap: 26px;
         }
         .ct-office-card {
-          background: #fff;
+          background-color: #fff;
+          background-image: var(--ct-grain);
           border-radius: 16px;
           overflow: hidden;
           border: 1.5px solid rgba(175,133,100,0.18);
           transition: all 0.3s ease;
           display: flex;
           flex-direction: column;
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.9),
+            inset 0 -2px 4px rgba(120,90,66,0.06),
+            0 3px 6px rgba(90,63,42,0.08);
         }
         .ct-office-card:hover {
           transform: translateY(-6px);
           border-color: #af8564;
-          box-shadow: 0 18px 44px rgba(139,94,60,0.2);
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.9),
+            inset 0 -2px 4px rgba(120,90,66,0.07),
+            0 18px 44px rgba(139,94,60,0.2);
         }
         .ct-office-img {
           width: 100%;
@@ -943,7 +975,8 @@ const Contact = () => {
           gap: 26px;
         }
         .ct-support-card {
-          background: rgba(255,255,255,0.06);
+          background-color: rgba(255,255,255,0.06);
+          background-image: var(--ct-grain);
           border: 1.5px solid rgba(255,255,255,0.22);
           border-radius: 16px;
           padding: 40px 34px;
@@ -954,11 +987,19 @@ const Contact = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.2),
+            inset 0 -2px 4px rgba(0,0,0,0.16),
+            0 4px 10px rgba(0,0,0,0.14);
         }
         .ct-support-card:hover {
-          background: rgba(255,255,255,0.12);
+          background-color: rgba(255,255,255,0.12);
           border-color: rgba(255,255,255,0.5);
           transform: translateY(-5px);
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.26),
+            inset 0 -2px 4px rgba(0,0,0,0.16),
+            0 12px 26px rgba(0,0,0,0.2);
         }
         .ct-support-card > i {
           font-size: 40px;

@@ -8,6 +8,7 @@ import heroBg from "../../assets/Steam/hero.webp";
 import HeroWave from "../../components/HeroWave";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import SEO from "../../components/SEO";
+import PageCTA from "../../components/PageCTA";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import menuPaths from "../../menuPaths";
 
@@ -240,6 +241,14 @@ const Steam = () => {
           </div>
         )}
       </section>
+
+      {/* ===================== */}
+      {/* CTA                   */}
+      {/* ===================== */}
+      <PageCTA
+        title="Need Help Choosing?"
+        description="From generators and controls to accessories, our team can help you find the right steam sauna setup for your home or commercial space."
+      />
 
       {/* ===================== */}
       {/* GLOBAL STYLES         */}
