@@ -35,6 +35,14 @@ if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
 if (!fs.existsSync(FILES_DIR)) fs.mkdirSync(FILES_DIR, { recursive: true });
 
 let statsDownloaded = { images: 0, files: 0 };
+let statsSkipped = { images: 0, files: 0 };
+
+// Re-downloading an asset already sitting on disk costs real egress and buys
+// nothing. A full run touches ~1,900 assets, which is how a single unguarded
+// `npm run sync` used to move hundreds of MB in one go. Pass --force to
+// re-fetch anyway (after an interrupted run, or when a source file was
+// replaced in place under the same name).
+const FORCE_REDOWNLOAD = process.argv.includes("--force");
 
 // ── Fetch Products ────────────────────────────────────────────────────────────
 async function fetchProducts() {
@@ -87,6 +95,15 @@ async function fetchTags() {
 // ── Download and process images ────────────────────────────────────────────────
 async function downloadImage(url, outputPath) {
   try {
+    // ── Skip if we already hold this file ───────────────────────
+    // A non-empty local copy is treated as current: these assets are
+    // immutable in practice (R2 keys carry a content hash, WordPress upload
+    // URLs are date-scoped), so a name that resolved once will not change
+    // bytes underneath us. --force overrides where that does not hold.
+    if (!FORCE_REDOWNLOAD && fs.existsSync(outputPath)) {
+      if (fs.statSync(outputPath).size > 0) return "skipped";
+    }
+
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
@@ -148,7 +165,7 @@ async function processImageField(value, productSlug, bucket = "product-images") 
 
   const success = await downloadImage(downloadUrl, outputPath);
   if (success) {
-    statsDownloaded.images++;
+    if (success === "skipped") statsSkipped.images++; else statsDownloaded.images++;
     return `images/${filename}`;
   }
 
@@ -172,7 +189,7 @@ async function processFiles(filesArray, productSlug) {
 
       const success = await downloadImage(downloadUrl, outputPath);
       if (success) {
-        statsDownloaded.files++;
+        if (success === "skipped") statsSkipped.files++; else statsDownloaded.files++;
         processed.push({ ...file, path: `files/${filename}` });
       } else {
         processed.push(file);
@@ -191,7 +208,7 @@ async function processFiles(filesArray, productSlug) {
         const outputPath = path.join(FILES_DIR, filename);
         const success = await downloadImage(file.url, outputPath);
         if (success) {
-          statsDownloaded.files++;
+          if (success === "skipped") statsSkipped.files++; else statsDownloaded.files++;
           processed.push({ ...file, url: `files/${filename}` });
         } else {
           processed.push(file);
@@ -218,7 +235,7 @@ async function processFiles(filesArray, productSlug) {
       if (!fs.existsSync(outputPath)) {
         const success = await downloadImage(file.url, outputPath);
         if (success) {
-          statsDownloaded.files++;
+          if (success === "skipped") statsSkipped.files++; else statsDownloaded.files++;
           processed.push({ ...file, url: `files/${filename}` });
         } else {
           processed.push(file); // keep original URL as fallback
@@ -282,6 +299,8 @@ async function sync() {
       total_products: products.length,
       total_images_downloaded: statsDownloaded.images,
       total_files_downloaded: statsDownloaded.files,
+      total_images_skipped: statsSkipped.images,
+      total_files_skipped: statsSkipped.files,
     };
 
     fs.writeFileSync(
@@ -306,6 +325,7 @@ async function sync() {
     console.log(`✅ Products synced: ${products.length}`);
     console.log(`🖼️  Images downloaded: ${statsDownloaded.images}`);
     console.log(`📄 Files downloaded: ${statsDownloaded.files}`);
+    console.log(`⏭️  Already local, not re-fetched: ${statsSkipped.images} image(s), ${statsSkipped.files} file(s)`);
     console.log(`⏱️  Last synced: ${timestamp}\n`);
   } catch (err) {
     console.error("❌ Sync failed:", err.message);

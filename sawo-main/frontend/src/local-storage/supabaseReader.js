@@ -21,6 +21,46 @@ import { getSupabase } from "./supabaseClient";
 import { isPubliclyVisible } from "./visibility";
 
 /**
+ * The columns the admin Products list actually renders: card/table cells,
+ * the search filter, the heater/accessory grouping, and the Model
+ * autocomplete. Deliberately excludes the heavy per-row payload
+ * (description, short_description, spec_table, images, spec_images,
+ * variants, variations, resources, heating_element_groups, included_items,
+ * features) — those are ~74% of this table's wire size and none of them are
+ * read until a row is opened.
+ *
+ * Anything needing a whole row — the edit modal, the preview modal, CSV
+ * import/export, bulk operations — fetches it by id/slug instead of
+ * expecting the list to have carried it. Adding a heavy column back here
+ * silently restores the old cost, so put in this list only what the list
+ * itself renders.
+ */
+export const PRODUCT_LIST_COLUMNS = [
+  "id", "name", "slug", "thumbnail", "status", "visible", "featured",
+  "sort_order", "created_at", "created_by_username", "publish_at",
+  "categories", "tags", "brand", "type", "files",
+].join(", ");
+
+/**
+ * Fetch every product live, list columns only — the default admin Products
+ * view. See PRODUCT_LIST_COLUMNS for why this is not select("*").
+ */
+export async function getProductsListLive() {
+  try {
+    const { data, error } = await (await getSupabase())
+      .from("products")
+      .select(PRODUCT_LIST_COLUMNS)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch product list:", err);
+    return [];
+  }
+}
+
+/**
  * Fetch all products live from Supabase
  */
 export async function getAllProductsLive() {
