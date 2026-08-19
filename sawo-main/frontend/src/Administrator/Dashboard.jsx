@@ -6,7 +6,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "./supabase";
 import { getCache, setCache } from "./adminCache";
-import { computeStats } from "./analytics/computeStats";
 import { getPerms } from "./permissions";
 import { getDashboardTrafficWindow } from "../local-storage/dashboardSettings";
 import { useLocalProducts } from "./Local/useLocalProducts";
@@ -90,20 +89,30 @@ export default function Dashboard({ currentUser }) {
       // Admin-configurable (Settings → Dashboard Traffic Window), 7/30/90
       // days — defaults to 30 if never set.
       const windowDays = await getDashboardTrafficWindow();
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - windowDays);
-
-      const [{ data: pageViews, error: pvErr }, { data: events, error: evErr }, { data: activity, error: actErr }] = await Promise.all([
-        supabase.from("analytics_page_views").select("*").gte("timestamp", startDate.toISOString()),
-        supabase.from("analytics_events").select("*").gte("timestamp", startDate.toISOString()).limit(50),
-        supabase.from("activity_logs").select("*").order("created_at", { ascending: false }).limit(RECENT_ACTIVITY_LIMIT),
+      // Two queries, both sized by what the page renders rather than by how
+      // much traffic the window happens to contain:
+      //
+      //  - dashboard_traffic_summary folds the page views into the three
+      //    numbers below inside Postgres. Selecting the rows and folding them
+      //    here (the previous shape) meant the payload grew with traffic
+      //    while the output stayed a ~31-entry series. The analytics_events
+      //    fetch that fed the same fold is gone with it — the Dashboard never
+      //    rendered anything derived from it.
+      //  - activity_logs names its columns, so the meta/changes JSON (a full
+      //    product diff on edit rows) stays out of a list that shows a title
+      //    and a timestamp.
+      const [{ data: traffic, error: pvErr }, { data: activity, error: actErr }] = await Promise.all([
+        supabase.rpc("dashboard_traffic_summary", { window_days: windowDays }),
+        supabase.from("activity_logs")
+          .select("id, action, entity, entity_id, entity_name, username, created_at")
+          .order("created_at", { ascending: false })
+          .limit(RECENT_ACTIVITY_LIMIT),
       ]);
 
       if (pvErr) throw pvErr;
-      if (evErr) throw evErr;
       if (actErr) throw actErr;
 
-      const stats = computeStats(pageViews || [], events || [], startDate);
+      const stats = traffic || { totalPageViews: 0, uniqueVisitors: 0, dailyStats: [] };
       const newData = { stats, activity: activity || [], windowDays };
       setData(newData);
       setCache(DASHBOARD_CACHE_KEY, newData);

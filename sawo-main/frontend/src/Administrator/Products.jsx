@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
-import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, getProductBySlugLive } from "../local-storage/supabaseReader";
+import { getProductsListLive, getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, getProductBySlugLive } from "../local-storage/supabaseReader";
 import { isAccessoryProduct, VARIANT_COLOR_DOT, getVariationsArray } from "../pages/IndividualDisplay/DispAccessories";
 import { getCache, setCache } from "./adminCache";
 import { productsToCsvString, downloadCsv } from "./csv/productCsv";
@@ -2764,6 +2764,7 @@ export default function Products({ currentUser }) {
   const [bulkConfirm,           setBulkConfirm]           = useState(false);
   const [bulkStatusValue,       setBulkStatusValue]       = useState("");
   const [csvImportOpen,         setCsvImportOpen]         = useState(false);
+  const [csvImportLoading,      setCsvImportLoading]      = useState(false);
 
   const [modalOpen,   setModalOpen]   = useState(false);
   const [editing,     setEditing]     = useState(null);
@@ -2786,6 +2787,11 @@ export default function Products({ currentUser }) {
   const [upFile,  setUpFile]  = useState(false);
 
   const [cleanupOpen, setCleanupOpen] = useState(false);
+  const [exportingCsv, setExportingCsv] = useState(false);
+  // Full rows for CsvImportModal: it diffs an incoming CSV row against every
+  // column of the existing product, so list-shaped rows would report each
+  // unloaded field as a change.
+  const [csvExistingProducts, setCsvExistingProducts] = useState(null);
 
   const [modalMenuOpen, setModalMenuOpen] = useState(false);
   const [showRevisions, setShowRevisions] = useState(false);
@@ -2802,7 +2808,7 @@ export default function Products({ currentUser }) {
     // instead of flashing the loading state.
     if (!getCache(PRODUCTS_CACHE_KEY)) setLoading(true);
     try {
-      let data = await getAllProductsLive();
+      let data = await getProductsListLive();
       if (filterStatus) data = data.filter(p => p.status === filterStatus);
       data.sort((a, b) => {
         const aTime = new Date(a.created_at).getTime();
@@ -2849,6 +2855,23 @@ export default function Products({ currentUser }) {
   useEffect(() => {
     if (!perms.can("products.edit")) setViewMode("grid");
   }, []); // eslint-disable-line
+
+  // The list rows carry display columns only (PRODUCT_LIST_COLUMNS), so the
+  // three places that need a whole product — the preview modal and both CSV
+  // directions — fetch it here rather than reading fields the list never
+  // loaded. Doing it on demand is what keeps the heavy payload off every
+  // admin page load.
+  const openPreview = async row => {
+    const full = (await getProductByIdLive(row.id)) || row;
+    setPreviewProduct(full);
+  };
+
+  const loadFullProducts = useCallback(async ids => {
+    const all = await getAllProductsLive();
+    if (!ids) return all;
+    const wanted = new Set(ids);
+    return all.filter(p => wanted.has(p.id));
+  }, []);
 
   // ── Fetch revision history (logs) ───────────────────────────────────────────
   const fetchRevisions = async (productId) => {
@@ -3305,11 +3328,20 @@ export default function Products({ currentUser }) {
   };
 
   // ── CSV export — current filtered view, or just the selection if any is active.
-  const handleExportCsv = () => {
-    const rows = selected.size > 0 ? products.filter(p => selected.has(p.id)) : filtered;
-    if (rows.length === 0) return add("No products to export.", "error");
-    downloadCsv(`products-export-${new Date().toISOString().slice(0, 10)}.csv`, productsToCsvString(rows));
-    add(`Exported ${rows.length} product(s).`, "success");
+  const handleExportCsv = async () => {
+    const visible = selected.size > 0 ? products.filter(p => selected.has(p.id)) : filtered;
+    if (visible.length === 0) return add("No products to export.", "error");
+    // Export every column, not just the ones the list rendered — otherwise
+    // description/spec_table/images would come out blank.
+    setExportingCsv(true);
+    try {
+      const rows = await loadFullProducts(visible.map(p => p.id));
+      if (rows.length === 0) return add("No products to export.", "error");
+      downloadCsv(`products-export-${new Date().toISOString().slice(0, 10)}.csv`, productsToCsvString(rows));
+      add(`Exported ${rows.length} product(s).`, "success");
+    } catch (err) {
+      add(err.message, "error");
+    } finally { setExportingCsv(false); }
   };
 
   const toggleSelect = id => {
@@ -3479,12 +3511,21 @@ export default function Products({ currentUser }) {
               </button>
             </>
           )}
-          <button type="button" className="btn btn-ghost btn-sm" onClick={handleExportCsv} title="Export the current view (or selection) to CSV">
+          <button type="button" className="btn btn-ghost btn-sm" onClick={handleExportCsv} disabled={exportingCsv} title="Export the current view (or selection) to CSV">
             <i className="fa-solid fa-file-arrow-down" style={{ marginRight: 5 }} />
             Export CSV
           </button>
           {perms.can("products.csv_import") && (
-            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setCsvImportOpen(true)} title="Bulk create/update products from a CSV file">
+            <button type="button" className="btn btn-ghost btn-sm" disabled={csvImportLoading}
+              onClick={async () => {
+                setCsvImportLoading(true);
+                try {
+                  setCsvExistingProducts(await loadFullProducts());
+                  setCsvImportOpen(true);
+                } catch (err) { add(err.message, "error"); }
+                finally { setCsvImportLoading(false); }
+              }}
+              title="Bulk create/update products from a CSV file">
               <i className="fa-solid fa-file-arrow-up" style={{ marginRight: 5 }} />
               Import CSV
             </button>
@@ -3537,7 +3578,7 @@ export default function Products({ currentUser }) {
               <div key={group.key} style={{ marginBottom: 28 }}>
                 <h3 className="product-group-label">{group.label}</h3>
                 <div className="product-grid">
-                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
+                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
                 </div>
               </div>
             ))}
@@ -3549,7 +3590,7 @@ export default function Products({ currentUser }) {
                 {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
               </div>
             )}
-            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
+            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
           </div>
         )
       )}
@@ -3573,7 +3614,7 @@ export default function Products({ currentUser }) {
               }
             </td>
             <td>
-              <button type="button" className="product-name-link" onClick={() => setPreviewProduct(p)}
+              <button type="button" className="product-name-link" onClick={() => openPreview(p)}
                 style={{ background: "none", border: "none", padding: 0, cursor: "pointer", textAlign: "left" }}>
                 {p.name}
               </button>
@@ -3609,7 +3650,7 @@ export default function Products({ currentUser }) {
             </td>
             <td style={{ textAlign: "right" }}>
               <div className="table-actions">
-                <IconBtn icon="fa-eye" title="Preview" onClick={() => setPreviewProduct(p)} />
+                <IconBtn icon="fa-eye" title="Preview" onClick={() => openPreview(p)} />
                 {perms.can("products.edit") && (
                   <IconBtn icon="fa-pen" title="Edit" onClick={() => openEdit(p)} />
                 )}
@@ -4284,11 +4325,11 @@ export default function Products({ currentUser }) {
         message={`Delete "${confirmDel?.name}"? This cannot be undone. All associated images and files will also be removed.`}
         confirmLabel="Delete" />
 
-      {csvImportOpen && (
+      {csvImportOpen && csvExistingProducts && (
         <CsvImportModal
           open={csvImportOpen}
-          onClose={() => setCsvImportOpen(false)}
-          existingProducts={products}
+          onClose={() => { setCsvImportOpen(false); setCsvExistingProducts(null); }}
+          existingProducts={csvExistingProducts}
           currentUser={currentUser}
           upsertTaxonomy={upsertTaxonomy}
           buildProductPayload={buildProductPayload}
