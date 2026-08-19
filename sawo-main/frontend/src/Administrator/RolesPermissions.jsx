@@ -7,7 +7,7 @@
 // superadmin builds up here, one checkbox at a time).
 import React, { useEffect, useState } from "react";
 import { logActivity } from "./supabase";
-import { CAPABILITY_MAP } from "./permissions";
+import { CAPABILITY_MAP, PERMISSION_SECTIONS } from "./permissions";
 import { getRoleCapabilityOverrides, setRoleCapabilityOverrides } from "../local-storage/rolePermissions";
 import { getCache, setCache } from "./adminCache";
 
@@ -22,97 +22,10 @@ const ROLE_COLUMNS = [
 
 // Grouped the same way the sidebar itself groups pages (Catalog / Insights /
 // System), so "what does the editor see on their sidebar" maps directly
-// onto this table's shape. Only capabilities actually enforced somewhere in
-// the UI are listed — a few caps exist in CAPABILITY_MAP but aren't wired to
-// any real check yet (upload/storage-cleanup caps, an unused local-products
-// page flag), and showing checkboxes for those would toggle nothing.
-const SECTIONS = [
-  {
-    name: "Catalog",
-    groups: [
-      {
-        label: "Products",
-        rows: [
-          { cap: "products.view",        label: "View page (sidebar)" },
-          { cap: "products.create",      label: "Create" },
-          { cap: "products.edit",        label: "Edit" },
-          { cap: "products.delete",      label: "Delete" },
-          { cap: "products.duplicate",   label: "Duplicate" },
-          { cap: "products.bulk_delete", label: "Bulk delete" },
-        ],
-      },
-      {
-        label: "Sauna Rooms",
-        rows: [
-          { cap: "sauna_rooms.view",        label: "View page (sidebar)" },
-          { cap: "sauna_rooms.create",      label: "Create" },
-          { cap: "sauna_rooms.edit",        label: "Edit" },
-          { cap: "sauna_rooms.delete",      label: "Delete" },
-          { cap: "sauna_rooms.duplicate",   label: "Duplicate" },
-          { cap: "sauna_rooms.bulk_delete", label: "Bulk delete" },
-        ],
-      },
-      {
-        label: "Models",
-        rows: [
-          { cap: "page.models", label: "View page (sidebar)" },
-        ],
-      },
-      {
-        label: "Taxonomy",
-        rows: [
-          { cap: "page.taxonomy",   label: "View page (sidebar)" },
-          { cap: "taxonomy.create", label: "Create category/tag" },
-          { cap: "taxonomy.edit",   label: "Edit category/tag" },
-          { cap: "taxonomy.delete", label: "Delete category/tag" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Insights",
-    groups: [
-      {
-        label: "Inbox",
-        rows: [
-          { cap: "page.inbox", label: "View page (sidebar)" },
-        ],
-      },
-      {
-        label: "Analytics",
-        rows: [
-          { cap: "page.analytics", label: "View page (sidebar)" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "System",
-    groups: [
-      {
-        label: "Logs",
-        rows: [
-          { cap: "page.logs", label: "View page (sidebar)" },
-        ],
-      },
-      {
-        label: "Settings",
-        rows: [
-          { cap: "page.settings", label: "View page (sidebar)" },
-        ],
-      },
-      {
-        label: "Users",
-        rows: [
-          { cap: "page.users",   label: "View page (sidebar)" },
-          { cap: "users.create", label: "Create admin account" },
-          { cap: "users.edit",   label: "Edit admin account" },
-          { cap: "users.delete", label: "Delete admin account" },
-        ],
-      },
-    ],
-  },
-];
+// onto this table's shape. Shared with Users.jsx's per-user extra-permission
+// checkboxes — see PERMISSION_SECTIONS in permissions.js for the single
+// source of truth and why a few CAPABILITY_MAP entries are absent from it.
+const SECTIONS = PERMISSION_SECTIONS;
 
 export default function RolesPermissions({ currentUser }) {
   const cached = getCache(CACHE_KEY);

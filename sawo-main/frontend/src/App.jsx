@@ -102,6 +102,7 @@ const SeoKeywordIntelligence = lazy(() => import("./Administrator/SeoKeywordInte
 const CIStatus       = lazy(() => import("./Administrator/CIStatus"));
 const WebsiteHealth  = lazy(() => import("./Administrator/WebsiteHealth"));
 const Settings        = lazy(() => import("./Administrator/Settings"));
+const Trash           = lazy(() => import("./Administrator/Trash"));
 const RolesPermissions = lazy(() => import("./Administrator/RolesPermissions"));
 const ProtectedRoute = lazy(() => import("./Administrator/ProtectedRoute"));
 
@@ -287,6 +288,9 @@ export default function App() {
             <Route path="/admin/language" element={<Navigate to="/admin/settings" replace />} />
             <Route path="/admin/settings" element={
               <ProtectedRoute requiredCap="page.settings"><AdminLayout><Settings /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/trash" element={
+              <ProtectedRoute requiredCap="page.trash"><AdminLayout><Trash /></AdminLayout></ProtectedRoute>
             } />
 
             {/* Legacy editor products route — redirect to unified products page */}

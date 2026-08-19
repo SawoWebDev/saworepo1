@@ -110,6 +110,9 @@ import PromoBanner from "../../../components/PromoBanner";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
+import { getPowerRange } from "../../../utils/productPower";
+import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../../../utils/wallMountedGroups";
+import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -144,52 +147,10 @@ const DISPLAY_TAGS = [
 ];
 
 // ─── Grouping by product type (Nordex, Mini, Scandia, etc.) ──────────────────
-const FIXED_ORDER = [
-  "Nordex Mini Combi", "Nordex Combi", "Nordex Mini", "Nordex",
-  "Mini Combi", "Mini X", "Mini",
-  "Scandia Combi", "Scandia",
-  "Krios", "Scandifire",
-];
-
-const GROUP_KEYWORDS = {
-  "Nordex Mini Combi": ["Nordex Mini Combi", "NRMC"],
-  "Nordex Combi":      ["Nordex Combi", "NRNC"],
-  "Nordex Mini":       ["Nordex Mini", "NRM-"],
-  "Nordex":            ["Nordex", "NRN-"],
-  "Mini Combi":        ["Mini Combi", "MNC"],
-  "Mini X":            ["Mini X", "MX "],
-  "Mini":              ["Mini NB", "MN "],
-  "Scandia Combi":     ["Scandia Combi", "SCAC"],
-  "Scandia":           ["Scandia", "SCA-"],
-  "Krios":             ["Krios", "KRI"],
-  "Scandifire":        ["Scandifire"],
-};
-
-/** Group products by brand/type keywords */
-function groupProducts(products) {
-  const groupedProducts = products.reduce((groups, product) => {
-    let assigned = false;
-    for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
-      for (const kw of keywords) {
-        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
-        if (nameMatch || tagMatch) {
-          if (!groups[group]) groups[group] = [];
-          groups[group].push(product);
-          assigned = true;
-          break;
-        }
-      }
-      if (assigned) break;
-    }
-    if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
-    }
-    return groups;
-  }, {});
-  return groupedProducts;
-}
+// Shared with the "Wall-Mounted Series" section of HeatersCatalog.jsx so both
+// pages stay in sync — see utils/wallMountedGroups.js.
+const FIXED_ORDER = WALL_MOUNTED_FIXED_ORDER;
+const groupProducts = groupWallMountedProducts;
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -202,13 +163,17 @@ function arrayMatchesAny(arr = [], targets = []) {
 
 /** Filter the full product list to only those matching DISPLAY_CATEGORIES / DISPLAY_TAGS */
 function applyDisplayFilter(products) {
+  // Admission gate first — category alone decides whether this is a heater
+  // at all, before the category/tag display filter below runs.
+  const heatersOnly = products.filter(isHeaterProduct);
+
   const noCatFilter = DISPLAY_CATEGORIES.length === 0;
   const noTagFilter = DISPLAY_TAGS.length === 0;
 
   // No filters at all → show everything
-  if (noCatFilter && noTagFilter) return products;
+  if (noCatFilter && noTagFilter) return heatersOnly;
 
-  return products.filter(p =>
+  return heatersOnly.filter(p =>
     arrayMatchesAny(p.categories, DISPLAY_CATEGORIES) ||
     arrayMatchesAny(p.tags, DISPLAY_TAGS)
   );
@@ -234,8 +199,7 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
-  // Look for a kW power range tag (e.g. "3.5 – 9 kW")
-  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const power = getPowerRange(product.tags);
 
   return (
     <Link

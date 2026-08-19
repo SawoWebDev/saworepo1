@@ -1,7 +1,7 @@
 // Infrared.jsx
 
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import heroBg from "../../assets/Infrared/hero.webp";
 import saunaRoom from "../../assets/Infrared/sauna-room.webp";
 import irPanels from "../../assets/Infrared/ir-panels.webp";
@@ -14,15 +14,16 @@ import HeroWave from "../../components/HeroWave";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
+import PageCTA from "../../components/PageCTA";
 
 const accessories = [
-  { img: irPanels, title: "Infrared Panels", slug: "infrared-panels-ir-panel-2" },
-  { img: irBackrest, title: "Infrared Backrest", slug: "infrared-backrest-505-ir-a-d" },
-  { img: interfaceHolder, title: "Interface Holder", slug: "interface-holder-saunova-2" },
+  { img: irPanels, title: "Infrared Panels", slug: "infrared-panels" },
+  { img: irBackrest, title: "Infrared Backrest", slug: "infrared-backrest" },
+  { img: interfaceHolder, title: "Interface Holder", slug: "interface-holder" },
 ];
 
 const controls = [
-  { img: irUiV2, title: "Infrared 2.0 User Interface", slug: "infrared-2-0-user-interface-ir-ui-v2" },
+  { img: irUiV2, title: "Infrared 2.0 User Interface", slug: "infrared-2-0-user-interface" },
   { img: irPowerController, title: "Infrared 2.0 Power Controller", slug: "infrared-2-0-power-controller" },
   { img: irBuiltinControl, title: "Infrared 2.0 Built-In Control", slug: "infrared-2-0-built-in-control" },
 ];
@@ -44,6 +45,20 @@ const benefits = [
 
 const Infrared = () => {
   const heroLoaded = useHeroLoaded(heroBg);
+  const location = useLocation();
+
+  // Scroll to the target section when arriving via a hash link (e.g. /infrared#infrared-controls)
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   // Benefit-card interaction (hover on desktop, tap on touch devices)
   useEffect(() => {
@@ -104,6 +119,19 @@ const Infrared = () => {
         path="/infrared"
       />
 
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "SAWO Infrared Sauna",
+          description:
+            "Cedar-crafted infrared sauna room with therapeutic infrared heat panels, backrests, and digital controls for relaxation, muscle recovery, and skin wellness. Available in single- and two-person configurations.",
+          brand: { "@type": "Brand", name: "SAWO" },
+          category: "Infrared Sauna",
+          image: heroBg,
+        })}
+      </script>
+
       {/* ===================== */}
       {/* HERO                  */}
       {/* ===================== */}
@@ -140,17 +168,24 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA ROOM   */}
       {/* ===================== */}
-      <section id="infrared-sauna-room" className="max-w-[1000px] mx-auto px-6 py-20 text-center">
-        <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Room</h2>
-        <div className="ir-room-img-wrap">
-          <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
+      <section id="infrared-room" className="max-w-[1100px] mx-auto px-6 py-20">
+        <div className="ir-room-grid">
+          <div className="ir-room-left">
+            <h2 className="ir-group-title">Infrared Sauna Room</h2>
+            <p className="ir-room-desc">
+              Indulge in the therapeutic benefits of our Infrared Sauna Room, designed to promote
+              relaxation and well-being through the gentle warmth of infrared technology. Experience a
+              soothing escape in the comfort of your own space. Our Infrared Sauna Room is available for
+              single person and two people.
+            </p>
+            <Link to="/sauna/rooms#infrared-sauna-room" className="wm-brochure-btn">
+              VIEW INFRARED SAUNA ROOM
+            </Link>
+          </div>
+          <div className="ir-room-img-wrap">
+            <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
+          </div>
         </div>
-        <p className="ir-room-desc">
-          Indulge in the therapeutic benefits of our Infrared Sauna Room, designed to promote
-          relaxation and well-being through the gentle warmth of infrared technology. Experience a
-          soothing escape in the comfort of your own space. Our Infrared Sauna Room is available for
-          single person and two people.
-        </p>
       </section>
 
       {/* ===================== */}
@@ -194,7 +229,7 @@ const Infrared = () => {
       {/* ===================== */}
       {/* INFRARED SAUNA CONTROLS */}
       {/* ===================== */}
-      <section id="infrared-sauna-controls" className="max-w-[1100px] mx-auto px-6 py-20">
+      <section id="infrared-controls" className="max-w-[1100px] mx-auto px-6 py-20">
         <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Controls</h2>
         <div className="ir-ctrl-grid">
           {controls.map((item, i) => (
@@ -209,6 +244,14 @@ const Infrared = () => {
       </section>
 
       {/* ===================== */}
+      {/* CTA                   */}
+      {/* ===================== */}
+      <PageCTA
+        title="Need Help Choosing?"
+        description="From infrared panels to controls and accessories, our team can help you find the right infrared sauna setup for your space."
+      />
+
+      {/* ===================== */}
       {/* GLOBAL STYLES         */}
       {/* ===================== */}
       <style>{`
@@ -217,6 +260,13 @@ const Infrared = () => {
           --ir-primary-dark: #9e7456;
           --ir-primary-light: #c79a77;
           --ir-text-dark: #2f2f2f;
+        }
+
+        /* Keeps anchor jumps from hiding under a fixed header. Adjust px to your nav height. */
+        #infrared-room,
+        #infrared-accessories,
+        #infrared-controls {
+          scroll-margin-top: 90px;
         }
 
         /* --- Hero --- */
@@ -245,9 +295,13 @@ const Infrared = () => {
         .ir-group-title--center { text-align: center; }
 
         /* --- Sauna room --- */
+        .ir-room-grid {
+          display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+        }
+        .ir-room-left { text-align: left; }
+        .ir-room-left .ir-group-title { margin-bottom: 20px; }
         .ir-room-img-wrap {
           display: flex; align-items: center; justify-content: center;
-          margin: 0 auto 28px; max-width: 640px;
         }
         .ir-room-img {
           width: 100%; height: auto; border-radius: 12px; display: block;
@@ -255,9 +309,19 @@ const Infrared = () => {
         }
         .ir-room-desc {
           font-family: 'Montserrat', sans-serif;
-          font-size: 0.95rem; line-height: 1.8; color: #555; max-width: 620px;
-          margin: 0 auto;
+          font-size: 0.95rem; line-height: 1.8; color: #555;
+          margin: 0 0 28px;
         }
+        .wm-brochure-btn {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.82rem; font-weight: 600;
+          letter-spacing: 1px; padding: 11px 30px;
+          border: 2px solid #AA8161; color: #AA8161;
+          background: transparent; border-radius: 6px;
+          text-decoration: none; display: inline-block;
+          transition: all 0.3s ease;
+        }
+        .wm-brochure-btn:hover { background: #AA8161; color: #fff; }
 
         /* --- Accessories --- */
         .ir-acc-grid {
@@ -314,25 +378,29 @@ const Infrared = () => {
         }
         .sauna-carousel-wrapper { position: relative; overflow: hidden; }
         .sauna-card-unique-grid {
-          display: flex; gap: 24px; animation: ir-scroll-carousel 60s linear infinite; width: max-content;
+          display: flex; align-items: flex-start; gap: 24px; animation: ir-scroll-carousel 60s linear infinite; width: max-content;
         }
         .sauna-carousel-wrapper:hover .sauna-card-unique-grid { animation-play-state: paused; }
 
         @keyframes ir-scroll-carousel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         .sauna-card-unique {
-          background: #fff; border-radius: 20px; width: 220px; min-width: 220px; aspect-ratio: 1 / 1;
-          text-align: center; transition: 0.4s ease; position: relative; cursor: pointer;
+          background: #fff; border-radius: 20px; width: 250px; min-width: 250px; height: 250px;
+          aspect-ratio: 1 / 1; flex-shrink: 0;
+          text-align: center; transition: height 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+          position: relative; cursor: pointer;
           display: flex; align-items: center; justify-content: center; padding: 18px 16px;
           border: 2px solid transparent; overflow: hidden; color: var(--ir-primary);
         }
-        .sauna-card-unique::before {
-          content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-          background: linear-gradient(90deg, var(--ir-primary-light), #fff, var(--ir-primary-light));
-          transform: scaleX(0); transition: 0.4s ease;
-        }
-        .sauna-card-unique:hover::before { transform: scaleX(1); }
+        /* Grow to fit the description instead of clamping/truncating it —
+           .sauna-card-unique-grid uses align-items:flex-start so this
+           doesn't stretch the other cards in the row. Sized to match the
+           Home page's carousel (250px) instead of the old smaller 220px. */
         .sauna-card-unique.active {
+          height: auto;
+          min-height: 250px;
+          aspect-ratio: auto;
+          padding-bottom: 26px;
           box-shadow: 0 22px 50px rgba(139,94,60,0.28);
           border-color: var(--ir-primary-light); color: var(--ir-primary-dark);
         }
@@ -341,15 +409,15 @@ const Infrared = () => {
           width: 76px; height: 76px; border-radius: 50%;
           background: radial-gradient(circle at 30% 25%, #e4c3a8 0%, var(--ir-primary-light) 35%, var(--ir-primary) 65%, var(--ir-primary-dark) 100%);
           display: flex; align-items: center; justify-content: center;
-          transition: 0.45s cubic-bezier(0.68,-0.55,0.265,1.55);
+          transition: 0.45s cubic-bezier(0.68,-0.55,0.265,1.55), width 0.3s ease, height 0.3s ease;
         }
         .sauna-card-unique-icon i { font-size: 2rem; color: #fff; transition: 0.4s ease; }
         .sauna-card-unique:hover .sauna-card-unique-icon { transform: rotate(10deg) scale(1.06); }
         .sauna-card-unique.active .sauna-card-unique-icon {
+          width: 44px; height: 44px;
           background: radial-gradient(circle at 30% 25%, #f1d7c2 0%, var(--ir-primary-light) 40%, var(--ir-primary) 70%, var(--ir-primary-dark) 100%);
-          transform: scale(0.62);
         }
-        .sauna-card-unique.active .sauna-card-unique-icon i { font-size: 2.3rem; }
+        .sauna-card-unique.active .sauna-card-unique-icon i { font-size: 1.3rem; }
         .sauna-card-unique-label {
           font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.05rem;
           margin-top: 8px; transition: 0.3s ease;
@@ -360,7 +428,9 @@ const Infrared = () => {
           max-height: 0; opacity: 0; overflow: hidden; transition: 0.45s ease;
           text-align: center; padding: 4px 6px; color: #fff;
         }
-        .sauna-card-unique.active .sauna-card-unique-description { max-height: 160px; opacity: 1; color: var(--ir-text-dark); }
+        .sauna-card-unique.active .sauna-card-unique-description {
+          max-height: 300px; opacity: 1; color: var(--ir-text-dark);
+        }
         .sauna-card-unique-click { position: absolute; inset: 0; }
         .sauna-card-unique-close {
           position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%;
@@ -374,9 +444,13 @@ const Infrared = () => {
         @media (max-width: 768px) {
           .ir-hero-title { font-size: 30px; line-height: 38px; }
           .ir-group-title { font-size: 1.4rem; }
+          .ir-room-grid { grid-template-columns: 1fr; gap: 28px; }
+          .ir-room-left { text-align: center; }
+          .ir-room-desc { text-align: center; }
           .ir-acc-grid { grid-template-columns: 1fr; }
           .ir-ctrl-grid { grid-template-columns: 1fr; }
-          .sauna-card-unique { width: 200px; min-width: 200px; }
+          .sauna-card-unique { width: 220px; min-width: 220px; height: 220px; }
+          .sauna-card-unique.active { min-height: 220px; }
           .sauna-card-unique-label { font-size: 0.9rem; }
           .sauna-card-unique-description { font-size: 0.8rem; line-height: 1.35; }
           .sauna-card-unique-icon i { font-size: 1.8rem; }

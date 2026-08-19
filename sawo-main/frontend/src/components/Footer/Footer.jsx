@@ -42,8 +42,8 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-2">{t("headings.infraredSauna")}</h3>
             <ul className="space-y-1 text-sm">
               <li><Link to={localize(menuPaths.infrared)} className="hover:text-gray-300">{t("links.infraredRooms")}</Link></li>
-              <li><Link to={localize("/products/infrared-backrest-505-ir-a-d")} className="hover:text-gray-300">{t("links.infraredBackrest")}</Link></li>
-              <li><Link to={localize("/products/infrared-panels-ir-panel-2")} className="hover:text-gray-300">{t("links.infraredPanels")}</Link></li>
+              <li><Link to={localize("/products/infrared-backrest")} className="hover:text-gray-300">{t("links.infraredBackrest")}</Link></li>
+              <li><Link to={localize("/products/infrared-panels")} className="hover:text-gray-300">{t("links.infraredPanels")}</Link></li>
             </ul>
           </div>
 

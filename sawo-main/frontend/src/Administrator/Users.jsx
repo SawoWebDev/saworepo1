@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase, isPasswordUpdateRequiredError, forgotPassword } from "./supabase";
 import { getCache, setCache } from "./adminCache";
-import { getPerms } from "./permissions";
+import { getPerms, can, PERMISSION_SECTIONS } from "./permissions";
 
 const USERS_CACHE_KEY = "admin:users";
 
@@ -25,10 +25,23 @@ async function syncAuthPassword(username, newPassword) {
     body: { username, current_password: newPassword, new_password: newPassword },
   });
   if (error) {
+    // supabase-js's own error.message for a non-2xx function response is a
+    // generic "Edge Function returned a non-2xx status code" — it doesn't
+    // surface the function's own { error: "..." } JSON body, which is where
+    // the actually useful reason (e.g. "email already registered") lives.
+    // Read it straight from the failed response instead.
+    let detail = error.message;
+    try {
+      const body = await error.context?.json();
+      if (body?.error) detail = body.error;
+    } catch {
+      // Response body wasn't JSON (or already consumed) — fall back to the
+      // generic message rather than let this throw mask the original error.
+    }
     throw new Error(
       "The password was saved, but syncing it to the login system failed, so " +
       "this user may not be able to sign in yet. Ask them to use \"Forgot password?\", " +
-      `or try again. (${error.message})`
+      `or try again. (${detail})`
     );
   }
 }
@@ -62,17 +75,43 @@ function Toast({ toasts, remove }) {
 
 const emptyForm = {
   username: "",
-  password_hash: "",
   full_name: "",
   email: "",
+  password_hash: "",
   role: "admin",
+  // Individual grants on top of the role's own defaults — see
+  // PERMISSION_SECTIONS in permissions.js. Never includes a capability the
+  // selected role already grants by default (toggling the role checkbox
+  // clears it there instead — see the Permissions form-group below).
+  extra_permissions: [],
 };
 
-function Modal({ open, onClose, title, children }) {
+// admin/superadmin have real reach into the CMS (data, other users' access,
+// site config), so they go through the email-invite flow only — no
+// admin-set-password shortcut, which is what caused the Editor/Rafael
+// account collision earlier. editor/viewer are lower-privilege, often
+// assigned in person like a WordPress account: email is optional for them,
+// and a superadmin can set their password directly instead.
+const EMAIL_REQUIRED_ROLES = new Set(["admin", "superadmin"]);
+const emailRequiredForRole = role => EMAIL_REQUIRED_ROLES.has(role);
+
+// Supabase Auth is inherently email-based — even a "no email" account still
+// needs one internally for a real Auth session to exist at all (this app
+// deliberately requires a real Auth session for every login now; see
+// apiLogin's comments for why that migration happened). Deriving a
+// placeholder from the username keeps it unique for free (usernames already
+// are) without ever asking the admin to think about it, and it's never
+// treated as a real, contactable address anywhere in this file.
+const NO_EMAIL_DOMAIN = "no-email.internal";
+const isSyntheticEmail = email => !!email && email.toLowerCase().endsWith(`@${NO_EMAIL_DOMAIN}`);
+const syntheticEmailFor = username =>
+  `${username.trim().toLowerCase().replace(/[^a-z0-9._-]/g, "") || "user"}@${NO_EMAIL_DOMAIN}`;
+
+function Modal({ open, onClose, title, wide, children }) {
   if (!open) return null;
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
+      <div className={`modal${wide ? " modal-wide" : ""}`} onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
           <button className="modal-close-btn" onClick={onClose}></button>
@@ -133,7 +172,6 @@ export default function Users({ currentUser }) {
   const [formError, setFormError]   = useState("");
   const [formLoading, setFormLoading] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
-  const [showPassword, setShowPassword]   = useState(false);
   const [changePassModal, setChangePassModal] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -142,7 +180,7 @@ export default function Users({ currentUser }) {
   const fetchUsers = async () => {
     const { data, error } = await supabase
       .from("users")
-      .select("id, username, full_name, email, role, created_at")
+      .select("id, username, full_name, email, role, extra_permissions, created_at")
       .order("created_at", { ascending: sortDir === "asc" });
     if (!error) { setUsers(data); setCache(USERS_CACHE_KEY, data); setSelected(new Set()); }
   };
@@ -150,93 +188,174 @@ export default function Users({ currentUser }) {
   useEffect(() => { fetchUsers(); }, [sortDir]); // eslint-disable-line
 
   const openAdd = () => {
-    setEditUser(null); setForm(emptyForm); setFormError(""); setShowPassword(false); setShowModal(true);
+    setEditUser(null); setForm(emptyForm); setFormError(""); setShowModal(true);
   };
 
   const openEdit = u => {
     setEditUser(u);
-    setForm({ username: u.username, password_hash: "", full_name: u.full_name || "", email: u.email || "", role: u.role || "admin" });
-    setFormError(""); setShowPassword(false); setShowModal(true);
+    setForm({
+      username: u.username,
+      full_name: u.full_name || "",
+      // A synthetic placeholder is an internal implementation detail, not a
+      // real address — show the field blank rather than that generated
+      // string, so it doesn't get mistaken for something worth keeping.
+      email: isSyntheticEmail(u.email) ? "" : (u.email || ""),
+      password_hash: "",
+      role: u.role || "admin",
+      extra_permissions: u.extra_permissions || [],
+    });
+    setFormError(""); setShowModal(true);
+  };
+
+  // Client-side duplicate check against the already-loaded user list —
+  // usernames and emails must both be unique (the database enforces this
+  // too, via users_username_key / users_email_key, so this is a friendlier
+  // early warning, not the only guard). Excludes the row being edited so
+  // saving a user without changing their own username/email doesn't flag
+  // itself as a duplicate.
+  const findDuplicate = (field, value) => {
+    const v = value.trim().toLowerCase();
+    if (!v) return null;
+    return users.find(u => u.id !== editUser?.id && (u[field] || "").toLowerCase() === v) || null;
+  };
+  const usernameDuplicate = findDuplicate("username", form.username);
+  const emailDuplicate = form.email ? findDuplicate("email", form.email) : null;
+
+  // Toggles one extra-permission checkbox. Guards against ever storing a cap
+  // the currently-selected role already grants by default — if the admin
+  // flips Role after checking some extras, any that became redundant drop
+  // out silently next render (see the filter in the Permissions section
+  // below) rather than being saved as dead weight.
+  const toggleExtraPermission = (cap, checked) => {
+    setForm(f => ({
+      ...f,
+      extra_permissions: checked
+        ? [...f.extra_permissions, cap]
+        : f.extra_permissions.filter(c => c !== cap),
+    }));
   };
 
   const closeModal = () => { setShowModal(false); setEditUser(null); };
 
+  // Translates a raw Postgres unique-violation into the friendly message the
+  // inline duplicate check already shows — a backstop for the rare race
+  // where two admins save the same username/email at nearly the same time
+  // (the client-side check alone can't catch that, only the database can).
+  const friendlyDbError = err => {
+    const msg = err.message || String(err);
+    if (/users_username_key/.test(msg)) return "That username is already taken.";
+    if (/users_email_key/.test(msg)) return "That email is already used by another account.";
+    return msg;
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     setFormError("");
+
+    if (usernameDuplicate) { setFormError("That username is already taken."); return; }
+    if (emailDuplicate) { setFormError("That email is already used by another account."); return; }
+
+    const requiresEmail = emailRequiredForRole(form.role);
+    const realEmail = form.email.trim();
+    const manualPassword = form.password_hash.trim();
+    if (requiresEmail && !realEmail) {
+      setFormError("Email is required for the admin and superadmin roles.");
+      return;
+    }
+    if (!requiresEmail && !editUser && !realEmail && !manualPassword) {
+      setFormError("Set a password for this user, or provide a real email so they can set their own.");
+      return;
+    }
+
     setFormLoading(true);
+    // Only persist caps the chosen role doesn't already grant by default —
+    // keeps extra_permissions a true diff from the role, not a redundant
+    // copy of it (and means switching Role never leaves stale dead grants
+    // behind that just happen to be harmless).
+    const extraPermissions = form.extra_permissions.filter(cap => !can(form.role, cap));
+    // A blank email on a role that doesn't require one gets a deterministic
+    // internal placeholder instead of staying null — see NO_EMAIL_DOMAIN's
+    // comment for why a real (if synthetic) address is still needed here.
+    const usingSyntheticEmail = !requiresEmail && !realEmail;
+    const email = usingSyntheticEmail ? syntheticEmailFor(form.username.trim()) : realEmail;
     try {
       if (editUser) {
-        // password_hash is no longer a directly-writable column (see
-        // supabase.js's apiLogin comment) — a changed password goes through
-        // the set_user_password RPC, hashed server-side, never sent as-is.
         const updates = {
           username: form.username.trim(),
           full_name: form.full_name.trim() || null,
-          email: form.email.trim() || null,
+          email,
           role: form.role,
+          extra_permissions: extraPermissions,
         };
         const { error } = await supabase.from("users").update(updates).eq("id", editUser.id);
-        if (error) throw new Error(error.message);
-        if (form.password_hash.trim()) {
-          const newPassword = form.password_hash.trim();
-          const { error: pwError } = await supabase.rpc("set_user_password", {
-            p_user_id: editUser.id,
-            p_new_password: newPassword,
-          });
-          if (pwError) throw new Error("User updated but password change failed: " + pwError.message);
-          // set_user_password only rewrites users.password_hash — it cannot
-          // touch Supabase Auth from the client. Without this second step the
-          // account's Auth password stays stale and its owner can't log in.
-          await syncAuthPassword(form.username.trim(), newPassword);
-        }
-        if (form.email.trim() && form.email.trim() !== editUser.email) {
-          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email: form.email.trim() } });
+        if (error) throw new Error(friendlyDbError(error));
+        // Only worth telling Auth about a REAL email change — a synthetic
+        // placeholder was never registered as a contactable address anywhere.
+        if (!usingSyntheticEmail && email !== editUser.email) {
+          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
           if (fnError) console.warn("Auth email sync failed:", fnError.message);
         }
+        closeModal();
+        fetchUsers();
       } else {
-        // New users set their own password via email, the same way every
-        // other password change in the CMS works (see ResetPassword.jsx) —
-        // omit password_hash entirely so the column DEFAULT fills in an
-        // unusable placeholder until they do.
         const newUsername = form.username.trim();
-        const email = form.email.trim();
         const { error } = await supabase.from("users").insert([{
           username: newUsername,
           full_name: form.full_name.trim() || null,
-          email: email || null,
+          email,
           role: form.role,
+          extra_permissions: extraPermissions,
         }]);
-        if (error) throw new Error(error.message);
+        if (error) throw new Error(friendlyDbError(error));
 
-        // Optional: an admin can still set an initial password directly
-        // (e.g. for an account with no email) — but it's never required.
-        if (form.password_hash.trim()) {
-          const newPassword = form.password_hash.trim();
-          const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
-            p_username: newUsername,
-            p_new_password: newPassword,
-          });
-          if (pwError) throw new Error("User created but setting the password failed: " + pwError.message);
-          // Keep Supabase Auth in step — see the note on the edit path above.
-          await syncAuthPassword(newUsername, newPassword);
-        }
+        // The account row now exists — close and refresh right away rather
+        // than waiting on the steps below. Those used to be awaited inside
+        // this same try block, so a failure there (e.g. the invite email
+        // erroring) left the modal open with a blocking error even though
+        // the user had already been created; clicking "Create User" again to
+        // retry then hit a conflict on the username, since it already
+        // existed from the first attempt. Treating them as best-effort
+        // follow-ups (reported via toast, not a blocking form error) makes
+        // that retry-into-a-conflict impossible.
+        closeModal();
+        fetchUsers();
 
-        if (email) {
-          const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
-          if (fnError) console.warn("Auth user creation failed:", fnError.message);
-
+        (async () => {
           try {
-            await forgotPassword(newUsername);
-          } catch (mailErr) {
-            console.warn("Password-setup email failed to send:", mailErr.message);
+            if (manualPassword) {
+              const { error: pwError } = await supabase.rpc("set_user_password_by_username", {
+                p_username: newUsername,
+                p_new_password: manualPassword,
+              });
+              if (pwError) throw new Error("Setting the password failed: " + pwError.message);
+              // Creates (or updates) the real Auth account behind that email
+              // — synthetic placeholder or not, this is what actually makes
+              // the username+password combo work at login.
+              await syncAuthPassword(newUsername, manualPassword);
+            }
+
+            if (usingSyntheticEmail) {
+              addToast(
+                manualPassword
+                  ? `User "${newUsername}" created. No email on file — share the password with them directly.`
+                  : `User "${newUsername}" created.`,
+                "success"
+              );
+            } else {
+              const { error: fnError } = await supabase.functions.invoke("create-auth-user", { body: { email } });
+              if (fnError) console.warn("Auth user creation failed:", fnError.message);
+              await forgotPassword(newUsername);
+              addToast(`User created. A password-setup link was sent to ${email}.`, "success");
+            }
+          } catch (err) {
+            if (isPasswordUpdateRequiredError(err.message)) {
+              notifyPasswordUpdateRequired();
+            } else {
+              addToast(`User created, but: ${err.message}`, "error");
+            }
           }
-        }
-      }
-      closeModal();
-      fetchUsers();
-      if (!editUser && form.email.trim()) {
-        addToast(`User created. A password-setup link was sent to ${form.email.trim()}.`, "success");
+        })();
+        return;
       }
     } catch (err) {
       if (isPasswordUpdateRequiredError(err.message)) {
@@ -423,8 +542,21 @@ export default function Users({ currentUser }) {
                   <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 14, color: "var(--text)" }}>{u.username}</span>
                 </td>
                 <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.full_name || "-"}</td>
-                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>{u.email || "-"}</td>
-                <td>{roleBadge(u.role)}</td>
+                <td style={{ fontFamily: "var(--font)", fontWeight: 400, fontSize: 13, color: "var(--text-2)" }}>
+                  {isSyntheticEmail(u.email) ? <span style={{ color: "var(--text-3)", fontStyle: "italic" }}>No email</span> : (u.email || "-")}
+                </td>
+                <td>
+                  {roleBadge(u.role)}
+                  {u.extra_permissions?.length > 0 && (
+                    <span
+                      className="tbl-pill"
+                      title={`${u.extra_permissions.length} extra permission(s) added on top of the ${u.role} role's defaults`}
+                      style={{ marginLeft: 6, background: "var(--brand-muted)", color: "var(--brand)" }}
+                    >
+                      +{u.extra_permissions.length} extra
+                    </span>
+                  )}
+                </td>
                 <td className="tbl-date">{formatDate(u.created_at)}</td>
                 <td style={{ textAlign: "right" }}>
                   <div className="table-actions">
@@ -459,35 +591,85 @@ export default function Users({ currentUser }) {
       </div>
 
       {/* Add / Edit Modal */}
-      <Modal open={showModal} onClose={closeModal} title={editUser ? "Edit User" : "Add User"}>
+      <Modal open={showModal} onClose={closeModal} title={editUser ? "Edit User" : "Add User"} wide>
+        <style>{`
+          .user-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+          @media (max-width: 640px) {
+            .user-form-row { grid-template-columns: 1fr; gap: 14px; }
+          }
+        `}</style>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Username <span style={{ color: "var(--danger)" }}>*</span></label>
-            <input className="form-input" type="text" required value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} />
+          <div className="user-form-row">
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Username <span style={{ color: "var(--danger)" }}>*</span></label>
+              <input className="form-input" type="text" required value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} />
+              {usernameDuplicate && (
+                <p style={{ fontSize: "0.75rem", color: "var(--danger)", marginTop: "0.3rem" }}>
+                  <i className="fa-solid fa-circle-exclamation" style={{ marginRight: 4 }} />
+                  Already taken by {usernameDuplicate.username}.
+                </p>
+              )}
+            </div>
+
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Full Name</label>
+              <input className="form-input" type="text" value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} />
+            </div>
           </div>
 
-          {!editUser ? (
+          <div className="user-form-row">
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">Password</label>
-              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 5px" }}>
-                Optional. If an email is provided below, a link to set their own password is sent automatically. Only fill this in to set an initial password yourself.
-              </p>
-              <div className="input-wrap">
-                <input
-                  className="form-input"
-                  type={showPassword ? "text" : "password"}
-                  value={form.password_hash}
-                  onChange={e => setForm({ ...form, password_hash: e.target.value })}
-                  style={{ paddingRight: "2.5rem" }}
-                  placeholder="Optional"
-                />
-                <button type="button" className="input-eye-btn" onClick={() => setShowPassword(s => !s)}>
-                  <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"} />
-                </button>
-              </div>
+              <label className="form-label">
+                Email {emailRequiredForRole(form.role) && <span style={{ color: "var(--danger)" }}>*</span>}
+                {!emailRequiredForRole(form.role) && <span style={{ color: "var(--text-3)", fontWeight: 400 }}> (optional for this role)</span>}
+              </label>
+              <input className="form-input" type="email" required={emailRequiredForRole(form.role)} value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+              {emailDuplicate ? (
+                <p style={{ fontSize: "0.75rem", color: "var(--danger)", marginTop: "0.3rem" }}>
+                  <i className="fa-solid fa-circle-exclamation" style={{ marginRight: 4 }} />
+                  Already used by {emailDuplicate.username}. Each account needs its own email — sign-in is matched by email, so two accounts can't share one.
+                </p>
+              ) : !editUser && (
+                <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
+                  {emailRequiredForRole(form.role)
+                    ? "A password-setup link will be sent to this address once the account is created — that's the only way this user's password gets set."
+                    : "Leave blank to skip email entirely and set a password for them directly below — hand it to them yourself, like a WordPress account. Provide a real email instead if you'd rather they set their own password."}
+                </p>
+              )}
             </div>
-          ) : canEdit && (
+
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Role</label>
+              <select className="form-select" value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}>
+                <option value="admin">admin</option>
+                <option value="superadmin">superadmin</option>
+                <option value="editor">editor</option>
+                <option value="viewer">viewer</option>
+              </select>
+            </div>
+          </div>
+
+          {!editUser && !emailRequiredForRole(form.role) && (
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">
+                Password {!form.email.trim() && <span style={{ color: "var(--danger)" }}>*</span>}
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                value={form.password_hash}
+                onChange={e => setForm({ ...form, password_hash: e.target.value })}
+                style={{ maxWidth: 340 }}
+                placeholder={form.email.trim() ? "Optional — leave blank to let them set it via email instead" : "Required — no email means no self-service reset"}
+              />
+              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
+                Shown in plain text here on purpose — you're meant to hand it to them yourself.
+              </p>
+            </div>
+          )}
+
+          {editUser && canEdit && (
             <button
               type="button"
               className="btn btn-sm"
@@ -499,30 +681,64 @@ export default function Users({ currentUser }) {
             </button>
           )}
 
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Full Name</label>
-            <input className="form-input" type="text" value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} />
-          </div>
-
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Email <span style={{ color: "var(--danger)" }}>*</span></label>
-            <input className="form-input" type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-            {!editUser && (
-              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", marginTop: "0.3rem" }}>
-                A Supabase Auth account will be created so the user can reset their password.
+          {form.role === "superadmin" ? (
+            <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: 0 }}>
+              Superadmin already has every permission — extra permissions don't apply.
+            </p>
+          ) : (
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Permissions</label>
+              <p style={{ fontSize: "0.75rem", color: "var(--text-3)", margin: "0 0 8px" }}>
+                Checked-and-locked boxes come from the <strong>{form.role}</strong> role's own defaults.
+                Check any other box to grant it to this user specifically, without changing the role itself.
               </p>
-            )}
-          </div>
-
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label className="form-label">Role</label>
-            <select className="form-select" value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}>
-              <option value="admin">admin</option>
-              <option value="superadmin">superadmin</option>
-              <option value="editor">editor</option>
-              <option value="viewer">viewer</option>
-            </select>
-          </div>
+              <div className="products-table-wrap" style={{ maxHeight: 280, overflowY: "auto" }}>
+                {PERMISSION_SECTIONS.map(section => (
+                  <div key={section.name}>
+                    {section.groups.map(group => (
+                      <React.Fragment key={group.label}>
+                        <div style={{
+                          fontSize: "0.72rem", fontWeight: 700, color: "var(--brand)",
+                          background: "var(--brand-muted)", padding: "6px 12px",
+                        }}>
+                          {group.label}
+                        </div>
+                        {group.rows.map(row => {
+                          const fromRole = can(form.role, row.cap);
+                          const checked = fromRole || form.extra_permissions.includes(row.cap);
+                          return (
+                            <label
+                              key={row.cap}
+                              style={{
+                                display: "flex", alignItems: "center", gap: 8,
+                                padding: "6px 12px", fontSize: "0.82rem",
+                                color: fromRole ? "var(--text-3)" : "var(--text-2)",
+                                cursor: fromRole ? "default" : "pointer",
+                              }}
+                            >
+                              <input
+                                type="checkbox"
+                                className="tbl-checkbox"
+                                checked={checked}
+                                disabled={fromRole}
+                                onChange={e => toggleExtraPermission(row.cap, e.target.checked)}
+                              />
+                              {row.label}
+                              {fromRole && (
+                                <span style={{ fontSize: "0.68rem", color: "var(--text-3)", marginLeft: "auto" }}>
+                                  from role
+                                </span>
+                              )}
+                            </label>
+                          );
+                        })}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {formError && (
             <div className="alert alert-error">
@@ -532,7 +748,7 @@ export default function Users({ currentUser }) {
 
           <div className="modal-footer">
             <button type="button" className="btn btn-ghost" onClick={closeModal}>Cancel</button>
-            <button type="submit" className="btn btn-primary" disabled={formLoading}>
+            <button type="submit" className="btn btn-primary" disabled={formLoading || !!usernameDuplicate || !!emailDuplicate}>
               {formLoading
                 ? <><i className="fa-solid fa-spinner" style={{ animation: "spin 1s linear infinite" }} /> {editUser ? "Saving..." : "Creating..."}</>
                 : <><i className={editUser ? "fa-solid fa-floppy-disk" : "fa-solid fa-user-plus"} /> {editUser ? "Save Changes" : "Create User"}</>

@@ -330,9 +330,12 @@ const Section1 = () => {
           transform: translateY(0);
         }
 
-        @media (max-width: 1024px) { .sawo-carousel-item { flex: 0 0 calc(33.333% - 20px); } }
-        @media (max-width: 768px)  { .sawo-carousel-item { flex: 0 0 calc(50% - 20px); } }
-        @media (max-width: 480px)  { .sawo-carousel-item { flex: 0 0 100%; } }
+        /* Breakpoints intentionally match Section2/Section4's carousels
+           (4 → 2 → 1) so every image card on the homepage steps down at the
+           same widths. Going 4→3→2 here left these cards visibly smaller than
+           the rest of the page on tablets and phones. */
+        @media (max-width: 1024px) { .sawo-carousel-item { flex: 0 0 calc(50% - 20px); } }
+        @media (max-width: 640px)  { .sawo-carousel-item { flex: 0 0 100%; } }
       `}</style>
     </div>
   );

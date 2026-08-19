@@ -41,11 +41,11 @@ export function controlsPath(type) {
   return group ? `${menuPaths.sauna.controls}?group=${encodeURIComponent(group)}` : menuPaths.sauna.controls;
 }
 
-// Infrared card key -> the real section id added to pages/Infrared/Infrared.jsx.
+// Infrared card key -> the real section id in pages/Infrared/Infrared.jsx.
 const INFRARED_ANCHORS = {
-  rooms: "infrared-sauna-room",
+  rooms: "infrared-room",
   panels: "infrared-accessories", // Infrared Panels are one product within this section, not their own section
-  controls: "infrared-sauna-controls",
+  controls: "infrared-controls",
 };
 
 export function infraredPath(type) {

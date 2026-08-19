@@ -14,6 +14,8 @@ import { isPubliclyVisible } from "../local-storage/visibility";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/NRM-NB-BL1.webp";
 import HeroWave from "../components/HeroWave";
+import { getPowerRange } from "../utils/productPower";
+import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
 
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
@@ -34,7 +36,7 @@ const HEATER_GROUPS = [
 ];
 
 function HeaterCard({ product }) {
-  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const power = getPowerRange(product.tags);
   const image = getImageUrl(product, "thumbnail");
 
   return (
@@ -53,7 +55,37 @@ function HeaterCard({ product }) {
 }
 
 function CategorySection({ group, productsByGroup }) {
-  const products = (productsByGroup[group.id] || [])
+  const products = productsByGroup[group.id] || [];
+
+  // The Wall-Mounted series has well-defined brand families (Nordex, Mini,
+  // Scandia, Krios, Scandifire) — organize it the same way the dedicated
+  // Wall-Mounted heaters page does, instead of one flat grid.
+  if (group.category === "wall-mounted") {
+    const brandGroups = groupWallMountedProducts(products);
+    const brandNames = WALL_MOUNTED_FIXED_ORDER.filter(g => brandGroups[g]?.length);
+
+    return (
+      <div id={group.id} className="category-section">
+        <div className="category-section-title">
+          <h2>{group.label}</h2>
+        </div>
+        <div className="hc-brand-groups">
+          {brandNames.map(brand => (
+            <div className="hc-brand-group" key={brand}>
+              <h3 className="hc-brand-title">{brand.toUpperCase()}</h3>
+              <div className="hc-grid">
+                {brandGroups[brand].map(product => (
+                  <HeaterCard key={product.id || product.slug} product={product} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const sorted = products
     .slice()
     .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
@@ -63,7 +95,7 @@ function CategorySection({ group, productsByGroup }) {
         <h2>{group.label}</h2>
       </div>
       <div className="hc-grid">
-        {products.map(product => (
+        {sorted.map(product => (
           <HeaterCard key={product.id || product.slug} product={product} />
         ))}
       </div>
@@ -333,6 +365,22 @@ export default function HeatersCatalog({ showHero = true } = {}) {
           margin: 0 0 8px;
           line-height: 1.2;
           font-family: 'Montserrat', sans-serif;
+        }
+
+        .hc-brand-groups {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+        .hc-brand-title {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          font-size: 1rem;
+          letter-spacing: 0.04em;
+          color: #2c1a0e;
+          margin: 0 0 18px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #edddd0;
         }
 
         @media screen and (max-width: 1024px) {

@@ -2,18 +2,20 @@
 // Dynamic products from Supabase, filtered by the "Sauna Controls" category/tags, with search.
 // Converted from WallMounted.jsx — same structure, updated copy, categories, grouping, and hero image.
 
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
+import promoBannerImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Sauna-Controls-Banner.webp";
 import PromoBanner from "../../components/PromoBanner";
 import "./heaters/heaters.css"; // reuse existing heaters CSS
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { getPowerRange } from "../../utils/productPower";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -62,14 +64,29 @@ const FIXED_ORDER = [
   "Sensor",
 ];
 
+// Order matters: matching walks groups top-to-bottom and stops at the first
+// hit, so narrow/specific groups must come before the broad brand ones.
+// Reason: e.g. "Innova & Saunova 2.0 Spare Rj12 – Cables" and "Rectangular
+// Interface Holder for 2.0 Controls" both carry "Innova"/"Saunova"
+// cross-compatibility tags (they work with either control line) — if the
+// brand groups were checked first, every spare part/interface holder that's
+// compatible with Saunova/Innova would get swallowed into those groups
+// instead of their real category, leaving "Control Spare Parts" and
+// "Interface Holder" empty.
 const GROUP_KEYWORDS = {
   "Coming Soon":          ["SAWO Sense", "Saunova 2.0 PLUS", "Coming Soon"],
-  "Saunova Series":       ["Saunova", "SAU-"],
-  "Innova Series":        ["Innova", "INC-", "INP-", "INT-"],
   "Control Spare Parts":  ["Spare", "RJ12", "Extension Module", "Silicon Wire"],
   "Interface Holder":     ["Interface Holder", "Holder"],
   "Sensor":               ["Sensor", "Temperature", "Humidity"],
+  "Saunova Series":       ["Saunova", "SAU-"],
+  "Innova Series":        ["Innova", "INC-", "INP-", "INT-"],
 };
+
+// These two groups' keywords ("Saunova", "Innova") also appear as generic
+// cross-compatibility tags on unrelated accessories/heaters (e.g. a heater
+// tagged "Saunova" just means it can pair with a Saunova control, not that
+// it IS one) — so only the product's own name identifies real membership.
+const NAME_ONLY_GROUPS = new Set(["Saunova Series", "Innova Series"]);
 
 /** Group products by brand/type keywords */
 function groupProducts(products) {
@@ -78,7 +95,8 @@ function groupProducts(products) {
     for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
       for (const kw of keywords) {
         const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch  = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
+        const tagMatch  = !NAME_ONLY_GROUPS.has(group) &&
+          product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
         if (nameMatch || tagMatch) {
           if (!groups[group]) groups[group] = [];
           groups[group].push(product);
@@ -95,6 +113,14 @@ function groupProducts(products) {
     return groups;
   }, {});
   return groupedProducts;
+}
+
+// DOM id for a group's section, used to jump straight to it from a
+// ?group=<name> link (see the groupParam effect in the component below) —
+// all FIXED_ORDER names are plain words/spaces, so a simple substitution
+// is safe here.
+function groupSectionId(name) {
+  return `group-${name.toLowerCase().replace(/\s+/g, "-")}`;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -140,8 +166,7 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
-  // Look for a kW power range tag (e.g. "3.5 – 9 kW")
-  const power = (product.tags || []).find(t => /\d+(\.\d+)?\s*[-–]\s*\d+(\.\d+)?\s*kW/i.test(t)) || "";
+  const power = getPowerRange(product.tags);
 
   return (
     <Link
@@ -183,26 +208,17 @@ export default function SaunaControls() {
 
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
-  const filterSectionRef = useRef(null);
 
-  // Auto-filter to the group requested via ?group=<name> (e.g. links from
-  // the Sauna landing page's control cards), once the matching group
-  // exists.
+  // Jump to the group requested via ?group=<name> (e.g. links from the Sauna
+  // landing page's control cards) — scrolls straight to that section instead
+  // of filtering the rest away, so visitors can still browse everything else
+  // on the page. Same anchor-jump pattern as /infrared#infrared-controls.
   const groupParam = searchParams.get("group");
-  useEffect(() => {
-    if (!groupParam) return;
-    if (FIXED_ORDER.includes(groupParam)) setActiveGroup(groupParam);
-  }, [groupParam]);
-
-  // Jump straight to the filtered grid instead of leaving a visitor staring
-  // at the hero with no visible sign anything changed below the fold. Kept
-  // as its own effect (not merged into the one above) because the filter
-  // section only exists in the DOM once `loading` is false — firing the
-  // scroll before then would find `filterSectionRef.current` still null.
   useEffect(() => {
     if (!groupParam || loading) return;
     if (!FIXED_ORDER.includes(groupParam)) return;
-    filterSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(groupSectionId(groupParam));
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [groupParam, loading]);
 
   const allProducts = useMemo(() => {
@@ -337,7 +353,7 @@ export default function SaunaControls() {
 
       {/* ── FILTER + SEARCH ───────────────────────────────────────────────── */}
       {!loading && allProducts.length > 0 && (
-        <section ref={filterSectionRef} className="wm-section wm-section--flush-bottom">
+        <section className="wm-section wm-section--flush-bottom">
           <div className="wm-container">
             <div className="wm-filter-search-row">
               {/* ── Filter pills ── */}
@@ -452,7 +468,7 @@ export default function SaunaControls() {
                   );
                   if (items.length === 0) return null;
                   return (
-                    <div className="wm-group" key={brand}>
+                    <div className="wm-group" id={groupSectionId(brand)} key={brand}>
                       <h3 className="wm-group-title">{brand.toUpperCase()}</h3>
                       <div className="wm-products-grid">
                         {items.map((product) => (
@@ -500,6 +516,7 @@ export default function SaunaControls() {
       <PromoBanner
         title="Experience Ultimate Relaxation"
         subtitle="Find your perfect control from our full range of SAWO solutions"
+        image={promoBannerImg}
       />
     </div>
   );
