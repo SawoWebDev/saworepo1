@@ -398,9 +398,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "sawo30-wall",
     slugs: [
-      "wooden-heater-guard-sawo30-wall",
-      "wooden-integration-collar-wall",
-      "stainless-steel-integration-collar-sawo30-wall",
+      "heater-guard-sawo30-wall",
+      "integration-collar-wall-wooden",
+      "integration-collar-sawo30-wall-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -410,9 +410,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "sawo30-round",
     slugs: [
-      "wooden-heater-guard-sawo30-round",
-      "wooden-integration-collar-round",
-      "stainless-steel-integration-collar-round",
+      "heater-guard-sawo30-round",
+      "integration-collar-round-wooden",
+      "integration-collar-round-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -422,9 +422,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "sawo30-corner",
     slugs: [
-      "wooden-heater-guard-sawo30-corner",
-      "wooden-integration-collar-corner",
-      "stainless-steel-integration-collar-sawo30-corner",
+      "heater-guard-sawo30-corner",
+      "integration-collar-corner-wooden",
+      "integration-collar-sawo30-corner-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -434,9 +434,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "tower-round",
     slugs: [
-      "wooden-heater-guard-tower-round",
-      "wooden-integration-collar-round",
-      "stainless-steel-integration-collar-round",
+      "heater-guard-tower-round",
+      "integration-collar-round-wooden",
+      "integration-collar-round-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -446,9 +446,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "tower-wall",
     slugs: [
-      "wooden-heater-guard-tower-wall",
-      "wooden-integration-collar-wall",
-      "stainless-steel-integration-collar-tower-wall",
+      "heater-guard-tower-wall",
+      "integration-collar-wall-wooden",
+      "integration-collar-tower-wall-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -458,9 +458,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "tower-corner",
     slugs: [
-      "wooden-heater-guard-tower-corner",
-      "wooden-integration-collar-corner",
-      "stainless-steel-integration-collar-tower-corner",
+      "heater-guard-tower-corner",
+      "integration-collar-corner-wooden",
+      "integration-collar-tower-corner-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -470,10 +470,10 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "aries-round",
     slugs: [
-      "wooden-heater-guard-aries-round",
-      "wooden-integration-collar-round",
-      "stainless-steel-integration-collar-round",
-      "round-stainless-collar-round",
+      "heater-guard-aries-round",
+      "integration-collar-round-wooden",
+      "integration-collar-round-stainless",
+      "integration-collar-round-v2-stainless",
       "safety-switch-for-heaters",
       "cozy-tank-03l",
       "cozy-tank-06l",
@@ -484,9 +484,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "aries-wall",
     slugs: [
-      "wooden-heater-guard-aries-wall",
-      "wooden-integration-collar-wall",
-      "stainless-steel-integration-collar-tower-wall",
+      "heater-guard-aries-wall",
+      "integration-collar-wall-wooden",
+      "integration-collar-tower-wall-stainless",
       "safety-switch-for-heaters",
       "cozy-tank-03l",
       "cozy-tank-06l",
@@ -497,9 +497,9 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "aries-corner",
     slugs: [
-      "wooden-heater-guard-aries-corner",
-      "wooden-integration-collar-corner",
-      "stainless-steel-integration-collar-tower-corner",
+      "heater-guard-aries-corner",
+      "integration-collar-corner-wooden",
+      "integration-collar-tower-corner-stainless",
       "safety-switch-for-heaters",
       "cozy-tank-03l",
       "cozy-tank-06l",
@@ -510,15 +510,15 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "cubos",
     slugs: [
-      "wooden-heater-guard-cubos-middle",
-      "wooden-heater-guard-cubos-wall",
-      "wooden-heater-guard-cubos-corner",
-      "wooden-integration-collar-cubos-middle",
-      "wooden-integration-collar-cubos-wall",
-      "wooden-integration-collar-cubos-corner",
-      "stainless-steel-integration-collar-cubos-middle",
-      "stainless-steel-integration-collar-cubos-wall",
-      "stainless-steel-integration-collar-cubos-corner",
+      "heater-guard-cubos-middle",
+      "heater-guard-cubos-wall",
+      "heater-guard-cubos-corner",
+      "integration-collar-cubos-middle-wooden",
+      "integration-collar-cubos-wall-wooden",
+      "integration-collar-cubos-corner-wooden",
+      "integration-collar-cubos-middle-stainless",
+      "integration-collar-cubos-wall-stainless",
+      "integration-collar-cubos-corner-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -542,11 +542,11 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "heaterking-round",
     slugs: [
-      "wooden-heater-guard-heaterking-round-w2",
-      "wooden-heater-guard-heaterking-round-w4",
-      "wooden-heater-guard-heaterking-round-w6",
-      "wooden-heater-guard-heaterking-round-w9",
-      "wooden-heater-guard-heaterking-round-w12",
+      "heater-guard-heaterking-round-w2",
+      "heater-guard-heaterking-round-w4",
+      "heater-guard-heaterking-round-w6",
+      "heater-guard-heaterking-round-w9",
+      "heater-guard-heaterking-round-w12",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -555,10 +555,10 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "phoenix",
     slugs: [
-      "wooden-heater-guard-phoenix",
-      "wooden-integration-collar-round",
-      "stainless-steel-integration-collar-phoenix",
-      "round-stainless-collar-round",
+      "heater-guard-phoenix",
+      "integration-collar-round-wooden",
+      "integration-collar-phoenix-stainless",
+      "integration-collar-round-v2-stainless",
       "cozy-tank-03l",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -577,7 +577,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   ...["nordex-nb", "nordex-black-nb", "nordex-ni2", "nordex-black-ni2", "nordex-ns", "nordex-black-ns"].map(prefix => ({
     prefix,
     slugs: [
-      "wooden-heater-guard-nordex-wall",
+      "heater-guard-nordex-wall",
       "safety-switch-for-heaters",
       "cozy-tank-03l",
       "cozy-tank-06l",
@@ -653,7 +653,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   ...["krios-nb", "krios-ni2", "krios-ni2a", "krios-ns"].map(prefix => ({
     prefix,
     slugs: [
-      "wooden-heater-guard-krios-wall",
+      "heater-guard-krios-wall",
       "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -687,6 +687,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "helius",
     slugs: [
+      "heater-guard-helius",
       "helius-heater-hood",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -695,7 +696,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "taurus-d-ns",
     slugs: [
-      "wooden-heater-guard-taurus-floor",
+      "heater-guard-taurus",
       "cozy-tank-13l",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -711,7 +712,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "nordex-pro-ns",
     slugs: [
-      "wooden-heater-guard-nordex-wall",
+      "heater-guard-nordex-pro",
       "safety-switch-for-heaters",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -720,7 +721,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "nordex-pro-combi-ns",
     slugs: [
-      "wooden-heater-guard-nordex-pro-combi",
+      "heater-guard-nordex-pro-combi",
       "safety-switch-for-heaters",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -729,7 +730,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   ...["nordex-s-ns", "nordex-s-black-ns"].map(prefix => ({
     prefix,
     slugs: [
-      "wooden-heater-guard-nordex-s",
+      "heater-guard-nordex-s",
       "cozy-tank-13l",
       "safety-switch-for-heaters",
       "sauna-stones-olivine-diabase-rounded-20kg",
@@ -739,7 +740,7 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   ...["nordex-s-combi-ns", "nordex-s-combi-black-ns"].map(prefix => ({
     prefix,
     slugs: [
-      "wooden-heater-guard-nordex-s-combi",
+      "heater-guard-nordex-s-combi",
       "safety-switch-for-heaters",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
@@ -756,21 +757,30 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   {
     prefix: "taurus-d-combi-ns",
     slugs: [
-      "wooden-heater-guard-taurus-floor",
+      "heater-guard-taurus",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
     ],
   },
-  {
-    prefix: "savonia-combi-ns",
+  ...["savonia-combi-ns", "savonia-combi-fiber-coated-ns"].map(prefix => ({
+    prefix,
     slugs: [
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
     ],
-  },
+  })),
   {
     prefix: "nimbus-combi-ns",
     slugs: [
+      "sauna-stones-olivine-diabase-rounded-20kg",
+      "decorative-sauna-stones-white-quartz-rounded-10kg",
+    ],
+  },
+  {
+    prefix: "minidragon",
+    slugs: [
+      "cozy-tank-03l",
+      "cozy-tank-06l",
       "sauna-stones-olivine-diabase-rounded-20kg",
       "decorative-sauna-stones-white-quartz-rounded-10kg",
     ],
