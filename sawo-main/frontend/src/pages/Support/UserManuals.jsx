@@ -38,7 +38,15 @@ const CATEGORY_TABS = [
   { id: "sauna-controls", label: "Sauna Controls", categories: ["Sauna Controls"] },
   { id: "steam-generators", label: "Steam Generators", categories: ["Steam Generators"] },
   { id: "steam-controls", label: "Steam Generator Controls", categories: ["Steam Controls"] },
-  { id: "heater-accessories", label: "Heater Accessories", categories: ["Heater Accessories"] },
+  {
+    id: "heater-accessories", label: "Heater Accessories", categories: ["Heater Accessories"],
+    // Every accessory carries the shared "Heater Accessories" tag (that's
+    // what makes the tab itself appear), so grouping on `categories` the
+    // way every other tab does would put them all in one flat, unsorted
+    // pile. groupOrder overrides just the sub-heading split below, keeping
+    // family members (guards / collars / tanks / safety) next to each other.
+    groupOrder: ["Heater Guard", "Integration Collar", "Humidifiers", "Sauna Accessories"],
+  },
 ];
 
 // Friendly sub-group headings shown within a tab, keyed by product category.
@@ -53,6 +61,10 @@ const SERIES_LABELS = {
   "Steam Controls": "Steam Generator Controls",
   "Steam Generators": "Steam Generators",
   "Heater Accessories": "Heater Accessories",
+  "Heater Guard": "Heater Guards",
+  "Integration Collar": "Collars",
+  "Humidifiers": "Cozy Tanks",
+  "Sauna Accessories": "Safety Accessories",
 };
 
 function seriesLabel(category) {
@@ -278,7 +290,7 @@ function ProductCard({ product, category, onOpenManuals }) {
       <div style={{
         background: "#fff", borderRadius: 14, border: "1.5px solid rgba(175,133,100,0.18)",
         overflow: "hidden", display: "flex", flexDirection: "column",
-        transition: "all 0.22s", textAlign: "center", cursor: "pointer",
+        height: 336, transition: "all 0.22s", textAlign: "center", cursor: "pointer",
       }}
         onMouseEnter={e => {
           e.currentTarget.style.borderColor = "#af8564";
@@ -293,7 +305,7 @@ function ProductCard({ product, category, onOpenManuals }) {
       >
         {/* Image */}
         <div style={{
-          aspectRatio: "4/3", background: "#f7f5f2",
+          height: 160, flexShrink: 0, background: "#f7f5f2",
           display: "flex", alignItems: "center", justifyContent: "center",
           padding: 8, position: "relative", overflow: "hidden",
         }}>
@@ -317,24 +329,25 @@ function ProductCard({ product, category, onOpenManuals }) {
         </div>
 
         {/* Body */}
-        <div style={{ padding: "14px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: 6 }}>
+        <div style={{ padding: "14px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: 6, minHeight: 0 }}>
           <p style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
             fontSize: "13px", color: "rgb(51,51,51)", margin: 0, lineHeight: 1.35,
-            transition: "color 0.2s",
+            height: "2.7em", transition: "color 0.2s",
+            display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
+            overflow: "hidden", textOverflow: "ellipsis",
           }}>
             {product.name}
           </p>
 
-          {category && (
-            <p style={{
-              fontFamily: "'Montserrat',sans-serif", fontWeight: 600,
-              fontSize: "0.65rem", letterSpacing: "0.03em",
-              color: "#c4a882", margin: "0 0 4px",
-            }}>
-              {seriesLabel(category)}
-            </p>
-          )}
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 600,
+            fontSize: "0.65rem", letterSpacing: "0.03em",
+            color: "#c4a882", margin: "0 0 4px", height: "1.4em",
+            overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis",
+          }}>
+            {category ? seriesLabel(category) : " "}
+          </p>
 
           {/* View Manual button — sits above the card's Link so it opens the
               modal instead of navigating (preventDefault + stopPropagation). */}
@@ -428,7 +441,7 @@ export default function UserManuals() {
   // instead of one flat grid — order follows the tab's own category list.
   const groupedDisplayed = useMemo(() => {
     const tab = tabs.find(t => t.id === activeTab);
-    const order = tab ? tab.categories : [];
+    const order = tab ? (tab.groupOrder || tab.categories) : [];
     const groups = new Map();
     displayed.forEach(p => {
       const cat = (p.categories || []).find(c => order.includes(c)) || (p.categories || [])[0] || "Other";
@@ -438,7 +451,22 @@ export default function UserManuals() {
     const keys = order.length
       ? order.filter(c => groups.has(c))
       : [...groups.keys()].sort();
-    return keys.map(cat => ({ category: cat, products: [...groups.get(cat)].reverse() }));
+    // Within a group (e.g. all the Collars), cluster by material — Wooden
+    // together, then Stainless — so visually-similar items sit side by side
+    // instead of interleaving; falls back to name order within each cluster.
+    const materialRank = p => {
+      const n = (p.name || "").toLowerCase();
+      if (n.includes("wooden") || n.includes("wood")) return 0;
+      if (n.includes("stainless")) return 1;
+      return 2;
+    };
+    return keys.map(cat => ({
+      category: cat,
+      products: [...groups.get(cat)].sort((a, b) => {
+        const r = materialRank(a) - materialRank(b);
+        return r !== 0 ? r : (a.name || "").localeCompare(b.name || "");
+      }),
+    }));
   }, [displayed, tabs, activeTab]);
 
   return (
