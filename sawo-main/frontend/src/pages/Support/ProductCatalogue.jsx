@@ -1,15 +1,119 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
+import { useLocalSaunaRooms } from "../../Administrator/Local/useLocalSaunaRooms";
 import { isAccessoryProduct } from "../IndividualDisplay/DispAccessories";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 
-const PRODUCT_TYPES = [
-  { label: "Sauna Heaters", id: "heaters", type: "heater" },
-  { label: "Sauna Rooms", id: "rooms", type: "room" },
-  { label: "Accessories", id: "accessories", type: "accessory" },
+// ─── Tab taxonomy ─────────────────────────────────────────────────────────────
+// Classification is FIRST MATCH WINS over this array, so every product lands in
+// exactly one tab and can never be double-counted.
+//
+// The order is load-bearing: a heater guard carries "Heater Guard" AND
+// "Sauna Accessories" AND "Heater Accessories" simultaneously, so the
+// heater-accessory tab has to be tested before the general accessories tab or
+// guards/collars would be swallowed by the latter.
+//
+// This replaces the previous three-bucket model, whose `heaters` bucket was a
+// catch-all (`!isAccessoryProduct(p) && p.type !== "room"`) that piled 203
+// products — heaters, controls, steam, infrared, guards, collars, spare parts —
+// under one "Sauna Heaters" heading.
+const CATALOGUE_TABS = [
+  {
+    id: "heaters", label: "Sauna Heaters",
+    categories: ["Towers", "Wall-Mounted", "Floor", "Combi", "Dragonfire", "Stones"],
+  },
+  {
+    id: "controls", label: "Sauna Controls",
+    categories: ["Sauna Controls", "Controls"],
+  },
+  {
+    id: "steam", label: "Steam",
+    categories: ["Steam Generators", "Steam Controls", "Steam Accessories"],
+  },
+  {
+    id: "infrared", label: "Infrared",
+    categories: ["Infrared"],
+  },
+  {
+    id: "heater-acc", label: "Heater Accessories",
+    categories: ["Heater Guard", "Integration Collar", "Humidifiers", "Sauna Stones"],
+    // Safety switches and the Helius hood only carry the broad "Sauna
+    // Accessories" tag, so category matching alone would drop them into the
+    // catch-all. They're matched on `type` instead, which is specific.
+    types: ["Safety Switch", "Heater Hood"],
+    // Explicit sub-group order (categories + the two type buckets above).
+    groupOrder: [
+      "Heater Guard", "Integration Collar", "Humidifiers",
+      "Sauna Stones", "Safety Switch", "Heater Hood",
+    ],
+  },
+  {
+    id: "accessories", label: "Sauna Accessories",
+    categories: [
+      "Pails", "Ladles", "Pail Shower", "Thermometers", "Clocks & Timers",
+      "Sauna Lights", "Headrest & Backrest", "Doors & Handles", "Benches",
+      "Cloth Hangers", "Wooden Floor Mats", "Kivistone",
+      "Ventilation & Miscellaneous", "Accessory Sets",
+    ],
+  },
+  // Rooms live in a separate Supabase table (`sauna_rooms`), not `products` —
+  // the old code filtered `p.type === "room"` against `products`, which matches
+  // zero rows, so this section silently never rendered at all.
+  {
+    id: "rooms", label: "Sauna Rooms", source: "rooms",
+    groupOrder: ["standard", "glassfront", "infrared"],
+  },
+  // Safety net: anything with an unrecognised category (e.g. Spare Parts, or a
+  // category added in the CMS later) still shows up here instead of vanishing.
+  { id: "other", label: "Other", catchAll: true },
 ];
+
+// Friendly sub-group headings, keyed by the raw category string.
+const SERIES_LABELS = {
+  "Towers": "Tower Series",
+  "Wall-Mounted": "Wall Mounted Series",
+  "Floor": "Floor Series",
+  "Combi": "Combi Series",
+  "Dragonfire": "Dragonfire Series",
+  "Stones": "Stone Series",
+  "Sauna Controls": "Sauna Controls",
+  "Controls": "Sauna Controls",
+  "Steam Generators": "Steam Generators",
+  "Steam Controls": "Steam Generator Controls",
+  "Steam Accessories": "Steam Accessories",
+  "Infrared": "Infrared",
+  "Heater Guard": "Heater Guards",
+  "Integration Collar": "Collars",
+  "Humidifiers": "Cozy Tanks",
+  "Sauna Stones": "Sauna Stones",
+  "Safety Switch": "Safety Switches",
+  "Heater Hood": "Heater Hoods",
+  "Doors & Handles": "Doors & Handles",
+  "Headrest & Backrest": "Headrests & Backrests",
+  "Ventilation & Miscellaneous": "Ventilation & Miscellaneous",
+  "Clocks & Timers": "Clocks & Sandtimers",
+  "Wooden Floor Mats": "Wooden Floor Mats",
+  "Accessory Sets": "Accessory Sets",
+  "Pail Shower": "Pail Showers",
+  // Sauna room types (from sauna_rooms.room_type)
+  "standard": "Standard Sauna Rooms",
+  "glassfront": "Glass Front Sauna Rooms",
+  "infrared": "Infrared Sauna Rooms",
+};
+
+function seriesLabel(category) {
+  return SERIES_LABELS[category] || category;
+}
+
+// Tab shown on first load. Named explicitly rather than CATALOGUE_TABS[0] so
+// reordering the array above cannot silently change which tab opens.
+const DEFAULT_TAB_ID = "heaters";
+
+// How many cards to mount per batch. The rest stay unrendered until the
+// sentinel below the grid scrolls into view.
+const BATCH_SIZE = 24;
 
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
@@ -19,155 +123,247 @@ function resolveUrl(pathOrUrl) {
 function getImageUrl(product) {
   const local = product?.local_thumbnail;
   const remote = product?.thumbnail;
-  const path = local || remote;
-  return resolveUrl(path);
+  return resolveUrl(local || remote);
 }
 
+// ─── Card ─────────────────────────────────────────────────────────────────────
+// The image is not fetched until the card actually scrolls into view — same
+// IntersectionObserver approach already proven in AllProducts.jsx, so a tab
+// holding 150 items issues a handful of image requests instead of 150.
 function ProductCard({ product }) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const isAccessory = isAccessoryProduct(product);
-  let link;
-  if (isAccessory) {
-    link = `/accessories/${product.slug}`;
-  } else if (product.type === "room") {
-    link = `/sauna/rooms/${product.slug}`;
-  } else {
-    link = `/products/${product.slug}`;
-  }
+  const [imageSrc, setImageSrc] = useState(null);
+  const cardRef = useRef(null);
+
+  const link = product.__isRoom
+    ? `/sauna/rooms/${product.slug}`
+    : isAccessoryProduct(product)
+      ? `/accessories/${product.slug}`
+      : `/products/${product.slug}`;
+
+  useEffect(() => {
+    const node = cardRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const fullUrl = getImageUrl(product);
+          if (fullUrl) setImageSrc(fullUrl);
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "150px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [product]);
 
   return (
-    <Link to={link} style={{ textDecoration: "none" }}>
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 10,
-          padding: "12px 8px",
-          borderRadius: 10,
-          transition: "transform 0.25s ease",
-          transform: hovered ? "translateY(-4px)" : "translateY(0)",
-          cursor: "pointer",
-        }}
-      >
-        <div style={{
-          width: "100%",
-          height: 140,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}>
+    <Link to={link} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+      <div ref={cardRef} className="pc-card">
+        {/* Image bay — fixed height so every row lines up regardless of art */}
+        <div className="pc-card-img">
           {getImageUrl(product) ? (
-            <img
-              src={getImageUrl(product)}
-              alt={product.name}
-              onLoad={() => setImageLoaded(true)}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                opacity: imageLoaded ? 1 : 0,
-                transition: "opacity 0.3s ease, transform 0.25s ease",
-                transform: hovered ? "scale(1.06)" : "scale(1)",
-              }}
-            />
+            <>
+              {!imageLoaded && <div className="pc-shimmer" />}
+              {imageSrc && (
+                <img
+                  src={imageSrc}
+                  alt={product.name}
+                  loading="lazy"
+                  decoding="async"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageLoaded(true)}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    opacity: imageLoaded ? 1 : 0,
+                    transition: "opacity 0.35s ease, transform 0.3s ease",
+                  }}
+                />
+              )}
+            </>
           ) : (
             <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
           )}
         </div>
 
-        <p style={{
-          fontWeight: 600,
-          fontSize: "0.78rem",
-          color: hovered ? "#a67853" : "#af8564",
-          margin: 0,
-          lineHeight: 1.4,
-          textAlign: "center",
-          transition: "color 0.2s ease",
-        }}>
-          {product.name}
-        </p>
+        <div className="pc-card-body">
+          {/* Clamped to exactly 2 lines so a one-word name and a long
+              "Integration Collar – Cubos Corner (Stainless)" produce the
+              same card height. */}
+          <p className="pc-card-name">{product.name}</p>
+        </div>
       </div>
     </Link>
   );
 }
 
+function SkeletonCard() {
+  return (
+    <div className="pc-card pc-card--skeleton">
+      <div className="pc-card-img"><div className="pc-shimmer" /></div>
+      <div className="pc-card-body">
+        <div className="pc-skel-line" style={{ width: "80%" }} />
+        <div className="pc-skel-line" style={{ width: "55%" }} />
+      </div>
+    </div>
+  );
+}
+
 function ProductCatalogue() {
   const { products: localProds, loading } = useLocalProducts();
-  const [activeType, setActiveType] = useState("heaters");
+  const { rooms: localRooms, loading: roomsLoading } = useLocalSaunaRooms();
+  const [activeTab, setActiveTab] = useState(DEFAULT_TAB_ID);
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const sentinelRef = useRef(null);
 
-  const publishedProducts = useMemo(() => {
-    if (!localProds.length) return [];
-    return localProds.filter(p => isPubliclyVisible(p));
-  }, [localProds]);
+  const publishedProducts = useMemo(
+    () => localProds.filter((p) => isPubliclyVisible(p)),
+    [localProds]
+  );
 
-  const productsByType = useMemo(() => {
-    const grouped = {};
-    PRODUCT_TYPES.forEach(pt => {
-      if (pt.type === "heater") {
-        grouped[pt.id] = publishedProducts.filter(p => !isAccessoryProduct(p) && p.type !== "room");
-      } else if (pt.type === "room") {
-        grouped[pt.id] = publishedProducts.filter(p => p.type === "room");
-      } else {
-        grouped[pt.id] = publishedProducts.filter(p => isAccessoryProduct(p));
+  // Rooms come from a different table and have no `categories` we group on, so
+  // they're tagged (__isRoom) for link resolution and grouped by room_type.
+  const publishedRooms = useMemo(
+    () =>
+      localRooms
+        .filter((r) => isPubliclyVisible(r))
+        .map((r) => ({ ...r, __isRoom: true, __group: r.room_type || "standard" })),
+    [localRooms]
+  );
+
+  // First-match-wins classification into exactly one tab.
+  const byTab = useMemo(() => {
+    const lists = {};
+    CATALOGUE_TABS.forEach((t) => { lists[t.id] = []; });
+
+    const categoryTabs = CATALOGUE_TABS.filter((t) => t.categories || t.types);
+    const catchAll = CATALOGUE_TABS.find((t) => t.catchAll);
+
+    publishedProducts.forEach((p) => {
+      const cats = (p.categories || []).map((c) => String(c).toLowerCase());
+      const type = String(p.type || "").toLowerCase();
+
+      const hit = categoryTabs.find((t) =>
+        (t.categories || []).some((c) => cats.includes(c.toLowerCase())) ||
+        (t.types || []).some((ty) => ty.toLowerCase() === type)
+      );
+
+      if (hit) {
+        // Remember which bucket matched so the sub-group split below is
+        // consistent with the tab that claimed the product. Category match
+        // wins the label; a type-only match groups under its type.
+        const matchedCat = (hit.categories || []).find((c) => cats.includes(c.toLowerCase()));
+        const matchedType = (hit.types || []).find((ty) => ty.toLowerCase() === type);
+        lists[hit.id].push({ ...p, __group: matchedCat || matchedType || "Other" });
+      } else if (catchAll) {
+        lists[catchAll.id].push({ ...p, __group: "Other" });
       }
     });
-    return grouped;
-  }, [publishedProducts]);
 
+    const roomsTab = CATALOGUE_TABS.find((t) => t.source === "rooms");
+    if (roomsTab) lists[roomsTab.id] = publishedRooms;
+
+    return lists;
+  }, [publishedProducts, publishedRooms]);
+
+  const tabs = useMemo(
+    () =>
+      CATALOGUE_TABS
+        .map((t) => ({ ...t, count: (byTab[t.id] || []).length }))
+        .filter((t) => t.count > 0),
+    [byTab]
+  );
+
+  // Keep the active tab valid once data arrives (the default may be empty).
   useEffect(() => {
-    const handleScroll = () => {
-      let closestType = null;
-      let closestOffset = Infinity;
+    if (!tabs.length) return;
+    if (tabs.some((t) => t.id === activeTab)) return;
+    // Prefer the default over whatever happens to sort first.
+    const fallback = tabs.find((t) => t.id === DEFAULT_TAB_ID) || tabs[0];
+    setActiveTab(fallback.id);
+  }, [tabs, activeTab]);
 
-      PRODUCT_TYPES.forEach(pt => {
-        const element = document.getElementById(`section-${pt.id}`);
-        if (!element) return;
-        const rect = element.getBoundingClientRect();
-        const offset = Math.abs(rect.top);
-        if (rect.top <= window.innerHeight * 0.4 && offset < closestOffset) {
-          closestOffset = offset;
-          closestType = pt.id;
-        }
-      });
+  // Switching tabs restarts the batch, so we never mount a big tab all at once.
+  useEffect(() => { setVisibleCount(BATCH_SIZE); }, [activeTab]);
 
-      if (closestType) setActiveType(closestType);
-    };
+  // Memoised, not `byTab[activeTab] || []` inline: the `|| []` fallback builds a
+  // fresh array on every render, which would change `grouped`'s dependency each
+  // time and defeat the memoisation below.
+  const activeList = useMemo(() => byTab[activeTab] || [], [byTab, activeTab]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Sub-group the active tab, ordered by the tab's own category list, and sort
+  // inside each group (sort_order first, then name) — the old page did no
+  // sorting at all, which is why it looked arbitrary.
+  const grouped = useMemo(() => {
+    const tab = CATALOGUE_TABS.find((t) => t.id === activeTab);
+    const order = tab ? (tab.groupOrder || tab.categories || []) : [];
 
-  const handleSidebarClick = (typeId) => {
-    const element = document.getElementById(`section-${typeId}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setActiveType(typeId);
-    }
-  };
+    const groups = new Map();
+    activeList.forEach((p) => {
+      const key = p.__group || "Other";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(p);
+    });
 
-  if (loading) {
-    return (
-      <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 120 }}>
-        <div style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px", textAlign: "center" }}>
-          <div style={{
-            height: 40,
-            width: 200,
-            background: "linear-gradient(90deg,#f5ede3 25%,#fdf8f4 50%,#f5ede3 75%)",
-            backgroundSize: "200% 100%",
-            animation: "skS 1.4s infinite",
-            borderRadius: 6,
-            margin: "0 auto 40px",
-          }} />
-          <p style={{ color: "#a67853" }}>Loading products...</p>
-        </div>
-      </div>
+    const keys = order.length
+      ? [...order.filter((c) => groups.has(c)), ...[...groups.keys()].filter((k) => !order.includes(k))]
+      : [...groups.keys()].sort();
+
+    return keys.map((key) => ({
+      group: key,
+      products: [...groups.get(key)].sort((a, b) => {
+        const sa = a.sort_order ?? 999;
+        const sb = b.sort_order ?? 999;
+        if (sa !== sb) return sa - sb;
+        return (a.name || "").localeCompare(b.name || "");
+      }),
+    }));
+  }, [activeList, activeTab]);
+
+  // Flatten back out, then cap at visibleCount — the batch limit applies across
+  // the whole tab so sub-group headings appear progressively too.
+  const flat = useMemo(
+    () => grouped.flatMap((g) => g.products.map((p) => ({ ...p, __groupKey: g.group }))),
+    [grouped]
+  );
+  const visible = flat.slice(0, visibleCount);
+  const hasMore = visibleCount < flat.length;
+
+  const visibleGroups = useMemo(() => {
+    const out = [];
+    visible.forEach((p) => {
+      const last = out[out.length - 1];
+      if (last && last.group === p.__groupKey) last.products.push(p);
+      else out.push({ group: p.__groupKey, products: [p] });
+    });
+    return out;
+  }, [visible]);
+
+  const loadMore = useCallback(() => {
+    setVisibleCount((c) => Math.min(c + BATCH_SIZE, flat.length));
+  }, [flat.length]);
+
+  // Sentinel below the grid: reaching it mounts the next batch.
+  useEffect(() => {
+    if (!hasMore) return;
+    const node = sentinelRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => { if (entries.some((e) => e.isIntersecting)) loadMore(); },
+      { rootMargin: "400px" }
     );
-  }
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [hasMore, loadMore]);
+
+  const isLoading = loading || roomsLoading;
 
   return (
     <>
@@ -177,300 +373,326 @@ function ProductCatalogue() {
         path="/support/catalogue"
       />
       <style>{`
-        @keyframes skS {
-          0% { background-position: 200% 0; }
+        @keyframes pcShimmer {
+          0%   { background-position: 200% 0; }
           100% { background-position: -200% 0; }
         }
 
-        .catalogue-wrapper {
-          display: grid;
-          grid-template-columns: 240px 1fr;
-          gap: 60px;
-          width: 100%;
-          padding: 60px 60px 40px;
-          min-height: 100vh;
+        .pc-outer {
+          max-width: 1140px;
+          margin: 0 auto;
+          padding: 60px 32px 80px;
         }
 
-        .type-buttons-sidebar {
+        /* ── Tabs ───────────────────────────────────────────────── */
+        .pc-tabs {
           display: flex;
-          flex-direction: column;
-          background: #ffffff;
-          border-radius: 16px;
-          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
-          border: 1px solid #edddd0;
-          height: fit-content;
-          position: sticky;
-          top: 160px;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 36px;
         }
-
-        .sidebar-header {
-          padding: 18px 20px 14px;
-          border-bottom: 1px solid #f0e8df;
-        }
-
-        .sidebar-header-label {
-          font-size: 0.6rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #a67853;
+        .pc-tab-btn {
           font-family: 'Montserrat', sans-serif;
-          margin: 0 0 2px;
-        }
-
-        .sidebar-header-title {
-          font-size: 0.88rem;
+          font-size: 0.78rem;
           font-weight: 700;
+          letter-spacing: 0.02em;
+          padding: 12px 22px;
+          border-radius: 8px;
+          border: 1.5px solid #af8564;
+          background: transparent;
           color: #af8564;
-          font-family: 'Montserrat', sans-serif;
-          margin: 0;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .pc-tab-btn:hover { background: rgba(175,133,100,0.08); }
+        .pc-tab-btn.active { background: #af8564; color: #fff; }
+        .pc-tab-count {
+          font-size: 0.65rem;
+          font-weight: 600;
+          padding: 1px 7px;
+          border-radius: 10px;
+          background: #f5ede3;
+          color: #c4a882;
+        }
+        .pc-tab-btn.active .pc-tab-count {
+          background: rgba(255,255,255,0.18);
+          color: #f6e9d8;
         }
 
-        .sidebar-scroll {
-          overflow-y: auto;
-          padding: 10px 10px;
+        /* ── Group heading ──────────────────────────────────────── */
+        .pc-group-title {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          font-size: 1rem;
+          color: #af8564;
+          margin: 0 0 18px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #edddd0;
+        }
+
+        /* ── Grid: caps at 4, only ever steps down ──────────────── */
+        .pc-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 22px 18px;
+        }
+        @media screen and (max-width: 1100px) {
+          .pc-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 14px; }
+        }
+        @media screen and (max-width: 768px) {
+          .pc-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
+          .pc-outer { padding: 40px 20px 60px; }
+        }
+        @media screen and (max-width: 480px) {
+          .pc-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Card: fixed height so rows are never ragged ────────── */
+        .pc-card {
+          background: #fff;
+          border-radius: 14px;
+          border: 1.5px solid rgba(175,133,100,0.18);
+          overflow: hidden;
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          height: 316px;
+          transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+          cursor: pointer;
+        }
+        .pc-card:hover {
+          border-color: #af8564;
+          transform: translateY(-5px);
+          box-shadow: 0 14px 36px rgba(175,133,100,0.18);
+        }
+        .pc-card--skeleton { cursor: default; }
+        .pc-card--skeleton:hover {
+          border-color: rgba(175,133,100,0.18);
+          transform: none;
+          box-shadow: none;
+        }
+        .pc-card:hover .pc-card-img img { transform: scale(1.06); }
+
+        .pc-card-img {
+          /* Taller bay + no tinted background: the image sits directly on the
+             card. objectFit: contain keeps the whole product visible, and the
+             padding leaves room for the hover scale so nothing clips. */
+          height: 216px;
+          flex-shrink: 0;
+          background: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 12px;
+          position: relative;
+          overflow: hidden;
         }
 
-        .sidebar-btn {
-          position: relative;
+        .pc-card-body {
+          padding: 12px 14px 14px;
+          flex: 1;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 6px;
+        }
+
+        .pc-card-name {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 700;
+          font-size: 14.5px;
+          /* Dark grey, not the old #af8564 brown — that was ~3.3:1 on white. */
+          color: rgb(51,51,51);
+          margin: 0;
+          line-height: 1.35;
+          text-align: center;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* ── Bottom CTA ─────────────────────────────────────────── */
+        .pc-cta {
+          background: linear-gradient(135deg, #8b5e3c 0%, #a67853 100%);
+          border-radius: 20px;
+          padding: 44px 56px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 100%;
-          padding: 9px 12px 9px 14px;
-          font-size: 0.75rem;
-          font-weight: 500;
-          text-align: left;
-          border-radius: 8px;
-          border: none;
-          color: #5a4030;
-          background: transparent;
-          cursor: pointer;
-          transition: background 0.18s ease, color 0.18s ease;
-          font-family: 'Montserrat', sans-serif;
-          line-height: 1.35;
+          gap: 30px;
+          flex-wrap: wrap;
+          box-shadow: 0 16px 48px rgba(139,94,60,0.24);
+        }
+        .pc-cta-btn {
+          display: inline-flex;
+          align-items: center;
           gap: 8px;
-        }
-
-        .sidebar-btn::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%) scaleY(0);
-          width: 3px;
-          height: 60%;
-          background: #a67853;
-          border-radius: 0 3px 3px 0;
-          transition: transform 0.2s ease;
-        }
-
-        .sidebar-btn:hover {
-          background: #faf4ef;
-          color: #af8564;
-        }
-
-        .sidebar-btn:hover::before {
-          transform: translateY(-50%) scaleY(0.6);
-        }
-
-        .sidebar-btn.active {
-          background: #af8564;
-          color: #ffffff;
-          font-weight: 700;
-        }
-
-        .sidebar-btn.active::before {
-          transform: translateY(-50%) scaleY(1);
-          background: #d9c4b0;
-        }
-
-        .sidebar-btn-count {
-          font-size: 0.65rem;
-          font-weight: 600;
-          color: #c4a882;
-          background: #f5ede3;
-          padding: 2px 7px;
-          border-radius: 10px;
-          flex-shrink: 0;
+          padding: 12px 26px;
+          border-radius: 8px;
           font-family: 'Montserrat', sans-serif;
-        }
-
-        .sidebar-btn.active .sidebar-btn-count {
-          background: rgba(255,255,255,0.15);
-          color: #f0e0cc;
-        }
-
-        .main-content {
-          display: flex;
-          flex-direction: column;
-          gap: 60px;
-        }
-
-        .type-section {
-          scroll-margin-top: 160px;
-        }
-
-        .type-section-title {
-          margin-bottom: 40px;
-        }
-
-        .type-section-title h2 {
-          font-size: 1.6rem;
+          font-size: 0.82rem;
           font-weight: 700;
-          color: #af8564;
-          margin: 0 0 8px;
-          line-height: 1.2;
+          letter-spacing: 0.04em;
+          text-decoration: none;
+          white-space: nowrap;
+          border: 2px solid transparent;
+          transition: all 0.3s ease;
+        }
+        .pc-cta-btn--solid { background: #fff; color: #a67853; }
+        .pc-cta-btn--solid:hover {
+          background: transparent;
+          color: #fff;
+          border-color: #fff;
+        }
+        @media screen and (max-width: 600px) {
+          .pc-cta { padding: 32px 26px; }
+          .pc-cta-btn { flex: 1 1 auto; justify-content: center; }
         }
 
-        .type-section-title .underline {
-          height: 3px;
-          width: 60px;
-          background: linear-gradient(90deg, #d9c4b0 0%, #d1bda6 100%);
-          border-radius: 3px;
+        .pc-shimmer {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg,#f5ede3 25%,#fdf8f4 50%,#f5ede3 75%);
+          background-size: 200% 100%;
+          animation: pcShimmer 1.4s infinite;
         }
-
-        .products-grid {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 24px 16px;
-        }
-
-        @media screen and (max-width: 1400px) {
-          .products-grid {
-            grid-template-columns: repeat(4, 1fr);
-          }
-        }
-
-        @media screen and (max-width: 1100px) {
-          .products-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        @media screen and (max-width: 1024px) {
-          .catalogue-wrapper {
-            grid-template-columns: 1fr;
-            padding: 50px 40px 40px;
-            gap: 24px;
-          }
-
-          .type-buttons-sidebar {
-            display: none;
-          }
-
-          .products-grid {
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px 14px;
-          }
-        }
-
-        @media screen and (max-width: 768px) {
-          .catalogue-wrapper {
-            padding: 40px 24px 40px;
-          }
-
-          .products-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px 12px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .products-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px 10px;
-          }
+        .pc-skel-line {
+          height: 11px;
+          border-radius: 4px;
+          margin: 0 auto;
+          background: linear-gradient(90deg,#f5ede3 25%,#fdf8f4 50%,#f5ede3 75%);
+          background-size: 200% 100%;
+          animation: pcShimmer 1.4s infinite;
         }
       `}</style>
 
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
+        {/* ── Header band — brown hero, white type ─────────────────── */}
         <div style={{
           width: "100%",
-          padding: "140px 60px 60px",
+          padding: "160px 60px 70px",
           textAlign: "center",
-          borderBottom: "1px solid #edddd0",
+          background: "linear-gradient(135deg, #af8564 0%, #8b5e3c 100%)",
         }}>
           <p style={{
-            fontSize: "0.67rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#a67853",
-            margin: "0 0 12px",
+            fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.14em",
+            textTransform: "uppercase", color: "rgba(255,255,255,0.82)", margin: "0 0 12px",
           }}>
             Complete Collection
           </p>
           <h1 style={{
-            fontSize: "2.4rem",
-            fontWeight: 700,
-            color: "#af8564",
-            margin: "0 0 16px",
-            lineHeight: 1.2,
+            fontSize: "2.4rem", fontWeight: 700, color: "#ffffff",
+            margin: "0 0 16px", lineHeight: 1.2,
           }}>
             All Products
           </h1>
           <p style={{
-            fontSize: "1rem",
-            color: "#5a4030",
-            margin: "0 auto 12px",
-            maxWidth: 700,
-            lineHeight: 1.6,
-            textAlign: "center",
+            fontSize: "1rem", color: "rgba(255,255,255,0.9)", margin: "0 auto",
+            maxWidth: 700, lineHeight: 1.6,
           }}>
             Browse our complete range of sauna heaters, rooms, and accessories designed to enhance your wellness experience.
           </p>
         </div>
 
-        <div className="catalogue-wrapper">
-          <div className="type-buttons-sidebar">
-            <div className="sidebar-header">
-              <p className="sidebar-header-label">Browse by</p>
-              <p className="sidebar-header-title">Type</p>
+        <div className="pc-outer">
+          {/* ── Tabs ───────────────────────────────────────────────── */}
+          {!isLoading && tabs.length > 1 && (
+            <div className="pc-tabs">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  className={`pc-tab-btn ${activeTab === tab.id ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  {tab.label}
+                  <span className="pc-tab-count">{tab.count}</span>
+                </button>
+              ))}
             </div>
-            <div className="sidebar-scroll">
-              {PRODUCT_TYPES.map(pt => {
-                const count = (productsByType[pt.id] || []).length;
-                if (count === 0) return null;
-                return (
-                  <button
-                    key={pt.id}
-                    className={`sidebar-btn ${activeType === pt.id ? "active" : ""}`}
-                    onClick={() => handleSidebarClick(pt.id)}
-                  >
-                    <span>{pt.label}</span>
-                    <span className="sidebar-btn-count">{count}</span>
-                  </button>
-                );
-              })}
+          )}
+
+          {/* ── Loading skeletons ──────────────────────────────────── */}
+          {isLoading && (
+            <div className="pc-grid">
+              {Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)}
             </div>
-          </div>
+          )}
 
-          <div className="main-content">
-            {PRODUCT_TYPES.map(pt => {
-              const products = productsByType[pt.id] || [];
-              if (products.length === 0) return null;
+          {/* ── Empty state ────────────────────────────────────────── */}
+          {!isLoading && tabs.length === 0 && (
+            <div style={{
+              display: "flex", flexDirection: "column", alignItems: "center",
+              justifyContent: "center", padding: "80px 0", textAlign: "center", gap: 14,
+            }}>
+              <div style={{
+                width: 64, height: 64, borderRadius: "50%",
+                background: "#faf7f4", border: "1px dashed #e0cfc0",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <i className="fa-regular fa-folder-open" style={{ fontSize: "1.6rem", color: "#ddc9b4" }} />
+              </div>
+              <p style={{ color: "#a67853", margin: 0, fontSize: "0.88rem", fontStyle: "italic" }}>
+                No products available.
+              </p>
+            </div>
+          )}
 
-              return (
-                <div key={pt.id} id={`section-${pt.id}`} className="type-section">
-                  <div className="type-section-title">
-                    <h2>{pt.label}</h2>
-                    <div className="underline" />
-                  </div>
-
-                  <div className="products-grid">
-                    {products.map(product => (
-                      <ProductCard key={product.id || product.slug} product={product} />
+          {/* ── Grouped, batched grid ──────────────────────────────── */}
+          {!isLoading && visibleGroups.length > 0 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+              {visibleGroups.map((g, gi) => (
+                <div key={`${g.group}-${gi}`}>
+                  {grouped.length > 1 && (
+                    <h3 className="pc-group-title">{seriesLabel(g.group)}</h3>
+                  )}
+                  <div className="pc-grid">
+                    {g.products.map((p) => (
+                      <ProductCard key={p.id || p.slug} product={p} />
                     ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {/* Sentinel — mounting the next batch happens when this scrolls near */}
+          {!isLoading && hasMore && (
+            <div ref={sentinelRef} style={{ height: 1 }} aria-hidden="true" />
+          )}
         </div>
+
+        {/* ── Bottom CTA ───────────────────────────────────────────── */}
+        {!isLoading && (
+          <div style={{ maxWidth: 1140, margin: "0 auto", padding: "0 32px 80px" }}>
+            <div className="pc-cta">
+              <div>
+                <h3 style={{
+                  fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+                  fontSize: "1.4rem", color: "#fff", margin: "0 0 8px",
+                }}>
+                  Can't find what you need?
+                </h3>
+                <p style={{
+                  fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
+                  fontSize: "0.92rem", color: "rgba(255,255,255,0.82)",
+                  margin: 0, lineHeight: 1.6,
+                }}>
+                  Our support team is ready to help you find the right product for your sauna.
+                </p>
+              </div>
+              <Link to="/contact" className="pc-cta-btn pc-cta-btn--solid">
+                CONTACT US
+                <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.7rem" }} />
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
