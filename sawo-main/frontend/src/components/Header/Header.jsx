@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
+import { infraredPath } from "../../utils/anchoredLinks";
 import SearchBar from "./SearchBar";
 import HeaderLanguageSwitcher from "./HeaderLanguageSwitcher";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
@@ -70,7 +71,19 @@ const navItems = [
       { name: "Steam Accessories", nk: "items.steamAccessories", path: menuPaths.steam.accessories },
     ],
   },
-  { name: "Infrared", nk: "groups.infrared", path: menuPaths.infrared },
+  {
+    name: "Infrared",
+    nk: "groups.infrared",
+    path: menuPaths.infrared.parent,
+    submenu: [
+      { name: "Infrared Sauna", nk: "items.infraredSauna", path: menuPaths.infrared.room },
+      // Panels and controls are sections on the Infrared hub page rather
+      // than pages of their own — infraredPath() maps each to its real
+      // section id, so these stay honest if those ids ever change.
+      { name: "Infrared Panels", nk: "items.infraredPanels", path: infraredPath("panels") },
+      { name: "Infrared Controls", nk: "items.infraredControls", path: infraredPath("controls") },
+    ],
+  },
   {
     name: "Support",
     nk: "support",

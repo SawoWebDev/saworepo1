@@ -123,13 +123,16 @@
     },
     "infrared": {
       "rooms": {
-        "title": "Infrapunasaunat"
+        "title": "Infrapunasaunat",
+        "caption": "Lempeää, hoitavaa infrapunalämpöä kompaktissa kabinetissa. Saatavana yhden ja kahden hengen kokoina."
       },
       "panels": {
-        "title": "Infrapunapaneelit"
+        "title": "Infrapunapaneelit",
+        "caption": "Kuitupinnoitetut pitkäaaltoiset infrapunapaneelit, 170 W kukin — lämmittävät kehoa suoraan koko huoneen sijaan."
       },
       "controls": {
-        "title": "Infrapunaohjaimet"
+        "title": "Infrapunaohjaimet",
+        "caption": "Infrapunasaunaan suunnitellut ohjaimet tarkkaan lämpötilan ja kylpyajan hallintaan."
       }
     },
     "controls": {

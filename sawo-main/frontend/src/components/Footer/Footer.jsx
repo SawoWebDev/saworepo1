@@ -41,7 +41,7 @@ export default function Footer() {
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
             <h3 className="font-bold text-lg mb-2">{t("headings.infraredSauna")}</h3>
             <ul className="space-y-1 text-sm">
-              <li><Link to={localize(menuPaths.infrared)} className="hover:text-gray-300">{t("links.infraredRooms")}</Link></li>
+              <li><Link to={localize(menuPaths.infrared.room)} className="hover:text-gray-300">{t("links.infraredRooms")}</Link></li>
               <li><Link to={localize("/products/infrared-backrest")} className="hover:text-gray-300">{t("links.infraredBackrest")}</Link></li>
               <li><Link to={localize("/products/infrared-panels")} className="hover:text-gray-300">{t("links.infraredPanels")}</Link></li>
             </ul>

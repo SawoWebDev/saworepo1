@@ -34,6 +34,7 @@ import Home from "./pages/Home/Home";
 // Every OTHER route is lazy-loaded so it gets its own chunk and stays out
 // of the initial download.
 const Infrared         = lazy(() => import("./pages/Infrared/Infrared"));
+const InfraredRoom     = lazy(() => import("./pages/Infrared/InfraredRoom"));
 const About            = lazy(() => import("./pages/AboutUs/About"));
 const Sustainability   = lazy(() => import("./pages/AboutUs/Sustainability"));
 const LatestNews       = lazy(() => import("./pages/AboutUs/LatestNews"));
@@ -132,7 +133,8 @@ function withLocale(prefix, routePath) {
 // isn't advertised as translated yet.
 const PUBLIC_ROUTES = [
   { path: menuPaths.home,                    element: <Home /> },
-  { path: menuPaths.infrared,                element: <Infrared /> },
+  { path: menuPaths.infrared.parent,         element: <Infrared /> },
+  { path: menuPaths.infrared.room,           element: <InfraredRoom /> },
   { path: menuPaths.about.parent,            element: <About /> },
   { path: menuPaths.about.sustainability,    element: <Sustainability /> },
   { path: menuPaths.about.news,              element: <LatestNews /> },
