@@ -77,7 +77,8 @@ const SaunaCalculatorCTA = ({
         line-height: 1.7;
       }
       .sawo-cta-btn {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         align-self: flex-start;
         background-color: #fff;
         color: #af8564;
@@ -91,6 +92,10 @@ const SaunaCalculatorCTA = ({
         border: 3px solid #fff;
         transition: background-color 0.3s ease, color 0.3s ease;
         border-radius: 5px;
+      }
+      .sawo-cta-btn svg {
+        display: inline;
+        flex-shrink: 0;
       }
       .sawo-cta-btn:hover {
         background-color: transparent;
