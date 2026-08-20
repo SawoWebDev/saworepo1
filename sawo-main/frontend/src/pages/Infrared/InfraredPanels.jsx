@@ -34,6 +34,12 @@ const InfraredPanels = () => {
       introText="Fiber-coated far infrared panels warm the body directly rather than heating the air around it, so sessions stay comfortable at a much lower room temperature. Each panel draws 170W and is built to sit flush within the cabin, alongside the backrests and interface holders that complete the room."
       products={panels}
       loading={loading}
+      specsTitle="Panel Configurations"
+      specsItems={[
+        { label: "IR-PANEL-1-D", value: "Single Panel" },
+        { label: "IR-PANEL-2-D", value: "Double Panel" },
+        { label: "IR-PANEL-3-D", value: "Triple Panel" },
+      ]}
       eyebrow="Infrared Panel"
       fallbackBlurb="Premium SAWO infrared component built for gentle, everyday warmth."
       emptyText="No infrared panels available yet."
