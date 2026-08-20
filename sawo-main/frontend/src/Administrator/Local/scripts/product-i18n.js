@@ -61,6 +61,41 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 const PACKET_DIR = path.join(__dirname, "..", "data", "product-i18n");
 if (!fs.existsSync(PACKET_DIR)) fs.mkdirSync(PACKET_DIR, { recursive: true });
 
+// ── translation memory ──────────────────────────────────────────────────
+// This catalog's product copy is heavily boilerplated within and across
+// products in the same category (spec-table headers, feature bullets,
+// included-item titles repeat near-verbatim). See
+// setup-translation-memory.sql. Exact-match on normalized (trimmed,
+// whitespace-collapsed) English text — no fuzzy matching, good enough for
+// this catalog's literal phrase reuse.
+function normalize(text) {
+  return typeof text === "string" ? text.trim().replace(/\s+/g, " ") : text;
+}
+
+async function loadTM(locale) {
+  const { data, error } = await supabase
+    .from("translation_memory")
+    .select("source_text, translated_text")
+    .eq("locale", locale);
+  if (error) throw new Error(`Loading translation memory: ${error.message}`);
+  const map = new Map();
+  for (const row of data || []) map.set(row.source_text, row.translated_text);
+  return map;
+}
+
+// Looks up `text` in the TM; if found, records the hit (for the console
+// summary + hit_count bump) and returns the translation, else returns the
+// original English unchanged (still a valid packet value — untouched
+// English is exactly what "needs translation" looks like).
+function tmLookup(text, tm, hits, pathLabel) {
+  if (!text) return text;
+  const key = normalize(text);
+  const hit = tm.get(key);
+  if (hit === undefined) return text;
+  hits.push({ path: pathLabel, source: key });
+  return hit;
+}
+
 // local_variations/local_variants (checked first by getVariationsArray, see
 // below) aren't real `products` columns — they only ever exist as a
 // client-side enrichment elsewhere, never on a raw Supabase row, so they're
@@ -118,22 +153,24 @@ function getVariationGroups(product) {
 
 // ── extract ──────────────────────────────────────────────────────────────
 
-function buildPacket(product) {
+function buildPacket(product, tm, hits) {
   const fields = {
-    name: product.name || null,
-    short_description: product.short_description || null, // HTML — translate text nodes, keep tags
-    description: product.description || null, // HTML — same rule
-    type: product.type || null,
+    name: tmLookup(product.name, tm, hits, "name") || null,
+    short_description: tmLookup(product.short_description, tm, hits, "short_description") || null, // HTML — translate text nodes, keep tags
+    description: tmLookup(product.description, tm, hits, "description") || null, // HTML — same rule
+    type: tmLookup(product.type, tm, hits, "type") || null,
   };
 
   if (Array.isArray(product.features) && product.features.length > 0) {
-    fields.features = product.features;
+    fields.features = product.features.map((s, i) => tmLookup(s, tm, hits, `features[${i}]`));
   }
 
   if (product.spec_table?.headers?.length > 0) {
     // rows are model codes/kW/dimensions/weight/control-mode names — data,
     // not prose, so they're deliberately excluded from the packet.
-    fields.spec_table_headers = product.spec_table.headers;
+    fields.spec_table_headers = product.spec_table.headers.map((s, i) =>
+      tmLookup(s, tm, hits, `spec_table_headers[${i}]`)
+    );
   }
 
   const variationGroups = getVariationGroups(product);
@@ -141,10 +178,14 @@ function buildPacket(product) {
     fields.variations = variationGroups.map((g, i) => ({
       index: i,
       _english_name: g.name || null, // reference only — apply matches by index, not this
-      name: g.name || null,
-      description: g.description || null,
-      features: Array.isArray(g.features) ? g.features : [],
-      spec_table_headers: g.spec_table?.headers?.length > 0 ? g.spec_table.headers : undefined,
+      name: tmLookup(g.name, tm, hits, `variations[${i}].name`) || null,
+      description: tmLookup(g.description, tm, hits, `variations[${i}].description`) || null,
+      features: Array.isArray(g.features)
+        ? g.features.map((s, fi) => tmLookup(s, tm, hits, `variations[${i}].features[${fi}]`))
+        : [],
+      spec_table_headers: g.spec_table?.headers?.length > 0
+        ? g.spec_table.headers.map((s, hi) => tmLookup(s, tm, hits, `variations[${i}].spec_table_headers[${hi}]`))
+        : undefined,
     }));
   }
 
@@ -152,30 +193,33 @@ function buildPacket(product) {
     fields.included_items = product.included_items.map((item, i) => ({
       index: i,
       _english_title: item.title || null, // reference only
-      title: item.title || null,
-      note: item.note || null,
+      title: tmLookup(item.title, tm, hits, `included_items[${i}].title`) || null,
+      note: tmLookup(item.note, tm, hits, `included_items[${i}].note`) || null,
     }));
   }
 
   return fields;
 }
 
-function extract(slug) {
-  return fetchProduct(slug).then((product) => {
-    const packet = {
-      slug,
-      productId: product.id,
-      locale: "fi",
-      instructions:
-        "Replace every string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index.",
-      fields: buildPacket(product),
-    };
-    const outFile = path.join(PACKET_DIR, `${slug}.fi.packet.json`);
-    fs.writeFileSync(outFile, JSON.stringify(packet, null, 2), "utf8");
-    console.log(`Wrote ${outFile}`);
-    console.log("Fill in the Finnish text, then run:");
-    console.log(`  node product-i18n.js apply ${slug} fi`);
-  });
+async function extract(slug) {
+  const product = await fetchProduct(slug);
+  const tm = await loadTM("fi");
+  const hits = [];
+  const packet = {
+    slug,
+    productId: product.id,
+    locale: "fi",
+    instructions:
+      "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+    tmPrefilled: hits,
+    fields: buildPacket(product, tm, hits),
+  };
+  const outFile = path.join(PACKET_DIR, `${slug}.fi.packet.json`);
+  fs.writeFileSync(outFile, JSON.stringify(packet, null, 2), "utf8");
+  console.log(`Wrote ${outFile}`);
+  console.log(`Translation memory: ${hits.length} field(s) pre-filled, review the rest.`);
+  console.log("Fill in the remaining Finnish text, then run:");
+  console.log(`  node product-i18n.js apply ${slug} fi`);
 }
 
 // ── apply ────────────────────────────────────────────────────────────────
@@ -191,6 +235,78 @@ function applyProse(englishArray, translatedArray, proseKeys) {
     }
     return merged;
   });
+}
+
+// Pairs up every (english, finnish) string actually applied, for writing
+// into translation_memory. Mirrors the same field walk as the row-building
+// logic below — kept separate rather than merged into it so a future
+// change to one doesn't silently desync from the other without a diff
+// showing it.
+function collectTmPairs(product, f) {
+  const pairs = [];
+  const add = (english, translated) => {
+    if (english && translated && normalize(english) !== normalize(translated)) {
+      pairs.push({ source: normalize(english), translated: normalize(translated) });
+    }
+  };
+
+  add(product.name, f.name);
+  add(product.short_description, f.short_description);
+  add(product.description, f.description);
+  add(product.type, f.type);
+
+  if (Array.isArray(product.features) && Array.isArray(f.features)) {
+    product.features.forEach((s, i) => add(s, f.features[i]));
+  }
+  if (product.spec_table?.headers?.length > 0 && Array.isArray(f.spec_table_headers)) {
+    product.spec_table.headers.forEach((s, i) => add(s, f.spec_table_headers[i]));
+  }
+
+  const englishGroups = getVariationGroups(product);
+  if (Array.isArray(f.variations)) {
+    englishGroups.forEach((g, i) => {
+      const t = f.variations.find((x) => x.index === i);
+      if (!t) return;
+      add(g.name, t.name);
+      add(g.description, t.description);
+      if (Array.isArray(g.features) && Array.isArray(t.features)) {
+        g.features.forEach((s, fi) => add(s, t.features[fi]));
+      }
+      if (g.spec_table?.headers?.length > 0 && Array.isArray(t.spec_table_headers)) {
+        g.spec_table.headers.forEach((s, hi) => add(s, t.spec_table_headers[hi]));
+      }
+    });
+  }
+
+  if (Array.isArray(product.included_items) && Array.isArray(f.included_items)) {
+    product.included_items.forEach((item, i) => {
+      const t = f.included_items.find((x) => x.index === i);
+      if (!t) return;
+      add(item.title, t.title);
+      add(item.note, t.note);
+    });
+  }
+
+  return pairs;
+}
+
+async function upsertTM(pairs, locale, productId) {
+  if (pairs.length === 0) return;
+  // Dedupe within this one product (e.g. "Auto drain" can appear in every
+  // variation group) — one row per distinct source string is all TM needs.
+  const seen = new Map();
+  for (const p of pairs) seen.set(p.source, p.translated);
+  const rows = Array.from(seen.entries()).map(([source_text, translated_text]) => ({
+    locale,
+    source_text,
+    translated_text,
+    first_seen_product_id: productId,
+  }));
+  const { error } = await supabase
+    .from("translation_memory")
+    .upsert(rows, { onConflict: "locale,source_text", ignoreDuplicates: false });
+  if (error) throw new Error(`Updating translation memory: ${error.message}`);
+  console.log(`Translation memory: recorded ${rows.length} distinct phrase(s).`);
 }
 
 async function apply(slug, locale, packetPathArg) {
@@ -242,6 +358,8 @@ async function apply(slug, locale, packetPathArg) {
   if (error) throw new Error(`Upserting "${slug}"/${locale}: ${error.message}`);
 
   console.log(`Applied ${packetPath} -> product_translations (${slug}, ${locale})`);
+
+  await upsertTM(collectTmPairs(product, f), locale, product.id);
 }
 
 // ── CLI ──────────────────────────────────────────────────────────────────
