@@ -7,6 +7,7 @@ import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import menuPaths from "../../menuPaths";
 import SaunaRoomViewer from "./rooms/SaunaRoomViewer";
+import SaunaCalculatorCTA from "../../components/SaunaCalculatorCTA";
 import SaunaFeatures from "./rooms/SaunaFeatures";
 import SaunaProductDetails from "./rooms/SaunaProductDetails";
 import SaunaRoomDetails from "./rooms/SaunaRoomDetails";
@@ -309,6 +310,7 @@ const SaunaRooms = () => {
       </section>
 
       <SaunaRoomViewer />
+      <SaunaCalculatorCTA />
       <SaunaFeatures />
       <SaunaProductDetails />
       <SaunaRoomDetails />

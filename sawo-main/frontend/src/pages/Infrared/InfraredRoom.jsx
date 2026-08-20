@@ -16,6 +16,7 @@ import SaunaRoomDetails from "../Sauna/rooms/SaunaRoomDetails";
 import SaunaWoodMaterials from "../Sauna/rooms/SaunaWoodMaterials";
 import SaunaCallToAction from "../Sauna/rooms/SaunaCallToAction";
 import WellnessBenefits from "../../components/WellnessBenefits";
+import SaunaCalculatorCTA from "../../components/SaunaCalculatorCTA";
 import {
   IR_SFW_ITEMS, IR_SPD_SLIDES, IR_SPD_STORY_SECTIONS, IR_SPD_FEATURE_TEXT,
   IR_SPD_PERF_CARDS, IR_SPD_ACCORDION_ITEMS, IR_MATS_ITEMS, SRD_PANELS,
@@ -96,7 +97,9 @@ const InfraredRoom = () => {
         <HeroWave />
       </section>
 
-      <SaunaRoomViewer rooms={["infrared"]} showTabs={false} showVideo={false} />
+      <SaunaRoomViewer rooms={["infrared"]} showTabs={false} />
+
+      <SaunaCalculatorCTA />
 
       <SaunaFeatures
         items={IR_SFW_ITEMS}
