@@ -7,7 +7,7 @@ import menuPaths from "../menuPaths";
 // but it now points at a tool the visitor can actually use rather than a
 // looping clip.
 //
-// Shared rather than pasted per page: /sauna/rooms and /infrared/room both
+// Shared rather than pasted per page: /sauna/rooms and /infrared/saunas both
 // render it, and the wellness carousel earlier in this project is the
 // cautionary tale for what copy-per-page costs.
 //

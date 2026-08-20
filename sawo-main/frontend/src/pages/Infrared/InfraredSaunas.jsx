@@ -34,7 +34,7 @@ const INFRARED_BROCHURE_URL =
   "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Infrared-Brochure-2026-1.pdf";
 
 /**
- * InfraredRoom — the infrared range's own page.
+ * InfraredSaunas — the infrared range's own page.
  *
  * Infrared used to be a fourth tab inside /sauna/rooms' viewer. It was split
  * out on 2026-08-20 so the infrared range lives in one place; that page's
@@ -51,7 +51,7 @@ const INFRARED_BROCHURE_URL =
  * configurator (its middle step picks a heater, which an infrared room does
  * not have).
  */
-const InfraredRoom = () => {
+const InfraredSaunas = () => {
   const heroLoaded = useHeroLoaded(heroBg);
 
   return (
@@ -59,7 +59,7 @@ const InfraredRoom = () => {
       <SEO
         title="Infrared Saunas"
         description="SAWO infrared rooms in one- and two-person sizes. Fiber-coated far infrared panels, cedar and hemlock finishes, and plug-and-play 230V installation."
-        path="/infrared/room"
+        path="/infrared/saunas"
       />
 
       {/* HERO */}
@@ -123,4 +123,4 @@ const InfraredRoom = () => {
   );
 };
 
-export default InfraredRoom;
+export default InfraredSaunas;

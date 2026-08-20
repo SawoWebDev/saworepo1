@@ -259,14 +259,14 @@ const SaunaRooms = () => {
   const navigate = useNavigate();
   const { hash } = useLocation();
 
-  // Infrared left this page for /infrared/room on 2026-08-20. A hash never
+  // Infrared left this page for /infrared/saunas on 2026-08-20. A hash never
   // reaches the router's path matching, so the old deep link can only be
   // caught here — without this it would land on /sauna/rooms with no
   // infrared tab to select, which reads as a broken link. replace:true keeps
   // the dead URL out of history so Back doesn't bounce through it.
   useEffect(() => {
     if (hash === "#infrared-sauna-room") {
-      navigate(menuPaths.infrared.room, { replace: true });
+      navigate(menuPaths.infrared.saunas, { replace: true });
     }
   }, [hash, navigate]);
 
