@@ -18,42 +18,42 @@ import SaunovaSeries     from "../../assets/Home/Section1/INC-S-V2AspenSauna.web
 
 const CAROUSEL_ITEMS = [
   {
-    title:   "SAUNA HEATERS",
+    title:   "Sauna Heaters",
     caption: "Rejuvenate in the warmth of a traditional Finnish sauna with SAWO's premium heaters.",
     href:    menuPaths.sauna.heaters.parent,
     img:     FinnishSauna,
     alt:     "Finnish sauna heater collection by SAWO for efficient sauna heating",
   },
   {
-    title:   "STEAM GENERATORS",
+    title:   "Steam Generators",
     caption: "Relieve your stress and tension with healing steam powered by SAWO generators.",
     href:    menuPaths.steam.generators,
     img:     SteamGenerator,
     alt:     "SAWO steam generator for modern sauna and spa steam rooms",
   },
   {
-    title:   "SAUNA ROOMS",
-    caption: "Relax, detox, and rejuvenate in a SAWO-designed sauna room with therapeutic heat.",
+    title:   "Sauna Rooms",
+    caption: "Relax, detox, and rejuvenate in an authentically designed sauna room with therapeutic heat.",
     href:    menuPaths.sauna.rooms,
     img:     SaunaRoom,
     alt:     "Standard Finnish sauna room by SAWO with natural wood design",
   },
   {
-    title:   "INFRARED SAUNA",
+    title:   "Infrared Sauna",
     caption: "Experience deep relaxation with advanced infrared sauna technology.",
     href:    menuPaths.infrared.parent,
     img:     InfraredSauna,
     alt:     "Infrared sauna with cedar wood interior by SAWO",
   },
   {
-    title:   "SAUNA ACCESSORIES",
+    title:   "Sauna Accessories",
     caption: "Enhance your sauna with thoughtfully designed SAWO accessories.",
     href:    menuPaths.sauna.accessories.parent,
     img:     SaunaAccessories,
     alt:     "SAWO sauna accessories collection including buckets, ladles, and thermometers",
   },
   {
-    title:   "SAUNA CONTROLS",
+    title:   "Sauna Controls",
     caption: "Precise temperature and time control for total comfort.",
     href:    menuPaths.sauna.controls,
     img:     SaunovaSeries,
@@ -253,7 +253,9 @@ const Section1 = () => {
                   <div className="sawo-carousel-overlay" />
                   <div className="sawo-carousel-content">
                     <div className="sawo-carousel-title">{item.title}</div>
-                    <div className="sawo-carousel-caption">{item.caption}</div>
+                    <div className="sawo-carousel-caption-wrap">
+                      <div className="sawo-carousel-caption">{item.caption}</div>
+                    </div>
                   </div>
                 </Link>
               </div>
@@ -315,8 +317,6 @@ const Section1 = () => {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          height: 100px;
-          overflow: hidden;
           z-index: 2;
         }
         .sawo-carousel-title, .sawo-carousel-caption {
@@ -328,28 +328,36 @@ const Section1 = () => {
         .sawo-carousel-title {
           font-size: clamp(12px, 3vw, 20px);
           margin: 0;
-          text-transform: uppercase;
           font-weight: 500;
           line-height: 1.2;
           flex-shrink: 0;
           text-shadow: 2px 3px 5px rgba(0,0,0,.7);
         }
+        /* Collapsed to zero height by default so the title sits flush at the
+           card's bottom edge, matching the other homepage carousels. On
+           hover this grows to fit the caption, which pushes the title up
+           from underneath rather than the title itself animating. */
+        .sawo-carousel-caption-wrap {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height .4s ease;
+        }
         .sawo-carousel-caption {
           font-size: clamp(10px, 1.2vw, 14px);
           line-height: 1.4;
           opacity: 0;
-          transform: translateY(10px);
-          transition: opacity .4s ease, transform .4s ease;
+          transition: opacity .3s ease;
           margin-top: 4px;
-          flex-shrink: 0;
           font-weight: 400;
           text-align: left;
           text-shadow: 1px 2px 4px rgba(0,0,0,.6);
         }
         .sawo-carousel-item:hover img { transform: scale(1.08); }
+        .sawo-carousel-item:hover .sawo-carousel-caption-wrap {
+          max-height: 100px;
+        }
         .sawo-carousel-item:hover .sawo-carousel-caption {
           opacity: 1;
-          transform: translateY(0);
         }
 
         /* Breakpoints intentionally match Section2/Section4's carousels

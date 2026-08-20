@@ -28,12 +28,12 @@ const STEAM_ITEMS = [
 // Sauna Controls) instead of just the general hub page, wherever that
 // specific section actually exists.
 const ROOMS_ITEMS = [
-  { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: `${menuPaths.sauna.rooms}#standard-sauna-room` },
-  { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: `${menuPaths.sauna.rooms}#glass-front-sauna-room` },
+  { title: "Standard Sauna",   caption: "Timeless design and high quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: `${menuPaths.sauna.rooms}#standard-sauna-room` },
+  { title: "Glass Front Sauna",caption: "Pure serenity and relaxation. Modern design featuring clear tempered glass panels for an unobstructed view outside.",                                                                                                  img: glassFrontSauna,  href: `${menuPaths.sauna.rooms}#glass-front-sauna-room` },
   { title: "Compact Sauna",    caption: "Instant, plug-and-play design built for urban spaces. A hidden heater keeps the setup safe while maximizing your view.",                                                                                                img: compactSauna,     href: `${menuPaths.sauna.rooms}#compact-sauna-room` },
 ];
 const INFRARED_ITEMS = [
-  { title: "Infrared Saunas",   caption: "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience.",                img: infraredRooms,      href: menuPaths.infrared.saunas },
+  { title: "Infrared Sauna Rooms",   caption: "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience.",                img: infraredRooms,      href: menuPaths.infrared.saunas },
   { title: "Infrared Panels",   caption: "Designed to provide gentle, direct infrared warmth, these panels create a comfortable and relaxing sauna experience.",            img: infraredPanels,     href: menuPaths.infrared.panels },
   { title: "Infrared Controls", caption: "Easy-to-use controls designed to help you manage your infrared sauna experience with convenient temperature and session settings.",                               img: infraredControls,   href: menuPaths.infrared.controls },
 ];
@@ -61,12 +61,11 @@ const exploreBtnStyle = {
 };
 
 /**
- * Section3 — Steam / Sauna Rooms / Infrared / Sauna Control grids.
+ * SteamSection — Steam grid, rendered separately (placed under Sauna Heaters on the homepage).
  */
-const Section3 = () => {
+export const SteamSection = () => {
   return (
     <section className="section3-wrapper">
-      {/* ── STEAM ── */}
       <h2 className="section-title">STEAM</h2>
       <div className="steam-grid">
         {STEAM_ITEMS.map((item, i) => (
@@ -83,6 +82,32 @@ const Section3 = () => {
         </Link>
       </div>
 
+      <style jsx>{`
+        .section3-wrapper { font-family: "Montserrat", sans-serif; padding: 40px 0; }
+        .section-title { text-align: center; font-size: 35px; font-weight: 500; color: rgb(175, 133, 100); margin: 60px 0 30px; }
+        .section-title:first-child { margin-top: 0; }
+        .steam-grid, .image-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .steam-card, .image-card { flex: 1 1 calc(25% - 20px); min-width: 220px; position: relative; overflow: hidden; border-radius: 4px; }
+        img { width: 100%; display: block; transition: transform 0.6s ease; }
+        .steam-card:hover img, .image-card:hover img { transform: scale(1.08); }
+        .steam-title, .image-card .title { position: absolute; bottom: 0; width: 100%; text-align: center; color: #fff; padding: 16px; z-index: 2; font-size: clamp(14px, 2vw, 20px); font-weight: 500; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); }
+        .steam-card.has-caption::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; transition: opacity 0.4s ease; z-index: 1; }
+        .steam-card.has-caption:hover::before { opacity: 1; }
+        .steam-caption { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: #fff; opacity: 0; z-index: 2; transition: opacity 0.4s ease; }
+        .steam-card.has-caption:hover .steam-caption { opacity: 1; }
+        .steam-card.has-caption:hover .steam-title { opacity: 0; }
+        @media (max-width: 768px) { .steam-card, .image-card { flex: 1 1 100%; } }
+      `}</style>
+    </section>
+  );
+};
+
+/**
+ * Section3 — Sauna Rooms / Infrared / Sauna Control grids (Steam moved out to SteamSection).
+ */
+const Section3 = () => {
+  return (
+    <section className="section3-wrapper">
       {/* ── SAUNA ROOMS ── */}
       <h2 className="section-title">SAUNA ROOMS</h2>
       <div className="steam-grid">
@@ -124,8 +149,33 @@ const Section3 = () => {
       {/* ── SAUNA WELLNESS BENEFITS ── */}
       <WellnessBenefits />
 
-      {/* ── SAUNA CONTROL ── */}
-      <h2 className="section-title">SAUNA CONTROL</h2>
+      <style jsx>{`
+        .section3-wrapper { font-family: "Montserrat", sans-serif; padding: 40px 0; }
+        .section-title { text-align: center; font-size: 35px; font-weight: 500; color: rgb(175, 133, 100); margin: 60px 0 30px; }
+        .section-title:first-child { margin-top: 0; }
+        .steam-grid, .image-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .steam-card, .image-card { flex: 1 1 calc(25% - 20px); min-width: 220px; position: relative; overflow: hidden; border-radius: 4px; }
+        img { width: 100%; display: block; transition: transform 0.6s ease; }
+        .steam-card:hover img, .image-card:hover img { transform: scale(1.08); }
+        .steam-title, .image-card .title { position: absolute; bottom: 0; width: 100%; text-align: center; color: #fff; padding: 16px; z-index: 2; font-size: clamp(14px, 2vw, 20px); font-weight: 500; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); }
+        .steam-card.has-caption::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; transition: opacity 0.4s ease; z-index: 1; }
+        .steam-card.has-caption:hover::before { opacity: 1; }
+        .steam-caption { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: #fff; opacity: 0; z-index: 2; transition: opacity 0.4s ease; }
+        .steam-card.has-caption:hover .steam-caption { opacity: 1; }
+        .steam-card.has-caption:hover .steam-title { opacity: 0; }
+        @media (max-width: 768px) { .steam-card, .image-card { flex: 1 1 100%; } }
+      `}</style>
+    </section>
+  );
+};
+
+/**
+ * SaunaControlsSection — Sauna Controls grid, rendered separately (placed under Steam on the homepage).
+ */
+export const SaunaControlsSection = () => {
+  return (
+    <section className="section3-wrapper">
+      <h2 className="section-title">SAUNA CONTROLS</h2>
       <div className="image-grid">
         {CONTROL_ITEMS.map((item, i) => (
           <Link key={i} to={item.href} className="image-card">
@@ -143,17 +193,13 @@ const Section3 = () => {
       <style jsx>{`
         .section3-wrapper { font-family: "Montserrat", sans-serif; padding: 40px 0; }
         .section-title { text-align: center; font-size: 35px; font-weight: 500; color: rgb(175, 133, 100); margin: 60px 0 30px; }
-        .steam-grid, .image-grid { display: flex; flex-wrap: wrap; gap: 20px; }
-        .steam-card, .image-card { flex: 1 1 calc(25% - 20px); min-width: 220px; position: relative; overflow: hidden; border-radius: 4px; }
+        .section-title:first-child { margin-top: 0; }
+        .image-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .image-card { flex: 1 1 calc(25% - 20px); min-width: 220px; position: relative; overflow: hidden; border-radius: 4px; }
         img { width: 100%; display: block; transition: transform 0.6s ease; }
-        .steam-card:hover img, .image-card:hover img { transform: scale(1.08); }
-        .steam-title, .image-card .title { position: absolute; bottom: 0; width: 100%; text-align: center; color: #fff; padding: 16px; z-index: 2; font-size: clamp(14px, 2vw, 20px); font-weight: 500; text-transform: uppercase; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); }
-        .steam-card.has-caption::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; transition: opacity 0.4s ease; z-index: 1; }
-        .steam-card.has-caption:hover::before { opacity: 1; }
-        .steam-caption { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: #fff; opacity: 0; z-index: 2; transition: opacity 0.4s ease; }
-        .steam-card.has-caption:hover .steam-caption { opacity: 1; }
-        .steam-card.has-caption:hover .steam-title { opacity: 0; }
-        @media (max-width: 768px) { .steam-card, .image-card { flex: 1 1 100%; } }
+        .image-card:hover img { transform: scale(1.08); }
+        .image-card .title { position: absolute; bottom: 0; width: 100%; text-align: center; color: #fff; padding: 16px; z-index: 2; font-size: clamp(14px, 2vw, 20px); font-weight: 500; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); }
+        @media (max-width: 768px) { .image-card { flex: 1 1 100%; } }
       `}</style>
     </section>
   );
