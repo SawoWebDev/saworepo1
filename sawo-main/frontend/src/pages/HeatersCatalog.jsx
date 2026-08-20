@@ -190,9 +190,44 @@ export default function HeatersCatalog({ showHero = true } = {}) {
         }
 
         .hc-grid {
+          /* auto-FILL, not auto-fit: auto-fit collapses the empty tracks
+             and stretches whatever is left, so a series holding one heater
+             rendered a single card across the full content column — and
+             .hc-card-img-wrap is aspect-ratio 1/1, so it came out as a
+             giant square. auto-fill keeps the empty tracks, leaving a lone
+             card at normal size and the rest of the row simply empty. */
+          --hc-card-width: 220px;
+          --hc-gap: 24px;
+          --hc-max-cols: 5;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 24px;
+          /* minmax(0, --hc-card-width), never 1fr: a 1fr max lets each track
+             absorb the leftover space, which is how one card came out
+             full-width and how two cards on a 1100px screen came out 328px
+             each. A fixed max pins every card to the same size at every
+             breakpoint; the leftover simply sits to the right. The 0 min
+             lets the card shrink below that on a phone rather than
+             overflow. */
+          grid-template-columns: repeat(auto-fill, minmax(0, var(--hc-card-width)));
+          justify-content: start;
+          gap: var(--hc-gap);
+          /* .heaters-wrapper has no max-width, so on a wide monitor this
+             column would otherwise fit 6-8 tracks. Capping the grid holds
+             it to --hc-max-cols columns at the card width. */
+          /* min(100%, ...) not the calc alone: a bare max-width becomes the
+             grid's max-content contribution, so .heaters-wrapper's 1fr track
+             sized itself to 1196px even inside an 820px wrapper and the last
+             cards were clipped. Wrapping in min() keeps the column cap while
+             still yielding to a narrower container. */
+          max-width: min(
+            100%,
+            calc(
+              var(--hc-card-width) * var(--hc-max-cols)
+              + var(--hc-gap) * (var(--hc-max-cols) - 1)
+            )
+          );
+          /* Grid/flex children default to min-width:auto, which refuses to
+             shrink below min-content — the other half of the same trap. */
+          min-width: 0;
         }
         .hc-card {
           display: flex;
