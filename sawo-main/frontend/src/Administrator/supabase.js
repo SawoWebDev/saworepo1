@@ -239,7 +239,7 @@ export async function logActivity({ action, entity, entity_id, entity_name, user
 //
 // Returns a result object:
 // {
-//   scanned:  { "product-images": N, "product-pdf": N, "sauna-room-images": N },
+//   scanned:  { "product-images": N, "product-pdf": N, "saunaroom-images": N },
 //   deleted:  { "product-images": [...paths], ... },
 //   failed:   { "product-images": [...paths], ... },
 //   kept:     { "product-images": N, ... },
@@ -251,7 +251,13 @@ export async function logActivity({ action, entity, entity_id, entity_name, user
 //   Storage → Buckets → [bucket] → Policies → New Policy → DELETE → true
 // ──────────────────────────────────────────────────────────────────────────────
 
-const STORAGE_BUCKETS = ["product-images", "product-pdf", "sauna-room-images"];
+// The four real bucket names, as reported by storage.listBuckets(). This
+// list read "sauna-room-images" (hyphenated) until 2026-08-20 — a name no
+// bucket has ever had, so the scan silently returned an empty list for it
+// rather than erroring, and the sauna-room bucket had never actually been
+// scanned. site-content-images was missing outright. Verify against
+// storage.listBuckets() before editing; a typo here fails quiet.
+const STORAGE_BUCKETS = ["product-images", "product-pdf", "saunaroom-images", "site-content-images"];
 
 // Supabase list() max is 1000 per call. We paginate until exhausted.
 async function listAllFiles(bucket) {

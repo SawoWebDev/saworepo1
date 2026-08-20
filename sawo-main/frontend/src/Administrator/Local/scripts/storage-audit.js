@@ -58,6 +58,7 @@ const DO_DELETE = args.includes("--delete");
 const CONFIRMED = args.includes("--yes");
 const ONLY_BUCKET = (args.find(a => a.startsWith("--bucket=")) || "").split("=")[1] || null;
 const INCLUDE_EXTERNAL = args.includes("--include-external");
+const CONCURRENCY = Number((args.find(a => a.startsWith("--concurrency=")) || "").split("=")[1]) || 8;
 const ARCHIVE_DIR = (args.find(a => a.startsWith("--archive-dir=")) || "").split("=")[1]
   || path.join(__dirname, "..", "data", "storage-archive");
 const MANIFEST_PATH = path.join(__dirname, "..", "data", "storage-audit.json");
@@ -187,21 +188,36 @@ function classifyReference(blob, objectName) {
 }
 
 // ── Archive one object ───────────────────────────────────────────────────
-async function archiveObject(bucket, obj) {
+// Verification is against the downloaded buffer, NOT a stat() of the file we
+// just wrote: on Windows, writeFileSync followed by an immediate statSync can
+// still report a stale size while several workers are writing, which shows up
+// as a phantom "got 0, expected N" on bytes that arrived perfectly intact.
+// The buffer length is also the thing actually worth checking — it catches a
+// truncated download, which is the real risk here.
+async function archiveObject(bucket, obj, attempts = 3) {
   const dest = path.join(ARCHIVE_DIR, bucket, obj.name);
   if (fs.existsSync(dest) && fs.statSync(dest).size === obj.size && obj.size > 0) {
     return "already-archived";
   }
-  const { data, error } = await supabase.storage.from(bucket).download(obj.name);
-  if (error) throw new Error(`download ${bucket}/${obj.name}: ${error.message}`);
-  const buf = Buffer.from(await data.arrayBuffer());
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, buf);
-  const written = fs.statSync(dest).size;
-  if (obj.size > 0 && written !== obj.size) {
-    throw new Error(`size mismatch for ${bucket}/${obj.name}: got ${written}, expected ${obj.size}`);
+
+  let lastProblem = "";
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    const { data, error } = await supabase.storage.from(bucket).download(obj.name);
+    if (error) {
+      lastProblem = error.message;
+    } else {
+      const buf = Buffer.from(await data.arrayBuffer());
+      if (obj.size > 0 && buf.length !== obj.size) {
+        lastProblem = `truncated download: got ${buf.length}, expected ${obj.size}`;
+      } else {
+        fs.mkdirSync(path.dirname(dest), { recursive: true });
+        fs.writeFileSync(dest, buf);
+        return "archived";
+      }
+    }
+    if (attempt < attempts) await new Promise(r => setTimeout(r, 250 * attempt));
   }
-  return "archived";
+  throw new Error(`${bucket}/${obj.name}: ${lastProblem}`);
 }
 
 function isSafelyArchived(bucket, obj) {
@@ -225,6 +241,7 @@ async function main() {
 
   const manifest = { generated_at: new Date().toISOString(), archive_dir: ARCHIVE_DIR, buckets: {} };
   let totalOrphanBytes = 0, totalKeptBytes = 0, totalExternalBytes = 0;
+  const archiveFailures = [];
 
   for (const b of targets) {
     const objects = await listBucket(b.name);
@@ -250,13 +267,30 @@ async function main() {
     console.log(`   unreferenced:          ${orphans.length} (${fmt(bytes(orphans))})`);
 
     if (DO_ARCHIVE && candidates.length) {
-      let done = 0, skipped = 0;
-      for (const o of candidates) {
-        const r = await archiveObject(b.name, o);
-        r === "archived" ? done++ : skipped++;
-        if ((done + skipped) % 100 === 0) console.log(`   ...${done + skipped}/${candidates.length}`);
-      }
+      // Archiving ~1,800 objects one round-trip at a time takes hours and is
+      // almost entirely latency, not bandwidth. CONCURRENCY workers pull from
+      // a shared cursor; matches migrate-to-r2.js's pattern.
+      let done = 0, skipped = 0, next = 0;
+      const worker = async () => {
+        for (;;) {
+          const i = next++;
+          if (i >= candidates.length) return;
+          // A single unarchivable object must not strand the run: record it
+          // and keep going. Nothing that failed here can be deleted later,
+          // because the delete stage independently re-verifies the archive.
+          try {
+            const r = await archiveObject(b.name, candidates[i]);
+            r === "archived" ? done++ : skipped++;
+          } catch (err) {
+            archiveFailures.push(err.message);
+          }
+          const seen = done + skipped + archiveFailures.length;
+          if (seen % 100 === 0) console.log(`   ...${seen}/${candidates.length}`);
+        }
+      };
+      await Promise.all(Array.from({ length: CONCURRENCY }, worker));
       console.log(`   archived ${done}, already had ${skipped} → ${path.join(ARCHIVE_DIR, b.name)}`);
+      if (archiveFailures.length) console.log(`   ⚠️  ${archiveFailures.length} object(s) could not be archived`);
     }
 
     const describe = list => list.map(o => ({ name: o.name, size: o.size, archived: isSafelyArchived(b.name, o) }));
@@ -293,6 +327,11 @@ async function main() {
   console.log(`Unreferenced:                 ${fmt(totalOrphanBytes)}`);
   console.log(`Reclaimable now:              ${fmt(INCLUDE_EXTERNAL ? totalOrphanBytes + totalExternalBytes : totalOrphanBytes)}`);
   console.log(`Manifest:                     ${MANIFEST_PATH}`);
+  if (archiveFailures.length) {
+    console.log(`\n⚠️  ${archiveFailures.length} object(s) could not be archived and were therefore NOT deleted:`);
+    for (const f of archiveFailures.slice(0, 20)) console.log(`   ${f}`);
+    if (archiveFailures.length > 20) console.log(`   ...and ${archiveFailures.length - 20} more`);
+  }
   if (!DO_ARCHIVE) console.log(`\nNothing was downloaded or deleted. Next: --archive, then --delete --yes.`);
   else if (!DO_DELETE) console.log(`\nArchived only. Nothing was deleted.`);
   else if (!CONFIRMED) console.log(`\nDry run. Nothing was deleted.`);

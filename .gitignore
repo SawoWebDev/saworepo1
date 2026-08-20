@@ -65,3 +65,8 @@ yarn-error.log*
 # Internal documentation — kept local only, not published to GitHub
 docs/
 sawo-main/docs/
+
+# Supabase Storage archive — the local safety copy taken before the buckets
+# were emptied (2026-08-20). ~369 MB of images/PDFs; it is a backup, not
+# source, and must never enter git history.
+sawo-main/frontend/src/Administrator/Local/data/storage-archive/
