@@ -4,11 +4,18 @@ import {
   SPD_ACCORDION_ITEMS, SPD_SLIDE_DELAY, SPD_LOADER_TIMEOUT,
 } from "./SaunaRoomData";
 
-const SaunaProductDetails = () => {
+const SaunaProductDetails = ({
+  slides = SPD_SLIDES,
+  storySections = SPD_STORY_SECTIONS,
+  featureText = SPD_FEATURE_TEXT,
+  perfCards = SPD_PERF_CARDS,
+  accordionItems = SPD_ACCORDION_ITEMS,
+  title = "The Sauna You'll Actually Use Every Day",
+}) => {
   const [index, setIndex]                     = useState(0);
   const [loaderHidden, setLoaderHidden]       = useState(false);
-  const [imagesLoaded, setImagesLoaded]       = useState(() => new Array(SPD_SLIDES.length).fill(false));
-  const [accordionOpen, setAccordionOpen]     = useState(() => new Array(SPD_ACCORDION_ITEMS.length).fill(false));
+  const [imagesLoaded, setImagesLoaded]       = useState(() => new Array(slides.length).fill(false));
+  const [accordionOpen, setAccordionOpen]     = useState(() => new Array(accordionItems.length).fill(false));
   const timerRef      = useRef(null);
   const loadedRef     = useRef(0);
   const timerStarted  = useRef(false);
@@ -17,10 +24,10 @@ const SaunaProductDetails = () => {
     if (timerStarted.current) return;
     timerStarted.current = true;
     timerRef.current = setInterval(
-      () => setIndex((i) => (i + 1) % SPD_SLIDES.length),
+      () => setIndex((i) => (i + 1) % slides.length),
       SPD_SLIDE_DELAY
     );
-  }, []);
+  }, [slides.length]);
 
   const handleImageLoad = useCallback((idx) => {
     setImagesLoaded((prev) => { const n = [...prev]; n[idx] = true; return n; });
@@ -60,7 +67,7 @@ const SaunaProductDetails = () => {
     <div className="sawo-product-details">
 
       <div className="sawo-product-main">
-        <div className="sawo-product-title">The Sauna You'll Actually Use Every Day</div>
+        <div className="sawo-product-title">{title}</div>
         <hr className="sawo-divider-subtle" />
 
         <div className="sawo-product-story">
@@ -70,7 +77,7 @@ const SaunaProductDetails = () => {
                 <div className="sawo-loader-ring"></div>
                 <div className="sawo-loader-text">Loading</div>
               </div>
-              {SPD_SLIDES.map((slide, i) => (
+              {slides.map((slide, i) => (
                 <div key={slide.alt} className={`sawo-slide${index === i ? " active" : ""}`}>
                   <img
                     src={slide.src}
@@ -82,7 +89,7 @@ const SaunaProductDetails = () => {
                 </div>
               ))}
               <div className="sawo-slide-dots">
-                {SPD_SLIDES.map((slide, i) => (
+                {slides.map((slide, i) => (
                   <button
                     key={slide.alt}
                     className={`sawo-dot${index === i ? " active" : ""}`}
@@ -94,7 +101,7 @@ const SaunaProductDetails = () => {
             </div>
           </div>
 
-          {SPD_STORY_SECTIONS.map((section) => (
+          {storySections.map((section) => (
             <div key={section.title} className="sawo-story-section">
               <div className="story-section-title">{section.title}</div>
               {section.paragraphs.map((p, j) => <p key={j}>{p}</p>)}
@@ -102,7 +109,7 @@ const SaunaProductDetails = () => {
           ))}
 
           <div className="sawo-product-features">
-            <p>{SPD_FEATURE_TEXT}</p>
+            <p>{featureText}</p>
           </div>
         </div>
 
@@ -112,7 +119,7 @@ const SaunaProductDetails = () => {
       <div className="sawo-performance-grid">
         <div className="performance-header">Crafted with Precision</div>
         <div className="performance-cards">
-          {SPD_PERF_CARDS.map((card) => (
+          {perfCards.map((card) => (
             <div key={card.label} className="perf-card">
               <div className="perf-label">{card.label}</div>
               <div className="perf-detail">{card.detail}</div>
@@ -122,7 +129,7 @@ const SaunaProductDetails = () => {
       </div>
 
       <div className="sawo-accordion-section">
-        {SPD_ACCORDION_ITEMS.map((item, i) => (
+        {accordionItems.map((item, i) => (
           <div key={item.title} className={`sawo-accordion-item${accordionOpen[i] ? " active" : ""}`}>
             <button className="sawo-accordion-header" onClick={() => toggleAccordion(i)}>
               <span className="accordion-title-text">{item.title}</span>

@@ -10,9 +10,24 @@ import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownBut
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import SaunaRoomViewer from "../Sauna/rooms/SaunaRoomViewer";
+import SaunaFeatures from "../Sauna/rooms/SaunaFeatures";
+import SaunaProductDetails from "../Sauna/rooms/SaunaProductDetails";
+import SaunaRoomDetails from "../Sauna/rooms/SaunaRoomDetails";
+import SaunaWoodMaterials from "../Sauna/rooms/SaunaWoodMaterials";
 import SaunaCallToAction from "../Sauna/rooms/SaunaCallToAction";
+import {
+  IR_SFW_ITEMS, IR_SPD_SLIDES, IR_SPD_STORY_SECTIONS, IR_SPD_FEATURE_TEXT,
+  IR_SPD_PERF_CARDS, IR_SPD_ACCORDION_ITEMS, IR_MATS_ITEMS, SRD_PANELS,
+} from "../Sauna/rooms/SaunaRoomData";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import heroBg from "../../assets/Infrared/hero.webp";
+
+// The About This Room carousel on /sauna/rooms rotates through all four room
+// types. Here it is pinned to the infrared panel: on a page about one room, a
+// carousel that wanders off to the Compact Sauna Room is a way out of the
+// page, not a feature. Selected by pill rather than index so reordering
+// SRD_PANELS cannot silently point this at the wrong room.
+const IR_ROOM_PANEL = SRD_PANELS.filter((p) => p.pill === "Infrared");
 
 const INFRARED_BROCHURE_URL =
   "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Infrared-Brochure-2026-1.pdf";
@@ -43,12 +58,16 @@ const BENEFITS = [
  * out on 2026-08-20 so the infrared range lives in one place; that page's
  * tab is gone and its old #infrared-sauna-room hash redirects here (see SaunaRooms.jsx).
  *
- * The viewer is the same component /sauna/rooms uses, pinned to the infrared
- * room and with its tab bar suppressed — a one-button tab bar is noise. Only
- * sections backed by real infrared data appear: the traditional-sauna
- * Features / Product Details / 3D teaser / Wood Materials / Configurator
- * sections on /sauna/rooms describe classic cabins and heaters, and infrared
- * has no equivalents, so they are deliberately not reproduced here.
+ * Every section is the same component /sauna/rooms uses, driven by infrared
+ * data rather than the traditional-sauna set — see the IR_* exports in
+ * SaunaRoomData. Those components take their data as props precisely so this
+ * page can exist without forking them.
+ *
+ * The viewer is pinned to the infrared room with its tab bar suppressed: a
+ * one-button tab bar is noise. Two sections from /sauna/rooms are still not
+ * reproduced — the 3D teaser (its model is a classic cabin) and the
+ * configurator (its middle step picks a heater, which an infrared room does
+ * not have).
  */
 const InfraredRoom = () => {
   const heroLoaded = useHeroLoaded(heroBg);
@@ -96,6 +115,27 @@ const InfraredRoom = () => {
       </section>
 
       <SaunaRoomViewer rooms={["infrared"]} showTabs={false} />
+
+      <SaunaFeatures
+        items={IR_SFW_ITEMS}
+        heading="What Makes Our Infrared Room Different"
+      />
+
+      <SaunaProductDetails
+        slides={IR_SPD_SLIDES}
+        storySections={IR_SPD_STORY_SECTIONS}
+        featureText={IR_SPD_FEATURE_TEXT}
+        perfCards={IR_SPD_PERF_CARDS}
+        accordionItems={IR_SPD_ACCORDION_ITEMS}
+        title="The Infrared Sauna You'll Actually Use Every Day"
+      />
+
+      <SaunaRoomDetails panels={IR_ROOM_PANEL} />
+
+      <SaunaWoodMaterials
+        items={IR_MATS_ITEMS}
+        subtitle="Infrared rooms are built in cedar or hemlock — each brings its own character, scent, and warmth to your sessions."
+      />
 
       {/* WELLNESS BENEFITS */}
       <section className="ir-benefits-section">
