@@ -39,7 +39,7 @@ async function requireUploader(env, userId) {
   const anonKey = env.REACT_APP_SUPABASE_ANON_KEY;
   if (!url || !anonKey) return null;
 
-  const res = await fetch(`${url}/rest/v1/users?id=eq.${encodeURIComponent(userId)}&select=id,role`, {
+  const res = await fetch(`${url}/rest/v1/users?id=eq.${encodeURIComponent(userId)}&select=id,role,username`, {
     headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
   });
   if (!res.ok) return null;
@@ -59,6 +59,31 @@ function buildKey({ entityPrefix, slug, role, ext, h }) {
   return `${entityPrefix}/${slug}/${role}-${h}.${ext}`;
 }
 
+// Records original filename -> hashed R2 key so that mapping isn't lost the
+// moment the object is stored (the key itself is a content hash, by design
+// — see the module comment above buildKey's sibling in
+// Local/scripts/migrate-to-r2.js for why). Best-effort: a logging failure
+// must never fail the upload itself, so callers don't await-and-throw this.
+async function logUpload(env, row) {
+  const url = env.REACT_APP_SUPABASE_URL;
+  const anonKey = env.REACT_APP_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) return;
+  try {
+    await fetch(`${url}/rest/v1/media_upload_log`, {
+      method: "POST",
+      headers: {
+        apikey: anonKey,
+        Authorization: `Bearer ${anonKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(row),
+    });
+  } catch (err) {
+    console.error("media_upload_log insert failed (non-fatal):", err);
+  }
+}
+
 export async function onRequestPost({ request, env }) {
   try {
     // Misconfigured binding (e.g. R2 bucket attached to the Production
@@ -75,6 +100,7 @@ export async function onRequestPost({ request, env }) {
     const role = url.searchParams.get("role");
     const ext = (url.searchParams.get("ext") || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     const userId = url.searchParams.get("userId");
+    const filename = url.searchParams.get("filename") || null;
 
     if (!ENTITY_PREFIXES.has(entityPrefix)) return Response.json({ error: "Invalid entityPrefix" }, { status: 400 });
     if (!slug || !SLUG_RE.test(slug)) return Response.json({ error: "Invalid slug" }, { status: 400 });
@@ -98,6 +124,14 @@ export async function onRequestPost({ request, env }) {
 
     const base = new URL(request.url);
     const publicUrl = `${base.protocol}//${base.host}/media/${key}`;
+
+    await logUpload(env, {
+      key, public_url: publicUrl, original_filename: filename,
+      entity_prefix: entityPrefix, slug, role, ext, content_type: contentType,
+      bytes: buf.byteLength, source: "cms-upload",
+      uploaded_by: uploader.id, uploaded_by_username: uploader.username || null,
+    });
+
     return Response.json({ url: publicUrl, key });
   } catch (err) {
     console.error("media-upload POST failed:", err);
@@ -120,6 +154,24 @@ export async function onRequestDelete({ request, env }) {
     if (!uploader) return Response.json({ error: "Not authorized" }, { status: 403 });
 
     await env.MEDIA_BUCKET.delete(key);
+
+    const supaUrl = env.REACT_APP_SUPABASE_URL;
+    const anonKey = env.REACT_APP_SUPABASE_ANON_KEY;
+    if (supaUrl && anonKey) {
+      try {
+        await fetch(`${supaUrl}/rest/v1/media_upload_log?key=eq.${encodeURIComponent(key)}`, {
+          method: "PATCH",
+          headers: {
+            apikey: anonKey, Authorization: `Bearer ${anonKey}`,
+            "Content-Type": "application/json", Prefer: "return=minimal",
+          },
+          body: JSON.stringify({ deleted_at: new Date().toISOString() }),
+        });
+      } catch (err) {
+        console.error("media_upload_log delete-mark failed (non-fatal):", err);
+      }
+    }
+
     return Response.json({ ok: true });
   } catch (err) {
     console.error("media-upload DELETE failed:", err);

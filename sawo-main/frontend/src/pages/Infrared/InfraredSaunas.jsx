@@ -58,7 +58,7 @@ const InfraredSaunas = () => {
     <div>
       <SEO
         title="Infrared Saunas"
-        description="SAWO infrared rooms in one- and two-person sizes. Fiber-coated far infrared panels, cedar and hemlock finishes, and plug-and-play 230V installation."
+        description="SAWO infrared saunas in one- and two-person sizes. Fiber-coated far infrared panels, cedar and hemlock finishes, and plug-and-play 230V installation."
         path="/infrared/saunas"
       />
 
@@ -115,7 +115,7 @@ const InfraredSaunas = () => {
 
       <SaunaWoodMaterials
         items={IR_MATS_ITEMS}
-        subtitle="Infrared rooms are built in cedar or hemlock — each brings its own character, scent, and warmth to your sessions."
+        subtitle="Infrared saunas are built in cedar or hemlock — each brings its own character, scent, and warmth to your sessions."
       />
 
       <SaunaCallToAction />

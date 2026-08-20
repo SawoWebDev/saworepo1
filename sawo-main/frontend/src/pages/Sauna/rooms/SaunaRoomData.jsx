@@ -813,7 +813,7 @@ const IR_SPD_STORY_SECTIONS = [
   {
     title: "Warmth That Reaches You Directly",
     paragraphs: [
-      "An infrared room does not need to reach 80°C to do its work. The panels warm your body rather than the air around it, so a session feels deep and enveloping while the cabin stays at a temperature you can breathe easily in.",
+      "An infrared sauna does not need to reach 80°C to do its work. The panels warm your body rather than the air around it, so a session feels deep and enveloping while the cabin stays at a temperature you can breathe easily in.",
       "That makes it a different proposition from a traditional sauna rather than a smaller version of one: gentler on the chest, easier to sit through for a full hour, and approachable for people who find the heat of a Finnish sauna too much.",
     ],
   },

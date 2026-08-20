@@ -37,7 +37,7 @@ const InfraredControls = () => {
       emptyText="No infrared controls available yet."
       loadingText="Loading infrared controls..."
       ctaTitle="Need Help Choosing a Control?"
-      ctaDescription="Whether you want a surface-mounted interface or a built-in unit, our team can help you pick the right control for your infrared room."
+      ctaDescription="Whether you want a surface-mounted interface or a built-in unit, our team can help you pick the right control for your infrared sauna."
     />
   );
 };
