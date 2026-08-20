@@ -80,6 +80,32 @@ export async function getAllProductsLive() {
 }
 
 /**
+ * Fetch every product_translations row for one locale, keyed by product_id
+ * — see Administrator/Local/scripts/setup-product-translations.sql. A
+ * product with no row here just isn't translated yet; callers merge this
+ * on top of getAllProductsLive()'s English rows and keep the English value
+ * for any field (name/short_description/description) this row leaves null,
+ * rather than showing a blank.
+ */
+export async function getProductTranslationsLive(locale) {
+  if (!locale || locale === "en") return {};
+  try {
+    const { data, error } = await (await getSupabase())
+      .from("product_translations")
+      .select("product_id, name, short_description, description")
+      .eq("locale", locale);
+
+    if (error) throw error;
+    const byProductId = {};
+    for (const row of data || []) byProductId[row.product_id] = row;
+    return byProductId;
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch product translations:", err);
+    return {};
+  }
+}
+
+/**
  * Fetch soft-deleted products still within their retention window — backs
  * the admin Trash page. See purge_expired_trash() (scheduled via pg_cron,
  * daily) for what actually removes a row once its 30 days are up.
