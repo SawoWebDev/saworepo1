@@ -13,9 +13,9 @@ import standardSauna     from "../../assets/Home/Section3/700x525.webp";
 import glassFrontSauna   from "../../assets/Home/Section3/GLASS-FRONT.webp";
 import compactSauna      from "../../assets/Home/Section3/700x525-compact.webp";
 import infraredSaunaRoom from "../../assets/Home/Section3/INFRARED-SAUNA-ROOM.webp";
-import infraredRooms     from "../../assets/Home/Section3/SR06-44710101-1313LS_PERSPECTIVE-VIEW-1.webp";
-import infraredPanels    from "../../assets/Home/Section3/infrared-panelss-400x600px.webp";
-import infraredControls  from "../../assets/Home/Section3/IR-UI-V2.webp";
+import infraredRooms     from "../../assets/Home/Section3/IR-ROOM.webp";
+import infraredPanels    from "../../assets/Home/Section3/IR-PANEL.webp";
+import infraredControls  from "../../assets/Home/Section3/IR-CONTROL.webp";
 import saunovaSeries     from "../../assets/Home/Section3/SAU-UI-V2_AspenSauna.webp";
 import innovaSeries      from "../../assets/Home/Section3/INC-S-V2_SpruceSauna.webp";
 import controlAccessories from "../../assets/Home/Section3/sensor-holder.webp";
@@ -87,7 +87,8 @@ const Section3 = () => {
     img: ROOMS_IMAGES[key], href: ROOMS_HREFS[key],
   }));
   const INFRARED_ITEMS = INFRARED_KEYS.map((key) => ({
-    key, title: t(`section3.infrared.${key}.title`), img: INFRARED_IMAGES[key], href: INFRARED_HREFS[key],
+    key, title: t(`section3.infrared.${key}.title`), caption: t(`section3.infrared.${key}.caption`),
+    img: INFRARED_IMAGES[key], href: INFRARED_HREFS[key],
   }));
   const CONTROL_ITEMS = CONTROL_KEYS.map((key) => ({
     key, title: t(`section3.controls.${key}.title`), img: CONTROL_IMAGES[key], href: CONTROL_HREFS[key],
@@ -180,6 +181,27 @@ const Section3 = () => {
         </Link>
       </div>
 
+
+      {/* ── INFRARED ── */}
+      {/* Same card treatment as Sauna Rooms above (steam-card has-caption):
+          dark overlay + description on hover, title fading out. Was the
+          plain .image-card (title only, no overlay) until 2026-08-20. */}
+      <h2 className="section-title">{t("section3.infraredHeading")}</h2>
+      <div className="steam-grid">
+        {INFRARED_ITEMS.map((item) => (
+          <Link key={item.key} className="steam-card has-caption" to={item.href}>
+            <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
+            <div className="steam-title">{item.title}</div>
+            <div className="steam-caption">{item.caption}</div>
+          </Link>
+        ))}
+      </div>
+      <div className="text-center mt-6">
+        <Link to={menuPaths.infrared.parent} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
+          {tc("exploreMore")} <ChevronRight />
+        </Link>
+      </div>
+
       {/* ── SAUNA WELLNESS BENEFITS ── */}
       <section className="sauna-benefits-section full-bleed" style={{ background: "#af8564" }}>
         <div className="sauna-card-unique-section">
@@ -205,22 +227,6 @@ const Section3 = () => {
           </div>
         </div>
       </section>
-
-      {/* ── INFRARED ── */}
-      <h2 className="section-title">{t("section3.infraredHeading")}</h2>
-      <div className="image-grid">
-        {INFRARED_ITEMS.map((item) => (
-          <Link key={item.key} to={item.href} className="image-card">
-            <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
-            <div className="title">{item.title}</div>
-          </Link>
-        ))}
-      </div>
-      <div className="text-center mt-6">
-        <Link to={menuPaths.infrared} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
-          {tc("exploreMore")} <ChevronRight />
-        </Link>
-      </div>
 
       {/* ── SAUNA CONTROL ── */}
       <h2 className="section-title">{t("section3.saunaControlHeading")}</h2>

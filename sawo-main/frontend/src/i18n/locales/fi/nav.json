@@ -44,7 +44,10 @@
     "productCatalogue": "Tuoteluettelo",
     "latestNews": "Ajankohtaista",
     "sustainability": "Vastuullisuus",
-    "careers": "Työpaikat"
+    "careers": "Työpaikat",
+    "infraredSauna": "Infrapunasauna",
+    "infraredPanels": "Infrapunapaneelit",
+    "infraredControls": "Infrapunaohjaimet"
   },
   "language": {
     "label": "Kieli",

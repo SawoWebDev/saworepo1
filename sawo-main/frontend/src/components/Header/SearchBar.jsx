@@ -14,7 +14,7 @@ const PAGE_RESULTS = [
   { name: "Steam Generators", nk: "items.steamGenerators", path: menuPaths.steam.generators, category: "Pages" },
   { name: "Steam Controls", nk: "items.steamControls", path: menuPaths.steam.controls, category: "Pages" },
   { name: "Steam Accessories", nk: "items.steamAccessories", path: menuPaths.steam.accessories, category: "Pages" },
-  { name: "Infrared", nk: "groups.infrared", path: menuPaths.infrared, category: "Pages" },
+  { name: "Infrared", nk: "groups.infrared", path: menuPaths.infrared.parent, category: "Pages" },
   { name: "FAQ", nk: "items.faq", path: menuPaths.support.faq, category: "Pages" },
   { name: "Product Catalogue", nk: "items.productCatalogue", path: menuPaths.support.catalogue, category: "Pages" },
   { name: "User Manuals", nk: "items.userManuals", path: menuPaths.support.manuals, category: "Pages" },

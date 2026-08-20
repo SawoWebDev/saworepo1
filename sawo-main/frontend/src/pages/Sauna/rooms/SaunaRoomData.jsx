@@ -480,8 +480,8 @@ const infraredSizeData = {
 };
 
 const infraredBenchTypes = {
-  "0908-IR-D": { name: "Straight Bench", title: "Infrared Sauna Room", class: "straight", image: img_0908MS_TOP_VIEW_with_DIMENSION },
-  "1111-IR-D": { name: "Straight Bench", title: "Infrared Sauna Room", class: "straight", image: img_1111RS_TOP_VIEW_with_DIMENSION },
+  "0908-IR-D": { name: "Straight Bench", title: "Infrared Room", class: "straight", image: img_0908MS_TOP_VIEW_with_DIMENSION },
+  "1111-IR-D": { name: "Straight Bench", title: "Infrared Room", class: "straight", image: img_1111RS_TOP_VIEW_with_DIMENSION },
 };
 
 // Compact Sauna Room images are recent additions, not yet downloaded into
@@ -691,7 +691,7 @@ const SRD_PANELS = [
   {
     pill: "Infrared",
     label: "About This Room",
-    title: "Infrared Sauna Room",
+    title: "Infrared Room",
     descriptions: [
       "SAWO's standard infrared sauna rooms come in two sizes, either for a single person or for two people. The far-infrared panels do not heat the room as much as a traditional sauna does, so the majority of the heat produced is heating the body directly.",
       "Featuring fiber-coated far infrared panels (170W per panel), these energy-efficient saunas offer 1-person (1200W) or 2-person (1400W) configurations with premium cedar construction and plug-and-play 230V installation.",
@@ -705,7 +705,7 @@ const SRD_PANELS = [
       "Premium cedar construction",
     ],
     image: img_IR_1111RS_SCENE,
-    imageAlt: "Infrared Sauna Room",
+    imageAlt: "Infrared Room",
     imgPosition: "left",
   },
   {
@@ -840,8 +840,8 @@ const ROOM_CONFIGS = {
     bestSellers: new Set(["1414"]),
   },
   infrared: {
-    label: "Infrared Sauna Room",
-    desc: "SAWO Infrared Sauna Rooms provide gentle, therapeutic heat using advanced infrared technology for a relaxing and rejuvenating experience.",
+    label: "Infrared Room",
+    desc: "SAWO Infrared Rooms provide gentle, therapeutic heat using advanced infrared technology for a relaxing and rejuvenating experience.",
     imageData: infraredImageData,
     sizeData: infraredSizeData,
     benchTypes: infraredBenchTypes,

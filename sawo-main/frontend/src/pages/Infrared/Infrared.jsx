@@ -166,24 +166,24 @@ const Infrared = () => {
       </section>
 
       {/* ===================== */}
-      {/* INFRARED SAUNA ROOM   */}
+      {/* INFRARED ROOM   */}
       {/* ===================== */}
       <section id="infrared-room" className="max-w-[1100px] mx-auto px-6 py-20">
         <div className="ir-room-grid">
           <div className="ir-room-left">
-            <h2 className="ir-group-title">Infrared Sauna Room</h2>
+            <h2 className="ir-group-title">Infrared Room</h2>
             <p className="ir-room-desc">
-              Indulge in the therapeutic benefits of our Infrared Sauna Room, designed to promote
+              Indulge in the therapeutic benefits of our Infrared Room, designed to promote
               relaxation and well-being through the gentle warmth of infrared technology. Experience a
-              soothing escape in the comfort of your own space. Our Infrared Sauna Room is available for
+              soothing escape in the comfort of your own space. Our Infrared Room is available for
               single person and two people.
             </p>
-            <Link to="/sauna/rooms#infrared-sauna-room" className="wm-brochure-btn">
-              VIEW INFRARED SAUNA ROOM
+            <Link to="/infrared/room" className="wm-brochure-btn">
+              VIEW INFRARED ROOM
             </Link>
           </div>
           <div className="ir-room-img-wrap">
-            <img src={saunaRoom} alt="Infrared Sauna Room" className="ir-room-img" />
+            <img src={saunaRoom} alt="Infrared Room" className="ir-room-img" />
           </div>
         </div>
       </section>

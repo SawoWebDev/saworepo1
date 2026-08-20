@@ -123,13 +123,16 @@
     },
     "infrared": {
       "rooms": {
-        "title": "Infrarotkabinen"
+        "title": "Infrarotkabinen",
+        "caption": "Sanfte, wohltuende Infrarotwärme in einer kompakten Kabine. Erhältlich in Größen für eine oder zwei Personen."
       },
       "panels": {
-        "title": "Infrarotpaneele"
+        "title": "Infrarotpaneele",
+        "caption": "Faserbeschichtete Ferninfrarot-Paneele mit je 170 W — sie erwärmen den Körper direkt statt den ganzen Raum."
       },
       "controls": {
-        "title": "Infrarotsteuerungen"
+        "title": "Infrarotsteuerungen",
+        "caption": "Speziell entwickelte Steuerungen für präzise Temperatur und Sitzungsdauer in Ihrer Infrarotkabine."
       }
     },
     "controls": {

@@ -8,7 +8,12 @@ import { useLocaleT } from "../../i18n/LocaleContext";
 import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
 import SteamGenerator    from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
 import SaunaRoom         from "../../assets/Home/Section1/Sauna-Room.webp";
-import InfraredSauna     from "../../assets/Home/Section1/IR-SAUNA-1P-CEDAR.webp";
+// The infrared card shows the sauna ROOM, matching the image the Sauna
+// Rooms section uses (Section3/INFRARED-SAUNA-ROOM.webp). Kept as its own
+// 350x350 crop rather than importing Section3s 700x525 original, because
+// .sawo-carousel-item img is height:auto and every other card here is
+// square — a 4:3 image would render visibly shorter than its neighbours.
+import InfraredSauna     from "../../assets/Home/Section1/INFRARED-SAUNA-ROOM.webp";
 import SaunaAccessories  from "../../assets/Home/Section1/Sauna-Accessories.webp";
 import SaunovaSeries     from "../../assets/Home/Section1/INC-S-V2AspenSauna.webp";
 
@@ -17,7 +22,7 @@ const ITEM_HREFS = {
   heaters: menuPaths.sauna.heaters.parent,
   steamGenerators: menuPaths.steam.generators,
   rooms: menuPaths.sauna.rooms,
-  infrared: menuPaths.infrared,
+  infrared: menuPaths.infrared.parent,
   accessories: menuPaths.sauna.accessories.parent,
   controls: menuPaths.sauna.controls,
 };
