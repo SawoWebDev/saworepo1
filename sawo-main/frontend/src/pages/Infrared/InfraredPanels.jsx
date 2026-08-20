@@ -26,7 +26,7 @@ const InfraredPanels = () => {
   return (
     <ProductShowcase
       seoTitle="Infrared Panels"
-      seoDescription="SAWO infrared panels and accessories — fiber-coated far infrared panels at 170W each, backrests, and interface holders for your infrared room."
+      seoDescription="SAWO infrared panels and accessories — fiber-coated far infrared panels at 170W each, backrests, and interface holders for your infrared sauna."
       seoPath="/infrared/panels"
       heroImage={heroImg}
       heroTitle="INFRARED PANELS"
@@ -39,7 +39,7 @@ const InfraredPanels = () => {
       emptyText="No infrared panels available yet."
       loadingText="Loading infrared panels..."
       ctaTitle="Not Sure Which Panel You Need?"
-      ctaDescription="Panel count and placement depend on the size of your infrared room. Our team can help you work out the right configuration for your space."
+      ctaDescription="Panel count and placement depend on the size of your infrared sauna. Our team can help you work out the right configuration for your space."
     />
   );
 };

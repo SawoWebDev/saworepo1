@@ -11,7 +11,6 @@ import steamAccessories  from "../../assets/Home/Section3/ST-746-I_Display2.webp
 import standardSauna     from "../../assets/Home/Section3/700x525.webp";
 import glassFrontSauna   from "../../assets/Home/Section3/GLASS-FRONT.webp";
 import compactSauna      from "../../assets/Home/Section3/700x525-compact.webp";
-import infraredSaunaRoom from "../../assets/Home/Section3/INFRARED-SAUNA-ROOM.webp";
 import infraredRooms     from "../../assets/Home/Section3/IR-ROOM.webp";
 import infraredPanels    from "../../assets/Home/Section3/IR-PANEL.webp";
 import infraredControls  from "../../assets/Home/Section3/IR-CONTROL.webp";
@@ -32,7 +31,6 @@ const ROOMS_ITEMS = [
   { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: `${menuPaths.sauna.rooms}#standard-sauna-room` },
   { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: `${menuPaths.sauna.rooms}#glass-front-sauna-room` },
   { title: "Compact Sauna",    caption: "Instant, plug-and-play design built for urban spaces. A hidden heater keeps the setup safe while maximizing your view.",                                                                                                img: compactSauna,     href: `${menuPaths.sauna.rooms}#compact-sauna-room` },
-  { title: "Infrared Saunas", caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: menuPaths.infrared.saunas },
 ];
 const INFRARED_ITEMS = [
   { title: "Infrared Saunas",   caption: "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience.",                img: infraredRooms,      href: menuPaths.infrared.saunas },

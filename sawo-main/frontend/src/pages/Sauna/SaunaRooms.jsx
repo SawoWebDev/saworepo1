@@ -274,7 +274,7 @@ const SaunaRooms = () => {
     <div>
       <SEO
         title="Sauna Rooms"
-        description="Explore SAWO sauna rooms: Standard, Glass Front, Outdoor, and Infrared designs crafted for a complete, therapeutic sauna experience."
+        description="Explore SAWO sauna rooms: Standard, Glass Front, and Compact designs crafted for a complete, therapeutic sauna experience."
         path="/sauna/rooms"
       />
       {/* HERO */}
