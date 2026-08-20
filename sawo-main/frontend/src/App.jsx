@@ -28,6 +28,8 @@ import Home from "./pages/Home/Home";
 // of the initial download.
 const Infrared         = lazy(() => import("./pages/Infrared/Infrared"));
 const InfraredRoom     = lazy(() => import("./pages/Infrared/InfraredRoom"));
+const InfraredPanels   = lazy(() => import("./pages/Infrared/InfraredPanels"));
+const InfraredControls = lazy(() => import("./pages/Infrared/InfraredControls"));
 const About            = lazy(() => import("./pages/AboutUs/About"));
 const Sustainability   = lazy(() => import("./pages/AboutUs/Sustainability"));
 const LatestNews       = lazy(() => import("./pages/AboutUs/LatestNews"));
@@ -131,6 +133,8 @@ export default function App() {
                     <Route path={menuPaths.home}                    element={<Home />} />
                     <Route path={menuPaths.infrared.parent}         element={<Infrared />} />
                     <Route path={menuPaths.infrared.room}           element={<InfraredRoom />} />
+                    <Route path={menuPaths.infrared.panels}         element={<InfraredPanels />} />
+                    <Route path={menuPaths.infrared.controls}       element={<InfraredControls />} />
                     <Route path={menuPaths.about.parent}            element={<About />} />
                     <Route path={menuPaths.about.sustainability}    element={<Sustainability />} />
                     <Route path={menuPaths.about.news}              element={<LatestNews />} />

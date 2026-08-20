@@ -36,8 +36,8 @@ const ROOMS_ITEMS = [
 ];
 const INFRARED_ITEMS = [
   { title: "Infrared Rooms",    caption: "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience.",                img: infraredRooms,      href: menuPaths.infrared.room },
-  { title: "Infrared Panels",   caption: "Designed to provide gentle, direct infrared warmth, these panels create a comfortable and relaxing sauna experience.",            img: infraredPanels,     href: `${menuPaths.infrared.parent}#infrared-accessories` },
-  { title: "Infrared Controls", caption: "Easy-to-use controls designed to help you manage your infrared sauna experience with convenient temperature and session settings.",                               img: infraredControls,   href: `${menuPaths.infrared.parent}#infrared-controls` },
+  { title: "Infrared Panels",   caption: "Designed to provide gentle, direct infrared warmth, these panels create a comfortable and relaxing sauna experience.",            img: infraredPanels,     href: menuPaths.infrared.panels },
+  { title: "Infrared Controls", caption: "Easy-to-use controls designed to help you manage your infrared sauna experience with convenient temperature and session settings.",                               img: infraredControls,   href: menuPaths.infrared.controls },
 ];
 const CONTROL_ITEMS = [
   { title: "Saunova Series",       img: saunovaSeries,      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Saunova Series")}` },

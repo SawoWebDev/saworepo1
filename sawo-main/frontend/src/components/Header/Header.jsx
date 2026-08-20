@@ -71,11 +71,9 @@ const navItems = [
     name: "Infrared",
     path: menuPaths.infrared.parent,
     submenu: [
-      { name: "Infrared Sauna", path: menuPaths.infrared.room },
-      // Panels and controls are sections on the Infrared hub page rather
-      // than pages of their own.
-      { name: "Infrared Panels", path: `${menuPaths.infrared.parent}#infrared-accessories` },
-      { name: "Infrared Controls", path: `${menuPaths.infrared.parent}#infrared-controls` },
+      { name: "Infrared Room", path: menuPaths.infrared.room },
+      { name: "Infrared Panels", path: menuPaths.infrared.panels },
+      { name: "Infrared Controls", path: menuPaths.infrared.controls },
     ],
   },
   {
