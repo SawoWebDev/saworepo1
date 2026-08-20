@@ -1,0 +1,238 @@
+{
+  "slug": "ste-steam-generator",
+  "productId": "62da5399-e16e-4b7a-9a24-c457d74d6f62",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Steam Generators"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "2 Heating Elements"
+    },
+    {
+      "path": "variations[0].features[0]",
+      "source": "Power range: 3.0 – 5.0kW"
+    },
+    {
+      "path": "variations[0].features[1]",
+      "source": "Steam output: up to 6.7kg/hr"
+    },
+    {
+      "path": "variations[0].features[2]",
+      "source": "Can be installed in either side"
+    },
+    {
+      "path": "variations[0].features[3]",
+      "source": "Own pipe for overpressure valve"
+    },
+    {
+      "path": "variations[0].features[4]",
+      "source": "Steam head included"
+    },
+    {
+      "path": "variations[0].spec_table_headers[0]",
+      "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[0].spec_table_headers[4]",
+      "source": "Weight (kg)"
+    },
+    {
+      "path": "variations[0].spec_table_headers[5]",
+      "source": "Control"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "3 Heating Elements"
+    },
+    {
+      "path": "variations[1].features[0]",
+      "source": "Power range: 4.5 – 7.5kW"
+    },
+    {
+      "path": "variations[1].features[1]",
+      "source": "Steam output: up to 7.5kg/hr"
+    },
+    {
+      "path": "variations[1].features[2]",
+      "source": "Can be installed in either side"
+    },
+    {
+      "path": "variations[1].features[3]",
+      "source": "Own pipe for overpressure valve"
+    },
+    {
+      "path": "variations[1].features[4]",
+      "source": "Steam head included"
+    },
+    {
+      "path": "variations[1].spec_table_headers[0]",
+      "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[1].spec_table_headers[4]",
+      "source": "Weight (kg)"
+    },
+    {
+      "path": "variations[1].spec_table_headers[5]",
+      "source": "Control"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "6 Heating Elements"
+    },
+    {
+      "path": "variations[2].features[0]",
+      "source": "Power range: 9.0 – 15.0kW"
+    },
+    {
+      "path": "variations[2].features[1]",
+      "source": "Steam output: up to 20kg/hr"
+    },
+    {
+      "path": "variations[2].features[2]",
+      "source": "Can be installed in either side"
+    },
+    {
+      "path": "variations[2].features[3]",
+      "source": "Own pipe for overpressure valve"
+    },
+    {
+      "path": "variations[2].features[4]",
+      "source": "2 Steam heads included"
+    },
+    {
+      "path": "variations[2].spec_table_headers[0]",
+      "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[2].spec_table_headers[4]",
+      "source": "Weight (kg)"
+    },
+    {
+      "path": "variations[2].spec_table_headers[5]",
+      "source": "Control"
+    },
+    {
+      "path": "included_items[0].title",
+      "source": "Temperature sensor with"
+    },
+    {
+      "path": "included_items[0].note",
+      "source": "wire and sensor holder"
+    },
+    {
+      "path": "included_items[1].title",
+      "source": "Steam Head"
+    },
+    {
+      "path": "included_items[1].note",
+      "source": "(for 9kW models and up, two heads are included)"
+    },
+    {
+      "path": "included_items[2].title",
+      "source": "7.5m RJ12 cable"
+    },
+    {
+      "path": "included_items[2].note",
+      "source": "7.5m RJ10 cable"
+    }
+  ],
+  "fields": {
+    "name": "STE-höyrynkehitin",
+    "short_description": "<p style=\"text-align: justify;\">Luotettava ja helppokäyttöinen <strong>STE</strong>-höyrynkehitin on suunniteltu kotikäyttöön. Käyttö on yksinkertaista – kytke ohjain päälle ja säädä lämpötilaa säätönupista. Ruostumattomasta teräksestä valmistettu rakenne takaa pitkäikäisen kestävyyden ja korroosionkeston.</p><p style=\"text-align: justify;\">STE voidaan asentaa liitännät kummalle puolelle tahansa, mikä helpottaa asennusta erilaisiin tilaratkaisuihin. Suuremman tehon saavuttamiseksi jopa viisi yksikköä voidaan kytkeä sarjaan, jolloin enimmäisteho on<strong> 75,0 kW</strong>, ja kaikkea ohjataan yhdellä SAWO-ohjaimella.</p>",
+    "description": null,
+    "type": "Höyrynkehittimet",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 3,0–5,0 kW",
+          "Höyryntuotto: jopa 6,7 kg/h",
+          "Voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Höyrypää sisältyy",
+          "Saatavilla olevat ohjaimet: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m³)",
+          "Kiukaan koko (mm) Pituus | Leveys | Korkeus",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 4,5–7,5 kW",
+          "Höyryntuotto: jopa 7,5 kg/h",
+          "Voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Höyrypää sisältyy",
+          "Saatavilla olevat ohjaimet: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m³)",
+          "Kiukaan koko (mm) Pituus | Leveys | Korkeus",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 9,0–15,0 kW",
+          "Höyryntuotto: jopa 20 kg/h",
+          "Voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "2 höyrypäätä sisältyy",
+          "Saatavilla olevat ohjaimet: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m³)",
+          "Kiukaan koko (mm) Pituus | Leveys | Korkeus",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Temperature sensor with",
+        "title": "Lämpötila-anturi ja",
+        "note": "johto sekä anturipidike"
+      },
+      {
+        "index": 1,
+        "_english_title": "Steam Head",
+        "title": "Höyrypää",
+        "note": "(9 kW:n ja sitä suuremmissa malleissa mukana kaksi höyrypäätä)"
+      },
+      {
+        "index": 2,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7,5 m RJ12-kaapeli",
+        "note": "7,5 m RJ10-kaapeli"
+      }
+    ]
+  }
+}

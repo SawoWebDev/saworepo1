@@ -1,0 +1,336 @@
+{
+  "slug": "stn-s-steam-generator",
+  "productId": "65d27a90-bd93-44e6-83aa-4fcd0e97a9e6",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Steam Generators"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "2 Heating Elements"
+    },
+    {
+      "path": "variations[0].features[0]",
+      "source": "Power range: 3.0 – 5.0kW"
+    },
+    {
+      "path": "variations[0].features[1]",
+      "source": "Steam output: up to 6.7kg/hr"
+    },
+    {
+      "path": "variations[0].features[3]",
+      "source": "Own pipe for overpressure valve"
+    },
+    {
+      "path": "variations[0].features[4]",
+      "source": "Auto drain"
+    },
+    {
+      "path": "variations[0].features[5]",
+      "source": "Steam head included"
+    },
+    {
+      "path": "variations[0].features[6]",
+      "source": "Cassette type heating element setup for easy maintenance"
+    },
+    {
+      "path": "variations[0].features[7]",
+      "source": "¾” steam pipe"
+    },
+    {
+      "path": "variations[0].spec_table_headers[0]",
+      "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[0].spec_table_headers[2]",
+      "source": "Steam Room (m²)"
+    },
+    {
+      "path": "variations[0].spec_table_headers[3]",
+      "source": "Size (mm) L|W|H"
+    },
+    {
+      "path": "variations[0].spec_table_headers[4]",
+      "source": "Weight (kg)"
+    },
+    {
+      "path": "variations[0].spec_table_headers[5]",
+      "source": "Control"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "3 Heating Elements"
+    },
+    {
+      "path": "variations[1].features[0]",
+      "source": "Power range: 4.5 – 7.5kW"
+    },
+    {
+      "path": "variations[1].features[1]",
+      "source": "Steam output: up to 7.5kg/hr"
+    },
+    {
+      "path": "variations[1].features[3]",
+      "source": "Own pipe for overpressure valve"
+    },
+    {
+      "path": "variations[1].features[4]",
+      "source": "Auto drain"
+    },
+    {
+      "path": "variations[1].features[5]",
+      "source": "Steam head included"
+    },
+    {
+      "path": "variations[1].features[6]",
+      "source": "Cassette type heating element setup for easy maintenance"
+    },
+    {
+      "path": "variations[1].features[7]",
+      "source": "¾” steam pipe"
+    },
+    {
+      "path": "variations[1].spec_table_headers[0]",
+      "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[1].spec_table_headers[2]",
+      "source": "Steam Room (m²)"
+    },
+    {
+      "path": "variations[1].spec_table_headers[3]",
+      "source": "Size (mm) L|W|H"
+    },
+    {
+      "path": "variations[1].spec_table_headers[4]",
+      "source": "Weight (kg)"
+    },
+    {
+      "path": "variations[1].spec_table_headers[5]",
+      "source": "Control"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "6 Heating Elements"
+    },
+    {
+      "path": "variations[2].features[0]",
+      "source": "Power range: 9.0 – 15.0kW"
+    },
+    {
+      "path": "variations[2].features[1]",
+      "source": "Steam output: up to 20kg/hr"
+    },
+    {
+      "path": "variations[2].features[3]",
+      "source": "Own pipe for overpressure valve"
+    },
+    {
+      "path": "variations[2].features[4]",
+      "source": "Auto drain"
+    },
+    {
+      "path": "variations[2].features[6]",
+      "source": "Cassette type heating element setup for easy maintenance"
+    },
+    {
+      "path": "variations[2].features[7]",
+      "source": "¾” steam pipe"
+    },
+    {
+      "path": "variations[2].spec_table_headers[0]",
+      "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[2].spec_table_headers[2]",
+      "source": "Steam Room (m²)"
+    },
+    {
+      "path": "variations[2].spec_table_headers[3]",
+      "source": "Size (mm) L|W|H"
+    },
+    {
+      "path": "variations[2].spec_table_headers[4]",
+      "source": "Weight (kg)"
+    },
+    {
+      "path": "variations[2].spec_table_headers[5]",
+      "source": "Control"
+    },
+    {
+      "path": "included_items[0].title",
+      "source": "Electronics Compartment"
+    },
+    {
+      "path": "included_items[0].note",
+      "source": "(Included for STN-S models only)"
+    },
+    {
+      "path": "included_items[1].title",
+      "source": "Autodrain"
+    },
+    {
+      "path": "included_items[1].note",
+      "source": "(Included for STN-S, STN-W, and STN models)"
+    },
+    {
+      "path": "included_items[2].title",
+      "source": "Steam Head"
+    },
+    {
+      "path": "included_items[2].note",
+      "source": "(for 9kW models and up, two heads are included)"
+    },
+    {
+      "path": "included_items[3].title",
+      "source": "Aroma, Fan and Dimmer Functions"
+    },
+    {
+      "path": "included_items[3].note",
+      "source": "(Optional features for STN models)"
+    },
+    {
+      "path": "included_items[4].title",
+      "source": "7.5m RJ12 cable"
+    },
+    {
+      "path": "included_items[4].note",
+      "source": "7.5m RJ10 cable"
+    },
+    {
+      "path": "included_items[5].title",
+      "source": "Temperature sensor with"
+    },
+    {
+      "path": "included_items[5].note",
+      "source": "wire and sensor holder"
+    }
+  ],
+  "fields": {
+    "name": "STN-S-höyrynkehitin",
+    "short_description": "<p style=\"text-align: justify;\">Tehoon ja suorituskykyyn suunniteltu <strong>STN-S-höyrynkehitin</strong> tarjoaa joustavampia asennusvaihtoehtoja. Siinä on erillinen elektroniikkakotelo, joten kehitin voidaan asentaa eri paikkaan kuin elektroniikka. Kasettimalliset lämmityselementit helpottavat säiliön puhdistusta ja huoltoa, ja tuoksu-, puhallin- ja himmennysohjaus mahdollistavat jokaisen höyrysession muokkaamisen.</p><p style=\"text-align: justify;\">Ylimääräinen höyry on vain painikkeen päässä <strong>lisähöyrypainikkeen</strong> ansiosta, joka voidaan asentaa höyryhuoneen sisä- tai ulkopuolelle. Virhekoodit näkyvät ohjaimessa nopeaa vianmääritystä varten. Jopa viisi yksikköä voidaan kytkeä yhteen, jolloin enimmäisteho on <strong>75,0 kW</strong>, ja kaikkea hallitaan yhdellä SAWO-ohjaimella.</p>",
+    "description": null,
+    "type": "Höyrynkehittimet",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 3,0–5,0 kW",
+          "Höyryntuotto: jopa 6,7 kg/h",
+          "Putkitus ja sähkökaapelit voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Automaattinen tyhjennys",
+          "Höyrypää sisältyy",
+          "Kasettimallinen lämmityselementti helpottaa huoltoa",
+          "¾” höyryputki",
+          "Ruostumaton teräs (kosketusnäyttö)",
+          "Saatavilla olevat ohjaimet: STP 2.0 -käyttöliittymä"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m²)",
+          "Koko (mm) P|L|K",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 4,5–7,5 kW",
+          "Höyryntuotto: jopa 7,5 kg/h",
+          "Putkitus ja sähkökaapelit voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Automaattinen tyhjennys",
+          "Höyrypää sisältyy",
+          "Kasettimallinen lämmityselementti helpottaa huoltoa",
+          "¾” höyryputki",
+          "Ruostumaton teräs (kosketusnäyttö)",
+          "Saatavilla olevat ohjaimet: STP 2.0 -käyttöliittymä"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m²)",
+          "Koko (mm) P|L|K",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 9,0–15,0 kW",
+          "Höyryntuotto: jopa 20 kg/h",
+          "Putkitus ja sähkökaapelit voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Automaattinen tyhjennys",
+          "2 höyrypäätä sisältyy",
+          "Kasettimallinen lämmityselementti helpottaa huoltoa",
+          "¾” höyryputki",
+          "Ruostumaton teräs (kosketusnäyttö)",
+          "Saatavilla olevat ohjaimet: STP 2.0 -käyttöliittymä"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m²)",
+          "Koko (mm) P|L|K",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "Elektroniikkakotelo",
+        "note": "(Sisältyy vain STN-S-malleihin)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "Automaattinen tyhjennys",
+        "note": "(Sisältyy STN-S-, STN-W- ja STN-malleihin)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "Höyrypää",
+        "note": "(9 kW:n ja sitä suuremmissa malleissa mukana kaksi höyrypäätä)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "Tuoksu-, puhallin- ja himmennystoiminnot",
+        "note": "(Valinnaiset lisäominaisuudet STN-malleihin)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7,5 m RJ12-kaapeli",
+        "note": "7,5 m RJ10-kaapeli"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "Lämpötila-anturi ja",
+        "note": "johto sekä anturipidike"
+      }
+    ]
+  }
+}

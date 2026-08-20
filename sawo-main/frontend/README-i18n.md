@@ -352,16 +352,57 @@ visible string, not just the ones you remember translating. The build will
 be silently, completely fine even if you translated the wrong field (see
 above) — only actually looking at the rendered page catches that.
 
+### Translation memory — reuse across products
+
+This catalog's product copy is heavily boilerplated: spec-table headers
+("Steam Generator Model", "kW", "Weight (kg)"...), feature bullets ("Auto
+drain", "Steam head included"...), and included-item titles/notes repeat
+near-verbatim across every product in a category, not just within one
+product's own variation groups. Translating the same phrase from scratch
+per product is pure waste on a catalog this size.
+
+`translation_memory` (`setup-translation-memory.sql`) is a `(locale,
+source_text) -> translated_text` lookup, exact-match on normalized
+(trimmed, whitespace-collapsed) English — no fuzzy matching, not needed for
+this catalog's literal phrase reuse. `extract` checks it for every prose
+string and pre-fills any match directly into the packet, listing what it
+filled under the packet's own `tmPrefilled` array so you know what's
+already Finnish (worth a quick sanity read) versus what's genuinely new and
+needs translating. `apply` writes every (English, Finnish) pair it just
+applied back into the table, so the memory grows with every product —
+whether that pair came from you translating it fresh or from a TM hit
+being carried forward unchanged.
+
+**Measured, not estimated:** translating `stn-steam-generator` first (cold
+memory) needed ~40 fresh strings. Extracting `ste-steam-generator` next
+pre-filled 34 of its fields automatically — only `name`, `short_description`,
+and 3 fields that were genuinely different (STE uses `m³` not `m²` for
+steam-room size, a different header wording, its own control lineup) needed
+fresh translation. `stn-s-steam-generator` after that had 51 fields
+pre-filled, including every one of its 6 included-items entries verbatim.
+48 distinct phrases in memory after 3 products — each one now free for
+every remaining product in the catalog that reuses it.
+
+One caveat worth knowing before trusting a pre-fill blindly: a TM hit means
+the *English source string* matched exactly, not that reusing it is
+necessarily correct in every context — a phrase that happens to read
+identically in English can occasionally need different Finnish depending on
+grammatical context (rare for this catalog's short, formulaic strings, but
+`tmPrefilled` exists specifically so a pre-filled value is at least visible
+for a second look, not silently invisible).
+
 ### Scaling beyond one product at a time
 
-Everything above is one product at a time, deliberately — matches this
-repo's "Finnish first, pilot before scale" approach (see
-`docs/🔴 GO-LIVE/SAWO_Multilingual_Implementation_Specification(1).md` §74).
-Translating the remaining catalog (~300 products) at this pace is a lot of
-individual `extract`/translate/`apply` passes. If/when that's the actual
-next step, the natural extension is a `--all` (or `--category <name>`) mode
-on `extract` that writes one packet per product to
-`data/product-i18n/`, translate the batch, then an `apply --dir
+Everything above is still one product per `extract`/`apply` pass,
+deliberately — matches this repo's "Finnish first, pilot before scale"
+approach (see `docs/🔴 GO-LIVE/SAWO_Multilingual_Implementation_
+Specification(1).md` §74). Translation memory cuts the *amount of new
+text* per product as the catalog fills in, but each product still needs
+its own `extract` → review/translate what's left → `apply` cycle. The
+natural next step, once ready to move past piloting: a `--category
+<name>` (or `--all`) mode on `extract` that writes one packet per product
+in that scope to `data/product-i18n/` in one run, then an `apply --dir
 data/product-i18n/` that walks all of them — not built yet, but the
-per-product plumbing (`fetchProduct`, `getVariationGroups`, the prose/data
-split, the upsert) is already exactly what a batch mode would reuse.
+per-product plumbing (`fetchProduct`, `getVariationGroups`, the TM lookup,
+the prose/data split, the upserts) is already exactly what a batch mode
+would reuse; it's a loop around what exists, not new machinery.
