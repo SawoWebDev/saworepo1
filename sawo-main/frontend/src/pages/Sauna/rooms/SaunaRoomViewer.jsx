@@ -104,7 +104,7 @@ const DEFAULT_ROOMS = ["standard", "glassfront", "compact"];
  * @param {boolean}  showTabs  false for a single-room page, where a one-button
  *                             tab bar would be noise
  */
-const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
+const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true, showVideo = true }) => {
   const visibleTabs = TABS.filter((tab) => rooms.includes(tab.key));
   const [activeRoom, setActiveRoom] = useState(() => {
     const hash = window.location.hash.replace("#", "");
@@ -695,7 +695,11 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
         </div>
       </div>
 
-      {/* VIDEO */}
+      {/* VIDEO — the configurator teaser. Off on the infrared page: that
+          configurator builds traditional rooms (its middle step picks a
+          heater), so pointing infrared visitors at it sends them somewhere
+          that cannot configure what they came for. */}
+      {showVideo && (
       <div className="sawo-video">
         <div className="sawo-title">Find Your Dream Sauna</div>
         <div className="sawo-subtitle">
@@ -712,6 +716,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
           </video>
         </div>
       </div>
+      )}
     </>
   );
 };

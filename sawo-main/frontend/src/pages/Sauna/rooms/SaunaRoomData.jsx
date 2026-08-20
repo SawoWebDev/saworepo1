@@ -197,7 +197,6 @@ import img_IR_1111RS_SCENE from "../../../assets/IR-1111RS-_SCENE-.webp";
 import img_IR_panels from "../../../assets/Infrared/ir-panels.webp";
 import img_IR_ui from "../../../assets/Infrared/ir-ui-v2.webp";
 import img_IR_builtin_control from "../../../assets/Infrared/ir-builtin-control.webp";
-import img_IR_backrest from "../../../assets/Infrared/ir-backrest.webp";
 import img_2560x1920 from "../../../assets/2560x1920.webp";
 import img_1420_Glass_Front_Sauna_Room_scaled_1 from "../../../assets/1420-Glass-Front-Sauna-Room-scaled-1.webp";
 import img_SR02_60001630_New_Compact_Sauna_Room_Scene_Cover_A1 from "../../../assets/SR02-60001630-New-Compact-Sauna-Room-SCENE-COVER-A1.webp";
@@ -799,17 +798,6 @@ const IR_SFW_ITEMS = [
       "A 12W LED system lights the cabin without the glare of a ceiling fixture, tuned to sit comfortably against the cedar rather than wash it out.",
       "The exhaust fan is pre-installed rather than an accessory, drawing 18W and clearing the cabin during and after a session, which keeps the interior dry and extends the life of the wood.",
       "Both run from the same digital control as the heat, so there is nothing extra to wire, mount or reach around for.",
-    ],
-    specs: null,
-  },
-  {
-    tab: "Plug & Play",
-    image: img_IR_backrest,
-    title: "Plug and Play",
-    paragraphs: [
-      "The room runs from an ordinary 230V socket. There is no dedicated circuit to install, no electrician to book and no heater to commission, which is most of the cost and delay of a traditional sauna removed outright.",
-      "Assembly is designed to be undone as easily as it is done, so the room can move with you rather than staying behind as a fixture.",
-      "An adjustable base support levels the cabin on uneven floors, so it sits true on tile, board or concrete without packing it out.",
     ],
     specs: null,
   },
