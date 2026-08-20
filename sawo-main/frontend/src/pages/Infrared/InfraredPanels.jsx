@@ -2,10 +2,7 @@ import React, { useMemo } from "react";
 import ProductShowcase from "../../components/ProductShowcase";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isPubliclyVisible } from "../../local-storage/visibility";
-// A room scene, not the ir-panels.webp product cut-out: that image is a
-// black panel on a dark ground and reads as a near-black rectangle at
-// full-bleed hero size. This shot shows the panels in situ inside the cabin.
-import heroImg from "../../assets/Infrared/sauna-room.webp";
+import heroImg from "../../assets/Infrared/ir-panels-hero.webp";
 
 // Selected by slug, not by category: every infrared product carries the
 // single category "Infrared", so a category filter (the way

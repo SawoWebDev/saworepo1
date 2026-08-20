@@ -483,8 +483,8 @@ const infraredSizeData = {
 };
 
 const infraredBenchTypes = {
-  "0908-IR-D": { name: "Straight Bench", title: "Infrared Room", class: "straight", image: img_0908MS_TOP_VIEW_with_DIMENSION },
-  "1111-IR-D": { name: "Straight Bench", title: "Infrared Room", class: "straight", image: img_1111RS_TOP_VIEW_with_DIMENSION },
+  "0908-IR-D": { name: "Straight Bench", title: "Infrared Sauna", class: "straight", image: img_0908MS_TOP_VIEW_with_DIMENSION },
+  "1111-IR-D": { name: "Straight Bench", title: "Infrared Sauna", class: "straight", image: img_1111RS_TOP_VIEW_with_DIMENSION },
 };
 
 // Compact Sauna Room images are recent additions, not yet downloaded into
@@ -694,7 +694,7 @@ const SRD_PANELS = [
   {
     pill: "Infrared",
     label: "About This Room",
-    title: "Infrared Room",
+    title: "Infrared Saunas",
     descriptions: [
       "SAWO's standard infrared sauna rooms come in two sizes, either for a single person or for two people. The far-infrared panels do not heat the room as much as a traditional sauna does, so the majority of the heat produced is heating the body directly.",
       "Featuring fiber-coated far infrared panels (170W per panel), these energy-efficient saunas offer 1-person (1200W) or 2-person (1400W) configurations with premium cedar construction and plug-and-play 230V installation.",
@@ -708,7 +708,7 @@ const SRD_PANELS = [
       "Premium cedar construction",
     ],
     image: img_IR_1111RS_SCENE,
-    imageAlt: "Infrared Room",
+    imageAlt: "Infrared Sauna",
     imgPosition: "left",
   },
   {
@@ -804,9 +804,9 @@ const IR_SFW_ITEMS = [
 ];
 
 const IR_SPD_SLIDES = [
-  { src: img_IR_1111RS_SCENE, alt: "Infrared Room in a home interior" },
-  { src: img_SR05_3303290_IR_1111RS_PERSPECTIVE_VIEW, alt: "Infrared Room 1111-IR-D, two person" },
-  { src: img_SR05_3433420_IR_0908MS_PERSPECTIVE_VIEW, alt: "Infrared Room 0908-IR-D, one person" },
+  { src: img_IR_1111RS_SCENE, alt: "Infrared Sauna in a home interior" },
+  { src: img_SR05_3303290_IR_1111RS_PERSPECTIVE_VIEW, alt: "Infrared Sauna 1111-IR-D, two person" },
+  { src: img_SR05_3433420_IR_0908MS_PERSPECTIVE_VIEW, alt: "Infrared Sauna 0908-IR-D, one person" },
 ];
 
 const IR_SPD_STORY_SECTIONS = [
@@ -955,8 +955,8 @@ const ROOM_CONFIGS = {
     bestSellers: new Set(["1414"]),
   },
   infrared: {
-    label: "Infrared Room",
-    desc: "SAWO Infrared Rooms provide gentle, therapeutic heat using advanced infrared technology for a relaxing and rejuvenating experience.",
+    label: "Infrared Saunas",
+    desc: "SAWO Infrared Saunas provide gentle, therapeutic heat using advanced infrared technology for a relaxing and rejuvenating experience.",
     imageData: infraredImageData,
     sizeData: infraredSizeData,
     benchTypes: infraredBenchTypes,
