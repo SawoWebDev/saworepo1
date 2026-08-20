@@ -279,9 +279,9 @@ export default function Header() {
           transition: "background 0.35s ease, box-shadow 0.35s ease, transform 0.5s ease",
         }}
       >
-        <div className="w-full flex items-center justify-between py-3 px-6 md:px-8">
+        <div className="w-full flex items-center justify-between py-3 px-3 sm:px-4 md:px-6 lg:px-8">
           {/* Logo with left padding */}
-          <Link to={localize("/")} className="flex-shrink-0 pl-2">
+          <Link to={localize("/")} className="flex-shrink-0 pl-0 sm:pl-2">
             <img
               src={sLogo}
               alt="SAWO-logo"
