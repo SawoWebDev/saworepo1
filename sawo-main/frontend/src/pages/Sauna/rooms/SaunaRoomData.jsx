@@ -194,6 +194,10 @@ import img_SAWO_heater_accessories_Cozy_tank_on_th12_rnd from "../../../assets/S
 import img_STANDARD_SAUNA_ROOM_COVER_scaled from "../../../assets/STANDARD-SAUNA-ROOM-COVER-scaled.webp";
 import img_GLASS_FRONT_SAUNA_ROOM_V3_scaled from "../../../assets/GLASS-FRONT-SAUNA-ROOM-V3-scaled.webp";
 import img_IR_1111RS_SCENE from "../../../assets/IR-1111RS-_SCENE-.webp";
+import img_IR_panels from "../../../assets/Infrared/ir-panels.webp";
+import img_IR_ui from "../../../assets/Infrared/ir-ui-v2.webp";
+import img_IR_builtin_control from "../../../assets/Infrared/ir-builtin-control.webp";
+import img_IR_backrest from "../../../assets/Infrared/ir-backrest.webp";
 import img_2560x1920 from "../../../assets/2560x1920.webp";
 import img_1420_Glass_Front_Sauna_Room_scaled_1 from "../../../assets/1420-Glass-Front-Sauna-Room-scaled-1.webp";
 import img_SR02_60001630_New_Compact_Sauna_Room_Scene_Cover_A1 from "../../../assets/SR02-60001630-New-Compact-Sauna-Room-SCENE-COVER-A1.webp";
@@ -757,6 +761,129 @@ const MATS_ITEMS = [
   },
 ];
 
+// ── Infrared variants of the shared page sections ────────────────────────
+// The traditional-sauna datasets above describe heaters, stone, humidity and
+// bench heights — none of which an infrared room has. Rather than reuse them
+// with the labels changed (which would put wrong specs on the page), the
+// infrared page gets its own set, built from the same spec that drives
+// ROOM_CONFIGS.infrared and the infrared SRD_PANELS entry.
+
+const IR_SFW_ITEMS = [
+  {
+    tab: "Infrared Panels",
+    image: img_IR_panels,
+    title: "Far Infrared Panels",
+    paragraphs: [
+      "A traditional sauna warms the air, and the air warms you. Far infrared works the other way round: the panels emit radiant heat that your body absorbs directly, so the room itself stays far cooler than a Finnish sauna while the warmth still reaches deep.",
+      "Each fiber-coated panel draws 170W and is positioned to surround you evenly, front, back and beside, rather than radiating from a single point. The result is a gentle, consistent warmth rather than the sharp heat of a stove.",
+      "That lower air temperature is what makes longer sessions comfortable, and what lets the room sit in a bedroom, bathroom or hallway without special ventilation.",
+    ],
+    specs: null,
+  },
+  {
+    tab: "Digital Control",
+    image: img_IR_ui,
+    title: "Digital Control",
+    paragraphs: [
+      "One panel controls the whole room: temperature, session length, lighting and the exhaust fan, all from the same display inside the cabin.",
+      "Session time is adjustable from 1 to 60 minutes, so a quick ten-minute warm-up and a full hour-long session are both a couple of presses away, and the room shuts itself off when the timer ends.",
+      "Settings hold between sessions, so the room you set up once is the room you step into every time.",
+    ],
+    specs: null,
+  },
+  {
+    tab: "Light & Airflow",
+    image: img_IR_builtin_control,
+    title: "Lighting & Airflow",
+    paragraphs: [
+      "A 12W LED system lights the cabin without the glare of a ceiling fixture, tuned to sit comfortably against the cedar rather than wash it out.",
+      "The exhaust fan is pre-installed rather than an accessory, drawing 18W and clearing the cabin during and after a session, which keeps the interior dry and extends the life of the wood.",
+      "Both run from the same digital control as the heat, so there is nothing extra to wire, mount or reach around for.",
+    ],
+    specs: null,
+  },
+  {
+    tab: "Plug & Play",
+    image: img_IR_backrest,
+    title: "Plug and Play",
+    paragraphs: [
+      "The room runs from an ordinary 230V socket. There is no dedicated circuit to install, no electrician to book and no heater to commission, which is most of the cost and delay of a traditional sauna removed outright.",
+      "Assembly is designed to be undone as easily as it is done, so the room can move with you rather than staying behind as a fixture.",
+      "An adjustable base support levels the cabin on uneven floors, so it sits true on tile, board or concrete without packing it out.",
+    ],
+    specs: null,
+  },
+];
+
+const IR_SPD_SLIDES = [
+  { src: img_IR_1111RS_SCENE, alt: "Infrared Room in a home interior" },
+  { src: img_SR05_3303290_IR_1111RS_PERSPECTIVE_VIEW, alt: "Infrared Room 1111-IR-D, two person" },
+  { src: img_SR05_3433420_IR_0908MS_PERSPECTIVE_VIEW, alt: "Infrared Room 0908-IR-D, one person" },
+];
+
+const IR_SPD_STORY_SECTIONS = [
+  {
+    title: "Warmth That Reaches You Directly",
+    paragraphs: [
+      "An infrared room does not need to reach 80°C to do its work. The panels warm your body rather than the air around it, so a session feels deep and enveloping while the cabin stays at a temperature you can breathe easily in.",
+      "That makes it a different proposition from a traditional sauna rather than a smaller version of one: gentler on the chest, easier to sit through for a full hour, and approachable for people who find the heat of a Finnish sauna too much.",
+    ],
+  },
+  {
+    title: "Ready Whenever You Are",
+    paragraphs: [
+      "There is no long pre-heat and no heater to tend. Plug the room into a standard socket, set a time, and it is ready in minutes rather than the best part of an hour.",
+      "At 0.80m and 1.10m square, the two sizes fit where a traditional sauna would not, a spare corner, a bathroom, the end of a bedroom, without construction work or a dedicated circuit. It is the version of a sauna you actually use on a weeknight.",
+    ],
+  },
+];
+
+const IR_SPD_FEATURE_TEXT = "Regular infrared sessions ease muscle soreness, support circulation and help the body wind down for sleep, at a temperature mild enough to make that a daily habit rather than an occasional event. Because the room plugs into an ordinary socket and assembles without building work, it is also the rare wellness addition you can take with you when you move.";
+
+const IR_SPD_PERF_CARDS = [
+  { label: "Cedar or Hemlock",        detail: "Naturally aromatic, sustainably sourced" },
+  { label: "1 or 2 Person",           detail: "0908-IR-D and 1111-IR-D configurations" },
+  { label: "230V Plug and Play",      detail: "No dedicated circuit or electrician needed" },
+  { label: "Finnish Made, 30+ Years", detail: "Decades of sauna expertise in every room" },
+];
+
+const IR_SPD_ACCORDION_ITEMS = [
+  {
+    title: "Product Specifications",
+    specs: [
+      { label: "0908-IR-D",    value: "0.80m W x 0.90m D", unit: "/ 1 person" },
+      { label: "1111-IR-D",    value: "1.10m W x 1.10m D", unit: "/ 2 people" },
+      { label: "Height",       value: "2.05m",             unit: "(both models)" },
+      { label: "Panels",       value: "Fiber-coated far infrared, 170W per panel", unit: null },
+      { label: "Total Output", value: "1200W (1 person) / 1400W (2 person)", unit: null },
+      { label: "Power",        value: "230V plug-and-play", unit: null },
+      { label: "Session Time", value: "1-60 minutes",      unit: "adjustable" },
+      { label: "Lighting",     value: "12W LED",           unit: "/ 18W exhaust fan" },
+      { label: "Material",     value: "Cedar or Hemlock",  unit: null },
+    ],
+  },
+];
+
+// Infrared rooms are offered in cedar and hemlock only — the aspen and
+// pinaceae options on ROOM_CONFIGS.infrared.woodOptions are not available
+// here, so listing all three (as the traditional page does) would be wrong.
+const IR_MATS_ITEMS = [
+  {
+    name: "Cedar",
+    image: img_Cedar_Panels,
+    alt: "Cedar wood",
+    description: "Rich, aromatic wood with natural resistance to moisture. Known for its warm reddish-brown tones and distinctive scent.",
+    traits: ["Aromatic", "Moisture-Resistant", "Warm Tones"],
+  },
+  {
+    name: "Hemlock",
+    image: img_HEMLOCK_PANELS,
+    alt: "Hemlock wood",
+    description: "Pale, even-grained wood with very little scent, a quieter backdrop for those who find cedar's aroma too strong. Stable and smooth to the touch.",
+    traits: ["Low Aroma", "Even Grain", "Smooth Finish"],
+  },
+];
+
 const HASH_MAP = {
   "standard-sauna-room": "standard",
   "glass-front-sauna-room": "glassfront",
@@ -937,6 +1064,9 @@ export {
   SIDE_THUMBS, COMPACT_VIDEO_SRC,
   ROOM_CONFIGS, HASH_MAP,
   SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY,
+  IR_SFW_ITEMS,
+  IR_SPD_SLIDES, IR_SPD_STORY_SECTIONS, IR_SPD_FEATURE_TEXT, IR_SPD_PERF_CARDS,
+  IR_SPD_ACCORDION_ITEMS, IR_MATS_ITEMS,
   SPD_SLIDES, SPD_STORY_SECTIONS, SPD_FEATURE_TEXT, SPD_PERF_CARDS,
   SPD_ACCORDION_ITEMS, SPD_SLIDE_DELAY, SPD_LOADER_TIMEOUT,
   SRD_PANELS, SRD_AUTO_DELAY,

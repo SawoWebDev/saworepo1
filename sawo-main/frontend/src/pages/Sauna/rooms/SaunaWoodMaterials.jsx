@@ -1,14 +1,18 @@
 import React from "react";
 import { MATS_ITEMS } from "./SaunaRoomData";
 
-const SaunaWoodMaterials = () => (
+const SaunaWoodMaterials = ({
+  items = MATS_ITEMS,
+  title = "Choose Your Wood",
+  subtitle = "Each wood type brings its own character, scent, and warmth to your sauna experience.",
+}) => (
   <div className="sawo-materials">
     <div className="sawo-materials-header">
-      <div className="sawo-materials-title">Choose Your Wood</div>
-      <p>Each wood type brings its own character, scent, and warmth to your sauna experience.</p>
+      <div className="sawo-materials-title">{title}</div>
+      <p>{subtitle}</p>
     </div>
     <div className="sawo-materials-grid">
-      {MATS_ITEMS.map((mat) => (
+      {items.map((mat) => (
         <div key={mat.name} className="sawo-mat-card">
           <div className="sawo-mat-card-img">
             <img src={mat.image} alt={mat.alt} />

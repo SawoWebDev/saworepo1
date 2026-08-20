@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { SRD_PANELS, SRD_AUTO_DELAY, wrapIndex } from "./SaunaRoomData";
 
-const SaunaRoomDetails = () => {
+const SaunaRoomDetails = ({ panels = SRD_PANELS }) => {
   const [index, setIndex] = useState(0);
   const timerRef = useRef(null);
 
@@ -13,15 +13,15 @@ const SaunaRoomDetails = () => {
   const startTimer = useCallback(() => {
     stopTimer();
     timerRef.current = setInterval(
-      () => setIndex((i) => (i + 1) % SRD_PANELS.length),
+      () => setIndex((i) => (i + 1) % panels.length),
       SRD_AUTO_DELAY
     );
-  }, [stopTimer]);
+  }, [stopTimer, panels.length]);
 
   const goTo = useCallback((idx) => {
-    setIndex(wrapIndex(idx, SRD_PANELS.length));
+    setIndex(wrapIndex(idx, panels.length));
     startTimer();
-  }, [startTimer]);
+  }, [startTimer, panels.length]);
 
   useEffect(() => {
     startTimer();
@@ -37,14 +37,16 @@ const SaunaRoomDetails = () => {
           onMouseEnter={stopTimer}
           onMouseLeave={startTimer}
         >
+          {panels.length > 1 && (
           <button className="srd-nav-arrow" onClick={() => goTo(index - 1)} aria-label="Previous">
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
               <path d="M7 1L1 7L7 13" stroke="#af8564" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
+          )}
 
           <div className="srd-nav-pills">
-            {SRD_PANELS.map((panel, i) => (
+            {panels.map((panel, i) => (
               <button
                 key={panel.pill}
                 className={`srd-nav-pill${index === i ? " active" : ""}`}
@@ -55,15 +57,17 @@ const SaunaRoomDetails = () => {
             ))}
           </div>
 
+          {panels.length > 1 && (
           <button className="srd-nav-arrow" onClick={() => goTo(index + 1)} aria-label="Next">
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
               <path d="M1 1L7 7L1 13" stroke="#af8564" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
+          )}
         </div>
 
         <div className="srd-panels">
-          {SRD_PANELS.map((panel, i) => (
+          {panels.map((panel, i) => (
             <div key={panel.pill} className={`srd-panel${index === i ? " active" : ""}`}>
               <div>
                 <div className="srd-label">{panel.label}</div>
@@ -91,7 +95,7 @@ const SaunaRoomDetails = () => {
           ))}
         </div>
 
-        <div className="srd-counter">{index + 1} / {SRD_PANELS.length}</div>
+        <div className="srd-counter">{index + 1} / {panels.length}</div>
 
       </div>
     </div>
