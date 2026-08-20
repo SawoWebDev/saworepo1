@@ -124,15 +124,15 @@
     "infrared": {
       "rooms": {
         "title": "Infrared Rooms",
-        "caption": "Gentle, therapeutic infrared warmth in a compact cabin. Available in single-person and two-person sizes."
+        "caption": "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience."
       },
       "panels": {
         "title": "Infrared Panels",
-        "caption": "Fiber-coated far infrared panels at 170W each, warming the body directly rather than heating the whole room."
+        "caption": "Designed to provide gentle, direct infrared warmth, these panels create a comfortable and relaxing sauna experience."
       },
       "controls": {
         "title": "Infrared Controls",
-        "caption": "Purpose-built controls for precise temperature and session timing in your infrared sauna."
+        "caption": "Easy-to-use controls designed to help you manage your infrared sauna experience with convenient temperature and session settings."
       }
     },
     "controls": {
