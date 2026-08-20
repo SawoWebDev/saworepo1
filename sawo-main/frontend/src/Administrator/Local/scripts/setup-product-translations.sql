@@ -19,17 +19,46 @@
 -- Applied to production (2026-08-19) as a pilot: schema + 3 Steam Generator
 -- products (STE/STN/STN-S) translated to Finnish, to validate the read/
 -- fallback path end-to-end before translating the remaining ~300 products.
+--
+-- Extended same day: `products` rows carry more translatable content than
+-- name/short_description/description — features, spec_table, per-variation
+-- groups (e.g. "2/3/6 Heating Elements" — see below), and included_items
+-- (package-contents cards) all hold real prose (labels, bullet text, table
+-- headers) mixed with non-translatable data (image URLs, slugs, model
+-- codes, physical dimensions). See
+-- Administrator/Local/scripts/product-i18n.js and its section in
+-- README-i18n.md — the script knows which paths in each JSONB blob are
+-- prose and which are data, so nobody has to work that out by hand per
+-- product.
+--
+-- `variations` here always holds the TRANSLATED per-configuration groups
+-- regardless of which field the English row actually keeps them in
+-- (`variations`, or the legacy `variants`/`heating_element_groups`
+-- combination — see DispAccessories.jsx's getVariationsArray() and
+-- product-i18n.js's getVariationGroups(), which mirrors it exactly). The
+-- frontend merge overlays `variations` onto the product object, which
+-- getVariationsArray() then finds first no matter what the untranslated
+-- row's own field layout was. `heating_element_groups` is kept here only
+-- because it was the first (wrong) guess at where this content actually
+-- renders from — see README-i18n.md's product-i18n.js section for what
+-- happened — and is unused by the frontend; do not write to it.
 -- ============================================================
 
 CREATE TABLE IF NOT EXISTS product_translations (
-  id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  product_id        UUID NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-  locale            TEXT NOT NULL,
-  name              TEXT,
-  short_description TEXT,
-  description       TEXT,
-  updated_by        TEXT,
-  updated_at        TIMESTAMPTZ DEFAULT now(),
+  id                     UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  product_id             UUID NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+  locale                 TEXT NOT NULL,
+  name                   TEXT,
+  short_description      TEXT,
+  description            TEXT,
+  type                   TEXT,   -- product.type, e.g. "Steam Generators" (the eyebrow line)
+  features               JSONB,  -- mirrors products.features: string[]
+  spec_table             JSONB,  -- mirrors products.spec_table: { headers: string[], rows: string[][] }
+  variations             JSONB,  -- translated per-configuration groups — see note above; this is the one the frontend actually reads
+  included_items         JSONB,  -- mirrors products.included_items: { slug, image, title, note }[]
+  heating_element_groups JSONB,  -- UNUSED by the frontend — kept only as a documented dead end, see note above
+  updated_by             TEXT,
+  updated_at             TIMESTAMPTZ DEFAULT now(),
   UNIQUE (product_id, locale)
 );
 

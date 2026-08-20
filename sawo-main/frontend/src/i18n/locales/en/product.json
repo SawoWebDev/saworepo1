@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "resources": "Resources",
+    "features": "Features",
+    "diagram": "Diagram",
+    "specifications": "Specifications",
+    "includedInPackage": "Included in the Package"
+  },
+  "noResourcesAvailable": "No resources available",
+  "notFound": {
+    "title": "Product Not Found",
+    "description": "This product doesn't exist or isn't published yet.",
+    "browseProducts": "Browse Products",
+    "home": "Home"
+  },
+  "related": {
+    "youMightAlsoLike": "You might also like",
+    "relatedProducts": "Related Products",
+    "saunaAccessories": "Sauna Accessories",
+    "otherHeaters": "Other Heaters"
+  }
+}

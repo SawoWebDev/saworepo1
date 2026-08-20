@@ -11,6 +11,8 @@
     "storage:audit": "node storage-audit.js",
     "storage:archive": "node storage-audit.js --archive",
     "storage:purge": "node storage-audit.js --delete",
+    "i18n:product:extract": "node product-i18n.js extract",
+    "i18n:product:apply": "node product-i18n.js apply",
     "seo:gsc-sync": "node seo-gsc-sync.js",
     "seo:gsc-backfill": "node seo-gsc-sync.js --backfill",
     "seo:competitor-crawl": "node seo-competitor-crawl.js",

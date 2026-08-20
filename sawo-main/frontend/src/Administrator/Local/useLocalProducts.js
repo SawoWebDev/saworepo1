@@ -23,6 +23,11 @@ function mergeTranslation(product, translation) {
     name: translation.name || product.name,
     short_description: translation.short_description || product.short_description,
     description: translation.description || product.description,
+    type: translation.type || product.type,
+    features: translation.features || product.features,
+    spec_table: translation.spec_table || product.spec_table,
+    variations: translation.variations || product.variations,
+    included_items: translation.included_items || product.included_items,
   };
 }
 

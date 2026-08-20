@@ -92,7 +92,7 @@ export async function getProductTranslationsLive(locale) {
   try {
     const { data, error } = await (await getSupabase())
       .from("product_translations")
-      .select("product_id, name, short_description, description")
+      .select("product_id, name, short_description, description, type, features, spec_table, variations, included_items")
       .eq("locale", locale);
 
     if (error) throw error;
