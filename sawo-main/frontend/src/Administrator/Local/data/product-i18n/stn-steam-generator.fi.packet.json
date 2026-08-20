@@ -1,0 +1,127 @@
+{
+  "slug": "stn-steam-generator",
+  "productId": "5bf11f8d-c96b-424d-919d-e9f8ae1eac9e",
+  "locale": "fi",
+  "instructions": "Replace every string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index.",
+  "fields": {
+    "name": "STN-höyrynkehitin",
+    "short_description": "<p style=\"text-align: justify;\">Kaupalliseen käyttöön suunniteltu <b>STN-höyrynkehitin</b> yhdistää kestävyyden ja suorituskyvyn. Tukeva ruostumattomasta teräksestä valmistettu rakenne minimoi korroosion, ja valinnaiset lisäominaisuudet, kuten tuoksu-, puhallin- ja himmennysohjaus, mahdollistavat yksilöllisen höyrykokemuksen.</p><p style=\"text-align: justify;\">Valinnainen lisähöyrypainike vapauttaa ylimääräistä höyryä 30 sekunnin ajaksi tarvittaessa. Vianmääritys on vaivatonta, sillä virhekoodit näkyvät suoraan ohjaimen näytöllä. Järjestelmä voidaan asentaa joko vasemmalle tai oikealle, ja jopa viisi yksikköä voidaan kytkeä sarjaan, jolloin enimmäisteho on<b> 75,0 kW</b>, kaikkea hallitaan yhdellä SAWO-käyttöliittymällä.</p>",
+    "description": null,
+    "type": "Höyrynkehittimet",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 3,0–5,0 kW",
+          "Höyryntuotto: jopa 6,7 kg/h",
+          "Voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Automaattinen tyhjennys",
+          "Höyrypää sisältyy",
+          "Kasettimallinen lämmityselementti helpottaa huoltoa",
+          "¾” höyryputki",
+          "Saatavilla olevat ohjaimet: STP Classic, STP Classic 2.0 ja STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m²)",
+          "Koko (mm) P|L|K",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 4,5–7,5 kW",
+          "Höyryntuotto: jopa 7,5 kg/h",
+          "Voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Automaattinen tyhjennys",
+          "Höyrypää sisältyy",
+          "Kasettimallinen lämmityselementti helpottaa huoltoa",
+          "¾” höyryputki",
+          "Saatavilla olevat ohjaimet: STP Classic, STP Classic 2.0 ja STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m²)",
+          "Koko (mm) P|L|K",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 lämmityselementtiä",
+        "description": null,
+        "features": [
+          "Tehoalue: 9,0–15,0 kW",
+          "Höyryntuotto: jopa 20 kg/h",
+          "Voidaan asentaa kummalle puolelle tahansa",
+          "Oma putki ylipaineventtiilille",
+          "Automaattinen tyhjennys",
+          "2 höyrypäätä sisältyy",
+          "Kasettimallinen lämmityselementti helpottaa huoltoa",
+          "¾” höyryputki",
+          "Saatavilla olevat ohjaimet: STP Classic, STP Classic 2.0 ja STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "Höyrynkehittimen malli",
+          "kW",
+          "Höyryhuone (m²)",
+          "Koko (mm) P|L|K",
+          "Paino (kg)",
+          "Ohjain"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "Elektroniikkakotelo",
+        "note": "(Sisältyy vain STN-S-malleihin)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "Automaattinen tyhjennys",
+        "note": "(Sisältyy STN-S-, STN-W- ja STN-malleihin)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "Höyrypää",
+        "note": "(9 kW:n ja sitä suuremmissa malleissa mukana kaksi höyrypäätä)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "Tuoksu-, puhallin- ja himmennystoiminnot",
+        "note": "(Valinnaiset lisäominaisuudet STN-malleihin)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7,5 m RJ12-kaapeli",
+        "note": "7,5 m RJ10-kaapeli"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "Lämpötila-anturi ja",
+        "note": "johto sekä anturipidike"
+      }
+    ]
+  }
+}

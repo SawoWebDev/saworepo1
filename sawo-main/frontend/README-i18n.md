@@ -264,11 +264,104 @@ Using `pages/Home/*.jsx` as the reference implementation:
 5. Add `/<locale>` and `/<locale>/index.html` (etc.) rewrites to
    `public/_redirects`, mirroring the `/fi`/`/de` entries.
 
-## Non-JSX content (out of scope for these scripts)
+## Product content (Supabase, not JSX) — `product-i18n.js`
 
-Product/room/accessory detail pages read copy from Supabase, not from JSX —
-`extract.js` can't see it. That's Phase 4 of the plan doc: a
-`product_translations` table, a CMS locale tab, and a
-`resolveLocalizedProduct()` field-by-field merge with English fallback. A
-separate, database-aware extract/inject pair would be needed if that track
-wants the same handoff-to-external-AI workflow; not built yet.
+Product/room/accessory detail pages read copy from Supabase (`products`
+table), not from JSX — none of the scripts above can see it, and it doesn't
+belong in `src/i18n/locales/`. This is Phase 4 of the plan doc, now built:
+a `product_translations` table (one row per `(product_id, locale)`, see
+`src/Administrator/Local/scripts/setup-product-translations.sql`) that a
+`useLocalProducts()` merge overlays on top of the English `products` row,
+field by field, falling back to English for anything not yet translated.
+**No rebuild or redeploy needed** — a new translation row is live the next
+time that product's page is fetched.
+
+**The problem this script solves:** a product row mixes real prose (name,
+descriptions, feature bullets, spec-table column headers, "included in
+package" titles/notes, per-variation labels) with data that must NEVER be
+translated (image URLs, slugs, model codes like `STN-45-C1/3`, physical
+dimensions, weights, control-mode names like "Classic 2.0"). Hand-writing
+SQL per product means re-deriving that split every time, and one wrong
+guess silently mistranslates a model code that ends up in someone's spec
+sheet. `Administrator/Local/scripts/product-i18n.js` knows the split once
+and reuses it in both directions.
+
+**Which field actually renders**, per `DispAccessories.jsx`'s
+`getVariationsArray()` (mirrored exactly by the script's own
+`getVariationGroups()` — check both if either ever changes): `variations`
+if populated, else a legacy fallback combining `variants` +
+`heating_element_groups`. A product's per-configuration content (the "2/3/6
+Heating Elements" style groups) can live in *either* field depending on how
+old the row is — **always verify what's actually on the live page against
+what the extracted packet contains before translating**; a field that looks
+plausible but isn't the one actually rendered is the single most likely way
+to waste a translation pass (this happened once already: an early pass on
+`stn-steam-generator` translated `heating_element_groups`, which that row
+still has as unused legacy data, while the live page actually reads
+`variations`. Silent-looking bug — the build was clean, only `name`/
+`short_description`/`type` visibly changed, and the "2 Heating Elements"
+table block stayed English until re-checked field-by-field against the
+rendered page).
+
+### Workflow
+
+```
+cd src/Administrator/Local/scripts
+
+# 1. Extract prose-only packet for one product
+node product-i18n.js extract <slug>
+#    -> data/product-i18n/<slug>.fi.packet.json
+
+# 2. Translate — open the packet, replace every string VALUE with Finnish.
+#    Keep every key. Keep array length/order (apply matches by index).
+#    Never touch the _english_* reference fields — read-only context.
+#    Leave a field null/absent to skip it (falls back to English live).
+
+# 3. Apply — re-fetches the English row as the source of truth for
+#    anything NOT prose (images, slugs, model codes, dimensions), splices
+#    the packet's translated text back into copies of those structures,
+#    upserts into product_translations.
+node product-i18n.js apply <slug> fi
+```
+
+(`npm run i18n:product:extract -- <slug>` / `npm run i18n:product:apply --
+<slug> fi` also work, from `Administrator/Local/scripts/`.)
+
+Requires `SUPABASE_URL` (from `frontend/.env`) and
+`SUPABASE_SERVICE_ROLE_KEY` (from `frontend/.env.local`) — same two files
+`sync.js` already reads, nothing new to configure.
+
+### What gets extracted (and what deliberately doesn't)
+
+| Field | Extracted? | Why |
+|---|---|---|
+| `name`, `short_description`, `description`, `type` | Yes | Straight prose. HTML fields (`short_description`/`description`) keep their tags — only text nodes are meant to change. |
+| `spec_table.headers` / `variations[].spec_table.headers` | Yes | Column titles ("Steam Room (m²)") are prose. |
+| `spec_table.rows` / `variations[].spec_table.rows` | **No** | Model codes, kW, dimensions, weight, control-mode names — data, not prose. |
+| `variations[].name`, `.description`, `.features[]` | Yes | Per-variation label/copy/bullets. |
+| `variations[].image`, `.code`, `.color` | **No** | Asset URLs and SKU-ish data. |
+| `included_items[].title`, `.note` | Yes | Package-contents card copy. |
+| `included_items[].slug`, `.image` | **No** | Routing/asset data. |
+| `files[].name` (PDF resource labels) | **No, not yet** | These label a specific English-only PDF (`STN_Eng_0318.pdf`) — translating the label without a Finnish PDF to actually link to would be misleading. Revisit once/if localized PDFs exist. |
+
+### After applying
+
+Same verification discipline as the JSX workflow — `npm run build`, then
+load the actual page in a browser (`/fi/products/<slug>`) and read every
+visible string, not just the ones you remember translating. The build will
+be silently, completely fine even if you translated the wrong field (see
+above) — only actually looking at the rendered page catches that.
+
+### Scaling beyond one product at a time
+
+Everything above is one product at a time, deliberately — matches this
+repo's "Finnish first, pilot before scale" approach (see
+`docs/🔴 GO-LIVE/SAWO_Multilingual_Implementation_Specification(1).md` §74).
+Translating the remaining catalog (~300 products) at this pace is a lot of
+individual `extract`/translate/`apply` passes. If/when that's the actual
+next step, the natural extension is a `--all` (or `--category <name>`) mode
+on `extract` that writes one packet per product to
+`data/product-i18n/`, translate the batch, then an `apply --dir
+data/product-i18n/` that walks all of them — not built yet, but the
+per-product plumbing (`fetchProduct`, `getVariationGroups`, the prose/data
+split, the upsert) is already exactly what a batch mode would reuse.

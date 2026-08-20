@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "resources": "Resurssit",
+    "features": "Ominaisuudet",
+    "diagram": "Kaavio",
+    "specifications": "Tekniset tiedot",
+    "includedInPackage": "Sisältyy pakettiin"
+  },
+  "noResourcesAvailable": "Ei resursseja saatavilla",
+  "notFound": {
+    "title": "Tuotetta ei löytynyt",
+    "description": "Tätä tuotetta ei ole olemassa tai sitä ei ole vielä julkaistu.",
+    "browseProducts": "Selaa tuotteita",
+    "home": "Etusivu"
+  },
+  "related": {
+    "youMightAlsoLike": "Saatat pitää myös näistä",
+    "relatedProducts": "Aiheeseen liittyvät tuotteet",
+    "saunaAccessories": "Saunatarvikkeet",
+    "otherHeaters": "Muut kiukaat"
+  }
+}
