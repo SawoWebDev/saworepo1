@@ -10,7 +10,6 @@ import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownBut
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import SaunaRoomViewer from "../Sauna/rooms/SaunaRoomViewer";
-import SaunaFeatures from "../Sauna/rooms/SaunaFeatures";
 import SaunaProductDetails from "../Sauna/rooms/SaunaProductDetails";
 import SaunaRoomDetails from "../Sauna/rooms/SaunaRoomDetails";
 import SaunaWoodMaterials from "../Sauna/rooms/SaunaWoodMaterials";
@@ -18,7 +17,7 @@ import SaunaCallToAction from "../Sauna/rooms/SaunaCallToAction";
 import WellnessBenefits from "../../components/WellnessBenefits";
 import SaunaCalculatorCTA from "../../components/SaunaCalculatorCTA";
 import {
-  IR_SFW_ITEMS, IR_SPD_SLIDES, IR_SPD_STORY_SECTIONS, IR_SPD_FEATURE_TEXT,
+  IR_SPD_SLIDES, IR_SPD_STORY_SECTIONS, IR_SPD_FEATURE_TEXT,
   IR_SPD_PERF_CARDS, IR_SPD_ACCORDION_ITEMS, IR_MATS_ITEMS, SRD_PANELS,
 } from "../Sauna/rooms/SaunaRoomData";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
@@ -58,7 +57,7 @@ const InfraredRoom = () => {
   return (
     <div>
       <SEO
-        title="Infrared Room"
+        title="Infrared Saunas"
         description="SAWO infrared rooms in one- and two-person sizes. Fiber-coated far infrared panels, cedar and hemlock finishes, and plug-and-play 230V installation."
         path="/infrared/room"
       />
@@ -83,7 +82,7 @@ const InfraredRoom = () => {
         />
         <div className="wm-hero-overlay" />
         <div className="wm-hero-content">
-          <h1 className="wm-hero-title">INFRARED ROOM</h1>
+          <h1 className="wm-hero-title">INFRARED SAUNAS</h1>
           <p className="wm-hero-subtitle">
             Gentle, therapeutic infrared warmth in a compact cabin — available for one or two people.
           </p>
@@ -101,11 +100,6 @@ const InfraredRoom = () => {
 
       <SaunaCalculatorCTA />
 
-      <SaunaFeatures
-        items={IR_SFW_ITEMS}
-        heading="What Makes Our Infrared Room Different"
-      />
-
       <SaunaProductDetails
         slides={IR_SPD_SLIDES}
         storySections={IR_SPD_STORY_SECTIONS}
@@ -117,7 +111,7 @@ const InfraredRoom = () => {
 
       <WellnessBenefits fullBleed={false} />
 
-      <SaunaRoomDetails panels={IR_ROOM_PANEL} />
+      <SaunaRoomDetails panels={IR_ROOM_PANEL} showNav={false} />
 
       <SaunaWoodMaterials
         items={IR_MATS_ITEMS}

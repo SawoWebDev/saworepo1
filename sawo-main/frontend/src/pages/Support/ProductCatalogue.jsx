@@ -100,7 +100,7 @@ const SERIES_LABELS = {
   // Sauna room types (from sauna_rooms.room_type)
   "standard": "Standard Sauna Rooms",
   "glassfront": "Glass Front Sauna Rooms",
-  "infrared": "Infrared Rooms",
+  "infrared": "Infrared Saunas",
 };
 
 function seriesLabel(category) {

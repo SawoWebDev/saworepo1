@@ -2,10 +2,7 @@ import React, { useMemo } from "react";
 import ProductShowcase from "../../components/ProductShowcase";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isPubliclyVisible } from "../../local-storage/visibility";
-// A room scene rather than the ir-ui-v2.webp control cut-out, which at hero
-// size put the page title straight on top of the control icons. The wall
-// control is visible inside the cabin here.
-import heroImg from "../../assets/IR-1111RS-_SCENE-.webp";
+import heroImg from "../../assets/Infrared/IR-CONTROL-New.webp";
 
 // Slug-selected for the same reason as InfraredPanels — see the note there.
 const CONTROL_SLUGS = [

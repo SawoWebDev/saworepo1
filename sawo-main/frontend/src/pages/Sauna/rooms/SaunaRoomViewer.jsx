@@ -88,7 +88,7 @@ function buildImages(cfg, activeRoom, selectedSize, selectedSide, activeSizeCate
 const TABS = [
   { key: "standard",   label: "Standard Sauna Room" },
   { key: "glassfront", label: "Glass Front Sauna Room" },
-  { key: "infrared",   label: "Infrared Room" },
+  { key: "infrared",   label: "Infrared Saunas" },
   { key: "compact",    label: "Compact Sauna Room" },
 ];
 

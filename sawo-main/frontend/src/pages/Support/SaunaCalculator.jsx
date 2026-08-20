@@ -410,16 +410,6 @@ export default function SaunaCalculator() {
           background: linear-gradient(180deg, transparent 55%, rgba(50,25,8,0.42) 100%);
           pointer-events: none;
         }
-        #sawo-hc-wrap .sawo-hc-dim-image-label {
-          position: absolute;
-          bottom: 14px;
-          left: 16px;
-          font-size: 10.5px;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.82);
-        }
 
         /* ── Result bar ── */
         #sawo-hc-wrap .sawo-hc-result-row-wrap {
@@ -810,7 +800,6 @@ export default function SaunaCalculator() {
               alt="Inside a SAWO sauna room"
             />
             <div className="sawo-hc-dim-image-overlay" />
-            <span className="sawo-hc-dim-image-label">SAWO Sauna Room</span>
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { SRD_PANELS, SRD_AUTO_DELAY, wrapIndex } from "./SaunaRoomData";
 
-const SaunaRoomDetails = ({ panels = SRD_PANELS }) => {
+const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
   const [index, setIndex] = useState(0);
   const timerRef = useRef(null);
 
@@ -32,6 +32,7 @@ const SaunaRoomDetails = ({ panels = SRD_PANELS }) => {
     <div className="srd">
       <div className="srd-inner">
 
+        {showNav && (
         <div
           className="srd-nav"
           onMouseEnter={stopTimer}
@@ -65,6 +66,7 @@ const SaunaRoomDetails = ({ panels = SRD_PANELS }) => {
           </button>
           )}
         </div>
+        )}
 
         <div className="srd-panels">
           {panels.map((panel, i) => (

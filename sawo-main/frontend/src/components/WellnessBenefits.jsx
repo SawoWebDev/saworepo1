@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 // that expand on hover (desktop) or tap (touch).
 //
 // This markup, copy and CSS used to be pasted into every page that wanted
-// it — Home Section3, the Infrared hub, the Infrared Room page — which is
+// it — Home Section3, the Infrared hub, the Infrared Saunas page — which is
 // three places to edit for one change and three chances to drift. It lives
 // here now; pages just render <WellnessBenefits />.
 //
