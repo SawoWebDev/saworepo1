@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
+import { useDragScroll } from "../../utils/useDragScroll";
 import { useLocaleT } from "../../i18n/LocaleContext";
 
 import imgPailsLadles        from "../../assets/Home/Section4/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE.webp";
@@ -51,6 +52,8 @@ const Section4 = () => {
   }));
   const carouselRef  = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  useDragScroll(carouselRef, setIsHovered);
 
   const loopedItems = [...ACCESSORIES, ...ACCESSORIES];
 
@@ -133,7 +136,9 @@ const Section4 = () => {
 
       <style jsx>{`
         .accessories-carousel::-webkit-scrollbar { display: none; }
-        .accessories-carousel { scrollbar-width: none; }
+        .accessories-carousel { scrollbar-width: none; cursor: grab; }
+        .accessories-carousel.sawo-drag-scrolling { cursor: grabbing; }
+        .accessories-carousel.sawo-drag-scrolling * { pointer-events: none; }
         /* Must match the container's px-2 padding. Without it, snap-mandatory puts
            the first snap point at scrollLeft:8px, so the browser auto-snaps on
            first layout. That scroll lands just before first paint, and Chrome

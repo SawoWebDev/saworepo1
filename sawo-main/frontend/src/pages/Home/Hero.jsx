@@ -167,7 +167,7 @@ const Hero = () => {
           sits on top of the image so this doesn't touch LCP occlusion. */}
       <div style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}>
         <h1
-          className="font-bold text-white text-left whitespace-nowrap text-2xl mt-10 sm:text-4xl md:text-5xl lg:text-[60px] leading-tight"
+          className="font-bold text-white text-left whitespace-nowrap text-3xl mt-10 sm:text-5xl md:text-6xl lg:text-[60px] leading-tight"
           style={{
             fontFamily: "Montserrat, sans-serif",
             textShadow: "4px 6px 7px rgba(0,0,0,0.5)",
