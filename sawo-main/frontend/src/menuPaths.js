@@ -39,7 +39,12 @@ const menuPaths = {
     accessories: "/steam/accessories",
   },
 
-  infrared: "/infrared",
+  infrared: {
+    parent: "/infrared",
+    // The infrared range's own room page. Was a tab inside /sauna/rooms
+    // until 2026-08-20; that tab is gone and its hash redirects here.
+    room: "/infrared/room",
+  },
 
   support: {
     parent: "/support",

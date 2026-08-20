@@ -27,6 +27,7 @@ import Home from "./pages/Home/Home";
 // Every OTHER route is lazy-loaded so it gets its own chunk and stays out
 // of the initial download.
 const Infrared         = lazy(() => import("./pages/Infrared/Infrared"));
+const InfraredRoom     = lazy(() => import("./pages/Infrared/InfraredRoom"));
 const About            = lazy(() => import("./pages/AboutUs/About"));
 const Sustainability   = lazy(() => import("./pages/AboutUs/Sustainability"));
 const LatestNews       = lazy(() => import("./pages/AboutUs/LatestNews"));
@@ -128,7 +129,8 @@ export default function App() {
                 <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                   <Routes>
                     <Route path={menuPaths.home}                    element={<Home />} />
-                    <Route path={menuPaths.infrared}                element={<Infrared />} />
+                    <Route path={menuPaths.infrared.parent}         element={<Infrared />} />
+                    <Route path={menuPaths.infrared.room}           element={<InfraredRoom />} />
                     <Route path={menuPaths.about.parent}            element={<About />} />
                     <Route path={menuPaths.about.sustainability}    element={<Sustainability />} />
                     <Route path={menuPaths.about.news}              element={<LatestNews />} />

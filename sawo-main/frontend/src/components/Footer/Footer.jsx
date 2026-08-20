@@ -37,7 +37,7 @@ export default function Footer() {
           <div className="flex flex-col items-center sm:items-start border-b border-white lg:border-b-0 lg:border-r lg:border-white pb-4 lg:pb-0">
             <h3 className="font-bold text-lg mb-2">INFRARED SAUNA</h3>
             <ul className="space-y-1 text-sm">
-              <li><Link to={menuPaths.infrared} className="hover:text-gray-300">Infrared Sauna Rooms</Link></li>
+              <li><Link to={menuPaths.infrared.room} className="hover:text-gray-300">Infrared Rooms</Link></li>
               <li><Link to="/products/infrared-backrest" className="hover:text-gray-300">Infrared Backrest</Link></li>
               <li><Link to="/products/infrared-panels" className="hover:text-gray-300">Infrared Panels</Link></li>
             </ul>

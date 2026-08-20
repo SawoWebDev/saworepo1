@@ -7,7 +7,12 @@ import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
 import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
 import SteamGenerator    from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
 import SaunaRoom         from "../../assets/Home/Section1/Sauna-Room.webp";
-import InfraredSauna     from "../../assets/Home/Section1/IR-SAUNA-1P-CEDAR.webp";
+// The infrared card shows the sauna ROOM, matching the image the Sauna
+// Rooms section uses. Kept as its own 350x350 crop rather than reusing
+// Section3's 700x525 original, because .sawo-carousel-item img is
+// height:auto and every other card here is square — a 4:3 image would
+// render visibly shorter than its neighbours.
+import InfraredSauna     from "../../assets/Home/Section1/INFRARED-SAUNA-ROOM.webp";
 import SaunaAccessories  from "../../assets/Home/Section1/Sauna-Accessories.webp";
 import SaunovaSeries     from "../../assets/Home/Section1/INC-S-V2AspenSauna.webp";
 
@@ -36,7 +41,7 @@ const CAROUSEL_ITEMS = [
   {
     title:   "INFRARED SAUNA",
     caption: "Experience deep relaxation with advanced infrared sauna technology.",
-    href:    menuPaths.infrared,
+    href:    menuPaths.infrared.parent,
     img:     InfraredSauna,
     alt:     "Infrared sauna with cedar wood interior by SAWO",
   },

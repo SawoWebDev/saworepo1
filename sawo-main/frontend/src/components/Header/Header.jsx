@@ -67,7 +67,7 @@ const navItems = [
       { name: "Steam Accessories", path: menuPaths.steam.accessories },
     ],
   },
-  { name: "Infrared", path: menuPaths.infrared },
+  { name: "Infrared", path: menuPaths.infrared.parent },
   {
     name: "Support",
     path: menuPaths.support.parent,

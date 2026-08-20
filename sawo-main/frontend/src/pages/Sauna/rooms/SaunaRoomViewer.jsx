@@ -88,14 +88,30 @@ function buildImages(cfg, activeRoom, selectedSize, selectedSide, activeSizeCate
 const TABS = [
   { key: "standard",   label: "Standard Sauna Room" },
   { key: "glassfront", label: "Glass Front Sauna Room" },
-  { key: "infrared",   label: "Infrared Sauna" },
+  { key: "infrared",   label: "Infrared Room" },
   { key: "compact",    label: "Compact Sauna Room" },
 ];
 
-const SaunaRoomViewer = () => {
+// Which rooms /sauna/rooms offers. Infrared is deliberately absent: it moved
+// to its own page (/infrared/room) on 2026-08-20 so the infrared range lives
+// in one place instead of being a tab inside the traditional-sauna page. The
+// infrared entry stays in TABS above because this component still renders
+// that room — just from the other page, via the `rooms` prop.
+const DEFAULT_ROOMS = ["standard", "glassfront", "compact"];
+
+/**
+ * @param {string[]} rooms     which room keys this instance offers, in tab order
+ * @param {boolean}  showTabs  false for a single-room page, where a one-button
+ *                             tab bar would be noise
+ */
+const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
+  const visibleTabs = TABS.filter((tab) => rooms.includes(tab.key));
   const [activeRoom, setActiveRoom] = useState(() => {
     const hash = window.location.hash.replace("#", "");
-    return HASH_MAP[hash] || "standard";
+    const fromHash = HASH_MAP[hash];
+    // Ignore a hash pointing at a room this instance does not offer, rather
+    // than rendering a room with no tab to switch away from.
+    return fromHash && rooms.includes(fromHash) ? fromHash : rooms[0];
   });
   const [activeSizeCategory, setActiveSizeCategory] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -375,7 +391,7 @@ const SaunaRoomViewer = () => {
       {/* TABS */}
       <div className="sauna-tabs-wrapper" id={REVERSE_HASH_MAP[activeRoom]}>
         <div className="sauna-room-tabs">
-          {TABS.map((tab) => (
+          {showTabs && visibleTabs.map((tab) => (
             <button
               key={tab.key}
               className={`sauna-tab-btn${activeRoom === tab.key ? " active" : ""}`}

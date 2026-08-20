@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./SaunaRooms.css";
 import "./heaters/heaters.css";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
@@ -254,6 +255,19 @@ const SaunaConfigurator = () => {
 
 const SaunaRooms = () => {
   const heroLoaded = useHeroLoaded(SAUNA_ROOMS_HERO_IMG);
+  const navigate = useNavigate();
+  const { hash } = useLocation();
+
+  // Infrared left this page for /infrared/room on 2026-08-20. A hash never
+  // reaches the router's path matching, so the old deep link can only be
+  // caught here — without this it would land on /sauna/rooms with no
+  // infrared tab to select, which reads as a broken link. replace:true keeps
+  // the dead URL out of history so Back doesn't bounce through it.
+  useEffect(() => {
+    if (hash === "#infrared-sauna-room") {
+      navigate(menuPaths.infrared.room, { replace: true });
+    }
+  }, [hash, navigate]);
 
   return (
     <div>
