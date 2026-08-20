@@ -93,7 +93,7 @@ const TABS = [
 ];
 
 // Which rooms /sauna/rooms offers. Infrared is deliberately absent: it moved
-// to its own page (/infrared/room) on 2026-08-20 so the infrared range lives
+// to its own page (/infrared/saunas) on 2026-08-20 so the infrared range lives
 // in one place instead of being a tab inside the traditional-sauna page. The
 // infrared entry stays in TABS above because this component still renders
 // that room — just from the other page, via the `rooms` prop.
@@ -368,9 +368,14 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
   return (
     <>
       {/* TABS */}
+      {/* Suppressed entirely when there are no tabs, rather than left as an
+          empty .sauna-tabs-wrapper > .sauna-room-tabs pair — those still
+          carry their own padding, so a single-room page got a band of dead
+          space under the hero. */}
+      {showTabs && (
       <div className="sauna-tabs-wrapper" id={REVERSE_HASH_MAP[activeRoom]}>
         <div className="sauna-room-tabs">
-          {showTabs && visibleTabs.map((tab) => (
+          {visibleTabs.map((tab) => (
             <button
               key={tab.key}
               className={`sauna-tab-btn${activeRoom === tab.key ? " active" : ""}`}
@@ -381,6 +386,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
           ))}
         </div>
       </div>
+      )}
 
       {/* ROOM UI */}
       <div className="room-wrapper" key={activeRoom} id="sawo-configurator">

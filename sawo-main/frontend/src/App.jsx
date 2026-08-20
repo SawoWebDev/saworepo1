@@ -27,7 +27,7 @@ import Home from "./pages/Home/Home";
 // Every OTHER route is lazy-loaded so it gets its own chunk and stays out
 // of the initial download.
 const Infrared         = lazy(() => import("./pages/Infrared/Infrared"));
-const InfraredRoom     = lazy(() => import("./pages/Infrared/InfraredRoom"));
+const InfraredSaunas   = lazy(() => import("./pages/Infrared/InfraredSaunas"));
 const InfraredPanels   = lazy(() => import("./pages/Infrared/InfraredPanels"));
 const InfraredControls = lazy(() => import("./pages/Infrared/InfraredControls"));
 const About            = lazy(() => import("./pages/AboutUs/About"));
@@ -132,7 +132,10 @@ export default function App() {
                   <Routes>
                     <Route path={menuPaths.home}                    element={<Home />} />
                     <Route path={menuPaths.infrared.parent}         element={<Infrared />} />
-                    <Route path={menuPaths.infrared.room}           element={<InfraredRoom />} />
+                    <Route path={menuPaths.infrared.saunas}         element={<InfraredSaunas />} />
+                    {/* /infrared/room was this page's path until 2026-08-20 and
+                        went out on main, so it redirects rather than 404s. */}
+                    <Route path="/infrared/room"                   element={<Navigate to={menuPaths.infrared.saunas} replace />} />
                     <Route path={menuPaths.infrared.panels}         element={<InfraredPanels />} />
                     <Route path={menuPaths.infrared.controls}       element={<InfraredControls />} />
                     <Route path={menuPaths.about.parent}            element={<About />} />

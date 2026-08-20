@@ -178,7 +178,7 @@ const Infrared = () => {
               soothing escape in the comfort of your own space. Our Infrared Saunas are available in
               one-person and two-person sizes.
             </p>
-            <Link to="/infrared/room" className="wm-brochure-btn">
+            <Link to="/infrared/saunas" className="wm-brochure-btn">
               VIEW INFRARED SAUNAS
             </Link>
           </div>
