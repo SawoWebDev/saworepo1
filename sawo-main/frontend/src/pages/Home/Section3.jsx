@@ -11,9 +11,9 @@ import standardSauna     from "../../assets/Home/Section3/700x525.webp";
 import glassFrontSauna   from "../../assets/Home/Section3/GLASS-FRONT.webp";
 import compactSauna      from "../../assets/Home/Section3/700x525-compact.webp";
 import infraredSaunaRoom from "../../assets/Home/Section3/INFRARED-SAUNA-ROOM.webp";
-import infraredRooms     from "../../assets/Home/Section3/SR06-44710101-1313LS_PERSPECTIVE-VIEW-1.webp";
-import infraredPanels    from "../../assets/Home/Section3/infrared-panelss-400x600px.webp";
-import infraredControls  from "../../assets/Home/Section3/IR-UI-V2.webp";
+import infraredRooms     from "../../assets/Home/Section3/IR-ROOM.webp";
+import infraredPanels    from "../../assets/Home/Section3/IR-PANEL.webp";
+import infraredControls  from "../../assets/Home/Section3/IR-CONTROL.webp";
 import saunovaSeries     from "../../assets/Home/Section3/SAU-UI-V2_AspenSauna.webp";
 import innovaSeries      from "../../assets/Home/Section3/INC-S-V2_SpruceSauna.webp";
 import controlAccessories from "../../assets/Home/Section3/sensor-holder.webp";
@@ -31,12 +31,12 @@ const ROOMS_ITEMS = [
   { title: "Standard Sauna",   caption: "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space.",                                                                                                          img: standardSauna,    href: `${menuPaths.sauna.rooms}#standard-sauna-room` },
   { title: "Glass Front Sauna",caption: "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation.",                                                                                                  img: glassFrontSauna,  href: `${menuPaths.sauna.rooms}#glass-front-sauna-room` },
   { title: "Compact Sauna",    caption: "Instant, plug-and-play design built for urban spaces. A hidden heater keeps the setup safe while maximizing your view.",                                                                                                img: compactSauna,     href: `${menuPaths.sauna.rooms}#compact-sauna-room` },
-  { title: "Infrared Sauna",   caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: `${menuPaths.sauna.rooms}#infrared-sauna-room` },
+  { title: "Infrared Sauna",   caption: "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort.",                                                                                                              img: infraredSaunaRoom,href: menuPaths.infrared.room },
 ];
 const INFRARED_ITEMS = [
-  { title: "Infrared Rooms",    img: infraredRooms,      href: `${menuPaths.infrared}#infrared-room` },
-  { title: "Infrared Panels",   img: infraredPanels,     href: `${menuPaths.infrared}#infrared-accessories` },
-  { title: "Infrared Controls", img: infraredControls,   href: `${menuPaths.infrared}#infrared-controls` },
+  { title: "Infrared Rooms",    caption: "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience.",                img: infraredRooms,      href: menuPaths.infrared.room },
+  { title: "Infrared Panels",   caption: "Designed to provide gentle, direct infrared warmth, these panels create a comfortable and relaxing sauna experience.",            img: infraredPanels,     href: `${menuPaths.infrared.parent}#infrared-accessories` },
+  { title: "Infrared Controls", caption: "Easy-to-use controls designed to help you manage your infrared sauna experience with convenient temperature and session settings.",                               img: infraredControls,   href: `${menuPaths.infrared.parent}#infrared-controls` },
 ];
 const CONTROL_ITEMS = [
   { title: "Saunova Series",       img: saunovaSeries,      href: `${menuPaths.sauna.controls}?group=${encodeURIComponent("Saunova Series")}` },
@@ -161,47 +161,52 @@ const Section3 = () => {
         </Link>
       </div>
 
-      {/* ── SAUNA WELLNESS BENEFITS ── */}
-      <section className="sauna-benefits-section full-bleed" style={{ background: "#af8564" }}>
-        <div className="sauna-card-unique-section">
-          <div className="home-benefits-carousel-wrapper">
-            <div className="sauna-card-unique-grid">
-              {/* Cards rendered twice for a seamless infinite loop */}
-              {[...BENEFIT_CARDS, ...BENEFIT_CARDS].map((card, i) => (
-                <div className="sauna-card-unique" key={i}>
-                  <div className="sauna-card-unique-close">
-                    <i className="fa-solid fa-times"></i>
-                  </div>
-                  <div className="sauna-card-unique-content">
-                    <div className="sauna-card-unique-icon">
-                      <i className={card.icon}></i>
-                    </div>
-                    <div className="sauna-card-unique-label">{card.label}</div>
-                    <div className="sauna-card-unique-description">{card.desc}</div>
-                  </div>
-                  <div className="sauna-card-unique-click"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ── INFRARED ── */}
+      {/* Same card treatment as Sauna Rooms above (steam-card has-caption):
+          dark overlay + description on hover, title fading out. Was the
+          plain .image-card (title only, no overlay) until 2026-08-20. */}
       <h2 className="section-title">INFRARED</h2>
-      <div className="image-grid">
+      <div className="steam-grid">
         {INFRARED_ITEMS.map((item, i) => (
-          <Link key={i} to={item.href} className="image-card">
+          <Link key={i} className="steam-card has-caption" to={item.href}>
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
-            <div className="title">{item.title}</div>
+            <div className="steam-title">{item.title}</div>
+            <div className="steam-caption">{item.caption}</div>
           </Link>
         ))}
       </div>
       <div className="text-center mt-6">
-        <Link to={menuPaths.infrared} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
+        <Link to={menuPaths.infrared.parent} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
           Explore More <ChevronRight />
         </Link>
       </div>
+
+      {/* ── SAUNA WELLNESS BENEFITS ── */}
+      <section className="sauna-benefits-section full-bleed" style={{ background: "#af8564" }}>
+        <div className="sauna-card-unique-section">
+          <div className="home-benefits-carousel-wrapper">
+            <div className="sauna-card-unique-grid">
+              {/* Cards rendered twice for a seamless infinite loop */}
+              {[...BENEFIT_CARDS, ...BENEFIT_CARDS].map((card, i) => (
+                <div className="sauna-card-unique" key={i}>
+                  <div className="sauna-card-unique-close">
+                    <i className="fa-solid fa-times"></i>
+                  </div>
+                  <div className="sauna-card-unique-content">
+                    <div className="sauna-card-unique-icon">
+                      <i className={card.icon}></i>
+                    </div>
+                    <div className="sauna-card-unique-label">{card.label}</div>
+                    <div className="sauna-card-unique-description">{card.desc}</div>
+                  </div>
+                  <div className="sauna-card-unique-click"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── SAUNA CONTROL ── */}
       <h2 className="section-title">SAUNA CONTROL</h2>
