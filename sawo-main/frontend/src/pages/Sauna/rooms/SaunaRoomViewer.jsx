@@ -104,7 +104,7 @@ const DEFAULT_ROOMS = ["standard", "glassfront", "compact"];
  * @param {boolean}  showTabs  false for a single-room page, where a one-button
  *                             tab bar would be noise
  */
-const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true, showVideo = true }) => {
+const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
   const visibleTabs = TABS.filter((tab) => rooms.includes(tab.key));
   const [activeRoom, setActiveRoom] = useState(() => {
     const hash = window.location.hash.replace("#", "");
@@ -118,9 +118,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true, showVideo = t
   const [selectedSize, setSelectedSize] = useState("all");
   const [selectedSide, setSelectedSide] = useState("all");
   const [fadeOut, setFadeOut] = useState(false);
-  const [videoLoading, setVideoLoading] = useState(true);
   const fadeTimer = useRef(null);
-  const videoRef = useRef(null);
 
   // Side-thumbnail "angle" preview — independent of the model/size carousel,
   // just swaps the displayed photo. Cleared whenever the carousel itself
@@ -171,25 +169,6 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true, showVideo = t
 
   useEffect(() => {
     return () => clearTimeout(fadeTimer.current);
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const onCanPlay  = () => setVideoLoading(false);
-    const onWaiting  = () => setVideoLoading(true);
-    const onPlaying  = () => setVideoLoading(false);
-    const onStalled  = () => setVideoLoading(true);
-    video.addEventListener("canplay",  onCanPlay);
-    video.addEventListener("waiting",  onWaiting);
-    video.addEventListener("playing",  onPlaying);
-    video.addEventListener("stalled",  onStalled);
-    return () => {
-      video.removeEventListener("canplay",  onCanPlay);
-      video.removeEventListener("waiting",  onWaiting);
-      video.removeEventListener("playing",  onPlaying);
-      video.removeEventListener("stalled",  onStalled);
-    };
   }, []);
 
   // Compact Sauna Room video — play/pause as the trigger tile is toggled.
@@ -694,29 +673,6 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true, showVideo = t
           </div>
         </div>
       </div>
-
-      {/* VIDEO — the configurator teaser. Off on the infrared page: that
-          configurator builds traditional rooms (its middle step picks a
-          heater), so pointing infrared visitors at it sends them somewhere
-          that cannot configure what they came for. */}
-      {showVideo && (
-      <div className="sawo-video">
-        <div className="sawo-title">Find Your Dream Sauna</div>
-        <div className="sawo-subtitle">
-          Watch how our innovative configurator brings your perfect sauna to life
-        </div>
-        <div className={`sawo-video-wrap${videoLoading ? " loading" : ""}`}>
-          <div className="sawo-video-loader">
-            <div className="sawo-video-spinner"></div>
-            <div className="sawo-video-loader-text">Loading video...</div>
-          </div>
-          <video ref={videoRef} autoPlay muted loop playsInline>
-            <source src="https://www.sawo.com/wp-content/uploads/2026/02/SAWO-ROOM-NO-LOGO.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-      )}
     </>
   );
 };
