@@ -110,20 +110,16 @@
       },
       "glassFront": {
         "title": "Glasfront-Sauna",
-        "caption": "Modernes Design mit klaren, gehärteten Glasscheiben für einen ungehinderten Blick nach draußen. Pure Gelassenheit und Entspannung."
+        "caption": "Pure Gelassenheit und Entspannung. Modernes Design mit klaren, gehärteten Glasscheiben für einen ungehinderten Blick nach draußen."
       },
       "compact": {
         "title": "Kompaktsauna",
         "caption": "Sofort einsatzbereite Plug-and-Play-Lösung für urbane Räume. Ein verborgener Ofen sorgt für Sicherheit und maximale Aussicht."
-      },
-      "infrared": {
-        "title": "Infrarotsauna",
-        "caption": "Fachmännisch gefertigt aus Zeder, Espe und Fichte. Sanfte Infrarotwärme für beruhigenden, therapeutischen Komfort."
       }
     },
     "infrared": {
       "rooms": {
-        "title": "Infrarotkabinen",
+        "title": "Infrarotsaunen",
         "caption": "Genießen Sie sanfte, wohltuende Infrarotwärme in einem komfortablen und kompakten Saunaraum, der für ein entspannendes und regenerierendes Erlebnis gestaltet ist."
       },
       "panels": {

@@ -34,7 +34,9 @@ import Home from "./pages/Home/Home";
 // Every OTHER route is lazy-loaded so it gets its own chunk and stays out
 // of the initial download.
 const Infrared         = lazy(() => import("./pages/Infrared/Infrared"));
-const InfraredRoom     = lazy(() => import("./pages/Infrared/InfraredRoom"));
+const InfraredSaunas   = lazy(() => import("./pages/Infrared/InfraredSaunas"));
+const InfraredPanels   = lazy(() => import("./pages/Infrared/InfraredPanels"));
+const InfraredControls = lazy(() => import("./pages/Infrared/InfraredControls"));
 const About            = lazy(() => import("./pages/AboutUs/About"));
 const Sustainability   = lazy(() => import("./pages/AboutUs/Sustainability"));
 const LatestNews       = lazy(() => import("./pages/AboutUs/LatestNews"));
@@ -134,7 +136,12 @@ function withLocale(prefix, routePath) {
 const PUBLIC_ROUTES = [
   { path: menuPaths.home,                    element: <Home /> },
   { path: menuPaths.infrared.parent,         element: <Infrared /> },
-  { path: menuPaths.infrared.room,           element: <InfraredRoom /> },
+  { path: menuPaths.infrared.saunas,         element: <InfraredSaunas /> },
+  // /infrared/room was this page's path until 2026-08-20 and went out on
+  // main, so it redirects rather than 404s.
+  { path: "/infrared/room",                  element: <Navigate to={menuPaths.infrared.saunas} replace /> },
+  { path: menuPaths.infrared.panels,         element: <InfraredPanels /> },
+  { path: menuPaths.infrared.controls,       element: <InfraredControls /> },
   { path: menuPaths.about.parent,            element: <About /> },
   { path: menuPaths.about.sustainability,    element: <Sustainability /> },
   { path: menuPaths.about.news,              element: <LatestNews /> },

@@ -7,6 +7,7 @@ import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import menuPaths from "../../menuPaths";
 import SaunaRoomViewer from "./rooms/SaunaRoomViewer";
+import SaunaCalculatorCTA from "../../components/SaunaCalculatorCTA";
 import SaunaFeatures from "./rooms/SaunaFeatures";
 import SaunaProductDetails from "./rooms/SaunaProductDetails";
 import SaunaRoomDetails from "./rooms/SaunaRoomDetails";
@@ -258,14 +259,14 @@ const SaunaRooms = () => {
   const navigate = useNavigate();
   const { hash } = useLocation();
 
-  // Infrared left this page for /infrared/room on 2026-08-20. A hash
-  // never reaches the router's path matching, so the old deep link can only
-  // be caught here — without this it would land on /sauna/rooms with no
+  // Infrared left this page for /infrared/saunas on 2026-08-20. A hash never
+  // reaches the router's path matching, so the old deep link can only be
+  // caught here — without this it would land on /sauna/rooms with no
   // infrared tab to select, which reads as a broken link. replace:true keeps
   // the dead URL out of history so Back doesn't bounce through it.
   useEffect(() => {
     if (hash === "#infrared-sauna-room") {
-      navigate(menuPaths.infrared.room, { replace: true });
+      navigate(menuPaths.infrared.saunas, { replace: true });
     }
   }, [hash, navigate]);
 
@@ -273,7 +274,7 @@ const SaunaRooms = () => {
     <div>
       <SEO
         title="Sauna Rooms"
-        description="Explore SAWO sauna rooms: Standard, Glass Front, Outdoor, and Infrared designs crafted for a complete, therapeutic sauna experience."
+        description="Explore SAWO sauna rooms: Standard, Glass Front, and Compact designs crafted for a complete, therapeutic sauna experience."
         path="/sauna/rooms"
       />
       {/* HERO */}
@@ -309,6 +310,7 @@ const SaunaRooms = () => {
       </section>
 
       <SaunaRoomViewer />
+      <SaunaCalculatorCTA />
       <SaunaFeatures />
       <SaunaProductDetails />
       <SaunaRoomDetails />

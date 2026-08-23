@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY, wrapIndex } from "./SaunaRoomData";
 
-const SaunaFeatures = () => {
+const SaunaFeatures = ({ items = SFW_ITEMS, heading = "What Makes Our Sauna Different" }) => {
   const [index, setIndex] = useState(0);
   const autoRef   = useRef(null);
   const resumeRef = useRef(null);
@@ -13,17 +13,17 @@ const SaunaFeatures = () => {
   const startAuto = useCallback(() => {
     stopAuto();
     autoRef.current = setInterval(
-      () => setIndex((i) => (i + 1) % SFW_ITEMS.length),
+      () => setIndex((i) => (i + 1) % items.length),
       SFW_AUTO_DELAY
     );
-  }, [stopAuto]);
+  }, [stopAuto, items.length]);
 
   const goTo = useCallback((idx) => {
-    setIndex(wrapIndex(idx, SFW_ITEMS.length));
+    setIndex(wrapIndex(idx, items.length));
     stopAuto();
     if (resumeRef.current) clearTimeout(resumeRef.current);
     resumeRef.current = setTimeout(startAuto, SFW_RESUME_DELAY);
-  }, [stopAuto, startAuto]);
+  }, [stopAuto, startAuto, items.length]);
 
   useEffect(() => {
     startAuto();
@@ -40,10 +40,10 @@ const SaunaFeatures = () => {
       onMouseLeave={startAuto}
     >
       <div className="sfw-inner">
-        <div className="sfw-heading">What Makes Our Sauna Different</div>
+        <div className="sfw-heading">{heading}</div>
 
         <div className="sfw-tabs">
-          {SFW_ITEMS.map((item, i) => (
+          {items.map((item, i) => (
             <button
               key={item.tab}
               className={`sfw-tab${index === i ? " active" : ""}`}
@@ -62,7 +62,7 @@ const SaunaFeatures = () => {
         <div className="sfw-body">
           <div className="sfw-carousel">
             <div className="sfw-slides">
-              {SFW_ITEMS.map((item, i) => (
+              {items.map((item, i) => (
                 <div key={item.tab} className={`sfw-slide${index === i ? " active" : ""}`}>
                   <img src={item.image} alt={item.tab} />
                 </div>
@@ -81,7 +81,7 @@ const SaunaFeatures = () => {
             </button>
 
             <div className="sfw-dots">
-              {SFW_ITEMS.map((item, i) => (
+              {items.map((item, i) => (
                 <button
                   key={item.tab}
                   className={`sfw-dot${index === i ? " active" : ""}`}
@@ -93,7 +93,7 @@ const SaunaFeatures = () => {
           </div>
 
           <div className="sfw-content">
-            {SFW_ITEMS.map((item, i) => (
+            {items.map((item, i) => (
               <div key={item.tab} className={`sfw-pane${index === i ? " active" : ""}`}>
                 <div className="sfw-pane-title">{item.title}</div>
                 {item.paragraphs.map((p, j) => (

@@ -29,7 +29,7 @@
       },
       "rooms": {
         "title": "SAUNA ROOMS",
-        "caption": "Relax, detox, and rejuvenate in a SAWO-designed sauna room with therapeutic heat.",
+        "caption": "Relax, detox, and rejuvenate in an authentically designed sauna room with therapeutic heat.",
         "alt": "Standard Finnish sauna room by SAWO with natural wood design"
       },
       "infrared": {
@@ -106,24 +106,20 @@
     "rooms": {
       "standard": {
         "title": "Standard Sauna",
-        "caption": "Timeless design and high-quality materials. Classic indoor sauna experience for any home or wellness space."
+        "caption": "Timeless design and high quality materials. Classic indoor sauna experience for any home or wellness space."
       },
       "glassFront": {
         "title": "Glass Front Sauna",
-        "caption": "Modern design featuring clear tempered glass panels for an unobstructed view outside. Pure serenity and relaxation."
+        "caption": "Pure serenity and relaxation. Modern design featuring clear tempered glass panels for an unobstructed view outside."
       },
       "compact": {
         "title": "Compact Sauna",
         "caption": "Instant, plug-and-play design built for urban spaces. A hidden heater keeps the setup safe while maximizing your view."
-      },
-      "infrared": {
-        "title": "Infrared Sauna",
-        "caption": "Expertly crafted in cedar, aspen, and spruce. Gentle infrared warmth for soothing, therapeutic comfort."
       }
     },
     "infrared": {
       "rooms": {
-        "title": "Infrared Rooms",
+        "title": "Infrared Sauna Rooms",
         "caption": "Enjoy gentle, soothing infrared warmth in a comfortable and compact sauna space, designed for a relaxing and restorative experience."
       },
       "panels": {

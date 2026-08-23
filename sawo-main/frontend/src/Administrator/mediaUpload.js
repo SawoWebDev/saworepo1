@@ -72,7 +72,14 @@ export async function uploadFileToR2(file, { entityPrefix, slug, role, currentUs
     ext = (file.name.split(".").pop() || "bin").toLowerCase();
   }
 
-  const params = new URLSearchParams({ entityPrefix, slug, role, ext, userId: currentUser.id });
+  const params = new URLSearchParams({
+    entityPrefix, slug, role, ext, userId: currentUser.id,
+    // Original browser filename — the server hashes the stored key for
+    // caching/dedup (see media-upload.js), so this is the only place the
+    // human-readable name survives; the endpoint logs it to
+    // media_upload_log so "which upload was this file" stays answerable.
+    filename: file.name || "",
+  });
   const res = await fetch(`/api/media-upload?${params}`, { method: "POST", body: uploadBlob });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
