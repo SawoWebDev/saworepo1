@@ -5,6 +5,11 @@ import { useLocalSaunaRooms } from "../../Administrator/Local/useLocalSaunaRooms
 import { isAccessoryProduct } from "../IndividualDisplay/DispAccessories";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import ButtonClear from "../../components/Buttons/ButtonClear";
+import towerWallScene from "../../assets/Support/sawo-tower-wall-scene.webp";
+
+const PRODUCT_CATALOGUE_PDF_URL =
+  "https://www.sawo.com/wp-content/uploads/2026/05/SAWO-Product-Catalogue-040526.pdf";
 
 // ─── Tab taxonomy ─────────────────────────────────────────────────────────────
 // Classification is FIRST MATCH WINS over this array, so every product lands in
@@ -100,7 +105,7 @@ const SERIES_LABELS = {
   // Sauna room types (from sauna_rooms.room_type)
   "standard": "Standard Sauna Rooms",
   "glassfront": "Glass Front Sauna Rooms",
-  "infrared": "Infrared Rooms",
+  "infrared": "Infrared Saunas",
 };
 
 function seriesLabel(category) {
@@ -573,12 +578,15 @@ function ProductCatalogue() {
       `}</style>
 
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
-        {/* ── Header band — brown hero, white type ─────────────────── */}
+        {/* ── Header band — scene photo + dark overlay, white type ──── */}
         <div style={{
           width: "100%",
           padding: "160px 60px 70px",
           textAlign: "center",
-          background: "linear-gradient(135deg, #af8564 0%, #8b5e3c 100%)",
+          position: "relative",
+          backgroundImage: `linear-gradient(rgba(20,14,10,0.6), rgba(20,14,10,0.6)), url(${towerWallScene})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}>
           <p style={{
             fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.14em",
@@ -598,6 +606,13 @@ function ProductCatalogue() {
           }}>
             Browse our complete range of sauna heaters, rooms, and accessories designed to enhance your wellness experience.
           </p>
+          <div style={{ marginTop: "28px" }}>
+            <ButtonClear
+              text="PRODUCT CATALOGUE"
+              href={PRODUCT_CATALOGUE_PDF_URL}
+              target="_blank"
+            />
+          </div>
         </div>
 
         <div className="pc-outer">

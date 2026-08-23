@@ -110,15 +110,11 @@
       },
       "glassFront": {
         "title": "Lasiseinäinen sauna",
-        "caption": "Moderni muotoilu kirkkailla karkaistuilla lasipaneeleilla esteettömään näkymään ulos. Puhdasta rauhaa ja rentoutumista."
+        "caption": "Puhdasta rauhaa ja rentoutumista. Moderni muotoilu kirkkailla karkaistuilla lasipaneeleilla esteettömään näkymään ulos."
       },
       "compact": {
         "title": "Kompaktisauna",
         "caption": "Välitön, liitä ja käytä -ratkaisu kaupunkitiloihin. Piilotettu kiuas pitää asennuksen turvallisena ja maksimoi näkymän."
-      },
-      "infrared": {
-        "title": "Infrapunasauna",
-        "caption": "Taidokkaasti valmistettu setristä, haavasta ja kuusesta. Hellävarainen infrapunalämpö rauhoittavaan, terapeuttiseen mukavuuteen."
       }
     },
     "infrared": {

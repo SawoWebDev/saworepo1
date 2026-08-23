@@ -84,15 +84,15 @@ function buildImages(cfg, activeRoom, selectedSize, selectedSide, activeSizeCate
 const TABS = [
   { key: "standard",   label: "Standard Sauna Room" },
   { key: "glassfront", label: "Glass Front Sauna Room" },
-  { key: "infrared",   label: "Infrared Sauna" },
+  { key: "infrared",   label: "Infrared Saunas" },
   { key: "compact",    label: "Compact Sauna Room" },
 ];
 
 // Which rooms /sauna/rooms offers. Infrared is deliberately absent: it moved
-// to its own page (/infrared/room) on 2026-08-20 so the infrared range
-// lives in one place instead of being a tab inside the traditional-sauna
-// page. The infrared entry stays in TABS above because this component still
-// renders that room — just from the other page, via the `rooms` prop.
+// to its own page (/infrared/saunas) on 2026-08-20 so the infrared range lives
+// in one place instead of being a tab inside the traditional-sauna page. The
+// infrared entry stays in TABS above because this component still renders
+// that room — just from the other page, via the `rooms` prop.
 const DEFAULT_ROOMS = ["standard", "glassfront", "compact"];
 
 // { standard: "standard-sauna-room", glassfront: "glass-front-sauna-room", ... }
@@ -102,7 +102,7 @@ const DEFAULT_ROOMS = ["standard", "glassfront", "compact"];
 const REVERSE_HASH_MAP = Object.fromEntries(Object.entries(HASH_MAP).map(([hash, key]) => [key, hash]));
 
 /**
- * @param {string[]} rooms   which room keys this instance offers, in tab order
+ * @param {string[]} rooms     which room keys this instance offers, in tab order
  * @param {boolean}  showTabs  false for a single-room page, where a one-button
  *                             tab bar would be noise
  */
@@ -120,9 +120,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
   const [selectedSize, setSelectedSize] = useState("all");
   const [selectedSide, setSelectedSide] = useState("all");
   const [fadeOut, setFadeOut] = useState(false);
-  const [videoLoading, setVideoLoading] = useState(true);
   const fadeTimer = useRef(null);
-  const videoRef = useRef(null);
 
   // Side-thumbnail "angle" preview — independent of the model/size carousel,
   // just swaps the displayed photo. Cleared whenever the carousel itself
@@ -173,25 +171,6 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
 
   useEffect(() => {
     return () => clearTimeout(fadeTimer.current);
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const onCanPlay  = () => setVideoLoading(false);
-    const onWaiting  = () => setVideoLoading(true);
-    const onPlaying  = () => setVideoLoading(false);
-    const onStalled  = () => setVideoLoading(true);
-    video.addEventListener("canplay",  onCanPlay);
-    video.addEventListener("waiting",  onWaiting);
-    video.addEventListener("playing",  onPlaying);
-    video.addEventListener("stalled",  onStalled);
-    return () => {
-      video.removeEventListener("canplay",  onCanPlay);
-      video.removeEventListener("waiting",  onWaiting);
-      video.removeEventListener("playing",  onPlaying);
-      video.removeEventListener("stalled",  onStalled);
-    };
   }, []);
 
   // Compact Sauna Room video — play/pause as the trigger tile is toggled.
@@ -391,9 +370,14 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
   return (
     <>
       {/* TABS */}
+      {/* Suppressed entirely when there are no tabs, rather than left as an
+          empty .sauna-tabs-wrapper > .sauna-room-tabs pair — those still
+          carry their own padding, so a single-room page got a band of dead
+          space under the hero. */}
+      {showTabs && (
       <div className="sauna-tabs-wrapper" id={REVERSE_HASH_MAP[activeRoom]}>
         <div className="sauna-room-tabs">
-          {showTabs && visibleTabs.map((tab) => (
+          {visibleTabs.map((tab) => (
             <button
               key={tab.key}
               className={`sauna-tab-btn${activeRoom === tab.key ? " active" : ""}`}
@@ -404,6 +388,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
           ))}
         </div>
       </div>
+      )}
 
       {/* ROOM UI */}
       <div className="room-wrapper" key={activeRoom} id="sawo-configurator">
@@ -694,24 +679,6 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
               </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* VIDEO */}
-      <div className="sawo-video">
-        <div className="sawo-title">Find Your Dream Sauna</div>
-        <div className="sawo-subtitle">
-          Watch how our innovative configurator brings your perfect sauna to life
-        </div>
-        <div className={`sawo-video-wrap${videoLoading ? " loading" : ""}`}>
-          <div className="sawo-video-loader">
-            <div className="sawo-video-spinner"></div>
-            <div className="sawo-video-loader-text">Loading video...</div>
-          </div>
-          <video ref={videoRef} autoPlay muted loop playsInline>
-            <source src="https://www.sawo.com/wp-content/uploads/2026/02/SAWO-ROOM-NO-LOGO.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
         </div>
       </div>
     </>

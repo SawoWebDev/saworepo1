@@ -5,7 +5,7 @@ import SEO from "../../components/SEO";
 import Hero from "./Hero";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
-import Section3 from "./Section3";
+import Section3, { SteamSection, SaunaControlsSection } from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
 import menuPaths from "../../menuPaths";
@@ -37,7 +37,12 @@ const Home = () => {
         <Section1 />
       </div>
 
-      {/* Section 2 */}
+      {/* Section 3 (Sauna Rooms / Infrared / Benefits) — moved above Section 2 (Sauna Heaters) */}
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
+        <Section3 />
+      </div>
+
+      {/* Section 2 (Sauna Heaters) */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section2 />
 
@@ -66,10 +71,16 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Section 3 */}
+      {/* Steam — placed under Sauna Heaters */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
-        <Section3 />
+        <SteamSection />
       </div>
+
+      {/* Sauna Controls — placed under Steam */}
+      <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
+        <SaunaControlsSection />
+      </div>
+
       {/* Section 4 */}
       <div className="max-w-[2000px] w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         <Section4 />

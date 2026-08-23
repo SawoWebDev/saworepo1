@@ -1,5 +1,6 @@
 import React from "react";
 import menuPaths from "../../../menuPaths";
+import ButtonBrown from "../../../components/Buttons/ButtonBrown";
 
 const SaunaCallToAction = () => (
   <div className="sawo-cta">
@@ -16,15 +17,7 @@ const SaunaCallToAction = () => (
       <div className="sawo-cta-description">
         Let our sauna specialists guide you through every step. From design consultation to installation support, we're here to bring the ultimate relaxation experience to your home.
       </div>
-      <a href={menuPaths.contact} className="sawo-cta-btn">
-        <span className="sawo-cta-btn-content">
-          Inquire Today
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </span>
-      </a>
+      <ButtonBrown text="Inquire Today" href={menuPaths.contact} />
     </div>
   </div>
 );

@@ -8,12 +8,15 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
-import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
+import { isHeaterProduct } from "../utils/isHeaterProduct";
 import SEO from "../components/SEO";
 import { isPubliclyVisible } from "../local-storage/visibility";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/NRM-NB-BL1.webp";
+import bannerImg from "../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import HeroWave from "../components/HeroWave";
+import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton";
+import menuPaths from "../menuPaths";
 import { getPowerRange } from "../utils/productPower";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
 
@@ -110,7 +113,7 @@ export default function HeatersCatalog({ showHero = true } = {}) {
 
   const heaters = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && isPubliclyVisible(p));
+    return localProds.filter(p => isHeaterProduct(p) && isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByGroup = useMemo(() => {
@@ -190,9 +193,44 @@ export default function HeatersCatalog({ showHero = true } = {}) {
         }
 
         .hc-grid {
+          /* auto-FILL, not auto-fit: auto-fit collapses the empty tracks
+             and stretches whatever is left, so a series holding one heater
+             rendered a single card across the full content column — and
+             .hc-card-img-wrap is aspect-ratio 1/1, so it came out as a
+             giant square. auto-fill keeps the empty tracks, leaving a lone
+             card at normal size and the rest of the row simply empty. */
+          --hc-card-width: 220px;
+          --hc-gap: 24px;
+          --hc-max-cols: 5;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 24px;
+          /* minmax(0, --hc-card-width), never 1fr: a 1fr max lets each track
+             absorb the leftover space, which is how one card came out
+             full-width and how two cards on a 1100px screen came out 328px
+             each. A fixed max pins every card to the same size at every
+             breakpoint; the leftover simply sits to the right. The 0 min
+             lets the card shrink below that on a phone rather than
+             overflow. */
+          grid-template-columns: repeat(auto-fill, minmax(0, var(--hc-card-width)));
+          justify-content: start;
+          gap: var(--hc-gap);
+          /* .heaters-wrapper has no max-width, so on a wide monitor this
+             column would otherwise fit 6-8 tracks. Capping the grid holds
+             it to --hc-max-cols columns at the card width. */
+          /* min(100%, ...) not the calc alone: a bare max-width becomes the
+             grid's max-content contribution, so .heaters-wrapper's 1fr track
+             sized itself to 1196px even inside an 820px wrapper and the last
+             cards were clipped. Wrapping in min() keeps the column cap while
+             still yielding to a narrower container. */
+          max-width: min(
+            100%,
+            calc(
+              var(--hc-card-width) * var(--hc-max-cols)
+              + var(--hc-gap) * (var(--hc-max-cols) - 1)
+            )
+          );
+          /* Grid/flex children default to min-width:auto, which refuses to
+             shrink below min-content — the other half of the same trap. */
+          min-width: 0;
         }
         .hc-card {
           display: flex;
@@ -383,6 +421,50 @@ export default function HeatersCatalog({ showHero = true } = {}) {
           border-bottom: 1px solid #edddd0;
         }
 
+        .hc-cta {
+          position: relative;
+          margin-top: 20px;
+          background-color: #1a1512;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          padding: 100px 24px;
+          min-height: 380px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        .hc-cta-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.4) 100%);
+        }
+        .hc-cta-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+        .hc-cta-title {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 14px;
+          line-height: 1.2;
+        }
+        .hc-cta-desc {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1rem;
+          font-weight: 300;
+          color: rgba(255,255,255,0.9);
+          margin: 0 0 8px;
+          line-height: 1.6;
+        }
+        .hc-cta-actions {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 16px;
+        }
+
         @media screen and (max-width: 1024px) {
           .heaters-wrapper {
             grid-template-columns: 1fr;
@@ -394,6 +476,8 @@ export default function HeatersCatalog({ showHero = true } = {}) {
 
         @media screen and (max-width: 768px) {
           .heaters-wrapper { padding: 40px 24px 40px; }
+          .hc-cta { padding: 64px 20px; min-height: 300px; }
+          .hc-cta-title { font-size: 1.5rem; }
         }
       `}</style>
 
@@ -467,6 +551,27 @@ export default function HeatersCatalog({ showHero = true } = {}) {
             })}
           </div>
         </div>
+
+        <section
+          className="hc-cta"
+          style={{ backgroundImage: `url(${bannerImg})` }}
+        >
+          <div className="hc-cta-overlay" />
+          <div className="hc-cta-content">
+            <h2 className="hc-cta-title">Need Help Choosing the Right Heater?</h2>
+            <p className="hc-cta-desc">
+              Our team can help you match power, size, and style to your sauna —
+              or browse full specs in our product catalogue.
+            </p>
+            <div className="hc-cta-actions">
+              <BrochureDropdownButton text="CONTACT US" href={menuPaths.contact} redirect />
+              <BrochureDropdownButton
+                text="DOWNLOAD CATALOGUE"
+                href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+              />
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

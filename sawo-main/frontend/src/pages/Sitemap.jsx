@@ -164,9 +164,9 @@ const Sitemap = () => {
             <h2 className={headingClass}>Infrared Sauna</h2>
             <ul className="space-y-3">
               <li><Link to={menuPaths.infrared.parent} className={linkClass}>Infrared</Link></li>
-              <li><Link to={menuPaths.infrared.room} className={linkClass}>Infrared Rooms</Link></li>
-              <li><Link to="/products/infrared-backrest" className={linkClass}>Infrared Backrest</Link></li>
-              <li><Link to="/products/infrared-panels" className={linkClass}>Infrared Panels</Link></li>
+              <li><Link to={menuPaths.infrared.saunas} className={linkClass}>Infrared Saunas</Link></li>
+              <li><Link to={menuPaths.infrared.panels} className={linkClass}>Infrared Panels</Link></li>
+              <li><Link to={menuPaths.infrared.controls} className={linkClass}>Infrared Controls</Link></li>
             </ul>
           </section>
 

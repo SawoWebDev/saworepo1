@@ -7,12 +7,13 @@ const ButtonClear = ({ text, href, download, target }) => {
       download={download}
       target={target}
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 px-8 py-3 border-2 rounded transition-all duration-300"
+      className="inline-flex items-center gap-2 px-8 py-3 transition-all duration-300"
       style={{
-        borderColor: "#ffffff",
+        border: "3px solid #ffffff",
+        borderRadius: "8px",
         color: "#ffffff",
         fontFamily: "Montserrat, sans-serif",
-        fontWeight: 400,
+        fontWeight: 600,
         fontSize: "14px",
         backgroundColor: "transparent",
       }}

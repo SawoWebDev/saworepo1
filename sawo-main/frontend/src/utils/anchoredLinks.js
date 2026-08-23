@@ -23,10 +23,6 @@ const ROOM_ANCHORS = {
 };
 
 export function roomsPath(type) {
-  // Infrared is no longer a tab on /sauna/rooms — it has its own page, so
-  // "the infrared room" resolves there rather than to a hash that would
-  // land on a tab that no longer exists.
-  if (type === "infrared") return menuPaths.infrared.room;
   const anchor = ROOM_ANCHORS[type];
   return anchor ? `${menuPaths.sauna.rooms}#${anchor}` : menuPaths.sauna.rooms;
 }
@@ -42,19 +38,4 @@ const CONTROL_GROUPS = {
 export function controlsPath(type) {
   const group = CONTROL_GROUPS[type];
   return group ? `${menuPaths.sauna.controls}?group=${encodeURIComponent(group)}` : menuPaths.sauna.controls;
-}
-
-// Infrared card key -> the real section id in pages/Infrared/Infrared.jsx.
-const INFRARED_ANCHORS = {
-  panels: "infrared-accessories", // Infrared Panels are one product within this section, not their own section
-  controls: "infrared-controls",
-};
-
-export function infraredPath(type) {
-  // "rooms" resolves to the infrared room page rather than the hub page's
-  // teaser section, so every route to the infrared range — nav, Home cards,
-  // footer — lands on the same page.
-  if (type === "rooms") return menuPaths.infrared.room;
-  const anchor = INFRARED_ANCHORS[type];
-  return anchor ? `${menuPaths.infrared.parent}#${anchor}` : menuPaths.infrared.parent;
 }
