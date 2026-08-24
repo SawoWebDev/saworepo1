@@ -1,0 +1,9 @@
+# Dev/testing harness — do not deploy this directory to the production host.
+# If it ends up there anyway, this blocks it from being requested.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
