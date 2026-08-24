@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { supabase, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
+import DataSourceBadge from "./DataSourceBadge";
 import { getCache, setCache } from "./adminCache";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
@@ -2062,6 +2063,7 @@ export default function SaunaRooms({ currentUser }) {
             <p className="products-subtitle" style={{ margin: 0 }}>
               {loading ? "Loading..." : `${filtered.length} of ${rooms.length} rooms`}
             </p>
+            <DataSourceBadge />
             {perms.can("sauna_rooms.create") && (
               <Btn icon="fa-plus" label="New Room" onClick={openCreate} style={{ marginLeft: "auto" }} />
             )}

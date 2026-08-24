@@ -19,6 +19,8 @@
 
 import { getSupabase } from "./supabaseClient";
 import { isPubliclyVisible } from "./visibility";
+import { getDataSource } from "./dataSource";
+import * as neonReader from "./neonReader";
 
 /**
  * The columns the admin Products list actually renders: card/table cells,
@@ -61,9 +63,13 @@ export async function getProductsListLive() {
 }
 
 /**
- * Fetch all products live from Supabase
+ * Fetch all products live from Supabase — or from Neon, when the CMS's
+ * "Data Source" setting (see dataSource.js) is switched to "neon". That
+ * switch is a superadmin-only test toggle (Settings.jsx), so this only
+ * ever routes to Neon deliberately, not as a fallback.
  */
 export async function getAllProductsLive() {
+  if ((await getDataSource()) === "neon") return neonReader.getAllProductsLive();
   try {
     const { data, error } = await (await getSupabase())
       .from("products")
@@ -154,9 +160,10 @@ export async function getRecentProductsLive(days = 7) {
 }
 
 /**
- * Fetch all categories live from Supabase
+ * Fetch all categories live from Supabase — or Neon, see getAllProductsLive.
  */
 export async function getAllCategoriesLive() {
+  if ((await getDataSource()) === "neon") return neonReader.getAllCategoriesLive();
   try {
     const { data, error } = await (await getSupabase())
       .from("categories")
@@ -172,9 +179,10 @@ export async function getAllCategoriesLive() {
 }
 
 /**
- * Fetch all tags live from Supabase
+ * Fetch all tags live from Supabase — or Neon, see getAllProductsLive.
  */
 export async function getAllTagsLive() {
+  if ((await getDataSource()) === "neon") return neonReader.getAllTagsLive();
   try {
     const { data, error } = await (await getSupabase())
       .from("tags")
@@ -229,9 +237,11 @@ export async function getProductBySlugLive(slug) {
 
 /**
  * Fetch all sauna rooms live from Supabase (mirrors the GitHub-synced
- * saunaroom-data.json shape/filter used by useLocalSaunaRooms).
+ * saunaroom-data.json shape/filter used by useLocalSaunaRooms) — or Neon,
+ * see getAllProductsLive.
  */
 export async function getAllSaunaRoomsLive() {
+  if ((await getDataSource()) === "neon") return neonReader.getAllSaunaRoomsLive();
   try {
     const { data, error } = await (await getSupabase())
       .from("sauna_rooms")
