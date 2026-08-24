@@ -3,6 +3,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { supabase, cleanOrphanedStorageFiles, logActivity } from "./supabase";
 import { getPerms } from "./permissions";
+import DataSourceBadge from "./DataSourceBadge";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductByIdLive, getProductBySlugLive } from "../local-storage/supabaseReader";
 import { isAccessoryProduct, VARIANT_COLOR_DOT, getVariationsArray } from "../pages/IndividualDisplay/DispAccessories";
@@ -3422,6 +3423,7 @@ export default function Products({ currentUser }) {
             <p className="products-subtitle" style={{ margin: 0 }}>
               {loading ? "Loading..." : `${filtered.length} of ${products.length} products`}
             </p>
+            <DataSourceBadge />
             {perms.can("products.create") && (
               <Btn icon="fa-plus" label="New Product" onClick={openCreate} style={{ marginLeft: "auto" }} />
             )}
