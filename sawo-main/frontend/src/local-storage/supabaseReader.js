@@ -23,27 +23,55 @@ import { getDataSource } from "./dataSource";
 import * as neonReader from "./neonReader";
 
 /**
- * Fetch all products live from Supabase — or from Neon, when the CMS's
- * "Data Source" setting (see dataSource.js) is switched to "neon". That
- * switch is a superadmin-only test toggle (Settings.jsx), so this only
- * ever routes to Neon deliberately, not as a fallback.
+ * Tries the selected primary source first (per the Data Source setting);
+ * on a real failure — thrown error, not just an unusually-empty result —
+ * automatically retries the other source before giving up. This is what
+ * makes Neon an actual safety net for "products don't show" rather than a
+ * manually-flipped toggle only: a genuine Supabase outage now degrades to
+ * Neon automatically instead of the page silently rendering nothing.
+ * Deliberately does NOT fall back on a merely-empty success (an empty
+ * table is a valid real state, not a failure) — only on a thrown error.
+ */
+async function readWithFallback(label, supabaseFn, neonFn) {
+  const source = await getDataSource();
+  const [primaryName, primary, fallbackName, fallback] =
+    source === "neon"
+      ? ["Neon", neonFn, "Supabase", supabaseFn]
+      : ["Supabase", supabaseFn, "Neon", neonFn];
+
+  try {
+    console.info(`[dataSource] Reading "${label}" from ${primaryName}`);
+    return await primary();
+  } catch (err) {
+    console.error(`[dataSource] ${primaryName} read failed for "${label}", falling back to ${fallbackName}:`, err);
+    try {
+      const data = await fallback();
+      console.info(`[dataSource] Fallback to ${fallbackName} for "${label}" succeeded`);
+      return data;
+    } catch (err2) {
+      console.error(`[dataSource] ${fallbackName} fallback also failed for "${label}":`, err2);
+      return [];
+    }
+  }
+}
+
+async function fetchProductsFromSupabase() {
+  const { data, error } = await (await getSupabase())
+    .from("products")
+    .select("*")
+    .eq("is_deleted", false)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+/**
+ * Fetch all products live — from whichever source is primary (see
+ * dataSource.js), with an automatic fallback to the other source on a
+ * real read failure. See readWithFallback above.
  */
 export async function getAllProductsLive() {
-  if ((await getDataSource()) === "neon") return neonReader.getAllProductsLive();
-  console.info('[dataSource] Reading "products" from Supabase');
-  try {
-    const { data, error } = await (await getSupabase())
-      .from("products")
-      .select("*")
-      .eq("is_deleted", false)
-      .order("created_at", { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (err) {
-    console.error("[supabaseReader] Failed to fetch products:", err);
-    return [];
-  }
+  return readWithFallback("products", fetchProductsFromSupabase, neonReader.getAllProductsLive);
 }
 
 /**
@@ -94,44 +122,36 @@ export async function getRecentProductsLive(days = 7) {
   }
 }
 
-/**
- * Fetch all categories live from Supabase — or Neon, see getAllProductsLive.
- */
-export async function getAllCategoriesLive() {
-  if ((await getDataSource()) === "neon") return neonReader.getAllCategoriesLive();
-  console.info('[dataSource] Reading "categories" from Supabase');
-  try {
-    const { data, error } = await (await getSupabase())
-      .from("categories")
-      .select("*")
-      .order("name", { ascending: true });
-
-    if (error) throw error;
-    return data || [];
-  } catch (err) {
-    console.error("[supabaseReader] Failed to fetch categories:", err);
-    return [];
-  }
+async function fetchCategoriesFromSupabase() {
+  const { data, error } = await (await getSupabase())
+    .from("categories")
+    .select("*")
+    .order("name", { ascending: true });
+  if (error) throw error;
+  return data || [];
 }
 
 /**
- * Fetch all tags live from Supabase — or Neon, see getAllProductsLive.
+ * Fetch all categories live — see getAllProductsLive.
+ */
+export async function getAllCategoriesLive() {
+  return readWithFallback("categories", fetchCategoriesFromSupabase, neonReader.getAllCategoriesLive);
+}
+
+async function fetchTagsFromSupabase() {
+  const { data, error } = await (await getSupabase())
+    .from("tags")
+    .select("*")
+    .order("name", { ascending: true });
+  if (error) throw error;
+  return data || [];
+}
+
+/**
+ * Fetch all tags live — see getAllProductsLive.
  */
 export async function getAllTagsLive() {
-  if ((await getDataSource()) === "neon") return neonReader.getAllTagsLive();
-  console.info('[dataSource] Reading "tags" from Supabase');
-  try {
-    const { data, error } = await (await getSupabase())
-      .from("tags")
-      .select("*")
-      .order("name", { ascending: true });
-
-    if (error) throw error;
-    return data || [];
-  } catch (err) {
-    console.error("[supabaseReader] Failed to fetch tags:", err);
-    return [];
-  }
+  return readWithFallback("tags", fetchTagsFromSupabase, neonReader.getAllTagsLive);
 }
 
 /**
@@ -172,28 +192,23 @@ export async function getProductBySlugLive(slug) {
   }
 }
 
+async function fetchSaunaRoomsFromSupabase() {
+  const { data, error } = await (await getSupabase())
+    .from("sauna_rooms")
+    .select("*")
+    .eq("is_deleted", false)
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
 /**
- * Fetch all sauna rooms live from Supabase (mirrors the GitHub-synced
- * saunaroom-data.json shape/filter used by useLocalSaunaRooms) — or Neon,
- * see getAllProductsLive.
+ * Fetch all sauna rooms live (mirrors the GitHub-synced saunaroom-data.json
+ * shape/filter used by useLocalSaunaRooms) — see getAllProductsLive.
  */
 export async function getAllSaunaRoomsLive() {
-  if ((await getDataSource()) === "neon") return neonReader.getAllSaunaRoomsLive();
-  console.info('[dataSource] Reading "sauna_rooms" from Supabase');
-  try {
-    const { data, error } = await (await getSupabase())
-      .from("sauna_rooms")
-      .select("*")
-      .eq("is_deleted", false)
-      .order("sort_order", { ascending: true })
-      .order("created_at", { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  } catch (err) {
-    console.error("[supabaseReader] Failed to fetch sauna rooms:", err);
-    return [];
-  }
+  return readWithFallback("sauna_rooms", fetchSaunaRoomsFromSupabase, neonReader.getAllSaunaRoomsLive);
 }
 
 /**
