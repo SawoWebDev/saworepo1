@@ -13,6 +13,7 @@ import officeSawoInc from "../../assets/Contact/offices/sawo-inc-plant.webp";
 import officeSawoNordic from "../../assets/Contact/offices/sawo-nordic.webp";
 import officeFem from "../../assets/Contact/offices/fem-cable-tower.webp";
 import officeEuropeHub from "../../assets/Contact/offices/sawo-europe-hub.webp";
+import { SEND_EMAIL_URL, ODOO_TICKET_URL } from "../../config/contactFormApi";
 
 // ─── Office data ──────────────────────────────────────────────────────────────
 const OFFICES = [
@@ -113,10 +114,8 @@ const ISSUE_OPTIONS = [
   "Other",
 ];
 
-// Standalone (no-WordPress-dependency) endpoints — same helpdeskapi backend the
-// old WordPress contact form used, called directly since it already has CORS open.
-const SEND_EMAIL_URL = "https://sawo.com/helpdeskapi/send.php";
-const ODOO_TICKET_URL = "https://sawo.com/helpdeskapi/indxe.php";
+// Standalone react_helpdeskapi backend (React's own — see src/config/contactFormApi.js).
+// The WordPress form still uses a separate, untouched helpdeskapi backend.
 
 const EMPTY_FORM = {
   fname: "", lname: "", email: "", country: "", phone: "",
