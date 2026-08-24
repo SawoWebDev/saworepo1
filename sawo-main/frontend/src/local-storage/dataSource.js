@@ -4,16 +4,22 @@
  *
  * Global switch controlling where the public frontend reads product,
  * sauna room, and site content data from. As of the 2026-08-06 cleanup
- * (saworepo2 deletion; see docs/go-live/STORAGE-CURRENT.txt), the only
- * supported value is:
+ * (saworepo2 deletion; see docs/go-live/STORAGE-CURRENT.txt) through
+ * 2026-08-24, the only supported value was "supabase". A second value was
+ * added on 2026-08-24 as a superadmin-only test switch (see Settings.jsx):
  *   "supabase" — live Supabase rows, direct and instant, no sync step.
+ *   "neon"     — the Neon Postgres mirror kept current by the
+ *                neon_sync_notify trigger on Supabase (see
+ *                docs/NEON_BACKUP_PLAN.md). Read via functions/api/neon/*
+ *                (Neon has no PostgREST layer, so the browser can't query
+ *                it directly the way it queries Supabase) — see
+ *                neonReader.js. Exists to verify the Neon mirror is
+ *                current and working, not as a resilience feature yet
+ *                (see Phase B in NEON_BACKUP_PLAN.md).
  *
  * The older "github" (bundled GitHub-synced JSON snapshot) and "jsonfile"
  * (hand-edited allaccs-data.json fetched from saworepo2 at runtime) modes
- * were dead code — the live site had run exclusively on Supabase + R2 for
- * a while before they were removed. This switch (and the app_settings row
- * behind it) is kept only so the value can still be read/set from the CMS
- * without a schema change; there is currently nothing else for it to be.
+ * were dead code, removed in the 2026-08-06 cleanup.
  *
  * The setting itself lives in the app_settings table (see
  * Administrator/Local/scripts/setup-app-settings.sql) so it can be
@@ -27,7 +33,7 @@ import { getSettings, primeSetting } from "./appSettings";
 
 const KEY_SOURCE = "data_source";
 
-const VALID_SOURCES = ["supabase"];
+const VALID_SOURCES = ["supabase", "neon"];
 
 // Reading is delegated to appSettings.js, which batches this key with
 // every other public setting into ONE request per page load (this used to be
