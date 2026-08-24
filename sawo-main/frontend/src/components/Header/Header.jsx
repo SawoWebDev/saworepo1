@@ -71,7 +71,7 @@ const navItems = [
     name: "Infrared",
     path: menuPaths.infrared.parent,
     submenu: [
-      { name: "Infrared Sauna Rooms", path: menuPaths.infrared.room },
+      { name: "Infrared Sauna Rooms", path: menuPaths.infrared.saunas },
       { name: "Infrared Panels", path: menuPaths.infrared.panels },
       { name: "Infrared Controls", path: menuPaths.infrared.controls },
     ],
