@@ -69,8 +69,10 @@ const LOCALE_LABELS = { en: "English", fi: "Suomi", de: "Deutsch" };
 const SETTINGS_CACHE_KEY = "admin:settings";
 
 // Recipient for the public Contact form's email notification — read server-side
-// by helpdeskapi/send.php on sawo.com (not passed from the client) so this is
-// the only place that controls where inquiries land.
+// by react_helpdeskapi/send.php (the React contact form's own PHP backend,
+// not passed from the client) so this is the only place that controls where
+// inquiries land. Overrides that backend's Europe-hub/info@sawo.com region
+// routing when set; falls back to that routing when empty.
 const CONTACT_NOTIFY_EMAIL_KEY = "contact_notify_email";
 
 async function fetchContactNotifyEmail() {
@@ -454,8 +456,9 @@ export default function Settings({ currentUser }) {
         <p className="text-sm text-[var(--text-3)] mb-4">
           Where the public Contact form's email notification is sent. Every submission is
           also logged in the Inbox regardless of this setting, and (for all categories) creates
-          an Odoo helpdesk ticket. Read server-side by helpdeskapi/send.php, changes apply to
-          the very next submission, no redeploy needed.
+          an Odoo helpdesk ticket. Read server-side by react_helpdeskapi/send.php, changes
+          apply to the very next submission, no redeploy needed. Leave blank to use the
+          default Europe-hub / info@sawo.com region routing.
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <input
