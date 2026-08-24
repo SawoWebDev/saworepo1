@@ -307,6 +307,69 @@ export default function SaunaControls() {
           color: #a67853;
           margin-bottom: 16px;
         }
+
+        /* ── Precaution notice ── */
+        .sfw-notice-wrap {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          font-family: 'Montserrat', sans-serif;
+          box-sizing: border-box;
+        }
+        .sfw-notice-card {
+          position: relative;
+          width: 100%;
+          background: #fdfaf7;
+          border: 2px solid #A67853;
+          border-radius: 10px;
+          padding: 30px 36px 30px 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 24px;
+          overflow: hidden;
+          box-shadow: 0 6px 16px rgba(139, 94, 60, 0.1);
+          box-sizing: border-box;
+        }
+        .sfw-notice-tab {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: #8B5E3C;
+          color: #fff;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          padding: 6px 18px 6px 14px;
+          border-bottom-right-radius: 10px;
+        }
+        .sfw-notice-body {
+          margin-top: 14px;
+          flex: 1 1 auto;
+          text-align: center;
+        }
+        .sfw-notice-body p {
+          margin: 0;
+          font-size: 1.12rem;
+          font-weight: 300;
+          line-height: 1.6;
+          color: #3a2c22;
+        }
+        @media (max-width: 768px) {
+          .sfw-notice-card {
+            flex-direction: column;
+            align-items: center;
+            padding: 34px 24px 26px;
+            gap: 14px;
+          }
+          .sfw-notice-body {
+            margin-top: 0;
+          }
+          .sfw-notice-body p {
+            font-size: 1.02rem;
+          }
+        }
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
@@ -482,6 +545,20 @@ export default function SaunaControls() {
             </>
           )}
 
+        </div>
+      </section>
+
+      {/* ── PRECAUTION NOTICE ────────────────────────────────────────────── */}
+      <section className="wm-section wm-section--flush-top wm-section--flush-bottom">
+        <div className="wm-container">
+          <div className="sfw-notice-wrap">
+            <div className="sfw-notice-card">
+              <span className="sfw-notice-tab">Precaution Notice</span>
+              <div className="sfw-notice-body">
+                <p>Only a qualified electrician is allowed to make electrical connections and repairs on the unit. Use original parts only.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
