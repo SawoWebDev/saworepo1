@@ -11,6 +11,7 @@ import SaunaCalculatorCTA from "../../components/SaunaCalculatorCTA";
 import SaunaFeatures from "./rooms/SaunaFeatures";
 import SaunaProductDetails from "./rooms/SaunaProductDetails";
 import SaunaRoomDetails from "./rooms/SaunaRoomDetails";
+import { SRD_PANELS } from "./rooms/SaunaRoomData";
 import Sauna3DTeaser from "./rooms/Sauna3DTeaser";
 import SaunaWoodMaterials from "./rooms/SaunaWoodMaterials";
 import SaunaCallToAction from "./rooms/SaunaCallToAction";
@@ -41,6 +42,11 @@ import img_Dragon_BL_v3 from "../../assets/Dragon-BL-v3.webp";
 // overlay + text scrim that already hides most fine detail loss.
 const SAUNA_ROOMS_HERO_IMG = "https://saworepo1.pages.dev/media/site-assets/sauna-rooms-hero-93a47116.webp";
 const SAUNA_ROOMS_BROCHURE_URL = "https://heyzine.com/flip-book/576de453b2.html";
+
+// Infrared moved to its own page (/infrared/saunas) on 2026-08-20, so the
+// "About This Room" carousel here no longer offers its pill — same reasoning
+// as DEFAULT_ROOMS in SaunaRoomViewer.jsx.
+const ROOM_DETAIL_PANELS = SRD_PANELS.filter((p) => p.pill !== "Infrared");
 
 const CONFIGURATOR_STEPS = [
   {
@@ -313,7 +319,7 @@ const SaunaRooms = () => {
       <SaunaCalculatorCTA />
       <SaunaFeatures />
       <SaunaProductDetails />
-      <SaunaRoomDetails />
+      <SaunaRoomDetails panels={ROOM_DETAIL_PANELS} />
       <Sauna3DTeaser />
       <SaunaWoodMaterials />
       <SaunaConfigurator />

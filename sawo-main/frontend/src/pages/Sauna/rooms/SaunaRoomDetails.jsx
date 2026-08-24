@@ -1,43 +1,19 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { SRD_PANELS, SRD_AUTO_DELAY, wrapIndex } from "./SaunaRoomData";
+import React, { useState, useCallback } from "react";
+import { SRD_PANELS, wrapIndex } from "./SaunaRoomData";
 
 const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
   const [index, setIndex] = useState(0);
-  const timerRef = useRef(null);
-
-  const stopTimer = useCallback(() => {
-    clearInterval(timerRef.current);
-    timerRef.current = null;
-  }, []);
-
-  const startTimer = useCallback(() => {
-    stopTimer();
-    timerRef.current = setInterval(
-      () => setIndex((i) => (i + 1) % panels.length),
-      SRD_AUTO_DELAY
-    );
-  }, [stopTimer, panels.length]);
 
   const goTo = useCallback((idx) => {
     setIndex(wrapIndex(idx, panels.length));
-    startTimer();
-  }, [startTimer, panels.length]);
-
-  useEffect(() => {
-    startTimer();
-    return () => stopTimer();
-  }, [startTimer, stopTimer]);
+  }, [panels.length]);
 
   return (
     <div className="srd">
       <div className="srd-inner">
 
         {showNav && (
-        <div
-          className="srd-nav"
-          onMouseEnter={stopTimer}
-          onMouseLeave={startTimer}
-        >
+        <div className="srd-nav">
           {panels.length > 1 && (
           <button className="srd-nav-arrow" onClick={() => goTo(index - 1)} aria-label="Previous">
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
