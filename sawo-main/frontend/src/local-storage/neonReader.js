@@ -16,6 +16,11 @@
  */
 
 async function fetchTable(route) {
+  // Console-only marker so switching Settings > Data Source to Neon is
+  // confirmable on any page (public or CMS) via DevTools, without adding a
+  // visible badge to the public site — the visible badge stays CMS-only
+  // (DataSourceBadge.jsx on Products.jsx/SaunaRoomsCMS.jsx).
+  console.info(`[dataSource] Reading "${route}" from Neon (not Supabase)`);
   const res = await fetch(`/api/neon/${route}`);
   if (!res.ok) throw new Error(`Neon read failed (${route}): HTTP ${res.status}`);
   const { data } = await res.json();
