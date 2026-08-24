@@ -8,12 +8,15 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
-import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
+import { isHeaterProduct } from "../utils/isHeaterProduct";
 import SEO from "../components/SEO";
 import { isPubliclyVisible } from "../local-storage/visibility";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/NRM-NB-BL1.webp";
+import bannerImg from "../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import HeroWave from "../components/HeroWave";
+import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton";
+import menuPaths from "../menuPaths";
 import { getPowerRange } from "../utils/productPower";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
 
@@ -110,7 +113,7 @@ export default function HeatersCatalog({ showHero = true } = {}) {
 
   const heaters = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && isPubliclyVisible(p));
+    return localProds.filter(p => isHeaterProduct(p) && isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByGroup = useMemo(() => {
@@ -418,6 +421,50 @@ export default function HeatersCatalog({ showHero = true } = {}) {
           border-bottom: 1px solid #edddd0;
         }
 
+        .hc-cta {
+          position: relative;
+          margin-top: 20px;
+          background-color: #1a1512;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          padding: 100px 24px;
+          min-height: 380px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        .hc-cta-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.4) 100%);
+        }
+        .hc-cta-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+        .hc-cta-title {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 2rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 14px;
+          line-height: 1.2;
+        }
+        .hc-cta-desc {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1rem;
+          font-weight: 300;
+          color: rgba(255,255,255,0.9);
+          margin: 0 0 8px;
+          line-height: 1.6;
+        }
+        .hc-cta-actions {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 16px;
+        }
+
         @media screen and (max-width: 1024px) {
           .heaters-wrapper {
             grid-template-columns: 1fr;
@@ -429,6 +476,8 @@ export default function HeatersCatalog({ showHero = true } = {}) {
 
         @media screen and (max-width: 768px) {
           .heaters-wrapper { padding: 40px 24px 40px; }
+          .hc-cta { padding: 64px 20px; min-height: 300px; }
+          .hc-cta-title { font-size: 1.5rem; }
         }
       `}</style>
 
@@ -502,6 +551,27 @@ export default function HeatersCatalog({ showHero = true } = {}) {
             })}
           </div>
         </div>
+
+        <section
+          className="hc-cta"
+          style={{ backgroundImage: `url(${bannerImg})` }}
+        >
+          <div className="hc-cta-overlay" />
+          <div className="hc-cta-content">
+            <h2 className="hc-cta-title">Need Help Choosing the Right Heater?</h2>
+            <p className="hc-cta-desc">
+              Our team can help you match power, size, and style to your sauna —
+              or browse full specs in our product catalogue.
+            </p>
+            <div className="hc-cta-actions">
+              <BrochureDropdownButton text="CONTACT US" href={menuPaths.contact} redirect />
+              <BrochureDropdownButton
+                text="DOWNLOAD CATALOGUE"
+                href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
+              />
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
