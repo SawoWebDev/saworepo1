@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>react_helpdeskapi — dev test form</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 32px auto; padding: 0 16px; color: #222; }
+  h1 { font-size: 20px; }
+  p.warn { background: #fff3cd; border: 1px solid #ffe08a; padding: 10px 14px; border-radius: 6px; }
+  fieldset { border: 1px solid #ddd; border-radius: 6px; margin-bottom: 16px; }
+  label { display: block; font-size: 12px; color: #555; margin-top: 8px; }
+  input, select, textarea { width: 100%; padding: 6px 8px; font-size: 14px; box-sizing: border-box; }
+  .row { display: flex; gap: 12px; }
+  .row > div { flex: 1; }
+  button { padding: 10px 18px; font-size: 14px; margin-right: 10px; cursor: pointer; }
+  pre { background: #f5f5f5; padding: 12px; border-radius: 6px; overflow-x: auto; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+  <h1>react_helpdeskapi — dev test form</h1>
+  <p class="warn">
+    Dev-only. Not for the production host (blocked by <code>dev/.htaccess</code> if it
+    ever ends up there anyway). Submitting here creates a <strong>real</strong> Odoo
+    ticket and sends a <strong>real</strong> email through the authenticated SMTP
+    account when pointed at a live <code>.env</code> — use test data, not real customer
+    data, and prefer pointing this at a local PHP dev server
+    (<code>php -S localhost:8000 -t react_helpdeskapi</code>) with its own
+    non-production Odoo/SMTP test credentials where possible.
+  </p>
+
+  <label>API base URL</label>
+  <input id="apiBase" value="http://localhost:8000" />
+
+  <fieldset>
+    <legend>Request payload</legend>
+    <div class="row">
+      <div><label>First name</label><input id="fname" value="Test" /></div>
+      <div><label>Last name</label><input id="lname" value="User" /></div>
+    </div>
+    <div class="row">
+      <div><label>Email</label><input id="email" value="test.user@example.com" /></div>
+      <div><label>Phone</label><input id="phone" value="" /></div>
+    </div>
+    <div class="row">
+      <div><label>Country</label><input id="country" value="Philippines" /></div>
+      <div>
+        <label>Category</label>
+        <select id="category">
+          <option value="technical">technical</option>
+          <option value="customer" selected>customer</option>
+          <option value="general">general</option>
+        </select>
+      </div>
+    </div>
+    <label>Subject</label>
+    <input id="subject" value="Feedback" />
+    <label>Message / describeIssue</label>
+    <textarea id="message" rows="3">This is a dev test submission.</textarea>
+    <div class="row">
+      <div><label>Product category</label><input id="productCategory" value="Heater" /></div>
+      <div><label>Product name</label><input id="productName" value="Nordex" /></div>
+    </div>
+    <div class="row">
+      <div><label>Product code</label><input id="productCode" value="" /></div>
+      <div><label>Serial number</label><input id="serialNumber" value="" /></div>
+    </div>
+  </fieldset>
+
+  <button id="btnOdoo">POST indxe.php (Odoo ticket + auto-reply)</button>
+  <button id="btnEmail">POST send.php (staff notification)</button>
+
+  <h3>Response</h3>
+  <pre id="out">—</pre>
+
+  <script>
+    function payload() {
+      return {
+        fname: document.getElementById('fname').value,
+        lname: document.getElementById('lname').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        country: document.getElementById('country').value,
+        category: document.getElementById('category').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        describeIssue: document.getElementById('message').value,
+        productCategory: document.getElementById('productCategory').value,
+        productName: document.getElementById('productName').value,
+        productCode: document.getElementById('productCode').value,
+        serialNumber: document.getElementById('serialNumber').value,
+        purchaseInvoice: '',
+        issue: '',
+        addProductInfo: '',
+        orderNumber: '',
+        width: '', depth: '', height: '',
+      };
+    }
+
+    async function post(path) {
+      const base = document.getElementById('apiBase').value.replace(/\/$/, '');
+      const out = document.getElementById('out');
+      out.textContent = 'Sending…';
+      try {
+        const res = await fetch(`${base}/${path}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload()),
+        });
+        const text = await res.text();
+        out.textContent = `HTTP ${res.status}\n\n${text}`;
+      } catch (err) {
+        out.textContent = 'Request failed: ' + err.message;
+      }
+    }
+
+    document.getElementById('btnOdoo').addEventListener('click', () => post('indxe.php'));
+    document.getElementById('btnEmail').addEventListener('click', () => post('send.php'));
+  </script>
+</body>
+</html>
