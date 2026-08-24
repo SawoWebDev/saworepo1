@@ -30,6 +30,7 @@ import * as neonReader from "./neonReader";
  */
 export async function getAllProductsLive() {
   if ((await getDataSource()) === "neon") return neonReader.getAllProductsLive();
+  console.info('[dataSource] Reading "products" from Supabase');
   try {
     const { data, error } = await (await getSupabase())
       .from("products")
@@ -98,6 +99,7 @@ export async function getRecentProductsLive(days = 7) {
  */
 export async function getAllCategoriesLive() {
   if ((await getDataSource()) === "neon") return neonReader.getAllCategoriesLive();
+  console.info('[dataSource] Reading "categories" from Supabase');
   try {
     const { data, error } = await (await getSupabase())
       .from("categories")
@@ -117,6 +119,7 @@ export async function getAllCategoriesLive() {
  */
 export async function getAllTagsLive() {
   if ((await getDataSource()) === "neon") return neonReader.getAllTagsLive();
+  console.info('[dataSource] Reading "tags" from Supabase');
   try {
     const { data, error } = await (await getSupabase())
       .from("tags")
@@ -176,6 +179,7 @@ export async function getProductBySlugLive(slug) {
  */
 export async function getAllSaunaRoomsLive() {
   if ((await getDataSource()) === "neon") return neonReader.getAllSaunaRoomsLive();
+  console.info('[dataSource] Reading "sauna_rooms" from Supabase');
   try {
     const { data, error } = await (await getSupabase())
       .from("sauna_rooms")
