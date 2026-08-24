@@ -9,7 +9,6 @@ import SEO from "../../components/SEO";
 // Image imports
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
 import LN1 from "../../assets/About/Latest News/LN1.webp";
-import LN2 from "../../assets/About/Latest News/LN2.webp";
 import LN3 from "../../assets/About/Latest News/LN3.webp";
 import LN4 from "../../assets/About/Latest News/LN4.webp";
 import AquanaleLogo from "../../assets/About/Latest News/Aquanale-logo.webp";
@@ -427,44 +426,6 @@ const LatestNews = () => {
         <div className="ln-logo-bar">
           <img src={AquanaleLogo} alt="Aquanale logo" className="aquanale-logo" />
           <img src={PiscinaLogo} alt="Piscina Barcelona logo" className="piscina-logo" />
-        </div>
-
-        <hr className="ln-divider" />
-
-        {/* ════════════════════════════
-             SECTION 2 — MEZ2 Plant 4 Expansion
-        ════════════════════════════ */}
-        <div className="ln-container">
-          <div className="ln-news-row">
-
-            {/* LEFT: Text */}
-            <div>
-              <span className="ln-event-label" style={{ marginBottom: "4px" }}>MEZ2</span>
-              <h2 className="ln-section-title">
-                Plant 4 <span>Expansion</span>
-              </h2>
-              <p className="ln-section-subtitle">SAWO Strengthens Global Position With Expansion</p>
-
-              <div className="ln-body">
-                <p>
-                  We are proud to announce the acquisition of our new Plant 4 in the Mactan Economic Zone 2, MEZ2, in Cebu. This development officially makes us the largest operator in the Estate. The expansion marks a bold step forward in our commitment to meeting global demand and continuing to lead the sauna industry with uncompromising quality and innovation.
-                </p>
-                <p>
-                  By expanding our facilities, we increase our production capacity and reinforce our position as a trusted global brand. The wellness industry continues to experience a remarkable boom, and we are even better equipped to take it on with the expansion.
-                </p>
-                <p>
-                  At the heart of this achievement lies our desire to deliver authentic, personal Finnish sauna experiences worldwide. Every product we create is designed with an emphasis on tradition, quality, and innovation.
-                </p>
-                <p>
-                  We extend our thank you to the Aboitiz Group for their support throughout this journey, to our partners, and to every member of the SAWO community for making this possible.
-                </p>
-                <p>We look forward to shaping the next era of sauna innovation, together.</p>
-              </div>
-            </div>
-
-            {/* RIGHT: Image */}
-            <img src={LN2} alt="MEZ2 Plant 4 contract signing ceremony" className="ln-news-img" />
-          </div>
         </div>
 
         <hr className="ln-divider" />
