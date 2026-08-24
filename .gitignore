@@ -10,6 +10,7 @@ frontend/.env.production
 backend/.env
 backend/.env.local
 frontend/src/.env*
+.dev.vars
 
 # Dependencies
 node_modules/

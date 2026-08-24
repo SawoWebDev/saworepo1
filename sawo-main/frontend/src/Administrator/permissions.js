@@ -68,6 +68,12 @@ export const CAPABILITY_MAP = {
   "page.ci_status":           ["admin", "superadmin"],
   "page.website_health":      ["editor", "admin", "superadmin"],
   "page.settings":            ["admin", "superadmin"],
+  // Gates the Data Source control specifically (Settings.jsx), not the
+  // whole Settings page — switches the CMS between reading Supabase and
+  // reading its Neon mirror, which can make product/room data appear
+  // stale or empty if flipped without knowing why. Deliberately narrower
+  // than page.settings' admin+superadmin.
+  "settings.data_source":     ["superadmin"],
   // Same roles as products.delete/sauna_rooms.delete — whoever can delete
   // something is who should be able to see and manage what's sitting in
   // Trash from having done that.
@@ -164,7 +170,8 @@ export const PERMISSION_SECTIONS = [
       {
         label: "Settings",
         rows: [
-          { cap: "page.settings", label: "View page (sidebar)" },
+          { cap: "page.settings",        label: "View page (sidebar)" },
+          { cap: "settings.data_source", label: "Change Data Source (Supabase / Neon)" },
         ],
       },
       {

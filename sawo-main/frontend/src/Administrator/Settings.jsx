@@ -9,7 +9,9 @@ import {
 import { setHeaderLayout as saveHeaderLayout } from "../local-storage/headerLayout";
 import { setHeaderNavStyle as saveHeaderNavStyle } from "../local-storage/headerNavStyle";
 import { getDashboardTrafficWindow, setDashboardTrafficWindow as saveDashboardTrafficWindow, VALID_WINDOWS } from "../local-storage/dashboardSettings";
+import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
 import { getCache, setCache } from "./adminCache";
+import { getPerms } from "./permissions";
 import HeaderPreview from "./HeaderPreview";
 
 // Header Layout / Header Nav Style: the public header is fixed in code at
@@ -60,6 +62,11 @@ const TRAFFIC_WINDOW_OPTIONS = VALID_WINDOWS.map((days) => ({
   label: `${days}d`,
   description: `Dashboard traffic tiles and chart cover the last ${days} days.`,
 }));
+
+const DATA_SOURCE_OPTIONS = [
+  { value: "supabase", label: "Supabase", description: "Live Supabase rows — the real, always-current data." },
+  { value: "neon", label: "Neon (test)", description: "Neon's mirror of Supabase, kept current by a database trigger. For verifying the Neon backup is working, not a resilience feature yet." },
+];
 
 // Kept in sync by hand with frontend-next/src/translation/routing.js's
 // `localeNames` and frontend/src/i18n/translatedRoutes.js's LOCALES —
@@ -135,8 +142,12 @@ export default function Settings({ currentUser }) {
   const [notifySaving, setNotifySaving] = useState(false);
   const [trafficWindow, setTrafficWindowState] = useState(() => cachedSettings ? cachedSettings.trafficWindow : 30);
   const [trafficWindowSaving, setTrafficWindowSaving] = useState(false);
+  const [dataSource, setDataSourceState] = useState(() => cachedSettings ? cachedSettings.dataSource : "supabase");
+  const [dataSourceSaving, setDataSourceSaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
+
+  const canChangeDataSource = getPerms(currentUser).can("settings.data_source");
 
   useEffect(() => {
     Promise.all([
@@ -144,8 +155,9 @@ export default function Settings({ currentUser }) {
       getLanguageSwitcherEnabled(), getEnabledLanguages(), fetchHeaderPrefs(),
       fetchContactNotifyEmail(),
       getDashboardTrafficWindow(),
+      getDataSource(),
     ])
-      .then(([gdpr, langEn, langs, headerPrefs, notifyEmailVal, trafficWindowVal]) => {
+      .then(([gdpr, langEn, langs, headerPrefs, notifyEmailVal, trafficWindowVal, dataSourceVal]) => {
         setGdprEnabled(gdpr);
         setLangEnabled(langEn); setLanguages(langs);
         setHeaderLayoutState(headerPrefs.headerLayout);
@@ -153,10 +165,11 @@ export default function Settings({ currentUser }) {
         setNotifyEmailState(notifyEmailVal);
         setNotifyEmailInput(notifyEmailVal);
         setTrafficWindowState(trafficWindowVal);
+        setDataSourceState(dataSourceVal);
         setCache(SETTINGS_CACHE_KEY, {
           gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
           headerLayout: headerPrefs.headerLayout, navStyle: headerPrefs.navStyle,
-          notifyEmail: notifyEmailVal, trafficWindow: trafficWindowVal,
+          notifyEmail: notifyEmailVal, trafficWindow: trafficWindowVal, dataSource: dataSourceVal,
         });
       })
       .catch((err) => setError(err.message))
@@ -338,6 +351,30 @@ export default function Settings({ currentUser }) {
     }
   };
 
+  const handleSwitchDataSource = async (value) => {
+    if (!canChangeDataSource || value === dataSource) return;
+    setDataSourceSaving(true);
+    setError(null);
+    try {
+      await saveDataSource(value, currentUser?.username);
+      setDataSourceState(value);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "data_source",
+        entity_name: `Data Source → ${value}`,
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add(`Data source switched to ${value === "neon" ? "Neon" : "Supabase"}`, "success");
+    } catch (err) {
+      setError("Failed to switch data source: " + err.message);
+      add("Failed to switch data source", "error");
+    } finally {
+      setDataSourceSaving(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -509,6 +546,46 @@ export default function Settings({ currentUser }) {
           ))}
         </div>
       </div>
+
+      {canChangeDataSource && (
+      <div className="card card-body">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-database text-[var(--brand)]"></i>
+          Data Source
+          <span className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full bg-[var(--warning-bg,#fef3c7)] text-[var(--warning,#92400e)]">Superadmin</span>
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          Where Products, Sauna Rooms, Categories, and Tags are read from across the CMS and public
+          site. Neon is a standing mirror of Supabase kept current by a database trigger — this
+          switch exists to verify that mirror is working, not as a resilience/failover feature yet.
+          Takes effect within seconds, no redeploy needed.
+        </p>
+        <div className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-2)] p-0.5">
+          {DATA_SOURCE_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              title={opt.description}
+              disabled={dataSourceSaving}
+              onClick={() => handleSwitchDataSource(opt.value)}
+              className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                dataSource === opt.value
+                  ? "bg-[var(--brand)] text-white"
+                  : "text-[var(--text-2)] hover:bg-[var(--surface)]"
+              } ${dataSourceSaving ? "opacity-60 pointer-events-none" : ""}`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+        {dataSource === "neon" && (
+          <p className="text-xs text-[var(--warning,#92400e)] mt-3">
+            <i className="fa-solid fa-triangle-exclamation mr-1"></i>
+            Currently reading from Neon — this affects the live public site too, not just the CMS.
+          </p>
+        )}
+      </div>
+      )}
 
       <div className="card card-body lg:col-span-2">
         <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
