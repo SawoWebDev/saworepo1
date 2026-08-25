@@ -16,12 +16,64 @@ import bannerImg from "../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import CategoryHero from "../components/CategoryHero";
 import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton";
 import menuPaths from "../menuPaths";
-import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
+import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts, variantRank } from "../utils/wallMountedGroups";
 
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
   if (!path) return null;
   return path;
+}
+
+// The literal "Sauna Stones" (heater rocks) accessory has ended up tagged
+// with the same "Stones" category the Stone-series heaters (Cumulus/Nimbus)
+// use — a CMS tagging collision, not a matching-logic bug. Name-matched so
+// it's excluded regardless of which category it's tagged with.
+function isSaunaStonesAccessory(product) {
+  return (product?.name || "").toLowerCase().includes("sauna stones");
+}
+
+// Strips control-class (Ni2/NS/NB) and finish (Black/Fiber-Coated) tokens
+// from a name so e.g. "Nordex Floor NS" and "Nordex Floor Black NS" both
+// reduce to "nordex floor" — the same base model, different variant.
+function baseProductKey(name = "") {
+  return name
+    .replace(/\b(ni2|ns|nb)\b/gi, "")
+    .replace(/black|fiber[\s-]?coated/gi, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+// Orders a product list so variants of the same base model always land
+// next to each other, instead of scattering if their individual
+// featured/sort_order happen to differ.
+function sortProducts(products) {
+  const groups = new Map();
+  products.forEach(p => {
+    const key = baseProductKey(p.name);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(p);
+  });
+
+  const groupList = [...groups.values()].map(items => ({
+    items,
+    featured: items.some(p => p.featured) ? 1 : 0,
+    sortOrder: Math.min(...items.map(p => p.sort_order ?? 999)),
+    label: items[0]?.name || "",
+  }));
+
+  groupList.sort((a, b) => {
+    if (a.featured !== b.featured) return b.featured - a.featured;
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+    return a.label.localeCompare(b.label);
+  });
+
+  return groupList.flatMap(g =>
+    g.items.slice().sort((a, b) => {
+      const r = variantRank(a.name) - variantRank(b.name);
+      return r !== 0 ? r : (a.name || "").localeCompare(b.name || "");
+    })
+  );
 }
 
 // Series groups — same category keys AllProducts.jsx already uses for its
