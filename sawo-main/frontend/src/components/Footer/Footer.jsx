@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
@@ -103,7 +104,7 @@ export default function Footer() {
                 icon: "fas fa-globe",
                 title: "GLOBAL SALES & GENERAL INQUIRIES",
                 company: "SAWO Inc.",
-                address: ["Mactan Economic Zone 2, Mactan,", "Cebu 6015, Philippines"],
+                address: ["MEZ2 Estate, Basak,", "Lapu-Lapu City 6015, Cebu,", "Philippines"],
                 tel: "+63 32 341 2233",
                 email: "info@sawo.com",
                 mapsLink: "https://www.google.com/maps/place/SAWO+Inc./@10.2908545,123.9474748,20678m/data=!3m1!1e3!4m6!3m5!1s0x33a999f9aaaaaaab:0x638e93b7abe9d209!8m2!3d10.3065109!4d123.9662661!16s%2Fg%2F11xbg6w1q?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
@@ -111,17 +112,17 @@ export default function Footer() {
               {
                 icon: "fas fa-warehouse",
                 title: "SALES & WAREHOUSE FOR THE NORDICS",
-                company: "SAWO Nordic Oy.",
-                address: ["Hampuntie 18, 36220 Kangasala,", "Finland"],
-                tel: "+358 40 038 3265",
+                company: "SAWO NORDIC OY",
+                address: ["Satakunnankatu 31, LT9,", "33210 Tampere,", "Finland"],
+                tel: "+358 400 383 265",
                 email: "finland@sawo.com",
                 mapsLink: "https://www.google.com/maps/place/Sawo+Nordic+Oy/@61.4682459,23.8889861,40152m/data=!3m1!1e3!4m6!3m5!1s0x468f1ff184c90c83:0xe1681d5d0909096b!8m2!3d61.4996934!4d23.7501876!16s%2Fg%2F1q675ymsx?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
               },
               {
                 icon: "fas fa-warehouse",
-                title: "SALES & WAREHOUSE FOR ASIA",
-                company: "F.E.M. Ltd",
-                address: ["2302, 23rd Floor, Cable TV Tower 9", "Hoi Shing Road, Tsuen Wan, Hong Kong"],
+                title: "SALES & WAREHOUSE FOR\nASIA",
+                company: "F.E.M. LIMITED",
+                address: ["Floor 23, 2302 Cable-TV Tower,", "9 Hoi Shing Road, Tsuen Wan,", "Hong Kong"],
                 tel: "+852 2417 1188",
                 email: "hongkong@sawo.com",
                 mapsLink: "https://www.google.com/maps/place/Cable+T+V+Tower,+9+Hoi+Shing+Rd,+Chai+Wan+Kok,+Hong+Kong/@22.3720256,114.1051012,1215m/data=!3m1!1e3!4m6!3m5!1s0x3403f8e56f3381c9:0xbdbb69dc3fa013e4!8m2!3d22.3727747!4d114.1073972!16s%2Fg%2F12j799c55?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
@@ -129,9 +130,9 @@ export default function Footer() {
               {
                 icon: "fas fa-warehouse",
                 title: "SALES & WAREHOUSE FOR EUROPE",
-                company: "SAWO EUROPE HUB",
-                address: ["De Vest 24, 5555 XL Valkenswaard", "Netherlands"],
-                tel: "+358 40 016 8269",
+                company: "SAWO SAUNA EUROPE B.V.",
+                address: ["De Vest 24,", "5555 XL, Valkenswaard,", "Netherlands"],
+                tel: "+358 400 168 269",
                 email: "europehub@sawo.com",
                 mapsLink: "https://www.google.com/maps/place/SAWO+Sauna+Europe+B.V./@51.347626,5.4851098,820m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47c6d7006fe0a9bb:0x95ddf180c98d0533!8m2!3d51.347626!4d5.4876847!16s%2Fg%2F11nbg5c2pp?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D",
               },
@@ -142,7 +143,19 @@ export default function Footer() {
               >
                 <i className={`${office.icon} text-xl mt-1 sm:mt-0`}></i>
                 <div className="flex-1">
-                  <h4 className="font-bold text-lg mb-1 leading-[1.3]">{office.title}</h4>
+                  <h4 className="font-bold text-lg mb-1 leading-[1.3]">
+                    {office.title.split("\n").map((line, i) => (
+                      <Fragment key={i}>
+                        {i > 0 && (
+                          <>
+                            <br className="hidden lg:block" />
+                            <span className="lg:hidden"> </span>
+                          </>
+                        )}
+                        {line}
+                      </Fragment>
+                    ))}
+                  </h4>
                   <a
                     href={office.mapsLink}
                     target="_blank"
