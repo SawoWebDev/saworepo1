@@ -9,6 +9,7 @@ import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import USER_MANUALS_HERO_IMG from "../../assets/Support/UserManuals/hero.webp";
+import useDragScroll from "../../hooks/useDragScroll";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -290,7 +291,7 @@ function ProductCard({ product, category, onOpenManuals }) {
       <div style={{
         background: "#fff", borderRadius: 14, border: "1.5px solid rgba(175,133,100,0.18)",
         overflow: "hidden", display: "flex", flexDirection: "column",
-        height: 336, transition: "all 0.22s", textAlign: "center", cursor: "pointer",
+        transition: "all 0.22s", textAlign: "center", cursor: "pointer",
       }}
         onMouseEnter={e => {
           e.currentTarget.style.borderColor = "#af8564";
@@ -305,8 +306,8 @@ function ProductCard({ product, category, onOpenManuals }) {
       >
         {/* Image */}
         <div style={{
-          height: 160, flexShrink: 0, background: "#f7f5f2",
-          display: "flex", alignItems: "center", justifyContent: "center",
+          height: 160, flexShrink: 0, background: "transparent",
+          display: "flex", alignItems: "flex-end", justifyContent: "center",
           padding: 8, position: "relative", overflow: "hidden",
         }}>
           {getImageUrl(product, 'thumbnail') ? (
@@ -329,7 +330,16 @@ function ProductCard({ product, category, onOpenManuals }) {
         </div>
 
         {/* Body */}
-        <div style={{ padding: "14px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: 6, minHeight: 0 }}>
+        <div style={{ padding: "6px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: 6, minHeight: 0 }}>
+          <p style={{
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 600,
+            fontSize: "0.65rem", letterSpacing: "0.03em",
+            color: "#c4a882", margin: 0, height: "1.4em",
+            overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis",
+          }}>
+            {category ? seriesLabel(category) : " "}
+          </p>
+
           <p style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
             fontSize: "13px", color: "rgb(51,51,51)", margin: 0, lineHeight: 1.35,
@@ -340,18 +350,9 @@ function ProductCard({ product, category, onOpenManuals }) {
             {product.name}
           </p>
 
-          <p style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 600,
-            fontSize: "0.65rem", letterSpacing: "0.03em",
-            color: "#c4a882", margin: "0 0 4px", height: "1.4em",
-            overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis",
-          }}>
-            {category ? seriesLabel(category) : " "}
-          </p>
-
           {/* View Manual button — sits above the card's Link so it opens the
               modal instead of navigating (preventDefault + stopPropagation). */}
-          <div style={{ marginTop: "auto", position: "relative", zIndex: 1 }}>
+          <div style={{ marginTop: 4, position: "relative", zIndex: 1 }}>
             <button
               onClick={e => {
                 e.preventDefault();
@@ -397,6 +398,7 @@ export default function UserManuals() {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState(null);
   const heroLoaded = useHeroLoaded(USER_MANUALS_HERO_IMG);
+  const { trackRef: tabsTrackRef, dragHandlers: tabsDragHandlers } = useDragScroll();
 
   // Only products that are publicly visible AND actually have a manual attached.
   const allProducts = useMemo(() => {
@@ -545,7 +547,7 @@ export default function UserManuals() {
           .um-header-row { flex-direction: column !important; align-items: flex-start !important; }
         }
         @media (max-width: 600px) {
-          .um-outer { padding: 40px 20px 60px !important; }
+          .um-outer { padding: 56px 20px 60px !important; }
           .um-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; gap: 16px !important; }
         }
 
@@ -603,6 +605,32 @@ export default function UserManuals() {
           color: #fff;
         }
 
+        @media screen and (max-width: 768px) {
+          .um-tabs {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            gap: 8px;
+            padding-bottom: 2px;
+            cursor: grab;
+            touch-action: pan-x;
+          }
+          .um-tabs::-webkit-scrollbar { display: none; }
+          .um-tabs.is-dragging { cursor: grabbing; user-select: none; }
+          .um-tab-btn {
+            font-size: 0.72rem;
+            padding: 9px 16px;
+            white-space: nowrap;
+            flex-shrink: 0;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .um-tab-btn { font-size: 0.68rem; padding: 8px 13px; }
+        }
+
         .um-group-title {
           font-family: 'Montserrat', sans-serif;
           font-weight: 700;
@@ -647,14 +675,14 @@ export default function UserManuals() {
       {/* ── Main body ─────────────────────────────────────────────────────── */}
       <div
         className="um-outer"
-        style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px 80px" }}
+        style={{ maxWidth: 1140, margin: "0 auto", padding: "64px 32px 80px" }}
       >
         {/* Section title + category tabs */}
         {!loading && allProducts.length > 0 && (
           <>
             <h2 className="um-section-title">SAWO PRODUCT RANGE</h2>
             {tabs.length > 1 && (
-              <div className="um-tabs">
+              <div className="um-tabs" ref={tabsTrackRef} {...tabsDragHandlers}>
                 {tabs.map(tab => (
                   <button
                     key={tab.id}

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
+import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
 
 // Image imports
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
@@ -263,6 +264,17 @@ const LatestNews = () => {
           margin: 0 auto 24px;
         }
 
+        /* On the brown gradient banner, the shared white CTA button's usual
+           hover (fills brown) reads as invisible — override to a ghost
+           treatment (transparent + white border/text) for this instance only. */
+        .ln-cta-btn-wrap .sawo-vb-btn:hover,
+        .ln-cta-btn-wrap .sawo-vb-btn.sawo-vb-active {
+          background: transparent !important;
+          color: #fff !important;
+          border: 2px solid #fff !important;
+          box-shadow: none !important;
+        }
+
         /* ── CUSTOM BUTTONS ── */
         .ln-btn {
           font-family: 'Montserrat', sans-serif;
@@ -287,16 +299,6 @@ const LatestNews = () => {
           transform: translateY(-2px);
           box-shadow: 0 10px 25px rgba(175, 133, 100, 0.3);
         }
-        .ln-btn-white {
-          background-color: #fff;
-          color: #AF8564;
-        }
-        .ln-btn-white:hover {
-          background-color: #f5f5f5;
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
         /* ── RESPONSIVE ── */
         @media (max-width: 860px) {
           .ln-news-row {
@@ -508,14 +510,14 @@ const LatestNews = () => {
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px 60px" }}>
           <div className="ln-cta-banner">
             <div className="ln-cta-icon">
-              <i className="fas fa-newspaper"></i>
+              <i className="fas fa-comments"></i>
             </div>
             <p className="ln-cta-text">
-              Stay connected with the SAWO story. From product breakthroughs to community action,
-              every chapter is a reflection of who we are and what we stand for.
+              Have a story to share, a partnership in mind, or a press inquiry?
+              We'd love to hear from you.
             </p>
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
-              <Link to={menuPaths.products} className="ln-btn ln-btn-white">Explore Products</Link>
+            <div className="ln-cta-btn-wrap" style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
+              <BrochureDropdownButton text="CONTACT US" href={menuPaths.contact} redirect />
             </div>
           </div>
         </div>
