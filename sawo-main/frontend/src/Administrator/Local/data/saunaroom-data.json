@@ -5,7 +5,7 @@
     "slug": "standard-sauna-room-1515",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1515RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515/thumbnail-6988486e.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1515",
@@ -30,11 +30,11 @@
       "RS": {
         "bench": "RS1515",
         "images": [
-          "saunaroom-images/standard-sauna-room-1515/1515RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515/config-rs-6988486e.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1515/Standard-Sauna-Room-Horizontal-Panel-1515RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515/config-rs-panel-2a496616.webp"
       }
     },
     "door_options": [
@@ -103,7 +103,7 @@
     "slug": "standard-sauna-room-1515l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1515RL_PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515l/thumbnail-d1deae22.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1515L",
@@ -128,20 +128,20 @@
       "LL": {
         "bench": "LL1515",
         "images": [
-          "saunaroom-images/standard-sauna-room-1515l/1515LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515l/config-ll-f613b43f.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1515l/Standard-Sauna-Room-Horizontal-Panel-1515LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515l/config-ll-panel-5589750f.webp"
       },
       "RL": {
         "bench": "RL1515",
         "images": [
-          "saunaroom-images/standard-sauna-room-1515l/1515RL_PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515l/config-rl-d1deae22.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1515l/Standard-Sauna-Room-Horizontal-Panel-1515RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1515l/config-rl-panel-31ad231f.webp"
       }
     },
     "door_options": [
@@ -185,8 +185,8 @@
     "features": null,
     "feature_tabs": [],
     "spec_table": null,
-    "images": null,
-    "spec_images": null,
+    "images": [],
+    "spec_images": [],
     "resources": [],
     "files": [],
     "tags": null,
@@ -210,7 +210,7 @@
     "slug": "standard-sauna-room-1420",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1420RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1420/thumbnail-6cba9b4d.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1420",
@@ -235,20 +235,20 @@
       "LS": {
         "bench": "LS1420",
         "images": [
-          "saunaroom-images/standard-sauna-room-1420/1420LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1420/config-ls-099763db.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1420/Standard-Sauna-Room-Horizontal-Panel-1420LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1420/config-ls-panel-7fdf2897.webp"
       },
       "RS": {
         "bench": "RS1420",
         "images": [
-          "saunaroom-images/standard-sauna-room-1420/1420RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1420/config-rs-6cba9b4d.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1420/Standard-Sauna-Room-Horizontal-Panel-1420RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1420/config-rs-panel-fe71e326.webp"
       }
     },
     "door_options": [
@@ -317,7 +317,7 @@
     "slug": "standard-sauna-room-1519",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1519RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519/thumbnail-1d3fac40.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1519",
@@ -342,11 +342,11 @@
       "RS": {
         "bench": "RS1519",
         "images": [
-          "saunaroom-images/standard-sauna-room-1519/1519RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519/config-rs-1d3fac40.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1519/Standard-Sauna-Room-Horizontal-Panel-1519RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519/config-rs-panel-2fe78060.webp"
       }
     },
     "door_options": [
@@ -415,7 +415,7 @@
     "slug": "standard-sauna-room-1520",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1520RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520/thumbnail-efeeccc1.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1520",
@@ -440,11 +440,11 @@
       "RS": {
         "bench": "RS1520",
         "images": [
-          "saunaroom-images/standard-sauna-room-1520/1520RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520/config-rs-efeeccc1.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1520/Standard-Sauna-Room-Horizontal-Panel-1520RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520/config-rs-panel-10effcc9.webp"
       }
     },
     "door_options": [
@@ -513,7 +513,7 @@
     "slug": "standard-sauna-room-1919",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1919RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919/thumbnail-267d438d.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1919",
@@ -538,20 +538,20 @@
       "LS": {
         "bench": "LS1919",
         "images": [
-          "saunaroom-images/standard-sauna-room-1919/1919LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919/config-ls-010cb852.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1919/Standard-Sauna-Room-Horizontal-Panel-1919LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919/config-ls-panel-dfbf2dc6.webp"
       },
       "RS": {
         "bench": "RS1919",
         "images": [
-          "saunaroom-images/standard-sauna-room-1919/1919RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919/config-rs-267d438d.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1919/Standard-Sauna-Room-Horizontal-Panel-1919RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919/config-rs-panel-545536dc.webp"
       }
     },
     "door_options": [
@@ -620,7 +620,7 @@
     "slug": "standard-sauna-room-1919l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1919RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919l/thumbnail-9f417e8f.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1919L",
@@ -645,20 +645,20 @@
       "LL": {
         "bench": "LL1919",
         "images": [
-          "saunaroom-images/standard-sauna-room-1919l/1919LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919l/config-ll-f9df0eb5.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1919l/Standard-Sauna-Room-Horizontal-Panel-1919LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919l/config-ll-panel-fa015686.webp"
       },
       "RL": {
         "bench": "RL1919",
         "images": [
-          "saunaroom-images/standard-sauna-room-1919l/1919RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919l/config-rl-9f417e8f.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1919l/Standard-Sauna-Room-Horizontal-Panel-1919RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1919l/config-rl-panel-e66cdec0.webp"
       }
     },
     "door_options": [
@@ -727,7 +727,7 @@
     "slug": "standard-sauna-room-1920",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1920RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920/thumbnail-76c2782d.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1920",
@@ -752,20 +752,20 @@
       "LS": {
         "bench": "LS1920",
         "images": [
-          "saunaroom-images/standard-sauna-room-1920/1920LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920/config-ls-1f903929.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1920/Standard-Sauna-Room-Horizontal-Panel-1920LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920/config-ls-panel-e3b90da8.webp"
       },
       "RS": {
         "bench": "RS1920",
         "images": [
-          "saunaroom-images/standard-sauna-room-1920/1920RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920/config-rs-76c2782d.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1920/Standard-Sauna-Room-Horizontal-Panel-1920RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920/config-rs-panel-ea61b52e.webp"
       }
     },
     "door_options": [
@@ -834,7 +834,7 @@
     "slug": "standard-sauna-room-1922ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1922MS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922ms/thumbnail-d19dce8d.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1922MS",
@@ -859,11 +859,11 @@
       "MS": {
         "bench": "MS1922",
         "images": [
-          "saunaroom-images/standard-sauna-room-1922ms/1922MS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922ms/config-ms-d19dce8d.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/standard-sauna-room-1922ms/Standard-Sauna-Room-Horizontal-Panel-1922MS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922ms/config-ms-panel-93d91681.webp"
       }
     },
     "door_options": [
@@ -932,7 +932,7 @@
     "slug": "standard-sauna-room-1922md",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1922MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922md/thumbnail-29b21a6c.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1922MD",
@@ -957,11 +957,11 @@
       "MD": {
         "bench": "MD1922",
         "images": [
-          "saunaroom-images/standard-sauna-room-1922md/1922MD_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922md/config-md-29b21a6c.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "saunaroom-images/standard-sauna-room-1922md/Standard-Sauna-Room-Horizontal-Panel-1922MD.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922md/config-md-panel-a976027c.webp"
       }
     },
     "door_options": [
@@ -1030,7 +1030,7 @@
     "slug": "standard-sauna-room-2020l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2020RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020l/thumbnail-d5e75ea5.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2020L",
@@ -1055,20 +1055,20 @@
       "LL": {
         "bench": "LL2020",
         "images": [
-          "saunaroom-images/standard-sauna-room-2020l/2020LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020l/config-ll-df0ba162.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-2020l/Standard-Sauna-Room-Horizontal-Panel-2020LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020l/config-ll-panel-0a1589df.webp"
       },
       "RL": {
         "bench": "RL2020",
         "images": [
-          "saunaroom-images/standard-sauna-room-2020l/2020RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020l/config-rl-d5e75ea5.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-2020l/Standard-Sauna-Room-Horizontal-Panel-2020RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020l/config-rl-panel-1ccc6f0b.webp"
       }
     },
     "door_options": [
@@ -1137,7 +1137,7 @@
     "slug": "standard-sauna-room-2022md",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2022MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022md/thumbnail-01c5889a.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2022MD",
@@ -1162,11 +1162,11 @@
       "MD": {
         "bench": "MD2022",
         "images": [
-          "saunaroom-images/standard-sauna-room-2022md/2022MD_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022md/config-md-01c5889a.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "saunaroom-images/standard-sauna-room-2022md/Standard-Sauna-Room-Horizontal-Panel-2022MD.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022md/config-md-panel-a6693779.webp"
       }
     },
     "door_options": [
@@ -1235,7 +1235,7 @@
     "slug": "standard-sauna-room-2222md",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2222-MD_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222md/thumbnail-1c73d30f.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2222MD",
@@ -1260,11 +1260,11 @@
       "MD": {
         "bench": "MD2222",
         "images": [
-          "saunaroom-images/standard-sauna-room-2222md/2222-MD_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222md/config-md-1c73d30f.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "saunaroom-images/standard-sauna-room-2222md/Standard-Sauna-Room-Horizontal-Panel-2222MD.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222md/config-md-panel-99f22fea.webp"
       }
     },
     "door_options": [
@@ -1333,7 +1333,7 @@
     "slug": "glass-front-sauna-room-1415",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1415/thumbnail-38db244f.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1415",
@@ -1358,20 +1358,20 @@
       "LS": {
         "bench": "LS1415",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1415/1415LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1415/config-ls-3aac6b30.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1415/Glass-Front-Sauna-Room-1415LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1415/config-ls-panel-a9717ad8.webp"
       },
       "RS": {
         "bench": "RS1415",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1415/1415RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1415/config-rs-38db244f.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1415/Glass-Front-Sauna-Room-1415RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1415/config-rs-panel-90ec70b9.webp"
       }
     },
     "door_options": [
@@ -1450,7 +1450,7 @@
     "slug": "glass-front-sauna-room-1419ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419ms/thumbnail-62469078.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1419MS",
@@ -1475,11 +1475,11 @@
       "MS": {
         "bench": "MS1419",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1419ms/1419MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419ms/config-ms-62469078.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1419ms/Glass-Front-Sauna-Room-1419MS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419ms/config-ms-panel-b6107dcf.png"
       }
     },
     "door_options": [
@@ -1558,7 +1558,7 @@
     "slug": "glass-front-sauna-room-1519",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519/thumbnail-a92e5b9d.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1519",
@@ -1583,20 +1583,20 @@
       "LS": {
         "bench": "LS1519",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1519/1519LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519/config-ls-3e2ce7f6.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1519/Glass-Front-Sauna-Room-1519LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519/config-ls-panel-049c74dc.webp"
       },
       "RS": {
         "bench": "RS1519",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1519/1519RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519/config-rs-a92e5b9d.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1519/Glass-Front-Sauna-Room-1519RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519/config-rs-panel-1b13369d.webp"
       }
     },
     "door_options": [
@@ -1675,7 +1675,7 @@
     "slug": "glass-front-sauna-room-1519ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519ms/thumbnail-10880bc9.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1519MS",
@@ -1700,11 +1700,11 @@
       "MS": {
         "bench": "MS1519",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1519ms/1519MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519ms/config-ms-10880bc9.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1519ms/Glass-Front-Sauna-Room-1519MS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1519ms/config-ms-panel-62fb557c.png"
       }
     },
     "door_options": [
@@ -1783,7 +1783,7 @@
     "slug": "glass-front-sauna-room-1420ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420ms/thumbnail-d4b947e5.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1420MS",
@@ -1808,11 +1808,11 @@
       "MS": {
         "bench": "MS1420",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1420ms/1420MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420ms/config-ms-d4b947e5.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1420ms/Glass-Front-Sauna-Room-1420MS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420ms/config-ms-panel-d2d7e665.png"
       }
     },
     "door_options": [
@@ -1891,7 +1891,7 @@
     "slug": "glass-front-sauna-room-1520ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520ms/thumbnail-9db30055.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1520MS",
@@ -1916,11 +1916,11 @@
       "MS": {
         "bench": "MS1520",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1520ms/1520MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520ms/config-ms-9db30055.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1520ms/Glass-Front-Sauna-Room-1520MS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520ms/config-ms-panel-35a473bd.png"
       }
     },
     "door_options": [
@@ -1999,7 +1999,7 @@
     "slug": "glass-front-sauna-room-1522",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522/thumbnail-5f27894a.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1522",
@@ -2024,20 +2024,20 @@
       "LS": {
         "bench": "LS1522",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1522/1522LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522/config-ls-1306c64b.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1522/Glass-Front-Sauna-Room-1522LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522/config-ls-panel-d920c4fd.webp"
       },
       "RS": {
         "bench": "RS1522",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1522/1522RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522/config-rs-5f27894a.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1522/Glass-Front-Sauna-Room-1522RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522/config-rs-panel-437016a5.webp"
       }
     },
     "door_options": [
@@ -2116,7 +2116,7 @@
     "slug": "glass-front-sauna-room-1919",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919/thumbnail-176525e7.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1919",
@@ -2141,20 +2141,20 @@
       "LS": {
         "bench": "LS1919",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1919/1919LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919/config-ls-413f7c65.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1919/Glass-Front-Sauna-Room-1919LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919/config-ls-panel-a6b126d4.webp"
       },
       "RS": {
         "bench": "RS1919",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1919/1919RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919/config-rs-176525e7.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1919/Glass-Front-Sauna-Room-1919RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919/config-rs-panel-c617a7f9.webp"
       }
     },
     "door_options": [
@@ -2233,7 +2233,7 @@
     "slug": "glass-front-sauna-room-1919ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919ms/thumbnail-575667ba.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1919MS",
@@ -2258,11 +2258,11 @@
       "MS": {
         "bench": "MS1919",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1919ms/1919MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919ms/config-ms-575667ba.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1919ms/Glass-Front-Sauna-Room-1919MS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919ms/config-ms-panel-63fe1431.webp"
       }
     },
     "door_options": [
@@ -2341,7 +2341,7 @@
     "slug": "glass-front-sauna-room-1920",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920/thumbnail-4ac04055.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1920",
@@ -2366,20 +2366,20 @@
       "LS": {
         "bench": "LS1920",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1920/1920LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920/config-ls-2b284864.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1920/Glass-Front-Sauna-Room-1920LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920/config-ls-panel-2f26a84c.webp"
       },
       "RS": {
         "bench": "RS1920",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1920/1920RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920/config-rs-4ac04055.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1920/Glass-Front-Sauna-Room-1920RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920/config-rs-panel-2333f46e.webp"
       }
     },
     "door_options": [
@@ -2458,7 +2458,7 @@
     "slug": "glass-front-sauna-room-1920mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920mrl/thumbnail-f2ba54e5.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1920MRL",
@@ -2483,20 +2483,20 @@
       "MIL": {
         "bench": "MIL1920",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1920mrl/1920MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920mrl/config-mil-56b6b712.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1920mrl/Glass-Front-Sauna-Room-1920MLL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920mrl/config-mil-panel-edf94540.webp"
       },
       "MRL": {
         "bench": "MRL1920",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1920mrl/1920MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920mrl/config-mrl-f2ba54e5.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1920mrl/Glass-Front-Sauna-Room-1920MRL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920mrl/config-mrl-panel-f7cc22d5.webp"
       }
     },
     "door_options": [
@@ -2575,7 +2575,7 @@
     "slug": "glass-front-sauna-room-1922",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922/thumbnail-976a74b0.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1922",
@@ -2600,20 +2600,20 @@
       "LS": {
         "bench": "LS1922",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1922/1922LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922/config-ls-63f60d64.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1922/Glass-Front-Sauna-Room-1922LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922/config-ls-panel-fac25003.webp"
       },
       "RS": {
         "bench": "RS1922",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1922/1922RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922/config-rs-976a74b0.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1922/Glass-Front-Sauna-Room-1922RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922/config-rs-panel-ea5f2414.webp"
       }
     },
     "door_options": [
@@ -2692,7 +2692,7 @@
     "slug": "glass-front-sauna-room-1922ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922ms/thumbnail-7a2a01aa.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1922MS",
@@ -2717,11 +2717,11 @@
       "MS": {
         "bench": "MS1922",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1922ms/1922MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922ms/config-ms-7a2a01aa.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1922ms/Glass-Front-Sauna-Room-Horizontal-Panel-1922MS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922ms/config-ms-panel-ddb69444.png"
       }
     },
     "door_options": [
@@ -2800,7 +2800,7 @@
     "slug": "glass-front-sauna-room-2020ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020ms/thumbnail-e40560d3.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2020MS",
@@ -2825,11 +2825,11 @@
       "MS": {
         "bench": "MS2020",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2020ms/2020MS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020ms/config-ms-e40560d3.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2020ms/Glass-Front-Sauna-Room-2020MS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020ms/config-ms-panel-fc6a25bb.webp"
       }
     },
     "door_options": [
@@ -2908,7 +2908,7 @@
     "slug": "glass-front-sauna-room-2022l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022l/thumbnail-6f077586.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2022L",
@@ -2933,20 +2933,20 @@
       "LL": {
         "bench": "LL2022",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2022l/2022LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022l/config-ll-224cb7bf.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2022l/Glass-Front-Sauna-Room-2022LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022l/config-ll-panel-23411128.webp"
       },
       "RL": {
         "bench": "RL2022",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2022l/2022RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022l/config-rl-6f077586.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2022l/Glass-Front-Sauna-Room-2022RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022l/config-rl-panel-143aec8a.webp"
       }
     },
     "door_options": [
@@ -3025,7 +3025,7 @@
     "slug": "glass-front-sauna-room-2022md",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022md/thumbnail-cf83d9fa.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2022MD",
@@ -3050,11 +3050,11 @@
       "MD": {
         "bench": "MD2022",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2022md/2022MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022md/config-md-cf83d9fa.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2022md/Glass-Front-Sauna-Room-2022MD.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2022md/config-md-panel-88d4fdb5.webp"
       }
     },
     "door_options": [
@@ -3133,7 +3133,7 @@
     "slug": "standard-sauna-room-1214",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1214RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1214/thumbnail-df3aa89a.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1214",
@@ -3158,20 +3158,20 @@
       "LS": {
         "bench": "LS1214",
         "images": [
-          "saunaroom-images/standard-sauna-room-1214/1214LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1214/config-ls-4afe920e.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1214/Standard-Sauna-Room-Horizontal-Panel-1214LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1214/config-ls-panel-109c2114.webp"
       },
       "RS": {
         "bench": "RS1214",
         "images": [
-          "saunaroom-images/standard-sauna-room-1214/1214RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1214/config-rs-df3aa89a.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1214/Standard-Sauna-Room-Horizontal-Panel-1214RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1214/config-rs-panel-d30b8007.webp"
       }
     },
     "door_options": [
@@ -3240,7 +3240,7 @@
     "slug": "standard-sauna-room-1215",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1215RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1215/thumbnail-8f356342.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1215",
@@ -3265,20 +3265,20 @@
       "LS": {
         "bench": "LS1215",
         "images": [
-          "saunaroom-images/standard-sauna-room-1215/1215LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1215/config-ls-f9e159b9.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1215/Standard-Sauna-Room-Horizontal-Panel-1215LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1215/config-ls-panel-77d05c38.webp"
       },
       "RS": {
         "bench": "RS1215",
         "images": [
-          "saunaroom-images/standard-sauna-room-1215/1215RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1215/config-rs-8f356342.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1215/Standard-Sauna-Room-Horizontal-Panel-1215RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1215/config-rs-panel-28297e61.webp"
       }
     },
     "door_options": [
@@ -3347,7 +3347,7 @@
     "slug": "glass-front-sauna-room-2222md",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222md/thumbnail-1befeff6.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2222MD",
@@ -3372,11 +3372,11 @@
       "MD": {
         "bench": "MD2222",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2222md/2222MD_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222md/config-md-1befeff6.webp"
         ],
         "bench_name": "Double Straight Bench",
         "bench_class": "double",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2222md/Glass-Front-Sauna-Room-2222MD.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222md/config-md-panel-4fd7afd6.webp"
       }
     },
     "door_options": [
@@ -3455,7 +3455,7 @@
     "slug": "infrared-sauna-room-0908-ir-d",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/infrared-sauna-room-0908-ir-d/thumbnail-a6f6c474.webp",
     "sku": null,
     "room_type": "infrared",
     "model_code": "0908-IR-D",
@@ -3478,11 +3478,11 @@
       "0908-IR-D": {
         "bench": "0908-IR-D",
         "images": [
-          "saunaroom-images/infrared-sauna-room-0908-ir-d/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/infrared-sauna-room-0908-ir-d/config-0908-ir-d-a6f6c474.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/infrared-sauna-room-0908-ir-d/0908MS-TOP-VIEW-with-DIMENSION.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/infrared-sauna-room-0908-ir-d/config-0908-ir-d-panel-ee9d322a.webp"
       }
     },
     "door_options": [],
@@ -3519,7 +3519,7 @@
     "slug": "standard-sauna-room-1415",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1415RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1415/thumbnail-76975137.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1415",
@@ -3544,20 +3544,20 @@
       "LS": {
         "bench": "LS1415",
         "images": [
-          "saunaroom-images/standard-sauna-room-1415/1415LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1415/config-ls-8be7da83.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1415/Standard-Sauna-Room-Horizontal-Panel-1415LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1415/config-ls-panel-dce4b218.webp"
       },
       "RS": {
         "bench": "RS1415",
         "images": [
-          "saunaroom-images/standard-sauna-room-1415/1415RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1415/config-rs-76975137.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1415/Standard-Sauna-Room-Horizontal-Panel-1415RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1415/config-rs-panel-e6e06d26.webp"
       }
     },
     "door_options": [
@@ -3626,7 +3626,7 @@
     "slug": "standard-sauna-room-1519l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1519RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519l/thumbnail-1d3fac40.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1519L",
@@ -3651,20 +3651,20 @@
       "LL": {
         "bench": "LL1519",
         "images": [
-          "saunaroom-images/standard-sauna-room-1519l/1519LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519l/config-ll-52cf2bb7.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1519l/Standard-Sauna-Room-Horizontal-Panel-1519LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519l/config-ll-panel-397f6686.webp"
       },
       "RL": {
         "bench": "RL1519",
         "images": [
-          "saunaroom-images/standard-sauna-room-1519l/1519RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519l/config-rl-1d3fac40.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1519l/Standard-Sauna-Room-Horizontal-Panel-1519RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1519l/config-rl-panel-171ab79b.webp"
       }
     },
     "door_options": [
@@ -3733,7 +3733,7 @@
     "slug": "standard-sauna-room-1520l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1520RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520l/thumbnail-efeeccc1.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1520L",
@@ -3758,20 +3758,20 @@
       "LL": {
         "bench": "LL1520",
         "images": [
-          "saunaroom-images/standard-sauna-room-1520l/1520LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520l/config-ll-7de55109.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1520l/Standard-Sauna-Room-Horizontal-Panel-1520LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520l/config-ll-panel-59f0d7fc.webp"
       },
       "RL": {
         "bench": "RL1520",
         "images": [
-          "saunaroom-images/standard-sauna-room-1520l/1520RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520l/config-rl-efeeccc1.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1520l/Standard-Sauna-Room-Horizontal-Panel-1520RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1520l/config-rl-panel-682a4718.webp"
       }
     },
     "door_options": [
@@ -3840,7 +3840,7 @@
     "slug": "standard-sauna-room-1522l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1522RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522l/thumbnail-01623bc4.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1522L",
@@ -3865,20 +3865,20 @@
       "LL": {
         "bench": "LL1522",
         "images": [
-          "saunaroom-images/standard-sauna-room-1522l/1522LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522l/config-ll-ce29c6b3.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1522l/Standard-Sauna-Room-Horizontal-Panel-1522LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522l/config-ll-panel-2a98d509.webp"
       },
       "RL": {
         "bench": "RL1522",
         "images": [
-          "saunaroom-images/standard-sauna-room-1522l/1522RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522l/config-rl-01623bc4.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1522l/Standard-Sauna-Room-Horizontal-Panel-1522RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522l/config-rl-panel-b7abcc72.webp"
       }
     },
     "door_options": [
@@ -3947,7 +3947,7 @@
     "slug": "standard-sauna-room-1419",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1419RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1419/thumbnail-9fa47ff2.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1419",
@@ -3972,20 +3972,20 @@
       "LS": {
         "bench": "LS1419",
         "images": [
-          "saunaroom-images/standard-sauna-room-1419/1419LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1419/config-ls-eb53f51e.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1419/Standard-Sauna-Room-Horizontal-Panel-1419LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1419/config-ls-panel-8194efd0.webp"
       },
       "RS": {
         "bench": "RS1419",
         "images": [
-          "saunaroom-images/standard-sauna-room-1419/1419RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1419/config-rs-9fa47ff2.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1419/Standard-Sauna-Room-Horizontal-Panel-1419RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1419/config-rs-panel-f0f0683f.webp"
       }
     },
     "door_options": [
@@ -4054,7 +4054,7 @@
     "slug": "standard-sauna-room-1522",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1522RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522/thumbnail-01623bc4.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1522",
@@ -4079,11 +4079,11 @@
       "RS": {
         "bench": "RS1522",
         "images": [
-          "saunaroom-images/standard-sauna-room-1522/1522RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522/config-rs-01623bc4.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1522/Standard-Sauna-Room-Horizontal-Panel-1522RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1522/config-rs-panel-4a76aadb.webp"
       }
     },
     "door_options": [
@@ -4152,7 +4152,7 @@
     "slug": "standard-sauna-room-1922l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1922RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922l/thumbnail-fa6adbc7.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1922L",
@@ -4177,20 +4177,20 @@
       "LL": {
         "bench": "LL1922",
         "images": [
-          "saunaroom-images/standard-sauna-room-1922l/1922LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922l/config-ll-2d53e68a.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1922l/Standard-Sauna-Room-Horizontal-Panel-1922LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922l/config-ll-panel-964c441c.webp"
       },
       "RL": {
         "bench": "RL1922",
         "images": [
-          "saunaroom-images/standard-sauna-room-1922l/1922RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922l/config-rl-fa6adbc7.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1922l/Standard-Sauna-Room-Horizontal-Panel-1922RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1922l/config-rl-panel-c86221b0.webp"
       }
     },
     "door_options": [
@@ -4259,7 +4259,7 @@
     "slug": "standard-sauna-room-2022l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2022RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022l/thumbnail-2fc898a3.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2022L",
@@ -4284,20 +4284,20 @@
       "LL": {
         "bench": "LL2022",
         "images": [
-          "saunaroom-images/standard-sauna-room-2022l/2022LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022l/config-ll-1f6a9769.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-2022l/Standard-Sauna-Room-Horizontal-Panel-2022LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022l/config-ll-panel-5ce69000.webp"
       },
       "RL": {
         "bench": "RL2022",
         "images": [
-          "saunaroom-images/standard-sauna-room-2022l/2022RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022l/config-rl-2fc898a3.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-2022l/Standard-Sauna-Room-Horizontal-Panel-2022RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022l/config-rl-panel-070d31fd.webp"
       }
     },
     "door_options": [
@@ -4366,7 +4366,7 @@
     "slug": "standard-sauna-room-2222l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2222RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222l/thumbnail-e282e5ee.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2222L",
@@ -4391,20 +4391,20 @@
       "LL": {
         "bench": "LL2222",
         "images": [
-          "saunaroom-images/standard-sauna-room-2222l/2222LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222l/config-ll-1136e133.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-2222l/Standard-Sauna-Room-Horizontal-Panel-2222LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222l/config-ll-panel-1f0a9af3.webp"
       },
       "RL": {
         "bench": "RL2222",
         "images": [
-          "saunaroom-images/standard-sauna-room-2222l/2222RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222l/config-rl-e282e5ee.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-2222l/Standard-Sauna-Room-Horizontal-Panel-2222RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2222l/config-rl-panel-6e2ee285.webp"
       }
     },
     "door_options": [
@@ -4473,7 +4473,7 @@
     "slug": "standard-sauna-room-1920l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1920RL_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920l/thumbnail-de02a120.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1920L",
@@ -4498,20 +4498,20 @@
       "LL": {
         "bench": "LL1920",
         "images": [
-          "saunaroom-images/standard-sauna-room-1920l/1920LL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920l/config-ll-5341cc94.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1920l/Standard-Sauna-Room-Horizontal-Panel-1920LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920l/config-ll-panel-bbc23f6c.webp"
       },
       "RL": {
         "bench": "RL1920",
         "images": [
-          "saunaroom-images/standard-sauna-room-1920l/1920RL_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920l/config-rl-de02a120.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/standard-sauna-room-1920l/Standard-Sauna-Room-Horizontal-Panel-1920RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1920l/config-rl-panel-fbe8cbb5.webp"
       }
     },
     "door_options": [
@@ -4580,7 +4580,7 @@
     "slug": "standard-sauna-room-2020",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2020RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020/thumbnail-d5e75ea5.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2020",
@@ -4605,20 +4605,20 @@
       "LS": {
         "bench": "LS2020",
         "images": [
-          "saunaroom-images/standard-sauna-room-2020/2020LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020/config-ls-8ffd1c6b.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-2020/Standard-Sauna-Room-Horizontal-Panel-2020LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020/config-ls-panel-9e23a72c.webp"
       },
       "RS": {
         "bench": "RS2020",
         "images": [
-          "saunaroom-images/standard-sauna-room-2020/2020RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020/config-rs-d5e75ea5.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-2020/Standard-Sauna-Room-Horizontal-Panel-2020RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2020/config-rs-panel-3ad823a8.webp"
       }
     },
     "door_options": [
@@ -4687,7 +4687,7 @@
     "slug": "standard-sauna-room-2022",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2022RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022/thumbnail-4d470803.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "2022",
@@ -4712,20 +4712,20 @@
       "LS": {
         "bench": "LS2022",
         "images": [
-          "saunaroom-images/standard-sauna-room-2022/2022LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022/config-ls-c5256fa5.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-2022/Standard-Sauna-Room-Horizontal-Panel-2022LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022/config-ls-panel-ebcef5b3.webp"
       },
       "RS": {
         "bench": "RS2022",
         "images": [
-          "saunaroom-images/standard-sauna-room-2022/2022RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022/config-rs-4d470803.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-2022/Standard-Sauna-Room-Horizontal-Panel-2022RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-2022/config-rs-panel-5e940ede.webp"
       }
     },
     "door_options": [
@@ -4794,7 +4794,7 @@
     "slug": "glass-front-sauna-room-1420",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420/thumbnail-9517caf4.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1420",
@@ -4819,20 +4819,20 @@
       "LS": {
         "bench": "LS1420",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1420/1420LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420/config-ls-a1237126.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1420/Glass-Front-Sauna-Room-1420LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420/config-ls-panel-ec7c9f3d.webp"
       },
       "RS": {
         "bench": "RS1420",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1420/1420RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420/config-rs-9517caf4.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1420/Glass-Front-Sauna-Room-1420RS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1420/config-rs-panel-82ebafc9.png"
       }
     },
     "door_options": [
@@ -4911,7 +4911,7 @@
     "slug": "glass-front-sauna-room-1414",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1414/thumbnail-eb86403d.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1414",
@@ -4936,20 +4936,20 @@
       "LS": {
         "bench": "LS1414",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1414/1414LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1414/config-ls-35d1881b.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1414/Glass-Front-Sauna-Room-1414LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1414/config-ls-panel-c165e117.webp"
       },
       "RS": {
         "bench": "RS1414",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1414/1414RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1414/config-rs-eb86403d.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1414/Glass-Front-Sauna-Room-1414RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1414/config-rs-panel-aa50f994.webp"
       }
     },
     "door_options": [
@@ -5028,7 +5028,7 @@
     "slug": "glass-front-sauna-room-1419",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419/thumbnail-4f978f1d.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1419",
@@ -5053,20 +5053,20 @@
       "LS": {
         "bench": "LS1419",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1419/1419LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419/config-ls-d4b93fbc.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1419/Glass-Front-Sauna-Room-1419LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419/config-ls-panel-dfe19a28.webp"
       },
       "RS": {
         "bench": "RS1419",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1419/1419RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419/config-rs-4f978f1d.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1419/Glass-Front-Sauna-Room-1419RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1419/config-rs-panel-9fdd1e5f.webp"
       }
     },
     "door_options": [
@@ -5145,7 +5145,7 @@
     "slug": "glass-front-sauna-room-1515",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1515/thumbnail-0258420f.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1515",
@@ -5170,20 +5170,20 @@
       "LS": {
         "bench": "LS1515",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1515/1515LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1515/config-ls-3b3ce360.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1515/Glass-Front-Sauna-Room-1515LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1515/config-ls-panel-5bb8b990.webp"
       },
       "RS": {
         "bench": "RS1515",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1515/1515RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1515/config-rs-0258420f.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1515/Glass-Front-Sauna-Room-1515RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1515/config-rs-panel-23587c11.webp"
       }
     },
     "door_options": [
@@ -5262,7 +5262,7 @@
     "slug": "glass-front-sauna-room-1522ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522ms/thumbnail-13752737.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1522MS",
@@ -5287,11 +5287,11 @@
       "MS": {
         "bench": "MS1522",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1522ms/1522MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522ms/config-ms-13752737.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1522ms/Glass-Front-Sauna-Room-1522MS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1522ms/config-ms-panel-749ab1e4.webp"
       }
     },
     "door_options": [
@@ -5370,7 +5370,7 @@
     "slug": "glass-front-sauna-room-1520",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520/thumbnail-e8562391.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1520",
@@ -5395,20 +5395,20 @@
       "LS": {
         "bench": "LS1520",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1520/1520LS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520/config-ls-9401600f.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1520/Glass-Front-Sauna-Room-1520LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520/config-ls-panel-e3b83c76.webp"
       },
       "RS": {
         "bench": "RS1520",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1520/1520RS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520/config-rs-e8562391.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1520/Glass-Front-Sauna-Room-1520RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1520/config-rs-panel-3fadcbf3.webp"
       }
     },
     "door_options": [
@@ -5487,7 +5487,7 @@
     "slug": "standard-sauna-room-1414",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1414RS_LATEST-NEW-SAUNA-ROOM.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1414/thumbnail-7b49b7a3.webp",
     "sku": null,
     "room_type": "standard",
     "model_code": "1414",
@@ -5512,20 +5512,20 @@
       "LS": {
         "bench": "LS1414",
         "images": [
-          "saunaroom-images/standard-sauna-room-1414/1414LS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1414/config-ls-f221dcb6.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1414/Standard-Sauna-Room-Horizontal-Panel-1414LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1414/config-ls-panel-89e61dce.webp"
       },
       "RS": {
         "bench": "RS1414",
         "images": [
-          "saunaroom-images/standard-sauna-room-1414/1414RS_LATEST-NEW-SAUNA-ROOM.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1414/config-rs-7b49b7a3.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/standard-sauna-room-1414/Standard-Sauna-Room-Horizontal-Panel-1414RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/standard-sauna-room-1414/config-rs-panel-b84da738.webp"
       }
     },
     "door_options": [
@@ -5594,7 +5594,7 @@
     "slug": "glass-front-sauna-room-1920ms",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920ms/thumbnail-8c3209a9.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1920MS",
@@ -5619,11 +5619,11 @@
       "MS": {
         "bench": "MS1920",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1920ms/1920MS-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920ms/config-ms-8c3209a9.webp"
         ],
         "bench_name": "Single Straight Bench",
         "bench_class": "single",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1920ms/Glass-Front-Sauna-Room-Horizontal-Panel-1920MS.png"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1920ms/config-ms-panel-8dceb19e.png"
       }
     },
     "door_options": [
@@ -5702,7 +5702,7 @@
     "slug": "glass-front-sauna-room-1922mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922mrl/thumbnail-25b77c20.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1922MRL",
@@ -5727,20 +5727,20 @@
       "MIL": {
         "bench": "MIL1922",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1922mrl/1922MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922mrl/config-mil-2542f902.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1922mrl/Glass-Front-Sauna-Room-1922MLL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922mrl/config-mil-panel-16ca9ead.webp"
       },
       "MRL": {
         "bench": "MRL1922",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1922mrl/1922MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922mrl/config-mrl-25b77c20.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1922mrl/Glass-Front-Sauna-Room-1922MRL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1922mrl/config-mrl-panel-43b75204.webp"
       }
     },
     "door_options": [
@@ -5819,7 +5819,7 @@
     "slug": "glass-front-sauna-room-2020",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020/thumbnail-40b1e070.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2020",
@@ -5844,20 +5844,20 @@
       "LS": {
         "bench": "LS2020",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2020/2020LS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020/config-ls-0ced487a.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2020/Glass-Front-Sauna-Room-2020LS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020/config-ls-panel-e4cac0f3.webp"
       },
       "RS": {
         "bench": "RS2020",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2020/2020RS_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020/config-rs-40b1e070.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2020/Glass-Front-Sauna-Room-2020RS.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020/config-rs-panel-92bbf407.webp"
       }
     },
     "door_options": [
@@ -5936,7 +5936,7 @@
     "slug": "glass-front-sauna-room-2020mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020mrl/thumbnail-bd1e6392.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2020MRL",
@@ -5961,20 +5961,20 @@
       "MIL": {
         "bench": "MIL2020",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2020mrl/2020MiL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020mrl/config-mil-5b5b8afc.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2020mrl/Glass-Front-Sauna-Room-2020MLL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020mrl/config-mil-panel-080886c8.webp"
       },
       "MRL": {
         "bench": "MRL2020",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2020mrl/2020MRL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020mrl/config-mrl-bd1e6392.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2020mrl/Glass-Front-Sauna-Room-2020MRL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2020mrl/config-mrl-panel-4fe213d1.webp"
       }
     },
     "door_options": [
@@ -6053,7 +6053,7 @@
     "slug": "glass-front-sauna-room-2222l",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222l/thumbnail-73b682ff.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "2222L",
@@ -6078,20 +6078,20 @@
       "LL": {
         "bench": "LL2222",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2222l/2222LL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222l/config-ll-a58adf93.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2222l/Glass-Front-Sauna-Room-2222LL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222l/config-ll-panel-931d8e63.webp"
       },
       "RL": {
         "bench": "RL2222",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-2222l/2222RL_GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222l/config-rl-73b682ff.webp"
         ],
         "bench_name": "L-Type Bench",
         "bench_class": "l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-2222l/Glass-Front-Sauna-Room-2222RL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-2222l/config-rl-panel-2f92d1bc.webp"
       }
     },
     "door_options": [
@@ -6170,7 +6170,7 @@
     "slug": "infrared-sauna-room-1111-ir-d",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/infrared-sauna-room-1111-ir-d/thumbnail-214c5ba6.webp",
     "sku": null,
     "room_type": "infrared",
     "model_code": "1111-IR-D",
@@ -6193,11 +6193,11 @@
       "1111-IR-D": {
         "bench": "1111-IR-D",
         "images": [
-          "saunaroom-images/infrared-sauna-room-1111-ir-d/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/infrared-sauna-room-1111-ir-d/config-1111-ir-d-214c5ba6.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
-        "panel_image": "saunaroom-images/infrared-sauna-room-1111-ir-d/1111RS-_TOP-VIEW-with-DIMENSION.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/infrared-sauna-room-1111-ir-d/config-1111-ir-d-panel-ce01d6d8.webp"
       }
     },
     "door_options": [],
@@ -6234,7 +6234,7 @@
     "slug": "glass-front-sauna-room-1919mrl",
     "short_description": null,
     "description": null,
-    "thumbnail": "sauna-room-images/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp",
+    "thumbnail": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919mrl/thumbnail-d98e6aa7.webp",
     "sku": null,
     "room_type": "glassfront",
     "model_code": "1919MRL",
@@ -6259,20 +6259,20 @@
       "MIL": {
         "bench": "MIL1919",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1919mrl/1919MiL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919mrl/config-mil-40c54d74.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1919mrl/Glass-Front-Sauna-Room-1919MLL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919mrl/config-mil-panel-5ae8476e.webp"
       },
       "MRL": {
         "bench": "MRL1919",
         "images": [
-          "saunaroom-images/glass-front-sauna-room-1919mrl/1919MrL-GLASS-FRONT-PERSPECTIVE-VIEW.webp"
+          "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919mrl/config-mrl-d98e6aa7.webp"
         ],
         "bench_name": "Middle L-Type Bench",
         "bench_class": "middle-l-type",
-        "panel_image": "saunaroom-images/glass-front-sauna-room-1919mrl/Glass-Front-Sauna-Room-1919MRL.webp"
+        "panel_image": "https://saworepo1.pages.dev/media/sauna-rooms/glass-front-sauna-room-1919mrl/config-mrl-panel-4792a25d.webp"
       }
     },
     "door_options": [
