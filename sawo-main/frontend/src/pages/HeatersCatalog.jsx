@@ -164,9 +164,7 @@ function CategorySection({ group, productsByGroup }) {
     );
   }
 
-  const sorted = products
-    .slice()
-    .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+  const sorted = sortProducts(products);
 
   return (
     <div id={group.id} className="category-section">
@@ -188,7 +186,7 @@ export default function HeatersCatalog({ showHero = true } = {}) {
 
   const heaters = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => isHeaterProduct(p) && isPubliclyVisible(p));
+    return localProds.filter(p => isHeaterProduct(p) && !isSaunaStonesAccessory(p) && isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByGroup = useMemo(() => {
