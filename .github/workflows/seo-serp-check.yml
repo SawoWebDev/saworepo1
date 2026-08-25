@@ -1,9 +1,13 @@
 name: SEO - SERP Check
 
+# HALTED pending domain transfer (2026-08-24): kept failing pre-launch.
+# Re-enable the schedule block below once the domain has cut over.
+# workflow_dispatch is left on so this can still be run manually if needed
+# in the meantime.
 on:
-  schedule:
-    # Weekly, Tuesday 07:00 UTC.
-    - cron: "0 7 * * 2"
+  # schedule:
+  #   # Weekly, Tuesday 07:00 UTC.
+  #   - cron: "0 7 * * 2"
   workflow_dispatch: {}
 
 jobs:

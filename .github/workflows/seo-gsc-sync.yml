@@ -1,10 +1,15 @@
 name: SEO - GSC Sync
 
+# HALTED pending domain transfer (2026-08-24): sawo.com's GSC property
+# doesn't match the pre-launch Cloudflare Pages site, so every scheduled run
+# was failing. Re-enable the schedule block below once the domain has cut
+# over and GSC_SITE_URL points at the right property. workflow_dispatch is
+# left on so this can still be run manually if needed in the meantime.
 on:
-  schedule:
-    # Daily, 05:00 UTC — after GSC's ~2-3 day data lag settles for the
-    # previous day, well clear of the midnight boundary.
-    - cron: "0 5 * * *"
+  # schedule:
+  #   # Daily, 05:00 UTC — after GSC's ~2-3 day data lag settles for the
+  #   # previous day, well clear of the midnight boundary.
+  #   - cron: "0 5 * * *"
   workflow_dispatch:
     inputs:
       backfill:

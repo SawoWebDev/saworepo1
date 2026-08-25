@@ -829,6 +829,8 @@ function parseBulletPaste(text, existingValues = []) {
 function PillInput({ label, value = [], onChange, placeholder, suggestions = [] }) {
   const [input, setInput]     = useState("");
   const [showSug, setShowSug] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editValue, setEditValue]       = useState("");
   const filtered = suggestions
     .filter(s => typeof s === "string")
     .filter(s => s.toLowerCase().includes(input.toLowerCase()) && !value.includes(s))
@@ -839,6 +841,21 @@ function PillInput({ label, value = [], onChange, placeholder, suggestions = [] 
     if (e.key === "Enter")    { e.preventDefault(); add(input); }
     if (e.key === "Backspace" && !input && value.length) remove(value.length - 1);
     if (e.key === "Escape")   setShowSug(false);
+  };
+
+  const startEdit = (e, i) => { e.stopPropagation(); setEditingIndex(i); setEditValue(value[i]); };
+  const cancelEdit = () => { setEditingIndex(null); setEditValue(""); };
+  const commitEdit = () => {
+    const t = editValue.trim();
+    if (editingIndex === null) return;
+    if (!t) { remove(editingIndex); cancelEdit(); return; }
+    if (value.some((v, idx) => idx !== editingIndex && v === t)) { cancelEdit(); return; }
+    onChange(value.map((v, idx) => (idx === editingIndex ? t : v)));
+    cancelEdit();
+  };
+  const handleEditKey = e => {
+    if (e.key === "Enter")  { e.preventDefault(); commitEdit(); }
+    if (e.key === "Escape") { e.preventDefault(); cancelEdit(); }
   };
   const handlePaste = e => {
     const text = e.clipboardData?.getData("text/plain") || "";
@@ -879,14 +896,28 @@ function PillInput({ label, value = [], onChange, placeholder, suggestions = [] 
         )}
       </div>
       <div className="pill-input-wrap" onClick={e => { e.currentTarget.querySelector("input")?.focus(); setShowSug(true); }}>
-        {value.map((v, i) => (
-          <span key={i} className="pill-item">
-            {v}
-            <button type="button" onClick={e => { e.stopPropagation(); remove(i); }}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          </span>
-        ))}
+        {value.map((v, i) =>
+          editingIndex === i ? (
+            <input
+              key={i}
+              autoFocus
+              value={editValue}
+              onChange={e => setEditValue(e.target.value)}
+              onKeyDown={handleEditKey}
+              onBlur={commitEdit}
+              onClick={e => e.stopPropagation()}
+              className="pill-item-edit"
+              style={{ width: `${Math.max(editValue.length, 2) + 1}ch` }}
+            />
+          ) : (
+            <span key={i} className="pill-item" onDoubleClick={e => startEdit(e, i)} title="Double-click to edit">
+              {v}
+              <button type="button" onClick={e => { e.stopPropagation(); remove(i); }}>
+                <i className="fa-solid fa-xmark" />
+              </button>
+            </span>
+          )
+        )}
         <input
           value={input} onChange={e => { setInput(e.target.value); setShowSug(true); }}
           onKeyDown={handleKey} onFocus={() => setShowSug(true)}
@@ -908,7 +939,7 @@ function PillInput({ label, value = [], onChange, placeholder, suggestions = [] 
           )}
         </div>
       )}
-      <p className="pill-hint">Press Enter to add items, Backspace to remove the last item, or paste formatted lists (» • - *)</p>
+      <p className="pill-hint">Press Enter to add items, Backspace to remove the last item, double-click a pill to edit it, or paste formatted lists (» • - *)</p>
     </div>
   );
 }
