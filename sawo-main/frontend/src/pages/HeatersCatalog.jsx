@@ -11,13 +11,11 @@ import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { isHeaterProduct } from "../utils/isHeaterProduct";
 import SEO from "../components/SEO";
 import { isPubliclyVisible } from "../local-storage/visibility";
-import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/NRM-NB-BL1.webp";
 import bannerImg from "../assets/Sauna/Sauna Heaters/heater-banner.webp";
-import HeroWave from "../components/HeroWave";
+import CategoryHero from "../components/CategoryHero";
 import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton";
 import menuPaths from "../menuPaths";
-import { getPowerRange } from "../utils/productPower";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
 
 function getImageUrl(product, field) {
@@ -39,20 +37,46 @@ const HEATER_GROUPS = [
 ];
 
 function HeaterCard({ product }) {
-  const power = getPowerRange(product.tags);
+  const [hovered, setHovered] = useState(false);
   const image = getImageUrl(product, "thumbnail");
 
   return (
-    <Link to={`/products/${product.slug}`} className="hc-card">
-      <div className="hc-card-img-wrap">
-        {image ? (
-          <img src={image} alt={product.name} className="hc-card-img" loading="lazy" />
-        ) : (
-          <div className="hc-card-img-placeholder"><i className="fa-regular fa-image" /></div>
-        )}
+    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
+          padding: "12px 8px", borderRadius: 10, transition: "transform 0.25s ease",
+          transform: hovered ? "translateY(-4px)" : "translateY(0)", cursor: "pointer",
+        }}
+      >
+        <div style={{
+          width: "100%", height: 200, display: "flex", alignItems: "center",
+          justifyContent: "center", overflow: "hidden", background: "transparent",
+        }}>
+          {image ? (
+            <img
+              src={image}
+              alt={product.name}
+              loading="lazy"
+              style={{
+                maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+                transition: "transform 0.25s ease",
+                transform: hovered ? "scale(1.06)" : "scale(1)",
+              }}
+            />
+          ) : (
+            <i className="fa-regular fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
+          )}
+        </div>
+        <p style={{
+          fontWeight: 600, fontSize: "0.78rem", color: hovered ? "#a67853" : "#af8564",
+          margin: 0, lineHeight: 1.4, textAlign: "center", transition: "color 0.2s ease",
+        }}>
+          {product.name}
+        </p>
       </div>
-      <p className="hc-card-name">{product.name}</p>
-      {power && <p className="hc-card-power">{power}</p>}
     </Link>
   );
 }
@@ -76,7 +100,7 @@ function CategorySection({ group, productsByGroup }) {
           {brandNames.map(brand => (
             <div className="hc-brand-group" key={brand}>
               <h3 className="hc-brand-title">{brand.toUpperCase()}</h3>
-              <div className="hc-grid">
+              <div className="products-grid">
                 {brandGroups[brand].map(product => (
                   <HeaterCard key={product.id || product.slug} product={product} />
                 ))}
@@ -97,7 +121,7 @@ function CategorySection({ group, productsByGroup }) {
       <div className="category-section-title">
         <h2>{group.label}</h2>
       </div>
-      <div className="hc-grid">
+      <div className="products-grid">
         {sorted.map(product => (
           <HeaterCard key={product.id || product.slug} product={product} />
         ))}
@@ -109,7 +133,6 @@ function CategorySection({ group, productsByGroup }) {
 export default function HeatersCatalog({ showHero = true } = {}) {
   const { products: localProds, loading } = useLocalProducts();
   const [activeSection, setActiveSection] = useState(HEATER_GROUPS[0].id);
-  const heroLoaded = useHeroLoaded(heroImg);
 
   const heaters = useMemo(() => {
     if (!localProds.length) return [];
@@ -192,194 +215,145 @@ export default function HeatersCatalog({ showHero = true } = {}) {
           100% { background-position: -200% 0; }
         }
 
-        .hc-grid {
-          /* auto-FILL, not auto-fit: auto-fit collapses the empty tracks
-             and stretches whatever is left, so a series holding one heater
-             rendered a single card across the full content column — and
-             .hc-card-img-wrap is aspect-ratio 1/1, so it came out as a
-             giant square. auto-fill keeps the empty tracks, leaving a lone
-             card at normal size and the rest of the row simply empty. */
-          --hc-card-width: 220px;
-          --hc-gap: 24px;
-          --hc-max-cols: 5;
+        .products-grid {
           display: grid;
-          /* minmax(0, --hc-card-width), never 1fr: a 1fr max lets each track
-             absorb the leftover space, which is how one card came out
-             full-width and how two cards on a 1100px screen came out 328px
-             each. A fixed max pins every card to the same size at every
-             breakpoint; the leftover simply sits to the right. The 0 min
-             lets the card shrink below that on a phone rather than
-             overflow. */
-          grid-template-columns: repeat(auto-fill, minmax(0, var(--hc-card-width)));
-          justify-content: start;
-          gap: var(--hc-gap);
-          /* .heaters-wrapper has no max-width, so on a wide monitor this
-             column would otherwise fit 6-8 tracks. Capping the grid holds
-             it to --hc-max-cols columns at the card width. */
-          /* min(100%, ...) not the calc alone: a bare max-width becomes the
-             grid's max-content contribution, so .heaters-wrapper's 1fr track
-             sized itself to 1196px even inside an 820px wrapper and the last
-             cards were clipped. Wrapping in min() keeps the column cap while
-             still yielding to a narrower container. */
-          max-width: min(
-            100%,
-            calc(
-              var(--hc-card-width) * var(--hc-max-cols)
-              + var(--hc-gap) * (var(--hc-max-cols) - 1)
-            )
-          );
-          /* Grid/flex children default to min-width:auto, which refuses to
-             shrink below min-content — the other half of the same trap. */
-          min-width: 0;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 24px 16px;
         }
-        .hc-card {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          text-decoration: none;
-          color: inherit;
+
+        @media screen and (max-width: 1400px) {
+          .products-grid { grid-template-columns: repeat(4, 1fr); }
         }
-        .hc-card-img-wrap {
-          width: 100%;
-          aspect-ratio: 1/1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          transition: transform 0.3s;
+
+        @media screen and (max-width: 1100px) {
+          .products-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        .hc-card:hover .hc-card-img-wrap { transform: scale(1.04); }
-        .hc-card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-        .hc-card-img-placeholder {
-          color: #d5b99a;
-          font-size: 2.5rem;
-        }
-        .hc-card-name {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 0.9rem;
-          font-weight: 600;
-          color: #2c1a0e;
-          margin: 12px 0 2px;
-        }
-        .hc-card-power {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 0.76rem;
-          color: #a67853;
-          margin: 0;
+
+        @media screen and (max-width: 480px) {
+          .products-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         .heaters-wrapper {
           display: grid;
           grid-template-columns: 240px 1fr;
-          align-items: start;
-          gap: 60px;
+          gap: 70px;
           width: 100%;
-          padding: 60px 60px 40px;
+          padding: 50px 60px 40px;
           min-height: 100vh;
         }
 
         .category-buttons-sidebar {
+          display: flex;
+          flex-direction: column;
+          background: #ffffff;
+          border-radius: 16px;
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+          border: 1px solid #edddd0;
+          height: fit-content;
           position: sticky;
           top: 160px;
-          flex-shrink: 0;
           max-height: calc(100vh - 180px);
-          overflow-y: auto;
-          background: #ffffff;
-          padding: 20px 12px 16px;
-          border-radius: 12px;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-          border: 1px solid rgba(0,0,0,0.07);
-          scrollbar-width: thin;
-          scrollbar-color: #d9c4b0 transparent;
+          overflow: hidden;
         }
 
-        .category-buttons-sidebar::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #d9c4b0 0%, #c8aa88 100%);
-          border-radius: 12px 12px 0 0;
+        .sidebar-header {
+          padding: 18px 20px 14px;
+          border-bottom: 1px solid #f0e8df;
+        }
+
+        .sidebar-header-label {
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #a67853;
+          font-family: 'Montserrat', sans-serif;
+          margin: 0 0 2px;
         }
 
         .sidebar-header-title {
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: #af8564;
           font-family: 'Montserrat', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 18px;
-          color: rgb(175, 133, 100);
-          text-align: center;
-          display: block;
-          width: 100%;
-          margin: 0 0 24px;
-          line-height: 1.3;
+          margin: 0;
         }
 
         .sidebar-scroll {
+          overflow-y: auto;
+          padding: 10px 10px;
           display: flex;
           flex-direction: column;
+          gap: 2px;
         }
+
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: #e4d0bf; border-radius: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: #b5886b; }
 
         .sidebar-btn {
           position: relative;
           display: flex;
           align-items: center;
-          justify-content: flex-start;
+          justify-content: space-between;
           width: 100%;
-          padding: 10px 14px;
-          margin-bottom: 6px;
-          font-size: 12px;
+          padding: 9px 12px 9px 14px;
+          font-size: 0.75rem;
           font-weight: 500;
-          font-family: 'Montserrat', sans-serif;
           text-align: left;
           border-radius: 8px;
           border: none;
-          color: #2c3e50;
-          background-color: #f8f9fa;
+          color: #5a4030;
+          background: transparent;
           cursor: pointer;
-          transition: color 0s, background 0s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          white-space: normal;
-          line-height: 1.3;
-          min-height: 42px;
-          overflow: hidden;
+          transition: background 0.18s ease, color 0.18s ease;
+          font-family: 'Montserrat', sans-serif;
+          line-height: 1.35;
+          gap: 8px;
         }
 
         .sidebar-btn::before {
           content: '';
           position: absolute;
-          left: 0; top: 50%;
-          transform: translateY(-50%);
-          width: 3px; height: 0;
-          background: #b5886b;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%) scaleY(0);
+          width: 3px;
+          height: 60%;
+          background: #a67853;
           border-radius: 0 3px 3px 0;
-          transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.2s ease;
         }
 
-        .sidebar-btn:hover {
-          background: linear-gradient(135deg, #d9c4b0 0%, #c8aa88 100%);
-          color: #ffffff;
-          transform: translateX(2px);
-          box-shadow: 0 4px 12px rgba(181,136,107,0.3);
-        }
-
-        .sidebar-btn:hover::before { height: 60%; background: #fff; }
+        .sidebar-btn:hover { background: #faf4ef; color: #af8564; }
+        .sidebar-btn:hover::before { transform: translateY(-50%) scaleY(0.6); }
 
         .sidebar-btn.active {
-          background: linear-gradient(135deg, #af8564 0%, #9a7558 100%);
+          background: #af8564;
           color: #ffffff;
-          box-shadow: 0 4px 12px rgba(175,133,100,0.4);
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .sidebar-btn.active::before {
-          height: 100%;
-          background: #fff;
-          opacity: 0.4;
+          transform: translateY(-50%) scaleY(1);
+          background: #d9c4b0;
+        }
+
+        .sidebar-btn-count {
+          font-size: 0.65rem;
+          font-weight: 600;
+          color: #c4a882;
+          background: #f5ede3;
+          padding: 2px 7px;
+          border-radius: 10px;
+          flex-shrink: 0;
+          font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar-btn.active .sidebar-btn-count {
+          background: rgba(255,255,255,0.15);
+          color: #f0e0cc;
         }
 
         .main-content {
@@ -393,7 +367,7 @@ export default function HeatersCatalog({ showHero = true } = {}) {
         }
 
         .category-section-title {
-          margin-bottom: 24px;
+          margin-bottom: 40px;
         }
 
         .category-section-title h2 {
@@ -403,6 +377,13 @@ export default function HeatersCatalog({ showHero = true } = {}) {
           margin: 0 0 8px;
           line-height: 1.2;
           font-family: 'Montserrat', sans-serif;
+        }
+
+        .category-section-title .underline {
+          height: 3px;
+          width: 60px;
+          background: linear-gradient(90deg, #d9c4b0 0%, #d1bda6 100%);
+          border-radius: 3px;
         }
 
         .hc-brand-groups {
@@ -472,10 +453,12 @@ export default function HeatersCatalog({ showHero = true } = {}) {
             gap: 24px;
           }
           .category-buttons-sidebar { display: none; }
+          .products-grid { grid-template-columns: repeat(4, 1fr); gap: 20px 14px; }
         }
 
         @media screen and (max-width: 768px) {
           .heaters-wrapper { padding: 40px 24px 40px; }
+          .products-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 12px; }
           .hc-cta { padding: 64px 20px; min-height: 300px; }
           .hc-cta-title { font-size: 1.5rem; }
         }
@@ -483,48 +466,21 @@ export default function HeatersCatalog({ showHero = true } = {}) {
 
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
         {showHero && (
-          <div style={{
-            position: "relative", width: "100%", padding: "140px 60px 60px",
-            textAlign: "center", overflow: "hidden", backgroundColor: "#241c17",
-          }}>
-            <div style={{
-              position: "absolute", inset: 0,
-              backgroundImage: `url(${heroImg})`,
-              backgroundSize: "cover", backgroundPosition: "center",
-              opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease",
-            }} />
-            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
-
-            <div style={{ position: "relative", zIndex: 1 }}>
-              <p style={{
-                fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.14em",
-                textTransform: "uppercase", color: "#e8c8ab", margin: "0 0 12px",
-              }}>
-                Premium Collection
-              </p>
-              <h1 style={{
-                fontSize: "2.4rem", fontWeight: 700, color: "#ffffff",
-                margin: "0 0 16px", lineHeight: 1.2,
-              }}>
-                Sauna Heaters
-              </h1>
-              <p style={{
-                fontSize: "1rem", color: "rgba(255,255,255,0.88)",
-                margin: "0 auto 12px", maxWidth: 700, lineHeight: 1.6, textAlign: "center",
-              }}>
-                Discover our complete range of premium sauna heaters designed for every sauna size
+          <CategoryHero
+            heroImg={heroImg}
+            title="Sauna Heaters"
+            description="Discover our complete range of premium sauna heaters designed for every sauna size
                 and style. Browse through our carefully curated Tower, Wall-Mounted, Stone, Floor,
-                Combi, and Dragonfire series.
-              </p>
-            </div>
-
-            <HeroWave />
-          </div>
+                Combi, and Dragonfire series."
+          />
         )}
 
         <div className="heaters-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
           <div className="category-buttons-sidebar">
-            <h1 className="sidebar-header-title">Sauna Heaters</h1>
+            <div className="sidebar-header">
+              <p className="sidebar-header-label">Browse by</p>
+              <p className="sidebar-header-title">Series</p>
+            </div>
             <div className="sidebar-scroll">
               {HEATER_GROUPS.map(group => {
                 const count = groupCounts[group.id] || 0;
@@ -535,7 +491,8 @@ export default function HeatersCatalog({ showHero = true } = {}) {
                     className={`sidebar-btn ${activeSection === group.id ? "active" : ""}`}
                     onClick={() => handleSidebarClick(group.id)}
                   >
-                    {group.label}
+                    <span>{group.label}</span>
+                    <span className="sidebar-btn-count">{count}</span>
                   </button>
                 );
               })}
