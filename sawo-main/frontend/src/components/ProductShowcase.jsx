@@ -213,7 +213,6 @@ const ProductShowcase = ({
         .sg-image-wrap {
           border-radius: 16px;
           overflow: hidden;
-          background: #faf7f4;
         }
         .sg-image {
           width: 100%;
