@@ -1,10 +1,14 @@
 name: SEO - Competitor Crawl
 
+# HALTED pending domain transfer (2026-08-24): kept failing pre-launch.
+# Re-enable the schedule block below once the domain has cut over.
+# workflow_dispatch is left on so this can still be run manually if needed
+# in the meantime.
 on:
-  schedule:
-    # Monthly, 1st at 06:00 UTC — this data doesn't need to be fresh (spec's
-    # own default cadence for content-theme crawling).
-    - cron: "0 6 1 * *"
+  # schedule:
+  #   # Monthly, 1st at 06:00 UTC — this data doesn't need to be fresh (spec's
+  #   # own default cadence for content-theme crawling).
+  #   - cron: "0 6 1 * *"
   workflow_dispatch: {}
 
 jobs:
