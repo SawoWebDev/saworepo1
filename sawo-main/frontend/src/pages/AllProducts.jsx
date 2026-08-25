@@ -8,6 +8,7 @@ import SEO from "../components/SEO";
 import CategoryHero from "../components/CategoryHero";
 import heroImg from "../assets/NRM-NB-BL1.webp";
 import { isPubliclyVisible } from "../local-storage/visibility";
+import { variantRank } from "../utils/wallMountedGroups";
 
 const HEATER_SECTIONS = [
   { label: "Wall-Mounted", id: "heater-wall-mounted", category: "wall-mounted" },
