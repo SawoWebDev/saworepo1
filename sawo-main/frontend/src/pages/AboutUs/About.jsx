@@ -14,6 +14,7 @@ import LN4 from '../../assets/About/Latest News/LN4.webp';
 import newsBg from '../../assets/Contacts-bg.webp';
 import HeroWave from '../../components/HeroWave';
 import SEO from '../../components/SEO';
+import BrochureDropdownButton from '../../components/Buttons/BrochureDropdownButton';
 
 const AboutUs = () => {
   const certRef = useRef(null);
@@ -175,12 +176,14 @@ const AboutUs = () => {
         }
         .cert-link {
           display: block;
+          width: 100%;
+          max-width: 240px;
           text-decoration: none;
           color: inherit;
         }
         .certification-item {
           width: 100%;
-          max-width: 240px;
+          height: 230px;
           padding: 12px 16px;
           text-align: center;
           position: relative;
@@ -189,6 +192,10 @@ const AboutUs = () => {
           border: 1px solid rgba(255,255,255,0.12);
           overflow: hidden;
           transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
         .certification-item:hover {
           transform: scale(1.03);
@@ -424,24 +431,6 @@ const AboutUs = () => {
           flex: 1;
           margin-bottom: 18px;
         }
-        .news-card-link {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: #AF8564;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          transition: all 0.3s ease;
-        }
-        .news-card-link:hover {
-          color: #8b5e3c;
-          gap: 12px;
-        }
-
         /* ── RESPONSIVE ── */
         @media (max-width: 1024px) {
           .about-hero-content {
@@ -655,9 +644,6 @@ const AboutUs = () => {
                 <p className="news-card-desc">
                   This autumn, we took part in Europe's top wellness exhibitions: Aquanale in Cologne and Piscina Barcelona. A pleasure connecting with industry leaders and showcasing Finnish tradition and wellness.
                 </p>
-                <Link to={menuPaths.about.news} className="news-card-link">
-                  Read more <span>→</span>
-                </Link>
               </div>
             </div>
 
@@ -674,9 +660,6 @@ const AboutUs = () => {
                 <p className="news-card-desc">
                   When a 6.9 magnitude earthquake struck off the Northeast coast of Cebu, our team organized a company-wide relief effort, delivering mattresses, food, hygiene products, and essentials to affected families.
                 </p>
-                <Link to={menuPaths.about.news} className="news-card-link">
-                  Read more <span>→</span>
-                </Link>
               </div>
             </div>
 
@@ -693,11 +676,16 @@ const AboutUs = () => {
                 <p className="news-card-desc">
                   Time for a change? We are looking for individuals with experience and/or interest in the sauna and wellness industry and eagerness to grow with us in Cebu.
                 </p>
-                <a href="/careers" className="news-card-link">
-                  Read more <span>→</span>
-                </a>
               </div>
             </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "48px" }}>
+            <BrochureDropdownButton
+              text="SEE MORE"
+              href={menuPaths.about.news}
+              redirect
+            />
           </div>
         </div>
       </section>
