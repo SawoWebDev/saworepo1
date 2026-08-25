@@ -1376,6 +1376,18 @@ body {
   align-items: center;
 }
 .pill-item button:hover { color:var(--danger); }
+.pill-item-edit {
+  background: var(--brand-muted);
+  color: var(--brand-dark);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid var(--brand);
+  outline: none;
+  font-family: var(--font);
+  min-width: 2ch;
+}
 .pill-input-field {
   border: none;
   outline: none;
