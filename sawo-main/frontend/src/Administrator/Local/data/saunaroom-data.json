@@ -6344,5 +6344,140 @@
     "updated_by_username": null,
     "created_at": "2026-04-29T01:33:53.784107+00:00",
     "updated_at": "2026-04-29T01:33:53.784107+00:00"
+  },
+  {
+    "id": "468155a5-cafa-445d-9609-b5b6b31d7a9e",
+    "name": "Compact Sauna Room 1310MS",
+    "slug": "compact-sauna-room-1310ms",
+    "short_description": "SAWO Compact Sauna Room 1310MS - a plug-and-play, single-person cedar sauna built for smaller spaces.",
+    "description": "The Compact Sauna Room's plug-and-play design offers instant, stable setup, saving on installation cost and downtime. Space-saving and crafted from premium cedar, it's the perfect solution for smaller spaces without compromising the authentic sauna experience.",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Actual-View-.webp",
+    "sku": null,
+    "room_type": "compact",
+    "model_code": "1310MS",
+    "size_category": "compact",
+    "width_m": 0.95,
+    "depth_m": 1.27,
+    "height_m": 2.12,
+    "capacity_label": "1 Person",
+    "capacity_min": 1,
+    "capacity_max": 1,
+    "wood_options": [
+      "Cedar"
+    ],
+    "wood_options_enabled": [
+      true
+    ],
+    "configurations": {
+      "1310MS": {
+        "bench": "1310MS",
+        "images": [
+          "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Actual-View-.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Bench-Design-.webp"
+      }
+    },
+    "door_options": [],
+    "side_order": [],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": [
+      "Plug-and-play, ready to use instantly",
+      "Space-saving compact design for 1 person",
+      "Saves set-up cost and minimises downtime",
+      "Premium cedar wood construction"
+    ],
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": false,
+    "sort_order": 0,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-08-25T07:01:32.034355+00:00",
+    "updated_at": "2026-08-25T07:01:32.034355+00:00"
+  },
+  {
+    "id": "91165fe1-e9f0-479b-99ab-32a38c57cff8",
+    "name": "Compact Sauna Room 1313MS",
+    "slug": "compact-sauna-room-1313ms",
+    "short_description": "SAWO Compact Sauna Room 1313MS - a plug-and-play, two-person cedar sauna built for smaller spaces.",
+    "description": "The Compact Sauna Room's plug-and-play design offers instant, stable setup, saving on installation cost and downtime. Space-saving and crafted from premium cedar, it's the perfect solution for smaller spaces without compromising the authentic sauna experience.",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Actual-View.webp",
+    "sku": null,
+    "room_type": "compact",
+    "model_code": "1313MS",
+    "size_category": "compact",
+    "width_m": 1.27,
+    "depth_m": 1.27,
+    "height_m": 2.12,
+    "capacity_label": "2 Person",
+    "capacity_min": 2,
+    "capacity_max": 2,
+    "wood_options": [
+      "Cedar"
+    ],
+    "wood_options_enabled": [
+      true
+    ],
+    "configurations": {
+      "1313MS": {
+        "bench": "1313MS",
+        "images": [
+          "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Actual-View.webp",
+          "https://www.sawo.com/wp-content/uploads/2026/07/1313MS_Compact-Sauna-Room.webp"
+        ],
+        "bench_name": "Straight Bench",
+        "bench_class": "straight",
+        "panel_image": "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Bench-Design-v2.png"
+      }
+    },
+    "door_options": [],
+    "side_order": [],
+    "ir_panel_wattage_w": null,
+    "ir_total_power_w": null,
+    "ir_voltage_v": 230,
+    "ir_session_time_min": null,
+    "features": [
+      "Plug-and-play, ready to use instantly",
+      "Space-saving compact design for 2 people",
+      "Saves set-up cost and minimises downtime",
+      "Premium cedar wood construction"
+    ],
+    "feature_tabs": [],
+    "spec_table": null,
+    "images": null,
+    "spec_images": null,
+    "resources": [],
+    "files": [],
+    "tags": null,
+    "categories": null,
+    "status": "published",
+    "visible": true,
+    "featured": false,
+    "is_best_seller": false,
+    "has_door_filter": false,
+    "sort_order": 0,
+    "is_deleted": false,
+    "created_by": null,
+    "created_by_username": null,
+    "updated_by_username": null,
+    "created_at": "2026-08-25T07:01:32.034355+00:00",
+    "updated_at": "2026-08-25T07:01:32.034355+00:00"
   }
 ]

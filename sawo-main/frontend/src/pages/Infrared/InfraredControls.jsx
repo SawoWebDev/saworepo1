@@ -5,7 +5,7 @@ import { isPubliclyVisible } from "../../local-storage/visibility";
 import heroImg from "../../assets/Infrared/IR-CONTROL-New.webp";
 
 // Slug-selected for the same reason as InfraredPanels — see the note there.
-const CONTROL_SLUGS = [
+export const CONTROL_SLUGS = [
   "infrared-2-0-user-interface",
   "infrared-2-0-power-controller",
   "infrared-2-0-built-in-control",

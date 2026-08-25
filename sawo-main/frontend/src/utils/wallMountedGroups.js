@@ -32,7 +32,8 @@ export const WALL_MOUNTED_GROUP_KEYWORDS = {
 };
 
 /** Within a brand group, order by control class (Ni2 → NS → NB), then the
- *  plain/standard variant before its Black or Fiber-Coated counterpart. */
+ *  plain/standard variant before its Black or Fiber-Coated counterpart, then
+ *  (for material-variant pairs like collars) Wooden before Stainless Steel. */
 export function variantRank(name = "") {
   const n = name.toLowerCase();
   let classRank;
@@ -41,7 +42,8 @@ export function variantRank(name = "") {
   else if (/\bnb\b/.test(n)) classRank = 2;
   else classRank = 3;
   const isAlt = /black|fibercoated|fiber coated/.test(n);
-  return classRank * 2 + (isAlt ? 1 : 0);
+  const isStainless = /stainless/.test(n);
+  return classRank * 4 + (isAlt ? 2 : 0) + (isStainless ? 1 : 0);
 }
 
 /** Group wall-mounted products by brand/type keywords, each group sorted by variantRank. */

@@ -67,11 +67,13 @@ function formsEqual(a, b) {
 // Matches the actual room_type values in the data (verified against
 // saunaroom-data.json) — "traditional/steam/combo" never existed here and
 // meant Standard/Glassfront rooms couldn't be filtered or correctly
-// labeled in the admin.
+// labeled in the admin. "compact" added 2026-08-25 alongside the first
+// Compact Sauna Room records (1310MS/1313MS).
 const ROOM_TYPES = [
   { value: "standard",   label: "Standard" },
   { value: "glassfront", label: "Glassfront" },
   { value: "infrared",   label: "Infrared" },
+  { value: "compact",    label: "Compact" },
 ];
 
 const SIZE_CATEGORIES = [
@@ -1428,7 +1430,7 @@ function RoomCard({ room, onEdit, onDelete, onDuplicate, onPreview, perms }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}
     >
-      {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
+      {isUnpublished && <span className="product-grid-unpublished-badge">Inactive</span>}
       <div className="product-grid-thumb">
         {getRoomImageUrl(room, "thumbnail")
           ? <img src={getRoomImageUrl(room, "thumbnail")} alt={room.name} />
