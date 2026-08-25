@@ -24,6 +24,102 @@ const ROOM_SECTIONS = [
   { label: "Infrared",    id: "room-infrared",    match: p => p.room_type === "infrared"    || (p.categories || []).some(c => c.toLowerCase() === "infrared") },
 ];
 
+// Matches the category set UserManuals.jsx's CATEGORY_TABS exposes, so the
+// full catalogue (not just heaters/rooms/general accessories) is reachable
+// from /products.
+const TAB_DEFS = [
+  { id: "heaters", label: "Sauna Heaters" },
+  { id: "rooms", label: "Sauna Rooms" },
+  { id: "sauna-controls", label: "Sauna Controls" },
+  { id: "steam-generators", label: "Steam Generators" },
+  { id: "steam-controls", label: "Steam Generator Controls" },
+  { id: "heater-accessories", label: "Heater Accessories" },
+  { id: "accessories", label: "Accessories" },
+];
+
+// Sub-grouping for the "Sauna Controls" tab — same keyword groups as
+// SaunaControls.jsx ("/sauna/controls"), so a flat pile of 20+ controls,
+// sensors, and spare parts reads the same way here as it does there.
+// Order matters: narrow/specific groups must come before the broad brand
+// ones (see SaunaControls.jsx for why).
+const SAUNA_CONTROLS_ORDER = ["Coming Soon", "Saunova Series", "Innova Series", "Control Spare Parts", "Interface Holder", "Sensor"];
+const SAUNA_CONTROLS_KEYWORDS = {
+  "Coming Soon":         ["SAWO Sense", "Saunova 2.0 PLUS", "Coming Soon"],
+  "Control Spare Parts": ["Spare", "RJ12", "Extension Module", "Silicon Wire"],
+  "Interface Holder":    ["Interface Holder", "Holder"],
+  "Sensor":              ["Sensor", "Temperature", "Humidity"],
+  "Saunova Series":      ["Saunova", "SAU-"],
+  "Innova Series":       ["Innova", "INC-", "INP-", "INT-"],
+};
+const SAUNA_CONTROLS_NAME_ONLY = new Set(["Saunova Series", "Innova Series"]);
+
+function groupByKeywords(products, order, keywordMap, nameOnlyGroups = new Set()) {
+  const groups = {};
+  products.forEach(product => {
+    let assigned = false;
+    for (const group of order) {
+      const keywords = keywordMap[group] || [];
+      for (const kw of keywords) {
+        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
+        const tagMatch = !nameOnlyGroups.has(group) &&
+          product.tags?.some(t => t.toLowerCase().includes(kw.toLowerCase()));
+        if (nameMatch || tagMatch) {
+          (groups[group] ||= []).push(product);
+          assigned = true;
+          break;
+        }
+      }
+      if (assigned) break;
+    }
+    if (!assigned) (groups["Other"] ||= []).push(product);
+  });
+  const keys = order.filter(g => groups[g]?.length);
+  if (groups["Other"]?.length) keys.push("Other");
+  return keys.map(label => ({ label, products: groups[label] }));
+}
+
+// Sub-grouping for the "Heater Accessories" tab — same category order and
+// friendly labels as UserManuals.jsx's "Heater Accessories" tab, plus
+// "Sauna Stones" (see ProductCatalogue.jsx's "heater-acc" tab, and
+// isSaunaStonesAccessory above).
+const HEATER_ACCESSORIES_ORDER = ["Heater Guard", "Integration Collar", "Humidifiers", "Sauna Accessories", "Sauna Stones"];
+const HEATER_ACCESSORIES_LABELS = {
+  "Heater Guard": "Heater Guards",
+  "Integration Collar": "Collars",
+  "Humidifiers": "Cozy Tanks",
+  "Sauna Accessories": "Safety Accessories",
+  "Sauna Stones": "Sauna Stones",
+};
+
+function groupByCategory(products, order, labelMap) {
+  const groups = {};
+  products.forEach(product => {
+    // Sauna Stones products are tagged with the same "Stones" category the
+    // Stone-series heaters use (a CMS tagging collision, see
+    // isSaunaStonesAccessory), so their real category can't be trusted here
+    // — bucket by name instead of by category for this one case.
+    const cat = isSaunaStonesAccessory(product)
+      ? "Sauna Stones"
+      : (product.categories || []).find(c => order.includes(c)) || (product.categories || [])[0] || "Other";
+    (groups[cat] ||= []).push(product);
+  });
+  const keys = order.filter(c => groups[c]?.length);
+  Object.keys(groups).forEach(c => { if (!keys.includes(c)) keys.push(c); });
+  return keys.map(cat => ({ label: labelMap[cat] || cat, products: groups[cat] }));
+}
+
+// Consistent ordering within a group: featured first, then CMS sort_order,
+// then name — same as HeatersCatalog.jsx's CategorySection.
+function sortProducts(products) {
+  return products.slice().sort((a, b) => {
+    const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+    if (featuredDiff !== 0) return featuredDiff;
+    const sortA = a.sort_order ?? 999, sortB = b.sort_order ?? 999;
+    if (sortA !== sortB) return sortA - sortB;
+    return (a.name || "").localeCompare(b.name || "");
+  });
+}
+
 const CATEGORY_SECTIONS = [
   { label: "Pails",                             id: "section-pails",             category: "pails" },
   { label: "Ladles",                            id: "section-ladles",            category: "ladles" },
@@ -39,6 +135,15 @@ const CATEGORY_SECTIONS = [
   { label: "Kivistone",                         id: "section-kivistone",         category: "kivistone" },
   { label: "Ventilations & Miscellaneous Items",id: "section-vent-misc",         category: "ventilation & miscellaneous" },
 ];
+
+// The literal "Sauna Stones" (heater rocks) accessory has ended up tagged
+// with the same "Stones" category the Stone-series heaters (Cumulus/Nimbus)
+// use, which is a CMS tagging collision, not a matching-logic bug — same
+// category string, two different real-world things. Name-matched so it
+// gets pulled out regardless of which category it's tagged with.
+function isSaunaStonesAccessory(product) {
+  return (product?.name || "").toLowerCase().includes("sauna stones");
+}
 
 function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
@@ -183,15 +288,15 @@ export default function AllProducts() {
 
   const saunaHeaters = useMemo(() => {
     if (!localProds.length) return [];
-    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && isPubliclyVisible(p));
+    return localProds.filter(p => !isAccessoryProduct(p) && p.type !== "room" && !isSaunaStonesAccessory(p) && isPubliclyVisible(p));
   }, [localProds]);
 
   const productsByHeaterSection = useMemo(() => {
     const grouped = {};
     HEATER_SECTIONS.forEach(section => {
-      grouped[section.id] = saunaHeaters.filter(p =>
+      grouped[section.id] = sortProducts(saunaHeaters.filter(p =>
         p.categories?.some(c => c.toLowerCase().includes(section.category))
-      );
+      ));
     });
     return grouped;
   }, [saunaHeaters]);
@@ -204,7 +309,7 @@ export default function AllProducts() {
   const productsByRoomSection = useMemo(() => {
     const grouped = {};
     ROOM_SECTIONS.forEach(section => {
-      grouped[section.id] = saunaRooms.filter(section.match);
+      grouped[section.id] = sortProducts(saunaRooms.filter(section.match));
     });
     return grouped;
   }, [saunaRooms]);
@@ -217,12 +322,62 @@ export default function AllProducts() {
   const productsByAccessoryCategory = useMemo(() => {
     const grouped = {};
     CATEGORY_SECTIONS.forEach(section => {
-      grouped[section.id] = accessories.filter(p =>
+      grouped[section.id] = sortProducts(accessories.filter(p =>
         p.categories?.some(c => c.toLowerCase() === section.category)
-      );
+      ));
     });
     return grouped;
   }, [accessories]);
+
+  // These four don't match ACCESSORY_CATEGORIES (isAccessoryProduct) and
+  // aren't rooms or a heater series either, so without their own tabs they
+  // fell into the "heaters" pool and never actually rendered anywhere —
+  // matches UserManuals.jsx's CATEGORY_TABS category strings.
+  const saunaControlsProducts = useMemo(() => {
+    if (!localProds.length) return [];
+    return localProds.filter(p => isPubliclyVisible(p) && p.categories?.includes("Sauna Controls"));
+  }, [localProds]);
+
+  const steamGeneratorsProducts = useMemo(() => {
+    if (!localProds.length) return [];
+    return localProds.filter(p => isPubliclyVisible(p) && p.categories?.includes("Steam Generators"));
+  }, [localProds]);
+
+  const steamControlsProducts = useMemo(() => {
+    if (!localProds.length) return [];
+    return localProds.filter(p => isPubliclyVisible(p) && p.categories?.includes("Steam Controls"));
+  }, [localProds]);
+
+  const heaterAccessoriesProducts = useMemo(() => {
+    if (!localProds.length) return [];
+    return localProds.filter(p => {
+      if (!isPubliclyVisible(p)) return false;
+      if (isSaunaStonesAccessory(p)) return true;
+      const cats = p.categories || [];
+      return cats.includes("Heater Accessories") ||
+        HEATER_ACCESSORIES_ORDER.some(c => cats.includes(c));
+    });
+  }, [localProds]);
+
+  // Sauna Controls and Heater Accessories are diverse enough (controls,
+  // sensors, spare parts / guards, collars, tanks) to need the same
+  // sub-grouping their own dedicated pages already use, instead of one
+  // flat pile. Steam Generators/Controls stay a flat, consistently-sorted
+  // grid — neither dedicated page groups them either.
+  const groupedSaunaControls = useMemo(
+    () => groupByKeywords(saunaControlsProducts, SAUNA_CONTROLS_ORDER, SAUNA_CONTROLS_KEYWORDS, SAUNA_CONTROLS_NAME_ONLY)
+      .map(g => ({ ...g, products: sortProducts(g.products) })),
+    [saunaControlsProducts]
+  );
+
+  const groupedHeaterAccessories = useMemo(
+    () => groupByCategory(heaterAccessoriesProducts, HEATER_ACCESSORIES_ORDER, HEATER_ACCESSORIES_LABELS)
+      .map(g => ({ ...g, products: sortProducts(g.products) })),
+    [heaterAccessoriesProducts]
+  );
+
+  const sortedSteamGenerators = useMemo(() => sortProducts(steamGeneratorsProducts), [steamGeneratorsProducts]);
+  const sortedSteamControls = useMemo(() => sortProducts(steamControlsProducts), [steamControlsProducts]);
 
   // Scroll spy for rooms sidebar
   useEffect(() => {
@@ -342,40 +497,49 @@ export default function AllProducts() {
           100% { background-position: 200% 0; }
         }
 
-        .tabs-container {
-          display: flex;
-          justify-content: center;
-          gap: 16px;
-          padding: 24px 40px;
-          border-bottom: 1px solid #edddd0;
+        .products-tabs-wrap {
+          padding: 32px 40px 8px;
           background: #fff;
+          border-bottom: 1px solid #edddd0;
           position: sticky;
           top: 0;
           z-index: 10;
         }
 
-        .tab-btn {
-          padding: 10px 24px;
-          border: 2px solid #d9c4b0;
-          background: #fff;
-          color: #5a4030;
-          font-weight: 600;
-          font-size: 0.95rem;
-          border-radius: 25px;
-          cursor: pointer;
-          transition: all 0.3s ease;
+        .products-tabs {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .products-tab-btn {
           font-family: 'Montserrat', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          padding: 12px 22px;
+          border-radius: 8px;
+          border: 1.5px solid #af8564;
+          background: transparent;
+          color: #af8564;
+          cursor: pointer;
+          transition: all 0.2s ease;
         }
 
-        .tab-btn:hover {
-          border-color: #a67853;
-          color: #a67853;
+        .products-tab-btn:hover {
+          background: rgba(175,133,100,0.08);
         }
 
-        .tab-btn.active {
-          background: #a67853;
-          border-color: #a67853;
-          color: white;
+        .products-tab-btn.active {
+          background: #af8564;
+          color: #fff;
+        }
+
+        @media screen and (max-width: 768px) {
+          .products-tabs-wrap { padding: 24px 24px 8px; }
         }
 
         .products-wrapper {
@@ -385,6 +549,14 @@ export default function AllProducts() {
           width: 100%;
           padding: 50px 60px 40px;
           min-height: 100vh;
+        }
+
+        .products-flat-wrapper {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 50px 60px 40px;
+          min-height: 60vh;
         }
 
         .category-buttons-sidebar {
@@ -552,10 +724,12 @@ export default function AllProducts() {
           }
           .category-buttons-sidebar { display: none; }
           .products-grid { grid-template-columns: repeat(4, 1fr); gap: 20px 14px; }
+          .products-flat-wrapper { padding: 50px 40px 40px; }
         }
 
         @media screen and (max-width: 768px) {
           .products-wrapper { padding: 40px 24px 40px; }
+          .products-flat-wrapper { padding: 40px 24px 40px; }
           .products-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 12px; }
         }
 
@@ -569,65 +743,23 @@ export default function AllProducts() {
           heroImg={heroImg}
           eyebrow="Complete Collection"
           title="All Products"
-          description="Browse SAWO's complete product range: sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
-        >
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: 14,
-            maxWidth: 700,
-            margin: "24px auto 0",
-          }}>
-            {[
-              { id: "heaters", label: "Sauna Heaters", desc: "Premium heating solutions" },
-              { id: "rooms", label: "Sauna Rooms", desc: "Complete sauna packages" },
-              { id: "accessories", label: "Accessories", desc: "Premium finishing touches" }
-            ].map(tab => (
+          description="Browse SAWO's complete product range: sauna heaters, controls, steam generators, rooms, and accessories, all in one searchable catalogue."
+        />
+
+        {/* ── Category tabs (below hero, matches /support/manuals) ── */}
+        <div className="products-tabs-wrap">
+          <div className="products-tabs">
+            {TAB_DEFS.map(tab => (
               <button
                 key={tab.id}
+                className={`products-tab-btn ${activeTab === tab.id ? "active" : ""}`}
                 onClick={() => setActiveTab(tab.id)}
-                style={{
-                  padding: "14px 16px",
-                  border: "2px solid #ffffff",
-                  background: activeTab === tab.id ? "rgb(159 112 84)" : "rgba(255,255,255,0.08)",
-                  borderRadius: 12,
-                  cursor: "pointer",
-                  textAlign: "center",
-                  fontFamily: "inherit",
-                  transition: "all 0.25s ease",
-                  position: "relative",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgb(159 112 84)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = activeTab === tab.id ? "rgb(159 112 84)" : "rgba(255,255,255,0.08)";
-                }}
               >
-                <h3 style={{
-                  fontSize: "0.9rem",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  margin: "0 0 3px 0",
-                  letterSpacing: "0.01em",
-                  transition: "color 0.25s ease",
-                }}>
-                  {tab.label}
-                </h3>
-                <p style={{
-                  fontSize: "0.7rem",
-                  color: "rgba(255,255,255,0.85)",
-                  margin: 0,
-                  fontWeight: 500,
-                  lineHeight: 1.3,
-                  transition: "color 0.25s ease",
-                }}>
-                  {tab.desc}
-                </p>
+                {tab.label}
               </button>
             ))}
           </div>
-        </CategoryHero>
+        </div>
 
         {/* ── HEATERS ── */}
         {activeTab === "heaters" && (
@@ -726,6 +858,80 @@ export default function AllProducts() {
                 <p style={{ color: "#a67853", fontSize: "1rem" }}>No sauna rooms available</p>
               )}
             </div>
+          </div>
+        )}
+
+        {/* ── SAUNA CONTROLS ── */}
+        {activeTab === "sauna-controls" && (
+          <div className="products-flat-wrapper">
+            {groupedSaunaControls.length === 0 ? (
+              <p style={{ color: "#a67853", fontSize: "1rem", textAlign: "center" }}>No sauna controls available</p>
+            ) : (
+              <div className="main-content">
+                {groupedSaunaControls.map(group => (
+                  <div key={group.label} className="category-section">
+                    <div className="category-section-title"><h2>{group.label}</h2></div>
+                    <div className="products-grid">
+                      {group.products.map(product => (
+                        <ProductCard key={product.id || product.slug} product={product} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── STEAM GENERATORS ── */}
+        {activeTab === "steam-generators" && (
+          <div className="products-flat-wrapper">
+            {sortedSteamGenerators.length === 0 ? (
+              <p style={{ color: "#a67853", fontSize: "1rem", textAlign: "center" }}>No steam generators available</p>
+            ) : (
+              <div className="products-grid">
+                {sortedSteamGenerators.map(product => (
+                  <ProductCard key={product.id || product.slug} product={product} />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── STEAM GENERATOR CONTROLS ── */}
+        {activeTab === "steam-controls" && (
+          <div className="products-flat-wrapper">
+            {sortedSteamControls.length === 0 ? (
+              <p style={{ color: "#a67853", fontSize: "1rem", textAlign: "center" }}>No steam generator controls available</p>
+            ) : (
+              <div className="products-grid">
+                {sortedSteamControls.map(product => (
+                  <ProductCard key={product.id || product.slug} product={product} />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── HEATER ACCESSORIES ── */}
+        {activeTab === "heater-accessories" && (
+          <div className="products-flat-wrapper">
+            {groupedHeaterAccessories.length === 0 ? (
+              <p style={{ color: "#a67853", fontSize: "1rem", textAlign: "center" }}>No heater accessories available</p>
+            ) : (
+              <div className="main-content">
+                {groupedHeaterAccessories.map(group => (
+                  <div key={group.label} className="category-section">
+                    <div className="category-section-title"><h2>{group.label}</h2></div>
+                    <div className="products-grid">
+                      {group.products.map(product => (
+                        <ProductCard key={product.id || product.slug} product={product} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
