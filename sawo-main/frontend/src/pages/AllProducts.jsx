@@ -109,16 +109,52 @@ function groupByCategory(products, order, labelMap) {
   return keys.map(cat => ({ label: labelMap[cat] || cat, products: groups[cat] }));
 }
 
-// Consistent ordering within a group: featured first, then CMS sort_order,
-// then name — same as HeatersCatalog.jsx's CategorySection.
+// Strips control-class (Ni2/NS/NB) and finish (Black/Fiber-Coated) tokens
+// from a product name, so "Nordex Floor NS" and "Nordex Floor Black NS"
+// both reduce to "nordex floor" — the same base model, different variant.
+function baseProductKey(name = "") {
+  return name
+    .replace(/\b(ni2|ns|nb)\b/gi, "")
+    .replace(/black|fiber[\s-]?coated/gi, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+// Orders a product list so variants of the same base model always land
+// next to each other (e.g. "Nordex Floor NS" beside "Nordex Floor Black
+// NS"), instead of scattering if their individual featured/sort_order
+// happen to differ — that noise is only used to order the base-model
+// GROUPS, not to split a group apart. Within a group, variantRank (from
+// wallMountedGroups.js — plain before Black/Fiber-Coated, Ni2 → NS → NB)
+// decides the order.
 function sortProducts(products) {
-  return products.slice().sort((a, b) => {
-    const featuredDiff = (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
-    if (featuredDiff !== 0) return featuredDiff;
-    const sortA = a.sort_order ?? 999, sortB = b.sort_order ?? 999;
-    if (sortA !== sortB) return sortA - sortB;
-    return (a.name || "").localeCompare(b.name || "");
+  const groups = new Map();
+  products.forEach(p => {
+    const key = baseProductKey(p.name);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(p);
   });
+
+  const groupList = [...groups.values()].map(items => ({
+    items,
+    featured: items.some(p => p.featured) ? 1 : 0,
+    sortOrder: Math.min(...items.map(p => p.sort_order ?? 999)),
+    label: items[0]?.name || "",
+  }));
+
+  groupList.sort((a, b) => {
+    if (a.featured !== b.featured) return b.featured - a.featured;
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+    return a.label.localeCompare(b.label);
+  });
+
+  return groupList.flatMap(g =>
+    g.items.slice().sort((a, b) => {
+      const r = variantRank(a.name) - variantRank(b.name);
+      return r !== 0 ? r : (a.name || "").localeCompare(b.name || "");
+    })
+  );
 }
 
 const CATEGORY_SECTIONS = [
