@@ -11,7 +11,7 @@ import heroImg from "../../assets/Infrared/ir-panels-hero.webp";
 // either. Re-categorising these in the CMS as "Infrared Panels" /
 // "Infrared Controls" would let both pages become data-driven — worth doing
 // if this range grows, but it is a content change, not a code one.
-const PANEL_SLUGS = ["infrared-panels", "infrared-backrest", "interface-holder"];
+export const PANEL_SLUGS = ["infrared-panels", "infrared-backrest", "interface-holder"];
 
 const InfraredPanels = () => {
   const { products, loading } = useLocalProducts();

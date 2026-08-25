@@ -10,10 +10,12 @@ import { isPubliclyVisible } from "../../local-storage/visibility";
 
 const ROOM_TYPE_LABELS = {
   traditional: "Traditional",
+  standard:    "Standard",
   infrared:    "Infrared",
   steam:       "Steam",
   combo:       "Combo",
   glassfront:  "Glass Front",
+  compact:     "Compact",
 };
 const SIZE_LABELS = {
   compact:    "Compact · 1–2 Person",

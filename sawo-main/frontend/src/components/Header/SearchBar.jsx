@@ -11,6 +11,7 @@ const PAGE_RESULTS = [
   { name: "Sauna Heaters", nk: "items.saunaHeaters", path: menuPaths.sauna.heaters.parent, category: "Pages" },
   { name: "Sauna Controls", nk: "items.saunaControls", path: menuPaths.sauna.controls, category: "Pages" },
   { name: "Sauna Accessories", nk: "items.saunaAccessories", path: menuPaths.sauna.accessories.parent, category: "Pages" },
+  { name: "Steam", nk: "groups.steam", path: menuPaths.steam.parent, category: "Pages" },
   { name: "Steam Generators", nk: "items.steamGenerators", path: menuPaths.steam.generators, category: "Pages" },
   { name: "Steam Controls", nk: "items.steamControls", path: menuPaths.steam.controls, category: "Pages" },
   { name: "Steam Accessories", nk: "items.steamAccessories", path: menuPaths.steam.accessories, category: "Pages" },
