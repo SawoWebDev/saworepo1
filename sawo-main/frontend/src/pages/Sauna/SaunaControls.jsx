@@ -10,12 +10,10 @@ import CirclesInfo from "../../components/CirclesInfo";
 import heroImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Controls-background-1.webp";
 import promoBannerImg from "../../assets/Sauna/Sauna Rooms/Sauna Controls/Sauna-Controls-Banner.webp";
 import PromoBanner from "../../components/PromoBanner";
-import "./heaters/heaters.css"; // reuse existing heaters CSS
-import HeroWave from "../../components/HeroWave";
+import "./heaters/heaters.css"; // reuse existing heaters CSS (filter pills, why-grid, banner)
+import CategoryHero from "../../components/CategoryHero";
 import SEO from "../../components/SEO";
-import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
-import { getPowerRange } from "../../utils/productPower";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -149,14 +147,13 @@ function applyDisplayFilter(products) {
 // ─── Skeleton card ────────────────────────────────────────────────────────────
 function SkeletonCard() {
   return (
-    <div className="wm-product-item" style={{ opacity: 0.45 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "12px 8px", opacity: 0.45 }}>
       <div
-        className="wm-product-img-wrap"
         style={{
+          width: "100%", height: 200, borderRadius: 8,
           background: "linear-gradient(90deg,#f0ebe3 25%,#faf8f5 50%,#f0ebe3 75%)",
           backgroundSize: "200% 100%",
           animation: "wm-shimmer 1.5s infinite",
-          borderRadius: 8,
         }}
       />
       <div style={{ height: 10, background: "#f0ebe3", borderRadius: 4, marginTop: 8, width: "70%", animation: "wm-shimmer 1.5s infinite" }} />
@@ -166,33 +163,45 @@ function SkeletonCard() {
 
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
-  const power = getPowerRange(product.tags);
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <Link
-      to={`/products/${product.slug}`}
-      className="wm-product-item"
-      style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
-    >
+    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
       <div
-        className="wm-product-img-wrap"
-        style={{ transition: "transform 0.3s" }}
-        onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
-        onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
+          padding: "12px 8px", borderRadius: 10, transition: "transform 0.25s ease",
+          transform: hovered ? "translateY(-4px)" : "translateY(0)", cursor: "pointer",
+        }}
       >
-        {getImageUrl(product, "thumbnail") ? (
-          <img
-            src={getImageUrl(product, "thumbnail")}
-            alt={product.name}
-            className="wm-product-img"
-            onError={e => { e.currentTarget.style.display = "none"; }}
-          />
-        ) : (
-          <div className="wm-product-img-placeholder"><i className="fas fa-image" /></div>
-        )}
+        <div style={{
+          width: "100%", height: 200, display: "flex", alignItems: "center",
+          justifyContent: "center", overflow: "hidden", background: "transparent",
+        }}>
+          {getImageUrl(product, "thumbnail") ? (
+            <img
+              src={getImageUrl(product, "thumbnail")}
+              alt={product.name}
+              onError={e => { e.currentTarget.style.display = "none"; }}
+              style={{
+                maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+                transition: "transform 0.25s ease",
+                transform: hovered ? "scale(1.06)" : "scale(1)",
+              }}
+            />
+          ) : (
+            <i className="fas fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
+          )}
+        </div>
+        <p style={{
+          fontWeight: 600, fontSize: "0.78rem", color: hovered ? "#a67853" : "#af8564",
+          margin: 0, lineHeight: 1.4, textAlign: "center", transition: "color 0.2s ease",
+        }}>
+          {product.name}
+        </p>
       </div>
-      <p className="wm-product-name" style={{ color: "#2c1f13" }}>{product.name}</p>
-      {power && <p className="wm-product-power">{power}</p>}
     </Link>
   );
 }
@@ -204,7 +213,6 @@ export default function SaunaControls() {
 
   // Search query for the displayed grid
   const [search, setSearch] = useState("");
-  const heroLoaded = useHeroLoaded(heroImg);
 
   // Grouping by product type
   const [activeGroup, setActiveGroup] = useState(null);
@@ -251,6 +259,40 @@ export default function SaunaControls() {
         @keyframes wm-shimmer {
           0%   { background-position: 200% 0; }
           100% { background-position: -200% 0; }
+        }
+
+        /* ── Product grid (matches /products) ── */
+        .category-section {
+          margin-bottom: 40px;
+          scroll-margin-top: 90px;
+        }
+        .category-section-title {
+          margin-bottom: 24px;
+        }
+        .category-section-title h2 {
+          font-size: 1.6rem;
+          font-weight: 700;
+          color: #af8564;
+          margin: 0 0 8px;
+          line-height: 1.2;
+          font-family: 'Montserrat', sans-serif;
+        }
+        .products-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 24px 16px;
+        }
+        @media screen and (max-width: 1400px) {
+          .products-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media screen and (max-width: 1100px) {
+          .products-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media screen and (max-width: 768px) {
+          .products-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 12px; }
+        }
+        @media screen and (max-width: 480px) {
+          .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px 10px; }
         }
 
         /* ── Search bar styles ── */
@@ -373,33 +415,15 @@ export default function SaunaControls() {
       `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section
-        className="wm-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-        style={{ backgroundColor: "#241c17" }}
+      <CategoryHero
+        heroImg={heroImg}
+        title="Sauna Controls"
+        description="Precision control for the perfect sauna experience. Explore SAWO's Innova and Saunova control series for total comfort."
       >
-        {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${heroImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: heroLoaded ? 1 : 0,
-            transition: "opacity 0.6s ease",
-            zIndex: 0,
-          }}
-        />
-        <div className="wm-hero-overlay" />
-        <div className="wm-hero-content">
-          <h1 className="wm-hero-title">SAUNA CONTROLS</h1>
-          <p className="wm-hero-subtitle">Precision control for the perfect sauna experience</p>
-          <div style={{ marginTop: "32px" }}>
-            <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
-          </div>
+        <div style={{ marginTop: "12px" }}>
+          <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
         </div>
-      <HeroWave />
-      </section>
+      </CategoryHero>
 
       {/* ── INTRO ────────────────────────────────────────────────────────── */}
       <section className="wm-section">
@@ -493,7 +517,7 @@ export default function SaunaControls() {
 
           {/* ── Loading skeletons ── */}
           {loading && (
-            <div className="wm-products-grid">
+            <div className="products-grid">
               {Array.from({ length: 12 }).map((_, i) => <SkeletonCard key={i} />)}
             </div>
           )}
@@ -531,9 +555,11 @@ export default function SaunaControls() {
                   );
                   if (items.length === 0) return null;
                   return (
-                    <div className="wm-group" id={groupSectionId(brand)} key={brand}>
-                      <h3 className="wm-group-title">{brand.toUpperCase()}</h3>
-                      <div className="wm-products-grid">
+                    <div className="category-section" id={groupSectionId(brand)} key={brand}>
+                      <div className="category-section-title">
+                        <h2>{brand}</h2>
+                      </div>
+                      <div className="products-grid">
                         {items.map((product) => (
                           <ProductCard key={product.id || product.slug} product={product} />
                         ))}

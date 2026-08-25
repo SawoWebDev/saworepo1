@@ -1,12 +1,11 @@
 ﻿// SteamControls.jsx
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
-import HeroWave from "../../components/HeroWave";
+import CategoryHero from "../../components/CategoryHero";
 import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
-import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 
 // Served from /public (not webpack-bundled) so its URL is stable at build time —
@@ -23,34 +22,54 @@ function getImageUrl(product, field) {
   return localOrRemote(product, field) || null;
 }
 
-function stripHtml(html) {
-  if (!html) return "";
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  return div.textContent || div.innerText || "";
-}
-
-function getFirstSentence(text) {
-  if (!text) return "";
-  const cleaned = stripHtml(text).replace(/\s+/g, " ").trim();
-  // Lookahead requires the punctuation to be followed by a space + capital
-  // letter (or the end of the string) so it doesn't stop early on periods
-  // inside things like "2.0" or abbreviations like "STE." mid-sentence.
-  const match = cleaned.match(/^[^.!?]*[.!?](?=\s+[A-Z]|\s*$)/);
-  return match ? match[0] : cleaned.split(/\s+/).slice(0, 20).join(" ") + "...";
-}
-
-// Model number lives as a "(STP-INFACE-V2)"-style tag rather than its own field.
-function getModelTag(product) {
-  const tag = (product.tags || []).find(t => /^\(.+\)$/.test(t));
-  return tag ? tag.slice(1, -1) : "";
-}
-
 const DISPLAY_CATEGORIES = ["Steam Controls"];
+
+// ─── Product card (matches /products) ──────────────────────────────────────────
+function ProductCard({ product }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
+          padding: "12px 8px", borderRadius: 10, transition: "transform 0.25s ease",
+          transform: hovered ? "translateY(-4px)" : "translateY(0)", cursor: "pointer",
+        }}
+      >
+        <div style={{
+          width: "100%", height: 200, display: "flex", alignItems: "center",
+          justifyContent: "center", overflow: "hidden", background: "transparent",
+        }}>
+          {getImageUrl(product, "thumbnail") ? (
+            <img
+              src={getImageUrl(product, "thumbnail")}
+              alt={product.name}
+              style={{
+                maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+                transition: "transform 0.25s ease",
+                transform: hovered ? "scale(1.06)" : "scale(1)",
+              }}
+            />
+          ) : (
+            <i className="fas fa-image" style={{ fontSize: "2.5rem", color: "#d5b99a" }} />
+          )}
+        </div>
+        <p style={{
+          fontWeight: 600, fontSize: "0.78rem", color: hovered ? "#a67853" : "#af8564",
+          margin: 0, lineHeight: 1.4, textAlign: "center", transition: "color 0.2s ease",
+        }}>
+          {product.name}
+        </p>
+      </div>
+    </Link>
+  );
+}
 
 const SteamControls = () => {
   const { products: localProds, loading } = useLocalProducts();
-  const heroLoaded = useHeroLoaded(heroBg);
 
   const controls = useMemo(() => {
     const visible = localProds.filter(p => isPubliclyVisible(p));
@@ -75,32 +94,11 @@ const SteamControls = () => {
     {/* ===================== */}
     {/* HERO                  */}
     {/* ===================== */}
-    <section
-      className="sc-hero min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative"
-      style={{ backgroundColor: "#241c17" }} // warm-dark placeholder so it doesn't flash gray before the hero image decodes
-    >
-      {/* Hero photo — faded in only once fully loaded, instead of popping in abruptly */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: heroLoaded ? 1 : 0,
-          transition: "opacity 0.6s ease",
-          zIndex: 0,
-        }}
-      />
-      <div className="sc-hero-overlay" />
-      <div className="sc-hero-content">
-        <h1 className="sc-hero-title">STEAM CONTROLS</h1>
-        <p className="sc-hero-subtitle">
-          Precision and ease, take full control of your steam experience
-        </p>
-      </div>
-    <HeroWave />
-    </section>
+    <CategoryHero
+      heroImg={heroBg}
+      title="Steam Controls"
+      description="Precision and ease — take full control of your steam experience with SAWO's Saunova and Innova control series."
+    />
 
     {/* ===================== */}
     {/* INTRO                 */}
@@ -125,26 +123,9 @@ const SteamControls = () => {
           <p style={{ textAlign: "center", color: "#999" }}>No steam controls available yet.</p>
         )}
         {!loading && controls.length > 0 && (
-          <div className="sc-grid">
+          <div className="products-grid">
             {controls.map(product => (
-              <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="sc-card" style={{ textDecoration: "none", color: "inherit" }}>
-                <div className="sc-img-wrap">
-                  {getImageUrl(product, "thumbnail") ? (
-                    <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="sc-img" />
-                  ) : (
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "160px", color: "#ccc" }}>
-                      <i className="fas fa-image" style={{ fontSize: "32px" }} />
-                    </div>
-                  )}
-                </div>
-                <div className="sc-text">
-                  {getModelTag(product) && <p className="sc-eyebrow">{getModelTag(product)}</p>}
-                  <h3 className="sc-card-title">{product.name}</h3>
-                  <p className="sc-card-desc">
-                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Precision steam control for a personalized sauna experience."}
-                  </p>
-                </div>
-              </Link>
+              <ProductCard key={product.id || product.slug} product={product} />
             ))}
           </div>
         )}
@@ -180,36 +161,6 @@ const SteamControls = () => {
     {/* ===================== */}
     <style>{`
 
-      /* ---- Hero ---- */
-      .sc-hero-overlay {
-        position: absolute; inset: 0;
-        background: rgba(0,0,0,0.48);
-        z-index: 0;
-      }
-      .sc-hero-content {
-        position: relative; z-index: 1;
-        display: flex; flex-direction: column;
-        align-items: center; gap: 10px;
-      }
-      .sc-hero-eyebrow {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.75rem; font-weight: 600;
-        letter-spacing: 4px; color: rgba(255,255,255,0.7);
-        text-transform: uppercase; margin: 0;
-      }
-      .sc-hero-title {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 45px; line-height: 52px;
-        font-weight: 700; color: #fff; margin: 0;
-      }
-      .sc-hero-subtitle {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 20px; font-weight: 300;
-        color: rgba(255,255,255,0.88);
-        line-height: 1.6; max-width: 540px;
-        margin: 4px 0 0;
-      }
-
       /* ---- Layout ---- */
       .sc-container {
         max-width: 1200px;
@@ -237,83 +188,28 @@ const SteamControls = () => {
         max-width: 680px; margin: 0 auto;
       }
 
-      /* ---- Control cards ---- */
-      .sc-grid {
+      /* ---- Product grid (matches /products) ---- */
+      .products-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 28px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px 16px;
       }
-      .sc-card {
-        display: flex;
-        flex-direction: column;
-        border-radius: 16px;
-        overflow: hidden;
-        border: 1px solid #ede5db;
-        background: #fff;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      @media screen and (max-width: 1400px) {
+        .products-grid { grid-template-columns: repeat(4, 1fr); }
       }
-      .sc-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 16px 40px rgba(170,129,97,0.15);
+      @media screen and (max-width: 1100px) {
+        .products-grid { grid-template-columns: repeat(3, 1fr); }
       }
-
-      /* ---- Image ---- */
-      .sc-img-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 32px 24px;
-        height: 220px;
-        overflow: hidden;
-      }
-      .sc-img {
-        max-width: 100%;
-        max-height: 160px;
-        object-fit: contain;
-        display: block;
-        transition: transform 0.5s ease;
-      }
-      .sc-card:hover .sc-img {
-        transform: scale(1.06);
-      }
-
-      /* ---- Text ---- */
-      .sc-text {
-        padding: 16px 20px 22px;
-        border-top: 1px solid #ede5db;
-        flex: 1;
-      }
-      .sc-eyebrow {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.75rem; font-weight: 600;
-        letter-spacing: 2.5px; color: #AA8161;
-        text-transform: uppercase; margin-bottom: 8px;
-      }
-      .sc-card-title {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.9rem; font-weight: 700;
-        background: linear-gradient(135deg, #AA8161 0%, #c4a077 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 16px; line-height: 1.2;
-      }
-      .sc-card-desc {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1rem; font-weight: 400;
-        color: #444; line-height: 1.8;
+      @media screen and (max-width: 480px) {
+        .products-grid { grid-template-columns: repeat(2, 1fr); }
       }
 
       /* ---- Responsive ---- */
       @media (max-width: 768px) {
-        .sc-hero-title   { font-size: 28px; line-height: 36px; }
-        .sc-hero-subtitle { font-size: 16px; }
         .sc-section-title { font-size: 1.7rem; }
-        .sc-grid { grid-template-columns: 1fr; }
+        .products-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 12px; }
         .sc-intro-section { padding: 48px 0 0; }
         .sc-section { padding: 32px 0 60px; }
-      }
-      @media (max-width: 1024px) and (min-width: 769px) {
-        .sc-grid { grid-template-columns: repeat(2, 1fr); }
       }
 
       /* ---- Precaution notice ---- */
