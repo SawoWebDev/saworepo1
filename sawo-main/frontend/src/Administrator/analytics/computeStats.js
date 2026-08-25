@@ -6,6 +6,32 @@ import { resolveSource, resolveChannel } from "./sources";
 
 const dayKey = (iso) => iso.slice(0, 10); // "YYYY-MM-DD" from an ISO timestamp
 
+// Raw `country` values come from two eras of the tracker: the old ipapi.co/
+// ip-api.com backend (trackingApi.js) wrote full English names ("United
+// States"), the current Cloudflare Pages Function (track/pageview.js) writes
+// request.cf.country, an ISO 3166-1 alpha-2 code ("US"). Left untallied,
+// every country with rows from both eras shows up twice. Expand any 2-letter
+// code to its full name so old and new rows land in the same bucket — this
+// covers every country, not just the ones already seen, so a new code from
+// the current tracker will never re-split from its historical rows.
+let countryDisplayNames = null;
+try {
+  countryDisplayNames = typeof Intl !== "undefined" && Intl.DisplayNames
+    ? new Intl.DisplayNames(["en"], { type: "region" })
+    : null;
+} catch {
+  countryDisplayNames = null;
+}
+function normalizeCountry(raw) {
+  if (!raw) return raw;
+  const trimmed = raw.trim();
+  if (countryDisplayNames && /^[A-Za-z]{2}$/.test(trimmed)) {
+    const name = countryDisplayNames.of(trimmed.toUpperCase());
+    if (name && name !== trimmed.toUpperCase()) return name;
+  }
+  return trimmed;
+}
+
 // FA 6 brand/solid icons for the Devices card (Browser + OS tabs).
 const BROWSER_ICONS = {
   Chrome:  "fa-brands fa-chrome",
@@ -153,7 +179,7 @@ export function computeStats(pageViews, events, startDate, endDate = new Date())
   const campaigns = tallySessions(rows => firstTouch(rows).utm_campaign || "None");
 
   // ── Locations ────────────────────────────────────────────────────────────
-  const countries = tallySessions(rows => rows[0]?.country);
+  const countries = tallySessions(rows => normalizeCountry(rows[0]?.country));
   const regions   = tallySessions(rows => rows[0]?.region);
   const cities    = tallySessions(rows => rows[0]?.city);
 

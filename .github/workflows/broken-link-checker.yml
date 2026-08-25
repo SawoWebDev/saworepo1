@@ -1,9 +1,13 @@
 name: Broken Link Checker
 
+# HALTED pending domain transfer (2026-08-24): kept failing against the
+# pre-launch site. Re-enable the schedule block below once the domain has
+# cut over. workflow_dispatch is left on so this can still be run manually
+# if needed in the meantime.
 on:
-  schedule:
-    # Weekly, Monday 04:00 UTC.
-    - cron: "0 4 * * 1"
+  # schedule:
+  #   # Weekly, Monday 04:00 UTC.
+  #   - cron: "0 4 * * 1"
   workflow_dispatch: {}
 
 jobs:
