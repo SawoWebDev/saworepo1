@@ -136,7 +136,17 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [toast, setToast] = useState({ show: false, details: "" });
+  const [toast, setToast] = useState({ show: false, title: "", details: "" });
+
+  // Warn on tab close/reload while a submission is in flight — the fetches
+  // below use keepalive so the request itself still completes, but the user
+  // should know leaving means they won't see the result.
+  useEffect(() => {
+    if (!submitting) return;
+    const handler = (e) => { e.preventDefault(); e.returnValue = ""; };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [submitting]);
 
   // Bot protection — mirrors the WordPress form's honeypot + timing + interaction-count check.
   const formStartTimeRef = useRef(Date.now());
@@ -169,7 +179,11 @@ const Contact = () => {
       .map(p => p.trim())
       .filter(p => /^Heater:/i.test(p) || /^Accessories:/i.test(p));
     const showTimer = setTimeout(() => {
-      setToast({ show: true, details: details.join(" · ") });
+      setToast({
+        show: true,
+        title: "Your sauna selections have been saved to your message!",
+        details: details.join(" · "),
+      });
       setTimeout(() => setToast(t => ({ ...t, show: false })), 5000);
     }, 600);
     return () => clearTimeout(showTimer);
@@ -319,9 +333,14 @@ const Contact = () => {
       height: form.height,
     };
 
+    // keepalive lets these requests finish server-side even if the tab closes
+    // or reloads mid-flight — same reasoning as the sendBeacon call in
+    // src/local-storage/track.js. The UI obviously can't update after the
+    // page is gone, but the email/ticket won't be silently dropped.
     const postJson = (url, payload) =>
       fetch(url, {
         method: "POST",
+        keepalive: true,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       }).then((r) => r.json());
@@ -373,6 +392,8 @@ const Contact = () => {
 
     if (emailSuccess) {
       setSubmitted(true);
+      setToast({ show: true, title: "Your request has been submitted successfully!", details: "" });
+      setTimeout(() => setToast(t => ({ ...t, show: false })), 5000);
     } else {
       setSubmitError("There was an error submitting your request. Please try again.");
     }
@@ -409,7 +430,7 @@ const Contact = () => {
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
         <span>
-          <span className="toast-title">Your sauna selections have been saved to your message!</span>
+          <span className="toast-title">{toast.title}</span>
           {toast.details && <span className="toast-details">{toast.details}</span>}
         </span>
       </div>
@@ -451,6 +472,7 @@ const Contact = () => {
         /* Form card */
         .ct-form-wrapper { max-width: 620px; margin: 0 auto; font-family: 'Montserrat', sans-serif; }
         .ct-form-card {
+          position: relative;
           background-color: #faf8f6;
           background-image: var(--ct-grain);
           border-radius: 10px;
@@ -460,6 +482,51 @@ const Contact = () => {
             inset 0 -1px 0 rgba(120,90,66,0.09),
             0 12px 40px rgba(0,0,0,0.35);
         }
+        .ct-form-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+        .ct-form-fieldset:disabled { opacity: 0.55; pointer-events: none; }
+
+        .ct-submit-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 20;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 20px;
+          background: rgba(250, 248, 246, 0.94);
+          backdrop-filter: blur(2px);
+          border-radius: 10px;
+          animation: ctFadeIn 0.25s ease;
+        }
+        .ct-submit-spinner {
+          width: 46px;
+          height: 46px;
+          border: 4px solid rgba(175,133,100,0.25);
+          border-top-color: #af8564;
+          border-radius: 50%;
+          margin-bottom: 18px;
+          animation: ctSpin 0.8s linear infinite;
+        }
+        .ct-submit-overlay-title {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 17px;
+          font-weight: 700;
+          color: #333;
+          margin: 0 0 8px;
+        }
+        .ct-submit-overlay-sub {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 13px;
+          font-weight: 400;
+          color: #777;
+          margin: 0;
+          max-width: 320px;
+          line-height: 1.5;
+        }
+        @keyframes ctSpin { to { transform: rotate(360deg); } }
+        .ct-back-link-disabled { color: #bbb; cursor: not-allowed; }
 
         /* Progress */
         .ct-progress {
@@ -1095,6 +1162,13 @@ const Contact = () => {
               </div>
             ) : (
               <>
+                {submitting && (
+                  <div className="ct-submit-overlay" role="status" aria-live="polite">
+                    <div className="ct-submit-spinner" />
+                    <p className="ct-submit-overlay-title">Sending your request…</p>
+                    <p className="ct-submit-overlay-sub">This can take a few seconds. Please don't close or refresh this page.</p>
+                  </div>
+                )}
                 {/* Progress */}
                 <div className="ct-progress">
                   {[{ n: 1, label: "Your Request" }, { n: 2, label: "About You" }, { n: 3, label: "Request Details" }].map((s, i) => (
@@ -1109,6 +1183,7 @@ const Contact = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} noValidate>
+                <fieldset className="ct-form-fieldset" disabled={submitting}>
                   <div className="ct-honeypot">
                     <label htmlFor="ct-website">Website</label>
                     <input
@@ -1506,10 +1581,15 @@ const Contact = () => {
                       {submitError && <div className="ct-form-error-msg">{submitError}</div>}
                     </div>
                   )}
+                </fieldset>
                 </form>
 
                 <div className="ct-back-link">
-                  Finished here? <Link to={menuPaths.home}>Back to Home</Link>
+                  {submitting ? (
+                    <span className="ct-back-link-disabled">Finished here? Back to Home</span>
+                  ) : (
+                    <>Finished here? <Link to={menuPaths.home}>Back to Home</Link></>
+                  )}
                 </div>
               </>
             )}
