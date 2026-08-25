@@ -5,6 +5,8 @@ import { useLocalSaunaRooms } from "../Administrator/Local/useLocalSaunaRooms";
 import { isAccessoryProduct } from "./IndividualDisplay/DispAccessories";
 import ScrollToTop from "../components/ScrollToTop";
 import SEO from "../components/SEO";
+import CategoryHero from "../components/CategoryHero";
+import heroImg from "../assets/NRM-NB-BL1.webp";
 import { isPubliclyVisible } from "../local-storage/visibility";
 
 const HEATER_SECTIONS = [
@@ -563,96 +565,69 @@ export default function AllProducts() {
       `}</style>
 
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
-        <div style={{
-          width: "100%",
-          padding: "80px 60px 40px",
-          background: "#af8564",
-          borderBottom: "1px solid #9d7554",
-          marginTop: 60,
-        }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div style={{ marginBottom: 32 }}>
-              <p style={{
-                fontSize: "0.65rem",
-                fontWeight: 700,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.75)",
-                margin: "0 0 8px",
-              }}>
-                Complete Collection
-              </p>
-              <h1 style={{
-                fontSize: "1.8rem",
-                fontWeight: 700,
-                color: "#ffffff",
-                margin: 0,
-                lineHeight: 1.2,
-              }}>
-                All Products
-              </h1>
-            </div>
-
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: 14,
-            }}>
-              {[
-                { id: "heaters", label: "Sauna Heaters", desc: "Premium heating solutions" },
-                { id: "rooms", label: "Sauna Rooms", desc: "Complete sauna packages" },
-                { id: "accessories", label: "Accessories", desc: "Premium finishing touches" }
-              ].map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  style={{
-                    padding: "14px 16px",
-                    border: "2px solid #ffffff",
-                    background: activeTab === tab.id ? "rgb(159 112 84)" : "transparent",
-                    borderRadius: 12,
-                    cursor: "pointer",
-                    textAlign: "center",
-                    fontFamily: "inherit",
-                    transition: "all 0.25s ease",
-                    position: "relative",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgb(159 112 84)";
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeTab === tab.id) {
-                      e.currentTarget.style.background = "rgb(159 112 84)";
-                    } else {
-                      e.currentTarget.style.background = "transparent";
-                    }
-                  }}
-                >
-                  <h3 style={{
-                    fontSize: "0.9rem",
-                    fontWeight: 700,
-                    color: "#ffffff",
-                    margin: "0 0 3px 0",
-                    letterSpacing: "0.01em",
-                    transition: "color 0.25s ease",
-                  }}>
-                    {tab.label}
-                  </h3>
-                  <p style={{
-                    fontSize: "0.7rem",
-                    color: "rgba(255,255,255,0.85)",
-                    margin: 0,
-                    fontWeight: 500,
-                    lineHeight: 1.3,
-                    transition: "color 0.25s ease",
-                  }}>
-                    {tab.desc}
-                  </p>
-                </button>
-              ))}
-            </div>
+        <CategoryHero
+          heroImg={heroImg}
+          eyebrow="Complete Collection"
+          title="All Products"
+          description="Browse SAWO's complete product range: sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
+        >
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: 14,
+            maxWidth: 700,
+            margin: "24px auto 0",
+          }}>
+            {[
+              { id: "heaters", label: "Sauna Heaters", desc: "Premium heating solutions" },
+              { id: "rooms", label: "Sauna Rooms", desc: "Complete sauna packages" },
+              { id: "accessories", label: "Accessories", desc: "Premium finishing touches" }
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  padding: "14px 16px",
+                  border: "2px solid #ffffff",
+                  background: activeTab === tab.id ? "rgb(159 112 84)" : "rgba(255,255,255,0.08)",
+                  borderRadius: 12,
+                  cursor: "pointer",
+                  textAlign: "center",
+                  fontFamily: "inherit",
+                  transition: "all 0.25s ease",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgb(159 112 84)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = activeTab === tab.id ? "rgb(159 112 84)" : "rgba(255,255,255,0.08)";
+                }}
+              >
+                <h3 style={{
+                  fontSize: "0.9rem",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  margin: "0 0 3px 0",
+                  letterSpacing: "0.01em",
+                  transition: "color 0.25s ease",
+                }}>
+                  {tab.label}
+                </h3>
+                <p style={{
+                  fontSize: "0.7rem",
+                  color: "rgba(255,255,255,0.85)",
+                  margin: 0,
+                  fontWeight: 500,
+                  lineHeight: 1.3,
+                  transition: "color 0.25s ease",
+                }}>
+                  {tab.desc}
+                </p>
+              </button>
+            ))}
           </div>
-        </div>
+        </CategoryHero>
 
         {/* ── HEATERS ── */}
         {activeTab === "heaters" && (
