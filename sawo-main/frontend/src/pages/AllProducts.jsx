@@ -9,6 +9,7 @@ import CategoryHero from "../components/CategoryHero";
 import heroImg from "../assets/NRM-NB-BL1.webp";
 import { isPubliclyVisible } from "../local-storage/visibility";
 import { variantRank } from "../utils/wallMountedGroups";
+import useDragScroll from "../hooks/useDragScroll";
 
 const HEATER_SECTIONS = [
   { label: "Wall-Mounted", id: "heater-wall-mounted", category: "wall-mounted" },
@@ -318,6 +319,7 @@ function ProductCard({ product }) {
 export default function AllProducts() {
   const { products: localProds, loading } = useLocalProducts();
   const { rooms: localRooms, loading: roomsLoading } = useLocalSaunaRooms();
+  const { trackRef: tabsTrackRef, dragHandlers: tabsDragHandlers } = useDragScroll();
   const [activeTab, setActiveTab] = useState("heaters");
   const [activeHeaterSection, setActiveHeaterSection] = useState(HEATER_SECTIONS[0].id);
   const [activeRoomSection, setActiveRoomSection] = useState(ROOM_SECTIONS[0].id);
@@ -535,7 +537,7 @@ export default function AllProducts() {
         }
 
         .products-tabs-wrap {
-          padding: 32px 40px 8px;
+          padding: 56px 40px 8px;
           background: #fff;
           border-bottom: 1px solid #edddd0;
           position: sticky;
@@ -576,7 +578,32 @@ export default function AllProducts() {
         }
 
         @media screen and (max-width: 768px) {
-          .products-tabs-wrap { padding: 24px 24px 8px; }
+          .products-tabs-wrap { padding: 36px 20px 10px; }
+
+          .products-tabs {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            gap: 8px;
+            padding-bottom: 2px;
+          }
+
+          .products-tabs::-webkit-scrollbar { display: none; }
+          .products-tabs { cursor: grab; touch-action: pan-x; }
+          .products-tabs.is-dragging { cursor: grabbing; user-select: none; }
+
+          .products-tab-btn {
+            font-size: 0.72rem;
+            padding: 9px 16px;
+            white-space: nowrap;
+            flex-shrink: 0;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .products-tab-btn { font-size: 0.68rem; padding: 8px 13px; }
         }
 
         .products-wrapper {
@@ -785,7 +812,7 @@ export default function AllProducts() {
 
         {/* ── Category tabs (below hero, matches /support/manuals) ── */}
         <div className="products-tabs-wrap">
-          <div className="products-tabs">
+          <div className="products-tabs" ref={tabsTrackRef} {...tabsDragHandlers}>
             {TAB_DEFS.map(tab => (
               <button
                 key={tab.id}

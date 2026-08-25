@@ -438,7 +438,7 @@ export default function SaunaRoomDisplay() {
               )}
             </div>
 
-            {/* RIGHT: Badges, Model, Name, Stats, Door Options, Wood Options */}
+            {/* RIGHT: Badges, Model, Name, Stats, Door Options */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
 
               {/* Badges */}
@@ -476,7 +476,7 @@ export default function SaunaRoomDisplay() {
               </h1>
 
               {/* Stat chips */}
-              {(room.capacity_label || room.width_m || room.height_m) && (
+              {(room.capacity_label || room.width_m || room.height_m || enabledWoods.length > 0) && (
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <StatChip icon="fa-solid fa-user-group"      label="Capacity"   value={room.capacity_label} />
                   {(room.width_m && room.depth_m) && (
@@ -484,6 +484,9 @@ export default function SaunaRoomDisplay() {
                   )}
                   {room.height_m && (
                     <StatChip icon="fa-solid fa-arrows-up-down" label="Height"    value={`${room.height_m} m`} />
+                  )}
+                  {enabledWoods.length > 0 && (
+                    <StatChip icon="fa-solid fa-tree" label="Wood Type" value={enabledWoods.map(w => w.name).join(", ")} />
                   )}
                 </div>
               )}
@@ -501,30 +504,6 @@ export default function SaunaRoomDisplay() {
                       </span>
                     ))}
                   </div>
-                </div>
-              )}
-
-              {/* Wood options — below door options */}
-              {woodOptions.length > 0 && (
-                <div>
-                  <SectionLabel icon="fa-solid fa-tree" text="Wood Options" />
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-                    {woodOptions.map(w => (
-                      <span key={w.name}
-                        style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.72rem", fontWeight: 600, padding: "6px 12px", borderRadius: 7, transition: "all 0.15s", border: `1.5px solid ${w.enabled ? "#a67853" : "#e0d4c8"}`, background: w.enabled ? "rgba(166,120,83,0.1)" : "#f7f3ef", color: w.enabled ? "#8b5e3c" : "#b8a898", display: "flex", alignItems: "center", gap: 6 }}>
-                        {w.enabled ? (
-                          <i className="fa-solid fa-check" style={{ fontSize: "0.6rem", color: "#a67853" }} />
-                        ) : (
-                          <i className="fa-solid fa-circle-xmark" style={{ fontSize: "0.6rem", color: "#c9b8aa" }} />
-                        )}
-                        {w.name}
-                        {!w.enabled && <span style={{ fontSize: "0.6rem", fontWeight: 400, opacity: 0.7 }}>(unavailable)</span>}
-                      </span>
-                    ))}
-                  </div>
-                  {enabledWoods.length === 0 && (
-                    <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.72rem", color: "#c4a882", fontStyle: "italic", margin: "6px 0 0" }}>No wood options currently available.</p>
-                  )}
                 </div>
               )}
 
