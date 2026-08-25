@@ -54,7 +54,7 @@ const Steam = () => {
 
   const generators = useMemo(() => byCategory(localProds, "Steam Generators"), [localProds]);
   const controls = useMemo(() => byCategory(localProds, "Steam Controls"), [localProds]);
-  const accessories = useMemo(() => byCategory(localProds, "Steam Accessories").slice(0, 6), [localProds]);
+  const accessories = useMemo(() => byCategory(localProds, "Steam Accessories"), [localProds]);
 
   return (
     <div className="relative">

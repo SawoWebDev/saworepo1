@@ -8,6 +8,7 @@ const PAGE_RESULTS = [
   { name: "Sauna Heaters", path: menuPaths.sauna.heaters.parent, category: "Pages" },
   { name: "Sauna Controls", path: menuPaths.sauna.controls, category: "Pages" },
   { name: "Sauna Accessories", path: menuPaths.sauna.accessories.parent, category: "Pages" },
+  { name: "Steam", path: menuPaths.steam.parent, category: "Pages" },
   { name: "Steam Generators", path: menuPaths.steam.generators, category: "Pages" },
   { name: "Steam Controls", path: menuPaths.steam.controls, category: "Pages" },
   { name: "Steam Accessories", path: menuPaths.steam.accessories, category: "Pages" },

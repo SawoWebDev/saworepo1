@@ -2394,7 +2394,7 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms }) {
       style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: "pointer" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}>
-      {isUnpublished && <span className="product-grid-unpublished-badge">Not Visible</span>}
+      {isUnpublished && <span className="product-grid-unpublished-badge">Inactive</span>}
       <div className="product-grid-thumb">
         {getImageUrl(p, 'thumbnail')
           ? <img src={getImageUrl(p, 'thumbnail')} alt={p.name} />
