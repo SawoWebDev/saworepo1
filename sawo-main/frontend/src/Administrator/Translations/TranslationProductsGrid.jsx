@@ -10,6 +10,9 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { PRODUCT_TRANSLATION_LOCALES } from "../../i18n/productTranslationLocales";
 import StatusIcon from "./StatusIcon";
+import ScrollArea from "../ScrollArea";
+import Pagination from "../Pagination";
+import { usePagination } from "../usePagination";
 
 export default function TranslationProductsGrid({ grid }) {
   const navigate = useNavigate();
@@ -29,8 +32,10 @@ export default function TranslationProductsGrid({ grid }) {
     navigate(`/admin/translations/products/${productId}${localeCode ? `?locale=${localeCode}` : ""}`);
   };
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filtered, { initialPageSize: 25 });
+
   return (
-    <div>
+    <div className="cms-scroll-page">
       <div className="products-toolbar">
         <div className="search-wrap">
           <i className="fa-solid fa-magnifying-glass" />
@@ -52,6 +57,7 @@ export default function TranslationProductsGrid({ grid }) {
         </div>
       </div>
 
+      <ScrollArea>
       <div className="products-table-wrap">
         <table className="products-table">
           <thead>
@@ -63,7 +69,7 @@ export default function TranslationProductsGrid({ grid }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map(({ product, locales }) => (
+            {pageItems.map(({ product, locales }) => (
               <tr key={product.id}>
                 <td style={{ fontSize: "0.85rem" }}>
                   <button
@@ -98,6 +104,17 @@ export default function TranslationProductsGrid({ grid }) {
           </tbody>
         </table>
       </div>
+      </ScrollArea>
+
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        itemLabel="products"
+      />
     </div>
   );
 }
