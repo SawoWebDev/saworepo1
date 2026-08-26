@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "SAWO — 优质芬兰桑拿炉、蒸汽发生器与桑拿房",
+    "description": "SAWO — 优质芬兰桑拿炉、蒸汽发生器、桑拿房、红外线解决方案及配件,服务全球90多个国家。"
+  },
+  "hero": {
+    "experience": "体验……",
+    "sentences": [
+      "焕然一新的逃逸时光",
+      "古老传统带来的养生之道",
+      "原汁原味的芬兰桑拿"
+    ],
+    "alt": "SAWO桑拿炉 - 体验养生与焕新",
+    "seoKeywords": "SAWO桑拿炉, 芬兰桑拿, 桑拿配件, 红外线桑拿, 蒸汽发生器"
+  },
+  "section1": {
+    "heading": "探索我们的桑拿世界",
+    "carouselLabel": "SAWO桑拿产品轮播",
+    "items": {
+      "heaters": {
+        "title": "桑拿炉",
+        "caption": "在SAWO优质桑拿炉带来的传统芬兰桑拿温暖中焕发活力。",
+        "alt": "SAWO芬兰桑拿炉系列,高效桑拿加热"
+      },
+      "steamGenerators": {
+        "title": "蒸汽发生器",
+        "caption": "借助SAWO蒸汽发生器带来的疗愈蒸汽,舒缓压力与紧张。",
+        "alt": "SAWO蒸汽发生器,适用于现代桑拿及水疗蒸汽房"
+      },
+      "rooms": {
+        "title": "桑拿房",
+        "caption": "在原汁原味设计的桑拿房中,借助疗愈热力放松、排毒、焕新。",
+        "alt": "SAWO标准芬兰桑拿房,天然木质设计"
+      },
+      "infrared": {
+        "title": "红外线桑拿",
+        "caption": "借助先进的红外线桑拿技术,体验深度放松。",
+        "alt": "SAWO红外线桑拿,雪松木内饰"
+      },
+      "accessories": {
+        "title": "桑拿配件",
+        "caption": "借助SAWO精心设计的配件,提升您的桑拿体验。",
+        "alt": "SAWO桑拿配件系列,包括木桶、勺子和温度计"
+      },
+      "controls": {
+        "title": "桑拿控制器",
+        "caption": "精准温度与时间控制,带来全面舒适体验。",
+        "alt": "SAWO桑拿控制系统,极致舒适"
+      }
+    }
+  },
+  "section2": {
+    "heading": "桑拿炉",
+    "items": {
+      "tower": {
+        "title": "塔式",
+        "caption": "高挑纤薄的优雅设计,兼具高度与节能效果。从桑拿房底部到顶部均匀传递温暖,带来最佳放松与养生体验。",
+        "alt": "SAWO塔式桑拿炉系列,优雅纵向设计"
+      },
+      "wallMounted": {
+        "title": "壁挂式",
+        "caption": "节省空间、节能高效的壁挂式桑拿炉,持续释放强劲热力。时尚现代的设计,带来卓越舒适的桑拿体验。",
+        "alt": "SAWO壁挂式桑拿炉系列,适用于紧凑型桑拿房"
+      },
+      "floor": {
+        "title": "落地式",
+        "caption": "高端强劲的独立式桑拿炉,完美结合节能与优雅设计,是商用场所的理想之选。",
+        "alt": "SAWO落地式桑拿炉系列,适用于商用桑拿房"
+      },
+      "combi": {
+        "title": "多功能一体式",
+        "caption": "一体化现代节能设备,兼具多种功能。蒸汽与热力相结合,打造可定制的舒适、养生与放松体验。",
+        "alt": "SAWO多功能一体式桑拿炉系列,蒸汽与热力兼备"
+      },
+      "stone": {
+        "title": "石材式",
+        "caption": "适用于各类桑拿房的完美桑拿炉:不锈钢材质经久耐用,优质芬兰皂石导热性能出众,外观时尚精致。",
+        "alt": "SAWO石材式桑拿炉系列,不锈钢与皂石材质"
+      },
+      "dragonfire": {
+        "title": "龙焰",
+        "caption": "由工业与室内设计师Stefan Lindfors设计,融合艺术气息与尖端科技。",
+        "alt": "SAWO龙焰桑拿炉系列,Stefan Lindfors艺术设计"
+      }
+    }
+  },
+  "section3": {
+    "steamHeading": "蒸汽",
+    "saunaRoomsHeading": "桑拿房",
+    "infraredHeading": "红外线",
+    "saunaControlHeading": "桑拿控制",
+    "steam": {
+      "generators": {
+        "title": "蒸汽发生器",
+        "caption": "先进蒸汽发生器带来的定制化蒸汽享受,打造水疗般的奢华体验。个性化设置,整体性能卓越出众。"
+      },
+      "controls": {
+        "title": "蒸汽控制器",
+        "caption": "精准、便捷、个性化:来自Saunova与Innova控制系列的精准蒸汽设置、轻松操作与个性化桑拿体验。"
+      },
+      "accessories": {
+        "title": "蒸汽配件",
+        "caption": "精心设计的高端配件,提升功能性,最大化舒适体验,持续带来非凡的养生与放松享受。"
+      }
+    },
+    "rooms": {
+      "standard": {
+        "title": "标准桑拿房",
+        "caption": "经典隽永的设计与优质材料,为任何家庭或养生空间带来经典室内桑拿体验。"
+      },
+      "glassFront": {
+        "title": "玻璃前脸桑拿房",
+        "caption": "纯粹的宁静与放松。现代设计采用透明钢化玻璃面板,享受无遮挡的户外视野。"
+      },
+      "compact": {
+        "title": "紧凑型桑拿房",
+        "caption": "即插即用的设计,专为都市空间打造。隐藏式桑拿炉在确保安全的同时,最大化您的视野。"
+      }
+    },
+    "infrared": {
+      "rooms": {
+        "title": "红外线桑拿房",
+        "caption": "在舒适紧凑的桑拿空间中,享受温和舒缓的红外线温暖,带来放松修复的体验。"
+      },
+      "panels": {
+        "title": "红外线板",
+        "caption": "专为提供温和直接的红外线温暖而设计,带来舒适放松的桑拿体验。"
+      },
+      "controls": {
+        "title": "红外线控制器",
+        "caption": "易于使用的控制器,配备便捷的温度与时长设置,助您轻松管理红外线桑拿体验。"
+      }
+    },
+    "controls": {
+      "saunova": {
+        "title": "Saunova系列"
+      },
+      "innova": {
+        "title": "Innova系列"
+      },
+      "accessories": {
+        "title": "控制器配件"
+      }
+    }
+  },
+  "section4": {
+    "heading": "桑拿配件",
+    "items": {
+      "pailsLadles": {
+        "title": "木桶与勺子",
+        "alt": "桑拿木桶与勺子"
+      },
+      "thermometers": {
+        "title": "温度计与组合仪表",
+        "alt": "桑拿温度计与组合仪表"
+      },
+      "clocksSandtimers": {
+        "title": "时钟与沙漏计时器",
+        "alt": "桑拿时钟与沙漏计时器"
+      },
+      "lightsCovers": {
+        "title": "桑拿灯具与灯罩",
+        "alt": "桑拿灯罩"
+      },
+      "headrestsBackrests": {
+        "title": "头枕与靠背",
+        "alt": "桑拿头枕与靠背"
+      },
+      "doorsHandles": {
+        "title": "门与把手",
+        "alt": "桑拿门与把手"
+      },
+      "benches": {
+        "title": "长凳与地砖",
+        "alt": "桑拿长凳与地砖"
+      },
+      "kivistone": {
+        "title": "KIVISTONE",
+        "alt": "Kivistone桑拿石"
+      },
+      "ventilations": {
+        "title": "通风与附加配件",
+        "alt": "桑拿通风与附加配件"
+      }
+    }
+  },
+  "section5": {
+    "heading": "定制解决方案",
+    "subtitle": "让我们将您的桑拿构想变为现实。",
+    "body1": "我们精心打造契合您风格与空间的桑拿解决方案。无论是家用还是商用,从设计、安装到技术支持,我们都能为您全程提供保障。",
+    "body2": "欢迎致电或给我们留言。",
+    "altRight": "桑拿定制解决方案",
+    "altLeft": "预防性维护"
+  }
+}

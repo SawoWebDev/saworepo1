@@ -49,6 +49,16 @@ export function useLocalProducts() {
   // filled in during the translation pilot, so it isn't cached at all yet:
   // always fetched fresh for the active non-English locale.
   const [translations, setTranslations] = useState({});
+  // Tracks whether `translations` actually reflects the CURRENT locale yet.
+  // Without this, every page painted the English product immediately
+  // (translations starts at {}, mergeTranslation falls back to English),
+  // then re-rendered a moment later once the fetch below resolved — a
+  // visible flash on every single navigation, not just first load, since
+  // translations aren't cached and this hook is called fresh per page.
+  // Folded into the returned `loading` flag instead of a separate field so
+  // every existing consumer's `if (loading) return <Skeleton/>` gate covers
+  // it automatically, no per-page changes needed.
+  const [translationsReady, setTranslationsReady] = useState(() => locale === "en");
 
   useEffect(() => {
     const cached = readPublicCache(PRODUCTS_CACHE_KEY, PRODUCTS_STORAGE_KEY);
@@ -89,11 +99,15 @@ export function useLocalProducts() {
   useEffect(() => {
     if (locale === "en") {
       setTranslations({});
+      setTranslationsReady(true);
       return;
     }
+    setTranslationsReady(false);
     let cancelled = false;
     getProductTranslationsLive(locale).then((byProductId) => {
-      if (!cancelled) setTranslations(byProductId);
+      if (cancelled) return;
+      setTranslations(byProductId);
+      setTranslationsReady(true);
     });
     return () => {
       cancelled = true;
@@ -105,5 +119,5 @@ export function useLocalProducts() {
     [products, translations, locale]
   );
 
-  return { products: translatedProducts, categories, tags, meta, loading, error };
+  return { products: translatedProducts, categories, tags, meta, loading: loading || !translationsReady, error };
 }

@@ -94,6 +94,8 @@ const Dashboard      = lazy(() => import("./Administrator/Dashboard"));
 const Profile        = lazy(() => import("./Administrator/Profile"));
 const Users          = lazy(() => import("./Administrator/Users"));
 const Products       = lazy(() => import("./Administrator/Products"));
+const Translations   = lazy(() => import("./Administrator/Translations/Translations"));
+const TranslationProductDetail = lazy(() => import("./Administrator/Translations/TranslationProductDetail"));
 const SaunaRoomsAdmin = lazy(() => import("./Administrator/SaunaRoomsCMS"));
 const Models         = lazy(() => import("./Administrator/Models"));
 const Taxonomy       = lazy(() => import("./Administrator/Taxonomy"));
@@ -262,6 +264,12 @@ export default function App() {
             } />
             <Route path="/admin/products" element={
               <ProtectedRoute><AdminLayout><Products /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/translations" element={
+              <ProtectedRoute requiredCap="page.translations"><AdminLayout><Translations /></AdminLayout></ProtectedRoute>
+            } />
+            <Route path="/admin/translations/products/:productId" element={
+              <ProtectedRoute requiredCap="page.translations"><AdminLayout><TranslationProductDetail /></AdminLayout></ProtectedRoute>
             } />
             <Route path="/admin/sauna-rooms" element={
               <ProtectedRoute requiredCap="sauna_rooms.view"><AdminLayout><SaunaRoomsAdmin /></AdminLayout></ProtectedRoute>

@@ -47,5 +47,378 @@
       "ventilations": { "title": "Ventilations & Add-Ons", "desc": "Explore your sauna experience with our range of ventilations and essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!" }
     },
     "viewAll": "VIEW ALL ACCESSORIES"
+  },
+  "heatersPage": {
+    "meta": {
+      "title": "Sauna Heaters",
+      "description": "Browse SAWO's full Finnish sauna heater lineup: Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style."
+    },
+    "hero": { "title": "SAUNA HEATERS", "catalogueButton": "PRODUCT CATALOGUE" },
+    "why": {
+      "eyebrow": "SAWO HEATERS",
+      "title": "Why Choose SAWO Heaters",
+      "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time."
+    },
+    "video": {
+      "title": "Who can use SAWO heaters?",
+      "desc": "We offer a wide range of choices for hotels, spas, gyms, and private residential saunas. From small to towering, simple to stylish, showstopping to concealed, we have the right heater for you."
+    },
+    "items": {
+      "tower": { "title": "Tower Series", "caption": "SAWO Tower heaters are best described as \"sauna stone pillars.\" Strong, stainless steel rings hold massive amounts of stones. These heaters are designed to circulate steam evenly from the lowest to the highest part of the sauna room." },
+      "floor": { "title": "Floor Series", "caption": "Our Floor series features movable, sleek, and durable high-performance standalone heaters that ensure optimal heat distribution and comfort. Due to having more heater placement options, the heaters allow for a more customized look of the sauna room." },
+      "wallMounted": { "title": "Wall Mounted Series", "caption": "SAWO Wall-mounted heaters are all about strong performance in a compact size. For added safety, most of our wall-mounted heaters are available with cool-to-touch fiber coating to help prevent accidental burns." },
+      "combi": { "title": "Combi Series", "caption": "Versatile electric heaters with integrated steamers, offering traditional and steam sauna options with aroma oil basins for added luxury." },
+      "dragonfire": { "title": "Dragonfire Series", "caption": "Elevate your sauna experience with the SAWO Dragonfire series, crafted by renowned Finnish designer Stefan Lindfors for modern living." },
+      "stone": { "title": "Stone Series", "caption": "Made of Finnish soapstone, the SAWO Stone Heaters have exceptional heat-storing and conducting properties. Their gentle heat provides a consistent and long-lasting sauna experience." }
+    },
+    "viewAll": "VIEW ALL HEATERS"
+  },
+  "accessoriesPage": {
+    "meta": {
+      "title": "Sauna Accessories",
+      "description": "Enhance your sauna with SAWO accessories: buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna."
+    },
+    "hero": { "title": "SAUNA ACCESSORIES", "subtitle": "Discover the Perfect Sauna Accessories" },
+    "sectionTitle": "Discover the Perfect Sauna Accessories",
+    "brochureItems": {
+      "kivistone": "Kivistone Brochure",
+      "saunaLights": "Sauna Lights Brochure",
+      "accessorySets": "Accessory Sets Brochure",
+      "accessories": "Accessories Brochure",
+      "curveLedLights": "Curve LED Lights Flyer"
+    },
+    "items": {
+      "accessorySets": { "title": "Accessory Sets", "desc": "Our carefully curated accessory sets offer something for everyone. From natural, zero-waste options to bold & sophisticated designs, the sets enhance your sauna enjoyment in every possible way." },
+      "pailsLadles": { "title": "Pails & Ladles", "desc": "Essential to Finnish saunas, our SAWO selection offers pails ranging from 2 to 40 liters. Choose from traditional cedar, aspen, & pine or modern stainless steel options. Complete your set with ladles." },
+      "thermometers": { "title": "Thermometers & Combined meters", "desc": "Traditional Thermometers & Hygrometers signal sauna readiness. Explore diverse shapes & styles. Enhance your lounge with wooden clocks & try our 15-minute sand timers for socializing or newcomers." },
+      "clocksSandtimers": { "title": "Clocks & Sandtimers", "desc": "Want to see who lasts the longest in sauna? Our 15min sand timers are a great way to create conversation or perfect for those who are new to Finnish sauna." },
+      "lightsCovers": { "title": "Sauna Lights & Covers", "desc": "Create the perfect ambience with a proper play of lighting. Our different light shades allow you to create the feel of soothing & warm." },
+      "headrestsBackrests": { "title": "Headrests & Backrests", "desc": "Wooden headrests & backrests, along with lounge backrests, made from durable materials like wood, memory foam, or fabric, offer comfort in the sauna & lounge with moisture-resistant upholstery for durability." },
+      "doorsHandles": { "title": "Doors & Handles", "desc": "Elevate your sauna with SAWO's sauna doors. Crafted for durability, they feature rubber lining, magnetic lock, stainless hinges, & laminated jambs. Choose from glass options for a light-filled, spacious feel." },
+      "benches": { "title": "Benches & Floor Tiles", "desc": "Upgrade your sauna experience with comfy, stylish benches that support & enhance relaxation. Choose from various high-quality designs to suit your taste & space, creating a wellness sanctuary for your body & mind." },
+      "kivistone": { "title": "Kivistone", "desc": "Kivistone offers a variety of unique soapstone products for homes, gifts, & corporate use, featuring a wide range of innovative designs." },
+      "ventilations": { "title": "Ventilations & Add-Ons", "desc": "Explore your sauna experience with our range of ventilations & essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!" }
+    },
+    "viewAll": "VIEW ALL ACCESSORIES"
+  },
+  "controlsPage": {
+    "meta": {
+      "title": "Sauna Controls",
+      "description": "Precise temperature, time, and lighting control for your sauna, explore SAWO's Innova and Saunova control series for total comfort."
+    },
+    "hero": {
+      "title": "Sauna Controls",
+      "description": "Precision control for the perfect sauna experience. Explore SAWO's Innova and Saunova control series for total comfort."
+    },
+    "intro": {
+      "title": "Discover Our Premier Sauna Control Collection",
+      "desc": "Using a separate control with SAWO heaters will let you decide what type of sauna experience you will have. Control features such as temperature, humidity, time, use of fan and light dimmer or even save energy with power consumption counter."
+    },
+    "groupLabels": {
+      "Coming Soon": "Coming Soon",
+      "Saunova Series": "Saunova Series",
+      "Innova Series": "Innova Series",
+      "Control Spare Parts": "Control Spare Parts",
+      "Interface Holder": "Interface Holder",
+      "Sensor": "Sensor",
+      "Other": "Other"
+    },
+    "precaution": {
+      "label": "Precaution Notice",
+      "text": "Only a qualified electrician is allowed to make electrical connections and repairs on the unit. Use original parts only."
+    },
+    "why": {
+      "eyebrow": "SAWO CONTROLS",
+      "title": "Why Choose SAWO Controls",
+      "desc": "SAWO controls combine intuitive usability with advanced technology, giving you full command over your sauna environment for a consistent, tailored experience every session."
+    },
+    "promo": {
+      "title": "Experience Ultimate Relaxation",
+      "subtitle": "Find your perfect control from our full range of SAWO solutions"
+    }
+  },
+  "roomsPage": {
+    "meta": {
+      "title": "Sauna Rooms",
+      "description": "Explore SAWO sauna rooms: Standard, Glass Front, and Compact designs crafted for a complete, therapeutic sauna experience."
+    },
+    "hero": {
+      "title": "SAUNA ROOMS",
+      "subtitle": "Custom-built Finnish sauna rooms crafted for comfort, durability, and timeless design.",
+      "catalogueButton": "Product Catalogue"
+    },
+    "configurator": {
+      "title": "Customize Your Dream Sauna",
+      "desc": "Select your ideal room, heater, and accessories, then send us your configuration for a personalized quote.",
+      "steps": { "room": "Room", "heater": "Heater", "accessories": "Accessories" },
+      "stepLabels": { "room": "Step 1", "heater": "Step 2", "accessory": "Step 3" },
+      "stepHeadings": {
+        "room": "Choose Your Sauna Room",
+        "heater": "Pick Your Sauna Heater",
+        "accessory": "Add Accessories"
+      },
+      "multiNote": "You can select multiple accessories",
+      "back": "Back",
+      "next": "Next",
+      "yourSelection": "Your Selection",
+      "notSelected": "Not selected",
+      "itemsSelected": "{{count}} items selected",
+      "cta": "Inquire About This Setup",
+      "ctaHintReady": "Opens our contact form with your selections pre-filled",
+      "ctaHintEmpty": "Select at least a room to continue",
+      "rooms": {
+        "r1": { "name": "Small Classic Sauna Room - 1214RS", "tag": "Small", "desc": "A compact Finnish-style sauna designed for 1–3 people. Perfect for private relaxation and smaller spaces without sacrificing authentic sauna comfort." },
+        "r2": { "name": "Medium Classic Sauna Room - 1419RS", "tag": "Medium", "desc": "A spacious and versatile sauna built for 4–6 people. Ideal for families or shared sessions, offering the perfect balance of comfort and functionality." },
+        "r3": { "name": "Large Classic Sauna Room - 1922RL", "tag": "Large", "desc": "A generous sauna room designed for 6 or more people. Perfect for larger homes, wellness spaces, or commercial environments seeking a premium group experience." },
+        "r4": { "name": "Small Glass Front Sauna Room - 1414RS", "tag": "Small", "desc": "A compact sauna for 1–3 people featuring a full glass front that enhances natural light and visual space. Ideal for modern interiors seeking a brighter, more open sauna experience." },
+        "r5": { "name": "Medium Glass Front Sauna Room - 1420RS", "tag": "Medium", "desc": "Designed for 4–6 people, this glass-front sauna combines spacious comfort with contemporary elegance. The transparent façade creates an open, airy atmosphere while maintaining authentic sauna performance." },
+        "r6": { "name": "Large Glass Front Sauna Room - 1922RS", "tag": "Large", "desc": "A premium 6+ person sauna featuring a striking full-glass front for a luxurious, open-concept feel. Perfect for statement wellness spaces that blend design and relaxation." }
+      },
+      "heaters": {
+        "h1": { "name": "Taurus D NS", "tag": "Floor Heater", "desc": "Taurus D revolutionizes the standard sauna heater by having two or more power options in the same heater. The heater is designed for industrial use, spas, and both public and private pools." },
+        "h2": { "name": "SAWO30 Round Ni2", "tag": "Tower Heater", "desc": "The SAWO30 Round is a magnificent-looking heater that can be placed perfectly in the middle of the sauna or embedded into benches. The large amount of stones in the tall sleek body creates a rich, steam-infused atmosphere." },
+        "h3": { "name": "Nordex Pro NS", "tag": "Floor Heater", "desc": "The Nordex Pro NS is the newest heater in the trusted Nordex lineup. It is engineered for long-lasting performance, with a separate stone compartment to protect the heating elements and extend the unit's lifespan." },
+        "h4": { "name": "Krios Ni2", "tag": "Wall-Mounted Heater", "desc": "The Krios Ni2 delivers a richer, more humid Finnish sauna experience with its larger stone container. Housed in a sleek stainless steel casing featuring SAWO's signature pattern, it combines style and performance." },
+        "h5": { "name": "Aries Round Black Ni2", "tag": "Tower Heater", "desc": "The Aries Round shares the minimalist elegance of all Tower heaters. Tall and space-saving, it distributes heat evenly and is ideal for installation in the center of the sauna or embedded into a bench." },
+        "h6": { "name": "Scandia NS", "tag": "Wall-Mounted Heater", "desc": "The Scandia NS is a staple classic among sauna heaters, delivering a truly traditional Finnish sauna experience. Simple, reliable, and efficient, it is available with a cool-to-touch fiber coating." }
+      },
+      "accessories": {
+        "a1": { "name": "Traditional Set", "tag": "Available in: Cedar", "desc": "The choice with a clean, timeless, and traditional finish. It delivers all the essential tools for everyday sauna use." },
+        "a2": { "name": "Essential Set", "tag": "Available in: Cedar", "desc": "The Essential set takes comfort and style to the next level, offering a wider collection of sauna items to enjoy." },
+        "a3": { "name": "Signature Set", "tag": "Available in: Black & Cedar", "desc": "The distinguished Signature set is for those seeking an elegant and sophisticated sauna experience." },
+        "a4": { "name": "Dragon Set", "tag": "Available in: Black & Cedar", "desc": "With unparalleled style and innovation, the Dragon set offers a unique, bold look with added flair. This set is part of the Dragonfire Series, designed by renowned Finnish designer Stefan Lindfors." }
+      }
+    },
+    "features": {
+      "heading": "What Makes Our Sauna Different",
+      "items": {
+        "ventilation": {
+          "tab": "Ventilation", "title": "Ventilation",
+          "paragraphs": [
+            "Proper ventilation is essential for removing CO₂, pathogens and equalising the temperature inside your sauna. Most sauna kits lack this entirely.",
+            "SAWO's built-in intake vent brings oxygen-rich air directly to the heater, mixing it into the rising airflow, allowing longer, more comfortable sessions without the sluggishness of CO₂ buildup.",
+            "The integrated exhaust vent equalises temperatures throughout the room while actively drying your sauna after each use, extending its lifespan significantly."
+          ]
+        },
+        "lighting": {
+          "tab": "Lighting", "title": "Lighting",
+          "paragraphs": [
+            "The right lighting transforms a sauna session into a complete sensory experience. SAWO's integrated LED system is designed to complement the warmth of the wood and the heat of the room.",
+            "Soft, low-glare positioning around the bench and ceiling creates a calm, immersive atmosphere, never harsh or clinical. Fully dimmable to suit any mood or time of day.",
+            "All components are rated for the heat and humidity of a sauna environment, ensuring safe and reliable performance for years of daily use."
+          ]
+        },
+        "benchHeight": {
+          "tab": "Bench Height", "title": "Bench Height",
+          "paragraphs": [
+            "Bench height plays a critical role in the quality of your sauna experience. Higher benches sit closer to the ceiling where temperatures are warmest, while lower benches offer a gentler, more relaxed heat.",
+            "SAWO benches are crafted from premium kiln-dried timber and positioned to maximise heat exposure and comfort simultaneously. Available in straight and L-type configurations to suit any room layout.",
+            "Every bench is finished to a smooth, splinter-free surface, designed for daily use without maintenance concerns."
+          ]
+        },
+        "excellentHeat": {
+          "tab": "Excellent Heat", "title": "Excellent Heat",
+          "paragraphs": [
+            "Even, consistent heat is what separates a great sauna from a good one. SAWO heaters are engineered to distribute warmth uniformly across the entire room, no cold corners, no hot spots.",
+            "Reaching target temperatures quickly and holding them precisely, our heaters are designed for efficiency without sacrificing the deep, penetrating heat that defines the Finnish experience.",
+            "Compatible with both wet and dry sauna sessions, giving you full control over the intensity and character of every session."
+          ]
+        },
+        "roomSizes": {
+          "tab": "Room Sizes", "title": "Room Sizes",
+          "paragraphs": [
+            "SAWO sauna rooms are available in three size categories, designed to fit any space, from a compact home bathroom to a dedicated wellness room."
+          ],
+          "specs": [
+            { "key": "Small Rooms", "val": "1.16m–1.54m wide", "note": "/ 1–3 people" },
+            { "key": "Medium Rooms", "val": "1.36m–1.85m wide", "note": "/ 4–6 people" },
+            { "key": "Large Rooms", "val": "1.85m–2.23m wide", "note": "/ 6+ people" },
+            { "key": "Height", "val": "2.12m", "note": "(all models)" },
+            { "key": "Bench Types", "val": "Straight, L-Type, Double Straight, Double with Middle Door", "note": null },
+            { "key": "Material", "val": "Cedar, Aspen or Pinaceae", "note": null }
+          ]
+        },
+        "insulation": {
+          "tab": "Insulation", "title": "Insulation",
+          "paragraphs": [
+            "Proper insulation is the foundation of an efficient sauna. SAWO rooms are built with high-performance insulation that retains heat inside the cabin and prevents energy loss through the walls, floor, and ceiling.",
+            "This means faster heat-up times, lower running costs, and a more consistent temperature throughout your session, regardless of the ambient conditions outside.",
+            "SAWO's insulation is also moisture-resistant, protecting the structural integrity of the room over years of daily use and steam exposure."
+          ]
+        }
+      }
+    },
+    "productDetails": {
+      "title": "The Sauna You'll Actually Use Every Day",
+      "loading": "Loading",
+      "performanceHeader": "Crafted with Precision",
+      "storySections": [
+        {
+          "title": "Your Own Private Retreat",
+          "paragraphs": [
+            "Imagine finishing a long day and stepping into your own sauna, heat rising, muscles unwinding, the world outside falling quiet. SAWO sauna rooms bring that experience home, available in sizes from compact 1–3 person rooms all the way up to spacious 6+ person suites, so there's a perfect fit for every space and every household.",
+            "Whether you're looking for a solo sanctuary or a place to unwind with family and friends, our rooms are designed to make that luxury effortless and permanent, no gym membership, no booking ahead, just pure Finnish heat whenever you need it."
+          ]
+        },
+        {
+          "title": "Authentic Finnish Craftsmanship",
+          "paragraphs": [
+            "SAWO has been building saunas in Finland for over 30 years, and every room reflects that heritage. Each sauna is available in cedar, aspen, or pinaceae, each wood bringing its own natural character, aroma, and feel to your sessions.",
+            "Choose from straight bench or L-type bench configurations, with left and right-hand door options to suit your space. Every detail, from the bench layout to the panel joinery, is designed the way Finns have always done it, with simplicity, quality, and longevity in mind."
+          ]
+        }
+      ],
+      "featureText": "Regular sauna use detoxifies naturally, improves circulation, and accelerates muscle recovery after exercise. The warmth eases stress, deepens sleep, and leaves you feeling restored, session after session. And beyond the wellness benefits, a SAWO sauna room is a lasting addition to your home that increases its value and sets it apart.",
+      "perfCards": [
+        { "label": "Cedar, Aspen or Pinaceae", "detail": "Naturally aromatic, sustainably sourced" },
+        { "label": "3 Size Categories", "detail": "1–3, 4–6, and 6+ person configurations" },
+        { "label": "Straight & L-Type Benches", "detail": "Left and right-hand door options available" },
+        { "label": "Finnish Made, 30+ Years", "detail": "Decades of sauna expertise in every room" }
+      ],
+      "accordionItems": [
+        {
+          "title": "Product Specifications",
+          "specs": [
+            { "label": "Small Rooms", "value": "1.16m–1.54m wide", "unit": "/ 1–3 people" },
+            { "label": "Medium Rooms", "value": "1.36m–1.85m wide", "unit": "/ 4–6 people" },
+            { "label": "Large Rooms", "value": "1.85m–2.23m wide", "unit": "/ 6+ people" },
+            { "label": "Height", "value": "2.12m", "unit": "(all models)" },
+            { "label": "Bench Types", "value": "Straight, L-Type, Double Straight, Double with Middle Door", "unit": null },
+            { "label": "Material", "value": "Cedar, Aspen or Pinaceae", "unit": null }
+          ]
+        }
+      ]
+    },
+    "roomDetails": {
+      "aboutThisRoom": "About This Room",
+      "pills": { "standard": "Standard", "glassfront": "Glass Front", "infrared": "Infrared", "compact": "Compact" },
+      "panels": {
+        "standard": {
+          "descriptions": [
+            "The SAWO Standard Sauna Room brings the authentic Finnish sauna experience to your home. Designed with simplicity and elegance, it combines traditional craftsmanship with modern engineering.",
+            "Each room is precision-built to maintain optimal heat circulation and energy efficiency, ensuring a consistent and comfortable sauna session every time."
+          ],
+          "features": [
+            "Easy assembly with pre-built wall panels",
+            "Premium heat-treated wood construction",
+            "Tempered glass door with magnetic seal",
+            "Available in all sizes and with multiple wood finishes"
+          ]
+        },
+        "glassfront": {
+          "descriptions": [
+            "The SAWO Glass Front Sauna Room combines contemporary design with traditional sauna benefits. Featuring a stunning full glass front panel, this modern sauna creates an open, airy atmosphere while maintaining exceptional heat retention.",
+            "Perfect for those who appreciate both aesthetics and functionality, the glass front design brings natural light into your sauna space and creates a luxurious spa-like ambiance."
+          ],
+          "features": [
+            "Full glass front panel for modern aesthetic",
+            "Triple-layered tempered safety glass",
+            "Enhanced heat insulation technology",
+            "Available in all sizes and wood options"
+          ]
+        },
+        "infrared": {
+          "descriptions": [
+            "SAWO's standard infrared sauna rooms come in two sizes, either for a single person or for two people. The far-infrared panels do not heat the room as much as a traditional sauna does, so the majority of the heat produced is heating the body directly.",
+            "Featuring fiber-coated far infrared panels (170W per panel), these energy-efficient saunas offer 1-person (1200W) or 2-person (1400W) configurations with premium cedar construction and plug-and-play 230V installation."
+          ],
+          "features": [
+            "Fiber-coated far infrared panels (170W/panel)",
+            "230V plug-and-play installation",
+            "Digital control for temperature, time, lights & fan",
+            "Modern LED lights (12W) & pre-installed exhaust fan (18W)",
+            "Adjustable base support & session time: 1–60 minutes",
+            "Premium cedar construction"
+          ]
+        },
+        "compact": {
+          "descriptions": [
+            "The Compact Sauna Room plug-and-play benefits offer instant use of stability, saving set-up cost and downtime.",
+            "Designed for single-person use, this space-saving sauna is available in two sizes and crafted from premium cedar, making it the perfect solution for smaller spaces without compromising on the authentic sauna experience."
+          ],
+          "features": [
+            "Plug-and-play, ready to use instantly",
+            "Space-saving compact design for 1 person",
+            "Saves set-up cost and minimises downtime",
+            "Premium cedar wood construction",
+            "Available in two sizes: 1310MS & 1313MS"
+          ]
+        }
+      }
+    },
+    "teaser3d": {
+      "label": "Interactive 3D Model",
+      "title": "Explore Every Detail",
+      "subtitle": "Rotate, zoom, and inspect every angle of our sauna before it ever arrives at your door.",
+      "launch": "Launch 3D Viewer",
+      "dragRotate": "Drag to Rotate",
+      "scrollZoom": "Scroll to Zoom",
+      "doubleTapFocus": "Double-tap to Focus",
+      "openViewer": "Open 3D Viewer",
+      "buildYourOwn": "Build Your Own"
+    },
+    "callToAction": {
+      "label": "Your Wellness Awaits",
+      "title": "Ready to Build Your Dream Sauna?",
+      "description": "Let our sauna specialists guide you through every step. From design consultation to installation support, we're here to bring the ultimate relaxation experience to your home."
+    },
+    "roomTitles": {
+      "standard": "Standard Sauna Room",
+      "glassfront": "Glass Front Sauna Room",
+      "infrared": "Infrared Saunas",
+      "compact": "Compact Sauna Room"
+    },
+    "roomDescriptions": {
+      "standard": "SAWO Classic Sauna Rooms offer a timeless sauna experience with high-quality Nordic wood and practical bench layouts.",
+      "glassfront": "SAWO Glass Front Sauna Rooms offer a modern sauna experience with durable glass to overlook stunning views without compromising on practicality.",
+      "infrared": "SAWO Infrared Saunas provide gentle, therapeutic heat using advanced infrared technology for a relaxing and rejuvenating experience.",
+      "compact": "SAWO Compact Sauna Rooms offer an instant, stable, plug-and-play sauna setup for urban spaces while a hidden heater ensures safety and maximized views."
+    },
+    "benchTypes": {
+      "straight": "Straight Bench",
+      "lType": "L-Type Bench",
+      "singleStraight": "Single Straight Bench",
+      "doubleStraight": "Double Straight Bench",
+      "middleLType": "Middle L-Type Bench"
+    },
+    "viewer": {
+      "bestSeller": "Best Seller",
+      "video": "Video",
+      "benchDesign": "Bench Design",
+      "modelNumber": "Model Number",
+      "capacity": "Capacity",
+      "dimensions": "Dimensions",
+      "width": "Width",
+      "depth": "Depth",
+      "height": "Height",
+      "saunaRoomModel": "Sauna Room Model",
+      "reset": "Reset",
+      "showAll": "Show All",
+      "doorLocation": "Door Location",
+      "woodType": "Wood Type",
+      "inquireNow": "Inquire Now",
+      "sizeCategories": { "small": "Small", "medium": "Medium", "large": "Large" }
+    },
+    "woodMaterials": {
+      "title": "Choose Your Wood",
+      "subtitle": "Each wood type brings its own character, scent, and warmth to your sauna experience.",
+      "items": {
+        "cedar": {
+          "name": "Cedar",
+          "description": "Rich, aromatic wood with natural resistance to moisture. Known for its warm reddish-brown tones and distinctive scent.",
+          "traits": ["Aromatic", "Moisture-Resistant", "Warm Tones"]
+        },
+        "aspen": {
+          "name": "Aspen",
+          "description": "Light, hypoallergenic wood with a smooth finish. Cool to the touch and perfect for those with sensitivities.",
+          "traits": ["Hypoallergenic", "Cool Touch", "Light Grain"]
+        },
+        "pinaceae": {
+          "name": "Pinaceae",
+          "description": "Traditional Nordic sauna wood with a clean, natural grain. Excellent heat properties and timeless aesthetic appeal.",
+          "traits": ["Traditional", "Heat-Efficient", "Natural Grain"]
+        }
+      }
+    }
   }
 }

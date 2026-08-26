@@ -1,6 +1,41 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { ROOM_CONFIGS, HASH_MAP, SIDE_THUMBS, COMPACT_VIDEO_SRC } from "./SaunaRoomData";
 import menuPaths from "../../../menuPaths";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
+
+// SaunaRoomData.jsx's ROOM_CONFIGS/bench data is plain English JS data (it
+// has no access to t()), and its "same 5 bench names / 4 room titles repeated
+// on every one of 250+ model entries" shape is exactly why: translating each
+// occurrence individually would mean re-translating the same handful of
+// phrases hundreds of times. Instead of restructuring that data file, this
+// component (which already has t()) maps each known English literal back to
+// one shared translation key at render time.
+const ROOM_TITLE_KEYS = {
+  "Standard Sauna Room": "standard",
+  "Glass Front Sauna Room": "glassfront",
+  "Infrared Saunas": "infrared",
+  "Compact Sauna Room": "compact",
+};
+const BENCH_NAME_KEYS = {
+  "Straight Bench": "straight",
+  "L-Type Bench": "lType",
+  "Single Straight Bench": "singleStraight",
+  "Double Straight Bench": "doubleStraight",
+  "Middle L-Type Bench": "middleLType",
+};
+// cfg.desc (ROOM_CONFIGS in SaunaRoomData.jsx) is a SEPARATE hardcoded data
+// source from SRD_PANELS (translated via translateSharedItems.js) — same
+// page, different shape, and it was missed on the first translation pass
+// because nothing enumerates every hardcoded-English source on a page
+// automatically (see README-i18n.md's "Every hardcoded-string source on a
+// page, not just its own .jsx" checklist item, added after this was caught).
+// Same literal-to-key lookup pattern as ROOM_TITLE_KEYS/BENCH_NAME_KEYS above.
+const ROOM_DESC_KEYS = {
+  "SAWO Classic Sauna Rooms offer a timeless sauna experience with high-quality Nordic wood and practical bench layouts.": "standard",
+  "SAWO Glass Front Sauna Rooms offer a modern sauna experience with durable glass to overlook stunning views without compromising on practicality.": "glassfront",
+  "SAWO Infrared Saunas provide gentle, therapeutic heat using advanced infrared technology for a relaxing and rejuvenating experience.": "infrared",
+  "SAWO Compact Sauna Rooms offer an instant, stable, plug-and-play sauna setup for urban spaces while a hidden heater ensures safety and maximized views.": "compact",
+};
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
@@ -107,6 +142,20 @@ const REVERSE_HASH_MAP = Object.fromEntries(Object.entries(HASH_MAP).map(([hash,
  *                             tab bar would be noise
  */
 const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
+  const t = useLocaleT("sauna");
+  const localize = useLocalizedPath();
+  const trTitle = useCallback((title) => {
+    const key = ROOM_TITLE_KEYS[title];
+    return key ? t(`roomsPage.roomTitles.${key}`) : title;
+  }, [t]);
+  const trBench = useCallback((name) => {
+    const key = BENCH_NAME_KEYS[name];
+    return key ? t(`roomsPage.benchTypes.${key}`) : name;
+  }, [t]);
+  const trDesc = useCallback((desc) => {
+    const key = ROOM_DESC_KEYS[desc];
+    return key ? t(`roomsPage.roomDescriptions.${key}`) : desc;
+  }, [t]);
   const visibleTabs = TABS.filter((tab) => rooms.includes(tab.key));
   const [activeRoom, setActiveRoom] = useState(() => {
     const hash = window.location.hash.replace("#", "");
@@ -329,13 +378,13 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
   const isBestSeller = current && cfg.bestSellers && cfg.bestSellers.has(current.size);
 
   const inquiryHref = useMemo(() => {
-    if (!current) return menuPaths.contact;
+    if (!current) return localize(menuPaths.contact);
     const model = cfg.isFlat ? current.size : cleanModelNumber(current.size, cfg);
     const benchType = cfg.benchTypes[current.bench]?.name || "Standard Bench";
     const sideStr = cfg.isFlat ? "" : current.side;
     const subject = `Customize My Sauna: Room: ${cfg.label} - ${model}${sideStr} - ${benchType}`;
-    return `${menuPaths.contact}?subject=${encodeURIComponent(subject)}`;
-  }, [current, cfg]);
+    return `${localize(menuPaths.contact)}?subject=${encodeURIComponent(subject)}`;
+  }, [current, cfg, localize]);
 
   const galleryModels = useMemo(() => {
     const side = cfg.hasDoorFilter ? selectedSide : "all";
@@ -383,7 +432,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
               className={`sauna-tab-btn${activeRoom === tab.key ? " active" : ""}`}
               onClick={() => switchRoom(tab.key)}
             >
-              {tab.label}
+              {trTitle(tab.label)}
             </button>
           ))}
         </div>
@@ -393,8 +442,8 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
       {/* ROOM UI */}
       <div className="room-wrapper" key={activeRoom} id="sawo-configurator">
         <div className="room-header-top">
-          <div className="room-title">{currentBench ? currentBench.title : cfg.label}</div>
-          <div className="room-desc">{cfg.desc}</div>
+          <div className="room-title">{currentBench ? trTitle(currentBench.title) : trTitle(cfg.label)}</div>
+          <div className="room-desc">{trDesc(cfg.desc)}</div>
         </div>
 
         {/* LEFT — Image + Gallery */}
@@ -419,7 +468,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
               <div className="image-tag">{imageTag}</div>
 
               {isBestSeller && (
-                <div className="carousel-best-seller">Best Seller</div>
+                <div className="carousel-best-seller">{t("roomsPage.viewer.bestSeller")}</div>
               )}
 
               {displayedSrc && (
@@ -514,7 +563,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
                     onClick={() => handleGalleryClick(modelSize)}
                   >
                     {isGalleryBestSeller && (
-                      <div className="gallery-best-seller">Best Seller</div>
+                      <div className="gallery-best-seller">{t("roomsPage.viewer.bestSeller")}</div>
                     )}
                     <img src={firstImage} alt={modelSize} />
                     <div className="gallery-label">
@@ -529,7 +578,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
                   onClick={toggleCompactVideo}
                 >
                   <div className="video-trigger-icon">▶</div>
-                  <div className="gallery-label">Video</div>
+                  <div className="gallery-label">{t("roomsPage.viewer.video")}</div>
                 </div>
               )}
             </div>
@@ -539,10 +588,10 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
         {/* RIGHT — Details */}
         <div className="room-details">
           <div className="bench-design-section">
-            <div className="bench-design-label">Bench Design</div>
+            <div className="bench-design-label">{t("roomsPage.viewer.benchDesign")}</div>
             <div className="bench-design-visual">
               <div className="bench-design-name">
-                {currentBench ? currentBench.name : "-"}
+                {currentBench ? trBench(currentBench.name) : "-"}
               </div>
               <div className={`bench-icon${currentBench ? " " + currentBench.class : ""}`}>
                 {currentBench && (
@@ -554,7 +603,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
 
           <div className="product-specs">
             <div className="spec-item">
-              <div className="spec-label">Model Number</div>
+              <div className="spec-label">{t("roomsPage.viewer.modelNumber")}</div>
               <div className="spec-value">
                 {current
                   ? cfg.isFlat
@@ -564,25 +613,25 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
               </div>
             </div>
             <div className="spec-item">
-              <div className="spec-label">Capacity</div>
+              <div className="spec-label">{t("roomsPage.viewer.capacity")}</div>
               <div className="spec-value">{currentSizeData ? currentSizeData.capacity : "-"}</div>
             </div>
           </div>
 
           <div className="dimensions-section">
-            <div className="dimensions-title">Dimensions</div>
+            <div className="dimensions-title">{t("roomsPage.viewer.dimensions")}</div>
             <div className="dimension-grid">
               <div className="dimension-box">
                 <div className="value">{currentSizeData ? currentSizeData.width : "-"}</div>
-                <div className="label">Width</div>
+                <div className="label">{t("roomsPage.viewer.width")}</div>
               </div>
               <div className="dimension-box">
                 <div className="value">{currentSizeData ? currentSizeData.depth : "-"}</div>
-                <div className="label">Depth</div>
+                <div className="label">{t("roomsPage.viewer.depth")}</div>
               </div>
               <div className="dimension-box">
                 <div className="value">{currentSizeData ? currentSizeData.height : "-"}</div>
-                <div className="label">Height</div>
+                <div className="label">{t("roomsPage.viewer.height")}</div>
               </div>
             </div>
           </div>
@@ -598,7 +647,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
                     onClick={() => handleSizeTag(cat)}
                   >
                     <div className="size-tag-name">
-                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                      {t(`roomsPage.viewer.sizeCategories.${cat}`)}
                     </div>
                   </button>
                 ))}
@@ -607,11 +656,11 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
 
             <div className="filter-group">
               <label>
-                Sauna Room Model
-                <button className="reset-btn" onClick={handleResetSize} title="Reset">↻</button>
+                {t("roomsPage.viewer.saunaRoomModel")}
+                <button className="reset-btn" onClick={handleResetSize} title={t("roomsPage.viewer.reset")}>↻</button>
               </label>
               <select value={selectedSize} onChange={(e) => handleSizeChange(e.target.value)}>
-                <option value="all">Show All</option>
+                <option value="all">{t("roomsPage.viewer.showAll")}</option>
                 {cfg.sizeOptions.map((opt) => {
                   const hidden = allowedSizeValues && !allowedSizeValues.has(opt.value);
                   return (
@@ -630,11 +679,11 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
 
             <div className="filter-group">
               <label>
-                Door Location
+                {t("roomsPage.viewer.doorLocation")}
                 <button
                   className="reset-btn"
                   onClick={handleResetSide}
-                  title="Reset"
+                  title={t("roomsPage.viewer.reset")}
                   disabled={!cfg.hasDoorFilter}
                   style={!cfg.hasDoorFilter ? { opacity: 0.3, cursor: "not-allowed" } : {}}
                 >
@@ -647,7 +696,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
                 disabled={!cfg.hasDoorFilter}
                 style={!cfg.hasDoorFilter ? { cursor: "not-allowed" } : {}}
               >
-                <option value="all">Show All</option>
+                <option value="all">{t("roomsPage.viewer.showAll")}</option>
                 {cfg.doorOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
                 ))}
@@ -655,7 +704,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
             </div>
 
             <div className="filter-group full-width">
-              <label>Wood Type</label>
+              <label>{t("roomsPage.viewer.woodType")}</label>
               <select disabled style={{ cursor: "not-allowed" }}>
                 {cfg.woodOptions.map((w, i) => (
                   <option key={w} disabled={!cfg.woodEnabled[i]}>{w}</option>
@@ -670,7 +719,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Inquire Now</span>
+                <span>{t("roomsPage.viewer.inquireNow")}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12" />

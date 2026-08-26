@@ -27,7 +27,7 @@ import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp
 import HeroWave from "../../components/HeroWave";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
-import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
+import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 import { controlsPath } from "../../utils/anchoredLinks";
 import PageCTA from "../../components/PageCTA";
 
@@ -38,6 +38,7 @@ const Sauna = () => {
   const locale = useLocale();
   const t = useLocaleT("sauna");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const path = locale === "en" ? "/sauna" : `/${locale}/sauna`;
   const heroLoaded = useHeroLoaded(img_SAWO_Finnish_Sauna_Room_Cedar_Cover_scaled);
 
@@ -329,42 +330,42 @@ const Sauna = () => {
         <div className="sawo-sec heaters">
           <div className="sawo-grid">
             <div className="sawo-card">
-              <a href={menuPaths.sauna.heaters.tower}>
+              <a href={localize(menuPaths.sauna.heaters.tower)}>
                 <img src={img_TOWER_SERIES_2_600x360_1} alt={t("heaters.items.tower.title")} />
               </a>
               <div className="sawo-title">{t("heaters.items.tower.title")}</div>
               <div className="sawo-caption">{t("heaters.items.tower.caption")}</div>
             </div>
             <div className="sawo-card">
-              <a href={menuPaths.sauna.heaters.stone}>
+              <a href={localize(menuPaths.sauna.heaters.stone)}>
                 <img src={img_STONE_SERIES_3_600x320_new} alt={t("heaters.items.stone.title")} />
               </a>
               <div className="sawo-title">{t("heaters.items.stone.title")}</div>
               <div className="sawo-caption">{t("heaters.items.stone.caption")}</div>
             </div>
             <div className="sawo-card">
-              <a href={menuPaths.sauna.heaters.wallMounted}>
+              <a href={localize(menuPaths.sauna.heaters.wallMounted)}>
                 <img src={img_WALL_MOUNTED_SERIES_v2_1} alt={t("heaters.items.wallMounted.title")} />
               </a>
               <div className="sawo-title">{t("heaters.items.wallMounted.title")}</div>
               <div className="sawo-caption">{t("heaters.items.wallMounted.caption")}</div>
             </div>
             <div className="sawo-card">
-              <a href={menuPaths.sauna.heaters.floor}>
+              <a href={localize(menuPaths.sauna.heaters.floor)}>
                 <img src={img_FLOOR_MOUNTED_SERIES1_1024x614_1} alt={t("heaters.items.floor.title")} />
               </a>
               <div className="sawo-title">{t("heaters.items.floor.title")}</div>
               <div className="sawo-caption">{t("heaters.items.floor.caption")}</div>
             </div>
             <div className="sawo-card">
-              <a href={menuPaths.sauna.heaters.dragonfire}>
+              <a href={localize(menuPaths.sauna.heaters.dragonfire)}>
                 <img src={img_DRAGON_SERIES_1_600x360_1} alt={t("heaters.items.dragonfire.title")} />
               </a>
               <div className="sawo-title">{t("heaters.items.dragonfire.title")}</div>
               <div className="sawo-caption">{t("heaters.items.dragonfire.caption")}</div>
             </div>
             <div className="sawo-card">
-              <a href={menuPaths.sauna.heaters.combi}>
+              <a href={localize(menuPaths.sauna.heaters.combi)}>
                 <img src={img_COMBI_SERIES_600x360_1} alt={t("heaters.items.combi.title")} />
               </a>
               <div className="sawo-title">{t("heaters.items.combi.title")}</div>
@@ -374,7 +375,7 @@ const Sauna = () => {
         </div>
 
         <div className="sauna-view-all-wrap">
-          <Link to={menuPaths.heaters} className="sauna-view-all-btn">{t("heaters.viewAll")}</Link>
+          <Link to={localize(menuPaths.heaters)} className="sauna-view-all-btn">{t("heaters.viewAll")}</Link>
         </div>
       </section>
 
@@ -609,7 +610,7 @@ const Sauna = () => {
 
         <div className="controls-grid">
           {controlCards.map((card, i) => (
-            <a href={card.href} className="control-card" key={i} style={{ textDecoration: "none" }}>
+            <a href={localize(card.href)} className="control-card" key={i} style={{ textDecoration: "none" }}>
               <div className="control-card-img-wrap">
                 <img src={card.img} alt={card.title} />
               </div>
@@ -622,7 +623,7 @@ const Sauna = () => {
         </div>
 
         <div className="sauna-view-all-wrap">
-          <Link to={menuPaths.sauna.controls} className="sauna-view-all-btn">{t("controls.viewAll")}</Link>
+          <Link to={localize(menuPaths.sauna.controls)} className="sauna-view-all-btn">{t("controls.viewAll")}</Link>
         </div>
       </section>
 
@@ -738,52 +739,52 @@ const Sauna = () => {
         `}</style>
 
         <div className="custom-product-grid">
-          <Link to={menuPaths.sauna.accessories.accessorySets} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.accessorySets)} className="product">
             <img src={img_Signature_D_v4_scaled} alt={t("accessories.items.accessorySets.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.accessorySets.title")}</h3>
             <p>{t("accessories.items.accessorySets.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.pailsLadles} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.pailsLadles)} className="product">
             <img src={img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1} alt={t("accessories.items.pailsLadles.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.pailsLadles.title")}</h3>
             <p>{t("accessories.items.pailsLadles.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.thermometers} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.thermometers)} className="product">
             <img src={img_BoxType2_copy_new} alt={t("accessories.items.thermometers.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.thermometers.title")}</h3>
             <p>{t("accessories.items.thermometers.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.clocksSandtimers} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.clocksSandtimers)} className="product">
             <img src={img_sand_timer_copy_new} alt={t("accessories.items.clocksSandtimers.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.clocksSandtimers.title")}</h3>
             <p>{t("accessories.items.clocksSandtimers.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.lightsCovers} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.lightsCovers)} className="product">
             <img src={img_917_D_Display_new} alt={t("accessories.items.lightsCovers.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.lightsCovers.title")}</h3>
             <p>{t("accessories.items.lightsCovers.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.headrestsBackrests} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.headrestsBackrests)} className="product">
             <img src={img_506_2_D} alt={t("accessories.items.headrestsBackrests.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.headrestsBackrests.title")}</h3>
             <p>{t("accessories.items.headrestsBackrests.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.doorsHandles} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.doorsHandles)} className="product">
             <img src={img_DOORS_AND_HANDLES_copy} alt={t("accessories.items.doorsHandles.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.doorsHandles.title")}</h3>
             <p>{t("accessories.items.doorsHandles.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.benches} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.benches)} className="product">
             <img src={img_siro_bench} alt={t("accessories.items.benches.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.benches.title")}</h3>
             <p>{t("accessories.items.benches.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.kivistone} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.kivistone)} className="product">
             <img src={img_R_500_D_Scene2} alt={t("accessories.items.kivistone.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.kivistone.title")}</h3>
             <p>{t("accessories.items.kivistone.desc")}</p>
           </Link>
-          <Link to={menuPaths.sauna.accessories.ventilations} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.ventilations)} className="product">
             <img src={img_Ventilation} alt={t("accessories.items.ventilations.title")} />
             <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>{t("accessories.items.ventilations.title")}</h3>
             <p>{t("accessories.items.ventilations.desc")}</p>
@@ -791,7 +792,7 @@ const Sauna = () => {
         </div>
 
         <div className="sauna-view-all-wrap">
-          <Link to={menuPaths.accessories} className="sauna-view-all-btn">
+          <Link to={localize(menuPaths.accessories)} className="sauna-view-all-btn">
             {t("accessories.viewAll")}
           </Link>
         </div>

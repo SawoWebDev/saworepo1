@@ -1,0 +1,20 @@
+{
+  "slug": "venturi-pipe-straight",
+  "productId": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Suora venturiputki",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Venturiputki</b><span style=\"text-align: justify;\"> vetää ilmaa putken sisään, mikä laskee lämpötilaa jäähdyttämällä putken sisällä olevia lämmenneitä ilmamolekyylejä. Tämä prosessi tuottaa tiheämmän, pehmeän höyrypilven ja estää höyryputkesta kuuluvan sihisevän äänen.</span>",
+    "description": null,
+    "type": "Höyrylisävarusteet",
+    "features": [
+      "Tuottaa miedompaa, pehmeämpää höyryä",
+      "Muodostaa täyteläisempiä höyrypilviä",
+      "Estää sihisevän äänen",
+      "Sisältää höyrypään tasaista höyryn jakautumista varten",
+      "Valmistettu paksusta ruostumattomasta teräksestä"
+    ]
+  }
+}

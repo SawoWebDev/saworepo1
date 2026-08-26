@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import ChevronRight from "../../components/icons/ChevronRight";
 import useDragCarousel from "../../hooks/useDragCarousel";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 import imgPailsLadles        from "../../assets/Home/Section4/DRAGON-FIRE-PAIL-AND-LADDLE-SCENE.webp";
 import imgThermometers       from "../../assets/Home/Section4/BoxType2-copy-new.webp";
@@ -44,6 +44,7 @@ const ACCESSORY_IMAGES = {
 const Section4 = () => {
   const t = useLocaleT("home");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const ACCESSORIES = ACCESSORY_KEYS.map((key) => ({
     key,
     title: t(`section4.items.${key}.title`),
@@ -79,7 +80,7 @@ const Section4 = () => {
           {...dragHandlers}
         >
           {loopedItems.map((item, idx) => (
-            <Link to={item.href} key={idx} draggable={false} className="accessories-slide relative flex-shrink-0 snap-start rounded overflow-hidden group">
+            <Link to={localize(item.href)} key={idx} draggable={false} className="accessories-slide relative flex-shrink-0 snap-start rounded overflow-hidden group">
               <img src={item.img} alt={item.alt} title={item.title} width="400" height="400" loading="lazy" decoding="async" draggable={false} className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
               <div className="accessories-slide-overlay absolute bottom-0 left-0 w-full h-2/3 z-10 pointer-events-none" />
               <div className="accessories-slide-title absolute bottom-0 w-full text-center p-2 z-20" style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, color: "#fff", fontSize: "20px", lineHeight: "30px" }}>
@@ -100,7 +101,7 @@ const Section4 = () => {
 
       <div className="text-center mt-6">
         <Link
-          to={menuPaths.sauna.accessories.parent}
+          to={localize(menuPaths.sauna.accessories.parent)}
           style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500, fontSize: "15px", lineHeight: "27px", color: "#333333", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px", transition: "color 0.3s ease" }}
           onMouseEnter={e => e.currentTarget.style.color = "#af8564"}
           onMouseLeave={e => e.currentTarget.style.color = "#333333"}

@@ -5,6 +5,14 @@
   "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
   "tmPrefilled": [
     {
+      "path": "name",
+      "source": "STE Steam Generator"
+    },
+    {
+      "path": "short_description",
+      "source": "<p style=\"text-align: justify;\">Reliable and effortless to use, the <strong>STE</strong> steam generator is designed for residential environments. It is also simple to operate; just switch on the control and adjust the temperature knob. The stainless-steel construction ensures long-lasting durability and resistance to corrosion.</p><p style=\"text-align: justify;\">The STE can be oriented for connections on either side for easy installation in any layout. For greater power capacity, up to five units can be linked in series to deliver a maximum output of<strong> 75.0kW</strong>, all managed from a single SAWO control.</p>"
+    },
+    {
       "path": "type",
       "source": "Steam Generators"
     },
@@ -33,8 +41,20 @@
       "source": "Steam head included"
     },
     {
+      "path": "variations[0].features[5]",
+      "source": "Available controls: STE 2.0"
+    },
+    {
       "path": "variations[0].spec_table_headers[0]",
       "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[0].spec_table_headers[2]",
+      "source": "Steam Room (m³)"
+    },
+    {
+      "path": "variations[0].spec_table_headers[3]",
+      "source": "Size of Heater (mm) Length | Width | Height"
     },
     {
       "path": "variations[0].spec_table_headers[4]",
@@ -69,8 +89,20 @@
       "source": "Steam head included"
     },
     {
+      "path": "variations[1].features[5]",
+      "source": "Available controls: STE 2.0"
+    },
+    {
       "path": "variations[1].spec_table_headers[0]",
       "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[1].spec_table_headers[2]",
+      "source": "Steam Room (m³)"
+    },
+    {
+      "path": "variations[1].spec_table_headers[3]",
+      "source": "Size of Heater (mm) Length | Width | Height"
     },
     {
       "path": "variations[1].spec_table_headers[4]",
@@ -105,8 +137,20 @@
       "source": "2 Steam heads included"
     },
     {
+      "path": "variations[2].features[5]",
+      "source": "Available controls: STE 2.0"
+    },
+    {
       "path": "variations[2].spec_table_headers[0]",
       "source": "Steam Generator Model"
+    },
+    {
+      "path": "variations[2].spec_table_headers[2]",
+      "source": "Steam Room (m³)"
+    },
+    {
+      "path": "variations[2].spec_table_headers[3]",
+      "source": "Size of Heater (mm) Length | Width | Height"
     },
     {
       "path": "variations[2].spec_table_headers[4]",

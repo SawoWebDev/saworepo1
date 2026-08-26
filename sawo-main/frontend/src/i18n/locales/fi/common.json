@@ -2,6 +2,7 @@
   "exploreMore": "Lue lisää",
   "inquireToday": "KYSY LISÄÄ",
   "viewCatalogue": "KATSO LUETTELO",
+  "viewBrochure": "KATSO ESITE",
   "previous": "Edellinen",
   "next": "Seuraava",
   "pageCTA": {
@@ -9,6 +10,21 @@
     "defaultDescription": "Tiimimme auttaa löytämään kotiisi tai liiketilaasi sopivan SAWO-ratkaisun.",
     "contactUs": "Ota yhteyttä",
     "viewManuals": "Käyttöohjeet"
+  },
+  "saunaCalculatorCTA": {
+    "title": "Löydä unelmiesi sauna",
+    "subtitle": "Syötä saunahuoneesi mitat – leveys, korkeus ja syvyys – niin laskurimme laskee saunasi tilavuuden ja suosittelee sopivan kiuastehon (kW) hetkessä.",
+    "buttonLabel": "Saunalaskuri"
+  },
+  "catalogFilter": {
+    "all": "Kaikki",
+    "searchPlaceholder": "Etsi: {{category}}...",
+    "clearSearch": "Tyhjennä haku",
+    "noProductsYet": "Tuotteita ei ole vielä saatavilla.",
+    "noMatch": "Ei osumia haulle \"{{query}}\" ({{category}})",
+    "noResultsFor": "Ei tuloksia haulle \"{{query}}\"",
+    "resultsCount_one": "{{count}} tulos haulle \"{{query}}\"",
+    "resultsCount_other": "{{count}} tulosta haulle \"{{query}}\""
   },
   "wellnessBenefits": {
     "stressRelief": {

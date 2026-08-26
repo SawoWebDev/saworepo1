@@ -11,6 +11,7 @@ import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import menuPaths from "../../menuPaths";
+import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -49,6 +50,11 @@ function byCategory(products, category) {
 }
 
 const Steam = () => {
+  const locale = useLocale();
+  const t = useLocaleT("steam");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
+  const path = locale === "en" ? "/steam" : `/${locale}/steam`;
   const { products: localProds, loading } = useLocalProducts();
   const heroLoaded = useHeroLoaded(heroBg);
 
@@ -59,9 +65,13 @@ const Steam = () => {
   return (
     <div className="relative">
       <SEO
-        title="Steam Sauna — Generators, Controls & Accessories"
-        description="Shop SAWO steam sauna systems: stainless-steel steam generators, digital controls, and installation accessories engineered for a consistent, spa-quality steam experience at home or commercially."
-        path="/steam"
+        title={t("hub.meta.title")}
+        description={t("hub.meta.description")}
+        path={path}
+        // German isn't translated for this page yet — only list locales
+        // that actually have real Steam hub copy (see SEO.jsx's prop
+        // comment and README-i18n.md). Add "de" here once its translation lands.
+        hreflangAlternates={{ en: "/steam", fi: "/fi/steam", zh: "/zh/steam" }}
       />
 
       {/* ===================== */}
@@ -86,13 +96,13 @@ const Steam = () => {
         />
         <div className="stm-hero-overlay" />
         <div className="stm-hero-content">
-          <h1 className="stm-hero-title">STEAM</h1>
+          <h1 className="stm-hero-title">{t("hub.hero.title")}</h1>
           <p className="stm-hero-subtitle">
-            Experience the luxury of pure steam therapy
+            {t("hub.hero.subtitle")}
           </p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="VIEW BROCHURE"
+              text={tc("viewBrochure")}
               href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Steam-Sauna-2026.pdf"
             />
           </div>
@@ -105,11 +115,7 @@ const Steam = () => {
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 pt-20">
         <p className="stm-intro-text">
-          SAWO steam sauna systems bring the therapeutic power of moist heat to any space —
-          from compact home steam showers to large-scale commercial spas. Our complete steam
-          range covers everything you need: stainless-steel steam generators engineered for
-          years of reliable service, intuitive digital controls for precise temperature and
-          humidity, and a full line of accessories to finish the installation.
+          {t("hub.intro.text")}
         </p>
       </section>
 
@@ -118,23 +124,20 @@ const Steam = () => {
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="stm-group-head">
-          <h2 className="stm-group-title">Steam Generators</h2>
-          <Link to={menuPaths.steam.generators} className="stm-view-all">View All Generators</Link>
+          <h2 className="stm-group-title">{t("hub.generatorsSection.title")}</h2>
+          <Link to={localize(menuPaths.steam.generators)} className="stm-view-all">{t("hub.generatorsSection.viewAll")}</Link>
         </div>
         <p className="stm-group-desc">
-          A steam generator is the heart of every steam room, converting water into a
-          continuous, even flow of steam. SAWO's stainless-steel generators are built for
-          durability and easy maintenance, with models scaled from compact residential units
-          up to multi-unit commercial installations delivering up to 75kW.
+          {t("hub.generatorsSection.desc")}
         </p>
-        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading generators...</p>}
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>{t("hub.generatorsSection.loading")}</p>}
         {!loading && generators.length === 0 && (
-          <p style={{ textAlign: "center", color: "#999" }}>No steam generators available yet.</p>
+          <p style={{ textAlign: "center", color: "#999" }}>{t("hub.generatorsSection.empty")}</p>
         )}
         {!loading && generators.length > 0 && (
           <div className="stm-gen-grid">
             {generators.map(product => (
-              <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="stm-gen-card">
+              <Link to={localize(`/products/${product.slug}`)} key={product.id || product.slug} className="stm-gen-card">
                 <div className="stm-gen-img-wrap">
                   {getImageUrl(product, "thumbnail") ? (
                     <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="stm-gen-img" />
@@ -147,7 +150,7 @@ const Steam = () => {
                 <div className="stm-gen-body">
                   <h3 className="stm-gen-title">{product.name}</h3>
                   <p className="stm-gen-desc">
-                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Premium SAWO steam generator built for reliable, everyday performance."}
+                    {getFirstSentence(product.short_description) || getFirstSentence(product.description) || t("hub.generatorsSection.fallbackDesc")}
                   </p>
                 </div>
               </Link>
@@ -162,23 +165,20 @@ const Steam = () => {
       <section className="stm-alt-section py-16 px-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="stm-group-head">
-            <h2 className="stm-group-title">Steam Controls</h2>
-            <Link to={menuPaths.steam.controls} className="stm-view-all">View All Controls</Link>
+            <h2 className="stm-group-title">{t("hub.controlsSection.title")}</h2>
+            <Link to={localize(menuPaths.steam.controls)} className="stm-view-all">{t("hub.controlsSection.viewAll")}</Link>
           </div>
           <p className="stm-group-desc">
-            Pair any SAWO steam generator with a dedicated control panel for precise command
-            over temperature, steam output, and session timing. From the essential Steam STE
-            dial to the touchscreen Steam Stainless Touch, every control is designed for
-            simple, reliable operation.
+            {t("hub.controlsSection.desc")}
           </p>
-          {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading controls...</p>}
+          {loading && <p style={{ textAlign: "center", color: "#999" }}>{t("hub.controlsSection.loading")}</p>}
           {!loading && controls.length === 0 && (
-            <p style={{ textAlign: "center", color: "#999" }}>No steam controls available yet.</p>
+            <p style={{ textAlign: "center", color: "#999" }}>{t("hub.controlsSection.empty")}</p>
           )}
           {!loading && controls.length > 0 && (
             <div className="stm-cards-grid">
               {controls.map(product => (
-                <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="stm-card">
+                <Link to={localize(`/products/${product.slug}`)} key={product.id || product.slug} className="stm-card">
                   <div className="stm-card-img-wrap">
                     {getImageUrl(product, "thumbnail") ? (
                       <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="stm-card-img" />
@@ -191,7 +191,7 @@ const Steam = () => {
                   <div className="stm-card-body">
                     <h3 className="stm-card-name">{product.name}</h3>
                     <p className="stm-card-desc">
-                      {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Precision steam control for a personalized session."}
+                      {getFirstSentence(product.short_description) || getFirstSentence(product.description) || t("hub.controlsSection.fallbackDesc")}
                     </p>
                   </div>
                 </Link>
@@ -206,23 +206,20 @@ const Steam = () => {
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="stm-group-head">
-          <h2 className="stm-group-title">Steam Accessories</h2>
-          <Link to={menuPaths.steam.accessories} className="stm-view-all">View All Accessories</Link>
+          <h2 className="stm-group-title">{t("hub.accessoriesSection.title")}</h2>
+          <Link to={localize(menuPaths.steam.accessories)} className="stm-view-all">{t("hub.accessoriesSection.viewAll")}</Link>
         </div>
         <p className="stm-group-desc">
-          Complete your steam room with SAWO's range of accessories — from steam doors and
-          diffusing heads to aroma pumps and installation hardware — each engineered to work
-          seamlessly with our generators and controls for a fully finished, professional
-          installation.
+          {t("hub.accessoriesSection.desc")}
         </p>
-        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading accessories...</p>}
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>{t("hub.accessoriesSection.loading")}</p>}
         {!loading && accessories.length === 0 && (
-          <p style={{ textAlign: "center", color: "#999" }}>No steam accessories available yet.</p>
+          <p style={{ textAlign: "center", color: "#999" }}>{t("hub.accessoriesSection.empty")}</p>
         )}
         {!loading && accessories.length > 0 && (
           <div className="stm-acc-grid">
             {accessories.map(product => (
-              <Link to={`/products/${product.slug}`} key={product.id || product.slug} className="stm-acc-card">
+              <Link to={localize(`/products/${product.slug}`)} key={product.id || product.slug} className="stm-acc-card">
                 <div className="stm-acc-img-wrap">
                   {getImageUrl(product, "thumbnail") ? (
                     <img src={getImageUrl(product, "thumbnail")} alt={product.name} className="stm-acc-img" />
@@ -234,7 +231,7 @@ const Steam = () => {
                 </div>
                 <h3 className="stm-acc-title">{product.name}</h3>
                 <p className="stm-acc-desc">
-                  {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "SAWO steam accessory for a complete installation."}
+                  {getFirstSentence(product.short_description) || getFirstSentence(product.description) || t("hub.accessoriesSection.fallbackDesc")}
                 </p>
               </Link>
             ))}
@@ -246,8 +243,8 @@ const Steam = () => {
       {/* CTA                   */}
       {/* ===================== */}
       <PageCTA
-        title="Need Help Choosing?"
-        description="From generators and controls to accessories, our team can help you find the right steam sauna setup for your home or commercial space."
+        title={t("hub.cta.title")}
+        description={t("hub.cta.description")}
       />
 
       {/* ===================== */}

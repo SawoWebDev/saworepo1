@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 import FinnishSauna      from "../../assets/Home/Section1/FinnishSauna.webp";
 import SteamGenerator    from "../../assets/Home/Section1/5-SAUNA-ROOM-STEAM-GENERATOR.webp";
@@ -49,6 +49,7 @@ const SPEED_PX_PER_SEC = 40;
  */
 const Section1 = () => {
   const t = useLocaleT("home");
+  const localize = useLocalizedPath();
   const CAROUSEL_ITEMS = ITEM_KEYS.map((key) => ({
     key,
     title: t(`section1.items.${key}.title`),
@@ -223,7 +224,7 @@ const Section1 = () => {
           <div className="sawo-carousel-track" role="list" ref={trackRef}>
             {[...CAROUSEL_ITEMS, ...CAROUSEL_ITEMS].map((item, index) => (
               <div className="sawo-carousel-item" key={index} role="listitem" aria-hidden={index >= CAROUSEL_ITEMS.length}>
-                <Link to={item.href}>
+                <Link to={localize(item.href)}>
                   <img
                     src={item.img}
                     alt={item.alt}

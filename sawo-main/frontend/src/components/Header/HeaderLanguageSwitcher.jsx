@@ -1,13 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isTranslated, LOCALES } from "../../i18n/translatedRoutes";
+import { LOCALES, LOCALE_PREFIXES } from "../../i18n/translatedRoutes";
 import { afterPageLoad } from "../../utils/afterPageLoad";
 import { getCachedLanguageSwitcherEnabled, getCachedEnabledLanguages } from "../../local-storage/languageSettings";
+
+// Built from LOCALE_PREFIXES, not hand-typed — a hardcoded `(fi|de)` here
+// silently stops matching every route the day a new locale prefix is added
+// to LOCALE_PREFIXES elsewhere (shipped once already: adding "zh" without
+// updating this regex left the switcher unable to detect it was on a /zh
+// page at all). Non-empty prefixes only ("" = English, unprefixed).
+const LOCALE_PREFIX_PATTERN = LOCALE_PREFIXES.filter(Boolean).join("|");
 
 // Splits a pathname like "/fi/sauna" into its locale ("fi") and the
 // unprefixed path ("/sauna"). Unprefixed paths (English) return locale "en".
 function splitLocale(pathname) {
-  const match = /^\/(fi|de)(\/.*)?$/.exec(pathname);
+  const match = new RegExp(`^/(${LOCALE_PREFIX_PATTERN})(/.*)?$`).exec(pathname);
   if (!match) return { locale: "en", path: pathname };
   return { locale: match[1], path: match[2] || "/" };
 }
@@ -48,7 +55,25 @@ function FlagDe(props) {
     </svg>
   );
 }
-const FLAGS = { en: FlagEn, fi: FlagFi, de: FlagDe };
+function FlagZh(props) {
+  // One large star + 4 small stars arced beside it, each small star angled
+  // toward the large one — same simplified/hand-drawn approach as the other
+  // flags here, not a pixel-accurate rendering.
+  const star = "M25,1 31,17 48,17 35,28 40,44 25,35 10,44 15,28 2,17 19,17 Z";
+  return (
+    <svg viewBox="0 0 60 36" {...props}>
+      <rect width="60" height="36" fill="#DE2910" />
+      <g fill="#FFDE00">
+        <path d={star} transform="translate(2,2) scale(0.18)" />
+        <path d={star} transform="translate(15,2) scale(0.09) rotate(23 25 22)" />
+        <path d={star} transform="translate(19,6) scale(0.09) rotate(45 25 22)" />
+        <path d={star} transform="translate(19,11) scale(0.09) rotate(70 25 22)" />
+        <path d={star} transform="translate(15,15) scale(0.09) rotate(95 25 22)" />
+      </g>
+    </svg>
+  );
+}
+const FLAGS = { en: FlagEn, fi: FlagFi, de: FlagDe, zh: FlagZh };
 
 function Flag({ code, className }) {
   const Svg = FLAGS[code] || FlagEn;
@@ -127,23 +152,21 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
 
   // Routes internally (in-app, no full reload — every path is a real route
   // under every locale prefix, see App.jsx's PUBLIC_ROUTES x LOCALE_PREFIXES).
-  // Switching BACK to English always mirrors the current path 1:1 — English
-  // is the source content, it exists for every page, full stop, no gating
-  // needed. Switching INTO fi/de only mirrors 1:1 when that path has real
-  // translated copy in the TARGET locale specifically (isTranslated —
-  // per-locale, since e.g. Sauna is real in Finnish but not German yet);
-  // otherwise it lands on that locale's home instead of a technically-
-  // live-but-untranslated page.
+  // Always mirrors the current path 1:1, both directions — switching
+  // language is not a "go to that locale's home" action, it's "show me
+  // this same page in another language", full stop, even for a page that's
+  // only partially translated (untranslated strings fall back to English
+  // per-key, see i18n.js's fallbackLng comment — better than bouncing the
+  // visitor back to home and losing their place). translatedRoutes.js's
+  // isTranslated()/TRANSLATED_PATHS still exists for a separate, narrower
+  // question — whether a given page should assert itself to search engines
+  // as a genuinely reviewed translation via hreflangAlternates (passed
+  // page-by-page to <SEO>, see README-i18n.md) — just not for routing here.
   const go = (code) => {
     setOpen(false);
     onNavigate?.();
     if (code === currentLocale) return;
-    if (code === "en") {
-      navigate(basePath);
-      return;
-    }
-    const target = isTranslated(basePath, code) ? basePath : "/";
-    navigate(`/${code}${target === "/" ? "" : target}`);
+    navigate(code === "en" ? basePath : `/${code}${basePath === "/" ? "" : basePath}`);
   };
 
   if (!enabled) return null;

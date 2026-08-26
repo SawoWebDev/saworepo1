@@ -1,0 +1,37 @@
+{
+  "slug": "steam-stainless-touch-control",
+  "productId": "20f895bb-31e0-4a02-8802-9768d7180345",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "蒸汽不锈钢触控控制器",
+    "short_description": "<p style=\"text-align: justify;\">全新触屏式 STN 蒸汽发生器现已上市。</p><p style=\"text-align: justify;\"><b>蒸汽不锈钢触控控制器</b>通过简单易用的操作界面,轻松掌控蒸汽、温度与时间,带来量身定制的桑拿或蒸汽房体验。</p>",
+    "description": null,
+    "type": "蒸汽控制器",
+    "features": [
+      "厚实不锈钢外壳",
+      "动态按钮效果",
+      "兼容家庭自动化组件",
+      "配备紧急报警功能",
+      "待机模式,保持水温至下次使用",
+      "显示错误代码",
+      "自动排水功能",
+      "按键锁定",
+      "提供简易模式",
+      "日期与时间设置",
+      "千瓦用电量计数器",
+      "除垢功能",
+      "加热元件故障检测",
+      "断电记忆功能",
+      "摄氏或华氏温度单位可选",
+      "自动照明",
+      "自动风扇",
+      "LCD 对比度调节",
+      "可选香薰泵、灯光调光器及风扇",
+      "含导线的温度传感器",
+      "可选界面支架",
+      "含 7.5米 RJ12 电缆及接头"
+    ]
+  }
+}

@@ -20,6 +20,10 @@
  * repo). Re-run manually (`node scripts/generate-sitemap.js`) whenever
  * menuPaths.js changes or after a product/room data sync, and commit the
  * regenerated public/sitemap.xml.
+ *
+ * Run `node Administrator/Local/scripts/sync.js` first if you're not sure
+ * products.json is current — this script has no live Supabase access of
+ * its own, only whatever that snapshot last captured.
  */
 
 const fs = require("fs");
@@ -41,9 +45,34 @@ const OUT_FILE = path.join(__dirname, "..", "public", "sitemap.xml");
 // too: a path NOT listed here only gets its English entry, never an
 // unreviewed /fi or /de alternate.
 const TRANSLATED_PATHS = {
-  "/": ["fi", "de"],
+  "/": ["fi", "de", "zh"],
   "/sauna": ["fi"],
   "/steam/generators": ["fi"],
+  "/steam": ["zh"],
+  "/sauna/rooms": ["zh"],
+};
+
+// Mirrors src/i18n/seoProductLocales.js's PRODUCT_TRANSLATED_LOCALES — same
+// "reviewed, not just present in the DB" bar, same hand-kept-in-sync reason
+// as TRANSLATED_PATHS above (no ESM import available to plain `node`).
+const PRODUCT_TRANSLATED_LOCALES = {
+  "ste-steam-generator": ["zh"],
+  "stn-steam-generator": ["zh"],
+  "stn-s-steam-generator": ["zh"],
+  "steam-2-0": ["zh"],
+  "steam-stainless-touch-control": ["zh"],
+  "aroma-pump": ["zh"],
+  "demand-button": ["zh"],
+  "installation-stand": ["zh"],
+  "steam-door": ["zh"],
+  "steam-head-cover": ["zh"],
+  "venturi-pipe-l-shape": ["zh"],
+  "venturi-pipe-straight": ["zh"],
+  "rj12-cable": ["zh"],
+  "autodrain": ["zh"],
+  "steam-head": ["zh"],
+  "aroma-fan-and-dimmer-functions": ["zh"],
+  "electronics-compartment": ["zh"],
 };
 
 const PRODUCTS_JSON = path.join(__dirname, "..", "src", "Administrator", "Local", "data", "products.json");
@@ -200,24 +229,39 @@ function main() {
     }
   }
 
+  // Builds { en: "/products/x", zh: "/zh/products/x", ... } for a reviewed
+  // product slug, or null if nothing's been reviewed for it yet — same
+  // shape/gating as alternatesFor() above, just keyed by slug+basePath
+  // instead of a static route path.
+  function productAlternatesFor(basePath, slug) {
+    const locales = PRODUCT_TRANSLATED_LOCALES[slug];
+    if (!locales || locales.length === 0) return null;
+    const enPath = `${basePath}/${slug}`;
+    const alternates = { en: enPath };
+    for (const locale of locales) alternates[locale] = `/${locale}${enPath}`;
+    return alternates;
+  }
+
   for (const p of plainProducts) {
-    entries.push(
-      urlEntry(`/products/${p.slug}`, {
-        changefreq: "monthly",
-        priority: "0.7",
-        lastmod: toLastmod(p.updated_at),
-      })
-    );
+    const alternates = productAlternatesFor("/products", p.slug);
+    const meta = { changefreq: "monthly", priority: "0.7", lastmod: toLastmod(p.updated_at), alternates };
+    entries.push(urlEntry(`/products/${p.slug}`, meta));
+    if (alternates) {
+      for (const locale of PRODUCT_TRANSLATED_LOCALES[p.slug]) {
+        entries.push(urlEntry(alternates[locale], meta));
+      }
+    }
   }
 
   for (const a of accessories) {
-    entries.push(
-      urlEntry(`/accessories/${a.slug}`, {
-        changefreq: "monthly",
-        priority: "0.6",
-        lastmod: toLastmod(a.updated_at),
-      })
-    );
+    const alternates = productAlternatesFor("/accessories", a.slug);
+    const meta = { changefreq: "monthly", priority: "0.6", lastmod: toLastmod(a.updated_at), alternates };
+    entries.push(urlEntry(`/accessories/${a.slug}`, meta));
+    if (alternates) {
+      for (const locale of PRODUCT_TRANSLATED_LOCALES[a.slug]) {
+        entries.push(urlEntry(alternates[locale], meta));
+      }
+    }
   }
 
   for (const r of visibleRooms) {

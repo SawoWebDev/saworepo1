@@ -3,7 +3,7 @@ import React from "react";
 import menuPaths from "../../menuPaths";
 import ChevronRight from "../../components/icons/ChevronRight";
 import useDragCarousel from "../../hooks/useDragCarousel";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 import Tower      from "../../assets/Home/Section2/TOWER-SERIES-2-600x360-1.webp";
 import WallMounted from "../../assets/Home/Section2/WALL-MOUNTED-SERIES-v2-1.webp";
@@ -29,6 +29,7 @@ const HEATER_IMAGES = { tower: Tower, wallMounted: WallMounted, floor: Floor, co
  */
 const Section2 = () => {
   const t = useLocaleT("home");
+  const localize = useLocalizedPath();
   const tc = useLocaleT("common");
   const SAUNA_HEATERS = HEATER_KEYS.map((key) => ({
     key,
@@ -71,7 +72,7 @@ const Section2 = () => {
           {...dragHandlers}
         >
           {loopedItems.map((item, idx) => (
-            <a href={item.href} key={idx} draggable={false} className="heaters-slide relative flex-shrink-0 snap-start rounded overflow-hidden group">
+            <a href={localize(item.href)} key={idx} draggable={false} className="heaters-slide relative flex-shrink-0 snap-start rounded overflow-hidden group">
               <img src={item.img} alt={item.alt} title={item.title} width="600" height="360" loading="lazy" decoding="async" draggable={false} className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
               <div className="heaters-slide-overlay absolute inset-0 transition duration-300 group-hover:bg-black/60" />
               <div className="heaters-slide-content absolute inset-0 flex flex-col justify-end p-4 pointer-events-none">

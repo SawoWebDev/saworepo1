@@ -1,50 +1,57 @@
 #!/usr/bin/env node
+/**
+ * sync.js — refreshes the local products/categories/tags/meta JSON
+ * snapshots (Administrator/Local/data/*.json) from live Supabase.
+ *
+ * These snapshots feed offline/local-storage fallback paths and
+ * scripts/generate-sitemap.js (which can't do a live Supabase query itself
+ * — see that script's header). Re-run whenever product data changes
+ * meaningfully and you need those snapshots current, e.g. before
+ * regenerating the sitemap.
+ *
+ * HISTORY: this used to also re-download every product's images/PDFs to a
+ * local `saworepo2/images`+`files` folder (a sibling repo), rewriting each
+ * product's image/file fields to local relative paths. That pipeline
+ * predates the move to Cloudflare Pages/R2 for asset hosting — every
+ * product's images/files are now already-live CDN URLs
+ * (https://saworepo1.pages.dev/media/...), not Supabase Storage bucket
+ * paths, so there is nothing left to download: Supabase Storage buckets
+ * for this project were emptied 2026-08-20 (see memory:
+ * supabase-storage-winddown), and `saworepo2` itself has since been
+ * discarded. Removed that whole step 2026-08-26 rather than repoint it at
+ * a new destination — the CDN URLs already work as-is, live, from
+ * Supabase's own columns, so there's no local copy to maintain.
+ */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
-import fetch from "node-fetch";
-
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// SUPABASE_URL lives in frontend/.env, SUPABASE_SERVICE_ROLE_KEY in
+// frontend/.env.local — same two-file load as product-i18n.js (plain
+// dotenv.config() only reads .env, which silently dropped the service
+// role key here before).
+const FRONTEND_DIR = path.join(__dirname, "..", "..", "..", "..");
+dotenv.config({ path: path.join(FRONTEND_DIR, ".env") });
+dotenv.config({ path: path.join(FRONTEND_DIR, ".env.local") });
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  console.error("❌ Missing environment variables. Check .env file.");
+  console.error("❌ Missing environment variables. Check .env / .env.local files.");
   console.error("   Required: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY");
   process.exit(1);
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 const DATA_DIR = path.join(__dirname, "..", "data");
-// Correct path: go up 6 levels to git-sawo, then into saworepo2
-const IMAGES_DIR = path.join(__dirname, "../../../../../../", "saworepo2", "images");
-const FILES_DIR = path.join(__dirname, "../../../../../../", "saworepo2", "files");
-
-console.log("Debug: IMAGES_DIR =", IMAGES_DIR);
-console.log("Debug: FILES_DIR =", FILES_DIR);
-
-// Ensure directories exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true });
-if (!fs.existsSync(FILES_DIR)) fs.mkdirSync(FILES_DIR, { recursive: true });
 
-let statsDownloaded = { images: 0, files: 0 };
-let statsSkipped = { images: 0, files: 0 };
-
-// Re-downloading an asset already sitting on disk costs real egress and buys
-// nothing. A full run touches ~1,900 assets, which is how a single unguarded
-// `npm run sync` used to move hundreds of MB in one go. Pass --force to
-// re-fetch anyway (after an interrupted run, or when a source file was
-// replaced in place under the same name).
-const FORCE_REDOWNLOAD = process.argv.includes("--force");
-
-// ── Fetch Products ────────────────────────────────────────────────────────────
 async function fetchProducts() {
   console.log("📦 Fetching products...");
   const { data, error } = await supabase
@@ -62,7 +69,6 @@ async function fetchProducts() {
   return data || [];
 }
 
-// ── Fetch Categories ──────────────────────────────────────────────────────────
 async function fetchCategories() {
   console.log("📂 Fetching categories...");
   const { data, error } = await supabase
@@ -77,7 +83,6 @@ async function fetchCategories() {
   return data || [];
 }
 
-// ── Fetch Tags ────────────────────────────────────────────────────────────────
 async function fetchTags() {
   console.log("🏷️  Fetching tags...");
   const { data, error } = await supabase
@@ -92,167 +97,6 @@ async function fetchTags() {
   return data || [];
 }
 
-// ── Download and process images ────────────────────────────────────────────────
-async function downloadImage(url, outputPath) {
-  try {
-    // ── Skip if we already hold this file ───────────────────────
-    // A non-empty local copy is treated as current: these assets are
-    // immutable in practice (R2 keys carry a content hash, WordPress upload
-    // URLs are date-scoped), so a name that resolved once will not change
-    // bytes underneath us. --force overrides where that does not hold.
-    if (!FORCE_REDOWNLOAD && fs.existsSync(outputPath)) {
-      if (fs.statSync(outputPath).size > 0) return "skipped";
-    }
-
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-    // Use arrayBuffer() for node-fetch v3+
-    const arrayBuf = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuf);
-
-    const dir = path.dirname(outputPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(outputPath, buffer);
-    // Debug: confirm file was written
-    const stats = fs.statSync(outputPath);
-    if (stats.size > 0) {
-      return true;
-    } else {
-      throw new Error("File written but size is 0");
-    }
-  } catch (err) {
-    console.warn(`⚠️  Failed to download ${url}: ${err.message}`);
-    return false;
-  }
-}
-
-// ── Process image field (thumbnail, images[], spec_images[]) ────────────────────
-async function processImageField(value, productSlug, bucket = "product-images") {
-  if (!value) return value;
-
-  // Handle array
-  if (Array.isArray(value)) {
-    const results = [];
-    for (const item of value) {
-      const processed = await processImageField(item, productSlug, bucket);
-      results.push(processed);
-    }
-    return results;
-  }
-
-  // Already a relative path, keep as-is
-  if (!value.includes("http") && !value.includes("://")) {
-    return value;
-  }
-
-  // It's already a full URL, extract the filename
-  const filename = path.basename(value);
-  let downloadUrl = value;
-
-  // If it's already a full Supabase URL, use it as-is
-  if (value.includes(SUPABASE_URL)) {
-    downloadUrl = value;
-  } else {
-    // If it's just a path, build the full URL
-    downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${value}`;
-  }
-
-  const outputPath = path.join(IMAGES_DIR, filename);
-
-  const success = await downloadImage(downloadUrl, outputPath);
-  if (success) {
-    if (success === "skipped") statsSkipped.images++; else statsDownloaded.images++;
-    return `images/${filename}`;
-  }
-
-  // If download fails, return original path
-  return value;
-}
-
-// ── Process files field ────────────────────────────────────────────────────────
-async function processFiles(filesArray, productSlug) {
-  if (!filesArray || !Array.isArray(filesArray)) return filesArray;
-
-  const processed = [];
-  for (const file of filesArray) {
-    if (typeof file !== "object") { processed.push(file); continue; }
-
-    // ── existing: handle f.path (Supabase bucket path or already-relative) ──
-    if (file.path) {
-      const filename = path.basename(file.path);
-      const downloadUrl = `${SUPABASE_URL}/storage/v1/object/public/product-pdf/${file.path}`;
-      const outputPath = path.join(FILES_DIR, filename);
-
-      const success = await downloadImage(downloadUrl, outputPath);
-      if (success) {
-        if (success === "skipped") statsSkipped.files++; else statsDownloaded.files++;
-        processed.push({ ...file, path: `files/${filename}` });
-      } else {
-        processed.push(file);
-      }
-      continue;
-    }
-
-    // ── NEW: handle f.url (CMS-saved entries, including external URLs) ──
-    if (file.url) {
-      // Already a relative path — already synced, leave as-is
-      if (!file.url.includes("://")) { processed.push(file); continue; }
-
-      // Supabase storage URL → download from bucket
-      if (file.url.includes(SUPABASE_URL)) {
-        const filename = path.basename(file.url);
-        const outputPath = path.join(FILES_DIR, filename);
-        const success = await downloadImage(file.url, outputPath);
-        if (success) {
-          if (success === "skipped") statsSkipped.files++; else statsDownloaded.files++;
-          processed.push({ ...file, url: `files/${filename}` });
-        } else {
-          processed.push(file);
-        }
-        continue;
-      }
-
-      // External URL (www.sawo.com, etc.) → download directly
-      let filename;
-      try {
-        filename = path.basename(new URL(file.url).pathname);
-        if (!filename || filename === "/") {
-          const parts = file.url.split("/");
-          filename = parts[parts.length - 1] || "document.pdf";
-        }
-      } catch (e) {
-        // Invalid URL → keep as-is
-        processed.push(file);
-        continue;
-      }
-
-      const outputPath = path.join(FILES_DIR, filename);
-      // Skip if already downloaded
-      if (!fs.existsSync(outputPath)) {
-        const success = await downloadImage(file.url, outputPath);
-        if (success) {
-          if (success === "skipped") statsSkipped.files++; else statsDownloaded.files++;
-          processed.push({ ...file, url: `files/${filename}` });
-        } else {
-          processed.push(file); // keep original URL as fallback
-        }
-        continue;
-      }
-      // File already exists in repo
-      processed.push({ ...file, url: `files/${filename}` });
-      continue;
-    }
-
-    processed.push(file);
-  }
-  return processed;
-}
-
-// ── Main sync function ─────────────────────────────────────────────────────────
 async function sync() {
   try {
     console.log("🚀 Starting sync...\n");
@@ -263,49 +107,15 @@ async function sync() {
       fetchTags(),
     ]);
 
-    // Process product images and files
-    console.log("🎨 Processing images and files...");
-    const processedProducts = [];
-    for (const product of products) {
-      const slug = product.slug;
-
-      // Process thumbnail
-      if (product.thumbnail) {
-        product.thumbnail = await processImageField(product.thumbnail, slug);
-      }
-
-      // Process images array
-      if (product.images && Array.isArray(product.images)) {
-        product.images = await processImageField(product.images, slug);
-      }
-
-      // Process spec_images array
-      if (product.spec_images && Array.isArray(product.spec_images)) {
-        product.spec_images = await processImageField(product.spec_images, slug);
-      }
-
-      // Process files
-      if (product.files && Array.isArray(product.files)) {
-        product.files = await processFiles(product.files, slug);
-      }
-
-      processedProducts.push(product);
-    }
-
-    // Write JSON files
     const timestamp = new Date().toISOString();
     const meta = {
       last_synced: timestamp,
       total_products: products.length,
-      total_images_downloaded: statsDownloaded.images,
-      total_files_downloaded: statsDownloaded.files,
-      total_images_skipped: statsSkipped.images,
-      total_files_skipped: statsSkipped.files,
     };
 
     fs.writeFileSync(
       path.join(DATA_DIR, "products.json"),
-      JSON.stringify(processedProducts, null, 2)
+      JSON.stringify(products, null, 2)
     );
     fs.writeFileSync(
       path.join(DATA_DIR, "categories.json"),
@@ -320,12 +130,10 @@ async function sync() {
       JSON.stringify(meta, null, 2)
     );
 
-    // Log summary
     console.log("\n✅ Sync complete!\n");
     console.log(`✅ Products synced: ${products.length}`);
-    console.log(`🖼️  Images downloaded: ${statsDownloaded.images}`);
-    console.log(`📄 Files downloaded: ${statsDownloaded.files}`);
-    console.log(`⏭️  Already local, not re-fetched: ${statsSkipped.images} image(s), ${statsSkipped.files} file(s)`);
+    console.log(`✅ Categories synced: ${categories.length}`);
+    console.log(`✅ Tags synced: ${tags.length}`);
     console.log(`⏱️  Last synced: ${timestamp}\n`);
   } catch (err) {
     console.error("❌ Sync failed:", err.message);

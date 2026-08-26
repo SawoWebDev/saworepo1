@@ -1,0 +1,20 @@
+{
+  "slug": "installation-stand",
+  "productId": "2f48041e-6fcb-4609-9f21-a62352a3f127",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Asennusteline",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Asennusteline</b><span style=\"text-align: justify;\"> tarjoaa tukevan ja kestävän alustan höyrynkehittimellesi, mikä varmistaa turvallisen ja tehokkaan toiminnan.</span>",
+    "description": null,
+    "type": "Höyrylisävarusteet",
+    "features": [
+      "Helpottaa STW-höyrynkehittimen asennusta",
+      "Säädettävä korkeus sopii eri höyrynkehittimiin ja erilaisiin käyttäjän tarpeisiin",
+      "Yhteensopiva useiden höyrynkehitinmallien kanssa monipuolisiin käyttökohteisiin",
+      "Käyttäjäystävällinen asennus erilaisiin tiloihin",
+      "Sopii useisiin höyrynkehitinmalleihin monipuolisiin käyttökohteisiin"
+    ]
+  }
+}

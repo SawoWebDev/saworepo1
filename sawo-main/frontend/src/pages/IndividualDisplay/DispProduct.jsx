@@ -9,6 +9,7 @@ import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { getVariationsArray } from "./DispAccessories";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
+import { reviewedLocalesFor } from "../../i18n/seoProductLocales";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -979,7 +980,7 @@ export default function ProductPage() {
     return localProds.find(p => p.slug === slug && isPubliclyVisible(p)) || null;
   }, [localProds, slug]);
 
-  const error = !loading && !product ? "Product not found." : null;
+  const error = !loading && !product;
 
   const openLightbox = (images, index) => setLightbox({ images, index });
   const closeLightbox = () => setLightbox(null);
@@ -1007,7 +1008,7 @@ export default function ProductPage() {
       </div>
       <h2 style={{ color: "#2c1a0e", margin: "0 0 8px" }}>{t("notFound.title")}</h2>
       <p style={{ color: "#a67853", margin: "0 0 24px", fontStyle: "italic", fontSize: "0.88rem" }}>
-        {error || t("notFound.description")}
+        {t("notFound.description")}
       </p>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
         <Link to={localize("/products")} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
@@ -1066,8 +1067,12 @@ export default function ProductPage() {
       <SEO
         title={product.meta_title || product.name}
         description={product.meta_description || seoDescription}
-        path={`/products/${product.slug}`}
+        path={localize(`/products/${product.slug}`)}
         image={product.og_image || thumbnail || undefined}
+        hreflangAlternates={reviewedLocalesFor(product.slug).length > 0 ? {
+          en: `/products/${product.slug}`,
+          ...Object.fromEntries(reviewedLocalesFor(product.slug).map((l) => [l, `/${l}/products/${product.slug}`])),
+        } : undefined}
       />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
@@ -1256,7 +1261,7 @@ export default function ProductPage() {
 
               {!hasShortDesc && !hasFeatures && (
                 <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#a67853", fontStyle: "italic", fontSize: "0.86rem", margin: 0 }}>
-                  More details coming soon.
+                  {t("moreDetailsSoon")}
                 </p>
               )}
 
@@ -1308,7 +1313,7 @@ export default function ProductPage() {
               {/* Technical Data Table */}
               {hasSpecTable && (
                 <div>
-                  <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
+                  <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>{t("sections.technicalData")}</h4>
                   {/* min-width scales with column count, same as the admin
                       Specifications Table editor — long multi-word headers
                       (e.g. "Minimum Safety Distances A|B|C|D") get room to

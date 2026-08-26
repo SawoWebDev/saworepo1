@@ -7,6 +7,8 @@ import { ImageWithLoader } from "../../components/ImageWithLoader";
 import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
+import { reviewedLocalesFor } from "../../i18n/seoProductLocales";
 
 // Accessory categories that should be displayed in the Accessories page
 export const ACCESSORY_CATEGORIES = [
@@ -331,6 +333,7 @@ function CompactSpecImages({ images, onImageClick, productName }) {
 
 /* ── Resources Panel ───────────────────────────────────────────────── */
 function ResourcesPanel({ files }) {
+  const t = useLocaleT("product");
   const [expanded, setExpanded] = useState(false);
   const isMultiple = files?.length > 1;
 
@@ -341,7 +344,7 @@ function ResourcesPanel({ files }) {
       fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem", textAlign: "center", gap: 10,
     }}>
       <i className="fa-regular fa-folder-open" style={{ fontSize: "2rem", color: "#ddc9b4" }} />
-      No resources available
+      {t("noResourcesAvailable")}
     </div>
   );
 
@@ -573,6 +576,8 @@ function Divider() {
 
 /* ── Related Products ──────────────────────────────────────────────── */
 function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
+  const t = useLocaleT("product");
+  const localize = useLocalizedPath();
   const related = useMemo(() => {
     if (!categories?.length || !allProducts.length) return [];
     const cats = categories.slice(0, 1).map(c => c.toLowerCase());
@@ -597,13 +602,13 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
             fontSize: "0.67rem", letterSpacing: "0.14em", textTransform: "uppercase",
             color: "#a67853", margin: "0 0 6px",
           }}>
-            You might also like
+            {t("related.youMightAlsoLike")}
           </p>
           <h2 style={{
             fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
             fontSize: "1.5rem", color: "#2c1a0e", margin: 0, lineHeight: 1.2,
           }}>
-            Related Products
+            {t("related.relatedProducts")}
           </h2>
         </div>
 
@@ -615,7 +620,7 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
           {related.map(p => (
             <Link
               key={p.id || p.slug}
-              to={`/products/${p.slug}`}
+              to={localize(`/products/${p.slug}`)}
               style={{ textDecoration: "none", cursor: "pointer" }}
             >
               <div
@@ -688,6 +693,8 @@ function SkeletonPage() {
 /* ── Main Component ────────────────────────────────────────────────── */
 export default function AccessoriesPage() {
   const { slug } = useParams();
+  const t = useLocaleT("product");
+  const localize = useLocalizedPath();
   const [lightbox, setLightbox] = useState(null);
   // Video is one more selectable option alongside the color dots (see
   // ProductInfoPanel) — not a separate modal — so it's a simple boolean
@@ -716,7 +723,7 @@ export default function AccessoriesPage() {
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
-  const error = !loading && !product ? "Product not found." : null;
+  const error = !loading && !product;
 
   const files        = getFilesArray(product);
   const images       = product ? getImagesArray(product, 'images') : [];
@@ -774,16 +781,16 @@ export default function AccessoriesPage() {
       }}>
         <i className="fa-solid fa-magnifying-glass" style={{ color: "#fff", fontSize: "1.6rem" }} />
       </div>
-      <h2 style={{ color: "#2c1a0e", margin: "0 0 8px" }}>Product Not Found</h2>
+      <h2 style={{ color: "#2c1a0e", margin: "0 0 8px" }}>{t("notFound.title")}</h2>
       <p style={{ color: "#a67853", margin: "0 0 24px", fontStyle: "italic", fontSize: "0.88rem" }}>
-        {error || "This product doesn't exist or isn't published yet."}
+        {t("notFound.description")}
       </p>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
-        <Link to="/products" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
-          Browse Products
+        <Link to={localize("/products")} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
+          {t("notFound.browseProducts")}
         </Link>
-        <Link to="/" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", border: "1.5px solid #a67853", color: "#a67853", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
-          Home
+        <Link to={localize("/")} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", border: "1.5px solid #a67853", color: "#a67853", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>
+          {t("notFound.home")}
         </Link>
       </div>
     </div>
@@ -804,8 +811,12 @@ export default function AccessoriesPage() {
       <SEO
         title={product.meta_title || product.name}
         description={product.meta_description || seoDescription}
-        path={`/accessories/${product.slug}`}
+        path={localize(`/accessories/${product.slug}`)}
         image={product.og_image || thumbnail || undefined}
+        hreflangAlternates={reviewedLocalesFor(product.slug).length > 0 ? {
+          en: `/accessories/${product.slug}`,
+          ...Object.fromEntries(reviewedLocalesFor(product.slug).map((l) => [l, `/${l}/accessories/${product.slug}`])),
+        } : undefined}
       />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
@@ -1072,7 +1083,7 @@ export default function AccessoriesPage() {
                   {/* Resources below carousel (only if Diagram exists) */}
                   {hasResources && hasSpec && (
                     <div>
-                      <SectionLabel text="Resources" />
+                      <SectionLabel text={t("sections.resources")} />
                       <ResourcesPanel files={files} />
                     </div>
                   )}
@@ -1127,7 +1138,7 @@ export default function AccessoriesPage() {
 
               {hasFeatures && (
                 <div>
-                  <SectionLabel text="Features" />
+                  <SectionLabel text={t("sections.features")} />
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 5 }}>
                     {product.features.map((f, i) => (
                       <li key={i} style={{
@@ -1145,14 +1156,14 @@ export default function AccessoriesPage() {
 
               {!hasShortDesc && !hasFeatures && !hasInfoPanel && (
                 <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#a67853", fontStyle: "italic", fontSize: "0.86rem", margin: 0 }}>
-                  More details coming soon.
+                  {t("moreDetailsSoon")}
                 </p>
               )}
 
               {/* Spec Images / Diagram */}
               {hasSpec && (
                 <div>
-                  <SectionLabel text="Diagram" />
+                  <SectionLabel text={t("sections.diagram")} />
                   <CompactSpecImages images={specImages} onImageClick={openLightbox} productName={product?.name} />
                 </div>
               )}
@@ -1161,7 +1172,7 @@ export default function AccessoriesPage() {
               {/* Resources (only show on right if no Diagram) */}
               {hasResources && !hasSpec && (
                 <div>
-                  <SectionLabel text="Resources" />
+                  <SectionLabel text={t("sections.resources")} />
                   <ResourcesPanel files={files} />
                 </div>
               )}
@@ -1177,7 +1188,7 @@ export default function AccessoriesPage() {
               className="pp-outer"
               style={{ maxWidth: 1140, margin: "0 auto", padding: "12px 8px" }}
             >
-              <SectionLabel text="Specifications" />
+              <SectionLabel text={t("sections.specifications")} />
 
               {hasDesc && (
                 <div style={{ marginBottom: hasVisibleSpecTable ? 32 : 0 }}>
@@ -1196,7 +1207,7 @@ export default function AccessoriesPage() {
 
               {hasVisibleSpecTable && (
                 <div>
-                  <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
+                  <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>{t("sections.technicalData")}</h4>
                   {/* min-width scales with column count so long multi-word
                       headers get room to wrap onto 2 lines instead of
                       squeezing every column down to unreadable widths. */}

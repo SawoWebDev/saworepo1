@@ -7,6 +7,7 @@ import { ImageWithLoader } from "../../components/ImageWithLoader";
 import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const ROOM_TYPE_LABELS = {
   traditional: "Traditional",
@@ -193,6 +194,8 @@ function SkeletonPage() {
 
 /* ── Related Rooms by Type ────────────────────────────────────────── */
 function RelatedRooms({ currentSlug, roomType, allRooms }) {
+  const t = useLocaleT("product");
+  const localize = useLocalizedPath();
   const related = useMemo(() => {
     if (!roomType || !allRooms.length) return [];
     return allRooms
@@ -213,7 +216,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
             More {typeLabel} Rooms
           </p>
           <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "1.5rem", color: "#2c1a0e", margin: 0, lineHeight: 1.2 }}>
-            Related Sauna Rooms
+            {t("related.relatedRooms")}
           </h2>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 24 }}>
@@ -222,7 +225,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
             const firstConfig = Object.values(configs)[0];
             const thumb = r.thumbnail || firstConfig?.images?.[0] || null;
             return (
-              <Link key={r.id || r.slug} to={`/sauna/rooms/${r.slug}`} style={{ textDecoration: "none" }}>
+              <Link key={r.id || r.slug} to={localize(`/sauna/rooms/${r.slug}`)} style={{ textDecoration: "none" }}>
                 <div
                   style={{ display: "flex", flexDirection: "column", gap: 10, padding: 12, borderRadius: 12, border: "2px solid transparent", transition: "all 0.25s ease" }}
                   onMouseEnter={e => { e.currentTarget.style.border = "2px solid #a67853"; e.currentTarget.style.background = "rgba(246,242,237,0.5)"; }}
@@ -257,6 +260,8 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
 /* ── Main ─────────────────────────────────────────────────────────── */
 export default function SaunaRoomDisplay() {
   const { slug } = useParams();
+  const t = useLocaleT("product");
+  const localize = useLocalizedPath();
   const [lightbox, setLightbox] = useState(null);
   const [activeConfig, setActiveConfig] = useState(null);
 
@@ -332,11 +337,11 @@ export default function SaunaRoomDisplay() {
       <div style={{ width: 72, height: 72, background: "linear-gradient(135deg,#8b5e3c,#a67853)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px", boxShadow: "0 8px 28px rgba(139,94,60,0.28)" }}>
         <i className="fa-solid fa-magnifying-glass" style={{ color: "#fff", fontSize: "1.6rem" }} />
       </div>
-      <h2 style={{ color: "#2c1a0e", margin: "0 0 8px" }}>Sauna Room Not Found</h2>
-      <p style={{ color: "#a67853", margin: "0 0 24px", fontStyle: "italic", fontSize: "0.88rem" }}>This sauna room doesn't exist or isn't published yet.</p>
+      <h2 style={{ color: "#2c1a0e", margin: "0 0 8px" }}>{t("notFound.roomTitle")}</h2>
+      <p style={{ color: "#a67853", margin: "0 0 24px", fontStyle: "italic", fontSize: "0.88rem" }}>{t("notFound.roomDescription")}</p>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
-        <Link to="/sauna/rooms" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>Browse Rooms</Link>
-        <Link to="/" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", border: "1.5px solid #a67853", color: "#a67853", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>Home</Link>
+        <Link to={localize("/sauna/rooms")} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>{t("notFound.browseRooms")}</Link>
+        <Link to={localize("/")} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px", border: "1.5px solid #a67853", color: "#a67853", textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem" }}>{t("notFound.home")}</Link>
       </div>
     </div>
   );
@@ -434,7 +439,7 @@ export default function SaunaRoomDisplay() {
               {/* Resources */}
               {files.length > 0 && (
                 <div>
-                  <SectionLabel icon="fa-solid fa-file-pdf" text="Resources" />
+                  <SectionLabel icon="fa-solid fa-file-pdf" text={t("sections.resources")} />
                   <ResourcesPanel files={files} />
                 </div>
               )}
@@ -564,7 +569,7 @@ export default function SaunaRoomDisplay() {
                   )}
                   {hasIR && (
                     <div>
-                      <SectionLabel icon="fa-solid fa-bolt" text="Infrared Specifications" />
+                      <SectionLabel icon="fa-solid fa-bolt" text={t("sections.infraredSpecifications")} />
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                         <StatChip icon="fa-solid fa-plug"        label="Voltage"       value={room.ir_voltage_v        ? `${room.ir_voltage_v} V`        : null} />
                         <StatChip icon="fa-solid fa-solar-panel" label="Panel Wattage" value={room.ir_panel_wattage_w  ? `${room.ir_panel_wattage_w} W`  : null} />
@@ -589,7 +594,7 @@ export default function SaunaRoomDisplay() {
               {/* Features */}
               {hasFeatures && (
                 <div style={{ marginBottom: 32 }}>
-                  <SectionLabel icon="fa-solid fa-list-check" text="Features" />
+                  <SectionLabel icon="fa-solid fa-list-check" text={t("sections.features")} />
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: "6px 24px" }}>
                     {room.features.map((f, i) => (
                       <li key={i} style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.78rem", lineHeight: 1.4, display: "flex", alignItems: "flex-start", gap: 7 }}>
@@ -620,7 +625,7 @@ export default function SaunaRoomDisplay() {
               {/* Spec table */}
               {hasSpecTable && (
                 <div>
-                  <SectionLabel icon="fa-solid fa-table" text="Technical Data" />
+                  <SectionLabel icon="fa-solid fa-table" text={t("sections.technicalData")} />
                   <div style={{ overflowX: "auto", borderRadius: 10, border: "2px solid #d5b99a", background: "#fafaf8" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>

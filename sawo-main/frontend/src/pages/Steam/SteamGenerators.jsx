@@ -14,7 +14,7 @@ import CategoryHero from "../../components/CategoryHero";
 import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
 import heroImg from "../../assets/Steam/Steam Generators/STN-S.webp";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -27,9 +27,10 @@ function getImageUrl(product, field) {
 // ─── Product card (matches /products) ──────────────────────────────────────────
 function ProductCard({ product }) {
   const [hovered, setHovered] = useState(false);
+  const localize = useLocalizedPath();
 
   return (
-    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
+    <Link to={localize(`/products/${product.slug}`)} style={{ textDecoration: "none" }}>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}

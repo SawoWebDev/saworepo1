@@ -1,7 +1,27 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY, wrapIndex } from "./SaunaRoomData";
+import { useLocaleT } from "../../../i18n/LocaleContext";
+import { translateSharedItems } from "../../../i18n/translateSharedItems";
 
-const SaunaFeatures = ({ items = SFW_ITEMS, heading = "What Makes Our Sauna Different" }) => {
+// SFW_ITEMS (SaunaRoomData.jsx) only has one consumer today (see
+// /sauna/rooms, always the untranslated default) — routed through
+// translateSharedItems anyway, on the same reasoning as SaunaRoomDetails:
+// a future caller passing SFW_ITEMS.filter(...)/.slice(...) should still
+// translate correctly instead of silently rendering English, or landing
+// the wrong tab's copy on the wrong image.
+const SFW_KEYS = ["ventilation", "lighting", "benchHeight", "excellentHeat", "roomSizes", "insulation"];
+
+const SaunaFeatures = ({ items = SFW_ITEMS, heading }) => {
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const resolvedHeading = heading ?? t("roomsPage.features.heading");
+  const translatedItems = useMemo(
+    () => translateSharedItems(items, SFW_ITEMS, SFW_KEYS, (item, key) => {
+      const tr = t(`roomsPage.features.items.${key}`, { returnObjects: true });
+      return { ...item, tab: tr.tab, title: tr.title, paragraphs: tr.paragraphs, specs: tr.specs || item.specs };
+    }),
+    [items, t]
+  );
   const [index, setIndex] = useState(0);
   const autoRef   = useRef(null);
   const resumeRef = useRef(null);
@@ -40,10 +60,10 @@ const SaunaFeatures = ({ items = SFW_ITEMS, heading = "What Makes Our Sauna Diff
       onMouseLeave={startAuto}
     >
       <div className="sfw-inner">
-        <div className="sfw-heading">{heading}</div>
+        <div className="sfw-heading">{resolvedHeading}</div>
 
         <div className="sfw-tabs">
-          {items.map((item, i) => (
+          {translatedItems.map((item, i) => (
             <button
               key={item.tab}
               className={`sfw-tab${index === i ? " active" : ""}`}
@@ -62,26 +82,26 @@ const SaunaFeatures = ({ items = SFW_ITEMS, heading = "What Makes Our Sauna Diff
         <div className="sfw-body">
           <div className="sfw-carousel">
             <div className="sfw-slides">
-              {items.map((item, i) => (
+              {translatedItems.map((item, i) => (
                 <div key={item.tab} className={`sfw-slide${index === i ? " active" : ""}`}>
                   <img src={item.image} alt={item.tab} />
                 </div>
               ))}
             </div>
 
-            <button className="sfw-arr sfw-arr-prev" onClick={() => goTo(index - 1)} aria-label="Previous">
+            <button className="sfw-arr sfw-arr-prev" onClick={() => goTo(index - 1)} aria-label={tc("previous")}>
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path d="M7 1L1 7L7 13" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <button className="sfw-arr sfw-arr-next" onClick={() => goTo(index + 1)} aria-label="Next">
+            <button className="sfw-arr sfw-arr-next" onClick={() => goTo(index + 1)} aria-label={tc("next")}>
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
                 <path d="M1 1L7 7L1 13" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
 
             <div className="sfw-dots">
-              {items.map((item, i) => (
+              {translatedItems.map((item, i) => (
                 <button
                   key={item.tab}
                   className={`sfw-dot${index === i ? " active" : ""}`}
@@ -93,7 +113,7 @@ const SaunaFeatures = ({ items = SFW_ITEMS, heading = "What Makes Our Sauna Diff
           </div>
 
           <div className="sfw-content">
-            {items.map((item, i) => (
+            {translatedItems.map((item, i) => (
               <div key={item.tab} className={`sfw-pane${index === i ? " active" : ""}`}>
                 <div className="sfw-pane-title">{item.title}</div>
                 {item.paragraphs.map((p, j) => (

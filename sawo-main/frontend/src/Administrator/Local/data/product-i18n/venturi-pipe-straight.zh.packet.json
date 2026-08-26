@@ -1,0 +1,20 @@
+{
+  "slug": "venturi-pipe-straight",
+  "productId": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "文丘里管(直型)",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">文丘里管</b><span style=\"text-align: justify;\">可将空气吸入管内,通过冷却管内受热的空气分子来降低温度。这一过程可产生更浓密柔和的蒸汽云,并防止蒸汽管发出嘶嘶声。</span>",
+    "description": null,
+    "type": "蒸汽配件",
+    "features": [
+      "产生更柔和细腻的蒸汽",
+      "形成更浓密的蒸汽云",
+      "防止发出嘶嘶噪音",
+      "含蒸汽头,实现均匀蒸汽扩散",
+      "采用厚实不锈钢材质制成"
+    ]
+  }
+}

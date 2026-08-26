@@ -4,18 +4,25 @@
     "features": "Features",
     "diagram": "Diagram",
     "specifications": "Specifications",
+    "technicalData": "Technical Data",
+    "infraredSpecifications": "Infrared Specifications",
     "includedInPackage": "Included in the Package"
   },
   "noResourcesAvailable": "No resources available",
+  "moreDetailsSoon": "More details coming soon.",
   "notFound": {
     "title": "Product Not Found",
     "description": "This product doesn't exist or isn't published yet.",
     "browseProducts": "Browse Products",
-    "home": "Home"
+    "home": "Home",
+    "roomTitle": "Sauna Room Not Found",
+    "roomDescription": "This sauna room doesn't exist or isn't published yet.",
+    "browseRooms": "Browse Rooms"
   },
   "related": {
     "youMightAlsoLike": "You might also like",
     "relatedProducts": "Related Products",
+    "relatedRooms": "Related Sauna Rooms",
     "saunaAccessories": "Sauna Accessories",
     "otherHeaters": "Other Heaters"
   }

@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "resources": "资源下载",
+    "features": "产品特点",
+    "diagram": "结构图",
+    "specifications": "产品规格",
+    "technicalData": "技术数据",
+    "infraredSpecifications": "红外线技术规格",
+    "includedInPackage": "包装内含"
+  },
+  "noResourcesAvailable": "暂无可用资源",
+  "moreDetailsSoon": "更多详情即将上线。",
+  "notFound": {
+    "title": "未找到该产品",
+    "description": "该产品不存在,或尚未发布。",
+    "browseProducts": "浏览产品",
+    "home": "返回首页",
+    "roomTitle": "未找到该桑拿房",
+    "roomDescription": "该桑拿房不存在,或尚未发布。",
+    "browseRooms": "浏览桑拿房"
+  },
+  "related": {
+    "youMightAlsoLike": "您可能还喜欢",
+    "relatedProducts": "相关产品",
+    "relatedRooms": "相关桑拿房",
+    "saunaAccessories": "桑拿配件",
+    "otherHeaters": "其他加热器"
+  }
+}

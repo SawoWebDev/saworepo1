@@ -3,7 +3,7 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import ChevronRight from "../../components/icons/ChevronRight";
 import ButtonBrown from "../../components/Buttons/ButtonBrown";
 import menuPaths from "../../menuPaths";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 import imgCustomizedSolutions   from "../../assets/Home/Section5/Customized-Solutions_1.webp";
 import imgPreventiveMaintenance from "../../assets/Home/Section5/PREVENTIVE-MAINTENANCE_1.webp";
@@ -13,6 +13,7 @@ import imgPreventiveMaintenance from "../../assets/Home/Section5/PREVENTIVE-MAIN
  */
 const Section5 = () => {
   const t = useLocaleT("home");
+  const localize = useLocalizedPath();
   const tc = useLocaleT("common");
   const HEADING     = t("section5.heading");
   const SUBTITLE    = t("section5.subtitle");
@@ -83,7 +84,7 @@ const Section5 = () => {
             >
               {BODY2}
             </p>
-            <ButtonBrown text={BUTTON_TEXT} href={menuPaths.contact} />
+            <ButtonBrown text={BUTTON_TEXT} href={localize(menuPaths.contact)} />
           </div>
 
           {/* Right Image Comparison Slider */}

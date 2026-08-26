@@ -15,15 +15,18 @@ import img_STONE_SERIES_3_600x320_new from "../../assets/STONE-SERIES-3-600x320-
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const SaunaHeaters = () => {
   const heroLoaded = useHeroLoaded(img_NRM_NB_BL1);
+  const t = useLocaleT("sauna");
+  const localize = useLocalizedPath();
 
   return (
     <div className="relative">
       <SEO
-        title="Sauna Heaters"
-        description="Browse SAWO's full Finnish sauna heater lineup: Tower, Wall-Mounted, Floor, Combi, Stone, and Dragonfire series for every sauna size and style."
+        title={t("heatersPage.meta.title")}
+        description={t("heatersPage.meta.description")}
         path="/sauna/heaters"
       />
 
@@ -49,10 +52,10 @@ const SaunaHeaters = () => {
         />
         <div className="sh-hero-overlay" />
         <div className="sh-hero-content">
-          <h1 className="sh-hero-title">SAUNA HEATERS</h1>
+          <h1 className="sh-hero-title">{t("heatersPage.hero.title")}</h1>
           <div style={{ marginTop: "12px", display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
             <BrochureDropdownButton
-              text="PRODUCT CATALOGUE"
+              text={t("heatersPage.hero.catalogueButton")}
               href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
             />
           </div>
@@ -67,13 +70,9 @@ const SaunaHeaters = () => {
         <div className="sh-why-grid">
           {/* Left */}
           <div className="sh-why-left">
-            <p className="sh-why-eyebrow">SAWO HEATERS</p>
-            <h2 className="sh-why-title">Why Choose SAWO Heaters</h2>
-            <p className="sh-why-desc">
-              SAWO heaters combine durability, energy efficiency, and modern
-              design, offering consistent performance for a reliable, superior
-              sauna experience every time.
-            </p>
+            <p className="sh-why-eyebrow">{t("heatersPage.why.eyebrow")}</p>
+            <h2 className="sh-why-title">{t("heatersPage.why.title")}</h2>
+            <p className="sh-why-desc">{t("heatersPage.why.desc")}</p>
           </div>
 
           {/* Right — placeholder for CirclesInfo */}
@@ -106,13 +105,8 @@ const SaunaHeaters = () => {
 
           {/* Right — text */}
           <div className="sh-video-text">
-            <h2 className="sh-video-title">Who can use SAWO heaters?</h2>
-            <p className="sh-video-desc">
-              We offer a wide range of choices for hotels, spas, gyms, and
-              private residential saunas. From small to towering, simple to
-              stylish, showstopping to concealed, we have the right heater for
-              you.
-            </p>
+            <h2 className="sh-video-title">{t("heatersPage.video.title")}</h2>
+            <p className="sh-video-desc">{t("heatersPage.video.desc")}</p>
           </div>
         </div>
       </section>
@@ -178,7 +172,7 @@ const SaunaHeaters = () => {
         <div className="sawo-sec heaters">
           <div className="sawo-grid">
 
-            <a className="sawo-card" href={menuPaths.sauna.heaters.tower}>
+            <a className="sawo-card" href={localize(menuPaths.sauna.heaters.tower)}>
               <figure>
                 <img
                   src={img_TOWER_SERIES_2_600x360_1}
@@ -187,13 +181,13 @@ const SaunaHeaters = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  <h2 className="sawo-title">Tower Series</h2>
-                  <p className="sawo-caption">SAWO Tower heaters are best described as "sauna stone pillars." Strong, stainless steel rings hold massive amounts of stones. These heaters are designed to circulate steam evenly from the lowest to the highest part of the sauna room.</p>
+                  <h2 className="sawo-title">{t("heatersPage.items.tower.title")}</h2>
+                  <p className="sawo-caption">{t("heatersPage.items.tower.caption")}</p>
                 </figcaption>
               </figure>
             </a>
 
-            <a className="sawo-card" href={menuPaths.sauna.heaters.floor}>
+            <a className="sawo-card" href={localize(menuPaths.sauna.heaters.floor)}>
               <figure>
                 <img
                   src={img_FLOOR_MOUNTED_SERIES1_1024x614_1}
@@ -202,13 +196,13 @@ const SaunaHeaters = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  <h2 className="sawo-title">Floor Series</h2>
-                  <p className="sawo-caption">Our Floor series features movable, sleek, and durable high-performance standalone heaters that ensure optimal heat distribution and comfort. Due to having more heater placement options, the heaters allow for a more customized look of the sauna room.</p>
+                  <h2 className="sawo-title">{t("heatersPage.items.floor.title")}</h2>
+                  <p className="sawo-caption">{t("heatersPage.items.floor.caption")}</p>
                 </figcaption>
               </figure>
             </a>
 
-            <a className="sawo-card" href={menuPaths.sauna.heaters.wallMounted}>
+            <a className="sawo-card" href={localize(menuPaths.sauna.heaters.wallMounted)}>
               <figure>
                 <img
                   src={img_WALL_MOUNTED_SERIES_v2_1}
@@ -217,13 +211,13 @@ const SaunaHeaters = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  <h2 className="sawo-title">Wall Mounted Series</h2>
-                  <p className="sawo-caption">SAWO Wall-mounted heaters are all about strong performance in a compact size. For added safety, most of our wall-mounted heaters are available with cool-to-touch fiber coating to help prevent accidental burns.</p>
+                  <h2 className="sawo-title">{t("heatersPage.items.wallMounted.title")}</h2>
+                  <p className="sawo-caption">{t("heatersPage.items.wallMounted.caption")}</p>
                 </figcaption>
               </figure>
             </a>
 
-            <a className="sawo-card" href={menuPaths.sauna.heaters.combi}>
+            <a className="sawo-card" href={localize(menuPaths.sauna.heaters.combi)}>
               <figure>
                 <img
                   src={img_COMBI_SERIES_600x360_1}
@@ -232,13 +226,13 @@ const SaunaHeaters = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  <h2 className="sawo-title">Combi Series</h2>
-                  <p className="sawo-caption">Versatile electric heaters with integrated steamers, offering traditional and steam sauna options with aroma oil basins for added luxury.</p>
+                  <h2 className="sawo-title">{t("heatersPage.items.combi.title")}</h2>
+                  <p className="sawo-caption">{t("heatersPage.items.combi.caption")}</p>
                 </figcaption>
               </figure>
             </a>
 
-            <a className="sawo-card" href={menuPaths.sauna.heaters.dragonfire}>
+            <a className="sawo-card" href={localize(menuPaths.sauna.heaters.dragonfire)}>
               <figure>
                 <img
                   src={img_DRAGON_SERIES_1_600x360_1}
@@ -247,13 +241,13 @@ const SaunaHeaters = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  <h2 className="sawo-title">Dragonfire Series</h2>
-                  <p className="sawo-caption">Elevate your sauna experience with the SAWO Dragonfire series, crafted by renowned Finnish designer Stefan Lindfors for modern living.</p>
+                  <h2 className="sawo-title">{t("heatersPage.items.dragonfire.title")}</h2>
+                  <p className="sawo-caption">{t("heatersPage.items.dragonfire.caption")}</p>
                 </figcaption>
               </figure>
             </a>
 
-            <a className="sawo-card" href={menuPaths.sauna.heaters.stone}>
+            <a className="sawo-card" href={localize(menuPaths.sauna.heaters.stone)}>
               <figure>
                 <img
                   src={img_STONE_SERIES_3_600x320_new}
@@ -262,8 +256,8 @@ const SaunaHeaters = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  <h2 className="sawo-title">Stone Series</h2>
-                  <p className="sawo-caption">Made of Finnish soapstone, the SAWO Stone Heaters have exceptional heat-storing and conducting properties. Their gentle heat provides a consistent and long-lasting sauna experience.</p>
+                  <h2 className="sawo-title">{t("heatersPage.items.stone.title")}</h2>
+                  <p className="sawo-caption">{t("heatersPage.items.stone.caption")}</p>
                 </figcaption>
               </figure>
             </a>
@@ -273,7 +267,7 @@ const SaunaHeaters = () => {
 
         {/* View all heaters → full catalog, same format as SaunaAccessories.jsx's "VIEW ALL ACCESSORIES" */}
         <div className="sh-view-all-wrap">
-          <Link to={menuPaths.heaters} className="sh-view-all-btn">VIEW ALL HEATERS</Link>
+          <Link to={localize(menuPaths.heaters)} className="sh-view-all-btn">{t("heatersPage.viewAll")}</Link>
         </div>
 
       </section>

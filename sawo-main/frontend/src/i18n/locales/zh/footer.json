@@ -1,0 +1,51 @@
+{
+  "headings": {
+    "finnishSauna": "芬兰桑拿",
+    "steamRoom": "蒸汽房",
+    "infraredSauna": "红外线桑拿",
+    "followUs": "关注我们",
+    "support": "支持",
+    "download": "下载",
+    "technicalSupport": "技术支持",
+    "offices": "办事处"
+  },
+  "links": {
+    "saunaHeaters": "桑拿炉",
+    "saunaControls": "桑拿控制器",
+    "saunaAccessories": "桑拿配件",
+    "saunaRooms": "桑拿房",
+    "steamGenerators": "蒸汽发生器",
+    "steamControls": "蒸汽控制器",
+    "steamAccessories": "蒸汽配件",
+    "infraredSaunas": "红外线桑拿房",
+    "infraredPanels": "红外线板",
+    "infraredControls": "红外线控制器",
+    "faq": "常见问题",
+    "aboutUs": "关于我们",
+    "contactUs": "联系我们",
+    "careers": "招聘信息",
+    "privacyPolicy": "隐私政策",
+    "sitemap": "网站地图",
+    "productCatalogue": "产品目录",
+    "userManuals": "用户手册"
+  },
+  "technicalSupportIntro": "如需技术支持或投诉,请联系:",
+  "whatsapp": "Whatsapp",
+  "tel": "电话",
+  "offices": {
+    "global": "全球销售与咨询",
+    "nordics": "北欧地区销售与仓储",
+    "asia": "亚洲地区销售与仓储",
+    "europe": "欧洲地区销售与仓储"
+  },
+  "copyright": "© {{year}} 版权所有 · SAWO",
+  "social": {
+    "facebook": "SAWO Facebook主页",
+    "instagram": "SAWO Instagram主页",
+    "linkedin": "SAWO LinkedIn主页",
+    "youtube": "SAWO YouTube频道",
+    "tiktok": "SAWO TikTok主页",
+    "email": "发送邮件至SAWO支持团队",
+    "phone": "致电SAWO"
+  }
+}

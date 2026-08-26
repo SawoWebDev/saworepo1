@@ -3,6 +3,8 @@ import {
   SPD_SLIDES, SPD_STORY_SECTIONS, SPD_FEATURE_TEXT, SPD_PERF_CARDS,
   SPD_ACCORDION_ITEMS, SPD_SLIDE_DELAY, SPD_LOADER_TIMEOUT,
 } from "./SaunaRoomData";
+import { useLocaleT } from "../../../i18n/LocaleContext";
+import { isDerivedFromDefault } from "../../../i18n/translateSharedItems";
 
 const SaunaProductDetails = ({
   slides = SPD_SLIDES,
@@ -10,8 +12,29 @@ const SaunaProductDetails = ({
   featureText = SPD_FEATURE_TEXT,
   perfCards = SPD_PERF_CARDS,
   accordionItems = SPD_ACCORDION_ITEMS,
-  title = "The Sauna You'll Actually Use Every Day",
+  title,
 }) => {
+  const t = useLocaleT("sauna");
+  const resolvedTitle = title ?? t("roomsPage.productDetails.title");
+  // These 4 props default to the standard-sauna English data, but
+  // /infrared/saunas renders this same component with its own IR_-prefixed
+  // props — only translate when the caller is using the (untranslated)
+  // standard-sauna default, never a caller-supplied override. Checked via
+  // isDerivedFromDefault, not `=== SPD_STORY_SECTIONS`, so this stays
+  // correct even if a future caller passes a filtered/reordered subset of
+  // the default (see translateSharedItems.js for why that distinction
+  // matters — SaunaRoomDetails shipped with exactly this bug once already).
+  const isDefault = isDerivedFromDefault(storySections, SPD_STORY_SECTIONS);
+  const resolvedStorySections = isDefault
+    ? t("roomsPage.productDetails.storySections", { returnObjects: true })
+    : storySections;
+  const resolvedFeatureText = isDefault ? t("roomsPage.productDetails.featureText") : featureText;
+  const resolvedPerfCards = isDefault
+    ? t("roomsPage.productDetails.perfCards", { returnObjects: true })
+    : perfCards;
+  const resolvedAccordionItems = isDefault
+    ? t("roomsPage.productDetails.accordionItems", { returnObjects: true })
+    : accordionItems;
   const [index, setIndex]                     = useState(0);
   const [loaderHidden, setLoaderHidden]       = useState(false);
   const [imagesLoaded, setImagesLoaded]       = useState(() => new Array(slides.length).fill(false));
@@ -67,7 +90,7 @@ const SaunaProductDetails = ({
     <div className="sawo-product-details">
 
       <div className="sawo-product-main">
-        <div className="sawo-product-title">{title}</div>
+        <div className="sawo-product-title">{resolvedTitle}</div>
         <hr className="sawo-divider-subtle" />
 
         <div className="sawo-product-story">
@@ -75,7 +98,7 @@ const SaunaProductDetails = ({
             <div className="sawo-slideshow">
               <div className={`sawo-loader${loaderHidden ? " hidden" : ""}`}>
                 <div className="sawo-loader-ring"></div>
-                <div className="sawo-loader-text">Loading</div>
+                <div className="sawo-loader-text">{t("roomsPage.productDetails.loading")}</div>
               </div>
               {slides.map((slide, i) => (
                 <div key={slide.alt} className={`sawo-slide${index === i ? " active" : ""}`}>
@@ -101,7 +124,7 @@ const SaunaProductDetails = ({
             </div>
           </div>
 
-          {storySections.map((section) => (
+          {resolvedStorySections.map((section) => (
             <div key={section.title} className="sawo-story-section">
               <div className="story-section-title">{section.title}</div>
               {section.paragraphs.map((p, j) => <p key={j}>{p}</p>)}
@@ -109,7 +132,7 @@ const SaunaProductDetails = ({
           ))}
 
           <div className="sawo-product-features">
-            <p>{featureText}</p>
+            <p>{resolvedFeatureText}</p>
           </div>
         </div>
 
@@ -117,9 +140,9 @@ const SaunaProductDetails = ({
       </div>
 
       <div className="sawo-performance-grid">
-        <div className="performance-header">Crafted with Precision</div>
+        <div className="performance-header">{t("roomsPage.productDetails.performanceHeader")}</div>
         <div className="performance-cards">
-          {perfCards.map((card) => (
+          {resolvedPerfCards.map((card) => (
             <div key={card.label} className="perf-card">
               <div className="perf-label">{card.label}</div>
               <div className="perf-detail">{card.detail}</div>
@@ -129,7 +152,7 @@ const SaunaProductDetails = ({
       </div>
 
       <div className="sawo-accordion-section">
-        {accordionItems.map((item, i) => (
+        {resolvedAccordionItems.map((item, i) => (
           <div key={item.title} className={`sawo-accordion-item${accordionOpen[i] ? " active" : ""}`}>
             <button className="sawo-accordion-header" onClick={() => toggleAccordion(i)}>
               <span className="accordion-title-text">{item.title}</span>

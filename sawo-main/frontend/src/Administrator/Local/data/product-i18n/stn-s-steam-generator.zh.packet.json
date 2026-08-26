@@ -1,0 +1,183 @@
+{
+  "slug": "stn-s-steam-generator",
+  "productId": "65d27a90-bd93-44e6-83aa-4fcd0e97a9e6",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    { "path": "type", "source": "Steam Generators" },
+    { "path": "variations[0].name", "source": "2 Heating Elements" },
+    { "path": "variations[0].features[0]", "source": "Power range: 3.0 – 5.0kW" },
+    { "path": "variations[0].features[1]", "source": "Steam output: up to 6.7kg/hr" },
+    { "path": "variations[0].features[3]", "source": "Own pipe for overpressure valve" },
+    { "path": "variations[0].features[4]", "source": "Auto drain" },
+    { "path": "variations[0].features[5]", "source": "Steam head included" },
+    { "path": "variations[0].features[6]", "source": "Cassette type heating element setup for easy maintenance" },
+    { "path": "variations[0].features[7]", "source": "¾” steam pipe" },
+    { "path": "variations[0].spec_table_headers[0]", "source": "Steam Generator Model" },
+    { "path": "variations[0].spec_table_headers[2]", "source": "Steam Room (m²)" },
+    { "path": "variations[0].spec_table_headers[3]", "source": "Size (mm) L|W|H" },
+    { "path": "variations[0].spec_table_headers[4]", "source": "Weight (kg)" },
+    { "path": "variations[0].spec_table_headers[5]", "source": "Control" },
+    { "path": "variations[1].name", "source": "3 Heating Elements" },
+    { "path": "variations[1].features[0]", "source": "Power range: 4.5 – 7.5kW" },
+    { "path": "variations[1].features[1]", "source": "Steam output: up to 7.5kg/hr" },
+    { "path": "variations[1].features[3]", "source": "Own pipe for overpressure valve" },
+    { "path": "variations[1].features[4]", "source": "Auto drain" },
+    { "path": "variations[1].features[5]", "source": "Steam head included" },
+    { "path": "variations[1].features[6]", "source": "Cassette type heating element setup for easy maintenance" },
+    { "path": "variations[1].features[7]", "source": "¾” steam pipe" },
+    { "path": "variations[1].spec_table_headers[0]", "source": "Steam Generator Model" },
+    { "path": "variations[1].spec_table_headers[2]", "source": "Steam Room (m²)" },
+    { "path": "variations[1].spec_table_headers[3]", "source": "Size (mm) L|W|H" },
+    { "path": "variations[1].spec_table_headers[4]", "source": "Weight (kg)" },
+    { "path": "variations[1].spec_table_headers[5]", "source": "Control" },
+    { "path": "variations[2].name", "source": "6 Heating Elements" },
+    { "path": "variations[2].features[0]", "source": "Power range: 9.0 – 15.0kW" },
+    { "path": "variations[2].features[1]", "source": "Steam output: up to 20kg/hr" },
+    { "path": "variations[2].features[3]", "source": "Own pipe for overpressure valve" },
+    { "path": "variations[2].features[4]", "source": "Auto drain" },
+    { "path": "variations[2].features[6]", "source": "Cassette type heating element setup for easy maintenance" },
+    { "path": "variations[2].features[7]", "source": "¾” steam pipe" },
+    { "path": "variations[2].spec_table_headers[0]", "source": "Steam Generator Model" },
+    { "path": "variations[2].spec_table_headers[2]", "source": "Steam Room (m²)" },
+    { "path": "variations[2].spec_table_headers[3]", "source": "Size (mm) L|W|H" },
+    { "path": "variations[2].spec_table_headers[4]", "source": "Weight (kg)" },
+    { "path": "variations[2].spec_table_headers[5]", "source": "Control" },
+    { "path": "included_items[0].title", "source": "Electronics Compartment" },
+    { "path": "included_items[0].note", "source": "(Included for STN-S models only)" },
+    { "path": "included_items[1].title", "source": "Autodrain" },
+    { "path": "included_items[1].note", "source": "(Included for STN-S, STN-W, and STN models)" },
+    { "path": "included_items[2].title", "source": "Steam Head" },
+    { "path": "included_items[2].note", "source": "(for 9kW models and up, two heads are included)" },
+    { "path": "included_items[3].title", "source": "Aroma, Fan and Dimmer Functions" },
+    { "path": "included_items[3].note", "source": "(Optional features for STN models)" },
+    { "path": "included_items[4].title", "source": "7.5m RJ12 cable" },
+    { "path": "included_items[4].note", "source": "7.5m RJ10 cable" },
+    { "path": "included_items[5].title", "source": "Temperature sensor with" },
+    { "path": "included_items[5].note", "source": "wire and sensor holder" }
+  ],
+  "fields": {
+    "name": "STN-S 蒸汽发生器",
+    "short_description": "<p style=\"text-align: justify;\"><strong>STN-S 蒸汽发生器</strong>专为强劲动力与卓越性能而打造,提供更灵活的安装方式。其配备独立电控舱,发生器主机可与电控部分分开安装于不同位置。卡匣式加热元件设计简化了水箱的清洁与维护,而香薰、风扇和调光功能则可让您自定义每一次蒸汽体验。</p><p style=\"text-align: justify;\">配备<strong>需求按钮</strong>功能,轻触即可释放额外蒸汽,该按钮可安装于蒸汽房内部或外部。控制器上会显示错误代码,便于快速排查故障。最多可将五台机组串联,在单个 SAWO 控制器的统一管理下,实现高达 <strong>75.0 kW</strong> 的最大输出。</p>",
+    "description": null,
+    "type": "蒸汽发生器",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 加热元件",
+        "description": null,
+        "features": [
+          "功率范围:3.0–5.0kW",
+          "蒸汽输出量:最高 6.7 千克/小时",
+          "管路与电气线缆可安装于任意一侧",
+          "配备独立超压阀管路",
+          "自动排水",
+          "含蒸汽头",
+          "卡匣式加热元件设计,便于维护",
+          "¾ 英寸蒸汽管",
+          "不锈钢触控面板",
+          "可用控制器:STP 2.0 用户界面"
+        ],
+        "spec_table_headers": [
+          "蒸汽发生器型号",
+          "kW",
+          "蒸汽房 (m²)",
+          "尺寸 (mm) 长|宽|高",
+          "重量 (kg)",
+          "控制器"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 加热元件",
+        "description": null,
+        "features": [
+          "功率范围:4.5–7.5kW",
+          "蒸汽输出量:最高 7.5 千克/小时",
+          "管路与电气线缆可安装于任意一侧",
+          "配备独立超压阀管路",
+          "自动排水",
+          "含蒸汽头",
+          "卡匣式加热元件设计,便于维护",
+          "¾ 英寸蒸汽管",
+          "不锈钢触控面板",
+          "可用控制器:STP 2.0 用户界面"
+        ],
+        "spec_table_headers": [
+          "蒸汽发生器型号",
+          "kW",
+          "蒸汽房 (m²)",
+          "尺寸 (mm) 长|宽|高",
+          "重量 (kg)",
+          "控制器"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 加热元件",
+        "description": null,
+        "features": [
+          "功率范围:9.0–15.0kW",
+          "蒸汽输出量:最高 20 千克/小时",
+          "管路与电气线缆可安装于任意一侧",
+          "配备独立超压阀管路",
+          "自动排水",
+          "含 2 个蒸汽头",
+          "卡匣式加热元件设计,便于维护",
+          "¾ 英寸蒸汽管",
+          "不锈钢触控面板",
+          "可用控制器:STP 2.0 用户界面"
+        ],
+        "spec_table_headers": [
+          "蒸汽发生器型号",
+          "kW",
+          "蒸汽房 (m²)",
+          "尺寸 (mm) 长|宽|高",
+          "重量 (kg)",
+          "控制器"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "电控舱",
+        "note": "(仅 STN-S 型号含此配置)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "自动排水装置",
+        "note": "(STN-S、STN-W 及 STN 型号均含此配置)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "蒸汽头",
+        "note": "(9kW 及以上型号含两个蒸汽头)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "香薰、风扇及调光功能",
+        "note": "(STN 型号的可选功能)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7.5米 RJ12 电缆",
+        "note": "7.5米 RJ10 电缆"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "温度传感器,含",
+        "note": "导线及传感器支架"
+      }
+    ]
+  }
+}

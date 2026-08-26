@@ -5,6 +5,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,6 +15,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -23,6 +25,17 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -140,6 +153,17 @@
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/rooms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/rooms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -155,6 +179,17 @@
   </url>
   <url>
     <loc>https://www.sawo.com/steam</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/steam</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -265,55 +300,409 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.sawo.com/products/emergency-stop-button-switch-estop</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-nordex-pro</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-helius</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-nordex-s-combi</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-nordex-s</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-nordex-pro-combi</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-taurus</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/helius-heater-hood</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/cozy-tank-13l</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-krios-wall</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-nordex-wall</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-phoenix</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-phoenix-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-heaterking-round-w4</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-heaterking-round-w6</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-heaterking-round-w9</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-heaterking-round-w2</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-heaterking-round-w12</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-cubos-middle</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-cubos-wall</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-cubos-middle-wooden</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-cubos-corner-wooden</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-cubos-wall-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-cubos-middle-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-cubos-corner-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-cubos-wall-wooden</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-cubos-corner</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-aries-corner</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-aries-wall</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-round-v2-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-aries-round</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/safety-switch-for-heaters</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-tower-wall-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-tower-corner-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-tower-corner</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-tower-wall</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-tower-round</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-sawo30-corner-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-corner-wooden</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-sawo30-corner</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-round-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-round-wooden</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-sawo30-round</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/cozy-tank-03l</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/heater-guard-sawo30-wall</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-sawo30-wall-stainless</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/integration-collar-wall-wooden</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/sauna-stones-olivine-diabase-rounded-20kg</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/decorative-sauna-stones-white-quartz-rounded-10kg</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/cozy-tank-06l</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/helius-mini-ns</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/ste-steam-generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/ste-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/ste-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/ste-steam-generator"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/products/ste-steam-generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/ste-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/ste-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/ste-steam-generator"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/stn-steam-generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/stn-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/stn-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/stn-steam-generator"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/products/stn-steam-generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/stn-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/stn-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/stn-steam-generator"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/products/stn-s-steam-generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/stn-s-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/stn-s-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/stn-s-steam-generator"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/products/stn-s-steam-generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/stn-s-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/stn-s-steam-generator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/stn-s-steam-generator"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.sawo.com/products/steam-ste</loc>
-    <lastmod>2026-07-23</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/products/steam-stainless-touch-control</loc>
-    <lastmod>2026-07-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/steam-stainless-touch-control"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/steam-stainless-touch-control"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/steam-stainless-touch-control"/>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/products/steam-stainless-touch-control</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/steam-stainless-touch-control"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/steam-stainless-touch-control"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/steam-stainless-touch-control"/>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/products/steam-2-0</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/steam-2-0"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/steam-2-0"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/steam-2-0"/>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/infrared-panels-ir-panel-2</loc>
-    <lastmod>2026-07-22</lastmod>
+    <loc>https://www.sawo.com/zh/products/steam-2-0</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products/steam-2-0"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products/steam-2-0"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products/steam-2-0"/>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/infrared-backrest-505-ir-a-d</loc>
-    <lastmod>2026-07-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/products/interface-holder-saunova-2</loc>
-    <lastmod>2026-07-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/products/infrared-2-0-user-interface-ir-ui-v2</loc>
-    <lastmod>2026-07-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/products/infrared-2-0-power-controller</loc>
-    <lastmod>2026-07-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/products/infrared-2-0-built-in-control</loc>
+    <loc>https://www.sawo.com/products/infrared-panels</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -745,12 +1134,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/asdas</loc>
-    <lastmod>2026-04-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.sawo.com/products/savonia-combi-ns</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -764,12 +1147,6 @@
   </url>
   <url>
     <loc>https://www.sawo.com/products/savonia-ns</loc>
-    <lastmod>2026-04-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/products/krios-floor-ns</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -824,7 +1201,7 @@
   </url>
   <url>
     <loc>https://www.sawo.com/products/krios-ni2</loc>
-    <lastmod>2026-04-15</lastmod>
+    <lastmod>2026-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -902,7 +1279,7 @@
   </url>
   <url>
     <loc>https://www.sawo.com/products/mini-fibercoated-nb</loc>
-    <lastmod>2026-04-15</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -961,20 +1338,14 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/temperature-sensor</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.sawo.com/products/optional-second-temperature-sensor-for-bench</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/products/optional-humidity-sensor-temperature-for-bench</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1148,7 +1519,7 @@
   </url>
   <url>
     <loc>https://www.sawo.com/products/cumulus-ni2</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1177,1064 +1548,1232 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/wooden-heater-guard-sawo30-wall</loc>
-    <lastmod>2026-08-18</lastmod>
+    <loc>https://www.sawo.com/products/infrared-backrest</loc>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/wooden-integration-collar-sawo30-wall</loc>
-    <lastmod>2026-08-18</lastmod>
+    <loc>https://www.sawo.com/products/interface-holder</loc>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/stainless-steel-integration-collar-sawo30-wall</loc>
-    <lastmod>2026-08-18</lastmod>
+    <loc>https://www.sawo.com/products/infrared-2-0-user-interface</loc>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/cozy-tank-03l</loc>
-    <lastmod>2026-08-18</lastmod>
+    <loc>https://www.sawo.com/products/infrared-2-0-power-controller</loc>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/cozy-tank-06l</loc>
-    <lastmod>2026-08-18</lastmod>
+    <loc>https://www.sawo.com/products/infrared-2-0-built-in-control</loc>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/sauna-stones-olivine-diabase-rounded-20kg</loc>
-    <lastmod>2026-08-18</lastmod>
+    <loc>https://www.sawo.com/products/temperature-sensor</loc>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/products/decorative-sauna-stones-white-quartz-rounded-10kg</loc>
-    <lastmod>2026-08-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/kanto-347-h</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/lovi-346-h</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/dragon-pail-4l-342-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/dragon-pail-9l-300-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/steamwater-pail-4l-342-d-drf</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/steamwater-pail-9l-300-d-drf</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/usva-374-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-pail-with-curved-handle-373-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-pail-with-wooden-handle-375-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-rattan-with-stainless-steel-insert-371-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-traditional-300-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-rattan-300-hd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-classic-340-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-rattan-4l-341-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-18l-381-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-cover-for-381-381-d-cov</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-28l-391-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-cover-for-391-391-d-cov</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-40l-392-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-cover-for-392-392-d-cov</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-36cm-430-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-42cm-440-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-52cm-443-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-68cm-444-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-puro-51cm-459-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-puro-67cm-460-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-ladle-puro-81cm-461-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/kanto-ladle-451-mh</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/dragon-ladle-449-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/steamshot-ladle-449-d-drf</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-40cm-441-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-siro-46-5cm-445-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-usva-40cm-442-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-with-curved-handle-453-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-siro-70-5cm-446-md</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/pail-shower-393-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/loisto-square-thermometer-108-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/loisto-rounded-thermometer-109-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/kanto-thermometer-104-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/black-metal-thermometer-295-tmbl</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/black-metal-thermo-hygrometer-295-thmbl</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/2-accent-stone-thermometer-280-trd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/1-accent-stone-thermometer-280-tr1d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cut-corner-square-thermometer-220-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/square-thermometer-223-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/octagon-thermometer-240-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/water-drop-thermometer-250-td</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/2-accent-stone-thermo-hygrometer-281-thrd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/1-accent-stone-thermo-hygrometer-thr1d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/2-accent-stone-rectangle-thermo-hygrometer-282-thrd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/1-accent-stone-rectangle-thermo-hygrometer-282-thr1rd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/accent-stone-vertical-thermo-hygrometer-283-thvrd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/water-drop-thermo-hygrometer-251-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/octagon-thermo-hygrometer-241-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/square-thermo-hygrometer-225-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/curved-square-thermo-hygrometer-285-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/basic-curved-rectangle-thermo-hygrometer-271-thbd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/rectangle-thermo-hygrometer-224-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/curved-rectangle-thermo-hygrometer-271-thpd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cut-corner-rectangle-thermo-hygrometer-221-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cut-corner-vertical-rectangle-thermo-hygrometer-221-thvd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/rounded-rectangle-thermo-hygrometer-222-thd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/loisto-clock-square-534-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/loisto-wooden-clock-round-535-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-clock-530-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-pail-clock-small-531-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sand-timer-15min-553-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sand-timer-kanto-15min-554-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sand-timer-tag-15min-550-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-curve-light-240-923-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-curve-light-364-924-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-curve-light-614-925-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-light-cover-square-910-sd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-light-cover-square-911-ld</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-light-cover-corner-wall-914-vd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-light-cover-wave-917-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-vertical-tiles-him-swl-275-1-v</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-vertical-tiles-large-him-swl-275-2-v</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-horizontal-tiles-him-swl-375-1</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-horizontal-tiles-large-him-swl-375-2</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wave-wooden-backrest-506-2-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wave-wooden-headrest-515-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/halu-wooden-headrest-512-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/halu-anti-theft-headrest-513-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-backrest-516-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-backrest-slim-514-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-stripe-sauna-door-770-4sd-r</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-stripe-sauna-door-wide-771-4sd-r</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-reversible-sauna-door-773-4sd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-reversible-sauna-door-734-4sd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-730-4scd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-wide-731-4scd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-with-vertical-wooden-handle-arc-741-4scd-1</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-with-vertical-wooden-handle-metal-741-4scd-3</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-door-with-clear-glass-window-743-4scd-r-l</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-wide-clear-window-sauna-door-739-3scd-r-l</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-with-arc-handle-741-4sgd-1</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-with-metallic-handle-741-4sgd-3</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-standard-730-4sgd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-standard-731-4sgd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/bronze-glass-sauna-door-finland-731-3sgd</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-door-with-bronze-glass-window-743-4sgd-r-l</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-sauna-door-with-window-736-4sgd-r-l</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-wide-bronze-window-sauna-door-739-3sgd-r-l</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-arc-door-handle-558-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-door-handle-559-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-straight-door-handle-with-metal-accent-560-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-door-handle-small-round-565-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-door-handle-big-round-566-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-door-handle-with-magnetic-lock-568-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/door-lock-magnet-round-heavy-duty-574</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/siro-sauna-bench-528-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/siro-sauna-bench-529-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/siro-sauna-bench-529-l-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/siro-wide-sauna-bench-42cm-628-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/siro-wide-sauna-bench-629-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/siro-wide-sauna-bench-629-l-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sauna-bench-520-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sauna-bench-521-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sauna-bench-522-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sauna-bench-523-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/sauna-bench-2-steps-524-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-hook-rack-3-hooks-582-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-hook-rack-4-hooks-586-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-hook-rack-5-hooks-583-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-curve-towel-hanger-589-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-floor-mat-block-595-d-bc</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-floor-mat-corner-frame-595-d-cnr</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wooden-floor-mat-sides-595-d-sid</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/luxury-aroma-cup-50-r-160</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/aroma-cup-50-r-100</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/aroma-spirit-cup-r-501</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/scent-warmer-r-123</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/wine-cooler-stone-r-93-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/spa-stones-set-r-500-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cooler-1-hole-r-141</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cooler-2-hole-r-92</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cooler-w-2-shot-glasses-r-205</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/cooler-w-4-shot-glasses-r-206</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/candle-holder-tower-r-131</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/candle-holder-tower-r-132</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/candle-holder-tower-r-133</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/tower-set-3-r-125</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/candle-holder-straight-r-105</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stone-plate-small-r-152</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/stone-plate-large-r-153-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/soap-holder-r-116</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/ventilation-cover-circle-640-mbr</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/ventilation-cover-circle-641-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-631-d</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-634-d</loc>
+    <loc>https://www.sawo.com/accessories/wooden-curve-light-240</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/ventilation-louver-square-620-d</loc>
+    <loc>https://www.sawo.com/accessories/wooden-hook-rack-3-hooks</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-with-black-option-638-d</loc>
+    <loc>https://www.sawo.com/accessories/ventilation-cover-circle-640mbr</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-with-black-option-639-d</loc>
-    <lastmod>2026-07-17</lastmod>
+    <loc>https://www.sawo.com/accessories/kanto</loc>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/display-stand-wall-1-dp-15</loc>
+    <loc>https://www.sawo.com/accessories/wave-wooden-backrest</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/display-stand-wall-2-dp-16</loc>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-36cm</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/display-stand-wall-3-dp-17</loc>
+    <loc>https://www.sawo.com/accessories/wooden-stripe-sauna-door</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/sauna-signage-950-d</loc>
+    <loc>https://www.sawo.com/accessories/siro-sauna-bench-528d</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/moisture-paper-sp02-900</loc>
+    <loc>https://www.sawo.com/accessories/luxury-aroma-cup-50</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/traditional-set-trad-d</loc>
+    <loc>https://www.sawo.com/accessories/wooden-floor-mat-block</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/essential-set-ess-d</loc>
+    <loc>https://www.sawo.com/accessories/loisto-clock-square</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/signature-set-sig-d</loc>
+    <loc>https://www.sawo.com/accessories/pail-shower</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sawo.com/accessories/dragon-set-dragon-d</loc>
+    <loc>https://www.sawo.com/accessories/loisto-square-thermometer</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/steam-head-cover</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/steam-head-cover"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/steam-head-cover"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/steam-head-cover"/>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/steam-head-cover</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/steam-head-cover"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/steam-head-cover"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/steam-head-cover"/>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/demand-button</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/demand-button"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/demand-button"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/demand-button"/>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/demand-button</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/demand-button"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/demand-button"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/demand-button"/>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/venturi-pipe-straight</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/venturi-pipe-straight"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/venturi-pipe-straight"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/venturi-pipe-straight"/>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/venturi-pipe-straight</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/venturi-pipe-straight"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/venturi-pipe-straight"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/venturi-pipe-straight"/>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/venturi-pipe-l-shape</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/venturi-pipe-l-shape"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/venturi-pipe-l-shape"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/venturi-pipe-l-shape"/>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/venturi-pipe-l-shape</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/venturi-pipe-l-shape"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/venturi-pipe-l-shape"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/venturi-pipe-l-shape"/>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/installation-stand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/installation-stand"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/installation-stand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/installation-stand"/>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/installation-stand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/installation-stand"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/installation-stand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/installation-stand"/>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/aroma-pump</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/aroma-pump"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/aroma-pump"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/aroma-pump"/>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/aroma-pump</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/aroma-pump"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/aroma-pump"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/aroma-pump"/>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/steam-door</loc>
-    <lastmod>2026-05-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/steam-door"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/steam-door"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/steam-door"/>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/steam-door</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/steam-door"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/steam-door"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/steam-door"/>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/siro-sauna-bench-529d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/lovi</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-hook-rack-4-hooks</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/loisto-wooden-clock-round</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-curve-light-364</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-floor-mat-corner-frame</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-42cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-stripe-sauna-door-wide</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/aroma-cup-50</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wave-wooden-headrest</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/loisto-rounded-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/ventilation-cover-circle-641d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-631d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-52cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-clock</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/aroma-spirit-cup</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/signature</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-reversible-sauna-door-7734sd</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/siro-sauna-bench-529ld</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-floor-mat-sides</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/dragon-pail-4l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-hook-rack-5-hooks</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-curve-light-614</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/kanto-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/halu-wooden-headrest</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-clock-small</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/siro-wide-sauna-bench-42cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/black-metal-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-light-cover-square-910sd</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-634d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-reversible-sauna-door-7344sd</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/dragon-pail-9l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-curve-towel-hanger</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/scent-warmer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-standard-68cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/dragon</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/halu-anti-theft-headrest</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/siro-wide-sauna-bench-629d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wine-cooler-stone</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/ventilation-louver-square</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/essential</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-light-cover-square-911ld</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/black-metal-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-puro-51cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sand-timer-15min</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-backrest</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/steamwater-pail-4l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-backrest-slim</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-light-cover-corner-wall</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/spa-stones-set</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-puro-67cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/siro-wide-sauna-bench-629ld</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/2-accent-stone-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/steamwater-pail-9l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-wide</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-with-black-option-638d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sand-timer-kanto-15min</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/traditional</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cooler-1-hole</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-light-cover-wave</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-with-vertical-wooden-handle-arc</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-ladle-puro-81cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/1-accent-stone-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sauna-bench-520d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/ventilation-louver-circle-with-black-option-639d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sand-timer-tag-15min</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/usva</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sauna-bench-521d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cut-corner-square-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-with-vertical-wooden-handle-metal</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/kanto-ladle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cooler-2-hole</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/display-stand-wall-1</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-vertical-tiles</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-pail-with-curved-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sauna-bench-522d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-pail-with-wooden-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-door-with-clear-glass-window</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cooler-w-2-shot-glasses</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/display-stand-wall-2</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/dragon-ladle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/square-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-vertical-tiles-large</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/octagon-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-wide-clear-window-sauna-door</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/display-stand-wall-3</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/steamshot-ladle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sauna-bench-523d</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-horizontal-tiles</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cooler-w-4-shot-glasses</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-rattan-with-stainless-steel-insert</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-40cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-traditional</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sauna-signage</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-with-arc-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/candle-holder-tower-r131</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/sauna-bench-2-steps</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/himalayan-salt-wall-horizontal-tiles-large</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/water-drop-thermometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/moisture-paper</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-rattan</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/candle-holder-tower-r132</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-siro-46-5cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/2-accent-stone-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-with-metallic-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-usva-40cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/1-accent-stone-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/candle-holder-tower-r133</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-classic</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-standard-7304sgd</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-standard-7314sgd</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/tower-set-3</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-rattan-4l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/2-accent-stone-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-with-curved-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-18l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stainless-steel-ladle-siro-70-5cm</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/candle-holder-straight</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/1-accent-stone-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/bronze-glass-sauna-door-finland</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-cover-for-381</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-door-with-bronze-glass-window</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/accent-stone-vertical-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stone-plate-small</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/water-drop-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-28l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-sauna-door-with-window</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/stone-plate-large</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-wide-bronze-window-sauna-door</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/octagon-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-cover-for-391</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/soap-holder</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/square-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-arc-door-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-pail-40l</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-cover-for-392</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/curved-square-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-door-handle</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/basic-curved-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-straight-door-handle-with-metal-accent</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-door-handle-small-round</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-door-handle-big-round</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/curved-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cut-corner-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/wooden-door-handle-with-magnetic-lock</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/cut-corner-vertical-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/door-lock-magnet-round-heavy-duty</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/rounded-rectangle-thermo-hygrometer</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/electronics-compartment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/electronics-compartment"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/electronics-compartment"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/electronics-compartment"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/electronics-compartment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/electronics-compartment"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/electronics-compartment"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/electronics-compartment"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/autodrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/autodrain"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/autodrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/autodrain"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/autodrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/autodrain"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/autodrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/autodrain"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/aroma-fan-and-dimmer-functions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/aroma-fan-and-dimmer-functions"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/aroma-fan-and-dimmer-functions"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/aroma-fan-and-dimmer-functions"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/aroma-fan-and-dimmer-functions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/aroma-fan-and-dimmer-functions"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/aroma-fan-and-dimmer-functions"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/aroma-fan-and-dimmer-functions"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/rj12-cable</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/rj12-cable"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/rj12-cable"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/rj12-cable"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/rj12-cable</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/rj12-cable"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/rj12-cable"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/rj12-cable"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/accessories/steam-head</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/steam-head"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/steam-head"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/steam-head"/>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/accessories/steam-head</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/accessories/steam-head"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/accessories/steam-head"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/accessories/steam-head"/>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2589,6 +3128,18 @@
   <url>
     <loc>https://www.sawo.com/sauna/rooms/glass-front-sauna-room-1919mrl</loc>
     <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/sauna/rooms/compact-sauna-room-1310ms</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/sauna/rooms/compact-sauna-room-1313ms</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
