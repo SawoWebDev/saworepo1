@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { supabase, isPasswordUpdateRequiredError, forgotPassword } from "./supabase";
 import { getCache, setCache } from "./adminCache";
 import { getPerms, can, PERMISSION_SECTIONS } from "./permissions";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const USERS_CACHE_KEY = "admin:users";
 
@@ -465,8 +468,10 @@ export default function Users({ currentUser }) {
 
   const formatDate = d => d ? new Date(d).toLocaleDateString("en-PH", { month: "short", day: "numeric", year: "numeric" }) : "-";
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filtered, { initialPageSize: 25 });
+
   return (
-    <div>
+    <div className="cms-scroll-page">
       <Toast toasts={toasts} remove={removeToast} />
 
       {/* Toolbar */}
@@ -511,6 +516,7 @@ export default function Users({ currentUser }) {
       </div>
 
       {/* Table */}
+      <ScrollArea>
       <div className="products-table-wrap">
         <table className="products-table">
           <thead>
@@ -531,7 +537,7 @@ export default function Users({ currentUser }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map(u => (
+            {pageItems.map(u => (
               <tr key={u.id} className={selected.has(u.id) ? "row-selected" : ""}>
                 {canDelete && (
                   <td style={{ paddingRight: 0 }}>
@@ -589,6 +595,17 @@ export default function Users({ currentUser }) {
           </tbody>
         </table>
       </div>
+      </ScrollArea>
+
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        itemLabel="users"
+      />
 
       {/* Add / Edit Modal */}
       <Modal open={showModal} onClose={closeModal} title={editUser ? "Edit User" : "Add User"} wide>

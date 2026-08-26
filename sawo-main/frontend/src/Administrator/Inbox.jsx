@@ -7,9 +7,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
 import { getCache, setCache } from "./adminCache";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
 
 const INBOX_CACHE_KEY = "admin:inbox:default";
-const PAGE_SIZE = 30;
 
 function formatDate(d) {
   if (!d) return "-";
@@ -81,12 +82,13 @@ export default function Inbox() {
   const [filterUnread, setFilterUnread] = useState(false);
 
   const [expandedId, setExpandedId] = useState(null);
+  const [pageSize, setPageSize] = useState(30);
   const [page, setPage] = useState(0);
   const [totalCount, setTotalCount] = useState(() => cached?.count || 0);
   const [unreadCount, setUnreadCount] = useState(0);
 
   const fetchRows = useCallback(async () => {
-    const isDefaultView = page === 0 && !filterCategory && !filterUnread && !search;
+    const isDefaultView = page === 0 && pageSize === 30 && !filterCategory && !filterUnread && !search;
     if (!(isDefaultView && getCache(INBOX_CACHE_KEY))) setLoading(true);
     setError(null);
     try {
@@ -94,7 +96,7 @@ export default function Inbox() {
         .from("contact_submissions")
         .select("*", { count: "exact" })
         .order("created_at", { ascending: false })
-        .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+        .range(page * pageSize, (page + 1) * pageSize - 1);
 
       if (filterCategory) q = q.eq("category", filterCategory);
       if (filterUnread) q = q.eq("is_read", false);
@@ -110,7 +112,7 @@ export default function Inbox() {
     } finally {
       setLoading(false);
     }
-  }, [page, filterCategory, filterUnread, search]);
+  }, [page, pageSize, filterCategory, filterUnread, search]);
 
   useEffect(() => { fetchRows(); }, [fetchRows]);
   useEffect(() => { setPage(0); }, [filterCategory, filterUnread, search]);
@@ -132,10 +134,10 @@ export default function Inbox() {
     }
   };
 
-  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+  const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="products-page">
+    <div className="products-page cms-scroll-page">
       <div className="logs-toolbar-row">
         <p className="products-subtitle" style={{ margin: 0 }}>
           {loading ? "Loading…" : `${totalCount.toLocaleString()} submissions${unreadCount ? ` · ${unreadCount} unread` : ""}`}
@@ -182,6 +184,7 @@ export default function Inbox() {
         </div>
       )}
 
+      <ScrollArea>
       <div className="products-table-wrap">
         {loading ? (
           <div className="table-loading">
@@ -268,20 +271,17 @@ export default function Inbox() {
           </table>
         )}
       </div>
+      </ScrollArea>
 
-      {totalPages > 1 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
-          <button className="btn btn-ghost btn-sm" disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
-            <i className="fa-solid fa-chevron-left" />
-          </button>
-          <span style={{ fontSize: "0.8rem", color: "var(--text-2)", alignSelf: "center" }}>
-            Page {page + 1} of {totalPages}
-          </span>
-          <button className="btn btn-ghost btn-sm" disabled={page + 1 >= totalPages} onClick={() => setPage((p) => p + 1)}>
-            <i className="fa-solid fa-chevron-right" />
-          </button>
-        </div>
-      )}
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={size => { setPageSize(size); setPage(0); }}
+        itemLabel="submissions"
+      />
     </div>
   );
 }

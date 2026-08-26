@@ -7,6 +7,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "./supabase";
 import { getCache, setCache } from "./adminCache";
 import RevisionFieldDiff from "./RevisionFieldDiff";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
 
 const LOGS_CACHE_KEY = "admin:logs:default";
 
@@ -99,13 +101,13 @@ export default function Logs() {
   const [expandedLogId, setExpandedLogId] = useState(null);
 
   // Pagination
-  const PAGE_SIZE = 50;
+  const [pageSize,   setPageSize]   = useState(50);
   const [page,      setPage]      = useState(0);
   const [totalCount, setTotalCount] = useState(() => cachedLogs?.count || 0);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchLogs = useCallback(async () => {
-    const isDefaultView = page === 0 && !filterAction && !filterEntity && !filterUser && !search;
+    const isDefaultView = page === 0 && pageSize === 50 && !filterAction && !filterEntity && !filterUser && !search;
     // Default view already has cached data on screen (seeded at mount) —
     // refetch quietly in the background instead of flashing the spinner.
     if (!(isDefaultView && getCache(LOGS_CACHE_KEY))) setLoading(true);
@@ -115,7 +117,7 @@ export default function Logs() {
         .from("activity_logs")
         .select("*", { count: "exact" })
         .order("created_at", { ascending: false })
-        .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+        .range(page * pageSize, (page + 1) * pageSize - 1);
 
       if (filterAction) q = q.eq("action", filterAction);
       if (filterEntity) q = q.eq("entity", filterEntity);
@@ -132,7 +134,7 @@ export default function Logs() {
     } finally {
       setLoading(false);
     }
-  }, [page, filterAction, filterEntity, filterUser, search]);
+  }, [page, pageSize, filterAction, filterEntity, filterUser, search]);
 
   useEffect(() => { fetchLogs(); }, [fetchLogs]);
 
@@ -148,11 +150,11 @@ export default function Logs() {
     });
   }, []);
 
-  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+  const totalPages = Math.ceil(totalCount / pageSize);
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="products-page">
+    <div className="products-page cms-scroll-page">
       {/* Summary + filters share one row (see .logs-toolbar-row mobile
           compacting in admin.css) — search gets its own row below since it
           needs more breathing room than a select. */}
@@ -212,6 +214,7 @@ export default function Logs() {
       )}
 
       {/* Table */}
+      <ScrollArea>
       <div className="products-table-wrap">
         {loading ? (
           <div className="table-loading">
@@ -302,61 +305,18 @@ export default function Logs() {
           </table>
         )}
       </div>
+      </ScrollArea>
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          marginTop: 16, padding: "0 4px",
-          fontSize: "0.78rem", color: "var(--text-2)",
-        }}>
-          <span>
-            Showing {page * PAGE_SIZE + 1}–{Math.min((page + 1) * PAGE_SIZE, totalCount)} of {totalCount.toLocaleString()}
-          </span>
-          <div style={{ display: "flex", gap: 6 }}>
-            <button
-              type="button"
-              className="btn btn-ghost btn-sm"
-              onClick={() => setPage(p => Math.max(0, p - 1))}
-              disabled={page === 0}
-            >
-              <i className="fa-solid fa-chevron-left" />
-            </button>
-            {/* Page number pills — show up to 7 */}
-            {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
-              let p;
-              if (totalPages <= 7) {
-                p = i;
-              } else if (page < 4) {
-                p = i;
-              } else if (page > totalPages - 5) {
-                p = totalPages - 7 + i;
-              } else {
-                p = page - 3 + i;
-              }
-              return (
-                <button
-                  key={p}
-                  type="button"
-                  className={`btn btn-sm ${page === p ? "btn-primary" : "btn-ghost"}`}
-                  onClick={() => setPage(p)}
-                  style={{ minWidth: 32 }}
-                >
-                  {p + 1}
-                </button>
-              );
-            })}
-            <button
-              type="button"
-              className="btn btn-ghost btn-sm"
-              onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
-              disabled={page >= totalPages - 1}
-            >
-              <i className="fa-solid fa-chevron-right" />
-            </button>
-          </div>
-        </div>
-      )}
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={size => { setPageSize(size); setPage(0); }}
+        itemLabel="events"
+      />
 
       {/* SQL hint shown when table is empty */}
       {!loading && logs.length === 0 && !search && !filterAction && !filterEntity && !filterUser && (
