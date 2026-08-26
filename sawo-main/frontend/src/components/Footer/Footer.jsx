@@ -1,10 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import sLogo from "../../assets/SAWO-logo.webp";
 import menuPaths from "../../menuPaths";
 
+const CHAT_WIDGET_SRC = "https://sawo-chatbot.vercel.app/sawo-chat-widget.js";
+
 export default function Footer() {
+  // Floating chatbot widget — loaded once here since Footer mounts once for
+  // the whole site (MainLayout wraps all public routes, not remounted per
+  // page), so the widget persists across navigation instead of reloading.
+  useEffect(() => {
+    if (document.querySelector(`script[src="${CHAT_WIDGET_SRC}"]`)) return;
+    const script = document.createElement("script");
+    script.src = CHAT_WIDGET_SRC;
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <footer
       className="bg-[#1a1a1a] text-white py-12"
