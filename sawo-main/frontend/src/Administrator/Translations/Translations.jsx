@@ -12,6 +12,9 @@ import { fetchAllProductsForTranslation, fetchAllTranslations } from "./translat
 import { buildStatusGrid, summarizeGrid, FIELD_STATUS } from "../Local/translationStatus";
 import { PRODUCT_TRANSLATION_LOCALES } from "../../i18n/productTranslationLocales";
 import TranslationProductsGrid from "./TranslationProductsGrid";
+import ScrollArea from "../ScrollArea";
+import Pagination from "../Pagination";
+import { usePagination } from "../usePagination";
 
 const CACHE_KEY = "admin:translations-grid";
 
@@ -54,7 +57,7 @@ export default function Translations({ currentUser }) {
   }
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
         <div className="tax-tabs">
           <button type="button" className={`tax-tab-btn${tab === "overview" ? " active" : ""}`} onClick={() => setTab("overview")}>
@@ -84,11 +87,11 @@ export default function Translations({ currentUser }) {
           <i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: "0.5rem" }} /> Loading translation status...
         </div>
       ) : (
-        <>
+        <div className="cms-scroll-page">
           {tab === "overview" && <OverviewTab summary={summary} grid={grid} onGoToProducts={() => setTab("products")} />}
           {tab === "products" && <TranslationProductsGrid grid={grid} />}
           {tab === "memory" && <TranslationMemoryTab />}
-        </>
+        </div>
       )}
     </div>
   );
@@ -198,6 +201,8 @@ function TranslationMemoryTab() {
     return true;
   });
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filtered, { initialPageSize: 25 });
+
   if (loading) {
     return (
       <div className="table-loading">
@@ -207,7 +212,7 @@ function TranslationMemoryTab() {
   }
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       {error && <div className="alert alert-error" style={{ marginBottom: 14 }}>{error}</div>}
       <p style={{ fontSize: "0.82rem", color: "var(--text-3)", marginBottom: 14, maxWidth: 720 }}>
         Every distinct English phrase translated so far, reused automatically next time the same phrase
@@ -244,6 +249,7 @@ function TranslationMemoryTab() {
         </div>
       </div>
 
+      <ScrollArea>
       <div className="products-table-wrap">
         <table className="products-table">
           <thead>
@@ -254,7 +260,7 @@ function TranslationMemoryTab() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((r, i) => (
+            {pageItems.map((r, i) => (
               <tr key={`${r.locale}-${i}`}>
                 <td style={{ fontSize: "0.82rem" }}>{r.source_text}</td>
                 <td style={{ fontSize: "0.82rem" }}>{r.translated_text}</td>
@@ -267,6 +273,17 @@ function TranslationMemoryTab() {
           </tbody>
         </table>
       </div>
+      </ScrollArea>
+
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        itemLabel="phrases"
+      />
     </div>
   );
 }
