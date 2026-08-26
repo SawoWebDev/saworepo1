@@ -14,6 +14,7 @@ import "./heaters/heaters.css"; // reuse existing heaters CSS (filter pills, why
 import CategoryHero from "../../components/CategoryHero";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -164,9 +165,10 @@ function SkeletonCard() {
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
   const [hovered, setHovered] = useState(false);
+  const localize = useLocalizedPath();
 
   return (
-    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
+    <Link to={localize(`/products/${product.slug}`)} style={{ textDecoration: "none" }}>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -210,6 +212,9 @@ function ProductCard({ product }) {
 export default function SaunaControls() {
   const { products: localProds, loading } = useLocalProducts();
   const [searchParams] = useSearchParams();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const groupLabel = (g) => t(`controlsPage.groupLabels.${g}`, { defaultValue: g });
 
   // Search query for the displayed grid
   const [search, setSearch] = useState("");
@@ -251,8 +256,8 @@ export default function SaunaControls() {
   return (
     <div className="relative">
       <SEO
-        title="Sauna Controls"
-        description="Precise temperature, time, and lighting control for your sauna, explore SAWO's Innova and Saunova control series for total comfort."
+        title={t("controlsPage.meta.title")}
+        description={t("controlsPage.meta.description")}
         path="/sauna/controls"
       />
       <style>{`
@@ -417,23 +422,19 @@ export default function SaunaControls() {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <CategoryHero
         heroImg={heroImg}
-        title="Sauna Controls"
-        description="Precision control for the perfect sauna experience. Explore SAWO's Innova and Saunova control series for total comfort."
+        title={t("controlsPage.hero.title")}
+        description={t("controlsPage.hero.description")}
       >
         <div style={{ marginTop: "12px" }}>
-          <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
+          <BrochureDropdownButton text={tc("viewBrochure")} href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf" />
         </div>
       </CategoryHero>
 
       {/* ── INTRO ────────────────────────────────────────────────────────── */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Discover Our Premier Sauna Control Collection</h2>
-          <p className="wm-products-desc">
-            Using a separate control with SAWO heaters will let you decide what type of sauna experience you will have.
-            Control features such as temperature, humidity, time, use of fan and light dimmer or even save energy
-            with power consumption counter.
-          </p>
+          <h2 className="wm-products-title">{t("controlsPage.intro.title")}</h2>
+          <p className="wm-products-desc">{t("controlsPage.intro.desc")}</p>
         </div>
       </section>
 
@@ -449,7 +450,7 @@ export default function SaunaControls() {
                   className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`}
                   onClick={() => setActiveGroup(null)}
                 >
-                  All
+                  {tc("catalogFilter.all")}
                 </button>
                 {groupNames.map((g) => (
                   <button
@@ -457,7 +458,7 @@ export default function SaunaControls() {
                     className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`}
                     onClick={() => setActiveGroup(g)}
                   >
-                    {g}
+                    {groupLabel(g)}
                   </button>
                 ))}
               </div>
@@ -470,10 +471,10 @@ export default function SaunaControls() {
                   type="text"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  placeholder="Search controls..."
+                  placeholder={tc("catalogFilter.searchPlaceholder", { category: t("controlsPage.meta.title") })}
                 />
                 {search && (
-                  <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                  <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                     <i className="fa-solid fa-xmark" />
                   </button>
                 )}
@@ -491,7 +492,7 @@ export default function SaunaControls() {
                     (p.tags || []).some(t => t.toLowerCase().includes(q))
                   );
                 })).length === 0
-                  ? `No results for "${search}"`
+                  ? tc("catalogFilter.noResultsFor", { query: search })
                   : (() => {
                       const count = visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
                         const q = search.trim().toLowerCase();
@@ -502,7 +503,7 @@ export default function SaunaControls() {
                           (p.tags || []).some(t => t.toLowerCase().includes(q))
                         );
                       })).length;
-                      return `${count} result${count !== 1 ? "s" : ""} for "${search}"`;
+                      return tc("catalogFilter.resultsCount", { count, query: search });
                     })()
                 }
               </p>
@@ -525,7 +526,7 @@ export default function SaunaControls() {
           {/* ── Empty states ── */}
           {!loading && allProducts.length === 0 && (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No products available yet.</p>
+              <p>{tc("catalogFilter.noProductsYet")}</p>
             </div>
           )}
 
@@ -535,12 +536,12 @@ export default function SaunaControls() {
               {visibleGroups.length === 0 ? (
                 <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#a67853" }}>
                   <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "1.8rem", opacity: 0.35, display: "block", marginBottom: 10 }} />
-                  <p style={{ margin: 0 }}>No controls match "<strong>{search}</strong>"</p>
+                  <p style={{ margin: 0 }}>{tc("catalogFilter.noMatch", { category: t("controlsPage.meta.title"), query: search })}</p>
                   <button
                     onClick={() => setSearch("")}
                     style={{ marginTop: 10, background: "none", border: "none", cursor: "pointer", color: "#8b5e3c", fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", textDecoration: "underline" }}
                   >
-                    Clear search
+                    {tc("catalogFilter.clearSearch")}
                   </button>
                 </div>
               ) : (
@@ -557,7 +558,7 @@ export default function SaunaControls() {
                   return (
                     <div className="category-section" id={groupSectionId(brand)} key={brand}>
                       <div className="category-section-title">
-                        <h2>{brand}</h2>
+                        <h2>{groupLabel(brand)}</h2>
                       </div>
                       <div className="products-grid">
                         {items.map((product) => (
@@ -579,9 +580,9 @@ export default function SaunaControls() {
         <div className="wm-container">
           <div className="sfw-notice-wrap">
             <div className="sfw-notice-card">
-              <span className="sfw-notice-tab">Precaution Notice</span>
+              <span className="sfw-notice-tab">{t("controlsPage.precaution.label")}</span>
               <div className="sfw-notice-body">
-                <p>Only a qualified electrician is allowed to make electrical connections and repairs on the unit. Use original parts only.</p>
+                <p>{t("controlsPage.precaution.text")}</p>
               </div>
             </div>
           </div>
@@ -593,13 +594,9 @@ export default function SaunaControls() {
         <div className="wm-container">
           <div className="wm-why-grid">
             <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO CONTROLS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Controls</h2>
-              <p className="wm-why-desc">
-                SAWO controls combine intuitive usability with advanced technology,
-                giving you full command over your sauna environment for a consistent,
-                tailored experience every session.
-              </p>
+              <p className="wm-eyebrow">{t("controlsPage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("controlsPage.why.title")}</h2>
+              <p className="wm-why-desc">{t("controlsPage.why.desc")}</p>
               <div style={{ marginTop: "20px" }}>
                 <a
                   href="https://www.sawo.com/wp-content/uploads/2026/07/STP-INFACE-V2_En_2026.pdf"
@@ -607,7 +604,7 @@ export default function SaunaControls() {
                   rel="noopener noreferrer"
                   className="wm-brochure-btn"
                 >
-                  VIEW BROCHURE
+                  {tc("viewBrochure")}
                 </a>
               </div>
             </div>
@@ -617,8 +614,8 @@ export default function SaunaControls() {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your perfect control from our full range of SAWO solutions"
+        title={t("controlsPage.promo.title")}
+        subtitle={t("controlsPage.promo.subtitle")}
         image={promoBannerImg}
       />
     </div>

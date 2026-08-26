@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
 import menuPaths from "../../menuPaths";
 import WellnessBenefits from "../../components/WellnessBenefits";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 import { roomsPath, controlsPath } from "../../utils/anchoredLinks";
 
 import steamGenerator    from "../../assets/Home/Section3/steam-generator1.webp";
@@ -78,6 +78,7 @@ const exploreBtnStyle = {
 export const SteamSection = () => {
   const t = useLocaleT("home");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const STEAM_ITEMS = STEAM_KEYS.map((key) => ({
     key, title: t(`section3.steam.${key}.title`), caption: t(`section3.steam.${key}.caption`),
     img: STEAM_IMAGES[key], href: STEAM_HREFS[key],
@@ -88,7 +89,7 @@ export const SteamSection = () => {
       <h2 className="section-title">{t("section3.steamHeading")}</h2>
       <div className="steam-grid">
         {STEAM_ITEMS.map((item) => (
-          <Link key={item.key} className="steam-card has-caption" to={item.href}>
+          <Link key={item.key} className="steam-card has-caption" to={localize(item.href)}>
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
@@ -96,7 +97,7 @@ export const SteamSection = () => {
         ))}
       </div>
       <div className="text-center mt-6">
-        <Link to={menuPaths.steam.parent} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
+        <Link to={localize(menuPaths.steam.parent)} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
           {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
@@ -128,6 +129,7 @@ export const SteamSection = () => {
 const Section3 = () => {
   const t = useLocaleT("home");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
 
   const ROOMS_ITEMS = ROOMS_KEYS.map((key) => ({
     key, title: t(`section3.rooms.${key}.title`), caption: t(`section3.rooms.${key}.caption`),
@@ -147,7 +149,7 @@ const Section3 = () => {
       <h2 className="section-title">{t("section3.saunaRoomsHeading")}</h2>
       <div className="steam-grid">
         {ROOMS_ITEMS.map((item) => (
-          <Link key={item.key} className="steam-card has-caption" to={item.href}>
+          <Link key={item.key} className="steam-card has-caption" to={localize(item.href)}>
             <img src={item.img} alt={item.title} width="700" height="525" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
@@ -155,7 +157,7 @@ const Section3 = () => {
         ))}
       </div>
       <div className="text-center mt-6">
-        <Link to={menuPaths.sauna.rooms} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
+        <Link to={localize(menuPaths.sauna.rooms)} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
           {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
@@ -167,7 +169,7 @@ const Section3 = () => {
       <h2 className="section-title">{t("section3.infraredHeading")}</h2>
       <div className="steam-grid">
         {INFRARED_ITEMS.map((item) => (
-          <Link key={item.key} className="steam-card has-caption" to={item.href}>
+          <Link key={item.key} className="steam-card has-caption" to={localize(item.href)}>
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="steam-title">{item.title}</div>
             <div className="steam-caption">{item.caption}</div>
@@ -175,7 +177,7 @@ const Section3 = () => {
         ))}
       </div>
       <div className="text-center mt-6">
-        <Link to={menuPaths.infrared.parent} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
+        <Link to={localize(menuPaths.infrared.parent)} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
           {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>
@@ -209,6 +211,7 @@ const Section3 = () => {
 export const SaunaControlsSection = () => {
   const t = useLocaleT("home");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const CONTROL_ITEMS = CONTROL_KEYS.map((key) => ({
     key, title: t(`section3.controls.${key}.title`), img: CONTROL_IMAGES[key], href: CONTROL_HREFS[key],
   }));
@@ -218,14 +221,14 @@ export const SaunaControlsSection = () => {
       <h2 className="section-title">{t("section3.saunaControlHeading")}</h2>
       <div className="image-grid">
         {CONTROL_ITEMS.map((item) => (
-          <Link key={item.key} to={item.href} className="image-card">
+          <Link key={item.key} to={localize(item.href)} className="image-card">
             <img src={item.img} alt={item.title} width="600" height="400" loading="lazy" decoding="async" />
             <div className="title">{item.title}</div>
           </Link>
         ))}
       </div>
       <div className="text-center mt-6">
-        <Link to={menuPaths.sauna.controls} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
+        <Link to={localize(menuPaths.sauna.controls)} style={exploreBtnStyle} onMouseEnter={e => e.currentTarget.style.color="#af8564"} onMouseLeave={e => e.currentTarget.style.color="#333333"}>
           {tc("exploreMore")} <ChevronRight />
         </Link>
       </div>

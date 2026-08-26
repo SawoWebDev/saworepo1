@@ -1,0 +1,56 @@
+{
+  "home": "首页",
+  "products": "产品",
+  "support": "支持",
+  "aboutUs": "关于我们",
+  "contactUs": "联系我们",
+  "search": "搜索",
+  "openMenu": "打开菜单",
+  "closeMenu": "关闭菜单",
+  "collapse": "收起",
+  "expand": "展开",
+  "searchBox": {
+    "placeholder": "搜索……",
+    "searching": "搜索中……",
+    "noResults": "未找到结果",
+    "pages": "页面",
+    "products": "产品"
+  },
+  "groups": {
+    "sauna": "桑拿",
+    "steam": "蒸汽",
+    "infrared": "红外线"
+  },
+  "items": {
+    "wallMounted": "壁挂式",
+    "tower": "塔式",
+    "stone": "石材式",
+    "floor": "落地式",
+    "combi": "多功能一体式",
+    "dragonfire": "龙焰",
+    "saunaHeaters": "桑拿炉",
+    "saunaControls": "桑拿控制器",
+    "saunaAccessories": "桑拿配件",
+    "saunaRooms": "桑拿房",
+    "interiorDesigns": "室内设计",
+    "woodPanels": "木板与木材",
+    "steamGenerators": "蒸汽发生器",
+    "steamControls": "蒸汽控制器",
+    "steamAccessories": "蒸汽配件",
+    "infrared": "红外线",
+    "faq": "常见问题",
+    "saunaCalculator": "桑拿计算器",
+    "userManuals": "用户手册",
+    "productCatalogue": "产品目录",
+    "latestNews": "最新资讯",
+    "sustainability": "可持续发展",
+    "careers": "招聘信息",
+    "infraredSaunaRooms": "红外线桑拿房",
+    "infraredPanels": "红外线板",
+    "infraredControls": "红外线控制器"
+  },
+  "language": {
+    "label": "语言",
+    "switchTo": "切换语言"
+  }
+}

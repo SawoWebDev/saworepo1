@@ -1,0 +1,28 @@
+{
+  "slug": "steam-door",
+  "productId": "efc9e723-8d96-4d74-930c-85cadc12a79b",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "蒸汽门",
+    "short_description": "<p style=\"text-align: justify;\"><strong><b>蒸汽门</b></strong>可有效锁住蒸汽,防止多余湿气流失,带来深度焕活的蒸汽房体验。</p><p style=\"text-align: justify;\">我们的蒸汽门采用橡胶密封条密封,并配备磁性锁、不锈钢门把手组,以及可将冷凝水导入地漏的集水盒。门框采用防锈铝材制成,钢化玻璃门则专为耐受高温而设计。安装简便,可选用硅胶密封胶或螺丝固定。</p><p style=\"text-align: justify;\">SAWO 蒸汽门可轻松使用硅胶或螺丝安装。</p>",
+    "description": null,
+    "type": "蒸汽配件",
+    "features": [
+      "现有铝制蒸汽门型号:",
+      "型号:ST-746 | 尺寸:790 × 1890mm | 门框:60mm",
+      "型号:ST-749 | 尺寸:900 × 2100mm | 门框:71mm",
+      "铝制门框",
+      "8mm 磨砂钢化玻璃门",
+      "不锈钢门把手组",
+      "3 个重型铰链",
+      "磁性门锁",
+      "密封橡胶垫圈",
+      "塑料集水盒",
+      "安装用楔块,便于施工",
+      "备用螺丝及橡胶盖",
+      "含硅胶密封胶、内六角扳手及安装导轨"
+    ]
+  }
+}

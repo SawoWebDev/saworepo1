@@ -130,10 +130,40 @@ silently land in the wrong locale.
 npm run i18n:manifest
 ```
 
-Regenerates `i18n-handoff/manifest.json` and prints a table: every page ×
-every locale directory that exists, with status `source` / `translated` /
+Regenerates `i18n-handoff/manifest.json` and prints **two** tables: `pages`
+(page-specific content) and `shared` (`common`/`footer`/`nav`/`seo` —
+every page depends on these). Each cell is `source` / `translated` /
 `stale (N key(s) behind source)` / `missing`. Run this after any
 extract/inject call, or any time you want to see what's left.
+
+**Always check the `shared` table too, not just `pages`.** A page can show
+`translated` while its buttons still render in English, because "Explore
+More," "Inquire Today," "View Catalogue," the sauna-calculator CTA, and the
+search/filter chrome all live in `common.json` — not the page's own file —
+and nothing about wiring a page pulls those in for you. This is not
+theoretical: it shipped twice already before this table existed (Finnish
+Home was fine because `common.json`'s `fi` was translated early, but German
+Home quietly fell 12 keys behind when new shared keys were added later and
+only `en`/`fi` got updated; the first Chinese pilot hit the identical gap
+for the same reason). `manifest.js` used to filter shared namespaces **out**
+of its report entirely (see git history, fixed 2026-08-26) — that's exactly
+how both gaps went unnoticed for as long as they did. The fix isn't
+"remember to check common.json" (that's what failed twice) — it's that the
+tool now can't produce an all-green report while a shared namespace is
+behind, so a stale shared file surfaces on the very next `npm run
+i18n:manifest` instead of only when someone happens to click the right
+button in the right language.
+
+**Before shipping a language into a new page or a new locale**, confirm what
+that page actually depends on — grep the page and everything it renders for
+`useLocaleT(` and translate every namespace that turns up, not just the
+page's own. Home's is `home` + `common` + `nav` + `footer` (confirmed via
+`grep -rn 'useLocaleT(' src/pages/Home src/components/Header
+src/components/Footer.jsx src/components/SaunaCalculatorCTA.jsx
+src/components/PageCTA.jsx` — `seo.json` exists but nothing reads it via
+`useLocaleT` yet, so it's tracked but not currently a rendering risk). Don't
+assume this list — grep it fresh for other pages, since which shared
+components a page pulls in isn't always obvious from the page file alone.
 
 ### `scan-all.js` + `finalize-master.js` — whole-codebase bulk extraction
 
@@ -247,6 +277,43 @@ Using `pages/Home/*.jsx` as the reference implementation:
    refactor, not a content change).
 7. Now `extract.js` works for this page — continue with "The manual loop"
    above to get it translated.
+
+## Wiring a component that's shared across pages (the `items = DEFAULT` gotcha)
+
+Several components in `pages/Sauna/rooms/` (`SaunaFeatures`, `SaunaProductDetails`,
+`SaunaRoomDetails`) take a prop like `items = DEFAULT_ITEMS`, rendered by one
+page with the default and by another page (e.g. `/infrared/saunas`) with its
+own, completely different content passed explicitly. Translating one of
+these needs to (a) only touch the default content, never a caller's
+override, and (b) know which i18n key each default item maps to.
+
+**Do not write either check as `props === DEFAULT_ITEMS` or a positional
+index into the prop itself.** Both look correct and both silently break the
+moment any caller passes a *derived* array instead of the literal default —
+most commonly `DEFAULT_ITEMS.filter(...)`, which is a completely ordinary
+thing to write. `filter()` returns a new array (fails `===`, so translation
+gets skipped and the page quietly renders English) and shifts indexes for
+everything after a removed element (so even same-length `.map()`/reordering
+maps translated content onto the wrong item). This shipped once already —
+`SaunaRooms.jsx` passes `SRD_PANELS.filter(p => p.pill !== "Infrared")` to
+`SaunaRoomDetails`, which silently left the "About This Room" panels in
+English (fixed 2026-08-25).
+
+Use `src/i18n/translateSharedItems.js` instead — it checks each item's own
+identity within the default array (survives filtering/reordering) rather
+than the array's identity or position:
+
+- `translateSharedItems(items, DEFAULT_ITEMS, keysByIndex, translateOne)` —
+  for a list where each item gets its own translation (`SaunaFeatures`,
+  `SaunaRoomDetails`'s pattern).
+- `isDerivedFromDefault(arr, DEFAULT_ARR)` — for a component that swaps in
+  one whole translated block at a time rather than per-item
+  (`SaunaProductDetails`'s pattern: `storySections`, `perfCards`,
+  `accordionItems` are each translated as a unit, gated by whether the
+  whole array is still made up of `DEFAULT_ARR`'s own items).
+
+Both live in that one file with full doc comments — read them before adding
+a fourth ad-hoc version of this check somewhere else.
 
 ## Adding a new locale
 

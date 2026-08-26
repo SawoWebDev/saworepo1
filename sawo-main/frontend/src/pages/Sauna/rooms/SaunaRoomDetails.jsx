@@ -1,7 +1,31 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { SRD_PANELS, wrapIndex } from "./SaunaRoomData";
+import { useLocaleT } from "../../../i18n/LocaleContext";
+import { translateSharedItems } from "../../../i18n/translateSharedItems";
+
+// Also rendered by /infrared/saunas with its own IR_ROOM_PANEL prop — see
+// translateSharedItems.js for why this goes through that helper rather than
+// a `panels === SRD_PANELS` check (SaunaRooms.jsx passes
+// SRD_PANELS.filter(...), which broke that check on first ship).
+const SRD_KEYS = ["standard", "glassfront", "infrared", "compact"];
 
 const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const translatedPanels = useMemo(
+    () => translateSharedItems(panels, SRD_PANELS, SRD_KEYS, (panel, key) => {
+      const tr = t(`roomsPage.roomDetails.panels.${key}`, { returnObjects: true });
+      return {
+        ...panel,
+        pill: t(`roomsPage.roomDetails.pills.${key}`),
+        label: t("roomsPage.roomDetails.aboutThisRoom"),
+        title: t(`roomsPage.roomTitles.${key}`),
+        descriptions: tr.descriptions,
+        features: tr.features,
+      };
+    }),
+    [panels, t]
+  );
   const [index, setIndex] = useState(0);
 
   const goTo = useCallback((idx) => {
@@ -15,7 +39,7 @@ const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
         {showNav && (
         <div className="srd-nav">
           {panels.length > 1 && (
-          <button className="srd-nav-arrow" onClick={() => goTo(index - 1)} aria-label="Previous">
+          <button className="srd-nav-arrow" onClick={() => goTo(index - 1)} aria-label={tc("previous")}>
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
               <path d="M7 1L1 7L7 13" stroke="#af8564" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -23,7 +47,7 @@ const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
           )}
 
           <div className="srd-nav-pills">
-            {panels.map((panel, i) => (
+            {translatedPanels.map((panel, i) => (
               <button
                 key={panel.pill}
                 className={`srd-nav-pill${index === i ? " active" : ""}`}
@@ -35,7 +59,7 @@ const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
           </div>
 
           {panels.length > 1 && (
-          <button className="srd-nav-arrow" onClick={() => goTo(index + 1)} aria-label="Next">
+          <button className="srd-nav-arrow" onClick={() => goTo(index + 1)} aria-label={tc("next")}>
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
               <path d="M1 1L7 7L1 13" stroke="#af8564" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -45,7 +69,7 @@ const SaunaRoomDetails = ({ panels = SRD_PANELS, showNav = true }) => {
         )}
 
         <div className="srd-panels">
-          {panels.map((panel, i) => (
+          {translatedPanels.map((panel, i) => (
             <div key={panel.pill} className={`srd-panel${index === i ? " active" : ""}`}>
               <div>
                 <div className="srd-label">{panel.label}</div>

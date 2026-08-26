@@ -1,0 +1,19 @@
+{
+  "slug": "steam-head-cover",
+  "productId": "90bc9fd9-8f93-4c62-b465-95a636a0819b",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "蒸汽头防护罩",
+    "short_description": "<span style=\"text-align: justify;\">我们的防护型</span><strong style=\"text-align: justify;\"><b>蒸汽头防护罩</b></strong><span style=\"text-align: justify;\">专为偏转和扩散蒸汽而设计,可在蒸汽房内实现安全、均匀、舒适的蒸汽分布。</span>",
+    "description": null,
+    "type": "蒸汽配件",
+    "features": [
+      "偏转直冲蒸汽气流,降低烫伤风险,提升使用安全性。",
+      "均匀分布蒸汽,带来更舒适的蒸汽体验。",
+      "减少出口处的热水滴溅与蒸汽喷射。",
+      "保护蒸汽出口免受碰撞与杂物损伤,提升耐用性。"
+    ]
+  }
+}

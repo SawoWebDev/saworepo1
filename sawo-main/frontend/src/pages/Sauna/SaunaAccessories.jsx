@@ -21,15 +21,19 @@ import img_DOORS_AND_HANDLES_copy from "../../assets/DOORS-AND-HANDLES-copy.webp
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const SaunaAccessories = () => {
   const heroLoaded = useHeroLoaded(img_Signature_BL_v2_1_scaled);
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
 
   return (
     <div className="relative">
       <SEO
-        title="Sauna Accessories"
-        description="Enhance your sauna with SAWO accessories: buckets, ladles, thermometers, headrests, lighting, and more, thoughtfully designed for every sauna."
+        title={t("accessoriesPage.meta.title")}
+        description={t("accessoriesPage.meta.description")}
         path="/sauna/accessories"
       />
 
@@ -55,16 +59,16 @@ const SaunaAccessories = () => {
         />
         <div className="sa-hero-overlay" />
         <div className="sa-hero-content">
-          <h1 className="sa-hero-title">SAUNA ACCESSORIES</h1>
-          <p className="sa-hero-subtitle">Discover the Perfect Sauna Accessories</p>
+          <h1 className="sa-hero-title">{t("accessoriesPage.hero.title")}</h1>
+          <p className="sa-hero-subtitle">{t("accessoriesPage.hero.subtitle")}</p>
           <BrochureDropdownButton
-            text="VIEW BROCHURE"
+            text={tc("viewBrochure")}
             items={[
-              { label: "Kivistone Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf" },
-              { label: "Sauna Lights Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" },
-              { label: "Accessory Sets Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" },
-              { label: "Accessories Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" },
-              { label: "Curve LED Lights Flyer", href: "https://www.sawo.com/wp-content/uploads/2026/07/Curve-LED-Lights-Flyer-for-USA-EU-2026.pdf" },
+              { label: t("accessoriesPage.brochureItems.kivistone"), href: "https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf" },
+              { label: t("accessoriesPage.brochureItems.saunaLights"), href: "https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" },
+              { label: t("accessoriesPage.brochureItems.accessorySets"), href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" },
+              { label: t("accessoriesPage.brochureItems.accessories"), href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" },
+              { label: t("accessoriesPage.brochureItems.curveLedLights"), href: "https://www.sawo.com/wp-content/uploads/2026/07/Curve-LED-Lights-Flyer-for-USA-EU-2026.pdf" },
             ]}
           />
         </div>
@@ -75,7 +79,7 @@ const SaunaAccessories = () => {
       {/* SECTION 1: GRID       */}
       {/* ===================== */}
       <section className="sa-grid-section max-w-[1200px] mx-auto px-6 py-20">
-        <h2 className="sa-section-title">Discover the Perfect Sauna Accessories</h2>
+        <h2 className="sa-section-title">{t("accessoriesPage.sectionTitle")}</h2>
 
         <style>{`
 
@@ -167,71 +171,71 @@ const SaunaAccessories = () => {
 
         <div className="custom-product-grid">
 
-          <Link to={menuPaths.sauna.accessories.accessorySets} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.accessorySets)} className="product">
             <img src={img_Signature_D_v4_scaled} alt="Accessory Sets" />
-            <h3>Accessory Sets</h3>
-            <p>Our carefully curated accessory sets offer something for everyone. From natural, zero-waste options to bold & sophisticated designs, the sets enhance your sauna enjoyment in every possible way.</p>
+            <h3>{t("accessoriesPage.items.accessorySets.title")}</h3>
+            <p>{t("accessoriesPage.items.accessorySets.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.pailsLadles} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.pailsLadles)} className="product">
             <img src={img_DRAGON_FIRE_PAIL_AND_LADDLE_SCENE_600x600_1} alt="Pails and Ladles" />
-            <h3>Pails & Ladles</h3>
-            <p>Essential to Finnish saunas, our SAWO selection offers pails ranging from 2 to 40 liters. Choose from traditional cedar, aspen, & pine or modern stainless steel options. Complete your set with ladles.</p>
+            <h3>{t("accessoriesPage.items.pailsLadles.title")}</h3>
+            <p>{t("accessoriesPage.items.pailsLadles.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.thermometers} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.thermometers)} className="product">
             <img src={img_BoxType2_copy_new} alt="Thermometers and Combined meters" />
-            <h3>Thermometers & Combined meters</h3>
-            <p>Traditional Thermometers & Hygrometers signal sauna readiness. Explore diverse shapes & styles. Enhance your lounge with wooden clocks & try our 15-minute sand timers for socializing or newcomers.</p>
+            <h3>{t("accessoriesPage.items.thermometers.title")}</h3>
+            <p>{t("accessoriesPage.items.thermometers.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.clocksSandtimers} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.clocksSandtimers)} className="product">
             <img src={img_sand_timer_copy_new} alt="Clocks and Sandtimers" />
-            <h3>Clocks & Sandtimers</h3>
-            <p>Want to see who lasts the longest in sauna? Our 15min sand timers are a great way to create conversation or perfect for those who are new to Finnish sauna.</p>
+            <h3>{t("accessoriesPage.items.clocksSandtimers.title")}</h3>
+            <p>{t("accessoriesPage.items.clocksSandtimers.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.lightsCovers} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.lightsCovers)} className="product">
             <img src={img_TR_LIGHT_COVER_SCENE1_copy} alt="Sauna Lights and Light Covers" />
-            <h3>Sauna Lights & Covers</h3>
-            <p>Create the perfect ambience with a proper play of lighting. Our different light shades allow you to create the feel of soothing & warm.</p>
+            <h3>{t("accessoriesPage.items.lightsCovers.title")}</h3>
+            <p>{t("accessoriesPage.items.lightsCovers.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.headrestsBackrests} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.headrestsBackrests)} className="product">
             <img src={img_506_2_D} alt="Headrests and Backrests" />
-            <h3>Headrests & Backrests</h3>
-            <p>Wooden headrests & backrests, along with lounge backrests, made from durable materials like wood, memory foam, or fabric, offer comfort in the sauna & lounge with moisture-resistant upholstery for durability.</p>
+            <h3>{t("accessoriesPage.items.headrestsBackrests.title")}</h3>
+            <p>{t("accessoriesPage.items.headrestsBackrests.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.doorsHandles} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.doorsHandles)} className="product">
             <img src={img_DOORS_AND_HANDLES_copy} alt="Doors and Handles" />
-            <h3>Doors & Handles</h3>
-            <p>Elevate your sauna with SAWO's sauna doors. Crafted for durability, they feature rubber lining, magnetic lock, stainless hinges, & laminated jambs. Choose from glass options for a light-filled, spacious feel.</p>
+            <h3>{t("accessoriesPage.items.doorsHandles.title")}</h3>
+            <p>{t("accessoriesPage.items.doorsHandles.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.benches} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.benches)} className="product">
             <img src={img_siro_bench} alt="Benches" />
-            <h3>Benches & Floor Tiles</h3>
-            <p>Upgrade your sauna experience with comfy, stylish benches that support & enhance relaxation. Choose from various high-quality designs to suit your taste & space, creating a wellness sanctuary for your body & mind.</p>
+            <h3>{t("accessoriesPage.items.benches.title")}</h3>
+            <p>{t("accessoriesPage.items.benches.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.kivistone} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.kivistone)} className="product">
             <img src={img_R_500_D_Scene2} alt="Kivistone" />
-            <h3>Kivistone</h3>
-            <p>Kivistone offers a variety of unique soapstone products for homes, gifts, & corporate use, featuring a wide range of innovative designs.</p>
+            <h3>{t("accessoriesPage.items.kivistone.title")}</h3>
+            <p>{t("accessoriesPage.items.kivistone.desc")}</p>
           </Link>
 
-          <Link to={menuPaths.sauna.accessories.ventilations} className="product">
+          <Link to={localize(menuPaths.sauna.accessories.ventilations)} className="product">
             <img src={img_Ventilation} alt="Ventilations and Miscellaneous Items" />
-            <h3>Ventilations & Add-Ons</h3>
-            <p>Explore your sauna experience with our range of ventilations & essential items. Elevate your time in the sauna with SAWO's complimentary items. Discover our fascinating selection today!</p>
+            <h3>{t("accessoriesPage.items.ventilations.title")}</h3>
+            <p>{t("accessoriesPage.items.ventilations.desc")}</p>
           </Link>
 
         </div>
 
         {/* View all accessories → full catalog */}
         <div className="sa-view-all-wrap">
-          <Link to={menuPaths.accessories} className="sa-view-all-btn">VIEW ALL ACCESSORIES</Link>
+          <Link to={localize(menuPaths.accessories)} className="sa-view-all-btn">{t("accessoriesPage.viewAll")}</Link>
         </div>
       </section>
 

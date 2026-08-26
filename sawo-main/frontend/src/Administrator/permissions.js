@@ -31,6 +31,10 @@ export const CAPABILITY_MAP = {
   "products.upload_files":    ["admin", "superadmin"],
   "products.csv_import":      ["admin", "superadmin"],
 
+  // Translations (product content, product_translations table)
+  "translations.view":        ["editor", "admin", "superadmin"],
+  "translations.apply":       ["editor", "admin", "superadmin"],
+
   // Sauna Rooms
   "sauna_rooms.view":         ["viewer", "editor", "admin", "superadmin"],
   "sauna_rooms.create":       ["editor", "admin", "superadmin"],
@@ -81,6 +85,9 @@ export const CAPABILITY_MAP = {
   // Gates the Permissions page itself — deliberately NOT part of
   // the dynamic override system (see setCapabilityOverrides below).
   "page.permissions":         ["superadmin"],
+  // Translation CMS nav entry (see translations.view/.apply above for the
+  // finer-grained action gates).
+  "page.translations":        ["editor", "admin", "superadmin"],
 };
 
 // Grouped, human-labeled subset of CAPABILITY_MAP — only capabilities that
@@ -137,6 +144,13 @@ export const PERMISSION_SECTIONS = [
           { cap: "taxonomy.create", label: "Create category/tag" },
           { cap: "taxonomy.edit",   label: "Edit category/tag" },
           { cap: "taxonomy.delete", label: "Delete category/tag" },
+        ],
+      },
+      {
+        label: "Translations",
+        rows: [
+          { cap: "page.translations",   label: "View page (sidebar)" },
+          { cap: "translations.apply",  label: "Apply translations" },
         ],
       },
     ],
@@ -321,6 +335,7 @@ export const NAV_ITEMS = [
   { to: "/admin/seo",             label: "Page Performance", icon: "fa-solid fa-magnifying-glass-chart", cap: "page.seo", description: "See which hub/category pages get traffic, drill into any page's visitors, and override its title/meta description/social-share image. No redeploy needed.", section: "site" },
   { to: "/admin/seo-keywords",    label: "Keywords",         icon: "fa-solid fa-chess", cap: "page.seo_keyword_intel", description: "Own Search Console rankings, competitor content themes, and tracked SERP positions — combined without conflating real ranking data with inferred content themes.", section: "site" },
   { to: "/admin/website-health",  label: "Website Health",   icon: "fa-solid fa-heart-pulse",    cap: "page.website_health", description: "Genuinely-actionable SEO gaps (missing descriptions, categories, images) plus a condensed view of the automated broken-link/Lighthouse checks.", section: "site" },
+  { to: "/admin/translations",    label: "Translations",     icon: "fa-solid fa-language",       cap: "page.translations", description: "See which product translations are current, need updating, or are missing across every language, and apply new ones.", section: "site" },
 
   // `hidden` keeps this out of the sidebar nav (it's reached by clicking your
   // own name/avatar in the sidebar footer instead) while still being

@@ -1,18 +1,18 @@
 import React from "react";
 import { S3T_VIEWER_URL, S3T_MODEL_LABEL } from "./SaunaRoomData";
+import { useLocaleT } from "../../../i18n/LocaleContext";
 
 const Sauna3DTeaser = () => {
+  const t = useLocaleT("sauna");
   const scrollToConfigurator = () => {
     document.getElementById("sawo-configurator")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
     <section className="sawo-3d-teaser">
-      <div className="s3t-label">Interactive 3D Model</div>
-      <div className="s3t-title">Explore Every Detail</div>
-      <p className="s3t-subtitle">
-        Rotate, zoom, and inspect every angle of our sauna before it ever arrives at your door.
-      </p>
+      <div className="s3t-label">{t("roomsPage.teaser3d.label")}</div>
+      <div className="s3t-title">{t("roomsPage.teaser3d.title")}</div>
+      <p className="s3t-subtitle">{t("roomsPage.teaser3d.subtitle")}</p>
 
       <a className="sawo-3d-card" href={S3T_VIEWER_URL} target="_blank" rel="noopener noreferrer">
         <div className="s3t-preview">
@@ -35,7 +35,7 @@ const Sauna3DTeaser = () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-              Launch 3D Viewer
+              {t("roomsPage.teaser3d.launch")}
             </div>
           </div>
         </div>
@@ -46,20 +46,20 @@ const Sauna3DTeaser = () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 2v6h-6M3 12a9 9 0 0115-6.7L21 8M3 22v-6h6M21 12a9 9 0 01-15 6.7L3 16"/>
               </svg>
-              Drag to Rotate
+              {t("roomsPage.teaser3d.dragRotate")}
             </span>
             <span className="s3t-hint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
               </svg>
-              Scroll to Zoom
+              {t("roomsPage.teaser3d.scrollZoom")}
             </span>
             <span className="s3t-hint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M8 21H5a2 2 0 01-2-2v-3M16 21h3a2 2 0 002-2v-3"/>
               </svg>
-              Double-tap to Focus
+              {t("roomsPage.teaser3d.doubleTapFocus")}
             </span>
           </div>
           <div className="s3t-model-label">{S3T_MODEL_LABEL}</div>
@@ -68,13 +68,13 @@ const Sauna3DTeaser = () => {
 
       <div className="s3t-cta-row">
         <a className="s3t-btn-primary" href={S3T_VIEWER_URL} target="_blank" rel="noopener noreferrer">
-          Open 3D Viewer
+          {t("roomsPage.teaser3d.openViewer")}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
         <button className="s3t-btn-secondary" onClick={scrollToConfigurator}>
-          Build Your Own
+          {t("roomsPage.teaser3d.buildYourOwn")}
         </button>
       </div>
     </section>

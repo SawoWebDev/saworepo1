@@ -5,6 +5,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getVariationsArray } from "./IndividualDisplay/DispAccessories";
+import { useLocalizedPath } from "../i18n/LocaleContext";
 
 export function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
@@ -87,6 +88,7 @@ export const ACCESSORY_CARD_CSS = `
 
 export function AccessoryCard({ product }) {
   const navigate = useNavigate();
+  const localize = useLocalizedPath();
   const variants = getVariationsArray(product);
   const hasSwatches = variants.length > 1;
   const [selected, setSelected] = useState(null); // null = grouped/default thumbnail
@@ -99,7 +101,7 @@ export function AccessoryCard({ product }) {
   const specRows = product.spec_table?.rows || [];
   const video = product.resources?.video;
 
-  const goToProduct = () => navigate(`/accessories/${product.slug}`);
+  const goToProduct = () => navigate(localize(`/accessories/${product.slug}`));
 
   return (
     <div

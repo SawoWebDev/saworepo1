@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import menuPaths from "../menuPaths";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 // Sauna calculator CTA — replaced the "Find Your Dream Sauna" autoplaying
 // configurator video that used to close out SaunaRoomViewer. Same heading,
@@ -15,20 +16,23 @@ import menuPaths from "../menuPaths";
 // the www.sawo.com URL from the original markup — that URL leaves this site
 // for the old WordPress build, which is the thing being replaced.
 const SaunaCalculatorCTA = ({
-  title = "Find Your Dream Sauna",
-  subtitle = "Enter your sauna room dimensions, width, height, and depth, and our calculator will instantly calculate your sauna volume and recommend the right heater power in kW.",
-  buttonLabel = "Sauna Calculator",
+  title,
+  subtitle,
+  buttonLabel,
   href = menuPaths.support.saunaCalculator,
   image = "https://www.sawo.com/wp-content/uploads/2026/05/CUB3-Ni2_InsideSaunaRoom-sauna-calculator.webp",
   imageAlt = "Inside a SAWO sauna room",
-}) => (
+}) => {
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
+  return (
   <div className="sawo-cta-section">
     <div className="sawo-cta-inner">
       <div className="sawo-cta-left">
-        <div className="sawo-title">{title}</div>
-        <div className="sawo-subtitle">{subtitle}</div>
-        <Link className="sawo-cta-btn" to={href}>
-          {buttonLabel}
+        <div className="sawo-title">{title ?? tc("saunaCalculatorCTA.title")}</div>
+        <div className="sawo-subtitle">{subtitle ?? tc("saunaCalculatorCTA.subtitle")}</div>
+        <Link className="sawo-cta-btn" to={localize(href)}>
+          {buttonLabel ?? tc("saunaCalculatorCTA.buttonLabel")}
           <svg
             xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -153,6 +157,7 @@ const SaunaCalculatorCTA = ({
       }
     `}</style>
   </div>
-);
+  );
+};
 
 export default SaunaCalculatorCTA;

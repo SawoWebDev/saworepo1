@@ -1,4 +1,45 @@
 {
+  "hub": {
+    "meta": {
+      "title": "Steam Sauna — Generators, Controls & Accessories",
+      "description": "Shop SAWO steam sauna systems: stainless-steel steam generators, digital controls, and installation accessories engineered for a consistent, spa-quality steam experience at home or commercially."
+    },
+    "hero": {
+      "title": "STEAM",
+      "subtitle": "Experience the luxury of pure steam therapy"
+    },
+    "intro": {
+      "text": "SAWO steam sauna systems bring the therapeutic power of moist heat to any space — from compact home steam showers to large-scale commercial spas. Our complete steam range covers everything you need: stainless-steel steam generators engineered for years of reliable service, intuitive digital controls for precise temperature and humidity, and a full line of accessories to finish the installation."
+    },
+    "generatorsSection": {
+      "title": "Steam Generators",
+      "viewAll": "View All Generators",
+      "desc": "A steam generator is the heart of every steam room, converting water into a continuous, even flow of steam. SAWO's stainless-steel generators are built for durability and easy maintenance, with models scaled from compact residential units up to multi-unit commercial installations delivering up to 75kW.",
+      "loading": "Loading generators...",
+      "empty": "No steam generators available yet.",
+      "fallbackDesc": "Premium SAWO steam generator built for reliable, everyday performance."
+    },
+    "controlsSection": {
+      "title": "Steam Controls",
+      "viewAll": "View All Controls",
+      "desc": "Pair any SAWO steam generator with a dedicated control panel for precise command over temperature, steam output, and session timing. From the essential Steam STE dial to the touchscreen Steam Stainless Touch, every control is designed for simple, reliable operation.",
+      "loading": "Loading controls...",
+      "empty": "No steam controls available yet.",
+      "fallbackDesc": "Precision steam control for a personalized session."
+    },
+    "accessoriesSection": {
+      "title": "Steam Accessories",
+      "viewAll": "View All Accessories",
+      "desc": "Complete your steam room with SAWO's range of accessories — from steam doors and diffusing heads to aroma pumps and installation hardware — each engineered to work seamlessly with our generators and controls for a fully finished, professional installation.",
+      "loading": "Loading accessories...",
+      "empty": "No steam accessories available yet.",
+      "fallbackDesc": "SAWO steam accessory for a complete installation."
+    },
+    "cta": {
+      "title": "Need Help Choosing?",
+      "description": "From generators and controls to accessories, our team can help you find the right steam sauna setup for your home or commercial space."
+    }
+  },
   "generators": {
     "meta": {
       "title": "Steam Generators",

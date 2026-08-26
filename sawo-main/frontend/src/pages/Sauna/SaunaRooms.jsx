@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./SaunaRooms.css";
 import "./heaters/heaters.css";
@@ -16,6 +16,7 @@ import Sauna3DTeaser from "./rooms/Sauna3DTeaser";
 import SaunaWoodMaterials from "./rooms/SaunaWoodMaterials";
 import SaunaCallToAction from "./rooms/SaunaCallToAction";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 import img_1214RS_LATEST_NEW_SAUNA_ROOM from "../../assets/1214RS_LATEST-NEW-SAUNA-ROOM.webp";
 import img_1419RS_LATEST_NEW_SAUNA_ROOM from "../../assets/1419RS_LATEST-NEW-SAUNA-ROOM.webp";
 import img_1922RL_LATEST_NEW_SAUNA_ROOM from "../../assets/1922RL_LATEST-NEW-SAUNA-ROOM.webp";
@@ -48,41 +49,35 @@ const SAUNA_ROOMS_BROCHURE_URL = "https://heyzine.com/flip-book/576de453b2.html"
 // as DEFAULT_ROOMS in SaunaRoomViewer.jsx.
 const ROOM_DETAIL_PANELS = SRD_PANELS.filter((p) => p.pill !== "Infrared");
 
-const CONFIGURATOR_STEPS = [
-  {
-    key: 'room', title: 'Step 1', heading: 'Choose Your Sauna Room', multi: false,
-    items: [
-      { id: 'r1', name: 'Small Classic Sauna Room - 1214RS', tag: 'Small', desc: 'A compact Finnish-style sauna designed for 1–3 people. Perfect for private relaxation and smaller spaces without sacrificing authentic sauna comfort.', img: img_1214RS_LATEST_NEW_SAUNA_ROOM },
-      { id: 'r2', name: 'Medium Classic Sauna Room - 1419RS', tag: 'Medium', desc: 'A spacious and versatile sauna built for 4–6 people. Ideal for families or shared sessions, offering the perfect balance of comfort and functionality.', img: img_1419RS_LATEST_NEW_SAUNA_ROOM },
-      { id: 'r3', name: 'Large Classic Sauna Room - 1922RL', tag: 'Large', desc: 'A generous sauna room designed for 6 or more people. Perfect for larger homes, wellness spaces, or commercial environments seeking a premium group experience.', img: img_1922RL_LATEST_NEW_SAUNA_ROOM },
-      { id: 'r4', name: 'Small Glass Front Sauna Room - 1414RS', tag: 'Small', desc: 'A compact sauna for 1–3 people featuring a full glass front that enhances natural light and visual space. Ideal for modern interiors seeking a brighter, more open sauna experience.', img: img_1414RS_GLASS_FRONT_CEDAR_PERSPECTIVE_VIEW_V2 },
-      { id: 'r5', name: 'Medium Glass Front Sauna Room - 1420RS', tag: 'Medium', desc: 'Designed for 4–6 people, this glass-front sauna combines spacious comfort with contemporary elegance. The transparent façade creates an open, airy atmosphere while maintaining authentic sauna performance.', img: img_1420RS_GLASS_FRONT_CEDAR_PERSPECTIVE_VIEW_V2 },
-      { id: 'r6', name: 'Large Glass Front Sauna Room - 1922RS', tag: 'Large', desc: 'A premium 6+ person sauna featuring a striking full-glass front for a luxurious, open-concept feel. Perfect for statement wellness spaces that blend design and relaxation.', img: img_1922RS_GLASS_FRONT_CEDAR_PERSPECTIVE_VIEW_V2 },
-    ],
-  },
-  {
-    key: 'heater', title: 'Step 2', heading: 'Pick Your Sauna Heater', multi: false,
-    items: [
-      { id: 'h1', name: 'Taurus D NS', tag: 'Floor Heater', desc: 'Taurus D revolutionizes the standard sauna heater by having two or more power options in the same heater. The heater is designed for industrial use, spas, and both public and private pools.', img: img_SAWO_sauna_heaters_floor_TRD_NS },
-      { id: 'h2', name: 'SAWO30 Round Ni2', tag: 'Tower Heater', desc: 'The SAWO30 Round is a magnificent-looking heater that can be placed perfectly in the middle of the sauna or embedded into benches. The large amount of stones in the tall sleek body creates a rich, steam-infused atmosphere.', img: img_SAWO_sauna_heaters_tower_SW3_Round_Ni2 },
-      { id: 'h3', name: 'Nordex Pro NS', tag: 'Floor Heater', desc: 'The Nordex Pro NS is the newest heater in the trusted Nordex lineup. It is engineered for long-lasting performance, with a separate stone compartment to protect the heating elements and extend the unit\'s lifespan.', img: img_SAWO_sauna_heaters_floor_Nordex_Pro_NS },
-      { id: 'h4', name: 'Krios Ni2', tag: 'Wall-Mounted Heater', desc: 'The Krios Ni2 delivers a richer, more humid Finnish sauna experience with its larger stone container. Housed in a sleek stainless steel casing featuring SAWO\'s signature pattern, it combines style and performance.', img: img_SAWO_sauna_heaters_wall_KRI_Ni2 },
-      { id: 'h5', name: 'Aries Round Black Ni2', tag: 'Tower Heater', desc: 'The Aries Round shares the minimalist elegance of all Tower heaters. Tall and space-saving, it distributes heat evenly and is ideal for installation in the center of the sauna or embedded into a bench.', img: img_SAWO_sauna_series_tower_ARI_Round_Black_Ni2 },
-      { id: 'h6', name: 'Scandia NS', tag: 'Wall-Mounted Heater', desc: 'The Scandia NS is a staple classic among sauna heaters, delivering a truly traditional Finnish sauna experience. Simple, reliable, and efficient, it is available with a cool-to-touch fiber coating.', img: img_SAWO_sauna_heaters_wall_SCA_NS },
-    ],
-  },
-  {
-    key: 'accessory', title: 'Step 3', heading: 'Add Accessories', multi: true,
-    items: [
-      { id: 'a1', name: 'Traditional Set', tag: 'Available in: Cedar', desc: 'The choice with a clean, timeless, and traditional finish. It delivers all the essential tools for everyday sauna use.', img: img_Traditional },
-      { id: 'a2', name: 'Essential Set', tag: 'Available in: Cedar', desc: 'The Essential set takes comfort and style to the next level, offering a wider collection of sauna items to enjoy.', img: img_Essential_v3 },
-      { id: 'a3', name: 'Signature Set', tag: 'Available in: Black & Cedar', desc: 'The distinguished Signature set is for those seeking an elegant and sophisticated sauna experience.', img: img_Signature_BL_v4_copy },
-      { id: 'a4', name: 'Dragon Set', tag: 'Available in: Black & Cedar', desc: 'With unparalleled style and innovation, the Dragon set offers a unique, bold look with added flair. This set is part of the Dragonfire Series, designed by renowned Finnish designer Stefan Lindfors.', img: img_Dragon_BL_v3 },
-    ],
-  },
-];
+const ROOM_IMGS = [img_1214RS_LATEST_NEW_SAUNA_ROOM, img_1419RS_LATEST_NEW_SAUNA_ROOM, img_1922RL_LATEST_NEW_SAUNA_ROOM, img_1414RS_GLASS_FRONT_CEDAR_PERSPECTIVE_VIEW_V2, img_1420RS_GLASS_FRONT_CEDAR_PERSPECTIVE_VIEW_V2, img_1922RS_GLASS_FRONT_CEDAR_PERSPECTIVE_VIEW_V2];
+const HEATER_IMGS = [img_SAWO_sauna_heaters_floor_TRD_NS, img_SAWO_sauna_heaters_tower_SW3_Round_Ni2, img_SAWO_sauna_heaters_floor_Nordex_Pro_NS, img_SAWO_sauna_heaters_wall_KRI_Ni2, img_SAWO_sauna_series_tower_ARI_Round_Black_Ni2, img_SAWO_sauna_heaters_wall_SCA_NS];
+const ACCESSORY_IMGS = [img_Traditional, img_Essential_v3, img_Signature_BL_v4_copy, img_Dragon_BL_v3];
+
+// Copy (name/tag/desc) comes from sauna.json's roomsPage.configurator.* — this
+// just pairs each translated item back up with its static image import,
+// which can't live in JSON.
+function buildConfiguratorSteps(t) {
+  const withImgs = (items, imgs) => items.map((item, i) => ({ ...item, img: imgs[i] }));
+  return [
+    {
+      key: 'room', title: t("roomsPage.configurator.stepLabels.room"), heading: t("roomsPage.configurator.stepHeadings.room"), multi: false,
+      items: withImgs(['r1', 'r2', 'r3', 'r4', 'r5', 'r6'].map(id => ({ id, ...t(`roomsPage.configurator.rooms.${id}`, { returnObjects: true }) })), ROOM_IMGS),
+    },
+    {
+      key: 'heater', title: t("roomsPage.configurator.stepLabels.heater"), heading: t("roomsPage.configurator.stepHeadings.heater"), multi: false,
+      items: withImgs(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map(id => ({ id, ...t(`roomsPage.configurator.heaters.${id}`, { returnObjects: true }) })), HEATER_IMGS),
+    },
+    {
+      key: 'accessory', title: t("roomsPage.configurator.stepLabels.accessory"), heading: t("roomsPage.configurator.stepHeadings.accessory"), multi: true,
+      items: withImgs(['a1', 'a2', 'a3', 'a4'].map(id => ({ id, ...t(`roomsPage.configurator.accessories.${id}`, { returnObjects: true }) })), ACCESSORY_IMGS),
+    },
+  ];
+}
 
 const SaunaConfigurator = () => {
+  const t = useLocaleT("sauna");
+  const localize = useLocalizedPath();
+  const CONFIGURATOR_STEPS = useMemo(() => buildConfiguratorSteps(t), [t]);
   const [currentStep, setCurrentStep] = useState(0);
   const [selections, setSelections] = useState({ room: null, heater: null, accessory: [] });
   const productsRef = useRef(null);
@@ -120,14 +115,14 @@ const SaunaConfigurator = () => {
     if (selections.heater) parts.push('Heater: ' + heaterSel.name);
     if (accessoryNames.length > 0) parts.push('Accessories: ' + accessoryNames.join(', '));
     const subject = 'Customize My Sauna, ' + parts.join(' | ');
-    return menuPaths.contact + '?subject=' + encodeURIComponent(subject);
+    return localize(menuPaths.contact) + '?subject=' + encodeURIComponent(subject);
   })();
 
   return (
     <div className="sawo-configurator">
       <div className="sawo-cfg-header">
-        <div className="cfg-title">Customize Your Dream Sauna</div>
-        <p className="cfg-desc">Select your ideal room, heater, and accessories, then send us your configuration for a personalized quote.</p>
+        <div className="cfg-title">{t("roomsPage.configurator.title")}</div>
+        <p className="cfg-desc">{t("roomsPage.configurator.desc")}</p>
       </div>
 
       <div className="sawo-steps">
@@ -135,7 +130,7 @@ const SaunaConfigurator = () => {
           const hasSel = s.multi ? selections[s.key].length > 0 : selections[s.key] !== null;
           const isActive = i === currentStep;
           const isCompleted = hasSel && !isActive;
-          const label = s.key === 'room' ? 'Room' : s.key === 'heater' ? 'Heater' : 'Accessories';
+          const label = s.key === 'room' ? t("roomsPage.configurator.steps.room") : s.key === 'heater' ? t("roomsPage.configurator.steps.heater") : t("roomsPage.configurator.steps.accessories");
           return (
             <button
               key={s.key}
@@ -153,7 +148,7 @@ const SaunaConfigurator = () => {
         <div className="sawo-cfg-products" ref={productsRef}>
           <div className="sawo-cfg-step-title">{step.title}</div>
           <div className="sawo-cfg-step-heading">{step.heading}</div>
-          {step.multi && <div className="sawo-multi-note">You can select multiple accessories</div>}
+          {step.multi && <div className="sawo-multi-note">{t("roomsPage.configurator.multiNote")}</div>}
 
           <div className="sawo-cfg-grid" style={{ animation: 'sawoCfgFadeUp 0.45s ease both' }}>
             {step.items.map((item) => {
@@ -177,12 +172,12 @@ const SaunaConfigurator = () => {
 
           <div className="sawo-cfg-nav">
             {currentStep > 0 ? (
-              <button className="sawo-cfg-nav-btn prev" onClick={() => goToStep(currentStep - 1)}>&larr; Back</button>
+              <button className="sawo-cfg-nav-btn prev" onClick={() => goToStep(currentStep - 1)}>&larr; {t("roomsPage.configurator.back")}</button>
             ) : (
               <button className="sawo-cfg-nav-btn hidden">&larr;</button>
             )}
             {currentStep < CONFIGURATOR_STEPS.length - 1 ? (
-              <button className="sawo-cfg-nav-btn next" onClick={() => goToStep(currentStep + 1)}>Next &rarr;</button>
+              <button className="sawo-cfg-nav-btn next" onClick={() => goToStep(currentStep + 1)}>{t("roomsPage.configurator.next")} &rarr;</button>
             ) : (
               <span />
             )}
@@ -190,7 +185,7 @@ const SaunaConfigurator = () => {
         </div>
 
         <div className="sawo-cfg-sidebar">
-          <div className="sidebar-title">Your Selection</div>
+          <div className="sidebar-title">{t("roomsPage.configurator.yourSelection")}</div>
 
           <div className={`sawo-sidebar-item${roomSel ? ' has-selection' : ''}`} onClick={() => handleSidebarItemClick(0)}>
             <div className="sb-icon">
@@ -201,8 +196,8 @@ const SaunaConfigurator = () => {
               )}
             </div>
             <div className="sb-text">
-              <div className="sb-label">Room</div>
-              <div className="sb-value">{roomSel ? roomSel.name : 'Not selected'}</div>
+              <div className="sb-label">{t("roomsPage.configurator.steps.room")}</div>
+              <div className="sb-value">{roomSel ? roomSel.name : t("roomsPage.configurator.notSelected")}</div>
             </div>
           </div>
 
@@ -215,8 +210,8 @@ const SaunaConfigurator = () => {
               )}
             </div>
             <div className="sb-text">
-              <div className="sb-label">Heater</div>
-              <div className="sb-value">{heaterSel ? heaterSel.name : 'Not selected'}</div>
+              <div className="sb-label">{t("roomsPage.configurator.steps.heater")}</div>
+              <div className="sb-value">{heaterSel ? heaterSel.name : t("roomsPage.configurator.notSelected")}</div>
             </div>
           </div>
 
@@ -229,13 +224,13 @@ const SaunaConfigurator = () => {
               )}
             </div>
             <div className="sb-text">
-              <div className="sb-label">Accessories</div>
+              <div className="sb-label">{t("roomsPage.configurator.steps.accessories")}</div>
               <div className="sb-value">
                 {accessoryNames.length === 0
-                  ? 'Not selected'
+                  ? t("roomsPage.configurator.notSelected")
                   : accessoryNames.length <= 2
                   ? accessoryNames.join(', ')
-                  : `${accessoryNames.length} items selected`}
+                  : t("roomsPage.configurator.itemsSelected", { count: accessoryNames.length })}
               </div>
             </div>
           </div>
@@ -246,12 +241,12 @@ const SaunaConfigurator = () => {
             target={selections.room ? '_blank' : undefined}
             rel={selections.room ? 'noopener noreferrer' : undefined}
           >
-            Inquire About This Setup
+            {t("roomsPage.configurator.cta")}
           </a>
           <div className="sawo-cfg-cta-hint">
             {selections.room
-              ? 'Opens our contact form with your selections pre-filled'
-              : 'Select at least a room to continue'}
+              ? t("roomsPage.configurator.ctaHintReady")
+              : t("roomsPage.configurator.ctaHintEmpty")}
           </div>
         </div>
       </div>
@@ -264,6 +259,9 @@ const SaunaRooms = () => {
   const heroLoaded = useHeroLoaded(SAUNA_ROOMS_HERO_IMG);
   const navigate = useNavigate();
   const { hash } = useLocation();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
 
   // Infrared left this page for /infrared/saunas on 2026-08-20. A hash never
   // reaches the router's path matching, so the old deep link can only be
@@ -272,16 +270,17 @@ const SaunaRooms = () => {
   // the dead URL out of history so Back doesn't bounce through it.
   useEffect(() => {
     if (hash === "#infrared-sauna-room") {
-      navigate(menuPaths.infrared.saunas, { replace: true });
+      navigate(localize(menuPaths.infrared.saunas), { replace: true });
     }
-  }, [hash, navigate]);
+  }, [hash, navigate, localize]);
 
   return (
     <div>
       <SEO
-        title="Sauna Rooms"
-        description="Explore SAWO sauna rooms: Standard, Glass Front, and Compact designs crafted for a complete, therapeutic sauna experience."
-        path="/sauna/rooms"
+        title={t("roomsPage.meta.title")}
+        description={t("roomsPage.meta.description")}
+        path={localize("/sauna/rooms")}
+        hreflangAlternates={{ en: "/sauna/rooms", zh: "/zh/sauna/rooms" }}
       />
       {/* HERO */}
       <section
@@ -303,12 +302,12 @@ const SaunaRooms = () => {
         />
         <div className="wm-hero-overlay" />
         <div className="wm-hero-content">
-          <h1 className="wm-hero-title">SAUNA ROOMS</h1>
-          <p className="wm-hero-subtitle">Custom-built Finnish sauna rooms crafted for comfort, durability, and timeless design.</p>
+          <h1 className="wm-hero-title">{t("roomsPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("roomsPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="VIEW BROCHURE"
-              items={[{ label: "Product Catalogue", href: SAUNA_ROOMS_BROCHURE_URL }]}
+              text={tc("viewBrochure")}
+              items={[{ label: t("roomsPage.hero.catalogueButton"), href: SAUNA_ROOMS_BROCHURE_URL }]}
             />
           </div>
         </div>

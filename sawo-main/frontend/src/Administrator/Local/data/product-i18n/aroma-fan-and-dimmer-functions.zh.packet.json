@@ -1,0 +1,18 @@
+{
+  "slug": "aroma-fan-and-dimmer-functions",
+  "productId": "ef506db9-1a03-4d31-a082-61f6155308d8",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "name",
+      "source": "Aroma, Fan and Dimmer Functions"
+    }
+  ],
+  "fields": {
+    "name": "香薰、风扇及调光功能",
+    "short_description": "STN 型号的可选功能。",
+    "description": null,
+    "type": null
+  }
+}

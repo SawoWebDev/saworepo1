@@ -35,6 +35,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
+import { normalize, getVariationGroups, computeSourceFieldHashes, packetTouchedPaths } from "./product-i18n-fields.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -67,10 +68,9 @@ if (!fs.existsSync(PACKET_DIR)) fs.mkdirSync(PACKET_DIR, { recursive: true });
 // included-item titles repeat near-verbatim). See
 // setup-translation-memory.sql. Exact-match on normalized (trimmed,
 // whitespace-collapsed) English text — no fuzzy matching, good enough for
-// this catalog's literal phrase reuse.
-function normalize(text) {
-  return typeof text === "string" ? text.trim().replace(/\s+/g, " ") : text;
-}
+// this catalog's literal phrase reuse. normalize() itself now lives in
+// product-i18n-fields.js (imported above) so the Translation CMS's
+// freshness hashing uses the exact same normalization.
 
 async function loadTM(locale) {
   const { data, error } = await supabase
@@ -114,42 +114,11 @@ async function fetchProduct(slug) {
   return data;
 }
 
-// Mirrors pages/IndividualDisplay/DispAccessories.jsx's getVariationsArray()
-// priority EXACTLY — local_variations > variations > a legacy fallback that
-// combines variants + heating_element_groups into the same {name, image,
-// features, spec_table, description} shape. Whichever one a given product
-// actually has populated is what DispProduct.jsx renders, so that's what
-// needs translating — always written back to product_translations.variations
-// regardless of which field it came from (mergeTranslation overlays
-// `variations` on the product object, which getVariationsArray then finds
-// first no matter what the untranslated row's own field layout was).
-function getVariationGroups(product) {
-  if (product.local_variations?.length) return product.local_variations;
-  if (product.variations?.length) return product.variations;
-
-  const legacyVariants = product.local_variants?.length ? product.local_variants : product.variants || [];
-  const legacyGroups = product.heating_element_groups || [];
-  return [
-    ...legacyVariants.map((v) => ({
-      name: [v.color, v.code ? `(${v.code})` : ""].filter(Boolean).join(" ").trim() || null,
-      color: v.color || null,
-      code: v.code || null,
-      image: v.image || null,
-      description: "",
-      features: [],
-      spec_table: null,
-    })),
-    ...legacyGroups.map((g) => ({
-      name: g.label || null,
-      color: null,
-      code: null,
-      image: g.image || null,
-      description: g.description || "",
-      features: g.features || [],
-      spec_table: g.spec_table || null,
-    })),
-  ];
-}
+// getVariationGroups() (resolves variations vs. legacy variants +
+// heating_element_groups, mirroring DispAccessories.jsx's
+// getVariationsArray() exactly) now lives in product-i18n-fields.js
+// (imported above) — same behavior, moved so the Translation CMS can call
+// the identical logic instead of a second copy.
 
 // ── extract ──────────────────────────────────────────────────────────────
 
@@ -201,25 +170,25 @@ function buildPacket(product, tm, hits) {
   return fields;
 }
 
-async function extract(slug) {
+async function extract(slug, locale = "fi") {
   const product = await fetchProduct(slug);
-  const tm = await loadTM("fi");
+  const tm = await loadTM(locale);
   const hits = [];
   const packet = {
     slug,
     productId: product.id,
-    locale: "fi",
+    locale,
     instructions:
-      "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+      `Replace every remaining ENGLISH string value below with its ${locale} translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).`,
     tmPrefilled: hits,
     fields: buildPacket(product, tm, hits),
   };
-  const outFile = path.join(PACKET_DIR, `${slug}.fi.packet.json`);
+  const outFile = path.join(PACKET_DIR, `${slug}.${locale}.packet.json`);
   fs.writeFileSync(outFile, JSON.stringify(packet, null, 2), "utf8");
   console.log(`Wrote ${outFile}`);
   console.log(`Translation memory: ${hits.length} field(s) pre-filled, review the rest.`);
-  console.log("Fill in the remaining Finnish text, then run:");
-  console.log(`  node product-i18n.js apply ${slug} fi`);
+  console.log(`Fill in the remaining ${locale} text, then run:`);
+  console.log(`  node product-i18n.js apply ${slug} ${locale}`);
 }
 
 // ── apply ────────────────────────────────────────────────────────────────
@@ -352,6 +321,25 @@ async function apply(slug, locale, packetPathArg) {
     row.included_items = applyProse(product.included_items, f.included_items, ["title", "note"]);
   }
 
+  // Freshness hashes: computed from the CURRENT English product (fetched
+  // fresh above, not from anything cached in the packet), for exactly the
+  // paths this packet covered — filled or deliberately left null, both
+  // count as "reviewed." Merged onto the existing row's hash map, never
+  // replacing it wholesale, so a packet that only touches a subset of
+  // fields (as CMS-generated tasks deliberately will) doesn't wipe out
+  // hash entries — and therefore freshness — for the fields it didn't
+  // touch. A full-packet apply (every CLI packet today) naturally acts as
+  // a full refresh through this same merge, no special-casing needed.
+  const touchedPaths = packetTouchedPaths(f);
+  const newHashes = computeSourceFieldHashes(product, touchedPaths);
+  const { data: existingRow } = await supabase
+    .from("product_translations")
+    .select("source_field_hashes")
+    .eq("product_id", product.id)
+    .eq("locale", locale)
+    .maybeSingle();
+  row.source_field_hashes = { ...(existingRow?.source_field_hashes || {}), ...newHashes };
+
   const { error } = await supabase
     .from("product_translations")
     .upsert(row, { onConflict: "product_id,locale" });
@@ -364,21 +352,21 @@ async function apply(slug, locale, packetPathArg) {
 
 // ── CLI ──────────────────────────────────────────────────────────────────
 
-const [, , command, slug, locale, packetPathArg] = process.argv;
+const [, , command, slug, arg1, packetPathArg] = process.argv;
 
 if (command === "extract" && slug) {
-  extract(slug).catch((err) => {
+  extract(slug, arg1 || "fi").catch((err) => {
     console.error(err.message);
     process.exit(1);
   });
-} else if (command === "apply" && slug && locale) {
-  apply(slug, locale, packetPathArg).catch((err) => {
+} else if (command === "apply" && slug && arg1) {
+  apply(slug, arg1, packetPathArg).catch((err) => {
     console.error(err.message);
     process.exit(1);
   });
 } else {
   console.log("Usage:");
-  console.log("  node product-i18n.js extract <slug>");
+  console.log("  node product-i18n.js extract <slug> [locale]   (locale defaults to fi)");
   console.log("  node product-i18n.js apply <slug> <locale> [packetFile]");
   process.exit(1);
 }

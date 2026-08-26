@@ -1,0 +1,79 @@
+{
+  "exploreMore": "了解更多",
+  "inquireToday": "立即咨询",
+  "viewCatalogue": "查看产品目录",
+  "viewBrochure": "查看宣传册",
+  "previous": "上一个",
+  "next": "下一个",
+  "pageCTA": {
+    "defaultTitle": "需要帮助选择吗?",
+    "defaultDescription": "我们的团队可以帮助您为家庭或商业空间找到合适的SAWO方案。",
+    "contactUs": "联系我们",
+    "viewManuals": "查看手册"
+  },
+  "saunaCalculatorCTA": {
+    "title": "找到您理想的桑拿",
+    "subtitle": "输入您桑拿房的宽度、高度和深度尺寸,我们的计算器将立即计算您的桑拿容积,并推荐合适的加热功率(kW)。",
+    "buttonLabel": "桑拿计算器"
+  },
+  "catalogFilter": {
+    "all": "全部",
+    "searchPlaceholder": "搜索{{category}}……",
+    "clearSearch": "清除搜索",
+    "noProductsYet": "暂无可用产品。",
+    "noMatch": "没有与\"{{query}}\"匹配的{{category}}",
+    "noResultsFor": "未找到\"{{query}}\"的相关结果",
+    "resultsCount_one": "找到{{count}}条\"{{query}}\"的相关结果",
+    "resultsCount_other": "找到{{count}}条\"{{query}}\"的相关结果"
+  },
+  "wellnessBenefits": {
+    "stressRelief": {
+      "label": "压力缓解",
+      "desc": "缓解压力,促进放松,减轻焦虑"
+    },
+    "heartHealth": {
+      "label": "心脏健康",
+      "desc": "改善血液循环,降低动脉硬化,维持健康血压"
+    },
+    "respiratoryRelief": {
+      "label": "呼吸道舒缓",
+      "desc": "缓解鼻塞、鼻窦及胸闷症状"
+    },
+    "muscleRecovery": {
+      "label": "肌肉恢复",
+      "desc": "加速运动后的肌肉恢复"
+    },
+    "betterSleep": {
+      "label": "改善睡眠",
+      "desc": "延长快速眼动睡眠时间,促进更深层、更具修复性的睡眠"
+    },
+    "diseasePrevention": {
+      "label": "疾病预防",
+      "desc": "降低心血管疾病风险,包括中风、高血压、痴呆症及阿尔茨海默病"
+    },
+    "skinDetox": {
+      "label": "肌肤排毒",
+      "desc": "打开毛孔,减少黑头,排出毒素,改善肌肤"
+    },
+    "collagenBoost": {
+      "label": "胶原蛋白提升",
+      "desc": "刺激成纤维细胞活性,促进胶原蛋白生成,改善肌肤质地"
+    },
+    "skinHydration": {
+      "label": "肌肤保湿",
+      "desc": "提升肌肤水分,稳定酸碱平衡,增强皮肤天然屏障"
+    },
+    "immuneSupport": {
+      "label": "免疫支持",
+      "desc": "支持身体的天然免疫防御,助力病后恢复"
+    },
+    "metabolismBoost": {
+      "label": "新陈代谢提升",
+      "desc": "促进蛋白质修复,改善胰岛素敏感性,提高代谢率"
+    },
+    "mentalWellness": {
+      "label": "心理健康",
+      "desc": "持续使用可显著缓解抑郁症状"
+    }
+  }
+}

@@ -1,4 +1,45 @@
 {
+  "hub": {
+    "meta": {
+      "title": "Höyrysauna — kehittimet, ohjaimet ja lisävarusteet",
+      "description": "Osta SAWOn höyrysaunajärjestelmät: ruostumattomasta teräksestä valmistetut höyrynkehittimet, digitaaliset ohjaimet ja asennuslisävarusteet, jotka on suunniteltu tasaiseen, kylpylätasoiseen höyrykokemukseen kotona tai kaupallisessa käytössä."
+    },
+    "hero": {
+      "title": "HÖYRY",
+      "subtitle": "Koe puhtaan höyryterapian ylellisyys"
+    },
+    "intro": {
+      "text": "SAWOn höyrysaunajärjestelmät tuovat kostean lämmön terapeuttisen voiman mihin tahansa tilaan – pienistä kotihöyrysuihkuista suuriin kaupallisiin kylpylöihin. Kattava höyryvalikoimamme kattaa kaiken tarvittavan: ruostumattomasta teräksestä valmistetut höyrynkehittimet, jotka on suunniteltu vuosien luotettavaan käyttöön, intuitiiviset digitaaliset ohjaimet tarkkaan lämpötilan ja kosteuden säätöön sekä kattavan lisävarustevalikoiman asennuksen viimeistelyyn."
+    },
+    "generatorsSection": {
+      "title": "Höyrynkehittimet",
+      "viewAll": "Katso kaikki kehittimet",
+      "desc": "Höyrynkehitin on jokaisen höyryhuoneen sydän, joka muuttaa veden jatkuvaksi, tasaiseksi höyryvirraksi. SAWOn ruostumattomasta teräksestä valmistetut kehittimet on suunniteltu kestäviksi ja helposti huollettaviksi, ja mallivalikoima ulottuu kompakteista kotikäytön yksiköistä aina moniyksikköisiin kaupallisiin asennuksiin, joiden teho voi olla jopa 75 kW.",
+      "loading": "Ladataan kehittimiä...",
+      "empty": "Höyrynkehittimiä ei ole vielä saatavilla.",
+      "fallbackDesc": "Laadukas SAWO-höyrynkehitin, joka on suunniteltu luotettavaan päivittäiseen käyttöön."
+    },
+    "controlsSection": {
+      "title": "Höyryohjaimet",
+      "viewAll": "Katso kaikki ohjaimet",
+      "desc": "Yhdistä mikä tahansa SAWOn höyrynkehitin omaan ohjauspaneeliin, joka antaa tarkan hallinnan lämpötilaan, höyryn määrään ja istunnon kestoon. Yksinkertaisesta Steam STE -valitsimesta kosketusnäytölliseen Steam Stainless Touch -ohjaimeen – jokainen ohjain on suunniteltu yksinkertaiseen ja luotettavaan käyttöön.",
+      "loading": "Ladataan ohjaimia...",
+      "empty": "Höyryohjaimia ei ole vielä saatavilla.",
+      "fallbackDesc": "Tarkka höyryn ohjaus yksilöllistä saunakokemusta varten."
+    },
+    "accessoriesSection": {
+      "title": "Höyrylisävarusteet",
+      "viewAll": "Katso kaikki lisävarusteet",
+      "desc": "Viimeistele höyryhuoneesi SAWOn lisävarustevalikoimalla – höyryovista ja höyrypäistä aromipumppuihin ja asennustarvikkeisiin – jokainen niistä on suunniteltu toimimaan saumattomasti kehittimiemme ja ohjaimiemme kanssa täysin viimeistellyn, ammattimaisen asennuksen aikaansaamiseksi.",
+      "loading": "Ladataan lisävarusteita...",
+      "empty": "Höyrylisävarusteita ei ole vielä saatavilla.",
+      "fallbackDesc": "SAWO-höyrylisävaruste täydelliseen asennukseen."
+    },
+    "cta": {
+      "title": "Tarvitsetko apua valinnassa?",
+      "description": "Kehittimistä ja ohjaimista lisävarusteisiin – tiimimme auttaa löytämään kotiisi tai kaupalliseen tilaasi sopivan höyrysaunaratkaisun."
+    }
+  },
   "generators": {
     "meta": {
       "title": "Höyrynkehittimet",

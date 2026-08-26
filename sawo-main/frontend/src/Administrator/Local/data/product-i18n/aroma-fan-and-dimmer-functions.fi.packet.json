@@ -1,0 +1,18 @@
+{
+  "slug": "aroma-fan-and-dimmer-functions",
+  "productId": "ef506db9-1a03-4d31-a082-61f6155308d8",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "name",
+      "source": "Aroma, Fan and Dimmer Functions"
+    }
+  ],
+  "fields": {
+    "name": "Tuoksu-, puhallin- ja himmennystoiminnot",
+    "short_description": "Valinnaiset lisäominaisuudet STN-malleihin.",
+    "description": null,
+    "type": null
+  }
+}

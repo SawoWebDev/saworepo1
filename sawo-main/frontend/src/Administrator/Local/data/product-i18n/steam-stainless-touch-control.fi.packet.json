@@ -1,0 +1,37 @@
+{
+  "slug": "steam-stainless-touch-control",
+  "productId": "20f895bb-31e0-4a02-8802-9768d7180345",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Steam Stainless Touch Control",
+    "short_description": "<p style=\"text-align: justify;\">Uusin kosketusnäytöllinen STN-höyrynkehittimen ohjain on nyt saatavilla.</p><p style=\"text-align: justify;\">Steam Stainless Touch Control -ohjain tarjoaa vaivattoman höyryn, lämpötilan ja ajan hallinnan käyttäjäystävällisen käyttöliittymän kautta, mikä takaa yksilöllisen sauna- tai höyryhuonekokemuksen.</p>",
+    "description": null,
+    "type": "Höyryohjaimet",
+    "features": [
+      "Paksu ruostumattomasta teräksestä valmistettu kotelo",
+      "Animoidut painikkeet",
+      "Yhteensopiva automaattisten kodin laitteiden kanssa",
+      "Hätähälytysvarustus",
+      "Valmiustila, joka pitää veden lämpimänä seuraavaan käyttökertaan asti",
+      "Näyttää virhekoodin",
+      "Automaattinen tyhjennystoiminto",
+      "Näppäinlukko",
+      "Helppokäyttötila saatavilla",
+      "Päivämäärän ja kellonajan asetus",
+      "Kilowattikäytön laskuri",
+      "Kalkinpoistotoiminto",
+      "Lämmityselementin vikatunnistus",
+      "Sähkökatkomuisti",
+      "Celsius- tai Fahrenheit-lämpötilayksikkö",
+      "Automaattinen valaistus",
+      "Automaattinen puhallin",
+      "LCD-kontrastin säätö",
+      "Valinnainen tuoksupumppu, valon himmennin ja puhallin",
+      "Lämpötila-anturi johdolla",
+      "Valinnainen käyttöliittymän pidike",
+      "7,5 m RJ12-kaapeli liittimineen mukana"
+    ]
+  }
+}

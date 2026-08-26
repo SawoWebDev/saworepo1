@@ -9,12 +9,13 @@ import Section3, { SteamSection, SaunaControlsSection } from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
 import menuPaths from "../../menuPaths";
-import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
+import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const Home = () => {
   const locale = useLocale();
   const tc = useLocaleT("common");
   const t = useLocaleT("home");
+  const localize = useLocalizedPath();
   const path = locale === "en" ? "/" : `/${locale}`;
   return (
     <div>
@@ -28,7 +29,7 @@ const Home = () => {
         path={path}
         rawTitle={locale === "en" ? undefined : t("meta.title")}
         description={locale === "en" ? undefined : t("meta.description")}
-        hreflangAlternates={{ en: "/", fi: "/fi", de: "/de" }}
+        hreflangAlternates={{ en: "/", fi: "/fi", de: "/de", zh: "/zh" }}
       />
       <Hero />
 
@@ -49,7 +50,7 @@ const Home = () => {
         {/* Explore More Button */}
         <div className="text-center mt-6">
           <Link
-            to={menuPaths.sauna.heaters.parent}
+            to={localize(menuPaths.sauna.heaters.parent)}
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 500,

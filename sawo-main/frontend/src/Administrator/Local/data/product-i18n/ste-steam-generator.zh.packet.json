@@ -1,0 +1,101 @@
+{
+  "slug": "ste-steam-generator",
+  "productId": "62da5399-e16e-4b7a-9a24-c457d74d6f62",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "STE 蒸汽发生器",
+    "short_description": "<p style=\"text-align: justify;\">可靠且操作简便,<strong>STE</strong> 蒸汽发生器专为住宅环境设计。操作十分简单:只需打开控制器开关,调节温度旋钮即可。不锈钢结构确保经久耐用、防腐蚀。</p><p style=\"text-align: justify;\">STE 可灵活选择两侧任意方向接管,便于适应各种空间布局的安装需求。如需更大功率,最多可将五台机组串联,在单个 SAWO 控制器的统一管理下,实现高达<strong> 75.0kW</strong> 的最大输出。</p>",
+    "description": null,
+    "type": "蒸汽发生器",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 加热元件",
+        "description": null,
+        "features": [
+          "功率范围:3.0–5.0kW",
+          "蒸汽输出量:最高 6.7 千克/小时",
+          "可安装于任意一侧",
+          "配备独立超压阀管路",
+          "含蒸汽头",
+          "可用控制器:STE 2.0"
+        ],
+        "spec_table_headers": [
+          "蒸汽发生器型号",
+          "kW",
+          "蒸汽房 (m³)",
+          "加热器尺寸 (mm) 长 | 宽 | 高",
+          "重量 (kg)",
+          "控制器"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 加热元件",
+        "description": null,
+        "features": [
+          "功率范围:4.5–7.5kW",
+          "蒸汽输出量:最高 7.5 千克/小时",
+          "可安装于任意一侧",
+          "配备独立超压阀管路",
+          "含蒸汽头",
+          "可用控制器:STE 2.0"
+        ],
+        "spec_table_headers": [
+          "蒸汽发生器型号",
+          "kW",
+          "蒸汽房 (m³)",
+          "加热器尺寸 (mm) 长 | 宽 | 高",
+          "重量 (kg)",
+          "控制器"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 加热元件",
+        "description": null,
+        "features": [
+          "功率范围:9.0–15.0kW",
+          "蒸汽输出量:最高 20 千克/小时",
+          "可安装于任意一侧",
+          "配备独立超压阀管路",
+          "含 2 个蒸汽头",
+          "可用控制器:STE 2.0"
+        ],
+        "spec_table_headers": [
+          "蒸汽发生器型号",
+          "kW",
+          "蒸汽房 (m³)",
+          "加热器尺寸 (mm) 长 | 宽 | 高",
+          "重量 (kg)",
+          "控制器"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Temperature sensor with",
+        "title": "温度传感器,含",
+        "note": "导线及传感器支架"
+      },
+      {
+        "index": 1,
+        "_english_title": "Steam Head",
+        "title": "蒸汽头",
+        "note": "(9kW 及以上型号含两个蒸汽头)"
+      },
+      {
+        "index": 2,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7.5米 RJ12 电缆",
+        "note": "7.5米 RJ10 电缆"
+      }
+    ]
+  }
+}

@@ -2,6 +2,7 @@
   "exploreMore": "Mehr entdecken",
   "inquireToday": "JETZT ANFRAGEN",
   "viewCatalogue": "KATALOG ANSEHEN",
+  "viewBrochure": "BROSCHÜRE ANSEHEN",
   "previous": "Zurück",
   "next": "Weiter",
   "pageCTA": {
@@ -9,6 +10,21 @@
     "defaultDescription": "Unser Team hilft Ihnen, die richtige SAWO-Lösung für Ihr Zuhause oder Gewerbe zu finden.",
     "contactUs": "Kontakt",
     "viewManuals": "Bedienungsanleitungen"
+  },
+  "saunaCalculatorCTA": {
+    "title": "Finden Sie Ihre Traumsauna",
+    "subtitle": "Geben Sie die Maße Ihres Saunaraums ein – Breite, Höhe und Tiefe – und unser Rechner berechnet sofort Ihr Saunavolumen und empfiehlt die passende Ofenleistung in kW.",
+    "buttonLabel": "Sauna-Rechner"
+  },
+  "catalogFilter": {
+    "all": "Alle",
+    "searchPlaceholder": "Suche: {{category}} …",
+    "clearSearch": "Suche zurücksetzen",
+    "noProductsYet": "Noch keine Produkte verfügbar.",
+    "noMatch": "Keine Treffer für \"{{query}}\" ({{category}})",
+    "noResultsFor": "Keine Ergebnisse für \"{{query}}\"",
+    "resultsCount_one": "{{count}} Ergebnis für \"{{query}}\"",
+    "resultsCount_other": "{{count}} Ergebnisse für \"{{query}}\""
   },
   "wellnessBenefits": {
     "stressRelief": {

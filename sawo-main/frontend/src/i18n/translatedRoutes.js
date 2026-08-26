@@ -22,9 +22,11 @@
  * docs/🔴 GO-LIVE/CRA-I18N-TRANSLATIONS-PLAN.md §3.2), re-homed to CRA.
  */
 export const TRANSLATED_PATHS = {
-  "/": ["fi", "de"],
+  "/": ["fi", "de", "zh"],
   "/sauna": ["fi"],
   "/steam/generators": ["fi"],
+  "/steam": ["zh"],
+  "/sauna/rooms": ["zh"],
 };
 
 // True if `path` has real, reviewed copy in `locale` — the single check
@@ -35,10 +37,19 @@ export function isTranslated(path, locale) {
 }
 
 // Locale prefixes routed in App.jsx (English is unprefixed, "").
-export const LOCALE_PREFIXES = ["", "fi", "de"];
+export const LOCALE_PREFIXES = ["", "fi", "de", "zh"];
 
+// "zh" = Simplified Chinese specifically (not Traditional) — content lives
+// in locales/zh/*.json. As of 2026-08-26, Home + global chrome + the /steam
+// hub + /sauna/rooms + the full steam-category product catalog (all 17
+// generator/control/accessory/spare-part products, via product_translations)
+// are translated and spot-checked as natural/accurate (user-reviewed via
+// screenshots) — added to TRANSLATED_PATHS above on that basis, same bar
+// used for fi's reviewed pages. Everything else still renders English
+// per-key for zh until it's translated and similarly checked.
 export const LOCALES = [
   { code: "en", label: "English" },
   { code: "fi", label: "Suomi" },
   { code: "de", label: "Deutsch" },
+  { code: "zh", label: "简体中文" },
 ];

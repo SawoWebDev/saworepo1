@@ -1,0 +1,19 @@
+{
+  "slug": "demand-button",
+  "productId": "32128110-1359-4cc0-af9a-162f9afc6777",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "需求按钮",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">需求按钮</b><span style=\"text-align: justify;\">可即时启动蒸汽生成,让您尽享量身定制的健康体验。</span>",
+    "description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">需求按钮</b><span style=\"text-align: justify;\">可即时启动蒸汽生成,让您尽享量身定制的健康体验。</span>",
+    "type": "蒸汽配件",
+    "features": [
+      "轻按按钮,即可高效用电、降低电费成本",
+      "快速获取蒸汽,提升使用便利性",
+      "人性化设计:按钮位置合理,便于操作",
+      "按钮启动式蒸汽发生,快速产生蒸汽"
+    ]
+  }
+}

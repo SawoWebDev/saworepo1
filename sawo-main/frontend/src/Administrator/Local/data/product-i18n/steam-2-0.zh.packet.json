@@ -1,0 +1,19 @@
+{
+  "slug": "steam-2-0",
+  "productId": "da98177f-d5d9-4a2c-b9e7-b7260ebece87",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Steam 2.0",
+    "short_description": "<span style=\"text-align: justify;\">Steam 2.0(STP-INFACE-V2)控制器是我们蒸汽发生器控制器系列的最新成员,以现代化的设计带来可靠稳定的性能。</span>",
+    "description": null,
+    "type": "蒸汽控制器",
+    "features": [
+      "厚实不锈钢外壳",
+      "LED 数字显示屏",
+      "可选功能:灯光调光器、香薰泵及风扇",
+      "含 7.5米 RJ12 电缆及接头"
+    ]
+  }
+}
