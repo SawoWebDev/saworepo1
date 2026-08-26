@@ -5,6 +5,9 @@ import { useLocalProducts } from "./Local/useLocalProducts";
 import ProductsGridModal from "./ProductsGridModal";
 import { getCache, setCache } from "./adminCache";
 import { getPerms } from "./permissions";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const taxCacheKey = (table) => `admin:taxonomy:${table}`;
 
@@ -315,8 +318,10 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
   const entityLabel = table === "categories" ? "Category" : "Tag";
   const isCategory  = table === "categories";
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filtered, { initialPageSize: 25 });
+
   return (
-    <div>
+    <div className="cms-scroll-page">
       {/* Toolbar */}
       <div className="products-toolbar">
         <div className="search-wrap">
@@ -366,8 +371,9 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
       ) : filtered.length === 0 ? (
         <div className="empty-state">No {label.toLowerCase()} yet.</div>
       ) : (
+        <ScrollArea>
         <div className="tax-grid">
-          {filtered.map(item => (
+          {pageItems.map(item => (
             <TaxCard
               key={item.id}
               item={item}
@@ -384,6 +390,19 @@ const TaxTab = React.forwardRef(function TaxTab({ table, label, hasDescription, 
             />
           ))}
         </div>
+        </ScrollArea>
+      )}
+
+      {!loading && filtered.length > 0 && (
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          totalCount={totalCount}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+          itemLabel={label.toLowerCase()}
+        />
       )}
 
       {/* Form modal */}
@@ -461,7 +480,7 @@ export default function Taxonomy({ currentUser }) {
   const canCreate = perms.can("taxonomy.create");
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
         <div className="tax-tabs">
           <button
@@ -487,7 +506,7 @@ export default function Taxonomy({ currentUser }) {
         )}
       </div>
 
-      <div style={{ marginTop: 20 }}>
+      <div className="cms-scroll-page" style={{ marginTop: 20 }}>
         {tab === "categories" && (
           <TaxTab ref={tabRef} table="categories" label="Categories" hasDescription perms={perms} products={localProducts} />
         )}

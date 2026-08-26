@@ -1857,6 +1857,67 @@ body {
 .view-toggle-btn.active { background: var(--brand); color: #fff; }
 .view-toggle-btn:not(.active):hover { background: var(--surface-2); }
 
+/* ── Contained scroll for CMS data pages ─────────────────────────────────
+   Opt-in per page via the `cms-scroll-page` class on the page's existing
+   root element. .admin-main-content is normally the page-level scroll
+   container (see its base rule above); when a page opts in, that scroll
+   moves down into the page's own .cms-scroll-area instead, so the toolbar/
+   filters/search/tabs above it stay pinned while only the data region
+   scrolls. Pages that don't opt in are completely unaffected — :has() only
+   applies these overrides when a .cms-scroll-page child is actually
+   present. ────────────────────────────────────────────────────────────── */
+.admin-main-content:has(> .cms-scroll-page) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.admin-main:has(.cms-scroll-page) {
+  overflow: hidden;
+}
+.cms-scroll-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.cms-scroll-area {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Shared pagination bar (Pagination.jsx) ──────────────────────────── */
+.cms-pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0 4px;
+  font-size: 0.78rem;
+  color: var(--text-2);
+}
+.cms-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.cms-pagination-size {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-2);
+}
+.cms-pagination-size .filter-select {
+  padding: 4px 26px 4px 8px;
+  font-size: 0.78rem;
+}
+
 /* ── Products table container ────────────────────────────────────────── */
 .products-table-wrap {
   background: var(--surface);
@@ -3086,6 +3147,25 @@ body {
   }
   .admin-main-content {
     padding: 1rem 0.85rem 1.5rem;
+  }
+
+  /* Mobile mirrors of the desktop cms-scroll-page overrides above — .admin-
+     main itself scrolls the whole page by default on mobile (see the base
+     rule a few lines up), so a page that opts into internal scrolling needs
+     that turned off here too, or scrolling would happen at both levels. */
+  .admin-main:has(.cms-scroll-page) {
+    overflow: hidden;
+  }
+  .admin-main-content:has(> .cms-scroll-page) {
+    padding: 1rem 0.85rem 1.5rem;
+  }
+  .cms-pagination-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .cms-pagination-controls {
+    justify-content: space-between;
   }
 
   /* ── Page header — hidden on mobile ──────────────────────────────────

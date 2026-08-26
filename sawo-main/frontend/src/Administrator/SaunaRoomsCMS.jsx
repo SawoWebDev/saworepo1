@@ -8,6 +8,9 @@ import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const ROOMS_CACHE_KEY = "admin:sauna-rooms:live";
 const ROOMS_META_CACHE_KEY = "admin:sauna-rooms:live:meta";
@@ -2053,9 +2056,11 @@ export default function SaunaRooms({ currentUser }) {
     { id: "settings",  label: "Settings",      icon: "fa-gear" },
   ];
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filtered, { initialPageSize: 25 });
+
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="products-page">
+    <div className="products-page cms-scroll-page">
       <Toast toasts={toasts} remove={remove} />
       <UnsavedConfirm open={unsavedOpen} onStay={handleUnsavedStay} onDiscard={handleUnsavedDiscard} />
 
@@ -2124,20 +2129,23 @@ export default function SaunaRooms({ currentUser }) {
 
       {/* Grid View */}
       {!loading && viewMode === "grid" && (
+        <ScrollArea>
         <div className="product-grid">
           {filtered.length === 0 && (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
               {search ? `No rooms match "${search}"` : "No sauna rooms yet. Click New Room to create one."}
             </div>
           )}
-          {filtered.map(r => (
+          {pageItems.map(r => (
             <RoomCard key={r.id} room={r} onEdit={openEdit} onDelete={setConfirmDel} onDuplicate={openDuplicate} onPreview={setPreviewRoom} perms={perms} />
           ))}
         </div>
+        </ScrollArea>
       )}
 
       {/* List View */}
       {viewMode === "list" && (
+        <ScrollArea>
         <div className="products-table-wrap">
           {loading ? (
             <div className="table-loading"><i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: "0.5rem" }} /> Loading...</div>
@@ -2170,7 +2178,7 @@ export default function SaunaRooms({ currentUser }) {
                       : "No sauna rooms yet. Click New Room to create one."}
                   </td></tr>
                 )}
-                {filtered.map(r => (
+                {pageItems.map(r => (
                   <tr key={r.id} className={selected.has(r.id) ? "row-selected" : ""}>
                     {perms.can("sauna_rooms.bulk_delete") && (
                       <td style={{ paddingRight: 0 }}>
@@ -2223,7 +2231,18 @@ export default function SaunaRooms({ currentUser }) {
             </table>
           )}
         </div>
+        </ScrollArea>
       )}
+
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        itemLabel="rooms"
+      />
 
       {/* ── Room Form Modal ── */}
       <Modal

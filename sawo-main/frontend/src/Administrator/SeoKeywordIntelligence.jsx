@@ -34,6 +34,9 @@ import {
   getSerpUsageThisMonth,
   getSemrushRealGaps,
 } from "./seoKeywordIntelligenceData";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const OWN_DOMAIN = "sawo.com";
 const TABS = [
@@ -54,7 +57,7 @@ export default function SeoKeywordIntelligence({ currentUser }) {
   const [tab, setTab] = useState("rankings");
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       {/* No page header here — AdminLayout already renders one shared
           PageHeader per route from the matched NAV_ITEMS entry (icon/
           title/description), same as every other admin page. This used to
@@ -73,9 +76,11 @@ export default function SeoKeywordIntelligence({ currentUser }) {
         ))}
       </div>
 
-      {tab === "rankings" && <MyRankingsTab />}
-      {tab === "themes" && <ContentThemesTab currentUser={currentUser} />}
-      {tab === "battle" && <TrackedBattleTab currentUser={currentUser} />}
+      <div className="cms-scroll-page">
+        {tab === "rankings" && <MyRankingsTab />}
+        {tab === "themes" && <ContentThemesTab currentUser={currentUser} />}
+        {tab === "battle" && <TrackedBattleTab currentUser={currentUser} />}
+      </div>
     </div>
   );
 }
@@ -118,6 +123,8 @@ function MyRankingsTab() {
     return { impressions, clicks, keywordCount: rankings.length };
   }, [rankings]);
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(sorted, { initialPageSize: 25 });
+
   if (loading) return <TabLoading label="Loading Search Console data…" />;
   if (error) return <TabError message={error} />;
 
@@ -132,7 +139,7 @@ function MyRankingsTab() {
   }
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 12, marginBottom: 20 }}>
         <MetricCard icon="fa-key" title="Tracked Keywords" value={totals.keywordCount} subtitle="Distinct query/page pairs, last 28 days" />
         <MetricCard icon="fa-eye" title="Total Impressions" value={totals.impressions.toLocaleString()} subtitle="Last 28 days" />
@@ -173,7 +180,7 @@ function MyRankingsTab() {
         />
       )}
 
-      <div className="card card-body card-lift">
+      <div className="card card-body card-lift cms-scroll-page">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
           <h3 className="text-lg font-bold text-[var(--text)]" style={{ margin: 0 }}>All Keywords</h3>
           <select className="form-select" value={sortKey} onChange={(e) => setSortKey(e.target.value)} style={{ width: "auto" }}>
@@ -182,6 +189,7 @@ function MyRankingsTab() {
             <option value="position">Sort: Position (best on top when ascending isn't used — see note)</option>
           </select>
         </div>
+        <ScrollArea>
         <div className="products-table-wrap">
           <table className="products-table">
             <thead>
@@ -196,7 +204,7 @@ function MyRankingsTab() {
               </tr>
             </thead>
             <tbody>
-              {sorted.map((r) => (
+              {pageItems.map((r) => (
                 <tr key={`${r.keyword}-${r.url}`}>
                   <td style={{ fontWeight: 600 }}>{r.keyword}</td>
                   <td style={{ fontSize: "0.78rem", color: "var(--text-3)" }}>{r.url}</td>
@@ -212,6 +220,16 @@ function MyRankingsTab() {
             </tbody>
           </table>
         </div>
+        </ScrollArea>
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          totalCount={totalCount}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+          itemLabel="keywords"
+        />
       </div>
     </div>
   );

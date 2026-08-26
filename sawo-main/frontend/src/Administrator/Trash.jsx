@@ -12,6 +12,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import { supabase, logActivity } from "./supabase";
 import { getTrashedProductsLive, getTrashedSaunaRoomsLive } from "../local-storage/supabaseReader";
 import { deleteR2Urls } from "./mediaUpload";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const TRASH_DAYS = 30;
 
@@ -155,6 +158,8 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
     }
   };
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(items, { initialPageSize: 25 });
+
   return (
     <div className="card card-body" style={{ padding: 0, marginBottom: 24 }}>
       <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
@@ -181,7 +186,7 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
               </tr>
             </thead>
             <tbody>
-              {items.map(item => {
+              {pageItems.map(item => {
                 const left = daysLeft(item.deleted_at);
                 return (
                   <tr key={item.id}>
@@ -231,6 +236,20 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
         </div>
       )}
 
+      {!loading && items.length > 0 && (
+        <div style={{ padding: "0 20px 16px" }}>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            itemLabel={title.toLowerCase()}
+          />
+        </div>
+      )}
+
       <Modal open={!!purgeTarget} onClose={() => setPurgeTarget(null)} title="Delete Forever?">
         <p className="confirm-msg">
           This permanently deletes "{purgeTarget?.name}" and its images/files right now — there's no more waiting
@@ -255,7 +274,7 @@ export default function Trash({ currentUser }) {
   const removeToast = id => setToasts(p => p.filter(t => t.id !== id));
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       <Toast toasts={toasts} remove={removeToast} />
 
       <p style={{ fontSize: "0.85rem", color: "var(--text-2)", margin: "0 0 20px", maxWidth: 720 }}>
@@ -264,24 +283,26 @@ export default function Trash({ currentUser }) {
         mistake, or delete it forever yourself to skip the wait.
       </p>
 
-      <TrashSection
-        title="Products"
-        icon="fa-box"
-        emptyLabel="No deleted products."
-        fetchFn={getTrashedProductsLive}
-        table="products"
-        currentUser={currentUser}
-        addToast={addToast}
-      />
-      <TrashSection
-        title="Sauna Rooms"
-        icon="fa-home"
-        emptyLabel="No deleted sauna rooms."
-        fetchFn={getTrashedSaunaRoomsLive}
-        table="sauna_rooms"
-        currentUser={currentUser}
-        addToast={addToast}
-      />
+      <ScrollArea>
+        <TrashSection
+          title="Products"
+          icon="fa-box"
+          emptyLabel="No deleted products."
+          fetchFn={getTrashedProductsLive}
+          table="products"
+          currentUser={currentUser}
+          addToast={addToast}
+        />
+        <TrashSection
+          title="Sauna Rooms"
+          icon="fa-home"
+          emptyLabel="No deleted sauna rooms."
+          fetchFn={getTrashedSaunaRoomsLive}
+          table="sauna_rooms"
+          currentUser={currentUser}
+          addToast={addToast}
+        />
+      </ScrollArea>
     </div>
   );
 }
