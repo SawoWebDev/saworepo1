@@ -12,7 +12,7 @@ import imgSaunaLights        from "../../assets/Home/Section4/TR-LIGHT-COVER_SCE
 import imgHeadrests          from "../../assets/Home/Section4/506-2-D.webp";
 import imgDoorsHandles       from "../../assets/Home/Section4/DOORS-AND-HANDLES-copy.webp";
 import imgBenches            from "../../assets/Home/Section4/siro-bench.webp";
-import imgKivistone          from "../../assets/Home/Section4/R-500-D_Scene2.webp";
+import imgKivistone          from "../../assets/Home/Section4/R-501-Photo-Scene.webp";
 import imgVentilation        from "../../assets/Home/Section4/Ventilation.webp";
 
 const ACCESSORIES = [

@@ -15,7 +15,31 @@
 // live every time, despite the "24h cache" framing in their own comments.
 import { getCache, setCache } from "../adminCache";
 
+// Dev-only escape hatch for the 24h cache below — flip via the floating
+// "LIVE DATA" toggle (components/DevCacheToggle.jsx, localhost-only, never
+// renders in production) instead of manually clearing localStorage while
+// iterating on product/room data against a live Supabase project.
+const BYPASS_FLAG_KEY = "sawo_dev_bypass_cache";
+
+export function isDevCacheBypassed() {
+  try {
+    return localStorage.getItem(BYPASS_FLAG_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function setDevCacheBypass(on) {
+  try {
+    if (on) localStorage.setItem(BYPASS_FLAG_KEY, "1");
+    else localStorage.removeItem(BYPASS_FLAG_KEY);
+  } catch {
+    // ignore — private browsing / storage unavailable
+  }
+}
+
 export function readPublicCache(memoryKey, storageKey) {
+  if (isDevCacheBypassed()) return undefined;
   const mem = getCache(memoryKey);
   if (mem) return mem;
   try {
@@ -29,6 +53,7 @@ export function readPublicCache(memoryKey, storageKey) {
 }
 
 export function writePublicCache(memoryKey, storageKey, entry) {
+  if (isDevCacheBypassed()) return;
   setCache(memoryKey, entry);
   try {
     localStorage.setItem(storageKey, JSON.stringify(entry));

@@ -9,6 +9,9 @@ import ScrollToTop from "./components/ScrollToTop";
 // Mounted inside the public route below (not here at Router level) so it
 // never runs — no settings fetch, no banner — on /admin/* or /login.
 import GDPRConsentGate from "./components/GDPRConsentGate";
+// Floating localhost-only toggle for the public 24h product/room cache —
+// never renders on the real production domain. See the component for why.
+import DevCacheToggle from "./components/DevCacheToggle";
 
 // Small non-component admin helpers — imported eagerly (not lazily) because
 // AdminLanding below needs them synchronously to resolve a redirect target.
@@ -127,6 +130,7 @@ export default function App() {
                     <main>) so this fixed-position banner never mounts (no
                     settings fetch, no banner code) on /admin/* or /login. */}
                 <GDPRConsentGate />
+                <DevCacheToggle />
                 <MainLayout>
                 <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
                   <Routes>

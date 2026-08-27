@@ -186,6 +186,8 @@ import img_Glass_Front_Sauna_Room_2222RL from "../../../assets/Glass-Front-Sauna
 import img_Glass_Front_Sauna_Room_2222LL from "../../../assets/Glass-Front-Sauna-Room-2222LL.webp";
 import img_Glass_Front_Sauna_Room_2222MD from "../../../assets/Glass-Front-Sauna-Room-2222MD.webp";
 import img_SR05_3433420_IR_0908MS_PERSPECTIVE_VIEW from "../../../assets/SR05-3433420_IR-0908MS-PERSPECTIVE-VIEW.webp";
+import img_0908_IR_SAUNA_ROOM from "../../../assets/0908-IR-SAUNA-ROOM.webp";
+import img_0908_IR_SAUNA_ROOM_V2 from "../../../assets/0908-IR-SAUNA-ROOM_V2.webp";
 import img_SR05_3303290_IR_1111RS_PERSPECTIVE_VIEW from "../../../assets/SR05-3303290_IR-1111RS-_PERSPECTIVE-VIEW.webp";
 import img_0908MS_TOP_VIEW_with_DIMENSION from "../../../assets/0908MS-TOP-VIEW-with-DIMENSION.webp";
 import img_1111RS_TOP_VIEW_with_DIMENSION from "../../../assets/1111RS-_TOP-VIEW-with-DIMENSION.webp";
@@ -523,7 +525,9 @@ const SIDE_THUMBS = {
     { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5715-1-scaled.webp", alt: "Compact View 4", zoom: 1.4 },
   ],
   infrared: [
-    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0908-IR-SAUNA-ROOM_V3-scaled.webp", alt: "Infrared View 1" },
+    { src: img_0908_IR_SAUNA_ROOM, alt: "Infrared View 1" },
+    { src: img_0908_IR_SAUNA_ROOM_V2, alt: "Infrared View 2" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0908-IR-SAUNA-ROOM_V3-scaled.webp", alt: "Infrared View 3" },
   ],
 };
 

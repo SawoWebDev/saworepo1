@@ -6,7 +6,7 @@ import menuPaths from "../../menuPaths";
 import WellnessBenefits from "../../components/WellnessBenefits";
 
 import steamGenerator    from "../../assets/Home/Section3/steam-generator1.webp";
-import steamControl      from "../../assets/Home/Section3/SteamControlFinal.webp";
+import steamControl      from "../../assets/Home/Section3/STE-INFACE-V2_Scene2.webp";
 import steamAccessories  from "../../assets/Home/Section3/ST-746-I_Display2.webp";
 import standardSauna     from "../../assets/Home/Section3/700x525.webp";
 import glassFrontSauna   from "../../assets/Home/Section3/GLASS-FRONT.webp";
@@ -15,7 +15,7 @@ import infraredRooms     from "../../assets/Home/Section3/IR-ROOM.webp";
 import infraredPanels    from "../../assets/Home/Section3/IR-PANEL.webp";
 import infraredControls  from "../../assets/Home/Section3/IR-CONTROL.webp";
 import saunovaSeries     from "../../assets/Home/Section3/SAU-UI-V2_AspenSauna.webp";
-import innovaSeries      from "../../assets/Home/Section3/INC-S-V2_SpruceSauna.webp";
+import innovaSeries      from "../../assets/Home/Section3/INC-S-V2_Hemlock-Sauna.webp";
 import controlAccessories from "../../assets/Home/Section3/sensor-holder.webp";
 
 const STEAM_ITEMS = [

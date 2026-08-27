@@ -1039,8 +1039,15 @@ export default function ProductPage() {
   // down to entries that actually carry config-group-style content
   // (description/features/table), so a plain color/style variation with
   // just a name+color doesn't render an empty-looking group card here.
-  const heatingGroups = getVariationsArray(product).filter(g => g && (g.description || g.spec_table || g.features?.length));
+  const allVariants = getVariationsArray(product);
+  const heatingGroups = allVariants.filter(g => g && (g.description || g.spec_table || g.features?.length));
   const hasHeatingGroups = heatingGroups.length > 0;
+  // Item/model code shown next to the product title — read from the raw
+  // variants list (not the filtered heatingGroups above) so it still shows
+  // even when a product's only "variant" exists solely to carry a code,
+  // with no description/spec_table/features of its own to render as a
+  // Section 2 group.
+  const itemCode = allVariants[0]?.code || null;
   const hasSection2  = hasDesc || hasSpecTable || hasHeatingGroups;
   const includedItems = (product.included_items || []).filter(i => i && (i.image || i.title));
   const hasIncludedItems = includedItems.length > 0;
@@ -1212,8 +1219,12 @@ export default function ProductPage() {
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
                 fontSize: "clamp(1.2rem,2.2vw,1.6rem)", color: "#2c1a0e",
                 margin: 0, lineHeight: 1.2,
+                display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: 8,
               }}>
-                {product.name}
+                <span>
+                  {product.name}
+                  {itemCode && ` (${itemCode})`}
+                </span>
               </h1>
 
               {hasShortDesc && (
@@ -1351,7 +1362,8 @@ export default function ProductPage() {
                     const gRows    = group.spec_table?.rows || [];
                     const gHasTable = gHeaders.length > 0 && gRows.length > 0;
                     return (
-                      <div key={gi} style={{ display: "flex", flexWrap: "wrap", gap: 28, alignItems: "flex-start" }}>
+                      <React.Fragment key={gi}>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 28, alignItems: "flex-start" }}>
                         {group.image && (
                           <img src={group.image} alt={group.name || `Configuration option ${gi + 1}`}
                             style={{ width: 220, maxWidth: "100%", height: "auto", flexShrink: 0, margin: "0 auto" }} />
@@ -1405,6 +1417,10 @@ export default function ProductPage() {
                           </div>
                         )}
                       </div>
+                      {gi < heatingGroups.length - 1 && (
+                        <hr style={{ border: "none", borderTop: "1px solid #edddd0", margin: 0 }} />
+                      )}
+                      </React.Fragment>
                     );
                   })}
                 </div>
