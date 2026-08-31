@@ -35,7 +35,7 @@ narrative log, the manifest is the source of truth.
 
 | Route | Wired | FI written | Live | Notes |
 |---|---|---|---|---|
-| `/sauna` (hub) | ✅ | ✅ | ✅ | Pre-existing, reviewed, live under `/fi/sauna`. |
+| `/sauna` (hub) | ✅ | ✅ | ✅ | Pre-existing, reviewed, live under `/fi/sauna`. **ZH added 2026-08-31** — root `meta`/`hero`/`heaters`/`controls`/`accessories` keys (52/52 keys, 0 gap verified via key-diff and `npm run i18n:manifest`). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/heaters` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, why-choose, video section, 6 heater cards. Needs native review before going live. **ZH added 2026-08-31** — full `heatersPage` section (22/22 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/accessories` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, brochure dropdown, 10 category cards. Needs native review. **ZH added 2026-08-31** — full `accessoriesPage` section (31/31 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/controls` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, intro, search/filter chrome, precaution notice, why-choose, promo banner. Needs native review. **ZH added 2026-08-31** — full `controlsPage` section (20/20 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
@@ -321,6 +321,20 @@ Infrared (`/infrared`, `/infrared/saunas`, `/infrared/panels`, `/infrared/contro
   `cardFallbackDesc`, `cta`) to `zh/steam.json`, translated in full (not a
   copy of the `en` fallback). Verified via `npm run i18n:manifest`: `steam`
   now reports "translated" for `zh` with zero key gap.
+- **Follow-up, same day**: closed the `/sauna` hub's `zh` gap (the manifest
+  reported `sauna` as "stale (52 key(s) behind source)" for `zh` — the root
+  `meta`/`hero`/`heaters`/`controls`/`accessories` keys that `Sauna.jsx`
+  actually reads had never been translated into `zh`, unlike the
+  `heatersPage`/`accessoriesPage`/`controlsPage`/`roomsPage` sub-page
+  namespaces which were already done). Added all 52 keys, translated in
+  full — reused the existing `zh` heater-item captions and accessory-item
+  descriptions verbatim where the hub's copy is identical to the sub-page
+  copy, translated the hub-only strings (meta, hero, section
+  headings/intros, the three `controls.items` — Innova/Saunova/Control
+  Accessories) fresh. Verified via `npm run i18n:manifest`: all 4 pages
+  (`home`/`product`/`sauna`/`steam`) and all 4 shared namespaces now report
+  "translated" for `zh` with zero remaining gaps. `CI=true npx
+  react-scripts build` compiled with zero errors afterward.
 
 ## Infra fixes (2026-08-26)
 
