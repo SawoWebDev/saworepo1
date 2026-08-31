@@ -6,7 +6,12 @@
     "specifications": "Tekniset tiedot",
     "technicalData": "Tekniset tiedot",
     "infraredSpecifications": "Infrapunan tekniset tiedot",
-    "includedInPackage": "Sisältyy pakettiin"
+    "includedInPackage": "Sisältyy pakettiin",
+    "doorPositions": "Saatavilla olevat ovipaikat",
+    "floorPlan": "Pohjapiirros",
+    "benchConfiguration": "Lauderakenne",
+    "details": "Lisätiedot",
+    "description": "Kuvaus"
   },
   "noResourcesAvailable": "Ei resursseja saatavilla",
   "moreDetailsSoon": "Lisätietoja tulossa pian.",
@@ -24,6 +29,49 @@
     "relatedProducts": "Aiheeseen liittyvät tuotteet",
     "relatedRooms": "Aiheeseen liittyvät saunahuoneet",
     "saunaAccessories": "Saunatarvikkeet",
-    "otherHeaters": "Muut kiukaat"
+    "otherHeaters": "Muut kiukaat",
+    "moreTypeRooms": "Lisää {{type}}-saunahuoneita"
+  },
+  "roomTypes": {
+    "traditional": "Perinteinen",
+    "standard": "Standardi",
+    "infrared": "Infrapuna",
+    "steam": "Höyry",
+    "combo": "Yhdistelmä",
+    "glassfront": "Lasietuseinä",
+    "compact": "Kompakti"
+  },
+  "sizeLabels": {
+    "compact": "Kompakti · 1–2 hengelle",
+    "small": "Pieni · 2–3 hengelle",
+    "medium": "Keskikokoinen · 3–4 hengelle",
+    "large": "Suuri · 4–6 hengelle",
+    "xl": "XL · 6+ hengelle",
+    "commercial": "Yrityskäyttöön"
+  },
+  "badges": {
+    "featured": "Suositeltu",
+    "bestSeller": "Myydyin"
+  },
+  "modelCode": "Malli {{code}}",
+  "skuCode": "Tuotenumero {{sku}}",
+  "stats": {
+    "capacity": "Kapasiteetti",
+    "floorSize": "Pohjan koko",
+    "height": "Korkeus",
+    "woodType": "Puulaji",
+    "voltage": "Jännite",
+    "panelWattage": "Paneelin teho",
+    "totalPower": "Kokonaisteho",
+    "sessionTime": "Käyttöaika"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · Avaa napsauttamalla",
+    "documentsCount": "{{count}} asiakirjaa",
+    "clickToExpand": "Laajenna napsauttamalla",
+    "clickToCollapse": "Pienennä napsauttamalla"
+  },
+  "featureTabs": {
+    "tabFallback": "Välilehti {{number}}"
   }
 }

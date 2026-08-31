@@ -6,7 +6,12 @@
     "specifications": "产品规格",
     "technicalData": "技术数据",
     "infraredSpecifications": "红外线技术规格",
-    "includedInPackage": "包装内含"
+    "includedInPackage": "包装内含",
+    "doorPositions": "可选门位",
+    "floorPlan": "平面图",
+    "benchConfiguration": "座椅配置",
+    "details": "详情",
+    "description": "产品描述"
   },
   "noResourcesAvailable": "暂无可用资源",
   "moreDetailsSoon": "更多详情即将上线。",
@@ -24,6 +29,49 @@
     "relatedProducts": "相关产品",
     "relatedRooms": "相关桑拿房",
     "saunaAccessories": "桑拿配件",
-    "otherHeaters": "其他加热器"
+    "otherHeaters": "其他加热器",
+    "moreTypeRooms": "更多{{type}}桑拿房"
+  },
+  "roomTypes": {
+    "traditional": "传统式",
+    "standard": "标准型",
+    "infrared": "红外线",
+    "steam": "蒸汽式",
+    "combo": "组合式",
+    "glassfront": "玻璃前壁",
+    "compact": "紧凑型"
+  },
+  "sizeLabels": {
+    "compact": "紧凑型 · 1–2人",
+    "small": "小型 · 2–3人",
+    "medium": "中型 · 3–4人",
+    "large": "大型 · 4–6人",
+    "xl": "超大型 · 6人以上",
+    "commercial": "商用型"
+  },
+  "badges": {
+    "featured": "精选",
+    "bestSeller": "畅销款"
+  },
+  "modelCode": "型号 {{code}}",
+  "skuCode": "货号 {{sku}}",
+  "stats": {
+    "capacity": "容纳人数",
+    "floorSize": "占地尺寸",
+    "height": "高度",
+    "woodType": "木材类型",
+    "voltage": "电压",
+    "panelWattage": "面板功率",
+    "totalPower": "总功率",
+    "sessionTime": "使用时长"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · 点击打开",
+    "documentsCount": "{{count}} 份文档",
+    "clickToExpand": "点击展开",
+    "clickToCollapse": "点击收起"
+  },
+  "featureTabs": {
+    "tabFallback": "标签 {{number}}"
   }
 }

@@ -9,23 +9,16 @@ import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
-const ROOM_TYPE_LABELS = {
-  traditional: "Traditional",
-  standard:    "Standard",
-  infrared:    "Infrared",
-  steam:       "Steam",
-  combo:       "Combo",
-  glassfront:  "Glass Front",
-  compact:     "Compact",
-};
-const SIZE_LABELS = {
-  compact:    "Compact · 1–2 Person",
-  small:      "Small · 2–3 Person",
-  medium:     "Medium · 3–4 Person",
-  large:      "Large · 4–6 Person",
-  xl:         "XL · 6+ Person",
-  commercial: "Commercial",
-};
+function roomTypeLabel(t, key) {
+  if (!key) return key;
+  const label = t(`roomTypes.${key}`);
+  return label === `roomTypes.${key}` ? key : label;
+}
+function sizeLabel(t, key) {
+  if (!key) return key;
+  const label = t(`sizeLabels.${key}`);
+  return label === `sizeLabels.${key}` ? key : label;
+}
 
 function resolveUrl(p) {
   if (!p) return null;
@@ -128,6 +121,7 @@ function StatChip({ icon, label, value }) {
 
 /* ── PDF Resources Panel ──────────────────────────────────────────── */
 function ResourcesPanel({ files }) {
+  const t = useLocaleT("product");
   const [expanded, setExpanded] = useState(false);
   if (!files?.length) return null;
   if (files.length === 1) return (
@@ -140,7 +134,7 @@ function ResourcesPanel({ files }) {
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{files[0].name}</div>
-        <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>PDF · Click to open</div>
+        <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>{t("resourcesPanel.pdfClickToOpen")}</div>
       </div>
       <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0 }} />
     </a>
@@ -153,8 +147,8 @@ function ResourcesPanel({ files }) {
           <i className="fa-solid fa-file-pdf" style={{ color: "#fff", fontSize: "0.9rem" }} />
         </div>
         <div style={{ flex: 1, textAlign: "left" }}>
-          <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e" }}>{files.length} Documents</div>
-          <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>Click to {expanded ? "collapse" : "expand"}</div>
+          <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e" }}>{t("resourcesPanel.documentsCount", { count: files.length })}</div>
+          <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>{expanded ? t("resourcesPanel.clickToCollapse") : t("resourcesPanel.clickToExpand")}</div>
         </div>
         <i className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`} style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0 }} />
       </button>
@@ -205,7 +199,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
 
   if (!related.length) return null;
 
-  const typeLabel = ROOM_TYPE_LABELS[roomType] || roomType;
+  const typeLabel = roomTypeLabel(t, roomType);
 
   return (
     <>
@@ -213,7 +207,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
       <section style={{ maxWidth: 1140, margin: "0 auto", padding: "52px 32px 80px" }}>
         <div style={{ marginBottom: 36 }}>
           <p style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.67rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#a67853", margin: "0 0 6px" }}>
-            More {typeLabel} Rooms
+            {t("related.moreTypeRooms", { type: typeLabel })}
           </p>
           <h2 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "1.5rem", color: "#2c1a0e", margin: 0, lineHeight: 1.2 }}>
             {t("related.relatedRooms")}
@@ -452,22 +446,22 @@ export default function SaunaRoomDisplay() {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                 {room.room_type && (
                   <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#a67853", background: "rgba(166,120,83,0.1)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(166,120,83,0.25)" }}>
-                    {ROOM_TYPE_LABELS[room.room_type] || room.room_type}
+                    {roomTypeLabel(t, room.room_type)}
                   </span>
                 )}
                 {room.size_category && (
                   <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#8b5e3c", background: "rgba(139,94,60,0.08)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(139,94,60,0.2)" }}>
-                    {SIZE_LABELS[room.size_category] || room.size_category}
+                    {sizeLabel(t, room.size_category)}
                   </span>
                 )}
                 {room.featured && (
                   <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#b45309", background: "rgba(180,83,9,0.08)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(180,83,9,0.2)" }}>
-                    <i className="fa-solid fa-star" style={{ marginRight: 4 }} />Featured
+                    <i className="fa-solid fa-star" style={{ marginRight: 4 }} />{t("badges.featured")}
                   </span>
                 )}
                 {room.is_best_seller && (
                   <span style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#b45309", background: "rgba(245,158,11,0.1)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(245,158,11,0.25)" }}>
-                    <i className="fa-solid fa-fire" style={{ marginRight: 4 }} />Best Seller
+                    <i className="fa-solid fa-fire" style={{ marginRight: 4 }} />{t("badges.bestSeller")}
                   </span>
                 )}
               </div>
@@ -475,7 +469,7 @@ export default function SaunaRoomDisplay() {
               {/* Model + Name */}
               {room.model_code && (
                 <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c4a882", margin: 0 }}>
-                  Model {room.model_code}{room.sku ? ` · SKU ${room.sku}` : ""}
+                  {t("modelCode", { code: room.model_code })}{room.sku ? ` · ${t("skuCode", { sku: room.sku })}` : ""}
                 </p>
               )}
               <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "clamp(1.2rem,2.2vw,1.65rem)", color: "#2c1a0e", margin: 0, lineHeight: 1.2 }}>
@@ -485,15 +479,15 @@ export default function SaunaRoomDisplay() {
               {/* Stat chips */}
               {(room.capacity_label || room.width_m || room.height_m || enabledWoods.length > 0) && (
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <StatChip icon="fa-solid fa-user-group"      label="Capacity"   value={room.capacity_label} />
+                  <StatChip icon="fa-solid fa-user-group"      label={t("stats.capacity")}   value={room.capacity_label} />
                   {(room.width_m && room.depth_m) && (
-                    <StatChip icon="fa-solid fa-ruler-combined" label="Floor Size" value={`${room.width_m} × ${room.depth_m} m`} />
+                    <StatChip icon="fa-solid fa-ruler-combined" label={t("stats.floorSize")} value={`${room.width_m} × ${room.depth_m} m`} />
                   )}
                   {room.height_m && (
-                    <StatChip icon="fa-solid fa-arrows-up-down" label="Height"    value={`${room.height_m} m`} />
+                    <StatChip icon="fa-solid fa-arrows-up-down" label={t("stats.height")}    value={`${room.height_m} m`} />
                   )}
                   {enabledWoods.length > 0 && (
-                    <StatChip icon="fa-solid fa-tree" label="Wood Type" value={enabledWoods.map(w => w.name).join(", ")} />
+                    <StatChip icon="fa-solid fa-tree" label={t("stats.woodType")} value={enabledWoods.map(w => w.name).join(", ")} />
                   )}
                 </div>
               )}
@@ -501,7 +495,7 @@ export default function SaunaRoomDisplay() {
               {/* Door options — below stat chips */}
               {room.has_door_filter && orderedDoorOptions.length > 0 && (
                 <div>
-                  <SectionLabel icon="fa-solid fa-door-open" text="Available Door Positions" />
+                  <SectionLabel icon="fa-solid fa-door-open" text={t("sections.doorPositions")} />
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                     {orderedDoorOptions.map(opt => (
                       <span key={opt.value}
@@ -529,7 +523,7 @@ export default function SaunaRoomDisplay() {
                 <div>
                   {specImages.length > 0 && (
                     <>
-                      <SectionLabel icon="fa-solid fa-vector-square" text="Floor Plan" />
+                      <SectionLabel icon="fa-solid fa-vector-square" text={t("sections.floorPlan")} />
                       <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 320 }}>
                         {specImages.map((url, i) => (
                           <div key={i} onClick={() => setLightbox({ images: specImages, index: i })} style={{ cursor: "zoom-in" }}>

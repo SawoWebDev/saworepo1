@@ -6,7 +6,12 @@
     "specifications": "Specifications",
     "technicalData": "Technical Data",
     "infraredSpecifications": "Infrared Specifications",
-    "includedInPackage": "Included in the Package"
+    "includedInPackage": "Included in the Package",
+    "doorPositions": "Available Door Positions",
+    "floorPlan": "Floor Plan",
+    "benchConfiguration": "Bench Configuration",
+    "details": "Details",
+    "description": "Description"
   },
   "noResourcesAvailable": "No resources available",
   "moreDetailsSoon": "More details coming soon.",
@@ -24,6 +29,49 @@
     "relatedProducts": "Related Products",
     "relatedRooms": "Related Sauna Rooms",
     "saunaAccessories": "Sauna Accessories",
-    "otherHeaters": "Other Heaters"
+    "otherHeaters": "Other Heaters",
+    "moreTypeRooms": "More {{type}} Rooms"
+  },
+  "roomTypes": {
+    "traditional": "Traditional",
+    "standard": "Standard",
+    "infrared": "Infrared",
+    "steam": "Steam",
+    "combo": "Combo",
+    "glassfront": "Glass Front",
+    "compact": "Compact"
+  },
+  "sizeLabels": {
+    "compact": "Compact · 1–2 Person",
+    "small": "Small · 2–3 Person",
+    "medium": "Medium · 3–4 Person",
+    "large": "Large · 4–6 Person",
+    "xl": "XL · 6+ Person",
+    "commercial": "Commercial"
+  },
+  "badges": {
+    "featured": "Featured",
+    "bestSeller": "Best Seller"
+  },
+  "modelCode": "Model {{code}}",
+  "skuCode": "SKU {{sku}}",
+  "stats": {
+    "capacity": "Capacity",
+    "floorSize": "Floor Size",
+    "height": "Height",
+    "woodType": "Wood Type",
+    "voltage": "Voltage",
+    "panelWattage": "Panel Wattage",
+    "totalPower": "Total Power",
+    "sessionTime": "Session Time"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · Click to open",
+    "documentsCount": "{{count}} Documents",
+    "clickToExpand": "Click to expand",
+    "clickToCollapse": "Click to collapse"
+  },
+  "featureTabs": {
+    "tabFallback": "Tab {{number}}"
   }
 }
