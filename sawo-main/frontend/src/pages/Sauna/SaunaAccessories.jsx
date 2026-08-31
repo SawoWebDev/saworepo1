@@ -60,11 +60,12 @@ const SaunaAccessories = () => {
           <BrochureDropdownButton
             text="VIEW BROCHURE"
             items={[
-              { label: "Kivistone Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf" },
               { label: "Sauna Lights Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/Sauna-Lights_RV15.pdf" },
               { label: "Accessory Sets Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" },
               { label: "Accessories Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" },
               { label: "Curve LED Lights Flyer", href: "https://www.sawo.com/wp-content/uploads/2026/07/Curve-LED-Lights-Flyer-for-USA-EU-2026.pdf" },
+              { label: "Sauna Doors Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/08/SAWO-Sauna-Doors-2026.pdf" },
+              { label: "Kivistone Brochure", href: "https://www.sawo.com/wp-content/uploads/2026/06/Kivistone-Brochure_-2026.pdf" },
             ]}
           />
         </div>
