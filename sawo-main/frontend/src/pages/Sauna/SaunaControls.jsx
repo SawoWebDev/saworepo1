@@ -162,8 +162,16 @@ function SkeletonCard() {
 }
 
 // ─── Product card ─────────────────────────────────────────────────────────────
+// Model code shown under the product name, e.g. "(SAU-UI-V2)" — pulled from
+// whichever tag looks like a parenthesized code rather than a generic tag
+// like "Innova" or "9.0 kW".
+function getModelCode(product) {
+  return (product.tags || []).find((t) => /^\(.+\)$/.test(t.trim())) || null;
+}
+
 function ProductCard({ product }) {
   const [hovered, setHovered] = useState(false);
+  const modelCode = getModelCode(product);
 
   return (
     <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
@@ -201,6 +209,14 @@ function ProductCard({ product }) {
         }}>
           {product.name}
         </p>
+        {modelCode && (
+          <p style={{
+            fontWeight: 500, fontSize: "0.7rem", color: "#a89685",
+            margin: 0, lineHeight: 1.3, textAlign: "center",
+          }}>
+            {modelCode}
+          </p>
+        )}
       </div>
     </Link>
   );
