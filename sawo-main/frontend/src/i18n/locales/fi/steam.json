@@ -60,5 +60,50 @@
       "title": "Tarvitsetko apua kehittimen mitoituksessa?",
       "description": "Kompakteista kotikäytön yksiköistä suuriin kaupallisiin asennuksiin – tiimimme auttaa löytämään tilaasi sopivan höyrynkehittimen."
     }
+  },
+  "controls": {
+    "meta": {
+      "title": "Höyryohjaimet",
+      "description": "Tarkka höyryn hallinta SAWOlta – Saunova- ja Innova-ohjainsarjat vaivattomaan käyttöön ja yksilölliseen saunakokemukseen."
+    },
+    "hero": {
+      "title": "Höyryohjaimet",
+      "description": "Tarkkuutta ja vaivattomuutta – hallitse höyrykokemustasi täysin SAWOn Saunova- ja Innova-ohjainsarjoilla."
+    },
+    "intro": {
+      "heading": "Esittelyssä höyryohjaimemme",
+      "desc": "Koe tarkat höyryasetukset ja vaivaton käyttö Saunova- ja Innova-sarjan ohjaimilla yksilöllistä saunakokemusta varten."
+    },
+    "loading": "Ladataan ohjaimia...",
+    "empty": "Höyryohjaimia ei ole vielä saatavilla.",
+    "notice": {
+      "tab": "Varoitus",
+      "text": "Vain pätevä sähköasentaja saa tehdä laitteen sähköliitännät ja korjaukset. Käytä vain alkuperäisiä varaosia."
+    },
+    "cta": {
+      "title": "Tarvitsetko apua ohjaimen valinnassa?",
+      "description": "Yhdistä oikea ohjauspaneeli höyrynkehittimeesi tarkkaa ja vaivatonta käyttöä varten. Tiimimme auttaa mielellään."
+    }
+  },
+  "accessories": {
+    "meta": {
+      "title": "Höyrylisävarusteet",
+      "description": "Premium-tason SAWO-höyrylisävarusteet, jotka on suunniteltu parantamaan toimivuutta ja mukavuutta tasaisen erinomaista höyrysaunakokemusta varten."
+    },
+    "hero": {
+      "title": "HÖYRYLISÄVARUSTEET",
+      "subtitle": "Viimeistele höyrysetuppisi premium-lisävarusteilla"
+    },
+    "intro": {
+      "heading": "Esittelyssä höyrylisävarusteemme",
+      "desc": "Paranna saunaasi premium-tason höyrylisävarusteillamme, jotka on suunniteltu optimoimaan mukavuutta, lisäämään toimivuutta ja kohottamaan rentoutumiskokemustasi."
+    },
+    "loading": "Ladataan lisävarusteita...",
+    "empty": "Höyrylisävarusteita ei ole vielä saatavilla.",
+    "fallbackDesc": "Premium-höyrylisävaruste optimaaliseen suorituskykyyn.",
+    "cta": {
+      "title": "Viimeistele höyrysetuppisi",
+      "description": "Höyryovista aromipumppuihin – tiimimme auttaa valitsemaan oikeat lisävarusteet asennuksesi viimeistelyyn."
+    }
   }
 }

@@ -60,5 +60,50 @@
       "title": "Need Help Sizing a Generator?",
       "description": "From compact residential units to large commercial installations, our team can help you find the right steam generator for your space."
     }
+  },
+  "controls": {
+    "meta": {
+      "title": "Steam Controls",
+      "description": "Precision steam control from SAWO, with the Saunova and Innova control series for effortless operation and a personalized sauna experience."
+    },
+    "hero": {
+      "title": "Steam Controls",
+      "description": "Precision and ease — take full control of your steam experience with SAWO's Saunova and Innova control series."
+    },
+    "intro": {
+      "heading": "Introducing Our Steam Controls",
+      "desc": "Experience precise steam settings and effortless operation with the Saunova and Innova series for a personalized sauna experience."
+    },
+    "loading": "Loading controls...",
+    "empty": "No steam controls available yet.",
+    "notice": {
+      "tab": "Precaution Notice",
+      "text": "Only a qualified electrician is allowed to make electrical connections and repairs on the unit. Use original parts only."
+    },
+    "cta": {
+      "title": "Need Help Choosing a Control?",
+      "description": "Pair the right control panel with your steam generator for precise, effortless operation. Our team is here to help."
+    }
+  },
+  "accessories": {
+    "meta": {
+      "title": "Steam Accessories",
+      "description": "Premium SAWO steam accessories designed to enhance functionality and comfort for a consistently exceptional steam sauna experience."
+    },
+    "hero": {
+      "title": "STEAM ACCESSORIES",
+      "subtitle": "Complete your steam setup with premium accessories"
+    },
+    "intro": {
+      "heading": "Introducing Our Steam Accessories",
+      "desc": "Enhance your sauna with our premium steam accessories, designed to optimize comfort, boost functionality, and elevate your relaxation experience."
+    },
+    "loading": "Loading accessories...",
+    "empty": "No steam accessories available yet.",
+    "fallbackDesc": "Premium steam accessory for optimal performance.",
+    "cta": {
+      "title": "Complete Your Steam Setup",
+      "description": "From steam doors to aroma pumps, our team can help you pick the right accessories to finish your installation."
+    }
   }
 }

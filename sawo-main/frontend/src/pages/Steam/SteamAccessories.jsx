@@ -9,6 +9,7 @@ import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -63,6 +64,8 @@ function applyDisplayFilter(products) {
 const SteamAccessories = () => {
   const { products: localProds, loading } = useLocalProducts();
   const heroLoaded = useHeroLoaded(heroBg);
+  const t = useLocaleT("steam");
+  const localize = useLocalizedPath();
 
   const accessories = useMemo(() => {
     const visible = localProds.filter(p => isPubliclyVisible(p));
@@ -77,8 +80,8 @@ const SteamAccessories = () => {
   return (
   <div className="relative">
       <SEO
-        title="Steam Accessories"
-        description="Premium SAWO steam accessories designed to enhance functionality and comfort for a consistently exceptional steam sauna experience."
+        title={t("accessories.meta.title")}
+        description={t("accessories.meta.description")}
         path="/steam/accessories"
       />
 
@@ -104,9 +107,9 @@ const SteamAccessories = () => {
       />
       <div className="sa-hero-overlay" />
       <div className="sa-hero-content">
-        <h1 className="sa-hero-title">STEAM ACCESSORIES</h1>
+        <h1 className="sa-hero-title">{t("accessories.hero.title")}</h1>
         <p className="sa-hero-subtitle">
-          Complete your steam setup with premium accessories
+          {t("accessories.hero.subtitle")}
         </p>
       </div>
     <HeroWave />
@@ -117,11 +120,9 @@ const SteamAccessories = () => {
     {/* ===================== */}
     <section className="sa-intro-section">
       <div className="sa-container text-center">
-        <h2 className="sa-section-title">Introducing Our Steam Accessories</h2>
+        <h2 className="sa-section-title">{t("accessories.intro.heading")}</h2>
         <p className="sa-section-desc">
-          Enhance your sauna with our premium steam accessories, designed to
-          optimize comfort, boost functionality, and elevate your relaxation
-          experience.
+          {t("accessories.intro.desc")}
         </p>
       </div>
     </section>
@@ -131,16 +132,16 @@ const SteamAccessories = () => {
     {/* ===================== */}
     <section className="sa-section">
       <div className="sa-container">
-        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading accessories...</p>}
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>{t("accessories.loading")}</p>}
         {!loading && accessories.length === 0 && (
-          <p style={{ textAlign: "center", color: "#999" }}>No steam accessories available yet.</p>
+          <p style={{ textAlign: "center", color: "#999" }}>{t("accessories.empty")}</p>
         )}
         {!loading && accessories.length > 0 && (
           <div className="sa-grid">
             {accessories.map((product) => (
               <Link
                 key={product.id || product.slug}
-                to={`/products/${product.slug}`}
+                to={localize(`/products/${product.slug}`)}
                 style={{ textDecoration: "none" }}
               >
                 <div className="sa-card">
@@ -156,7 +157,7 @@ const SteamAccessories = () => {
                   <div className="sa-card-body">
                     <h3 className="sa-card-title">{product.name}</h3>
                     <p className="sa-card-desc">
-                      {getFirstSentence(product.short_description) || getFirstSentence(product.description) || "Premium steam accessory for optimal performance."}
+                      {getFirstSentence(product.short_description) || getFirstSentence(product.description) || t("accessories.fallbackDesc")}
                     </p>
                   </div>
                 </div>
@@ -171,8 +172,8 @@ const SteamAccessories = () => {
     {/* CTA                   */}
     {/* ===================== */}
     <PageCTA
-      title="Complete Your Steam Setup"
-      description="From steam doors to aroma pumps, our team can help you pick the right accessories to finish your installation."
+      title={t("accessories.cta.title")}
+      description={t("accessories.cta.description")}
     />
 
     {/* ===================== */}

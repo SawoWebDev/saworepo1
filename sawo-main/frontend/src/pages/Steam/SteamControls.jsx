@@ -7,6 +7,7 @@ import CategoryHero from "../../components/CategoryHero";
 import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // Served from /public (not webpack-bundled) so its URL is stable at build time —
 // public/index.html preloads this exact path for this route, so by the time
@@ -27,9 +28,10 @@ const DISPLAY_CATEGORIES = ["Steam Controls"];
 // ─── Product card (matches /products) ──────────────────────────────────────────
 function ProductCard({ product }) {
   const [hovered, setHovered] = useState(false);
+  const localize = useLocalizedPath();
 
   return (
-    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
+    <Link to={localize(`/products/${product.slug}`)} style={{ textDecoration: "none" }}>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -70,6 +72,7 @@ function ProductCard({ product }) {
 
 const SteamControls = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("steam");
 
   const controls = useMemo(() => {
     const visible = localProds.filter(p => isPubliclyVisible(p));
@@ -86,8 +89,8 @@ const SteamControls = () => {
   return (
   <div className="relative">
       <SEO
-        title="Steam Controls"
-        description="Precision steam control from SAWO, with the Saunova and Innova control series for effortless operation and a personalized sauna experience."
+        title={t("controls.meta.title")}
+        description={t("controls.meta.description")}
         path="/steam/controls"
       />
 
@@ -96,8 +99,8 @@ const SteamControls = () => {
     {/* ===================== */}
     <CategoryHero
       heroImg={heroBg}
-      title="Steam Controls"
-      description="Precision and ease — take full control of your steam experience with SAWO's Saunova and Innova control series."
+      title={t("controls.hero.title")}
+      description={t("controls.hero.description")}
     />
 
     {/* ===================== */}
@@ -105,10 +108,9 @@ const SteamControls = () => {
     {/* ===================== */}
     <section className="sc-intro-section">
       <div className="sc-container text-center">
-        <h2 className="sc-section-title">Introducing Our Steam Controls</h2>
+        <h2 className="sc-section-title">{t("controls.intro.heading")}</h2>
         <p className="sc-section-desc">
-          Experience precise steam settings and effortless operation with the
-          Saunova and Innova series for a personalized sauna experience.
+          {t("controls.intro.desc")}
         </p>
       </div>
     </section>
@@ -118,9 +120,9 @@ const SteamControls = () => {
     {/* ===================== */}
     <section className="sc-section">
       <div className="sc-container">
-        {loading && <p style={{ textAlign: "center", color: "#999" }}>Loading controls...</p>}
+        {loading && <p style={{ textAlign: "center", color: "#999" }}>{t("controls.loading")}</p>}
         {!loading && controls.length === 0 && (
-          <p style={{ textAlign: "center", color: "#999" }}>No steam controls available yet.</p>
+          <p style={{ textAlign: "center", color: "#999" }}>{t("controls.empty")}</p>
         )}
         {!loading && controls.length > 0 && (
           <div className="products-grid">
@@ -139,9 +141,9 @@ const SteamControls = () => {
       <div className="sc-container">
         <div className="sfw-notice-wrap">
           <div className="sfw-notice-card">
-            <span className="sfw-notice-tab">Precaution Notice</span>
+            <span className="sfw-notice-tab">{t("controls.notice.tab")}</span>
             <div className="sfw-notice-body">
-              <p>Only a qualified electrician is allowed to make electrical connections and repairs on the unit. Use original parts only.</p>
+              <p>{t("controls.notice.text")}</p>
             </div>
           </div>
         </div>
@@ -152,8 +154,8 @@ const SteamControls = () => {
     {/* CTA                   */}
     {/* ===================== */}
     <PageCTA
-      title="Need Help Choosing a Control?"
-      description="Pair the right control panel with your steam generator for precise, effortless operation. Our team is here to help."
+      title={t("controls.cta.title")}
+      description={t("controls.cta.description")}
     />
 
     {/* ===================== */}

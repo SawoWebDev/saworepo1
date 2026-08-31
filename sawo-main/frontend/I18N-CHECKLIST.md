@@ -36,9 +36,9 @@ narrative log, the manifest is the source of truth.
 | Route | Wired | FI written | Live | Notes |
 |---|---|---|---|---|
 | `/sauna` (hub) | ✅ | ✅ | ✅ | Pre-existing, reviewed, live under `/fi/sauna`. |
-| `/sauna/heaters` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, why-choose, video section, 6 heater cards. Needs native review before going live. |
-| `/sauna/accessories` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, brochure dropdown, 10 category cards. Needs native review. |
-| `/sauna/controls` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, intro, search/filter chrome, precaution notice, why-choose, promo banner. Needs native review. |
+| `/sauna/heaters` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, why-choose, video section, 6 heater cards. Needs native review before going live. **ZH added 2026-08-31** — full `heatersPage` section (22/22 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
+| `/sauna/accessories` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, brochure dropdown, 10 category cards. Needs native review. **ZH added 2026-08-31** — full `accessoriesPage` section (31/31 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
+| `/sauna/controls` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, intro, search/filter chrome, precaution notice, why-choose, promo banner. Needs native review. **ZH added 2026-08-31** — full `controlsPage` section (20/20 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/rooms` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, 16-item Configurator, RoomViewer chrome, Features carousel (6 tabs incl. paragraphs/specs), ProductDetails (story sections, feature text, perf cards, spec accordion), Room panels (4 room-type descriptions/features), Wood Materials section, the shared `SaunaCalculatorCTA` ("Find Your Dream Sauna"), plus bench-type/room-title dedup. Needs native review before going live. **ZH added 2026-08-26** — full `roomsPage` section (163/163 keys, verified 0 gap vs. English source via key-diff), reachable via the language switcher pilot (`en/fi/zh`, see `languageSettings.js`'s `PILOT_ENABLED_LOCALES`). Not native-reviewed, not in `TRANSLATED_PATHS`. **Correction, 2026-08-26**: the "Done 2026-08-25" claim above was wrong for two spots — `SaunaConfigurator.jsx` (the 16-item configurator) had the translation JSON written but **zero actual `t()` wiring in the component**, so it silently rendered 100% English on every locale (title, step tabs/labels/headings, all 16 item name/tag/desc, nav buttons, sidebar, CTA — plus the same locale-dropping `menuPaths.contact` link bug fixed elsewhere). Separately, `SaunaRoomViewer.jsx`'s one-line room-type subtitle (`cfg.desc`, sourced from `ROOM_CONFIGS` in `SaunaRoomData.jsx` — a *different* hardcoded data shape from the already-fixed `SRD_PANELS`) was never wired at all. Both fixed now (see "Infra fixes" below); FI and ZH both updated with the missing `roomDescriptions` keys. |
 | `/sauna/heaters/tower` | ⬜ | ⬜ | ⬜ | Individual heater model page. |
 | `/sauna/heaters/wall-mounted` | ⬜ | ⬜ | ⬜ | |
@@ -58,8 +58,8 @@ narrative log, the manifest is the source of truth.
 |---|---|---|---|---|
 | `/steam` (hub) | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, intro, brochure link, and all 3 group sections (Generators/Controls/Accessories: headings, view-all links, descriptions, loading/empty states, card fallback descriptions), CTA. Product content: translated all 15 remaining Steam Controls/Accessories products (name/description/features/specs) in `product_translations`; all 18 steam-category products now have `fi` rows. Needs native review before going live. **ZH added 2026-08-26** — full `hub` section (25/25 keys, 0 gap verified via key-diff). Pre-check per the new audit process: `Steam.jsx` confirmed properly wired (`useLocaleT` used, every visible string traced to a `t("hub....")` call, `PageCTA` receives translated props) before translating — no repeat of the Configurator gap found here. Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/steam/generators` | ✅ | ✅ | ✅ | Pre-existing, reviewed, live under `/fi/steam/generators`. |
-| `/steam/controls` | ⬜ | ⬜ | ⬜ | Fully hardcoded English (confirmed — `steam.json` only has `hub`/`generators` keys). Underlying product data is now translated (all 3 Steam Controls products have `fi` rows in `product_translations`, done 2026-08-25) even though this page's own JSX isn't wired yet. |
-| `/steam/accessories` | ⬜ | ⬜ | ⬜ | Underlying product data is now translated (all 12 Steam Accessories products have `fi` rows in `product_translations`, done 2026-08-25) even though this page's own JSX isn't wired yet. |
+| `/steam/controls` | ✅ | ✅ | ⬜ | Wired 2026-08-31 — `SteamControls.jsx`/`ProductCard` now call `useLocaleT("steam")`/`useLocalizedPath()`: SEO title/description, `CategoryHero` title/description, intro heading/desc, loading/empty states, precaution-notice tab+text, CTA, and the product-card `<Link>` all go through `t()`/`localize()`. New `controls` namespace (`meta`, `hero`, `intro`, `loading`, `empty`, `notice`, `cta`) added to `steam.json` for en/fi/zh — fi and zh both full, 0 gap (key-diff verified via `npm run i18n:manifest`, only the pre-existing `generators` zh gap remains, see note below). Underlying product data already translated (2026-08-25/26). Not native-reviewed, not in `TRANSLATED_PATHS`. |
+| `/steam/accessories` | ✅ | ✅ | ⬜ | Wired 2026-08-31 — `SteamAccessories.jsx` now calls `useLocaleT("steam")`/`useLocalizedPath()`: SEO title/description, hero title/subtitle, intro heading/desc, loading/empty states, card fallback description, CTA, and the product-card `<Link>` all go through `t()`/`localize()`. New `accessories` namespace (`meta`, `hero`, `intro`, `loading`, `empty`, `fallbackDesc`, `cta`) added to `steam.json` for en/fi/zh — fi and zh both full, 0 gap. Underlying product data already translated (2026-08-25/26). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 
 ## Product content (Supabase `product_translations`)
 
@@ -295,6 +295,32 @@ Infrared (`/infrared`, `/infrared/saunas`, `/infrared/panels`, `/infrared/contro
 
 1. `/steam/controls` + `/steam/accessories` — same `CategoryHero` + `catalogFilter` pattern already built today, should go fast.
 2. Native-speaker review pass on everything marked "FI written, not Live" above, then flip each path in `translatedRoutes.js`.
+
+## Infra fixes (2026-08-31)
+
+- **Wired `/steam/controls` and `/steam/accessories`** (`SteamControls.jsx`,
+  `SteamAccessories.jsx`, both in `src/pages/Steam/`), following the exact
+  pattern already used in `Steam.jsx`/`SteamGenerators.jsx` in the same
+  folder: `useLocaleT("steam")` for all copy, `useLocalizedPath()` for the
+  internal `<Link>`s (the product-card link in each page, plus
+  `ProductCard`'s own `<Link>` in `SteamControls.jsx`). Added `controls` and
+  `accessories` namespaces to `steam.json` for en/fi/zh (fi and zh both
+  translated in full, not just en — this file previously had `hub` and
+  `generators` only). Ran the audit process from the 2026-08-26 entry below
+  before marking these wired: `grep -c useLocaleT` (2 in each file — import +
+  call site), the 2-and-3-word hardcoded-JSX-text regexes (zero real hits —
+  the only matches were CSS values like `translateY(-4px)` inside inline
+  `style` ternaries, not text), the `alt|title|placeholder|aria-label`
+  attribute regex (zero hits), and the `||\s*t\(` / `?\s*"` pattern check
+  (only hit was the `... || t("accessories.fallbackDesc")` fallback chain
+  itself, which is correct — not a leftover literal). `CI=true npx
+  react-scripts build` compiled with zero errors afterward.
+- **Follow-up, same day**: filled the `zh/steam.json` `generators` gap
+  noted above — added the missing `generators` namespace (11 keys:
+  `meta`, `hero`, `intro`, `loading`, `empty`, `cardEyebrow`,
+  `cardFallbackDesc`, `cta`) to `zh/steam.json`, translated in full (not a
+  copy of the `en` fallback). Verified via `npm run i18n:manifest`: `steam`
+  now reports "translated" for `zh` with zero key gap.
 
 ## Infra fixes (2026-08-26)
 
