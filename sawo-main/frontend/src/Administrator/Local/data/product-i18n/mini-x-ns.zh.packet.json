@@ -1,0 +1,39 @@
+{
+  "slug": "mini-x-ns",
+  "productId": "a8b064aa-cfff-40cc-816a-160372fbd0a3",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "short_description",
+      "source": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Mini X</b><span style=\"text-align: justify;\"> is a space-saver that is placed in the corner of a sauna room. It is available with cool-to-touch fiber coating, and compatible with Saunova or Innova controls (NS).</span>"
+    },
+    {
+      "path": "description",
+      "source": "<table> <thead> <tr> <th>Heater Model</th> <th>kW</th> <th>Sauna Room<br>min. (m3) max.</th> <th>Size of Heater (mm)<br>Length Width Height</th> <th>Stones<br>(kg)</th> <th>Control</th> <th colspan=\"3\">Minimum Safety Distances<br>A | B | C</th> </tr> </thead> <tbody> <tr> <td>MX-23NS-Z</td> <td>2.3</td> <td>1.3 – 2.5</td> <td>310 × 330 × 485</td> <td>8 – 11</td> <td>Separate</td> <td>30</td> <td>20</td> <td>60</td> </tr> <tr> <td>MX-30NS-Z</td> <td>3.0</td> <td>2 – 4</td> <td>310 × 330 × 485</td> <td>8 – 11</td> <td>Separate</td> <td>35</td> <td>25</td> <td>65</td> </tr> <tr> <td>MX-36NS-Z</td> <td>3.6</td> <td>3 – 6</td> <td>310 × 330 × 485</td> <td>8 – 11</td> <td>Separate</td> <td>40</td> <td>25</td> <td>65</td> </tr></tbody></table>"
+    },
+    {
+      "path": "features[0]",
+      "source": "Power range: 2.3 – 3.6kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless-steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Mini X NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini X</b><span style=\"text-align: justify;\"> 是一款节省空间的加热器，可安装于桑拿房角落。提供触感清凉的纤维涂层版本可选，兼容 Saunova 或 Innova 控制器 (NS)。</span>",
+    "description": "<table> <thead> <tr> <th>加热器型号</th> <th>kW</th> <th>桑拿房<br>最小 (m3) 最大</th> <th>加热器尺寸 (mm)<br>长 宽 高</th> <th>桑拿石<br>(kg)</th> <th>控制方式</th> <th colspan=\"3\">最小安全距离<br>A | B | C</th> </tr> </thead> <tbody> <tr> <td>MX-23NS-Z</td> <td>2.3</td> <td>1.3 – 2.5</td> <td>310 × 330 × 485</td> <td>8 – 11</td> <td>Separate</td> <td>30</td> <td>20</td> <td>60</td> </tr> <tr> <td>MX-30NS-Z</td> <td>3.0</td> <td>2 – 4</td> <td>310 × 330 × 485</td> <td>8 – 11</td> <td>Separate</td> <td>35</td> <td>25</td> <td>65</td> </tr> <tr> <td>MX-36NS-Z</td> <td>3.6</td> <td>3 – 6</td> <td>310 × 330 × 485</td> <td>8 – 11</td> <td>Separate</td> <td>40</td> <td>25</td> <td>65</td> </tr></tbody></table>",
+    "type": "Mini X",
+    "features": [
+      "功率范围：2.3 – 3.6 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "不锈钢外壳"
+    ]
+  }
+}

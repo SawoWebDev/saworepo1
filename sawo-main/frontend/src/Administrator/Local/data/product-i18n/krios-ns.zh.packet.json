@@ -1,0 +1,30 @@
+{
+  "slug": "krios-ns",
+  "productId": "a9719e36-47cc-4a94-8436-8c8d9c3c94ff",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    }
+  ],
+  "fields": {
+    "name": "Krios NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Krios</b><span style=\"text-align: justify;\"> 配备更大的石材容器，可产生更高更湿润的热量。它同样采用不锈钢外壳，饰有 SAWO 标志性图案。Krios 加热器兼容 Saunova (Ni2, NS) 和 Innova (NS) 控制器。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"3\">最小安全距离<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>KRI-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Innova</td>\n  <td>50</td>\n  <td>75</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Innova</td>\n  <td>80</td>\n  <td>105</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-80NS-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr>\n<tr>\n  <td>KRI-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr></tbody></table>",
+    "type": "Krios",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "不锈钢外壳",
+      "配备隔热反射板",
+      "内置控制装置可安装于加热器左侧、右侧或顶部",
+      "最大容量：50 kg 石材"
+    ]
+  }
+}

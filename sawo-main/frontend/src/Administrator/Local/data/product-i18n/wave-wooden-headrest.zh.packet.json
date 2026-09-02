@@ -1,0 +1,56 @@
+{
+  "slug": "wave-wooden-headrest",
+  "productId": "9d70e747-c3c8-4a5d-8c7b-111411c4cbde",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "波浪形木质头枕",
+    "short_description": "SAWO 波浪形木质头枕是一款木质桑拿头枕，尺寸为 190 × 480mm，在桑拿过程中为颈部与背部提供支撑。",
+    "description": null,
+    "type": "头枕与靠背",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (515-D)",
+        "name": "雪松 (515-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (515-A)",
+        "name": "白杨 (515-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (515-H)",
+        "name": "铁杉 (515-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (515-BL)",
+        "name": "黑色 (515-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

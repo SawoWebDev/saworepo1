@@ -1,0 +1,47 @@
+{
+  "slug": "sawo30-wall-black-nb",
+  "productId": "09471c44-08ae-4599-b18b-763d2f02e897",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Built-in (NB)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Black metal casing"
+    },
+    {
+      "path": "features[4]",
+      "source": "Removable stone spacer"
+    },
+    {
+      "path": "features[5]",
+      "source": "Optional heater guard"
+    },
+    {
+      "path": "features[6]",
+      "source": "Optional integration collar"
+    }
+  ],
+  "fields": {
+    "name": "SAWO30 壁挂式 黑色 NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">SAWO30 壁挂式黑色</strong><span style=\"text-align: justify;\">加热器可最大化利用空间,兼具简约时尚美感。其高挑纤薄的机身可容纳更多桑拿石,带来充沛的蒸汽与湿度。SAWO30 壁挂式同样配备可拆卸石材间隔器,提供两种安装方式:(1) 装有间隔器时加热更快、更节能,桑拿房温度更高;(2) 不装间隔器时可容纳更多桑拿石以产生更多蒸汽,温度更温和,更适合商业场所节能使用。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg) 不含石材间隔器</th>\n  <th>桑拿石<br>(kg) 含石材间隔器</th>\n  <th>控制方式</th>\n  <th colspan=\"2\">最小安全距离<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NB-WL-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NB-WL-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NB-WL-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>250 × 475 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "SAWO30 壁挂式",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：内置 (NB)",
+      "黑色金属外壳",
+      "可拆卸上盖,便于装填桑拿石",
+      "可拆卸石材间隔器",
+      "可选加热器护罩",
+      "可选安装环"
+    ]
+  }
+}

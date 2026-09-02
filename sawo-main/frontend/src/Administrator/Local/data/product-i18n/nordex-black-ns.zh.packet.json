@@ -1,0 +1,32 @@
+{
+  "slug": "nordex-black-ns",
+  "productId": "3c509fa8-2425-4a77-97f3-60628fd09779",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Black metal casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Black NS",
+    "short_description": "与所有 Nordex 系列产品一样，这款加热器采用简约现代的设计。其设置和功能可通过独立控制器（Saunova 或 Innova）轻松自定义。作为壁挂式机型，Nordex Black NS 节省空间，让任何桑拿房都更加舒适。",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"4\">最小安全距离<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45NS-BL-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n<tr>\n  <td>NRN-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "流线型简约设计",
+      "黑色金属外壳"
+    ]
+  }
+}

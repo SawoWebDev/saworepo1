@@ -17,11 +17,30 @@ import SaunaCallToAction from "../Sauna/rooms/SaunaCallToAction";
 import WellnessBenefits from "../../components/WellnessBenefits";
 import SaunaCalculatorCTA from "../../components/SaunaCalculatorCTA";
 import {
-  IR_SPD_SLIDES, IR_SPD_STORY_SECTIONS, IR_SPD_FEATURE_TEXT,
-  IR_SPD_PERF_CARDS, IR_SPD_ACCORDION_ITEMS, IR_MATS_ITEMS, SRD_PANELS,
+  IR_SPD_SLIDES, IR_MATS_ITEMS, SRD_PANELS,
 } from "../Sauna/rooms/SaunaRoomData";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
 import heroBg from "../../assets/Infrared/hero.webp";
+
+// Same 12 cards as Home's Section3.jsx and the Infrared hub — see
+// WellnessBenefits.jsx's file header. The component itself takes translated
+// content as a prop rather than reading i18n directly, so every caller that
+// wants non-default copy builds this the same way Section3 does.
+const BENEFIT_KEYS = [
+  ["stressRelief", "fas fa-spa"],
+  ["heartHealth", "fas fa-heartbeat"],
+  ["respiratoryRelief", "fas fa-lungs"],
+  ["muscleRecovery", "fas fa-dumbbell"],
+  ["betterSleep", "fas fa-bed"],
+  ["diseasePrevention", "fas fa-heart"],
+  ["skinDetox", "fas fa-droplet"],
+  ["collagenBoost", "fas fa-wand-magic-sparkles"],
+  ["skinHydration", "fas fa-hand-holding-droplet"],
+  ["immuneSupport", "fas fa-shield-alt"],
+  ["metabolismBoost", "fas fa-fire"],
+  ["mentalWellness", "fas fa-smile"],
+];
 
 // The About This Room carousel on /sauna/rooms rotates through all four room
 // types. Here it is pinned to the infrared panel: on a page about one room, a
@@ -29,6 +48,12 @@ import heroBg from "../../assets/Infrared/hero.webp";
 // page, not a feature. Selected by pill rather than index so reordering
 // SRD_PANELS cannot silently point this at the wrong room.
 const IR_ROOM_PANEL = SRD_PANELS.filter((p) => p.pill === "Infrared");
+
+// Maps IR_MATS_ITEMS' English `name` (image/alt live only in the data file,
+// not in translation JSON) to the matching key under infrared.json's
+// saunas.woodMaterials.items, mirroring SaunaWoodMaterials.jsx's own
+// WOOD_KEYS lookup pattern.
+const IR_WOOD_KEYS = { Cedar: "cedar", Hemlock: "hemlock" };
 
 const INFRARED_BROCHURE_URL =
   "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Infrared-Brochure-2026-1.pdf";
@@ -52,14 +77,30 @@ const INFRARED_BROCHURE_URL =
  * not have).
  */
 const InfraredSaunas = () => {
+  const locale = useLocale();
+  const t = useLocaleT("infrared");
+  const tc = useLocaleT("common");
   const heroLoaded = useHeroLoaded(heroBg);
+
+  const benefitCards = BENEFIT_KEYS.map(([key, icon]) => ({
+    key, icon,
+    label: tc(`wellnessBenefits.${key}.label`),
+    desc: tc(`wellnessBenefits.${key}.desc`),
+  }));
+
+  const translatedMatsItems = IR_MATS_ITEMS.map((mat) => {
+    const key = IR_WOOD_KEYS[mat.name];
+    const tr = key ? t(`saunas.woodMaterials.items.${key}`, { returnObjects: true }) : null;
+    return tr ? { ...mat, name: tr.name, description: tr.description, traits: tr.traits } : mat;
+  });
 
   return (
     <div>
       <SEO
-        title="Infrared Saunas"
-        description="SAWO infrared saunas in one- and two-person sizes. Fiber-coated far infrared panels, cedar and hemlock finishes, and plug-and-play 230V installation."
-        path="/infrared/saunas"
+        title={t("saunas.meta.title")}
+        description={t("saunas.meta.description")}
+        path={locale === "en" ? "/infrared/saunas" : `/${locale}/infrared/saunas`}
+        hreflangAlternates={{ en: "/infrared/saunas", fi: "/fi/infrared/saunas", zh: "/zh/infrared/saunas" }}
       />
 
       {/* HERO */}
@@ -82,14 +123,14 @@ const InfraredSaunas = () => {
         />
         <div className="wm-hero-overlay" />
         <div className="wm-hero-content">
-          <h1 className="wm-hero-title">INFRARED SAUNAS</h1>
+          <h1 className="wm-hero-title">{t("saunas.hero.title")}</h1>
           <p className="wm-hero-subtitle">
-            Gentle, therapeutic infrared warmth in a compact cabin — available for one or two people.
+            {t("saunas.hero.subtitle")}
           </p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="VIEW BROCHURE"
-              items={[{ label: "Infrared Brochure", href: INFRARED_BROCHURE_URL }]}
+              text={t("saunas.hero.brochureBtn")}
+              items={[{ label: t("saunas.hero.brochureItemLabel"), href: INFRARED_BROCHURE_URL }]}
             />
           </div>
         </div>
@@ -102,20 +143,20 @@ const InfraredSaunas = () => {
 
       <SaunaProductDetails
         slides={IR_SPD_SLIDES}
-        storySections={IR_SPD_STORY_SECTIONS}
-        featureText={IR_SPD_FEATURE_TEXT}
-        perfCards={IR_SPD_PERF_CARDS}
-        accordionItems={IR_SPD_ACCORDION_ITEMS}
-        title="The Infrared Sauna You'll Actually Use Every Day"
+        storySections={t("saunas.productDetails.storySections", { returnObjects: true })}
+        featureText={t("saunas.productDetails.featureText")}
+        perfCards={t("saunas.productDetails.perfCards", { returnObjects: true })}
+        accordionItems={t("saunas.productDetails.accordionItems", { returnObjects: true })}
+        title={t("saunas.productDetails.title")}
       />
 
-      <WellnessBenefits fullBleed={false} />
+      <WellnessBenefits cards={benefitCards} fullBleed={false} />
 
       <SaunaRoomDetails panels={IR_ROOM_PANEL} showNav={false} />
 
       <SaunaWoodMaterials
-        items={IR_MATS_ITEMS}
-        subtitle="Infrared saunas are built in cedar or hemlock — each brings its own character, scent, and warmth to your sessions."
+        items={translatedMatsItems}
+        subtitle={t("saunas.woodMaterials.subtitle")}
       />
 
       <SaunaCallToAction />

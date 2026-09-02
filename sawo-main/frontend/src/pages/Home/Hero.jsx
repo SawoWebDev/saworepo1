@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import HeroWave from "../../components/HeroWave";
 import { afterPageLoad, prefersReducedMotion } from "../../utils/afterPageLoad";
-import { useLocaleT } from "../../i18n/LocaleContext";
+import { useLocaleT, useLocale } from "../../i18n/LocaleContext";
 
 const BUTTON_URL = "https://www.sawo.com/wp-content/uploads/2025/10/SAWO-Product-Catalogue-2025.pdf";
 
 const Hero = () => {
+  const locale = useLocale();
   const tHome = useLocaleT("home");
   const tCommon = useLocaleT("common");
   const SENTENCES = tHome("hero.sentences", { returnObjects: true });
@@ -105,11 +106,22 @@ const Hero = () => {
       clearTimeout(timeout);
       cancelStart();
     };
-    // SENTENCES is derived from the locale fixed at mount (LocaleContext
-    // doesn't change during Home's lifetime) — intentionally excluded so
-    // this effect runs once, not on every render.
+    // Re-run when locale changes: switching languages via the header
+    // switcher is a client-side route change (e.g. "/" -> "/zh"), and
+    // React Router keeps the same <Home>/<Hero> instance mounted since the
+    // element type/position in the tree doesn't change — only the route
+    // path does. That means this effect, if it only ran once on mount,
+    // would keep animating whatever locale's SENTENCES array it captured
+    // at the *original* mount, even after tHome()-driven text elsewhere on
+    // the page (like the h1 above) already re-rendered in the new locale.
+    // That's exactly the bug this fixed: the static h1 updated to Chinese
+    // immediately, but the typewriter kept typing the English sentences
+    // from before the switch, because its effect never reran. `SENTENCES`
+    // itself isn't a stable dependency (tHome() returns a new array
+    // reference every render), so depending on the primitive `locale`
+    // instead is what actually restarts the loop only when it should.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [locale]);
 
   // Dark bg on the section itself (not just the -z-10 image div) so contrast
   // checkers see white hero text against #3a3a3a instead of the page's white.

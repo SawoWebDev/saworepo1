@@ -1,0 +1,32 @@
+{
+  "slug": "nordex-mini-black-ns",
+  "productId": "0fbd2098-f824-4f48-9fec-a36a75b0c471",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Streamlined, minimal design"
+    },
+    {
+      "path": "features[3]",
+      "source": "Black metal casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Mini Black NS",
+    "short_description": "<span style=\"text-align: justify;\">超紧凑型 </span><strong style=\"text-align: justify;\">Nordex Mini</strong><span style=\"text-align: justify;\"> 可安装于直角或转角壁面。提供不锈钢或黑色金属外壳可选，兼容独立式 Saunova (Ni2, NS) 和 Innova (NS) 控制器。</span>",
+    "description": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"3\">最小安全距离<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRM-23NS-BL-Z</td>\n  <td>2.3</td>\n  <td>1.3 – 2.5</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Separate</td>\n  <td>30 | 50</td>\n  <td>20 | 30</td>\n  <td>60 | 85</td>\n</tr>\n<tr>\n  <td>NRM-30NS-BL-Z</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Separate</td>\n  <td>35 | 50</td>\n  <td>25 | 30</td>\n  <td>65 | 85</td>\n</tr>\n<tr>\n  <td>NRM-36NS-BL-Z</td>\n  <td>3.6</td>\n  <td>3 – 6</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Separate</td>\n  <td>40 | 50</td>\n  <td>25 | 30</td>\n  <td>65 | 85</td>\n</tr></tbody></table></div>",
+    "type": "Nordex Mini",
+    "features": [
+      "功率范围：2.3 – 3.6 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "流线型简约设计",
+      "黑色金属外壳"
+    ]
+  }
+}

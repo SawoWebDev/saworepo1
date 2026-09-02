@@ -1,0 +1,28 @@
+{
+  "slug": "cumulus-ni2",
+  "productId": "ace7c2a9-0c4c-45f3-8dd3-ca9d494dce17",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova (Ni2)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Cumulus Ni2",
+    "short_description": "Cumulus 是一款优雅简约的壁挂式加热器，采用不锈钢外壳，并饰以芬兰皂石装饰面板。皂石有助于更快地加热石材，并将热量保存更久。Cumulus 配备内置香薰杯，是通过芳香疗法为桑拿体验增添水疗感受的明智之选。",
+    "description": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-12 wpb_column column_container _ height-full\"><div class=\"vc_wp_text wpb_content_element tg\"><div class=\"widget widget_text mk-in-viewport\"><div class=\"textwidget\">\n<table class=\"tg\">\n<tbody class=\"specificationstext\">\n<tr>\n<th class=\"tg-s6z2 c_tta-tabs-container\">加热器型号</th>\n<th class=\"tg-s6z2\">kW</th>\n<th class=\"tg-s6z2\">桑拿房\n最小 (m3) 最大</th>\n<th class=\"tg-s6z2\">加热器尺寸 (mm)\n长 宽 高</th>\n<th class=\"tg-s6z2\">桑拿石\n(kg)</th>\n<th class=\"tg-s6z2\">控制方式</th>\n<th class=\"tg-s6z2\" colspan=\"5\">最小安全距离\nA | B | C | D | E</th>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">CML-45Ni2-P-C</td>\n<td class=\"tg-s6z2\">4.5</td>\n<td class=\"tg-s6z2\">3 – 6</td>\n<td class=\"tg-s6z2\">300 × 420 × 500</td>\n<td class=\"tg-s6z2\">18</td>\n<td class=\"tg-s6z2\">Saunova</td>\n<td class=\"tg-s6z2\">50</td>\n<td class=\"tg-s6z2\">130</td>\n<td class=\"tg-s6z2\">245</td>\n<td class=\"tg-s6z2\">20</td>\n<td class=\"tg-s6z2\">50</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">CML-60Ni2-P-C</td>\n<td class=\"tg-s6z2\">6.0</td>\n<td class=\"tg-s6z2\">5 – 9</td>\n<td class=\"tg-s6z2\">300 × 420 × 500</td>\n<td class=\"tg-s6z2\">18</td>\n<td class=\"tg-s6z2\">Saunova</td>\n<td class=\"tg-s6z2\">50</td>\n<td class=\"tg-s6z2\">130</td>\n<td class=\"tg-s6z2\">245</td>\n<td class=\"tg-s6z2\">20</td>\n<td class=\"tg-s6z2\">50</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">CML-80Ni2-P-C</td>\n<td class=\"tg-s6z2\">8.0</td>\n<td class=\"tg-s6z2\">7 – 13</td>\n<td class=\"tg-s6z2\">300 × 420 × 590</td>\n<td class=\"tg-s6z2\">18</td>\n<td class=\"tg-s6z2\">Saunova</td>\n<td class=\"tg-s6z2\">60</td>\n<td class=\"tg-s6z2\">140</td>\n<td class=\"tg-s6z2\">330</td>\n<td class=\"tg-s6z2\">30</td>\n<td class=\"tg-s6z2\">60</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">CML-90Ni2-P-C</td>\n<td class=\"tg-s6z2\">9.0</td>\n<td class=\"tg-s6z2\">8 – 14</td>\n<td class=\"tg-s6z2\">300 × 420 × 590</td>\n<td class=\"tg-s6z2\">18</td>\n<td class=\"tg-s6z2\">Saunova</td>\n<td class=\"tg-s6z2\">60</td>\n<td class=\"tg-s6z2\">140</td>\n<td class=\"tg-s6z2\">330</td>\n<td class=\"tg-s6z2\">30</td>\n<td class=\"tg-s6z2\">60</td>\n</tr>\n</tbody>\n</table><br></div></div></div></div></div>",
+    "type": "Cumulus",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova (Ni2)",
+      "不锈钢外壳",
+      "内置香薰杯"
+    ]
+  }
+}

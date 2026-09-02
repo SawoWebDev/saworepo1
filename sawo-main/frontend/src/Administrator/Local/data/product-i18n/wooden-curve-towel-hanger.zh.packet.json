@@ -1,0 +1,49 @@
+{
+  "slug": "wooden-curve-towel-hanger",
+  "productId": "6416e261-dc77-4610-9e8a-4ea7c2592da9",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "木质弧形毛巾架",
+    "short_description": "SAWO 木质弧形毛巾架尺寸为 42 × 240mm，用于在桑拿房外悬挂毛巾与浴袍。",
+    "description": null,
+    "type": "衣物挂架",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (589-D)",
+        "name": "雪松 (589-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (589-A)",
+        "name": "白杨 (589-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (589-BL)",
+        "name": "黑色 (589-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

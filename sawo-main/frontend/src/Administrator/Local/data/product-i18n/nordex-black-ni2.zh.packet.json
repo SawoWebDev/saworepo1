@@ -1,0 +1,32 @@
+{
+  "slug": "nordex-black-ni2",
+  "productId": "84781ed8-1c12-4fa7-bf75-4162b4580f34",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova (Ni2)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Black metal casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Black Ni2",
+    "short_description": "这款 Nordex 加热器延续了所有 Nordex 系列产品简约现代的设计风格。其节省空间的体积与壁挂式安装方式，让任何桑拿房都更加舒适。",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"4\">最小安全距离<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45Ni2-BL-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>50</td>\n  <td>130</td>\n  <td>270</td>\n</tr>\n<tr>\n  <td>NRN-60Ni2-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>50</td>\n  <td>130</td>\n  <td>270</td>\n</tr>\n<tr>\n  <td>NRN-80Ni2-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>80</td>\n  <td>80</td>\n  <td>160</td>\n  <td>330</td>\n</tr>\n<tr>\n  <td>NRN-90Ni2-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>80</td>\n  <td>80</td>\n  <td>160</td>\n  <td>330</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova (Ni2)",
+      "流线型简约设计",
+      "黑色金属外壳"
+    ]
+  }
+}

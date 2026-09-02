@@ -1,0 +1,24 @@
+{
+  "slug": "helius-mini-ns",
+  "productId": "2c147543-2f01-4114-8336-85a4bcdb1f00",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    }
+  ],
+  "fields": {
+    "name": "Helius Mini NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Helius Mini</strong><span style=\"text-align: justify;\"> 以更紧凑的机身带来与 Helius 相同的创新体验。它可以不显眼地安装在长椅后方，配合最小安全距离，完全隐藏于视线之外。其防护罩专为隐形加热器的使用场景而设计。凭借强劲性能，Helius Mini 经过精心设计，可为较小空间提供均匀加热。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器\n<br>型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th colspan=\"2\">控制方式</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-MN-20NS-Z</td>\n  <td>2.0</td>\n  <td>1.5 – 2.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-27NS-Z</td>\n  <td>2.7</td>\n  <td>2.0 – 3.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-30NS-Z</td>\n  <td>3.0</td>\n  <td>2.0 – 4.0</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "功率范围：2.0 – 3.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "独立皂石水盆，配软管",
+      "可选加热器护栏与防护罩"
+    ]
+  }
+}

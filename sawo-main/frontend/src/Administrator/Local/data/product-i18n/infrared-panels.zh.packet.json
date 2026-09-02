@@ -1,0 +1,26 @@
+{
+  "slug": "infrared-panels",
+  "productId": "7bac4219-f7b5-4523-9a69-6a4a9a7864ca",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "红外线加热板",
+    "short_description": "红外线辐射加热板，带来深层柔和的温暖，打造舒适的红外线桑拿体验。",
+    "description": null,
+    "type": "红外线配件",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ]
+  }
+}

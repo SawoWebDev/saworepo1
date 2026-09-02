@@ -1,0 +1,23 @@
+{
+  "slug": "cozy-tank-03l",
+  "productId": "1be0afba-f331-468e-ad86-1d7f3d070b9b",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cozy Tank (0.3L)",
+    "short_description": "0.3L Cozy Tank 是一款圆柱形桑拿加湿器，内置储水装置，当加热器达到工作温度后即可立即释放蒸汽。可在水中加入精油和香氛，产生带香气的蒸汽。该加湿器采用厚实不锈钢制成，坚固耐用，并配有雕刻皂石顶盖，兼具便捷性与自然设计感。只需通过顶盖上的注水孔即可轻松加水。",
+    "description": null,
+    "type": "圆柱形桑拿加湿器",
+    "features": [
+      "内置储水，加热器升温后立即释放蒸汽",
+      "可通过顶盖注水孔加水",
+      "厚实不锈钢材质",
+      "雕刻皂石顶盖"
+    ],
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ]
+  }
+}

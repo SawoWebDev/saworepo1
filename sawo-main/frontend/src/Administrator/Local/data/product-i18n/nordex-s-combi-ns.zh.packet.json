@@ -1,0 +1,47 @@
+{
+  "slug": "nordex-s-combi-ns",
+  "productId": "eb0a637d-39a1-4d81-a73e-af677b46b208",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 6.0 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Streamlined, minimal design"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    },
+    {
+      "path": "features[5]",
+      "source": "Stainless steel casing"
+    },
+    {
+      "path": "features[6]",
+      "source": "Automatic shut-off in case of overheating"
+    }
+  ],
+  "fields": {
+    "name": "Nordex S Combi NS",
+    "short_description": null,
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW\n<br>加热器</th>\n  <th>kW\n<br>水箱</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"4\">最小安全距离<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNSC-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1990</td>\n</tr>\n<tr>\n  <td>NRNSC-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1990</td>\n</tr>\n<tr>\n  <td>NRNSC-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1990</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "功率范围：6.0 – 9.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "高效加热，能耗更低",
+      "流线型简约设计",
+      "内置香薰杯",
+      "不锈钢外壳",
+      "过热自动关闭保护"
+    ]
+  }
+}

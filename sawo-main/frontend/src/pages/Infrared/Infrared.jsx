@@ -15,37 +15,54 @@ import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownBut
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
 import PageCTA from "../../components/PageCTA";
+import menuPaths from "../../menuPaths";
+import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const accessories = [
-  { img: irPanels, title: "Infrared Panels", slug: "infrared-panels" },
-  { img: irBackrest, title: "Infrared Backrest", slug: "infrared-backrest" },
-  { img: interfaceHolder, title: "Interface Holder", slug: "interface-holder" },
+  { img: irPanels, key: "infraredPanels", slug: "infrared-panels" },
+  { img: irBackrest, key: "infraredBackrest", slug: "infrared-backrest" },
+  { img: interfaceHolder, key: "interfaceHolder", slug: "interface-holder" },
 ];
 
 const controls = [
-  { img: irUiV2, title: "Infrared 2.0 User Interface", slug: "infrared-2-0-user-interface" },
-  { img: irPowerController, title: "Infrared 2.0 Power Controller", slug: "infrared-2-0-power-controller" },
-  { img: irBuiltinControl, title: "Infrared 2.0 Built-In Control", slug: "infrared-2-0-built-in-control" },
+  { img: irUiV2, key: "userInterface", slug: "infrared-2-0-user-interface" },
+  { img: irPowerController, key: "powerController", slug: "infrared-2-0-power-controller" },
+  { img: irBuiltinControl, key: "builtInControl", slug: "infrared-2-0-built-in-control" },
 ];
 
-const benefits = [
-  { icon: "fas fa-spa", label: "Stress Relief", desc: "Reduces stress, promotes relaxation, and alleviates anxiety" },
-  { icon: "fas fa-heartbeat", label: "Heart Health", desc: "Enhances blood circulation, reduces arterial stiffness, and supports healthy blood pressure" },
-  { icon: "fas fa-lungs", label: "Respiratory Relief", desc: "Relieves nasal, sinus, and chest congestion" },
-  { icon: "fas fa-dumbbell", label: "Muscle Recovery", desc: "Accelerates muscle recovery following exercise" },
-  { icon: "fas fa-bed", label: "Better Sleep", desc: "Promotes deeper, more restorative sleep by extending REM sleep duration" },
-  { icon: "fas fa-heart", label: "Disease Prevention", desc: "Lowers risk of cardiovascular diseases, including stroke, hypertension, dementia, and Alzheimer's disease" },
-  { icon: "fas fa-droplet", label: "Skin Detox", desc: "Opens pores, reduces blackheads, eliminates toxins, and improves skin" },
-  { icon: "fas fa-wand-magic-sparkles", label: "Collagen Boost", desc: "Stimulates fibroblast activity to boost collagen production and enhance skin texture" },
-  { icon: "fas fa-hand-holding-droplet", label: "Skin Hydration", desc: "Improves skin hydration, stabilizes pH balance, and strengthens the skin's natural barrier" },
-  { icon: "fas fa-shield-alt", label: "Immune Support", desc: "Supports the body's natural immune defenses and aids recovery after illness" },
-  { icon: "fas fa-fire", label: "Metabolism Boost", desc: "Stimulates protein repair, improves insulin sensitivity, and enhances metabolic rate" },
-  { icon: "fas fa-smile", label: "Mental Wellness", desc: "Significantly reduces symptoms of depression with consistent use" },
+// Same 12 cards as the shared WellnessBenefits component (see its file
+// header) — kept as this page's own inline carousel rather than switching to
+// <WellnessBenefits /> (a larger structural change out of scope for i18n
+// wiring), but translated from the same common.json `wellnessBenefits` keys
+// so the copy stays a single source of truth across both.
+const BENEFIT_KEYS = [
+  ["stressRelief", "fas fa-spa"],
+  ["heartHealth", "fas fa-heartbeat"],
+  ["respiratoryRelief", "fas fa-lungs"],
+  ["muscleRecovery", "fas fa-dumbbell"],
+  ["betterSleep", "fas fa-bed"],
+  ["diseasePrevention", "fas fa-heart"],
+  ["skinDetox", "fas fa-droplet"],
+  ["collagenBoost", "fas fa-wand-magic-sparkles"],
+  ["skinHydration", "fas fa-hand-holding-droplet"],
+  ["immuneSupport", "fas fa-shield-alt"],
+  ["metabolismBoost", "fas fa-fire"],
+  ["mentalWellness", "fas fa-smile"],
 ];
 
 const Infrared = () => {
+  const locale = useLocale();
+  const t = useLocaleT("infrared");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const heroLoaded = useHeroLoaded(heroBg);
   const location = useLocation();
+
+  const benefits = BENEFIT_KEYS.map(([key, icon]) => ({
+    key, icon,
+    label: tc(`wellnessBenefits.${key}.label`),
+    desc: tc(`wellnessBenefits.${key}.desc`),
+  }));
 
   // Scroll to the target section when arriving via a hash link (e.g. /infrared#infrared-controls)
   useEffect(() => {
@@ -114,9 +131,10 @@ const Infrared = () => {
   return (
     <div className="relative">
       <SEO
-        title="Infrared Sauna"
-        description="Discover SAWO infrared saunas: cedar-crafted rooms with gentle, therapeutic infrared heat panels and controls for deep relaxation and wellness."
-        path="/infrared"
+        title={t("hub.meta.title")}
+        description={t("hub.meta.description")}
+        path={locale === "en" ? "/infrared" : `/${locale}/infrared`}
+        hreflangAlternates={{ en: "/infrared", fi: "/fi/infrared", zh: "/zh/infrared" }}
       />
 
       <script type="application/ld+json">
@@ -154,10 +172,10 @@ const Infrared = () => {
         />
         <div className="ir-hero-overlay" />
         <div className="ir-hero-content">
-          <h1 className="ir-hero-title">INFRARED SAUNA</h1>
+          <h1 className="ir-hero-title">{t("hub.hero.title")}</h1>
           <div style={{ marginTop: "28px" }}>
             <BrochureDropdownButton
-              text="VIEW BROCHURE"
+              text={t("hub.hero.brochureBtn")}
               href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Infrared-Brochure-2026-1.pdf"
             />
           </div>
@@ -171,19 +189,16 @@ const Infrared = () => {
       <section id="infrared-room" className="max-w-[1100px] mx-auto px-6 py-20">
         <div className="ir-room-grid">
           <div className="ir-room-left">
-            <h2 className="ir-group-title">Infrared Saunas</h2>
+            <h2 className="ir-group-title">{t("hub.saunasSection.title")}</h2>
             <p className="ir-room-desc">
-              Indulge in the therapeutic benefits of our Infrared Saunas, designed to promote
-              relaxation and well-being through the gentle warmth of infrared technology. Experience a
-              soothing escape in the comfort of your own space. Our Infrared Saunas are available in
-              one-person and two-person sizes.
+              {t("hub.saunasSection.desc")}
             </p>
-            <Link to="/infrared/saunas" className="wm-brochure-btn">
-              VIEW INFRARED SAUNAS
+            <Link to={localize(menuPaths.infrared.saunas)} className="wm-brochure-btn">
+              {t("hub.saunasSection.viewAll")}
             </Link>
           </div>
           <div className="ir-room-img-wrap">
-            <img src={saunaRoom} alt="Infrared Sauna" className="ir-room-img" />
+            <img src={saunaRoom} alt={t("hub.saunasSection.title")} className="ir-room-img" />
           </div>
         </div>
       </section>
@@ -192,16 +207,19 @@ const Infrared = () => {
       {/* INFRARED ACCESSORIES  */}
       {/* ===================== */}
       <section id="infrared-accessories" className="max-w-[1100px] mx-auto px-6 py-16">
-        <h2 className="ir-group-title ir-group-title--center">Infrared Accessories</h2>
+        <h2 className="ir-group-title ir-group-title--center">{t("hub.accessoriesSection.title")}</h2>
         <div className="ir-acc-grid">
-          {accessories.map((item, i) => (
-            <Link to={`/products/${item.slug}`} className="ir-acc-card" key={i}>
-              <div className="ir-acc-img-wrap">
-                <img src={item.img} alt={item.title} className="ir-acc-img" />
-              </div>
-              <h3 className="ir-acc-title">{item.title}</h3>
-            </Link>
-          ))}
+          {accessories.map((item) => {
+            const title = t(`hub.accessoriesSection.items.${item.key}`);
+            return (
+              <Link to={localize(`/products/${item.slug}`)} className="ir-acc-card" key={item.key}>
+                <div className="ir-acc-img-wrap">
+                  <img src={item.img} alt={title} className="ir-acc-img" />
+                </div>
+                <h3 className="ir-acc-title">{title}</h3>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -212,7 +230,7 @@ const Infrared = () => {
         <div className="sauna-carousel-wrapper">
           <div className="sauna-card-unique-grid">
             {[...benefits, ...benefits].map((b, i) => (
-              <div className="sauna-card-unique" key={i}>
+              <div className="sauna-card-unique" key={`${b.key}-${i}`}>
                 <div className="sauna-card-unique-close"><i className="fa-solid fa-times" /></div>
                 <div className="sauna-card-unique-content">
                   <div className="sauna-card-unique-icon"><i className={b.icon} /></div>
@@ -230,16 +248,19 @@ const Infrared = () => {
       {/* INFRARED SAUNA CONTROLS */}
       {/* ===================== */}
       <section id="infrared-controls" className="max-w-[1100px] mx-auto px-6 py-20">
-        <h2 className="ir-group-title ir-group-title--center">Infrared Sauna Controls</h2>
+        <h2 className="ir-group-title ir-group-title--center">{t("hub.controlsSection.title")}</h2>
         <div className="ir-ctrl-grid">
-          {controls.map((item, i) => (
-            <Link to={`/products/${item.slug}`} className="ir-ctrl-card" key={i}>
-              <div className="ir-ctrl-img-wrap">
-                <img src={item.img} alt={item.title} className="ir-ctrl-img" />
-              </div>
-              <h3 className="ir-ctrl-title">{item.title}</h3>
-            </Link>
-          ))}
+          {controls.map((item) => {
+            const title = t(`hub.controlsSection.items.${item.key}`);
+            return (
+              <Link to={localize(`/products/${item.slug}`)} className="ir-ctrl-card" key={item.key}>
+                <div className="ir-ctrl-img-wrap">
+                  <img src={item.img} alt={title} className="ir-ctrl-img" />
+                </div>
+                <h3 className="ir-ctrl-title">{title}</h3>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -247,8 +268,8 @@ const Infrared = () => {
       {/* CTA                   */}
       {/* ===================== */}
       <PageCTA
-        title="Need Help Choosing?"
-        description="From infrared panels to controls and accessories, our team can help you find the right infrared sauna setup for your space."
+        title={t("hub.cta.title")}
+        description={t("hub.cta.description")}
       />
 
       {/* ===================== */}

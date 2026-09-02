@@ -1,0 +1,36 @@
+{
+  "slug": "heaterking-wall-ns",
+  "productId": "358faebf-1aba-47d6-9cfd-1fc7a725ab08",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[6]",
+      "source": "Heat reflector included"
+    },
+    {
+      "path": "features[7]",
+      "source": "Optional heater guard"
+    }
+  ],
+  "fields": {
+    "name": "Heaterking 壁挂式 NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Heaterking 壁挂式</strong><span style=\"text-align: justify;\">加热器由 Stefan Lindfors 设计,在节省桑拿房空间的同时带来王者级热力。其挺拔的高度可容纳大量桑拿石,持续均匀散发热力。沐浴者可通过将水泼向石柱底部或顶部,自由体验柔和或强烈干爽的热感。与所有 Heaterking 系列一样,壁挂式加热器采用独特的丛林火焰(Junglefire)图案不锈钢外壳,为任何桑拿房增添大胆优雅的气质。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg) 不含石材间隔器</th>\n  <th>桑拿石<br>(kg) 含石材间隔器</th>\n  <th>控制方式</th>\n  <th colspan=\"2\">最小安全距离<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>DRFT3-35NS-WL-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>220 × 395 × 1440</td>\n  <td>80</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-45NS-WL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>220 × 395 × 1440</td>\n  <td>80</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-60NS-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>220 × 395 × 1440</td>\n  <td>80</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-80NS-WL-P-C</td>\n  <td>8.0</td>\n  <td>4 – 14</td>\n  <td>300 × 550 × 1475</td>\n  <td>160</td>\n  <td>105</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-90NS-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>300 × 550 × 1475</td>\n  <td>160</td>\n  <td>105</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-105NS-WL-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>300 × 550 × 1475</td>\n  <td>160</td>\n  <td>105</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-120NS-WL-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>300 × 550 × 1475</td>\n  <td>160</td>\n  <td>105</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>DRFT9-105NS-WL-P</td>\n  <td>10.5</td>\n  <td>10 – 16</td>\n  <td>350 × 650 × 1510</td>\n  <td>180</td>\n  <td>115</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>DRFT9-120NS-WL-P</td>\n  <td>12.0</td>\n  <td>11 – 20</td>\n  <td>350 × 650 × 1510</td>\n  <td>180</td>\n  <td>115</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>DRFT9-150NS-WL-P</td>\n  <td>15.0</td>\n  <td>14 – 25</td>\n  <td>350 × 650 × 1510</td>\n  <td>180</td>\n  <td>115</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>DRFT9-180NS-WL-P</td>\n  <td>18.0</td>\n  <td>18 – 28</td>\n  <td>350 × 650 × 1510</td>\n  <td>180</td>\n  <td>115</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>DRFT12-150NS-WL-P</td>\n  <td>15.0</td>\n  <td>15 – 26</td>\n  <td>420 × 790 × 1545</td>\n  <td>250</td>\n  <td>165</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>DRFT12-180NS-WL-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>420 × 790 × 1545</td>\n  <td>250</td>\n  <td>165</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>DRFT12-210NS-WL-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>420 × 790 × 1545</td>\n  <td>250</td>\n  <td>165</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>DRFT12-240NS-WL-P</td>\n  <td>24.0</td>\n  <td>24 – 40</td>\n  <td>420 × 790 × 1545</td>\n  <td>250</td>\n  <td>165</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr></tbody></table>",
+    "type": "Heaterking 壁挂式",
+    "features": [
+      "功率范围：3.5 – 12.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "精致丛林火焰(Junglefire)图案不锈钢外壳",
+      "配备石材间隔器,延长发热元件使用寿命",
+      "桑拿石容量：45kg 至 160kg",
+      "转角式不锈钢外壳",
+      "配备隔热反射板",
+      "可选加热器护罩"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "nordex-mini-ni2",
+  "productId": "55b7ac59-128f-4f7f-ab2b-45d7e1a3b48a",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Mini Ni2",
+    "short_description": "超紧凑型 Nordex Mini 可安装于直角或转角壁面。提供不锈钢或黑色金属外壳可选，兼容独立式 Saunova (Ni2, NS) 和 Innova (NS) 控制器。",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"3\">最小安全距离<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRM-23Ni2-Z-C</td>\n  <td>2.3</td>\n  <td>1.3 – 2.5</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>30</td>\n  <td>85</td>\n</tr>\n<tr>\n  <td>NRM-30Ni2-Z-C</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>30</td>\n  <td>85</td>\n</tr>\n<tr>\n  <td>NRM-36Ni2-Z-C</td>\n  <td>3.6</td>\n  <td>3 – 6</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>30</td>\n  <td>85</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex Mini"
+  }
+}

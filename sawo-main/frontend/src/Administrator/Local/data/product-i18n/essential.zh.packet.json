@@ -1,0 +1,35 @@
+{
+  "slug": "essential",
+  "productId": "01311230-1555-4cf0-a872-878e8cdbda0d",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "精选款",
+    "short_description": "精选款套装将舒适与风格提升至全新高度，提供更丰富多样的桑拿用品选择。",
+    "description": null,
+    "type": "配件套装",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (SET-ESS-D)",
+        "name": "铁杉 (SET-ESS-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

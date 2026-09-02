@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import ProductShowcase from "../../components/ProductShowcase";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
 import heroImg from "../../assets/Infrared/IR-CONTROL-New.webp";
 
 // Slug-selected for the same reason as InfraredPanels — see the note there.
@@ -12,6 +13,8 @@ export const CONTROL_SLUGS = [
 ];
 
 const InfraredControls = () => {
+  const locale = useLocale();
+  const t = useLocaleT("infrared");
   const { products, loading } = useLocalProducts();
 
   const controls = useMemo(() => {
@@ -23,21 +26,22 @@ const InfraredControls = () => {
 
   return (
     <ProductShowcase
-      seoTitle="Infrared Controls"
-      seoDescription="SAWO Infrared 2.0 controls — user interface, power controller, and built-in control for managing temperature, session time, lighting, and airflow."
-      seoPath="/infrared/controls"
+      seoTitle={t("controls.meta.title")}
+      seoDescription={t("controls.meta.description")}
+      seoPath={locale === "en" ? "/infrared/controls" : `/${locale}/infrared/controls`}
+      seoHreflangAlternates={{ en: "/infrared/controls", fi: "/fi/infrared/controls", zh: "/zh/infrared/controls" }}
       heroImage={heroImg}
-      heroTitle="INFRARED CONTROLS"
-      introTitle="Introducing Our Infrared Controls"
-      introText="One control runs the whole room — temperature, session length from 1 to 60 minutes, lighting, and the exhaust fan. The Infrared 2.0 range covers the user interface, the power controller behind it, and a built-in option for a cleaner cabin wall."
+      heroTitle={t("controls.hero.title")}
+      introTitle={t("controls.intro.title")}
+      introText={t("controls.intro.text")}
       products={controls}
       loading={loading}
-      eyebrow="Infrared Control"
-      fallbackBlurb="Premium SAWO infrared control built for simple, reliable everyday use."
-      emptyText="No infrared controls available yet."
-      loadingText="Loading infrared controls..."
-      ctaTitle="Need Help Choosing a Control?"
-      ctaDescription="Whether you want a surface-mounted interface or a built-in unit, our team can help you pick the right control for your infrared room."
+      eyebrow={t("controls.eyebrow")}
+      fallbackBlurb={t("controls.fallbackBlurb")}
+      emptyText={t("controls.emptyText")}
+      loadingText={t("controls.loadingText")}
+      ctaTitle={t("controls.cta.title")}
+      ctaDescription={t("controls.cta.description")}
     />
   );
 };

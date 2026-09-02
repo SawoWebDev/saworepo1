@@ -1,0 +1,18 @@
+{
+  "slug": "decorative-sauna-stones-white-quartz-rounded-10kg",
+  "productId": "746b8f1f-0732-4d18-811d-de7c27005606",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "白石英装饰桑拿石（圆形，10kg）",
+    "short_description": "作为桑拿石的点缀配件使用的白色石英石。它们为桑拿装置增添明亮优雅的装饰效果，而不会替代主要的发热石材，提供 3–10cm 和 8–15cm 两种规格。",
+    "description": null,
+    "type": "桑拿石",
+    "spec_table_headers": [
+      "型号",
+      "尺寸",
+      "用途"
+    ]
+  }
+}

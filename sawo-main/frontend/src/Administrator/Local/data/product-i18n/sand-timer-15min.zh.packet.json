@@ -1,0 +1,56 @@
+{
+  "slug": "sand-timer-15min",
+  "productId": "946a955f-b47e-4599-9a2f-1895c4aa7a3c",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "15分钟沙漏",
+    "short_description": "SAWO 15分钟沙漏尺寸为 65 × 340mm，是记录桑拿时长的简便方式。",
+    "description": null,
+    "type": "时钟与计时器",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (553-D)",
+        "name": "雪松 (553-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (553-A)",
+        "name": "白杨 (553-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (553-H)",
+        "name": "铁杉 (553-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (553-BL)",
+        "name": "黑色 (553-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

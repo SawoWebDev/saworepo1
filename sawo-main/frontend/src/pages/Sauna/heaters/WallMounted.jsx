@@ -113,6 +113,7 @@ import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../../../utils/wallMountedGroups";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -200,10 +201,11 @@ function SkeletonCard() {
 // ─── Product card ─────────────────────────────────────────────────────────────
 function ProductCard({ product }) {
   const power = getPowerRange(product.tags);
+  const localize = useLocalizedPath();
 
   return (
     <Link
-      to={`/products/${product.slug}`}
+      to={localize(`/products/${product.slug}`)}
       className="wm-product-item"
       style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
     >
@@ -240,6 +242,9 @@ function getImageUrl(product, field) {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function WallMounted() {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
 
   const [search, setSearch] = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
@@ -269,8 +274,8 @@ export default function WallMounted() {
   return (
     <div className="relative">
       <SEO
-        title="Wall-Mounted Sauna Heaters"
-        description="Browse SAWO wall-mounted sauna heaters: Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas."
+        title={t("wallMountedPage.meta.title")}
+        description={t("wallMountedPage.meta.description")}
         path="/sauna/heaters/wall-mounted"
       />
       <style>{`
@@ -339,7 +344,7 @@ export default function WallMounted() {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Wall-Mounted Sauna Heaters"
+          alt={t("wallMountedPage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -350,10 +355,10 @@ export default function WallMounted() {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">WALL-MOUNTED SAUNA HEATERS</h1>
-          <p className="wm-hero-subtitle">Space-saving sleek modern designs</p>
+          <h1 className="wm-hero-title">{t("wallMountedPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("wallMountedPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
-            <BrochureDropdownButton text="EXPLORE HEATERS" href={menuPaths.sauna.heaters.parent} redirect />
+            <BrochureDropdownButton text={t("wallMountedPage.hero.exploreButton")} href={menuPaths.sauna.heaters.parent} redirect />
           </div>
         </div>
       <HeroWave />
@@ -362,10 +367,9 @@ export default function WallMounted() {
       {/* ── INTRO ────────────────────────────────────────────────────────── */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Introducing Our Premium Wall Mounted Heaters</h2>
+          <h2 className="wm-products-title">{t("wallMountedPage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Our wall-mounted heaters are crafted for those who love the traditional dry and hot sauna experience.
-            This series of classic heaters boasts of robust, space-saving models for small and medium-sized saunas.
+            {t("wallMountedPage.intro.desc")}
           </p>
         </div>
       </section>
@@ -378,7 +382,7 @@ export default function WallMounted() {
             <div className="wm-filter-search-row">
               {/* ── Filter pills ── */}
               <div className="wm-filter-pills-group">
-                <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+                <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
                 {groupNames.map((g) => (
                   <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>
                     {g}
@@ -394,10 +398,10 @@ export default function WallMounted() {
                   type="text"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  placeholder="Search heaters..."
+                  placeholder={tc("catalogFilter.searchPlaceholder", { category: t("wallMountedPage.meta.title") })}
                 />
                 {search && (
-                  <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                  <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                     <i className="fa-solid fa-xmark" />
                   </button>
                 )}
@@ -405,19 +409,15 @@ export default function WallMounted() {
             </div>
             {search && (
               <p className="wm-search-count">
-                {visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
-                  const q = search.trim().toLowerCase();
-                  return p.name?.toLowerCase().includes(q) || p.short_description?.toLowerCase().includes(q) || (p.categories || []).some(c => c.toLowerCase().includes(q)) || (p.tags || []).some(t => t.toLowerCase().includes(q));
-                })).length === 0
-                  ? `No results for "${search}"`
-                  : `${visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
+                {(() => {
+                  const count = visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
                     const q = search.trim().toLowerCase();
                     return p.name?.toLowerCase().includes(q) || p.short_description?.toLowerCase().includes(q) || (p.categories || []).some(c => c.toLowerCase().includes(q)) || (p.tags || []).some(t => t.toLowerCase().includes(q));
-                  })).length} result${visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
-                    const q = search.trim().toLowerCase();
-                    return p.name?.toLowerCase().includes(q) || p.short_description?.toLowerCase().includes(q) || (p.categories || []).some(c => c.toLowerCase().includes(q)) || (p.tags || []).some(t => t.toLowerCase().includes(q));
-                  })).length !== 1 ? "s" : ""} for "${search}"`
-                }
+                  })).length;
+                  return count === 0
+                    ? tc("catalogFilter.noResultsFor", { query: search })
+                    : tc("catalogFilter.resultsCount", { count, query: search });
+                })()}
               </p>
             )}
           </div>
@@ -438,7 +438,7 @@ export default function WallMounted() {
           {/* ── Empty states ── */}
           {!loading && allProducts.length === 0 && (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No products available yet.</p>
+              <p>{tc("catalogFilter.noProductsYet")}</p>
             </div>
           )}
 
@@ -448,9 +448,9 @@ export default function WallMounted() {
               {visibleGroups.length === 0 ? (
                 <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#a67853" }}>
                   <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "1.8rem", opacity: 0.35, display: "block", marginBottom: 10 }} />
-                  <p style={{ margin: 0 }}>No heaters match "<strong>{search}</strong>"</p>
+                  <p style={{ margin: 0 }}>{tc("catalogFilter.noMatch", { category: t("wallMountedPage.meta.title"), query: search })}</p>
                   <button onClick={() => setSearch("")} style={{ marginTop: 10, background: "none", border: "none", cursor: "pointer", color: "#8b5e3c", fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", textDecoration: "underline" }}>
-                    Clear search
+                    {tc("catalogFilter.clearSearch")}
                   </button>
                 </div>
               ) : (
@@ -484,7 +484,7 @@ export default function WallMounted() {
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
+        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
       </section>
 
       {/* ── WHY SAWO ─────────────────────────────────────────────────────── */}
@@ -492,11 +492,10 @@ export default function WallMounted() {
         <div className="wm-container">
           <div className="wm-why-grid">
             <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO HEATERS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
+              <p className="wm-eyebrow">{t("wallMountedPage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("wallMountedPage.why.title")}</h2>
               <p className="wm-why-desc">
-                SAWO heaters combine durability, energy efficiency, and modern design,
-                offering consistent performance for a reliable, superior sauna experience every time.
+                {t("wallMountedPage.why.desc")}
               </p>
               <div style={{ marginTop: "20px" }}>
                 <a
@@ -505,7 +504,7 @@ export default function WallMounted() {
                   rel="noopener noreferrer"
                   className="wm-brochure-btn"
                 >
-                  VIEW BROCHURE
+                  {tc("viewBrochure")}
                 </a>
               </div>
             </div>
@@ -515,8 +514,8 @@ export default function WallMounted() {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title={t("wallMountedPage.promo.title")}
+        subtitle={t("wallMountedPage.promo.subtitle")}
         image={bannerImg}
       />
     </div>

@@ -1,0 +1,44 @@
+{
+  "slug": "tower-wall-ni2",
+  "productId": "3b7587a5-a121-4083-bf71-d57932a31794",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available control: Saunova (Ni2)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless steel casing"
+    },
+    {
+      "path": "features[5]",
+      "source": "Adjustable legs"
+    },
+    {
+      "path": "features[6]",
+      "source": "Optional heater guard"
+    },
+    {
+      "path": "features[7]",
+      "source": "Optional integration collar"
+    }
+  ],
+  "fields": {
+    "name": "Tower Seinä Ni2",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Tower Seinä</strong><span style=\"text-align: justify;\"> on tyylikäs, minimalistinen ja tilaa säästävä malli. Sen korkeus varmistaa pitkäkestoisen, kostean lämmön tasaisen jakautumisen perusteellisesti virkistäviin saunahetkiin. Seinä-mallin tehoa voidaan kasvattaa yli 24,0 kW:iin, tai kaksi Tower Seinä -kiuasta voidaan yhdistää jopa 48 kW:n tehoon. Kuten kaikissa Tower-kiukaissa, myös Tower Seinä -mallissa on irrotettava kivivälike, joka tarjoaa kaksi asennusvaihtoehtoa: (1) välikkeen kanssa nopeampi kuumeneminen, energiatehokkuus ja kuumempi sauna, tai (2) ilman väliketta tilaa useammille kiville lisähöyryn tuottamiseksi, miedompi lämpötila ja energiansäästöä kaupallisessa käytössä.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)\nilman kivivälikettä</th>\n  <th>Kivet<br>(kg)\nkivivälikkeen kanssa</th>\n  <th>Ohjaus</th>\n  <th colspan=\"2\">Vähimmäisturvaetäisyydet<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH2-30Ni2-WL-P-C</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-35Ni2-WL-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-45Ni2-WL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-60Ni2-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH4-60Ni2-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>250 × 475 × 1395</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-80Ni2-WL-P-C</td>\n  <td>8.0</td>\n  <td>8 – 14</td>\n  <td>250 × 475 × 1395</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-90Ni2-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>250 × 475 × 1395</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-80Ni2-WL-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>320 × 550 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-90Ni2-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>320 × 550 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Tower Seinä",
+    "features": [
+      "Tehoalue: 3.0 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova (Ni2)",
+      "Ruostumaton teräskuori",
+      "Liikkuvat teräsrenkaat rikkoutuneiden kivien vaihtoa varten",
+      "Irrotettava kivivälike",
+      "Säädettävät jalat",
+      "Valinnainen kiuassuoja",
+      "Valinnainen liitosrengas"
+    ]
+  }
+}

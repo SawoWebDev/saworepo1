@@ -1,0 +1,24 @@
+{
+  "slug": "cumulus-ns",
+  "productId": "49825108-e558-40a2-87d4-7e5d837cb07c",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[2]",
+      "source": "Stainless steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Cumulus NS",
+    "short_description": "Cumulus 是一款优雅简约的壁挂式加热器，采用不锈钢外壳，并饰以芬兰皂石装饰面板。皂石有助于更快地加热石材，并将热量保存更久。Cumulus 配备内置香薰杯，是通过芳香疗法为桑拿体验增添水疗感受的明智之选。",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"5\">最小安全距离<br>A | B | C | D | E</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CML-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-80NS-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n<tr>\n  <td>CML-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n</tbody></table>",
+    "type": "Cumulus",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "不锈钢外壳",
+      "内置香薰杯"
+    ]
+  }
+}

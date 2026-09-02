@@ -59,6 +59,7 @@ import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -147,9 +148,10 @@ function SkeletonCard() {
 
 function ProductCard({ product }) {
   const power = getPowerRange(product.tags);
+  const localize = useLocalizedPath();
   return (
     <Link
-      to={`/products/${product.slug}`}
+      to={localize(`/products/${product.slug}`)}
       className="wm-product-item"
       style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
     >
@@ -178,6 +180,9 @@ function ProductCard({ product }) {
 
 const Tower = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [activeGroup, setActiveGroup] = useState(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [activeType,  setActiveType]  = useState("All");
@@ -213,8 +218,8 @@ const Tower = () => {
   return (
     <div className="relative">
       <SEO
-        title="Tower Sauna Heaters"
-        description="Explore SAWO Tower Series sauna heaters: energy-efficient, sleek vertical designs with superior heat distribution for a modern wellness sauna experience."
+        title={t("towerPage.meta.title")}
+        description={t("towerPage.meta.description")}
         path="/sauna/heaters/tower"
       />
       <style>{`
@@ -235,7 +240,7 @@ const Tower = () => {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Tower Sauna Heaters"
+          alt={t("towerPage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -246,10 +251,10 @@ const Tower = () => {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">TOWER SAUNA HEATERS</h1>
-          <p className="wm-hero-subtitle">Efficient, Sleek, Wellness-Focused Saunas</p>
+          <h1 className="wm-hero-title">{t("towerPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("towerPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
-            <BrochureDropdownButton text="EXPLORE HEATERS" href={menuPaths.sauna.heaters.parent} redirect />
+            <BrochureDropdownButton text={t("towerPage.hero.exploreButton")} href={menuPaths.sauna.heaters.parent} redirect />
           </div>
         </div>
       <HeroWave />
@@ -258,11 +263,9 @@ const Tower = () => {
       {/* INTRODUCING */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Introducing Our Premium Sauna Tower Heaters</h2>
+          <h2 className="wm-products-title">{t("towerPage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Indulge in modern, energy-efficient saunas designed for relaxation and wellness, with sleek
-            aesthetics and superior comfort. Experience superior heat distribution and elegant design
-            with our premium sauna tower heaters.
+            {t("towerPage.intro.desc")}
           </p>
         </div>
       </section>
@@ -272,7 +275,7 @@ const Tower = () => {
         <div className="wm-container">
           <div className="wm-filter-search-row">
             <div className="wm-filter-pills-group">
-              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
               {groupNames.map((g) => (
                 <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{g}</button>
               ))}
@@ -285,18 +288,23 @@ const Tower = () => {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search heaters..."
+                placeholder={tc("catalogFilter.searchPlaceholder", { category: t("towerPage.meta.title") })}
               />
               {search && (
-                <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                   <i className="fa-solid fa-xmark" />
                 </button>
               )}
             </div>
           </div>
           <div className="wm-filter-wrap" style={{ marginTop: "10px" }}>
-            {["All", "Round", "Wall", "Corner"].map((type) => (
-              <button key={type} className={`wm-filter-btn ${activeType === type ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveType(type)}>{type}</button>
+            {[
+              { value: "All", label: tc("catalogFilter.all") },
+              { value: "Round", label: t("towerPage.types.round") },
+              { value: "Wall", label: t("towerPage.types.wall") },
+              { value: "Corner", label: t("towerPage.types.corner") },
+            ].map(({ value, label }) => (
+              <button key={value} className={`wm-filter-btn ${activeType === value ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveType(value)}>{label}</button>
             ))}
           </div>
         </div>
@@ -311,7 +319,7 @@ const Tower = () => {
             </div>
           ) : Object.keys(filteredGroups).length === 0 ? (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No Tower heaters available.</p>
+              <p>{t("towerPage.empty")}</p>
             </div>
           ) : (
             groupNames.map((series, gi) => {
@@ -332,20 +340,20 @@ const Tower = () => {
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
+        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
       </section>
 
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
           <div className="wm-why-grid">
-            <div className="wm-why-left wm-why-card">
-              <p className="wm-eyebrow">SAWO HEATERS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
-              <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
-              <p className="wm-why-desc">User-Friendly Controls: Easily adjust temperature and time settings for your perfect sauna experience.</p>
+            <div className="wm-why-left">
+              <p className="wm-eyebrow">{t("towerPage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("towerPage.why.title")}</h2>
+              <p className="wm-why-desc">{t("towerPage.why.desc")}</p>
+              <p className="wm-why-desc">{t("towerPage.why.userFriendly")}</p>
               <div style={{ marginTop: "20px" }}>
-                <a href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Tower-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn wm-brochure-btn--inverse">VIEW BROCHURE</a>
+                <a href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Tower-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">{tc("viewBrochure")}</a>
               </div>
             </div>
             <div className="wm-why-right"><CirclesInfo /></div>
@@ -354,8 +362,8 @@ const Tower = () => {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title={t("towerPage.promo.title")}
+        subtitle={t("towerPage.promo.subtitle")}
         image={bannerImg}
       />
     </div>

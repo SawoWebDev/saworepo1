@@ -1,0 +1,56 @@
+{
+  "slug": "wave-wooden-backrest",
+  "productId": "5f84e59a-2642-45eb-b899-86614808bdbb",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "波浪形木质靠背",
+    "short_description": "SAWO 波浪形木质靠背是一款木质桑拿靠背，尺寸为 390 × 845mm，在桑拿过程中为颈部与背部提供支撑。",
+    "description": null,
+    "type": "头枕与靠背",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (506-2-D)",
+        "name": "雪松 (506-2-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (506-2-A)",
+        "name": "白杨 (506-2-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (506-2-H)",
+        "name": "铁杉 (506-2-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (506-2-BL)",
+        "name": "黑色 (506-2-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -60,6 +60,7 @@ import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -152,10 +153,11 @@ function SkeletonCard() {
 // ── Product card component ───────────────────────────────────────────
 function ProductCard({ product }) {
   const power = getPowerRange(product.tags);
+  const localize = useLocalizedPath();
 
   return (
     <Link
-      to={`/products/${product.slug}`}
+      to={localize(`/products/${product.slug}`)}
       className="wm-product-item"
       style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
     >
@@ -185,6 +187,9 @@ function ProductCard({ product }) {
 // ── Stone page ───────────────────────────────────────────────────────
 const Stone = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [activeGroup, setActiveGroup] = useState(null);
   const [search, setSearch] = useState("");
   const [heroLoaded, setHeroLoaded] = useState(false);
@@ -205,8 +210,8 @@ const Stone = () => {
   return (
     <div className="relative">
       <SEO
-        title="Stone Sauna Heaters"
-        description="SAWO Stone Series heaters combine durable stainless steel with heat-conducting Finnish soapstone for efficient heating and quick drying after use."
+        title={t("stonePage.meta.title")}
+        description={t("stonePage.meta.description")}
         path="/sauna/heaters/stone"
       />
       <style>{`
@@ -273,7 +278,7 @@ const Stone = () => {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Sauna Stone Series"
+          alt={t("stonePage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -284,11 +289,11 @@ const Stone = () => {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">SAUNA STONE SERIES</h1>
-          <p className="wm-hero-subtitle">Efficient, Sleek, Wellness-Focused Saunas.</p>
+          <h1 className="wm-hero-title">{t("stonePage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("stonePage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="EXPLORE HEATERS"
+              text={t("stonePage.hero.exploreButton")}
               href={menuPaths.sauna.heaters.parent}
               redirect
             />
@@ -300,12 +305,9 @@ const Stone = () => {
       {/* INTRODUCING */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Introducing Our Premium Sauna Stone Series</h2>
+          <h2 className="wm-products-title">{t("stonePage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Indulge in modern, energy-efficient saunas designed for relaxation and wellness, with sleek
-            aesthetics and superior comfort. Our Stone Heaters are made from all stone or a combination
-            of stainless steel and stone. You get excellent heat conduction from Finnish soapstone,
-            which enhances your sauna experience and dries your sauna room faster after use.
+            {t("stonePage.intro.desc")}
           </p>
         </div>
       </section>
@@ -316,7 +318,7 @@ const Stone = () => {
           <div className="wm-filter-search-row">
             {/* ── Filter pills ── */}
             <div className="wm-filter-pills-group">
-              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
               {groupNames.map((g) => (
                 <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>
                   {g}
@@ -332,10 +334,10 @@ const Stone = () => {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search heaters..."
+                placeholder={tc("catalogFilter.searchPlaceholder", { category: t("stonePage.meta.title") })}
               />
               {search && (
-                <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                   <i className="fa-solid fa-xmark" />
                 </button>
               )}
@@ -343,19 +345,15 @@ const Stone = () => {
           </div>
           {search && (
             <p className="wm-search-count">
-              {visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
-                const q = search.trim().toLowerCase();
-                return p.name?.toLowerCase().includes(q) || p.short_description?.toLowerCase().includes(q) || (p.categories || []).some(c => c.toLowerCase().includes(q));
-              })).length === 0
-                ? `No results for "${search}"`
-                : `${visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
+              {(() => {
+                const count = visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
                   const q = search.trim().toLowerCase();
                   return p.name?.toLowerCase().includes(q) || p.short_description?.toLowerCase().includes(q) || (p.categories || []).some(c => c.toLowerCase().includes(q));
-                })).length} result${visibleGroups.flatMap(g => (groupedProducts[g] || []).filter(p => {
-                  const q = search.trim().toLowerCase();
-                  return p.name?.toLowerCase().includes(q) || p.short_description?.toLowerCase().includes(q) || (p.categories || []).some(c => c.toLowerCase().includes(q));
-                })).length !== 1 ? "s" : ""} for "${search}"`
-              }
+                })).length;
+                return count === 0
+                  ? tc("catalogFilter.noResultsFor", { query: search })
+                  : tc("catalogFilter.resultsCount", { count, query: search });
+              })()}
             </p>
           )}
         </div>
@@ -370,7 +368,7 @@ const Stone = () => {
             </div>
           ) : visibleGroups.length === 0 ? (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No Stone heaters available.</p>
+              <p>{t("stonePage.empty")}</p>
             </div>
           ) : (
             visibleGroups.map((brand, gi) => {
@@ -399,7 +397,7 @@ const Stone = () => {
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
+        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
       </section>
 
       {/* WHY SAWO */}
@@ -407,12 +405,12 @@ const Stone = () => {
         <div className="wm-container">
           <div className="wm-why-grid">
             <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO HEATERS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
-              <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
-              <p className="wm-why-desc">Durable Construction: High-quality materials ensure long-lasting performance.</p>
+              <p className="wm-eyebrow">{t("stonePage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("stonePage.why.title")}</h2>
+              <p className="wm-why-desc">{t("stonePage.why.desc")}</p>
+              <p className="wm-why-desc">{t("stonePage.why.durable")}</p>
               <div style={{ marginTop: "20px" }}>
-                <a href="https://www.sawo.com/wp-content/uploads/2026/07/Stone-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
+                <a href="https://www.sawo.com/wp-content/uploads/2026/07/Stone-Series-2026.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">{tc("viewBrochure")}</a>
               </div>
             </div>
             <div className="wm-why-right"><CirclesInfo /></div>
@@ -421,8 +419,8 @@ const Stone = () => {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title={t("stonePage.promo.title")}
+        subtitle={t("stonePage.promo.subtitle")}
         image={bannerImg}
       />
     </div>

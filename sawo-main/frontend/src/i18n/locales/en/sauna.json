@@ -137,6 +137,90 @@
       "subtitle": "Find your perfect control from our full range of SAWO solutions"
     }
   },
+  "wallMountedPage": {
+    "meta": {
+      "title": "Wall-Mounted Sauna Heaters",
+      "description": "Browse SAWO wall-mounted sauna heaters: Nordex, Mini, Scandia, Krios and Scandifire series in robust, space-saving designs for small and medium saunas."
+    },
+    "hero": {
+      "title": "WALL-MOUNTED SAUNA HEATERS",
+      "subtitle": "Space-saving sleek modern designs",
+      "alt": "Wall-Mounted Sauna Heaters",
+      "exploreButton": "EXPLORE HEATERS"
+    },
+    "intro": {
+      "title": "Introducing Our Premium Wall Mounted Heaters",
+      "desc": "Our wall-mounted heaters are crafted for those who love the traditional dry and hot sauna experience. This series of classic heaters boasts of robust, space-saving models for small and medium-sized saunas."
+    },
+    "why": {
+      "eyebrow": "SAWO HEATERS",
+      "title": "Why Choose SAWO Heaters",
+      "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time."
+    },
+    "promo": {
+      "title": "Experience Ultimate Relaxation",
+      "subtitle": "Find your source of serenity from over 100 heater models"
+    }
+  },
+  "stonePage": {
+    "meta": {
+      "title": "Stone Sauna Heaters",
+      "description": "SAWO Stone Series heaters combine durable stainless steel with heat-conducting Finnish soapstone for efficient heating and quick drying after use."
+    },
+    "hero": {
+      "title": "SAUNA STONE SERIES",
+      "subtitle": "Efficient, Sleek, Wellness-Focused Saunas.",
+      "alt": "Sauna Stone Series",
+      "exploreButton": "EXPLORE HEATERS"
+    },
+    "intro": {
+      "title": "Introducing Our Premium Sauna Stone Series",
+      "desc": "Indulge in modern, energy-efficient saunas designed for relaxation and wellness, with sleek aesthetics and superior comfort. Our Stone Heaters are made from all stone or a combination of stainless steel and stone. You get excellent heat conduction from Finnish soapstone, which enhances your sauna experience and dries your sauna room faster after use."
+    },
+    "why": {
+      "eyebrow": "SAWO HEATERS",
+      "title": "Why Choose SAWO Heaters",
+      "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.",
+      "durable": "Durable Construction: High-quality materials ensure long-lasting performance."
+    },
+    "promo": {
+      "title": "Experience Ultimate Relaxation",
+      "subtitle": "Find your source of serenity from over 100 heater models"
+    },
+    "empty": "No Stone heaters available."
+  },
+  "towerPage": {
+    "meta": {
+      "title": "Tower Sauna Heaters",
+      "description": "Explore SAWO Tower Series sauna heaters: energy-efficient, sleek vertical designs with superior heat distribution for a modern wellness sauna experience."
+    },
+    "hero": {
+      "title": "TOWER SAUNA HEATERS",
+      "subtitle": "Efficient, Sleek, Wellness-Focused Saunas",
+      "alt": "Tower Sauna Heaters",
+      "exploreButton": "EXPLORE HEATERS"
+    },
+    "intro": {
+      "title": "Introducing Our Premium Sauna Tower Heaters",
+      "desc": "Indulge in modern, energy-efficient saunas designed for relaxation and wellness, with sleek aesthetics and superior comfort. Experience superior heat distribution and elegant design with our premium sauna tower heaters."
+    },
+    "types": {
+      "round": "Round",
+      "wall": "Wall",
+      "corner": "Corner"
+    },
+    "why": {
+      "eyebrow": "SAWO HEATERS",
+      "title": "Why Choose SAWO Heaters",
+      "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.",
+      "userFriendly": "User-Friendly Controls: Easily adjust temperature and time settings for your perfect sauna experience."
+    },
+    "promo": {
+      "title": "Experience Ultimate Relaxation",
+      "subtitle": "Find your source of serenity from over 100 heater models"
+    },
+    "empty": "No Tower heaters available."
+  },
   "roomsPage": {
     "meta": {
       "title": "Sauna Rooms",

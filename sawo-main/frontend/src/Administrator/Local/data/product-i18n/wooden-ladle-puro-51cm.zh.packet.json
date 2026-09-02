@@ -1,0 +1,49 @@
+{
+  "slug": "wooden-ladle-puro-51cm",
+  "productId": "5ee2ff74-66cc-4b37-90ae-0a031be62e29",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "Puro 木质桑拿勺 51cm",
+    "short_description": "SAWO Puro 木质桑拿勺 51cm 长度为 510mm，用于将水（löyly）浇在加热的桑拿石上。",
+    "description": null,
+    "type": "桑拿勺",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (459-D)",
+        "name": "雪松 (459-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (459-H)",
+        "name": "铁杉 (459-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (459-BL)",
+        "name": "黑色 (459-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "aries-corner-black-nb",
+  "productId": "242d9eb5-907f-4be2-a371-5db18c96d548",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Kulma Musta NB",
+    "short_description": "<div><span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\"><b>Aries Kulma</b></strong><span style=\"text-align: justify;\"> on minimalistinen mutta tyylikäs tilaa säästävä kiuas. Se on suunniteltu saumattomaan kulma-asennukseen, joka maksimoi saunahuoneen tilan ja lisää kylpijöiden mukavuutta perusteellisesti virkistävien saunahetkien aikaansaamiseksi. Sisäänrakennettu kivivälike varmistaa saunakiville lyhyemmän kuumenemisajan ja pidemmän käyttöiän lämmityselementeille.</span>\n</div>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"2\">Vähimmäisturvaetäisyydet<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-CNR-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-CNR-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>AR13-75NB-CNR-BL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-CNR-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries Kulma",
+    "features": [
+      "Tehoalue: 4.5 – 9.0kW",
+      "Saatavilla oleva ohjaus: Sisäänrakennettu (NB)",
+      "Sisäänrakennettu kivivälike",
+      "Säädettävät jalat",
+      "Musta metallikuori",
+      "Valinnainen kiuassuoja",
+      "Valinnainen liitosrengas"
+    ]
+  }
+}

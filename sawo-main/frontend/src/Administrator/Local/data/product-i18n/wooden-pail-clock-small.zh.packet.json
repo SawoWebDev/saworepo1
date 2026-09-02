@@ -1,0 +1,49 @@
+{
+  "slug": "wooden-pail-clock-small",
+  "productId": "43bf6c55-cc7d-4499-b506-22555acbb252",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "木质水桶造型时钟（小号）",
+    "short_description": "SAWO 木质水桶造型时钟（小号）形似迷你桑拿水桶，尺寸为 Ø230 x H40mm，专为承受桑拿房的高温高湿环境而打造。",
+    "description": null,
+    "type": "时钟与计时器",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (531-D)",
+        "name": "雪松 (531-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (531-A)",
+        "name": "白杨 (531-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (531-H)",
+        "name": "铁杉 (531-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
