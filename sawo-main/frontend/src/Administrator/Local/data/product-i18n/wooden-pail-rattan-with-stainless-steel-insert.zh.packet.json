@@ -1,0 +1,68 @@
+{
+  "slug": "wooden-pail-rattan-with-stainless-steel-insert",
+  "productId": "b3930449-d682-4f53-92ad-ad4f0b0f3837",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Pails"
+    },
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (371-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (371-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (371-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "藤编不锈钢内衬木质水桶",
+    "short_description": "SAWO 藤编不锈钢内衬木质水桶是一款配不锈钢内衬的木质水桶，容量为 5 升，用于盛放浇在桑拿石上的水。",
+    "description": null,
+    "type": "水桶",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (371-MD)",
+        "name": "雪松 (371-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (371-MA)",
+        "name": "白杨 (371-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (371-MH)",
+        "name": "铁杉 (371-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

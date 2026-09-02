@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-cubos-corner",
+  "productId": "ec095908-9634-49d1-8934-84c9098056e6",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Heater Guard – Cubos Corner",
+    "short_description": "The Heater Guard are precaution measure against accidental contact with the heater while integration collars add accent and beauty to your sauna interior. Guard rails are made from Hemlock wood and are mounted to the heater.",
+    "description": null,
+    "type": "Heater Guard",
+    "spec_table_headers": [
+      "Model",
+      "Material",
+      "Length (mm)",
+      "Width (mm)",
+      "Height (mm)"
+    ]
+  }
+}

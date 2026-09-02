@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-aries-round",
+  "productId": "81157825-082f-4838-ab54-3bb8293c6311",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Heater Guard – Aries Round",
+    "short_description": "The Heater Guard is a safety feature designed to minimize the risk of burns. Built from heat-resistant Hemlock, it provides a protective barrier while enhancing a heater's aesthetic appeal.",
+    "description": null,
+    "type": "Heater Guard",
+    "spec_table_headers": [
+      "Model",
+      "Material",
+      "Length (mm)",
+      "Width (mm)",
+      "Height (mm)"
+    ]
+  }
+}

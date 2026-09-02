@@ -1,0 +1,56 @@
+{
+  "slug": "steamwater-pail-4l",
+  "productId": "5c4b96c1-50af-45c8-82c9-1c799aee7b98",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Pails"
+    },
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (342-D-DRF)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Black (342-BL-DRF)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Steamwater 水桶 4L",
+    "short_description": "SAWO Steamwater 水桶 4L 容量为 4 升，用于盛放浇在桑拿石上的水。",
+    "description": null,
+    "type": "水桶",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (342-D-DRF)",
+        "name": "雪松 (342-D-DRF)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Black (342-BL-DRF)",
+        "name": "黑色 (342-BL-DRF)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

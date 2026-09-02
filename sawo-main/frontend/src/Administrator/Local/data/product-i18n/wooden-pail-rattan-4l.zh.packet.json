@@ -1,0 +1,68 @@
+{
+  "slug": "wooden-pail-rattan-4l",
+  "productId": "ec3d0259-a4be-4795-9343-ecab6dcbbd00",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Pails"
+    },
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (341-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (341-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (341-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "藤编木质水桶 4L",
+    "short_description": "SAWO 藤编木质水桶 4L 容量为 4 升，用于盛放浇在桑拿石上的水。",
+    "description": null,
+    "type": "水桶",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (341-D)",
+        "name": "雪松 (341-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (341-A)",
+        "name": "白杨 (341-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (341-H)",
+        "name": "铁杉 (341-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

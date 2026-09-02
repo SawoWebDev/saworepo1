@@ -1,0 +1,68 @@
+{
+  "slug": "wooden-pail-28l",
+  "productId": "2aa91307-4a57-4e96-a3b6-08eb0f02c58c",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Pails"
+    },
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (391-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (391-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (391-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木质水桶 28L",
+    "short_description": "SAWO 木质水桶 28L 容量为 28 升，用于盛放浇在桑拿石上的水。",
+    "description": null,
+    "type": "水桶",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (391-D)",
+        "name": "雪松 (391-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (391-A)",
+        "name": "白杨 (391-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (391-H)",
+        "name": "铁杉 (391-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

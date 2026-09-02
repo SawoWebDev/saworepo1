@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-light-cover-square-910sd",
+  "productId": "c98bff56-b07b-4acc-8f5a-28106e53e332",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (910-SD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (910-SA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (910-SH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Wooden Light Cover Square",
+    "short_description": "The SAWO Wooden Light Cover Square is a wooden sauna light cover measuring 250 × 75mm, fitted over a light fixture to diffuse illumination evenly inside the sauna.",
+    "description": null,
+    "type": "Sauna Lights",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (910-SD)",
+        "name": "雪松 (910-SD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (910-SA)",
+        "name": "白杨 (910-SA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (910-SH)",
+        "name": "铁杉 (910-SH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
