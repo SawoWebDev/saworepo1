@@ -88,6 +88,8 @@ export default function Kivistone() {
     const visible  = localProds.filter(p => isPubliclyVisible(p));
     const filtered = applyDisplayFilter(visible);
     return [...filtered].sort((a, b) => {
+      const fA = a.featured ? 1 : 0, fB = b.featured ? 1 : 0;
+      if (fA !== fB) return fB - fA;
       const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;
       if (sA !== sB) return sA - sB;
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
