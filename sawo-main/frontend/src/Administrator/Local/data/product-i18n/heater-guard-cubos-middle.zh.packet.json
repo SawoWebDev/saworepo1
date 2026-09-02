@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-cubos-middle",
+  "productId": "46d89d1e-e466-4eff-a15d-2a8334cfb08e",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Heater Guard – Cubos Middle",
+    "short_description": "The Heater Guard is a safety feature designed to minimize the risk of burns. Built from heat-resistant Hemlock, it provides a protective barrier while enhancing a heater's aesthetic appeal. The Cubos heater guards are designed for installations in the middle of the sauna room, along the wall, and in the corner.",
+    "description": null,
+    "type": "Heater Guard",
+    "spec_table_headers": [
+      "Model",
+      "Material",
+      "Length (mm)",
+      "Width (mm)",
+      "Height (mm)"
+    ]
+  }
+}

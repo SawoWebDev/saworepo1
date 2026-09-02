@@ -1,0 +1,20 @@
+{
+  "slug": "integration-collar-corner-wooden",
+  "productId": "7ed5ce24-c12c-40be-8003-582635d5261c",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Integration Collar – Corner (Wooden)",
+    "short_description": "The Integration Collar enhances the aesthetic of heaters installed into a bench, giving them a seamless, built-in look. Built from durable Hemlock, it complements the sauna's natural design while maintaining structural integrity and heat resistance.",
+    "description": null,
+    "type": "Integration Collar",
+    "spec_table_headers": [
+      "Model",
+      "Material",
+      "Length (mm)",
+      "Width (mm)",
+      "Height (mm)"
+    ]
+  }
+}

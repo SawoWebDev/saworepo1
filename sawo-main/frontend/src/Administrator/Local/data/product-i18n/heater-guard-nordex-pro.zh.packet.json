@@ -1,0 +1,40 @@
+{
+  "slug": "heater-guard-nordex-pro",
+  "productId": "78cb4822-6df3-47e4-b7d1-a1c011746259",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (NRN-PRO-GUARD-W-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (NRN-PRO-GUARD-W-A)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Heater Guard – Nordex Pro",
+    "short_description": "The Heater Guard is a safety feature designed to minimize the risk of burns. Built from heat-resistant woods such as cedar or aspen, they provide a protective barrier while enhancing a heater's aesthetic appeal.",
+    "description": null,
+    "type": "Heater Guard",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (NRN-PRO-GUARD-W-D)",
+        "name": "雪松 (NRN-PRO-GUARD-W-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (NRN-PRO-GUARD-W-A)",
+        "name": "白杨 (NRN-PRO-GUARD-W-A)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

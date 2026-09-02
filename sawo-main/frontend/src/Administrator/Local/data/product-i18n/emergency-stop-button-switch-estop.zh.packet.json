@@ -1,0 +1,13 @@
+{
+  "slug": "emergency-stop-button-switch-estop",
+  "productId": "14ff030c-e163-4db1-b9e4-951525d50ecb",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Emergency Stop Button Switch (ESTOP)",
+    "short_description": "The emergency button allows to switch off the sauna heater via the overheating safety circuit. Additionally in an emergency case an alarm via an optional signalling equipment may be triggered, e.g. to draw attention of the supervising staff in a remote location. Please make sure to observe the applicable norms and legal requirements, for instance EN 60335-1, EN 60335-2-53, VDE 0100 part 703 and the requirements of the local energy supplier.",
+    "description": null,
+    "type": "Safety Switch"
+  }
+}

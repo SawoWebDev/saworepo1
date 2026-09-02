@@ -1,0 +1,19 @@
+{
+  "slug": "integration-collar-round-v2-stainless",
+  "productId": "aafbd2ce-bed3-4876-9bf2-0ad0096351ba",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Integration Collar – Round V2 (Stainless)",
+    "short_description": "The Round Stainless Collar enhances the aesthetic of heaters installed into a bench, giving them a seamless, built-in look. The collars are built from various materials, carefully chosen to complement a sauna room's design. Options include sleek, hairline-finish stainless steel, natural soft soapstone, and durable laminated wood.",
+    "description": null,
+    "type": "Integration Collar",
+    "spec_table_headers": [
+      "Model",
+      "Length (mm)",
+      "Width (mm)",
+      "Height (mm)"
+    ]
+  }
+}

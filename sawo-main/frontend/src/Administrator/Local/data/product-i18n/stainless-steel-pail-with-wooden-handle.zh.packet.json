@@ -1,0 +1,68 @@
+{
+  "slug": "stainless-steel-pail-with-wooden-handle",
+  "productId": "f9acca66-3b8a-496b-918f-362d39274668",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Pails"
+    },
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (375-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (375-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (375-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木柄不锈钢水桶",
+    "short_description": "SAWO 木柄不锈钢水桶是一款配不锈钢内衬的木质水桶，容量为 5 升，用于盛放浇在桑拿石上的水。",
+    "description": null,
+    "type": "水桶",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (375-MD)",
+        "name": "雪松 (375-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (375-MA)",
+        "name": "白杨 (375-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (375-MH)",
+        "name": "铁杉 (375-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

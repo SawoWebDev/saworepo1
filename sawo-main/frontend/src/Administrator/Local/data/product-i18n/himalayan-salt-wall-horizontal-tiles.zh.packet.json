@@ -1,0 +1,64 @@
+{
+  "slug": "himalayan-salt-wall-horizontal-tiles",
+  "productId": "699f2e62-2eee-43e9-b6e7-b6762b0f1e78",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (HIM-SWL-375-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (HIM-SWL-375-1-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (HIM-SWL-375-1-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Himalayan Salt Wall Horizontal Tiles",
+    "short_description": "The SAWO Himalayan Salt Wall Horizontal Tiles is a Himalayan salt wall tile measuring 675mm (L) x 375mm (W) x 60mm (D), installed to diffuse a soft glow when backlit inside the sauna.",
+    "description": null,
+    "type": "Sauna Lights",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (HIM-SWL-375-1)",
+        "name": "雪松 (HIM-SWL-375-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (HIM-SWL-375-1-H)",
+        "name": "铁杉 (HIM-SWL-375-1-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (HIM-SWL-375-1-BL)",
+        "name": "黑色 (HIM-SWL-375-1-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
