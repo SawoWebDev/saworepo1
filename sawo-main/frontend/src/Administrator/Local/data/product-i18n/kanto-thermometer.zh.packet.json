@@ -1,0 +1,64 @@
+{
+  "slug": "kanto-thermometer",
+  "productId": "c5848ca8-1465-4e44-8b43-0773bc2cd68a",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (104-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "White (104-TWH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (104-TBL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kanto 温度计",
+    "short_description": "SAWO Kanto 温度计 是一款桑拿温度计，尺寸为 125 × 125mm，用于监测桑拿房内的温度。",
+    "description": null,
+    "type": "温度计",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (104-TD)",
+        "name": "雪松 (104-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "White (104-TWH)",
+        "name": "白色 (104-TWH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (104-TBL)",
+        "name": "黑色 (104-TBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-door-handle-big-round",
+  "productId": "bded57b2-b8d4-414f-94f5-cfb838a8decd",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (566-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (566-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (566-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "大号圆形木质门拉手",
+    "short_description": "SAWO 大号圆形木质门拉手是一款木质桑拿门拉手，尺寸为 Ø90 x W50mm，专为在桑拿房高温环境中保持触感清凉而设计。",
+    "description": null,
+    "type": "门与拉手",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (566-D)",
+        "name": "雪松 (566-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (566-A)",
+        "name": "白杨 (566-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (566-H)",
+        "name": "铁杉 (566-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "square-thermometer",
+  "productId": "0c09b668-0e5c-4004-89b1-70970c23aeaf",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (223-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (223-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (223-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "方形温度计",
+    "short_description": "SAWO 方形温度计 是一款桑拿温度计，尺寸为 140 × 140mm，用于监测桑拿房内的温度。",
+    "description": null,
+    "type": "温度计",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (223-TD)",
+        "name": "雪松 (223-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (223-TA)",
+        "name": "白杨 (223-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (223-TH)",
+        "name": "铁杉 (223-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

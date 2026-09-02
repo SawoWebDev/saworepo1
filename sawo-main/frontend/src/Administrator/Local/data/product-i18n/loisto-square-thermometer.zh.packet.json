@@ -1,0 +1,40 @@
+{
+  "slug": "loisto-square-thermometer",
+  "productId": "a569c0c8-934b-47f5-8bc8-605d88e07f7f",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (108-TD)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Loisto 方形温度计",
+    "short_description": "SAWO Loisto 方形温度计 是一款桑拿温度计，尺寸为 110 × 85mm，用于监测桑拿房内的温度。",
+    "description": null,
+    "type": "温度计",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (108-TD)",
+        "name": "雪松 (108-TD)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -629,6 +629,86 @@ Chinese equivalent exists in the site's copy, so preserved rather than
 inventing one. Post-batch count: **193 of 380 products still missing
 `zh`** (down from 208). Ladles category is now fully done for `zh`.
 
+**Source bug cleanup (2026-09-02)**: both previously-flagged-not-fixed
+English source bugs are now fixed directly in the `products` table, per
+user request. (1) `nimbus-combi-ns.description` — the `"kW$1<br>Heater"`
+/ `"kW$1<br>Tank"` template artifact (2 occurrences) replaced with plain
+`"kW"`. (2) `cumulus-nb`/`cumulus-ni2`/`cumulus-ns.short_description` —
+the "wall-mounted with heater" double-word and orphaned "It comes"
+clause fixed to read: "The Cumulus is an elegant minimalist wall-mounted
+heater with stainless steel casing accented by a decorative Finnish
+soapstone front. The soapstone helps to heat the stones faster and
+store the heat longer. With a built-in aroma cup, the Cumulus is a
+smart option for adding a touch of spa to sauna sessions through
+aromatherapy." No translation content needed to change — both `zh`
+translations (and Cumulus's existing `fi`) were already translated by
+*intended* meaning per the original flagging note, so they already read
+correctly. Re-ran `product-i18n.js apply` for all 4 products (zh) +
+3 Cumulus (fi) with their existing packets, purely to refresh
+`source_field_hashes` against the corrected English source — otherwise
+`/admin/translations` would have flagged all of them "stale" the moment
+the English changed, even though nothing was actually wrong. Verified
+via SQL: neither bug string exists in the `products` table anymore.
+
+### Tooling upgrade (2026-09-02) — read this before starting a new batch
+
+User asked for the remaining-228-products pace to be sped up. Three
+changes landed, all documented in full in the new
+`PRODUCT-TRANSLATION-CONVENTIONS.md` (read that file before translating
+anything — this entry is just the changelog pointer):
+
+1. **`product-i18n.js` gained `pending`, `extract-many`, and
+   `apply-many` commands.** `pending <locale> [category]` replaces the
+   hand-written SQL query every batch used to start with. `extract-many`/
+   `apply-many <locale> <slugs|->` loop the existing extract/apply logic
+   over a whole slug list in one Node process (accepts a comma list or
+   `-` for stdin, so `pending`'s output pipes straight in) instead of one
+   process launch per product.
+2. **A `MATERIAL_WORD_DICTIONARY` (zh) auto-translates variation names**
+   shaped `"<Material/Color> (<model code>)"` — the single biggest
+   source of repeated hand-translation, since the model code makes each
+   full string unique to translation_memory's exact-match lookup even
+   though the material word itself repeats constantly. Marked in a
+   packet's `tmPrefilled` with `"via": "material-dictionary"`. Currently
+   covers Cedar/Aspen/Hemlock/Alder/Pine/Spruce/Birch/Black/White/
+   Grey/Silver/Natural/Aluminum/"Black Metal" — extend it in
+   `product-i18n.js` (search `MATERIAL_WORD_DICTIONARY`) the moment a
+   new one shows up rather than only hand-fixing that one packet.
+3. **`PRODUCT-TRANSLATION-CONVENTIONS.md`** (new file, repo root)
+   consolidates every naming rule from this log into one reference doc
+   — which brand/product-line names stay English, common header/feature
+   phrase translations, the prose-vs-data table-header rule, how to
+   handle a templated micro-category with a one-off fill script instead
+   of hand-editing JSON, and the source-bug-fixing rule. Point any new
+   session or parallel agent at this file first.
+
+Parallel-agent note: 3 agents were launched to translate Thermometers/
+Doors & Handles/Benches concurrently as a first test of this approach.
+All 3 were killed by a session interruption before finishing — they
+had run `extract-many` (packets exist) but none had translated or
+applied anything. Not a tooling failure, just bad timing; re-verified
+via `pending` (all 3 categories still showed 100% missing) before
+redoing the work directly rather than trusting the "launched" state.
+Worth retrying agent parallelization once a session isn't expected to
+be interrupted mid-run — the CLI tooling itself worked fine when driven
+directly (see Batch 4 below, same categories, done in one session).
+
+**Batch 4 — 65 products across 4 categories (2026-09-02)**: Pails ×3
+(`dragon-pail-9l`, `usva`, `kanto` — done by hand while validating the
+new CLI commands), **Thermometers, complete (26/26)**, **Benches,
+complete (11/11)**, **Doors & Handles, complete (25/25)**. Thermometers/
+Benches/Doors & Handles were each filled via a one-off Node fill script
+per the new "templated micro-categories" convention (see
+`PRODUCT-TRANSLATION-CONVENTIONS.md`) rather than hand-editing 62
+packets individually — each script hand-maps `name` per slug and
+derives `short_description` from the English source's own dimensions/
+flags via regex, not from guessing. New `type` translations added:
+Thermometers → 温度计, Benches → 长椅, Doors & Handles → 门与拉手, Pails →
+水桶. All 65 verified via SQL (`product_translations` rows present,
+`source_field_hashes` populated) and via `pending` reporting 0 for all
+three categories. Post-batch count: **128 of 380 products still missing
+`zh`** (down from 193).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

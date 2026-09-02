@@ -1,0 +1,52 @@
+{
+  "slug": "wooden-stripe-sauna-door-wide",
+  "productId": "95a7fb29-9d67-4f78-ae7c-4025240495f2",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (771-4SD-R)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Cedar (771-4SD-L)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "宽版条纹实木桑拿门",
+    "short_description": "SAWO 宽版条纹实木桑拿门是一款桑拿门，开口尺寸 915 × 2030mm，门框尺寸 1005 × 2120mm。",
+    "description": null,
+    "type": "门与拉手",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (771-4SD-R)",
+        "name": "雪松 (771-4SD-R)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Cedar (771-4SD-L)",
+        "name": "雪松 (771-4SD-L)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

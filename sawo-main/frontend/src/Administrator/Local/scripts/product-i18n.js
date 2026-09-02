@@ -62,6 +62,60 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 const PACKET_DIR = path.join(__dirname, "..", "data", "product-i18n");
 if (!fs.existsSync(PACKET_DIR)) fs.mkdirSync(PACKET_DIR, { recursive: true });
 
+// ── material/color word dictionary ──────────────────────────────────────
+// Variation names in this catalog are almost always "<Material/Color>
+// (<model code>)" (e.g. "Cedar (513-D)", "Black (449-BL)") — the code is
+// per-product-unique, so translation_memory's exact-string match never
+// hits on the full name even though the material word itself repeats
+// hundreds of times across the catalog. Established during the 2026-09-02
+// zh push (see I18N-CHECKLIST.md's naming-convention notes) — every one of
+// these words was hand-translated the same way across every category
+// (Ladles, Headrest & Backrest, Clocks & Timers, Wooden Floor Mats,
+// Accessory Sets, Cloth Hangers). Codifying them here so buildPacket()
+// below can auto-fill the word and leave the code untouched, instead of
+// every future product re-deriving the same translation by hand.
+// Extend this per-locale as more locales get a real translation pass.
+const MATERIAL_WORD_DICTIONARY = {
+  zh: {
+    Cedar: "雪松",
+    Aspen: "白杨",
+    Hemlock: "铁杉",
+    Alder: "桤木",
+    Pine: "松木",
+    Spruce: "云杉",
+    Birch: "桦木",
+    Black: "黑色",
+    White: "白色",
+    Grey: "灰色",
+    Gray: "灰色",
+    Silver: "银色",
+    Natural: "原木色",
+    Aluminum: "铝合金",
+    "Black Metal": "黑色金属",
+  },
+};
+
+// Matches "<Word>" or "<Word> (<anything>)" where <Word> is 1-2 plain
+// English words (no digits/symbols) — deliberately narrow so it only ever
+// fires on the material/color pattern, never on a real product name like
+// "Nordex S Combi NS" or "Loisto Wooden Clock Round".
+const MATERIAL_NAME_RE = /^([A-Za-z]+(?:\s[A-Za-z]+)?)(\s*\(.+\))?$/;
+
+// Returns a translated variation name if `name` is exactly a known
+// material/color word (optionally followed by "(model code)"), else null.
+// Only called as a fallback when translation_memory had no exact-string
+// hit — a real TM hit (e.g. from an identical name on a sibling product)
+// always wins, this is strictly for the case TM structurally can't cover.
+function materialWordFallback(name, locale) {
+  const dict = MATERIAL_WORD_DICTIONARY[locale];
+  if (!dict || !name) return null;
+  const m = name.match(MATERIAL_NAME_RE);
+  if (!m) return null;
+  const word = dict[m[1]];
+  if (!word) return null;
+  return m[2] ? `${word} ${m[2].trim()}` : word;
+}
+
 // ── translation memory ──────────────────────────────────────────────────
 // This catalog's product copy is heavily boilerplated within and across
 // products in the same category (spec-table headers, feature bullets,
@@ -122,7 +176,7 @@ async function fetchProduct(slug) {
 
 // ── extract ──────────────────────────────────────────────────────────────
 
-function buildPacket(product, tm, hits) {
+function buildPacket(product, tm, hits, locale) {
   const fields = {
     name: tmLookup(product.name, tm, hits, "name") || null,
     short_description: tmLookup(product.short_description, tm, hits, "short_description") || null, // HTML — translate text nodes, keep tags
@@ -144,10 +198,22 @@ function buildPacket(product, tm, hits) {
 
   const variationGroups = getVariationGroups(product);
   if (variationGroups.length > 0) {
-    fields.variations = variationGroups.map((g, i) => ({
+    fields.variations = variationGroups.map((g, i) => {
+      let name = tmLookup(g.name, tm, hits, `variations[${i}].name`) || null;
+      // TM had no exact hit (name includes a unique model code) — fall back
+      // to the material/color word dictionary before giving up and leaving
+      // it as untranslated English for the human/agent to fill in.
+      if (name === g.name) {
+        const fallback = materialWordFallback(g.name, locale);
+        if (fallback) {
+          name = fallback;
+          hits.push({ path: `variations[${i}].name`, source: g.name, via: "material-dictionary" });
+        }
+      }
+      return {
       index: i,
       _english_name: g.name || null, // reference only — apply matches by index, not this
-      name: tmLookup(g.name, tm, hits, `variations[${i}].name`) || null,
+      name,
       description: tmLookup(g.description, tm, hits, `variations[${i}].description`) || null,
       features: Array.isArray(g.features)
         ? g.features.map((s, fi) => tmLookup(s, tm, hits, `variations[${i}].features[${fi}]`))
@@ -155,7 +221,8 @@ function buildPacket(product, tm, hits) {
       spec_table_headers: g.spec_table?.headers?.length > 0
         ? g.spec_table.headers.map((s, hi) => tmLookup(s, tm, hits, `variations[${i}].spec_table_headers[${hi}]`))
         : undefined,
-    }));
+      };
+    });
   }
 
   if (Array.isArray(product.included_items) && product.included_items.length > 0) {
@@ -181,7 +248,7 @@ async function extract(slug, locale = "fi") {
     instructions:
       `Replace every remaining ENGLISH string value below with its ${locale} translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).`,
     tmPrefilled: hits,
-    fields: buildPacket(product, tm, hits),
+    fields: buildPacket(product, tm, hits, locale),
   };
   const outFile = path.join(PACKET_DIR, `${slug}.${locale}.packet.json`);
   fs.writeFileSync(outFile, JSON.stringify(packet, null, 2), "utf8");
@@ -350,23 +417,139 @@ async function apply(slug, locale, packetPathArg) {
   await upsertTM(collectTmPairs(product, f), locale, product.id);
 }
 
+// ── pending ──────────────────────────────────────────────────────────────
+// Lists published+visible+not-deleted product slugs in `category` that
+// don't yet have a product_translations row for `locale`. Replaces the
+// one-off inline SQL query re-written by hand at the start of every batch
+// (see I18N-CHECKLIST.md's Batch 1-3 entries) with a single command —
+// same filter logic (status=published, visible=true, is_deleted=false)
+// each of those batches used.
+async function pending(locale, category) {
+  const { data: prods, error } = await supabase
+    .from("products")
+    .select("slug, name, categories, is_deleted")
+    .eq("status", "published")
+    .eq("visible", true);
+  if (error) throw new Error(`Listing products: ${error.message}`);
+  const notDeleted = (prods || []).filter((p) => !p.is_deleted);
+  const inCategory = category
+    ? notDeleted.filter((p) => (p.categories || []).includes(category))
+    : notDeleted;
+
+  const { data: tr, error: e2 } = await supabase
+    .from("product_translations")
+    .select("product_id")
+    .eq("locale", locale);
+  if (e2) throw new Error(`Listing translations: ${e2.message}`);
+
+  // Need product_id, not slug, to diff — re-select with id included.
+  const { data: prodsWithId, error: e3 } = await supabase
+    .from("products")
+    .select("id, slug")
+    .in("slug", inCategory.map((p) => p.slug));
+  if (e3) throw new Error(`Listing product ids: ${e3.message}`);
+  const trSet = new Set((tr || []).map((t) => t.product_id));
+  const missing = prodsWithId.filter((p) => !trSet.has(p.id)).map((p) => p.slug);
+
+  if (category) console.log(`Category "${category}": ${inCategory.length} total, ${missing.length} missing ${locale}.`);
+  else console.log(`${inCategory.length} total, ${missing.length} missing ${locale}.`);
+  missing.forEach((s) => console.log(s));
+}
+
+// ── extract-many / apply-many ───────────────────────────────────────────
+// Same extract()/apply() as above, looped over a slug list within ONE node
+// process instead of one process launch per product — the actual
+// bottleneck was never CPU time, it was ~259 separate `node product-i18n.js
+// ...` invocations across a session. `slugsArg` is comma-separated, or "-"
+// to read one slug per line from stdin (so `pending`'s output can be piped
+// straight in: `node product-i18n.js pending zh "Doors & Handles" | tail -n
+// +2 | node product-i18n.js extract-many zh -`).
+function readSlugList(slugsArg) {
+  if (slugsArg === "-") {
+    return fs.readFileSync(0, "utf8").split("\n").map((s) => s.trim()).filter(Boolean);
+  }
+  return slugsArg.split(",").map((s) => s.trim()).filter(Boolean);
+}
+
+async function extractMany(locale, slugsArg) {
+  const slugs = readSlugList(slugsArg);
+  console.log(`Extracting ${slugs.length} product(s) into ${locale} packets...`);
+  let prefilled = 0;
+  for (const s of slugs) {
+    try {
+      const product = await fetchProduct(s);
+      const tm = await loadTM(locale);
+      const hits = [];
+      const packet = {
+        slug: s,
+        productId: product.id,
+        locale,
+        instructions:
+          `Replace every remaining ENGLISH string value below with its ${locale} translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).`,
+        tmPrefilled: hits,
+        fields: buildPacket(product, tm, hits, locale),
+      };
+      const outFile = path.join(PACKET_DIR, `${s}.${locale}.packet.json`);
+      fs.writeFileSync(outFile, JSON.stringify(packet, null, 2), "utf8");
+      prefilled += hits.length;
+      console.log(`  ${s}: wrote packet, ${hits.length} field(s) pre-filled`);
+    } catch (err) {
+      console.error(`  ${s}: FAILED — ${err.message}`);
+    }
+  }
+  console.log(`Done. ${prefilled} total field(s) pre-filled across ${slugs.length} product(s) — review packets in ${PACKET_DIR}, then apply-many.`);
+}
+
+async function applyMany(locale, slugsArg) {
+  const slugs = readSlugList(slugsArg);
+  console.log(`Applying ${slugs.length} product(s) for ${locale}...`);
+  let ok = 0;
+  for (const s of slugs) {
+    try {
+      await apply(s, locale);
+      ok++;
+    } catch (err) {
+      console.error(`  ${s}: FAILED — ${err.message}`);
+    }
+  }
+  console.log(`Done. ${ok}/${slugs.length} applied successfully.`);
+}
+
 // ── CLI ──────────────────────────────────────────────────────────────────
 
-const [, , command, slug, arg1, packetPathArg] = process.argv;
+const [, , command, arg0, arg1, arg2] = process.argv;
 
-if (command === "extract" && slug) {
-  extract(slug, arg1 || "fi").catch((err) => {
+if (command === "extract" && arg0) {
+  extract(arg0, arg1 || "fi").catch((err) => {
     console.error(err.message);
     process.exit(1);
   });
-} else if (command === "apply" && slug && arg1) {
-  apply(slug, arg1, packetPathArg).catch((err) => {
+} else if (command === "apply" && arg0 && arg1) {
+  apply(arg0, arg1, arg2).catch((err) => {
+    console.error(err.message);
+    process.exit(1);
+  });
+} else if (command === "pending" && arg0) {
+  pending(arg0, arg1).catch((err) => {
+    console.error(err.message);
+    process.exit(1);
+  });
+} else if (command === "extract-many" && arg0 && arg1) {
+  extractMany(arg0, arg1).catch((err) => {
+    console.error(err.message);
+    process.exit(1);
+  });
+} else if (command === "apply-many" && arg0 && arg1) {
+  applyMany(arg0, arg1).catch((err) => {
     console.error(err.message);
     process.exit(1);
   });
 } else {
   console.log("Usage:");
-  console.log("  node product-i18n.js extract <slug> [locale]   (locale defaults to fi)");
+  console.log("  node product-i18n.js extract <slug> [locale]              (locale defaults to fi)");
   console.log("  node product-i18n.js apply <slug> <locale> [packetFile]");
+  console.log("  node product-i18n.js pending <locale> [category]          list slugs still missing that locale");
+  console.log("  node product-i18n.js extract-many <locale> <slugs|->      comma-separated, or - for stdin (one per line)");
+  console.log("  node product-i18n.js apply-many <locale> <slugs|->        same, applies existing packets");
   process.exit(1);
 }

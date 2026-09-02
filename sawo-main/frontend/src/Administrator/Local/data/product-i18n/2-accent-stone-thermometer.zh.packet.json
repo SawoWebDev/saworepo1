@@ -1,0 +1,64 @@
+{
+  "slug": "2-accent-stone-thermometer",
+  "productId": "f1d36e01-da26-46e8-bb3c-de7f02366418",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (280-TRD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (280-TRA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (280-TRH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "2号点缀石材温度计",
+    "short_description": "SAWO 2号点缀石材温度计 是一款点缀石材桑拿温度计，尺寸为 125 × 160mm，用于监测桑拿房内的温度。",
+    "description": null,
+    "type": "温度计",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (280-TRD)",
+        "name": "雪松 (280-TRD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (280-TRA)",
+        "name": "白杨 (280-TRA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (280-TRH)",
+        "name": "铁杉 (280-TRH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
