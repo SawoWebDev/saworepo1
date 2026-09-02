@@ -1,0 +1,24 @@
+{
+  "slug": "cumulus-ns",
+  "productId": "49825108-e558-40a2-87d4-7e5d837cb07c",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[2]",
+      "source": "Stainless steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Cumulus NS",
+    "short_description": "Cumulus on tyylikäs ja minimalistinen seinäkiuas, jossa on ruostumaton teräskuori ja koristeellinen suomalaisesta vuolukivestä valmistettu etulevy. Vuolukivi auttaa lämmittämään kivet nopeammin ja säilyttämään lämmön pidempään. Sisäänrakennetun aromikupin ansiosta Cumulus on älykäs valinta, joka tuo spa-tunnelmaa saunahetkiin aromaterapian avulla.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"5\">Vähimmäisturvaetäisyydet<br>A | B | C | D | E</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CML-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-80NS-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n<tr>\n  <td>CML-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n</tbody></table>",
+    "type": "Cumulus",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Ruostumaton teräskuori",
+      "Sisäänrakennettu aromikuppi"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "infrared-backrest",
+  "productId": "b3f6e11d-1caf-4b7c-8492-3cc8c79054f8",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "红外线靠背",
+    "short_description": "符合人体工学的红外线靠背，可直接向背部散发舒缓辐射热，实现精准的肌肉放松。",
+    "description": null,
+    "type": "红外线配件",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ]
+  }
+}

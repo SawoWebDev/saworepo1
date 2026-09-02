@@ -1,0 +1,33 @@
+{
+  "slug": "steam-ste",
+  "productId": "3fd0cdb2-adf7-4c97-8287-51e6c5a8c702",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Steam STE",
+    "short_description": "<span style=\"text-align: justify;\">Steam STE 控制器在延续前代产品操作方式的同时，采用现代化设计与更精致的尺寸，带来更简便、更可靠的使用体验。</span>",
+    "description": null,
+    "type": null,
+    "features": [
+      "适用于 STE 蒸汽发生器",
+      "可设置蒸汽时长与温度",
+      "节能待机模式",
+      "按键锁定",
+      "可选摄氏/华氏温度单位",
+      "加热元件重置功能，提升加热元件性能",
+      "支持远程开启，可接入智能家居系统",
+      "兼容按需启动按钮",
+      "产品尺寸 (mm) 长 | 宽 | 高：37 | 104 | 147"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

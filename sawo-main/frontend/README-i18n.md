@@ -419,6 +419,23 @@ visible string, not just the ones you remember translating. The build will
 be silently, completely fine even if you translated the wrong field (see
 above) — only actually looking at the rendered page catches that.
 
+### Unit spacing — always a space before the unit
+
+When translating a `features` bullet or spec-table cell that contains a
+number + unit (`kW`, `kg`, `mm`, `m³`...), always write it with a space
+between the number and the unit (`"4.5 – 9.0 kW"`, `"50 kg"`) — **even
+when the English source has no space** (`"9.0kW"`, `"9kW"`). This is a
+known bug pattern, not a style nitpick: it was found and fixed catalog-wide
+2026-09-01 (see `I18N-CHECKLIST.md`'s "formatting fix, applied
+catalog-wide" entry under the Sauna Heaters batch) after shipping without
+it in the Steam batch and the first pass of Sauna Heaters. Apply the space
+in every locale (`fi`, `zh`, and any future one) regardless of what the
+English source does — this is a deliberate, permanent correction, not a
+faithful-preservation case like the `venturi-pipe` spelling-typo one above.
+The English source `products` table itself is left as-is; this only
+applies to the translated `product_translations` rows this pipeline
+writes.
+
 ### Translation memory — reuse across products
 
 This catalog's product copy is heavily boilerplated: spec-table headers

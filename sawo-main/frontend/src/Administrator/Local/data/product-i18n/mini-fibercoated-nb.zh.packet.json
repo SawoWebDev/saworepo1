@@ -1,0 +1,43 @@
+{
+  "slug": "mini-fibercoated-nb",
+  "productId": "15dff165-8128-49f2-b760-9553be5cff00",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "name",
+      "source": "Mini Fibercoated NB"
+    },
+    {
+      "path": "short_description",
+      "source": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Mini Fibercoated</b><span style=\"text-align: justify;\"> heater is the solution for 1-to-2–person sauna rooms. Its small size and left-to-right reversible control unit makes this heater well-suited for installation in small locations. For added safety, its cool-to-touch fibercoating helps minimize the risk of injury.</span>"
+    },
+    {
+      "path": "description",
+      "source": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-6 wpb_column column_container _ height-full\"><h3 id=\"fancy-title-20\" class=\"mk-fancy-title align-left simple-style color-single\"><br></h3></div></div><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-12 wpb_column column_container _ height-full\"><div class=\"vc_wp_text wpb_content_element tg\"><div class=\"widget widget_text mk-in-viewport\"><div class=\"textwidget\"><table class=\"tg\"> <tbody class=\"specificationstext\"> <tr> <th class=\"tg-s6z2 c_tta-tabs-container\">Heater Model</th> <th class=\"tg-s6z2\">KW</th> <th class=\"tg-s6z2\">Sauna Room min. (m3) max.</th> <th class=\"tg-s6z2\">Size of Heater (mm) Length Width Height</th> <th class=\"tg-s6z2\">Stones (kg)</th> <th class=\"tg-s6z2\">Control</th> <th class=\"tg-s6z2\" colspan=\"5\">Minimum Safety Distances A | B | C | D | E</th> <th class=\"tg-s6z2\"></th> </tr> <tr> <td class=\"tg-s6z2\">MN-23NB-P-F</td> <td class=\"tg-s6z2\">2.3</td> <td class=\"tg-s6z2\">1.3 – 2.5</td> <td class=\"tg-s6z2\">215 × 435 × 455</td> <td class=\"tg-s6z2\">11</td> <td class=\"tg-s6z2\">Built-in (8+4h)</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">20</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">140</td> <td class=\"tg-s6z2\">155</td> </tr> <tr> <td class=\"tg-s6z2\">MN-30NB-P-F</td> <td class=\"tg-s6z2\">3.0</td> <td class=\"tg-s6z2\">2 – 4</td> <td class=\"tg-s6z2\">215 × 435 × 455</td> <td class=\"tg-s6z2\">11</td> <td class=\"tg-s6z2\">Built-in (8+4h)</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">20</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">140</td> <td class=\"tg-s6z2\">155</td> </tr> <tr> <td class=\"tg-s6z2\">MN-36NB-P-F</td> <td class=\"tg-s6z2\">3.6</td> <td class=\"tg-s6z2\">3 – 6</td> <td class=\"tg-s6z2\">215 × 435 × 455</td> <td class=\"tg-s6z2\">11</td> <td class=\"tg-s6z2\">Built-in (8+4h)</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">20</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">140</td> <td class=\"tg-s6z2\">155</td> </tr> </tbody> </table> </div> </div> </div> </div> </div> </div>"
+    },
+    {
+      "path": "features[0]",
+      "source": "Power range: 2.3 – 3.6kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Built-in (NB)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Cool-to-touch fibercoating"
+    }
+  ],
+  "fields": {
+    "name": "Mini 纤维涂层 NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini 纤维涂层</b><span style=\"text-align: justify;\"> 加热器是1至2人桑拿房的理想解决方案。其小巧的体积与左右可换向的控制单元，使这款加热器非常适合安装在狭小空间内。为提升安全性，其触感清凉的纤维涂层有助于降低烫伤风险。</span>",
+    "description": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-6 wpb_column column_container _ height-full\"><h3 id=\"fancy-title-20\" class=\"mk-fancy-title align-left simple-style color-single\"><br></h3></div></div><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-12 wpb_column column_container _ height-full\"><div class=\"vc_wp_text wpb_content_element tg\"><div class=\"widget widget_text mk-in-viewport\"><div class=\"textwidget\"><table class=\"tg\"> <tbody class=\"specificationstext\"> <tr> <th class=\"tg-s6z2 c_tta-tabs-container\">加热器型号</th> <th class=\"tg-s6z2\">KW</th> <th class=\"tg-s6z2\">桑拿房 最小 (m3) 最大</th> <th class=\"tg-s6z2\">加热器尺寸 (mm) 长 宽 高</th> <th class=\"tg-s6z2\">桑拿石 (kg)</th> <th class=\"tg-s6z2\">控制方式</th> <th class=\"tg-s6z2\" colspan=\"5\">最小安全距离 A | B | C | D | E</th> <th class=\"tg-s6z2\"></th> </tr> <tr> <td class=\"tg-s6z2\">MN-23NB-P-F</td> <td class=\"tg-s6z2\">2.3</td> <td class=\"tg-s6z2\">1.3 – 2.5</td> <td class=\"tg-s6z2\">215 × 435 × 455</td> <td class=\"tg-s6z2\">11</td> <td class=\"tg-s6z2\">Built-in (8+4h)</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">20</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">140</td> <td class=\"tg-s6z2\">155</td> </tr> <tr> <td class=\"tg-s6z2\">MN-30NB-P-F</td> <td class=\"tg-s6z2\">3.0</td> <td class=\"tg-s6z2\">2 – 4</td> <td class=\"tg-s6z2\">215 × 435 × 455</td> <td class=\"tg-s6z2\">11</td> <td class=\"tg-s6z2\">Built-in (8+4h)</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">20</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">140</td> <td class=\"tg-s6z2\">155</td> </tr> <tr> <td class=\"tg-s6z2\">MN-36NB-P-F</td> <td class=\"tg-s6z2\">3.6</td> <td class=\"tg-s6z2\">3 – 6</td> <td class=\"tg-s6z2\">215 × 435 × 455</td> <td class=\"tg-s6z2\">11</td> <td class=\"tg-s6z2\">Built-in (8+4h)</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">20</td> <td class=\"tg-s6z2\">100</td> <td class=\"tg-s6z2\">140</td> <td class=\"tg-s6z2\">155</td> </tr> </tbody> </table> </div> </div> </div> </div> </div> </div>",
+    "type": "Mini",
+    "features": [
+      "功率范围：2.3 – 3.6 kW",
+      "可选控制方式：内置 (NB)",
+      "触感清凉的纤维涂层"
+    ]
+  }
+}

@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import ProductShowcase from "../../components/ProductShowcase";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
 import heroImg from "../../assets/Infrared/ir-panels-hero.webp";
 
 // Selected by slug, not by category: every infrared product carries the
@@ -14,6 +15,8 @@ import heroImg from "../../assets/Infrared/ir-panels-hero.webp";
 export const PANEL_SLUGS = ["infrared-panels", "infrared-backrest", "interface-holder"];
 
 const InfraredPanels = () => {
+  const locale = useLocale();
+  const t = useLocaleT("infrared");
   const { products, loading } = useLocalProducts();
 
   const panels = useMemo(() => {
@@ -25,21 +28,22 @@ const InfraredPanels = () => {
 
   return (
     <ProductShowcase
-      seoTitle="Infrared Panels"
-      seoDescription="SAWO infrared panels and accessories — fiber-coated far infrared panels at 170W each, backrests, and interface holders for your infrared room."
-      seoPath="/infrared/panels"
+      seoTitle={t("panels.meta.title")}
+      seoDescription={t("panels.meta.description")}
+      seoPath={locale === "en" ? "/infrared/panels" : `/${locale}/infrared/panels`}
+      seoHreflangAlternates={{ en: "/infrared/panels", fi: "/fi/infrared/panels", zh: "/zh/infrared/panels" }}
       heroImage={heroImg}
-      heroTitle="INFRARED PANELS"
-      introTitle="Introducing Our Infrared Panels"
-      introText="Fiber-coated far infrared panels warm the body directly rather than heating the air around it, so sessions stay comfortable at a much lower room temperature. Each panel draws 170W and is built to sit flush within the cabin, alongside the backrests and interface holders that complete the room."
+      heroTitle={t("panels.hero.title")}
+      introTitle={t("panels.intro.title")}
+      introText={t("panels.intro.text")}
       products={panels}
       loading={loading}
-      eyebrow="Infrared Panel"
-      fallbackBlurb="Premium SAWO infrared component built for gentle, everyday warmth."
-      emptyText="No infrared panels available yet."
-      loadingText="Loading infrared panels..."
-      ctaTitle="Not Sure Which Panel You Need?"
-      ctaDescription="Panel count and placement depend on the size of your infrared room. Our team can help you work out the right configuration for your space."
+      eyebrow={t("panels.eyebrow")}
+      fallbackBlurb={t("panels.fallbackBlurb")}
+      emptyText={t("panels.emptyText")}
+      loadingText={t("panels.loadingText")}
+      ctaTitle={t("panels.cta.title")}
+      ctaDescription={t("panels.cta.description")}
     />
   );
 };

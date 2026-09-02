@@ -1,0 +1,144 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Infrapunasauna",
+      "description": "Tutustu SAWOn infrapunasaunoihin: setristä valmistetut huoneet, joissa on lempeät, terapeuttiset infrapunalämpöpaneelit ja ohjaimet syvään rentoutumiseen ja hyvinvointiin."
+    },
+    "hero": {
+      "title": "INFRAPUNASAUNA",
+      "brochureBtn": "KATSO ESITE"
+    },
+    "saunasSection": {
+      "title": "Infrapunasaunat",
+      "desc": "Nauti infrapunasaunojemme terapeuttisista hyödyistä – ne on suunniteltu edistämään rentoutumista ja hyvinvointia infrapunateknologian lempeän lämmön avulla. Koe rauhoittava pakopaikka omassa tilassasi. Infrapunasaunamme ovat saatavilla yhden ja kahden hengen kokoina.",
+      "viewAll": "KATSO INFRAPUNASAUNAT"
+    },
+    "accessoriesSection": {
+      "title": "Infrapunalisävarusteet",
+      "items": {
+        "infraredPanels": "Infrapunapaneelit",
+        "infraredBackrest": "Infrapunaselkänoja",
+        "interfaceHolder": "Käyttöliittymän pidike"
+      }
+    },
+    "controlsSection": {
+      "title": "Infrapunasaunan ohjaimet",
+      "items": {
+        "userInterface": "Infrapuna 2.0 käyttöliittymä",
+        "powerController": "Infrapuna 2.0 tehonohjain",
+        "builtInControl": "Infrapuna 2.0 kiinteä ohjain"
+      }
+    },
+    "cta": {
+      "title": "Tarvitsetko apua valinnassa?",
+      "description": "Infrapunapaneeleista ohjaimiin ja lisävarusteisiin – tiimimme auttaa löytämään tilaasi sopivan infrapunasaunaratkaisun."
+    }
+  },
+  "saunas": {
+    "meta": {
+      "title": "Infrapunasaunat",
+      "description": "SAWOn infrapunasaunat yhden ja kahden hengen kokoina. Kuitupinnoitetut kaukoinfrapunapaneelit, setri- ja hemlokkiviimeistelyt sekä liitä ja käytä -asennus 230V:lla."
+    },
+    "hero": {
+      "title": "INFRAPUNASAUNAT",
+      "subtitle": "Lempeä, terapeuttinen infrapunalämpö kompaktissa hytissä – saatavilla yhdelle tai kahdelle hengelle.",
+      "brochureBtn": "KATSO ESITE",
+      "brochureItemLabel": "Infrapunaesite"
+    },
+    "productDetails": {
+      "title": "Infrapunasauna, jota todella käytät joka päivä",
+      "storySections": [
+        {
+          "title": "Lämpö, joka tavoittaa sinut suoraan",
+          "paragraphs": [
+            "Infrapunasaunan ei tarvitse saavuttaa 80 °C:ta toimiakseen. Paneelit lämmittävät kehoasi eivätkä ympäröivää ilmaa, joten istunto tuntuu syvältä ja ympäröivältä, kun taas hytin lämpötila pysyy sellaisena, että hengittäminen on helppoa.",
+            "Tämä tekee siitä erilaisen kokemuksen kuin perinteinen sauna – ei vain pienemmän version siitä: lempeämpi rinnalle, helpompi kestää kokonainen tunti ja lähestyttävä niille, joille suomalaisen saunan kuumuus on liikaa."
+          ]
+        },
+        {
+          "title": "Valmis aina kun sinä olet",
+          "paragraphs": [
+            "Pitkää esilämmitystä ei tarvita eikä kiuasta tarvitse valvoa. Kytke huone tavalliseen pistorasiaan, aseta aika, ja se on valmis minuuteissa – ei lähes tunnissa.",
+            "0,80 m ja 1,10 m neliökokoina huoneet mahtuvat paikkoihin, joihin perinteinen sauna ei mahdu – vapaaseen nurkkaan, kylpyhuoneeseen, makuuhuoneen päähän – ilman rakennustöitä tai omaa sähköpiiriä. Se on saunan versio, jota todella käytät arki-iltana."
+          ]
+        }
+      ],
+      "featureText": "Säännölliset infrapunaistunnot lievittävät lihasten arkuutta, tukevat verenkiertoa ja auttavat kehoa rauhoittumaan unta varten – lämpötilassa, joka on niin lempeä, että siitä voi tulla päivittäinen tapa satunnaisen sijaan. Koska huone kytketään tavalliseen pistorasiaan ja se kootaan ilman rakennustöitä, se on myös harvinainen hyvinvointilisä, jonka voit ottaa mukaan muuttaessasi.",
+      "perfCards": [
+        { "label": "Setri tai hemlokki", "detail": "Luonnollisen tuoksuva, kestävästi hankittu" },
+        { "label": "1 tai 2 hengen", "detail": "0908-IR-D- ja 1111-IR-D-kokoonpanot" },
+        { "label": "230V liitä ja käytä", "detail": "Ei omaa sähköpiiriä tai sähköasentajaa" },
+        { "label": "Suomalainen valmistus, yli 30 vuotta", "detail": "Vuosikymmenten saunaosaaminen jokaisessa huoneessa" }
+      ],
+      "accordionItems": [
+        {
+          "title": "Tuotetiedot",
+          "specs": [
+            { "label": "0908-IR-D", "value": "0,80 m L x 0,90 m S", "unit": "/ 1 henkilö" },
+            { "label": "1111-IR-D", "value": "1,10 m L x 1,10 m S", "unit": "/ 2 henkilöä" },
+            { "label": "Korkeus", "value": "2,05 m", "unit": "(molemmat mallit)" },
+            { "label": "Paneelit", "value": "Kuitupinnoitettu kaukoinfrapuna, 170W per paneeli", "unit": null },
+            { "label": "Kokonaisteho", "value": "1200W (1 hlö) / 1400W (2 hlöä)", "unit": null },
+            { "label": "Sähkö", "value": "230V liitä ja käytä", "unit": null },
+            { "label": "Istunnon kesto", "value": "1–60 minuuttia", "unit": "säädettävä" },
+            { "label": "Valaistus", "value": "12W LED", "unit": "/ 18W poistoilmapuhallin" },
+            { "label": "Materiaali", "value": "Setri tai hemlokki", "unit": null }
+          ]
+        }
+      ]
+    },
+    "woodMaterials": {
+      "subtitle": "Infrapunasaunat rakennetaan setristä tai hemlokista – kumpikin tuo istuntoihisi oman luonteensa, tuoksunsa ja lämpönsä.",
+      "items": {
+        "cedar": {
+          "name": "Setri",
+          "description": "Runsastuoksuinen puu, jolla on luontainen kosteudenkestävyys. Tunnetaan lämpimistä punaruskeista sävyistään ja tunnusomaisesta tuoksustaan.",
+          "traits": ["Tuoksuva", "Kosteudenkestävä", "Lämpimät sävyt"]
+        },
+        "hemlock": {
+          "name": "Hemlokki",
+          "description": "Vaalea, tasasyinen puu, jolla on hyvin vähäinen tuoksu – rauhallisempi tausta niille, joille setrin tuoksu on liian voimakas. Vakaa ja sileä kosketukselta.",
+          "traits": ["Vähätuoksuinen", "Tasainen syy", "Sileä pinta"]
+        }
+      }
+    }
+  },
+  "panels": {
+    "meta": {
+      "title": "Infrapunapaneelit",
+      "description": "SAWOn infrapunapaneelit ja lisävarusteet – kuitupinnoitetut kaukoinfrapunapaneelit, 170W kukin, selkänojat ja käyttöliittymän pidikkeet infrapunahuoneeseesi."
+    },
+    "hero": { "title": "INFRAPUNAPANEELIT" },
+    "intro": {
+      "title": "Esittelyssä infrapunapaneelimme",
+      "text": "Kuitupinnoitetut kaukoinfrapunapaneelit lämmittävät kehoa suoraan sen sijaan, että lämmittäisivät ympäröivää ilmaa, joten istunnot pysyvät mukavina huomattavasti matalammassa huonelämpötilassa. Jokainen paneeli kuluttaa 170W ja on rakennettu istumaan tasaisesti hytin sisään yhdessä selkänojien ja käyttöliittymän pidikkeiden kanssa, jotka viimeistelevät huoneen."
+    },
+    "eyebrow": "Infrapunapaneeli",
+    "fallbackBlurb": "Laadukas SAWO-infrapunakomponentti lempeään, päivittäiseen lämpöön.",
+    "emptyText": "Infrapunapaneeleita ei ole vielä saatavilla.",
+    "loadingText": "Ladataan infrapunapaneeleita...",
+    "cta": {
+      "title": "Etkö ole varma, minkä paneelin tarvitset?",
+      "description": "Paneelien määrä ja sijoittelu riippuvat infrapunahuoneesi koosta. Tiimimme auttaa selvittämään tilaasi sopivan kokoonpanon."
+    }
+  },
+  "controls": {
+    "meta": {
+      "title": "Infrapunaohjaimet",
+      "description": "SAWO Infrapuna 2.0 -ohjaimet – käyttöliittymä, tehonohjain ja kiinteä ohjain lämpötilan, istunnon keston, valaistuksen ja ilmanvaihdon hallintaan."
+    },
+    "hero": { "title": "INFRAPUNAOHJAIMET" },
+    "intro": {
+      "title": "Esittelyssä infrapunaohjaimemme",
+      "text": "Yksi ohjain hallitsee koko huonetta – lämpötilaa, 1–60 minuutin istunnon kestoa, valaistusta ja poistoilmapuhallinta. Infrapuna 2.0 -valikoima kattaa käyttöliittymän, sen takana olevan tehonohjaimen sekä kiinteän vaihtoehdon siistimpää hyttiseinää varten."
+    },
+    "eyebrow": "Infrapunaohjain",
+    "fallbackBlurb": "Laadukas SAWO-infrapunaohjain yksinkertaiseen, luotettavaan päivittäiseen käyttöön.",
+    "emptyText": "Infrapunaohjaimia ei ole vielä saatavilla.",
+    "loadingText": "Ladataan infrapunaohjaimia...",
+    "cta": {
+      "title": "Tarvitsetko apua ohjaimen valinnassa?",
+      "description": "Halusitpa pinta-asennettavan käyttöliittymän tai kiinteän yksikön, tiimimme auttaa valitsemaan infrapunahuoneeseesi sopivan ohjaimen."
+    }
+  }
+}

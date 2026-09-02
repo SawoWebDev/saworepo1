@@ -1,0 +1,22 @@
+{
+  "slug": "aries-corner-black-nb",
+  "productId": "242d9eb5-907f-4be2-a371-5db18c96d548",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries 转角式 黑色 NB",
+    "short_description": "<div><span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\"><b>Aries Corner</b></strong><span style=\"text-align: justify;\"> 是一款简约而时尚的节省空间型加热器。它专为无缝转角安装而设计，可最大化利用任何桑拿房的空间，提升沐浴者的舒适度，带来彻底焕活身心的桑拿体验。内置石材间隔器可缩短桑拿石的加热时间，并延长发热元件的使用寿命。</span>\n</div>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"2\">最小安全距离<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-CNR-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-CNR-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>AR13-75NB-CNR-BL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-CNR-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries 转角式",
+    "features": [
+      "功率范围：4.5 – 9.0kW",
+      "可选控制方式：内置 (NB)",
+      "内置石材间隔器",
+      "可调节支脚",
+      "黑色金属外壳",
+      "可选加热器护罩",
+      "可选安装环"
+    ]
+  }
+}

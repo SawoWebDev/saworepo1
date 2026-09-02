@@ -1,0 +1,49 @@
+{
+  "slug": "wooden-hook-rack-4-hooks",
+  "productId": "50a253e2-e633-4788-9cea-4957c609e4ad",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "木质挂钩架（4 钩）",
+    "short_description": "SAWO 木质挂钩架（4 钩）尺寸为 42 × 340mm，用于在桑拿房外悬挂毛巾与浴袍。",
+    "description": null,
+    "type": "衣物挂架",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (586-D)",
+        "name": "雪松 (586-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (586-A)",
+        "name": "白杨 (586-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (586-H)",
+        "name": "铁杉 (586-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

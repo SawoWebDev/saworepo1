@@ -527,7 +527,7 @@ export default function SaunaRoomDisplay() {
                       <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 320 }}>
                         {specImages.map((url, i) => (
                           <div key={i} onClick={() => setLightbox({ images: specImages, index: i })} style={{ cursor: "zoom-in" }}>
-                            <ImageWithLoader src={url} alt="Floor plan" style={{ width: "100%", objectFit: "contain", display: "block" }} />
+                            <ImageWithLoader src={url} alt={t("sections.floorPlan")} style={{ width: "100%", objectFit: "contain", display: "block" }} />
                           </div>
                         ))}
                       </div>
@@ -539,7 +539,7 @@ export default function SaunaRoomDisplay() {
                 <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                   {hasMultiConf && (
                     <div>
-                      <SectionLabel icon="fa-solid fa-diagram-project" text="Bench Configuration" />
+                      <SectionLabel icon="fa-solid fa-diagram-project" text={t("sections.benchConfiguration")} />
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                         {configKeys.map(key => (
                           <button key={key} onClick={() => setActiveConfig(key)}
@@ -557,7 +557,7 @@ export default function SaunaRoomDisplay() {
                   )}
                   {!hasMultiConf && currentConf?.bench_name && (
                     <div>
-                      <SectionLabel icon="fa-solid fa-diagram-project" text="Bench Configuration" />
+                      <SectionLabel icon="fa-solid fa-diagram-project" text={t("sections.benchConfiguration")} />
                       <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem", color: "#5a4030", margin: 0 }}>{currentConf.bench_name}</p>
                     </div>
                   )}
@@ -565,10 +565,10 @@ export default function SaunaRoomDisplay() {
                     <div>
                       <SectionLabel icon="fa-solid fa-bolt" text={t("sections.infraredSpecifications")} />
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                        <StatChip icon="fa-solid fa-plug"        label="Voltage"       value={room.ir_voltage_v        ? `${room.ir_voltage_v} V`        : null} />
-                        <StatChip icon="fa-solid fa-solar-panel" label="Panel Wattage" value={room.ir_panel_wattage_w  ? `${room.ir_panel_wattage_w} W`  : null} />
-                        <StatChip icon="fa-solid fa-bolt"        label="Total Power"   value={room.ir_total_power_w    ? `${room.ir_total_power_w} W`    : null} />
-                        <StatChip icon="fa-solid fa-clock"       label="Session Time"  value={room.ir_session_time_min ? `${room.ir_session_time_min} min`: null} />
+                        <StatChip icon="fa-solid fa-plug"        label={t("stats.voltage")}      value={room.ir_voltage_v        ? `${room.ir_voltage_v} V`        : null} />
+                        <StatChip icon="fa-solid fa-solar-panel" label={t("stats.panelWattage")} value={room.ir_panel_wattage_w  ? `${room.ir_panel_wattage_w} W`  : null} />
+                        <StatChip icon="fa-solid fa-bolt"        label={t("stats.totalPower")}   value={room.ir_total_power_w    ? `${room.ir_total_power_w} W`    : null} />
+                        <StatChip icon="fa-solid fa-clock"       label={t("stats.sessionTime")}  value={room.ir_session_time_min ? `${room.ir_session_time_min} min`: null} />
                       </div>
                     </div>
                   )}
@@ -602,7 +602,7 @@ export default function SaunaRoomDisplay() {
               {/* Feature tabs */}
               {featureTabs.length > 0 && (
                 <div style={{ marginBottom: 32 }}>
-                  <SectionLabel icon="fa-solid fa-layer-group" text="Details" />
+                  <SectionLabel icon="fa-solid fa-layer-group" text={t("sections.details")} />
                   <FeatureTabs tabs={featureTabs} />
                 </div>
               )}
@@ -610,7 +610,7 @@ export default function SaunaRoomDisplay() {
               {/* Description */}
               {hasDesc && (
                 <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
-                  <SectionLabel icon="fa-solid fa-align-left" text="Description" />
+                  <SectionLabel icon="fa-solid fa-align-left" text={t("sections.description")} />
                   <div className="pp-richtext" style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", lineHeight: 1.7, fontSize: "0.82rem", whiteSpace: "pre-wrap", wordWrap: "break-word" }}
                     dangerouslySetInnerHTML={{ __html: room.description }} />
                 </div>
@@ -656,16 +656,17 @@ export default function SaunaRoomDisplay() {
 
 /* ── Feature Tabs ─────────────────────────────────────────────────── */
 function FeatureTabs({ tabs }) {
+  const t = useLocaleT("product");
   const [active, setActive] = useState(0);
   if (!tabs?.length) return null;
   const tab = tabs[active];
   return (
     <div>
       <div style={{ display: "flex", gap: 0, borderBottom: "2px solid #edddd0", marginBottom: 16, flexWrap: "wrap" }}>
-        {tabs.map((t, i) => (
+        {tabs.map((tb, i) => (
           <button key={i} onClick={() => setActive(i)}
             style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.72rem", fontWeight: 700, padding: "9px 16px", border: "none", borderBottom: `2px solid ${active === i ? "#a67853" : "transparent"}`, marginBottom: -2, background: "transparent", color: active === i ? "#a67853" : "#a09080", cursor: "pointer", transition: "all 0.18s", letterSpacing: "0.05em" }}>
-            {t.title || `Tab ${i + 1}`}
+            {tb.title || t("featureTabs.tabFallback", { number: i + 1 })}
           </button>
         ))}
       </div>

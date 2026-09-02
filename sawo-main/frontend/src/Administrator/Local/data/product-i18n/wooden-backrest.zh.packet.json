@@ -1,0 +1,49 @@
+{
+  "slug": "wooden-backrest",
+  "productId": "a4deea27-81af-4683-9b96-78dffd98abaf",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "木质靠背",
+    "short_description": "SAWO 木质靠背是一款木质桑拿靠背，尺寸为 396 × 515mm，在桑拿过程中为颈部与背部提供支撑。",
+    "description": null,
+    "type": "头枕与靠背",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (516-D)",
+        "name": "雪松 (516-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (516-A)",
+        "name": "白杨 (516-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (516-H)",
+        "name": "铁杉 (516-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

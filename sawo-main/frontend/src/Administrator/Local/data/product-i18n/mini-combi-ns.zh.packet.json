@@ -1,0 +1,49 @@
+{
+  "slug": "mini-combi-ns",
+  "productId": "9974c209-5962-4256-9d17-aaceaeda1046",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "short_description",
+      "source": "<span style=\"text-align: justify;\">The </span><b style=\"text-align: justify;\">Mini Combi</b><span style=\"text-align: justify;\"> combines a regular sauna experience with a water tank for increased humidity. It is available with cool-to-touch fiber-coating.</span>"
+    },
+    {
+      "path": "description",
+      "source": "<table> <thead> <tr> <th>Heater Model</th> <th>kW <br>Heater</th> <th>kW <br>Tank</th> <th>Sauna Room<br>min. (m³) max.</th> <th>Size of Heater (mm)<br>Length Width Height</th> <th>Stones<br>(kg)</th> <th>Control</th> </tr> </thead> <tbody> <tr> <td>MNC-30NS-Z</td> <td>3.0</td> <td>1 × 1.0</td> <td>2 – 4</td> <td>330 × 260 × 500</td> <td>8 – 10.5</td> <td>Separate</td> </tr> <tr> <td>MNC-36NS-Z</td> <td>3.6</td> <td>1 × 1.0</td> <td>3 – 6</td> <td>330 × 260 × 500</td> <td>8 – 10.5</td> <td>Separate</td> </tr></tbody></table>"
+    },
+    {
+      "path": "features[0]",
+      "source": "Power range: 3.0 – 3.6kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Separate water tank with 1kW steam generator"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless-steel casing"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    }
+  ],
+  "fields": {
+    "name": "Mini Combi NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini Combi</b><span style=\"text-align: justify;\"> 将普通桑拿体验与水箱结合，可增加湿度。提供触感清凉的纤维涂层版本可选。</span>",
+    "description": "<table> <thead> <tr> <th>加热器型号</th> <th>kW <br>加热器</th> <th>kW <br>水箱</th> <th>桑拿房<br>最小 (m³) 最大</th> <th>加热器尺寸 (mm)<br>长 宽 高</th> <th>桑拿石<br>(kg)</th> <th>控制方式</th> </tr> </thead> <tbody> <tr> <td>MNC-30NS-Z</td> <td>3.0</td> <td>1 × 1.0</td> <td>2 – 4</td> <td>330 × 260 × 500</td> <td>8 – 10.5</td> <td>Separate</td> </tr> <tr> <td>MNC-36NS-Z</td> <td>3.6</td> <td>1 × 1.0</td> <td>3 – 6</td> <td>330 × 260 × 500</td> <td>8 – 10.5</td> <td>Separate</td> </tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "功率范围：3.0 – 3.6 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "独立水箱，配备 1 kW 蒸汽发生器",
+      "不锈钢外壳",
+      "内置香薰杯"
+    ]
+  }
+}

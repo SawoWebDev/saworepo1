@@ -1,0 +1,32 @@
+{
+  "slug": "heaterking-corner-ns",
+  "productId": "26c9e85d-8efe-4d8d-97b7-606bb9e3a771",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[7]",
+      "source": "Optional heater guard"
+    }
+  ],
+  "fields": {
+    "name": "Heaterking Kulma NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Heaterking Kulma</strong><span style=\"text-align: justify;\"> -kiuas, Stefan Lindforsin suunnittelema, tarjoaa kuninkaallisen lämmön säästäen samalla saunatilaa. Sen vaikuttava korkeus mahdollistaa suuren kivimäärän, mikä tuottaa tasaista, ympäröivää lämpöä. Kylpijät voivat nauttia joko pehmeästä tai terävän kuivasta lämmöstä heittämällä vettä joko pilarin alaosaan tai yläosaan. Kuten kaikissa Heaterking-malleissa, myös kulmamallin ainutlaatuinen Junglefire-kuvioitu ruostumaton teräskuori tuo mihin tahansa saunahuoneeseen rohkeaa tyylikkyyttä.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg) ilman kivivälikettä</th>\n  <th>Kivet<br>(kg) kivivälikkeen kanssa</th>\n  <th>Ohjaus</th>\n  <th colspan=\"2\">Vähimmäisturvaetäisyydet<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>DRFT3-35NS-CNR-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-45NS-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-80NS-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-105NS-CNR-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-120NS-CNR-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Heaterking Kulma",
+    "features": [
+      "Tehoalue: 3.5 – 12.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Ruostumaton teräs, jossa yksityiskohtainen Junglefire-kuvio",
+      "Kivivälike pidentää lämmityselementtien käyttöikää",
+      "Kivikapasiteetti: 45–160 kg",
+      "Kulmamallinen ruostumaton teräskuori",
+      "Lämmönheijastin mukana",
+      "Valinnainen kiuassuoja"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "savonia-fiber-coated-ns",
+  "productId": "dc28e725-ee4a-4fbe-99ee-170c98ecf47b",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 9.0 – 24.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Adjustable legs"
+    }
+  ],
+  "fields": {
+    "name": "Savonia 纤维涂层 NS",
+    "short_description": "<strong style=\"text-align: justify;\">Savonia</strong><span style=\"text-align: justify;\"> </span><span style=\"text-align: justify;\">系列专为承受极端高温而设计，同时将日常保养与维护的工作量降至最低。它还可容纳大量桑拿石。加热器提供两种版本：不锈钢外壳款与触感清凉的纤维涂层款。两种版本均配备可调节支脚，可支撑加热器并使其牢固地立于地面。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器\n<br>型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"5\">最小安全距离<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SAV-90NS-Z-F</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>440 × 420 × 655</td>\n  <td>50 – 60</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>110</td>\n  <td>50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SAV-105NS-Z-F</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>440 × 420 × 655</td>\n  <td>50 – 60</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>60</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SAV-120NS-Z-F</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>440 × 420 × 655</td>\n  <td>50 – 60</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>210</td>\n</tr>\n<tr>\n  <td>SAV-150NS-Z-F</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>590 × 420 × 655</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SAV-180NS-Z-F</td>\n  <td>18.0</td>\n  <td>17 – 29</td>\n  <td>590 × 420 × 655</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SAV-180NS-V12-Z-F</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>740 × 420 × 655</td>\n  <td>80 – 100</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SAV-210NS-V12-Z-F</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>740 × 420 × 655</td>\n  <td>80 – 100</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SAV-240NS-V12-Z-F</td>\n  <td>24.0</td>\n  <td>26 – 42</td>\n  <td>740 × 420 × 655</td>\n  <td>80 – 100</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Savonia",
+    "features": [
+      "功率范围：9.0 – 24.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "可调节支脚"
+    ]
+  }
+}

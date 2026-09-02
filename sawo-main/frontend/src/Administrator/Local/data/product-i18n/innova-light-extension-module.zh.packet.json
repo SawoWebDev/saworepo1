@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova 灯光扩展模块",
+    "short_description": "将 Saunova 2.0 接触器单元与 Saunova 2.0 功率控制器连接，适用于 9kW 以上的加热器。\n\n全新现代化外壳设计，提供更大内部空间，安装更简便快捷。四面均设有走线卸荷保护，包括背面走线，可实现完全隐藏式布线。\n\n<span style=\"text-align: justify;\"><b>适用于 9kW 以上的 NS 系列加热器，与 Saunova 功率控制器配合使用。</b></span>",
+    "description": null,
+    "type": "备件",
+    "features": [
+      "套装包含 Saunova 接触器单元及 1 米 RJ12 电缆",
+      "全新外壳设计，空间更大、走线更灵活，安装更轻松"
+    ]
+  }
+}

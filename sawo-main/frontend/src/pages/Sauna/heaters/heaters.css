@@ -155,27 +155,21 @@
 
 /* ---- Why SAWO ---- */
 .wm-why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.wm-why-card {
-  background: #3d2a1c;
-  border-radius: 16px;
-  padding: 44px 40px;
-  box-shadow: 0 12px 32px rgba(61,42,28,0.25);
-}
 .wm-eyebrow {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 2.5px; color: #e8c9a6;
+  letter-spacing: 2.5px; color: #000;
   text-transform: uppercase; margin-bottom: 8px;
 }
 .wm-why-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem; font-weight: 700;
-  color: #fff; margin-bottom: 14px; line-height: 1.2;
+  color: #AA8161; margin-bottom: 14px; line-height: 1.2;
 }
 .wm-why-desc {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.97rem; font-weight: 400;
-  color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 10px;
+  color: #000; line-height: 1.8; margin-bottom: 10px;
 }
 .wm-brochure-btn {
   font-family: 'Montserrat', sans-serif;

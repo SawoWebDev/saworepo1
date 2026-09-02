@@ -1,0 +1,49 @@
+{
+  "slug": "stainless-steel-ladle-siro-46-5cm",
+  "productId": "7b3de244-9169-48bc-a905-332491680704",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "Siro 不锈钢桑拿勺 46.5cm",
+    "short_description": "SAWO Siro 不锈钢桑拿勺 46.5cm 长度为 465mm，用于将水（löyly）浇在加热的桑拿石上。",
+    "description": null,
+    "type": "桑拿勺",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (445-MD)",
+        "name": "雪松 (445-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (445-MA)",
+        "name": "白杨 (445-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (445-MH)",
+        "name": "铁杉 (445-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

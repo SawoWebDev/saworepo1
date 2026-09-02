@@ -1,0 +1,43 @@
+{
+  "slug": "sawo30-wall-ni2",
+  "productId": "09e827c4-45c9-44c8-87dd-1086227821b2",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova (Ni2)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless steel casing"
+    },
+    {
+      "path": "features[5]",
+      "source": "Optional heater guard"
+    },
+    {
+      "path": "features[6]",
+      "source": "Optional integration collar"
+    }
+  ],
+  "fields": {
+    "name": "SAWO30 Seinä Ni2",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">SAWO30 Seinä</strong><span style=\"text-align: justify;\"> -kiuas on täydellinen tilan maksimoimiseen ja tuo mukanaan minimalistisen mutta tyylikkään ilmeen. Sen kyky pitää sisällään enemmän kiviä korkeassa, siro rungossa varmistaa runsaan höyryn ja kosteuden tuoton. SAWO30 Seinä -mallissa on myös irrotettava kivivälike, joka tarjoaa kaksi asennusvaihtoehtoa: (1) välikkeen kanssa nopeampi kuumeneminen, energiatehokkuus ja kuumempi sauna, tai (2) ilman väliketta tilaa useammille kiville lisähöyryn tuottamiseksi, miedompi lämpötila ja energiansäästöä kaupallisessa käytössä.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)\nilman kivivälikettä</th>\n  <th>Kivet<br>(kg)\nkivivälikkeen kanssa</th>\n  <th>Ohjaus</th>\n  <th colspan=\"2\">Vähimmäisturvaetäisyydet<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45Ni2-WL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60Ni2-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90Ni2-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>250 × 475 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "SAWO30 Seinä",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova (Ni2)",
+      "Ruostumaton teräskuori",
+      "Irrotettava yläosa helpottaa kivien lisäämistä",
+      "Irrotettava kivivälike",
+      "Valinnainen kiuassuoja",
+      "Valinnainen liitosrengas"
+    ]
+  }
+}

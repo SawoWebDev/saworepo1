@@ -1,0 +1,51 @@
+{
+  "slug": "cubos-nb",
+  "productId": "7078d72f-2c37-445d-9fa1-12f331e2fec9",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available control: Built-in (NB)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Built-in stone spacer"
+    },
+    {
+      "path": "features[3]",
+      "source": "Adjustable legs"
+    },
+    {
+      "path": "features[4]",
+      "source": "Stainless steel casing"
+    },
+    {
+      "path": "features[5]",
+      "source": "Optional heater guard"
+    },
+    {
+      "path": "features[6]",
+      "source": "Optional integration collar"
+    }
+  ],
+  "fields": {
+    "name": "Cubos NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Cubos</strong><span style=\"text-align: justify;\"> 非常适合空间有限的场所。它具备三合一的灵活性：一体简约现代设计，三种安装方式可选——居中、转角或壁挂安装。产品配备保护罩，可为壁挂和转角安装提供额外支撑，同时配有反射板，即使桑拿房最底部区域也能均匀导热。Cubos 还配备内置石材间隔器，可实现更快的加热速度，并延长发热元件的使用寿命。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"3\">最小安全距离<br>A | AA | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CUB3-45NB-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-60NB-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-75NB-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>125</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Cubos",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：内置 (NB)",
+      "内置石材间隔器",
+      "可调节支脚",
+      "不锈钢外壳",
+      "可选加热器护罩",
+      "可选安装环"
+    ]
+  }
+}

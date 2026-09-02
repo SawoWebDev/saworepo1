@@ -1,0 +1,51 @@
+{
+  "slug": "aries-wall-ni2",
+  "productId": "37e47747-7f5e-4fb6-9410-883771d00c5f",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available control: Saunova (Ni2)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Built-in stone spacer"
+    },
+    {
+      "path": "features[3]",
+      "source": "Adjustable legs"
+    },
+    {
+      "path": "features[4]",
+      "source": "Stainless steel casing"
+    },
+    {
+      "path": "features[5]",
+      "source": "Optional heater guard"
+    },
+    {
+      "path": "features[6]",
+      "source": "Optional integration collar"
+    }
+  ],
+  "fields": {
+    "name": "Aries 壁挂式 Ni2",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Aries 壁挂式</strong><span style=\"text-align: justify;\"> 是一款节省空间的设计，具备与所有塔式加热器相同的时尚简约美感。其尺寸与形状可确保在任何桑拿房布局中占用更少空间，为沐浴者留出更多空间，尽情享受深度焕活的桑拿体验。内置石材间隔器可缩短桑拿石的加热时间，并延长发热元件的使用寿命。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"2\">最小安全距离<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45Ni2-WL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60Ni2-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75Ni2-WL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90Ni2-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries 壁挂式",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova (Ni2)",
+      "内置石材间隔器",
+      "可调节支脚",
+      "不锈钢外壳",
+      "可选加热器护罩",
+      "可选安装环"
+    ]
+  }
+}

@@ -194,6 +194,38 @@
       "subtitle": "Löydä täydellinen ohjauskeskus SAWOn kattavasta valikoimasta"
     }
   },
+  "towerPage": {
+    "meta": {
+      "title": "Tower-sarjan saunakiukaat",
+      "description": "Tutustu SAWOn Tower-sarjan saunakiukaisiin: energiatehokkaat, tyylikkäät pystymalliset kiukaat, joissa erinomainen lämmönjakautuminen nykyaikaiseen hyvinvointisaunakokemukseen."
+    },
+    "hero": {
+      "title": "TOWER-SARJAN SAUNAKIUKAAT",
+      "subtitle": "Tehokkaita, tyylikkäitä ja hyvinvointiin keskittyviä saunoja",
+      "alt": "Tower-sarjan saunakiukaat",
+      "exploreButton": "TUTUSTU KIUKAISIIN"
+    },
+    "intro": {
+      "title": "Esittelyssä huippuluokan Tower-sarjan saunakiukaat",
+      "desc": "Nauti nykyaikaisista, energiatehokkaista saunoista, jotka on suunniteltu rentoutumista ja hyvinvointia varten, tyylikkäällä ulkoasulla ja erinomaisella mukavuudella. Koe erinomainen lämmönjakautuminen ja tyylikäs muotoilu huippuluokan Tower-sarjan saunakiukaillamme."
+    },
+    "types": {
+      "round": "Pyöreä",
+      "wall": "Seinäasennettava",
+      "corner": "Nurkka"
+    },
+    "why": {
+      "eyebrow": "SAWO-KIUKAAT",
+      "title": "Miksi valita SAWO-kiuas",
+      "desc": "SAWO-kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, tarjoten tasaisen suorituskyvyn luotettavaan ja ylivertaiseen saunakokemukseen joka kerta.",
+      "userFriendly": "Käyttäjäystävälliset ohjaimet: Säädä lämpötilaa ja aikaa helposti täydellisen saunakokemuksen saavuttamiseksi."
+    },
+    "promo": {
+      "title": "Koe täydellinen rentoutuminen",
+      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
+    },
+    "empty": "Tower-kiukaita ei ole saatavilla."
+  },
   "roomsPage": {
     "meta": {
       "title": "Saunahuoneet",

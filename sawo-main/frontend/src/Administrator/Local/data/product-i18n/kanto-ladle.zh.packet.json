@@ -1,0 +1,49 @@
+{
+  "slug": "kanto-ladle",
+  "productId": "e97fa065-bba9-43bd-bf43-177980f1e61c",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "Kanto 桑拿勺",
+    "short_description": "SAWO Kanto 桑拿勺长度为 520mm，用于将水（löyly）浇在加热的桑拿石上。",
+    "description": null,
+    "type": "桑拿勺",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (451-MH)",
+        "name": "铁杉 (451-MH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "White (451-MWH)",
+        "name": "白色 (451-MWH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (451-MBL)",
+        "name": "黑色 (451-MBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

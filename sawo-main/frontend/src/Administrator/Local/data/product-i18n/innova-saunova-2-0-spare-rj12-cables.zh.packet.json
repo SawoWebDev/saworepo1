@@ -1,0 +1,13 @@
+{
+  "slug": "innova-saunova-2-0-spare-rj12-cables",
+  "productId": "8a27b22f-0506-478c-a207-2484c68cfdfb",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova & Saunova 2.0 备用 RJ12 电缆",
+    "short_description": "坚固耐用、可延长的低压电缆，配备卡扣式 RJ12 接头，专为与 Innova 及 Saunova 2.0 控制器无缝兼容而设计。信号传输可靠，安装简便。\n\n<span style=\"text-align: justify;\"><b>Innova 与 Saunova 2.0 控制器专用可延长低压电缆，配备卡扣式 RJ 接头。</b></span>",
+    "description": null,
+    "type": "备件"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "slug": "sawo30-round-ns",
+  "productId": "fbd6f67e-993e-477d-b784-32b7b3020d10",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless-steel casing"
+    },
+    {
+      "path": "features[4]",
+      "source": "Removable stone spacer"
+    },
+    {
+      "path": "features[5]",
+      "source": "Optional heater guard"
+    },
+    {
+      "path": "features[6]",
+      "source": "Optional integration collar"
+    }
+  ],
+  "fields": {
+    "name": "SAWO30 圆柱式 NS",
+    "short_description": "<p style=\"text-align: justify;\">SAWO30 <strong>圆柱式</strong>加热器造型出众,可完美安装在桑拿房中央,亦可嵌入长凳中。</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">高挑纤薄的机身可容纳大量桑拿石,营造出蒸汽与湿度完美结合的浓郁氛围。</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)\n不含石材间隔器</th>\n  <th>桑拿石<br>(kg)\nw/ Stone Spacer</th>\n  <th>控制方式</th>\n  <th colspan=\"2\">最小安全距离<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>245 × 245 × 1305</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>245 × 245 × 1305</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>345 × 345 × 1305</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-120NS-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>345 × 345 × 1305</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SW12-180NS-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>515 × 515 × 1305</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>SW12-210NS-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>515 × 515 × 1305</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>SW12-240NS-P</td>\n  <td>24.0</td>\n  <td>24 – 40</td>\n  <td>515 × 515 × 1305</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr></tbody></table>",
+    "type": "SAWO30 圆柱式",
+    "features": [
+      "功率范围：4.5 – 24.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "不锈钢外壳",
+      "可拆卸上盖,便于装填桑拿石",
+      "可拆卸石材间隔器",
+      "可选加热器护罩",
+      "可选安装环"
+    ]
+  }
+}

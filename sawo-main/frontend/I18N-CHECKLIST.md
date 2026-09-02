@@ -40,9 +40,9 @@ narrative log, the manifest is the source of truth.
 | `/sauna/accessories` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, brochure dropdown, 10 category cards. Needs native review. **ZH added 2026-08-31** — full `accessoriesPage` section (31/31 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/controls` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, intro, search/filter chrome, precaution notice, why-choose, promo banner. Needs native review. **ZH added 2026-08-31** — full `controlsPage` section (20/20 keys, 0 gap verified via key-diff). Reachable via the language switcher pilot (`en/fi/zh`). Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/rooms` | ✅ | ✅ | ⬜ | Done 2026-08-25. Hero, 16-item Configurator, RoomViewer chrome, Features carousel (6 tabs incl. paragraphs/specs), ProductDetails (story sections, feature text, perf cards, spec accordion), Room panels (4 room-type descriptions/features), Wood Materials section, the shared `SaunaCalculatorCTA` ("Find Your Dream Sauna"), plus bench-type/room-title dedup. Needs native review before going live. **ZH added 2026-08-26** — full `roomsPage` section (163/163 keys, verified 0 gap vs. English source via key-diff), reachable via the language switcher pilot (`en/fi/zh`, see `languageSettings.js`'s `PILOT_ENABLED_LOCALES`). Not native-reviewed, not in `TRANSLATED_PATHS`. **Correction, 2026-08-26**: the "Done 2026-08-25" claim above was wrong for two spots — `SaunaConfigurator.jsx` (the 16-item configurator) had the translation JSON written but **zero actual `t()` wiring in the component**, so it silently rendered 100% English on every locale (title, step tabs/labels/headings, all 16 item name/tag/desc, nav buttons, sidebar, CTA — plus the same locale-dropping `menuPaths.contact` link bug fixed elsewhere). Separately, `SaunaRoomViewer.jsx`'s one-line room-type subtitle (`cfg.desc`, sourced from `ROOM_CONFIGS` in `SaunaRoomData.jsx` — a *different* hardcoded data shape from the already-fixed `SRD_PANELS`) was never wired at all. Both fixed now (see "Infra fixes" below); FI and ZH both updated with the missing `roomDescriptions` keys. |
-| `/sauna/heaters/tower` | ⬜ | ⬜ | ⬜ | Individual heater model page. |
-| `/sauna/heaters/wall-mounted` | ⬜ | ⬜ | ⬜ | |
-| `/sauna/heaters/stone` | ⬜ | ⬜ | ⬜ | |
+| `/sauna/heaters/tower` | ✅ | ✅ | ⬜ | **Wired 2026-09-01** — `Tower.jsx` now calls `useLocaleT("sauna")`/`useLocaleT("common")`/`useLocalizedPath()` (following the `Stone.jsx` pattern): SEO title/description, hero title/subtitle/alt/explore-button, intro heading/desc, filter-pill "All"/group names + search placeholder/clear (via `common.json`'s `catalogFilter.*`), the second Round/Wall/Corner type-filter row (new `towerPage.types.*` keys — this page is the only heater page with a second filter row), empty state, product-card `<Link>`, "View All Heaters" link (locale-prefixed via `localize()`), Why-choose section, brochure link, and `PromoBanner` props. New `towerPage` namespace added to `sauna.json` for en+zh (`fi` intentionally left ⬜, out of scope for this pass). Zero hardcoded-English JSX hits on the audit regex. **Products (half-batch, per user request to split the 36-product remainder in two)**: this page pulls 7 product families (Tower/SAWO30/Aries/Cubos/Heaterking/Phoenix/Fiberjungle via the "Towers" category) — Aries (18) and Cubos (3) already had `zh` from Day 1. Translated the other half today: **Tower ×12** (corner/round/wall × nb/ni/ni2/ns), **Heaterking ×3** (corner/round/wall-ns), **Phoenix ×2** (ni2/ns), **Fiberjungle ×1** (ns) — 18/18 via `product-i18n.js extract/apply`. `name`/`type` follow the established Aries precedent (`Corner`→`转角式`, `Round`→`圆柱式`, `Wall`→`壁挂式`, brand name and NB/NS/Ni/Ni2 codes kept). Same HTML-baked-spec-table gotcha as Aries Corner (`description` has the whole `<table>` inline, not `spec_table`) — translated only `<th>` header cells (`Heater Model`→`加热器型号`, `Stones<br>(kg)`→`桑拿石<br>(kg)`, `Control`→`控制方式`, etc., reusing the exact Aries `zh` header wording for consistency), left every `<td>` model-code/kW/dimension row untouched. Verified via SQL: 18/18 have `product_translations` rows with `source_field_hashes` populated (10–12 fields each). Confirmed end-to-end on `/zh/products/tower-corner-nb` via Playwright — name, description, feature bullets, and spec-table headers all render in Chinese; model codes/dimensions/`Built-in (8+4h)` control-mode data correctly left in English. **Second half, same day (2026-09-01)**: user asked to also translate "Round/Wall/Corner colors" and finish the rest — extracted/translated/applied the remaining **SAWO30 ×18** products (corner/round/wall × plain/Black × nb/ni2/ns), completing all 7 product families shown on this page. `name`/`type` extend the same convention: `Black`→`黑色` (color descriptor), position words as before. Note SAWO30's spec-table headers have minor casing/punctuation drift from the Tower/Aries wording (`(KG)` vs `(kg)`, `min (m3) max` vs `min. (m3) max.`, `Size of heater` vs `Size of Heater`) — matched case-insensitively rather than normalizing the English source. `short_description` HTML structure varies more than Tower/Heaterking did (Round variants in particular mix `<p>`/`<span style="color:var(--text)...">` wrappers inconsistently product-to-product, apparently hand-edited over time) — handled with a per-slug (not per-shared-text) translation map instead of the dedup-by-exact-string approach used for the Tower batch, since exact-string reuse mostly missed here. Verified via SQL: 18/18 have `product_translations` rows with `source_field_hashes` populated (11 fields each). Confirmed end-to-end on `/zh/products/sawo30-round-black-ni2` via Playwright — name (`SAWO30 圆柱式 黑色 Ni2`), both description paragraphs, all 7 feature bullets, and the spec-table headers all render in Chinese; model codes/control-mode data untouched. Also visible in the "other heaters" carousel on that page: already-translated siblings (`Heaterking 圆柱式 NS`) render in Chinese next to still-English ones (`Phoenix NS`) from families not yet done — expected, not a bug. **All 36 of the original "products under `/sauna/heaters/tower`" remainder are now done in `zh`** (Tower ×12, Heaterking ×3, Phoenix ×2, Fiberjungle ×1, SAWO30 ×18) — combined with the pre-existing Aries ×18 and Cubos ×3, all 57 Towers-category products have `zh`. **`fi` pass, same day (2026-09-01), user asked to "continue the rest"**: added `towerPage` to `fi/sauna.json` (this page was the first heater sub-page — Stone/Wall-Mounted — to get `fi` copy; those two remain ⬜ for `fi`, out of scope here) and translated all 36 remaining products into `fi` via the same `product-i18n.js extract/apply` flow, reusing established fi vocabulary from the Aries/Cubos Day-1 batch (`Corner`→`Kulma`, `Round`→`Pyöreä`, `Wall`→`Seinä`, `Black`→`Musta`, header row `Heater Model`→`Lämmitinmalli` etc., `Available control:`→`Saatavilla oleva ohjaus:`, `Power range:`→`Tehoalue:` — all pulled from existing `translation_memory` rows rather than reinvented). Same two structural gotchas as the `zh` pass: SAWO30's spec-table header casing/punctuation drift (`(KG)` vs `(kg)`, `min (m3) max` vs `min. (m3) max.`) handled case-insensitively, and SAWO30 Round's inconsistent `<p>`/`<span style="color:var(--text)...">` HTML wrapping handled with a per-slug (not per-shared-text) translation map. Verified via SQL: 36/36 have `product_translations` rows with `source_field_hashes` populated. Confirmed end-to-end on `/fi/sauna/heaters/tower` (page chrome) and `/fi/products/sawo30-wall-black-ni2` (product — name, both description sentences, all 7 features, and spec-table headers all in Finnish; model codes/control-mode data untouched) via Playwright. **All 57 Towers-category products now have both `zh` and `fi`.** Not native-reviewed, not in `TRANSLATED_PATHS`. |
+| `/sauna/heaters/wall-mounted` | ✅ | ⬜ | ⬜ | **Checklist correction, 2026-09-01**: this row said "not started" but `WallMounted.jsx` was already fully wired (`useLocaleT`/`useLocalizedPath`, `wallMountedPage` namespace complete in en+zh) — found while using this file as the wiring template for `/sauna/heaters/stone`. `fi` genuinely is missing (confirmed via `require()`). Not native-reviewed, not in `TRANSLATED_PATHS`. **Products, 2026-09-01**: all 37 Wall-Mounted category products (Krios ×3, Nordex family ×16 [core/Black/Combi/Mini/Mini Combi], Mini family ×4, Mini X ×4, Scandia family ×6, Scandifire ×4) translated to `zh` via `product-i18n.js`, verified via SQL — 37/37 have `product_translations` rows with `source_field_hashes` populated, zero unspaced `kW`/`kg` matches. Brand names (Nordex, Krios, Mini, Mini X, Scandia, Scandifire, Cubos-style precedent) kept untranslated; color/finish descriptors (Black→黑色, Fibercoated→纤维涂层, Red→红色) and mounting/model-line words (Aries-style "Corner"→"Kulma"/"转角式" precedent doesn't apply here — these are all flat brand+code names) translated where present. Confirmed end-to-end on `/zh/products/nordex-black-nb` via Playwright: description, features, spec-table headers, and the "other heaters" carousel (`Scandifire 黑色 NB` etc.) all render correctly. Full per-product checklist and family-by-family notes in the Sauna Heaters batch table below. |
+| `/sauna/heaters/stone` | ✅ | ⬜ | ⬜ | **Wired 2026-09-01** — `Stone.jsx` now calls `useLocaleT("sauna")`/`useLocaleT("common")`/`useLocalizedPath()` (following the `WallMounted.jsx` pattern above): SEO title/description, hero title/subtitle/alt/explore-button, intro heading/desc, filter-pill "All" + search placeholder/clear/no-results/results-count (via `common.json`'s `catalogFilter.*`), empty state, product-card `<Link>`, "View All Heaters" link (now also correctly locale-prefixed — was a bare `menuPaths.heaters` before, same locale-dropping bug class documented elsewhere in this file), Why-choose section, brochure link (`common.json`'s `viewBrochure`), and `PromoBanner` props. New `stonePage` namespace added to `sauna.json` for en+zh (zh only, per this task's scope — `fi` intentionally left ⬜, falls back to English per-key, not a bug). Zero hardcoded-English hits on the audit regexes, `useLocaleT` count 3. `npm run i18n:manifest` confirms `sauna: zh translated`, 0 gap. `CI=true npx react-scripts build` compiled with zero errors. **Products**: of the 5 Stone-series products (Cumulus ×3, Nimbus ×2 — see the Sauna Heaters batch table below), Cumulus already had `zh` from Day 1; **Nimbus ×2 (`nimbus-ns`, `nimbus-combi-ns`) translated to `zh` today** via `product-i18n.js extract/apply`, verified via SQL — both have `product_translations` rows with `source_field_hashes` populated (6 and 8 fields respectively). Brand/model names (`Nimbus NS`, `Nimbus Combi NS`, `type: "Nimbus"`) kept untranslated, matching the Cumulus/Cubos precedent. Spec-table `<th>` headers translated, `<td>` data rows (model codes, kW, dimensions) left untouched, same prose/data split as every other product in this batch. **Source content bug found (not fixed, flagged only)**: `nimbus-combi-ns`'s English `description` table has a literal `"kW$1<br>Heater"` / `"kW$1<br>Tank"` artifact in the live `products` row itself (confirmed via direct Supabase query, not an extraction bug) — translated the intended meaning (`"kW<br>加热器"` / `"kW<br>水箱"`) rather than preserving the broken placeholder, same precedent as the Cumulus dangling-sentence bug from Day 1. Worth fixing in the English source directly; out of scope here. Not native-reviewed, not in `TRANSLATED_PATHS`. |
 | `/sauna/heaters/floor` | ⬜ | ⬜ | ⬜ | |
 | `/sauna/heaters/combi` | ⬜ | ⬜ | ⬜ | |
 | `/sauna/heaters/dragonfire` | ⬜ | ⬜ | ⬜ | |
@@ -69,6 +69,287 @@ included items) is tracked live in the **Translation CMS**
 grid), not exhaustively re-listed here — that page reads `source_field_hashes`
 freshness data directly from Supabase, so it's always current; this file
 would just go stale. Noteworthy events only:
+
+### Sauna Heaters batch — 5-day schedule (started 2026-09-01)
+
+119 products qualify as "Sauna Heaters" — filtered the same way
+`HeatersCatalog.jsx`/`isHeaterProduct()` does: `categories` contains
+`wall-mounted`/`floor`/`combi`/`dragonfire`/`tower`/`stone`, excluding
+accessory-like categories and the "Sauna Stones" name collision (published,
+visible, not deleted). Batched by base heater model (not alphabetically) so
+translation-memory reuse is maximal within a day — the first finish/control
+variant of each model gets fresh translation, siblings mostly auto-fill from
+TM and just need a review pass. `fi` and `zh` are both done per product
+before moving to the next, so a day's row is either fully done or not
+started (no split-locale state to track separately). Update the ✅/⬜ cells
+below as each product is applied — this table is the source of truth for
+"what's left," `/admin/translations` is the source of truth for "is it
+still fresh" (source_field_hashes-based, flags a product the moment its
+English content changes — see `README-i18n.md`'s Product content section
+for the extract/apply mechanics and the `variations` vs
+`heating_element_groups` gotcha).
+
+**Ordering decision (2026-09-01): `zh` first, `fi` second, not interleaved
+per-product.** Originally planned as fi+zh together per product before
+moving on; switched because Finnish (Latin script) blends into a page on a
+visual skim, so a stray untranslated English sentence is easy to miss —
+Chinese makes the translated/untranslated boundary visually unmistakable
+(this is exactly how the earlier zh audit caught real bugs — canonical
+tags, hreflang, the `ProductPageRouter` redirect — that a Finnish-only pass
+risked missing). So each day's batch now does `zh` for every product first,
+then comes back for `fi` as the mop-up pass. `aries-corner-black-nb` was
+done both-together before this decision (kept, not redone); `fi` for the
+next few Aries Corner variants was done ahead of `zh` for the same reason —
+kept rather than discarded, `zh` for those is being caught up now.
+
+**Day 1 — Aries, Cubos, Cumulus (24 products)**
+
+| Slug | fi | zh |
+|---|---|---|
+| aries-corner-black-nb | ✅ | ✅ |
+| aries-corner-black-ni2 | ✅ | ✅ |
+| aries-corner-black-ns | ✅ | ✅ |
+| aries-corner-nb | ✅ | ✅ |
+| aries-corner-ni2 | ✅ | ✅ |
+| aries-corner-ns | ✅ | ✅ |
+| aries-round-black-nb | ✅ | ✅ |
+| aries-round-black-ni2 | ✅ | ✅ |
+| aries-round-black-ns | ✅ | ✅ |
+| aries-round-nb | ✅ | ✅ |
+| aries-round-ni2 | ✅ | ✅ |
+| aries-round-ns | ✅ | ✅ |
+| aries-wall-black-nb | ✅ | ✅ |
+| aries-wall-black-ni2 | ✅ | ✅ |
+| aries-wall-black-ns | ✅ | ✅ |
+| aries-wall-nb | ✅ | ✅ |
+| aries-wall-ni2 | ✅ | ✅ |
+| aries-wall-ns | ✅ | ✅ |
+| cubos-nb | ✅ | ✅ |
+| cubos-ni2 | ✅ | ✅ |
+| cubos-ns | ✅ | ✅ |
+| cumulus-nb | ✅ | ✅ |
+| cumulus-ni2 | ✅ | ✅ |
+| cumulus-ns | ✅ | ✅ |
+
+**Day 2 — Nordex family (24 products)**
+
+| Slug | fi | zh |
+|---|---|---|
+| nordex-black-nb | ⬜ | ✅ |
+| nordex-black-ni2 | ⬜ | ✅ |
+| nordex-black-ns | ⬜ | ✅ |
+| nordex-nb | ⬜ | ✅ |
+| nordex-ni2 | ⬜ | ✅ |
+| nordex-ns | ⬜ | ✅ |
+| nordex-combi-black-ns | ⬜ | ✅ |
+| nordex-combi-ns | ⬜ | ✅ |
+| nordex-floor-black-ns | ⬜ | ⬜ |
+| nordex-floor-ns | ⬜ | ⬜ |
+| nordex-mini-black-nb | ⬜ | ✅ |
+| nordex-mini-black-ni2 | ⬜ | ✅ |
+| nordex-mini-black-ns | ⬜ | ✅ |
+| nordex-mini-combi-black-ns | ⬜ | ✅ |
+| nordex-mini-combi-ns | ⬜ | ✅ |
+| nordex-mini-nb | ⬜ | ✅ |
+| nordex-mini-ni2 | ⬜ | ✅ |
+| nordex-mini-ns | ⬜ | ✅ |
+| nordex-pro-combi-ns | ⬜ | ⬜ |
+| nordex-pro-ns | ⬜ | ⬜ |
+| nordex-s-black-ns | ⬜ | ⬜ |
+| nordex-s-combi-black-ns | ⬜ | ⬜ |
+| nordex-s-combi-ns | ⬜ | ⬜ |
+| nordex-s-ns | ⬜ | ⬜ |
+
+**Day 3 — SAWO30, Krios, Phoenix, Fiberjungle (24 products)**
+
+| Slug | fi | zh |
+|---|---|---|
+| sawo30-corner-black-nb | ✅ | ✅ |
+| sawo30-corner-black-ni2 | ✅ | ✅ |
+| sawo30-corner-black-ns | ✅ | ✅ |
+| sawo30-corner-nb | ✅ | ✅ |
+| sawo30-corner-ni2 | ✅ | ✅ |
+| sawo30-corner-ns | ✅ | ✅ |
+| sawo30-round-black-nb | ✅ | ✅ |
+| sawo30-round-black-ni2 | ✅ | ✅ |
+| sawo30-round-black-ns | ✅ | ✅ |
+| sawo30-round-nb | ✅ | ✅ |
+| sawo30-round-ni2 | ✅ | ✅ |
+| sawo30-round-ns | ✅ | ✅ |
+| sawo30-wall-black-nb | ✅ | ✅ |
+| sawo30-wall-black-ni2 | ✅ | ✅ |
+| sawo30-wall-black-ns | ✅ | ✅ |
+| sawo30-wall-nb | ✅ | ✅ |
+| sawo30-wall-ni2 | ✅ | ✅ |
+| sawo30-wall-ns | ✅ | ✅ |
+| krios-nb | ⬜ | ✅ |
+| krios-ni2 | ⬜ | ✅ |
+| krios-ns | ⬜ | ✅ |
+| phoenix-ni2 | ✅ | ✅ |
+| phoenix-ns | ✅ | ✅ |
+| fiberjungle-ns | ✅ | ✅ |
+
+**Day 4 — Tower, Scandia, Scandifire, Heaterking (25 products)**
+
+| Slug | fi | zh |
+|---|---|---|
+| tower-corner-nb | ✅ | ✅ |
+| tower-corner-ni | ✅ | ✅ |
+| tower-corner-ni2 | ✅ | ✅ |
+| tower-corner-ns | ✅ | ✅ |
+| tower-round-nb | ✅ | ✅ |
+| tower-round-ni | ✅ | ✅ |
+| tower-round-ni2 | ✅ | ✅ |
+| tower-round-ns | ✅ | ✅ |
+| tower-wall-nb | ✅ | ✅ |
+| tower-wall-ni | ✅ | ✅ |
+| tower-wall-ni2 | ✅ | ✅ |
+| tower-wall-ns | ✅ | ✅ |
+| scandia-combi-fiber-coated-ns | ⬜ | ✅ |
+| scandia-combi-ns | ⬜ | ✅ |
+| scandia-fibercoated-nb | ⬜ | ✅ |
+| scandia-fibercoated-ns | ⬜ | ✅ |
+| scandia-nb | ⬜ | ✅ |
+| scandia-ns | ⬜ | ✅ |
+| scandifire-black-nb | ⬜ | ✅ |
+| scandifire-black-ns | ⬜ | ✅ |
+| scandifire-red-nb | ⬜ | ✅ |
+| scandifire-red-ns | ⬜ | ✅ |
+| heaterking-corner-ns | ✅ | ✅ |
+| heaterking-round-ns | ✅ | ✅ |
+| heaterking-wall-ns | ✅ | ✅ |
+
+**Day 5 — Mini, Mini X, Minidragon, Nimbus, Helius, Savonia, Taurus (22 products)**
+
+| Slug | fi | zh |
+|---|---|---|
+| mini-nb | ⬜ | ✅ |
+| mini-fibercoated-nb | ⬜ | ✅ |
+| mini-combi-ns | ⬜ | ✅ |
+| mini-combi-fibercoated-ns | ⬜ | ✅ |
+| mini-x-nb | ⬜ | ✅ |
+| mini-x-ns | ⬜ | ✅ |
+| mini-x-fibercoated-nb | ⬜ | ✅ |
+| mini-x-fibercoated-ns | ⬜ | ✅ |
+| minidragon-black-nb | ⬜ | ✅ |
+| minidragon-black-ns | ⬜ | ✅ |
+| minidragon-red-nb | ⬜ | ✅ |
+| minidragon-red-ns | ⬜ | ✅ |
+| nimbus-combi-ns | ⬜ | ✅ |
+| nimbus-ns | ⬜ | ✅ |
+| helius-mini-ns | ⬜ | ✅ |
+| helius-ns | ⬜ | ✅ |
+| savonia-combi-fiber-coated-ns | ⬜ | ✅ |
+| savonia-combi-ns | ⬜ | ✅ |
+| savonia-fiber-coated-ns | ⬜ | ✅ |
+| savonia-ns | ⬜ | ✅ |
+| taurus-d-combi-ns | ⬜ | ✅ |
+| taurus-d-ns | ⬜ | ✅ |
+
+**Progress log** (append one line per day as it's completed — narrative
+detail like TM-prefill counts and any bugs found goes here, same style as
+the Steam entries below):
+
+- **2026-09-01 — Day 5 complete for `zh` (22/22 products, `fi` still ⬜)**:
+  Mini (`mini-nb`, `mini-fibercoated-nb`, `mini-combi-ns`,
+  `mini-combi-fibercoated-ns`), Mini X (`mini-x-nb`, `mini-x-ns`,
+  `mini-x-fibercoated-nb`, `mini-x-fibercoated-ns`), Minidragon
+  (`minidragon-black-nb`, `minidragon-black-ns`, `minidragon-red-nb`,
+  `minidragon-red-ns`), Helius (`helius-mini-ns`, `helius-ns`), Savonia
+  (`savonia-combi-fiber-coated-ns`, `savonia-combi-ns`,
+  `savonia-fiber-coated-ns`, `savonia-ns`), and Taurus
+  (`taurus-d-combi-ns`, `taurus-d-ns`) — done via `product-i18n.js
+  extract/apply`, verified via SQL: all 22 have `product_translations` rows
+  with `source_field_hashes` populated (Nimbus's 2 were done first, as part
+  of the `/sauna/heaters/stone` pickup logged directly below). TM reuse was
+  very strong within the Mini/Mini X families — both fully pre-filled
+  (name/short_description/description/features, zero fresh translation
+  needed) since near-identical Mini/Mini X copy had already been through
+  `zh` translation memory from earlier sessions. Minidragon, Helius,
+  Savonia, and Taurus needed fresh short_description + spec-table header
+  translation each, following the established prose/data split (`<th>`
+  headers translated, `<td>` rows — model codes, kW, dimensions — left
+  untouched) and the brand-name-kept-untranslated convention (e.g.
+  `Minidragon Black NB`, `type: "Minidragon"`) except where TM had already
+  translated a descriptive suffix into the name itself (e.g. `Mini
+  纤维涂层 NB`, `Savonia 纤维涂层 NS` — "Fibercoated"/"Fiber Coated" treated
+  as a translatable descriptor, consistent with the Aries "Corner"
+  precedent, not a brand word). **Two source-content typos found (not
+  fixed, flagged only)**: `helius-mini-ns`'s `features[0]` had `"Power
+  range: 2,0 – 3.0kW"` (European decimal comma) — corrected to `"2.0"` in
+  the zh translation only, English source left as-is; several Savonia
+  Combi/Taurus D Combi `features` used `"1,0kW"/"2,0kW"` for the same
+  reason — same fix applied in translation only. `fi` intentionally left
+  ⬜ for the whole batch — out of scope for this pass (user asked for
+  `zh` specifically).
+- **2026-09-01 — out-of-batch-order pickup, `/sauna/heaters/stone` requested
+  directly**: user asked to translate the Stone heaters page and its
+  products to `zh` specifically (not part of the sequential Day 1–5 batch
+  order above). Wired `Stone.jsx` (page chrome) and translated its 2
+  not-yet-done Nimbus products (`nimbus-ns`, `nimbus-combi-ns`) — see the
+  `/sauna/heaters/stone` row above for full detail and the source-content
+  `kW$1` bug found. Cumulus (the other Stone-series family) already had
+  `zh` from Day 1. `fi` intentionally left for both the page and the two
+  Nimbus products — out of scope for this pass, tracked as the usual ⬜.
+- **2026-09-01**: Aries Corner (6/6 products) done in both `fi` and `zh` via
+  `product-i18n.js`. Confirmed a real gotcha not previously documented:
+  these products' spec table isn't in the `spec_table` field at all — the
+  entire `<table>` (headers AND data rows) is baked as raw HTML directly
+  into `description`. Handled per the existing prose/data split rule
+  applied manually: translated only the `<th>` header cell text (e.g.
+  "Heater Model" → "Lämmitinmalli" / "加热器型号"), left every `<td>` row
+  cell (model codes, kW numbers, dimensions, "Built-in (8+4h)"-style
+  control-mode names) untouched. TM reuse confirmed strong within a model
+  family: after the first variant (`aries-corner-black-nb`), siblings
+  pre-filled 6-9 of ~10 fields automatically, needing fresh translation
+  only for `name`, the description table headers (re-typed per product
+  since the HTML wrapper/whitespace differs slightly between rows, so exact
+  TM string-match mostly misses on `description` even though the header
+  wording is identical — `short_description` and `features` matched fine).
+  Also adopted zh-first ordering starting here (see note above the Day 1
+  table).
+- **2026-09-01 — formatting fix, applied catalog-wide, not just today's
+  batch**: numbers were rendering jammed against their unit (`"9.0kW"`,
+  `"9kW"`) because the English source itself has no space there and the
+  translation pipeline was mirroring it verbatim. Fixed via SQL across
+  every `product_translations` row (`name`/`type`/`short_description`/
+  `description`/`features`/`variations`, all locales) — this caught and
+  fixed existing Steam Generators `zh` rows too (`"75.0kW"` → `"75.0 kW"`),
+  not just Sauna Heaters. Also fixed `translation_memory.translated_text`
+  so future `extract` pre-fills carry the space forward instead of
+  reintroducing the bug. Verified zero remaining `\d(kW|kg)` matches
+  anywhere in `product_translations`. New translations from here on are
+  typed with the space from the start. The English source `products` table
+  itself was deliberately left untouched — out of scope, a separate
+  decision if wanted.
+- **2026-09-01 — Day 1 complete (24/24 products, fi+zh, verified via SQL)**:
+  Aries Corner/Round/Wall (18, detailed above), Cubos (3), Cumulus (3). All
+  confirmed with `source_field_hashes` populated for both locales, zero
+  remaining unspaced-unit matches. Cubos and Cumulus each turned out to be
+  a single distinct model (not a mounting-position family like Aries), so
+  `name`/`type` kept the brand name unchanged ("Cubos", "Cumulus") rather
+  than translating a generic noun after it, unlike "Aries Corner" → "Aries
+  Kulma" / "Aries 转角式".
+  - **Source content bug found (not fixed, flagged only — out of scope for
+    a translation pass)**: all 3 Cumulus products' English
+    `short_description` has a dangling, grammatically broken sentence —
+    `"...front. It comes The soapstone helps..."` (an orphaned "It comes"
+    with no continuation). Translated the *intended* meaning coherently in
+    both `fi`/`zh` rather than preserving the break (unlike the
+    `venturi-pipe` spelling-typo case from the Steam batch, this isn't a
+    reproducible spelling variant of a real word — a broken clause doesn't
+    translate meaningfully word-for-word). Worth fixing in the English
+    source directly at some point; flagging here rather than silently
+    fixing it since it's outside this pass's scope.
+  - **Second HTML-structure gotcha found**: `cumulus-ni2`'s spec table
+    isn't a plain `<table>` like every other Aries/Cubos/Cumulus variant —
+    it's wrapped in a legacy WordPress/Visual-Composer widget div stack
+    (`wpb_row`/`vc_row`/`textwidget`/etc., `<th class="tg-s6z2">` cells).
+    Same prose/data split applied (translate `<th>` text only), but large
+    whole-string `old_string` replacements kept failing to match against
+    this packet — worked around by editing each `<th>` text and the
+    `short_description`/`name` fields as separate small, uniquely-anchored
+    edits instead of one big block replace.
 
 - **2026-08-25**: all 18 steam-category products (3 Steam Controls + 12
   Steam Accessories + 3 Steam Generators, the last already partially done)
@@ -246,6 +527,108 @@ would just go stale. Noteworthy events only:
     Same script, same packet format, works for any of the 7
     `PRODUCT_TRANSLATION_LOCALES` now.
 
+### Site-wide all-products `zh` batch (started 2026-09-02)
+
+User asked to continue `zh` translation across **all** products, not just
+the Sauna Heaters set above. Baseline check via SQL (published, visible,
+not-deleted products): **380 total, 128 already had `zh`, 252 missing**
+at the start of this batch. Unlike the Sauna Heaters batch, this spans
+every category — mostly non-heater accessories that translation memory
+hasn't touched before, so TM pre-fill is much weaker here (many products
+extract with 0 pre-filled fields, vs. near-100% for repeat heater model
+families). Working through it in smaller ad-hoc batches (not a fixed
+5-day schedule like heaters) since category sizes vary wildly — tracked
+here as flat progress-log entries rather than a per-day table. Remaining
+category breakdown at batch start (excludes anything already counted in
+the Sauna Heaters batch above): Sauna Accessories 50, Heater Accessories
+46, Thermometers 26, Heater Guard 26, Doors & Handles 25, Sauna Controls
+23, Pails 20, Kivistone 18, Integration Collar 16, Ladles 15, Ventilation
+& Miscellaneous 12, Benches 11, Sauna Lights 11, Floor 8, Clocks & Timers
+7, Infrared 6, Headrest & Backrest 6, Accessory Sets 4, Cloth Hangers 4,
+Spare Parts 3, Humidifiers 3, Wooden Floor Mats 3, Combi 3, Sauna Stones
+2, Steam Controls 1, Pail Shower 1 (a product can count in more than one
+category, so this sums higher than 252).
+
+**Naming convention note, established this session**: unlike heater model
+names (Cumulus, Nimbus, Aries — proprietary marketing names kept in
+English), generic accessory product names ARE fully translated (e.g.
+"Aroma Pump" → "香薰泵", confirmed against an existing `zh` row from an
+earlier session). Wood species in variation names are translated too
+(Cedar → 雪松, Hemlock → 铁杉, Aspen → 白杨) while model codes in
+parentheses stay untouched (e.g. "雪松 (595-D-CNR)"). Set/product-line
+names that read as a brand (Signature, Dragon — tied to the Dragonfire
+Series) were kept in English, same treatment as heater brand names,
+since the surrounding descriptive text is what actually needed
+translating.
+
+**Batch 1 — 24 products (2026-09-02)**: picked from the smallest
+remaining categories to make fast initial progress: Sauna Stones (2:
+`sauna-stones-olivine-diabase-rounded-20kg`,
+`decorative-sauna-stones-white-quartz-rounded-10kg`), Steam Controls (1:
+`steam-ste`), Pail Shower (1: `pail-shower`), Combi (3, actually Nordex
+heater-family products tagged with the "Combi" category —
+`nordex-s-combi-ns`, `nordex-s-combi-black-ns`, `nordex-pro-combi-ns` —
+these also count toward the still-unstarted Day 2/Nordex row of the
+Sauna Heaters batch table above, not yet marked there since that table
+tracks the full 24-product Nordex family as one day), Humidifiers (3
+Cozy Tank sizes), Spare Parts (3), Wooden Floor Mats (3), Accessory Sets
+(4: Traditional/Essential/Dragon/Signature), Cloth Hangers (4). All 24
+done via `product-i18n.js extract/apply`, verified via SQL —
+`product_translations` rows present with `source_field_hashes` populated
+for every one. New `spec_table_headers` field type encountered for the
+first time in this session (simple accessories use a 2-column
+Specification/Detail table rather than the heaters' full HTML
+`description` table) — translated `["Specification","Detail"]` →
+`["规格","详情"]` consistently across all of them. Post-batch count:
+**228 of 380 products still missing `zh`** (down from 252). Continuing
+in further batches; check this section (or `/admin/translations`, the
+live source of truth) before resuming to avoid re-doing a category.
+
+**Batch 2 — 20 products (2026-09-02)**: Clocks & Timers (7, all done:
+`loisto-wooden-clock-round`, `sand-timer-tag-15min`, `sand-timer-15min`,
+`loisto-clock-square`, `sand-timer-kanto-15min`, `wooden-pail-clock`,
+`wooden-pail-clock-small`), Headrest & Backrest (6, all done:
+`halu-anti-theft-headrest`, `wooden-backrest`, `wooden-backrest-slim`,
+`halu-wooden-headrest`, `wave-wooden-backrest`, `wave-wooden-headrest`),
+Infrared (6, all done: `infrared-panels`, `infrared-backrest`,
+`infrared-2-0-power-controller`, `infrared-2-0-built-in-control`,
+`infrared-2-0-user-interface`, `interface-holder`), plus 1 Nordex
+heater-family product picked up from the "Floor" category
+(`nordex-floor-ns` — same Day 2/Nordex row as the 3 Combi variants in
+Batch 1 above; the remaining Nordex Floor/S/Pro variants are still
+untranslated). All 20 verified via SQL — `product_translations` rows
+present with `source_field_hashes` populated. **Naming precedent
+extended**: brand/model-line names that read as marketing names (Halu,
+Loisto, Kanto — all Finnish product-line names, same treatment as
+Signature/Dragon) kept in English with only the descriptive suffix
+translated (e.g. "Halu Anti-theft Headrest" → "Halu 防盗头枕"); purely
+descriptive names (Wave, Wooden Backrest) translated in full. "Infrared
+2.0" kept untranslated as a model designation, same pattern as "Steam
+2.0". Post-batch count: **208 of 380 products still missing `zh`** (down
+from 228). Clocks & Timers, Headrest & Backrest, and Infrared categories
+are now fully done for `zh`.
+
+**Batch 3 — 15 products, Ladles category complete (2026-09-02)**: all 15
+Ladles products done — `stainless-steel-ladle-with-curved-handle`,
+`dragon-ladle`, `kanto-ladle`, `stainless-steel-ladle-40cm`,
+`stainless-steel-ladle-siro-46-5cm`, `stainless-steel-ladle-siro-70-5cm`,
+`stainless-steel-ladle-usva-40cm`, `steamshot-ladle`,
+`wooden-ladle-puro-81cm`, `wooden-ladle-puro-51cm`,
+`wooden-ladle-puro-67cm`, `wooden-ladle-standard-36cm`,
+`wooden-ladle-standard-42cm`, `wooden-ladle-standard-52cm`,
+`wooden-ladle-standard-68cm`. All verified via SQL. **Naming precedent
+extended again**: product-line names for ladles (Siro, Usva, Kanto,
+Puro, Steamshot — all Finnish/marketing names) kept in English with only
+the descriptive noun translated (e.g. "Stainless Steel Ladle Siro
+46.5cm" → "Siro 不锈钢桑拿勺 46.5cm"); the plain "Wooden Ladle Standard
+_cm" line has no brand word so translated in full ("标准木质桑拿勺"). The
+Finnish word "löyly" (sauna steam/the act of pouring water on hot
+stones) was kept untranslated in every short_description, same as the
+English source keeps it italicized/untranslated — no established
+Chinese equivalent exists in the site's copy, so preserved rather than
+inventing one. Post-batch count: **193 of 380 products still missing
+`zh`** (down from 208). Ladles category is now fully done for `zh`.
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |
@@ -253,7 +636,7 @@ would just go stale. Noteworthy events only:
 | `/` (Home) | ✅ | ✅ (fi, de, **zh**) | ✅ (fi + de) | zh added 2026-08-26 as a timing/quality pilot — reachable via the language switcher (not yet in `TRANSLATED_PATHS`, so no hreflang claim, and not native-reviewed). |
 | Header / nav | ✅ | ✅ (fi, de, zh) | — | `nav.json`, shared chrome. |
 | Footer | ✅ | ✅ (fi, de, zh) | — | `footer.json`, shared chrome. |
-| `product.json` (individual product page copy) | ✅ | ✅ (fi, zh) | — | Feeds `DispProduct.jsx`; separate from the Supabase `product_translations` pilot (see README-i18n.md's "Product content" section). **2026-08-26**: found and fixed `DispAccessories.jsx` and `DispSaunaRoom.jsx` — the individual accessory-product and individual sauna-room detail templates — had **zero** i18n wiring at all (no `useLocaleT`, no `localize()`, unlike `DispProduct.jsx` which was already wired). Every "Resources"/"Specifications"/"Technical Data"/"You might also like"/"Related Products" label, the not-found fallback state, and internal `<Link>`s on those two templates rendered hardcoded English regardless of locale. Wired both to `product.json` (added `sections.technicalData`, `sections.infraredSpecifications`, `moreDetailsSoon`, `notFound.roomTitle/roomDescription/browseRooms`, `related.relatedRooms`) and fixed their locale-dropping links. `zh/product.json` created from scratch (didn't exist before today). Also fixed two misses inside `DispProduct.jsx` itself that an earlier hardcoded-string audit's regex didn't catch: the not-found `error` message was a raw English string that bypassed `t()` entirely when set, and "More details coming soon." was untranslated. **Known remaining gap, not fixed today** (out of scope for this pass — flagged so it isn't lost): `DispSaunaRoom.jsx` still has several untranslated labels beyond what was requested — "Available Door Positions," "Floor Plan," "Bench Configuration," "Details," "Description," the `ROOM_TYPE_LABELS`/`SIZE_LABELS` lookup tables, and the ResourcesPanel's "N Documents"/"Click to expand" text; `DispSaunaRoom.jsx` also still reads from a static JSON snapshot rather than live Supabase (see `sauna-rooms-data-sync-gotcha` note) — separate pre-existing issue, not part of this i18n pass. |
+| `product.json` (individual product page copy) | ✅ | ✅ (fi, zh) | — | Feeds `DispProduct.jsx`; separate from the Supabase `product_translations` pilot (see README-i18n.md's "Product content" section). **2026-08-26**: found and fixed `DispAccessories.jsx` and `DispSaunaRoom.jsx` — the individual accessory-product and individual sauna-room detail templates — had **zero** i18n wiring at all (no `useLocaleT`, no `localize()`, unlike `DispProduct.jsx` which was already wired). Every "Resources"/"Specifications"/"Technical Data"/"You might also like"/"Related Products" label, the not-found fallback state, and internal `<Link>`s on those two templates rendered hardcoded English regardless of locale. Wired both to `product.json` (added `sections.technicalData`, `sections.infraredSpecifications`, `moreDetailsSoon`, `notFound.roomTitle/roomDescription/browseRooms`, `related.relatedRooms`) and fixed their locale-dropping links. `zh/product.json` created from scratch (didn't exist before today). Also fixed two misses inside `DispProduct.jsx` itself that an earlier hardcoded-string audit's regex didn't catch: the not-found `error` message was a raw English string that bypassed `t()` entirely when set, and "More details coming soon." was untranslated. **2026-09-01 — remaining `DispSaunaRoom.jsx` gap closed**: wired every label flagged above — `ROOM_TYPE_LABELS`/`SIZE_LABELS` (replaced with `roomTypeLabel()`/`sizeLabel()` helpers reading `product.json`'s new `roomTypes`/`sizeLabels` keys), "Available Door Positions" (`sections.doorPositions`), "Floor Plan" (`sections.floorPlan`, including the image `alt` text), "Bench Configuration" (`sections.benchConfiguration`, both the multi-config and single-config branches), "Details" (`sections.details`), "Description" (`sections.description`), the "Featured"/"Best Seller" badges (`badges.featured`/`badges.bestSeller`), the "Model {{code}} · SKU {{sku}}" line (`modelCode`/`skuCode`), every `StatChip` label (`stats.capacity/floorSize/height/woodType/voltage/panelWattage/totalPower/sessionTime`), the `ResourcesPanel`'s "N Documents"/"Click to expand"/"Click to collapse"/"PDF · Click to open" (`resourcesPanel.*`, with `{{count}}` interpolation), `FeatureTabs`' `Tab N` fallback title (`featureTabs.tabFallback`), and `RelatedRooms`' "More {type} Rooms" (`related.moreTypeRooms`, interpolated with the now-translated type label). Added all new keys to `en`/`fi`/`zh` `product.json`; `npm run i18n:manifest` confirms zero key gap in either locale. Verified via Playwright against two real rooms (`standard-sauna-room-1515` for badges/stats/door-options/bench-config/IR-specs, `compact-sauna-room-1310ms` for features/description) across `/`, `/fi`, `/zh` — every wired label renders translated (e.g. "SAATAVILLA OLEVAT OVIPAIKAT"/"可选门位" for door positions, "LAUDERAKENNE"/"座椅配置" for bench configuration). Door-option `label`/room `features`/`description` text itself is per-room Supabase-sourced content (English source, not translated) — unaffected by this pass, same as before. `DispSaunaRoom.jsx` still reads from a static JSON snapshot rather than live Supabase (see `sauna-rooms-data-sync-gotcha` note) — separate pre-existing issue, still not part of any i18n pass. |
 | `common.json` (shared buttons/CTAs) | ✅ | ✅ (fi, de, zh) | — | Includes `catalogFilter.*`, `viewBrochure`, `saunaCalculatorCTA` — see "Home page's full translation dependency list" below for why this file matters more than it looks. |
 | `seo.json` (site-wide Organization schema) | — | ✅ (fi, de, zh) | — | Not currently read via `useLocaleT` anywhere (checked 2026-08-26) — tracked for manifest completeness, not a live rendering dependency yet. |
 
@@ -287,14 +670,74 @@ automatically: `npm run i18n:manifest` prints a `shared` table alongside
 `pages` — a shared namespace showing `stale`/`missing` there means **every**
 page using it is incompletely translated, not just the one you're looking at.
 
+## Infrared section
+
+| Route | Wired | FI written | ZH written | Live | Notes |
+|---|---|---|---|---|---|
+| `/infrared` (hub) | ✅ | ✅ | ✅ | ⬜ | Done 2026-09-01. New `infrared.json` namespace (`hub`/`saunas`/`panels`/`controls`). Hero, sauna-room intro section, 3 accessory cards + alt text, 3 control cards + alt text, CTA. Benefits carousel (12 cards) translated by reusing `common.json`'s existing `wellnessBenefits` keys rather than duplicating that copy — same pattern as Home's Section3.jsx. All internal links (`/infrared/saunas`, `/products/:slug` x2) wrapped in `useLocalizedPath()`. Key-parity verified 57/57 across en/fi/zh, `npm run i18n:manifest` confirms `infrared: source/translated/translated`. Needs native review before going live. |
+| `/infrared/saunas` | ✅ | ✅ | ✅ | ⬜ | Done 2026-09-01. Hero, brochure button + PDF item label. `SaunaRoomViewer`'s room title/description were **already wired** (reused from `sauna.json`'s `roomsPage.roomTitles/roomDescriptions.infrared` — fixed in an earlier session, see "Infra fixes (2026-08-26)"), so no work needed there. **Found and fixed a real gap in shared components while wiring this page**: `SaunaProductDetails` only auto-translates its `storySections`/`featureText`/`perfCards`/`accordionItems` props when the caller passes the *default* standard-sauna data (`isDerivedFromDefault` check) — since this page always passed its own `IR_SPD_*` data, none of those ever translated, and the `title` prop override bypassed translation entirely too. Fixed by building the translated versions directly from the new `infrared.json` `saunas.productDetails.*` keys and passing those instead of the raw `IR_SPD_*` imports (component itself untouched — this is caller-side, matches how `isDerivedFromDefault` was designed to be worked around). Same issue existed for `SaunaWoodMaterials`: its `WOOD_KEYS` lookup only maps Cedar/Aspen/Pinaceae, so the infrared page's Hemlock item was never translatable via that path — fixed by pre-merging translated `name`/`description`/`traits` from `infrared.json`'s `saunas.woodMaterials.items` onto the existing `IR_MATS_ITEMS` (keeping the untranslatable `image`/`alt` fields), rather than touching the shared `WOOD_KEYS` map. **Also found**: this page renders `<WellnessBenefits />` (the shared 12-card carousel) with no `cards` prop, i.e. the untranslated English default — same "component has i18n, page never passed it" bug class as the two above. Fixed by building the same `tc("wellnessBenefits.<key>...")`-based `cards` array Home's Section3.jsx already builds, and passing it in. Key-parity verified. Needs native review before going live. |
+| `/infrared/panels` | ✅ | ✅ | ✅ | ⬜ | Done 2026-09-01. Uses the shared `ProductShowcase` component (unchanged) with all copy now passed as translated props (`infrared.json`'s `panels.*`) instead of hardcoded strings. `seoHreflangAlternates` wired. |
+| `/infrared/controls` | ✅ | ✅ | ✅ | ⬜ | Done 2026-09-01. Same `ProductShowcase` pattern as `/infrared/panels`, using `infrared.json`'s `controls.*`. |
+
+Audited per the "Infra fixes (2026-08-26)" process before calling any of the 4 pages done: the 3-word/2-word hardcoded-JSX-text regexes and the `alt|title|placeholder|aria-label="..."` attribute regex both returned zero hits across all 4 files after wiring, every internal `<Link to=...>` (4 call sites) is wrapped in `useLocalizedPath()`, and `useLocaleT` appears ≥2 times in every file. The three shared-component gaps found (`SaunaProductDetails`, `SaunaWoodMaterials`, `WellnessBenefits` all silently rendering English when a caller supplies non-default data/no `cards` prop) are exactly the "JSON is complete, component/page never reads it" failure mode this file has flagged twice before (`SaunaConfigurator.jsx`, `DispAccessories.jsx`/`DispSaunaRoom.jsx`) — worth grepping for the same pattern (`useLocaleT` count on a shared component that also accepts data via props) if a similar catalogue-style page shows up untranslated later.
+
 ## Not yet touched at all
 
-Infrared (`/infrared`, `/infrared/saunas`, `/infrared/panels`, `/infrared/controls`), About (`/about`, sustainability, latest-news), Careers, Contact, Support (FAQ, sauna calculator, user manuals, product catalogue), Privacy Policy, Sitemap. None of these have any `t()` wiring yet.
+About (`/about`, sustainability, latest-news), Careers, Contact, Support (FAQ, sauna calculator, user manuals, product catalogue), Privacy Policy, Sitemap. None of these have any `t()` wiring yet.
 
 ## Recommended next batch
 
 1. `/steam/controls` + `/steam/accessories` — same `CategoryHero` + `catalogFilter` pattern already built today, should go fast.
 2. Native-speaker review pass on everything marked "FI written, not Live" above, then flip each path in `translatedRoutes.js`.
+
+## Infra fixes (2026-09-01)
+
+- **Real bug, not a translation gap: the Home hero's typewriter animation
+  (`src/pages/Home/Hero.jsx`) stayed stuck in whatever locale it first
+  mounted in, even after the rest of the page had switched.** Reported by
+  the user via a screenshot of `/zh` — the hero `<h1>` ("体验……") was
+  correctly Chinese, but the animated line beneath it kept typing English
+  ("wellness with ancient tradition"). Root cause: switching language via
+  the header dropdown is a **client-side route change** (`/` → `/zh`), and
+  because `<Home>`/`<Hero>` is the same element type at the same position
+  in the route tree for every locale, React Router does **not** remount
+  it — only `useLocale()`'s context value updates, triggering a re-render.
+  Every plain `t()`-driven render (the `<h1>`, the button, etc.) picks up
+  the new locale immediately because it re-runs on every render. But the
+  typewriter text is built once inside a `useEffect(..., [])` that reads
+  `SENTENCES` (the translated array) into a closure and then drives a
+  manual `setTimeout` char-by-char loop outside of React's render cycle —
+  since the effect had an empty dependency array (deliberately, per its
+  own comment, to avoid restarting the animation on unrelated re-renders),
+  it never reran when the locale changed, so it kept animating the
+  sentences captured at the *original* mount.
+  - **Fix**: added `locale` (from `useLocale()`) to the effect's
+    dependency array — `[locale]` instead of `[]` — so the whole
+    type/delete loop restarts (with its own internal state reset, since
+    `n`/`i`/`isTyping`/`spans` are all local to the effect body) exactly
+    when the locale actually changes, and only then. Depending on
+    `SENTENCES` itself would have been wrong — `tHome()` returns a new
+    array reference on every render regardless of content, which would
+    restart the animation on every unrelated re-render (e.g. the
+    `heroLoaded` image-fade state changing).
+  - **Why this class of bug is easy to miss**: a fresh page load to `/zh`
+    never reproduces it — the component mounts fresh with the correct
+    locale from the start, so the effect's closure is correct from
+    `n = 0`. It only shows up when a visitor arrives on one locale and
+    **switches** to another without a full page reload — exactly the
+    header language switcher's normal behavior, and the most common real
+    path a visitor actually takes. **Any other locale-derived value read
+    once into a `useEffect`/`useRef`/imperative-DOM closure (not a plain
+    `t()` call in JSX) is worth checking for the same pattern** — an
+    effect with `[]` deps that captures translated text is a symptom, the
+    fix is always the same shape: add the primitive that actually should
+    invalidate it (`locale`, not the translated array/object itself) to
+    the dependency list.
+  - Verified with Playwright: loaded `/`, confirmed the typewriter showed
+    an English sentence, clicked the header language switcher to 简体中文
+    (a real client-side nav, not `page.goto("/zh")`), waited through a
+    full type/pause/delete cycle, and confirmed the typewriter text turned
+    Chinese without a page reload.
 
 ## Infra fixes (2026-08-31)
 
