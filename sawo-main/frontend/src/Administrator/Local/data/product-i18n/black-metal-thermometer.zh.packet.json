@@ -1,0 +1,35 @@
+{
+  "slug": "black-metal-thermometer",
+  "productId": "ff8fdb74-3536-47fd-8ada-1004b5c497fe",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "黑色金属温度计",
+    "short_description": "SAWO 黑色金属温度计 是一款黑色金属桑拿温度计，尺寸为 110 × 110mm，用于监测桑拿房内的温度。",
+    "description": null,
+    "type": "温度计",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Black Metal (295-TMBL)",
+        "name": "黑色金属 (295-TMBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

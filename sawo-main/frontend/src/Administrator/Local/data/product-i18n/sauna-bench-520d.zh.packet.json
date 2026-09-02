@@ -1,0 +1,40 @@
+{
+  "slug": "sauna-bench-520d",
+  "productId": "d2d150fb-c147-479a-8fec-eaa396a8b7ee",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (520-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "桑拿长椅",
+    "short_description": "SAWO 桑拿长椅是一款实木桑拿长椅，尺寸为 430 × 534 × 412mm，专为在桑拿房内提供舒适、耐热的座椅体验而打造。",
+    "description": null,
+    "type": "长椅",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (520-D)",
+        "name": "雪松 (520-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "clear-glass-reversible-sauna-door-wide",
+  "productId": "e85e98bd-0640-4698-9302-24e627b850c9",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (731-4SCD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (731-4SCA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (731-4SCH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "宽版透明玻璃左右可开桑拿门",
+    "short_description": "SAWO 宽版透明玻璃左右可开桑拿门是一款桑拿门，开口尺寸 700 × 1800mm，门框尺寸 790 × 1890mm，可左右翻转安装。",
+    "description": null,
+    "type": "门与拉手",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (731-4SCD)",
+        "name": "雪松 (731-4SCD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (731-4SCA)",
+        "name": "白杨 (731-4SCA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (731-4SCH)",
+        "name": "铁杉 (731-4SCH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

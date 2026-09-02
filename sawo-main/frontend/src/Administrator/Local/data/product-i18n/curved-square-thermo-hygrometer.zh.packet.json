@@ -1,0 +1,64 @@
+{
+  "slug": "curved-square-thermo-hygrometer",
+  "productId": "6574195b-3312-4c32-bcc4-824321773a1d",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (285-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (285-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (285-THH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "弧形方形温湿度计",
+    "short_description": "SAWO 弧形方形温湿度计 是一款桑拿温湿度计，尺寸为 170 × 175mm，用于监测桑拿房内的温度与湿度。",
+    "description": null,
+    "type": "温度计",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (285-THD)",
+        "name": "雪松 (285-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (285-THA)",
+        "name": "白杨 (285-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (285-THH)",
+        "name": "铁杉 (285-THH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
