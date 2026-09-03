@@ -20,6 +20,20 @@ export default function ResetPassword() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", "light");
 
+    // A link that's already been used, expired, or was opened by an email
+    // scanner before the real click never fires PASSWORD_RECOVERY at all —
+    // Supabase instead redirects back here with an error in the hash/query
+    // string (e.g. #error=access_denied&error_code=otp_expired). Surface
+    // that immediately instead of spinning on "Verifying..." forever.
+    const params = new URLSearchParams(
+      window.location.hash ? window.location.hash.slice(1) : window.location.search
+    );
+    const linkError = params.get("error_description") || params.get("error");
+    if (linkError) {
+      setError(decodeURIComponent(linkError).replace(/\+/g, " "));
+      return;
+    }
+
     // Supabase automatically handles the token in the URL
     // and fires PASSWORD_RECOVERY when the user lands on this page
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -39,7 +53,33 @@ export default function ResetPassword() {
       }
     );
 
-    return () => subscription.unsubscribe();
+    // Fallback for the case the event already fired (or never will) before
+    // this listener subscribed — e.g. Supabase processed the URL
+    // synchronously on load. If there's already a recovery session sitting
+    // there, pick it up directly instead of waiting on an event that won't
+    // come again.
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) setSessionReady(true);
+    });
+
+    // If neither a session nor an error param ever shows up (link already
+    // consumed, clock skew, etc.), don't spin forever — tell the user and
+    // point them back to requesting a fresh link.
+    const timeout = setTimeout(() => {
+      setSessionReady((ready) => {
+        if (!ready) {
+          setError(
+            "This reset link couldn't be verified. It may have expired or already been used — request a new one."
+          );
+        }
+        return ready;
+      });
+    }, 10000);
+
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(timeout);
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -94,7 +134,23 @@ export default function ResetPassword() {
   return (
     <div className="login-page">
       <div className="login-card">
-        {success ? (
+        {!sessionReady && error ? (
+          <div className="login-header">
+            <div style={{ marginBottom: "0.75rem" }}>
+              <i className="fa-solid fa-circle-exclamation"
+                style={{ fontSize: "2rem", color: "#dc2626" }} />
+            </div>
+            <img src={logo} alt="Logo" className="login-logo" />
+            <h1 className="login-title">Link Not Verified</h1>
+            <p className="login-sub">{error}</p>
+            <div style={footerStyle}>
+              <button onClick={() => navigate("/login")}
+                className="link-btn back-btn">
+                <i className="fa-solid fa-chevron-left" /> Back to login
+              </button>
+            </div>
+          </div>
+        ) : success ? (
           <div className="login-header">
             <div style={{ marginBottom: "0.75rem" }}>
               <i className="fa-solid fa-circle-check"
