@@ -1,0 +1,76 @@
+{
+  "slug": "wave-wooden-headrest",
+  "productId": "9d70e747-c3c8-4a5d-8c7b-111411c4cbde",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (515-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (515-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (515-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (515-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Aaltomallinen puinen niskatuki",
+    "short_description": "SAWO Aaltomallinen puinen niskatuki on puinen niskatuki, mitat 190 × 480mm, joka tukee niskaa ja selkää saunomisen aikana.",
+    "description": null,
+    "type": "Niskatuet ja selkänojat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (515-D)",
+        "name": "Setri (515-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (515-A)",
+        "name": "Haapa (515-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (515-H)",
+        "name": "Hemlokki (515-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (515-BL)",
+        "name": "Musta (515-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "slug": "loisto-wooden-clock-round",
+  "productId": "89ca2395-08f5-48e4-80b1-fefbddd2d5a5",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (535-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Loisto puukello, pyöreä",
+    "short_description": "SAWO Loisto puukello, pyöreä on pyöreä puinen saunakello, mitat Ø180mm, kestää saunan kuumuuden ja kosteuden.",
+    "description": null,
+    "type": "Kellot ja ajastimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (535-D)",
+        "name": "Setri (535-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

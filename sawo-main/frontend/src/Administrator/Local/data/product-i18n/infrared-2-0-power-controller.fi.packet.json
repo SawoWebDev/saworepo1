@@ -1,0 +1,26 @@
+{
+  "slug": "infrared-2-0-power-controller",
+  "productId": "5c2398a8-ecc5-4c24-8aaf-7032d2759e18",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "Infrared 2.0 -tehonohjain",
+    "short_description": "Infrared 2.0 -tehonohjain ohjaa infrapunalämmityspaneeleita luotettavasti ja tarkasti.",
+    "description": null,
+    "type": "Infrapunaohjaimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ]
+  }
+}
