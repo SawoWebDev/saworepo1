@@ -536,7 +536,7 @@ export default function Settings({ currentUser }) {
           type="button"
           onClick={handleClearCache}
           disabled={clearingCache}
-          className="btn btn-secondary text-sm px-4 py-2 disabled:opacity-50 disabled:pointer-events-none"
+          className="btn btn-ghost text-sm px-4 py-2 disabled:opacity-50 disabled:pointer-events-none"
         >
           {clearingCache ? "Clearing..." : "Clear Cache"}
         </button>
