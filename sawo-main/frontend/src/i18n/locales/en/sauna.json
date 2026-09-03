@@ -85,7 +85,8 @@
       "saunaLights": "Sauna Lights Brochure",
       "accessorySets": "Accessory Sets Brochure",
       "accessories": "Accessories Brochure",
-      "curveLedLights": "Curve LED Lights Flyer"
+      "curveLedLights": "Curve LED Lights Flyer",
+      "saunaDoors": "Sauna Doors Brochure"
     },
     "items": {
       "accessorySets": { "title": "Accessory Sets", "desc": "Our carefully curated accessory sets offer something for everyone. From natural, zero-waste options to bold & sophisticated designs, the sets enhance your sauna enjoyment in every possible way." },

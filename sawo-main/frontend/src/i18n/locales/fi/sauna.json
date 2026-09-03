@@ -142,7 +142,8 @@
       "saunaLights": "Saunavalaisimien esite",
       "accessorySets": "Tarvikesarjojen esite",
       "accessories": "Tarvikkeiden esite",
-      "curveLedLights": "Curve LED -valaisimien esite"
+      "curveLedLights": "Curve LED -valaisimien esite",
+      "saunaDoors": "Saunanovien esite"
     },
     "items": {
       "accessorySets": { "title": "Tarvikesarjat", "desc": "Huolella kootut tarvikesarjamme tarjoavat jotain jokaiselle. Luonnollisista, jätteettömistä vaihtoehdoista rohkeisiin ja tyylikkäisiin muotoiluihin – sarjat lisäävät saunanautintoa kaikin mahdollisin tavoin." },

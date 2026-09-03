@@ -8,6 +8,9 @@
 // — this page just reads it back over the anon key, same pattern as Logs.jsx.
 import React, { useEffect, useState } from "react";
 import { supabase } from "./supabase";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const RUNS_LIMIT = 100;
 
@@ -80,8 +83,10 @@ export default function CIStatus() {
     latestByWorkflow.push(run);
   }
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(runs, { initialPageSize: 25 });
+
   return (
-    <div>
+    <div className="cms-scroll-page">
       {error && (
         <div style={{
           margin: "12px 0", padding: "12px 16px",
@@ -135,6 +140,7 @@ export default function CIStatus() {
           </div>
 
           {/* Full recent-runs table */}
+          <ScrollArea>
           <div className="products-table-wrap">
             <table className="products-table" style={{ tableLayout: "fixed" }}>
               <thead>
@@ -146,7 +152,7 @@ export default function CIStatus() {
                 </tr>
               </thead>
               <tbody>
-                {runs.map((run) => (
+                {pageItems.map((run) => (
                   <tr key={run.id}>
                     <td style={{ whiteSpace: "nowrap" }}>
                       <div style={{ fontSize: "0.75rem", color: "var(--text-2)", lineHeight: 1.2 }}>{timeAgo(run.created_at)}</div>
@@ -168,6 +174,16 @@ export default function CIStatus() {
               </tbody>
             </table>
           </div>
+          </ScrollArea>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            itemLabel="runs"
+          />
         </>
       )}
     </div>

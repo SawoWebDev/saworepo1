@@ -489,6 +489,9 @@ export default function SaunaRoomDisplay() {
                   {enabledWoods.length > 0 && (
                     <StatChip icon="fa-solid fa-tree" label={t("stats.woodType")} value={enabledWoods.map(w => w.name).join(", ")} />
                   )}
+                  {enabledWoods.length > 0 && (
+                    <StatChip icon="fa-solid fa-tree" label="Wood Type" value={enabledWoods.map(w => w.name).join(", ")} />
+                  )}
                 </div>
               )}
 

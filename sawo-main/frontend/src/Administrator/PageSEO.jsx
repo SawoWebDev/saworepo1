@@ -26,6 +26,9 @@ import { DATE_RANGE_OPTIONS, resolveRange } from "./analytics/dateRange";
 import Sparkline from "./analytics/Sparkline";
 import DailyTrafficChart from "./DailyTrafficChart";
 import { MetricCard, BreakdownCard, BreakdownList, Modal } from "./analytics/StatPrimitives";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 // One row per static route this admin covers. `label` is just this list's
 // own display name — it does NOT change what ships if left blank;
@@ -552,6 +555,8 @@ export default function PageSEO({ currentUser }) {
 
   const selected = selectedPath ? summary.find((p) => p.path === selectedPath) : null;
 
+  const { page: pageNum, setPage: setPageNum, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filtered, { initialPageSize: 25 });
+
   if ((loading && range) || seoRows === null) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
@@ -564,7 +569,7 @@ export default function PageSEO({ currentUser }) {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full cms-scroll-page">
       <Toast toasts={toasts} remove={remove} />
 
       {error && (
@@ -626,11 +631,24 @@ export default function PageSEO({ currentUser }) {
       {!range ? (
         <p className="text-[var(--text-3)] text-sm">Pick a start and end date to load page performance for that range.</p>
       ) : (
+        <>
+        <ScrollArea>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {filtered.map((page) => (
+          {pageItems.map((page) => (
             <PageCard key={page.path} page={page} onOpen={() => setSelectedPath(page.path)} />
           ))}
         </div>
+        </ScrollArea>
+        <Pagination
+          page={pageNum}
+          totalPages={totalPages}
+          totalCount={totalCount}
+          pageSize={pageSize}
+          onPageChange={setPageNum}
+          onPageSizeChange={setPageSize}
+          itemLabel="pages"
+        />
+        </>
       )}
 
       {selected && raw && (

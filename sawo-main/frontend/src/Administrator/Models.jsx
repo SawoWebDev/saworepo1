@@ -9,6 +9,9 @@ import React, { useState, useEffect } from "react";
 import { useLocalProducts } from "./Local/useLocalProducts";
 import ProductsGridModal from "./ProductsGridModal";
 import { getCache, setCache } from "./adminCache";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
+import { usePagination } from "./usePagination";
 
 const MODELS_CACHE_KEY = "admin:models:products";
 
@@ -73,9 +76,11 @@ export default function Models() {
     return modelName.toLowerCase().includes(search.toLowerCase());
   });
 
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(filteredGroups, { initialPageSize: 25 });
+
   // ──────────────────────────────────────────────────────────────────────────
   return (
-    <div className="products-page">
+    <div className="products-page cms-scroll-page">
       <p className="products-subtitle" style={{ marginBottom: 14 }}>
         {showLoading ? "Loading…" : `${filteredGroups.length} model${filteredGroups.length !== 1 ? "s" : ""} · ${products.length} product${products.length !== 1 ? "s" : ""}`}
       </p>
@@ -121,8 +126,10 @@ export default function Models() {
           {search ? "No models match your search." : "No products found. Create products in the Products page to see them grouped here."}
         </div>
       ) : (
+        <>
+        <ScrollArea>
         <div className="model-grid">
-          {filteredGroups.map(([modelName, modelProducts]) => (
+          {pageItems.map(([modelName, modelProducts]) => (
             <ModelGroup
               key={modelName}
               modelName={modelName}
@@ -131,6 +138,17 @@ export default function Models() {
             />
           ))}
         </div>
+        </ScrollArea>
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          totalCount={totalCount}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+          itemLabel="models"
+        />
+        </>
       )}
 
       {/* Products-in-model modal — shared with Taxonomy's category/tag view */}
