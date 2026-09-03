@@ -14,3 +14,10 @@ export function getCache(key) {
 export function setCache(key, value) {
   store.set(key, value);
 }
+
+// Drops every admin-page entry (Users, Products, Settings, ...) so the next
+// mount of each page refetches instead of painting from a stale snapshot.
+// Used by Settings.jsx's "Clear Cache" button.
+export function clearAllCache() {
+  store.clear();
+}
