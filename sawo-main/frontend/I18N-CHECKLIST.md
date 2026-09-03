@@ -788,6 +788,46 @@ count: **56 of 381 products still missing `zh`** (down from 75).
 Remaining: Sauna Controls (20), Kivistone (18), Ventilation &
 Miscellaneous (13), Floor (4, leftover Nordex), Wall-Mounted (1).
 
+**Batch 7 — Sauna Controls complete (2026-09-03)**: all 20 remaining
+Innova/Saunova/sensor/interface-holder products
+(`innova-classic-2-0`, `saunova-simple`, `sawo-sense`,
+`rectangular-interface-holder-for-2-0-controls`,
+`optional-humidity-sensor-temperature-for-bench`,
+`optional-second-temperature-sensor-for-bench`,
+`innova-classic-built-in`, `saunova-2-0-power-controller`,
+`saunova-2-0-contactor-unit`, `innova-classic-2-0-built-in`,
+`innova-2-0-power-controller`, `innova-classic`,
+`innova-stainless-steel-touch`, `innova-2-0-contactor-unit`,
+`saunova-2-0-plus`, `rectangular-interface-holder-for-innova-classic-
+control`, `oval-interface-holder-for-innova-classic-control`,
+`saunova-2-0-built-in`, `saunova-2-0`, `temperature-sensor`).
+**Not templated** — unlike recent batches, each product has genuinely
+distinct technical content (feature lists, kW thresholds, model codes),
+so every one was hand-translated individually rather than via a
+fill-script, per the user's explicit "make sure translations are right"
+request. All model codes (INN-IH23, SAU-PS-V2, INP-C, etc.), kW values,
+and cable/wire lengths preserved exactly; only prose translated.
+"Innova"/"Saunova" kept as English brand names throughout (including in
+`type`, matching the heater-brand precedent) — `type` translated where
+generic: Sensor → 传感器, Interface Holder → 界面支架 (already an
+established translation, reused via TM), "Coming Soon" (sawo-sense's
+placeholder type) → 即将推出. European-comma decimals in the English
+source (`9,0kW`, `18,0kW` on `sawo-sense`/`saunova-2-0-plus`) corrected
+to `9.0 kW`/`18.0 kW` in the translation only, consistent with the
+established catalog-wide unit-spacing fix — English source left as-is.
+**One flagged-not-fixed source bug** (translation preserved faithfully,
+not fixed): `saunova-simple`'s dimensions feature reads `"(D)
+137mm3"` in English, almost certainly a typo — the same-shape sibling
+product `saunova-2-0` lists `"(D) 37mm"` for what looks like an
+identical physical enclosure. Translated the label only, left the
+number exactly as printed in English, per the "don't silently correct
+data" rule. 1 of 20 `apply` calls hit a transient network error on
+first attempt, succeeded on retry. Verified via SQL (20/20 present with
+`source_field_hashes`) and `pending` (0 remaining). Post-batch count:
+**36 of 381 products still missing `zh`** (down from 56). Remaining:
+Kivistone (18), Ventilation & Miscellaneous (13), Floor (4, leftover
+Nordex), Wall-Mounted (1).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |
