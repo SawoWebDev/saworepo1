@@ -5,15 +5,15 @@
   "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
   "tmPrefilled": [],
   "fields": {
-    "name": "Helius Heater Hood",
-    "short_description": "The Helius Heater Hood can be installed in a recessed area in the sauna room to keep it hidden and away from bathers. Using the heater's separate soapstone water basin, water can be poured into the stones to generate steam. This design feature helps prevent accidental burns. The Helius Hood reduces the safety distance to the minimum.",
+    "name": "Helius 加热器防护罩",
+    "short_description": "Helius 加热器防护罩可安装于桑拿房的凹入区域，使加热器隐藏于视线之外，远离沐浴者。借助加热器独立的皂石水盆，可将水浇在石材上产生蒸汽。这一设计有助于防止意外烫伤。Helius 防护罩可将安全距离缩短至最小。",
     "description": null,
-    "type": "Heater Hood",
+    "type": "加热器防护罩",
     "spec_table_headers": [
-      "Model",
-      "Length (mm)",
-      "Width (mm)",
-      "Height (mm)"
+      "型号",
+      "长度 (mm)",
+      "宽度 (mm)",
+      "高度 (mm)"
     ]
   }
 }

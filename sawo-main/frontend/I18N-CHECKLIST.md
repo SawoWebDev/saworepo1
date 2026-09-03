@@ -759,6 +759,35 @@ Sauna Controls (20), Kivistone (18), Integration Collar (16),
 Ventilation & Miscellaneous (13), Floor (4, leftover Nordex heater
 variants — see Sauna Heaters batch Day 2 table above).
 
+**Batch 6 — Sauna Accessories, Heater Accessories, Integration Collar
+all complete (2026-09-03)**: the "45"/"43" remaining counts logged above
+were stale — re-querying found only 19 products actually still missing
+across these overlapping categories (a product counts once per category
+it's tagged with, so a lot of the earlier count was double-counting
+Integration Collar products also tagged Sauna Accessories/Heater
+Accessories). All 19 done: 16 Integration Collar variants
+(`integration-collar-{sawo30,tower}-{wall,corner}-stainless`,
+`integration-collar-round-{v2-,}stainless`, `integration-collar-round-
+wooden`, `integration-collar-phoenix-stainless`, `integration-collar-
+cubos-{corner,middle,wall}-{stainless,wooden}`, `integration-collar-
+{corner,wall}-wooden`) plus 3 standalone safety/hood products
+(`safety-switch-for-heaters`, `helius-heater-hood`, `emergency-stop-
+button-switch-estop`). New `type` translations: Integration Collar →
+集成环, Safety Switch → 安全开关, Heater Hood → 加热器防护罩. Two short_description
+templates cover 14/16 collar variants (a "stainless" boilerplate listing
+material options, a shorter "Hemlock wood" boilerplate for the wooden
+ones) — only the 3 standalone products needed fully custom translation.
+Collar model-name translation followed the established brand-vs-generic
+split: heater brand words kept English (SAWO30, Tower, Phoenix, Cubos),
+generic shape words translated (Corner→转角式, Wall→壁挂式, Round→圆形,
+Middle→居中式). 3 of the 19 `apply` calls hit a transient network error
+on the first attempt (`fetch failed`, not a data problem) — retried
+individually, all succeeded. Verified via SQL (19/19 present with
+`source_field_hashes`) and `pending` (0 for both categories). Post-batch
+count: **56 of 381 products still missing `zh`** (down from 75).
+Remaining: Sauna Controls (20), Kivistone (18), Ventilation &
+Miscellaneous (13), Floor (4, leftover Nordex), Wall-Mounted (1).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |
