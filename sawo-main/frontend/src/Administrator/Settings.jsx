@@ -8,8 +8,10 @@ import {
 } from "../local-storage/languageSettings";
 import { getDashboardTrafficWindow, setDashboardTrafficWindow as saveDashboardTrafficWindow, VALID_WINDOWS } from "../local-storage/dashboardSettings";
 import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
-import { getCache, setCache } from "./adminCache";
+import { getCache, setCache, clearAllCache } from "./adminCache";
 import { getPerms } from "./permissions";
+import { PRODUCTS_STORAGE_KEY } from "./Local/useLocalProducts";
+import { LOCAL_ROOMS_STORAGE_KEY } from "./Local/useLocalSaunaRooms";
 
 const TRAFFIC_WINDOW_OPTIONS = VALID_WINDOWS.map((days) => ({
   value: days,
@@ -96,6 +98,7 @@ export default function Settings({ currentUser }) {
   const [dataSourceSaving, setDataSourceSaving] = useState(false);
   const [loading, setLoading] = useState(() => !cachedSettings);
   const [error, setError] = useState(null);
+  const [clearingCache, setClearingCache] = useState(false);
 
   const canChangeDataSource = getPerms(currentUser).can("settings.data_source");
 
@@ -273,6 +276,36 @@ export default function Settings({ currentUser }) {
       add("Failed to switch data source", "error");
     } finally {
       setDataSourceSaving(false);
+    }
+  };
+
+  // Clears this browser's admin-page cache (adminCache.js's in-memory Map)
+  // and the localStorage-persisted public-site product/sauna-room cache
+  // (publicDataCache.js, 24h TTL) so the next page visit refetches live
+  // instead of painting a stale snapshot. This only affects the browser the
+  // button is clicked in — there's no shared server-side cache to purge, so
+  // it can't force a fresh copy onto every visitor the way a WordPress
+  // "clear all cache" plugin does; every visitor's own cache still ages out
+  // and refetches on its own within 24h regardless.
+  const handleClearCache = async () => {
+    setClearingCache(true);
+    try {
+      clearAllCache();
+      localStorage.removeItem(PRODUCTS_STORAGE_KEY);
+      localStorage.removeItem(LOCAL_ROOMS_STORAGE_KEY);
+      await logActivity({
+        action: "update",
+        entity: "app_settings",
+        entity_id: "clear_cache",
+        entity_name: "Cleared admin + public data cache (this browser)",
+        username: currentUser?.username,
+        user_id: currentUser?.id,
+      });
+      add("Cache cleared. Reloading...", "success");
+      setTimeout(() => window.location.reload(), 600);
+    } catch (err) {
+      add("Failed to clear cache: " + err.message, "error");
+      setClearingCache(false);
     }
   };
 
@@ -487,6 +520,27 @@ export default function Settings({ currentUser }) {
         )}
       </div>
       )}
+
+      <div className="card card-body">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
+          <i className="fa-solid fa-broom text-[var(--brand)]"></i>
+          Clear Cache
+        </h3>
+        <p className="text-sm text-[var(--text-3)] mb-4">
+          Clears this browser's cached CMS page data and the public product/sauna-room
+          cache (normally up to 24h old) so the next page load pulls live data. Only
+          affects this browser — every visitor's own cache still refreshes on its own
+          within 24h regardless, since there's no shared server-side cache to purge.
+        </p>
+        <button
+          type="button"
+          onClick={handleClearCache}
+          disabled={clearingCache}
+          className="btn btn-ghost text-sm px-4 py-2 disabled:opacity-50 disabled:pointer-events-none"
+        >
+          {clearingCache ? "Clearing..." : "Clear Cache"}
+        </button>
+      </div>
 
       </div>
     </div>

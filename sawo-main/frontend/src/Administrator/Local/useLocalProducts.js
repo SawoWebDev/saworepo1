@@ -14,8 +14,8 @@ import { useLocale } from "../../i18n/LocaleContext";
 // open. To see an edit immediately, hard-reload (Ctrl+Shift+R): that
 // clears the in-memory cache, but the localStorage copy is still read on
 // the next load unless it too has aged past CACHE_TTL_MS.
-const PRODUCTS_CACHE_KEY = "public:products:data";
-const PRODUCTS_STORAGE_KEY = "sawo_public_products_cache_v1";
+export const PRODUCTS_CACHE_KEY = "public:products:data";
+export const PRODUCTS_STORAGE_KEY = "sawo_public_products_cache_v1";
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 1 day
 
 // A product with no translation row for a field falls back to the English
