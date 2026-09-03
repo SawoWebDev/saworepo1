@@ -181,9 +181,12 @@ export default function Users({ currentUser }) {
   const [passError, setPassError] = useState("");
 
   const fetchUsers = async () => {
+    // get_users_with_last_active() joins in auth.users.last_sign_in_at,
+    // which Supabase Auth already overwrites in place on every real login —
+    // no separate tracking table to keep in sync. See
+    // Local/scripts/setup-users-last-active.sql.
     const { data, error } = await supabase
-      .from("users")
-      .select("id, username, full_name, email, role, extra_permissions, created_at")
+      .rpc("get_users_with_last_active")
       .order("created_at", { ascending: sortDir === "asc" });
     if (!error) { setUsers(data); setCache(USERS_CACHE_KEY, data); setSelected(new Set()); }
   };
@@ -533,6 +536,7 @@ export default function Users({ currentUser }) {
               <th>Email</th>
               <th>Role</th>
               <th>Created</th>
+              <th>Last Active</th>
               <th className="text-right">Actions</th>
             </tr>
           </thead>
@@ -564,6 +568,7 @@ export default function Users({ currentUser }) {
                   )}
                 </td>
                 <td className="tbl-date">{formatDate(u.created_at)}</td>
+                <td className="tbl-date">{u.last_active_at ? formatDate(u.last_active_at) : "Never"}</td>
                 <td style={{ textAlign: "right" }}>
                   <div className="table-actions">
                     {deleteConfirm === u.id ? (
@@ -590,7 +595,7 @@ export default function Users({ currentUser }) {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={canDelete ? 7 : 6} className="table-empty">No users found.</td></tr>
+              <tr><td colSpan={canDelete ? 8 : 7} className="table-empty">No users found.</td></tr>
             )}
           </tbody>
         </table>
