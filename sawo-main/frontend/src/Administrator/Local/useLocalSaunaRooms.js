@@ -13,8 +13,8 @@ import { readPublicCache, writePublicCache } from "./publicDataCache";
 // (Ctrl+Shift+R): that clears the in-memory cache, but the localStorage
 // copy is still read on the next load unless it too has aged past
 // CACHE_TTL_MS.
-const LOCAL_ROOMS_CACHE_KEY = "public:sauna-rooms:data";
-const LOCAL_ROOMS_STORAGE_KEY = "sawo_public_sauna_rooms_cache_v1";
+export const LOCAL_ROOMS_CACHE_KEY = "public:sauna-rooms:data";
+export const LOCAL_ROOMS_STORAGE_KEY = "sawo_public_sauna_rooms_cache_v1";
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 1 day
 
 export function useLocalSaunaRooms() {
