@@ -29,10 +29,10 @@
     }
   ],
   "fields": {
-    "name": "Wooden Light Cover Wave",
-    "short_description": "The SAWO Wooden Light Cover Wave is a wooden sauna light cover measuring 207 × 280mm, fitted over a light fixture to diffuse illumination evenly inside the sauna.",
+    "name": "波浪形木质灯罩",
+    "short_description": "SAWO 波浪形木质灯罩是一款木质桑拿灯罩，尺寸为 207 × 280mm，安装于灯具上，可使桑拿房内的光线均匀扩散。",
     "description": null,
-    "type": "Sauna Lights",
+    "type": "桑拿灯具",
     "spec_table_headers": [
       "规格",
       "详情"

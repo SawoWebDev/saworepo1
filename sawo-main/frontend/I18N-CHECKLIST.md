@@ -709,6 +709,56 @@ Thermometers → 温度计, Benches → 长椅, Doors & Handles → 门与拉手
 three categories. Post-batch count: **128 of 380 products still missing
 `zh`** (down from 193).
 
+**Batch 5 — Pails complete, 3 more parallel-agent attempts, Heater Guard
++ Sauna Lights complete (2026-09-02/03)**: **Pails, complete (20/20)**
+— remaining 17 done directly (`wooden-pail-rattan-4l`,
+`stainless-steel-pail-with-curved-handle`, `steamwater-pail-4l`,
+`stainless-steel-pail-with-wooden-handle`, `steamwater-pail-9l`,
+`wooden-cover-for-392`, `dragon-pail-4l`, `lovi`, `wooden-pail-28l`,
+`wooden-pail-rattan`, `wooden-cover-for-381`, `wooden-cover-for-391`,
+`wooden-pail-18l`, `wooden-pail-classic`,
+`wooden-pail-rattan-with-stainless-steel-insert`,
+`wooden-pail-traditional`, `wooden-pail-40l`) — `type` "Pails" already
+pre-filled "水桶" from translation_memory, confirming TM reuse compounds
+as intended. New brand-line names kept English: Lovi, Steamwater
+(same treatment as Halu/Loisto/Kanto/Puro/Usva/Siro/Steamshot).
+
+Two more rounds of parallel agents were tried on Sauna Accessories (~45),
+Heater Accessories (~43), and Heater Guard (26) — **both rounds got
+killed by session interruptions before translating anything**, same
+failure mode as the first attempt logged above. Re-verified via
+`pending` each time rather than trusting agent "launched" status.
+**Heater Guard did leave behind 26 fully-extracted-but-untranslated
+packets** (committed to the repo directly by the user in the interim,
+commit `7598adff`) — picked those up and finished them rather than
+re-extracting: **Heater Guard, complete (26/26)**, via the templated-
+micro-category fill-script pattern (2-4 short_description variants
+depending on wood-species wording and whether the product mentions
+Cubos-specific install locations; spec_table_headers header dictionary
+extended with Model→型号, Material→材质, Length/Width/Height/Depth
+(mm)→长度/宽度/高度/深度 (mm)). New `type`: Heater Guard → 加热器护栏.
+Also finished my own previously-stalled **Sauna Lights (11/11)** extract
+(from the interruption right before the `main`-branch-merge request) —
+Himalayan Salt Wall tiles + Wooden Light Covers + Wooden Curve Lights,
+new `type`: Sauna Lights → 桑拿灯具.
+
+**Lesson reinforced**: parallel background agents keep dying to session
+interruptions before producing translated output (extraction survives,
+translation+apply doesn't) — three separate attempts now. Prefer doing
+batches directly (or via the fill-script pattern for templated
+categories) over relying on parallel agents until this environment's
+interruption behavior changes; if an agent's `extract-many` output is
+found sitting untranslated on disk from a prior dead attempt, translate
+and apply it directly rather than re-extracting.
+
+Post-batch count: **75 of 381 products still missing `zh`** (down from
+128; total product count ticked up by 1 between checks, unrelated to
+this batch). Pails, Heater Guard, and Sauna Lights are now fully done
+for `zh`. Remaining: Sauna Accessories (45), Heater Accessories (43),
+Sauna Controls (20), Kivistone (18), Integration Collar (16),
+Ventilation & Miscellaneous (13), Floor (4, leftover Nordex heater
+variants — see Sauna Heaters batch Day 2 table above).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

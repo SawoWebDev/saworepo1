@@ -29,10 +29,10 @@
     }
   ],
   "fields": {
-    "name": "Wooden Curve Light 240",
-    "short_description": "The SAWO Wooden Curve Light 240 is a curved wooden sauna light measuring 60mm (3.4\") x 240mm (9.3\") x 85mm (2.4\"), designed to diffuse illumination evenly inside the sauna.",
+    "name": "弧形木质灯 240",
+    "short_description": "SAWO 弧形木质灯 240 是一款弧形木质桑拿灯，尺寸为 60mm (3.4\") x 240mm (9.3\") x 85mm (2.4\")，专为使桑拿房内光线均匀扩散而设计。",
     "description": null,
-    "type": "Sauna Lights",
+    "type": "桑拿灯具",
     "spec_table_headers": [
       "规格",
       "详情"

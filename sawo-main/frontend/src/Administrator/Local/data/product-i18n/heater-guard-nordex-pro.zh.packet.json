@@ -16,10 +16,10 @@
     }
   ],
   "fields": {
-    "name": "Heater Guard – Nordex Pro",
-    "short_description": "The Heater Guard is a safety feature designed to minimize the risk of burns. Built from heat-resistant woods such as cedar or aspen, they provide a protective barrier while enhancing a heater's aesthetic appeal.",
+    "name": "加热器护栏 – Nordex Pro",
+    "short_description": "加热器护栏是一项安全防护设计，可降低烫伤风险。护栏采用雪松或白杨等耐热木材制成，在提升加热器美观度的同时，形成一道防护屏障。",
     "description": null,
-    "type": "Heater Guard",
+    "type": "加热器护栏",
     "variations": [
       {
         "index": 0,
