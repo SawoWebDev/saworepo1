@@ -1,0 +1,18 @@
+{
+  "slug": "rectangular-interface-holder-for-innova-classic-control",
+  "productId": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Interface Holder"
+    }
+  ],
+  "fields": {
+    "name": "Innova Classic 控制器专用长方形界面支架",
+    "short_description": "时尚木质界面支架 INN-IH20，专为 Innova Classic 控制器设计。提供优质雪松、白杨与松木饰面可选，可与多种桑拿房风格相搭配。尺寸：215mm (宽) x 140mm (深) x 20mm (高)。安全收纳控制单元的同时，增添自然优雅气息。",
+    "description": null,
+    "type": "界面支架"
+  }
+}

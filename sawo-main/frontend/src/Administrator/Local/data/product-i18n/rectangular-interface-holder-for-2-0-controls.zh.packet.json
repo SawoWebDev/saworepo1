@@ -1,0 +1,18 @@
+{
+  "slug": "rectangular-interface-holder-for-2-0-controls",
+  "productId": "96c70250-e9a0-4dd4-8e0d-c4a5552f292f",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Interface Holder"
+    }
+  ],
+  "fields": {
+    "name": "2.0 控制器专用长方形界面支架",
+    "short_description": "高级木质界面支架 INN-IH23，适用于多种 2.0 控制器，包括 Innova Classic 2.0、Innova Stainless Touch 2.0、Saunova 2.0、STE/STN Classic 2.0 以及 IR Control 2.0。提供雪松、白杨与松木饰面可选，可与各类桑拿房装饰风格相搭配。尺寸：190mm (宽) x 145mm (深) x 40mm (高)。坚固优雅，可安全收纳您的 2.0 系列控制器。",
+    "description": null,
+    "type": "界面支架"
+  }
+}

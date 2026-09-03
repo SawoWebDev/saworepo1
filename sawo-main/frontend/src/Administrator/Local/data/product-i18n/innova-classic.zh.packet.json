@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic",
+  "productId": "bab85c05-e589-45bf-b634-8a4f62d8db6b",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic",
+    "short_description": "<div style=\"text-align: justify;\"><p><b>分体式控制单元</b><br>Innova Classic 控制单元由独立控制面板与功率控制器组成，最高可承载 15 kW 功率。配备门传感器、预约定时器、智能节能及稳定均匀的功率分配等功能！配有清晰的 LED 显示屏与七个按键，操作简便。套装内含带过热保险丝的温度传感器及 4 米连接电缆。</p><p>加热器功率超过 15 kW 时，需另配独立 Innova 接触器单元。\n\n</p></div><div style=\"text-align: justify;\"><p><b>内置式控制单元</b><br>Innova Classic 内置款控制单元由功率控制器与集成控制面板组成。其功能与 Innova Classic 分体式控制单元完全相同，唯一区别在于所有部件均整合于一个整洁的机身之中！</p><p><b>加热器功率超过 15 kW 时，需另配独立 Innova 接触器单元。</b></p></div>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNICAL DETAILS</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic (INC-S)</td><td>W: 170 mm x H: 90 mm x D: 30 mm</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "智能控制功能：自动分阶段调节加热元件，快速达到设定温度，并始终提供优质蒸汽。",
+      "连接 INP-C 功率控制器，可用于任意 15 kW 以下的 NS 系列加热器；超过 15 kW 的加热器需加装 INP-S 接触器单元。",
+      "兼容门传感器",
+      "预约定时启动",
+      "可选风扇、调光及 Combi 蒸汽功能",
+      "建议搭配可选长椅传感器 (INN-BTEMP) 使用；Combi 加热器建议搭配湿度传感器 (INN-HUM)",
+      "套装包含 Classic 用户界面及 5 米 RJ12 电缆"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

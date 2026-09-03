@@ -1,0 +1,21 @@
+{
+  "slug": "saunova-2-0-plus",
+  "productId": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 PLUS",
+    "short_description": "全新智能桑拿控制单元 Saunova 2.0 PLUS，为用户带来更高的使用自由度。控制单元支持 Wi-Fi 连接，可通过 SAWO App 进行操控。App 可实现更个性化的桑拿体验，并远程控制温度、灯光等多项桑拿功能。借助实时监控功能，用户可即时查看当前桑拿温度与运行时长。Saunova 2.0 PLUS 配备直观易用的用户界面，可安装于桑拿房内部或外部。专为 9.0 kW 以下的 Ni2 及 NS 系列加热器设计，并可通过接触器单元扩展至 18.0 kW。",
+    "description": null,
+    "type": "Saunova",
+    "features": [
+      "远程控制：随时随地设置计划并控制加热器。",
+      "直观界面：简洁的 UI/UX 设计，让 App 与控制器操作更轻松。",
+      "一体化控制：所有控制设置均可通过智能控制器或手机 App 一站式管理。",
+      "实时监控：即时查看当前桑拿温度与运行时长。",
+      "安全保障：定时器归零后加热器自动关闭。",
+      "支持 Wi-Fi 连接"
+    ]
+  }
+}
