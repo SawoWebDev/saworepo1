@@ -105,6 +105,9 @@ export default function PailsLadles() {
     const visible  = localProds.filter(p => isPubliclyVisible(p));
     const filtered = applyDisplayFilter(visible);
     return [...filtered].sort((a, b) => {
+      const featuredA = a.featured ? 1 : 0;
+      const featuredB = b.featured ? 1 : 0;
+      if (featuredA !== featuredB) return featuredB - featuredA;
       const sortA = a.sort_order ?? 999;
       const sortB = b.sort_order ?? 999;
       if (sortA !== sortB) return sortA - sortB;

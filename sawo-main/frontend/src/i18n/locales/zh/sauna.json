@@ -142,7 +142,8 @@
       "saunaLights": "桑拿灯具宣传册",
       "accessorySets": "配件套装宣传册",
       "accessories": "配件宣传册",
-      "curveLedLights": "Curve LED 灯具宣传单"
+      "curveLedLights": "Curve LED 灯具宣传单",
+      "saunaDoors": "桑拿门宣传册"
     },
     "items": {
       "accessorySets": { "title": "配件套装", "desc": "我们精心打造的配件套装,总有一款适合您。从天然零浪费之选到大胆精致的设计,这些套装将在方方面面提升您的桑拿享受。" },

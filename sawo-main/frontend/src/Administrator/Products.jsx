@@ -13,6 +13,8 @@ import CsvImportModal from "./csv/CsvImportModal";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
+import ScrollArea from "./ScrollArea";
+import Pagination from "./Pagination";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
 const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
@@ -2394,7 +2396,7 @@ function ProductCard({ p, onEdit, onDelete, onDuplicate, onPreview, perms }) {
       style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", cursor: "pointer" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setMenuOpen(false); }}>
-      {isUnpublished && <span className="product-grid-unpublished-badge">INACTIVE</span>}
+      {isUnpublished && <span className="product-grid-unpublished-badge">Inactive</span>}
       <div className="product-grid-thumb">
         {getImageUrl(p, 'thumbnail')
           ? <img src={getImageUrl(p, 'thumbnail')} alt={p.name} />
@@ -2789,7 +2791,7 @@ export default function Products({ currentUser }) {
   const [activeAccessorySubcats, setActiveAccessorySubcats] = useState([]); // multi-select pills, only used when quickFilter === "accessories"
   const [sortDir,      setSortDir]      = useState("desc");
   const [viewMode,     setViewMode]     = useState("grid");
-  const itemsPerPage = 20; // "Show" limit selector removed, fixed page size
+  const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage,  setCurrentPage]  = useState(1);
 
   const [selected,              setSelected]              = useState(new Set());
@@ -3476,7 +3478,7 @@ export default function Products({ currentUser }) {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="products-page">
+    <div className="products-page cms-scroll-page">
       <Toast toasts={toasts} remove={remove} />
       <UnsavedConfirm open={unsavedOpen} onStay={handleUnsavedStay} onDiscard={handleUnsavedDiscard} />
 
@@ -3601,7 +3603,7 @@ export default function Products({ currentUser }) {
       {/* Grid View */}
       {!loading && viewMode === "grid" && (
         groups ? (
-          <>
+          <ScrollArea>
             {groups.length === 0 && (
               <div style={{ textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
                 No products match this filter.
@@ -3615,16 +3617,30 @@ export default function Products({ currentUser }) {
                 </div>
               </div>
             ))}
-          </>
+          </ScrollArea>
         ) : (
+          <>
+          <ScrollArea>
           <div className="product-grid">
             {filtered.length === 0 && (
               <div style={{ gridColumn: "1/-1", textAlign: "center", padding: 40, color: "var(--text-3)", fontStyle: "italic", fontSize: "0.82rem" }}>
                 {search ? `No products match "${search}"` : "No products yet. Click New Product to create one."}
               </div>
             )}
-            {filtered.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
+            {paginatedProducts.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
           </div>
+          </ScrollArea>
+          <Pagination
+            page={currentPage - 1}
+            totalPages={totalPages}
+            totalCount={filtered.length}
+            pageSize={itemsPerPage}
+            onPageChange={p => setCurrentPage(p + 1)}
+            onPageSizeChange={size => { setItemsPerPage(size); setCurrentPage(1); }}
+            pageSizeOptions={[10, 20, 50, 100]}
+            itemLabel="products"
+          />
+          </>
         )
       )}
 
@@ -3699,13 +3715,12 @@ export default function Products({ currentUser }) {
         );
         return (
         <>
-          {visibleProducts.length > 0 && (
+          {groups && visibleProducts.length > 0 && (
             <div style={{ fontSize: "0.85rem", color: "var(--text-2)", marginBottom: 12 }}>
-              {groups
-                ? `Showing all ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`
-                : `Showing ${startIdx + 1}-${Math.min(endIdx, filtered.length)} of ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`}
+              {`Showing all ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`}
             </div>
           )}
+          <ScrollArea>
           <div className="products-table-wrap" style={{ position: "relative" }}>
             {loading ? (
               <div className="table-loading">
@@ -3762,56 +3777,17 @@ export default function Products({ currentUser }) {
             </table>
             )}
           </div>
-          {!groups && filtered.length > 0 && totalPages > 1 && (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginTop: 16, paddingTop: 12, borderTop: "1px solid var(--border)" }}>
-              <button
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
-                title="Previous page"
-                style={{
-                  padding: "8px 12px",
-                  fontSize: "0.9rem",
-                  border: "1px solid var(--border)",
-                  background: currentPage === 1 ? "var(--surface-2)" : "var(--surface)",
-                  color: currentPage === 1 ? "var(--text-3)" : "var(--text)",
-                  cursor: currentPage === 1 ? "not-allowed" : "pointer",
-                  borderRadius: 4,
-                  transition: "all 0.2s ease",
-                  opacity: currentPage === 1 ? 0.5 : 1,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6
-                }}
-              >
-                <i className="fa-solid fa-chevron-left" />
-              </button>
-
-              <span style={{ fontSize: "0.85rem", fontWeight: 500, minWidth: "80px", textAlign: "center" }}>
-                {currentPage} / {totalPages}
-              </span>
-
-              <button
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                disabled={currentPage === totalPages}
-                title="Next page"
-                style={{
-                  padding: "8px 12px",
-                  fontSize: "0.9rem",
-                  border: "1px solid var(--border)",
-                  background: currentPage === totalPages ? "var(--surface-2)" : "var(--surface)",
-                  color: currentPage === totalPages ? "var(--text-3)" : "var(--text)",
-                  cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-                  borderRadius: 4,
-                  transition: "all 0.2s ease",
-                  opacity: currentPage === totalPages ? 0.5 : 1,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6
-                }}
-              >
-                <i className="fa-solid fa-chevron-right" />
-              </button>
-            </div>
+          </ScrollArea>
+          {!groups && (
+            <Pagination
+              page={currentPage - 1}
+              totalPages={totalPages}
+              totalCount={filtered.length}
+              pageSize={itemsPerPage}
+              onPageChange={p => setCurrentPage(p + 1)}
+              onPageSizeChange={size => { setItemsPerPage(size); setCurrentPage(1); }}
+              itemLabel="products"
+            />
           )}
         </>
         );

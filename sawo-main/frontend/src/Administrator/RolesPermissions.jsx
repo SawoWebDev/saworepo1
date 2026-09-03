@@ -10,6 +10,7 @@ import { logActivity } from "./supabase";
 import { CAPABILITY_MAP, PERMISSION_SECTIONS } from "./permissions";
 import { getRoleCapabilityOverrides, setRoleCapabilityOverrides } from "../local-storage/rolePermissions";
 import { getCache, setCache } from "./adminCache";
+import ScrollArea from "./ScrollArea";
 
 const CACHE_KEY = "admin:role-permissions";
 
@@ -80,7 +81,7 @@ export default function RolesPermissions({ currentUser }) {
   }
 
   return (
-    <div>
+    <div className="cms-scroll-page">
       {error && (
         <div className="alert alert-error" style={{ marginBottom: 14 }}>
           <i className="fa-solid fa-circle-exclamation" /> {error}
@@ -92,6 +93,7 @@ export default function RolesPermissions({ currentUser }) {
         yourself out. Toggling a box here takes effect for other logged-in sessions within seconds.
       </p>
 
+      <ScrollArea>
       {SECTIONS.map((section) => (
         <div key={section.name} style={{ marginBottom: 28 }}>
           <h2 style={{
@@ -156,6 +158,7 @@ export default function RolesPermissions({ currentUser }) {
           </div>
         </div>
       ))}
+      </ScrollArea>
     </div>
   );
 }

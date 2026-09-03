@@ -69,6 +69,7 @@ const SaunaAccessories = () => {
               { label: t("accessoriesPage.brochureItems.accessorySets"), href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" },
               { label: t("accessoriesPage.brochureItems.accessories"), href: "https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf" },
               { label: t("accessoriesPage.brochureItems.curveLedLights"), href: "https://www.sawo.com/wp-content/uploads/2026/07/Curve-LED-Lights-Flyer-for-USA-EU-2026.pdf" },
+              { label: t("accessoriesPage.brochureItems.saunaDoors"), href: "https://www.sawo.com/wp-content/uploads/2026/08/SAWO-Sauna-Doors-2026.pdf" },
             ]}
           />
         </div>
