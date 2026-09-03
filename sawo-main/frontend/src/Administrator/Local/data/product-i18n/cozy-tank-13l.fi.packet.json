@@ -1,0 +1,23 @@
+{
+  "slug": "cozy-tank-13l",
+  "productId": "64d559e0-16fe-41b9-b83a-7c1a0272be0b",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cozy Tank (1.3L)",
+    "short_description": "1.3L Cozy Tank on suorakulmainen saunan kostutin, jossa on sisäänrakennettu vesisäiliö ja joka vapauttaa höyryä heti kiukaan lämmettyä. Veteen voi lisätä eteerisiä öljyjä ja tuoksuja, jolloin syntyy tuoksuvaa höyryä. Kostutin on valmistettu paksusta ruostumattomasta teräksestä kestävyyden vuoksi, ja siinä on kaiverrettu vuolukivinen yläkansi, joka yhdistää käytännöllisyyden ja luonnollisen muotoilun. Se voidaan täyttää helposti vedellä yläkannen aukon kautta.",
+    "description": null,
+    "type": "Suorakulmainen saunan kostutin",
+    "features": [
+      "Vesisäiliö, joka tuottaa höyryä heti kiukaan ollessa kuuma",
+      "Täytettävissä vedellä yläkannen aukoista",
+      "Paksu ruostumaton teräs",
+      "Kaiverrettu vuolukivinen yläkansi"
+    ],
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ]
+  }
+}

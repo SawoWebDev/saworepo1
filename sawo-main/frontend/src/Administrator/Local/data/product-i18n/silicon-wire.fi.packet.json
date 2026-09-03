@@ -1,0 +1,13 @@
+{
+  "slug": "silicon-wire",
+  "productId": "7db07a84-cc67-482e-8933-1903e8111e6e",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Silikonijohto",
+    "short_description": "<span style=\"text-align: justify;\">Korkealaatuinen silikonijohto, joka on suunniteltu käytettäväksi antureiden ja Innova-valolaajennusmoduulin kanssa. Kestää korkeita lämpötiloja ja takaa luotettavat liitännät sekä toimivuuden saunaympäristössä.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">TUOTTEEN MITAT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Silikonijohto 5 m\n(INN-WSIL5)</td>\n  <td>5 m 4 × 0.25mm² silikonijohto</td>\n</tr>\n<tr>\n  <td>Silikonijohto 10 m\n(INN-WSIL10)</td>\n  <td>10 m 4 × 0.25mm² silikonijohto</td>\n</tr>\n<tr>\n  <td>Silikonijohto 25 m\n(INN-WSIL25)</td>\n  <td>25 m 4 × 0.25mm² silikonijohto</td>\n</tr></tbody></table>",
+    "type": "Varaosat"
+  }
+}

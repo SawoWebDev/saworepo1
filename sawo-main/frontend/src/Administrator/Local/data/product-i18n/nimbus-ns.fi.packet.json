@@ -1,0 +1,22 @@
+{
+  "slug": "nimbus-ns",
+  "productId": "02d375d6-19ae-4f40-ac11-5187ae4a7549",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    }
+  ],
+  "fields": {
+    "name": "Nimbus NS",
+    "short_description": "Nimbus on ainoa SAWO-kiuas, jossa on kokonaan vuolukivestä valmistettu kuori. Tämän materiaalin ansiosta saunakivien lämpeneminen voi kestää hieman kauemmin, mutta kun lämpö on kerran muodostunut, vuolukivikuori auttaa säilyttämään lämmön ja mahdollistaa lämpimän, kostean höyryn vapautumisen tunteja kerrallaan. Se on erinomainen kiuas pitkiin, rentouttaviin saunahetkiin. Nimbus on yhteensopiva Saunova- ja Innova-ohjausten (NS) kanssa ja saatavilla myös Combi-mallina.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Heater Model</th>\n  <th>kW</th>\n  <th>Sauna Room<br>min. (m3) max.</th>\n  <th>Size of Heater (mm)<br>Length Width Height</th>\n  <th>Stones<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"4\">Minimum Safety Distances<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NIM-90NS-P</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>520 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>110</td>\n  <td>50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NIM-105NS-P</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>520 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>60</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NIM-120NS-P</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>520 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIM-150NS-P</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>660 × 470 × 690</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIM-180NS-P</td>\n  <td>18.0</td>\n  <td>17 – 29</td>\n  <td>660 × 470 × 690</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIM-180NS-V12-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>820 × 470 × 690</td>\n  <td>80 – 100</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIM-210NS-V12-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>820 × 470 × 690</td>\n  <td>80 – 100</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIM-240NS-V12-P</td>\n  <td>24.0</td>\n  <td>26 – 42</td>\n  <td>820 × 470 × 690</td>\n  <td>80 – 100</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n</tbody></table>",
+    "type": "Nimbus",
+    "features": [
+      "Tehoalue: 9.0 – 24.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)"
+    ]
+  }
+}

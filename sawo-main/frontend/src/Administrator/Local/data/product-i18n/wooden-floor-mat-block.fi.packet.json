@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-floor-mat-block",
+  "productId": "034dd0d2-13c2-4f0f-b6ad-a6d1bbe28d96",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (595-D-BC)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (595-A-BC)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (595-H-BC)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen lattiamatto, palikka",
+    "short_description": "SAWO Puinen lattiamatto, palikka on SAWO:n modulaarisen puisen lattiamattojärjestelmän keskiosa, mitat 285 × 285mm ja paksuus 22mm, joka suojaa saunan lattiaa ja parantaa jalkojen mukavuutta.",
+    "description": null,
+    "type": "Puiset lattiamatot",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (595-D-BC)",
+        "name": "Setri (595-D-BC)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (595-A-BC)",
+        "name": "Haapa (595-A-BC)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (595-H-BC)",
+        "name": "Hemlokki (595-H-BC)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
