@@ -1,0 +1,64 @@
+{
+  "slug": "stone-plate-large",
+  "productId": "385a4e9b-b5ee-47f5-b57f-05139f425386",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (R-153-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (R-153-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (R-153-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "石制托盘（大号）",
+    "short_description": "SAWO 石制托盘（大号）是一款皂石托盘，尺寸为 305 × 200 × 15mm，重 2.8kg，属于 Kivistone 配件系列。",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (R-153-D)",
+        "name": "雪松 (R-153-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (R-153-A)",
+        "name": "白杨 (R-153-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (R-153-H)",
+        "name": "铁杉 (R-153-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -828,6 +828,30 @@ first attempt, succeeded on retry. Verified via SQL (20/20 present with
 Kivistone (18), Ventilation & Miscellaneous (13), Floor (4, leftover
 Nordex), Wall-Mounted (1).
 
+**Batch 8 — Kivistone complete (2026-09-03)**: all 18 soapstone
+accessory products (`candle-holder-tower-{r131,r132,r133}`,
+`aroma-cup-50`, `aroma-spirit-cup`, `luxury-aroma-cup-50`,
+`candle-holder-straight`, `cooler-{1,2}-hole`, `cooler-w-{2,4}-shot-
+glasses`, `scent-warmer`, `tower-set-3`, `spa-stones-set`, `stone-plate-
+{large,small}`, `soap-holder`, `wine-cooler-stone`) via the templated
+fill-script pattern — one English short_description shape (`"The SAWO
+X is a soapstone <descriptor> measuring <dims>, <weight>kg, part of the
+Kivistone accessory line[, used for...]"`) covering all 18 with only
+the descriptor noun, dims, weight, and an optional aroma/chilling-use
+clause varying. **"Kivistone" itself kept untranslated** in both `type`
+and every short_description — unlike the generic descriptive product
+names (Candle Holder → 烛台, Cooler → 冷酒石, Aroma Cup → 香薰杯, etc., all
+translated in full), Kivistone is the actual soapstone product-line
+brand name used as a site navigation tab (see `products-page-reorg`
+project memory), so it gets the same brand-name-stays-English treatment
+as Cumulus/Nordex/Halu/etc. Heavy network flakiness during this batch —
+6 of 18 `apply` calls failed on the first pass (`fetch failed`) and the
+whole `apply-many` run itself timed out once; all recovered via
+individual per-slug retries, no data lost. Verified via SQL/`pending`
+(0 remaining). Post-batch count: **18 of 381 products still missing
+`zh`** (down from 36) — only Ventilation & Miscellaneous (13), Floor (4,
+leftover Nordex heaters), and Wall-Mounted (1) left.
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |
