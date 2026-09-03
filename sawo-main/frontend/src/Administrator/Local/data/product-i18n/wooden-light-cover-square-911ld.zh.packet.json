@@ -29,10 +29,10 @@
     }
   ],
   "fields": {
-    "name": "Wooden Light Cover Square",
-    "short_description": "The SAWO Wooden Light Cover Square is a wooden sauna light cover measuring 250 × 135mm, fitted over a light fixture to diffuse illumination evenly inside the sauna.",
+    "name": "木质方形灯罩",
+    "short_description": "SAWO 木质方形灯罩是一款木质桑拿灯罩，尺寸为 250 × 135mm，安装于灯具上，可使桑拿房内的光线均匀扩散。",
     "description": null,
-    "type": "Sauna Lights",
+    "type": "桑拿灯具",
     "spec_table_headers": [
       "规格",
       "详情"

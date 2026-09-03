@@ -5,16 +5,16 @@
   "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
   "tmPrefilled": [],
   "fields": {
-    "name": "Heater Guard – Tower Corner",
-    "short_description": "The Heater Guard is a safety feature designed to minimize the risk of burns. Built from heat-resistant Hemlock, it provides a protective barrier while enhancing a heater's aesthetic appeal.",
+    "name": "加热器护栏 – Tower Corner",
+    "short_description": "加热器护栏是一项安全防护设计，可降低烫伤风险。护栏采用耐热铁杉木制成，在提升加热器美观度的同时，形成一道防护屏障。",
     "description": null,
-    "type": "Heater Guard",
+    "type": "加热器护栏",
     "spec_table_headers": [
-      "Model",
-      "Material",
-      "Length (mm)",
-      "Width (mm)",
-      "Height (mm)"
+      "型号",
+      "材质",
+      "长度 (mm)",
+      "宽度 (mm)",
+      "高度 (mm)"
     ]
   }
 }

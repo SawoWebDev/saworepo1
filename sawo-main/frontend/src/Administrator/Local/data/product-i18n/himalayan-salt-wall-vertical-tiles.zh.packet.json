@@ -29,10 +29,10 @@
     }
   ],
   "fields": {
-    "name": "Himalayan Salt Wall Vertical Tiles",
-    "short_description": "The SAWO Himalayan Salt Wall Vertical Tiles is a Himalayan salt wall tile measuring 675mm (L) x 275mm (W) x 60mm (D), installed to diffuse a soft glow when backlit inside the sauna.",
+    "name": "喜马拉雅盐墙竖向瓷砖",
+    "short_description": "SAWO 喜马拉雅盐墙竖向瓷砖是一款喜马拉雅盐墙瓷砖，尺寸为 675mm（长）x 275mm（宽）x 60mm（厚），安装后经背光照射可散发柔和光晕，用于桑拿房内装饰照明。",
     "description": null,
-    "type": "Sauna Lights",
+    "type": "桑拿灯具",
     "spec_table_headers": [
       "规格",
       "详情"
