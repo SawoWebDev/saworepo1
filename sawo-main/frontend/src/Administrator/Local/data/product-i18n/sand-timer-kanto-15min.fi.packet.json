@@ -1,0 +1,64 @@
+{
+  "slug": "sand-timer-kanto-15min",
+  "productId": "e06fa6fc-d8e7-4a75-a6f5-270ce5e2392f",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (554-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (554-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (554-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kanto-tiimalasi 15 min",
+    "short_description": "SAWO Kanto-tiimalasi 15 min on tiimalasi, mitat 65 × 340mm, yksinkertainen tapa seurata saunomisajan kestoa.",
+    "description": null,
+    "type": "Kellot ja ajastimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (554-D)",
+        "name": "Setri (554-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (554-A)",
+        "name": "Haapa (554-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (554-BL)",
+        "name": "Musta (554-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

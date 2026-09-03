@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-pail-clock-small",
+  "productId": "43bf6c55-cc7d-4499-b506-22555acbb252",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (531-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (531-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (531-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen ämpärikello, pieni",
+    "short_description": "SAWO Puinen ämpärikello, pieni on puinen kello, joka muistuttaa muodoltaan pientä saunaämpäriä, mitat Ø230 x H40mm, kestää saunan kuumuuden ja kosteuden.",
+    "description": null,
+    "type": "Kellot ja ajastimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (531-D)",
+        "name": "Setri (531-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (531-A)",
+        "name": "Haapa (531-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (531-H)",
+        "name": "Hemlokki (531-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

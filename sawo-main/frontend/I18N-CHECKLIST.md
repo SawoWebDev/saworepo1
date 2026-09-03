@@ -942,6 +942,26 @@ per-locale judgment call, not a mechanical mirror of the zh precedent.
 Verified via SQL (22/22 present with `source_field_hashes`). Post-batch
 count: **281 of 381 products still missing `fi`** (down from 303).
 
+**Batch 2 — 19 products (2026-09-03)**: Headrest & Backrest (6, all
+done: `halu-anti-theft-headrest`, `halu-wooden-headrest`, `wave-wooden-
+backrest`, `wave-wooden-headrest`, `wooden-backrest`, `wooden-backrest-
+slim`), Clocks & Timers (7, all done: `loisto-clock-square`, `loisto-
+wooden-clock-round`, `sand-timer-15min`, `sand-timer-kanto-15min`,
+`sand-timer-tag-15min`, `wooden-pail-clock`, `wooden-pail-clock-small`),
+Infrared (6, all done: `infrared-2-0-built-in-control`, `infrared-2-0-
+power-controller`, `infrared-2-0-user-interface`, `infrared-backrest`,
+`infrared-panels`, `interface-holder`). Confirmed the `fi` material
+dictionary and "Ominaisuus"/"Tiedot" spec-header translation from
+Batch 1 are now compounding through `translation_memory` exactly as
+designed — every product in this batch had its `spec_table_headers`
+and variation names fully pre-filled, only `name`/`short_description`/
+`type` needed fresh translation. New `type` translations: Headrest &
+Backrest → Niskatuet ja selkänojat, Clocks & Timers → Kellot ja
+ajastimet, Infrared Controls → Infrapunaohjaimet, Infrared Accessories
+→ Infrapunatarvikkeet. Verified via SQL/`apply-many` (19/19 applied).
+Post-batch count: **262 of 381 products still missing `fi`** (down from
+281).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

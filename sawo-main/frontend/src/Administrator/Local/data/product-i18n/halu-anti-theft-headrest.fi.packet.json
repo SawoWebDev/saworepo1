@@ -1,0 +1,64 @@
+{
+  "slug": "halu-anti-theft-headrest",
+  "productId": "f76a67e5-0e8a-4677-9052-2a9bd44218e7",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (513-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (513-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (513-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Halu Varkaudenestoniskatuki",
+    "short_description": "SAWO Halu Varkaudenestoniskatuki on puinen niskatuki, mitat 190 × 480mm, joka tukee niskaa ja selkää saunomisen aikana.",
+    "description": null,
+    "type": "Niskatuet ja selkänojat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (513-D)",
+        "name": "Setri (513-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (513-A)",
+        "name": "Haapa (513-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (513-H)",
+        "name": "Hemlokki (513-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "slug": "sand-timer-15min",
+  "productId": "946a955f-b47e-4599-9a2f-1895c4aa7a3c",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (553-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (553-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (553-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (553-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Tiimalasi 15 min",
+    "short_description": "SAWO Tiimalasi 15 min on tiimalasi, mitat 65 × 340mm, yksinkertainen tapa seurata saunomisajan kestoa.",
+    "description": null,
+    "type": "Kellot ja ajastimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (553-D)",
+        "name": "Setri (553-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (553-A)",
+        "name": "Haapa (553-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (553-H)",
+        "name": "Hemlokki (553-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (553-BL)",
+        "name": "Musta (553-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

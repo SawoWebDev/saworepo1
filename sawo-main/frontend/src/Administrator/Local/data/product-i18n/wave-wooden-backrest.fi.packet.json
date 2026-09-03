@@ -1,0 +1,76 @@
+{
+  "slug": "wave-wooden-backrest",
+  "productId": "5f84e59a-2642-45eb-b899-86614808bdbb",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (506-2-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (506-2-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (506-2-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (506-2-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Aaltomallinen puinen selkänoja",
+    "short_description": "SAWO Aaltomallinen puinen selkänoja on puinen selkänoja, mitat 390 × 845mm, joka tukee niskaa ja selkää saunomisen aikana.",
+    "description": null,
+    "type": "Niskatuet ja selkänojat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (506-2-D)",
+        "name": "Setri (506-2-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (506-2-A)",
+        "name": "Haapa (506-2-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (506-2-H)",
+        "name": "Hemlokki (506-2-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (506-2-BL)",
+        "name": "Musta (506-2-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

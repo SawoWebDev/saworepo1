@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-pail-clock",
+  "productId": "0edded93-57eb-4db3-8444-015b6eb67192",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (530-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (530-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (530-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen ämpärikello",
+    "short_description": "SAWO Puinen ämpärikello on puinen kello, joka muistuttaa muodoltaan pientä saunaämpäriä, mitat Ø260 × 90mm, kestää saunan kuumuuden ja kosteuden.",
+    "description": null,
+    "type": "Kellot ja ajastimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (530-D)",
+        "name": "Setri (530-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (530-A)",
+        "name": "Haapa (530-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (530-H)",
+        "name": "Hemlokki (530-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
