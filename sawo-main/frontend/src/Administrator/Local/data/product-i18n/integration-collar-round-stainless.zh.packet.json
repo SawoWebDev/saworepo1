@@ -5,15 +5,15 @@
   "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
   "tmPrefilled": [],
   "fields": {
-    "name": "Integration Collar – Round (Stainless)",
-    "short_description": "The Integration Collar enhances the aesthetic of heaters installed into a bench, giving them a seamless, built-in look. The collars are built from various materials, carefully chosen to complement a sauna room's design. Options include sleek, hairline-finish stainless steel, natural soft soapstone, and durable laminated wood.",
+    "name": "集成环 – 圆形（不锈钢款）",
+    "short_description": "集成环可提升嵌入长椅式加热器的美观度，带来无缝、一体化的外观效果。集成环采用多种精心挑选的材质打造，以搭配桑拿房的整体设计，可选拉丝不锈钢、天然软质皂石及耐用胶合木材等版本。",
     "description": null,
-    "type": "Integration Collar",
+    "type": "集成环",
     "spec_table_headers": [
-      "Model",
-      "Length (mm)",
-      "Width (mm)",
-      "Height (mm)"
+      "型号",
+      "长度 (mm)",
+      "宽度 (mm)",
+      "高度 (mm)"
     ]
   }
 }
