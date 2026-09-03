@@ -1,0 +1,18 @@
+{
+  "slug": "sauna-stones-olivine-diabase-rounded-20kg",
+  "productId": "250c53b7-b278-4870-b1eb-81314f7789e4",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunakivet, oliviinidiabaasi, pyöristetty (20kg)",
+    "short_description": "Perinteisiä pyöristettyjä kiviä saunakiukaisiin. Painonsa ja tiheytensä ansiosta ne varastoivat lämpöä erinomaisesti ja tuottavat tasaista löylyä. Saatavilla koossa 3–10cm ja 8–15cm.",
+    "description": null,
+    "type": "Saunakivet",
+    "spec_table_headers": [
+      "Koodi",
+      "Koko",
+      "Käyttö"
+    ]
+  }
+}

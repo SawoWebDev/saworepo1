@@ -93,6 +93,23 @@ const MATERIAL_WORD_DICTIONARY = {
     Aluminum: "铝合金",
     "Black Metal": "黑色金属",
   },
+  fi: {
+    Cedar: "Setri",
+    Aspen: "Haapa",
+    Hemlock: "Hemlokki",
+    Alder: "Leppä",
+    Pine: "Mänty",
+    Spruce: "Kuusi",
+    Birch: "Koivu",
+    Black: "Musta",
+    White: "Valkoinen",
+    Grey: "Harmaa",
+    Gray: "Harmaa",
+    Silver: "Hopea",
+    Natural: "Luonnonvärinen",
+    Aluminum: "Alumiini",
+    "Black Metal": "Musta metalli",
+  },
 };
 
 // Matches "<Word>" or "<Word> (<anything>)" where <Word> is 1-2 plain

@@ -900,6 +900,48 @@ native-speaker review before flipping anything into `TRANSLATED_PATHS`
 to go live, and the page-level `sauna.json` `fi` staleness (28 keys
 behind) flagged earlier in this file.
 
+### Site-wide all-products `fi` push (started 2026-09-03)
+
+With `zh` fully done, started the equivalent push for Finnish (`fi`).
+Baseline: **303 of 381 products missing `fi`** — most of what got
+translated to `zh` this week was never done in `fi` (only the original
+Day 1 heaters pilot batch — Aries/Cubos/Cumulus — plus a handful of
+others have `fi`). Same tooling, same batch approach as the `zh` push.
+
+**Locale-specific setup**: extended `product-i18n.js`'s
+`MATERIAL_WORD_DICTIONARY` to cover `fi` (Cedar→Setri, Aspen→Haapa,
+Hemlock→Hemlokki, etc. — see `PRODUCT-TRANSLATION-CONVENTIONS.md` for
+the full list), since it previously only had a `zh` entry and every `fi`
+extract was getting 0 material-word pre-fills. Confirmed established
+`fi` phrasing by reading an already-applied product
+(`cumulus-nb`'s live `fi` row from the original pilot) rather than
+inventing fresh wording — found "Tehoalue: X – Y kW" (Power range),
+"Saatavilla oleva ohjaus: X" (Available controls), "Ruostumaton
+teräskuori" (Stainless steel casing), "Sisäänrakennettu aromikuppi"
+(Built-in aroma cup) already established; extended with "Ominaisuus"/
+"Tiedot" for the `["Specification","Detail"]` 2-column spec-table header
+pair (not previously translated for `fi` — the pilot batch used full
+HTML description tables, not this simpler 2-column shape). Same
+"don't reformat data" rule applies: kept the English source's PERIOD
+decimal separator in kW/mm figures rather than switching to the
+Finnish-typical comma, for consistency with every number elsewhere in
+the catalog.
+
+**Batch 1 — 22 products (2026-09-03)**: Pail Shower (1), Stones/Nimbus
+(2: `nimbus-combi-ns`, `nimbus-ns`), Sauna Stones (2), Wooden Floor Mats
+(3), Humidifiers (3: Cozy Tank sizes), Spare Parts (3), Cloth Hangers
+(4), Accessory Sets (4). All hand-translated (too varied for a single
+fill-script template at this small scale). Naming calls: "Traditional"
+→ "Perinteinen" (plain descriptive word, translated); "Dragon",
+"Essential", "Signature" kept in English — unlike `zh` where only
+Dragon/Signature were kept English and Essential was translated,
+for `fi` all three read naturally as English loanwords in Nordic retail
+branding, so translating "Essential" into a literal Finnish word
+("Olennainen") would have read worse, not better; this is a deliberate
+per-locale judgment call, not a mechanical mirror of the zh precedent.
+Verified via SQL (22/22 present with `source_field_hashes`). Post-batch
+count: **281 of 381 products still missing `fi`** (down from 303).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

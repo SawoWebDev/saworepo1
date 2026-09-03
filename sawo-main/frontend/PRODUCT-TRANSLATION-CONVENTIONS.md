@@ -1,12 +1,16 @@
-# Product translation conventions (zh)
+# Product translation conventions (zh + fi)
 
 Rules established while translating `product_translations` content into
-Chinese (`zh`) across the Sauna Heaters batch and the site-wide
+Chinese (`zh`, complete site-wide as of 2026-09-03) and Finnish (`fi`,
+in progress) across the Sauna Heaters batch and the site-wide
 all-products push (see `I18N-CHECKLIST.md`'s "Product content" section
 for the full narrative log). Read this before translating any new batch
 of products — it exists so every session/agent makes the same calls
 instead of re-deriving them, and so a spot-check across categories finds
-consistent output.
+consistent output. Most of the rules below were written during the zh
+push and apply verbatim to `fi` too (prose-vs-data split, templated-
+category fill-script pattern, source-bug-fixing rule) — locale-specific
+notes are called out explicitly.
 
 ## Tooling
 
@@ -55,13 +59,18 @@ match can never hit the *whole* string, even though "Cedar" repeats
 constantly. `product-i18n.js` has a `MATERIAL_WORD_DICTIONARY` (zh) that
 auto-translates just the word and leaves the code untouched —
 `tmPrefilled` entries with `"via": "material-dictionary"` are these.
-Current dictionary: Cedar 雪松, Aspen 白杨, Hemlock 铁杉, Alder 桤木, Pine
+Current dictionary — zh: Cedar 雪松, Aspen 白杨, Hemlock 铁杉, Alder 桤木, Pine
 松木, Spruce 云杉, Birch 桦木, Black 黑色, White 白色, Grey/Gray 灰色,
 Silver 银色, Natural 原木色, Aluminum 铝合金, "Black Metal" 黑色金属.
+fi (added 2026-09-03 for the fi push): Cedar Setri, Aspen Haapa, Hemlock
+Hemlokki, Alder Leppä, Pine Mänty, Spruce Kuusi, Birch Koivu, Black
+Musta, White Valkoinen, Grey/Gray Harmaa, Silver Hopea, Natural
+Luonnonvärinen, Aluminum Alumiini, "Black Metal" Musta metalli.
 **If you hit a material/color word not in
-this list, add it to the dictionary in `product-i18n.js` (search
-`MATERIAL_WORD_DICTIONARY`) instead of only hand-translating that one
-packet** — it should get an entry so every future product benefits.
+this list (either locale), add it to the dictionary in `product-i18n.js`
+(search `MATERIAL_WORD_DICTIONARY`) instead of only hand-translating
+that one packet** — it should get an entry so every future product
+benefits.
 
 ## Naming conventions (what stays English vs. gets translated)
 
@@ -122,7 +131,7 @@ they're also already in `translation_memory` from earlier batches, so
 | Size | 尺寸 |
 | Use | 用途 |
 
-Common feature-bullet patterns:
+Common feature-bullet patterns (zh):
 - "Power range: X – Y kW" → "功率范围：X – Y kW" (note the space before
   `kW` even if the English source is missing it — this was a catalog-wide
   formatting fix, see `I18N-CHECKLIST.md`'s 2026-09-01 entry — and use
@@ -132,6 +141,23 @@ Common feature-bullet patterns:
 - "Built-in aroma cup(s)" → "内置香薰杯"
 - "Adjustable legs" → "可调节支脚"
 - "Automatic shut-off in case of overheating" → "过热自动关闭保护"
+
+Common feature-bullet patterns (fi) — confirmed against `cumulus-nb`'s
+already-applied `fi` row (from the original heaters pilot) rather than
+invented fresh, so these are the actual established site phrasing, not
+a guess:
+- "Power range: X – Y kW" → "Tehoalue: X – Y kW" (kept the PERIOD
+  decimal separator from the English source, not the Finnish-typical
+  comma — this catalog keeps every spec number exactly as printed in
+  English throughout, per the "don't reformat data" rule below; only
+  the label word is translated)
+- "Available controls: X" → "Saatavilla oleva ohjaus: X"
+- "Stainless-steel casing" / "Stainless steel casing" → "Ruostumaton
+  teräskuori"
+- "Built-in aroma cup(s)" → "Sisäänrakennettu aromikuppi" (singular
+  source) / "Sisäänrakennetut aromikupit" (plural source)
+- spec-table 2-column header pair `["Specification", "Detail"]` →
+  `["Ominaisuus", "Tiedot"]`
 
 ## Category `type` field translations seen so far
 

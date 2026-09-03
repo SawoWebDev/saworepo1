@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova-valolaajennusmoduuli",
+    "short_description": "Yhdistä Saunova 2.0 -kontaktoriyksikkö Saunova 2.0 -tehonohjaimeen käytettäväksi yli 9 kW:n kiukaiden kanssa.\n\nUusi, nykyaikaistettu kotelo tarjoaa enemmän tilaa helpompaan ja nopeampaan asennukseen. Joustavat johdotusvaihtoehdot vedonpoistoineen kotelon neljällä sivulla, mukaan lukien takaosa, jolloin johdotus voidaan piilottaa kokonaan.\n\n<span style=\"text-align: justify;\"><b>Käytä yli 9 kW:n NS-kiukaiden kanssa. Yhdistä Saunova-tehonohjaimeen</b></span>",
+    "description": null,
+    "type": "Varaosat",
+    "features": [
+      "Pakkaus sisältää Saunova-kontaktoriyksikön ja 1 m RJ12-kaapelin",
+      "Uusi kotelomalli helpompaan asennukseen, enemmän tilaa ja johdotusvaihtoehtoja"
+    ]
+  }
+}

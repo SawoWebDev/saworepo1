@@ -1,0 +1,44 @@
+{
+  "slug": "signature",
+  "productId": "54da1d1e-89c9-4dce-9dbd-d06b0a8edd0a",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (SET-SIG-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Black (SET-SIG-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Signature",
+    "short_description": "Arvokas Signature-sarja on tarkoitettu niille, jotka etsivät tyylikästä ja hienostunutta saunaelämystä.",
+    "description": null,
+    "type": "Tarvikesarjat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (SET-SIG-D)",
+        "name": "Hemlokki (SET-SIG-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Black (SET-SIG-BL)",
+        "name": "Musta (SET-SIG-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
