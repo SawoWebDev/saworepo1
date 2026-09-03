@@ -1,0 +1,38 @@
+{
+  "slug": "nordex-s-ns",
+  "productId": "0f45ed72-d70b-4dcf-9d06-c78c7aa04064",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 6.0 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Streamlined, minimal design"
+    },
+    {
+      "path": "features[3]",
+      "source": "Efficient heating with minimal energy use"
+    }
+  ],
+  "fields": {
+    "name": "Nordex S NS",
+    "short_description": "<span style=\"text-align: justify;\">Nordex S 是 Nordex Floor 加热器的升级版本，采用更纤薄的设计，为不同桑拿房布局提供更多安装选择。Nordex S 适用于家用与商用场景。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"4\">最小安全距离<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNS-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNS-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNS-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "功率范围：6.0 – 9.0 kW",
+      "可选控制方式：Saunova/Innova (NS)",
+      "流线型简约设计",
+      "高效加热，能耗更低",
+      "过热保护",
+      "安全自动关闭功能"
+    ]
+  }
+}

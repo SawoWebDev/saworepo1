@@ -1,0 +1,76 @@
+{
+  "slug": "sauna-signage",
+  "productId": "6406aee0-c0d7-4157-92bf-fa28325ff8ed",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (950-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (950-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (950-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (950-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "桑拿标识牌",
+    "short_description": "SAWO 桑拿标识牌尺寸为 150 × 80mm，用于标注或标识桑拿房。",
+    "description": null,
+    "type": "通风与杂项配件",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (950-D)",
+        "name": "雪松 (950-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (950-A)",
+        "name": "白杨 (950-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (950-H)",
+        "name": "铁杉 (950-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (950-BL)",
+        "name": "黑色 (950-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
