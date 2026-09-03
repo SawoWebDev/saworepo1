@@ -1,0 +1,35 @@
+{
+  "slug": "luxury-aroma-cup-50",
+  "productId": "0108fab7-3622-4fcb-b1d2-7c17a577f312",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "尊享香薰杯 (ø)50",
+    "short_description": "SAWO 尊享香薰杯 (ø)50 是一款皂石香薰杯，尺寸为 50 × 50 × 50mm，重 0.2kg，属于 Kivistone 配件系列，用于盛放浇在桑拿石上的芳香水。",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-160)",
+        "name": "(R-160)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

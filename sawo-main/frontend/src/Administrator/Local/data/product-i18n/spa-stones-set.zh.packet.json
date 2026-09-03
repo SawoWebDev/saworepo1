@@ -1,0 +1,35 @@
+{
+  "slug": "spa-stones-set",
+  "productId": "88e1d851-dc78-47a2-8f61-dc6b45f50cec",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "水疗石套装",
+    "short_description": "SAWO 水疗石套装是一款皂石与雪松材质的水疗石套装，尺寸为 90 × 128 × 178mm，属于 Kivistone 配件系列。",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-500-D)",
+        "name": "(R-500-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
