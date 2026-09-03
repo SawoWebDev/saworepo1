@@ -962,6 +962,32 @@ ajastimet, Infrared Controls → Infrapunaohjaimet, Infrared Accessories
 Post-batch count: **262 of 381 products still missing `fi`** (down from
 281).
 
+**Batch 3 — 23 products, Ladles complete + Dragonfire complete
+(2026-09-03)**: Ladles (15/15 — same slug list as the earlier `zh`
+Ladles batch), all via a fill-script parsing dims/material from the
+English source, mirroring the `zh` Ladles approach exactly but in
+Finnish; new `type`: Ladles → Kauhat; "löyly" kept untranslated per the
+existing rule. Dragonfire (8/8 — Minidragon ×4, Scandifire ×4): unlike
+Ladles, this was **not zh-only prior art copied over** — confirmed
+established `fi` phrasing already existed in `translation_memory` for
+this heater family from the original Day 1 pilot (features like
+"Tehoalue", "Junglefire-kuvioitu kuitupinnoite" pre-filled on
+extraction), and confirmed the exact heater spec-table header
+translations (Heater Model → Lämmitinmalli, Sauna Room → Saunahuone,
+Size of Heater → Lämmittimen koko, Minimum Safety Distances →
+Vähimmäisturvaetäisyydet) by reading `cumulus-nb`'s already-applied `fi`
+row rather than guessing — now added to
+`PRODUCT-TRANSLATION-CONVENTIONS.md`. Only `short_description` +
+remaining feature bullets ("Wall mounted", "Can fit Nkg of stones",
+etc.) needed fresh translation. **Same garbled-English source bug as
+the zh pass** hit again on `minidragon-black-nb` ("is boasts a sleek,
+compact design that fits seamlessly into suitable for... perfect for
+sauna room") — translated the intended meaning coherently in `fi` too,
+consistent with how it was handled in `zh`; not fixed in the English
+source (already flagged, out of scope). Verified via SQL/`apply-many`
+(23/23 applied). Post-batch count: **239 of 381 products still missing
+`fi`** (down from 262).
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

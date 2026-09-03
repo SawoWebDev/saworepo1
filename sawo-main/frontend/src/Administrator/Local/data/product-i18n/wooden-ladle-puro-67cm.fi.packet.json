@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-ladle-puro-67cm",
+  "productId": "a57c2e5c-1865-43f8-9856-ecac615e7df1",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (460-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (460-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (460-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puro puukauha 67cm",
+    "short_description": "SAWO Puro puukauha 67cm on puinen saunakauha, pituus 670mm, jolla kaadetaan vettä (löyly) kuumille saunakiville.",
+    "description": null,
+    "type": "Kauhat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (460-D)",
+        "name": "Setri (460-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (460-H)",
+        "name": "Hemlokki (460-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (460-BL)",
+        "name": "Musta (460-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
