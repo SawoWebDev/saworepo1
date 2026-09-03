@@ -159,6 +159,18 @@ a guess:
 - spec-table 2-column header pair `["Specification", "Detail"]` →
   `["Ominaisuus", "Tiedot"]`
 
+Heater spec-table header translations (fi) — confirmed against an
+already-applied `fi` row (`cumulus-nb`) rather than guessed:
+
+| English | Finnish |
+|---|---|
+| Heater Model | Lämmitinmalli |
+| Sauna Room / min. (m³) max. | Saunahuone / min. (m³) maks. |
+| Size of Heater (mm) / Length Width Height | Lämmittimen koko (mm) / Pituus Leveys Korkeus |
+| Stones (kg) | Kivet (kg) |
+| Control | Ohjaus |
+| Minimum Safety Distances | Vähimmäisturvaetäisyydet |
+
 ## Category `type` field translations seen so far
 
 Sauna Stones → 桑拿石, Ladles → 桑拿勺, Pails → 水桶, Clocks & Timers →

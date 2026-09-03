@@ -1,0 +1,64 @@
+{
+  "slug": "stainless-steel-ladle-siro-70-5cm",
+  "productId": "8b475da0-472f-4c8c-a6c2-48d5c635f7de",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (446-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (446-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (446-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Siro ruostumaton teräskauha 70.5cm",
+    "short_description": "SAWO Siro ruostumaton teräskauha 70.5cm on ruostumaton teräksinen saunakauha, pituus 705mm, jolla kaadetaan vettä (löyly) kuumille saunakiville.",
+    "description": null,
+    "type": "Kauhat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (446-MD)",
+        "name": "Setri (446-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (446-MA)",
+        "name": "Haapa (446-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (446-MH)",
+        "name": "Hemlokki (446-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

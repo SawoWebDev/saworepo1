@@ -1,0 +1,64 @@
+{
+  "slug": "kanto-ladle",
+  "productId": "e97fa065-bba9-43bd-bf43-177980f1e61c",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (451-MH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "White (451-MWH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (451-MBL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kanto-kauha",
+    "short_description": "SAWO Kanto-kauha on saunakauha, pituus 520mm, jolla kaadetaan vettä (löyly) kuumille saunakiville.",
+    "description": null,
+    "type": "Kauhat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (451-MH)",
+        "name": "Hemlokki (451-MH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "White (451-MWH)",
+        "name": "Valkoinen (451-MWH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (451-MBL)",
+        "name": "Musta (451-MBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

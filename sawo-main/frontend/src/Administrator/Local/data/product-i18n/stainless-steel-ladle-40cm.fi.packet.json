@@ -1,0 +1,64 @@
+{
+  "slug": "stainless-steel-ladle-40cm",
+  "productId": "f48ceaec-88c7-4232-9fa5-c856c1d18adf",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (441-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (441-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (441-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Ruostumaton teräskauha 40cm",
+    "short_description": "SAWO Ruostumaton teräskauha 40cm on ruostumaton teräksinen saunakauha, pituus 400mm, jolla kaadetaan vettä (löyly) kuumille saunakiville.",
+    "description": null,
+    "type": "Kauhat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (441-MD)",
+        "name": "Setri (441-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (441-MA)",
+        "name": "Haapa (441-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (441-MH)",
+        "name": "Hemlokki (441-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
