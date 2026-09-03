@@ -852,6 +852,54 @@ individual per-slug retries, no data lost. Verified via SQL/`pending`
 `zh`** (down from 36) — only Ventilation & Miscellaneous (13), Floor (4,
 leftover Nordex heaters), and Wall-Mounted (1) left.
 
+**Batch 9 — SITE-WIDE `zh` PRODUCT TRANSLATION COMPLETE (2026-09-03)**:
+finished the last 3 categories. Ventilation & Miscellaneous (13/13):
+`sauna-signage`, `display-stand-wall-{1,2,3}`, `ventilation-cover-
+circle-{641d,640mbr}`, `sauna-grille-622-d` (had no English
+`short_description` to begin with — left `null`, correctly matching
+source), `ventilation-louver-circle-{634d,631d}`,
+`ventilation-louver-square`, `ventilation-louver-circle-with-black-
+option-{639d,638d}`, `moisture-paper` — via a hand-written per-slug fill
+script (13 genuinely distinct products, not a single repeatable
+template, so no shared short_description string). New `type`:
+Ventilation & Miscellaneous → 通风与杂项配件. One new material-dictionary-
+style word found and translated inline (not worth adding to the shared
+dictionary for a single occurrence): "Metallic Brown" → 金属棕色. Floor
+(4/4): the last remaining Nordex heater-family stragglers
+(`nordex-s-black-ns`, `nordex-pro-ns`, `nordex-floor-black-ns`,
+`nordex-s-ns`) — mostly already TM-prefilled from the earlier Nordex/
+Sauna Heaters batches, only spec-table headers and two Nordex-S-specific
+features ("Overheat protection" → 过热保护, "Automatic shut-off for
+safety" → 安全自动关闭功能) needed fresh translation; careful to preserve
+`nordex-s-black-ns`'s different axis-label order ("Width Depth Height"
+vs. the usual "Length Width Height") exactly as printed in the English
+source. Wall-Mounted (0 remaining — was already fully done before this
+batch started, the "1" in the running category count was double-counted
+against Sauna Controls/other overlapping categories).
+
+**Final SQL sweep found ONE straggler outside all category counts**:
+`krios-ni2a` (Krios Ni2a, Wall-Mounted) — a heater variant not caught by
+any `pending`-per-category query because of how it slipped through the
+Kivistone/Sauna Controls-era category snapshots. Extracted, translated
+(mostly TM-prefilled from the existing Krios family — only the spec-
+table headers needed fresh translation), applied, and reverified.
+
+**Verified via direct SQL query against every published+visible+not-
+deleted product in the `products` table (not a per-category `pending`
+sum, which can double-count or miss products spanning categories):
+0 of 381 products now missing a `zh` `product_translations` row.**
+`npm run i18n:manifest` clean, `CI=true npx react-scripts build`
+compiles with zero errors. This closes out the "all products zh"
+effort started in the "Site-wide all-products `zh` batch" section above
+— every product in the live catalog now has a Chinese translation.
+Still outstanding, out of scope for this effort and tracked separately:
+`fi` coverage for everything translated during this zh-focused push
+(most of it currently falls back to English for Finnish visitors — see
+each batch's notes above for exactly which slugs/pages need `fi`),
+native-speaker review before flipping anything into `TRANSLATED_PATHS`
+to go live, and the page-level `sauna.json` `fi` staleness (28 keys
+behind) flagged earlier in this file.
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

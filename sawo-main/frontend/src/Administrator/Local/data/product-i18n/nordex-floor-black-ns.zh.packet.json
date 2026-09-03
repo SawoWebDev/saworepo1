@@ -1,0 +1,55 @@
+{
+  "slug": "nordex-floor-black-ns",
+  "productId": "eeaf0536-113d-4df2-a79a-f293d5207ff4",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "short_description",
+      "source": "<span style=\"text-align: justify;\">The </span><strong style=\"text-align: justify;\">Nordex Floor</strong><span style=\"text-align: justify;\"> heater is sleek and spare in aesthetic and efficient in performance. It distributes warmth through convection or radiant heating methods and incorporates advanced energy-saving technology. It is designed for regular and frequent use, ensuring reduced energy and maintenance costs. and can accommodate 40kg to 100kg of sauna stones.</span>"
+    },
+    {
+      "path": "features[0]",
+      "source": "Power range: 9.0 – 24.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: NS (Saunova/Innova)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Black metal casing"
+    },
+    {
+      "path": "features[3]",
+      "source": "Streamlined, minimal design"
+    },
+    {
+      "path": "features[4]",
+      "source": "Energy efficient"
+    },
+    {
+      "path": "features[5]",
+      "source": "Low maintainance"
+    },
+    {
+      "path": "features[6]",
+      "source": "Stone capacity: 40kg–100kg"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Floor Black NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Nordex Floor</strong><span style=\"text-align: justify;\"> 加热器造型简洁大方，性能高效卓越。它通过对流或辐射两种加热方式散发热量，并融入先进的节能技术。专为频繁常规使用而设计，有效降低能耗与维护成本，可容纳 40kg 至 100kg 桑拿石。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>加热器型号</th>\n  <th>kW</th>\n  <th>桑拿房<br>最小 (m3) 最大</th>\n  <th>加热器尺寸 (mm)<br>长 宽 高</th>\n  <th>桑拿石<br>(kg)</th>\n  <th>控制方式</th>\n  <th colspan=\"4\">最小安全距离<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNF-90NS-BL-Z</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNF-105NS-BL-Z</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>60</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNF-120NS-BL-Z</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-150NS-BL-Z</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>595 × 400 × 670</td>\n  <td>55</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-180NS-BL-Z</td>\n  <td>18.0</td>\n  <td>17 – 29</td>\n  <td>595 × 400 × 670</td>\n  <td>55</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-180NS-BL-V12-Z</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-210NS-BL-V12-Z</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-240NS-BL-V12-Z</td>\n  <td>24.0</td>\n  <td>26 – 42</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Nordex Floor",
+    "features": [
+      "功率范围：9.0 – 24.0 kW",
+      "可选控制方式：NS (Saunova/Innova)",
+      "黑色金属外壳",
+      "流线型简约设计",
+      "高能效",
+      "维护成本低",
+      "石材容量：40kg–100kg"
+    ]
+  }
+}

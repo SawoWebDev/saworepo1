@@ -1,0 +1,64 @@
+{
+  "slug": "ventilation-louver-circle-631d",
+  "productId": "61452e73-ed05-4595-9723-0dd034e22f87",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (631-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (631-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (631-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "圆形通风百叶",
+    "short_description": "SAWO 圆形通风百叶是一款通风百叶，尺寸为 Ø145mm，配 100mm 通风管孔，用于调节桑拿房内外的空气流通。",
+    "description": null,
+    "type": "通风与杂项配件",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (631-D)",
+        "name": "雪松 (631-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (631-A)",
+        "name": "白杨 (631-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (631-H)",
+        "name": "铁杉 (631-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "slug": "krios-ni2a",
+  "productId": "baa77108-ac34-4844-82ff-d8450c2f6cad",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "short_description",
+      "source": "<span style=\"text-align: justify;\">The </span><strong style=\"text-align: justify;\">Krios</strong><span style=\"text-align: justify;\"> provides a larger stone container for higher and more humid heat. It also features the signature SAWO pattern in a stainless steel casing. The Krios heater is compatible with Saunova (Ni2, NS), and Innova (NS) controls.</span>"
+    },
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova (Ni2)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless-steel casing"
+    },
+    {
+      "path": "features[3]",
+      "source": "Heat reflector included"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in control unit can be attached to the left, right or of the heater"
+    },
+    {
+      "path": "features[5]",
+      "source": "Maximum capacity: 50kg of stones"
+    }
+  ],
+  "fields": {
+    "name": "Krios Ni2a",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Krios</strong><span style=\"text-align: justify;\"> 配备更大的石材容器，可产生更高更湿润的热量。它同样采用不锈钢外壳，饰有 SAWO 标志性图案。Krios 加热器兼容 Saunova (Ni2, NS) 和 Innova (NS) 控制器。</span>",
+    "description": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-6 wpb_column column_container _ height-full\"><br></div></div><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-12 wpb_column column_container _ height-full\"><div class=\"vc_wp_text wpb_content_element tg\"><div class=\"widget widget_text mk-in-viewport\"><div class=\"textwidget\"><table class=\"tg\">\n<tbody class=\"specificationstext\">\n<tr>\n<th class=\"tg-s6z2 c_tta-tabs-container\">加热器型号</th>\n<th class=\"tg-s6z2\">kW</th>\n<th class=\"tg-s6z2\">桑拿房\n最小 (m3) 最大</th>\n<th class=\"tg-s6z2\">加热器尺寸 (mm)\n长 宽 高</th>\n<th class=\"tg-s6z2\">桑拿石\n(kg)</th>\n<th class=\"tg-s6z2\">控制方式</th>\n<th class=\"tg-s6z2\" colspan=\"3\">最小安全距离\nA | B | C</th>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">KRI-45Ni2-P-C</td>\n<td class=\"tg-s6z2\">4.5</td>\n<td class=\"tg-s6z2\">3 – 6</td>\n<td class=\"tg-s6z2\">290 × 390 × 600</td>\n<td class=\"tg-s6z2\">40</td>\n<td class=\"tg-s6z2\">Saunova 2.0</td>\n<td class=\"tg-s6z2\">50</td>\n<td class=\"tg-s6z2\">75</td>\n<td class=\"tg-s6z2\">345</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">KRI-60Ni2-P-C</td>\n<td class=\"tg-s6z2\">6.0</td>\n<td class=\"tg-s6z2\">5 – 8</td>\n<td class=\"tg-s6z2\">290 × 390 × 600</td>\n<td class=\"tg-s6z2\">40</td>\n<td class=\"tg-s6z2\">Saunova 2.0</td>\n<td class=\"tg-s6z2\">80</td>\n<td class=\"tg-s6z2\">105</td>\n<td class=\"tg-s6z2\">345</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">KRI-80Ni2-P-C</td>\n<td class=\"tg-s6z2\">8.0</td>\n<td class=\"tg-s6z2\">7 – 13</td>\n<td class=\"tg-s6z2\">290 × 390 × 670</td>\n<td class=\"tg-s6z2\">50</td>\n<td class=\"tg-s6z2\">Saunova 2.0</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">125</td>\n<td class=\"tg-s6z2\">415</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">KRI-90Ni2-P-C</td>\n<td class=\"tg-s6z2\">9.0</td>\n<td class=\"tg-s6z2\">8 – 14</td>\n<td class=\"tg-s6z2\">290 × 390 × 670</td>\n<td class=\"tg-s6z2\">50</td>\n<td class=\"tg-s6z2\">Saunova 2.0</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">125</td>\n<td class=\"tg-s6z2\">415</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+    "type": "Krios",
+    "features": [
+      "功率范围：4.5 – 9.0 kW",
+      "可选控制方式：Saunova (Ni2)",
+      "不锈钢外壳",
+      "配备隔热反射板",
+      "内置控制装置可安装于加热器左侧、右侧或顶部",
+      "最大容量：50 kg 石材"
+    ]
+  }
+}

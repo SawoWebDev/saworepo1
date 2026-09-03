@@ -1,0 +1,76 @@
+{
+  "slug": "ventilation-louver-circle-with-black-option-638d",
+  "productId": "caece0fa-8f57-4ff6-9384-f8b50265163d",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (638-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (638-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (638-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (638-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "圆形通风百叶（含黑色款）",
+    "short_description": "SAWO 圆形通风百叶（含黑色款）是一款通风百叶，尺寸为 Ø145mm，配 100mm 通风管孔，提供黑色饰面可选，用于调节桑拿房内外的空气流通。",
+    "description": null,
+    "type": "通风与杂项配件",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (638-D)",
+        "name": "雪松 (638-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (638-A)",
+        "name": "白杨 (638-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (638-H)",
+        "name": "铁杉 (638-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (638-BL)",
+        "name": "黑色 (638-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
