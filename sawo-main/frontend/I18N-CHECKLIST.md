@@ -1073,6 +1073,58 @@ the fact. Cheap to run (one pass over all products), worth doing before
 declaring any locale's push finished, and worth re-running occasionally
 even after "finished" if the English catalog keeps getting edited.
 
+### zh naming-convention audit (2026-09-04) — 46 products, done directly via SQL
+
+A separate, narrower audit from the completeness one above: rather than
+missing/stale *rows*, this found `zh` rows that existed and looked
+translated but still had a real English word embedded — a brand/model
+name being correctly kept English had been over-applied to a
+descriptive word standing right next to it. Found and fixed via direct
+`product_translations` SQL updates (not the `product-i18n.js`
+extract/apply pipeline, since these were single-field name corrections,
+not full re-translations) across several rounds, user-driven by
+spot-checking rendered category pages:
+
+1. **Sauna Controls (9)**: Innova/Saunova "Contactor Unit"/"Power
+   Controller"/"Built-In"/"Stainless Steel Touch"/"Simple" were 100%
+   untranslated on 9 products (e.g. `Innova 2.0 Contactor Unit` →
+   `Innova 2.0 接触器组件`).
+2. **Heater Guard (19)** + **Integration Collar** (already correct, no
+   fix needed) + **Cozy Tank (3)**: position words on accessory names
+   weren't getting the same Corner/Round/Wall/Middle treatment already
+   established for the heaters themselves (e.g. `加热器护栏 – Aries
+   Corner` → `加热器护栏 – Aries 转角式`); "Tank" on Cozy Tank sizes was
+   plain English (`Cozy Tank (0.3L)` → `Cozy 水箱 (0.3L)`).
+3. **Color words (15)**: `Black`/`Red` left untranslated on several
+   Nordex/Minidragon variants while sibling products (Scandifire, Aries,
+   SAWO30) already had them correctly as 黑色/红色 — pure inconsistency,
+   not an intentional brand-name exception.
+4. **Full-catalog word-frequency sweep** (the SQL query now documented
+   in `PRODUCT-TRANSLATION-CONVENTIONS.md`'s "Full-catalog audit sweep"
+   section) caught one more: **"Floor" (3)** — `Krios Floor NS`/`Nordex
+   Floor NS`/`Nordex Floor Black NS` — same position-word class as
+   Corner/Round/Wall/Middle, just missed until the sweep ran.
+5. **Steam / Classic (8)**: `Steam 2.0`/`Steam STE` and 6 `Innova
+   Classic...` variants were kept fully English on the assumption they
+   were model-designation names — turned out both words are already
+   translated on sibling products (`steam-head`→蒸汽头,
+   `wooden-pail-classic`→经典木质水桶), so these were misclassified,
+   not intentional. `SAWO Sense` was checked the same way and confirmed
+   correct to keep English (no sibling precedent translates it, and
+   it's a standalone single-SKU product line, not a modifier).
+
+All fixes verified via re-query after each update (`name` no longer
+matches the untranslated pattern). Full before/after word list and the
+reusable "check sibling-product precedent before deciding" method are
+now in `PRODUCT-TRANSLATION-CONVENTIONS.md`'s "Naming conventions"
+section — **read that section (not just this log entry) before
+translating any new product batch, in any locale**, so the same 46
+mistakes aren't repeated for `fi` or a future locale. `fi` has not yet
+been audited this way — the `fi` push already inherited the same
+`Steam 2.0`/`Innova Classic`/heater-guard-position-word names from
+before this fix, so it likely has the identical gaps; run the
+full-catalog sweep against `fi` once its push reaches these products.
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |
@@ -1236,6 +1288,22 @@ Privacy Policy, Sitemap. Neither has any `t()` wiring yet.
 3. Native-speaker review pass on everything marked "ZH written, not
    Live" across the whole file, then flip each path in
    `translatedRoutes.js`.
+4. **Not started, real architecture gap found 2026-09-04**: `sauna_rooms`
+   has no per-locale name storage at all — unlike `products` →
+   `product_translations`, there's no `room_translations` table or `zh`
+   column, so `room.name` ("Standard Sauna Room 1214") renders as raw
+   English on every locale everywhere it's shown: `ProductCard`,
+   `AllProducts.jsx`, `ProductCatalogue.jsx`'s Sauna Rooms tab, and
+   `DispSaunaRoom.jsx`'s own detail-page title (`{room.name}`, line
+   ~476). The fix isn't a data patch — build a `{roomTypeLabel}
+   {model_code}` display-name helper (e.g. `红外线桑拿房 0908-IR-D`)
+   reusing the already-translated `roomTitles` map (`sauna.json`'s
+   `roomsPage.roomTitles` / `support.json`'s `catalogue.seriesLabels`),
+   and swap every raw `room.name` render for it on non-`en` locales.
+   Two smaller bugs found alongside it, same area: `support.json`'s
+   `catalogue.seriesLabels` (zh) is missing a `compact` key, and
+   `ProductCatalogue.jsx`'s Sauna Rooms `groupOrder` array omits
+   `"compact"` entirely (only lists `standard`/`glassfront`/`infrared`).
 
 ## Infra fixes (2026-09-01)
 
