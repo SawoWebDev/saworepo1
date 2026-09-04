@@ -8,37 +8,41 @@ import pianoBench from "../../../assets/Sauna/Sauna Rooms/Interior Designs/piano
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { useHeroLoaded } from "../../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 const InteriorDesign = () => {
   const heroLoaded = useHeroLoaded(heroBg);
+  const t = useLocaleT("sauna");
+  const localize = useLocalizedPath();
 
   const designs = [
     {
       img: classicBench,
-      title: "Classic Bench",
-      subtitle: "Timeless Sauna Elegance",
-      desc: "Embodying the essence of traditional Finnish saunas, the Classic Bench features a meticulously arranged, symmetrical wood layout that exudes simplicity and charm. Crafted from premium Cedar, Aspen, and Spruce Wood, this design ensures durability, comfort, and a warm, authentic sauna experience.",
+      title: t("interiorDesignsPage.designs.classicBench.title"),
+      subtitle: t("interiorDesignsPage.designs.classicBench.subtitle"),
+      desc: t("interiorDesignsPage.designs.classicBench.desc"),
     },
     {
       img: waveBench,
-      title: "Wave Bench",
-      subtitle: "Inspired by Nature's Serenity",
-      desc: "Drawing inspiration from Finland's serene lakes, the Wave Bench brings the soothing curves of gentle water ripples into your sauna. Crafted from premium Cedar, Aspen, and Spruce Wood, its flowing design enhances relaxation, creating a tranquil and inviting atmosphere for an authentic sauna experience.",
+      title: t("interiorDesignsPage.designs.waveBench.title"),
+      subtitle: t("interiorDesignsPage.designs.waveBench.subtitle"),
+      desc: t("interiorDesignsPage.designs.waveBench.desc"),
     },
     {
       img: pianoBench,
-      title: "Piano Bench",
-      subtitle: "A Blend of Modern & Traditional Elegance",
-      desc: "Blending contemporary style with classic sauna craftsmanship, the Piano Bench features a sleek, rhythmic arrangement reminiscent of piano keys. Crafted from high-quality Cedar, Aspen, and Spruce Wood, this design adds a touch of elegance and sophistication to any sauna space while ensuring durability and comfort.",
+      title: t("interiorDesignsPage.designs.pianoBench.title"),
+      subtitle: t("interiorDesignsPage.designs.pianoBench.subtitle"),
+      desc: t("interiorDesignsPage.designs.pianoBench.desc"),
     },
   ];
 
   return (
     <div className="relative">
       <SEO
-        title="Sauna Interior Designs"
-        description="Explore SAWO sauna interior design options, wood finishes, layouts, and styling choices to personalize your sauna room."
-        path="/sauna/rooms/interior-designs"
+        title={t("interiorDesignsPage.meta.title")}
+        description={t("interiorDesignsPage.meta.description")}
+        path={localize("/sauna/rooms/interior-designs")}
+        hreflangAlternates={{ en: "/sauna/rooms/interior-designs", zh: "/zh/sauna/rooms/interior-designs" }}
       />
 
       {/* ===================== */}
@@ -63,9 +67,9 @@ const InteriorDesign = () => {
         />
         <div className="id-hero-overlay" />
         <div className="id-hero-content">
-          <h1 className="id-hero-title">INTERIOR DESIGNS</h1>
+          <h1 className="id-hero-title">{t("interiorDesignsPage.hero.title")}</h1>
           <p className="id-hero-subtitle">
-            Designed for both comfort and elegance
+            {t("interiorDesignsPage.hero.subtitle")}
           </p>
         </div>
       <HeroWave />
@@ -77,14 +81,10 @@ const InteriorDesign = () => {
       <section className="id-intro-section max-w-[1200px] mx-auto px-6 py-20">
         <div className="text-center">
           <h2 className="id-section-title">
-            Explore Our Exquisite Sauna Interior Designs
+            {t("interiorDesignsPage.intro.title")}
           </h2>
           <p className="id-section-desc">
-            Designed for both comfort and elegance, our premium sauna interiors
-            elevate your relaxation experience. Featuring high-quality materials
-            and innovative layouts, each design seamlessly blends functionality
-            with aesthetics, ensuring a warm and inviting atmosphere in every
-            sauna space.
+            {t("interiorDesignsPage.intro.desc")}
           </p>
         </div>
       </section>
@@ -137,35 +137,29 @@ const InteriorDesign = () => {
               lineHeight: 1.2,
             }}
           >
-            Premium Wood Materials
+            {t("interiorDesignsPage.materials.heading")}
           </h2>
 
           <div className="id-materials-grid">
             <div className="id-material-card">
               <div className="id-material-icon"><i className="fas fa-tree"></i></div>
-              <h3>Cedar</h3>
+              <h3>{t("interiorDesignsPage.materials.cedar.title")}</h3>
               <p>
-                Naturally aromatic and moisture-resistant, Cedar provides a
-                rich, warm tone and is renowned for its longevity in high-heat
-                sauna environments.
+                {t("interiorDesignsPage.materials.cedar.desc")}
               </p>
             </div>
             <div className="id-material-card">
               <div className="id-material-icon"><i className="fas fa-leaf"></i></div>
-              <h3>Aspen</h3>
+              <h3>{t("interiorDesignsPage.materials.aspen.title")}</h3>
               <p>
-                Light in color and smooth to the touch, Aspen is hypoallergenic
-                and odorless, ideal for those who prefer a clean, neutral
-                sauna atmosphere.
+                {t("interiorDesignsPage.materials.aspen.desc")}
               </p>
             </div>
             <div className="id-material-card">
               <div className="id-material-icon"><i className="fas fa-seedling"></i></div>
-              <h3>Spruce</h3>
+              <h3>{t("interiorDesignsPage.materials.spruce.title")}</h3>
               <p>
-                Durable and elegant, Spruce offers a classic Nordic aesthetic
-                with a light grain and excellent heat retention properties for
-                an authentic Finnish sauna feel.
+                {t("interiorDesignsPage.materials.spruce.desc")}
               </p>
             </div>
           </div>

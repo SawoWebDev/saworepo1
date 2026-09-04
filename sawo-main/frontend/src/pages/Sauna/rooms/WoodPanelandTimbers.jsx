@@ -12,59 +12,75 @@ import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdown
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { useHeroLoaded } from "../../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
-const panelData = [
-  {
-    img: cedarWood,
-    title: "Cedar Wood",
-    desc: "Beautifully toned Cedar has a pleasant and natural scent which is known to repel insects. SAWO Cedar materials are knot-free and carefully selected to guarantee the best quality.",
-    headers: ["Profile", "Width (mm)", "Thickness (mm)", "Length (mm)"],
-    rows: [["STV", "106", "13.8", "1800 / 2100 / 2400"]],
-  },
-  {
-    img: aspenWood,
-    title: "Aspen Wood",
-    desc: "Aspen wood is white and soft which is cool to touch and has low flammability. The selected Sawo Aspen does not have any visible knots.",
-    headers: ["Profile", "Width (mm)", "Thickness (mm)", "Length (mm)"],
-    rows: [["STV", "106", "13.8", "1800 / 2100 / 2400"]],
-  },
-  {
-    img: spruceWood,
-    title: "Spruce Wood",
-    desc: "Spruce is a softwood with uniform grain texture. A durable wood that withstands heat well and is used widely in saunas. Typically spruce wood has some small knots.",
-    headers: ["Profile", "Width (mm)", "Thickness (mm)", "Length (mm)"],
-    rows: [["STP", "95", "13.8", "2100"]],
-  },
-];
+function buildPanelData(t) {
+  const headers = [
+    t("woodPanelsPage.tableHeaders.profile"),
+    t("woodPanelsPage.tableHeaders.width"),
+    t("woodPanelsPage.tableHeaders.thickness"),
+    t("woodPanelsPage.tableHeaders.length"),
+  ];
+  return [
+    {
+      img: cedarWood,
+      title: t("woodPanelsPage.panels.cedar.title"),
+      desc: t("woodPanelsPage.panels.cedar.desc"),
+      headers,
+      rows: [["STV", "106", "13.8", "1800 / 2100 / 2400"]],
+    },
+    {
+      img: aspenWood,
+      title: t("woodPanelsPage.panels.aspen.title"),
+      desc: t("woodPanelsPage.panels.aspen.desc"),
+      headers,
+      rows: [["STV", "106", "13.8", "1800 / 2100 / 2400"]],
+    },
+    {
+      img: spruceWood,
+      title: t("woodPanelsPage.panels.spruce.title"),
+      desc: t("woodPanelsPage.panels.spruce.desc"),
+      headers,
+      rows: [["STP", "95", "13.8", "2100"]],
+    },
+  ];
+}
 
-const benchData = [
-  {
-    img: benchCedar,
-    title: "Cedar Wood",
-    desc: "Western Red Cedar wood is valued for its unique appearance, aroma, and its high natural resistance to decay. Highly recommended for house interiors and saunas. Sawo selects to use only the high quality Cedar, which don't have any knots or defects.",
-    headers: ["Width (mm)", "Thickness (mm)", "Length (mm)"],
-    rows: [
-      ["44", "22/28", "1800 / 2100 / 2400"],
-      ["70", "22/28", "1800 / 2100 / 2400"],
-      ["90", "22/28", "1800 / 2100 / 2400"],
-      ["90", "44", "1800 / 2100 / 2400"],
-    ],
-  },
-  {
-    img: benchAspen,
-    title: "Aspen Wood",
-    desc: "Aspen wood is white and soft which is cool to touch and has low flammability. The selected Sawo Aspen does not have any visible knots.",
-    headers: ["Width (mm)", "Thickness (mm)", "Length (mm)"],
-    rows: [["90", "22", "1800 / 2100 / 2400"]],
-  },
-  {
-    img: benchSpruce,
-    title: "Spruce Wood",
-    desc: "Spruce is a softwood with uniform grain texture. A durable and strong wood that withstands heat. Typically spruce wood has some small natural knots.",
-    headers: ["Width (mm)", "Thickness (mm)", "Length (mm)"],
-    rows: [["90", "22", "1800 / 2100 / 2400"]],
-  },
-];
+function buildBenchData(t) {
+  const headers = [
+    t("woodPanelsPage.tableHeaders.width"),
+    t("woodPanelsPage.tableHeaders.thickness"),
+    t("woodPanelsPage.tableHeaders.length"),
+  ];
+  return [
+    {
+      img: benchCedar,
+      title: t("woodPanelsPage.bench.cedar.title"),
+      desc: t("woodPanelsPage.bench.cedar.desc"),
+      headers,
+      rows: [
+        ["44", "22/28", "1800 / 2100 / 2400"],
+        ["70", "22/28", "1800 / 2100 / 2400"],
+        ["90", "22/28", "1800 / 2100 / 2400"],
+        ["90", "44", "1800 / 2100 / 2400"],
+      ],
+    },
+    {
+      img: benchAspen,
+      title: t("woodPanelsPage.bench.aspen.title"),
+      desc: t("woodPanelsPage.bench.aspen.desc"),
+      headers,
+      rows: [["90", "22", "1800 / 2100 / 2400"]],
+    },
+    {
+      img: benchSpruce,
+      title: t("woodPanelsPage.bench.spruce.title"),
+      desc: t("woodPanelsPage.bench.spruce.desc"),
+      headers,
+      rows: [["90", "22", "1800 / 2100 / 2400"]],
+    },
+  ];
+}
 
 const WoodCard = ({ item, reverse }) => (
   <div className={`wpt-card-row ${reverse ? "wpt-card-row--reverse" : ""}`}>
@@ -104,13 +120,19 @@ const WoodCard = ({ item, reverse }) => (
 
 const WoodPanelandTimbers = () => {
   const heroLoaded = useHeroLoaded(heroBg);
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
+  const panelData = buildPanelData(t);
+  const benchData = buildBenchData(t);
 
   return (
     <div className="relative">
       <SEO
-        title="Wood Panels & Timbers"
-        description="SAWO wood panel and timber options, cedar, aspen, and spruce choices to craft the natural look and feel of your sauna room."
-        path="/sauna/rooms/wood-panels-timbers"
+        title={t("woodPanelsPage.meta.title")}
+        description={t("woodPanelsPage.meta.description")}
+        path={localize("/sauna/rooms/wood-panels-timbers")}
+        hreflangAlternates={{ en: "/sauna/rooms/wood-panels-timbers", zh: "/zh/sauna/rooms/wood-panels-timbers" }}
       />
 
       {/* ===================== */}
@@ -135,15 +157,15 @@ const WoodPanelandTimbers = () => {
         />
         <div className="wpt-hero-overlay" />
         <div className="wpt-hero-content">
-          <h1 className="wpt-hero-title">WOOD PANELS & TIMBERS</h1>
+          <h1 className="wpt-hero-title">{t("woodPanelsPage.hero.title")}</h1>
           <p className="wpt-hero-subtitle">
-            Premium wood materials for your perfect sauna
+            {t("woodPanelsPage.hero.subtitle")}
           </p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="VIEW BROCHURE"
+              text={tc("viewBrochure")}
               items={[{
-                label: "Panels & Timbers Brochure",
+                label: t("woodPanelsPage.brochureLabel"),
                 href: "https://www.sawo.com/wp-content/uploads/2025/12/Panels-TimbersRV4_compressed.pdf",
               }]}
             />
@@ -157,14 +179,10 @@ const WoodPanelandTimbers = () => {
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 py-20 text-center">
         <h2 className="wpt-section-title">
-          Explore Our Premium Wood Panels & Timbers Selection
+          {t("woodPanelsPage.intro.title")}
         </h2>
         <p className="wpt-section-desc">
-          Crafted for both beauty and durability, our high-quality wood panels
-          and timbers enhance any sauna space. Choose from a variety of premium
-          wood options, including Cedar, Aspen, and Spruce, designed to
-          withstand heat and moisture while providing a natural, relaxing
-          ambiance.
+          {t("woodPanelsPage.intro.desc")}
         </p>
       </section>
 
@@ -172,7 +190,7 @@ const WoodPanelandTimbers = () => {
       {/* WOOD PANELS           */}
       {/* ===================== */}
       <section className="max-w-[1200px] mx-auto px-6 pb-20">
-        <h2 className="wpt-group-title">Wood Panels</h2>
+        <h2 className="wpt-group-title">{t("woodPanelsPage.panelsHeading")}</h2>
         <div className="wpt-cards-grid">
           {panelData.map((item, i) => (
             <WoodCard key={i} item={item} reverse={i % 2 === 1} />
@@ -185,7 +203,7 @@ const WoodPanelandTimbers = () => {
       {/* ===================== */}
       <section className="wpt-bench-section py-20 px-6">
         <div className="max-w-[1200px] mx-auto">
-          <h2 className="wpt-group-title">Bench Timbers</h2>
+          <h2 className="wpt-group-title">{t("woodPanelsPage.benchHeading")}</h2>
           <div className="wpt-cards-grid">
             {benchData.map((item, i) => (
               <WoodCard key={i} item={item} reverse={i % 2 === 0} />
