@@ -6,6 +6,7 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import img_CUB3_Ni2_InsideSaunaRoom from "../../assets/CUB3-Ni2_InsideSaunaRoom.webp";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -100,11 +101,11 @@ function DimField({ label, subLabel, value, onChange, placeholder, hint, unit })
 }
 
 // ─── Product card ─────────────────────────────────────────────────────────────
-function ProductCard({ product, matchKw }) {
+function ProductCard({ product, matchKw, localize }) {
   const voltages = extractKwFromTags(product.tags || []).sort((a, b) => a - b);
 
   return (
-    <Link to={`/products/${product.slug}`} className="sawo-hc-product-card">
+    <Link to={localize(`/products/${product.slug}`)} className="sawo-hc-product-card">
       <div className="sawo-hc-img-wrap">
         {getImageUrl(product, 'thumbnail') ? (
           <img
@@ -139,6 +140,8 @@ function ProductCard({ product, matchKw }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function SaunaCalculator() {
   const { products: localProds, loading: loadingProducts } = useLocalProducts();
+  const t = useLocaleT("support");
+  const localize = useLocalizedPath();
   const [unit, setUnit] = useState("m"); // "m" | "ft"
   const [width,  setWidth]  = useState("");
   const [height, setHeight] = useState("");
@@ -237,21 +240,22 @@ export default function SaunaCalculator() {
   const areaUnit = imperial ? "ft²" : "m²";
   const placeholders = imperial ? ["7.9", "6.9", "5.9"] : ["2.4", "2.1", "1.8"];
   const dimHints = imperial
-    ? { w: "typical sauna: 6–8 ft", h: "standard ceiling: 7 ft", d: "typical sauna: 6–8 ft" }
-    : { w: "typical sauna: 1.8–2.4 m", h: "standard ceiling: 2.1 m", d: "typical sauna: 1.8–2.4 m" };
+    ? t("calculator.fields.hints.imperial", { returnObjects: true })
+    : t("calculator.fields.hints.metric", { returnObjects: true });
 
   const volSubParts = [];
   if (showResult) {
     if (imperial) volSubParts.push(`(${hcRound(volume * 35.3147)} ft³)`);
-    if (parseFloat(uninsulated) > 0) volSubParts.push(`Effective: ${effectiveVolume} m³`);
+    if (parseFloat(uninsulated) > 0) volSubParts.push(t("calculator.result.effective", { val: effectiveVolume }));
   }
 
   return (
     <div id="sawo-hc-wrap">
       <SEO
-        title="Sauna Calculator"
-        description="Find the right SAWO heater for your sauna by using our calculator to match room size and volume to the ideal heater power output."
-        path="/support/sauna-calculator"
+        title={t("calculator.meta.title")}
+        description={t("calculator.meta.description")}
+        path={localize("/support/sauna-calculator")}
+        hreflangAlternates={{ en: "/support/sauna-calculator", zh: "/zh/support/sauna-calculator" }}
       />
       <style>{`
 
@@ -733,21 +737,19 @@ export default function SaunaCalculator() {
 
       {/* ── Intro ─────────────────────────────────────────────────────────── */}
       <div className="sawo-hc-intro">
-        <h2>Sauna Volume Calculator</h2>
+        <h2>{t("calculator.intro.title")}</h2>
         <p>
-          The size of your sauna directly affects the heater power required. Use this sauna volume
-          calculator to measure your sauna room dimensions and get a precise heater recommendation
-          in kW for optimal performance.
+          {t("calculator.intro.desc")}
         </p>
       </div>
 
       {/* ── Input card ────────────────────────────────────────────────────── */}
       <div className="sawo-hc-card">
         <div className="sawo-hc-card-header">
-          <div className="sawo-hc-card-title">Room Dimensions</div>
+          <div className="sawo-hc-card-title">{t("calculator.card.title")}</div>
           <div className="sawo-hc-card-controls">
             {(width || height || depth || uninsulated) && (
-              <button type="button" className="sawo-hc-clear-btn" onClick={handleClear}>Clear</button>
+              <button type="button" className="sawo-hc-clear-btn" onClick={handleClear}>{t("calculator.card.clear")}</button>
             )}
             <div className="sawo-hc-unit-toggle">
               <button
@@ -768,24 +770,24 @@ export default function SaunaCalculator() {
           {/* Left: inputs — ref tracked for height sync */}
           <div className="sawo-hc-dim-inputs" ref={leftColRef}>
             <DimField
-              label="Width" subLabel="(side to side)"
+              label={t("calculator.fields.width.label")} subLabel={t("calculator.fields.width.subLabel")}
               value={width} onChange={setWidth}
               placeholder={placeholders[0]} hint={dimHints.w} unit={lenUnit}
             />
             <DimField
-              label="Height" subLabel="(floor to ceiling)"
+              label={t("calculator.fields.height.label")} subLabel={t("calculator.fields.height.subLabel")}
               value={height} onChange={setHeight}
               placeholder={placeholders[1]} hint={dimHints.h} unit={lenUnit}
             />
             <DimField
-              label="Depth" subLabel="(door to back wall)"
+              label={t("calculator.fields.depth.label")} subLabel={t("calculator.fields.depth.subLabel")}
               value={depth} onChange={setDepth}
               placeholder={placeholders[2]} hint={dimHints.d} unit={lenUnit}
             />
             <DimField
-              label="Uninsulated Surfaces" subLabel="(Leave 0 if fully wood-lined)"
+              label={t("calculator.fields.uninsulated.label")} subLabel={t("calculator.fields.uninsulated.subLabel")}
               value={uninsulated} onChange={setUninsulated}
-              placeholder="0" hint="glass, tile, stone or concrete walls, including glass walls, windows and doors" unit={areaUnit}
+              placeholder="0" hint={t("calculator.fields.uninsulated.hint")} unit={areaUnit}
             />
           </div>
 
@@ -796,7 +798,7 @@ export default function SaunaCalculator() {
           >
             <img
               src={img_CUB3_Ni2_InsideSaunaRoom}
-              alt="Inside a SAWO sauna room"
+              alt={t("calculator.imageAlt")}
             />
             <div className="sawo-hc-dim-image-overlay" />
           </div>
@@ -806,7 +808,7 @@ export default function SaunaCalculator() {
         <div className={`sawo-hc-result-row-wrap${showResult ? " visible" : ""}`}>
           <div className="sawo-hc-result-combined">
             <div className="sawo-hc-result-half">
-              <div className="sawo-hc-result-card-label">Sauna Volume</div>
+              <div className="sawo-hc-result-card-label">{t("calculator.result.volumeLabel")}</div>
               <div className="sawo-hc-result-card-val">
                 {volume !== null ? volume : "-"}
                 <small>m³</small>
@@ -815,12 +817,12 @@ export default function SaunaCalculator() {
             </div>
             <div className="sawo-hc-result-sep" />
             <div className="sawo-hc-result-half">
-              <div className="sawo-hc-result-card-label">Recommended Heater</div>
+              <div className="sawo-hc-result-card-label">{t("calculator.result.heaterLabel")}</div>
               <div className="sawo-hc-result-card-val">
                 {matchKw !== null ? matchKw : "-"}
                 <small>kW</small>
               </div>
-              <div className="sawo-hc-vol-sub">{oversized ? "Exceeds standard range, contact us for advice" : ""}</div>
+              <div className="sawo-hc-vol-sub">{oversized ? t("calculator.result.oversized") : ""}</div>
             </div>
           </div>
         </div>
@@ -829,19 +831,19 @@ export default function SaunaCalculator() {
       {/* ── Recommendations ───────────────────────────────────────────────── */}
       <div className={`sawo-hc-reco-section${showResult ? " visible" : ""}`}>
         <div className="sawo-hc-reco-header">
-          <h3 className="sawo-hc-reco-title">Recommended Heaters</h3>
+          <h3 className="sawo-hc-reco-title">{t("calculator.reco.title")}</h3>
           {!loadingProducts && matched.length > 0 && (
             <span className="sawo-hc-reco-badge">
-              {matched.length} heater{matched.length !== 1 ? "s" : ""} found
+              {t("calculator.reco.badge", { count: matched.length })}
             </span>
           )}
         </div>
 
         {showResult && matched.length > 0 && (
-          <p className="sawo-hc-reco-sub">
-            Showing heaters compatible with <strong>{matchKw} kW</strong> for a{" "}
-            <strong>{volume} m³</strong> sauna.
-          </p>
+          <p
+            className="sawo-hc-reco-sub"
+            dangerouslySetInnerHTML={{ __html: t("calculator.reco.sub", { kw: matchKw, volume }) }}
+          />
         )}
 
         <div className="sawo-hc-grid">
@@ -858,15 +860,15 @@ export default function SaunaCalculator() {
 
           {!loadingProducts && showResult && matched.length === 0 && (
             <p className="sawo-hc-no-result">
-              No heaters found for this power rating. Please{" "}
-              <a href="/contact" style={{ color:"#af8564", fontWeight:700 }}>contact us</a>{" "}
-              for advice.
+              {t("calculator.reco.noResultPrefix")}{" "}
+              <a href={localize("/contact")} style={{ color:"#af8564", fontWeight:700 }}>{t("calculator.reco.noResultLink")}</a>{" "}
+              {t("calculator.reco.noResultSuffix")}
             </p>
           )}
 
           {!loadingProducts &&
             matched.map(p => (
-              <ProductCard key={p.id || p.slug} product={p} matchKw={matchKw} />
+              <ProductCard key={p.id || p.slug} product={p} matchKw={matchKw} localize={localize} />
             ))}
         </div>
       </div>

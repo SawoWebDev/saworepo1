@@ -147,5 +147,45 @@
         ]
       }
     ]
+  },
+  "calculator": {
+    "meta": {
+      "title": "Sauna Calculator",
+      "description": "Find the right SAWO heater for your sauna by using our calculator to match room size and volume to the ideal heater power output."
+    },
+    "intro": {
+      "title": "Sauna Volume Calculator",
+      "desc": "The size of your sauna directly affects the heater power required. Use this sauna volume calculator to measure your sauna room dimensions and get a precise heater recommendation in kW for optimal performance."
+    },
+    "imageAlt": "Inside a SAWO sauna room",
+    "card": {
+      "title": "Room Dimensions",
+      "clear": "Clear"
+    },
+    "fields": {
+      "width": { "label": "Width", "subLabel": "(side to side)" },
+      "height": { "label": "Height", "subLabel": "(floor to ceiling)" },
+      "depth": { "label": "Depth", "subLabel": "(door to back wall)" },
+      "uninsulated": { "label": "Uninsulated Surfaces", "subLabel": "(Leave 0 if fully wood-lined)", "hint": "glass, tile, stone or concrete walls, including glass walls, windows and doors" },
+      "hints": {
+        "metric": { "w": "typical sauna: 1.8–2.4 m", "h": "standard ceiling: 2.1 m", "d": "typical sauna: 1.8–2.4 m" },
+        "imperial": { "w": "typical sauna: 6–8 ft", "h": "standard ceiling: 7 ft", "d": "typical sauna: 6–8 ft" }
+      }
+    },
+    "result": {
+      "volumeLabel": "Sauna Volume",
+      "heaterLabel": "Recommended Heater",
+      "effective": "Effective: {{val}} m³",
+      "oversized": "Exceeds standard range, contact us for advice"
+    },
+    "reco": {
+      "title": "Recommended Heaters",
+      "badge_one": "{{count}} heater found",
+      "badge_other": "{{count}} heaters found",
+      "sub": "Showing heaters compatible with <b>{{kw}} kW</b> for a <b>{{volume}} m³</b> sauna.",
+      "noResultPrefix": "No heaters found for this power rating. Please",
+      "noResultLink": "contact us",
+      "noResultSuffix": "for advice."
+    }
   }
 }
