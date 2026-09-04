@@ -4,18 +4,22 @@ import menuPaths from '../../menuPaths';
 import ButtonClear from '../../components/Buttons/ButtonClear';
 import HeroWave from '../../components/HeroWave';
 import SEO from '../../components/SEO';
+import { useLocaleT, useLocalizedPath } from '../../i18n/LocaleContext';
 
 import supportHeroImg from '../../assets/CUB3-Ni2_InsideSaunaRoom.webp';
 
 const Support = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const t = useLocaleT("support");
+  const localize = useLocalizedPath();
 
   return (
     <div className="relative">
       <SEO
-        title="Support Center"
-        description="Get help with your SAWO products: FAQs, sauna calculator, user manuals, and product catalogue all in one place."
-        path="/support"
+        title={t("hub.meta.title")}
+        description={t("hub.meta.description")}
+        path={localize("/support")}
+        hreflangAlternates={{ en: "/support", zh: "/zh/support" }}
       />
       <style>{`
 
@@ -361,7 +365,7 @@ const Support = () => {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={supportHeroImg}
-          alt="Support Center"
+          alt={t("hub.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -372,81 +376,80 @@ const Support = () => {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="support-hero-title">SUPPORT CENTER</h1>
-          <p className="support-hero-subtitle">Everything you need to get the most out of your SAWO products</p>
+          <h1 className="support-hero-title">{t("hub.hero.title")}</h1>
+          <p className="support-hero-subtitle">{t("hub.hero.subtitle")}</p>
         </div>
         <HeroWave />
       </section>
 
       {/* SUPPORT RESOURCES */}
       <section className="support-section">
-        <h2>How Can We Help?</h2>
+        <h2>{t("hub.resources.title")}</h2>
         <p>
-          Explore our comprehensive support resources, from detailed product guides to interactive tools and FAQs.
-          We're here to ensure you get the perfect SAWO experience.
+          {t("hub.resources.desc")}
         </p>
 
         <div className="support-grid">
           {/* FAQ Card */}
-          <Link to={menuPaths.support.faq} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={localize(menuPaths.support.faq)} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="support-card">
               <div className="support-card-icon">
                 <i className="fas fa-question-circle"></i>
               </div>
-              <h3>Frequently Asked Questions</h3>
+              <h3>{t("hub.resources.faq.title")}</h3>
               <p>
-                Find answers to common sauna and product questions.
+                {t("hub.resources.faq.desc")}
               </p>
               <span className="support-card-link">
-                Browse FAQ <i className="fas fa-chevron-right"></i>
+                {t("hub.resources.faq.link")} <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
 
           {/* Sauna Calculator Card */}
-          <Link to={menuPaths.support.saunaCalculator} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={localize(menuPaths.support.saunaCalculator)} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="support-card">
               <div className="support-card-icon">
                 <i className="fas fa-calculator"></i>
               </div>
-              <h3>Sauna Calculator</h3>
+              <h3>{t("hub.resources.calculator.title")}</h3>
               <p>
-                Use our interactive tool to calculate the perfect sauna heater size for your space based on room dimensions.
+                {t("hub.resources.calculator.desc")}
               </p>
               <span className="support-card-link">
-                Use Calculator <i className="fas fa-chevron-right"></i>
+                {t("hub.resources.calculator.link")} <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
 
           {/* User Manuals Card */}
-          <Link to={menuPaths.support.manuals} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={localize(menuPaths.support.manuals)} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="support-card">
               <div className="support-card-icon">
                 <i className="fas fa-book"></i>
               </div>
-              <h3>User Manuals</h3>
+              <h3>{t("hub.resources.manuals.title")}</h3>
               <p>
-                Download detailed instruction manuals for all SAWO products including heaters, controls, and accessories.
+                {t("hub.resources.manuals.desc")}
               </p>
               <span className="support-card-link">
-                Download Manuals <i className="fas fa-chevron-right"></i>
+                {t("hub.resources.manuals.link")} <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
 
           {/* Product Catalogue Card */}
-          <Link to={menuPaths.support.catalogue} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={localize(menuPaths.support.catalogue)} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="support-card">
               <div className="support-card-icon">
                 <i className="fas fa-book-open"></i>
               </div>
-              <h3>Product Catalogue</h3>
+              <h3>{t("hub.resources.catalogue.title")}</h3>
               <p>
-                Browse our complete product catalogue with specifications, pricing, and technical details for all offerings.
+                {t("hub.resources.catalogue.desc")}
               </p>
               <span className="support-card-link">
-                VIEW CATALOGUE <i className="fas fa-chevron-right"></i>
+                {t("hub.resources.catalogue.link")} <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </Link>
@@ -455,49 +458,49 @@ const Support = () => {
 
       {/* CONTACT SUPPORT */}
       <section className="support-section support-contact-section">
-        <h2>Need Direct Support?</h2>
+        <h2>{t("hub.contact.title")}</h2>
         <p>
-          Our technical support team is ready to help with questions, troubleshooting, or special requests.
+          {t("hub.contact.desc")}
         </p>
 
         <div className="support-contact-box">
-          <h3>Technical Support</h3>
+          <h3>{t("hub.contact.boxTitle")}</h3>
 
           <div className="support-contact-grid">
             <div className="support-contact-item">
               <i className="fas fa-envelope"></i>
-              <strong>Email</strong>
+              <strong>{t("hub.contact.email")}</strong>
               <a href="mailto:help@sawo.com">help@sawo.com</a>
             </div>
 
             <div className="support-contact-item">
               <i className="fas fa-phone"></i>
-              <strong>Phone</strong>
+              <strong>{t("hub.contact.phone")}</strong>
               <a href="tel:+63323412233">+63 323 412 233</a>
             </div>
 
             <div className="support-contact-item">
               <i className="fab fa-whatsapp"></i>
-              <strong>WhatsApp</strong>
+              <strong>{t("hub.contact.whatsapp")}</strong>
               <a href="tel:+639497594450">+63 949 759 4450</a>
             </div>
           </div>
 
           <div className="support-contact-note">
             <i className="fas fa-info-circle" style={{ marginRight: '12px', color: '#af8564' }}></i>
-            For technical support and troubleshooting, we recommend reaching out via WhatsApp or email. Our team typically responds within 24 hours.
+            {t("hub.contact.note")}
           </div>
         </div>
       </section>
 
       {/* GETTING STARTED / CTA */}
       <section className="support-section support-cta-section">
-        <h2>Ready to Explore Our Products?</h2>
-        <p>Discover the perfect sauna, steam room, or infrared solution for your needs.</p>
+        <h2>{t("hub.cta.title")}</h2>
+        <p>{t("hub.cta.desc")}</p>
         <div style={{ marginTop: "32px" }}>
           <ButtonClear
-            text="BROWSE ALL PRODUCTS"
-            href={menuPaths.products}
+            text={t("hub.cta.btn")}
+            href={localize(menuPaths.products)}
           />
         </div>
       </section>
