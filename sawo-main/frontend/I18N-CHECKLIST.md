@@ -1115,14 +1115,52 @@ page using it is incompletely translated, not just the one you're looking at.
 
 Audited per the "Infra fixes (2026-08-26)" process before calling any of the 4 pages done: the 3-word/2-word hardcoded-JSX-text regexes and the `alt|title|placeholder|aria-label="..."` attribute regex both returned zero hits across all 4 files after wiring, every internal `<Link to=...>` (4 call sites) is wrapped in `useLocalizedPath()`, and `useLocaleT` appears ≥2 times in every file. The three shared-component gaps found (`SaunaProductDetails`, `SaunaWoodMaterials`, `WellnessBenefits` all silently rendering English when a caller supplies non-default data/no `cards` prop) are exactly the "JSON is complete, component/page never reads it" failure mode this file has flagged twice before (`SaunaConfigurator.jsx`, `DispAccessories.jsx`/`DispSaunaRoom.jsx`) — worth grepping for the same pattern (`useLocaleT` count on a shared component that also accepts data via props) if a similar catalogue-style page shows up untranslated later.
 
+## About / Support / Careers / News section (2026-09-04)
+
+Session goal: continue the `zh` push into every page still on the "Not
+yet touched at all" list below (this list itself was stale — see the
+correction under Contact). All pages in this section were **wired from
+scratch this session** — confirmed 0 `useLocaleT` hits before starting
+each one (a couple, like Contact, turned out to already be partially
+wired from an uncommitted working-tree state at session start; noted
+per-row). `fi` was **not** touched for any of these — `zh`-only per this
+session's request, `fi` remains ⬜ throughout. None are in
+`TRANSLATED_PATHS` yet (needs native-speaker review first, same gate as
+every other page in this file) — reachable at their `/zh/...` URL
+directly, just not offered by the switcher/hreflang yet.
+
+| Route | Wired | FI written | ZH written | Live | Notes |
+|---|---|---|---|---|---|
+| `/contact` | ✅ | ⬜ | ✅ | ⬜ | **Correction**: this page was NOT actually untouched — found already fully wired (196 `t()` call sites) in the working tree at session start (from an earlier uncommitted session), just missing `zh`. Committed the existing en wiring + `offices.list.*.role`/`categories`/`technicalSubjects`/`customerSubjects` roleKey/labelKey refactor, then added full `zh/contact.json` (184/184 countries translated, 0 key gap vs. en). Country `<option value>` stays the bare English `COUNTRIES` array (sent to Odoo/email backend) — only the *displayed* text is translated, confirmed via `t("countries", {returnObjects:true})` index-aligned lookup. |
+| `/about` | ✅ | ⬜ | ✅ | ⬜ | `AboutUs/About.jsx` — hero, Innovation/Not-Limited-by-Borders section (5 paragraphs incl. inline `<b>` tags via `dangerouslySetInnerHTML`), 4 certification badges (ISO 9001/14001, Sauna from Finland, PEFC), Latest News preview cards (3). New `about.json` namespace. |
+| `/about/news` | ✅ | ⬜ | ✅ | ⬜ | `AboutUs/LatestNews.jsx` — hero, 3 full articles (Exhibitions, Talent Search, Earthquake Relief in Cebu), partner logo alts, closing CTA. New `news.json` namespace. Fixed 2 locale-dropping links (`careers`/`contact` `<Link>`s) while wiring. |
+| `/about/sustainability` | ✅ | ⬜ | ✅ | ⬜ | `AboutUs/Sustainability.jsx` — hero, Commitment section, 3 Eco-Friendly Practice cards, Energy-Smart Design (3 features + info banner), Waste Hierarchy (3-step EU 2018/851 breakdown), Sauna-is-Wellbeing quote block + closing CTA. New `sustainability.json` namespace. The falling-leaves canvas effect (`#leavesContainer` + its `useEffect`) is presentational/locale-agnostic, untouched. |
+| `/careers` | ✅ | ⬜ | ✅ | ⬜ | `Careers/Careers.jsx` — hero, Join SAWO intro, all **10** Open Positions rows (title + badges + years-experience where applicable), We Are Hiring box (email/address), 4 department category cards, 4 Why-Work-for-SAWO benefit cards. New `careers.json` namespace. **Convention**: the Finnish job-title subtitles printed next to each English title (e.g. "Elektroniikkasuunnittelija") are kept as literal Finnish text in *both* `en` and `zh` — an existing bilingual-posting convention on this page, not a per-locale translation target. |
+| `/support` (hub) | ✅ | ⬜ | ✅ | ⬜ | `Support/Support.jsx` — hero, 4 resource cards (FAQ/Calculator/Manuals/Catalogue), Technical Support contact box, bottom CTA. New `support.json` namespace, `hub` key. |
+| `/support/faq` | ✅ | ⬜ | ✅ | ⬜ | `Support/FAQ.jsx` — hero, all **4 categories / ~15 Q&A pairs** (~4,000 words: Finnish Sauna, Building & Installation, Sauna Heater, Using Sauna), sidebar, bottom banner. Per-section data (previously hardcoded in JS as `faqSections`) was **moved entirely into `support.json`'s `faq.sections`** — only per-section `icon` stays in JS (`FAQ_SECTION_ICONS`, keyed by the same `id`). `support.json`, `faq` key. |
+| `/support/sauna-calculator` | ✅ | ⬜ | ✅ | ⬜ | `Support/SaunaCalculator.jsx` — intro, dimension fields (width/height/depth/uninsulated + hints, metric vs. imperial), unit toggle, result bar, recommendation section using i18next's automatic `_one`/`_other` plural suffix for the heater-count badge (`t("calculator.reco.badge", {count})`). Fixed a locale-dropping `ProductCard` `<Link to={\`/products/${slug}\`}>`. `support.json`, `calculator` key. |
+| `/support/manuals` | ✅ | ⬜ | ✅ | ⬜ | `Support/UserManuals.jsx` — hero, 5 category tabs, series sub-headings (moved `SERIES_LABELS`/`CATEGORY_TABS.label` out of JS into `manuals.tabs`/`manuals.seriesLabels`), search bar, empty/no-results states, PDF modal, product cards, bottom banner. Fixed 2 locale-dropping links (`ProductCard`'s product/room/accessory link, bottom-banner `/contact` link). `support.json`, `manuals` key. |
+| `/support/catalogue` | ✅ | ⬜ | ✅ | ⬜ | `Support/ProductCatalogue.jsx` — header band, 8 category tabs, series sub-headings (same `CATALOGUE_TABS.label`/`SERIES_LABELS` → JSON move as manuals), empty state, product cards, bottom CTA. Fixed 2 locale-dropping links (`ProductCard`, bottom CTA). `support.json`, `catalogue` key. |
+
+Every page above: audited with the standard process from "Infra fixes
+(2026-08-26)" (3-word/2-word hardcoded-JSX-text regex + `alt|title|
+placeholder|aria-label="..."` attribute regex, both zero real hits after
+wiring; `grep -c useLocaleT` ≥2 in every file) and confirmed with
+`CI=true npx react-scripts build` (zero errors) after every commit.
+
 ## Not yet touched at all
 
-About (`/about`, sustainability, latest-news), Careers, Contact, Support (FAQ, sauna calculator, user manuals, product catalogue), Privacy Policy, Sitemap. None of these have any `t()` wiring yet.
+Privacy Policy, Sitemap. Neither has any `t()` wiring yet.
 
-## Recommended next batch
+## Recommended next batch (updated 2026-09-04)
 
-1. `/steam/controls` + `/steam/accessories` — same `CategoryHero` + `catalogFilter` pattern already built today, should go fast.
-2. Native-speaker review pass on everything marked "FI written, not Live" above, then flip each path in `translatedRoutes.js`.
+1. `fi` pass for everything in the "About / Support / Careers / News"
+   section above — all 9 pages are `zh`-only right now, same as the
+   pattern already run for products (`zh` first, `fi` mop-up second).
+2. Privacy Policy, Sitemap — last two untouched pages.
+3. Native-speaker review pass on everything marked "ZH written, not
+   Live" across the whole file, then flip each path in
+   `translatedRoutes.js`.
 
 ## Infra fixes (2026-09-01)
 
