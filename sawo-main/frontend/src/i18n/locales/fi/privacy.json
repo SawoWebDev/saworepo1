@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "title": "Tietosuojaseloste",
+    "description": "SAWOn tietosuojaseloste, joka kuvaa, kuinka keräämme, käytämme ja suojaamme henkilötietojasi verkkosivustollamme ja palveluissamme."
+  },
+  "hero": {
+    "eyebrow": "Lakiasiat",
+    "title": "Tietosuojaseloste",
+    "websiteLabel": "Verkkosivusto:"
+  },
+  "footer": "Viimeksi päivitetty: 2026 · SAWO INC · Kaikki oikeudet pidätetään.",
+  "sections": [
+    {
+      "title": "Keitä olemme",
+      "content": [
+        "Tämä tietosuojaseloste koskee SAWO INC:n ylläpitämää verkkosivustoa, joka on saatavilla osoitteessa https://sawo.com."
+      ]
+    },
+    {
+      "title": "Mitä henkilötietoja keräämme ja miksi",
+      "subsections": [
+        {
+          "subtitle": "Kommentit",
+          "content": [
+            "Kun kävijät jättävät kommentteja sivustollamme, keräämme kommenttilomakkeessa näkyvät tiedot sekä kävijän IP-osoitteen ja selaimen user agent -merkkijonon roskapostin havaitsemisen avuksi.",
+            "Sähköpostiosoitteestasi luotu anonymisoitu merkkijono (tiiviste) voidaan lähettää Gravatar-palveluun sen tarkistamiseksi, käytätkö palvelua. Gravatarin tietosuojaseloste on saatavilla osoitteessa https://automattic.com/privacy/. Kun kommenttisi on hyväksytty, profiilikuvasi saattaa näkyä julkisesti kommenttisi yhteydessä."
+          ]
+        },
+        {
+          "subtitle": "Media",
+          "content": [
+            "Jos lataat kuvia verkkosivustollemme, vältä sisällyttämästä niihin sijaintitietoja (EXIF GPS), sillä muut käyttäjät voivat ladata ja poimia sijaintitietoja ladatuista kuvista."
+          ]
+        },
+        {
+          "subtitle": "Evästeet",
+          "bullets": [
+            "Jos jätät kommentin, voit halutessasi tallentaa nimesi, sähköpostiosoitteesi ja verkkosivustosi evästeisiin. Nämä evästeet ovat voimassa vuoden ja on tarkoitettu sinun mukavuuttasi varten.",
+            "Väliaikainen eväste asetetaan, kun vierailet kirjautumissivulla, jotta voidaan tarkistaa, hyväksyykö selaimesi evästeitä. Se ei sisällä henkilötietoja ja poistuu, kun suljet selaimen.",
+            "Kirjautuessasi sisään asetetaan useita evästeitä kirjautumistietojesi ja näyttöasetustesi tallentamiseksi. Kirjautumisevästeet ovat voimassa kaksi päivää ja näyttöasetusevästeet vuoden. Valitsemalla \"Muista minut\" kirjautumisesi pidennetään kahteen viikkoon.",
+            "Jos kirjaudut ulos, kirjautumisevästeet poistetaan.",
+            "Artikkelin muokkaaminen tai julkaiseminen asettaa evästeen, joka sisältää artikkelin julkaisutunnuksen. Tämä eväste vanhenee yhden päivän kuluttua."
+          ]
+        },
+        {
+          "subtitle": "Muilta verkkosivustoilta upotettu sisältö",
+          "content": [
+            "Tämän sivuston artikkelit saattavat sisältää upotettua sisältöä (esim. videoita, kuvia, artikkeleita jne.). Upotettu sisältö käyttäytyy samalla tavoin kuin jos olisit vieraillut lähdesivustolla suoraan. Nämä ulkoiset sivustot saattavat kerätä sinusta tietoa, käyttää evästeitä ja seurata vuorovaikutustasi niiden sisällön kanssa, erityisesti jos olet kirjautunut sisään niiden palveluun."
+          ]
+        },
+        {
+          "subtitle": "Analytiikka",
+          "content": [
+            "Voimme käyttää kolmannen osapuolen analytiikkatyökaluja liikenteen ja käyttötrendien mittaamiseen. Nämä työkalut keräävät selaimesi lähettämiä tietoja, mukaan lukien vieraillut sivut ja käyttäytyminen, palveluidemme kehittämiseksi."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kenen kanssa jaamme tietojasi",
+      "content": [
+        "Jos pyydät salasanan palautusta, IP-osoitteesi sisällytetään palautusviestiin."
+      ]
+    },
+    {
+      "title": "Kuinka kauan säilytämme tietojasi",
+      "bullets": [
+        "Kommentit ja niihin liittyvät metatiedot säilytetään toistaiseksi, jotta seurantakommentit voidaan tunnistaa ja hyväksyä automaattisesti.",
+        "Sivustollemme rekisteröityneiden käyttäjien (mikäli sovellettavissa) osalta säilytämme heidän käyttäjäprofiilissaan antamansa henkilötiedot. Kaikki käyttäjät voivat milloin tahansa tarkastella, muokata tai poistaa henkilötietonsa (käyttäjätunnusta lukuun ottamatta). Verkkosivuston ylläpitäjät voivat myös käyttää ja hallita näitä tietoja."
+      ]
+    },
+    {
+      "title": "Oikeutesi omiin tietoihisi",
+      "content": [
+        "Jos sinulla on tili tai olet jättänyt kommentteja, voit pyytää viedyn tiedoston sinusta hallussamme olevista henkilötiedoista, mukaan lukien antamasi tiedot. Voit myös pyytää meitä poistamaan henkilötietosi, lukuun ottamatta tietoja, jotka meidän on säilytettävä hallinnollisista, oikeudellisista tai turvallisuussyistä."
+      ]
+    },
+    {
+      "title": "Minne lähetämme tietojasi",
+      "content": [
+        "Kävijöiden kommentit saatetaan tarkistaa automaattisen roskapostintunnistuspalvelun kautta."
+      ]
+    },
+    {
+      "title": "Yhteystiedot",
+      "content": [
+        "Tietosuojaan liittyvissä kysymyksissä tai tietopyynnöissä ota yhteyttä osoitteeseen:"
+      ],
+      "email": "info@sawo.com"
+    },
+    {
+      "title": "Lisätietoja",
+      "subsections": [
+        {
+          "subtitle": "Kuinka suojaamme tietojasi",
+          "content": [
+            "Toteutamme asianmukaiset tekniset ja organisatoriset toimenpiteet, mukaan lukien salauksen, palomuurit ja pääsynhallinnan, henkilötietojesi suojaamiseksi."
+          ]
+        },
+        {
+          "subtitle": "Tietoturvaloukkausmenettelyt",
+          "content": [
+            "Tietoturvaloukkauksen sattuessa ilmoitamme asiasta asianomaisille käyttäjille ja valvontaviranomaisille lain edellyttämällä tavalla ja ryhdymme välittömiin toimiin käyttäjätietojen suojaamiseksi."
+          ]
+        },
+        {
+          "subtitle": "Kolmannet osapuolet, joilta vastaanotamme tietoja",
+          "content": [
+            "Voimme vastaanottaa tietoja luotettavilta kolmansien osapuolten palveluilta roskapostisuojausta, analytiikkaa ja kirjautumispalveluita varten."
+          ]
+        },
+        {
+          "subtitle": "Automatisoitu päätöksenteko ja profilointi",
+          "content": [
+            "Emme käytä tietojasi automatisoituun päätöksentekoon tai profilointiin, joka johtaisi oikeudellisiin tai vastaaviin merkittäviin vaikutuksiin."
+          ]
+        },
+        {
+          "subtitle": "Alakohtaiset viranomaisvaatimukset tietojen luovuttamisesta",
+          "content": [
+            "Noudatamme sovellettavaa tietosuojalainsäädäntöä, mukaan lukien käyttäjän suostumusta, tietojen säilytystä ja lainmukaista käsittelyä koskevat säännökset."
+          ]
+        }
+      ]
+    }
+  ]
+}

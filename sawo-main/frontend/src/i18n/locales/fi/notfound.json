@@ -1,0 +1,21 @@
+{
+  "meta": { "title": "Sivua ei löytynyt", "description": "Etsimääsi sivua ei ole olemassa tai se on siirretty." },
+  "heading": "Hups! Sivua ei löytynyt",
+  "desc": "Pahoittelemme, etsimääsi sivua ei ole olemassa tai se on siirretty.",
+  "triedToAccess": "Yritit avata:",
+  "helpBox": {
+    "title": "Näin voit jatkaa:",
+    "item1": "Tarkista, ettei osoitteessa ole kirjoitusvirheitä",
+    "item2": "Selaa tuoteluetteloamme",
+    "item3": "Käytä alla olevaa hakutoimintoa",
+    "item4": "Ota meihin yhteyttä saadaksesi apua"
+  },
+  "goHome": "Siirry etusivulle",
+  "browseProducts": "Selaa tuotteita",
+  "popularSections": "Suositut osiot:",
+  "saunaHeaters": "Saunankiukaat",
+  "steamGenerators": "Höyrynkehittimet",
+  "faq": "Usein kysytyt kysymykset",
+  "contactUs": "Ota yhteyttä",
+  "supportPrompt": "Onko sinulla edelleen ongelmia? Tukitiimimme auttaa mielellään."
+}

@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Kestävä kehitys",
+    "description": "Kuinka SAWO rakentaa kestävästi – vastuullisesti hankittua puuta, jätteen vähentämistä ja energiatehokasta valmistusta jokaisen saunankiukaan ja saunan takana."
+  },
+  "hero": { "title": "KESTÄVÄ KEHITYS", "subtitle": "Välitämme sinusta ja maapallosta" },
+  "commitment": {
+    "title": "Sitoumuksemme kestävään kehitykseen",
+    "desc": "SAWOlla yhdistämme hyvinvoinnin ja ympäristövastuun. Jokainen valmistamamme sauna ilmentää kestävää kehitystä materiaalivalinnoista aina valmistusprosesseihin asti. Pyrimme levittämään aitoa suomalaista saunakulttuuria korkealaatuisilla, kestävillä saunoilla, jotka vaalivat terveyttä kunnioittaen samalla planeettaamme.",
+    "imgAlt": "SAWOn kestävä kehitys"
+  },
+  "practices": {
+    "title": "Ympäristöystävälliset valmistuskäytännöt",
+    "energy": { "title": "Energiatehokkuus", "desc": "Kehittyneet teknologiat, kuten tarkka CNC-työstö, minimoivat energiankulutuksen ja vähentävät hukkaa." },
+    "waste": { "title": "Jätteen vähentäminen", "desc": "Hyödynnämme uudelleen tai kierrätämme ylijäävän puun ja materiaalit pyrkien nollajätetuotantoon." },
+    "nonToxic": { "title": "Myrkyttömät käsittelyt", "desc": "Vältämme haitallisia kemikaaleja ja käytämme myrkyttömiä pintakäsittelyjä ympäristön ja terveyden suojelemiseksi. Jätteemme on sertifioitu myrkyttömäksi." }
+  },
+  "energySmart": {
+    "title": "Energiaälykäs saunasuunnittelu",
+    "subtitle": "Saunamme on suunniteltu optimaalista energiatehokkuutta silmällä pitäen, mikä takaa täydellisen saunakokemuksen minimaalisin ympäristövaikutuksin.",
+    "imgAlt": "Energiaälykäs saunasuunnittelu",
+    "feature1": "Lämmitysjärjestelmät on sovitettu tarkasti saunan kokoon energiahukan estämiseksi.",
+    "feature2": "Joissakin malleissa on älytermostaatit tarkkaa lämpötilan säätöä varten.",
+    "feature3": "Infrapunateknologiaa hyödynnetään sähkönkulutuksen vähentämiseksi.",
+    "bannerImgAlt": "Kestävästi tuotettu puu",
+    "bannerText": "Valitsemalla SAWOn investoit tuotteeseen, joka on valmistettu kestävistä materiaaleista, valmistusprosessiin, joka kunnioittaa luonnonvaroja, ja terveellisempään sisäympäristöön."
+  },
+  "wasteHierarchy": {
+    "title": "Jätteestä arvoa: kierto sulkeutuu",
+    "intro": "Noudatamme jätehierarkiadirektiiviä (EU) 2018/851, jossa etusijalla ovat jätteen minimointi, uudelleenkäyttö ja hyötykäyttö",
+    "minimization": { "title": "Jätteen minimointi", "desc": "Kehittyneet leikkuutekniikat vähentävät tarpeetonta hukkaa hyödyntämällä leikkuujätteen molemmat osat materiaalinkulutuksen pienentämiseksi." },
+    "reuse": { "title": "Jätteen uudelleenkäyttö", "desc": "Kaikki jäljelle jäävät puukappaleet hyödynnetään muissa tuotteissa." },
+    "recovery": { "title": "Jätteen hyötykäyttö", "desc": "Sahanpuru ja hyödyntämiskelvottomat puujätteet käytetään biomassakattiloiden polttoaineena, mikä tuottaa tehtaillemme uusiutuvaa energiaa ja pienentää hiilijalanjälkeämme." },
+    "imgAlt": "Jätehierarkia"
+  },
+  "wellbeing": {
+    "titleLine1": "Sauna on hyvinvointia",
+    "titleLine2": "Kestävä kehitys on hyvinvointia",
+    "quotePrefix": "Terveys ja hyvinvointi ovat hyvän elämän perusta. Kestävä kehitys ei koske pelkästään ihmisten hyvinvointia, vaan myös maapallon hyvinvointia. SAWOlla",
+    "quoteHighlight1": "hyvinvointi on liiketoimintamme ydin",
+    "quoteMiddle": ". Huolehdimme siitä, että sinusta pidetään huolta saunan avulla. Teemme myös parhaamme huolehtiaksemme maapallosta.",
+    "quoteHighlight2": "Hyvinvointi on kestävää kehitystä. Voi hyvin. Saunota hyvin.",
+    "imgAlt": "Sauna kestävässä ympäristössä",
+    "ctaText": "Liity mukaan matkallemme, jolla teemme kestävistä saunakokemuksista saavutettavia ja nautinnollisia kaikkialla maailmassa. Koe luonnon lämpö saunassa, joka välittää sinusta ja maapallosta.",
+    "ctaBtn": "TUTUSTU"
+  }
+}
