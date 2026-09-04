@@ -1,0 +1,32 @@
+{
+  "slug": "nordex-mini-nb",
+  "productId": "39b92ea9-2b0e-43a2-9a3c-25c3e1b95b63",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 2.3 – 3.6kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Built-in (NB)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless-steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Mini NB",
+    "short_description": "<span style=\"text-align: justify;\">Erittäin kompakti </span><strong style=\"text-align: justify;\">Nordex Mini</strong><span style=\"text-align: justify;\"> voidaan asentaa seinään suoraan tai kulma-asentoon. Se on saatavilla ruostumattomasta teräksestä tai mustasta metallista valmistetulla kuorella, ja se on yhteensopiva erillisten Saunova (Ni2, NS)- ja Innova (NS) -ohjausten kanssa.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min (m³) maks</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"3\">Vähimmäisturvaetäisyydet<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRM-23NB-Z</td>\n  <td>2.3</td>\n  <td>1.3 – 2.5</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Built-in (8+4h)</td>\n  <td>30 | 50</td>\n  <td>20 | 30</td>\n  <td>60 | 85</td>\n</tr>\n<tr>\n  <td>NRM-30NB-Z</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Built-in (8+4h)</td>\n  <td>35 | 50</td>\n  <td>25 | 30</td>\n  <td>65 | 85</td>\n</tr>\n<tr>\n  <td>NRM-36NB-Z</td>\n  <td>3.6</td>\n  <td>3 – 6</td>\n  <td>200 × 340 × 500</td>\n  <td>8 – 11</td>\n  <td>Built-in (8+4h)</td>\n  <td>40 | 50</td>\n  <td>25 | 30</td>\n  <td>65 | 85</td>\n</tr></tbody></table>",
+    "type": "Nordex Mini",
+    "features": [
+      "Tehoalue: 2.3 – 3.6 kW",
+      "Saatavilla oleva ohjaus: Sisäänrakennettu (NB)",
+      "Virtaviivainen, minimalistinen muotoilu",
+      "Ruostumaton teräskuori"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "nordex-s-black-ns",
+  "productId": "2e691db6-5da4-4ea0-92b1-27d2a99f9cfa",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    }
+  ],
+  "fields": {
+    "name": "Nordex S Black NS",
+    "short_description": "<strong style=\"text-align: justify;\">Nordex S</strong><span style=\"text-align: justify;\"> on Nordex Floor -lämmittimen päivitetty versio, jossa on hoikempi muotoilu useampiin asennusvaihtoehtoihin erilaisissa saunaratkaisuissa. Nordex S sopii sekä koti- että ammattikäyttöön.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min (m³) maks</th>\n  <th>Lämmittimen koko (mm)<br>Leveys Syvyys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNS-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNS-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNS-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "Tehoalue: 6.0 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Virtaviivainen, minimalistinen muotoilu",
+      "Tehokas lämmitys vähäisellä energiankulutuksella",
+      "Ylikuumenemissuoja",
+      "Automaattinen turvakatkaisu"
+    ]
+  }
+}
