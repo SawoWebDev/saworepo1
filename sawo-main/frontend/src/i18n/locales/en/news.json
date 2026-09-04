@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Latest News",
+    "description": "News, trade shows, and updates from SAWO, covering our Finnish sauna heaters, steam generators, and sauna room innovations."
+  },
+  "hero": {
+    "alt": "SAWO sauna interior",
+    "title": "Latest News",
+    "subtitle": "Stay updated with SAWO stories, events, and milestones"
+  },
+  "exhibitions": {
+    "eyebrow": "Recent",
+    "titleSpan": "Exhibitions",
+    "subtitle": "Aquanale & Piscina Barcelona",
+    "p1": "We are happy to announce that we will be attending two exhibitions in Europe less than a month apart. Come and see us at Aquanale and Piscina Barcelona.",
+    "aquanaleLabel": "Aquanale: OCTOBER 28-31, 2025",
+    "aquanaleInfo": "Hall 8 Stand A028 – B209, Messeplatz 1, 50679 Cologne, Germany",
+    "piscinaLabel": "Piscina Barcelona: NOVEMBER 17-20, 2025",
+    "piscinaInfo": "Stand D90, Recinto Gran Via, Pabellon P1, Nivel 0, Gran Via, Exhibition Centre, Barcelona, Spain",
+    "p2": "More than simply creating products, we help you bring authentic and personalized Finnish sauna experiences. As we see it, sauna belongs to everyone around the world.",
+    "p3": "This time around, our exhibition highlights have to do with exceptional innovation in sauna controls and heater design. For further information about these upcoming products, be on the lookout for updates on our website and in our social media channels.",
+    "p4": "We'll also unveil our new accessory collections, from Essential and Rustic sets to Signature and Dragon designs. Each set is crafted to complement each sauna's aesthetic while focusing on the user's personal sauna experience.",
+    "p5": "Sauna is more than a room, it provides a wellness lifestyle. At both Aquanale and Piscina Barcelona, you will discover how our products blend authenticity, design, and modern innovations to transform everyday routines into moments of true wellness.",
+    "closing": "Come see it, feel it, and experience it for yourself.",
+    "imgAlt": "SAWO exhibition booth",
+    "aquanaleLogoAlt": "Aquanale logo",
+    "piscinaLogoAlt": "Piscina Barcelona logo"
+  },
+  "talent": {
+    "eyebrow": "Talent",
+    "titleSpan": "Search",
+    "subtitle": "Join Our Growing Team In Cebu",
+    "p1": "We believe that our people are the driving force behind every achievement. As we celebrate the expansion of Plant 4 in Cebu, we are opening a new chapter, not only for production, but also for people. We are now looking for passionate individuals to join our team in Cebu, Philippines.",
+    "p2": "We are looking for talents who bring experience in the sauna and wellness industry, and who are eager to contribute to a global brand that delivers authentic Finnish sauna experiences to over 90 countries and counting. If you are a self-starter that thrives in a dynamic, tropical setting and wants to be part of a company that blends tradition with innovation, we are the right fit for you.",
+    "closing": "Explore our job openings and join us in shaping the next era of wellness.",
+    "cta": "Job Openings",
+    "imgAlt": "SAWO talent search"
+  },
+  "earthquake": {
+    "eyebrow": "Earthquake",
+    "titlePrefix": "Relief in",
+    "titleSpan": "Cebu",
+    "subtitle": "SAWO Staff Join Forces to Aid Cebu Earthquake Victims",
+    "p1": "When disaster strikes close to home, we come together to help.",
+    "p2": "On September 30th, a strong, 6.9 magnitude earthquake struck off the Northeast coast of Cebu, leaving dozens dead, hundreds injured, and many more without shelter. As part of the Cebu community, we acted quickly to support those affected.",
+    "p3": "Shortly after the quake, we organized a company-wide relief effort, delivering mattresses, food, hygiene products, and other essentials to the hardest-hit areas. Our team members personally distributed the supplies to affected SAWO families and their neighbors in the surrounding communities.",
+    "p4": "Cebu has long been home to SAWO, and during this time of hardship, we're reminded how important it is to stand with the community that has embraced us. In turn, it is up to us to embrace the community back.",
+    "imgAlt": "SAWO earthquake relief efforts in Cebu"
+  },
+  "cta": {
+    "text": "Have a story to share, a partnership in mind, or a press inquiry? We'd love to hear from you.",
+    "btn": "CONTACT US"
+  }
+}
