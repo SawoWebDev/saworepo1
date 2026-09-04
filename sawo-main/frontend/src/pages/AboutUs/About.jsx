@@ -15,10 +15,13 @@ import newsBg from '../../assets/Contacts-bg.webp';
 import HeroWave from '../../components/HeroWave';
 import SEO from '../../components/SEO';
 import BrochureDropdownButton from '../../components/Buttons/BrochureDropdownButton';
+import { useLocaleT, useLocalizedPath } from '../../i18n/LocaleContext';
 
 const AboutUs = () => {
   const certRef = useRef(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const t = useLocaleT("about");
+  const localize = useLocalizedPath();
 
   // Staggered "gleam" sweep across the ISO/Sauna-from-Finland badges once
   // they scroll into view — ported from the reference vanilla-JS snippet,
@@ -56,9 +59,10 @@ const AboutUs = () => {
   return (
     <div className="relative">
       <SEO
-        title="About Us"
-        description="Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms, trusted by customers in 90+ countries."
-        path="/about"
+        title={t("meta.title")}
+        description={t("meta.description")}
+        path={localize("/about")}
+        hreflangAlternates={{ en: "/about", zh: "/zh/about" }}
       />
       <style>{`
 
@@ -498,7 +502,7 @@ const AboutUs = () => {
       <section className="about-hero">
         <img
           src={aboutusHero}
-          alt="SAWO office"
+          alt={t("alt.office")}
           className="about-hero-img"
           onLoad={() => setHeroLoaded(true)}
           onError={() => setHeroLoaded(true)}
@@ -507,13 +511,13 @@ const AboutUs = () => {
         <div className="about-hero-overlay" />
         <div className="about-hero-content">
           <div className="about-hero-img-left">
-            <img src={aboutusEmployee} alt="SAWO team" />
+            <img src={aboutusEmployee} alt={t("alt.team")} />
           </div>
           <div className="about-hero-text">
-            <h1>We are SAWO</h1>
-            <p>Bringing Finnish tradition to the world</p>
+            <h1>{t("hero.title")}</h1>
+            <p>{t("hero.subtitle")}</p>
             <p className="about-hero-desc">
-              We are a customer-centric, excellence-driven company, consistently prioritizing the needs of our customers at every step, from product design to manufacturing to after-sales. We take pride in delivering only the finest products and the best service to our valued customers.
+              {t("hero.desc")}
             </p>
           </div>
         </div>
@@ -527,45 +531,35 @@ const AboutUs = () => {
         <div className="about-grid">
           <div className="about-content">
             <h2 className="innovation-title">
-              <span className="innovation-title-main">Not Limited by Borders</span>
-              <span className="innovation-title-sub">Finnish Tradition Made Global</span>
+              <span className="innovation-title-main">{t("innovation.titleMain")}</span>
+              <span className="innovation-title-sub">{t("innovation.titleSub")}</span>
             </h2>
             <div className="about-text">
-              <p>
-                We are a pioneering European sauna company with a manufacturing site in Asia – home to over 600 dedicated Filipino and Finnish professionals, and growing. Our success is built on a foundation of competitive pricing, exceptional product quality, and customer service that goes above and beyond.
-              </p>
-              <p>
-                SAWO is a result from fusing the two words <b>Sa</b>una and <b>Wo</b>rld. It accurately reflects us as a comprehensive sauna provider. Meeting all your sauna needs, from heaters to door handles and louvers. Driven by a passion for sauna and guided by an innovative company culture, we have become one of the world's leading sauna product manufacturers, serving over 90 countries around the globe, and counting. Our offering ranges from sauna heaters, accessories, and control units to sauna rooms, steam generators, and infrared solutions.
-              </p>
-              <p>
-                We continue to expand our portfolio with thoughtfully designed, high-performing products that exceed customer expectations worldwide. Every item is crafted under Finnish management, ensuring authenticity and a deep respect for the rich heritage of Finnish sauna culture.
-              </p>
-              <p>
-                Our dedication to quality and sustainability is backed by internationally recognized certifications. We first obtained <b>ISO 9001 for Quality Management</b> in 2002 and <b>ISO 14001 for Environmental Management</b> in 2007, both of which were renewed in 2025 under the latest standards; <b>ISO 9001:2015</b> and <b>ISO 14001:2015</b>. Our <b>PEFC</b> certification further demonstrates our commitment to source from sustainably managed forests. These certifications guarantee that every single product meets the highest global benchmarks for safety, quality, and environmental responsibility.
-              </p>
-              <p>
-                As proud ambassadors of Finnish sauna culture, we are also a member of <b>Sauna from Finland</b>, an association dedicated to promoting the authentic Finnish sauna experience around the world.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: t("innovation.p1") }} />
+              <p dangerouslySetInnerHTML={{ __html: t("innovation.p2") }} />
+              <p dangerouslySetInnerHTML={{ __html: t("innovation.p3") }} />
+              <p dangerouslySetInnerHTML={{ __html: t("innovation.p4") }} />
+              <p dangerouslySetInnerHTML={{ __html: t("innovation.p5") }} />
 
               <div className="about-stats">
                 <div className="stat-item">
-                  <div className="stat-label">Established excellence</div>
+                  <div className="stat-label">{t("innovation.stats.establishedLabel")}</div>
                   <div className="stat-number">
-                    <span className="stat-number-value">30+</span>{" "}
-                    <span className="stat-number-suffix">years</span>
+                    <span className="stat-number-value">{t("innovation.stats.establishedValue")}</span>{" "}
+                    <span className="stat-number-suffix">{t("innovation.stats.establishedSuffix")}</span>
                   </div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-label">Global reach</div>
+                  <div className="stat-label">{t("innovation.stats.reachLabel")}</div>
                   <div className="stat-number">
-                    <span className="stat-number-value">90+</span>{" "}
-                    <span className="stat-number-suffix">countries worldwide</span>
+                    <span className="stat-number-value">{t("innovation.stats.reachValue")}</span>{" "}
+                    <span className="stat-number-suffix">{t("innovation.stats.reachSuffix")}</span>
                   </div>
                 </div>
               </div>
 
-              <Link to={menuPaths.sauna.parent} className="about-btn">
-                Explore Our Products
+              <Link to={localize(menuPaths.sauna.parent)} className="about-btn">
+                {t("innovation.exploreBtn")}
                 <ChevronRight />
               </Link>
             </div>
@@ -579,8 +573,8 @@ const AboutUs = () => {
                     <div className="cert-icon">
                       <img src={ISO9001} alt="ISO 9001" />
                     </div>
-                    <div className="cert-caption">ISO 9001</div>
-                    <div className="cert-label">Quality Management</div>
+                    <div className="cert-caption">{t("certs.iso9001.caption")}</div>
+                    <div className="cert-label">{t("certs.iso9001.label")}</div>
                     <div className="cert-gleam" />
                   </div>
                 </a>
@@ -590,8 +584,8 @@ const AboutUs = () => {
                     <div className="cert-icon">
                       <img src={ISO14001} alt="ISO 14001" />
                     </div>
-                    <div className="cert-caption">ISO 14001</div>
-                    <div className="cert-label">Environmental Management</div>
+                    <div className="cert-caption">{t("certs.iso14001.caption")}</div>
+                    <div className="cert-label">{t("certs.iso14001.label")}</div>
                     <div className="cert-gleam" />
                   </div>
                 </a>
@@ -601,8 +595,8 @@ const AboutUs = () => {
                     <div className="cert-icon">
                       <img src={SaunaSupport} alt="Sauna from Finland" />
                     </div>
-                    <div className="cert-caption">Sauna from Finland</div>
-                    <div className="cert-label">Official Member</div>
+                    <div className="cert-caption">{t("certs.saunaFromFinland.caption")}</div>
+                    <div className="cert-label">{t("certs.saunaFromFinland.label")}</div>
                     <div className="cert-gleam" />
                   </div>
                 </a>
@@ -612,8 +606,8 @@ const AboutUs = () => {
                     <div className="cert-icon">
                       <img src={PEFC} alt="PEFC / 01-31-1332" />
                     </div>
-                    <div className="cert-caption">We Promote Sustainable Forestry</div>
-                    <div className="cert-label">www.pefc.org</div>
+                    <div className="cert-caption">{t("certs.pefc.caption")}</div>
+                    <div className="cert-label">{t("certs.pefc.label")}</div>
                     <div className="cert-gleam" />
                   </div>
                 </a>
@@ -628,21 +622,21 @@ const AboutUs = () => {
       ════════════════════════════ */}
       <section className="news-section">
         <div className="news-container">
-          <h2 className="news-title">Latest News</h2>
+          <h2 className="news-title">{t("news.title")}</h2>
 
           <div className="news-grid">
             {/* Card 1 */}
             <div className="news-card">
               <img
                 src={LN1}
-                alt="Recent Exhibitions"
+                alt={t("news.card1.alt")}
                 className="news-card-img"
               />
               <div className="news-card-content">
-                <span className="news-card-label">Exhibitions</span>
-                <h3 className="news-card-title">Recent Exhibitions</h3>
+                <span className="news-card-label">{t("news.card1.label")}</span>
+                <h3 className="news-card-title">{t("news.card1.title")}</h3>
                 <p className="news-card-desc">
-                  This autumn, we took part in Europe's top wellness exhibitions: Aquanale in Cologne and Piscina Barcelona. A pleasure connecting with industry leaders and showcasing Finnish tradition and wellness.
+                  {t("news.card1.desc")}
                 </p>
               </div>
             </div>
@@ -651,14 +645,14 @@ const AboutUs = () => {
             <div className="news-card">
               <img
                 src={LN4}
-                alt="Earthquake Relief"
+                alt={t("news.card2.alt")}
                 className="news-card-img"
               />
               <div className="news-card-content">
-                <span className="news-card-label">Community</span>
-                <h3 className="news-card-title">Earthquake Relief in Cebu</h3>
+                <span className="news-card-label">{t("news.card2.label")}</span>
+                <h3 className="news-card-title">{t("news.card2.title")}</h3>
                 <p className="news-card-desc">
-                  When a 6.9 magnitude earthquake struck off the Northeast coast of Cebu, our team organized a company-wide relief effort, delivering mattresses, food, hygiene products, and essentials to affected families.
+                  {t("news.card2.desc")}
                 </p>
               </div>
             </div>
@@ -667,14 +661,14 @@ const AboutUs = () => {
             <div className="news-card">
               <img
                 src={LN3}
-                alt="Talent Search"
+                alt={t("news.card3.alt")}
                 className="news-card-img"
               />
               <div className="news-card-content">
-                <span className="news-card-label">Careers</span>
-                <h3 className="news-card-title">Talent Search</h3>
+                <span className="news-card-label">{t("news.card3.label")}</span>
+                <h3 className="news-card-title">{t("news.card3.title")}</h3>
                 <p className="news-card-desc">
-                  Time for a change? We are looking for individuals with experience and/or interest in the sauna and wellness industry and eagerness to grow with us in Cebu.
+                  {t("news.card3.desc")}
                 </p>
               </div>
             </div>
@@ -682,8 +676,8 @@ const AboutUs = () => {
 
           <div style={{ display: "flex", justifyContent: "center", marginTop: "48px" }}>
             <BrochureDropdownButton
-              text="SEE MORE"
-              href={menuPaths.about.news}
+              text={t("news.seeMore")}
+              href={localize(menuPaths.about.news)}
               redirect
             />
           </div>
