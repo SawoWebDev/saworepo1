@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "title": "Ota yhteyttä | SAWO",
+    "description": "Ota yhteyttä SAWOon: tekninen tuki, myyntitiedustelut ja jälleenmyyjien yhteystiedot maailmanlaajuisesta edustustoverkostostamme."
+  },
+  "toast": {
+    "addonSaved": "Saunavalintasi on tallennettu viestiisi!",
+    "submitted": "Pyyntösi on lähetetty onnistuneesti!"
+  },
+  "hero": {
+    "title": "Onko sinulla kysyttävää?",
+    "desc": "Ota yhteyttä jo tänään! Yli 30 vuoden kokemuksellamme sauna-alalta autamme mielellämme vastaamaan kaikkiin kysymyksiisi. Olipa kyse tuotteistamme, lähimmän SAWO-jälleenmyyjän löytämisestä tai oman saunaprojektisi suunnittelusta, meillä on tarvitsemasi vastaukset. Täytä alla oleva lomake, niin tiimimme ottaa sinuun pian yhteyttä."
+  },
+  "steps": { "1": "Pyyntösi", "2": "Tietoja sinusta", "3": "Pyynnön tiedot" },
+  "submittingOverlay": {
+    "title": "Lähetetään pyyntöäsi…",
+    "sub": "Tämä voi kestää muutaman sekunnin. Älä sulje tai päivitä tätä sivua."
+  },
+  "success": {
+    "title": "Pyyntö lähetetty",
+    "message": "Kiitos yhteydenotostasi. Olemme vastaanottaneet pyyntösi, ja tiimimme ottaa sinuun pian yhteyttä.",
+    "another": "Lähetä uusi pyyntö",
+    "backHome": "Takaisin etusivulle"
+  },
+  "categories": {
+    "technical": "Tekninen tuki",
+    "customer": "Asiakastuki",
+    "general": "Yleinen tiedustelu"
+  },
+  "step2": {
+    "heading": "Henkilötiedot",
+    "firstName": "Etunimi",
+    "firstNamePlaceholder": "John...",
+    "lastName": "Sukunimi",
+    "lastNamePlaceholder": "Doe...",
+    "email": "Sähköposti",
+    "emailPlaceholder": "johndoe@gmail.com",
+    "country": "Maa",
+    "selectCountry": "Valitse maa",
+    "phone": "Puhelinnumero",
+    "optional": "(Valinnainen)",
+    "phoneHelp": "Puhelinnumeron antaminen on valinnaista, mutta se voi auttaa meitä palvelemaan sinua nopeammin.",
+    "goBack": "Takaisin",
+    "nextStep": "Seuraava vaihe"
+  },
+  "step3": {
+    "heading": "Pyynnön tiedot",
+    "subject": "Aihe",
+    "subjectPlaceholder": "Aihe tähän...",
+    "message": "Viesti",
+    "moreInfoLong": "Mitä enemmän tietoa jaat, sitä paremmin voimme auttaa sinua",
+    "moreInfoShort": "Mitä enemmän tietoa jaat, sitä paremmin voimme auttaa",
+    "selectOption": "Valitse vaihtoehto",
+    "productCategory": "Tuotekategoria",
+    "productName": "Tuotteen nimi",
+    "productNamePlaceholder": "Nordex...",
+    "productCode": "Tuotekoodi",
+    "serialNumber": "Sarjanumero",
+    "serialPlaceholder": "012345",
+    "serialHelp": "Erillinen tarra kuusinumeroisella koodilla",
+    "stickerHelp": "Tarra lähellä kiukaan alaosaa",
+    "purchaseInvoice": "Ostolasku",
+    "issue": "Ongelma",
+    "saunaRoomSize": "Saunahuoneen koko",
+    "width": "Leveys (metriä)",
+    "depth": "Syvyys (metriä)",
+    "height": "Korkeus (metriä)",
+    "addlInfo": "Lisätietoa tuotteesta",
+    "addlInfoPlaceholder": "Ei käynnisty, muu...",
+    "addlInfoPlaceholderGeneric": "Lisätietoa tuotteesta...",
+    "describeIssueInDetail": "Kuvaile ongelmaa tarkasti",
+    "description": "Kuvaus",
+    "orderNumber": "Tilausnumero",
+    "orderNumberPlaceholder": "Tilausnumero...",
+    "describeOrderInquiry": "Kuvaile tilaustiedusteluasi...",
+    "describeWarrantyInquiry": "Kuvaile takuutiedusteluasi...",
+    "shareFeedback": "Jaa palautteesi...",
+    "describeRequest": "Kuvaile pyyntösi...",
+    "describeInquiry": "Kuvaile tiedustelusi tai ongelmasi...",
+    "notProductRelated": "— Ei liity tuotteeseen —"
+  },
+  "validation": {
+    "required": "Tämä kenttä on pakollinen",
+    "invalidEmail": "Anna kelvollinen sähköpostiosoite",
+    "selectCountry": "Valitse maa",
+    "selectOption": "Valitse vaihtoehto",
+    "serialDigits": "Sarjanumeron on oltava tasan 6 numeroa",
+    "tooFast": "Käytä hetki aikaa lähetyksesi tarkistamiseen",
+    "incomplete": "Täytä kaikki pakolliset kentät oikein",
+    "submitError": "Pyynnön lähettämisessä tapahtui virhe. Yritä uudelleen."
+  },
+  "technicalSubjects": {
+    "requestRepair": "Pyydä korjausta",
+    "requestSpareParts": "Pyydä varaosia",
+    "requestReplacement": "Pyydä vaihtoa"
+  },
+  "customerSubjects": {
+    "customerSupport": "Asiakastuki",
+    "feedback": "Palaute",
+    "orderStatus": "Tilauksen tila",
+    "warrantyClaims": "Takuuvaateet",
+    "other": "Muu"
+  },
+  "productCategories": {
+    "heater": "Kiuas",
+    "steamGenerator": "Höyrynkehitin",
+    "accessory": "Tarvike",
+    "kivistoneItem": "Kivistone-tuote"
+  },
+  "issues": {
+    "errorDisplayed": "Näytöllä näkyy virhe",
+    "blankDisplay": "Näyttö on tyhjä tai näkyy vain viiva",
+    "notTurnOn": "Ei käynnisty",
+    "flashingLed": "LED-valo vilkkuu",
+    "notHeat": "Kiuas ei lämpene",
+    "other": "Muu"
+  },
+  "buttons": {
+    "goBack": "Takaisin",
+    "nextStep": "Seuraava vaihe",
+    "submitRequest": "Lähetä pyyntö",
+    "sending": "Lähetetään…"
+  },
+  "finishedHere": "Valmiiksi tässä? ",
+  "backToHome": "Takaisin etusivulle",
+  "quick": {
+    "eyebrow": "Ota suoraan yhteyttä",
+    "title": "Haluatko nopeamman tavan?",
+    "whatsapp": { "title": "Tekninen tuki", "desc": "Teknistä tukea ja reklamaatioita varten lähetä meille viesti WhatsAppissa" },
+    "email": { "title": "Lähetä sähköpostia", "desc": "Yleiset tiedustelut ja tuotekysymykset" },
+    "helpdesk": { "title": "Asiakaspalvelu", "desc": "Tarvitsetko apua olemassa olevan tuotteen kanssa?" }
+  },
+  "offices": {
+    "eyebrow": "Ympäri maailmaa",
+    "title": "Ota yhteyttä edustustoihin",
+    "tel": "Puh: ",
+    "list": {
+      "sawoInc": { "role": "Globaali myynti ja yleiset tiedustelut" },
+      "sawoNordic": { "role": "Myynti ja varasto Pohjoismaita varten" },
+      "fem": { "role": "Myynti ja varasto Aasiaa varten" },
+      "europeHub": { "role": "Myynti ja varasto Eurooppaa varten" }
+    }
+  },
+  "supportCta": {
+    "title": "Etsitkö vastauksia ensin?",
+    "desc": "Monet kysymykset on jo vastattu tukisivuillamme. Tutustu niihin ennen kuin odotat vastausta.",
+    "faq": { "title": "Usein kysytyt kysymykset", "desc": "Selaa vastauksia yleisimpiin kysymyksiin kiukaistamme, ohjauskeskuksista ja saunahuoneista.", "btn": "Katso UKK" },
+    "manuals": { "title": "Käyttöoppaat", "desc": "Asennusoppaat, käyttöohjeet ja tekninen dokumentaatio jokaiselle SAWO-tuotteelle.", "btn": "Katso oppaat" }
+  },
+  "countries": [
+    "Afganistan","Albania","Algeria","Andorra","Angola","Argentiina","Armenia","Australia","Itävalta","Azerbaidžan",
+    "Bahama","Bahrain","Bangladesh","Barbados","Valko-Venäjä","Belgia","Belize","Benin","Bhutan","Bolivia",
+    "Bosnia ja Hertsegovina","Botswana","Brasilia","Brunei","Bulgaria","Burkina Faso","Burundi",
+    "Kambodža","Kamerun","Kanada","Kap Verde","Keski-Afrikan tasavalta","Tšad","Chile","Kiina","Kolumbia",
+    "Komorit","Kongo","Costa Rica","Norsunluurannikko","Kroatia","Kuuba","Kypros","Tšekki",
+    "Tanska","Djibouti","Dominica","Dominikaaninen tasavalta","Ecuador","Egypti","El Salvador","Päiväntasaajan Guinea",
+    "Eritrea","Viro","Etiopia","Fidži","Suomi","Ranska","Gabon","Gambia","Georgia","Saksa","Ghana",
+    "Kreikka","Grönlanti","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hongkong","Unkari",
+    "Islanti","Intia","Indonesia","Iran","Irak","Irlanti","Israel","Italia","Jamaika",
+    "Japani","Jordania","Kazakstan","Kenia","Kiribati","Etelä-Korea","Kuwait","Kirgisia",
+    "Laos","Latvia","Libanon","Lesotho","Liberia","Libya",
+    "Liechtenstein","Liettua","Luxemburg","Macao","Madagaskar","Malawi","Malesia","Malediivit","Mali","Malta",
+    "Mauritania","Mauritius","Meksiko","Moldova","Monaco","Mongolia","Montenegro","Marokko",
+    "Mosambik","Myanmar","Namibia","Nepal","Alankomaat","Uusi-Seelanti","Nicaragua","Niger","Nigeria",
+    "Pohjois-Makedonia","Norja","Oman","Pakistan","Palau","Panama","Papua-Uusi-Guinea","Paraguay","Peru",
+    "Filippiinit","Puola","Portugali","Qatar","Romania","Venäjä","Ruanda","Saint Lucia","Samoa",
+    "San Marino","Saudi-Arabia","Senegal","Serbia","Seychellit","Sierra Leone","Singapore","Slovakia",
+    "Slovenia","Salomonsaaret","Somalia","Etelä-Afrikka","Espanja","Sri Lanka","Sudan","Suriname","Ruotsi",
+    "Sveitsi","Syyria","Taiwan","Tadžikistan","Tansania","Thaimaa",
+    "Itä-Timor","Togo","Tonga","Trinidad ja Tobago","Tunisia","Turkki","Turkmenistan","Uganda","Ukraina",
+    "Arabiemiirikunnat","Yhdistynyt kuningaskunta","Yhdysvallat","Uruguay","Uzbekistan","Vanuatu","Venezuela",
+    "Vietnam","Jemen","Sambia","Zimbabwe"
+  ]
+}
