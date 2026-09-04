@@ -12,6 +12,7 @@ import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 // ─── Display filter ───────────────────────────────────────────────────────────
 const DISPLAY_CATEGORIES = ["Pails", "Ladles", "Pail Shower"];
@@ -97,6 +98,9 @@ function SkeletonCard() {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function PailsLadles() {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [search, setSearch]       = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
   const [heroLoaded, setHeroLoaded]   = useState(false);
@@ -137,9 +141,10 @@ export default function PailsLadles() {
   return (
     <div className="relative">
       <SEO
-        title="Sauna Pails & Ladles"
-        description="Shop SAWO sauna pails and ladles, durable, elegant water accessories for the perfect löyly steam experience."
-        path="/sauna/accessories/pails-ladles"
+        title={t("pailsLadlesPage.meta.title")}
+        description={t("pailsLadlesPage.meta.description")}
+        path={localize("/sauna/accessories/pails-ladles")}
+        hreflangAlternates={{ en: "/sauna/accessories/pails-ladles", zh: "/zh/sauna/accessories/pails-ladles" }}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -168,7 +173,7 @@ export default function PailsLadles() {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Pails and Ladles"
+          alt={t("pailsLadlesPage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -179,11 +184,11 @@ export default function PailsLadles() {
         />
         <div className="absolute inset-0 bg-black/50 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">PAILS & LADLES</h1>
-          <p className="wm-hero-subtitle">Essential Finnish sauna accessories since 1921</p>
+          <h1 className="wm-hero-title">{t("pailsLadlesPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("pailsLadlesPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="VIEW BROCHURE"
+              text={tc("viewBrochure")}
               href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
             />
           </div>
@@ -194,11 +199,9 @@ export default function PailsLadles() {
       {/* ── INTRO ────────────────────────────────────────────────────────── */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Premium Pails & Ladles for the Authentic Sauna Experience</h2>
+          <h2 className="wm-products-title">{t("pailsLadlesPage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Essential to Finnish sauna tradition, our SAWO selection offers pails ranging from 2 to 40 liters.
-            Choose from traditional cedar, aspen, and pine or modern stainless steel options.
-            Complete your sauna setup with a matching ladle for the perfect löyly.
+            {t("pailsLadlesPage.intro.desc")}
           </p>
         </div>
       </section>
@@ -213,7 +216,7 @@ export default function PailsLadles() {
                   className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`}
                   onClick={() => setActiveGroup(null)}
                 >
-                  All
+                  {tc("catalogFilter.all")}
                 </button>
                 {groupNames.map(g => (
                   <button
@@ -221,7 +224,7 @@ export default function PailsLadles() {
                     className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`}
                     onClick={() => setActiveGroup(g)}
                   >
-                    {g}
+                    {t(`pailsLadlesPage.groups.${g}`, { defaultValue: g })}
                   </button>
                 ))}
               </div>
@@ -233,10 +236,10 @@ export default function PailsLadles() {
                   type="text"
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  placeholder="Search pails & ladles..."
+                  placeholder={t("pailsLadlesPage.search.placeholder")}
                 />
                 {search && (
-                  <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                  <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                     <i className="fa-solid fa-xmark" />
                   </button>
                 )}
@@ -246,8 +249,8 @@ export default function PailsLadles() {
             {search && (
               <p className="wm-search-count">
                 {searchCount === 0
-                  ? `No results for "${search}"`
-                  : `${searchCount} result${searchCount !== 1 ? "s" : ""} for "${search}"`
+                  ? tc("catalogFilter.noResultsFor", { query: search })
+                  : tc("catalogFilter.resultsCount", { count: searchCount, query: search })
                 }
               </p>
             )}
@@ -267,7 +270,7 @@ export default function PailsLadles() {
 
           {!loading && allProducts.length === 0 && (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No products available yet.</p>
+              <p>{tc("catalogFilter.noProductsYet")}</p>
             </div>
           )}
 
@@ -276,9 +279,9 @@ export default function PailsLadles() {
               {visibleGroups.length === 0 ? (
                 <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#a67853" }}>
                   <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "1.8rem", opacity: 0.35, display: "block", marginBottom: 10 }} />
-                  <p style={{ margin: 0 }}>No products match "<strong>{search}</strong>"</p>
+                  <p style={{ margin: 0 }}>{tc("catalogFilter.noMatch", { category: t("pailsLadlesPage.meta.title"), query: search })}</p>
                   <button onClick={() => setSearch("")} style={{ marginTop: 10, background: "none", border: "none", cursor: "pointer", color: "#8b5e3c", fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", textDecoration: "underline" }}>
-                    Clear search
+                    {tc("catalogFilter.clearSearch")}
                   </button>
                 </div>
               ) : (
@@ -293,7 +296,7 @@ export default function PailsLadles() {
                   if (items.length === 0) return null;
                   return (
                     <div className="wm-group" key={group}>
-                      <h3 className="wm-group-title">{group.toUpperCase()}</h3>
+                      <h3 className="wm-group-title">{t(`pailsLadlesPage.groups.${group}`, { defaultValue: group }).toUpperCase()}</h3>
                       <div className="sawo-av-grid sawo-av-grid--roomy">
                         {items.map(product => (
                           <AccessoryCard key={product.id || product.slug} product={product} />
@@ -311,20 +314,20 @@ export default function PailsLadles() {
 
       {/* ── VIEW ALL ACCESSORIES ────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.accessories} className="wm-brochure-btn">VIEW ALL ACCESSORIES</Link>
+        <Link to={localize(menuPaths.accessories)} className="wm-brochure-btn">{t("accessoriesPage.viewAll")}</Link>
       </section>
 
       <WhyChooseSawo
-        eyebrow="SAWO ACCESSORIES"
-        title="Why Choose SAWO Pails & Ladles"
-        description="SAWO pails and ladles are crafted from premium natural materials, cedar, aspen, and pine, as well as modern stainless steel options. Designed for authentic Finnish sauna culture, each piece is built to last and enhance your löyly ritual."
+        eyebrow={t("pailsLadlesPage.why.eyebrow")}
+        title={t("pailsLadlesPage.why.title")}
+        description={t("pailsLadlesPage.why.description")}
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Sauna-Accessories-2026.pdf"
-        brochureLabel="VIEW BROCHURE"
+        brochureLabel={tc("viewBrochure")}
       />
 
       <PromoBanner
-        title="Complete Your Sauna Experience"
-        subtitle="Explore our full range of authentic Finnish sauna accessories"
+        title={t("pailsLadlesPage.promo.title")}
+        subtitle={t("pailsLadlesPage.promo.subtitle")}
         image={accessoriesBannerImg}
       />
     </div>
