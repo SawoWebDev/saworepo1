@@ -10,6 +10,7 @@ import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import USER_MANUALS_HERO_IMG from "../../assets/Support/UserManuals/hero.webp";
 import useDragScroll from "../../hooks/useDragScroll";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function localOrRemote(product, field) {
@@ -33,14 +34,15 @@ function hasManuals(product) {
 }
 
 // Tabs map to existing product category strings — a tab is hidden entirely
-// if no publicly-visible product with a manual falls into it.
+// if no publicly-visible product with a manual falls into it. Labels are
+// translated via t("manuals.tabs.<id>") at render time, not stored here.
 const CATEGORY_TABS = [
-  { id: "heaters", label: "Sauna Heaters", categories: ["Towers", "Wall-Mounted", "Floor", "Combi", "Dragonfire", "Stones"] },
-  { id: "sauna-controls", label: "Sauna Controls", categories: ["Sauna Controls"] },
-  { id: "steam-generators", label: "Steam Generators", categories: ["Steam Generators"] },
-  { id: "steam-controls", label: "Steam Generator Controls", categories: ["Steam Controls"] },
+  { id: "heaters", categories: ["Towers", "Wall-Mounted", "Floor", "Combi", "Dragonfire", "Stones"] },
+  { id: "sauna-controls", categories: ["Sauna Controls"] },
+  { id: "steam-generators", categories: ["Steam Generators"] },
+  { id: "steam-controls", categories: ["Steam Controls"] },
   {
-    id: "heater-accessories", label: "Heater Accessories", categories: ["Heater Accessories"],
+    id: "heater-accessories", categories: ["Heater Accessories"],
     // Every accessory carries the shared "Heater Accessories" tag (that's
     // what makes the tab itself appear), so grouping on `categories` the
     // way every other tab does would put them all in one flat, unsorted
@@ -50,30 +52,16 @@ const CATEGORY_TABS = [
   },
 ];
 
-// Friendly sub-group headings shown within a tab, keyed by product category.
-const SERIES_LABELS = {
-  "Towers": "Tower Series",
-  "Wall-Mounted": "Wall Mounted Series",
-  "Floor": "Floor Series",
-  "Stones": "Stone Series",
-  "Dragonfire": "Dragonfire Series",
-  "Combi": "Combi Series",
-  "Sauna Controls": "Sauna Controls",
-  "Steam Controls": "Steam Generator Controls",
-  "Steam Generators": "Steam Generators",
-  "Heater Accessories": "Heater Accessories",
-  "Heater Guard": "Heater Guards",
-  "Integration Collar": "Collars",
-  "Humidifiers": "Cozy Tanks",
-  "Sauna Accessories": "Safety Accessories",
-};
-
-function seriesLabel(category) {
-  return SERIES_LABELS[category] || category;
+// Friendly sub-group headings shown within a tab, keyed by product category —
+// translated via t("manuals.seriesLabels.<category>"), falling back to the
+// raw category string for anything not in that map.
+function seriesLabel(category, t) {
+  const translated = t(`manuals.seriesLabels.${category}`);
+  return translated === `manuals.seriesLabels.${category}` ? category : translated;
 }
 
 // ─── PDF Modal ────────────────────────────────────────────────────────────────
-function PdfModal({ product, onClose }) {
+function PdfModal({ product, onClose, t }) {
   const files = (product.files || []).filter(f => getFileUrl(f));
 
   useEffect(() => {
@@ -133,7 +121,7 @@ function PdfModal({ product, onClose }) {
                 fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
                 color: "#a67853", margin: 0,
               }}>
-                User Manuals
+                {t("manuals.modal.eyebrow")}
               </p>
               <h3 style={{
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
@@ -174,7 +162,7 @@ function PdfModal({ product, onClose }) {
                 <i className="fa-regular fa-folder-open" style={{ fontSize: "1.4rem", color: "#ddc9b4" }} />
               </div>
               <p style={{ color: "#a67853", margin: 0, fontSize: "0.84rem", fontStyle: "italic" }}>
-                No manuals available for this product yet.
+                {t("manuals.modal.noManuals")}
               </p>
             </div>
           ) : (
@@ -216,10 +204,10 @@ function PdfModal({ product, onClose }) {
                       fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e",
                       overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                     }}>
-                      {f.name || `Manual ${i + 1}`}
+                      {f.name || t("manuals.modal.manualFallback", { n: i + 1 })}
                     </div>
                     <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>
-                      PDF · Click to open
+                      {t("manuals.modal.pdfClickToOpen")}
                     </div>
                   </div>
                   <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0 }} />
@@ -272,7 +260,7 @@ function SkeletonCard() {
 }
 
 // ─── Product card ─────────────────────────────────────────────────────────────
-function ProductCard({ product, category, onOpenManuals }) {
+function ProductCard({ product, category, onOpenManuals, t, localize }) {
   const isAccessory = isAccessoryProduct(product);
   let link;
   if (isAccessory) {
@@ -285,7 +273,7 @@ function ProductCard({ product, category, onOpenManuals }) {
 
   return (
     <Link
-      to={link}
+      to={localize(link)}
       style={{ textDecoration: "none", color: "inherit", display: "block" }}
     >
       <div style={{
@@ -337,7 +325,7 @@ function ProductCard({ product, category, onOpenManuals }) {
             color: "#c4a882", margin: 0, height: "1.4em",
             overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis",
           }}>
-            {category ? seriesLabel(category) : " "}
+            {category ? seriesLabel(category, t) : " "}
           </p>
 
           <p style={{
@@ -382,7 +370,7 @@ function ProductCard({ product, category, onOpenManuals }) {
               }}
             >
               <i className="fa-regular fa-file-lines" style={{ fontSize: "0.7rem" }} />
-              View Manual
+              {t("manuals.viewManual")}
             </button>
           </div>
         </div>
@@ -394,6 +382,8 @@ function ProductCard({ product, category, onOpenManuals }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function UserManuals() {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("support");
+  const localize = useLocalizedPath();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState(null);
@@ -474,9 +464,10 @@ export default function UserManuals() {
   return (
     <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
       <SEO
-        title="User Manuals"
-        description="Download SAWO user manuals: installation guides and operating instructions for our sauna heaters, controls, and steam generators."
-        path="/support/manuals"
+        title={t("manuals.meta.title")}
+        description={t("manuals.meta.description")}
+        path={localize("/support/manuals")}
+        hreflangAlternates={{ en: "/support/manuals", zh: "/zh/support/manuals" }}
       />
       <style>{`
         @keyframes umFadeIn  { from{opacity:0} to{opacity:1} }
@@ -643,7 +634,7 @@ export default function UserManuals() {
       `}</style>
 
       {selectedProduct && (
-        <PdfModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+        <PdfModal product={selectedProduct} onClose={() => setSelectedProduct(null)} t={t} />
       )}
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
@@ -666,8 +657,8 @@ export default function UserManuals() {
         />
         <div className="um-hero-overlay" />
         <div className="um-hero-content">
-          <h1 className="um-hero-title">USER MANUALS</h1>
-          <p className="um-hero-subtitle">Your complete guide to installation, operation, and maintenance</p>
+          <h1 className="um-hero-title">{t("manuals.hero.title")}</h1>
+          <p className="um-hero-subtitle">{t("manuals.hero.subtitle")}</p>
         </div>
       <HeroWave />
       </section>
@@ -680,7 +671,7 @@ export default function UserManuals() {
         {/* Section title + category tabs */}
         {!loading && allProducts.length > 0 && (
           <>
-            <h2 className="um-section-title">SAWO PRODUCT RANGE</h2>
+            <h2 className="um-section-title">{t("manuals.sectionTitle")}</h2>
             {tabs.length > 1 && (
               <div className="um-tabs" ref={tabsTrackRef} {...tabsDragHandlers}>
                 {tabs.map(tab => (
@@ -689,7 +680,7 @@ export default function UserManuals() {
                     className={`um-tab-btn ${activeTab === tab.id ? "active" : ""}`}
                     onClick={() => setActiveTab(tab.id)}
                   >
-                    {tab.label}
+                    {t(`manuals.tabs.${tab.id}`)}
                   </button>
                 ))}
               </div>
@@ -707,10 +698,10 @@ export default function UserManuals() {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search products…"
+                placeholder={t("manuals.search.placeholder")}
               />
               {search && (
-                <button className="um-search-clear" onClick={() => setSearch("")} title="Clear">
+                <button className="um-search-clear" onClick={() => setSearch("")} title={t("manuals.search.clear")}>
                   <i className="fa-solid fa-xmark" />
                 </button>
               )}
@@ -747,7 +738,7 @@ export default function UserManuals() {
               <i className="fa-regular fa-folder-open" style={{ fontSize: "1.6rem", color: "#ddc9b4" }} />
             </div>
             <p style={{ color: "#a67853", margin: 0, fontSize: "0.88rem", fontStyle: "italic" }}>
-              No products available.
+              {t("manuals.empty.noProducts")}
             </p>
           </div>
         )}
@@ -761,7 +752,7 @@ export default function UserManuals() {
           }}>
             <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "1.8rem", color: "#ddc9b4" }} />
             <p style={{ color: "#a67853", margin: 0, fontSize: "0.88rem" }}>
-              No products match "<strong>{search}</strong>"
+              {t("manuals.noResults.prefix")} "<strong>{search}</strong>"
             </p>
             <button
               onClick={() => setSearch("")}
@@ -771,7 +762,7 @@ export default function UserManuals() {
                 fontSize: "0.78rem", fontWeight: 700, textDecoration: "underline",
               }}
             >
-              Clear search
+              {t("manuals.noResults.clearSearch")}
             </button>
           </div>
         )}
@@ -782,7 +773,7 @@ export default function UserManuals() {
             {groupedDisplayed.map(group => (
               <div key={group.category}>
                 {groupedDisplayed.length > 1 && (
-                  <h3 className="um-group-title">{seriesLabel(group.category)}</h3>
+                  <h3 className="um-group-title">{seriesLabel(group.category, t)}</h3>
                 )}
                 <div
                   className="um-grid"
@@ -798,6 +789,8 @@ export default function UserManuals() {
                       product={p}
                       category={group.category}
                       onOpenManuals={setSelectedProduct}
+                      t={t}
+                      localize={localize}
                     />
                   ))}
                 </div>
@@ -823,18 +816,18 @@ export default function UserManuals() {
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
                 fontSize: "1.4rem", color: "#fff", margin: "0 0 8px",
               }}>
-                Can't find what you need?
+                {t("manuals.banner.title")}
               </h3>
               <p style={{
                 fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
                 fontSize: "0.92rem", color: "rgba(255,255,255,0.82)",
                 margin: 0, lineHeight: 1.6,
               }}>
-                Our support team is ready to help you with documentation and technical guidance.
+                {t("manuals.banner.desc")}
               </p>
             </div>
             <a
-              href="/contact"
+              href={localize("/contact")}
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 padding: "12px 30px", background: "#fff", color: "#a67853",
@@ -854,7 +847,7 @@ export default function UserManuals() {
                 e.currentTarget.style.borderColor = "transparent";
               }}
             >
-              CONTACT US <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.7rem" }} />
+              {t("manuals.banner.cta")} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.7rem" }} />
             </a>
           </div>
         </div>
