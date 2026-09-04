@@ -988,6 +988,81 @@ source (already flagged, out of scope). Verified via SQL/`apply-many`
 (23/23 applied). Post-batch count: **239 of 381 products still missing
 `fi`** (down from 262).
 
+**Batch 4 — 36 products, Combi complete + Benches complete + Sauna
+Lights complete (2026-09-04)**: Combi heaters (14/14:
+`savonia-combi-ns`, `mini-combi-ns`, `mini-combi-fibercoated-ns`,
+`nordex-mini-combi-ns`, `nordex-combi-black-ns`, `nordex-s-combi-ns`,
+`nordex-combi-ns`, `scandia-combi-fiber-coated-ns`,
+`nordex-mini-combi-black-ns`, `scandia-combi-ns`,
+`savonia-combi-fiber-coated-ns`, `nordex-s-combi-black-ns`,
+`taurus-d-combi-ns`, `nordex-pro-combi-ns`) — hand-translated
+short_description (all have distinct marketing copy, not a templated
+category) plus the HTML `description` spec-table headers on all 14
+(none had been touched by any prior pre-fill, since Combi is a new
+category for this push); `type` stayed the bare brand name per
+convention, unchanged. Benches (11/11) and Sauna Lights (11/11) via a
+fill-script (`fill-fi-benches-lights.mjs`, same pattern as the zh
+Thermometers/Doors script): Benches `type` → Penkit, Sauna Lights
+`type` → Saunavalaisimet; Himalayan Salt Wall tile dims parsed from the
+English "L/W/D" pattern, Wooden Light Cover / Curve Light dims parsed
+generically. Verified via `apply-many` (31/36 succeeded first pass, 5
+hit `fetch failed` network flakiness — same recurring issue as earlier
+in the session — retried individually, 5/5 succeeded on retry, 36/36
+total). Post-batch count: **203 of 380 products still missing `fi`**
+(product total dropped 381→380 between checkpoints — one product was
+removed from the catalog, not a translation regression).
+
+### zh completeness audit (2026-09-04)
+
+With the `zh` push having been declared complete on 2026-09-03, ran a
+fuller audit before starting more `fi` work, since `pending` only
+catches products with **no** translation row at all — it can't see a
+row that exists but has gone stale because the English source changed
+*after* translation. Wrote `check-translation-staleness.mjs` (kept
+permanently in `scripts/`, not a scratch file — takes a locale arg,
+defaults to `zh`) to compare each product's live English content hash
+against the `source_field_hashes` stored on its translation row, using
+the same `computeSourceFieldHashes`/`hashSourceValue` the apply step
+itself uses, so "stale" here means exactly what the admin UI's own
+staleness flag means.
+
+Found real gaps `pending` had missed:
+- **`krios-floor-ns`** — missing `zh` entirely (a product added after
+  the original push finished). Translated fresh: name/type kept as
+  "Krios"/"Krios Floor NS" (brand, per convention), short_description
+  and the description table's headers translated.
+- **`ste-steam-generator`** — `variations[0..2].spec_table_headers[3]`
+  flagged stale (English source's column-3 header text had changed
+  since translation), but TM already had the correct new zh string on
+  re-extract, so no manual edit was needed — just re-`apply` to refresh
+  the hash.
+- **`steam-2-0`** — `features[0..3]` stale; the product had picked up
+  new English feature bullets ("Suitable for STN Steam Generators",
+  "Optional features Aroma, Fan and Dimmer", etc.) since its original
+  zh translation. Translated the 2 genuinely-new bullets by hand
+  (others were already zh from before and just needed the hash
+  refresh).
+
+All 3 fixed and re-applied. Re-ran the audit: **0 missing, 0 stale
+across all 381 zh rows** — `zh` is now both complete and current, not
+just complete-as-of-last-check.
+
+Also ran the same audit against `fi` out of curiosity (not part of the
+`fi` push itself, since `fi` is still mid-push and expected to have
+many missing rows) — found the *same* `ste-steam-generator` /
+`steam-2-0` staleness, plus a third, `steam-ste`, also stale on
+`features[0..3]` for the identical reason (new English bullets added
+after its original `fi` translation from the Day 1 pilot). Fixed and
+re-applied all 3 for `fi` too, same approach.
+
+**Lesson for future batches**: run
+`node scripts/check-translation-staleness.mjs <locale>` periodically
+(not just `pending`) — a locale can look "100% done" by the missing-row
+count while quietly holding stale content from source edits made after
+the fact. Cheap to run (one pass over all products), worth doing before
+declaring any locale's push finished, and worth re-running occasionally
+even after "finished" if the English catalog keeps getting edited.
+
 ## Home / global chrome
 
 | Route / area | Wired | FI written | Live | Notes |

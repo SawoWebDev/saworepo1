@@ -1,0 +1,40 @@
+{
+  "slug": "sauna-bench-521d",
+  "productId": "f76fee8e-9fd6-4f28-88d9-4ada45feef00",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (521-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Saunapenkki",
+    "short_description": "SAWO Saunapenkki on täyspuinen saunapenkki, mitat 430 × 870 × 412mm, valmistettu mukavaan ja lämmönkestävään istumiseen saunassa.",
+    "description": null,
+    "type": "Penkit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (521-D)",
+        "name": "Setri (521-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "nordex-s-combi-black-ns",
+  "productId": "cc3cb0d3-c79c-4c4f-818e-4370f09148f2",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    },
+    {
+      "path": "features[5]",
+      "source": "Black metal casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex S Combi Black NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Nordex S Combi</b><span style=\"text-align: justify;\"> tarjoaa monipuolisia saunaelämyksiä yhdistämällä voimakkaan lämmön ja lisähöyryn, jonka mahdollistaa ylimääräinen vesisäiliö. Sen sisäänrakennettu aromikuppi on suunniteltu eteerisille öljyille ja tuoksuille, joilla terapeuttista höyryä voi maustaa ylellisen saunatunnelman luomiseksi. </span><div><div style=\"text-align: justify;\"><br></div><div><span style=\"text-align: justify;\">Kuten kaikissa Combi-kiukaissa, myös Nordex S Combissa on patentoitu vedenpinnan tunnistusjärjestelmä, joka ilmoittaa, kun vesi on vähissä. Automaattinen täyttötoiminto voidaan myös aktivoida entistä suuremman mukavuuden vuoksi. Nordex S Combi sopii erikokoisiin saunoihin niin kotikäyttöön kuin wellness-keskuksiinkin.</span>\n\n</div></div>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNSC-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNSC-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNSC-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "Power range: 6.0 – 9.0kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Efficient heating with minimal energy use",
+      "Streamlined, minimal design",
+      "Sisäänrakennettu aromikuppi",
+      "Musta metallikuori",
+      "Automatic shut-off in case of overheating"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "slug": "mini-combi-ns",
+  "productId": "9974c209-5962-4256-9d17-aaceaeda1046",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless-steel casing"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    }
+  ],
+  "fields": {
+    "name": "Mini Combi NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini Combi</b><span style=\"text-align: justify;\"> yhdistää tavallisen saunakokemuksen vesisäiliöön kosteuden lisäämiseksi. Se on saatavilla viileänä pysyvällä kuitupinnoitteella.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MNC-30NS-Z</td>\n  <td>3.0</td>\n  <td>1 × 1.0</td>\n  <td>2 – 4</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>MNC-36NS-Z</td>\n  <td>3.6</td>\n  <td>1 × 1.0</td>\n  <td>3 – 6</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "Power range: 3.0 – 3.6kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Separate water tank with 1kW steam generator",
+      "Ruostumaton teräskuori",
+      "Sisäänrakennettu aromikuppi"
+    ]
+  }
+}

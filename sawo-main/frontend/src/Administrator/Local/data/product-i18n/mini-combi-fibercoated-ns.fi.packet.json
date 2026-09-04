@@ -1,0 +1,29 @@
+{
+  "slug": "mini-combi-fibercoated-ns",
+  "productId": "9dac0470-40f9-4ce4-945c-eee43f19f4aa",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    }
+  ],
+  "fields": {
+    "name": "Mini Combi Fibercoated NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini Combi Fibercoated</b><span style=\"text-align: justify;\"> on Mini-kiuas, jossa on erillinen vesisäiliö lisäkosteutta varten. Siinä on sisäänrakennettu aromikuppi eteerisille öljyille ja tuoksuille, joilla höyryä voi maustaa saunomisen aikana. Fibercoated-malli tarjoaa lisäturvaa viileänä pysyvällä kuitupinnoitteellaan, joka minimoi palovammariskin.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th colspan=\"2\">Ohjaus</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MNC-30NS-P-F</td>\n  <td>3.0</td>\n  <td>1 × 1.0</td>\n  <td>2 – 4</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>MNC-36NS-P-F</td>\n  <td>3.6</td>\n  <td>1 × 1.0</td>\n  <td>3 – 6</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "Power range: 3.0 – 3.6kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Separate water tank with 1kW steam generator",
+      "Cool-to-touch fibercoating",
+      "Sisäänrakennettu aromikuppi"
+    ]
+  }
+}

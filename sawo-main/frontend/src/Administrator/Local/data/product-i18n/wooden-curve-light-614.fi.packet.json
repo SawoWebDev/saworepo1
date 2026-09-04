@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-curve-light-614",
+  "productId": "d7f8b918-bdf7-48cc-af89-90dd3ff2f00d",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (925-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (925-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (925-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kaareva puuvalaisin 614",
+    "short_description": "SAWO Kaareva puuvalaisin 614 on kaareva puinen saunavalaisin, mitat 60mm (3.4\") x 614mm (24\") x 85mm (2.4\"), suunniteltu levittämään valoa tasaisesti saunan sisällä.",
+    "description": null,
+    "type": "Saunavalaisimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (925-D)",
+        "name": "Setri (925-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (925-H)",
+        "name": "Hemlokki (925-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (925-BL)",
+        "name": "Musta (925-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
