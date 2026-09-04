@@ -93,23 +93,116 @@ benefits.
   descriptive suffix after the brand gets translated, e.g. "Aries
   Corner" → "Aries 转角式". `type` mirrors this — kept as the bare brand
   name (e.g. `"Cumulus"`, `"Nordex S"`), not translated.
+- **Control-system product-line names stay English**: Innova, Saunova,
+  SAWO Sense. Each is a standalone control-line name (like a heater
+  brand), not a descriptive word — SAWO Sense in particular is its own
+  single-SKU smart-control product, not a modifier on Innova/Saunova.
 - **Other Finnish/marketing product-line names also stay English**:
-  Halu, Loisto, Kanto, Puro, Usva, Siro, Steamshot, Dragon, Signature
-  (Dragonfire Series line names). Same treatment as heater brands — only
-  the surrounding descriptive noun translates (e.g. "Halu Anti-theft
-  Headrest" → "Halu 防盗头枕", "Stainless Steel Ladle Siro 46.5cm" →
-  "Siro 不锈钢桑拿勺 46.5cm").
+  Halu, Loisto, Kanto, Puro, Usva, Siro, Steamshot, Steamwater, Lovi,
+  Dragon, Signature (Dragonfire Series line names). Same treatment as
+  heater brands — only the surrounding descriptive noun translates
+  (e.g. "Halu Anti-theft Headrest" → "Halu 防盗头枕", "Stainless Steel
+  Ladle Siro 46.5cm" → "Siro 不锈钢桑拿勺 46.5cm").
 - **Purely generic/descriptive product names translate in full.**
   "Aroma Pump" → "香薰泵", "Wooden Backrest" → "木质靠背", "Wave Wooden
   Headrest" → "波浪形木质头枕". If there's no brand/line word in the
   name, there's nothing to preserve.
-- **Model designations like "Steam 2.0" / "Infrared 2.0" stay English**
-  — they're version-numbered product names, not descriptive phrases.
+- **Model/version codes stay English**: NB, NS, Ni, Ni2, S, D, W2–W12,
+  2.0, PLUS, STE, STN, RJ12, X.
 - **"löyly"** (the Finnish word for sauna steam / the act of pouring
   water on hot stones) is kept untranslated in every ladle/pail
   short_description, matching how the English source itself treats it
   (no established Chinese equivalent exists in the site's copy — don't
   invent one).
+
+### Descriptive words attached to a brand name DO get translated
+
+This is the mistake found and fixed catalog-wide on 2026-09-04 (a
+post-translation audit pass, after the site-wide `zh` push above was
+already believed complete) — a brand/model word being kept English does
+**not** mean every word next to it is also protected. Position,
+color/finish, and plain feature nouns are ordinary translatable prose
+even when they sit right next to "Nordex" or "Innova." Confirmed/fixed
+words, safe to reuse verbatim:
+
+| English (attached to a brand) | 中文 |
+|---|---|
+| Corner | 转角式 |
+| Round | 圆柱式 |
+| Wall | 壁挂式 |
+| Middle | 居中式 |
+| Floor | 落地式 |
+| Black | 黑色 |
+| Red | 红色 |
+| Fibercoated / Fiber Coated | 纤维涂层 |
+| Contactor Unit | 接触器组件 |
+| Power Controller | 电源控制器 |
+| Built-In | 内置版 |
+| Stainless Steel Touch | 不锈钢触控款 |
+| Simple | 简易款 |
+| Tank | 水箱 |
+| Steam (as in "Steam 2.0", "Steam STE") | 蒸汽 |
+| Classic (as in "Innova Classic") | 经典款 |
+
+Note "Steam 2.0" is the one entry here that reverses earlier guidance
+in this file (a previous version of this doc listed "Steam 2.0" /
+"Infrared 2.0" together as English-only model designations) —
+"Infrared 2.0" is correct to keep English (no sibling product
+translates "Infrared"), but "Steam" turned out to already be
+translated on several sibling products (`steam-head` → 蒸汽头,
+`steam-door` → 蒸汽门, `steam-stainless-touch-control` →
+蒸汽不锈钢触控控制器) before "Steam 2.0"/"Steam STE" were fixed to
+match. This is exactly why the precedent-check below matters more than
+pattern-matching against this table alone — the table is a snapshot of
+what's been *checked*, not a rule that any given English word is safe
+by default.
+
+### How to tell the difference when unsure
+
+Don't guess from spelling or from how a similar-looking case was
+handled elsewhere — **check whether the same word is already
+translated for a sibling product in this catalog** before deciding.
+This resolved every ambiguous case in the 2026-09-04 audit (the
+`Classic` call was made only after finding `wooden-pail-classic` →
+`经典木质水桶` already in the DB; the `Steam` call only after finding
+`steam-head`/`steam-door` already translated). Quick check:
+
+```sql
+select pt.name from product_translations pt
+where pt.locale = 'zh' and (pt.name ilike '%<word>%' or pt.name ilike '%<中文候选>%');
+```
+
+If the word shows up translated elsewhere with no exception noted, the
+new product should match. If it shows up consistently English
+elsewhere (e.g. "Combi", "Pro", brand names), it's a real model/brand
+term — leave it.
+
+### Full-catalog audit sweep — run this before declaring a locale "done"
+
+A word-frequency sweep across every translated `name` catches anything
+a per-batch review missed (this single query found the `Floor` miss
+above, after the Corner/Round/Wall/Middle/Black/Red/Steam/Classic
+misses had already been individually reported and fixed):
+
+```sql
+select word, count(*) c
+from (
+  select unnest(regexp_matches(name, '[A-Za-z][A-Za-z.]*', 'g')) as word
+  from product_translations
+  where locale = '<locale>'
+) s
+group by word
+order by word;
+```
+
+Read the output token by token: anything not in this file's known
+brand/model/code lists is a candidate miss — check it against the
+sibling-product precedent method above, not by assumption, before
+fixing it. Re-run per locale (this exact sweep has only been run for
+`zh`, as of 2026-09-04 — run it for `fi` too once the `fi` push
+reaches the same products, since `fi` inherited the same "Steam 2.0" /
+"Innova Classic" / heater-guard position-word names and likely has the
+identical gaps).
 
 ## Prose vs. data — what never gets translated
 
