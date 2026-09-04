@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-light-cover-wave",
+  "productId": "9f69acfd-bd4f-4e19-8199-8da994c059fd",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (917-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (917-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (917-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen valaisinsuoja, aalto",
+    "short_description": "SAWO Puinen valaisinsuoja, aalto on puinen saunavalaisimen suoja, mitat 207 × 280mm, asennetaan valaisimen päälle levittämään valoa tasaisesti saunan sisällä.",
+    "description": null,
+    "type": "Saunavalaisimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (917-D)",
+        "name": "Setri (917-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (917-A)",
+        "name": "Haapa (917-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (917-H)",
+        "name": "Hemlokki (917-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

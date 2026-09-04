@@ -1,0 +1,33 @@
+{
+  "slug": "nordex-pro-combi-ns",
+  "productId": "524d4f69-8864-4b00-a174-2e0c2179f89f",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Built-in aroma cups"
+    },
+    {
+      "path": "features[3]",
+      "source": "Adjustable legs"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Pro Combi NS",
+    "short_description": "<p style=\"text-align: justify;\">Nordex-perinteeseen pohjautuva <strong>Nordex Pro Combi</strong> tuo mukanaan parannellun muotoilun, joka yhdistää tehokkaan lämmityksen höyryn tuomaan lisämukavuuteen. Sisäänrakennettu vesisäiliö tuo hienovaraista kosteutta, kun taas kivien ja lämmityselementtien erottelu parantaa kestävyyttä.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Nordex Pro Combin ulosvedettävä kasettitarjotin helpottaa huoltoa, ja laitteen voi yhdistää toiseen lisätehon saamiseksi tilaviin saunahuoneisiin.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min (m³) maks</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-PRO-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex Pro",
+    "features": [
+      "Power range: 6.0 – 9.0kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Sisäänrakennetut aromikupit",
+      "Säädettävät jalat",
+      "Separate water tank with 0.8kW steam generator"
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "himalayan-salt-wall-vertical-tiles-large",
+  "productId": "3f048158-b001-4f88-bb0c-66f678f45d14",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (HIM-SWL-275-2-V)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (HIM-SWL-275-2-V-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (HIM-SWL-275-2-V-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Himalajan suolakivilaatat, pysty, suuri",
+    "short_description": "SAWO Himalajan suolakivilaatat, pysty, suuri on Himalajan suolakivilaatta, mitat 1075mm (pituus) x 275mm (leveys) x 60mm (syvyys), asennetaan levittämään pehmeää hehkua taustavalaistuna saunassa.",
+    "description": null,
+    "type": "Saunavalaisimet",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (HIM-SWL-275-2-V)",
+        "name": "Setri (HIM-SWL-275-2-V)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (HIM-SWL-275-2-V-H)",
+        "name": "Hemlokki (HIM-SWL-275-2-V-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (HIM-SWL-275-2-V-BL)",
+        "name": "Musta (HIM-SWL-275-2-V-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

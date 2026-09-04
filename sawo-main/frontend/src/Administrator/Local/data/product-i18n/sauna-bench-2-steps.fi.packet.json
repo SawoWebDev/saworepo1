@@ -1,0 +1,40 @@
+{
+  "slug": "sauna-bench-2-steps",
+  "productId": "04d7d637-965d-47d6-b9af-96eaab1e52a1",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (524-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Saunapenkki, 2 askelmaa",
+    "short_description": "SAWO Saunapenkki, 2 askelmaa on täyspuinen saunapenkki, jossa on kaksi porrastettua askelmaa ylemmän penkin helpompaan saavuttamiseen, mitat 760 × 534 × 562mm, valmistettu mukavaan ja lämmönkestävään istumiseen saunassa.",
+    "description": null,
+    "type": "Penkit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (524-D)",
+        "name": "Setri (524-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

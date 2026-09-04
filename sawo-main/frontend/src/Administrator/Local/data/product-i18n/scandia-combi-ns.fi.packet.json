@@ -1,0 +1,33 @@
+{
+  "slug": "scandia-combi-ns",
+  "productId": "ef8e7e21-b129-4dfb-9edc-81c466bff91e",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless-steel casing"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    }
+  ],
+  "fields": {
+    "name": "Scandia Combi NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Scandia Combi</strong><span style=\"text-align: justify;\"> -kiukaassa on vesisäiliö lisäkosteutta varten ja aromikuppi saunatuoksujen käyttöä varten. Saatavilla viileänä pysyvällä kuitupinnoitteella, yhteensopiva Saunova- tai Innova-ohjausten (NS) kanssa.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCAC-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 1.0</td>\n  <td>5 – 9</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "Power range: 6.0 – 9.0kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Separate water tank with 1kW or 2kW steam generator",
+      "Ruostumaton teräskuori",
+      "Sisäänrakennettu aromikuppi"
+    ]
+  }
+}

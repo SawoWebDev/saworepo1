@@ -2,7 +2,7 @@
   "slug": "ste-steam-generator",
   "productId": "62da5399-e16e-4b7a-9a24-c457d74d6f62",
   "locale": "fi",
-  "instructions": "Replace every remaining ENGLISH string value below with its Finnish translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already Finnish, worth a quick sanity read, not a fresh translation).",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
   "tmPrefilled": [
     {
       "path": "name",
@@ -54,7 +54,7 @@
     },
     {
       "path": "variations[0].spec_table_headers[3]",
-      "source": "Size of Heater (mm) Length | Width | Height"
+      "source": "Size (mm) L|W|H"
     },
     {
       "path": "variations[0].spec_table_headers[4]",
@@ -102,7 +102,7 @@
     },
     {
       "path": "variations[1].spec_table_headers[3]",
-      "source": "Size of Heater (mm) Length | Width | Height"
+      "source": "Size (mm) L|W|H"
     },
     {
       "path": "variations[1].spec_table_headers[4]",
@@ -150,7 +150,7 @@
     },
     {
       "path": "variations[2].spec_table_headers[3]",
-      "source": "Size of Heater (mm) Length | Width | Height"
+      "source": "Size (mm) L|W|H"
     },
     {
       "path": "variations[2].spec_table_headers[4]",
@@ -208,7 +208,7 @@
           "Höyrynkehittimen malli",
           "kW",
           "Höyryhuone (m³)",
-          "Kiukaan koko (mm) Pituus | Leveys | Korkeus",
+          "Koko (mm) P|L|K",
           "Paino (kg)",
           "Ohjain"
         ]
@@ -230,7 +230,7 @@
           "Höyrynkehittimen malli",
           "kW",
           "Höyryhuone (m³)",
-          "Kiukaan koko (mm) Pituus | Leveys | Korkeus",
+          "Koko (mm) P|L|K",
           "Paino (kg)",
           "Ohjain"
         ]
@@ -252,7 +252,7 @@
           "Höyrynkehittimen malli",
           "kW",
           "Höyryhuone (m³)",
-          "Kiukaan koko (mm) Pituus | Leveys | Korkeus",
+          "Koko (mm) P|L|K",
           "Paino (kg)",
           "Ohjain"
         ]

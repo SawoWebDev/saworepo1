@@ -41,6 +41,18 @@ tail -n +2 /tmp/slugs.txt | node product-i18n.js apply-many zh -
 slug list from an earlier session/turn. Another batch (or another
 parallel agent) may have already covered some of it.
 
+`pending` only catches products with **no** translation row at all. It
+misses a row that exists but has gone stale because the English source
+changed after translation. Run
+`node check-translation-staleness.mjs <locale>` (defaults to `zh`) for
+that — it compares each product's live source hash against the
+`source_field_hashes` stored on its row and reports both missing and
+stale slugs (with the exact field paths that drifted). Worth running
+before declaring any locale's push "done," and worth re-running later
+if the English catalog keeps getting edited (found and fixed 3 stale
+products on both `zh` and `fi` this way on 2026-09-04 — see
+`I18N-CHECKLIST.md`'s "zh completeness audit" entry).
+
 ### Translation memory does a lot of the work automatically
 
 `extract` looks up every prose string in `translation_memory` first

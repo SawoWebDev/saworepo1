@@ -1,0 +1,33 @@
+{
+  "slug": "nordex-mini-combi-ns",
+  "productId": "8d388b31-c36e-4456-8420-2cb4ee0edd89",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless steel casing"
+    },
+    {
+      "path": "features[4]",
+      "source": "Built-in aroma cup"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Mini Combi NS",
+    "short_description": "<span style=\"text-align: justify;\">Erittäin kompakti Nordex Mini Combi lisää kosteutta lämpöön vesisäiliönsä avulla. Se on saatavilla ruostumattomasta teräksestä tai mustasta metallista valmistetulla kuorella ja yhteensopiva erillisten Saunova (NS)- ja Innova (NS) -ohjausten kanssa.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th colspan=\"2\">Ohjaus</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRMC-30NS-Z</td>\n  <td>3.0</td>\n  <td>1 × 0.8</td>\n  <td>2 – 4</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>NRMC-36NS-Z</td>\n  <td>3.6</td>\n  <td>1 × 0.8</td>\n  <td>3 – 6</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "Power range: 3.0 – 3.6kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Separate water tank with 0.8kW steam generator",
+      "Ruostumaton teräskuori",
+      "Sisäänrakennettu aromikuppi"
+    ]
+  }
+}

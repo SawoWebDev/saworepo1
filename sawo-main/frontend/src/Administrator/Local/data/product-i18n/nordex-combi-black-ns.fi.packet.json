@@ -1,0 +1,13 @@
+{
+  "slug": "nordex-combi-black-ns",
+  "productId": "960809d7-d1b5-473f-b4a0-af7b982f10d1",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Combi Black NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Nordex Combi</strong><span style=\"text-align: justify;\"> kohentaa Nordex-kiukaiden minimalistista, korkean teknologian modernia muotoilua ja monipuolisuutta sisäänrakennetulla höyrystimellä. Saunojat voivat nauttia spa-tyylisistä saunahetkistä höyryllä, johon on lisätty eteerisiä öljyjä ja tuoksuja kiukaan sisäänrakennettujen aromikuppien avulla.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW\n<br>Kiuas</th>\n  <th>kW\n<br>Säiliö</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th colspan=\"2\">Ohjaus</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr>\n<tr>\n  <td>NRNC-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr>\n<tr>\n  <td>NRNC-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Nordex Combi"
+  }
+}
