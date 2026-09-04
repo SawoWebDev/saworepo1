@@ -1,0 +1,27 @@
+{
+  "slug": "scandia-fibercoated-ns",
+  "productId": "eee8fddc-0ad2-49b3-8a54-714eec91136a",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    }
+  ],
+  "fields": {
+    "name": "Scandia Fibercoated NS",
+    "short_description": "Scandia on vakiintunut klassikko SAWOn lämmittimien joukossa. Tämä tilaa säästävä, minimalistisen muotoilun lämmitin on luotettava valinta virkistävään suomalaiseen saunakokemukseen. Fibercoated-malli viileänä pysyvällä kuitupinnoitteella on erinomainen vaihtoehto palovammariskin minimoimiseksi entisestään.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NS-P-F-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 410 × 515</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NS-P-F-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 410 × 515</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NS-P-F-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 410 × 585</td>\n  <td>19 – 23</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NS-P-F-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 410 × 585</td>\n  <td>19 – 23</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Viileänä pysyvä kuitupinnoite"
+    ]
+  }
+}

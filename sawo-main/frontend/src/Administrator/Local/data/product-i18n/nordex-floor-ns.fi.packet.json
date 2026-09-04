@@ -1,0 +1,31 @@
+{
+  "slug": "nordex-floor-ns",
+  "productId": "bad59c23-c327-4690-a324-4a00084e9281",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 9.0 – 24.0kW"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Floor NS",
+    "short_description": "<strong style=\"text-align: justify;\">Nordex Floor</strong><span style=\"text-align: justify;\"> -lämmitin on tyylikäs ja pelkistetty ulkoasultaan sekä tehokas suorituskyvyltään. Se jakaa lämpöä konvektion tai säteilylämmityksen avulla ja hyödyntää kehittynyttä energiansäästöteknologiaa. Se on suunniteltu säännölliseen ja tiheään käyttöön, mikä vähentää energia- ja huoltokustannuksia, ja se sopii 40–100 kg:n saunakivimäärälle.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNF-90NS-Z</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNF-105NS-Z</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>60</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNF-120NS-Z</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-150NS-Z</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>595 × 400 × 670</td>\n  <td>55</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-180NS-Z</td>\n  <td>18.0</td>\n  <td>17 – 29</td>\n  <td>595 × 400 × 670</td>\n  <td>55</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-180NS-V12-Z</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-210NS-V12-Z</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-240NS-V12-Z</td>\n  <td>24.0</td>\n  <td>26 – 42</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Nordex Floor",
+    "features": [
+      "Tehoalue: 9.0 – 24.0 kW",
+      "Saatavilla oleva ohjaus: NS (Saunova/Innova)",
+      "Ruostumaton teräskuori",
+      "Virtaviivainen, minimalistinen muotoilu",
+      "Energiatehokas",
+      "Vähäinen huoltotarve",
+      "Kivikapasiteetti: 40–100 kg"
+    ]
+  }
+}

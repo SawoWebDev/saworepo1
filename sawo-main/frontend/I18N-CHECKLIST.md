@@ -1072,6 +1072,52 @@ Post-batch count: **162 of 380 products still missing `fi`** (down from
 combined remaining scope at the time this batch started, not a
 regression from the 203 figure two batches above).
 
+**Batch 6 — 34 products, Nordex-family heater stragglers
+(2026-09-04)**: `nordex-mini-nb`, `nordex-black-ni2`, `nordex-mini-ns`,
+`scandia-ns`, `krios-ni2`, `mini-fibercoated-nb`, `mini-x-ns`,
+`savonia-fiber-coated-ns`, `nordex-nb`, `scandia-fibercoated-nb`,
+`mini-x-nb`, `nordex-ni2`, `mini-x-fibercoated-nb`, `nordex-ns`,
+`nordex-floor-ns`, `savonia-ns`, `nordex-black-nb`, `krios-ns`,
+`nordex-mini-black-ni2`, `nordex-mini-black-ns`, `scandia-nb`,
+`nordex-mini-ni2`, `taurus-d-ns`, `scandia-fibercoated-ns`,
+`nordex-black-ns`, `nordex-mini-black-nb`, `mini-nb`, `helius-ns`,
+`nordex-s-black-ns`, `nordex-pro-ns`, `nordex-floor-black-ns`,
+`nordex-s-ns`, `mini-x-fibercoated-ns`, `krios-nb` — Nordex/Mini/Mini X/
+Scandia/Krios/Savonia/Taurus D/Helius heater-line siblings (a fixed slug
+list handed off from a parallel session splitting the remaining missing-
+`fi` heater products by family, so `pending` was deliberately *not*
+re-run fresh for this batch to avoid colliding with other sessions'
+slugs). TM reuse was strong within each model family as expected — most
+packets pre-filled the `features[0..2]` power-range/controls/casing
+bullets on extraction (2-4 fields each), leaving only `short_description`,
+the HTML `description` spec-table `<th>` headers, and a handful of
+family-specific feature bullets (e.g. Krios's "Heat reflector included"/
+"Maximum capacity: 50kg of stones", Helius's soapstone-basin bullets,
+Nordex Floor's "Energy efficient"/"Stone capacity" bullets) to hand-
+translate — one packet (`nordex-mini-ni2`) had zero pre-fill and needed
+everything from scratch. Confirmed/reused this batch's `th` header set
+against the conventions doc's established heater table (Heater Model →
+Lämmitinmalli, Sauna Room → Saunahuone, Size of Heater → Lämmittimen
+koko, Stones → Kivet, Control → Ohjaus, Minimum Safety Distances →
+Vähimmäisturvaetäisyydet), including the `m3`→`m³` symbol swap already
+used in the doc's own header table; left every `<td>` model-code/kW/
+dimension data row untouched. Also translated (not preserved) the
+`nordex-floor-ns`/`nordex-floor-black-ns` short_description's dangling
+"...maintenance costs. and can accommodate 40kg to 100kg..." clause and
+`krios-*`'s garbled "attached to the left, right or of the heater"
+feature bullet into coherent Finnish, per the source-content-bug rule —
+neither was fixed in the English source (out of scope for this pass).
+No European-decimal-comma typos were present in this batch's source
+text (checked; none of the `,0kW` pattern found). All brand/model names
+(Nordex, Mini/Mini X, Scandia, Krios, Savonia, Taurus, Helius) kept
+English per the conventions doc, `type` field unchanged. `extract-many`
+34/34 succeeded on the first pass (no `fetch failed` retries needed);
+`apply-many` also 34/34 on the first pass. Verified via direct Supabase
+query (not just `apply-many`'s own success count): 34/34 have `fi`
+`product_translations` rows with `source_field_hashes` populated (7-11
+fields per row). Post-batch count: **128 of 380 products still missing
+`fi`** (down from 162).
+
 ### zh completeness audit (2026-09-04)
 
 With the `zh` push having been declared complete on 2026-09-03, ran a

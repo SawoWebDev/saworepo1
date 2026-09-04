@@ -1,0 +1,32 @@
+{
+  "slug": "nordex-ni2",
+  "productId": "9a0558ad-bde6-4530-bd3a-674e205f67bf",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova (Ni2)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless-steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex Ni2",
+    "short_description": "Tämä Nordex-lämmitin jakaa kaikkien Nordex-mallien minimalistisen, modernin muotoilun. Sen tilaa säästävä koko ja seinäasennus tekevät saunahuoneesta entistä mukavamman.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45Ni2-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>50</td>\n  <td>130</td>\n  <td>270</td>\n</tr>\n<tr>\n  <td>NRN-60Ni2-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>50</td>\n  <td>130</td>\n  <td>270</td>\n</tr>\n<tr>\n  <td>NRN-80Ni2-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>80</td>\n  <td>80</td>\n  <td>160</td>\n  <td>330</td>\n</tr>\n<tr>\n  <td>NRN-90Ni2-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>80</td>\n  <td>80</td>\n  <td>160</td>\n  <td>330</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova (Ni2)",
+      "Virtaviivainen, minimalistinen muotoilu",
+      "Ruostumaton teräskuori"
+    ]
+  }
+}

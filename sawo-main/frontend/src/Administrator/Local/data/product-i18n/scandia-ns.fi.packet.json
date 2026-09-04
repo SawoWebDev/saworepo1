@@ -1,0 +1,31 @@
+{
+  "slug": "scandia-ns",
+  "productId": "4a4c1eb7-1713-47e1-b5f7-9060355180d0",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless-steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Scandia NS",
+    "short_description": "<b style=\"text-align: justify;\">Scandia</b><span style=\"text-align: justify;\"> on saunanlämmittimien vakioklassikko. Tämä yksinkertainen lämmitin tarjoaa perinteisen suomalaisen saunakokemuksen. Se on saatavilla viileänä pysyvällä kuitupinnoitteella, ja se on yhteensopiva Saunova- tai Innova-ohjausten kanssa (NS).</span>",
+    "description": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\">\n<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\">\n<div class=\"vc_col-sm-6 wpb_column column_container _ height-full\">\n<h3 id=\"fancy-title-20\" class=\"mk-fancy-title align-left simple-style color-single\">Technical Data</h3>\n<a href=\"https://www.sawo.com/wp-content/uploads/2025/10/SAWO_Scandia_NS_Wall_minimum_safety_distances.webp\" data-caption=\"\"><img class=\"size-full wp-image-48279 alignleft\" title=\"\" src=\"https://www.sawo.com/wp-content/uploads/2025/10/SAWO_Scandia_NS_Wall_minimum_safety_distances.webp\" alt=\"\" width=\"2560\" height=\"2224\" /></a>\n\n</div>\n</div>\n<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\">\n<div class=\"vc_col-sm-12 wpb_column column_container _ height-full\">\n<div class=\"vc_wp_text wpb_content_element tg\">\n<div class=\"widget widget_text mk-in-viewport\">\n<div class=\"textwidget\">\n<table class=\"tg\">\n<tbody class=\"specificationstext\">\n<tr>\n<th class=\"tg-s6z2 c_tta-tabs-container\">Lämmitinmalli</th>\n<th class=\"tg-s6z2\">kW</th>\n<th class=\"tg-s6z2\">Saunahuone\nmin. (m³) maks.</th>\n<th class=\"tg-s6z2\">Lämmittimen koko (mm)\nPituus Leveys Korkeus</th>\n<th class=\"tg-s6z2\">Kivet\n(kg)</th>\n<th class=\"tg-s6z2\">Ohjaus</th>\n<th class=\"tg-s6z2\" colspan=\"4\">Vähimmäisturvaetäisyydet\nA | B | C | D</th>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">SCA-45NS-Z-C</td>\n<td class=\"tg-s6z2\">4.5</td>\n<td class=\"tg-s6z2\">3 – 6</td>\n<td class=\"tg-s6z2\">290 × 410 × 515</td>\n<td class=\"tg-s6z2\">18 – 22</td>\n<td class=\"tg-s6z2\">Separate</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">185</td>\n<td class=\"tg-s6z2\">155</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">SCA-60NS-Z-C</td>\n<td class=\"tg-s6z2\">6.0</td>\n<td class=\"tg-s6z2\">5 – 9</td>\n<td class=\"tg-s6z2\">290 × 410 × 515</td>\n<td class=\"tg-s6z2\">18 – 22</td>\n<td class=\"tg-s6z2\">Separate</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">185</td>\n<td class=\"tg-s6z2\">155</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">SCA-80NS-Z-C</td>\n<td class=\"tg-s6z2\">8.0</td>\n<td class=\"tg-s6z2\">7 – 13</td>\n<td class=\"tg-s6z2\">290 × 410 × 585</td>\n<td class=\"tg-s6z2\">19 – 23</td>\n<td class=\"tg-s6z2\">Separate</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">185</td>\n<td class=\"tg-s6z2\">235</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">SCA-90NS-Z-C</td>\n<td class=\"tg-s6z2\">9.0</td>\n<td class=\"tg-s6z2\">8 – 14</td>\n<td class=\"tg-s6z2\">290 × 410 × 585</td>\n<td class=\"tg-s6z2\">19 – 23</td>\n<td class=\"tg-s6z2\">Separate</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">185</td>\n<td class=\"tg-s6z2\">235</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+    "type": "Scandia",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Ruostumaton teräskuori"
+    ]
+  }
+}

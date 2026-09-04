@@ -1,0 +1,38 @@
+{
+  "slug": "krios-ns",
+  "productId": "a9719e36-47cc-4a94-8436-8c8d9c3c94ff",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[2]",
+      "source": "Stainless-steel casing"
+    },
+    {
+      "path": "features[3]",
+      "source": "Heat reflector included"
+    }
+  ],
+  "fields": {
+    "name": "Krios NS",
+    "short_description": "<b style=\"text-align: justify;\">Krios</b><span style=\"text-align: justify;\"> tarjoaa suuremman kivisäiliön korkeammalle ja kosteammalle lämmölle. Siinä on myös SAWOlle tunnusomainen kuvio ruostumattomasta teräksestä valmistetussa kuoressa. Krios-lämmitin on yhteensopiva Saunova (Ni2, NS)- ja Innova (NS) -ohjausten kanssa.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"3\">Vähimmäisturvaetäisyydet<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>KRI-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Innova</td>\n  <td>50</td>\n  <td>75</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Innova</td>\n  <td>80</td>\n  <td>105</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-80NS-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr>\n<tr>\n  <td>KRI-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr></tbody></table>",
+    "type": "Krios",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Ruostumaton teräskuori",
+      "Lämmönheijastin mukana",
+      "Sisäänrakennetun ohjausyksikön voi kiinnittää lämmittimen vasemmalle, oikealle tai keskelle",
+      "Enimmäiskapasiteetti: 50 kg kiviä"
+    ]
+  }
+}

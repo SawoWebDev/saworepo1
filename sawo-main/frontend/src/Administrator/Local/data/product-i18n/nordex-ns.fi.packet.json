@@ -1,0 +1,32 @@
+{
+  "slug": "nordex-ns",
+  "productId": "e8372b04-0cd3-4490-a09d-4ca7457132e0",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[0]",
+      "source": "Power range: 4.5 – 9.0kW"
+    },
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    },
+    {
+      "path": "features[3]",
+      "source": "Stainless-steel casing"
+    }
+  ],
+  "fields": {
+    "name": "Nordex NS",
+    "short_description": "Kuten kaikki Nordex-mallit, myös tämä lämmitin edustaa minimalistista, modernia muotoilua. Sen asetuksia ja toimintoja voi helposti mukauttaa erillisellä ohjauksella, joko Saunovalla tai Innovalla. Seinäasennettavana yksikkönä Nordex NS on tilaa säästävä, mikä tekee saunahuoneesta entistä mukavamman.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitinmalli</th>\n  <th>KW</th>\n  <th>Saunahuone<br>min. (m³) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th>Ohjaus</th>\n  <th colspan=\"4\">Vähimmäisturvaetäisyydet<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45NS-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n<tr>\n  <td>NRN-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "Tehoalue: 4.5 – 9.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Virtaviivainen, minimalistinen muotoilu",
+      "Ruostumaton teräskuori"
+    ]
+  }
+}
