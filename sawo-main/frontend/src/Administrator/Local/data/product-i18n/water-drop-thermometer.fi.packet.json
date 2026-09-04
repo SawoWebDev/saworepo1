@@ -1,0 +1,64 @@
+{
+  "slug": "water-drop-thermometer",
+  "productId": "89ecf5bf-9be3-497b-b5d5-42367efef704",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (250-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (250-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (250-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Vesipisaratermometri",
+    "short_description": "SAWO Vesipisaratermometri on saunatermometri, mitat 150 × 180mm, käytetään saunan sisälämpötilan seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (250-TD)",
+        "name": "Setri (250-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (250-TA)",
+        "name": "Haapa (250-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (250-TH)",
+        "name": "Hemlokki (250-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

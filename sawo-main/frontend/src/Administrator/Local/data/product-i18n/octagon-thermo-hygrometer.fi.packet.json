@@ -1,0 +1,64 @@
+{
+  "slug": "octagon-thermo-hygrometer",
+  "productId": "b3cc5b9c-1316-4997-8d86-8b492f35b853",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (241-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (241-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (241-THH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kahdeksankulmiotermohygrometri",
+    "short_description": "SAWO Kahdeksankulmiotermohygrometri on saunatermohygrometri, mitat 175 × 225mm, käytetään saunan sisälämpötilan ja -kosteuden seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (241-THD)",
+        "name": "Setri (241-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (241-THA)",
+        "name": "Haapa (241-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (241-THH)",
+        "name": "Hemlokki (241-THH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -288,6 +288,20 @@ the category `type` field stays the shorter 温度计), Benches → 长椅,
 Doors & Handles → 门与拉手. If you hit a category not listed here,
 translate it once and add it to this table.
 
+`fi` category `type` translations seen so far: Headrest & Backrest →
+Niskatuet ja selkänojat, Clocks & Timers → Kellot ja ajastimet, Infrared
+Controls → Infrapunaohjaimet, Infrared Accessories → Infrapunatarvikkeet,
+Ladles → Kauhat, Benches → Penkit, Sauna Lights → Saunavalaisimet,
+Ventilation & Miscellaneous → Ilmanvaihto ja sekalaiset, Thermometers →
+Lämpömittarit (used for thermo-hygrometer variants too, same shorter-form
+rule as zh's 温度计 above — the individual product `name`/
+`short_description` says "termohygrometri" where relevant). **Pails is a
+documented exception — its `type` field is left as the literal English
+"Pails"** in every existing `fi` row (confirmed 2026-09-04 by querying
+every `fi` Pails row in `product_translations`), not translated like the
+categories above — reuse this as-is rather than "fixing" it to a Finnish
+word, to stay consistent with the rest of the category.
+
 ## Templated micro-categories — write a fill script, don't hand-edit JSON
 
 Some categories are one product family repeated with only dimensions/

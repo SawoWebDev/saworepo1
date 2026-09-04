@@ -1,0 +1,40 @@
+{
+  "slug": "black-metal-thermo-hygrometer",
+  "productId": "4e3814ca-dd8d-4ae8-ac17-f12e482c9985",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Black Metal (295-THMBL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Musta metallitermohygrometri",
+    "short_description": "SAWO Musta metallitermohygrometri on musta metallinen saunatermohygrometri, mitat 220 × 110mm, käytetään saunan sisälämpötilan ja -kosteuden seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Black Metal (295-THMBL)",
+        "name": "Musta metalli (295-THMBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

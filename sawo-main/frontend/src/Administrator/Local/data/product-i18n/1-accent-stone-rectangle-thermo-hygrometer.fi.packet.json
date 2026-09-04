@@ -1,0 +1,64 @@
+{
+  "slug": "1-accent-stone-rectangle-thermo-hygrometer",
+  "productId": "d0b7ee0d-dac0-4c7a-9acc-2220e9022384",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (282-THR1RD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (282-THR1A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (282-THR1H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "1 koristekivi, suorakaidetermohygrometri",
+    "short_description": "SAWO 1 koristekivi, suorakaidetermohygrometri on koristekivinen saunatermohygrometri, mitat 255 × 155mm, käytetään saunan sisälämpötilan ja -kosteuden seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (282-THR1RD)",
+        "name": "Setri (282-THR1RD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (282-THR1A)",
+        "name": "Haapa (282-THR1A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (282-THR1H)",
+        "name": "Hemlokki (282-THR1H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
