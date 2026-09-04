@@ -6,6 +6,7 @@ import menuPaths from "../../menuPaths";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import BrochureDropdownButton from "../../components/Buttons/BrochureDropdownButton";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // Image imports
 import LNhero from "../../assets/About/Latest News/LNhero.webp";
@@ -17,13 +18,16 @@ import PiscinaLogo from "../../assets/About/Latest News/piscina-logo.webp";
 
 const LatestNews = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const t = useLocaleT("news");
+  const localize = useLocalizedPath();
 
   return (
     <div className="relative">
       <SEO
-        title="Latest News"
-        description="News, trade shows, and updates from SAWO, covering our Finnish sauna heaters, steam generators, and sauna room innovations."
-        path="/about/news"
+        title={t("meta.title")}
+        description={t("meta.description")}
+        path={localize("/about/news")}
+        hreflangAlternates={{ en: "/about/news", zh: "/zh/about/news" }}
       />
       <style>{`
 
@@ -362,15 +366,15 @@ const LatestNews = () => {
         <section className="ln-hero">
           <img
             src={LNhero}
-            alt="SAWO sauna interior"
+            alt={t("hero.alt")}
             className="ln-hero-img"
             onLoad={() => setHeroLoaded(true)}
             onError={() => setHeroLoaded(true)}
             style={{ opacity: heroLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
           />
           <div className="ln-hero-overlay" />
-          <h1>Latest News</h1>
-          <p>Stay updated with SAWO stories, events, and milestones</p>
+          <h1>{t("hero.title")}</h1>
+          <p>{t("hero.subtitle")}</p>
           <HeroWave />
         </section>
 
@@ -382,52 +386,52 @@ const LatestNews = () => {
 
             {/* LEFT: Text */}
             <div>
-              <span className="ln-event-label" style={{ marginBottom: "4px" }}>Recent</span>
+              <span className="ln-event-label" style={{ marginBottom: "4px" }}>{t("exhibitions.eyebrow")}</span>
               <h2 className="ln-section-title">
-                <span>Exhibitions</span>
+                <span>{t("exhibitions.titleSpan")}</span>
               </h2>
-              <p className="ln-section-subtitle">Aquanale &amp; Piscina Barcelona</p>
+              <p className="ln-section-subtitle">{t("exhibitions.subtitle")}</p>
 
               <div className="ln-body">
                 <p>
-                  We are happy to announce that we will be attending two exhibitions in Europe less than a month apart. Come and see us at Aquanale and Piscina Barcelona.
+                  {t("exhibitions.p1")}
                 </p>
 
-                <span className="ln-event-label" style={{ marginTop: "16px" }}>Aquanale: OCTOBER 28-31, 2025</span>
+                <span className="ln-event-label" style={{ marginTop: "16px" }}>{t("exhibitions.aquanaleLabel")}</span>
                 <p className="ln-event-info">
-                  Hall 8 Stand A028 – B209, Messeplatz 1, 50679 Cologne, Germany
+                  {t("exhibitions.aquanaleInfo")}
                 </p>
 
-                <span className="ln-event-label">Piscina Barcelona: NOVEMBER 17-20, 2025</span>
+                <span className="ln-event-label">{t("exhibitions.piscinaLabel")}</span>
                 <p className="ln-event-info">
-                  Stand D90, Recinto Gran Via, Pabellon P1, Nivel 0, Gran Via, Exhibition Centre, Barcelona, Spain
+                  {t("exhibitions.piscinaInfo")}
                 </p>
 
                 <p>
-                  More than simply creating products, we help you bring authentic and personalized Finnish sauna experiences. As we see it, sauna belongs to everyone around the world.
+                  {t("exhibitions.p2")}
                 </p>
                 <p>
-                  This time around, our exhibition highlights have to do with exceptional innovation in sauna controls and heater design. For further information about these upcoming products, be on the lookout for updates on our website and in our social media channels.
+                  {t("exhibitions.p3")}
                 </p>
                 <p>
-                  We'll also unveil our new accessory collections, from Essential and Rustic sets to Signature and Dragon designs. Each set is crafted to complement each sauna's aesthetic while focusing on the user's personal sauna experience.
+                  {t("exhibitions.p4")}
                 </p>
                 <p>
-                  Sauna is more than a room, it provides a wellness lifestyle. At both Aquanale and Piscina Barcelona, you will discover how our products blend authenticity, design, and modern innovations to transform everyday routines into moments of true wellness.
+                  {t("exhibitions.p5")}
                 </p>
-                <p className="ln-italic ln-bold">Come see it, feel it, and experience it for yourself.</p>
+                <p className="ln-italic ln-bold">{t("exhibitions.closing")}</p>
               </div>
             </div>
 
             {/* RIGHT: Image */}
-            <img src={LN1} alt="SAWO exhibition booth" className="ln-news-img" />
+            <img src={LN1} alt={t("exhibitions.imgAlt")} className="ln-news-img" />
           </div>
         </div>
 
         {/* ── Partner Logo Bar ── */}
         <div className="ln-logo-bar">
-          <img src={AquanaleLogo} alt="Aquanale logo" className="aquanale-logo" />
-          <img src={PiscinaLogo} alt="Piscina Barcelona logo" className="piscina-logo" />
+          <img src={AquanaleLogo} alt={t("exhibitions.aquanaleLogoAlt")} className="aquanale-logo" />
+          <img src={PiscinaLogo} alt={t("exhibitions.piscinaLogoAlt")} className="piscina-logo" />
         </div>
 
         <hr className="ln-divider" />
@@ -440,31 +444,31 @@ const LatestNews = () => {
 
             {/* LEFT: Text */}
             <div>
-              <span className="ln-event-label" style={{ marginBottom: "4px" }}>Talent</span>
+              <span className="ln-event-label" style={{ marginBottom: "4px" }}>{t("talent.eyebrow")}</span>
               <h2 className="ln-section-title">
-                <span>Search</span>
+                <span>{t("talent.titleSpan")}</span>
               </h2>
-              <p className="ln-section-subtitle">Join Our Growing Team In Cebu</p>
+              <p className="ln-section-subtitle">{t("talent.subtitle")}</p>
 
               <div className="ln-body">
                 <p>
-                  We believe that our people are the driving force behind every achievement. As we celebrate the expansion of Plant 4 in Cebu, we are opening a new chapter, not only for production, but also for people. We are now looking for passionate individuals to join our team in Cebu, Philippines.
+                  {t("talent.p1")}
                 </p>
                 <p>
-                  We are looking for talents who bring experience in the sauna and wellness industry, and who are eager to contribute to a global brand that delivers authentic Finnish sauna experiences to over 90 countries and counting. If you are a self-starter that thrives in a dynamic, tropical setting and wants to be part of a company that blends tradition with innovation, we are the right fit for you.
+                  {t("talent.p2")}
                 </p>
                 <p className="ln-bold ln-italic">
-                  Explore our job openings and join us in shaping the next era of wellness.
+                  {t("talent.closing")}
                 </p>
               </div>
 
               <div style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
-                <Link to={menuPaths.careers} className="ln-btn ln-btn-brown">Job Openings</Link>
+                <Link to={localize(menuPaths.careers)} className="ln-btn ln-btn-brown">{t("talent.cta")}</Link>
               </div>
             </div>
 
             {/* RIGHT: Image */}
-            <img src={LN3} alt="SAWO talent search" className="ln-news-img" />
+            <img src={LN3} alt={t("talent.imgAlt")} className="ln-news-img" />
           </div>
         </div>
 
@@ -478,28 +482,28 @@ const LatestNews = () => {
 
             {/* LEFT: Text */}
             <div>
-              <span className="ln-event-label" style={{ marginBottom: "4px" }}>Earthquake</span>
+              <span className="ln-event-label" style={{ marginBottom: "4px" }}>{t("earthquake.eyebrow")}</span>
               <h2 className="ln-section-title">
-                Relief in <span>Cebu</span>
+                {t("earthquake.titlePrefix")} <span>{t("earthquake.titleSpan")}</span>
               </h2>
-              <p className="ln-section-subtitle">SAWO Staff Join Forces to Aid Cebu Earthquake Victims</p>
+              <p className="ln-section-subtitle">{t("earthquake.subtitle")}</p>
 
               <div className="ln-body">
-                <p>When disaster strikes close to home, we come together to help.</p>
+                <p>{t("earthquake.p1")}</p>
                 <p>
-                  On September 30th, a strong, 6.9 magnitude earthquake struck off the Northeast coast of Cebu, leaving dozens dead, hundreds injured, and many more without shelter. As part of the Cebu community, we acted quickly to support those affected.
+                  {t("earthquake.p2")}
                 </p>
                 <p>
-                  Shortly after the quake, we organized a company-wide relief effort, delivering mattresses, food, hygiene products, and other essentials to the hardest-hit areas. Our team members personally distributed the supplies to affected SAWO families and their neighbors in the surrounding communities.
+                  {t("earthquake.p3")}
                 </p>
                 <p>
-                  Cebu has long been home to SAWO, and during this time of hardship, we're reminded how important it is to stand with the community that has embraced us. In turn, it is up to us to embrace the community back.
+                  {t("earthquake.p4")}
                 </p>
               </div>
             </div>
 
             {/* RIGHT: Image */}
-            <img src={LN4} alt="SAWO earthquake relief efforts in Cebu" className="ln-news-img" />
+            <img src={LN4} alt={t("earthquake.imgAlt")} className="ln-news-img" />
           </div>
         </div>
 
@@ -513,11 +517,10 @@ const LatestNews = () => {
               <i className="fas fa-comments"></i>
             </div>
             <p className="ln-cta-text">
-              Have a story to share, a partnership in mind, or a press inquiry?
-              We'd love to hear from you.
+              {t("cta.text")}
             </p>
             <div className="ln-cta-btn-wrap" style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
-              <BrochureDropdownButton text="CONTACT US" href={menuPaths.contact} redirect />
+              <BrochureDropdownButton text={t("cta.btn")} href={localize(menuPaths.contact)} redirect />
             </div>
           </div>
         </div>
