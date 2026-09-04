@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "title": "联系我们 | SAWO",
+    "description": "联系 SAWO：技术支持、销售咨询,以及我们全球代理办事处网络的经销商联系方式。"
+  },
+  "toast": {
+    "addonSaved": "您的桑拿选择已保存至留言中！",
+    "submitted": "您的申请已成功提交！"
+  },
+  "hero": {
+    "title": "有任何问题吗？",
+    "desc": "欢迎立即联系我们！凭借30多年的桑拿行业经验,我们非常乐意为您解答任何问题。无论是关于我们的产品、寻找离您最近的 SAWO 经销商,还是规划您的定制桑拿房项目,我们都能为您提供所需的答案。请填写下方表单,我们的团队将尽快与您联系。"
+  },
+  "steps": { "1": "您的请求", "2": "关于您", "3": "请求详情" },
+  "submittingOverlay": {
+    "title": "正在发送您的请求……",
+    "sub": "此过程可能需要几秒钟。请勿关闭或刷新此页面。"
+  },
+  "success": {
+    "title": "请求已提交",
+    "message": "感谢您与我们联系。我们已收到您的请求,我们的团队将尽快与您联系。",
+    "another": "提交另一个请求",
+    "backHome": "返回首页"
+  },
+  "categories": {
+    "technical": "技术支持",
+    "customer": "客户支持",
+    "general": "一般咨询"
+  },
+  "step2": {
+    "heading": "个人信息",
+    "firstName": "名字",
+    "firstNamePlaceholder": "John...",
+    "lastName": "姓氏",
+    "lastNamePlaceholder": "Doe...",
+    "email": "电子邮箱",
+    "emailPlaceholder": "johndoe@gmail.com",
+    "country": "国家",
+    "selectCountry": "请选择国家",
+    "phone": "电话号码",
+    "optional": "（选填）",
+    "phoneHelp": "提供电话号码为选填项,但有助于我们更快地为您提供帮助。",
+    "goBack": "返回上一步",
+    "nextStep": "下一步"
+  },
+  "step3": {
+    "heading": "请求详情",
+    "subject": "主题",
+    "subjectPlaceholder": "请输入主题...",
+    "message": "留言内容",
+    "moreInfoLong": "您提供的信息越详细,我们就能越好地为您提供帮助",
+    "moreInfoShort": "您提供的信息越详细,我们就能越好地为您提供帮助",
+    "selectOption": "请选择一个选项",
+    "productCategory": "产品类别",
+    "productName": "产品名称",
+    "productNamePlaceholder": "Nordex...",
+    "productCode": "产品型号",
+    "serialNumber": "序列号",
+    "serialPlaceholder": "012345",
+    "serialHelp": "单独贴纸上的六位数代码",
+    "stickerHelp": "位于加热器底部附近的贴纸",
+    "purchaseInvoice": "购买发票",
+    "issue": "问题",
+    "saunaRoomSize": "桑拿房尺寸",
+    "width": "宽度（米）",
+    "depth": "深度（米）",
+    "height": "高度（米）",
+    "addlInfo": "其他产品信息",
+    "addlInfoPlaceholder": "无法开机、其他...",
+    "addlInfoPlaceholderGeneric": "其他产品信息...",
+    "describeIssueInDetail": "请详细描述问题",
+    "description": "描述",
+    "orderNumber": "订单号",
+    "orderNumberPlaceholder": "订单号...",
+    "describeOrderInquiry": "请描述您的订单咨询...",
+    "describeWarrantyInquiry": "请描述您的保修咨询...",
+    "shareFeedback": "分享您的反馈...",
+    "describeRequest": "描述您的请求...",
+    "describeInquiry": "描述您的咨询或问题...",
+    "notProductRelated": "— 与产品无关 —"
+  },
+  "validation": {
+    "required": "此字段为必填项",
+    "invalidEmail": "请输入有效的电子邮箱地址",
+    "selectCountry": "请选择国家",
+    "selectOption": "请选择一个选项",
+    "serialDigits": "序列号必须为6位数字",
+    "tooFast": "请花些时间仔细检查您的提交内容",
+    "incomplete": "请正确填写所有必填字段",
+    "submitError": "提交请求时出错，请重试。"
+  },
+  "technicalSubjects": {
+    "requestRepair": "申请维修",
+    "requestSpareParts": "申请备件",
+    "requestReplacement": "申请更换"
+  },
+  "customerSubjects": {
+    "customerSupport": "客户支持",
+    "feedback": "反馈意见",
+    "orderStatus": "订单状态",
+    "warrantyClaims": "保修索赔",
+    "other": "其他"
+  },
+  "productCategories": {
+    "heater": "加热器",
+    "steamGenerator": "蒸汽发生器",
+    "accessory": "配件",
+    "kivistoneItem": "Kivistone 产品"
+  },
+  "issues": {
+    "errorDisplayed": "显示错误信息",
+    "blankDisplay": "屏幕空白或仅显示横线",
+    "notTurnOn": "无法开机",
+    "flashingLed": "LED 指示灯闪烁",
+    "notHeat": "加热器不加热",
+    "other": "其他"
+  },
+  "buttons": {
+    "goBack": "返回上一步",
+    "nextStep": "下一步",
+    "submitRequest": "提交请求",
+    "sending": "发送中…"
+  },
+  "finishedHere": "已经完成了？",
+  "backToHome": "返回首页",
+  "quick": {
+    "eyebrow": "直接联系我们",
+    "title": "想要更快的方式？",
+    "whatsapp": { "title": "技术支持", "desc": "如需技术支持或投诉,请通过 WhatsApp 联系我们" },
+    "email": { "title": "给我们发邮件", "desc": "一般咨询和产品问题" },
+    "helpdesk": { "title": "帮助台", "desc": "需要有关现有产品的帮助吗？" }
+  },
+  "offices": {
+    "eyebrow": "遍布全球",
+    "title": "联系代理办事处",
+    "tel": "电话：",
+    "list": {
+      "sawoInc": { "role": "全球销售与一般咨询" },
+      "sawoNordic": { "role": "北欧地区销售与仓储" },
+      "fem": { "role": "亚洲地区销售与仓储" },
+      "europeHub": { "role": "欧洲地区销售与仓储" }
+    }
+  },
+  "supportCta": {
+    "title": "想先自己找答案？",
+    "desc": "我们的支持资源中已经解答了许多常见问题。在等待回复之前,不妨先查看一下。",
+    "faq": { "title": "常见问题", "desc": "浏览有关我们加热器、控制器和桑拿房的常见问题解答。", "btn": "查看常见问题" },
+    "manuals": { "title": "用户手册", "desc": "适用于每款 SAWO 产品的安装指南、操作手册和技术文档。", "btn": "查看手册" }
+  },
+  "countries": [
+    "阿富汗","阿尔巴尼亚","阿尔及利亚","安道尔","安哥拉","阿根廷","亚美尼亚","澳大利亚","奥地利","阿塞拜疆",
+    "巴哈马","巴林","孟加拉国","巴巴多斯","白俄罗斯","比利时","伯利兹","贝宁","不丹","玻利维亚",
+    "波斯尼亚和黑塞哥维那","博茨瓦纳","巴西","文莱","保加利亚","布基纳法索","布隆迪",
+    "柬埔寨","喀麦隆","加拿大","佛得角","中非共和国","乍得","智利","中国","哥伦比亚",
+    "科摩罗","刚果","哥斯达黎加","科特迪瓦","克罗地亚","古巴","塞浦路斯","捷克共和国",
+    "丹麦","吉布提","多米尼克","多米尼加共和国","厄瓜多尔","埃及","萨尔瓦多","赤道几内亚",
+    "厄立特里亚","爱沙尼亚","埃塞俄比亚","斐济","芬兰","法国","加蓬","冈比亚","格鲁吉亚","德国","加纳",
+    "希腊","格陵兰","格林纳达","危地马拉","几内亚","圭亚那","海地","洪都拉斯","中国香港","匈牙利",
+    "冰岛","印度","印度尼西亚","伊朗伊斯兰共和国","伊拉克","爱尔兰","以色列","意大利","牙买加",
+    "日本","约旦","哈萨克斯坦","肯尼亚","基里巴斯","大韩民国","科威特","吉尔吉斯斯坦",
+    "老挝人民民主共和国","拉脱维亚","黎巴嫩","莱索托","利比里亚","阿拉伯利比亚民众国",
+    "列支敦士登","立陶宛","卢森堡","中国澳门","马达加斯加","马拉维","马来西亚","马尔代夫","马里","马耳他",
+    "毛里塔尼亚","毛里求斯","墨西哥","摩尔多瓦共和国","摩纳哥","蒙古","黑山","摩洛哥",
+    "莫桑比克","缅甸","纳米比亚","尼泊尔","荷兰","新西兰","尼加拉瓜","尼日尔","尼日利亚",
+    "北马其顿","挪威","阿曼","巴基斯坦","帕劳","巴拿马","巴布亚新几内亚","巴拉圭","秘鲁",
+    "菲律宾","波兰","葡萄牙","卡塔尔","罗马尼亚","俄罗斯联邦","卢旺达","圣卢西亚","萨摩亚",
+    "圣马力诺","沙特阿拉伯","塞内加尔","塞尔维亚","塞舌尔","塞拉利昂","新加坡","斯洛伐克",
+    "斯洛文尼亚","所罗门群岛","索马里","南非","西班牙","斯里兰卡","苏丹","苏里南","瑞典",
+    "瑞士","阿拉伯叙利亚共和国","中国台湾","塔吉克斯坦","坦桑尼亚联合共和国","泰国",
+    "东帝汶","多哥","汤加","特立尼达和多巴哥","突尼斯","土耳其","土库曼斯坦","乌干达","乌克兰",
+    "阿拉伯联合酋长国","英国","美国","乌拉圭","乌兹别克斯坦","瓦努阿图","委内瑞拉",
+    "越南","也门","赞比亚","津巴布韦"
+  ]
+}
