@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getVariationsArray } from "./IndividualDisplay/DispAccessories";
-import { useLocalizedPath } from "../i18n/LocaleContext";
+import { useLocalizedPath, useLocaleT } from "../i18n/LocaleContext";
 
 export function resolveUrl(pathOrUrl) {
   if (!pathOrUrl) return null;
@@ -89,6 +89,7 @@ export const ACCESSORY_CARD_CSS = `
 export function AccessoryCard({ product }) {
   const navigate = useNavigate();
   const localize = useLocalizedPath();
+  const tc = useLocaleT("common");
   const variants = getVariationsArray(product);
   const hasSwatches = variants.length > 1;
   const [selected, setSelected] = useState(null); // null = grouped/default thumbnail
@@ -111,7 +112,7 @@ export function AccessoryCard({ product }) {
       onClick={goToProduct}
       onKeyDown={e => { if (e.key === "Enter") goToProduct(); }}
     >
-      {product.featured && <div className="sawo-av-best-seller-badge">Best Seller</div>}
+      {product.featured && <div className="sawo-av-best-seller-badge">{tc("accessoryCard.bestSeller")}</div>}
 
       <div className="sawo-av-image-container">
         {mainImage ? (
@@ -130,7 +131,7 @@ export function AccessoryCard({ product }) {
             </video>
             <button
               className="sawo-av-close-video"
-              title="Close"
+              title={tc("accessoryCard.close")}
               onClick={e => { e.stopPropagation(); setVideoOpen(false); }}
             >
               &#10006;
@@ -154,7 +155,7 @@ export function AccessoryCard({ product }) {
             <button
               type="button"
               className="sawo-av-video-btn"
-              title="Watch Video"
+              title={tc("accessoryCard.watchVideo")}
               onClick={e => { e.stopPropagation(); setVideoOpen(true); }}
             >
               <i className="fa-solid fa-play" style={{ fontSize: 7, color: "#fff" }} />
@@ -164,11 +165,11 @@ export function AccessoryCard({ product }) {
       )}
 
       <div className="sawo-av-headtext">{product.name}</div>
-      {codes.length > 0 && <div className="sawo-av-code">Code: {codes.join(" | ")}</div>}
+      {codes.length > 0 && <div className="sawo-av-code">{tc("accessoryCard.code")}: {codes.join(" | ")}</div>}
       {specRows.map(([label, value]) => (
         <div className="sawo-av-subtext" key={label}><strong>{label}:</strong> {value}</div>
       ))}
-      {colors.length > 1 && <div className="sawo-av-subtext"><strong>Option:</strong> {colors.join(" | ")}</div>}
+      {colors.length > 1 && <div className="sawo-av-subtext"><strong>{tc("accessoryCard.option")}:</strong> {colors.join(" | ")}</div>}
     </div>
   );
 }

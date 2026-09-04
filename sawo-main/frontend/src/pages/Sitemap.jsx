@@ -5,6 +5,7 @@ import SEO from "../components/SEO";
 import { useLocalProducts } from "../Administrator/Local/useLocalProducts";
 import { useLocalSaunaRooms } from "../Administrator/Local/useLocalSaunaRooms";
 import { isPubliclyVisible } from "../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 const linkClass = "text-amber-800 hover:text-amber-950 hover:underline";
 const headingClass = "text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-gray-300";
@@ -49,6 +50,8 @@ function classifyProduct(product) {
 }
 
 const Sitemap = () => {
+  const t = useLocaleT("sitemap");
+  const localize = useLocalizedPath();
   // Every publicly-visible product/accessory + sauna room, straight from the
   // same feeds the rest of the site reads (bundled JSON, or live Supabase if
   // the CMS's Live Data Source is set to it) — new items appear here the
@@ -87,33 +90,34 @@ const Sitemap = () => {
   return (
     <div className="min-h-screen bg-white pt-32 pb-16 px-4 sm:px-6 lg:px-8">
       <SEO
-        title="Sitemap"
-        description="A complete guide to every page and section of the SAWO website: sauna heaters, steam generators, sauna rooms, and more."
-        path="/sitemap"
+        title={t("meta.title")}
+        description={t("meta.description")}
+        path={localize("/sitemap")}
+        hreflangAlternates={{ en: "/sitemap", zh: "/zh/sitemap" }}
       />
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-2 text-gray-900">Sitemap</h1>
+        <h1 className="text-4xl font-bold mb-2 text-gray-900">{t("title")}</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Complete guide to all pages and sections of the SAWO website.
+          {t("subtitle")}
         </p>
 
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <section>
-            <h2 className={headingClass}>Main Pages</h2>
+            <h2 className={headingClass}>{t("groups.mainPages.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.home} className={linkClass}>Home</Link></li>
-              <li><Link to={menuPaths.about.parent} className={linkClass}>About Us</Link></li>
-              <li><Link to={menuPaths.contact} className={linkClass}>Contact Us</Link></li>
-              <li><Link to={menuPaths.careers} className={linkClass}>Careers</Link></li>
-              <li><Link to={menuPaths.privacy} className={linkClass}>Privacy Policy</Link></li>
+              <li><Link to={localize(menuPaths.home)} className={linkClass}>{t("groups.mainPages.home")}</Link></li>
+              <li><Link to={localize(menuPaths.about.parent)} className={linkClass}>{t("groups.mainPages.about")}</Link></li>
+              <li><Link to={localize(menuPaths.contact)} className={linkClass}>{t("groups.mainPages.contact")}</Link></li>
+              <li><Link to={localize(menuPaths.careers)} className={linkClass}>{t("groups.mainPages.careers")}</Link></li>
+              <li><Link to={localize(menuPaths.privacy)} className={linkClass}>{t("groups.mainPages.privacy")}</Link></li>
             </ul>
           </section>
 
           <section>
-            <h2 className={headingClass}>About</h2>
+            <h2 className={headingClass}>{t("groups.about.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.about.news} className={linkClass}>Latest News</Link></li>
-              <li><Link to={menuPaths.about.sustainability} className={linkClass}>Sustainability</Link></li>
+              <li><Link to={localize(menuPaths.about.news)} className={linkClass}>{t("groups.about.news")}</Link></li>
+              <li><Link to={localize(menuPaths.about.sustainability)} className={linkClass}>{t("groups.about.sustainability")}</Link></li>
             </ul>
           </section>
 
@@ -122,82 +126,82 @@ const Sitemap = () => {
               fill columns 1-2 across 3 rows via normal grid auto-placement,
               this occupies column 3 for the full height next to them. */}
           <section className="lg:row-span-3">
-            <h2 className={headingClass}>Finnish Sauna</h2>
+            <h2 className={headingClass}>{t("groups.sauna.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.sauna.parent} className={`${linkClass} font-semibold`}>Sauna Products</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.parent} className={linkClass}>Sauna Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.wallMounted} className={linkClass}>Wall-Mounted Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.tower} className={linkClass}>Tower Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.stone} className={linkClass}>Stone Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.floor} className={linkClass}>Floor Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.combi} className={linkClass}>Combination Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.heaters.dragonfire} className={linkClass}>Dragonfire Heaters</Link></li>
-              <li><Link to={menuPaths.sauna.controls} className={linkClass}>Sauna Controls</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.parent} className={linkClass}>Sauna Accessories</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.accessorySets} className={linkClass}>Accessory Sets</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.pailsLadles} className={linkClass}>Pails & Ladles</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.thermometers} className={linkClass}>Thermometers & Combined Meters</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.clocksSandtimers} className={linkClass}>Clocks & Sandtimers</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.lightsCovers} className={linkClass}>Sauna Lights & Covers</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.headrestsBackrests} className={linkClass}>Headrests & Backrests</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.doorsHandles} className={linkClass}>Doors & Handles</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.benches} className={linkClass}>Benches & Floor Tiles</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.kivistone} className={linkClass}>Kivistone</Link></li>
-              <li><Link to={menuPaths.sauna.accessories.ventilations} className={linkClass}>Ventilations & Add-Ons</Link></li>
-              <li><Link to={menuPaths.sauna.rooms} className={linkClass}>Sauna Rooms</Link></li>
-              <li><Link to={menuPaths.sauna.interiorDesigns} className={linkClass}>Interior Designs</Link></li>
-              <li><Link to={menuPaths.sauna.woodPanels} className={linkClass}>Wood Panels & Timbers</Link></li>
+              <li><Link to={localize(menuPaths.sauna.parent)} className={`${linkClass} font-semibold`}>{t("groups.sauna.products")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.parent)} className={linkClass}>{t("groups.sauna.heaters")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.wallMounted)} className={linkClass}>{t("groups.sauna.wallMounted")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.tower)} className={linkClass}>{t("groups.sauna.tower")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.stone)} className={linkClass}>{t("groups.sauna.stone")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.floor)} className={linkClass}>{t("groups.sauna.floor")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.combi)} className={linkClass}>{t("groups.sauna.combi")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.heaters.dragonfire)} className={linkClass}>{t("groups.sauna.dragonfire")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.controls)} className={linkClass}>{t("groups.sauna.controls")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.parent)} className={linkClass}>{t("groups.sauna.accessories")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.accessorySets)} className={linkClass}>{t("groups.sauna.accessorySets")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.pailsLadles)} className={linkClass}>{t("groups.sauna.pailsLadles")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.thermometers)} className={linkClass}>{t("groups.sauna.thermometers")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.clocksSandtimers)} className={linkClass}>{t("groups.sauna.clocksSandtimers")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.lightsCovers)} className={linkClass}>{t("groups.sauna.lightsCovers")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.headrestsBackrests)} className={linkClass}>{t("groups.sauna.headrestsBackrests")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.doorsHandles)} className={linkClass}>{t("groups.sauna.doorsHandles")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.benches)} className={linkClass}>{t("groups.sauna.benches")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.kivistone)} className={linkClass}>{t("groups.sauna.kivistone")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.accessories.ventilations)} className={linkClass}>{t("groups.sauna.ventilations")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.rooms)} className={linkClass}>{t("groups.sauna.rooms")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.interiorDesigns)} className={linkClass}>{t("groups.sauna.interiorDesigns")}</Link></li>
+              <li><Link to={localize(menuPaths.sauna.woodPanels)} className={linkClass}>{t("groups.sauna.woodPanels")}</Link></li>
             </ul>
           </section>
 
           <section>
-            <h2 className={headingClass}>Steam Rooms</h2>
+            <h2 className={headingClass}>{t("groups.steam.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.steam.parent} className={`${linkClass} font-semibold`}>Steam Room Products</Link></li>
-              <li><Link to={menuPaths.steam.generators} className={linkClass}>Steam Generators</Link></li>
-              <li><Link to={menuPaths.steam.controls} className={linkClass}>Steam Controls</Link></li>
-              <li><Link to={menuPaths.steam.accessories} className={linkClass}>Steam Accessories</Link></li>
+              <li><Link to={localize(menuPaths.steam.parent)} className={`${linkClass} font-semibold`}>{t("groups.steam.products")}</Link></li>
+              <li><Link to={localize(menuPaths.steam.generators)} className={linkClass}>{t("groups.steam.generators")}</Link></li>
+              <li><Link to={localize(menuPaths.steam.controls)} className={linkClass}>{t("groups.steam.controls")}</Link></li>
+              <li><Link to={localize(menuPaths.steam.accessories)} className={linkClass}>{t("groups.steam.accessories")}</Link></li>
             </ul>
           </section>
 
           <section>
-            <h2 className={headingClass}>Infrared Sauna</h2>
+            <h2 className={headingClass}>{t("groups.infrared.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.infrared.parent} className={linkClass}>Infrared</Link></li>
-              <li><Link to={menuPaths.infrared.saunas} className={linkClass}>Infrared Saunas</Link></li>
-              <li><Link to={menuPaths.infrared.panels} className={linkClass}>Infrared Panels</Link></li>
-              <li><Link to={menuPaths.infrared.controls} className={linkClass}>Infrared Controls</Link></li>
+              <li><Link to={localize(menuPaths.infrared.parent)} className={linkClass}>{t("groups.infrared.parent")}</Link></li>
+              <li><Link to={localize(menuPaths.infrared.saunas)} className={linkClass}>{t("groups.infrared.saunas")}</Link></li>
+              <li><Link to={localize(menuPaths.infrared.panels)} className={linkClass}>{t("groups.infrared.panels")}</Link></li>
+              <li><Link to={localize(menuPaths.infrared.controls)} className={linkClass}>{t("groups.infrared.controls")}</Link></li>
             </ul>
           </section>
 
           <section>
-            <h2 className={headingClass}>Support & Resources</h2>
+            <h2 className={headingClass}>{t("groups.support.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.support.parent} className={`${linkClass} font-semibold`}>Support Center</Link></li>
-              <li><Link to={menuPaths.support.faq} className={linkClass}>Frequently Asked Questions</Link></li>
-              <li><Link to={menuPaths.support.saunaCalculator} className={linkClass}>Sauna Calculator</Link></li>
-              <li><Link to={menuPaths.support.manuals} className={linkClass}>User Manuals</Link></li>
-              <li><Link to={menuPaths.support.catalogue} className={linkClass}>Product Catalogue</Link></li>
+              <li><Link to={localize(menuPaths.support.parent)} className={`${linkClass} font-semibold`}>{t("groups.support.parent")}</Link></li>
+              <li><Link to={localize(menuPaths.support.faq)} className={linkClass}>{t("groups.support.faq")}</Link></li>
+              <li><Link to={localize(menuPaths.support.saunaCalculator)} className={linkClass}>{t("groups.support.calculator")}</Link></li>
+              <li><Link to={localize(menuPaths.support.manuals)} className={linkClass}>{t("groups.support.manuals")}</Link></li>
+              <li><Link to={localize(menuPaths.support.catalogue)} className={linkClass}>{t("groups.support.catalogue")}</Link></li>
             </ul>
           </section>
 
           <section>
-            <h2 className={headingClass}>Products & Catalog</h2>
+            <h2 className={headingClass}>{t("groups.catalog.heading")}</h2>
             <ul className="space-y-3">
-              <li><Link to={menuPaths.products} className={linkClass}>All Products</Link></li>
-              <li><Link to={menuPaths.accessories} className={linkClass}>Accessories Catalog</Link></li>
-              <li><Link to={menuPaths.heaters} className={linkClass}>Heaters Catalog</Link></li>
+              <li><Link to={localize(menuPaths.products)} className={linkClass}>{t("groups.catalog.allProducts")}</Link></li>
+              <li><Link to={localize(menuPaths.accessories)} className={linkClass}>{t("groups.catalog.accessoriesCatalog")}</Link></li>
+              <li><Link to={localize(menuPaths.heaters)} className={linkClass}>{t("groups.catalog.heatersCatalog")}</Link></li>
             </ul>
           </section>
 
           <div className="md:col-span-2 lg:col-span-3">
             <h2 className={headingClass}>
-              Every Product{totalProducts > 0 && ` (${totalProducts})`}
+              {t("everyProduct")}{totalProducts > 0 && ` (${totalProducts})`}
             </h2>
             {productsLoading ? (
-              <p className="text-gray-500">Loading products…</p>
+              <p className="text-gray-500">{t("loadingProducts")}</p>
             ) : totalProducts === 0 ? (
-              <p className="text-gray-500">No products available right now.</p>
+              <p className="text-gray-500">{t("noProducts")}</p>
             ) : (
               // True CSS multi-column flow, not a grid — a grid puts each
               // group in its own cell and sizes every row to its tallest
@@ -211,11 +215,11 @@ const Sitemap = () => {
               <div className="columns-1 sm:columns-2 lg:columns-3 gap-8">
                 {groupedProducts.map(([label, list]) => (
                   <section key={label} className="mb-6">
-                    <h3 className="font-semibold text-gray-800 mb-2 [break-after:avoid-column]">{label} ({list.length})</h3>
+                    <h3 className="font-semibold text-gray-800 mb-2 [break-after:avoid-column]">{t(`productGroups.${label}`)} ({list.length})</h3>
                     <ul className="space-y-1.5">
                       {list.map((p) => (
                         <li key={p.slug} className="[break-inside:avoid-column]">
-                          <Link to={`/products/${p.slug}`} className={linkClass}>{p.name}</Link>
+                          <Link to={localize(`/products/${p.slug}`)} className={linkClass}>{p.name}</Link>
                         </li>
                       ))}
                     </ul>
@@ -227,17 +231,17 @@ const Sitemap = () => {
 
           <div className="md:col-span-2 lg:col-span-3">
             <h2 className={headingClass}>
-              Sauna Rooms{visibleRooms.length > 0 && ` (${visibleRooms.length})`}
+              {t("saunaRooms")}{visibleRooms.length > 0 && ` (${visibleRooms.length})`}
             </h2>
             {roomsLoading ? (
-              <p className="text-gray-500">Loading sauna rooms…</p>
+              <p className="text-gray-500">{t("loadingRooms")}</p>
             ) : visibleRooms.length === 0 ? (
-              <p className="text-gray-500">No sauna rooms available right now.</p>
+              <p className="text-gray-500">{t("noRooms")}</p>
             ) : (
               <ul className="columns-2 sm:columns-3 lg:columns-4 gap-6 space-y-1.5">
                 {visibleRooms.map((r) => (
                   <li key={r.slug} className="break-inside-avoid">
-                    <Link to={`/sauna/rooms/${r.slug}`} className={linkClass}>{r.name}</Link>
+                    <Link to={localize(`/sauna/rooms/${r.slug}`)} className={linkClass}>{r.name}</Link>
                   </li>
                 ))}
               </ul>
@@ -245,12 +249,12 @@ const Sitemap = () => {
           </div>
 
           <div className="p-6 bg-gray-100 rounded-lg md:col-span-2 lg:col-span-3">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Need Help?</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">{t("help.title")}</h3>
             <p className="text-gray-600">
-              Can't find what you're looking for? Visit our{" "}
-              <Link to={menuPaths.contact} className={linkClass}>contact page</Link>{" "}
-              or{" "}
-              <Link to={menuPaths.support.faq} className={linkClass}>FAQ section</Link>.
+              {t("help.prefix")}{" "}
+              <Link to={localize(menuPaths.contact)} className={linkClass}>{t("help.contactLink")}</Link>{" "}
+              {t("help.or")}{" "}
+              <Link to={localize(menuPaths.support.faq)} className={linkClass}>{t("help.faqLink")}</Link>.
             </p>
           </div>
         </div>

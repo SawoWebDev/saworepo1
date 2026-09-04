@@ -1,0 +1,21 @@
+{
+  "meta": { "title": "页面未找到", "description": "您要查找的页面不存在或已被移动。" },
+  "heading": "哎呀！页面未找到",
+  "desc": "抱歉,您要查找的页面不存在或已被移动。",
+  "triedToAccess": "尝试访问的地址：",
+  "helpBox": {
+    "title": "您可以尝试以下操作：",
+    "item1": "检查网址是否输入有误",
+    "item2": "浏览我们的产品目录",
+    "item3": "使用下方的搜索功能",
+    "item4": "联系我们寻求帮助"
+  },
+  "goHome": "返回首页",
+  "browseProducts": "浏览产品",
+  "popularSections": "热门板块：",
+  "saunaHeaters": "桑拿加热器",
+  "steamGenerators": "蒸汽发生器",
+  "faq": "常见问题",
+  "contactUs": "联系我们",
+  "supportPrompt": "仍然遇到问题？我们的支持团队随时为您提供帮助。"
+}

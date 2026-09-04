@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "网站地图",
+    "description": "SAWO 网站所有页面和板块的完整导览：桑拿加热器、蒸汽发生器、桑拿房等等。"
+  },
+  "title": "网站地图",
+  "subtitle": "SAWO 网站所有页面和板块的完整导览。",
+  "productGroups": {
+    "Steam Accessories": "蒸汽配件",
+    "Steam Controls": "蒸汽控制器",
+    "Infrared": "红外线",
+    "Sauna Controls": "桑拿控制器",
+    "Sauna Accessories": "桑拿配件",
+    "Sauna Heaters": "桑拿加热器",
+    "Other Products": "其他产品"
+  },
+  "groups": {
+    "productOther": "其他产品",
+    "mainPages": {
+      "heading": "主要页面",
+      "home": "首页",
+      "about": "关于我们",
+      "contact": "联系我们",
+      "careers": "招贤纳士",
+      "privacy": "隐私政策"
+    },
+    "about": {
+      "heading": "关于我们",
+      "news": "最新动态",
+      "sustainability": "可持续发展"
+    },
+    "sauna": {
+      "heading": "芬兰桑拿",
+      "products": "桑拿产品",
+      "heaters": "桑拿加热器",
+      "wallMounted": "壁挂式加热器",
+      "tower": "Tower 系列加热器",
+      "stone": "Stone 系列加热器",
+      "floor": "落地式加热器",
+      "combi": "Combi 组合式加热器",
+      "dragonfire": "Dragonfire 系列加热器",
+      "controls": "桑拿控制器",
+      "accessories": "桑拿配件",
+      "accessorySets": "配件套装",
+      "pailsLadles": "水桶与桑拿勺",
+      "thermometers": "温度计与多功能仪表",
+      "clocksSandtimers": "时钟与沙漏计时器",
+      "lightsCovers": "桑拿灯具与灯罩",
+      "headrestsBackrests": "头枕与靠背",
+      "doorsHandles": "门与拉手",
+      "benches": "长椅与地砖",
+      "kivistone": "Kivistone",
+      "ventilations": "通风与附加配件",
+      "rooms": "桑拿房",
+      "interiorDesigns": "室内设计",
+      "woodPanels": "木质墙板与木材"
+    },
+    "steam": {
+      "heading": "蒸汽房",
+      "products": "蒸汽房产品",
+      "generators": "蒸汽发生器",
+      "controls": "蒸汽控制器",
+      "accessories": "蒸汽配件"
+    },
+    "infrared": {
+      "heading": "红外线桑拿",
+      "parent": "红外线",
+      "saunas": "红外线桑拿房",
+      "panels": "红外线加热板",
+      "controls": "红外线控制器"
+    },
+    "support": {
+      "heading": "支持与资源",
+      "parent": "支持中心",
+      "faq": "常见问题解答",
+      "calculator": "桑拿计算器",
+      "manuals": "用户手册",
+      "catalogue": "产品目录"
+    },
+    "catalog": {
+      "heading": "产品与目录",
+      "allProducts": "全部产品",
+      "accessoriesCatalog": "配件目录",
+      "heatersCatalog": "加热器目录"
+    }
+  },
+  "everyProduct": "全部产品",
+  "loadingProducts": "正在加载产品…",
+  "noProducts": "目前暂无可用产品。",
+  "saunaRooms": "桑拿房",
+  "loadingRooms": "正在加载桑拿房…",
+  "noRooms": "目前暂无可用桑拿房。",
+  "help": {
+    "title": "需要帮助？",
+    "prefix": "找不到您需要的内容？请访问我们的",
+    "contactLink": "联系页面",
+    "or": "或",
+    "faqLink": "常见问题解答板块"
+  }
+}

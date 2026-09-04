@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import menuPaths from "../menuPaths";
 import SEO from "../components/SEO";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 const NotFound = () => {
   const location = useLocation();
+  const t = useLocaleT("notfound");
+  const localize = useLocalizedPath();
 
   useEffect(() => {
     // Track 404 errors in analytics
@@ -21,8 +24,8 @@ const NotFound = () => {
   return (
     <div className="relative min-h-screen flex flex-col justify-center items-center bg-white px-6 py-12">
       <SEO
-        title="Page Not Found"
-        description="The page you're looking for doesn't exist or has moved."
+        title={t("meta.title")}
+        description={t("meta.description")}
         path={location.pathname}
         noindex
       />
@@ -42,64 +45,64 @@ const NotFound = () => {
 
         {/* Main heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-[#333] mb-4">
-          Oops! Page Not Found
+          {t("heading")}
         </h2>
 
         {/* Description */}
         <p className="text-lg text-[#666] mb-2">
-          We're sorry, the page you're looking for doesn't exist or has been moved.
+          {t("desc")}
         </p>
         <p className="text-sm text-[#999] mb-8">
-          Tried to access: <code className="bg-gray-100 px-2 py-1 rounded text-[#333]">{location.pathname}</code>
+          {t("triedToAccess")} <code className="bg-gray-100 px-2 py-1 rounded text-[#333]">{location.pathname}</code>
         </p>
 
         {/* Helpful message */}
         <div className="bg-[#f5f1ed] border-l-4 border-[#af8564] p-4 mb-8 text-left rounded">
-          <p className="text-[#333] font-medium mb-2">Here's what you can do:</p>
+          <p className="text-[#333] font-medium mb-2">{t("helpBox.title")}</p>
           <ul className="text-[#666] text-sm space-y-1">
-            <li>✓ Check the URL for typos</li>
-            <li>✓ Browse our product catalog</li>
-            <li>✓ Use the search function below</li>
-            <li>✓ Contact us for assistance</li>
+            <li>✓ {t("helpBox.item1")}</li>
+            <li>✓ {t("helpBox.item2")}</li>
+            <li>✓ {t("helpBox.item3")}</li>
+            <li>✓ {t("helpBox.item4")}</li>
           </ul>
         </div>
 
         {/* Quick links */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <Link
-            to={menuPaths.home}
+            to={localize(menuPaths.home)}
             className="inline-block bg-[#af8564] hover:bg-[#96704f] text-white font-semibold py-3 px-6 rounded transition-colors"
           >
-            Go to Home
+            {t("goHome")}
           </Link>
           <Link
-            to={menuPaths.sauna.heaters.parent}
+            to={localize(menuPaths.sauna.heaters.parent)}
             className="inline-block bg-[#f5f1ed] hover:bg-[#e8e1da] text-[#333] font-semibold py-3 px-6 rounded transition-colors border border-[#ddd]"
           >
-            Browse Products
+            {t("browseProducts")}
           </Link>
         </div>
 
         {/* Additional helpful links */}
         <div className="mb-8">
           <h3 className="text-sm font-semibold text-[#333] mb-4">
-            Popular Sections:
+            {t("popularSections")}
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link to={menuPaths.sauna.heaters.parent} className="text-[#af8564] hover:underline text-sm">
-              Sauna Heaters
+            <Link to={localize(menuPaths.sauna.heaters.parent)} className="text-[#af8564] hover:underline text-sm">
+              {t("saunaHeaters")}
             </Link>
             <span className="text-[#ddd]">|</span>
-            <Link to={menuPaths.steam.generators} className="text-[#af8564] hover:underline text-sm">
-              Steam Generators
+            <Link to={localize(menuPaths.steam.generators)} className="text-[#af8564] hover:underline text-sm">
+              {t("steamGenerators")}
             </Link>
             <span className="text-[#ddd]">|</span>
-            <Link to={menuPaths.support.faq} className="text-[#af8564] hover:underline text-sm">
-              FAQ
+            <Link to={localize(menuPaths.support.faq)} className="text-[#af8564] hover:underline text-sm">
+              {t("faq")}
             </Link>
             <span className="text-[#ddd]">|</span>
-            <Link to={menuPaths.contact} className="text-[#af8564] hover:underline text-sm">
-              Contact Us
+            <Link to={localize(menuPaths.contact)} className="text-[#af8564] hover:underline text-sm">
+              {t("contactUs")}
             </Link>
           </div>
         </div>
@@ -107,7 +110,7 @@ const NotFound = () => {
         {/* Support section */}
         <div className="border-t border-[#ddd] pt-8">
           <p className="text-[#666] mb-4">
-            Still having trouble? Our support team is here to help.
+            {t("supportPrompt")}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
             <a

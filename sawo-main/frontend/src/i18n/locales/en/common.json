@@ -75,5 +75,12 @@
       "label": "Mental Wellness",
       "desc": "Significantly reduces symptoms of depression with consistent use"
     }
+  },
+  "accessoryCard": {
+    "bestSeller": "Best Seller",
+    "close": "Close",
+    "watchVideo": "Watch Video",
+    "code": "Code",
+    "option": "Option"
   }
 }
