@@ -288,6 +288,29 @@ the category `type` field stays the shorter 温度计), Benches → 长椅,
 Doors & Handles → 门与拉手. If you hit a category not listed here,
 translate it once and add it to this table.
 
+`fi` category `type` field translations seen so far (each confirmed via
+a live `product_translations` query, not guessed): Heater Guard →
+Kiuassuoja (found already established in `translation_memory` from
+`"Optional heater guard"` → `"Valinnainen kiuassuoja"` before the fi
+Heater Guard batch started — worth checking `translation_memory` for an
+existing `type` translation before coining one, the same way this was
+found), Headrest & Backrest → Niskatuet ja selkänojat, Clocks & Timers →
+Kellot ja ajastimet, Infrared Controls → Infrapunaohjaimet, Infrared
+Accessories → Infrapunatarvikkeet, Ladles → Kauhat, Benches → Penkit,
+Sauna Lights → Saunavalaisimet, Thermometers → Lämpömittarit, Safety
+Switch → Turvakytkin, Heater Hood → Kiuaskupu (`helius-heater-hood`'s
+live row — a single-product "category"), Ventilation & Miscellaneous →
+Ilmanvaihto ja sekalaiset, Kivistone → Kivistone (kept untranslated,
+same brand-name treatment as the `zh` row), Pails → Pails (kept literal
+English per every existing `fi` Pails row in `product_translations`, not
+translated — confirmed, not an oversight). **Integration Collar has no
+`fi` rows at all yet** (still fully missing for this locale as of
+2026-09-04) — coin its `type` translation when that category's `fi`
+batch actually runs, don't guess it here. If you hit an `fi` category
+not listed here, check `translation_memory` and live
+`product_translations` for an existing translation before coining one,
+then add it to this list.
+
 `fi` category `type` translations seen so far: Headrest & Backrest →
 Niskatuet ja selkänojat, Clocks & Timers → Kellot ja ajastimet, Infrared
 Controls → Infrapunaohjaimet, Infrared Accessories → Infrapunatarvikkeet,

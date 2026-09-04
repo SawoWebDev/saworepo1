@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic-2-0",
+  "productId": "9d43ef15-615c-4354-aa32-8463fa50d186",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Klassinen 2.0",
+    "short_description": "<b style=\"text-align: justify;\">Innova 2.0</b><span style=\"text-align: justify;\"> on erittäin monipuolinen ohjain, jolla voidaan säätää saunan lämpötilaa, kosteutta, ilmanvaihtoa ja valaistuksen kirkkautta.</span>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNICAL DETAILS</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic 2.0 (INC-S-V2)</td><td>W: 104 mm x H: 147 mm x L: 37 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "Älykäs ohjaus -toiminto säätää lämmityselementtejä automaattisesti vaiheittain, jotta haluttu lämpötila saavutetaan nopeasti ja höyry pysyy aina hyvänä.",
+      "Yhdistä INP-C-tehonohjaimeen käytettäväksi minkä tahansa enintään 15 kW:n NS-kiukaan kanssa. Yli 15 kW:n kiukaisiin lisää INP-S-kontaktoriyksikkö.",
+      "Yhteensopiva ovianturin kanssa",
+      "Ennakkoajastin",
+      "Valinnainen tuuletin, himmennin ja Combi-toiminto",
+      "Toimii parhaiten yhdessä valinnaisen penkkianturin (INN-BTEMP) kanssa; Combi-kiukaille suositellaan kosteusanturia (INN-HUM)",
+      "Pakkaus sisältää Classic 2.0 -käyttöliittymän ja 5 m RJ12-kaapelin"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

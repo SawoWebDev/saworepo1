@@ -1,0 +1,18 @@
+{
+  "slug": "rectangular-interface-holder-for-2-0-controls",
+  "productId": "96c70250-e9a0-4dd4-8e0d-c4a5552f292f",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Interface Holder"
+    }
+  ],
+  "fields": {
+    "name": "Suorakulmainen käyttöliittymän pidike 2.0-ohjaimille",
+    "short_description": "Laadukas puinen käyttöliittymän pidike INN-IH23, joka sopii laajalle valikoimalle 2.0-ohjaimia, mukaan lukien Innova Classic 2.0, Innova Stainless Touch 2.0, Saunova 2.0, STE/STN Classic 2.0 ja IR Control 2.0. Saatavilla setri-, haapa- ja mäntypintaisena, jotta se sopii mihin tahansa saunan sisustukseen. Mitat: 190 mm (L) x 145 mm (S) x 40 mm (K). Kestävä ja tyylikäs ratkaisu 2.0-ohjaimien turvalliseen säilytykseen.",
+    "description": null,
+    "type": "Käyttöliittymän pidike"
+  }
+}

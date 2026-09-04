@@ -1,0 +1,25 @@
+{
+  "slug": "saunova-2-0-contactor-unit",
+  "productId": "9d7a2dce-595f-4391-82fc-cd7cbcc72a1c",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 Kontaktoriyksikkö",
+    "short_description": "<p style=\"text-align: justify;\"><strong>Saunova 2.0 -kontaktoriyksikkö (SAU-PS-V2)</strong> liitetään Saunova 2.0 -tehonohjaimeen, ja se mahdollistaa luotettavan ohjauksen yli 9kW:n NS-saunankiukaille. Suunniteltu suuritehoisiin saunaratkaisuihin, se tarjoaa turvallisen ja tehokkaan ratkaisun asennuksiin, jotka ylittävät tavanomaiset tehovaatimukset.\n\n</p><p style=\"text-align: justify;\">Nykyaikaistettu kotelo tarjoaa lisää sisätilaa helpompaan ja nopeampaan asennukseen. Joustavat johdotusvaihtoehdot vedonpoistoineen kaikilla neljällä sivulla — mukaan lukien takapaneeli — mahdollistavat kaapeleiden täydellisen piilottamisen, mikä takaa siistin ja ammattimaisen lopputuloksen.</p>\n<span style=\"text-align: justify;\"><b>Käytä yli 9kW:n NS-kiukaiden kanssa. Yhdistä Saunova-tehonohjaimeen</b></span>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNICAL DETAILS</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>9kW max</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova 2.0 Contactor Unit (SAU-PS-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Rated Power 3 Phase</td><td>3x3kW</td></tr>\n  <tr><td>Rated Voltage 3 Phase</td><td>400V 3N~</td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Pakkaus sisältää Saunova-kontaktoriyksikön"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

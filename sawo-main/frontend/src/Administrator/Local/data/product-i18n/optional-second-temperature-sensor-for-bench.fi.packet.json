@@ -1,0 +1,22 @@
+{
+  "slug": "optional-second-temperature-sensor-for-bench",
+  "productId": "3ec10896-68a3-4450-8b24-a35b50a1c6c7",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Toinen lisälämpötila-anturi penkille",
+    "short_description": "Valinnainen lämpötila-anturi, joka on suunniteltu penkkialueelle saunan suorituskyvyn parantamiseksi. Mahdollistaa nopeamman ja tarkemman huonelämpötilan säädön, mikä auttaa säästämään energiaa optimoimalla lämmitystehokkuutta. Ohjain tunnistaa anturin automaattisesti kytkennän jälkeen, mikä takaa saumattoman integroinnin ja luotettavan lämpötilanhallinnan.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">PRODUCT DIMENSIONS</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Optional Bench Sensor\n(INN-BTEMP)</td>\n  <td>W: 47mm x D: 40mm x H: 55mm 0.02KG</td>\n</tr></tbody></table>",
+    "type": "Anturi",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

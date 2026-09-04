@@ -1,0 +1,18 @@
+{
+  "slug": "rectangular-interface-holder-for-innova-classic-control",
+  "productId": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Interface Holder"
+    }
+  ],
+  "fields": {
+    "name": "Suorakulmainen käyttöliittymän pidike Innova Classic -ohjaimelle",
+    "short_description": "Tyylikäs puinen käyttöliittymän pidike INN-IH20, suunniteltu Innova Classic -ohjaimelle. Saatavilla laadukkaana setri-, haapa- ja mäntypintaisena eri saunatyylien täydentämiseksi. Mitat: 215 mm (L) x 140 mm (S) x 20 mm (K). Täydellinen ratkaisu ohjausyksikön turvalliseen säilytykseen tuoden samalla luonnollista tyylikkyyttä.",
+    "description": null,
+    "type": "Käyttöliittymän pidike"
+  }
+}

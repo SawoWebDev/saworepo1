@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-aries-wall",
+  "productId": "dd9026d3-6f64-44d5-92e5-191dbf835b22",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Kiuassuoja – Aries Seinä",
+    "short_description": "Kiuassuoja on turvallisuusominaisuus, joka on suunniteltu minimoimaan palovammariskiä. Se on valmistettu lämmönkestävästä hemlokista ja muodostaa suojaavan esteen samalla kun se parantaa kiukaan ulkonäköä.",
+    "description": null,
+    "type": "Kiuassuoja",
+    "spec_table_headers": [
+      "Malli",
+      "Materiaali",
+      "Pituus (mm)",
+      "Leveys (mm)",
+      "Korkeus (mm)"
+    ]
+  }
+}
