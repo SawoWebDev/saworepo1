@@ -12,6 +12,7 @@ import WhyChooseSawo from "../../../components/WhyChooseSawo";
 import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 const DISPLAY_CATEGORIES = ["Accessory Sets"];
 const DISPLAY_TAGS       = ["Accessory Sets"];
@@ -80,6 +81,9 @@ function SkeletonCard() {
 
 export default function AccessorySets() {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [search, setSearch]           = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
   const [heroLoaded, setHeroLoaded]   = useState(false);
@@ -113,9 +117,10 @@ export default function AccessorySets() {
   return (
     <div className="relative">
       <SEO
-        title="Sauna Accessory Sets"
-        description="SAWO sauna accessory sets, curated collections pairing pails, ladles, thermometers, and more for a complete, coordinated sauna look."
-        path="/sauna/accessories/accessory-sets"
+        title={t("accessorySetsPage.meta.title")}
+        description={t("accessorySetsPage.meta.description")}
+        path={localize("/sauna/accessories/accessory-sets")}
+        hreflangAlternates={{ en: "/sauna/accessories/accessory-sets", zh: "/zh/sauna/accessories/accessory-sets" }}
       />
       <style>{`
         @keyframes wm-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
@@ -133,7 +138,7 @@ export default function AccessorySets() {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Accessory Sets"
+          alt={t("accessorySetsPage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -144,10 +149,10 @@ export default function AccessorySets() {
         />
         <div className="absolute inset-0 bg-black/50 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">ACCESSORY SETS</h1>
-          <p className="wm-hero-subtitle">Everything you need for the perfect sauna experience</p>
+          <h1 className="wm-hero-title">{t("accessorySetsPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("accessorySetsPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
-            <BrochureDropdownButton text="VIEW BROCHURE" href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" />
+            <BrochureDropdownButton text={tc("viewBrochure")} href="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf" />
           </div>
         </div>
       <HeroWave />
@@ -155,8 +160,8 @@ export default function AccessorySets() {
 
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">SAWO Curated Accessory Sets</h2>
-          <p className="wm-products-desc">Our carefully curated accessory sets offer something for everyone. From natural, zero-waste options to bold and sophisticated designs, each set enhances your sauna enjoyment with perfectly matched pieces.</p>
+          <h2 className="wm-products-title">{t("accessorySetsPage.intro.title")}</h2>
+          <p className="wm-products-desc">{t("accessorySetsPage.intro.desc")}</p>
         </div>
       </section>
 
@@ -166,19 +171,19 @@ export default function AccessorySets() {
             <div className="wm-filter-search-row">
               {groupNames.length > 1 && (
                 <div className="wm-filter-pills-group">
-                  <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+                  <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
                   {groupNames.map(g => (
-                    <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{g}</button>
+                    <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>{t(`accessorySetsPage.groups.${g}`, { defaultValue: g })}</button>
                   ))}
                 </div>
               )}
               <div className="wm-search-wrap wm-search-bar-fixed">
                 <i className="fa-solid fa-magnifying-glass wm-search-icon" />
-                <input className="wm-search-input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search accessory sets..." />
-                {search && <button className="wm-search-clear" onClick={() => setSearch("")}><i className="fa-solid fa-xmark" /></button>}
+                <input className="wm-search-input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder={tc("catalogFilter.searchPlaceholder", { category: t("accessorySetsPage.meta.title") })} />
+                {search && <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}><i className="fa-solid fa-xmark" /></button>}
               </div>
             </div>
-            {search && <p className="wm-search-count">{searchCount === 0 ? `No results for "${search}"` : `${searchCount} result${searchCount !== 1 ? "s" : ""} for "${search}"`}</p>}
+            {search && <p className="wm-search-count">{searchCount === 0 ? tc("catalogFilter.noResultsFor", { query: search }) : tc("catalogFilter.resultsCount", { count: searchCount, query: search })}</p>}
           </div>
         </section>
       )}
@@ -186,14 +191,14 @@ export default function AccessorySets() {
       <section className="wm-section wm-section--flush-top">
         <div className="wm-container">
           {loading && <div className="wm-products-grid">{Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}</div>}
-          {!loading && allProducts.length === 0 && <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}><p>No products available yet.</p></div>}
+          {!loading && allProducts.length === 0 && <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}><p>{tc("catalogFilter.noProductsYet")}</p></div>}
           {!loading && allProducts.length > 0 && (
             <>
               {visibleGroups.length === 0 ? (
                 <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#a67853" }}>
                   <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "1.8rem", opacity: 0.35, display: "block", marginBottom: 10 }} />
-                  <p style={{ margin: 0 }}>No products match "<strong>{search}</strong>"</p>
-                  <button onClick={() => setSearch("")} style={{ marginTop: 10, background: "none", border: "none", cursor: "pointer", color: "#8b5e3c", fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", textDecoration: "underline" }}>Clear search</button>
+                  <p style={{ margin: 0 }}>{tc("catalogFilter.noMatch", { category: t("accessorySetsPage.meta.title"), query: search })}</p>
+                  <button onClick={() => setSearch("")} style={{ marginTop: 10, background: "none", border: "none", cursor: "pointer", color: "#8b5e3c", fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", textDecoration: "underline" }}>{tc("catalogFilter.clearSearch")}</button>
                 </div>
               ) : (
                 visibleGroups.map(group => {
@@ -202,7 +207,7 @@ export default function AccessorySets() {
                   if (items.length === 0) return null;
                   return (
                     <div className="wm-group" key={group}>
-                      <h3 className="wm-group-title">{group.toUpperCase()}</h3>
+                      <h3 className="wm-group-title">{t(`accessorySetsPage.groups.${group}`, { defaultValue: group }).toUpperCase()}</h3>
                       <div className="sawo-av-grid sawo-av-grid--sets">{items.map(product => <AccessoryCard key={product.id || product.slug} product={product} />)}</div>
                     </div>
                   );
@@ -214,20 +219,20 @@ export default function AccessorySets() {
       </section>
 
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.accessories} className="wm-brochure-btn">VIEW ALL ACCESSORIES</Link>
+        <Link to={localize(menuPaths.accessories)} className="wm-brochure-btn">{t("accessoriesPage.viewAll")}</Link>
       </section>
 
       <WhyChooseSawo
-        eyebrow="SAWO ACCESSORIES"
-        title="Why Choose SAWO Accessory Sets"
-        description="SAWO accessory sets are thoughtfully curated to pair the finest pails, ladles, thermometers, and accessories in one complete package, saving you time and ensuring every piece works in perfect harmony."
+        eyebrow={t("accessorySetsPage.why.eyebrow")}
+        title={t("accessorySetsPage.why.title")}
+        description={t("accessorySetsPage.why.description")}
         brochureHref="https://www.sawo.com/wp-content/uploads/2026/07/SAWO-Accessory-Set-Brochure-2026.pdf"
-        brochureLabel="VIEW BROCHURE"
+        brochureLabel={tc("viewBrochure")}
       />
 
       <PromoBanner
-        title="Complete Your Sauna Experience"
-        subtitle="Explore our full range of authentic Finnish sauna accessories"
+        title={t("accessorySetsPage.promo.title")}
+        subtitle={t("accessorySetsPage.promo.subtitle")}
         image={accessoriesBannerImg}
       />
     </div>
