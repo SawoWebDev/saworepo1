@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-door-handle-small-round",
+  "productId": "a636863e-f4b5-424f-aeaa-0adefb5dd423",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (565-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (565-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (565-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Wooden Door Handle Small Round",
+    "short_description": "The SAWO Wooden Door Handle Small Round is a wooden sauna door handle with a rounded profile, measuring Ø65 x W70mm and designed to stay cool to the touch in the heat of the sauna.",
+    "description": null,
+    "type": "Doors & Handles",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (565-D)",
+        "name": "Setri (565-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (565-A)",
+        "name": "Haapa (565-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (565-H)",
+        "name": "Hemlokki (565-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

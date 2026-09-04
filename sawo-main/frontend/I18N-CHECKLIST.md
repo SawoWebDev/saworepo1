@@ -1193,6 +1193,36 @@ query joining `products`→`product_translations` on all 40 slugs: 40/40
 have a `fi` row with non-empty `source_field_hashes`. Post-batch count:
 **88 of 380 products still missing `fi`** (down from 128).
 
+**Batch — 5 products, wooden door handles (2026-09-04)**: re-ran `pending
+fi` fresh first (parallel sessions had already brought the total down to
+42 missing by this point) — picked the 5 `wooden-door-handle*` slugs as a
+small, self-contained group: `wooden-arc-door-handle`,
+`wooden-door-handle`, `wooden-door-handle-with-magnetic-lock`,
+`wooden-door-handle-big-round`, `wooden-door-handle-small-round`. Hand-
+translated via a short fill script (`fill-fi-door-handles.mjs`, mainly for
+consistent JSON writing across the 5 — not a derivation script). Base
+word "ovenkahva" confirmed from `translation_memory`'s existing
+"Stainless-steel door handle set" → "Ruostumattomasta teräksestä
+valmistettu ovenkahvasarja" row rather than guessed fresh. Coined `type`
+"Doors & Handles" → **"Ovet ja kahvat"** (no prior `fi` precedent existed
+for this category's `type` field; matches the already-established
+`doorsHandlesPage` hero copy "SAUNAN OVET JA KAHVAT" in `sauna.json` —
+add to `PRODUCT-TRANSLATION-CONVENTIONS.md`'s category table). Shape
+qualifiers followed the same noun-merges/adjective-stays-separate +
+comma-break pattern as the Thermometers batch above: "Arc" (a noun
+profile shape) merged into the compound (`Puinen kaariovenkahva`); "Big
+Round"/"Small Round" (adjective pairs) stayed comma-separated
+(`Puinen ovenkahva, iso pyöreä`); "with Magnetic Lock" became a plain
+postpositional attribute (`Puinen ovenkahva magneettilukolla`), no
+comma needed since it reads as one continuous noun phrase in Finnish.
+"designed to stay cool to the touch in the heat of the sauna" → coined
+"suunniteltu pysymään viileänä kosketettaessa saunan kuumuudessa" (no
+exact prior TM match; "viileänä pysyvä" reused from the established
+cool-to-touch fibercoating phrasing elsewhere in the catalog).
+Verified via `apply-many` (5/5 applied, no retries needed) and `pending
+fi` (37 missing after, down from 42). Post-batch count: **37 of 380
+products still missing `fi`** (down from 42).
+
 **Batch — 46 products, Heater Guard complete + Sauna Controls complete
 (2026-09-04)**: ran as an explicit fixed 46-slug batch (not a fresh
 `pending` pull) to avoid overlapping with other parallel sessions
