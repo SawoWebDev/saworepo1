@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Ajankohtaista",
+    "description": "Uutisia, messuja ja päivityksiä SAWOlta – suomalaisista saunankiukaistamme, höyrynkehittimistämme ja saunahuoneinnovaatioistamme."
+  },
+  "hero": {
+    "alt": "SAWO-saunan sisätila",
+    "title": "Ajankohtaista",
+    "subtitle": "Pysy ajan tasalla SAWOn tarinoista, tapahtumista ja virstanpylväistä"
+  },
+  "exhibitions": {
+    "eyebrow": "Tuoreimmat",
+    "titleSpan": "Messut",
+    "subtitle": "Aquanale & Piscina Barcelona",
+    "p1": "Olemme iloisia voidessamme kertoa osallistuvamme kahteen messutapahtumaan Euroopassa alle kuukauden sisällä toisistaan. Tule tapaamaan meitä Aquanalessa ja Piscina Barcelonassa.",
+    "aquanaleLabel": "Aquanale: 28.–31. LOKAKUUTA 2025",
+    "aquanaleInfo": "Halli 8, osasto A028 – B209, Messeplatz 1, 50679 Köln, Saksa",
+    "piscinaLabel": "Piscina Barcelona: 17.–20. MARRASKUUTA 2025",
+    "piscinaInfo": "Osasto D90, Recinto Gran Via, Pabellon P1, taso 0, Gran Via, Exhibition Centre, Barcelona, Espanja",
+    "p2": "Emme pelkästään valmista tuotteita – autamme sinua tuomaan aidon ja henkilökohtaisen suomalaisen saunakokemuksen osaksi arkea. Näemme saunan kuuluvan kaikille ympäri maailmaa.",
+    "p3": "Tällä kertaa messuannillamme korostuvat poikkeukselliset innovaatiot saunan ohjausjärjestelmissä ja kiuassuunnittelussa. Lisätietoja näistä tulevista tuotteista löydät pian verkkosivuiltamme ja sosiaalisen median kanavistamme.",
+    "p4": "Esittelemme myös uudet tarvikemallistomme – Essential- ja Rustic-sarjoista Signature- ja Dragon-malleihin. Jokainen sarja on suunniteltu täydentämään saunan tyyliä ja korostamaan käyttäjän omaa saunakokemusta.",
+    "p5": "Sauna on enemmän kuin huone – se tarjoaa hyvinvointia elämäntapana. Sekä Aquanalessa että Piscina Barcelonassa pääset näkemään, kuinka tuotteemme yhdistävät aitouden, muotoilun ja modernin innovaation muuttaen arjen hetket todelliseksi hyvinvoinniksi.",
+    "closing": "Tule katsomaan, tuntemaan ja kokemaan se itse.",
+    "imgAlt": "SAWOn messuosasto",
+    "aquanaleLogoAlt": "Aquanalen logo",
+    "piscinaLogoAlt": "Piscina Barcelonan logo"
+  },
+  "talent": {
+    "eyebrow": "Osaajat",
+    "titleSpan": "Haussa",
+    "subtitle": "Liity kasvavaan tiimiimme Cebulla",
+    "p1": "Uskomme, että ihmisemme ovat jokaisen saavutuksemme liikkeellepaneva voima. Cebun Plant 4 -tehtaan laajennuksen myötä avaamme uuden luvun paitsi tuotannolle myös ihmisille. Etsimme nyt intohimoisia osaajia liittymään tiimiimme Cebulla, Filippiineillä.",
+    "p2": "Etsimme osaajia, joilla on kokemusta sauna- ja hyvinvointialalta ja jotka haluavat olla mukana rakentamassa globaalia brändiä, joka tuo aidon suomalaisen saunakokemuksen jo yli 90 maahan – ja määrä kasvaa. Jos olet oma-aloitteinen, viihdyt dynaamisessa, trooppisessa ympäristössä ja haluat olla osa yritystä, joka yhdistää perinteen ja innovaation, olet meille oikea valinta.",
+    "closing": "Tutustu avoimiin työpaikkoihimme ja tule mukaan muovaamaan hyvinvoinnin seuraavaa aikakautta.",
+    "cta": "Avoimet työpaikat",
+    "imgAlt": "SAWOn osaajahaku"
+  },
+  "earthquake": {
+    "eyebrow": "Maanjäristys",
+    "titlePrefix": "Apua",
+    "titleSpan": "Cebulla",
+    "subtitle": "SAWOn henkilöstö yhdisti voimansa Cebun maanjäristyksen uhrien auttamiseksi",
+    "p1": "Kun katastrofi iskee lähelle, tartumme toimeen auttaaksemme.",
+    "p2": "30. syyskuuta voimakas 6,9 magnitudin maanjäristys iski Cebun koillisrannikolla, jättäen jälkeensä kymmeniä kuolonuhreja, satoja loukkaantuneita ja lukuisia koditta jääneitä. Osana Cebun yhteisöä toimimme nopeasti auttaaksemme kärsimyksen kohdanneita.",
+    "p3": "Pian järistyksen jälkeen järjestimme koko yrityksen laajuisen avustustoimen ja toimitimme patjoja, ruokaa, hygieniatuotteita ja muita välttämättömyystarvikkeita pahiten kärsineille alueille. Tiimimme jäsenet jakoivat tarvikkeet henkilökohtaisesti järistyksestä kärsineille SAWO-perheille ja heidän naapurustonsa asukkaille.",
+    "p4": "Cebu on ollut SAWOn koti jo pitkään, ja tänä vaikeana aikana muistutamme itsellemme, kuinka tärkeää on seistä sen yhteisön rinnalla, joka on ottanut meidät vastaan. Nyt on meidän vuoromme antaa tuki takaisin.",
+    "imgAlt": "SAWOn maanjäristysavustustyö Cebulla"
+  },
+  "cta": {
+    "text": "Onko sinulla kerrottavaa tarinaa, yhteistyöidea tai lehdistökysely mielessä? Kuulisimme mielellämme sinusta.",
+    "btn": "OTA YHTEYTTÄ"
+  }
+}

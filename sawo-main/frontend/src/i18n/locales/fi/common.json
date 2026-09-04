@@ -75,5 +75,12 @@
       "label": "Mielen hyvinvointi",
       "desc": "Vähentää merkittävästi masennuksen oireita säännöllisessä käytössä"
     }
+  },
+  "accessoryCard": {
+    "bestSeller": "Myydyin",
+    "close": "Sulje",
+    "watchVideo": "Katso video",
+    "code": "Koodi",
+    "option": "Vaihtoehto"
   }
 }

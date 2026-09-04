@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "Sivukartta",
+    "description": "Täydellinen opas kaikkiin SAWO-verkkosivuston sivuihin ja osioihin: saunankiukaat, höyrynkehittimet, saunat ja paljon muuta."
+  },
+  "title": "Sivukartta",
+  "subtitle": "Täydellinen opas kaikkiin SAWO-verkkosivuston sivuihin ja osioihin.",
+  "productGroups": {
+    "Steam Accessories": "Höyrytarvikkeet",
+    "Steam Controls": "Höyryn ohjauskeskukset",
+    "Infrared": "Infrapuna",
+    "Sauna Controls": "Saunan ohjauskeskukset",
+    "Sauna Accessories": "Saunatarvikkeet",
+    "Sauna Heaters": "Saunankiukaat",
+    "Other Products": "Muut tuotteet"
+  },
+  "groups": {
+    "productOther": "Muut tuotteet",
+    "mainPages": {
+      "heading": "Pääsivut",
+      "home": "Etusivu",
+      "about": "Tietoa meistä",
+      "contact": "Ota yhteyttä",
+      "careers": "Ura",
+      "privacy": "Tietosuojaseloste"
+    },
+    "about": {
+      "heading": "Tietoa meistä",
+      "news": "Ajankohtaista",
+      "sustainability": "Kestävä kehitys"
+    },
+    "sauna": {
+      "heading": "Suomalainen sauna",
+      "products": "Saunatuotteet",
+      "heaters": "Saunankiukaat",
+      "wallMounted": "Seinäkiukaat",
+      "tower": "Tornikiukaat",
+      "stone": "Kivikiukaat",
+      "floor": "Lattiakiukaat",
+      "combi": "Combi-kiukaat",
+      "dragonfire": "Dragonfire-kiukaat",
+      "controls": "Saunan ohjauskeskukset",
+      "accessories": "Saunatarvikkeet",
+      "accessorySets": "Tarvikesarjat",
+      "pailsLadles": "Kiulut ja kauhat",
+      "thermometers": "Lämpömittarit ja yhdistelmämittarit",
+      "clocksSandtimers": "Kellot ja tiimalasit",
+      "lightsCovers": "Saunavalot ja valaisinsuojat",
+      "headrestsBackrests": "Niskatuet ja selkänojat",
+      "doorsHandles": "Ovet ja kahvat",
+      "benches": "Lauteet ja lattialaatat",
+      "kivistone": "Kivistone",
+      "ventilations": "Ilmanvaihto ja lisävarusteet",
+      "rooms": "Saunat",
+      "interiorDesigns": "Sisustussuunnitelmat",
+      "woodPanels": "Puupaneelit ja lauteiden puut"
+    },
+    "steam": {
+      "heading": "Höyryhuoneet",
+      "products": "Höyryhuoneen tuotteet",
+      "generators": "Höyrynkehittimet",
+      "controls": "Höyryn ohjauskeskukset",
+      "accessories": "Höyrytarvikkeet"
+    },
+    "infrared": {
+      "heading": "Infrapunasauna",
+      "parent": "Infrapuna",
+      "saunas": "Infrapunasaunat",
+      "panels": "Infrapunapaneelit",
+      "controls": "Infrapunaohjaimet"
+    },
+    "support": {
+      "heading": "Tuki ja resurssit",
+      "parent": "Tukikeskus",
+      "faq": "Usein kysytyt kysymykset",
+      "calculator": "Saunalaskuri",
+      "manuals": "Käyttöohjeet",
+      "catalogue": "Tuoteluettelo"
+    },
+    "catalog": {
+      "heading": "Tuotteet ja luettelo",
+      "allProducts": "Kaikki tuotteet",
+      "accessoriesCatalog": "Tarvikeluettelo",
+      "heatersCatalog": "Kiuasluettelo"
+    }
+  },
+  "everyProduct": "Kaikki tuotteet",
+  "loadingProducts": "Ladataan tuotteita…",
+  "noProducts": "Tuotteita ei ole juuri nyt saatavilla.",
+  "saunaRooms": "Saunat",
+  "loadingRooms": "Ladataan saunoja…",
+  "noRooms": "Saunoja ei ole juuri nyt saatavilla.",
+  "help": {
+    "title": "Tarvitsetko apua?",
+    "prefix": "Etkö löydä etsimääsi? Käy",
+    "contactLink": "yhteydenottosivullamme",
+    "or": "tai",
+    "faqLink": "usein kysytyt kysymykset -osiossa"
+  }
+}
