@@ -11,9 +11,12 @@ import img4 from "../../assets/Careers/img4.webp";
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const Careers = () => {
   const heroLoaded = useHeroLoaded(heroBg);
+  const t = useLocaleT("careers");
+  const localize = useLocalizedPath();
 
   useEffect(() => {
     // Component mounted
@@ -22,9 +25,10 @@ const Careers = () => {
   return (
     <div className="relative">
       <SEO
-        title="Careers"
-        description="Join the SAWO team and explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters."
-        path="/careers"
+        title={t("meta.title")}
+        description={t("meta.description")}
+        path={localize("/careers")}
+        hreflangAlternates={{ en: "/careers", zh: "/zh/careers" }}
       />
       {/* HERO */}
       <section
@@ -64,7 +68,7 @@ const Careers = () => {
             maxWidth: "600px",
           }}
         >
-          Join the SAWO Team
+          {t("hero.title")}
         </h1>
 
         <p
@@ -77,7 +81,7 @@ const Careers = () => {
             maxWidth: "600px",
           }}
         >
-          Build Your Future with a Global Leader in Sauna Manufacturing
+          {t("hero.subtitle")}
         </p>
 
         {/* Mobile font adjustments */}
@@ -102,7 +106,7 @@ const Careers = () => {
             <div className="join-image-wrapper">
               <img
                 src={joinImg}
-                alt="Join SAWO Team"
+                alt={t("join.imgAlt")}
                 className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>
@@ -119,8 +123,7 @@ const Careers = () => {
                   lineHeight: "1.4",
                 }}
               >
-                We are looking for individuals with prior experience in the
-                sauna industry.
+                {t("join.highlight")}
               </p>
               <p
                 className="join-description mb-4"
@@ -131,11 +134,7 @@ const Careers = () => {
                   lineHeight: "1.8",
                 }}
               >
-                SAWO is a trusted name in sauna manufacturing, blending Finnish
-                expertise with skilled craftsmanship based in Cebu, the
-                Philippines. Our team takes pride in producing high-quality
-                sauna heaters, accessories, and complete sauna solutions for the
-                global market.
+                {t("join.desc")}
               </p>
               <p
                 className="join-cta"
@@ -146,8 +145,7 @@ const Careers = () => {
                   lineHeight: "1.8",
                 }}
               >
-                Do you want to work in the tropics? Join us and be part of an
-                industry leader in sauna innovation!
+                {t("join.cta")}
               </p>
             </div>
           </div>
@@ -177,7 +175,7 @@ const Careers = () => {
                   color: "#ffffff",
                 }}
               >
-                Open Positions
+                {t("openPositions.heading")}
               </h2>
               <p
                 className="mb-8"
@@ -188,7 +186,7 @@ const Careers = () => {
                   lineHeight: "1.6",
                 }}
               >
-                Explore exciting job openings in various departments:
+                {t("openPositions.intro")}
               </p>
 
               <div className="positions-list space-y-4">
@@ -197,11 +195,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Electrical Engineer</h3>
+                    <h3>{t("openPositions.positions.electricalEngineer.title")}</h3>
                     <p>
-                      Elektroniikkasuunnittelija – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.electricalEngineer.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -211,11 +209,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Production Supervisor, Woodworking</h3>
+                    <h3>{t("openPositions.positions.productionSupervisor.title")}</h3>
                     <p>
-                      Puutekniikan Osaaja – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.productionSupervisor.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -225,11 +223,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Marketing Specialist</h3>
+                    <h3>{t("openPositions.positions.marketingSpecialist.title")}</h3>
                     <p>
-                      Markkinoinnin Osaaja – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.marketingSpecialist.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -239,11 +237,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Buyer / Logistics Specialist</h3>
+                    <h3>{t("openPositions.positions.buyerLogistics.title")}</h3>
                     <p>
-                      Ostaja / Logistiikka-osaaja – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.buyerLogistics.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -253,11 +251,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Process Engineer</h3>
+                    <h3>{t("openPositions.positions.processEngineer.title")}</h3>
                     <p>
-                      Prosessi-insinööri – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.processEngineer.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -267,11 +265,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>International Sales Manager</h3>
+                    <h3>{t("openPositions.positions.salesManager.title")}</h3>
                     <p>
-                      Kansainvälinen Myyntipäällikkö – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.salesManager.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -281,11 +279,11 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Odoo Software Developer</h3>
+                    <h3>{t("openPositions.positions.odooDeveloper.title")}</h3>
                     <p>
-                      Odoo Ohjelmistokehittäjä – Cebu |{" "}
-                      <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span>
+                      {t("openPositions.positions.odooDeveloper.subtitle")} – {t("openPositions.locationCebu")} |{" "}
+                      <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span>
                     </p>
                   </div>
                 </div>
@@ -295,8 +293,8 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>International Sales Manager (German Speaker)</h3>
-                    <p>Kansainvälinen Myyntipäällikkö – Europe (Hybrid)</p>
+                    <h3>{t("openPositions.positions.salesManagerGerman.title")}</h3>
+                    <p>{t("openPositions.positions.salesManagerGerman.subtitle")} – {t("openPositions.locationEurope")}</p>
                   </div>
                 </div>
 
@@ -305,11 +303,10 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Head of Production</h3>
+                    <h3>{t("openPositions.positions.headOfProduction.title")}</h3>
                     <p>
-                      Cebu | <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span> | 3–6 Years
-                      Experience
+                      {t("openPositions.locationCebu")} | <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span> | {t("openPositions.positions.headOfProduction.years")}
                     </p>
                   </div>
                 </div>
@@ -319,11 +316,10 @@ const Careers = () => {
                     <i className="fas fa-user-circle"></i>
                   </div>
                   <div className="position-info">
-                    <h3>Production Manager</h3>
+                    <h3>{t("openPositions.positions.productionManager.title")}</h3>
                     <p>
-                      Cebu | <span className="badge-fulltime">Full-Time</span> |{" "}
-                      <span className="badge-onsite">On-Site</span> | 2–4 Years
-                      Experience
+                      {t("openPositions.locationCebu")} | <span className="badge-fulltime">{t("badges.fullTime")}</span> |{" "}
+                      <span className="badge-onsite">{t("badges.onSite")}</span> | {t("openPositions.positions.productionManager.years")}
                     </p>
                   </div>
                 </div>
@@ -342,7 +338,7 @@ const Careers = () => {
                     color: "#af8564",
                   }}
                 >
-                  We Are <span style={{ color: "#af8564" }}>Hiring!</span>
+                  {t("hiring.titlePrefix")} <span style={{ color: "#af8564" }}>{t("hiring.titleHighlight")}</span>
                 </h2>
                 <p
                   className="mb-6"
@@ -353,15 +349,14 @@ const Careers = () => {
                     lineHeight: "1.6",
                   }}
                 >
-                  Be part of an industry leader that blends Finnish expertise
-                  with world-class craftsmanship.
+                  {t("hiring.desc")}
                 </p>
 
                 <div className="hiring-details mb-6">
                   <div className="hiring-detail-item">
                     <i className="fas fa-envelope"></i>
                     <span>
-                      Send your resume to:{" "}
+                      {t("hiring.emailPrefix")}{" "}
                       <strong style={{ color: "#D32F2F" }}>
                         rekry@sawo.com
                       </strong>
@@ -370,9 +365,9 @@ const Careers = () => {
                   <div className="hiring-detail-item">
                     <i className="fas fa-map-marker-alt"></i>
                     <span>
-                      Location: SAWO Inc.
+                      {t("hiring.locationLabel")}
                       <br />
-                      MEZ2 Estate, Basak, Lapu-Lapu City 6015, Cebu, Philippines
+                      {t("hiring.locationAddress")}
                     </span>
                   </div>
                 </div>
@@ -386,45 +381,44 @@ const Careers = () => {
                     fontWeight: 600,
                   }}
                 >
-                  Let's build something great together!
+                  {t("hiring.closing")}
                 </p>
 
                 {/* Category Images Grid */}
                 <div className="hiring-categories grid grid-cols-2 gap-4">
                   <div className="category-card">
-                    <img src={img1} alt="Manufacturing & Production" />
+                    <img src={img1} alt={t("categories.manufacturing.alt")} />
                     <div className="category-overlay">
-                      <h3>Manufacturing & Production</h3>
+                      <h3>{t("categories.manufacturing.title")}</h3>
                       <p className="category-description">
-                        Woodworking, Metal Fabrication, Quality Control
+                        {t("categories.manufacturing.desc")}
                       </p>
                     </div>
                   </div>
                   <div className="category-card">
-                    <img src={img2} alt="Engineering & Design" />
+                    <img src={img2} alt={t("categories.engineering.alt")} />
                     <div className="category-overlay">
-                      <h3>Engineering & Design</h3>
+                      <h3>{t("categories.engineering.title")}</h3>
                       <p className="category-description">
-                        Product Development, R&D, Sauna Technology
+                        {t("categories.engineering.desc")}
                       </p>
                     </div>
                   </div>
                   <div className="category-card">
-                    <img src={img3} alt="Sales & Marketing" />
+                    <img src={img3} alt={t("categories.sales.alt")} />
                     <div className="category-overlay">
-                      <h3>Sales & Marketing</h3>
+                      <h3>{t("categories.sales.title")}</h3>
                       <p className="category-description">
-                        Local & International Sales, Digital Marketing,
-                        Customer Relations
+                        {t("categories.sales.desc")}
                       </p>
                     </div>
                   </div>
                   <div className="category-card">
-                    <img src={img4} alt="Operations & Support" />
+                    <img src={img4} alt={t("categories.operations.alt")} />
                     <div className="category-overlay">
-                      <h3>Operations & Support</h3>
+                      <h3>{t("categories.operations.title")}</h3>
                       <p className="category-description">
-                        Logistics, Finance, HR, DA, IT, Admin
+                        {t("categories.operations.desc")}
                       </p>
                     </div>
                   </div>
@@ -586,7 +580,7 @@ const Careers = () => {
           <div className="why-image-wrapper mb-12 rounded-lg overflow-hidden shadow-lg">
             <img
               src={heaterImg}
-              alt="SAWO Manufacturing"
+              alt={t("whySawo.imgAlt")}
               className="w-full h-auto object-cover"
             />
           </div>
@@ -601,7 +595,7 @@ const Careers = () => {
               color: "#af8564",
             }}
           >
-            Why Work for <span style={{ color: "#af8564" }}>SAWO</span>?
+            {t("whySawo.titlePrefix")} <span style={{ color: "#af8564" }}>{t("whySawo.titleHighlight")}</span>?
           </h2>
 
           {/* Benefits Cards */}
@@ -611,10 +605,10 @@ const Careers = () => {
                 <i className="fas fa-lightbulb"></i>
               </div>
               <div className="why-content">
-                <h3>Innovative & Customer-Centric</h3>
+                <h3>{t("whySawo.innovative.title")}</h3>
                 <p>
-                  Be part of a company that values{" "}
-                  <strong>quality, innovation, and customer satisfaction.</strong>
+                  {t("whySawo.innovative.prefix")}{" "}
+                  <strong>{t("whySawo.innovative.highlight")}</strong>
                 </p>
               </div>
             </div>
@@ -624,11 +618,11 @@ const Careers = () => {
                 <i className="fas fa-globe"></i>
               </div>
               <div className="why-content">
-                <h3>International Exposure</h3>
+                <h3>{t("whySawo.international.title")}</h3>
                 <p>
-                  Work with a diverse team of{" "}
-                  <strong>Finnish and Filipino professionals</strong>{" "}
-                  collaborating across global markets.
+                  {t("whySawo.international.prefix")}{" "}
+                  <strong>{t("whySawo.international.highlight")}</strong>{" "}
+                  {t("whySawo.international.suffix")}
                 </p>
               </div>
             </div>
@@ -638,11 +632,11 @@ const Careers = () => {
                 <i className="fas fa-chart-line"></i>
               </div>
               <div className="why-content">
-                <h3>Career Growth & Development</h3>
+                <h3>{t("whySawo.growth.title")}</h3>
                 <p>
-                  We invest in our employees through{" "}
+                  {t("whySawo.growth.prefix")}{" "}
                   <strong>
-                    training, skill development, and career advancement
+                    {t("whySawo.growth.highlight")}
                   </strong>
                   .
                 </p>
@@ -654,11 +648,10 @@ const Careers = () => {
                 <i className="fas fa-award"></i>
               </div>
               <div className="why-content">
-                <h3>Commitment To Excellence</h3>
+                <h3>{t("whySawo.excellence.title")}</h3>
                 <p>
-                  SAWO is{" "}
-                  <strong>ISO 9001 & ISO 14001 certified</strong>, ensuring a
-                  workplace focused on quality and sustainability.
+                  {t("whySawo.excellence.prefix")}{" "}
+                  <strong>{t("whySawo.excellence.highlight")}</strong>{t("whySawo.excellence.suffix")}
                 </p>
               </div>
             </div>

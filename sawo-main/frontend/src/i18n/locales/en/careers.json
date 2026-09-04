@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "title": "Careers",
+    "description": "Join the SAWO team and explore current job openings in engineering, manufacturing, and sales at a global leader in Finnish sauna heaters."
+  },
+  "hero": {
+    "title": "Join the SAWO Team",
+    "subtitle": "Build Your Future with a Global Leader in Sauna Manufacturing"
+  },
+  "join": {
+    "imgAlt": "Join SAWO Team",
+    "highlight": "We are looking for individuals with prior experience in the sauna industry.",
+    "desc": "SAWO is a trusted name in sauna manufacturing, blending Finnish expertise with skilled craftsmanship based in Cebu, the Philippines. Our team takes pride in producing high-quality sauna heaters, accessories, and complete sauna solutions for the global market.",
+    "cta": "Do you want to work in the tropics? Join us and be part of an industry leader in sauna innovation!"
+  },
+  "badges": { "fullTime": "Full-Time", "onSite": "On-Site" },
+  "openPositions": {
+    "heading": "Open Positions",
+    "intro": "Explore exciting job openings in various departments:",
+    "locationCebu": "Cebu",
+    "locationEurope": "Europe (Hybrid)",
+    "positions": {
+      "electricalEngineer": { "title": "Electrical Engineer", "subtitle": "Elektroniikkasuunnittelija" },
+      "productionSupervisor": { "title": "Production Supervisor, Woodworking", "subtitle": "Puutekniikan Osaaja" },
+      "marketingSpecialist": { "title": "Marketing Specialist", "subtitle": "Markkinoinnin Osaaja" },
+      "buyerLogistics": { "title": "Buyer / Logistics Specialist", "subtitle": "Ostaja / Logistiikka-osaaja" },
+      "processEngineer": { "title": "Process Engineer", "subtitle": "Prosessi-insinööri" },
+      "salesManager": { "title": "International Sales Manager", "subtitle": "Kansainvälinen Myyntipäällikkö" },
+      "odooDeveloper": { "title": "Odoo Software Developer", "subtitle": "Odoo Ohjelmistokehittäjä" },
+      "salesManagerGerman": { "title": "International Sales Manager (German Speaker)", "subtitle": "Kansainvälinen Myyntipäällikkö" },
+      "headOfProduction": { "title": "Head of Production", "years": "3–6 Years Experience" },
+      "productionManager": { "title": "Production Manager", "years": "2–4 Years Experience" }
+    }
+  },
+  "hiring": {
+    "titlePrefix": "We Are",
+    "titleHighlight": "Hiring!",
+    "desc": "Be part of an industry leader that blends Finnish expertise with world-class craftsmanship.",
+    "emailPrefix": "Send your resume to:",
+    "locationLabel": "Location: SAWO Inc.",
+    "locationAddress": "MEZ2 Estate, Basak, Lapu-Lapu City 6015, Cebu, Philippines",
+    "closing": "Let's build something great together!"
+  },
+  "categories": {
+    "manufacturing": { "alt": "Manufacturing & Production", "title": "Manufacturing & Production", "desc": "Woodworking, Metal Fabrication, Quality Control" },
+    "engineering": { "alt": "Engineering & Design", "title": "Engineering & Design", "desc": "Product Development, R&D, Sauna Technology" },
+    "sales": { "alt": "Sales & Marketing", "title": "Sales & Marketing", "desc": "Local & International Sales, Digital Marketing, Customer Relations" },
+    "operations": { "alt": "Operations & Support", "title": "Operations & Support", "desc": "Logistics, Finance, HR, DA, IT, Admin" }
+  },
+  "whySawo": {
+    "imgAlt": "SAWO Manufacturing",
+    "titlePrefix": "Why Work for",
+    "titleHighlight": "SAWO",
+    "innovative": { "title": "Innovative & Customer-Centric", "prefix": "Be part of a company that values", "highlight": "quality, innovation, and customer satisfaction." },
+    "international": { "title": "International Exposure", "prefix": "Work with a diverse team of", "highlight": "Finnish and Filipino professionals", "suffix": "collaborating across global markets." },
+    "growth": { "title": "Career Growth & Development", "prefix": "We invest in our employees through", "highlight": "training, skill development, and career advancement" },
+    "excellence": { "title": "Commitment To Excellence", "prefix": "SAWO is", "highlight": "ISO 9001 & ISO 14001 certified", "suffix": ", ensuring a workplace focused on quality and sustainability." }
+  }
+}
