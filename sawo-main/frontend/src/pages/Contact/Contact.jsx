@@ -14,12 +14,16 @@ import officeSawoNordic from "../../assets/Contact/offices/sawo-nordic.webp";
 import officeFem from "../../assets/Contact/offices/fem-cable-tower.webp";
 import officeEuropeHub from "../../assets/Contact/offices/sawo-europe-hub.webp";
 import { SEND_EMAIL_URL, ODOO_TICKET_URL } from "../../config/contactFormApi";
+import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── Office data ──────────────────────────────────────────────────────────────
+// `name`/address/tel/email are real-world data (company names, addresses,
+// phone numbers) and stay as-is in every locale — only `roleKey` (looked up
+// via t(`offices.list.${roleKey}.role`)) is translated.
 const OFFICES = [
   {
+    roleKey: "sawoInc",
     name: "SAWO Inc.",
-    role: "Global Sales & General Inquiries",
     image: officeSawoInc,
     address: ["Mactan Economic Zone 2, Mactan,", "Cebu 6015, Philippines"],
     mapUrl: "https://www.google.com/maps/place/SAWO+Inc./@10.2908545,123.9474748,20678m/data=!3m1!1e3!4m6!3m5!1s0x33a999f9aaaaaaab:0x638e93b7abe9d209!8m2!3d10.3065109!4d123.9662661!16s%2Fg%2F11xbg6w1q",
@@ -28,8 +32,8 @@ const OFFICES = [
     email: "info@sawo.com",
   },
   {
+    roleKey: "sawoNordic",
     name: "SAWO Nordic Oy",
-    role: "Sales & Warehouse for the Nordics",
     image: officeSawoNordic,
     address: ["Hampuntie 18, 36220 Kangasala,", "Finland"],
     mapUrl: "https://www.google.com/maps/place/Sawo+Nordic+Oy/@61.4682459,23.8889861,40152m/data=!3m1!1e3!4m6!3m5!1s0x468f1ff184c90c83:0xe1681d5d0909096b!8m2!3d61.4996934!4d23.7501876!16s%2Fg%2F1q675ymsx",
@@ -38,8 +42,8 @@ const OFFICES = [
     email: "finland@sawo.com",
   },
   {
+    roleKey: "fem",
     name: "F.E.M. Ltd",
-    role: "Sales & Warehouse for Asia",
     image: officeFem,
     address: ["2302, 23rd Floor, Cable TV Tower 9", "Hoi Shing Road, Tsuen Wan, Hong Kong"],
     mapUrl: "https://www.google.com/maps/place/Cable+T+V+Tower,+9+Hoi+Shing+Rd,+Chai+Wan+Kok,+Hong+Kong/@22.3720256,114.1051012,1215m/data=!3m1!1e3!4m6!3m5!1s0x3403f8e56f3381c9:0xbdbb69dc3fa013e4!8m2!3d22.3727747!4d114.1073972!16s%2Fg%2F12j799c55",
@@ -48,8 +52,8 @@ const OFFICES = [
     email: "hongkong@sawo.com",
   },
   {
+    roleKey: "europeHub",
     name: "SAWO Sauna Europe Hub B.V.",
-    role: "Sales & Warehouse for Europe",
     image: officeEuropeHub,
     address: ["De Vest 24, 5555 XL Valkenswaard", "Netherlands"],
     mapUrl: "https://www.google.com/maps/place/SAWO+Sauna+Europe+B.V./@51.347626,5.4851098,820m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47c6d7006fe0a9bb:0x95ddf180c98d0533!8m2!3d51.347626!4d5.4876847!16s%2Fg%2F11nbg5c2pp",
@@ -84,34 +88,42 @@ const COUNTRIES = [
   "Viet Nam","Yemen","Zambia","Zimbabwe",
 ];
 
+// `value` is the literal string sent to the backend (email/Odoo ticket
+// payload) and must stay in English regardless of locale — only
+// `labelKey` (looked up in the matching t() namespace) is translated.
 const CATEGORIES = [
-  { value: "technical", label: "Technical Support", icon: "fa-solid fa-wrench" },
-  { value: "customer",  label: "Customer Support",  icon: "fa-solid fa-headphones" },
-  { value: "general",   label: "General Inquiry",   icon: "fa-regular fa-comment" },
+  { value: "technical", labelKey: "technical", icon: "fa-solid fa-wrench" },
+  { value: "customer",  labelKey: "customer",  icon: "fa-solid fa-headphones" },
+  { value: "general",   labelKey: "general",   icon: "fa-regular fa-comment" },
 ];
 
 // Technical "Request Repair" and "Request Spare Parts" intentionally share the same
 // underlying subject value — mirrors the original WordPress form's field logic.
 const TECHNICAL_SUBJECTS = [
-  { label: "Request Repair", value: "Repair Inquiry" },
-  { label: "Request Spare Parts", value: "Repair Inquiry" },
-  { label: "Request Replacement", value: "Replacement Request" },
+  { labelKey: "requestRepair", value: "Repair Inquiry" },
+  { labelKey: "requestSpareParts", value: "Repair Inquiry" },
+  { labelKey: "requestReplacement", value: "Replacement Request" },
 ];
 const CUSTOMER_SUBJECTS = [
-  { label: "Customer Support", value: "Customer Support" },
-  { label: "Feedback", value: "Feedback" },
-  { label: "Order Status", value: "Order Status" },
-  { label: "Warranty Claims", value: "Purchase Inquiry" },
-  { label: "Other", value: "Other" },
+  { labelKey: "customerSupport", value: "Customer Support" },
+  { labelKey: "feedback", value: "Feedback" },
+  { labelKey: "orderStatus", value: "Order Status" },
+  { labelKey: "warrantyClaims", value: "Purchase Inquiry" },
+  { labelKey: "other", value: "Other" },
 ];
-const PRODUCT_CATEGORIES = ["Heater", "Steam Generator", "Accessory", "Kivistone Item"];
+const PRODUCT_CATEGORIES = [
+  { value: "Heater", labelKey: "heater" },
+  { value: "Steam Generator", labelKey: "steamGenerator" },
+  { value: "Accessory", labelKey: "accessory" },
+  { value: "Kivistone Item", labelKey: "kivistoneItem" },
+];
 const ISSUE_OPTIONS = [
-  "An Error is Displayed",
-  "Display is Blank or Only Dashline",
-  "Does Not Turn On",
-  "Flashing LED Light",
-  "Heater Does Not Heat Up",
-  "Other",
+  { value: "An Error is Displayed", labelKey: "errorDisplayed" },
+  { value: "Display is Blank or Only Dashline", labelKey: "blankDisplay" },
+  { value: "Does Not Turn On", labelKey: "notTurnOn" },
+  { value: "Flashing LED Light", labelKey: "flashingLed" },
+  { value: "Heater Does Not Heat Up", labelKey: "notHeat" },
+  { value: "Other", labelKey: "other" },
 ];
 
 // Standalone react_helpdeskapi backend (React's own — see src/config/contactFormApi.js).
@@ -128,6 +140,10 @@ const EMPTY_FORM = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const Contact = () => {
+  const locale = useLocale();
+  const t = useLocaleT("contact");
+  const localize = useLocalizedPath();
+  const countries = t("countries", { returnObjects: true });
   const [searchParams] = useSearchParams();
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState("");
@@ -181,10 +197,10 @@ const Contact = () => {
     const showTimer = setTimeout(() => {
       setToast({
         show: true,
-        title: "Your sauna selections have been saved to your message!",
+        title: t("toast.addonSaved"),
         details: details.join(" · "),
       });
-      setTimeout(() => setToast(t => ({ ...t, show: false })), 5000);
+      setTimeout(() => setToast(prev => ({ ...prev, show: false })), 5000);
     }, 600);
     return () => clearTimeout(showTimer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -210,11 +226,11 @@ const Contact = () => {
 
   const validateStep2 = () => {
     const e = {};
-    if (!form.fname.trim()) e.fname = "This field is required";
-    if (!form.lname.trim()) e.lname = "This field is required";
-    if (!form.email.trim()) e.email = "This field is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = "Please enter a valid email address";
-    if (!form.country) e.country = "Please select a country";
+    if (!form.fname.trim()) e.fname = t("validation.required");
+    if (!form.lname.trim()) e.lname = t("validation.required");
+    if (!form.email.trim()) e.email = t("validation.required");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = t("validation.invalidEmail");
+    if (!form.country) e.country = t("validation.selectCountry");
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -225,49 +241,49 @@ const Contact = () => {
     const e = {};
 
     if (category === "general") {
-      if (!form.subject.trim()) e.subject = "This field is required";
-      if (!form.message.trim()) e.message = "This field is required";
+      if (!form.subject.trim()) e.subject = t("validation.required");
+      if (!form.message.trim()) e.message = t("validation.required");
       setErrors(e);
       return Object.keys(e).length === 0;
     }
 
-    if (!form.subject) e.subject = "Please select an option";
+    if (!form.subject) e.subject = t("validation.selectOption");
 
     if (category === "technical" && form.subject) {
-      if (!form.productCategory) e.productCategory = "Please select an option";
-      if (!form.productName.trim()) e.productName = "This field is required";
-      if (!form.productCode.trim()) e.productCode = "This field is required";
+      if (!form.productCategory) e.productCategory = t("validation.selectOption");
+      if (!form.productName.trim()) e.productName = t("validation.required");
+      if (!form.productCode.trim()) e.productCode = t("validation.required");
       if (form.subject === "Replacement Request") {
-        if (!/^\d{6}$/.test(form.serialNumber.trim())) e.serialNumber = "Serial number must be exactly 6 digits";
-        if (!form.purchaseInvoice.trim()) e.purchaseInvoice = "This field is required";
-        if (!form.issue) e.issue = "Please select an option";
+        if (!/^\d{6}$/.test(form.serialNumber.trim())) e.serialNumber = t("validation.serialDigits");
+        if (!form.purchaseInvoice.trim()) e.purchaseInvoice = t("validation.required");
+        if (!form.issue) e.issue = t("validation.selectOption");
       }
     }
 
     if (category === "customer") {
       if (form.subject === "Order Status") {
-        if (!form.orderNumber.trim()) e.orderNumber = "This field is required";
+        if (!form.orderNumber.trim()) e.orderNumber = t("validation.required");
       } else if (form.subject === "Purchase Inquiry") {
-        if (!form.productCategory) e.productCategory = "Please select an option";
+        if (!form.productCategory) e.productCategory = t("validation.selectOption");
         if (form.productCategory) {
-          if (!form.productName.trim()) e.productName = "This field is required";
-          if (!/^\d{6}$/.test(form.serialNumber.trim())) e.serialNumber = "Serial number must be exactly 6 digits";
-          if (!form.productCode.trim()) e.productCode = "This field is required";
-          if (!form.purchaseInvoice.trim()) e.purchaseInvoice = "This field is required";
-          if (!form.issue) e.issue = "Please select an option";
+          if (!form.productName.trim()) e.productName = t("validation.required");
+          if (!/^\d{6}$/.test(form.serialNumber.trim())) e.serialNumber = t("validation.serialDigits");
+          if (!form.productCode.trim()) e.productCode = t("validation.required");
+          if (!form.purchaseInvoice.trim()) e.purchaseInvoice = t("validation.required");
+          if (!form.issue) e.issue = t("validation.selectOption");
         }
       } else if (form.subject && form.productCategory) {
-        if (!form.productName.trim()) e.productName = "This field is required";
-        if (!form.productCode.trim()) e.productCode = "This field is required";
+        if (!form.productName.trim()) e.productName = t("validation.required");
+        if (!form.productCode.trim()) e.productCode = t("validation.required");
         if (form.subject === "Customer Support") {
-          if (!/^\d{6}$/.test(form.serialNumber.trim())) e.serialNumber = "Serial number must be exactly 6 digits";
-          if (!form.purchaseInvoice.trim()) e.purchaseInvoice = "This field is required";
-          if (!form.issue) e.issue = "Please select an option";
+          if (!/^\d{6}$/.test(form.serialNumber.trim())) e.serialNumber = t("validation.serialDigits");
+          if (!form.purchaseInvoice.trim()) e.purchaseInvoice = t("validation.required");
+          if (!form.issue) e.issue = t("validation.selectOption");
         }
       }
     }
 
-    if (category !== "general" && !form.message.trim()) e.message = "This field is required";
+    if (category !== "general" && !form.message.trim()) e.message = t("validation.required");
 
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -299,8 +315,8 @@ const Contact = () => {
     if (botResult) {
       setSubmitError(
         botResult === "too_fast"
-          ? "Please take your time to review your submission"
-          : "Please complete all required fields properly"
+          ? t("validation.tooFast")
+          : t("validation.incomplete")
       );
       return;
     }
@@ -392,10 +408,10 @@ const Contact = () => {
 
     if (emailSuccess) {
       setSubmitted(true);
-      setToast({ show: true, title: "Your request has been submitted successfully!", details: "" });
-      setTimeout(() => setToast(t => ({ ...t, show: false })), 5000);
+      setToast({ show: true, title: t("toast.submitted"), details: "" });
+      setTimeout(() => setToast(prev => ({ ...prev, show: false })), 5000);
     } else {
-      setSubmitError("There was an error submitting your request. Please try again.");
+      setSubmitError(t("validation.submitError"));
     }
     setSubmitting(false);
   };
@@ -422,7 +438,8 @@ const Contact = () => {
     <div className="relative">
       <SEO
         title="Contact Us"
-        description="Get in touch with SAWO: technical support, sales inquiries, and distributor contacts for our global network of representative offices."
+        rawTitle={locale === "en" ? undefined : t("meta.title")}
+        description={t("meta.description")}
         path="/contact"
       />
       <div id="sawoContactToast" className={toast.show ? "show" : ""} role="status" aria-live="polite">
@@ -1133,30 +1150,22 @@ const Contact = () => {
 
       {/* ══ MULTI-STEP FORM ══ */}
       <section className="ct-form-section">
-        <h2 className="ct-form-section-title">Any Questions?</h2>
-        <p className="ct-form-section-desc">
-          Contact us today! With over 30 years of experience in the sauna industry, we are more than
-          happy to assist you with any questions. Whether related to our products, finding your
-          nearest SAWO distributor, or planning your custom sauna project, we have the answers you
-          need. Please fill out the form below, and our team will get back to you shortly.
-        </p>
+        <h2 className="ct-form-section-title">{t("hero.title")}</h2>
+        <p className="ct-form-section-desc">{t("hero.desc")}</p>
 
         <div className="ct-form-wrapper">
           <div className="ct-form-card">
             {submitted ? (
               <div className="ct-success">
                 <div className="ct-success-icon"><i className="fa-solid fa-check" /></div>
-                <h3 className="ct-success-title">Request Submitted</h3>
-                <p className="ct-success-msg">
-                  Thank you for contacting us. We've received your request and our team will get
-                  back to you shortly.
-                </p>
+                <h3 className="ct-success-title">{t("success.title")}</h3>
+                <p className="ct-success-msg">{t("success.message")}</p>
                 <div className="ct-success-actions">
                   <button className="ct-success-btn ct-success-btn--primary" onClick={resetForm}>
-                    Submit Another Request
+                    {t("success.another")}
                   </button>
-                  <Link to={menuPaths.home} className="ct-success-btn ct-success-btn--secondary">
-                    Back to Home
+                  <Link to={localize(menuPaths.home)} className="ct-success-btn ct-success-btn--secondary">
+                    {t("success.backHome")}
                   </Link>
                 </div>
               </div>
@@ -1165,13 +1174,13 @@ const Contact = () => {
                 {submitting && (
                   <div className="ct-submit-overlay" role="status" aria-live="polite">
                     <div className="ct-submit-spinner" />
-                    <p className="ct-submit-overlay-title">Sending your request…</p>
-                    <p className="ct-submit-overlay-sub">This can take a few seconds. Please don't close or refresh this page.</p>
+                    <p className="ct-submit-overlay-title">{t("submittingOverlay.title")}</p>
+                    <p className="ct-submit-overlay-sub">{t("submittingOverlay.sub")}</p>
                   </div>
                 )}
                 {/* Progress */}
                 <div className="ct-progress">
-                  {[{ n: 1, label: "Your Request" }, { n: 2, label: "About You" }, { n: 3, label: "Request Details" }].map((s, i) => (
+                  {[{ n: 1, label: t("steps.1") }, { n: 2, label: t("steps.2") }, { n: 3, label: t("steps.3") }].map((s, i) => (
                     <React.Fragment key={s.n}>
                       {i > 0 && <div className={`ct-progress-line${step > i ? " filled" : ""}`} />}
                       <div className={`ct-progress-step ${stepState(s.n)}`}>
@@ -1206,7 +1215,7 @@ const Contact = () => {
                             onClick={() => pickCategory(c.value)}
                           >
                             <i className={c.icon} />
-                            <div className="ct-category-title">{c.label}</div>
+                            <div className="ct-category-title">{t(`categories.${c.labelKey}`)}</div>
                           </div>
                         ))}
                       </div>
@@ -1216,44 +1225,42 @@ const Contact = () => {
                   {/* Step 2 — personal details */}
                   {step === 2 && (
                     <div className="ct-fade">
-                      <div className="ct-section-heading">Personal Details</div>
+                      <div className="ct-section-heading">{t("step2.heading")}</div>
                       <div className="ct-form-row">
                         <div className={`ct-form-group${errors.fname ? " error" : ""}`}>
-                          <label htmlFor="ct-fname">First Name<span className="ct-req">*</span></label>
-                          <input id="ct-fname" type="text" placeholder="John..." value={form.fname} onChange={e => setField("fname", e.target.value)} />
+                          <label htmlFor="ct-fname">{t("step2.firstName")}<span className="ct-req">*</span></label>
+                          <input id="ct-fname" type="text" placeholder={t("step2.firstNamePlaceholder")} value={form.fname} onChange={e => setField("fname", e.target.value)} />
                           {fieldError("fname")}
                         </div>
                         <div className={`ct-form-group${errors.lname ? " error" : ""}`}>
-                          <label htmlFor="ct-lname">Last Name<span className="ct-req">*</span></label>
-                          <input id="ct-lname" type="text" placeholder="Doe..." value={form.lname} onChange={e => setField("lname", e.target.value)} />
+                          <label htmlFor="ct-lname">{t("step2.lastName")}<span className="ct-req">*</span></label>
+                          <input id="ct-lname" type="text" placeholder={t("step2.lastNamePlaceholder")} value={form.lname} onChange={e => setField("lname", e.target.value)} />
                           {fieldError("lname")}
                         </div>
                       </div>
                       <div className="ct-form-row">
                         <div className={`ct-form-group${errors.email ? " error" : ""}`}>
-                          <label htmlFor="ct-email">Email<span className="ct-req">*</span></label>
-                          <input id="ct-email" type="email" placeholder="johndoe@gmail.com" value={form.email} onChange={e => setField("email", e.target.value)} />
+                          <label htmlFor="ct-email">{t("step2.email")}<span className="ct-req">*</span></label>
+                          <input id="ct-email" type="email" placeholder={t("step2.emailPlaceholder")} value={form.email} onChange={e => setField("email", e.target.value)} />
                           {fieldError("email")}
                         </div>
                         <div className={`ct-form-group${errors.country ? " error" : ""}`}>
-                          <label htmlFor="ct-country">Country<span className="ct-req">*</span></label>
+                          <label htmlFor="ct-country">{t("step2.country")}<span className="ct-req">*</span></label>
                           <select id="ct-country" value={form.country} onChange={e => setField("country", e.target.value)}>
-                            <option value="" disabled>Select a country</option>
-                            {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
+                            <option value="" disabled>{t("step2.selectCountry")}</option>
+                            {COUNTRIES.map((c, i) => <option key={c} value={c}>{countries[i] || c}</option>)}
                           </select>
                           {fieldError("country")}
                         </div>
                       </div>
                       <div className="ct-form-group">
-                        <label htmlFor="ct-phone">Phone Number <span className="ct-optional">(Optional)</span></label>
+                        <label htmlFor="ct-phone">{t("step2.phone")} <span className="ct-optional">{t("step2.optional")}</span></label>
                         <input id="ct-phone" type="tel" value={form.phone} onChange={e => setField("phone", e.target.value)} />
-                        <div className="ct-helper-text">
-                          Providing a phone number is optional, but it can help us assist you more quickly.
-                        </div>
+                        <div className="ct-helper-text">{t("step2.phoneHelp")}</div>
                       </div>
                       <div className="ct-btn-group">
-                        <button type="button" className="ct-btn" onClick={() => setStep(1)}>Go Back</button>
-                        <button type="button" className="ct-btn" onClick={goNext}>Next Step</button>
+                        <button type="button" className="ct-btn" onClick={() => setStep(1)}>{t("step2.goBack")}</button>
+                        <button type="button" className="ct-btn" onClick={goNext}>{t("step2.nextStep")}</button>
                       </div>
                     </div>
                   )}
@@ -1261,19 +1268,19 @@ const Contact = () => {
                   {/* Step 3 — request details */}
                   {step === 3 && (
                     <div className="ct-fade">
-                      <div className="ct-section-heading">Request Details</div>
+                      <div className="ct-section-heading">{t("step3.heading")}</div>
 
                       {category === "general" && (
                         <>
                           <div className={`ct-form-group${errors.subject ? " error" : ""}`}>
-                            <label htmlFor="ct-subject">Subject<span className="ct-req">*</span></label>
-                            <input id="ct-subject" type="text" placeholder="Subject here..." value={form.subject} onChange={e => setField("subject", e.target.value)} />
+                            <label htmlFor="ct-subject">{t("step3.subject")}<span className="ct-req">*</span></label>
+                            <input id="ct-subject" type="text" placeholder={t("step3.subjectPlaceholder")} value={form.subject} onChange={e => setField("subject", e.target.value)} />
                             {fieldError("subject")}
                           </div>
                           <div className={`ct-form-group${errors.message ? " error" : ""}`}>
-                            <label htmlFor="ct-message">Message<span className="ct-req">*</span></label>
+                            <label htmlFor="ct-message">{t("step3.message")}<span className="ct-req">*</span></label>
                             <textarea id="ct-message" value={form.message} onChange={e => setField("message", e.target.value)} />
-                            <div className="ct-helper-text">The more information you share, the better we can help you</div>
+                            <div className="ct-helper-text">{t("step3.moreInfoLong")}</div>
                             {fieldError("message")}
                           </div>
                         </>
@@ -1282,10 +1289,10 @@ const Contact = () => {
                       {category === "technical" && (
                         <>
                           <div className={`ct-form-group${errors.subject ? " error" : ""}`}>
-                            <label htmlFor="ct-subject">Subject<span className="ct-req">*</span></label>
+                            <label htmlFor="ct-subject">{t("step3.subject")}<span className="ct-req">*</span></label>
                             <select id="ct-subject" value={form.subject} onChange={e => setField("subject", e.target.value)}>
-                              <option value="" disabled>Select an option</option>
-                              {TECHNICAL_SUBJECTS.map((s, i) => <option key={i} value={s.value}>{s.label}</option>)}
+                              <option value="" disabled>{t("step3.selectOption")}</option>
+                              {TECHNICAL_SUBJECTS.map((s, i) => <option key={i} value={s.value}>{t(`technicalSubjects.${s.labelKey}`)}</option>)}
                             </select>
                             {fieldError("subject")}
                           </div>
@@ -1293,32 +1300,32 @@ const Contact = () => {
                           {form.subject && (
                             <>
                               <div className={`ct-form-group${errors.productCategory ? " error" : ""}`}>
-                                <label htmlFor="ct-product-category">Product Category<span className="ct-req">*</span></label>
+                                <label htmlFor="ct-product-category">{t("step3.productCategory")}<span className="ct-req">*</span></label>
                                 <select id="ct-product-category" value={form.productCategory} onChange={e => setField("productCategory", e.target.value)}>
-                                  <option value="" disabled>Select an option</option>
-                                  {PRODUCT_CATEGORIES.map(p => <option key={p} value={p}>{p}</option>)}
+                                  <option value="" disabled>{t("step3.selectOption")}</option>
+                                  {PRODUCT_CATEGORIES.map(p => <option key={p.value} value={p.value}>{t(`productCategories.${p.labelKey}`)}</option>)}
                                 </select>
                                 {fieldError("productCategory")}
                               </div>
 
                               <div className="ct-form-row">
                                 <div className={`ct-form-group${errors.productName ? " error" : ""}`}>
-                                  <label htmlFor="ct-product-name">Product Name<span className="ct-req">*</span></label>
-                                  <input id="ct-product-name" type="text" placeholder="Nordex..." value={form.productName} onChange={e => setField("productName", e.target.value)} />
-                                  {form.subject === "Replacement Request" && <div className="ct-helper-text">Sticker near the bottom of the heater</div>}
+                                  <label htmlFor="ct-product-name">{t("step3.productName")}<span className="ct-req">*</span></label>
+                                  <input id="ct-product-name" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productName} onChange={e => setField("productName", e.target.value)} />
+                                  {form.subject === "Replacement Request" && <div className="ct-helper-text">{t("step3.stickerHelp")}</div>}
                                   {fieldError("productName")}
                                 </div>
                                 {form.subject === "Replacement Request" ? (
                                   <div className={`ct-form-group${errors.serialNumber ? " error" : ""}`}>
-                                    <label htmlFor="ct-serial">Serial Number<span className="ct-req">*</span></label>
-                                    <input id="ct-serial" type="text" maxLength={6} placeholder="012345" value={form.serialNumber} onChange={e => setField("serialNumber", e.target.value)} />
-                                    <div className="ct-helper-text">Separate sticker with a six-digit code</div>
+                                    <label htmlFor="ct-serial">{t("step3.serialNumber")}<span className="ct-req">*</span></label>
+                                    <input id="ct-serial" type="text" maxLength={6} placeholder={t("step3.serialPlaceholder")} value={form.serialNumber} onChange={e => setField("serialNumber", e.target.value)} />
+                                    <div className="ct-helper-text">{t("step3.serialHelp")}</div>
                                     {fieldError("serialNumber")}
                                   </div>
                                 ) : (
                                   <div className={`ct-form-group${errors.productCode ? " error" : ""}`}>
-                                    <label htmlFor="ct-product-code">Product Code<span className="ct-req">*</span></label>
-                                    <input id="ct-product-code" type="text" placeholder="Nordex..." value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
+                                    <label htmlFor="ct-product-code">{t("step3.productCode")}<span className="ct-req">*</span></label>
+                                    <input id="ct-product-code" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
                                     {fieldError("productCode")}
                                   </div>
                                 )}
@@ -1328,51 +1335,51 @@ const Contact = () => {
                                 <>
                                   <div className="ct-form-row">
                                     <div className={`ct-form-group${errors.productCode ? " error" : ""}`}>
-                                      <label htmlFor="ct-product-code-2">Product Code<span className="ct-req">*</span></label>
-                                      <input id="ct-product-code-2" type="text" placeholder="Nordex..." value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
+                                      <label htmlFor="ct-product-code-2">{t("step3.productCode")}<span className="ct-req">*</span></label>
+                                      <input id="ct-product-code-2" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
                                       {fieldError("productCode")}
                                     </div>
                                     <div className={`ct-form-group${errors.purchaseInvoice ? " error" : ""}`}>
-                                      <label htmlFor="ct-invoice">Purchase Invoice<span className="ct-req">*</span></label>
-                                      <input id="ct-invoice" type="text" placeholder="Nordex..." value={form.purchaseInvoice} onChange={e => setField("purchaseInvoice", e.target.value)} />
+                                      <label htmlFor="ct-invoice">{t("step3.purchaseInvoice")}<span className="ct-req">*</span></label>
+                                      <input id="ct-invoice" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.purchaseInvoice} onChange={e => setField("purchaseInvoice", e.target.value)} />
                                       {fieldError("purchaseInvoice")}
                                     </div>
                                   </div>
 
                                   <div className={`ct-form-group${errors.issue ? " error" : ""}`}>
-                                    <label htmlFor="ct-issue">Issue<span className="ct-req">*</span></label>
+                                    <label htmlFor="ct-issue">{t("step3.issue")}<span className="ct-req">*</span></label>
                                     <select id="ct-issue" value={form.issue} onChange={e => setField("issue", e.target.value)}>
-                                      <option value="" disabled>Select an option</option>
-                                      {ISSUE_OPTIONS.map(i => <option key={i} value={i}>{i}</option>)}
+                                      <option value="" disabled>{t("step3.selectOption")}</option>
+                                      {ISSUE_OPTIONS.map(i => <option key={i.value} value={i.value}>{t(`issues.${i.labelKey}`)}</option>)}
                                     </select>
                                     {fieldError("issue")}
                                   </div>
 
                                   {showsSaunaSize && (
                                     <div className="ct-form-group">
-                                      <label>Sauna Room Size <span className="ct-optional">(Optional)</span></label>
+                                      <label>{t("step3.saunaRoomSize")} <span className="ct-optional">{t("step2.optional")}</span></label>
                                       <div className="ct-dimensions-group">
-                                        <input type="number" step="0.01" placeholder="Width (meters)" value={form.width} onChange={e => setField("width", e.target.value)} />
-                                        <input type="number" step="0.01" placeholder="Depth (meters)" value={form.depth} onChange={e => setField("depth", e.target.value)} />
-                                        <input type="number" step="0.01" placeholder="Height (meters)" value={form.height} onChange={e => setField("height", e.target.value)} />
+                                        <input type="number" step="0.01" placeholder={t("step3.width")} value={form.width} onChange={e => setField("width", e.target.value)} />
+                                        <input type="number" step="0.01" placeholder={t("step3.depth")} value={form.depth} onChange={e => setField("depth", e.target.value)} />
+                                        <input type="number" step="0.01" placeholder={t("step3.height")} value={form.height} onChange={e => setField("height", e.target.value)} />
                                       </div>
                                     </div>
                                   )}
 
                                   <div className="ct-form-group">
-                                    <label htmlFor="ct-addinfo">Additional Product Information <span className="ct-optional">(Optional)</span></label>
-                                    <input id="ct-addinfo" type="text" placeholder="Does Not Turn On, Other..." value={form.addProductInfo} onChange={e => setField("addProductInfo", e.target.value)} />
+                                    <label htmlFor="ct-addinfo">{t("step3.addlInfo")} <span className="ct-optional">{t("step2.optional")}</span></label>
+                                    <input id="ct-addinfo" type="text" placeholder={t("step3.addlInfoPlaceholder")} value={form.addProductInfo} onChange={e => setField("addProductInfo", e.target.value)} />
                                   </div>
                                 </>
                               )}
 
                               <div className={`ct-form-group${errors.message ? " error" : ""}`}>
                                 <label htmlFor="ct-message">
-                                  {form.subject === "Replacement Request" ? "Describe the issue in detail" : "Description"}
+                                  {form.subject === "Replacement Request" ? t("step3.describeIssueInDetail") : t("step3.description")}
                                   <span className="ct-req">*</span>
                                 </label>
                                 <textarea id="ct-message" value={form.message} onChange={e => setField("message", e.target.value)} />
-                                {form.subject !== "Replacement Request" && <div className="ct-helper-text">The more information you share, the better we can help</div>}
+                                {form.subject !== "Replacement Request" && <div className="ct-helper-text">{t("step3.moreInfoShort")}</div>}
                                 {fieldError("message")}
                               </div>
                             </>
@@ -1383,10 +1390,10 @@ const Contact = () => {
                       {category === "customer" && (
                         <>
                           <div className={`ct-form-group${errors.subject ? " error" : ""}`}>
-                            <label htmlFor="ct-subject">Subject<span className="ct-req">*</span></label>
+                            <label htmlFor="ct-subject">{t("step3.subject")}<span className="ct-req">*</span></label>
                             <select id="ct-subject" value={form.subject} onChange={e => setField("subject", e.target.value)}>
-                              <option value="" disabled>Select an option</option>
-                              {CUSTOMER_SUBJECTS.map(s => <option key={s.label} value={s.value}>{s.label}</option>)}
+                              <option value="" disabled>{t("step3.selectOption")}</option>
+                              {CUSTOMER_SUBJECTS.map(s => <option key={s.labelKey} value={s.value}>{t(`customerSubjects.${s.labelKey}`)}</option>)}
                             </select>
                             {fieldError("subject")}
                           </div>
@@ -1394,14 +1401,14 @@ const Contact = () => {
                           {form.subject === "Order Status" && (
                             <>
                               <div className={`ct-form-group${errors.orderNumber ? " error" : ""}`}>
-                                <label htmlFor="ct-order">Order Number<span className="ct-req">*</span></label>
-                                <input id="ct-order" type="text" placeholder="Order number..." value={form.orderNumber} onChange={e => setField("orderNumber", e.target.value)} />
+                                <label htmlFor="ct-order">{t("step3.orderNumber")}<span className="ct-req">*</span></label>
+                                <input id="ct-order" type="text" placeholder={t("step3.orderNumberPlaceholder")} value={form.orderNumber} onChange={e => setField("orderNumber", e.target.value)} />
                                 {fieldError("orderNumber")}
                               </div>
                               <div className={`ct-form-group${errors.message ? " error" : ""}`}>
-                                <label htmlFor="ct-message">Message<span className="ct-req">*</span></label>
-                                <textarea id="ct-message" placeholder="Describe your order inquiry..." value={form.message} onChange={e => setField("message", e.target.value)} />
-                                <div className="ct-helper-text">The more information you share, the better we can help you</div>
+                                <label htmlFor="ct-message">{t("step3.message")}<span className="ct-req">*</span></label>
+                                <textarea id="ct-message" placeholder={t("step3.describeOrderInquiry")} value={form.message} onChange={e => setField("message", e.target.value)} />
+                                <div className="ct-helper-text">{t("step3.moreInfoLong")}</div>
                                 {fieldError("message")}
                               </div>
                             </>
@@ -1410,10 +1417,10 @@ const Contact = () => {
                           {form.subject === "Purchase Inquiry" && (
                             <>
                               <div className={`ct-form-group${errors.productCategory ? " error" : ""}`}>
-                                <label htmlFor="ct-product-category">Product Category<span className="ct-req">*</span></label>
+                                <label htmlFor="ct-product-category">{t("step3.productCategory")}<span className="ct-req">*</span></label>
                                 <select id="ct-product-category" value={form.productCategory} onChange={e => setField("productCategory", e.target.value)}>
-                                  <option value="" disabled>Select an option</option>
-                                  {PRODUCT_CATEGORIES.map(p => <option key={p} value={p}>{p}</option>)}
+                                  <option value="" disabled>{t("step3.selectOption")}</option>
+                                  {PRODUCT_CATEGORIES.map(p => <option key={p.value} value={p.value}>{t(`productCategories.${p.labelKey}`)}</option>)}
                                 </select>
                                 {fieldError("productCategory")}
                               </div>
@@ -1422,59 +1429,59 @@ const Contact = () => {
                                 <>
                                   <div className="ct-form-row">
                                     <div className={`ct-form-group${errors.productName ? " error" : ""}`}>
-                                      <label htmlFor="ct-product-name">Product Name<span className="ct-req">*</span></label>
-                                      <input id="ct-product-name" type="text" placeholder="Nordex..." value={form.productName} onChange={e => setField("productName", e.target.value)} />
-                                      <div className="ct-helper-text">Sticker near the bottom of the heater</div>
+                                      <label htmlFor="ct-product-name">{t("step3.productName")}<span className="ct-req">*</span></label>
+                                      <input id="ct-product-name" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productName} onChange={e => setField("productName", e.target.value)} />
+                                      <div className="ct-helper-text">{t("step3.stickerHelp")}</div>
                                       {fieldError("productName")}
                                     </div>
                                     <div className={`ct-form-group${errors.serialNumber ? " error" : ""}`}>
-                                      <label htmlFor="ct-serial">Serial Number<span className="ct-req">*</span></label>
-                                      <input id="ct-serial" type="text" maxLength={6} placeholder="012345" value={form.serialNumber} onChange={e => setField("serialNumber", e.target.value)} />
-                                      <div className="ct-helper-text">Separate sticker with a six-digit code</div>
+                                      <label htmlFor="ct-serial">{t("step3.serialNumber")}<span className="ct-req">*</span></label>
+                                      <input id="ct-serial" type="text" maxLength={6} placeholder={t("step3.serialPlaceholder")} value={form.serialNumber} onChange={e => setField("serialNumber", e.target.value)} />
+                                      <div className="ct-helper-text">{t("step3.serialHelp")}</div>
                                       {fieldError("serialNumber")}
                                     </div>
                                   </div>
                                   <div className="ct-form-row">
                                     <div className={`ct-form-group${errors.productCode ? " error" : ""}`}>
-                                      <label htmlFor="ct-product-code">Product Code<span className="ct-req">*</span></label>
-                                      <input id="ct-product-code" type="text" placeholder="Nordex..." value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
+                                      <label htmlFor="ct-product-code">{t("step3.productCode")}<span className="ct-req">*</span></label>
+                                      <input id="ct-product-code" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
                                       {fieldError("productCode")}
                                     </div>
                                     <div className={`ct-form-group${errors.purchaseInvoice ? " error" : ""}`}>
-                                      <label htmlFor="ct-invoice">Purchase Invoice<span className="ct-req">*</span></label>
-                                      <input id="ct-invoice" type="text" placeholder="Nordex..." value={form.purchaseInvoice} onChange={e => setField("purchaseInvoice", e.target.value)} />
+                                      <label htmlFor="ct-invoice">{t("step3.purchaseInvoice")}<span className="ct-req">*</span></label>
+                                      <input id="ct-invoice" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.purchaseInvoice} onChange={e => setField("purchaseInvoice", e.target.value)} />
                                       {fieldError("purchaseInvoice")}
                                     </div>
                                   </div>
                                   <div className={`ct-form-group${errors.issue ? " error" : ""}`}>
-                                    <label htmlFor="ct-issue">Issue<span className="ct-req">*</span></label>
+                                    <label htmlFor="ct-issue">{t("step3.issue")}<span className="ct-req">*</span></label>
                                     <select id="ct-issue" value={form.issue} onChange={e => setField("issue", e.target.value)}>
-                                      <option value="" disabled>Select an option</option>
-                                      {ISSUE_OPTIONS.map(i => <option key={i} value={i}>{i}</option>)}
+                                      <option value="" disabled>{t("step3.selectOption")}</option>
+                                      {ISSUE_OPTIONS.map(i => <option key={i.value} value={i.value}>{t(`issues.${i.labelKey}`)}</option>)}
                                     </select>
                                     {fieldError("issue")}
                                   </div>
                                   {showsSaunaSize && (
                                     <div className="ct-form-group">
-                                      <label>Sauna Room Size <span className="ct-optional">(Optional)</span></label>
+                                      <label>{t("step3.saunaRoomSize")} <span className="ct-optional">{t("step2.optional")}</span></label>
                                       <div className="ct-dimensions-group">
-                                        <input type="number" step="0.01" placeholder="Width (meters)" value={form.width} onChange={e => setField("width", e.target.value)} />
-                                        <input type="number" step="0.01" placeholder="Depth (meters)" value={form.depth} onChange={e => setField("depth", e.target.value)} />
-                                        <input type="number" step="0.01" placeholder="Height (meters)" value={form.height} onChange={e => setField("height", e.target.value)} />
+                                        <input type="number" step="0.01" placeholder={t("step3.width")} value={form.width} onChange={e => setField("width", e.target.value)} />
+                                        <input type="number" step="0.01" placeholder={t("step3.depth")} value={form.depth} onChange={e => setField("depth", e.target.value)} />
+                                        <input type="number" step="0.01" placeholder={t("step3.height")} value={form.height} onChange={e => setField("height", e.target.value)} />
                                       </div>
                                     </div>
                                   )}
                                   <div className="ct-form-group">
-                                    <label htmlFor="ct-addinfo">Additional Product Information <span className="ct-optional">(Optional)</span></label>
-                                    <input id="ct-addinfo" type="text" placeholder="Additional product information..." value={form.addProductInfo} onChange={e => setField("addProductInfo", e.target.value)} />
+                                    <label htmlFor="ct-addinfo">{t("step3.addlInfo")} <span className="ct-optional">{t("step2.optional")}</span></label>
+                                    <input id="ct-addinfo" type="text" placeholder={t("step3.addlInfoPlaceholderGeneric")} value={form.addProductInfo} onChange={e => setField("addProductInfo", e.target.value)} />
                                   </div>
                                 </>
                               )}
 
                               <div className={`ct-form-group${errors.message ? " error" : ""}`}>
-                                <label htmlFor="ct-message">Message<span className="ct-req">*</span></label>
-                                <textarea id="ct-message" placeholder="Describe your warranty inquiry..." value={form.message} onChange={e => setField("message", e.target.value)} />
-                                <div className="ct-helper-text">The more information you share, the better we can help you</div>
+                                <label htmlFor="ct-message">{t("step3.message")}<span className="ct-req">*</span></label>
+                                <textarea id="ct-message" placeholder={t("step3.describeWarrantyInquiry")} value={form.message} onChange={e => setField("message", e.target.value)} />
+                                <div className="ct-helper-text">{t("step3.moreInfoLong")}</div>
                                 {fieldError("message")}
                               </div>
                             </>
@@ -1483,10 +1490,10 @@ const Contact = () => {
                           {form.subject && form.subject !== "Order Status" && form.subject !== "Purchase Inquiry" && (
                             <>
                               <div className="ct-form-group">
-                                <label htmlFor="ct-product-category">Product Category <span className="ct-optional">(Optional)</span></label>
+                                <label htmlFor="ct-product-category">{t("step3.productCategory")} <span className="ct-optional">{t("step2.optional")}</span></label>
                                 <select id="ct-product-category" value={form.productCategory} onChange={e => setField("productCategory", e.target.value)}>
-                                  <option value="">— Not product-related —</option>
-                                  {PRODUCT_CATEGORIES.map(p => <option key={p} value={p}>{p}</option>)}
+                                  <option value="">{t("step3.notProductRelated")}</option>
+                                  {PRODUCT_CATEGORIES.map(p => <option key={p.value} value={p.value}>{t(`productCategories.${p.labelKey}`)}</option>)}
                                 </select>
                               </div>
 
@@ -1494,13 +1501,13 @@ const Contact = () => {
                                 (form.subject === "Feedback" || form.subject === "Other") ? (
                                   <div className="ct-form-row">
                                     <div className={`ct-form-group${errors.productName ? " error" : ""}`}>
-                                      <label htmlFor="ct-product-name">Product Name<span className="ct-req">*</span></label>
-                                      <input id="ct-product-name" type="text" placeholder="Nordex..." value={form.productName} onChange={e => setField("productName", e.target.value)} />
+                                      <label htmlFor="ct-product-name">{t("step3.productName")}<span className="ct-req">*</span></label>
+                                      <input id="ct-product-name" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productName} onChange={e => setField("productName", e.target.value)} />
                                       {fieldError("productName")}
                                     </div>
                                     <div className={`ct-form-group${errors.productCode ? " error" : ""}`}>
-                                      <label htmlFor="ct-product-code">Product Code<span className="ct-req">*</span></label>
-                                      <input id="ct-product-code" type="text" placeholder="Nordex..." value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
+                                      <label htmlFor="ct-product-code">{t("step3.productCode")}<span className="ct-req">*</span></label>
+                                      <input id="ct-product-code" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
                                       {fieldError("productCode")}
                                     </div>
                                   </div>
@@ -1508,65 +1515,65 @@ const Contact = () => {
                                   <>
                                     <div className="ct-form-row">
                                       <div className={`ct-form-group${errors.productName ? " error" : ""}`}>
-                                        <label htmlFor="ct-product-name">Product Name<span className="ct-req">*</span></label>
-                                        <input id="ct-product-name" type="text" placeholder="Nordex..." value={form.productName} onChange={e => setField("productName", e.target.value)} />
-                                        <div className="ct-helper-text">Sticker near the bottom of the heater</div>
+                                        <label htmlFor="ct-product-name">{t("step3.productName")}<span className="ct-req">*</span></label>
+                                        <input id="ct-product-name" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productName} onChange={e => setField("productName", e.target.value)} />
+                                        <div className="ct-helper-text">{t("step3.stickerHelp")}</div>
                                         {fieldError("productName")}
                                       </div>
                                       <div className={`ct-form-group${errors.serialNumber ? " error" : ""}`}>
-                                        <label htmlFor="ct-serial">Serial Number<span className="ct-req">*</span></label>
-                                        <input id="ct-serial" type="text" maxLength={6} placeholder="012345" value={form.serialNumber} onChange={e => setField("serialNumber", e.target.value)} />
-                                        <div className="ct-helper-text">Separate sticker with a six-digit code</div>
+                                        <label htmlFor="ct-serial">{t("step3.serialNumber")}<span className="ct-req">*</span></label>
+                                        <input id="ct-serial" type="text" maxLength={6} placeholder={t("step3.serialPlaceholder")} value={form.serialNumber} onChange={e => setField("serialNumber", e.target.value)} />
+                                        <div className="ct-helper-text">{t("step3.serialHelp")}</div>
                                         {fieldError("serialNumber")}
                                       </div>
                                     </div>
                                     <div className="ct-form-row">
                                       <div className={`ct-form-group${errors.productCode ? " error" : ""}`}>
-                                        <label htmlFor="ct-product-code">Product Code<span className="ct-req">*</span></label>
-                                        <input id="ct-product-code" type="text" placeholder="Nordex..." value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
+                                        <label htmlFor="ct-product-code">{t("step3.productCode")}<span className="ct-req">*</span></label>
+                                        <input id="ct-product-code" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.productCode} onChange={e => setField("productCode", e.target.value)} />
                                         {fieldError("productCode")}
                                       </div>
                                       <div className={`ct-form-group${errors.purchaseInvoice ? " error" : ""}`}>
-                                        <label htmlFor="ct-invoice">Purchase Invoice<span className="ct-req">*</span></label>
-                                        <input id="ct-invoice" type="text" placeholder="Nordex..." value={form.purchaseInvoice} onChange={e => setField("purchaseInvoice", e.target.value)} />
+                                        <label htmlFor="ct-invoice">{t("step3.purchaseInvoice")}<span className="ct-req">*</span></label>
+                                        <input id="ct-invoice" type="text" placeholder={t("step3.productNamePlaceholder")} value={form.purchaseInvoice} onChange={e => setField("purchaseInvoice", e.target.value)} />
                                         {fieldError("purchaseInvoice")}
                                       </div>
                                     </div>
                                     <div className={`ct-form-group${errors.issue ? " error" : ""}`}>
-                                      <label htmlFor="ct-issue">Issue<span className="ct-req">*</span></label>
+                                      <label htmlFor="ct-issue">{t("step3.issue")}<span className="ct-req">*</span></label>
                                       <select id="ct-issue" value={form.issue} onChange={e => setField("issue", e.target.value)}>
-                                        <option value="" disabled>Select an option</option>
-                                        {ISSUE_OPTIONS.map(i => <option key={i} value={i}>{i}</option>)}
+                                        <option value="" disabled>{t("step3.selectOption")}</option>
+                                        {ISSUE_OPTIONS.map(i => <option key={i.value} value={i.value}>{t(`issues.${i.labelKey}`)}</option>)}
                                       </select>
                                       {fieldError("issue")}
                                     </div>
                                     {showsSaunaSize && (
                                       <div className="ct-form-group">
-                                        <label>Sauna Room Size <span className="ct-optional">(Optional)</span></label>
+                                        <label>{t("step3.saunaRoomSize")} <span className="ct-optional">{t("step2.optional")}</span></label>
                                         <div className="ct-dimensions-group">
-                                          <input type="number" step="0.01" placeholder="Width (meters)" value={form.width} onChange={e => setField("width", e.target.value)} />
-                                          <input type="number" step="0.01" placeholder="Depth (meters)" value={form.depth} onChange={e => setField("depth", e.target.value)} />
-                                          <input type="number" step="0.01" placeholder="Height (meters)" value={form.height} onChange={e => setField("height", e.target.value)} />
+                                          <input type="number" step="0.01" placeholder={t("step3.width")} value={form.width} onChange={e => setField("width", e.target.value)} />
+                                          <input type="number" step="0.01" placeholder={t("step3.depth")} value={form.depth} onChange={e => setField("depth", e.target.value)} />
+                                          <input type="number" step="0.01" placeholder={t("step3.height")} value={form.height} onChange={e => setField("height", e.target.value)} />
                                         </div>
                                       </div>
                                     )}
                                     <div className="ct-form-group">
-                                      <label htmlFor="ct-addinfo">Additional Product Information <span className="ct-optional">(Optional)</span></label>
-                                      <input id="ct-addinfo" type="text" placeholder="Additional product information..." value={form.addProductInfo} onChange={e => setField("addProductInfo", e.target.value)} />
+                                      <label htmlFor="ct-addinfo">{t("step3.addlInfo")} <span className="ct-optional">{t("step2.optional")}</span></label>
+                                      <input id="ct-addinfo" type="text" placeholder={t("step3.addlInfoPlaceholderGeneric")} value={form.addProductInfo} onChange={e => setField("addProductInfo", e.target.value)} />
                                     </div>
                                   </>
                                 )
                               )}
 
                               <div className={`ct-form-group${errors.message ? " error" : ""}`}>
-                                <label htmlFor="ct-message">Message<span className="ct-req">*</span></label>
+                                <label htmlFor="ct-message">{t("step3.message")}<span className="ct-req">*</span></label>
                                 <textarea
                                   id="ct-message"
-                                  placeholder={form.subject === "Feedback" ? "Share your feedback..." : form.subject === "Other" ? "Describe your request..." : "Describe your inquiry or issue..."}
+                                  placeholder={form.subject === "Feedback" ? t("step3.shareFeedback") : form.subject === "Other" ? t("step3.describeRequest") : t("step3.describeInquiry")}
                                   value={form.message}
                                   onChange={e => setField("message", e.target.value)}
                                 />
-                                <div className="ct-helper-text">The more information you share, the better we can help you</div>
+                                <div className="ct-helper-text">{t("step3.moreInfoLong")}</div>
                                 {fieldError("message")}
                               </div>
                             </>
@@ -1575,8 +1582,8 @@ const Contact = () => {
                       )}
 
                       <div className="ct-btn-group">
-                        <button type="button" className="ct-btn" onClick={() => setStep(2)}>Go Back</button>
-                        <button type="submit" className="ct-btn" disabled={submitting}>{submitting ? "Sending…" : "Submit Request"}</button>
+                        <button type="button" className="ct-btn" onClick={() => setStep(2)}>{t("buttons.goBack")}</button>
+                        <button type="submit" className="ct-btn" disabled={submitting}>{submitting ? t("buttons.sending") : t("buttons.submitRequest")}</button>
                       </div>
                       {submitError && <div className="ct-form-error-msg">{submitError}</div>}
                     </div>
@@ -1586,9 +1593,9 @@ const Contact = () => {
 
                 <div className="ct-back-link">
                   {submitting ? (
-                    <span className="ct-back-link-disabled">Finished here? Back to Home</span>
+                    <span className="ct-back-link-disabled">{t("finishedHere")}{t("backToHome")}</span>
                   ) : (
-                    <>Finished here? <Link to={menuPaths.home}>Back to Home</Link></>
+                    <>{t("finishedHere")}<Link to={localize(menuPaths.home)}>{t("backToHome")}</Link></>
                   )}
                 </div>
               </>
@@ -1601,30 +1608,30 @@ const Contact = () => {
       {/* ══ QUICK CONTACT STRIP ══ */}
       <section className="ct-quick-section">
         <div className="ct-quick-header">
-          <div className="ct-quick-eyebrow">Reach Us Directly</div>
-          <h2 className="ct-quick-title">Prefer a Faster Way?</h2>
+          <div className="ct-quick-eyebrow">{t("quick.eyebrow")}</div>
+          <h2 className="ct-quick-title">{t("quick.title")}</h2>
         </div>
         <div className="ct-quick-grid">
           <div className="ct-quick-card">
             <div className="ct-quick-icon"><i className="fa-brands fa-whatsapp" /></div>
-            <h3>Technical Support</h3>
-            <p>For technical support and reclamations, message us on WhatsApp</p>
+            <h3>{t("quick.whatsapp.title")}</h3>
+            <p>{t("quick.whatsapp.desc")}</p>
             <a href="https://wa.me/63949759450" target="_blank" rel="noopener noreferrer">
               +63 949 759 4450 <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.7rem" }} />
             </a>
           </div>
           <div className="ct-quick-card">
             <div className="ct-quick-icon"><i className="fa-solid fa-envelope" /></div>
-            <h3>Email Us</h3>
-            <p>General inquiries and product questions</p>
+            <h3>{t("quick.email.title")}</h3>
+            <p>{t("quick.email.desc")}</p>
             <a href="mailto:info@sawo.com">
               info@sawo.com <i className="fa-solid fa-arrow-right" style={{ fontSize: "0.7rem" }} />
             </a>
           </div>
           <div className="ct-quick-card">
             <div className="ct-quick-icon"><i className="fa-solid fa-headset" /></div>
-            <h3>Help Desk</h3>
-            <p>Need a hand with an existing product?</p>
+            <h3>{t("quick.helpdesk.title")}</h3>
+            <p>{t("quick.helpdesk.desc")}</p>
             <a href="mailto:help@sawo.com">
               help@sawo.com <i className="fa-solid fa-arrow-right" style={{ fontSize: "0.7rem" }} />
             </a>
@@ -1635,8 +1642,8 @@ const Contact = () => {
       {/* ══ OFFICES ══ */}
       <section className="ct-offices-section">
         <div className="ct-offices-header">
-          <div className="ct-offices-eyebrow">Around the World</div>
-          <h2 className="ct-offices-title">Contact Representative Offices</h2>
+          <div className="ct-offices-eyebrow">{t("offices.eyebrow")}</div>
+          <h2 className="ct-offices-title">{t("offices.title")}</h2>
         </div>
         <div className="ct-offices-grid">
           {OFFICES.map(office => (
@@ -1646,7 +1653,7 @@ const Contact = () => {
               </div>
               <div className="ct-office-body">
                 <h3 className="ct-office-name">{office.name}</h3>
-                <p className="ct-office-role">{office.role}</p>
+                <p className="ct-office-role">{t(`offices.list.${office.roleKey}.role`)}</p>
                 <a
                   className="ct-office-address"
                   href={office.mapUrl}
@@ -1657,7 +1664,7 @@ const Contact = () => {
                 </a>
                 <p className="ct-office-line">
                   <i className="fa-solid fa-phone" />{" "}
-                  <a href={`tel:${office.telHref}`}>Tel: {office.tel}</a>
+                  <a href={`tel:${office.telHref}`}>{t("offices.tel")}{office.tel}</a>
                 </p>
                 <p className="ct-office-line">
                   <i className="fa-solid fa-envelope" />{" "}
@@ -1672,27 +1679,24 @@ const Contact = () => {
       {/* ══ SUPPORT CTAs ══ */}
       <section className="ct-support-section">
         <div className="ct-support-header">
-          <h2 className="ct-support-title">Looking for Answers First?</h2>
-          <p className="ct-support-desc">
-            Many questions are already answered in our support resources. Check them out before
-            waiting for a reply.
-          </p>
+          <h2 className="ct-support-title">{t("supportCta.title")}</h2>
+          <p className="ct-support-desc">{t("supportCta.desc")}</p>
         </div>
         <div className="ct-support-grid">
-          <Link to={menuPaths.support.faq} className="ct-support-card">
+          <Link to={localize(menuPaths.support.faq)} className="ct-support-card">
             <i className="fa-regular fa-circle-question" />
-            <h3>Frequently Asked Questions</h3>
-            <p>Browse answers to the most common questions about our heaters, controls, and sauna rooms.</p>
+            <h3>{t("supportCta.faq.title")}</h3>
+            <p>{t("supportCta.faq.desc")}</p>
             <span className="ct-support-card-btn">
-              See FAQ <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", margin: 0 }} />
+              {t("supportCta.faq.btn")} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", margin: 0 }} />
             </span>
           </Link>
-          <Link to={menuPaths.support.manuals} className="ct-support-card">
+          <Link to={localize(menuPaths.support.manuals)} className="ct-support-card">
             <i className="fa-solid fa-book-open" />
-            <h3>User Manuals</h3>
-            <p>Installation guides, operating manuals, and technical documentation for every SAWO product.</p>
+            <h3>{t("supportCta.manuals.title")}</h3>
+            <p>{t("supportCta.manuals.desc")}</p>
             <span className="ct-support-card-btn">
-              View Manuals <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", margin: 0 }} />
+              {t("supportCta.manuals.btn")} <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", margin: 0 }} />
             </span>
           </Link>
         </div>
