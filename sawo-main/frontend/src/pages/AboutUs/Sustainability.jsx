@@ -13,9 +13,12 @@ import img_waste_hierarchy_sustainability from "../../assets/waste-hierarchy-sus
 import HeroWave from "../../components/HeroWave";
 import SEO from "../../components/SEO";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const Sustainability = () => {
   const heroLoaded = useHeroLoaded(heroBg);
+  const t = useLocaleT("sustainability");
+  const localize = useLocalizedPath();
 
   useEffect(() => {
     // ==============================
@@ -143,9 +146,10 @@ const Sustainability = () => {
   return (
     <div className="relative">
       <SEO
-        title="Sustainability"
-        description="How SAWO builds sustainably, using responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room."
-        path="/about/sustainability"
+        title={t("meta.title")}
+        description={t("meta.description")}
+        path={localize("/about/sustainability")}
+        hreflangAlternates={{ en: "/about/sustainability", zh: "/zh/about/sustainability" }}
       />
       {/* Leaves container */}
       <div id="leavesContainer"></div>
@@ -184,7 +188,7 @@ const Sustainability = () => {
               lineHeight: "45px",
             }}
           >
-            SUSTAINABILITY
+            {t("hero.title")}
           </h1>
 
           <p
@@ -196,7 +200,7 @@ const Sustainability = () => {
               lineHeight: "40px",
             }}
           >
-            We care for you and the Earth
+            {t("hero.subtitle")}
           </p>
         </div>
 
@@ -226,7 +230,7 @@ const Sustainability = () => {
               fontFamily: "Montserrat, sans-serif",
             }}
           >
-            Our Commitment to Sustainability
+            {t("commitment.title")}
           </h2>
           <p
             className="hero-description"
@@ -237,11 +241,7 @@ const Sustainability = () => {
               lineHeight: "1.8",
             }}
           >
-            At SAWO, we blend wellness with environmental responsibility. Every
-            sauna we craft embodies sustainability, from material selection to
-            manufacturing processes. We strive to spread authentic Finnish sauna
-            culture with high-quality, durable saunas that nurture health while
-            respecting our planet.
+            {t("commitment.desc")}
           </p>
         </div>
 
@@ -249,7 +249,7 @@ const Sustainability = () => {
         <div className="hero-image w-full max-w-[450px] h-[450px] rounded-lg overflow-hidden shadow-lg mx-auto">
           <img
             src={img_sustainability_image}
-            alt="SAWO Sustainability"
+            alt={t("commitment.imgAlt")}
             className="w-full h-full object-cover"
           />
         </div>
@@ -304,7 +304,7 @@ const Sustainability = () => {
               lineHeight: 1.2,
             }}
           >
-            Eco-Friendly Manufacturing Practices
+            {t("practices.title")}
           </h2>
 
           <div className="practices-grid grid gap-6 md:grid-cols-3">
@@ -312,10 +312,9 @@ const Sustainability = () => {
               <div className="icon-wrapper1">
                 <i className="fas fa-bolt"></i>
               </div>
-              <h3>Energy Efficiency</h3>
+              <h3>{t("practices.energy.title")}</h3>
               <p>
-                Advanced technologies, including precision CNC machining,
-                minimize energy consumption and reduce waste.
+                {t("practices.energy.desc")}
               </p>
             </div>
 
@@ -323,10 +322,9 @@ const Sustainability = () => {
               <div className="icon-wrapper1">
                 <i className="fas fa-recycle"></i>
               </div>
-              <h3>Waste Reduction</h3>
+              <h3>{t("practices.waste.title")}</h3>
               <p>
-                We repurpose or recycle excess wood and materials, striving for
-                zero waste in production.
+                {t("practices.waste.desc")}
               </p>
             </div>
 
@@ -334,10 +332,9 @@ const Sustainability = () => {
               <div className="icon-wrapper1">
                 <i className="fas fa-leaf"></i>
               </div>
-              <h3>Non-Toxic Treatments</h3>
+              <h3>{t("practices.nonToxic.title")}</h3>
               <p>
-                We avoid harmful chemicals, using toxin-free finishes to protect
-                the environment and health. Our waste is certified non-toxic.
+                {t("practices.nonToxic.desc")}
               </p>
             </div>
           </div>
@@ -493,11 +490,10 @@ const Sustainability = () => {
               className="text-4xl font-bold mb-2"
               style={{ color: "#8B5E3C", fontFamily: "Montserrat, sans-serif" }}
             >
-              Energy-Smart Sauna Design
+              {t("energySmart.title")}
             </h2>
             <p className="section-subtitle text-center max-w-[800px] mx-auto font-light text-black">
-              Our saunas are engineered for optimal energy efficiency, ensuring
-              a perfect sauna experience with minimal environmental impact.
+              {t("energySmart.subtitle")}
             </p>
           </div>
 
@@ -506,7 +502,7 @@ const Sustainability = () => {
             <div className="energy-image-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:shadow-2xl">
               <img
                 src={img_SAWO_Cumulus_Wall_NS}
-                alt="Energy Smart Sauna Design"
+                alt={t("energySmart.imgAlt")}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -519,8 +515,7 @@ const Sustainability = () => {
                     <i className="fas fa-bolt text-white text-xl transition-transform duration-300 hover:scale-110"></i>
                   </div>
                   <p className="energy-feature-text text-black text-sm font-light leading-6 pt-1">
-                    Heating systems are perfectly matched to sauna size to
-                    prevent energy waste.
+                    {t("energySmart.feature1")}
                   </p>
                 </div>
 
@@ -529,8 +524,7 @@ const Sustainability = () => {
                     <i className="fas fa-thermometer-half text-white text-xl transition-transform duration-300 hover:scale-110"></i>
                   </div>
                   <p className="energy-feature-text text-black text-sm font-light leading-6 pt-1">
-                    Some models feature smart thermostats for precise
-                    temperature control.
+                    {t("energySmart.feature2")}
                   </p>
                 </div>
 
@@ -539,8 +533,7 @@ const Sustainability = () => {
                     <i className="fas fa-sun text-white text-xl transition-transform duration-300 hover:scale-110"></i>
                   </div>
                   <p className="energy-feature-text text-black text-sm font-light leading-6 pt-1">
-                    Infrared technology is incorporated to reduce electricity
-                    consumption.
+                    {t("energySmart.feature3")}
                   </p>
                 </div>
               </div>
@@ -551,13 +544,11 @@ const Sustainability = () => {
           <div className="info-banner relative flex items-center justify-center bg-gradient-to-tr from-[#8B5E3C] to-[#A67853] rounded-xl shadow-lg p-8 mt-6">
             <img
               src={img_Wood_Pattern_Brown_03}
-              alt="Sustainable Wood"
+              alt={t("energySmart.bannerImgAlt")}
               className="absolute left-10 top-1/2 transform -translate-y-1/2 h-[75px] w-auto"
             />
             <p className="text-white text-lg leading-7 max-w-[800px] text-center">
-              By choosing SAWO, you invest in a product made from sustainable
-              materials, a manufacturing process that respects natural
-              resources, and a healthier indoor environment.
+              {t("energySmart.bannerText")}
             </p>
           </div>
         </div>
@@ -592,10 +583,9 @@ const Sustainability = () => {
       </section>
       <section className="waste-hierarchy-section">
         <div className="header-wrapper">
-          <h2>Waste into Worth: Closing the Loop</h2>
+          <h2>{t("wasteHierarchy.title")}</h2>
           <p className="waste-intro">
-            We follow the Waste Hierarchy Directive (EU) 2018/851, prioritizing
-            waste minimization, reuse, and recovery
+            {t("wasteHierarchy.intro")}
           </p>
         </div>
         <div className="waste-two-column">
@@ -604,10 +594,9 @@ const Sustainability = () => {
               <div className="waste-item">
                 <div className="waste-number">1</div>
                 <div className="waste-item-content">
-                  <h3>Waste Minimization</h3>
+                  <h3>{t("wasteHierarchy.minimization.title")}</h3>
                   <p>
-                    Advanced cutting techniques limit unnecessary waste, using
-                    both parts of cut-offs to reduce material consumption.
+                    {t("wasteHierarchy.minimization.desc")}
                   </p>
                 </div>
               </div>
@@ -615,9 +604,9 @@ const Sustainability = () => {
               <div className="waste-item">
                 <div className="waste-number">2</div>
                 <div className="waste-item-content">
-                  <h3>Waste Reuse</h3>
+                  <h3>{t("wasteHierarchy.reuse.title")}</h3>
                   <p>
-                    Any remaining wood pieces are repurposed into other designs.
+                    {t("wasteHierarchy.reuse.desc")}
                   </p>
                 </div>
               </div>
@@ -625,11 +614,9 @@ const Sustainability = () => {
               <div className="waste-item">
                 <div className="waste-number">3</div>
                 <div className="waste-item-content">
-                  <h3>Waste Recovery</h3>
+                  <h3>{t("wasteHierarchy.recovery.title")}</h3>
                   <p>
-                    Sawdust and unsavable wood cut-offs fuel biomass boilers,
-                    powering our facilities with renewable energy and reducing
-                    our carbon footprint.
+                    {t("wasteHierarchy.recovery.desc")}
                   </p>
                 </div>
               </div>
@@ -640,7 +627,7 @@ const Sustainability = () => {
             <div className="waste-image-wrapper">
               <img
                 src={img_waste_hierarchy_sustainability}
-                alt="Waste Hierarchy"
+                alt={t("wasteHierarchy.imgAlt")}
               />
             </div>
           </div>
@@ -825,8 +812,8 @@ const Sustainability = () => {
         {/* Title */}
         <div className="uw-title-wrapper">
           <div className="uw-title">
-            Sauna is Wellbeing
-            <span>Sustainability is Wellbeing</span>
+            {t("wellbeing.titleLine1")}
+            <span>{t("wellbeing.titleLine2")}</span>
           </div>
         </div>
 
@@ -837,16 +824,13 @@ const Sustainability = () => {
               <i className="fas fa-quote-left"></i>
             </div>
             <p className="unique-wellbeing-quote-text">
-              Health and wellbeing is at the base of having a good life.
-              Sustainability not only looks at the wellbeing of people, but also
-              at the wellbeing of the Earth. At SAWO,{" "}
+              {t("wellbeing.quotePrefix")}{" "}
               <span className="unique-wellbeing-quote-highlight">
-                wellbeing is our business
+                {t("wellbeing.quoteHighlight1")}
               </span>
-              . We make sure you are taken care of with a sauna. We also do our
-              best to make sure the Earth is taken care of.{" "}
+              {t("wellbeing.quoteMiddle")}{" "}
               <span className="unique-wellbeing-quote-highlight">
-                Wellbeing is Sustainability. Be well. Sauna well.
+                {t("wellbeing.quoteHighlight2")}
               </span>
             </p>
           </div>
@@ -855,7 +839,7 @@ const Sustainability = () => {
             <img
               className="unique-wellbeing-quote-image"
               src={img_health_well_being}
-              alt="Sauna in a sustainable setting"
+              alt={t("wellbeing.imgAlt")}
             />
           </div>
         </div>
@@ -866,15 +850,13 @@ const Sustainability = () => {
             <i className="fas fa-spa"></i>
           </div>
           <p className="unique-wellbeing-cta-text">
-            Join us on our journey to make sustainable sauna experiences
-            accessible and enjoyable worldwide. Experience the warmth of nature
-            with a sauna that cares for you and the Earth.
+            {t("wellbeing.ctaText")}
           </p>
           <Link
-            to={menuPaths.sauna.rooms} // or whichever Sauna page path you want
+            to={localize(menuPaths.sauna.rooms)} // or whichever Sauna page path you want
             className="uwb-sauna-button"
           >
-            EXPLORE <i className="fas fa-chevron-right"></i>
+            {t("wellbeing.ctaBtn")} <i className="fas fa-chevron-right"></i>
           </Link>
         </div>
 

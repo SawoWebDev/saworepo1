@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Sustainability",
+    "description": "How SAWO builds sustainably, using responsibly sourced wood, waste-reduction practices, and energy-efficient manufacturing behind every sauna heater and room."
+  },
+  "hero": { "title": "SUSTAINABILITY", "subtitle": "We care for you and the Earth" },
+  "commitment": {
+    "title": "Our Commitment to Sustainability",
+    "desc": "At SAWO, we blend wellness with environmental responsibility. Every sauna we craft embodies sustainability, from material selection to manufacturing processes. We strive to spread authentic Finnish sauna culture with high-quality, durable saunas that nurture health while respecting our planet.",
+    "imgAlt": "SAWO Sustainability"
+  },
+  "practices": {
+    "title": "Eco-Friendly Manufacturing Practices",
+    "energy": { "title": "Energy Efficiency", "desc": "Advanced technologies, including precision CNC machining, minimize energy consumption and reduce waste." },
+    "waste": { "title": "Waste Reduction", "desc": "We repurpose or recycle excess wood and materials, striving for zero waste in production." },
+    "nonToxic": { "title": "Non-Toxic Treatments", "desc": "We avoid harmful chemicals, using toxin-free finishes to protect the environment and health. Our waste is certified non-toxic." }
+  },
+  "energySmart": {
+    "title": "Energy-Smart Sauna Design",
+    "subtitle": "Our saunas are engineered for optimal energy efficiency, ensuring a perfect sauna experience with minimal environmental impact.",
+    "imgAlt": "Energy Smart Sauna Design",
+    "feature1": "Heating systems are perfectly matched to sauna size to prevent energy waste.",
+    "feature2": "Some models feature smart thermostats for precise temperature control.",
+    "feature3": "Infrared technology is incorporated to reduce electricity consumption.",
+    "bannerImgAlt": "Sustainable Wood",
+    "bannerText": "By choosing SAWO, you invest in a product made from sustainable materials, a manufacturing process that respects natural resources, and a healthier indoor environment."
+  },
+  "wasteHierarchy": {
+    "title": "Waste into Worth: Closing the Loop",
+    "intro": "We follow the Waste Hierarchy Directive (EU) 2018/851, prioritizing waste minimization, reuse, and recovery",
+    "minimization": { "title": "Waste Minimization", "desc": "Advanced cutting techniques limit unnecessary waste, using both parts of cut-offs to reduce material consumption." },
+    "reuse": { "title": "Waste Reuse", "desc": "Any remaining wood pieces are repurposed into other designs." },
+    "recovery": { "title": "Waste Recovery", "desc": "Sawdust and unsavable wood cut-offs fuel biomass boilers, powering our facilities with renewable energy and reducing our carbon footprint." },
+    "imgAlt": "Waste Hierarchy"
+  },
+  "wellbeing": {
+    "titleLine1": "Sauna is Wellbeing",
+    "titleLine2": "Sustainability is Wellbeing",
+    "quotePrefix": "Health and wellbeing is at the base of having a good life. Sustainability not only looks at the wellbeing of people, but also at the wellbeing of the Earth. At SAWO,",
+    "quoteHighlight1": "wellbeing is our business",
+    "quoteMiddle": ". We make sure you are taken care of with a sauna. We also do our best to make sure the Earth is taken care of.",
+    "quoteHighlight2": "Wellbeing is Sustainability. Be well. Sauna well.",
+    "imgAlt": "Sauna in a sustainable setting",
+    "ctaText": "Join us on our journey to make sustainable sauna experiences accessible and enjoyable worldwide. Experience the warmth of nature with a sauna that cares for you and the Earth.",
+    "ctaBtn": "EXPLORE"
+  }
+}
