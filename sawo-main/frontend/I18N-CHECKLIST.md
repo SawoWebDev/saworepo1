@@ -1022,6 +1022,56 @@ total). Post-batch count: **203 of 380 products still missing `fi`**
 (product total dropped 381→380 between checkpoints — one product was
 removed from the catalog, not a translation regression).
 
+**Batch 5 — 40 products, misc accessories (pails, ventilation, display
+stands, safety switches, Kivistone) (2026-09-04)**: run as one of 5
+parallel sessions splitting the remaining ~202 missing-`fi` products by
+category (Doors & Handles + Integration Collar, Thermometers + small
+accessories, Heater Guard + Sauna Controls, Nordex-family heater
+stragglers, and this one — see this file's git history for the other
+4 batches' entries, logged separately by each session). This batch:
+**Pails (18/18)** — `dragon-pail-9l/4l`, `wooden-pail-{rattan-4l,28l,
+rattan,18l,classic,traditional,rattan-with-stainless-steel-insert,40l}`,
+`wooden-cover-for-{381,391,392}`, `stainless-steel-pail-with-{curved,
+wooden}-handle`, `steamwater-pail-{4l,9l}`, `lovi`, `kanto` — all via a
+one-off fill script (`fill-fi-misc-accessories.mjs`, kept in
+`scripts/`), since every pail shares the identical English
+short_description template ("The SAWO X is a [wooden/stainless steel]
+pail with a NL capacity, used for holding the water poured onto the
+sauna stones."). **Naming**: "Classic"/"Traditional" translated in full
+(Klassinen/Perinteinen, matching the established fi Accessory Sets
+precedent for these exact words), Dragon/Steamwater/Lovi/Kanto kept as
+English brand/product-line names per convention, material words
+(Cedar/Aspen/Hemlock/Black/White) came pre-filled via the
+`MATERIAL_WORD_DICTIONARY`. **Ventilation & Miscellaneous (9/9)** —
+`ventilation-cover-circle-{641d,640mbr}`, `ventilation-louver-
+circle-{634d,631d}`, `ventilation-louver-square`, `ventilation-louver-
+circle-with-black-option-{639d,638d}`, `moisture-paper`, `sauna-
+grille-622-d` (no English short_description, left `null` — correctly
+matches source) — new `type` coined: Ventilation & Miscellaneous →
+"Ilmanvaihto ja sekalaiset". "Louver" → "säleikkö", "Cover" →
+"tuuletuskansi". **Display stands (3/3)** — `display-stand-wall-{1,2,3}`,
+`type` grouped under the same Ventilation & Miscellaneous fi string
+(matches their English category tag). **Safety/hood (3/3)** —
+`safety-switch-for-heaters`, `helius-heater-hood`,
+`emergency-stop-button-switch-estop` — new `type` translations: Safety
+Switch → "Turvakytkin", Heater Hood → "Kiuaskupu". **Kivistone (5/5)**
+— `soap-holder`, `wine-cooler-stone`, `stone-plate-{large,small}`,
+`cooler-w-2-shot-glasses` — "Kivistone" itself kept untranslated in
+`type` and every short_description (brand/product-line name, matching
+the established zh precedent exactly). **1 stray Thermometers item**
+(`loisto-square-thermometer`, picked up because it fell in this batch's
+slug range) — coined `type` "Thermometers" → "Lämpömittarit"; flagging
+here since the Thermometers category's other ~25 products were being
+translated by a different parallel session in this same push — worth a
+quick check that they used the same fi `type` string, or reconciling if
+not, before calling the Thermometers category done. Verified via direct
+Supabase query (not just `apply-many`'s own success count): 40/40 have
+`fi` `product_translations` rows with `source_field_hashes` populated.
+Post-batch count: **162 of 380 products still missing `fi`** (down from
+202 — the 202 baseline itself reflects the 4 other parallel batches'
+combined remaining scope at the time this batch started, not a
+regression from the 203 figure two batches above).
+
 ### zh completeness audit (2026-09-04)
 
 With the `zh` push having been declared complete on 2026-09-03, ran a
