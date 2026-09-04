@@ -187,5 +187,51 @@
       "noResultLink": "contact us",
       "noResultSuffix": "for advice."
     }
+  },
+  "manuals": {
+    "meta": {
+      "title": "User Manuals",
+      "description": "Download SAWO user manuals: installation guides and operating instructions for our sauna heaters, controls, and steam generators."
+    },
+    "hero": { "title": "USER MANUALS", "subtitle": "Your complete guide to installation, operation, and maintenance" },
+    "sectionTitle": "SAWO PRODUCT RANGE",
+    "search": { "placeholder": "Search products…", "clear": "Clear" },
+    "empty": { "noProducts": "No products available." },
+    "noResults": { "prefix": "No products match", "clearSearch": "Clear search" },
+    "viewManual": "View Manual",
+    "modal": {
+      "eyebrow": "User Manuals",
+      "noManuals": "No manuals available for this product yet.",
+      "manualFallback": "Manual {{n}}",
+      "pdfClickToOpen": "PDF · Click to open"
+    },
+    "banner": {
+      "title": "Can't find what you need?",
+      "desc": "Our support team is ready to help you with documentation and technical guidance.",
+      "cta": "CONTACT US"
+    },
+    "tabs": {
+      "heaters": "Sauna Heaters",
+      "sauna-controls": "Sauna Controls",
+      "steam-generators": "Steam Generators",
+      "steam-controls": "Steam Generator Controls",
+      "heater-accessories": "Heater Accessories"
+    },
+    "seriesLabels": {
+      "Towers": "Tower Series",
+      "Wall-Mounted": "Wall Mounted Series",
+      "Floor": "Floor Series",
+      "Stones": "Stone Series",
+      "Dragonfire": "Dragonfire Series",
+      "Combi": "Combi Series",
+      "Sauna Controls": "Sauna Controls",
+      "Steam Controls": "Steam Generator Controls",
+      "Steam Generators": "Steam Generators",
+      "Heater Accessories": "Heater Accessories",
+      "Heater Guard": "Heater Guards",
+      "Integration Collar": "Collars",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Accessories": "Safety Accessories"
+    }
   }
 }

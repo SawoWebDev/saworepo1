@@ -186,5 +186,51 @@
       "noResultLink": "联系我们",
       "noResultSuffix": "获取建议。"
     }
+  },
+  "manuals": {
+    "meta": {
+      "title": "用户手册",
+      "description": "下载 SAWO 用户手册：适用于我们的桑拿加热器、控制器和蒸汽发生器的安装指南和操作说明。"
+    },
+    "hero": { "title": "用户手册", "subtitle": "安装、操作和维护的完整指南" },
+    "sectionTitle": "SAWO 产品系列",
+    "search": { "placeholder": "搜索产品…", "clear": "清除" },
+    "empty": { "noProducts": "暂无可用产品。" },
+    "noResults": { "prefix": "没有找到匹配的产品", "clearSearch": "清除搜索" },
+    "viewManual": "查看手册",
+    "modal": {
+      "eyebrow": "用户手册",
+      "noManuals": "该产品暂无可用手册。",
+      "manualFallback": "手册 {{n}}",
+      "pdfClickToOpen": "PDF · 点击打开"
+    },
+    "banner": {
+      "title": "找不到您需要的内容？",
+      "desc": "我们的支持团队随时准备为您提供文档和技术指导方面的帮助。",
+      "cta": "联系我们"
+    },
+    "tabs": {
+      "heaters": "桑拿加热器",
+      "sauna-controls": "桑拿控制器",
+      "steam-generators": "蒸汽发生器",
+      "steam-controls": "蒸汽发生器控制器",
+      "heater-accessories": "加热器配件"
+    },
+    "seriesLabels": {
+      "Towers": "Tower 系列",
+      "Wall-Mounted": "壁挂系列",
+      "Floor": "落地系列",
+      "Stones": "Stone 系列",
+      "Dragonfire": "Dragonfire 系列",
+      "Combi": "Combi 系列",
+      "Sauna Controls": "桑拿控制器",
+      "Steam Controls": "蒸汽发生器控制器",
+      "Steam Generators": "蒸汽发生器",
+      "Heater Accessories": "加热器配件",
+      "Heater Guard": "加热器护栏",
+      "Integration Collar": "集成环",
+      "Humidifiers": "Cozy 水箱",
+      "Sauna Accessories": "安全配件"
+    }
   }
 }
