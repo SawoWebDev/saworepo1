@@ -147,5 +147,44 @@
         ]
       }
     ]
+  },
+  "calculator": {
+    "meta": {
+      "title": "桑拿计算器",
+      "description": "使用我们的计算器,根据房间尺寸和容积匹配理想的加热器功率,为您的桑拿房找到合适的 SAWO 加热器。"
+    },
+    "intro": {
+      "title": "桑拿容积计算器",
+      "desc": "桑拿房的大小直接影响所需的加热器功率。使用此桑拿容积计算器测量您的桑拿房尺寸,即可获得精确的加热器功率（kW）建议,以达到最佳效果。"
+    },
+    "imageAlt": "SAWO 桑拿房内部",
+    "card": {
+      "title": "房间尺寸",
+      "clear": "清除"
+    },
+    "fields": {
+      "width": { "label": "宽度", "subLabel": "（左右方向）" },
+      "height": { "label": "高度", "subLabel": "（地面到天花板）" },
+      "depth": { "label": "深度", "subLabel": "（门到后墙）" },
+      "uninsulated": { "label": "未隔热表面", "subLabel": "（如全部为木质包覆,请填0）", "hint": "玻璃、瓷砖、石材或混凝土墙面,包括玻璃墙、窗户和门" },
+      "hints": {
+        "metric": { "w": "常见桑拿房尺寸：1.8–2.4 米", "h": "标准天花板高度：2.1 米", "d": "常见桑拿房尺寸：1.8–2.4 米" },
+        "imperial": { "w": "常见桑拿房尺寸：6–8 英尺", "h": "标准天花板高度：7 英尺", "d": "常见桑拿房尺寸：6–8 英尺" }
+      }
+    },
+    "result": {
+      "volumeLabel": "桑拿容积",
+      "heaterLabel": "推荐加热器",
+      "effective": "有效容积：{{val}} m³",
+      "oversized": "超出标准范围,请联系我们获取建议"
+    },
+    "reco": {
+      "title": "推荐加热器",
+      "badge_other": "找到 {{count}} 款加热器",
+      "sub": "为您的 <b>{{volume}} m³</b> 桑拿房显示与 <b>{{kw}} kW</b> 兼容的加热器。",
+      "noResultPrefix": "未找到符合该功率的加热器。请",
+      "noResultLink": "联系我们",
+      "noResultSuffix": "获取建议。"
+    }
   }
 }
