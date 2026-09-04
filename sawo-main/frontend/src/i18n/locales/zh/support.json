@@ -232,5 +232,63 @@
       "Humidifiers": "Cozy 水箱",
       "Sauna Accessories": "安全配件"
     }
+  },
+  "catalogue": {
+    "meta": {
+      "title": "产品目录",
+      "description": "浏览完整的 SAWO 产品目录,包括桑拿加热器、桑拿房和配件,可在一处轻松搜索。"
+    },
+    "header": {
+      "eyebrow": "完整系列",
+      "title": "全部产品",
+      "desc": "浏览我们完整的桑拿加热器、桑拿房和配件系列,提升您的健康生活体验。",
+      "pdfBtn": "产品目录"
+    },
+    "empty": "暂无可用产品。",
+    "banner": {
+      "title": "找不到您需要的内容？",
+      "desc": "我们的支持团队随时准备帮助您找到适合您桑拿房的产品。",
+      "cta": "联系我们"
+    },
+    "tabs": {
+      "heaters": "桑拿加热器",
+      "controls": "桑拿控制器",
+      "steam": "蒸汽系列",
+      "infrared": "红外线",
+      "heater-acc": "加热器配件",
+      "accessories": "桑拿配件",
+      "rooms": "桑拿房",
+      "other": "其他"
+    },
+    "seriesLabels": {
+      "Towers": "Tower 系列",
+      "Wall-Mounted": "壁挂系列",
+      "Floor": "落地系列",
+      "Combi": "Combi 系列",
+      "Dragonfire": "Dragonfire 系列",
+      "Stones": "Stone 系列",
+      "Sauna Controls": "桑拿控制器",
+      "Controls": "桑拿控制器",
+      "Steam Generators": "蒸汽发生器",
+      "Steam Controls": "蒸汽发生器控制器",
+      "Steam Accessories": "蒸汽配件",
+      "Infrared": "红外线",
+      "Heater Guard": "加热器护栏",
+      "Integration Collar": "集成环",
+      "Humidifiers": "Cozy 水箱",
+      "Sauna Stones": "桑拿石",
+      "Safety Switch": "安全开关",
+      "Heater Hood": "加热器防护罩",
+      "Doors & Handles": "门与拉手",
+      "Headrest & Backrest": "头枕与靠背",
+      "Ventilation & Miscellaneous": "通风与杂项配件",
+      "Clocks & Timers": "时钟与沙漏计时器",
+      "Wooden Floor Mats": "木质地垫",
+      "Accessory Sets": "配件套装",
+      "Pail Shower": "水桶花洒",
+      "standard": "标准桑拿房",
+      "glassfront": "玻璃幕墙桑拿房",
+      "infrared": "红外线桑拿房"
+    }
   }
 }
