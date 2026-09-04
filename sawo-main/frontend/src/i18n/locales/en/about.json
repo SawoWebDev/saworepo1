@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "About Us",
+    "description": "Over 30 years designing and manufacturing premium Finnish sauna heaters, steam generators, and sauna rooms, trusted by customers in 90+ countries."
+  },
+  "alt": {
+    "office": "SAWO office",
+    "team": "SAWO team"
+  },
+  "hero": {
+    "title": "We are SAWO",
+    "subtitle": "Bringing Finnish tradition to the world",
+    "desc": "We are a customer-centric, excellence-driven company, consistently prioritizing the needs of our customers at every step, from product design to manufacturing to after-sales. We take pride in delivering only the finest products and the best service to our valued customers."
+  },
+  "innovation": {
+    "titleMain": "Not Limited by Borders",
+    "titleSub": "Finnish Tradition Made Global",
+    "p1": "We are a pioneering European sauna company with a manufacturing site in Asia – home to over 600 dedicated Filipino and Finnish professionals, and growing. Our success is built on a foundation of competitive pricing, exceptional product quality, and customer service that goes above and beyond.",
+    "p2": "SAWO is a result from fusing the two words <b>Sa</b>una and <b>Wo</b>rld. It accurately reflects us as a comprehensive sauna provider. Meeting all your sauna needs, from heaters to door handles and louvers. Driven by a passion for sauna and guided by an innovative company culture, we have become one of the world's leading sauna product manufacturers, serving over 90 countries around the globe, and counting. Our offering ranges from sauna heaters, accessories, and control units to sauna rooms, steam generators, and infrared solutions.",
+    "p3": "We continue to expand our portfolio with thoughtfully designed, high-performing products that exceed customer expectations worldwide. Every item is crafted under Finnish management, ensuring authenticity and a deep respect for the rich heritage of Finnish sauna culture.",
+    "p4": "Our dedication to quality and sustainability is backed by internationally recognized certifications. We first obtained <b>ISO 9001 for Quality Management</b> in 2002 and <b>ISO 14001 for Environmental Management</b> in 2007, both of which were renewed in 2025 under the latest standards; <b>ISO 9001:2015</b> and <b>ISO 14001:2015</b>. Our <b>PEFC</b> certification further demonstrates our commitment to source from sustainably managed forests. These certifications guarantee that every single product meets the highest global benchmarks for safety, quality, and environmental responsibility.",
+    "p5": "As proud ambassadors of Finnish sauna culture, we are also a member of <b>Sauna from Finland</b>, an association dedicated to promoting the authentic Finnish sauna experience around the world.",
+    "stats": {
+      "establishedLabel": "Established excellence",
+      "establishedValue": "30+",
+      "establishedSuffix": "years",
+      "reachLabel": "Global reach",
+      "reachValue": "90+",
+      "reachSuffix": "countries worldwide"
+    },
+    "exploreBtn": "Explore Our Products"
+  },
+  "certs": {
+    "iso9001": { "caption": "ISO 9001", "label": "Quality Management" },
+    "iso14001": { "caption": "ISO 14001", "label": "Environmental Management" },
+    "saunaFromFinland": { "caption": "Sauna from Finland", "label": "Official Member" },
+    "pefc": { "caption": "We Promote Sustainable Forestry", "label": "www.pefc.org" }
+  },
+  "news": {
+    "title": "Latest News",
+    "seeMore": "SEE MORE",
+    "card1": {
+      "alt": "Recent Exhibitions",
+      "label": "Exhibitions",
+      "title": "Recent Exhibitions",
+      "desc": "This autumn, we took part in Europe's top wellness exhibitions: Aquanale in Cologne and Piscina Barcelona. A pleasure connecting with industry leaders and showcasing Finnish tradition and wellness."
+    },
+    "card2": {
+      "alt": "Earthquake Relief",
+      "label": "Community",
+      "title": "Earthquake Relief in Cebu",
+      "desc": "When a 6.9 magnitude earthquake struck off the Northeast coast of Cebu, our team organized a company-wide relief effort, delivering mattresses, food, hygiene products, and essentials to affected families."
+    },
+    "card3": {
+      "alt": "Talent Search",
+      "label": "Careers",
+      "title": "Talent Search",
+      "desc": "Time for a change? We are looking for individuals with experience and/or interest in the sauna and wellness industry and eagerness to grow with us in Cebu."
+    }
+  }
+}
