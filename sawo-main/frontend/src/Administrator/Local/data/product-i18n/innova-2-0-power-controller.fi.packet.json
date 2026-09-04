@@ -1,0 +1,35 @@
+{
+  "slug": "innova-2-0-power-controller",
+  "productId": "7fc76dd6-2520-4759-a7d1-59b6d22e20b9",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova 2.0 Tehonohjain",
+    "short_description": "<p style=\"text-align: justify;\">Yhdistä<b> Innova 2.0 -tehonohjain </b>mihin tahansa Innova-ohjaimeen käytettäväksi NS-kiukaiden kanssa.</p><p style=\"text-align: justify;\">Ohjaimen kotelossa on enemmän tilaa sähköasentajan työskentelyyn, mikä tekee asennuksesta helpompaa kuin koskaan! Uusi nykyaikaistettu kotelo tarjoaa enemmän tilaa helpompaan ja nopeampaan asennukseen. Joustavat johdotusvaihtoehdot vedonpoistoineen kotelon neljällä sivulla, mukaan lukien takaosa, jolloin johdotus voidaan piilottaa kokonaan.</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNICAL DETAILS</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>15kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova 2.0 Power Controller (INP-C-V2)</td><td>W: 320 mm x H: 270 mm x D: 78 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "Älykäs ohjaus sammuttaa lämmityselementin automaattisesti halutussa lämpötilassa",
+      "Yhdistä Innova-käyttöliittymään enintään 15 kW:n kiukaille, tai lisää INP-S-V2-kontaktori suuremmille yksiköille",
+      "Uusi kotelomalli entistä helpompaan asennukseen, enemmän tilaa ja johdotusvaihtoehtoja",
+      "Yhteensopiva ovianturin kanssa",
+      "Ennakkoajastin viikoittaisia saunahetkiä varten",
+      "Helppokäyttötila, näppäinlukko ja sähkökatkomuisti lisämukavuutta varten",
+      "Sähkönkulutuslaskuri",
+      "Valinnainen tuuletin, himmennin ja Combi-toiminto",
+      "Voidaan yhdistää kodin automaatiojärjestelmiin",
+      "Toimii parhaiten yhdessä valinnaisen penkkianturin (INN-BTEMP) ja Combi-kiukaiden kosteusanturin (INN-HUM) kanssa",
+      "Sisältää Innova-tehonohjaimen, 5 m RJ12-kaapelin, lehmuspuisella pidikkeellä varustetun lämpötila-anturin sekä 5 m silikonijohdon"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

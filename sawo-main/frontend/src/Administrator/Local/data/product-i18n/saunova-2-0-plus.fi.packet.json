@@ -1,0 +1,21 @@
+{
+  "slug": "saunova-2-0-plus",
+  "productId": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 PLUS",
+    "short_description": "Uusi älykäs saunanohjausyksikkömme, Saunova 2.0 PLUS, antaa käyttäjälle entistäkin enemmän käytön vapautta. Ohjausyksikössä on Wi-Fi-yhteys, joten sitä voidaan ohjata SAWO-sovelluksella. Sovellus mahdollistaa entistä yksilöllisemmän saunakokemuksen ja useiden saunatoimintojen, kuten lämpötilan ja valaistuksen, etäohjauksen. Reaaliaikaisen seurannan ansiosta sovelluksen käyttäjä näkee heti nykyisen saunan lämpötilan ja saunomisajan. Saunova 2.0 PLUS -mallissa on intuitiivinen käyttöliittymä, joka voidaan sijoittaa saunahuoneen sisä- tai ulkopuolelle. Ni2- ja NS-kiukaille suunniteltu, enintään 9.0 kW:n Saunova 2.0 PLUS voidaan myös laajentaa kontaktoriyksiköllä 18.0 kW:iin asti.",
+    "description": null,
+    "type": "Saunova",
+    "features": [
+      "Etäohjaus: Aseta aikataulu ja hallitse kiuasta mistä ja miltä etäisyydeltä tahansa.",
+      "Intuitiivinen käyttöliittymä: Käytä sovellusta ja ohjaimia vaivattomasti sujuvan UI/UX-suunnittelumme ansiosta.",
+      "Integroitu ohjaus: Kaikkia ohjausasetuksia voidaan hallita yhden alustan kautta: älykkään ohjaimen tai mobiilisovelluksen.",
+      "Reaaliaikainen seuranta: Näe heti nykyisen saunan lämpötilan ja saunomisajan.",
+      "Turvallisuus: Kiukaat sammuvat automaattisesti, kun ajastin saavuttaa nollan.",
+      "Wi-Fi-yhteensopiva"
+    ]
+  }
+}

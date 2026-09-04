@@ -1,0 +1,13 @@
+{
+  "slug": "heater-guard-nordex-pro-combi",
+  "productId": "125434c9-83e0-4e15-be51-19b698ffcf78",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Kiuassuoja – Nordex Pro Combi",
+    "short_description": "Kiuassuoja on turvallisuusominaisuus, joka on suunniteltu minimoimaan palovammariskiä. Se on valmistettu lämmönkestävästä hemlokista ja muodostaa suojaavan esteen samalla kun se parantaa kiukaan ulkonäköä.",
+    "description": null,
+    "type": "Kiuassuoja"
+  }
+}

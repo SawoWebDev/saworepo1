@@ -1,0 +1,26 @@
+{
+  "slug": "innova-2-0-contactor-unit",
+  "productId": "16492285-3ef7-436b-9606-9a01304cf309",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova 2.0 Kontaktoriyksikkö",
+    "short_description": "<p style=\"text-align: justify;\">Yhdistä <b>Innova 2.0 -kontaktoriyksikkö</b> Innova 2.0 -tehonohjaimeen käytettäväksi yli 15 kW:n kiukaiden kanssa.</p><p style=\"text-align: justify;\">Kotelossa on enemmän tilaa sähköasentajan työskentelyyn, mikä tekee asennuksesta helpompaa kuin koskaan! Uusi nykyaikaistettu kotelo tarjoaa enemmän tilaa helpompaan ja nopeampaan asennukseen. Joustavat johdotusvaihtoehdot vedonpoistoineen kotelon neljällä sivulla, mukaan lukien takaosa, jolloin johdotus voidaan piilottaa kokonaan.</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNICAL DETAILS</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>15kW max</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova 2.0 Contactor Unit (INP-S-V2)</td><td>W: 320 mm x H: 270 mm x D: 78 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Rated Power 3 Phase</td><td>3x5kW</td></tr>\n  <tr><td>Rated Voltage 3 Phase</td><td>400V 3N~</td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "Pakkaus sisältää Innova-kontaktoriyksikön ja 1 m RJ12-kaapelin",
+      "Uusi kotelomalli entistä helpompaan asennukseen, lisätilaa ja johdotusvaihtoehtoja"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

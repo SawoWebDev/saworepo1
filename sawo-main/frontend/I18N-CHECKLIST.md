@@ -1193,6 +1193,93 @@ query joining `products`→`product_translations` on all 40 slugs: 40/40
 have a `fi` row with non-empty `source_field_hashes`. Post-batch count:
 **88 of 380 products still missing `fi`** (down from 128).
 
+**Batch — 46 products, Heater Guard complete + Sauna Controls complete
+(2026-09-04)**: ran as an explicit fixed 46-slug batch (not a fresh
+`pending` pull) to avoid overlapping with other parallel sessions
+working the same push concurrently. **Heater Guard (26/26)** via the
+templated-micro-category fill-script pattern
+(`fill-fi-heater-guard.mjs`), mirroring the already-applied zh Heater
+Guard batch: 5 short_description variants keyed off the actual English
+source text per product (not the slug) — the plain Hemlock-only
+sentence (20 products), the Cubos middle/wall variant with an extra
+install-location sentence, the fully different Cubos-corner sentence
+(mentions integration collars, no "safety feature" framing), and two
+"woods such as cedar[, aspen,] or hemlock" variants (`heaterking-w4`
+lists all three woods, `helius`/`nordex-pro` list only cedar/aspen).
+New `type`: Heater Guard → **"Kiuassuoja"** — found already established
+in `translation_memory` (`"Optional heater guard"` →
+`"Valinnainen kiuassuoja"`) rather than coined fresh. Also confirmed via
+`translation_memory`: "Integration collar" → "liitosrengas" (used in the
+Cubos-corner short_description). Position words in `name` (Corner/
+Round/Wall/Wall) translated per the naming-convention doc's "descriptive
+words attached to a brand DO get translated" rule — confirmed the
+established `fi` words by querying live `product_translations` rows for
+the actual heater products (not the Heater Guard zh packets sitting in
+`data/product-i18n/`, which still show the pre-audit-fix English
+position words since that zh naming-convention audit was done via direct
+SQL, not through this pipeline, so local zh packet files never got
+regenerated): Corner → **Kulma**, Round → **Pyöreä**, Wall → **Seinä**
+(all three from live `Aries`/`Tower`/`SAWO30` heater name rows); Middle
+had no existing `fi` precedent, coined **Keski** to match the same
+compact single-word style. `spec_table_headers`: Model → Malli, Material
+→ Materiaali, Length/Width/Height/Depth (mm) → Pituus/Leveys/Korkeus/
+Syvyys (mm), consistent with the existing heater spec-header table in
+`PRODUCT-TRANSLATION-CONVENTIONS.md`.
+
+**Sauna Controls (20/20)** — same 20 slugs as the already-applied zh
+Sauna Controls batch — hand-translated individually per product (not
+templated), matching how zh explicitly avoided templating this category
+for accuracy. All model codes (INN-IH23, SAU-PS-V2, INP-C, INN-BTEMP,
+INN-HUM, etc.), kW values, mm dimensions, and cable/wire lengths
+preserved exactly; only prose translated. `description` HTML spec
+tables left byte-identical to the English source (untranslated `<td>`
+data cells, no `<th>` content worth translating) — matches the
+already-applied zh rows for the same 20 products exactly. Innova/
+Saunova/SAWO Sense kept as English brand names throughout, including in
+`type`. Per this task's explicit instruction, translated the "common
+word, not brand name" set: **Classic → Klassinen** (confirmed via
+`product_translations`: zh already has `Innova Classic` → `Innova 经典款`
+site-wide, so the zh word is translated everywhere except inside prose
+that merely *references* a sibling product by name, e.g. "compatible
+with Innova Classic 2.0" — left those in English to avoid inventing a
+name for a product outside this batch's scope); **Built-In →
+Sisäänrakennettu** (confirmed established `fi` precedent from
+`infrared-2-0-built-in-control`); **Power Controller → Tehonohjain**
+(confirmed established `fi` precedent from `infrared-2-0-power-
+controller`, found via `translation_memory`); **Contactor Unit →
+Kontaktoriyksikkö** (found already in `translation_memory` from a prior
+Saunova batch); **Simple → Yksinkertainen** (no existing `fi` precedent,
+translated per this task's explicit instruction — the zh sibling
+`Saunova Simple` → `Saunova 简易款` confirms "Simple" is a translatable
+common word here, not a protected brand suffix, matching this category's
+Contactor Unit/Power Controller/Built-In/Stainless Steel Touch
+treatment rather than the Batch 1 fi call on Dragon/Essential/Signature,
+which is a different product line); **Stainless Steel Touch → Ruostumaton
+Teräs -kosketusnäyttö** (coined — no direct `fi` product-name precedent
+existed, but `translation_memory` already had the descriptive phrase
+"Stainless steel touch" → "Ruostumaton teräs (kosketusnäyttö)" from
+prose elsewhere, used as the basis). "Door Sensor" translated as
+"ovianturi" throughout (not "oviaisturi", a typo caught during drafting
+and corrected before writing any packet). Two English-source stray
+Finnish strings found and reused as-is rather than retranslated: three
+Interface Holder products' `type` field already contained Finnish text
+in the *English* source row (`"Käyttöliittymän pidike"`) — copied
+through unchanged for `fi`, since it already was the correct target
+text; `innova-stainless-steel-touch`'s English `features` array
+similarly already contained two stray Finnish strings ("Näppäinlukko",
+"Sähkökatkomuisti") mixed into otherwise-English bullets — kept
+unchanged, matching how the already-applied zh features array treated
+them (translated the surrounding English bullets, left these two as the
+existing correct value). Corrected two comma-decimal typos in the
+English source (`sawo-sense`: "9,0kW"/"18,0kW"; `saunova-2-0-plus`:
+"9,0kW"/"n18,0kW") to the catalog's period convention in the
+translation only ("9.0 kW"/"18.0 kW"), same treatment the zh Batch 7
+entry already logged for these exact two products — source left as-is.
+Verified via `apply-many` (46/46 succeeded on the first pass, no `fetch
+failed` retries needed) and independently via a direct Supabase query
+joining `products`→`product_translations` on all 46 slugs: 46/46 have a
+`fi` row with non-empty `source_field_hashes`.
+
 ### zh completeness audit (2026-09-04)
 
 With the `zh` push having been declared complete on 2026-09-03, ran a
