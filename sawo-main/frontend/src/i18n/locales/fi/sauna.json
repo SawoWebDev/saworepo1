@@ -510,5 +510,137 @@
         }
       }
     }
+  },
+  "wallMountedPage": {
+    "meta": {
+      "title": "Seinäkiuassarjan saunankiukaat",
+      "description": "Tutustu SAWOn seinäkiukaisiin: Nordex-, Mini-, Scandia-, Krios- ja Scandifire-sarjat vankkoina, tilaa säästävinä ratkaisuina pieniin ja keskikokoisiin saunoihin."
+    },
+    "hero": {
+      "title": "SEINÄKIUASSARJAN SAUNANKIUKAAT",
+      "subtitle": "Tilaa säästäviä, tyylikkään moderneja malleja",
+      "alt": "Seinäkiuassarjan saunankiukaat",
+      "exploreButton": "TUTUSTU KIUKAISIIN"
+    },
+    "intro": {
+      "title": "Esittelyssä huippuluokan seinäkiukaamme",
+      "desc": "Seinäkiukaamme on suunniteltu perinteisen kuivan ja kuuman saunakokemuksen ystäville. Tämä klassisten kiukaiden sarja tarjoaa vankkoja, tilaa säästäviä malleja pieniin ja keskikokoisiin saunoihin."
+    },
+    "why": {
+      "eyebrow": "SAWO-KIUKAAT",
+      "title": "Miksi valita SAWOn kiukaat",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
+    },
+    "promo": {
+      "title": "Koe täydellinen rentoutuminen",
+      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
+    }
+  },
+  "stonePage": {
+    "meta": {
+      "title": "Stone-sarjan saunakiukaat",
+      "description": "SAWOn Stone-sarjan kiukaat yhdistävät kestävän ruostumattoman teräksen lämpöä johtavaan suomalaiseen vuolukiveen tehokasta lämmitystä ja nopeaa kuivumista varten käytön jälkeen."
+    },
+    "hero": {
+      "title": "STONE-SARJAN SAUNAKIUKAAT",
+      "subtitle": "Tehokkaita, tyylikkäitä ja hyvinvointiin keskittyviä saunoja.",
+      "alt": "Stone-sarjan saunakiukaat",
+      "exploreButton": "TUTUSTU KIUKAISIIN"
+    },
+    "intro": {
+      "title": "Esittelyssä huippuluokan Stone-sarjan saunakiukaat",
+      "desc": "Nauti nykyaikaisista, energiatehokkaista saunoista, jotka on suunniteltu rentoutumista ja hyvinvointia varten tyylikkäällä ulkoasulla ja erinomaisella mukavuudella. Stone-kiukaamme on valmistettu kokonaan kivestä tai ruostumattoman teräksen ja kiven yhdistelmästä. Saat erinomaisen lämmönjohtavuuden suomalaisesta vuolukivestä, joka parantaa saunakokemustasi ja kuivattaa saunahuoneen nopeammin käytön jälkeen."
+    },
+    "why": {
+      "eyebrow": "SAWO-KIUKAAT",
+      "title": "Miksi valita SAWOn kiukaat",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
+      "durable": "Kestävä rakenne: Korkealaatuiset materiaalit takaavat pitkäikäisen suorituskyvyn."
+    },
+    "promo": {
+      "title": "Koe täydellinen rentoutuminen",
+      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
+    },
+    "empty": "Stone-kiukaita ei ole saatavilla."
+  },
+  "floorPage": {
+    "meta": {
+      "title": "Lattiakiuassarjan saunakiukaat",
+      "description": "SAWOn Lattiakiuassarja: tehokkaita, siirrettäviä itsenäisiä saunankiukaita, jotka takaavat optimaalisen lämmönjaon ja pitkäkestoisen mukavuuden koti- ja kaupallisiin saunoihin."
+    },
+    "hero": {
+      "title": "SAUNAN LATTIAKIUKAAT",
+      "subtitle": "Erinomainen lämmönjako ja tyylikäs muotoilu",
+      "alt": "Saunan lattiakiukaat",
+      "exploreButton": "TUTUSTU KIUKAISIIN"
+    },
+    "intro": {
+      "title": "Esittelyssä huippuluokan saunan lattiakiukaamme",
+      "desc": "Koe erinomainen lämmönjako ja tyylikäs muotoilu huippuluokan saunan lattiakiukaillamme, jotka on suunniteltu täydellistä rentoutumista ja tehokkuutta varten."
+    },
+    "why": {
+      "eyebrow": "SAWO-KIUKAAT",
+      "title": "Miksi valita SAWOn kiukaat",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
+    },
+    "promo": {
+      "title": "Koe täydellinen rentoutuminen",
+      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
+    },
+    "empty": "Lattiakiukaita ei ole saatavilla."
+  },
+  "combiPage": {
+    "meta": {
+      "title": "Combi-sarjan saunakiukaat",
+      "description": "SAWOn Combi-kiukaat yhdistävät saunan ja höyryn yhteen tehokkaaseen laitteeseen – monipuolista, energiatehokasta lämpöä sisäänrakennetulla höyrystimellä."
+    },
+    "hero": {
+      "title": "COMBI-KIUKAAT",
+      "subtitle": "Sauna ja höyry yhdessä tehokkaassa laitteessa",
+      "alt": "Combi-kiukaat",
+      "exploreButton": "TUTUSTU KIUKAISIIN"
+    },
+    "intro": {
+      "title": "Esittelyssä huippuluokan Combi-sarjan saunakiukaat",
+      "desc": "Combi-kiukaat ovat sähkökiukaita, joissa on sisäänrakennettu höyrystin, joten voit valita tavallisen saunan ja höyrysaunan väliltä. Combi-kiukaissa on aromiöljyallas ja patentoitu vedenpinnan tunnistusjärjestelmä, joka varoittaa veden loppuessa. Vedenpintaa voidaan tarkkailla helposti vedenpinnan ilmaisinputken avulla (vain vakiomallissa)."
+    },
+    "why": {
+      "eyebrow": "SAWO-KIUKAAT",
+      "title": "Miksi valita SAWOn kiukaat",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
+      "durable": "Kestävä rakenne: Korkealaatuiset materiaalit takaavat pitkäikäisen suorituskyvyn."
+    },
+    "promo": {
+      "title": "Koe täydellinen rentoutuminen",
+      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
+    },
+    "empty": "Combi-kiukaita ei ole saatavilla."
+  },
+  "dragonfirePage": {
+    "meta": {
+      "title": "Dragonfire-sarjan saunakiukaat",
+      "description": "SAWOn Dragonfire-sarja: taiteellisia saunakiukaita, jotka on suunnitellut Stefan Lindfors ja jotka yhdistävät näyttävän muotoilun huipputason lämmitystekniikkaan."
+    },
+    "hero": {
+      "title": "DRAGONFIRE-SARJAN SAUNAKIUKAAT",
+      "subtitle": "Taiteellista tyyliä ja huipputeknologiaa",
+      "alt": "Dragonfire-sarjan saunakiukaat",
+      "exploreButton": "TUTUSTU KIUKAISIIN"
+    },
+    "intro": {
+      "title": "Esittelyssä huippuluokan Dragonfire-sarjan saunakiukaat",
+      "desc": "Dragonfire-kiukaat ovat hienostunut yhdistelmä taiteellista tyyliä ja huipputeknologiaa, tunnetun suomalaisen muotoilijan Stefan Lindforsin suunnittelemina. Jokaisessa Dragonfire-kiukaassa on tyylikäs viidakkotulikuvio, ja se tarjoaa voimakasta, tasaista lämpöä sekä energiatehokkuutta. Valittavana on lattia-, seinä- ja nurkkamalleja sekä Mini-kiukaita."
+    },
+    "why": {
+      "eyebrow": "SAWO-KIUKAAT",
+      "title": "Miksi valita SAWOn kiukaat",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
+      "userFriendly": "Käyttäjäystävälliset ohjaimet: Säädä lämpötilaa ja aikaa helposti täydellisen saunakokemuksen saavuttamiseksi."
+    },
+    "promo": {
+      "title": "Koe täydellinen rentoutuminen",
+      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
+    },
+    "empty": "Dragonfire-kiukaita ei ole saatavilla."
   }
 }

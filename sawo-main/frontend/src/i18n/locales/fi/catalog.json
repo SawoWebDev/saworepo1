@@ -1,0 +1,135 @@
+{
+  "allProducts": {
+    "meta": {
+      "title": "Kaikki tuotteet",
+      "description": "Selaa SAWOn koko tuotevalikoimaa: saunankiukaat, saunahuoneet ja lisävarusteet, kaikki yhdessä haettavassa tuoteluettelossa."
+    },
+    "hero": {
+      "eyebrow": "Koko valikoima",
+      "title": "Kaikki tuotteet",
+      "description": "Selaa SAWOn koko tuotevalikoimaa: saunankiukaat, ohjaimet, höyrynkehittimet, saunahuoneet ja lisävarusteet, kaikki yhdessä haettavassa tuoteluettelossa."
+    },
+    "loading": "Ladataan tuotteita...",
+    "sidebar": {
+      "browseBy": "Selaa",
+      "type": "Tyyppi",
+      "categories": "Kategoriat"
+    },
+    "tabs": {
+      "heaters": "Saunankiukaat",
+      "rooms": "Saunahuoneet",
+      "saunaControls": "Saunaohjaimet",
+      "steam": "Höyry",
+      "infrared": "Infrapuna",
+      "heaterAccessories": "Kiuastarvikkeet",
+      "accessories": "Saunatarvikkeet"
+    },
+    "heaterSections": {
+      "wallMounted": "Seinäkiuassarja",
+      "tower": "Tower-sarja",
+      "stone": "Stone-sarja",
+      "floor": "Lattiakiuassarja",
+      "combi": "Combi-sarja",
+      "dragonfire": "Dragonfire-sarja"
+    },
+    "roomSections": {
+      "standard": "Standardi",
+      "glassFront": "Lasietuseinä",
+      "compact": "Kompakti"
+    },
+    "steamSections": {
+      "generators": "Höyrynkehittimet",
+      "controls": "Höyryohjaimet",
+      "accessories": "Höyrytarvikkeet"
+    },
+    "infraredSections": {
+      "rooms": "Saunahuoneet",
+      "panels": "Paneelit",
+      "controls": "Ohjaimet"
+    },
+    "heaterAccessoriesLabels": {
+      "Heater Guard": "Kiuassuojat",
+      "Integration Collar": "Kauluslistat",
+      "Humidifiers": "Aromisäiliöt",
+      "Sauna Accessories": "Turvatarvikkeet",
+      "Sauna Stones": "Saunakivet"
+    },
+    "categorySections": {
+      "pails": "Saunakiulut",
+      "ladles": "Saunakauhat",
+      "pailShower": "Kiulusuihkut",
+      "meters": "Lämpömittarit & yhdistelmämittarit",
+      "clockTimer": "Kellot & ajastimet",
+      "saunaLights": "Saunavalaisimet",
+      "headrestBackrest": "Pääntuet & selkänojat",
+      "doorsHandles": "Ovet & kahvat",
+      "benches": "Lauteet",
+      "clothHangers": "Ripustimet & koukkutelineet",
+      "woodenFloorMats": "Lattiamatot",
+      "kivistone": "Kivistone",
+      "ventMisc": "Ilmanvaihto & sekalaiset tarvikkeet"
+    },
+    "empty": {
+      "heaters": "Saunankiukaita ei ole saatavilla",
+      "rooms": "Saunahuoneita ei ole saatavilla",
+      "saunaControls": "Saunaohjaimia ei ole saatavilla",
+      "steam": "Höyrytuotteita ei ole saatavilla",
+      "infrared": "Infrapunatuotteita ei ole saatavilla",
+      "heaterAccessories": "Kiuastarvikkeita ei ole saatavilla"
+    }
+  },
+  "heatersCatalog": {
+    "meta": {
+      "title": "Saunankiukaat",
+      "description": "Selaa SAWOn koko kiuasvalikoimaa: Tower-, seinä-, Stone-, lattia-, Combi- ja Dragonfire-sarjat jokaiseen saunakokoon ja -tyyliin."
+    },
+    "hero": {
+      "title": "Saunankiukaat",
+      "description": "Tutustu kattavaan valikoimaamme huippuluokan saunankiukaita, jotka on suunniteltu jokaiseen saunakokoon ja -tyyliin. Selaa huolella koottuja Tower-, seinä-, Stone-, lattia-, Combi- ja Dragonfire-sarjojamme."
+    },
+    "loading": "Ladataan kiukaita...",
+    "sidebar": {
+      "browseBy": "Selaa",
+      "series": "Sarja"
+    },
+    "groups": {
+      "wallMounted": "Seinäkiuassarja",
+      "tower": "Tower-sarja",
+      "stone": "Stone-sarja",
+      "floor": "Lattiakiuassarja",
+      "combi": "Combi-sarja",
+      "dragonfire": "Dragonfire-sarja"
+    },
+    "cta": {
+      "title": "Tarvitsetko apua oikean kiukaan valinnassa?",
+      "desc": "Tiimimme auttaa sinua sovittamaan tehon, koon ja tyylin saunaasi, tai selaa täydet tekniset tiedot tuoteluettelostamme.",
+      "contactBtn": "OTA YHTEYTTÄ",
+      "downloadBtn": "LATAA TUOTELUETTELO"
+    }
+  },
+  "accessoriesCatalog": {
+    "meta": {
+      "title": "Saunatarvikkeet",
+      "description": "Selaa SAWOn koko tarvikevalikoimaa: kiulut, kauhat, lämpömittarit, lauteet, valaistus ja paljon muuta jokaiseen saunaan."
+    },
+    "hero": {
+      "eyebrow": "Premium-valikoima",
+      "title": "Saunatarvikkeet",
+      "description": "Tutustu kattavaan valikoimaamme huippuluokan saunatarvikkeita, jotka on suunniteltu parantamaan hyvinvointikokemustasi. Selaa huolella koottua valikoimaamme korkealaatuisia tuotteita."
+    },
+    "loading": "Ladataan tarvikkeita...",
+    "sidebarTitle": "Saunatarvikkeet",
+    "groups": {
+      "pailsLadles": "Kiulut & kauhat",
+      "meters": "Lämpömittarit & yhdistelmämittarit",
+      "clockTimer": "Kellot & ajastimet",
+      "saunaLights": "Saunavalaisimet",
+      "headrestBackrest": "Pääntuet & selkänojat",
+      "doorsHandles": "Ovet & kahvat",
+      "benches": "Lauteet, ripustimet & lattiamatot",
+      "kivistone": "Kivistone",
+      "ventMisc": "Ilmanvaihto & sekalaiset tarvikkeet",
+      "accessorySets": "Tarvikepaketit"
+    }
+  }
+}
