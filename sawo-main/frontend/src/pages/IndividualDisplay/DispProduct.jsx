@@ -787,37 +787,14 @@ const CURATED_RELATED_BY_SLUG_PREFIX = [
   },
 ];
 
-/* ── Related Products grid (shared by every group below) ────────────── */
-function RelatedProductsGrid({ eyebrow, title, items }) {
-  if (!items.length) return null;
+/* ── Product cards grid (used inside the More Details drawer) ───────── */
+function ProductGrid({ items }) {
+  if (!items?.length) return null;
   return (
-    <>
-      <Divider />
-      {/* Symmetric top/bottom padding — this grid renders back-to-back with
-          another one of itself (Accessories, then Other Heaters), so a
-          lopsided bottom padding here would stack with this one's own top
-          padding and blow the gap between them out to ~130px. */}
-      <section style={{ maxWidth: 1140, margin: "0 auto", padding: "44px 32px" }}>
-        <div style={{ marginBottom: 28 }}>
-          <p style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-            fontSize: "0.67rem", letterSpacing: "0.14em", textTransform: "uppercase",
-            color: "#a67853", margin: "0 0 6px",
-          }}>
-            {eyebrow}
-          </p>
-          <h2 style={{
-            fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
-            fontSize: "1.5rem", color: "#2c1a0e", margin: 0, lineHeight: 1.2,
-          }}>
-            {title}
-          </h2>
-        </div>
-
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          gap: 24,
+          gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+          gap: 20,
         }}>
           {items.map(p => (
             <Link
@@ -872,53 +849,292 @@ function RelatedProductsGrid({ eyebrow, title, items }) {
             </Link>
           ))}
         </div>
-      </section>
-    </>
   );
 }
 
-/* ── Related Products ─────────────────────────────────────────────── */
-function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
-  const { accessories, otherHeaters, generic } = useMemo(() => {
-    const empty = { accessories: [], otherHeaters: [], generic: [] };
-    if (!allProducts.length) return empty;
+/* ── Spec table reader — same shape ProductPage computes for the current
+   product, but reusable for any related-product object so each accordion
+   row in the Other Heaters drawer can render its own Technical Data table ── */
+function getSpecTable(p) {
+  const specCell = (row, h, ci) => Array.isArray(row) ? row[ci] : row?.[h];
+  const tableHasValues = (headers, rows) => headers.length > 0 && rows.some(
+    row => headers.some((h, ci) => {
+      const v = specCell(row, h, ci);
+      return v !== null && v !== undefined && String(v).trim() !== "" && String(v).trim() !== "–";
+    })
+  );
 
-    const sameCategory = (cats) => {
-      if (!cats?.length) return [];
-      const lower = cats.slice(0, 1).map(c => c.toLowerCase());
-      return allProducts
-        .filter(p =>
-          isPubliclyVisible(p) &&
-          p.slug !== currentSlug &&
-          (p.categories || []).some(c => lower.includes(c.toLowerCase()))
-        )
-        .slice(0, 4);
+  const headers = p?.spec_table?.headers || [];
+  const rows = p?.spec_table?.rows || [];
+  if (tableHasValues(headers, rows)) return { headers, rows, specCell, hasTable: true };
+
+  // Fallback: many products carry their table inside a heating-element /
+  // config-group variant (the unified `variations` column, or the legacy
+  // `heating_element_groups`/`variants` columns) instead of the top-level
+  // spec_table column — same source the main product's own Specifications
+  // section reads via getVariationsArray()/heatingGroups.
+  const groupWithTable = (getVariationsArray(p) || []).find(
+    g => tableHasValues(g?.spec_table?.headers || [], g?.spec_table?.rows || [])
+  );
+  if (groupWithTable) {
+    return {
+      headers: groupWithTable.spec_table.headers,
+      rows: groupWithTable.spec_table.rows,
+      specCell,
+      hasTable: true,
     };
-
-    const curated = CURATED_RELATED_BY_SLUG_PREFIX.find(c => currentSlug?.startsWith(c.prefix));
-    if (curated) {
-      const bySlug = new Map(allProducts.map(p => [p.slug, p]));
-      const accessories = curated.slugs
-        .map(s => bySlug.get(s))
-        .filter(p => p && isPubliclyVisible(p) && p.slug !== currentSlug);
-      return { accessories, otherHeaters: sameCategory(categories), generic: [] };
-    }
-
-    return { accessories: [], otherHeaters: [], generic: sameCategory(categories) };
-  }, [currentSlug, categories, allProducts]);
-
-  if (!accessories.length && !otherHeaters.length && !generic.length) return null;
-
-  if (accessories.length || otherHeaters.length) {
-    return (
-      <>
-        <RelatedProductsGrid eyebrow="You might also like" title="Sauna Accessories" items={accessories} />
-        <RelatedProductsGrid eyebrow="You might also like" title="Other Heaters" items={otherHeaters} />
-      </>
-    );
   }
 
-  return <RelatedProductsGrid eyebrow="You might also like" title="Related Products" items={generic} />;
+  return { headers, rows, specCell, hasTable: false };
+}
+
+/* ── One expandable "Other Heaters" row — scene image + name; expands to
+   that heater's own spec table with a View More link to its product page ── */
+function OtherHeaterRow({ product }) {
+  const [expanded, setExpanded] = useState(false);
+  const { headers, rows, specCell, hasTable } = getSpecTable(product);
+  // Second fallback: ~130+ products migrated from WordPress carry their
+  // table as raw pasted <table> HTML inside the description field instead
+  // of the structured spec_table/variations columns — same case the main
+  // product's own Specifications drawer renders via .pp-richtext.
+  const hasDescTable = !hasTable && /<table[\s>]/i.test(product.description || "");
+  const galleryImages = getImagesArray(product, 'images');
+  const previewImg = galleryImages[0] || getImageUrl(product, 'thumbnail');
+
+  return (
+    <div style={{ border: "1px solid #edddd0", borderRadius: 12, overflow: "hidden" }}>
+      <button
+        onClick={() => setExpanded(e => !e)}
+        style={{
+          display: "block", width: "100%", padding: 0, margin: 0,
+          background: "transparent", border: "none", cursor: "pointer", textAlign: "left", font: "inherit",
+        }}
+      >
+        <PlaceholderPreview label="scene image" image={previewImg} />
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "14px 16px", background: "#8b5e3c",
+        }}>
+          <span style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.9rem", color: "#fff" }}>
+            {product.name}
+          </span>
+          <i className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`} style={{ color: "#fff", fontSize: "0.8rem" }} />
+        </div>
+      </button>
+
+      {expanded && (
+        <div style={{ padding: "18px 16px" }}>
+          {hasTable ? (
+            <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a", marginBottom: 16 }}>
+              <table style={{ width: "100%", minWidth: Math.max(360, headers.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                <thead>
+                  <tr style={{ background: "#8b5e3c" }}>
+                    {headers.map((h, i) => (
+                      <th key={i} style={{
+                        padding: "10px 14px", textAlign: "center", color: "#fff",
+                        fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
+                        letterSpacing: "0.06em", lineHeight: 1.2,
+                        borderRight: i < headers.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
+                      }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((row, ri) => (
+                    <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
+                      {headers.map((h, ci) => (
+                        <td key={ci} style={{
+                          padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
+                          borderRight: ci < headers.length - 1 ? "1px solid #edddd0" : "none",
+                        }}>{specCell(row, h, ci) || "–"}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : hasDescTable ? (
+            <div
+              className="pp-richtext"
+              style={{ marginBottom: 16 }}
+              dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description) }}
+            />
+          ) : (
+            <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#a67853", fontStyle: "italic", fontSize: "0.82rem", margin: "0 0 16px" }}>
+              No specifications available.
+            </p>
+          )}
+          <Link
+            to={`/products/${product.slug}`}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 7, padding: "9px 20px",
+              background: "linear-gradient(135deg,#8b5e3c,#a67853)", color: "#fff",
+              textDecoration: "none", fontWeight: 700, borderRadius: 7, fontSize: "0.82rem",
+              fontFamily: "'Montserrat',sans-serif",
+            }}
+          >
+            View More
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function OtherHeatersAccordion({ items }) {
+  if (!items?.length) return null;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      {items.map(p => <OtherHeaterRow key={p.id || p.slug} product={p} />)}
+    </div>
+  );
+}
+
+/* ── Related-product grouping (plain function, not a hook — safe to call
+   directly during render since ProductPage's own hooks all run earlier) ── */
+function computeRelatedGroups(currentSlug, categories, allProducts = []) {
+  const empty = { accessories: [], otherHeaters: [], generic: [] };
+  if (!allProducts.length) return empty;
+
+  const sameCategory = (cats) => {
+    if (!cats?.length) return [];
+    const lower = cats.slice(0, 1).map(c => c.toLowerCase());
+    return allProducts
+      .filter(p =>
+        isPubliclyVisible(p) &&
+        p.slug !== currentSlug &&
+        (p.categories || []).some(c => lower.includes(c.toLowerCase()))
+      )
+      .slice(0, 4);
+  };
+
+  const curated = CURATED_RELATED_BY_SLUG_PREFIX.find(c => currentSlug?.startsWith(c.prefix));
+  if (curated) {
+    const bySlug = new Map(allProducts.map(p => [p.slug, p]));
+    const accessories = curated.slugs
+      .map(s => bySlug.get(s))
+      .filter(p => p && isPubliclyVisible(p) && p.slug !== currentSlug);
+    return { accessories, otherHeaters: sameCategory(categories), generic: [] };
+  }
+
+  return { accessories: [], otherHeaters: [], generic: sameCategory(categories) };
+}
+
+/* ── Preview tile for a More Details card — temporary stand-in using the
+   product's own gallery/scene photo until each card gets real preview art ── */
+function PlaceholderPreview({ label, image }) {
+  if (image) {
+    return (
+      <div style={{ aspectRatio: "4/3", overflow: "hidden", background: "#faf7f4" }}>
+        <img src={image} alt={label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      </div>
+    );
+  }
+  return (
+    <div style={{
+      aspectRatio: "4/3",
+      background: "repeating-linear-gradient(135deg, #ececec 0 10px, #f7f7f7 10px 20px)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      color: "#9a9a9a", fontFamily: "monospace", fontSize: "0.68rem",
+      textAlign: "center", padding: 10,
+    }}>
+      {label}
+    </div>
+  );
+}
+
+/* ── More Details card — click opens the DetailsDrawer with that section's
+   content, replacing what used to be always-inline page sections ─────── */
+function MoreDetailsCard({ label, preview, image, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        display: "flex", flexDirection: "column", textAlign: "left",
+        background: "#fff", border: "1px solid #edddd0", borderRadius: 12,
+        overflow: "hidden", cursor: "pointer", padding: 0,
+        boxShadow: "0 1px 3px rgba(0,0,0,0.05)", transition: "all 0.2s ease",
+        font: "inherit",
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.boxShadow = "0 6px 18px rgba(139,94,60,0.16)";
+        e.currentTarget.style.borderColor = "#d4b896";
+        e.currentTarget.style.transform = "translateY(-2px)";
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
+        e.currentTarget.style.borderColor = "#edddd0";
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
+    >
+      <PlaceholderPreview label={preview} image={image} />
+      <div style={{
+        padding: "12px 14px", fontFamily: "'Montserrat',sans-serif",
+        fontWeight: 700, fontSize: "0.85rem", color: "#2c1a0e",
+      }}>
+        {label}
+      </div>
+    </button>
+  );
+}
+
+/* ── Slide-in sidebar drawer — shows the content for whichever More
+   Details card was clicked (Specifications, Diagrams & Resources,
+   Accessories, Other Heaters). Single instance, content swapped by key.
+   Closes on backdrop click OR on scroll (of the underlying page — the
+   drawer's own content scroll is a separate, inner scroll container so it
+   doesn't trigger this). ─────────────────────────────────────────────── */
+function DetailsDrawer({ open, title, onClose, children }) {
+  useEffect(() => {
+    if (!open) return;
+    const handleScroll = () => onClose();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open, onClose]);
+
+  return (
+    <>
+      <div
+        onClick={onClose}
+        style={{
+          position: "fixed", inset: 0, background: "rgba(20,12,6,0.45)",
+          opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none",
+          transition: "opacity 0.25s ease", zIndex: 200,
+        }}
+      />
+      <div className="pp-details-drawer" style={{
+        position: "fixed", top: 0, right: 0, height: "100vh",
+        width: "50vw", background: "#fff",
+        boxShadow: "-8px 0 30px rgba(0,0,0,0.15)",
+        transform: open ? "translateX(0)" : "translateX(100%)",
+        transition: "transform 0.3s ease", zIndex: 201,
+        display: "flex", flexDirection: "column",
+      }}>
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "22px 28px", borderBottom: "1px solid #edddd0", flexShrink: 0,
+        }}>
+          <h3 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "1.15rem", color: "#2c1a0e", margin: 0 }}>
+            {title}
+          </h3>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            style={{
+              background: "transparent", border: "none", cursor: "pointer",
+              width: 34, height: 34, borderRadius: "50%", display: "flex",
+              alignItems: "center", justifyContent: "center", color: "#a67853", flexShrink: 0,
+            }}
+          >
+            <i className="fa-solid fa-xmark" style={{ fontSize: "1.15rem" }} />
+          </button>
+        </div>
+        <div style={{ padding: "24px 28px 40px", overflowY: "auto", flex: 1 }}>
+          {children}
+        </div>
+      </div>
+    </>
+  );
 }
 
 /* ── Skeleton ─────────────────────────────────────────────────────── */
@@ -966,6 +1182,7 @@ function cleanHTMLStyles(html) {
 export default function ProductPage() {
   const { slug } = useParams();
   const [lightbox, setLightbox] = useState(null);
+  const [activeDrawer, setActiveDrawer] = useState(null);
   const { products: localProds, loading } = useLocalProducts();
 
   const product = useMemo(() => {
@@ -977,6 +1194,14 @@ export default function ProductPage() {
 
   const openLightbox = (images, index) => setLightbox({ images, index });
   const closeLightbox = () => setLightbox(null);
+
+  // Hides the fixed site header (via the pp-drawer-open CSS rule below)
+  // while the More Details sidebar is open, regardless of the header's own
+  // scroll-direction hide/show state.
+  useEffect(() => {
+    document.body.classList.toggle("pp-drawer-open", !!activeDrawer);
+    return () => document.body.classList.remove("pp-drawer-open");
+  }, [activeDrawer]);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -1051,6 +1276,189 @@ export default function ProductPage() {
   const hasSection2  = hasDesc || hasSpecTable || hasHeatingGroups;
   const includedItems = (product.included_items || []).filter(i => i && (i.image || i.title));
   const hasIncludedItems = includedItems.length > 0;
+
+  // Related-product groups, now surfaced through the More Details cards /
+  // drawer instead of always-inline "You might also like" sections.
+  const { accessories: relAccessories, otherHeaters: relOtherHeaters, generic: relGeneric } =
+    computeRelatedGroups(slug, product.categories, localProds);
+  const hasAccessoriesCard = relAccessories.length > 0;
+  const hasOtherHeatersCard = relOtherHeaters.length > 0;
+  const hasGenericCard = !hasAccessoriesCard && !hasOtherHeatersCard && relGeneric.length > 0;
+  const hasDiagramCard = hasSpec || hasResources;
+
+  // Temporary placeholder art for the More Details cards — the product's
+  // own gallery photo (not the main thumbnail), until each card gets real
+  // dedicated preview art.
+  const cardPreviewImage = images[0] || thumbnail || null;
+
+  const moreDetailsCards = [
+    hasSection2 && { key: "specifications", label: "Specifications", preview: "spec table preview" },
+    hasDiagramCard && { key: "diagram", label: "Diagrams & Resources", preview: "diagram + PDF preview" },
+    hasAccessoriesCard && { key: "accessories", label: "Accessories", preview: "accessories grid preview" },
+    hasOtherHeatersCard && { key: "otherHeaters", label: "Other Heaters", preview: "other heaters preview" },
+    hasGenericCard && { key: "related", label: "Related Products", preview: "related products preview" },
+  ].filter(Boolean);
+
+  const drawerTitles = {
+    specifications: "Specifications",
+    diagram: "Diagrams & Resources",
+    accessories: "Accessories",
+    otherHeaters: "Other Heaters",
+    related: "Related Products",
+  };
+
+  const renderDrawerContent = () => {
+    switch (activeDrawer) {
+      case "specifications":
+        return (
+          <>
+            {hasDesc && (
+              <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
+                <div
+                  className="pp-richtext"
+                  style={{
+                    fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
+                    lineHeight: 1.7, fontSize: "0.85rem",
+                    maxWidth: "100%",
+                    whiteSpace: "pre-wrap", wordWrap: "break-word",
+                  }}
+                  dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description) }}
+                />
+              </div>
+            )}
+
+            {hasSpecTable && (
+              <div>
+                <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
+                <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+                  <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                    <thead>
+                      <tr style={{ background: "#8b5e3c" }}>
+                        {specHeaders.map((h, i) => (
+                          <th key={i} style={{
+                            padding: "10px 14px", textAlign: "center", color: "#fff",
+                            fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
+                            letterSpacing: "0.06em", lineHeight: 1.2,
+                            borderRight: i < specHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
+                          }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {specRows.map((row, ri) => (
+                        <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
+                          {specHeaders.map((h, ci) => (
+                            <td key={ci} style={{
+                              padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
+                              borderRight: ci < specHeaders.length - 1 ? "1px solid #edddd0" : "none",
+                            }}>{specCell(row, h, ci) || "–"}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {hasHeatingGroups && (
+              <div style={{ marginTop: hasDesc || hasSpecTable ? 40 : 0, display: "flex", flexDirection: "column", gap: 36 }}>
+                {heatingGroups.map((group, gi) => {
+                  const gHeaders = group.spec_table?.headers || [];
+                  const gRows    = group.spec_table?.rows || [];
+                  const gHasTable = gHeaders.length > 0 && gRows.length > 0;
+                  return (
+                    <React.Fragment key={gi}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 28, alignItems: "flex-start" }}>
+                      {group.image && (
+                        <img src={group.image} alt={group.name || `Configuration option ${gi + 1}`}
+                          style={{ width: 220, maxWidth: "100%", height: "auto", flexShrink: 0, margin: "0 auto" }} />
+                      )}
+                      <div style={{ flex: "1 1 260px", minWidth: 220 }}>
+                        {group.name && (
+                          <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 12px" }}>{group.name}</h4>
+                        )}
+                        {group.description && (
+                          <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7, margin: "0 0 12px" }}>{group.description}</p>
+                        )}
+                        {(group.features || []).length > 0 && (
+                          <ul style={{ listStyle: "none", margin: "0 0 16px", padding: 0, fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7 }}>
+                            {group.features.map((f, fi) => (
+                              <li key={fi} style={{ display: "flex", gap: 8 }}>
+                                <span style={{ color: "#8b5e3c", flexShrink: 0 }}>»</span>
+                                <span>{f}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                      {gHasTable && (
+                        <div style={{ width: "100%", overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+                          <table style={{ width: "100%", minWidth: Math.max(360, gHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
+                            <thead>
+                              <tr style={{ background: "#8b5e3c" }}>
+                                {gHeaders.map((h, i) => (
+                                  <th key={i} style={{
+                                    padding: "10px 14px", textAlign: "center", color: "#fff",
+                                    fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
+                                    letterSpacing: "0.06em", lineHeight: 1.2,
+                                    borderRight: i < gHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
+                                  }}>{h}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {gRows.map((row, ri) => (
+                                <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
+                                  {gHeaders.map((h, ci) => (
+                                    <td key={ci} style={{
+                                      padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
+                                      borderRight: ci < gHeaders.length - 1 ? "1px solid #edddd0" : "none",
+                                    }}>{specCell(row, h, ci) || "–"}</td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                    {gi < heatingGroups.length - 1 && (
+                      <hr style={{ border: "none", borderTop: "1px solid #edddd0", margin: 0 }} />
+                    )}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        );
+      case "diagram":
+        return (
+          <>
+            {hasSpec && (
+              <div style={{ marginBottom: hasResources ? 32 : 0 }}>
+                <CompactSpecImages images={specImages} onImageClick={openLightbox} productName={product.name} />
+              </div>
+            )}
+            {hasResources && (
+              <div>
+                <SectionLabel text="Resources" />
+                <ResourcesPanel files={files} />
+              </div>
+            )}
+          </>
+        );
+      case "accessories":
+        return <ProductGrid items={relAccessories} />;
+      case "otherHeaters":
+        return <OtherHeatersAccordion items={relOtherHeaters} />;
+      case "related":
+        return <ProductGrid items={relGeneric} />;
+      default:
+        return null;
+    }
+  };
 
   // Plain-text meta description from whichever product copy is available —
   // short_description/description are HTML (rendered via dangerouslySetInnerHTML
@@ -1166,8 +1574,21 @@ export default function ProductPage() {
           .pp-s1-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
           .pp-s3-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
         }
+        @media(max-width:640px){
+          .pp-s1b-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+        }
         @media(max-width:600px){
           .pp-outer { padding-left: 16px !important; padding-right: 16px !important; }
+        }
+        @media(max-width:768px){
+          .pp-details-drawer { width: 100vw !important; }
+        }
+
+        /* Force the fixed site header off-screen while the More Details
+           drawer is open — overrides its own scroll-direction hide/show
+           className regardless of scroll state. */
+        body.pp-drawer-open header {
+          transform: translateY(-100%) !important;
         }
       `}</style>
 
@@ -1186,7 +1607,7 @@ export default function ProductPage() {
             className="pp-s1-grid"
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}
           >
-            {/* LEFT: Carousel + Resources (only if Diagram exists) */}
+            {/* LEFT: Carousel */}
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
               <Carousel
                 images={images}
@@ -1195,16 +1616,9 @@ export default function ProductPage() {
                 onImageClick={openLightbox}
                 productName={product.name}
               />
-              {/* Resources — below images (only show on left if Diagram exists) */}
-              {hasResources && hasSpec && (
-                <div>
-                  <SectionLabel text="Resources" />
-                  <ResourcesPanel files={files} />
-                </div>
-              )}
             </div>
 
-            {/* RIGHT: Brand, Name, Short Desc, Features, Spec Images — top aligned */}
+            {/* RIGHT: Brand, Name, Short Desc — top aligned */}
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
               {(product.brand || product.type) && (
                 <p style={{
@@ -1241,190 +1655,80 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {hasFeatures && (
-                <div>
-                  <SectionLabel text="Features" />
-                  <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 5 }}>
-                    {product.features.map((f, i) => (
-                      <li key={i} style={{
-                        fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
-                        fontSize: "0.78rem", lineHeight: 1.4,
-                        display: "flex", alignItems: "flex-start", gap: 7,
-                      }}>
-                        <i className="fa-solid fa-check" style={{ color: "#a67853", fontSize: "0.68rem", marginTop: 4, flexShrink: 0 }} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {!hasShortDesc && !hasFeatures && (
+              {!hasShortDesc && (
                 <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#a67853", fontStyle: "italic", fontSize: "0.86rem", margin: 0 }}>
                   More details coming soon.
                 </p>
-              )}
-
-              {/* Spec Images — compact, no bg, no zoom label, still clickable */}
-              {hasSpec && (
-                <div>
-                  <SectionLabel text="Diagram" />
-                  <CompactSpecImages images={specImages} onImageClick={openLightbox} productName={product.name} />
-                </div>
-              )}
-
-              {/* Resources — on right side if no Diagram */}
-              {hasResources && !hasSpec && (
-                <div>
-                  <SectionLabel text="Resources" />
-                  <ResourcesPanel files={files} />
-                </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* ── SECTION 2: Specifications (Full Description + Spec Table) ── */}
-        {hasSection2 && (
+        {/* ── Features | Diagram — full-width, 2 columns. Diagram also
+              appears again in the More Details drawer (Diagrams & Resources
+              card) — shown both inline here and in the sidebar on purpose. ── */}
+        {(hasFeatures || hasSpec) && (
           <>
             <Divider />
             <div
               className="pp-outer"
               style={{ maxWidth: 1140, margin: "0 auto", padding: "12px 8px" }}
             >
-              <SectionLabel text="Specifications" />
-
-              {/* Full Description */}
-              {hasDesc && (
-                <div style={{ marginBottom: hasSpecTable ? 32 : 0 }}>
-                  <div
-                    className="pp-richtext"
-                    style={{
-                      fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
-                      lineHeight: 1.7, fontSize: "0.82rem",
-                      maxWidth: "100%",
-                      whiteSpace: "pre-wrap", wordWrap: "break-word",
-                    }}
-                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description) }}
-                  />
-                </div>
-              )}
-
-              {/* Technical Data Table */}
-              {hasSpecTable && (
-                <div>
-                  <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
-                  {/* min-width scales with column count, same as the admin
-                      Specifications Table editor — long multi-word headers
-                      (e.g. "Minimum Safety Distances A|B|C|D") get room to
-                      wrap onto 2 lines instead of squeezing every column
-                      down to unreadable widths. */}
-                  <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
-                    <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
-                      <thead>
-                        <tr style={{ background: "#8b5e3c" }}>
-                          {specHeaders.map((h, i) => (
-                            <th key={i} style={{
-                              padding: "10px 14px", textAlign: "center", color: "#fff",
-                              fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
-                              letterSpacing: "0.06em", lineHeight: 1.2,
-                              borderRight: i < specHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
-                            }}>{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {specRows.map((row, ri) => (
-                          <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
-                            {specHeaders.map((h, ci) => (
-                              <td key={ci} style={{
-                                padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
-                                borderRight: ci < specHeaders.length - 1 ? "1px solid #edddd0" : "none",
-                              }}>{specCell(row, h, ci) || "–"}</td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+              <div
+                className="pp-s1b-grid"
+                style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}
+              >
+                {hasFeatures && (
+                  <div>
+                    <SectionLabel text="Features" />
+                    <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
+                      {product.features.map((f, i) => (
+                        <li key={i} style={{
+                          fontFamily: "'Montserrat',sans-serif", color: "#5a4030",
+                          fontSize: "1rem", lineHeight: 1.5,
+                          display: "flex", alignItems: "flex-start", gap: 10,
+                        }}>
+                          <i className="fa-solid fa-check" style={{ color: "#a67853", fontSize: "0.85rem", marginTop: 4, flexShrink: 0 }} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              )}
+                )}
 
-              {/* Heating Element Group Options — e.g. "2/3/6 Heating Elements"
-                  variants of a steam generator, each with its own photo,
-                  feature bullets, and technical-data table (product.heating_
-                  element_groups). Independent of the single spec_table above,
-                  which stays for products that only need one flat table. */}
-              {hasHeatingGroups && (
-                <div style={{ marginTop: hasDesc || hasSpecTable ? 40 : 0, display: "flex", flexDirection: "column", gap: 36 }}>
-                  {heatingGroups.map((group, gi) => {
-                    const gHeaders = group.spec_table?.headers || [];
-                    const gRows    = group.spec_table?.rows || [];
-                    const gHasTable = gHeaders.length > 0 && gRows.length > 0;
-                    return (
-                      <React.Fragment key={gi}>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 28, alignItems: "flex-start" }}>
-                        {group.image && (
-                          <img src={group.image} alt={group.name || `Configuration option ${gi + 1}`}
-                            style={{ width: 220, maxWidth: "100%", height: "auto", flexShrink: 0, margin: "0 auto" }} />
-                        )}
-                        <div style={{ flex: "1 1 260px", minWidth: 220 }}>
-                          {group.name && (
-                            <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 12px" }}>{group.name}</h4>
-                          )}
-                          {group.description && (
-                            <p style={{ fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7, margin: "0 0 12px" }}>{group.description}</p>
-                          )}
-                          {(group.features || []).length > 0 && (
-                            <ul style={{ listStyle: "none", margin: "0 0 16px", padding: 0, fontFamily: "'Montserrat',sans-serif", color: "#5a4030", fontSize: "0.8rem", lineHeight: 1.7 }}>
-                              {group.features.map((f, fi) => (
-                                <li key={fi} style={{ display: "flex", gap: 8 }}>
-                                  <span style={{ color: "#8b5e3c", flexShrink: 0 }}>»</span>
-                                  <span>{f}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                        {gHasTable && (
-                          <div style={{ width: "100%", overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
-                            <table style={{ width: "100%", minWidth: Math.max(360, gHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
-                              <thead>
-                                <tr style={{ background: "#8b5e3c" }}>
-                                  {gHeaders.map((h, i) => (
-                                    <th key={i} style={{
-                                      padding: "10px 14px", textAlign: "center", color: "#fff",
-                                      fontWeight: 700, fontSize: "0.6rem", textTransform: "uppercase",
-                                      letterSpacing: "0.06em", lineHeight: 1.2,
-                                      borderRight: i < gHeaders.length - 1 ? "1px solid rgba(255,255,255,0.25)" : "none",
-                                    }}>{h}</th>
-                                  ))}
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {gRows.map((row, ri) => (
-                                  <tr key={ri} style={{ background: ri % 2 === 1 ? "#faf7f4" : "#fff", borderTop: "1px solid #edddd0" }}>
-                                    {gHeaders.map((h, ci) => (
-                                      <td key={ci} style={{
-                                        padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
-                                        borderRight: ci < gHeaders.length - 1 ? "1px solid #edddd0" : "none",
-                                      }}>{specCell(row, h, ci) || "–"}</td>
-                                    ))}
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        )}
-                      </div>
-                      {gi < heatingGroups.length - 1 && (
-                        <hr style={{ border: "none", borderTop: "1px solid #edddd0", margin: 0 }} />
-                      )}
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
-              )}
+                {hasSpec && (
+                  <div>
+                    <SectionLabel text="Diagram" />
+                    <CompactSpecImages images={specImages} onImageClick={openLightbox} productName={product.name} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* ── More Details — cards that open the relevant content in a
+              slide-in drawer (Specifications, Diagrams & Resources,
+              Accessories, Other Heaters) instead of always-inline sections ── */}
+        {moreDetailsCards.length > 0 && (
+          <>
+            <Divider />
+            <div
+              className="pp-outer"
+              style={{ maxWidth: 1140, margin: "0 auto", padding: "12px 8px 40px" }}
+            >
+              <SectionLabel text="More Details" />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 20 }}>
+                {moreDetailsCards.map(c => (
+                  <MoreDetailsCard
+                    key={c.key}
+                    label={c.label}
+                    preview={c.preview}
+                    image={cardPreviewImage}
+                    onClick={() => setActiveDrawer(c.key)}
+                  />
+                ))}
+              </div>
             </div>
           </>
         )}
@@ -1486,10 +1790,15 @@ export default function ProductPage() {
           </>
         )}
 
-        {/* ── SECTION 3: Related Products ───────────────────────────── */}
-        <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={localProds} />
-
       </div>
+
+      <DetailsDrawer
+        open={!!activeDrawer}
+        title={drawerTitles[activeDrawer] || ""}
+        onClose={() => setActiveDrawer(null)}
+      >
+        {renderDrawerContent()}
+      </DetailsDrawer>
     </>
   );
 }
