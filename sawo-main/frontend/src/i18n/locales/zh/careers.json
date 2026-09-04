@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "title": "招贤纳士",
+    "description": "加入 SAWO 团队,探索这家芬兰桑拿加热器全球领导企业在工程、制造和销售领域的最新职位空缺。"
+  },
+  "hero": {
+    "title": "加入 SAWO 团队",
+    "subtitle": "与桑拿制造业的全球领导者一起,共创您的未来"
+  },
+  "join": {
+    "imgAlt": "加入 SAWO 团队",
+    "highlight": "我们正在寻找拥有桑拿行业相关经验的人才。",
+    "desc": "SAWO 是桑拿制造领域值得信赖的品牌,将芬兰专业技术与位于菲律宾宿务的精湛工艺相结合。我们的团队以为全球市场生产高品质桑拿加热器、配件及完整桑拿解决方案为荣。",
+    "cta": "想在热带工作吗？加入我们,成为桑拿创新行业领导者的一员！"
+  },
+  "badges": { "fullTime": "全职", "onSite": "现场办公" },
+  "openPositions": {
+    "heading": "职位空缺",
+    "intro": "探索各部门精彩的职位空缺：",
+    "locationCebu": "宿务",
+    "locationEurope": "欧洲（混合办公）",
+    "positions": {
+      "electricalEngineer": { "title": "电气工程师", "subtitle": "Elektroniikkasuunnittelija" },
+      "productionSupervisor": { "title": "生产主管（木工）", "subtitle": "Puutekniikan Osaaja" },
+      "marketingSpecialist": { "title": "市场营销专员", "subtitle": "Markkinoinnin Osaaja" },
+      "buyerLogistics": { "title": "采购/物流专员", "subtitle": "Ostaja / Logistiikka-osaaja" },
+      "processEngineer": { "title": "工艺工程师", "subtitle": "Prosessi-insinööri" },
+      "salesManager": { "title": "国际销售经理", "subtitle": "Kansainvälinen Myyntipäällikkö" },
+      "odooDeveloper": { "title": "Odoo 软件开发工程师", "subtitle": "Odoo Ohjelmistokehittäjä" },
+      "salesManagerGerman": { "title": "国际销售经理（德语）", "subtitle": "Kansainvälinen Myyntipäällikkö" },
+      "headOfProduction": { "title": "生产总监", "years": "3–6年经验" },
+      "productionManager": { "title": "生产经理", "years": "2–4年经验" }
+    }
+  },
+  "hiring": {
+    "titlePrefix": "我们正在",
+    "titleHighlight": "招聘！",
+    "desc": "加入这家融合芬兰专业技术与世界一流工艺的行业领导企业。",
+    "emailPrefix": "请将您的简历发送至：",
+    "locationLabel": "地址：SAWO Inc.",
+    "locationAddress": "菲律宾宿务拉普拉普市6015邮编 MEZ2 工业区 Basak",
+    "closing": "让我们携手共创辉煌！"
+  },
+  "categories": {
+    "manufacturing": { "alt": "制造与生产", "title": "制造与生产", "desc": "木工制作、金属加工、质量控制" },
+    "engineering": { "alt": "工程与设计", "title": "工程与设计", "desc": "产品开发、研发、桑拿技术" },
+    "sales": { "alt": "销售与市场营销", "title": "销售与市场营销", "desc": "国内外销售、数字营销、客户关系" },
+    "operations": { "alt": "运营与支持", "title": "运营与支持", "desc": "物流、财务、人力资源、数据分析、IT、行政" }
+  },
+  "whySawo": {
+    "imgAlt": "SAWO 生产制造",
+    "titlePrefix": "为什么选择",
+    "titleHighlight": "SAWO",
+    "innovative": { "title": "创新与以客户为中心", "prefix": "加入一家重视", "highlight": "品质、创新与客户满意度的公司。" },
+    "international": { "title": "国际化视野", "prefix": "与来自", "highlight": "芬兰和菲律宾的专业人才组成的多元化团队", "suffix": "携手合作,共拓全球市场。" },
+    "growth": { "title": "职业成长与发展", "prefix": "我们通过", "highlight": "培训、技能提升和职业晋升机会" },
+    "excellence": { "title": "追求卓越的承诺", "prefix": "SAWO 已通过", "highlight": "ISO 9001 与 ISO 14001 认证", "suffix": ",确保打造一个专注于品质与可持续发展的工作环境。" }
+  }
+}
