@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-door-handle-with-magnetic-lock",
+  "productId": "aff0195f-0bfb-45e5-84dc-225b4793f7da",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (568-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (568-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (568-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen ovenkahva magneettilukolla",
+    "short_description": "SAWO Puinen ovenkahva magneettilukolla on puinen saunan ovenkahva, jossa on sisäänrakennettu magneettilukko, mitat 260 × 45mm, suunniteltu pysymään viileänä kosketettaessa saunan kuumuudessa.",
+    "description": null,
+    "type": "Ovet ja kahvat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (568-D)",
+        "name": "Setri (568-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (568-A)",
+        "name": "Haapa (568-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (568-H)",
+        "name": "Hemlokki (568-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

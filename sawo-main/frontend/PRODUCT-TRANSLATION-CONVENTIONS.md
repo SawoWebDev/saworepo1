@@ -318,7 +318,9 @@ Ladles → Kauhat, Benches → Penkit, Sauna Lights → Saunavalaisimet,
 Ventilation & Miscellaneous → Ilmanvaihto ja sekalaiset, Thermometers →
 Lämpömittarit (used for thermo-hygrometer variants too, same shorter-form
 rule as zh's 温度计 above — the individual product `name`/
-`short_description` says "termohygrometri" where relevant). **Pails is a
+`short_description` says "termohygrometri" where relevant), Doors &
+Handles → Ovet ja kahvat (coined 2026-09-04, matches the `doorsHandlesPage`
+hero copy already established in `sauna.json`). **Pails is a
 documented exception — its `type` field is left as the literal English
 "Pails"** in every existing `fi` row (confirmed 2026-09-04 by querying
 every `fi` Pails row in `product_translations`), not translated like the
