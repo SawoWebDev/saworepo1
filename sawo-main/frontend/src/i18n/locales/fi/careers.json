@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "title": "Ura",
+    "description": "Liity SAWO-tiimiin ja tutustu avoimiin työpaikkoihin suunnittelun, valmistuksen ja myynnin aloilla suomalaisten saunankiukaiden globaalilla markkinajohtajalla."
+  },
+  "hero": {
+    "title": "Liity SAWO-tiimiin",
+    "subtitle": "Rakenna tulevaisuutesi saunavalmistuksen globaalin markkinajohtajan kanssa"
+  },
+  "join": {
+    "imgAlt": "Liity SAWO-tiimiin",
+    "highlight": "Etsimme henkilöitä, joilla on aiempaa kokemusta saunateollisuudesta.",
+    "desc": "SAWO on luotettu nimi saunavalmistuksessa, joka yhdistää suomalaisen osaamisen ja ammattitaitoisen käsityön Cebulla, Filippiineillä. Tiimimme on ylpeä korkealaatuisten saunankiukaiden, tarvikkeiden ja täydellisten saunaratkaisujen valmistamisesta globaaleille markkinoille.",
+    "cta": "Haluatko työskennellä tropiikissa? Liity meihin ja ole osa saunainnovaation alan johtavaa yritystä!"
+  },
+  "badges": { "fullTime": "Kokoaikainen", "onSite": "Paikan päällä" },
+  "openPositions": {
+    "heading": "Avoimet työpaikat",
+    "intro": "Tutustu jännittäviin työpaikkoihin eri osastoilla:",
+    "locationCebu": "Cebu",
+    "locationEurope": "Eurooppa (Hybridi)",
+    "positions": {
+      "electricalEngineer": { "title": "Sähköinsinööri", "subtitle": "Elektroniikkasuunnittelija" },
+      "productionSupervisor": { "title": "Tuotantopäällikkö, puuntyöstö", "subtitle": "Puutekniikan Osaaja" },
+      "marketingSpecialist": { "title": "Markkinointiasiantuntija", "subtitle": "Markkinoinnin Osaaja" },
+      "buyerLogistics": { "title": "Ostaja / logistiikka-asiantuntija", "subtitle": "Ostaja / Logistiikka-osaaja" },
+      "processEngineer": { "title": "Prosessi-insinööri", "subtitle": "Prosessi-insinööri" },
+      "salesManager": { "title": "Kansainvälinen myyntipäällikkö", "subtitle": "Kansainvälinen Myyntipäällikkö" },
+      "odooDeveloper": { "title": "Odoo-ohjelmistokehittäjä", "subtitle": "Odoo Ohjelmistokehittäjä" },
+      "salesManagerGerman": { "title": "Kansainvälinen myyntipäällikkö (saksankielinen)", "subtitle": "Kansainvälinen Myyntipäällikkö" },
+      "headOfProduction": { "title": "Tuotantojohtaja", "years": "3–6 vuoden kokemus" },
+      "productionManager": { "title": "Tuotantopäällikkö", "years": "2–4 vuoden kokemus" }
+    }
+  },
+  "hiring": {
+    "titlePrefix": "Me",
+    "titleHighlight": "Palkkaamme!",
+    "desc": "Ole osa alan johtavaa yritystä, joka yhdistää suomalaisen osaamisen maailmanluokan käsityötaitoon.",
+    "emailPrefix": "Lähetä ansioluettelosi osoitteeseen:",
+    "locationLabel": "Sijainti: SAWO Inc.",
+    "locationAddress": "MEZ2 Estate, Basak, Lapu-Lapu City 6015, Cebu, Filippiinit",
+    "closing": "Rakennetaan yhdessä jotain suurenmoista!"
+  },
+  "categories": {
+    "manufacturing": { "alt": "Valmistus ja tuotanto", "title": "Valmistus ja tuotanto", "desc": "Puuntyöstö, metallinvalmistus, laadunvalvonta" },
+    "engineering": { "alt": "Suunnittelu ja tuotekehitys", "title": "Suunnittelu ja tuotekehitys", "desc": "Tuotekehitys, T&K, saunateknologia" },
+    "sales": { "alt": "Myynti ja markkinointi", "title": "Myynti ja markkinointi", "desc": "Kotimainen ja kansainvälinen myynti, digitaalinen markkinointi, asiakassuhteet" },
+    "operations": { "alt": "Toiminta ja tuki", "title": "Toiminta ja tuki", "desc": "Logistiikka, talous, HR, DA, IT, hallinto" }
+  },
+  "whySawo": {
+    "imgAlt": "SAWOn valmistus",
+    "titlePrefix": "Miksi työskennellä",
+    "titleHighlight": "SAWOlla",
+    "innovative": { "title": "Innovatiivinen ja asiakaslähtöinen", "prefix": "Ole osa yritystä, joka arvostaa", "highlight": "laatua, innovaatioita ja asiakastyytyväisyyttä." },
+    "international": { "title": "Kansainvälinen kokemus", "prefix": "Työskentele monimuotoisen tiimin kanssa, johon kuuluu", "highlight": "suomalaisia ja filippiiniläisiä ammattilaisia", "suffix": "jotka tekevät yhteistyötä globaaleilla markkinoilla." },
+    "growth": { "title": "Uran kasvu ja kehitys", "prefix": "Panostamme työntekijöihimme", "highlight": "koulutuksen, osaamisen kehittämisen ja uralla etenemisen kautta" },
+    "excellence": { "title": "Sitoutuminen huippulaatuun", "prefix": "SAWO on", "highlight": "ISO 9001- ja ISO 14001 -sertifioitu", "suffix": ", mikä takaa laatuun ja kestävyyteen keskittyvän työympäristön." }
+  }
+}

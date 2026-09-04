@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "Tietoa meistä",
+    "description": "Yli 30 vuoden ajan suunnitelleet ja valmistaneet korkealaatuisia suomalaisia saunankiukaita, höyrynkehittimiä ja saunahuoneita, joihin luottavat asiakkaat yli 90 maassa."
+  },
+  "alt": {
+    "office": "SAWOn toimisto",
+    "team": "SAWOn tiimi"
+  },
+  "hero": {
+    "title": "Me olemme SAWO",
+    "subtitle": "Tuomme suomalaisen perinteen maailmalle",
+    "desc": "Olemme asiakaslähtöinen, huippuosaamiseen tähtäävä yritys, joka asettaa asiakkaidemme tarpeet etusijalle jokaisessa vaiheessa – tuotesuunnittelusta valmistukseen ja jälkimarkkinointiin asti. Olemme ylpeitä siitä, että tarjoamme arvostetuille asiakkaillemme vain parhaat tuotteet ja parhaan palvelun."
+  },
+  "innovation": {
+    "titleMain": "Ei rajojen rajoittama",
+    "titleSub": "Suomalainen perinne maailmanlaajuiseksi",
+    "p1": "Olemme eurooppalainen edelläkävijäyritys saunatuotteiden alalla, jolla on tuotantolaitos Aasiassa – yli 600 omistautuneen filippiiniläisen ja suomalaisen ammattilaisen koti, ja määrä kasvaa jatkuvasti. Menestyksemme perustuu kilpailukykyiseen hinnoitteluun, poikkeukselliseen tuotelaatuun ja asiakaspalveluun, joka ylittää odotukset.",
+    "p2": "SAWO on syntynyt yhdistämällä kaksi sanaa <b>Sa</b>una ja <b>Wo</b>rld (maailma). Se kuvaa meitä osuvasti kattavana saunatoimittajana, joka täyttää kaikki saunatarpeesi kiukaista ovenkahvoihin ja tuuletusluukkuihin. Saunan intohimon innoittamina ja innovatiivisen yrityskulttuurin ohjaamina olemme kasvaneet yhdeksi maailman johtavista saunatuotteiden valmistajista, ja palvelemme yli 90 maata ympäri maailmaa – ja määrä kasvaa. Valikoimamme kattaa saunankiukaat, tarvikkeet ja ohjauskeskukset sekä saunahuoneet, höyrynkehittimet ja infrapunaratkaisut.",
+    "p3": "Laajennamme jatkuvasti tuotevalikoimaamme harkitusti suunnitelluilla ja suorituskykyisillä tuotteilla, jotka ylittävät asiakkaiden odotukset ympäri maailmaa. Jokainen tuote valmistetaan suomalaisen johdon alaisuudessa, mikä takaa aitouden ja syvän kunnioituksen suomalaisen saunakulttuurin rikasta perintöä kohtaan.",
+    "p4": "Sitoutumisemme laatuun ja kestävyyteen on vahvistettu kansainvälisesti tunnustetuilla sertifikaateilla. Saimme ensimmäisen <b>ISO 9001 -laadunhallintasertifikaatin</b> vuonna 2002 ja <b>ISO 14001 -ympäristöjärjestelmäsertifikaatin</b> vuonna 2007, ja molemmat uusittiin vuonna 2025 uusimpien standardien mukaisesti: <b>ISO 9001:2015</b> ja <b>ISO 14001:2015</b>. <b>PEFC</b>-sertifikaattimme osoittaa lisäksi sitoutumisemme kestävästi hoidetuista metsistä hankittuun puuraaka-aineeseen. Nämä sertifikaatit takaavat, että jokainen tuote täyttää korkeimmat maailmanlaajuiset turvallisuus-, laatu- ja ympäristövastuun vaatimukset.",
+    "p5": "Ylpeinä suomalaisen saunakulttuurin lähettiläinä olemme myös <b>Sauna from Finland</b> -yhdistyksen jäsen; yhdistys edistää aidon suomalaisen saunakokemuksen tunnettuutta ympäri maailmaa.",
+    "stats": {
+      "establishedLabel": "Vakiintunutta huippuosaamista",
+      "establishedValue": "30+",
+      "establishedSuffix": "vuotta",
+      "reachLabel": "Maailmanlaajuinen ulottuvuus",
+      "reachValue": "90+",
+      "reachSuffix": "maata ympäri maailmaa"
+    },
+    "exploreBtn": "Tutustu tuotteisiimme"
+  },
+  "certs": {
+    "iso9001": { "caption": "ISO 9001", "label": "Laadunhallinta" },
+    "iso14001": { "caption": "ISO 14001", "label": "Ympäristöjärjestelmä" },
+    "saunaFromFinland": { "caption": "Sauna from Finland", "label": "Virallinen jäsen" },
+    "pefc": { "caption": "Edistämme kestävää metsätaloutta", "label": "www.pefc.org" }
+  },
+  "news": {
+    "title": "Viimeisimmät uutiset",
+    "seeMore": "KATSO LISÄÄ",
+    "card1": {
+      "alt": "Viimeaikaiset messut",
+      "label": "Messut",
+      "title": "Viimeaikaiset messut",
+      "desc": "Tänä syksynä osallistuimme Euroopan johtaviin hyvinvointimessuihin: Aquanaleen Kölnissä ja Piscina Barcelonaan. Oli ilo verkostoitua alan johtavien toimijoiden kanssa ja esitellä suomalaista perinnettä ja hyvinvointia."
+    },
+    "card2": {
+      "alt": "Maanjäristysapu",
+      "label": "Yhteisö",
+      "title": "Maanjäristysapu Cebulla",
+      "desc": "Kun 6.9 magnitudin maanjäristys iski Cebun koillisrannikon edustalle, tiimimme järjesti koko yrityksen kattavan avustustoimen ja toimitti patjoja, ruokaa, hygieniatuotteita ja välttämättömiä tarvikkeita kärsineille perheille."
+    },
+    "card3": {
+      "alt": "Kykyjen etsintä",
+      "label": "Ura",
+      "title": "Kykyjen etsintä",
+      "desc": "Onko aika muutokselle? Etsimme henkilöitä, joilla on kokemusta ja/tai kiinnostusta sauna- ja hyvinvointialaan sekä halua kasvaa kanssamme Cebulla."
+    }
+  }
+}
