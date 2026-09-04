@@ -233,5 +233,63 @@
       "Humidifiers": "Cozy Tanks",
       "Sauna Accessories": "Safety Accessories"
     }
+  },
+  "catalogue": {
+    "meta": {
+      "title": "Product Catalogue",
+      "description": "Browse the full SAWO product catalogue, sauna heaters, sauna rooms, and accessories in one searchable listing."
+    },
+    "header": {
+      "eyebrow": "Complete Collection",
+      "title": "All Products",
+      "desc": "Browse our complete range of sauna heaters, rooms, and accessories designed to enhance your wellness experience.",
+      "pdfBtn": "PRODUCT CATALOGUE"
+    },
+    "empty": "No products available.",
+    "banner": {
+      "title": "Can't find what you need?",
+      "desc": "Our support team is ready to help you find the right product for your sauna.",
+      "cta": "CONTACT US"
+    },
+    "tabs": {
+      "heaters": "Sauna Heaters",
+      "controls": "Sauna Controls",
+      "steam": "Steam",
+      "infrared": "Infrared",
+      "heater-acc": "Heater Accessories",
+      "accessories": "Sauna Accessories",
+      "rooms": "Sauna Rooms",
+      "other": "Other"
+    },
+    "seriesLabels": {
+      "Towers": "Tower Series",
+      "Wall-Mounted": "Wall Mounted Series",
+      "Floor": "Floor Series",
+      "Combi": "Combi Series",
+      "Dragonfire": "Dragonfire Series",
+      "Stones": "Stone Series",
+      "Sauna Controls": "Sauna Controls",
+      "Controls": "Sauna Controls",
+      "Steam Generators": "Steam Generators",
+      "Steam Controls": "Steam Generator Controls",
+      "Steam Accessories": "Steam Accessories",
+      "Infrared": "Infrared",
+      "Heater Guard": "Heater Guards",
+      "Integration Collar": "Collars",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Stones": "Sauna Stones",
+      "Safety Switch": "Safety Switches",
+      "Heater Hood": "Heater Hoods",
+      "Doors & Handles": "Doors & Handles",
+      "Headrest & Backrest": "Headrests & Backrests",
+      "Ventilation & Miscellaneous": "Ventilation & Miscellaneous",
+      "Clocks & Timers": "Clocks & Sandtimers",
+      "Wooden Floor Mats": "Wooden Floor Mats",
+      "Accessory Sets": "Accessory Sets",
+      "Pail Shower": "Pail Showers",
+      "standard": "Standard Sauna Rooms",
+      "glassfront": "Glass Front Sauna Rooms",
+      "infrared": "Infrared Saunas"
+    }
   }
 }

@@ -7,6 +7,7 @@ import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import ButtonClear from "../../components/Buttons/ButtonClear";
 import towerWallScene from "../../assets/Support/sawo-tower-wall-scene.webp";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 const PRODUCT_CATALOGUE_PDF_URL =
   "https://www.sawo.com/wp-content/uploads/2026/05/SAWO-Product-Catalogue-040526.pdf";
@@ -24,25 +25,27 @@ const PRODUCT_CATALOGUE_PDF_URL =
 // catch-all (`!isAccessoryProduct(p) && p.type !== "room"`) that piled 203
 // products — heaters, controls, steam, infrared, guards, collars, spare parts —
 // under one "Sauna Heaters" heading.
+// Labels are translated via t("catalogue.tabs.<id>") at render time, not
+// stored here.
 const CATALOGUE_TABS = [
   {
-    id: "heaters", label: "Sauna Heaters",
+    id: "heaters",
     categories: ["Towers", "Wall-Mounted", "Floor", "Combi", "Dragonfire", "Stones"],
   },
   {
-    id: "controls", label: "Sauna Controls",
+    id: "controls",
     categories: ["Sauna Controls", "Controls"],
   },
   {
-    id: "steam", label: "Steam",
+    id: "steam",
     categories: ["Steam Generators", "Steam Controls", "Steam Accessories"],
   },
   {
-    id: "infrared", label: "Infrared",
+    id: "infrared",
     categories: ["Infrared"],
   },
   {
-    id: "heater-acc", label: "Heater Accessories",
+    id: "heater-acc",
     categories: ["Heater Guard", "Integration Collar", "Humidifiers", "Sauna Stones"],
     // Safety switches and the Helius hood only carry the broad "Sauna
     // Accessories" tag, so category matching alone would drop them into the
@@ -55,7 +58,7 @@ const CATALOGUE_TABS = [
     ],
   },
   {
-    id: "accessories", label: "Sauna Accessories",
+    id: "accessories",
     categories: [
       "Pails", "Ladles", "Pail Shower", "Thermometers", "Clocks & Timers",
       "Sauna Lights", "Headrest & Backrest", "Doors & Handles", "Benches",
@@ -67,49 +70,20 @@ const CATALOGUE_TABS = [
   // the old code filtered `p.type === "room"` against `products`, which matches
   // zero rows, so this section silently never rendered at all.
   {
-    id: "rooms", label: "Sauna Rooms", source: "rooms",
+    id: "rooms", source: "rooms",
     groupOrder: ["standard", "glassfront", "infrared"],
   },
   // Safety net: anything with an unrecognised category (e.g. Spare Parts, or a
   // category added in the CMS later) still shows up here instead of vanishing.
-  { id: "other", label: "Other", catchAll: true },
+  { id: "other", catchAll: true },
 ];
 
-// Friendly sub-group headings, keyed by the raw category string.
-const SERIES_LABELS = {
-  "Towers": "Tower Series",
-  "Wall-Mounted": "Wall Mounted Series",
-  "Floor": "Floor Series",
-  "Combi": "Combi Series",
-  "Dragonfire": "Dragonfire Series",
-  "Stones": "Stone Series",
-  "Sauna Controls": "Sauna Controls",
-  "Controls": "Sauna Controls",
-  "Steam Generators": "Steam Generators",
-  "Steam Controls": "Steam Generator Controls",
-  "Steam Accessories": "Steam Accessories",
-  "Infrared": "Infrared",
-  "Heater Guard": "Heater Guards",
-  "Integration Collar": "Collars",
-  "Humidifiers": "Cozy Tanks",
-  "Sauna Stones": "Sauna Stones",
-  "Safety Switch": "Safety Switches",
-  "Heater Hood": "Heater Hoods",
-  "Doors & Handles": "Doors & Handles",
-  "Headrest & Backrest": "Headrests & Backrests",
-  "Ventilation & Miscellaneous": "Ventilation & Miscellaneous",
-  "Clocks & Timers": "Clocks & Sandtimers",
-  "Wooden Floor Mats": "Wooden Floor Mats",
-  "Accessory Sets": "Accessory Sets",
-  "Pail Shower": "Pail Showers",
-  // Sauna room types (from sauna_rooms.room_type)
-  "standard": "Standard Sauna Rooms",
-  "glassfront": "Glass Front Sauna Rooms",
-  "infrared": "Infrared Saunas",
-};
-
-function seriesLabel(category) {
-  return SERIES_LABELS[category] || category;
+// Friendly sub-group headings, keyed by the raw category string — translated
+// via t("catalogue.seriesLabels.<category>"), falling back to the raw
+// category string for anything not in that map.
+function seriesLabel(category, t) {
+  const translated = t(`catalogue.seriesLabels.${category}`);
+  return translated === `catalogue.seriesLabels.${category}` ? category : translated;
 }
 
 // Tab shown on first load. Named explicitly rather than CATALOGUE_TABS[0] so
@@ -135,16 +109,16 @@ function getImageUrl(product) {
 // The image is not fetched until the card actually scrolls into view — same
 // IntersectionObserver approach already proven in AllProducts.jsx, so a tab
 // holding 150 items issues a handful of image requests instead of 150.
-function ProductCard({ product }) {
+function ProductCard({ product, localize }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   const cardRef = useRef(null);
 
-  const link = product.__isRoom
+  const link = localize(product.__isRoom
     ? `/sauna/rooms/${product.slug}`
     : isAccessoryProduct(product)
       ? `/accessories/${product.slug}`
-      : `/products/${product.slug}`;
+      : `/products/${product.slug}`);
 
   useEffect(() => {
     const node = cardRef.current;
@@ -223,6 +197,8 @@ function SkeletonCard() {
 function ProductCatalogue() {
   const { products: localProds, loading } = useLocalProducts();
   const { rooms: localRooms, loading: roomsLoading } = useLocalSaunaRooms();
+  const t = useLocaleT("support");
+  const localize = useLocalizedPath();
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB_ID);
   const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
   const sentinelRef = useRef(null);
@@ -373,9 +349,10 @@ function ProductCatalogue() {
   return (
     <>
       <SEO
-        title="Product Catalogue"
-        description="Browse the full SAWO product catalogue, sauna heaters, sauna rooms, and accessories in one searchable listing."
-        path="/support/catalogue"
+        title={t("catalogue.meta.title")}
+        description={t("catalogue.meta.description")}
+        path={localize("/support/catalogue")}
+        hreflangAlternates={{ en: "/support/catalogue", zh: "/zh/support/catalogue" }}
       />
       <style>{`
         @keyframes pcShimmer {
@@ -592,23 +569,23 @@ function ProductCatalogue() {
             fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.14em",
             textTransform: "uppercase", color: "rgba(255,255,255,0.82)", margin: "0 0 12px",
           }}>
-            Complete Collection
+            {t("catalogue.header.eyebrow")}
           </p>
           <h1 style={{
             fontSize: "2.4rem", fontWeight: 700, color: "#ffffff",
             margin: "0 0 16px", lineHeight: 1.2,
           }}>
-            All Products
+            {t("catalogue.header.title")}
           </h1>
           <p style={{
             fontSize: "1rem", color: "rgba(255,255,255,0.9)", margin: "0 auto",
             maxWidth: 700, lineHeight: 1.6,
           }}>
-            Browse our complete range of sauna heaters, rooms, and accessories designed to enhance your wellness experience.
+            {t("catalogue.header.desc")}
           </p>
           <div style={{ marginTop: "28px" }}>
             <ButtonClear
-              text="PRODUCT CATALOGUE"
+              text={t("catalogue.header.pdfBtn")}
               href={PRODUCT_CATALOGUE_PDF_URL}
               target="_blank"
             />
@@ -625,7 +602,7 @@ function ProductCatalogue() {
                   className={`pc-tab-btn ${activeTab === tab.id ? "active" : ""}`}
                   onClick={() => setActiveTab(tab.id)}
                 >
-                  {tab.label}
+                  {t(`catalogue.tabs.${tab.id}`)}
                   <span className="pc-tab-count">{tab.count}</span>
                 </button>
               ))}
@@ -653,7 +630,7 @@ function ProductCatalogue() {
                 <i className="fa-regular fa-folder-open" style={{ fontSize: "1.6rem", color: "#ddc9b4" }} />
               </div>
               <p style={{ color: "#a67853", margin: 0, fontSize: "0.88rem", fontStyle: "italic" }}>
-                No products available.
+                {t("catalogue.empty")}
               </p>
             </div>
           )}
@@ -664,11 +641,11 @@ function ProductCatalogue() {
               {visibleGroups.map((g, gi) => (
                 <div key={`${g.group}-${gi}`}>
                   {grouped.length > 1 && (
-                    <h3 className="pc-group-title">{seriesLabel(g.group)}</h3>
+                    <h3 className="pc-group-title">{seriesLabel(g.group, t)}</h3>
                   )}
                   <div className="pc-grid">
                     {g.products.map((p) => (
-                      <ProductCard key={p.id || p.slug} product={p} />
+                      <ProductCard key={p.id || p.slug} product={p} localize={localize} />
                     ))}
                   </div>
                 </div>
@@ -691,18 +668,18 @@ function ProductCatalogue() {
                   fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
                   fontSize: "1.4rem", color: "#fff", margin: "0 0 8px",
                 }}>
-                  Can't find what you need?
+                  {t("catalogue.banner.title")}
                 </h3>
                 <p style={{
                   fontFamily: "'Montserrat',sans-serif", fontWeight: 400,
                   fontSize: "0.92rem", color: "rgba(255,255,255,0.82)",
                   margin: 0, lineHeight: 1.6,
                 }}>
-                  Our support team is ready to help you find the right product for your sauna.
+                  {t("catalogue.banner.desc")}
                 </p>
               </div>
-              <Link to="/contact" className="pc-cta-btn pc-cta-btn--solid">
-                CONTACT US
+              <Link to={localize("/contact")} className="pc-cta-btn pc-cta-btn--solid">
+                {t("catalogue.banner.cta")}
                 <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.7rem" }} />
               </Link>
             </div>
