@@ -1,0 +1,64 @@
+{
+  "slug": "octagon-thermometer",
+  "productId": "eaf0b31d-dc58-4373-955c-09ae15fecb15",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (240-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (240-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (240-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kahdeksankulmiotermometri",
+    "short_description": "SAWO Kahdeksankulmiotermometri on saunatermometri, mitat 165 × 180mm, käytetään saunan sisälämpötilan seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (240-TD)",
+        "name": "Setri (240-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (240-TA)",
+        "name": "Haapa (240-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (240-TH)",
+        "name": "Hemlokki (240-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

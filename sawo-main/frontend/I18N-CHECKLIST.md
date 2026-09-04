@@ -1118,6 +1118,81 @@ query (not just `apply-many`'s own success count): 34/34 have `fi`
 fields per row). Post-batch count: **128 of 380 products still missing
 `fi`** (down from 162).
 
+**Batch — 40 products, Thermometers category complete (2026-09-04)**: ran
+as an explicit fixed 40-slug batch (not a fresh `pending` pull) to avoid
+overlapping with other parallel sessions' in-flight slugs. Thermometers/
+Thermo-Hygrometers (25/26 — the 26th, `loisto-square-thermometer`, was
+already done by a parallel session before this batch started) plus 15
+misc small accessories (4 Candle Holder Tower/Straight variants, 3 aroma
+cups, 4 Kivistone coolers, Scent Warmer, Tower Set 3, Spa Stones Set,
+Sauna Signage, and the `usva` pail). Thermometers/Thermo-Hygrometers
+filled via a one-off Node script (`fill-fi-thermometers.mjs`, per the
+templated-micro-category convention) — hand-mapped each slug's name,
+derived `short_description` (dimensions + accent-stone/black-metal flags)
+from the English source via regex. Naming calls, confirmed against
+`translation_memory` precedent from a parallel session's already-applied
+`loisto-square-thermometer`/`loisto-clock-square`/`kanto` rows rather than
+guessed fresh:
+- `type` "Thermometers" → **"Lämpömittarit"** (found already in
+  `translation_memory`, matching the zh precedent's 温度计 role) — now the
+  established `fi` category-type translation, add to
+  `PRODUCT-TRANSLATION-CONVENTIONS.md`'s category table.
+- Base nouns: "Thermometer" → "termometri", coined "Thermo-Hygrometer" →
+  "termohygrometri" (no established TM precedent for the combined
+  instrument existed yet; standard Finnish technical term, single word).
+- Shape/base compounding follows the `Loisto Square Thermometer` →
+  `Loisto Neliötermometri` precedent exactly: a NOUN shape word (Neliö/
+  Suorakaide/Kahdeksankulmio/Vesipisara) merges directly onto the base
+  word with no space (`Neliötermometri`); an ADJECTIVE shape word
+  (Kaareva/Pyöristetty/Viistokulmainen/Yksinkertainen) stays a separate
+  word before the merged noun-compound (`Kaareva neliötermohygrometri`),
+  confirmed against the `musta metallikuori` precedent (adjective "musta"
+  stays separate, noun "metalli" merges: `Musta metallitermometri`).
+  "Accent Stone" (coined "koristekivi", a decorative/accent stone — no
+  prior TM entry) is treated as a noun and merges the same way (`1
+  koristekivitermometri`); when a second shape noun stacks on top of it
+  (`1 Accent Stone Rectangle Thermo-Hygrometer`), broke with a comma
+  before the final merged pair (`1 koristekivi, suorakaidetermohygrometri`)
+  rather than triple-merging, mirroring the `Loisto Clock Square` →
+  `Loisto-kello, neliö` comma-break precedent for a similarly-stacked
+  case. "Kanto"/"Loisto" kept English (marketing names) per the doc,
+  hyphenated to the base word for Kanto (`Kanto-termometri`, matching
+  `Kanto-tiimalasi 15 min`) and space-separated for Loisto (matching
+  `Loisto Neliötermometri`) — same inconsistency already present in the
+  precedent data, not introduced here. `mm` dimensions kept jammed with
+  no space (`110 × 85mm`), confirmed against every TM entry checked for
+  this category — this is a different, category-specific formatting
+  precedent than the catalog-wide `kW`/`kg` spacing fix logged
+  2026-09-01, not a contradiction of it.
+The 15 misc items were hand-translated individually (too varied for one
+template) via a second small script (`fill-fi-misc-batch.mjs`, mainly a
+convenience for consistent JSON writing, not a templated-derivation
+script). Kivistone items follow the "SAWO {name} on vuolukivinen
+{esine}, mitat {dims}, {weight}, osa Kivistone-tarvikesarjaa[, {use
+clause}]." shape already established by this category's other Kivistone
+products; `type` "Kivistone" kept as-is (untranslated brand/line name,
+confirmed against existing `fi` Kivistone rows in `product_translations`
+which also keep it literal). `type` "Ventilation & Miscellaneous" (for
+`sauna-signage`, the only non-Kivistone/non-Pails item) confirmed via
+`translation_memory` as **"Ilmanvaihto ja sekalaiset"** (already
+established by a parallel session — 12/13 of this category was already
+done). `type` "Pails" (for `usva`) left as the literal English string
+"Pails" — confirmed this is the actual existing convention by querying
+every other `fi` Pails row in `product_translations` (all keep
+`type: "Pails"` unchanged), not an oversight. "Tower"/"Straight" (candle
+holder shape names) and "Spirit" (aroma cup name) are plain English
+words, not listed in the doc's marketing-name list — translated "Tower"
+→ "Torni" and "Straight" → "Suora" as ordinary descriptive shape words
+(reused "Torni" for `tower-set-3` too, for consistency across the two
+Kivistone products using the word); kept "Spirit" in English since it
+doesn't read as a shape/descriptive word and no sibling precedent for it
+was found (default-to-English-when-unsure per the doc). Verified via
+`extract-many`/`apply-many` (40/40 succeeded on the first pass, no
+`fetch failed` retries needed) and independently via a direct Supabase
+query joining `products`→`product_translations` on all 40 slugs: 40/40
+have a `fi` row with non-empty `source_field_hashes`. Post-batch count:
+**88 of 380 products still missing `fi`** (down from 128).
+
 ### zh completeness audit (2026-09-04)
 
 With the `zh` push having been declared complete on 2026-09-03, ran a

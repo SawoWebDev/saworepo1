@@ -1,0 +1,64 @@
+{
+  "slug": "1-accent-stone-thermometer",
+  "productId": "050e5a9a-f1f9-49d0-a9f5-d9c0a033b518",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (280-TR1D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (280-TR1A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (280-TR1H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "1 koristekivitermometri",
+    "short_description": "SAWO 1 koristekivitermometri on koristekivinen saunatermometri, mitat 125 × 160mm, käytetään saunan sisälämpötilan seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (280-TR1D)",
+        "name": "Setri (280-TR1D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (280-TR1A)",
+        "name": "Haapa (280-TR1A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (280-TR1H)",
+        "name": "Hemlokki (280-TR1H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

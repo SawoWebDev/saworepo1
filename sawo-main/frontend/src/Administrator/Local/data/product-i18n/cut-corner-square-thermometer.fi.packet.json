@@ -1,0 +1,64 @@
+{
+  "slug": "cut-corner-square-thermometer",
+  "productId": "a318d27d-8422-472f-be0b-8d262ecf52be",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (220-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (220-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (220-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Viistokulmainen neliötermometri",
+    "short_description": "SAWO Viistokulmainen neliötermometri on saunatermometri, mitat 140 × 140mm, käytetään saunan sisälämpötilan seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (220-TD)",
+        "name": "Setri (220-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (220-TA)",
+        "name": "Haapa (220-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (220-TH)",
+        "name": "Hemlokki (220-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "accent-stone-vertical-thermo-hygrometer",
+  "productId": "fe609aad-024a-4294-9f1f-a2ae3d85e4d5",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (283-THVRD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (283-THVRA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (283-THVRH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Koristekivi, pystysuuntainen termohygrometri",
+    "short_description": "SAWO Koristekivi, pystysuuntainen termohygrometri on koristekivinen saunatermohygrometri, mitat 155 × 255mm, käytetään saunan sisälämpötilan ja -kosteuden seurantaan.",
+    "description": null,
+    "type": "Lämpömittarit",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (283-THVRD)",
+        "name": "Setri (283-THVRD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (283-THVRA)",
+        "name": "Haapa (283-THVRA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (283-THVRH)",
+        "name": "Hemlokki (283-THVRH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
