@@ -17,6 +17,7 @@ import CategoryHero from "../components/CategoryHero";
 import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton";
 import menuPaths from "../menuPaths";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts, variantRank } from "../utils/wallMountedGroups";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
@@ -78,22 +79,26 @@ function sortProducts(products) {
 
 // Series groups — same category keys AllProducts.jsx already uses for its
 // heater sidebar sections, kept lowercase/substring-matched so this reads
-// whatever the CMS "categories" field already carries per product.
+// whatever the CMS "categories" field already carries per product. `label`
+// stays English on purpose — it's the display fallback and, via `key`, the
+// lookup into catalog.json's heatersCatalog.groups.* (see t(...) call sites
+// below), not something translated in place here.
 const HEATER_GROUPS = [
-  { id: "section-wall-mounted", label: "Wall-Mounted Series", category: "wall-mounted" },
-  { id: "section-tower",        label: "Tower Series",        category: "tower" },
-  { id: "section-stone",        label: "Stone Series",        category: "stone" },
-  { id: "section-floor",        label: "Floor Series",        category: "floor" },
-  { id: "section-combi",        label: "Combi Series",        category: "combi" },
-  { id: "section-dragonfire",   label: "Dragonfire Series",   category: "dragonfire" },
+  { id: "section-wall-mounted", key: "wallMounted", label: "Wall-Mounted Series", category: "wall-mounted" },
+  { id: "section-tower",        key: "tower",        label: "Tower Series",        category: "tower" },
+  { id: "section-stone",        key: "stone",        label: "Stone Series",        category: "stone" },
+  { id: "section-floor",        key: "floor",        label: "Floor Series",        category: "floor" },
+  { id: "section-combi",        key: "combi",        label: "Combi Series",        category: "combi" },
+  { id: "section-dragonfire",   key: "dragonfire",   label: "Dragonfire Series",   category: "dragonfire" },
 ];
 
 function HeaterCard({ product }) {
   const [hovered, setHovered] = useState(false);
   const image = getImageUrl(product, "thumbnail");
+  const localize = useLocalizedPath();
 
   return (
-    <Link to={`/products/${product.slug}`} style={{ textDecoration: "none" }}>
+    <Link to={localize(`/products/${product.slug}`)} style={{ textDecoration: "none" }}>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -134,7 +139,9 @@ function HeaterCard({ product }) {
 }
 
 function CategorySection({ group, productsByGroup }) {
+  const t = useLocaleT("catalog");
   const products = productsByGroup[group.id] || [];
+  const groupLabel = t(`heatersCatalog.groups.${group.key}`);
 
   // The Wall-Mounted series has well-defined brand families (Nordex, Mini,
   // Scandia, Krios, Scandifire) — organize it the same way the dedicated
@@ -146,7 +153,7 @@ function CategorySection({ group, productsByGroup }) {
     return (
       <div id={group.id} className="category-section">
         <div className="category-section-title">
-          <h2>{group.label}</h2>
+          <h2>{groupLabel}</h2>
         </div>
         <div className="hc-brand-groups">
           {brandNames.map(brand => (
@@ -169,7 +176,7 @@ function CategorySection({ group, productsByGroup }) {
   return (
     <div id={group.id} className="category-section">
       <div className="category-section-title">
-        <h2>{group.label}</h2>
+        <h2>{groupLabel}</h2>
       </div>
       <div className="products-grid">
         {sorted.map(product => (
@@ -181,6 +188,8 @@ function CategorySection({ group, productsByGroup }) {
 }
 
 export default function HeatersCatalog({ showHero = true } = {}) {
+  const t = useLocaleT("catalog");
+  const localize = useLocalizedPath();
   const { products: localProds, loading } = useLocalProducts();
   const [activeSection, setActiveSection] = useState(HEATER_GROUPS[0].id);
 
@@ -246,7 +255,7 @@ export default function HeatersCatalog({ showHero = true } = {}) {
             backgroundSize: "200% 100%", animation: "hcSkeleton 1.4s infinite",
             borderRadius: 6, margin: "0 auto 40px",
           }} />
-          <p style={{ color: "#a67853" }}>Loading heaters...</p>
+          <p style={{ color: "#a67853" }}>{t("heatersCatalog.loading")}</p>
         </div>
       </div>
     );
@@ -255,9 +264,10 @@ export default function HeatersCatalog({ showHero = true } = {}) {
   return (
     <>
       <SEO
-        title="Sauna Heaters"
-        description="Browse the full SAWO heaters catalog: Tower, Wall-Mounted, Stone, Floor, Combi, and Dragonfire series for every sauna size and style."
-        path="/sauna-heaters"
+        title={t("heatersCatalog.meta.title")}
+        description={t("heatersCatalog.meta.description")}
+        path={localize("/sauna-heaters")}
+        hreflangAlternates={{ en: "/sauna-heaters", zh: "/zh/sauna-heaters" }}
       />
       <style>{`
         @keyframes hcSkeleton {
@@ -518,18 +528,16 @@ export default function HeatersCatalog({ showHero = true } = {}) {
         {showHero && (
           <CategoryHero
             heroImg={heroImg}
-            title="Sauna Heaters"
-            description="Discover our complete range of premium sauna heaters designed for every sauna size
-                and style. Browse through our carefully curated Tower, Wall-Mounted, Stone, Floor,
-                Combi, and Dragonfire series."
+            title={t("heatersCatalog.hero.title")}
+            description={t("heatersCatalog.hero.description")}
           />
         )}
 
         <div className="heaters-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
           <div className="category-buttons-sidebar">
             <div className="sidebar-header">
-              <p className="sidebar-header-label">Browse by</p>
-              <p className="sidebar-header-title">Series</p>
+              <p className="sidebar-header-label">{t("heatersCatalog.sidebar.browseBy")}</p>
+              <p className="sidebar-header-title">{t("heatersCatalog.sidebar.series")}</p>
             </div>
             <div className="sidebar-scroll">
               {HEATER_GROUPS.map(group => {
@@ -541,7 +549,7 @@ export default function HeatersCatalog({ showHero = true } = {}) {
                     className={`sidebar-btn ${activeSection === group.id ? "active" : ""}`}
                     onClick={() => handleSidebarClick(group.id)}
                   >
-                    <span>{group.label}</span>
+                    <span>{t(`heatersCatalog.groups.${group.key}`)}</span>
                     <span className="sidebar-btn-count">{count}</span>
                   </button>
                 );
@@ -565,15 +573,14 @@ export default function HeatersCatalog({ showHero = true } = {}) {
         >
           <div className="hc-cta-overlay" />
           <div className="hc-cta-content">
-            <h2 className="hc-cta-title">Need Help Choosing the Right Heater?</h2>
+            <h2 className="hc-cta-title">{t("heatersCatalog.cta.title")}</h2>
             <p className="hc-cta-desc">
-              Our team can help you match power, size, and style to your sauna —
-              or browse full specs in our product catalogue.
+              {t("heatersCatalog.cta.desc")}
             </p>
             <div className="hc-cta-actions">
-              <BrochureDropdownButton text="CONTACT US" href={menuPaths.contact} redirect />
+              <BrochureDropdownButton text={t("heatersCatalog.cta.contactBtn")} href={localize(menuPaths.contact)} redirect />
               <BrochureDropdownButton
-                text="DOWNLOAD CATALOGUE"
+                text={t("heatersCatalog.cta.downloadBtn")}
                 href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf"
               />
             </div>

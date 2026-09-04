@@ -1,0 +1,135 @@
+{
+  "allProducts": {
+    "meta": {
+      "title": "全部产品",
+      "description": "浏览 SAWO 完整产品系列:桑拿加热器、桑拿房与配件,尽在一个可搜索的目录中。"
+    },
+    "hero": {
+      "eyebrow": "完整系列",
+      "title": "全部产品",
+      "description": "浏览 SAWO 完整产品系列:桑拿加热器、控制器、蒸汽发生器、桑拿房与配件,尽在一个可搜索的目录中。"
+    },
+    "loading": "产品加载中...",
+    "sidebar": {
+      "browseBy": "浏览方式",
+      "type": "类型",
+      "categories": "分类"
+    },
+    "tabs": {
+      "heaters": "桑拿加热器",
+      "rooms": "桑拿房",
+      "saunaControls": "桑拿控制器",
+      "steam": "蒸汽",
+      "infrared": "红外线",
+      "heaterAccessories": "加热器配件",
+      "accessories": "桑拿配件"
+    },
+    "heaterSections": {
+      "wallMounted": "壁挂式",
+      "tower": "塔式",
+      "stone": "石材式",
+      "floor": "落地式",
+      "combi": "多功能一体式",
+      "dragonfire": "龙焰系列"
+    },
+    "roomSections": {
+      "standard": "标准款",
+      "glassFront": "玻璃前脸款",
+      "compact": "紧凑款"
+    },
+    "steamSections": {
+      "generators": "蒸汽发生器",
+      "controls": "蒸汽控制器",
+      "accessories": "蒸汽配件"
+    },
+    "infraredSections": {
+      "rooms": "桑拿房",
+      "panels": "面板",
+      "controls": "控制器"
+    },
+    "heaterAccessoriesLabels": {
+      "Heater Guard": "加热器护栏",
+      "Integration Collar": "集成环",
+      "Humidifiers": "保温加湿罐",
+      "Sauna Accessories": "安全配件",
+      "Sauna Stones": "桑拿石"
+    },
+    "categorySections": {
+      "pails": "水桶",
+      "ladles": "勺子",
+      "pailShower": "水桶淋浴",
+      "meters": "温度计与组合仪表",
+      "clockTimer": "时钟与计时器",
+      "saunaLights": "桑拿灯具",
+      "headrestBackrest": "头枕与靠背",
+      "doorsHandles": "门与把手",
+      "benches": "长椅",
+      "clothHangers": "挂钩与衣架",
+      "woodenFloorMats": "木质地垫",
+      "kivistone": "Kivistone",
+      "ventMisc": "通风及其他配件"
+    },
+    "empty": {
+      "heaters": "暂无可用的桑拿加热器",
+      "rooms": "暂无可用的桑拿房",
+      "saunaControls": "暂无可用的桑拿控制器",
+      "steam": "暂无可用的蒸汽产品",
+      "infrared": "暂无可用的红外线产品",
+      "heaterAccessories": "暂无可用的加热器配件"
+    }
+  },
+  "heatersCatalog": {
+    "meta": {
+      "title": "桑拿加热器",
+      "description": "浏览 SAWO 加热器全系列目录:塔式、壁挂式、石材式、落地式、多功能一体式和龙焰系列,满足各种桑拿尺寸与风格需求。"
+    },
+    "hero": {
+      "title": "桑拿加热器",
+      "description": "探索我们专为各种桑拿尺寸与风格设计的高端加热器全系列。浏览我们精心打造的塔式、壁挂式、石材式、落地式、多功能一体式和龙焰系列。"
+    },
+    "loading": "加热器加载中...",
+    "sidebar": {
+      "browseBy": "浏览方式",
+      "series": "系列"
+    },
+    "groups": {
+      "wallMounted": "壁挂式系列",
+      "tower": "塔式系列",
+      "stone": "石材式系列",
+      "floor": "落地式系列",
+      "combi": "多功能一体式系列",
+      "dragonfire": "龙焰系列"
+    },
+    "cta": {
+      "title": "需要帮助挑选合适的加热器吗?",
+      "desc": "我们的团队可以帮助您根据桑拿房匹配合适的功率、尺寸与风格,或浏览产品目录中的完整规格信息。",
+      "contactBtn": "联系我们",
+      "downloadBtn": "下载产品目录"
+    }
+  },
+  "accessoriesCatalog": {
+    "meta": {
+      "title": "桑拿配件",
+      "description": "浏览 SAWO 配件全系列目录:水桶、勺子、温度计、长椅、灯具等,满足每一间桑拿房的需求。"
+    },
+    "hero": {
+      "eyebrow": "高端系列",
+      "title": "桑拿配件",
+      "description": "探索我们专为提升您的养生体验而设计的高端桑拿配件全系列。浏览我们精心打造的优质产品精选。"
+    },
+    "loading": "配件加载中...",
+    "sidebarTitle": "桑拿配件",
+    "groups": {
+      "pailsLadles": "水桶与勺子",
+      "meters": "温度计与组合仪表",
+      "clockTimer": "时钟与计时器",
+      "saunaLights": "桑拿灯具",
+      "headrestBackrest": "头枕与靠背",
+      "doorsHandles": "门与把手",
+      "benches": "长椅、挂钩与地垫",
+      "kivistone": "Kivistone",
+      "ventMisc": "通风及其他配件",
+      "accessorySets": "配件套装"
+    }
+  }
+}
