@@ -1,0 +1,21 @@
+{
+  "meta": { "title": "Page Not Found", "description": "The page you're looking for doesn't exist or has moved." },
+  "heading": "Oops! Page Not Found",
+  "desc": "We're sorry, the page you're looking for doesn't exist or has been moved.",
+  "triedToAccess": "Tried to access:",
+  "helpBox": {
+    "title": "Here's what you can do:",
+    "item1": "Check the URL for typos",
+    "item2": "Browse our product catalog",
+    "item3": "Use the search function below",
+    "item4": "Contact us for assistance"
+  },
+  "goHome": "Go to Home",
+  "browseProducts": "Browse Products",
+  "popularSections": "Popular Sections:",
+  "saunaHeaters": "Sauna Heaters",
+  "steamGenerators": "Steam Generators",
+  "faq": "FAQ",
+  "contactUs": "Contact Us",
+  "supportPrompt": "Still having trouble? Our support team is here to help."
+}

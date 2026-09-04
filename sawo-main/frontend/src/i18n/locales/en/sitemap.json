@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "Sitemap",
+    "description": "A complete guide to every page and section of the SAWO website: sauna heaters, steam generators, sauna rooms, and more."
+  },
+  "title": "Sitemap",
+  "subtitle": "Complete guide to all pages and sections of the SAWO website.",
+  "productGroups": {
+    "Steam Accessories": "Steam Accessories",
+    "Steam Controls": "Steam Controls",
+    "Infrared": "Infrared",
+    "Sauna Controls": "Sauna Controls",
+    "Sauna Accessories": "Sauna Accessories",
+    "Sauna Heaters": "Sauna Heaters",
+    "Other Products": "Other Products"
+  },
+  "groups": {
+    "productOther": "Other Products",
+    "mainPages": {
+      "heading": "Main Pages",
+      "home": "Home",
+      "about": "About Us",
+      "contact": "Contact Us",
+      "careers": "Careers",
+      "privacy": "Privacy Policy"
+    },
+    "about": {
+      "heading": "About",
+      "news": "Latest News",
+      "sustainability": "Sustainability"
+    },
+    "sauna": {
+      "heading": "Finnish Sauna",
+      "products": "Sauna Products",
+      "heaters": "Sauna Heaters",
+      "wallMounted": "Wall-Mounted Heaters",
+      "tower": "Tower Heaters",
+      "stone": "Stone Heaters",
+      "floor": "Floor Heaters",
+      "combi": "Combination Heaters",
+      "dragonfire": "Dragonfire Heaters",
+      "controls": "Sauna Controls",
+      "accessories": "Sauna Accessories",
+      "accessorySets": "Accessory Sets",
+      "pailsLadles": "Pails & Ladles",
+      "thermometers": "Thermometers & Combined Meters",
+      "clocksSandtimers": "Clocks & Sandtimers",
+      "lightsCovers": "Sauna Lights & Covers",
+      "headrestsBackrests": "Headrests & Backrests",
+      "doorsHandles": "Doors & Handles",
+      "benches": "Benches & Floor Tiles",
+      "kivistone": "Kivistone",
+      "ventilations": "Ventilations & Add-Ons",
+      "rooms": "Sauna Rooms",
+      "interiorDesigns": "Interior Designs",
+      "woodPanels": "Wood Panels & Timbers"
+    },
+    "steam": {
+      "heading": "Steam Rooms",
+      "products": "Steam Room Products",
+      "generators": "Steam Generators",
+      "controls": "Steam Controls",
+      "accessories": "Steam Accessories"
+    },
+    "infrared": {
+      "heading": "Infrared Sauna",
+      "parent": "Infrared",
+      "saunas": "Infrared Saunas",
+      "panels": "Infrared Panels",
+      "controls": "Infrared Controls"
+    },
+    "support": {
+      "heading": "Support & Resources",
+      "parent": "Support Center",
+      "faq": "Frequently Asked Questions",
+      "calculator": "Sauna Calculator",
+      "manuals": "User Manuals",
+      "catalogue": "Product Catalogue"
+    },
+    "catalog": {
+      "heading": "Products & Catalog",
+      "allProducts": "All Products",
+      "accessoriesCatalog": "Accessories Catalog",
+      "heatersCatalog": "Heaters Catalog"
+    }
+  },
+  "everyProduct": "Every Product",
+  "loadingProducts": "Loading products…",
+  "noProducts": "No products available right now.",
+  "saunaRooms": "Sauna Rooms",
+  "loadingRooms": "Loading sauna rooms…",
+  "noRooms": "No sauna rooms available right now.",
+  "help": {
+    "title": "Need Help?",
+    "prefix": "Can't find what you're looking for? Visit our",
+    "contactLink": "contact page",
+    "or": "or",
+    "faqLink": "FAQ section"
+  }
+}

@@ -75,5 +75,12 @@
       "label": "心理健康",
       "desc": "持续使用可显著缓解抑郁症状"
     }
+  },
+  "accessoryCard": {
+    "bestSeller": "畅销产品",
+    "close": "关闭",
+    "watchVideo": "观看视频",
+    "code": "型号",
+    "option": "选项"
   }
 }
