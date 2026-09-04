@@ -6,129 +6,18 @@ import faqImage from "../../assets/Support/FAQ/faq1.webp";
 import HeroWave from "../../components/HeroWave";
 import { useHeroLoaded } from "../../utils/useHeroLoaded";
 import SEO from "../../components/SEO";
+import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
-
-const faqSections = [
-  {
-    id: "finnish-sauna",
-    title: "Finnish Sauna",
-    icon: "fas fa-fire",
-    items: [
-      {
-        question: "What is the heat source in sauna?",
-        answer:
-          "The heat source in sauna is the heater, which is used for warming sauna stones either by using electricity through heating elements or by burning wood. The electric heaters are the most common option markedly for the convenience, fast heating-time and ability to modify sauna experience according to your liking.\n\nDepending on how much water is thrown to the stones, the hotter the temperature will be before starting to lower down slowly.",
-      },
-      {
-        question: "What is the best wood for sauna?",
-        answer:
-          "Best wood for sauna are the softwoods, such as Western Red Cedar, Common Aspen and Spruce for sauna building. These species have excellent qualities for sauna, especially if sourced from Arctic regions such as Northern US, Canada and Scandinavia. The arctic wood species are naturally isolating heat well and tolerating changing temperatures and moisture without significant swelling or shrinking. Sauna benches made from these woods will remain cool and pleasant to sit in, even when the temperatures in sauna can increase to 70-80 degrees.\n\nWestern Red Cedar (Thuja plicata) is exceptionally beautiful wood with a natural warm reddish color, complemented with uniform fine-grained texture with a satin luster. Cedar is very durable against moisture, making it excellent choice especially for outdoor saunas. The strong scent of cedar wood not only works as a natural repellant against insects and mold but also helps to improve concentration, quality of sleep and relaxing the body.\n\nCommon Aspen: A softwood with white to creamy appearance, perfect for an elegant look. Aspen wood has creamy white knotless appearance, similar to Abachi. This wood specie is very resistant towards moisture, bacteria and fungi, hence excellent choice for commercial or public saunas.\n\nFinnish Spruce is a softwood with a close, even and uniform grain texture. It has a light-yellow appearance with few markings. Spruce is durable and can withstand heat and has small healthy knots, making it one of the most common sauna woods used in Finland. The forest-like natural aroma of spruce is said to make relaxing and breathing easier.",
-      },
-      {
-        question: "What is Finnish sauna?",
-        answer:
-          "Finnish sauna basically is a room with wooden walls, ceiling and benches. The sauna has for centuries been a place for relaxation. The heart of the sauna is the heater, which is used to warm stones either by using electricity or by burning wood. Unquestionably, what makes a sauna, a Finnish sauna is the act of pouring water from pail to stones. This is called \"löyly\" in Finnish. Depending on how much water you will throw to the stones, the hotter the temperature will be before slowly getting cooler. The changes of temperatures, combined with regular sauna usage has been scientifically proven to have several health benefits. Regular sauna bathing will specifically improve brain and mental health, protect from cardiac health problems and boost immune system.",
-      },
-    ],
-  },
-  {
-    id: "building-installation",
-    title: "Building & Installation",
-    icon: "fas fa-hammer",
-    items: [
-      {
-        question: "Where is the ideal sauna location?",
-        answer:
-          "The ideal sauna location would be somewhere dry with good ventilation and concrete, tile, ceramic or vinyl flooring. We recommend to have floor-drain for easier cleaning. The good ventilation will guarantee that the slight condensation from sauna will effectively dry after bathing. Whenever the sauna is in use, it will cause very minor increase in temperature for surrounding areas. With this in mind, if the sauna is modular and installed inside the house is good to consider leaving small gap between sauna room and house walls to ensure air flow.",
-      },
-      {
-        question: "Why there are upper and lower benches in sauna?",
-        answer:
-          "The temperature of the sauna room is warmer at ceiling level and cooler near the floor. Benches are installed at different heights to give the bather a choice of different bathing temperatures.",
-      },
-      {
-        question: "How to protect the wood panels from moisture?",
-        answer:
-          "The best way to protect the wood panels from moisture is proper ventilation and drying after using the sauna. Do not apply paint, sealants or any preservative on the wood panels. Wood swells and shrinks and tears off paint and sealants, which are only on the surface of the wood. It is best to leave the wood bare.",
-      },
-      {
-        question: "What are requirements for sauna floor?",
-        answer:
-          "The requirements for sauna floor is to be waterproof, for easy washability and maintenance. For example tile, cement or heavy-duty vinyl floors are good because they are washable and do not absorb water.",
-      },
-      {
-        question: "Is floor drain in sauna required?",
-        answer:
-          "The floor drain in sauna is not required, but highly recommended. This will makes cleaning of sauna more convenient.",
-      },
-    ],
-  },
-  {
-    id: "sauna-heater",
-    title: "Sauna Heater",
-    icon: "fas fa-bolt",
-    items: [
-      {
-        question: "Can I get electric shock from heater?",
-        answer:
-          "If the heater is installed correctly, electric shock from heater is very unlikely. To ensure the safe use, a qualified electrician must do the installation. All our heaters are tested before delivery and have passed the electrical safety standards.",
-      },
-    ],
-  },
-  {
-    id: "using-sauna",
-    title: "Using Sauna",
-    icon: "fas fa-spa",
-    items: [
-      {
-        question: "How long is the heating time?",
-        answer:
-          "When the sauna has proper insulation, and vents and doors are closed, the heating time is less than an hour. This depends on also on which heater you have.",
-      },
-      {
-        question: "What is the best temperature in sauna?",
-        answer:
-          "The recommended temperature in sauna is from 60-90 Celsius, but this depends on your own preference.",
-      },
-      {
-        question: "Why are sauna stones important?",
-        answer:
-          "The main purpose of the sauna stones in the heater is to store enough energy to efficiently vaporize the water thrown on top of the stones to create temperature increase in the sauna. The stones must be removed at least once a year or every 500 hours which ever occurs first. All crumbles must be removed from the heater and replaced with new ones, as described in the heater manual.\n\nNever use the heater without stones as it may cause fire. Use only manufacturer recommended SAWO-stones. Using unsuitable stones may lead to heating element damage and will void the warranty. Never use ceramic stones or other artificial stones of any type!",
-      },
-      {
-        question: "What are the requirements for water thrown to sauna stones?",
-        answer:
-          "Water thrown onto the sauna stones needs to be suitable for household consumption. Chlorinated water (e.g. from the swimming pool or jacuzzi) or seawater can cause damages for heater and heating elements.",
-      },
-      {
-        question: "How to do sauna maintenance?",
-        answer:
-          "SAUNA MAINTENANCE FOR EVERY SAUNA SESSION\nUse bench towels during sauna for the purpose of keeping benches well-looking longer.\nAfter sauna session, leave the heater on for 30 minutes to make sauna dry faster from the moisture. Lastly, open the air vents and sauna door to let the sauna ventilate properly.\nEmpty pail from water, and lift the ladle to bench. This will help on preventing cracks on wooden accessories, and keep the sauna fresh.\n\nSAUNA MAINTENANCE AT LEAST 1 to 4 TIMES PER YEAR:\nCheck the sauna stones in the heater. Clean possible stone dust and crumbs from the bottom of the heater. Remove stones and replace disintegrated ones. Last reload stones back to the heater. Checking the stones from time to time will help to increase the lifespan of heating elements as well as saving energy.\nCheck heating elements. In case there are any cracks or elements are bent, replace all elements. Do not replace only one.\nWash the overall surfaces of sauna benches, ceiling, floor and walls with warm water, soft brush and multi-purpose detergent. However, do not use detergent with ammonia or chlorine. Rinse surfaces with cold water and let sauna ventilate well. If needed, you can apply wood treatment oil, suitable for sauna use, such as paraffin oil to the benches.\nIf washing doesn't get the benches clean, sand the benches with sandpaper. Protect benches with wood oil suitable for sauna use. Follow the wood oil instructions and avoid using the sauna before the oil has dried properly.\nWhenever needed, use mild soap water to clean any calcium stains or other dirt from the heater cover. You can also use SAWO Decalcifying solution. Dry after wash.\nClean glass surfaces with window cleaning agent or dish soap. If needed rinse, then dry with a squeegee or microfiber cloth.\nCheck screws (door, sauna benches, railings) and tighten up if necessary.\nClean the floor drain.",
-      },
-      {
-        question: "How often to use sauna?",
-        answer:
-          "As often as you like. But most people go to the sauna twice or three times a week, usually in the evenings to relax after a hard day's work.",
-      },
-      {
-        question: "How long should I stay in sauna?",
-        answer:
-          "You can stay in sauna as long as you feel comfortable. Leave the sauna to cool off immediately if you start to feel uncomfortable.",
-      },
-      {
-        question: "When should I not use the sauna?",
-        answer:
-          "Do not use sauna with a full stomach or under the influence of alcohol. People with heart problems or acute illnesses should consult a doctor before taking a sauna.",
-      },
-      {
-        question: "Can small children go to sauna?",
-        answer:
-          "Small children can go to sauna under adult supervision. However, first times limit the bathing only for few minutes and in a moderate temperature. Children can sit on lower benches, where temperature also is lower.",
-      },
-    ],
-  },
-];
+// Only the structural (non-translatable) bits stay here — icon per section,
+// keyed by the same `id` used in support.json's faq.sections so the two can
+// be zipped together at render time. title/items text lives in the JSON.
+const FAQ_SECTION_ICONS = {
+  "finnish-sauna": "fas fa-fire",
+  "building-installation": "fas fa-hammer",
+  "sauna-heater": "fas fa-bolt",
+  "using-sauna": "fas fa-spa",
+};
 
 // ─── ACCORDION ITEM ──────────────────────────────────────────────────────────
 
@@ -288,7 +177,13 @@ export default function FAQ() {
   const [activeTab, setActiveTab] = useState(0);
   const [openIndex, setOpenIndex] = useState(null);
   const heroLoaded = useHeroLoaded(heroBg);
+  const t = useLocaleT("support");
+  const localize = useLocalizedPath();
 
+  const faqSections = t("faq.sections", { returnObjects: true }).map(s => ({
+    ...s,
+    icon: FAQ_SECTION_ICONS[s.id],
+  }));
   const section = faqSections[activeTab];
 
   const handleTabChange = (i) => {
@@ -304,9 +199,10 @@ export default function FAQ() {
   return (
     <div style={{ fontFamily: "Montserrat, sans-serif" }}>
       <SEO
-        title="Frequently Asked Questions"
-        description="Answers to common questions about SAWO Finnish saunas, heaters, steam generators, and sauna care, from heat sources to wood types."
-        path="/support/faq"
+        title={t("faq.meta.title")}
+        description={t("faq.meta.description")}
+        path={localize("/support/faq")}
+        hreflangAlternates={{ en: "/support/faq", zh: "/zh/support/faq" }}
       />
       <style>{`
 
@@ -405,8 +301,8 @@ export default function FAQ() {
         />
         <div className="faq-hero-overlay" />
         <div className="faq-hero-content">
-          <h1 className="faq-hero-title">FAQ</h1>
-          <p className="faq-hero-subtitle">Frequently Asked Questions</p>
+          <h1 className="faq-hero-title">{t("faq.hero.title")}</h1>
+          <p className="faq-hero-subtitle">{t("faq.hero.subtitle")}</p>
         </div>
       <HeroWave />
       </section>
@@ -481,7 +377,7 @@ export default function FAQ() {
                   {section.title}
                 </h2>
                 <span style={{ fontFamily:"Montserrat,sans-serif", fontSize:"0.8rem", fontWeight:300, color:"#a67853" }}>
-                  {section.items.length} {section.items.length === 1 ? "question" : "questions"}
+                  {section.items.length} {section.items.length === 1 ? t("faq.questionCount.one") : t("faq.questionCount.other")}
                 </span>
               </div>
             </div>
@@ -518,7 +414,7 @@ export default function FAQ() {
             >
               <img
                 src={faqImage}
-                alt="FAQ"
+                alt={t("faq.sidebar.imageAlt")}
                 className="faq-main-img"
               />
             </div>
@@ -535,11 +431,11 @@ export default function FAQ() {
               <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:8 }}>
                 <i className="fas fa-lightbulb" style={{ color:"rgba(255,255,255,0.85)", fontSize:"1rem" }} />
                 <span style={{ fontFamily:"Montserrat,sans-serif", fontWeight:700, fontSize:"0.9rem", color:"#fff", letterSpacing:"0.3px" }}>
-                  Quick Help
+                  {t("faq.sidebar.quickHelpTitle")}
                 </span>
               </div>
               <p style={{ fontFamily:"Montserrat,sans-serif", fontWeight:300, fontSize:"0.82rem", color:"rgba(255,255,255,0.82)", lineHeight:1.6, margin:0 }}>
-                Click any question to expand the answer. Switch between categories using the tabs above.
+                {t("faq.sidebar.quickHelpDesc")}
               </p>
             </div>
           </div>
@@ -563,14 +459,14 @@ export default function FAQ() {
         >
           <div>
             <h3 style={{ fontFamily:"Montserrat,sans-serif", fontWeight:700, fontSize:"1.5rem", color:"#fff", margin:"0 0 8px" }}>
-              Still have questions?
+              {t("faq.banner.title")}
             </h3>
             <p style={{ fontFamily:"Montserrat,sans-serif", fontWeight:300, fontSize:"0.98rem", color:"rgba(255,255,255,0.85)", margin:0, lineHeight:1.6 }}>
-              Our sauna experts are ready to help you with anything you need.
+              {t("faq.banner.desc")}
             </p>
           </div>
           <a
-            href="/contact"
+            href={localize("/contact")}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -599,7 +495,7 @@ export default function FAQ() {
               e.currentTarget.style.borderColor = "transparent";
             }}
           >
-            CONTACT US <i className="fas fa-chevron-right" style={{ fontSize:"0.75rem" }} />
+            {t("faq.banner.cta")} <i className="fas fa-chevron-right" style={{ fontSize:"0.75rem" }} />
           </a>
         </div>
       </section>
