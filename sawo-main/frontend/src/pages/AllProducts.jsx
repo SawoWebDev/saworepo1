@@ -12,6 +12,7 @@ import { variantRank } from "../utils/wallMountedGroups";
 import useDragScroll from "../hooks/useDragScroll";
 import { PANEL_SLUGS as INFRARED_PANEL_SLUGS } from "./Infrared/InfraredPanels";
 import { CONTROL_SLUGS as INFRARED_CONTROL_SLUGS } from "./Infrared/InfraredControls";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 const HEATER_SECTIONS = [
   { label: "Wall-Mounted", id: "heater-wall-mounted" },
@@ -21,6 +22,58 @@ const HEATER_SECTIONS = [
   { label: "Combi",        id: "heater-combi" },
   { label: "Dragonfire",   id: "heater-dragonfire" },
 ];
+
+// The `label` fields on every *_SECTIONS/CATEGORY_SECTIONS/TAB_DEFS array
+// below stay plain English on purpose — they double as matching/sort keys
+// (TOWER_BRAND_ORDER, groupByCategory's labelMap keys, slugify(g.label) for
+// sidebar-anchor DOM ids, etc.), and slugify() strips non-ASCII characters,
+// so translating them in place would collapse several Chinese group labels
+// down to the same empty/duplicate DOM id. Instead, LABEL_I18N_KEYS below
+// maps each known English label to its "allProducts.<bucket>.<key>" JSON
+// path, and trLabel() (defined inside AllProducts()) resolves the *display*
+// text through it at render time only — every non-display use of `.label`
+// (ids, sorting, keyword grouping) keeps reading the original English string.
+const LABEL_I18N_KEYS = {
+  "Wall-Mounted": "allProducts.heaterSections.wallMounted",
+  "Tower": "allProducts.heaterSections.tower",
+  "Stone": "allProducts.heaterSections.stone",
+  "Floor": "allProducts.heaterSections.floor",
+  "Combi": "allProducts.heaterSections.combi",
+  "Dragonfire": "allProducts.heaterSections.dragonfire",
+  "Standard": "allProducts.roomSections.standard",
+  "Glass Front": "allProducts.roomSections.glassFront",
+  "Compact": "allProducts.roomSections.compact",
+  "Steam Generators": "allProducts.steamSections.generators",
+  "Steam Controls": "allProducts.steamSections.controls",
+  "Steam Accessories": "allProducts.steamSections.accessories",
+  "Sauna Rooms": "allProducts.infraredSections.rooms",
+  "Panels": "allProducts.infraredSections.panels",
+  "Controls": "allProducts.infraredSections.controls",
+  "Sauna Heaters": "allProducts.tabs.heaters",
+  "Sauna Controls": "allProducts.tabs.saunaControls",
+  "Steam": "allProducts.tabs.steam",
+  "Infrared": "allProducts.tabs.infrared",
+  "Heater Accessories": "allProducts.tabs.heaterAccessories",
+  "Sauna Accessories": "allProducts.tabs.accessories",
+  "Pails": "allProducts.categorySections.pails",
+  "Ladles": "allProducts.categorySections.ladles",
+  "Pail Shower": "allProducts.categorySections.pailShower",
+  "Thermometers & Combined Meters": "allProducts.categorySections.meters",
+  "Clocks & Timers": "allProducts.categorySections.clockTimer",
+  "Sauna Lights": "allProducts.categorySections.saunaLights",
+  "Headrest & Backrests": "allProducts.categorySections.headrestBackrest",
+  "Doors & Handles": "allProducts.categorySections.doorsHandles",
+  "Benches": "allProducts.categorySections.benches",
+  "Hangers & Hook Racks": "allProducts.categorySections.clothHangers",
+  "Floor Mat Tiles": "allProducts.categorySections.woodenFloorMats",
+  "Kivistone": "allProducts.categorySections.kivistone",
+  "Ventilations & Miscellaneous Items": "allProducts.categorySections.ventMisc",
+  "Heater Guards": "allProducts.heaterAccessoriesLabels.Heater Guard",
+  "Collars": "allProducts.heaterAccessoriesLabels.Integration Collar",
+  "Cozy Tanks": "allProducts.heaterAccessoriesLabels.Humidifiers",
+  "Safety Accessories": "allProducts.heaterAccessoriesLabels.Sauna Accessories",
+  "Sauna Stones": "allProducts.heaterAccessoriesLabels.Sauna Stones",
+};
 
 // Category-only classifier, mirroring the admin CMS's own
 // getHeaterSubcategory() (Administrator/Products.jsx) so /products always
@@ -335,6 +388,7 @@ function ProductCard({ product }) {
   const [imageSrc, setImageSrc] = React.useState(null);
   const [hovered, setHovered] = React.useState(false);
   const imgRef = React.useRef(null);
+  const localize = useLocalizedPath();
   const isAccessory = isAccessoryProduct(product);
   let link;
   if (isAccessory) {
@@ -344,6 +398,7 @@ function ProductCard({ product }) {
   } else {
     link = `/products/${product.slug}`;
   }
+  link = localize(link);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -452,6 +507,19 @@ function ProductCard({ product }) {
 }
 
 export default function AllProducts() {
+  const t = useLocaleT("catalog");
+  const tSauna = useLocaleT("sauna");
+  const localize = useLocalizedPath();
+  // Resolves a section/tab/group's *display* text — falls back to the raw
+  // English label for anything not in LABEL_I18N_KEYS (e.g. the "Other"
+  // catch-all bucket, or a category that has no dedicated translation yet).
+  const trLabel = (label) => {
+    const key = LABEL_I18N_KEYS[label];
+    return key ? t(key) : label;
+  };
+  // Sauna Controls' group labels reuse sauna.json's controlsPage.groupLabels
+  // (same group names as /sauna/controls) rather than duplicating them here.
+  const trControlsGroupLabel = (label) => tSauna(`controlsPage.groupLabels.${label}`, { defaultValue: label });
   const { products: localProds, loading } = useLocalProducts();
   const { rooms: localRooms, loading: roomsLoading } = useLocalSaunaRooms();
   const { trackRef: tabsTrackRef, dragHandlers: tabsDragHandlers } = useDragScroll();
@@ -816,7 +884,7 @@ export default function AllProducts() {
     return (
       <div style={{ minHeight: "100vh", background: "#fff", paddingTop: 120 }}>
         <div style={{ maxWidth: 1140, margin: "0 auto", padding: "40px 32px", textAlign: "center" }}>
-          <p style={{ color: "#a67853" }}>Loading products...</p>
+          <p style={{ color: "#a67853" }}>{t("allProducts.loading")}</p>
         </div>
       </div>
     );
@@ -825,9 +893,10 @@ export default function AllProducts() {
   return (
     <>
       <SEO
-        title="All Products"
-        description="Browse SAWO's complete product range: sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
-        path="/products"
+        title={t("allProducts.meta.title")}
+        description={t("allProducts.meta.description")}
+        path={localize("/products")}
+        hreflangAlternates={{ en: "/products", zh: "/zh/products" }}
       />
       <style>{`
         @keyframes skS {
@@ -1105,9 +1174,9 @@ export default function AllProducts() {
       <div style={{ minHeight: "100vh", background: "#fff", fontFamily: "'Montserrat',sans-serif" }}>
         <CategoryHero
           heroImg={heroImg}
-          eyebrow="Complete Collection"
-          title="All Products"
-          description="Browse SAWO's complete product range: sauna heaters, controls, steam generators, rooms, and accessories, all in one searchable catalogue."
+          eyebrow={t("allProducts.hero.eyebrow")}
+          title={t("allProducts.hero.title")}
+          description={t("allProducts.hero.description")}
         />
 
         {/* ── Category tabs (below hero, matches /support/manuals) ── */}
@@ -1119,7 +1188,7 @@ export default function AllProducts() {
                 className={`products-tab-btn ${activeTab === tab.id ? "active" : ""}`}
                 onClick={() => setActiveTab(tab.id)}
               >
-                {tab.label}
+                {trLabel(tab.label)}
               </button>
             ))}
           </div>
@@ -1130,8 +1199,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Type</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.type")}</p>
               </div>
               <div className="sidebar-scroll">
                 {HEATER_SECTIONS.map(section => {
@@ -1143,7 +1212,7 @@ export default function AllProducts() {
                       className={`sidebar-btn ${activeHeaterSection === section.id ? "active" : ""}`}
                       onClick={() => handleHeaterClick(section.id)}
                     >
-                      <span>{section.label}</span>
+                      <span>{trLabel(section.label)}</span>
                       <span className="sidebar-btn-count">{count}</span>
                     </button>
                   );
@@ -1158,7 +1227,7 @@ export default function AllProducts() {
                 return (
                   <div key={section.id} id={section.id} className="category-section">
                     <div className="category-section-title">
-                      <h2>{section.label}</h2>
+                      <h2>{trLabel(section.label)}</h2>
                     </div>
                     <div className="products-grid">
                       {products.map(product => (
@@ -1169,7 +1238,7 @@ export default function AllProducts() {
                 );
               })}
               {saunaHeaters.length === 0 && (
-                <p style={{ color: "#a67853", fontSize: "1rem" }}>No sauna heaters available</p>
+                <p style={{ color: "#a67853", fontSize: "1rem" }}>{t("allProducts.empty.heaters")}</p>
               )}
             </div>
           </div>
@@ -1180,8 +1249,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Type</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.type")}</p>
               </div>
               <div className="sidebar-scroll">
                 {ROOM_SECTIONS.map(section => {
@@ -1193,7 +1262,7 @@ export default function AllProducts() {
                       className={`sidebar-btn ${activeRoomSection === section.id ? "active" : ""}`}
                       onClick={() => handleRoomClick(section.id)}
                     >
-                      <span>{section.label}</span>
+                      <span>{trLabel(section.label)}</span>
                       <span className="sidebar-btn-count">{count}</span>
                     </button>
                   );
@@ -1208,7 +1277,7 @@ export default function AllProducts() {
                 return (
                   <div key={section.id} id={section.id} className="category-section">
                     <div className="category-section-title">
-                      <h2>{section.label}</h2>
+                      <h2>{trLabel(section.label)}</h2>
                     </div>
                     <div className="products-grid">
                       {products.map(product => (
@@ -1219,7 +1288,7 @@ export default function AllProducts() {
                 );
               })}
               {saunaRooms.length === 0 && (
-                <p style={{ color: "#a67853", fontSize: "1rem" }}>No sauna rooms available</p>
+                <p style={{ color: "#a67853", fontSize: "1rem" }}>{t("allProducts.empty.rooms")}</p>
               )}
             </div>
           </div>
@@ -1230,8 +1299,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Type</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.type")}</p>
               </div>
               <div className="sidebar-scroll">
                 {groupedSaunaControls.map(group => (
@@ -1240,7 +1309,7 @@ export default function AllProducts() {
                     className={`sidebar-btn ${activeSaunaControlsSection === group.id ? "active" : ""}`}
                     onClick={() => handleSaunaControlsClick(group.id)}
                   >
-                    <span>{group.label}</span>
+                    <span>{trControlsGroupLabel(group.label)}</span>
                     <span className="sidebar-btn-count">{group.products.length}</span>
                   </button>
                 ))}
@@ -1249,11 +1318,11 @@ export default function AllProducts() {
 
             <div className="main-content">
               {groupedSaunaControls.length === 0 ? (
-                <p style={{ color: "#a67853", fontSize: "1rem" }}>No sauna controls available</p>
+                <p style={{ color: "#a67853", fontSize: "1rem" }}>{t("allProducts.empty.saunaControls")}</p>
               ) : (
                 groupedSaunaControls.map(group => (
                   <div key={group.id} id={group.id} className="category-section">
-                    <div className="category-section-title"><h2>{group.label}</h2></div>
+                    <div className="category-section-title"><h2>{trControlsGroupLabel(group.label)}</h2></div>
                     <div className="products-grid">
                       {group.products.map(product => (
                         <ProductCard key={product.id || product.slug} product={product} />
@@ -1271,8 +1340,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Type</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.type")}</p>
               </div>
               <div className="sidebar-scroll">
                 {STEAM_SECTIONS.map(section => {
@@ -1284,7 +1353,7 @@ export default function AllProducts() {
                       className={`sidebar-btn ${activeSteamSection === section.id ? "active" : ""}`}
                       onClick={() => handleSteamClick(section.id)}
                     >
-                      <span>{section.label}</span>
+                      <span>{trLabel(section.label)}</span>
                       <span className="sidebar-btn-count">{count}</span>
                     </button>
                   );
@@ -1299,7 +1368,7 @@ export default function AllProducts() {
                 return (
                   <div key={section.id} id={section.id} className="category-section">
                     <div className="category-section-title">
-                      <h2>{section.label}</h2>
+                      <h2>{trLabel(section.label)}</h2>
                     </div>
                     <div className="products-grid">
                       {products.map(product => (
@@ -1310,7 +1379,7 @@ export default function AllProducts() {
                 );
               })}
               {STEAM_SECTIONS.every(section => (productsBySteamSection[section.id] || []).length === 0) && (
-                <p style={{ color: "#a67853", fontSize: "1rem" }}>No steam products available</p>
+                <p style={{ color: "#a67853", fontSize: "1rem" }}>{t("allProducts.empty.steam")}</p>
               )}
             </div>
           </div>
@@ -1321,8 +1390,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Type</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.type")}</p>
               </div>
               <div className="sidebar-scroll">
                 {INFRARED_SECTIONS.map(section => {
@@ -1334,7 +1403,7 @@ export default function AllProducts() {
                       className={`sidebar-btn ${activeInfraredSection === section.id ? "active" : ""}`}
                       onClick={() => handleInfraredClick(section.id)}
                     >
-                      <span>{section.label}</span>
+                      <span>{trLabel(section.label)}</span>
                       <span className="sidebar-btn-count">{count}</span>
                     </button>
                   );
@@ -1349,7 +1418,7 @@ export default function AllProducts() {
                 return (
                   <div key={section.id} id={section.id} className="category-section">
                     <div className="category-section-title">
-                      <h2>{section.label}</h2>
+                      <h2>{trLabel(section.label)}</h2>
                     </div>
                     <div className="products-grid">
                       {products.map(product => (
@@ -1363,7 +1432,7 @@ export default function AllProducts() {
                 );
               })}
               {INFRARED_SECTIONS.every(section => (productsByInfraredSection[section.id] || []).length === 0) && (
-                <p style={{ color: "#a67853", fontSize: "1rem" }}>No infrared products available</p>
+                <p style={{ color: "#a67853", fontSize: "1rem" }}>{t("allProducts.empty.infrared")}</p>
               )}
             </div>
           </div>
@@ -1374,8 +1443,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Type</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.type")}</p>
               </div>
               <div className="sidebar-scroll">
                 {groupedHeaterAccessories.map(group => (
@@ -1384,7 +1453,7 @@ export default function AllProducts() {
                     className={`sidebar-btn ${activeHeaterAccSection === group.id ? "active" : ""}`}
                     onClick={() => handleHeaterAccClick(group.id)}
                   >
-                    <span>{group.label}</span>
+                    <span>{trLabel(group.label)}</span>
                     <span className="sidebar-btn-count">{group.products.length}</span>
                   </button>
                 ))}
@@ -1393,11 +1462,11 @@ export default function AllProducts() {
 
             <div className="main-content">
               {groupedHeaterAccessories.length === 0 ? (
-                <p style={{ color: "#a67853", fontSize: "1rem" }}>No heater accessories available</p>
+                <p style={{ color: "#a67853", fontSize: "1rem" }}>{t("allProducts.empty.heaterAccessories")}</p>
               ) : (
                 groupedHeaterAccessories.map(group => (
                   <div key={group.id} id={group.id} className="category-section">
-                    <div className="category-section-title"><h2>{group.label}</h2></div>
+                    <div className="category-section-title"><h2>{trLabel(group.label)}</h2></div>
                     <div className="products-grid">
                       {group.products.map(product => (
                         <ProductCard key={product.id || product.slug} product={product} />
@@ -1415,8 +1484,8 @@ export default function AllProducts() {
           <div className="products-wrapper">
             <div className="category-buttons-sidebar">
               <div className="sidebar-header">
-                <p className="sidebar-header-label">Browse by</p>
-                <p className="sidebar-header-title">Categories</p>
+                <p className="sidebar-header-label">{t("allProducts.sidebar.browseBy")}</p>
+                <p className="sidebar-header-title">{t("allProducts.sidebar.categories")}</p>
               </div>
               <div className="sidebar-scroll">
                 {CATEGORY_SECTIONS.map(section => {
@@ -1428,7 +1497,7 @@ export default function AllProducts() {
                       className={`sidebar-btn ${activeCategoryAccessories === section.id ? "active" : ""}`}
                       onClick={() => handleAccessoriesClick(section.id)}
                     >
-                      <span>{section.label}</span>
+                      <span>{trLabel(section.label)}</span>
                       <span className="sidebar-btn-count">{count}</span>
                     </button>
                   );
@@ -1443,7 +1512,7 @@ export default function AllProducts() {
                 return (
                   <div key={section.id} id={section.id} className="category-section">
                     <div className="category-section-title">
-                      <h2>{section.label}</h2>
+                      <h2>{trLabel(section.label)}</h2>
                     </div>
                     <div className="products-grid">
                       {products.map(product => (

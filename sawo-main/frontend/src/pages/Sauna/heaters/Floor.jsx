@@ -58,6 +58,7 @@ import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -142,10 +143,11 @@ function SkeletonCard() {
 // ── Product card component ───────────────────────────────────────────
 function ProductCard({ product }) {
   const power = getPowerRange(product.tags);
+  const localize = useLocalizedPath();
 
   return (
     <Link
-      to={`/products/${product.slug}`}
+      to={localize(`/products/${product.slug}`)}
       className="wm-product-item"
       style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
     >
@@ -175,6 +177,9 @@ function ProductCard({ product }) {
 // ── Floor page ───────────────────────────────────────────────────────
 const Floor = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [activeGroup, setActiveGroup] = useState(null);
   const [search, setSearch] = useState("");
   const [heroLoaded, setHeroLoaded] = useState(false);
@@ -194,9 +199,10 @@ const Floor = () => {
   return (
     <div className="relative">
       <SEO
-        title="Floor Sauna Heaters"
-        description="SAWO Floor Series: powerful, movable stand-alone sauna heaters delivering optimal heat distribution and lasting comfort for commercial and home saunas."
-        path="/sauna/heaters/floor"
+        title={t("floorPage.meta.title")}
+        description={t("floorPage.meta.description")}
+        path={localize("/sauna/heaters/floor")}
+        hreflangAlternates={{ en: "/sauna/heaters/floor", zh: "/zh/sauna/heaters/floor" }}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -216,7 +222,7 @@ const Floor = () => {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Sauna Floor Heaters"
+          alt={t("floorPage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -227,11 +233,11 @@ const Floor = () => {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">SAUNA FLOOR HEATERS</h1>
-          <p className="wm-hero-subtitle">Superior Heat Distribution & Elegant Design</p>
+          <h1 className="wm-hero-title">{t("floorPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("floorPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="EXPLORE HEATERS"
+              text={t("floorPage.hero.exploreButton")}
               href={menuPaths.sauna.heaters.parent}
               redirect
             />
@@ -243,10 +249,9 @@ const Floor = () => {
       {/* INTRODUCING */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Introducing Our Premium Floor Sauna Heaters</h2>
+          <h2 className="wm-products-title">{t("floorPage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Experience superior heat distribution and elegant design with our premium sauna floor
-            heaters, crafted for ultimate relaxation and efficiency.
+            {t("floorPage.intro.desc")}
           </p>
         </div>
       </section>
@@ -256,7 +261,7 @@ const Floor = () => {
         <div className="wm-container">
           <div className="wm-filter-search-row">
             <div className="wm-filter-pills-group">
-              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
               {groupNames.map((g) => (
                 <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>
                   {g}
@@ -271,10 +276,10 @@ const Floor = () => {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search heaters..."
+                placeholder={tc("catalogFilter.searchPlaceholder", { category: t("floorPage.meta.title") })}
               />
               {search && (
-                <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                   <i className="fa-solid fa-xmark" />
                 </button>
               )}
@@ -292,7 +297,7 @@ const Floor = () => {
             </div>
           ) : visibleGroups.length === 0 ? (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No Floor heaters available.</p>
+              <p>{t("floorPage.empty")}</p>
             </div>
           ) : (
             visibleGroups.map((brand, gi) => {
@@ -322,7 +327,7 @@ const Floor = () => {
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
+        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
       </section>
 
       {/* WHY SAWO + CIRCLES */}
@@ -330,11 +335,10 @@ const Floor = () => {
         <div className="wm-container">
           <div className="wm-why-grid">
             <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO HEATERS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
+              <p className="wm-eyebrow">{t("floorPage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("floorPage.why.title")}</h2>
               <p className="wm-why-desc">
-                SAWO heaters combine durability, energy efficiency, and modern design, offering
-                consistent performance for a reliable, superior sauna experience every time.
+                {t("floorPage.why.desc")}
               </p>
               <div style={{ marginTop: "24px" }}>
                 <a
@@ -343,7 +347,7 @@ const Floor = () => {
                   rel="noopener noreferrer"
                   className="wm-brochure-btn"
                 >
-                  VIEW BROCHURE
+                  {tc("viewBrochure")}
                 </a>
               </div>
             </div>
@@ -355,8 +359,8 @@ const Floor = () => {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title={t("floorPage.promo.title")}
+        subtitle={t("floorPage.promo.subtitle")}
         image={bannerImg}
       />
     </div>

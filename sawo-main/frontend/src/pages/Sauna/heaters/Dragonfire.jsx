@@ -59,6 +59,7 @@ import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -146,10 +147,11 @@ function SkeletonCard() {
 // ── Product card component ───────────────────────────────────────────
 function ProductCard({ product }) {
   const power = getPowerRange(product.tags);
+  const localize = useLocalizedPath();
 
   return (
     <Link
-      to={`/products/${product.slug}`}
+      to={localize(`/products/${product.slug}`)}
       className="wm-product-item"
       style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
     >
@@ -179,6 +181,9 @@ function ProductCard({ product }) {
 // ── Dragonfire page ──────────────────────────────────────────────────
 const Dragonfire = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [activeGroup, setActiveGroup] = useState(null);
   const [search, setSearch] = useState("");
   const [heroLoaded, setHeroLoaded] = useState(false);
@@ -198,9 +203,10 @@ const Dragonfire = () => {
   return (
     <div className="relative">
       <SEO
-        title="Dragonfire Sauna Heaters"
-        description="SAWO Dragonfire Series: artistic sauna heaters designed by Stefan Lindfors, blending striking design with cutting-edge heating technology."
-        path="/sauna/heaters/dragonfire"
+        title={t("dragonfirePage.meta.title")}
+        description={t("dragonfirePage.meta.description")}
+        path={localize("/sauna/heaters/dragonfire")}
+        hreflangAlternates={{ en: "/sauna/heaters/dragonfire", zh: "/zh/sauna/heaters/dragonfire" }}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -220,7 +226,7 @@ const Dragonfire = () => {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Dragonfire Sauna Heaters"
+          alt={t("dragonfirePage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -231,11 +237,11 @@ const Dragonfire = () => {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">DRAGONFIRE SAUNA HEATERS</h1>
-          <p className="wm-hero-subtitle">Artistic Flair Meets Cutting-Edge Technology</p>
+          <h1 className="wm-hero-title">{t("dragonfirePage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("dragonfirePage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="EXPLORE HEATERS"
+              text={t("dragonfirePage.hero.exploreButton")}
               href={menuPaths.sauna.heaters.parent}
               redirect
             />
@@ -247,13 +253,9 @@ const Dragonfire = () => {
       {/* INTRODUCING */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Introducing Our Premium Sauna Dragonfire Series</h2>
+          <h2 className="wm-products-title">{t("dragonfirePage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Dragonfire heaters are a refined blend of artistic flair and cutting-edge technology,
-            as envisioned by renowned Finnish designer Stefan Lindfors. Every Dragonfire heater
-            boasts a stylishly elegant jungle-fire pattern and delivers powerful, consistent
-            heat and energy efficiency. Choose from Floor, Wall and Corner models, as well as
-            Mini heaters.
+            {t("dragonfirePage.intro.desc")}
           </p>
         </div>
       </section>
@@ -263,7 +265,7 @@ const Dragonfire = () => {
         <div className="wm-container">
           <div className="wm-filter-search-row">
             <div className="wm-filter-pills-group">
-              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
               {groupNames.map((g) => (
                 <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>
                   {g}
@@ -278,10 +280,10 @@ const Dragonfire = () => {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search heaters..."
+                placeholder={tc("catalogFilter.searchPlaceholder", { category: t("dragonfirePage.meta.title") })}
               />
               {search && (
-                <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                   <i className="fa-solid fa-xmark" />
                 </button>
               )}
@@ -299,7 +301,7 @@ const Dragonfire = () => {
             </div>
           ) : visibleGroups.length === 0 ? (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No Dragonfire heaters available.</p>
+              <p>{t("dragonfirePage.empty")}</p>
             </div>
           ) : (
             visibleGroups.map((brand, gi) => {
@@ -329,7 +331,7 @@ const Dragonfire = () => {
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
+        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
       </section>
 
       {/* WHY SAWO */}
@@ -337,12 +339,12 @@ const Dragonfire = () => {
         <div className="wm-container">
           <div className="wm-why-grid">
             <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO HEATERS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
-              <p className="wm-why-desc">SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.</p>
-              <p className="wm-why-desc">User-Friendly Controls: Easily adjust temperature and time settings for your perfect sauna experience.</p>
+              <p className="wm-eyebrow">{t("dragonfirePage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("dragonfirePage.why.title")}</h2>
+              <p className="wm-why-desc">{t("dragonfirePage.why.desc")}</p>
+              <p className="wm-why-desc">{t("dragonfirePage.why.userFriendly")}</p>
               <div style={{ marginTop: "20px" }}>
-                <a href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">VIEW BROCHURE</a>
+                <a href="https://www.sawo.com/wp-content/uploads/2025/12/SAWO-Product-Catalogue-2025-2026-web.pdf" target="_blank" rel="noopener noreferrer" className="wm-brochure-btn">{tc("viewBrochure")}</a>
               </div>
             </div>
             <div className="wm-why-right"><CirclesInfo /></div>
@@ -351,8 +353,8 @@ const Dragonfire = () => {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title={t("dragonfirePage.promo.title")}
+        subtitle={t("dragonfirePage.promo.subtitle")}
         image={bannerImg}
       />
     </div>

@@ -7,6 +7,7 @@ import { isPubliclyVisible } from "../local-storage/visibility";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
 import heroImg from "../assets/Home/Section1/Sauna-Accessories.webp";
 import HeroWave from "../components/HeroWave";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 // Groups that combine multiple data categories under one section (mirroring
 // the WordPress reference pages that group the same categories together —
@@ -14,10 +15,16 @@ import HeroWave from "../components/HeroWave";
 // -> Benches, Hangers & Floor Mats) simply merge every tab's products into
 // one flat grid — no tab switcher, matching allaccs-display.html's plain
 // per-section layout.
+// `groupKey` below is the lookup into catalog.json's
+// accessoriesCatalog.groups.* (see CategorySection/AccessoriesCatalog),
+// distinct from each group's `label`, which stays plain English — it's only
+// used as a fallback and, for the per-tab `label`s, has no display use at
+// all (products are just flattened per group, tab labels aren't rendered).
 const CATEGORY_GROUPS = [
   {
     id: "section-pails",
     label: "Pails & Ladles",
+    groupKey: "pailsLadles",
     tabs: [
       { key: "pails", label: "Pails", category: "pails" },
       { key: "ladles", label: "Ladles", category: "ladles" },
@@ -27,31 +34,37 @@ const CATEGORY_GROUPS = [
   {
     id: "section-meters",
     label: "Thermometers & Combined Meters",
+    groupKey: "meters",
     tabs: [{ key: "meters", label: "Thermometers & Combined Meters", category: "thermometers" }],
   },
   {
     id: "section-clock-timer",
     label: "Clocks & Timers",
+    groupKey: "clockTimer",
     tabs: [{ key: "clocks", label: "Clocks & Timers", category: "clocks & timers" }],
   },
   {
     id: "section-sauna-lights",
     label: "Sauna Lights",
+    groupKey: "saunaLights",
     tabs: [{ key: "lights", label: "Sauna Lights", category: "sauna lights" }],
   },
   {
     id: "section-headrest-backrest",
     label: "Headrest & Backrests",
+    groupKey: "headrestBackrest",
     tabs: [{ key: "headrest", label: "Headrest & Backrests", category: "headrest & backrest" }],
   },
   {
     id: "section-doors-handles",
     label: "Doors & Handles",
+    groupKey: "doorsHandles",
     tabs: [{ key: "doors", label: "Doors & Handles", category: "doors & handles" }],
   },
   {
     id: "section-benches",
     label: "Benches, Hangers & Floor Mats",
+    groupKey: "benches",
     tabs: [
       { key: "benches", label: "Benches", category: "benches" },
       { key: "hooks", label: "Hangers & Hook Racks", category: "cloth hangers" },
@@ -61,21 +74,25 @@ const CATEGORY_GROUPS = [
   {
     id: "section-kivistone",
     label: "Kivistone",
+    groupKey: "kivistone",
     tabs: [{ key: "kivistone", label: "Kivistone", category: "kivistone" }],
   },
   {
     id: "section-vent-misc",
     label: "Ventilations & Miscellaneous Items",
+    groupKey: "ventMisc",
     tabs: [{ key: "vent", label: "Ventilations & Miscellaneous Items", category: "ventilation & miscellaneous" }],
   },
   {
     id: "section-accessory-sets",
     label: "Accessory Sets",
+    groupKey: "accessorySets",
     tabs: [{ key: "sets", label: "Accessory Sets", category: "accessory sets" }],
   },
 ];
 
 function CategorySection({ group, productsByTab }) {
+  const t = useLocaleT("catalog");
   // Best sellers float to the top within this category's own grid only —
   // .sort() is stable, so ties keep the existing sort_order among
   // best-sellers and among non-best-sellers alike.
@@ -86,7 +103,7 @@ function CategorySection({ group, productsByTab }) {
   return (
     <div id={group.id} className="category-section">
       <div className="category-section-title">
-        <h2>{group.label}</h2>
+        <h2>{t(`accessoriesCatalog.groups.${group.groupKey}`)}</h2>
       </div>
 
       <div className="sawo-av-grid">
@@ -99,6 +116,8 @@ function CategorySection({ group, productsByTab }) {
 }
 
 export default function AccessoriesCatalog({ showHero = true } = {}) {
+  const t = useLocaleT("catalog");
+  const localize = useLocalizedPath();
   const { products: localProds, loading } = useLocalProducts();
   const [activeSection, setActiveSection] = useState(CATEGORY_GROUPS[0].id);
   const heroLoaded = useHeroLoaded(heroImg);
@@ -178,7 +197,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
             borderRadius: 6,
             margin: "0 auto 40px",
           }} />
-          <p style={{ color: "#a67853" }}>Loading accessories...</p>
+          <p style={{ color: "#a67853" }}>{t("accessoriesCatalog.loading")}</p>
         </div>
       </div>
     );
@@ -187,9 +206,10 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
   return (
     <>
       <SEO
-        title="Sauna Accessories"
-        description="Browse the full SAWO accessories catalog: pails, ladles, thermometers, benches, lighting, and more for every sauna."
-        path="/sauna-accessories"
+        title={t("accessoriesCatalog.meta.title")}
+        description={t("accessoriesCatalog.meta.description")}
+        path={localize("/sauna-accessories")}
+        hreflangAlternates={{ en: "/sauna-accessories", zh: "/zh/sauna-accessories" }}
       />
       <style>{`
         @keyframes skS {
@@ -385,7 +405,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
                 color: "#e8c8ab",
                 margin: "0 0 12px",
               }}>
-                Premium Collection
+                {t("accessoriesCatalog.hero.eyebrow")}
               </p>
               <h1 style={{
                 fontSize: "2.4rem",
@@ -394,7 +414,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
                 margin: "0 0 16px",
                 lineHeight: 1.2,
               }}>
-                Sauna Accessories
+                {t("accessoriesCatalog.hero.title")}
               </h1>
               <p style={{
                 fontSize: "1rem",
@@ -404,7 +424,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
                 lineHeight: 1.6,
                 textAlign: "center",
               }}>
-                Discover our complete range of premium sauna accessories designed to enhance your wellness experience. Browse through our carefully curated selection of high-quality products.
+                {t("accessoriesCatalog.hero.description")}
               </p>
             </div>
 
@@ -416,7 +436,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
         <div className="accessories-wrapper" style={!showHero ? { paddingTop: 140 } : undefined}>
           {/* Sidebar */}
           <div className="category-buttons-sidebar">
-            <h2 className="sidebar-header-title">Sauna Accessories</h2>
+            <h2 className="sidebar-header-title">{t("accessoriesCatalog.sidebarTitle")}</h2>
             <div className="sidebar-scroll">
               {CATEGORY_GROUPS.map(group => {
                 const count = groupCounts[group.id] || 0;
@@ -427,7 +447,7 @@ export default function AccessoriesCatalog({ showHero = true } = {}) {
                     className={`sidebar-btn ${activeSection === group.id ? "active" : ""}`}
                     onClick={() => handleSidebarClick(group.id)}
                   >
-                    {group.label}
+                    {t(`accessoriesCatalog.groups.${group.groupKey}`)}
                   </button>
                 );
               })}

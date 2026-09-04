@@ -1,0 +1,135 @@
+{
+  "allProducts": {
+    "meta": {
+      "title": "All Products",
+      "description": "Browse SAWO's complete product range: sauna heaters, sauna rooms, and accessories, all in one searchable catalogue."
+    },
+    "hero": {
+      "eyebrow": "Complete Collection",
+      "title": "All Products",
+      "description": "Browse SAWO's complete product range: sauna heaters, controls, steam generators, rooms, and accessories, all in one searchable catalogue."
+    },
+    "loading": "Loading products...",
+    "sidebar": {
+      "browseBy": "Browse by",
+      "type": "Type",
+      "categories": "Categories"
+    },
+    "tabs": {
+      "heaters": "Sauna Heaters",
+      "rooms": "Sauna Rooms",
+      "saunaControls": "Sauna Controls",
+      "steam": "Steam",
+      "infrared": "Infrared",
+      "heaterAccessories": "Heater Accessories",
+      "accessories": "Sauna Accessories"
+    },
+    "heaterSections": {
+      "wallMounted": "Wall-Mounted",
+      "tower": "Tower",
+      "stone": "Stone",
+      "floor": "Floor",
+      "combi": "Combi",
+      "dragonfire": "Dragonfire"
+    },
+    "roomSections": {
+      "standard": "Standard",
+      "glassFront": "Glass Front",
+      "compact": "Compact"
+    },
+    "steamSections": {
+      "generators": "Steam Generators",
+      "controls": "Steam Controls",
+      "accessories": "Steam Accessories"
+    },
+    "infraredSections": {
+      "rooms": "Sauna Rooms",
+      "panels": "Panels",
+      "controls": "Controls"
+    },
+    "heaterAccessoriesLabels": {
+      "Heater Guard": "Heater Guards",
+      "Integration Collar": "Collars",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Accessories": "Safety Accessories",
+      "Sauna Stones": "Sauna Stones"
+    },
+    "categorySections": {
+      "pails": "Pails",
+      "ladles": "Ladles",
+      "pailShower": "Pail Shower",
+      "meters": "Thermometers & Combined Meters",
+      "clockTimer": "Clocks & Timers",
+      "saunaLights": "Sauna Lights",
+      "headrestBackrest": "Headrest & Backrests",
+      "doorsHandles": "Doors & Handles",
+      "benches": "Benches",
+      "clothHangers": "Hangers & Hook Racks",
+      "woodenFloorMats": "Floor Mat Tiles",
+      "kivistone": "Kivistone",
+      "ventMisc": "Ventilations & Miscellaneous Items"
+    },
+    "empty": {
+      "heaters": "No sauna heaters available",
+      "rooms": "No sauna rooms available",
+      "saunaControls": "No sauna controls available",
+      "steam": "No steam products available",
+      "infrared": "No infrared products available",
+      "heaterAccessories": "No heater accessories available"
+    }
+  },
+  "heatersCatalog": {
+    "meta": {
+      "title": "Sauna Heaters",
+      "description": "Browse the full SAWO heaters catalog: Tower, Wall-Mounted, Stone, Floor, Combi, and Dragonfire series for every sauna size and style."
+    },
+    "hero": {
+      "title": "Sauna Heaters",
+      "description": "Discover our complete range of premium sauna heaters designed for every sauna size and style. Browse through our carefully curated Tower, Wall-Mounted, Stone, Floor, Combi, and Dragonfire series."
+    },
+    "loading": "Loading heaters...",
+    "sidebar": {
+      "browseBy": "Browse by",
+      "series": "Series"
+    },
+    "groups": {
+      "wallMounted": "Wall-Mounted Series",
+      "tower": "Tower Series",
+      "stone": "Stone Series",
+      "floor": "Floor Series",
+      "combi": "Combi Series",
+      "dragonfire": "Dragonfire Series"
+    },
+    "cta": {
+      "title": "Need Help Choosing the Right Heater?",
+      "desc": "Our team can help you match power, size, and style to your sauna, or browse full specs in our product catalogue.",
+      "contactBtn": "CONTACT US",
+      "downloadBtn": "DOWNLOAD CATALOGUE"
+    }
+  },
+  "accessoriesCatalog": {
+    "meta": {
+      "title": "Sauna Accessories",
+      "description": "Browse the full SAWO accessories catalog: pails, ladles, thermometers, benches, lighting, and more for every sauna."
+    },
+    "hero": {
+      "eyebrow": "Premium Collection",
+      "title": "Sauna Accessories",
+      "description": "Discover our complete range of premium sauna accessories designed to enhance your wellness experience. Browse through our carefully curated selection of high-quality products."
+    },
+    "loading": "Loading accessories...",
+    "sidebarTitle": "Sauna Accessories",
+    "groups": {
+      "pailsLadles": "Pails & Ladles",
+      "meters": "Thermometers & Combined Meters",
+      "clockTimer": "Clocks & Timers",
+      "saunaLights": "Sauna Lights",
+      "headrestBackrest": "Headrest & Backrests",
+      "doorsHandles": "Doors & Handles",
+      "benches": "Benches, Hangers & Floor Mats",
+      "kivistone": "Kivistone",
+      "ventMisc": "Ventilations & Miscellaneous Items",
+      "accessorySets": "Accessory Sets"
+    }
+  }
+}

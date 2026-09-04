@@ -63,6 +63,7 @@ import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { variantRank } from "../../../utils/wallMountedGroups";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -166,10 +167,11 @@ function SkeletonCard() {
 // ── Product card component ───────────────────────────────────────────
 function ProductCard({ product }) {
   const power = getPowerRange(product.tags);
+  const localize = useLocalizedPath();
 
   return (
     <Link
-      to={`/products/${product.slug}`}
+      to={localize(`/products/${product.slug}`)}
       className="wm-product-item"
       style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", cursor: "pointer" }}
     >
@@ -199,6 +201,9 @@ function ProductCard({ product }) {
 // ── Combi page ───────────────────────────────────────────────────────
 const Combi = () => {
   const { products: localProds, loading } = useLocalProducts();
+  const t = useLocaleT("sauna");
+  const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [activeGroup, setActiveGroup] = useState(null);
   const [search, setSearch] = useState("");
   const [heroLoaded, setHeroLoaded] = useState(false);
@@ -218,9 +223,10 @@ const Combi = () => {
   return (
     <div className="relative">
       <SEO
-        title="Combi Sauna Heaters"
-        description="SAWO Combi heaters combine sauna and steam in one powerful unit, versatile, energy-efficient warmth with an integrated steamer."
-        path="/sauna/heaters/combi"
+        title={t("combiPage.meta.title")}
+        description={t("combiPage.meta.description")}
+        path={localize("/sauna/heaters/combi")}
+        hreflangAlternates={{ en: "/sauna/heaters/combi", zh: "/zh/sauna/heaters/combi" }}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -246,7 +252,7 @@ const Combi = () => {
       <section className="relative isolate min-h-[95vh] flex flex-col justify-center items-center text-center px-6" style={{ backgroundColor: "#241c17" }}>
         <img
           src={heroImg}
-          alt="Combi Heaters"
+          alt={t("combiPage.hero.alt")}
           className="absolute inset-0 w-full h-full object-cover object-center -z-10"
           loading="eager"
           fetchPriority="high"
@@ -257,11 +263,11 @@ const Combi = () => {
         />
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="relative z-10">
-          <h1 className="wm-hero-title">COMBI HEATERS</h1>
-          <p className="wm-hero-subtitle">Sauna & Steam in One Powerful Unit</p>
+          <h1 className="wm-hero-title">{t("combiPage.hero.title")}</h1>
+          <p className="wm-hero-subtitle">{t("combiPage.hero.subtitle")}</p>
           <div style={{ marginTop: "32px" }}>
             <BrochureDropdownButton
-              text="EXPLORE HEATERS"
+              text={t("combiPage.hero.exploreButton")}
               href={menuPaths.sauna.heaters.parent}
               redirect
             />
@@ -273,13 +279,9 @@ const Combi = () => {
       {/* INTRODUCING */}
       <section className="wm-section">
         <div className="wm-container text-center">
-          <h2 className="wm-products-title">Introducing Our Premium Sauna Combi Series</h2>
+          <h2 className="wm-products-title">{t("combiPage.intro.title")}</h2>
           <p className="wm-products-desc">
-            Combi Heaters are electric heaters with an integrated steamer, which allows you to choose
-            from a normal sauna to a steam sauna. Combi Heaters are equipped with scent basins for
-            aroma oil and a patented Water Level Detection System that warns when water level is low.
-            Water level can easily be monitored through a water level indicator tube (in the standard
-            model only).
+            {t("combiPage.intro.desc")}
           </p>
         </div>
       </section>
@@ -289,7 +291,7 @@ const Combi = () => {
         <div className="wm-container">
           <div className="wm-filter-search-row">
             <div className="wm-filter-pills-group">
-              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>All</button>
+              <button className={`wm-filter-btn ${activeGroup === null ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(null)}>{tc("catalogFilter.all")}</button>
               {groupNames.map((g) => (
                 <button key={g} className={`wm-filter-btn ${activeGroup === g ? "wm-filter-btn--active" : ""}`} onClick={() => setActiveGroup(g)}>
                   {g}
@@ -304,10 +306,10 @@ const Combi = () => {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search heaters..."
+                placeholder={tc("catalogFilter.searchPlaceholder", { category: t("combiPage.meta.title") })}
               />
               {search && (
-                <button className="wm-search-clear" onClick={() => setSearch("")} title="Clear search">
+                <button className="wm-search-clear" onClick={() => setSearch("")} title={tc("catalogFilter.clearSearch")}>
                   <i className="fa-solid fa-xmark" />
                 </button>
               )}
@@ -325,7 +327,7 @@ const Combi = () => {
             </div>
           ) : visibleGroups.length === 0 ? (
             <div style={{ textAlign: "center", padding: "48px 0", fontFamily: "'Montserrat', sans-serif", color: "#888" }}>
-              <p>No Combi heaters available.</p>
+              <p>{t("combiPage.empty")}</p>
             </div>
           ) : (
             visibleGroups.map((brand, gi) => {
@@ -355,7 +357,7 @@ const Combi = () => {
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
       <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
+        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
       </section>
 
       {/* WHY SAWO */}
@@ -363,15 +365,13 @@ const Combi = () => {
         <div className="wm-container">
           <div className="wm-why-grid">
             <div className="wm-why-left">
-              <p className="wm-eyebrow">SAWO HEATERS</p>
-              <h2 className="wm-why-title">Why Choose SAWO Heaters</h2>
+              <p className="wm-eyebrow">{t("combiPage.why.eyebrow")}</p>
+              <h2 className="wm-why-title">{t("combiPage.why.title")}</h2>
               <p className="wm-why-desc">
-                SAWO heaters combine durability, energy efficiency, and modern
-                design, offering consistent performance for a reliable, superior
-                sauna experience every time.
+                {t("combiPage.why.desc")}
               </p>
               <p className="wm-why-desc">
-                Durable Construction: High-quality materials ensure long-lasting performance.
+                {t("combiPage.why.durable")}
               </p>
               <div style={{ marginTop: "20px" }}>
                 <a
@@ -380,7 +380,7 @@ const Combi = () => {
                   rel="noopener noreferrer"
                   className="wm-brochure-btn"
                 >
-                  VIEW BROCHURE
+                  {tc("viewBrochure")}
                 </a>
               </div>
             </div>
@@ -390,8 +390,8 @@ const Combi = () => {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title={t("combiPage.promo.title")}
+        subtitle={t("combiPage.promo.subtitle")}
         image={bannerImg}
       />
     </div>
