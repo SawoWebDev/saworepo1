@@ -145,11 +145,11 @@ kept rather than discarded, `zh` for those is being caught up now.
 
 | Slug | fi | zh |
 |---|---|---|
-| nordex-black-nb | ⬜ | ✅ |
-| nordex-black-ni2 | ⬜ | ✅ |
-| nordex-black-ns | ⬜ | ✅ |
-| nordex-nb | ⬜ | ✅ |
-| nordex-ni2 | ⬜ | ✅ |
+| nordex-black-nb | ✅ | ✅ |
+| nordex-black-ni2 | ✅ | ✅ |
+| nordex-black-ns | ✅ | ✅ |
+| nordex-nb | ✅ | ✅ |
+| nordex-ni2 | ✅ | ✅ |
 | nordex-ns | ⬜ | ✅ |
 | nordex-combi-black-ns | ⬜ | ✅ |
 | nordex-combi-ns | ⬜ | ✅ |
@@ -169,6 +169,52 @@ kept rather than discarded, `zh` for those is being caught up now.
 | nordex-s-combi-black-ns | ⬜ | ⬜ |
 | nordex-s-combi-ns | ⬜ | ⬜ |
 | nordex-s-ns | ⬜ | ⬜ |
+
+**Partial Day 2 `fi` mop-up, 2026-09-07**: translated the first 5 of Day
+2's 24 products into `fi` — `nordex-black-nb`, `nordex-black-ni2`,
+`nordex-black-ns`, `nordex-nb`, `nordex-ni2` (the other 19 Day 2 rows,
+including `nordex-ns` itself, are untouched — this was explicitly a 5-of-24
+partial batch, not the full mop-up day). Used the same `product-i18n.js
+extract <slug> fi` / `apply` pipeline as every other product batch in this
+file. Translation memory was already heavily seeded from the `zh` pass plus
+the earlier Wall-Mounted/Tower `fi` batches sharing this exact spec-table
+wording: `nordex-nb` extracted with 6/6 prose fields pre-filled (only
+`name` needed manual entry, kept as `Nordex NB` per the brand-name
+convention), `nordex-ni2` 5 fields pre-filled, `nordex-black-ni2` 6 fields
+pre-filled (only `name` needed translating). `nordex-black-nb` (4
+pre-filled) and `nordex-black-ns` (4 pre-filled) needed a bit more manual
+work — `nordex-black-ns`'s `short_description`/`description` didn't
+TM-match anything (different wording/HTML whitespace from the other Nordex
+variants) so its spec-table `<th>` headers were translated by hand
+following the established header vocabulary (`Heater Model`→`Lämmitinmalli`,
+`Sauna Room`→`Saunahuone`, `Size of Heater`→`Lämmittimen koko`,
+`Stones`→`Kivet`, `Control`→`Ohjaus`, `Minimum Safety
+Distances`→`Vähimmäisturvaetäisyydet`), `<td>` model-code/kW/dimension rows
+left untouched. **`Black`→`Musta`** confirmed as the established fi
+descriptor by querying `translation_memory` directly (50 rows matching
+`%Black%` for locale `fi`, incl. `Aries Corner Black NB`→`Aries Kulma Musta
+NB`, `SAWO30 Round Black`→`SAWO30 Pyöreä Musta`) — since Nordex names are
+flat brand+code (no Corner/Round/Wall position word, per the `zh` note
+above), applied as `Nordex Musta NB`/`Nordex Musta Ni2`/`Nordex Musta NS`.
+No source-content bugs found in these 5 (the `kW$1` and dangling-sentence
+artifacts documented elsewhere in this file don't appear in this batch's
+English rows). Verified via SQL: all 5 have `product_translations` rows for
+`fi` with `source_field_hashes` populated (8 fields each:
+`name`/`type`/`description`/`short_description`/`features[0-3]`). Not
+Playwright-verified end-to-end this pass — SQL verification only.
+**Note found while writing this up**: these 5 slugs were apparently
+already translated once before, in "Batch 6 — 34 products, Nordex-family
+heater stragglers (2026-09-04)" (see its entry under the `fi` completeness
+push further below in this file, part of a different tracking scheme) —
+that batch's own list explicitly includes `nordex-black-nb`,
+`nordex-black-ni2`, `nordex-black-ns`, `nordex-nb`, and `nordex-ni2`. This
+Day 2 table simply never got its ⬜→✅ flipped for them at the time, which
+is why this pass re-extracted/re-applied — `apply` is an upsert, and
+translation memory was already heavily seeded from that batch (hence the
+high pre-fill counts above), so the re-applied content should match or
+closely match what Batch 6 wrote. Flagging so nobody double-counts this as
+"38 slugs translated" when tallying `fi` progress — it's the same 5
+products, now correctly reflected here.
 
 **Day 3 — SAWO30, Krios, Phoenix, Fiberjungle (24 products)**
 
