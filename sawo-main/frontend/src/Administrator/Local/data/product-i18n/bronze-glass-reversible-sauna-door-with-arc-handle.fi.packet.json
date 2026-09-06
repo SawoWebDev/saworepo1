@@ -1,0 +1,64 @@
+{
+  "slug": "bronze-glass-reversible-sauna-door-with-arc-handle",
+  "productId": "d311345b-e346-43d4-b672-6c6f4343d9cd",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (741-4SGD-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (741-4SGA-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (741-4SGH-1)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Pronssilasinen kääntyvä saunan ovi, kaarikahva",
+    "short_description": "SAWO Pronssilasinen kääntyvä saunan ovi, kaarikahva on pronssilasinen saunan ovi — aukko 600 × 1800mm, karmi 690 × 1890mm, kääntyvä, sopii sekä vasen- että oikeakätiseen asennukseen.",
+    "description": null,
+    "type": "Ovet ja kahvat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (741-4SGD-1)",
+        "name": "Setri (741-4SGD-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (741-4SGA-1)",
+        "name": "Haapa (741-4SGA-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (741-4SGH-1)",
+        "name": "Hemlokki (741-4SGH-1)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

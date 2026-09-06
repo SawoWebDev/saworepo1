@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-reversible-sauna-door-7344sd",
+  "productId": "9c5d2ac0-4081-4eb8-9668-ff10a2431333",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (734-4SD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (734-4SA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (734-4SH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen kääntyvä saunan ovi",
+    "short_description": "SAWO Puinen kääntyvä saunan ovi on puinen saunan ovi — aukko 610 × 1935mm, karmi 700 × 2040mm, kääntyvä, sopii sekä vasen- että oikeakätiseen asennukseen.",
+    "description": null,
+    "type": "Ovet ja kahvat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (734-4SD)",
+        "name": "Setri (734-4SD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (734-4SA)",
+        "name": "Haapa (734-4SA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (734-4SH)",
+        "name": "Hemlokki (734-4SH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

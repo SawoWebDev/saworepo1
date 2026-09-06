@@ -1,0 +1,24 @@
+{
+  "slug": "helius-mini-ns",
+  "productId": "2c147543-2f01-4114-8336-85a4bcdb1f00",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "features[1]",
+      "source": "Available controls: Saunova/Innova (NS)"
+    }
+  ],
+  "fields": {
+    "name": "Helius Mini NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Helius Mini</strong><span style=\"text-align: justify;\"> tarjoaa saman innovaation kuin Helius kompaktimmassa muodossa. Se voidaan asentaa huomaamattomasti penkkien taakse, täysin piiloon minimaalisella turvaetäisyydellä. Sen suojakupu on suunniteltu piilotetun lämmittimen käyttöön. Yhdistettynä tehokkaaseen suorituskykyyn se on suunniteltu huolella lämmittämään pienempiä tiloja tasaisesti.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Lämmitin\n<br>malli</th>\n  <th>kW</th>\n  <th>Saunahuone<br>min. (m3) maks.</th>\n  <th>Lämmittimen koko (mm)<br>Pituus Leveys Korkeus</th>\n  <th>Kivet<br>(kg)</th>\n  <th colspan=\"2\">Ohjaus</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-MN-20NS-Z</td>\n  <td>2.0</td>\n  <td>1.5 – 2.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-27NS-Z</td>\n  <td>2.7</td>\n  <td>2.0 – 3.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-30NS-Z</td>\n  <td>3.0</td>\n  <td>2.0 – 4.0</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "Tehoalue: 2.0 – 3.0 kW",
+      "Saatavilla oleva ohjaus: Saunova/Innova (NS)",
+      "Erillinen vuolukivinen vesiallas letkulla",
+      "Valinnainen kiuassuoja ja suojakupu"
+    ]
+  }
+}

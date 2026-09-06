@@ -1,0 +1,40 @@
+{
+  "slug": "door-lock-magnet-round-heavy-duty",
+  "productId": "cdadf506-5ab5-4eb5-aa18-ce2e1c58cb3d",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Aluminum (574)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Pyöreä raskaan sarjan magneettinen ovilukko",
+    "short_description": "SAWO Pyöreä raskaan sarjan magneettinen ovilukko on pyöreä, raskaan sarjan magneettinen ovilukko, mitat 17 × 28.5mm, jolla saunan ovi pysyy tukevasti kiinni.",
+    "description": null,
+    "type": "Ovet ja kahvat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Aluminum (574)",
+        "name": "Alumiini (574)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
