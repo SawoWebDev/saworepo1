@@ -1269,6 +1269,44 @@ Verified via `apply-many` (5/5 applied, no retries needed) and `pending
 fi` (37 missing after, down from 42). Post-batch count: **37 of 380
 products still missing `fi`** (down from 42).
 
+**Batch — 5 products, Integration Collar micro-category (2026-09-04)**:
+re-ran `pending fi` fresh (37 missing at start). Picked 5 of the
+~17-product Integration Collar category (a bench-mount heater trim
+ring/collar, new to the `fi` push — 0 `tmPrefilled` fields on extraction,
+no prior `fi` translation existed for this category at all):
+`integration-collar-sawo30-wall-stainless`,
+`integration-collar-tower-corner-stainless`,
+`integration-collar-round-v2-stainless`,
+`integration-collar-phoenix-stainless`,
+`integration-collar-tower-wall-stainless`. Filled via a one-off script
+(`fill-fi-integration-collars.mjs`) since 4 of the 5 share one identical
+English short_description verbatim (only `integration-collar-round-v2-
+stainless` has a distinct opening sentence). Coined `type`/base-word
+**"Integration Collar" → "Kiuaskaulus"** (kiuas+kaulus, i.e.
+"heater-collar") — modeled directly on the sibling **"Heater Guard" →
+"Kiuassuoja"** category already established in `fi` (same
+`kiuas`+noun compounding style, and the same "keep `type` as the bare
+translated term rather than a full descriptive phrase" convention,
+confirmed by querying that category's already-applied rows). Heater
+position words reused from that same sibling category's precedent
+rather than guessed: **Corner → Kulma, Wall → Seinä, Round → Pyöreä**
+(all three confirmed via direct query of already-applied `Kiuassuoja –
+<Brand> <Position>` names) — add all three to
+`PRODUCT-TRANSLATION-CONVENTIONS.md`'s naming-conventions section as the
+now-confirmed `fi` equivalents of the zh table's Corner/Wall/Round
+row. Heater brand names (SAWO30, Tower, Phoenix) and the "V2" version
+code kept English per the existing brand/code rules. Material label
+"(Stainless)" → "(Ruostumaton teräs)", reusing the established
+`MATERIAL_WORD_DICTIONARY` word rather than inventing a new one.
+`spec_table_headers` ("Model"/"Length (mm)"/"Width (mm)"/"Height (mm)")
+translated as "Malli"/"Pituus (mm)"/"Leveys (mm)"/"Korkeus (mm)" — "Malli"
+confirmed from `translation_memory`, the other three reused from the
+"Length Width Height" → "Pituus Leveys Korkeus" heater spec-table
+precedent already in the conventions doc. Verified via `apply-many` (5/5
+applied, no retries needed) and `pending fi` (32 missing after, down from
+37). Post-batch count: **32 of 380 products still missing `fi`** (down
+from 37).
+
 **Batch — 46 products, Heater Guard complete + Sauna Controls complete
 (2026-09-04)**: ran as an explicit fixed 46-slug batch (not a fresh
 `pending` pull) to avoid overlapping with other parallel sessions

@@ -114,6 +114,9 @@ benefits.
   short_description, matching how the English source itself treats it
   (no established Chinese equivalent exists in the site's copy — don't
   invent one).
+- **`fi` equivalents of the position words in the zh table below**
+  (confirmed via the already-applied `Kiuassuoja – <Brand> <Position>`
+  rows, 2026-09-04): Corner → Kulma, Wall → Seinä, Round → Pyöreä.
 
 ### Descriptive words attached to a brand name DO get translated
 
@@ -301,31 +304,17 @@ Sauna Lights → Saunavalaisimet, Thermometers → Lämpömittarit, Safety
 Switch → Turvakytkin, Heater Hood → Kiuaskupu (`helius-heater-hood`'s
 live row — a single-product "category"), Ventilation & Miscellaneous →
 Ilmanvaihto ja sekalaiset, Kivistone → Kivistone (kept untranslated,
-same brand-name treatment as the `zh` row), Pails → Pails (kept literal
-English per every existing `fi` Pails row in `product_translations`, not
-translated — confirmed, not an oversight). **Integration Collar has no
-`fi` rows at all yet** (still fully missing for this locale as of
-2026-09-04) — coin its `type` translation when that category's `fi`
-batch actually runs, don't guess it here. If you hit an `fi` category
-not listed here, check `translation_memory` and live
-`product_translations` for an existing translation before coining one,
-then add it to this list.
-
-`fi` category `type` translations seen so far: Headrest & Backrest →
-Niskatuet ja selkänojat, Clocks & Timers → Kellot ja ajastimet, Infrared
-Controls → Infrapunaohjaimet, Infrared Accessories → Infrapunatarvikkeet,
-Ladles → Kauhat, Benches → Penkit, Sauna Lights → Saunavalaisimet,
-Ventilation & Miscellaneous → Ilmanvaihto ja sekalaiset, Thermometers →
-Lämpömittarit (used for thermo-hygrometer variants too, same shorter-form
-rule as zh's 温度计 above — the individual product `name`/
-`short_description` says "termohygrometri" where relevant), Doors &
-Handles → Ovet ja kahvat (coined 2026-09-04, matches the `doorsHandlesPage`
-hero copy already established in `sauna.json`). **Pails is a
-documented exception — its `type` field is left as the literal English
-"Pails"** in every existing `fi` row (confirmed 2026-09-04 by querying
-every `fi` Pails row in `product_translations`), not translated like the
-categories above — reuse this as-is rather than "fixing" it to a Finnish
-word, to stay consistent with the rest of the category.
+same brand-name treatment as the `zh` row), Doors & Handles → Ovet ja
+kahvat (coined 2026-09-04, matches the `doorsHandlesPage` hero copy
+already established in `sauna.json`), Integration Collar → Kiuaskaulus
+(coined 2026-09-04, modeled on the Heater Guard/Kiuassuoja compounding
+style — `kiuas`+noun, and the same "keep `type` as the bare translated
+term" convention — 0 `fi` rows existed for this category before that
+batch), Pails → Pails (kept literal English per every existing `fi`
+Pails row in `product_translations`, not translated — confirmed, not an
+oversight). If you hit an `fi` category not listed here, check
+`translation_memory` and live `product_translations` for an existing
+translation before coining one, then add it to this list.
 
 ## Templated micro-categories — write a fill script, don't hand-edit JSON
 
