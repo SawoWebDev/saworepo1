@@ -1,0 +1,64 @@
+{
+  "slug": "clear-glass-reversible-sauna-door-wide",
+  "productId": "e85e98bd-0640-4698-9302-24e627b850c9",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (731-4SCD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (731-4SCA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (731-4SCH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kirkaslasinen kääntyvä saunan ovi, leveä",
+    "short_description": "SAWO Kirkaslasinen kääntyvä saunan ovi, leveä on kirkaslasinen saunan ovi — aukko 700 × 1800mm, karmi 790 × 1890mm, kääntyvä, sopii sekä vasen- että oikeakätiseen asennukseen.",
+    "description": null,
+    "type": "Ovet ja kahvat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (731-4SCD)",
+        "name": "Setri (731-4SCD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (731-4SCA)",
+        "name": "Haapa (731-4SCA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (731-4SCH)",
+        "name": "Hemlokki (731-4SCH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

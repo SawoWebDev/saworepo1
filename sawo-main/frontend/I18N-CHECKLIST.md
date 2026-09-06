@@ -1394,6 +1394,83 @@ failed` retries needed) and independently via a direct Supabase query
 joining `products`→`product_translations` on all 46 slugs: 46/46 have a
 `fi` row with non-empty `source_field_hashes`.
 
+**Batch — 42 products, SITE-WIDE `fi` PRODUCT TRANSLATION COMPLETE
+(2026-09-07)**: re-ran `pending fi` fresh — 42 missing, the last batch
+needed for full site-wide `fi` coverage (380/380). Two concurrent
+sessions ended up working this exact same 42-slug list at once (visible
+via packets that were already hand-translated moments after `extract-
+many` wrote them, and via `pending fi`'s missing-count dropping between
+polls as the other session applied its own slugs) — no conflicts
+resulted since `apply` is a per-slug upsert; this session simply skipped
+re-applying any slug the other session had already landed (confirmed via
+a fresh `pending fi` re-check right before the final `apply-many`, per
+this doc's standing "always re-run `pending` right before extracting/
+applying" rule) and translated the remainder. Two category groups plus
+one stray:
+
+- **Doors & Handles doors (18 full-door products)** — the first `fi`
+  batch to cover the actual door slabs (as opposed to the 5 door-*handle*
+  products already done 2026-09-04); `type` "Doors & Handles" →
+  "Ovet ja kahvat" reused unchanged from that existing precedent, and
+  `tmPrefilled` confirmed strong reuse on `spec_table_headers`
+  ("Ominaisuus"/"Tiedot") and every Cedar/Aspen/Hemlock variation name
+  via the material dictionary — only `name`/`short_description` needed
+  fresh translation per product. Coined the base vocabulary fresh (no
+  prior `fi` sauna-door-product precedent existed): "sauna door" →
+  "saunan ovi", "opening"/"frame" → "aukko"/"karmi", "reversible for
+  left- or right-hand installation" → "kääntyvä, sopii sekä vasen- että
+  oikeakätiseen asennukseen", "clear/bronze glass" →
+  "kirkaslasinen"/"pronssilasinen" (as compound adjectives) or
+  "kirkas/pronssinvärinen lasi-ikkuna" (for "fitted with a ... glass
+  window" phrasing on solid-wood doors). Reused the handle batch's
+  established comma-suffix pattern for descriptive name variants (e.g.
+  "Puinen raidallinen saunan ovi, leveä" for the "Wide" striped-door
+  variant, mirroring "Puinen ovenkahva, iso pyöreä"). Two more Doors &
+  Handles non-door items translated the same way: `door-lock-magnet-
+  round-heavy-duty` ("Pyöreä raskaan sarjan magneettinen ovilukko") and
+  `wooden-straight-door-handle-with-metal-accent` ("Puinen suora
+  ovenkahva, metallikoristeella", following the existing handle
+  sentence template exactly). `bronze-glass-sauna-door-finland` kept
+  "Finland" untranslated in the name (treated as a model/market
+  designation, not ordinary prose, consistent with how model codes are
+  never translated) — flag for a future naming-convention audit pass if
+  a sibling product ever clarifies what "Finland" actually designates
+  here.
+- **Integration Collar (11 more products)**, continuing the 5 done
+  2026-09-04: reused that batch's coined `type`/base word "Kiuaskaulus"
+  and confirmed position words (Corner → Kulma, Wall → Seinä, Round →
+  Pyöreä, plus Middle → Keski per the Heater Guard batch's precedent)
+  rather than re-deriving anything. `spec_table_headers` reused
+  Malli/Pituus (mm)/Leveys (mm)/Korkeus (mm), plus Materiaali for
+  `integration-collar-corner-wooden`'s extra "Material" column. Two
+  short_description variants confirmed against the already-applied
+  2026-09-04 rows: the generic multi-material sentence (stainless/Cubos
+  products) vs. the Hemlock-specific sentence (`*-wall-wooden`/`*-corner-
+  wooden`/`*-round-wooden`, which describe a single fixed wood rather
+  than "options include..."). Material label "(Puu)" coined fresh for
+  "(Wooden)" (no prior `fi` Integration Collar wooden-material precedent
+  existed; "(Ruostumaton teräs)" for "(Stainless)" reused unchanged).
+- **`helius-mini-ns`** (stray, not Doors/Handles or Integration Collar):
+  `type` "Helius" kept English per the established heater-brand rule.
+  Found and fixed the same European-decimal-comma typo pattern as the
+  2026-09-04 Sauna Controls batch: English source `features[0]` read
+  "Power range: 2,0 – 3.0kW" (comma inside an otherwise period-formatted
+  catalog) — translated as "Tehoalue: 2.0 – 3.0 kW" (period, source left
+  as-is per the standing rule). `description`'s HTML spec-table `<th>`
+  headers translated (Heater Model/Sauna Room/Size of Heater/Stones/
+  Control → Lämmitin malli/Saunahuone/Lämmittimen koko/Kivet/Ohjaus,
+  reusing the existing heater spec-header table in
+  `PRODUCT-TRANSLATION-CONVENTIONS.md`), every `<td>` data row (including
+  the "Separate" control-mode label) left untouched.
+
+Verified via `apply-many` (32/32 applied on this session's final call —
+the other 10 of the 42 had already been applied by the concurrent
+session) and `node product-i18n.js pending fi`: **0 missing — full
+site-wide `fi` coverage, 380/380 products.** This closes out the
+"Site-wide all-products `fi` push" section above; any further `fi` work
+is staleness maintenance (`check-translation-staleness.mjs`), not new
+coverage.
+
 ### zh completeness audit (2026-09-04)
 
 With the `zh` push having been declared complete on 2026-09-03, ran a

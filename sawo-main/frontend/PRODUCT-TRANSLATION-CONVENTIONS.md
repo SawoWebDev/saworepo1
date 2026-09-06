@@ -316,6 +316,24 @@ oversight). If you hit an `fi` category not listed here, check
 `translation_memory` and live `product_translations` for an existing
 translation before coining one, then add it to this list.
 
+`fi` Doors & Handles sauna-door vocabulary (coined 2026-09-07 completing
+the category's `fi` coverage — no prior `fi` full-door precedent existed,
+only the door-*handle* products done 2026-09-04): "sauna door" →
+"saunan ovi", "opening" → "aukko", "frame" → "karmi", "reversible for
+left- or right-hand installation" → "kääntyvä, sopii sekä vasen- että
+oikeakätiseen asennukseen", "clear glass sauna door" / "bronze glass
+sauna door" → "kirkaslasinen saunan ovi" / "pronssilasinen saunan ovi"
+(compound adjective), "fitted with a clear/bronze glass window" →
+"jossa on kirkas/pronssinvärinen lasi-ikkuna" (used on solid-wood doors
+that merely have a window, as opposed to all-glass doors). Reuses the
+door-handle batch's comma-suffix pattern for descriptive variants (e.g.
+"Puinen raidallinen saunan ovi, leveä" for a "Wide" striped-door
+variant, same style as "Puinen ovenkahva, iso pyöreä").
+
+`fi` Integration Collar material label "(Wooden)" → "(Puu)" (coined
+2026-09-07; "(Stainless)" → "(Ruostumaton teräs)" was already
+established 2026-09-04).
+
 ## Templated micro-categories — write a fill script, don't hand-edit JSON
 
 Some categories are one product family repeated with only dimensions/

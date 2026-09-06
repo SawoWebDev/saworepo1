@@ -1,0 +1,64 @@
+{
+  "slug": "wooden-straight-door-handle-with-metal-accent",
+  "productId": "d3325e99-59f0-4f01-92a1-fc9071b8989d",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (560-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (560-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (560-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puinen suora ovenkahva, metallikoristeella",
+    "short_description": "SAWO Puinen suora ovenkahva, metallikoristeella on puinen saunan ovenkahva, jossa on suora profiili ja metallikoriste, mitat 155 × 900mm, suunniteltu pysymään viileänä kosketettaessa saunan kuumuudessa.",
+    "description": null,
+    "type": "Ovet ja kahvat",
+    "spec_table_headers": [
+      "Ominaisuus",
+      "Tiedot"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (560-D)",
+        "name": "Setri (560-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (560-A)",
+        "name": "Haapa (560-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (560-BL)",
+        "name": "Musta (560-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

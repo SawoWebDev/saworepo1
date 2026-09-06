@@ -1,0 +1,20 @@
+{
+  "slug": "integration-collar-corner-wooden",
+  "productId": "7ed5ce24-c12c-40be-8003-582635d5261c",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Kiuaskaulus – Kulma (Puu)",
+    "short_description": "Kiuaskaulus parantaa penkkiin asennettujen kiukaiden ulkonäköä antamalla niille saumattoman, sisäänrakennetun ilmeen. Valmistettu kestävästä hemlokista, se täydentää saunan luonnollista ilmettä säilyttäen samalla rakenteellisen kestävyyden ja lämmönkeston.",
+    "description": null,
+    "type": "Kiuaskaulus",
+    "spec_table_headers": [
+      "Malli",
+      "Materiaali",
+      "Pituus (mm)",
+      "Leveys (mm)",
+      "Korkeus (mm)"
+    ]
+  }
+}
