@@ -55,6 +55,8 @@
   },
   "modelCode": "Model {{code}}",
   "skuCode": "SKU {{sku}}",
+  "roomDisplayName": "{{type}} Sauna Room {{code}}",
+  "seoFallbackDescription": "{{name}} by SAWO. A premium Finnish sauna room.",
   "stats": {
     "capacity": "Capacity",
     "floorSize": "Floor Size",
