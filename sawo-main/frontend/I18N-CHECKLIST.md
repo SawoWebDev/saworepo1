@@ -150,25 +150,25 @@ kept rather than discarded, `zh` for those is being caught up now.
 | nordex-black-ns | ✅ | ✅ |
 | nordex-nb | ✅ | ✅ |
 | nordex-ni2 | ✅ | ✅ |
-| nordex-ns | ⬜ | ✅ |
-| nordex-combi-black-ns | ⬜ | ✅ |
-| nordex-combi-ns | ⬜ | ✅ |
-| nordex-floor-black-ns | ⬜ | ⬜ |
-| nordex-floor-ns | ⬜ | ⬜ |
-| nordex-mini-black-nb | ⬜ | ✅ |
-| nordex-mini-black-ni2 | ⬜ | ✅ |
-| nordex-mini-black-ns | ⬜ | ✅ |
-| nordex-mini-combi-black-ns | ⬜ | ✅ |
-| nordex-mini-combi-ns | ⬜ | ✅ |
-| nordex-mini-nb | ⬜ | ✅ |
-| nordex-mini-ni2 | ⬜ | ✅ |
-| nordex-mini-ns | ⬜ | ✅ |
-| nordex-pro-combi-ns | ⬜ | ⬜ |
-| nordex-pro-ns | ⬜ | ⬜ |
-| nordex-s-black-ns | ⬜ | ⬜ |
-| nordex-s-combi-black-ns | ⬜ | ⬜ |
-| nordex-s-combi-ns | ⬜ | ⬜ |
-| nordex-s-ns | ⬜ | ⬜ |
+| nordex-ns | ✅ | ✅ |
+| nordex-combi-black-ns | ✅ | ✅ |
+| nordex-combi-ns | ✅ | ✅ |
+| nordex-floor-black-ns | ✅ | ✅ |
+| nordex-floor-ns | ✅ | ✅ |
+| nordex-mini-black-nb | ✅ | ✅ |
+| nordex-mini-black-ni2 | ✅ | ✅ |
+| nordex-mini-black-ns | ✅ | ✅ |
+| nordex-mini-combi-black-ns | ✅ | ✅ |
+| nordex-mini-combi-ns | ✅ | ✅ |
+| nordex-mini-nb | ✅ | ✅ |
+| nordex-mini-ni2 | ✅ | ✅ |
+| nordex-mini-ns | ✅ | ✅ |
+| nordex-pro-combi-ns | ✅ | ✅ |
+| nordex-pro-ns | ✅ | ✅ |
+| nordex-s-black-ns | ✅ | ✅ |
+| nordex-s-combi-black-ns | ✅ | ✅ |
+| nordex-s-combi-ns | ✅ | ✅ |
+| nordex-s-ns | ✅ | ✅ |
 
 **Partial Day 2 `fi` mop-up, 2026-09-07**: translated the first 5 of Day
 2's 24 products into `fi` — `nordex-black-nb`, `nordex-black-ni2`,
@@ -215,6 +215,57 @@ high pre-fill counts above), so the re-applied content should match or
 closely match what Batch 6 wrote. Flagging so nobody double-counts this as
 "38 slugs translated" when tallying `fi` progress — it's the same 5
 products, now correctly reflected here.
+
+**Day 2 completion, remaining 19 (2026-09-07, Batch A)**: tasked with
+finishing the rest of the Day 2 Nordex table — `fi` for the 11 rows still
+showing `fi` ⬜ (`nordex-ns`, `nordex-combi-black-ns`, `nordex-combi-ns`,
+`nordex-mini-black-nb`, `nordex-mini-black-ni2`, `nordex-mini-black-ns`,
+`nordex-mini-combi-black-ns`, `nordex-mini-combi-ns`, `nordex-mini-nb`,
+`nordex-mini-ni2`, `nordex-mini-ns`) plus both `fi`+`zh` for the 8 rows
+still showing ⬜/⬜ (`nordex-floor-black-ns`, `nordex-floor-ns`,
+`nordex-pro-combi-ns`, `nordex-pro-ns`, `nordex-s-black-ns`,
+`nordex-s-combi-black-ns`, `nordex-s-combi-ns`, `nordex-s-ns`) — 19 rows,
+27 slug/locale pairs total. Before running `product-i18n.js extract` on
+any of them, ran `pending fi`/`pending zh` (0 missing either locale,
+site-wide) and then a direct SQL check against `product_translations` for
+all 19 slugs: every one already had both a `fi` and a `zh` row with
+`source_field_hashes` populated, `name`/`short_description`/`description`
+filled, and real (non-English) translated prose — e.g. `nordex-ns` `fi`
+short_description reads "Kuten kaikki Nordex-mallit..." and `zh` reads "与
+所有 Nordex 系列产品一样..."; features correctly kept "9.0 kW"-style spacing
+in both locales. `updated_by`/`updated_at` on the rows point to
+`product-i18n.js` (and one `claude-i18n-fix` touch on
+`nordex-floor-ns`/`nordex-floor-black-ns` `zh`) with timestamps from
+2026-09-01 through 2026-09-04 — i.e. this is the exact same situation the
+entry immediately above documents for the first 5 rows: these 19 were
+already carried by an earlier, differently-scoped batch (the site-wide
+"Complete site-wide fi product translations (380/380)" pass and/or "Batch
+6 — 34 products, Nordex-family heater stragglers"), and this Day 2 table
+simply never got flipped for them. No new `extract`/`apply` calls were
+needed or run this pass — this was a verification-and-bookkeeping pass,
+not a translation pass, so there is no new TM pre-fill data to report.
+**One naming inconsistency noticed, not fixed (out of scope for a
+verification pass)**: the "5 of 24" mop-up entry above established
+`Black`→`Musta` as the `fi` convention for Nordex `Black` variants
+(confirmed via `translation_memory`), but the already-existing rows for
+`nordex-mini-black-nb`, `nordex-mini-black-ns`, `nordex-mini-black-ni2`,
+`nordex-mini-combi-black-ns`, `nordex-floor-black-ns`, and
+`nordex-s-black-ns` (all written by the earlier, unrelated batch) instead
+keep `Black` untranslated in the `name` field (e.g. `Nordex Mini Black
+NB`, `Nordex Floor Black NS`) while still translating "black" correctly
+inside the prose body (e.g. `nordex-mini-black-nb`'s `fi`
+short_description says "mustasta metallista" = "black metal"). `zh`
+handles the same rows consistently (`黑色` in both name and body). Not
+changed here since it's pre-existing content from a different session,
+not something this pass introduced, and the task was verification/
+bookkeeping only — flagging for a future consistency pass if the `fi`
+`Black`→`Musta` convention is meant to be name-field-wide. No source-
+content bugs (broken HTML, stray decimal commas, etc.) found in the 19
+rows spot-checked beyond the pre-existing dangling-`<span>` artifact on
+`nordex-floor-black-ns` `zh` short_description already documented
+elsewhere in this file. Verified via SQL: all 19 slugs × both locales = 38
+`product_translations` rows confirmed present with `source_field_hashes`
+populated.
 
 **Day 3 — SAWO30, Krios, Phoenix, Fiberjungle (24 products)**
 
