@@ -1778,22 +1778,26 @@ after adding a new page) to catch anything new before declaring a push
 1. Native-speaker review pass on everything marked "ZH written"/"FI
    written" but not "Live" across the whole file, then flip each path
    in `translatedRoutes.js`.
-2. **Not started, real architecture gap found 2026-09-04**: `sauna_rooms`
+2. **Architecture gap found 2026-09-04, fix landed 2026-09-07**: `sauna_rooms`
    has no per-locale name storage at all — unlike `products` →
    `product_translations`, there's no `room_translations` table or `zh`
-   column, so `room.name` ("Standard Sauna Room 1214") renders as raw
-   English on every locale everywhere it's shown: `ProductCard`,
-   `AllProducts.jsx`, `ProductCatalogue.jsx`'s Sauna Rooms tab, and
-   `DispSaunaRoom.jsx`'s own detail-page title (`{room.name}`, line
-   ~476). The fix isn't a data patch — build a `{roomTypeLabel}
-   {model_code}` display-name helper (e.g. `红外线桑拿房 0908-IR-D`)
-   reusing the already-translated `roomTitles` map (`sauna.json`'s
-   `roomsPage.roomTitles` / `support.json`'s `catalogue.seriesLabels`),
-   and swap every raw `room.name` render for it on non-`en` locales.
-   Two smaller bugs found alongside it, same area: `support.json`'s
-   `catalogue.seriesLabels` (zh) is missing a `compact` key, and
-   `ProductCatalogue.jsx`'s Sauna Rooms `groupOrder` array omits
-   `"compact"` entirely (only lists `standard`/`glassfront`/`infrared`).
+   column, so `room.name` ("Standard Sauna Room 1214") rendered as raw
+   English on every locale everywhere it's shown. Fixed with a
+   `roomDisplayName(t, room)` helper (product.json's `"roomDisplayName"`
+   key: `"{{type}} Sauna Room {{code}}"`) that reconstructs the display
+   name from the already-translated `room_type` word + the untranslatable
+   `model_code`, verified byte-exact against all 61 rooms' real English
+   names. Landed in `DispSaunaRoom.jsx` (detail-page title, SEO
+   title/description fallbacks, carousel alt text, `RelatedRooms` grid),
+   `Sitemap.jsx`'s room listing, and `AllProducts.jsx`'s `ProductCard`
+   (card title text + image alt), each with its own local copy of the
+   helper per this repo's per-file-helper convention. Along the way this
+   also fixed: `support.json`'s `catalogue.seriesLabels` (zh) was missing
+   a `compact` key, and `ProductCatalogue.jsx`'s Sauna Rooms `groupOrder`
+   array omitted `"compact"` entirely.
+   **Still open**: `ProductCatalogue.jsx`'s own `ProductCard` (the
+   `/support/catalogue` page) still renders raw `room.name` and needs the
+   same `roomDisplayName` treatment — last of the four render sites.
 
 ## Infra fixes (2026-09-01)
 

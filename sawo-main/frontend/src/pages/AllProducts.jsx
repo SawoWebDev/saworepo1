@@ -383,12 +383,41 @@ function getImageUrl(product) {
   return resolveUrl(path);
 }
 
+function roomTypeLabel(t, key) {
+  if (!key) return key;
+  const label = t(`roomTypes.${key}`);
+  return label === `roomTypes.${key}` ? key : label;
+}
+// `room.name` ("Standard Sauna Room 1515") is stored English-only in
+// Supabase — there's no room_translations table like products have. Every
+// room's name follows the exact pattern `${typeWord} Sauna Room
+// ${model_code}` (verified across all 61 rooms), so it's reconstructed from
+// the already-translated room_type word + the untranslatable model code
+// instead of needing real per-locale storage. Falls back to the raw name if
+// room_type/model_code are ever missing (shouldn't happen for a real room).
+// Same helper as IndividualDisplay/DispSaunaRoom.jsx and Sitemap.jsx,
+// duplicated locally per this repo's existing per-file-helper convention.
+function roomDisplayName(t, room) {
+  if (!room?.room_type || !room?.model_code) return room?.name;
+  return t("roomDisplayName", { type: roomTypeLabel(t, room.room_type), code: room.model_code });
+}
+
+// ProductCard renders both regular products AND sauna rooms (rooms merged
+// into the same list via useLocalSaunaRooms()) — a room is identified by
+// having both room_type and model_code, which regular products never have
+// together.
+function isRoomProduct(product) {
+  return Boolean(product?.room_type && product?.model_code);
+}
+
 function ProductCard({ product }) {
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState(null);
   const [hovered, setHovered] = React.useState(false);
   const imgRef = React.useRef(null);
   const localize = useLocalizedPath();
+  const tProduct = useLocaleT("product");
+  const displayName = isRoomProduct(product) ? roomDisplayName(tProduct, product) : product.name;
   const isAccessory = isAccessoryProduct(product);
   let link;
   if (isAccessory) {
@@ -471,7 +500,7 @@ function ProductCard({ product }) {
               )}
               <img
                 src={imageSrc}
-                alt={product.name}
+                alt={displayName}
                 onLoad={() => setImageLoaded(true)}
                 loading="lazy"
                 style={{
@@ -499,7 +528,7 @@ function ProductCard({ product }) {
           textAlign: "center",
           transition: "color 0.2s ease",
         }}>
-          {product.name}
+          {displayName}
         </p>
       </div>
     </Link>
