@@ -105,6 +105,26 @@ function getImageUrl(product) {
   return resolveUrl(local || remote);
 }
 
+function roomTypeLabel(t, key) {
+  if (!key) return key;
+  const label = t(`roomTypes.${key}`);
+  return label === `roomTypes.${key}` ? key : label;
+}
+// `room.name` ("Standard Sauna Room 1515") is stored English-only in
+// Supabase — there's no room_translations table like products have. Every
+// room's name follows the exact pattern `${typeWord} Sauna Room
+// ${model_code}` (verified across all 61 rooms), so it's reconstructed from
+// the already-translated room_type word + the untranslatable model code
+// instead of needing real per-locale storage. Falls back to the raw name if
+// room_type/model_code are ever missing (shouldn't happen for a real room).
+// Same helper as IndividualDisplay/DispSaunaRoom.jsx, Sitemap.jsx and
+// AllProducts.jsx, duplicated locally per this repo's per-file-helper
+// convention.
+function roomDisplayName(t, room) {
+  if (!room?.room_type || !room?.model_code) return room?.name;
+  return t("roomDisplayName", { type: roomTypeLabel(t, room.room_type), code: room.model_code });
+}
+
 // ─── Card ─────────────────────────────────────────────────────────────────────
 // The image is not fetched until the card actually scrolls into view — same
 // IntersectionObserver approach already proven in AllProducts.jsx, so a tab
@@ -113,6 +133,8 @@ function ProductCard({ product, localize }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   const cardRef = useRef(null);
+  const tProduct = useLocaleT("product");
+  const displayName = product.__isRoom ? roomDisplayName(tProduct, product) : product.name;
 
   const link = localize(product.__isRoom
     ? `/sauna/rooms/${product.slug}`
@@ -151,7 +173,7 @@ function ProductCard({ product, localize }) {
               {imageSrc && (
                 <img
                   src={imageSrc}
-                  alt={product.name}
+                  alt={displayName}
                   loading="lazy"
                   decoding="async"
                   onLoad={() => setImageLoaded(true)}
@@ -175,7 +197,7 @@ function ProductCard({ product, localize }) {
           {/* Clamped to exactly 2 lines so a one-word name and a long
               "Integration Collar – Cubos Corner (Stainless)" produce the
               same card height. */}
-          <p className="pc-card-name">{product.name}</p>
+          <p className="pc-card-name">{displayName}</p>
         </div>
       </div>
     </Link>

@@ -1789,15 +1789,18 @@ after adding a new page) to catch anything new before declaring a push
    `model_code`, verified byte-exact against all 61 rooms' real English
    names. Landed in `DispSaunaRoom.jsx` (detail-page title, SEO
    title/description fallbacks, carousel alt text, `RelatedRooms` grid),
-   `Sitemap.jsx`'s room listing, and `AllProducts.jsx`'s `ProductCard`
-   (card title text + image alt), each with its own local copy of the
-   helper per this repo's per-file-helper convention. Along the way this
-   also fixed: `support.json`'s `catalogue.seriesLabels` (zh) was missing
-   a `compact` key, and `ProductCatalogue.jsx`'s Sauna Rooms `groupOrder`
+   `Sitemap.jsx`'s room listing, `AllProducts.jsx`'s `ProductCard` (card
+   title text + image alt), and `ProductCatalogue.jsx`'s own `ProductCard`
+   (card title text + image alt, gated on the `__isRoom` flag this file
+   already tags rooms with), each with its own local copy of the helper
+   per this repo's per-file-helper convention. Along the way this also
+   fixed: `support.json`'s `catalogue.seriesLabels` (zh) was missing a
+   `compact` key, and `ProductCatalogue.jsx`'s Sauna Rooms `groupOrder`
    array omitted `"compact"` entirely.
-   **Still open**: `ProductCatalogue.jsx`'s own `ProductCard` (the
-   `/support/catalogue` page) still renders raw `room.name` and needs the
-   same `roomDisplayName` treatment — last of the four render sites.
+   **Closed 2026-09-07**: all four known room-name render sites
+   (`DispSaunaRoom.jsx`, `Sitemap.jsx`, `AllProducts.jsx`,
+   `ProductCatalogue.jsx`) now use `roomDisplayName`. No known raw
+   `room.name` render sites remain.
 
 ## Infra fixes (2026-09-01)
 
