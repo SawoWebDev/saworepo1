@@ -4,12 +4,12 @@ import menuPaths from "../../menuPaths";
 import ChevronRight from "../../components/icons/ChevronRight";
 import useDragCarousel from "../../hooks/useDragCarousel";
 
-import Tower      from "../../assets/Home/Section2/TOWER-SERIES-2-600x360-1.webp";
-import WallMounted from "../../assets/Home/Section2/WALL-MOUNTED-SERIES-v2-1.webp";
-import Floor      from "../../assets/Home/Section2/FLOOR-MOUNTED-SERIES1-1024x614-1.webp";
-import Combi      from "../../assets/Home/Section2/COMBI-SERIES-600x360-1.webp";
-import Stone      from "../../assets/Home/Section2/STONE-SERIES-3-600x320-new-.webp";
-import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-1-600x360-1.webp";
+import Tower      from "../../assets/Home/Section2/TOWER-SERIES-ROUND-STONE.webp";
+import WallMounted from "../../assets/Home/Section2/wall-mounted-series-round-stone-v2.webp";
+import Floor      from "../../assets/Home/Section2/FLOOR-MOUNTED-SERIES-ROUND-STONE.webp";
+import Combi      from "../../assets/Home/Section2/COMBI-SERIES_round-stone.webp";
+import Stone      from "../../assets/Home/Section2/STONE-SERIES-ROUND-STONE.webp";
+import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-ROUND-STONE.webp";
 
 const SAUNA_HEATERS = [
   { title: "Tower",        href: menuPaths.sauna.heaters.tower,       img: Tower,       alt: "SAWO Tower Sauna Heater Series with elegant vertical design",                    caption: "Height and energy efficiency in a sleek, elegant design. Consistent warmth delivered from the lowest to the highest parts of the sauna for optimal relaxation and wellness." },
