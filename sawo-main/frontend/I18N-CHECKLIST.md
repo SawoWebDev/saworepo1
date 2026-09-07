@@ -330,33 +330,78 @@ populated.
 
 | Slug | fi | zh |
 |---|---|---|
-| mini-nb | ⬜ | ✅ |
-| mini-fibercoated-nb | ⬜ | ✅ |
-| mini-combi-ns | ⬜ | ✅ |
-| mini-combi-fibercoated-ns | ⬜ | ✅ |
-| mini-x-nb | ⬜ | ✅ |
-| mini-x-ns | ⬜ | ✅ |
-| mini-x-fibercoated-nb | ⬜ | ✅ |
-| mini-x-fibercoated-ns | ⬜ | ✅ |
-| minidragon-black-nb | ⬜ | ✅ |
-| minidragon-black-ns | ⬜ | ✅ |
-| minidragon-red-nb | ⬜ | ✅ |
-| minidragon-red-ns | ⬜ | ✅ |
-| nimbus-combi-ns | ⬜ | ✅ |
-| nimbus-ns | ⬜ | ✅ |
-| helius-mini-ns | ⬜ | ✅ |
-| helius-ns | ⬜ | ✅ |
-| savonia-combi-fiber-coated-ns | ⬜ | ✅ |
-| savonia-combi-ns | ⬜ | ✅ |
-| savonia-fiber-coated-ns | ⬜ | ✅ |
-| savonia-ns | ⬜ | ✅ |
-| taurus-d-combi-ns | ⬜ | ✅ |
-| taurus-d-ns | ⬜ | ✅ |
+| mini-nb | ✅ | ✅ |
+| mini-fibercoated-nb | ✅ | ✅ |
+| mini-combi-ns | ✅ | ✅ |
+| mini-combi-fibercoated-ns | ✅ | ✅ |
+| mini-x-nb | ✅ | ✅ |
+| mini-x-ns | ✅ | ✅ |
+| mini-x-fibercoated-nb | ✅ | ✅ |
+| mini-x-fibercoated-ns | ✅ | ✅ |
+| minidragon-black-nb | ✅ | ✅ |
+| minidragon-black-ns | ✅ | ✅ |
+| minidragon-red-nb | ✅ | ✅ |
+| minidragon-red-ns | ✅ | ✅ |
+| nimbus-combi-ns | ✅ | ✅ |
+| nimbus-ns | ✅ | ✅ |
+| helius-mini-ns | ✅ | ✅ |
+| helius-ns | ✅ | ✅ |
+| savonia-combi-fiber-coated-ns | ✅ | ✅ |
+| savonia-combi-ns | ✅ | ✅ |
+| savonia-fiber-coated-ns | ✅ | ✅ |
+| savonia-ns | ✅ | ✅ |
+| taurus-d-combi-ns | ✅ | ✅ |
+| taurus-d-ns | ✅ | ✅ |
 
 **Progress log** (append one line per day as it's completed — narrative
 detail like TM-prefill counts and any bugs found goes here, same style as
 the Steam entries below):
 
+- **2026-09-07 — Day 5 complete for `fi` (22/22 products)**: verified via
+  SQL before starting that all 22 already had a `product_translations` row
+  for `fi` with `source_field_hashes` populated — this batch's own
+  `extract`/`apply` pass (via `product-i18n.js extract-many`/packet review)
+  had already been done in an earlier, uncheckmarked session; this file's
+  Day 5 `fi` column simply never got flipped from ⬜ to ✅. TM pre-fill on
+  a fresh `extract` was strong across the board (Mini/Mini X: 1-5 fields
+  pre-filled per product on the raw extract, but nearly every remaining
+  field was *already* correctly translated live — meaning true TM coverage
+  once accounting for the untracked earlier pass was ~95%+ for Mini/Mini X;
+  Minidragon: 6-7/9 fields pre-filled per product; Helius: fully translated
+  live, including the two-line `Heater<br>Model` header variant; Savonia:
+  7-11 fields pre-filled per product; Taurus: 2-6/8-12 fields pre-filled).
+  A live-data audit (regex sweep for English function/spec words across
+  `short_description`/`description`/`type`/`features`/`variations` for all
+  22, not just a re-run of `extract`) turned up 7 products with a handful of
+  fields that had been silently skipped by the earlier untracked pass:
+  `mini-combi-ns` (`features[0]`/`features[2]`), `mini-combi-fibercoated-ns`
+  (`features[0]`/`features[2]`/`features[3]`), `nimbus-combi-ns` and
+  `nimbus-ns` (entire spec-table `<th>` header row left in English —
+  `Heater Model`/`Sauna Room`/`Size of Heater (mm)`/`Stones`/`Control`/
+  `Minimum Safety Distances` → `Lämmitinmalli`/`Saunahuone`/`Lämmittimen
+  koko (mm)`/`Kivet`/`Ohjaus`/`Vähimmäisturvaetäisyydet`, `<td>` rows left
+  untouched per the usual prose/data split), `savonia-combi-fiber-coated-ns`
+  (`features[2]`/`features[4]`/`features[6]`), `savonia-combi-ns`
+  (`features[4]`/`features[6]`), and `taurus-d-combi-ns`
+  (`features[0]`/`features[2]`/`features[3]`/`features[7]`). Patched these
+  directly via a targeted Supabase update (not a full packet re-apply, to
+  avoid disturbing the already-correct fields/hashes) and backfilled
+  `translation_memory` with the newly-written pairs. **Decimal-comma bug
+  reapplied for `fi`, confirmed already fixed for 2 of 3 spots and fixed the
+  3rd here**: `helius-mini-ns`'s `features[0]` was already correctly
+  `"Tehoalue: 2.0 – 3.0 kW"` (not `2,0`) from the earlier pass; same for
+  most Savonia Combi/Taurus D Combi occurrences, but
+  `savonia-combi-fiber-coated-ns`'s and `savonia-combi-ns`'s
+  `features[4]` (`"Separate water tank with 1,0kW or 2,0kW steam
+  generator"`) had been skipped entirely (untranslated AND still carrying
+  the comma bug) — fixed to `"Erillinen vesisäiliö, jossa 1.0 kW:n tai 2.0
+  kW:n höyrystin"` (period form, matching the zh-pass convention of not
+  reproducing the source typo, English source left untouched as before).
+  Re-verified via SQL after patching: all 22 `fi` rows have
+  `source_field_hashes` populated and the live-data English-word sweep
+  comes back clean for all 22. Local extract packets generated during
+  investigation were discarded (`git checkout --`) rather than committed,
+  since the live rows were already ahead of them.
 - **2026-09-01 — Day 5 complete for `zh` (22/22 products, `fi` still ⬜)**:
   Mini (`mini-nb`, `mini-fibercoated-nb`, `mini-combi-ns`,
   `mini-combi-fibercoated-ns`), Mini X (`mini-x-nb`, `mini-x-ns`,
