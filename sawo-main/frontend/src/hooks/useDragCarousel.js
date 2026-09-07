@@ -21,6 +21,7 @@ export default function useDragCarousel({ autoplayMs = 3000 } = {}) {
   const movedRef       = useRef(false);
   const downXRef       = useRef(0);
   const lastXRef       = useRef(0);
+  const pointerIdRef    = useRef(null);
 
   // Center on the middle copy once the track has laid out.
   useEffect(() => {
@@ -79,6 +80,11 @@ export default function useDragCarousel({ autoplayMs = 3000 } = {}) {
     el.scrollBy({ left: dir * itemWidth, behavior: "smooth" });
   }, []);
 
+  // No preventDefault() here: calling it on pointerdown suppresses the
+  // browser's compatibility click event entirely, which silently broke
+  // navigation for every card (not just ones actually dragged). Text
+  // selection during a drag is instead prevented via CSS (user-select:
+  // none on .is-dragging), and images already carry draggable={false}.
   const onPointerDown = useCallback((e) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
     const el = trackRef.current;
@@ -87,9 +93,7 @@ export default function useDragCarousel({ autoplayMs = 3000 } = {}) {
     movedRef.current = false;
     downXRef.current = e.clientX;
     lastXRef.current = e.clientX;
-    el.classList.add("is-dragging");
-    el.setPointerCapture(e.pointerId);
-    e.preventDefault();
+    pointerIdRef.current = e.pointerId;
   }, []);
 
   // Applies each move as a delta against the *current* scrollLeft (not a
@@ -97,13 +101,23 @@ export default function useDragCarousel({ autoplayMs = 3000 } = {}) {
   // wrap correction, which can shift scrollLeft by a whole copy-width
   // between two pointermove events. An absolute start-relative computation
   // would silently overwrite that shift and undo the loop mid-drag.
+  //
+  // Pointer capture is acquired here, only once real dragging starts
+  // (not on pointerdown), because Chromium retargets the click event
+  // that follows a captured pointer to the *capturing* element — capturing
+  // on every pointerdown meant a plain click's "click" event never
+  // reached the card's <Link>, silently breaking navigation.
   const onPointerMove = useCallback((e) => {
     if (!draggingRef.current) return;
     const el = trackRef.current;
     if (!el) return;
     const dx = e.clientX - lastXRef.current;
     lastXRef.current = e.clientX;
-    if (Math.abs(e.clientX - downXRef.current) > 4) movedRef.current = true;
+    if (!movedRef.current && Math.abs(e.clientX - downXRef.current) > 4) {
+      movedRef.current = true;
+      el.classList.add("is-dragging");
+      if (pointerIdRef.current != null) el.setPointerCapture(pointerIdRef.current);
+    }
     el.scrollLeft -= dx;
   }, []);
 
