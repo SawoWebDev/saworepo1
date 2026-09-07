@@ -1,5 +1,6 @@
 // src/pages/Home/Section2.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 import menuPaths from "../../menuPaths";
 import ChevronRight from "../../components/icons/ChevronRight";
 import useDragCarousel from "../../hooks/useDragCarousel";
@@ -57,14 +58,14 @@ const Section2 = () => {
           {...dragHandlers}
         >
           {loopedItems.map((item, idx) => (
-            <a href={item.href} key={idx} draggable={false} className="heaters-slide relative flex-shrink-0 snap-start rounded overflow-hidden group">
+            <Link to={item.href} key={idx} draggable={false} className="heaters-slide relative flex-shrink-0 snap-start rounded overflow-hidden group">
               <img src={item.img} alt={item.alt} title={item.title} width="600" height="360" loading="lazy" decoding="async" draggable={false} className="w-full h-auto block transition-transform duration-300 ease-in-out group-hover:scale-105" />
               <div className="heaters-slide-overlay absolute inset-0 transition duration-300 group-hover:bg-black/60" />
               <div className="heaters-slide-content absolute inset-0 flex flex-col justify-end p-4 pointer-events-none">
                 <div className="heaters-slide-title text-white text-center z-10 group-hover:opacity-0 transition-opacity duration-300">{item.title}</div>
                 <div className="heaters-slide-caption absolute inset-0 flex justify-center items-center text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3">{item.caption}</div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
