@@ -178,24 +178,12 @@
 /distributors/                                            /contact                        301
 
 # ---- TOOLS / MEDIA (decide: build / redirect / retire) -------------------------
-# GAP — HIGHER PRIORITY THAN THE OTHERS BELOW: this is not just an old
-# external backlink target. frontend/src/pages/Sauna/rooms/SaunaRoomData.jsx
-# (S3T_VIEWER_URL, line ~733) hardcodes
-# "https://www.sawo.com/3d-viewer/" and that URL is rendered as a live
-# outbound link on the /sauna/rooms page itself (via Sauna3DTeaser.jsx,
-# "Launch 3D Viewer" / "Open 3D Viewer" buttons). Once sawo.com points at
-# THIS app, that link becomes a same-domain link to a path this app does
-# not implement anywhere — a real interactive 3D room viewer tool was never
-# migrated off WordPress. Today it silently 200s to WordPress; after
-# cutover it will 200-soft-404 to this SPA's catch-all (Scenario 13)
-# instead, and it's a link real visitors will click, not just a crawler
-# path. Redirecting the URL here is a stopgap so it lands somewhere real,
-# but the actual bug is the hardcoded self-link in SaunaRoomData.jsx —
-# flagging back: either restore the 3D viewer tool at this path (Cloudflare
-# Pages Function or an embedded iframe to wherever it's actually hosted),
-# or update SaunaRoomData.jsx to stop linking to a URL this app can't
-# serve, or remove the 3D-viewer teaser from the rooms page entirely.
-/3d-viewer/                                                /sauna/rooms                   301
+# RESOLVED (2026-09-07): a real interactive 3D room viewer now lives at
+# /3d-viewer (src/pages/ThreeDViewer.jsx, data-driven off
+# sauna_rooms.model_3d_url — no hardcoded model list). SaunaRoomData.jsx's
+# S3T_VIEWER_URL was updated to the internal route, so this is now just a
+# trailing-slash normalization for old backlinks/bookmarks, not a stopgap.
+/3d-viewer/                                                /3d-viewer                      301
 # GAP: zero references to "ai-cad" or "AI CAD" anywhere in this repo — no
 # internal link, no data entry, nothing that suggests a live feature was
 # ever built for this URL in the new site. Per GO-LIVE-INSTRUCTIONS.md

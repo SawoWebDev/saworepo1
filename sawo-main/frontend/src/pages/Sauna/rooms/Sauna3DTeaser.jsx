@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { S3T_VIEWER_URL, S3T_MODEL_LABEL } from "./SaunaRoomData";
 
 const Sauna3DTeaser = () => {
@@ -14,7 +15,7 @@ const Sauna3DTeaser = () => {
         Rotate, zoom, and inspect every angle of our sauna before it ever arrives at your door.
       </p>
 
-      <a className="sawo-3d-card" href={S3T_VIEWER_URL} target="_blank" rel="noopener noreferrer">
+      <Link className="sawo-3d-card" to={S3T_VIEWER_URL}>
         <div className="s3t-preview">
           <div className="s3t-orbit s3t-orbit-1"></div>
           <div className="s3t-orbit s3t-orbit-2"></div>
@@ -64,15 +65,15 @@ const Sauna3DTeaser = () => {
           </div>
           <div className="s3t-model-label">{S3T_MODEL_LABEL}</div>
         </div>
-      </a>
+      </Link>
 
       <div className="s3t-cta-row">
-        <a className="s3t-btn-primary" href={S3T_VIEWER_URL} target="_blank" rel="noopener noreferrer">
+        <Link className="s3t-btn-primary" to={S3T_VIEWER_URL}>
           Open 3D Viewer
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
-        </a>
+        </Link>
         <button className="s3t-btn-secondary" onClick={scrollToConfigurator}>
           Build Your Own
         </button>

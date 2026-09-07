@@ -63,6 +63,7 @@ const ProductCatalogue = lazy(() => import("./pages/Support/ProductCatalogue"));
 const AllProducts      = lazy(() => import("./pages/AllProducts"));
 const PrivacyPolicy    = lazy(() => import("./pages/PrivacyPolicy"));
 const Sitemap          = lazy(() => import("./pages/Sitemap"));
+const ThreeDViewer     = lazy(() => import("./pages/ThreeDViewer"));
 const NotFound         = lazy(() => import("./pages/NotFound"));
 const PailsLadles        = lazy(() => import("./pages/Sauna/accessories/PailsLadles"));
 const Thermometers       = lazy(() => import("./pages/Sauna/accessories/Thermometers"));
@@ -182,6 +183,7 @@ export default function App() {
                     <Route path="/products" element={<AllProducts />} />
                     <Route path={menuPaths.privacy}              element={<PrivacyPolicy />} />
                     <Route path={menuPaths.sitemap}              element={<Sitemap />} />
+                    <Route path={menuPaths.threeDViewer}         element={<ThreeDViewer />} />
 
                     {/* Single product detail page */}
                     <Route path="/products/:slug" element={<ProductPageRouter />} />

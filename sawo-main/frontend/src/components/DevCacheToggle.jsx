@@ -12,7 +12,7 @@
 // clear) to appear on a product page.
 import { useState, useRef, useEffect } from "react";
 import { isDevCacheBypassed, setDevCacheBypass } from "../Administrator/Local/publicDataCache";
-import { getCache, setCache } from "../Administrator/adminCache";
+import { setCache } from "../Administrator/adminCache";
 
 const IS_LOCALHOST =
   typeof window !== "undefined" &&

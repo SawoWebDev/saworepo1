@@ -45,3 +45,8 @@ yarn-error.log*
 # Internal documentation — kept local only, not published to GitHub
 docs/
 sawo-main/docs/
+
+# One-off local staging area for large binary assets (GLBs etc.) awaiting
+# upload to R2 via upload-3d-model.js / upload-hero-asset.js — never commit
+# the raw asset itself, only the script.
+**/scripts/tmp-3d-assets/
