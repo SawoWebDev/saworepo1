@@ -162,7 +162,7 @@ export function AccessoryCard({ product }) {
       )}
 
       <div className="sawo-av-headtext">{product.name}</div>
-      {codes.length > 0 && <div className="sawo-av-code">Code: {codes.join(" | ")}</div>}
+      {codes.length > 0 && <div className="sawo-av-code"><strong>Code:</strong> {codes.join(" | ")}</div>}
       {specRows.map(([label, value]) => (
         <div className="sawo-av-subtext" key={label}><strong>{label}:</strong> {value}</div>
       ))}
