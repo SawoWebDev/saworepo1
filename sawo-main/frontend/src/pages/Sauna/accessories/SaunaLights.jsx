@@ -16,10 +16,15 @@ import { isPubliclyVisible } from "../../../local-storage/visibility";
 const DISPLAY_CATEGORIES = ["Sauna Lights", "Light Covers", "Lights & Covers"];
 const DISPLAY_TAGS       = ["Sauna Lights"];
 
-const FIXED_ORDER = ["Sauna Lights", "Light Covers"];
+const FIXED_ORDER = ["Sauna Lights", "Light Covers", "Himalayan Salt Lights"];
+// Checked in this order, most specific first: "Wooden Light Cover Square"
+// contains both "Light" and "Cover", so Light Covers must be tested before
+// Sauna Lights or every cover product would fall into the wrong group.
+// Same reasoning puts Himalayan Salt Lights first, ahead of "Light".
 const GROUP_KEYWORDS = {
-  "Sauna Lights":  ["Light", "Lamp"],
+  "Himalayan Salt Lights": ["Himalayan", "Salt"],
   "Light Covers":  ["Cover", "Shade"],
+  "Sauna Lights":  ["Light", "Lamp"],
 };
 
 function arrayMatchesAny(arr = [], targets = []) {
@@ -62,7 +67,7 @@ function groupProducts(products) {
       const target = names.find(g => {
         const gl = g.toLowerCase();
         return cats.some(c => c === gl || c.includes(gl) || gl.includes(c));
-      }) || names[0];
+      }) || "Sauna Lights";
       if (!groups[target]) groups[target] = [];
       groups[target].push(product);
     }
