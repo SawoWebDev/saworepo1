@@ -92,7 +92,7 @@
     },
     "hero": {
       "title": "HÖYRYLISÄVARUSTEET",
-      "subtitle": "Viimeistele höyrysetuppisi premium-lisävarusteilla"
+      "subtitle": "Viimeistele höyrysaunasi premium-lisävarusteilla"
     },
     "intro": {
       "heading": "Esittelyssä höyrylisävarusteemme",
@@ -102,7 +102,7 @@
     "empty": "Höyrylisävarusteita ei ole vielä saatavilla.",
     "fallbackDesc": "Premium-höyrylisävaruste optimaaliseen suorituskykyyn.",
     "cta": {
-      "title": "Viimeistele höyrysetuppisi",
+      "title": "Viimeistele höyrysaunasi",
       "description": "Höyryovista aromipumppuihin – tiimimme auttaa valitsemaan oikeat lisävarusteet asennuksesi viimeistelyyn."
     }
   }

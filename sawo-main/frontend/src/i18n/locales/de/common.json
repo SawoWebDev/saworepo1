@@ -75,5 +75,12 @@
       "label": "Mentales Wohlbefinden",
       "desc": "Reduziert signifikant Depressionssymptome bei regelmäßiger Anwendung"
     }
+  },
+  "accessoryCard": {
+    "bestSeller": "Bestseller",
+    "close": "Schließen",
+    "watchVideo": "Video ansehen",
+    "code": "Code",
+    "option": "Option"
   }
 }

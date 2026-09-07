@@ -54,7 +54,7 @@
     "bestSeller": "Myydyin"
   },
   "modelCode": "Malli {{code}}",
-  "roomDisplayName": "{{type}} saunahuone {{code}}",
+  "roomDisplayName": "{{type}}-saunahuone {{code}}",
   "seoFallbackDescription": "{{name}} – SAWO. Ylellinen suomalainen saunahuone.",
   "skuCode": "Tuotenumero {{sku}}",
   "stats": {
