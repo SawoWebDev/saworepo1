@@ -5,12 +5,12 @@ import ChevronRight from "../../components/icons/ChevronRight";
 import useDragCarousel from "../../hooks/useDragCarousel";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
-import Tower      from "../../assets/Home/Section2/TOWER-SERIES-2-600x360-1.webp";
-import WallMounted from "../../assets/Home/Section2/WALL-MOUNTED-SERIES-v2-1.webp";
-import Floor      from "../../assets/Home/Section2/FLOOR-MOUNTED-SERIES1-1024x614-1.webp";
-import Combi      from "../../assets/Home/Section2/COMBI-SERIES-600x360-1.webp";
-import Stone      from "../../assets/Home/Section2/STONE-SERIES-3-600x320-new-.webp";
-import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-1-600x360-1.webp";
+import Tower      from "../../assets/Home/Section2/TOWER-SERIES-ROUND-STONE.webp";
+import WallMounted from "../../assets/Home/Section2/wall-mounted-series-round-stone-v2.webp";
+import Floor      from "../../assets/Home/Section2/FLOOR-MOUNTED-SERIES-ROUND-STONE.webp";
+import Combi      from "../../assets/Home/Section2/COMBI-SERIES_round-stone.webp";
+import Stone      from "../../assets/Home/Section2/STONE-SERIES-ROUND-STONE.webp";
+import Dragonfire from "../../assets/Home/Section2/DRAGON-SERIES-ROUND-STONE.webp";
 
 const HEATER_KEYS = ["tower", "wallMounted", "floor", "combi", "stone", "dragonfire"];
 const HEATER_HREFS = {
