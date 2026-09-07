@@ -1,0 +1,20 @@
+{
+  "banner": {
+    "eyebrow": "Tietosuoja",
+    "text": "Käytämme Supabasea tietojesi turvalliseen tallentamiseen. Jatkamalla hyväksyt tietojemme käytön.",
+    "privacyLink": "Katso tietosuojakäytäntömme",
+    "essentialOnly": "Vain välttämättömät",
+    "acceptAll": "Hyväksy kaikki",
+    "details": "Lisätiedot"
+  },
+  "modal": {
+    "title": "Yksityisyytesi ja tietosi",
+    "collect": { "title": "Mitä keräämme", "desc": "Keräämme tietoja, jotka annat rekisteröityessäsi, ottaessasi meihin yhteyttä tai käyttäessäsi palveluitamme. Tämä sisältää nimesi, sähköpostiosoitteesi ja tilin asetukset." },
+    "use": { "title": "Miten käytämme tietoja", "desc": "Tietosi tallennetaan turvallisesti Supabaseen ja niitä käytetään palveluidemme tarjoamiseen, tärkeiden päivitysten lähettämiseen ja kokemuksesi parantamiseen." },
+    "rights": { "title": "Oikeutesi", "desc": "Sinulla on oikeus tarkastella, päivittää tai poistaa henkilötietojasi milloin tahansa.", "link": "Lue koko tietosuojakäytäntömme" },
+    "essentialCookies": { "title": "Välttämättömät evästeet", "desc": "Nämä ovat tarpeellisia sivustomme toiminnalle. Niihin kuuluvat todennus- ja istuntoevästeet. Aina käytössä." },
+    "goBack": "Takaisin",
+    "essentialOnly": "Vain välttämättömät",
+    "acceptAll": "Hyväksy kaikki"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "banner": {
+    "eyebrow": "数据与隐私",
+    "text": "我们使用 Supabase 安全地存储您的数据。继续使用即表示您同意我们的数据使用方式。",
+    "privacyLink": "查看我们的隐私政策",
+    "essentialOnly": "仅必要项",
+    "acceptAll": "全部接受",
+    "details": "详情"
+  },
+  "modal": {
+    "title": "您的隐私与数据",
+    "collect": { "title": "我们收集的信息", "desc": "我们会收集您在注册、联系我们或使用我们服务时提供的信息,包括您的姓名、电子邮箱和账户偏好设置。" },
+    "use": { "title": "我们如何使用这些信息", "desc": "您的数据安全存储在 Supabase 中,用于提供我们的服务、发送重要更新以及改善您的使用体验。" },
+    "rights": { "title": "您的权利", "desc": "您有权随时访问、更新或删除您的个人数据。", "link": "阅读完整的隐私政策" },
+    "essentialCookies": { "title": "必要 Cookie", "desc": "这些 Cookie 是网站正常运行所必需的,包括身份验证和会话 Cookie,始终处于启用状态。" },
+    "goBack": "返回",
+    "essentialOnly": "仅必要项",
+    "acceptAll": "全部接受"
+  }
+}

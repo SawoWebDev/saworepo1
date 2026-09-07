@@ -1724,20 +1724,61 @@ itself is unaffected, just the commit attribution.
   translated` and `sauna: zh translated` (0 key gap for both), and
   `CI=true npx react-scripts build` compiled with zero errors.
 
+## Full-site untranslated scan (2026-09-04)
+
+With the `zh`+`fi` product push (381/381 both locales, 0 missing/0 stale
+per `check-translation-staleness.mjs`) and the page-level `zh`+`fi` push
+both declared complete, ran a full sweep for anything still missed —
+`grep -c useLocaleT` across every `.jsx` under `src/pages/` AND
+`src/components/` (the earlier per-page audits only ever checked
+`src/pages/`, which is exactly how this slipped through), plus
+`npm run i18n:manifest` for the page/shared-namespace view.
+
+**Found one real, previously-undiscovered gap: `components/
+GDPRConsent.jsx`** — the site-wide cookie-consent banner + its details
+modal, rendered from `App.jsx` on every single page via
+`GDPRConsentGate.jsx` (a lazy-load toggle wrapper, not a content
+component itself). 100% hardcoded English, 0 `useLocaleT` hits, never
+caught by any prior audit because every previous pass only scanned
+`src/pages/*.jsx` — this lives in `src/components/` and isn't a routed
+page. Also had one locale-dropping link (`<Link to="/privacy-policy">`
+in both the banner and the modal). **Fixed**: new `gdpr.json` namespace
+(en/zh/fi, full key parity verified 0 gap), wired via
+`useLocaleT("gdpr")`/`useLocalizedPath()`, both privacy-policy links
+localized. `CI=true npx react-scripts build` clean afterward.
+
+Everything else in `src/components/` was confirmed clean on the same
+sweep — `CategoryHero`/`CirclesInfo`/`ProductShowcase`/`PromoBanner`/
+`WellnessBenefits`/`WhyChooseSawo` all show 0 `useLocaleT` hits but are
+genuinely prop-driven with no hardcoded English fallback baked in
+(confirmed via the same hardcoded-text regexes used elsewhere in this
+file, zero real hits) — callers already pass translated props, this is
+the intended pattern, not a gap. `ProductPageRouter.jsx` and
+`Sauna/rooms/SaunaRoomData.jsx` also show 0 hits but are pure
+routing-logic/data files with no rendered copy of their own — not
+translation targets (confirmed `ProductPageRouter.jsx`'s redirect is
+still `localize()`-wrapped from the 2026-08-26 fix).
+
+**Lesson for future sweeps**: `grep -c useLocaleT` across `src/pages/`
+alone is not sufficient to declare a locale push complete — always also
+check `src/components/` (and any other shared-component directory) for
+components rendered outside the normal page-routing tree (global
+banners, modals, toasts), since those won't show up in a page-by-page
+route checklist at all.
+
 ## Not yet touched at all
 
-Privacy Policy, Sitemap. Neither has any `t()` wiring yet.
+Nothing currently known — see the full-site scan above. Re-run
+`grep -rc useLocaleT src/pages src/components` periodically (not just
+after adding a new page) to catch anything new before declaring a push
+"done."
 
 ## Recommended next batch (updated 2026-09-04)
 
-1. `fi` pass for everything in the "About / Support / Careers / News"
-   section above — all 9 pages are `zh`-only right now, same as the
-   pattern already run for products (`zh` first, `fi` mop-up second).
-2. Privacy Policy, Sitemap — last two untouched pages.
-3. Native-speaker review pass on everything marked "ZH written, not
-   Live" across the whole file, then flip each path in
-   `translatedRoutes.js`.
-4. **Not started, real architecture gap found 2026-09-04**: `sauna_rooms`
+1. Native-speaker review pass on everything marked "ZH written"/"FI
+   written" but not "Live" across the whole file, then flip each path
+   in `translatedRoutes.js`.
+2. **Not started, real architecture gap found 2026-09-04**: `sauna_rooms`
    has no per-locale name storage at all — unlike `products` →
    `product_translations`, there's no `room_translations` table or `zh`
    column, so `room.name` ("Standard Sauna Room 1214") renders as raw

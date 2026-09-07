@@ -1,0 +1,20 @@
+{
+  "banner": {
+    "eyebrow": "Data & Privacy",
+    "text": "We use Supabase to store your data securely. By continuing, you agree to our data usage.",
+    "privacyLink": "View our Privacy Policy",
+    "essentialOnly": "Essential Only",
+    "acceptAll": "Accept All",
+    "details": "Details"
+  },
+  "modal": {
+    "title": "Your Privacy & Data",
+    "collect": { "title": "What We Collect", "desc": "We collect information you provide when signing up, contacting us, or using our services. This includes your name, email, and account preferences." },
+    "use": { "title": "How We Use It", "desc": "Your data is securely stored in Supabase and used to provide our services, send important updates, and improve your experience." },
+    "rights": { "title": "Your Rights", "desc": "You have the right to access, update, or delete your personal data at any time.", "link": "Read our full Privacy Policy" },
+    "essentialCookies": { "title": "Essential Cookies", "desc": "These are necessary for our site to work properly. They include authentication and session cookies. Always enabled." },
+    "goBack": "Go Back",
+    "essentialOnly": "Essential Only",
+    "acceptAll": "Accept All"
+  }
+}

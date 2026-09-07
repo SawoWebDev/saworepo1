@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
 
 export default function GDPRConsent() {
+  const t = useLocaleT("gdpr");
+  const localize = useLocalizedPath();
   const [showBanner, setShowBanner] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -65,12 +68,12 @@ export default function GDPRConsent() {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
               <div style={{ flex: 1, minWidth: 250 }}>
                 <p style={{ margin: "0 0 8px 0", fontSize: "0.9rem", fontWeight: 600, color: "#c4a882" }}>
-                  Data & Privacy
+                  {t("banner.eyebrow")}
                 </p>
                 <p style={{ margin: 0, fontSize: "0.85rem", color: "#b0b0b0", lineHeight: 1.5 }}>
-                  We use Supabase to store your data securely. By continuing, you agree to our data usage.
-                  <Link to="/privacy-policy" style={{ color: "#c4a882", textDecoration: "none", fontWeight: 600, marginLeft: 4 }}>
-                    View our Privacy Policy
+                  {t("banner.text")}
+                  <Link to={localize("/privacy-policy")} style={{ color: "#c4a882", textDecoration: "none", fontWeight: 600, marginLeft: 4 }}>
+                    {t("banner.privacyLink")}
                   </Link>
                 </p>
               </div>
@@ -100,7 +103,7 @@ export default function GDPRConsent() {
                     e.currentTarget.style.color = "#c4a882";
                   }}
                 >
-                  Essential Only
+                  {t("banner.essentialOnly")}
                 </button>
 
                 <button
@@ -124,7 +127,7 @@ export default function GDPRConsent() {
                     e.currentTarget.style.background = "#a67853";
                   }}
                 >
-                  Accept All
+                  {t("banner.acceptAll")}
                 </button>
 
                 <button
@@ -149,7 +152,7 @@ export default function GDPRConsent() {
                     e.currentTarget.style.borderColor = "#666";
                   }}
                 >
-                  Details
+                  {t("banner.details")}
                 </button>
               </div>
             </div>
@@ -187,35 +190,35 @@ export default function GDPRConsent() {
             onClick={(e) => e.stopPropagation()}
           >
             <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "#a67853", margin: "0 0 16px 0" }}>
-              Your Privacy & Data
+              {t("modal.title")}
             </h2>
 
             <div style={{ color: "#333", fontSize: "0.9rem", lineHeight: 1.6, marginBottom: 24 }}>
               <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>What We Collect</h3>
+                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>{t("modal.collect.title")}</h3>
                 <p style={{ margin: 0, color: "#666" }}>
-                  We collect information you provide when signing up, contacting us, or using our services. This includes your name, email, and account preferences.
+                  {t("modal.collect.desc")}
                 </p>
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>How We Use It</h3>
+                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>{t("modal.use.title")}</h3>
                 <p style={{ margin: 0, color: "#666" }}>
-                  Your data is securely stored in Supabase and used to provide our services, send important updates, and improve your experience.
+                  {t("modal.use.desc")}
                 </p>
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>Your Rights</h3>
+                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>{t("modal.rights.title")}</h3>
                 <p style={{ margin: 0, color: "#666" }}>
-                  You have the right to access, update, or delete your personal data at any time. <Link to="/privacy-policy" style={{ color: "#a67853", textDecoration: "none", fontWeight: 600 }}>Read our full Privacy Policy</Link>.
+                  {t("modal.rights.desc")} <Link to={localize("/privacy-policy")} style={{ color: "#a67853", textDecoration: "none", fontWeight: 600 }}>{t("modal.rights.link")}</Link>.
                 </p>
               </div>
 
               <div style={{ marginBottom: 20, padding: 12, background: "#f5f5f5", borderRadius: 8 }}>
-                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>Essential Cookies</h3>
+                <h3 style={{ fontWeight: 700, color: "#5a4030", marginBottom: 8 }}>{t("modal.essentialCookies.title")}</h3>
                 <p style={{ margin: 0, fontSize: "0.85rem", color: "#666" }}>
-                  These are necessary for our site to work properly. They include authentication and session cookies. Always enabled.
+                  {t("modal.essentialCookies.desc")}
                 </p>
               </div>
             </div>
@@ -235,7 +238,7 @@ export default function GDPRConsent() {
                   fontFamily: "inherit",
                 }}
               >
-                Go Back
+                {t("modal.goBack")}
               </button>
 
               <button
@@ -252,7 +255,7 @@ export default function GDPRConsent() {
                   fontFamily: "inherit",
                 }}
               >
-                Essential Only
+                {t("modal.essentialOnly")}
               </button>
 
               <button
@@ -269,7 +272,7 @@ export default function GDPRConsent() {
                   fontFamily: "inherit",
                 }}
               >
-                Accept All
+                {t("modal.acceptAll")}
               </button>
             </div>
           </div>
