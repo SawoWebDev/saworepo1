@@ -42,7 +42,10 @@ function sanitizeLanguages(value) {
 async function readSettings() {
   const all = await getSettings();
   return {
-    enabled: typeof all?.[KEY_ENABLED] === "boolean" ? all[KEY_ENABLED] : true,
+    // Defaults to OFF: the switcher's target locale pages (formerly served by
+    // frontend-next, see translatedRoutes.js) don't exist in this app yet.
+    // Flip back on in the CMS once CRA-native /fi, /de routes actually ship.
+    enabled: typeof all?.[KEY_ENABLED] === "boolean" ? all[KEY_ENABLED] : false,
     languages: sanitizeLanguages(all?.[KEY_LANGUAGES]),
   };
 }

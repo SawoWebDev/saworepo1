@@ -42,7 +42,13 @@ function getImageUrl(product, field) {
 const DISPLAY_CATEGORIES = [
   "Sauna Controls",
   "Sauna Control",
-  "Controls",
+  // NOTE: a bare "Controls" entry used to live here. Removed — it's too
+  // generic and was matching products from other product lines that are
+  // cross-tagged "Controls" (e.g. Steam 2.0, tagged ["Steam Controls",
+  // "Controls"]), pulling them into this page's pool. They didn't visibly
+  // render (fell into groupProducts()'s unrendered "Other" bucket), but
+  // it's a live-data footgun: any product name that happens to match a
+  // GROUP_KEYWORDS entry below would wrongly display here too.
   // Add more category names here as needed
 ];
 

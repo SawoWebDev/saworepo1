@@ -1,0 +1,282 @@
+/* ============================================================
+   3D VIEWER PAGE
+   Palette matched to SaunaRooms.css's s3t-* teaser (the card that
+   links here): #af8564 accent, #1a1410 heading, #5a4a3a body,
+   #faf6f1 background.
+   ============================================================ */
+.tdv-page {
+  font-family: 'Montserrat', sans-serif;
+  background: #faf6f1;
+  min-height: 100vh;
+  padding: 100px 24px 96px;
+}
+
+.tdv-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+
+.tdv-eyebrow {
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #af8564;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.tdv-title {
+  font-size: 38px;
+  font-weight: 400;
+  color: #1a1410;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.tdv-subtitle {
+  font-size: 15px;
+  color: #5a4a3a;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Room selector row ───────────────────────────────────────── */
+.tdv-selector {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto 32px;
+}
+
+.tdv-selector-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 1.5px solid #e3d5c4;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  font-family: inherit;
+}
+
+.tdv-selector-btn:hover {
+  border-color: #af8564;
+  transform: translateY(-1px);
+}
+
+.tdv-selector-btn.is-active {
+  border-color: #8b5e3c;
+  background: #fbf2e9;
+}
+
+.tdv-selector-model {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1410;
+}
+
+.tdv-selector-variant {
+  font-size: 11px;
+  color: #a67853;
+}
+
+/* ── Main viewer layout ──────────────────────────────────────── */
+.tdv-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .tdv-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tdv-frame {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #f3e9dd, #ece0d0);
+  border: 1px solid #e3d5c4;
+  box-shadow: 0 20px 50px rgba(139, 94, 60, 0.12);
+  transition: opacity 0.25s ease;
+}
+
+.tdv-frame model-viewer {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+
+.tdv-loader {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(250, 246, 241, 0.75);
+  z-index: 2;
+}
+
+.tdv-loader.is-visible {
+  display: flex;
+}
+
+.tdv-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #e3d5c4;
+  border-top-color: #8b5e3c;
+  animation: tdv-spin 0.8s linear infinite;
+}
+
+@keyframes tdv-spin {
+  to { transform: rotate(360deg); }
+}
+
+.tdv-hint-bar {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-size: 12px;
+  color: #a67853;
+}
+
+.tdv-hint-bar span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tdv-hint-bar svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Info panel ──────────────────────────────────────────────── */
+.tdv-info {
+  background: #fff;
+  border: 1px solid #e3d5c4;
+  border-radius: 16px;
+  padding: 24px;
+  transition: opacity 0.2s ease;
+}
+
+.tdv-info.tdv-fading {
+  opacity: 0;
+}
+
+.tdv-info-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1410;
+  margin: 0 0 8px;
+}
+
+.tdv-info-desc {
+  font-size: 13.5px;
+  color: #5a4a3a;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.tdv-spec {
+  padding: 12px 0;
+  border-top: 1px solid #f0e6d8;
+}
+
+.tdv-spec:first-of-type {
+  border-top: none;
+}
+
+.tdv-spec-label {
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #af8564;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tdv-spec-value {
+  font-size: 14px;
+  color: #1a1410;
+  font-weight: 600;
+}
+
+.tdv-view-room {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #8b5e3c;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: background 0.2s ease;
+}
+
+.tdv-view-room:hover {
+  background: #714a2f;
+}
+
+/* ── Empty / no-models state ─────────────────────────────────── */
+.tdv-empty {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e3d5c4;
+  border-radius: 16px;
+  padding: 48px 32px;
+}
+
+.tdv-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5e3c, #a67853);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.tdv-empty-text {
+  color: #5a4a3a;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.tdv-empty-link {
+  color: #8b5e3c;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tdv-empty-link:hover {
+  text-decoration: underline;
+}

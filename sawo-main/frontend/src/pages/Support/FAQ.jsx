@@ -16,19 +16,19 @@ const faqSections = [
     icon: "fas fa-fire",
     items: [
       {
-        question: "What is the heat source in sauna?",
+        question: "What is the heat source in a sauna?",
         answer:
-          "The heat source in sauna is the heater, which is used for warming sauna stones either by using electricity through heating elements or by burning wood. The electric heaters are the most common option markedly for the convenience, fast heating-time and ability to modify sauna experience according to your liking.\n\nDepending on how much water is thrown to the stones, the hotter the temperature will be before starting to lower down slowly.",
+          "The heat source in a sauna is often powered by a central heater that warms a bed of sauna stones. There are two main types of sauna heaters:\n\nElectric Heaters: The most popular option today. They are incredibly convenient, heat up quickly, and allow you to easily control the exact temperature of your sauna.\n\nWood-Burning Heaters: The traditional method, which relies on a wood fire to heat the space.\n\nOnce the stones are hot, you can customize your experience by ladling water over them. This creates a soothing burst of steam that instantly intensifies the heat before slowly settling back down.",
       },
       {
-        question: "What is the best wood for sauna?",
+        question: "What is the best wood for a sauna?",
         answer:
-          "Best wood for sauna are the softwoods, such as Western Red Cedar, Common Aspen and Spruce for sauna building. These species have excellent qualities for sauna, especially if sourced from Arctic regions such as Northern US, Canada and Scandinavia. The arctic wood species are naturally isolating heat well and tolerating changing temperatures and moisture without significant swelling or shrinking. Sauna benches made from these woods will remain cool and pleasant to sit in, even when the temperatures in sauna can increase to 70-80 degrees.\n\nWestern Red Cedar (Thuja plicata) is exceptionally beautiful wood with a natural warm reddish color, complemented with uniform fine-grained texture with a satin luster. Cedar is very durable against moisture, making it excellent choice especially for outdoor saunas. The strong scent of cedar wood not only works as a natural repellant against insects and mold but also helps to improve concentration, quality of sleep and relaxing the body.\n\nCommon Aspen: A softwood with white to creamy appearance, perfect for an elegant look. Aspen wood has creamy white knotless appearance, similar to Abachi. This wood specie is very resistant towards moisture, bacteria and fungi, hence excellent choice for commercial or public saunas.\n\nFinnish Spruce is a softwood with a close, even and uniform grain texture. It has a light-yellow appearance with few markings. Spruce is durable and can withstand heat and has small healthy knots, making it one of the most common sauna woods used in Finland. The forest-like natural aroma of spruce is said to make relaxing and breathing easier.",
+          "The best woods for a sauna are softwoods like Western Red Cedar, Common Aspen, and Finnish Spruce. Often sourced from the northern countries, these woods naturally insulate heat and tolerate extreme moisture changes without warping or shrinking. Importantly, they stay cool to the touch, ensuring sauna benches remain comfortable to sit on even when room temperatures reach 70–80°C (158–176°F).\n\nHere is why these three softwoods are top choices:\n\nWestern Red Cedar: Known for its warm reddish color and fine-grained texture, cedar is exceptionally durable against moisture, making it a perfect choice for outdoor saunas. It also produces a strong, natural scent that repels insects and mold while helping you relax.\n\nCommon Aspen: If you want an elegant, modern look, aspen offers a smooth, creamy white, knot-free finish. This wood species is highly resistant to moisture, bacteria, and fungi, making it a fantastic, hygienic option for commercial or high-use public saunas.\n\nFinnish Spruce: A staple in traditional saunas in Finland, spruce features a light-yellow tone with a uniform grain and small, healthy knots. It is highly durable under high heat and releases a pleasant, forest-like aroma that enhances the breathing and relaxation experience.",
       },
       {
-        question: "What is Finnish sauna?",
+        question: "What is a Finnish sauna?",
         answer:
-          "Finnish sauna basically is a room with wooden walls, ceiling and benches. The sauna has for centuries been a place for relaxation. The heart of the sauna is the heater, which is used to warm stones either by using electricity or by burning wood. Unquestionably, what makes a sauna, a Finnish sauna is the act of pouring water from pail to stones. This is called \"löyly\" in Finnish. Depending on how much water you will throw to the stones, the hotter the temperature will be before slowly getting cooler. The changes of temperatures, combined with regular sauna usage has been scientifically proven to have several health benefits. Regular sauna bathing will specifically improve brain and mental health, protect from cardiac health problems and boost immune system.",
+          "A traditional Finnish sauna is a wood-lined room designed for deep relaxation, powered by a central heater that warms a bed of stones.\n\nWhat truly defines a Finnish sauna is the authentic tradition of löyly, the act of ladling water over the hot stones. This releases a rejuvenating burst of steam that envelops the room, temporarily intensifying the heat and humidity before gently subsiding.\n\nBeyond simply feeling great, regular sauna bathing is a proven wellness practice. Enjoying this cycle of soothing heat naturally helps to:\n\n• Support heart health and cardiovascular function\n• Improve mental well-being and reduce stress\n• Give your immune system a healthy boost",
       },
     ],
   },
@@ -38,29 +38,29 @@ const faqSections = [
     icon: "fas fa-hammer",
     items: [
       {
-        question: "Where is the ideal sauna location?",
+        question: "Where is an ideal sauna location?",
         answer:
-          "The ideal sauna location would be somewhere dry with good ventilation and concrete, tile, ceramic or vinyl flooring. We recommend to have floor-drain for easier cleaning. The good ventilation will guarantee that the slight condensation from sauna will effectively dry after bathing. Whenever the sauna is in use, it will cause very minor increase in temperature for surrounding areas. With this in mind, if the sauna is modular and installed inside the house is good to consider leaving small gap between sauna room and house walls to ensure air flow.",
+          "The ideal sauna location is a dry, well-ventilated space with waterproof flooring, such as concrete, tile, ceramic, or vinyl. To ensure your sauna functions perfectly and remains easy to maintain, keep these key installation factors in mind:\n\n• Proper Ventilation: Good airflow is essential. It guarantees that any minor condensation from the sauna dries completely after your session.\n• Floor Drainage: Installing a floor drain is highly recommended for convenient cleaning and water management.\n• Wall Clearance: An active sauna will cause a minor temperature increase in the immediate vicinity. If you are installing a modular indoor sauna, always leave a small gap between the sauna exterior and your home's interior walls to allow for adequate air circulation.",
       },
       {
-        question: "Why there are upper and lower benches in sauna?",
+        question: "Why are there upper and lower benches in a sauna?",
         answer:
-          "The temperature of the sauna room is warmer at ceiling level and cooler near the floor. Benches are installed at different heights to give the bather a choice of different bathing temperatures.",
+          "The temperature inside a sauna is higher near the ceiling and cooler near the floor because heat naturally rises. Tiered sauna benches are installed at different heights so that bathers can easily customize their experience and choose the heat level that feels most comfortable for them.",
       },
       {
-        question: "How to protect the wood panels from moisture?",
+        question: "How do you protect the wood panels from moisture?",
         answer:
-          "The best way to protect the wood panels from moisture is proper ventilation and drying after using the sauna. Do not apply paint, sealants or any preservative on the wood panels. Wood swells and shrinks and tears off paint and sealants, which are only on the surface of the wood. It is best to leave the wood bare.",
+          "The most effective way to protect the sauna's wood panels is through proper ventilation and allowing the room to dry completely after every session.\n\nYou should never apply paint, sealants, or preservatives to the interior wood. Because sauna wood naturally expands and contracts with the changing heat and humidity, any surface-level coatings will quickly crack, blister, and peel off. To keep your sauna in top condition, it is always best to leave the interior wood completely bare so it can naturally breathe.",
       },
       {
-        question: "What are requirements for sauna floor?",
+        question: "What are the requirements for a sauna floor?",
         answer:
-          "The requirements for sauna floor is to be waterproof, for easy washability and maintenance. For example tile, cement or heavy-duty vinyl floors are good because they are washable and do not absorb water.",
+          "The primary requirement for a sauna floor is that it must be completely waterproof. A non-porous surface ensures the room remains hygienic and is easy to wash and maintain. Excellent flooring materials include tile, concrete, ceramic, or heavy-duty vinyl, as these options are fully water-resistant and will not absorb moisture.",
       },
       {
-        question: "Is floor drain in sauna required?",
+        question: "Is a floor drain in a sauna required?",
         answer:
-          "The floor drain in sauna is not required, but highly recommended. This will makes cleaning of sauna more convenient.",
+          "We highly recommend having a floor drain in your sauna. While it is not strictly required, installing a floor drain makes the cleaning and maintenance of the sauna significantly easier as it helps drain excess water after ladling out hot stones.",
       },
     ],
   },
@@ -70,9 +70,9 @@ const faqSections = [
     icon: "fas fa-bolt",
     items: [
       {
-        question: "Can I get electric shock from heater?",
+        question: "Can I get electric shock from a heater?",
         answer:
-          "If the heater is installed correctly, electric shock from heater is very unlikely. To ensure the safe use, a qualified electrician must do the installation. All our heaters are tested before delivery and have passed the electrical safety standards.",
+          "A properly installed sauna heater poses almost no risk of electric shock. To guarantee safe operation, a qualified electrician must perform the installation. Additionally, we rigorously test every heater before delivery to ensure it meets strict electrical safety standards.",
       },
     ],
   },
@@ -124,7 +124,7 @@ const faqSections = [
       {
         question: "Can small children go to sauna?",
         answer:
-          "Small children can go to sauna under adult supervision. However, first times limit the bathing only for few minutes and in a moderate temperature. Children can sit on lower benches, where temperature also is lower.",
+          "Children can safely enjoy a sauna under close adult supervision. For their first few visits, keep sessions brief — just a few minutes — and maintain a moderate temperature. Because heat rises, always have children sit on the lower benches where the air is much cooler.",
       },
     ],
   },

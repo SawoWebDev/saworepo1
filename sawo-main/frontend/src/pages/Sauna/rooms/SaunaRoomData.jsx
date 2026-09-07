@@ -736,7 +736,11 @@ const SRD_PANELS = [
 ];
 
 
-const S3T_VIEWER_URL  = "https://www.sawo.com/3d-viewer/";
+// Internal route now — a real /3d-viewer page exists (see
+// src/pages/ThreeDViewer.jsx), so this no longer needs to be an absolute
+// same-domain URL (which would 404 once this app owns the whole site: the
+// old WordPress-hosted viewer at this path never actually got ported here).
+const S3T_VIEWER_URL  = "/3d-viewer";
 const S3T_MODEL_LABEL = "1414RS · Glass Front";
 
 const MATS_ITEMS = [

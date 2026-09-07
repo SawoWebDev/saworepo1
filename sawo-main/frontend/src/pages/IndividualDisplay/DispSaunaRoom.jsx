@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import saunaRoomsData from "../../Administrator/Local/data/saunaroom-data.json";
+import { useLocalSaunaRooms } from "../../Administrator/Local/useLocalSaunaRooms";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
@@ -260,12 +260,14 @@ export default function SaunaRoomDisplay() {
   const [lightbox, setLightbox] = useState(null);
   const [activeConfig, setActiveConfig] = useState(null);
 
-  const room = useMemo(() => {
-    return saunaRoomsData.find(r => r.slug === slug && isPubliclyVisible(r)) || null;
-  }, [slug]);
+  const { rooms: saunaRoomsData, loading } = useLocalSaunaRooms();
 
-  const loading = false;
-  const error = !room;
+  const room = useMemo(() => {
+    if (!saunaRoomsData.length) return null;
+    return saunaRoomsData.find(r => r.slug === slug && isPubliclyVisible(r)) || null;
+  }, [saunaRoomsData, slug]);
+
+  const error = !loading && !room ? "Sauna room not found." : null;
 
   // Parse JSONB fields
   const configurations = useMemo(() => parseJsonField(room?.configurations, {}), [room]);

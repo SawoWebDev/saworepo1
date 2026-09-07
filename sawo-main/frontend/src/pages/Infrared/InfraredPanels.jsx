@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import ProductShowcase from "../../components/ProductShowcase";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isPubliclyVisible } from "../../local-storage/visibility";
+import { PANEL_SLUGS, getUnclassifiedInfraredProducts } from "./infraredClassification";
 import heroImg from "../../assets/Infrared/ir-panels-hero.webp";
 
 // Selected by slug, not by category: every infrared product carries the
@@ -10,17 +11,19 @@ import heroImg from "../../assets/Infrared/ir-panels-hero.webp";
 // is also the display order, which a category filter could not express
 // either. Re-categorising these in the CMS as "Infrared Panels" /
 // "Infrared Controls" would let both pages become data-driven — worth doing
-// if this range grows, but it is a content change, not a code one.
-export const PANEL_SLUGS = ["infrared-panels", "infrared-backrest", "interface-holder"];
+// if this range grows, but it is a content change, not a code one. Slug
+// lists live in infraredClassification.js, re-exported here for callers
+// that only need this page's list (e.g. AllProducts.jsx).
+export { PANEL_SLUGS };
 
 const InfraredPanels = () => {
   const { products, loading } = useLocalProducts();
 
   const panels = useMemo(() => {
-    const bySlug = new Map(
-      products.filter(isPubliclyVisible).map((p) => [p.slug, p])
-    );
-    return PANEL_SLUGS.map((slug) => bySlug.get(slug)).filter(Boolean);
+    const visible = products.filter(isPubliclyVisible);
+    const bySlug = new Map(visible.map((p) => [p.slug, p]));
+    const known = PANEL_SLUGS.map((slug) => bySlug.get(slug)).filter(Boolean);
+    return [...known, ...getUnclassifiedInfraredProducts(visible)];
   }, [products]);
 
   return (

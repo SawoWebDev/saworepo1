@@ -10,8 +10,11 @@ import heroImg from "../assets/NRM-NB-BL1.webp";
 import { isPubliclyVisible } from "../local-storage/visibility";
 import { variantRank } from "../utils/wallMountedGroups";
 import useDragScroll from "../hooks/useDragScroll";
-import { PANEL_SLUGS as INFRARED_PANEL_SLUGS } from "./Infrared/InfraredPanels";
-import { CONTROL_SLUGS as INFRARED_CONTROL_SLUGS } from "./Infrared/InfraredControls";
+import {
+  PANEL_SLUGS as INFRARED_PANEL_SLUGS,
+  CONTROL_SLUGS as INFRARED_CONTROL_SLUGS,
+  getUnclassifiedInfraredProducts,
+} from "./Infrared/infraredClassification";
 
 const HEATER_SECTIONS = [
   { label: "Wall-Mounted", id: "heater-wall-mounted" },
@@ -295,6 +298,7 @@ const CATEGORY_SECTIONS = [
   { label: "Floor Mat Tiles",                   id: "section-wooden-floor-mats", category: "wooden floor mats" },
   { label: "Kivistone",                         id: "section-kivistone",         category: "kivistone" },
   { label: "Ventilations & Miscellaneous Items",id: "section-vent-misc",         category: "ventilation & miscellaneous" },
+  { label: "Accessory Sets",                    id: "section-accessory-sets",    category: "accessory sets" },
 ];
 
 // The literal "Sauna Stones" (heater rocks) accessory has ended up tagged
@@ -503,8 +507,10 @@ export default function AllProducts() {
   // / InfraredControls.jsx use, so no sortProducts() here.
   const infraredPanels = useMemo(() => {
     if (!localProds.length) return [];
-    const bySlug = new Map(localProds.filter(isPubliclyVisible).map(p => [p.slug, p]));
-    return INFRARED_PANEL_SLUGS.map(slug => bySlug.get(slug)).filter(Boolean);
+    const visible = localProds.filter(isPubliclyVisible);
+    const bySlug = new Map(visible.map(p => [p.slug, p]));
+    const known = INFRARED_PANEL_SLUGS.map(slug => bySlug.get(slug)).filter(Boolean);
+    return [...known, ...getUnclassifiedInfraredProducts(visible)];
   }, [localProds]);
 
   const infraredControls = useMemo(() => {
