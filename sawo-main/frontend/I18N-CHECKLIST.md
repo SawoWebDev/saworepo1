@@ -289,9 +289,9 @@ populated.
 | sawo30-wall-nb | ✅ | ✅ |
 | sawo30-wall-ni2 | ✅ | ✅ |
 | sawo30-wall-ns | ✅ | ✅ |
-| krios-nb | ⬜ | ✅ |
-| krios-ni2 | ⬜ | ✅ |
-| krios-ns | ⬜ | ✅ |
+| krios-nb | ✅ | ✅ |
+| krios-ni2 | ✅ | ✅ |
+| krios-ns | ✅ | ✅ |
 | phoenix-ni2 | ✅ | ✅ |
 | phoenix-ns | ✅ | ✅ |
 | fiberjungle-ns | ✅ | ✅ |
@@ -312,16 +312,16 @@ populated.
 | tower-wall-ni | ✅ | ✅ |
 | tower-wall-ni2 | ✅ | ✅ |
 | tower-wall-ns | ✅ | ✅ |
-| scandia-combi-fiber-coated-ns | ⬜ | ✅ |
-| scandia-combi-ns | ⬜ | ✅ |
-| scandia-fibercoated-nb | ⬜ | ✅ |
-| scandia-fibercoated-ns | ⬜ | ✅ |
-| scandia-nb | ⬜ | ✅ |
-| scandia-ns | ⬜ | ✅ |
-| scandifire-black-nb | ⬜ | ✅ |
-| scandifire-black-ns | ⬜ | ✅ |
-| scandifire-red-nb | ⬜ | ✅ |
-| scandifire-red-ns | ⬜ | ✅ |
+| scandia-combi-fiber-coated-ns | ✅ | ✅ |
+| scandia-combi-ns | ✅ | ✅ |
+| scandia-fibercoated-nb | ✅ | ✅ |
+| scandia-fibercoated-ns | ✅ | ✅ |
+| scandia-nb | ✅ | ✅ |
+| scandia-ns | ✅ | ✅ |
+| scandifire-black-nb | ✅ | ✅ |
+| scandifire-black-ns | ✅ | ✅ |
+| scandifire-red-nb | ✅ | ✅ |
+| scandifire-red-ns | ✅ | ✅ |
 | heaterking-corner-ns | ✅ | ✅ |
 | heaterking-round-ns | ✅ | ✅ |
 | heaterking-wall-ns | ✅ | ✅ |
@@ -1521,6 +1521,61 @@ site-wide `fi` coverage, 380/380 products.** This closes out the
 "Site-wide all-products `fi` push" section above; any further `fi` work
 is staleness maintenance (`check-translation-staleness.mjs`), not new
 coverage.
+
+**Batch — 13 products, Krios (Day 3) + Scandia/Scandifire (Day 4) `fi`
+completion (2026-09-07)**: this doc's own "Product content" Day 3/Day 4
+tables (not `pending fi`, which the "SITE-WIDE `fi` PRODUCT TRANSLATION
+COMPLETE" batch above already ran clean) still showed 13 slugs as `fi`
+⬜ despite `zh` being ✅ for all of them — same class of tracking-scheme
+drift the Day 2 table note earlier in this file already flagged (a
+product genuinely lacking `product_translations` for `fi` that the
+Day-N table simply never got flipped for). Verified the ⬜ state by
+reading the table fresh before starting, then ran `extract`/`apply` via
+`product-i18n.js` for: **Krios ×3** (krios-nb, krios-ni2, krios-ns) and
+**Scandia ×6** (scandia-nb, scandia-ns, scandia-fibercoated-nb,
+scandia-fibercoated-ns, scandia-combi-ns, scandia-combi-fiber-coated-ns)
+and **Scandifire ×4** (scandifire-black-nb, scandifire-black-ns,
+scandifire-red-nb, scandifire-red-ns).
+
+TM pre-fill: 71/~110 prose fields pre-filled automatically at extraction
+time from existing `fi` translation memory (Aries/SAWO30/Tower/Nordex
+heater-family vocabulary — spec-table headers "Heater Model"→
+"Lämmitinmalli", "Sauna Room"→"Saunahuone", "Control"→"Ohjaus", etc.,
+and the `Power range:`→`Tehoalue:`/`Available controls:`→`Saatavilla
+oleva ohjaus:` feature-bullet templates all reused verbatim); remainder
+hand-translated following existing precedent rather than invented fresh
+— "Stainless steel casing"→"Ruostumaton teräskuori" (TM had the
+unhyphenated form only, so the hyphenated "Stainless-steel casing"
+variant used across this batch's source didn't exact-match; applied by
+hand, now also in TM for future normalization), "Fibercoated"/"Combi"
+kept untranslated as bare loanwords (matching the existing Mini
+Combi/Mini Combi Fibercoated/Nimbus Combi/Savonia Combi precedent —
+these read as product-line suffixes in the existing `fi` catalog, not
+ordinary adjectives), "Black"→"Musta" (`MATERIAL_WORD_DICTIONARY`).
+"Red" had no prior `fi` precedent anywhere in translation_memory
+(Minidragon Red, the only other Red-suffixed family, is still ⬜) — used
+the plain dictionary word "Punainen" for Scandifire Red's `name`/`type`,
+consistent with how "Musta"/"Black" is handled. Applied `apply-many`
+recorded 95 distinct new phrases into `translation_memory` across the
+13 products (24 Krios, 34 Scandia, 37 Scandifire — includes shared
+spec-table headers, so not all net-new vocabulary), which should raise
+the pre-fill rate for any future Nordex/Mini/Savonia `fi` batch that
+shares this heater-family boilerplate.
+
+**Bug found (flagged, not fixed in English source)**: `scandifire-red-
+nb`'s live `products.type` column reads `"Scandia"` — every sibling
+Scandifire variant (black-nb/black-ns/red-ns) has `type: "Scandifire"`.
+Translated the intended correct meaning (`type: "Scandifire"` in the
+`fi` row) rather than mirroring the wrong English value, per this file's
+standing "translate intended meaning, don't fix the English source"
+rule. Worth a direct `products` table fix outside this pass.
+
+Verified via direct Supabase query joining `products`→
+`product_translations` on all 13 slugs: 13/13 have a `fi` row with
+non-empty `source_field_hashes` (7–11 fields each, matching how many
+prose fields each product actually carries). Flipped `fi` ✅ for exactly
+these 13 rows in the Day 3/Day 4 tables above; `zh` and every other row
+left untouched.
 
 ### zh completeness audit (2026-09-04)
 
