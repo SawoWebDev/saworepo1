@@ -14,6 +14,17 @@ function roomTypeLabel(t, key) {
   const label = t(`roomTypes.${key}`);
   return label === `roomTypes.${key}` ? key : label;
 }
+// `room.name` ("Standard Sauna Room 1515") is stored English-only in
+// Supabase — there's no room_translations table like products have. Every
+// room's name follows the exact pattern `${typeWord} Sauna Room
+// ${model_code}` (verified across all 61 rooms), so it's reconstructed from
+// the already-translated room_type word + the untranslatable model code
+// instead of needing real per-locale storage. Falls back to the raw name if
+// room_type/model_code are ever missing (shouldn't happen for a real room).
+function roomDisplayName(t, room) {
+  if (!room?.room_type || !room?.model_code) return room?.name;
+  return t("roomDisplayName", { type: roomTypeLabel(t, room.room_type), code: room.model_code });
+}
 function sizeLabel(t, key) {
   if (!key) return key;
   const label = t(`sizeLabels.${key}`);
@@ -227,7 +238,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
                 >
                   <div style={{ aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center", padding: 8, borderRadius: 8 }}>
                     {thumb ? (
-                      <ImageWithLoader src={resolveUrl(thumb)} alt={r.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                      <ImageWithLoader src={resolveUrl(thumb)} alt={roomDisplayName(t, r)} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
                     ) : (
                       <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "2rem" }} />
                     )}
@@ -235,7 +246,7 @@ function RelatedRooms({ currentSlug, roomType, allRooms }) {
                   {r.model_code && (
                     <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#a67853", margin: 0, textAlign: "center" }}>{r.model_code}</p>
                   )}
-                  <p style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", margin: 0, lineHeight: 1.4, textAlign: "center" }}>{r.name}</p>
+                  <p style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", margin: 0, lineHeight: 1.4, textAlign: "center" }}>{roomDisplayName(t, r)}</p>
                   {r.capacity_label && (
                     <p style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.7rem", color: "#a67853", margin: 0, textAlign: "center" }}>
                       <i className="fa-solid fa-user" style={{ marginRight: 4 }} />{r.capacity_label}
@@ -358,16 +369,16 @@ export default function SaunaRoomDisplay() {
   const seoDescription = (() => {
     const raw = room.description || "";
     const text = raw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-    if (!text) return `${room.name} by SAWO. A premium Finnish sauna room.`;
+    if (!text) return t("seoFallbackDescription", { name: roomDisplayName(t, room) });
     return text.length > 160 ? `${text.slice(0, 157)}...` : text;
   })();
 
   return (
     <>
       <SEO
-        title={room.meta_title || room.name}
+        title={room.meta_title || roomDisplayName(t, room)}
         description={room.meta_description || seoDescription}
-        path={`/sauna/rooms/${slug}`}
+        path={localize(`/sauna/rooms/${slug}`)}
         image={room.og_image || carouselImages[0] || undefined}
       />
       <style>{`
@@ -428,7 +439,7 @@ export default function SaunaRoomDisplay() {
 
             {/* LEFT: Carousel + Resources */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <Carousel images={carouselImages} onImageClick={(imgs, i) => setLightbox({ images: imgs, index: i })} roomName={room.name} />
+              <Carousel images={carouselImages} onImageClick={(imgs, i) => setLightbox({ images: imgs, index: i })} roomName={roomDisplayName(t, room)} />
 
               {/* Resources */}
               {files.length > 0 && (
@@ -473,7 +484,7 @@ export default function SaunaRoomDisplay() {
                 </p>
               )}
               <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: "clamp(1.2rem,2.2vw,1.65rem)", color: "#2c1a0e", margin: 0, lineHeight: 1.2 }}>
-                {room.name}
+                {roomDisplayName(t, room)}
               </h1>
 
               {/* Stat chips */}

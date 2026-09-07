@@ -71,7 +71,7 @@ const CATALOGUE_TABS = [
   // zero rows, so this section silently never rendered at all.
   {
     id: "rooms", source: "rooms",
-    groupOrder: ["standard", "glassfront", "infrared"],
+    groupOrder: ["standard", "glassfront", "infrared", "compact"],
   },
   // Safety net: anything with an unrecognised category (e.g. Spare Parts, or a
   // category added in the CMS later) still shows up here instead of vanishing.

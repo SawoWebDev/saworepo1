@@ -54,6 +54,8 @@
     "bestSeller": "畅销款"
   },
   "modelCode": "型号 {{code}}",
+  "roomDisplayName": "{{type}}桑拿房 {{code}}",
+  "seoFallbackDescription": "{{name}} —— SAWO 出品,优质芬兰桑拿房。",
   "skuCode": "货号 {{sku}}",
   "stats": {
     "capacity": "容纳人数",

@@ -41,6 +41,17 @@ const PRODUCT_GROUPS = [
   },
 ];
 
+// Rooms have no per-locale name storage in Supabase (unlike products) —
+// every room.name follows the exact pattern `${typeWord} Sauna Room
+// ${model_code}` (verified across all 61 rooms), so it's reconstructed from
+// the translated room_type word instead. See the same helper in
+// IndividualDisplay/DispSaunaRoom.jsx.
+function roomDisplayName(tp, room) {
+  if (!room?.room_type || !room?.model_code) return room?.name;
+  const typeLabel = tp(`roomTypes.${room.room_type}`);
+  return tp("roomDisplayName", { type: typeLabel === `roomTypes.${room.room_type}` ? room.room_type : typeLabel, code: room.model_code });
+}
+
 function classifyProduct(product) {
   const categories = (product.categories || []).map((c) => c.toLowerCase());
   for (const group of PRODUCT_GROUPS) {
@@ -51,6 +62,7 @@ function classifyProduct(product) {
 
 const Sitemap = () => {
   const t = useLocaleT("sitemap");
+  const tp = useLocaleT("product");
   const localize = useLocalizedPath();
   // Every publicly-visible product/accessory + sauna room, straight from the
   // same feeds the rest of the site reads (bundled JSON, or live Supabase if
@@ -241,7 +253,7 @@ const Sitemap = () => {
               <ul className="columns-2 sm:columns-3 lg:columns-4 gap-6 space-y-1.5">
                 {visibleRooms.map((r) => (
                   <li key={r.slug} className="break-inside-avoid">
-                    <Link to={localize(`/sauna/rooms/${r.slug}`)} className={linkClass}>{r.name}</Link>
+                    <Link to={localize(`/sauna/rooms/${r.slug}`)} className={linkClass}>{roomDisplayName(tp, r)}</Link>
                   </li>
                 ))}
               </ul>
