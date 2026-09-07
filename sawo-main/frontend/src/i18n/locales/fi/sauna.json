@@ -146,7 +146,7 @@
       },
       "stone": {
         "title": "Stone-sarja",
-        "caption": "SAWOn Stone-kiukaat on valmistettu suomalaisesta vuolukivestä, jolla on erinomaiset lämpöä varaavat ja johtavat ominaisuudet. Sen leppoisa lämpö tarjoaa tasaisen ja pitkäkestoisen saunakokemuksen."
+        "caption": "SAWOn Stone-kiukaat on valmistettu suomalaisesta vuolukivestä, jolla on erinomaiset lämpöä varaavat ja johtavat ominaisuudet. Niiden leppoisa lämpö tarjoaa tasaisen ja pitkäkestoisen saunakokemuksen."
       }
     },
     "viewAll": "KATSO KAIKKI KIUKAAT"
@@ -412,7 +412,7 @@
           "tab": "Ilmanvaihto",
           "title": "Ilmanvaihto",
           "paragraphs": [
-            "Kunnollinen ilmanvaihto on välttämätöntä hiilidioksidin ja epäpuhtauksien poistamiseksi sekä lämpötilan tasaamiseksi saunassasi. Useimmista saunapaketeista tämä puuttuu kokonaan.",
+            "Kunnollinen ilmanvaihto on välttämätöntä hiilidioksidin ja taudinaiheuttajien poistamiseksi sekä lämpötilan tasaamiseksi saunassasi. Useimmista saunapaketeista tämä puuttuu kokonaan.",
             "SAWOn sisäänrakennettu tuloilmaventtiili tuo happirikasta ilmaa suoraan kiukaalle ja sekoittaa sen nousevaan ilmavirtaan, mikä mahdollistaa pidemmät ja mukavammat löylyt ilman hiilidioksidin aiheuttamaa raukeutta.",
             "Integroitu poistoilmaventtiili tasaa lämpötilat koko huoneessa ja kuivattaa saunaasi aktiivisesti jokaisen käyttökerran jälkeen, mikä pidentää sen käyttöikää merkittävästi."
           ]
@@ -815,7 +815,7 @@
     },
     "intro": {
       "title": "Esittelyssä huippuluokan Combi-sarjan saunakiukaat",
-      "desc": "Combi-kiukaat ovat sähkökiukaita, joissa on sisäänrakennettu höyrystin, joten voit valita tavallisen saunan ja höyrysaunan väliltä. Combi-kiukaissa on aromiöljyallas ja patentoitu vedenpinnan tunnistusjärjestelmä, joka varoittaa veden loppuessa. Vedenpintaa voidaan tarkkailla helposti vedenpinnan ilmaisinputken avulla (vain vakiomallissa)."
+      "desc": "Combi-kiukaat ovat sähkökiukaita, joissa on sisäänrakennettu höyrystin, joten voit valita tavallisen saunan ja höyrysaunan väliltä. Combi-kiukaissa on aromiöljyallas ja patentoitu vedenpinnan tunnistusjärjestelmä, joka varoittaa veden pinnan ollessa matala. Vedenpintaa voidaan tarkkailla helposti vedenpinnan ilmaisinputken avulla (vain vakiomallissa)."
     },
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
