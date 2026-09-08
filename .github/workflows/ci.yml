@@ -1,0 +1,37 @@
+name: CI Build & Test
+
+on:
+  push:
+    paths:
+      - "sawo-main/frontend/**"
+  pull_request:
+    paths:
+      - "sawo-main/frontend/**"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: sawo-main/frontend
+        run: npm ci
+
+      - name: Run tests
+        working-directory: sawo-main/frontend
+        env:
+          CI: true
+        run: npx react-scripts test --watchAll=false --passWithNoTests
+
+      - name: Build
+        working-directory: sawo-main/frontend
+        env:
+          CI: false
+          REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: npm run build
