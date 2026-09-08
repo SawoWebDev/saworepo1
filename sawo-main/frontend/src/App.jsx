@@ -1,9 +1,13 @@
 // src/App.jsx ThemeProvider wraps everything so CSS vars are available on ALL pages
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Components (always needed — small, no lazy needed)
 import ScrollToTop from "./components/ScrollToTop";
+// Catches render errors anywhere in the matched route so one broken page
+// shows a fallback instead of blanking the whole app. Keyed by pathname
+// (see AppRoutes below) so navigating away from the broken page resets it.
+import ErrorBoundary from "./components/ErrorBoundary";
 // GDPRConsent itself is lazy-loaded inside the gate, only when the CMS
 // toggle (Settings page) is on — see components/GDPRConsentGate.jsx.
 // Mounted inside the public route below (not here at Router level) so it
@@ -116,12 +120,15 @@ function AdminLanding() {
   return <Navigate to={getLandingPath(role)} replace />;
 }
 
-export default function App() {
+// Wraps the routed content in an ErrorBoundary keyed to the current path, so
+// if a page throws during render, navigating to a different route mounts a
+// fresh ErrorBoundary instance (resetting the fallback) instead of leaving
+// the visitor stuck until a full reload.
+function AppRoutes() {
+  const location = useLocation();
   return (
-      <Router>
-        <ScrollToTop />
-        <Suspense fallback={null}>
-          <Routes>
+    <ErrorBoundary key={location.pathname}>
+      <Routes>
 
             {/*  Public  */}
             <Route path="*" element={
@@ -277,7 +284,17 @@ export default function App() {
               <ProtectedRoute><AdminLanding /></ProtectedRoute>
             } />
 
-          </Routes>
+      </Routes>
+    </ErrorBoundary>
+  );
+}
+
+export default function App() {
+  return (
+      <Router>
+        <ScrollToTop />
+        <Suspense fallback={null}>
+          <AppRoutes />
         </Suspense>
       </Router>
   );
