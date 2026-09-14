@@ -71,3 +71,8 @@ sawo-main/docs/
 # were emptied (2026-08-20). ~369 MB of images/PDFs; it is a backup, not
 # source, and must never enter git history.
 sawo-main/frontend/src/Administrator/Local/data/storage-archive/
+
+# One-off local staging area for large binary assets (GLBs etc.) awaiting
+# upload to R2 via upload-3d-model.js / upload-hero-asset.js — never commit
+# the raw asset itself, only the script.
+**/scripts/tmp-3d-assets/

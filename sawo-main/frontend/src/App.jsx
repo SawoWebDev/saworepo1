@@ -4,6 +4,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "r
 
 // Components (always needed — small, no lazy needed)
 import ScrollToTop from "./components/ScrollToTop";
+// Catches render errors anywhere in the matched route so one broken page
+// shows a fallback instead of blanking the whole app. Keyed by pathname
+// (see AppRoutes below) so navigating away from the broken page resets it.
+import ErrorBoundary from "./components/ErrorBoundary";
 // GDPRConsent itself is lazy-loaded inside the gate, only when the CMS
 // toggle (Settings page) is on — see components/GDPRConsentGate.jsx.
 // Mounted inside the public route below (not here at Router level) so it
@@ -70,6 +74,7 @@ const ProductCatalogue = lazy(() => import("./pages/Support/ProductCatalogue"));
 const AllProducts      = lazy(() => import("./pages/AllProducts"));
 const PrivacyPolicy    = lazy(() => import("./pages/PrivacyPolicy"));
 const Sitemap          = lazy(() => import("./pages/Sitemap"));
+const ThreeDViewer     = lazy(() => import("./pages/ThreeDViewer"));
 const NotFound         = lazy(() => import("./pages/NotFound"));
 const PailsLadles        = lazy(() => import("./pages/Sauna/accessories/PailsLadles"));
 const Thermometers       = lazy(() => import("./pages/Sauna/accessories/Thermometers"));
@@ -192,6 +197,7 @@ const PUBLIC_ROUTES = [
   { path: menuPaths.heaters,                 element: <HeatersCatalog /> },
   { path: "/accessories/:slug",              element: <DispAccessories /> },
   { path: "/sauna/rooms/:slug",              element: <DispSaunaRoom /> },
+  { path: menuPaths.threeDViewer,            element: <ThreeDViewer /> },
 ];
 
 // MainLayout's Header/Footer render as siblings of the routed page content,
@@ -212,12 +218,15 @@ function RouteLocale({ children }) {
   return <LocaleContext.Provider value={locale}>{children}</LocaleContext.Provider>;
 }
 
-export default function App() {
+// Wraps the routed content in an ErrorBoundary keyed to the current path, so
+// if a page throws during render, navigating to a different route mounts a
+// fresh ErrorBoundary instance (resetting the fallback) instead of leaving
+// the visitor stuck until a full reload.
+function AppRoutes() {
+  const location = useLocation();
   return (
-      <Router>
-        <ScrollToTop />
-        <Suspense fallback={null}>
-          <Routes>
+    <ErrorBoundary key={location.pathname}>
+      <Routes>
 
             {/*  Public  */}
             <Route path="*" element={
@@ -327,7 +336,17 @@ export default function App() {
               <ProtectedRoute><AdminLanding /></ProtectedRoute>
             } />
 
-          </Routes>
+      </Routes>
+    </ErrorBoundary>
+  );
+}
+
+export default function App() {
+  return (
+      <Router>
+        <ScrollToTop />
+        <Suspense fallback={null}>
+          <AppRoutes />
         </Suspense>
       </Router>
   );

@@ -70,6 +70,7 @@ const menuPaths = {
   products: "/products",
   accessories: "/sauna-accessories",
   heaters: "/sauna-heaters",
+  threeDViewer: "/3d-viewer",
   adminDashboard:"/admin/dashboard",
 };
 
