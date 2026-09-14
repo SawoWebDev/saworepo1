@@ -1,5 +1,7 @@
-// rake.test.js — run with `node --test rake.test.js` (Node's built-in test
-// runner, no test-framework dependency added).
+// rake.nodetest.js — run with `node --test rake.nodetest.js` (Node's built-in
+// test runner, no test-framework dependency added). Named ".nodetest.js"
+// rather than ".test.js" so CRA's Jest runner (used by `npm test` / CI)
+// doesn't pick this up too — it can't resolve `node:test` and would fail.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { extractKeywords } from "./rake.js";

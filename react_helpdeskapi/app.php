@@ -152,7 +152,7 @@ class app {
         $output .= "<li>Verify your username: <strong>" . $this->username . "</strong></li>";
         $output .= "<li>Make sure the API key has proper access rights in Odoo</li>";
         $output .= "<li>Check if the database name is correct: <strong>" . $this->db . "</strong></li>";
-        $output .= "<li>Try logging in to Odoo web interface with the same credentials</li>";
+        $output .= "<li>Try logging in to Odoo web interface with the same credentials</li>";   
         $output .= "</ul>";
         $output .= "</div>";
 

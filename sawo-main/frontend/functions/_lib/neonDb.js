@@ -49,7 +49,7 @@ const TABLE_DEFS = {
       "feature_tabs","spec_table","images","spec_images","resources","files","tags","categories",
       "status","visible","featured","is_best_seller","has_door_filter","sort_order","is_deleted",
       "created_by","created_by_username","updated_by_username","created_at","updated_at",
-      "meta_title","meta_description","og_image","publish_at","deleted_at",
+      "meta_title","meta_description","og_image","publish_at","deleted_at","model_3d_url",
     ],
     jsonbCols: ["configurations","door_options","feature_tabs","spec_table","resources","files"],
     listWhere: "is_deleted = false",

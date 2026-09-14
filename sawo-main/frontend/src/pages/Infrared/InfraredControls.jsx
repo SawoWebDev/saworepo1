@@ -3,14 +3,15 @@ import ProductShowcase from "../../components/ProductShowcase";
 import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { useLocale, useLocaleT } from "../../i18n/LocaleContext";
+import { CONTROL_SLUGS } from "./infraredClassification";
 import heroImg from "../../assets/Infrared/IR-CONTROL-New.webp";
 
 // Slug-selected for the same reason as InfraredPanels — see the note there.
-export const CONTROL_SLUGS = [
-  "infrared-2-0-user-interface",
-  "infrared-2-0-power-controller",
-  "infrared-2-0-built-in-control",
-];
+// List lives in infraredClassification.js, re-exported here for callers
+// that only need this page's list (e.g. AllProducts.jsx). Unclassified
+// fallback products intentionally surface on the Panels page only (see
+// getUnclassifiedInfraredProducts) — not duplicated here.
+export { CONTROL_SLUGS };
 
 const InfraredControls = () => {
   const locale = useLocale();

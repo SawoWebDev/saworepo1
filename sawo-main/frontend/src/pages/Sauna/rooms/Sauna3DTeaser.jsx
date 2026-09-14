@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { S3T_VIEWER_URL, S3T_MODEL_LABEL } from "./SaunaRoomData";
-import { useLocaleT } from "../../../i18n/LocaleContext";
+import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
 
 const Sauna3DTeaser = () => {
   const t = useLocaleT("sauna");
+  const localize = useLocalizedPath();
   const scrollToConfigurator = () => {
     document.getElementById("sawo-configurator")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -14,7 +16,7 @@ const Sauna3DTeaser = () => {
       <div className="s3t-title">{t("roomsPage.teaser3d.title")}</div>
       <p className="s3t-subtitle">{t("roomsPage.teaser3d.subtitle")}</p>
 
-      <a className="sawo-3d-card" href={S3T_VIEWER_URL} target="_blank" rel="noopener noreferrer">
+      <Link className="sawo-3d-card" to={localize(S3T_VIEWER_URL)}>
         <div className="s3t-preview">
           <div className="s3t-orbit s3t-orbit-1"></div>
           <div className="s3t-orbit s3t-orbit-2"></div>
@@ -64,15 +66,15 @@ const Sauna3DTeaser = () => {
           </div>
           <div className="s3t-model-label">{S3T_MODEL_LABEL}</div>
         </div>
-      </a>
+      </Link>
 
       <div className="s3t-cta-row">
-        <a className="s3t-btn-primary" href={S3T_VIEWER_URL} target="_blank" rel="noopener noreferrer">
+        <Link className="s3t-btn-primary" to={localize(S3T_VIEWER_URL)}>
           {t("roomsPage.teaser3d.openViewer")}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
-        </a>
+        </Link>
         <button className="s3t-btn-secondary" onClick={scrollToConfigurator}>
           {t("roomsPage.teaser3d.buildYourOwn")}
         </button>
