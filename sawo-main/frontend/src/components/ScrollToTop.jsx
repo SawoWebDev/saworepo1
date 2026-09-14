@@ -60,11 +60,11 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       style={{
         position: "fixed",
-        bottom: "30px",
-        right: "30px",
-        width: "44px",
-        height: "44px",
-        borderRadius: "50%",
+        bottom: "4px",
+        left: "50%",
+        width: "72px",
+        height: "28px",
+        borderRadius: "10px",
         // Same gradient/shadow as the header's Nav Style 2 active/hover pill
         // (Header.jsx) — kept byte-identical so every "brown pill" on the
         // site reads as the same element.
@@ -82,7 +82,7 @@ export default function ScrollToTop() {
         alignItems: "center",
         justifyContent: "center",
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        transform: isVisible ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(20px)",
         visibility: isVisible ? "visible" : "hidden",
         transition: "transform 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease",
         zIndex: 999,
@@ -103,7 +103,7 @@ export default function ScrollToTop() {
       onMouseEnter={(e) => {
         if (!isVisible) return;
         e.currentTarget.style.background = "linear-gradient(135deg, #9a7250 0%, #b08d68 100%)";
-        e.currentTarget.style.transform = "translateY(-3px)";
+        e.currentTarget.style.transform = "translateX(-50%) translateY(-3px)";
         e.currentTarget.style.boxShadow =
           "0 14px 26px rgba(139,94,60,0.45), " +
           "0 4px 8px rgba(0,0,0,0.25), " +
@@ -112,7 +112,7 @@ export default function ScrollToTop() {
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.background = "linear-gradient(135deg, #af8564 0%, #c9a97e 100%)";
-        e.currentTarget.style.transform = isVisible ? "translateY(0)" : "translateY(20px)";
+        e.currentTarget.style.transform = isVisible ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(20px)";
         e.currentTarget.style.boxShadow =
           "0 10px 20px rgba(139,94,60,0.38), " +
           "0 3px 6px rgba(0,0,0,0.22), " +
@@ -124,14 +124,14 @@ export default function ScrollToTop() {
         // flip (dark on top, light sliver at the bottom) to read as pressed
         // rather than raised, and the drop shadow tightens as it "meets" the
         // page. Restored in onMouseUp/onMouseLeave/onTouchEnd.
-        e.currentTarget.style.transform = "translateY(1px) scale(0.96)";
+        e.currentTarget.style.transform = "translateX(-50%) translateY(1px) scale(0.96)";
         e.currentTarget.style.boxShadow =
           "0 2px 4px rgba(139,94,60,0.3), " +
           "inset 0 2px 4px rgba(0,0,0,0.35), " +
           "inset 0 -1px 1px rgba(255,255,255,0.25)";
       }}
       onMouseUp={(e) => {
-        e.currentTarget.style.transform = "translateY(-3px)";
+        e.currentTarget.style.transform = "translateX(-50%) translateY(-3px)";
         e.currentTarget.style.boxShadow =
           "0 14px 26px rgba(139,94,60,0.45), " +
           "0 4px 8px rgba(0,0,0,0.25), " +
@@ -139,14 +139,14 @@ export default function ScrollToTop() {
           "inset 0 -4px 6px rgba(0,0,0,0.28)";
       }}
       onTouchStart={(e) => {
-        e.currentTarget.style.transform = "translateY(1px) scale(0.96)";
+        e.currentTarget.style.transform = "translateX(-50%) translateY(1px) scale(0.96)";
         e.currentTarget.style.boxShadow =
           "0 2px 4px rgba(139,94,60,0.3), " +
           "inset 0 2px 4px rgba(0,0,0,0.35), " +
           "inset 0 -1px 1px rgba(255,255,255,0.25)";
       }}
       onTouchEnd={(e) => {
-        e.currentTarget.style.transform = isVisible ? "translateY(0)" : "translateY(20px)";
+        e.currentTarget.style.transform = isVisible ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(20px)";
         e.currentTarget.style.boxShadow =
           "0 10px 20px rgba(139,94,60,0.38), " +
           "0 3px 6px rgba(0,0,0,0.22), " +
