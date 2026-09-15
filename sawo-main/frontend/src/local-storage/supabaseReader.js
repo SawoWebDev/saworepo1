@@ -105,6 +105,31 @@ export async function getProductsLatestUpdateLive() {
 }
 
 /**
+ * Fetch images currently sitting in the media trash — trashed (replaced or
+ * removed in the CMS) but not yet restored or permanently purged. Backs
+ * the Media section of the admin Trash page. See purge_expired_media_trash()
+ * in setup-media-trash.sql (scheduled via pg_cron, daily) for what actually
+ * deletes the R2 object once 30 days are up.
+ */
+export async function getTrashedMediaLive() {
+  try {
+    const { data, error } = await (await getSupabase())
+      .from("media_upload_log")
+      .select("*")
+      .not("trashed_at", "is", null)
+      .is("restored_at", null)
+      .is("deleted_at", null)
+      .order("trashed_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.error("[supabaseReader] Failed to fetch trashed media:", err);
+    return [];
+  }
+}
+
+/**
  * Fetch soft-deleted products still within their retention window — backs
  * the admin Trash page. See purge_expired_trash() (scheduled via pg_cron,
  * daily) for what actually removes a row once its 30 days are up.
