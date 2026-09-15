@@ -229,8 +229,8 @@
    rendered when a caller passes them, so this stays invisible/unused on
    every PromoBanner usage that doesn't (accessories pages, Sauna
    Controls). Keeps the existing image background untouched; just adds a
-   prompt line + button under the title/subtitle. */
-.wm-banner-cta { margin-top: 26px; }
+   button under the title/subtitle. */
+.wm-banner-cta { margin-top: 32px; }
 .wm-banner-cta-prompt {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.95rem; font-weight: 300;

@@ -311,10 +311,9 @@ const Dragonfire = () => {
       </section>
 
       <PromoBanner
-        title="Experience Ultimate Relaxation"
-        subtitle="Find your source of serenity from over 100 heater models"
+        title="Find Your Perfect Heater"
+        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
         image={bannerImg}
-        ctaPrompt="Looking for something different? Check out our other heaters."
         ctaLabel="VIEW ALL HEATERS"
         ctaTo={menuPaths.sauna.heaters.parent}
       />
