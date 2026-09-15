@@ -1197,14 +1197,20 @@ function ImageUploader({ onUpload, label = "Upload Image", multiple = false, upl
 }
 
 // ─── Floating thumbnail with hover overlay ────────────────────────────────────
+// Replacing here (click, drag & drop, or paste) permanently deletes the old
+// file from storage (see handleThumbUpload's cleanup) — a dropped file is
+// easy to miss-target, so every replacement path funnels through a single
+// pendingFile + Confirm step rather than swapping the image immediately.
 function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
   const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
   const replaceRef = useRef();
   const containerRef = useRef();
 
   const handleFiles = files => {
     const file = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
-    if (file) onReplace(file);
+    if (file) setPendingFile(file);
   };
 
   const handlePaste = e => {
@@ -1223,21 +1229,41 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
     <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
       <div
         ref={containerRef}
-        style={{ position: "relative", display: "inline-block", outline: "none", cursor: !uploading ? "pointer" : "default" }}
+        style={{
+          position: "relative", display: "inline-block", outline: "none",
+          cursor: !uploading ? "pointer" : "default",
+          borderRadius: "var(--r)",
+          border: dragging ? "2px solid var(--brand)" : "2px solid transparent",
+          transition: "border-color 0.15s",
+        }}
         onMouseEnter={() => { setHovered(true); containerRef.current?.focus(); }}
         onMouseLeave={() => { setHovered(false); }}
         onPaste={handlePaste}
         onClick={() => !uploading && replaceRef.current?.click()}
+        onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); }}
         tabIndex="0"
         contentEditable={hovered && !uploading}
         suppressContentEditableWarning
       >
         <img src={url} alt="Featured" style={{
           display: "block", maxHeight: 220, maxWidth: "100%",
-          borderRadius: "var(--r)", objectFit: "contain",
-          transition: "opacity 0.18s", opacity: uploading ? 0.5 : (hovered ? 0.8 : 1),
+          borderRadius: "calc(var(--r) - 2px)", objectFit: "contain",
+          transition: "opacity 0.18s", opacity: uploading ? 0.5 : ((hovered || dragging) ? 0.8 : 1),
         }} />
-        {hovered && !uploading && (
+        {dragging && !uploading && (
+          <div style={{
+            position: "absolute", inset: 0, borderRadius: "calc(var(--r) - 2px)",
+            background: "rgba(0,0,0,0.7)", color: "#fff",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "0.85rem", fontWeight: 700, zIndex: 11, pointerEvents: "none",
+          }}>
+            <i className="fa-solid fa-arrow-down-to-bracket" style={{ marginRight: 8 }} />
+            Drop to replace
+          </div>
+        )}
+        {hovered && !uploading && !dragging && (
         <>
           {/* ✕ remove — top right */}
           <button type="button" onClick={(e) => { e.stopPropagation(); onRemove(); }} title="Remove image" style={{
@@ -1265,7 +1291,7 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
               <i className="fa-solid fa-arrow-up-from-bracket" style={{ fontSize: "0.72rem" }} />
               Replace
             </div>
-            <div style={{ fontSize: "0.65rem", opacity: 0.8, fontWeight: 400, marginTop: 2 }}>Click or Ctrl+V</div>
+            <div style={{ fontSize: "0.65rem", opacity: 0.8, fontWeight: 400, marginTop: 2 }}>Click, drag &amp; drop, or Ctrl+V</div>
           </div>
         </>
         )}
@@ -1282,6 +1308,15 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
         <input ref={replaceRef} type="file" accept="image/*" style={{ display: "none" }}
           onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
       </div>
+      <Confirm
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        onConfirm={() => { onReplace(pendingFile); setPendingFile(null); }}
+        title="Replace featured image?"
+        message="The current featured image will be permanently deleted and replaced with the new one. This can't be undone."
+        confirmLabel="Replace"
+        confirmVariant="primary"
+      />
     </div>
   );
 }
