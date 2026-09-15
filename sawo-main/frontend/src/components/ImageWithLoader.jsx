@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const ImageWithLoader = ({ src, alt, className, style = {}, onError }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  // Without this, a caller that doesn't remount/re-key this component per
+  // src (e.g. the same carousel slot re-rendering with a NEW url — a
+  // replaced product thumbnail, or same-session cached data getting
+  // corrected by a fresh fetch) keeps showing the broken-image fallback
+  // forever once hasError flips true once, even after src points at a
+  // perfectly valid image. hasError/isLoading need to track the CURRENT
+  // src, not just "has this component instance ever failed."
+  useEffect(() => {
+    setIsLoading(true);
+    setHasError(false);
+  }, [src]);
 
   const handleLoad = () => setIsLoading(false);
   const handleError = (e) => {
