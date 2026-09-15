@@ -17,6 +17,7 @@ import CategoryHero from "../components/CategoryHero";
 import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton";
 import menuPaths from "../menuPaths";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts, variantRank } from "../utils/wallMountedGroups";
+import { FLOOR_FIXED_ORDER, groupFloorProducts } from "../utils/floorGroups";
 
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
@@ -142,6 +143,35 @@ function CategorySection({ group, productsByGroup }) {
   if (group.category === "wall-mounted") {
     const brandGroups = groupWallMountedProducts(products);
     const brandNames = WALL_MOUNTED_FIXED_ORDER.filter(g => brandGroups[g]?.length);
+
+    return (
+      <div id={group.id} className="category-section">
+        <div className="category-section-title">
+          <h2>{group.label}</h2>
+        </div>
+        <div className="hc-brand-groups">
+          {brandNames.map(brand => (
+            <div className="hc-brand-group" key={brand}>
+              <h3 className="hc-brand-title">{brand.toUpperCase()}</h3>
+              <div className="products-grid">
+                {brandGroups[brand].map(product => (
+                  <HeaterCard key={product.id || product.slug} product={product} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // The Floor series has well-defined brand families too (Helius, Taurus D,
+  // Savonia, Nordex) — same brand-sub-heading treatment as Wall-Mounted
+  // above, reusing the exact grouping logic the dedicated Floor heaters
+  // page uses so the two stay in sync (see floorGroups.js).
+  if (group.category === "floor") {
+    const brandGroups = groupFloorProducts(products);
+    const brandNames = FLOOR_FIXED_ORDER.filter(g => brandGroups[g]?.length);
 
     return (
       <div id={group.id} className="category-section">
