@@ -228,6 +228,39 @@
   color: rgba(255,255,255,0.9); margin: 0; line-height: 1.6;
 }
 
+/* ---- View All Heaters CTA banner ---- */
+/* Full-width brown prompt strip pointing to the full heaters catalog —
+   sits between a series page's product grid and its "Why Choose SAWO"
+   section. No .wm-container wrapper (same as .wm-banner above), so the
+   brown background runs edge to edge; only the text/button column inside
+   is width-capped. */
+.wm-viewall-banner {
+  background: #AA8161;
+  padding: 56px 24px;
+  text-align: center;
+}
+.wm-viewall-content { max-width: 640px; margin: 0 auto; }
+.wm-viewall-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: #fff; margin: 0 0 10px; line-height: 1.3;
+}
+.wm-viewall-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem; font-weight: 300;
+  color: rgba(255,255,255,0.9); margin: 0 0 26px; line-height: 1.6;
+}
+.wm-viewall-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 1px; padding: 12px 32px;
+  background: #fff; color: #AA8161;
+  border: 2px solid #fff; border-radius: 6px;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s ease;
+}
+.wm-viewall-btn:hover { background: transparent; color: #fff; }
+
 /* ---- Responsive ---- */
 @media (max-width: 1024px) { .wm-products-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 768px) {
@@ -240,6 +273,8 @@
   .wm-section--why  { padding: 48px 0; }
   .wm-banner        { padding: 72px 20px; min-height: 300px; }
   .wm-banner-title  { font-size: 1.7rem; }
+  .wm-viewall-banner { padding: 40px 20px; }
+  .wm-viewall-title  { font-size: 1.3rem; }
 }
 @media (max-width: 480px) {
   .wm-products-grid { grid-template-columns: repeat(2, 1fr); }

@@ -149,7 +149,9 @@
         "caption": "SAWO 石材式加热器采用芬兰皂石制成,拥有卓越的蓄热与导热性能。其温和的热度带来持久稳定的桑拿体验。"
       }
     },
-    "viewAll": "查看全部加热器"
+    "viewAll": "查看全部加热器",
+    "viewAllTitle": "想找点不一样的？",
+    "viewAllSub": "查看我们的其他加热器——浏览 SAWO 全系列加热器。"
   },
   "accessoriesPage": {
     "meta": {
