@@ -1013,21 +1013,132 @@ function ModelSelect({ label, value, onChange, placeholder, suggestions = [], ti
 }
 
 // ─── Smart Image Gallery — adapts display based on count ────────────────────────
-function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
+// ─── One image slot that's both removable AND replaceable in place ─────────
+// Click, drag & drop, or Ctrl+V paste a new file directly onto an already-
+// uploaded image to swap it — same click/drag/confirm pattern as
+// ThumbnailPreview above, just sized to sit inside a grid/strip item
+// instead of standing alone. onReplace is async (it uploads + trashes the
+// old file + writes the new url back at this same array index) — a
+// Confirm gate sits in front of it for the same reason ThumbnailPreview
+// has one: the old file is only recoverable from Trash until it actually
+// gets replaced, and a mis-dropped file is easy to not notice.
+function ReplaceableImage({ url, onReplace, onRemove, className, removeClassName = "smart-image-remove" }) {
+  const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const ref = useRef();
+  const containerRef = useRef();
+
+  const handleFiles = files => {
+    const file = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
+    if (file) setPendingFile(file);
+  };
+
+  const confirmReplace = async () => {
+    const file = pendingFile;
+    setPendingFile(null);
+    setUploading(true);
+    try { await onReplace(file); }
+    finally { setUploading(false); }
+  };
+
+  const handlePaste = e => {
+    if (uploading) return;
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let item of items) {
+      if (item.kind === "file" && item.type.startsWith("image/")) {
+        const file = item.getAsFile();
+        if (file) { e.preventDefault(); handleFiles(file); return; }
+      }
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={className}
+      style={{
+        position: "relative",
+        cursor: !uploading ? "pointer" : "default",
+        // outline (not border): these containers already set their own
+        // border/overflow via CSS class (.smart-image-wrapper/-item,
+        // .image-strip-item) — an inline border would override that
+        // instead of adding to it, and outline doesn't affect layout so
+        // there's no size shift between dragging/not.
+        outline: dragging ? "2px solid var(--brand)" : "2px solid transparent",
+        outlineOffset: -2,
+        transition: "outline-color 0.15s",
+      }}
+      onMouseEnter={() => { setHovered(true); containerRef.current?.focus(); }}
+      onMouseLeave={() => setHovered(false)}
+      onPaste={handlePaste}
+      onClick={() => !uploading && ref.current?.click()}
+      onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); }}
+      tabIndex="0"
+      contentEditable={hovered && !uploading}
+      suppressContentEditableWarning
+    >
+      <img src={url} alt="" style={{ opacity: uploading ? 0.5 : 1 }} />
+      {dragging && !uploading && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.7rem", fontWeight: 700, textAlign: "center", padding: 4, zIndex: 3,
+        }}>
+          Drop to replace
+        </div>
+      )}
+      {hovered && !uploading && !dragging && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.65rem", fontWeight: 600, textAlign: "center", padding: 4, zIndex: 3,
+        }}>
+          Replace
+        </div>
+      )}
+      {uploading && (
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 3 }}>
+          <i className="fa-solid fa-spinner" style={{ color: "var(--brand)", fontSize: "1.1rem", animation: "spin 1s linear infinite" }} />
+        </div>
+      )}
+      {onRemove && !dragging && !uploading && (
+        <button type="button" className={removeClassName} onClick={e => { e.stopPropagation(); onRemove(); }} style={{ zIndex: 4 }}>
+          <i className="fa-solid fa-xmark" />
+        </button>
+      )}
+      <input ref={ref} type="file" accept="image/*" style={{ display: "none" }} disabled={uploading}
+        onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+      <Confirm
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        onConfirm={confirmReplace}
+        title="Replace image?"
+        message="The current image will be permanently deleted and replaced with the new one. This can't be undone."
+        confirmLabel="Replace"
+        confirmVariant="primary"
+      />
+    </div>
+  );
+}
+
+function SmartImageGallery({ images = [], onRemove, onReplace, isSingle = false }) {
   if (!images.length) return null;
 
   // Single image: display large
   if (isSingle && images.length === 1) {
     return (
       <div className="smart-image-single">
-        <div className="smart-image-wrapper">
-          <img src={images[0]} alt="" />
-          {onRemove && (
-            <button type="button" className="smart-image-remove" onClick={() => onRemove(0)}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          )}
-        </div>
+        <ReplaceableImage
+          className="smart-image-wrapper"
+          url={images[0]}
+          onReplace={onReplace ? file => onReplace(0, file) : undefined}
+          onRemove={onRemove ? () => onRemove(0) : undefined}
+        />
       </div>
     );
   }
@@ -1037,14 +1148,13 @@ function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
     return (
       <div className={`smart-image-grid grid-${images.length}`}>
         {images.map((url, i) => (
-          <div key={i} className="smart-image-item">
-            <img src={url} alt="" />
-            {onRemove && (
-              <button type="button" className="smart-image-remove" onClick={() => onRemove(i)}>
-                <i className="fa-solid fa-xmark" />
-              </button>
-            )}
-          </div>
+          <ReplaceableImage
+            key={i}
+            className="smart-image-item"
+            url={url}
+            onReplace={onReplace ? file => onReplace(i, file) : undefined}
+            onRemove={onRemove ? () => onRemove(i) : undefined}
+          />
         ))}
       </div>
     );
@@ -1054,14 +1164,14 @@ function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
   return (
     <div className="image-strip">
       {images.map((url, i) => (
-        <div key={i} className="image-strip-item">
-          <img src={url} alt="" />
-          {onRemove && (
-            <button type="button" className="image-strip-remove" onClick={() => onRemove(i)}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          )}
-        </div>
+        <ReplaceableImage
+          key={i}
+          className="image-strip-item"
+          removeClassName="image-strip-remove"
+          url={url}
+          onReplace={onReplace ? file => onReplace(i, file) : undefined}
+          onRemove={onRemove ? () => onRemove(i) : undefined}
+        />
       ))}
     </div>
   );
@@ -1390,9 +1500,13 @@ function ThumbnailUploader({ onUpload, uploading }) {
 }
 
 // ─── Smart File Display — adapts layout based on count ────────────────────────
-function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) {
+function SmartFileDisplay({ files = [], onRemove, onRename, onReplace, isSingle = false }) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(files.length > 0 ? files[0].name : "");
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const ref = useRef();
 
   if (!files.length) return null;
 
@@ -1400,9 +1514,27 @@ function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) 
   if (isSingle && files.length === 1) {
     const file = files[0];
 
+    const handleFiles = fl => {
+      const f = fl instanceof FileList ? fl[0] : (Array.isArray(fl) ? fl[0] : fl);
+      if (f) setPendingFile(f);
+    };
+    const confirmReplace = async () => {
+      const f = pendingFile;
+      setPendingFile(null);
+      setUploading(true);
+      try { await onReplace(0, f); }
+      finally { setUploading(false); }
+    };
+
     return (
       <div className="smart-file-single">
-        <div className="smart-file-card">
+        <div
+          className="smart-file-card"
+          style={{ position: "relative", outline: dragging ? "2px solid var(--brand)" : "2px solid transparent", outlineOffset: -2, transition: "outline-color 0.15s" }}
+          onDragOver={onReplace ? e => { e.preventDefault(); if (!uploading) setDragging(true); } : undefined}
+          onDragLeave={onReplace ? () => setDragging(false) : undefined}
+          onDrop={onReplace ? e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); } : undefined}
+        >
           <div className="smart-file-icon">
             <i className="fa-solid fa-file-pdf" />
           </div>
@@ -1420,12 +1552,41 @@ function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) 
               </>
             )}
           </div>
+          {onReplace && (
+            <button type="button" onClick={() => !uploading && ref.current?.click()} title="Replace" className="smart-file-btn" disabled={uploading}>
+              <i className={`fa-solid ${uploading ? "fa-spinner fa-spin" : "fa-arrow-up-from-bracket"}`} />
+            </button>
+          )}
           <button type="button" onClick={() => setEditing(true)} title="Rename" className="smart-file-btn smart-file-edit">
             <i className="fa-solid fa-pen" />
           </button>
           <button type="button" onClick={() => onRemove(0)} title="Remove" className="smart-file-btn smart-file-trash">
             <i className="fa-solid fa-trash" />
           </button>
+          {onReplace && (
+            <>
+              <input ref={ref} type="file" accept=".pdf,application/pdf" style={{ display: "none" }} disabled={uploading}
+                onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+              <Confirm
+                open={!!pendingFile}
+                onClose={() => setPendingFile(null)}
+                onConfirm={confirmReplace}
+                title="Replace PDF?"
+                message={`The current file will be permanently deleted and replaced with the new one, kept under the same name ("${file.name}"). This can't be undone.`}
+                confirmLabel="Replace"
+                confirmVariant="primary"
+              />
+            </>
+          )}
+          {dragging && (
+            <div style={{
+              position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", color: "#fff",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "0.8rem", fontWeight: 700, borderRadius: "var(--r)", pointerEvents: "none",
+            }}>
+              Drop to replace
+            </div>
+          )}
         </div>
       </div>
     );
@@ -1434,16 +1595,45 @@ function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) 
   // Multiple files: compact list
   return (
     <div className="file-rows">
-      {files.map((file, index) => <FileRow key={index} file={file} index={index} onRemove={onRemove} onRename={onRename} />)}
+      {files.map((file, index) => <FileRow key={index} file={file} index={index} onRemove={onRemove} onRename={onRename} onReplace={onReplace} />)}
     </div>
   );
 }
 
-function FileRow({ file, index, onRemove, onRename }) {
-  const [editing, setEditing] = useState(false);
-  const [name, setName]       = useState(file.name);
+// Drag a new PDF onto an already-uploaded one (or click the row) to swap
+// it in place — same click/drag/confirm pattern as ThumbnailPreview/
+// ReplaceableImage above. Rename/Remove stay exactly as they were;
+// onReplace is optional so this still works anywhere a caller doesn't
+// wire it up.
+function FileRow({ file, index, onRemove, onRename, onReplace }) {
+  const [editing, setEditing]   = useState(false);
+  const [name, setName]         = useState(file.name);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading]     = useState(false);
+  const ref = useRef();
+
+  const handleFiles = files => {
+    const f = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
+    if (f) setPendingFile(f);
+  };
+
+  const confirmReplace = async () => {
+    const f = pendingFile;
+    setPendingFile(null);
+    setUploading(true);
+    try { await onReplace(index, f); }
+    finally { setUploading(false); }
+  };
+
   return (
-    <div className="file-row">
+    <div
+      className="file-row"
+      style={{ position: "relative", outline: dragging ? "2px solid var(--brand)" : "2px solid transparent", outlineOffset: -2, transition: "outline-color 0.15s" }}
+      onDragOver={onReplace ? e => { e.preventDefault(); if (!uploading) setDragging(true); } : undefined}
+      onDragLeave={onReplace ? () => setDragging(false) : undefined}
+      onDrop={onReplace ? e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); } : undefined}
+    >
       <div className="file-row-icon"><i className="fa-solid fa-file-pdf" /></div>
       <div className="file-row-info">
         {editing ? (
@@ -1457,12 +1647,41 @@ function FileRow({ file, index, onRemove, onRename }) {
           {file.url ? file.url.split("/").pop() : ""}
         </a>
       </div>
+      {onReplace && (
+        <button type="button" onClick={() => !uploading && ref.current?.click()} title="Replace" className="file-row-btn" disabled={uploading}>
+          <i className={`fa-solid ${uploading ? "fa-spinner fa-spin" : "fa-arrow-up-from-bracket"}`} />
+        </button>
+      )}
       <button type="button" onClick={() => setEditing(true)} title="Rename" className="file-row-btn file-row-edit">
         <i className="fa-solid fa-pen" />
       </button>
       <button type="button" onClick={() => onRemove(index)} title="Remove" className="file-row-btn file-row-trash">
         <i className="fa-solid fa-trash" />
       </button>
+      {onReplace && (
+        <>
+          <input ref={ref} type="file" accept=".pdf,application/pdf" style={{ display: "none" }} disabled={uploading}
+            onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+          <Confirm
+            open={!!pendingFile}
+            onClose={() => setPendingFile(null)}
+            onConfirm={confirmReplace}
+            title="Replace PDF?"
+            message={`The current file will be permanently deleted and replaced with the new one, kept under the same name ("${file.name}"). This can't be undone.`}
+            confirmLabel="Replace"
+            confirmVariant="primary"
+          />
+        </>
+      )}
+      {dragging && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.75rem", fontWeight: 700, borderRadius: "var(--r)", pointerEvents: "none",
+        }}>
+          Drop to replace
+        </div>
+      )}
     </div>
   );
 }
@@ -3098,6 +3317,25 @@ export default function Products({ currentUser }) {
     setForm(f => ({ ...f, files: f.files.filter((_, idx) => idx !== i) }));
   };
 
+  // Swap an already-uploaded PDF for a new file, in place, keeping its
+  // existing display name (only the file/url changes). The old PDF is
+  // trashed (recoverable for 30 days), not deleted outright.
+  const replaceFile = async (index, file) => {
+    try {
+      const existing = form.files[index];
+      const slug = effectiveSlug(form);
+      const role = `manual-${slugify(existing.name).slice(0, 30)}`;
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role, currentUser });
+      if (existing?.url && existing.url !== url) {
+        await Promise.allSettled([deleteStorageUrls([existing.url]), trashMediaUrls([existing.url], currentUser)]);
+      }
+      setForm(f => ({ ...f, files: f.files.map((fi, idx) => idx === index ? { ...fi, url } : fi) }));
+      add("PDF replaced.", "success");
+    } catch (err) {
+      add("PDF replace failed: " + err.message, "error");
+    }
+  };
+
   // Remove image and trash it (recoverable from admin Trash for 30 days —
   // see setup-media-trash.sql) instead of deleting it right away.
   const removeImageFile = (type, index) => {
@@ -3113,6 +3351,25 @@ export default function Products({ currentUser }) {
       });
     }
     setForm(f => ({ ...f, [type]: f[type].filter((_, idx) => idx !== index) }));
+  };
+
+  // Swap one already-uploaded gallery/spec image for a new file, in place
+  // (same array index/position) — the old image is trashed, not deleted,
+  // same as every other replace in this file. type: "images" | "spec_images".
+  const replaceImageFile = async (type, index, file) => {
+    const role = type === "spec_images" ? "spec" : "gallery";
+    try {
+      const oldUrl = form[type][index];
+      const slug = effectiveSlug(form);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role, currentUser });
+      if (oldUrl && oldUrl !== url) {
+        await Promise.allSettled([deleteStorageUrls([oldUrl]), trashMediaUrls([oldUrl], currentUser)]);
+      }
+      setForm(f => ({ ...f, [type]: f[type].map((u, i) => i === index ? url : u) }));
+      add(`${role === "spec" ? "Spec" : "Gallery"} image replaced.`, "success");
+    } catch (err) {
+      add(err.message, "error");
+    }
   };
 
   // ── Modal guard ────────────────────────────────────────────────────────────
@@ -4142,7 +4399,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Gallery Images" />
               {form.images.length > 0 ? (
                 <>
-                  <SmartImageGallery images={form.images} isSingle onRemove={i => removeImageFile("images", i)} />
+                  <SmartImageGallery images={form.images} isSingle onRemove={i => removeImageFile("images", i)} onReplace={(i, file) => replaceImageFile("images", i, file)} />
                   <AddMoreImagesButton label="Add More Images" uploading={upImgs}
                     onChange={e => e.target.files?.length && uploadMoreImages(Array.from(e.target.files))} />
                 </>
@@ -4215,7 +4472,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Spec / Diagram Images" />
               {form.spec_images.length > 0 ? (
                 <>
-                  <SmartImageGallery images={form.spec_images} isSingle onRemove={i => removeImageFile("spec_images", i)} />
+                  <SmartImageGallery images={form.spec_images} isSingle onRemove={i => removeImageFile("spec_images", i)} onReplace={(i, file) => replaceImageFile("spec_images", i, file)} />
                   <AddMoreImagesButton label="Add More Spec Images" uploading={upSpec}
                     onChange={e => e.target.files?.length && uploadSpecImages(Array.from(e.target.files))} />
                 </>
@@ -4229,7 +4486,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Resources (PDFs)" />
               {form.files.length > 0 ? (
                 <>
-                  <SmartFileDisplay files={form.files} isSingle onRemove={removeFile} onRename={renameFile} />
+                  <SmartFileDisplay files={form.files} isSingle onRemove={removeFile} onRename={renameFile} onReplace={replaceFile} />
                   <AddMorePdfsButton label="Add More PDFs" uploading={upFile}
                     onUploadFile={handleFileUpload} onAddUrl={handleAddPdfUrl} />
                 </>
