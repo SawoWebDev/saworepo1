@@ -2057,6 +2057,8 @@ body {
   text-transform: uppercase;
   color: var(--text-2);
   margin: 0 0 10px;
+  padding-right: 10px;
+  border-right: 1px solid var(--border-light);
   padding-left: 2px;
 }
 
