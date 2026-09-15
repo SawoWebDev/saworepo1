@@ -890,19 +890,120 @@ function AddMoreImagesButton({ label, uploading, onChange }) {
   );
 }
 
-function ImageStrip({ images = [], onRemove }) {
+// One image slot that's both removable AND replaceable in place — click,
+// drag & drop, or Ctrl+V paste a new file directly onto an already-
+// uploaded image to swap it, same pattern as ThumbnailPreview above.
+// onReplace is optional so this keeps working anywhere a caller doesn't
+// wire it up.
+function ReplaceableImage({ url, onReplace, onRemove }) {
+  const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const ref = useRef();
+  const containerRef = useRef();
+
+  const handleFiles = files => {
+    const file = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
+    if (file) setPendingFile(file);
+  };
+  const confirmReplace = async () => {
+    const file = pendingFile;
+    setPendingFile(null);
+    setUploading(true);
+    try { await onReplace(file); }
+    finally { setUploading(false); }
+  };
+  const handlePaste = e => {
+    if (uploading) return;
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let item of items) {
+      if (item.kind === "file" && item.type.startsWith("image/")) {
+        const file = item.getAsFile();
+        if (file) { e.preventDefault(); handleFiles(file); return; }
+      }
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="image-strip-item"
+      style={{
+        position: "relative", outline: dragging ? "2px solid var(--brand)" : "2px solid transparent",
+        outlineOffset: -2, transition: "outline-color 0.15s", cursor: onReplace && !uploading ? "pointer" : "default",
+      }}
+      onMouseEnter={() => { setHovered(true); containerRef.current?.focus(); }}
+      onMouseLeave={() => setHovered(false)}
+      onPaste={onReplace ? handlePaste : undefined}
+      onClick={onReplace ? () => !uploading && ref.current?.click() : undefined}
+      onDragOver={onReplace ? e => { e.preventDefault(); if (!uploading) setDragging(true); } : undefined}
+      onDragLeave={onReplace ? () => setDragging(false) : undefined}
+      onDrop={onReplace ? e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); } : undefined}
+      tabIndex={onReplace ? "0" : undefined}
+      contentEditable={onReplace && hovered && !uploading}
+      suppressContentEditableWarning
+    >
+      <img src={url} alt="" style={{ opacity: uploading ? 0.5 : 1 }} />
+      {dragging && !uploading && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.68rem", fontWeight: 700, textAlign: "center", padding: 4, zIndex: 3,
+        }}>
+          Drop to replace
+        </div>
+      )}
+      {onReplace && hovered && !uploading && !dragging && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.62rem", fontWeight: 600, textAlign: "center", padding: 4, zIndex: 3,
+        }}>
+          Replace
+        </div>
+      )}
+      {uploading && (
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 3 }}>
+          <i className="fa-solid fa-spinner" style={{ color: "var(--brand)", fontSize: "1rem", animation: "spin 1s linear infinite" }} />
+        </div>
+      )}
+      {onRemove && !dragging && !uploading && (
+        <button type="button" className="image-strip-remove" onClick={e => { e.stopPropagation(); onRemove(); }} style={{ zIndex: 4 }}>
+          <i className="fa-solid fa-xmark" />
+        </button>
+      )}
+      {onReplace && (
+        <>
+          <input ref={ref} type="file" accept="image/*" style={{ display: "none" }} disabled={uploading}
+            onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+          <Confirm
+            open={!!pendingFile}
+            onClose={() => setPendingFile(null)}
+            onConfirm={confirmReplace}
+            title="Replace image?"
+            message="The current image will be permanently deleted and replaced with the new one. This can't be undone."
+            confirmLabel="Replace"
+            confirmVariant="primary"
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
+function ImageStrip({ images = [], onRemove, onReplace }) {
   if (!images.length) return null;
   return (
     <div className="image-strip">
       {images.map((url, i) => (
-        <div key={i} className="image-strip-item">
-          <img src={url} alt="" />
-          {onRemove && (
-            <button type="button" className="image-strip-remove" onClick={() => onRemove(i)}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          )}
-        </div>
+        <ReplaceableImage
+          key={i}
+          url={url}
+          onReplace={onReplace ? file => onReplace(i, file) : undefined}
+          onRemove={onRemove ? () => onRemove(i) : undefined}
+        />
       ))}
     </div>
   );
@@ -949,11 +1050,38 @@ function PdfUploader({ onUploadFile, onAddUrl, uploading = false }) {
   );
 }
 
-function FileRow({ file, index, onRemove, onRename }) {
-  const [editing, setEditing] = useState(false);
-  const [name, setName] = useState(file.name);
+// Drag a new PDF onto an already-uploaded one (or click the row) to swap
+// it in place — same click/drag/confirm pattern as ThumbnailPreview above.
+// onReplace is optional so this still works anywhere a caller doesn't wire
+// it up.
+function FileRow({ file, index, onRemove, onRename, onReplace }) {
+  const [editing, setEditing]   = useState(false);
+  const [name, setName]         = useState(file.name);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading]     = useState(false);
+  const ref = useRef();
+
+  const handleFiles = files => {
+    const f = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
+    if (f) setPendingFile(f);
+  };
+  const confirmReplace = async () => {
+    const f = pendingFile;
+    setPendingFile(null);
+    setUploading(true);
+    try { await onReplace(index, f); }
+    finally { setUploading(false); }
+  };
+
   return (
-    <div className="file-row">
+    <div
+      className="file-row"
+      style={{ position: "relative", outline: dragging ? "2px solid var(--brand)" : "2px solid transparent", outlineOffset: -2, transition: "outline-color 0.15s" }}
+      onDragOver={onReplace ? e => { e.preventDefault(); if (!uploading) setDragging(true); } : undefined}
+      onDragLeave={onReplace ? () => setDragging(false) : undefined}
+      onDrop={onReplace ? e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); } : undefined}
+    >
       <div className="file-row-icon"><i className="fa-solid fa-file-pdf" /></div>
       <div className="file-row-info">
         {editing
@@ -966,8 +1094,37 @@ function FileRow({ file, index, onRemove, onRename }) {
           {file.url ? file.url.split("/").pop() : ""}
         </a>
       </div>
+      {onReplace && (
+        <button type="button" onClick={() => !uploading && ref.current?.click()} title="Replace" className="file-row-btn" disabled={uploading}>
+          <i className={`fa-solid ${uploading ? "fa-spinner fa-spin" : "fa-arrow-up-from-bracket"}`} />
+        </button>
+      )}
       <button type="button" onClick={() => setEditing(true)} title="Rename" className="file-row-btn file-row-edit"><i className="fa-solid fa-pen" /></button>
       <button type="button" onClick={() => onRemove(index)} title="Remove" className="file-row-btn file-row-trash"><i className="fa-solid fa-trash" /></button>
+      {onReplace && (
+        <>
+          <input ref={ref} type="file" accept=".pdf,application/pdf" style={{ display: "none" }} disabled={uploading}
+            onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+          <Confirm
+            open={!!pendingFile}
+            onClose={() => setPendingFile(null)}
+            onConfirm={confirmReplace}
+            title="Replace PDF?"
+            message={`The current file will be permanently deleted and replaced with the new one, kept under the same name ("${file.name}"). This can't be undone.`}
+            confirmLabel="Replace"
+            confirmVariant="primary"
+          />
+        </>
+      )}
+      {dragging && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.75rem", fontWeight: 700, borderRadius: "var(--r)", pointerEvents: "none",
+        }}>
+          Drop to replace
+        </div>
+      )}
     </div>
   );
 }
@@ -1826,10 +1983,48 @@ export default function SaunaRooms({ currentUser }) {
     setForm(f => ({ ...f, files: f.files.filter((_, idx) => idx !== i) }));
   };
 
+  // Swap an already-uploaded PDF for a new file, in place, keeping its
+  // existing display name. The old PDF is trashed (recoverable for 30
+  // days), not deleted outright.
+  const replaceFile = async (index, file) => {
+    try {
+      const existing = form.files[index];
+      const slug = effectiveSlug(form);
+      const role = `manual-${slugify(existing.name).slice(0, 30)}`;
+      const url = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role, currentUser });
+      if (existing?.url && existing.url !== url) {
+        await Promise.allSettled([deleteStorageUrls([existing.url]), trashMediaUrls([existing.url], currentUser)]);
+      }
+      setForm(f => ({ ...f, files: f.files.map((fi, idx) => idx === index ? { ...fi, url } : fi) }));
+      add("PDF replaced.", "success");
+    } catch (err) {
+      add("PDF replace failed: " + err.message, "error");
+    }
+  };
+
   const removeImageFile = (field, index) => {
     const url = form[field][index];
     if (url) Promise.allSettled([deleteStorageUrls([url]), trashMediaUrls([url], currentUser)]).catch(console.warn);
     setForm(f => ({ ...f, [field]: f[field].filter((_, idx) => idx !== index) }));
+  };
+
+  // Swap one already-uploaded gallery/spec image for a new file, in place
+  // (same array index/position) — the old image is trashed, not deleted.
+  // field: "images" | "spec_images".
+  const replaceImageFile = async (field, index, file) => {
+    const role = field === "spec_images" ? "spec" : "gallery";
+    try {
+      const oldUrl = form[field][index];
+      const slug = effectiveSlug(form);
+      const url = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role, currentUser });
+      if (oldUrl && oldUrl !== url) {
+        await Promise.allSettled([deleteStorageUrls([oldUrl]), trashMediaUrls([oldUrl], currentUser)]);
+      }
+      setForm(f => ({ ...f, [field]: f[field].map((u, i) => i === index ? url : u) }));
+      add(`${role === "spec" ? "Spec" : "Gallery"} image replaced.`, "success");
+    } catch (err) {
+      add(err.message, "error");
+    }
   };
 
   // ── Modal guard ────────────────────────────────────────────────────────────
@@ -2482,7 +2677,7 @@ export default function SaunaRooms({ currentUser }) {
                   <SectionLabel label="Gallery Images" />
                   {form.images.length > 0 ? (
                     <>
-                      <ImageStrip images={form.images} onRemove={i => removeImageFile("images", i)} />
+                      <ImageStrip images={form.images} onRemove={i => removeImageFile("images", i)} onReplace={(i, file) => replaceImageFile("images", i, file)} />
                       <AddMoreImagesButton label="Add More Images" uploading={upImgs}
                         onChange={e => e.target.files?.length && uploadMoreImages(Array.from(e.target.files))} />
                     </>
@@ -2493,7 +2688,7 @@ export default function SaunaRooms({ currentUser }) {
                   <SectionLabel label="Spec / Diagram Images" />
                   {form.spec_images.length > 0 ? (
                     <>
-                      <ImageStrip images={form.spec_images} onRemove={i => removeImageFile("spec_images", i)} />
+                      <ImageStrip images={form.spec_images} onRemove={i => removeImageFile("spec_images", i)} onReplace={(i, file) => replaceImageFile("spec_images", i, file)} />
                       <AddMoreImagesButton label="Add More Spec Images" uploading={upSpec}
                         onChange={e => e.target.files?.length && uploadSpecImages(Array.from(e.target.files))} />
                     </>
@@ -2504,7 +2699,7 @@ export default function SaunaRooms({ currentUser }) {
                   <SectionLabel label="Files / Resources (PDFs)" />
                   {form.files.length > 0 ? (
                     <div className="file-rows">
-                      {form.files.map((file, i) => <FileRow key={i} file={file} index={i} onRemove={removeFile} onRename={renameFile} />)}
+                      {form.files.map((file, i) => <FileRow key={i} file={file} index={i} onRemove={removeFile} onRename={renameFile} onReplace={replaceFile} />)}
                     </div>
                   ) : null}
                   <PdfUploader onUploadFile={handleFileUpload} onAddUrl={handleAddFileUrl} uploading={upFile} />
