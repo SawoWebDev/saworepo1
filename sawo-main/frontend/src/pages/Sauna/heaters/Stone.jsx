@@ -60,6 +60,7 @@ import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { STONE_FIXED_ORDER, groupStoneProducts } from "../../../utils/stoneGroups";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -70,15 +71,6 @@ function getImageUrl(product, field) {
   if (!path) return null;
   return path;
 }
-
-// ── Fixed group order ─────────────────────────────────────────────────
-const FIXED_ORDER = ["Cumulus", "Nimbus"];
-
-// ── Keywords to detect group membership ───────────────────────────────
-const GROUP_KEYWORDS = {
-  Cumulus: ["Cumulus"],
-  Nimbus: ["Nimbus"],
-};
 
 // ── Filter Stone products dynamically ────────────────────────────────
 function filterStoneProducts(allProducts) {
@@ -98,36 +90,6 @@ function filterStoneProducts(allProducts) {
       name.includes("STONE")
     );
   });
-}
-
-// ── Group products dynamically ───────────────────────────────────────
-function groupProducts(products) {
-  const groupedProducts = products.reduce((groups, product) => {
-    let assigned = false;
-    for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
-      for (const kw of keywords) {
-        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
-        if (nameMatch || tagMatch) {
-          if (!groups[group]) groups[group] = [];
-          groups[group].push(product);
-          assigned = true;
-          break;
-        }
-      }
-      if (assigned) break;
-    }
-
-    // If no match, assign to Other
-    if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
-    }
-
-    return groups;
-  }, {});
-
-  return groupedProducts;
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────────
@@ -195,8 +157,8 @@ const Stone = () => {
   }, [localProds]);
 
   // ── Group and filter products ───────────────────────────────────────────
-  const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
-  const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
+  const groupedProducts = useMemo(() => groupStoneProducts(allProducts), [allProducts]);
+  const groupNames = useMemo(() => STONE_FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
 
   const visibleGroups = activeGroup
     ? groupNames.filter((g) => g === activeGroup)

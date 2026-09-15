@@ -15,6 +15,10 @@ import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, trashMediaUrls, effectiveSlug } from "./mediaUpload";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
 import { FLOOR_FIXED_ORDER, groupFloorProducts } from "../utils/floorGroups";
+import { COMBI_FIXED_ORDER, groupCombiProducts } from "../utils/combiGroups";
+import { TOWER_FIXED_ORDER, groupTowerProducts } from "../utils/towerGroups";
+import { STONE_FIXED_ORDER, groupStoneProducts } from "../utils/stoneGroups";
+import { DRAGONFIRE_FIXED_ORDER, groupDragonfireProducts } from "../utils/dragonfireGroups";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
 
@@ -50,16 +54,18 @@ function getHeaterSubcategories(product) {
   return HEATER_SUBCATEGORIES.filter(s => cats.some(c => s.match(c))).map(s => s.key);
 }
 
-// Wall-Mounted and Floor have well-defined brand families (Nordex, Mini,
-// Scandia... / Helius, Taurus D, Savonia, Nordex) — the live site already
-// breaks both of those out under brand sub-headings instead of one flat
-// grid (see wallMountedGroups.js/floorGroups.js, shared with the public
-// heater pages so admin and live never drift apart). The other 4
-// subcategories (Tower, Stone, Combi, Dragonfire) don't have this second
-// tier and keep rendering as a flat list under their one heading.
+// Every heater subcategory has well-defined brand families — the live site
+// already breaks all of them out under brand sub-headings instead of one
+// flat grid (see wallMountedGroups.js/floorGroups.js/combiGroups.js/
+// towerGroups.js/stoneGroups.js/dragonfireGroups.js, shared with the
+// public heater pages so admin and live never drift apart).
 const HEATER_BRAND_GROUPERS = {
   "wall-mounted": { fixedOrder: WALL_MOUNTED_FIXED_ORDER, group: groupWallMountedProducts },
   "floor":        { fixedOrder: FLOOR_FIXED_ORDER,        group: groupFloorProducts },
+  "combi":        { fixedOrder: COMBI_FIXED_ORDER,        group: groupCombiProducts },
+  "tower":        { fixedOrder: TOWER_FIXED_ORDER,        group: groupTowerProducts },
+  "stone":        { fixedOrder: STONE_FIXED_ORDER,        group: groupStoneProducts },
+  "dragonfire":   { fixedOrder: DRAGONFIRE_FIXED_ORDER,   group: groupDragonfireProducts },
 };
 
 // Returns [{ brand, products }] for a heater subcategory group that has

@@ -59,6 +59,7 @@ import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
+import { DRAGONFIRE_FIXED_ORDER, DRAGONFIRE_GROUP_KEYWORDS, groupDragonfireProducts } from "../../../utils/dragonfireGroups";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -70,17 +71,6 @@ function getImageUrl(product, field) {
   return path;
 }
 
-// ── Fixed group order ─────────────────────────────────────────────────
-const FIXED_ORDER = ["Heaterking", "Fiberjungle", "Scandifire", "Minidragon"];
-
-// ── Keywords to detect group membership ────────────────────────────────
-const GROUP_KEYWORDS = {
-  Heaterking: ["Heaterking"],
-  Fiberjungle: ["Fiberjungle"],
-  Scandifire: ["Scandifire"],
-  Minidragon: ["Minidragon"],
-};
-
 // ── Filter Dragonfire products dynamically ────────────────────────────
 function filterDragonfireProducts(allProducts) {
   return allProducts.filter((p) => {
@@ -91,37 +81,12 @@ function filterDragonfireProducts(allProducts) {
       p.categories?.includes("Dragonfire") ||
       p.name?.toLowerCase().includes("dragonfire") ||
       // Also include any product whose tags/name match one of the dragonfire group keywords
-      Object.values(GROUP_KEYWORDS).flat().some(kw =>
+      Object.values(DRAGONFIRE_GROUP_KEYWORDS).flat().some(kw =>
         p.name?.toLowerCase().includes(kw.toLowerCase()) ||
         p.tags?.some(t => t.toLowerCase().includes(kw.toLowerCase()))
       )
     );
   });
-}
-
-// ── Group products dynamically ───────────────────────────────────────
-function groupProducts(products) {
-  return products.reduce((groups, product) => {
-    let assigned = false;
-    for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
-      for (const kw of keywords) {
-        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
-        if (nameMatch || tagMatch) {
-          if (!groups[group]) groups[group] = [];
-          groups[group].push(product);
-          assigned = true;
-          break;
-        }
-      }
-      if (assigned) break;
-    }
-    if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
-    }
-    return groups;
-  }, {});
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────────
@@ -188,8 +153,8 @@ const Dragonfire = () => {
     return filterDragonfireProducts(visible);
   }, [localProds]);
 
-  const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
-  const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
+  const groupedProducts = useMemo(() => groupDragonfireProducts(allProducts), [allProducts]);
+  const groupNames = useMemo(() => DRAGONFIRE_FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
 
   const visibleGroups = activeGroup
     ? groupNames.filter((g) => g === activeGroup)
