@@ -1,5 +1,12 @@
 -- ============================================================
 -- SAWO: Media Trash — Supabase Setup
+-- ALREADY APPLIED to sawo-react (qsdfdfuooeythaioucpx) on 2026-09-16 —
+-- acting as Rafael (superadmin, 3884cdf9-51c4-47de-9c2e-f0f2381117a0).
+-- Columns, index, function, and cron job all confirmed live. This file is
+-- kept as the record of what was run (and is safe to re-run — every
+-- statement in it is idempotent) rather than something that still needs
+-- doing; do not restore the placeholder-UUID guard below.
+--
 -- Adds soft-delete tracking to media_upload_log so replacing/removing an
 -- image in the CMS (Products.jsx, SaunaRoomsCMS.jsx) marks it trashed
 -- instead of the app immediately, permanently deleting it from R2. A
@@ -50,15 +57,15 @@ CREATE INDEX IF NOT EXISTS media_upload_log_active_trash_idx
 -- requireUploader() check every interactive delete already goes through;
 -- see functions/api/media-upload.js). Rather than invent a second, weaker
 -- auth path just for this scheduled job, it acts as one specific real
--- admin account. Replace the placeholder below with that account's own
--- users.id before running this file:
---   SELECT id, username, role FROM users WHERE role IN ('admin','superadmin') LIMIT 5;
--- Any admin/superadmin works — this only identifies WHO the scheduled
--- purge is attributed to in media_upload_log/activity logs, same as any
--- other delete.
+-- admin account — Rafael (superadmin). Any admin/superadmin would work;
+-- this only identifies WHO the scheduled purge is attributed to in
+-- media_upload_log/activity logs, same as any other delete. To act as a
+-- different account instead, update purge_actor_id in both places below
+-- (the DO block is just a startup guard, not a separate identity) via
+-- `SELECT id, username, role FROM users WHERE role IN ('admin','superadmin')`.
 DO $$
 DECLARE
-  purge_actor_id uuid := '00000000-0000-0000-0000-000000000000'; -- ← replace me
+  purge_actor_id uuid := '3884cdf9-51c4-47de-9c2e-f0f2381117a0';
 BEGIN
   IF purge_actor_id = '00000000-0000-0000-0000-000000000000' THEN
     RAISE EXCEPTION 'setup-media-trash.sql: replace purge_actor_id with a real admin/superadmin users.id before running this block.';
@@ -69,7 +76,7 @@ CREATE OR REPLACE FUNCTION purge_expired_media_trash() RETURNS void
 LANGUAGE plpgsql
 AS $$
 DECLARE
-  purge_actor_id uuid := '00000000-0000-0000-0000-000000000000'; -- ← same id as above
+  purge_actor_id uuid := '3884cdf9-51c4-47de-9c2e-f0f2381117a0'; -- Rafael, superadmin
   row_ RECORD;
 BEGIN
   FOR row_ IN
