@@ -150,7 +150,10 @@
       }
     },
     "viewAll": "查看全部加热器",
-    "viewAllPrompt": "想找点不一样的？看看我们的其他加热器。"
+    "promo": {
+      "title": "找到您的理想加热器",
+      "subtitle": "浏览我们超过 100 款加热器型号，找到最适合您桑拿房的那一款"
+    }
   },
   "accessoriesPage": {
     "meta": {

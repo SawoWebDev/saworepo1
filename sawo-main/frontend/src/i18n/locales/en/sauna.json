@@ -150,7 +150,10 @@
       }
     },
     "viewAll": "VIEW ALL HEATERS",
-    "viewAllPrompt": "Looking for something different? Check out our other heaters."
+    "promo": {
+      "title": "Find Your Perfect Heater",
+      "subtitle": "Explore our full range of over 100 heater models and discover the one made for your sauna"
+    }
   },
   "accessoriesPage": {
     "meta": {

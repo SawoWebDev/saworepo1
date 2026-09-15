@@ -150,7 +150,10 @@
       }
     },
     "viewAll": "KATSO KAIKKI KIUKAAT",
-    "viewAllPrompt": "Etsitkö jotain muuta? Tutustu muihin kiuaisiimme."
+    "promo": {
+      "title": "Löydä täydellinen kiuas",
+      "subtitle": "Tutustu yli 100 kiuasmallin valikoimaamme ja löydä juuri saunallesi sopiva"
+    }
   },
   "accessoriesPage": {
     "meta": {

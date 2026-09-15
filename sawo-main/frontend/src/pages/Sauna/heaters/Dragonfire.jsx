@@ -313,10 +313,9 @@ const Dragonfire = () => {
       </section>
 
       <PromoBanner
-        title={t("dragonfirePage.promo.title")}
-        subtitle={t("dragonfirePage.promo.subtitle")}
+        title={t("heatersPage.promo.title")}
+        subtitle={t("heatersPage.promo.subtitle")}
         image={bannerImg}
-        ctaPrompt={t("heatersPage.viewAllPrompt")}
         ctaLabel={t("heatersPage.viewAll")}
         ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />

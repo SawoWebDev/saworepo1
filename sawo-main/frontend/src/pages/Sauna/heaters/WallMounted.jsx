@@ -509,10 +509,9 @@ export default function WallMounted() {
       </section>
 
       <PromoBanner
-        title={t("wallMountedPage.promo.title")}
-        subtitle={t("wallMountedPage.promo.subtitle")}
+        title={t("heatersPage.promo.title")}
+        subtitle={t("heatersPage.promo.subtitle")}
         image={bannerImg}
-        ctaPrompt={t("heatersPage.viewAllPrompt")}
         ctaLabel={t("heatersPage.viewAll")}
         ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
