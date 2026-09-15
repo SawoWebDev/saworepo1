@@ -103,6 +103,7 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
+import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/wall-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -483,9 +484,7 @@ export default function WallMounted() {
       </section>
 
       {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={menuPaths.heaters} className="wm-brochure-btn">VIEW ALL HEATERS</Link>
-      </section>
+      <ViewAllHeatersBanner />
 
       {/* ── WHY SAWO ─────────────────────────────────────────────────────── */}
       <section className="wm-section">
