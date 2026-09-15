@@ -161,11 +161,27 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
   const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(items, { initialPageSize: 25 });
 
   return (
-    <div className="card card-body" style={{ padding: 0, marginBottom: 24 }}>
-      <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
-        <i className={`fa-solid ${icon}`} style={{ color: "var(--brand)" }} />
-        <h3 style={{ margin: 0, fontSize: "0.95rem", fontWeight: 700, color: "var(--text)" }}>{title}</h3>
-        <span className="tbl-pill" style={{ marginLeft: 4 }}>{items.length}</span>
+    <div className="cms-scroll-page">
+      {/* Header row: count on the left, rows-per-page + page nav on the
+          right — replaces both the old title bar above the table and the
+          "Showing X-Y of Z" summary bar below it with one compact row. */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginBottom: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <i className={`fa-solid ${icon}`} style={{ color: "var(--brand)" }} />
+          <span className="tbl-pill">{items.length}</span>
+        </div>
+        {!loading && items.length > 0 && (
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            itemLabel={title.toLowerCase()}
+            hideSummary
+          />
+        )}
       </div>
 
       {loading ? (
@@ -175,7 +191,8 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
       ) : items.length === 0 ? (
         <div className="table-empty" style={{ padding: 24 }}>{emptyLabel}</div>
       ) : (
-        <div className="products-table-wrap" style={{ border: "none", borderRadius: 0 }}>
+        <ScrollArea>
+        <div className="products-table-wrap">
           <table className="products-table">
             <thead>
               <tr>
@@ -234,20 +251,7 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
             </tbody>
           </table>
         </div>
-      )}
-
-      {!loading && items.length > 0 && (
-        <div style={{ padding: "0 20px 16px" }}>
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            totalCount={totalCount}
-            pageSize={pageSize}
-            onPageChange={setPage}
-            onPageSizeChange={setPageSize}
-            itemLabel={title.toLowerCase()}
-          />
-        </div>
+        </ScrollArea>
       )}
 
       <Modal open={!!purgeTarget} onClose={() => setPurgeTarget(null)} title="Delete Forever?">
@@ -355,11 +359,24 @@ function MediaTrashSection({ currentUser, addToast }) {
   const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(items, { initialPageSize: 24 });
 
   return (
-    <div className="card card-body" style={{ padding: 0, marginBottom: 24 }}>
-      <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
-        <i className="fa-solid fa-image" style={{ color: "var(--brand)" }} />
-        <h3 style={{ margin: 0, fontSize: "0.95rem", fontWeight: 700, color: "var(--text)" }}>Media</h3>
-        <span className="tbl-pill" style={{ marginLeft: 4 }}>{items.length}</span>
+    <div className="cms-scroll-page">
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginBottom: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <i className="fa-solid fa-image" style={{ color: "var(--brand)" }} />
+          <span className="tbl-pill">{items.length}</span>
+        </div>
+        {!loading && items.length > 0 && (
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            itemLabel="image"
+            hideSummary
+          />
+        )}
       </div>
 
       {loading ? (
@@ -369,7 +386,8 @@ function MediaTrashSection({ currentUser, addToast }) {
       ) : items.length === 0 ? (
         <div className="table-empty" style={{ padding: 24 }}>No trashed images.</div>
       ) : (
-        <div style={{ padding: 16, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 14 }}>
+        <ScrollArea>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 14 }}>
           {pageItems.map(item => {
             const left = daysLeft(item.trashed_at);
             return (
@@ -403,20 +421,7 @@ function MediaTrashSection({ currentUser, addToast }) {
             );
           })}
         </div>
-      )}
-
-      {!loading && items.length > 0 && (
-        <div style={{ padding: "0 20px 16px" }}>
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            totalCount={totalCount}
-            pageSize={pageSize}
-            onPageChange={setPage}
-            onPageSizeChange={setPageSize}
-            itemLabel="image"
-          />
-        </div>
+        </ScrollArea>
       )}
 
       <Modal open={!!purgeTarget} onClose={() => setPurgeTarget(null)} title="Delete Forever?">
@@ -434,6 +439,7 @@ function MediaTrashSection({ currentUser, addToast }) {
 }
 
 export default function Trash({ currentUser }) {
+  const [tab, setTab] = useState("media");
   const [toasts, setToasts] = useState([]);
   const addToast = (message, type = "info") => {
     const id = Date.now();
@@ -446,15 +452,20 @@ export default function Trash({ currentUser }) {
     <div className="cms-scroll-page">
       <Toast toasts={toasts} remove={removeToast} />
 
-      <p style={{ fontSize: "0.85rem", color: "var(--text-2)", margin: "0 0 20px", maxWidth: 720 }}>
-        Deleting a product, sauna room, or a single image (Featured/OG/gallery/spec/variant photos — replacing
-        one counts too, not just removing it) moves it here instead of removing it right away. Anything sitting in
-        Trash for {TRASH_DAYS} days gets permanently deleted automatically — restore it before then if it was a
-        mistake, or delete it forever yourself to skip the wait. Restoring a Featured/OG image swaps it back in:
-        whatever's currently there goes to Trash in its place.
-      </p>
+      <div className="tax-tabs" style={{ marginBottom: 16 }}>
+        <button type="button" className={`tax-tab-btn${tab === "media" ? " active" : ""}`} onClick={() => setTab("media")}>
+          <i className="fa-solid fa-image" /> Media
+        </button>
+        <button type="button" className={`tax-tab-btn${tab === "products" ? " active" : ""}`} onClick={() => setTab("products")}>
+          <i className="fa-solid fa-box" /> Products
+        </button>
+        <button type="button" className={`tax-tab-btn${tab === "rooms" ? " active" : ""}`} onClick={() => setTab("rooms")}>
+          <i className="fa-solid fa-home" /> Sauna Rooms
+        </button>
+      </div>
 
-      <ScrollArea>
+      {tab === "media" && <MediaTrashSection currentUser={currentUser} addToast={addToast} />}
+      {tab === "products" && (
         <TrashSection
           title="Products"
           icon="fa-box"
@@ -464,6 +475,8 @@ export default function Trash({ currentUser }) {
           currentUser={currentUser}
           addToast={addToast}
         />
+      )}
+      {tab === "rooms" && (
         <TrashSection
           title="Sauna Rooms"
           icon="fa-home"
@@ -473,8 +486,7 @@ export default function Trash({ currentUser }) {
           currentUser={currentUser}
           addToast={addToast}
         />
-        <MediaTrashSection currentUser={currentUser} addToast={addToast} />
-      </ScrollArea>
+      )}
     </div>
   );
 }
