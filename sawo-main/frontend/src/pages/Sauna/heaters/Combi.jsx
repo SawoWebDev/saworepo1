@@ -53,7 +53,6 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
-import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/combi-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -298,9 +297,6 @@ const Combi = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <ViewAllHeatersBanner />
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -334,6 +330,9 @@ const Combi = () => {
         title={t("combiPage.promo.title")}
         subtitle={t("combiPage.promo.subtitle")}
         image={bannerImg}
+        ctaPrompt={t("heatersPage.viewAllPrompt")}
+        ctaLabel={t("heatersPage.viewAll")}
+        ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
     </div>
   );

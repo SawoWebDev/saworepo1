@@ -103,7 +103,6 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
-import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/wall-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -245,6 +244,7 @@ export default function WallMounted() {
   const { products: localProds, loading } = useLocalProducts();
   const t = useLocaleT("sauna");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
 
   const [search, setSearch] = useState("");
   const [activeGroup, setActiveGroup] = useState(null);
@@ -482,9 +482,6 @@ export default function WallMounted() {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <ViewAllHeatersBanner />
-
       {/* ── WHY SAWO ─────────────────────────────────────────────────────── */}
       <section className="wm-section">
         <div className="wm-container">
@@ -515,6 +512,9 @@ export default function WallMounted() {
         title={t("wallMountedPage.promo.title")}
         subtitle={t("wallMountedPage.promo.subtitle")}
         image={bannerImg}
+        ctaPrompt={t("heatersPage.viewAllPrompt")}
+        ctaLabel={t("heatersPage.viewAll")}
+        ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
     </div>
   );

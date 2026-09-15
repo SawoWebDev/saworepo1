@@ -49,7 +49,6 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
-import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/floor-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -289,9 +288,6 @@ const Floor = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <ViewAllHeatersBanner />
-
       {/* WHY SAWO + CIRCLES */}
       <section className="wm-section">
         <div className="wm-container">
@@ -324,6 +320,9 @@ const Floor = () => {
         title={t("floorPage.promo.title")}
         subtitle={t("floorPage.promo.subtitle")}
         image={bannerImg}
+        ctaPrompt={t("heatersPage.viewAllPrompt")}
+        ctaLabel={t("heatersPage.viewAll")}
+        ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
     </div>
   );

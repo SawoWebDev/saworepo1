@@ -50,7 +50,6 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
-import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/dragonfire-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -295,9 +294,6 @@ const Dragonfire = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <ViewAllHeatersBanner />
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -320,6 +316,9 @@ const Dragonfire = () => {
         title={t("dragonfirePage.promo.title")}
         subtitle={t("dragonfirePage.promo.subtitle")}
         image={bannerImg}
+        ctaPrompt={t("heatersPage.viewAllPrompt")}
+        ctaLabel={t("heatersPage.viewAll")}
+        ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
     </div>
   );

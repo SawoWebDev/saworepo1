@@ -150,8 +150,7 @@
       }
     },
     "viewAll": "KATSO KAIKKI KIUKAAT",
-    "viewAllTitle": "Etsitkö jotain muuta?",
-    "viewAllSub": "Tutustu muihin kiuaisiimme — selaa SAWOn koko kiuasvalikoimaa."
+    "viewAllPrompt": "Etsitkö jotain muuta? Tutustu muihin kiuaisiimme."
   },
   "accessoriesPage": {
     "meta": {

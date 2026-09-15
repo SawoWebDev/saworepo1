@@ -50,7 +50,6 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
-import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/tower-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -160,6 +159,7 @@ const Tower = () => {
   const { products: localProds, loading } = useLocalProducts();
   const t = useLocaleT("sauna");
   const tc = useLocaleT("common");
+  const localize = useLocalizedPath();
   const [activeGroup, setActiveGroup] = useState(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [activeType,  setActiveType]  = useState("All");
@@ -315,9 +315,6 @@ const Tower = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <ViewAllHeatersBanner />
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -340,6 +337,9 @@ const Tower = () => {
         title={t("towerPage.promo.title")}
         subtitle={t("towerPage.promo.subtitle")}
         image={bannerImg}
+        ctaPrompt={t("heatersPage.viewAllPrompt")}
+        ctaLabel={t("heatersPage.viewAll")}
+        ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
     </div>
   );
