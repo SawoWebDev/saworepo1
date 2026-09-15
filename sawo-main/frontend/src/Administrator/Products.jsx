@@ -1088,6 +1088,7 @@ function ReplaceableImage({ url, onReplace, onRemove, className, removeClassName
           position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", color: "#fff",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: "0.7rem", fontWeight: 700, textAlign: "center", padding: 4, zIndex: 3,
+          pointerEvents: "none",
         }}>
           Drop to replace
         </div>
@@ -1097,12 +1098,13 @@ function ReplaceableImage({ url, onReplace, onRemove, className, removeClassName
           position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", color: "#fff",
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: "0.65rem", fontWeight: 600, textAlign: "center", padding: 4, zIndex: 3,
+          pointerEvents: "none",
         }}>
           Replace
         </div>
       )}
       {uploading && (
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 3 }}>
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 3, pointerEvents: "none" }}>
           <i className="fa-solid fa-spinner" style={{ color: "var(--brand)", fontSize: "1.1rem", animation: "spin 1s linear infinite" }} />
         </div>
       )}
