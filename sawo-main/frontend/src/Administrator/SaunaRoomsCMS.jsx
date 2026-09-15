@@ -745,27 +745,46 @@ function ThumbnailUploader({ onUpload, uploading }) {
   );
 }
 
+// Replacing here (click, drag & drop, or paste) permanently deletes the old
+// file from storage — a dropped file is easy to miss-target, so every
+// replacement path funnels through pendingFile + Confirm before swapping.
 function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
   const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
   const replaceRef = useRef(); const containerRef = useRef();
   const handlePaste = e => {
     if (uploading) return;
     const items = e.clipboardData?.items; if (!items) return;
-    for (let item of items) { if (item.kind === "file" && item.type.startsWith("image/")) { const f = item.getAsFile(); if (f) { e.preventDefault(); onReplace(f); return; } } }
+    for (let item of items) { if (item.kind === "file" && item.type.startsWith("image/")) { const f = item.getAsFile(); if (f) { e.preventDefault(); setPendingFile(f); return; } } }
   };
   return (
     <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
-      <div ref={containerRef} style={{ position: "relative", display: "inline-block", outline: "none", cursor: !uploading ? "pointer" : "default" }}
+      <div ref={containerRef} style={{
+        position: "relative", display: "inline-block", outline: "none",
+        cursor: !uploading ? "pointer" : "default",
+        borderRadius: "var(--r)",
+        border: dragging ? "2px solid var(--brand)" : "2px solid transparent",
+        transition: "border-color 0.15s",
+      }}
         onMouseEnter={() => { setHovered(true); containerRef.current?.focus(); }}
         onMouseLeave={() => setHovered(false)}
         onPaste={handlePaste}
         onClick={() => !uploading && replaceRef.current?.click()}
+        onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={e => { e.preventDefault(); setDragging(false); if (!uploading && e.dataTransfer.files[0]) setPendingFile(e.dataTransfer.files[0]); }}
         tabIndex="0"
         contentEditable={hovered && !uploading}
         suppressContentEditableWarning
       >
-        <img src={url} alt="Thumbnail" style={{ display: "block", maxHeight: 220, maxWidth: "100%", borderRadius: "var(--r)", objectFit: "contain", opacity: uploading ? 0.5 : hovered ? 0.8 : 1, transition: "opacity 0.18s" }} />
-        {hovered && !uploading && (
+        <img src={url} alt="Thumbnail" style={{ display: "block", maxHeight: 220, maxWidth: "100%", borderRadius: "calc(var(--r) - 2px)", objectFit: "contain", opacity: uploading ? 0.5 : (hovered || dragging) ? 0.8 : 1, transition: "opacity 0.18s" }} />
+        {dragging && !uploading && (
+          <div style={{ position: "absolute", inset: 0, borderRadius: "calc(var(--r) - 2px)", background: "rgba(0,0,0,0.7)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 700, zIndex: 11, pointerEvents: "none" }}>
+            <i className="fa-solid fa-arrow-down-to-bracket" style={{ marginRight: 8 }} />Drop to replace
+          </div>
+        )}
+        {hovered && !uploading && !dragging && (
           <>
             <button type="button" onClick={e => { e.stopPropagation(); onRemove(); }} style={{ position: "absolute", top: 8, right: 8, width: 28, height: 28, borderRadius: "50%", background: "rgba(0,0,0,0.65)", color: "#fff", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.8rem", zIndex: 10 }}>
               <i className="fa-solid fa-xmark" />
@@ -776,8 +795,17 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
           </>
         )}
         <input ref={replaceRef} type="file" accept="image/*" style={{ display: "none" }}
-          onChange={e => { if (e.target.files[0]) { onReplace(e.target.files[0]); e.target.value = ""; } }} />
+          onChange={e => { if (e.target.files[0]) { setPendingFile(e.target.files[0]); e.target.value = ""; } }} />
       </div>
+      <Confirm
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        onConfirm={() => { onReplace(pendingFile); setPendingFile(null); }}
+        title="Replace thumbnail?"
+        message="The current thumbnail will be permanently deleted and replaced with the new one. This can't be undone."
+        confirmLabel="Replace"
+        confirmVariant="primary"
+      />
     </div>
   );
 }
