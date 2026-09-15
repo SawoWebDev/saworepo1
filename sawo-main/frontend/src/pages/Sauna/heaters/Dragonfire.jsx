@@ -50,7 +50,6 @@ import { useLocalProducts } from "../../../Administrator/Local/useLocalProducts"
 import BrochureDropdownButton from "../../../components/Buttons/BrochureDropdownButton";
 import CirclesInfo from "../../../components/CirclesInfo";
 import menuPaths from "../../../menuPaths";
-import ViewAllHeatersBanner from "./ViewAllHeatersBanner";
 import heroImg from "../../../assets/Sauna/Sauna Heaters/dragonfire-hero.webp";
 import bannerImg from "../../../assets/Sauna/Sauna Heaters/heater-banner.webp";
 import "./heaters.css";
@@ -293,9 +292,6 @@ const Dragonfire = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <ViewAllHeatersBanner />
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -318,6 +314,9 @@ const Dragonfire = () => {
         title="Experience Ultimate Relaxation"
         subtitle="Find your source of serenity from over 100 heater models"
         image={bannerImg}
+        ctaPrompt="Looking for something different? Check out our other heaters."
+        ctaLabel="VIEW ALL HEATERS"
+        ctaTo={menuPaths.sauna.heaters.parent}
       />
     </div>
   );
