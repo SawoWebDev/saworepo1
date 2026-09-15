@@ -2065,12 +2065,13 @@ body {
 /* Trailing rule filling the rest of the row after the text — same color
    as the label text itself, not a border on the label (which, as a
    full-width block, would just sit invisibly at the far edge of its
-   container). */
+   container). Solid where it meets the text, fading to nothing toward
+   the far right instead of a flat bar. */
 .product-brand-label::after {
   content: "";
   flex: 1;
   height: 2px;
-  background: var(--text-2);
+  background: linear-gradient(to right, var(--text-2), transparent);
   opacity: 0.35;
 }
 
