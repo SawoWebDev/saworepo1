@@ -13,6 +13,8 @@ import CsvImportModal from "./csv/CsvImportModal";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
 import { uploadFileToR2, trashMediaUrls, effectiveSlug } from "./mediaUpload";
+import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
+import { FLOOR_FIXED_ORDER, groupFloorProducts } from "../utils/floorGroups";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
 
@@ -33,11 +35,50 @@ const HEATER_SUBCATEGORIES = [
   { key: "combi",        label: "Combi",        match: c => c.toLowerCase() === "combi" },
   { key: "dragonfire",   label: "Dragonfire",   match: c => c.toLowerCase() === "dragonfire" },
 ];
-function getHeaterSubcategory(product) {
+// A heater product can genuinely belong to more than one subcategory at
+// once — a Combi heater is also tagged Wall-Mounted/Floor/Stones (its
+// physical form), by design, so it correctly shows on BOTH that series'
+// live page and the Combi page. Returns every matching key, not just one —
+// picking only the first (in HEATER_SUBCATEGORIES order) was the actual
+// bug behind "Combi only shows 1 product": a Combi heater tagged
+// ["Floor","Combi"] got claimed by "floor" (checked first) and never
+// reached "combi" at all, for every Combi product except the one with no
+// secondary category (Taurus D Combi NS, tagged ["Combi"] alone).
+function getHeaterSubcategories(product) {
   const cats = product?.categories;
-  if (!Array.isArray(cats)) return null;
-  const sub = HEATER_SUBCATEGORIES.find(s => cats.some(c => s.match(c)));
-  return sub ? sub.key : null;
+  if (!Array.isArray(cats)) return [];
+  return HEATER_SUBCATEGORIES.filter(s => cats.some(c => s.match(c))).map(s => s.key);
+}
+
+// Wall-Mounted and Floor have well-defined brand families (Nordex, Mini,
+// Scandia... / Helius, Taurus D, Savonia, Nordex) — the live site already
+// breaks both of those out under brand sub-headings instead of one flat
+// grid (see wallMountedGroups.js/floorGroups.js, shared with the public
+// heater pages so admin and live never drift apart). The other 4
+// subcategories (Tower, Stone, Combi, Dragonfire) don't have this second
+// tier and keep rendering as a flat list under their one heading.
+const HEATER_BRAND_GROUPERS = {
+  "wall-mounted": { fixedOrder: WALL_MOUNTED_FIXED_ORDER, group: groupWallMountedProducts },
+  "floor":        { fixedOrder: FLOOR_FIXED_ORDER,        group: groupFloorProducts },
+};
+
+// Returns [{ brand, products }] for a heater subcategory group that has
+// brand sub-headings, or null for one that doesn't (caller renders that
+// flat, same as before).
+function getBrandSubgroups(subcatKey, products) {
+  const grouper = HEATER_BRAND_GROUPERS[subcatKey];
+  if (!grouper) return null;
+  const grouped = grouper.group(products);
+  const ordered = grouper.fixedOrder.filter(brand => grouped[brand]?.length);
+  // The admin has to see EVERY matching product regardless of what the
+  // live site chooses to display — e.g. Krios is deliberately left out of
+  // FLOOR_FIXED_ORDER because the public Floor page no longer shows it,
+  // but an admin still needs to find it here to edit/reactivate/delete it.
+  // Any brand key the grouper produced that isn't in fixedOrder (Krios,
+  // the catch-all "Other", or anything future) gets appended at the end
+  // instead of silently vanishing from this list.
+  const leftover = Object.keys(grouped).filter(brand => !grouper.fixedOrder.includes(brand));
+  return [...ordered, ...leftover].map(brand => ({ brand, products: grouped[brand] }));
 }
 
 // The 10 accessory subcategories, in the fixed display order requested for
@@ -3701,9 +3742,9 @@ export default function Products({ currentUser }) {
       if (activeAccessorySubcats.length > 0 && !activeAccessorySubcats.includes(sub)) return false;
     }
     if (quickFilter === "heaters") {
-      const sub = getHeaterSubcategory(p);
-      if (!sub) return false;
-      if (activeHeaterSubcats.length > 0 && !activeHeaterSubcats.includes(sub)) return false;
+      const subs = getHeaterSubcategories(p);
+      if (subs.length === 0) return false;
+      if (activeHeaterSubcats.length > 0 && !subs.some(s => activeHeaterSubcats.includes(s))) return false;
     }
 
     if (!search) return true;
@@ -3735,7 +3776,7 @@ export default function Products({ currentUser }) {
   const heaterGroups = quickFilter === "heaters"
     ? HEATER_SUBCATEGORIES
         .filter(sub => activeHeaterSubcats.length === 0 || activeHeaterSubcats.includes(sub.key))
-        .map(sub => ({ ...sub, products: filtered.filter(p => getHeaterSubcategory(p) === sub.key) }))
+        .map(sub => ({ ...sub, products: filtered.filter(p => getHeaterSubcategories(p).includes(sub.key)) }))
         .filter(group => group.products.length > 0)
     : null;
 
@@ -3902,14 +3943,28 @@ export default function Products({ currentUser }) {
                 No products match this filter.
               </div>
             )}
-            {groups.map(group => (
-              <div key={group.key} style={{ marginBottom: 28 }}>
-                <h3 className="product-group-label">{group.label}</h3>
-                <div className="product-grid">
-                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
+            {groups.map(group => {
+              const brandSubgroups = getBrandSubgroups(group.key, group.products);
+              return (
+                <div key={group.key} style={{ marginBottom: 28 }}>
+                  <h3 className="product-group-label">{group.label}</h3>
+                  {brandSubgroups ? (
+                    brandSubgroups.map(({ brand, products }) => (
+                      <div key={brand} style={{ marginBottom: 18 }}>
+                        <h4 className="product-brand-label">{brand.toUpperCase()}</h4>
+                        <div className="product-grid">
+                          {products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="product-grid">
+                      {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={setPreviewProduct} perms={perms} />)}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </ScrollArea>
         ) : (
           <>
@@ -4045,16 +4100,32 @@ export default function Products({ currentUser }) {
                     groups.length === 0 ? (
                       <tr><td colSpan={colCount} className="table-empty">No products match this filter.</td></tr>
                     ) : (
-                      groups.map(group => (
-                        <React.Fragment key={group.key}>
-                          <tr>
-                            <td colSpan={colCount} className="product-group-label" style={{ background: "var(--surface-2)", padding: "8px 12px" }}>
-                              {group.label}
-                            </td>
-                          </tr>
-                          {group.products.map(renderRow)}
-                        </React.Fragment>
-                      ))
+                      groups.map(group => {
+                        const brandSubgroups = getBrandSubgroups(group.key, group.products);
+                        return (
+                          <React.Fragment key={group.key}>
+                            <tr>
+                              <td colSpan={colCount} className="product-group-label" style={{ background: "var(--surface-2)", padding: "8px 12px" }}>
+                                {group.label}
+                              </td>
+                            </tr>
+                            {brandSubgroups ? (
+                              brandSubgroups.map(({ brand, products }) => (
+                                <React.Fragment key={brand}>
+                                  <tr>
+                                    <td colSpan={colCount} className="product-brand-label" style={{ padding: "6px 12px 6px 24px" }}>
+                                      {brand.toUpperCase()}
+                                    </td>
+                                  </tr>
+                                  {products.map(renderRow)}
+                                </React.Fragment>
+                              ))
+                            ) : (
+                              group.products.map(renderRow)
+                            )}
+                          </React.Fragment>
+                        );
+                      })
                     )
                   ) : (
                     <>
