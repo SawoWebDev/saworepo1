@@ -24,7 +24,11 @@ export const WALL_MOUNTED_GROUP_KEYWORDS = {
   "Nordex":            ["Nordex", "NRN-"],
   "Mini Combi":        ["Mini Combi", "MNC"],
   "Mini X":            ["Mini X", "MX "],
-  "Mini":              ["Mini NB", "MN "],
+  // "Mini NB"/"MN " alone missed "Mini Fibercoated NB" — "Fibercoated"
+  // breaks up the "Mini NB" substring in the name, and its SKU tags use
+  // hyphens ("MN-23NB-P-F") not the space "MN " was matching on — so it
+  // fell through to "Other" instead of joining plain "Mini NB" here.
+  "Mini":              ["Mini NB", "Mini Fibercoated", "MN "],
   "Scandifire":        ["Scandifire"],
   "Scandia Combi":     ["Scandia Combi", "SCAC"],
   "Scandia":           ["Scandia", "SCA-"],
