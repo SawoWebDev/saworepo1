@@ -6,7 +6,7 @@ import DataSourceBadge from "./DataSourceBadge";
 import { getCache, setCache } from "./adminCache";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
-import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
+import { uploadFileToR2, trashMediaUrls, effectiveSlug } from "./mediaUpload";
 import { processPastedTableHTML } from "../utils/cleanTableHTML";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
@@ -143,14 +143,24 @@ async function deleteStorageUrls(urls = []) {
   );
 }
 
+// Matches either a legacy Supabase Storage url (parseStorageUrl, handled
+// by deleteStorageUrls) or a current R2 url (/media/..., handled by
+// trashMediaUrls) — this sweep is a safety net for whatever the specific
+// upload/remove handlers above didn't already catch, so it shouldn't be
+// narrower than what those handlers themselves can act on.
+function isTrashableUrl(url) {
+  return parseStorageUrl(url) !== null || /\/media\/.+/.test(String(url || ""));
+}
+
 function findOrphanedUrls(savedForm, currentForm) {
   const collect = f => [
     f.thumbnail,
+    f.og_image,
     ...(f.images      || []),
     ...(f.spec_images || []),
     ...(f.files       || []).map(fi => fi?.url),
     ...(f.resources   || []).map(fi => fi?.url),
-  ].filter(Boolean).filter(url => parseStorageUrl(url) !== null);
+  ].filter(Boolean).filter(isTrashableUrl);
   const savedSet   = new Set(collect(savedForm));
   const currentSet = new Set(collect(currentForm));
   return [...savedSet].filter(url => !currentSet.has(url));
@@ -1743,7 +1753,7 @@ export default function SaunaRooms({ currentUser }) {
     setUpThumb(true);
     try {
       const slug = effectiveSlug(form);
-      if (form.thumbnail) await Promise.allSettled([deleteStorageUrls([form.thumbnail]), deleteR2Urls([form.thumbnail], currentUser)]);
+      if (form.thumbnail) await Promise.allSettled([deleteStorageUrls([form.thumbnail]), trashMediaUrls([form.thumbnail], currentUser)]);
       const url = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role: "thumbnail", currentUser });
       setForm(f => ({ ...f, thumbnail: url }));
       add("Thumbnail uploaded.", "success");
@@ -1755,7 +1765,7 @@ export default function SaunaRooms({ currentUser }) {
     setUpOg(true);
     try {
       const slug = effectiveSlug(form);
-      if (form.og_image) await Promise.allSettled([deleteStorageUrls([form.og_image]), deleteR2Urls([form.og_image], currentUser)]);
+      if (form.og_image) await Promise.allSettled([deleteStorageUrls([form.og_image]), trashMediaUrls([form.og_image], currentUser)]);
       const url = await uploadFileToR2(file, { entityPrefix: "sauna-rooms", slug, role: "og", currentUser });
       setForm(f => ({ ...f, og_image: url }));
       add("OG image uploaded.", "success");
@@ -1818,7 +1828,7 @@ export default function SaunaRooms({ currentUser }) {
 
   const removeImageFile = (field, index) => {
     const url = form[field][index];
-    if (url) deleteStorageUrls([url]).catch(console.warn);
+    if (url) Promise.allSettled([deleteStorageUrls([url]), trashMediaUrls([url], currentUser)]).catch(console.warn);
     setForm(f => ({ ...f, [field]: f[field].filter((_, idx) => idx !== index) }));
   };
 
@@ -1990,8 +2000,8 @@ export default function SaunaRooms({ currentUser }) {
         await logActivity({ action: "update", entity: "sauna_room", entity_id: editing.id, entity_name: form.name.trim(), username: currentUser?.username, user_id: currentUser?.id, changes: diffRoomForms(savedForm, form) });
         const orphans = findOrphanedUrls(savedForm, form);
         if (orphans.length) {
-          await deleteStorageUrls(orphans).catch(console.warn);
-          add(`Cleaned up ${orphans.length} removed file(s).`, "success");
+          await Promise.allSettled([deleteStorageUrls(orphans), trashMediaUrls(orphans, currentUser)]).catch(console.warn);
+          add(`Moved ${orphans.length} removed file(s) to Trash.`, "success");
         }
       } else {
         const { data: inserted, error } = await supabase.from("sauna_rooms").insert([payload]).select("id").single();
@@ -2405,7 +2415,7 @@ export default function SaunaRooms({ currentUser }) {
                 <>
                   <SectionLabel label="Featured Image" />
                   {form.thumbnail
-                    ? <ThumbnailPreview url={form.thumbnail} onRemove={() => { deleteStorageUrls([form.thumbnail]).catch(console.warn); setForm(f => ({ ...f, thumbnail: "" })); }} onReplace={handleThumbUpload} uploading={upThumb} />
+                    ? <ThumbnailPreview url={form.thumbnail} onRemove={() => { Promise.allSettled([deleteStorageUrls([form.thumbnail]), trashMediaUrls([form.thumbnail], currentUser)]).catch(console.warn); setForm(f => ({ ...f, thumbnail: "" })); }} onReplace={handleThumbUpload} uploading={upThumb} />
                     : <ThumbnailUploader onUpload={handleThumbUpload} uploading={upThumb} />
                   }
 
@@ -2617,7 +2627,7 @@ export default function SaunaRooms({ currentUser }) {
                       {form.og_image ? (
                         <ThumbnailPreview
                           url={form.og_image}
-                          onRemove={() => { deleteStorageUrls([form.og_image]).catch(console.warn); setForm(f => ({ ...f, og_image: "" })); }}
+                          onRemove={() => { Promise.allSettled([deleteStorageUrls([form.og_image]), trashMediaUrls([form.og_image], currentUser)]).catch(console.warn); setForm(f => ({ ...f, og_image: "" })); }}
                           onReplace={handleOgUpload}
                           uploading={upOg}
                         />
