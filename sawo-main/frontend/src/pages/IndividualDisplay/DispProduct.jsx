@@ -75,7 +75,7 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick, productName }) {
           <>
             {!err[idx] && (
               <ImageWithLoader
-                key={idx}
+                key={`${items[idx].url}-${idx}`}
                 src={items[idx].url}
                 alt={productName || ""}
                 onError={() => setErr(e => ({ ...e, [idx]: true }))}
@@ -190,7 +190,7 @@ function CompactSpecImages({ images, onImageClick, productName }) {
         minHeight: 100,
       }} onClick={() => onImageClick(images, idx)}>
         <ImageWithLoader
-          key={idx}
+          key={`${images[idx]}-${idx}`}
           src={images[idx]}
           alt={productName ? `${productName} diagram ${idx + 1}` : ""}
           style={{
