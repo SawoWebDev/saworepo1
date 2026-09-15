@@ -18,6 +18,12 @@ export default function Pagination({
   onPageSizeChange,
   pageSizeOptions = [10, 25, 50, 100],
   itemLabel = "items",
+  // Drops the "Showing X-Y of Z" text, keeping only the rows-per-page
+  // select and prev/pill/next controls — for pages that put this bar in a
+  // compact header/toolbar row instead of its usual spot below the list
+  // (see Trash.jsx), where the summary reads as redundant next to a count
+  // already shown elsewhere in that row.
+  hideSummary = false,
 }) {
   if (totalCount === 0) return null;
 
@@ -26,9 +32,11 @@ export default function Pagination({
 
   return (
     <div className="cms-pagination-bar">
-      <span className="cms-pagination-summary">
-        Showing {rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()} of {totalCount.toLocaleString()} {itemLabel}
-      </span>
+      {!hideSummary && (
+        <span className="cms-pagination-summary">
+          Showing {rangeStart.toLocaleString()}–{rangeEnd.toLocaleString()} of {totalCount.toLocaleString()} {itemLabel}
+        </span>
+      )}
 
       <div className="cms-pagination-controls">
         {onPageSizeChange && (
