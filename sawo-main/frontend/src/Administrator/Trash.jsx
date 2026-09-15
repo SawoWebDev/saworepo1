@@ -10,8 +10,8 @@
 // admin-initiated actions: Restore, and Delete Forever (skip the wait).
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase, logActivity } from "./supabase";
-import { getTrashedProductsLive, getTrashedSaunaRoomsLive } from "../local-storage/supabaseReader";
-import { deleteR2Urls } from "./mediaUpload";
+import { getTrashedProductsLive, getTrashedSaunaRoomsLive, getTrashedMediaLive } from "../local-storage/supabaseReader";
+import { deleteR2Urls, trashMediaUrls, restoreMediaLogRow } from "./mediaUpload";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
 import { usePagination } from "./usePagination";
@@ -264,6 +264,175 @@ function TrashSection({ title, icon, emptyLabel, fetchFn, table, onGone, current
   );
 }
 
+const MEDIA_ROLE_LABELS = { thumbnail: "Featured Image", og: "OG Image", gallery: "Gallery Image", spec: "Spec Image" };
+function mediaRoleLabel(role) {
+  if (MEDIA_ROLE_LABELS[role]) return MEDIA_ROLE_LABELS[role];
+  if (role?.startsWith("variation-")) return "Variant Image";
+  if (role?.startsWith("included-")) return "Included Item Image";
+  return "Image";
+}
+
+// Individual image trash — separate from TrashSection above (which handles
+// whole soft-deleted products/rooms) because restoring here means
+// something different per role: thumbnail/og are single-slot fields, so
+// restoring SWAPS them back in (whatever's currently there gets trashed in
+// its place — the same trashMediaUrls() every remove/replace call already
+// uses, see Products.jsx/SaunaRoomsCMS.jsx); gallery/spec are arrays, so
+// restoring just re-adds the url; everything else (variant/included-item
+// images) has no reliable slot to auto-reattach to — see mediaUpload.js's
+// restoreMediaLogRow comment — so restoring those only stops the
+// auto-purge clock, it doesn't try to put the image back anywhere.
+function MediaTrashSection({ currentUser, addToast }) {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [purgeTarget, setPurgeTarget] = useState(null);
+  const [busyId, setBusyId] = useState(null);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    try { setItems(await getTrashedMediaLive()); }
+    finally { setLoading(false); }
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  const handleRestore = async (item) => {
+    setBusyId(item.id);
+    try {
+      const table = item.entity_prefix === "products" ? "products" : "sauna_rooms";
+      const { data: entity, error: fetchErr } = await supabase
+        .from(table).select("*").eq("slug", item.slug).maybeSingle();
+      if (fetchErr) throw fetchErr;
+
+      if (!entity) {
+        addToast(`The original ${table === "products" ? "product" : "sauna room"} ("${item.slug}") no longer exists — un-trashed, but not re-attached anywhere.`, "warning");
+      } else if (item.role === "thumbnail" || item.role === "og") {
+        const field = item.role === "thumbnail" ? "thumbnail" : "og_image";
+        const currentUrl = entity[field];
+        // The swap: whatever is currently in this slot goes to trash in
+        // this image's place, same as any other replace.
+        if (currentUrl && currentUrl !== item.public_url) {
+          await trashMediaUrls([currentUrl], currentUser);
+        }
+        const { error } = await supabase.from(table).update({ [field]: item.public_url }).eq("id", entity.id);
+        if (error) throw error;
+      } else if (item.role === "gallery" || item.role === "spec") {
+        const field = item.role === "gallery" ? "images" : "spec_images";
+        const arr = entity[field] || [];
+        if (!arr.includes(item.public_url)) {
+          const { error } = await supabase.from(table).update({ [field]: [...arr, item.public_url] }).eq("id", entity.id);
+          if (error) throw error;
+        }
+      }
+      // else (variation-*/included-*/anything else): no field to write —
+      // restoreMediaLogRow below is the entire restore for these.
+
+      await restoreMediaLogRow(item.id);
+      addToast("Image restored.", "success");
+      setItems(prev => prev.filter(i => i.id !== item.id));
+    } catch (err) {
+      addToast(err.message, "error");
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const handlePurge = async () => {
+    const item = purgeTarget;
+    setPurgeTarget(null);
+    setBusyId(item.id);
+    try {
+      await deleteR2Urls([item.public_url], currentUser);
+      addToast("Image permanently deleted.", "success");
+      setItems(prev => prev.filter(i => i.id !== item.id));
+    } catch (err) {
+      addToast(err.message, "error");
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const { page, setPage, pageSize, setPageSize, totalPages, totalCount, pageItems } = usePagination(items, { initialPageSize: 24 });
+
+  return (
+    <div className="card card-body" style={{ padding: 0, marginBottom: 24 }}>
+      <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
+        <i className="fa-solid fa-image" style={{ color: "var(--brand)" }} />
+        <h3 style={{ margin: 0, fontSize: "0.95rem", fontWeight: 700, color: "var(--text)" }}>Media</h3>
+        <span className="tbl-pill" style={{ marginLeft: 4 }}>{items.length}</span>
+      </div>
+
+      {loading ? (
+        <div style={{ padding: 24, textAlign: "center", color: "var(--text-3)" }}>
+          <i className="fa-solid fa-spinner fa-spin" />
+        </div>
+      ) : items.length === 0 ? (
+        <div className="table-empty" style={{ padding: 24 }}>No trashed images.</div>
+      ) : (
+        <div style={{ padding: 16, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 14 }}>
+          {pageItems.map(item => {
+            const left = daysLeft(item.trashed_at);
+            return (
+              <div key={item.id} style={{ border: "1px solid var(--border)", borderRadius: "var(--r-sm)", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <div style={{ aspectRatio: "1/1", background: "var(--surface-2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img src={item.public_url} alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                    onError={e => { e.target.style.display = "none"; }} />
+                </div>
+                <div style={{ padding: 8, display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text)" }}>{mediaRoleLabel(item.role)}</span>
+                  <span style={{ fontSize: "0.68rem", color: "var(--text-3)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.slug}>
+                    {item.slug}
+                  </span>
+                  <span
+                    className="tbl-pill"
+                    style={{ fontSize: "0.62rem", alignSelf: "flex-start", ...(left <= 5 ? { background: "var(--danger-bg)", color: "var(--danger)" } : {}) }}
+                  >
+                    {left} day{left === 1 ? "" : "s"} left
+                  </span>
+                  <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+                    <button type="button" className="btn btn-sm" style={{ flex: 1 }} disabled={busyId === item.id} onClick={() => handleRestore(item)}>
+                      <i className="fa-solid fa-clock-rotate-left" style={{ marginRight: 5 }} />
+                      Restore
+                    </button>
+                    <button type="button" className="icon-btn danger" title="Delete forever" disabled={busyId === item.id} onClick={() => setPurgeTarget(item)}>
+                      <i className="fa-solid fa-trash" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {!loading && items.length > 0 && (
+        <div style={{ padding: "0 20px 16px" }}>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            itemLabel="image"
+          />
+        </div>
+      )}
+
+      <Modal open={!!purgeTarget} onClose={() => setPurgeTarget(null)} title="Delete Forever?">
+        <p className="confirm-msg">
+          This permanently deletes this image right now — there's no more waiting out the {TRASH_DAYS}-day
+          window, and this cannot be undone.
+        </p>
+        <div className="confirm-actions">
+          <button type="button" className="btn btn-ghost" onClick={() => setPurgeTarget(null)}>Cancel</button>
+          <button type="button" className="btn btn-danger" onClick={handlePurge}>Delete Forever</button>
+        </div>
+      </Modal>
+    </div>
+  );
+}
+
 export default function Trash({ currentUser }) {
   const [toasts, setToasts] = useState([]);
   const addToast = (message, type = "info") => {
@@ -278,9 +447,11 @@ export default function Trash({ currentUser }) {
       <Toast toasts={toasts} remove={removeToast} />
 
       <p style={{ fontSize: "0.85rem", color: "var(--text-2)", margin: "0 0 20px", maxWidth: 720 }}>
-        Deleting a product or sauna room moves it here instead of removing it right away. Anything sitting in
+        Deleting a product, sauna room, or a single image (Featured/OG/gallery/spec/variant photos — replacing
+        one counts too, not just removing it) moves it here instead of removing it right away. Anything sitting in
         Trash for {TRASH_DAYS} days gets permanently deleted automatically — restore it before then if it was a
-        mistake, or delete it forever yourself to skip the wait.
+        mistake, or delete it forever yourself to skip the wait. Restoring a Featured/OG image swaps it back in:
+        whatever's currently there goes to Trash in its place.
       </p>
 
       <ScrollArea>
@@ -302,6 +473,7 @@ export default function Trash({ currentUser }) {
           currentUser={currentUser}
           addToast={addToast}
         />
+        <MediaTrashSection currentUser={currentUser} addToast={addToast} />
       </ScrollArea>
     </div>
   );

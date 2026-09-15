@@ -12,7 +12,7 @@ import { productsToCsvString, downloadCsv } from "./csv/productCsv";
 import CsvImportModal from "./csv/CsvImportModal";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
-import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
+import { uploadFileToR2, trashMediaUrls, effectiveSlug } from "./mediaUpload";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
 
@@ -319,13 +319,25 @@ async function deleteStorageUrls(urls = []) {
   );
 }
 
+// Matches either a legacy Supabase Storage url (parseStorageUrl, handled
+// by deleteStorageUrls) or a current R2 url (/media/..., handled by
+// trashMediaUrls) — this sweep is a safety net for whatever the specific
+// upload/remove handlers above didn't already catch, so it shouldn't be
+// narrower than what those handlers themselves can act on.
+function isTrashableUrl(url) {
+  return parseStorageUrl(url) !== null || /\/media\/.+/.test(String(url || ""));
+}
+
 function findOrphanedUrls(savedForm, currentForm) {
   const collect = f => [
     f.thumbnail,
+    f.og_image,
     ...(f.images      || []),
     ...(f.spec_images || []),
     ...(f.files       || []).map(fi => fi?.url),
-  ].filter(Boolean).filter(url => parseStorageUrl(url) !== null);
+    ...(f.variations     || []).map(v  => v?.image),
+    ...(f.included_items || []).map(it => it?.image),
+  ].filter(Boolean).filter(isTrashableUrl);
   const savedSet   = new Set(collect(savedForm));
   const currentSet = new Set(collect(currentForm));
   return [...savedSet].filter(url => !currentSet.has(url));
@@ -2696,13 +2708,23 @@ function VariationsManager({ variations = [], onChange, addToast, slug, currentU
 
   const setVariation = (idx, patch) => onChange(variations.map((v, i) => i === idx ? { ...v, ...patch } : v));
   const addVariation = () => onChange([...variations, { name: "", description: "", color: "", code: "", image: "", features: [], spec_table: null }]);
-  const removeVariation = idx => onChange(variations.filter((_, i) => i !== idx));
+  // Trash the variation's own image (if any) before dropping the row —
+  // this previously leaked silently (no cleanup call at all), now
+  // recoverable from Trash for 30 days like every other image, even though
+  // there's no slot left to auto-restore it back into.
+  const removeVariation = idx => {
+    const url = variations[idx]?.image;
+    if (url) trashMediaUrls([url], currentUser).catch(() => {});
+    onChange(variations.filter((_, i) => i !== idx));
+  };
 
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
       const roleTag = slugify(variations[idx]?.name || variations[idx]?.color || `variation-${idx}`);
       const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `variation-${roleTag}`, currentUser });
+      const oldUrl = variations[idx]?.image;
+      if (oldUrl && oldUrl !== url) trashMediaUrls([oldUrl], currentUser).catch(() => {});
       setVariation(idx, { image: url });
       addToast("✓ Variation image uploaded.", "success");
     } catch (err) {
@@ -2765,13 +2787,21 @@ function IncludedItemsManager({ items = [], onChange, addToast, slug, currentUse
 
   const setItem = (idx, patch) => onChange(items.map((it, i) => i === idx ? { ...it, ...patch } : it));
   const addItem = () => onChange([...items, { image: "", title: "", note: "" }]);
-  const removeItem = idx => onChange(items.filter((_, i) => i !== idx));
+  // Trash the item's own image (if any) before dropping the row — see
+  // VariationsManager's removeVariation above for why.
+  const removeItem = idx => {
+    const url = items[idx]?.image;
+    if (url) trashMediaUrls([url], currentUser).catch(() => {});
+    onChange(items.filter((_, i) => i !== idx));
+  };
 
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
       const roleTag = slugify(items[idx]?.title || `item-${idx}`);
       const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `included-${roleTag}`, currentUser });
+      const oldUrl = items[idx]?.image;
+      if (oldUrl && oldUrl !== url) trashMediaUrls([oldUrl], currentUser).catch(() => {});
       setItem(idx, { image: url });
       addToast("✓ Image uploaded.", "success");
     } catch (err) {
@@ -2971,12 +3001,15 @@ export default function Products({ currentUser }) {
     try {
       const slug = effectiveSlug(form);
       const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: "thumbnail", currentUser });
-      // Clean up the old thumbnail if it existed (harmless no-op for
-      // whichever of R2/Supabase the old URL wasn't hosted on).
+      // Trash the old thumbnail rather than deleting it immediately — it
+      // stays recoverable from the admin Trash page for 30 days (see
+      // setup-media-trash.sql). deleteStorageUrls still runs for whichever
+      // of R2/Supabase the old URL wasn't hosted on (harmless no-op either
+      // way; legacy Supabase Storage urls have no trash mechanism of their own).
       if (form.thumbnail && form.thumbnail !== url) {
         await Promise.allSettled([
           deleteStorageUrls([form.thumbnail]),
-          deleteR2Urls([form.thumbnail], currentUser),
+          trashMediaUrls([form.thumbnail], currentUser),
         ]);
       }
       setForm(f => ({ ...f, thumbnail: url }));
@@ -2993,7 +3026,7 @@ export default function Products({ currentUser }) {
       if (form.og_image && form.og_image !== url) {
         await Promise.allSettled([
           deleteStorageUrls([form.og_image]),
-          deleteR2Urls([form.og_image], currentUser),
+          trashMediaUrls([form.og_image], currentUser),
         ]);
       }
       setForm(f => ({ ...f, og_image: url }));
@@ -3065,14 +3098,18 @@ export default function Products({ currentUser }) {
     setForm(f => ({ ...f, files: f.files.filter((_, idx) => idx !== i) }));
   };
 
-  // Remove image and delete from storage
+  // Remove image and trash it (recoverable from admin Trash for 30 days —
+  // see setup-media-trash.sql) instead of deleting it right away.
   const removeImageFile = (type, index) => {
     const array = form[type];
     const url = array[index];
     if (url) {
-      deleteStorageUrls([url]).catch(err => {
-        console.warn(`[Products] Failed to delete ${type} from storage:`, err);
-        add(`⚠️ Failed to delete image from storage. It may need manual cleanup.`, "warning");
+      Promise.allSettled([
+        deleteStorageUrls([url]),
+        trashMediaUrls([url], currentUser),
+      ]).catch(err => {
+        console.warn(`[Products] Failed to trash ${type} image:`, err);
+        add(`⚠️ Failed to move image to trash. It may need manual cleanup.`, "warning");
       });
     }
     setForm(f => ({ ...f, [type]: f[type].filter((_, idx) => idx !== index) }));
@@ -3262,12 +3299,15 @@ export default function Products({ currentUser }) {
         const orphans = findOrphanedUrls(savedForm, form);
         if (orphans.length) {
           try {
-            await deleteStorageUrls(orphans);
-            console.info(`[Products] Removed ${orphans.length} orphaned file(s).`);
-            add(`Cleaned up ${orphans.length} removed file(s) from storage.`, "success");
+            await Promise.allSettled([
+              deleteStorageUrls(orphans),
+              trashMediaUrls(orphans, currentUser),
+            ]);
+            console.info(`[Products] Trashed ${orphans.length} removed file(s).`);
+            add(`Moved ${orphans.length} removed file(s) to Trash.`, "success");
           } catch (deleteErr) {
-            console.error("[Products] Failed to delete orphaned files:", deleteErr);
-            add(`⚠️ Failed to delete ${orphans.length} file(s) from storage. They may need manual cleanup.`, "warning");
+            console.error("[Products] Failed to trash orphaned files:", deleteErr);
+            add(`⚠️ Failed to move ${orphans.length} file(s) to trash. They may need manual cleanup.`, "warning");
           }
         }
       } else {
@@ -4079,9 +4119,12 @@ export default function Products({ currentUser }) {
                   url={form.thumbnail}
                   onRemove={() => {
                     if (form.thumbnail) {
-                      deleteStorageUrls([form.thumbnail]).catch(err => {
-                        console.warn("[Products] Failed to delete thumbnail from storage:", err);
-                        add("⚠️ Failed to delete thumbnail from storage. It may need manual cleanup.", "warning");
+                      Promise.allSettled([
+                        deleteStorageUrls([form.thumbnail]),
+                        trashMediaUrls([form.thumbnail], currentUser),
+                      ]).catch(err => {
+                        console.warn("[Products] Failed to trash thumbnail:", err);
+                        add("⚠️ Failed to move thumbnail to trash. It may need manual cleanup.", "warning");
                       });
                     }
                     setForm(f => ({ ...f, thumbnail: "" }));
@@ -4285,9 +4328,12 @@ export default function Products({ currentUser }) {
                 <ThumbnailPreview
                   url={form.og_image}
                   onRemove={() => {
-                    deleteStorageUrls([form.og_image]).catch(err => {
-                      console.warn("[Products] Failed to delete OG image from storage:", err);
-                      add("⚠️ Failed to delete OG image from storage. It may need manual cleanup.", "warning");
+                    Promise.allSettled([
+                      deleteStorageUrls([form.og_image]),
+                      trashMediaUrls([form.og_image], currentUser),
+                    ]).catch(err => {
+                      console.warn("[Products] Failed to trash OG image:", err);
+                      add("⚠️ Failed to move OG image to trash. It may need manual cleanup.", "warning");
                     });
                     setForm(f => ({ ...f, og_image: "" }));
                   }}
