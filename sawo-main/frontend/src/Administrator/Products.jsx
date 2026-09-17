@@ -2807,7 +2807,14 @@ function VariantImageSlot({ image, uploading, onFile, size = 60 }) {
         <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)", border: dragging ? "2px solid var(--brand)" : "1px solid transparent" }}>
           <img src={image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: uploading ? 0.5 : 1 }} onError={e => { e.target.style.display = "none"; }} />
           {(hovering || dragging) && !uploading && (
-            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.62rem", color: "white", textAlign: "center", cursor: "pointer" }}>
+            // pointerEvents: "none" is load-bearing — without it this overlay
+            // becomes the drag hit-target the instant it appears, which fires
+            // dragleave on the container (pointer is now "over" a different
+            // element), hiding the overlay, which re-fires dragenter on the
+            // image underneath — a fast show/hide loop that reads as
+            // blinking for as long as the file is dragged over the slot.
+            // Same fix already applied on ReplaceableImage above.
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.62rem", color: "white", textAlign: "center", cursor: "pointer", pointerEvents: "none" }}>
               {dragging ? "Drop" : "Change"}
             </div>
           )}
@@ -3137,6 +3144,11 @@ export default function Products({ currentUser }) {
   const [editing,     setEditing]     = useState(null);
   // editingFull: the complete DB row, kept for the audit trail strip
   const [editingFull, setEditingFull] = useState(null);
+  // openEdit fetches the live row before the form has anything to show —
+  // without this the modal stayed closed for that whole round-trip, so
+  // clicking Edit looked like it did nothing until it suddenly popped open.
+  // Now the modal opens immediately in a loading state instead.
+  const [editLoading, setEditLoading] = useState(false);
   const [form,        setForm]        = useState(EMPTY_FORM);
   const [savedForm,   setSavedForm]   = useState(EMPTY_FORM);
   const [slugEdited,  setSlugEdited]  = useState(false);
@@ -3425,7 +3437,7 @@ export default function Products({ currentUser }) {
   const actualClose = () => {
     setModalOpen(false); setEditing(null); setEditingFull(null);
     setShowRevisions(false); setModalMenuOpen(false);
-    setUnsavedOpen(false); pendingClose.current = null;
+    setUnsavedOpen(false); pendingClose.current = null; setEditLoading(false);
   };
   const handleModalClose = () => { if (isDirty) { pendingClose.current = actualClose; setUnsavedOpen(true); } else actualClose(); };
   const handleUnsavedStay    = () => { setUnsavedOpen(false); pendingClose.current = null; };
@@ -3439,6 +3451,19 @@ export default function Products({ currentUser }) {
   };
 
   const openEdit = async row => {
+    // Open right away with a spinner instead of waiting on the fetch below —
+    // otherwise there's a silent gap between the click and the modal
+    // appearing where nothing on screen indicates anything happened.
+    // `editing` stays null until the fetch resolves so the Save button and
+    // the Revisions/Delete menu (both gated on `editing`/off `saving`)
+    // don't act on a half-loaded row in the meantime.
+    setEditing(null);
+    setEditingFull(null);
+    setShowRevisions(false);
+    setModalMenuOpen(false);
+    setActiveFormTab("general");
+    setEditLoading(true);
+    setModalOpen(true);
     try {
       const data = (await getProductByIdLive(row.id)) || (row.slug ? await getProductBySlugLive(row.slug) : null);
       if (!data) throw new Error("Product not found");
@@ -3481,11 +3506,12 @@ export default function Products({ currentUser }) {
       // path rendered "Edit: undefined" instead of the product's name.
       setEditing(data);
       setEditingFull(data);   // full row → audit strip
-      setShowRevisions(false);
-      setModalMenuOpen(false);
-      setActiveFormTab("general");
-      setModalOpen(true);
-    } catch (err) { add(err.message, "error"); }
+    } catch (err) {
+      add(err.message, "error");
+      actualClose();
+    } finally {
+      setEditLoading(false);
+    }
   };
 
   // Deep-link from Taxonomy/Models' quick-preview "Edit" button —
@@ -4208,7 +4234,7 @@ export default function Products({ currentUser }) {
       <Modal
         open={modalOpen}
         onClose={handleModalClose}
-        title={editing ? (
+        title={editLoading ? "Loading…" : editing ? (
           <a
             href={productUrl(editingFull || editing)}
             target="_blank"
@@ -4228,7 +4254,7 @@ export default function Products({ currentUser }) {
             <button
               type="submit"
               form="product-form"
-              disabled={saving}
+              disabled={saving || editLoading}
               style={{
                 padding: "6px 12px",
                 fontSize: "0.8rem",
@@ -4237,15 +4263,15 @@ export default function Products({ currentUser }) {
                 color: "white",
                 border: "none",
                 borderRadius: "var(--r-sm)",
-                cursor: saving ? "not-allowed" : "pointer",
-                opacity: saving ? 0.6 : 1,
+                cursor: (saving || editLoading) ? "not-allowed" : "pointer",
+                opacity: (saving || editLoading) ? 0.6 : 1,
                 transition: "opacity 0.15s",
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
               }}
-              onMouseEnter={e => !saving && (e.currentTarget.style.opacity = "0.9")}
-              onMouseLeave={e => !saving && (e.currentTarget.style.opacity = "1")}
+              onMouseEnter={e => !saving && !editLoading && (e.currentTarget.style.opacity = "0.9")}
+              onMouseLeave={e => !saving && !editLoading && (e.currentTarget.style.opacity = "1")}
             >
               <i className={`fa-solid ${saving ? "fa-spinner fa-spin" : "fa-check"}`} />
               {editing ? "Save Changes" : "Create Product"}
@@ -4323,8 +4349,14 @@ export default function Products({ currentUser }) {
         )}
       >
 
-        {/* Show either revision history or form */}
-        {showRevisions && editing ? (
+        {/* Show either revision history, a loading spinner while openEdit's
+            fetch is still in flight, or the form */}
+        {editLoading ? (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, padding: "60px 0", color: "var(--text-3)" }}>
+            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: "1.6rem", color: "var(--brand)" }} />
+            <span style={{ fontSize: "0.82rem" }}>Loading product…</span>
+          </div>
+        ) : showRevisions && editing ? (
           <div>
             <button
               type="button"
