@@ -503,8 +503,8 @@ const compactSizeData = {
 };
 
 const compactBenchTypes = {
-  "1310MS": { name: "Straight Bench", title: "Compact Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Bench-Design-.webp" },
-  "1313MS": { name: "Straight Bench", title: "Compact Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Bench-Design-v2.png" },
+  "1310MS": { name: "Straight Bench", title: "Compact Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/09/Compact-Sauna-Room-Horizontal-Panel-1.webp" },
+  "1313MS": { name: "Straight Bench", title: "Compact Sauna Room", class: "straight", image: "https://www.sawo.com/wp-content/uploads/2026/09/1313MS-Bench-Design-v2.webp" },
 };
 
 // Extra "angle" thumbnails shown beside the carousel — independent of the
