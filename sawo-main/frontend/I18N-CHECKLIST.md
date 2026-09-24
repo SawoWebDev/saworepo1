@@ -2297,6 +2297,22 @@ the language switcher until someone enables it in the CMS.
   `fill-apply.mjs <locale>` + `fill-<locale>-data-1-phrases.mjs` (1,069 whole
   strings / HTML text nodes / `<th>` cells per language; see
   `PRODUCT-TRANSLATION-CONVENTIONS.md`, "French / Spanish / Thai notes").
+- **CMS Translations overview was wrong, not the data:** `fetchAllTranslations`
+  read `product_translations` in one un-paginated query, and Supabase silently
+  caps a response at 1000 rows. Once a third language existed, everything past
+  row 1000 counted as MISSING (the screen showed "1000 current / 1681 missing"
+  while the table actually had 382+ rows for every language). Fixed by
+  `fetchAllPages()` in `Translations/translationData.js` (range-paginated, with a
+  deterministic order); the Translation Memory tab and `loadTranslationMemory`
+  use it too, since that table now has ~1,400 pairs per language. Any new
+  "read a whole table" query in the admin must use it.
+- **German read-through (same day):** the not-yet-read `sauna` labels plus
+  `gdpr`/`sitemap` were reviewed against the English and 51 `sauna` strings
+  fixed via `inject.js` (`Wandmontiert-Serie` -> `Wandofen-Serie`,
+  `Boden-Serie` -> `Bodenofen-Serie`, `Stone-Serie` -> `Stein-Serie`, hyphenated
+  `Xyz-Saunaöfen` titles, sentence-case verbs, `L-Typ` -> `L-förmig`,
+  `Sauna-Zubehör` -> `Saunazubehör`, `Isolierung` -> `Dämmung`, Saunagang). A
+  sample of de product rows read naturally. Still no native-speaker review.
 - **Open:** native-speaker review of the fr/es/th glossaries below and of the
   legal text (`privacy`, `gdpr`) before any path goes live; `common.json`
   plural keys are `one`/`other` only (fr/es also have a CLDR `many` category

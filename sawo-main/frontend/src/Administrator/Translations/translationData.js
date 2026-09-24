@@ -22,13 +22,36 @@ const PRODUCT_COLUMNS =
   "id, name, slug, short_description, description, type, features, spec_table, included_items, variations, variants, heating_element_groups, updated_at";
 
 // ── bulk fetch ─────────────────────────────────────────────────────────────
-// Two queries total, no matter how many products/locales — no N+1.
+// PostgREST caps every response at the project's max-rows setting (1000 on
+// Supabase by default), silently — a plain .select() returns the first 1000
+// rows with no error, and .limit(2000) doesn't lift it. product_translations
+// passed 1000 rows once a third language existed, so the overview counted
+// every row past the cap as MISSING. Any table that can outgrow 1000 rows
+// must be read through this instead: pages of PAGE_SIZE via .range(), which
+// needs a deterministic .order() in `buildQuery` or rows can repeat/skip
+// between pages.
+const PAGE_SIZE = 1000;
+export async function fetchAllPages(buildQuery) {
+  const rows = [];
+  for (let from = 0; ; from += PAGE_SIZE) {
+    const { data, error } = await buildQuery().range(from, from + PAGE_SIZE - 1);
+    if (error) return { data: null, error };
+    rows.push(...(data || []));
+    if (!data || data.length < PAGE_SIZE) break;
+  }
+  return { data: rows, error: null };
+}
+
+// Two paginated reads total, no matter how many products/locales — no N+1.
 export async function fetchAllProductsForTranslation() {
-  const { data, error } = await supabase
-    .from("products")
-    .select(PRODUCT_COLUMNS)
-    .eq("is_deleted", false)
-    .order("name", { ascending: true });
+  const { data, error } = await fetchAllPages(() =>
+    supabase
+      .from("products")
+      .select(PRODUCT_COLUMNS)
+      .eq("is_deleted", false)
+      .order("name", { ascending: true })
+      .order("id", { ascending: true })
+  );
   if (error) throw new Error(`Fetching products: ${error.message}`);
   return data || [];
 }
@@ -37,9 +60,13 @@ export async function fetchAllProductsForTranslation() {
 // (deliberately not per-locale like the public site's
 // getProductTranslationsLive — the CMS needs every locale simultaneously).
 export async function fetchAllTranslations() {
-  const { data, error } = await supabase
-    .from("product_translations")
-    .select("product_id, locale, name, short_description, description, type, features, spec_table, variations, included_items, source_field_hashes, updated_at, updated_by");
+  const { data, error } = await fetchAllPages(() =>
+    supabase
+      .from("product_translations")
+      .select("product_id, locale, name, short_description, description, type, features, spec_table, variations, included_items, source_field_hashes, updated_at, updated_by")
+      .order("product_id", { ascending: true })
+      .order("locale", { ascending: true })
+  );
   if (error) throw new Error(`Fetching product_translations: ${error.message}`);
   const map = new Map();
   for (const row of data || []) map.set(`${row.product_id}:${row.locale}`, row);
@@ -66,10 +93,13 @@ export async function fetchTranslationsForProduct(productId) {
 // ── translation memory ──────────────────────────────────────────────────
 // Same exact-match-on-normalized-text lookup product-i18n.js uses.
 export async function loadTranslationMemory(locale) {
-  const { data, error } = await supabase
-    .from("translation_memory")
-    .select("source_text, translated_text")
-    .eq("locale", locale);
+  const { data, error } = await fetchAllPages(() =>
+    supabase
+      .from("translation_memory")
+      .select("source_text, translated_text")
+      .eq("locale", locale)
+      .order("source_text", { ascending: true })
+  );
   if (error) throw new Error(`Loading translation memory: ${error.message}`);
   const map = new Map();
   for (const row of data || []) map.set(row.source_text, row.translated_text);

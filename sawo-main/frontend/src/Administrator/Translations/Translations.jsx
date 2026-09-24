@@ -8,7 +8,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { getPerms } from "../permissions";
 import { getCache, setCache } from "../adminCache";
 import { supabase } from "../supabase";
-import { fetchAllProductsForTranslation, fetchAllTranslations } from "./translationData";
+import { fetchAllProductsForTranslation, fetchAllTranslations, fetchAllPages } from "./translationData";
 import { buildStatusGrid, summarizeGrid, FIELD_STATUS } from "../Local/translationStatus";
 import { PRODUCT_TRANSLATION_LOCALES } from "../../i18n/productTranslationLocales";
 import TranslationProductsGrid from "./TranslationProductsGrid";
@@ -174,11 +174,13 @@ function TranslationMemoryTab() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    supabase
-      .from("translation_memory")
-      .select("locale, source_text, translated_text, hit_count")
-      .order("locale", { ascending: true })
-      .limit(2000)
+    fetchAllPages(() =>
+      supabase
+        .from("translation_memory")
+        .select("locale, source_text, translated_text, hit_count")
+        .order("locale", { ascending: true })
+        .order("source_text", { ascending: true })
+    )
       .then(({ data, error: err }) => {
         if (cancelled) return;
         if (err) setError(err.message);

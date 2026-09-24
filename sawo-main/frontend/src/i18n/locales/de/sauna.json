@@ -17,16 +17,16 @@
         "caption": "Die SAWO Tower-Serie ist als Steinsäule gebaut und verteilt den Dampf gleichmäßig vom Boden bis zur Decke – für ein luxuriöses, umhüllendes Dampferlebnis."
       },
       "stone": {
-        "title": "Stone-Serie",
-        "caption": "Die SAWO Stone-Serie besteht aus einem robusten Edelstahlkorpus mit wärmeleitendem finnischem Speckstein und sorgt so für effizientes Heizen und schnelles Trocknen nach der Nutzung."
+        "title": "Stein-Serie",
+        "caption": "Die SAWO Stein-Serie besteht aus einem robusten Edelstahlkorpus mit wärmeleitendem finnischem Speckstein und sorgt so für effizientes Heizen und schnelles Trocknen nach der Nutzung."
       },
       "wallMounted": {
-        "title": "Wandmontiert-Serie",
-        "caption": "Die SAWO Wandmontiert-Serie besticht durch schlanke, platzsparende Öfen, die Effizienz mit modernem Design für optimale Wärme und Komfort verbinden."
+        "title": "Wandofen-Serie",
+        "caption": "Die SAWO Wandofen-Serie besticht durch schlanke, platzsparende Öfen, die Effizienz mit modernem Design für optimale Wärme und Komfort verbinden."
       },
       "floor": {
-        "title": "Boden-Serie",
-        "caption": "Die SAWO Boden-Serie bietet bewegliche, leistungsstarke, freistehende Öfen für optimale Wärmeverteilung und dauerhaften Komfort."
+        "title": "Bodenofen-Serie",
+        "caption": "Die SAWO Bodenofen-Serie bietet bewegliche, leistungsstarke, freistehende Öfen für optimale Wärmeverteilung und dauerhaften Komfort."
       },
       "dragonfire": {
         "title": "Dragonfire-Serie",
@@ -59,8 +59,8 @@
     "viewAll": "SAUNASTEUERUNGEN ANSEHEN"
   },
   "accessories": {
-    "heading": "Sauna-Zubehör",
-    "intro": "Wir bieten eine große Auswahl an zeitlosem Sauna-Zubehör aus Zeder, Espe und Kiefer. Wählen Sie Ihre Favoriten, um die Sauna ganz nach Ihrem Geschmack zu gestalten.",
+    "heading": "Saunazubehör",
+    "intro": "Wir bieten eine große Auswahl an zeitlosem Saunazubehör aus Zeder, Espe und Kiefer. Wählen Sie Ihre Favoriten, um die Sauna ganz nach Ihrem Geschmack zu gestalten.",
     "items": {
       "accessorySets": {
         "title": "Zubehör-Sets",
@@ -129,11 +129,11 @@
         "caption": "SAWO Tower Öfen lassen sich am besten als „Saunastein-Säulen“ beschreiben. Robuste Edelstahlringe fassen große Mengen an Steinen. Diese Öfen sind so konzipiert, dass sie den Dampf gleichmäßig vom niedrigsten bis zum höchsten Punkt des Saunaraums verteilen."
       },
       "floor": {
-        "title": "Boden-Serie",
-        "caption": "Unsere Boden-Serie bietet bewegliche, schlanke und langlebige, leistungsstarke freistehende Öfen, die eine optimale Wärmeverteilung und Komfort gewährleisten. Durch mehr Platzierungsmöglichkeiten ermöglichen diese Öfen eine individuellere Gestaltung des Saunaraums."
+        "title": "Bodenofen-Serie",
+        "caption": "Unsere Bodenofen-Serie bietet bewegliche, schlanke und langlebige, leistungsstarke freistehende Öfen, die eine optimale Wärmeverteilung und Komfort gewährleisten. Durch mehr Platzierungsmöglichkeiten ermöglichen diese Öfen eine individuellere Gestaltung des Saunaraums."
       },
       "wallMounted": {
-        "title": "Wandmontiert-Serie",
+        "title": "Wandofen-Serie",
         "caption": "Bei SAWO wandmontierten Öfen dreht sich alles um starke Leistung auf kompaktem Raum. Für zusätzliche Sicherheit sind die meisten unserer wandmontierten Öfen mit einer kühl bleibenden Faserbeschichtung erhältlich, um versehentliche Verbrennungen zu vermeiden."
       },
       "combi": {
@@ -145,7 +145,7 @@
         "caption": "Werten Sie Ihr Saunaerlebnis mit der SAWO Dragonfire-Serie auf, entworfen vom renommierten finnischen Designer Stefan Lindfors für modernes Wohnen."
       },
       "stone": {
-        "title": "Stone-Serie",
+        "title": "Stein-Serie",
         "caption": "Gefertigt aus finnischem Speckstein, verfügen die SAWO Stone-Öfen über außergewöhnliche Wärmespeicher- und Leiteigenschaften. Ihre sanfte Wärme sorgt für ein gleichbleibendes und langanhaltendes Saunaerlebnis."
       }
     },
@@ -157,20 +157,20 @@
   },
   "accessoriesPage": {
     "meta": {
-      "title": "Sauna-Zubehör",
+      "title": "Saunazubehör",
       "description": "Werten Sie Ihre Sauna mit SAWO Zubehör auf: Eimer, Kellen, Thermometer, Kopfstützen, Beleuchtung und mehr, durchdacht gestaltet für jede Sauna."
     },
     "hero": {
       "title": "SAUNA-ZUBEHÖR",
-      "subtitle": "Entdecken Sie das perfekte Sauna-Zubehör"
+      "subtitle": "Entdecken Sie das perfekte Saunazubehör"
     },
-    "sectionTitle": "Entdecken Sie das perfekte Sauna-Zubehör",
+    "sectionTitle": "Entdecken Sie das perfekte Saunazubehör",
     "brochureItems": {
       "kivistone": "Kivistone-Broschüre",
       "saunaLights": "Saunaleuchten-Broschüre",
       "accessorySets": "Zubehör-Sets-Broschüre",
       "accessories": "Zubehör-Broschüre",
-      "curveLedLights": "Curve LED-Leuchten Flyer",
+      "curveLedLights": "Flyer Curve LED-Leuchten",
       "saunaDoors": "Saunatüren-Broschüre"
     },
     "items": {
@@ -231,7 +231,7 @@
       "desc": "Mit einer separaten Steuerung für SAWO Öfen bestimmen Sie selbst, welches Saunaerlebnis Sie genießen möchten. Regeln Sie Temperatur, Luftfeuchtigkeit, Zeit, Lüfter und Lichtdimmer oder sparen Sie mit dem Stromverbrauchszähler sogar Energie."
     },
     "groupLabels": {
-      "Coming Soon": "Demnächst Verfügbar",
+      "Coming Soon": "Demnächst verfügbar",
       "Saunova Series": "Saunova-Serie",
       "Innova Series": "Innova-Serie",
       "Control Spare Parts": "Steuerung: Ersatzteile",
@@ -276,17 +276,17 @@
   },
   "stonePage": {
     "meta": {
-      "title": "Stone Saunaöfen",
-      "description": "SAWO Stone-Serie Öfen kombinieren robusten Edelstahl mit wärmeleitendem finnischem Speckstein für effizientes Heizen und schnelles Trocknen nach der Nutzung."
+      "title": "Stein-Saunaöfen",
+      "description": "SAWO Stein-Serie Öfen kombinieren robusten Edelstahl mit wärmeleitendem finnischem Speckstein für effizientes Heizen und schnelles Trocknen nach der Nutzung."
     },
     "hero": {
       "title": "SAUNA STONE-SERIE",
       "subtitle": "Effiziente, schlanke, wellnessorientierte Saunen.",
-      "alt": "Sauna Stone-Serie",
+      "alt": "Sauna Stein-Serie",
       "exploreButton": "ÖFEN ENTDECKEN"
     },
     "intro": {
-      "title": "Unsere Premium-Saunaöfen der Stone-Serie",
+      "title": "Unsere Premium-Saunaöfen der Stein-Serie",
       "desc": "Gönnen Sie sich moderne, energieeffiziente Saunen, konzipiert für Entspannung und Wohlbefinden, mit schlanker Ästhetik und außergewöhnlichem Komfort. Unsere Stone-Öfen bestehen vollständig aus Stein oder einer Kombination aus Edelstahl und Stein. Sie profitieren von der hervorragenden Wärmeleitung des finnischen Specksteins, der Ihr Saunaerlebnis verbessert und Ihren Saunaraum nach der Nutzung schneller trocknen lässt."
     },
     "why": {
@@ -299,13 +299,13 @@
   },
   "towerPage": {
     "meta": {
-      "title": "Tower Saunaöfen",
+      "title": "Tower-Saunaöfen",
       "description": "Entdecken Sie SAWO Tower-Serie Saunaöfen: energieeffiziente, schlanke, vertikale Designs mit hervorragender Wärmeverteilung für ein modernes Wellness-Saunaerlebnis."
     },
     "hero": {
       "title": "TOWER SAUNAÖFEN",
       "subtitle": "Effiziente, schlanke, wellnessorientierte Saunen",
-      "alt": "Tower Saunaöfen",
+      "alt": "Tower-Saunaöfen",
       "exploreButton": "ÖFEN ENTDECKEN"
     },
     "intro": {
@@ -327,18 +327,18 @@
   },
   "floorPage": {
     "meta": {
-      "title": "Boden Saunaöfen",
-      "description": "SAWO Boden-Serie: leistungsstarke, bewegliche, freistehende Saunaöfen für optimale Wärmeverteilung und dauerhaften Komfort in gewerblichen und privaten Saunen."
+      "title": "Boden-Saunaöfen",
+      "description": "SAWO Bodenofen-Serie: leistungsstarke, bewegliche, freistehende Saunaöfen für optimale Wärmeverteilung und dauerhaften Komfort in gewerblichen und privaten Saunen."
     },
     "hero": {
       "title": "SAUNA BODENÖFEN",
       "subtitle": "Hervorragende Wärmeverteilung & elegantes Design",
-      "alt": "Sauna Bodenöfen",
+      "alt": "Boden-Saunaöfen",
       "exploreButton": "ÖFEN ENTDECKEN"
     },
     "intro": {
       "title": "Unsere Premium-Bodenöfen",
-      "desc": "Erleben Sie hervorragende Wärmeverteilung und elegantes Design mit unseren Premium Sauna Bodenöfen, gefertigt für ultimative Entspannung und Effizienz."
+      "desc": "Erleben Sie hervorragende Wärmeverteilung und elegantes Design mit unseren Premium Boden-Saunaöfen, gefertigt für ultimative Entspannung und Effizienz."
     },
     "why": {
       "eyebrow": "SAWO ÖFEN",
@@ -349,7 +349,7 @@
   },
   "combiPage": {
     "meta": {
-      "title": "Combi Saunaöfen",
+      "title": "Combi-Saunaöfen",
       "description": "SAWO Combi-Öfen vereinen Sauna und Dampf in einem leistungsstarken Gerät – vielseitige, energieeffiziente Wärme mit integriertem Verdampfer."
     },
     "hero": {
@@ -372,13 +372,13 @@
   },
   "dragonfirePage": {
     "meta": {
-      "title": "Dragonfire Saunaöfen",
+      "title": "Dragonfire-Saunaöfen",
       "description": "SAWO Dragonfire-Serie: von Stefan Lindfors gestaltete, kunstvolle Saunaöfen, die auffälliges Design mit modernster Heiztechnologie verbinden."
     },
     "hero": {
       "title": "DRAGONFIRE SAUNAÖFEN",
       "subtitle": "Künstlerischer Stil trifft modernste Technologie",
-      "alt": "Dragonfire Saunaöfen",
+      "alt": "Dragonfire-Saunaöfen",
       "exploreButton": "ÖFEN ENTDECKEN"
     },
     "intro": {
@@ -570,7 +570,7 @@
     },
     "hero": {
       "title": "EIMER & KELLEN",
-      "subtitle": "Unverzichtbares finnisches Sauna-Zubehör seit 1921",
+      "subtitle": "Unverzichtbares finnisches Saunazubehör seit 1921",
       "alt": "Eimer und Kellen"
     },
     "intro": {
@@ -716,7 +716,7 @@
       "stepHeadings": {
         "room": "Wählen Sie Ihren Saunaraum",
         "heater": "Wählen Sie Ihren Saunaofen",
-        "accessory": "Zubehör Hinzufügen"
+        "accessory": "Zubehör hinzufügen"
       },
       "multiNote": "Sie können mehrere Zubehörteile auswählen",
       "back": "Zurück",
@@ -845,12 +845,12 @@
           ]
         },
         "excellentHeat": {
-          "tab": "Hervorragende Hitze",
-          "title": "Hervorragende Hitze",
+          "tab": "Hervorragende Wärme",
+          "title": "Hervorragende Wärme",
           "paragraphs": [
             "Gleichmäßige, konstante Hitze unterscheidet eine großartige Sauna von einer guten. SAWO Öfen sind so konzipiert, dass sie die Wärme gleichmäßig im gesamten Raum verteilen – keine kalten Ecken, keine Hitzenester.",
             "Unsere Öfen erreichen die Zieltemperatur schnell und halten sie präzise. Sie sind auf Effizienz ausgelegt, ohne dass die tiefe, durchdringende Hitze leidet, die das finnische Saunaerlebnis ausmacht.",
-            "Kompatibel mit sowohl feuchten als auch trockenen Saunasitzungen, für volle Kontrolle über Intensität und Charakter jeder Sitzung."
+            "Geeignet für feuchte wie trockene Saunagänge, für volle Kontrolle über Intensität und Charakter jedes Saunagangs."
           ]
         },
         "roomSizes": {
@@ -882,7 +882,7 @@
             },
             {
               "key": "Banktypen",
-              "val": "Gerade, L-Typ, doppelt gerade, doppelt mit Mitteltür",
+              "val": "Gerade, L-förmig, doppelt gerade, doppelt mit Mitteltür",
               "note": null
             },
             {
@@ -893,12 +893,12 @@
           ]
         },
         "insulation": {
-          "tab": "Isolierung",
-          "title": "Isolierung",
+          "tab": "Dämmung",
+          "title": "Dämmung",
           "paragraphs": [
-            "Eine gute Isolierung ist die Grundlage einer effizienten Sauna. SAWO Räume sind mit hochwertiger Isolierung gebaut, die die Wärme in der Kabine hält und Energieverluste über Wände, Boden und Decke verhindert.",
+            "Eine gute Dämmung ist die Grundlage einer effizienten Sauna. SAWO Räume sind mit hochwertiger Dämmung gebaut, die die Wärme in der Kabine hält und Energieverluste über Wände, Boden und Decke verhindert.",
             "Das bedeutet schnelleres Aufheizen, geringere Betriebskosten und eine gleichmäßigere Temperatur während des gesamten Saunagangs – unabhängig von den Bedingungen draußen.",
-            "Die Isolierung von SAWO ist zudem feuchtigkeitsbeständig und schützt die strukturelle Integrität des Raums über Jahre täglicher Nutzung und Dampfeinwirkung."
+            "Die Dämmung von SAWO ist zudem feuchtigkeitsbeständig und schützt die strukturelle Integrität des Raums über Jahre täglicher Nutzung und Dampfeinwirkung."
           ]
         }
       }
@@ -934,7 +934,7 @@
           "detail": "Konfigurationen für 1–3, 4–6 und 6+ Personen"
         },
         {
-          "label": "Gerade & L-Typ Bänke",
+          "label": "Gerade & L-förmige Bänke",
           "detail": "Links- und rechtsseitige Türoptionen verfügbar"
         },
         {
@@ -968,7 +968,7 @@
             },
             {
               "label": "Banktypen",
-              "value": "Gerade, L-Typ, doppelt gerade, doppelt mit Mitteltür",
+              "value": "Gerade, L-förmig, doppelt gerade, doppelt mit Mitteltür",
               "unit": null
             },
             {
@@ -1023,7 +1023,7 @@
             "230V steckerfertige Installation",
             "Digitale Steuerung für Temperatur, Zeit, Licht & Lüfter",
             "Moderne LED-Leuchten (12W) & vorinstallierter Abluftventilator (18W)",
-            "Verstellbare Standfüße & Sitzungsdauer: 1–60 Minuten",
+            "Verstellbare Standfüße & Laufzeit: 1–60 Minuten",
             "Hochwertige Zedernkonstruktion"
           ]
         },
@@ -1046,11 +1046,11 @@
       "label": "Interaktives 3D-Modell",
       "title": "Entdecken Sie jedes Detail",
       "subtitle": "Drehen, zoomen und begutachten Sie jeden Winkel unserer Sauna, bevor sie bei Ihnen ankommt.",
-      "launch": "3D-Viewer Starten",
+      "launch": "3D-Viewer starten",
       "dragRotate": "Ziehen zum Drehen",
       "scrollZoom": "Scrollen zum Zoomen",
       "doubleTapFocus": "Doppeltippen zum Fokussieren",
-      "openViewer": "3D-Viewer Öffnen",
+      "openViewer": "3D-Viewer öffnen",
       "buildYourOwn": "Eigene Sauna gestalten"
     },
     "callToAction": {
@@ -1065,17 +1065,17 @@
       "compact": "Kompakt-Saunaraum"
     },
     "roomDescriptions": {
-      "standard": "SAWO Klassische Saunaräume bieten ein zeitloses Saunaerlebnis mit hochwertigem nordischem Holz und praktischen Bankanordnungen.",
+      "standard": "Klassische SAWO Saunaräume bieten ein zeitloses Saunaerlebnis mit hochwertigem nordischem Holz und praktischen Bankanordnungen.",
       "glassfront": "SAWO Glasfront-Saunaräume bieten ein modernes Saunaerlebnis mit widerstandsfähigem Glas für beeindruckende Ausblicke, ohne auf Praktikabilität zu verzichten.",
       "infrared": "SAWO Infrarotsaunen bieten sanfte, therapeutische Wärme durch fortschrittliche Infrarottechnologie für ein entspannendes und belebendes Erlebnis.",
       "compact": "SAWO Kompakt-Saunaräume sind eine stabile Plug-and-play-Lösung für urbane Räume und sofort einsatzbereit. Der verdeckte Ofen sorgt für Sicherheit und freie Sicht."
     },
     "benchTypes": {
       "straight": "Gerade Bank",
-      "lType": "L-Typ Bank",
-      "singleStraight": "Einfache gerade Bank",
-      "doubleStraight": "Doppelte gerade Bank",
-      "middleLType": "L-Typ-Bank mit Mitteltür"
+      "lType": "L-förmige Bank",
+      "singleStraight": "Gerade Einzelbank",
+      "doubleStraight": "Gerade Doppelbank",
+      "middleLType": "L-förmige Bank mit Mitteltür"
     },
     "viewer": {
       "bestSeller": "Bestseller",
@@ -1089,7 +1089,7 @@
       "height": "Höhe",
       "saunaRoomModel": "Saunaraum-Modell",
       "reset": "Zurücksetzen",
-      "showAll": "Alle Anzeigen",
+      "showAll": "Alle anzeigen",
       "doorLocation": "Türposition",
       "woodType": "Holzart",
       "inquireNow": "Jetzt Anfragen",
