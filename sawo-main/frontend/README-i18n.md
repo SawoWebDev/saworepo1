@@ -490,3 +490,29 @@ data/product-i18n/` that walks all of them — not built yet, but the
 per-product plumbing (`fetchProduct`, `getVariationGroups`, the TM lookup,
 the prose/data split, the upserts) is already exactly what a batch mode
 would reuse; it's a loop around what exists, not new machinery.
+
+## Writing standard: natural, not literal (added 2026-09-24)
+
+Translations here are meant to read as if a native marketing writer wrote them, so
+that no separate "make it sound natural" review pass is needed. When translating or
+editing any locale:
+
+- **Write the sentence a native would write**, not a word-for-word rendering. Reorder,
+  split or merge sentences; drop English-only constructions (possessive brand names like
+  "SAWO's" -> "the X of SAWO" in German; stacked noun phrases; exclamation-heavy claims).
+- **One term per concept, per language, everywhere.** Before introducing a term, grep the
+  existing locale files and `product_translations` for the settled one and reuse it. Settled terms:
+  - **de:** Saunaofen/Saunaöfen (heater), Dampferzeuger (never "Dampfgenerator"), Saunaraum/
+    Saunaräume (sauna room), Eimer, Kelle, Steuerung, Zubehör, Ofenschutzgitter, Einbaukragen,
+    Schützeinheit, Fühler (sensor); formal "Sie".
+  - **fi:** kiuas/kiukaat, höyrynkehitin, saunahuone, kiulu, kauha; consistent formal-friendly tone.
+  - **zh (Simplified):** 桑拿加热器 (heater; the catalog uses 加热器, never mix in 桑拿炉), 桑拿房,
+    蒸汽发生器, 水桶, 勺子.
+  - Brand/line/model names stay English (see PRODUCT-TRANSLATION-CONVENTIONS.md).
+- **Marketing copy is transcreated**: keep the meaning and tone, adapt the phrasing to the
+  market. Headings and buttons stay short, in the natural call-to-action form for the language.
+- **Consistency lint:** after any batch, count competing terms across
+  `src/i18n/locales/<locale>/*.json` and the DB (see the 2026-09-24 sweep in git history for
+  the query shape) and normalize outliers through `inject.js`.
+- A native-speaker check is still worth doing once for the glossary above and on a small
+  sample plus safety/legal text — not on every batch.
