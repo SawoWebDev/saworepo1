@@ -9,7 +9,6 @@ import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { getVariationsArray } from "./DispAccessories";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
-import { reviewedLocalesFor } from "../../i18n/seoProductLocales";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -253,9 +252,9 @@ function CompactSpecImages({ images, onImageClick, productName }) {
 
 /* ── PDF Resources Panel ──────────────────────────────────────────── */
 function ResourcesPanel({ files }) {
+  const t = useLocaleT("product");
   const [expanded, setExpanded] = useState(false);
   const isMultiple = files?.length > 1;
-  const t = useLocaleT("product");
 
   if (!files?.length) return (
     <div style={{
@@ -293,7 +292,7 @@ function ResourcesPanel({ files }) {
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</div>
-              <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>PDF · Click to open</div>
+              <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>{t("resourcesPanel.pdfClickToOpen")}</div>
             </div>
             <i className="fa-solid fa-arrow-up-right-from-square" style={{ color: "#a67853", fontSize: "0.7rem", flexShrink: 0 }} />
           </a>
@@ -328,9 +327,11 @@ function ResourcesPanel({ files }) {
         </div>
         <div style={{ flex: 1, textAlign: "left" }}>
           <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#2c1a0e" }}>
-            {files.length} Documents
+            {t("resourcesPanel.documentsCount", { count: files.length })}
           </div>
-          <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>Click to {expanded ? "collapse" : "expand"}</div>
+          <div style={{ fontSize: "0.65rem", color: "#a67853", marginTop: 2 }}>
+            {expanded ? t("resourcesPanel.clickToCollapse") : t("resourcesPanel.clickToExpand")}
+          </div>
         </div>
         <i
           className={`fa-solid fa-chevron-${expanded ? "up" : "down"}`}
@@ -883,6 +884,7 @@ function RelatedProductsGrid({ eyebrow, title, items }) {
 
 /* ── Related Products ─────────────────────────────────────────────── */
 function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
+  const t = useLocaleT("product");
   const { accessories, otherHeaters, generic } = useMemo(() => {
     const empty = { accessories: [], otherHeaters: [], generic: [] };
     if (!allProducts.length) return empty;
@@ -916,13 +918,13 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
   if (accessories.length || otherHeaters.length) {
     return (
       <>
-        <RelatedProductsGrid eyebrow="You might also like" title="Sauna Accessories" items={accessories} />
-        <RelatedProductsGrid eyebrow="You might also like" title="Other Heaters" items={otherHeaters} />
+        <RelatedProductsGrid eyebrow={t("related.youMightAlsoLike")} title={t("related.saunaAccessories")} items={accessories} />
+        <RelatedProductsGrid eyebrow={t("related.youMightAlsoLike")} title={t("related.otherHeaters")} items={otherHeaters} />
       </>
     );
   }
 
-  return <RelatedProductsGrid eyebrow="You might also like" title="Related Products" items={generic} />;
+  return <RelatedProductsGrid eyebrow={t("related.youMightAlsoLike")} title={t("related.relatedProducts")} items={generic} />;
 }
 
 /* ── Skeleton ─────────────────────────────────────────────────────── */
@@ -969,17 +971,17 @@ function cleanHTMLStyles(html) {
 /* ── Main ─────────────────────────────────────────────────────────── */
 export default function ProductPage() {
   const { slug } = useParams();
-  const [lightbox, setLightbox] = useState(null);
-  const { products: localProds, loading } = useLocalProducts();
   const t = useLocaleT("product");
   const localize = useLocalizedPath();
+  const [lightbox, setLightbox] = useState(null);
+  const { products: localProds, loading } = useLocalProducts();
 
   const product = useMemo(() => {
     if (!localProds.length) return null;
     return localProds.find(p => p.slug === slug && isPubliclyVisible(p)) || null;
   }, [localProds, slug]);
 
-  const error = !loading && !product;
+  const error = !loading && !product ? t("notFound.description") : null;
 
   const openLightbox = (images, index) => setLightbox({ images, index });
   const closeLightbox = () => setLightbox(null);
@@ -1071,14 +1073,14 @@ export default function ProductPage() {
   return (
     <>
       <SEO
+        // meta_title/meta_description are NOT covered by product_translations
+        // (see supabaseReader.js's getProductTranslationsLive column list) —
+        // always English regardless of locale, a real gap for a follow-up,
+        // not something to paper over here.
         title={product.meta_title || product.name}
         description={product.meta_description || seoDescription}
         path={localize(`/products/${product.slug}`)}
         image={product.og_image || thumbnail || undefined}
-        hreflangAlternates={reviewedLocalesFor(product.slug).length > 0 ? {
-          en: `/products/${product.slug}`,
-          ...Object.fromEntries(reviewedLocalesFor(product.slug).map((l) => [l, `/${l}/products/${product.slug}`])),
-        } : undefined}
       />
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
@@ -1302,7 +1304,7 @@ export default function ProductPage() {
               className="pp-outer"
               style={{ maxWidth: 1140, margin: "0 auto", padding: "12px 8px" }}
             >
-              <SectionLabel text="Specifications" />
+              <SectionLabel text={t("sections.specifications")} />
 
               {/* Full Description */}
               {hasDesc && (
