@@ -110,6 +110,23 @@ const MATERIAL_WORD_DICTIONARY = {
     Aluminum: "Alumiini",
     "Black Metal": "Musta metalli",
   },
+  de: {
+    Cedar: "Zeder",
+    Aspen: "Espe",
+    Hemlock: "Hemlock",
+    Alder: "Erle",
+    Pine: "Kiefer",
+    Spruce: "Fichte",
+    Birch: "Birke",
+    Black: "Schwarz",
+    White: "Weiß",
+    Grey: "Grau",
+    Gray: "Grau",
+    Silver: "Silber",
+    Natural: "Naturfarben",
+    Aluminum: "Aluminium",
+    "Black Metal": "Schwarzmetall",
+  },
 };
 
 // Matches "<Word>" or "<Word> (<anything>)" where <Word> is 1-2 plain
