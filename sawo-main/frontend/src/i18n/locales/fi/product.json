@@ -75,5 +75,6 @@
   },
   "featureTabs": {
     "tabFallback": "Välilehti {{number}}"
-  }
+  },
+  "seoFallbackProductDescription": "{{name}} – SAWO. Laadukkaita suomalaisia saunatuotteita."
 }

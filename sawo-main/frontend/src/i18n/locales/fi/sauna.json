@@ -279,10 +279,6 @@
       "desc": "SAWO-kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, tarjoten tasaisen suorituskyvyn luotettavaan ja ylivertaiseen saunakokemukseen joka kerta.",
       "userFriendly": "Käyttäjäystävälliset ohjaimet: Säädä lämpötilaa ja aikaa helposti täydellisen saunakokemuksen saavuttamiseksi."
     },
-    "promo": {
-      "title": "Koe täydellinen rentoutuminen",
-      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
-    },
     "empty": "Tower-kiukaita ei ole saatavilla."
   },
   "roomsPage": {
@@ -747,10 +743,6 @@
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
       "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
-    },
-    "promo": {
-      "title": "Koe täydellinen rentoutuminen",
-      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
     }
   },
   "stonePage": {
@@ -774,10 +766,6 @@
       "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
       "durable": "Kestävä rakenne: Korkealaatuiset materiaalit takaavat pitkäikäisen suorituskyvyn."
     },
-    "promo": {
-      "title": "Koe täydellinen rentoutuminen",
-      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
-    },
     "empty": "Stone-kiukaita ei ole saatavilla."
   },
   "floorPage": {
@@ -799,10 +787,6 @@
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
       "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
-    },
-    "promo": {
-      "title": "Koe täydellinen rentoutuminen",
-      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
     },
     "empty": "Lattiakiukaita ei ole saatavilla."
   },
@@ -827,10 +811,6 @@
       "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
       "durable": "Kestävä rakenne: Korkealaatuiset materiaalit takaavat pitkäikäisen suorituskyvyn."
     },
-    "promo": {
-      "title": "Koe täydellinen rentoutuminen",
-      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
-    },
     "empty": "Combi-kiukaita ei ole saatavilla."
   },
   "dragonfirePage": {
@@ -853,10 +833,6 @@
       "title": "Miksi valita SAWOn kiukaat",
       "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
       "userFriendly": "Käyttäjäystävälliset ohjaimet: Säädä lämpötilaa ja aikaa helposti täydellisen saunakokemuksen saavuttamiseksi."
-    },
-    "promo": {
-      "title": "Koe täydellinen rentoutuminen",
-      "subtitle": "Löydä oma rauhan lähteesi yli 100 kiuasmallin joukosta"
     },
     "empty": "Dragonfire-kiukaita ei ole saatavilla."
   },

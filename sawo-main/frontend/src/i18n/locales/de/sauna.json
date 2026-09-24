@@ -272,10 +272,6 @@
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen Wählen",
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis."
-    },
-    "promo": {
-      "title": "Erleben Sie Ultimative Entspannung",
-      "subtitle": "Finden Sie Ihre Quelle der Gelassenheit aus über 100 Ofenmodellen"
     }
   },
   "stonePage": {
@@ -298,10 +294,6 @@
       "title": "Warum SAWO Öfen Wählen",
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
       "durable": "Robuste Konstruktion: Hochwertige Materialien sorgen für langanhaltende Leistung."
-    },
-    "promo": {
-      "title": "Erleben Sie Ultimative Entspannung",
-      "subtitle": "Finden Sie Ihre Quelle der Gelassenheit aus über 100 Ofenmodellen"
     },
     "empty": "Keine Stone-Öfen verfügbar."
   },
@@ -331,10 +323,6 @@
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
       "userFriendly": "Benutzerfreundliche Steuerung: Passen Sie Temperatur und Zeiteinstellungen einfach für Ihr perfektes Saunaerlebnis an."
     },
-    "promo": {
-      "title": "Erleben Sie Ultimative Entspannung",
-      "subtitle": "Finden Sie Ihre Quelle der Gelassenheit aus über 100 Ofenmodellen"
-    },
     "empty": "Keine Tower-Öfen verfügbar."
   },
   "floorPage": {
@@ -356,10 +344,6 @@
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen Wählen",
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis."
-    },
-    "promo": {
-      "title": "Erleben Sie Ultimative Entspannung",
-      "subtitle": "Finden Sie Ihre Quelle der Gelassenheit aus über 100 Ofenmodellen"
     },
     "empty": "Keine Boden-Öfen verfügbar."
   },
@@ -384,10 +368,6 @@
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
       "durable": "Robuste Konstruktion: Hochwertige Materialien sorgen für langanhaltende Leistung."
     },
-    "promo": {
-      "title": "Erleben Sie Ultimative Entspannung",
-      "subtitle": "Finden Sie Ihre Quelle der Gelassenheit aus über 100 Ofenmodellen"
-    },
     "empty": "Keine Combi-Öfen verfügbar."
   },
   "dragonfirePage": {
@@ -410,10 +390,6 @@
       "title": "Warum SAWO Öfen Wählen",
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
       "userFriendly": "Benutzerfreundliche Steuerung: Passen Sie Temperatur und Zeiteinstellungen einfach für Ihr perfektes Saunaerlebnis an."
-    },
-    "promo": {
-      "title": "Erleben Sie Ultimative Entspannung",
-      "subtitle": "Finden Sie Ihre Quelle der Gelassenheit aus über 100 Ofenmodellen"
     },
     "empty": "Keine Dragonfire-Öfen verfügbar."
   },

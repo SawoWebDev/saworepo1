@@ -272,10 +272,6 @@
       "eyebrow": "SAWO HEATERS",
       "title": "Why Choose SAWO Heaters",
       "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time."
-    },
-    "promo": {
-      "title": "Experience Ultimate Relaxation",
-      "subtitle": "Find your source of serenity from over 100 heater models"
     }
   },
   "stonePage": {
@@ -298,10 +294,6 @@
       "title": "Why Choose SAWO Heaters",
       "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.",
       "durable": "Durable Construction: High-quality materials ensure long-lasting performance."
-    },
-    "promo": {
-      "title": "Experience Ultimate Relaxation",
-      "subtitle": "Find your source of serenity from over 100 heater models"
     },
     "empty": "No Stone heaters available."
   },
@@ -331,10 +323,6 @@
       "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.",
       "userFriendly": "User-Friendly Controls: Easily adjust temperature and time settings for your perfect sauna experience."
     },
-    "promo": {
-      "title": "Experience Ultimate Relaxation",
-      "subtitle": "Find your source of serenity from over 100 heater models"
-    },
     "empty": "No Tower heaters available."
   },
   "floorPage": {
@@ -356,10 +344,6 @@
       "eyebrow": "SAWO HEATERS",
       "title": "Why Choose SAWO Heaters",
       "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time."
-    },
-    "promo": {
-      "title": "Experience Ultimate Relaxation",
-      "subtitle": "Find your source of serenity from over 100 heater models"
     },
     "empty": "No Floor heaters available."
   },
@@ -384,10 +368,6 @@
       "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.",
       "durable": "Durable Construction: High-quality materials ensure long-lasting performance."
     },
-    "promo": {
-      "title": "Experience Ultimate Relaxation",
-      "subtitle": "Find your source of serenity from over 100 heater models"
-    },
     "empty": "No Combi heaters available."
   },
   "dragonfirePage": {
@@ -410,10 +390,6 @@
       "title": "Why Choose SAWO Heaters",
       "desc": "SAWO heaters combine durability, energy efficiency, and modern design, offering consistent performance for a reliable, superior sauna experience every time.",
       "userFriendly": "User-Friendly Controls: Easily adjust temperature and time settings for your perfect sauna experience."
-    },
-    "promo": {
-      "title": "Experience Ultimate Relaxation",
-      "subtitle": "Find your source of serenity from over 100 heater models"
     },
     "empty": "No Dragonfire heaters available."
   },

@@ -75,5 +75,6 @@
   },
   "featureTabs": {
     "tabFallback": "标签 {{number}}"
-  }
+  },
+  "seoFallbackProductDescription": "{{name}}，来自 SAWO。优质芬兰桑拿设备。"
 }
