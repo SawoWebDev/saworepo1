@@ -22,7 +22,7 @@
     "infrared": "Infrarot"
   },
   "items": {
-    "wallMounted": "Wandmontage",
+    "wallMounted": "Wandmontiert",
     "tower": "Turm",
     "stone": "Stein",
     "floor": "Standmodell",
@@ -34,7 +34,7 @@
     "saunaRooms": "Saunakabinen",
     "interiorDesigns": "Innenausstattung",
     "woodPanels": "Holzpaneele & Hölzer",
-    "steamGenerators": "Dampfgeneratoren",
+    "steamGenerators": "Dampferzeuger",
     "steamControls": "Dampfsteuerungen",
     "steamAccessories": "Dampfzubehör",
     "infrared": "Infrarot",
