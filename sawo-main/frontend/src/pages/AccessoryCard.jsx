@@ -65,7 +65,7 @@ export const ACCESSORY_CARD_CSS = `
 .sawo-av-subtext strong,.sawo-av-code strong{font-weight:600}
 .sawo-av-best-seller-badge{position:absolute;top:16px;left:-36px;width:140px;background-color:#af8564;color:#fff;text-align:center;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;letter-spacing:0.5px;padding:5px 0;transform:rotate(-45deg);z-index:20;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
 .sawo-av-video-modal{display:flex;position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);z-index:10;justify-content:center;align-items:center}
-.sawo-av-popup-video{width:100%;height:100%;object-fit:cover;background:#000;z-index:11}
+.sawo-av-popup-video{width:100%;height:100%;object-fit:contain;background:#000;z-index:11}
 .sawo-av-close-video{position:absolute;top:10px;right:10px;background:#fff;border:none;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;z-index:12}
 .sawo-av-video-btn{background-color:#2c1a0e;cursor:pointer;width:14px;height:14px;border:2px solid transparent;transition:border-color 0.3s ease,transform 0.3s ease;border-radius:50%;user-select:none;padding:0;display:flex;align-items:center;justify-content:center}
 .sawo-av-video-btn:hover{border-color:#af8564;transform:scale(1.3)}
