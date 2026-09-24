@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "Sonde de température de banc",
     "fan": "Ventilateur",
     "rating": "Puissance nominale"
+  },
+  "colorNames": {
+    "cedar": "Cèdre",
+    "hemlock": "Pruche",
+    "aspen": "Tremble",
+    "black": "Noir",
+    "white": "Blanc",
+    "blackMetal": "Métal noir",
+    "aluminum": "Aluminium",
+    "metallicBrown": "Brun métallisé",
+    "pine": "Pin",
+    "red": "Rouge"
   }
 }

@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "Lauteen lämpötila-anturi",
     "fan": "Puhallin",
     "rating": "Nimellisarvo"
+  },
+  "colorNames": {
+    "cedar": "Setri",
+    "hemlock": "Hemlokki",
+    "aspen": "Haapa",
+    "black": "Musta",
+    "white": "Valkoinen",
+    "blackMetal": "Musta metalli",
+    "aluminum": "Alumiini",
+    "metallicBrown": "Metallinruskea",
+    "pine": "Mänty",
+    "red": "Punainen"
   }
 }

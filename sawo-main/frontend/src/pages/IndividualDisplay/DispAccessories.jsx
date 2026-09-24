@@ -464,6 +464,18 @@ function SectionLabel({ icon, text }) {
    Also the palette behind the admin CMS's Variations color picker (see
    Products.jsx's VariationsManager) — typing a color name there previews
    against this same map, so admin and live-page dots always match. */
+// English variant.color -> product.json colorNames key, so the Option line, dot
+// tooltips and image alt text follow the visitor's language.
+const COLOR_NAME_KEYS = {
+  cedar: "cedar", hemlock: "hemlock", aspen: "aspen", black: "black", white: "white",
+  "black metal": "blackMetal", aluminum: "aluminum", "metallic brown": "metallicBrown",
+  pine: "pine", red: "red",
+};
+function colorLabel(t, color) {
+  const key = COLOR_NAME_KEYS[(color || "").toLowerCase()];
+  return key ? t(`colorNames.${key}`) : color;
+}
+
 export const VARIANT_COLOR_DOT = {
   "hemlock": "#d9b98c",
   "white": "#f7f5f1",
@@ -497,7 +509,7 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
   const t = useLocaleT("product");
   const tc = useLocaleT("common");
   const codes = variants.map(v => v.code).filter(Boolean);
-  const colors = variants.map(v => v.color).filter(Boolean);
+  const colors = variants.map(v => colorLabel(t, v.color)).filter(Boolean);
   const capacityRow = (product.spec_table?.rows || []).find(row =>
     (Array.isArray(row) ? row[0] : row?.Specification) === "Capacity"
   );
@@ -524,7 +536,7 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
             <button
               key={v.key}
               onClick={() => onSelectVariant(v)}
-              title={v.color}
+              title={colorLabel(t, v.color)}
               style={{
                 width: 26, height: 26, borderRadius: "50%", padding: 0, cursor: "pointer",
                 background: VARIANT_COLOR_DOT[(v.color || "").toLowerCase()] || "#d5b99a",
@@ -955,7 +967,7 @@ export default function AccessoriesPage() {
                     ) : displayImage && !imageErrors[selectedVariant?.key || "__main__"] ? (
                       <ImageWithLoader
                         src={displayImage}
-                        alt={selectedVariant?.color || selectedVariant?.code || product.name}
+                        alt={colorLabel(t, selectedVariant?.color) || selectedVariant?.code || product.name}
                         onError={() => setImageErrors(e => ({ ...e, [selectedVariant?.key || "__main__"]: true }))}
                         style={{
                           maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
@@ -1007,7 +1019,7 @@ export default function AccessoriesPage() {
                           setImageErrors(e => ({ ...e, [variant.key]: false }));
                           setShowVideo(false);
                         }}
-                        title={variant.color || variant.code}
+                        title={colorLabel(t, variant.color) || variant.code}
                         style={{
                           width: 60, height: 60, borderRadius: 8,
                           border: `2px solid ${!showVideo && selectedVariant?.key === variant.key ? "#a67853" : "#edddd0"}`,
@@ -1019,7 +1031,7 @@ export default function AccessoriesPage() {
                         {variant.image && !imageErrors[variant.key] ? (
                           <ImageWithLoader
                             src={variant.image}
-                            alt={variant.color || variant.code}
+                            alt={colorLabel(t, variant.color) || variant.code}
                             onError={() => setImageErrors(e => ({ ...e, [variant.key]: true }))}
                             style={{
                               width: "100%", height: "100%", objectFit: "contain",

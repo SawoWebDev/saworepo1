@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "Temperatursensor (Bank)",
     "fan": "Lüfter",
     "rating": "Nennwert"
+  },
+  "colorNames": {
+    "cedar": "Zeder",
+    "hemlock": "Hemlock",
+    "aspen": "Espe",
+    "black": "Schwarz",
+    "white": "Weiß",
+    "blackMetal": "Schwarzmetall",
+    "aluminum": "Aluminium",
+    "metallicBrown": "Metallic-Braun",
+    "pine": "Kiefer",
+    "red": "Rot"
   }
 }

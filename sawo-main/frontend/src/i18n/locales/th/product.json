@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "เซนเซอร์อุณหภูมิที่ม้านั่ง",
     "fan": "พัดลม",
     "rating": "กำลังไฟพิกัด"
+  },
+  "colorNames": {
+    "cedar": "ซีดาร์",
+    "hemlock": "เฮมล็อก",
+    "aspen": "แอสเพน",
+    "black": "สีดำ",
+    "white": "สีขาว",
+    "blackMetal": "โลหะสีดำ",
+    "aluminum": "อะลูมิเนียม",
+    "metallicBrown": "สีน้ำตาลเมทัลลิก",
+    "pine": "สน",
+    "red": "สีแดง"
   }
 }

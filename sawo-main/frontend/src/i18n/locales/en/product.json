@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "Bench Temperature Sensor",
     "fan": "Fan",
     "rating": "Rating"
+  },
+  "colorNames": {
+    "cedar": "Cedar",
+    "hemlock": "Hemlock",
+    "aspen": "Aspen",
+    "black": "Black",
+    "white": "White",
+    "blackMetal": "Black Metal",
+    "aluminum": "Aluminum",
+    "metallicBrown": "Metallic Brown",
+    "pine": "Pine",
+    "red": "Red"
   }
 }

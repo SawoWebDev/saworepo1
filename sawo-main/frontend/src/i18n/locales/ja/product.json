@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "ベンチ用温度センサー",
     "fan": "ファン",
     "rating": "定格"
+  },
+  "colorNames": {
+    "cedar": "シダー",
+    "hemlock": "ヘムロック",
+    "aspen": "アスペン",
+    "black": "ブラック",
+    "white": "ホワイト",
+    "blackMetal": "ブラックメタル",
+    "aluminum": "アルミニウム",
+    "metallicBrown": "メタリックブラウン",
+    "pine": "パイン",
+    "red": "レッド"
   }
 }

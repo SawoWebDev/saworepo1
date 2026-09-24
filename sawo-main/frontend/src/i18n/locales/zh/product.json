@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "长凳温度传感器",
     "fan": "风扇",
     "rating": "额定值"
+  },
+  "colorNames": {
+    "cedar": "雪松",
+    "hemlock": "铁杉",
+    "aspen": "白杨",
+    "black": "黑色",
+    "white": "白色",
+    "blackMetal": "黑色金属",
+    "aluminum": "铝合金",
+    "metallicBrown": "金属棕",
+    "pine": "松木",
+    "red": "红色"
   }
 }

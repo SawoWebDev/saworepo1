@@ -107,5 +107,17 @@
     "benchTemperatureSensor": "Sensor de temperatura de banco",
     "fan": "Ventilador",
     "rating": "Potencia nominal"
+  },
+  "colorNames": {
+    "cedar": "Cedro",
+    "hemlock": "Tsuga",
+    "aspen": "Álamo",
+    "black": "Negro",
+    "white": "Blanco",
+    "blackMetal": "Metal negro",
+    "aluminum": "Aluminio",
+    "metallicBrown": "Marrón metálico",
+    "pine": "Pino",
+    "red": "Rojo"
   }
 }
