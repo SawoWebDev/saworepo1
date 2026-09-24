@@ -76,5 +76,36 @@
   "featureTabs": {
     "tabFallback": "Tab {{number}}"
   },
-  "seoFallbackProductDescription": "{{name}} by SAWO. Premium Finnish sauna equipment."
+  "seoFallbackProductDescription": "{{name}} by SAWO. Premium Finnish sauna equipment.",
+  "specLabels": {
+    "size": "Size",
+    "capacity": "Capacity",
+    "openingSize": "Opening Size",
+    "frameSize": "Frame Size",
+    "weight": "Weight",
+    "productCode": "Product Code",
+    "setCodes": "Set Codes",
+    "ductingHole": "Ducting Hole",
+    "includes": "Includes",
+    "thickness": "Thickness",
+    "use": "Use",
+    "material": "Material",
+    "code": "Code"
+  },
+  "tableCells": {
+    "separate": "Separate",
+    "builtIn": "Built-in",
+    "maxSessionTime": "Max. Session Time",
+    "technicalDetails": "TECHNICAL DETAILS",
+    "productDimensions": "PRODUCT DIMENSIONS",
+    "switchingCapacityPerPhase": "Switching Capacity per phase",
+    "frequency": "Frequency",
+    "temperatureRange": "Temperature Range",
+    "ratedVoltage": "Rated Voltage",
+    "suitableHeaters": "Suitable Heaters",
+    "benchCombinedSensor": "Bench Combined Temperature-Humidity Sensor",
+    "benchTemperatureSensor": "Bench Temperature Sensor",
+    "fan": "Fan",
+    "rating": "Rating"
+  }
 }

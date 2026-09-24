@@ -9,6 +9,7 @@ import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { getVariationsArray } from "./DispAccessories";
 import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
+import { translateSpecLabel, translateHtmlTableCells } from "../../utils/specLabel";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -945,9 +946,10 @@ function SkeletonPage() {
 }
 
 /* ── Utility: Clean inline styles from HTML ────────────────────────── */
-function cleanHTMLStyles(html) {
+function cleanHTMLStyles(html, t) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
+  if (t) translateHtmlTableCells(temp, t);
 
   // Remove all style attributes from all elements, but preserve br tags
   const allElements = temp.querySelectorAll("*");
@@ -1320,7 +1322,7 @@ export default function ProductPage() {
                       maxWidth: "100%",
                       whiteSpace: "pre-wrap", wordWrap: "break-word",
                     }}
-                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description) }}
+                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description, t) }}
                   />
                 </div>
               )}
@@ -1355,7 +1357,7 @@ export default function ProductPage() {
                               <td key={ci} style={{
                                 padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
                                 borderRight: ci < specHeaders.length - 1 ? "1px solid #edddd0" : "none",
-                              }}>{specCell(row, h, ci) || "–"}</td>
+                              }}>{translateSpecLabel(t, specCell(row, h, ci), ci) || "–"}</td>
                             ))}
                           </tr>
                         ))}
@@ -1423,7 +1425,7 @@ export default function ProductPage() {
                                       <td key={ci} style={{
                                         padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
                                         borderRight: ci < gHeaders.length - 1 ? "1px solid #edddd0" : "none",
-                                      }}>{specCell(row, h, ci) || "–"}</td>
+                                      }}>{translateSpecLabel(t, specCell(row, h, ci), ci) || "–"}</td>
                                     ))}
                                   </tr>
                                 ))}

@@ -76,5 +76,36 @@
   "featureTabs": {
     "tabFallback": "标签{{number}}"
   },
-  "seoFallbackProductDescription": "{{name}}，来自SAWO。优质芬兰桑拿设备。"
+  "seoFallbackProductDescription": "{{name}}，来自SAWO。优质芬兰桑拿设备。",
+  "specLabels": {
+    "size": "尺寸",
+    "capacity": "容量",
+    "openingSize": "开口尺寸",
+    "frameSize": "框架尺寸",
+    "weight": "重量",
+    "productCode": "产品代码",
+    "setCodes": "套装代码",
+    "ductingHole": "风管孔",
+    "includes": "包含",
+    "thickness": "厚度",
+    "use": "用途",
+    "material": "材料",
+    "code": "代码"
+  },
+  "tableCells": {
+    "separate": "外置",
+    "builtIn": "内置",
+    "maxSessionTime": "最长使用时间",
+    "technicalDetails": "技术详情",
+    "productDimensions": "产品尺寸",
+    "switchingCapacityPerPhase": "每相开关容量",
+    "frequency": "频率",
+    "temperatureRange": "温度范围",
+    "ratedVoltage": "额定电压",
+    "suitableHeaters": "适用加热器",
+    "benchCombinedSensor": "长凳温湿度组合传感器",
+    "benchTemperatureSensor": "长凳温度传感器",
+    "fan": "风扇",
+    "rating": "额定值"
+  }
 }

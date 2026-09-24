@@ -76,5 +76,36 @@
   "featureTabs": {
     "tabFallback": "Välilehti {{number}}"
   },
-  "seoFallbackProductDescription": "{{name}} – SAWO. Laadukkaita suomalaisia saunatuotteita."
+  "seoFallbackProductDescription": "{{name}} – SAWO. Laadukkaita suomalaisia saunatuotteita.",
+  "specLabels": {
+    "size": "Koko",
+    "capacity": "Kapasiteetti",
+    "openingSize": "Aukon koko",
+    "frameSize": "Kehyksen koko",
+    "weight": "Paino",
+    "productCode": "Tuotekoodi",
+    "setCodes": "Settikoodit",
+    "ductingHole": "Kanava-aukko",
+    "includes": "Sisältää",
+    "thickness": "Paksuus",
+    "use": "Käyttö",
+    "material": "Materiaali",
+    "code": "Koodi"
+  },
+  "tableCells": {
+    "separate": "Erillinen",
+    "builtIn": "Sisäänrakennettu",
+    "maxSessionTime": "Enimmäiskäyttöaika",
+    "technicalDetails": "TEKNISET TIEDOT",
+    "productDimensions": "TUOTTEEN MITAT",
+    "switchingCapacityPerPhase": "Kytkentäteho vaihetta kohti",
+    "frequency": "Taajuus",
+    "temperatureRange": "Lämpötila-alue",
+    "ratedVoltage": "Nimellisjännite",
+    "suitableHeaters": "Sopivat kiukaat",
+    "benchCombinedSensor": "Lauteen yhdistetty lämpötila- ja kosteusanturi",
+    "benchTemperatureSensor": "Lauteen lämpötila-anturi",
+    "fan": "Puhallin",
+    "rating": "Nimellisarvo"
+  }
 }

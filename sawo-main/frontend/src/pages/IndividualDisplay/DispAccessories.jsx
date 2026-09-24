@@ -8,6 +8,7 @@ import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
+import { translateSpecLabel, translateHtmlTableCells } from "../../utils/specLabel";
 import { reviewedLocalesFor } from "../../i18n/seoProductLocales";
 
 // Accessory categories that should be displayed in the Accessories page
@@ -94,9 +95,10 @@ export function getVariationsArray(product) {
   ];
 }
 
-function cleanHTMLStyles(html) {
+function cleanHTMLStyles(html, t) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
+  if (t) translateHtmlTableCells(temp, t);
   const allElements = temp.querySelectorAll("*");
   allElements.forEach(el => {
     if (el.tagName === "BR") {
@@ -1200,7 +1202,7 @@ export default function AccessoriesPage() {
                       maxWidth: "100%",
                       whiteSpace: "pre-wrap", wordWrap: "break-word",
                     }}
-                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description) }}
+                    dangerouslySetInnerHTML={{ __html: cleanHTMLStyles(product.description, t) }}
                   />
                 </div>
               )}
@@ -1233,7 +1235,7 @@ export default function AccessoriesPage() {
                                 padding: "8px 14px", color: "#5a4030", fontSize: "0.8rem", textAlign: "center",
                                 borderRight: ci < specHeaders.length - 1 ? "1px solid #edddd0" : "none",
                               }}>
-                                {specCell(row, h, ci) || "–"}
+                                {translateSpecLabel(t, specCell(row, h, ci), ci) || "–"}
                               </td>
                             ))}
                           </tr>

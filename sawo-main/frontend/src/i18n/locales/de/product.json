@@ -76,5 +76,36 @@
   "featureTabs": {
     "tabFallback": "Tab {{number}}"
   },
-  "seoFallbackProductDescription": "{{name}} von SAWO. Hochwertige finnische Saunaausstattung."
+  "seoFallbackProductDescription": "{{name}} von SAWO. Hochwertige finnische Saunaausstattung.",
+  "specLabels": {
+    "size": "Größe",
+    "capacity": "Kapazität",
+    "openingSize": "Öffnungsgröße",
+    "frameSize": "Rahmengröße",
+    "weight": "Gewicht",
+    "productCode": "Produktcode",
+    "setCodes": "Set-Codes",
+    "ductingHole": "Kanalöffnung",
+    "includes": "Enthält",
+    "thickness": "Dicke",
+    "use": "Verwendung",
+    "material": "Material",
+    "code": "Code"
+  },
+  "tableCells": {
+    "separate": "Separat",
+    "builtIn": "Integriert",
+    "maxSessionTime": "Max. Sitzungsdauer",
+    "technicalDetails": "TECHNISCHE DETAILS",
+    "productDimensions": "PRODUKTABMESSUNGEN",
+    "switchingCapacityPerPhase": "Schaltleistung pro Phase",
+    "frequency": "Frequenz",
+    "temperatureRange": "Temperaturbereich",
+    "ratedVoltage": "Nennspannung",
+    "suitableHeaters": "Geeignete Saunaöfen",
+    "benchCombinedSensor": "Kombinierter Temperatur-/Feuchtesensor (Bank)",
+    "benchTemperatureSensor": "Temperatursensor (Bank)",
+    "fan": "Lüfter",
+    "rating": "Nennwert"
+  }
 }
