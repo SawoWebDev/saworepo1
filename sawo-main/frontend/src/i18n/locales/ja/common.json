@@ -1,1 +1,86 @@
-{}
+{
+  "exploreMore": "もっと見る",
+  "inquireToday": "今すぐお問い合わせ",
+  "viewCatalogue": "カタログを見る",
+  "viewBrochure": "パンフレットを見る",
+  "previous": "前へ",
+  "next": "次へ",
+  "pageCTA": {
+    "defaultTitle": "製品選びでお悩みですか？",
+    "defaultDescription": "ご家庭や商業施設に最適なSAWOのサウナ構成を、専門チームがご提案します。",
+    "contactUs": "お問い合わせ",
+    "viewManuals": "取扱説明書を見る"
+  },
+  "saunaCalculatorCTA": {
+    "title": "理想のサウナを見つけましょう",
+    "subtitle": "サウナルームの幅・高さ・奥行きを入力するだけで、容積を自動計算し、最適なヒーター出力（kW）をご提案します。",
+    "buttonLabel": "サウナ計算ツール"
+  },
+  "catalogFilter": {
+    "all": "すべて",
+    "searchPlaceholder": "{{category}}を検索…",
+    "clearSearch": "検索をクリア",
+    "noProductsYet": "現在、掲載中の製品はありません。",
+    "noMatch": "「{{query}}」に一致する{{category}}はありません",
+    "noResultsFor": "「{{query}}」の検索結果はありません",
+    "resultsCount_one": "「{{query}}」の検索結果：{{count}}件",
+    "resultsCount_other": "「{{query}}」の検索結果：{{count}}件"
+  },
+  "wellnessBenefits": {
+    "stressRelief": {
+      "label": "ストレス軽減",
+      "desc": "ストレスを和らげ、リラックスを促し、不安感を軽減します"
+    },
+    "heartHealth": {
+      "label": "心臓の健康",
+      "desc": "血行を促進し、動脈の硬化を抑え、健やかな血圧をサポートします"
+    },
+    "respiratoryRelief": {
+      "label": "呼吸器のケア",
+      "desc": "鼻づまり、副鼻腔や胸のつかえ感を和らげます"
+    },
+    "muscleRecovery": {
+      "label": "筋肉の回復",
+      "desc": "運動後の筋肉の回復を早めます"
+    },
+    "betterSleep": {
+      "label": "睡眠の質の向上",
+      "desc": "レム睡眠の時間を延ばし、より深く質の高い眠りへ導きます"
+    },
+    "diseasePrevention": {
+      "label": "病気の予防",
+      "desc": "脳卒中、高血圧、認知症、アルツハイマー病など、心血管系疾患のリスクを低減します"
+    },
+    "skinDetox": {
+      "label": "肌のデトックス",
+      "desc": "毛穴を開き、黒ずみを抑え、老廃物の排出を促して肌を整えます"
+    },
+    "collagenBoost": {
+      "label": "コラーゲン生成のサポート",
+      "desc": "線維芽細胞の働きを促してコラーゲンの生成を高め、肌のキメを整えます"
+    },
+    "skinHydration": {
+      "label": "肌の保湿",
+      "desc": "肌の潤いを高め、pHバランスを整え、肌本来のバリア機能を強化します"
+    },
+    "immuneSupport": {
+      "label": "免疫力のサポート",
+      "desc": "体が本来持つ免疫機能を支え、病後の回復を助けます"
+    },
+    "metabolismBoost": {
+      "label": "代謝の向上",
+      "desc": "たんぱく質の修復を促し、インスリン感受性を高め、代謝を向上させます"
+    },
+    "mentalWellness": {
+      "label": "メンタルウェルネス",
+      "desc": "継続的にご利用いただくことで、うつ症状を大きく軽減します"
+    }
+  },
+  "accessoryCard": {
+    "bestSeller": "ベストセラー",
+    "close": "閉じる",
+    "watchVideo": "動画を見る",
+    "code": "品番",
+    "option": "オプション"
+  }
+}

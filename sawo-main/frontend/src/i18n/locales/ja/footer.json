@@ -1,0 +1,51 @@
+{
+  "headings": {
+    "finnishSauna": "フィンランド式サウナ",
+    "steamRoom": "スチームルーム",
+    "infraredSauna": "赤外線サウナ",
+    "followUs": "フォローする",
+    "support": "サポート",
+    "download": "ダウンロード",
+    "technicalSupport": "テクニカルサポート",
+    "offices": "拠点"
+  },
+  "links": {
+    "saunaHeaters": "サウナヒーター",
+    "saunaControls": "サウナコントローラー",
+    "saunaAccessories": "サウナアクセサリー",
+    "saunaRooms": "サウナルーム",
+    "steamGenerators": "スチームジェネレーター",
+    "steamControls": "スチームコントローラー",
+    "steamAccessories": "スチームアクセサリー",
+    "infraredSaunas": "赤外線サウナルーム",
+    "infraredPanels": "赤外線パネル",
+    "infraredControls": "赤外線コントローラー",
+    "faq": "よくあるご質問",
+    "aboutUs": "会社概要",
+    "contactUs": "お問い合わせ",
+    "careers": "採用情報",
+    "privacyPolicy": "プライバシーポリシー",
+    "sitemap": "サイトマップ",
+    "productCatalogue": "製品カタログ",
+    "userManuals": "取扱説明書"
+  },
+  "technicalSupportIntro": "技術サポートおよびクレームに関するお問い合わせは、下記までご連絡ください。",
+  "whatsapp": "WhatsApp",
+  "tel": "TEL",
+  "offices": {
+    "global": "グローバル営業・一般のお問い合わせ",
+    "nordics": "北欧地域の営業・倉庫",
+    "asia": "アジア地域の営業・倉庫",
+    "europe": "ヨーロッパ地域の営業・倉庫"
+  },
+  "copyright": "© {{year}} All rights reserved. · SAWO",
+  "social": {
+    "facebook": "SAWO Facebook公式ページ",
+    "instagram": "SAWO Instagram公式アカウント",
+    "linkedin": "SAWO LinkedIn公式ページ",
+    "youtube": "SAWO YouTube公式チャンネル",
+    "tiktok": "SAWO TikTok公式アカウント",
+    "email": "SAWOサポートへメールを送る",
+    "phone": "SAWOに電話する"
+  }
+}

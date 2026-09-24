@@ -1,0 +1,135 @@
+{
+  "allProducts": {
+    "meta": {
+      "title": "全製品",
+      "description": "SAWOの全製品ラインアップ（サウナヒーター、サウナルーム、アクセサリー）を、検索できるカタログでまとめてご覧いただけます。"
+    },
+    "hero": {
+      "eyebrow": "コンプリートコレクション",
+      "title": "全製品",
+      "description": "SAWOの全製品ラインアップ（サウナヒーター、コントローラー、スチームジェネレーター、サウナルーム、アクセサリー）を、検索できるカタログでまとめてご覧いただけます。"
+    },
+    "loading": "製品を読み込んでいます...",
+    "sidebar": {
+      "browseBy": "絞り込み",
+      "type": "タイプ",
+      "categories": "カテゴリー"
+    },
+    "tabs": {
+      "heaters": "サウナヒーター",
+      "rooms": "サウナルーム",
+      "saunaControls": "サウナコントローラー",
+      "steam": "スチーム",
+      "infrared": "赤外線",
+      "heaterAccessories": "ヒーター用アクセサリー",
+      "accessories": "サウナアクセサリー"
+    },
+    "heaterSections": {
+      "wallMounted": "壁掛けタイプ",
+      "tower": "タワータイプ",
+      "stone": "ストーンタイプ",
+      "floor": "床置きタイプ",
+      "combi": "コンビタイプ",
+      "dragonfire": "ドラゴンファイア"
+    },
+    "roomSections": {
+      "standard": "スタンダード",
+      "glassFront": "ガラスフロント",
+      "compact": "コンパクト"
+    },
+    "steamSections": {
+      "generators": "スチームジェネレーター",
+      "controls": "スチームコントローラー",
+      "accessories": "スチームアクセサリー"
+    },
+    "infraredSections": {
+      "rooms": "サウナルーム",
+      "panels": "パネル",
+      "controls": "コントローラー"
+    },
+    "heaterAccessoriesLabels": {
+      "Heater Guard": "ヒーターガード",
+      "Integration Collar": "カラー",
+      "Humidifiers": "コージータンク",
+      "Sauna Accessories": "安全アクセサリー",
+      "Sauna Stones": "サウナストーン"
+    },
+    "categorySections": {
+      "pails": "バケツ",
+      "ladles": "ひしゃく",
+      "pailShower": "バケツシャワー",
+      "meters": "温度計＆温湿度計",
+      "clockTimer": "時計＆タイマー",
+      "saunaLights": "サウナ用照明",
+      "headrestBackrest": "ヘッドレスト＆バックレスト",
+      "doorsHandles": "ドア＆ハンドル",
+      "benches": "ベンチ",
+      "clothHangers": "ハンガー＆フックラック",
+      "woodenFloorMats": "フロアマットタイル",
+      "kivistone": "キヴィストーン",
+      "ventMisc": "換気パーツ＆その他"
+    },
+    "empty": {
+      "heaters": "サウナヒーターはありません",
+      "rooms": "サウナルームはありません",
+      "saunaControls": "サウナコントローラーはありません",
+      "steam": "スチーム製品はありません",
+      "infrared": "赤外線製品はありません",
+      "heaterAccessories": "ヒーター用アクセサリーはありません"
+    }
+  },
+  "heatersCatalog": {
+    "meta": {
+      "title": "サウナヒーター",
+      "description": "SAWOのヒーターカタログ全ラインアップ：あらゆるサウナの広さとスタイルに合わせた、タワー、壁掛け、ストーン、床置き、コンビ、ドラゴンファイアの各シリーズをご覧いただけます。"
+    },
+    "hero": {
+      "title": "サウナヒーター",
+      "description": "あらゆるサウナの広さとスタイルに合わせて設計された、高品質なサウナヒーターの全ラインアップをご覧ください。厳選したタワー、壁掛け、ストーン、床置き、コンビ、ドラゴンファイアの各シリーズからお選びいただけます。"
+    },
+    "loading": "ヒーターを読み込んでいます...",
+    "sidebar": {
+      "browseBy": "絞り込み",
+      "series": "シリーズ"
+    },
+    "groups": {
+      "wallMounted": "壁掛けタイプ シリーズ",
+      "tower": "タワータイプ シリーズ",
+      "stone": "ストーンタイプ シリーズ",
+      "floor": "床置きタイプ シリーズ",
+      "combi": "コンビタイプ シリーズ",
+      "dragonfire": "ドラゴンファイア シリーズ"
+    },
+    "cta": {
+      "title": "最適なヒーター選びでお困りですか？",
+      "desc": "出力、サイズ、スタイルをお客様のサウナに合わせて、専門チームがご提案します。製品カタログで詳細な仕様をご確認いただくこともできます。",
+      "contactBtn": "お問い合わせ",
+      "downloadBtn": "カタログをダウンロード"
+    }
+  },
+  "accessoriesCatalog": {
+    "meta": {
+      "title": "サウナアクセサリー",
+      "description": "SAWOのアクセサリーカタログ全ラインアップ：あらゆるサウナに対応するバケツ、ひしゃく、温度計、ベンチ、照明などをご覧いただけます。"
+    },
+    "hero": {
+      "eyebrow": "プレミアムコレクション",
+      "title": "サウナアクセサリー",
+      "description": "ウェルネス体験をさらに高めるために設計された、高品質なサウナアクセサリーの全ラインアップをご覧ください。厳選した高品質な製品からお選びいただけます。"
+    },
+    "loading": "アクセサリーを読み込んでいます...",
+    "sidebarTitle": "サウナアクセサリー",
+    "groups": {
+      "pailsLadles": "バケツ＆ひしゃく",
+      "meters": "温度計＆温湿度計",
+      "clockTimer": "時計＆タイマー",
+      "saunaLights": "サウナ用照明",
+      "headrestBackrest": "ヘッドレスト＆バックレスト",
+      "doorsHandles": "ドア＆ハンドル",
+      "benches": "ベンチ、ハンガー＆フロアマット",
+      "kivistone": "キヴィストーン",
+      "ventMisc": "換気パーツ＆その他",
+      "accessorySets": "アクセサリーセット"
+    }
+  }
+}

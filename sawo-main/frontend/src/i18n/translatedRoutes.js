@@ -60,7 +60,7 @@ export const LOCALES = [
   { code: "en", label: "English", ready: true },
   { code: "fi", label: "Suomi", ready: true },
   { code: "zh", label: "简体中文", ready: true },
-  { code: "ja", label: "日本語", ready: false },
+  { code: "ja", label: "日本語", ready: true },
   { code: "de", label: "Deutsch", ready: true },
   { code: "fr", label: "Français", ready: false },
   { code: "es", label: "Español", ready: false },

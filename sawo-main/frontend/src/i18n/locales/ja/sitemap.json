@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "サイトマップ",
+    "description": "サウナヒーター、スチームジェネレーター、サウナルームなど、SAWOウェブサイトのすべてのページとセクションをご案内します。"
+  },
+  "title": "サイトマップ",
+  "subtitle": "SAWOウェブサイトのすべてのページとセクションのご案内です。",
+  "productGroups": {
+    "Steam Accessories": "スチームアクセサリー",
+    "Steam Controls": "スチームコントローラー",
+    "Infrared": "赤外線",
+    "Sauna Controls": "サウナコントローラー",
+    "Sauna Accessories": "サウナアクセサリー",
+    "Sauna Heaters": "サウナヒーター",
+    "Other Products": "その他の製品"
+  },
+  "groups": {
+    "productOther": "その他の製品",
+    "mainPages": {
+      "heading": "メインページ",
+      "home": "ホーム",
+      "about": "会社概要",
+      "contact": "お問い合わせ",
+      "careers": "採用情報",
+      "privacy": "プライバシーポリシー"
+    },
+    "about": {
+      "heading": "会社情報",
+      "news": "最新ニュース",
+      "sustainability": "サステナビリティ"
+    },
+    "sauna": {
+      "heading": "フィンランド式サウナ",
+      "products": "サウナ製品",
+      "heaters": "サウナヒーター",
+      "wallMounted": "壁掛けタイプヒーター",
+      "tower": "タワータイプヒーター",
+      "stone": "ストーンタイプヒーター",
+      "floor": "床置きタイプヒーター",
+      "combi": "コンビタイプヒーター",
+      "dragonfire": "ドラゴンファイアヒーター",
+      "controls": "サウナコントローラー",
+      "accessories": "サウナアクセサリー",
+      "accessorySets": "アクセサリーセット",
+      "pailsLadles": "バケツ＆ひしゃく",
+      "thermometers": "温度計＆温湿度計",
+      "clocksSandtimers": "時計＆砂時計",
+      "lightsCovers": "サウナ用照明＆カバー",
+      "headrestsBackrests": "ヘッドレスト＆バックレスト",
+      "doorsHandles": "ドア＆ハンドル",
+      "benches": "ベンチ＆フロアタイル",
+      "kivistone": "キヴィストーン",
+      "ventilations": "換気＆追加パーツ",
+      "rooms": "サウナルーム",
+      "interiorDesigns": "インテリアデザイン",
+      "woodPanels": "ウッドパネル＆木材"
+    },
+    "steam": {
+      "heading": "スチームルーム",
+      "products": "スチームルーム製品",
+      "generators": "スチームジェネレーター",
+      "controls": "スチームコントローラー",
+      "accessories": "スチームアクセサリー"
+    },
+    "infrared": {
+      "heading": "赤外線サウナ",
+      "parent": "赤外線",
+      "saunas": "赤外線サウナ",
+      "panels": "赤外線パネル",
+      "controls": "赤外線コントローラー"
+    },
+    "support": {
+      "heading": "サポート＆リソース",
+      "parent": "サポートセンター",
+      "faq": "よくあるご質問",
+      "calculator": "サウナ計算ツール",
+      "manuals": "取扱説明書",
+      "catalogue": "製品カタログ"
+    },
+    "catalog": {
+      "heading": "製品＆カタログ",
+      "allProducts": "全製品",
+      "accessoriesCatalog": "アクセサリーカタログ",
+      "heatersCatalog": "ヒーターカタログ"
+    }
+  },
+  "everyProduct": "すべての製品",
+  "loadingProducts": "製品を読み込んでいます…",
+  "noProducts": "現在、掲載中の製品はありません。",
+  "saunaRooms": "サウナルーム",
+  "loadingRooms": "サウナルームを読み込んでいます…",
+  "noRooms": "現在、掲載中のサウナルームはありません。",
+  "help": {
+    "title": "お困りですか？",
+    "prefix": "お探しの情報が見つからない場合は、次のページをご覧ください：",
+    "contactLink": "お問い合わせページ",
+    "or": "または",
+    "faqLink": "よくあるご質問"
+  }
+}

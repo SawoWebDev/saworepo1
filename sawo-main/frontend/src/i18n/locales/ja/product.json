@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "resources": "資料ダウンロード",
+    "features": "特長",
+    "diagram": "寸法図",
+    "specifications": "製品仕様",
+    "technicalData": "技術データ",
+    "infraredSpecifications": "赤外線の仕様",
+    "includedInPackage": "同梱物",
+    "doorPositions": "選択可能なドアの位置",
+    "floorPlan": "間取り図",
+    "benchConfiguration": "ベンチの構成",
+    "details": "詳細",
+    "description": "製品説明"
+  },
+  "noResourcesAvailable": "ご利用いただける資料はありません",
+  "moreDetailsSoon": "詳細は近日公開予定です。",
+  "notFound": {
+    "title": "製品が見つかりません",
+    "description": "この製品は存在しないか、まだ公開されていません。",
+    "browseProducts": "製品を見る",
+    "home": "ホーム",
+    "roomTitle": "サウナルームが見つかりません",
+    "roomDescription": "このサウナルームは存在しないか、まだ公開されていません。",
+    "browseRooms": "サウナルームを見る"
+  },
+  "related": {
+    "youMightAlsoLike": "こちらもおすすめ",
+    "relatedProducts": "関連製品",
+    "relatedRooms": "関連するサウナルーム",
+    "saunaAccessories": "サウナアクセサリー",
+    "otherHeaters": "その他のヒーター",
+    "moreTypeRooms": "その他の{{type}}ルーム"
+  },
+  "roomTypes": {
+    "traditional": "トラディショナル",
+    "standard": "スタンダード",
+    "infrared": "赤外線",
+    "steam": "スチーム",
+    "combo": "コンボ",
+    "glassfront": "ガラスフロント",
+    "compact": "コンパクト"
+  },
+  "sizeLabels": {
+    "compact": "コンパクト · 1〜2名",
+    "small": "スモール · 2〜3名",
+    "medium": "ミディアム · 3〜4名",
+    "large": "ラージ · 4〜6名",
+    "xl": "XL · 6名以上",
+    "commercial": "業務用"
+  },
+  "badges": {
+    "featured": "注目",
+    "bestSeller": "ベストセラー"
+  },
+  "modelCode": "型番 {{code}}",
+  "skuCode": "SKU {{sku}}",
+  "roomDisplayName": "{{type}}サウナルーム {{code}}",
+  "seoFallbackDescription": "SAWOの{{name}}。高品質なフィンランド式サウナルーム。",
+  "stats": {
+    "capacity": "収容人数",
+    "floorSize": "床面積",
+    "height": "高さ",
+    "woodType": "木材の種類",
+    "voltage": "電圧",
+    "panelWattage": "パネルの消費電力",
+    "totalPower": "総出力",
+    "sessionTime": "セッション時間"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · クリックして開く",
+    "documentsCount": "{{count}}件の資料",
+    "clickToExpand": "クリックして展開",
+    "clickToCollapse": "クリックして折りたたむ"
+  },
+  "featureTabs": {
+    "tabFallback": "タブ {{number}}"
+  },
+  "seoFallbackProductDescription": "SAWOの{{name}}。高品質なフィンランド式サウナ機器。",
+  "specLabels": {
+    "size": "サイズ",
+    "capacity": "容量",
+    "openingSize": "開口サイズ",
+    "frameSize": "フレームサイズ",
+    "weight": "重量",
+    "productCode": "品番",
+    "setCodes": "セット品番",
+    "ductingHole": "ダクト穴",
+    "includes": "内容",
+    "thickness": "厚さ",
+    "use": "用途",
+    "material": "素材",
+    "code": "品番"
+  },
+  "tableCells": {
+    "separate": "別置き",
+    "builtIn": "内蔵",
+    "maxSessionTime": "最大セッション時間",
+    "technicalDetails": "技術仕様",
+    "productDimensions": "製品寸法",
+    "switchingCapacityPerPhase": "相ごとの開閉容量",
+    "frequency": "周波数",
+    "temperatureRange": "温度範囲",
+    "ratedVoltage": "定格電圧",
+    "suitableHeaters": "対応ヒーター",
+    "benchCombinedSensor": "ベンチ用温湿度複合センサー",
+    "benchTemperatureSensor": "ベンチ用温度センサー",
+    "fan": "ファン",
+    "rating": "定格"
+  }
+}

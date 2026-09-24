@@ -1,0 +1,56 @@
+{
+  "home": "ホーム",
+  "products": "製品",
+  "support": "サポート",
+  "aboutUs": "会社概要",
+  "contactUs": "お問い合わせ",
+  "search": "検索",
+  "openMenu": "メニューを開く",
+  "closeMenu": "メニューを閉じる",
+  "collapse": "折りたたむ",
+  "expand": "展開する",
+  "searchBox": {
+    "placeholder": "検索…",
+    "searching": "検索中…",
+    "noResults": "該当する結果は見つかりませんでした",
+    "pages": "ページ",
+    "products": "製品"
+  },
+  "groups": {
+    "sauna": "サウナ",
+    "steam": "スチーム",
+    "infrared": "赤外線"
+  },
+  "items": {
+    "wallMounted": "壁掛けタイプ",
+    "tower": "タワータイプ",
+    "stone": "ストーンタイプ",
+    "floor": "床置きタイプ",
+    "combi": "コンビタイプ",
+    "dragonfire": "ドラゴンファイア",
+    "saunaHeaters": "サウナヒーター",
+    "saunaControls": "サウナコントローラー",
+    "saunaAccessories": "サウナアクセサリー",
+    "saunaRooms": "サウナルーム",
+    "interiorDesigns": "インテリアデザイン",
+    "woodPanels": "ウッドパネル＆木材",
+    "steamGenerators": "スチームジェネレーター",
+    "steamControls": "スチームコントローラー",
+    "steamAccessories": "スチームアクセサリー",
+    "infrared": "赤外線",
+    "faq": "よくあるご質問",
+    "saunaCalculator": "サウナ計算ツール",
+    "userManuals": "取扱説明書",
+    "productCatalogue": "製品カタログ",
+    "latestNews": "最新ニュース",
+    "sustainability": "サステナビリティ",
+    "careers": "採用情報",
+    "infraredSaunaRooms": "赤外線サウナルーム",
+    "infraredPanels": "赤外線パネル",
+    "infraredControls": "赤外線コントローラー"
+  },
+  "language": {
+    "label": "言語",
+    "switchTo": "言語を切り替える"
+  }
+}

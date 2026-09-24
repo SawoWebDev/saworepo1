@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "採用情報",
+    "description": "SAWOチームの一員になりませんか。フィンランド式サウナヒーターのグローバルリーダーで、エンジニアリング、製造、営業の現在の求人をご覧ください。"
+  },
+  "hero": {
+    "title": "SAWOチームに加わろう",
+    "subtitle": "サウナ製造のグローバルリーダーとともに、未来を築く"
+  },
+  "join": {
+    "imgAlt": "SAWOチームに加わろう",
+    "highlight": "サウナ業界での経験をお持ちの方を募集しています。",
+    "desc": "SAWOは、フィンランドの専門知識と、フィリピンのセブ島を拠点とする熟練の職人技を融合させた、サウナ製造分野で信頼されるブランドです。私たちのチームは、世界市場に向けて高品質なサウナヒーター、アクセサリー、そしてトータルなサウナソリューションを生み出すことに誇りを持っています。",
+    "cta": "南国で働いてみませんか？サウナ・イノベーションの業界リーダーの一員になりましょう！"
+  },
+  "badges": {
+    "fullTime": "フルタイム",
+    "onSite": "現地勤務"
+  },
+  "openPositions": {
+    "heading": "募集中のポジション",
+    "intro": "さまざまな部門で、魅力的なポジションを募集しています。",
+    "locationCebu": "セブ",
+    "locationEurope": "ヨーロッパ（ハイブリッド勤務）",
+    "positions": {
+      "electricalEngineer": {
+        "title": "電気エンジニア",
+        "subtitle": "Elektroniikkasuunnittelija"
+      },
+      "productionSupervisor": {
+        "title": "生産スーパーバイザー（木工）",
+        "subtitle": "Puutekniikan Osaaja"
+      },
+      "marketingSpecialist": {
+        "title": "マーケティングスペシャリスト",
+        "subtitle": "Markkinoinnin Osaaja"
+      },
+      "buyerLogistics": {
+        "title": "バイヤー／ロジスティクススペシャリスト",
+        "subtitle": "Ostaja / Logistiikka-osaaja"
+      },
+      "processEngineer": {
+        "title": "プロセスエンジニア",
+        "subtitle": "Prosessi-insinööri"
+      },
+      "salesManager": {
+        "title": "海外営業マネージャー",
+        "subtitle": "Kansainvälinen Myyntipäällikkö"
+      },
+      "odooDeveloper": {
+        "title": "Odooソフトウェア開発者",
+        "subtitle": "Odoo Ohjelmistokehittäjä"
+      },
+      "salesManagerGerman": {
+        "title": "海外営業マネージャー（ドイツ語話者）",
+        "subtitle": "Kansainvälinen Myyntipäällikkö"
+      },
+      "headOfProduction": {
+        "title": "生産部門責任者",
+        "years": "経験3〜6年"
+      },
+      "productionManager": {
+        "title": "生産マネージャー",
+        "years": "経験2〜4年"
+      }
+    }
+  },
+  "hiring": {
+    "titlePrefix": "SAWOは",
+    "titleHighlight": "採用募集中！",
+    "desc": "フィンランドの専門知識と世界水準の職人技を融合させる業界リーダーの一員になりませんか。",
+    "emailPrefix": "履歴書の送付先：",
+    "locationLabel": "勤務地：SAWO Inc.",
+    "locationAddress": "MEZ2 Estate, Basak, Lapu-Lapu City 6015, Cebu, Philippines",
+    "closing": "一緒に素晴らしいものを作り上げましょう！"
+  },
+  "categories": {
+    "manufacturing": {
+      "alt": "製造・生産",
+      "title": "製造・生産",
+      "desc": "木工、金属加工、品質管理"
+    },
+    "engineering": {
+      "alt": "エンジニアリング・設計",
+      "title": "エンジニアリング・設計",
+      "desc": "製品開発、研究開発、サウナ技術"
+    },
+    "sales": {
+      "alt": "営業・マーケティング",
+      "title": "営業・マーケティング",
+      "desc": "国内外の営業、デジタルマーケティング、カスタマーリレーション"
+    },
+    "operations": {
+      "alt": "オペレーション・サポート",
+      "title": "オペレーション・サポート",
+      "desc": "物流、経理、人事、DA、IT、総務"
+    }
+  },
+  "whySawo": {
+    "imgAlt": "SAWOの製造現場",
+    "titlePrefix": "働くなら、",
+    "titleHighlight": "SAWO",
+    "innovative": {
+      "title": "革新的でお客様第一",
+      "prefix": "次のことを大切にする会社の一員に：",
+      "highlight": "品質、革新、そしてお客様の満足。"
+    },
+    "international": {
+      "title": "国際的な経験",
+      "prefix": "多様なチームと働けます：",
+      "highlight": "フィンランドとフィリピンの専門家が",
+      "suffix": "世界の市場で協力し合っています。"
+    },
+    "growth": {
+      "title": "キャリアの成長と自己啓発",
+      "prefix": "社員への投資を惜しみません：",
+      "highlight": "研修、スキル開発、キャリアアップ"
+    },
+    "excellence": {
+      "title": "卓越性へのこだわり",
+      "prefix": "SAWOは",
+      "highlight": "ISO 9001およびISO 14001認証取得企業",
+      "suffix": "であり、品質とサステナビリティを重視した職場環境を整えています。"
+    }
+  }
+}
