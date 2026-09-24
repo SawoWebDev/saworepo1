@@ -376,8 +376,8 @@ const Stone = () => {
       </section>
 
       <PromoBanner
-        title={t("heatersPage.promo.title")}
-        subtitle={t("heatersPage.promo.subtitle")}
+        title={t("heatersPage.promoBanner.title")}
+        subtitle={t("heatersPage.promoBanner.subtitle")}
         image={bannerImg}
         ctaLabel={t("heatersPage.viewAll")}
         ctaTo={localize(menuPaths.sauna.heaters.parent)}

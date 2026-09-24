@@ -20,13 +20,22 @@ Update this whenever a page moves between columns.
 - 🟡 Partial — some content on the page still hardcoded English.
 - ⬜ Not started.
 
-German (`de`) is not tracked per-page below — per the project's "Finnish
-first, pilot before scale" approach, `de` only exists today for Home (`/`).
-Add a `de` column here once German work actually starts.
+**Status as of 2026-09-24:** site-chrome JSON (`src/i18n/locales/`) is
+**complete for `fi`, `zh` and `de`** — all 16 page namespaces plus the 4
+shared ones (`npm run i18n:manifest` shows every cell `translated`). The
+per-page tables below were written when only Finnish was being tracked; read
+their "FI written" column as "written for the pilot locale," not as a claim
+that `zh`/`de` are missing. `de` was completed on 2026-09-24 in one pass
+(1,926 strings via extract → translate → inject); it is machine translation
+and has **not** had native-speaker review, so no `de` path is in
+`TRANSLATED_PATHS` yet. Product content (`product_translations` table) is a
+separate track — see the "Product content" section.
 
-Chinese (`zh`) is likewise not a full tracked column yet — noted inline in a
-page's Notes cell only once that specific page gets a `zh` translation (see
-`/sauna/rooms` below, added 2026-08-26 as the second zh page after Home).
+The six heater series pages' promo banner ("Find Your Perfect Heater") now
+reads `heatersPage.promoBanner.*` in all four locales (2026-09-24); the older
+per-page `*Page.promo.*` keys are unused leftovers (main reworded the banner
+after they were translated) and can be deleted from all locales in a cleanup.
+
 Run `npm run i18n:manifest` for the authoritative up-to-date state of every
 locale/page combination rather than trusting this file alone — it's a
 narrative log, the manifest is the source of truth.
