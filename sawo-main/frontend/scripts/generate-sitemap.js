@@ -21,9 +21,14 @@
  * menuPaths.js changes or after a product/room data sync, and commit the
  * regenerated public/sitemap.xml.
  *
- * Run `node Administrator/Local/scripts/sync.js` first if you're not sure
- * products.json is current — this script has no live Supabase access of
- * its own, only whatever that snapshot last captured.
+ * DATA SOURCE (changed 2026-09-24): products and rooms are read LIVE from
+ * Supabase over the public REST API (same anon key + same visibility rules
+ * the site itself uses), NOT from the local JSON snapshots. The snapshots
+ * (src/Administrator/Local/data/*.json) are stale — regenerating from them
+ * silently dropped ~60 live products from the sitemap. If Supabase is
+ * unreachable the script now FAILS instead of quietly using the snapshot;
+ * pass `--allow-stale` to opt into the old snapshot behaviour on purpose.
+ * Reads SUPABASE_URL / SUPABASE_ANON_KEY from the environment or .env.
  */
 
 const fs = require("fs");
@@ -161,6 +166,54 @@ const STATIC_ROUTES = [
   { path: "/sauna-heaters", priority: "0.8", changefreq: "weekly" },
 ];
 
+function readEnvFile() {
+  const out = {};
+  for (const name of [".env", ".env.local"]) {
+    try {
+      for (const line of fs.readFileSync(path.join(__dirname, "..", name), "utf8").split(/\r?\n/)) {
+        const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+        if (m) out[m[1]] = m[2].replace(/^['"]|['"]$/g, "");
+      }
+    } catch { /* file optional */ }
+  }
+  return out;
+}
+
+async function fetchLiveTable(table) {
+  const env = { ...readEnvFile(), ...process.env };
+  const url = env.SUPABASE_URL || env.REACT_APP_SUPABASE_URL;
+  const key = env.SUPABASE_ANON_KEY || env.REACT_APP_SUPABASE_ANON_KEY;
+  if (!url || !key) throw new Error("SUPABASE_URL / SUPABASE_ANON_KEY not set");
+  const cols = "slug,categories,visible,status,publish_at,updated_at";
+  const rows = [];
+  const PAGE = 1000; // PostgREST's default max rows per request — page until a short page comes back
+  for (let from = 0; ; from += PAGE) {
+    const res = await fetch(`${url}/rest/v1/${table}?select=${cols}&is_deleted=eq.false&order=slug.asc`, {
+      headers: { apikey: key, Authorization: `Bearer ${key}`, Range: `${from}-${from + PAGE - 1}` },
+    });
+    if (!res.ok) throw new Error(`${table}: HTTP ${res.status} ${await res.text()}`);
+    const page = await res.json();
+    rows.push(...page);
+    if (page.length < PAGE) break;
+  }
+  return rows;
+}
+
+async function loadData() {
+  if (process.argv.includes("--allow-stale")) {
+    console.warn("WARNING: --allow-stale — using the local JSON snapshots, which are known to be out of date.");
+    return { products: loadJson(PRODUCTS_JSON), rooms: loadJson(ROOMS_JSON), source: "snapshot" };
+  }
+  try {
+    const [products, rooms] = await Promise.all([fetchLiveTable("products"), fetchLiveTable("sauna_rooms")]);
+    return { products, rooms, source: "live Supabase" };
+  } catch (err) {
+    console.error(`SITEMAP: could not read live data (${err.message}).`);
+    console.error("Refusing to fall back to the stale snapshot. Fix connectivity, or re-run with --allow-stale if you really mean it.");
+    process.exit(1);
+  }
+}
+
 function loadJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
@@ -207,9 +260,8 @@ function toLastmod(isoString) {
   return d.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
-function main() {
-  const products = loadJson(PRODUCTS_JSON);
-  const rooms = loadJson(ROOMS_JSON);
+async function main() {
+  const { products, rooms, source } = await loadData();
 
   const visibleProducts = products.filter(isPubliclyVisible);
   const accessories = visibleProducts.filter(isAccessoryProduct);
@@ -283,7 +335,7 @@ function main() {
   fs.writeFileSync(OUT_FILE, xml, "utf8");
   const localeUrlCount = entries.length - STATIC_ROUTES.length - plainProducts.length - accessories.length - visibleRooms.length;
   console.log(
-    `SITEMAP: wrote ${entries.length} URLs (${STATIC_ROUTES.length} static + ${localeUrlCount} translated-locale variants + ${plainProducts.length} products + ${accessories.length} accessories + ${visibleRooms.length} rooms) to ${OUT_FILE}`
+    `SITEMAP (${source}): wrote ${entries.length} URLs (${STATIC_ROUTES.length} static + ${localeUrlCount} translated-locale variants + ${plainProducts.length} products + ${accessories.length} accessories + ${visibleRooms.length} rooms) to ${OUT_FILE}`
   );
 }
 

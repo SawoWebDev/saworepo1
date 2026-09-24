@@ -75,5 +75,6 @@
   },
   "featureTabs": {
     "tabFallback": "Tab {{number}}"
-  }
+  },
+  "seoFallbackProductDescription": "{{name}} by SAWO. Premium Finnish sauna equipment."
 }
