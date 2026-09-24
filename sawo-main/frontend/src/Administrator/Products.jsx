@@ -4026,6 +4026,11 @@ export default function Products({ currentUser }) {
                       <div key={brand} style={{ marginBottom: 18 }}>
                         <h4 className="product-brand-label">{brand.toUpperCase()}</h4>
                         <div className="product-grid">
+                          {/* onPreview must stay openPreview, not setPreviewProduct directly:
+                              this list's rows carry PRODUCT_LIST_COLUMNS (display columns
+                              only) — see supabaseReader.js — so a raw row lacks
+                              description/spec_table/images/etc. openPreview does the
+                              per-id full-row fetch before opening the modal. */}
                           {products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
                         </div>
                       </div>

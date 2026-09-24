@@ -165,7 +165,6 @@ function CategorySection({ group, productsByGroup }) {
   const t = useLocaleT("catalog");
   const products = productsByGroup[group.id] || [];
   const groupLabel = t(`heatersCatalog.groups.${group.key}`);
-
   const grouper = CATEGORY_BRAND_GROUPERS[group.category];
 
   if (grouper) {

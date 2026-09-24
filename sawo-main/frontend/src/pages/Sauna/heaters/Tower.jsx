@@ -197,7 +197,7 @@ const Tower = () => {
       <SEO
         title={t("towerPage.meta.title")}
         description={t("towerPage.meta.description")}
-        path="/sauna/heaters/tower"
+        path={localize("/sauna/heaters/tower")}
       />
       <style>{`
         @keyframes wm-shimmer {

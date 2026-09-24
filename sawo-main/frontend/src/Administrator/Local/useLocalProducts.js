@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductTranslationsLive, getProductsLatestUpdateLive } from "../../local-storage/supabaseReader";
+import { getAllProductsLive, getAllCategoriesLive, getAllTagsLive, getProductsLatestUpdateLive, getProductTranslationsLive } from "../../local-storage/supabaseReader";
 import { readPublicCache, writePublicCache } from "./publicDataCache";
 import { useLocale } from "../../i18n/LocaleContext";
 

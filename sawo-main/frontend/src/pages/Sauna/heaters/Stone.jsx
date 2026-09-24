@@ -174,7 +174,7 @@ const Stone = () => {
       <SEO
         title={t("stonePage.meta.title")}
         description={t("stonePage.meta.description")}
-        path="/sauna/heaters/stone"
+        path={localize("/sauna/heaters/stone")}
       />
       <style>{`
         @keyframes wm-shimmer {

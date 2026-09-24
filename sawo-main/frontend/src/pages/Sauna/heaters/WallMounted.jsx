@@ -276,7 +276,7 @@ export default function WallMounted() {
       <SEO
         title={t("wallMountedPage.meta.title")}
         description={t("wallMountedPage.meta.description")}
-        path="/sauna/heaters/wall-mounted"
+        path={localize("/sauna/heaters/wall-mounted")}
       />
       <style>{`
         @keyframes wm-shimmer {
