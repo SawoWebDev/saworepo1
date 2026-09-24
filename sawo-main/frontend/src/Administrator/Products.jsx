@@ -12,7 +12,13 @@ import { productsToCsvString, downloadCsv } from "./csv/productCsv";
 import CsvImportModal from "./csv/CsvImportModal";
 import { diffFormFields } from "./diff";
 import RevisionFieldDiff from "./RevisionFieldDiff";
-import { uploadFileToR2, deleteR2Urls, effectiveSlug } from "./mediaUpload";
+import { uploadFileToR2, trashMediaUrls, effectiveSlug } from "./mediaUpload";
+import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts } from "../utils/wallMountedGroups";
+import { FLOOR_FIXED_ORDER, groupFloorProducts } from "../utils/floorGroups";
+import { COMBI_FIXED_ORDER, groupCombiProducts } from "../utils/combiGroups";
+import { TOWER_FIXED_ORDER, groupTowerProducts } from "../utils/towerGroups";
+import { STONE_FIXED_ORDER, groupStoneProducts } from "../utils/stoneGroups";
+import { DRAGONFIRE_FIXED_ORDER, groupDragonfireProducts } from "../utils/dragonfireGroups";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
 
@@ -33,11 +39,52 @@ const HEATER_SUBCATEGORIES = [
   { key: "combi",        label: "Combi",        match: c => c.toLowerCase() === "combi" },
   { key: "dragonfire",   label: "Dragonfire",   match: c => c.toLowerCase() === "dragonfire" },
 ];
-function getHeaterSubcategory(product) {
+// A heater product can genuinely belong to more than one subcategory at
+// once — a Combi heater is also tagged Wall-Mounted/Floor/Stones (its
+// physical form), by design, so it correctly shows on BOTH that series'
+// live page and the Combi page. Returns every matching key, not just one —
+// picking only the first (in HEATER_SUBCATEGORIES order) was the actual
+// bug behind "Combi only shows 1 product": a Combi heater tagged
+// ["Floor","Combi"] got claimed by "floor" (checked first) and never
+// reached "combi" at all, for every Combi product except the one with no
+// secondary category (Taurus D Combi NS, tagged ["Combi"] alone).
+function getHeaterSubcategories(product) {
   const cats = product?.categories;
-  if (!Array.isArray(cats)) return null;
-  const sub = HEATER_SUBCATEGORIES.find(s => cats.some(c => s.match(c)));
-  return sub ? sub.key : null;
+  if (!Array.isArray(cats)) return [];
+  return HEATER_SUBCATEGORIES.filter(s => cats.some(c => s.match(c))).map(s => s.key);
+}
+
+// Every heater subcategory has well-defined brand families — the live site
+// already breaks all of them out under brand sub-headings instead of one
+// flat grid (see wallMountedGroups.js/floorGroups.js/combiGroups.js/
+// towerGroups.js/stoneGroups.js/dragonfireGroups.js, shared with the
+// public heater pages so admin and live never drift apart).
+const HEATER_BRAND_GROUPERS = {
+  "wall-mounted": { fixedOrder: WALL_MOUNTED_FIXED_ORDER, group: groupWallMountedProducts },
+  "floor":        { fixedOrder: FLOOR_FIXED_ORDER,        group: groupFloorProducts },
+  "combi":        { fixedOrder: COMBI_FIXED_ORDER,        group: groupCombiProducts },
+  "tower":        { fixedOrder: TOWER_FIXED_ORDER,        group: groupTowerProducts },
+  "stone":        { fixedOrder: STONE_FIXED_ORDER,        group: groupStoneProducts },
+  "dragonfire":   { fixedOrder: DRAGONFIRE_FIXED_ORDER,   group: groupDragonfireProducts },
+};
+
+// Returns [{ brand, products }] for a heater subcategory group that has
+// brand sub-headings, or null for one that doesn't (caller renders that
+// flat, same as before).
+function getBrandSubgroups(subcatKey, products) {
+  const grouper = HEATER_BRAND_GROUPERS[subcatKey];
+  if (!grouper) return null;
+  const grouped = grouper.group(products);
+  const ordered = grouper.fixedOrder.filter(brand => grouped[brand]?.length);
+  // The admin has to see EVERY matching product regardless of what the
+  // live site chooses to display — e.g. Krios is deliberately left out of
+  // FLOOR_FIXED_ORDER because the public Floor page no longer shows it,
+  // but an admin still needs to find it here to edit/reactivate/delete it.
+  // Any brand key the grouper produced that isn't in fixedOrder (Krios,
+  // the catch-all "Other", or anything future) gets appended at the end
+  // instead of silently vanishing from this list.
+  const leftover = Object.keys(grouped).filter(brand => !grouper.fixedOrder.includes(brand));
+  return [...ordered, ...leftover].map(brand => ({ brand, products: grouped[brand] }));
 }
 
 // The 10 accessory subcategories, in the fixed display order requested for
@@ -319,13 +366,25 @@ async function deleteStorageUrls(urls = []) {
   );
 }
 
+// Matches either a legacy Supabase Storage url (parseStorageUrl, handled
+// by deleteStorageUrls) or a current R2 url (/media/..., handled by
+// trashMediaUrls) — this sweep is a safety net for whatever the specific
+// upload/remove handlers above didn't already catch, so it shouldn't be
+// narrower than what those handlers themselves can act on.
+function isTrashableUrl(url) {
+  return parseStorageUrl(url) !== null || /\/media\/.+/.test(String(url || ""));
+}
+
 function findOrphanedUrls(savedForm, currentForm) {
   const collect = f => [
     f.thumbnail,
+    f.og_image,
     ...(f.images      || []),
     ...(f.spec_images || []),
     ...(f.files       || []).map(fi => fi?.url),
-  ].filter(Boolean).filter(url => parseStorageUrl(url) !== null);
+    ...(f.variations     || []).map(v  => v?.image),
+    ...(f.included_items || []).map(it => it?.image),
+  ].filter(Boolean).filter(isTrashableUrl);
   const savedSet   = new Set(collect(savedForm));
   const currentSet = new Set(collect(currentForm));
   return [...savedSet].filter(url => !currentSet.has(url));
@@ -1001,21 +1060,134 @@ function ModelSelect({ label, value, onChange, placeholder, suggestions = [], ti
 }
 
 // ─── Smart Image Gallery — adapts display based on count ────────────────────────
-function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
+// ─── One image slot that's both removable AND replaceable in place ─────────
+// Click, drag & drop, or Ctrl+V paste a new file directly onto an already-
+// uploaded image to swap it — same click/drag/confirm pattern as
+// ThumbnailPreview above, just sized to sit inside a grid/strip item
+// instead of standing alone. onReplace is async (it uploads + trashes the
+// old file + writes the new url back at this same array index) — a
+// Confirm gate sits in front of it for the same reason ThumbnailPreview
+// has one: the old file is only recoverable from Trash until it actually
+// gets replaced, and a mis-dropped file is easy to not notice.
+function ReplaceableImage({ url, onReplace, onRemove, className, removeClassName = "smart-image-remove" }) {
+  const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const ref = useRef();
+  const containerRef = useRef();
+
+  const handleFiles = files => {
+    const file = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
+    if (file) setPendingFile(file);
+  };
+
+  const confirmReplace = async () => {
+    const file = pendingFile;
+    setPendingFile(null);
+    setUploading(true);
+    try { await onReplace(file); }
+    finally { setUploading(false); }
+  };
+
+  const handlePaste = e => {
+    if (uploading) return;
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let item of items) {
+      if (item.kind === "file" && item.type.startsWith("image/")) {
+        const file = item.getAsFile();
+        if (file) { e.preventDefault(); handleFiles(file); return; }
+      }
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={className}
+      style={{
+        position: "relative",
+        cursor: !uploading ? "pointer" : "default",
+        // outline (not border): these containers already set their own
+        // border/overflow via CSS class (.smart-image-wrapper/-item,
+        // .image-strip-item) — an inline border would override that
+        // instead of adding to it, and outline doesn't affect layout so
+        // there's no size shift between dragging/not.
+        outline: dragging ? "2px solid var(--brand)" : "2px solid transparent",
+        outlineOffset: -2,
+        transition: "outline-color 0.15s",
+      }}
+      onMouseEnter={() => { setHovered(true); containerRef.current?.focus(); }}
+      onMouseLeave={() => setHovered(false)}
+      onPaste={handlePaste}
+      onClick={() => !uploading && ref.current?.click()}
+      onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); }}
+      tabIndex="0"
+      contentEditable={hovered && !uploading}
+      suppressContentEditableWarning
+    >
+      <img src={url} alt="" style={{ opacity: uploading ? 0.5 : 1 }} />
+      {dragging && !uploading && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.7rem", fontWeight: 700, textAlign: "center", padding: 4, zIndex: 3,
+          pointerEvents: "none",
+        }}>
+          Drop to replace
+        </div>
+      )}
+      {hovered && !uploading && !dragging && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.65rem", fontWeight: 600, textAlign: "center", padding: 4, zIndex: 3,
+          pointerEvents: "none",
+        }}>
+          Replace
+        </div>
+      )}
+      {uploading && (
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 3, pointerEvents: "none" }}>
+          <i className="fa-solid fa-spinner" style={{ color: "var(--brand)", fontSize: "1.1rem", animation: "spin 1s linear infinite" }} />
+        </div>
+      )}
+      {onRemove && !dragging && !uploading && (
+        <button type="button" className={removeClassName} onClick={e => { e.stopPropagation(); onRemove(); }} style={{ zIndex: 4 }}>
+          <i className="fa-solid fa-xmark" />
+        </button>
+      )}
+      <input ref={ref} type="file" accept="image/*" style={{ display: "none" }} disabled={uploading}
+        onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+      <Confirm
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        onConfirm={confirmReplace}
+        title="Replace image?"
+        message="The current image will be permanently deleted and replaced with the new one. This can't be undone."
+        confirmLabel="Replace"
+        confirmVariant="primary"
+      />
+    </div>
+  );
+}
+
+function SmartImageGallery({ images = [], onRemove, onReplace, isSingle = false }) {
   if (!images.length) return null;
 
   // Single image: display large
   if (isSingle && images.length === 1) {
     return (
       <div className="smart-image-single">
-        <div className="smart-image-wrapper">
-          <img src={images[0]} alt="" />
-          {onRemove && (
-            <button type="button" className="smart-image-remove" onClick={() => onRemove(0)}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          )}
-        </div>
+        <ReplaceableImage
+          className="smart-image-wrapper"
+          url={images[0]}
+          onReplace={onReplace ? file => onReplace(0, file) : undefined}
+          onRemove={onRemove ? () => onRemove(0) : undefined}
+        />
       </div>
     );
   }
@@ -1025,14 +1197,13 @@ function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
     return (
       <div className={`smart-image-grid grid-${images.length}`}>
         {images.map((url, i) => (
-          <div key={i} className="smart-image-item">
-            <img src={url} alt="" />
-            {onRemove && (
-              <button type="button" className="smart-image-remove" onClick={() => onRemove(i)}>
-                <i className="fa-solid fa-xmark" />
-              </button>
-            )}
-          </div>
+          <ReplaceableImage
+            key={i}
+            className="smart-image-item"
+            url={url}
+            onReplace={onReplace ? file => onReplace(i, file) : undefined}
+            onRemove={onRemove ? () => onRemove(i) : undefined}
+          />
         ))}
       </div>
     );
@@ -1042,14 +1213,14 @@ function SmartImageGallery({ images = [], onRemove, isSingle = false }) {
   return (
     <div className="image-strip">
       {images.map((url, i) => (
-        <div key={i} className="image-strip-item">
-          <img src={url} alt="" />
-          {onRemove && (
-            <button type="button" className="image-strip-remove" onClick={() => onRemove(i)}>
-              <i className="fa-solid fa-xmark" />
-            </button>
-          )}
-        </div>
+        <ReplaceableImage
+          key={i}
+          className="image-strip-item"
+          removeClassName="image-strip-remove"
+          url={url}
+          onReplace={onReplace ? file => onReplace(i, file) : undefined}
+          onRemove={onRemove ? () => onRemove(i) : undefined}
+        />
       ))}
     </div>
   );
@@ -1197,14 +1368,20 @@ function ImageUploader({ onUpload, label = "Upload Image", multiple = false, upl
 }
 
 // ─── Floating thumbnail with hover overlay ────────────────────────────────────
+// Replacing here (click, drag & drop, or paste) permanently deletes the old
+// file from storage (see handleThumbUpload's cleanup) — a dropped file is
+// easy to miss-target, so every replacement path funnels through a single
+// pendingFile + Confirm step rather than swapping the image immediately.
 function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
   const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
   const replaceRef = useRef();
   const containerRef = useRef();
 
   const handleFiles = files => {
     const file = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
-    if (file) onReplace(file);
+    if (file) setPendingFile(file);
   };
 
   const handlePaste = e => {
@@ -1223,21 +1400,41 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
     <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>
       <div
         ref={containerRef}
-        style={{ position: "relative", display: "inline-block", outline: "none", cursor: !uploading ? "pointer" : "default" }}
+        style={{
+          position: "relative", display: "inline-block", outline: "none",
+          cursor: !uploading ? "pointer" : "default",
+          borderRadius: "var(--r)",
+          border: dragging ? "2px solid var(--brand)" : "2px solid transparent",
+          transition: "border-color 0.15s",
+        }}
         onMouseEnter={() => { setHovered(true); containerRef.current?.focus(); }}
         onMouseLeave={() => { setHovered(false); }}
         onPaste={handlePaste}
         onClick={() => !uploading && replaceRef.current?.click()}
+        onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); }}
         tabIndex="0"
         contentEditable={hovered && !uploading}
         suppressContentEditableWarning
       >
         <img src={url} alt="Featured" style={{
           display: "block", maxHeight: 220, maxWidth: "100%",
-          borderRadius: "var(--r)", objectFit: "contain",
-          transition: "opacity 0.18s", opacity: uploading ? 0.5 : (hovered ? 0.8 : 1),
+          borderRadius: "calc(var(--r) - 2px)", objectFit: "contain",
+          transition: "opacity 0.18s", opacity: uploading ? 0.5 : ((hovered || dragging) ? 0.8 : 1),
         }} />
-        {hovered && !uploading && (
+        {dragging && !uploading && (
+          <div style={{
+            position: "absolute", inset: 0, borderRadius: "calc(var(--r) - 2px)",
+            background: "rgba(0,0,0,0.7)", color: "#fff",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "0.85rem", fontWeight: 700, zIndex: 11, pointerEvents: "none",
+          }}>
+            <i className="fa-solid fa-arrow-down-to-bracket" style={{ marginRight: 8 }} />
+            Drop to replace
+          </div>
+        )}
+        {hovered && !uploading && !dragging && (
         <>
           {/* ✕ remove — top right */}
           <button type="button" onClick={(e) => { e.stopPropagation(); onRemove(); }} title="Remove image" style={{
@@ -1265,7 +1462,7 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
               <i className="fa-solid fa-arrow-up-from-bracket" style={{ fontSize: "0.72rem" }} />
               Replace
             </div>
-            <div style={{ fontSize: "0.65rem", opacity: 0.8, fontWeight: 400, marginTop: 2 }}>Click or Ctrl+V</div>
+            <div style={{ fontSize: "0.65rem", opacity: 0.8, fontWeight: 400, marginTop: 2 }}>Click, drag &amp; drop, or Ctrl+V</div>
           </div>
         </>
         )}
@@ -1282,6 +1479,15 @@ function ThumbnailPreview({ url, onRemove, onReplace, uploading }) {
         <input ref={replaceRef} type="file" accept="image/*" style={{ display: "none" }}
           onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
       </div>
+      <Confirm
+        open={!!pendingFile}
+        onClose={() => setPendingFile(null)}
+        onConfirm={() => { onReplace(pendingFile); setPendingFile(null); }}
+        title="Replace featured image?"
+        message="The current featured image will be permanently deleted and replaced with the new one. This can't be undone."
+        confirmLabel="Replace"
+        confirmVariant="primary"
+      />
     </div>
   );
 }
@@ -1343,9 +1549,13 @@ function ThumbnailUploader({ onUpload, uploading }) {
 }
 
 // ─── Smart File Display — adapts layout based on count ────────────────────────
-function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) {
+function SmartFileDisplay({ files = [], onRemove, onRename, onReplace, isSingle = false }) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(files.length > 0 ? files[0].name : "");
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const ref = useRef();
 
   if (!files.length) return null;
 
@@ -1353,9 +1563,27 @@ function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) 
   if (isSingle && files.length === 1) {
     const file = files[0];
 
+    const handleFiles = fl => {
+      const f = fl instanceof FileList ? fl[0] : (Array.isArray(fl) ? fl[0] : fl);
+      if (f) setPendingFile(f);
+    };
+    const confirmReplace = async () => {
+      const f = pendingFile;
+      setPendingFile(null);
+      setUploading(true);
+      try { await onReplace(0, f); }
+      finally { setUploading(false); }
+    };
+
     return (
       <div className="smart-file-single">
-        <div className="smart-file-card">
+        <div
+          className="smart-file-card"
+          style={{ position: "relative", outline: dragging ? "2px solid var(--brand)" : "2px solid transparent", outlineOffset: -2, transition: "outline-color 0.15s" }}
+          onDragOver={onReplace ? e => { e.preventDefault(); if (!uploading) setDragging(true); } : undefined}
+          onDragLeave={onReplace ? () => setDragging(false) : undefined}
+          onDrop={onReplace ? e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); } : undefined}
+        >
           <div className="smart-file-icon">
             <i className="fa-solid fa-file-pdf" />
           </div>
@@ -1373,12 +1601,41 @@ function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) 
               </>
             )}
           </div>
+          {onReplace && (
+            <button type="button" onClick={() => !uploading && ref.current?.click()} title="Replace" className="smart-file-btn" disabled={uploading}>
+              <i className={`fa-solid ${uploading ? "fa-spinner fa-spin" : "fa-arrow-up-from-bracket"}`} />
+            </button>
+          )}
           <button type="button" onClick={() => setEditing(true)} title="Rename" className="smart-file-btn smart-file-edit">
             <i className="fa-solid fa-pen" />
           </button>
           <button type="button" onClick={() => onRemove(0)} title="Remove" className="smart-file-btn smart-file-trash">
             <i className="fa-solid fa-trash" />
           </button>
+          {onReplace && (
+            <>
+              <input ref={ref} type="file" accept=".pdf,application/pdf" style={{ display: "none" }} disabled={uploading}
+                onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+              <Confirm
+                open={!!pendingFile}
+                onClose={() => setPendingFile(null)}
+                onConfirm={confirmReplace}
+                title="Replace PDF?"
+                message={`The current file will be permanently deleted and replaced with the new one, kept under the same name ("${file.name}"). This can't be undone.`}
+                confirmLabel="Replace"
+                confirmVariant="primary"
+              />
+            </>
+          )}
+          {dragging && (
+            <div style={{
+              position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", color: "#fff",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "0.8rem", fontWeight: 700, borderRadius: "var(--r)", pointerEvents: "none",
+            }}>
+              Drop to replace
+            </div>
+          )}
         </div>
       </div>
     );
@@ -1387,16 +1644,45 @@ function SmartFileDisplay({ files = [], onRemove, onRename, isSingle = false }) 
   // Multiple files: compact list
   return (
     <div className="file-rows">
-      {files.map((file, index) => <FileRow key={index} file={file} index={index} onRemove={onRemove} onRename={onRename} />)}
+      {files.map((file, index) => <FileRow key={index} file={file} index={index} onRemove={onRemove} onRename={onRename} onReplace={onReplace} />)}
     </div>
   );
 }
 
-function FileRow({ file, index, onRemove, onRename }) {
-  const [editing, setEditing] = useState(false);
-  const [name, setName]       = useState(file.name);
+// Drag a new PDF onto an already-uploaded one (or click the row) to swap
+// it in place — same click/drag/confirm pattern as ThumbnailPreview/
+// ReplaceableImage above. Rename/Remove stay exactly as they were;
+// onReplace is optional so this still works anywhere a caller doesn't
+// wire it up.
+function FileRow({ file, index, onRemove, onRename, onReplace }) {
+  const [editing, setEditing]   = useState(false);
+  const [name, setName]         = useState(file.name);
+  const [dragging, setDragging] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [uploading, setUploading]     = useState(false);
+  const ref = useRef();
+
+  const handleFiles = files => {
+    const f = files instanceof FileList ? files[0] : (Array.isArray(files) ? files[0] : files);
+    if (f) setPendingFile(f);
+  };
+
+  const confirmReplace = async () => {
+    const f = pendingFile;
+    setPendingFile(null);
+    setUploading(true);
+    try { await onReplace(index, f); }
+    finally { setUploading(false); }
+  };
+
   return (
-    <div className="file-row">
+    <div
+      className="file-row"
+      style={{ position: "relative", outline: dragging ? "2px solid var(--brand)" : "2px solid transparent", outlineOffset: -2, transition: "outline-color 0.15s" }}
+      onDragOver={onReplace ? e => { e.preventDefault(); if (!uploading) setDragging(true); } : undefined}
+      onDragLeave={onReplace ? () => setDragging(false) : undefined}
+      onDrop={onReplace ? e => { e.preventDefault(); setDragging(false); if (!uploading) handleFiles(e.dataTransfer.files); } : undefined}
+    >
       <div className="file-row-icon"><i className="fa-solid fa-file-pdf" /></div>
       <div className="file-row-info">
         {editing ? (
@@ -1410,12 +1696,41 @@ function FileRow({ file, index, onRemove, onRename }) {
           {file.url ? file.url.split("/").pop() : ""}
         </a>
       </div>
+      {onReplace && (
+        <button type="button" onClick={() => !uploading && ref.current?.click()} title="Replace" className="file-row-btn" disabled={uploading}>
+          <i className={`fa-solid ${uploading ? "fa-spinner fa-spin" : "fa-arrow-up-from-bracket"}`} />
+        </button>
+      )}
       <button type="button" onClick={() => setEditing(true)} title="Rename" className="file-row-btn file-row-edit">
         <i className="fa-solid fa-pen" />
       </button>
       <button type="button" onClick={() => onRemove(index)} title="Remove" className="file-row-btn file-row-trash">
         <i className="fa-solid fa-trash" />
       </button>
+      {onReplace && (
+        <>
+          <input ref={ref} type="file" accept=".pdf,application/pdf" style={{ display: "none" }} disabled={uploading}
+            onChange={e => { if (e.target.files[0]) { handleFiles(e.target.files[0]); e.target.value = ""; } }} />
+          <Confirm
+            open={!!pendingFile}
+            onClose={() => setPendingFile(null)}
+            onConfirm={confirmReplace}
+            title="Replace PDF?"
+            message={`The current file will be permanently deleted and replaced with the new one, kept under the same name ("${file.name}"). This can't be undone.`}
+            confirmLabel="Replace"
+            confirmVariant="primary"
+          />
+        </>
+      )}
+      {dragging && (
+        <div style={{
+          position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", color: "#fff",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "0.75rem", fontWeight: 700, borderRadius: "var(--r)", pointerEvents: "none",
+        }}>
+          Drop to replace
+        </div>
+      )}
     </div>
   );
 }
@@ -2492,7 +2807,14 @@ function VariantImageSlot({ image, uploading, onFile, size = 60 }) {
         <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "var(--r-sm)", overflow: "hidden", background: "var(--surface)", border: dragging ? "2px solid var(--brand)" : "1px solid transparent" }}>
           <img src={image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: uploading ? 0.5 : 1 }} onError={e => { e.target.style.display = "none"; }} />
           {(hovering || dragging) && !uploading && (
-            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.62rem", color: "white", textAlign: "center", cursor: "pointer" }}>
+            // pointerEvents: "none" is load-bearing — without it this overlay
+            // becomes the drag hit-target the instant it appears, which fires
+            // dragleave on the container (pointer is now "over" a different
+            // element), hiding the overlay, which re-fires dragenter on the
+            // image underneath — a fast show/hide loop that reads as
+            // blinking for as long as the file is dragged over the slot.
+            // Same fix already applied on ReplaceableImage above.
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.62rem", color: "white", textAlign: "center", cursor: "pointer", pointerEvents: "none" }}>
               {dragging ? "Drop" : "Change"}
             </div>
           )}
@@ -2661,13 +2983,23 @@ function VariationsManager({ variations = [], onChange, addToast, slug, currentU
 
   const setVariation = (idx, patch) => onChange(variations.map((v, i) => i === idx ? { ...v, ...patch } : v));
   const addVariation = () => onChange([...variations, { name: "", description: "", color: "", code: "", image: "", features: [], spec_table: null }]);
-  const removeVariation = idx => onChange(variations.filter((_, i) => i !== idx));
+  // Trash the variation's own image (if any) before dropping the row —
+  // this previously leaked silently (no cleanup call at all), now
+  // recoverable from Trash for 30 days like every other image, even though
+  // there's no slot left to auto-restore it back into.
+  const removeVariation = idx => {
+    const url = variations[idx]?.image;
+    if (url) trashMediaUrls([url], currentUser).catch(() => {});
+    onChange(variations.filter((_, i) => i !== idx));
+  };
 
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
       const roleTag = slugify(variations[idx]?.name || variations[idx]?.color || `variation-${idx}`);
       const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `variation-${roleTag}`, currentUser });
+      const oldUrl = variations[idx]?.image;
+      if (oldUrl && oldUrl !== url) trashMediaUrls([oldUrl], currentUser).catch(() => {});
       setVariation(idx, { image: url });
       addToast("✓ Variation image uploaded.", "success");
     } catch (err) {
@@ -2730,13 +3062,21 @@ function IncludedItemsManager({ items = [], onChange, addToast, slug, currentUse
 
   const setItem = (idx, patch) => onChange(items.map((it, i) => i === idx ? { ...it, ...patch } : it));
   const addItem = () => onChange([...items, { image: "", title: "", note: "" }]);
-  const removeItem = idx => onChange(items.filter((_, i) => i !== idx));
+  // Trash the item's own image (if any) before dropping the row — see
+  // VariationsManager's removeVariation above for why.
+  const removeItem = idx => {
+    const url = items[idx]?.image;
+    if (url) trashMediaUrls([url], currentUser).catch(() => {});
+    onChange(items.filter((_, i) => i !== idx));
+  };
 
   const handleImageUpload = async (file, idx) => {
     setUploadingIdx(idx);
     try {
       const roleTag = slugify(items[idx]?.title || `item-${idx}`);
       const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: `included-${roleTag}`, currentUser });
+      const oldUrl = items[idx]?.image;
+      if (oldUrl && oldUrl !== url) trashMediaUrls([oldUrl], currentUser).catch(() => {});
       setItem(idx, { image: url });
       addToast("✓ Image uploaded.", "success");
     } catch (err) {
@@ -2804,6 +3144,11 @@ export default function Products({ currentUser }) {
   const [editing,     setEditing]     = useState(null);
   // editingFull: the complete DB row, kept for the audit trail strip
   const [editingFull, setEditingFull] = useState(null);
+  // openEdit fetches the live row before the form has anything to show —
+  // without this the modal stayed closed for that whole round-trip, so
+  // clicking Edit looked like it did nothing until it suddenly popped open.
+  // Now the modal opens immediately in a loading state instead.
+  const [editLoading, setEditLoading] = useState(false);
   const [form,        setForm]        = useState(EMPTY_FORM);
   const [savedForm,   setSavedForm]   = useState(EMPTY_FORM);
   const [slugEdited,  setSlugEdited]  = useState(false);
@@ -2936,12 +3281,15 @@ export default function Products({ currentUser }) {
     try {
       const slug = effectiveSlug(form);
       const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role: "thumbnail", currentUser });
-      // Clean up the old thumbnail if it existed (harmless no-op for
-      // whichever of R2/Supabase the old URL wasn't hosted on).
+      // Trash the old thumbnail rather than deleting it immediately — it
+      // stays recoverable from the admin Trash page for 30 days (see
+      // setup-media-trash.sql). deleteStorageUrls still runs for whichever
+      // of R2/Supabase the old URL wasn't hosted on (harmless no-op either
+      // way; legacy Supabase Storage urls have no trash mechanism of their own).
       if (form.thumbnail && form.thumbnail !== url) {
         await Promise.allSettled([
           deleteStorageUrls([form.thumbnail]),
-          deleteR2Urls([form.thumbnail], currentUser),
+          trashMediaUrls([form.thumbnail], currentUser),
         ]);
       }
       setForm(f => ({ ...f, thumbnail: url }));
@@ -2958,7 +3306,7 @@ export default function Products({ currentUser }) {
       if (form.og_image && form.og_image !== url) {
         await Promise.allSettled([
           deleteStorageUrls([form.og_image]),
-          deleteR2Urls([form.og_image], currentUser),
+          trashMediaUrls([form.og_image], currentUser),
         ]);
       }
       setForm(f => ({ ...f, og_image: url }));
@@ -3030,24 +3378,66 @@ export default function Products({ currentUser }) {
     setForm(f => ({ ...f, files: f.files.filter((_, idx) => idx !== i) }));
   };
 
-  // Remove image and delete from storage
+  // Swap an already-uploaded PDF for a new file, in place, keeping its
+  // existing display name (only the file/url changes). The old PDF is
+  // trashed (recoverable for 30 days), not deleted outright.
+  const replaceFile = async (index, file) => {
+    try {
+      const existing = form.files[index];
+      const slug = effectiveSlug(form);
+      const role = `manual-${slugify(existing.name).slice(0, 30)}`;
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role, currentUser });
+      if (existing?.url && existing.url !== url) {
+        await Promise.allSettled([deleteStorageUrls([existing.url]), trashMediaUrls([existing.url], currentUser)]);
+      }
+      setForm(f => ({ ...f, files: f.files.map((fi, idx) => idx === index ? { ...fi, url } : fi) }));
+      add("PDF replaced.", "success");
+    } catch (err) {
+      add("PDF replace failed: " + err.message, "error");
+    }
+  };
+
+  // Remove image and trash it (recoverable from admin Trash for 30 days —
+  // see setup-media-trash.sql) instead of deleting it right away.
   const removeImageFile = (type, index) => {
     const array = form[type];
     const url = array[index];
     if (url) {
-      deleteStorageUrls([url]).catch(err => {
-        console.warn(`[Products] Failed to delete ${type} from storage:`, err);
-        add(`⚠️ Failed to delete image from storage. It may need manual cleanup.`, "warning");
+      Promise.allSettled([
+        deleteStorageUrls([url]),
+        trashMediaUrls([url], currentUser),
+      ]).catch(err => {
+        console.warn(`[Products] Failed to trash ${type} image:`, err);
+        add(`⚠️ Failed to move image to trash. It may need manual cleanup.`, "warning");
       });
     }
     setForm(f => ({ ...f, [type]: f[type].filter((_, idx) => idx !== index) }));
+  };
+
+  // Swap one already-uploaded gallery/spec image for a new file, in place
+  // (same array index/position) — the old image is trashed, not deleted,
+  // same as every other replace in this file. type: "images" | "spec_images".
+  const replaceImageFile = async (type, index, file) => {
+    const role = type === "spec_images" ? "spec" : "gallery";
+    try {
+      const oldUrl = form[type][index];
+      const slug = effectiveSlug(form);
+      const url = await uploadFileToR2(file, { entityPrefix: "products", slug, role, currentUser });
+      if (oldUrl && oldUrl !== url) {
+        await Promise.allSettled([deleteStorageUrls([oldUrl]), trashMediaUrls([oldUrl], currentUser)]);
+      }
+      setForm(f => ({ ...f, [type]: f[type].map((u, i) => i === index ? url : u) }));
+      add(`${role === "spec" ? "Spec" : "Gallery"} image replaced.`, "success");
+    } catch (err) {
+      add(err.message, "error");
+    }
   };
 
   // ── Modal guard ────────────────────────────────────────────────────────────
   const actualClose = () => {
     setModalOpen(false); setEditing(null); setEditingFull(null);
     setShowRevisions(false); setModalMenuOpen(false);
-    setUnsavedOpen(false); pendingClose.current = null;
+    setUnsavedOpen(false); pendingClose.current = null; setEditLoading(false);
   };
   const handleModalClose = () => { if (isDirty) { pendingClose.current = actualClose; setUnsavedOpen(true); } else actualClose(); };
   const handleUnsavedStay    = () => { setUnsavedOpen(false); pendingClose.current = null; };
@@ -3061,6 +3451,19 @@ export default function Products({ currentUser }) {
   };
 
   const openEdit = async row => {
+    // Open right away with a spinner instead of waiting on the fetch below —
+    // otherwise there's a silent gap between the click and the modal
+    // appearing where nothing on screen indicates anything happened.
+    // `editing` stays null until the fetch resolves so the Save button and
+    // the Revisions/Delete menu (both gated on `editing`/off `saving`)
+    // don't act on a half-loaded row in the meantime.
+    setEditing(null);
+    setEditingFull(null);
+    setShowRevisions(false);
+    setModalMenuOpen(false);
+    setActiveFormTab("general");
+    setEditLoading(true);
+    setModalOpen(true);
     try {
       const data = (await getProductByIdLive(row.id)) || (row.slug ? await getProductBySlugLive(row.slug) : null);
       if (!data) throw new Error("Product not found");
@@ -3103,11 +3506,12 @@ export default function Products({ currentUser }) {
       // path rendered "Edit: undefined" instead of the product's name.
       setEditing(data);
       setEditingFull(data);   // full row → audit strip
-      setShowRevisions(false);
-      setModalMenuOpen(false);
-      setActiveFormTab("general");
-      setModalOpen(true);
-    } catch (err) { add(err.message, "error"); }
+    } catch (err) {
+      add(err.message, "error");
+      actualClose();
+    } finally {
+      setEditLoading(false);
+    }
   };
 
   // Deep-link from Taxonomy/Models' quick-preview "Edit" button —
@@ -3227,12 +3631,15 @@ export default function Products({ currentUser }) {
         const orphans = findOrphanedUrls(savedForm, form);
         if (orphans.length) {
           try {
-            await deleteStorageUrls(orphans);
-            console.info(`[Products] Removed ${orphans.length} orphaned file(s).`);
-            add(`Cleaned up ${orphans.length} removed file(s) from storage.`, "success");
+            await Promise.allSettled([
+              deleteStorageUrls(orphans),
+              trashMediaUrls(orphans, currentUser),
+            ]);
+            console.info(`[Products] Trashed ${orphans.length} removed file(s).`);
+            add(`Moved ${orphans.length} removed file(s) to Trash.`, "success");
           } catch (deleteErr) {
-            console.error("[Products] Failed to delete orphaned files:", deleteErr);
-            add(`⚠️ Failed to delete ${orphans.length} file(s) from storage. They may need manual cleanup.`, "warning");
+            console.error("[Products] Failed to trash orphaned files:", deleteErr);
+            add(`⚠️ Failed to move ${orphans.length} file(s) to trash. They may need manual cleanup.`, "warning");
           }
         }
       } else {
@@ -3399,9 +3806,9 @@ export default function Products({ currentUser }) {
       if (activeAccessorySubcats.length > 0 && !activeAccessorySubcats.includes(sub)) return false;
     }
     if (quickFilter === "heaters") {
-      const sub = getHeaterSubcategory(p);
-      if (!sub) return false;
-      if (activeHeaterSubcats.length > 0 && !activeHeaterSubcats.includes(sub)) return false;
+      const subs = getHeaterSubcategories(p);
+      if (subs.length === 0) return false;
+      if (activeHeaterSubcats.length > 0 && !subs.some(s => activeHeaterSubcats.includes(s))) return false;
     }
 
     if (!search) return true;
@@ -3433,7 +3840,7 @@ export default function Products({ currentUser }) {
   const heaterGroups = quickFilter === "heaters"
     ? HEATER_SUBCATEGORIES
         .filter(sub => activeHeaterSubcats.length === 0 || activeHeaterSubcats.includes(sub.key))
-        .map(sub => ({ ...sub, products: filtered.filter(p => getHeaterSubcategory(p) === sub.key) }))
+        .map(sub => ({ ...sub, products: filtered.filter(p => getHeaterSubcategories(p).includes(sub.key)) }))
         .filter(group => group.products.length > 0)
     : null;
 
@@ -3609,14 +4016,33 @@ export default function Products({ currentUser }) {
                 No products match this filter.
               </div>
             )}
-            {groups.map(group => (
-              <div key={group.key} style={{ marginBottom: 28 }}>
-                <h3 className="product-group-label">{group.label}</h3>
-                <div className="product-grid">
-                  {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
+            {groups.map(group => {
+              const brandSubgroups = getBrandSubgroups(group.key, group.products);
+              return (
+                <div key={group.key} style={{ marginBottom: 28 }}>
+                  <h3 className="product-group-label">{group.label}</h3>
+                  {brandSubgroups ? (
+                    brandSubgroups.map(({ brand, products }) => (
+                      <div key={brand} style={{ marginBottom: 18 }}>
+                        <h4 className="product-brand-label">{brand.toUpperCase()}</h4>
+                        <div className="product-grid">
+                          {/* onPreview must stay openPreview, not setPreviewProduct directly:
+                              this list's rows carry PRODUCT_LIST_COLUMNS (display columns
+                              only) — see supabaseReader.js — so a raw row lacks
+                              description/spec_table/images/etc. openPreview does the
+                              per-id full-row fetch before opening the modal. */}
+                          {products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="product-grid">
+                      {group.products.map(p => <ProductCard key={p.id} p={p} onEdit={openEdit} onDuplicate={openDuplicate} onDelete={setConfirmDel} onPreview={openPreview} perms={perms} />)}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </ScrollArea>
         ) : (
           <>
@@ -3752,16 +4178,32 @@ export default function Products({ currentUser }) {
                     groups.length === 0 ? (
                       <tr><td colSpan={colCount} className="table-empty">No products match this filter.</td></tr>
                     ) : (
-                      groups.map(group => (
-                        <React.Fragment key={group.key}>
-                          <tr>
-                            <td colSpan={colCount} className="product-group-label" style={{ background: "var(--surface-2)", padding: "8px 12px" }}>
-                              {group.label}
-                            </td>
-                          </tr>
-                          {group.products.map(renderRow)}
-                        </React.Fragment>
-                      ))
+                      groups.map(group => {
+                        const brandSubgroups = getBrandSubgroups(group.key, group.products);
+                        return (
+                          <React.Fragment key={group.key}>
+                            <tr>
+                              <td colSpan={colCount} className="product-group-label" style={{ background: "var(--surface-2)", padding: "8px 12px" }}>
+                                {group.label}
+                              </td>
+                            </tr>
+                            {brandSubgroups ? (
+                              brandSubgroups.map(({ brand, products }) => (
+                                <React.Fragment key={brand}>
+                                  <tr>
+                                    <td colSpan={colCount} className="product-brand-label" style={{ padding: "6px 12px 6px 24px" }}>
+                                      {brand.toUpperCase()}
+                                    </td>
+                                  </tr>
+                                  {products.map(renderRow)}
+                                </React.Fragment>
+                              ))
+                            ) : (
+                              group.products.map(renderRow)
+                            )}
+                          </React.Fragment>
+                        );
+                      })
                     )
                   ) : (
                     <>
@@ -3797,7 +4239,7 @@ export default function Products({ currentUser }) {
       <Modal
         open={modalOpen}
         onClose={handleModalClose}
-        title={editing ? (
+        title={editLoading ? "Loading…" : editing ? (
           <a
             href={productUrl(editingFull || editing)}
             target="_blank"
@@ -3817,7 +4259,7 @@ export default function Products({ currentUser }) {
             <button
               type="submit"
               form="product-form"
-              disabled={saving}
+              disabled={saving || editLoading}
               style={{
                 padding: "6px 12px",
                 fontSize: "0.8rem",
@@ -3826,15 +4268,15 @@ export default function Products({ currentUser }) {
                 color: "white",
                 border: "none",
                 borderRadius: "var(--r-sm)",
-                cursor: saving ? "not-allowed" : "pointer",
-                opacity: saving ? 0.6 : 1,
+                cursor: (saving || editLoading) ? "not-allowed" : "pointer",
+                opacity: (saving || editLoading) ? 0.6 : 1,
                 transition: "opacity 0.15s",
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
               }}
-              onMouseEnter={e => !saving && (e.currentTarget.style.opacity = "0.9")}
-              onMouseLeave={e => !saving && (e.currentTarget.style.opacity = "1")}
+              onMouseEnter={e => !saving && !editLoading && (e.currentTarget.style.opacity = "0.9")}
+              onMouseLeave={e => !saving && !editLoading && (e.currentTarget.style.opacity = "1")}
             >
               <i className={`fa-solid ${saving ? "fa-spinner fa-spin" : "fa-check"}`} />
               {editing ? "Save Changes" : "Create Product"}
@@ -3912,8 +4354,14 @@ export default function Products({ currentUser }) {
         )}
       >
 
-        {/* Show either revision history or form */}
-        {showRevisions && editing ? (
+        {/* Show either revision history, a loading spinner while openEdit's
+            fetch is still in flight, or the form */}
+        {editLoading ? (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, padding: "60px 0", color: "var(--text-3)" }}>
+            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: "1.6rem", color: "var(--brand)" }} />
+            <span style={{ fontSize: "0.82rem" }}>Loading product…</span>
+          </div>
+        ) : showRevisions && editing ? (
           <div>
             <button
               type="button"
@@ -4044,9 +4492,12 @@ export default function Products({ currentUser }) {
                   url={form.thumbnail}
                   onRemove={() => {
                     if (form.thumbnail) {
-                      deleteStorageUrls([form.thumbnail]).catch(err => {
-                        console.warn("[Products] Failed to delete thumbnail from storage:", err);
-                        add("⚠️ Failed to delete thumbnail from storage. It may need manual cleanup.", "warning");
+                      Promise.allSettled([
+                        deleteStorageUrls([form.thumbnail]),
+                        trashMediaUrls([form.thumbnail], currentUser),
+                      ]).catch(err => {
+                        console.warn("[Products] Failed to trash thumbnail:", err);
+                        add("⚠️ Failed to move thumbnail to trash. It may need manual cleanup.", "warning");
                       });
                     }
                     setForm(f => ({ ...f, thumbnail: "" }));
@@ -4064,7 +4515,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Gallery Images" />
               {form.images.length > 0 ? (
                 <>
-                  <SmartImageGallery images={form.images} isSingle onRemove={i => removeImageFile("images", i)} />
+                  <SmartImageGallery images={form.images} isSingle onRemove={i => removeImageFile("images", i)} onReplace={(i, file) => replaceImageFile("images", i, file)} />
                   <AddMoreImagesButton label="Add More Images" uploading={upImgs}
                     onChange={e => e.target.files?.length && uploadMoreImages(Array.from(e.target.files))} />
                 </>
@@ -4137,7 +4588,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Spec / Diagram Images" />
               {form.spec_images.length > 0 ? (
                 <>
-                  <SmartImageGallery images={form.spec_images} isSingle onRemove={i => removeImageFile("spec_images", i)} />
+                  <SmartImageGallery images={form.spec_images} isSingle onRemove={i => removeImageFile("spec_images", i)} onReplace={(i, file) => replaceImageFile("spec_images", i, file)} />
                   <AddMoreImagesButton label="Add More Spec Images" uploading={upSpec}
                     onChange={e => e.target.files?.length && uploadSpecImages(Array.from(e.target.files))} />
                 </>
@@ -4151,7 +4602,7 @@ export default function Products({ currentUser }) {
               <SectionLabel label="Resources (PDFs)" />
               {form.files.length > 0 ? (
                 <>
-                  <SmartFileDisplay files={form.files} isSingle onRemove={removeFile} onRename={renameFile} />
+                  <SmartFileDisplay files={form.files} isSingle onRemove={removeFile} onRename={renameFile} onReplace={replaceFile} />
                   <AddMorePdfsButton label="Add More PDFs" uploading={upFile}
                     onUploadFile={handleFileUpload} onAddUrl={handleAddPdfUrl} />
                 </>
@@ -4250,9 +4701,12 @@ export default function Products({ currentUser }) {
                 <ThumbnailPreview
                   url={form.og_image}
                   onRemove={() => {
-                    deleteStorageUrls([form.og_image]).catch(err => {
-                      console.warn("[Products] Failed to delete OG image from storage:", err);
-                      add("⚠️ Failed to delete OG image from storage. It may need manual cleanup.", "warning");
+                    Promise.allSettled([
+                      deleteStorageUrls([form.og_image]),
+                      trashMediaUrls([form.og_image], currentUser),
+                    ]).catch(err => {
+                      console.warn("[Products] Failed to trash OG image:", err);
+                      add("⚠️ Failed to move OG image to trash. It may need manual cleanup.", "warning");
                     });
                     setForm(f => ({ ...f, og_image: "" }));
                   }}

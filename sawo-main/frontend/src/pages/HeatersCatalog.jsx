@@ -18,6 +18,11 @@ import BrochureDropdownButton from "../components/Buttons/BrochureDropdownButton
 import menuPaths from "../menuPaths";
 import { WALL_MOUNTED_FIXED_ORDER, groupWallMountedProducts, variantRank } from "../utils/wallMountedGroups";
 import { useLocaleT, useLocalizedPath } from "../i18n/LocaleContext";
+import { FLOOR_FIXED_ORDER, groupFloorProducts } from "../utils/floorGroups";
+import { COMBI_FIXED_ORDER, groupCombiProducts } from "../utils/combiGroups";
+import { TOWER_FIXED_ORDER, groupTowerProducts } from "../utils/towerGroups";
+import { STONE_FIXED_ORDER, groupStoneProducts } from "../utils/stoneGroups";
+import { DRAGONFIRE_FIXED_ORDER, groupDragonfireProducts } from "../utils/dragonfireGroups";
 
 function getImageUrl(product, field) {
   const path = product?.[`local_${field}`] || product?.[field] || null;
@@ -138,17 +143,33 @@ function HeaterCard({ product }) {
   );
 }
 
+// Every heater series has well-defined brand families — each organizes its
+// section under brand sub-headings the same way its own dedicated page
+// does (Wall-Mounted: Nordex/Mini/Scandia/Krios/Scandifire; Floor: Helius/
+// Taurus D/Savonia/Nordex; Combi: Taurus D Combi/Nordex Pro Combi/...;
+// Tower: SAWO30/Tower/Aries/Cubos/Heaterking/Phoenix/Fiberjungle; Stone:
+// Cumulus/Nimbus; Dragonfire: Heaterking/Fiberjungle/Scandifire/
+// Minidragon) instead of one flat grid — reusing the exact grouping logic
+// each dedicated page itself uses (see *Groups.js in utils/) so this
+// catalog and the individual pages can never drift apart.
+const CATEGORY_BRAND_GROUPERS = {
+  "wall-mounted": { fixedOrder: WALL_MOUNTED_FIXED_ORDER, group: groupWallMountedProducts },
+  floor:          { fixedOrder: FLOOR_FIXED_ORDER,        group: groupFloorProducts },
+  combi:          { fixedOrder: COMBI_FIXED_ORDER,        group: groupCombiProducts },
+  tower:          { fixedOrder: TOWER_FIXED_ORDER,        group: groupTowerProducts },
+  stone:          { fixedOrder: STONE_FIXED_ORDER,        group: groupStoneProducts },
+  dragonfire:     { fixedOrder: DRAGONFIRE_FIXED_ORDER,   group: groupDragonfireProducts },
+};
+
 function CategorySection({ group, productsByGroup }) {
   const t = useLocaleT("catalog");
   const products = productsByGroup[group.id] || [];
   const groupLabel = t(`heatersCatalog.groups.${group.key}`);
+  const grouper = CATEGORY_BRAND_GROUPERS[group.category];
 
-  // The Wall-Mounted series has well-defined brand families (Nordex, Mini,
-  // Scandia, Krios, Scandifire) — organize it the same way the dedicated
-  // Wall-Mounted heaters page does, instead of one flat grid.
-  if (group.category === "wall-mounted") {
-    const brandGroups = groupWallMountedProducts(products);
-    const brandNames = WALL_MOUNTED_FIXED_ORDER.filter(g => brandGroups[g]?.length);
+  if (grouper) {
+    const brandGroups = grouper.group(products);
+    const brandNames = grouper.fixedOrder.filter(g => brandGroups[g]?.length);
 
     return (
       <div id={group.id} className="category-section">

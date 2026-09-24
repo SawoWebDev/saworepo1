@@ -112,11 +112,24 @@
    fixed header (same 90px used for the #infrared-* anchors on /infrared). */
 .wm-group { margin-bottom: 40px; scroll-margin-top: 90px; }
 .wm-group-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.9rem; font-weight: 700;
   color: #AA8161; text-transform: uppercase;
-  letter-spacing: 1.5px; padding-bottom: 8px;
-  border-bottom: 2px solid #ede5db; margin-bottom: 20px;
+  letter-spacing: 1.5px; margin-bottom: 20px;
+}
+/* Trailing rule filling the rest of the row after the text, same color as
+   the heading itself, fading to nothing toward the right — matches the
+   admin CMS's brand sub-headings (see Administrator/admin.css's
+   .product-brand-label). Replaces the old flat full-width border-bottom. */
+.wm-group-title::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, #AA8161, transparent);
+  opacity: 0.35;
 }
 .wm-products-grid {
   display: grid;
@@ -214,6 +227,27 @@
   font-size: 1rem; font-weight: 300;
   color: rgba(255,255,255,0.9); margin: 0; line-height: 1.6;
 }
+/* Optional CTA (PromoBanner's ctaPrompt/ctaLabel/ctaTo props) — only
+   rendered when a caller passes them, so this stays invisible/unused on
+   every PromoBanner usage that doesn't (accessories pages, Sauna
+   Controls). Keeps the existing image background untouched; just adds a
+   button under the title/subtitle. */
+.wm-banner-cta { margin-top: 32px; }
+.wm-banner-cta-prompt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem; font-weight: 300;
+  color: rgba(255,255,255,0.9); margin: 0 0 14px; line-height: 1.6;
+}
+.wm-banner-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 1px; padding: 12px 32px;
+  background: #fff; color: #AA8161;
+  border: 2px solid #fff; border-radius: 6px;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s ease;
+}
+.wm-banner-btn:hover { background: transparent; color: #fff; }
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) { .wm-products-grid { grid-template-columns: repeat(3, 1fr); } }

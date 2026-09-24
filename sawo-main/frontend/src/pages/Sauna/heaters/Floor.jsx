@@ -59,6 +59,7 @@ import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
+import { FLOOR_FIXED_ORDER, groupFloorProducts } from "../../../utils/floorGroups";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -69,19 +70,6 @@ function getImageUrl(product, field) {
   if (!path) return null;
   return path;
 }
-
-// ── Fixed group order ───────────────────────────────────────────────
-// Krios is intentionally excluded — Floor Series no longer displays it.
-const FIXED_ORDER = ["Helius", "Taurus D", "Savonia", "Nordex"];
-
-// ── Keywords to detect group membership ────────────────────────────
-const GROUP_KEYWORDS = {
-  "Taurus D": ["Taurus D", "Taurus"],
-  Helius: ["Helius", "HELIUS"],
-  Krios: ["Krios Floor", "Krios"],
-  Savonia: ["Savonia"],
-  Nordex: ["Nordex"],
-};
 
 // ── Filter Floor products dynamically ───────────────────────────────
 function filterFloorProducts(allProducts) {
@@ -94,31 +82,6 @@ function filterFloorProducts(allProducts) {
       p.tags?.some(t => t.toLowerCase() === "floor")
     );
   });
-}
-
-// ── Group products dynamically ──────────────────────────────────────
-function groupProducts(products) {
-  return products.reduce((groups, product) => {
-    let assigned = false;
-    for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
-      for (const kw of keywords) {
-        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
-        if (nameMatch || tagMatch) {
-          if (!groups[group]) groups[group] = [];
-          groups[group].push(product);
-          assigned = true;
-          break;
-        }
-      }
-      if (assigned) break;
-    }
-    if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
-    }
-    return groups;
-  }, {});
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────
@@ -189,8 +152,8 @@ const Floor = () => {
     return filterFloorProducts(visible);
   }, [localProds]);
 
-  const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
-  const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
+  const groupedProducts = useMemo(() => groupFloorProducts(allProducts), [allProducts]);
+  const groupNames = useMemo(() => FLOOR_FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
 
   const visibleGroups = activeGroup
     ? groupNames.filter((g) => g === activeGroup)
@@ -325,11 +288,6 @@ const Floor = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
-      </section>
-
       {/* WHY SAWO + CIRCLES */}
       <section className="wm-section">
         <div className="wm-container">
@@ -359,9 +317,16 @@ const Floor = () => {
       </section>
 
       <PromoBanner
-        title={t("floorPage.promo.title")}
-        subtitle={t("floorPage.promo.subtitle")}
+        // NOT t("*Page.promo.*"): main reworded this banner after the
+        // i18n branch translated the old per-page copy, so that key's
+        // fi/zh values no longer match this English text. Hardcoded
+        // (matching main, same generic copy on every heater page) until
+        // it is re-translated.
+        title="Find Your Perfect Heater"
+        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
         image={bannerImg}
+        ctaLabel="VIEW ALL HEATERS"
+        ctaTo={menuPaths.sauna.heaters.parent}
       />
     </div>
   );

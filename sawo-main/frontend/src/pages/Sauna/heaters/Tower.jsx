@@ -60,6 +60,7 @@ import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
+import { TOWER_FIXED_ORDER, groupTowerProducts } from "../../../utils/towerGroups";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -70,9 +71,6 @@ function getImageUrl(product, field) {
   if (!path) return null;
   return path;
 }
-
-// ── Fixed group order ─────────────────────────────────────────────────
-const FIXED_ORDER = ["SAWO30", "Tower", "Aries", "Cubos", "Heaterking", "Phoenix", "Fiberjungle"];
 
 // ── Filter Tower products ─────────────────────────────────────────────
 // Requires the "Towers" category first — matching on name alone let
@@ -99,33 +97,12 @@ function filterTowerProducts(allProducts) {
   });
 }
 
-function getSeriesName(name = "") {
-  const u = name.toUpperCase();
-  if (u.includes("SAWO30"))         return "SAWO30";
-  if (u.includes("ARIES"))          return "Aries";
-  if (u.includes("CUBOS"))          return "Cubos";
-  if (u.includes("HEATERKING"))     return "Heaterking";
-  if (u.includes("PHOENIX"))        return "Phoenix";
-  if (u.includes("FIBERJUNGLE NS")) return "Fiberjungle";
-  if (u.includes("TOWER"))          return "Tower";
-  return "Other";
-}
-
 function getType(name = "") {
   const u = name.toUpperCase();
   if (u.includes("ROUND"))  return "Round";
   if (u.includes("WALL"))   return "Wall";
   if (u.includes("CORNER")) return "Corner";
   return "Other";
-}
-
-function groupProducts(products) {
-  return products.reduce((groups, product) => {
-    const series = getSeriesName(product.name);
-    if (!groups[series]) groups[series] = [];
-    groups[series].push(product);
-    return groups;
-  }, {});
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────────
@@ -193,8 +170,8 @@ const Tower = () => {
     return filterTowerProducts(visible);
   }, [localProds]);
 
-  const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
-  const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
+  const groupedProducts = useMemo(() => groupTowerProducts(allProducts), [allProducts]);
+  const groupNames = useMemo(() => TOWER_FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
 
   const filteredGroups = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -220,7 +197,7 @@ const Tower = () => {
       <SEO
         title={t("towerPage.meta.title")}
         description={t("towerPage.meta.description")}
-        path="/sauna/heaters/tower"
+        path={localize("/sauna/heaters/tower")}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -338,11 +315,6 @@ const Tower = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
-      </section>
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -362,9 +334,16 @@ const Tower = () => {
       </section>
 
       <PromoBanner
-        title={t("towerPage.promo.title")}
-        subtitle={t("towerPage.promo.subtitle")}
+        // NOT t("*Page.promo.*"): main reworded this banner after the
+        // i18n branch translated the old per-page copy, so that key's
+        // fi/zh values no longer match this English text. Hardcoded
+        // (matching main, same generic copy on every heater page) until
+        // it is re-translated.
+        title="Find Your Perfect Heater"
+        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
         image={bannerImg}
+        ctaLabel="VIEW ALL HEATERS"
+        ctaTo={menuPaths.sauna.heaters.parent}
       />
     </div>
   );

@@ -276,7 +276,7 @@ export default function WallMounted() {
       <SEO
         title={t("wallMountedPage.meta.title")}
         description={t("wallMountedPage.meta.description")}
-        path="/sauna/heaters/wall-mounted"
+        path={localize("/sauna/heaters/wall-mounted")}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -482,11 +482,6 @@ export default function WallMounted() {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
-      </section>
-
       {/* ── WHY SAWO ─────────────────────────────────────────────────────── */}
       <section className="wm-section">
         <div className="wm-container">
@@ -514,9 +509,16 @@ export default function WallMounted() {
       </section>
 
       <PromoBanner
-        title={t("wallMountedPage.promo.title")}
-        subtitle={t("wallMountedPage.promo.subtitle")}
+        // NOT t("wallMountedPage.promo.*"): main reworded this banner after
+        // the i18n branch translated the old per-page copy, so that key's
+        // fi/zh values no longer match this English text. Hardcoded
+        // (matching main, same generic copy on every heater page) until it
+        // is re-translated.
+        title="Find Your Perfect Heater"
+        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
         image={bannerImg}
+        ctaLabel="VIEW ALL HEATERS"
+        ctaTo={menuPaths.sauna.heaters.parent}
       />
     </div>
   );

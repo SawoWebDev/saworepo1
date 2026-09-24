@@ -61,6 +61,7 @@ import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
+import { STONE_FIXED_ORDER, groupStoneProducts } from "../../../utils/stoneGroups";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -71,15 +72,6 @@ function getImageUrl(product, field) {
   if (!path) return null;
   return path;
 }
-
-// ── Fixed group order ─────────────────────────────────────────────────
-const FIXED_ORDER = ["Cumulus", "Nimbus"];
-
-// ── Keywords to detect group membership ───────────────────────────────
-const GROUP_KEYWORDS = {
-  Cumulus: ["Cumulus"],
-  Nimbus: ["Nimbus"],
-};
 
 // ── Filter Stone products dynamically ────────────────────────────────
 function filterStoneProducts(allProducts) {
@@ -99,36 +91,6 @@ function filterStoneProducts(allProducts) {
       name.includes("STONE")
     );
   });
-}
-
-// ── Group products dynamically ───────────────────────────────────────
-function groupProducts(products) {
-  const groupedProducts = products.reduce((groups, product) => {
-    let assigned = false;
-    for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
-      for (const kw of keywords) {
-        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
-        if (nameMatch || tagMatch) {
-          if (!groups[group]) groups[group] = [];
-          groups[group].push(product);
-          assigned = true;
-          break;
-        }
-      }
-      if (assigned) break;
-    }
-
-    // If no match, assign to Other
-    if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
-    }
-
-    return groups;
-  }, {});
-
-  return groupedProducts;
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────────
@@ -200,8 +162,8 @@ const Stone = () => {
   }, [localProds]);
 
   // ── Group and filter products ───────────────────────────────────────────
-  const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
-  const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
+  const groupedProducts = useMemo(() => groupStoneProducts(allProducts), [allProducts]);
+  const groupNames = useMemo(() => STONE_FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
 
   const visibleGroups = activeGroup
     ? groupNames.filter((g) => g === activeGroup)
@@ -212,7 +174,7 @@ const Stone = () => {
       <SEO
         title={t("stonePage.meta.title")}
         description={t("stonePage.meta.description")}
-        path="/sauna/heaters/stone"
+        path={localize("/sauna/heaters/stone")}
       />
       <style>{`
         @keyframes wm-shimmer {
@@ -395,11 +357,6 @@ const Stone = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
-      </section>
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -419,9 +376,16 @@ const Stone = () => {
       </section>
 
       <PromoBanner
-        title={t("stonePage.promo.title")}
-        subtitle={t("stonePage.promo.subtitle")}
+        // NOT t("*Page.promo.*"): main reworded this banner after the
+        // i18n branch translated the old per-page copy, so that key's
+        // fi/zh values no longer match this English text. Hardcoded
+        // (matching main, same generic copy on every heater page) until
+        // it is re-translated.
+        title="Find Your Perfect Heater"
+        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
         image={bannerImg}
+        ctaLabel="VIEW ALL HEATERS"
+        ctaTo={menuPaths.sauna.heaters.parent}
       />
     </div>
   );

@@ -61,9 +61,9 @@ import HeroWave from "../../../components/HeroWave";
 import SEO from "../../../components/SEO";
 import { isPubliclyVisible } from "../../../local-storage/visibility";
 import { getPowerRange } from "../../../utils/productPower";
-import { variantRank } from "../../../utils/wallMountedGroups";
 import { isHeaterProduct } from "../../../utils/isHeaterProduct";
 import { useLocaleT, useLocalizedPath } from "../../../i18n/LocaleContext";
+import { COMBI_FIXED_ORDER, groupCombiProducts } from "../../../utils/combiGroups";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -74,32 +74,6 @@ function getImageUrl(product, field) {
   if (!path) return null;
   return path;
 }
-
-// ── Fixed group order ─────────────────────────────────────────────────
-const FIXED_ORDER = [
-  "Taurus D Combi",
-  "Nordex Pro Combi",
-  "Nordex S Combi",
-  "Nordex Combi",
-  "Nordex Mini Combi",
-  "Mini Combi",
-  "Savonia Combi",
-  "Scandia Combi",
-  "Nimbus Combi",
-];
-
-// ── Keywords to detect group membership ────────────────────────────────
-const GROUP_KEYWORDS = {
-  "Taurus D Combi": ["Taurus D Combi", "TRDC-NS"],
-  "Nordex Pro Combi": ["Nordex Pro Combi", "NRNC-PRO"],
-  "Nordex S Combi": ["Nordex S Combi", "NRNSC"],
-  "Nordex Combi": ["Nordex Combi", "NRNC"],
-  "Nordex Mini Combi": ["Nordex Mini Combi", "NRMC"],
-  "Mini Combi": ["Mini Combi", "MNC"],
-  "Savonia Combi": ["Savonia Combi", "SAVC"],
-  "Scandia Combi": ["Scandia Combi", "SCAC"],
-  "Nimbus Combi": ["Nimbus Combi", "NIMC"],
-};
 
 // ── Filter Combi products dynamically ────────────────────────────────
 function filterCombiProducts(allProducts) {
@@ -112,38 +86,6 @@ function filterCombiProducts(allProducts) {
       p.name?.toLowerCase().includes("combi")
     );
   });
-}
-
-// ── Group products dynamically ───────────────────────────────────────
-function groupProducts(products) {
-  const groups = products.reduce((groups, product) => {
-    let assigned = false;
-    for (const [group, keywords] of Object.entries(GROUP_KEYWORDS)) {
-      for (const kw of keywords) {
-        const nameMatch = product.name?.toLowerCase().includes(kw.toLowerCase());
-        const tagMatch = product.tags?.some((t) => t.toLowerCase().includes(kw.toLowerCase()));
-        if (nameMatch || tagMatch) {
-          if (!groups[group]) groups[group] = [];
-          groups[group].push(product);
-          assigned = true;
-          break;
-        }
-      }
-      if (assigned) break;
-    }
-    if (!assigned) {
-      if (!groups["Other"]) groups["Other"] = [];
-      groups["Other"].push(product);
-    }
-    return groups;
-  }, {});
-  // Within each group, plain/standard variant before its Black or
-  // Fiber-Coated counterpart (e.g. "Nordex S Combi NS" before "Nordex S
-  // Combi Black NS").
-  for (const group of Object.keys(groups)) {
-    groups[group].sort((a, b) => variantRank(a.name) - variantRank(b.name));
-  }
-  return groups;
 }
 
 // ── Skeleton card ────────────────────────────────────────────────────────
@@ -213,8 +155,8 @@ const Combi = () => {
     return filterCombiProducts(visible);
   }, [localProds]);
 
-  const groupedProducts = useMemo(() => groupProducts(allProducts), [allProducts]);
-  const groupNames = useMemo(() => FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
+  const groupedProducts = useMemo(() => groupCombiProducts(allProducts), [allProducts]);
+  const groupNames = useMemo(() => COMBI_FIXED_ORDER.filter((g) => groupedProducts[g]), [groupedProducts]);
 
   const visibleGroups = activeGroup
     ? groupNames.filter((g) => g === activeGroup)
@@ -355,11 +297,6 @@ const Combi = () => {
         </div>
       </section>
 
-      {/* ── VIEW ALL HEATERS ────────────────────────────────────────────── */}
-      <section className="wm-section" style={{ textAlign: "center" }}>
-        <Link to={localize(menuPaths.heaters)} className="wm-brochure-btn">{t("heatersPage.viewAll")}</Link>
-      </section>
-
       {/* WHY SAWO */}
       <section className="wm-section">
         <div className="wm-container">
@@ -390,9 +327,18 @@ const Combi = () => {
       </section>
 
       <PromoBanner
-        title={t("combiPage.promo.title")}
-        subtitle={t("combiPage.promo.subtitle")}
+        // NOT t("combiPage.promo.*"): main reworded this banner after the
+        // i18n branch translated the old copy ("Experience Ultimate
+        // Relaxation..."), so that key's fi/zh values no longer match this
+        // English text. Hardcoded (matching main) until it's re-translated
+        // — showing everyone main's current, correct copy beats showing
+        // fi/zh visitors an accurate translation of banner text main no
+        // longer uses.
+        title="Find Your Perfect Heater"
+        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
         image={bannerImg}
+        ctaLabel="VIEW ALL HEATERS"
+        ctaTo={menuPaths.sauna.heaters.parent}
       />
     </div>
   );

@@ -2045,6 +2045,36 @@ body {
   color: #fff;
 }
 
+/* Brand sub-heading nested under a group label — Wall-Mounted/Floor only
+   (see HEATER_BRAND_GROUPERS in Products.jsx), one size down from
+   .product-group-label so the two-tier hierarchy (group > brand) reads
+   clearly at a glance. */
+.product-brand-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin: 0 0 10px;
+  padding-left: 2px;
+}
+/* Trailing rule filling the rest of the row after the text — same color
+   as the label text itself, not a border on the label (which, as a
+   full-width block, would just sit invisibly at the far edge of its
+   container). Solid where it meets the text, fading to nothing toward
+   the far right instead of a flat bar. */
+.product-brand-label::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, var(--text-2), transparent);
+  opacity: 0.35;
+}
+
 .product-grid-card {
   position: relative;
   background: transparent;
