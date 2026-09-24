@@ -27,8 +27,8 @@ const CATEGORY_GROUPS = [
     groupKey: "pailsLadles",
     tabs: [
       { key: "pails", label: "Pails", category: "pails" },
-      { key: "ladles", label: "Ladles", category: "ladles" },
       { key: "pail-shower", label: "Pail Shower", category: "pail shower" },
+      { key: "ladles", label: "Ladles", category: "ladles" },
     ],
   },
   {
@@ -93,19 +93,21 @@ const CATEGORY_GROUPS = [
 
 function CategorySection({ group, productsByTab }) {
   const t = useLocaleT("catalog");
-  // Best sellers float to the top within this category's own grid only, then
-  // the CMS sort_order (newest first as the final tie-break) — same ordering
-  // VentilationsAddOns uses. The product list itself arrives newest-first, so
-  // without the sort_order step the CMS arrangement was ignored here.
+  // Each tab (data category) is ordered by its own CMS sort_order first
+  // (newest first as the tie-break) — sort_order restarts at 0 per category,
+  // so it must never be compared across tabs, or multi-tab groups (Pails &
+  // Ladles, Benches/Hangers/Floor Mats) interleave. The product list itself
+  // arrives newest-first, so without this step the CMS arrangement was
+  // ignored here. Tabs then stay in their declared order, one after another.
+  // Best sellers float to the top of the whole group — .sort() is stable, so
+  // ties keep that tab-by-tab order.
   const products = group.tabs
-    .flatMap(tab => productsByTab[tab.key] || [])
-    .sort((a, b) => {
-      const fA = a.featured ? 1 : 0, fB = b.featured ? 1 : 0;
-      if (fA !== fB) return fB - fA;
+    .flatMap(tab => [...(productsByTab[tab.key] || [])].sort((a, b) => {
       const sA = a.sort_order ?? 999, sB = b.sort_order ?? 999;
       if (sA !== sB) return sA - sB;
       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-    });
+    }))
+    .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
   return (
     <div id={group.id} className="category-section">
