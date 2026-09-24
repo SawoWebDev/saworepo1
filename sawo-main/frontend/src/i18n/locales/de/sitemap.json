@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "Sitemap",
+    "description": "Ein vollständiger Leitfaden zu jeder Seite und jedem Bereich der SAWO Website: Saunaöfen, Dampferzeuger, Saunaräume und mehr."
+  },
+  "title": "Sitemap",
+  "subtitle": "Vollständiger Leitfaden zu allen Seiten und Bereichen der SAWO Website.",
+  "productGroups": {
+    "Steam Accessories": "Dampfzubehör",
+    "Steam Controls": "Dampfsteuerungen",
+    "Infrared": "Infrarot",
+    "Sauna Controls": "Saunasteuerungen",
+    "Sauna Accessories": "Sauna-Zubehör",
+    "Sauna Heaters": "Saunaöfen",
+    "Other Products": "Weitere Produkte"
+  },
+  "groups": {
+    "productOther": "Weitere Produkte",
+    "mainPages": {
+      "heading": "Hauptseiten",
+      "home": "Startseite",
+      "about": "Über Uns",
+      "contact": "Kontakt",
+      "careers": "Karriere",
+      "privacy": "Datenschutzerklärung"
+    },
+    "about": {
+      "heading": "Über Uns",
+      "news": "Neuigkeiten",
+      "sustainability": "Nachhaltigkeit"
+    },
+    "sauna": {
+      "heading": "Finnische Sauna",
+      "products": "Sauna-Produkte",
+      "heaters": "Saunaöfen",
+      "wallMounted": "Wandmontierte Öfen",
+      "tower": "Tower-Öfen",
+      "stone": "Stone-Öfen",
+      "floor": "Standöfen",
+      "combi": "Kombi-Öfen",
+      "dragonfire": "Dragonfire-Öfen",
+      "controls": "Saunasteuerungen",
+      "accessories": "Sauna-Zubehör",
+      "accessorySets": "Zubehör-Sets",
+      "pailsLadles": "Eimer & Kellen",
+      "thermometers": "Thermometer & Kombigeräte",
+      "clocksSandtimers": "Uhren & Sanduhren",
+      "lightsCovers": "Saunaleuchten & Abdeckungen",
+      "headrestsBackrests": "Kopfstützen & Rückenlehnen",
+      "doorsHandles": "Türen & Griffe",
+      "benches": "Bänke & Bodenfliesen",
+      "kivistone": "Kivistone",
+      "ventilations": "Belüftung & Zubehör",
+      "rooms": "Saunaräume",
+      "interiorDesigns": "Innendesigns",
+      "woodPanels": "Holzpaneele & Hölzer"
+    },
+    "steam": {
+      "heading": "Dampfräume",
+      "products": "Dampfraum-Produkte",
+      "generators": "Dampferzeuger",
+      "controls": "Dampfsteuerungen",
+      "accessories": "Dampfzubehör"
+    },
+    "infrared": {
+      "heading": "Infrarotsauna",
+      "parent": "Infrarot",
+      "saunas": "Infrarotsaunen",
+      "panels": "Infrarotpaneele",
+      "controls": "Infrarotsteuerungen"
+    },
+    "support": {
+      "heading": "Support & Ressourcen",
+      "parent": "Support-Center",
+      "faq": "Häufig Gestellte Fragen",
+      "calculator": "Sauna-Rechner",
+      "manuals": "Bedienungsanleitungen",
+      "catalogue": "Produktkatalog"
+    },
+    "catalog": {
+      "heading": "Produkte & Katalog",
+      "allProducts": "Alle Produkte",
+      "accessoriesCatalog": "Zubehörkatalog",
+      "heatersCatalog": "Ofenkatalog"
+    }
+  },
+  "everyProduct": "Alle Produkte",
+  "loadingProducts": "Produkte werden geladen…",
+  "noProducts": "Derzeit keine Produkte verfügbar.",
+  "saunaRooms": "Saunaräume",
+  "loadingRooms": "Saunaräume werden geladen…",
+  "noRooms": "Derzeit keine Saunaräume verfügbar.",
+  "help": {
+    "title": "Brauchen Sie Hilfe?",
+    "prefix": "Finden Sie nicht, wonach Sie suchen? Besuchen Sie unsere",
+    "contactLink": "Kontaktseite",
+    "or": "oder",
+    "faqLink": "FAQ-Bereich"
+  }
+}

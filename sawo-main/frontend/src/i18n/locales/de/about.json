@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "title": "Über Uns",
+    "description": "Seit über 30 Jahren entwerfen und fertigen wir hochwertige finnische Saunaöfen, Dampferzeuger und Saunaräume – vertraut von Kunden in mehr als 90 Ländern."
+  },
+  "alt": {
+    "office": "SAWO Büro",
+    "team": "SAWO Team"
+  },
+  "hero": {
+    "title": "Wir sind SAWO",
+    "subtitle": "Finnische Tradition für die Welt",
+    "desc": "Wir sind ein kundenorientiertes, exzellenzgetriebenes Unternehmen, das bei jedem Schritt – vom Produktdesign über die Fertigung bis zum Kundendienst – die Bedürfnisse unserer Kunden konsequent in den Mittelpunkt stellt. Wir sind stolz darauf, unseren geschätzten Kunden ausschließlich erstklassige Produkte und den besten Service zu bieten."
+  },
+  "innovation": {
+    "titleMain": "Ohne Grenzen",
+    "titleSub": "Finnische Tradition, weltweit zuhause",
+    "p1": "Wir sind ein wegweisendes europäisches Saunaunternehmen mit einem Fertigungsstandort in Asien – Heimat von über 600 engagierten philippinischen und finnischen Fachkräften, Tendenz steigend. Unser Erfolg beruht auf wettbewerbsfähigen Preisen, außergewöhnlicher Produktqualität und einem Kundenservice, der weit über das Übliche hinausgeht.",
+    "p2": "SAWO entstand aus der Verschmelzung der beiden Wörter <b>Sa</b>una und <b>Wo</b>rld (Welt). Das spiegelt uns treffend als umfassenden Sauna-Anbieter wider, der alle Ihre Saunabedürfnisse erfüllt – von Öfen bis hin zu Türgriffen und Lüftungslamellen. Angetrieben von unserer Leidenschaft für die Sauna und geleitet von einer innovativen Unternehmenskultur sind wir zu einem der weltweit führenden Hersteller von Saunaprodukten geworden und beliefern mittlerweile über 90 Länder weltweit, Tendenz steigend. Unser Angebot reicht von Saunaöfen, Zubehör und Steuerungen bis hin zu Saunaräumen, Dampferzeugern und Infrarotlösungen.",
+    "p3": "Wir erweitern unser Portfolio kontinuierlich um durchdacht gestaltete, leistungsstarke Produkte, die die Erwartungen unserer Kunden weltweit übertreffen. Jedes Produkt wird unter finnischer Leitung gefertigt, um Authentizität und einen tiefen Respekt vor dem reichen Erbe der finnischen Saunakultur zu gewährleisten.",
+    "p4": "Unser Engagement für Qualität und Nachhaltigkeit wird durch international anerkannte Zertifizierungen bestätigt. Wir erhielten erstmals 2002 die Zertifizierung <b>ISO 9001 für Qualitätsmanagement</b> und 2007 <b>ISO 14001 für Umweltmanagement</b>, beide wurden 2025 nach den neuesten Standards <b>ISO 9001:2015</b> und <b>ISO 14001:2015</b> erneuert. Unsere <b>PEFC</b>-Zertifizierung unterstreicht zudem unser Engagement, Holz aus nachhaltig bewirtschafteten Wäldern zu beziehen. Diese Zertifizierungen garantieren, dass jedes einzelne Produkt die höchsten globalen Maßstäbe für Sicherheit, Qualität und ökologische Verantwortung erfüllt.",
+    "p5": "Als stolze Botschafter der finnischen Saunakultur sind wir zudem Mitglied von <b>Sauna from Finland</b>, einem Verband, der sich der Förderung des authentischen finnischen Saunaerlebnisses weltweit widmet.",
+    "stats": {
+      "establishedLabel": "Etablierte Exzellenz",
+      "establishedValue": "30+",
+      "establishedSuffix": "Jahre",
+      "reachLabel": "Globale Präsenz",
+      "reachValue": "90+",
+      "reachSuffix": "Länder weltweit"
+    },
+    "exploreBtn": "Unsere Produkte Entdecken"
+  },
+  "certs": {
+    "iso9001": {
+      "caption": "ISO 9001",
+      "label": "Qualitätsmanagement"
+    },
+    "iso14001": {
+      "caption": "ISO 14001",
+      "label": "Umweltmanagement"
+    },
+    "saunaFromFinland": {
+      "caption": "Sauna from Finland",
+      "label": "Offizielles Mitglied"
+    },
+    "pefc": {
+      "caption": "Wir Fördern Nachhaltige Forstwirtschaft",
+      "label": "www.pefc.org"
+    }
+  },
+  "news": {
+    "title": "Neuigkeiten",
+    "seeMore": "MEHR ANZEIGEN",
+    "card1": {
+      "alt": "Aktuelle Messen",
+      "label": "Messen",
+      "title": "Aktuelle Messen",
+      "desc": "In diesem Herbst nahmen wir an Europas führenden Wellness-Messen teil: der Aquanale in Köln und der Piscina Barcelona. Es war uns eine Freude, mit Branchenführern in Kontakt zu treten und die finnische Tradition und Wellness zu präsentieren."
+    },
+    "card2": {
+      "alt": "Erdbebenhilfe",
+      "label": "Gemeinschaft",
+      "title": "Erdbebenhilfe in Cebu",
+      "desc": "Als ein Erdbeben der Stärke 6,9 die Nordostküste von Cebu erschütterte, organisierte unser Team eine unternehmensweite Hilfsaktion und lieferte Matratzen, Lebensmittel, Hygieneartikel und lebenswichtige Güter an betroffene Familien."
+    },
+    "card3": {
+      "alt": "Talentsuche",
+      "label": "Karriere",
+      "title": "Talentsuche",
+      "desc": "Zeit für eine Veränderung? Wir suchen Menschen mit Erfahrung und/oder Interesse an der Sauna- und Wellnessbranche, die mit uns in Cebu wachsen möchten."
+    }
+  }
+}

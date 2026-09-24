@@ -1,0 +1,109 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Dampfsauna — Generatoren, Steuerungen & Zubehör",
+      "description": "SAWO Dampfsauna-Systeme: Dampferzeuger aus Edelstahl, digitale Steuerungen und Installationszubehör für ein gleichbleibendes Dampferlebnis auf Spa-Niveau, zuhause oder gewerblich."
+    },
+    "hero": {
+      "title": "DAMPF",
+      "subtitle": "Erleben Sie den Luxus reiner Dampftherapie"
+    },
+    "intro": {
+      "text": "SAWO Dampfsauna-Systeme bringen die therapeutische Kraft feuchter Wärme in jeden Raum – von kompakten Dampfduschen zuhause bis hin zu großen gewerblichen Spa-Anlagen. Unser komplettes Dampfsortiment deckt alles ab, was Sie benötigen: Dampferzeuger aus Edelstahl für jahrelang zuverlässigen Betrieb, intuitive digitale Steuerungen für präzise Temperatur und Luftfeuchtigkeit sowie eine vollständige Zubehörlinie für die Installation."
+    },
+    "generatorsSection": {
+      "title": "Dampferzeuger",
+      "viewAll": "Alle Generatoren Ansehen",
+      "desc": "Ein Dampferzeuger ist das Herzstück jedes Dampfraums und wandelt Wasser in einen kontinuierlichen, gleichmäßigen Dampfstrom um. Die Edelstahl-Generatoren von SAWO sind auf Langlebigkeit und einfache Wartung ausgelegt, mit Modellen von kompakten Einheiten für den Wohnbereich bis hin zu gewerblichen Mehrfachinstallationen mit bis zu 75 kW.",
+      "loading": "Generatoren werden geladen...",
+      "empty": "Noch keine Dampferzeuger verfügbar.",
+      "fallbackDesc": "Hochwertiger SAWO Dampferzeuger für zuverlässige Alltagsleistung."
+    },
+    "controlsSection": {
+      "title": "Dampfsteuerungen",
+      "viewAll": "Alle Steuerungen Ansehen",
+      "desc": "Kombinieren Sie jeden SAWO Dampferzeuger mit einem dedizierten Bedienfeld für präzise Kontrolle über Temperatur, Dampfausstoß und Sitzungsdauer. Vom einfachen Drehregler Steam STE bis zum Touchscreen Steam Stainless Touch ist jede Steuerung auf einfache, zuverlässige Bedienung ausgelegt.",
+      "loading": "Steuerungen werden geladen...",
+      "empty": "Noch keine Dampfsteuerungen verfügbar.",
+      "fallbackDesc": "Präzise Dampfsteuerung für ein individuelles Erlebnis."
+    },
+    "accessoriesSection": {
+      "title": "Dampfzubehör",
+      "viewAll": "Alles Zubehör Ansehen",
+      "desc": "Vervollständigen Sie Ihren Dampfraum mit dem Zubehörsortiment von SAWO – von Dampftüren und Diffusorköpfen bis hin zu Aromapumpen und Montagezubehör – jedes Teil ist für ein nahtloses Zusammenspiel mit unseren Generatoren und Steuerungen konzipiert, für eine vollständig professionelle Installation.",
+      "loading": "Zubehör wird geladen...",
+      "empty": "Noch kein Dampfzubehör verfügbar.",
+      "fallbackDesc": "SAWO Dampfzubehör für eine vollständige Installation."
+    },
+    "cta": {
+      "title": "Brauchen Sie Hilfe Bei Der Auswahl?",
+      "description": "Von Generatoren und Steuerungen bis hin zu Zubehör – unser Team hilft Ihnen, die richtige Dampfsauna-Ausstattung für Ihr Zuhause oder Ihre gewerblichen Räume zu finden."
+    }
+  },
+  "generators": {
+    "meta": {
+      "title": "Dampferzeuger",
+      "description": "SAWO Dampferzeuger bieten den Luxus individuell abgestimmten Dampfs mit fortschrittlichen Generatoren und anpassbaren Einstellungen für außergewöhnliche Spa-Leistung."
+    },
+    "hero": {
+      "title": "DAMPFERZEUGER"
+    },
+    "intro": {
+      "heading": "Unsere Dampferzeuger",
+      "desc": "Erleben Sie den Luxus individuell abgestimmten Dampfs mit unseren fortschrittlichen Dampferzeugern – zuverlässige Leistung, anpassbare Einstellungen und erholsame Wärme für jeden Raum."
+    },
+    "loading": "Generatoren werden geladen...",
+    "empty": "Noch keine Dampferzeuger verfügbar.",
+    "cardEyebrow": "Dampferzeuger",
+    "cardFallbackDesc": "Hochwertiger SAWO Dampferzeuger für zuverlässige Alltagsleistung.",
+    "cta": {
+      "title": "Brauchen Sie Hilfe Bei Der Dimensionierung?",
+      "description": "Von kompakten Einheiten für den Wohnbereich bis zu großen gewerblichen Installationen – unser Team hilft Ihnen, den richtigen Dampferzeuger für Ihren Raum zu finden."
+    }
+  },
+  "controls": {
+    "meta": {
+      "title": "Dampfsteuerungen",
+      "description": "Präzise Dampfsteuerung von SAWO mit den Steuerungsserien Saunova und Innova für mühelose Bedienung und ein individuelles Saunaerlebnis."
+    },
+    "hero": {
+      "title": "Dampfsteuerungen",
+      "description": "Präzision und Einfachheit — übernehmen Sie die volle Kontrolle über Ihr Dampferlebnis mit den Steuerungsserien Saunova und Innova von SAWO."
+    },
+    "intro": {
+      "heading": "Unsere Dampfsteuerungen",
+      "desc": "Erleben Sie präzise Dampfeinstellungen und mühelose Bedienung mit den Serien Saunova und Innova für ein individuelles Saunaerlebnis."
+    },
+    "loading": "Steuerungen werden geladen...",
+    "empty": "Noch keine Dampfsteuerungen verfügbar.",
+    "notice": {
+      "tab": "Sicherheitshinweis",
+      "text": "Elektrische Anschlüsse und Reparaturen am Gerät dürfen nur von einer qualifizierten Elektrofachkraft durchgeführt werden. Verwenden Sie ausschließlich Originalteile."
+    },
+    "cta": {
+      "title": "Brauchen Sie Hilfe Bei Der Auswahl Einer Steuerung?",
+      "description": "Kombinieren Sie die passende Steuerung mit Ihrem Dampferzeuger für präzise, mühelose Bedienung. Unser Team hilft Ihnen gerne weiter."
+    }
+  },
+  "accessories": {
+    "meta": {
+      "title": "Dampfzubehör",
+      "description": "Hochwertiges SAWO Dampfzubehör für mehr Funktionalität und Komfort – für ein durchgehend außergewöhnliches Dampfsauna-Erlebnis."
+    },
+    "hero": {
+      "title": "DAMPFZUBEHÖR",
+      "subtitle": "Vervollständigen Sie Ihre Dampfausstattung mit hochwertigem Zubehör"
+    },
+    "intro": {
+      "heading": "Unser Dampfzubehör",
+      "desc": "Werten Sie Ihre Sauna mit unserem hochwertigen Dampfzubehör auf – konzipiert, um Komfort zu optimieren, die Funktionalität zu steigern und Ihr Entspannungserlebnis zu verbessern."
+    },
+    "loading": "Zubehör wird geladen...",
+    "empty": "Noch kein Dampfzubehör verfügbar.",
+    "fallbackDesc": "Hochwertiges Dampfzubehör für optimale Leistung.",
+    "cta": {
+      "title": "Vervollständigen Sie Ihre Dampfausstattung",
+      "description": "Von Dampftüren bis zu Aromapumpen — unser Team hilft Ihnen, das richtige Zubehör für Ihre Installation auszuwählen."
+    }
+  }
+}

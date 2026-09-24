@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Karriere",
+    "description": "Werden Sie Teil des SAWO Teams und entdecken Sie aktuelle Stellenangebote in Technik, Fertigung und Vertrieb bei einem globalen Marktführer für finnische Saunaöfen."
+  },
+  "hero": {
+    "title": "Werden Sie Teil des SAWO Teams",
+    "subtitle": "Gestalten Sie Ihre Zukunft mit einem globalen Marktführer der Saunafertigung"
+  },
+  "join": {
+    "imgAlt": "SAWO Team beitreten",
+    "highlight": "Wir suchen Menschen mit Berufserfahrung in der Saunabranche.",
+    "desc": "SAWO ist ein vertrauenswürdiger Name in der Saunafertigung, der finnisches Fachwissen mit handwerklichem Können in Cebu, Philippinen, vereint. Unser Team ist stolz darauf, hochwertige Saunaöfen, Zubehör und komplette Saunalösungen für den globalen Markt zu fertigen.",
+    "cta": "Möchten Sie in den Tropen arbeiten? Werden Sie Teil eines Branchenführers in der Sauna-Innovation!"
+  },
+  "badges": {
+    "fullTime": "Vollzeit",
+    "onSite": "Vor Ort"
+  },
+  "openPositions": {
+    "heading": "Offene Stellen",
+    "intro": "Entdecken Sie spannende Stellenangebote in verschiedenen Abteilungen:",
+    "locationCebu": "Cebu",
+    "locationEurope": "Europa (Hybrid)",
+    "positions": {
+      "electricalEngineer": {
+        "title": "Elektroingenieur",
+        "subtitle": "Elektroniikkasuunnittelija"
+      },
+      "productionSupervisor": {
+        "title": "Produktionsleiter, Holzverarbeitung",
+        "subtitle": "Puutekniikan Osaaja"
+      },
+      "marketingSpecialist": {
+        "title": "Marketing-Spezialist",
+        "subtitle": "Markkinoinnin Osaaja"
+      },
+      "buyerLogistics": {
+        "title": "Einkäufer / Logistik-Spezialist",
+        "subtitle": "Ostaja / Logistiikka-osaaja"
+      },
+      "processEngineer": {
+        "title": "Prozessingenieur",
+        "subtitle": "Prosessi-insinööri"
+      },
+      "salesManager": {
+        "title": "Internationaler Vertriebsleiter",
+        "subtitle": "Kansainvälinen Myyntipäällikkö"
+      },
+      "odooDeveloper": {
+        "title": "Odoo-Softwareentwickler",
+        "subtitle": "Odoo Ohjelmistokehittäjä"
+      },
+      "salesManagerGerman": {
+        "title": "Internationaler Vertriebsleiter (Deutschsprachig)",
+        "subtitle": "Kansainvälinen Myyntipäällikkö"
+      },
+      "headOfProduction": {
+        "title": "Produktionsleiter",
+        "years": "3–6 Jahre Erfahrung"
+      },
+      "productionManager": {
+        "title": "Produktionsmanager",
+        "years": "2–4 Jahre Erfahrung"
+      }
+    }
+  },
+  "hiring": {
+    "titlePrefix": "Wir",
+    "titleHighlight": "Stellen Ein!",
+    "desc": "Werden Sie Teil eines Branchenführers, der finnisches Fachwissen mit erstklassiger Handwerkskunst verbindet.",
+    "emailPrefix": "Senden Sie Ihren Lebenslauf an:",
+    "locationLabel": "Standort: SAWO Inc.",
+    "locationAddress": "MEZ2 Estate, Basak, Lapu-Lapu City 6015, Cebu, Philippinen",
+    "closing": "Lassen Sie uns gemeinsam etwas Großartiges aufbauen!"
+  },
+  "categories": {
+    "manufacturing": {
+      "alt": "Fertigung & Produktion",
+      "title": "Fertigung & Produktion",
+      "desc": "Holzverarbeitung, Metallbearbeitung, Qualitätskontrolle"
+    },
+    "engineering": {
+      "alt": "Technik & Design",
+      "title": "Technik & Design",
+      "desc": "Produktentwicklung, F&E, Saunatechnologie"
+    },
+    "sales": {
+      "alt": "Vertrieb & Marketing",
+      "title": "Vertrieb & Marketing",
+      "desc": "Nationaler & internationaler Vertrieb, digitales Marketing, Kundenbeziehungen"
+    },
+    "operations": {
+      "alt": "Betrieb & Support",
+      "title": "Betrieb & Support",
+      "desc": "Logistik, Finanzen, Personal, DA, IT, Verwaltung"
+    }
+  },
+  "whySawo": {
+    "imgAlt": "SAWO Fertigung",
+    "titlePrefix": "Warum Bei",
+    "titleHighlight": "SAWO Arbeiten",
+    "innovative": {
+      "title": "Innovativ & Kundenorientiert",
+      "prefix": "Werden Sie Teil eines Unternehmens, das",
+      "highlight": "Qualität, Innovation und Kundenzufriedenheit schätzt."
+    },
+    "international": {
+      "title": "Internationale Erfahrung",
+      "prefix": "Arbeiten Sie mit einem vielfältigen Team aus",
+      "highlight": "finnischen und philippinischen Fachkräften",
+      "suffix": "in der Zusammenarbeit über globale Märkte hinweg."
+    },
+    "growth": {
+      "title": "Karrierewachstum & Entwicklung",
+      "prefix": "Wir investieren in unsere Mitarbeiter durch",
+      "highlight": "Schulungen, Weiterbildung und Karriereförderung"
+    },
+    "excellence": {
+      "title": "Engagement Für Exzellenz",
+      "prefix": "SAWO ist",
+      "highlight": "ISO 9001- und ISO 14001-zertifiziert",
+      "suffix": " – für einen Arbeitsplatz mit Fokus auf Qualität und Nachhaltigkeit."
+    }
+  }
+}

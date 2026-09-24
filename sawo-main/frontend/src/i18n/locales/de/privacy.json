@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "title": "Datenschutzerklärung",
+    "description": "Die Datenschutzerklärung von SAWO – wie wir personenbezogene Daten auf unserer Website und in unseren Diensten erheben, nutzen und schützen."
+  },
+  "hero": {
+    "eyebrow": "Rechtliches",
+    "title": "Datenschutzerklärung",
+    "websiteLabel": "Website:"
+  },
+  "footer": "Zuletzt aktualisiert: 2026 · SAWO INC · Alle Rechte vorbehalten.",
+  "sections": [
+    {
+      "title": "Wer Wir Sind",
+      "content": [
+        "Diese Datenschutzerklärung gilt für die von SAWO INC betriebene Website, erreichbar unter https://sawo.com."
+      ]
+    },
+    {
+      "title": "Welche Personenbezogenen Daten Wir Erheben Und Warum",
+      "subsections": [
+        {
+          "subtitle": "Kommentare",
+          "content": [
+            "Wenn Besucher Kommentare auf unserer Website hinterlassen, erfassen wir die im Kommentarformular angegebenen Daten sowie die IP-Adresse und den Browser-User-Agent-String des Besuchers zur Unterstützung der Spam-Erkennung.",
+            "Eine anonymisierte, aus Ihrer E-Mail-Adresse generierte Zeichenfolge (Hash) kann an den Gravatar-Dienst gesendet werden, um zu prüfen, ob Sie diesen nutzen. Die Datenschutzerklärung von Gravatar finden Sie unter https://automattic.com/privacy/. Nach Genehmigung Ihres Kommentars kann Ihr Profilbild im Kontext Ihres Kommentars öffentlich sichtbar sein."
+          ]
+        },
+        {
+          "subtitle": "Medien",
+          "content": [
+            "Wenn Sie Bilder auf unsere Website hochladen, vermeiden Sie bitte eingebettete Standortdaten (EXIF-GPS), da andere Nutzer Standortinformationen aus hochgeladenen Bildern herunterladen und extrahieren können."
+          ]
+        },
+        {
+          "subtitle": "Cookies",
+          "bullets": [
+            "Wenn Sie einen Kommentar hinterlassen, können Sie wählen, ob Ihr Name, Ihre E-Mail-Adresse und Ihre Website in Cookies gespeichert werden. Diese Cookies sind ein Jahr lang gültig und dienen Ihrem Komfort.",
+            "Beim Besuch der Login-Seite wird ein temporäres Cookie gesetzt, um zu prüfen, ob Ihr Browser Cookies akzeptiert. Es enthält keine personenbezogenen Daten und wird beim Schließen Ihres Browsers verworfen.",
+            "Beim Einloggen werden mehrere Cookies gesetzt, um Ihre Login-Daten und Bildschirmanzeige-Einstellungen zu speichern. Login-Cookies sind zwei Tage gültig, Anzeige-Einstellungs-Cookies ein Jahr. Wenn Sie „Angemeldet bleiben“ auswählen, wird Ihre Anmeldung um zwei Wochen verlängert.",
+            "Wenn Sie sich abmelden, werden die Login-Cookies entfernt.",
+            "Beim Bearbeiten oder Veröffentlichen eines Artikels wird ein Cookie mit der Beitrags-ID des Artikels gesetzt. Dieses Cookie läuft nach einem Tag ab."
+          ]
+        },
+        {
+          "subtitle": "Eingebettete Inhalte Von Anderen Websites",
+          "content": [
+            "Artikel auf dieser Website können eingebettete Inhalte enthalten (z. B. Videos, Bilder, Artikel usw.). Eingebettete Inhalte verhalten sich genauso, als hätten Sie die Ursprungs-Website direkt besucht. Diese externen Websites können Daten über Sie erheben, Cookies verwenden und Ihre Interaktion mit deren Inhalten verfolgen, insbesondere wenn Sie auf deren Plattform angemeldet sind."
+          ]
+        },
+        {
+          "subtitle": "Analyse",
+          "content": [
+            "Wir können Analysetools von Drittanbietern verwenden, um Besucherzahlen und Nutzungstrends zu messen. Diese Tools erfassen von Ihrem Browser gesendete Daten, einschließlich besuchter Seiten und Nutzungsverhalten, um unsere Dienste zu verbessern."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Mit Wem Wir Ihre Daten Teilen",
+      "content": [
+        "Wenn Sie das Zurücksetzen eines Passworts beantragen, wird Ihre IP-Adresse in der Zurücksetzungs-E-Mail enthalten sein."
+      ]
+    },
+    {
+      "title": "Wie Lange Wir Ihre Daten Speichern",
+      "bullets": [
+        "Kommentare und ihre Metadaten werden unbegrenzt gespeichert, um Folgekommentare automatisch zu erkennen und zu genehmigen.",
+        "Für Nutzer, die sich auf unserer Website registrieren (falls zutreffend), speichern wir die in ihrem Benutzerprofil angegebenen personenbezogenen Daten. Alle Nutzer können ihre personenbezogenen Daten jederzeit einsehen, bearbeiten oder löschen (mit Ausnahme ihres Benutzernamens). Website-Administratoren können ebenfalls auf diese Daten zugreifen und sie verwalten."
+      ]
+    },
+    {
+      "title": "Ihre Rechte An Ihren Daten",
+      "content": [
+        "Wenn Sie ein Konto haben oder Kommentare hinterlassen haben, können Sie eine exportierte Datei Ihrer bei uns gespeicherten personenbezogenen Daten anfordern, einschließlich aller von Ihnen bereitgestellten Daten. Sie können auch verlangen, dass wir Ihre personenbezogenen Daten löschen, mit Ausnahme von Daten, die wir aus administrativen, rechtlichen oder sicherheitsrelevanten Gründen aufbewahren müssen."
+      ]
+    },
+    {
+      "title": "Wohin Wir Ihre Daten Senden",
+      "content": [
+        "Besucherkommentare können über einen automatisierten Spam-Erkennungsdienst geprüft werden."
+      ]
+    },
+    {
+      "title": "Kontaktinformationen",
+      "content": [
+        "Bei datenschutzbezogenen Anliegen oder Datenanfragen kontaktieren Sie uns bitte unter:"
+      ],
+      "email": "info@sawo.com"
+    },
+    {
+      "title": "Zusätzliche Informationen",
+      "subsections": [
+        {
+          "subtitle": "Wie Wir Ihre Daten Schützen",
+          "content": [
+            "Wir setzen geeignete technische und organisatorische Maßnahmen wie Verschlüsselung, Firewalls und Zugriffskontrollen ein, um Ihre personenbezogenen Daten zu schützen."
+          ]
+        },
+        {
+          "subtitle": "Verfahren Bei Datenschutzverletzungen",
+          "content": [
+            "Im Falle einer Datenschutzverletzung benachrichtigen wir betroffene Nutzer und Aufsichtsbehörden entsprechend den gesetzlichen Vorgaben und ergreifen umgehend Maßnahmen zur Sicherung der Nutzerdaten."
+          ]
+        },
+        {
+          "subtitle": "Dritte, Von Denen Wir Daten Erhalten",
+          "content": [
+            "Wir können Daten von vertrauenswürdigen Drittanbietern für Spam-Schutz, Analyse und Login-Dienste erhalten."
+          ]
+        },
+        {
+          "subtitle": "Automatisierte Entscheidungsfindung Und Profiling",
+          "content": [
+            "Wir nutzen Ihre Daten nicht für automatisierte Entscheidungsfindung oder Profiling mit rechtlicher oder ähnlich bedeutsamer Wirkung."
+          ]
+        },
+        {
+          "subtitle": "Branchenspezifische Regulatorische Offenlegungspflichten",
+          "content": [
+            "Wir halten die geltenden Datenschutzgesetze ein, einschließlich jener zu Nutzereinwilligung, Datenspeicherung und rechtmäßiger Verarbeitung."
+          ]
+        }
+      ]
+    }
+  ]
+}

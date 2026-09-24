@@ -1,0 +1,204 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Infrarotsauna",
+      "description": "Entdecken Sie SAWO Infrarotsaunen: aus Zedernholz gefertigte Kabinen mit sanften, therapeutischen Infrarot-Heizpaneelen und Steuerungen für tiefe Entspannung und Wohlbefinden."
+    },
+    "hero": {
+      "title": "INFRAROTSAUNA",
+      "brochureBtn": "BROSCHÜRE ANSEHEN"
+    },
+    "saunasSection": {
+      "title": "Infrarotsaunen",
+      "desc": "Genießen Sie die therapeutischen Vorteile unserer Infrarotsaunen, die durch die sanfte Wärme der Infrarottechnologie Entspannung und Wohlbefinden fördern. Erleben Sie eine wohltuende Auszeit im Komfort Ihres eigenen Raums. Unsere Infrarotsaunen sind in Ein- und Zweipersonen-Größen erhältlich.",
+      "viewAll": "INFRAROTSAUNEN ANSEHEN"
+    },
+    "accessoriesSection": {
+      "title": "Infrarot-Zubehör",
+      "items": {
+        "infraredPanels": "Infrarotpaneele",
+        "infraredBackrest": "Infrarot-Rückenlehne",
+        "interfaceHolder": "Bedienfeld-Halterung"
+      }
+    },
+    "controlsSection": {
+      "title": "Infrarotsauna-Steuerungen",
+      "items": {
+        "userInterface": "Infrared 2.0 Benutzeroberfläche",
+        "powerController": "Infrared 2.0 Leistungssteuerung",
+        "builtInControl": "Infrared 2.0 Einbausteuerung"
+      }
+    },
+    "cta": {
+      "title": "Brauchen Sie Hilfe Bei Der Auswahl?",
+      "description": "Von Infrarotpaneelen über Steuerungen bis hin zu Zubehör — unser Team hilft Ihnen, die richtige Infrarotsauna-Ausstattung für Ihren Raum zu finden."
+    }
+  },
+  "saunas": {
+    "meta": {
+      "title": "Infrarotsaunen",
+      "description": "SAWO Infrarotsaunen in Ein- und Zweipersonen-Größen. Faserbeschichtete Fern-Infrarotpaneele, Zedern- und Hemlock-Oberflächen und steckerfertige 230V-Installation."
+    },
+    "hero": {
+      "title": "INFRAROTSAUNEN",
+      "subtitle": "Sanfte, therapeutische Infrarotwärme in einer kompakten Kabine — erhältlich für eine oder zwei Personen.",
+      "brochureBtn": "BROSCHÜRE ANSEHEN",
+      "brochureItemLabel": "Infrarot-Broschüre"
+    },
+    "productDetails": {
+      "title": "Die Infrarotsauna, Die Sie Wirklich Täglich Nutzen Werden",
+      "storySections": [
+        {
+          "title": "Wärme, Die Sie Direkt Erreicht",
+          "paragraphs": [
+            "Eine Infrarotsauna muss nicht 80 °C erreichen, um zu wirken. Die Paneele erwärmen Ihren Körper statt der umgebenden Luft, sodass sich eine Sitzung tief und umhüllend anfühlt, während die Kabine auf einer Temperatur bleibt, bei der Sie problemlos atmen können.",
+            "Das macht sie zu einer eigenständigen Alternative zur traditionellen Sauna, nicht zu einer kleineren Version davon: sanfter für die Brust, leichter für eine ganze Stunde durchzuhalten und geeignet für Menschen, denen die Hitze einer finnischen Sauna zu viel ist."
+          ]
+        },
+        {
+          "title": "Bereit, Wann Immer Sie Es Sind",
+          "paragraphs": [
+            "Es gibt keine lange Vorheizzeit und keinen Ofen, um den man sich kümmern muss. Schließen Sie die Kabine an eine normale Steckdose an, stellen Sie eine Zeit ein, und sie ist in Minuten statt in fast einer Stunde bereit.",
+            "Mit 0,80 m und 1,10 m im Quadrat passen die beiden Größen dorthin, wo eine traditionelle Sauna nicht passen würde — eine freie Ecke, ein Badezimmer, das Ende eines Schlafzimmers — ohne Bauarbeiten oder einen eigenen Stromkreis. Es ist die Version einer Sauna, die Sie tatsächlich an einem Wochentagabend nutzen."
+          ]
+        }
+      ],
+      "featureText": "Regelmäßige Infrarot-Sitzungen lindern Muskelkater, unterstützen die Durchblutung und helfen dem Körper, sich auf den Schlaf einzustellen — bei einer Temperatur, die mild genug ist, um daraus eine tägliche Gewohnheit statt eines gelegentlichen Ereignisses zu machen. Da die Kabine an eine gewöhnliche Steckdose angeschlossen wird und ohne Bauarbeiten montiert wird, ist sie zudem eine der wenigen Wellness-Ergänzungen, die Sie bei einem Umzug mitnehmen können.",
+      "perfCards": [
+        {
+          "label": "Zeder oder Hemlock",
+          "detail": "Natürlich aromatisch, nachhaltig bezogen"
+        },
+        {
+          "label": "1 oder 2 Personen",
+          "detail": "Konfigurationen 0908-IR-D und 1111-IR-D"
+        },
+        {
+          "label": "230V Steckerfertig",
+          "detail": "Kein eigener Stromkreis oder Elektriker nötig"
+        },
+        {
+          "label": "Finnische Fertigung, 30+ Jahre",
+          "detail": "Jahrzehntelange Sauna-Expertise in jeder Kabine"
+        }
+      ],
+      "accordionItems": [
+        {
+          "title": "Produktspezifikationen",
+          "specs": [
+            {
+              "label": "0908-IR-D",
+              "value": "0,80 m B x 0,90 m T",
+              "unit": "/ 1 Person"
+            },
+            {
+              "label": "1111-IR-D",
+              "value": "1,10 m B x 1,10 m T",
+              "unit": "/ 2 Personen"
+            },
+            {
+              "label": "Höhe",
+              "value": "2,05 m",
+              "unit": "(beide Modelle)"
+            },
+            {
+              "label": "Paneele",
+              "value": "Faserbeschichtetes Fern-Infrarot, 170W pro Paneel",
+              "unit": null
+            },
+            {
+              "label": "Gesamtleistung",
+              "value": "1200W (1 Person) / 1400W (2 Personen)",
+              "unit": null
+            },
+            {
+              "label": "Strom",
+              "value": "230V, steckerfertig",
+              "unit": null
+            },
+            {
+              "label": "Sitzungsdauer",
+              "value": "1–60 Minuten",
+              "unit": "einstellbar"
+            },
+            {
+              "label": "Beleuchtung",
+              "value": "12W LED",
+              "unit": "/ 18W Abluftventilator"
+            },
+            {
+              "label": "Material",
+              "value": "Zeder oder Hemlock",
+              "unit": null
+            }
+          ]
+        }
+      ]
+    },
+    "woodMaterials": {
+      "subtitle": "Infrarotsaunen werden aus Zeder oder Hemlock gefertigt — jedes bringt seinen eigenen Charakter, Duft und Wärme in Ihre Sitzungen.",
+      "items": {
+        "cedar": {
+          "name": "Zeder",
+          "description": "Kräftiges, aromatisches Holz mit natürlicher Feuchtigkeitsbeständigkeit. Bekannt für seine warmen rotbraunen Töne und seinen unverwechselbaren Duft.",
+          "traits": [
+            "Aromatisch",
+            "Feuchtigkeitsbeständig",
+            "Warme Töne"
+          ]
+        },
+        "hemlock": {
+          "name": "Hemlock",
+          "description": "Helles Holz mit gleichmäßiger Maserung und sehr geringem Eigengeruch — eine ruhigere Alternative für alle, denen der Duft der Zeder zu intensiv ist. Stabil und angenehm glatt im Griff.",
+          "traits": [
+            "Geringer Eigengeruch",
+            "Gleichmäßige Maserung",
+            "Glatte Oberfläche"
+          ]
+        }
+      }
+    }
+  },
+  "panels": {
+    "meta": {
+      "title": "Infrarotpaneele",
+      "description": "SAWO Infrarotpaneele und Zubehör — faserbeschichtete Fern-Infrarotpaneele mit je 170W, Rückenlehnen und Bedienfeld-Halterungen für Ihren Infrarotraum."
+    },
+    "hero": {
+      "title": "INFRAROTPANEELE"
+    },
+    "intro": {
+      "title": "Unsere Infrarotpaneele",
+      "text": "Faserbeschichtete Fern-Infrarotpaneele erwärmen den Körper direkt, anstatt die umgebende Luft zu heizen, sodass Sitzungen auch bei deutlich niedrigerer Raumtemperatur angenehm bleiben. Jedes Paneel benötigt 170W und ist so konzipiert, dass es bündig in die Kabine eingepasst wird, zusammen mit den Rückenlehnen und Bedienfeld-Halterungen, die den Raum vervollständigen."
+    },
+    "eyebrow": "Infrarotpaneel",
+    "fallbackBlurb": "Hochwertige SAWO Infrarot-Komponente für sanfte, alltägliche Wärme.",
+    "emptyText": "Noch keine Infrarotpaneele verfügbar.",
+    "loadingText": "Infrarotpaneele werden geladen...",
+    "cta": {
+      "title": "Nicht Sicher, Welches Paneel Sie Brauchen?",
+      "description": "Anzahl und Platzierung der Paneele hängen von der Größe Ihres Infrarotraums ab. Unser Team hilft Ihnen, die richtige Konfiguration für Ihren Raum zu ermitteln."
+    }
+  },
+  "controls": {
+    "meta": {
+      "title": "Infrarotsteuerungen",
+      "description": "SAWO Infrared 2.0 Steuerungen — Benutzeroberfläche, Leistungssteuerung und Einbausteuerung zur Regelung von Temperatur, Sitzungsdauer, Beleuchtung und Luftstrom."
+    },
+    "hero": {
+      "title": "INFRAROTSTEUERUNGEN"
+    },
+    "intro": {
+      "title": "Unsere Infrarotsteuerungen",
+      "text": "Eine Steuerung regelt den gesamten Raum — Temperatur, Sitzungsdauer von 1 bis 60 Minuten, Beleuchtung und den Abluftventilator. Die Infrared 2.0 Reihe umfasst die Benutzeroberfläche, die dahinterliegende Leistungssteuerung und eine Einbauoption für eine klarere Kabinenwand."
+    },
+    "eyebrow": "Infrarotsteuerung",
+    "fallbackBlurb": "Hochwertige SAWO Infrarotsteuerung für einfache, zuverlässige tägliche Nutzung.",
+    "emptyText": "Noch keine Infrarotsteuerungen verfügbar.",
+    "loadingText": "Infrarotsteuerungen werden geladen...",
+    "cta": {
+      "title": "Brauchen Sie Hilfe Bei Der Auswahl Einer Steuerung?",
+      "description": "Ob aufgesetzte Bedienoberfläche oder Einbaugerät — unser Team hilft Ihnen, die richtige Steuerung für Ihren Infrarotraum zu finden."
+    }
+  }
+}

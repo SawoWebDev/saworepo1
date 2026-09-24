@@ -1,0 +1,350 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Support-Center",
+      "description": "Hilfe zu Ihren SAWO Produkten: FAQs, Sauna-Rechner, Bedienungsanleitungen und Produktkatalog – alles an einem Ort."
+    },
+    "hero": {
+      "alt": "Support-Center",
+      "title": "SUPPORT-CENTER",
+      "subtitle": "Alles, was Sie brauchen, um das Beste aus Ihren SAWO Produkten herauszuholen"
+    },
+    "resources": {
+      "title": "Wie Können Wir Helfen?",
+      "desc": "Entdecken Sie unsere umfassenden Support-Ressourcen, von detaillierten Produktanleitungen bis zu interaktiven Tools und FAQs. Wir sorgen dafür, dass Sie das perfekte SAWO Erlebnis erhalten.",
+      "faq": {
+        "title": "Häufig Gestellte Fragen",
+        "desc": "Antworten auf häufige Fragen zu Sauna und Produkten.",
+        "link": "FAQ Durchsuchen"
+      },
+      "calculator": {
+        "title": "Sauna-Rechner",
+        "desc": "Nutzen Sie unser interaktives Tool, um die perfekte Ofengröße für Ihren Raum anhand der Raummaße zu berechnen.",
+        "link": "Rechner Nutzen"
+      },
+      "manuals": {
+        "title": "Bedienungsanleitungen",
+        "desc": "Laden Sie detaillierte Bedienungsanleitungen für alle SAWO Produkte herunter, einschließlich Öfen, Steuerungen und Zubehör.",
+        "link": "Anleitungen Herunterladen"
+      },
+      "catalogue": {
+        "title": "Produktkatalog",
+        "desc": "Durchstöbern Sie unseren vollständigen Produktkatalog mit Spezifikationen, Preisen und technischen Details für alle Angebote.",
+        "link": "KATALOG ANSEHEN"
+      }
+    },
+    "contact": {
+      "title": "Direkten Support Benötigt?",
+      "desc": "Unser technisches Support-Team hilft Ihnen gerne bei Fragen, Problemen oder besonderen Anliegen.",
+      "boxTitle": "Technischer Support",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "whatsapp": "WhatsApp",
+      "note": "Für technischen Support und Fehlerbehebung empfehlen wir die Kontaktaufnahme per WhatsApp oder E-Mail. Unser Team antwortet in der Regel innerhalb von 24 Stunden."
+    },
+    "cta": {
+      "title": "Bereit, Unsere Produkte Zu Entdecken?",
+      "desc": "Entdecken Sie die perfekte Sauna, den perfekten Dampfraum oder die perfekte Infrarotlösung für Ihre Bedürfnisse.",
+      "btn": "ALLE PRODUKTE DURCHSUCHEN"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Häufig Gestellte Fragen",
+      "description": "Antworten auf häufige Fragen zu finnischen SAWO Saunen, Öfen, Dampferzeugern und Saunapflege – von Wärmequellen bis zu Holzarten."
+    },
+    "hero": {
+      "title": "FAQ",
+      "subtitle": "Häufig Gestellte Fragen"
+    },
+    "questionCount": {
+      "one": "Frage",
+      "other": "Fragen"
+    },
+    "sidebar": {
+      "imageAlt": "FAQ",
+      "quickHelpTitle": "Schnellhilfe",
+      "quickHelpDesc": "Klicken Sie auf eine Frage, um die Antwort anzuzeigen. Wechseln Sie über die Tabs oben zwischen den Kategorien."
+    },
+    "banner": {
+      "title": "Noch Fragen?",
+      "desc": "Unsere Sauna-Experten helfen Ihnen gerne bei allem, was Sie brauchen.",
+      "cta": "KONTAKTIEREN SIE UNS"
+    },
+    "sections": [
+      {
+        "id": "finnish-sauna",
+        "title": "Finnische Sauna",
+        "items": [
+          {
+            "question": "Was ist die Wärmequelle in einer Sauna?",
+            "answer": "Die Wärmequelle in einer Sauna ist der Ofen, der die Saunasteine entweder mit elektrischen Heizelementen oder durch Holzverbrennung erwärmt. Elektroöfen sind die gängigste Wahl, vor allem wegen ihrer Bequemlichkeit, der schnellen Aufheizzeit und der Möglichkeit, das Saunaerlebnis nach Belieben anzupassen.\n\nJe mehr Wasser auf die Steine gegossen wird, desto heißer wird die Temperatur, bevor sie langsam wieder absinkt."
+          },
+          {
+            "question": "Welches ist das beste Holz für eine Sauna?",
+            "answer": "Das beste Holz für den Saunabau sind Weichhölzer wie Western Red Cedar, Zitterpappel und Fichte. Diese Holzarten haben hervorragende Eigenschaften für die Sauna, besonders wenn sie aus arktischen Regionen wie dem Norden der USA, Kanada und Skandinavien stammen. Die arktischen Holzarten isolieren Wärme von Natur aus gut und vertragen wechselnde Temperaturen und Feuchtigkeit, ohne sich nennenswert auszudehnen oder zu schrumpfen. Saunabänke aus diesen Hölzern bleiben kühl und angenehm zum Sitzen, selbst wenn die Temperatur in der Sauna auf 70–80 Grad steigt.\n\nWestern Red Cedar (Thuja plicata) ist ein außergewöhnlich schönes Holz mit einer natürlichen warmen rötlichen Farbe, ergänzt durch eine gleichmäßige, feine Maserung mit seidigem Glanz. Zeder ist sehr beständig gegen Feuchtigkeit und daher besonders für Außensaunen geeignet. Der intensive Duft des Zedernholzes wirkt nicht nur als natürliches Abwehrmittel gegen Insekten und Schimmel, sondern soll auch die Konzentration und Schlafqualität verbessern und den Körper entspannen.\n\nZitterpappel: Ein Weichholz mit weißer bis cremefarbener Optik, perfekt für ein elegantes Erscheinungsbild. Das Holz der Zitterpappel hat eine cremeweiße, astfreie Optik, ähnlich wie Abachi. Diese Holzart ist sehr widerstandsfähig gegen Feuchtigkeit, Bakterien und Pilze und daher eine ausgezeichnete Wahl für gewerbliche oder öffentliche Saunen.\n\nFinnische Fichte ist ein Weichholz mit dichter, gleichmäßiger Maserung. Sie hat ein hellgelbes Erscheinungsbild mit wenigen Maserungen. Fichtenholz ist widerstandsfähig, hitzebeständig und hat kleine, gesunde Äste, weshalb es zu den meistverwendeten Saunahölzern in Finnland zählt. Das waldartige, natürliche Aroma der Fichte soll das Entspannen und Atmen erleichtern."
+          },
+          {
+            "question": "Was ist eine finnische Sauna?",
+            "answer": "Eine finnische Sauna ist im Grunde ein Raum mit Holzwänden, -decke und -bänken. Die Sauna dient seit Jahrhunderten der Entspannung. Das Herzstück der Sauna ist der Ofen, der die Steine entweder mit Elektrizität oder durch Holzverbrennung erwärmt. Was eine Sauna zweifellos zu einer finnischen Sauna macht, ist das Übergießen der Steine mit Wasser aus einem Eimer. Auf Finnisch nennt man das „löyly“. Je mehr Wasser auf die Steine gegossen wird, desto heißer wird die Temperatur, bevor sie langsam wieder abkühlt. Die Temperaturwechsel in Kombination mit regelmäßigem Saunabaden haben wissenschaftlich nachgewiesene gesundheitliche Vorteile. Regelmäßiges Saunieren verbessert insbesondere die Gehirn- und mentale Gesundheit, schützt vor Herz-Kreislauf-Problemen und stärkt das Immunsystem."
+          }
+        ]
+      },
+      {
+        "id": "building-installation",
+        "title": "Bau & Installation",
+        "items": [
+          {
+            "question": "Wo ist der ideale Standort für eine Sauna?",
+            "answer": "Der ideale Standort für eine Sauna ist ein trockener Ort mit guter Belüftung und einem Boden aus Beton, Fliesen, Keramik oder Vinyl. Wir empfehlen einen Bodenablauf zur leichteren Reinigung. Die gute Belüftung stellt sicher, dass die leichte Kondensation nach dem Saunieren effektiv abtrocknet. Wenn die Sauna in Gebrauch ist, führt dies zu einem geringen Temperaturanstieg in den umliegenden Bereichen. Bei einer modularen Sauna, die im Haus installiert wird, sollte man daher einen kleinen Abstand zwischen Saunaraum und Hauswänden lassen, um den Luftstrom zu gewährleisten."
+          },
+          {
+            "question": "Warum gibt es obere und untere Bänke in der Sauna?",
+            "answer": "Die Temperatur im Saunaraum ist unter der Decke wärmer und näher am Boden kühler. Bänke werden in unterschiedlichen Höhen installiert, damit der Saunagänger zwischen verschiedenen Badetemperaturen wählen kann."
+          },
+          {
+            "question": "Wie schützt man die Holzpaneele vor Feuchtigkeit?",
+            "answer": "Der beste Schutz der Holzpaneele vor Feuchtigkeit ist eine ordnungsgemäße Belüftung und das Trocknen nach der Saunanutzung. Tragen Sie keine Farbe, Dichtstoffe oder sonstige Schutzmittel auf die Holzpaneele auf. Holz dehnt sich aus und schrumpft und reißt Farbe und Dichtstoffe ab, die nur auf der Holzoberfläche haften. Es ist am besten, das Holz unbehandelt zu lassen."
+          },
+          {
+            "question": "Welche Anforderungen gibt es an den Saunaboden?",
+            "answer": "Der Saunaboden muss wasserdicht sein, damit er leicht zu reinigen und zu pflegen ist. Fliesen-, Zement- oder strapazierfähige Vinylböden eignen sich gut, da sie abwaschbar sind und kein Wasser aufnehmen."
+          },
+          {
+            "question": "Ist ein Bodenablauf in der Sauna erforderlich?",
+            "answer": "Ein Bodenablauf in der Sauna ist nicht zwingend erforderlich, wird aber dringend empfohlen. Er erleichtert die Reinigung der Sauna erheblich."
+          }
+        ]
+      },
+      {
+        "id": "sauna-heater",
+        "title": "Saunaofen",
+        "items": [
+          {
+            "question": "Kann ich einen Stromschlag vom Ofen bekommen?",
+            "answer": "Bei korrekter Installation des Ofens ist ein Stromschlag sehr unwahrscheinlich. Für eine sichere Nutzung muss die Installation von einer qualifizierten Elektrofachkraft durchgeführt werden. Alle unsere Öfen werden vor der Auslieferung geprüft und erfüllen die elektrischen Sicherheitsstandards."
+          }
+        ]
+      },
+      {
+        "id": "using-sauna",
+        "title": "Sauna Nutzen",
+        "items": [
+          {
+            "question": "Wie lange dauert die Aufheizzeit?",
+            "answer": "Bei ordnungsgemäßer Isolierung und geschlossenen Lüftungsöffnungen und Türen beträgt die Aufheizzeit weniger als eine Stunde. Dies hängt auch davon ab, welchen Ofen Sie besitzen."
+          },
+          {
+            "question": "Was ist die beste Temperatur in der Sauna?",
+            "answer": "Die empfohlene Saunatemperatur liegt zwischen 60 und 90 Grad Celsius, dies hängt jedoch von Ihren persönlichen Vorlieben ab."
+          },
+          {
+            "question": "Warum sind Saunasteine wichtig?",
+            "answer": "Der Hauptzweck der Saunasteine im Ofen besteht darin, genügend Energie zu speichern, um das auf die Steine gegossene Wasser effizient zu verdampfen und so die Temperatur in der Sauna zu erhöhen. Die Steine müssen mindestens einmal jährlich oder alle 500 Stunden ausgetauscht werden, je nachdem, was zuerst eintritt. Alle Bruchstücke müssen aus dem Ofen entfernt und durch neue ersetzt werden, wie in der Ofenanleitung beschrieben.\n\nVerwenden Sie den Ofen niemals ohne Steine, da dies einen Brand verursachen kann. Verwenden Sie ausschließlich vom Hersteller empfohlene SAWO-Steine. Die Verwendung ungeeigneter Steine kann zu Schäden am Heizelement führen und die Garantie erlöschen lassen. Verwenden Sie niemals Keramiksteine oder andere künstliche Steine jeglicher Art!"
+          },
+          {
+            "question": "Welche Anforderungen gelten für das auf die Saunasteine gegossene Wasser?",
+            "answer": "Das auf die Saunasteine gegossene Wasser muss für den Hausgebrauch geeignet sein. Gechlortes Wasser (z. B. aus dem Schwimmbad oder Whirlpool) oder Meerwasser kann Schäden am Ofen und an den Heizelementen verursachen."
+          },
+          {
+            "question": "Wie führt man die Saunapflege durch?",
+            "answer": "SAUNAPFLEGE FÜR JEDE SAUNASITZUNG\nVerwenden Sie Banktücher während des Saunierens, damit die Bänke länger gut aussehen.\nLassen Sie den Ofen nach der Saunasitzung 30 Minuten lang eingeschaltet, damit die Sauna schneller von der Feuchtigkeit trocknet. Öffnen Sie anschließend die Lüftungsöffnungen und die Saunatür, damit die Sauna ordnungsgemäß belüftet wird.\nLeeren Sie den Eimer und heben Sie die Kelle auf die Bank. Dies hilft, Risse in den Holzaccessoires zu vermeiden und hält die Sauna frisch.\n\nSAUNAPFLEGE MINDESTENS 1 BIS 4 MAL PRO JAHR:\nÜberprüfen Sie die Saunasteine im Ofen. Reinigen Sie eventuellen Steinstaub und Bruchstücke vom Boden des Ofens. Entfernen Sie die Steine und ersetzen Sie zerfallene Steine. Legen Sie die Steine anschließend wieder in den Ofen. Die regelmäßige Kontrolle der Steine trägt dazu bei, die Lebensdauer der Heizelemente zu verlängern und Energie zu sparen.\nÜberprüfen Sie die Heizelemente. Falls Risse vorhanden sind oder Elemente verbogen sind, ersetzen Sie alle Elemente. Ersetzen Sie niemals nur ein einzelnes Element.\nReinigen Sie die Oberflächen der Saunabänke, Decke, des Bodens und der Wände mit warmem Wasser, einer weichen Bürste und einem Allzweckreiniger. Verwenden Sie jedoch keinen Reiniger mit Ammoniak oder Chlor. Spülen Sie die Oberflächen mit kaltem Wasser ab und lassen Sie die Sauna gut belüften. Bei Bedarf können Sie ein für den Saunagebrauch geeignetes Holzpflegeöl, wie Paraffinöl, auf die Bänke auftragen.\nWenn die Reinigung die Bänke nicht sauber genug macht, schleifen Sie die Bänke mit Schleifpapier ab. Schützen Sie die Bänke mit einem für den Saunagebrauch geeigneten Holzöl. Befolgen Sie die Anweisungen des Holzöls und vermeiden Sie die Saunanutzung, bevor das Öl vollständig getrocknet ist.\nVerwenden Sie bei Bedarf mildes Seifenwasser, um Kalkflecken oder andere Verschmutzungen von der Ofenabdeckung zu entfernen. Sie können auch die SAWO Entkalkungslösung verwenden. Nach dem Waschen trocknen.\nReinigen Sie Glasflächen mit Glasreiniger oder Spülmittel. Bei Bedarf abspülen und anschließend mit einem Abzieher oder Mikrofasertuch trocknen.\nÜberprüfen Sie die Schrauben (Tür, Saunabänke, Geländer) und ziehen Sie sie bei Bedarf nach.\nReinigen Sie den Bodenablauf."
+          },
+          {
+            "question": "Wie oft sollte man die Sauna nutzen?",
+            "answer": "So oft Sie möchten. Die meisten Menschen gehen jedoch zwei- bis dreimal pro Woche in die Sauna, meist abends, um sich nach einem anstrengenden Arbeitstag zu entspannen."
+          },
+          {
+            "question": "Wie lange sollte ich in der Sauna bleiben?",
+            "answer": "Sie können so lange in der Sauna bleiben, wie es sich für Sie angenehm anfühlt. Verlassen Sie die Sauna sofort zum Abkühlen, sobald Sie sich unwohl fühlen."
+          },
+          {
+            "question": "Wann sollte ich die Sauna nicht nutzen?",
+            "answer": "Nutzen Sie die Sauna nicht mit vollem Magen oder unter Alkoholeinfluss. Personen mit Herzproblemen oder akuten Erkrankungen sollten vor dem Saunieren einen Arzt konsultieren."
+          },
+          {
+            "question": "Können kleine Kinder in die Sauna?",
+            "answer": "Kleine Kinder können unter Aufsicht Erwachsener in die Sauna. Beim ersten Mal sollte der Saunabesuch jedoch nur wenige Minuten und bei moderater Temperatur dauern. Kinder können auf den unteren Bänken sitzen, wo die Temperatur ebenfalls niedriger ist."
+          }
+        ]
+      }
+    ]
+  },
+  "calculator": {
+    "meta": {
+      "title": "Sauna-Rechner",
+      "description": "Finden Sie den richtigen SAWO Ofen für Ihre Sauna mit unserem Rechner, der Raumgröße und -volumen mit der idealen Ofenleistung abgleicht."
+    },
+    "intro": {
+      "title": "Sauna-Volumenrechner",
+      "desc": "Die Größe Ihrer Sauna beeinflusst direkt die erforderliche Ofenleistung. Nutzen Sie diesen Sauna-Volumenrechner, um die Maße Ihres Saunaraums zu erfassen und eine präzise Ofenempfehlung in kW für optimale Leistung zu erhalten."
+    },
+    "imageAlt": "Innenansicht eines SAWO Saunaraums",
+    "card": {
+      "title": "Raummaße",
+      "clear": "Zurücksetzen"
+    },
+    "fields": {
+      "width": {
+        "label": "Breite",
+        "subLabel": "(Seite zu Seite)"
+      },
+      "height": {
+        "label": "Höhe",
+        "subLabel": "(Boden bis Decke)"
+      },
+      "depth": {
+        "label": "Tiefe",
+        "subLabel": "(Tür bis Rückwand)"
+      },
+      "uninsulated": {
+        "label": "Unisolierte Flächen",
+        "subLabel": "(0 lassen, wenn vollständig holzverkleidet)",
+        "hint": "Glas-, Fliesen-, Stein- oder Betonwände, einschließlich Glaswände, Fenster und Türen"
+      },
+      "hints": {
+        "metric": {
+          "w": "typische Sauna: 1,8–2,4 m",
+          "h": "Standarddeckenhöhe: 2,1 m",
+          "d": "typische Sauna: 1,8–2,4 m"
+        },
+        "imperial": {
+          "w": "typische Sauna: 6–8 ft",
+          "h": "Standarddeckenhöhe: 7 ft",
+          "d": "typische Sauna: 6–8 ft"
+        }
+      }
+    },
+    "result": {
+      "volumeLabel": "Saunavolumen",
+      "heaterLabel": "Empfohlener Ofen",
+      "effective": "Effektiv: {{val}} m³",
+      "oversized": "Überschreitet den Standardbereich, kontaktieren Sie uns für Beratung"
+    },
+    "reco": {
+      "title": "Empfohlene Öfen",
+      "badge_one": "{{count}} Ofen gefunden",
+      "badge_other": "{{count}} Öfen gefunden",
+      "sub": "Anzeige von Öfen, die mit <b>{{kw}} kW</b> für eine <b>{{volume}} m³</b> Sauna kompatibel sind.",
+      "noResultPrefix": "Keine Öfen für diese Leistungsklasse gefunden. Bitte",
+      "noResultLink": "kontaktieren Sie uns",
+      "noResultSuffix": "für Beratung."
+    }
+  },
+  "manuals": {
+    "meta": {
+      "title": "Bedienungsanleitungen",
+      "description": "SAWO Bedienungsanleitungen herunterladen: Installationsanleitungen und Betriebsanweisungen für unsere Saunaöfen, Steuerungen und Dampferzeuger."
+    },
+    "hero": {
+      "title": "BEDIENUNGSANLEITUNGEN",
+      "subtitle": "Ihr vollständiger Leitfaden für Installation, Betrieb und Wartung"
+    },
+    "sectionTitle": "SAWO PRODUKTSORTIMENT",
+    "search": {
+      "placeholder": "Produkte suchen…",
+      "clear": "Zurücksetzen"
+    },
+    "empty": {
+      "noProducts": "Keine Produkte verfügbar."
+    },
+    "noResults": {
+      "prefix": "Keine Produkte gefunden für",
+      "clearSearch": "Suche zurücksetzen"
+    },
+    "viewManual": "Anleitung Ansehen",
+    "modal": {
+      "eyebrow": "Bedienungsanleitungen",
+      "noManuals": "Für dieses Produkt sind noch keine Anleitungen verfügbar.",
+      "manualFallback": "Anleitung {{n}}",
+      "pdfClickToOpen": "PDF · Zum Öffnen klicken"
+    },
+    "banner": {
+      "title": "Finden Sie Nicht, Was Sie Brauchen?",
+      "desc": "Unser Support-Team hilft Ihnen gerne bei Dokumentation und technischer Beratung.",
+      "cta": "KONTAKTIEREN SIE UNS"
+    },
+    "tabs": {
+      "heaters": "Saunaöfen",
+      "sauna-controls": "Saunasteuerungen",
+      "steam-generators": "Dampferzeuger",
+      "steam-controls": "Dampferzeuger-Steuerungen",
+      "heater-accessories": "Ofenzubehör"
+    },
+    "seriesLabels": {
+      "Towers": "Tower-Serie",
+      "Wall-Mounted": "Wandmontiert-Serie",
+      "Floor": "Boden-Serie",
+      "Stones": "Stone-Serie",
+      "Dragonfire": "Dragonfire-Serie",
+      "Combi": "Combi-Serie",
+      "Sauna Controls": "Saunasteuerungen",
+      "Steam Controls": "Dampferzeuger-Steuerungen",
+      "Steam Generators": "Dampferzeuger",
+      "Heater Accessories": "Ofenzubehör",
+      "Heater Guard": "Ofenschutzgitter",
+      "Integration Collar": "Einbaukragen",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Accessories": "Sicherheitszubehör"
+    }
+  },
+  "catalogue": {
+    "meta": {
+      "title": "Produktkatalog",
+      "description": "Entdecken Sie den vollständigen SAWO Produktkatalog: Saunaöfen, Saunaräume und Zubehör in einer durchsuchbaren Übersicht."
+    },
+    "header": {
+      "eyebrow": "Komplettes Sortiment",
+      "title": "Alle Produkte",
+      "desc": "Entdecken Sie unser komplettes Sortiment an Saunaöfen, Räumen und Zubehör, das Ihr Wellness-Erlebnis bereichert.",
+      "pdfBtn": "PRODUKTKATALOG"
+    },
+    "empty": "Keine Produkte verfügbar.",
+    "banner": {
+      "title": "Finden Sie Nicht, Was Sie Brauchen?",
+      "desc": "Unser Support-Team hilft Ihnen gerne, das richtige Produkt für Ihre Sauna zu finden.",
+      "cta": "KONTAKTIEREN SIE UNS"
+    },
+    "tabs": {
+      "heaters": "Saunaöfen",
+      "controls": "Saunasteuerungen",
+      "steam": "Dampf",
+      "infrared": "Infrarot",
+      "heater-acc": "Ofenzubehör",
+      "accessories": "Sauna-Zubehör",
+      "rooms": "Saunaräume",
+      "other": "Sonstiges"
+    },
+    "seriesLabels": {
+      "Towers": "Tower-Serie",
+      "Wall-Mounted": "Wandmontiert-Serie",
+      "Floor": "Boden-Serie",
+      "Combi": "Combi-Serie",
+      "Dragonfire": "Dragonfire-Serie",
+      "Stones": "Stone-Serie",
+      "Sauna Controls": "Saunasteuerungen",
+      "Controls": "Saunasteuerungen",
+      "Steam Generators": "Dampferzeuger",
+      "Steam Controls": "Dampferzeuger-Steuerungen",
+      "Steam Accessories": "Dampfzubehör",
+      "Infrared": "Infrarot",
+      "Heater Guard": "Ofenschutzgitter",
+      "Integration Collar": "Einbaukragen",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Stones": "Saunasteine",
+      "Safety Switch": "Sicherheitsschalter",
+      "Heater Hood": "Ofenhauben",
+      "Doors & Handles": "Türen & Griffe",
+      "Headrest & Backrest": "Kopfstützen & Rückenlehnen",
+      "Ventilation & Miscellaneous": "Belüftung & Sonstiges",
+      "Clocks & Timers": "Uhren & Sanduhren",
+      "Wooden Floor Mats": "Holzbodenmatten",
+      "Accessory Sets": "Zubehör-Sets",
+      "Pail Shower": "Eimerduschen",
+      "standard": "Standard-Saunaräume",
+      "glassfront": "Glasfront-Saunaräume",
+      "infrared": "Infrarotsaunen",
+      "compact": "Kompakt-Saunaräume"
+    }
+  }
+}
