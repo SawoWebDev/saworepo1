@@ -5,7 +5,10 @@ const lib = require("../lib");
 // loaderImgSelector isn't overridden (CSS background-image hero, no real
 // <img> tag) and why the hero text is baked at opacity:0 in the pristine
 // snapshot. Locale is resolved client-side via LocaleContext (see
-// home-fi.js's comment) — no extra waitFor step needed.
+// home-fi.js's comment) — but the Finnish catalog is a lazy chunk (i18n.js's
+// loadLocale()), so waitFor explicitly waits for the real Finnish heading
+// (same "SUOMALAINEN SAUNA" marker sanityCheck already trusts) instead of a
+// flat sleep, to not race the chunk fetch.
 module.exports = {
   path: "/fi/sauna",
   outFile: "fi/sauna/index.html",
@@ -13,6 +16,10 @@ module.exports = {
 
   async waitFor(page) {
     await page.waitForSelector("h1", { timeout: 30000 });
+    await page.waitForFunction(
+      () => document.getElementById("root")?.innerHTML.includes("SUOMALAINEN SAUNA"),
+      { timeout: 30000 }
+    );
     await new Promise((r) => setTimeout(r, 500));
   },
 

@@ -2,8 +2,12 @@
  * Home ("/zh") page config — same shape as pages/home.js, snapshotting the
  * Simplified Chinese locale instead of English. Locale is resolved entirely
  * client-side (see i18n/LocaleContext.js — synchronous from the URL, no
- * async i18n.changeLanguage race), so no extra waitFor step is needed beyond
- * Home's own hero-image selector.
+ * async i18n.changeLanguage race). BUT the Chinese catalog itself is now a
+ * lazy webpack chunk (see i18n.js's loadLocale()) fetched after first paint,
+ * not bundled eagerly — so waitFor explicitly waits for the real Chinese
+ * text (same "体验" marker sanityCheck already trusts) rather than a flat
+ * sleep, which would otherwise race the chunk fetch and could bake the
+ * English fallback into this snapshot instead of failing loudly.
  */
 module.exports = {
   path: "/zh",
@@ -13,6 +17,10 @@ module.exports = {
 
   async waitFor(page) {
     await page.waitForSelector("section.sauna-unique img", { timeout: 30000 });
+    await page.waitForFunction(
+      () => document.getElementById("root")?.innerHTML.includes("体验"),
+      { timeout: 30000 }
+    );
     await new Promise((r) => setTimeout(r, 500));
   },
 

@@ -7,7 +7,13 @@ const lib = require("../lib");
 // hub.*Section.loading keys) until that resolves — same reasoning as
 // pages/steam.js, so this opts out of blockNetwork and waits for real data
 // instead. Locale is resolved client-side via LocaleContext (see
-// home-zh.js's comment) — no extra locale-specific waitFor step needed.
+// home-zh.js's comment). The Chinese catalog is now a lazy chunk (i18n.js's
+// loadLocale()) though: the absence check below ("no more Chinese loading
+// placeholder text") would pass trivially on the still-English fallback
+// render too, since the English placeholder never matches those Chinese
+// strings either — so it's not actually proof the zh chunk has loaded. The
+// added positive check for "蒸汽" (same marker sanityCheck trusts) closes
+// that gap.
 module.exports = {
   path: "/zh/steam",
   outFile: "zh/steam/index.html",
@@ -15,7 +21,8 @@ module.exports = {
 
   async waitFor(page) {
     await page.waitForFunction(
-      () => !document.body.textContent.includes("正在加载发生器...")
+      () => document.getElementById("root")?.innerHTML.includes("蒸汽")
+        && !document.body.textContent.includes("正在加载发生器...")
         && !document.body.textContent.includes("正在加载控制器...")
         && !document.body.textContent.includes("正在加载配件..."),
       { timeout: 30000 }

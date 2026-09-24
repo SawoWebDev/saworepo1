@@ -8,8 +8,11 @@ const lib = require("../lib");
 // CSS background-image div (useHeroLoaded hook, no real <img> tag) — default
 // loaderImgSelector falls through to the first real <img> further down the
 // page, or the loader's own no-match fallback. Locale is resolved
-// client-side via LocaleContext (see home-zh.js's comment) — no extra
-// waitFor step needed beyond the hero heading itself.
+// client-side via LocaleContext (see home-zh.js's comment) — but the
+// Chinese catalog is a lazy chunk (i18n.js's loadLocale()), so waitFor
+// explicitly waits for the real Chinese heading (same "桑拿房" marker
+// sanityCheck already trusts) instead of a flat sleep, to not race the
+// chunk fetch.
 module.exports = {
   path: "/zh/sauna/rooms",
   outFile: "zh/sauna/rooms/index.html",
@@ -17,6 +20,10 @@ module.exports = {
 
   async waitFor(page) {
     await page.waitForSelector("h1", { timeout: 30000 });
+    await page.waitForFunction(
+      () => document.getElementById("root")?.innerHTML.includes("桑拿房"),
+      { timeout: 30000 }
+    );
     await new Promise((r) => setTimeout(r, 500));
   },
 
