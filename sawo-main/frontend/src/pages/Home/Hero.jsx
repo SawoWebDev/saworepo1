@@ -12,6 +12,7 @@ const Hero = () => {
   const tHome = useLocaleT("home");
   const tCommon = useLocaleT("common");
   const SENTENCES = tHome("hero.sentences", { returnObjects: true });
+  const sentencesKey = Array.isArray(SENTENCES) ? SENTENCES.join("|") : "";
   const BUTTON_TEXT = tCommon("viewCatalogue");
   const ALT_TEXT = tHome("hero.alt");
   const typewriterRef = useRef(null);
@@ -120,8 +121,18 @@ const Hero = () => {
     // itself isn't a stable dependency (tHome() returns a new array
     // reference every render), so depending on the primitive `locale`
     // instead is what actually restarts the loop only when it should.
+    //
+    // `sentencesKey` is also a dependency for the hard-reload case: on a
+    // direct load of /zh (or /de, /fi) the non-English catalog is a lazy
+    // chunk (see i18n.js loadLocale), so this effect's first run happens
+    // while tHome() still resolves the English *fallback*. `locale` never
+    // changes afterwards, so without this the loop kept typing English
+    // forever while the h1 (which re-renders on load) flipped to the target
+    // language. Keying on the resolved text restarts the typewriter the
+    // moment the real sentences arrive, and still animates the English
+    // fallback if the chunk fails to load.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locale]);
+  }, [locale, sentencesKey]);
 
   // Dark bg on the section itself (not just the -z-10 image div) so contrast
   // checkers see white hero text against #3a3a3a instead of the page's white.
