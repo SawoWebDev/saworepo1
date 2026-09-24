@@ -37,7 +37,7 @@
           "bullets": [
             "Jos jätät kommentin, voit halutessasi tallentaa nimesi, sähköpostiosoitteesi ja verkkosivustosi evästeisiin. Nämä evästeet ovat voimassa vuoden ja on tarkoitettu sinun mukavuuttasi varten.",
             "Väliaikainen eväste asetetaan, kun vierailet kirjautumissivulla, jotta voidaan tarkistaa, hyväksyykö selaimesi evästeitä. Se ei sisällä henkilötietoja ja poistuu, kun suljet selaimen.",
-            "Kirjautuessasi sisään asetetaan useita evästeitä kirjautumistietojesi ja näyttöasetustesi tallentamiseksi. Kirjautumisevästeet ovat voimassa kaksi päivää ja näyttöasetusevästeet vuoden. Valitsemalla \"Muista minut\" kirjautumisesi pidennetään kahteen viikkoon.",
+            "Kirjautuessasi sisään asetetaan useita evästeitä kirjautumistietojesi ja näyttöasetustesi tallentamiseksi. Kirjautumisevästeet ovat voimassa kaksi päivää ja näyttöasetusevästeet vuoden. Jos valitset \"Muista minut\", kirjautumisesi säilyy kahden viikon ajan.",
             "Jos kirjaudut ulos, kirjautumisevästeet poistetaan.",
             "Artikkelin muokkaaminen tai julkaiseminen asettaa evästeen, joka sisältää artikkelin julkaisutunnuksen. Tämä eväste vanhenee yhden päivän kuluttua."
           ]
@@ -51,7 +51,7 @@
         {
           "subtitle": "Analytiikka",
           "content": [
-            "Voimme käyttää kolmannen osapuolen analytiikkatyökaluja liikenteen ja käyttötrendien mittaamiseen. Nämä työkalut keräävät selaimesi lähettämiä tietoja, mukaan lukien vieraillut sivut ja käyttäytyminen, palveluidemme kehittämiseksi."
+            "Voimme käyttää kolmannen osapuolen analytiikkatyökaluja kävijämäärien ja käyttötrendien mittaamiseen. Nämä työkalut keräävät selaimesi lähettämiä tietoja, kuten vierailtuja sivuja ja käyttäytymistä sivustolla, palveluidemme kehittämiseksi."
           ]
         }
       ]
@@ -66,13 +66,13 @@
       "title": "Kuinka kauan säilytämme tietojasi",
       "bullets": [
         "Kommentit ja niihin liittyvät metatiedot säilytetään toistaiseksi, jotta seurantakommentit voidaan tunnistaa ja hyväksyä automaattisesti.",
-        "Sivustollemme rekisteröityneiden käyttäjien (mikäli sovellettavissa) osalta säilytämme heidän käyttäjäprofiilissaan antamansa henkilötiedot. Kaikki käyttäjät voivat milloin tahansa tarkastella, muokata tai poistaa henkilötietonsa (käyttäjätunnusta lukuun ottamatta). Verkkosivuston ylläpitäjät voivat myös käyttää ja hallita näitä tietoja."
+        "Sivustolle rekisteröityneiden käyttäjien osalta (soveltuvin osin) säilytämme heidän käyttäjäprofiilissaan antamansa henkilötiedot. Kaikki käyttäjät voivat milloin tahansa tarkastella, muokata tai poistaa henkilötietonsa (käyttäjätunnusta lukuun ottamatta). Myös sivuston ylläpitäjät voivat nähdä ja hallita näitä tietoja."
       ]
     },
     {
       "title": "Oikeutesi omiin tietoihisi",
       "content": [
-        "Jos sinulla on tili tai olet jättänyt kommentteja, voit pyytää viedyn tiedoston sinusta hallussamme olevista henkilötiedoista, mukaan lukien antamasi tiedot. Voit myös pyytää meitä poistamaan henkilötietosi, lukuun ottamatta tietoja, jotka meidän on säilytettävä hallinnollisista, oikeudellisista tai turvallisuussyistä."
+        "Jos sinulla on tili tai olet jättänyt kommentteja, voit pyytää tiedoston, joka sisältää sinusta tallentamamme henkilötiedot ja antamasi tiedot. Voit myös pyytää meitä poistamaan henkilötietosi, lukuun ottamatta tietoja, jotka meidän on säilytettävä hallinnollisista, oikeudellisista tai turvallisuussyistä."
       ]
     },
     {
