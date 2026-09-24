@@ -1,0 +1,20 @@
+{
+  "slug": "nordex-mini-combi-black-ns",
+  "productId": "b5149a8b-acf3-4ef3-8d04-61be17c724d3",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Mini Combi ブラック NS",
+    "short_description": "<span style=\"text-align: justify;\">超コンパクトな </span><strong style=\"text-align: justify;\">Nordex Mini Combi</strong><span style=\"text-align: justify;\">は、水タンクで熱に湿度を加えます。ステンレス製またはブラックメタル製のケースからお選びいただけ、別置きのSaunova (NS) およびInnova (NS) コントローラーに対応しています。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW\n<br>ヒーター</th>\n  <th>kW\n<br>タンク</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th colspan=\"2\">制御方式</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRMC-30NS-BL-Z</td>\n  <td>3.0</td>\n  <td>1 × 0.8</td>\n  <td>2 – 4</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>NRMC-36NS-BL-Z</td>\n  <td>3.6</td>\n  <td>1 × 0.8</td>\n  <td>3 – 6</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "出力範囲：3.0 – 3.6 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "0.8kWスチームジェネレーター付きの別置き水タンク",
+      "ブラックメタル製ケース",
+      "内蔵アロマカップ"
+    ]
+  }
+}

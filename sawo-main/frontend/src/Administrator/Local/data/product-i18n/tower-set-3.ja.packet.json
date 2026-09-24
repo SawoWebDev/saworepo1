@@ -1,0 +1,26 @@
+{
+  "slug": "tower-set-3",
+  "productId": "788f3593-0721-4d7d-a8a4-8118dde3145b",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "タワーセット 3",
+    "short_description": "SAWO タワーセット 3は、寸法180 × 60 × 180mm、重さ1.8kgのタワー型ソープストーン製アクセサリーで、Kivistoneアクセサリーラインの一つです。",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-125)",
+        "name": "(R-125)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

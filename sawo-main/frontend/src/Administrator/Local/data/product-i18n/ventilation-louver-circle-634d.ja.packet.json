@@ -1,0 +1,56 @@
+{
+  "slug": "ventilation-louver-circle-634d",
+  "productId": "a2e4c15b-bba3-4f2a-b946-fe24a50a7a62",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (634-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (634-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (634-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "換気ルーバー 円形",
+    "short_description": "SAWO 換気ルーバー 円形は、サウナルームの空気の出入りを調整するための、Ø170mm、ダクト穴125mmの換気ルーバーです。",
+    "description": null,
+    "type": "換気パーツ＆その他",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (634-D)",
+        "name": "シダー (634-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (634-A)",
+        "name": "アスペン (634-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (634-H)",
+        "name": "ヘムロック (634-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

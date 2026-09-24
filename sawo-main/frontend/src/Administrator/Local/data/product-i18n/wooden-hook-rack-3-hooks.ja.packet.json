@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-hook-rack-3-hooks",
+  "productId": "62434757-9ec0-4ae3-8879-637854d6b55c",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (582-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (582-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (582-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木製フックラック（フック3個）",
+    "short_description": "SAWO 木製フックラック（フック3個）は、サウナのすぐ外でタオルやローブを掛けるための、寸法42 × 240mmの木製フックラックです。",
+    "description": null,
+    "type": "ハンガー",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (582-D)",
+        "name": "シダー (582-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (582-A)",
+        "name": "アスペン (582-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (582-H)",
+        "name": "ヘムロック (582-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

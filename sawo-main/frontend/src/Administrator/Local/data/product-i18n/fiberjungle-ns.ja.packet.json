@@ -1,0 +1,21 @@
+{
+  "slug": "fiberjungle-ns",
+  "productId": "fe13bcbb-0dc8-4140-b069-ee4d6c9c0c45",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Fiberjungle NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\"><b>Fiberjungle</b></strong><span style=\"text-align: justify;\">は、フィンランドの著名デザイナー、ステファン・リンドフォルスがデザインした、見た目も性能も印象的なヒーターです。高さがあるため、大量のストーンを収容でき、安定した心身をよみがえらせるぬくもりを生み出します。黒い触れても熱くないファイバーコーティングを施した、ジャングルファイア模様のケースを備えたFiberjungleは、大胆でありながらエレガントなサウナの主役です。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>DRF3-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRF3-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRF3-75NS-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRF3-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 13</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Fiberjungle",
+    "features": [
+      "出力範囲：4.5 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "高さ調整可能な脚",
+      "ジャングルファイア模様のファイバーコーティング",
+      "コーティングがヒーターを湿気と高温から守ります",
+      "発熱体スペーサーが発熱体の寿命を延ばします"
+    ]
+  }
+}

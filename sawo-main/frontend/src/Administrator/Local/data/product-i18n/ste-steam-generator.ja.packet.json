@@ -1,0 +1,101 @@
+{
+  "slug": "ste-steam-generator",
+  "productId": "62da5399-e16e-4b7a-9a24-c457d74d6f62",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "STE スチームジェネレーター",
+    "short_description": "<p style=\"text-align: justify;\">信頼性が高く、簡単に使える、 <strong>STE</strong> スチームジェネレーターは、住宅環境向けに設計されています。操作もシンプルで、コントロールをオンにして温度ダイヤルを調整するだけです。ステンレス製の構造が、長く続く耐久性と耐食性を確保します。</p><p style=\"text-align: justify;\">STEは、どんなレイアウトでも簡単に設置できるよう、左右どちらの側にも接続を向けられます。より大きな出力が必要な場合は、最大5台を直列に接続して、最大出力<strong> 75.0kW</strong>を実現し、すべてを1つのSAWOコントロールで管理できます。</p>",
+    "description": null,
+    "type": "スチームジェネレーター",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "発熱体2本",
+        "description": null,
+        "features": [
+          "出力範囲：3.0 – 5.0 kW",
+          "スチーム出力：最大6.7kg/時",
+          "左右どちらの側にも設置可能",
+          "過圧バルブ用の専用パイプ",
+          "スチームヘッド付属",
+          "対応コントローラー：STE 2.0"
+        ],
+        "spec_table_headers": [
+          "スチームジェネレーター型番",
+          "kW",
+          "スチームルーム (m³)",
+          "サイズ (mm) 長|幅|高",
+          "重量 (kg)",
+          "制御方式"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "発熱体3本",
+        "description": null,
+        "features": [
+          "出力範囲：4.5 – 7.5 kW",
+          "スチーム出力：最大7.5kg/時",
+          "左右どちらの側にも設置可能",
+          "過圧バルブ用の専用パイプ",
+          "スチームヘッド付属",
+          "対応コントローラー：STE 2.0"
+        ],
+        "spec_table_headers": [
+          "スチームジェネレーター型番",
+          "kW",
+          "スチームルーム (m³)",
+          "サイズ (mm) 長|幅|高",
+          "重量 (kg)",
+          "制御方式"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "発熱体6本",
+        "description": null,
+        "features": [
+          "出力範囲：9.0 – 15.0 kW",
+          "スチーム出力：最大20kg/時",
+          "左右どちらの側にも設置可能",
+          "過圧バルブ用の専用パイプ",
+          "スチームヘッド2個付属",
+          "対応コントローラー：STE 2.0"
+        ],
+        "spec_table_headers": [
+          "スチームジェネレーター型番",
+          "kW",
+          "スチームルーム (m³)",
+          "サイズ (mm) 長|幅|高",
+          "重量 (kg)",
+          "制御方式"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Temperature sensor with",
+        "title": "温度センサー（付属品：",
+        "note": "ワイヤーとセンサーホルダー）"
+      },
+      {
+        "index": 1,
+        "_english_title": "Steam Head",
+        "title": "スチームヘッド",
+        "note": "（9kW以上のモデルには、2個のヘッドが付属します）"
+      },
+      {
+        "index": 2,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7.5m RJ12ケーブル",
+        "note": "7.5m RJ10ケーブル"
+      }
+    ]
+  }
+}

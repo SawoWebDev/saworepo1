@@ -1,0 +1,20 @@
+{
+  "slug": "integration-collar-corner-wooden",
+  "productId": "7ed5ce24-c12c-40be-8003-582635d5261c",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "カラー – コーナー (木製)",
+    "short_description": "カラーは、ベンチに組み込まれたヒーターの美しさを引き立て、すっきりと一体化した見た目に仕上げます。丈夫なヘムロック材で作られ、構造的な強度と耐熱性を保ちながら、サウナの自然なデザインに調和します。",
+    "description": null,
+    "type": "カラー",
+    "spec_table_headers": [
+      "型番",
+      "素材",
+      "長さ (mm)",
+      "幅 (mm)",
+      "高さ (mm)"
+    ]
+  }
+}

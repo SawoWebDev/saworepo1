@@ -1,0 +1,22 @@
+{
+  "slug": "phoenix-ns",
+  "productId": "74bd6255-103e-44b5-908d-bd36c90724dc",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Phoenix NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Phoenix</strong><span style=\"text-align: justify;\">は、オリンピックの聖火の形をエレガントでミニマルなデザインに取り入れ、活力と再生を表現しています。広い上部により、より多くのストーンを収容でき、より豊富で心地よいスチームを生み出します。長い一日（あるいは夜）を終えたあと、灰の中から蘇るというたとえを、まさに思い起こさせるデザインです。Phoenixにはストーンスペーサーも付属しており、発熱体の寿命を延ばします。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>PNX3-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Separate</td>\n  <td>125</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-75NS-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Separate</td>\n  <td>125</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Separate</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX6-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>475 × 525 × 1175</td>\n  <td>130</td>\n  <td>Separate</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX6-105NS-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>475 × 525 × 1175</td>\n  <td>130</td>\n  <td>Separate</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX6-120NS-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>475 × 525 × 1175</td>\n  <td>130</td>\n  <td>Separate</td>\n  <td>150</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>PNX6-150NS-P</td>\n  <td>15.0</td>\n  <td>14 – 25</td>\n  <td>475 × 525 × 1175</td>\n  <td>130</td>\n  <td>Separate</td>\n  <td>150</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>PNX6-180NS-P</td>\n  <td>18.0</td>\n  <td>18 – 28</td>\n  <td>475 × 525 × 1175</td>\n  <td>130</td>\n  <td>Separate</td>\n  <td>175</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Phoenix",
+    "features": [
+      "出力範囲：4.5 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "内蔵ストーンスペーサー",
+      "高さ調整可能な脚",
+      "ステンレス製ケース",
+      "オプションのヒーターガード",
+      "オプションのカラー"
+    ]
+  }
+}

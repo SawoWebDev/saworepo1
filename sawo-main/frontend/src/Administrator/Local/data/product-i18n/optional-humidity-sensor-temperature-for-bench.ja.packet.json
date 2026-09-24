@@ -1,0 +1,22 @@
+{
+  "slug": "optional-humidity-sensor-temperature-for-bench",
+  "productId": "96070ec2-7666-4b98-8ab2-068f595a91d3",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "追加の温湿度センサー",
+    "short_description": "ベンチ周辺の温度と湿度を測定するオプションのセンサーで、コンビヒーターとの併用に最適です。エネルギー効率を高め、加熱時間を短縮し、サウナのセッション中の温度と湿度をより正確に保ちます。接続すると、コントロールが自動的に認識し、シームレスに連携します。",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">製品寸法</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Optional Temperature &amp; Humidity Sensor\n(INN-HUM)</td>\n  <td>W: 47mm x D: 40mm x H: 55mm 0.05KG</td>\n</tr></tbody></table>",
+    "type": "センサー",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

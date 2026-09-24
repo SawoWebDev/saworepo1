@@ -1,0 +1,23 @@
+{
+  "slug": "tower-round-ni",
+  "productId": "fbd415e6-6d42-4871-9fa1-83ca329d8583",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Tower ラウンド Ni",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Tower ラウンド</strong><span style=\"text-align: justify;\"> ヒーターは、時代を超えるエレガントなデザインです。その高さにより、長く続く湿った熱が均等に行き渡り、深い満足感のあるサウナセッションを楽しめます。ラウンドモデルは、サウナルームの中央にも、ベンチへの埋め込みにも設置できます。取り外し可能なストーンスペーサーも付属しており、2通りのセットアップをお選びいただけます。(1) スペーサーあり：より速い加熱、省エネ、より熱いサウナ。(2) スペーサーなし：より多くのストーンを収容して、より多くのスチーム、よりやわらかな温度、業務用設備での省エネを実現。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg) ストーンスペーサーなし</th>\n  <th>ストーン<br>(kg) ストーンスペーサー付き</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH6-105Ni-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>365 × 365 × 1300</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Innova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-120Ni-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>365 × 365 × 1300</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-105Ni-P</td>\n  <td>10.5</td>\n  <td>10 – 16</td>\n  <td>450 × 450 × 1300</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>150</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-120Ni-P</td>\n  <td>12.0</td>\n  <td>11 – 20</td>\n  <td>450 × 450 × 1300</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>150</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-150Ni-P</td>\n  <td>15.0</td>\n  <td>14 – 25</td>\n  <td>450 × 450 × 1300</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH12-150Ni-P</td>\n  <td>15.0</td>\n  <td>15 – 26</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-180Ni-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-210Ni-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-240Ni-P</td>\n  <td>24.0</td>\n  <td>24 – 40</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr></tbody></table>",
+    "type": "Tower ラウンド",
+    "features": [
+      "出力範囲：10.5 – 24.0 kW",
+      "対応コントローラー：Innova (Ni)",
+      "ステンレス製ケース",
+      "壊れたストーンを交換できる可動式スチールリング",
+      "取り外し可能なストーンスペーサー",
+      "高さ調整可能な脚",
+      "オプションのヒーターガード",
+      "オプションのカラー"
+    ]
+  }
+}

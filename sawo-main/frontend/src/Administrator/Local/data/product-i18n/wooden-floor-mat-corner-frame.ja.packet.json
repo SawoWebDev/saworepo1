@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-floor-mat-corner-frame",
+  "productId": "028d03cd-9e2b-4721-a2ee-9d01fc4580de",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (595-D-CNR)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (595-A-CNR)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (595-H-CNR)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木製フロアマット コーナーフレーム",
+    "short_description": "SAWO 木製フロアマット コーナーフレームは、SAWOのモジュール式木製フロアマットシステムのコーナーフレーム部品で、寸法390 × 115mm、厚さ22mm。サウナの床を保護し、足元の快適さを高めます。",
+    "description": null,
+    "type": "木製フロアマット",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (595-D-CNR)",
+        "name": "シダー (595-D-CNR)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (595-A-CNR)",
+        "name": "アスペン (595-A-CNR)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (595-H-CNR)",
+        "name": "ヘムロック (595-H-CNR)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

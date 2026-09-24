@@ -127,6 +127,23 @@ const MATERIAL_WORD_DICTIONARY = {
     Aluminum: "Aluminium",
     "Black Metal": "Schwarzmetall",
   },
+  ja: {
+    Cedar: "シダー",
+    Aspen: "アスペン",
+    Hemlock: "ヘムロック",
+    Alder: "アルダー",
+    Pine: "パイン",
+    Spruce: "スプルース",
+    Birch: "バーチ",
+    Black: "ブラック",
+    White: "ホワイト",
+    Grey: "グレー",
+    Gray: "グレー",
+    Silver: "シルバー",
+    Natural: "ナチュラル",
+    Aluminum: "アルミニウム",
+    "Black Metal": "ブラックメタル",
+  },
 };
 
 // Matches "<Word>" or "<Word> (<anything>)" where <Word> is 1-2 plain

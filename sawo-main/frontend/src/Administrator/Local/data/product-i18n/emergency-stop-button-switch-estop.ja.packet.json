@@ -1,0 +1,13 @@
+{
+  "slug": "emergency-stop-button-switch-estop",
+  "productId": "14ff030c-e163-4db1-b9e4-951525d50ecb",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "非常停止ボタンスイッチ (ESTOP)",
+    "short_description": "非常停止ボタンにより、過熱防止の安全回路を通じてサウナヒーターを停止できます。さらに緊急時には、オプションの信号装置を通じて、離れた場所にいる監視スタッフの注意を引くなどのために、警報を作動させることもできます。EN 60335-1、EN 60335-2-53、VDE 0100 part 703などの適用される規格や法的要件、および地域の電力会社の要件を必ず順守してください。",
+    "description": null,
+    "type": "安全スイッチ"
+  }
+}

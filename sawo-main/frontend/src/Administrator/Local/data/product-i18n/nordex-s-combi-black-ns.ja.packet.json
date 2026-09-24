@@ -1,0 +1,22 @@
+{
+  "slug": "nordex-s-combi-black-ns",
+  "productId": "cc3cb0d3-c79c-4c4f-818e-4370f09148f2",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex S Combi ブラック NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Nordex S Combi</b><span style=\"text-align: justify;\">は、強い熱と、追加の水タンクによる豊富なスチームを組み合わせ、多彩なサウナ体験を叶えます。内蔵のアロマカップにエッセンシャルオイルや香りを加えることで、心身を癒やすスチームに香りを付け、贅沢なサウナの雰囲気をつくり出せます。 </span><div><div style=\"text-align: justify;\"><br></div><div><span style=\"text-align: justify;\">すべてのコンビヒーターと同様に、Nordex S Combiには、水位が低下すると知らせる特許取得済みの水位検知システムが備わっています。自動給水機能も有効にでき、利便性を最大限に高められます。Nordex S Combiは、ご家庭でもウェルネスセンターでも、さまざまなサウナの広さに合わせて設計されています。</span>\n\n</div></div>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW\n<br>ヒーター</th>\n  <th>kW\n<br>タンク</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"4\">最小安全距離<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNSC-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNSC-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNSC-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "出力範囲：6.0 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "最小限のエネルギーで効率的に加熱",
+      "すっきりとしたミニマルなデザイン",
+      "内蔵アロマカップ",
+      "ブラックメタル製ケース",
+      "過熱時の自動遮断機能"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "helius-mini-ns",
+  "productId": "2c147543-2f01-4114-8336-85a4bcdb1f00",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius Mini NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Helius Mini</strong><span style=\"text-align: justify;\">は、Heliusと同じ革新性を、よりコンパクトな形で実現しました。ベンチの後ろに目立たず設置でき、最小限の安全距離で完全に視界から隠せます。そのフードは、隠しヒーターとして使うために作られています。パワフルな性能とあわせ、小さな空間を均等に温めるよう入念に設計されています。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター\n<br>型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th colspan=\"2\">制御方式</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-MN-20NS-Z</td>\n  <td>2.0</td>\n  <td>1.5 – 2.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-27NS-Z</td>\n  <td>2.7</td>\n  <td>2.0 – 3.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-30NS-Z</td>\n  <td>3.0</td>\n  <td>2.0 – 4.0</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "出力範囲：2.0 – 3.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "ホース付きの別置きソープストーン水皿",
+      "オプションのヒーターガードとフード"
+    ]
+  }
+}

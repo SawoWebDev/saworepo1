@@ -1,0 +1,32 @@
+{
+  "slug": "door-lock-magnet-round-heavy-duty",
+  "productId": "cdadf506-5ab5-4eb5-aa18-ce2e1c58cb3d",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Aluminum (574)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ドアロックマグネット 丸型 強力タイプ",
+    "short_description": "SAWO ドアロックマグネット 丸型 強力タイプは、サウナのドアをしっかり閉じておくための、寸法17 × 28.5mmの丸型の強力なマグネット式ドアロックです。",
+    "description": null,
+    "type": "ドア＆ハンドル",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Aluminum (574)",
+        "name": "アルミニウム (574)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

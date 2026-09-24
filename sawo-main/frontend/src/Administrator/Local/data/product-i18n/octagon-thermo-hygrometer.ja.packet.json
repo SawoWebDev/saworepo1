@@ -1,0 +1,56 @@
+{
+  "slug": "octagon-thermo-hygrometer",
+  "productId": "b3cc5b9c-1316-4997-8d86-8b492f35b853",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (241-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (241-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (241-THH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "八角形温湿度計",
+    "short_description": "SAWO 八角形温湿度計は、サウナ内の温度と湿度を確認するための、寸法175 × 225mmのサウナ用温湿度計です。",
+    "description": null,
+    "type": "温度計",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (241-THD)",
+        "name": "シダー (241-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (241-THA)",
+        "name": "アスペン (241-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (241-THH)",
+        "name": "ヘムロック (241-THH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

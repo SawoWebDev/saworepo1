@@ -1,0 +1,32 @@
+{
+  "slug": "sauna-bench-520d",
+  "productId": "d2d150fb-c147-479a-8fec-eaa396a8b7ee",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (520-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "サウナベンチ",
+    "short_description": "SAWO サウナベンチは、サウナ内で快適に座れる耐熱仕様の、寸法430 × 534 × 412mmの無垢材のサウナベンチです。",
+    "description": null,
+    "type": "ベンチ",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (520-D)",
+        "name": "シダー (520-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

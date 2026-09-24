@@ -473,3 +473,30 @@ tail -n +2 slugs.txt | node product-i18n.js apply-many de -
   after editing a dictionary.
 - Consistency: a string always gets the same German everywhere, which is what
   translation memory would give anyway; `apply-many` still records every pair.
+
+## Japanese (`ja`) notes (2026-09-25 push)
+
+Everything above applies to `ja` unless stated here. `ja` reuses the `de` approach — one shared exact-English-string →
+Japanese dictionary applied to freshly extracted packets — via `fill-ja-apply.mjs` + `fill-ja-data-*.mjs` (same file
+format as the `de` engine; `JA_SRC=<pristine packet dir>` re-runs the fill idempotently). 382/383 published products done
+(`krios-floor-ns` is hidden, same as `de`). Polite です/ます register, spaces kept between a brand and its descriptive
+suffix ("Aries コーナー ブラック NB"), spec-table **data** cells and model codes untouched.
+
+Two engine differences from `de`, both needed for Japanese word order: an empty-string dictionary value drops a word with no
+Japanese counterpart (the article "The" before a bold product name), and a translation that begins with a particle or
+punctuation ("は…", "を…", "、…") attaches to the previous tag without the English inter-word space. The "already translated"
+guard for parenthesised text is limited to a bare code (`(R-100)`) — the `de` version also swallowed real notes like
+"(Included for STN-S models only)", which is why those stayed English there; re-check `de`/`fi`/`zh` `included_items[].note`.
+
+Material/colour words (`MATERIAL_WORD_DICTIONARY.ja`): Cedar シダー, Aspen アスペン, Hemlock ヘムロック, Alder アルダー,
+Pine パイン, Spruce スプルース, Birch バーチ, Black ブラック, White ホワイト, Grey/Gray グレー, Silver シルバー,
+Natural ナチュラル, Aluminum アルミニウム, "Black Metal" ブラックメタル.
+
+Vocabulary: heater ヒーター, heater guard ヒーターガード, integration collar カラー, heater hood ヒーターフード, ladle ひしゃく,
+pail バケツ, soapstone ソープストーン, control(ler) コントローラー/コントロール, power controller パワーコントローラー,
+contactor unit コンタクターユニット, user interface ユーザーインターフェース, built-in ビルトイン/内蔵, steam generator
+スチームジェネレーター, cool-to-touch fibercoating 触れても熱くないファイバーコーティング, löyly kept as "löyly".
+Position words on a brand: Corner コーナー, Round ラウンド, Wall ウォール, Floor フロア, Middle センター.
+Table headers: Specification 仕様 / Detail 詳細, Heater Model ヒーター型番, Control 制御方式, Minimum Safety Distances 最小安全距離.
+Remaining English inside description tables (`Separate`, `Built-in`, the Innova/Saunova technical-detail labels) is
+translated at render time by `src/utils/specLabel.js` (`tableCells` / `specLabels` in `locales/<lang>/product.json`).

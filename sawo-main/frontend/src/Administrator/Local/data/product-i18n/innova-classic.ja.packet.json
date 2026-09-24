@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic",
+  "productId": "bab85c05-e589-45bf-b634-8a4f62d8db6b",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic",
+    "short_description": "<div style=\"text-align: justify;\"><p><b>別置きコントロールユニット</b><br>Innova Classicコントロールユニットは、別置きのコントロールパネルと、最大15 kWまで対応できるパワーコントローラーで構成されています。ドアセンサー、プレタイマー、スマート省エネ、安定して均一な電力配分など、多彩な機能を搭載しています。見やすいLEDディスプレイと7つのボタンで、簡単に操作できます。過熱ヒューズ付き温度センサーと4 m接続ケーブルがパッケージに含まれています。</p><p>ヒーター出力が15 kWを超える場合は、別売のInnovaコンタクターユニットが必要です。\n\n</p></div><div style=\"text-align: justify;\"><p><b>ビルトインコントロールユニット</b><br>Innova Classic ビルトインコントロールユニットは、コントロールパネルを一体化したパワーコントローラーで構成されています。Innova Classic別置きコントロールユニットと同じ機能を備えており、違いは、すべてがひとつのすっきりしたパッケージにまとまっている点だけです！\n\n</p><p><b>ヒーター出力が15 kWを超える場合は、別売のInnovaコンタクターユニットが必要です。</b></p></div>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">技術仕様</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic (INC-S)</td><td>W: 170 mm x H: 90 mm x D: 30 mm</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "スマートコントロール機能が、発熱体を段階的に自動制御し、設定温度に素早く到達させ、常に良質なスチームを生み出します。",
+      "INP-Cパワーコントローラーと接続すれば、15 kWまでのあらゆるNSヒーターでお使いいただけます。15 kWを超えるヒーターには、INP-Sコンタクターユニットを追加してください。",
+      "ドアセンサーに対応",
+      "プレランタイマー",
+      "オプションのファン、調光、コンビ機能",
+      "オプションのベンチセンサー (INN-BTEMP) との併用が最適で、コンビヒーターでは湿度センサー (INN-HUM) との併用が最適です",
+      "クラシックユーザーインターフェースと5 m RJ12ケーブルが付属"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

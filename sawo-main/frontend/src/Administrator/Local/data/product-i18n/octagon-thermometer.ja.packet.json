@@ -1,0 +1,56 @@
+{
+  "slug": "octagon-thermometer",
+  "productId": "eaf0b31d-dc58-4373-955c-09ae15fecb15",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (240-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (240-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (240-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "八角形温度計",
+    "short_description": "SAWO 八角形温度計は、サウナ内の温度を確認するための、寸法165 × 180mmのサウナ用温度計です。",
+    "description": null,
+    "type": "温度計",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (240-TD)",
+        "name": "シダー (240-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (240-TA)",
+        "name": "アスペン (240-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (240-TH)",
+        "name": "ヘムロック (240-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

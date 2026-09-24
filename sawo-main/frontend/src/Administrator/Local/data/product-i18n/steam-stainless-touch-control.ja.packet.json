@@ -1,0 +1,37 @@
+{
+  "slug": "steam-stainless-touch-control",
+  "productId": "20f895bb-31e0-4a02-8802-9768d7180345",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "スチームステンレスタッチコントロール",
+    "short_description": "<p style=\"text-align: justify;\">最新のタッチスクリーン式STNスチームジェネレーター用コントロールが登場しました。</p><p style=\"text-align: justify;\"><b>スチームステンレスタッチコントロール</b>は、使いやすいインターフェースで、スチーム、温度、時間を手軽にコントロールでき、自分好みのサウナまたはスチームルーム体験を叶えます。</p>",
+    "description": null,
+    "type": "スチームコントローラー",
+    "features": [
+      "厚手のステンレス製ケース",
+      "アニメーション付きボタン",
+      "家庭用の自動化機器に対応",
+      "非常用アラーム対応",
+      "次のセッションまで水を温かく保つスタンバイモード",
+      "エラーコードを表示",
+      "オートドレイン機能",
+      "キーロック",
+      "イージーモードあり",
+      "日付と時刻の設定",
+      "キロワット使用量カウンター",
+      "除石灰機能",
+      "発熱体の故障検知",
+      "停電メモリー",
+      "温度単位は摂氏または華氏",
+      "オートライト",
+      "オートファン",
+      "LCDコントラスト調整",
+      "オプションのアロマポンプ、調光、ファン",
+      "ワイヤー付き温度センサー",
+      "オプションのインターフェースホルダー",
+      "コネクター付き7.5m RJ12ケーブル付属"
+    ]
+  }
+}

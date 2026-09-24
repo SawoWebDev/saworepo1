@@ -1,0 +1,17 @@
+{
+  "slug": "sauna-wood-oil-4l",
+  "productId": "0ca1d6f7-860b-4768-acb1-08731f00c815",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO サウナウッドオイル 4L",
+    "short_description": "SAWO サウナウッドオイルは、あらゆる木材に使用できる化粧品グレードのオイルです。この処理は、木の表面を湿気と汚れから守るよう設計されています。湿気の吸収を防ぎ、サウナの寿命を大幅に延ばします。",
+    "description": null,
+    "type": "換気パーツ＆その他",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ]
+  }
+}

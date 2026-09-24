@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-light-cover-corner-wall",
+  "productId": "e8604f18-9c3a-40bb-9823-a99edd4e8803",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (914-VD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (914-VA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (914-VH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木製ライトカバー コーナー／ウォール",
+    "short_description": "SAWO 木製ライトカバー コーナー／ウォールは、サウナ内で光を均一に拡散させるため、照明器具に被せる、寸法150 × 110mmの木製サウナ用ライトカバーです。",
+    "description": null,
+    "type": "サウナ用照明",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (914-VD)",
+        "name": "シダー (914-VD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (914-VA)",
+        "name": "アスペン (914-VA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (914-VH)",
+        "name": "ヘムロック (914-VH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-round-black-nb",
+  "productId": "68d24877-e300-4c6b-841e-5a35a1ffd362",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 ラウンド ブラック NB",
+    "short_description": "<p style=\"text-align: justify;\"><strong>SAWO30 ラウンド</strong> <b>ブラック</b>は、サウナの中央にもベンチへの埋め込みにも完璧に設置できる、見事な外観のヒーターです。</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">背が高くスリムな本体に収められた大量のストーンが、スチームと湿度の理想的な組み合わせによる、豊かでスチームに満ちた雰囲気をつくり出します。</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(KG) ストーンスペーサーなし</th>\n  <th>ストーン<br>(KG) ストーンスペーサー付き</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NB-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>245 × 245 × 1305</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NB-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>245 × 245 × 1305</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NB-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>345 × 345 × 1305</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "SAWO30 ラウンド",
+    "features": [
+      "出力範囲：4.5 – 9.0 kW",
+      "対応コントローラー：内蔵 (NB)",
+      "ブラックメタル製ケース",
+      "ストーンを入れやすくする、取り外し可能な上半分",
+      "取り外し可能なストーンスペーサー",
+      "オプションのヒーターガード",
+      "オプションのカラー"
+    ]
+  }
+}

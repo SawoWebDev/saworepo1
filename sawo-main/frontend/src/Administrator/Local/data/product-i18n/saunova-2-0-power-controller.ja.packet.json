@@ -1,0 +1,31 @@
+{
+  "slug": "saunova-2-0-power-controller",
+  "productId": "2fbd56fa-6c44-47af-b463-d738580ff741",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 パワーコントローラー",
+    "short_description": "<p style=\"text-align: justify;\">次の製品を接続してください： <b>Saunova 2.0</b> パワーコントローラーを Saunova 2.0 と接続し、9kW未満のあらゆるNSヒーターでお使いください。\n\n</p><p style=\"text-align: justify;\">コントロールのケーシングは、電気工事士が作業できるスペースが広く、これまで以上に簡単に設置できます！一新されたモダンなケーシングは、より簡単で素早い設置のために、スペースを拡大しています。背面を含む4面にひずみ防止機構を備えた柔軟な配線オプションにより、配線を完全に隠せます。</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">技術仕様</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>9kW max</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova 2.0 Power Controller (SAU-PC-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "スマートコントロール機能が、発熱体を段階的に自動制御し、設定温度に素早く到達させ、常に良質なスチームを生み出します。",
+      "NSヒーターは、Saunova 2.0と接続すれば、9 kW未満のあらゆるNSヒーターでお使いいただけます。9 kWを超えるヒーターには、SAU-PS-2コンタクターユニットを追加してください。",
+      "家庭用オートメーションシステムに接続可能",
+      "ドアセンサーに対応",
+      "プレランタイマー",
+      "オプションのファンとコンビ機能",
+      "Saunovaパワーコントローラー、シダー製ホルダー付き温度センサー、5 mシリコン配線が付属"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

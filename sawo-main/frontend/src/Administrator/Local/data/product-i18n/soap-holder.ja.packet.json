@@ -1,0 +1,26 @@
+{
+  "slug": "soap-holder",
+  "productId": "abe95293-3a66-4fa0-a198-d2cdf1261f33",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ソープホルダー",
+    "short_description": "SAWO ソープホルダーは、寸法180 × 100 × 30mm、重さ0.9kgのソープストーン製ソープホルダーで、Kivistoneアクセサリーラインの一つです。",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-116)",
+        "name": "(R-116)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

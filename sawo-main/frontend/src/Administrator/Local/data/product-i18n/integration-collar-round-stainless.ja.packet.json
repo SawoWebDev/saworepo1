@@ -1,0 +1,19 @@
+{
+  "slug": "integration-collar-round-stainless",
+  "productId": "7098f3b9-7500-4599-a020-10e10e71c7b2",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "カラー – ラウンド (ステンレス)",
+    "short_description": "カラーは、ベンチに組み込まれたヒーターの美しさを引き立て、すっきりと一体化した見た目に仕上げます。サウナルームのデザインに合わせて選び抜かれた、さまざまな素材で作られています。ヘアライン仕上げのスタイリッシュなステンレス、自然でやわらかなソープストーン、丈夫な積層木材からお選びいただけます。",
+    "description": null,
+    "type": "カラー",
+    "spec_table_headers": [
+      "型番",
+      "長さ (mm)",
+      "幅 (mm)",
+      "高さ (mm)"
+    ]
+  }
+}

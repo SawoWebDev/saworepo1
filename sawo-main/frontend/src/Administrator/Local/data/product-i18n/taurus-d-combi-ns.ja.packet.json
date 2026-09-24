@@ -1,0 +1,23 @@
+{
+  "slug": "taurus-d-combi-ns",
+  "productId": "2fcb7b83-c383-4a2b-89c0-53987e5453c9",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Taurus D Combi NS",
+    "short_description": "<p style=\"text-align: justify;\"><strong><b>Taurus D Combi</b></strong>のおかげで、ウェルネス体験をこれまで以上に手軽に自分好みにできるようになりました。このヒーターは、スチーマーと、Taurus Dの革新である「2つ以上の発熱体オプション」を組み合わせています。</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Taurus D Combiなら、従来型のサウナ体験も、スチームサウナ体験も楽しめます。香り用の受け皿が付いているため、お気に入りのエッセンシャルオイルや香りを含んだ、心身を癒やすスチームでリフレッシュできます。</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">ヒーターの使い方は、これ以上ないほど手軽です。ほかのコンビヒーターと同様に、水位が低下すると知らせる水位検知システムを備えています。ヒーターの自動給水機能も有効にでき、利便性を最大限に高められます。</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW\n<br>ヒーター</th>\n  <th>kW タンク</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th>安全距離 A |<br>B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TRDC-90/120NS-G-P</td>\n  <td>9.0 | 12.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 18</td>\n  <td>595 × 555 × 690</td>\n  <td>50</td>\n  <td>Separate</td>\n  <td>1210 | 5/50 | 1900</td>\n</tr>\n<tr>\n  <td>TRDC-150/180NS-G-P</td>\n  <td>15.0 | 18.0</td>\n  <td>1 × 2.0</td>\n  <td>13 – 29</td>\n  <td>595 × 705 × 690</td>\n  <td>65 – 75</td>\n  <td>Separate</td>\n  <td>1410 | 5/50 | 2100</td>\n</tr>\n<tr>\n  <td>TRDC-180/210/240NS-G-P</td>\n  <td>18.0 | 21.0 | 24.0</td>\n  <td>2 × 2.0</td>\n  <td>18 – 42</td>\n  <td>595 × 970 × 690</td>\n  <td>90 – 100</td>\n  <td>Separate</td>\n  <td>1410 | 5/50 | 2100</td>\n</tr>\n<tr>\n  <td>TRDC-270/300/330/360NS-G-P</td>\n  <td>27.0 | 30.0 | 33.0 | 36.0</td>\n  <td>3 × 2.0</td>\n  <td>32 – 75</td>\n  <td>595 × 1385 × 690</td>\n  <td>150</td>\n  <td>Separate</td>\n  <td>1410 | 5/50 | 2100</td>\n</tr></tbody></table>",
+    "type": "Taurus Combi",
+    "features": [
+      "出力範囲：9.0 – 36.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "ブラックスチール製ケース",
+      "過熱時の自動遮断機能",
+      "内蔵アロマカップ",
+      "高さ調整可能な脚",
+      "オプションのヒーターガード",
+      "水タンクに自動で給水するオプションの自動補給機能"
+    ]
+  }
+}

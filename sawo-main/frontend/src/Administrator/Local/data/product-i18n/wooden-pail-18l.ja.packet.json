@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-18l",
+  "productId": "08e256d2-908c-4032-81ad-0fec805c3735",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (381-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (381-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (381-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木製バケツ 18L",
+    "short_description": "SAWO 木製バケツ 18Lは、サウナストーンにかける水を入れておくための、容量18Lの木製バケツです。",
+    "description": null,
+    "type": "バケツ",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (381-D)",
+        "name": "シダー (381-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (381-A)",
+        "name": "アスペン (381-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (381-H)",
+        "name": "ヘムロック (381-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

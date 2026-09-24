@@ -1,0 +1,17 @@
+{
+  "slug": "infrared-2-0-built-in-control",
+  "productId": "5dcd7d2c-a621-47e1-b9aa-1bf3242bb550",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Infrared 2.0 ビルトインコントロール",
+    "short_description": "Infrared 2.0 ビルトインコントロールは、サウナに直接組み込まれ、赤外線セッションをシームレスに操作できます。",
+    "description": null,
+    "type": "赤外線コントローラー",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "slug": "infrared-2-0-power-controller",
+  "productId": "5c2398a8-ecc5-4c24-8aaf-7032d2759e18",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Infrared 2.0 パワーコントローラー",
+    "short_description": "Infrared 2.0 パワーコントローラーは、赤外線ヒーターパネルを、信頼性が高く精密な電力供給で制御します。",
+    "description": null,
+    "type": "赤外線コントローラー",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ]
+  }
+}

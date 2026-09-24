@@ -1,0 +1,32 @@
+{
+  "slug": "siro-sauna-bench-529d",
+  "productId": "7d65757f-bc60-4db2-af9c-56a739c90182",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (529-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Siro サウナベンチ",
+    "short_description": "SAWO Siro サウナベンチは、Siroベンチシリーズの、寸法280 × 850 × 420mmの無垢材のサウナベンチで、サウナ内で快適に座れる耐熱仕様です。",
+    "description": null,
+    "type": "ベンチ",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (529-D)",
+        "name": "シダー (529-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

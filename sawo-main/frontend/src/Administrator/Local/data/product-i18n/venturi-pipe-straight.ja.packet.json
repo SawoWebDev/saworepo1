@@ -1,0 +1,20 @@
+{
+  "slug": "venturi-pipe-straight",
+  "productId": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ベンチュリーパイプ ストレート",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">ベンチュリーパイプ</b><span style=\"text-align: justify;\">は、管の内側に空気を取り込み、内部の熱せられた空気の分子を冷やして温度を下げます。この仕組みにより、よりやわらかで濃密なスチームの雲が生まれ、スチームパイプから出るシューという音を防ぎます。</span>",
+    "description": null,
+    "type": "スチームアクセサリー",
+    "features": [
+      "よりマイルドでやわらかなスチームを生成",
+      "ふんわりとしたスチームの雲をより多く発生",
+      "シューという音を防止",
+      "スチームを均一に拡散させるスチームヘッド付き",
+      "厚手のステンレス製"
+    ]
+  }
+}

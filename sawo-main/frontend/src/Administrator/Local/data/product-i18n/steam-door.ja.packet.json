@@ -1,0 +1,28 @@
+{
+  "slug": "steam-door",
+  "productId": "efc9e723-8d96-4d74-930c-85cadc12a79b",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "スチームドア",
+    "short_description": "<p style=\"text-align: justify;\"><strong><b>スチームドア</b></strong>は、スチームを閉じ込め、過剰な湿気が逃げるのを防ぎ、心身を深くよみがえらせるスチームルーム体験を実現します。</p><p style=\"text-align: justify;\">当社のスチームドアは、ゴム製ガスケットで密閉され、マグネットロック、ステンレス製ドアハンドルセット、結露を床排水口へ導くウォーターキャッチャーを備えています。フレームは錆びにくいアルミ製で、強化ガラスのドアは高温に耐えるよう設計されています。取り付けは、シリコンシーラントまたはネジのどちらでも簡単に行えます。</p><p style=\"text-align: justify;\">SAWOのスチームドアは、シリコンまたはネジで簡単に取り付けられます。</p>",
+    "description": null,
+    "type": "スチームアクセサリー",
+    "features": [
+      "アルミ製スチームドアの種類：",
+      "品番：ST-746 | サイズ：790 × 1890mm | フレーム：60mm",
+      "品番：ST-749 | サイズ：900 × 2100mm | フレーム：71mm",
+      "アルミ製ドア枠",
+      "8mm厚のフロスト強化ガラスドア",
+      "ステンレス製ドアハンドルセット",
+      "強力ヒンジ3個",
+      "マグネットドアロック",
+      "密閉ゴムガスケット",
+      "プラスチック製ウォーターキャッチャー",
+      "取り付けを容易にするくさび",
+      "予備のネジとゴムキャップ",
+      "シリコンシーラント、六角レンチ、ネジガイド付属"
+    ]
+  }
+}

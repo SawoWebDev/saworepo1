@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-corner-nb",
+  "productId": "34ca7aa4-28a9-48f5-8810-f6342a016c76",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 コーナー NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">SAWO30 コーナー</strong><span style=\"text-align: justify;\">は、スペースが貴重なサウナのレイアウト向けに設計されています。すべてのタワーヒーターと同様に、その高さにより、下から上まで均等に熱が行き渡ります。SAWO30 コーナーには取り外し可能なストーンスペーサーも付属しており、2通りのセットアップをお選びいただけます。(1) スペーサーあり：より速い加熱、省エネ、より熱いサウナ。(2) スペーサーなし：より多くのストーンを収容して、より多くのスチーム、よりやわらかな温度、業務用設備での省エネを実現。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(KG) ストーンスペーサーなし</th>\n  <th>ストーン<br>(KG) ストーンスペーサー付き</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NB-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NB-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NB-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>415 × 415 × 1380</td>\n  <td>105</td>\n  <td>80</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "SAWO30 コーナー",
+    "features": [
+      "出力範囲：4.5 – 9.0 kW",
+      "対応コントローラー：内蔵 (NB)",
+      "ステンレス製ケース",
+      "ストーンを入れやすくする、取り外し可能な上半分",
+      "取り外し可能なストーンスペーサー",
+      "オプションのヒーターガード",
+      "オプションのカラー"
+    ]
+  }
+}

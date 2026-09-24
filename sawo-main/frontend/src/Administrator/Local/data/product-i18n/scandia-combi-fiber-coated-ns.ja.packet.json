@@ -1,0 +1,20 @@
+{
+  "slug": "scandia-combi-fiber-coated-ns",
+  "productId": "1daf49dc-68d7-49ec-8041-65bbcc142133",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia Combi ファイバーコート NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Scandia Combi ファイバーコート</strong><span style=\"text-align: justify;\"> ヒーターは、追加のコンビ用水タンクにより湿度を高め、サウナセッションにスチームをもたらします。内蔵のアロマカップにエッセンシャルオイルや香りを加えることで、スチームに香りを付け、スパのような体験を楽しめます。触れても熱くないファイバーコーティングを施したこのクラシックヒーターの進化版は、ヒーターのケースにうっかり触れてしまった際のやけどのリスクも最小限に抑えます。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW\n<br>ヒーター</th>\n  <th>kW\n<br>タンク</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"4\">最小安全距離<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCAC-60NS-P-F-C</td>\n  <td>6.0</td>\n  <td>1 × 1.0</td>\n  <td>5 – 9</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-80NS-P-F-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-90NS-P-F-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "出力範囲：6.0 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "1kWまたは2kWスチームジェネレーター付きの別置き水タンク",
+      "触れても熱くないファイバーコーティング",
+      "内蔵アロマカップ"
+    ]
+  }
+}

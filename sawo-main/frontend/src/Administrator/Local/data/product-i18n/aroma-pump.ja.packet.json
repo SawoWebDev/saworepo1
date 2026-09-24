@@ -1,0 +1,13 @@
+{
+  "slug": "aroma-pump",
+  "productId": "3edc6a58-f8cf-45dd-961f-1392046e862c",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "アロマポンプ",
+    "short_description": "<div><p><br></p></div><div style=\"text-align: justify;\"><p>スチームルームでの体験を、 <strong><b>アロマポンプ</b></strong>でさらに高めましょう。スチームジェネレーターに接続すると、お好みの香りが室内に広がり、心身の健やかさを支えるものとして数千年にわたり実践されてきたアロマテラピーの恵みを、毎回のセッションにもたらします。先進のモーターが香りを均一に拡散させ、スチームコントローラーとの連携で調整も簡単です。丈夫で精密なアロマポンプは、長く続く性能と利便性を提供します。</p><p>SAWOのアロマポンプは、先進のモーターにより、アロマの香りを非常に均一に拡散します。スチームコントローラーで簡単に調整でき、ポンプ自体も高精度で丈夫です。</p></div>",
+    "description": null,
+    "type": "スチームアクセサリー"
+  }
+}

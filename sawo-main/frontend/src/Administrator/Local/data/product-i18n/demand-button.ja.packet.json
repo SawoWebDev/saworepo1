@@ -1,0 +1,19 @@
+{
+  "slug": "demand-button",
+  "productId": "32128110-1359-4cc0-af9a-162f9afc6777",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "デマンドボタン",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">デマンドボタン</b><span style=\"text-align: justify;\">を押すとすぐにスチームが発生するため、自分好みのウェルネス体験をじっくりと楽しめます。</span>",
+    "description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">デマンドボタン</b><span style=\"text-align: justify;\">を押すとすぐにスチームが発生するため、自分好みのウェルネス体験をじっくりと楽しめます。</span>",
+    "type": "スチームアクセサリー",
+    "features": [
+      "ボタンを押すだけで、効率的なエネルギー使用と電気代の節約",
+      "スチームをすばやく利用でき、使いやすさが向上",
+      "使いやすいデザイン：手が届きやすい位置に配置されたボタン",
+      "ボタン操作でスチームジェネレーターが作動し、スチームを素早く発生"
+    ]
+  }
+}

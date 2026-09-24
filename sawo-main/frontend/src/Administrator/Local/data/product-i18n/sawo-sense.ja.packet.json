@@ -1,0 +1,13 @@
+{
+  "slug": "sawo-sense",
+  "productId": "f42926da-8a5f-4e67-a095-7d165da3c1b4",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO Sense",
+    "short_description": "SAWO Senseは、洗練されたタッチスクリーンインターフェースで、スマートサウナコントロールを次のレベルへと引き上げます。直感的なディスプレイと、内蔵Wi-Fi接続によるSAWOアプリの両方で、温度、照明、その他のサウナ機能を手軽に管理できます。リアルタイムのモニタリングとリモートアクセスにより、ユーザーはいつでもどこでも、サウナセッションをカスタマイズし、コントロールできます。最大9.0kWまでのNi2およびNSヒーター向けに設計されており、コンタクターユニットで18.0kWまで拡張できるため、あらゆる広さのサウナに柔軟に対応します。",
+    "description": null,
+    "type": "近日発売"
+  }
+}

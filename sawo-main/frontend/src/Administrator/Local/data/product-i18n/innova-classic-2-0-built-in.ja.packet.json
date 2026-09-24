@@ -1,0 +1,32 @@
+{
+  "slug": "innova-classic-2-0-built-in",
+  "productId": "19063a1d-6d6a-463d-a24c-ac50b43d18e6",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic 2.0 ビルトイン",
+    "short_description": "<p style=\"text-align: justify;\">人気の <b>Innova 2.0 </b>に、ビルトインタイプが登場しました。ビルトインタイプは、コントロールパネルとパワーコントローラーを1つにまとめています。住宅用サウナや、コントロールを別室に設置する業務用サウナに便利なソリューションです。\n\n</p><p style=\"text-align: justify;\">Innova 2.0 ビルトインなら、サウナ内の温度、湿度、換気、明るさを簡単に調整できます。</p>\n<span style=\"text-align: justify;\"><b>すべてのNSヒーターに対応</b></span>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">技術仕様</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>15kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic 2.0 Built-In (INC-B-V2)</td><td>W: 320 mm x H: 270 mm x D: 78 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "スマートコントロールが、設定温度に達すると加熱を自動的にオフにします",
+      "15kWを超えるヒーターには、INP-Sコンタクターユニットを追加してください",
+      "スペースと配線オプションを増やし、設置が簡単になった新しいケーシングデザイン",
+      "ドアセンサーに対応",
+      "スケジュール加熱のためのプレランタイマー",
+      "オプションのファン、調光、コンビ機能",
+      "コンビヒーターでは、オプションのベンチセンサー (INN-BTEMP) と湿度センサー (INN-HUM) との併用が理想的です",
+      "Innovaパワーコントローラー、クラシックユーザーインターフェース、5m RJ12ケーブル、シナノキ製ホルダー付き温度センサー、5mシリコン配線が付属"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

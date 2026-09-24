@@ -1,0 +1,13 @@
+{
+  "slug": "innova-saunova-2-0-spare-rj12-cables",
+  "productId": "8a27b22f-0506-478c-a207-2484c68cfdfb",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova ＆ Saunova 2.0 予備RJ12ケーブル",
+    "short_description": "Innova および Saunova 2.0 コントローラーとシームレスに使えるよう設計された、スナップ式RJ12コネクター付きの、丈夫で延長可能な低電圧ケーブルです。信頼性の高い信号伝送と簡単な設置に最適です。\n\n<span style=\"text-align: justify;\"><b>Innova および Saunova 2.0 コントローラー用の、スナップ式RJコネクター付き延長可能な低電圧ケーブルです。</b></span>",
+    "description": null,
+    "type": "交換部品"
+  }
+}

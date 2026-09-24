@@ -1,0 +1,68 @@
+{
+  "slug": "wave-wooden-backrest",
+  "productId": "5f84e59a-2642-45eb-b899-86614808bdbb",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (506-2-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (506-2-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (506-2-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (506-2-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ウェーブ木製バックレスト",
+    "short_description": "SAWO ウェーブ木製バックレストは、サウナのセッション中に首と背中をサポートする、寸法390 × 845mmの木製サウナ用バックレストです。",
+    "description": null,
+    "type": "ヘッドレスト＆バックレスト",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (506-2-D)",
+        "name": "シダー (506-2-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (506-2-A)",
+        "name": "アスペン (506-2-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (506-2-H)",
+        "name": "ヘムロック (506-2-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (506-2-BL)",
+        "name": "ブラック (506-2-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

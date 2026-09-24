@@ -1,0 +1,22 @@
+{
+  "slug": "savonia-combi-ns",
+  "productId": "745f4b48-fcfe-4e0f-9646-aba34b4891af",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Savonia Combi NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Savonia Combi</strong><span style=\"text-align: justify;\">は、Savoniaヒーターの高性能と、より多くのスチームと湿度をもたらす水タンクという、両方の良さを兼ね備えています。Savonia Combiは、触れても熱くないファイバーコーティング仕様と、水タンクの自動補給機能をお選びいただけます。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW\n<br>ヒーター</th>\n  <th>kW\n<br>タンク</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"4\">最小安全距離<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SAVC-90NS-Z</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>510 × 420 × 655</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>110</td>\n  <td>50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SAVC-105NS-Z</td>\n  <td>10.5</td>\n  <td>1 × 2.0</td>\n  <td>9 – 15</td>\n  <td>510 × 420 × 655</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>60</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SAVC-120NS-Z</td>\n  <td>12.0</td>\n  <td>1 × 2.0</td>\n  <td>10 – 18</td>\n  <td>510 × 420 × 655</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SAVC-150NS-Z</td>\n  <td>15.0</td>\n  <td>2 × 2.0</td>\n  <td>13 – 23</td>\n  <td>715 × 420 × 655</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SAVC-180NS-Z</td>\n  <td>18.0</td>\n  <td>2 × 2.0</td>\n  <td>17 – 29</td>\n  <td>715 × 420 × 655</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Savonia",
+    "features": [
+      "出力範囲：9.0 – 18.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "ステンレス製ケース",
+      "内蔵アロマカップ",
+      "1.0kWまたは2.0kWスチームジェネレーター付きの別置き水タンク",
+      "高さ調整可能な脚",
+      "水タンクに自動で給水するオプションの自動補給機能"
+    ]
+  }
+}

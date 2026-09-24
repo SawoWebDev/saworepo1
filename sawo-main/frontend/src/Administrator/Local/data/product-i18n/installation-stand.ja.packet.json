@@ -1,0 +1,20 @@
+{
+  "slug": "installation-stand",
+  "productId": "2f48041e-6fcb-4609-9f21-a62352a3f127",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "インストールスタンド",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">インストールスタンド</b><span style=\"text-align: justify;\">は、スチームジェネレーターのための頑丈で耐久性のある土台となり、安全で効率的な運転を支えます。</span>",
+    "description": null,
+    "type": "スチームアクセサリー",
+    "features": [
+      "STWスチームジェネレーターの設置をより簡単に",
+      "さまざまなスチームジェネレーターとユーザーの好みに合わせて高さを調整可能",
+      "さまざまな用途に対応し、多様なスチームジェネレーターのモデルに適合",
+      "さまざまな環境で設置しやすい設計",
+      "さまざまな用途に向けて、多様なスチームジェネレーターのモデルに対応"
+    ]
+  }
+}

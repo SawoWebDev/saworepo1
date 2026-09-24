@@ -1,0 +1,22 @@
+{
+  "slug": "aries-round-nb",
+  "productId": "e5ed7b73-5325-4303-8612-cd060cfbfb5d",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries ラウンド NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Aries ラウンド</strong><span style=\"text-align: justify;\">は、すべてのタワータイプヒーターに共通するミニマルなエレガンスを備えています。背が高く省スペースで、熱を均等に行き渡らせ、サウナの中央やベンチへの埋め込み設置に最適です。内蔵のストーンスペーサーにより、サウナストーンを効率よく素早く加熱でき、発熱体の寿命も長くなります。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター\n<br>型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NB-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries ラウンド",
+    "features": [
+      "出力範囲：4.5 – 9.0 kW",
+      "対応コントローラー：内蔵 (NB)",
+      "内蔵ストーンスペーサー",
+      "高さ調整可能な脚",
+      "ステンレス製ケース",
+      "オプションのヒーターガード",
+      "オプションのカラー"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "nordex-s-black-ns",
+  "productId": "2e691db6-5da4-4ea0-92b1-27d2a99f9cfa",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex S ブラック NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Nordex S</strong><span style=\"text-align: justify;\">は、Nordex フロアヒーターをアップデートしたモデルで、よりスリムなデザインにより、さまざまなサウナのレイアウトでの設置の選択肢が広がりました。Nordex Sは、家庭用にも業務用にも適しています。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>幅 奥行き 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"4\">最小安全距離<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNS-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNS-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNS-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>270 × 395 × 710</td>\n  <td>18 – 25</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "出力範囲：6.0 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "すっきりとしたミニマルなデザイン",
+      "最小限のエネルギーで効率的に加熱",
+      "過熱防止機能",
+      "安全のための自動遮断"
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "stn-s-steam-generator",
+  "productId": "65d27a90-bd93-44e6-83aa-4fcd0e97a9e6",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "STN-S スチームジェネレーター",
+    "short_description": "<p style=\"text-align: justify;\">パワーと性能のために作られた、 <strong>STN-S スチームジェネレーター</strong>は、より柔軟な設置オプションを備えています。電装部が別置きになっているため、ジェネレーターを電装部とは別の場所に設置できます。カセット式の発熱体により、タンクの清掃とメンテナンスが簡単になり、アロマ、ファン、調光のコントロールで、すべてのスチームセッションを自分好みにカスタマイズできます。</p><p style=\"text-align: justify;\">追加のスチームは、ボタン一つで。 <strong>デマンドボタン</strong> 機能は、スチームルームの内側にも外側にも設置できます。エラーコードがコントロールに表示されるため、素早くトラブルシューティングできます。最大5台を連結でき、最大出力 <strong>75.0 kW</strong>を実現し、すべてを1つのSAWOコントロールで管理できます。</p>",
+    "description": null,
+    "type": "スチームジェネレーター",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "発熱体2本",
+        "description": null,
+        "features": [
+          "出力範囲：3.0 – 5.0 kW",
+          "スチーム出力：最大6.7kg/時",
+          "配管と電気ケーブルは、左右どちらの側にも設置可能",
+          "過圧バルブ用の専用パイプ",
+          "オートドレイン",
+          "スチームヘッド付属",
+          "メンテナンスしやすいカセット式発熱体構成",
+          "¾インチのスチームパイプ",
+          "ステンレスタッチ",
+          "対応コントローラー：STP 2.0 ユーザーインターフェース"
+        ],
+        "spec_table_headers": [
+          "スチームジェネレーター型番",
+          "kW",
+          "スチームルーム (m²)",
+          "サイズ (mm) 長|幅|高",
+          "重量 (kg)",
+          "制御方式"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "発熱体3本",
+        "description": null,
+        "features": [
+          "出力範囲：4.5 – 7.5 kW",
+          "スチーム出力：最大7.5kg/時",
+          "配管と電気ケーブルは、左右どちらの側にも設置可能",
+          "過圧バルブ用の専用パイプ",
+          "オートドレイン",
+          "スチームヘッド付属",
+          "メンテナンスしやすいカセット式発熱体構成",
+          "¾インチのスチームパイプ",
+          "ステンレスタッチ",
+          "対応コントローラー：STP 2.0 ユーザーインターフェース"
+        ],
+        "spec_table_headers": [
+          "スチームジェネレーター型番",
+          "kW",
+          "スチームルーム (m²)",
+          "サイズ (mm) 長|幅|高",
+          "重量 (kg)",
+          "制御方式"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "発熱体6本",
+        "description": null,
+        "features": [
+          "出力範囲：9.0 – 15.0 kW",
+          "スチーム出力：最大20kg/時",
+          "配管と電気ケーブルは、左右どちらの側にも設置可能",
+          "過圧バルブ用の専用パイプ",
+          "オートドレイン",
+          "スチームヘッド2個付属",
+          "メンテナンスしやすいカセット式発熱体構成",
+          "¾インチのスチームパイプ",
+          "ステンレスタッチ",
+          "対応コントローラー：STP 2.0 ユーザーインターフェース"
+        ],
+        "spec_table_headers": [
+          "スチームジェネレーター型番",
+          "kW",
+          "スチームルーム (m²)",
+          "サイズ (mm) 長|幅|高",
+          "重量 (kg)",
+          "制御方式"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "エレクトロニクスコンパートメント",
+        "note": "（STN-Sモデルのみに付属）"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "オートドレイン",
+        "note": "（STN-S、STN-W、STNモデルに付属）"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "スチームヘッド",
+        "note": "（9kW以上のモデルには、2個のヘッドが付属します）"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "アロマ、ファン、調光機能",
+        "note": "（STNモデル用のオプション機能）"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7.5m RJ12ケーブル",
+        "note": "7.5m RJ10ケーブル"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "温度センサー（付属品：",
+        "note": "ワイヤーとセンサーホルダー）"
+      }
+    ]
+  }
+}

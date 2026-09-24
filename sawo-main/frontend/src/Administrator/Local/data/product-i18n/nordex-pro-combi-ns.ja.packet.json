@@ -1,0 +1,20 @@
+{
+  "slug": "nordex-pro-combi-ns",
+  "productId": "524d4f69-8864-4b00-a174-2e0c2179f89f",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Pro Combi NS",
+    "short_description": "<p style=\"text-align: justify;\">Nordexの伝統を受け継ぐ、 <strong>Nordex Pro Combi</strong>は、効率的な加熱にスチームの心地よさを加えた、進化したデザインを採用しています。内蔵の水タンクがやさしい湿度を届け、ストーンと発熱体を分離することで耐久性も高まっています。</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Nordex Pro Combiの引き出し式カセットトレイでメンテナンスが簡単になり、広いサウナルームでは、もう1台と接続して出力を高めることもできます。</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW\n<br>ヒーター</th>\n  <th>kW\n<br>タンク</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"4\">最小安全距離<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-PRO-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex Pro",
+    "features": [
+      "出力範囲：6.0 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "内蔵アロマカップ",
+      "高さ調整可能な脚",
+      "0.8kWスチームジェネレーター付きの別置き水タンク"
+    ]
+  }
+}

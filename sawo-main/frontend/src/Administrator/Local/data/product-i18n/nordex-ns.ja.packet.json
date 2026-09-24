@@ -1,0 +1,19 @@
+{
+  "slug": "nordex-ns",
+  "productId": "e8372b04-0cd3-4490-a09d-4ca7457132e0",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex NS",
+    "short_description": "すべてのNordexモデルと同様に、このヒーターはミニマルでモダンなデザインです。設定や機能は、SaunovaまたはInnovaの別置きコントロールで簡単にカスタマイズできます。壁掛け式のNordex NSは、スペース効率に優れ、どんなサウナルームもより快適にします。",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>KW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg)</th>\n  <th>制御方式</th>\n  <th colspan=\"4\">最小安全距離<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45NS-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n<tr>\n  <td>NRN-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "出力範囲：4.5 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "すっきりとしたミニマルなデザイン",
+      "ステンレス製ケース"
+    ]
+  }
+}

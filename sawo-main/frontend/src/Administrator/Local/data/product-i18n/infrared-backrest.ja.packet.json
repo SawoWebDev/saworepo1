@@ -1,0 +1,17 @@
+{
+  "slug": "infrared-backrest",
+  "productId": "b3f6e11d-1caf-4b7c-8492-3cc8c79054f8",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "赤外線バックレスト",
+    "short_description": "やさしく放射する熱を背中に直接届け、筋肉のこりをピンポイントで和らげる、人間工学に基づいた赤外線バックレストです。",
+    "description": null,
+    "type": "赤外線アクセサリー",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ]
+  }
+}

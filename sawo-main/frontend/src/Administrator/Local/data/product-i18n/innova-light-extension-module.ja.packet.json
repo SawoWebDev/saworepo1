@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova ライト拡張モジュール",
+    "short_description": "Saunova 2.0 コンタクターユニットを Saunova 2.0 パワーコントローラーと接続し、9kWを超えるヒーターでお使いください。一新されたモダンなケーシングは、より簡単で素早い設置のために、スペースを拡大しています。背面を含む4面にひずみ防止機構を備えた柔軟な配線オプションにより、配線を完全に隠せます。\n\n<span style=\"text-align: justify;\"><b>9kWを超えるNSヒーターでお使いください。Saunovaパワーコントローラーと接続してください</b></span>",
+    "description": null,
+    "type": "交換部品",
+    "features": [
+      "Saunovaコンタクターユニットと1m RJ12ケーブルが付属",
+      "スペースと配線オプションを追加し、設置が簡単になった新しいケーシングデザイン"
+    ]
+  }
+}

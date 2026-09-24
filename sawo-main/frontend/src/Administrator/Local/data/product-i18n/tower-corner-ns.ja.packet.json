@@ -1,0 +1,23 @@
+{
+  "slug": "tower-corner-ns",
+  "productId": "8cb8bfc8-b0fd-41fb-bfe5-7b296bd23dcc",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Tower コーナー NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Tower コーナー</strong><span style=\"text-align: justify;\"> ヒーターは、狭いコーナーにすっきり収まるよう特別に設計されています。熱の分散やエレガントでミニマルな美しさの印象を損なうことなく、サウナのレイアウトを最大限に生かします。壊れたストーンを簡単に交換できる可動式のスチールリングを備え、取り外し可能なストーンスペーサーにより、2通りのセットアップをお選びいただけます。(1) スペーサーあり：より速い加熱、省エネ、より熱いサウナ。(2) スペーサーなし：より多くのストーンを収容して、より多くのスチーム、よりやわらかな温度、業務用設備での省エネを実現。</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ヒーター型番</th>\n  <th>kW</th>\n  <th>サウナルーム<br>最小 (m³) 最大</th>\n  <th>ヒーターサイズ (mm)<br>長さ 幅 高さ</th>\n  <th>ストーン<br>(kg) ストーンスペーサーなし</th>\n  <th>ストーン<br>(kg) ストーンスペーサー付き</th>\n  <th>制御方式</th>\n  <th colspan=\"2\">最小安全距離<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH3-35NS-CNR-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-45NS-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH4-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>355 × 355 × 1380</td>\n  <td>105</td>\n  <td>70</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-80NS-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>355 × 355 × 1380</td>\n  <td>105</td>\n  <td>70</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>355 × 355 × 1380</td>\n  <td>105</td>\n  <td>70</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-80NS-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>415 × 415 × 1380</td>\n  <td>160</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>415 × 415 × 1380</td>\n  <td>160</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-105NS-CNR-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>415 × 415 × 1380</td>\n  <td>160</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-120NS-CNR-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>415 × 415 × 1380</td>\n  <td>160</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Tower コーナー",
+    "features": [
+      "出力範囲：3.0 – 9.0 kW",
+      "対応コントローラー：Saunova/Innova (NS)",
+      "ステンレス製ケース",
+      "壊れたストーンを交換できる可動式スチールリング",
+      "取り外し可能なストーンスペーサー",
+      "高さ調整可能な脚",
+      "オプションのヒーターガード",
+      "オプションのカラー"
+    ]
+  }
+}

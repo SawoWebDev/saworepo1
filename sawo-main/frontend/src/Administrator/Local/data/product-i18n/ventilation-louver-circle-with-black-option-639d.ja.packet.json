@@ -1,0 +1,68 @@
+{
+  "slug": "ventilation-louver-circle-with-black-option-639d",
+  "productId": "d57ae750-48b3-44b0-9d81-f20da166d420",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (639-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (639-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (639-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (639-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "換気ルーバー 円形（ブラックオプションあり）",
+    "short_description": "SAWO 換気ルーバー 円形（ブラックオプションあり）は、サウナルームの空気の出入りを調整するための、Ø170mm、ダクト穴125mmの換気ルーバーで、ブラック仕上げもお選びいただけます。",
+    "description": null,
+    "type": "換気パーツ＆その他",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (639-D)",
+        "name": "シダー (639-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (639-A)",
+        "name": "アスペン (639-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (639-H)",
+        "name": "ヘムロック (639-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (639-BL)",
+        "name": "ブラック (639-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

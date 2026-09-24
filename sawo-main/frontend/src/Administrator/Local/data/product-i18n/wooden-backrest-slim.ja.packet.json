@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-backrest-slim",
+  "productId": "9a60d1b7-6106-44c5-b1f4-4c29c5101706",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (514-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (514-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (514-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木製バックレスト スリム",
+    "short_description": "SAWO 木製バックレスト スリムは、サウナのセッション中に首と背中をサポートする、寸法190 × 480mmの木製サウナ用バックレストです。",
+    "description": null,
+    "type": "ヘッドレスト＆バックレスト",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (514-D)",
+        "name": "シダー (514-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (514-A)",
+        "name": "アスペン (514-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (514-H)",
+        "name": "ヘムロック (514-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

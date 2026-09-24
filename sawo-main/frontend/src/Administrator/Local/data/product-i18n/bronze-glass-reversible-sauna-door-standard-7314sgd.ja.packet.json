@@ -1,0 +1,56 @@
+{
+  "slug": "bronze-glass-reversible-sauna-door-standard-7314sgd",
+  "productId": "3fb46ffa-cced-4ad3-9690-3ea0e6e26e90",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (731-4SGD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (731-4SGA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (731-4SGH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ブロンズガラス リバーシブルサウナドア スタンダード",
+    "short_description": "SAWO ブロンズガラス リバーシブルサウナドア スタンダードは、開口700 × 1800mm、枠790 × 1890mmのブロンズガラス製サウナドアで、左開き・右開きのどちらにも取り付けられます。",
+    "description": null,
+    "type": "ドア＆ハンドル",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (731-4SGD)",
+        "name": "シダー (731-4SGD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (731-4SGA)",
+        "name": "アスペン (731-4SGA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (731-4SGH)",
+        "name": "ヘムロック (731-4SGH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
