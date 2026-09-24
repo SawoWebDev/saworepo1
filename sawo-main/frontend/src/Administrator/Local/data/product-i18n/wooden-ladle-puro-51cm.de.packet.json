@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-ladle-puro-51cm",
+  "productId": "5ee2ff74-66cc-4b37-90ae-0a031be62e29",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (459-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (459-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (459-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Holzkelle Puro 51 cm",
+    "short_description": "Die SAWO Holzkelle Puro 51 cm ist eine Saunakelle aus Holz mit einer Länge von 510 mm zum Übergießen der erhitzten Saunasteine mit Wasser (löyly).",
+    "description": null,
+    "type": "Kellen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (459-D)",
+        "name": "Zeder (459-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (459-H)",
+        "name": "Hemlock (459-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (459-BL)",
+        "name": "Schwarz (459-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

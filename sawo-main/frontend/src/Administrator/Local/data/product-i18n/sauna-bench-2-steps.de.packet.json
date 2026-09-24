@@ -1,0 +1,32 @@
+{
+  "slug": "sauna-bench-2-steps",
+  "productId": "04d7d637-965d-47d6-b9af-96eaab1e52a1",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (524-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Saunabank 2 Stufen",
+    "short_description": "Die SAWO Saunabank 2 Stufen ist eine Saunabank aus Massivholz mit zwei abgestuften Tritten für einen leichteren Zugang zur oberen Bank, mit den Maßen 760 × 534 × 562 mm, gefertigt für bequemes, hitzebeständiges Sitzen in der Sauna.",
+    "description": null,
+    "type": "Bänke",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (524-D)",
+        "name": "Zeder (524-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

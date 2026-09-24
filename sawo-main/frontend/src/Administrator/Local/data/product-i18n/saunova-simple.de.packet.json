@@ -1,0 +1,18 @@
+{
+  "slug": "saunova-simple",
+  "productId": "cd47764f-9156-400f-af7d-b3e1f3f48d1c",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova Einfach",
+    "short_description": "Erleben Sie unkomplizierten Saunabetrieb mit der Saunova Einfach (SAU-UI-S). Für alle, die Einfachheit schätzen: Mit dieser kompakten Steuerung schalten Sie Ihren Saunaofen ganz einfach ein und aus und können sich voll auf die Entspannung konzentrieren.\n\n<b>Geeignet für alle NS-Öfen bis 9 kW. Öfen über 9 kW benötigen eine separate Saunova Schützeinheit.</b>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNISCHE DATEN</th></tr></thead>\n  <tbody>\n  <tr><td>Temperaturbereich</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Sitzungsdauer</td><td>Standard 6 Std., max. 24 Std.</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUKTABMESSUNGEN</b></td></tr>\n  <tr><td>Saunova Einfach (SAU-UI-S)</td><td>H: 147 mm x W: 104 mm x D: 147 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>LEISTUNGSERWEITERUNGSEINHEIT</b></td></tr>\n  <tr><td>Frequenz</td><td>50/60Hz</td></tr>\n  <tr><td>Schaltleistung pro Phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>FÜHLER</b></td></tr>\n  <tr><td>Bank-Temperaturfühler</td><td>kompatibel (optional)</td></tr>\n  <tr><td>Bank-Kombifühler für Temperatur und Feuchte</td><td>kompatibel (optional)</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Abmessungen: (B) 104 x (H) 147 x (T) 137 mm³",
+      "Ab 9 kW ist eine Schützeinheit erforderlich",
+      "Für alle, die eine einfache Saunasteuerung suchen."
+    ]
+  }
+}

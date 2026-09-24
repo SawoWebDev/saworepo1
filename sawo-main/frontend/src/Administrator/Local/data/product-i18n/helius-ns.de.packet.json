@@ -1,0 +1,19 @@
+{
+  "slug": "helius-ns",
+  "productId": "15024010-24cd-4cf2-ab01-7e4281cc5603",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius NS",
+    "short_description": "<p style=\"text-align: justify;\">Der <strong>Helius</strong> bietet dank seines schlanken Profils mehr Flexibilität bei der Platzierung. Dieser „versteckte“ Ofen kann mithilfe einer Wandtrennung hinter den Bänken installiert werden und ist so praktisch unsichtbar. Sobald Wasser in das Wasserbecken gegossen wird – das einzige Element, das sichtbar bleibt –, fließt es über einen Schlauch in den Ofen und heizt den Raum auf. Dank seines fortschrittlichen Luftstromdesigns benötigt der Helius weniger Steine, was zu besserer Luftzirkulation und höherer Heizeffizienz führt.</p><p style=\"text-align: justify;\">Der Helius benötigt außerdem einen deutlich kürzeren als den üblichen Sicherheitsabstand (min. 5 mm). Mit der separat erhältlichen Helius-Ofenhaube kann der Sicherheitsabstand nahezu minimal gehalten werden.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofen\n<br>Modell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th colspan=\"2\">Steuerung</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-45NS-G-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-60NS-G-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-75NS-G-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-90NS-G-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "Leistungsbereich: 4,5 – 9,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Separates Wasserbecken aus Speckstein mit Schlauch",
+      "Optionales Ofenschutzgitter und optionale Ofenhaube"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-door-with-bronze-glass-window",
+  "productId": "fb7ae545-1463-43a8-9607-249f8aafcd4c",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (743-4SGD-R/L)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (743-4SGA-R/L)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (743-4SGH-R/L)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Holztür mit Bronzeglasfenster",
+    "short_description": "Die SAWO Holztür mit Bronzeglasfenster ist eine Saunatür aus Massivholz mit Bronzeglasfenster – 600 × 1800 mm Öffnung, 690 × 1890 mm Rahmen.",
+    "description": null,
+    "type": "Türen & Griffe",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (743-4SGD-R/L)",
+        "name": "Zeder (743-4SGD-R/L)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (743-4SGA-R/L)",
+        "name": "Espe (743-4SGA-R/L)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (743-4SGH-R/L)",
+        "name": "Hemlock (743-4SGH-R/L)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

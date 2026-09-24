@@ -1,0 +1,26 @@
+{
+  "slug": "ventilation-cover-circle-640mbr",
+  "productId": "b8ef96d6-d395-44ef-8805-c7121abd5c0b",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Belüftungsabdeckung rund",
+    "short_description": "Die SAWO Belüftungsabdeckung rund ist eine Abdeckung mit Ø160 mm zum Abschluss einer Lüftungsöffnung im Saunaraum.",
+    "description": null,
+    "type": "Belüftung & Sonstiges",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Metallic Brown (640-MBR)",
+        "name": "Metallic Braun (640-MBR)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

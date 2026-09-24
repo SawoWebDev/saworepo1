@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-cover-for-391",
+  "productId": "abe337aa-8fe8-46e9-90da-9bb9e8927c91",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (391-D-COV)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (391-A-COV)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (391-H-COV)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Holzdeckel für 391",
+    "short_description": "Der SAWO Holzdeckel für 391 ist ein Holzdeckel für den passenden SAWO Eimer 391 und schützt ihn zwischen den Saunagängen.",
+    "description": null,
+    "type": "Eimer",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (391-D-COV)",
+        "name": "Zeder (391-D-COV)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (391-A-COV)",
+        "name": "Espe (391-A-COV)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (391-H-COV)",
+        "name": "Hemlock (391-H-COV)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

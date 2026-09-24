@@ -1,0 +1,19 @@
+{
+  "slug": "steam-head-cover",
+  "productId": "90bc9fd9-8f93-4c62-b465-95a636a0819b",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Dampfkopf-Abdeckung",
+    "short_description": "<span style=\"text-align: justify;\">Unsere schützende </span><strong style=\"text-align: justify;\"><b>Dampfkopf-Abdeckung</b></strong><span style=\"text-align: justify;\"> ist darauf ausgelegt, den Dampf abzulenken und zu verteilen, für eine sichere, gleichmäßige und angenehme Dampfverteilung in Dampfbädern.</span>",
+    "description": null,
+    "type": "Dampfzubehör",
+    "features": [
+      "Lenkt den direkten Dampfstrom ab, verringert das Verbrühungsrisiko und erhöht die Sicherheit.",
+      "Verteilt den Dampf gleichmäßig für ein angenehmeres Dampferlebnis.",
+      "Minimiert heiße Wassertropfen und Dampfstrahlen am Auslass.",
+      "Schützt den Dampfauslass vor Stößen und Verschmutzung für mehr Langlebigkeit."
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "slug": "stn-steam-generator",
+  "productId": "5bf11f8d-c96b-424d-919d-e9f8ae1eac9e",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "STN Dampferzeuger",
+    "short_description": "<p style=\"text-align: justify;\">Für die Anforderungen des gewerblichen Einsatzes gebaut, vereint der <b>STN-Dampferzeuger</b> Langlebigkeit und Leistung. Seine massive Edelstahlkonstruktion minimiert Korrosion, während eine Reihe optionaler Funktionen – darunter Aroma-, Lüfter- und Dimmersteuerung – ein individuelles Dampferlebnis ermöglichen.</p><p style=\"text-align: justify;\">Ein optionaler Demand-Taster gibt bei Bedarf 30 Sekunden lang zusätzlichen Dampf ab. Die Fehlersuche ist mühelos, da Fehlercodes direkt auf dem Display der Steuerung angezeigt werden. Das System kann links- oder rechtsseitig installiert und mit bis zu fünf Einheiten in Reihe geschaltet werden, für eine maximale Leistung von<b> 75.0kW, </b>alles gesteuert über eine einzige SAWO-Oberfläche.</p>",
+    "description": null,
+    "type": "Dampferzeuger",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 Heizelemente",
+        "description": null,
+        "features": [
+          "Leistungsbereich: 3,0 – 5,0 kW",
+          "Dampfleistung: bis zu 6,7 kg/h",
+          "Kann auf beiden Seiten installiert werden",
+          "Eigene Leitung für das Überdruckventil",
+          "Automatische Entleerung",
+          "Dampfkopf im Lieferumfang",
+          "Heizelemente in Kassettenbauweise für einfache Wartung",
+          "¾-Zoll-Dampfrohr",
+          "Verfügbare Steuerungen: STP Classic, STP Classic 2.0 und STP Edelstahl-Touch"
+        ],
+        "spec_table_headers": [
+          "Dampferzeuger-Modell",
+          "kW",
+          "Dampfraum (m²)",
+          "Größe (mm) L|B|H",
+          "Gewicht (kg)",
+          "Steuerung"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 Heizelemente",
+        "description": null,
+        "features": [
+          "Leistungsbereich: 4,5 – 7,5 kW",
+          "Dampfleistung: bis zu 7,5 kg/h",
+          "Kann auf beiden Seiten installiert werden",
+          "Eigene Leitung für das Überdruckventil",
+          "Automatische Entleerung",
+          "Dampfkopf im Lieferumfang",
+          "Heizelemente in Kassettenbauweise für einfache Wartung",
+          "¾-Zoll-Dampfrohr",
+          "Verfügbare Steuerungen: STP Classic, STP Classic 2.0 und STP Edelstahl-Touch"
+        ],
+        "spec_table_headers": [
+          "Dampferzeuger-Modell",
+          "kW",
+          "Dampfraum (m²)",
+          "Größe (mm) L|B|H",
+          "Gewicht (kg)",
+          "Steuerung"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 Heizelemente",
+        "description": null,
+        "features": [
+          "Leistungsbereich: 9,0 – 15,0 kW",
+          "Dampfleistung: bis zu 20 kg/h",
+          "Kann auf beiden Seiten installiert werden",
+          "Eigene Leitung für das Überdruckventil",
+          "Automatische Entleerung",
+          "2 Dampfköpfe im Lieferumfang",
+          "Heizelemente in Kassettenbauweise für einfache Wartung",
+          "¾-Zoll-Dampfrohr",
+          "Verfügbare Steuerungen: STP Classic, STP Classic 2.0 und STP Edelstahl-Touch"
+        ],
+        "spec_table_headers": [
+          "Dampferzeuger-Modell",
+          "kW",
+          "Dampfraum (m²)",
+          "Größe (mm) L|B|H",
+          "Gewicht (kg)",
+          "Steuerung"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "Elektronikfach",
+        "note": "(Nur bei STN-S-Modellen enthalten)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "Automatische Entleerung",
+        "note": "(Bei den Modellen STN-S, STN-W und STN enthalten)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "Dampfkopf",
+        "note": "(bei Modellen ab 9 kW sind zwei Köpfe enthalten)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "Aroma-, Lüfter- und Dimmerfunktionen",
+        "note": "(Optionale Funktionen für STN-Modelle)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7,5 m RJ12-Kabel",
+        "note": "7,5 m RJ10-Kabel"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "Temperaturfühler mit",
+        "note": "Kabel und Fühlerhalterung"
+      }
+    ]
+  }
+}

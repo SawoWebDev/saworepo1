@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-sauna-door-with-window",
+  "productId": "f929fe0d-a3b7-4cbe-bc10-dc8c7f5e2492",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (736-4SGD-R/L)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (736-4SGA-R/L)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (736-4SGH-R/L)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Holz-Saunatür mit Fenster",
+    "short_description": "Die SAWO Holz-Saunatür mit Fenster ist eine Saunatür aus Massivholz – 915 × 2015 mm Öffnung, 1005 × 2120 mm Rahmen.",
+    "description": null,
+    "type": "Türen & Griffe",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (736-4SGD-R/L)",
+        "name": "Zeder (736-4SGD-R/L)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (736-4SGA-R/L)",
+        "name": "Espe (736-4SGA-R/L)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (736-4SGH-R/L)",
+        "name": "Hemlock (736-4SGH-R/L)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

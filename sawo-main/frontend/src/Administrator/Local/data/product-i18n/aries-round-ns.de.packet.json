@@ -1,0 +1,22 @@
+{
+  "slug": "aries-round-ns",
+  "productId": "2420cbc5-5922-4f1d-af39-7382f6f8369e",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Rund NS",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><b style=\"text-align: justify;\">Aries Rund</b><span style=\"text-align: justify;\"> teilt die minimalistische Eleganz aller Tower-Öfen. Hoch und platzsparend verteilt er die Wärme gleichmäßig und eignet sich ideal für die Installation in der Saunamitte oder eingelassen in eine Bank. Der integrierte Steinabstandshalter sorgt für ein schnelleres, effizientes Aufheizen der Saunasteine und eine längere Lebensdauer der Heizelemente.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"2\">Mindestsicherheitsabstände<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NS-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-105NS-P</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-120NS-P</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>ARI6-150NS-P</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>ARI6-180NS-P</td>\n  <td>18.0</td>\n  <td>15 – 26</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>125</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Aries Rund",
+    "features": [
+      "Leistungsbereich: 4,5 – 18,0 kW",
+      "Verfügbare Steuerung: Saunova/Innova (NS)",
+      "Integrierter Steinabstandshalter",
+      "Verstellbare Füße",
+      "Edelstahlgehäuse",
+      "Optionales Ofenschutzgitter",
+      "Optionaler Einbaukragen"
+    ]
+  }
+}

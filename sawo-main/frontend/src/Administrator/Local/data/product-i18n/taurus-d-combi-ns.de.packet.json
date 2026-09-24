@@ -1,0 +1,23 @@
+{
+  "slug": "taurus-d-combi-ns",
+  "productId": "2fcb7b83-c383-4a2b-89c0-53987e5453c9",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Taurus D Combi NS",
+    "short_description": "<p style=\"text-align: justify;\">Dank des <strong><b>Taurus D Combi</b></strong> lässt sich das Wellness-Erlebnis jetzt noch einfacher individuell gestalten. Der Ofen kombiniert einen Dampferzeuger mit der Innovation des Taurus D: zwei oder mehr Heizelement-Optionen.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Mit dem Taurus D Combi genießen Saunagäste ein traditionelles oder ein Dampfsauna-Erlebnis. Er verfügt über ein Duftbecken, sodass sich der Nutzer in wohltuendem Dampf erholen kann, der mit seinen liebsten ätherischen Ölen und Düften angereichert ist.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Die Nutzung des Ofens ist so unkompliziert wie nur möglich. Er verfügt über ein Wasserstandserkennungssystem, das – wie bei anderen Combi-Öfen – einen niedrigen Wasserstand signalisiert. Auch die Nachfüllautomatik des Ofens lässt sich für maximalen Komfort aktivieren.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW\n<br>Ofen</th>\n  <th>kW Tank</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th>Sicherheitsabstand A |<br>B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TRDC-90/120NS-G-P</td>\n  <td>9.0 | 12.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 18</td>\n  <td>595 × 555 × 690</td>\n  <td>50</td>\n  <td>Separate</td>\n  <td>1210 | 5/50 | 1900</td>\n</tr>\n<tr>\n  <td>TRDC-150/180NS-G-P</td>\n  <td>15.0 | 18.0</td>\n  <td>1 × 2.0</td>\n  <td>13 – 29</td>\n  <td>595 × 705 × 690</td>\n  <td>65 – 75</td>\n  <td>Separate</td>\n  <td>1410 | 5/50 | 2100</td>\n</tr>\n<tr>\n  <td>TRDC-180/210/240NS-G-P</td>\n  <td>18.0 | 21.0 | 24.0</td>\n  <td>2 × 2.0</td>\n  <td>18 – 42</td>\n  <td>595 × 970 × 690</td>\n  <td>90 – 100</td>\n  <td>Separate</td>\n  <td>1410 | 5/50 | 2100</td>\n</tr>\n<tr>\n  <td>TRDC-270/300/330/360NS-G-P</td>\n  <td>27.0 | 30.0 | 33.0 | 36.0</td>\n  <td>3 × 2.0</td>\n  <td>32 – 75</td>\n  <td>595 × 1385 × 690</td>\n  <td>150</td>\n  <td>Separate</td>\n  <td>1410 | 5/50 | 2100</td>\n</tr></tbody></table>",
+    "type": "Taurus Combi",
+    "features": [
+      "Leistungsbereich: 9,0 – 36,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Gehäuse aus schwarzem Stahl",
+      "Automatische Abschaltung bei Überhitzung",
+      "Integrierte Aromabecher",
+      "Verstellbare Füße",
+      "Optionales Ofenschutzgitter",
+      "Optionale Nachfüllautomatik für den automatisch befüllten Wassertank"
+    ]
+  }
+}

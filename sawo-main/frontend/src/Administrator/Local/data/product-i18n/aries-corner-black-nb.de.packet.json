@@ -1,0 +1,22 @@
+{
+  "slug": "aries-corner-black-nb",
+  "productId": "242d9eb5-907f-4be2-a371-5db18c96d548",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Eck Schwarz NB",
+    "short_description": "<div><span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\"><b>Aries Eck</b></strong><span style=\"text-align: justify;\"> ist ein minimalistischer und zugleich stilvoller, platzsparender Saunaofen. Er ist für die nahtlose Montage in der Ecke konzipiert, nutzt den Platz in jedem Saunaraum optimal und steigert den Komfort der Saunagäste für rundum erfrischende Saunagänge. Der integrierte Steinabstandshalter sorgt für eine kürzere Aufheizzeit der Saunasteine und eine längere Lebensdauer der Heizelemente.</span>\n</div>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"2\">Mindestsicherheitsabstände<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-CNR-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-CNR-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>AR13-75NB-CNR-BL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-CNR-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries Eck",
+    "features": [
+      "Leistungsbereich: 4,5 – 9,0 kW",
+      "Verfügbare Steuerung: Integriert (NB)",
+      "Integrierter Steinabstandshalter",
+      "Verstellbare Füße",
+      "Gehäuse aus Schwarzmetall",
+      "Optionales Ofenschutzgitter",
+      "Optionaler Einbaukragen"
+    ]
+  }
+}

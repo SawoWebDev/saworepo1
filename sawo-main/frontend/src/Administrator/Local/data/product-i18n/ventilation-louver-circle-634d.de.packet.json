@@ -1,0 +1,56 @@
+{
+  "slug": "ventilation-louver-circle-634d",
+  "productId": "a2e4c15b-bba3-4f2a-b946-fe24a50a7a62",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (634-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (634-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (634-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Belüftungsgitter rund",
+    "short_description": "Das SAWO Belüftungsgitter rund ist ein Belüftungsgitter mit Ø170 mm und einer Kanalöffnung von 125 mm zur Regulierung des Luftstroms in den und aus dem Saunaraum.",
+    "description": null,
+    "type": "Belüftung & Sonstiges",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (634-D)",
+        "name": "Zeder (634-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (634-A)",
+        "name": "Espe (634-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (634-H)",
+        "name": "Hemlock (634-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

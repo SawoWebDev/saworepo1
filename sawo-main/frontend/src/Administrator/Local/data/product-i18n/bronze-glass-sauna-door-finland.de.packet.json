@@ -1,0 +1,56 @@
+{
+  "slug": "bronze-glass-sauna-door-finland",
+  "productId": "07779f7f-71ab-46dc-922f-6d2ed9797b33",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (731-3SGD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (731-3SGA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (731-3SGH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Bronzeglas-Saunatür Finland",
+    "short_description": "Die SAWO Bronzeglas-Saunatür Finland ist eine Bronzeglas-Saunatür – 700 × 1800 mm Öffnung, 790 × 1890 mm Rahmen.",
+    "description": null,
+    "type": "Türen & Griffe",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (731-3SGD)",
+        "name": "Zeder (731-3SGD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (731-3SGA)",
+        "name": "Espe (731-3SGA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (731-3SGH)",
+        "name": "Hemlock (731-3SGH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "innova-saunova-2-0-spare-rj12-cables",
+  "productId": "8a27b22f-0506-478c-a207-2484c68cfdfb",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova & Saunova 2.0 RJ12-Ersatzkabel",
+    "short_description": "Robustes, verlängerbares Niederspannungskabel mit Snap-RJ12-Steckern, für nahtlose Kompatibilität mit den Steuerungen Innova und Saunova 2.0. Ideal für eine zuverlässige Signalübertragung und einfache Installation.\n\n<span style=\"text-align: justify;\"><b>Verlängerbares Niederspannungskabel mit Snap-RJ-Steckern für die Steuerungen Innova und Saunova 2.0.</b></span>",
+    "description": null,
+    "type": "Ersatzteile"
+  }
+}

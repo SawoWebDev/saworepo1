@@ -1,0 +1,20 @@
+{
+  "slug": "scandia-combi-ns",
+  "productId": "ef8e7e21-b129-4dfb-9edc-81c466bff91e",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia Combi NS",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\">Scandia Combi</strong><span style=\"text-align: justify;\"> Saunaofen wird mit einem Wassertank für mehr Feuchtigkeit und einem Aromabecher für Saunadüfte geliefert. Erhältlich mit berührungskühler Faserbeschichtung und kompatibel mit den Steuerungen Saunova oder Innova (NS).</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW\n<br>Ofen</th>\n  <th>kW\n<br>Tank</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"4\">Mindestsicherheitsabstände<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCAC-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 1.0</td>\n  <td>5 – 9</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "Leistungsbereich: 6,0 – 9,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Separater Wassertank mit 1-kW- oder 2-kW-Dampferzeuger",
+      "Edelstahlgehäuse",
+      "Integrierter Aromabecher"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "rectangular-interface-holder-for-innova-classic-control",
+  "productId": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Rechteckige Bedienfeld-Halterung für Innova Classic Steuerung",
+    "short_description": "Stilvolle Holz-Bedienfeld-Halterung INN-IH20 für die Innova Classic Steuerung. Erhältlich in hochwertigen Ausführungen Zeder, Espe und Kiefer, passend zu unterschiedlichen Saunastilen. Abmessungen: 215 mm (B) x 140 mm (T) x 20 mm (H). Ideal, um Ihre Steuereinheit sicher aufzunehmen und zugleich einen Hauch natürlicher Eleganz zu verleihen.",
+    "description": null,
+    "type": "Bedienfeld-Halterung"
+  }
+}

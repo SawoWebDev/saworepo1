@@ -1,0 +1,40 @@
+{
+  "slug": "heater-guard-nordex-pro",
+  "productId": "78cb4822-6df3-47e4-b7d1-a1c011746259",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (NRN-PRO-GUARD-W-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (NRN-PRO-GUARD-W-A)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Ofenschutzgitter – Nordex Pro",
+    "short_description": "Das Ofenschutzgitter ist eine Sicherheitsvorrichtung, die das Verbrennungsrisiko minimieren soll. Aus hitzebeständigen Hölzern wie Zeder oder Espe gefertigt, bilden sie eine Schutzbarriere und unterstreichen zugleich die Optik des Ofens.",
+    "description": null,
+    "type": "Ofenschutzgitter",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (NRN-PRO-GUARD-W-D)",
+        "name": "Zeder (NRN-PRO-GUARD-W-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (NRN-PRO-GUARD-W-A)",
+        "name": "Espe (NRN-PRO-GUARD-W-A)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

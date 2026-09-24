@@ -1,0 +1,22 @@
+{
+  "slug": "cubos-nb",
+  "productId": "7078d72f-2c37-445d-9fa1-12f331e2fec9",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cubos NB",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\">Cubos</strong><span style=\"text-align: justify;\"> ist ideal für begrenzte Platzverhältnisse. Er bietet 3-in-1-Flexibilität: ein schlankes, modernes Design und drei Aufstellmöglichkeiten – mittig, in der Ecke oder an der Wand. Eine Schutzabdeckung bietet zusätzlichen Halt bei Wand- und Eckmontage, und ein Reflektor lenkt die Wärme auch in die untersten Bereiche des Saunaraums. Auch der Cubos verfügt über einen integrierten Steinabstandshalter für eine schnellere Aufheizzeit und langlebigere Heizelemente.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"3\">Mindestsicherheitsabstände<br>A | AA | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CUB3-45NB-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-60NB-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-75NB-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>125</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Cubos",
+    "features": [
+      "Leistungsbereich: 4,5 – 9,0 kW",
+      "Verfügbare Steuerung: Integriert (NB)",
+      "Integrierter Steinabstandshalter",
+      "Verstellbare Füße",
+      "Edelstahlgehäuse",
+      "Optionales Ofenschutzgitter",
+      "Optionaler Einbaukragen"
+    ]
+  }
+}

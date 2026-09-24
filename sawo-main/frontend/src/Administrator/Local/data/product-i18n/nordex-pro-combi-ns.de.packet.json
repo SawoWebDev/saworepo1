@@ -1,0 +1,20 @@
+{
+  "slug": "nordex-pro-combi-ns",
+  "productId": "524d4f69-8864-4b00-a174-2e0c2179f89f",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Pro Combi NS",
+    "short_description": "<p style=\"text-align: justify;\">Aufbauend auf der Nordex-Tradition präsentiert der <strong>Nordex Pro Combi</strong> ein verbessertes Design, das effizientes Heizen mit dem zusätzlichen Komfort von Dampf verbindet. Ein integrierter Wassertank sorgt für sanfte Feuchtigkeit, während die Trennung von Steinen und Heizelementen die Langlebigkeit erhöht.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">Die ausziehbare Kassette des Nordex Pro Combi vereinfacht die Wartung, und das Gerät kann mit einem weiteren gekoppelt werden, um in großzügigen Saunaräumen mehr Leistung zu erzielen.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW\n<br>Ofen</th>\n  <th>kW\n<br>Tank</th>\n  <th>Saunaraum<br>min (m³) max</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"4\">Mindestsicherheitsabstände<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-PRO-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNC-PRO-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>500 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex Pro",
+    "features": [
+      "Leistungsbereich: 6,0 – 9,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Integrierte Aromabecher",
+      "Verstellbare Füße",
+      "Separater Wassertank mit 0,8-kW-Dampferzeuger"
+    ]
+  }
+}

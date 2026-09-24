@@ -1,0 +1,20 @@
+{
+  "slug": "mini-combi-fibercoated-ns",
+  "productId": "9dac0470-40f9-4ce4-945c-eee43f19f4aa",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Mini Combi Faserbeschichtet NS",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><b style=\"text-align: justify;\">Mini Combi Faserbeschichtet</b><span style=\"text-align: justify;\"> ist der Mini-Ofen mit separatem Wassertank für zusätzliche Feuchtigkeit. Er verfügt über einen integrierten Aromabecher, mit dem sich der während des Saunagangs erzeugte Dampf mit ätherischen Ölen und Düften anreichern lässt. Das faserbeschichtete Modell bietet dank seiner berührungskühlen Faserbeschichtung zusätzliche Sicherheit und minimiert das Verbrennungsrisiko.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW\n<br>Ofen</th>\n  <th>kW\n<br>Tank</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th colspan=\"2\">Steuerung</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MNC-30NS-P-F</td>\n  <td>3.0</td>\n  <td>1 × 1.0</td>\n  <td>2 – 4</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>MNC-36NS-P-F</td>\n  <td>3.6</td>\n  <td>1 × 1.0</td>\n  <td>3 – 6</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "Leistungsbereich: 3,0 – 3,6 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Separater Wassertank mit 1-kW-Dampferzeuger",
+      "Berührungskühle Faserbeschichtung",
+      "Integrierter Aromabecher"
+    ]
+  }
+}

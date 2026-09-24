@@ -1,0 +1,56 @@
+{
+  "slug": "lovi",
+  "productId": "6a06e3ba-8906-43f2-8988-d5ce40f42c47",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (346-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "White (346-WH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (346-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Lovi",
+    "short_description": "Der SAWO Lovi ist ein Eimer mit einem Fassungsvermögen von 4 l zur Aufnahme des Wassers, das auf die Saunasteine gegossen wird.",
+    "description": null,
+    "type": "Eimer",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (346-H)",
+        "name": "Hemlock (346-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "White (346-WH)",
+        "name": "Weiß (346-WH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (346-BL)",
+        "name": "Schwarz (346-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

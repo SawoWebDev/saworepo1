@@ -1,0 +1,101 @@
+{
+  "slug": "ste-steam-generator",
+  "productId": "62da5399-e16e-4b7a-9a24-c457d74d6f62",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "STE Dampferzeuger",
+    "short_description": "<p style=\"text-align: justify;\">Zuverlässig und einfach zu bedienen: der <strong>STE</strong> Dampferzeuger ist für den Wohnbereich konzipiert. Er ist zudem einfach zu bedienen: Steuerung einschalten und Temperaturregler einstellen. Die Edelstahlkonstruktion sorgt für lange Haltbarkeit und Korrosionsbeständigkeit.</p><p style=\"text-align: justify;\">Der STE kann mit Anschlüssen auf beiden Seiten ausgerichtet werden und lässt sich so in jedem Grundriss einfach installieren. Für mehr Leistung können bis zu fünf Einheiten in Reihe geschaltet werden, für eine maximale Leistung von<strong> 75.0kW</strong>, alles gesteuert über eine einzige SAWO-Steuerung.</p>",
+    "description": null,
+    "type": "Dampferzeuger",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 Heizelemente",
+        "description": null,
+        "features": [
+          "Leistungsbereich: 3,0 – 5,0 kW",
+          "Dampfleistung: bis zu 6,7 kg/h",
+          "Kann auf beiden Seiten installiert werden",
+          "Eigene Leitung für das Überdruckventil",
+          "Dampfkopf im Lieferumfang",
+          "Verfügbare Steuerungen: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Dampferzeuger-Modell",
+          "kW",
+          "Dampfraum (m³)",
+          "Größe (mm) L|B|H",
+          "Gewicht (kg)",
+          "Steuerung"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 Heizelemente",
+        "description": null,
+        "features": [
+          "Leistungsbereich: 4,5 – 7,5 kW",
+          "Dampfleistung: bis zu 7,5 kg/h",
+          "Kann auf beiden Seiten installiert werden",
+          "Eigene Leitung für das Überdruckventil",
+          "Dampfkopf im Lieferumfang",
+          "Verfügbare Steuerungen: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Dampferzeuger-Modell",
+          "kW",
+          "Dampfraum (m³)",
+          "Größe (mm) L|B|H",
+          "Gewicht (kg)",
+          "Steuerung"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 Heizelemente",
+        "description": null,
+        "features": [
+          "Leistungsbereich: 9,0 – 15,0 kW",
+          "Dampfleistung: bis zu 20 kg/h",
+          "Kann auf beiden Seiten installiert werden",
+          "Eigene Leitung für das Überdruckventil",
+          "2 Dampfköpfe im Lieferumfang",
+          "Verfügbare Steuerungen: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Dampferzeuger-Modell",
+          "kW",
+          "Dampfraum (m³)",
+          "Größe (mm) L|B|H",
+          "Gewicht (kg)",
+          "Steuerung"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Temperature sensor with",
+        "title": "Temperaturfühler mit",
+        "note": "Kabel und Fühlerhalterung"
+      },
+      {
+        "index": 1,
+        "_english_title": "Steam Head",
+        "title": "Dampfkopf",
+        "note": "(bei Modellen ab 9 kW sind zwei Köpfe enthalten)"
+      },
+      {
+        "index": 2,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "7,5 m RJ12-Kabel",
+        "note": "7,5 m RJ10-Kabel"
+      }
+    ]
+  }
+}

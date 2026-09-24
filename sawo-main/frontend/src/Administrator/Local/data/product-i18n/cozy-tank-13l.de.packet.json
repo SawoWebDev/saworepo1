@@ -1,0 +1,23 @@
+{
+  "slug": "cozy-tank-13l",
+  "productId": "64d559e0-16fe-41b9-b83a-7c1a0272be0b",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cozy Tank (1,3 l)",
+    "short_description": "Der 1,3-l-Cozy Tank ist ein rechteckiger Saunabefeuchter mit integriertem Wasserspeicher, der sofort Dampf abgibt, sobald der Ofen heiß ist. Dem Wasser können ätherische Öle und Düfte beigemischt werden, um duftenden Dampf zu erzeugen. Dieser Befeuchter besteht aus dickwandigem Edelstahl und hat eine geschnitzte Abdeckung aus Speckstein – eine Verbindung aus Komfort und natürlichem Design. Er lässt sich über eine Öffnung in der oberen Abdeckung einfach mit Wasser befüllen.",
+    "description": null,
+    "type": "Rechteckiger Saunabefeuchter",
+    "features": [
+      "Wasserspeicher, der bei heißem Ofen sofort Dampf erzeugt",
+      "Wasser wird über Öffnungen in der oberen Abdeckung nachgefüllt",
+      "Dickwandiger Edelstahl",
+      "Obere Abdeckung aus geschnitztem Speckstein"
+    ],
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ]
+  }
+}

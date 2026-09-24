@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-cubos-wall",
+  "productId": "495cc14e-79dd-458b-ae31-42ef241c2a9e",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Ofenschutzgitter – Cubos Wand",
+    "short_description": "Das Ofenschutzgitter ist eine Sicherheitsvorrichtung, die das Verbrennungsrisiko minimieren soll. Aus hitzebeständigem Hemlock gefertigt, bildet es eine Schutzbarriere und unterstreicht zugleich die Optik des Ofens. Die Cubos Ofenschutzgitter sind für Installationen in der Mitte des Saunaraums, an der Wand und in der Ecke ausgelegt.",
+    "description": null,
+    "type": "Ofenschutzgitter",
+    "spec_table_headers": [
+      "Modell",
+      "Material",
+      "Länge (mm)",
+      "Breite (mm)",
+      "Höhe (mm)"
+    ]
+  }
+}

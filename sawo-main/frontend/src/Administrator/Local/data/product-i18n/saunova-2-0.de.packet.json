@@ -1,0 +1,31 @@
+{
+  "slug": "saunova-2-0",
+  "productId": "7ed5a5f1-e3e5-4601-8b86-bc606f91e392",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0",
+    "short_description": "Saunova 2.0 ist eine praktische Steuerung für kleine Öfen bis 9 Kilowatt. Ideal in Kombination mit Ni2-Öfen, bei denen keine separate Leistungssteuerung mehr erforderlich ist. Die Saunova 2.0 Benutzeroberfläche kann innerhalb oder außerhalb des Saunaraums angebracht werden! Das System arbeitet mit einer intelligenten Regelung, die bei Erreichen der eingestellten Temperatur abwechselnd ein Heizelement abschaltet. Dieser Vorgang verringert Temperaturschwankungen, sodass die Heizelemente in einem ausgewogenen Rhythmus arbeiten. Noch präzisere Temperaturmessung mit dem zusätzlichen Bankfühler.",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNISCHE DATEN</th></tr></thead>\n  <tbody>\n  <tr><td>Geeignete Öfen</td><td>max. 9 kW</td></tr>\n  <tr><td>Temperaturbereich</td><td>30°C – 110°C</td></tr>\n  <tr><td>Nennspannung</td><td>400V 3N~ (3-phasig) 230V 1P (1-phasig)</td></tr>\n  <tr><td>Max. Sitzungsdauer</td><td>Standard 6 Std., max. 24 Std.</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>KABINENLEUCHTE</b></td></tr>\n  <tr><td>Nennleistung</td><td>230V 100W</td></tr>\n  <tr><td>Lüfter</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUKTABMESSUNGEN</b></td></tr>\n  <tr><td>Saunova 2.0 (SAU-UI-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>LEISTUNGSERWEITERUNGSEINHEIT</b></td></tr>\n  <tr><td>Frequenz</td><td>50/60Hz</td></tr>\n  <tr><td>Schaltleistung pro Phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>FÜHLER</b></td></tr>\n  <tr><td>Bank-Temperaturfühler</td><td>kompatibel (optional)</td></tr>\n  <tr><td>Bank-Kombifühler für Temperatur und Feuchte</td><td>kompatibel (optional)</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Einfache und stilvolle Benutzeroberfläche",
+      "Direkte Steuerung für Ni2-Öfen; für NS-Öfen mit 2,3–9 kW zusätzlich Saunova 2.0 verwenden",
+      "Leistungssteuerung",
+      "Ab 9 kW ist eine Schützeinheit erforderlich",
+      "Smart-Controlling-Funktion",
+      "Optionale Lüfter- und Combi-Funktion",
+      "Abmessungen: (B) 104 x (H) 147 x (T) 37 mm"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "steam-door",
+  "productId": "efc9e723-8d96-4d74-930c-85cadc12a79b",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Dampftür",
+    "short_description": "<p style=\"text-align: justify;\">Die <strong><b>Dampftür</b></strong> hält den Dampf im Raum und verhindert das Entweichen überschüssiger Feuchtigkeit – für ein zutiefst belebendes Dampfbad-Erlebnis.</p><p style=\"text-align: justify;\">Unsere Dampftür ist mit einer Gummidichtung abgedichtet und mit einem Magnetverschluss, einem Türgriff-Set aus Edelstahl und einer Wasserfangleiste ausgestattet, die Kondenswasser in den Bodenablauf leitet. Der Rahmen besteht aus rostbeständigem Aluminium, und die Glastür aus gehärtetem Glas ist für hohe Temperaturen ausgelegt. Die Montage ist einfach – wahlweise mit Silikondichtmasse oder Schrauben.</p><p style=\"text-align: justify;\">Die SAWO Dampftür lässt sich einfach mit Silikon oder Schrauben montieren.</p>",
+    "description": null,
+    "type": "Dampfzubehör",
+    "features": [
+      "Verfügbare Dampftür aus Aluminium:",
+      "Code: ST-746 | Größe: 790 × 1890 mm | Rahmen: 60 mm",
+      "Code: ST-749 | Größe: 900 × 2100 mm | Rahmen: 71 mm",
+      "Türzarge aus Aluminium",
+      "Tür aus satiniertem 8-mm-Einscheibensicherheitsglas",
+      "Türgriff-Set aus Edelstahl",
+      "3 robuste Scharniere",
+      "Magnetverschluss",
+      "Abdichtende Gummidichtung",
+      "Wasserfangleiste aus Kunststoff",
+      "Keile für die einfache Installation",
+      "Zusätzliche Schrauben und Gummikappen",
+      "Silikondichtmasse, Innensechskantschlüssel und Schraubenführung im Lieferumfang"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "saunova-2-0-built-in",
+  "productId": "2f5d7d0c-a9cf-44f0-bc72-36968d5602ad",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 Einbau",
+    "short_description": "<p style=\"text-align: justify;\">\nDer <b>Saunova 2.0</b> Einbau vereint Bedienfeld und Leistungssteuerung in einem Paket. Sie wirkt modern und stilvoll und bietet nun flexiblere Installationsmöglichkeiten. Die Steuerung merkt sich Ihre persönlichen Einstellungen wie Sitzungsdauer und Temperatur und ermöglicht so ein gleichbleibendes Saunaerlebnis.\n</p><p style=\"text-align: justify;\">Die Steuerung nutzt intelligente Technologie, die die Heizelemente automatisch abschaltet, sobald die eingestellte Temperatur erreicht ist. Sinkt die Temperatur, schaltet sie die erforderlichen Heizelemente wieder zu. Das hält nicht nur die Temperatur konstant, sondern verlängert auch die Lebensdauer der Heizelemente und spart Energie!\n\n</p><p style=\"text-align: justify;\">Das Steuerungsgehäuse bietet dem Elektriker mehr Platz zum Arbeiten und macht die Installation so einfach wie nie zuvor! Flexible Verdrahtungsmöglichkeiten mit Zugentlastung an allen 4 Seiten, einschließlich der Rückseite, sodass die Verkabelung vollständig verborgen werden kann.</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNISCHE DATEN</th></tr></thead>\n  <tbody>\n  <tr><td>Geeignete Öfen</td><td>max. 9 kW</td></tr>\n  <tr><td>Temperaturbereich</td><td>30°C – 110°C</td></tr>\n  <tr><td>Nennspannung</td><td>400V 3N~ (3-phasig) 230V 1P (1-phasig)</td></tr>\n  <tr><td>Max. Sitzungsdauer</td><td>Standard 6 Std., max. 24 Std.</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>KABINENLEUCHTE</b></td></tr>\n  <tr><td>Nennleistung</td><td>230V 100W</td></tr>\n  <tr><td>Lüfter</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUKTABMESSUNGEN</b></td></tr>\n  <tr><td>Saunova 2.0 Einbau (SAU-B-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td>Saunova 2.0 Einbau mit Combi &amp; Lüfter (SAU-B-CF-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>LEISTUNGSERWEITERUNGSEINHEIT</b></td></tr>\n  <tr><td>Frequenz</td><td>50/60Hz</td></tr>\n  <tr><td>Schaltleistung pro Phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>FÜHLER</b></td></tr>\n  <tr><td>Bank-Temperaturfühler (SAU-B-V2)</td><td>kompatibel (optional)</td></tr>\n  <tr><td>Bank-Kombifühler für Temperatur und Feuchte (SAU-B-V2)</td><td>kompatibel (optional)</td></tr>\n  <tr><td>Bank-Temperaturfühler (SAU-B-CF-V2)</td><td>kompatibel</td></tr>\n  <tr><td>Bank-Kombifühler für Temperatur und Feuchte (SAU-B-CF-V2)</td><td>kompatibel</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Kombination aus Benutzeroberfläche und Leistungssteuerung.",
+      "Die Smart-Controlling-Funktion regelt die Heizelemente phasenweise, damit die gewünschte Temperatur schnell erreicht wird und jederzeit guter Dampf entsteht.",
+      "NS-Öfen werden mit der Leistungssteuerung SAU-B-V2 oder SAU-B-V2-15 betrieben. Für Öfen über 9 kW bzw. 15 kW die jeweils passende Schützeinheit SAU-PS-V2 oder SAU-PS-V2-15 ergänzen.",
+      "Kann an ein Hausautomationssystem angeschlossen werden",
+      "Kompatibel mit Türsensor",
+      "Vorlauf-Timer",
+      "Optionale Lüfter- und Combi-Funktion",
+      "Lieferumfang: Saunova Leistungssteuerung mit Saunova 2.0 Benutzeroberfläche, Temperaturfühler mit Zederholzhalter und 5 m Silikonkabel."
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

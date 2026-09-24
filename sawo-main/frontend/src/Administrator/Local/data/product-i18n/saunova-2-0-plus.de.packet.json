@@ -1,0 +1,21 @@
+{
+  "slug": "saunova-2-0-plus",
+  "productId": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 PLUS",
+    "short_description": "Unsere neue smarte Saunasteuerung, die Saunova 2.0 PLUS, bietet noch mehr Nutzungsfreiheit. Die Steuereinheit verfügt über WLAN-Konnektivität und lässt sich daher über die SAWO-App bedienen. Die App ermöglicht ein noch individuelleres Saunaerlebnis und die Fernsteuerung mehrerer Saunafunktionen wie Temperatur und Beleuchtung. Dank Echtzeit-Überwachung hat der App-Nutzer sofort Zugriff auf die aktuelle Saunatemperatur und Sitzungsdauer. Die Saunova 2.0 PLUS wird mit einer intuitiven Benutzeroberfläche geliefert, die innerhalb oder außerhalb des Saunaraums angebracht werden kann. Sie ist für Ni2- und NS-Öfen bis 9,0 kW ausgelegt und lässt sich mit einer Schützeinheit auch auf 18,0 kW erweitern.",
+    "description": null,
+    "type": "Saunova",
+    "features": [
+      "Fernbedienung: Zeitpläne festlegen und den Ofen von überall und aus beliebiger Entfernung steuern.",
+      "Intuitive Bedienung: App und Steuerung lassen sich dank unseres schlanken UI/UX-Designs mühelos nutzen.",
+      "Integrierte Steuerung: Alle Einstellungen lassen sich über eine einzige Plattform verwalten – die Smart-Steuerung oder die mobile App.",
+      "Echtzeit-Überwachung: Aktuelle Saunatemperatur und Sitzungsdauer jederzeit im Blick.",
+      "Sicherheit: Der Ofen schaltet sich automatisch ab, wenn der Timer null erreicht.",
+      "WLAN-kompatibel"
+    ]
+  }
+}

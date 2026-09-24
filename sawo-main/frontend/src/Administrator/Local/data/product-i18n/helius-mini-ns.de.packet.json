@@ -1,0 +1,19 @@
+{
+  "slug": "helius-mini-ns",
+  "productId": "2c147543-2f01-4114-8336-85a4bcdb1f00",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius Mini NS",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\">Helius Mini</strong><span style=\"text-align: justify;\"> bietet dieselbe Innovation wie der Helius in kompakterer Form. Er lässt sich dezent hinter den Bänken installieren, vollständig verdeckt und mit minimalem Sicherheitsabstand. Seine Haube ist speziell für den Einsatz als verdeckter Ofen gemacht. In Verbindung mit seiner starken Leistung ist er sorgfältig darauf ausgelegt, kleinere Räume gleichmäßig zu beheizen.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofen\n<br>Modell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th colspan=\"2\">Steuerung</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-MN-20NS-Z</td>\n  <td>2.0</td>\n  <td>1.5 – 2.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-27NS-Z</td>\n  <td>2.7</td>\n  <td>2.0 – 3.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-30NS-Z</td>\n  <td>3.0</td>\n  <td>2.0 – 4.0</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "Leistungsbereich: 2,0 – 3,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Separates Wasserbecken aus Speckstein mit Schlauch",
+      "Optionales Ofenschutzgitter und optionale Ofenhaube"
+    ]
+  }
+}

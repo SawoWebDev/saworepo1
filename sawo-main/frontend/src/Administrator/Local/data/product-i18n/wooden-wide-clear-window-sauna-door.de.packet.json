@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-wide-clear-window-sauna-door",
+  "productId": "3a659b1d-f780-4b62-bbfe-1cfca0ea7765",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (739-3SCD-R/L)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (739-3SCA-R/L)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (739-3SCH-R/L)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Breite Holz-Saunatür mit Klarfenster",
+    "short_description": "Die SAWO Breite Holz-Saunatür mit Klarfenster ist eine Saunatür aus Massivholz mit Klarglasfenster – 915 × 2035 mm Öffnung, 1005 × 2075 mm Rahmen.",
+    "description": null,
+    "type": "Türen & Griffe",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (739-3SCD-R/L)",
+        "name": "Zeder (739-3SCD-R/L)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (739-3SCA-R/L)",
+        "name": "Espe (739-3SCA-R/L)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (739-3SCH-R/L)",
+        "name": "Hemlock (739-3SCH-R/L)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

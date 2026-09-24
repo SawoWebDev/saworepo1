@@ -1,0 +1,56 @@
+{
+  "slug": "stainless-steel-ladle-usva-40cm",
+  "productId": "b53e8d1e-7802-490d-a514-693d4e905ef1",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (442-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (442-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (442-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Edelstahlkelle Usva 40 cm",
+    "short_description": "Die SAWO Edelstahlkelle Usva 40 cm ist eine Saunakelle aus Edelstahl mit einer Länge von 400 mm zum Übergießen der erhitzten Saunasteine mit Wasser (löyly).",
+    "description": null,
+    "type": "Kellen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (442-MD)",
+        "name": "Zeder (442-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (442-MA)",
+        "name": "Espe (442-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (442-MH)",
+        "name": "Hemlock (442-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -2173,3 +2173,41 @@ above).
   new locale prefix elsewhere (`LOCALE_PREFIXES`) didn't teach the switcher
   about it. Now built from `LOCALE_PREFIXES` itself, so a future locale
   addition can't silently repeat this.
+
+## Product content — German (`de`) push (2026-09-24)
+
+`product_translations` now has **383 `de` rows** = the 382 visible products
++ the hidden `krios-floor-ns` (`fi`/`zh` have 381: they lack
+`sauna-wood-oil-1l/4l`, which de includes, and have `krios-floor-ns`). Applied through `apply-many` only
+(`source_field_hashes` + translation memory maintained); `node
+product-i18n.js pending de` → 0 missing, `node check-translation-staleness.mjs
+de` → 0 missing / 0 stale (it counts 383: `krios-floor-ns` is published but
+`visible=false`, so `pending` never lists it — translated anyway for parity
+with its fi/zh rows). Machine translation, **not native-reviewed**; `/de` is not
+in `TRANSLATED_PATHS`, the language switcher stays off.
+
+- **Method:** new dictionary fill engine `fill-de-apply.mjs` +
+  `fill-de-data-*.mjs` (exact English string / HTML text node → German, name
+  tokens, per-slug overrides) instead of hand-editing packets; documented in
+  `PRODUCT-TRANSLATION-CONVENTIONS.md` ("German (`de`) notes"). Two dictionary
+  files (`fill-de-data-t-tail*.mjs`, ~300 entries) were written by a parallel
+  Claude session; one session ran every `apply-many`.
+- **Code:** `MATERIAL_WORD_DICTIONARY.de` added to `product-i18n.js` (Zeder, Espe,
+  Hemlock kept, Erle, Kiefer, Fichte, Birke, Schwarz, Weiß, Grau, Silber,
+  Naturfarben, Aluminium, Schwarzmetall). `extract`/`pending` accept any locale
+  and `PRODUCT_TRANSLATION_LOCALES` already listed `de`.
+- **Audit:** every filled packet has the same structure as its extracted source;
+  word-frequency sweep of `de` names shows only brand/model/line words in
+  English (Steam 2.0, Steam STE, Infrared 2.0, Combi, Classic, Slim, Block, Tag,
+  Set, ... — intentional).
+- **Decisions:** `Nordex Floor` → `Nordex Boden` (brief: Floor→Boden; zh
+  translated, fi kept English — revisit if the site prefers the English name);
+  `Saunova Simple` → `Saunova Einfach` (fi/zh precedent); `Demand Button` →
+  `Demand-Taster`; Innova/Saunova description-table label cells translated
+  (fi/zh left them English); prose "steam" → Dampf, "löyly" kept.
+- **Source-content slips found (English left untouched, translated as
+  intended):** `innova-light-extension-module`'s description talks about the
+  Saunova 2.0 Contactor Unit; `saunova-2-0-plus` has a stray "n18,0kW";
+  `minidragon-black-nb` has a garbled sentence; `sauna-wood-oil-1l/4l` have
+  no fi/zh rows.
+- **Open:** native-speaker review of German copy before any `/de` path goes live.

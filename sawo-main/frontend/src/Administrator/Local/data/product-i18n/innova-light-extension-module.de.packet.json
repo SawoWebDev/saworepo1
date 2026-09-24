@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Licht-Erweiterungsmodul",
+    "short_description": "Verbinden Sie die Saunova 2.0 Schützeinheit mit der Saunova 2.0 Leistungssteuerung für Öfen über 9 kW. Das neue, modernisierte Gehäuse bietet mehr Platz für eine einfachere und schnellere Installation. Flexible Verdrahtungsmöglichkeiten mit Zugentlastung an allen 4 Seiten, einschließlich der Rückseite, sodass die Verkabelung vollständig verborgen werden kann.\n\n<span style=\"text-align: justify;\"><b>Für NS-Öfen über 9 kW. Anschluss an die Saunova Leistungssteuerung.</b></span>",
+    "description": null,
+    "type": "Ersatzteile",
+    "features": [
+      "Lieferumfang: Saunova Schützeinheit und 1 m RJ12-Kabel",
+      "Neues Gehäusedesign für eine einfachere Installation mit zusätzlichem Platz und mehr Verdrahtungsmöglichkeiten"
+    ]
+  }
+}
