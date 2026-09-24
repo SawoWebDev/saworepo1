@@ -1,10 +1,10 @@
 {
   "meta": {
     "title": "网站地图",
-    "description": "SAWO 网站所有页面和板块的完整导览：桑拿加热器、蒸汽发生器、桑拿房等等。"
+    "description": "SAWO网站所有页面和板块的完整导览：桑拿加热器、蒸汽发生器、桑拿房等等。"
   },
   "title": "网站地图",
-  "subtitle": "SAWO 网站所有页面和板块的完整导览。",
+  "subtitle": "SAWO网站所有页面和板块的完整导览。",
   "productGroups": {
     "Steam Accessories": "蒸汽配件",
     "Steam Controls": "蒸汽控制器",
@@ -34,26 +34,26 @@
       "products": "桑拿产品",
       "heaters": "桑拿加热器",
       "wallMounted": "壁挂式加热器",
-      "tower": "Tower 系列加热器",
-      "stone": "Stone 系列加热器",
+      "tower": "塔式加热器",
+      "stone": "石材式加热器",
       "floor": "落地式加热器",
-      "combi": "Combi 组合式加热器",
-      "dragonfire": "Dragonfire 系列加热器",
+      "combi": "多功能一体式加热器",
+      "dragonfire": "龙焰系列加热器",
       "controls": "桑拿控制器",
       "accessories": "桑拿配件",
       "accessorySets": "配件套装",
-      "pailsLadles": "水桶与桑拿勺",
-      "thermometers": "温度计与多功能仪表",
-      "clocksSandtimers": "时钟与沙漏计时器",
+      "pailsLadles": "水桶与勺子",
+      "thermometers": "温度计与温湿度计",
+      "clocksSandtimers": "时钟与沙漏",
       "lightsCovers": "桑拿灯具与灯罩",
       "headrestsBackrests": "头枕与靠背",
-      "doorsHandles": "门与拉手",
+      "doorsHandles": "门与把手",
       "benches": "长椅与地砖",
       "kivistone": "Kivistone",
-      "ventilations": "通风与附加配件",
+      "ventilations": "通风与配件",
       "rooms": "桑拿房",
       "interiorDesigns": "室内设计",
-      "woodPanels": "木质墙板与木材"
+      "woodPanels": "木镶板与木材"
     },
     "steam": {
       "heading": "蒸汽房",
