@@ -41,7 +41,7 @@
   },
   "controls": {
     "heading": "Saunasteuerungen",
-    "intro": "Mit einer separaten Steuerung für SAWO Öfen entscheiden Sie selbst, welche Art von Saunaerlebnis Sie erleben möchten. Steuern Sie Merkmale wie Temperatur, Luftfeuchtigkeit, Zeit, Lüfter- und Lichtdimmer-Nutzung oder sparen Sie sogar Energie mit dem Stromverbrauchszähler.",
+    "intro": "Mit einer separaten Steuerung für SAWO Öfen bestimmen Sie selbst, welches Saunaerlebnis Sie genießen möchten. Regeln Sie Temperatur, Luftfeuchtigkeit, Zeit, Lüfter und Lichtdimmer oder sparen Sie mit dem Stromverbrauchszähler sogar Energie.",
     "items": {
       "innova": {
         "title": "Innova-Serie",
@@ -117,7 +117,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis."
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau."
     },
     "video": {
       "title": "Wer kann SAWO Öfen nutzen?",
@@ -228,7 +228,7 @@
     },
     "intro": {
       "title": "Entdecken Sie unsere erstklassige Saunasteuerungs-Kollektion",
-      "desc": "Mit einer separaten Steuerung für SAWO Öfen entscheiden Sie selbst, welche Art von Saunaerlebnis Sie erleben möchten. Steuern Sie Merkmale wie Temperatur, Luftfeuchtigkeit, Zeit, Lüfter- und Lichtdimmer-Nutzung oder sparen Sie sogar Energie mit dem Stromverbrauchszähler."
+      "desc": "Mit einer separaten Steuerung für SAWO Öfen bestimmen Sie selbst, welches Saunaerlebnis Sie genießen möchten. Regeln Sie Temperatur, Luftfeuchtigkeit, Zeit, Lüfter und Lichtdimmer oder sparen Sie mit dem Stromverbrauchszähler sogar Energie."
     },
     "groupLabels": {
       "Coming Soon": "Demnächst Verfügbar",
@@ -271,7 +271,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis."
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau."
     }
   },
   "stonePage": {
@@ -292,7 +292,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau.",
       "durable": "Robuste Konstruktion: Hochwertige Materialien sorgen für langanhaltende Leistung."
     },
     "empty": "Keine Stone-Öfen verfügbar."
@@ -320,7 +320,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau.",
       "userFriendly": "Benutzerfreundliche Steuerung: Passen Sie Temperatur und Zeiteinstellungen einfach für Ihr perfektes Saunaerlebnis an."
     },
     "empty": "Keine Tower-Öfen verfügbar."
@@ -343,7 +343,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis."
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau."
     },
     "empty": "Keine Boden-Öfen verfügbar."
   },
@@ -365,7 +365,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau.",
       "durable": "Robuste Konstruktion: Hochwertige Materialien sorgen für langanhaltende Leistung."
     },
     "empty": "Keine Combi-Öfen verfügbar."
@@ -388,7 +388,7 @@
     "why": {
       "eyebrow": "SAWO ÖFEN",
       "title": "Warum SAWO Öfen wählen",
-      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design und bieten so jedes Mal eine gleichbleibende Leistung für ein zuverlässiges, herausragendes Saunaerlebnis.",
+      "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau.",
       "userFriendly": "Benutzerfreundliche Steuerung: Passen Sie Temperatur und Zeiteinstellungen einfach für Ihr perfektes Saunaerlebnis an."
     },
     "empty": "Keine Dragonfire-Öfen verfügbar."
@@ -498,7 +498,7 @@
     "why": {
       "eyebrow": "SAWO ZUBEHÖR",
       "title": "Warum SAWO Türen & Griffe wählen",
-      "description": "SAWO Saunatüren und Griffe sind für die anspruchsvolle Saunaumgebung konzipiert – hitzebeständig, langlebig und wunderschön gestaltet. Vom klassischen Holzrahmen bis zum modernen Sicherheitsglas ist jede Tür auf Langlebigkeit und Wirkung ausgelegt."
+      "description": "SAWO Saunatüren und Griffe sind für die anspruchsvolle Saunaumgebung gemacht – hitzebeständig, langlebig und schön gestaltet. Vom klassischen Holzrahmen bis zum modernen Sicherheitsglas ist jede Tür dafür gebaut, lange zu halten und zu überzeugen."
     },
     "promo": {
       "title": "Vervollständigen Sie Ihr Saunaerlebnis",
@@ -607,7 +607,7 @@
     },
     "intro": {
       "title": "Saunabeleuchtung & Lichtabdeckungen",
-      "desc": "Schaffen Sie mit dem richtigen Lichtspiel die perfekte Atmosphäre. Unsere verschiedenen Lichtfarben lassen Sie ein beruhigendes und warmes Gefühl erzeugen, von sanftem Schimmer bis zu warmen Goldtönen."
+      "desc": "Schaffen Sie mit dem richtigen Lichtspiel die perfekte Atmosphäre. Mit unseren verschiedenen Leuchtenabdeckungen erzeugen Sie eine beruhigende, warme Stimmung – vom sanften Schimmer bis zu warmen Goldtönen."
     },
     "groups": {
       "Sauna Lights": "Saunaleuchten",
@@ -751,7 +751,7 @@
         "r5": {
           "name": "Mittlerer Glasfront-Saunaraum - 1420RS",
           "tag": "Mittel",
-          "desc": "Konzipiert für 4–6 Personen, verbindet diese Glasfront-Sauna geräumigen Komfort mit zeitgenössischer Eleganz. Die transparente Fassade schafft eine offene, luftige Atmosphäre bei gleichbleibend authentischer Saunaleistung."
+          "desc": "Diese Glasfront-Sauna für 4–6 Personen verbindet geräumigen Komfort mit zeitgemäßer Eleganz. Die transparente Front schafft eine offene, luftige Atmosphäre und bietet dabei ein authentisches Saunaerlebnis."
         },
         "r6": {
           "name": "Großer Glasfront-Saunaraum - 1922RS",
@@ -778,17 +778,17 @@
         "h4": {
           "name": "Krios Ni2",
           "tag": "Wandmontierter Ofen",
-          "desc": "Der Krios Ni2 bietet mit seinem größeren Steinbehälter ein reichhaltigeres, feuchteres finnisches Saunaerlebnis. Untergebracht in einem schlanken Edelstahlgehäuse mit dem charakteristischen SAWO Muster, verbindet er Stil und Leistung."
+          "desc": "Der Krios Ni2 bietet mit seinem größeren Steinbehälter ein besonders sattes, feuchteres finnisches Saunaerlebnis. Das schlanke Edelstahlgehäuse mit dem typischen SAWO Muster verbindet Stil und Leistung."
         },
         "h5": {
           "name": "Aries Round Black Ni2",
           "tag": "Tower-Ofen",
-          "desc": "Der Aries Round teilt die minimalistische Eleganz aller Tower-Öfen. Hoch und platzsparend, verteilt er die Wärme gleichmäßig und eignet sich ideal für die Installation in der Saunamitte oder eingebaut in eine Bank."
+          "desc": "Der Aries Round hat die minimalistische Eleganz aller Tower-Öfen. Er ist hoch und platzsparend, verteilt die Wärme gleichmäßig und eignet sich ideal für die Aufstellung in der Saunamitte oder den Einbau in eine Bank."
         },
         "h6": {
           "name": "Scandia NS",
           "tag": "Wandmontierter Ofen",
-          "desc": "Der Scandia NS ist ein bewährter Klassiker unter den Saunaöfen und bietet ein wahrhaft traditionelles finnisches Saunaerlebnis. Einfach, zuverlässig und effizient, erhältlich mit kühl bleibender Faserbeschichtung."
+          "desc": "Der Scandia NS ist ein bewährter Klassiker unter den Saunaöfen und steht für das traditionelle finnische Saunaerlebnis. Schlicht, zuverlässig und effizient – auch mit kühl bleibender Faserbeschichtung erhältlich."
         }
       },
       "accessories": {
@@ -822,16 +822,16 @@
           "title": "Belüftung",
           "paragraphs": [
             "Eine ordnungsgemäße Belüftung ist essenziell, um CO₂ und Keime abzuführen und die Temperatur in Ihrer Sauna auszugleichen. Den meisten Sauna-Bausätzen fehlt dies vollständig.",
-            "Der integrierte Zuluftauslass von SAWO führt sauerstoffreiche Luft direkt zum Ofen und mischt sie in den aufsteigenden Luftstrom ein, sodass längere, angenehmere Sitzungen ohne die Trägheit durch CO₂-Ansammlung möglich sind.",
-            "Der integrierte Abluftauslass gleicht die Temperaturen im gesamten Raum aus und trocknet Ihre Sauna nach jeder Nutzung aktiv, was ihre Lebensdauer erheblich verlängert."
+            "Die integrierte Zuluftöffnung von SAWO führt sauerstoffreiche Luft direkt zum Ofen und mischt sie dem aufsteigenden Luftstrom bei. So sind längere, angenehmere Saunagänge möglich, ohne dass sich durch CO₂ Müdigkeit einstellt.",
+            "Die integrierte Abluftöffnung gleicht die Temperaturen im ganzen Raum aus und trocknet die Sauna nach jedem Gebrauch aktiv – das verlängert ihre Lebensdauer spürbar."
           ]
         },
         "lighting": {
           "tab": "Beleuchtung",
           "title": "Beleuchtung",
           "paragraphs": [
-            "Die richtige Beleuchtung verwandelt eine Saunasitzung in ein vollständiges Sinneserlebnis. Das integrierte LED-System von SAWO ist so konzipiert, dass es die Wärme des Holzes und der Raumhitze ergänzt.",
-            "Sanfte, blendfreie Positionierung um Bank und Decke schafft eine ruhige, immersive Atmosphäre, niemals grell oder klinisch. Vollständig dimmbar, passend zu jeder Stimmung und Tageszeit.",
+            "Das richtige Licht macht aus dem Saunagang ein Erlebnis für alle Sinne. Das integrierte LED-System von SAWO ergänzt die Wärme des Holzes und die Hitze im Raum stimmungsvoll.",
+            "Sanft und blendfrei rund um Bank und Decke platziert, sorgt das Licht für eine ruhige, umhüllende Atmosphäre – nie grell oder klinisch. Vollständig dimmbar, passend zu jeder Stimmung und Tageszeit.",
             "Alle Komponenten sind für die Hitze und Luftfeuchtigkeit einer Saunaumgebung ausgelegt und gewährleisten eine sichere, zuverlässige Leistung über Jahre täglicher Nutzung."
           ]
         },
@@ -840,7 +840,7 @@
           "title": "Bankhöhe",
           "paragraphs": [
             "Die Bankhöhe spielt eine entscheidende Rolle für die Qualität Ihres Saunaerlebnisses. Höhere Bänke liegen näher an der Decke, wo die Temperaturen am höchsten sind, während niedrigere Bänke eine sanftere, entspanntere Wärme bieten.",
-            "SAWO Bänke sind aus hochwertigem, kammergetrocknetem Holz gefertigt und so positioniert, dass sie Wärmeeinwirkung und Komfort gleichzeitig maximieren. Erhältlich in geraden und L-förmigen Konfigurationen, passend zu jedem Raumlayout.",
+            "SAWO Bänke sind aus hochwertigem, kammergetrocknetem Holz gefertigt und so platziert, dass Wärme und Komfort gleichermaßen zur Geltung kommen. Erhältlich als gerade oder L-förmige Bank, passend zu jedem Raumgrundriss.",
             "Jede Bank ist auf eine glatte, splitterfreie Oberfläche veredelt, konzipiert für die tägliche Nutzung ohne Wartungsaufwand."
           ]
         },
@@ -849,7 +849,7 @@
           "title": "Hervorragende Hitze",
           "paragraphs": [
             "Gleichmäßige, konstante Hitze unterscheidet eine großartige Sauna von einer guten. SAWO Öfen sind so konzipiert, dass sie die Wärme gleichmäßig im gesamten Raum verteilen – keine kalten Ecken, keine Hitzenester.",
-            "Unsere Öfen erreichen Zieltemperaturen schnell und halten sie präzise, konzipiert für Effizienz, ohne auf die tiefe, durchdringende Hitze zu verzichten, die das finnische Erlebnis ausmacht.",
+            "Unsere Öfen erreichen die Zieltemperatur schnell und halten sie präzise. Sie sind auf Effizienz ausgelegt, ohne dass die tiefe, durchdringende Hitze leidet, die das finnische Saunaerlebnis ausmacht.",
             "Kompatibel mit sowohl feuchten als auch trockenen Saunasitzungen, für volle Kontrolle über Intensität und Charakter jeder Sitzung."
           ]
         },
@@ -896,8 +896,8 @@
           "tab": "Isolierung",
           "title": "Isolierung",
           "paragraphs": [
-            "Eine ordnungsgemäße Isolierung ist die Grundlage einer effizienten Sauna. SAWO Räume sind mit hochleistungsfähiger Isolierung gebaut, die die Wärme in der Kabine hält und Energieverluste durch Wände, Boden und Decke verhindert.",
-            "Das bedeutet schnellere Aufheizzeiten, geringere Betriebskosten und eine gleichmäßigere Temperatur während Ihrer Sitzung, unabhängig von den Umgebungsbedingungen draußen.",
+            "Eine gute Isolierung ist die Grundlage einer effizienten Sauna. SAWO Räume sind mit hochwertiger Isolierung gebaut, die die Wärme in der Kabine hält und Energieverluste über Wände, Boden und Decke verhindert.",
+            "Das bedeutet schnelleres Aufheizen, geringere Betriebskosten und eine gleichmäßigere Temperatur während des gesamten Saunagangs – unabhängig von den Bedingungen draußen.",
             "Die Isolierung von SAWO ist zudem feuchtigkeitsbeständig und schützt die strukturelle Integrität des Raums über Jahre täglicher Nutzung und Dampfeinwirkung."
           ]
         }
@@ -911,19 +911,19 @@
         {
           "title": "Ihr eigener privater Rückzugsort",
           "paragraphs": [
-            "Stellen Sie sich vor, Sie beenden einen langen Tag und treten in Ihre eigene Sauna ein – die Wärme steigt, die Muskeln entspannen sich, die Welt draußen wird still. SAWO Saunaräume bringen dieses Erlebnis nach Hause, erhältlich in Größen von kompakten 1–3-Personen-Räumen bis hin zu geräumigen 6+-Personen-Suiten, sodass es für jeden Raum und jeden Haushalt die perfekte Lösung gibt.",
-            "Egal, ob Sie einen Ort der Ruhe für sich allein oder einen Platz zum Entspannen mit Familie und Freunden suchen – unsere Räume sind so konzipiert, dass dieser Luxus mühelos und dauerhaft verfügbar ist, keine Fitnessstudio-Mitgliedschaft, keine Voranmeldung, nur pure finnische Wärme, wann immer Sie sie brauchen."
+            "Stellen Sie sich vor, Sie kommen nach einem langen Tag nach Hause und treten in Ihre eigene Sauna – die Wärme steigt, die Muskeln entspannen sich, die Welt draußen wird still. SAWO Saunaräume bringen dieses Erlebnis zu Ihnen nach Hause: von kompakten Räumen für 1–3 Personen bis zu großzügigen Räumen für 6 und mehr Personen. So gibt es für jeden Raum und jeden Haushalt die passende Lösung.",
+            "Ob Rückzugsort für sich allein oder Platz zum Entspannen mit Familie und Freunden – unsere Räume machen diesen Luxus mühelos und dauerhaft verfügbar: ohne Fitnessstudio-Mitgliedschaft, ohne Voranmeldung, einfach pure finnische Wärme, wann immer Sie sie brauchen."
           ]
         },
         {
           "title": "Authentische finnische Handwerkskunst",
           "paragraphs": [
-            "SAWO baut seit über 30 Jahren Saunen in Finnland, und jeder Raum spiegelt dieses Erbe wider. Jede Sauna ist in Zeder, Espe oder Kiefer erhältlich, wobei jedes Holz seinen eigenen natürlichen Charakter, Duft und sein Gefühl in Ihre Sitzungen einbringt.",
+            "SAWO baut seit über 30 Jahren Saunen in Finnland, und jeder Raum spiegelt diese Tradition wider. Jede Sauna gibt es in Zeder, Espe oder Kiefer – jedes Holz bringt seinen eigenen Charakter, Duft und sein eigenes Gefühl mit.",
             "Wählen Sie zwischen geraden oder L-förmigen Bankkonfigurationen, mit links- und rechtsseitigen Türoptionen passend zu Ihrem Raum. Jedes Detail, vom Bankdesign bis zur Paneelverbindung, ist so gestaltet, wie es die Finnen schon immer getan haben – mit Einfachheit, Qualität und Langlebigkeit im Sinn."
           ]
         }
       ],
-      "featureText": "Regelmäßige Saunanutzung entgiftet auf natürliche Weise, verbessert die Durchblutung und beschleunigt die Muskelerholung nach dem Sport. Die Wärme lindert Stress, vertieft den Schlaf und hinterlässt ein Gefühl der Erholung, Sitzung für Sitzung. Und über die Wellness-Vorteile hinaus ist ein SAWO Saunaraum eine dauerhafte Bereicherung für Ihr Zuhause, die seinen Wert steigert und ihn hervorhebt.",
+      "featureText": "Regelmäßiges Saunieren entgiftet auf natürliche Weise, verbessert die Durchblutung und beschleunigt die Muskelregeneration nach dem Sport. Die Wärme baut Stress ab, vertieft den Schlaf, und Sie fühlen sich nach jedem Saunagang erholt. Und über den Wellness-Nutzen hinaus ist ein SAWO Saunaraum eine bleibende Bereicherung für Ihr Zuhause, die seinen Wert steigert und es aus der Masse hervorhebt.",
       "perfCards": [
         {
           "label": "Zeder, Espe oder Kiefer",
@@ -991,8 +991,8 @@
       "panels": {
         "standard": {
           "descriptions": [
-            "Der SAWO Standard-Saunaraum bringt das authentische finnische Saunaerlebnis in Ihr Zuhause. Konzipiert mit Einfachheit und Eleganz, verbindet er traditionelle Handwerkskunst mit moderner Technik.",
-            "Jeder Raum ist präzisionsgefertigt, um optimale Wärmezirkulation und Energieeffizienz zu gewährleisten, für eine gleichbleibend angenehme Saunasitzung jedes Mal."
+            "Der SAWO Standard-Saunaraum bringt das authentische finnische Saunaerlebnis in Ihr Zuhause. Schlicht und elegant gestaltet, verbindet er traditionelle Handwerkskunst mit moderner Technik.",
+            "Jeder Raum ist präzise gefertigt, damit die Wärme optimal zirkuliert und die Energie effizient genutzt wird – für einen gleichmäßig angenehmen Saunagang, jedes Mal."
           ],
           "features": [
             "Einfacher Zusammenbau mit vorgefertigten Wandpaneelen",
@@ -1056,7 +1056,7 @@
     "callToAction": {
       "label": "Ihr Wohlbefinden wartet auf Sie",
       "title": "Bereit, Ihre Traumsauna zu bauen?",
-      "description": "Lassen Sie sich von unseren Sauna-Spezialisten durch jeden Schritt begleiten. Von der Designberatung bis zur Installationsunterstützung sind wir für Sie da, um das ultimative Entspannungserlebnis in Ihr Zuhause zu bringen."
+      "description": "Unsere Sauna-Spezialisten begleiten Sie bei jedem Schritt. Von der Designberatung bis zur Unterstützung bei der Installation sind wir für Sie da – für ultimative Entspannung in Ihrem Zuhause."
     },
     "roomTitles": {
       "standard": "Standard-Saunaraum",
@@ -1068,7 +1068,7 @@
       "standard": "SAWO Klassische Saunaräume bieten ein zeitloses Saunaerlebnis mit hochwertigem nordischem Holz und praktischen Bankanordnungen.",
       "glassfront": "SAWO Glasfront-Saunaräume bieten ein modernes Saunaerlebnis mit widerstandsfähigem Glas für beeindruckende Ausblicke, ohne auf Praktikabilität zu verzichten.",
       "infrared": "SAWO Infrarotsaunen bieten sanfte, therapeutische Wärme durch fortschrittliche Infrarottechnologie für ein entspannendes und belebendes Erlebnis.",
-      "compact": "SAWO Kompakt-Saunaräume bieten eine sofortige, stabile, steckerfertige Saunalösung für urbane Räume, während ein verborgener Ofen für Sicherheit und maximale Aussicht sorgt."
+      "compact": "SAWO Kompakt-Saunaräume sind eine stabile Plug-and-play-Lösung für urbane Räume und sofort einsatzbereit. Der verdeckte Ofen sorgt für Sicherheit und freie Sicht."
     },
     "benchTypes": {
       "straight": "Gerade Bank",
@@ -1191,7 +1191,7 @@
     "brochureLabel": "Paneele & Hölzer Broschüre",
     "intro": {
       "title": "Entdecken Sie unser Premium-Sortiment an Holzpaneelen & Hölzern",
-      "desc": "Gefertigt für Schönheit und Langlebigkeit zugleich, werten unsere hochwertigen Holzpaneele und Hölzer jeden Saunaraum auf. Wählen Sie aus einer Vielzahl an Premium-Holzoptionen, darunter Zeder, Espe und Fichte, konzipiert um Hitze und Feuchtigkeit standzuhalten und dabei ein natürliches, entspannendes Ambiente zu schaffen."
+      "desc": "Schön und langlebig zugleich: Unsere hochwertigen Holzpaneele und Hölzer werten jeden Saunaraum auf. Wählen Sie aus verschiedenen Premium-Holzarten, darunter Zeder, Espe und Fichte. Sie halten Hitze und Feuchtigkeit stand und schaffen ein natürliches, entspannendes Ambiente."
     },
     "panelsHeading": "Holzpaneele",
     "benchHeading": "Bankhölzer",

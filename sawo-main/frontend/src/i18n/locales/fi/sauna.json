@@ -41,7 +41,7 @@
   },
   "controls": {
     "heading": "Saunan ohjauskeskukset",
-    "intro": "Erillisen ohjauskeskuksen käyttäminen SAWOn kiukaiden kanssa antaa sinun päättää, millaisen saunakokemuksen haluat. Säädä lämpötilaa, kosteutta, aikaa, tuulettimen käyttöä ja valaistuksen himmennystä tai säästä energiaa kulutuslaskurin avulla.",
+    "intro": "Erillisellä ohjauskeskuksella päätät itse, millaisen saunakokemuksen haluat SAWOn kiukaalla. Säädä lämpötilaa, kosteutta, aikaa, tuuletinta ja valaistuksen himmennystä tai säästä energiaa kulutuslaskurin avulla.",
     "items": {
       "innova": {
         "title": "Innova-sarja",
@@ -49,7 +49,7 @@
       },
       "saunova": {
         "title": "Saunova-sarja",
-        "desc": "Monipuolinen ohjauskeskus saunan lämpötilan, kosteuden, ilmanvaihdon ja valaistuksen säätöön. Mukana älykäs ohjaus, oviasennon tunnistin ja ennakkoajastin sekä lisävarusteina saatavat tuuletin-, himmennin- ja Combi-toiminnot."
+        "desc": "Monipuolinen ohjauskeskus saunan lämpötilan, kosteuden, ilmanvaihdon ja valaistuksen säätöön. Mukana älykäs ohjaus, ovianturi ja ennakkoajastin sekä lisävarusteina tuuletin-, himmennin- ja Combi-toiminnot."
       },
       "accessories": {
         "title": "Ohjauskeskusten lisävarusteet",
@@ -68,7 +68,7 @@
       },
       "pailsLadles": {
         "title": "Kiulut ja kauhat",
-        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy kiuluja 2–40 litran kokoisina. Valitse perinteinen setri, haapa tai mänty tai moderni ruostumaton teräs. Täydennä settisi kauhalla."
+        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy 2–40 litran kiuluja perinteisestä setristä, haavasta tai männystä tai modernista ruostumattomasta teräksestä. Täydennä kokonaisuus kauhalla."
       },
       "thermometers": {
         "title": "Lämpömittarit ja yhdistelmämittarit",
@@ -88,7 +88,7 @@
       },
       "doorsHandles": {
         "title": "Ovet ja kahvat",
-        "desc": "Kohota saunasi tasoa SAWOn saunanovilla. Kestävyyttä varten valmistetut ovet sisältävät kumitiivisteen, magneettilukon, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
+        "desc": "Nosta saunasi uudelle tasolle SAWOn saunanovilla. Kestäviksi valmistetuissa ovissa on kumitiiviste, magneettilukko, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
       },
       "benches": {
         "title": "Lauteet ja lattialaatat",
@@ -117,7 +117,7 @@
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
-      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa."
     },
     "video": {
       "title": "Kenelle SAWOn kiukaat sopivat?",
@@ -126,15 +126,15 @@
     "items": {
       "tower": {
         "title": "Tower-sarja",
-        "caption": "SAWO Tower -kiukaita kuvaillaan parhaiten \"saunan kivipilareiksi\". Vahvat, ruostumattomasta teräksestä valmistetut renkaat pitävät sisällään suuria määriä kiviä. Nämä kiukaat on suunniteltu levittämään löylyä tasaisesti saunan alaosasta aina kattoon asti."
+        "caption": "SAWO Tower -kiukaita kuvaillaan parhaiten saunan kivipilareiksi. Vahvoihin ruostumattomasta teräksestä valmistettuihin renkaisiin mahtuu valtava määrä kiviä. Kiukaat on suunniteltu levittämään löylyä tasaisesti saunan alaosasta aina kattoon asti."
       },
       "floor": {
         "title": "Lattiakiuassarja",
-        "caption": "Lattiasarjamme kiukaat ovat siirrettäviä, tyylikkäitä ja kestäviä itsenäisiä korkean suorituskyvyn kiukaita, jotka takaavat optimaalisen lämmönjaon ja mukavuuden. Useampien sijoitusvaihtoehtojen ansiosta kiukaat mahdollistavat saunan entistä yksilöllisemmän ilmeen."
+        "caption": "Lattiakiukaamme ovat siirrettäviä, tyylikkäitä ja kestäviä vapaasti seisovia huippukiukaita, jotka takaavat optimaalisen lämmönjaon ja mukavuuden. Koska ne voi sijoittaa monin eri tavoin, saunan ilmeen voi räätälöidä entistä persoonallisemmaksi."
       },
       "wallMounted": {
         "title": "Seinäkiuassarja",
-        "caption": "SAWOn seinäkiukaat tarjoavat vahvan suorituskyvyn kompaktissa koossa. Lisäturvallisuuden vuoksi useimmat seinäkiukaamme ovat saatavilla viileänä pysyvällä kuitupinnoitteella, joka auttaa ehkäisemään vahinkopalovammoja."
+        "caption": "SAWOn seinäkiukaissa on vahva teho pienessä koossa. Lisäturvaksi useimmat seinäkiukaamme ovat saatavana viileänä pysyvällä kuitupinnoitteella, joka ehkäisee vahingossa tapahtuvia palovammoja."
       },
       "combi": {
         "title": "Combi-sarja",
@@ -180,7 +180,7 @@
       },
       "pailsLadles": {
         "title": "Kiulut ja kauhat",
-        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy kiuluja 2–40 litran kokoisina. Valitse perinteinen setri, haapa tai mänty tai moderni ruostumaton teräs. Täydennä settisi kauhalla."
+        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy 2–40 litran kiuluja perinteisestä setristä, haavasta tai männystä tai modernista ruostumattomasta teräksestä. Täydennä kokonaisuus kauhalla."
       },
       "thermometers": {
         "title": "Lämpömittarit ja yhdistelmämittarit",
@@ -200,7 +200,7 @@
       },
       "doorsHandles": {
         "title": "Ovet ja kahvat",
-        "desc": "Kohota saunasi tasoa SAWOn saunanovilla. Kestävyyttä varten valmistetut ovet sisältävät kumitiivisteen, magneettilukon, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
+        "desc": "Nosta saunasi uudelle tasolle SAWOn saunanovilla. Kestäviksi valmistetuissa ovissa on kumitiiviste, magneettilukko, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
       },
       "benches": {
         "title": "Lauteet ja lattialaatat",
@@ -228,7 +228,7 @@
     },
     "intro": {
       "title": "Tutustu huippuluokan saunan ohjauskeskusvalikoimaamme",
-      "desc": "Erillisen ohjauskeskuksen käyttäminen SAWOn kiukaiden kanssa antaa sinun päättää, millaisen saunakokemuksen haluat. Säädä lämpötilaa, kosteutta, aikaa, tuulettimen käyttöä ja valaistuksen himmennystä tai säästä energiaa kulutuslaskurin avulla."
+      "desc": "Erillisellä ohjauskeskuksella päätät itse, millaisen saunakokemuksen haluat SAWOn kiukaalla. Säädä lämpötilaa, kosteutta, aikaa, tuuletinta ja valaistuksen himmennystä tai säästä energiaa kulutuslaskurin avulla."
     },
     "groupLabels": {
       "Coming Soon": "Tulossa pian",
@@ -256,7 +256,7 @@
   "towerPage": {
     "meta": {
       "title": "Tower-sarjan saunakiukaat",
-      "description": "Tutustu SAWOn Tower-sarjan saunakiukaisiin: energiatehokkaat, tyylikkäät pystymalliset kiukaat, joissa erinomainen lämmönjakautuminen nykyaikaiseen hyvinvointisaunakokemukseen."
+      "description": "Tutustu SAWOn Tower-sarjan saunakiukaisiin: energiatehokkaita, tyylikkäitä pystymalleja, jotka jakavat lämmön erinomaisesti ja sopivat nykyaikaiseen hyvinvointisaunaan."
     },
     "hero": {
       "title": "TOWER-SARJAN SAUNAKIUKAAT",
@@ -266,7 +266,7 @@
     },
     "intro": {
       "title": "Esittelyssä huippuluokan Tower-sarjan saunakiukaat",
-      "desc": "Nauti nykyaikaisista, energiatehokkaista saunoista, jotka on suunniteltu rentoutumista ja hyvinvointia varten, tyylikkäällä ulkoasulla ja erinomaisella mukavuudella. Koe erinomainen lämmönjakautuminen ja tyylikäs muotoilu huippuluokan Tower-sarjan saunakiukaillamme."
+      "desc": "Nauti nykyaikaisista, energiatehokkaista saunoista, jotka on suunniteltu rentoutumiseen ja hyvinvointiin ja joissa yhdistyvät tyylikäs ilme ja erinomainen mukavuus. Koe erinomainen lämmönjakautuminen ja tyylikäs muotoilu huippuluokan Tower-kiukaidemme avulla."
     },
     "types": {
       "round": "Pyöreä",
@@ -276,7 +276,7 @@
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWO-kiuas",
-      "desc": "SAWO-kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, tarjoten tasaisen suorituskyvyn luotettavaan ja ylivertaiseen saunakokemukseen joka kerta.",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa.",
       "userFriendly": "Käyttäjäystävälliset ohjaimet: Säädä lämpötilaa ja aikaa helposti täydellisen saunakokemuksen saavuttamiseksi."
     },
     "empty": "Tower-kiukaita ei ole saatavilla."
@@ -335,19 +335,19 @@
           "desc": "Tilava saunahuone 6 hengelle tai enemmälle. Täydellinen suuriin koteihin, hyvinvointitiloihin tai yrityskäyttöön, joissa halutaan tarjota laadukas ryhmäkokemus."
         },
         "r4": {
-          "name": "Pieni lasijulkisivuinen saunahuone – 1414RS",
+          "name": "Pieni lasiseinäinen saunahuone – 1414RS",
           "tag": "Pieni",
-          "desc": "Kompakti sauna 1–3 hengelle, jossa on täysi lasijulkisivu luonnonvalon ja avaruuden tunnun lisäämiseksi. Ihanteellinen moderneihin sisustuksiin, jotka kaipaavat valoisampaa ja avoimempaa saunakokemusta."
+          "desc": "Kompakti sauna 1–3 hengelle, jonka koko etuseinä on lasia – luonnonvalo ja tilan avaruus korostuvat. Ihanteellinen moderneihin sisustuksiin, jotka kaipaavat valoisampaa ja avoimempaa saunakokemusta."
         },
         "r5": {
-          "name": "Keskikokoinen lasijulkisivuinen saunahuone – 1420RS",
+          "name": "Keskikokoinen lasiseinäinen saunahuone – 1420RS",
           "tag": "Keskikokoinen",
-          "desc": "Suunniteltu 4–6 hengelle, tämä lasijulkisivuinen sauna yhdistää tilavan mukavuuden nykyaikaiseen tyylikkyyteen. Läpinäkyvä julkisivu luo avoimen, ilmavan tunnelman säilyttäen samalla aidon saunakokemuksen."
+          "desc": "Tämä 4–6 hengen lasiseinäinen sauna yhdistää tilavan mukavuuden nykyaikaiseen tyylikkyyteen. Läpinäkyvä etuseinä luo avoimen, ilmavan tunnelman, mutta sauna säilyttää aidon saunan ominaisuudet."
         },
         "r6": {
-          "name": "Suuri lasijulkisivuinen saunahuone – 1922RS",
+          "name": "Suuri lasiseinäinen saunahuone – 1922RS",
           "tag": "Suuri",
-          "desc": "Ylellinen 6+ hengen sauna, jossa on vaikuttava täysilasinen julkisivu ylellisen, avoimen tunnelman luomiseksi. Täydellinen näyttäviin hyvinvointitiloihin, jotka yhdistävät muotoilun ja rentoutumisen."
+          "desc": "Premium-luokan sauna 6+ hengelle, jonka näyttävä lasiseinä luo avoimen ja ylellisen tunnelman. Täydellinen näyttäviin hyvinvointitiloihin, jotka yhdistävät muotoilun ja rentoutumisen."
         }
       },
       "heaters": {
@@ -364,17 +364,17 @@
         "h3": {
           "name": "Nordex Pro NS",
           "tag": "Lattiakiuas",
-          "desc": "Nordex Pro NS on uusin malli luotetussa Nordex-mallistossa. Se on suunniteltu pitkäikäiseen suorituskykyyn erillisellä kivitilalla, joka suojaa lämmityselementtejä ja pidentää laitteen käyttöikää."
+          "desc": "Nordex Pro NS on uusin malli luotetussa Nordex-mallistossa. Se on suunniteltu kestämään: erillinen kivitila suojaa vastuksia ja pidentää laitteen käyttöikää."
         },
         "h4": {
           "name": "Krios Ni2",
           "tag": "Seinäkiuas",
-          "desc": "Krios Ni2 tarjoaa rikkaamman ja kosteamman suomalaisen saunakokemuksen suuremman kivisäiliönsä ansiosta. Tyylikkäässä ruostumattomasta teräksestä valmistetussa kotelossa, jossa on SAWOn tunnusomainen kuvio, se yhdistää tyylin ja suorituskyvyn."
+          "desc": "Krios Ni2 tarjoaa rikkaamman ja kosteamman suomalaisen saunakokemuksen suuremman kivisäiliönsä ansiosta. Tyylikäs ruostumattomasta teräksestä valmistettu kotelo SAWOn tunnusomaisine kuvioineen yhdistää tyylin ja suorituskyvyn."
         },
         "h5": {
           "name": "Aries Round Black Ni2",
           "tag": "Tornikiuas",
-          "desc": "Aries Round jakaa kaikkien Tower-kiukaiden minimalistisen tyylikkyyden. Korkea ja tilaa säästävä, se levittää lämmön tasaisesti ja sopii ihanteellisesti asennettavaksi saunan keskelle tai upotettavaksi lauteisiin."
+          "desc": "Aries Round on yhtä minimalistisen tyylikäs kuin muutkin Tower-kiukaat. Korkea ja tilaa säästävä kiuas levittää lämmön tasaisesti ja sopii ihanteellisesti saunan keskelle tai lauteisiin upotettavaksi."
         },
         "h6": {
           "name": "Scandia NS",
@@ -401,7 +401,7 @@
         "a4": {
           "name": "Dragon Set",
           "tag": "Saatavilla: Musta & Setri",
-          "desc": "Vertaansa vailla olevalla tyylillä ja innovaatiolla Dragon-sarja tarjoaa ainutlaatuisen, rohkean ilmeen ylimääräisellä tyylikkyydellä. Tämä sarja kuuluu Dragonfire-sarjaan, jonka on suunnitellut tunnettu suomalainen muotoilija Stefan Lindfors."
+          "desc": "Dragon-tarvikesarja tuo saunaan ainutlaatuisen, rohkean ilmeen vertaansa vailla olevalla tyylillään ja innovatiivisuudellaan. Sarja kuuluu Dragonfire-mallistoon, jonka on suunnitellut tunnettu suomalainen muotoilija Stefan Lindfors."
         }
       }
     },
@@ -421,7 +421,7 @@
           "tab": "Valaistus",
           "title": "Valaistus",
           "paragraphs": [
-            "Oikea valaistus muuttaa saunahetken täydelliseksi aistikokemukseksi. SAWOn integroitu LED-järjestelmä on suunniteltu täydentämään puun lämpöä ja huoneen lämpötilaa.",
+            "Oikea valaistus tekee saunomisesta kokonaisvaltaisen aistielämyksen. SAWOn integroitu LED-järjestelmä täydentää puun lämpöä ja saunan löylyä.",
             "Pehmeä, häikäisemätön sijoittelu lauteiden ja katon ympärille luo rauhallisen, mukaansatempaavan tunnelman – ei koskaan kova tai kliininen. Täysin himmennettävissä sopimaan mihin tahansa tunnelmaan tai vuorokaudenaikaan.",
             "Kaikki komponentit on mitoitettu saunaympäristön lämpöä ja kosteutta varten, mikä takaa turvallisen ja luotettavan toiminnan vuosien päivittäisessä käytössä."
           ]
@@ -430,8 +430,8 @@
           "tab": "Lauteiden korkeus",
           "title": "Lauteiden korkeus",
           "paragraphs": [
-            "Lauteiden korkeudella on ratkaiseva merkitys saunakokemuksen laatuun. Korkeammat lauteet ovat lähempänä kattoa, jossa lämpötila on korkein, kun taas matalammat lauteet tarjoavat leppoisamman, rennomman lämmön.",
-            "SAWOn lauteet on valmistettu laadukkaasta kuivatusta puutavarasta ja sijoitettu maksimoimaan sekä lämmön että mukavuuden samanaikaisesti. Saatavilla suorina ja L-mallisina kokoonpanoina sopimaan mihin tahansa huoneen pohjaratkaisuun.",
+            "Lauteiden korkeus vaikuttaa ratkaisevasti saunomisen laatuun. Ylemmät lauteet ovat lähempänä kattoa, jossa on kuumin, kun taas alemmilla lauteilla lämpö on lempeämpää ja rennompaa.",
+            "SAWOn lauteet on tehty laadukkaasta uunikuivatusta puusta ja sijoitettu niin, että sekä lämpö että mukavuus pääsevät parhaiten oikeuksiinsa. Saatavana suorina tai L-mallisina, joten ne sopivat mihin tahansa huoneratkaisuun.",
             "Jokainen laude on viimeistelty sileäksi ja tikkuvapaaksi pinnaksi, joka kestää päivittäisen käytön ilman huoltotarpeita."
           ]
         },
@@ -439,8 +439,8 @@
           "tab": "Erinomainen lämpö",
           "title": "Erinomainen lämpö",
           "paragraphs": [
-            "Tasainen, johdonmukainen lämpö erottaa erinomaisen saunan hyvästä. SAWOn kiukaat on suunniteltu jakamaan lämpöä tasaisesti koko huoneeseen – ei kylmiä nurkkia, ei kuumia pisteitä.",
-            "Kiukaamme saavuttavat tavoitelämpötilan nopeasti ja pitävät sen tarkasti, ja ne on suunniteltu tehokkuutta silmällä pitäen tinkimättä siitä syvästä, läpitunkevasta lämmöstä, joka määrittää suomalaisen saunakokemuksen.",
+            "Tasainen ja vakaa lämpö erottaa erinomaisen saunan hyvästä. SAWOn kiukaat on suunniteltu jakamaan lämpö tasaisesti koko huoneeseen – ei kylmiä nurkkia, ei kuumia pisteitä.",
+            "Kiukaamme saavuttavat tavoitelämpötilan nopeasti ja pitävät sen tarkasti. Ne on suunniteltu tehokkaiksi tinkimättä syvästä, läpitunkevasta lämmöstä, joka kuuluu suomalaiseen saunaan.",
             "Sopii sekä kosteisiin että kuiviin löylyihin, ja antaa sinulle täyden hallinnan jokaisen saunahetken voimakkuudesta ja luonteesta."
           ]
         },
@@ -487,7 +487,7 @@
           "tab": "Eristys",
           "title": "Eristys",
           "paragraphs": [
-            "Kunnollinen eristys on tehokkaan saunan perusta. SAWOn huoneet on rakennettu tehokkaalla eristyksellä, joka pitää lämmön kopin sisällä ja estää energiahävikin seinien, lattian ja katon kautta.",
+            "Kunnollinen eristys on tehokkaan saunan perusta. SAWO-saunahuoneiden tehokas eristys pitää lämmön sisällä ja estää energiahävikin seinien, lattian ja katon kautta.",
             "Tämä tarkoittaa nopeampia lämpenemisaikoja, alhaisempia käyttökustannuksia ja tasaisempaa lämpötilaa koko löylyn ajan riippumatta ulkona vallitsevista olosuhteista.",
             "SAWOn eristys on myös kosteutta kestävää, mikä suojaa huoneen rakenteellista kestävyyttä vuosien päivittäisessä käytössä ja löylyn kosteudessa."
           ]
@@ -502,19 +502,19 @@
         {
           "title": "Oma yksityinen keidas",
           "paragraphs": [
-            "Kuvittele, kuinka pitkän päivän päätteeksi astut omaan saunaasi – lämpö nousee, lihakset rentoutuvat ja ulkomaailma vaikenee. SAWOn saunahuoneet tuovat tämän kokemuksen kotiisi, ja niitä on saatavilla kompakteista 1–3 hengen huoneista aina tilaviin 6+ hengen tiloihin asti, joten jokaiselle tilalle ja kotitaloudelle löytyy täydellinen ratkaisu.",
-            "Etsitpä sitten yksityistä rauhoittumispaikkaa tai tilaa rentoutua perheen ja ystävien kanssa, huoneemme on suunniteltu tekemään tästä ylellisyydestä vaivatonta ja pysyvää – ei kuntosalijäsenyyttä, ei varauksia etukäteen, vain aitoa suomalaista löylyä aina kun sitä tarvitset."
+            "Kuvittele, kuinka pitkän päivän päätteeksi astut omaan saunaasi – lämpö nousee, lihakset rentoutuvat ja ulkomaailma hiljenee. SAWOn saunahuoneet tuovat tämän kokemuksen kotiisi: valittavana on kompakteja 1–3 hengen huoneita ja tilavia 6+ hengen saunoja, joten jokaiseen tilaan ja kotiin löytyy sopiva ratkaisu.",
+            "Etsitpä omaa rauhoittumispaikkaa tai tilaa rentoutua perheen ja ystävien kanssa, saunahuoneemme tuovat tämän ylellisyyden osaksi arkeasi: ei kuntosalijäsenyyttä, ei ajanvarausta, vain aitoa suomalaista löylyä aina kun sitä tarvitset."
           ]
         },
         {
           "title": "Aitoa suomalaista käsityötaitoa",
           "paragraphs": [
             "SAWO on rakentanut saunoja Suomessa yli 30 vuoden ajan, ja jokainen huone heijastaa tätä perintöä. Jokainen sauna on saatavilla setristä, haavasta tai männystä – jokainen puulaji tuo oman luonteensa, tuoksunsa ja tunnun löylyihisi.",
-            "Valitse suorien tai L-mallisten lauteiden väliltä, vasemman- tai oikeanpuoleisella ovella tilaasi sopien. Jokainen yksityiskohta, lauteiden asettelusta paneelien liitoksiin, on suunniteltu niin kuin suomalaiset ovat sen aina tehneet: yksinkertaisuutta, laatua ja kestävyyttä ajatellen."
+            "Valitse suorat tai L-mallin lauteet ja tilaasi sopiva vasen- tai oikeakätinen ovi. Jokainen yksityiskohta lauteiden asettelusta paneelien liitoksiin on suunniteltu suomalaiseen tapaan: yksinkertaisuutta, laatua ja kestävyyttä ajatellen."
           ]
         }
       ],
-      "featureText": "Säännöllinen saunominen puhdistaa elimistöä luonnollisesti, parantaa verenkiertoa ja nopeuttaa lihasten palautumista harjoittelun jälkeen. Lämpö helpottaa stressiä, syventää unta ja jättää sinut virkistyneeksi kerta toisensa jälkeen. Hyvinvointihyötyjen lisäksi SAWOn saunahuone on pysyvä lisä kotiisi, joka nostaa sen arvoa ja erottaa sen muista.",
+      "featureText": "Säännöllinen saunominen puhdistaa elimistöä luonnollisesti, parantaa verenkiertoa ja nopeuttaa lihasten palautumista harjoittelun jälkeen. Lämpö helpottaa stressiä, syventää unta ja jättää sinut virkistyneeksi kerta toisensa jälkeen. Hyvinvointihyötyjen lisäksi SAWOn saunahuone on pysyvä lisä kotiisi: se nostaa kodin arvoa ja tekee siitä erityisen.",
       "perfCards": [
         {
           "label": "Setri, haapa tai mänty",
@@ -575,7 +575,7 @@
       "aboutThisRoom": "Tietoa tästä huoneesta",
       "pills": {
         "standard": "Standard",
-        "glassfront": "Lasijulkisivu",
+        "glassfront": "Lasiseinä",
         "infrared": "Infrapuna",
         "compact": "Compact"
       },
@@ -595,7 +595,7 @@
         "glassfront": {
           "descriptions": [
             "SAWO Glass Front -saunahuone yhdistää nykyaikaisen muotoilun perinteisen saunan etuihin. Vaikuttava täyslasinen etupaneeli luo avaran ja ilmavan tunnelman säilyttäen samalla poikkeuksellisen hyvän lämmönpidon.",
-            "Täydellinen niille, jotka arvostavat sekä esteettisyyttä että toimivuutta – lasijulkisivu tuo luonnonvaloa saunatilaasi ja luo ylellisen, kylpylämäisen tunnelman."
+            "Täydellinen niille, jotka arvostavat sekä esteettisyyttä että toimivuutta – lasiseinä tuo luonnonvaloa saunatilaasi ja luo ylellisen, kylpylämäisen tunnelman."
           ],
           "features": [
             "Täyslasinen etupaneeli modernia ilmettä varten",
@@ -607,7 +607,7 @@
         "infrared": {
           "descriptions": [
             "SAWOn vakiomalliset infrapunasaunahuoneet ovat saatavilla kahdessa koossa, joko yhdelle tai kahdelle henkilölle. Kaukoinfrapunapaneelit eivät lämmitä huonetta yhtä paljon kuin perinteinen sauna, joten suurin osa tuotetusta lämmöstä lämmittää kehoa suoraan.",
-            "Nämä energiatehokkaat saunat käyttävät kuitupinnoitettuja kaukoinfrapunapaneeleita (170 W/paneeli) ja tarjoavat 1 hengen (1200 W) tai 2 hengen (1400 W) kokoonpanoja laadukkaalla setrirakenteella ja plug-and-play 230 V -asennuksella."
+            "Nämä energiatehokkaat saunat on varustettu kuitupinnoitetuilla kaukoinfrapunapaneeleilla (170 W/paneeli), ja niitä on saatavana 1 hengen (1200 W) tai 2 hengen (1400 W) mallina. Laadukas setrirakenne ja pistorasiaan kytkettävä 230 V:n asennus."
           ],
           "features": [
             "Kuitupinnoitetut kaukoinfrapunapaneelit (170 W/paneeli)",
@@ -621,7 +621,7 @@
         "compact": {
           "descriptions": [
             "Compact-saunahuoneen plug-and-play-ominaisuudet tarjoavat välittömän käytön ja vakauden, mikä säästää asennuskustannuksissa ja käyttökatkoissa.",
-            "Yhden hengen käyttöön suunniteltu, tilaa säästävä sauna on saatavilla kahdessa koossa ja valmistettu laadukkaasta setristä, mikä tekee siitä täydellisen ratkaisun pienempiin tiloihin tinkimättä aidosta saunakokemuksesta."
+            "Tämä yhden hengen sauna säästää tilaa. Sitä on kahta kokoa, ja se on valmistettu laadukkaasta setristä – täydellinen ratkaisu pieniin tiloihin, kun aidosta saunakokemuksesta ei haluta tinkiä."
           ],
           "features": [
             "Plug-and-play, käyttövalmis heti",
@@ -647,19 +647,19 @@
     "callToAction": {
       "label": "Hyvinvointisi odottaa",
       "title": "Valmis rakentamaan unelmiesi saunan?",
-      "description": "Anna saunaspesialistiemme opastaa sinua jokaisessa vaiheessa. Suunnittelukonsultoinnista asennustukeen – olemme täällä tuomassa täydellisen rentoutumiskokemuksen kotiisi."
+      "description": "Anna saunaspesialistiemme opastaa sinua jokaisessa vaiheessa. Suunnitteluneuvonnasta asennustukeen – autamme sinua saamaan täydellistä rentoutumista kotiisi."
     },
     "roomTitles": {
       "standard": "Standard-saunahuone",
-      "glassfront": "Lasijulkisivuinen saunahuone",
+      "glassfront": "Lasiseinäinen saunahuone",
       "infrared": "Infrapunasaunat",
       "compact": "Compact-saunahuone"
     },
     "roomDescriptions": {
       "standard": "SAWOn klassiset saunahuoneet tarjoavat ajattoman saunakokemuksen laadukkaalla pohjoismaisella puulla ja käytännöllisillä lauteratkaisuilla.",
-      "glassfront": "SAWOn lasijulkisivuiset saunahuoneet tarjoavat modernin saunakokemuksen kestävällä lasilla, joka avaa upeat näkymät tinkimättä käytännöllisyydestä.",
+      "glassfront": "SAWOn lasiseinäiset saunahuoneet tarjoavat modernin saunakokemuksen kestävällä lasilla, joka avaa upeat näkymät tinkimättä käytännöllisyydestä.",
       "infrared": "SAWOn infrapunasaunat tarjoavat leppoisaa, terapeuttista lämpöä edistyneellä infrapunatekniikalla rentouttavaa ja virkistävää kokemusta varten.",
-      "compact": "SAWOn Compact-saunahuoneet tarjoavat välittömän ja vakaan plug-and-play-saunaratkaisun kaupunkitiloihin, ja piilotettu kiuas takaa turvallisuuden ja mahdollisimman avoimet näkymät."
+      "compact": "SAWOn Compact-saunahuoneet ovat vakaa ja heti käyttövalmis plug-and-play-ratkaisu kaupunkitiloihin. Piilotettu kiuas takaa turvallisuuden ja avoimet näkymät."
     },
     "benchTypes": {
       "straight": "Suora laude",
@@ -742,7 +742,7 @@
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
-      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa."
     }
   },
   "stonePage": {
@@ -763,7 +763,7 @@
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
-      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa.",
       "durable": "Kestävä rakenne: Korkealaatuiset materiaalit takaavat pitkäikäisen suorituskyvyn."
     },
     "empty": "Stone-kiukaita ei ole saatavilla."
@@ -771,7 +771,7 @@
   "floorPage": {
     "meta": {
       "title": "Lattiakiuassarjan saunakiukaat",
-      "description": "SAWOn Lattiakiuassarja: tehokkaita, siirrettäviä itsenäisiä saunankiukaita, jotka takaavat optimaalisen lämmönjaon ja pitkäkestoisen mukavuuden koti- ja kaupallisiin saunoihin."
+      "description": "SAWOn lattiakiuassarja: tehokkaita, siirrettäviä ja vapaasti seisovia saunakiukaita, jotka takaavat optimaalisen lämmönjaon ja pitkäkestoisen mukavuuden koti- ja kaupallisiin saunoihin."
     },
     "hero": {
       "title": "SAUNAN LATTIAKIUKAAT",
@@ -786,7 +786,7 @@
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
-      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten."
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa."
     },
     "empty": "Lattiakiukaita ei ole saatavilla."
   },
@@ -803,12 +803,12 @@
     },
     "intro": {
       "title": "Esittelyssä huippuluokan Combi-sarjan saunakiukaat",
-      "desc": "Combi-kiukaat ovat sähkökiukaita, joissa on sisäänrakennettu höyrystin, joten voit valita tavallisen saunan ja höyrysaunan väliltä. Combi-kiukaissa on aromiöljyallas ja patentoitu vedenpinnan tunnistusjärjestelmä, joka varoittaa veden pinnan ollessa matala. Vedenpintaa voidaan tarkkailla helposti vedenpinnan ilmaisinputken avulla (vain vakiomallissa)."
+      "desc": "Combi-kiukaat ovat sähkökiukaita, joissa on sisäänrakennettu höyrystin, joten voit valita tavallisen saunan ja höyrysaunan väliltä. Combi-kiukaissa on aromiöljyallas ja patentoitu vedenpinnan tunnistusjärjestelmä, joka varoittaa veden vähyydestä. Vedenpinnan korkeutta voi seurata helposti ilmaisinputkesta (vain vakiomallissa)."
     },
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
-      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa.",
       "durable": "Kestävä rakenne: Korkealaatuiset materiaalit takaavat pitkäikäisen suorituskyvyn."
     },
     "empty": "Combi-kiukaita ei ole saatavilla."
@@ -831,7 +831,7 @@
     "why": {
       "eyebrow": "SAWO-KIUKAAT",
       "title": "Miksi valita SAWOn kiukaat",
-      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun, ja ne tarjoavat tasaisen suorituskyvyn joka kerta luotettavaa ja ylivertaista saunakokemusta varten.",
+      "desc": "SAWOn kiukaat yhdistävät kestävyyden, energiatehokkuuden ja modernin muotoilun. Ne toimivat luotettavasti ja tasaisesti joka kerta, ja saunakokemus on aina huippuluokkaa.",
       "userFriendly": "Käyttäjäystävälliset ohjaimet: Säädä lämpötilaa ja aikaa helposti täydellisen saunakokemuksen saavuttamiseksi."
     },
     "empty": "Dragonfire-kiukaita ei ole saatavilla."
@@ -848,7 +848,7 @@
     },
     "intro": {
       "title": "SAWOn huolella kootut tarvikesarjat",
-      "desc": "Huolella kootut tarvikesarjamme tarjoavat jotain jokaiselle. Luonnollisista, jätteettömistä vaihtoehdoista rohkeisiin ja tyylikkäisiin muotoiluihin – jokainen sarja täydentää saunanautintoasi täydellisesti yhteensopivilla tuotteilla."
+      "desc": "Huolella kootut tarvikesarjamme tarjoavat jotain jokaiselle. Luonnollisista, jätteettömistä vaihtoehdoista rohkeisiin ja tyylikkäisiin muotoiluihin – jokaisessa sarjassa tuotteet sopivat täydellisesti yhteen ja tekevät saunomisesta entistä nautinnollisempaa."
     },
     "groups": {
       "Accessory Sets": "Tarvikesarjat"
@@ -856,7 +856,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn tarvikesarjat",
-      "description": "SAWOn tarvikesarjat on koottu huolella yhdistämään parhaat kiulut, kauhat, lämpömittarit ja muut tarvikkeet yhdeksi kokonaisuudeksi – säästät aikaa ja varmistat, että jokainen osa toimii täydellisessä sopusoinnussa."
+      "description": "SAWOn tarvikesarjoihin on koottu huolella parhaat kiulut, kauhat, lämpömittarit ja muut tarvikkeet yhdeksi kokonaisuudeksi – säästät aikaa, ja kaikki osat sopivat täydellisesti yhteen."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -875,7 +875,7 @@
     },
     "intro": {
       "title": "Saunan lauteet, lattiamatot ja vaatenaulakot",
-      "desc": "Kohota saunakokemustasi mukavilla ja tyylikkäillä lauteilla, jotka tukevat ja lisäävät rentoutumista. Täydennä saunasi sisustus puisilla lattiamatoilla ja käytännöllisillä vaatenaulakoilla – kaikki valmistettu laadukkaista luonnonmateriaaleista."
+      "desc": "Paranna saunakokemustasi mukavilla ja tyylikkäillä lauteilla, jotka tukevat ja lisäävät rentoutumista. Täydennä saunasi sisustus puisilla lattiamatoilla ja käytännöllisillä vaatenaulakoilla – kaikki on valmistettu laadukkaista luonnonmateriaaleista."
     },
     "groups": {
       "Benches": "Lauteet",
@@ -885,7 +885,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn lauteet ja tarvikkeet",
-      "description": "SAWOn lauteet ja lattiatarvikkeet on valmistettu laadukkaasta puusta – kestäviä, lämpöä kestäviä ja kauniisti viimeisteltyjä. Suunniteltu täydentämään mitä tahansa saunan sisustusta ja tarjoamaan kestävää mukavuutta ja käytännöllisyyttä."
+      "description": "SAWOn lauteet ja lattiatarvikkeet on tehty laadukkaasta puusta: ne kestävät kulutusta ja kuumuutta ja ovat kauniisti viimeisteltyjä. Ne sopivat mihin tahansa saunan sisustukseen ja tuovat kestävää mukavuutta ja käytännöllisyyttä."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -913,7 +913,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn kellot ja tiimalasit",
-      "description": "SAWOn kellot ja tiimalasit on valmistettu luonnonpuusta aidon saunatunnelman luomiseksi. Kestäviä, lämpöä kestäviä ja kauniisti muotoiltuja täydentämään mitä tahansa saunan sisustusta."
+      "description": "SAWOn kellot ja tiimalasit on tehty luonnonpuusta, jotta saunaan tulee aito tunnelma. Ne kestävät kulutusta ja kuumuutta, ja kauniin muotoilunsa ansiosta ne sopivat mihin tahansa saunan sisustukseen."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -932,7 +932,7 @@
     },
     "intro": {
       "title": "Saunan ovet ja kahvat",
-      "desc": "Kohota saunasi tasoa SAWOn laadukkailla ovilla ja kahvoilla. Kestävyyttä varten valmistetut ovet sisältävät kumitiivisteen, magneettilukon, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
+      "desc": "Nosta saunasi uudelle tasolle SAWOn laadukkailla ovilla ja kahvoilla. Kestäviksi valmistetuissa ovissa on kumitiiviste, magneettilukko, ruostumattomat saranat ja laminoidut karmit. Valitse lasiovi, jos haluat saunaan lisää valoa ja avaruuden tuntua."
     },
     "groups": {
       "Sauna Doors": "Saunanovet",
@@ -941,7 +941,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn ovet ja kahvat",
-      "description": "SAWOn saunanovet ja kahvat on suunniteltu vaativaan saunaympäristöön – lämpöä kestäviä, kestäviä ja kauniisti muotoiltuja. Klassisista puukehyksistä moderneihin karkaistun lasin ratkaisuihin, jokainen ovi on rakennettu kestämään ja tekemään vaikutuksen."
+      "description": "SAWOn saunanovet ja kahvat on suunniteltu vaativaan saunaympäristöön: ne kestävät kuumuutta ja kulutusta ja ovat kauniisti muotoiltuja. Klassisista puukehyksistä moderneihin karkaistuista laseista – jokainen ovi on tehty kestämään ja tekemään vaikutuksen."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -960,7 +960,7 @@
     },
     "intro": {
       "title": "Saunan niska- ja selkätuet",
-      "desc": "Puiset niska- ja selkätuet, jotka on valmistettu kestävistä materiaaleista – puusta, muistivaahdosta tai kankaasta – tarjoavat poikkeuksellista mukavuutta saunassa. Kosteutta kestävä verhoilu takaa kestävän laadun."
+      "desc": "Kestävistä materiaaleista – puusta, muistivaahdosta tai kankaasta – valmistetut niska- ja selkätuet tuovat saunaan poikkeuksellista mukavuutta. Kosteutta kestävä verhoilu takaa pitkäikäisen laadun."
     },
     "groups": {
       "Headrests": "Niskatuet",
@@ -969,7 +969,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn mukavuustarvikkeet",
-      "description": "SAWOn niska- ja selkätuet on valmistettu laadukkaasta puusta ja kosteutta kestävistä materiaaleista, suunniteltu tarjoamaan kestävää mukavuutta korkean lämpötilan saunaympäristössä tyylistä tinkimättä."
+      "description": "SAWOn niska- ja selkätuet on valmistettu laadukkaasta puusta ja kosteutta kestävistä materiaaleista. Ne tuovat kestävää mukavuutta saunan kuumiin olosuhteisiin tyylistä tinkimättä."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -988,7 +988,7 @@
     },
     "intro": {
       "title": "Kivistone-vuolukivikokoelma",
-      "desc": "Kivistone tarjoaa monipuolisen valikoiman ainutlaatuisia vuolukivituotteita koteihin, lahjoiksi ja yritysten käyttöön. Laajan innovatiivisten muotoilujen valikoiman ansiosta jokainen tuote tuo suomalaisen vuolukiven luonnollisen kauneuden ja lämpöä säilyttävät ominaisuudet arkeesi."
+      "desc": "Kivistone tarjoaa monipuolisen valikoiman ainutlaatuisia vuolukivituotteita koteihin, lahjoiksi ja yritysten käyttöön. Valikoimaan kuuluu monenlaisia innovatiivisia muotoiluja, ja jokainen tuote tuo suomalaisen vuolukiven luonnollisen kauneuden ja lämmönvarauskyvyn arkeesi."
     },
     "groups": {
       "Kivistone": "Kivistone"
@@ -999,7 +999,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita Kivistone",
-      "description": "Kivistone-vuolukivituotteet tunnetaan luonnollisesta lämmönpidosta, kestävyydestä ja ajattomasta pohjoismaisesta estetiikasta. Jokainen tuote on ainutlaatuisesti valmistettu, mikä tekee niistä ihanteellisia lahjoja ja koko elämän kestäviä kotitarvikkeita."
+      "description": "Kivistone-vuolukivituotteet tunnetaan luonnollisesta lämmönvarauskyvystä, kestävyydestä ja ajattomasta pohjoismaisesta estetiikasta. Jokainen tuote on ainutlaatuinen, joten ne sopivat ihanteellisesti lahjoiksi ja kodin esineiksi, jotka kestävät koko elämän."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -1031,7 +1031,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn kiulut ja kauhat",
-      "description": "SAWOn kiulut ja kauhat on valmistettu laadukkaista luonnonmateriaaleista – setristä, haavasta ja männystä – sekä moderneista ruostumattomasta teräksestä valmistetuista vaihtoehdoista. Suunniteltu aitoa suomalaista saunakulttuuria varten, jokainen tuote on rakennettu kestämään ja kohottamaan löylyriittiäsi."
+      "description": "SAWOn kiulut ja kauhat on tehty laadukkaista luonnonmateriaaleista – setristä, haavasta ja männystä – tai modernista ruostumattomasta teräksestä. Ne on suunniteltu aidon suomalaisen saunakulttuurin tarpeisiin, ja jokainen tuote kestää käyttöä ja tekee löylyrituaalista entistä upeamman."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -1050,7 +1050,7 @@
     },
     "intro": {
       "title": "Saunavalaistus ja valaisinsuojat",
-      "desc": "Luo täydellinen tunnelma oikeanlaisella valaistuksella. Erilaiset valaisinvarjostimemme mahdollistavat rauhoittavan ja lämpimän tunnelman luomisen pehmeistä hehkuista lämpimiin kultaisiin sävyihin."
+      "desc": "Luo täydellinen tunnelma oikealla valaistuksella. Erilaisten valaisinsuojiemme avulla saat aikaan rauhoittavan ja lämpimän tunnelman pehmeästä hehkusta lämpimiin kultaisiin sävyihin."
     },
     "groups": {
       "Sauna Lights": "Saunavalaisimet",
@@ -1062,7 +1062,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn valaistus",
-      "description": "SAWOn saunavalaisimet ja valaisinsuojat on rakennettu vaativaan saunaympäristöön – lämpöä kestäviä, kosteudenkestäviä ja kauniisti muotoiltuja kohottamaan rentoutumistilaasi."
+      "description": "SAWOn saunavalaisimet ja valaisinsuojat on tehty vaativaan saunaympäristöön: ne kestävät kuumuutta ja kosteutta ja tuovat rentoutumistilaan kauniin ilmeen."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -1094,7 +1094,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn lämpömittarit",
-      "description": "SAWOn lämpömittarit ja kosteusmittarit on valmistettu tarkkuutta ja kestävyyttä silmällä pitäen korkean lämpötilan ja kosteuden ympäristöihin. Seuraa saunaasi luottavaisin mielin kestävillä mittareilla."
+      "description": "SAWOn lämpömittarit ja kosteusmittarit on tehty tarkoiksi ja kestäviksi kuumaan ja kosteaan ympäristöön. Seuraa saunaasi luottavaisin mielin mittareilla, jotka kestävät käyttöä."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -1113,7 +1113,7 @@
     },
     "intro": {
       "title": "Saunan ilmanvaihto ja sekalaiset tarvikkeet",
-      "desc": "Oikea ilmanvaihto on olennainen osa turvallista ja miellyttävää saunakokemusta. Tutustu ilmanvaihtoratkaisuihimme, vaatenaulakoihin ja sekalaisiin lisätarvikkeisiin, jotka on suunniteltu täydentämään saunavarustuksesi laadukkaasti ja toimivasti."
+      "desc": "Oikea ilmanvaihto on olennainen osa turvallista ja miellyttävää saunakokemusta. Tutustu ilmanvaihtoratkaisuihimme, vaatenaulakoihin ja muihin lisätarvikkeisiin, joiden avulla saunastasi tulee laadukas ja toimiva."
     },
     "groups": {
       "Ventilation": "Ilmanvaihto",
@@ -1126,7 +1126,7 @@
     "why": {
       "eyebrow": "SAWO-TARVIKKEET",
       "title": "Miksi valita SAWOn ilmanvaihto ja lisätarvikkeet",
-      "description": "SAWOn ilmanvaihto- ja sekalaiset tarvikkeet on suunniteltu optimoimaan saunaympäristösi, varmistaen asianmukaisen ilmanvaihdon, turvallisuuden ja mukavuuden. Valmistettu samoilla korkeilla standardeilla kuin kaikki SAWOn tuotteet kestävän suorituskyvyn takaamiseksi."
+      "description": "SAWOn ilmanvaihto- ja muut tarvikkeet on suunniteltu parantamaan saunasi olosuhteita: ne varmistavat asianmukaisen ilmanvaihdon, turvallisuuden ja mukavuuden. Ne on valmistettu samoilla korkeilla laatuvaatimuksilla kuin kaikki SAWO-tuotteet, jotta ne toimivat pitkään."
     },
     "promo": {
       "title": "Täydennä saunakokemuksesi",
@@ -1144,23 +1144,23 @@
     },
     "intro": {
       "title": "Tutustu hienostuneisiin saunan sisustussuunnitelmiimme",
-      "desc": "Suunniteltu sekä mukavuutta että tyylikkyyttä silmällä pitäen, laadukkaat saunasisustuksemme kohottavat rentoutumiskokemustasi. Laadukkaat materiaalit ja innovatiiviset layoutit yhdistyvät saumattomasti toiminnallisuuden ja estetiikan kanssa, taaten lämpimän ja kutsuvan tunnelman jokaiseen saunatilaan."
+      "desc": "Laadukkaat saunasisustuksemme yhdistävät mukavuuden ja tyylikkyyden ja tekevät rentoutumisesta entistäkin nautinnollisempaa. Laadukkaat materiaalit ja innovatiiviset ratkaisut yhdistävät toiminnallisuuden ja estetiikan saumattomasti ja luovat lämpimän, kutsuvan tunnelman jokaiseen saunaan."
     },
     "designs": {
       "classicBench": {
         "title": "Classic-laude",
         "subtitle": "Ajaton saunan eleganssi",
-        "desc": "Ilmentäen perinteisen suomalaisen saunan olemusta, Classic-laude on huolellisesti aseteltu, symmetrinen puulayout, joka huokuu yksinkertaisuutta ja viehätystä. Valmistettu laadukkaasta setristä, haavasta ja kuusesta, tämä suunnitelma takaa kestävyyden, mukavuuden ja lämpimän, aidon saunakokemuksen."
+        "desc": "Classic-laude ilmentää perinteisen suomalaisen saunan olemusta: huolellisesti aseteltu, symmetrinen puurakenne huokuu yksinkertaisuutta ja viehätystä. Laadukkaasta setristä, haavasta ja kuusesta valmistettu malli on kestävä ja mukava ja tarjoaa lämpimän, aidon saunakokemuksen."
       },
       "waveBench": {
         "title": "Wave-laude",
         "subtitle": "Luonnon rauhan inspiroima",
-        "desc": "Ammentaen inspiraationsa Suomen tyynistä järvistä, Wave-laude tuo veden lempeiden aaltojen rauhoittavat kaaret saunaasi. Valmistettu laadukkaasta setristä, haavasta ja kuusesta, sen virtaava muotoilu lisää rentoutumista ja luo rauhallisen ja kutsuvan tunnelman aitoon saunakokemukseen."
+        "desc": "Wave-laude on saanut inspiraationsa Suomen tyynistä järvistä ja tuo saunaan veden lempeiden väreiden rauhoittavat kaaret. Laadukkaasta setristä, haavasta ja kuusesta valmistettu, virtaavan muotoinen laude lisää rentoutumista ja luo rauhallisen, kutsuvan tunnelman aitoon saunakokemukseen."
       },
       "pianoBench": {
         "title": "Piano-laude",
         "subtitle": "Modernin ja perinteisen eleganssin yhdistelmä",
-        "desc": "Yhdistäen nykyaikaisen tyylin klassiseen saunan käsityötaitoon, Piano-laude on tyylikäs, rytmikäs asettelu, joka muistuttaa pianon koskettimia. Valmistettu laadukkaasta setristä, haavasta ja kuusesta, tämä suunnitelma tuo tyylikkyyttä ja hienostuneisuutta mihin tahansa saunatilaan taaten samalla kestävyyden ja mukavuuden."
+        "desc": "Piano-laude yhdistää nykyaikaisen tyylin ja klassisen saunakäsityön. Sen tyylikäs, rytmikäs asettelu muistuttaa pianon koskettimia. Laadukkaasta setristä, haavasta ja kuusesta valmistettu malli tuo mihin tahansa saunaan tyylikkyyttä ja hienostuneisuutta ja on samalla kestävä ja mukava."
       }
     },
     "materials": {
@@ -1175,7 +1175,7 @@
       },
       "spruce": {
         "title": "Kuusi",
-        "desc": "Kestävä ja tyylikäs, kuusi tarjoaa klassisen pohjoismaisen estetiikan vaalealla syykuviolla ja erinomaisilla lämmönpito-ominaisuuksilla aitoon suomalaiseen saunatunnelmaan."
+        "desc": "Kestävä ja tyylikäs kuusi tuo saunaan klassisen pohjoismaisen ilmeen: vaalea syykuvio ja erinomainen lämmönpito luovat aidon suomalaisen saunatunnelman."
       }
     }
   },
@@ -1191,7 +1191,7 @@
     "brochureLabel": "Paneelien ja lauteenkehysten esite",
     "intro": {
       "title": "Tutustu laadukkaaseen puupaneeli- ja lauteenkehysvalikoimaamme",
-      "desc": "Valmistettu sekä kauneutta että kestävyyttä silmällä pitäen, laadukkaat puupaneelimme ja lauteenkehyksemme kohottavat mitä tahansa saunatilaa. Valitse useista laadukkaista puuvaihtoehdoista, mukaan lukien setri, haapa ja kuusi, jotka on suunniteltu kestämään kuumuutta ja kosteutta tarjoten samalla luonnollisen ja rentouttavan tunnelman."
+      "desc": "Kauneutta ja kestävyyttä yhdistävät laadukkaat puupaneelimme ja puutavaramme tekevät jokaisesta saunasta hienon. Valittavana on useita laadukkaita puulajeja, kuten setri, haapa ja kuusi. Ne kestävät kuumuutta ja kosteutta ja luovat luonnollisen, rentouttavan tunnelman."
     },
     "panelsHeading": "Puupaneelit",
     "benchHeading": "Lauteenkehykset",
@@ -1218,7 +1218,7 @@
     "bench": {
       "cedar": {
         "title": "Setripuu",
-        "desc": "Länsiamerikan punasetriä arvostetaan sen ainutlaatuisesta ulkonäöstä, tuoksusta ja korkeasta luontaisesta lahonkestävyydestä. Erittäin suositeltava sisustuksiin ja saunoihin. Sawo valitsee käyttöön vain korkealaatuista setriä, jossa ei ole oksia tai vikoja."
+        "desc": "Western Red Cedar -puuta arvostetaan ainutlaatuisen ulkonäön, tuoksun ja korkean luontaisen lahonkestävyyden vuoksi. Erittäin suositeltava sisustukseen ja saunoihin. SAWO käyttää vain laadukasta setriä, jossa ei ole oksia tai vikoja."
       },
       "aspen": {
         "title": "Haapapuu",
