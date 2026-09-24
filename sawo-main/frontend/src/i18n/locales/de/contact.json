@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Kontakt | SAWO",
-    "description": "Kontaktieren Sie SAWO: technischer Support, Vertriebsanfragen und Ansprechpartner unseres weltweiten Netzwerks an Vertretungen."
+    "description": "Kontaktieren Sie SAWO: technischer Support, Vertriebsanfragen und Ansprechpartner in unserem weltweiten Netz an Vertretungen."
   },
   "toast": {
     "addonSaved": "Ihre Sauna-Auswahl wurde in Ihrer Nachricht gespeichert!",
@@ -9,7 +9,7 @@
   },
   "hero": {
     "title": "Haben Sie Fragen?",
-    "desc": "Kontaktieren Sie uns noch heute! Mit über 30 Jahren Erfahrung in der Saunabranche helfen wir Ihnen gerne bei allen Fragen weiter. Ob zu unseren Produkten, der Suche nach Ihrem nächstgelegenen SAWO Vertriebspartner oder der Planung Ihres individuellen Saunaprojekts – wir haben die Antworten, die Sie brauchen. Bitte füllen Sie das untenstehende Formular aus, und unser Team meldet sich in Kürze bei Ihnen."
+    "desc": "Kontaktieren Sie uns noch heute! Mit über 30 Jahren Erfahrung in der Saunabranche helfen wir Ihnen gerne bei allen Fragen weiter – ob zu unseren Produkten, zum nächstgelegenen SAWO Vertriebspartner oder zur Planung Ihres individuellen Saunaprojekts. Wir haben die Antworten, die Sie brauchen. Bitte füllen Sie das untenstehende Formular aus, und unser Team meldet sich in Kürze bei Ihnen."
   },
   "steps": {
     "1": "Ihre Anfrage",
@@ -43,7 +43,7 @@
     "selectCountry": "Land auswählen",
     "phone": "Telefonnummer",
     "optional": "(Optional)",
-    "phoneHelp": "Die Angabe einer Telefonnummer ist optional, kann uns aber helfen, Ihnen schneller zu helfen.",
+    "phoneHelp": "Die Angabe einer Telefonnummer ist optional, hilft uns aber, Sie schneller zu unterstützen.",
     "goBack": "Zurück",
     "nextStep": "Weiter"
   },

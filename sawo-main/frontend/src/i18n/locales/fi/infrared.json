@@ -24,9 +24,9 @@
     "controlsSection": {
       "title": "Infrapunasaunan ohjaimet",
       "items": {
-        "userInterface": "Infrapuna 2.0 käyttöliittymä",
-        "powerController": "Infrapuna 2.0 tehonohjain",
-        "builtInControl": "Infrapuna 2.0 kiinteä ohjain"
+        "userInterface": "Infrared 2.0 käyttöliittymä",
+        "powerController": "Infrared 2.0 tehonohjain",
+        "builtInControl": "Infrared 2.0 kiinteä ohjain"
       }
     },
     "cta": {
@@ -51,8 +51,8 @@
         {
           "title": "Lämpö, joka tavoittaa sinut suoraan",
           "paragraphs": [
-            "Infrapunasaunan ei tarvitse saavuttaa 80 °C:ta toimiakseen. Paneelit lämmittävät kehoasi eivätkä ympäröivää ilmaa, joten istunto tuntuu syvältä ja ympäröivältä, kun taas hytin lämpötila pysyy sellaisena, että hengittäminen on helppoa.",
-            "Tämä tekee siitä erilaisen kokemuksen kuin perinteinen sauna – ei vain pienemmän version siitä: lempeämpi rinnalle, helpompi kestää kokonainen tunti ja lähestyttävä niille, joille suomalaisen saunan kuumuus on liikaa."
+            "Infrapunasaunan ei tarvitse saavuttaa 80 °C:ta toimiakseen. Paneelit lämmittävät kehoasi eivätkä ympäröivää ilmaa, joten lämpö tuntuu syvältä ja kietovalta, kun taas hytin ilma pysyy sellaisena, että hengittäminen on helppoa.",
+            "Se on siis oma kokemuksensa eikä pelkkä pienempi sauna: hellävaraisempi hengitykselle, helppo pitää kokonainen tunti ja sopii myös niille, joille suomalaisen saunan kuumuus on liikaa."
           ]
         },
         {
@@ -63,26 +63,74 @@
           ]
         }
       ],
-      "featureText": "Säännölliset infrapunaistunnot lievittävät lihasten arkuutta, tukevat verenkiertoa ja auttavat kehoa rauhoittumaan unta varten – lämpötilassa, joka on niin lempeä, että siitä voi tulla päivittäinen tapa satunnaisen sijaan. Koska huone kytketään tavalliseen pistorasiaan ja se kootaan ilman rakennustöitä, se on myös harvinainen hyvinvointilisä, jonka voit ottaa mukaan muuttaessasi.",
+      "featureText": "Säännöllinen infrapunasaunominen lievittää lihaskipua, tukee verenkiertoa ja auttaa kehoa rauhoittumaan uneen – niin lempeässä lämpötilassa, että siitä voi tulla päivittäinen tapa satunnaisen kerran sijaan. Koska huone kytketään tavalliseen pistorasiaan ja se kootaan ilman rakennustöitä, se on myös harvinainen hyvinvointihankinta, jonka voit ottaa mukaan muuttaessasi.",
       "perfCards": [
-        { "label": "Setri tai hemlokki", "detail": "Luonnollisen tuoksuva, kestävästi hankittu" },
-        { "label": "1 tai 2 hengen", "detail": "0908-IR-D- ja 1111-IR-D-kokoonpanot" },
-        { "label": "230V liitä ja käytä", "detail": "Ei omaa sähköpiiriä tai sähköasentajaa" },
-        { "label": "Suomalainen valmistus, yli 30 vuotta", "detail": "Vuosikymmenten saunaosaaminen jokaisessa huoneessa" }
+        {
+          "label": "Setri tai hemlokki",
+          "detail": "Luonnollisen tuoksuva, kestävästi hankittu"
+        },
+        {
+          "label": "1 tai 2 hengen",
+          "detail": "0908-IR-D- ja 1111-IR-D-kokoonpanot"
+        },
+        {
+          "label": "230V liitä ja käytä",
+          "detail": "Ei omaa sähköpiiriä tai sähköasentajaa"
+        },
+        {
+          "label": "Suomalainen valmistus, yli 30 vuotta",
+          "detail": "Vuosikymmenten saunaosaaminen jokaisessa huoneessa"
+        }
       ],
       "accordionItems": [
         {
           "title": "Tuotetiedot",
           "specs": [
-            { "label": "0908-IR-D", "value": "0,80 m L x 0,90 m S", "unit": "/ 1 henkilö" },
-            { "label": "1111-IR-D", "value": "1,10 m L x 1,10 m S", "unit": "/ 2 henkilöä" },
-            { "label": "Korkeus", "value": "2,05 m", "unit": "(molemmat mallit)" },
-            { "label": "Paneelit", "value": "Kuitupinnoitettu kaukoinfrapuna, 170W per paneeli", "unit": null },
-            { "label": "Kokonaisteho", "value": "1200W (1 hlö) / 1400W (2 hlöä)", "unit": null },
-            { "label": "Sähkö", "value": "230V liitä ja käytä", "unit": null },
-            { "label": "Istunnon kesto", "value": "1–60 minuuttia", "unit": "säädettävä" },
-            { "label": "Valaistus", "value": "12W LED", "unit": "/ 18W poistoilmapuhallin" },
-            { "label": "Materiaali", "value": "Setri tai hemlokki", "unit": null }
+            {
+              "label": "0908-IR-D",
+              "value": "0,80 m L x 0,90 m S",
+              "unit": "/ 1 henkilö"
+            },
+            {
+              "label": "1111-IR-D",
+              "value": "1,10 m L x 1,10 m S",
+              "unit": "/ 2 henkilöä"
+            },
+            {
+              "label": "Korkeus",
+              "value": "2,05 m",
+              "unit": "(molemmat mallit)"
+            },
+            {
+              "label": "Paneelit",
+              "value": "Kuitupinnoitettu kaukoinfrapuna, 170W per paneeli",
+              "unit": null
+            },
+            {
+              "label": "Kokonaisteho",
+              "value": "1200W (1 hlö) / 1400W (2 hlöä)",
+              "unit": null
+            },
+            {
+              "label": "Sähkö",
+              "value": "230V liitä ja käytä",
+              "unit": null
+            },
+            {
+              "label": "Istunnon kesto",
+              "value": "1–60 minuuttia",
+              "unit": "säädettävä"
+            },
+            {
+              "label": "Valaistus",
+              "value": "12W LED",
+              "unit": "/ 18W poistoilmapuhallin"
+            },
+            {
+              "label": "Materiaali",
+              "value": "Setri tai hemlokki",
+              "unit": null
+            }
           ]
         }
       ]
@@ -93,12 +141,20 @@
         "cedar": {
           "name": "Setri",
           "description": "Runsastuoksuinen puu, jolla on luontainen kosteudenkestävyys. Tunnetaan lämpimistä punaruskeista sävyistään ja tunnusomaisesta tuoksustaan.",
-          "traits": ["Tuoksuva", "Kosteudenkestävä", "Lämpimät sävyt"]
+          "traits": [
+            "Tuoksuva",
+            "Kosteudenkestävä",
+            "Lämpimät sävyt"
+          ]
         },
         "hemlock": {
           "name": "Hemlokki",
           "description": "Vaalea, tasasyinen puu, jolla on hyvin vähäinen tuoksu – rauhallisempi tausta niille, joille setrin tuoksu on liian voimakas. Vakaa ja sileä kosketukselta.",
-          "traits": ["Vähätuoksuinen", "Tasainen syy", "Sileä pinta"]
+          "traits": [
+            "Vähätuoksuinen",
+            "Tasainen syy",
+            "Sileä pinta"
+          ]
         }
       }
     }
@@ -108,10 +164,12 @@
       "title": "Infrapunapaneelit",
       "description": "SAWOn infrapunapaneelit ja lisävarusteet – kuitupinnoitetut kaukoinfrapunapaneelit, 170W kukin, selkänojat ja käyttöliittymän pidikkeet infrapunahuoneeseesi."
     },
-    "hero": { "title": "INFRAPUNAPANEELIT" },
+    "hero": {
+      "title": "INFRAPUNAPANEELIT"
+    },
     "intro": {
       "title": "Esittelyssä infrapunapaneelimme",
-      "text": "Kuitupinnoitetut kaukoinfrapunapaneelit lämmittävät kehoa suoraan sen sijaan, että lämmittäisivät ympäröivää ilmaa, joten istunnot pysyvät mukavina huomattavasti matalammassa huonelämpötilassa. Jokainen paneeli kuluttaa 170W ja on rakennettu istumaan tasaisesti hytin sisään yhdessä selkänojien ja käyttöliittymän pidikkeiden kanssa, jotka viimeistelevät huoneen."
+      "text": "Kuitupinnoitetut kaukoinfrapunapaneelit lämmittävät kehoa suoraan sen sijaan, että lämmittäisivät ympäröivää ilmaa, joten olo pysyy miellyttävänä huomattavasti matalammassakin huonelämpötilassa. Jokainen paneeli kuluttaa 170 W, ja ne asennetaan tasaisesti hytin sisään yhdessä selkänojien ja käyttöliittymän pidikkeiden kanssa, jotka viimeistelevät huoneen."
     },
     "eyebrow": "Infrapunapaneeli",
     "fallbackBlurb": "Laadukas SAWO-infrapunakomponentti lempeään, päivittäiseen lämpöön.",
@@ -125,12 +183,14 @@
   "controls": {
     "meta": {
       "title": "Infrapunaohjaimet",
-      "description": "SAWO Infrapuna 2.0 -ohjaimet – käyttöliittymä, tehonohjain ja kiinteä ohjain lämpötilan, istunnon keston, valaistuksen ja ilmanvaihdon hallintaan."
+      "description": "SAWO Infrared 2.0 -ohjaimet – käyttöliittymä, tehonohjain ja kiinteä ohjain lämpötilan, käyttöajan, valaistuksen ja ilmanvaihdon hallintaan."
     },
-    "hero": { "title": "INFRAPUNAOHJAIMET" },
+    "hero": {
+      "title": "INFRAPUNAOHJAIMET"
+    },
     "intro": {
       "title": "Esittelyssä infrapunaohjaimemme",
-      "text": "Yksi ohjain hallitsee koko huonetta – lämpötilaa, 1–60 minuutin istunnon kestoa, valaistusta ja poistoilmapuhallinta. Infrapuna 2.0 -valikoima kattaa käyttöliittymän, sen takana olevan tehonohjaimen sekä kiinteän vaihtoehdon siistimpää hyttiseinää varten."
+      "text": "Yksi ohjain hallitsee koko huonetta: lämpötilaa, 1–60 minuutin käyttöaikaa, valaistusta ja poistoilmapuhallinta. Infrared 2.0 -valikoima kattaa käyttöliittymän, sen takana olevan tehonohjaimen sekä kiinteän vaihtoehdon siistimpää hyttiseinää varten."
     },
     "eyebrow": "Infrapunaohjain",
     "fallbackBlurb": "Laadukas SAWO-infrapunaohjain yksinkertaiseen, luotettavaan päivittäiseen käyttöön.",
