@@ -6,7 +6,7 @@
     "specifications": "Spezifikationen",
     "technicalData": "Technische Daten",
     "infraredSpecifications": "Infrarot-Spezifikationen",
-    "includedInPackage": "Im Lieferumfang Enthalten",
+    "includedInPackage": "Im Lieferumfang enthalten",
     "doorPositions": "Verfügbare Türpositionen",
     "floorPlan": "Grundriss",
     "benchConfiguration": "Bankkonfiguration",
@@ -16,13 +16,13 @@
   "noResourcesAvailable": "Keine Ressourcen verfügbar",
   "moreDetailsSoon": "Weitere Details folgen in Kürze.",
   "notFound": {
-    "title": "Produkt Nicht Gefunden",
+    "title": "Produkt nicht gefunden",
     "description": "Dieses Produkt existiert nicht oder ist noch nicht veröffentlicht.",
-    "browseProducts": "Produkte Durchsuchen",
+    "browseProducts": "Produkte durchsuchen",
     "home": "Startseite",
-    "roomTitle": "Saunaraum Nicht Gefunden",
+    "roomTitle": "Saunaraum nicht gefunden",
     "roomDescription": "Dieser Saunaraum existiert nicht oder ist noch nicht veröffentlicht.",
-    "browseRooms": "Räume Durchsuchen"
+    "browseRooms": "Räume durchsuchen"
   },
   "related": {
     "youMightAlsoLike": "Das könnte Ihnen auch gefallen",

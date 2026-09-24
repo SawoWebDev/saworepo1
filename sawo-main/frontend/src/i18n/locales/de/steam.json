@@ -13,7 +13,7 @@
     },
     "generatorsSection": {
       "title": "Dampferzeuger",
-      "viewAll": "Alle Generatoren Ansehen",
+      "viewAll": "Alle Generatoren ansehen",
       "desc": "Ein Dampferzeuger ist das Herzstück jedes Dampfraums und wandelt Wasser in einen kontinuierlichen, gleichmäßigen Dampfstrom um. Die Edelstahl-Generatoren von SAWO sind auf Langlebigkeit und einfache Wartung ausgelegt, mit Modellen von kompakten Einheiten für den Wohnbereich bis hin zu gewerblichen Mehrfachinstallationen mit bis zu 75 kW.",
       "loading": "Generatoren werden geladen...",
       "empty": "Noch keine Dampferzeuger verfügbar.",
@@ -21,7 +21,7 @@
     },
     "controlsSection": {
       "title": "Dampfsteuerungen",
-      "viewAll": "Alle Steuerungen Ansehen",
+      "viewAll": "Alle Steuerungen ansehen",
       "desc": "Kombinieren Sie jeden SAWO Dampferzeuger mit einem dedizierten Bedienfeld für präzise Kontrolle über Temperatur, Dampfausstoß und Sitzungsdauer. Vom einfachen Drehregler Steam STE bis zum Touchscreen Steam Stainless Touch ist jede Steuerung auf einfache, zuverlässige Bedienung ausgelegt.",
       "loading": "Steuerungen werden geladen...",
       "empty": "Noch keine Dampfsteuerungen verfügbar.",
@@ -29,14 +29,14 @@
     },
     "accessoriesSection": {
       "title": "Dampfzubehör",
-      "viewAll": "Alles Zubehör Ansehen",
+      "viewAll": "Alles Zubehör ansehen",
       "desc": "Vervollständigen Sie Ihren Dampfraum mit dem Zubehörsortiment von SAWO – von Dampftüren und Diffusorköpfen bis hin zu Aromapumpen und Montagezubehör – jedes Teil ist für ein nahtloses Zusammenspiel mit unseren Generatoren und Steuerungen konzipiert, für eine vollständig professionelle Installation.",
       "loading": "Zubehör wird geladen...",
       "empty": "Noch kein Dampfzubehör verfügbar.",
       "fallbackDesc": "SAWO Dampfzubehör für eine vollständige Installation."
     },
     "cta": {
-      "title": "Brauchen Sie Hilfe Bei Der Auswahl?",
+      "title": "Brauchen Sie Hilfe bei der Auswahl?",
       "description": "Von Generatoren und Steuerungen bis hin zu Zubehör – unser Team hilft Ihnen, die richtige Dampfsauna-Ausstattung für Ihr Zuhause oder Ihre gewerblichen Räume zu finden."
     }
   },
@@ -57,7 +57,7 @@
     "cardEyebrow": "Dampferzeuger",
     "cardFallbackDesc": "Hochwertiger SAWO Dampferzeuger für zuverlässige Alltagsleistung.",
     "cta": {
-      "title": "Brauchen Sie Hilfe Bei Der Dimensionierung?",
+      "title": "Brauchen Sie Hilfe bei der Dimensionierung?",
       "description": "Von kompakten Einheiten für den Wohnbereich bis zu großen gewerblichen Installationen – unser Team hilft Ihnen, den richtigen Dampferzeuger für Ihren Raum zu finden."
     }
   },
@@ -81,7 +81,7 @@
       "text": "Elektrische Anschlüsse und Reparaturen am Gerät dürfen nur von einer qualifizierten Elektrofachkraft durchgeführt werden. Verwenden Sie ausschließlich Originalteile."
     },
     "cta": {
-      "title": "Brauchen Sie Hilfe Bei Der Auswahl Einer Steuerung?",
+      "title": "Brauchen Sie Hilfe bei der Auswahl einer Steuerung?",
       "description": "Kombinieren Sie die passende Steuerung mit Ihrem Dampferzeuger für präzise, mühelose Bedienung. Unser Team hilft Ihnen gerne weiter."
     }
   },
