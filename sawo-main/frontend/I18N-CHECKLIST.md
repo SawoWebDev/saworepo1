@@ -2211,3 +2211,48 @@ in `TRANSLATED_PATHS`, the language switcher stays off.
   `minidragon-black-nb` has a garbled sentence; `sauna-wood-oil-1l/4l` have
   no fi/zh rows.
 - **Open:** native-speaker review of German copy before any `/de` path goes live.
+
+## zh naturalness pass (2026-09-24)
+
+Read-and-fix pass over `src/i18n/locales/zh/*.json` (all pages except `home`, left
+untouched as briefed), applied only through `inject.js`; `npm run i18n:manifest`
+still shows zh `translated` everywhere. Commits: `b161b804` (about, steam,
+infrared, contact, careers, news, sustainability), `29752353` (sauna, support),
+`122c39c6` (catalog, product, common, nav, footer, privacy, gdpr, sitemap,
+notfound, seo).
+
+- **Mechanical, site-wide (every page but home):** ~800 half-width `,` `:` `(`
+  next to Chinese → full-width `，：（）`; no space between Latin/digits and
+  Chinese (`SAWO加热器`, `30年`); spaced ` — ` → `——`; straight quotes in
+  search messages → `“ ”`. Home still has 49 half-width commas — same fix
+  would apply there if wanted.
+- **Semantic rewrites** (strings touched / of which rewritten): about 13/9,
+  steam 25/16, infrared 50/32, contact 26/20, careers 18/11, news 26/15,
+  sustainability 21/10, sauna 313/~152, support 63/33, catalog 14/8, product 9/3,
+  common 17/8, nav 3/3, footer 3/2, sitemap 12/10, privacy 21/1, gdpr 5/0,
+  notfound 1/0, seo 1/0. Rewrites remove literal English order, stiff
+  公文腔 ("隆重推出我们的…" → "认识我们的…", "尽享完整桑拿体验" → "让桑拿体验更完整"),
+  and padding.
+- **Real errors fixed:** support FAQ said 西部红杉 (= redwood) for Western Red
+  Cedar → 西部红雪松; FAQ "stones must be *removed* every year/500 h" had been
+  rendered "replaced" → 取出检查; "降低动脉硬化" (atherosclerosis) → 降低动脉
+  僵硬度; `蒸发器` → `蒸汽发生器`; 打开 3D "浏览器" → "查看器"; 阻燃性高 →
+  不易燃; "Why Work for SAWO" was "为什么选择" → "为什么加入".
+- **Term decisions (aligned to catalog/DB):** benches 长椅 (FAQ said 座椅);
+  infrared panels 红外线加热板 / 远红外加热板 (was 红外线板 / 面板);
+  加热元件 (not 发热元件); 温湿度计 for "combined meters" (was 组合仪表);
+  best seller 畅销款 everywhere (was 畅销产品 / 热销款); wood panels 木镶板与
+  木材; news 最新动态; "Infrared 2.0" / "Steam STE" stay English like the
+  catalog rows; 圆柱式 for the Round filter (catalog uses it); 安全提示 for
+  "Precaution Notice"; heating-element wording 触感清凉的纤维涂层 (matches DB).
+- **For a human to confirm:** (1) `玻璃前脸` (Glass Front rooms; kept because
+  home uses it — 前墙 / 玻璃门面 might read better; product.json's stray
+  玻璃前壁 was aligned to it); (2) `石材式` vs `石材` for Stone-series labels
+  (both exist, pages use 石材式 in labels, 石材 in a few titles); (3) `多功能一体式`
+  for Combi (long for a nav label; the catalog DB keeps "Combi" untranslated);
+  (4) configurator hardcoded names ("SAWO30 Round Ni2", "Traditional Set") are
+  still English where the catalog DB uses 圆柱式 / 传统款.
+- **Left alone / source issues:** `sauna.controls.items.innova` and `.saunova`
+  descriptions look swapped in the English source (Innova card describes
+  Saunova 2.0) — zh follows the source; the contact-page country list and
+  Finnish job subtitles untouched; `home` untouched (still has half-width commas).
