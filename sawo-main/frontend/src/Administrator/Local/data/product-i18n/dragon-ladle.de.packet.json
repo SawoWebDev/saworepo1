@@ -1,0 +1,44 @@
+{
+  "slug": "dragon-ladle",
+  "productId": "4fc3434e-aa16-4dca-a2ef-33d6eb735442",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (449-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Black (449-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Dragon Kelle",
+    "short_description": "Die SAWO Dragon Kelle ist eine Saunakelle mit einer Länge von 498 mm zum Übergießen der erhitzten Saunasteine mit Wasser (löyly).",
+    "description": null,
+    "type": "Kellen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (449-D)",
+        "name": "Zeder (449-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Black (449-BL)",
+        "name": "Schwarz (449-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

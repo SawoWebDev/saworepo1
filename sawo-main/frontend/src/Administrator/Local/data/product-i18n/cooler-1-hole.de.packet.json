@@ -1,0 +1,26 @@
+{
+  "slug": "cooler-1-hole",
+  "productId": "da5f2797-39ac-4563-a86a-34287de5f88a",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Getränkekühler (1 Loch)",
+    "short_description": "Der SAWO Getränkekühler (1 Loch) ist ein Kühler aus Speckstein mit den Maßen 100 × 100 × 75 mm und einem Gewicht von 1,3 kg, Teil der Kivistone-Zubehörlinie, zum Kühlen von Getränken im Ruhebereich der Sauna.",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-141)",
+        "name": "(R-141)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

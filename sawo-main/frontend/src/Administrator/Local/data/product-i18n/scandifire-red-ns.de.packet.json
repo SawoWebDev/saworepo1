@@ -1,0 +1,22 @@
+{
+  "slug": "scandifire-red-ns",
+  "productId": "52e29aa8-8493-4915-a9f9-88eabc6e43ae",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandifire Rot NS",
+    "short_description": "<b style=\"text-align: justify;\">Scandifire</b><span style=\"text-align: justify;\"> ist der kompakteste der von Stefan Lindfors entworfenen Öfen und wurde entwickelt, um selbst engste Räume mit Schönheit zu schmücken. Der Ofen hat eine berührungskühle Faserbeschichtung und ist mit den Steuerungen Saunova und Innova (NS) kompatibel.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"4\">Mindestsicherheitsabstände<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NS-DRF-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 410 × 455</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NS-DRF-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 410 × 455</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NS-DRF-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 410 × 525</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NS-DRF-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 410 × 525</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandifire",
+    "features": [
+      "Leistungsbereich: 4,5 – 9,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Faserbeschichtet mit Junglefire-Muster",
+      "Wandmontage",
+      "Fasst 22 kg Steine",
+      "Integrierte Modelle: Drehregler mit Leuchtanzeige",
+      "Die Beschichtung schützt den Ofen vor Feuchtigkeit und hohen Temperaturen"
+    ]
+  }
+}

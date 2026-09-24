@@ -1,0 +1,26 @@
+{
+  "slug": "scent-warmer",
+  "productId": "05f48e47-b80d-4376-a58b-958c57c290a4",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Duftwärmer",
+    "short_description": "Der SAWO Duftwärmer ist ein Duftwärmer aus Speckstein mit den Maßen 75 × 75 × 80 mm und einem Gewicht von 0,7 kg, Teil der Kivistone-Zubehörlinie.",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-123)",
+        "name": "(R-123)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

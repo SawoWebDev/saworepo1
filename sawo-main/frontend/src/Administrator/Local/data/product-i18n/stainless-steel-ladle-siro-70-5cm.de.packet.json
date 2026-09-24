@@ -1,0 +1,56 @@
+{
+  "slug": "stainless-steel-ladle-siro-70-5cm",
+  "productId": "8b475da0-472f-4c8c-a6c2-48d5c635f7de",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (446-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (446-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (446-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Edelstahlkelle Siro 70,5 cm",
+    "short_description": "Die SAWO Edelstahlkelle Siro 70,5 cm ist eine Saunakelle aus Edelstahl mit einer Länge von 705 mm zum Übergießen der erhitzten Saunasteine mit Wasser (löyly).",
+    "description": null,
+    "type": "Kellen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (446-MD)",
+        "name": "Zeder (446-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (446-MA)",
+        "name": "Espe (446-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (446-MH)",
+        "name": "Hemlock (446-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

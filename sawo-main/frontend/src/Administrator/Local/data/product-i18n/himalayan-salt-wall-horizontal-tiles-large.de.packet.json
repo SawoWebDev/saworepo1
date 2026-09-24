@@ -1,0 +1,56 @@
+{
+  "slug": "himalayan-salt-wall-horizontal-tiles-large",
+  "productId": "0a9c15ac-8e36-4f20-b246-a10fb44cbf30",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (HIM-SWL-375-2)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (HIM-SWL-375-2-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (HIM-SWL-375-2-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Himalaya-Salz-Wandfliesen horizontal groß",
+    "short_description": "Die SAWO Himalaya-Salz-Wandfliesen horizontal groß sind eine Wandfliese aus Himalaya-Salz mit den Maßen 1075 mm (L) x 375 mm (B) x 60 mm (T), die bei Hinterleuchtung in der Sauna ein weiches Licht streut.",
+    "description": null,
+    "type": "Saunaleuchten",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (HIM-SWL-375-2)",
+        "name": "Zeder (HIM-SWL-375-2)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (HIM-SWL-375-2-H)",
+        "name": "Hemlock (HIM-SWL-375-2-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (HIM-SWL-375-2-BL)",
+        "name": "Schwarz (HIM-SWL-375-2-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

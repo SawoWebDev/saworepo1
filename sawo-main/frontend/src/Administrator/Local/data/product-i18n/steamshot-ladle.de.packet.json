@@ -1,0 +1,44 @@
+{
+  "slug": "steamshot-ladle",
+  "productId": "cdb55175-9c31-430a-9467-dc7ed803bfeb",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (449-D-DRF)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Black (449-BL-DRF)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Steamshot Kelle",
+    "short_description": "Die SAWO Steamshot Kelle ist eine Saunakelle mit einer Länge von 498 mm zum Übergießen der erhitzten Saunasteine mit Wasser (löyly).",
+    "description": null,
+    "type": "Kellen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (449-D-DRF)",
+        "name": "Zeder (449-D-DRF)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Black (449-BL-DRF)",
+        "name": "Schwarz (449-BL-DRF)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

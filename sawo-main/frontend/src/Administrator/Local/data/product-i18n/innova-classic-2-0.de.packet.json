@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic-2-0",
+  "productId": "9d43ef15-615c-4354-aa32-8463fa50d186",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic 2.0",
+    "short_description": "<b style=\"text-align: justify;\">Innova 2.0</b><span style=\"text-align: justify;\"> ist eine äußerst vielseitige Steuerung, mit der sich Temperatur, Luftfeuchtigkeit, Belüftung und Helligkeit in der Sauna einstellen lassen.</span>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">TECHNISCHE DATEN</th></tr></thead>\n  <tbody>\n  <tr><td>Temperaturbereich</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Sitzungsdauer</td><td>Standard 6 Std., max. 24 Std.</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUKTABMESSUNGEN</b></td></tr>\n  <tr><td>Innova Classic 2.0 (INC-S-V2)</td><td>W: 104 mm x H: 147 mm x L: 37 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>LEISTUNGSERWEITERUNGSEINHEIT</b></td></tr>\n  <tr><td>Frequenz</td><td>50/60Hz</td></tr>\n  <tr><td>Schaltleistung pro Phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>FÜHLER</b></td></tr>\n  <tr><td>Bank-Temperaturfühler</td><td>kompatibel (optional)</td></tr>\n  <tr><td>Bank-Kombifühler für Temperatur und Feuchte</td><td>kompatibel (optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "Die Smart-Controlling-Funktion regelt die Heizelemente phasenweise, damit die gewünschte Temperatur schnell erreicht wird und jederzeit guter Dampf entsteht.",
+      "Mit der Leistungssteuerung INP-C an jedem NS-Ofen bis 15 kW einsetzbar. Für Öfen über 15 kW die Schützeinheit INP-S ergänzen.",
+      "Kompatibel mit Türsensor",
+      "Vorlauf-Timer",
+      "Optionale Lüfter-, Dimmer- und Combi-Funktion",
+      "Am besten in Kombination mit dem optionalen Bankfühler (INN-BTEMP) und, bei Combi-Öfen, mit dem Feuchtefühler (INN-HUM)",
+      "Lieferumfang: Classic 2.0 Benutzeroberfläche und 5 m RJ12-Kabel"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

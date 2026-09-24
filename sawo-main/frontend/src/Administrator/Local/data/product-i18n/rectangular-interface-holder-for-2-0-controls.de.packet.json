@@ -1,0 +1,13 @@
+{
+  "slug": "rectangular-interface-holder-for-2-0-controls",
+  "productId": "96c70250-e9a0-4dd4-8e0d-c4a5552f292f",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Rechteckige Bedienfeld-Halterung für 2.0-Steuerungen",
+    "short_description": "Hochwertige Holz-Bedienfeld-Halterung INN-IH23 für eine breite Palette von 2.0-Steuerungen, darunter Innova Classic 2.0, Innova Stainless Touch 2.0, Saunova 2.0, STE/STN Classic 2.0 und IR Control 2.0. Erhältlich in den Ausführungen Zeder, Espe und Kiefer, passend zu jedem Saunadekor. Abmessungen: 190 mm (B) x 145 mm (T) x 40 mm (H). Eine langlebige und elegante Lösung zur sicheren Aufnahme Ihrer 2.0-Steuerungen.",
+    "description": null,
+    "type": "Bedienfeld-Halterung"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "integration-collar-sawo30-corner-stainless",
+  "productId": "d4431cba-a4d3-4058-8638-d5348fe169df",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Einbaukragen – SAWO30 Eck (Edelstahl)",
+    "short_description": "Der Einbaukragen verbessert die Optik von in eine Bank eingebauten Öfen und verleiht ihnen einen nahtlosen, integrierten Look. Die Kragen werden aus verschiedenen Materialien gefertigt, die sorgfältig ausgewählt sind, um das Design eines Saunaraums zu ergänzen. Zur Auswahl stehen schlanker Edelstahl mit Haarlinienfinish, natürlicher weicher Speckstein und langlebiges Schichtholz.",
+    "description": null,
+    "type": "Einbaukragen",
+    "spec_table_headers": [
+      "Modell",
+      "Länge (mm)",
+      "Breite (mm)",
+      "Höhe (mm)"
+    ]
+  }
+}

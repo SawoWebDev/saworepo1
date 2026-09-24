@@ -1,0 +1,20 @@
+{
+  "slug": "venturi-pipe-l-shape",
+  "productId": "7c129d6e-3954-4f43-a787-9a0ac1e1b57e",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Venturi-Rohr L-Form",
+    "short_description": "<span style=\"text-align: justify;\">Das </span><b style=\"text-align: justify;\">Venturi-Rohr</b><span style=\"text-align: justify;\"> saugt Luft in das Rohr, wodurch die Temperatur sinkt, weil die erhitzten Luftmoleküle im Inneren abgekühlt werden. Dieser Vorgang erzeugt eine dichtere Wolke aus weichem Dampf und verhindert das Zischgeräusch des Dampfrohrs. Das L-förmige Rohr ist ideal für begrenzten Platz und eine kompakte Installation.</span>",
+    "description": null,
+    "type": "Dampfzubehör",
+    "features": [
+      "Erzeugt milderen, weicheren Dampf",
+      "Erzeugt vollere Dampfwolken",
+      "Verhindert Zischgeräusche",
+      "Inklusive Dampfkopf für eine gleichmäßige Dampfverteilung",
+      "Aus dickwandigem Edelstahl gefertigt"
+    ]
+  }
+}

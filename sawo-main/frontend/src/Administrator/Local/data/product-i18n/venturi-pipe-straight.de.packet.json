@@ -1,0 +1,20 @@
+{
+  "slug": "venturi-pipe-straight",
+  "productId": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Venturi-Rohr gerade",
+    "short_description": "<span style=\"text-align: justify;\">Das </span><b style=\"text-align: justify;\">Venturi-Rohr</b><span style=\"text-align: justify;\"> saugt Luft in das Rohr, wodurch die Temperatur sinkt, weil die erhitzten Luftmoleküle im Inneren abgekühlt werden. Dieser Vorgang erzeugt eine dichtere Wolke aus weichem Dampf und verhindert das Zischgeräusch des Dampfrohrs.</span>",
+    "description": null,
+    "type": "Dampfzubehör",
+    "features": [
+      "Erzeugt milderen, weicheren Dampf",
+      "Erzeugt vollere Dampfwolken",
+      "Verhindert Zischgeräusche",
+      "Inklusive Dampfkopf für eine gleichmäßige Dampfverteilung",
+      "Aus dickwandigem Edelstahl gefertigt"
+    ]
+  }
+}

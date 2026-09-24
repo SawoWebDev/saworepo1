@@ -1,0 +1,23 @@
+{
+  "slug": "heaterking-corner-ns",
+  "productId": "26c9e85d-8efe-4d8d-97b7-606bb9e3a771",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Heaterking Eck NS",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\">Heaterking Eck</strong><span style=\"text-align: justify;\"> Saunaofen von Stefan Lindfors bietet königliche Wärme bei minimalem Platzbedarf. Seine beeindruckende Höhe fasst eine große Steinmenge und liefert konstante, wohlig umhüllende Wärme. Saunagäste genießen wahlweise weiche oder scharfe, trockene Hitze, je nachdem, ob sie das Wasser auf den unteren oder oberen Teil der Säule geben. Wie alle Heaterking-Modelle verleiht das einzigartige Edelstahlgehäuse des Eckofens mit Junglefire-Muster jedem Saunaraum kühne Eleganz.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg) ohne Steinabstandshalter</th>\n  <th>Steine<br>(kg) mit Steinabstandshalter</th>\n  <th>Steuerung</th>\n  <th colspan=\"2\">Mindestsicherheitsabstände<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>DRFT3-35NS-CNR-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-45NS-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-80NS-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-105NS-CNR-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-120NS-CNR-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Heaterking Eck",
+    "features": [
+      "Leistungsbereich: 3,5 – 12,0 kW",
+      "Verfügbare Steuerungen: Saunova/Innova (NS)",
+      "Edelstahl mit filigranem Junglefire-Muster",
+      "Steinabstandshalter verlängert die Lebensdauer der Heizelemente",
+      "Steinkapazität: 45 kg bis 160 kg",
+      "Eckgehäuse aus Edelstahl",
+      "Wärmereflektor im Lieferumfang",
+      "Optionales Ofenschutzgitter"
+    ]
+  }
+}

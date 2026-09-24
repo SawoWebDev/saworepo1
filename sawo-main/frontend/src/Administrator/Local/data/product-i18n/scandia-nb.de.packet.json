@@ -1,0 +1,18 @@
+{
+  "slug": "scandia-nb",
+  "productId": "00fb6d76-ed0b-4850-b411-b601ab3388e9",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia NB",
+    "short_description": "Der Scandia ist ein Klassiker unter den Saunaöfen. Dieser schlichte Ofen bietet das traditionelle finnische Saunaerlebnis. Er ist mit berührungskühler Faserbeschichtung erhältlich und mit den Steuerungen Saunova oder Innova (NS) kompatibel.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg)</th>\n  <th>Steuerung</th>\n  <th colspan=\"4\">Mindestsicherheitsabstände<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NB-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 515 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NB-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 515 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NB-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 515 × 585</td>\n  <td>19 – 23</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NB-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 515 × 585</td>\n  <td>19 – 23</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "Leistungsbereich: 4,5 – 9,0 kW",
+      "Verfügbare Steuerungen: Integriert (NB)",
+      "Edelstahlgehäuse"
+    ]
+  }
+}

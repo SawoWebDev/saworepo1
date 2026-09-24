@@ -1,0 +1,56 @@
+{
+  "slug": "rounded-rectangle-thermo-hygrometer",
+  "productId": "1248c7f5-ef99-46ac-a7f0-31adee651932",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (222-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (222-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (222-THH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Abgerundetes rechteckiges Thermo-Hygrometer",
+    "short_description": "Das SAWO Abgerundete Rechteckige Thermo-Hygrometer ist ein Saunathermo-Hygrometer mit den Maßen 225 × 140 mm zur Überwachung von Temperatur und Luftfeuchtigkeit in der Sauna.",
+    "description": null,
+    "type": "Thermometer",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (222-THD)",
+        "name": "Zeder (222-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (222-THA)",
+        "name": "Espe (222-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (222-THH)",
+        "name": "Hemlock (222-THH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

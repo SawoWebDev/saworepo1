@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-hook-rack-5-hooks",
+  "productId": "16211346-c8ee-40a8-8111-8251132b532d",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (583-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (583-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (583-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Holz-Hakenleiste (5 Haken)",
+    "short_description": "Die SAWO Holz-Hakenleiste (5 Haken) ist eine Hakenleiste aus Holz mit den Maßen 42 × 440 mm zum Aufhängen von Handtüchern und Bademänteln unmittelbar vor der Sauna.",
+    "description": null,
+    "type": "Kleiderhaken & Ablagen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (583-D)",
+        "name": "Zeder (583-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (583-A)",
+        "name": "Espe (583-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (583-H)",
+        "name": "Hemlock (583-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

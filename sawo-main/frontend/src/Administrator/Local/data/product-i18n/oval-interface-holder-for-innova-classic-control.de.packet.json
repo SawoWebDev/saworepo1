@@ -1,0 +1,13 @@
+{
+  "slug": "oval-interface-holder-for-innova-classic-control",
+  "productId": "092c7d32-3510-4cab-8f16-10db6e6b5599",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Ovale Bedienfeld-Halterung für Innova Classic Steuerung",
+    "short_description": "Liebevoll gefertigte Holz-Bedienfeld-Halterung INN-IH10, speziell für die Innova Classic Steuerung entwickelt. Erhältlich in den Ausführungen Zeder, Espe und Kiefer, passend zu unterschiedlichen Saunastilen. Abmessungen: 215 mm (B) x 140 mm (T) x 20 mm. Verbindet Funktionalität mit natürlicher Eleganz und bietet Ihrer Steuereinheit ein sicheres, stilvolles Gehäuse.",
+    "description": null,
+    "type": "Bedienfeld-Halterung"
+  }
+}

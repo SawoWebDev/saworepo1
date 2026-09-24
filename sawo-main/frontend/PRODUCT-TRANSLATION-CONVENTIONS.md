@@ -397,3 +397,79 @@ matches its sibling product → preserve it, flag it, don't silently
    updated remaining-count. This file is what lets the next
    session/agent pick up without re-querying from scratch or repeating
    work.
+
+## German (`de`) notes (2026-09-24 push)
+
+Everything above applies to `de` unless stated here. `de` was done with the
+**dictionary fill engine** rather than by hand-editing 382 packets — see
+"Fill engine" below. Formal register (Sie), decimal comma and spaced units in
+prose ("0,80 m", "4,5 – 9,0 kW"); spec-table **data** cells keep the source's
+period decimals, same "don't reformat data" rule as `fi`.
+
+Material/colour words (auto-filled at `extract` by `MATERIAL_WORD_DICTIONARY.de`):
+Cedar Zeder, Aspen Espe, Hemlock Hemlock (kept — the site's de chrome keeps it),
+Alder Erle, Pine Kiefer, Spruce Fichte, Birch Birke, Black Schwarz, White Weiß,
+Grey/Gray Grau, Silver Silber, Natural Naturfarben, Aluminum Aluminium,
+"Black Metal" Schwarzmetall.
+
+Vocabulary (reuse; taken from / consistent with `src/i18n/locales/de/*.json`):
+heater → Saunaofen/Ofen, heater guard → Ofenschutzgitter, integration collar →
+Einbaukragen, heater hood → Ofenhaube, stone spacer → Steinabstandshalter,
+ladle → Kelle, pail → Eimer, soapstone → Speckstein, sensor → Fühler, bench
+sensor → Bankfühler, control → Steuerung, power controller → Leistungssteuerung,
+contactor unit → Schützeinheit, user interface → Benutzeroberfläche, interface
+holder → Bedienfeld-Halterung, built-in (control) → Einbau/integriert, steam
+generator → Dampferzeuger, steam head → Dampfkopf, steam room → Dampfraum,
+cool-to-touch fibercoating → berührungskühle Faserbeschichtung, bathers →
+Saunagäste, sauna session → Saunagang, accent stone → Zierstein, cooler →
+Getränkekühler. "löyly" stays untranslated where the English source uses it;
+where the source says "steam" it is "Dampf".
+
+Position/finish words attached to a brand (checked against the fi/zh sibling
+rows, as the "How to tell the difference" section requires): Corner → Eck,
+Round → Rund, Wall → Wand, Middle → Mitte, Floor → Boden (so `Nordex Floor NS` →
+`Nordex Boden NS`; zh translated it, fi left it English), Black → Schwarz, Red →
+Rot, Fibercoated/Fiber Coated → Faserbeschichtet. Kept English as line/model
+names: Combi, Mini, Pro, PLUS, Classic, Steam 2.0, Steam STE, Infrared 2.0,
+Dragon, Signature, Essential, Traditional, Kanto, Loisto, Lovi, Siro, Usva, Puro,
+Halu, Steamshot, Cozy Tank. Judgment calls: `Saunova Simple` → `Saunova Einfach`
+(follows fi `Yksinkertainen` / zh 简易款), `Demand Button` → `Demand-Taster`,
+`Cooler` → `Getränkekühler`.
+
+`type` for a heater with a position stays `<Brand> <Position>` translated
+(`Aries Eck`, `Tower Wand`), as fi/zh do; bare brand types stay English.
+
+Description HTML: `<th>` text is translated, `<td>` data is not — with one
+deliberate improvement over fi/zh: the label cells of the Innova/Saunova
+"TECHNICAL DETAILS" tables (Suitable Heaters, Rated Voltage, Frequency, ...)
+are translated too, since they're labels, not data. The Control column's mode
+names (`Built-in (8+4h)`, `Separate`) are data and stay English.
+
+### Fill engine (`src/Administrator/Local/scripts/fill-de-apply.mjs`)
+
+Instead of hand-editing packets, `de` uses one shared exact-English-string →
+German dictionary split across `fill-de-data-*.mjs` files, applied to the
+freshly extracted packets:
+
+```
+node product-i18n.js pending de > slugs.txt
+tail -n +2 slugs.txt | node product-i18n.js extract-many de -
+DE_SRC=<dir with pristine copies of the extracted packets> node fill-de-apply.mjs --all   # or a slug list
+#   prints every string that still has no German entry — the batch is done when it prints 0
+tail -n +2 slugs.txt | node product-i18n.js apply-many de -
+```
+
+- Dictionary files export `phrases` (whole strings and HTML text nodes), `th`,
+  `cells`, `nameTokens` (names built from brand + descriptive words + model
+  code are composed automatically; an unknown word makes the name "missing"
+  instead of guessing), `bySlug` (per-slug overrides, e.g. the article "The " →
+  der/die/das) and `rules` (regex templates, e.g. "Power range: X – Y kW").
+- Short descriptions are HTML with inline `<b>/<strong>`; the engine translates
+  each **text node** (so one sentence in the dictionary serves every colour/
+  control variant of a heater) and leaves tags/attributes untouched. Write
+  translations so a node still reads correctly next to the bold product name
+  around it. A node that starts with punctuation attaches to the previous tag.
+- The fill overwrites the packet, so keep pristine copies (`DE_SRC`) to re-run it
+  after editing a dictionary.
+- Consistency: a string always gets the same German everywhere, which is what
+  translation memory would give anyway; `apply-many` still records every pair.

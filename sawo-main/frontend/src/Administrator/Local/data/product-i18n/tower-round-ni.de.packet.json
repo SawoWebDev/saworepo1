@@ -1,0 +1,23 @@
+{
+  "slug": "tower-round-ni",
+  "productId": "fbd415e6-6d42-4871-9fa1-83ca329d8583",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Tower Rund Ni",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\">Tower Rund</strong><span style=\"text-align: justify;\"> Saunaofen ist ein zeitloses, elegantes Design. Seine Höhe sorgt für eine gleichmäßige Verteilung lang anhaltender feuchter Wärme für zutiefst befriedigende Saunagänge. Das Rundmodell kann mittig im Saunaraum installiert oder in eine Bank eingelassen werden. Es wird außerdem mit einem abnehmbaren Steinabstandshalter geliefert, der zwei Einrichtungsvarianten ermöglicht: (1) mit Abstandshalter für schnelleres Aufheizen, Energieeffizienz und eine heißere Sauna oder (2) ohne Abstandshalter für Platz für mehr Steine, mehr Dampf, eine mildere Temperatur und Energieeinsparungen im gewerblichen Einsatz.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg) ohne Steinabstandshalter</th>\n  <th>Steine<br>(kg) mit Steinabstandshalter</th>\n  <th>Steuerung</th>\n  <th colspan=\"2\">Mindestsicherheitsabstände<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH6-105Ni-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>365 × 365 × 1300</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Innova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-120Ni-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>365 × 365 × 1300</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-105Ni-P</td>\n  <td>10.5</td>\n  <td>10 – 16</td>\n  <td>450 × 450 × 1300</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>150</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-120Ni-P</td>\n  <td>12.0</td>\n  <td>11 – 20</td>\n  <td>450 × 450 × 1300</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>150</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-150Ni-P</td>\n  <td>15.0</td>\n  <td>14 – 25</td>\n  <td>450 × 450 × 1300</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH12-150Ni-P</td>\n  <td>15.0</td>\n  <td>15 – 26</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-180Ni-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-210Ni-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-240Ni-P</td>\n  <td>24.0</td>\n  <td>24 – 40</td>\n  <td>545 × 545 × 1300</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>200</td>\n  <td>2300</td>\n</tr></tbody></table>",
+    "type": "Tower Rund",
+    "features": [
+      "Leistungsbereich: 10,5 – 24,0 kW",
+      "Verfügbare Steuerung: Innova (Ni)",
+      "Edelstahlgehäuse",
+      "Bewegliche Stahlringe zum Austausch gebrochener Steine",
+      "Abnehmbarer Steinabstandshalter",
+      "Verstellbare Füße",
+      "Optionales Ofenschutzgitter",
+      "Optionaler Einbaukragen"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "aroma-cup-50",
+  "productId": "c0f8a762-c263-4719-a89e-7c1b46075ce6",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aromabecher (ø)50",
+    "short_description": "Der SAWO Aromabecher (ø)50 ist ein Aromabecher aus Speckstein mit den Maßen 50 × 50 × 60 mm und einem Gewicht von 0,3 kg, Teil der Kivistone-Zubehörlinie, zur Aufnahme von Wasser für die Aromatherapie auf den Saunasteinen.",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-100)",
+        "name": "(R-100)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

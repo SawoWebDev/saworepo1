@@ -1,0 +1,23 @@
+{
+  "slug": "tower-corner-ni2",
+  "productId": "4e2b9b0c-e677-4209-8d39-ca7d4dc123ce",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Tower Eck Ni2",
+    "short_description": "<span style=\"text-align: justify;\">Der </span><strong style=\"text-align: justify;\">Tower Eck</strong><span style=\"text-align: justify;\"> Saunaofen ist speziell dafür konzipiert, sich nahtlos in enge Ecken einzufügen. Er nutzt den Saunagrundriss optimal aus, ohne Kompromisse bei der Wärmeverteilung und der Wirkung seiner eleganten, minimalistischen Ästhetik einzugehen. Bewegliche Stahlringe ermöglichen den einfachen Austausch gebrochener Steine, und der abnehmbare Steinabstandshalter bietet zwei Einrichtungsvarianten: (1) mit Abstandshalter für schnelleres Aufheizen, Energieeffizienz und eine heißere Sauna oder (2) ohne Abstandshalter für Platz für mehr Steine, mehr Dampf, eine mildere Temperatur und Energieeinsparungen im gewerblichen Einsatz.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Ofenmodell</th>\n  <th>kW</th>\n  <th>Saunaraum<br>min. (m³) max.</th>\n  <th>Ofengröße (mm)<br>Länge Breite Höhe</th>\n  <th>Steine<br>(kg) ohne Steinabstandshalter</th>\n  <th>Steine<br>(kg) mit Steinabstandshalter</th>\n  <th>Steuerung</th>\n  <th colspan=\"2\">Mindestsicherheitsabstände<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH2-30Ni2-CNR-P-C</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-35Ni2-CNR-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-45Ni2-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-60Ni2-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH4-60Ni2-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>355 × 355 × 1380</td>\n  <td>105</td>\n  <td>70</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-80Ni2-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>355 × 355 × 1380</td>\n  <td>105</td>\n  <td>70</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-90Ni2-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>355 × 355 × 1380</td>\n  <td>105</td>\n  <td>70</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-80Ni2-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>415 × 415 × 1380</td>\n  <td>160</td>\n  <td>80</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-90Ni2-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>415 × 415 × 1380</td>\n  <td>160</td>\n  <td>80</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Tower Eck",
+    "features": [
+      "Leistungsbereich: 3,0 – 9,0 kW",
+      "Verfügbare Steuerung: Saunova (Ni2)",
+      "Edelstahlgehäuse",
+      "Bewegliche Stahlringe zum Austausch gebrochener Steine",
+      "Abnehmbarer Steinabstandshalter",
+      "Verstellbare Füße",
+      "Optionales Ofenschutzgitter",
+      "Optionaler Einbaukragen"
+    ]
+  }
+}

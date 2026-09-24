@@ -1,0 +1,32 @@
+{
+  "slug": "black-metal-thermometer",
+  "productId": "ff8fdb74-3536-47fd-8ada-1004b5c497fe",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Black Metal (295-TMBL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Schwarzmetall-Thermometer",
+    "short_description": "Das SAWO Schwarzmetall-Thermometer ist ein Saunathermometer aus Schwarzmetall mit den Maßen 110 × 110 mm zur Überwachung der Temperatur in der Sauna.",
+    "description": null,
+    "type": "Thermometer",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Black Metal (295-TMBL)",
+        "name": "Schwarzmetall (295-TMBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

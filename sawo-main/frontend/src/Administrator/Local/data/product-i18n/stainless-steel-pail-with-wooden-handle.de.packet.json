@@ -1,0 +1,56 @@
+{
+  "slug": "stainless-steel-pail-with-wooden-handle",
+  "productId": "f9acca66-3b8a-496b-918f-362d39274668",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (375-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (375-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (375-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Edelstahleimer mit Holzgriff",
+    "short_description": "Der SAWO Edelstahleimer mit Holzgriff ist ein Holzeimer mit Edelstahleinsatz und einem Fassungsvermögen von 5 l zur Aufnahme des Wassers, das auf die Saunasteine gegossen wird.",
+    "description": null,
+    "type": "Eimer",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (375-MD)",
+        "name": "Zeder (375-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (375-MA)",
+        "name": "Espe (375-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (375-MH)",
+        "name": "Hemlock (375-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

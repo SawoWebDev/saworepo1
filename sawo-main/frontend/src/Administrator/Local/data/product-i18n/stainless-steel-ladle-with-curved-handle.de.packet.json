@@ -1,0 +1,44 @@
+{
+  "slug": "stainless-steel-ladle-with-curved-handle",
+  "productId": "00456e93-ac74-4388-b2c5-c342a0e228c7",
+  "locale": "de",
+  "instructions": "Replace every remaining ENGLISH string value below with its de translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (453-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (453-MA)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Edelstahlkelle mit gebogenem Griff",
+    "short_description": "Die SAWO Edelstahlkelle mit gebogenem Griff ist eine Saunakelle aus Edelstahl mit einer Länge von 460 mm zum Übergießen der erhitzten Saunasteine mit Wasser (löyly).",
+    "description": null,
+    "type": "Kellen",
+    "spec_table_headers": [
+      "Spezifikation",
+      "Details"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (453-MD)",
+        "name": "Zeder (453-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (453-MA)",
+        "name": "Espe (453-MA)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
