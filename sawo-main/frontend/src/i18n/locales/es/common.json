@@ -1,1 +1,86 @@
-{}
+{
+  "exploreMore": "Descubrir más",
+  "inquireToday": "SOLICITAR INFORMACIÓN",
+  "viewCatalogue": "VER CATÁLOGO",
+  "viewBrochure": "VER FOLLETO",
+  "previous": "Anterior",
+  "next": "Siguiente",
+  "pageCTA": {
+    "defaultTitle": "¿Necesita ayuda para elegir?",
+    "defaultDescription": "Nuestro equipo puede ayudarle a encontrar la configuración SAWO ideal para su hogar o espacio comercial.",
+    "contactUs": "Contacto",
+    "viewManuals": "Ver manuales"
+  },
+  "saunaCalculatorCTA": {
+    "title": "Encuentre la sauna de sus sueños",
+    "subtitle": "Introduzca el ancho, el alto y el fondo de su cabina y nuestra calculadora obtendrá al instante el volumen del sauna y le recomendará la potencia de estufa adecuada, en kW.",
+    "buttonLabel": "Calculadora de sauna"
+  },
+  "catalogFilter": {
+    "all": "Todos",
+    "searchPlaceholder": "Buscar: {{category}}…",
+    "clearSearch": "Borrar búsqueda",
+    "noProductsYet": "Todavía no hay productos disponibles.",
+    "noMatch": "Ningún resultado para «{{query}}» en {{category}}",
+    "noResultsFor": "Sin resultados para «{{query}}»",
+    "resultsCount_one": "{{count}} resultado para «{{query}}»",
+    "resultsCount_other": "{{count}} resultados para «{{query}}»"
+  },
+  "wellnessBenefits": {
+    "stressRelief": {
+      "label": "Alivio del estrés",
+      "desc": "Reduce el estrés, favorece la relajación y alivia la ansiedad"
+    },
+    "heartHealth": {
+      "label": "Salud cardiovascular",
+      "desc": "Mejora la circulación sanguínea, reduce la rigidez arterial y contribuye a una presión arterial saludable"
+    },
+    "respiratoryRelief": {
+      "label": "Alivio respiratorio",
+      "desc": "Alivia la congestión nasal, de los senos paranasales y del pecho"
+    },
+    "muscleRecovery": {
+      "label": "Recuperación muscular",
+      "desc": "Acelera la recuperación muscular después del ejercicio"
+    },
+    "betterSleep": {
+      "label": "Mejor sueño",
+      "desc": "Favorece un sueño más profundo y reparador al prolongar la fase REM"
+    },
+    "diseasePrevention": {
+      "label": "Prevención de enfermedades",
+      "desc": "Reduce el riesgo de enfermedades cardiovasculares, como el ictus, la hipertensión, la demencia y el alzhéimer"
+    },
+    "skinDetox": {
+      "label": "Detox de la piel",
+      "desc": "Abre los poros, reduce los puntos negros, elimina toxinas y mejora la piel"
+    },
+    "collagenBoost": {
+      "label": "Estímulo del colágeno",
+      "desc": "Estimula la actividad de los fibroblastos para aumentar la producción de colágeno y mejorar la textura de la piel"
+    },
+    "skinHydration": {
+      "label": "Hidratación de la piel",
+      "desc": "Mejora la hidratación de la piel, estabiliza el equilibrio del pH y refuerza la barrera natural de la piel"
+    },
+    "immuneSupport": {
+      "label": "Refuerzo inmunitario",
+      "desc": "Apoya las defensas inmunitarias naturales del cuerpo y favorece la recuperación tras una enfermedad"
+    },
+    "metabolismBoost": {
+      "label": "Impulso del metabolismo",
+      "desc": "Estimula la reparación de proteínas, mejora la sensibilidad a la insulina y aumenta el metabolismo"
+    },
+    "mentalWellness": {
+      "label": "Bienestar mental",
+      "desc": "Reduce de forma notable los síntomas de la depresión con un uso constante"
+    }
+  },
+  "accessoryCard": {
+    "bestSeller": "Más vendido",
+    "close": "Cerrar",
+    "watchVideo": "Ver vídeo",
+    "code": "Código",
+    "option": "Opción"
+  }
+}

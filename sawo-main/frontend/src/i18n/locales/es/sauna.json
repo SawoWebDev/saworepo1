@@ -1,0 +1,1233 @@
+{
+  "meta": {
+    "title": "Estufas, controles y accesorios para sauna finlandesa",
+    "description": "Explore toda la gama de sauna finlandés de SAWO: estufas, controles y accesorios diseñados durante más de 30 años para ofrecer el calor y la comodidad de un sauna auténtico."
+  },
+  "hero": {
+    "heading": "SAUNA FINLANDESA",
+    "subtitle": "Descubra el auténtico sauna finlandés con nuestras estufas: calor suave, humedad y el equilibrio perfecto para una relajación total.",
+    "catalogueButton": "CATÁLOGO DE PRODUCTOS"
+  },
+  "heaters": {
+    "heading": "Estufa de sauna",
+    "intro": "Considerada el <strong>«corazón del sauna»</strong>, tenemos más de 100 modelos de estufa entre los que elegir. Las estufas SAWO están diseñadas con gran experiencia para adaptarse tanto a saunas residenciales como comerciales.",
+    "items": {
+      "tower": {
+        "title": "Serie Tower",
+        "caption": "La serie SAWO Tower, un diseño de columna de piedras de sauna que distribuye el vapor por todo el cuerpo y ofrece una experiencia de vapor lujosa e inmersiva del suelo al techo."
+      },
+      "stone": {
+        "title": "Serie de piedra",
+        "caption": "La serie SAWO de piedra cuenta con un cuerpo de acero inoxidable resistente y esteatita finlandesa conductora del calor, lo que garantiza un calentamiento eficiente y un secado rápido tras el uso."
+      },
+      "wallMounted": {
+        "title": "Serie de pared",
+        "caption": "La serie SAWO de pared ofrece estufas elegantes que ahorran espacio y combinan eficiencia y diseño moderno para un calor y una comodidad óptimos."
+      },
+      "floor": {
+        "title": "Serie de suelo",
+        "caption": "La serie SAWO de suelo ofrece estufas independientes, móviles y de alto rendimiento para una distribución óptima del calor y una comodidad duradera."
+      },
+      "dragonfire": {
+        "title": "Serie Dragonfire",
+        "caption": "Mejore su experiencia de sauna con la serie SAWO Dragonfire, creada por el reconocido diseñador finlandés Stefan Lindfors para la vida moderna."
+      },
+      "combi": {
+        "title": "Serie Combi",
+        "caption": "Estufas eléctricas versátiles con vaporizadores integrados que ofrecen la opción de sauna tradicional o de vapor, con cubetas para aceites aromáticos para un toque extra de lujo."
+      }
+    },
+    "viewAll": "VER TODAS LAS ESTUFAS"
+  },
+  "controls": {
+    "heading": "Controles de sauna",
+    "intro": "Utilizar un control independiente con las estufas SAWO le permite decidir qué tipo de experiencia de sauna desea. Controle funciones como la temperatura, la humedad, el tiempo, el ventilador y el regulador de luz, o incluso ahorre energía con el contador de consumo.",
+    "items": {
+      "innova": {
+        "title": "Serie Innova",
+        "desc": "La Saunova 2.0 se combina a la perfección con estufas de hasta 9 kW y cuenta con control inteligente de la temperatura, un sensor de banco preciso y una interfaz de usuario versátil, sin necesidad de un controlador de potencia independiente."
+      },
+      "saunova": {
+        "title": "Serie Saunova",
+        "desc": "Control versátil de la temperatura, la humedad, la ventilación y la iluminación del sauna, con Smart Controlling, sensor de puerta, temporizador de arranque programado y funciones opcionales de ventilador, regulador y Combi."
+      },
+      "accessories": {
+        "title": "Accesorios de control",
+        "desc": "Los sistemas de control de sauna modernos mejoran su experiencia al gestionar el calor, ajustar el ambiente, supervisar el consumo de energía y enviar alertas de mantenimiento."
+      }
+    },
+    "viewAll": "VER CONTROLES DE SAUNA"
+  },
+  "accessories": {
+    "heading": "Accesorios para sauna",
+    "intro": "Ofrecemos una amplia selección de accesorios para sauna atemporales en cedro, álamo y pino. Elija sus favoritos para personalizar el sauna exactamente a su gusto.",
+    "items": {
+      "accessorySets": {
+        "title": "Sets de accesorios",
+        "desc": "Nuestros sets de accesorios, cuidadosamente seleccionados, ofrecen algo para todos. Desde opciones naturales de residuo cero hasta diseños atrevidos y sofisticados, los sets mejoran el disfrute de su sauna de todas las formas posibles."
+      },
+      "pailsLadles": {
+        "title": "Cubos y cucharones",
+        "desc": "Imprescindibles en el sauna finlandés, nuestra selección SAWO ofrece cubos de 2 a 40 litros. Elija entre cedro, álamo y pino tradicionales u opciones modernas de acero inoxidable. Complete su set con cucharones."
+      },
+      "thermometers": {
+        "title": "Termómetros y medidores combinados",
+        "desc": "Los termohigrómetros tradicionales indican que el sauna está listo. Descubra formas y estilos diversos. Realce su zona de descanso con relojes de madera y pruebe nuestros relojes de arena de 15 minutos para socializar o para quienes se inician."
+      },
+      "clocksSandtimers": {
+        "title": "Relojes y temporizadores",
+        "desc": "¿Quiere ver quién aguanta más en el sauna? Nuestros relojes de arena de 15 min son una forma estupenda de generar conversación y perfectos para quienes se inician en el sauna finlandés."
+      },
+      "lightsCovers": {
+        "title": "Iluminación para sauna",
+        "desc": "Cree el ambiente perfecto con un buen juego de iluminación. Nuestras distintas pantallas de luz le permiten lograr una sensación relajante y cálida."
+      },
+      "headrestsBackrests": {
+        "title": "Reposacabezas y respaldos",
+        "desc": "Los reposacabezas y respaldos de madera, junto con los respaldos de zona de descanso, fabricados con materiales duraderos como madera, espuma viscoelástica o tela, ofrecen comodidad en el sauna y en la zona de descanso, con tapizado resistente a la humedad para mayor durabilidad."
+      },
+      "doorsHandles": {
+        "title": "Puertas y tiradores",
+        "desc": "Mejore su sauna con las puertas de sauna de SAWO. Fabricadas para durar, incorporan junta de goma, cierre magnético, bisagras de acero inoxidable y jambas laminadas. Elija las opciones de vidrio para lograr una sensación luminosa y de amplitud."
+      },
+      "benches": {
+        "title": "Bancos y baldosas de suelo",
+        "desc": "Mejore su experiencia de sauna con bancos cómodos y elegantes que favorecen la relajación. Elija entre diversos diseños de alta calidad que se adapten a su gusto y a su espacio, y cree un santuario de bienestar para su cuerpo y su mente."
+      },
+      "kivistone": {
+        "title": "Kivistone",
+        "desc": "Kivistone ofrece una gran variedad de productos únicos de esteatita para el hogar, regalos y uso corporativo, con un amplio abanico de diseños innovadores."
+      },
+      "ventilations": {
+        "title": "Ventilación y complementos",
+        "desc": "Descubra su experiencia de sauna con nuestra gama de ventilaciones y artículos esenciales. Disfrute aún más de su tiempo en el sauna con los complementos de SAWO. ¡Descubra hoy nuestra fascinante selección!"
+      }
+    },
+    "viewAll": "VER TODOS LOS ACCESORIOS"
+  },
+  "heatersPage": {
+    "meta": {
+      "title": "Estufas de sauna",
+      "description": "Explore toda la gama de estufas de sauna finlandesas SAWO: series Tower, de pared, de suelo, Combi, de piedra y Dragonfire para cualquier tamaño y estilo de sauna."
+    },
+    "hero": {
+      "title": "ESTUFAS DE SAUNA",
+      "catalogueButton": "CATÁLOGO DE PRODUCTOS"
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión."
+    },
+    "video": {
+      "title": "¿Quién puede usar las estufas SAWO?",
+      "desc": "Ofrecemos una amplia gama de opciones para hoteles, spas, gimnasios y saunas residenciales privados. Del pequeño al imponente, del sencillo al elegante, del espectacular al oculto, tenemos la estufa adecuada para usted."
+    },
+    "items": {
+      "tower": {
+        "title": "Serie Tower",
+        "caption": "Las estufas SAWO Tower se describen mejor como «columnas de piedras de sauna». Resistentes anillos de acero inoxidable sostienen enormes cantidades de piedras. Estas estufas están diseñadas para hacer circular el vapor de manera uniforme desde la parte más baja hasta la más alta de la cabina de sauna."
+      },
+      "floor": {
+        "title": "Serie de suelo",
+        "caption": "Nuestra serie de suelo ofrece estufas independientes móviles, elegantes y duraderas de alto rendimiento que garantizan una distribución óptima del calor y la comodidad. Al contar con más opciones de ubicación, permiten personalizar más el aspecto de la cabina de sauna."
+      },
+      "wallMounted": {
+        "title": "Serie de pared",
+        "caption": "Las estufas de pared SAWO se basan en un alto rendimiento en un tamaño compacto. Para mayor seguridad, la mayoría de nuestras estufas de pared están disponibles con recubrimiento de fibra que no quema al tacto, lo que ayuda a prevenir quemaduras accidentales."
+      },
+      "combi": {
+        "title": "Serie Combi",
+        "caption": "Estufas eléctricas versátiles con vaporizadores integrados que ofrecen la opción de sauna tradicional o de vapor, con cubetas para aceites aromáticos para un toque extra de lujo."
+      },
+      "dragonfire": {
+        "title": "Serie Dragonfire",
+        "caption": "Mejore su experiencia de sauna con la serie SAWO Dragonfire, creada por el reconocido diseñador finlandés Stefan Lindfors para la vida moderna."
+      },
+      "stone": {
+        "title": "Serie de piedra",
+        "caption": "Fabricadas con esteatita finlandesa, las estufas SAWO de piedra tienen propiedades excepcionales de almacenamiento y conducción del calor. Su calor suave ofrece una experiencia de sauna constante y duradera."
+      }
+    },
+    "viewAll": "VER TODAS LAS ESTUFAS",
+    "promoBanner": {
+      "title": "Encuentre su estufa perfecta",
+      "subtitle": "Explore nuestra gama completa de más de 100 modelos de estufa y descubra la que está hecha para su sauna"
+    }
+  },
+  "accessoriesPage": {
+    "meta": {
+      "title": "Accesorios para sauna",
+      "description": "Mejore su sauna con los accesorios SAWO: cubos, cucharones, termómetros, reposacabezas, iluminación y mucho más, diseñados con esmero para cualquier sauna."
+    },
+    "hero": {
+      "title": "ACCESORIOS PARA SAUNA",
+      "subtitle": "Descubra los accesorios para sauna perfectos"
+    },
+    "sectionTitle": "Descubra los accesorios para sauna perfectos",
+    "brochureItems": {
+      "kivistone": "Folleto Kivistone",
+      "saunaLights": "Folleto de iluminación para sauna",
+      "accessorySets": "Folleto de sets de accesorios",
+      "accessories": "Folleto de accesorios",
+      "curveLedLights": "Folleto de luces LED curvas",
+      "saunaDoors": "Folleto de puertas de sauna"
+    },
+    "items": {
+      "accessorySets": {
+        "title": "Sets de accesorios",
+        "desc": "Nuestros sets de accesorios, cuidadosamente seleccionados, ofrecen algo para todos. Desde opciones naturales de residuo cero hasta diseños atrevidos y sofisticados, los sets mejoran el disfrute de su sauna de todas las formas posibles."
+      },
+      "pailsLadles": {
+        "title": "Cubos y cucharones",
+        "desc": "Imprescindibles en el sauna finlandés, nuestra selección SAWO ofrece cubos de 2 a 40 litros. Elija entre cedro, álamo y pino tradicionales u opciones modernas de acero inoxidable. Complete su set con cucharones."
+      },
+      "thermometers": {
+        "title": "Termómetros y medidores combinados",
+        "desc": "Los termómetros e higrómetros tradicionales indican que el sauna está listo. Descubra formas y estilos diversos. Realce su zona de descanso con relojes de madera y pruebe nuestros relojes de arena de 15 minutos para socializar o para quienes se inician."
+      },
+      "clocksSandtimers": {
+        "title": "Relojes y relojes de arena",
+        "desc": "¿Quiere ver quién aguanta más en el sauna? Nuestros relojes de arena de 15 min son una forma estupenda de generar conversación y perfectos para quienes se inician en el sauna finlandés."
+      },
+      "lightsCovers": {
+        "title": "Luces y cubiertas para sauna",
+        "desc": "Cree el ambiente perfecto con un buen juego de iluminación. Nuestras distintas pantallas de luz le permiten lograr una sensación relajante y cálida."
+      },
+      "headrestsBackrests": {
+        "title": "Reposacabezas y respaldos",
+        "desc": "Los reposacabezas y respaldos de madera, junto con los respaldos de zona de descanso, fabricados con materiales duraderos como madera, espuma viscoelástica o tela, ofrecen comodidad en el sauna y en la zona de descanso, con tapizado resistente a la humedad para mayor durabilidad."
+      },
+      "doorsHandles": {
+        "title": "Puertas y tiradores",
+        "desc": "Mejore su sauna con las puertas de sauna de SAWO. Fabricadas para durar, incorporan junta de goma, cierre magnético, bisagras de acero inoxidable y jambas laminadas. Elija las opciones de vidrio para lograr una sensación luminosa y de amplitud."
+      },
+      "benches": {
+        "title": "Bancos y baldosas de suelo",
+        "desc": "Mejore su experiencia de sauna con bancos cómodos y elegantes que favorecen la relajación. Elija entre diversos diseños de alta calidad que se adapten a su gusto y a su espacio, y cree un santuario de bienestar para su cuerpo y su mente."
+      },
+      "kivistone": {
+        "title": "Kivistone",
+        "desc": "Kivistone ofrece una gran variedad de productos únicos de esteatita para el hogar, regalos y uso corporativo, con un amplio abanico de diseños innovadores."
+      },
+      "ventilations": {
+        "title": "Ventilación y complementos",
+        "desc": "Descubra su experiencia de sauna con nuestra gama de ventilaciones y artículos esenciales. Disfrute aún más de su tiempo en el sauna con los complementos de SAWO. ¡Descubra hoy nuestra fascinante selección!"
+      }
+    },
+    "viewAll": "VER TODOS LOS ACCESORIOS"
+  },
+  "controlsPage": {
+    "meta": {
+      "title": "Controles de sauna",
+      "description": "Control preciso de la temperatura, el tiempo y la iluminación de su sauna: descubra las series de controles SAWO Innova y Saunova para un confort total."
+    },
+    "hero": {
+      "title": "Controles de sauna",
+      "description": "Control de precisión para la experiencia de sauna perfecta. Descubra las series de controles SAWO Innova y Saunova para un confort total."
+    },
+    "intro": {
+      "title": "Descubra nuestra colección de controles de sauna de primera categoría",
+      "desc": "Utilizar un control independiente con las estufas SAWO le permite decidir qué tipo de experiencia de sauna desea. Controle funciones como la temperatura, la humedad, el tiempo, el ventilador y el regulador de luz, o incluso ahorre energía con el contador de consumo."
+    },
+    "groupLabels": {
+      "Coming Soon": "Próximamente",
+      "Saunova Series": "Serie Saunova",
+      "Innova Series": "Serie Innova",
+      "Control Spare Parts": "Repuestos de controles",
+      "Interface Holder": "Soporte de interfaz",
+      "Sensor": "Sensor",
+      "Other": "Otros"
+    },
+    "precaution": {
+      "label": "Aviso de precaución",
+      "text": "Solo un electricista cualificado puede realizar las conexiones eléctricas y las reparaciones de la unidad. Utilice únicamente piezas originales."
+    },
+    "why": {
+      "eyebrow": "CONTROLES SAWO",
+      "title": "Por qué elegir los controles SAWO",
+      "desc": "Los controles SAWO combinan un uso intuitivo con tecnología avanzada y le dan el control total sobre el entorno de su sauna para lograr una experiencia constante y a medida en cada sesión."
+    },
+    "promo": {
+      "title": "Viva la relajación máxima",
+      "subtitle": "Encuentre su control perfecto en toda nuestra gama de soluciones SAWO"
+    }
+  },
+  "wallMountedPage": {
+    "meta": {
+      "title": "Estufas de sauna de pared",
+      "description": "Explore las estufas de sauna de pared SAWO: series Nordex, Mini, Scandia, Krios y Scandifire, con diseños robustos que ahorran espacio para saunas pequeños y medianos."
+    },
+    "hero": {
+      "title": "ESTUFAS DE SAUNA DE PARED",
+      "subtitle": "Diseños modernos y elegantes que ahorran espacio",
+      "alt": "Estufas de sauna de pared",
+      "exploreButton": "EXPLORAR ESTUFAS"
+    },
+    "intro": {
+      "title": "Presentamos nuestras estufas de pared de alta gama",
+      "desc": "Nuestras estufas de pared están pensadas para quienes disfrutan de la experiencia de sauna tradicional, seca y caliente. Esta serie de estufas clásicas incluye modelos robustos que ahorran espacio para saunas pequeños y medianos."
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión."
+    }
+  },
+  "stonePage": {
+    "meta": {
+      "title": "Estufas de sauna de piedra",
+      "description": "Las estufas de la serie SAWO de piedra combinan acero inoxidable resistente con esteatita finlandesa conductora del calor para un calentamiento eficiente y un secado rápido tras el uso."
+    },
+    "hero": {
+      "title": "SERIE DE SAUNA DE PIEDRA",
+      "subtitle": "Saunas eficientes, elegantes y centrados en el bienestar.",
+      "alt": "Serie de sauna de piedra",
+      "exploreButton": "EXPLORAR ESTUFAS"
+    },
+    "intro": {
+      "title": "Presentamos nuestra serie de sauna de piedra de alta gama",
+      "desc": "Disfrute de saunas modernos y eficientes energéticamente, diseñados para la relajación y el bienestar, con una estética elegante y una comodidad superior. Nuestras estufas de piedra están fabricadas íntegramente en piedra o combinando acero inoxidable y piedra. La esteatita finlandesa proporciona una excelente conducción del calor, que mejora su experiencia de sauna y seca más rápido la cabina tras el uso."
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión.",
+      "durable": "Construcción duradera: los materiales de alta calidad garantizan un rendimiento duradero."
+    },
+    "empty": "No hay estufas de piedra disponibles."
+  },
+  "towerPage": {
+    "meta": {
+      "title": "Estufas de sauna Tower",
+      "description": "Explore las estufas de sauna de la serie SAWO Tower: diseños verticales elegantes y eficientes energéticamente, con una distribución del calor superior para una experiencia de sauna de bienestar moderna."
+    },
+    "hero": {
+      "title": "ESTUFAS DE SAUNA TOWER",
+      "subtitle": "Saunas eficientes, elegantes y centrados en el bienestar",
+      "alt": "Estufas de sauna Tower",
+      "exploreButton": "EXPLORAR ESTUFAS"
+    },
+    "intro": {
+      "title": "Presentamos nuestras estufas de sauna Tower de alta gama",
+      "desc": "Disfrute de saunas modernos y eficientes energéticamente, diseñados para la relajación y el bienestar, con una estética elegante y una comodidad superior. Descubra una distribución del calor superior y un diseño elegante con nuestras estufas de sauna Tower de alta gama."
+    },
+    "types": {
+      "round": "Redondo",
+      "wall": "De pared",
+      "corner": "Esquina"
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión.",
+      "userFriendly": "Controles fáciles de usar: ajuste con facilidad la temperatura y el tiempo para lograr su experiencia de sauna perfecta."
+    },
+    "empty": "No hay estufas Tower disponibles."
+  },
+  "floorPage": {
+    "meta": {
+      "title": "Estufas de sauna de suelo",
+      "description": "Serie SAWO de suelo: potentes estufas de sauna independientes y móviles que ofrecen una distribución óptima del calor y una comodidad duradera en saunas comerciales y domésticos."
+    },
+    "hero": {
+      "title": "ESTUFAS DE SAUNA DE SUELO",
+      "subtitle": "Distribución del calor superior y diseño elegante",
+      "alt": "Estufas de sauna de suelo",
+      "exploreButton": "EXPLORAR ESTUFAS"
+    },
+    "intro": {
+      "title": "Presentamos nuestras estufas de sauna de suelo de alta gama",
+      "desc": "Descubra una distribución del calor superior y un diseño elegante con nuestras estufas de sauna de suelo de alta gama, creadas para una relajación y una eficiencia máximas."
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión."
+    },
+    "empty": "No hay estufas de suelo disponibles."
+  },
+  "combiPage": {
+    "meta": {
+      "title": "Estufas de sauna Combi",
+      "description": "Las estufas SAWO Combi combinan sauna y vapor en una sola unidad potente: calor versátil y eficiente energéticamente con un vaporizador integrado."
+    },
+    "hero": {
+      "title": "ESTUFAS COMBI",
+      "subtitle": "Sauna y vapor en una sola unidad potente",
+      "alt": "Estufas Combi",
+      "exploreButton": "EXPLORAR ESTUFAS"
+    },
+    "intro": {
+      "title": "Presentamos nuestra serie de sauna Combi de alta gama",
+      "desc": "Las estufas Combi son estufas eléctricas con vaporizador integrado que permiten elegir entre un sauna normal y un sauna de vapor. Están equipadas con cubetas de aromas para aceites aromáticos y con un sistema patentado de detección del nivel de agua que avisa cuando el nivel es bajo. El nivel de agua se puede controlar fácilmente mediante un tubo indicador de nivel (solo en el modelo estándar)."
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión.",
+      "durable": "Construcción duradera: los materiales de alta calidad garantizan un rendimiento duradero."
+    },
+    "empty": "No hay estufas Combi disponibles."
+  },
+  "dragonfirePage": {
+    "meta": {
+      "title": "Estufas de sauna Dragonfire",
+      "description": "Serie SAWO Dragonfire: estufas de sauna artísticas diseñadas por Stefan Lindfors que combinan un diseño impactante con tecnología de calefacción punta."
+    },
+    "hero": {
+      "title": "ESTUFAS DE SAUNA DRAGONFIRE",
+      "subtitle": "El talento artístico se une a la tecnología punta",
+      "alt": "Estufas de sauna Dragonfire",
+      "exploreButton": "EXPLORAR ESTUFAS"
+    },
+    "intro": {
+      "title": "Presentamos nuestra serie de sauna Dragonfire de alta gama",
+      "desc": "Las estufas Dragonfire son una refinada fusión de talento artístico y tecnología punta, tal como las concibió el reconocido diseñador finlandés Stefan Lindfors. Cada estufa Dragonfire luce un elegante motivo jungle-fire y ofrece un calor potente y constante, además de eficiencia energética. Elija entre modelos de suelo, de pared y de esquina, así como estufas Mini."
+    },
+    "why": {
+      "eyebrow": "ESTUFAS SAWO",
+      "title": "Por qué elegir las estufas SAWO",
+      "desc": "Las estufas SAWO combinan durabilidad, eficiencia energética y diseño moderno, con un rendimiento constante para una experiencia de sauna fiable y superior en cada sesión.",
+      "userFriendly": "Controles fáciles de usar: ajuste con facilidad la temperatura y el tiempo para lograr su experiencia de sauna perfecta."
+    },
+    "empty": "No hay estufas Dragonfire disponibles."
+  },
+  "roomsPage": {
+    "meta": {
+      "title": "Cabinas de sauna",
+      "description": "Explore las cabinas de sauna SAWO: diseños Estándar, Frontal de vidrio y Compacto, creados para una experiencia de sauna completa y terapéutica."
+    },
+    "hero": {
+      "title": "CABINAS DE SAUNA",
+      "subtitle": "Cabinas de sauna finlandesas a medida, creadas para ofrecer comodidad, durabilidad y un diseño atemporal.",
+      "catalogueButton": "Catálogo de productos"
+    },
+    "configurator": {
+      "title": "Personalice el sauna de sus sueños",
+      "desc": "Seleccione su cabina, estufa y accesorios ideales y envíenos su configuración para recibir un presupuesto personalizado.",
+      "steps": {
+        "room": "Cabina",
+        "heater": "Estufa",
+        "accessories": "Accesorios"
+      },
+      "stepLabels": {
+        "room": "Paso 1",
+        "heater": "Paso 2",
+        "accessory": "Paso 3"
+      },
+      "stepHeadings": {
+        "room": "Elija su cabina de sauna",
+        "heater": "Elija su estufa de sauna",
+        "accessory": "Añada accesorios"
+      },
+      "multiNote": "Puede seleccionar varios accesorios",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "yourSelection": "Su selección",
+      "notSelected": "No seleccionado",
+      "itemsSelected": "{{count}} artículos seleccionados",
+      "cta": "Solicitar información sobre esta configuración",
+      "ctaHintReady": "Abre nuestro formulario de contacto con sus selecciones ya rellenadas",
+      "ctaHintEmpty": "Seleccione al menos una cabina para continuar",
+      "rooms": {
+        "r1": {
+          "name": "Cabina de sauna clásica pequeña - 1214RS",
+          "tag": "Pequeña",
+          "desc": "Un sauna compacto de estilo finlandés diseñado para 1–3 personas. Perfecto para la relajación privada y los espacios más reducidos sin renunciar a la comodidad de un sauna auténtico."
+        },
+        "r2": {
+          "name": "Cabina de sauna clásica mediana - 1419RS",
+          "tag": "Mediana",
+          "desc": "Un sauna espacioso y versátil diseñado para 4–6 personas. Ideal para familias o sesiones compartidas, con el equilibrio perfecto entre comodidad y funcionalidad."
+        },
+        "r3": {
+          "name": "Cabina de sauna clásica grande - 1922RL",
+          "tag": "Grande",
+          "desc": "Una cabina de sauna generosa diseñada para 6 o más personas. Perfecta para casas grandes, espacios de bienestar o entornos comerciales que buscan una experiencia de grupo premium."
+        },
+        "r4": {
+          "name": "Cabina de sauna con frontal de vidrio pequeña - 1414RS",
+          "tag": "Pequeña",
+          "desc": "Un sauna compacto para 1–3 personas con un frontal completamente de vidrio que realza la luz natural y la sensación de amplitud. Ideal para interiores modernos que buscan una experiencia de sauna más luminosa y abierta."
+        },
+        "r5": {
+          "name": "Cabina de sauna con frontal de vidrio mediana - 1420RS",
+          "tag": "Mediana",
+          "desc": "Diseñado para 4–6 personas, este sauna con frontal de vidrio combina un confort espacioso con una elegancia contemporánea. La fachada transparente crea un ambiente abierto y luminoso sin renunciar al rendimiento de un sauna auténtico."
+        },
+        "r6": {
+          "name": "Cabina de sauna con frontal de vidrio grande - 1922RS",
+          "tag": "Grande",
+          "desc": "Un sauna premium para más de 6 personas con un impresionante frontal totalmente de vidrio que aporta una sensación lujosa y de espacio abierto. Perfecto para espacios de bienestar singulares que combinan diseño y relajación."
+        }
+      },
+      "heaters": {
+        "h1": {
+          "name": "Taurus D NS",
+          "tag": "Estufa de suelo",
+          "desc": "La Taurus D revoluciona la estufa de sauna estándar al ofrecer dos o más opciones de potencia en la misma estufa. Está diseñada para uso industrial, spas y piscinas tanto públicas como privadas."
+        },
+        "h2": {
+          "name": "SAWO30 Redondo Ni2",
+          "tag": "Estufa Tower",
+          "desc": "La SAWO30 Redondo es una estufa de aspecto magnífico que puede colocarse perfectamente en el centro del sauna o integrarse en los bancos. La gran cantidad de piedras alojadas en su cuerpo alto y esbelto crea un ambiente rico e impregnado de vapor."
+        },
+        "h3": {
+          "name": "Nordex Pro NS",
+          "tag": "Estufa de suelo",
+          "desc": "La Nordex Pro NS es la estufa más reciente de la gama Nordex, de reconocida fiabilidad. Está diseñada para un rendimiento duradero, con un compartimento de piedras independiente que protege las resistencias y prolonga la vida útil de la unidad."
+        },
+        "h4": {
+          "name": "Krios Ni2",
+          "tag": "Estufa de pared",
+          "desc": "La Krios Ni2 ofrece una experiencia de sauna finlandés más rica y húmeda gracias a su depósito de piedras más grande. Alojada en una elegante carcasa de acero inoxidable con el motivo característico de SAWO, combina estilo y rendimiento."
+        },
+        "h5": {
+          "name": "Aries Redondo Negro Ni2",
+          "tag": "Estufa Tower",
+          "desc": "La Aries Redondo comparte la elegancia minimalista de todas las estufas Tower. Alta y de poco espacio, distribuye el calor de manera uniforme y es ideal para instalarla en el centro del sauna o integrada en un banco."
+        },
+        "h6": {
+          "name": "Scandia NS",
+          "tag": "Estufa de pared",
+          "desc": "La Scandia NS es un clásico imprescindible entre las estufas de sauna y ofrece una experiencia de sauna finlandés verdaderamente tradicional. Sencilla, fiable y eficiente, está disponible con recubrimiento de fibra que no quema al tacto."
+        }
+      },
+      "accessories": {
+        "a1": {
+          "name": "Set Traditional",
+          "tag": "Disponible en: cedro",
+          "desc": "La opción de acabado limpio, atemporal y tradicional. Reúne todas las herramientas esenciales para el uso diario del sauna."
+        },
+        "a2": {
+          "name": "Set Essential",
+          "tag": "Disponible en: cedro",
+          "desc": "El set Essential lleva la comodidad y el estilo a otro nivel y ofrece una colección más amplia de artículos de sauna para disfrutar."
+        },
+        "a3": {
+          "name": "Set Signature",
+          "tag": "Disponible en: negro y cedro",
+          "desc": "El distinguido set Signature es para quienes buscan una experiencia de sauna elegante y sofisticada."
+        },
+        "a4": {
+          "name": "Set Dragon",
+          "tag": "Disponible en: negro y cedro",
+          "desc": "Con un estilo y una innovación incomparables, el set Dragon ofrece un aspecto único y atrevido, con un toque extra de distinción. Este set forma parte de la serie Dragonfire, diseñada por el reconocido diseñador finlandés Stefan Lindfors."
+        }
+      }
+    },
+    "features": {
+      "heading": "Lo que hace diferente a nuestro sauna",
+      "items": {
+        "ventilation": {
+          "tab": "Ventilación",
+          "title": "Ventilación",
+          "paragraphs": [
+            "Una ventilación adecuada es esencial para eliminar el CO₂ y los patógenos y para igualar la temperatura dentro de su sauna. La mayoría de los kits de sauna carecen por completo de ella.",
+            "La rejilla de entrada integrada de SAWO lleva aire rico en oxígeno directamente a la estufa y lo mezcla con el flujo de aire ascendente, lo que permite sesiones más largas y cómodas sin la pesadez que provoca la acumulación de CO₂.",
+            "La rejilla de extracción integrada iguala las temperaturas en toda la sala y seca activamente el sauna después de cada uso, lo que prolonga notablemente su vida útil."
+          ]
+        },
+        "lighting": {
+          "tab": "Iluminación",
+          "title": "Iluminación",
+          "paragraphs": [
+            "Una iluminación adecuada convierte una sesión de sauna en una experiencia sensorial completa. El sistema LED integrado de SAWO está diseñado para complementar la calidez de la madera y el calor de la sala.",
+            "La colocación suave y de bajo deslumbramiento alrededor del banco y del techo crea un ambiente tranquilo e inmersivo, nunca duro ni clínico. Totalmente regulable para adaptarse a cualquier estado de ánimo y momento del día.",
+            "Todos los componentes están homologados para el calor y la humedad de un sauna, lo que garantiza un rendimiento seguro y fiable durante años de uso diario."
+          ]
+        },
+        "benchHeight": {
+          "tab": "Altura de los bancos",
+          "title": "Altura de los bancos",
+          "paragraphs": [
+            "La altura de los bancos desempeña un papel fundamental en la calidad de su experiencia de sauna. Los bancos más altos están más cerca del techo, donde las temperaturas son más cálidas, mientras que los bancos más bajos ofrecen un calor más suave y relajado.",
+            "Los bancos SAWO se fabrican con madera de primera calidad secada en horno y se colocan de modo que maximicen a la vez la exposición al calor y la comodidad. Están disponibles en configuraciones rectas y en L para adaptarse a cualquier distribución.",
+            "Cada banco tiene un acabado liso y sin astillas, pensado para el uso diario sin preocupaciones de mantenimiento."
+          ]
+        },
+        "excellentHeat": {
+          "tab": "Calor excelente",
+          "title": "Calor excelente",
+          "paragraphs": [
+            "Un calor uniforme y constante es lo que distingue un gran sauna de uno bueno. Las estufas SAWO están diseñadas para distribuir el calor de forma uniforme por toda la sala: sin rincones fríos ni puntos calientes.",
+            "Al alcanzar rápidamente las temperaturas objetivo y mantenerlas con precisión, nuestras estufas están diseñadas para ser eficientes sin sacrificar el calor profundo y penetrante que define la experiencia finlandesa.",
+            "Compatibles con sesiones de sauna tanto húmedas como secas, le dan el control total de la intensidad y el carácter de cada sesión."
+          ]
+        },
+        "roomSizes": {
+          "tab": "Tamaños de cabina",
+          "title": "Tamaños de cabina",
+          "paragraphs": [
+            "Las cabinas de sauna SAWO están disponibles en tres categorías de tamaño, diseñadas para adaptarse a cualquier espacio, desde un baño doméstico compacto hasta una sala de bienestar exclusiva."
+          ],
+          "specs": [
+            {
+              "key": "Cabinas pequeñas",
+              "val": "1,16 m–1,54 m de ancho",
+              "note": "/ 1–3 personas"
+            },
+            {
+              "key": "Cabinas medianas",
+              "val": "1,36 m–1,85 m de ancho",
+              "note": "/ 4–6 personas"
+            },
+            {
+              "key": "Cabinas grandes",
+              "val": "1,85 m–2,23 m de ancho",
+              "note": "/ más de 6 personas"
+            },
+            {
+              "key": "Altura",
+              "val": "2,12 m",
+              "note": "(todos los modelos)"
+            },
+            {
+              "key": "Tipos de bancos",
+              "val": "Recto, en L, doble recto, doble con puerta central",
+              "note": null
+            },
+            {
+              "key": "Material",
+              "val": "Cedro, álamo o Pinaceae",
+              "note": null
+            }
+          ]
+        },
+        "insulation": {
+          "tab": "Aislamiento",
+          "title": "Aislamiento",
+          "paragraphs": [
+            "Un buen aislamiento es la base de un sauna eficiente. Las cabinas SAWO se construyen con un aislamiento de alto rendimiento que retiene el calor en el interior y evita las pérdidas de energía a través de paredes, suelo y techo.",
+            "Esto significa un calentamiento más rápido, menores costes de funcionamiento y una temperatura más constante durante toda la sesión, independientemente de las condiciones ambientales exteriores.",
+            "El aislamiento de SAWO también es resistente a la humedad, lo que protege la integridad estructural de la cabina tras años de uso diario y exposición al vapor."
+          ]
+        }
+      }
+    },
+    "productDetails": {
+      "title": "El sauna que realmente usará todos los días",
+      "loading": "Cargando",
+      "performanceHeader": "Fabricado con precisión",
+      "storySections": [
+        {
+          "title": "Su propio refugio privado",
+          "paragraphs": [
+            "Imagine terminar una larga jornada y entrar en su propio sauna: el calor sube, los músculos se relajan y el mundo exterior se queda en silencio. Las cabinas de sauna SAWO llevan esa experiencia a su hogar, con tamaños que van desde cabinas compactas para 1–3 personas hasta amplias suites para más de 6, de modo que hay una opción perfecta para cada espacio y cada hogar.",
+            "Tanto si busca un santuario para usted solo como un lugar para relajarse con la familia y los amigos, nuestras cabinas están diseñadas para que ese lujo sea sencillo y permanente: sin cuota de gimnasio, sin reservar con antelación, solo puro calor finlandés cuando lo necesite."
+          ]
+        },
+        {
+          "title": "Auténtica artesanía finlandesa",
+          "paragraphs": [
+            "SAWO lleva más de 30 años construyendo saunas en Finlandia y cada cabina refleja ese legado. Cada sauna está disponible en cedro, álamo o Pinaceae, y cada madera aporta su propio carácter natural, aroma y sensación a sus sesiones.",
+            "Elija entre bancos rectos o en L, con puerta a la izquierda o a la derecha según su espacio. Cada detalle, desde la distribución de los bancos hasta el ensamblaje de los paneles, está pensado como siempre lo han hecho los finlandeses, con sencillez, calidad y durabilidad en mente."
+          ]
+        }
+      ],
+      "featureText": "El uso regular del sauna desintoxica de forma natural, mejora la circulación y acelera la recuperación muscular tras el ejercicio. El calor alivia el estrés, profundiza el sueño y le deja renovado sesión tras sesión. Y más allá de los beneficios para el bienestar, una cabina de sauna SAWO es una adición duradera a su hogar que aumenta su valor y lo distingue.",
+      "perfCards": [
+        {
+          "label": "Cedro, álamo o Pinaceae",
+          "detail": "Naturalmente aromática, de origen sostenible"
+        },
+        {
+          "label": "3 categorías de tamaño",
+          "detail": "Configuraciones para 1–3, 4–6 y más de 6 personas"
+        },
+        {
+          "label": "Bancos rectos y en L",
+          "detail": "Opciones de puerta a izquierda y derecha"
+        },
+        {
+          "label": "Fabricado en Finlandia, más de 30 años de experiencia",
+          "detail": "Décadas de experiencia en sauna en cada cabina"
+        }
+      ],
+      "accordionItems": [
+        {
+          "title": "Especificaciones del producto",
+          "specs": [
+            {
+              "label": "Cabinas pequeñas",
+              "value": "1,16 m–1,54 m de ancho",
+              "unit": "/ 1–3 personas"
+            },
+            {
+              "label": "Cabinas medianas",
+              "value": "1,36 m–1,85 m de ancho",
+              "unit": "/ 4–6 personas"
+            },
+            {
+              "label": "Cabinas grandes",
+              "value": "1,85 m–2,23 m de ancho",
+              "unit": "/ más de 6 personas"
+            },
+            {
+              "label": "Altura",
+              "value": "2,12 m",
+              "unit": "(todos los modelos)"
+            },
+            {
+              "label": "Tipos de bancos",
+              "value": "Recto, en L, doble recto, doble con puerta central",
+              "unit": null
+            },
+            {
+              "label": "Material",
+              "value": "Cedro, álamo o Pinaceae",
+              "unit": null
+            }
+          ]
+        }
+      ]
+    },
+    "roomDetails": {
+      "aboutThisRoom": "Acerca de esta cabina",
+      "pills": {
+        "standard": "Estándar",
+        "glassfront": "Frontal de vidrio",
+        "infrared": "Infrarrojos",
+        "compact": "Compacta"
+      },
+      "panels": {
+        "standard": {
+          "descriptions": [
+            "La cabina de sauna SAWO Estándar lleva la auténtica experiencia del sauna finlandés a su hogar. Diseñada con sencillez y elegancia, combina la artesanía tradicional con la ingeniería moderna.",
+            "Cada cabina se fabrica con precisión para mantener una circulación óptima del calor y eficiencia energética, lo que garantiza una sesión de sauna constante y cómoda cada vez."
+          ],
+          "features": [
+            "Montaje sencillo con paneles de pared prefabricados",
+            "Construcción de madera termotratada de primera calidad",
+            "Puerta de vidrio templado con sellado magnético",
+            "Disponible en todos los tamaños y con varios acabados de madera"
+          ]
+        },
+        "glassfront": {
+          "descriptions": [
+            "La cabina de sauna SAWO con frontal de vidrio combina un diseño contemporáneo con los beneficios del sauna tradicional. Con un impresionante panel frontal totalmente de vidrio, este sauna moderno crea un ambiente abierto y luminoso sin perder una excelente retención del calor.",
+            "Perfecta para quienes valoran tanto la estética como la funcionalidad, la fachada de vidrio aporta luz natural a su espacio de sauna y crea un ambiente lujoso de estilo spa."
+          ],
+          "features": [
+            "Panel frontal totalmente de vidrio para una estética moderna",
+            "Vidrio de seguridad templado de triple capa",
+            "Tecnología de aislamiento térmico mejorada",
+            "Disponible en todos los tamaños y opciones de madera"
+          ]
+        },
+        "infrared": {
+          "descriptions": [
+            "Las cabinas de sauna de infrarrojos estándar de SAWO están disponibles en dos tamaños, para una persona o para dos. Los paneles de infrarrojos lejanos no calientan la sala tanto como un sauna tradicional, por lo que la mayor parte del calor producido calienta directamente el cuerpo.",
+            "Con paneles de infrarrojos lejanos con recubrimiento de fibra (170 W por panel), estos saunas eficientes energéticamente están disponibles en configuraciones para 1 persona (1200 W) o 2 personas (1400 W), con construcción de cedro premium e instalación plug-and-play a 230 V."
+          ],
+          "features": [
+            "Paneles de infrarrojos lejanos con recubrimiento de fibra (170 W/panel)",
+            "Instalación plug-and-play a 230 V",
+            "Control digital de temperatura, tiempo, luces y ventilador",
+            "Iluminación LED moderna (12 W) y ventilador extractor preinstalado (18 W)",
+            "Base de apoyo ajustable y duración de la sesión de 1 a 60 minutos",
+            "Construcción de cedro de primera calidad"
+          ]
+        },
+        "compact": {
+          "descriptions": [
+            "Las ventajas plug-and-play de la cabina de sauna compacta permiten un uso inmediato y estable, con ahorro en costes de instalación y en tiempos de inactividad.",
+            "Diseñado para uso individual, este sauna que ahorra espacio está disponible en dos tamaños y se fabrica con cedro premium, lo que lo convierte en la solución perfecta para espacios reducidos sin renunciar a la auténtica experiencia del sauna."
+          ],
+          "features": [
+            "Plug-and-play, listo para usar al instante",
+            "Diseño compacto que ahorra espacio para 1 persona",
+            "Ahorra costes de instalación y minimiza los tiempos de inactividad",
+            "Construcción de madera de cedro de primera calidad",
+            "Disponible en dos tamaños: 1310MS y 1313MS"
+          ]
+        }
+      }
+    },
+    "teaser3d": {
+      "label": "Modelo 3D interactivo",
+      "title": "Explore cada detalle",
+      "subtitle": "Gire, amplíe e inspeccione cada ángulo de nuestro sauna antes de que llegue a su puerta.",
+      "launch": "Abrir el visor 3D",
+      "dragRotate": "Arrastre para girar",
+      "scrollZoom": "Desplace para ampliar",
+      "doubleTapFocus": "Toque dos veces para enfocar",
+      "openViewer": "Abrir el visor 3D",
+      "buildYourOwn": "Diseñe el suyo"
+    },
+    "callToAction": {
+      "label": "Su bienestar le espera",
+      "title": "¿Listo para construir el sauna de sus sueños?",
+      "description": "Deje que nuestros especialistas en sauna le guíen en cada paso. Desde la consulta de diseño hasta el apoyo a la instalación, estamos aquí para llevar a su hogar la experiencia de relajación definitiva."
+    },
+    "roomTitles": {
+      "standard": "Cabina de sauna estándar",
+      "glassfront": "Cabina de sauna con frontal de vidrio",
+      "infrared": "Saunas de infrarrojos",
+      "compact": "Cabina de sauna compacta"
+    },
+    "roomDescriptions": {
+      "standard": "Las cabinas de sauna SAWO Classic ofrecen una experiencia de sauna atemporal con madera nórdica de alta calidad y distribuciones de bancos prácticas.",
+      "glassfront": "Las cabinas de sauna SAWO con frontal de vidrio ofrecen una experiencia de sauna moderna con vidrio resistente para contemplar vistas espectaculares sin renunciar a la practicidad.",
+      "infrared": "Los saunas de infrarrojos SAWO proporcionan un calor suave y terapéutico con tecnología avanzada de infrarrojos para una experiencia relajante y revitalizante.",
+      "compact": "Las cabinas de sauna compactas SAWO ofrecen una instalación de sauna instantánea, estable y plug-and-play para espacios urbanos, mientras que una estufa oculta garantiza la seguridad y maximiza las vistas."
+    },
+    "benchTypes": {
+      "straight": "Banco recto",
+      "lType": "Banco en L",
+      "singleStraight": "Banco recto simple",
+      "doubleStraight": "Banco recto doble",
+      "middleLType": "Banco en L central"
+    },
+    "viewer": {
+      "bestSeller": "Más vendido",
+      "video": "Vídeo",
+      "benchDesign": "Diseño del banco",
+      "modelNumber": "Número de modelo",
+      "capacity": "Capacidad",
+      "dimensions": "Dimensiones",
+      "width": "Ancho",
+      "depth": "Fondo",
+      "height": "Alto",
+      "saunaRoomModel": "Modelo de cabina de sauna",
+      "reset": "Restablecer",
+      "showAll": "Mostrar todo",
+      "doorLocation": "Ubicación de la puerta",
+      "woodType": "Tipo de madera",
+      "inquireNow": "Solicitar información",
+      "sizeCategories": {
+        "small": "Pequeña",
+        "medium": "Mediana",
+        "large": "Grande"
+      }
+    },
+    "woodMaterials": {
+      "title": "Elija su madera",
+      "subtitle": "Cada tipo de madera aporta su propio carácter, aroma y calidez a su experiencia de sauna.",
+      "items": {
+        "cedar": {
+          "name": "Cedro",
+          "description": "Madera rica y aromática con resistencia natural a la humedad. Conocida por sus cálidos tonos marrón rojizo y su aroma inconfundible.",
+          "traits": [
+            "Aromática",
+            "Resistente a la humedad",
+            "Tonos cálidos"
+          ]
+        },
+        "aspen": {
+          "name": "Álamo",
+          "description": "Madera clara e hipoalergénica con acabado suave. Fresca al tacto y perfecta para personas con sensibilidad.",
+          "traits": [
+            "Hipoalergénica",
+            "Fresca al tacto",
+            "Veta clara"
+          ]
+        },
+        "pinaceae": {
+          "name": "Pinaceae",
+          "description": "Madera de sauna nórdica tradicional con una veta natural y limpia. Excelentes propiedades térmicas y un atractivo estético atemporal.",
+          "traits": [
+            "Tradicional",
+            "Eficiente térmicamente",
+            "Veta natural"
+          ]
+        }
+      }
+    }
+  },
+  "accessorySetsPage": {
+    "meta": {
+      "title": "Sets de accesorios para sauna",
+      "description": "Sets de accesorios para sauna SAWO: colecciones cuidadosamente seleccionadas que combinan cubos, cucharones, termómetros y más para lograr un sauna completo y coordinado."
+    },
+    "hero": {
+      "title": "SETS DE ACCESORIOS",
+      "subtitle": "Todo lo que necesita para la experiencia de sauna perfecta",
+      "alt": "Sets de accesorios"
+    },
+    "intro": {
+      "title": "Sets de accesorios SAWO seleccionados",
+      "desc": "Nuestros sets de accesorios, cuidadosamente seleccionados, ofrecen algo para todos. Desde opciones naturales de residuo cero hasta diseños atrevidos y sofisticados, cada set mejora el disfrute de su sauna con piezas perfectamente combinadas."
+    },
+    "groups": {
+      "Accessory Sets": "Sets de accesorios"
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir los sets de accesorios SAWO",
+      "description": "Los sets de accesorios SAWO están cuidadosamente seleccionados para reunir en un paquete completo los mejores cubos, cucharones, termómetros y accesorios, lo que le ahorra tiempo y garantiza que cada pieza funcione en perfecta armonía."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "benchesFloorTilesPage": {
+    "meta": {
+      "title": "Bancos y baldosas de suelo para sauna",
+      "description": "Bancos y baldosas de suelo para sauna SAWO: superficies de madera termotratada duraderas diseñadas para ofrecer comodidad y longevidad en el interior de su sauna."
+    },
+    "hero": {
+      "title": "BANCOS Y BALDOSAS DE SUELO",
+      "subtitle": "Comodidad y artesanía para el interior de su sauna",
+      "alt": "Bancos y baldosas de suelo para sauna"
+    },
+    "intro": {
+      "title": "Bancos de sauna, alfombrillas de suelo y perchas",
+      "desc": "Mejore su experiencia de sauna con bancos cómodos y elegantes que favorecen la relajación. Complete el interior de su sauna con alfombrillas de suelo de madera y prácticas perchas, todo fabricado con materiales naturales de primera calidad."
+    },
+    "groups": {
+      "Benches": "Bancos",
+      "Wooden Floor Mats": "Alfombrillas de madera para suelo",
+      "Cloth Hangers": "Perchas"
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir los bancos y accesorios SAWO",
+      "description": "Los bancos y accesorios de suelo SAWO se fabrican con madera de primera calidad, duraderos, resistentes al calor y con un acabado excelente. Diseñados para combinar con cualquier interior de sauna, ofrecen comodidad y practicidad duraderas."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "clocksSandtimersPage": {
+    "meta": {
+      "title": "Relojes y relojes de arena para sauna",
+      "description": "Relojes y relojes de arena para sauna SAWO: accesorios clásicos de cronometraje para controlar con facilidad sus sesiones de sauna."
+    },
+    "hero": {
+      "title": "RELOJES Y RELOJES DE ARENA",
+      "subtitle": "Controle su sesión de sauna con estilo",
+      "alt": "Relojes y relojes de arena"
+    },
+    "intro": {
+      "title": "Relojes y relojes de arena para sauna",
+      "desc": "¿Quiere ver quién aguanta más en el sauna? Nuestros relojes de arena de 15 minutos son perfectos para generar conversación o para quienes se inician en el sauna finlandés. Complemente su sauna con elegantes relojes de madera."
+    },
+    "groups": {
+      "Clocks": "Relojes",
+      "Sand Timers": "Relojes de arena"
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir los relojes y temporizadores SAWO",
+      "description": "Los relojes y relojes de arena SAWO se fabrican con madera natural para lograr una estética de sauna auténtica. Duraderos, resistentes al calor y con un diseño cuidado para combinar con cualquier interior de sauna."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "doorsHandlesPage": {
+    "meta": {
+      "title": "Puertas y tiradores para sauna",
+      "description": "Puertas y tiradores para sauna SAWO: puertas de vidrio y madera de calidad con tiradores ergonómicos, fabricadas para durar en entornos de alta temperatura."
+    },
+    "hero": {
+      "title": "PUERTAS Y TIRADORES PARA SAUNA",
+      "subtitle": "Realce la entrada de su sauna con calidad y estilo",
+      "alt": "Puertas y tiradores para sauna"
+    },
+    "intro": {
+      "title": "Puertas y tiradores para sauna",
+      "desc": "Mejore su sauna con las puertas y tiradores premium de SAWO. Fabricados para durar, incorporan junta de goma, cierres magnéticos, bisagras de acero inoxidable y jambas laminadas. Elija las opciones de vidrio para lograr una sensación luminosa y de amplitud."
+    },
+    "groups": {
+      "Sauna Doors": "Puertas de sauna",
+      "Handles": "Tiradores"
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir las puertas y tiradores SAWO",
+      "description": "Las puertas y tiradores para sauna SAWO están diseñados para el exigente entorno del sauna: resistentes al calor, duraderos y con un diseño cuidado. Desde los clásicos marcos de madera hasta el moderno vidrio templado, cada puerta está fabricada para durar e impresionar."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "headrestsBackrestsPage": {
+    "meta": {
+      "title": "Reposacabezas y respaldos para sauna",
+      "description": "Reposacabezas y respaldos para sauna SAWO: accesorios de madera cómodos y seguros frente al calor que hacen más relajantes las sesiones de sauna más largas."
+    },
+    "hero": {
+      "title": "REPOSACABEZAS Y RESPALDOS",
+      "subtitle": "Comodidad y apoyo para la mejor experiencia de sauna",
+      "alt": "Reposacabezas y respaldos"
+    },
+    "intro": {
+      "title": "Reposacabezas y respaldos para sauna",
+      "desc": "Los reposacabezas y respaldos de madera fabricados con materiales duraderos (madera, espuma viscoelástica o tela) ofrecen una comodidad excepcional en el sauna. El tapizado resistente a la humedad garantiza una calidad duradera."
+    },
+    "groups": {
+      "Headrests": "Reposacabezas",
+      "Backrests": "Respaldos"
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir los accesorios de confort SAWO",
+      "description": "Los reposacabezas y respaldos SAWO se fabrican con madera de primera calidad y materiales resistentes a la humedad, diseñados para ofrecer una comodidad duradera en el entorno de alta temperatura del sauna sin renunciar al estilo."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "kivistonePage": {
+    "meta": {
+      "title": "Colección Kivistone de esteatita",
+      "description": "SAWO Kivistone es una colección de accesorios de esteatita que combina la piedra natural finlandesa con un diseño que retiene el calor para una experiencia de sauna refinada."
+    },
+    "hero": {
+      "title": "KIVISTONE",
+      "subtitle": "Productos únicos de esteatita elaborados con precisión nórdica",
+      "alt": "Productos de esteatita Kivistone"
+    },
+    "intro": {
+      "title": "Colección Kivistone de esteatita",
+      "desc": "Kivistone ofrece una gran variedad de productos únicos de esteatita para el hogar, regalos y uso corporativo. Con un amplio abanico de diseños innovadores, cada pieza aporta a su día a día la belleza natural y las propiedades de retención del calor de la esteatita finlandesa."
+    },
+    "groups": {
+      "Kivistone": "Kivistone"
+    },
+    "search": {
+      "placeholder": "Buscar productos Kivistone..."
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir Kivistone",
+      "description": "Los productos de esteatita Kivistone son famosos por su retención natural del calor, su durabilidad y su estética nórdica atemporal. Cada pieza se elabora de forma única, por lo que son regalos y accesorios para el hogar ideales que duran toda la vida."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "pailsLadlesPage": {
+    "meta": {
+      "title": "Cubos y cucharones para sauna",
+      "description": "Descubra los cubos y cucharones para sauna SAWO: accesorios para el agua duraderos y elegantes para la experiencia de vapor löyly perfecta."
+    },
+    "hero": {
+      "title": "CUBOS Y CUCHARONES",
+      "subtitle": "Accesorios esenciales para el sauna finlandés desde 1921",
+      "alt": "Cubos y cucharones"
+    },
+    "intro": {
+      "title": "Cubos y cucharones premium para la auténtica experiencia de sauna",
+      "desc": "Imprescindibles en la tradición del sauna finlandés, nuestra selección SAWO ofrece cubos de 2 a 40 litros. Elija entre cedro, álamo y pino tradicionales u opciones modernas de acero inoxidable. Complete su sauna con un cucharón a juego para lograr el löyly perfecto."
+    },
+    "groups": {
+      "Pails": "Cubos",
+      "Ladles": "Cucharones",
+      "Pail Shower": "Ducha de cubo"
+    },
+    "search": {
+      "placeholder": "Buscar cubos y cucharones..."
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir los cubos y cucharones SAWO",
+      "description": "Los cubos y cucharones SAWO se fabrican con materiales naturales de primera calidad (cedro, álamo y pino), así como con opciones modernas de acero inoxidable. Diseñada para la auténtica cultura del sauna finlandés, cada pieza está hecha para durar y realzar su ritual del löyly."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "lightsCoversPage": {
+    "meta": {
+      "title": "Luces y cubiertas para sauna",
+      "description": "Luces y cubiertas de luz para sauna SAWO: soluciones de iluminación ambiental seguras diseñadas para soportar altas temperaturas y humedad."
+    },
+    "hero": {
+      "title": "LUCES Y CUBIERTAS PARA SAUNA",
+      "subtitle": "Cree el ambiente de sauna perfecto",
+      "alt": "Luces y cubiertas para sauna"
+    },
+    "intro": {
+      "title": "Iluminación para sauna y cubiertas de luz",
+      "desc": "Cree el ambiente perfecto con un buen juego de iluminación. Nuestras distintas pantallas de luz le permiten lograr una sensación relajante y cálida, desde luces suaves hasta tonos dorados cálidos."
+    },
+    "groups": {
+      "Sauna Lights": "Iluminación para sauna",
+      "Light Covers": "Cubiertas de luz"
+    },
+    "search": {
+      "placeholder": "Buscar luces y cubiertas..."
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir la iluminación SAWO",
+      "description": "Las luces y cubiertas para sauna SAWO están fabricadas para el exigente entorno del sauna: resistentes al calor, a prueba de humedad y con un diseño cuidado para realzar su espacio de relajación."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "thermometersPage": {
+    "meta": {
+      "title": "Termómetros e higrómetros para sauna",
+      "description": "Termómetros e higrómetros para sauna SAWO: lecturas precisas de temperatura y humedad para ajustar la sesión de sauna perfecta."
+    },
+    "hero": {
+      "title": "TERMÓMETROS Y MEDIDORES COMBINADOS",
+      "subtitle": "Controle su sauna con instrumentos de precisión",
+      "alt": "Termómetros y medidores combinados"
+    },
+    "intro": {
+      "title": "Termómetros e higrómetros para sauna de precisión",
+      "desc": "Los termómetros e higrómetros tradicionales indican que el sauna está listo. Descubra formas y estilos diversos para controlar con precisión la temperatura y la humedad de su sauna."
+    },
+    "groups": {
+      "Thermometers": "Termómetros",
+      "Combined Meters": "Medidores combinados",
+      "Hygrometers": "Higrómetros"
+    },
+    "search": {
+      "placeholder": "Buscar termómetros..."
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir los termómetros SAWO",
+      "description": "Los termómetros e higrómetros SAWO están fabricados para ofrecer precisión y longevidad en entornos de alta temperatura y humedad. Controle su sauna con confianza usando instrumentos hechos para durar."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "ventilationsPage": {
+    "meta": {
+      "title": "Ventilación y complementos para sauna",
+      "description": "Ventilación y complementos para sauna SAWO: mejore la circulación del aire y la comodidad de su sauna con nuestra gama de soluciones de ventilación."
+    },
+    "hero": {
+      "title": "VENTILACIÓN Y COMPLEMENTOS",
+      "subtitle": "Todo lo que necesita para completar su instalación de sauna",
+      "alt": "Ventilación y complementos para sauna"
+    },
+    "intro": {
+      "title": "Ventilación y accesorios varios para sauna",
+      "desc": "Una ventilación adecuada es esencial para una experiencia de sauna segura y agradable. Explore nuestra gama de soluciones de ventilación, perchas y complementos varios diseñados para completar su sauna con calidad y funcionalidad."
+    },
+    "groups": {
+      "Ventilation": "Ventilación",
+      "Add-Ons": "Complementos",
+      "Cloth Hangers": "Perchas"
+    },
+    "search": {
+      "placeholder": "Buscar ventilación y complementos..."
+    },
+    "why": {
+      "eyebrow": "ACCESORIOS SAWO",
+      "title": "Por qué elegir la ventilación y los complementos SAWO",
+      "description": "La ventilación y los accesorios varios de SAWO están diseñados para optimizar el entorno de su sauna y garantizar una circulación de aire adecuada, seguridad y comodidad. Fabricados con los mismos altos estándares que todos los productos SAWO para un rendimiento duradero."
+    },
+    "promo": {
+      "title": "Complete su experiencia de sauna",
+      "subtitle": "Explore nuestra gama completa de auténticos accesorios para sauna finlandés"
+    }
+  },
+  "interiorDesignsPage": {
+    "meta": {
+      "title": "Diseños de interior para sauna",
+      "description": "Explore las opciones de diseño de interior para sauna SAWO: acabados de madera, distribuciones y opciones de estilo para personalizar su cabina de sauna."
+    },
+    "hero": {
+      "title": "DISEÑOS DE INTERIOR",
+      "subtitle": "Diseñados para la comodidad y la elegancia"
+    },
+    "intro": {
+      "title": "Descubra nuestros exquisitos diseños de interior para sauna",
+      "desc": "Diseñados para la comodidad y la elegancia, nuestros interiores de sauna premium elevan su experiencia de relajación. Con materiales de alta calidad y distribuciones innovadoras, cada diseño combina a la perfección funcionalidad y estética, lo que garantiza un ambiente cálido y acogedor en cada espacio de sauna."
+    },
+    "designs": {
+      "classicBench": {
+        "title": "Banco clásico",
+        "subtitle": "Elegancia atemporal de sauna",
+        "desc": "Encarnando la esencia de los saunas finlandeses tradicionales, el banco clásico presenta una distribución de madera simétrica y meticulosamente ordenada que transmite sencillez y encanto. Fabricado con cedro, álamo y abeto de primera calidad, este diseño garantiza durabilidad, comodidad y una experiencia de sauna cálida y auténtica."
+      },
+      "waveBench": {
+        "title": "Banco ondulado",
+        "subtitle": "Inspirado en la serenidad de la naturaleza",
+        "desc": "Inspirado en los serenos lagos de Finlandia, el banco ondulado lleva a su sauna las curvas relajantes de las suaves ondas del agua. Fabricado con cedro, álamo y abeto de primera calidad, su diseño fluido favorece la relajación y crea un ambiente tranquilo y acogedor para una experiencia de sauna auténtica."
+      },
+      "pianoBench": {
+        "title": "Banco piano",
+        "subtitle": "Una fusión de elegancia moderna y tradicional",
+        "desc": "Combinando estilo contemporáneo y artesanía clásica del sauna, el banco piano presenta una distribución elegante y rítmica que recuerda a las teclas de un piano. Fabricado con cedro, álamo y abeto de alta calidad, este diseño aporta un toque de elegancia y sofisticación a cualquier espacio de sauna y garantiza durabilidad y comodidad."
+      }
+    },
+    "materials": {
+      "heading": "Maderas de primera calidad",
+      "cedar": {
+        "title": "Cedro",
+        "desc": "Naturalmente aromático y resistente a la humedad, el cedro aporta un tono rico y cálido y es famoso por su longevidad en entornos de sauna de alta temperatura."
+      },
+      "aspen": {
+        "title": "Álamo",
+        "desc": "De color claro y suave al tacto, el álamo es hipoalergénico e inodoro, ideal para quienes prefieren un ambiente de sauna limpio y neutro."
+      },
+      "spruce": {
+        "title": "Abeto",
+        "desc": "Duradero y elegante, el abeto ofrece una estética nórdica clásica con una veta clara y excelentes propiedades de retención del calor para una auténtica sensación de sauna finlandés."
+      }
+    }
+  },
+  "woodPanelsPage": {
+    "meta": {
+      "title": "Paneles y maderas",
+      "description": "Opciones de paneles de madera y maderas SAWO: cedro, álamo y abeto para crear el aspecto y la sensación naturales de su cabina de sauna."
+    },
+    "hero": {
+      "title": "PANELES Y MADERAS",
+      "subtitle": "Materiales de madera premium para su sauna perfecto"
+    },
+    "brochureLabel": "Folleto de paneles y maderas",
+    "intro": {
+      "title": "Explore nuestra selección de paneles de madera y maderas premium",
+      "desc": "Fabricados para ser hermosos y duraderos, nuestros paneles de madera y maderas de alta calidad realzan cualquier espacio de sauna. Elija entre una variedad de maderas premium, como cedro, álamo y abeto, diseñadas para soportar el calor y la humedad y ofrecer un ambiente natural y relajante."
+    },
+    "panelsHeading": "Paneles de madera",
+    "benchHeading": "Maderas para bancos",
+    "tableHeaders": {
+      "profile": "Perfil",
+      "width": "Ancho (mm)",
+      "thickness": "Grosor (mm)",
+      "length": "Longitud (mm)"
+    },
+    "panels": {
+      "cedar": {
+        "title": "Madera de cedro",
+        "desc": "El cedro, de hermosos tonos, tiene un aroma natural agradable conocido por repeler los insectos. Los materiales de cedro de SAWO no tienen nudos y se seleccionan cuidadosamente para garantizar la mejor calidad."
+      },
+      "aspen": {
+        "title": "Madera de álamo",
+        "desc": "La madera de álamo es blanca y blanda, fresca al tacto y de baja inflamabilidad. El álamo SAWO seleccionado no tiene nudos visibles."
+      },
+      "spruce": {
+        "title": "Madera de abeto",
+        "desc": "El abeto es una conífera de textura de grano uniforme. Una madera duradera que resiste bien el calor y se utiliza ampliamente en los saunas. La madera de abeto suele tener algunos nudos pequeños."
+      }
+    },
+    "bench": {
+      "cedar": {
+        "title": "Madera de cedro",
+        "desc": "La madera de cedro rojo occidental es apreciada por su aspecto único, su aroma y su alta resistencia natural a la pudrición. Muy recomendable para interiores de viviendas y saunas. SAWO selecciona solo cedro de alta calidad, sin nudos ni defectos."
+      },
+      "aspen": {
+        "title": "Madera de álamo",
+        "desc": "La madera de álamo es blanca y blanda, fresca al tacto y de baja inflamabilidad. El álamo SAWO seleccionado no tiene nudos visibles."
+      },
+      "spruce": {
+        "title": "Madera de abeto",
+        "desc": "El abeto es una conífera de textura de grano uniforme. Una madera duradera y resistente que soporta el calor. La madera de abeto suele tener algunos nudos naturales pequeños."
+      }
+    }
+  }
+}

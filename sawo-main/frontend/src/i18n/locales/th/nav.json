@@ -1,0 +1,56 @@
+{
+  "home": "หน้าแรก",
+  "products": "ผลิตภัณฑ์",
+  "support": "บริการช่วยเหลือ",
+  "aboutUs": "เกี่ยวกับเรา",
+  "contactUs": "ติดต่อเรา",
+  "search": "ค้นหา",
+  "openMenu": "เปิดเมนู",
+  "closeMenu": "ปิดเมนู",
+  "collapse": "ย่อ",
+  "expand": "ขยาย",
+  "searchBox": {
+    "placeholder": "ค้นหา...",
+    "searching": "กำลังค้นหา...",
+    "noResults": "ไม่พบผลลัพธ์",
+    "pages": "หน้าเว็บ",
+    "products": "ผลิตภัณฑ์"
+  },
+  "groups": {
+    "sauna": "ซาวน่า",
+    "steam": "ไอน้ำ",
+    "infrared": "อินฟราเรด"
+  },
+  "items": {
+    "wallMounted": "ติดผนัง",
+    "tower": "ทาวเวอร์",
+    "stone": "สโตน",
+    "floor": "ตั้งพื้น",
+    "combi": "Combi",
+    "dragonfire": "Dragonfire",
+    "saunaHeaters": "ฮีตเตอร์ซาวน่า",
+    "saunaControls": "ชุดควบคุมซาวน่า",
+    "saunaAccessories": "อุปกรณ์เสริมซาวน่า",
+    "saunaRooms": "ห้องซาวน่า",
+    "interiorDesigns": "งานตกแต่งภายใน",
+    "woodPanels": "แผ่นไม้ปิดผนังและไม้แปรรูป",
+    "steamGenerators": "เครื่องกำเนิดไอน้ำ",
+    "steamControls": "ชุดควบคุมไอน้ำ",
+    "steamAccessories": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ",
+    "infrared": "อินฟราเรด",
+    "faq": "คำถามที่พบบ่อย",
+    "saunaCalculator": "เครื่องคำนวณซาวน่า",
+    "userManuals": "คู่มือการใช้งาน",
+    "productCatalogue": "แคตตาล็อกผลิตภัณฑ์",
+    "latestNews": "ข่าวล่าสุด",
+    "sustainability": "ความยั่งยืน",
+    "careers": "ร่วมงานกับเรา",
+    "infraredSaunaRooms": "ห้องซาวน่าอินฟราเรด",
+    "infraredPanels": "แผงอินฟราเรด",
+    "infraredControls": "ชุดควบคุมอินฟราเรด"
+  },
+  "language": {
+    "label": "ภาษา",
+    "switchTo": "เปลี่ยนภาษา"
+  }
+}

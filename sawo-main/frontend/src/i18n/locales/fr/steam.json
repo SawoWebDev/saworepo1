@@ -1,0 +1,109 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Sauna vapeur : générateurs, commandes et accessoires",
+      "description": "Découvrez les systèmes vapeur SAWO : générateurs de vapeur en acier inoxydable, commandes numériques et accessoires d'installation conçus pour une vapeur régulière et digne d'un spa, à domicile comme en usage professionnel."
+    },
+    "hero": {
+      "title": "VAPEUR",
+      "subtitle": "Découvrez le luxe de la thérapie par la vapeur pure"
+    },
+    "intro": {
+      "text": "Les systèmes vapeur SAWO apportent les bienfaits thérapeutiques de la chaleur humide à tous les espaces, des compactes douches à vapeur domestiques aux grands spas commerciaux. Notre gamme vapeur complète couvre tout ce dont vous avez besoin : des générateurs de vapeur en acier inoxydable conçus pour des années de service fiable, des commandes numériques intuitives pour régler avec précision la température et l'humidité, et une gamme complète d'accessoires pour finaliser l'installation."
+    },
+    "generatorsSection": {
+      "title": "Générateurs de vapeur",
+      "viewAll": "Voir tous les générateurs",
+      "desc": "Le générateur de vapeur est le cœur de tout hammam : il transforme l'eau en un flux de vapeur continu et régulier. Les générateurs en acier inoxydable SAWO sont conçus pour la durabilité et un entretien facile, avec des modèles allant des unités résidentielles compactes aux installations commerciales multi-unités délivrant jusqu'à 75 kW.",
+      "loading": "Chargement des générateurs…",
+      "empty": "Aucun générateur de vapeur disponible pour le moment.",
+      "fallbackDesc": "Générateur de vapeur SAWO haut de gamme, conçu pour des performances fiables au quotidien."
+    },
+    "controlsSection": {
+      "title": "Commandes vapeur",
+      "viewAll": "Voir toutes les commandes",
+      "desc": "Associez n'importe quel générateur de vapeur SAWO à un panneau de commande dédié pour régler avec précision la température, le débit de vapeur et la durée des séances. Du sélecteur essentiel Steam STE à l'écran tactile Steam Stainless Touch, chaque commande est conçue pour un fonctionnement simple et fiable.",
+      "loading": "Chargement des commandes…",
+      "empty": "Aucune commande vapeur disponible pour le moment.",
+      "fallbackDesc": "Commande vapeur de précision pour une séance personnalisée."
+    },
+    "accessoriesSection": {
+      "title": "Accessoires vapeur",
+      "viewAll": "Voir tous les accessoires",
+      "desc": "Complétez votre hammam avec la gamme d'accessoires SAWO, des portes de hammam et têtes de diffusion aux pompes à arômes et à la quincaillerie d'installation, tous conçus pour fonctionner en parfaite harmonie avec nos générateurs et nos commandes et offrir une installation professionnelle entièrement finalisée.",
+      "loading": "Chargement des accessoires…",
+      "empty": "Aucun accessoire vapeur disponible pour le moment.",
+      "fallbackDesc": "Accessoire vapeur SAWO pour une installation complète."
+    },
+    "cta": {
+      "title": "Besoin d'aide pour choisir ?",
+      "description": "Des générateurs et commandes aux accessoires, notre équipe vous aide à trouver la configuration vapeur adaptée à votre maison ou à votre espace professionnel."
+    }
+  },
+  "generators": {
+    "meta": {
+      "title": "Générateurs de vapeur",
+      "description": "Les générateurs de vapeur SAWO offrent le luxe d'une vapeur sur mesure grâce à des générateurs avancés aux réglages personnalisables, pour des performances dignes d'un spa."
+    },
+    "hero": {
+      "title": "GÉNÉRATEURS DE VAPEUR"
+    },
+    "intro": {
+      "heading": "Présentation de nos générateurs de vapeur",
+      "desc": "Découvrez le luxe d'une vapeur sur mesure avec nos générateurs de vapeur avancés, qui offrent des performances fiables, des réglages personnalisables et une chaleur revigorante dans tous les espaces."
+    },
+    "loading": "Chargement des générateurs…",
+    "empty": "Aucun générateur de vapeur disponible pour le moment.",
+    "cardEyebrow": "Générateur de vapeur",
+    "cardFallbackDesc": "Générateur de vapeur SAWO haut de gamme, conçu pour des performances fiables au quotidien.",
+    "cta": {
+      "title": "Besoin d'aide pour dimensionner un générateur ?",
+      "description": "Des unités résidentielles compactes aux grandes installations commerciales, notre équipe vous aide à trouver le générateur de vapeur adapté à votre espace."
+    }
+  },
+  "controls": {
+    "meta": {
+      "title": "Commandes vapeur",
+      "description": "Commande vapeur de précision SAWO, avec les séries de commandes Saunova et Innova pour un fonctionnement sans effort et une expérience de sauna personnalisée."
+    },
+    "hero": {
+      "title": "Commandes vapeur",
+      "description": "Précision et simplicité : prenez le contrôle total de votre expérience vapeur avec les séries de commandes Saunova et Innova de SAWO."
+    },
+    "intro": {
+      "heading": "Présentation de nos commandes vapeur",
+      "desc": "Profitez de réglages de vapeur précis et d'un fonctionnement sans effort avec les séries Saunova et Innova, pour une expérience de sauna personnalisée."
+    },
+    "loading": "Chargement des commandes…",
+    "empty": "Aucune commande vapeur disponible pour le moment.",
+    "notice": {
+      "tab": "Avertissement",
+      "text": "Seul un électricien qualifié est autorisé à effectuer les raccordements électriques et les réparations sur l'appareil. Utilisez uniquement des pièces d'origine."
+    },
+    "cta": {
+      "title": "Besoin d'aide pour choisir une commande ?",
+      "description": "Associez le bon panneau de commande à votre générateur de vapeur pour un fonctionnement précis et sans effort. Notre équipe est là pour vous aider."
+    }
+  },
+  "accessories": {
+    "meta": {
+      "title": "Accessoires vapeur",
+      "description": "Accessoires vapeur SAWO haut de gamme, conçus pour améliorer la fonctionnalité et le confort et offrir une expérience de hammam toujours exceptionnelle."
+    },
+    "hero": {
+      "title": "ACCESSOIRES VAPEUR",
+      "subtitle": "Complétez votre installation vapeur avec des accessoires haut de gamme"
+    },
+    "intro": {
+      "heading": "Présentation de nos accessoires vapeur",
+      "desc": "Sublimez votre sauna avec nos accessoires vapeur haut de gamme, conçus pour optimiser le confort, renforcer la fonctionnalité et rehausser votre expérience de détente."
+    },
+    "loading": "Chargement des accessoires…",
+    "empty": "Aucun accessoire vapeur disponible pour le moment.",
+    "fallbackDesc": "Accessoire vapeur haut de gamme pour des performances optimales.",
+    "cta": {
+      "title": "Complétez votre installation vapeur",
+      "description": "Des portes de hammam aux pompes à arômes, notre équipe vous aide à choisir les accessoires qui finaliseront votre installation."
+    }
+  }
+}

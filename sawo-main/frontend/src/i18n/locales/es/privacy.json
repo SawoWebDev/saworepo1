@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "title": "Política de privacidad",
+    "description": "La política de privacidad de SAWO, que explica cómo recopilamos, utilizamos y protegemos sus datos personales en nuestro sitio web y servicios."
+  },
+  "hero": {
+    "eyebrow": "Aviso legal",
+    "title": "Política de privacidad",
+    "websiteLabel": "Sitio web:"
+  },
+  "footer": "Última actualización: 2026 · SAWO INC · Todos los derechos reservados.",
+  "sections": [
+    {
+      "title": "Quiénes somos",
+      "content": [
+        "Esta Política de privacidad se aplica al sitio web operado por SAWO INC, accesible en https://sawo.com."
+      ]
+    },
+    {
+      "title": "Qué datos personales recopilamos y por qué",
+      "subsections": [
+        {
+          "subtitle": "Comentarios",
+          "content": [
+            "Cuando los visitantes dejan comentarios en nuestro sitio, recopilamos los datos que aparecen en el formulario de comentarios, así como la dirección IP del visitante y la cadena de agente de usuario de su navegador para ayudar a detectar el spam.",
+            "Es posible que se envíe una cadena anonimizada (hash) generada a partir de su dirección de correo electrónico al servicio Gravatar para comprobar si lo está utilizando. La política de privacidad de Gravatar está disponible en https://automattic.com/privacy/. Una vez aprobado su comentario, su foto de perfil puede ser visible públicamente en el contexto de su comentario."
+          ]
+        },
+        {
+          "subtitle": "Archivos multimedia",
+          "content": [
+            "Si sube imágenes a nuestro sitio web, evite incluir datos de ubicación incrustados (EXIF GPS), ya que otros usuarios pueden descargar las imágenes y extraer la información de ubicación."
+          ]
+        },
+        {
+          "subtitle": "Cookies",
+          "bullets": [
+            "Si deja un comentario, puede optar por guardar su nombre, correo electrónico y sitio web en cookies. Estas cookies duran un año y tienen como fin su comodidad.",
+            "Se establece una cookie temporal al visitar la página de inicio de sesión para comprobar si su navegador acepta cookies. No contiene datos personales y se elimina al cerrar el navegador.",
+            "Al iniciar sesión, se establecen varias cookies para guardar sus datos de acceso y sus preferencias de visualización de pantalla. Las cookies de inicio de sesión duran dos días y las de preferencias de pantalla, un año. Si selecciona «Recuérdame», su sesión se prolonga durante dos semanas.",
+            "Si cierra sesión, se eliminan las cookies de inicio de sesión.",
+            "Al editar o publicar un artículo se establece una cookie que contiene el ID de la entrada. Esta cookie caduca al cabo de un día."
+          ]
+        },
+        {
+          "subtitle": "Contenido incrustado de otros sitios web",
+          "content": [
+            "Los artículos de este sitio pueden incluir contenido incrustado (por ejemplo, vídeos, imágenes, artículos, etc.). El contenido incrustado se comporta exactamente igual que si visitara directamente el sitio web de origen. Estos sitios externos pueden recopilar datos sobre usted, utilizar cookies y realizar un seguimiento de su interacción con su contenido, especialmente si ha iniciado sesión en su plataforma."
+          ]
+        },
+        {
+          "subtitle": "Analítica",
+          "content": [
+            "Podemos utilizar herramientas de analítica de terceros para medir el tráfico y las tendencias de uso. Estas herramientas recopilan los datos que envía su navegador, incluidas las páginas visitadas y el comportamiento de uso, para ayudar a mejorar nuestros servicios."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Con quién compartimos sus datos",
+      "content": [
+        "Si solicita el restablecimiento de su contraseña, su dirección IP se incluirá en el correo electrónico de restablecimiento."
+      ]
+    },
+    {
+      "title": "Durante cuánto tiempo conservamos sus datos",
+      "bullets": [
+        "Los comentarios y sus metadatos se conservan de forma indefinida para reconocer y aprobar automáticamente los comentarios posteriores.",
+        "En el caso de los usuarios que se registran en nuestro sitio (si procede), almacenamos la información personal que facilitan en su perfil de usuario. Todos los usuarios pueden ver, editar o eliminar su información personal en cualquier momento (excepto su nombre de usuario). Los administradores del sitio web también pueden acceder a esos datos y gestionarlos."
+      ]
+    },
+    {
+      "title": "Sus derechos sobre sus datos",
+      "content": [
+        "Si tiene una cuenta o ha dejado comentarios, puede solicitar un archivo exportado con los datos personales que conservamos sobre usted, incluidos los datos que nos haya facilitado. También puede solicitar que borremos sus datos personales, excepto aquellos que estemos obligados a conservar por motivos administrativos, legales o de seguridad."
+      ]
+    },
+    {
+      "title": "A dónde enviamos sus datos",
+      "content": [
+        "Los comentarios de los visitantes pueden comprobarse mediante un servicio automatizado de detección de spam."
+      ]
+    },
+    {
+      "title": "Información de contacto",
+      "content": [
+        "Para consultas relacionadas con la privacidad o solicitudes sobre sus datos, póngase en contacto con nosotros en:"
+      ],
+      "email": "info@sawo.com"
+    },
+    {
+      "title": "Información adicional",
+      "subsections": [
+        {
+          "subtitle": "Cómo protegemos sus datos",
+          "content": [
+            "Aplicamos medidas técnicas y organizativas adecuadas, como cifrado, cortafuegos y controles de acceso, para proteger sus datos personales."
+          ]
+        },
+        {
+          "subtitle": "Procedimientos en caso de violación de datos",
+          "content": [
+            "En caso de violación de datos, notificaremos a los usuarios afectados y a las autoridades reguladoras según lo exija la ley, y tomaremos medidas inmediatas para proteger los datos de los usuarios."
+          ]
+        },
+        {
+          "subtitle": "Terceros de los que recibimos datos",
+          "content": [
+            "Podemos recibir datos de servicios de terceros de confianza para la protección contra el spam, la analítica y los servicios de inicio de sesión."
+          ]
+        },
+        {
+          "subtitle": "Toma de decisiones automatizada y elaboración de perfiles",
+          "content": [
+            "No utilizamos sus datos para la toma de decisiones automatizada ni para la elaboración de perfiles que produzcan efectos jurídicos o efectos significativos similares."
+          ]
+        },
+        {
+          "subtitle": "Requisitos de divulgación normativa del sector",
+          "content": [
+            "Cumplimos las leyes de protección de datos aplicables, incluidas las relativas al consentimiento del usuario, la conservación de datos y el tratamiento lícito."
+          ]
+        }
+      ]
+    }
+  ]
+}

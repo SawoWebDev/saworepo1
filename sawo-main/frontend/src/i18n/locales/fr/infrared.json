@@ -1,0 +1,204 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Sauna infrarouge",
+      "description": "Découvrez les saunas infrarouges SAWO : cabines en cèdre dotées de panneaux chauffants infrarouges doux et thérapeutiques et de commandes pour une relaxation et un bien-être profonds."
+    },
+    "hero": {
+      "title": "SAUNA INFRAROUGE",
+      "brochureBtn": "VOIR LA BROCHURE"
+    },
+    "saunasSection": {
+      "title": "Saunas infrarouges",
+      "desc": "Profitez des bienfaits thérapeutiques de nos saunas infrarouges, conçus pour favoriser la détente et le bien-être grâce à la douce chaleur de la technologie infrarouge. Offrez-vous une évasion apaisante dans le confort de votre propre espace. Nos saunas infrarouges existent en versions une place et deux places.",
+      "viewAll": "VOIR LES SAUNAS INFRAROUGES"
+    },
+    "accessoriesSection": {
+      "title": "Accessoires infrarouges",
+      "items": {
+        "infraredPanels": "Panneaux infrarouges",
+        "infraredBackrest": "Dossier infrarouge",
+        "interfaceHolder": "Support d'interface"
+      }
+    },
+    "controlsSection": {
+      "title": "Commandes de sauna infrarouge",
+      "items": {
+        "userInterface": "Interface utilisateur Infrared 2.0",
+        "powerController": "Contrôleur de puissance Infrared 2.0",
+        "builtInControl": "Commande encastrable Infrared 2.0"
+      }
+    },
+    "cta": {
+      "title": "Besoin d'aide pour choisir ?",
+      "description": "Des panneaux infrarouges aux commandes et aux accessoires, notre équipe vous aide à trouver la configuration de sauna infrarouge adaptée à votre espace."
+    }
+  },
+  "saunas": {
+    "meta": {
+      "title": "Saunas infrarouges",
+      "description": "Saunas infrarouges SAWO en versions une et deux places. Panneaux infrarouges lointains à revêtement fibre, finitions cèdre et Hemlock, et installation prête à brancher en 230 V."
+    },
+    "hero": {
+      "title": "SAUNAS INFRAROUGES",
+      "subtitle": "Une chaleur infrarouge douce et thérapeutique dans une cabine compacte, disponible pour une ou deux personnes.",
+      "brochureBtn": "VOIR LA BROCHURE",
+      "brochureItemLabel": "Brochure infrarouge"
+    },
+    "productDetails": {
+      "title": "Le sauna infrarouge que vous utiliserez vraiment tous les jours",
+      "storySections": [
+        {
+          "title": "Une chaleur qui vous atteint directement",
+          "paragraphs": [
+            "Un sauna infrarouge n'a pas besoin d'atteindre 80 °C pour faire effet. Les panneaux réchauffent votre corps plutôt que l'air ambiant : la séance est profonde et enveloppante, tandis que la cabine reste à une température où l'on respire aisément.",
+            "C'est donc une proposition différente d'un sauna traditionnel, et non une version réduite : plus doux pour la poitrine, plus facile à supporter pendant une heure entière, et accessible à ceux qui trouvent la chaleur d'un sauna finlandais trop intense."
+          ]
+        },
+        {
+          "title": "Prêt quand vous l'êtes",
+          "paragraphs": [
+            "Pas de longue montée en température ni de poêle à surveiller. Branchez la cabine sur une prise standard, réglez la durée, et elle est prête en quelques minutes plutôt qu'en près d'une heure.",
+            "Avec 0,80 m et 1,10 m de côté, les deux tailles se logent là où un sauna traditionnel ne tiendrait pas : un coin libre, une salle de bains, le bout d'une chambre, sans travaux ni circuit dédié. C'est la version du sauna que l'on utilise vraiment un soir de semaine."
+          ]
+        }
+      ],
+      "featureText": "Des séances régulières d'infrarouge soulagent les courbatures, favorisent la circulation et aident le corps à se préparer au sommeil, à une température assez douce pour en faire une habitude quotidienne plutôt qu'un événement occasionnel. Comme la cabine se branche sur une prise ordinaire et se monte sans travaux, c'est aussi l'un des rares équipements de bien-être que l'on peut emporter en déménageant.",
+      "perfCards": [
+        {
+          "label": "Cèdre ou Hemlock",
+          "detail": "Naturellement aromatique, issu de sources durables"
+        },
+        {
+          "label": "1 ou 2 places",
+          "detail": "Configurations 0908-IR-D et 1111-IR-D"
+        },
+        {
+          "label": "230 V prêt à brancher",
+          "detail": "Aucun circuit dédié ni électricien nécessaire"
+        },
+        {
+          "label": "Fabriqué en Finlande, plus de 30 ans d'expérience",
+          "detail": "Des décennies d'expertise du sauna dans chaque cabine"
+        }
+      ],
+      "accordionItems": [
+        {
+          "title": "Caractéristiques du produit",
+          "specs": [
+            {
+              "label": "0908-IR-D",
+              "value": "0,80 m L x 0,90 m P",
+              "unit": "/ 1 personne"
+            },
+            {
+              "label": "1111-IR-D",
+              "value": "1,10 m L x 1,10 m P",
+              "unit": "/ 2 personnes"
+            },
+            {
+              "label": "Hauteur",
+              "value": "2,05 m",
+              "unit": "(les deux modèles)"
+            },
+            {
+              "label": "Panneaux",
+              "value": "Infrarouge lointain à revêtement fibre, 170 W par panneau",
+              "unit": null
+            },
+            {
+              "label": "Puissance totale",
+              "value": "1200 W (1 personne) / 1400 W (2 personnes)",
+              "unit": null
+            },
+            {
+              "label": "Alimentation",
+              "value": "230 V prêt à brancher",
+              "unit": null
+            },
+            {
+              "label": "Durée de séance",
+              "value": "1 à 60 minutes",
+              "unit": "réglable"
+            },
+            {
+              "label": "Éclairage",
+              "value": "LED 12 W",
+              "unit": "/ ventilateur d'extraction 18 W"
+            },
+            {
+              "label": "Matériau",
+              "value": "Cèdre ou Hemlock",
+              "unit": null
+            }
+          ]
+        }
+      ]
+    },
+    "woodMaterials": {
+      "subtitle": "Les saunas infrarouges sont construits en cèdre ou en Hemlock : chaque essence apporte son propre caractère, son parfum et sa chaleur à vos séances.",
+      "items": {
+        "cedar": {
+          "name": "Cèdre",
+          "description": "Bois riche et aromatique, naturellement résistant à l'humidité. Réputé pour ses tons brun-rouge chauds et son parfum distinctif.",
+          "traits": [
+            "Aromatique",
+            "Résistant à l'humidité",
+            "Tons chauds"
+          ]
+        },
+        "hemlock": {
+          "name": "Hemlock",
+          "description": "Bois clair au grain régulier, très peu odorant : une toile de fond plus discrète pour ceux qui trouvent l'arôme du cèdre trop marqué. Stable et lisse au toucher.",
+          "traits": [
+            "Faible odeur",
+            "Grain régulier",
+            "Finition lisse"
+          ]
+        }
+      }
+    }
+  },
+  "panels": {
+    "meta": {
+      "title": "Panneaux infrarouges",
+      "description": "Panneaux et accessoires infrarouges SAWO : panneaux infrarouges lointains à revêtement fibre de 170 W chacun, dossiers et supports d'interface pour votre cabine infrarouge."
+    },
+    "hero": {
+      "title": "PANNEAUX INFRAROUGES"
+    },
+    "intro": {
+      "title": "Présentation de nos panneaux infrarouges",
+      "text": "Les panneaux infrarouges lointains à revêtement fibre chauffent directement le corps plutôt que l'air ambiant : les séances restent confortables à une température de cabine bien plus basse. Chaque panneau consomme 170 W et s'installe à fleur dans la cabine, avec les dossiers et supports d'interface qui complètent l'ensemble."
+    },
+    "eyebrow": "Panneau infrarouge",
+    "fallbackBlurb": "Composant infrarouge SAWO haut de gamme pour une chaleur douce au quotidien.",
+    "emptyText": "Aucun panneau infrarouge disponible pour le moment.",
+    "loadingText": "Chargement des panneaux infrarouges…",
+    "cta": {
+      "title": "Vous ne savez pas quel panneau choisir ?",
+      "description": "Le nombre et l'emplacement des panneaux dépendent de la taille de votre cabine infrarouge. Notre équipe vous aide à définir la bonne configuration pour votre espace."
+    }
+  },
+  "controls": {
+    "meta": {
+      "title": "Commandes infrarouges",
+      "description": "Commandes SAWO Infrared 2.0 : interface utilisateur, contrôleur de puissance et commande encastrable pour gérer la température, la durée de séance, l'éclairage et la ventilation."
+    },
+    "hero": {
+      "title": "COMMANDES INFRAROUGES"
+    },
+    "intro": {
+      "title": "Présentation de nos commandes infrarouges",
+      "text": "Une seule commande pilote toute la cabine : température, durée de séance de 1 à 60 minutes, éclairage et ventilateur d'extraction. La gamme Infrared 2.0 comprend l'interface utilisateur, le contrôleur de puissance qui l'accompagne et une version encastrable pour une paroi de cabine plus épurée."
+    },
+    "eyebrow": "Commande infrarouge",
+    "fallbackBlurb": "Commande infrarouge SAWO haut de gamme pour une utilisation quotidienne simple et fiable.",
+    "emptyText": "Aucune commande infrarouge disponible pour le moment.",
+    "loadingText": "Chargement des commandes infrarouges…",
+    "cta": {
+      "title": "Besoin d'aide pour choisir une commande ?",
+      "description": "Que vous préfériez une interface en saillie ou une unité encastrée, notre équipe vous aide à choisir la commande adaptée à votre cabine infrarouge."
+    }
+  }
+}

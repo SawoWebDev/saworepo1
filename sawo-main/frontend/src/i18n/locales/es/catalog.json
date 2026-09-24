@@ -1,0 +1,135 @@
+{
+  "allProducts": {
+    "meta": {
+      "title": "Todos los productos",
+      "description": "Explore toda la gama de productos SAWO: estufas de sauna, cabinas de sauna y accesorios, reunidos en un único catálogo con buscador."
+    },
+    "hero": {
+      "eyebrow": "Colección completa",
+      "title": "Todos los productos",
+      "description": "Explore toda la gama de productos SAWO: estufas de sauna, controles, generadores de vapor, cabinas y accesorios, reunidos en un único catálogo con buscador."
+    },
+    "loading": "Cargando productos…",
+    "sidebar": {
+      "browseBy": "Explorar por",
+      "type": "Tipo",
+      "categories": "Categorías"
+    },
+    "tabs": {
+      "heaters": "Estufas de sauna",
+      "rooms": "Cabinas de sauna",
+      "saunaControls": "Controles de sauna",
+      "steam": "Vapor",
+      "infrared": "Infrarrojos",
+      "heaterAccessories": "Accesorios de estufa",
+      "accessories": "Accesorios para sauna"
+    },
+    "heaterSections": {
+      "wallMounted": "De pared",
+      "tower": "Torre",
+      "stone": "Piedra",
+      "floor": "De suelo",
+      "combi": "Combi",
+      "dragonfire": "Dragonfire"
+    },
+    "roomSections": {
+      "standard": "Estándar",
+      "glassFront": "Frontal de vidrio",
+      "compact": "Compactas"
+    },
+    "steamSections": {
+      "generators": "Generadores de vapor",
+      "controls": "Controles de vapor",
+      "accessories": "Accesorios de vapor"
+    },
+    "infraredSections": {
+      "rooms": "Saunas de infrarrojos",
+      "panels": "Paneles",
+      "controls": "Controles"
+    },
+    "heaterAccessoriesLabels": {
+      "Heater Guard": "Protectores de estufa",
+      "Integration Collar": "Marcos",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Accessories": "Accesorios de seguridad",
+      "Sauna Stones": "Piedras de sauna"
+    },
+    "categorySections": {
+      "pails": "Cubos",
+      "ladles": "Cucharones",
+      "pailShower": "Ducha de cubo",
+      "meters": "Termómetros y medidores combinados",
+      "clockTimer": "Relojes y temporizadores",
+      "saunaLights": "Iluminación para sauna",
+      "headrestBackrest": "Reposacabezas y respaldos",
+      "doorsHandles": "Puertas y tiradores",
+      "benches": "Bancos",
+      "clothHangers": "Perchas y percheros",
+      "woodenFloorMats": "Baldosas de alfombrilla de suelo",
+      "kivistone": "Kivistone",
+      "ventMisc": "Ventilación y artículos varios"
+    },
+    "empty": {
+      "heaters": "No hay estufas de sauna disponibles",
+      "rooms": "No hay cabinas de sauna disponibles",
+      "saunaControls": "No hay controles de sauna disponibles",
+      "steam": "No hay productos de vapor disponibles",
+      "infrared": "No hay productos de infrarrojos disponibles",
+      "heaterAccessories": "No hay accesorios de estufa disponibles"
+    }
+  },
+  "heatersCatalog": {
+    "meta": {
+      "title": "Estufas de sauna",
+      "description": "Explore el catálogo completo de estufas SAWO: series Tower, de pared, de piedra, de suelo, Combi y Dragonfire para cualquier tamaño y estilo de sauna."
+    },
+    "hero": {
+      "title": "Estufas de sauna",
+      "description": "Descubra nuestra gama completa de estufas de sauna de alta gama, diseñadas para cualquier tamaño y estilo de sauna. Explore nuestra cuidada selección de las series Tower, de pared, de piedra, de suelo, Combi y Dragonfire."
+    },
+    "loading": "Cargando estufas…",
+    "sidebar": {
+      "browseBy": "Explorar por",
+      "series": "Serie"
+    },
+    "groups": {
+      "wallMounted": "Serie de pared",
+      "tower": "Serie Tower",
+      "stone": "Serie de piedra",
+      "floor": "Serie de suelo",
+      "combi": "Serie Combi",
+      "dragonfire": "Serie Dragonfire"
+    },
+    "cta": {
+      "title": "¿Necesita ayuda para elegir la estufa adecuada?",
+      "desc": "Nuestro equipo puede ayudarle a elegir la potencia, el tamaño y el estilo adecuados para su sauna, o puede consultar todas las especificaciones en nuestro catálogo de productos.",
+      "contactBtn": "CONTACTO",
+      "downloadBtn": "DESCARGAR CATÁLOGO"
+    }
+  },
+  "accessoriesCatalog": {
+    "meta": {
+      "title": "Accesorios para sauna",
+      "description": "Explore el catálogo completo de accesorios SAWO: cubos, cucharones, termómetros, bancos, iluminación y mucho más para cualquier sauna."
+    },
+    "hero": {
+      "eyebrow": "Colección premium",
+      "title": "Accesorios para sauna",
+      "description": "Descubra nuestra gama completa de accesorios para sauna de alta gama, diseñados para mejorar su experiencia de bienestar. Explore nuestra cuidada selección de productos de gran calidad."
+    },
+    "loading": "Cargando accesorios…",
+    "sidebarTitle": "Accesorios para sauna",
+    "groups": {
+      "pailsLadles": "Cubos y cucharones",
+      "meters": "Termómetros y medidores combinados",
+      "clockTimer": "Relojes y temporizadores",
+      "saunaLights": "Iluminación para sauna",
+      "headrestBackrest": "Reposacabezas y respaldos",
+      "doorsHandles": "Puertas y tiradores",
+      "benches": "Bancos, perchas y alfombrillas de suelo",
+      "kivistone": "Kivistone",
+      "ventMisc": "Ventilación y artículos varios",
+      "accessorySets": "Sets de accesorios"
+    }
+  }
+}

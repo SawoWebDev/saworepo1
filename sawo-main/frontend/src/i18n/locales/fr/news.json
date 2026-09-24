@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Actualités",
+    "description": "Actualités, salons professionnels et nouveautés de SAWO : poêles de sauna finlandais, générateurs de vapeur et innovations en matière de cabines de sauna."
+  },
+  "hero": {
+    "alt": "Intérieur de sauna SAWO",
+    "title": "Actualités",
+    "subtitle": "Restez informé des histoires, événements et grandes étapes de SAWO"
+  },
+  "exhibitions": {
+    "eyebrow": "Derniers",
+    "titleSpan": "salons",
+    "subtitle": "Aquanale et Piscina Barcelona",
+    "p1": "Nous sommes heureux d'annoncer notre présence à deux salons en Europe, à moins d'un mois d'intervalle. Venez nous voir à Aquanale et à Piscina Barcelona.",
+    "aquanaleLabel": "Aquanale : du 28 au 31 OCTOBRE 2025",
+    "aquanaleInfo": "Hall 8, stand A028 – B209, Messeplatz 1, 50679 Cologne, Allemagne",
+    "piscinaLabel": "Piscina Barcelona : du 17 au 20 NOVEMBRE 2025",
+    "piscinaInfo": "Stand D90, Recinto Gran Via, Pabellón P1, Nivel 0, Gran Via, Centre d'exposition, Barcelone, Espagne",
+    "p2": "Nous ne nous contentons pas de créer des produits : nous vous aidons à vivre une expérience du sauna finlandais authentique et personnalisée. Pour nous, le sauna appartient à tout le monde, partout dans le monde.",
+    "p3": "Cette fois, nos temps forts portent sur des innovations remarquables en matière de commandes de sauna et de conception de poêles. Pour en savoir plus sur ces nouveautés, suivez les actualités de notre site web et de nos réseaux sociaux.",
+    "p4": "Nous dévoilerons aussi nos nouvelles collections d'accessoires, des ensembles Essential et Rustic aux créations Signature et Dragon. Chaque ensemble est conçu pour s'accorder à l'esthétique de chaque sauna tout en mettant l'accent sur l'expérience personnelle de l'utilisateur.",
+    "p5": "Le sauna est bien plus qu'une pièce : c'est un art de vivre axé sur le bien-être. À Aquanale comme à Piscina Barcelona, vous découvrirez comment nos produits allient authenticité, design et innovations modernes pour transformer le quotidien en véritables moments de bien-être.",
+    "closing": "Venez le voir, le ressentir et le vivre par vous-même.",
+    "imgAlt": "Stand SAWO sur le salon",
+    "aquanaleLogoAlt": "Logo Aquanale",
+    "piscinaLogoAlt": "Logo Piscina Barcelona"
+  },
+  "talent": {
+    "eyebrow": "Recherche de",
+    "titleSpan": "talents",
+    "subtitle": "Rejoignez notre équipe en pleine croissance à Cebu",
+    "p1": "Nous sommes convaincus que nos collaborateurs sont le moteur de chacune de nos réussites. Alors que nous célébrons l'agrandissement de l'usine 4 à Cebu, un nouveau chapitre s'ouvre, pour la production comme pour les équipes. Nous recherchons aujourd'hui des personnes passionnées pour rejoindre notre équipe à Cebu, aux Philippines.",
+    "p2": "Nous cherchons des talents qui ont de l'expérience dans le sauna et le bien-être, et qui souhaitent contribuer à une marque mondiale offrant d'authentiques expériences de sauna finlandais dans plus de 90 pays. Si vous avez de l'initiative, vous vous épanouissez dans un cadre tropical dynamique et vous voulez rejoindre une entreprise qui allie tradition et innovation, nous sommes faits pour nous entendre.",
+    "closing": "Découvrez nos offres d'emploi et aidez-nous à façonner la prochaine ère du bien-être.",
+    "cta": "Offres d'emploi",
+    "imgAlt": "Recherche de talents chez SAWO"
+  },
+  "earthquake": {
+    "eyebrow": "Séisme",
+    "titlePrefix": "Aide à",
+    "titleSpan": "Cebu",
+    "subtitle": "Les équipes de SAWO s'unissent pour aider les victimes du séisme de Cebu",
+    "p1": "Quand le malheur frappe près de chez nous, nous nous mobilisons.",
+    "p2": "Le 30 septembre, un puissant séisme de magnitude 6,9 a frappé au large de la côte nord-est de Cebu, faisant des dizaines de morts, des centaines de blessés et laissant de nombreuses personnes sans abri. En tant que membre de la communauté de Cebu, nous avons réagi rapidement pour soutenir les personnes touchées.",
+    "p3": "Peu après le séisme, nous avons organisé une mobilisation à l'échelle de l'entreprise : matelas, nourriture, produits d'hygiène et autres produits de première nécessité ont été acheminés vers les zones les plus durement touchées. Nos collaborateurs ont eux-mêmes distribué les fournitures aux familles SAWO sinistrées et à leurs voisins dans les communautés alentour.",
+    "p4": "Cebu est depuis longtemps la terre d'accueil de SAWO, et dans cette épreuve, nous mesurons à quel point il est important d'être aux côtés de la communauté qui nous a adoptés. À nous, à notre tour, de l'accueillir à bras ouverts.",
+    "imgAlt": "Actions de solidarité de SAWO après le séisme à Cebu"
+  },
+  "cta": {
+    "text": "Une histoire à raconter, un projet de partenariat ou une demande presse ? Nous serions ravis d'échanger avec vous.",
+    "btn": "NOUS CONTACTER"
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Centro de soporte",
+      "description": "Obtenga ayuda con sus productos SAWO: preguntas frecuentes, calculadora de sauna, manuales de usuario y catálogo de productos, todo en un solo lugar."
+    },
+    "hero": {
+      "alt": "Centro de soporte",
+      "title": "CENTRO DE SOPORTE",
+      "subtitle": "Todo lo que necesita para sacar el máximo partido a sus productos SAWO"
+    },
+    "resources": {
+      "title": "¿En qué podemos ayudarle?",
+      "desc": "Explore nuestros completos recursos de soporte, desde guías detalladas de productos hasta herramientas interactivas y preguntas frecuentes. Estamos aquí para que disfrute de la mejor experiencia SAWO.",
+      "faq": {
+        "title": "Preguntas frecuentes",
+        "desc": "Encuentre respuestas a las preguntas más habituales sobre el sauna y los productos.",
+        "link": "Ver preguntas frecuentes"
+      },
+      "calculator": {
+        "title": "Calculadora de sauna",
+        "desc": "Utilice nuestra herramienta interactiva para calcular el tamaño de estufa ideal para su espacio a partir de las dimensiones de la sala.",
+        "link": "Usar la calculadora"
+      },
+      "manuals": {
+        "title": "Manuales de usuario",
+        "desc": "Descargue manuales de instrucciones detallados de todos los productos SAWO, incluidas estufas, controles y accesorios.",
+        "link": "Descargar manuales"
+      },
+      "catalogue": {
+        "title": "Catálogo de productos",
+        "desc": "Explore nuestro catálogo de productos completo con especificaciones, precios y detalles técnicos de toda nuestra oferta.",
+        "link": "VER CATÁLOGO"
+      }
+    },
+    "contact": {
+      "title": "¿Necesita soporte directo?",
+      "desc": "Nuestro equipo de soporte técnico está a su disposición para resolver dudas, solucionar problemas o atender solicitudes especiales.",
+      "boxTitle": "Soporte técnico",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "whatsapp": "WhatsApp",
+      "note": "Para soporte técnico y resolución de problemas, le recomendamos ponerse en contacto con nosotros por WhatsApp o por correo electrónico. Nuestro equipo suele responder en un plazo de 24 horas."
+    },
+    "cta": {
+      "title": "¿Listo para explorar nuestros productos?",
+      "desc": "Encuentre el sauna, el baño de vapor o la solución de infrarrojos ideal para sus necesidades.",
+      "btn": "VER TODOS LOS PRODUCTOS"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Preguntas frecuentes",
+      "description": "Respuestas a las preguntas más habituales sobre los saunas finlandeses SAWO, las estufas, los generadores de vapor y el cuidado del sauna, desde las fuentes de calor hasta los tipos de madera."
+    },
+    "hero": {
+      "title": "PREGUNTAS FRECUENTES",
+      "subtitle": "Preguntas frecuentes"
+    },
+    "questionCount": {
+      "one": "pregunta",
+      "other": "preguntas"
+    },
+    "sidebar": {
+      "imageAlt": "Preguntas frecuentes",
+      "quickHelpTitle": "Ayuda rápida",
+      "quickHelpDesc": "Haga clic en cualquier pregunta para ver la respuesta. Cambie de categoría con las pestañas de arriba."
+    },
+    "banner": {
+      "title": "¿Todavía tiene preguntas?",
+      "desc": "Nuestros expertos en sauna están a su disposición para lo que necesite.",
+      "cta": "CONTACTO"
+    },
+    "sections": [
+      {
+        "id": "finnish-sauna",
+        "title": "Sauna finlandesa",
+        "items": [
+          {
+            "question": "¿Cuál es la fuente de calor en un sauna?",
+            "answer": "La fuente de calor de un sauna es la estufa, que se utiliza para calentar las piedras del sauna, ya sea mediante electricidad con resistencias o quemando leña. Las estufas eléctricas son la opción más habitual, sobre todo por su comodidad, su rápido tiempo de calentamiento y la posibilidad de adaptar la experiencia de sauna a su gusto.\n\nCuanta más agua se vierte sobre las piedras, más sube la temperatura antes de empezar a bajar lentamente."
+          },
+          {
+            "question": "¿Cuál es la mejor madera para un sauna?",
+            "answer": "Las mejores maderas para un sauna son las coníferas, como el cedro rojo occidental, el álamo temblón común y el abeto. Estas especies tienen excelentes cualidades para el sauna, sobre todo si proceden de regiones árticas como el norte de Estados Unidos, Canadá y Escandinavia. Las maderas árticas aíslan bien el calor de forma natural y toleran los cambios de temperatura y humedad sin hincharse ni contraerse de forma significativa. Los bancos de sauna fabricados con estas maderas se mantienen frescos y agradables para sentarse, incluso cuando la temperatura del sauna puede alcanzar entre 70 y 80 grados.\n\nEl cedro rojo occidental (Thuja plicata) es una madera excepcionalmente hermosa, con un color rojizo cálido natural, una textura uniforme de grano fino y un brillo satinado. El cedro es muy resistente a la humedad, por lo que es una excelente opción, especialmente para saunas de exterior. El intenso aroma de la madera de cedro no solo actúa como repelente natural contra insectos y moho, sino que también ayuda a mejorar la concentración, la calidad del sueño y la relajación del cuerpo.\n\nEl álamo temblón común: una conífera de aspecto blanco a crema, perfecta para un acabado elegante. La madera de álamo temblón tiene un aspecto blanco cremoso sin nudos, similar al abachi. Esta especie es muy resistente a la humedad, las bacterias y los hongos, por lo que es una excelente opción para saunas comerciales o públicos.\n\nEl abeto finlandés es una conífera de textura de grano cerrado, regular y uniforme. Tiene un aspecto amarillo claro con pocas marcas. El abeto es duradero, resiste el calor y tiene pequeños nudos sanos, lo que lo convierte en una de las maderas de sauna más habituales en Finlandia. Se dice que el aroma natural a bosque del abeto facilita la relajación y la respiración."
+          },
+          {
+            "question": "¿Qué es un sauna finlandés?",
+            "answer": "El sauna finlandés es básicamente una sala con paredes, techo y bancos de madera. Durante siglos, el sauna ha sido un lugar de relajación. El corazón del sauna es la estufa, que se utiliza para calentar piedras mediante electricidad o quemando leña. Sin duda, lo que convierte un sauna en un sauna finlandés es el acto de verter agua de un cubo sobre las piedras. En finés esto se llama «löyly». Cuanta más agua se vierta sobre las piedras, más sube la temperatura antes de bajar lentamente. Los cambios de temperatura, combinados con el uso regular del sauna, han demostrado científicamente varios beneficios para la salud. El sauna regular mejora en particular la salud cerebral y mental, protege frente a problemas cardíacos y refuerza el sistema inmunitario."
+          }
+        ]
+      },
+      {
+        "id": "building-installation",
+        "title": "Construcción e instalación",
+        "items": [
+          {
+            "question": "¿Cuál es la ubicación ideal para un sauna?",
+            "answer": "La ubicación ideal de un sauna es un lugar seco, con buena ventilación y suelo de hormigón, baldosa, cerámica o vinilo. Recomendamos instalar un desagüe en el suelo para facilitar la limpieza. Una buena ventilación garantiza que la ligera condensación del sauna se seque eficazmente después del baño. Siempre que el sauna está en uso, provoca un aumento mínimo de la temperatura de las zonas circundantes. Teniendo esto en cuenta, si el sauna es modular y se instala dentro de la casa, conviene dejar un pequeño espacio entre la cabina y las paredes de la vivienda para asegurar la circulación del aire."
+          },
+          {
+            "question": "¿Por qué hay bancos superiores e inferiores en un sauna?",
+            "answer": "La temperatura de la cabina es más cálida a la altura del techo y más fresca cerca del suelo. Los bancos se instalan a diferentes alturas para que el bañista pueda elegir entre distintas temperaturas."
+          },
+          {
+            "question": "¿Cómo proteger los paneles de madera de la humedad?",
+            "answer": "La mejor forma de proteger los paneles de madera de la humedad es una ventilación adecuada y secarlos después de usar el sauna. No aplique pintura, selladores ni ningún conservante sobre los paneles de madera. La madera se hincha y se contrae, y desprende la pintura y los selladores, que solo quedan en la superficie. Lo mejor es dejar la madera al natural."
+          },
+          {
+            "question": "¿Qué requisitos debe cumplir el suelo de un sauna?",
+            "answer": "El suelo de un sauna debe ser impermeable, fácil de lavar y de mantener. Por ejemplo, los suelos de baldosa, cemento o vinilo de alta resistencia son adecuados porque son lavables y no absorben el agua."
+          },
+          {
+            "question": "¿Es obligatorio un desagüe en el suelo del sauna?",
+            "answer": "El desagüe en el suelo del sauna no es obligatorio, pero se recomienda encarecidamente. Facilita la limpieza del sauna."
+          }
+        ]
+      },
+      {
+        "id": "sauna-heater",
+        "title": "Estufa de sauna",
+        "items": [
+          {
+            "question": "¿Puedo recibir una descarga eléctrica de la estufa?",
+            "answer": "Si la estufa está instalada correctamente, es muy improbable recibir una descarga eléctrica. Para garantizar un uso seguro, la instalación debe realizarla un electricista cualificado. Todas nuestras estufas se prueban antes de la entrega y cumplen las normas de seguridad eléctrica."
+          }
+        ]
+      },
+      {
+        "id": "using-sauna",
+        "title": "Uso del sauna",
+        "items": [
+          {
+            "question": "¿Cuánto tarda en calentarse?",
+            "answer": "Cuando el sauna está bien aislado y las rejillas de ventilación y las puertas están cerradas, el tiempo de calentamiento es inferior a una hora. También depende de la estufa que tenga."
+          },
+          {
+            "question": "¿Cuál es la mejor temperatura en un sauna?",
+            "answer": "La temperatura recomendada en un sauna es de 60 a 90 grados Celsius, pero depende de sus preferencias."
+          },
+          {
+            "question": "¿Por qué son importantes las piedras del sauna?",
+            "answer": "La función principal de las piedras del sauna en la estufa es almacenar suficiente energía para vaporizar eficazmente el agua que se vierte sobre ellas y así aumentar la temperatura del sauna. Las piedras deben retirarse al menos una vez al año o cada 500 horas, lo que ocurra primero. Todos los restos deben retirarse de la estufa y sustituirse por piedras nuevas, como se describe en el manual de la estufa.\n\nNo utilice nunca la estufa sin piedras, ya que podría provocar un incendio. Utilice únicamente piedras SAWO recomendadas por el fabricante. El uso de piedras inadecuadas puede dañar las resistencias y anulará la garantía. ¡No utilice nunca piedras de cerámica ni ningún otro tipo de piedras artificiales!"
+          },
+          {
+            "question": "¿Qué requisitos debe cumplir el agua que se vierte sobre las piedras del sauna?",
+            "answer": "El agua que se vierte sobre las piedras del sauna debe ser apta para el consumo doméstico. El agua clorada (por ejemplo, de una piscina o un jacuzzi) o el agua de mar pueden dañar la estufa y las resistencias."
+          },
+          {
+            "question": "¿Cómo se mantiene un sauna?",
+            "answer": "MANTENIMIENTO DEL SAUNA EN CADA SESIÓN\nUtilice toallas sobre los bancos durante el sauna para que se conserven en buen estado durante más tiempo.\nDespués de la sesión, deje la estufa encendida durante 30 minutos para que el sauna se seque más rápido de la humedad. Por último, abra las rejillas de ventilación y la puerta del sauna para que se ventile bien.\nVacíe el cubo de agua y coloque el cucharón sobre el banco. Esto ayuda a evitar grietas en los accesorios de madera y mantiene el sauna fresco.\n\nMANTENIMIENTO DEL SAUNA AL MENOS DE 1 A 4 VECES AL AÑO:\nCompruebe las piedras de la estufa. Limpie el posible polvo de piedra y los restos del fondo de la estufa. Retire las piedras y sustituya las que se hayan desintegrado. Por último, vuelva a colocar las piedras en la estufa. Revisar las piedras de vez en cuando ayuda a aumentar la vida útil de las resistencias y a ahorrar energía.\nCompruebe las resistencias. Si hay grietas o alguna resistencia está doblada, sustituya todas. No sustituya solo una.\nLave todas las superficies de los bancos, el techo, el suelo y las paredes con agua tibia, un cepillo suave y un detergente multiusos. No obstante, no utilice detergentes con amoníaco ni cloro. Enjuague las superficies con agua fría y deje que el sauna se ventile bien. Si es necesario, puede aplicar en los bancos un aceite de tratamiento para madera apto para sauna, como el aceite de parafina.\nSi el lavado no deja limpios los bancos, líjelos con papel de lija. Proteja los bancos con un aceite para madera apto para sauna. Siga las instrucciones del aceite y evite usar el sauna antes de que el aceite se haya secado bien.\nSiempre que sea necesario, utilice agua con jabón suave para limpiar las manchas de cal u otra suciedad de la cubierta de la estufa. También puede usar la solución descalcificadora SAWO. Seque después de lavar.\nLimpie las superficies de vidrio con un limpiacristales o con lavavajillas. Si es necesario, enjuague y seque con un limpiacristales de goma o un paño de microfibra.\nCompruebe los tornillos (puerta, bancos del sauna, barandillas) y apriételos si es necesario.\nLimpie el desagüe del suelo."
+          },
+          {
+            "question": "¿Con qué frecuencia se debe usar el sauna?",
+            "answer": "Tan a menudo como quiera. Pero la mayoría de la gente va al sauna dos o tres veces por semana, normalmente por la noche, para relajarse tras un duro día de trabajo."
+          },
+          {
+            "question": "¿Cuánto tiempo debo permanecer en el sauna?",
+            "answer": "Puede permanecer en el sauna mientras se sienta cómodo. Salga del sauna para refrescarse de inmediato si empieza a sentirse incómodo."
+          },
+          {
+            "question": "¿Cuándo no debo usar el sauna?",
+            "answer": "No utilice el sauna con el estómago lleno ni bajo los efectos del alcohol. Las personas con problemas cardíacos o enfermedades agudas deben consultar a un médico antes de usar el sauna."
+          },
+          {
+            "question": "¿Pueden ir los niños pequeños al sauna?",
+            "answer": "Los niños pequeños pueden ir al sauna bajo la supervisión de un adulto. Sin embargo, las primeras veces conviene limitar el baño a unos pocos minutos y a una temperatura moderada. Los niños pueden sentarse en los bancos inferiores, donde la temperatura también es más baja."
+          }
+        ]
+      }
+    ]
+  },
+  "calculator": {
+    "meta": {
+      "title": "Calculadora de sauna",
+      "description": "Encuentre la estufa SAWO adecuada para su sauna con nuestra calculadora, que relaciona el tamaño y el volumen de la sala con la potencia de estufa ideal."
+    },
+    "intro": {
+      "title": "Calculadora de volumen del sauna",
+      "desc": "El tamaño de su sauna influye directamente en la potencia de estufa necesaria. Utilice esta calculadora de volumen para medir las dimensiones de su cabina y obtener una recomendación precisa de potencia de estufa en kW para un rendimiento óptimo."
+    },
+    "imageAlt": "Interior de una cabina de sauna SAWO",
+    "card": {
+      "title": "Dimensiones de la sala",
+      "clear": "Borrar"
+    },
+    "fields": {
+      "width": {
+        "label": "Ancho",
+        "subLabel": "(de lado a lado)"
+      },
+      "height": {
+        "label": "Alto",
+        "subLabel": "(del suelo al techo)"
+      },
+      "depth": {
+        "label": "Fondo",
+        "subLabel": "(de la puerta a la pared del fondo)"
+      },
+      "uninsulated": {
+        "label": "Superficies sin aislar",
+        "subLabel": "(Deje 0 si está completamente revestida de madera)",
+        "hint": "paredes de vidrio, baldosa, piedra u hormigón, incluidas paredes de vidrio, ventanas y puertas"
+      },
+      "hints": {
+        "metric": {
+          "w": "sauna típico: 1,8–2,4 m",
+          "h": "techo estándar: 2,1 m",
+          "d": "sauna típico: 1,8–2,4 m"
+        },
+        "imperial": {
+          "w": "sauna típico: 6–8 ft",
+          "h": "techo estándar: 7 ft",
+          "d": "sauna típico: 6–8 ft"
+        }
+      }
+    },
+    "result": {
+      "volumeLabel": "Volumen del sauna",
+      "heaterLabel": "Estufa recomendada",
+      "effective": "Efectivo: {{val}} m³",
+      "oversized": "Supera el rango estándar, contacte con nosotros para recibir asesoramiento"
+    },
+    "reco": {
+      "title": "Estufas recomendadas",
+      "badge_one": "{{count}} estufa encontrada",
+      "badge_other": "{{count}} estufas encontradas",
+      "sub": "Estufas compatibles con <b>{{kw}} kW</b> para un sauna de <b>{{volume}} m³</b>.",
+      "noResultPrefix": "No se han encontrado estufas para esta potencia. Por favor,",
+      "noResultLink": "póngase en contacto con nosotros",
+      "noResultSuffix": "para recibir asesoramiento."
+    }
+  },
+  "manuals": {
+    "meta": {
+      "title": "Manuales de usuario",
+      "description": "Descargue los manuales de usuario de SAWO: guías de instalación e instrucciones de uso de nuestras estufas de sauna, controles y generadores de vapor."
+    },
+    "hero": {
+      "title": "MANUALES DE USUARIO",
+      "subtitle": "Su guía completa de instalación, uso y mantenimiento"
+    },
+    "sectionTitle": "GAMA DE PRODUCTOS SAWO",
+    "search": {
+      "placeholder": "Buscar productos…",
+      "clear": "Borrar"
+    },
+    "empty": {
+      "noProducts": "No hay productos disponibles."
+    },
+    "noResults": {
+      "prefix": "Ningún producto coincide con",
+      "clearSearch": "Borrar búsqueda"
+    },
+    "viewManual": "Ver manual",
+    "modal": {
+      "eyebrow": "Manuales de usuario",
+      "noManuals": "Todavía no hay manuales disponibles para este producto.",
+      "manualFallback": "Manual {{n}}",
+      "pdfClickToOpen": "PDF · Haga clic para abrir"
+    },
+    "banner": {
+      "title": "¿No encuentra lo que necesita?",
+      "desc": "Nuestro equipo de soporte está a su disposición para ayudarle con la documentación y la orientación técnica.",
+      "cta": "CONTACTO"
+    },
+    "tabs": {
+      "heaters": "Estufas de sauna",
+      "sauna-controls": "Controles de sauna",
+      "steam-generators": "Generadores de vapor",
+      "steam-controls": "Controles de generadores de vapor",
+      "heater-accessories": "Accesorios de estufa"
+    },
+    "seriesLabels": {
+      "Towers": "Serie Tower",
+      "Wall-Mounted": "Serie de pared",
+      "Floor": "Serie de suelo",
+      "Stones": "Serie de piedra",
+      "Dragonfire": "Serie Dragonfire",
+      "Combi": "Serie Combi",
+      "Sauna Controls": "Controles de sauna",
+      "Steam Controls": "Controles de generadores de vapor",
+      "Steam Generators": "Generadores de vapor",
+      "Heater Accessories": "Accesorios de estufa",
+      "Heater Guard": "Protectores de estufa",
+      "Integration Collar": "Marcos",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Accessories": "Accesorios de seguridad"
+    }
+  },
+  "catalogue": {
+    "meta": {
+      "title": "Catálogo de productos",
+      "description": "Explore el catálogo completo de productos SAWO: estufas de sauna, cabinas de sauna y accesorios en un único listado con buscador."
+    },
+    "header": {
+      "eyebrow": "Colección completa",
+      "title": "Todos los productos",
+      "desc": "Explore nuestra gama completa de estufas de sauna, cabinas y accesorios diseñados para mejorar su experiencia de bienestar.",
+      "pdfBtn": "CATÁLOGO DE PRODUCTOS"
+    },
+    "empty": "No hay productos disponibles.",
+    "banner": {
+      "title": "¿No encuentra lo que necesita?",
+      "desc": "Nuestro equipo de soporte está a su disposición para ayudarle a encontrar el producto adecuado para su sauna.",
+      "cta": "CONTACTO"
+    },
+    "tabs": {
+      "heaters": "Estufas de sauna",
+      "controls": "Controles de sauna",
+      "steam": "Vapor",
+      "infrared": "Infrarrojos",
+      "heater-acc": "Accesorios de estufa",
+      "accessories": "Accesorios para sauna",
+      "rooms": "Cabinas de sauna",
+      "other": "Otros"
+    },
+    "seriesLabels": {
+      "Towers": "Serie Tower",
+      "Wall-Mounted": "Serie de pared",
+      "Floor": "Serie de suelo",
+      "Combi": "Serie Combi",
+      "Dragonfire": "Serie Dragonfire",
+      "Stones": "Serie de piedra",
+      "Sauna Controls": "Controles de sauna",
+      "Controls": "Controles de sauna",
+      "Steam Generators": "Generadores de vapor",
+      "Steam Controls": "Controles de generadores de vapor",
+      "Steam Accessories": "Accesorios de vapor",
+      "Infrared": "Infrarrojos",
+      "Heater Guard": "Protectores de estufa",
+      "Integration Collar": "Marcos",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Stones": "Piedras de sauna",
+      "Safety Switch": "Interruptores de seguridad",
+      "Heater Hood": "Campanas de estufa",
+      "Doors & Handles": "Puertas y tiradores",
+      "Headrest & Backrest": "Reposacabezas y respaldos",
+      "Ventilation & Miscellaneous": "Ventilación y varios",
+      "Clocks & Timers": "Relojes y relojes de arena",
+      "Wooden Floor Mats": "Alfombrillas de madera para suelo",
+      "Accessory Sets": "Sets de accesorios",
+      "Pail Shower": "Duchas de cubo",
+      "standard": "Cabinas de sauna estándar",
+      "glassfront": "Cabinas de sauna con frontal de vidrio",
+      "infrared": "Saunas de infrarrojos",
+      "compact": "Cabinas de sauna compactas"
+    }
+  }
+}

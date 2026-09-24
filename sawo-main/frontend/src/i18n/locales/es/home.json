@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "SAWO: estufas de sauna finlandesas de alta gama, generadores de vapor y cabinas de sauna",
+    "description": "SAWO: estufas de sauna finlandesas de alta gama, generadores de vapor, cabinas de sauna, soluciones de infrarrojos y accesorios. Presentes en más de 90 países de todo el mundo."
+  },
+  "hero": {
+    "experience": "Viva . . .",
+    "sentences": [
+      "una escapada revitalizante",
+      "el bienestar con tradición ancestral",
+      "un auténtico sauna finlandés"
+    ],
+    "alt": "Estufas de sauna SAWO: viva el bienestar y la revitalización",
+    "seoKeywords": "estufas de sauna SAWO, sauna finlandés, accesorios para sauna, sauna de infrarrojos, generador de vapor"
+  },
+  "section1": {
+    "heading": "Sumérjase en nuestro mundo del sauna",
+    "carouselLabel": "Carrusel de productos de sauna SAWO",
+    "items": {
+      "heaters": {
+        "title": "ESTUFAS DE SAUNA",
+        "caption": "Revitalícese en el calor de un sauna finlandés tradicional con las estufas de alta gama de SAWO.",
+        "alt": "Colección de estufas de sauna finlandesas de SAWO para un calentamiento eficiente del sauna"
+      },
+      "steamGenerators": {
+        "title": "GENERADORES DE VAPOR",
+        "caption": "Alivie el estrés y la tensión con un vapor terapéutico generado por los generadores SAWO.",
+        "alt": "Generador de vapor SAWO para baños de vapor y spas modernos"
+      },
+      "rooms": {
+        "title": "CABINAS DE SAUNA",
+        "caption": "Relájese, desintoxíquese y revitalícese en una cabina de sauna de diseño auténtico con calor terapéutico.",
+        "alt": "Cabina de sauna finlandesa estándar de SAWO con diseño en madera natural"
+      },
+      "infrared": {
+        "title": "SAUNA DE INFRARROJOS",
+        "caption": "Descubra una relajación profunda con la avanzada tecnología del sauna de infrarrojos.",
+        "alt": "Sauna de infrarrojos con interior de madera de cedro de SAWO"
+      },
+      "accessories": {
+        "title": "ACCESORIOS PARA SAUNA",
+        "caption": "Mejore su sauna con los accesorios SAWO, diseñados con esmero.",
+        "alt": "Colección de accesorios para sauna SAWO, con cubos, cucharones y termómetros"
+      },
+      "controls": {
+        "title": "CONTROLES DE SAUNA",
+        "caption": "Control preciso de la temperatura y del tiempo para un confort total.",
+        "alt": "Sistema de control de sauna SAWO para un confort máximo"
+      }
+    }
+  },
+  "section2": {
+    "heading": "ESTUFAS DE SAUNA",
+    "items": {
+      "tower": {
+        "title": "TOWER",
+        "caption": "Altura y eficiencia energética en un diseño esbelto y elegante. Un calor constante desde la parte más baja hasta la más alta del sauna para una relajación y un bienestar óptimos.",
+        "alt": "Serie de estufas de sauna SAWO Tower con elegante diseño vertical"
+      },
+      "wallMounted": {
+        "title": "DE PARED",
+        "caption": "Estufas de sauna de pared que ahorran espacio y energía y generan un calor constante y potente. Diseño moderno y elegante, y un confort superior para la mejor experiencia de sauna.",
+        "alt": "Serie de estufas de sauna de pared SAWO para cabinas de sauna compactas"
+      },
+      "floor": {
+        "title": "DE SUELO",
+        "caption": "Estufas independientes de alta gama y gran potencia que ofrecen la combinación inmejorable de eficiencia energética y diseño elegante. Ideales para uso comercial.",
+        "alt": "Serie de estufas de sauna de suelo SAWO para saunas comerciales"
+      },
+      "combi": {
+        "title": "COMBI",
+        "caption": "Versatilidad en una sola unidad moderna y eficiente energéticamente. Vapor y calor combinados para un confort, un bienestar y una relajación a medida.",
+        "alt": "Serie de estufas de sauna SAWO Combi que combinan vapor y calor"
+      },
+      "stone": {
+        "title": "PIEDRA",
+        "caption": "La estufa perfecta para cualquier tipo de sauna: durabilidad del acero inoxidable, conducción del calor superior de la esteatita finlandesa y estética elegante.",
+        "alt": "Serie de estufas de sauna SAWO de piedra con acero inoxidable y esteatita"
+      },
+      "dragonfire": {
+        "title": "DRAGONFIRE",
+        "caption": "Una fusión de talento artístico y tecnología punta diseñada por el diseñador industrial y de interiores Stefan Lindfors.",
+        "alt": "Serie de estufas de sauna SAWO Dragonfire con diseño artístico de Stefan Lindfors"
+      }
+    }
+  },
+  "section3": {
+    "steamHeading": "VAPOR",
+    "saunaRoomsHeading": "CABINAS DE SAUNA",
+    "infraredHeading": "INFRARROJOS",
+    "saunaControlHeading": "CONTROLES DE SAUNA",
+    "steam": {
+      "generators": {
+        "title": "Generadores de vapor",
+        "caption": "El lujo de un vapor a medida gracias a generadores de vapor avanzados, para una experiencia de spa. Ajustes personalizados y un rendimiento excepcional en todos los aspectos."
+      },
+      "controls": {
+        "title": "Controles de vapor",
+        "caption": "Precisión, facilidad y personalización: ajustes de vapor precisos, funcionamiento sin esfuerzo y una experiencia de sauna personalizada con nuestras series de controles Saunova e Innova."
+      },
+      "accessories": {
+        "title": "Accesorios de vapor",
+        "caption": "Accesorios de alta gama diseñados para mejorar la funcionalidad y maximizar la comodidad. Una experiencia de bienestar y relajación siempre extraordinaria."
+      }
+    },
+    "rooms": {
+      "standard": {
+        "title": "Sauna estándar",
+        "caption": "Diseño atemporal y materiales de alta calidad. La experiencia clásica del sauna de interior para cualquier hogar o espacio de bienestar."
+      },
+      "glassFront": {
+        "title": "Sauna con frontal de vidrio",
+        "caption": "Serenidad y relajación en estado puro. Un diseño moderno con paneles de vidrio templado transparente para disfrutar de una vista despejada hacia el exterior."
+      },
+      "compact": {
+        "title": "Sauna compacta",
+        "caption": "Un diseño instantáneo, listo para enchufar y pensado para espacios urbanos. Una estufa oculta mantiene la instalación segura y maximiza la vista."
+      }
+    },
+    "infrared": {
+      "rooms": {
+        "title": "Cabinas de sauna de infrarrojos",
+        "caption": "Disfrute del calor suave y reconfortante de los infrarrojos en un espacio de sauna cómodo y compacto, diseñado para una experiencia relajante y reparadora."
+      },
+      "panels": {
+        "title": "Paneles de infrarrojos",
+        "caption": "Diseñados para proporcionar un calor de infrarrojos suave y directo, estos paneles crean una experiencia de sauna cómoda y relajante."
+      },
+      "controls": {
+        "title": "Controles de infrarrojos",
+        "caption": "Controles fáciles de usar para gestionar su experiencia de sauna de infrarrojos con ajustes prácticos de temperatura y duración de la sesión."
+      }
+    },
+    "controls": {
+      "saunova": {
+        "title": "Serie Saunova"
+      },
+      "innova": {
+        "title": "Serie Innova"
+      },
+      "accessories": {
+        "title": "Accesorios de control"
+      }
+    }
+  },
+  "section4": {
+    "heading": "ACCESORIOS PARA SAUNA",
+    "items": {
+      "pailsLadles": {
+        "title": "CUBOS y CUCHARONES",
+        "alt": "Cubos y cucharones de sauna"
+      },
+      "thermometers": {
+        "title": "TERMÓMETROS y MEDIDORES COMBINADOS",
+        "alt": "Termómetros y medidores combinados para sauna"
+      },
+      "clocksSandtimers": {
+        "title": "RELOJES y RELOJES DE ARENA",
+        "alt": "Relojes y relojes de arena para sauna"
+      },
+      "lightsCovers": {
+        "title": "LUCES y CUBIERTAS PARA SAUNA",
+        "alt": "Cubiertas de luz para sauna"
+      },
+      "headrestsBackrests": {
+        "title": "REPOSACABEZAS y RESPALDOS",
+        "alt": "Reposacabezas y respaldos para sauna"
+      },
+      "doorsHandles": {
+        "title": "PUERTAS y TIRADORES",
+        "alt": "Puertas y tiradores para sauna"
+      },
+      "benches": {
+        "title": "BANCOS y BALDOSAS DE SUELO",
+        "alt": "Bancos y baldosas de suelo para sauna"
+      },
+      "kivistone": {
+        "title": "KIVISTONE",
+        "alt": "Piedras de sauna Kivistone"
+      },
+      "ventilations": {
+        "title": "VENTILACIÓN y COMPLEMENTOS",
+        "alt": "Ventilación y complementos para sauna"
+      }
+    }
+  },
+  "section5": {
+    "heading": "Soluciones a medida",
+    "subtitle": "Hagamos realidad su sauna ideal.",
+    "body1": "Creamos soluciones de sauna adaptadas a su estilo y a su espacio. Tanto para el hogar como para su negocio, nos ocupamos de todo, desde el diseño y la instalación hasta el soporte técnico.",
+    "body2": "Llámenos o envíenos un mensaje.",
+    "altRight": "Soluciones de sauna a medida",
+    "altLeft": "Mantenimiento preventivo"
+  }
+}

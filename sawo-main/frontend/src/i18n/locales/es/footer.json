@@ -1,0 +1,51 @@
+{
+  "headings": {
+    "finnishSauna": "SAUNA FINLANDESA",
+    "steamRoom": "BAÑO DE VAPOR",
+    "infraredSauna": "SAUNA DE INFRARROJOS",
+    "followUs": "Síguenos",
+    "support": "SOPORTE",
+    "download": "DESCARGAS",
+    "technicalSupport": "SOPORTE TÉCNICO",
+    "offices": "OFICINAS"
+  },
+  "links": {
+    "saunaHeaters": "Estufas de sauna",
+    "saunaControls": "Controles de sauna",
+    "saunaAccessories": "Accesorios para sauna",
+    "saunaRooms": "Cabinas de sauna",
+    "steamGenerators": "Generadores de vapor",
+    "steamControls": "Controles de vapor",
+    "steamAccessories": "Accesorios de vapor",
+    "infraredSaunas": "Saunas de infrarrojos",
+    "infraredPanels": "Paneles de infrarrojos",
+    "infraredControls": "Controles de infrarrojos",
+    "faq": "Preguntas frecuentes",
+    "aboutUs": "Sobre nosotros",
+    "contactUs": "Contacto",
+    "careers": "Empleo",
+    "privacyPolicy": "Política de privacidad",
+    "sitemap": "Mapa del sitio",
+    "productCatalogue": "Catálogo de productos",
+    "userManuals": "Manuales de usuario"
+  },
+  "technicalSupportIntro": "Para soporte técnico y reclamaciones, póngase en contacto con:",
+  "whatsapp": "WhatsApp",
+  "tel": "Tel.",
+  "offices": {
+    "global": "VENTAS GLOBALES Y CONSULTAS GENERALES",
+    "nordics": "VENTAS Y ALMACÉN PARA LOS PAÍSES NÓRDICOS",
+    "asia": "VENTAS Y ALMACÉN PARA ASIA",
+    "europe": "VENTAS Y ALMACÉN PARA EUROPA"
+  },
+  "copyright": "© {{year}} Todos los derechos reservados. · SAWO",
+  "social": {
+    "facebook": "SAWO en Facebook",
+    "instagram": "SAWO en Instagram",
+    "linkedin": "SAWO en LinkedIn",
+    "youtube": "SAWO en YouTube",
+    "tiktok": "SAWO en TikTok",
+    "email": "Enviar un correo al soporte de SAWO",
+    "phone": "Llamar a SAWO"
+  }
+}

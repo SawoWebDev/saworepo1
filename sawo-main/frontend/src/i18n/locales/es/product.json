@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "resources": "Recursos",
+    "features": "Características",
+    "diagram": "Esquema",
+    "specifications": "Especificaciones",
+    "technicalData": "Datos técnicos",
+    "infraredSpecifications": "Especificaciones de infrarrojos",
+    "includedInPackage": "Incluido en el paquete",
+    "doorPositions": "Posiciones de puerta disponibles",
+    "floorPlan": "Plano de planta",
+    "benchConfiguration": "Configuración de bancos",
+    "details": "Detalles",
+    "description": "Descripción"
+  },
+  "noResourcesAvailable": "No hay recursos disponibles",
+  "moreDetailsSoon": "Próximamente más detalles.",
+  "notFound": {
+    "title": "Producto no encontrado",
+    "description": "Este producto no existe o todavía no se ha publicado.",
+    "browseProducts": "Ver productos",
+    "home": "Inicio",
+    "roomTitle": "Cabina de sauna no encontrada",
+    "roomDescription": "Esta cabina de sauna no existe o todavía no se ha publicado.",
+    "browseRooms": "Ver cabinas"
+  },
+  "related": {
+    "youMightAlsoLike": "También le puede interesar",
+    "relatedProducts": "Productos relacionados",
+    "relatedRooms": "Cabinas de sauna relacionadas",
+    "saunaAccessories": "Accesorios para sauna",
+    "otherHeaters": "Otras estufas",
+    "moreTypeRooms": "Más cabinas de tipo {{type}}"
+  },
+  "roomTypes": {
+    "traditional": "Tradicional",
+    "standard": "Estándar",
+    "infrared": "Infrarrojos",
+    "steam": "Vapor",
+    "combo": "Combinada",
+    "glassfront": "Frontal de vidrio",
+    "compact": "Compacta"
+  },
+  "sizeLabels": {
+    "compact": "Compacta · 1–2 personas",
+    "small": "Pequeña · 2–3 personas",
+    "medium": "Mediana · 3–4 personas",
+    "large": "Grande · 4–6 personas",
+    "xl": "XL · más de 6 personas",
+    "commercial": "Comercial"
+  },
+  "badges": {
+    "featured": "Destacado",
+    "bestSeller": "Más vendido"
+  },
+  "modelCode": "Modelo {{code}}",
+  "skuCode": "SKU {{sku}}",
+  "roomDisplayName": "Cabina de sauna {{type}} {{code}}",
+  "seoFallbackDescription": "{{name}} de SAWO. Una cabina de sauna finlandesa de alta gama.",
+  "stats": {
+    "capacity": "Capacidad",
+    "floorSize": "Superficie",
+    "height": "Altura",
+    "woodType": "Tipo de madera",
+    "voltage": "Tensión",
+    "panelWattage": "Potencia de los paneles",
+    "totalPower": "Potencia total",
+    "sessionTime": "Duración de la sesión"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · Haga clic para abrir",
+    "documentsCount": "{{count}} documentos",
+    "clickToExpand": "Haga clic para expandir",
+    "clickToCollapse": "Haga clic para contraer"
+  },
+  "featureTabs": {
+    "tabFallback": "Pestaña {{number}}"
+  },
+  "seoFallbackProductDescription": "{{name}} de SAWO. Equipamiento de sauna finlandés de alta gama.",
+  "specLabels": {
+    "size": "Tamaño",
+    "capacity": "Capacidad",
+    "openingSize": "Tamaño de la abertura",
+    "frameSize": "Tamaño del marco",
+    "weight": "Peso",
+    "productCode": "Código de producto",
+    "setCodes": "Códigos de los sets",
+    "ductingHole": "Orificio del conducto",
+    "includes": "Incluye",
+    "thickness": "Grosor",
+    "use": "Uso",
+    "material": "Material",
+    "code": "Código"
+  },
+  "tableCells": {
+    "separate": "Independiente",
+    "builtIn": "Integrado",
+    "maxSessionTime": "Duración máx. de la sesión",
+    "technicalDetails": "DETALLES TÉCNICOS",
+    "productDimensions": "DIMENSIONES DEL PRODUCTO",
+    "switchingCapacityPerPhase": "Capacidad de conmutación por fase",
+    "frequency": "Frecuencia",
+    "temperatureRange": "Rango de temperatura",
+    "ratedVoltage": "Tensión nominal",
+    "suitableHeaters": "Estufas compatibles",
+    "benchCombinedSensor": "Sensor combinado de temperatura y humedad de banco",
+    "benchTemperatureSensor": "Sensor de temperatura de banco",
+    "fan": "Ventilador",
+    "rating": "Potencia nominal"
+  }
+}

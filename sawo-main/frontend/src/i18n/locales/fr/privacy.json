@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "title": "Politique de confidentialité",
+    "description": "La politique de confidentialité de SAWO : comment nous collectons, utilisons et protégeons vos données personnelles sur notre site web et dans nos services."
+  },
+  "hero": {
+    "eyebrow": "Mentions légales",
+    "title": "Politique de confidentialité",
+    "websiteLabel": "Site web :"
+  },
+  "footer": "Dernière mise à jour : 2026 · SAWO INC · Tous droits réservés.",
+  "sections": [
+    {
+      "title": "Qui sommes-nous",
+      "content": [
+        "La présente politique de confidentialité s'applique au site web exploité par SAWO INC, accessible à l'adresse https://sawo.com."
+      ]
+    },
+    {
+      "title": "Quelles données personnelles nous collectons et pourquoi",
+      "subsections": [
+        {
+          "subtitle": "Commentaires",
+          "content": [
+            "Lorsque des visiteurs laissent des commentaires sur notre site, nous collectons les données saisies dans le formulaire de commentaire, ainsi que l'adresse IP du visiteur et la chaîne d'identification de son navigateur (user agent) afin de faciliter la détection du spam.",
+            "Une chaîne anonymisée (hachage) générée à partir de votre adresse e-mail peut être transmise au service Gravatar afin de vérifier si vous l'utilisez. La politique de confidentialité de Gravatar est disponible à l'adresse https://automattic.com/privacy/. Une fois votre commentaire approuvé, votre photo de profil peut être visible publiquement dans le contexte de votre commentaire."
+          ]
+        },
+        {
+          "subtitle": "Médias",
+          "content": [
+            "Si vous téléversez des images sur notre site, veuillez éviter d'y inclure des données de localisation intégrées (EXIF GPS), car d'autres utilisateurs peuvent télécharger ces images et en extraire les informations de localisation."
+          ]
+        },
+        {
+          "subtitle": "Cookies",
+          "bullets": [
+            "Si vous laissez un commentaire, vous pouvez choisir d'enregistrer votre nom, votre adresse e-mail et votre site web dans des cookies. Ces cookies durent un an et sont destinés à votre confort.",
+            "Un cookie temporaire est défini lorsque vous consultez la page de connexion afin de vérifier si votre navigateur accepte les cookies. Il ne contient aucune donnée personnelle et est supprimé à la fermeture de votre navigateur.",
+            "Lors de la connexion, plusieurs cookies sont définis pour enregistrer vos informations de connexion et vos préférences d'affichage. Les cookies de connexion durent deux jours et les cookies de préférences d'affichage un an. Si vous sélectionnez « Se souvenir de moi », votre connexion est prolongée de deux semaines.",
+            "Si vous vous déconnectez, les cookies de connexion sont supprimés.",
+            "La modification ou la publication d'un article définit un cookie contenant l'identifiant de l'article. Ce cookie expire au bout d'un jour."
+          ]
+        },
+        {
+          "subtitle": "Contenu intégré provenant d'autres sites web",
+          "content": [
+            "Les articles de ce site peuvent inclure du contenu intégré (par exemple des vidéos, des images, des articles, etc.). Le contenu intégré se comporte exactement comme si vous visitiez directement le site d'origine. Ces sites externes peuvent collecter des données vous concernant, utiliser des cookies et suivre vos interactions avec leur contenu, en particulier si vous êtes connecté à leur plateforme."
+          ]
+        },
+        {
+          "subtitle": "Analyse d'audience",
+          "content": [
+            "Nous pouvons utiliser des outils d'analyse tiers pour mesurer le trafic et les tendances d'utilisation. Ces outils collectent les données transmises par votre navigateur, notamment les pages consultées et le comportement d'utilisation, afin de nous aider à améliorer nos services."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Avec qui nous partageons vos données",
+      "content": [
+        "Si vous demandez la réinitialisation de votre mot de passe, votre adresse IP sera incluse dans l'e-mail de réinitialisation."
+      ]
+    },
+    {
+      "title": "Combien de temps nous conservons vos données",
+      "bullets": [
+        "Les commentaires et leurs métadonnées sont conservés indéfiniment afin de reconnaître et d'approuver automatiquement les commentaires ultérieurs.",
+        "Pour les utilisateurs qui s'inscrivent sur notre site (le cas échéant), nous conservons les informations personnelles fournies dans leur profil. Tous les utilisateurs peuvent consulter, modifier ou supprimer leurs informations personnelles à tout moment (à l'exception de leur nom d'utilisateur). Les administrateurs du site peuvent également accéder à ces données et les gérer."
+      ]
+    },
+    {
+      "title": "Vos droits sur vos données",
+      "content": [
+        "Si vous avez un compte ou avez laissé des commentaires, vous pouvez demander un fichier d'export des données personnelles que nous détenons à votre sujet, y compris les données que vous avez fournies. Vous pouvez également demander l'effacement de vos données personnelles, à l'exception de celles que nous sommes tenus de conserver pour des raisons administratives, légales ou de sécurité."
+      ]
+    },
+    {
+      "title": "Où nous envoyons vos données",
+      "content": [
+        "Les commentaires des visiteurs peuvent être vérifiés par un service automatisé de détection du spam."
+      ]
+    },
+    {
+      "title": "Coordonnées",
+      "content": [
+        "Pour toute question relative à la confidentialité ou toute demande concernant vos données, veuillez nous contacter à l'adresse suivante :"
+      ],
+      "email": "info@sawo.com"
+    },
+    {
+      "title": "Informations complémentaires",
+      "subsections": [
+        {
+          "subtitle": "Comment nous protégeons vos données",
+          "content": [
+            "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées, notamment le chiffrement, des pare-feu et des contrôles d'accès, pour protéger vos données personnelles."
+          ]
+        },
+        {
+          "subtitle": "Procédures en cas de violation de données",
+          "content": [
+            "En cas de violation de données, nous informerons les utilisateurs concernés et les autorités de contrôle comme l'exige la loi, et prendrons immédiatement des mesures pour sécuriser les données des utilisateurs."
+          ]
+        },
+        {
+          "subtitle": "Tiers dont nous recevons des données",
+          "content": [
+            "Nous pouvons recevoir des données de services tiers de confiance pour la protection contre le spam, l'analyse d'audience et les services de connexion."
+          ]
+        },
+        {
+          "subtitle": "Prise de décision automatisée et profilage",
+          "content": [
+            "Nous n'utilisons pas vos données pour des décisions automatisées ni pour un profilage produisant des effets juridiques ou des effets significatifs similaires."
+          ]
+        },
+        {
+          "subtitle": "Obligations de communication réglementaires du secteur",
+          "content": [
+            "Nous respectons les lois applicables en matière de protection des données, notamment celles relatives au consentement des utilisateurs, à la conservation des données et au traitement licite."
+          ]
+        }
+      ]
+    }
+  ]
+}

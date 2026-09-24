@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée."
+  },
+  "heading": "Oups ! Page introuvable",
+  "desc": "Nous sommes désolés : la page que vous cherchez n'existe pas ou a été déplacée.",
+  "triedToAccess": "Adresse demandée :",
+  "helpBox": {
+    "title": "Voici ce que vous pouvez faire :",
+    "item1": "Vérifiez que l'adresse ne contient pas de faute de frappe",
+    "item2": "Parcourez notre catalogue de produits",
+    "item3": "Utilisez la fonction de recherche ci-dessous",
+    "item4": "Contactez-nous pour obtenir de l'aide"
+  },
+  "goHome": "Retour à l'accueil",
+  "browseProducts": "Parcourir les produits",
+  "popularSections": "Rubriques populaires :",
+  "saunaHeaters": "Poêles de sauna",
+  "steamGenerators": "Générateurs de vapeur",
+  "faq": "FAQ",
+  "contactUs": "Nous contacter",
+  "supportPrompt": "Un problème persiste ? Notre équipe d'assistance est là pour vous aider."
+}

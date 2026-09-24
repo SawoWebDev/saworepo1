@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Développement durable",
+    "description": "Comment SAWO construit de façon durable : bois issu de sources responsables, réduction des déchets et fabrication économe en énergie derrière chaque poêle et chaque cabine de sauna."
+  },
+  "hero": {
+    "title": "DÉVELOPPEMENT DURABLE",
+    "subtitle": "Nous prenons soin de vous et de la Terre"
+  },
+  "commitment": {
+    "title": "Notre engagement en faveur du développement durable",
+    "desc": "Chez SAWO, nous associons bien-être et responsabilité environnementale. Chaque sauna que nous fabriquons incarne le développement durable, du choix des matériaux aux procédés de fabrication. Nous nous attachons à faire rayonner l'authentique culture finlandaise du sauna grâce à des saunas durables et de grande qualité, qui préservent la santé tout en respectant la planète.",
+    "imgAlt": "Développement durable chez SAWO"
+  },
+  "practices": {
+    "title": "Des pratiques de fabrication respectueuses de l'environnement",
+    "energy": {
+      "title": "Efficacité énergétique",
+      "desc": "Des technologies avancées, dont l'usinage CNC de précision, réduisent la consommation d'énergie et les déchets."
+    },
+    "waste": {
+      "title": "Réduction des déchets",
+      "desc": "Nous réutilisons ou recyclons les chutes de bois et de matériaux, avec pour objectif zéro déchet en production."
+    },
+    "nonToxic": {
+      "title": "Traitements non toxiques",
+      "desc": "Nous évitons les produits chimiques nocifs et utilisons des finitions sans substances toxiques pour protéger l'environnement et la santé. Nos déchets sont certifiés non toxiques."
+    }
+  },
+  "energySmart": {
+    "title": "Une conception de sauna économe en énergie",
+    "subtitle": "Nos saunas sont conçus pour une efficacité énergétique optimale, afin d'offrir une expérience de sauna parfaite avec un impact environnemental minimal.",
+    "imgAlt": "Conception de sauna économe en énergie",
+    "feature1": "Les systèmes de chauffage sont parfaitement adaptés à la taille du sauna afin d'éviter tout gaspillage d'énergie.",
+    "feature2": "Certains modèles sont dotés de thermostats intelligents pour un réglage précis de la température.",
+    "feature3": "La technologie infrarouge est intégrée pour réduire la consommation d'électricité.",
+    "bannerImgAlt": "Bois durable",
+    "bannerText": "En choisissant SAWO, vous investissez dans un produit fabriqué à partir de matériaux durables, selon un procédé qui respecte les ressources naturelles, pour un environnement intérieur plus sain."
+  },
+  "wasteHierarchy": {
+    "title": "Des déchets à la valeur : boucler la boucle",
+    "intro": "Nous appliquons la hiérarchie des déchets de la directive (UE) 2018/851, qui privilégie la réduction, le réemploi et la valorisation des déchets",
+    "minimization": {
+      "title": "Réduction des déchets",
+      "desc": "Des techniques de découpe avancées limitent les pertes inutiles, en exploitant les deux parties des chutes pour réduire la consommation de matière."
+    },
+    "reuse": {
+      "title": "Réemploi des déchets",
+      "desc": "Les morceaux de bois restants sont réutilisés dans d'autres créations."
+    },
+    "recovery": {
+      "title": "Valorisation des déchets",
+      "desc": "La sciure et les chutes de bois non réutilisables alimentent des chaudières à biomasse, ce qui fournit de l'énergie renouvelable à nos sites et réduit notre empreinte carbone."
+    },
+    "imgAlt": "Hiérarchie des déchets"
+  },
+  "wellbeing": {
+    "titleLine1": "Le sauna, c'est le bien-être",
+    "titleLine2": "Le développement durable, c'est le bien-être",
+    "quotePrefix": "La santé et le bien-être sont à la base d'une belle vie. Le développement durable ne se soucie pas seulement du bien-être des personnes, mais aussi de celui de la Terre. Chez SAWO,",
+    "quoteHighlight1": "le bien-être est notre métier",
+    "quoteMiddle": ". Nous veillons à ce que vous soyez bien entouré grâce à un sauna, et nous faisons aussi de notre mieux pour prendre soin de la Terre.",
+    "quoteHighlight2": "Le bien-être, c'est le développement durable. Prenez soin de vous. Profitez du sauna.",
+    "imgAlt": "Sauna dans un cadre durable",
+    "ctaText": "Rejoignez-nous dans notre démarche pour rendre les expériences de sauna durables accessibles et agréables partout dans le monde. Découvrez la chaleur de la nature avec un sauna qui prend soin de vous et de la Terre.",
+    "ctaBtn": "DÉCOUVRIR"
+  }
+}

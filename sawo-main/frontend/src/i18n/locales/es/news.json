@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Últimas noticias",
+    "description": "Noticias, ferias y novedades de SAWO sobre nuestras estufas de sauna finlandesas, generadores de vapor e innovaciones en cabinas de sauna."
+  },
+  "hero": {
+    "alt": "Interior de una sauna SAWO",
+    "title": "Últimas noticias",
+    "subtitle": "Manténgase al día con las historias, los eventos y los hitos de SAWO"
+  },
+  "exhibitions": {
+    "eyebrow": "Últimas",
+    "titleSpan": "ferias",
+    "subtitle": "Aquanale y Piscina Barcelona",
+    "p1": "Nos complace anunciar que asistiremos a dos ferias en Europa con menos de un mes de diferencia. Venga a vernos a Aquanale y a Piscina Barcelona.",
+    "aquanaleLabel": "Aquanale: del 28 al 31 de OCTUBRE de 2025",
+    "aquanaleInfo": "Pabellón 8, stand A028 – B209, Messeplatz 1, 50679 Colonia, Alemania",
+    "piscinaLabel": "Piscina Barcelona: del 17 al 20 de NOVIEMBRE de 2025",
+    "piscinaInfo": "Stand D90, Recinto Gran Via, Pabellón P1, Nivel 0, Gran Via, Centro de exposiciones, Barcelona, España",
+    "p2": "Más que crear productos, le ayudamos a disfrutar de experiencias auténticas y personalizadas de sauna finlandés. Creemos que el sauna pertenece a todo el mundo.",
+    "p3": "En esta ocasión, nuestras novedades destacadas se centran en innovaciones excepcionales en controles de sauna y en el diseño de estufas. Para más información sobre estos próximos productos, esté atento a las novedades de nuestro sitio web y de nuestras redes sociales.",
+    "p4": "También presentaremos nuestras nuevas colecciones de accesorios, desde los conjuntos Essential y Rustic hasta los diseños Signature y Dragon. Cada conjunto está pensado para complementar la estética de cada sauna y centrarse en la experiencia personal del usuario.",
+    "p5": "El sauna es más que una estancia: es un estilo de vida de bienestar. Tanto en Aquanale como en Piscina Barcelona descubrirá cómo nuestros productos combinan autenticidad, diseño e innovaciones modernas para convertir la rutina diaria en verdaderos momentos de bienestar.",
+    "closing": "Venga a verlo, sentirlo y vivirlo usted mismo.",
+    "imgAlt": "Stand de SAWO en la feria",
+    "aquanaleLogoAlt": "Logotipo de Aquanale",
+    "piscinaLogoAlt": "Logotipo de Piscina Barcelona"
+  },
+  "talent": {
+    "eyebrow": "Búsqueda de",
+    "titleSpan": "talento",
+    "subtitle": "Únase a nuestro equipo en crecimiento en Cebú",
+    "p1": "Creemos que nuestro equipo humano es el motor de cada logro. Al celebrar la ampliación de la Planta 4 en Cebú, abrimos un nuevo capítulo, no solo para la producción, sino también para las personas. Buscamos ahora personas apasionadas que se sumen a nuestro equipo en Cebú, Filipinas.",
+    "p2": "Buscamos talento con experiencia en el sector del sauna y el bienestar, con ganas de contribuir a una marca global que ofrece auténticas experiencias de sauna finlandés en más de 90 países. Si tiene iniciativa, disfruta en un entorno tropical y dinámico y quiere formar parte de una empresa que une tradición e innovación, somos la opción ideal para usted.",
+    "closing": "Explore nuestras ofertas de empleo y ayúdenos a dar forma a la próxima era del bienestar.",
+    "cta": "Ofertas de empleo",
+    "imgAlt": "Búsqueda de talento en SAWO"
+  },
+  "earthquake": {
+    "eyebrow": "Terremoto",
+    "titlePrefix": "Ayuda en",
+    "titleSpan": "Cebú",
+    "subtitle": "El personal de SAWO se une para ayudar a las víctimas del terremoto de Cebú",
+    "p1": "Cuando la desgracia golpea cerca de casa, nos unimos para ayudar.",
+    "p2": "El 30 de septiembre, un fuerte terremoto de magnitud 6,9 sacudió la costa noreste de Cebú, dejando decenas de muertos, cientos de heridos y muchas personas sin refugio. Como parte de la comunidad de Cebú, actuamos con rapidez para apoyar a los afectados.",
+    "p3": "Poco después del terremoto organizamos una campaña de ayuda en toda la empresa y entregamos colchones, alimentos, productos de higiene y otros artículos de primera necesidad en las zonas más afectadas. Los miembros de nuestro equipo repartieron personalmente los suministros a las familias de SAWO afectadas y a sus vecinos en las comunidades cercanas.",
+    "p4": "Cebú ha sido durante mucho tiempo el hogar de SAWO y, en estos momentos difíciles, recordamos lo importante que es apoyar a la comunidad que nos ha acogido. Nos corresponde ahora acogerla a ella.",
+    "imgAlt": "Labores de ayuda de SAWO tras el terremoto de Cebú"
+  },
+  "cta": {
+    "text": "¿Tiene una historia que compartir, una colaboración en mente o una consulta de prensa? Nos encantaría saber de usted.",
+    "btn": "CONTACTO"
+  }
+}

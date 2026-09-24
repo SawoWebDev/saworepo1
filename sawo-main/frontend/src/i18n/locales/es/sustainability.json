@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Sostenibilidad",
+    "description": "Cómo construye SAWO de forma sostenible: madera de origen responsable, prácticas de reducción de residuos y fabricación eficiente energéticamente detrás de cada estufa y cabina de sauna."
+  },
+  "hero": {
+    "title": "SOSTENIBILIDAD",
+    "subtitle": "Cuidamos de usted y de la Tierra"
+  },
+  "commitment": {
+    "title": "Nuestro compromiso con la sostenibilidad",
+    "desc": "En SAWO combinamos el bienestar con la responsabilidad ambiental. Cada sauna que fabricamos encarna la sostenibilidad, desde la selección de materiales hasta los procesos de fabricación. Nos esforzamos por difundir la auténtica cultura finlandesa del sauna con saunas duraderos y de alta calidad que cuidan la salud y respetan el planeta.",
+    "imgAlt": "Sostenibilidad en SAWO"
+  },
+  "practices": {
+    "title": "Prácticas de fabricación respetuosas con el medio ambiente",
+    "energy": {
+      "title": "Eficiencia energética",
+      "desc": "Las tecnologías avanzadas, como el mecanizado CNC de precisión, minimizan el consumo de energía y reducen los residuos."
+    },
+    "waste": {
+      "title": "Reducción de residuos",
+      "desc": "Reutilizamos o reciclamos el exceso de madera y materiales, con el objetivo de alcanzar cero residuos en la producción."
+    },
+    "nonToxic": {
+      "title": "Tratamientos no tóxicos",
+      "desc": "Evitamos los productos químicos nocivos y utilizamos acabados libres de sustancias tóxicas para proteger el medio ambiente y la salud. Nuestros residuos están certificados como no tóxicos."
+    }
+  },
+  "energySmart": {
+    "title": "Diseño de saunas eficiente en energía",
+    "subtitle": "Nuestros saunas están diseñados para lograr una eficiencia energética óptima y ofrecer una experiencia de sauna perfecta con un impacto ambiental mínimo.",
+    "imgAlt": "Diseño de sauna eficiente en energía",
+    "feature1": "Los sistemas de calefacción se adaptan perfectamente al tamaño del sauna para evitar el derroche de energía.",
+    "feature2": "Algunos modelos incorporan termostatos inteligentes para un control preciso de la temperatura.",
+    "feature3": "Se incorpora tecnología de infrarrojos para reducir el consumo eléctrico.",
+    "bannerImgAlt": "Madera sostenible",
+    "bannerText": "Al elegir SAWO, invierte en un producto fabricado con materiales sostenibles, mediante un proceso que respeta los recursos naturales y que favorece un ambiente interior más saludable."
+  },
+  "wasteHierarchy": {
+    "title": "De residuo a valor: cerrando el círculo",
+    "intro": "Seguimos la jerarquía de residuos de la Directiva (UE) 2018/851, que da prioridad a la minimización, la reutilización y la valorización de los residuos",
+    "minimization": {
+      "title": "Minimización de residuos",
+      "desc": "Las técnicas de corte avanzadas limitan los residuos innecesarios y aprovechan ambas partes de los recortes para reducir el consumo de material."
+    },
+    "reuse": {
+      "title": "Reutilización de residuos",
+      "desc": "Los trozos de madera sobrantes se reutilizan en otros diseños."
+    },
+    "recovery": {
+      "title": "Valorización de residuos",
+      "desc": "El serrín y los recortes de madera no aprovechables alimentan calderas de biomasa, que abastecen nuestras instalaciones con energía renovable y reducen nuestra huella de carbono."
+    },
+    "imgAlt": "Jerarquía de residuos"
+  },
+  "wellbeing": {
+    "titleLine1": "El sauna es bienestar",
+    "titleLine2": "La sostenibilidad es bienestar",
+    "quotePrefix": "La salud y el bienestar son la base de una buena vida. La sostenibilidad no solo se ocupa del bienestar de las personas, sino también del de la Tierra. En SAWO,",
+    "quoteHighlight1": "el bienestar es nuestro negocio",
+    "quoteMiddle": ". Nos aseguramos de que usted esté bien cuidado con un sauna, y también hacemos todo lo posible para que la Tierra esté bien cuidada.",
+    "quoteHighlight2": "El bienestar es sostenibilidad. Cuídese. Disfrute del sauna.",
+    "imgAlt": "Sauna en un entorno sostenible",
+    "ctaText": "Únase a nosotros en nuestro camino para que las experiencias de sauna sostenibles sean accesibles y agradables en todo el mundo. Descubra el calor de la naturaleza con un sauna que cuida de usted y de la Tierra.",
+    "ctaBtn": "DESCUBRIR"
+  }
+}

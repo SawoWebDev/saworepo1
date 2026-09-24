@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "Página no encontrada",
+    "description": "La página que busca no existe o se ha movido."
+  },
+  "heading": "¡Vaya! Página no encontrada",
+  "desc": "Lo sentimos, la página que busca no existe o se ha movido.",
+  "triedToAccess": "Dirección solicitada:",
+  "helpBox": {
+    "title": "Esto es lo que puede hacer:",
+    "item1": "Compruebe que la dirección no tenga errores tipográficos",
+    "item2": "Explore nuestro catálogo de productos",
+    "item3": "Utilice la función de búsqueda que aparece abajo",
+    "item4": "Póngase en contacto con nosotros si necesita ayuda"
+  },
+  "goHome": "Ir al inicio",
+  "browseProducts": "Ver productos",
+  "popularSections": "Secciones populares:",
+  "saunaHeaters": "Estufas de sauna",
+  "steamGenerators": "Generadores de vapor",
+  "faq": "Preguntas frecuentes",
+  "contactUs": "Contacto",
+  "supportPrompt": "¿Sigue teniendo problemas? Nuestro equipo de soporte está a su disposición."
+}

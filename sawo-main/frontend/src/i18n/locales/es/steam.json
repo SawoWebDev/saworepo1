@@ -1,0 +1,109 @@
+{
+  "hub": {
+    "meta": {
+      "title": "Sauna de vapor: generadores, controles y accesorios",
+      "description": "Descubra los sistemas de vapor SAWO: generadores de vapor de acero inoxidable, controles digitales y accesorios de instalación diseñados para una experiencia de vapor constante y de calidad spa, en el hogar o en entornos comerciales."
+    },
+    "hero": {
+      "title": "VAPOR",
+      "subtitle": "Descubra el lujo de la terapia de vapor puro"
+    },
+    "intro": {
+      "text": "Los sistemas de vapor SAWO llevan el poder terapéutico del calor húmedo a cualquier espacio, desde compactas duchas de vapor domésticas hasta grandes spas comerciales. Nuestra gama de vapor cubre todo lo que necesita: generadores de vapor de acero inoxidable diseñados para años de servicio fiable, controles digitales intuitivos para ajustar con precisión la temperatura y la humedad, y una línea completa de accesorios para completar la instalación."
+    },
+    "generatorsSection": {
+      "title": "Generadores de vapor",
+      "viewAll": "Ver todos los generadores",
+      "desc": "El generador de vapor es el corazón de todo baño de vapor: convierte el agua en un flujo continuo y uniforme de vapor. Los generadores de acero inoxidable de SAWO están fabricados para durar y facilitar el mantenimiento, con modelos que van desde compactas unidades residenciales hasta instalaciones comerciales de varias unidades que alcanzan los 75 kW.",
+      "loading": "Cargando generadores…",
+      "empty": "Todavía no hay generadores de vapor disponibles.",
+      "fallbackDesc": "Generador de vapor SAWO de alta gama, fabricado para un rendimiento fiable en el uso diario."
+    },
+    "controlsSection": {
+      "title": "Controles de vapor",
+      "viewAll": "Ver todos los controles",
+      "desc": "Combine cualquier generador de vapor SAWO con un panel de control específico para controlar con precisión la temperatura, la producción de vapor y la duración de las sesiones. Desde el mando básico Steam STE hasta la pantalla táctil Steam Stainless Touch, cada control está diseñado para un funcionamiento sencillo y fiable.",
+      "loading": "Cargando controles…",
+      "empty": "Todavía no hay controles de vapor disponibles.",
+      "fallbackDesc": "Control de vapor de precisión para una sesión personalizada."
+    },
+    "accessoriesSection": {
+      "title": "Accesorios de vapor",
+      "viewAll": "Ver todos los accesorios",
+      "desc": "Complete su baño de vapor con la gama de accesorios de SAWO, desde puertas de vapor y cabezales difusores hasta bombas de aroma y material de instalación, todos ellos diseñados para funcionar a la perfección con nuestros generadores y controles y lograr una instalación profesional totalmente terminada.",
+      "loading": "Cargando accesorios…",
+      "empty": "Todavía no hay accesorios de vapor disponibles.",
+      "fallbackDesc": "Accesorio de vapor SAWO para una instalación completa."
+    },
+    "cta": {
+      "title": "¿Necesita ayuda para elegir?",
+      "description": "Desde generadores y controles hasta accesorios, nuestro equipo puede ayudarle a encontrar la configuración de vapor ideal para su hogar o espacio comercial."
+    }
+  },
+  "generators": {
+    "meta": {
+      "title": "Generadores de vapor",
+      "description": "Los generadores de vapor SAWO ofrecen el lujo de un vapor a medida con generadores avanzados y ajustes personalizados para un rendimiento excepcional de calidad spa."
+    },
+    "hero": {
+      "title": "GENERADORES DE VAPOR"
+    },
+    "intro": {
+      "heading": "Presentamos nuestros generadores de vapor",
+      "desc": "Descubra el lujo de un vapor a medida con nuestros avanzados generadores de vapor, que ofrecen un rendimiento fiable, ajustes personalizables y un calor revitalizante para cualquier espacio."
+    },
+    "loading": "Cargando generadores…",
+    "empty": "Todavía no hay generadores de vapor disponibles.",
+    "cardEyebrow": "Generador de vapor",
+    "cardFallbackDesc": "Generador de vapor SAWO de alta gama, fabricado para un rendimiento fiable en el uso diario.",
+    "cta": {
+      "title": "¿Necesita ayuda para dimensionar un generador?",
+      "description": "Desde compactas unidades residenciales hasta grandes instalaciones comerciales, nuestro equipo puede ayudarle a encontrar el generador de vapor adecuado para su espacio."
+    }
+  },
+  "controls": {
+    "meta": {
+      "title": "Controles de vapor",
+      "description": "Control de vapor de precisión de SAWO, con las series de controles Saunova e Innova para un funcionamiento sin esfuerzo y una experiencia de sauna personalizada."
+    },
+    "hero": {
+      "title": "Controles de vapor",
+      "description": "Precisión y facilidad: tome el control total de su experiencia de vapor con las series de controles Saunova e Innova de SAWO."
+    },
+    "intro": {
+      "heading": "Presentamos nuestros controles de vapor",
+      "desc": "Disfrute de ajustes de vapor precisos y un funcionamiento sin esfuerzo con las series Saunova e Innova para una experiencia de sauna personalizada."
+    },
+    "loading": "Cargando controles…",
+    "empty": "Todavía no hay controles de vapor disponibles.",
+    "notice": {
+      "tab": "Aviso de precaución",
+      "text": "Solo un electricista cualificado puede realizar las conexiones eléctricas y las reparaciones de la unidad. Utilice únicamente piezas originales."
+    },
+    "cta": {
+      "title": "¿Necesita ayuda para elegir un control?",
+      "description": "Combine el panel de control adecuado con su generador de vapor para lograr un funcionamiento preciso y sin esfuerzo. Nuestro equipo está aquí para ayudarle."
+    }
+  },
+  "accessories": {
+    "meta": {
+      "title": "Accesorios de vapor",
+      "description": "Accesorios de vapor SAWO de alta gama, diseñados para mejorar la funcionalidad y la comodidad y lograr una experiencia de baño de vapor siempre excepcional."
+    },
+    "hero": {
+      "title": "ACCESORIOS DE VAPOR",
+      "subtitle": "Complete su instalación de vapor con accesorios de alta gama"
+    },
+    "intro": {
+      "heading": "Presentamos nuestros accesorios de vapor",
+      "desc": "Mejore su sauna con nuestros accesorios de vapor de alta gama, diseñados para optimizar la comodidad, aumentar la funcionalidad y elevar su experiencia de relajación."
+    },
+    "loading": "Cargando accesorios…",
+    "empty": "Todavía no hay accesorios de vapor disponibles.",
+    "fallbackDesc": "Accesorio de vapor de alta gama para un rendimiento óptimo.",
+    "cta": {
+      "title": "Complete su instalación de vapor",
+      "description": "Desde puertas de vapor hasta bombas de aroma, nuestro equipo puede ayudarle a elegir los accesorios adecuados para terminar su instalación."
+    }
+  }
+}

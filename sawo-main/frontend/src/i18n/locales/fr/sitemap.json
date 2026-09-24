@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "Plan du site",
+    "description": "Un guide complet de toutes les pages et rubriques du site SAWO : poêles de sauna, générateurs de vapeur, cabines de sauna et plus encore."
+  },
+  "title": "Plan du site",
+  "subtitle": "Guide complet de toutes les pages et rubriques du site SAWO.",
+  "productGroups": {
+    "Steam Accessories": "Accessoires vapeur",
+    "Steam Controls": "Commandes vapeur",
+    "Infrared": "Infrarouge",
+    "Sauna Controls": "Commandes de sauna",
+    "Sauna Accessories": "Accessoires de sauna",
+    "Sauna Heaters": "Poêles de sauna",
+    "Other Products": "Autres produits"
+  },
+  "groups": {
+    "productOther": "Autres produits",
+    "mainPages": {
+      "heading": "Pages principales",
+      "home": "Accueil",
+      "about": "À propos",
+      "contact": "Nous contacter",
+      "careers": "Carrières",
+      "privacy": "Politique de confidentialité"
+    },
+    "about": {
+      "heading": "À propos",
+      "news": "Actualités",
+      "sustainability": "Développement durable"
+    },
+    "sauna": {
+      "heading": "Sauna finlandais",
+      "products": "Produits de sauna",
+      "heaters": "Poêles de sauna",
+      "wallMounted": "Poêles muraux",
+      "tower": "Poêles Tower",
+      "stone": "Poêles Pierre",
+      "floor": "Poêles au sol",
+      "combi": "Poêles combinés",
+      "dragonfire": "Poêles Dragonfire",
+      "controls": "Commandes de sauna",
+      "accessories": "Accessoires de sauna",
+      "accessorySets": "Ensembles d'accessoires",
+      "pailsLadles": "Seaux et louches",
+      "thermometers": "Thermomètres et appareils de mesure combinés",
+      "clocksSandtimers": "Horloges et sabliers",
+      "lightsCovers": "Éclairages et caches de sauna",
+      "headrestsBackrests": "Appuie-tête et dossiers",
+      "doorsHandles": "Portes et poignées",
+      "benches": "Bancs et dalles de sol",
+      "kivistone": "Kivistone",
+      "ventilations": "Ventilation et accessoires",
+      "rooms": "Cabines de sauna",
+      "interiorDesigns": "Aménagements intérieurs",
+      "woodPanels": "Panneaux et bois de construction"
+    },
+    "steam": {
+      "heading": "Hammams",
+      "products": "Produits pour hammam",
+      "generators": "Générateurs de vapeur",
+      "controls": "Commandes vapeur",
+      "accessories": "Accessoires vapeur"
+    },
+    "infrared": {
+      "heading": "Sauna infrarouge",
+      "parent": "Infrarouge",
+      "saunas": "Saunas infrarouges",
+      "panels": "Panneaux infrarouges",
+      "controls": "Commandes infrarouges"
+    },
+    "support": {
+      "heading": "Assistance et ressources",
+      "parent": "Centre d'assistance",
+      "faq": "Questions fréquentes",
+      "calculator": "Calculateur de sauna",
+      "manuals": "Manuels d'utilisation",
+      "catalogue": "Catalogue produits"
+    },
+    "catalog": {
+      "heading": "Produits et catalogue",
+      "allProducts": "Tous les produits",
+      "accessoriesCatalog": "Catalogue d'accessoires",
+      "heatersCatalog": "Catalogue de poêles"
+    }
+  },
+  "everyProduct": "Tous les produits",
+  "loadingProducts": "Chargement des produits…",
+  "noProducts": "Aucun produit disponible pour le moment.",
+  "saunaRooms": "Cabines de sauna",
+  "loadingRooms": "Chargement des cabines de sauna…",
+  "noRooms": "Aucune cabine de sauna disponible pour le moment.",
+  "help": {
+    "title": "Besoin d'aide ?",
+    "prefix": "Vous ne trouvez pas ce que vous cherchez ? Consultez notre",
+    "contactLink": "page de contact",
+    "or": "ou notre",
+    "faqLink": "rubrique FAQ"
+  }
+}

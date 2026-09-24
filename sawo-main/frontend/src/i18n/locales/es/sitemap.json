@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "Mapa del sitio",
+    "description": "Una guía completa de todas las páginas y secciones del sitio web de SAWO: estufas de sauna, generadores de vapor, cabinas de sauna y mucho más."
+  },
+  "title": "Mapa del sitio",
+  "subtitle": "Guía completa de todas las páginas y secciones del sitio web de SAWO.",
+  "productGroups": {
+    "Steam Accessories": "Accesorios de vapor",
+    "Steam Controls": "Controles de vapor",
+    "Infrared": "Infrarrojos",
+    "Sauna Controls": "Controles de sauna",
+    "Sauna Accessories": "Accesorios para sauna",
+    "Sauna Heaters": "Estufas de sauna",
+    "Other Products": "Otros productos"
+  },
+  "groups": {
+    "productOther": "Otros productos",
+    "mainPages": {
+      "heading": "Páginas principales",
+      "home": "Inicio",
+      "about": "Sobre nosotros",
+      "contact": "Contacto",
+      "careers": "Empleo",
+      "privacy": "Política de privacidad"
+    },
+    "about": {
+      "heading": "Acerca de",
+      "news": "Últimas noticias",
+      "sustainability": "Sostenibilidad"
+    },
+    "sauna": {
+      "heading": "Sauna finlandesa",
+      "products": "Productos para sauna",
+      "heaters": "Estufas de sauna",
+      "wallMounted": "Estufas de pared",
+      "tower": "Estufas Tower",
+      "stone": "Estufas de piedra",
+      "floor": "Estufas de suelo",
+      "combi": "Estufas combinadas",
+      "dragonfire": "Estufas Dragonfire",
+      "controls": "Controles de sauna",
+      "accessories": "Accesorios para sauna",
+      "accessorySets": "Sets de accesorios",
+      "pailsLadles": "Cubos y cucharones",
+      "thermometers": "Termómetros y medidores combinados",
+      "clocksSandtimers": "Relojes y relojes de arena",
+      "lightsCovers": "Luces y cubiertas para sauna",
+      "headrestsBackrests": "Reposacabezas y respaldos",
+      "doorsHandles": "Puertas y tiradores",
+      "benches": "Bancos y baldosas de suelo",
+      "kivistone": "Kivistone",
+      "ventilations": "Ventilación y complementos",
+      "rooms": "Cabinas de sauna",
+      "interiorDesigns": "Diseños de interior",
+      "woodPanels": "Paneles y maderas"
+    },
+    "steam": {
+      "heading": "Baños de vapor",
+      "products": "Productos para baños de vapor",
+      "generators": "Generadores de vapor",
+      "controls": "Controles de vapor",
+      "accessories": "Accesorios de vapor"
+    },
+    "infrared": {
+      "heading": "Sauna de infrarrojos",
+      "parent": "Infrarrojos",
+      "saunas": "Saunas de infrarrojos",
+      "panels": "Paneles de infrarrojos",
+      "controls": "Controles de infrarrojos"
+    },
+    "support": {
+      "heading": "Soporte y recursos",
+      "parent": "Centro de soporte",
+      "faq": "Preguntas frecuentes",
+      "calculator": "Calculadora de sauna",
+      "manuals": "Manuales de usuario",
+      "catalogue": "Catálogo de productos"
+    },
+    "catalog": {
+      "heading": "Productos y catálogo",
+      "allProducts": "Todos los productos",
+      "accessoriesCatalog": "Catálogo de accesorios",
+      "heatersCatalog": "Catálogo de estufas"
+    }
+  },
+  "everyProduct": "Todos los productos",
+  "loadingProducts": "Cargando productos…",
+  "noProducts": "No hay productos disponibles en este momento.",
+  "saunaRooms": "Cabinas de sauna",
+  "loadingRooms": "Cargando cabinas de sauna…",
+  "noRooms": "No hay cabinas de sauna disponibles en este momento.",
+  "help": {
+    "title": "¿Necesita ayuda?",
+    "prefix": "¿No encuentra lo que busca? Visite nuestra",
+    "contactLink": "página de contacto",
+    "or": "o nuestra",
+    "faqLink": "sección de preguntas frecuentes"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "title": "Sobre nosotros",
+    "description": "Más de 30 años diseñando y fabricando estufas de sauna finlandesas de alta gama, generadores de vapor y cabinas de sauna, con la confianza de clientes en más de 90 países."
+  },
+  "alt": {
+    "office": "Oficina de SAWO",
+    "team": "Equipo de SAWO"
+  },
+  "hero": {
+    "title": "Somos SAWO",
+    "subtitle": "Llevamos la tradición finlandesa a todo el mundo",
+    "desc": "Somos una empresa centrada en el cliente y guiada por la excelencia, que antepone las necesidades de sus clientes en cada paso, desde el diseño de los productos hasta la fabricación y el servicio posventa. Nos enorgullece ofrecer a nuestros clientes únicamente los mejores productos y el mejor servicio."
+  },
+  "innovation": {
+    "titleMain": "Sin fronteras",
+    "titleSub": "La tradición finlandesa, a escala mundial",
+    "p1": "Somos una empresa europea pionera en el sector del sauna, con una planta de fabricación en Asia donde trabajan más de 600 profesionales filipinos y finlandeses comprometidos, y seguimos creciendo. Nuestro éxito se basa en precios competitivos, una calidad de producto excepcional y un servicio al cliente que va siempre un paso más allá.",
+    "p2": "SAWO nace de la fusión de dos palabras: <b>Sa</b>una y <b>Wo</b>rld. Refleja con exactitud lo que somos: un proveedor integral de sauna que cubre todas sus necesidades, desde las estufas hasta los tiradores de puerta y las rejillas de ventilación. Impulsados por la pasión por el sauna y guiados por una cultura empresarial innovadora, nos hemos convertido en uno de los principales fabricantes de productos para sauna del mundo, presentes en más de 90 países y en constante crecimiento. Nuestra oferta abarca desde estufas de sauna, accesorios y unidades de control hasta cabinas de sauna, generadores de vapor y soluciones de infrarrojos.",
+    "p3": "Seguimos ampliando nuestra cartera con productos cuidadosamente diseñados y de alto rendimiento que superan las expectativas de los clientes de todo el mundo. Cada artículo se fabrica bajo dirección finlandesa, lo que garantiza su autenticidad y un profundo respeto por el rico legado de la cultura finlandesa del sauna.",
+    "p4": "Nuestro compromiso con la calidad y la sostenibilidad está respaldado por certificaciones reconocidas internacionalmente. Obtuvimos por primera vez la norma <b>ISO 9001 de gestión de la calidad</b> en 2002 y la <b>ISO 14001 de gestión ambiental</b> en 2007, ambas renovadas en 2025 conforme a las últimas versiones: <b>ISO 9001:2015</b> e <b>ISO 14001:2015</b>. Nuestra certificación <b>PEFC</b> demuestra además nuestro compromiso de abastecernos de bosques gestionados de forma sostenible. Estas certificaciones garantizan que todos nuestros productos cumplen los más altos estándares mundiales de seguridad, calidad y responsabilidad ambiental.",
+    "p5": "Como orgullosos embajadores de la cultura finlandesa del sauna, también somos miembros de <b>Sauna from Finland</b>, una asociación dedicada a promover la auténtica experiencia del sauna finlandés en todo el mundo.",
+    "stats": {
+      "establishedLabel": "Excelencia consolidada",
+      "establishedValue": "30+",
+      "establishedSuffix": "años",
+      "reachLabel": "Alcance global",
+      "reachValue": "90+",
+      "reachSuffix": "países en todo el mundo"
+    },
+    "exploreBtn": "Descubra nuestros productos"
+  },
+  "certs": {
+    "iso9001": {
+      "caption": "ISO 9001",
+      "label": "Gestión de la calidad"
+    },
+    "iso14001": {
+      "caption": "ISO 14001",
+      "label": "Gestión ambiental"
+    },
+    "saunaFromFinland": {
+      "caption": "Sauna from Finland",
+      "label": "Miembro oficial"
+    },
+    "pefc": {
+      "caption": "Promovemos la silvicultura sostenible",
+      "label": "www.pefc.org"
+    }
+  },
+  "news": {
+    "title": "Últimas noticias",
+    "seeMore": "VER MÁS",
+    "card1": {
+      "alt": "Ferias recientes",
+      "label": "Ferias",
+      "title": "Ferias recientes",
+      "desc": "Este otoño participamos en dos de las principales ferias europeas del bienestar: Aquanale, en Colonia, y Piscina Barcelona. Fue un placer conectar con líderes del sector y dar a conocer la tradición y el bienestar finlandeses."
+    },
+    "card2": {
+      "alt": "Ayuda tras el terremoto",
+      "label": "Comunidad",
+      "title": "Ayuda tras el terremoto en Cebú",
+      "desc": "Cuando un terremoto de magnitud 6,9 sacudió la costa noreste de Cebú, nuestro equipo organizó una campaña de ayuda en toda la empresa y entregó colchones, alimentos, productos de higiene y artículos de primera necesidad a las familias afectadas."
+    },
+    "card3": {
+      "alt": "Búsqueda de talento",
+      "label": "Empleo",
+      "title": "Búsqueda de talento",
+      "desc": "¿Es hora de un cambio? Buscamos personas con experiencia o interés en el sector del sauna y el bienestar, y con ganas de crecer con nosotros en Cebú."
+    }
+  }
+}

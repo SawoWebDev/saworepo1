@@ -1,1 +1,86 @@
-{}
+{
+  "exploreMore": "En savoir plus",
+  "inquireToday": "DEMANDER UN DEVIS",
+  "viewCatalogue": "VOIR LE CATALOGUE",
+  "viewBrochure": "VOIR LA BROCHURE",
+  "previous": "Précédent",
+  "next": "Suivant",
+  "pageCTA": {
+    "defaultTitle": "Besoin d'aide pour choisir ?",
+    "defaultDescription": "Notre équipe vous aide à trouver la configuration SAWO adaptée à votre maison ou à votre espace professionnel.",
+    "contactUs": "Nous contacter",
+    "viewManuals": "Voir les manuels"
+  },
+  "saunaCalculatorCTA": {
+    "title": "Trouvez le sauna de vos rêves",
+    "subtitle": "Saisissez la largeur, la hauteur et la profondeur de votre cabine : notre calculateur détermine aussitôt le volume du sauna et recommande la puissance de poêle adaptée, en kW.",
+    "buttonLabel": "Calculateur de sauna"
+  },
+  "catalogFilter": {
+    "all": "Tous",
+    "searchPlaceholder": "Rechercher : {{category}}…",
+    "clearSearch": "Effacer la recherche",
+    "noProductsYet": "Aucun produit disponible pour le moment.",
+    "noMatch": "Aucun résultat pour « {{query}} » dans {{category}}",
+    "noResultsFor": "Aucun résultat pour « {{query}} »",
+    "resultsCount_one": "{{count}} résultat pour « {{query}} »",
+    "resultsCount_other": "{{count}} résultats pour « {{query}} »"
+  },
+  "wellnessBenefits": {
+    "stressRelief": {
+      "label": "Anti-stress",
+      "desc": "Réduit le stress, favorise la détente et atténue l'anxiété"
+    },
+    "heartHealth": {
+      "label": "Santé du cœur",
+      "desc": "Améliore la circulation sanguine, réduit la rigidité artérielle et contribue à une tension artérielle saine"
+    },
+    "respiratoryRelief": {
+      "label": "Confort respiratoire",
+      "desc": "Soulage la congestion nasale, sinusienne et bronchique"
+    },
+    "muscleRecovery": {
+      "label": "Récupération musculaire",
+      "desc": "Accélère la récupération musculaire après l'effort"
+    },
+    "betterSleep": {
+      "label": "Meilleur sommeil",
+      "desc": "Favorise un sommeil plus profond et plus réparateur en prolongeant la phase de sommeil paradoxal"
+    },
+    "diseasePrevention": {
+      "label": "Prévention des maladies",
+      "desc": "Réduit le risque de maladies cardiovasculaires, notamment l'AVC, l'hypertension, la démence et la maladie d'Alzheimer"
+    },
+    "skinDetox": {
+      "label": "Détox de la peau",
+      "desc": "Ouvre les pores, réduit les points noirs, élimine les toxines et améliore l'aspect de la peau"
+    },
+    "collagenBoost": {
+      "label": "Stimulation du collagène",
+      "desc": "Stimule l'activité des fibroblastes pour favoriser la production de collagène et améliorer la texture de la peau"
+    },
+    "skinHydration": {
+      "label": "Hydratation de la peau",
+      "desc": "Améliore l'hydratation de la peau, stabilise l'équilibre du pH et renforce la barrière cutanée naturelle"
+    },
+    "immuneSupport": {
+      "label": "Soutien immunitaire",
+      "desc": "Soutient les défenses immunitaires naturelles de l'organisme et favorise la convalescence après une maladie"
+    },
+    "metabolismBoost": {
+      "label": "Métabolisme stimulé",
+      "desc": "Stimule la réparation des protéines, améliore la sensibilité à l'insuline et accélère le métabolisme"
+    },
+    "mentalWellness": {
+      "label": "Bien-être mental",
+      "desc": "Réduit nettement les symptômes de la dépression lorsqu'il est pratiqué régulièrement"
+    }
+  },
+  "accessoryCard": {
+    "bestSeller": "Meilleure vente",
+    "close": "Fermer",
+    "watchVideo": "Regarder la vidéo",
+    "code": "Référence",
+    "option": "Option"
+  }
+}

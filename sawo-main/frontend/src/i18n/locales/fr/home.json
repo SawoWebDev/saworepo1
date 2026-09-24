@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "SAWO : poêles de sauna finlandais haut de gamme, générateurs de vapeur et cabines de sauna",
+    "description": "SAWO : poêles de sauna finlandais haut de gamme, générateurs de vapeur, cabines de sauna, solutions infrarouges et accessoires. Présent dans plus de 90 pays."
+  },
+  "hero": {
+    "experience": "Vivez . . .",
+    "sentences": [
+      "une évasion ressourçante",
+      "le bien-être empreint de tradition ancestrale",
+      "un authentique sauna finlandais"
+    ],
+    "alt": "Poêles de sauna SAWO : vivez le bien-être et le ressourcement",
+    "seoKeywords": "poêles de sauna SAWO, sauna finlandais, accessoires de sauna, sauna infrarouge, générateur de vapeur"
+  },
+  "section1": {
+    "heading": "Plongez dans notre univers du sauna",
+    "carouselLabel": "Carrousel des produits de sauna SAWO",
+    "items": {
+      "heaters": {
+        "title": "POÊLES DE SAUNA",
+        "caption": "Ressourcez-vous dans la chaleur d'un sauna finlandais traditionnel grâce aux poêles haut de gamme SAWO.",
+        "alt": "Collection de poêles de sauna finlandais SAWO pour un chauffage de sauna efficace"
+      },
+      "steamGenerators": {
+        "title": "GÉNÉRATEURS DE VAPEUR",
+        "caption": "Soulagez stress et tensions grâce à une vapeur bienfaisante produite par les générateurs SAWO.",
+        "alt": "Générateur de vapeur SAWO pour hammams et spas modernes"
+      },
+      "rooms": {
+        "title": "CABINES DE SAUNA",
+        "caption": "Détendez-vous, détoxifiez-vous et ressourcez-vous dans une cabine de sauna au design authentique et à la chaleur thérapeutique.",
+        "alt": "Cabine de sauna finlandaise standard SAWO au design en bois naturel"
+      },
+      "infrared": {
+        "title": "SAUNA INFRAROUGE",
+        "caption": "Découvrez une relaxation profonde grâce à la technologie avancée du sauna infrarouge.",
+        "alt": "Sauna infrarouge à l'intérieur en cèdre signé SAWO"
+      },
+      "accessories": {
+        "title": "ACCESSOIRES DE SAUNA",
+        "caption": "Sublimez votre sauna avec les accessoires SAWO, pensés dans les moindres détails.",
+        "alt": "Collection d'accessoires de sauna SAWO : seaux, louches et thermomètres"
+      },
+      "controls": {
+        "title": "COMMANDES DE SAUNA",
+        "caption": "Un contrôle précis de la température et de la durée pour un confort total.",
+        "alt": "Système de commande de sauna SAWO pour un confort optimal"
+      }
+    }
+  },
+  "section2": {
+    "heading": "POÊLES DE SAUNA",
+    "items": {
+      "tower": {
+        "title": "TOWER",
+        "caption": "Hauteur et efficacité énergétique dans un design épuré et élégant. Une chaleur régulière, du bas au haut du sauna, pour une détente et un bien-être optimaux.",
+        "alt": "Série de poêles de sauna SAWO Tower au design vertical élégant"
+      },
+      "wallMounted": {
+        "title": "MURAUX",
+        "caption": "Poêles de sauna muraux peu encombrants et économes en énergie, qui produisent une chaleur régulière et puissante. Un design moderne et épuré et un confort supérieur pour l'expérience de sauna ultime.",
+        "alt": "Série de poêles de sauna muraux SAWO pour cabines de sauna compactes"
+      },
+      "floor": {
+        "title": "AU SOL",
+        "caption": "Poêles autonomes haut de gamme, très puissants, qui offrent l'alliance imbattable de l'efficacité énergétique et d'un design élégant. Idéaux pour un usage commercial.",
+        "alt": "Série de poêles de sauna au sol SAWO pour saunas commerciaux"
+      },
+      "combi": {
+        "title": "COMBI",
+        "caption": "La polyvalence dans un seul appareil moderne et économe en énergie. Vapeur et chaleur combinées pour un confort, un bien-être et une détente sur mesure.",
+        "alt": "Série de poêles de sauna SAWO Combi associant vapeur et chaleur"
+      },
+      "stone": {
+        "title": "PIERRE",
+        "caption": "Le poêle idéal pour tous les types de sauna : durabilité de l'acier inoxydable, conduction de chaleur supérieure de la stéatite finlandaise et esthétique épurée.",
+        "alt": "Série de poêles de sauna SAWO Pierre en acier inoxydable et stéatite"
+      },
+      "dragonfire": {
+        "title": "DRAGONFIRE",
+        "caption": "Un mélange de flair artistique et de technologie de pointe, conçu par le designer industriel et d'intérieur Stefan Lindfors.",
+        "alt": "Série de poêles de sauna SAWO Dragonfire au design artistique signé Stefan Lindfors"
+      }
+    }
+  },
+  "section3": {
+    "steamHeading": "VAPEUR",
+    "saunaRoomsHeading": "CABINES DE SAUNA",
+    "infraredHeading": "INFRAROUGE",
+    "saunaControlHeading": "COMMANDES DE SAUNA",
+    "steam": {
+      "generators": {
+        "title": "Générateurs de vapeur",
+        "caption": "Le luxe d'une vapeur sur mesure grâce à des générateurs de vapeur avancés, pour une expérience digne d'un spa. Réglages personnalisés et performances exceptionnelles."
+      },
+      "controls": {
+        "title": "Commandes vapeur",
+        "caption": "Précision, simplicité et personnalisation : réglages de vapeur précis, fonctionnement sans effort et expérience de sauna personnalisée avec nos séries de commandes Saunova et Innova."
+      },
+      "accessories": {
+        "title": "Accessoires vapeur",
+        "caption": "Des accessoires haut de gamme conçus pour améliorer la fonctionnalité et maximiser le confort. Une expérience de bien-être et de détente toujours extraordinaire."
+      }
+    },
+    "rooms": {
+      "standard": {
+        "title": "Sauna standard",
+        "caption": "Un design intemporel et des matériaux de grande qualité. L'expérience classique du sauna d'intérieur pour toute maison ou tout espace bien-être."
+      },
+      "glassFront": {
+        "title": "Sauna à façade vitrée",
+        "caption": "Sérénité et détente à l'état pur. Un design moderne avec des panneaux en verre trempé transparent pour une vue dégagée sur l'extérieur."
+      },
+      "compact": {
+        "title": "Sauna compact",
+        "caption": "Un design prêt à brancher, pensé pour les espaces urbains. Un poêle caché garantit la sécurité de l'installation tout en maximisant votre vue."
+      }
+    },
+    "infrared": {
+      "rooms": {
+        "title": "Cabines de sauna infrarouge",
+        "caption": "Profitez d'une chaleur infrarouge douce et apaisante dans un espace de sauna confortable et compact, conçu pour une expérience relaxante et régénérante."
+      },
+      "panels": {
+        "title": "Panneaux infrarouges",
+        "caption": "Conçus pour diffuser une chaleur infrarouge douce et directe, ces panneaux créent une expérience de sauna confortable et relaxante."
+      },
+      "controls": {
+        "title": "Commandes infrarouges",
+        "caption": "Des commandes simples d'utilisation pour gérer votre expérience de sauna infrarouge grâce à des réglages pratiques de la température et de la durée de séance."
+      }
+    },
+    "controls": {
+      "saunova": {
+        "title": "Série Saunova"
+      },
+      "innova": {
+        "title": "Série Innova"
+      },
+      "accessories": {
+        "title": "Accessoires de commande"
+      }
+    }
+  },
+  "section4": {
+    "heading": "ACCESSOIRES DE SAUNA",
+    "items": {
+      "pailsLadles": {
+        "title": "SEAUX et LOUCHES",
+        "alt": "Seaux et louches de sauna"
+      },
+      "thermometers": {
+        "title": "THERMOMÈTRES et APPAREILS DE MESURE COMBINÉS",
+        "alt": "Thermomètres et appareils de mesure combinés pour sauna"
+      },
+      "clocksSandtimers": {
+        "title": "HORLOGES et SABLIERS",
+        "alt": "Horloges et sabliers de sauna"
+      },
+      "lightsCovers": {
+        "title": "ÉCLAIRAGES et CACHES DE SAUNA",
+        "alt": "Caches de luminaires de sauna"
+      },
+      "headrestsBackrests": {
+        "title": "APPUIE-TÊTE et DOSSIERS",
+        "alt": "Appuie-tête et dossiers de sauna"
+      },
+      "doorsHandles": {
+        "title": "PORTES et POIGNÉES",
+        "alt": "Portes et poignées de sauna"
+      },
+      "benches": {
+        "title": "BANCS et DALLES DE SOL",
+        "alt": "Bancs et dalles de sol de sauna"
+      },
+      "kivistone": {
+        "title": "KIVISTONE",
+        "alt": "Pierres de sauna Kivistone"
+      },
+      "ventilations": {
+        "title": "VENTILATION et ACCESSOIRES",
+        "alt": "Ventilation et accessoires de sauna"
+      }
+    }
+  },
+  "section5": {
+    "heading": "Des solutions sur mesure",
+    "subtitle": "Donnons vie à votre projet de sauna.",
+    "body1": "Nous concevons des solutions de sauna adaptées à votre style et à votre espace. Pour la maison comme pour l'entreprise, nous vous accompagnons de la conception à l'installation, jusqu'à l'assistance technique.",
+    "body2": "Appelez-nous ou écrivez-nous.",
+    "altRight": "Solutions de sauna sur mesure",
+    "altLeft": "Maintenance préventive"
+  }
+}

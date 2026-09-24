@@ -1,0 +1,51 @@
+{
+  "headings": {
+    "finnishSauna": "SAUNA FINLANDAIS",
+    "steamRoom": "HAMMAM",
+    "infraredSauna": "SAUNA INFRAROUGE",
+    "followUs": "Suivez-nous",
+    "support": "ASSISTANCE",
+    "download": "TÉLÉCHARGEMENTS",
+    "technicalSupport": "ASSISTANCE TECHNIQUE",
+    "offices": "BUREAUX"
+  },
+  "links": {
+    "saunaHeaters": "Poêles de sauna",
+    "saunaControls": "Commandes de sauna",
+    "saunaAccessories": "Accessoires de sauna",
+    "saunaRooms": "Cabines de sauna",
+    "steamGenerators": "Générateurs de vapeur",
+    "steamControls": "Commandes vapeur",
+    "steamAccessories": "Accessoires vapeur",
+    "infraredSaunas": "Saunas infrarouges",
+    "infraredPanels": "Panneaux infrarouges",
+    "infraredControls": "Commandes infrarouges",
+    "faq": "Questions fréquentes",
+    "aboutUs": "À propos",
+    "contactUs": "Nous contacter",
+    "careers": "Carrières",
+    "privacyPolicy": "Politique de confidentialité",
+    "sitemap": "Plan du site",
+    "productCatalogue": "Catalogue produits",
+    "userManuals": "Manuels d'utilisation"
+  },
+  "technicalSupportIntro": "Pour toute assistance technique ou réclamation, veuillez contacter :",
+  "whatsapp": "WhatsApp",
+  "tel": "Tél.",
+  "offices": {
+    "global": "VENTES MONDIALES ET RENSEIGNEMENTS GÉNÉRAUX",
+    "nordics": "VENTES ET ENTREPÔT POUR LES PAYS NORDIQUES",
+    "asia": "VENTES ET ENTREPÔT POUR L'ASIE",
+    "europe": "VENTES ET ENTREPÔT POUR L'EUROPE"
+  },
+  "copyright": "© {{year}} Tous droits réservés. · SAWO",
+  "social": {
+    "facebook": "SAWO sur Facebook",
+    "instagram": "SAWO sur Instagram",
+    "linkedin": "SAWO sur LinkedIn",
+    "youtube": "SAWO sur YouTube",
+    "tiktok": "SAWO sur TikTok",
+    "email": "Écrire à l'assistance SAWO",
+    "phone": "Appeler SAWO"
+  }
+}

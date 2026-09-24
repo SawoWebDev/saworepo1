@@ -1,0 +1,56 @@
+{
+  "home": "Accueil",
+  "products": "Produits",
+  "support": "Assistance",
+  "aboutUs": "À propos",
+  "contactUs": "Nous contacter",
+  "search": "Rechercher",
+  "openMenu": "Ouvrir le menu",
+  "closeMenu": "Fermer le menu",
+  "collapse": "Réduire",
+  "expand": "Développer",
+  "searchBox": {
+    "placeholder": "Rechercher…",
+    "searching": "Recherche en cours…",
+    "noResults": "Aucun résultat trouvé",
+    "pages": "Pages",
+    "products": "Produits"
+  },
+  "groups": {
+    "sauna": "Sauna",
+    "steam": "Vapeur",
+    "infrared": "Infrarouge"
+  },
+  "items": {
+    "wallMounted": "Muraux",
+    "tower": "Tour",
+    "stone": "Pierre",
+    "floor": "Au sol",
+    "combi": "Combi",
+    "dragonfire": "Dragonfire",
+    "saunaHeaters": "Poêles de sauna",
+    "saunaControls": "Commandes de sauna",
+    "saunaAccessories": "Accessoires de sauna",
+    "saunaRooms": "Cabines de sauna",
+    "interiorDesigns": "Aménagements intérieurs",
+    "woodPanels": "Panneaux et bois de construction",
+    "steamGenerators": "Générateurs de vapeur",
+    "steamControls": "Commandes vapeur",
+    "steamAccessories": "Accessoires vapeur",
+    "infrared": "Infrarouge",
+    "faq": "Questions fréquentes",
+    "saunaCalculator": "Calculateur de sauna",
+    "userManuals": "Manuels d'utilisation",
+    "productCatalogue": "Catalogue produits",
+    "latestNews": "Actualités",
+    "sustainability": "Développement durable",
+    "careers": "Carrières",
+    "infraredSaunaRooms": "Saunas infrarouges",
+    "infraredPanels": "Panneaux infrarouges",
+    "infraredControls": "Commandes infrarouges"
+  },
+  "language": {
+    "label": "Langue",
+    "switchTo": "Changer de langue"
+  }
+}

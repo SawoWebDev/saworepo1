@@ -1,0 +1,111 @@
+{
+  "sections": {
+    "resources": "เอกสารและทรัพยากร",
+    "features": "คุณสมบัติเด่น",
+    "diagram": "แผนภาพ",
+    "specifications": "ข้อมูลจำเพาะ",
+    "technicalData": "ข้อมูลทางเทคนิค",
+    "infraredSpecifications": "ข้อมูลจำเพาะอินฟราเรด",
+    "includedInPackage": "รายการในชุดผลิตภัณฑ์",
+    "doorPositions": "ตำแหน่งประตูที่มีให้เลือก",
+    "floorPlan": "ผังพื้น",
+    "benchConfiguration": "การจัดวางม้านั่ง",
+    "details": "รายละเอียด",
+    "description": "คำอธิบาย"
+  },
+  "noResourcesAvailable": "ไม่มีเอกสารให้ดาวน์โหลด",
+  "moreDetailsSoon": "รายละเอียดเพิ่มเติมเร็ว ๆ นี้",
+  "notFound": {
+    "title": "ไม่พบผลิตภัณฑ์",
+    "description": "ไม่มีผลิตภัณฑ์นี้หรือยังไม่ได้เผยแพร่",
+    "browseProducts": "ดูผลิตภัณฑ์",
+    "home": "หน้าแรก",
+    "roomTitle": "ไม่พบห้องซาวน่า",
+    "roomDescription": "ไม่มีห้องซาวน่านี้หรือยังไม่ได้เผยแพร่",
+    "browseRooms": "ดูห้องซาวน่า"
+  },
+  "related": {
+    "youMightAlsoLike": "คุณอาจสนใจสิ่งเหล่านี้ด้วย",
+    "relatedProducts": "ผลิตภัณฑ์ที่เกี่ยวข้อง",
+    "relatedRooms": "ห้องซาวน่าที่เกี่ยวข้อง",
+    "saunaAccessories": "อุปกรณ์เสริมซาวน่า",
+    "otherHeaters": "ฮีตเตอร์รุ่นอื่น",
+    "moreTypeRooms": "ห้องซาวน่า{{type}}เพิ่มเติม"
+  },
+  "roomTypes": {
+    "traditional": "แบบดั้งเดิม",
+    "standard": "มาตรฐาน",
+    "infrared": "อินฟราเรด",
+    "steam": "ไอน้ำ",
+    "combo": "คอมโบ",
+    "glassfront": "หน้ากระจก",
+    "compact": "กะทัดรัด"
+  },
+  "sizeLabels": {
+    "compact": "กะทัดรัด · 1–2 คน",
+    "small": "เล็ก · 2–3 คน",
+    "medium": "กลาง · 3–4 คน",
+    "large": "ใหญ่ · 4–6 คน",
+    "xl": "XL · 6 คนขึ้นไป",
+    "commercial": "เชิงพาณิชย์"
+  },
+  "badges": {
+    "featured": "แนะนำ",
+    "bestSeller": "ขายดี"
+  },
+  "modelCode": "รุ่น {{code}}",
+  "skuCode": "SKU {{sku}}",
+  "roomDisplayName": "ห้องซาวน่า{{type}} {{code}}",
+  "seoFallbackDescription": "{{name}} โดย SAWO ห้องซาวน่าฟินแลนด์คุณภาพพรีเมียม",
+  "stats": {
+    "capacity": "ความจุ",
+    "floorSize": "ขนาดพื้นที่",
+    "height": "ความสูง",
+    "woodType": "ชนิดไม้",
+    "voltage": "แรงดันไฟฟ้า",
+    "panelWattage": "กำลังไฟของแผง",
+    "totalPower": "กำลังไฟรวม",
+    "sessionTime": "ระยะเวลาการใช้งาน"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · คลิกเพื่อเปิด",
+    "documentsCount": "{{count}} เอกสาร",
+    "clickToExpand": "คลิกเพื่อขยาย",
+    "clickToCollapse": "คลิกเพื่อย่อ"
+  },
+  "featureTabs": {
+    "tabFallback": "แท็บ {{number}}"
+  },
+  "seoFallbackProductDescription": "{{name}} โดย SAWO อุปกรณ์ซาวน่าฟินแลนด์คุณภาพพรีเมียม",
+  "specLabels": {
+    "size": "ขนาด",
+    "capacity": "ความจุ",
+    "openingSize": "ขนาดช่องเปิด",
+    "frameSize": "ขนาดวงกบ",
+    "weight": "น้ำหนัก",
+    "productCode": "รหัสผลิตภัณฑ์",
+    "setCodes": "รหัสชุด",
+    "ductingHole": "รูต่อท่อ",
+    "includes": "รวมอยู่ในชุด",
+    "thickness": "ความหนา",
+    "use": "การใช้งาน",
+    "material": "วัสดุ",
+    "code": "รหัส"
+  },
+  "tableCells": {
+    "separate": "แบบแยก",
+    "builtIn": "แบบบิวท์อิน",
+    "maxSessionTime": "ระยะเวลาสูงสุดต่อครั้ง",
+    "technicalDetails": "รายละเอียดทางเทคนิค",
+    "productDimensions": "ขนาดผลิตภัณฑ์",
+    "switchingCapacityPerPhase": "ความสามารถในการสวิตช์ต่อเฟส",
+    "frequency": "ความถี่",
+    "temperatureRange": "ช่วงอุณหภูมิ",
+    "ratedVoltage": "แรงดันไฟฟ้าพิกัด",
+    "suitableHeaters": "ฮีตเตอร์ที่ใช้ได้",
+    "benchCombinedSensor": "เซนเซอร์อุณหภูมิและความชื้นรวมที่ม้านั่ง",
+    "benchTemperatureSensor": "เซนเซอร์อุณหภูมิที่ม้านั่ง",
+    "fan": "พัดลม",
+    "rating": "กำลังไฟพิกัด"
+  }
+}

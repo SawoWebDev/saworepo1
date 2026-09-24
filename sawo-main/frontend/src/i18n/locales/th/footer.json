@@ -1,0 +1,51 @@
+{
+  "headings": {
+    "finnishSauna": "ซาวน่าฟินแลนด์",
+    "steamRoom": "ห้องอบไอน้ำ",
+    "infraredSauna": "ซาวน่าอินฟราเรด",
+    "followUs": "ติดตามเรา",
+    "support": "บริการช่วยเหลือ",
+    "download": "ดาวน์โหลด",
+    "technicalSupport": "บริการทางเทคนิค",
+    "offices": "สำนักงาน"
+  },
+  "links": {
+    "saunaHeaters": "ฮีตเตอร์ซาวน่า",
+    "saunaControls": "ชุดควบคุมซาวน่า",
+    "saunaAccessories": "อุปกรณ์เสริมซาวน่า",
+    "saunaRooms": "ห้องซาวน่า",
+    "steamGenerators": "เครื่องกำเนิดไอน้ำ",
+    "steamControls": "ชุดควบคุมไอน้ำ",
+    "steamAccessories": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ",
+    "infraredSaunas": "ห้องซาวน่าอินฟราเรด",
+    "infraredPanels": "แผงอินฟราเรด",
+    "infraredControls": "ชุดควบคุมอินฟราเรด",
+    "faq": "คำถามที่พบบ่อย",
+    "aboutUs": "เกี่ยวกับเรา",
+    "contactUs": "ติดต่อเรา",
+    "careers": "ร่วมงานกับเรา",
+    "privacyPolicy": "นโยบายความเป็นส่วนตัว",
+    "sitemap": "แผนผังเว็บไซต์",
+    "productCatalogue": "แคตตาล็อกผลิตภัณฑ์",
+    "userManuals": "คู่มือการใช้งาน"
+  },
+  "technicalSupportIntro": "สำหรับบริการทางเทคนิคและการเคลมสินค้า กรุณาติดต่อ:",
+  "whatsapp": "WhatsApp",
+  "tel": "โทร.",
+  "offices": {
+    "global": "ฝ่ายขายทั่วโลกและสอบถามข้อมูลทั่วไป",
+    "nordics": "ฝ่ายขายและคลังสินค้าสำหรับกลุ่มประเทศนอร์ดิก",
+    "asia": "ฝ่ายขายและคลังสินค้าสำหรับเอเชีย",
+    "europe": "ฝ่ายขายและคลังสินค้าสำหรับยุโรป"
+  },
+  "copyright": "© {{year}} สงวนลิขสิทธิ์ · SAWO",
+  "social": {
+    "facebook": "SAWO บน Facebook",
+    "instagram": "SAWO บน Instagram",
+    "linkedin": "SAWO บน LinkedIn",
+    "youtube": "SAWO บน YouTube",
+    "tiktok": "SAWO บน TikTok",
+    "email": "ส่งอีเมลถึงฝ่ายบริการ SAWO",
+    "phone": "โทรหา SAWO"
+  }
+}
