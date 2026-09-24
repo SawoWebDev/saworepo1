@@ -67,7 +67,7 @@
   },
   "hiring": {
     "titlePrefix": "Wir",
-    "titleHighlight": "Stellen Ein!",
+    "titleHighlight": "suchen Verstärkung!",
     "desc": "Werden Sie Teil eines Branchenführers, der finnisches Fachwissen mit erstklassiger Handwerkskunst verbindet.",
     "emailPrefix": "Senden Sie Ihren Lebenslauf an:",
     "locationLabel": "Standort: SAWO Inc.",
@@ -98,8 +98,8 @@
   },
   "whySawo": {
     "imgAlt": "SAWO Fertigung",
-    "titlePrefix": "Warum Bei",
-    "titleHighlight": "SAWO Arbeiten",
+    "titlePrefix": "Warum bei",
+    "titleHighlight": "SAWO arbeiten",
     "innovative": {
       "title": "Innovativ & Kundenorientiert",
       "prefix": "Werden Sie Teil eines Unternehmens, das",
@@ -117,7 +117,7 @@
       "highlight": "Schulungen, Weiterbildung und Karriereförderung"
     },
     "excellence": {
-      "title": "Engagement Für Exzellenz",
+      "title": "Engagement für höchste Qualität",
       "prefix": "SAWO ist",
       "highlight": "ISO 9001- und ISO 14001-zertifiziert",
       "suffix": " – für einen Arbeitsplatz mit Fokus auf Qualität und Nachhaltigkeit."

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Über Uns",
-    "description": "Seit über 30 Jahren entwerfen und fertigen wir hochwertige finnische Saunaöfen, Dampferzeuger und Saunaräume – vertraut von Kunden in mehr als 90 Ländern."
+    "description": "Seit über 30 Jahren entwerfen und fertigen wir hochwertige finnische Saunaöfen, Dampferzeuger und Saunaräume – Kunden in mehr als 90 Ländern vertrauen uns."
   },
   "alt": {
     "office": "SAWO Büro",
@@ -10,25 +10,25 @@
   "hero": {
     "title": "Wir sind SAWO",
     "subtitle": "Finnische Tradition für die Welt",
-    "desc": "Wir sind ein kundenorientiertes, exzellenzgetriebenes Unternehmen, das bei jedem Schritt – vom Produktdesign über die Fertigung bis zum Kundendienst – die Bedürfnisse unserer Kunden konsequent in den Mittelpunkt stellt. Wir sind stolz darauf, unseren geschätzten Kunden ausschließlich erstklassige Produkte und den besten Service zu bieten."
+    "desc": "Wir sind ein kundenorientiertes Unternehmen mit hohem Qualitätsanspruch. Vom Produktdesign über die Fertigung bis zum Kundendienst stellen wir die Bedürfnisse unserer Kunden in den Mittelpunkt. Wir sind stolz darauf, unseren Kunden nur erstklassige Produkte und besten Service zu bieten."
   },
   "innovation": {
     "titleMain": "Ohne Grenzen",
     "titleSub": "Finnische Tradition, weltweit zuhause",
     "p1": "Wir sind ein wegweisendes europäisches Saunaunternehmen mit einem Fertigungsstandort in Asien – Heimat von über 600 engagierten philippinischen und finnischen Fachkräften, Tendenz steigend. Unser Erfolg beruht auf wettbewerbsfähigen Preisen, außergewöhnlicher Produktqualität und einem Kundenservice, der weit über das Übliche hinausgeht.",
-    "p2": "SAWO entstand aus der Verschmelzung der beiden Wörter <b>Sa</b>una und <b>Wo</b>rld (Welt). Das spiegelt uns treffend als umfassenden Sauna-Anbieter wider, der alle Ihre Saunabedürfnisse erfüllt – von Öfen bis hin zu Türgriffen und Lüftungslamellen. Angetrieben von unserer Leidenschaft für die Sauna und geleitet von einer innovativen Unternehmenskultur sind wir zu einem der weltweit führenden Hersteller von Saunaprodukten geworden und beliefern mittlerweile über 90 Länder weltweit, Tendenz steigend. Unser Angebot reicht von Saunaöfen, Zubehör und Steuerungen bis hin zu Saunaräumen, Dampferzeugern und Infrarotlösungen.",
+    "p2": "SAWO entstand aus der Verschmelzung der beiden Wörter <b>Sa</b>una und <b>Wo</b>rld (Welt). Das beschreibt uns treffend: Wir sind ein Komplettanbieter rund um die Sauna und liefern alles, vom Ofen über Türgriffe bis zu Lüftungslamellen. Angetrieben von unserer Leidenschaft für die Sauna und geleitet von einer innovativen Unternehmenskultur sind wir zu einem der weltweit führenden Hersteller von Saunaprodukten geworden und beliefern heute über 90 Länder – Tendenz steigend. Unser Angebot reicht von Saunaöfen, Zubehör und Steuerungen bis hin zu Saunaräumen, Dampferzeugern und Infrarotlösungen.",
     "p3": "Wir erweitern unser Portfolio kontinuierlich um durchdacht gestaltete, leistungsstarke Produkte, die die Erwartungen unserer Kunden weltweit übertreffen. Jedes Produkt wird unter finnischer Leitung gefertigt, um Authentizität und einen tiefen Respekt vor dem reichen Erbe der finnischen Saunakultur zu gewährleisten.",
     "p4": "Unser Engagement für Qualität und Nachhaltigkeit wird durch international anerkannte Zertifizierungen bestätigt. Wir erhielten erstmals 2002 die Zertifizierung <b>ISO 9001 für Qualitätsmanagement</b> und 2007 <b>ISO 14001 für Umweltmanagement</b>, beide wurden 2025 nach den neuesten Standards <b>ISO 9001:2015</b> und <b>ISO 14001:2015</b> erneuert. Unsere <b>PEFC</b>-Zertifizierung unterstreicht zudem unser Engagement, Holz aus nachhaltig bewirtschafteten Wäldern zu beziehen. Diese Zertifizierungen garantieren, dass jedes einzelne Produkt die höchsten globalen Maßstäbe für Sicherheit, Qualität und ökologische Verantwortung erfüllt.",
     "p5": "Als stolze Botschafter der finnischen Saunakultur sind wir zudem Mitglied von <b>Sauna from Finland</b>, einem Verband, der sich der Förderung des authentischen finnischen Saunaerlebnisses weltweit widmet.",
     "stats": {
-      "establishedLabel": "Etablierte Exzellenz",
+      "establishedLabel": "Bewährte Qualität",
       "establishedValue": "30+",
       "establishedSuffix": "Jahre",
       "reachLabel": "Globale Präsenz",
       "reachValue": "90+",
       "reachSuffix": "Länder weltweit"
     },
-    "exploreBtn": "Unsere Produkte Entdecken"
+    "exploreBtn": "Unsere Produkte entdecken"
   },
   "certs": {
     "iso9001": {
@@ -44,7 +44,7 @@
       "label": "Offizielles Mitglied"
     },
     "pefc": {
-      "caption": "Wir Fördern Nachhaltige Forstwirtschaft",
+      "caption": "Wir fördern nachhaltige Forstwirtschaft",
       "label": "www.pefc.org"
     }
   },

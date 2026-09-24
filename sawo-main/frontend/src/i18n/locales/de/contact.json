@@ -14,17 +14,17 @@
   "steps": {
     "1": "Ihre Anfrage",
     "2": "Über Sie",
-    "3": "Details Zur Anfrage"
+    "3": "Details zur Anfrage"
   },
   "submittingOverlay": {
     "title": "Ihre Anfrage wird gesendet…",
     "sub": "Dies kann einige Sekunden dauern. Bitte schließen Sie diese Seite nicht und laden Sie sie nicht neu."
   },
   "success": {
-    "title": "Anfrage Übermittelt",
+    "title": "Anfrage übermittelt",
     "message": "Vielen Dank für Ihre Kontaktaufnahme. Wir haben Ihre Anfrage erhalten und unser Team wird sich in Kürze bei Ihnen melden.",
-    "another": "Weitere Anfrage Senden",
-    "backHome": "Zurück Zur Startseite"
+    "another": "Weitere Anfrage senden",
+    "backHome": "Zurück zur Startseite"
   },
   "categories": {
     "technical": "Technischer Support",
@@ -48,7 +48,7 @@
     "nextStep": "Weiter"
   },
   "step3": {
-    "heading": "Details Zur Anfrage",
+    "heading": "Details zur Anfrage",
     "subject": "Betreff",
     "subjectPlaceholder": "Betreff hier...",
     "message": "Nachricht",
@@ -65,7 +65,7 @@
     "stickerHelp": "Aufkleber nahe dem unteren Rand des Ofens",
     "purchaseInvoice": "Kaufrechnung",
     "issue": "Problem",
-    "saunaRoomSize": "Größe Des Saunaraums",
+    "saunaRoomSize": "Größe des Saunaraums",
     "width": "Breite (Meter)",
     "depth": "Tiefe (Meter)",
     "height": "Höhe (Meter)",
@@ -94,9 +94,9 @@
     "submitError": "Beim Absenden Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
   "technicalSubjects": {
-    "requestRepair": "Reparatur Anfragen",
-    "requestSpareParts": "Ersatzteile Anfragen",
-    "requestReplacement": "Ersatz Anfragen"
+    "requestRepair": "Reparatur anfragen",
+    "requestSpareParts": "Ersatzteile anfragen",
+    "requestReplacement": "Ersatz anfragen"
   },
   "customerSubjects": {
     "customerSupport": "Kundenservice",
@@ -112,30 +112,30 @@
     "kivistoneItem": "Kivistone-Artikel"
   },
   "issues": {
-    "errorDisplayed": "Eine Fehlermeldung Wird Angezeigt",
-    "blankDisplay": "Display Ist Leer Oder Zeigt Nur Striche",
-    "notTurnOn": "Lässt Sich Nicht Einschalten",
+    "errorDisplayed": "Eine Fehlermeldung wird angezeigt",
+    "blankDisplay": "Display ist leer oder zeigt nur Striche",
+    "notTurnOn": "Lässt sich nicht einschalten",
     "flashingLed": "Blinkende LED-Anzeige",
-    "notHeat": "Ofen Heizt Nicht Auf",
+    "notHeat": "Ofen heizt nicht auf",
     "other": "Sonstiges"
   },
   "buttons": {
     "goBack": "Zurück",
     "nextStep": "Weiter",
-    "submitRequest": "Anfrage Senden",
+    "submitRequest": "Anfrage senden",
     "sending": "Wird Gesendet…"
   },
   "finishedHere": "Hier fertig? ",
-  "backToHome": "Zurück Zur Startseite",
+  "backToHome": "Zurück zur Startseite",
   "quick": {
-    "eyebrow": "Direkt Erreichen",
-    "title": "Lieber Einen Schnelleren Weg?",
+    "eyebrow": "Direkt erreichen",
+    "title": "Lieber schneller zum Ziel?",
     "whatsapp": {
       "title": "Technischer Support",
       "desc": "Für technischen Support und Reklamationen schreiben Sie uns über WhatsApp"
     },
     "email": {
-      "title": "E-Mail An Uns",
+      "title": "E-Mail an uns",
       "desc": "Allgemeine Anfragen und Produktfragen"
     },
     "helpdesk": {
@@ -145,35 +145,35 @@
   },
   "offices": {
     "eyebrow": "Weltweit",
-    "title": "Kontakt Zu Unseren Vertretungen",
+    "title": "Kontakt zu unseren Vertretungen",
     "tel": "Tel: ",
     "list": {
       "sawoInc": {
-        "role": "Globaler Vertrieb & Allgemeine Anfragen"
+        "role": "Globaler Vertrieb & allgemeine Anfragen"
       },
       "sawoNordic": {
-        "role": "Vertrieb & Lager Für Den Norden"
+        "role": "Vertrieb & Lager für den Norden"
       },
       "fem": {
-        "role": "Vertrieb & Lager Für Asien"
+        "role": "Vertrieb & Lager für Asien"
       },
       "europeHub": {
-        "role": "Vertrieb & Lager Für Europa"
+        "role": "Vertrieb & Lager für Europa"
       }
     }
   },
   "supportCta": {
-    "title": "Suchen Sie Zuerst Antworten?",
+    "title": "Suchen Sie zuerst Antworten?",
     "desc": "Viele Fragen sind bereits in unseren Support-Ressourcen beantwortet. Schauen Sie dort nach, bevor Sie auf eine Antwort warten.",
     "faq": {
-      "title": "Häufig Gestellte Fragen",
+      "title": "Häufig gestellte Fragen",
       "desc": "Durchstöbern Sie Antworten auf die häufigsten Fragen zu unseren Öfen, Steuerungen und Saunaräumen.",
-      "btn": "FAQ Ansehen"
+      "btn": "FAQ ansehen"
     },
     "manuals": {
       "title": "Bedienungsanleitungen",
       "desc": "Installationsanleitungen, Bedienungsanleitungen und technische Dokumentation für jedes SAWO Produkt.",
-      "btn": "Anleitungen Ansehen"
+      "btn": "Anleitungen ansehen"
     }
   },
   "countries": [

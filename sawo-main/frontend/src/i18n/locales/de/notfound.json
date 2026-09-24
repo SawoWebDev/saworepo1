@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Seite Nicht Gefunden",
+    "title": "Seite nicht gefunden",
     "description": "Die gesuchte Seite existiert nicht oder wurde verschoben."
   },
-  "heading": "Hoppla! Seite Nicht Gefunden",
+  "heading": "Hoppla! Seite nicht gefunden",
   "desc": "Es tut uns leid, die gesuchte Seite existiert nicht oder wurde verschoben.",
   "triedToAccess": "Versuchter Zugriff auf:",
   "helpBox": {
@@ -14,7 +14,7 @@
     "item4": "Kontaktieren Sie uns für Unterstützung"
   },
   "goHome": "Zur Startseite",
-  "browseProducts": "Produkte Durchsuchen",
+  "browseProducts": "Produkte durchsuchen",
   "popularSections": "Beliebte Bereiche:",
   "saunaHeaters": "Saunaöfen",
   "steamGenerators": "Dampferzeuger",

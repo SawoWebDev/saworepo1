@@ -10,10 +10,10 @@
       "subtitle": "Alles, was Sie brauchen, um das Beste aus Ihren SAWO Produkten herauszuholen"
     },
     "resources": {
-      "title": "Wie Können Wir Helfen?",
+      "title": "Wie können wir helfen?",
       "desc": "Entdecken Sie unsere umfassenden Support-Ressourcen, von detaillierten Produktanleitungen bis zu interaktiven Tools und FAQs. Wir sorgen dafür, dass Sie das perfekte SAWO Erlebnis erhalten.",
       "faq": {
-        "title": "Häufig Gestellte Fragen",
+        "title": "Häufig gestellte Fragen",
         "desc": "Antworten auf häufige Fragen zu Sauna und Produkten.",
         "link": "FAQ Durchsuchen"
       },
@@ -34,7 +34,7 @@
       }
     },
     "contact": {
-      "title": "Direkten Support Benötigt?",
+      "title": "Brauchen Sie direkte Unterstützung?",
       "desc": "Unser technisches Support-Team hilft Ihnen gerne bei Fragen, Problemen oder besonderen Anliegen.",
       "boxTitle": "Technischer Support",
       "email": "E-Mail",
@@ -43,19 +43,19 @@
       "note": "Für technischen Support und Fehlerbehebung empfehlen wir die Kontaktaufnahme per WhatsApp oder E-Mail. Unser Team antwortet in der Regel innerhalb von 24 Stunden."
     },
     "cta": {
-      "title": "Bereit, Unsere Produkte Zu Entdecken?",
+      "title": "Bereit, unsere Produkte zu entdecken?",
       "desc": "Entdecken Sie die perfekte Sauna, den perfekten Dampfraum oder die perfekte Infrarotlösung für Ihre Bedürfnisse.",
       "btn": "ALLE PRODUKTE DURCHSUCHEN"
     }
   },
   "faq": {
     "meta": {
-      "title": "Häufig Gestellte Fragen",
+      "title": "Häufig gestellte Fragen",
       "description": "Antworten auf häufige Fragen zu finnischen SAWO Saunen, Öfen, Dampferzeugern und Saunapflege – von Wärmequellen bis zu Holzarten."
     },
     "hero": {
       "title": "FAQ",
-      "subtitle": "Häufig Gestellte Fragen"
+      "subtitle": "Häufig gestellte Fragen"
     },
     "questionCount": {
       "one": "Frage",
@@ -260,7 +260,7 @@
       "pdfClickToOpen": "PDF · Zum Öffnen klicken"
     },
     "banner": {
-      "title": "Finden Sie Nicht, Was Sie Brauchen?",
+      "title": "Sie finden nicht, was Sie suchen?",
       "desc": "Unser Support-Team hilft Ihnen gerne bei Dokumentation und technischer Beratung.",
       "cta": "KONTAKTIEREN SIE UNS"
     },
@@ -301,7 +301,7 @@
     },
     "empty": "Keine Produkte verfügbar.",
     "banner": {
-      "title": "Finden Sie Nicht, Was Sie Brauchen?",
+      "title": "Sie finden nicht, was Sie suchen?",
       "desc": "Unser Support-Team hilft Ihnen gerne, das richtige Produkt für Ihre Sauna zu finden.",
       "cta": "KONTAKTIEREN SIE UNS"
     },

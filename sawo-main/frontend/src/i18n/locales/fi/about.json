@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Tietoa meistä",
-    "description": "Yli 30 vuoden ajan suunnitelleet ja valmistaneet korkealaatuisia suomalaisia saunankiukaita, höyrynkehittimiä ja saunahuoneita, joihin luottavat asiakkaat yli 90 maassa."
+    "description": "Yli 30 vuotta laadukkaiden suomalaisten saunankiukaiden, höyrynkehittimien ja saunahuoneiden suunnittelua ja valmistusta – asiakkaat yli 90 maassa luottavat meihin."
   },
   "alt": {
     "office": "SAWOn toimisto",
@@ -10,13 +10,13 @@
   "hero": {
     "title": "Me olemme SAWO",
     "subtitle": "Tuomme suomalaisen perinteen maailmalle",
-    "desc": "Olemme asiakaslähtöinen, huippuosaamiseen tähtäävä yritys, joka asettaa asiakkaidemme tarpeet etusijalle jokaisessa vaiheessa – tuotesuunnittelusta valmistukseen ja jälkimarkkinointiin asti. Olemme ylpeitä siitä, että tarjoamme arvostetuille asiakkaillemme vain parhaat tuotteet ja parhaan palvelun."
+    "desc": "Olemme asiakaslähtöinen, laatua tavoitteleva yritys, joka asettaa asiakkaidensa tarpeet etusijalle jokaisessa vaiheessa – tuotesuunnittelusta valmistukseen ja myynnin jälkeiseen palveluun asti. Olemme ylpeitä siitä, että voimme tarjota arvostetuille asiakkaillemme vain parhaat tuotteet ja parhaan palvelun."
   },
   "innovation": {
-    "titleMain": "Ei rajojen rajoittama",
+    "titleMain": "Rajoja tuntematon",
     "titleSub": "Suomalainen perinne maailmanlaajuiseksi",
     "p1": "Olemme eurooppalainen edelläkävijäyritys saunatuotteiden alalla, jolla on tuotantolaitos Aasiassa – yli 600 omistautuneen filippiiniläisen ja suomalaisen ammattilaisen koti, ja määrä kasvaa jatkuvasti. Menestyksemme perustuu kilpailukykyiseen hinnoitteluun, poikkeukselliseen tuotelaatuun ja asiakaspalveluun, joka ylittää odotukset.",
-    "p2": "SAWO on syntynyt yhdistämällä kaksi sanaa <b>Sa</b>una ja <b>Wo</b>rld (maailma). Se kuvaa meitä osuvasti kattavana saunatoimittajana, joka täyttää kaikki saunatarpeesi kiukaista ovenkahvoihin ja tuuletusluukkuihin. Saunan intohimon innoittamina ja innovatiivisen yrityskulttuurin ohjaamina olemme kasvaneet yhdeksi maailman johtavista saunatuotteiden valmistajista, ja palvelemme yli 90 maata ympäri maailmaa – ja määrä kasvaa. Valikoimamme kattaa saunankiukaat, tarvikkeet ja ohjauskeskukset sekä saunahuoneet, höyrynkehittimet ja infrapunaratkaisut.",
+    "p2": "SAWO on syntynyt yhdistämällä kaksi sanaa: <b>Sa</b>una ja <b>Wo</b>rld (maailma). Nimi kuvaa meitä osuvasti: olemme kattava saunatoimittaja, joka tarjoaa kaiken kiukaista ovenkahvoihin ja tuuletusluukkuihin. Saunaintohimomme innoittamina ja innovatiivisen yrityskulttuurin ohjaamina olemme kasvaneet yhdeksi maailman johtavista saunatuotteiden valmistajista, ja toimitamme tuotteita jo yli 90 maahan – määrä kasvaa jatkuvasti. Valikoimamme kattaa saunankiukaat, tarvikkeet ja ohjausyksiköt sekä saunahuoneet, höyrynkehittimet ja infrapunaratkaisut.",
     "p3": "Laajennamme jatkuvasti tuotevalikoimaamme harkitusti suunnitelluilla ja suorituskykyisillä tuotteilla, jotka ylittävät asiakkaiden odotukset ympäri maailmaa. Jokainen tuote valmistetaan suomalaisen johdon alaisuudessa, mikä takaa aitouden ja syvän kunnioituksen suomalaisen saunakulttuurin rikasta perintöä kohtaan.",
     "p4": "Sitoutumisemme laatuun ja kestävyyteen on vahvistettu kansainvälisesti tunnustetuilla sertifikaateilla. Saimme ensimmäisen <b>ISO 9001 -laadunhallintasertifikaatin</b> vuonna 2002 ja <b>ISO 14001 -ympäristöjärjestelmäsertifikaatin</b> vuonna 2007, ja molemmat uusittiin vuonna 2025 uusimpien standardien mukaisesti: <b>ISO 9001:2015</b> ja <b>ISO 14001:2015</b>. <b>PEFC</b>-sertifikaattimme osoittaa lisäksi sitoutumisemme kestävästi hoidetuista metsistä hankittuun puuraaka-aineeseen. Nämä sertifikaatit takaavat, että jokainen tuote täyttää korkeimmat maailmanlaajuiset turvallisuus-, laatu- ja ympäristövastuun vaatimukset.",
     "p5": "Ylpeinä suomalaisen saunakulttuurin lähettiläinä olemme myös <b>Sauna from Finland</b> -yhdistyksen jäsen; yhdistys edistää aidon suomalaisen saunakokemuksen tunnettuutta ympäri maailmaa.",
@@ -24,17 +24,29 @@
       "establishedLabel": "Vakiintunutta huippuosaamista",
       "establishedValue": "30+",
       "establishedSuffix": "vuotta",
-      "reachLabel": "Maailmanlaajuinen ulottuvuus",
+      "reachLabel": "Läsnä maailmanlaajuisesti",
       "reachValue": "90+",
       "reachSuffix": "maata ympäri maailmaa"
     },
     "exploreBtn": "Tutustu tuotteisiimme"
   },
   "certs": {
-    "iso9001": { "caption": "ISO 9001", "label": "Laadunhallinta" },
-    "iso14001": { "caption": "ISO 14001", "label": "Ympäristöjärjestelmä" },
-    "saunaFromFinland": { "caption": "Sauna from Finland", "label": "Virallinen jäsen" },
-    "pefc": { "caption": "Edistämme kestävää metsätaloutta", "label": "www.pefc.org" }
+    "iso9001": {
+      "caption": "ISO 9001",
+      "label": "Laadunhallinta"
+    },
+    "iso14001": {
+      "caption": "ISO 14001",
+      "label": "Ympäristöjärjestelmä"
+    },
+    "saunaFromFinland": {
+      "caption": "Sauna from Finland",
+      "label": "Virallinen jäsen"
+    },
+    "pefc": {
+      "caption": "Edistämme kestävää metsätaloutta",
+      "label": "www.pefc.org"
+    }
   },
   "news": {
     "title": "Viimeisimmät uutiset",
@@ -48,13 +60,13 @@
     "card2": {
       "alt": "Maanjäristysapu",
       "label": "Yhteisö",
-      "title": "Maanjäristysapu Cebulla",
-      "desc": "Kun 6.9 magnitudin maanjäristys iski Cebun koillisrannikon edustalle, tiimimme järjesti koko yrityksen kattavan avustustoimen ja toimitti patjoja, ruokaa, hygieniatuotteita ja välttämättömiä tarvikkeita kärsineille perheille."
+      "title": "Apua maanjäristyksen uhreille Cebulla",
+      "desc": "Kun magnitudiltaan 6,9 maanjäristys iski Cebun koillisrannikon edustalle, tiimimme järjesti koko yrityksen kattavan avustustoimen ja toimitti patjoja, ruokaa, hygieniatuotteita ja välttämättömiä tarvikkeita kärsineille perheille."
     },
     "card3": {
       "alt": "Kykyjen etsintä",
       "label": "Ura",
-      "title": "Kykyjen etsintä",
+      "title": "Etsimme osaajia",
       "desc": "Onko aika muutokselle? Etsimme henkilöitä, joilla on kokemusta ja/tai kiinnostusta sauna- ja hyvinvointialaan sekä halua kasvaa kanssamme Cebulla."
     }
   }

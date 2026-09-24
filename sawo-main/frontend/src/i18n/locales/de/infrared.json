@@ -30,7 +30,7 @@
       }
     },
     "cta": {
-      "title": "Brauchen Sie Hilfe Bei Der Auswahl?",
+      "title": "Brauchen Sie Hilfe bei der Auswahl?",
       "description": "Von Infrarotpaneelen über Steuerungen bis hin zu Zubehör — unser Team hilft Ihnen, die richtige Infrarotsauna-Ausstattung für Ihren Raum zu finden."
     }
   },
@@ -46,17 +46,17 @@
       "brochureItemLabel": "Infrarot-Broschüre"
     },
     "productDetails": {
-      "title": "Die Infrarotsauna, Die Sie Wirklich Täglich Nutzen Werden",
+      "title": "Die Infrarotsauna, die Sie wirklich täglich nutzen werden",
       "storySections": [
         {
-          "title": "Wärme, Die Sie Direkt Erreicht",
+          "title": "Wärme, die Sie direkt erreicht",
           "paragraphs": [
             "Eine Infrarotsauna muss nicht 80 °C erreichen, um zu wirken. Die Paneele erwärmen Ihren Körper statt der umgebenden Luft, sodass sich eine Sitzung tief und umhüllend anfühlt, während die Kabine auf einer Temperatur bleibt, bei der Sie problemlos atmen können.",
             "Das macht sie zu einer eigenständigen Alternative zur traditionellen Sauna, nicht zu einer kleineren Version davon: sanfter für die Brust, leichter für eine ganze Stunde durchzuhalten und geeignet für Menschen, denen die Hitze einer finnischen Sauna zu viel ist."
           ]
         },
         {
-          "title": "Bereit, Wann Immer Sie Es Sind",
+          "title": "Bereit, wann immer Sie es sind",
           "paragraphs": [
             "Es gibt keine lange Vorheizzeit und keinen Ofen, um den man sich kümmern muss. Schließen Sie die Kabine an eine normale Steckdose an, stellen Sie eine Zeit ein, und sie ist in Minuten statt in fast einer Stunde bereit.",
             "Mit 0,80 m und 1,10 m im Quadrat passen die beiden Größen dorthin, wo eine traditionelle Sauna nicht passen würde — eine freie Ecke, ein Badezimmer, das Ende eines Schlafzimmers — ohne Bauarbeiten oder einen eigenen Stromkreis. Es ist die Version einer Sauna, die Sie tatsächlich an einem Wochentagabend nutzen."
@@ -176,7 +176,7 @@
     "emptyText": "Noch keine Infrarotpaneele verfügbar.",
     "loadingText": "Infrarotpaneele werden geladen...",
     "cta": {
-      "title": "Nicht Sicher, Welches Paneel Sie Brauchen?",
+      "title": "Nicht sicher, welches Paneel Sie brauchen?",
       "description": "Anzahl und Platzierung der Paneele hängen von der Größe Ihres Infrarotraums ab. Unser Team hilft Ihnen, die richtige Konfiguration für Ihren Raum zu ermitteln."
     }
   },
@@ -197,7 +197,7 @@
     "emptyText": "Noch keine Infrarotsteuerungen verfügbar.",
     "loadingText": "Infrarotsteuerungen werden geladen...",
     "cta": {
-      "title": "Brauchen Sie Hilfe Bei Der Auswahl Einer Steuerung?",
+      "title": "Brauchen Sie Hilfe bei der Auswahl einer Steuerung?",
       "description": "Ob aufgesetzte Bedienoberfläche oder Einbaugerät — unser Team hilft Ihnen, die richtige Steuerung für Ihren Infrarotraum zu finden."
     }
   }

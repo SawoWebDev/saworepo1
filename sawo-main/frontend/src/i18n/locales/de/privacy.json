@@ -11,13 +11,13 @@
   "footer": "Zuletzt aktualisiert: 2026 · SAWO INC · Alle Rechte vorbehalten.",
   "sections": [
     {
-      "title": "Wer Wir Sind",
+      "title": "Wer wir sind",
       "content": [
         "Diese Datenschutzerklärung gilt für die von SAWO INC betriebene Website, erreichbar unter https://sawo.com."
       ]
     },
     {
-      "title": "Welche Personenbezogenen Daten Wir Erheben Und Warum",
+      "title": "Welche personenbezogenen Daten wir erheben und warum",
       "subsections": [
         {
           "subtitle": "Kommentare",
@@ -43,7 +43,7 @@
           ]
         },
         {
-          "subtitle": "Eingebettete Inhalte Von Anderen Websites",
+          "subtitle": "Eingebettete Inhalte von anderen Websites",
           "content": [
             "Artikel auf dieser Website können eingebettete Inhalte enthalten (z. B. Videos, Bilder, Artikel usw.). Eingebettete Inhalte verhalten sich genauso, als hätten Sie die Ursprungs-Website direkt besucht. Diese externen Websites können Daten über Sie erheben, Cookies verwenden und Ihre Interaktion mit deren Inhalten verfolgen, insbesondere wenn Sie auf deren Plattform angemeldet sind."
           ]
@@ -57,26 +57,26 @@
       ]
     },
     {
-      "title": "Mit Wem Wir Ihre Daten Teilen",
+      "title": "Mit wem wir Ihre Daten teilen",
       "content": [
         "Wenn Sie das Zurücksetzen eines Passworts beantragen, wird Ihre IP-Adresse in der Zurücksetzungs-E-Mail enthalten sein."
       ]
     },
     {
-      "title": "Wie Lange Wir Ihre Daten Speichern",
+      "title": "Wie lange wir Ihre Daten speichern",
       "bullets": [
         "Kommentare und ihre Metadaten werden unbegrenzt gespeichert, um Folgekommentare automatisch zu erkennen und zu genehmigen.",
         "Für Nutzer, die sich auf unserer Website registrieren (falls zutreffend), speichern wir die in ihrem Benutzerprofil angegebenen personenbezogenen Daten. Alle Nutzer können ihre personenbezogenen Daten jederzeit einsehen, bearbeiten oder löschen (mit Ausnahme ihres Benutzernamens). Website-Administratoren können ebenfalls auf diese Daten zugreifen und sie verwalten."
       ]
     },
     {
-      "title": "Ihre Rechte An Ihren Daten",
+      "title": "Ihre Rechte an Ihren Daten",
       "content": [
         "Wenn Sie ein Konto haben oder Kommentare hinterlassen haben, können Sie eine exportierte Datei Ihrer bei uns gespeicherten personenbezogenen Daten anfordern, einschließlich aller von Ihnen bereitgestellten Daten. Sie können auch verlangen, dass wir Ihre personenbezogenen Daten löschen, mit Ausnahme von Daten, die wir aus administrativen, rechtlichen oder sicherheitsrelevanten Gründen aufbewahren müssen."
       ]
     },
     {
-      "title": "Wohin Wir Ihre Daten Senden",
+      "title": "Wohin wir Ihre Daten senden",
       "content": [
         "Besucherkommentare können über einen automatisierten Spam-Erkennungsdienst geprüft werden."
       ]
@@ -92,31 +92,31 @@
       "title": "Zusätzliche Informationen",
       "subsections": [
         {
-          "subtitle": "Wie Wir Ihre Daten Schützen",
+          "subtitle": "Wie wir Ihre Daten schützen",
           "content": [
             "Wir setzen geeignete technische und organisatorische Maßnahmen wie Verschlüsselung, Firewalls und Zugriffskontrollen ein, um Ihre personenbezogenen Daten zu schützen."
           ]
         },
         {
-          "subtitle": "Verfahren Bei Datenschutzverletzungen",
+          "subtitle": "Verfahren bei Datenschutzverletzungen",
           "content": [
             "Im Falle einer Datenschutzverletzung benachrichtigen wir betroffene Nutzer und Aufsichtsbehörden entsprechend den gesetzlichen Vorgaben und ergreifen umgehend Maßnahmen zur Sicherung der Nutzerdaten."
           ]
         },
         {
-          "subtitle": "Dritte, Von Denen Wir Daten Erhalten",
+          "subtitle": "Dritte, von denen wir Daten erhalten",
           "content": [
             "Wir können Daten von vertrauenswürdigen Drittanbietern für Spam-Schutz, Analyse und Login-Dienste erhalten."
           ]
         },
         {
-          "subtitle": "Automatisierte Entscheidungsfindung Und Profiling",
+          "subtitle": "Automatisierte Entscheidungsfindung und Profiling",
           "content": [
             "Wir nutzen Ihre Daten nicht für automatisierte Entscheidungsfindung oder Profiling mit rechtlicher oder ähnlich bedeutsamer Wirkung."
           ]
         },
         {
-          "subtitle": "Branchenspezifische Regulatorische Offenlegungspflichten",
+          "subtitle": "Branchenspezifische regulatorische Offenlegungspflichten",
           "content": [
             "Wir halten die geltenden Datenschutzgesetze ein, einschließlich jener zu Nutzereinwilligung, Datenspeicherung und rechtmäßiger Verarbeitung."
           ]
