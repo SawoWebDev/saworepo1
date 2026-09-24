@@ -9,7 +9,7 @@
     "includedInPackage": "包装内含",
     "doorPositions": "可选门位",
     "floorPlan": "平面图",
-    "benchConfiguration": "座椅配置",
+    "benchConfiguration": "长椅配置",
     "details": "详情",
     "description": "产品描述"
   },
@@ -17,11 +17,11 @@
   "moreDetailsSoon": "更多详情即将上线。",
   "notFound": {
     "title": "未找到该产品",
-    "description": "该产品不存在,或尚未发布。",
+    "description": "该产品不存在，或尚未发布。",
     "browseProducts": "浏览产品",
     "home": "返回首页",
     "roomTitle": "未找到该桑拿房",
-    "roomDescription": "该桑拿房不存在,或尚未发布。",
+    "roomDescription": "该桑拿房不存在，或尚未发布。",
     "browseRooms": "浏览桑拿房"
   },
   "related": {
@@ -38,7 +38,7 @@
     "infrared": "红外线",
     "steam": "蒸汽式",
     "combo": "组合式",
-    "glassfront": "玻璃前壁",
+    "glassfront": "玻璃前脸",
     "compact": "紧凑型"
   },
   "sizeLabels": {
@@ -55,7 +55,7 @@
   },
   "modelCode": "型号 {{code}}",
   "roomDisplayName": "{{type}}桑拿房 {{code}}",
-  "seoFallbackDescription": "{{name}} —— SAWO 出品,优质芬兰桑拿房。",
+  "seoFallbackDescription": "{{name}} —— SAWO出品，优质芬兰桑拿房。",
   "skuCode": "货号 {{sku}}",
   "stats": {
     "capacity": "容纳人数",
@@ -63,18 +63,18 @@
     "height": "高度",
     "woodType": "木材类型",
     "voltage": "电压",
-    "panelWattage": "面板功率",
+    "panelWattage": "加热板功率",
     "totalPower": "总功率",
     "sessionTime": "使用时长"
   },
   "resourcesPanel": {
     "pdfClickToOpen": "PDF · 点击打开",
-    "documentsCount": "{{count}} 份文档",
+    "documentsCount": "{{count}}份文档",
     "clickToExpand": "点击展开",
     "clickToCollapse": "点击收起"
   },
   "featureTabs": {
-    "tabFallback": "标签 {{number}}"
+    "tabFallback": "标签{{number}}"
   },
-  "seoFallbackProductDescription": "{{name}}，来自 SAWO。优质芬兰桑拿设备。"
+  "seoFallbackProductDescription": "{{name}}，来自SAWO。优质芬兰桑拿设备。"
 }

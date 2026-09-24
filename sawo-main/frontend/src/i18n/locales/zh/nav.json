@@ -33,7 +33,7 @@
     "saunaAccessories": "桑拿配件",
     "saunaRooms": "桑拿房",
     "interiorDesigns": "室内设计",
-    "woodPanels": "木板与木材",
+    "woodPanels": "木镶板与木材",
     "steamGenerators": "蒸汽发生器",
     "steamControls": "蒸汽控制器",
     "steamAccessories": "蒸汽配件",
@@ -42,11 +42,11 @@
     "saunaCalculator": "桑拿计算器",
     "userManuals": "用户手册",
     "productCatalogue": "产品目录",
-    "latestNews": "最新资讯",
+    "latestNews": "最新动态",
     "sustainability": "可持续发展",
     "careers": "招聘信息",
     "infraredSaunaRooms": "红外线桑拿房",
-    "infraredPanels": "红外线板",
+    "infraredPanels": "红外线加热板",
     "infraredControls": "红外线控制器"
   },
   "language": {
