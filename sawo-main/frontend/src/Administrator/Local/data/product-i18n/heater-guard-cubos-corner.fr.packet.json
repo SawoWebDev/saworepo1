@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-cubos-corner",
+  "productId": "ec095908-9634-49d1-8934-84c9098056e6",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Grille de protection – Cubos Angle",
+    "short_description": "Les grilles de protection évitent tout contact accidentel avec le poêle, tandis que les collerettes d'intégration ajoutent une touche d'élégance à l'intérieur de votre sauna. Les barrières sont en bois de Hemlock et se fixent au poêle.",
+    "description": null,
+    "type": "Grille de protection du poêle",
+    "spec_table_headers": [
+      "Modèle",
+      "Matériau",
+      "Longueur (mm)",
+      "Largeur (mm)",
+      "Hauteur (mm)"
+    ]
+  }
+}

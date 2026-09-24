@@ -1,0 +1,28 @@
+{
+  "slug": "steam-door",
+  "productId": "efc9e723-8d96-4d74-930c-85cadc12a79b",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Porte de hammam",
+    "short_description": "<p style=\"text-align: justify;\">La <strong><b>porte de hammam</b></strong> garde la vapeur à l'intérieur et empêche l'humidité excessive de s'échapper, pour une expérience de hammam profondément revigorante.</p><p style=\"text-align: justify;\">Notre porte de hammam est étanchéifiée par un joint en caoutchouc et équipée d'un verrou magnétique, d'un ensemble de poignées en acier inoxydable et d'un récupérateur d'eau qui dirige la condensation vers le siphon de sol. Le cadre est en aluminium résistant à la rouille, et la porte en verre trempé est conçue pour supporter les températures élevées. L'installation est simple, avec du mastic silicone ou des vis.</p><p style=\"text-align: justify;\">La porte de hammam SAWO se monte facilement avec du silicone ou des vis.</p>",
+    "description": null,
+    "type": "Accessoires vapeur",
+    "features": [
+      "Porte de hammam en aluminium disponible :",
+      "référence : ST-746 | dimensions : 790 × 1890 mm | cadre : 60 mm",
+      "référence : ST-749 | dimensions : 900 × 2100 mm | cadre : 71 mm",
+      "Montant de porte en aluminium",
+      "Porte en verre trempé dépoli de 8 mm",
+      "Ensemble de poignées de porte en acier inoxydable",
+      "3 charnières renforcées",
+      "Verrou de porte magnétique",
+      "Joint d'étanchéité en caoutchouc",
+      "Récupérateur d'eau en plastique",
+      "Cales pour faciliter l'installation",
+      "Vis supplémentaires et embouts en caoutchouc",
+      "Mastic silicone, clé Allen et guide de vissage inclus"
+    ]
+  }
+}

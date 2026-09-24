@@ -1,0 +1,19 @@
+{
+  "slug": "helius-mini-ns",
+  "productId": "2c147543-2f01-4114-8336-85a4bcdb1f00",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius Mini NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Helius Mini</strong><span style=\"text-align: justify;\"> ให้นวัตกรรมเดียวกับ Helius ในรูปแบบที่กะทัดรัดกว่า ติดตั้งแอบไว้หลังม้านั่งได้อย่างมิดชิดด้วยระยะปลอดภัยขั้นต่ำ ฝาครอบออกแบบมาสำหรับการใช้งานเป็นฮีตเตอร์ซ่อนตัว ด้วยประสิทธิภาพที่ทรงพลังจึงออกแบบมาอย่างพิถีพิถันเพื่อทำความร้อนให้พื้นที่ขนาดเล็กอย่างทั่วถึง</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ฮีตเตอร์\n<br>รุ่น</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th colspan=\"2\">ระบบควบคุม</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-MN-20NS-Z</td>\n  <td>2.0</td>\n  <td>1.5 – 2.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-27NS-Z</td>\n  <td>2.7</td>\n  <td>2.0 – 3.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-30NS-Z</td>\n  <td>3.0</td>\n  <td>2.0 – 4.0</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "ช่วงกำลังไฟ: 2.0 – 3.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "อ่างน้ำหินสบู่แยกต่างหากพร้อมสายยาง",
+      "มีตะแกรงป้องกันและฝาครอบฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

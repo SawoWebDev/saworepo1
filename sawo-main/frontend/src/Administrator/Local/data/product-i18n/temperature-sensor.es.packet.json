@@ -1,0 +1,22 @@
+{
+  "slug": "temperature-sensor",
+  "productId": "bc55562a-f390-4481-a5b9-da85b7553878",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Sensor de temperatura con fusible",
+    "short_description": "Diseñado para medir con precisión los niveles de temperatura durante una sesión de sauna, este sensor garantiza lecturas constantes y fiables en todo momento. El sistema de control lo reconoce automáticamente al conectarlo, con una integración sin complicaciones para un rendimiento óptimo del sauna.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">DIMENSIONES DEL PRODUCTO</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Temperature Sensor with Fuse\n(INN-FTEMP)</td>\n  <td>W: 47mm x D: 40mm x H: 55mm 0.03KG</td>\n</tr></tbody></table>",
+    "type": "Sensor",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "heater-guard-cubos-wall",
+  "productId": "495cc14e-79dd-458b-ae31-42ef241c2a9e",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Grille de protection – Cubos Mural",
+    "short_description": "La grille de protection est un dispositif de sécurité conçu pour limiter les risques de brûlure. Fabriquée en Hemlock résistant à la chaleur, elle forme une barrière protectrice tout en valorisant l'esthétique du poêle. Les grilles de protection Cubos sont conçues pour les installations au milieu de la cabine de sauna, le long d'un mur ou dans un angle.",
+    "description": null,
+    "type": "Grille de protection du poêle",
+    "spec_table_headers": [
+      "Modèle",
+      "Matériau",
+      "Longueur (mm)",
+      "Largeur (mm)",
+      "Hauteur (mm)"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-curve-light-364",
+  "productId": "ae9e8429-fb86-4f6a-9675-6259c193d001",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (924-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (924-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (924-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ไฟไม้ทรงโค้ง 364",
+    "short_description": "ไฟไม้ทรงโค้ง SAWO 364 เป็นไฟซาวน่าไม้ทรงโค้งขนาด 60 มม. (3.4\") x 364 มม. (14.4\") x 85 มม. (2.4\") ออกแบบมาเพื่อกระจายแสงสว่างอย่างสม่ำเสมอภายในห้องซาวน่า",
+    "description": null,
+    "type": "ไฟซาวน่า",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (924-D)",
+        "name": "ซีดาร์ (924-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (924-H)",
+        "name": "เฮมล็อก (924-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (924-BL)",
+        "name": "สีดำ (924-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

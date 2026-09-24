@@ -1,0 +1,13 @@
+{
+  "slug": "aroma-pump",
+  "productId": "3edc6a58-f8cf-45dd-961f-1392046e862c",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Pompe à arômes",
+    "short_description": "<div><p><br></p></div><div style=\"text-align: justify;\"><p>Sublimez votre expérience du hammam avec la <strong><b>Pompe à arômes</b></strong>. Reliée au générateur de vapeur, elle diffuse dans la pièce le parfum de votre choix et apporte à chaque séance les bienfaits de l'aromathérapie, pratiquée depuis des millénaires pour favoriser le bien-être physique et mental. Son moteur avancé assure une diffusion homogène des arômes, et l'intégration aux commandes vapeur rend le réglage très simple. Durable et précise, la pompe à arômes offre des performances durables et un grand confort d'utilisation.</p><p>La pompe à arômes SAWO diffuse les parfums de façon extrêmement homogène grâce à son moteur avancé. Elle se règle très facilement avec les commandes vapeur, et elle est en outre très précise et durable.</p></div>",
+    "description": null,
+    "type": "Accessoires vapeur"
+  }
+}

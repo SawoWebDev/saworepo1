@@ -1,0 +1,19 @@
+{
+  "slug": "helius-heater-hood",
+  "productId": "f7c45700-7624-4ca8-be26-1b9ebc1e336c",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ฝาครอบฮีตเตอร์ Helius",
+    "short_description": "ฝาครอบฮีตเตอร์ Helius ติดตั้งในช่องที่เว้นไว้ในห้องซาวน่าเพื่อซ่อนตัวเครื่องและอยู่ห่างจากผู้ใช้ เมื่อใช้อ่างน้ำหินสบู่แยกต่างหากของฮีตเตอร์ สามารถเทน้ำลงบนหินเพื่อสร้างไอน้ำได้ การออกแบบนี้ช่วยป้องกันการโดนความร้อนลวกโดยไม่ตั้งใจ ฝาครอบ Helius ช่วยลดระยะปลอดภัยให้เหลือน้อยที่สุด",
+    "description": null,
+    "type": "ฝาครอบฮีตเตอร์",
+    "spec_table_headers": [
+      "รุ่น",
+      "ความยาว (มม.)",
+      "ความกว้าง (มม.)",
+      "ความสูง (มม.)"
+    ]
+  }
+}

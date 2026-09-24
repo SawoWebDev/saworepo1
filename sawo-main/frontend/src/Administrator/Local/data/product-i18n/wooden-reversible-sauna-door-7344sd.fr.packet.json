@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-reversible-sauna-door-7344sd",
+  "productId": "9c5d2ac0-4081-4eb8-9668-ff10a2431333",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (734-4SD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (734-4SA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (734-4SH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Porte de sauna réversible en bois",
+    "short_description": "La porte de sauna réversible en bois SAWO est une porte de sauna en bois massif : ouverture de 610 × 1935 mm, cadre de 700 × 2040 mm, réversible pour une installation à gauche ou à droite.",
+    "description": null,
+    "type": "Portes et poignées",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (734-4SD)",
+        "name": "Cèdre (734-4SD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (734-4SA)",
+        "name": "Tremble (734-4SA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (734-4SH)",
+        "name": "Pruche (734-4SH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

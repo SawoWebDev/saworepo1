@@ -1,0 +1,56 @@
+{
+  "slug": "clear-glass-reversible-sauna-door-with-vertical-wooden-handle-arc",
+  "productId": "69d443f5-104c-4cac-82e6-c8bd88fa3951",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (741-4SCD-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (741-4SCA-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (741-4SCH-1)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ประตูซาวน่ากระจกใสแบบกลับด้านได้ พร้อมมือจับไม้แนวตั้งทรงโค้ง",
+    "short_description": "ประตูซาวน่ากระจกใสแบบกลับด้านได้ SAWO พร้อมมือจับไม้แนวตั้งทรงโค้ง เป็นประตูซาวน่ากระจกใส ช่องเปิด 600 × 1800 มม. วงกบ 690 × 1890 มม. กลับด้านได้เพื่อติดตั้งบานเปิดซ้ายหรือขวา",
+    "description": null,
+    "type": "ประตูและมือจับ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (741-4SCD-1)",
+        "name": "ซีดาร์ (741-4SCD-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (741-4SCA-1)",
+        "name": "แอสเพน (741-4SCA-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (741-4SCH-1)",
+        "name": "เฮมล็อก (741-4SCH-1)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

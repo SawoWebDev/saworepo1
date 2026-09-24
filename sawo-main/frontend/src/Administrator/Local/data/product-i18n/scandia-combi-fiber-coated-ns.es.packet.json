@@ -1,0 +1,20 @@
+{
+  "slug": "scandia-combi-fiber-coated-ns",
+  "productId": "1daf49dc-68d7-49ec-8041-65bbcc142133",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia Combi Revestido de fibra NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Scandia Combi Revestido de fibra</strong><span style=\"text-align: justify;\"> incorpora vapor a las sesiones de sauna mediante un depósito de agua combi adicional que aumenta la humedad. Los cuencos de aromas integrados están pensados para que los aceites esenciales y las fragancias impregnen el vapor y ofrezcan una experiencia de spa. Con su recubrimiento de fibra que no quema al tacto, esta actualización de una estufa clásica también reduce el riesgo de quemaduras por contacto accidental con la carcasa de la estufa.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW\n<br>Estufa</th>\n  <th>kW\n<br>Depósito</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"4\">Distancias de seguridad mínimas<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCAC-60NS-P-F-C</td>\n  <td>6.0</td>\n  <td>1 × 1.0</td>\n  <td>5 – 9</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-80NS-P-F-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-90NS-P-F-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "Rango de potencia: 6,0 – 9,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Depósito de agua independiente con generador de vapor de 1 kW o 2 kW",
+      "Recubrimiento de fibra que no quema al tacto",
+      "Cuenco de aromas integrado"
+    ]
+  }
+}

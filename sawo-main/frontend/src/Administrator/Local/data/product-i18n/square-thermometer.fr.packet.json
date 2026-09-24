@@ -1,0 +1,56 @@
+{
+  "slug": "square-thermometer",
+  "productId": "0c09b668-0e5c-4004-89b1-70970c23aeaf",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (223-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (223-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (223-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Thermomètre carré",
+    "short_description": "Le thermomètre carré SAWO est un thermomètre de sauna de 140 × 140 mm, utilisé pour surveiller la température à l'intérieur du sauna.",
+    "description": null,
+    "type": "Thermomètres",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (223-TD)",
+        "name": "Cèdre (223-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (223-TA)",
+        "name": "Tremble (223-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (223-TH)",
+        "name": "Pruche (223-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

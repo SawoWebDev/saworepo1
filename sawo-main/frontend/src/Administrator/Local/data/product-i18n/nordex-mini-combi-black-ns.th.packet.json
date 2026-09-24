@@ -1,0 +1,20 @@
+{
+  "slug": "nordex-mini-combi-black-ns",
+  "productId": "b5149a8b-acf3-4ef3-8d04-61be17c724d3",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Mini Combi สีดำ NS",
+    "short_description": "<span style=\"text-align: justify;\">ฮีตเตอร์ขนาดกะทัดรัดพิเศษ </span><strong style=\"text-align: justify;\">Nordex Mini Combi</strong><span style=\"text-align: justify;\"> เพิ่มความชื้นให้กับความร้อนด้วยถังน้ำ มีโครงเครื่องสแตนเลสหรือโลหะสีดำให้เลือก และใช้งานร่วมกับชุดควบคุมแยก Saunova (NS) และ Innova (NS) ได้</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW\n<br>ฮีตเตอร์</th>\n  <th>kW\n<br>ถังน้ำ</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th colspan=\"2\">ระบบควบคุม</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRMC-30NS-BL-Z</td>\n  <td>3.0</td>\n  <td>1 × 0.8</td>\n  <td>2 – 4</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>NRMC-36NS-BL-Z</td>\n  <td>3.6</td>\n  <td>1 × 0.8</td>\n  <td>3 – 6</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "ช่วงกำลังไฟ: 3.0 – 3.6 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "ถังน้ำแยกพร้อมเครื่องกำเนิดไอน้ำ 0.8 kW",
+      "โครงเครื่องโลหะสีดำ",
+      "มีถ้วยน้ำมันหอมระเหยในตัว"
+    ]
+  }
+}

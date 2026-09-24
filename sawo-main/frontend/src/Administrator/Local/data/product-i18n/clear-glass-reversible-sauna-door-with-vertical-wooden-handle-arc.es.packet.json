@@ -1,0 +1,56 @@
+{
+  "slug": "clear-glass-reversible-sauna-door-with-vertical-wooden-handle-arc",
+  "productId": "69d443f5-104c-4cac-82e6-c8bd88fa3951",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (741-4SCD-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (741-4SCA-1)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (741-4SCH-1)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puerta de sauna reversible de vidrio transparente con tirador vertical de madera en arco",
+    "short_description": "La puerta de sauna reversible SAWO de vidrio transparente con tirador vertical de madera en arco es una puerta de sauna de vidrio transparente: hueco de 600 × 1800 mm, marco de 690 × 1890 mm, reversible para instalarla a izquierda o derecha.",
+    "description": null,
+    "type": "Puertas y tiradores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (741-4SCD-1)",
+        "name": "Cedro (741-4SCD-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (741-4SCA-1)",
+        "name": "Álamo (741-4SCA-1)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (741-4SCH-1)",
+        "name": "Tsuga (741-4SCH-1)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

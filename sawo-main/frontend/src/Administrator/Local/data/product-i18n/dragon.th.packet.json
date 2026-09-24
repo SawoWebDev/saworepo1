@@ -1,0 +1,44 @@
+{
+  "slug": "dragon",
+  "productId": "71ea2f1e-f27f-4eee-87d9-1035d6dfcb27",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (SET-DRAGON-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Black (SET-DRAGON-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Dragon",
+    "short_description": "ด้วยสไตล์และนวัตกรรมที่หาใครเทียบไม่ได้ ชุด Dragon จึงมีลุคที่โดดเด่นกล้าแสดงออกและมีเสน่ห์เพิ่มขึ้น ชุดนี้เป็นส่วนหนึ่งของซีรีส์ Dragonfire ออกแบบโดยสเตฟาน ลินด์ฟอร์ส นักออกแบบชื่อดังชาวฟินแลนด์",
+    "description": null,
+    "type": "ชุดอุปกรณ์เสริม",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (SET-DRAGON-D)",
+        "name": "ซีดาร์ (SET-DRAGON-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Black (SET-DRAGON-BL)",
+        "name": "สีดำ (SET-DRAGON-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

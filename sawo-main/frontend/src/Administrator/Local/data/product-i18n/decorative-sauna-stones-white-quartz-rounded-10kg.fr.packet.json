@@ -1,0 +1,18 @@
+{
+  "slug": "decorative-sauna-stones-white-quartz-rounded-10kg",
+  "productId": "746b8f1f-0732-4d18-811d-de7c27005606",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Pierres de sauna décoratives quartz blanc arrondies (10 kg)",
+    "short_description": "Pierres de quartz blanc utilisées comme accessoire pour compléter les pierres de sauna. Elles apportent une touche décorative lumineuse et élégante à l'aménagement du sauna sans remplacer les pierres de chauffe principales, et existent en granulométries de 3 à 10 cm et de 8 à 15 cm.",
+    "description": null,
+    "type": "Pierres de sauna",
+    "spec_table_headers": [
+      "Code",
+      "Taille",
+      "Utilisation"
+    ]
+  }
+}

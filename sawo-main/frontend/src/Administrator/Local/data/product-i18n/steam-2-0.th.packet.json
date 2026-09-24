@@ -1,0 +1,32 @@
+{
+  "slug": "steam-2-0",
+  "productId": "da98177f-d5d9-4a2c-b9e7-b7260ebece87",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Steam 2.0",
+    "short_description": "<span style=\"text-align: justify;\"><b>Steam 2.0</b> (STP-INFACE-V2) เป็นสมาชิกใหม่ล่าสุดในกลุ่มชุดควบคุมเครื่องกำเนิดไอน้ำของเรา ให้ประสิทธิภาพที่เชื่อถือได้ในดีไซน์ที่ทันสมัย</span>",
+    "description": null,
+    "type": "ชุดควบคุมไอน้ำ",
+    "features": [
+      "ใช้ได้กับเครื่องกำเนิดไอน้ำ STN",
+      "ตั้งเวลาการใช้งานและอุณหภูมิได้",
+      "โหมดสแตนด์บายประหยัดพลังงาน",
+      "ล็อกปุ่ม",
+      "ระบบระบายน้ำอัตโนมัติ",
+      "ใช้งานร่วมกับปุ่ม Demand ได้",
+      "ฟังก์ชันกลิ่นหอม พัดลม และหรี่ไฟ ให้เลือกเสริม",
+      "ขนาดสินค้า (มม.) ย | ก | ส: 37 | 104 | 147"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

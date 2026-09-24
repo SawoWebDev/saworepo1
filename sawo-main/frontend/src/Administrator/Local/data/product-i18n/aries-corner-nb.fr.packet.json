@@ -1,0 +1,22 @@
+{
+  "slug": "aries-corner-nb",
+  "productId": "abe3f7fb-2725-4d68-bc6b-dff65be81afc",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Angle NB",
+    "short_description": "<span style=\"text-align: justify;\">Le </span><strong style=\"text-align: justify;\"><b>Aries Angle</b></strong><span style=\"text-align: justify;\"> est un poêle minimaliste et élégant qui fait gagner de la place. Conçu pour s'installer facilement dans un angle, il optimise l'espace de n'importe quelle cabine de sauna et renforce le confort des baigneurs pour des saunas profondément ressourçants. Son entretoise à pierres intégrée raccourcit le temps de chauffe des pierres et prolonge la durée de vie des éléments chauffants.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"2\">Distances de sécurité minimales<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NB-CNR-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>335 × 335 × 1000</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries Angle",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commande disponible : intégrée (NB)",
+      "Entretoise à pierres intégrée",
+      "Pieds réglables",
+      "Habillage en acier inoxydable",
+      "Grille de protection en option",
+      "Collerette d'intégration en option"
+    ]
+  }
+}

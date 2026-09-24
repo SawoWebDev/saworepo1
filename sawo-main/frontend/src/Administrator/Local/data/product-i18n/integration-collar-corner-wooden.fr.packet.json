@@ -1,0 +1,20 @@
+{
+  "slug": "integration-collar-corner-wooden",
+  "productId": "7ed5ce24-c12c-40be-8003-582635d5261c",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Collerette d'intégration – Angle (bois)",
+    "short_description": "La collerette d'intégration valorise l'esthétique des poêles installés dans un banc en leur donnant un aspect encastré et harmonieux. Fabriquée en Hemlock résistant, elle s'accorde au design naturel du sauna tout en préservant l'intégrité structurelle et la résistance à la chaleur.",
+    "description": null,
+    "type": "Collerette d'intégration",
+    "spec_table_headers": [
+      "Modèle",
+      "Matériau",
+      "Longueur (mm)",
+      "Largeur (mm)",
+      "Hauteur (mm)"
+    ]
+  }
+}

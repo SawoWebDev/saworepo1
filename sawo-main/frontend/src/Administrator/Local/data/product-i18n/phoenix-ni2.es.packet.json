@@ -1,0 +1,22 @@
+{
+  "slug": "phoenix-ni2",
+  "productId": "b675e512-24e0-4a11-b734-1ef04a84c42d",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Phoenix Ni2",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Phoenix</strong><span style=\"text-align: justify;\"> incorpora la forma de la antorcha olímpica en su diseño elegante y minimalista para simbolizar vitalidad y renovación. Su parte superior ancha aloja más piedras, lo que le permite generar una mayor cantidad de vapor reconfortante. Evoca sin duda la metáfora de resurgir de las cenizas, en este caso después de un largo día (o una larga noche). La Phoenix incluye además un separador de piedras que prolonga la vida útil de sus resistencias.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"2\">Distancias de seguridad mínimas<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>PNX3-45Ni2-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-60Ni2-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>125</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-75Ni2-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>125</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX3-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>340 × 375 × 1100</td>\n  <td>85</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>PNX6-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>475 × 525 × 1175</td>\n  <td>130</td>\n  <td>Saunova</td>\n  <td>150</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Phoenix",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Controles disponibles: Saunova (Ni2)",
+      "Separador de piedras integrado",
+      "Patas regulables",
+      "Carcasa de acero inoxidable",
+      "Protector de estufa opcional",
+      "Marco de integración opcional"
+    ]
+  }
+}

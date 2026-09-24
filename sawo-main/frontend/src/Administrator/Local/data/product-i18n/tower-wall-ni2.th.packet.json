@@ -1,0 +1,23 @@
+{
+  "slug": "tower-wall-ni2",
+  "productId": "3b7587a5-a121-4083-bf71-d57932a31794",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Tower ติดผนัง Ni2",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Tower ติดผนัง</strong><span style=\"text-align: justify;\"> เป็นดีไซน์สง่างามแบบมินิมอลที่ประหยัดพื้นที่ ความสูงช่วยกระจายความร้อนชื้นที่คงทนอย่างสม่ำเสมอเพื่อการอบซาวน่าที่ฟื้นฟูร่างกายอย่างเต็มที่ รุ่นติดผนังเพิ่มกำลังไฟได้เกิน 24.0 kW หรือเชื่อมต่อ Tower ติดผนังสองเครื่องเพื่อให้ได้กำลังไฟสูงสุด 48 kW เช่นเดียวกับฮีตเตอร์ Tower ทุกรุ่น Tower ติดผนัง มาพร้อมตัวคั่นหินแบบถอดได้ที่มี 2 รูปแบบการติดตั้ง คือ (1) ใช้ตัวคั่นเพื่อทำความร้อนเร็วขึ้น ประหยัดพลังงาน และได้ซาวน่าที่ร้อนขึ้น หรือ (2) ไม่ใช้ตัวคั่นเพื่อให้ใส่หินได้มากขึ้น สร้างไอน้ำได้มากขึ้น อุณหภูมิอ่อนลง และประหยัดพลังงานในการใช้งานเชิงพาณิชย์</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(กก.) ไม่มีตัวคั่นหิน</th>\n  <th>หิน<br>(กก.) พร้อมตัวคั่นหิน</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"2\">ระยะปลอดภัยขั้นต่ำ<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH2-30Ni2-WL-P-C</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-35Ni2-WL-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-45Ni2-WL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH3-60Ni2-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH4-60Ni2-WL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>250 × 475 × 1395</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-80Ni2-WL-P-C</td>\n  <td>8.0</td>\n  <td>8 – 14</td>\n  <td>250 × 475 × 1395</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH5-90Ni2-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>250 × 475 × 1395</td>\n  <td>105</td>\n  <td>90</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-80Ni2-WL-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>320 × 550 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-90Ni2-WL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>320 × 550 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Tower ติดผนัง",
+    "features": [
+      "ช่วงกำลังไฟ: 3.0 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova (Ni2)",
+      "โครงเครื่องสแตนเลส",
+      "วงแหวนเหล็กเคลื่อนย้ายได้สำหรับเปลี่ยนหินที่แตก",
+      "ตัวคั่นหินถอดได้",
+      "ขาปรับระดับได้",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม",
+      "มีกรอบติดตั้งฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

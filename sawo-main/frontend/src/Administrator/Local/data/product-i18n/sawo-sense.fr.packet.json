@@ -1,0 +1,13 @@
+{
+  "slug": "sawo-sense",
+  "productId": "f42926da-8a5f-4e67-a095-7d165da3c1b4",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO Sense",
+    "short_description": "Le SAWO Sense porte la commande de sauna intelligente à un niveau supérieur grâce à son élégante interface tactile. Il permet de gérer sans effort la température, l'éclairage et d'autres fonctions du sauna, à la fois depuis son écran intuitif et depuis l'application SAWO grâce à la connexion Wi-Fi intégrée. Avec le suivi en temps réel et l'accès à distance, les utilisateurs peuvent personnaliser et piloter leurs séances de sauna à tout moment, où qu'ils soient. Conçu pour les poêles Ni2 et NS jusqu'à 9,0 kW, le système peut être étendu jusqu'à 18,0 kW avec une unité de contacteur, pour s'adapter aux saunas de toutes tailles.",
+    "description": null,
+    "type": "Bientôt disponible"
+  }
+}

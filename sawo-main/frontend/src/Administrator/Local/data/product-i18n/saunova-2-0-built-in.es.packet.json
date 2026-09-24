@@ -1,0 +1,32 @@
+{
+  "slug": "saunova-2-0-built-in",
+  "productId": "2f5d7d0c-a9cf-44f0-bc72-36968d5602ad",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 integrado",
+    "short_description": "<p style=\"text-align: justify;\">\nEl <b>Saunova 2.0</b> Integrado combina el panel de control y el controlador de potencia en un solo conjunto. Tiene un aspecto moderno y elegante, y ahora ofrece posibilidades de instalación más flexibles. El control recuerda sus ajustes personales, como la duración de la sesión y la temperatura, para que disfrute de una experiencia de sauna constante.\n</p><p style=\"text-align: justify;\">El control utiliza tecnología inteligente que apaga automáticamente las resistencias cuando se alcanza la temperatura ajustada y activa las necesarias cuando la temperatura baja. Esto no solo mantiene estable la temperatura, sino que además prolonga la vida útil de las resistencias y ahorra energía.\n\n</p><p style=\"text-align: justify;\">¡La carcasa del control tiene más espacio para que trabaje el electricista, lo que hace la instalación más fácil que nunca! Opciones de cableado flexibles con alivio de tensión en 4 lados, incluida la parte trasera, para ocultar el cableado por completo.</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">DETALLES TÉCNICOS</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>9kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova 2.0 Built-In (SAU-B-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td>Saunova 2.0 Built-In with Combi &amp; Fan (SAU-B-CF-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor (SAU-B-V2)</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor (SAU-B-V2)</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Temperature Sensor (SAU-B-CF-V2)</td><td>compatible</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor (SAU-B-CF-V2)</td><td>compatible</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Combinación de interfaz de usuario y controlador de potencia.",
+      "La función Smart Controlling regula las resistencias por fases para alcanzar rápidamente la temperatura deseada y ofrecer siempre un buen vapor.",
+      "Las estufas NS se conectan al controlador de potencia SAU-B-V2 o SAU-B-V2-15 para cualquier estufa NS. Para estufas de más de 9 kW / 15 kW, añada la unidad de contactor SAU-PS-V2 o SAU-PS-V2-15 que corresponda.",
+      "Se puede conectar a un sistema de domótica",
+      "Compatible con el sensor de puerta",
+      "Temporizador de arranque programado",
+      "Funciones opcionales de ventilador y Combi",
+      "Incluye el controlador de potencia Saunova con interfaz de usuario Saunova 2.0, un sensor de temperatura con soporte de cedro y 5 m de cableado de silicona."
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

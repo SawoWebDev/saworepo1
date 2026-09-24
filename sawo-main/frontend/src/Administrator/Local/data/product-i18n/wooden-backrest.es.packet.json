@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-backrest",
+  "productId": "a4deea27-81af-4683-9b96-78dffd98abaf",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (516-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (516-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (516-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Respaldo de madera",
+    "short_description": "El respaldo de madera SAWO es un respaldo de sauna de madera de 396 × 515 mm que aporta apoyo para el cuello y la espalda durante las sesiones de sauna.",
+    "description": null,
+    "type": "Reposacabezas y respaldo",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (516-D)",
+        "name": "Cedro (516-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (516-A)",
+        "name": "Álamo (516-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (516-H)",
+        "name": "Tsuga (516-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

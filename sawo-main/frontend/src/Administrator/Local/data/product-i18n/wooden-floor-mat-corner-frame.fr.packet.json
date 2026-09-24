@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-floor-mat-corner-frame",
+  "productId": "028d03cd-9e2b-4721-a2ee-9d01fc4580de",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (595-D-CNR)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (595-A-CNR)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (595-H-CNR)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Tapis de sol en bois, cadre d'angle",
+    "short_description": "Le tapis de sol en bois SAWO, cadre d'angle, est une pièce de cadre d'angle du système modulaire de tapis de sol en bois SAWO, de 390 × 115 mm et de 22 mm d'épaisseur, utilisée pour protéger le sol du sauna et améliorer le confort sous les pieds.",
+    "description": null,
+    "type": "Tapis de sol en bois",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (595-D-CNR)",
+        "name": "Cèdre (595-D-CNR)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (595-A-CNR)",
+        "name": "Tremble (595-A-CNR)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (595-H-CNR)",
+        "name": "Pruche (595-H-CNR)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

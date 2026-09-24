@@ -1,0 +1,56 @@
+{
+  "slug": "stainless-steel-pail-with-wooden-handle",
+  "productId": "f9acca66-3b8a-496b-918f-362d39274668",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (375-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (375-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (375-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ถังสแตนเลสหูหิ้วไม้",
+    "short_description": "ถังสแตนเลสหูหิ้วไม้ SAWO เป็นถังไม้พร้อมกระบอกในสแตนเลสความจุ 5 ลิตร ใช้ใส่น้ำสำหรับราดลงบนหินซาวน่า",
+    "description": null,
+    "type": "ถังน้ำ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (375-MD)",
+        "name": "ซีดาร์ (375-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (375-MA)",
+        "name": "แอสเพน (375-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (375-MH)",
+        "name": "เฮมล็อก (375-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

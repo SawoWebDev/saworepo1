@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-light-cover-corner-wall",
+  "productId": "e8604f18-9c3a-40bb-9823-a99edd4e8803",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (914-VD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (914-VA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (914-VH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cubierta de luz de madera, esquina/pared",
+    "short_description": "La cubierta de luz de madera SAWO, esquina/pared, es una cubierta de luz de sauna de madera de 150 × 110 mm que se coloca sobre un punto de luz para difundir la iluminación de manera uniforme dentro del sauna.",
+    "description": null,
+    "type": "Iluminación para sauna",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (914-VD)",
+        "name": "Cedro (914-VD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (914-VA)",
+        "name": "Álamo (914-VA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (914-VH)",
+        "name": "Tsuga (914-VH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

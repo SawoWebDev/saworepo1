@@ -1,0 +1,13 @@
+{
+  "slug": "rectangular-interface-holder-for-2-0-controls",
+  "productId": "96c70250-e9a0-4dd4-8e0d-c4a5552f292f",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Support d'interface rectangulaire pour commandes 2.0",
+    "short_description": "Support d'interface en bois haut de gamme INN-IH23, conçu pour une large gamme de commandes 2.0, dont Innova Classic 2.0, Innova Stainless Touch 2.0, Saunova 2.0, STE/STN Classic 2.0 et IR Control 2.0. Disponible en finitions cèdre, tremble et pin pour s'accorder à tous les décors de sauna. Dimensions : 190 mm (L) x 145 mm (P) x 40 mm (H). Une solution durable et élégante pour loger en toute sécurité vos commandes 2.0.",
+    "description": null,
+    "type": "Support d'interface"
+  }
+}

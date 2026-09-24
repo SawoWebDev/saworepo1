@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-straight-door-handle-with-metal-accent",
+  "productId": "d3325e99-59f0-4f01-92a1-fc9071b8989d",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (560-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (560-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (560-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Poignée de porte droite en bois avec détail métallique",
+    "short_description": "La poignée de porte droite en bois avec détail métallique SAWO est une poignée de porte de sauna en bois au profil droit, rehaussée de métal, de 155 × 900 mm, conçue pour rester froide au toucher malgré la chaleur du sauna.",
+    "description": null,
+    "type": "Portes et poignées",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (560-D)",
+        "name": "Cèdre (560-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (560-A)",
+        "name": "Tremble (560-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (560-BL)",
+        "name": "Noir (560-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

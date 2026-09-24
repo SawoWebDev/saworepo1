@@ -1,0 +1,44 @@
+{
+  "slug": "stainless-steel-pail-with-curved-handle",
+  "productId": "fd7d2670-9db3-448c-843b-a490d8414878",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (373-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (373-MA)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cubo de acero inoxidable con asa curva",
+    "short_description": "El cubo de acero inoxidable SAWO con asa curva es un cubo de acero inoxidable con una capacidad de 5 L que sirve para contener el agua que se vierte sobre las piedras del sauna.",
+    "description": null,
+    "type": "Cubos",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (373-MD)",
+        "name": "Cedro (373-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (373-MA)",
+        "name": "Álamo (373-MA)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

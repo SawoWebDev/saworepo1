@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-rattan-4l",
+  "productId": "ec3d0259-a4be-4795-9343-ecab6dcbbd00",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (341-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (341-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (341-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cubo de madera de ratán 4 L",
+    "short_description": "El cubo de madera de ratán SAWO de 4 L es un cubo de madera con una capacidad de 4 L que sirve para contener el agua que se vierte sobre las piedras del sauna.",
+    "description": null,
+    "type": "Cubos",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (341-D)",
+        "name": "Cedro (341-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (341-A)",
+        "name": "Álamo (341-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (341-H)",
+        "name": "Tsuga (341-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

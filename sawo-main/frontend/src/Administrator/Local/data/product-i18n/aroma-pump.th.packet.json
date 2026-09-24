@@ -1,0 +1,13 @@
+{
+  "slug": "aroma-pump",
+  "productId": "3edc6a58-f8cf-45dd-961f-1392046e862c",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ปั๊มกลิ่นหอม",
+    "short_description": "<div><p><br></p></div><div style=\"text-align: justify;\"><p>ยกระดับประสบการณ์ห้องอบไอน้ำของคุณด้วย <strong><b>ปั๊มกลิ่นหอม</b></strong>. เมื่อเชื่อมต่อกับเครื่องกำเนิดไอน้ำ ปั๊มจะปล่อยกลิ่นหอมที่คุณเลือกไปทั่วห้อง นำประโยชน์ของอโรมาเทอราพีซึ่งใช้กันมาหลายพันปีเพื่อเสริมสุขภาพกายและใจ มาสู่ทุกการอบไอน้ำ มอเตอร์ขั้นสูงช่วยกระจายกลิ่นหอมอย่างสม่ำเสมอ และการเชื่อมต่อกับชุดควบคุมไอน้ำทำให้ปรับตั้งได้ง่าย ทนทานและแม่นยำ ปั๊มกลิ่นหอมให้ประสิทธิภาพที่ยาวนานและความสะดวกในการใช้งาน</p><p>ปั๊มกลิ่นหอมของ SAWO กระจายกลิ่นหอมได้สม่ำเสมออย่างยิ่งด้วยมอเตอร์ขั้นสูง ปรับตั้งได้สะดวกมากผ่านชุดควบคุมไอน้ำ และยังแม่นยำและทนทาน</p></div>",
+    "description": null,
+    "type": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ"
+  }
+}

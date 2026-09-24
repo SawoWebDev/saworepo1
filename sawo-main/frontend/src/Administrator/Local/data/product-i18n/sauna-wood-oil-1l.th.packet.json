@@ -1,0 +1,17 @@
+{
+  "slug": "sauna-wood-oil-1l",
+  "productId": "4d0d0194-25d6-4e65-bda9-553c4667ae6d",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "น้ำมันเคลือบไม้ซาวน่า SAWO 1 ลิตร",
+    "short_description": "น้ำมันเคลือบไม้ซาวน่า SAWO เป็นน้ำมันเกรดเครื่องสำอางที่ใช้ได้กับไม้ทุกชนิด ออกแบบมาเพื่อปกป้องพื้นผิวไม้จากความชื้นและสิ่งสกปรก ป้องกันการซึมซับความชื้น ช่วยยืดอายุการใช้งานของซาวน่าได้อย่างมาก",
+    "description": null,
+    "type": "ระบบระบายอากาศและอื่น ๆ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ]
+  }
+}

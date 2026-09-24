@@ -1,0 +1,131 @@
+{
+  "slug": "stn-s-steam-generator",
+  "productId": "65d27a90-bd93-44e6-83aa-4fcd0e97a9e6",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Générateur de vapeur STN-S",
+    "short_description": "<p style=\"text-align: justify;\">Conçu pour la puissance et la performance, le <strong>générateur de vapeur STN-S</strong> offre des options d'installation plus souples. Doté d'un compartiment électronique séparé, il peut être installé à un autre endroit que l'électronique. Ses éléments chauffants de type cassette simplifient le nettoyage et l'entretien du réservoir, tandis que les commandes d'arôme, de ventilateur et de variateur permettent de personnaliser chaque séance de vapeur.</p><p style=\"text-align: justify;\">Un supplément de vapeur d'une simple pression avec la fonction <strong>bouton Demand</strong> installable à l'intérieur ou à l'extérieur du hammam. Les codes d'erreur s'affichent sur la commande pour un dépannage rapide. Jusqu'à cinq unités peuvent être reliées pour une puissance maximale de <strong>75.0 kW</strong> en sortie, le tout géré depuis une seule commande SAWO.</p>",
+    "description": null,
+    "type": "Générateurs de vapeur",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 éléments chauffants",
+        "description": null,
+        "features": [
+          "Plage de puissance : 3,0 – 5,0 kW",
+          "Production de vapeur : jusqu'à 6,7 kg/h",
+          "Tuyauterie et câbles électriques installables d'un côté comme de l'autre",
+          "Tuyau dédié pour la soupape de surpression",
+          "Vidange automatique",
+          "Tête de vapeur incluse",
+          "Éléments chauffants de type cassette pour un entretien facile",
+          "Tuyau de vapeur de ¾ po",
+          "Stainless Steel Touch",
+          "Commandes disponibles : interface utilisateur STP 2.0"
+        ],
+        "spec_table_headers": [
+          "Modèle de générateur de vapeur",
+          "kW",
+          "Hammam (m²)",
+          "Dimensions (mm) L|l|H",
+          "Poids (kg)",
+          "Commande"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 éléments chauffants",
+        "description": null,
+        "features": [
+          "Plage de puissance : 4,5 – 7,5 kW",
+          "Production de vapeur : jusqu'à 7,5 kg/h",
+          "Tuyauterie et câbles électriques installables d'un côté comme de l'autre",
+          "Tuyau dédié pour la soupape de surpression",
+          "Vidange automatique",
+          "Tête de vapeur incluse",
+          "Éléments chauffants de type cassette pour un entretien facile",
+          "Tuyau de vapeur de ¾ po",
+          "Stainless Steel Touch",
+          "Commandes disponibles : interface utilisateur STP 2.0"
+        ],
+        "spec_table_headers": [
+          "Modèle de générateur de vapeur",
+          "kW",
+          "Hammam (m²)",
+          "Dimensions (mm) L|l|H",
+          "Poids (kg)",
+          "Commande"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 éléments chauffants",
+        "description": null,
+        "features": [
+          "Plage de puissance : 9,0 – 15,0 kW",
+          "Production de vapeur : jusqu'à 20 kg/h",
+          "Tuyauterie et câbles électriques installables d'un côté comme de l'autre",
+          "Tuyau dédié pour la soupape de surpression",
+          "Vidange automatique",
+          "2 têtes de vapeur incluses",
+          "Éléments chauffants de type cassette pour un entretien facile",
+          "Tuyau de vapeur de ¾ po",
+          "Stainless Steel Touch",
+          "Commandes disponibles : interface utilisateur STP 2.0"
+        ],
+        "spec_table_headers": [
+          "Modèle de générateur de vapeur",
+          "kW",
+          "Hammam (m²)",
+          "Dimensions (mm) L|l|H",
+          "Poids (kg)",
+          "Commande"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "Compartiment électronique",
+        "note": "(inclus uniquement avec les modèles STN-S)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "Vidange automatique",
+        "note": "(inclus avec les modèles STN-S, STN-W et STN)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "Tête de vapeur",
+        "note": "(pour les modèles à partir de 9 kW, deux têtes sont incluses)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "Fonctions arôme, ventilateur et variateur",
+        "note": "(options pour les modèles STN)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "Câble RJ12 de 7,5 m",
+        "note": "Câble RJ10 de 7,5 m"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "Sonde de température avec",
+        "note": "fil et support de sonde"
+      }
+    ]
+  }
+}

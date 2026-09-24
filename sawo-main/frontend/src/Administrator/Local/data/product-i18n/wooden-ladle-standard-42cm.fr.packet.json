@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-ladle-standard-42cm",
+  "productId": "6b6fb642-3af4-4ff3-ba3d-ec49267febe0",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (440-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (440-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (440-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Louche en bois Standard 42 cm",
+    "short_description": "La louche en bois SAWO Standard 42 cm est une louche de sauna en bois de 420 mm de long, utilisée pour verser l'eau (löyly) sur les pierres de sauna chauffées.",
+    "description": null,
+    "type": "Louches",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (440-D)",
+        "name": "Cèdre (440-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (440-A)",
+        "name": "Tremble (440-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (440-H)",
+        "name": "Pruche (440-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

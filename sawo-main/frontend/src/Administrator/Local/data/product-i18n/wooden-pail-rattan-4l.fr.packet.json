@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-rattan-4l",
+  "productId": "ec3d0259-a4be-4795-9343-ecab6dcbbd00",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (341-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (341-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (341-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Seau en bois rotin 4 L",
+    "short_description": "Le seau en bois rotin SAWO 4 L est un seau en bois d'une capacité de 4 L, utilisé pour contenir l'eau versée sur les pierres de sauna.",
+    "description": null,
+    "type": "Seaux",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (341-D)",
+        "name": "Cèdre (341-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (341-A)",
+        "name": "Tremble (341-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (341-H)",
+        "name": "Pruche (341-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

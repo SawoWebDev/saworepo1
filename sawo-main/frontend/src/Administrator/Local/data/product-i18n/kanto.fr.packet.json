@@ -1,0 +1,56 @@
+{
+  "slug": "kanto",
+  "productId": "b67db2b4-a075-41f2-825d-1a64df552c7a",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (347-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "White (347-WH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (347-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Kanto",
+    "short_description": "Le SAWO Kanto est un seau d'une capacité de 4 L, utilisé pour contenir l'eau versée sur les pierres de sauna.",
+    "description": null,
+    "type": "Seaux",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (347-H)",
+        "name": "Pruche (347-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "White (347-WH)",
+        "name": "Blanc (347-WH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (347-BL)",
+        "name": "Noir (347-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

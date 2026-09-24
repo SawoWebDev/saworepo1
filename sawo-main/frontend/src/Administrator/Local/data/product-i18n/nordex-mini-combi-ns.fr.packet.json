@@ -1,0 +1,20 @@
+{
+  "slug": "nordex-mini-combi-ns",
+  "productId": "8d388b31-c36e-4456-8420-2cb4ee0edd89",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Mini Combi NS",
+    "short_description": "Le Nordex Mini Combi ultra-compact ajoute de l'humidité à la chaleur grâce à son réservoir d'eau. Il est disponible avec un habillage en acier inoxydable ou en métal noir, et compatible avec les commandes séparées Saunova (NS) et Innova (NS).",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW\n<br>Poêle</th>\n  <th>kW\n<br>Réservoir</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th colspan=\"2\">Commande</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRMC-30NS-Z</td>\n  <td>3.0</td>\n  <td>1 × 0.8</td>\n  <td>2 – 4</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>NRMC-36NS-Z</td>\n  <td>3.6</td>\n  <td>1 × 0.8</td>\n  <td>3 – 6</td>\n  <td>300 × 345 × 525</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "Plage de puissance : 3,0 – 3,6 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Réservoir d'eau séparé avec générateur de vapeur de 0,8 kW",
+      "Habillage en acier inoxydable",
+      "Coupelle à arômes intégrée"
+    ]
+  }
+}

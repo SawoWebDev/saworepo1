@@ -1,0 +1,13 @@
+{
+  "slug": "nordex-combi-black-ns",
+  "productId": "960809d7-d1b5-473f-b4a0-af7b982f10d1",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Combi สีดำ NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Nordex Combi</strong><span style=\"text-align: justify;\"> ยกระดับดีไซน์ทันสมัยไฮเทคแบบมินิมอลและความอเนกประสงค์สูงสุดของฮีตเตอร์ Nordex ด้วยเครื่องสร้างไอน้ำในตัว ผู้ใช้เพลิดเพลินกับการอบซาวน่าเหมือนอยู่ในสปา ด้วยไอน้ำที่หอมด้วยน้ำมันหอมระเหยและกลิ่นหอมที่ใส่ในถ้วยน้ำมันหอมระเหยของฮีตเตอร์</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW\n<br>ฮีตเตอร์</th>\n  <th>kW\n<br>ถังน้ำ</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th colspan=\"2\">ระบบควบคุม</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr>\n<tr>\n  <td>NRNC-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr>\n<tr>\n  <td>NRNC-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Nordex Combi"
+  }
+}

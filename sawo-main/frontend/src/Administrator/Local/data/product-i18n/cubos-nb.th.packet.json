@@ -1,0 +1,22 @@
+{
+  "slug": "cubos-nb",
+  "productId": "7078d72f-2c37-445d-9fa1-12f331e2fec9",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cubos NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Cubos</strong><span style=\"text-align: justify;\"> เหมาะอย่างยิ่งกับพื้นที่จำกัด ให้ความยืดหยุ่นแบบ 3 in 1 ดีไซน์ทันสมัยเรียบหรูเพียงแบบเดียว แต่ติดตั้งได้ 3 แบบ คือกลางห้อง เข้ามุม หรือติดผนัง มาพร้อมฝาครอบป้องกันที่ช่วยรองรับเพิ่มเติมสำหรับการติดตั้งแบบติดผนังและเข้ามุม รวมถึงแผ่นสะท้อนความร้อนที่ส่งความร้อนไปถึงส่วนล่างสุดของห้องซาวน่า นอกจากนี้ Cubos ยังมีตัวคั่นหินในตัว ทำให้หินร้อนเร็วขึ้นและองค์ประกอบทำความร้อนใช้งานได้ยาวนานขึ้น</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"3\">ระยะปลอดภัยขั้นต่ำ<br>A | AA | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CUB3-45NB-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-60NB-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-75NB-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Built-in (8+4h)</td>\n  <td>125</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Cubos",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "มีตัวคั่นหินในตัว",
+      "ขาปรับระดับได้",
+      "โครงเครื่องสแตนเลส",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม",
+      "มีกรอบติดตั้งฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "cozy-tank-13l",
+  "productId": "64d559e0-16fe-41b9-b83a-7c1a0272be0b",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cozy Tank (1,3 L)",
+    "short_description": "Le Cozy Tank de 1,3 L est un humidificateur de sauna rectangulaire doté d'une réserve d'eau intégrée qui libère instantanément de la vapeur dès que le poêle est chaud. On peut ajouter des huiles essentielles et des parfums à l'eau pour produire une vapeur parfumée. Cet humidificateur est fabriqué en acier inoxydable épais pour plus de durabilité et dispose d'un couvercle en stéatite sculptée, alliant praticité et design naturel. Il se remplit facilement par un orifice du couvercle supérieur.",
+    "description": null,
+    "type": "Humidificateur de sauna rectangulaire",
+    "features": [
+      "Réserve d'eau qui produit instantanément de la vapeur lorsque le poêle est chaud",
+      "Remplissage d'eau par les orifices du couvercle supérieur",
+      "Acier inoxydable épais",
+      "Couvercle supérieur en stéatite sculptée"
+    ],
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ]
+  }
+}

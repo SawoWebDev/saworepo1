@@ -1,0 +1,56 @@
+{
+  "slug": "2-accent-stone-thermometer",
+  "productId": "f1d36e01-da26-46e8-bb3c-de7f02366418",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (280-TRD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (280-TRA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (280-TRH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Thermomètre Accent Stone 2",
+    "short_description": "Le thermomètre SAWO Accent Stone 2 est un thermomètre de sauna Accent Stone de 125 × 160 mm, utilisé pour surveiller la température à l'intérieur du sauna.",
+    "description": null,
+    "type": "Thermomètres",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (280-TRD)",
+        "name": "Cèdre (280-TRD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (280-TRA)",
+        "name": "Tremble (280-TRA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (280-TRH)",
+        "name": "Pruche (280-TRH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

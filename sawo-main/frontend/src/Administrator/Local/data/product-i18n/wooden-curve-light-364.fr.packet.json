@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-curve-light-364",
+  "productId": "ae9e8429-fb86-4f6a-9675-6259c193d001",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (924-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (924-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (924-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Luminaire courbe en bois 364",
+    "short_description": "Le luminaire courbe en bois SAWO 364 est un luminaire de sauna en bois courbé de 60 mm (3,4\") x 364 mm (14,4\") x 85 mm (2,4\"), conçu pour diffuser la lumière de façon homogène dans le sauna.",
+    "description": null,
+    "type": "Éclairage de sauna",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (924-D)",
+        "name": "Cèdre (924-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (924-H)",
+        "name": "Pruche (924-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (924-BL)",
+        "name": "Noir (924-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

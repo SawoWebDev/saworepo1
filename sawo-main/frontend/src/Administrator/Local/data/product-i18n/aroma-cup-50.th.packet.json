@@ -1,0 +1,26 @@
+{
+  "slug": "aroma-cup-50",
+  "productId": "c0f8a762-c263-4719-a89e-7c1b46075ce6",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ถ้วยน้ำมันหอมระเหย (ø)50",
+    "short_description": "ถ้วยน้ำมันหอมระเหย SAWO (ø)50 เป็นถ้วยหินสบู่ขนาด 50 × 50 × 60 มม. หนัก 0.3 กก. ในกลุ่มอุปกรณ์เสริม Kivistone ใช้ใส่น้ำสำหรับอโรมาเทอราพีบนหินซาวน่า",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-100)",
+        "name": "(R-100)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

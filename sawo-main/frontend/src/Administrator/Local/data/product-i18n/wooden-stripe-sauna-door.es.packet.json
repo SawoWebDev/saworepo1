@@ -1,0 +1,44 @@
+{
+  "slug": "wooden-stripe-sauna-door",
+  "productId": "bfe97541-651d-4afc-8736-085aa38516bd",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (770-4SD-R)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Cedar (770-4SD-L)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puerta de sauna de madera con rayas",
+    "short_description": "La puerta de sauna de madera con rayas SAWO es una puerta de sauna de madera maciza con panel a rayas: hueco de 610 × 1955 mm, marco de 700 × 2040 mm.",
+    "description": null,
+    "type": "Puertas y tiradores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (770-4SD-R)",
+        "name": "Cedro (770-4SD-R)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Cedar (770-4SD-L)",
+        "name": "Cedro (770-4SD-L)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

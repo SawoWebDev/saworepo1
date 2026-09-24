@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-cover-for-381",
+  "productId": "182b2068-89b9-4209-8341-953aafca41dd",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (381-D-COV)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (381-A-COV)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (381-H-COV)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cubierta de madera para 381",
+    "short_description": "La cubierta de madera SAWO para 381 es una tapa de madera fabricada para el cubo SAWO 381 correspondiente, que lo protege entre sesiones de sauna.",
+    "description": null,
+    "type": "Cubos",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (381-D-COV)",
+        "name": "Cedro (381-D-COV)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (381-A-COV)",
+        "name": "Álamo (381-A-COV)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (381-H-COV)",
+        "name": "Tsuga (381-H-COV)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

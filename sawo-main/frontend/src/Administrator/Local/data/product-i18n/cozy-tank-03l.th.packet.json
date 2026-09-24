@@ -1,0 +1,23 @@
+{
+  "slug": "cozy-tank-03l",
+  "productId": "1be0afba-f331-468e-ad86-1d7f3d070b9b",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cozy Tank (0.3 L)",
+    "short_description": "Cozy Tank 0.3 ลิตร เป็นเครื่องเพิ่มความชื้นซาวน่าทรงกระบอกที่มีถังเก็บน้ำในตัว ปล่อยไอน้ำทันทีเมื่อฮีตเตอร์ร้อน ใส่น้ำมันหอมระเหยและกลิ่นหอมลงในน้ำเพื่อให้ได้ไอน้ำหอมได้ ผลิตจากสแตนเลสหนาเพื่อความทนทาน พร้อมฝาหินสบู่แกะสลัก ผสานความสะดวกเข้ากับดีไซน์ธรรมชาติ เติมน้ำได้ง่ายผ่านรูบนฝาครอบด้านบน",
+    "description": null,
+    "type": "เครื่องเพิ่มความชื้นซาวน่าทรงกระบอก",
+    "features": [
+      "ถังเก็บน้ำที่สร้างไอน้ำทันทีเมื่อฮีตเตอร์ร้อน",
+      "เติมน้ำได้ผ่านรูบนฝาครอบด้านบน",
+      "สแตนเลสหนา",
+      "ฝาครอบด้านบนหินสบู่แกะสลัก"
+    ],
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ]
+  }
+}

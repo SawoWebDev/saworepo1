@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-floor-mat-corner-frame",
+  "productId": "028d03cd-9e2b-4721-a2ee-9d01fc4580de",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (595-D-CNR)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (595-A-CNR)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (595-H-CNR)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "แผ่นไม้ปูพื้น กรอบมุม",
+    "short_description": "แผ่นไม้ปูพื้น SAWO กรอบมุม เป็นชิ้นกรอบมุมของระบบแผ่นไม้ปูพื้นแบบโมดูลาร์ของ SAWO ขนาด 390 × 115 มม. หนา 22 มม. ใช้ปกป้องพื้นห้องซาวน่าและเพิ่มความสบายเมื่อเดิน",
+    "description": null,
+    "type": "แผ่นไม้ปูพื้น",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (595-D-CNR)",
+        "name": "ซีดาร์ (595-D-CNR)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (595-A-CNR)",
+        "name": "แอสเพน (595-A-CNR)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (595-H-CNR)",
+        "name": "เฮมล็อก (595-H-CNR)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

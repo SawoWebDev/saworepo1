@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-hook-rack-4-hooks",
+  "productId": "50a253e2-e633-4788-9cea-4957c609e4ad",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (586-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (586-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (586-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Porte-crochets en bois (4 crochets)",
+    "short_description": "Le porte-crochets en bois SAWO (4 crochets) est un porte-crochets en bois de 42 × 340 mm, utilisé pour suspendre serviettes et peignoirs juste à l'extérieur du sauna.",
+    "description": null,
+    "type": "Cintres pour vêtements",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (586-D)",
+        "name": "Cèdre (586-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (586-A)",
+        "name": "Tremble (586-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (586-H)",
+        "name": "Pruche (586-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

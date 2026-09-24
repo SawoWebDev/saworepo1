@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Módulo de extensión de luz Innova",
+    "short_description": "Conecte la unidad de contactor Saunova 2.0 con el controlador de potencia Saunova 2.0 para usarla con estufas de más de 9 kW. La nueva carcasa modernizada ofrece más espacio para una instalación más sencilla y rápida. Opciones de cableado flexibles con alivio de tensión en 4 lados, incluida la parte trasera, para ocultar el cableado por completo.\n\n<span style=\"text-align: justify;\"><b>Para usar con estufas NS de más de 9 kW. Se conecta al controlador de potencia Saunova</b></span>",
+    "description": null,
+    "type": "Repuestos",
+    "features": [
+      "Incluye la unidad de contactor Saunova y un cable RJ12 de 1 m",
+      "Nuevo diseño de carcasa para una instalación más sencilla, con más espacio y opciones de cableado"
+    ]
+  }
+}

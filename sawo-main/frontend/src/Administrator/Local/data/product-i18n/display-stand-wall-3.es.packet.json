@@ -1,0 +1,26 @@
+{
+  "slug": "display-stand-wall-3",
+  "productId": "bbfc9355-6a61-4b2d-8c99-6373b39b3987",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Expositor de pared 3",
+    "short_description": "El expositor de pared SAWO 3 es un expositor mural de (L) 630 x (An) 3400 x (Al) 2000 mm que se utiliza para exhibir estufas y accesorios SAWO en una tienda o showroom.",
+    "description": null,
+    "type": "Ventilación y varios",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(DP-17)",
+        "name": "(DP-17)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

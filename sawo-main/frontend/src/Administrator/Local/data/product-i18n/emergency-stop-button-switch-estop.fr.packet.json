@@ -1,0 +1,13 @@
+{
+  "slug": "emergency-stop-button-switch-estop",
+  "productId": "14ff030c-e163-4db1-b9e4-951525d50ecb",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Bouton d'arrêt d'urgence (ESTOP)",
+    "short_description": "Le bouton d'arrêt d'urgence permet d'éteindre le poêle de sauna via le circuit de sécurité contre la surchauffe. En cas d'urgence, une alarme peut également être déclenchée via un dispositif de signalisation en option, par exemple pour alerter le personnel de surveillance situé à distance. Veillez à respecter les normes et exigences légales applicables, par exemple EN 60335-1, EN 60335-2-53, VDE 0100 partie 703 ainsi que les exigences du fournisseur d'énergie local.",
+    "description": null,
+    "type": "Interrupteur de sécurité"
+  }
+}

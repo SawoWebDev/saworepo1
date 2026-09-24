@@ -1,0 +1,18 @@
+{
+  "slug": "mini-fibercoated-nb",
+  "productId": "15dff165-8128-49f2-b760-9553be5cff00",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Mini เคลือบไฟเบอร์ NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini เคลือบไฟเบอร์</b><span style=\"text-align: justify;\"> เป็นทางออกสำหรับห้องซาวน่า 1–2 คน ขนาดเล็กและชุดควบคุมที่สลับซ้าย-ขวาได้ทำให้เหมาะกับการติดตั้งในพื้นที่เล็ก เพื่อความปลอดภัยยิ่งขึ้น สารเคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อนช่วยลดความเสี่ยงต่อการบาดเจ็บ</span>",
+    "description": "<div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-6 wpb_column column_container _ height-full\"><h3 id=\"fancy-title-20\" class=\"mk-fancy-title align-left simple-style color-single\"><br></h3></div></div><div class=\"wpb_row vc_row mk-fullwidth-false attched-false vc_row-fluid js-master-row mk-in-viewport\"><div class=\"vc_col-sm-12 wpb_column column_container _ height-full\"><div class=\"vc_wp_text wpb_content_element tg\"><div class=\"widget widget_text mk-in-viewport\"><div class=\"textwidget\"><table class=\"tg\">\n<tbody class=\"specificationstext\">\n<tr>\n<th class=\"tg-s6z2 c_tta-tabs-container\">รุ่นฮีตเตอร์</th>\n<th class=\"tg-s6z2\">KW</th>\n<th class=\"tg-s6z2\">ห้องซาวน่า ต่ำสุด (ลบ.ม.) สูงสุด</th>\n<th class=\"tg-s6z2\">ขนาดฮีตเตอร์ (มม.) ยาว กว้าง สูง</th>\n<th class=\"tg-s6z2\">หิน (กก.)</th>\n<th class=\"tg-s6z2\">ระบบควบคุม</th>\n<th class=\"tg-s6z2\" colspan=\"5\">ระยะปลอดภัยขั้นต่ำ A | B | C | D | E</th>\n<th class=\"tg-s6z2\"></th>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">MN-23NB-P-F</td>\n<td class=\"tg-s6z2\">2.3</td>\n<td class=\"tg-s6z2\">1.3 – 2.5</td>\n<td class=\"tg-s6z2\">215 × 435 × 455</td>\n<td class=\"tg-s6z2\">11</td>\n<td class=\"tg-s6z2\">Built-in (8+4h)</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">20</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">140</td>\n<td class=\"tg-s6z2\">155</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">MN-30NB-P-F</td>\n<td class=\"tg-s6z2\">3.0</td>\n<td class=\"tg-s6z2\">2 – 4</td>\n<td class=\"tg-s6z2\">215 × 435 × 455</td>\n<td class=\"tg-s6z2\">11</td>\n<td class=\"tg-s6z2\">Built-in (8+4h)</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">20</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">140</td>\n<td class=\"tg-s6z2\">155</td>\n</tr>\n<tr>\n<td class=\"tg-s6z2\">MN-36NB-P-F</td>\n<td class=\"tg-s6z2\">3.6</td>\n<td class=\"tg-s6z2\">3 – 6</td>\n<td class=\"tg-s6z2\">215 × 435 × 455</td>\n<td class=\"tg-s6z2\">11</td>\n<td class=\"tg-s6z2\">Built-in (8+4h)</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">20</td>\n<td class=\"tg-s6z2\">100</td>\n<td class=\"tg-s6z2\">140</td>\n<td class=\"tg-s6z2\">155</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>",
+    "type": "Mini",
+    "features": [
+      "ช่วงกำลังไฟ: 2.3 – 3.6 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "เคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อน"
+    ]
+  }
+}

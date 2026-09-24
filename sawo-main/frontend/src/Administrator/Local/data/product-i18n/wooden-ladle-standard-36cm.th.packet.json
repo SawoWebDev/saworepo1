@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-ladle-standard-36cm",
+  "productId": "66c001fe-7c99-49ad-afc5-43b04670527c",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (430-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (430-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (430-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "กระบวยไม้ มาตรฐาน 36 ซม.",
+    "short_description": "กระบวยไม้ SAWO มาตรฐาน 36 ซม. เป็นกระบวยซาวน่าไม้ยาว 360 มม. ใช้ราดน้ำ (löyly) ลงบนหินซาวน่าที่ร้อน",
+    "description": null,
+    "type": "กระบวยตักน้ำ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (430-D)",
+        "name": "ซีดาร์ (430-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (430-A)",
+        "name": "แอสเพน (430-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (430-H)",
+        "name": "เฮมล็อก (430-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

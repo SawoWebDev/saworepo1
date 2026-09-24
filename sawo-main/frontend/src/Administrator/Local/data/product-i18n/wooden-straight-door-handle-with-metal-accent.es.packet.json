@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-straight-door-handle-with-metal-accent",
+  "productId": "d3325e99-59f0-4f01-92a1-fc9071b8989d",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (560-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (560-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (560-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Tirador de puerta recto de madera con detalle metálico",
+    "short_description": "El tirador de puerta recto de madera con detalle metálico SAWO es un tirador de puerta de sauna de madera con perfil recto y detalles metálicos, de 155 × 900 mm, diseñado para no quemar al tacto con el calor del sauna.",
+    "description": null,
+    "type": "Puertas y tiradores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (560-D)",
+        "name": "Cedro (560-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (560-A)",
+        "name": "Álamo (560-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (560-BL)",
+        "name": "Negro (560-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

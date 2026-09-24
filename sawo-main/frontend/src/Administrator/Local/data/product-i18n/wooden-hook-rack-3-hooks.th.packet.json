@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-hook-rack-3-hooks",
+  "productId": "62434757-9ec0-4ae3-8879-637854d6b55c",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (582-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (582-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (582-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ราวแขวนไม้ (3 ตะขอ)",
+    "short_description": "ราวแขวนไม้ SAWO (3 ตะขอ) เป็นราวแขวนไม้ขนาด 42 × 240 มม. ใช้แขวนผ้าเช็ดตัวและเสื้อคลุมบริเวณนอกห้องซาวน่า",
+    "description": null,
+    "type": "ที่แขวนเสื้อผ้า",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (582-D)",
+        "name": "ซีดาร์ (582-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (582-A)",
+        "name": "แอสเพน (582-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (582-H)",
+        "name": "เฮมล็อก (582-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

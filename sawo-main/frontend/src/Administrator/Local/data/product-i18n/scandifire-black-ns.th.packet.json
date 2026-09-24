@@ -1,0 +1,22 @@
+{
+  "slug": "scandifire-black-ns",
+  "productId": "c18f7676-a199-4e7e-b092-02c81217afbd",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandifire สีดำ NS",
+    "short_description": "<div style=\"text-align: justify;\"><p><b>Scandifire</b> โดยสเตฟาน ลินด์ฟอร์ส ชุบชีวิตใหม่ให้ฮีตเตอร์คลาสสิกไร้กาลเวลาอย่าง Scandia ลาย Junglefire ทั้งสนุกและกล้า เมื่อผสานกับสารเคลือบไฟเบอร์ ทำให้ฮีตเตอร์นี้ทั้งปลอดภัยและมีสไตล์</p></div><div></div><br>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NS-DRF-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 410 × 455</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NS-DRF-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 410 × 455</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NS-DRF-BL-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 410 × 525</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NS-DRF-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 410 × 525</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandifire",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "เคลือบไฟเบอร์ลาย Junglefire",
+      "ติดตั้งบนผนัง",
+      "รองรับหินได้ 22 กก.",
+      "รุ่นบิวท์อิน: ปุ่มหมุนควบคุมพร้อมไฟแสดงสถานะ",
+      "สารเคลือบช่วยปกป้องฮีตเตอร์จากความชื้นและอุณหภูมิสูง"
+    ]
+  }
+}

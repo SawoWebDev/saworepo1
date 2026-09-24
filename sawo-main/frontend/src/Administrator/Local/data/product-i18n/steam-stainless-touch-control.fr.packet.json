@@ -1,0 +1,37 @@
+{
+  "slug": "steam-stainless-touch-control",
+  "productId": "20f895bb-31e0-4a02-8802-9768d7180345",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Commande tactile Steam en inox",
+    "short_description": "<p style=\"text-align: justify;\">Le tout dernier générateur de vapeur STN à écran tactile est désormais disponible.</p><p style=\"text-align: justify;\">La <b>commande tactile Steam en inox</b> permet de contrôler sans effort la vapeur, la température et la durée grâce à une interface conviviale, pour une expérience de sauna ou de hammam personnalisée.</p>",
+    "description": null,
+    "type": "Commandes vapeur",
+    "features": [
+      "Habillage épais en acier inoxydable",
+      "Boutons animés",
+      "Compatible avec les composants domotiques automatisés",
+      "Possibilité de raccorder une alarme d'urgence",
+      "Mode veille pour garder l'eau chaude jusqu'à la séance suivante",
+      "Affichage des codes d'erreur",
+      "Fonction de vidange automatique",
+      "Verrouillage des touches",
+      "Mode simple disponible",
+      "Réglage de la date et de l'heure",
+      "Compteur de consommation en kilowatts",
+      "Fonction de détartrage",
+      "Détection de panne d'élément chauffant",
+      "Mémoire en cas de coupure de courant",
+      "Unité de température en degrés Celsius ou Fahrenheit",
+      "Éclairage automatique",
+      "Ventilateur automatique",
+      "Réglage du contraste de l'écran LCD",
+      "Pompe à parfum, variateur de lumière et ventilateur en option",
+      "Sonde de température avec câble",
+      "Support d'interface en option",
+      "Câble RJ12 de 7,5 m avec connecteurs inclus"
+    ]
+  }
+}

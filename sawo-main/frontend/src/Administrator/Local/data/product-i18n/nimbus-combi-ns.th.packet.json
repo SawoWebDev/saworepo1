@@ -1,0 +1,19 @@
+{
+  "slug": "nimbus-combi-ns",
+  "productId": "a2c06d94-9bc9-4c7a-aabe-45cd6cec7326",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nimbus Combi NS",
+    "short_description": "Nimbus Combi เสริมความร้อนสม่ำเสมอที่ฮีตเตอร์ Nimbus สร้างและรักษาไว้ได้นานหลายชั่วโมง ด้วยถังน้ำแยกจึงเพิ่มปริมาณไอน้ำที่เกิดขึ้น ให้ความสมดุลที่ลงตัวระหว่างความร้อนและความชื้น เช่นเดียวกับ Nimbus รุ่น Combi ใช้งานร่วมกับชุดควบคุม Saunova และ Innova (NS) ได้",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW<br>ฮีตเตอร์</th>\n  <th>kW<br>ถังน้ำ</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NIMC-90NS-P</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>575 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>50</td>\n  <td>30</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NIMC-105NS-P</td>\n  <td>10.5</td>\n  <td>1 × 2.0</td>\n  <td>9 – 15</td>\n  <td>575 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>50</td>\n  <td>30</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NIMC-120NS-P</td>\n  <td>12.0</td>\n  <td>1 × 2.0</td>\n  <td>10 – 18</td>\n  <td>575 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIMC-150NS-P</td>\n  <td>15.0</td>\n  <td>2 × 2.0</td>\n  <td>13 – 23</td>\n  <td>775 × 470 × 690</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIMC-180NS-P</td>\n  <td>18.0</td>\n  <td>2 × 2.0</td>\n  <td>17 – 29</td>\n  <td>775 × 470 × 690</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n</tbody></table>",
+    "type": "Nimbus",
+    "features": [
+      "ช่วงกำลังไฟ: 9.0 – 18.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "มีถ้วยน้ำมันหอมระเหยในตัว",
+      "มีระบบเติมน้ำอัตโนมัติให้เลือกเสริมเพื่อเติมน้ำลงถังโดยอัตโนมัติ"
+    ]
+  }
+}

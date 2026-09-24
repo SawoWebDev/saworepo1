@@ -1,0 +1,32 @@
+{
+  "slug": "saunova-2-0-built-in",
+  "productId": "2f5d7d0c-a9cf-44f0-bc72-36968d5602ad",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 encastrable",
+    "short_description": "<p style=\"text-align: justify;\">\nLa <b>Saunova 2.0</b> Encastrable réunit le panneau de commande et le contrôleur de puissance en un seul ensemble. Il affiche un look moderne et élégant, avec désormais des possibilités d'installation plus souples. La commande mémorise vos réglages personnels, comme la durée de séance et la température, pour une expérience de sauna toujours identique.\n</p><p style=\"text-align: justify;\">La commande utilise une technologie intelligente qui coupe automatiquement les éléments chauffants lorsque la température réglée est atteinte, et qui réactive ceux qui sont nécessaires lorsque la température baisse. Cela maintient non seulement une température stable, mais prolonge aussi la durée de vie des éléments chauffants et permet d'économiser de l'énergie !\n\n</p><p style=\"text-align: justify;\">Le boîtier de la commande offre plus d'espace de travail à l'électricien, ce qui rend l'installation plus simple que jamais ! Options de câblage flexibles avec passages de câbles anti-traction sur 4 côtés, y compris à l'arrière pour dissimuler complètement le câblage.</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">CARACTÉRISTIQUES TECHNIQUES</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>9kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova 2.0 Built-In (SAU-B-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td>Saunova 2.0 Built-In with Combi &amp; Fan (SAU-B-CF-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor (SAU-B-V2)</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor (SAU-B-V2)</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Temperature Sensor (SAU-B-CF-V2)</td><td>compatible</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor (SAU-B-CF-V2)</td><td>compatible</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Association d'une interface utilisateur et d'un contrôleur de puissance.",
+      "La fonction Smart Controlling régule les éléments chauffants par étapes pour atteindre rapidement la température souhaitée et offrir en permanence une vapeur de qualité.",
+      "Les poêles NS se raccordent au contrôleur de puissance SAU-B-V2 ou SAU-B-V2-15 pour tout poêle NS. Pour les poêles de plus de 9 kW / 15 kW, ajoutez l'unité de contacteur SAU-PS-V2 ou SAU-PS-V2-15 nécessaire.",
+      "Peut être raccordé à un système domotique",
+      "Compatible avec le détecteur d'ouverture de porte",
+      "Minuterie de démarrage différé",
+      "Fonctions ventilateur et Combi en option",
+      "Comprend le contrôleur de puissance Saunova avec interface utilisateur Saunova 2.0, une sonde de température avec support en cèdre et un câblage en silicone de 5 m."
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

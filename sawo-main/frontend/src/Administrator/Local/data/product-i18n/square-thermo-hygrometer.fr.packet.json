@@ -1,0 +1,68 @@
+{
+  "slug": "square-thermo-hygrometer",
+  "productId": "2b49a493-a353-4f16-8757-f445dad584b2",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (225-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (225-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (225-THH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black Metal (225-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Thermo-hygromètre carré",
+    "short_description": "Le thermo-hygromètre carré SAWO est un thermo-hygromètre de sauna de 180 × 180 mm, utilisé pour surveiller la température et l'humidité à l'intérieur du sauna.",
+    "description": null,
+    "type": "Thermomètres",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (225-THD)",
+        "name": "Cèdre (225-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (225-THA)",
+        "name": "Tremble (225-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (225-THH)",
+        "name": "Pruche (225-THH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black Metal (225-BL)",
+        "name": "Métal noir (225-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

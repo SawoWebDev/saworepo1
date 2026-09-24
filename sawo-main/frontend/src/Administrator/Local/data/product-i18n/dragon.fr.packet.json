@@ -1,0 +1,44 @@
+{
+  "slug": "dragon",
+  "productId": "71ea2f1e-f27f-4eee-87d9-1035d6dfcb27",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (SET-DRAGON-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Black (SET-DRAGON-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Dragon",
+    "short_description": "D'un style et d'une innovation inégalés, le set Dragon affiche un look unique et audacieux, avec une touche d'originalité en plus. Ce set fait partie de la série Dragonfire, conçue par le célèbre designer finlandais Stefan Lindfors.",
+    "description": null,
+    "type": "Ensembles d'accessoires",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (SET-DRAGON-D)",
+        "name": "Cèdre (SET-DRAGON-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Black (SET-DRAGON-BL)",
+        "name": "Noir (SET-DRAGON-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

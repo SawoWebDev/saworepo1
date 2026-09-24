@@ -1,0 +1,36 @@
+{
+  "slug": "innova-stainless-steel-touch",
+  "productId": "9b16757e-fc42-4213-b33f-07a48edc4e2e",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Stainless Steel Touch",
+    "short_description": "<span style=\"text-align: justify;\">Moderna y elegante </span><b style=\"text-align: justify;\">Innova Stainless Steel Touch</b><span style=\"text-align: justify;\"> está equipada con funciones útiles que hacen su experiencia de sauna aún más agradable.</span>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">DETALLES TÉCNICOS</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Stainless Steel Touch (INT-S-SST)</td><td>W: 140 mm x H: 190 mm x D: 40 mm</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "La función Smart Controlling regula las resistencias por fases para alcanzar rápidamente la temperatura deseada y ofrecer siempre un buen vapor.",
+      "Se conecta al controlador de potencia INP-C para cualquier estufa NS de hasta 15 kW. Para estufas de más de 15 kW, añada la unidad de contactor INP-S.",
+      "Compatible con el sensor de puerta",
+      "Temporizador de arranque programado para sesiones semanales",
+      "Modo fácil",
+      "Bloqueo de teclas",
+      "Memoria ante cortes de energía",
+      "Contador de consumo eléctrico",
+      "Funciones opcionales de ventilador, regulador de intensidad y Combi",
+      "Se puede conectar a un sistema de domótica",
+      "Se recomienda usarlo junto con el sensor de banco opcional (INN-BTEMP) y, en estufas Combi, con el sensor de humedad (INN-HUM)",
+      "Incluye la interfaz de usuario Stainless Touch y un cable RJ12 de 5 m"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

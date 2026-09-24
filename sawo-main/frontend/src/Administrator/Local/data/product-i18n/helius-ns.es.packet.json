@@ -1,0 +1,19 @@
+{
+  "slug": "helius-ns",
+  "productId": "15024010-24cd-4cf2-ab01-7e4281cc5603",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius NS",
+    "short_description": "<p style=\"text-align: justify;\">La <strong>Helius</strong> ofrece mayor flexibilidad de ubicación gracias a su perfil delgado. Esta estufa «oculta» puede instalarse detrás de los bancos mediante un panel divisor de pared, lo que la hace prácticamente invisible. Cuando se vierte agua en la pila de agua, el único elemento que permanece a la vista, el agua llega a la estufa a través de una manguera y calienta la estancia. Gracias a su avanzado diseño de circulación de aire, la Helius utiliza menos piedras, lo que mejora el flujo de aire y la eficiencia de calentamiento.</p><p style=\"text-align: justify;\">La Helius requiere además una distancia de seguridad mucho menor de lo habitual (mín. 5 mm). Si se añade la campana Helius que se vende por separado, la distancia de seguridad puede reducirse casi al mínimo.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Estufa\n<br>Modelo</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th colspan=\"2\">Control</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-45NS-G-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-60NS-G-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-75NS-G-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-90NS-G-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Depósito de agua independiente de esteatita con manguera",
+      "Protector y campana de estufa opcionales"
+    ]
+  }
+}

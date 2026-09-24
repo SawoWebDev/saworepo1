@@ -1,0 +1,19 @@
+{
+  "slug": "nordex-black-ns",
+  "productId": "3c509fa8-2425-4a77-97f3-60628fd09779",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Noir NS",
+    "short_description": "Comme tous les modèles Nordex, ce poêle affiche un design moderne et minimaliste. Ses réglages et ses fonctions se personnalisent facilement à l'aide d'une commande séparée, Saunova ou Innova. Poêle mural, le Nordex Noir NS optimise l'espace et rend toute cabine de sauna plus confortable.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"4\">Distances de sécurité minimales<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45NS-BL-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n<tr>\n  <td>NRN-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Design épuré et minimaliste",
+      "Habillage en métal noir"
+    ]
+  }
+}

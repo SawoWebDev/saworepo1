@@ -1,0 +1,18 @@
+{
+  "slug": "mini-nb",
+  "productId": "7ebdcf49-d5da-412f-bd72-255628e97314",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Mini NB",
+    "short_description": "<p style=\"text-align: justify;\">Le <b>Mini</b> est la solution pour les cabines de sauna de 1 à 2 personnes. Son faible encombrement et son unité de commande réversible de gauche à droite rendent le poêle Mini idéal pour une installation dans de très petits espaces.</p><p style=\"text-align: justify;\">Également disponible avec un revêtement fibre froid au toucher.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>KW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"5\">Distances de sécurité minimales<br>A | B | C | D | E</th>\n  <th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MN-23NB-Z</td>\n  <td>2.3</td>\n  <td>1.3 – 2.5</td>\n  <td>215 × 435 × 455</td>\n  <td>11</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>20</td>\n  <td>100</td>\n  <td>140</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>MN-30NB-Z</td>\n  <td>3.0</td>\n  <td>2 – 4</td>\n  <td>215 × 435 × 455</td>\n  <td>11</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>20</td>\n  <td>100</td>\n  <td>140</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>MN-36NB-Z</td>\n  <td>3.6</td>\n  <td>3 – 6</td>\n  <td>215 × 435 × 455</td>\n  <td>11</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>20</td>\n  <td>100</td>\n  <td>140</td>\n  <td>155</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "Plage de puissance : 2,3 – 3,6 kW",
+      "Commandes disponibles : intégrée (NB)",
+      "Habillage en acier inoxydable"
+    ]
+  }
+}

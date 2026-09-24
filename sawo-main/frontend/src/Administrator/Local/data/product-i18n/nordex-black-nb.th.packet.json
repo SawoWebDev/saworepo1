@@ -1,0 +1,19 @@
+{
+  "slug": "nordex-black-nb",
+  "productId": "ae72cb7e-7891-48ca-a72b-17195a40a16b",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex สีดำ NB",
+    "short_description": "ฮีตเตอร์ Nordex รุ่นนี้ใช้ดีไซน์ทันสมัยแบบมินิมอลเหมือนทุกรุ่นในไลน์ Nordex ขนาดกะทัดรัดและการติดตั้งบนผนังช่วยเหลือพื้นที่ในห้องซาวน่าได้มากขึ้น ทำให้การอบซาวน่าสบายยิ่งขึ้น",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45NB-BL-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-60NB-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>50</td>\n  <td>80</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>NRN-80NB-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n<tr>\n  <td>NRN-90NB-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>80</td>\n  <td>80</td>\n  <td>110</td>\n  <td>395</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "ดีไซน์เรียบง่ายลื่นไหล",
+      "โครงเครื่องโลหะสีดำ"
+    ]
+  }
+}

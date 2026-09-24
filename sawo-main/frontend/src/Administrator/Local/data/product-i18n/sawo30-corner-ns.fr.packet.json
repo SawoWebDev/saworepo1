@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-corner-ns",
+  "productId": "b8d6cf7a-8f33-4b6e-a997-8d27f70b5daf",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 Angle NS",
+    "short_description": "<span style=\"text-align: justify;\">Le </span><strong style=\"text-align: justify;\">SAWO30 Angle</strong><span style=\"text-align: justify;\"> est conçu pour les aménagements de sauna où l'espace est précieux. Comme tous les poêles Tower, sa hauteur garantit une chaleur bien répartie, de bas en haut. Le SAWO30 Angle est également livré avec une entretoise à pierres amovible, qui offre deux configurations : (1) avec l'entretoise, un chauffage plus rapide, une meilleure efficacité énergétique et un sauna plus chaud, ou (2) sans l'entretoise, de la place pour davantage de pierres afin de produire plus de vapeur, une température plus douce et des économies d'énergie en usage commercial.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg) sans entretoise à pierres</th>\n  <th>Pierres<br>(kg) avec entretoise à pierres</th>\n  <th>Commande</th>\n  <th colspan=\"2\">Distances de sécurité minimales<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NS-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>415 × 415 × 1380</td>\n  <td>105</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-120NS-CNR-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>415 × 415 × 1380</td>\n  <td>105</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "SAWO30 Angle",
+    "features": [
+      "Plage de puissance : 4,5 – 12,0 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Habillage en acier inoxydable",
+      "Moitié supérieure amovible pour faciliter le chargement des pierres",
+      "Entretoise à pierres amovible",
+      "Grille de protection en option",
+      "Collerette d'intégration en option"
+    ]
+  }
+}

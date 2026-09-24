@@ -1,0 +1,35 @@
+{
+  "slug": "innova-2-0-power-controller",
+  "productId": "7fc76dd6-2520-4759-a7d1-59b6d22e20b9",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Contrôleur de puissance Innova 2.0",
+    "short_description": "<p style=\"text-align: justify;\">Raccordez la<b> Contrôleur de puissance Innova 2.0 </b>avec n'importe quelle commande Innova pour l'utiliser avec des poêles NS.</p><p style=\"text-align: justify;\">Le boîtier de la commande offre plus d'espace de travail à l'électricien, ce qui rend l'installation plus simple que jamais ! Ce nouveau boîtier modernisé offre plus de place pour une installation plus facile et plus rapide. Options de câblage flexibles avec passages de câbles anti-traction sur 4 côtés, y compris à l'arrière pour dissimuler complètement le câblage.</p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">CARACTÉRISTIQUES TECHNIQUES</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>15kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova 2.0 Power Controller (INP-C-V2)</td><td>W: 320 mm x H: 270 mm x D: 78 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "La commande intelligente coupe automatiquement l'élément chauffant à la température souhaitée",
+      "À raccorder à l'interface utilisateur Innova pour les poêles jusqu'à 15 kW, ou à compléter par un contacteur INP-S-V2 pour les modèles plus puissants",
+      "Nouvelle conception du boîtier pour une installation plus simple, avec plus d'espace et de possibilités de câblage",
+      "Compatible avec le détecteur d'ouverture de porte",
+      "Minuterie de démarrage différé pour les séances hebdomadaires",
+      "Mode simple, verrouillage des touches et mémoire en cas de coupure de courant pour plus de confort",
+      "Compteur de consommation électrique",
+      "Fonctions ventilateur, variateur et Combi en option",
+      "Intégrable aux systèmes domotiques",
+      "Idéal avec la sonde de banc (INN-BTEMP) et la sonde d'humidité (INN-HUM) en option pour les poêles Combi",
+      "Comprend le contrôleur de puissance Innova, un câble RJ12 de 5 m, une sonde de température avec support en tilleul et un câblage en silicone de 5 m"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

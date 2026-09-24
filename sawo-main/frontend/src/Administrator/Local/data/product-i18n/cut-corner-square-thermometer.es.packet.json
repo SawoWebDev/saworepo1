@@ -1,0 +1,56 @@
+{
+  "slug": "cut-corner-square-thermometer",
+  "productId": "a318d27d-8422-472f-be0b-8d262ecf52be",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (220-TD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (220-TA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (220-TH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Termómetro cuadrado de esquinas cortadas",
+    "short_description": "El termómetro cuadrado de esquinas cortadas SAWO es un termómetro de sauna de 140 × 140 mm que se utiliza para controlar la temperatura dentro del sauna.",
+    "description": null,
+    "type": "Termómetros",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (220-TD)",
+        "name": "Cedro (220-TD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (220-TA)",
+        "name": "Álamo (220-TA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (220-TH)",
+        "name": "Tsuga (220-TH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

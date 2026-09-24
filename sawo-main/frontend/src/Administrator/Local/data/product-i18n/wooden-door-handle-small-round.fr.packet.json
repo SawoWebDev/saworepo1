@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-door-handle-small-round",
+  "productId": "a636863e-f4b5-424f-aeaa-0adefb5dd423",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (565-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (565-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (565-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Poignée de porte en bois ronde, petit modèle",
+    "short_description": "La poignée de porte en bois ronde petit modèle SAWO est une poignée de porte de sauna en bois au profil arrondi, de Ø65 x L70 mm, conçue pour rester froide au toucher malgré la chaleur du sauna.",
+    "description": null,
+    "type": "Portes et poignées",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (565-D)",
+        "name": "Cèdre (565-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (565-A)",
+        "name": "Tremble (565-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (565-H)",
+        "name": "Pruche (565-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

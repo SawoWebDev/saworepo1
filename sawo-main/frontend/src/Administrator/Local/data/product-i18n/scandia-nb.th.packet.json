@@ -1,0 +1,18 @@
+{
+  "slug": "scandia-nb",
+  "productId": "00fb6d76-ed0b-4850-b411-b601ab3388e9",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia NB",
+    "short_description": "Scandia เป็นฮีตเตอร์ซาวน่าคลาสสิกที่ขาดไม่ได้ ฮีตเตอร์เรียบง่ายรุ่นนี้ให้ประสบการณ์ซาวน่าฟินแลนด์แบบดั้งเดิม มีรุ่นเคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อนให้เลือก และใช้งานร่วมกับชุดควบคุม Saunova หรือ Innova (NS) ได้",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NB-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 515 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NB-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 515 × 515</td>\n  <td>18 – 22</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NB-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 515 × 585</td>\n  <td>19 – 23</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NB-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 515 × 585</td>\n  <td>19 – 23</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "โครงเครื่องสแตนเลส"
+    ]
+  }
+}

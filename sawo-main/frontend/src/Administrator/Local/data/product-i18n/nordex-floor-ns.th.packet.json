@@ -1,0 +1,22 @@
+{
+  "slug": "nordex-floor-ns",
+  "productId": "bad59c23-c327-4690-a324-4a00084e9281",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex ตั้งพื้น NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Nordex ตั้งพื้น</strong><span style=\"text-align: justify;\"> เป็นฮีตเตอร์ที่มีรูปลักษณ์เรียบง่ายเพรียวบางและทำงานได้อย่างมีประสิทธิภาพ กระจายความอบอุ่นด้วยการพาความร้อนหรือการแผ่รังสีความร้อน พร้อมเทคโนโลยีประหยัดพลังงานขั้นสูง ออกแบบมาสำหรับการใช้งานสม่ำเสมอและบ่อยครั้ง ช่วยลดค่าพลังงานและค่าบำรุงรักษา และรองรับหินซาวน่าได้ 40 ถึง 100 กก.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNF-90NS-Z</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNF-105NS-Z</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>120</td>\n  <td>60</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNF-120NS-Z</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>450 × 400 × 670</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-150NS-Z</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>595 × 400 × 670</td>\n  <td>55</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-180NS-Z</td>\n  <td>18.0</td>\n  <td>17 – 29</td>\n  <td>595 × 400 × 670</td>\n  <td>55</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-180NS-V12-Z</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-210NS-V12-Z</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NRNF-240NS-V12-Z</td>\n  <td>24.0</td>\n  <td>26 – 42</td>\n  <td>740 × 400 × 670</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Nordex ตั้งพื้น",
+    "features": [
+      "ช่วงกำลังไฟ: 9.0 – 24.0 kW",
+      "ระบบควบคุมที่เลือกได้: NS (Saunova/Innova)",
+      "โครงเครื่องสแตนเลส",
+      "ดีไซน์เรียบง่ายลื่นไหล",
+      "ประหยัดพลังงาน",
+      "บำรุงรักษาน้อย",
+      "รองรับหินได้ 40 ถึง 100 กก."
+    ]
+  }
+}

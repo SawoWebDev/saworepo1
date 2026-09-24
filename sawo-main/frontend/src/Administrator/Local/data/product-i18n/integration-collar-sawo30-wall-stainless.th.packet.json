@@ -1,0 +1,19 @@
+{
+  "slug": "integration-collar-sawo30-wall-stainless",
+  "productId": "0f88505c-4c50-47df-b092-9a2662022af8",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "กรอบติดตั้งฮีตเตอร์ – SAWO30 ติดผนัง (สแตนเลส)",
+    "short_description": "กรอบติดตั้งฮีตเตอร์ช่วยเพิ่มความสวยงามให้ฮีตเตอร์ที่ติดตั้งในม้านั่ง ให้ดูกลมกลืนเป็นเนื้อเดียวกัน กรอบผลิตจากวัสดุหลากหลายที่เลือกสรรมาอย่างพิถีพิถันเพื่อให้เข้ากับดีไซน์ห้องซาวน่า ตัวเลือกประกอบด้วยสแตนเลสเรียบหรูผิวขัดเส้นผม หินสบู่ธรรมชาติเนื้อนุ่ม และไม้ลามิเนตทนทาน",
+    "description": null,
+    "type": "กรอบติดตั้งฮีตเตอร์",
+    "spec_table_headers": [
+      "รุ่น",
+      "ความยาว (มม.)",
+      "ความกว้าง (มม.)",
+      "ความสูง (มม.)"
+    ]
+  }
+}

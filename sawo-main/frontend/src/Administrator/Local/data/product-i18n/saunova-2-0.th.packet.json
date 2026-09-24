@@ -1,0 +1,31 @@
+{
+  "slug": "saunova-2-0",
+  "productId": "7ed5a5f1-e3e5-4601-8b86-bc606f91e392",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0",
+    "short_description": "Saunova 2.0 เป็นชุดควบคุมที่ใช้งานได้จริงสำหรับฮีตเตอร์ขนาดเล็กไม่เกิน 9 กิโลวัตต์ เหมาะอย่างยิ่งเมื่อใช้ร่วมกับฮีตเตอร์ Ni2 ที่ไม่ต้องมีตัวควบคุมกำลังไฟแยกอีกต่อไป หน้าจอควบคุม Saunova 2.0 ติดตั้งได้ทั้งภายในหรือภายนอกห้องซาวน่า! ระบบควบคุมอัจฉริยะจะตัดการทำงานของแท่งความร้อนสลับกันไปเมื่อถึงอุณหภูมิที่ตั้งไว้ ช่วยลดความผันผวนของอุณหภูมิและทำให้แท่งความร้อนทำงานในจังหวะที่สมดุล วัดอุณหภูมิได้แม่นยำยิ่งขึ้นเมื่อเสริมเซนเซอร์ที่ม้านั่ง",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">รายละเอียดทางเทคนิค</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>9kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova 2.0 (SAU-UI-V2)</td><td>L: 78 mm x W: 320 mm x H: 270 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "หน้าจอควบคุมใช้งานง่ายและสวยงาม",
+      "ควบคุมโดยตรงสำหรับฮีตเตอร์ Ni2 ส่วนฮีตเตอร์ NS 2.3–9 kW ให้เพิ่ม Saunova 2.0",
+      "ตัวควบคุมกำลังไฟ",
+      "เกิน 9 kW ต้องใช้คอนแทกเตอร์",
+      "ฟังก์ชัน Smart Controlling",
+      "ฟังก์ชันพัดลมและ Combi ให้เลือกเสริม",
+      "ขนาด: (กว้าง) 104 x (สูง) 147 x (ลึก) 37 มม."
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

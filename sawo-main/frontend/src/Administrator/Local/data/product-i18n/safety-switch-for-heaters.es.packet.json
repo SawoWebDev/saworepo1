@@ -1,0 +1,13 @@
+{
+  "slug": "safety-switch-for-heaters",
+  "productId": "52fce2db-0111-45bc-9f1a-bd12b9d5bfab",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Interruptor de seguridad para estufas",
+    "short_description": "El interruptor de seguridad apaga la estufa si un objeto extraño (por ejemplo, una toalla) entra en contacto con ella o se sitúa dentro de las distancias de seguridad. (Cumple la norma SFS-EN60335-2-53, apartado 19.101).",
+    "description": null,
+    "type": "Interruptor de seguridad"
+  }
+}

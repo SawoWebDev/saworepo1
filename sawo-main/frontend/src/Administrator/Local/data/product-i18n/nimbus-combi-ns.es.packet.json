@@ -1,0 +1,19 @@
+{
+  "slug": "nimbus-combi-ns",
+  "productId": "a2c06d94-9bc9-4c7a-aabe-45cd6cec7326",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nimbus Combi NS",
+    "short_description": "El Nimbus Combi complementa las horas de calor constante que genera y mantiene la estufa Nimbus. Con su depósito de agua independiente, aumenta la cantidad de vapor generado para lograr el equilibrio perfecto entre calor y humedad. Al igual que la Nimbus, la Combi es compatible con los controles Saunova e Innova (NS).",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW<br>Estufa</th>\n  <th>kW<br>Depósito</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"4\">Distancias de seguridad mínimas<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NIMC-90NS-P</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>575 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>50</td>\n  <td>30</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NIMC-105NS-P</td>\n  <td>10.5</td>\n  <td>1 × 2.0</td>\n  <td>9 – 15</td>\n  <td>575 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1200</td>\n  <td>50</td>\n  <td>30</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NIMC-120NS-P</td>\n  <td>12.0</td>\n  <td>1 × 2.0</td>\n  <td>10 – 18</td>\n  <td>575 × 470 × 690</td>\n  <td>40 – 50</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>130</td>\n  <td>70</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIMC-150NS-P</td>\n  <td>15.0</td>\n  <td>2 × 2.0</td>\n  <td>13 – 23</td>\n  <td>775 × 470 × 690</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>NIMC-180NS-P</td>\n  <td>18.0</td>\n  <td>2 × 2.0</td>\n  <td>17 – 29</td>\n  <td>775 × 470 × 690</td>\n  <td>60 – 75</td>\n  <td>Separate</td>\n  <td>1400</td>\n  <td>160</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n</tbody></table>",
+    "type": "Nimbus",
+    "features": [
+      "Rango de potencia: 9,0 – 18,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Cuencos de aromas integrados",
+      "Rellenado automático opcional para llenar el depósito de agua sin intervención"
+    ]
+  }
+}

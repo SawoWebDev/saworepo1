@@ -1,0 +1,19 @@
+{
+  "slug": "demand-button",
+  "productId": "32128110-1359-4cc0-af9a-162f9afc6777",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Bouton Demand",
+    "short_description": "<span style=\"text-align: justify;\">Le </span><b style=\"text-align: justify;\">bouton Demand</b><span style=\"text-align: justify;\"> active instantanément la production de vapeur pour vous permettre de savourer une expérience de bien-être entièrement personnalisée.</span>",
+    "description": "<span style=\"text-align: justify;\">Le </span><b style=\"text-align: justify;\">bouton Demand</b><span style=\"text-align: justify;\"> active instantanément la production de vapeur pour vous permettre de savourer une expérience de bien-être entièrement personnalisée.</span>",
+    "type": "Accessoires vapeur",
+    "features": [
+      "Utilisation efficace de l'énergie et facture d'électricité réduite d'une simple pression sur un bouton",
+      "Accès rapide à la vapeur pour une utilisation plus pratique",
+      "Conception intuitive : bouton idéalement placé pour un accès facile",
+      "Générateur de vapeur activé par bouton pour une production rapide de vapeur"
+    ]
+  }
+}

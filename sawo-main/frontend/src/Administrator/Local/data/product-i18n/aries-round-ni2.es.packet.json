@@ -1,0 +1,22 @@
+{
+  "slug": "aries-round-ni2",
+  "productId": "6157a803-8f82-47eb-9702-8d0cf3b8c797",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Redondo Ni2",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Aries Redondo</strong><span style=\"text-align: justify;\"> comparte la elegancia minimalista de todas las estufas Tower. Alta y de poco espacio, distribuye el calor de manera uniforme y es ideal para instalarla en el centro del sauna o integrada en un banco. Su separador de piedras integrado permite un calentamiento más rápido y eficiente de las piedras y prolonga la vida útil de las resistencias.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Estufa\n<br>Modelo</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"2\">Distancias de seguridad mínimas<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45Ni2-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60Ni2-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75Ni2-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90Ni2-P-C</td>\n  <td>9.0</td>\n  <td>8 – 13</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries Redondo",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Control disponible: Saunova (Ni2)",
+      "Separador de piedras integrado",
+      "Patas regulables",
+      "Carcasa de acero inoxidable",
+      "Protector de estufa opcional",
+      "Marco de integración opcional"
+    ]
+  }
+}

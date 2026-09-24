@@ -1,0 +1,20 @@
+{
+  "slug": "scandia-combi-ns",
+  "productId": "ef8e7e21-b129-4dfb-9edc-81c466bff91e",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia Combi NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Scandia Combi</strong><span style=\"text-align: justify;\"> มาพร้อมถังน้ำเพื่อเพิ่มความชื้นและถ้วยน้ำมันหอมระเหยสำหรับใช้กลิ่นหอมซาวน่า มีรุ่นเคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อนให้เลือก และใช้งานร่วมกับชุดควบคุม Saunova หรือ Innova (NS) ได้</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW\n<br>ฮีตเตอร์</th>\n  <th>kW\n<br>ถังน้ำ</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCAC-60NS-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 1.0</td>\n  <td>5 – 9</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-80NS-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-90NS-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "ช่วงกำลังไฟ: 6.0 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "ถังน้ำแยกพร้อมเครื่องกำเนิดไอน้ำ 1 kW หรือ 2 kW",
+      "โครงเครื่องสแตนเลส",
+      "มีถ้วยน้ำมันหอมระเหยในตัว"
+    ]
+  }
+}

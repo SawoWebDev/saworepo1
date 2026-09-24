@@ -1,0 +1,32 @@
+{
+  "slug": "loisto-clock-square",
+  "productId": "ab242f1d-79cc-4892-881c-a57c0d102046",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (534-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Reloj cuadrado Loisto",
+    "short_description": "El reloj cuadrado SAWO Loisto es un reloj de sauna cuadrado de madera de 180 × 180 mm, fabricado para resistir el calor y la humedad del sauna.",
+    "description": null,
+    "type": "Relojes y temporizadores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (534-D)",
+        "name": "Cedro (534-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

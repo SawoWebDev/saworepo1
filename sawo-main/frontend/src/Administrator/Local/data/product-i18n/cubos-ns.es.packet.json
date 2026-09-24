@@ -1,0 +1,22 @@
+{
+  "slug": "cubos-ns",
+  "productId": "180af7f6-1c1c-44db-94cd-cd88070811b6",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cubos NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Cubos</strong><span style=\"text-align: justify;\"> es ideal para espacios reducidos. Ofrece flexibilidad 3 en 1: un único diseño moderno y elegante con tres opciones de instalación (centro, esquina o pared). Incluye una cubierta protectora que aporta un soporte adicional en instalaciones de pared y de esquina, así como un reflector que dirige el calor incluso a las zonas más bajas de la cabina de sauna. El Cubos también incorpora un separador de piedras, que garantiza un calentamiento más rápido y unas resistencias más duraderas.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"3\">Distancias de seguridad mínimas<br>A | AA | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CUB3-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-75NS-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>CUB3-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 290 × 930</td>\n  <td>75</td>\n  <td>Separate</td>\n  <td>125</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Cubos",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Control disponible: Saunova/Innova (NS)",
+      "Separador de piedras integrado",
+      "Patas regulables",
+      "Carcasa de acero inoxidable",
+      "Protector de estufa opcional",
+      "Marco de integración opcional"
+    ]
+  }
+}

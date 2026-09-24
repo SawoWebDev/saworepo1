@@ -1,0 +1,26 @@
+{
+  "slug": "ventilation-cover-circle-640mbr",
+  "productId": "b8ef96d6-d395-44ef-8805-c7121abd5c0b",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cache de ventilation rond",
+    "short_description": "Le cache de ventilation rond SAWO est un cache de ventilation de Ø160 mm, utilisé pour habiller une ouverture de ventilation dans la cabine de sauna.",
+    "description": null,
+    "type": "Ventilation et divers",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Metallic Brown (640-MBR)",
+        "name": "Brun métallisé (640-MBR)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "sand-timer-15min",
+  "productId": "946a955f-b47e-4599-9a2f-1895c4aa7a3c",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (553-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (553-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (553-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[3].name",
+      "source": "Black (553-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Sablier 15 min",
+    "short_description": "Le sablier SAWO 15 min est un sablier de 65 × 340 mm, un moyen simple de suivre la durée d'une séance dans le sauna.",
+    "description": null,
+    "type": "Horloges et minuteurs",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (553-D)",
+        "name": "Cèdre (553-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (553-A)",
+        "name": "Tremble (553-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (553-H)",
+        "name": "Pruche (553-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 3,
+        "_english_name": "Black (553-BL)",
+        "name": "Noir (553-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

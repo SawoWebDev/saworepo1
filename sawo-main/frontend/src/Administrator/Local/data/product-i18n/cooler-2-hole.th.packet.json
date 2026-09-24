@@ -1,0 +1,26 @@
+{
+  "slug": "cooler-2-hole",
+  "productId": "52dd042d-4118-4a31-a23b-33f58d7f3339",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ที่แช่เย็นเครื่องดื่ม (2 ช่อง)",
+    "short_description": "ที่แช่เย็นเครื่องดื่ม SAWO (2 ช่อง) เป็นที่แช่เย็นหินสบู่ขนาด 185 × 100 × 75 มม. หนัก 4.1 กก. ในกลุ่มอุปกรณ์เสริม Kivistone ใช้แช่เครื่องดื่มให้เย็นในพื้นที่พักผ่อนของซาวน่า",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-92)",
+        "name": "(R-92)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "cooler-w-2-shot-glasses",
+  "productId": "7067f631-c521-454d-b983-378d566ae2e6",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ที่แช่เย็นเครื่องดื่มพร้อมแก้วช็อต 2 ใบ",
+    "short_description": "ที่แช่เย็นเครื่องดื่ม SAWO พร้อมแก้วช็อต 2 ใบ เป็นที่แช่เย็นหินสบู่ขนาด 135 × 100 × 70 มม. หนัก 1.8 กก. ในกลุ่มอุปกรณ์เสริม Kivistone ใช้แช่เครื่องดื่มให้เย็นในพื้นที่พักผ่อนของซาวน่า",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-205)",
+        "name": "(R-205)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

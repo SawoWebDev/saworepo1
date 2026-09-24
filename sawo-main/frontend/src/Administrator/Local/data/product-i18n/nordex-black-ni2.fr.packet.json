@@ -1,0 +1,19 @@
+{
+  "slug": "nordex-black-ni2",
+  "productId": "84781ed8-1c12-4fa7-bf75-4162b4580f34",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Noir Ni2",
+    "short_description": "Ce poêle Nordex partage le design moderne et minimaliste de tous les modèles Nordex. Son faible encombrement et son installation murale rendent toute cabine de sauna plus confortable.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"4\">Distances de sécurité minimales<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-45Ni2-BL-Z-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>295 × 400 × 515</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>50</td>\n  <td>130</td>\n  <td>270</td>\n</tr>\n<tr>\n  <td>NRN-60Ni2-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>295 × 400 × 515</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>50</td>\n  <td>50</td>\n  <td>130</td>\n  <td>270</td>\n</tr>\n<tr>\n  <td>NRN-80Ni2-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>295 × 400 × 590</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>80</td>\n  <td>80</td>\n  <td>160</td>\n  <td>330</td>\n</tr>\n<tr>\n  <td>NRN-90Ni2-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>295 × 400 × 590</td>\n  <td>22</td>\n  <td>Saunova</td>\n  <td>80</td>\n  <td>80</td>\n  <td>160</td>\n  <td>330</td>\n</tr>\n</tbody></table>",
+    "type": "Nordex",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commandes disponibles : Saunova (Ni2)",
+      "Design épuré et minimaliste",
+      "Habillage en métal noir"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "aries-round-black-nb",
+  "productId": "a0144bd6-29ce-43c1-89d8-cb6110b98ca9",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries ทรงกลม สีดำ NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\"> Aries ทรงกลม</b><span style=\"text-align: justify;\"> มีความเรียบหรูแบบมินิมอลเหมือนฮีตเตอร์ Tower ทุกรุ่น ตัวสูงและประหยัดพื้นที่ กระจายความร้อนอย่างสม่ำเสมอ เหมาะกับการติดตั้งกลางห้องซาวน่าหรือฝังในม้านั่ง ตัวคั่นหินในตัวช่วยให้หินร้อนเร็วและมีประสิทธิภาพ พร้อมยืดอายุการใช้งานขององค์ประกอบทำความร้อน</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ฮีตเตอร์\n<br>รุ่น</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"2\">ระยะปลอดภัยขั้นต่ำ<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NB-BL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-90NB-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries ทรงกลม",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "มีตัวคั่นหินในตัว",
+      "ขาปรับระดับได้",
+      "โครงเครื่องโลหะสีดำ",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม",
+      "มีกรอบติดตั้งฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

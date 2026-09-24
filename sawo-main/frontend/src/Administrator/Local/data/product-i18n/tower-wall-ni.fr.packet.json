@@ -1,0 +1,23 @@
+{
+  "slug": "tower-wall-ni",
+  "productId": "5fa90bf8-772f-4308-b4e5-a271c19a822f",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Tower Mural Ni",
+    "short_description": "<span style=\"text-align: justify;\">Le </span><strong style=\"text-align: justify;\">Tower Mural</strong><span style=\"text-align: justify;\"> est un design élégant, minimaliste et peu encombrant. Sa hauteur assure une répartition uniforme d'une chaleur humide et durable pour des séances de sauna pleinement revigorantes. La puissance du modèle mural peut être portée à plus de 24,0 kW, ou bien deux Tower Mural peuvent être reliés pour atteindre jusqu'à 48 kW. Comme tous les poêles Tower, le Tower Mural est aussi livré avec une entretoise à pierres amovible, qui offre deux configurations : (1) avec l'entretoise pour un chauffage plus rapide, une meilleure efficacité énergétique et un sauna plus chaud, ou (2) sans l'entretoise pour accueillir davantage de pierres afin de produire plus de vapeur, une température plus douce et des économies d'énergie en usage commercial.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg) sans entretoise à pierres</th>\n  <th>Pierres<br>(kg) avec entretoise à pierres</th>\n  <th>Commande</th>\n  <th colspan=\"2\">Distances de sécurité minimales<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TH6-105Ni-WL-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>320 × 550 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TH6-120Ni-WL-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>320 × 550 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-105Ni-WL-P</td>\n  <td>10.5</td>\n  <td>10 – 16</td>\n  <td>355 × 650 × 1395</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-120Ni-WL-P</td>\n  <td>12.0</td>\n  <td>11 – 20</td>\n  <td>355 × 650 × 1395</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH9-150Ni-WL-P</td>\n  <td>15.0</td>\n  <td>14– 25</td>\n  <td>355 × 650 × 1395</td>\n  <td>230</td>\n  <td>165</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TH12-150Ni-WL-P</td>\n  <td>15.0</td>\n  <td>15 – 26</td>\n  <td>425 × 790 × 1395</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-180Ni-WL-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>425 × 790 × 1395</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-210Ni-WL-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>425 × 790 × 1395</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>TH12-240Ni-WL-P</td>\n  <td>24.0</td>\n  <td>24 – 40</td>\n  <td>425 × 790 × 1395</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>2300</td>\n</tr></tbody></table>",
+    "type": "Tower Mural",
+    "features": [
+      "Plage de puissance : 10,5 – 24,0 kW",
+      "Commande disponible : Innova (Ni)",
+      "Habillage en acier inoxydable",
+      "Anneaux en acier mobiles pour remplacer les pierres cassées",
+      "Entretoise à pierres amovible",
+      "Pieds réglables",
+      "Grille de protection en option",
+      "Collerette d'intégration en option"
+    ]
+  }
+}

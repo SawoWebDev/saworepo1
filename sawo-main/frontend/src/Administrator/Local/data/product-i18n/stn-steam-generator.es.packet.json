@@ -1,0 +1,128 @@
+{
+  "slug": "stn-steam-generator",
+  "productId": "5bf11f8d-c96b-424d-919d-e9f8ae1eac9e",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Generador de vapor STN",
+    "short_description": "<p style=\"text-align: justify;\">Diseñado para las exigencias del uso comercial, el <b>generador de vapor STN</b> combina durabilidad y rendimiento. Su sólida construcción de acero inoxidable minimiza la corrosión, y una serie de funciones opcionales, como los controles de aroma, ventilador y regulador de luz, permiten personalizar la experiencia de vapor.</p><p style=\"text-align: justify;\">Un pulsador Demand opcional libera vapor adicional durante 30 segundos cuando se necesita. La resolución de averías es sencilla, con los códigos de error mostrados directamente en la pantalla del controlador. El sistema puede instalarse con orientación izquierda o derecha y conectarse en serie con hasta cinco unidades para una potencia máxima de<b> 75.0kW, </b>todo ello controlado desde una única interfaz SAWO.</p>",
+    "description": null,
+    "type": "Generadores de vapor",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 elementos calefactores",
+        "description": null,
+        "features": [
+          "Rango de potencia: 3,0 – 5,0 kW",
+          "Producción de vapor: hasta 6,7 kg/h",
+          "Se puede instalar en cualquiera de los dos lados",
+          "Tubería propia para la válvula de sobrepresión",
+          "Drenaje automático",
+          "Cabezal de vapor incluido",
+          "Resistencias tipo cassette para facilitar el mantenimiento",
+          "Tubo de vapor de ¾ de pulgada",
+          "Controles disponibles: STP Classic, STP Classic 2.0 y STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "Modelo de generador de vapor",
+          "kW",
+          "Baño de vapor (m²)",
+          "Dimensiones (mm) L|An|Al",
+          "Peso (kg)",
+          "Control"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 elementos calefactores",
+        "description": null,
+        "features": [
+          "Rango de potencia: 4,5 – 7,5 kW",
+          "Producción de vapor: hasta 7,5 kg/h",
+          "Se puede instalar en cualquiera de los dos lados",
+          "Tubería propia para la válvula de sobrepresión",
+          "Drenaje automático",
+          "Cabezal de vapor incluido",
+          "Resistencias tipo cassette para facilitar el mantenimiento",
+          "Tubo de vapor de ¾ de pulgada",
+          "Controles disponibles: STP Classic, STP Classic 2.0 y STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "Modelo de generador de vapor",
+          "kW",
+          "Baño de vapor (m²)",
+          "Dimensiones (mm) L|An|Al",
+          "Peso (kg)",
+          "Control"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 elementos calefactores",
+        "description": null,
+        "features": [
+          "Rango de potencia: 9,0 – 15,0 kW",
+          "Producción de vapor: hasta 20 kg/h",
+          "Se puede instalar en cualquiera de los dos lados",
+          "Tubería propia para la válvula de sobrepresión",
+          "Drenaje automático",
+          "Incluye 2 cabezales de vapor",
+          "Resistencias tipo cassette para facilitar el mantenimiento",
+          "Tubo de vapor de ¾ de pulgada",
+          "Controles disponibles: STP Classic, STP Classic 2.0 y STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "Modelo de generador de vapor",
+          "kW",
+          "Baño de vapor (m²)",
+          "Dimensiones (mm) L|An|Al",
+          "Peso (kg)",
+          "Control"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "Compartimento electrónico",
+        "note": "(incluido solo en los modelos STN-S)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "Drenaje automático",
+        "note": "(incluido en los modelos STN-S, STN-W y STN)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "Cabezal de vapor",
+        "note": "(en los modelos de 9 kW en adelante se incluyen dos cabezales)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "Funciones de aroma, ventilador y regulador",
+        "note": "(funciones opcionales para los modelos STN)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "Cable RJ12 de 7,5 m",
+        "note": "Cable RJ10 de 7,5 m"
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "Sensor de temperatura con",
+        "note": "cable y soporte del sensor"
+      }
+    ]
+  }
+}

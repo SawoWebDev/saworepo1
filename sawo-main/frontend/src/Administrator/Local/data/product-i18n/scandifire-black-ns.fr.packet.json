@@ -1,0 +1,22 @@
+{
+  "slug": "scandifire-black-ns",
+  "productId": "c18f7676-a199-4e7e-b092-02c81217afbd",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandifire Noir NS",
+    "short_description": "<div style=\"text-align: justify;\"><p><b>Scandifire</b> de Stefan Lindfors donne une seconde vie à Scandia, poêle classique intemporel. Le motif Junglefire est à la fois ludique et audacieux ; associé au revêtement fibre, il rend ce poêle à la fois sûr et élégant.</p></div><div></div><br>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"4\">Distances de sécurité minimales<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NS-DRF-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 410 × 455</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NS-DRF-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 410 × 455</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NS-DRF-BL-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 410 × 525</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NS-DRF-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 410 × 525</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>50</td>\n  <td>135</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandifire",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Revêtement fibre à motif Junglefire",
+      "Fixation murale",
+      "Peut contenir 22 kg de pierres",
+      "Modèles encastrables : boutons de commande avec voyant lumineux",
+      "Le revêtement protège le poêle de l'humidité et des hautes températures"
+    ]
+  }
+}

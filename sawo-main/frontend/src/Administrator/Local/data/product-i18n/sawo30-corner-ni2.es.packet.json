@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-corner-ni2",
+  "productId": "7fd6691d-c5a8-43dd-bf19-b2bff37417b3",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 Esquina Ni2",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">SAWO30 Esquina </strong><span style=\"text-align: justify;\">está diseñada para distribuciones de sauna en las que el espacio es un bien escaso. Como todas las estufas Tower, su altura garantiza una distribución uniforme del calor, de abajo arriba. La SAWO30 Esquina también incluye un separador de piedras desmontable que ofrece dos configuraciones: (1) con el separador, calentamiento más rápido, eficiencia energética y un sauna más caliente, o (2) sin el separador, espacio para más piedras que generen más vapor, una temperatura más suave y ahorro de energía en un uso comercial.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg) sin separador de piedras</th>\n  <th>Piedras<br>(kg) con separador de piedras</th>\n  <th>Control</th>\n  <th colspan=\"2\">Distancias de seguridad mínimas<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45Ni2-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60Ni2-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90Ni2-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>415 × 415 × 1380</td>\n  <td>105</td>\n  <td>80</td>\n  <td>Saunova</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "SAWO30 Esquina",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Controles disponibles: Saunova (Ni2)",
+      "Carcasa de acero inoxidable",
+      "Mitad superior desmontable para cargar las piedras con mayor facilidad",
+      "Separador de piedras desmontable",
+      "Protector de estufa opcional",
+      "Marco de integración opcional"
+    ]
+  }
+}

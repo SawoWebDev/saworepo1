@@ -1,0 +1,128 @@
+{
+  "slug": "stn-steam-generator",
+  "productId": "5bf11f8d-c96b-424d-919d-e9f8ae1eac9e",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "เครื่องกำเนิดไอน้ำ STN",
+    "short_description": "<p style=\"text-align: justify;\">สร้างมาเพื่อตอบโจทย์การใช้งานเชิงพาณิชย์ <b>เครื่องกำเนิดไอน้ำ STN</b> ผสานความทนทานเข้ากับประสิทธิภาพ โครงสร้างสแตนเลสแข็งแรงช่วยลดการกัดกร่อน พร้อมฟังก์ชันเสริมหลากหลาย เช่น ระบบควบคุมกลิ่นหอม พัดลม และหรี่ไฟ เพื่อประสบการณ์ไอน้ำที่เป็นแบบของคุณ</p><p style=\"text-align: justify;\">ปุ่ม Demand ที่เป็นอุปกรณ์เสริมปล่อยไอน้ำเพิ่มเป็นเวลา 30 วินาทีเมื่อต้องการ แก้ไขปัญหาได้ง่ายด้วยรหัสข้อผิดพลาดที่แสดงบนหน้าจอของชุดควบคุมโดยตรง ติดตั้งได้ทั้งแบบซ้ายหรือขวา และเชื่อมต่อแบบอนุกรมได้สูงสุดห้าเครื่องเพื่อให้ได้กำลังไฟสูงสุดถึง<b> 75.0kW, </b>ทั้งหมดควบคุมผ่านหน้าจอ SAWO เพียงชุดเดียว</p>",
+    "description": null,
+    "type": "เครื่องกำเนิดไอน้ำ",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "องค์ประกอบทำความร้อน 2 ชิ้น",
+        "description": null,
+        "features": [
+          "ช่วงกำลังไฟ: 3.0 – 5.0 kW",
+          "ปริมาณไอน้ำ: สูงสุด 6.7 กก./ชม.",
+          "ติดตั้งได้ทั้งสองด้าน",
+          "มีท่อแยกสำหรับวาล์วระบายแรงดันเกิน",
+          "ระบายน้ำอัตโนมัติ",
+          "มีหัวจ่ายไอน้ำรวมอยู่ในชุด",
+          "องค์ประกอบทำความร้อนแบบตลับเพื่อการบำรุงรักษาที่ง่าย",
+          "ท่อไอน้ำขนาด ¾ นิ้ว",
+          "ระบบควบคุมที่เลือกได้: STP Classic, STP Classic 2.0 และ STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "รุ่นเครื่องกำเนิดไอน้ำ",
+          "kW",
+          "ห้องอบไอน้ำ (ตร.ม.)",
+          "ขนาด (มม.) ย|ก|ส",
+          "น้ำหนัก (กก.)",
+          "ระบบควบคุม"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "องค์ประกอบทำความร้อน 3 ชิ้น",
+        "description": null,
+        "features": [
+          "ช่วงกำลังไฟ: 4.5 – 7.5 kW",
+          "ปริมาณไอน้ำ: สูงสุด 7.5 กก./ชม.",
+          "ติดตั้งได้ทั้งสองด้าน",
+          "มีท่อแยกสำหรับวาล์วระบายแรงดันเกิน",
+          "ระบายน้ำอัตโนมัติ",
+          "มีหัวจ่ายไอน้ำรวมอยู่ในชุด",
+          "องค์ประกอบทำความร้อนแบบตลับเพื่อการบำรุงรักษาที่ง่าย",
+          "ท่อไอน้ำขนาด ¾ นิ้ว",
+          "ระบบควบคุมที่เลือกได้: STP Classic, STP Classic 2.0 และ STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "รุ่นเครื่องกำเนิดไอน้ำ",
+          "kW",
+          "ห้องอบไอน้ำ (ตร.ม.)",
+          "ขนาด (มม.) ย|ก|ส",
+          "น้ำหนัก (กก.)",
+          "ระบบควบคุม"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "องค์ประกอบทำความร้อน 6 ชิ้น",
+        "description": null,
+        "features": [
+          "ช่วงกำลังไฟ: 9.0 – 15.0 kW",
+          "ปริมาณไอน้ำ: สูงสุด 20 กก./ชม.",
+          "ติดตั้งได้ทั้งสองด้าน",
+          "มีท่อแยกสำหรับวาล์วระบายแรงดันเกิน",
+          "ระบายน้ำอัตโนมัติ",
+          "มีหัวจ่ายไอน้ำ 2 หัวรวมอยู่ในชุด",
+          "องค์ประกอบทำความร้อนแบบตลับเพื่อการบำรุงรักษาที่ง่าย",
+          "ท่อไอน้ำขนาด ¾ นิ้ว",
+          "ระบบควบคุมที่เลือกได้: STP Classic, STP Classic 2.0 และ STP Stainless Steel Touch"
+        ],
+        "spec_table_headers": [
+          "รุ่นเครื่องกำเนิดไอน้ำ",
+          "kW",
+          "ห้องอบไอน้ำ (ตร.ม.)",
+          "ขนาด (มม.) ย|ก|ส",
+          "น้ำหนัก (กก.)",
+          "ระบบควบคุม"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Electronics Compartment",
+        "title": "ช่องใส่อุปกรณ์อิเล็กทรอนิกส์",
+        "note": "(มีให้เฉพาะรุ่น STN-S)"
+      },
+      {
+        "index": 1,
+        "_english_title": "Autodrain",
+        "title": "ระบบระบายน้ำอัตโนมัติ",
+        "note": "(มีให้ในรุ่น STN-S, STN-W และ STN)"
+      },
+      {
+        "index": 2,
+        "_english_title": "Steam Head",
+        "title": "หัวจ่ายไอน้ำ",
+        "note": "(รุ่น 9 kW ขึ้นไปมีหัวจ่าย 2 หัวรวมอยู่ในชุด)"
+      },
+      {
+        "index": 3,
+        "_english_title": "Aroma, Fan and Dimmer Functions",
+        "title": "ฟังก์ชันกลิ่นหอม พัดลม และหรี่ไฟ",
+        "note": "(ฟังก์ชันเสริมสำหรับรุ่น STN)"
+      },
+      {
+        "index": 4,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "สาย RJ12 ยาว 7.5 ม.",
+        "note": "สาย RJ10 ยาว 7.5 ม."
+      },
+      {
+        "index": 5,
+        "_english_title": "Temperature sensor with",
+        "title": "เซนเซอร์อุณหภูมิพร้อม",
+        "note": "สายไฟและที่ยึดเซนเซอร์"
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic",
+  "productId": "bab85c05-e589-45bf-b634-8a4f62d8db6b",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic",
+    "short_description": "<div style=\"text-align: justify;\"><p><b>Unité de commande séparée</b><br>L'unité de commande Innova Classic se compose d'un panneau de commande séparé et d'un contrôleur de puissance pouvant gérer jusqu'à 15 kW. Elle regorge de fonctions : détecteur d'ouverture de porte, minuterie de démarrage différé, gestion intelligente des économies d'énergie et répartition de puissance stable et homogène ! Elle dispose d'un affichage LED clair et de sept boutons pour une utilisation facile. Une sonde de température avec fusible de surchauffe et un câble de raccordement de 4 m sont inclus dans le pack.</p><p>Une unité de contacteur Innova séparée est nécessaire lorsque la puissance du poêle dépasse 15 kW.\n\n</p></div><div style=\"text-align: justify;\"><p><b>Unité de commande encastrable</b><br>L'unité de commande encastrable Innova Classic se compose d'un contrôleur de puissance avec panneau de commande intégré. Elle offre les mêmes fonctions que l'unité de commande séparée Innova Classic. La seule différence : tout est réuni dans un seul boîtier élégant !\n\n</p><p><b>Une unité de contacteur Innova séparée est nécessaire lorsque la puissance du poêle dépasse 15 kW.</b></p></div>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">CARACTÉRISTIQUES TECHNIQUES</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic (INC-S)</td><td>W: 170 mm x H: 90 mm x D: 30 mm</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "La fonction Smart Controlling régule les éléments chauffants par étapes pour atteindre rapidement la température souhaitée et offrir en permanence une vapeur de qualité.",
+      "À raccorder au contrôleur de puissance INP-C pour tout poêle NS jusqu'à 15 kW. Pour les poêles de plus de 15 kW, ajoutez l'unité de contacteur INP-S.",
+      "Compatible avec le détecteur d'ouverture de porte",
+      "Minuterie de démarrage différé",
+      "Fonctions ventilateur, variateur et Combi en option",
+      "À utiliser de préférence avec la sonde de banc en option (INN-BTEMP) et, pour les poêles Combi, la sonde d'humidité (INN-HUM)",
+      "Comprend l'interface utilisateur Classic et un câble RJ12 de 5 m"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

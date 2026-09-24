@@ -1,0 +1,18 @@
+{
+  "slug": "saunova-simple",
+  "productId": "cd47764f-9156-400f-af7d-b3e1f3f48d1c",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova Simple",
+    "short_description": "Profitez d'un sauna sans souci avec le Saunova Simple (SAU-UI-S). Conçu pour ceux qui préfèrent la simplicité, ce contrôleur compact permet d'allumer et d'éteindre facilement votre poêle de sauna, pour vous concentrer sur la détente.\n\n<b>Compatible avec tous les poêles NS jusqu'à 9 kW. Les poêles de plus de 9 kW nécessitent une unité de contacteur Saunova séparée.</b>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">CARACTÉRISTIQUES TECHNIQUES</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova Simple (SAU-UI-S)</td><td>H: 147 mm x W: 104 mm x D: 147 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "Dimensions : (L) 104 x (H) 147 x (P) 137 mm³",
+      "Au-delà de 9 kW, un contacteur est nécessaire",
+      "Pour ceux qui recherchent la simplicité dans la commande du sauna."
+    ]
+  }
+}

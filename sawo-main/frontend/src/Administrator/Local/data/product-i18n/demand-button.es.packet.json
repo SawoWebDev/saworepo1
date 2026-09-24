@@ -1,0 +1,19 @@
+{
+  "slug": "demand-button",
+  "productId": "32128110-1359-4cc0-af9a-162f9afc6777",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Pulsador Demand",
+    "short_description": "<span style=\"text-align: justify;\">El </span><b style=\"text-align: justify;\">pulsador Demand</b><span style=\"text-align: justify;\"> activa la producción de vapor al instante para que disfrute de una experiencia de bienestar totalmente personalizada.</span>",
+    "description": "<span style=\"text-align: justify;\">El </span><b style=\"text-align: justify;\">pulsador Demand</b><span style=\"text-align: justify;\"> activa la producción de vapor al instante para que disfrute de una experiencia de bienestar totalmente personalizada.</span>",
+    "type": "Accesorios de vapor",
+    "features": [
+      "Uso eficiente de la energía y menor coste eléctrico con solo pulsar un botón",
+      "Acceso rápido al vapor para mayor comodidad de uso",
+      "Diseño intuitivo: botón colocado estratégicamente para un acceso fácil",
+      "Generador de vapor activado por botón para una producción rápida de vapor"
+    ]
+  }
+}

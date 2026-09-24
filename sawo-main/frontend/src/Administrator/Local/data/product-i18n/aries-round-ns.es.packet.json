@@ -1,0 +1,22 @@
+{
+  "slug": "aries-round-ns",
+  "productId": "2420cbc5-5922-4f1d-af39-7382f6f8369e",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Redondo NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><b style=\"text-align: justify;\">Aries Redondo</b><span style=\"text-align: justify;\"> comparte la elegancia minimalista de todas las estufas Tower. Alta y de poco espacio, distribuye el calor de manera uniforme y es ideal para instalarla en el centro del sauna o integrada en un banco. Su separador de piedras integrado permite un calentamiento más rápido y eficiente de las piedras y prolonga la vida útil de las resistencias.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"2\">Distancias de seguridad mínimas<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NS-P-C</td>\n  <td>7.5</td>\n  <td>7 – 12</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 300 × 930</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-105NS-P</td>\n  <td>10.5</td>\n  <td>9 – 15</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI6-120NS-P</td>\n  <td>12.0</td>\n  <td>10 – 18</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>ARI6-150NS-P</td>\n  <td>15.0</td>\n  <td>13 – 23</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>ARI6-180NS-P</td>\n  <td>18.0</td>\n  <td>15 – 26</td>\n  <td>440 × 440 × 930</td>\n  <td>110</td>\n  <td>Separate</td>\n  <td>125</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Aries Redondo",
+    "features": [
+      "Rango de potencia: 4,5 – 18,0 kW",
+      "Control disponible: Saunova/Innova (NS)",
+      "Separador de piedras integrado",
+      "Patas regulables",
+      "Carcasa de acero inoxidable",
+      "Protector de estufa opcional",
+      "Marco de integración opcional"
+    ]
+  }
+}

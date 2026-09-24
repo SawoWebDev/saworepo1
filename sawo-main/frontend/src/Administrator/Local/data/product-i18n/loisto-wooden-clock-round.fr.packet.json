@@ -1,0 +1,32 @@
+{
+  "slug": "loisto-wooden-clock-round",
+  "productId": "89ca2395-08f5-48e4-80b1-fefbddd2d5a5",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (535-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Horloge ronde en bois Loisto",
+    "short_description": "L'horloge ronde en bois SAWO Loisto est une horloge de sauna ronde en bois de Ø180 mm, conçue pour résister à la chaleur et à l'humidité du sauna.",
+    "description": null,
+    "type": "Horloges et minuteurs",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (535-D)",
+        "name": "Cèdre (535-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

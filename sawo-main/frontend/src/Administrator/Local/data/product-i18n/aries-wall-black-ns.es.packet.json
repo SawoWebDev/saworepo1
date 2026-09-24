@@ -1,0 +1,22 @@
+{
+  "slug": "aries-wall-black-ns",
+  "productId": "0d3cd79f-d62b-4deb-88d2-fb7d9ee0ac3c",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries Pared Negro NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Aries Pared</strong><span style=\"text-align: justify;\"> es un diseño que ahorra espacio, con la misma estética elegante y minimalista de todas las estufas Tower. Su tamaño y su forma hacen que ocupe menos espacio en cualquier distribución de sauna, y deja más sitio para que los bañistas disfruten de sesiones de sauna profundamente reconfortantes. Su separador de piedras integrado reduce el tiempo de calentamiento de las piedras y prolonga la vida útil de las resistencias.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"2\">Distancias de seguridad mínimas<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NS-WL-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NS-WL-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NS-WL-BL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NS-WL-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries Pared",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Control disponible: Saunova/Innova (NS)",
+      "Separador de piedras integrado",
+      "Patas regulables",
+      "Carcasa de metal negro",
+      "Protector de estufa opcional",
+      "Marco de integración opcional"
+    ]
+  }
+}

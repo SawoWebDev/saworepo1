@@ -1,0 +1,21 @@
+{
+  "slug": "saunova-2-0-plus",
+  "productId": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 PLUS",
+    "short_description": "Notre nouvelle commande de sauna intelligente, la Saunova 2.0 PLUS, offre encore plus de liberté d'utilisation. L'unité de commande intègre une connexion Wi-Fi et peut donc être pilotée depuis l'application SAWO. L'application permet une expérience de sauna plus personnalisée et la commande à distance de plusieurs fonctions du sauna, comme la température et l'éclairage. Grâce au suivi en temps réel, l'utilisateur de l'application accède instantanément à la température actuelle du sauna et à la durée de la séance. La Saunova 2.0 PLUS est dotée d'une interface utilisateur intuitive qui peut être placée à l'intérieur ou à l'extérieur de la cabine de sauna. Conçue pour les poêles Ni2 et NS jusqu'à 9,0 kW, la Saunova 2.0 PLUS peut aussi être étendue jusqu'à 18,0 kW avec une unité de contacteur.",
+    "description": null,
+    "type": "Saunova",
+    "features": [
+      "Télécommande : programmez et pilotez le poêle de n'importe où, à n'importe quelle distance.",
+      "Interface intuitive : utilisez l'application et les commandes en toute simplicité grâce à une conception UI/UX épurée.",
+      "Commandes intégrées : tous les réglages se gèrent depuis une seule plateforme, la commande intelligente ou l'application mobile.",
+      "Suivi en temps réel : accédez instantanément à la température actuelle du sauna et à la durée de la séance.",
+      "Sécurité : les poêles s'éteignent automatiquement lorsque la minuterie arrive à zéro.",
+      "Compatible Wi-Fi"
+    ]
+  }
+}

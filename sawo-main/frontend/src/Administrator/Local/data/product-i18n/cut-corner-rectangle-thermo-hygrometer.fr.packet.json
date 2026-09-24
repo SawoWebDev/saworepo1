@@ -1,0 +1,56 @@
+{
+  "slug": "cut-corner-rectangle-thermo-hygrometer",
+  "productId": "1939852b-4010-44b5-ab06-cb3de5628b31",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (221-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (221-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (221-THH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Thermo-hygromètre rectangulaire à coins coupés",
+    "short_description": "Le thermo-hygromètre rectangulaire à coins coupés SAWO est un thermo-hygromètre de sauna de 225 × 140 mm, utilisé pour surveiller la température et l'humidité à l'intérieur du sauna.",
+    "description": null,
+    "type": "Thermomètres",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (221-THD)",
+        "name": "Cèdre (221-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (221-THA)",
+        "name": "Tremble (221-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (221-THH)",
+        "name": "Pruche (221-THH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

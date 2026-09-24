@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-rattan-4l",
+  "productId": "ec3d0259-a4be-4795-9343-ecab6dcbbd00",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (341-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (341-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (341-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ถังไม้หวาย 4 ลิตร",
+    "short_description": "ถังไม้หวาย SAWO 4 ลิตร เป็นถังไม้ความจุ 4 ลิตร ใช้ใส่น้ำสำหรับราดลงบนหินซาวน่า",
+    "description": null,
+    "type": "ถังน้ำ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (341-D)",
+        "name": "ซีดาร์ (341-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (341-A)",
+        "name": "แอสเพน (341-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (341-H)",
+        "name": "เฮมล็อก (341-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "saunova-simple",
+  "productId": "cd47764f-9156-400f-af7d-b3e1f3f48d1c",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova แบบเรียบง่าย",
+    "short_description": "สัมผัสการใช้งานซาวน่าอย่างไร้กังวลกับ Saunova Simple (SAU-UI-S) ออกแบบสำหรับผู้ที่ชอบความเรียบง่าย ตัวควบคุมขนาดกะทัดรัดนี้ช่วยให้เปิดและปิดฮีตเตอร์ซาวน่าได้ง่าย เพื่อให้คุณโฟกัสกับการผ่อนคลายได้อย่างเต็มที่\n\n<b>ใช้ได้กับฮีตเตอร์ NS ทุกรุ่นไม่เกิน 9 kW ฮีตเตอร์ที่เกิน 9 kW ต้องใช้ยูนิตคอนแทกเตอร์ Saunova แยกต่างหาก</b>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">รายละเอียดทางเทคนิค</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Saunova Simple (SAU-UI-S)</td><td>H: 147 mm x W: 104 mm x D: 147 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>13A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Saunova",
+    "features": [
+      "ขนาด: (กว้าง) 104 x (สูง) 147 x (ลึก) 137 มม.³",
+      "เกิน 9 kW ต้องใช้คอนแทกเตอร์",
+      "สำหรับผู้ที่ต้องการความเรียบง่ายในการควบคุมซาวน่า"
+    ]
+  }
+}

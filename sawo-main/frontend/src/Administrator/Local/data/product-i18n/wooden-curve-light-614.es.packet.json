@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-curve-light-614",
+  "productId": "d7f8b918-bdf7-48cc-af89-90dd3ff2f00d",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (925-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (925-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (925-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Luz curva de madera 614",
+    "short_description": "La luz curva de madera SAWO 614 es una luz de sauna curva de madera de 60 mm (3,4\") x 614 mm (24\") x 85 mm (2,4\"), diseñada para difundir la iluminación de manera uniforme dentro del sauna.",
+    "description": null,
+    "type": "Iluminación para sauna",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (925-D)",
+        "name": "Cedro (925-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (925-H)",
+        "name": "Tsuga (925-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (925-BL)",
+        "name": "Negro (925-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

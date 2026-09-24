@@ -1,0 +1,20 @@
+{
+  "slug": "mini-combi-fibercoated-ns",
+  "productId": "9dac0470-40f9-4ce4-945c-eee43f19f4aa",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Mini Combi Revestido de fibra NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><b style=\"text-align: justify;\">Mini Combi Revestido de fibra</b><span style=\"text-align: justify;\"> es la estufa Mini con un depósito de agua independiente para aportar más humedad. Incorpora un cuenco de aromas integrado para que los aceites esenciales y las fragancias impregnen el vapor generado durante la sesión de sauna. El modelo revestido de fibra ofrece mayor seguridad gracias a su recubrimiento de fibra que no quema al tacto y reduce el riesgo de quemaduras.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW\n<br>Estufa</th>\n  <th>kW\n<br>Depósito</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th colspan=\"2\">Control</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MNC-30NS-P-F</td>\n  <td>3.0</td>\n  <td>1 × 1.0</td>\n  <td>2 – 4</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>MNC-36NS-P-F</td>\n  <td>3.6</td>\n  <td>1 × 1.0</td>\n  <td>3 – 6</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "Rango de potencia: 3,0 – 3,6 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Depósito de agua independiente con generador de vapor de 1 kW",
+      "Recubrimiento de fibra que no quema al tacto",
+      "Cuenco de aromas integrado"
+    ]
+  }
+}

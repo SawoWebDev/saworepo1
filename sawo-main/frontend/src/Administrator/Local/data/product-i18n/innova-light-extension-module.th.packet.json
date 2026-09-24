@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "โมดูลขยายไฟ Innova",
+    "short_description": "เชื่อมต่อยูนิตคอนแทกเตอร์ Saunova 2.0 เข้ากับตัวควบคุมกำลังไฟ Saunova 2.0 เพื่อใช้กับฮีตเตอร์ที่เกิน 9 kW โครงเครื่องรุ่นใหม่ที่ปรับปรุงแล้วมีพื้นที่มากขึ้นเพื่อติดตั้งได้ง่ายและรวดเร็วกว่าเดิม มีตัวเลือกการเดินสายที่ยืดหยุ่นพร้อมที่รองรับแรงดึงสายทั้ง 4 ด้าน รวมถึงด้านหลัง เพื่อซ่อนสายไฟได้มิดชิด\n\n<span style=\"text-align: justify;\"><b>ใช้กับฮีตเตอร์ NS ที่เกิน 9 kW เชื่อมต่อกับตัวควบคุมกำลังไฟ Saunova</b></span>",
+    "description": null,
+    "type": "อะไหล่",
+    "features": [
+      "ในชุดมียูนิตคอนแทกเตอร์ Saunova และสาย RJ12 ยาว 1 ม.",
+      "ดีไซน์โครงเครื่องใหม่ ติดตั้งง่ายขึ้นด้วยพื้นที่กว้างขึ้นและมีตัวเลือกการเดินสายมากขึ้น"
+    ]
+  }
+}

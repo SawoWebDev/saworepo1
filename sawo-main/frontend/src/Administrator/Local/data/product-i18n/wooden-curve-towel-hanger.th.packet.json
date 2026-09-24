@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-curve-towel-hanger",
+  "productId": "6416e261-dc77-4610-9e8a-4ea7c2592da9",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (589-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (589-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (589-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ที่แขวนผ้าเช็ดตัวไม้ทรงโค้ง",
+    "short_description": "ที่แขวนผ้าเช็ดตัวไม้ทรงโค้ง SAWO เป็นที่แขวนผ้าเช็ดตัวไม้ขนาด 42 × 240 มม. ใช้แขวนผ้าเช็ดตัวและเสื้อคลุมบริเวณนอกห้องซาวน่า",
+    "description": null,
+    "type": "ที่แขวนเสื้อผ้า",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (589-D)",
+        "name": "ซีดาร์ (589-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (589-A)",
+        "name": "แอสเพน (589-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (589-BL)",
+        "name": "สีดำ (589-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

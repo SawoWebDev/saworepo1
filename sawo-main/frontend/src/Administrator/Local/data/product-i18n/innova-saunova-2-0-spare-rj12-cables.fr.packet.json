@@ -1,0 +1,13 @@
+{
+  "slug": "innova-saunova-2-0-spare-rj12-cables",
+  "productId": "8a27b22f-0506-478c-a207-2484c68cfdfb",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Câbles RJ12 de rechange Innova et Saunova 2.0",
+    "short_description": "Câble basse tension durable et extensible avec connecteurs RJ12 à encliquetage, conçu pour une compatibilité totale avec les commandes Innova et Saunova 2.0. Idéal pour une transmission fiable du signal et une installation facile.\n\n<span style=\"text-align: justify;\"><b>Câble basse tension extensible avec connecteurs RJ à encliquetage pour les commandes Innova et Saunova 2.0.</b></span>",
+    "description": null,
+    "type": "Pièces détachées"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "wooden-stripe-sauna-door",
+  "productId": "bfe97541-651d-4afc-8736-085aa38516bd",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (770-4SD-R)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Cedar (770-4SD-L)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "ประตูซาวน่าไม้ลายริ้ว",
+    "short_description": "ประตูซาวน่าไม้ลายริ้ว SAWO เป็นประตูซาวน่าไม้เนื้อแข็งพร้อมแผงลายริ้ว ช่องเปิด 610 × 1955 มม. วงกบ 700 × 2040 มม.",
+    "description": null,
+    "type": "ประตูและมือจับ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (770-4SD-R)",
+        "name": "ซีดาร์ (770-4SD-R)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Cedar (770-4SD-L)",
+        "name": "ซีดาร์ (770-4SD-L)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

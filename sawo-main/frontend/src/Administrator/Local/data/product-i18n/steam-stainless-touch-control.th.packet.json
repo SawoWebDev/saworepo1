@@ -1,0 +1,37 @@
+{
+  "slug": "steam-stainless-touch-control",
+  "productId": "20f895bb-31e0-4a02-8802-9768d7180345",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ชุดควบคุมทัชสกรีน Steam สแตนเลส",
+    "short_description": "<p style=\"text-align: justify;\">เครื่องกำเนิดไอน้ำ STN แบบหน้าจอสัมผัสรุ่นล่าสุดพร้อมจำหน่ายแล้ว</p><p style=\"text-align: justify;\"><b>ชุดควบคุมทัชสกรีน Steam สแตนเลส</b> ควบคุมไอน้ำ อุณหภูมิ และเวลาได้อย่างง่ายดายผ่านหน้าจอที่ใช้งานสะดวก เพื่อประสบการณ์ซาวน่าหรือห้องอบไอน้ำที่เป็นแบบของคุณ</p>",
+    "description": null,
+    "type": "ชุดควบคุมไอน้ำ",
+    "features": [
+      "โครงเครื่องสแตนเลสหนา",
+      "ปุ่มกดแบบมีแอนิเมชัน",
+      "ใช้งานร่วมกับอุปกรณ์อัตโนมัติในบ้านได้",
+      "รองรับการเชื่อมต่อสัญญาณเตือนฉุกเฉิน",
+      "โหมดสแตนด์บายรักษาความร้อนของน้ำไว้จนถึงการใช้งานครั้งถัดไป",
+      "แสดงรหัสข้อผิดพลาด",
+      "ฟังก์ชันระบายน้ำอัตโนมัติ",
+      "ล็อกปุ่ม",
+      "มีโหมดง่าย",
+      "ตั้งวันที่และเวลา",
+      "เครื่องนับการใช้กิโลวัตต์",
+      "ฟังก์ชันล้างตะกรัน",
+      "ตรวจจับความขัดข้องของแท่งความร้อน",
+      "หน่วยความจำเมื่อไฟดับ",
+      "เลือกหน่วยอุณหภูมิเป็นเซลเซียสหรือฟาเรนไฮต์",
+      "ไฟอัตโนมัติ",
+      "พัดลมอัตโนมัติ",
+      "ปรับความคมชัดหน้าจอ LCD",
+      "ปั๊มกลิ่นหอม หรี่ไฟ และพัดลม ให้เลือกเสริม",
+      "เซนเซอร์อุณหภูมิพร้อมสาย",
+      "มีที่ยึดหน้าจอควบคุมให้เลือกเสริม",
+      "มีสาย RJ12 ยาว 7.5 ม. พร้อมขั้วต่อรวมอยู่ในชุด"
+    ]
+  }
+}

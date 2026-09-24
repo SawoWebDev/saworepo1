@@ -1,0 +1,21 @@
+{
+  "slug": "saunova-2-0-plus",
+  "productId": "6f0d1b02-40b8-43ad-a06f-5dbbae1d1b17",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Saunova 2.0 PLUS",
+    "short_description": "Nuestra nueva unidad de control de sauna inteligente, la Saunova 2.0 PLUS, ofrece al usuario aún más libertad de uso. La unidad de control incluye conectividad Wi-Fi, por lo que puede manejarse desde la aplicación SAWO. La aplicación permite una experiencia de sauna más personalizada y el control remoto de varias funciones del sauna, como la temperatura y la iluminación. Con la monitorización en tiempo real, el usuario de la aplicación accede al instante a la temperatura actual del sauna y a la duración de la sesión. La Saunova 2.0 PLUS incorpora una interfaz de usuario intuitiva que puede colocarse dentro o fuera de la cabina de sauna. Diseñada para estufas Ni2 y NS de hasta 9,0 kW, la Saunova 2.0 PLUS también puede ampliarse hasta 18,0 kW con una unidad de contactor.",
+    "description": null,
+    "type": "Saunova",
+    "features": [
+      "Control remoto: programe y controle la estufa desde cualquier lugar y a cualquier distancia.",
+      "Interfaz intuitiva: use la aplicación y los controles con facilidad gracias a un diseño UI/UX depurado.",
+      "Controles integrados: todos los ajustes se gestionan desde una única plataforma, el control inteligente o la aplicación móvil.",
+      "Monitorización en tiempo real: consulte al instante la temperatura actual del sauna y la duración de la sesión.",
+      "Seguridad: las estufas se apagan automáticamente cuando el temporizador llega a cero.",
+      "Compatible con Wi-Fi"
+    ]
+  }
+}

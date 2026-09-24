@@ -1,0 +1,19 @@
+{
+  "slug": "helius-heater-hood",
+  "productId": "f7c45700-7624-4ca8-be26-1b9ebc1e336c",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Hotte de poêle Helius",
+    "short_description": "La hotte de poêle Helius peut être installée dans une niche de la cabine de sauna pour rester cachée et à l'écart des baigneurs. Grâce au bac à eau séparé en stéatite du poêle, on peut verser l'eau sur les pierres pour produire de la vapeur. Cette conception aide à éviter les brûlures accidentelles. La hotte Helius réduit la distance de sécurité au minimum.",
+    "description": null,
+    "type": "Hotte de poêle",
+    "spec_table_headers": [
+      "Modèle",
+      "Longueur (mm)",
+      "Largeur (mm)",
+      "Hauteur (mm)"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "electronics-compartment",
+  "productId": "88329d4e-f91d-458b-a782-1af14354bf7c",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Compartimento electrónico",
+    "short_description": "Incluido solo en los modelos STN-S.",
+    "description": null,
+    "type": null
+  }
+}

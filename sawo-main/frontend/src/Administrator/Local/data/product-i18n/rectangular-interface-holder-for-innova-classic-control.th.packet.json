@@ -1,0 +1,13 @@
+{
+  "slug": "rectangular-interface-holder-for-innova-classic-control",
+  "productId": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ที่ยึดหน้าจอควบคุมทรงสี่เหลี่ยมผืนผ้าสำหรับ Innova Classic",
+    "short_description": "ที่ยึดหน้าจอควบคุมไม้ดีไซน์สวย INN-IH20 ออกแบบสำหรับ Innova Classic มีให้เลือกในผิวสัมผัสพรีเมียมซีดาร์ แอสเพน และไม้สนตระกูล Pinaceae เพื่อให้เข้ากับสไตล์ซาวน่าที่หลากหลาย ขนาด: 215 มม. (กว้าง) x 140 มม. (ลึก) x 20 มม. (สูง) เหมาะสำหรับใส่ชุดควบคุมของคุณอย่างปลอดภัยพร้อมเพิ่มความงามแบบธรรมชาติ",
+    "description": null,
+    "type": "ที่ยึดหน้าจอควบคุม"
+  }
+}

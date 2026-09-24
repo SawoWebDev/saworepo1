@@ -1,0 +1,19 @@
+{
+  "slug": "cumulus-ns",
+  "productId": "49825108-e558-40a2-87d4-7e5d837cb07c",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cumulus NS",
+    "short_description": "La Cumulus es una elegante estufa de pared minimalista con carcasa de acero inoxidable realzada por un frontal decorativo de esteatita finlandesa. La esteatita ayuda a calentar las piedras más rápido y a conservar el calor durante más tiempo. Con su cuenco de aromas integrado, la Cumulus es una opción inteligente para añadir un toque de spa a las sesiones de sauna mediante la aromaterapia.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"5\">Distancias de seguridad mínimas<br>A | B | C | D | E</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CML-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-80NS-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n<tr>\n  <td>CML-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Separate</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n</tbody></table>",
+    "type": "Cumulus",
+    "features": [
+      "Rango de potencia: 4,5 – 9,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Carcasa de acero inoxidable",
+      "Cuenco de aromas integrado"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "krios-nb",
+  "productId": "0f409779-f47d-4136-8328-ec47fda7e077",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Krios NB",
+    "short_description": "<span style=\"text-align: justify;\">Le </span><strong style=\"text-align: justify;\">Krios</strong><span style=\"text-align: justify;\"> offre un plus grand bac à pierres pour une chaleur plus intense et plus humide. Il arbore aussi le motif SAWO emblématique sur un habillage en acier inoxydable. Le poêle Krios est compatible avec les commandes Saunova (Ni2, NS) et Innova (NS).</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"3\">Distances de sécurité minimales<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>KRI-45NB-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Built-in</td>\n  <td>50</td>\n  <td>75</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-60NB-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Built-in</td>\n  <td>80</td>\n  <td>105</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-80NB-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Built-in</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr>\n<tr>\n  <td>KRI-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Built-in</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr></tbody></table>",
+    "type": "Krios",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commandes disponibles : intégrée (NB)",
+      "Habillage en acier inoxydable",
+      "Réflecteur de chaleur inclus",
+      "Unité de commande intégrée pouvant être fixée à gauche, à droite ou au-dessus du poêle",
+      "Capacité maximale : 50 kg de pierres"
+    ]
+  }
+}

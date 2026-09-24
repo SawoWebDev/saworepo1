@@ -1,0 +1,56 @@
+{
+  "slug": "stainless-steel-ladle-siro-46-5cm",
+  "productId": "7b3de244-9169-48bc-a905-332491680704",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (445-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (445-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (445-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Louche en inox Siro 46,5 cm",
+    "short_description": "La louche en inox SAWO Siro 46,5 cm est une louche de sauna en acier inoxydable de 465 mm de long, utilisée pour verser l'eau (löyly) sur les pierres de sauna chauffées.",
+    "description": null,
+    "type": "Louches",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (445-MD)",
+        "name": "Cèdre (445-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (445-MA)",
+        "name": "Tremble (445-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (445-MH)",
+        "name": "Pruche (445-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

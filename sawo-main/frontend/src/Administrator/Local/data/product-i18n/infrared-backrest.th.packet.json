@@ -1,0 +1,17 @@
+{
+  "slug": "infrared-backrest",
+  "productId": "b3f6e11d-1caf-4b7c-8492-3cc8c79054f8",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "พนักพิงอินฟราเรด",
+    "short_description": "พนักพิงอินฟราเรดตามหลักสรีระที่แผ่ความร้อนผ่อนคลายตรงไปยังหลังโดยตรงเพื่อบรรเทากล้ามเนื้อเฉพาะจุด",
+    "description": null,
+    "type": "อุปกรณ์เสริมอินฟราเรด",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ]
+  }
+}

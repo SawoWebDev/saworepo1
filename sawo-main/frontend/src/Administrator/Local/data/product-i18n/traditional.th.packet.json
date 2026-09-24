@@ -1,0 +1,32 @@
+{
+  "slug": "traditional",
+  "productId": "f44c4083-c5cb-4825-bd52-132f6771c688",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (SET-TRAD-D)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Traditional",
+    "short_description": "ตัวเลือกที่มาพร้อมผิวสัมผัสเรียบง่าย ไร้กาลเวลา และเป็นแบบดั้งเดิม รวบรวมอุปกรณ์จำเป็นทั้งหมดสำหรับการใช้ซาวน่าในชีวิตประจำวัน",
+    "description": null,
+    "type": "ชุดอุปกรณ์เสริม",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (SET-TRAD-D)",
+        "name": "เฮมล็อก (SET-TRAD-D)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

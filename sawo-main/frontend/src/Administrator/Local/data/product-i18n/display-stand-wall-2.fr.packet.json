@@ -1,0 +1,26 @@
+{
+  "slug": "display-stand-wall-2",
+  "productId": "7cffc249-9f00-4bbf-88e9-39a4839ac494",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Présentoir mural 2",
+    "short_description": "Le présentoir mural SAWO 2 est un présentoir mural de (L) 630 x (l) 2300 x (H) 2000 mm, utilisé pour exposer les poêles et accessoires SAWO dans un point de vente ou un showroom.",
+    "description": null,
+    "type": "Ventilation et divers",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(DP-16)",
+        "name": "(DP-16)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

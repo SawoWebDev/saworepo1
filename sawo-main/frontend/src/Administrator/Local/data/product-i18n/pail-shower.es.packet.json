@@ -1,0 +1,56 @@
+{
+  "slug": "pail-shower",
+  "productId": "9299ac76-11e7-40cf-9e0d-eb501397d978",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (393-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (393-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (393-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Ducha de cubo",
+    "short_description": "La ducha de cubo SAWO tiene una capacidad de 18 L y combina un cubo con una alcachofa de ducha para enjuagarse antes o después de una sesión de sauna.",
+    "description": null,
+    "type": "Ducha de cubo",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (393-D)",
+        "name": "Cedro (393-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (393-H)",
+        "name": "Tsuga (393-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (393-BL)",
+        "name": "Negro (393-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

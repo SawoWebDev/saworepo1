@@ -1,0 +1,28 @@
+{
+  "slug": "steam-door",
+  "productId": "efc9e723-8d96-4d74-930c-85cadc12a79b",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Puerta de vapor",
+    "short_description": "<p style=\"text-align: justify;\">La <strong><b>puerta de vapor</b></strong> mantiene el vapor dentro e impide que escape el exceso de humedad, lo que garantiza una experiencia de baño de vapor profundamente revitalizante.</p><p style=\"text-align: justify;\">Nuestra puerta de vapor está sellada con una junta de goma y equipada con un cierre magnético, un juego de tiradores de acero inoxidable y un recogegotas que dirige la condensación al desagüe del suelo. El marco es de aluminio resistente a la oxidación y la puerta de vidrio templado está diseñada para soportar altas temperaturas. La instalación es sencilla, con sellador de silicona o con tornillos.</p><p style=\"text-align: justify;\">La puerta de vapor de SAWO se monta fácilmente con silicona o con tornillos.</p>",
+    "description": null,
+    "type": "Accesorios de vapor",
+    "features": [
+      "Puerta de vapor de aluminio disponible:",
+      "código: ST-746 | tamaño: 790 × 1890 mm | marco: 60 mm",
+      "código: ST-749 | tamaño: 900 × 2100 mm | marco: 71 mm",
+      "Jamba de puerta de aluminio",
+      "Puerta de vidrio templado esmerilado de 8 mm",
+      "Juego de tiradores de puerta de acero inoxidable",
+      "3 bisagras de alta resistencia",
+      "Cierre magnético de puerta",
+      "Junta de goma hermética",
+      "Recogegotas de plástico",
+      "Cuñas para facilitar la instalación",
+      "Tornillos adicionales y tapones de goma",
+      "Incluye sellador de silicona, llave Allen y guía de tornillos"
+    ]
+  }
+}

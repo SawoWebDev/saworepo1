@@ -1,0 +1,19 @@
+{
+  "slug": "helius-ns",
+  "productId": "15024010-24cd-4cf2-ab01-7e4281cc5603",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius NS",
+    "short_description": "<p style=\"text-align: justify;\"><strong>Helius</strong> ให้ความยืดหยุ่นในการติดตั้งมากขึ้นด้วยรูปทรงบาง ฮีตเตอร์แบบ \"ซ่อนตัว\" นี้ติดตั้งไว้หลังม้านั่งโดยใช้ผนังกั้น ทำให้มองไม่เห็นตัวฮีตเตอร์ เมื่อเทน้ำลงในอ่างน้ำซึ่งเป็นส่วนเดียวที่มองเห็น น้ำจะไหลผ่านสายยางเข้าสู่ฮีตเตอร์เพื่อทำความร้อนให้ห้อง ด้วยการออกแบบทางเดินอากาศขั้นสูง Helius ใช้หินน้อยลง ทำให้อากาศไหลเวียนดีขึ้นและทำความร้อนได้มีประสิทธิภาพมากขึ้น</p><p style=\"text-align: justify;\">Helius ยังต้องการระยะปลอดภัยที่สั้นกว่าปกติมาก (ขั้นต่ำ 5 มม.) และหากเพิ่มฝาครอบ Helius ที่จำหน่ายแยกต่างหาก ระยะปลอดภัยจะลดลงเกือบเหลือน้อยที่สุด</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>ฮีตเตอร์\n<br>รุ่น</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th colspan=\"2\">ระบบควบคุม</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-45NS-G-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-60NS-G-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-75NS-G-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-90NS-G-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "อ่างน้ำหินสบู่แยกต่างหากพร้อมสายยาง",
+      "มีตะแกรงป้องกันและฝาครอบฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

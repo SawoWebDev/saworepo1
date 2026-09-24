@@ -1,0 +1,21 @@
+{
+  "slug": "krios-ns",
+  "productId": "a9719e36-47cc-4a94-8436-8c8d9c3c94ff",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Krios NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Krios</b><span style=\"text-align: justify;\"> มีช่องใส่หินขนาดใหญ่ขึ้นเพื่อให้ความร้อนสูงและชื้นยิ่งขึ้น พร้อมลายสัญลักษณ์ของ SAWO บนโครงเครื่องสแตนเลส ฮีตเตอร์ Krios ใช้งานร่วมกับชุดควบคุม Saunova (Ni2, NS) และ Innova (NS) ได้</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"3\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>KRI-45NS-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Innova</td>\n  <td>50</td>\n  <td>75</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-60NS-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>290 × 390 × 580</td>\n  <td>40</td>\n  <td>Innova</td>\n  <td>80</td>\n  <td>105</td>\n  <td>320</td>\n</tr>\n<tr>\n  <td>KRI-80NS-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr>\n<tr>\n  <td>KRI-90NS-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 390 × 650</td>\n  <td>50</td>\n  <td>Innova</td>\n  <td>100</td>\n  <td>125</td>\n  <td>390</td>\n</tr></tbody></table>",
+    "type": "Krios",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "โครงเครื่องสแตนเลส",
+      "มีแผ่นสะท้อนความร้อนรวมอยู่ในชุด",
+      "ชุดควบคุมในตัวติดตั้งได้ทางซ้าย ทางขวา หรือด้านบนของฮีตเตอร์",
+      "รองรับหินได้สูงสุด 50 กก."
+    ]
+  }
+}

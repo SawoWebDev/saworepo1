@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic-built-in",
+  "productId": "50834970-4527-4954-9cd7-8ac89d7bd70f",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic encastrable",
+    "short_description": "<p style=\"text-align: justify;\"><b>Innova Classic encastrable</b> est une unité de commande composée d'un contrôleur de puissance avec panneau de commande intégré. Elle offre les mêmes fonctions que l'unité de commande séparée Innova Classic. La seule différence : tout est réuni dans un seul boîtier élégant !\n\n</p><p style=\"text-align: justify;\"><b>Une unité de contacteur Innova séparée est nécessaire lorsque la puissance du poêle dépasse 15 kW.</b></p>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">CARACTÉRISTIQUES TECHNIQUES</th></tr></thead>\n  <tbody>\n  <tr><td>Suitable Heaters</td><td>15kW max</td></tr>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Rated Voltage</td><td>400V 3N~ (3Phase)\n230V 1P (1Phase)</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>CABIN LIGHT</b></td></tr>\n  <tr><td>Rating</td><td>230V 100W</td></tr>\n  <tr><td>Fan</td><td>230V 100W</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic Built-In (INC-B)</td><td>W: 320 mm x H: 270 mm x D: 78 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "La fonction Smart Controlling régule les éléments chauffants par étapes pour atteindre rapidement la température souhaitée et offrir en permanence une vapeur de qualité.",
+      "Pour les poêles de plus de 15 kW, ajoutez l'unité de contacteur INP-S.",
+      "Compatible avec le détecteur d'ouverture de porte",
+      "Minuterie de démarrage différé",
+      "Fonctions ventilateur, variateur et Combi en option",
+      "À utiliser de préférence avec la sonde de banc en option (INN-BTEMP) et, pour les poêles Combi, la sonde d'humidité (INN-HUM)",
+      "Comprend le contrôleur de puissance Innova avec interface utilisateur Classic, une sonde de température avec support en cèdre et un câblage en silicone de 5 m."
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

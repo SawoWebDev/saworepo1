@@ -1,0 +1,17 @@
+{
+  "slug": "innova-light-extension-module",
+  "productId": "6dbf9605-4d25-4c60-a02e-57d5a878001b",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Module d'extension lumineux Innova",
+    "short_description": "Raccordez l'unité de contacteur Saunova 2.0 au contrôleur de puissance Saunova 2.0 pour l'utiliser avec des poêles de plus de 9 kW. Le nouveau boîtier modernisé offre plus de place pour une installation plus facile et plus rapide. Options de câblage flexibles avec passages de câbles anti-traction sur 4 côtés, y compris à l'arrière pour dissimuler complètement le câblage.\n\n<span style=\"text-align: justify;\"><b>À utiliser avec les poêles NS de plus de 9 kW. À raccorder au contrôleur de puissance Saunova</b></span>",
+    "description": null,
+    "type": "Pièces détachées",
+    "features": [
+      "Comprend l'unité de contacteur Saunova et un câble RJ12 de 1 m",
+      "Nouvelle conception du boîtier pour une installation plus simple, avec plus d'espace et de possibilités de câblage"
+    ]
+  }
+}

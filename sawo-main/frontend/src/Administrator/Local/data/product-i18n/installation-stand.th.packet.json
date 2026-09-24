@@ -1,0 +1,20 @@
+{
+  "slug": "installation-stand",
+  "productId": "2f48041e-6fcb-4609-9f21-a62352a3f127",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ขาตั้งสำหรับติดตั้ง",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">ขาตั้งสำหรับติดตั้ง</b><span style=\"text-align: justify;\"> เป็นฐานที่แข็งแรงทนทานสำหรับเครื่องกำเนิดไอน้ำของคุณ ช่วยให้ทำงานได้อย่างปลอดภัยและมีประสิทธิภาพ</span>",
+    "description": null,
+    "type": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ",
+    "features": [
+      "ช่วยให้ติดตั้งเครื่องกำเนิดไอน้ำ STW ได้ง่ายขึ้น",
+      "ปรับความสูงได้ให้เหมาะกับเครื่องกำเนิดไอน้ำหลายรุ่นและความต้องการของผู้ใช้",
+      "ใช้งานได้กับเครื่องกำเนิดไอน้ำหลายรุ่นสำหรับการใช้งานที่หลากหลาย",
+      "ติดตั้งง่ายในพื้นที่หลากหลายรูปแบบ",
+      "รองรับเครื่องกำเนิดไอน้ำหลายรุ่นสำหรับการใช้งานที่หลากหลาย"
+    ]
+  }
+}

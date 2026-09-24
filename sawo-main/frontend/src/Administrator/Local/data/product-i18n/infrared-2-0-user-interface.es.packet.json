@@ -1,0 +1,17 @@
+{
+  "slug": "infrared-2-0-user-interface",
+  "productId": "7298bfd7-c3df-403c-ae13-fd79133bd1a0",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Interfaz de usuario Infrared 2.0",
+    "short_description": "La interfaz de usuario Infrared 2.0 ofrece un control táctil intuitivo de la temperatura, el tiempo y la iluminación de su sauna de infrarrojos.",
+    "description": null,
+    "type": "Controles de infrarrojos",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ]
+  }
+}

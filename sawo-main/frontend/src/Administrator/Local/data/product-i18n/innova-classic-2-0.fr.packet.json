@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic-2-0",
+  "productId": "9d43ef15-615c-4354-aa32-8463fa50d186",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic 2.0",
+    "short_description": "<b style=\"text-align: justify;\">Innova 2.0</b><span style=\"text-align: justify;\"> est une commande très polyvalente qui permet de régler la température, l'humidité, la ventilation et la luminosité du sauna.</span>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">CARACTÉRISTIQUES TECHNIQUES</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic 2.0 (INC-S-V2)</td><td>W: 104 mm x H: 147 mm x L: 37 mm</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>POWER EXTENSION UNIT</b></td></tr>\n  <tr><td>Frequency</td><td>50/60Hz</td></tr>\n  <tr><td>Switching Capacity per phase</td><td>21A</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>SENSOR</b></td></tr>\n  <tr><td>Bench Temperature Sensor</td><td>compatible (Optional)</td></tr>\n  <tr><td>Bench Combined Temperature-Humidity Sensor</td><td>compatible (Optional)</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "La fonction Smart Controlling régule les éléments chauffants par étapes pour atteindre rapidement la température souhaitée et offrir en permanence une vapeur de qualité.",
+      "À raccorder au contrôleur de puissance INP-C pour tout poêle NS jusqu'à 15 kW. Pour les poêles de plus de 15 kW, ajoutez l'unité de contacteur INP-S.",
+      "Compatible avec le détecteur d'ouverture de porte",
+      "Minuterie de démarrage différé",
+      "Fonctions ventilateur, variateur et Combi en option",
+      "À utiliser de préférence avec la sonde de banc en option (INN-BTEMP) et, pour les poêles Combi, la sonde d'humidité (INN-HUM)",
+      "Comprend l'interface utilisateur Classic 2.0 et un câble RJ12 de 5 m"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

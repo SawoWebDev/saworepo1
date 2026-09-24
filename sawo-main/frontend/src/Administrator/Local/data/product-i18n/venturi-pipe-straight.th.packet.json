@@ -1,0 +1,20 @@
+{
+  "slug": "venturi-pipe-straight",
+  "productId": "5bbccbe0-01f8-460e-8b04-dce27d17c9c5",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ท่อเวนทูรีแบบตรง",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Venturi Pipe</b><span style=\"text-align: justify;\"> ดูดอากาศเข้าไปในท่อเพื่อลดอุณหภูมิด้วยการทำให้โมเลกุลอากาศร้อนภายในเย็นลง กระบวนการนี้สร้างม่านไอน้ำที่หนาแน่นและนุ่มนวลกว่าและป้องกันเสียงฟู่จากท่อไอน้ำ</span>",
+    "description": null,
+    "type": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ",
+    "features": [
+      "ให้ไอน้ำที่อ่อนโยนและนุ่มนวลกว่า",
+      "สร้างม่านไอน้ำที่หนาแน่นกว่า",
+      "ป้องกันเสียงฟู่",
+      "มีหัวจ่ายไอน้ำเพื่อกระจายไอน้ำอย่างสม่ำเสมอ",
+      "ผลิตจากสแตนเลสหนา"
+    ]
+  }
+}

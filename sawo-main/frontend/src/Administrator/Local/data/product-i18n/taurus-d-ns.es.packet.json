@@ -1,0 +1,19 @@
+{
+  "slug": "taurus-d-ns",
+  "productId": "0fcd7adc-bc93-44b2-81af-5c17c1ee557e",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Taurus D NS",
+    "short_description": "<p><strong>Taurus D</strong> revoluciona la estufa de sauna estándar al ofrecer dos o más opciones de potencia en la misma estufa. Está diseñada para uso industrial, spas y piscinas tanto públicas como privadas.\n\n</p><p style=\"text-align: justify;\">La <strong>Taurus D</strong> cuenta con un sistema sensorial avanzado que detecta a tiempo los fallos de las resistencias. El depósito de piedras mantiene las piedras separadas de las resistencias, lo que aumenta la vida útil de estas. Además, la estufa incorpora una bandeja cassette extraíble que simplifica cualquier tarea de mantenimiento, ya sea sustituir las piedras o las resistencias. Este diseño reduce los tiempos de inactividad y los costes de funcionamiento, y garantiza un rendimiento duradero.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo x Ancho x Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"3\">Distancias de seguridad mínimas<br>A | B | C</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>TRD-90/120NS-G-P</td>\n  <td>9.0 | 12.0</td>\n  <td>8 – 18</td>\n  <td>555 × 555 × 690</td>\n  <td>50</td>\n  <td>Separate</td>\n  <td>1210</td>\n  <td>5/50</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>TRD-150/180NS-G-P</td>\n  <td>15.0 | 18.0</td>\n  <td>13 – 29</td>\n  <td>555 × 705 × 690</td>\n  <td>65 – 75</td>\n  <td>Separate</td>\n  <td>1410</td>\n  <td>5/50</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TRD-180/210/240NS-G-P</td>\n  <td>18.0 | 21.0 | 24.0</td>\n  <td>18 – 42</td>\n  <td>555 × 970 × 690</td>\n  <td>90 – 100</td>\n  <td>Separate</td>\n  <td>1410</td>\n  <td>5/50</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>TRD-270/300/330/360NS-G-P</td>\n  <td>27.0 | 30.0 | 33.0 | 36.0</td>\n  <td>32 – 75</td>\n  <td>555 × 1385 × 690</td>\n  <td>150</td>\n  <td>Separate</td>\n  <td>1410</td>\n  <td>5/50</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Taurus",
+    "features": [
+      "Rango de potencia: 9,0 – 36,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Patas regulables",
+      "Rellenado automático opcional para llenar el depósito de agua sin intervención"
+    ]
+  }
+}

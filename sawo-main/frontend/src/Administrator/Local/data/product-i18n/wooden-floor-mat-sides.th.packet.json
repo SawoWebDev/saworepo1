@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-floor-mat-sides",
+  "productId": "c2f4a8cb-d799-4a50-abb6-c2f1da2947ef",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (595-D-SID)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (595-A-SID)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (595-H-SID)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "แผ่นไม้ปูพื้น ด้านข้าง",
+    "short_description": "แผ่นไม้ปูพื้น SAWO ด้านข้าง เป็นชิ้นด้านข้างของระบบแผ่นไม้ปูพื้นแบบโมดูลาร์ของ SAWO ขนาด 285 × 115 มม. หนา 22 มม. ใช้ปกป้องพื้นห้องซาวน่าและเพิ่มความสบายเมื่อเดิน",
+    "description": null,
+    "type": "แผ่นไม้ปูพื้น",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (595-D-SID)",
+        "name": "ซีดาร์ (595-D-SID)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (595-A-SID)",
+        "name": "แอสเพน (595-A-SID)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (595-H-SID)",
+        "name": "เฮมล็อก (595-H-SID)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "scandia-combi-fiber-coated-ns",
+  "productId": "1daf49dc-68d7-49ec-8041-65bbcc142133",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia Combi เคลือบไฟเบอร์ NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Scandia Combi เคลือบไฟเบอร์</strong><span style=\"text-align: justify;\"> เพิ่มไอน้ำให้การอบซาวน่าด้วยถังน้ำ Combi เสริมเพื่อเพิ่มความชื้น ถ้วยน้ำมันหอมระเหยในตัวออกแบบมาเพื่อเติมกลิ่นหอมลงในไอน้ำให้ได้ประสบการณ์เหมือนอยู่ในสปา ด้วยสารเคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อน ฮีตเตอร์คลาสสิกรุ่นอัปเดตนี้ยังช่วยลดความเสี่ยงจากการโดนโครงเครื่องลวกโดยไม่ตั้งใจ</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW\n<br>ฮีตเตอร์</th>\n  <th>kW\n<br>ถังน้ำ</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCAC-60NS-P-F-C</td>\n  <td>6.0</td>\n  <td>1 × 1.0</td>\n  <td>5 – 9</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-80NS-P-F-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SCAC-90NS-P-F-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>365 × 410 × 595</td>\n  <td>18 - 22</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>135</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "ช่วงกำลังไฟ: 6.0 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "ถังน้ำแยกพร้อมเครื่องกำเนิดไอน้ำ 1 kW หรือ 2 kW",
+      "เคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อน",
+      "มีถ้วยน้ำมันหอมระเหยในตัว"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "mini-combi-fibercoated-ns",
+  "productId": "9dac0470-40f9-4ce4-945c-eee43f19f4aa",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Mini Combi เคลือบไฟเบอร์ NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><b style=\"text-align: justify;\">Mini Combi เคลือบไฟเบอร์</b><span style=\"text-align: justify;\"> คือฮีตเตอร์ Mini ที่มีถังน้ำแยกเพื่อเพิ่มความชื้น มีถ้วยน้ำมันหอมระเหยในตัวสำหรับเติมกลิ่นหอมลงในไอน้ำที่เกิดขึ้นระหว่างการอบซาวน่า รุ่นเคลือบไฟเบอร์เพิ่มความปลอดภัยด้วยสารเคลือบที่สัมผัสแล้วไม่ร้อน ช่วยลดความเสี่ยงจากการโดนความร้อนลวก</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW\n<br>ฮีตเตอร์</th>\n  <th>kW\n<br>ถังน้ำ</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th colspan=\"2\">ระบบควบคุม</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MNC-30NS-P-F</td>\n  <td>3.0</td>\n  <td>1 × 1.0</td>\n  <td>2 – 4</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>MNC-36NS-P-F</td>\n  <td>3.6</td>\n  <td>1 × 1.0</td>\n  <td>3 – 6</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "ช่วงกำลังไฟ: 3.0 – 3.6 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "ถังน้ำแยกพร้อมเครื่องกำเนิดไอน้ำ 1 kW",
+      "เคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อน",
+      "มีถ้วยน้ำมันหอมระเหยในตัว"
+    ]
+  }
+}

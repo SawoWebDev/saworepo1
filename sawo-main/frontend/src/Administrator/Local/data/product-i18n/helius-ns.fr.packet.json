@@ -1,0 +1,19 @@
+{
+  "slug": "helius-ns",
+  "productId": "15024010-24cd-4cf2-ab01-7e4281cc5603",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius NS",
+    "short_description": "<p style=\"text-align: justify;\">Le <strong>Helius</strong> offre une plus grande souplesse d'installation grâce à son profil mince. Ce poêle « caché » peut être installé derrière les bancs à l'aide d'une cloison murale, ce qui le rend pratiquement invisible. Une fois l'eau versée dans le bac à eau, seul élément qui reste visible, elle circule jusqu'au poêle par un tuyau et chauffe la pièce. Grâce à sa conception avancée de circulation d'air, le Helius utilise moins de pierres, ce qui améliore la circulation de l'air et l'efficacité de chauffe.</p><p style=\"text-align: justify;\">Le Helius nécessite en outre une distance de sécurité beaucoup plus courte que d'habitude (min. 5 mm). Avec la hotte Helius vendue séparément, la distance de sécurité peut être quasiment réduite au minimum.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Poêle\n<br>Modèle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th colspan=\"2\">Commande</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-45NS-G-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-60NS-G-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-75NS-G-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-90NS-G-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>230 × 860 × 655</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Bac à eau séparé en stéatite avec tuyau",
+      "Grille de protection et hotte en option"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "helius-mini-ns",
+  "productId": "2c147543-2f01-4114-8336-85a4bcdb1f00",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Helius Mini NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Helius Mini</strong><span style=\"text-align: justify;\"> ofrece la misma innovación que la Helius en un formato más compacto. Puede instalarse discretamente detrás de los bancos, totalmente fuera de la vista y con una distancia de seguridad mínima. Su campana está pensada para su uso como estufa oculta. Combinada con su potente rendimiento, está diseñada con esmero para calentar de manera uniforme espacios más reducidos.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Estufa\n<br>Modelo</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th colspan=\"2\">Control</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>HES-MN-20NS-Z</td>\n  <td>2.0</td>\n  <td>1.5 – 2.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-27NS-Z</td>\n  <td>2.7</td>\n  <td>2.0 – 3.5</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr>\n<tr>\n  <td>HES-MN-30NS-Z</td>\n  <td>3.0</td>\n  <td>2.0 – 4.0</td>\n  <td>190 × 480 × 480</td>\n  <td>17</td>\n  <td>Separate</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Helius",
+    "features": [
+      "Rango de potencia: 2,0 – 3,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Depósito de agua independiente de esteatita con manguera",
+      "Protector y campana de estufa opcionales"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "aries-wall-black-nb",
+  "productId": "ad273de0-e0db-4ad0-9c2f-0bf05bde124c",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aries ติดผนัง สีดำ NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Aries ติดผนัง</strong><span style=\"text-align: justify;\"> เป็นดีไซน์ประหยัดพื้นที่ที่มีความสวยเรียบแบบมินิมอลเช่นเดียวกับฮีตเตอร์ Tower ทุกรุ่น ขนาดและรูปทรงทำให้ใช้พื้นที่น้อยในทุกผังห้องซาวน่า เหลือพื้นที่ให้ผู้ใช้ได้เพลิดเพลินกับการอบซาวน่าที่ช่วยฟื้นฟูร่างกายอย่างเต็มที่ ตัวคั่นหินในตัวช่วยให้หินร้อนเร็วขึ้นและยืดอายุการใช้งานขององค์ประกอบทำความร้อน</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"2\">ระยะปลอดภัยขั้นต่ำ<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>ARI3-45NB-WL-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-60NB-WL-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-75NB-WL-BL-P-C</td>\n  <td>7.5</td>\n  <td>7 – 13</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>ARI3-90NB-WL-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>250 × 415 × 1030</td>\n  <td>65</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Aries ติดผนัง",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "มีตัวคั่นหินในตัว",
+      "ขาปรับระดับได้",
+      "โครงเครื่องโลหะสีดำ",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม",
+      "มีกรอบติดตั้งฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

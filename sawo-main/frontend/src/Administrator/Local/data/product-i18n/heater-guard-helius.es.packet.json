@@ -1,0 +1,40 @@
+{
+  "slug": "heater-guard-helius",
+  "productId": "69297e97-5b1c-452d-8cc5-4a65e65dcb9d",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (HES-GUARD-W-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (HES-GUARD-W-A)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Protector de estufa – Helius",
+    "short_description": "El protector de estufa es un elemento de seguridad diseñado para reducir el riesgo de quemaduras. Fabricados con maderas resistentes al calor como el cedro o el álamo, ofrecen una barrera protectora y realzan el atractivo estético de la estufa.",
+    "description": null,
+    "type": "Protector de estufa",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (HES-GUARD-W-D)",
+        "name": "Cedro (HES-GUARD-W-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (HES-GUARD-W-A)",
+        "name": "Álamo (HES-GUARD-W-A)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

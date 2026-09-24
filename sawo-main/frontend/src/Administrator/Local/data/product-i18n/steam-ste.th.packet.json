@@ -1,0 +1,33 @@
+{
+  "slug": "steam-ste",
+  "productId": "3fd0cdb2-adf7-4c97-8287-51e6c5a8c702",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Steam STE",
+    "short_description": "<span style=\"text-align: justify;\">ชุดควบคุม Steam STE. ผสานการใช้งานที่คุ้นเคยของรุ่นก่อนเข้ากับดีไซน์ที่ทันสมัยและขนาดที่ปรับให้เหมาะสมยิ่งขึ้น เพื่อการใช้งานที่ง่ายและเชื่อถือได้ยิ่งขึ้น</span>",
+    "description": null,
+    "type": null,
+    "features": [
+      "ใช้ได้กับเครื่องกำเนิดไอน้ำ STE",
+      "ตั้งเวลาการใช้งานและอุณหภูมิได้",
+      "โหมดสแตนด์บายประหยัดพลังงาน",
+      "ล็อกปุ่ม",
+      "เลือกได้ระหว่างเซลเซียสและฟาเรนไฮต์",
+      "รีเซ็ตแท่งความร้อนเพื่อประสิทธิภาพการทำความร้อนที่ดียิ่งขึ้น",
+      "เปิดใช้งานการควบคุมระยะไกลได้ เชื่อมต่อกับระบบสมาร์ทโฮมได้",
+      "ใช้งานร่วมกับปุ่ม Demand ได้",
+      "ขนาดสินค้า (มม.) ย | ก | ส: 37 | 104 | 147"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

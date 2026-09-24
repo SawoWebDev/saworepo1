@@ -1,0 +1,44 @@
+{
+  "slug": "stainless-steel-ladle-with-curved-handle",
+  "productId": "00456e93-ac74-4388-b2c5-c342a0e228c7",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (453-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (453-MA)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cucharón de acero inoxidable con mango curvo",
+    "short_description": "El cucharón de acero inoxidable SAWO con mango curvo es un cucharón de sauna de acero inoxidable de 460 mm de largo que se utiliza para verter agua (löyly) sobre las piedras calientes del sauna.",
+    "description": null,
+    "type": "Cucharones",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (453-MD)",
+        "name": "Cedro (453-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (453-MA)",
+        "name": "Álamo (453-MA)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

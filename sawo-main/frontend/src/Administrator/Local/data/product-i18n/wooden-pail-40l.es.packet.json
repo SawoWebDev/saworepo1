@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-40l",
+  "productId": "10ee0602-aff8-444a-897d-a651a32805ea",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (392-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (392-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (392-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cubo de madera 40 L",
+    "short_description": "El cubo de madera SAWO de 40 L es un cubo de madera con una capacidad de 40 L que sirve para contener el agua que se vierte sobre las piedras del sauna.",
+    "description": null,
+    "type": "Cubos",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (392-D)",
+        "name": "Cedro (392-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (392-A)",
+        "name": "Álamo (392-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (392-H)",
+        "name": "Tsuga (392-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "sand-timer-kanto-15min",
+  "productId": "e06fa6fc-d8e7-4a75-a6f5-270ce5e2392f",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (554-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (554-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (554-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Sablier Kanto 15 min",
+    "short_description": "Le sablier SAWO Kanto 15 min est un sablier de 65 × 340 mm, un moyen simple de suivre la durée d'une séance dans le sauna.",
+    "description": null,
+    "type": "Horloges et minuteurs",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (554-D)",
+        "name": "Cèdre (554-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (554-A)",
+        "name": "Tremble (554-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (554-BL)",
+        "name": "Noir (554-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

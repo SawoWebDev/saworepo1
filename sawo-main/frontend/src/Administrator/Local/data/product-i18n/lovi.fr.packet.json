@@ -1,0 +1,56 @@
+{
+  "slug": "lovi",
+  "productId": "6a06e3ba-8906-43f2-8988-d5ce40f42c47",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (346-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "White (346-WH)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (346-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Lovi",
+    "short_description": "Le SAWO Lovi est un seau d'une capacité de 4 L, utilisé pour contenir l'eau versée sur les pierres de sauna.",
+    "description": null,
+    "type": "Seaux",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (346-H)",
+        "name": "Pruche (346-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "White (346-WH)",
+        "name": "Blanc (346-WH)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (346-BL)",
+        "name": "Noir (346-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

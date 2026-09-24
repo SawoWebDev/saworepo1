@@ -1,0 +1,22 @@
+{
+  "slug": "optional-humidity-sensor-temperature-for-bench",
+  "productId": "96070ec2-7666-4b98-8ab2-068f595a91d3",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Sensor adicional de humedad y temperatura",
+    "short_description": "Sensor opcional para medir la temperatura y la humedad en la zona de los bancos, ideal para estufas Combi. Mejora la eficiencia energética, acelera los tiempos de calentamiento y garantiza niveles de temperatura y humedad más precisos durante toda la sesión de sauna. El control lo reconoce automáticamente al conectarlo, para una integración sin complicaciones.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">DIMENSIONES DEL PRODUCTO</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Optional Temperature &amp; Humidity Sensor\n(INN-HUM)</td>\n  <td>W: 47mm x D: 40mm x H: 55mm 0.05KG</td>\n</tr></tbody></table>",
+    "type": "Sensor",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

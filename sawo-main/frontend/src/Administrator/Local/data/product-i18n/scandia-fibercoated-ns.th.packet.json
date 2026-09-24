@@ -1,0 +1,18 @@
+{
+  "slug": "scandia-fibercoated-ns",
+  "productId": "eee8fddc-0ad2-49b3-8a54-714eec91136a",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Scandia เคลือบไฟเบอร์ NS",
+    "short_description": "Scandia เป็นฮีตเตอร์คลาสสิกที่ยืนหยัดมายาวนานของ SAWO ดีไซน์มินิมอลประหยัดพื้นที่ เป็นตัวเลือกที่เชื่อถือได้สำหรับประสบการณ์ซาวน่าฟินแลนด์ที่ฟื้นฟูร่างกาย รุ่นเคลือบไฟเบอร์ซึ่งสัมผัสแล้วไม่ร้อนเป็นตัวเลือกที่ดีเยี่ยมเพื่อลดความเสี่ยงจากการโดนความร้อนลวกให้มากขึ้นอีก",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(kg)</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"4\">ระยะปลอดภัยขั้นต่ำ<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SCA-45NS-P-F-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>290 × 410 × 515</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-60NS-P-F-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>290 × 410 × 515</td>\n  <td>18 – 22</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>155</td>\n</tr>\n<tr>\n  <td>SCA-80NS-P-F-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>290 × 410 × 585</td>\n  <td>19 – 23</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr>\n<tr>\n  <td>SCA-90NS-P-F-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>290 × 410 × 585</td>\n  <td>19 – 23</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>100</td>\n  <td>185</td>\n  <td>235</td>\n</tr></tbody></table>",
+    "type": "Scandia",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "เคลือบไฟเบอร์ที่สัมผัสแล้วไม่ร้อน"
+    ]
+  }
+}

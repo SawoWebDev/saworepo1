@@ -1,0 +1,23 @@
+{
+  "slug": "heaterking-corner-ns",
+  "productId": "26c9e85d-8efe-4d8d-97b7-606bb9e3a771",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Heaterking มุม NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">Heaterking มุม</strong><span style=\"text-align: justify;\"> โดยสเตฟาน ลินด์ฟอร์ส ให้ความร้อนระดับราชาพร้อมประหยัดพื้นที่ซาวน่า ด้วยความสูงที่โดดเด่น บรรจุหินได้จำนวนมากและให้ความร้อนสม่ำเสมออบอุ่น ผู้ใช้เลือกได้ทั้งความร้อนนุ่มนวลหรือร้อนแห้งจัดจ้านด้วยการราดน้ำที่ส่วนล่างหรือส่วนบนของเสา เช่นเดียวกับ Heaterking ทุกรุ่น โครงเครื่องสแตนเลสลาย Junglefire อันเป็นเอกลักษณ์ของรุ่นติดมุมเพิ่มความสง่างามอันโดดเด่นให้ห้องซาวน่าทุกห้อง</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(กก.) ไม่มีตัวคั่นหิน</th>\n  <th>หิน<br>(กก.) พร้อมตัวคั่นหิน</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"2\">ระยะปลอดภัยขั้นต่ำ<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>DRFT3-35NS-CNR-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-45NS-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-80NS-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-105NS-CNR-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-120NS-CNR-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Heaterking มุม",
+    "features": [
+      "ช่วงกำลังไฟ: 3.5 – 12.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "สแตนเลสลาย Junglefire อันประณีต",
+      "ตัวคั่นหินช่วยยืดอายุการใช้งานขององค์ประกอบทำความร้อน",
+      "รองรับหินได้ 45 ถึง 160 กก.",
+      "โครงเครื่องสแตนเลสแบบติดมุม",
+      "มีแผ่นสะท้อนความร้อนรวมอยู่ในชุด",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

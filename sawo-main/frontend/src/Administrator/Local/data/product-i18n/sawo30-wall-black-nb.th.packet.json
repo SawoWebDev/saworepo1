@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-wall-black-nb",
+  "productId": "09471c44-08ae-4599-b18b-763d2f02e897",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 ติดผนัง สีดำ NB",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">SAWO30 ติดผนัง สีดำ</strong><span style=\"text-align: justify;\"> เป็นฮีตเตอร์ที่เหมาะอย่างยิ่งสำหรับใช้พื้นที่ให้คุ้มค่าและเพิ่มความสวยเรียบแบบมินิมอล ตัวเครื่องสูงเพรียวบรรจุหินได้มากขึ้น ทำให้ได้ไอน้ำและความชื้นอย่างเต็มที่ SAWO30 ติดผนัง ยังมาพร้อมตัวคั่นหินแบบถอดได้ ซึ่งมี 2 รูปแบบการติดตั้ง คือ (1) ใช้ตัวคั่นเพื่อทำความร้อนเร็วขึ้น ประหยัดพลังงาน และได้ซาวน่าที่ร้อนขึ้น หรือ (2) ไม่ใช้ตัวคั่นเพื่อให้ใส่หินได้มากขึ้น สร้างไอน้ำได้มากขึ้น อุณหภูมิอ่อนลง และประหยัดพลังงานในการใช้งานเชิงพาณิชย์</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(กก.) ไม่มีตัวคั่นหิน</th>\n  <th>หิน<br>(กก.) พร้อมตัวคั่นหิน</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"2\">ระยะปลอดภัยขั้นต่ำ<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NB-WL-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NB-WL-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>230 × 385 × 1395</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NB-WL-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>250 × 475 × 1395</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Built-in (8+4h)</td>\n  <td>100</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "SAWO30 ติดผนัง",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 9.0 kW",
+      "ระบบควบคุมที่เลือกได้: แบบบิวท์อิน (NB)",
+      "โครงเครื่องโลหะสีดำ",
+      "ส่วนบนถอดออกได้เพื่อให้ใส่หินได้สะดวกขึ้น",
+      "ตัวคั่นหินถอดได้",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม",
+      "มีกรอบติดตั้งฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

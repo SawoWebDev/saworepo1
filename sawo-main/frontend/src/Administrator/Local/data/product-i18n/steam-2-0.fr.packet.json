@@ -1,0 +1,32 @@
+{
+  "slug": "steam-2-0",
+  "productId": "da98177f-d5d9-4a2c-b9e7-b7260ebece87",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Steam 2.0",
+    "short_description": "<span style=\"text-align: justify;\">La <b>Steam 2.0</b> (STP-INFACE-V2) est la toute dernière nouveauté de notre gamme de commandes pour générateurs de vapeur, offrant des performances fiables dans un design modernisé.</span>",
+    "description": null,
+    "type": "Commandes vapeur",
+    "features": [
+      "Compatible avec les générateurs de vapeur STN",
+      "Réglage de la durée de séance et de la température",
+      "Mode veille économe en énergie",
+      "Verrouillage des touches",
+      "Vidange automatique",
+      "Compatible avec le bouton Demand",
+      "Fonctions arôme, ventilateur et variateur en option",
+      "Dimensions de l'article (mm) L | l | H : 37 | 104 | 147"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

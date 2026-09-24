@@ -1,0 +1,23 @@
+{
+  "slug": "heaterking-corner-ns",
+  "productId": "26c9e85d-8efe-4d8d-97b7-606bb9e3a771",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Heaterking Esquina NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Heaterking Esquina</strong><span style=\"text-align: justify;\"> de Stefan Lindfors ofrece un calor de tamaño rey y ahorra espacio en el sauna. Su impresionante altura le permite alojar una gran cantidad de piedras y generar un calor constante y envolvente. Los bañistas pueden disfrutar de un calor suave o de un calor seco e intenso, según echen el agua en la parte inferior o superior de la columna. Como todos los modelos Heaterking, la exclusiva carcasa de acero inoxidable con motivo Junglefire de la estufa de esquina aporta una audaz elegancia a cualquier cabina de sauna.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg) sin separador de piedras</th>\n  <th>Piedras<br>(kg) con separador de piedras</th>\n  <th>Control</th>\n  <th colspan=\"2\">Distancias de seguridad mínimas<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>DRFT3-35NS-CNR-P-C</td>\n  <td>3.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-45NS-CNR-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT3-60NS-CNR-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1410</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-80NS-CNR-P-C</td>\n  <td>8.0</td>\n  <td>7 – 14</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-90NS-CNR-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-105NS-CNR-P</td>\n  <td>10.5</td>\n  <td>9 – 16</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>DRFT6-120NS-CNR-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>410 × 410 × 1430</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "Heaterking Esquina",
+    "features": [
+      "Rango de potencia: 3,5 – 12,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Acero inoxidable con elaborado motivo Junglefire",
+      "Separador de piedras para prolongar la vida útil de los elementos calefactores",
+      "Capacidad de piedras: de 45 a 160 kg",
+      "Carcasa de esquina de acero inoxidable",
+      "Reflector de calor incluido",
+      "Protector de estufa opcional"
+    ]
+  }
+}

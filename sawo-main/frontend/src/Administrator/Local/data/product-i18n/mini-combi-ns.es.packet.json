@@ -1,0 +1,20 @@
+{
+  "slug": "mini-combi-ns",
+  "productId": "9974c209-5962-4256-9d17-aaceaeda1046",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Mini Combi NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><b style=\"text-align: justify;\">Mini Combi</b><span style=\"text-align: justify;\"> combina la experiencia de sauna tradicional con un depósito de agua para aportar más humedad. Está disponible con recubrimiento de fibra que no quema al tacto.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW\n<br>Estufa</th>\n  <th>kW\n<br>Depósito</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>MNC-30NS-Z</td>\n  <td>3.0</td>\n  <td>1 × 1.0</td>\n  <td>2 – 4</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr>\n<tr>\n  <td>MNC-36NS-Z</td>\n  <td>3.6</td>\n  <td>1 × 1.0</td>\n  <td>3 – 6</td>\n  <td>330 × 260 × 500</td>\n  <td>8 – 10.5</td>\n  <td>Separate</td>\n</tr></tbody></table>",
+    "type": "Mini",
+    "features": [
+      "Rango de potencia: 3,0 – 3,6 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Depósito de agua independiente con generador de vapor de 1 kW",
+      "Carcasa de acero inoxidable",
+      "Cuenco de aromas integrado"
+    ]
+  }
+}

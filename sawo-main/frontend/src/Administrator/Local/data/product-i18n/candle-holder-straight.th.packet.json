@@ -1,0 +1,26 @@
+{
+  "slug": "candle-holder-straight",
+  "productId": "8dbb438e-5429-43c2-9d7b-c02998091cac",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ที่วางเทียนทรงตรง",
+    "short_description": "ที่วางเทียนทรงตรง SAWO เป็นที่วางเทียนหินสบู่ขนาด 265 × 60 × 30 มม. หนัก 1.3 กก. ในกลุ่มอุปกรณ์เสริม Kivistone",
+    "description": null,
+    "type": "Kivistone",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "(R-105)",
+        "name": "(R-105)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

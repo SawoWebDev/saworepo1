@@ -1,0 +1,19 @@
+{
+  "slug": "cumulus-nb",
+  "productId": "cbba2e49-2e8e-43b8-877e-c23eaf7a14e5",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cumulus NB",
+    "short_description": "Le Cumulus est un élégant poêle mural minimaliste dont l'habillage en acier inoxydable est rehaussé d'une façade décorative en stéatite finlandaise. La stéatite aide à chauffer les pierres plus vite et à conserver la chaleur plus longtemps. Avec sa coupelle à arômes intégrée, le Cumulus est un choix judicieux pour apporter une touche de spa aux séances de sauna grâce à l'aromathérapie.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"5 \">Distances de sécurité minimales<br>A | B | C | D | E</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>CML-45NB-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-60NB-P-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>300 × 420 × 500</td>\n  <td>18</td>\n  <td>Built-in (8+4h)</td>\n  <td>50</td>\n  <td>130</td>\n  <td>245</td>\n  <td>20</td>\n  <td>50</td>\n</tr>\n<tr>\n  <td>CML-80NB-P-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Built-in (8+4h)</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n<tr>\n  <td>CML-90NB-P-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>300 × 420 × 590</td>\n  <td>18</td>\n  <td>Built-in (8+4h)</td>\n  <td>60</td>\n  <td>140</td>\n  <td>330</td>\n  <td>30</td>\n  <td>60</td>\n</tr>\n</tbody></table>",
+    "type": "Cumulus",
+    "features": [
+      "Plage de puissance : 4,5 – 9,0 kW",
+      "Commandes disponibles : intégrée (NB)",
+      "Habillage en acier inoxydable",
+      "Coupelle à arômes intégrée"
+    ]
+  }
+}

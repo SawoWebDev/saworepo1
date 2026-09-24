@@ -1,0 +1,23 @@
+{
+  "slug": "cozy-tank-03l",
+  "productId": "1be0afba-f331-468e-ad86-1d7f3d070b9b",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Cozy Tank (0,3 L)",
+    "short_description": "El Cozy Tank de 0,3 L es un humidificador de sauna cilíndrico con depósito de agua integrado que libera vapor al instante cuando la estufa está caliente. Se pueden añadir aceites esenciales y fragancias al agua para generar un vapor perfumado. Este humidificador está fabricado con acero inoxidable grueso para mayor durabilidad y tiene una tapa de esteatita tallada, que combina comodidad y diseño natural. Se rellena fácilmente con agua a través de un orificio de la tapa superior.",
+    "description": null,
+    "type": "Humidificador de sauna cilíndrico",
+    "features": [
+      "Depósito de agua que genera vapor al instante cuando la estufa está caliente",
+      "Rellenable con agua a través de los orificios de la tapa superior",
+      "Acero inoxidable grueso",
+      "Tapa superior de esteatita tallada"
+    ],
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ]
+  }
+}

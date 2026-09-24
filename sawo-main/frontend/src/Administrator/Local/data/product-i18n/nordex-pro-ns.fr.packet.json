@@ -1,0 +1,18 @@
+{
+  "slug": "nordex-pro-ns",
+  "productId": "b819ed43-288c-4a66-8279-15dc3ab9207c",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Pro NS",
+    "short_description": "<span style=\"text-align: justify;\">Le </span><strong style=\"text-align: justify;\">Nordex Pro</strong><span style=\"text-align: justify;\"> est le tout dernier poêle de la gamme Nordex, réputée pour sa fiabilité. Il est conçu pour durer, avec un compartiment à pierres séparé qui protège les éléments chauffants et prolonge la durée de vie de l'appareil. Un tiroir cassette extractible pour les éléments chauffants garantit un accès et un entretien faciles. Bien qu'il n'existe qu'en une seule taille, le modèle peut être associé à une unité supplémentaire pour plus de puissance dans les grandes cabines de sauna.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min (m³) max</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg)</th>\n  <th>Commande</th>\n  <th colspan=\"4\">Distances de sécurité minimales<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRN-PRO-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>5 – 9</td>\n  <td>410 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRN-PRO-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>7 – 13</td>\n  <td>410 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRN-PRO-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>8 – 14</td>\n  <td>410 × 370 × 705</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>80</td>\n  <td>80</td>\n  <td>20</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex Pro",
+    "features": [
+      "Plage de puissance : 6,0 – 9,0 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Pieds réglables"
+    ]
+  }
+}

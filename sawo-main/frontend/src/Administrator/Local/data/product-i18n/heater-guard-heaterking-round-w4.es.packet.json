@@ -1,0 +1,19 @@
+{
+  "slug": "heater-guard-heaterking-round-w4",
+  "productId": "b6a54e1e-ab0e-467f-8ae9-78e2b2d76472",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Protector de estufa – Heaterking Redondo W4",
+    "short_description": "El protector de estufa es un elemento de seguridad diseñado para reducir el riesgo de quemaduras. Fabricados con maderas resistentes al calor como el cedro, el álamo o el Hemlock, ofrecen una barrera protectora y realzan el atractivo estético de la estufa.",
+    "description": null,
+    "type": "Protector de estufa",
+    "spec_table_headers": [
+      "Modelo",
+      "Ancho (mm)",
+      "Fondo (mm)",
+      "Alto (mm)"
+    ]
+  }
+}

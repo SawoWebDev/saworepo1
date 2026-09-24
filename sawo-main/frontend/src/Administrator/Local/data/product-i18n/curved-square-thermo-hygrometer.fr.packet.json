@@ -1,0 +1,56 @@
+{
+  "slug": "curved-square-thermo-hygrometer",
+  "productId": "6574195b-3312-4c32-bcc4-824321773a1d",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (285-THD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (285-THA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (285-THH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Thermo-hygromètre carré courbé",
+    "short_description": "Le thermo-hygromètre carré courbé SAWO est un thermo-hygromètre de sauna de 170 × 175 mm, utilisé pour surveiller la température et l'humidité à l'intérieur du sauna.",
+    "description": null,
+    "type": "Thermomètres",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (285-THD)",
+        "name": "Cèdre (285-THD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (285-THA)",
+        "name": "Tremble (285-THA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (285-THH)",
+        "name": "Pruche (285-THH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

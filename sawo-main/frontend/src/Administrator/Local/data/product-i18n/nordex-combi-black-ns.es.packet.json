@@ -1,0 +1,13 @@
+{
+  "slug": "nordex-combi-black-ns",
+  "productId": "960809d7-d1b5-473f-b4a0-af7b982f10d1",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex Combi Negro NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><strong style=\"text-align: justify;\">Nordex Combi</strong><span style=\"text-align: justify;\"> mejora el diseño moderno, minimalista y de alta tecnología de las estufas Nordex y su máxima versatilidad con un vaporizador integrado. Los bañistas disfrutan de sesiones de sauna dignas de un spa, con un vapor impregnado de aceites esenciales y fragancias que se añaden en los cuencos de aromas integrados de la estufa.</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW\n<br>Estufa</th>\n  <th>kW\n<br>Depósito</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th colspan=\"2\">Control</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNC-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr>\n<tr>\n  <td>NRNC-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr>\n<tr>\n  <td>NRNC-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>385 × 400 × 610</td>\n  <td>22</td>\n  <td>Innova</td>\n  <td></td>\n</tr></tbody></table>",
+    "type": "Nordex Combi"
+  }
+}

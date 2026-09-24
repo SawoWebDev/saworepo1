@@ -1,0 +1,19 @@
+{
+  "slug": "helius-heater-hood",
+  "productId": "f7c45700-7624-4ca8-be26-1b9ebc1e336c",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Campana de estufa Helius",
+    "short_description": "La campana de estufa Helius puede instalarse en un hueco empotrado de la cabina de sauna para mantenerla oculta y alejada de los bañistas. Con la pila de agua de esteatita independiente de la estufa, se puede verter agua sobre las piedras para generar vapor. Esta característica de diseño ayuda a evitar quemaduras accidentales. La campana Helius reduce la distancia de seguridad al mínimo.",
+    "description": null,
+    "type": "Campana de estufa",
+    "spec_table_headers": [
+      "Modelo",
+      "Longitud (mm)",
+      "Ancho (mm)",
+      "Alto (mm)"
+    ]
+  }
+}

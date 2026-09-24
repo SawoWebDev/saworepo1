@@ -1,0 +1,13 @@
+{
+  "slug": "safety-switch-for-heaters",
+  "productId": "52fce2db-0111-45bc-9f1a-bd12b9d5bfab",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Interrupteur de sécurité pour poêles",
+    "short_description": "L'interrupteur de sécurité coupe le poêle si un objet étranger (par exemple une serviette) entre en contact avec lui ou pénètre dans les distances de sécurité. (Conforme à la norme SFS-EN60335-2-53, section 19.101.)",
+    "description": null,
+    "type": "Interrupteur de sécurité"
+  }
+}

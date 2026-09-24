@@ -1,0 +1,22 @@
+{
+  "slug": "optional-humidity-sensor-temperature-for-bench",
+  "productId": "96070ec2-7666-4b98-8ab2-068f595a91d3",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Sonde supplémentaire d'humidité et de température",
+    "short_description": "Sonde en option pour mesurer la température et l'humidité au niveau du banc, idéale avec les poêles Combi. Elle améliore l'efficacité énergétique, accélère la montée en température et garantit des niveaux de température et d'humidité plus précis tout au long de votre séance de sauna. Elle est reconnue automatiquement par la commande une fois branchée, pour une intégration transparente.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">DIMENSIONS DU PRODUIT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Optional Temperature &amp; Humidity Sensor\n(INN-HUM)</td>\n  <td>W: 47mm x D: 40mm x H: 55mm 0.05KG</td>\n</tr></tbody></table>",
+    "type": "Sonde",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

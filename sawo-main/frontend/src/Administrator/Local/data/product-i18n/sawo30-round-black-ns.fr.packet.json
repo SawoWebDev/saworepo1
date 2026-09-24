@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-round-black-ns",
+  "productId": "05da80c7-f31c-4155-ab9b-b98fcff27650",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 Rond Noir NS",
+    "short_description": "<p style=\"text-align: justify;\">Le <strong>SAWO30 Rond Noir</strong> est un poêle d'une beauté saisissante, qui se place à merveille au centre du sauna ou s'encastre dans les bancs.</p><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\">La grande quantité de pierres contenues dans ce corps haut et élancé crée une atmosphère riche, imprégnée de vapeur, avec une combinaison idéale de vapeur et d'humidité.</p>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modèle de poêle</th>\n  <th>kW</th>\n  <th>Cabine de sauna<br>min. (m³) max.</th>\n  <th>Dimensions du poêle (mm)<br>Longueur Largeur Hauteur</th>\n  <th>Pierres<br>(kg) sans entretoise à pierres</th>\n  <th>Pierres<br>(kg) avec entretoise à pierres</th>\n  <th>Commande</th>\n  <th colspan=\"2\">Distances de sécurité minimales<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NS-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>245 × 245 × 1305</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NS-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>245 × 245 × 1305</td>\n  <td>70</td>\n  <td>60</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NS-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>345 × 345 × 1305</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-120NS-BL-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>345 × 345 × 1305</td>\n  <td>160</td>\n  <td>100</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr>\n<tr>\n  <td>SW12-180NS-BL-P</td>\n  <td>18.0</td>\n  <td>18 – 30</td>\n  <td>515 × 515 × 1305</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>SW12-210NS-BL-P</td>\n  <td>21.0</td>\n  <td>22 – 35</td>\n  <td>515 × 515 × 1305</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr>\n<tr>\n  <td>SW12-240NS-BL-P</td>\n  <td>24.0</td>\n  <td>24 – 40</td>\n  <td>515 × 515 × 1305</td>\n  <td>360</td>\n  <td>220</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2300</td>\n</tr></tbody></table>",
+    "type": "SAWO30 Rond",
+    "features": [
+      "Plage de puissance : 4,5 – 24,0 kW",
+      "Commandes disponibles : Saunova/Innova (NS)",
+      "Habillage en métal noir",
+      "Moitié supérieure amovible pour faciliter le chargement des pierres",
+      "Entretoise à pierres amovible",
+      "Grille de protection en option",
+      "Collerette d'intégration en option"
+    ]
+  }
+}

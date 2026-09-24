@@ -1,0 +1,32 @@
+{
+  "slug": "black-metal-thermo-hygrometer",
+  "productId": "4e3814ca-dd8d-4ae8-ac17-f12e482c9985",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Black Metal (295-THMBL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "เครื่องวัดอุณหภูมิและความชื้นโลหะสีดำ",
+    "short_description": "เครื่องวัดอุณหภูมิและความชื้นโลหะสีดำ SAWO เป็นเครื่องวัดอุณหภูมิและความชื้นสำหรับซาวน่าที่ทำจากโลหะสีดำ ขนาด 220 × 110 มม. ใช้ตรวจวัดอุณหภูมิและความชื้นภายในห้องซาวน่า",
+    "description": null,
+    "type": "เทอร์โมมิเตอร์",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Black Metal (295-THMBL)",
+        "name": "โลหะสีดำ (295-THMBL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

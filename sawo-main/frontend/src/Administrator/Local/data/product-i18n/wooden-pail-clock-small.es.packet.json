@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-clock-small",
+  "productId": "43bf6c55-cc7d-4499-b506-22555acbb252",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (531-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (531-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (531-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Cubo de madera con reloj, pequeño",
+    "short_description": "El cubo de madera con reloj SAWO, pequeño, es un reloj de madera con forma de minicubo de sauna, de Ø230 x Al40 mm, fabricado para resistir el calor y la humedad del sauna.",
+    "description": null,
+    "type": "Relojes y temporizadores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (531-D)",
+        "name": "Cedro (531-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (531-A)",
+        "name": "Álamo (531-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (531-H)",
+        "name": "Tsuga (531-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "rectangular-interface-holder-for-innova-classic-control",
+  "productId": "eb13317a-5636-4997-811f-cd2a5a7fadc4",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Support d'interface rectangulaire pour commande Innova Classic",
+    "short_description": "Support d'interface en bois élégant INN-IH20, conçu pour la commande Innova Classic. Disponible en finitions haut de gamme cèdre, tremble et Pinaceae pour s'accorder à différentes esthétiques de sauna. Dimensions : 215 mm (L) x 140 mm (P) x 20 mm (H). Parfait pour loger en toute sécurité votre unité de commande tout en ajoutant une touche d'élégance naturelle.",
+    "description": null,
+    "type": "Support d'interface"
+  }
+}

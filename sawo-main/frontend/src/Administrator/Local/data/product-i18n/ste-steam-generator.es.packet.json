@@ -1,0 +1,101 @@
+{
+  "slug": "ste-steam-generator",
+  "productId": "62da5399-e16e-4b7a-9a24-c457d74d6f62",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Generador de vapor STE",
+    "short_description": "<p style=\"text-align: justify;\">Fiable y sencillo de usar, el <strong>STE</strong> es un generador de vapor diseñado para entornos residenciales. También es sencillo de manejar: basta con encender el control y ajustar el mando de temperatura. La construcción de acero inoxidable garantiza una larga durabilidad y resistencia a la corrosión.</p><p style=\"text-align: justify;\">El STE puede orientarse para realizar las conexiones por cualquiera de los dos lados y facilitar así la instalación en cualquier distribución. Para aumentar la capacidad de potencia, se pueden conectar hasta cinco unidades en serie para alcanzar una potencia máxima de<strong> 75.0kW</strong>, todo ello gestionado desde un único control SAWO.</p>",
+    "description": null,
+    "type": "Generadores de vapor",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "2 Heating Elements",
+        "name": "2 elementos calefactores",
+        "description": null,
+        "features": [
+          "Rango de potencia: 3,0 – 5,0 kW",
+          "Producción de vapor: hasta 6,7 kg/h",
+          "Se puede instalar en cualquiera de los dos lados",
+          "Tubería propia para la válvula de sobrepresión",
+          "Cabezal de vapor incluido",
+          "Controles disponibles: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Modelo de generador de vapor",
+          "kW",
+          "Baño de vapor (m³)",
+          "Dimensiones (mm) L|An|Al",
+          "Peso (kg)",
+          "Control"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "3 Heating Elements",
+        "name": "3 elementos calefactores",
+        "description": null,
+        "features": [
+          "Rango de potencia: 4,5 – 7,5 kW",
+          "Producción de vapor: hasta 7,5 kg/h",
+          "Se puede instalar en cualquiera de los dos lados",
+          "Tubería propia para la válvula de sobrepresión",
+          "Cabezal de vapor incluido",
+          "Controles disponibles: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Modelo de generador de vapor",
+          "kW",
+          "Baño de vapor (m³)",
+          "Dimensiones (mm) L|An|Al",
+          "Peso (kg)",
+          "Control"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "6 Heating Elements",
+        "name": "6 elementos calefactores",
+        "description": null,
+        "features": [
+          "Rango de potencia: 9,0 – 15,0 kW",
+          "Producción de vapor: hasta 20 kg/h",
+          "Se puede instalar en cualquiera de los dos lados",
+          "Tubería propia para la válvula de sobrepresión",
+          "Incluye 2 cabezales de vapor",
+          "Controles disponibles: STE 2.0"
+        ],
+        "spec_table_headers": [
+          "Modelo de generador de vapor",
+          "kW",
+          "Baño de vapor (m³)",
+          "Dimensiones (mm) L|An|Al",
+          "Peso (kg)",
+          "Control"
+        ]
+      }
+    ],
+    "included_items": [
+      {
+        "index": 0,
+        "_english_title": "Temperature sensor with",
+        "title": "Sensor de temperatura con",
+        "note": "cable y soporte del sensor"
+      },
+      {
+        "index": 1,
+        "_english_title": "Steam Head",
+        "title": "Cabezal de vapor",
+        "note": "(en los modelos de 9 kW en adelante se incluyen dos cabezales)"
+      },
+      {
+        "index": 2,
+        "_english_title": "7.5m RJ12 cable",
+        "title": "Cable RJ12 de 7,5 m",
+        "note": "Cable RJ10 de 7,5 m"
+      }
+    ]
+  }
+}

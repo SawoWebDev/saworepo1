@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-door-handle-big-round",
+  "productId": "bded57b2-b8d4-414f-94f5-cfb838a8decd",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (566-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (566-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (566-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Tirador de puerta de madera redondo, grande",
+    "short_description": "El tirador de puerta de madera redondo grande SAWO es un tirador de puerta de sauna de madera con perfil redondeado, de Ø90 x An50 mm, diseñado para no quemar al tacto con el calor del sauna.",
+    "description": null,
+    "type": "Puertas y tiradores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (566-D)",
+        "name": "Cedro (566-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (566-A)",
+        "name": "Álamo (566-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (566-H)",
+        "name": "Tsuga (566-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

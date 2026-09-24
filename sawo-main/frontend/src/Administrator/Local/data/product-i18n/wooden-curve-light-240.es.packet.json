@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-curve-light-240",
+  "productId": "9aa84aa4-c7ee-438e-bc59-0fc956451721",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (923-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Hemlock (923-H)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Black (923-BL)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Luz curva de madera 240",
+    "short_description": "La luz curva de madera SAWO 240 es una luz de sauna curva de madera de 60 mm (3,4\") x 240 mm (9,3\") x 85 mm (2,4\"), diseñada para difundir la iluminación de manera uniforme dentro del sauna.",
+    "description": null,
+    "type": "Iluminación para sauna",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (923-D)",
+        "name": "Cedro (923-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Hemlock (923-H)",
+        "name": "Tsuga (923-H)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Black (923-BL)",
+        "name": "Negro (923-BL)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

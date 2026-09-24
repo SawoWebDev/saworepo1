@@ -1,0 +1,22 @@
+{
+  "slug": "nordex-s-combi-black-ns",
+  "productId": "cc3cb0d3-c79c-4c4f-818e-4370f09148f2",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Nordex S Combi Negro NS",
+    "short_description": "<span style=\"text-align: justify;\">La </span><b style=\"text-align: justify;\">Nordex S Combi</b><span style=\"text-align: justify;\"> ofrece experiencias de sauna versátiles al combinar un calor intenso con más vapor, gracias a un depósito de agua adicional. Su cuenco de aromas integrado está pensado para que los aceites esenciales y las fragancias impregnen el vapor terapéutico y creen un ambiente de sauna lujoso. </span><div><div style=\"text-align: justify;\"><br></div><div><span style=\"text-align: justify;\">Como todas las estufas Combi, la Nordex S Combi incluye un sistema patentado de detección del nivel de agua que avisa cuando el nivel es bajo. También puede activarse la función de rellenado automático para mayor comodidad. La Nordex S Combi está diseñada para adaptarse a distintos tamaños de sauna, tanto en el hogar como en centros de bienestar.</span>\n\n</div></div>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>Modelo de estufa</th>\n  <th>kW\n<br>Estufa</th>\n  <th>kW\n<br>Depósito</th>\n  <th>Cabina de sauna<br>mín. (m³) máx.</th>\n  <th>Medidas de la estufa (mm)<br>Largo Ancho Alto</th>\n  <th>Piedras<br>(kg)</th>\n  <th>Control</th>\n  <th colspan=\"4\">Distancias de seguridad mínimas<br>A | B | C | D</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>NRNSC-60NS-BL-Z-C</td>\n  <td>6.0</td>\n  <td>1 × 0.8</td>\n  <td>5 – 9</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>50</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNSC-80NS-BL-Z-C</td>\n  <td>8.0</td>\n  <td>1 × 2.0</td>\n  <td>7 – 13</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>NRNSC-90NS-BL-Z-C</td>\n  <td>9.0</td>\n  <td>1 × 2.0</td>\n  <td>8 – 14</td>\n  <td>360 × 395 × 710</td>\n  <td>8</td>\n  <td>Separate</td>\n  <td>5</td>\n  <td>80</td>\n  <td>5</td>\n  <td>1900</td>\n</tr></tbody></table>",
+    "type": "Nordex S",
+    "features": [
+      "Rango de potencia: 6,0 – 9,0 kW",
+      "Controles disponibles: Saunova/Innova (NS)",
+      "Calentamiento eficiente con un consumo mínimo de energía",
+      "Diseño aerodinámico y minimalista",
+      "Cuenco de aromas integrado",
+      "Carcasa de metal negro",
+      "Apagado automático en caso de sobrecalentamiento"
+    ]
+  }
+}

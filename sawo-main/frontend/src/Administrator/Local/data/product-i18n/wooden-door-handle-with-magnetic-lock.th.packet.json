@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-door-handle-with-magnetic-lock",
+  "productId": "aff0195f-0bfb-45e5-84dc-225b4793f7da",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (568-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (568-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (568-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "มือจับประตูไม้พร้อมล็อกแม่เหล็ก",
+    "short_description": "มือจับประตูไม้พร้อมล็อกแม่เหล็ก SAWO เป็นมือจับประตูซาวน่าไม้ที่มีล็อกแม่เหล็กในตัว ขนาด 260 × 45 มม. ออกแบบให้สัมผัสแล้วไม่ร้อนแม้ในความร้อนของห้องซาวน่า",
+    "description": null,
+    "type": "ประตูและมือจับ",
+    "spec_table_headers": [
+      "ข้อมูลจำเพาะ",
+      "รายละเอียด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (568-D)",
+        "name": "ซีดาร์ (568-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (568-A)",
+        "name": "แอสเพน (568-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (568-H)",
+        "name": "เฮมล็อก (568-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

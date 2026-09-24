@@ -1,0 +1,31 @@
+{
+  "slug": "innova-classic",
+  "productId": "bab85c05-e589-45bf-b634-8a4f62d8db6b",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Innova Classic",
+    "short_description": "<div style=\"text-align: justify;\"><p><b>Unidad de control independiente</b><br>La unidad de control Innova Classic consta de un panel de control independiente y un controlador de potencia capaz de gestionar hasta 15 kW. Está repleta de funciones, como sensor de puerta, temporizador de arranque programado, ahorro energético inteligente y una distribución de potencia estable y uniforme. Tiene una pantalla LED clara y siete botones para un manejo sencillo. El paquete incluye un sensor de temperatura con fusible de sobrecalentamiento y un cable de conexión de 4 m.</p><p>Se necesita una unidad de contactor Innova independiente cuando la potencia de la estufa supera los 15 kW.\n\n</p></div><div style=\"text-align: justify;\"><p><b>Unidad de control integrada</b><br>La unidad de control integrada Innova Classic consta de un controlador de potencia con panel de control integrado. Cuenta con las mismas funciones que la unidad de control independiente Innova Classic. La única diferencia es que todo viene en un único conjunto compacto.\n\n</p><p><b>Se necesita una unidad de contactor Innova independiente cuando la potencia de la estufa supera los 15 kW.</b></p></div>",
+    "description": "<table>\n  <thead><tr><th colspan=\"2\">DETALLES TÉCNICOS</th></tr></thead>\n  <tbody>\n  <tr><td>Temperature Range</td><td>30°C – 110°C</td></tr>\n  <tr><td>Max. Session Time</td><td>6hr default, 24hrs max</td></tr>\n  <tr><td colspan=\"2\" style=\"text-align: center;\"><b>PRODUCT DIMENSIONS</b></td></tr>\n  <tr><td>Innova Classic (INC-S)</td><td>W: 170 mm x H: 90 mm x D: 30 mm</td></tr>\n  </tbody></table>",
+    "type": "Innova",
+    "features": [
+      "La función Smart Controlling regula las resistencias por fases para alcanzar rápidamente la temperatura deseada y ofrecer siempre un buen vapor.",
+      "Se conecta al controlador de potencia INP-C para cualquier estufa NS de hasta 15 kW. Para estufas de más de 15 kW, añada la unidad de contactor INP-S.",
+      "Compatible con el sensor de puerta",
+      "Temporizador de arranque programado",
+      "Funciones opcionales de ventilador, regulador de intensidad y Combi",
+      "Se recomienda usarlo junto con el sensor de banco opcional (INN-BTEMP) y, en estufas Combi, con el sensor de humedad (INN-HUM)",
+      "Incluye la interfaz de usuario Classic y un cable RJ12 de 5 m"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

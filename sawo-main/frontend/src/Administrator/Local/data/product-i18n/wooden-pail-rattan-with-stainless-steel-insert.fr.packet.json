@@ -1,0 +1,56 @@
+{
+  "slug": "wooden-pail-rattan-with-stainless-steel-insert",
+  "productId": "b3930449-d682-4f53-92ad-ad4f0b0f3837",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (371-MD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (371-MA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (371-MH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Seau en bois rotin avec insert en inox",
+    "short_description": "Le seau en bois rotin SAWO avec insert en inox est un seau en bois avec insert en acier inoxydable d'une capacité de 5 L, utilisé pour contenir l'eau versée sur les pierres de sauna.",
+    "description": null,
+    "type": "Seaux",
+    "spec_table_headers": [
+      "Spécification",
+      "Détail"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (371-MD)",
+        "name": "Cèdre (371-MD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (371-MA)",
+        "name": "Tremble (371-MA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (371-MH)",
+        "name": "Pruche (371-MH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "steam-head-cover",
+  "productId": "90bc9fd9-8f93-4c62-b465-95a636a0819b",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "ฝาครอบหัวจ่ายไอน้ำ",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\"><b>ฝาครอบหัวจ่ายไอน้ำ</b></strong><span style=\"text-align: justify;\"> ช่วยเบี่ยงเบนและกระจายไอน้ำเพื่อให้ไอน้ำกระจายตัวอย่างปลอดภัย สม่ำเสมอ และสบายในห้องอบไอน้ำ</span>",
+    "description": null,
+    "type": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ",
+    "features": [
+      "เบี่ยงทิศทางไอน้ำที่พุ่งตรงเพื่อลดความเสี่ยงจากการลวกและเพิ่มความปลอดภัยแก่ผู้ใช้",
+      "กระจายไอน้ำอย่างสม่ำเสมอเพื่อประสบการณ์การอบไอน้ำที่สบายยิ่งขึ้น",
+      "ลดหยดน้ำร้อนและไอน้ำที่พุ่งออกมาบริเวณช่องจ่าย",
+      "ปกป้องช่องจ่ายไอน้ำจากแรงกระแทกและเศษวัสดุ เพิ่มความทนทาน"
+    ]
+  }
+}

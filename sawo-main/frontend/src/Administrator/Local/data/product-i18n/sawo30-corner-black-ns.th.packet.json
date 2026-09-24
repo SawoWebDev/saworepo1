@@ -1,0 +1,22 @@
+{
+  "slug": "sawo30-corner-black-ns",
+  "productId": "480eecb7-c3f6-4cb9-9f5c-59e05fa77e90",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "SAWO30 มุม สีดำ NS",
+    "short_description": "<span style=\"text-align: justify;\"></span><strong style=\"text-align: justify;\">SAWO30 มุม สีดำ</strong><span style=\"text-align: justify;\"> ออกแบบมาสำหรับผังห้องซาวน่าที่พื้นที่มีค่า เช่นเดียวกับฮีตเตอร์ Tower ทุกรุ่น ความสูงช่วยให้กระจายความร้อนอย่างสม่ำเสมอจากล่างขึ้นบน SAWO30 มุม ยังมาพร้อมตัวคั่นหินแบบถอดได้ ซึ่งมี 2 รูปแบบการติดตั้ง คือ (1) ใช้ตัวคั่นเพื่อทำความร้อนเร็วขึ้น ประหยัดพลังงาน และได้ซาวน่าที่ร้อนขึ้น หรือ (2) ไม่ใช้ตัวคั่นเพื่อให้ใส่หินได้มากขึ้น สร้างไอน้ำได้มากขึ้น อุณหภูมิอ่อนลง และประหยัดพลังงานในการใช้งานเชิงพาณิชย์</span>",
+    "description": "<table>\n  <thead>\n<tr>\n  <th>รุ่นฮีตเตอร์</th>\n  <th>kW</th>\n  <th>ห้องซาวน่า<br>ต่ำสุด (ลบ.ม.) สูงสุด</th>\n  <th>ขนาดฮีตเตอร์ (มม.)<br>ยาว กว้าง สูง</th>\n  <th>หิน<br>(กก.) ไม่มีตัวคั่นหิน</th>\n  <th>หิน<br>(กก.) พร้อมตัวคั่นหิน</th>\n  <th>ระบบควบคุม</th>\n  <th colspan=\"2\">ระยะปลอดภัยขั้นต่ำ<br>A | B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>SW3-45NS-CNR-BL-P-C</td>\n  <td>4.5</td>\n  <td>3 – 6</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW3-60NS-CNR-BL-P-C</td>\n  <td>6.0</td>\n  <td>5 – 8</td>\n  <td>300 × 300 × 1380</td>\n  <td>70</td>\n  <td>45</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-90NS-CNR-BL-P-C</td>\n  <td>9.0</td>\n  <td>8 – 15</td>\n  <td>415 × 415 × 1380</td>\n  <td>105</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>1900</td>\n</tr>\n<tr>\n  <td>SW6-120NS-CNR-BL-P</td>\n  <td>12.0</td>\n  <td>11 – 18</td>\n  <td>415 × 415 × 1380</td>\n  <td>105</td>\n  <td>80</td>\n  <td>Separate</td>\n  <td>100</td>\n  <td>2100</td>\n</tr></tbody></table>",
+    "type": "SAWO30 มุม",
+    "features": [
+      "ช่วงกำลังไฟ: 4.5 – 12.0 kW",
+      "ระบบควบคุมที่เลือกได้: Saunova/Innova (NS)",
+      "โครงเครื่องโลหะสีดำ",
+      "ส่วนบนถอดออกได้เพื่อให้ใส่หินได้สะดวกขึ้น",
+      "ตัวคั่นหินถอดได้",
+      "มีตะแกรงป้องกันฮีตเตอร์ให้เลือกเสริม",
+      "มีกรอบติดตั้งฮีตเตอร์ให้เลือกเสริม"
+    ]
+  }
+}

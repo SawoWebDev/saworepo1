@@ -1,0 +1,22 @@
+{
+  "slug": "optional-second-temperature-sensor-for-bench",
+  "productId": "3ec10896-68a3-4450-8b24-a35b50a1c6c7",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Seconde sonde de température supplémentaire",
+    "short_description": "Sonde de température en option conçue pour le niveau du banc afin d'améliorer les performances du sauna. Elle permet des ajustements de la température ambiante plus rapides et plus précis et aide à économiser l'énergie en optimisant l'efficacité du chauffage. Elle est reconnue automatiquement par la commande une fois branchée, pour une intégration transparente et une gestion fiable de la température.",
+    "description": "<table>\n  <thead>\n<tr>\n  <th colspan=\"2\">DIMENSIONS DU PRODUIT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n  <td>Optional Bench Sensor\n(INN-BTEMP)</td>\n  <td>W: 47mm x D: 40mm x H: 55mm 0.02KG</td>\n</tr></tbody></table>",
+    "type": "Sonde",
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": null,
+        "name": null,
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

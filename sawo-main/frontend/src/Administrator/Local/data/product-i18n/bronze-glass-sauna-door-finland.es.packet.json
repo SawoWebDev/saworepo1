@@ -1,0 +1,56 @@
+{
+  "slug": "bronze-glass-sauna-door-finland",
+  "productId": "07779f7f-71ab-46dc-922f-6d2ed9797b33",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (731-3SGD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (731-3SGA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (731-3SGH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Puerta de sauna de vidrio bronce Finland",
+    "short_description": "La puerta de sauna SAWO de vidrio bronce Finland es una puerta de sauna de vidrio bronce: hueco de 700 × 1800 mm, marco de 790 × 1890 mm.",
+    "description": null,
+    "type": "Puertas y tiradores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (731-3SGD)",
+        "name": "Cedro (731-3SGD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (731-3SGA)",
+        "name": "Álamo (731-3SGA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (731-3SGH)",
+        "name": "Tsuga (731-3SGH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

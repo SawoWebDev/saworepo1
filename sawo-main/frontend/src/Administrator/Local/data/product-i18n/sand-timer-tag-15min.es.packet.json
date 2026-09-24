@@ -1,0 +1,56 @@
+{
+  "slug": "sand-timer-tag-15min",
+  "productId": "50b17945-d1b3-4015-b26d-33f39b5fa3a0",
+  "locale": "es",
+  "instructions": "Replace every remaining ENGLISH string value below with its es translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (550-D)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (550-A)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (550-H)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "Reloj de arena Tag de 15 min",
+    "short_description": "El reloj de arena SAWO Tag de 15 min es un reloj de arena de 65 × 340 mm, una forma sencilla de controlar la duración de la sesión dentro del sauna.",
+    "description": null,
+    "type": "Relojes y temporizadores",
+    "spec_table_headers": [
+      "Especificación",
+      "Detalle"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (550-D)",
+        "name": "Cedro (550-D)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (550-A)",
+        "name": "Álamo (550-A)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (550-H)",
+        "name": "Tsuga (550-H)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
