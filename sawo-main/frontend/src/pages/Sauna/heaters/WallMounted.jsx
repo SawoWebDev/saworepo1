@@ -509,16 +509,11 @@ export default function WallMounted() {
       </section>
 
       <PromoBanner
-        // NOT t("wallMountedPage.promo.*"): main reworded this banner after
-        // the i18n branch translated the old per-page copy, so that key's
-        // fi/zh values no longer match this English text. Hardcoded
-        // (matching main, same generic copy on every heater page) until it
-        // is re-translated.
-        title="Find Your Perfect Heater"
-        subtitle="Explore our full range of over 100 heater models and discover the one made for your sauna"
+        title={t("heatersPage.promoBanner.title")}
+        subtitle={t("heatersPage.promoBanner.subtitle")}
         image={bannerImg}
-        ctaLabel="VIEW ALL HEATERS"
-        ctaTo={menuPaths.sauna.heaters.parent}
+        ctaLabel={t("heatersPage.viewAll")}
+        ctaTo={localize(menuPaths.sauna.heaters.parent)}
       />
     </div>
   );

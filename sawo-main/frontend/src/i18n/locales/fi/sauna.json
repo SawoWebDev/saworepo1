@@ -149,7 +149,11 @@
         "caption": "SAWOn Stone-kiukaat on valmistettu suomalaisesta vuolukivestä, jolla on erinomaiset lämpöä varaavat ja johtavat ominaisuudet. Niiden leppoisa lämpö tarjoaa tasaisen ja pitkäkestoisen saunakokemuksen."
       }
     },
-    "viewAll": "KATSO KAIKKI KIUKAAT"
+    "viewAll": "KATSO KAIKKI KIUKAAT",
+    "promoBanner": {
+      "title": "Löydä täydellinen kiuas",
+      "subtitle": "Tutustu yli 100 kiuasmallin kokonaisvalikoimaamme ja löydä juuri saunaasi sopiva"
+    }
   },
   "accessoriesPage": {
     "meta": {

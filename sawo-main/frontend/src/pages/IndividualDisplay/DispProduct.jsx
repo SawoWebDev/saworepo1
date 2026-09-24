@@ -8,7 +8,7 @@ import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { getVariationsArray } from "./DispAccessories";
-import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
+import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -971,6 +971,7 @@ function cleanHTMLStyles(html) {
 /* ── Main ─────────────────────────────────────────────────────────── */
 export default function ProductPage() {
   const { slug } = useParams();
+  const locale = useLocale();
   const t = useLocaleT("product");
   const localize = useLocalizedPath();
   const [lightbox, setLightbox] = useState(null);
@@ -1073,12 +1074,14 @@ export default function ProductPage() {
   return (
     <>
       <SEO
-        // meta_title/meta_description are NOT covered by product_translations
-        // (see supabaseReader.js's getProductTranslationsLive column list) —
-        // always English regardless of locale, a real gap for a follow-up,
-        // not something to paper over here.
-        title={product.meta_title || product.name}
-        description={product.meta_description || seoDescription}
+        // meta_title/meta_description are English-only: product_translations
+        // has no columns for them (see getProductTranslationsLive in
+        // supabaseReader.js). On non-English routes use the translated name
+        // and description instead of the English override, so a /fi, /zh or
+        // /de product page never advertises English search snippets. The
+        // proper fix (translated meta columns) is a schema change.
+        title={locale === "en" ? (product.meta_title || product.name) : product.name}
+        description={locale === "en" ? (product.meta_description || seoDescription) : seoDescription}
         path={localize(`/products/${product.slug}`)}
         image={product.og_image || thumbnail || undefined}
       />

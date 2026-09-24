@@ -149,7 +149,11 @@
         "caption": "Gefertigt aus finnischem Speckstein, verfügen die SAWO Stone-Öfen über außergewöhnliche Wärmespeicher- und Leiteigenschaften. Ihre sanfte Wärme sorgt für ein gleichbleibendes und langanhaltendes Saunaerlebnis."
       }
     },
-    "viewAll": "ALLE ÖFEN ANSEHEN"
+    "viewAll": "ALLE ÖFEN ANSEHEN",
+    "promoBanner": {
+      "title": "Finden Sie Ihren Perfekten Ofen",
+      "subtitle": "Entdecken Sie unser gesamtes Sortiment mit über 100 Ofenmodellen und finden Sie das passende für Ihre Sauna"
+    }
   },
   "accessoriesPage": {
     "meta": {

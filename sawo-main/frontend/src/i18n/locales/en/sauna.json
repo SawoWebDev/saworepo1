@@ -149,7 +149,11 @@
         "caption": "Made of Finnish soapstone, the SAWO Stone Heaters have exceptional heat-storing and conducting properties. Their gentle heat provides a consistent and long-lasting sauna experience."
       }
     },
-    "viewAll": "VIEW ALL HEATERS"
+    "viewAll": "VIEW ALL HEATERS",
+    "promoBanner": {
+      "title": "Find Your Perfect Heater",
+      "subtitle": "Explore our full range of over 100 heater models and discover the one made for your sauna"
+    }
   },
   "accessoriesPage": {
     "meta": {
