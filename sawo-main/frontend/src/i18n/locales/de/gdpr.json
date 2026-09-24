@@ -1,0 +1,33 @@
+{
+  "banner": {
+    "eyebrow": "Daten & Datenschutz",
+    "text": "Wir verwenden Supabase, um Ihre Daten sicher zu speichern. Wenn Sie fortfahren, stimmen Sie unserer Datennutzung zu.",
+    "privacyLink": "Unsere Datenschutzerklärung ansehen",
+    "essentialOnly": "Nur Notwendige",
+    "acceptAll": "Alle Akzeptieren",
+    "details": "Details"
+  },
+  "modal": {
+    "title": "Ihre Privatsphäre & Daten",
+    "collect": {
+      "title": "Was Wir Erfassen",
+      "desc": "Wir erfassen Informationen, die Sie bei der Anmeldung, Kontaktaufnahme oder Nutzung unserer Dienste angeben. Dazu gehören Ihr Name, Ihre E-Mail-Adresse und Ihre Kontoeinstellungen."
+    },
+    "use": {
+      "title": "Wie Wir Sie Verwenden",
+      "desc": "Ihre Daten werden sicher in Supabase gespeichert und zur Bereitstellung unserer Dienste, zum Versand wichtiger Updates und zur Verbesserung Ihrer Erfahrung verwendet."
+    },
+    "rights": {
+      "title": "Ihre Rechte",
+      "desc": "Sie haben jederzeit das Recht, auf Ihre personenbezogenen Daten zuzugreifen, sie zu aktualisieren oder zu löschen.",
+      "link": "Lesen Sie unsere vollständige Datenschutzerklärung"
+    },
+    "essentialCookies": {
+      "title": "Notwendige Cookies",
+      "desc": "Diese sind erforderlich, damit unsere Website ordnungsgemäß funktioniert. Sie umfassen Authentifizierungs- und Sitzungs-Cookies. Immer aktiviert."
+    },
+    "goBack": "Zurück",
+    "essentialOnly": "Nur Notwendige",
+    "acceptAll": "Alle Akzeptieren"
+  }
+}

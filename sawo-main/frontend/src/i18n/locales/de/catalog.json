@@ -1,0 +1,135 @@
+{
+  "allProducts": {
+    "meta": {
+      "title": "Alle Produkte",
+      "description": "Entdecken Sie das komplette Produktsortiment von SAWO: Saunaöfen, Saunaräume und Zubehör, alles in einem durchsuchbaren Katalog."
+    },
+    "hero": {
+      "eyebrow": "Komplettes Sortiment",
+      "title": "Alle Produkte",
+      "description": "Entdecken Sie das komplette Produktsortiment von SAWO: Saunaöfen, Steuerungen, Dampferzeuger, Räume und Zubehör, alles in einem durchsuchbaren Katalog."
+    },
+    "loading": "Produkte werden geladen...",
+    "sidebar": {
+      "browseBy": "Durchsuchen nach",
+      "type": "Typ",
+      "categories": "Kategorien"
+    },
+    "tabs": {
+      "heaters": "Saunaöfen",
+      "rooms": "Saunaräume",
+      "saunaControls": "Saunasteuerungen",
+      "steam": "Dampf",
+      "infrared": "Infrarot",
+      "heaterAccessories": "Ofenzubehör",
+      "accessories": "Sauna-Zubehör"
+    },
+    "heaterSections": {
+      "wallMounted": "Wandmontiert",
+      "tower": "Tower",
+      "stone": "Stone",
+      "floor": "Boden",
+      "combi": "Combi",
+      "dragonfire": "Dragonfire"
+    },
+    "roomSections": {
+      "standard": "Standard",
+      "glassFront": "Glasfront",
+      "compact": "Kompakt"
+    },
+    "steamSections": {
+      "generators": "Dampferzeuger",
+      "controls": "Dampfsteuerungen",
+      "accessories": "Dampfzubehör"
+    },
+    "infraredSections": {
+      "rooms": "Saunaräume",
+      "panels": "Paneele",
+      "controls": "Steuerungen"
+    },
+    "heaterAccessoriesLabels": {
+      "Heater Guard": "Ofenschutzgitter",
+      "Integration Collar": "Einbaukragen",
+      "Humidifiers": "Cozy Tanks",
+      "Sauna Accessories": "Sicherheitszubehör",
+      "Sauna Stones": "Saunasteine"
+    },
+    "categorySections": {
+      "pails": "Eimer",
+      "ladles": "Kellen",
+      "pailShower": "Eimerdusche",
+      "meters": "Thermometer & Kombigeräte",
+      "clockTimer": "Uhren & Timer",
+      "saunaLights": "Saunaleuchten",
+      "headrestBackrest": "Kopfstützen & Rückenlehnen",
+      "doorsHandles": "Türen & Griffe",
+      "benches": "Bänke",
+      "clothHangers": "Kleiderhaken & Ablagen",
+      "woodenFloorMats": "Bodenmattenfliesen",
+      "kivistone": "Kivistone",
+      "ventMisc": "Belüftung & Sonstiges"
+    },
+    "empty": {
+      "heaters": "Keine Saunaöfen verfügbar",
+      "rooms": "Keine Saunaräume verfügbar",
+      "saunaControls": "Keine Saunasteuerungen verfügbar",
+      "steam": "Keine Dampfprodukte verfügbar",
+      "infrared": "Keine Infrarotprodukte verfügbar",
+      "heaterAccessories": "Kein Ofenzubehör verfügbar"
+    }
+  },
+  "heatersCatalog": {
+    "meta": {
+      "title": "Saunaöfen",
+      "description": "Entdecken Sie den vollständigen SAWO Ofenkatalog: Tower-, Wandmontiert-, Stone-, Boden-, Combi- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
+    },
+    "hero": {
+      "title": "Saunaöfen",
+      "description": "Entdecken Sie unser komplettes Sortiment hochwertiger Saunaöfen für jede Saunagröße und jeden Stil. Durchstöbern Sie unsere sorgfältig zusammengestellte Tower-, Wandmontiert-, Stone-, Boden-, Combi- und Dragonfire-Serie."
+    },
+    "loading": "Öfen werden geladen...",
+    "sidebar": {
+      "browseBy": "Durchsuchen nach",
+      "series": "Serie"
+    },
+    "groups": {
+      "wallMounted": "Wandmontiert-Serie",
+      "tower": "Tower-Serie",
+      "stone": "Stone-Serie",
+      "floor": "Boden-Serie",
+      "combi": "Combi-Serie",
+      "dragonfire": "Dragonfire-Serie"
+    },
+    "cta": {
+      "title": "Brauchen Sie Hilfe Bei Der Wahl Des Richtigen Ofens?",
+      "desc": "Unser Team hilft Ihnen, Leistung, Größe und Stil auf Ihre Sauna abzustimmen, oder Sie durchstöbern alle Spezifikationen in unserem Produktkatalog.",
+      "contactBtn": "KONTAKTIEREN SIE UNS",
+      "downloadBtn": "KATALOG HERUNTERLADEN"
+    }
+  },
+  "accessoriesCatalog": {
+    "meta": {
+      "title": "Sauna-Zubehör",
+      "description": "Entdecken Sie den vollständigen SAWO Zubehörkatalog: Eimer, Kellen, Thermometer, Bänke, Beleuchtung und mehr für jede Sauna."
+    },
+    "hero": {
+      "eyebrow": "Premium-Kollektion",
+      "title": "Sauna-Zubehör",
+      "description": "Entdecken Sie unser komplettes Sortiment an hochwertigem Sauna-Zubehör, das Ihr Wellness-Erlebnis bereichert. Durchstöbern Sie unsere sorgfältig zusammengestellte Auswahl hochwertiger Produkte."
+    },
+    "loading": "Zubehör wird geladen...",
+    "sidebarTitle": "Sauna-Zubehör",
+    "groups": {
+      "pailsLadles": "Eimer & Kellen",
+      "meters": "Thermometer & Kombigeräte",
+      "clockTimer": "Uhren & Timer",
+      "saunaLights": "Saunaleuchten",
+      "headrestBackrest": "Kopfstützen & Rückenlehnen",
+      "doorsHandles": "Türen & Griffe",
+      "benches": "Bänke, Haken & Bodenmatten",
+      "kivistone": "Kivistone",
+      "ventMisc": "Belüftung & Sonstiges",
+      "accessorySets": "Zubehör-Sets"
+    }
+  }
+}

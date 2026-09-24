@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Nachhaltigkeit",
+    "description": "Wie SAWO nachhaltig baut: mit verantwortungsvoll beschafftem Holz, Abfallvermeidung und energieeffizienter Fertigung hinter jedem Saunaofen und Saunaraum."
+  },
+  "hero": {
+    "title": "NACHHALTIGKEIT",
+    "subtitle": "Wir kümmern uns um Sie und die Erde"
+  },
+  "commitment": {
+    "title": "Unser Engagement für Nachhaltigkeit",
+    "desc": "Bei SAWO verbinden wir Wellness mit ökologischer Verantwortung. Jede Sauna, die wir fertigen, verkörpert Nachhaltigkeit – von der Materialauswahl bis zum Herstellungsprozess. Wir bemühen uns, die authentische finnische Saunakultur mit hochwertigen, langlebigen Saunen zu verbreiten, die die Gesundheit fördern und dabei unseren Planeten respektieren.",
+    "imgAlt": "SAWO Nachhaltigkeit"
+  },
+  "practices": {
+    "title": "Umweltfreundliche Fertigungspraktiken",
+    "energy": {
+      "title": "Energieeffizienz",
+      "desc": "Fortschrittliche Technologien, darunter präzise CNC-Bearbeitung, minimieren den Energieverbrauch und reduzieren Abfall."
+    },
+    "waste": {
+      "title": "Abfallreduzierung",
+      "desc": "Wir verwerten oder recyceln überschüssiges Holz und Materialien und streben eine abfallfreie Produktion an."
+    },
+    "nonToxic": {
+      "title": "Schadstofffreie Behandlungen",
+      "desc": "Wir vermeiden schädliche Chemikalien und verwenden schadstofffreie Oberflächenbehandlungen zum Schutz von Umwelt und Gesundheit. Unsere Abfälle sind als ungiftig zertifiziert."
+    }
+  },
+  "energySmart": {
+    "title": "Energiesparendes Sauna-Design",
+    "subtitle": "Unsere Saunen sind für optimale Energieeffizienz konzipiert und gewährleisten ein perfektes Saunaerlebnis bei minimaler Umweltbelastung.",
+    "imgAlt": "Energiesparendes Sauna-Design",
+    "feature1": "Heizsysteme sind perfekt auf die Saunagröße abgestimmt, um Energieverschwendung zu vermeiden.",
+    "feature2": "Einige Modelle verfügen über intelligente Thermostate für eine präzise Temperaturregelung.",
+    "feature3": "Infrarottechnologie wird eingesetzt, um den Stromverbrauch zu senken.",
+    "bannerImgAlt": "Nachhaltiges Holz",
+    "bannerText": "Mit SAWO investieren Sie in ein Produkt aus nachhaltigen Materialien, einen Herstellungsprozess, der natürliche Ressourcen respektiert, und ein gesünderes Raumklima."
+  },
+  "wasteHierarchy": {
+    "title": "Abfall wird Wert: Den Kreislauf schließen",
+    "intro": "Wir folgen der Abfallhierarchie-Richtlinie (EU) 2018/851 und priorisieren Abfallvermeidung, Wiederverwendung und Verwertung",
+    "minimization": {
+      "title": "Abfallvermeidung",
+      "desc": "Fortschrittliche Schnitttechniken begrenzen unnötigen Abfall, indem beide Teile der Zuschnittreste genutzt werden, um den Materialverbrauch zu senken."
+    },
+    "reuse": {
+      "title": "Abfallwiederverwendung",
+      "desc": "Verbleibende Holzstücke werden für andere Designs weiterverwendet."
+    },
+    "recovery": {
+      "title": "Abfallverwertung",
+      "desc": "Sägemehl und nicht mehr verwertbare Holzreste betreiben unsere Biomassekessel, versorgen unsere Anlagen mit erneuerbarer Energie und verringern unseren CO2-Fußabdruck."
+    },
+    "imgAlt": "Abfallhierarchie"
+  },
+  "wellbeing": {
+    "titleLine1": "Sauna ist Wohlbefinden",
+    "titleLine2": "Nachhaltigkeit ist Wohlbefinden",
+    "quotePrefix": "Gesundheit und Wohlbefinden sind die Grundlage eines guten Lebens. Nachhaltigkeit betrachtet nicht nur das Wohlbefinden der Menschen, sondern auch das Wohlbefinden der Erde. Bei SAWO",
+    "quoteHighlight1": "ist Wohlbefinden unser Geschäft",
+    "quoteMiddle": ". Wir sorgen dafür, dass für Sie mit einer Sauna gesorgt wird. Wir tun auch unser Bestes, um für die Erde zu sorgen.",
+    "quoteHighlight2": "Wohlbefinden ist Nachhaltigkeit. Fühlen Sie sich wohl. Saunieren Sie wohl.",
+    "imgAlt": "Sauna in nachhaltiger Umgebung",
+    "ctaText": "Begleiten Sie uns auf unserem Weg, nachhaltige Saunaerlebnisse weltweit zugänglich und angenehm zu machen. Erleben Sie die Wärme der Natur mit einer Sauna, die sich um Sie und die Erde kümmert.",
+    "ctaBtn": "ENTDECKEN"
+  }
+}

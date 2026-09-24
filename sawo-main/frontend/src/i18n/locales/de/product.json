@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "resources": "Ressourcen",
+    "features": "Merkmale",
+    "diagram": "Diagramm",
+    "specifications": "Spezifikationen",
+    "technicalData": "Technische Daten",
+    "infraredSpecifications": "Infrarot-Spezifikationen",
+    "includedInPackage": "Im Lieferumfang Enthalten",
+    "doorPositions": "Verfügbare Türpositionen",
+    "floorPlan": "Grundriss",
+    "benchConfiguration": "Bankkonfiguration",
+    "details": "Details",
+    "description": "Beschreibung"
+  },
+  "noResourcesAvailable": "Keine Ressourcen verfügbar",
+  "moreDetailsSoon": "Weitere Details folgen in Kürze.",
+  "notFound": {
+    "title": "Produkt Nicht Gefunden",
+    "description": "Dieses Produkt existiert nicht oder ist noch nicht veröffentlicht.",
+    "browseProducts": "Produkte Durchsuchen",
+    "home": "Startseite",
+    "roomTitle": "Saunaraum Nicht Gefunden",
+    "roomDescription": "Dieser Saunaraum existiert nicht oder ist noch nicht veröffentlicht.",
+    "browseRooms": "Räume Durchsuchen"
+  },
+  "related": {
+    "youMightAlsoLike": "Das könnte Ihnen auch gefallen",
+    "relatedProducts": "Ähnliche Produkte",
+    "relatedRooms": "Ähnliche Saunaräume",
+    "saunaAccessories": "Sauna-Zubehör",
+    "otherHeaters": "Weitere Saunaöfen",
+    "moreTypeRooms": "Weitere {{type}}-Räume"
+  },
+  "roomTypes": {
+    "traditional": "Traditionell",
+    "standard": "Standard",
+    "infrared": "Infrarot",
+    "steam": "Dampf",
+    "combo": "Kombi",
+    "glassfront": "Glasfront",
+    "compact": "Kompakt"
+  },
+  "sizeLabels": {
+    "compact": "Kompakt · 1–2 Personen",
+    "small": "Klein · 2–3 Personen",
+    "medium": "Mittel · 3–4 Personen",
+    "large": "Groß · 4–6 Personen",
+    "xl": "XL · 6+ Personen",
+    "commercial": "Gewerblich"
+  },
+  "badges": {
+    "featured": "Empfohlen",
+    "bestSeller": "Bestseller"
+  },
+  "modelCode": "Modell {{code}}",
+  "skuCode": "SKU {{sku}}",
+  "roomDisplayName": "{{type}} Saunaraum {{code}}",
+  "seoFallbackDescription": "{{name}} von SAWO. Ein hochwertiger finnischer Saunaraum.",
+  "stats": {
+    "capacity": "Kapazität",
+    "floorSize": "Grundfläche",
+    "height": "Höhe",
+    "woodType": "Holzart",
+    "voltage": "Spannung",
+    "panelWattage": "Panel-Leistung",
+    "totalPower": "Gesamtleistung",
+    "sessionTime": "Sitzungsdauer"
+  },
+  "resourcesPanel": {
+    "pdfClickToOpen": "PDF · Zum Öffnen klicken",
+    "documentsCount": "{{count}} Dokumente",
+    "clickToExpand": "Zum Erweitern klicken",
+    "clickToCollapse": "Zum Einklappen klicken"
+  },
+  "featureTabs": {
+    "tabFallback": "Tab {{number}}"
+  }
+}

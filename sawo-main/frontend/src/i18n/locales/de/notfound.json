@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "Seite Nicht Gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben."
+  },
+  "heading": "Hoppla! Seite Nicht Gefunden",
+  "desc": "Es tut uns leid, die gesuchte Seite existiert nicht oder wurde verschoben.",
+  "triedToAccess": "Versuchter Zugriff auf:",
+  "helpBox": {
+    "title": "Das können Sie tun:",
+    "item1": "Überprüfen Sie die URL auf Tippfehler",
+    "item2": "Durchsuchen Sie unseren Produktkatalog",
+    "item3": "Nutzen Sie die Suchfunktion unten",
+    "item4": "Kontaktieren Sie uns für Unterstützung"
+  },
+  "goHome": "Zur Startseite",
+  "browseProducts": "Produkte Durchsuchen",
+  "popularSections": "Beliebte Bereiche:",
+  "saunaHeaters": "Saunaöfen",
+  "steamGenerators": "Dampferzeuger",
+  "faq": "FAQ",
+  "contactUs": "Kontakt",
+  "supportPrompt": "Haben Sie weiterhin Probleme? Unser Support-Team hilft Ihnen gerne weiter."
+}
