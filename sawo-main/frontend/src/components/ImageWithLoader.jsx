@@ -1,25 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export const ImageWithLoader = ({ src, alt, className, style = {}, onError }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  // Track WHICH src has loaded/failed rather than a bare boolean. A caller
+  // that doesn't re-key this component per src (same carousel slot, new url)
+  // must not keep showing a stale broken-image fallback, so loading/error
+  // are derived from the CURRENT src.
+  //
+  // This deliberately does NOT reset state in a useEffect([src]): for an
+  // already-cached image (e.g. related-product cards whose thumbnails were
+  // just loaded on the listing page) the browser can fire `load` before
+  // that effect runs, and the effect's setIsLoading(true) then overwrote the
+  // load — leaving the shimmer forever until a hard refresh bypassed the
+  // cache and made `load` fire late enough. Deriving from src has no such race.
+  const [loadedSrc, setLoadedSrc] = useState(null);
+  const [failedSrc, setFailedSrc] = useState(null);
+  const imgRef = useRef(null);
 
-  // Without this, a caller that doesn't remount/re-key this component per
-  // src (e.g. the same carousel slot re-rendering with a NEW url — a
-  // replaced product thumbnail, or same-session cached data getting
-  // corrected by a fresh fetch) keeps showing the broken-image fallback
-  // forever once hasError flips true once, even after src points at a
-  // perfectly valid image. hasError/isLoading need to track the CURRENT
-  // src, not just "has this component instance ever failed."
+  const isLoading = loadedSrc !== src;
+  const hasError = failedSrc === src;
+
+  // Covers an image that finished loading before React attached onLoad.
   useEffect(() => {
-    setIsLoading(true);
-    setHasError(false);
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth > 0) setLoadedSrc(src);
   }, [src]);
 
-  const handleLoad = () => setIsLoading(false);
+  const handleLoad = () => setLoadedSrc(src);
   const handleError = (e) => {
-    setIsLoading(false);
-    setHasError(true);
+    setFailedSrc(src);
     if (onError) onError(e);
   };
 
@@ -42,6 +50,7 @@ export const ImageWithLoader = ({ src, alt, className, style = {}, onError }) =>
       {/* Image */}
       {!hasError && (
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
           className={className}
