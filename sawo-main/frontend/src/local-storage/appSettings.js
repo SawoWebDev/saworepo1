@@ -41,6 +41,7 @@ const PUBLIC_KEYS = [
   "gdpr_banner_enabled",
   "language_switcher_enabled",
   "enabled_languages",
+  "language_order",
 ];
 
 let memCache = null; // { [key]: value }
@@ -63,6 +64,39 @@ function writeCache(byKey, time) {
   try {
     localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ value: byKey, time }));
   } catch {}
+}
+
+// Same-tab and cross-tab change notification. A public page that is already
+// open (e.g. the site in one tab, the admin CMS in another) has its own
+// in-memory copy of the settings that nothing would ever refresh until a
+// reload. Two things keep it live:
+//   - the browser's `storage` event, which fires in every OTHER tab of this
+//     origin the moment the CMS writes the cache (see primeSetting), and
+//   - subscribeToSettings(), so components (the language switcher) can
+//     re-read the cache when either that or a revalidation changes it.
+const listeners = new Set();
+function notifySettingsChanged() {
+  listeners.forEach((cb) => {
+    try { cb(); } catch {}
+  });
+}
+export function subscribeToSettings(cb) {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", (e) => {
+    if (e.key !== CACHE_STORAGE_KEY || !e.newValue) return;
+    try {
+      const parsed = JSON.parse(e.newValue);
+      if (parsed && typeof parsed.value === "object") {
+        memCache = parsed.value;
+        memCacheTime = parsed.time || Date.now();
+        notifySettingsChanged();
+      }
+    } catch {}
+  });
 }
 
 /**
@@ -88,14 +122,16 @@ export function getCachedSettings() {
  * Fresh settings, revalidating if the cache has expired. Concurrent callers
  * within one render share a single request.
  */
-export async function getSettings() {
+export async function getSettings({ force = false } = {}) {
   const now = Date.now();
-  if (memCache && now - memCacheTime < CACHE_MS) return memCache;
+  if (!force) {
+    if (memCache && now - memCacheTime < CACHE_MS) return memCache;
 
-  const stored = readStorage();
-  if (stored && now - stored.time < CACHE_MS) {
-    writeCache(stored.value, stored.time);
-    return stored.value;
+    const stored = readStorage();
+    if (stored && now - stored.time < CACHE_MS) {
+      writeCache(stored.value, stored.time);
+      return stored.value;
+    }
   }
 
   if (inflight) return inflight;
@@ -116,6 +152,7 @@ export async function getSettings() {
       const rows = await res.json();
       const byKey = Object.fromEntries((rows || []).map((r) => [r.key, r.value]));
       writeCache(byKey, Date.now());
+      notifySettingsChanged();
       return byKey;
     } catch (err) {
       console.warn("[appSettings] Failed to read settings:", err.message);
@@ -135,8 +172,14 @@ export async function getSettings() {
  * the change is reflected immediately without waiting for the TTL to lapse.
  */
 export function primeSetting(key, value) {
-  const next = { ...(memCache || {}), [key]: value };
+  // Base on whatever is known — memory, else localStorage — never an empty
+  // object: the admin tab may not have read the public settings yet, and
+  // writing back a cache holding ONLY this key would wipe the others (e.g.
+  // language_switcher_enabled) for the next 30s, hiding the switcher.
+  const base = memCache || readStorage()?.value || {};
+  const next = { ...base, [key]: value };
   writeCache(next, Date.now());
+  notifySettingsChanged();
 }
 
 /** Read one key from the sync cache, validated. Returns null if unusable. */

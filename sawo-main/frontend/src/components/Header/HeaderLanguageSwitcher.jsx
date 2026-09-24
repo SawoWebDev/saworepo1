@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LOCALES, LOCALE_PREFIXES } from "../../i18n/translatedRoutes";
+import Flag from "./LanguageFlag";
 import { afterPageLoad } from "../../utils/afterPageLoad";
-import { getCachedLanguageSwitcherEnabled, getCachedEnabledLanguages } from "../../local-storage/languageSettings";
+import { getCachedLanguageSwitcherEnabled, getCachedEnabledLanguages, getCachedLanguageOrder } from "../../local-storage/languageSettings";
+import { subscribeToSettings } from "../../local-storage/appSettings";
 
 // Built from LOCALE_PREFIXES, not hand-typed — a hardcoded `(fi|de)` here
 // silently stops matching every route the day a new locale prefix is added
@@ -17,67 +19,6 @@ function splitLocale(pathname) {
   const match = new RegExp(`^/(${LOCALE_PREFIX_PATTERN})(/.*)?$`).exec(pathname);
   if (!match) return { locale: "en", path: pathname };
   return { locale: match[1], path: match[2] || "/" };
-}
-
-// Inline SVG flags — emoji flags don't render on Windows/some browsers, so
-// these are drawn by hand. Rendered inside a circular frame
-// (.header-lang-flag*) below.
-function FlagEn(props) {
-  return (
-    <svg viewBox="0 0 60 30" {...props}>
-      <clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
-      <clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" /></clipPath>
-      <g clipPath="url(#uk-s)">
-        <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
-        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
-        <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#uk-t)" stroke="#C8102E" strokeWidth="4" />
-        <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
-        <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
-      </g>
-    </svg>
-  );
-}
-function FlagFi(props) {
-  return (
-    <svg viewBox="0 0 60 36" {...props}>
-      <rect width="60" height="36" fill="#fff" />
-      <rect x="16" width="10" height="36" fill="#003580" />
-      <rect y="13" width="60" height="10" fill="#003580" />
-    </svg>
-  );
-}
-function FlagDe(props) {
-  return (
-    <svg viewBox="0 0 60 36" {...props}>
-      <rect width="60" height="12" y="0" fill="#000" />
-      <rect width="60" height="12" y="12" fill="#DD0000" />
-      <rect width="60" height="12" y="24" fill="#FFCE00" />
-    </svg>
-  );
-}
-function FlagZh(props) {
-  // One large star + 4 small stars arced beside it, each small star angled
-  // toward the large one — same simplified/hand-drawn approach as the other
-  // flags here, not a pixel-accurate rendering.
-  const star = "M25,1 31,17 48,17 35,28 40,44 25,35 10,44 15,28 2,17 19,17 Z";
-  return (
-    <svg viewBox="0 0 60 36" {...props}>
-      <rect width="60" height="36" fill="#DE2910" />
-      <g fill="#FFDE00">
-        <path d={star} transform="translate(2,2) scale(0.18)" />
-        <path d={star} transform="translate(15,2) scale(0.09) rotate(23 25 22)" />
-        <path d={star} transform="translate(19,6) scale(0.09) rotate(45 25 22)" />
-        <path d={star} transform="translate(19,11) scale(0.09) rotate(70 25 22)" />
-        <path d={star} transform="translate(15,15) scale(0.09) rotate(95 25 22)" />
-      </g>
-    </svg>
-  );
-}
-const FLAGS = { en: FlagEn, fi: FlagFi, de: FlagDe, zh: FlagZh };
-
-function Flag({ code, className }) {
-  const Svg = FLAGS[code] || FlagEn;
-  return <Svg className={className} preserveAspectRatio="xMidYMid slice" />;
 }
 
 // Header globe dropdown, right of "Contact Us". Initial state comes from
@@ -100,6 +41,7 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
   const { locale: currentLocale, path: basePath } = splitLocale(location.pathname);
   const [open, setOpen] = useState(false);
   const [langs, setLangs] = useState(() => getCachedEnabledLanguages());
+  const [order, setOrder] = useState(() => getCachedLanguageOrder());
   const [enabled, setEnabled] = useState(() => getCachedLanguageSwitcherEnabled());
   const ref = useRef(null);
   const hoverTimeout = useRef(null);
@@ -118,16 +60,40 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
 
   const loadSettings = () => {
     import("../../local-storage/languageSettings").then((m) => {
-      Promise.all([m.getLanguageSwitcherEnabled(), m.getEnabledLanguages()])
-        .then(([e, l]) => {
+      Promise.all([m.getLanguageSwitcherEnabled(), m.getEnabledLanguages(), m.getLanguageOrder()])
+        .then(([e, l, o]) => {
           setEnabled(e);
           setLangs(l);
+          setOrder(o);
         })
         .catch(() => {});
     });
   };
 
   useEffect(() => afterPageLoad(loadSettings), []);
+
+  // Re-read the (already-updated) cache whenever the settings change under
+  // us: the CMS saving in another tab of this browser, or a revalidation
+  // finishing. Cache-only and synchronous, so no request is made.
+  useEffect(
+    () => subscribeToSettings(() => {
+      setEnabled(getCachedLanguageSwitcherEnabled());
+      setLangs(getCachedEnabledLanguages());
+      setOrder(getCachedLanguageOrder());
+    }),
+    []
+  );
+
+  // Coming back to a tab that sat in the background: revalidate (still
+  // bounded by the 30s TTL in appSettings, so this is at most one small
+  // request) instead of showing whatever was true when the tab was left.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible") loadSettings();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, []);
 
   const toggleOpen = () => {
     setOpen((v) => {
@@ -171,7 +137,14 @@ export default function HeaderLanguageSwitcher({ variant = "desktop", onNavigate
 
   if (!enabled) return null;
 
-  const visibleLocales = LOCALES.filter((l) => langs.includes(l.code));
+  // Order comes from the CMS (Settings > Language Switcher, drag to reorder).
+  // The language the visitor is already on is left out of the list — it's
+  // shown on the toggle button itself, so listing it again is just noise.
+  // With nothing else to switch to, the whole control is hidden.
+  const visibleLocales = order
+    .map((code) => LOCALES.find((l) => l.code === code))
+    .filter((l) => l && langs.includes(l.code) && l.code !== currentLocale);
+  if (visibleLocales.length === 0) return null;
 
   if (variant === "mobile") {
     return (

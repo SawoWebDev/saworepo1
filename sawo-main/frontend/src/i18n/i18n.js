@@ -33,7 +33,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 export const DEFAULT_LOCALE = "en";
-const LAZY_LOCALES = ["fi", "de", "zh"];
+const LAZY_LOCALES = ["fi", "de", "zh", "ja", "fr", "es", "th"];
 
 const enContext = require.context("./locales/en", false, /\.json$/);
 const resources = { en: {} };
@@ -81,6 +81,10 @@ const localeContexts = {
   fi: require.context("./locales/fi", false, /\.json$/, "lazy-once"),
   de: require.context("./locales/de", false, /\.json$/, "lazy-once"),
   zh: require.context("./locales/zh", false, /\.json$/, "lazy-once"),
+  ja: require.context("./locales/ja", false, /\.json$/, "lazy-once"),
+  fr: require.context("./locales/fr", false, /\.json$/, "lazy-once"),
+  es: require.context("./locales/es", false, /\.json$/, "lazy-once"),
+  th: require.context("./locales/th", false, /\.json$/, "lazy-once"),
 };
 
 const loadedLocales = new Set([DEFAULT_LOCALE]);

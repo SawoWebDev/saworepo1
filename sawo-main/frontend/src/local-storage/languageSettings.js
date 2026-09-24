@@ -23,32 +23,46 @@
 
 import { getSupabase } from "./supabaseClient";
 import { getSettings, getCachedSettings, primeSetting } from "./appSettings";
+import { LOCALES } from "../i18n/translatedRoutes";
 
 const KEY_ENABLED = "language_switcher_enabled";
 const KEY_LANGUAGES = "enabled_languages";
+const KEY_ORDER = "language_order";
 
-// Kept in sync by hand with src/i18n/translatedRoutes.js's LOCALE_PREFIXES.
-// German is still fully routed/built (its pages exist, stay in the
-// sitemap/hreflang) — see PILOT_ENABLED_LOCALES below for why it doesn't
-// show up in the public switcher right now.
-export const BUILT_LOCALES = ["en", "fi", "de"];
+// Derived from translatedRoutes.js's LOCALES so a new locale only needs adding
+// in one place. Array order = the DEFAULT switcher order (see getLanguageOrder
+// for the CMS-editable override).
+export const BUILT_LOCALES = LOCALES.map((l) => l.code);
 
-// Finnish-first pilot (see docs/🔴 GO-LIVE/SAWO_Multilingual_Implementation_
-// Specification(1).md §74): until the Finnish rollout is validated, the
-// public switcher is HARD-CAPPED to a known-good subset, regardless of what's
-// stored in app_settings — a stray/legacy `enabled_languages` row containing
-// "de" (there was one) must not silently re-show it. This is deliberately
-// stricter than sanitizeLanguages used to be (DB value always won before);
-// once the Finnish pilot is validated, change this back to BUILT_LOCALES so
-// the admin CMS toggle (Settings.jsx) governs German again.
-// "zh" added alongside "fi" to pilot Chinese too and see how translation
-// coverage/velocity compares — same hard-cap mechanism, just a bigger set.
-const PILOT_ENABLED_LOCALES = ["en", "fi", "zh"];
+// Shown when nothing valid is stored in app_settings (first run, or a
+// malformed row). Deliberately NOT all of BUILT_LOCALES: a locale only goes
+// public once someone turns it on in the admin CMS (Settings.jsx).
+const DEFAULT_ENABLED_LOCALES = ["en", "fi", "zh"];
 
+// The admin CMS toggle governs which built locales appear in the switcher.
+// (This used to hard-cap to a Finnish/Chinese pilot subset, which silently
+// dropped "de" from a CMS save while the CMS UI still showed it as on.)
 function sanitizeLanguages(value) {
-  if (!Array.isArray(value)) return [...PILOT_ENABLED_LOCALES];
-  const filtered = value.filter((loc) => PILOT_ENABLED_LOCALES.includes(loc));
-  return filtered.length > 0 ? filtered : [...PILOT_ENABLED_LOCALES];
+  if (!Array.isArray(value)) return [...DEFAULT_ENABLED_LOCALES];
+  const filtered = value.filter((loc) => BUILT_LOCALES.includes(loc));
+  return filtered.length > 0 ? filtered : [...DEFAULT_ENABLED_LOCALES];
+}
+
+// Display order of ALL built locales in the switcher (and the CMS list that
+// edits it). Whatever is stored is de-duplicated and cleaned of unknown codes;
+// any built locale missing from it (e.g. one added to the code after the
+// order was last saved) is appended in its default position, so a new
+// language never silently vanishes from the CMS list.
+function sanitizeOrder(value) {
+  const seen = new Set();
+  const order = [];
+  if (Array.isArray(value)) {
+    for (const loc of value) {
+      if (BUILT_LOCALES.includes(loc) && !seen.has(loc)) { seen.add(loc); order.push(loc); }
+    }
+  }
+  for (const loc of BUILT_LOCALES) if (!seen.has(loc)) order.push(loc);
+  return order;
 }
 
 // Reading is delegated to appSettings.js, which batches these two keys with
@@ -63,7 +77,13 @@ async function readSettings() {
     // Flip back on in the CMS once CRA-native /fi, /de routes actually ship.
     enabled: typeof all?.[KEY_ENABLED] === "boolean" ? all[KEY_ENABLED] : false,
     languages: sanitizeLanguages(all?.[KEY_LANGUAGES]),
+    order: sanitizeOrder(all?.[KEY_ORDER]),
   };
+}
+
+export async function getLanguageOrder() {
+  const { order } = await readSettings();
+  return order;
 }
 
 export async function getLanguageSwitcherEnabled() {
@@ -96,6 +116,23 @@ export function getCachedLanguageSwitcherEnabled() {
 export function getCachedEnabledLanguages() {
   const all = getCachedSettings();
   return sanitizeLanguages(all?.[KEY_LANGUAGES]);
+}
+
+export function getCachedLanguageOrder() {
+  const all = getCachedSettings();
+  return sanitizeOrder(all?.[KEY_ORDER]);
+}
+
+export async function setLanguageOrder(value, username = null) {
+  const order = sanitizeOrder(value);
+  const supabase = await getSupabase();
+  const { error } = await supabase
+    .from("app_settings")
+    .upsert({ key: KEY_ORDER, value: order, updated_by: username, updated_at: new Date().toISOString() }, { onConflict: "key" });
+  if (error) throw new Error(error.message);
+
+  primeSetting(KEY_ORDER, order);
+  return order;
 }
 
 export async function setLanguageSwitcherEnabled(value, username = null) {

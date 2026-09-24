@@ -37,7 +37,7 @@ export function isTranslated(path, locale) {
 }
 
 // Locale prefixes routed in App.jsx (English is unprefixed, "").
-export const LOCALE_PREFIXES = ["", "fi", "de", "zh"];
+export const LOCALE_PREFIXES = ["", "fi", "de", "zh", "ja", "fr", "es", "th"];
 
 // "zh" = Simplified Chinese specifically (not Traditional) — content lives
 // in locales/zh/*.json. As of 2026-08-26, Home + global chrome + the /steam
@@ -47,9 +47,22 @@ export const LOCALE_PREFIXES = ["", "fi", "de", "zh"];
 // screenshots) — added to TRANSLATED_PATHS above on that basis, same bar
 // used for fi's reviewed pages. Everything else still renders English
 // per-key for zh until it's translated and similarly checked.
+//
+// `ready: false` marks a locale whose routes and switcher slot exist but
+// whose site-chrome catalogs (locales/<code>/*.json) are still empty — every
+// string falls back to English per-key (see i18n.js). The admin CMS flags
+// these so nobody switches one on in the public switcher by accident.
+//
+// This array's order is only the DEFAULT display order of the switcher; the
+// live order is editable in the admin CMS (Settings > Language Switcher) and
+// stored as the `language_order` app_setting, see local-storage/languageSettings.js.
 export const LOCALES = [
-  { code: "en", label: "English" },
-  { code: "fi", label: "Suomi" },
-  { code: "de", label: "Deutsch" },
-  { code: "zh", label: "简体中文" },
+  { code: "en", label: "English", ready: true },
+  { code: "fi", label: "Suomi", ready: true },
+  { code: "zh", label: "简体中文", ready: true },
+  { code: "ja", label: "日本語", ready: false },
+  { code: "de", label: "Deutsch", ready: true },
+  { code: "fr", label: "Français", ready: false },
+  { code: "es", label: "Español", ready: false },
+  { code: "th", label: "ไทย", ready: false },
 ];

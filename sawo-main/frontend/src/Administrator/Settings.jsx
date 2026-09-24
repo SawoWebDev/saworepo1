@@ -4,12 +4,14 @@ import { getGDPRBannerEnabled, setGDPRBannerEnabled as saveGDPRBannerEnabled } f
 import {
   getLanguageSwitcherEnabled, setLanguageSwitcherEnabled as saveLanguageSwitcherEnabled,
   getEnabledLanguages, setEnabledLanguages as saveEnabledLanguages,
+  getLanguageOrder, setLanguageOrder as saveLanguageOrder,
   BUILT_LOCALES,
 } from "../local-storage/languageSettings";
 import { getDashboardTrafficWindow, setDashboardTrafficWindow as saveDashboardTrafficWindow, VALID_WINDOWS } from "../local-storage/dashboardSettings";
 import { getDataSource, setDataSource as saveDataSource } from "../local-storage/dataSource";
 import { getCache, setCache, clearAllCache } from "./adminCache";
 import { getPerms } from "./permissions";
+import LanguageOrderList from "./LanguageOrderList";
 import { PRODUCTS_STORAGE_KEY } from "./Local/useLocalProducts";
 import { LOCAL_ROOMS_STORAGE_KEY } from "./Local/useLocalSaunaRooms";
 
@@ -23,11 +25,6 @@ const DATA_SOURCE_OPTIONS = [
   { value: "supabase", label: "Supabase", description: "Live Supabase rows — the real, always-current data." },
   { value: "neon", label: "Neon (test)", description: "Neon's mirror of Supabase, kept current by a database trigger. For verifying the Neon backup is working, not a resilience feature yet." },
 ];
-
-// Kept in sync by hand with frontend-next/src/translation/routing.js's
-// `localeNames` and frontend/src/i18n/translatedRoutes.js's LOCALES —
-// only cosmetic (label shown per locale row), not a source of truth.
-const LOCALE_LABELS = { en: "English", fi: "Suomi", de: "Deutsch" };
 
 const SETTINGS_CACHE_KEY = "admin:settings";
 
@@ -88,6 +85,7 @@ export default function Settings({ currentUser }) {
   const [gdprSaving, setGdprSaving] = useState(false);
   const [langEnabled, setLangEnabled] = useState(() => cachedSettings ? cachedSettings.langEnabled : null);
   const [languages, setLanguages] = useState(() => cachedSettings ? cachedSettings.languages : BUILT_LOCALES);
+  const [langOrder, setLangOrder] = useState(() => cachedSettings?.langOrder || BUILT_LOCALES);
   const [langSaving, setLangSaving] = useState(false);
   const [notifyEmail, setNotifyEmailState] = useState(() => cachedSettings ? cachedSettings.notifyEmail : "");
   const [notifyEmailInput, setNotifyEmailInput] = useState(() => cachedSettings ? cachedSettings.notifyEmail : "");
@@ -105,20 +103,20 @@ export default function Settings({ currentUser }) {
   useEffect(() => {
     Promise.all([
       getGDPRBannerEnabled(),
-      getLanguageSwitcherEnabled(), getEnabledLanguages(),
+      getLanguageSwitcherEnabled(), getEnabledLanguages(), getLanguageOrder(),
       fetchContactNotifyEmail(),
       getDashboardTrafficWindow(),
       getDataSource(),
     ])
-      .then(([gdpr, langEn, langs, notifyEmailVal, trafficWindowVal, dataSourceVal]) => {
+      .then(([gdpr, langEn, langs, orderVal, notifyEmailVal, trafficWindowVal, dataSourceVal]) => {
         setGdprEnabled(gdpr);
-        setLangEnabled(langEn); setLanguages(langs);
+        setLangEnabled(langEn); setLanguages(langs); setLangOrder(orderVal);
         setNotifyEmailState(notifyEmailVal);
         setNotifyEmailInput(notifyEmailVal);
         setTrafficWindowState(trafficWindowVal);
         setDataSourceState(dataSourceVal);
         setCache(SETTINGS_CACHE_KEY, {
-          gdprEnabled: gdpr, langEnabled: langEn, languages: langs,
+          gdprEnabled: gdpr, langEnabled: langEn, languages: langs, langOrder: orderVal,
           notifyEmail: notifyEmailVal, trafficWindow: trafficWindowVal, dataSource: dataSourceVal,
         });
       })
@@ -167,6 +165,31 @@ export default function Settings({ currentUser }) {
     } catch (err) {
       setError("Failed to toggle language switcher: " + err.message);
       add("Failed to toggle language switcher", "error");
+    } finally {
+      setLangSaving(false);
+    }
+  };
+
+  const handleReorderLanguages = async (nextOrder) => {
+    const prev = langOrder;
+    setLangOrder(nextOrder); // optimistic: the list snaps into place on drop
+    setLangSaving(true);
+    setError(null);
+    try {
+      await saveLanguageOrder(nextOrder, currentUser?.username);
+      await logActivity({
+        action:      "update",
+        entity:      "app_settings",
+        entity_id:   "language_order",
+        entity_name: `Language Order → ${nextOrder.join(", ")}`,
+        username:    currentUser?.username,
+        user_id:     currentUser?.id,
+      });
+      add("Language order updated", "success");
+    } catch (err) {
+      setLangOrder(prev);
+      setError("Failed to update language order: " + err.message);
+      add("Failed to update language order", "error");
     } finally {
       setLangSaving(false);
     }
@@ -330,8 +353,11 @@ export default function Settings({ currentUser }) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="card card-body">
+      {/* CSS columns (not grid): each column fills independently, so a tall card
+          (Language Switcher) doesn't stretch the row and leave a gap beside it;
+          the other cards flow into the shorter column instead. */}
+      <div className="columns-1 lg:columns-2 gap-6">
+      <div className="card card-body break-inside-avoid mb-6">
         <div className="flex items-center justify-between mb-1">
           <h3 className="text-lg font-bold text-[var(--text)] flex items-center gap-2">
             <i className="fas fa-language text-[var(--brand)]"></i>
@@ -353,47 +379,27 @@ export default function Settings({ currentUser }) {
           {langEnabled ? "Visible on every page of the public site." : "Hidden from visitors right now."}
         </p>
 
-        <div className="space-y-3">
-          {BUILT_LOCALES.map((loc) => {
-            const checked = languages.includes(loc);
-            return (
-              <div
-                key={loc}
-                className="flex items-center justify-between pb-3 border-b border-[var(--border-light)] last:border-b-0 last:pb-0"
-              >
-                <div>
-                  <p className="text-sm font-medium text-[var(--text)]">{LOCALE_LABELS[loc] || loc}</p>
-                  <p className="text-xs text-[var(--text-3)] uppercase tracking-wide">{loc}</p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only peer"
-                    checked={checked}
-                    disabled={langSaving || !langEnabled}
-                    onChange={(e) => handleToggleLanguage(loc, e.target.checked)}
-                  />
-                  <div className="w-11 h-6 bg-[var(--border)] peer-checked:bg-[var(--brand)] rounded-full peer transition-colors relative opacity-100 peer-disabled:opacity-50">
-                    <div
-                      className={`absolute top-0.5 left-0.5 bg-[var(--surface)] w-5 h-5 rounded-full shadow transition-transform ${
-                        checked ? "translate-x-5" : ""
-                      }`}
-                    />
-                  </div>
-                </label>
-              </div>
-            );
-          })}
-        </div>
+        <p className="text-xs text-[var(--text-3)] mb-3">
+          Drag (or use the arrows) to set the order visitors see. The language a visitor is
+          currently viewing is left out of their dropdown automatically.
+        </p>
+        <LanguageOrderList
+          order={langOrder}
+          enabledLanguages={languages}
+          disabled={langSaving || !langEnabled}
+          onReorder={handleReorderLanguages}
+          onToggle={handleToggleLanguage}
+        />
 
         <p className="text-xs text-[var(--text-3)] mt-4">
           Only affects the switcher itself. A hidden language's pages still exist, stay indexable,
-          and remain in the sitemap. Adding a brand-new language still requires a build-time change
-          in the site's codebase, so it cannot be added from here.
+          and remain in the sitemap. Languages marked "Not translated yet" have routes but no site
+          copy, so visitors would see English: leave them off until they are translated. Adding a
+          brand-new language still requires a build-time change in the site's codebase.
         </p>
       </div>
 
-      <div className="card card-body">
+      <div className="card card-body break-inside-avoid mb-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
@@ -419,7 +425,7 @@ export default function Settings({ currentUser }) {
         </div>
       </div>
 
-      <div className="card card-body">
+      <div className="card card-body break-inside-avoid mb-6">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-inbox text-[var(--brand)]"></i>
           Contact Form Recipient
@@ -452,7 +458,7 @@ export default function Settings({ currentUser }) {
         <p className="text-xs text-[var(--text-3)] mt-3">Currently: {notifyEmail || "info@sawo.com"}</p>
       </div>
 
-      <div className="card card-body">
+      <div className="card card-body break-inside-avoid mb-6">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-chart-column text-[var(--brand)]"></i>
           Dashboard Traffic Window
@@ -482,7 +488,7 @@ export default function Settings({ currentUser }) {
       </div>
 
       {canChangeDataSource && (
-      <div className="card card-body">
+      <div className="card card-body break-inside-avoid mb-6">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-database text-[var(--brand)]"></i>
           Data Source
@@ -521,7 +527,7 @@ export default function Settings({ currentUser }) {
       </div>
       )}
 
-      <div className="card card-body">
+      <div className="card card-body break-inside-avoid mb-6">
         <h3 className="text-lg font-bold text-[var(--text)] mb-1 flex items-center gap-2">
           <i className="fa-solid fa-broom text-[var(--brand)]"></i>
           Clear Cache
