@@ -10,8 +10,8 @@
   "join": {
     "imgAlt": "SAWO Team beitreten",
     "highlight": "Wir suchen Menschen mit Berufserfahrung in der Saunabranche.",
-    "desc": "SAWO ist ein vertrauenswürdiger Name in der Saunafertigung, der finnisches Fachwissen mit handwerklichem Können in Cebu, Philippinen, vereint. Unser Team ist stolz darauf, hochwertige Saunaöfen, Zubehör und komplette Saunalösungen für den globalen Markt zu fertigen.",
-    "cta": "Möchten Sie in den Tropen arbeiten? Werden Sie Teil eines Branchenführers in der Sauna-Innovation!"
+    "desc": "SAWO ist ein bewährter Name in der Saunafertigung und verbindet finnisches Fachwissen mit handwerklichem Können in Cebu, Philippinen. Unser Team ist stolz darauf, hochwertige Saunaöfen, Zubehör und komplette Saunalösungen für den Weltmarkt zu fertigen.",
+    "cta": "Möchten Sie in den Tropen arbeiten? Dann kommen Sie zu uns und gestalten Sie die Sauna-Innovation mit!"
   },
   "badges": {
     "fullTime": "Vollzeit",
@@ -88,7 +88,7 @@
     "sales": {
       "alt": "Vertrieb & Marketing",
       "title": "Vertrieb & Marketing",
-      "desc": "Nationaler & internationaler Vertrieb, digitales Marketing, Kundenbeziehungen"
+      "desc": "Lokaler & internationaler Vertrieb, digitales Marketing, Kundenbeziehungen"
     },
     "operations": {
       "alt": "Betrieb & Support",

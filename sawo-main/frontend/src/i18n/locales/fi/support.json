@@ -12,10 +12,26 @@
     "resources": {
       "title": "Miten voimme auttaa?",
       "desc": "Tutustu kattaviin tukiresursseihimme yksityiskohtaisista tuoteoppaista interaktiivisiin työkaluihin ja usein kysyttyihin kysymyksiin. Olemme täällä varmistaaksemme täydellisen SAWO-kokemuksen.",
-      "faq": { "title": "Usein kysytyt kysymykset", "desc": "Löydä vastaukset yleisiin sauna- ja tuotekysymyksiin.", "link": "Selaa UKK:ta" },
-      "calculator": { "title": "Saunalaskuri", "desc": "Käytä interaktiivista työkaluamme laskeaksesi täydellisen saunakiukaan koon tilallesi huoneen mittojen perusteella.", "link": "Käytä laskuria" },
-      "manuals": { "title": "Käyttöoppaat", "desc": "Lataa yksityiskohtaiset käyttöoppaat kaikille SAWO-tuotteille, mukaan lukien kiukaat, ohjaimet ja lisävarusteet.", "link": "Lataa oppaat" },
-      "catalogue": { "title": "Tuoteluettelo", "desc": "Selaa täydellistä tuoteluetteloamme, joka sisältää tekniset tiedot kaikista tuotteistamme.", "link": "KATSO LUETTELO" }
+      "faq": {
+        "title": "Usein kysytyt kysymykset",
+        "desc": "Löydä vastaukset yleisiin sauna- ja tuotekysymyksiin.",
+        "link": "Selaa UKK:ta"
+      },
+      "calculator": {
+        "title": "Saunalaskuri",
+        "desc": "Käytä interaktiivista laskuriamme ja selvitä huoneesi mittojen perusteella, minkä kokoinen kiuas tilaan sopii.",
+        "link": "Käytä laskuria"
+      },
+      "manuals": {
+        "title": "Käyttöoppaat",
+        "desc": "Lataa yksityiskohtaiset käyttöoppaat kaikille SAWO-tuotteille, mukaan lukien kiukaat, ohjaimet ja lisävarusteet.",
+        "link": "Lataa oppaat"
+      },
+      "catalogue": {
+        "title": "Tuoteluettelo",
+        "desc": "Selaa täydellistä tuoteluetteloamme, joka sisältää tekniset tiedot kaikista tuotteistamme.",
+        "link": "KATSO LUETTELO"
+      }
     },
     "contact": {
       "title": "Tarvitsetko suoraa tukea?",
@@ -37,8 +53,14 @@
       "title": "Usein kysytyt kysymykset",
       "description": "Vastauksia yleisiin kysymyksiin SAWO:n suomalaisista saunoista, kiukaista, höyrynkehittimistä ja saunan hoidosta, lämmönlähteistä puulajeihin."
     },
-    "hero": { "title": "UKK", "subtitle": "Usein kysytyt kysymykset" },
-    "questionCount": { "one": "kysymys", "other": "kysymystä" },
+    "hero": {
+      "title": "UKK",
+      "subtitle": "Usein kysytyt kysymykset"
+    },
+    "questionCount": {
+      "one": "kysymys",
+      "other": "kysymystä"
+    },
     "sidebar": {
       "imageAlt": "UKK",
       "quickHelpTitle": "Pika-apu",
@@ -56,15 +78,15 @@
         "items": [
           {
             "question": "Mikä on saunan lämmönlähde?",
-            "answer": "Saunan lämmönlähde on kiuas, jota käytetään saunakivien lämmittämiseen joko sähkövastuksilla tai puuta polttamalla. Sähkökiukaat ovat yleisin vaihtoehto erityisesti mukavuutensa, nopean lämpenemisajan ja saunakokemuksen muokattavuuden ansiosta.\n\nRiippuen siitä, kuinka paljon vettä kiville heitetään, lämpötila nousee hetkeksi korkeammaksi ennen kuin se alkaa hitaasti laskea."
+            "answer": "Saunan lämmönlähde on kiuas, joka lämmittää saunakivet joko sähkövastuksilla tai polttamalla puuta. Sähkökiukaat ovat yleisin vaihtoehto erityisesti helppokäyttöisyytensä, nopean lämpenemisensä ja säädettävyytensä ansiosta: saunakokemuksen voi muokata omien mieltymysten mukaiseksi.\n\nMitä enemmän vettä kiville heitetään, sitä kuumemmaksi lämpötila nousee, ennen kuin se alkaa hitaasti laskea."
           },
           {
             "question": "Mikä on paras puulaji saunaan?",
-            "answer": "Parhaita puulajeja saunan rakentamiseen ovat havupuut, kuten läntinen tuija (Western Red Cedar), haapa ja kuusi. Näillä lajeilla on erinomaiset ominaisuudet saunakäyttöön, erityisesti jos ne ovat peräisin arktisilta alueilta, kuten Yhdysvaltojen pohjoisosista, Kanadasta ja Skandinaviasta. Arktiset puulajit eristävät lämpöä hyvin ja kestävät vaihtelevia lämpötiloja ja kosteutta ilman merkittävää turpoamista tai kutistumista. Näistä puulajeista tehdyt saunalauteet pysyvät viileinä ja miellyttävinä istua, vaikka saunan lämpötila nousisi 70–80 asteeseen.\n\nLäntinen tuija (Thuja plicata) on poikkeuksellisen kaunis puulaji, jolla on luonnollinen lämmin punertava sävy sekä tasainen hienosyinen pinta ja silkkinen kiilto. Tuija kestää erittäin hyvin kosteutta, mikä tekee siitä erinomaisen valinnan etenkin ulkosaunoihin. Tuijan voimakas tuoksu toimii luonnollisena karkotteena hyönteisiä ja hometta vastaan, mutta myös parantaa keskittymiskykyä, unen laatua ja auttaa rentoutumaan.\n\nHaapa on havupuu, jolla on valkoisesta kermanvalkoiseen ulkonäkö ja se soveltuu tyylikkääseen ilmeeseen. Haapapuulla on kermanvalkoinen, oksaton pinta, joka muistuttaa abachi-puuta. Tämä puulaji kestää erittäin hyvin kosteutta, bakteereja ja sieni-itiöitä, joten se sopii erinomaisesti kaupallisiin tai julkisiin saunoihin.\n\nSuomalainen kuusi on havupuu, jolla on tiivis, tasainen ja yhtenäinen syyrakenne. Sen ulkonäkö on vaaleankeltainen ja siinä on vain vähän merkintöjä. Kuusi on kestävä ja sietää lämpöä hyvin, ja siinä on pieniä terveitä oksia, minkä ansiosta se on yksi Suomen yleisimmin käytetyistä saunapuulajeista. Kuusen metsäisen luonnollisen tuoksun sanotaan helpottavan rentoutumista ja hengittämistä."
+            "answer": "Parhaita puulajeja saunan rakentamiseen ovat pehmeät puulajit, kuten läntinen tuija (Western Red Cedar), haapa ja kuusi. Niillä on erinomaiset ominaisuudet saunakäyttöön, erityisesti jos ne ovat peräisin pohjoisilta alueilta, kuten Pohjois-Yhdysvalloista, Kanadasta tai Skandinaviasta. Pohjoiset puulajit eristävät lämpöä luonnostaan hyvin ja kestävät lämpötilan ja kosteuden vaihtelua ilman merkittävää turpoamista tai kutistumista. Näistä puulajeista tehdyt lauteet pysyvät viileinä ja miellyttävinä istua, vaikka saunan lämpötila nousisi 70–80 asteeseen.\n\nLäntinen tuija (Thuja plicata) on poikkeuksellisen kaunis puulaji: sen väri on lämmin punertava, syyrakenne tasaisen hienoa ja pinta silkkisen kiiltävä. Tuija kestää kosteutta erittäin hyvin, joten se sopii erinomaisesti etenkin ulkosaunoihin. Tuijan voimakas tuoksu ei vain karkota hyönteisiä ja hometta, vaan sen sanotaan myös parantavan keskittymiskykyä ja unen laatua sekä auttavan kehoa rentoutumaan.\n\nHaapa on pehmeä puulaji, jonka väri vaihtelee valkoisesta kermanvalkoiseen ja joka sopii täydellisesti tyylikkääseen ilmeeseen. Haavan pinta on kermanvalkoinen ja oksaton, abachi-puun kaltainen. Se kestää erittäin hyvin kosteutta, bakteereja ja sieniä, minkä vuoksi se on erinomainen valinta kaupallisiin ja julkisiin saunoihin.\n\nSuomalainen kuusi on havupuu, jonka syyrakenne on tiivis ja tasainen. Se on väriltään vaaleankeltaista ja vähäkuvioista. Kuusi kestää hyvin lämpöä, ja sen pienet terveet oksat tekevät siitä yhden Suomen yleisimmistä saunapuista. Kuusen metsäisen luonnollisen tuoksun sanotaan helpottavan rentoutumista ja hengittämistä."
           },
           {
             "question": "Mikä on suomalainen sauna?",
-            "answer": "Suomalainen sauna on periaatteessa huone, jossa on puiset seinät, katto ja lauteet. Sauna on vuosisatojen ajan ollut rentoutumisen paikka. Saunan sydän on kiuas, jota käytetään kivien lämmittämiseen joko sähköllä tai puuta polttamalla. Se, mikä kiistatta tekee saunasta suomalaisen saunan, on veden heittäminen kauhalla kiuaskiville. Tätä kutsutaan suomeksi \"löylyksi\". Riippuen siitä, kuinka paljon vettä kiville heitetään, lämpötila nousee hetkeksi korkeammaksi ennen kuin se hitaasti viilenee. Lämpötilan vaihteluiden ja säännöllisen saunomisen on tieteellisesti todistettu tuovan useita terveyshyötyjä. Säännöllinen saunominen erityisesti parantaa aivojen ja mielenterveyttä, suojaa sydänongelmilta ja vahvistaa immuunijärjestelmää."
+            "answer": "Suomalainen sauna on periaatteessa huone, jonka seinät, katto ja lauteet ovat puuta. Sauna on ollut vuosisatojen ajan rentoutumisen paikka. Saunan sydän on kiuas, joka lämmittää kivet joko sähköllä tai polttamalla puuta. Suomalaisen saunan tekee kiistatta suomalaiseksi se, että kiville heitetään vettä kiulusta kauhalla. Tätä kutsutaan löylyksi. Mitä enemmän vettä kiville heitetään, sitä kuumemmaksi lämpötila nousee, ennen kuin se hitaasti viilenee. Lämpötilan vaihtelun ja säännöllisen saunomisen on tieteellisesti osoitettu tuovan useita terveyshyötyjä. Säännöllinen saunominen parantaa erityisesti aivojen ja mielen terveyttä, suojaa sydänsairauksilta ja vahvistaa vastustuskykyä."
           }
         ]
       },
@@ -74,7 +96,7 @@
         "items": [
           {
             "question": "Mikä on ihanteellinen paikka saunalle?",
-            "answer": "Ihanteellinen paikka saunalle on kuiva tila, jossa on hyvä ilmanvaihto sekä betoni-, laatta-, keraaminen tai vinyylilattia. Suosittelemme lattiakaivon asentamista helpompaa puhdistusta varten. Hyvä ilmanvaihto varmistaa, että saunomisesta syntyvä lievä kosteus kuivuu tehokkaasti käytön jälkeen. Kun saunaa käytetään, se aiheuttaa hyvin vähäisen lämpötilan nousun ympäröivissä tiloissa. Tämän vuoksi, jos sauna on modulaarinen ja asennettu talon sisälle, kannattaa harkita pienen raon jättämistä saunahuoneen ja talon seinien väliin ilmanvaihdon varmistamiseksi."
+            "answer": "Ihanteellinen paikka saunalle on kuiva tila, jossa on hyvä ilmanvaihto ja betoni-, laatta-, keraaminen tai vinyylilattia. Suosittelemme lattiakaivoa, sillä se helpottaa puhdistamista. Hyvä ilmanvaihto varmistaa, että saunomisesta syntyvä kosteus haihtuu tehokkaasti pois. Kun sauna on käytössä, ympäröivien tilojen lämpötila nousee hieman. Siksi kannattaa harkita pienen raon jättämistä saunahuoneen ja talon seinien väliin, jos sauna on modulaarinen ja asennetaan sisälle: ilma pääsee silloin kiertämään."
           },
           {
             "question": "Miksi saunassa on ylä- ja alalauteet?",
@@ -82,11 +104,11 @@
           },
           {
             "question": "Miten puupaneelit suojataan kosteudelta?",
-            "answer": "Paras tapa suojata puupaneelit kosteudelta on kunnollinen ilmanvaihto ja kuivuminen saunomisen jälkeen. Älä käytä maalia, tiivisteitä tai muita suoja-aineita puupaneeleissa. Puu turpoaa ja kutistuu, jolloin maali ja tiivisteet, jotka jäävät vain puun pinnalle, irtoavat. Parasta on jättää puu käsittelemättömäksi."
+            "answer": "Puupaneelit suojaat kosteudelta parhaiten huolehtimalla hyvästä ilmanvaihdosta ja antamalla saunan kuivua saunomisen jälkeen. Älä käsittele puupaneeleja maalilla, tiivisteillä tai muilla suoja-aineilla. Puu elää: se turpoaa ja kutistuu, jolloin pelkästään pinnalla olevat maali ja tiivisteet irtoavat. Parasta on jättää puu käsittelemättömäksi."
           },
           {
             "question": "Mitä vaatimuksia saunan lattialle asetetaan?",
-            "answer": "Saunan lattian tulee olla vedenpitävä sekä helposti pestävä ja huollettava. Esimerkiksi laatta-, betoni- tai kestävät vinyylilattiat ovat hyviä vaihtoehtoja, koska ne ovat pestäviä eivätkä imeydy vettä."
+            "answer": "Saunan lattian on oltava vedenpitävä, jotta se on helppo pestä ja pitää kunnossa. Hyviä vaihtoehtoja ovat esimerkiksi laatta-, betoni- ja kestävät vinyylilattiat, sillä ne ovat pestäviä eivätkä imeydy vedestä."
           },
           {
             "question": "Tarvitaanko saunassa lattiakaivoa?",
@@ -118,7 +140,7 @@
           },
           {
             "question": "Miksi saunakivet ovat tärkeitä?",
-            "answer": "Kiukaan saunakivien tärkein tehtävä on varastoida riittävästi energiaa, jotta kiville heitetty vesi höyrystyy tehokkaasti ja nostaa saunan lämpötilaa. Kivet tulee vaihtaa vähintään kerran vuodessa tai 500 käyttötunnin välein, kumpi tulee ensin. Kaikki murentuneet kivet tulee poistaa kiukaasta ja korvata uusilla käyttöoppaan ohjeiden mukaisesti.\n\nÄlä koskaan käytä kiuasta ilman kiviä, sillä se voi aiheuttaa tulipalon vaaran. Käytä ainoastaan valmistajan suosittelemia SAWO-kiviä. Sopimattomien kivien käyttö voi vaurioittaa lämmitysvastuksia ja mitätöidä takuun. Älä koskaan käytä keraamisia kiviä tai muita keinotekoisia kiviä!"
+            "answer": "Kiukaan kivien tärkein tehtävä on varastoida riittävästi energiaa, jotta niille heitetty vesi höyrystyy tehokkaasti ja saunan lämpötila nousee. Kivet on vaihdettava vähintään kerran vuodessa tai 500 käyttötunnin välein sen mukaan, kumpi täyttyy ensin. Kaikki murut on poistettava kiukaasta ja kivet korvattava uusilla kiukaan käyttöoppaan ohjeiden mukaisesti.\n\nÄlä koskaan käytä kiuasta ilman kiviä, sillä siitä voi seurata palovaara. Käytä vain valmistajan suosittelemia SAWO-kiviä. Sopimattomat kivet voivat vaurioittaa lämmitysvastuksia, ja takuu raukeaa. Älä koskaan käytä keraamisia tai muita keinotekoisia kiviä!"
           },
           {
             "question": "Millaista vettä kiuaskiville saa heittää?",
@@ -126,7 +148,7 @@
           },
           {
             "question": "Miten sauna huolletaan?",
-            "answer": "SAUNAN HUOLTO JOKAISEN SAUNAKERRAN JÄLKEEN\nKäytä lauteliinoja saunomisen aikana, jotta lauteet pysyvät siisteinä pidempään.\nJätä kiuas päälle 30 minuutiksi saunomisen jälkeen, jotta sauna kuivuu nopeammin kosteudesta. Avaa lopuksi ilmanvaihtoaukot ja saunan ovi, jotta sauna pääsee tuulettumaan kunnolla.\nTyhjennä kiulu vedestä ja nosta kauha lauteelle. Tämä auttaa estämään puisten lisävarusteiden halkeilua ja pitää saunan raikkaana.\n\nSAUNAN HUOLTO VÄHINTÄÄN 1–4 KERTAA VUODESSA:\nTarkista kiukaan saunakivet. Puhdista mahdollinen kivipöly ja murut kiukaan pohjalta. Poista kivet ja vaihda rikkoutuneet uusiin. Lataa lopuksi kivet takaisin kiukaaseen. Kivien säännöllinen tarkistaminen pidentää lämmitysvastusten käyttöikää ja säästää energiaa.\nTarkista lämmitysvastukset. Jos niissä on halkeamia tai ne ovat taipuneet, vaihda kaikki vastukset. Älä vaihda vain yhtä.\nPese lauteiden, katon, lattian ja seinien pinnat lämpimällä vedellä, pehmeällä harjalla ja yleispuhdistusaineella. Älä kuitenkaan käytä ammoniakkia tai klooria sisältäviä puhdistusaineita. Huuhtele pinnat kylmällä vedellä ja anna saunan tuulettua hyvin. Tarvittaessa voit käsitellä lauteet saunakäyttöön sopivalla puuöljyllä, kuten parafiiniöljyllä.\nJos pesu ei puhdista lauteita riittävästi, hio lauteet hiekkapaperilla. Suojaa lauteet saunakäyttöön sopivalla puuöljyllä. Noudata puuöljyn käyttöohjeita äläkä käytä saunaa ennen kuin öljy on kunnolla kuivunut.\nKäytä tarvittaessa mietoa saippuavettä puhdistaaksesi kalkkitahrat tai muun lian kiuaskuoresta. Voit käyttää myös SAWO-kalkinpoistoainetta. Kuivaa pesun jälkeen.\nPuhdista lasipinnat ikkunanpesuaineella tai astianpesuaineella. Huuhtele tarvittaessa ja kuivaa lastalla tai mikrokuituliinalla.\nTarkista ruuvit (ovi, lauteet, kaiteet) ja kiristä tarvittaessa.\nPuhdista lattiakaivo."
+            "answer": "SAUNAN HUOLTO JOKAISEN SAUNAKERRAN JÄLKEEN\nKäytä saunomisen aikana lauteliinoja, niin lauteet pysyvät siisteinä pidempään.\nJätä kiuas päälle 30 minuutiksi saunomisen jälkeen, jotta sauna kuivuu nopeammin. Avaa lopuksi ilmanvaihtoaukot ja saunan ovi, jotta sauna tuulettuu kunnolla.\nTyhjennä kiulu vedestä ja nosta kauha lauteelle. Se ehkäisee puisten tarvikkeiden halkeilua ja pitää saunan raikkaana.\n\nSAUNAN HUOLTO VÄHINTÄÄN 1–4 KERTAA VUODESSA:\nTarkista kiukaan kivet. Puhdista mahdollinen kivipöly ja murut kiukaan pohjalta. Ota kivet pois ja vaihda murentuneet uusiin. Aseta lopuksi kivet takaisin kiukaaseen. Kivien säännöllinen tarkistaminen pidentää vastusten käyttöikää ja säästää energiaa.\nTarkista lämmitysvastukset. Jos niissä on halkeamia tai ne ovat taipuneet, vaihda kaikki vastukset – älä vain yhtä.\nPese lauteiden, katon, lattian ja seinien pinnat lämpimällä vedellä, pehmeällä harjalla ja yleispuhdistusaineella. Älä kuitenkaan käytä ammoniakkia tai klooria sisältäviä puhdistusaineita. Huuhtele pinnat kylmällä vedellä ja anna saunan tuulettua hyvin. Tarvittaessa voit käsitellä lauteet saunakäyttöön sopivalla puuöljyllä, kuten parafiiniöljyllä.\nJos lauteet eivät puhdistu pesemällä, hio ne hiekkapaperilla. Suojaa lauteet saunakäyttöön sopivalla puuöljyllä. Noudata öljyn käyttöohjeita äläkä käytä saunaa ennen kuin öljy on kunnolla kuivunut.\nPoista kalkkitahrat ja muu lika kiukaan kuoresta tarvittaessa miedolla saippuavedellä. Voit käyttää myös SAWO-kalkinpoistoainetta. Kuivaa pesun jälkeen.\nPuhdista lasipinnat ikkunanpesuaineella tai astianpesuaineella. Huuhtele tarvittaessa ja kuivaa lastalla tai mikrokuituliinalla.\nTarkista ruuvit (ovi, lauteet, kaiteet) ja kiristä tarvittaessa.\nPuhdista lattiakaivo."
           },
           {
             "question": "Kuinka usein saunaa tulisi käyttää?",
@@ -134,7 +156,7 @@
           },
           {
             "question": "Kuinka kauan saunassa kannattaa olla?",
-            "answer": "Voit olla saunassa niin kauan kuin sinusta tuntuu mukavalta. Poistu saunasta viilentymään heti, jos alat tuntea olosi epämukavaksi."
+            "answer": "Saunassa voi olla niin kauan kuin siellä on hyvä olla. Jos olo alkaa tuntua epämukavalta, poistu heti saunasta viilentymään."
           },
           {
             "question": "Milloin saunaa ei tulisi käyttää?",
@@ -151,11 +173,11 @@
   "calculator": {
     "meta": {
       "title": "Saunalaskuri",
-      "description": "Löydä oikea SAWO-kiuas saunaasi laskurimme avulla, joka sovittaa huoneen koon ja tilavuuden ihanteelliseen kiukaan tehoon."
+      "description": "Löydä saunaasi sopiva SAWO-kiuas laskurimme avulla: se määrittää huoneen koon ja tilavuuden perusteella sopivan kiukaan tehon."
     },
     "intro": {
       "title": "Saunan tilavuuslaskuri",
-      "desc": "Saunasi koko vaikuttaa suoraan tarvittavaan kiukaan tehoon. Käytä tätä tilavuuslaskuria mitataksesi saunahuoneesi mitat ja saadaksesi tarkan kiuassuosituksen kilowatteina parhaan suorituskyvyn saavuttamiseksi."
+      "desc": "Saunasi koko vaikuttaa suoraan siihen, kuinka tehokas kiuas tarvitaan. Syötä tähän tilavuuslaskuriin saunahuoneesi mitat, niin saat tarkan kiuassuosituksen kilowatteina ja sauna toimii parhaalla mahdollisella tavalla."
     },
     "imageAlt": "SAWO-saunahuoneen sisätila",
     "card": {
@@ -163,13 +185,34 @@
       "clear": "Tyhjennä"
     },
     "fields": {
-      "width": { "label": "Leveys", "subLabel": "(sivulta sivulle)" },
-      "height": { "label": "Korkeus", "subLabel": "(lattiasta kattoon)" },
-      "depth": { "label": "Syvyys", "subLabel": "(ovelta takaseinään)" },
-      "uninsulated": { "label": "Eristämättömät pinnat", "subLabel": "(Jätä 0, jos täysin puuverhoiltu)", "hint": "lasi-, laatta-, kivi- tai betoniseinät, mukaan lukien lasiseinät, ikkunat ja ovet" },
+      "width": {
+        "label": "Leveys",
+        "subLabel": "(sivulta sivulle)"
+      },
+      "height": {
+        "label": "Korkeus",
+        "subLabel": "(lattiasta kattoon)"
+      },
+      "depth": {
+        "label": "Syvyys",
+        "subLabel": "(ovelta takaseinään)"
+      },
+      "uninsulated": {
+        "label": "Eristämättömät pinnat",
+        "subLabel": "(Jätä 0, jos täysin puuverhoiltu)",
+        "hint": "lasi-, laatta-, kivi- tai betoniseinät, mukaan lukien lasiseinät, ikkunat ja ovet"
+      },
       "hints": {
-        "metric": { "w": "tyypillinen sauna: 1,8–2,4 m", "h": "vakiokorkeus: 2,1 m", "d": "tyypillinen sauna: 1,8–2,4 m" },
-        "imperial": { "w": "tyypillinen sauna: 6–8 ft", "h": "vakiokorkeus: 7 ft", "d": "tyypillinen sauna: 6–8 ft" }
+        "metric": {
+          "w": "tyypillinen sauna: 1,8–2,4 m",
+          "h": "vakiokorkeus: 2,1 m",
+          "d": "tyypillinen sauna: 1,8–2,4 m"
+        },
+        "imperial": {
+          "w": "tyypillinen sauna: 6–8 ft",
+          "h": "vakiokorkeus: 7 ft",
+          "d": "tyypillinen sauna: 6–8 ft"
+        }
       }
     },
     "result": {
@@ -193,11 +236,22 @@
       "title": "Käyttöoppaat",
       "description": "Lataa SAWO-käyttöoppaat: asennusohjeet ja käyttöohjeet saunakiukaillemme, ohjaimille ja höyrynkehittimille."
     },
-    "hero": { "title": "KÄYTTÖOPPAAT", "subtitle": "Täydellinen oppaasi asennukseen, käyttöön ja huoltoon" },
+    "hero": {
+      "title": "KÄYTTÖOPPAAT",
+      "subtitle": "Täydellinen oppaasi asennukseen, käyttöön ja huoltoon"
+    },
     "sectionTitle": "SAWO-TUOTEVALIKOIMA",
-    "search": { "placeholder": "Hae tuotteita…", "clear": "Tyhjennä" },
-    "empty": { "noProducts": "Ei tuotteita saatavilla." },
-    "noResults": { "prefix": "Ei hakua vastaavia tuotteita", "clearSearch": "Tyhjennä haku" },
+    "search": {
+      "placeholder": "Hae tuotteita…",
+      "clear": "Tyhjennä"
+    },
+    "empty": {
+      "noProducts": "Ei tuotteita saatavilla."
+    },
+    "noResults": {
+      "prefix": "Ei hakua vastaavia tuotteita",
+      "clearSearch": "Tyhjennä haku"
+    },
     "viewManual": "Katso opas",
     "modal": {
       "eyebrow": "Käyttöoppaat",
@@ -237,12 +291,12 @@
   "catalogue": {
     "meta": {
       "title": "Tuoteluettelo",
-      "description": "Selaa koko SAWO-tuoteluetteloa: saunakiukaat, saunahuoneet ja lisävarusteet yhdessä haettavassa listassa."
+      "description": "Selaa koko SAWO-tuoteluetteloa: kiukaat, saunahuoneet ja lisävarusteet yhdessä haettavassa luettelossa."
     },
     "header": {
       "eyebrow": "Koko valikoima",
       "title": "Kaikki tuotteet",
-      "desc": "Selaa koko valikoimaamme saunakiukaita, -huoneita ja lisävarusteita, jotka on suunniteltu parantamaan hyvinvointikokemustasi.",
+      "desc": "Tutustu kiuas-, saunahuone- ja lisävarustevalikoimaamme, jonka avulla saunomisesta tulee entistä nautinnollisempaa.",
       "pdfBtn": "TUOTELUETTELO"
     },
     "empty": "Ei tuotteita saatavilla.",
