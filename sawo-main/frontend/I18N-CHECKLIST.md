@@ -2276,3 +2276,28 @@ A `CI=true` build + prerender passed afterwards.
   long strings of `gdpr`/`sitemap`; still no native review of any de/fi path.
 - **Source issue (not fixed):** `sauna.controls.items.innova` and `.saunova`
   English descriptions look swapped (already noted in the zh pass).
+
+## fr / es / th push (2026-09-24)
+
+`fr`, `es` and `th` are now complete on both tracks; `npm run i18n:manifest`
+shows every page and shared namespace `translated` for all 8 locales, and
+`LOCALES` in `translatedRoutes.js` has them `ready: true` (the CMS "Not
+translated yet" badge is gone). Machine translation, **not native-reviewed**;
+no `/fr`, `/es`, `/th` path is in `TRANSLATED_PATHS` and none is switched on in
+the language switcher until someone enables it in the CMS.
+
+- **Site chrome:** all 20 namespaces (2,072 strings per language) written in one
+  pass per language through `extract`-shaped handoff files and `inject.js`
+  (placeholders/tags validated). The 184-country list in `contact.json` comes
+  from ICU region names (`Intl.DisplayNames`), not hand translation; FAQ section
+  `id` anchors (`finnish-sauna`, ...) are deliberately left as-is.
+- **Product content:** `product_translations` has 382 rows each for `fr`, `es`
+  and `th` (the 382 visible products; hidden `krios-floor-ns` is not included,
+  same as `ja`). Built with the generic dictionary engine
+  `fill-apply.mjs <locale>` + `fill-<locale>-data-1-phrases.mjs` (1,069 whole
+  strings / HTML text nodes / `<th>` cells per language; see
+  `PRODUCT-TRANSLATION-CONVENTIONS.md`, "French / Spanish / Thai notes").
+- **Open:** native-speaker review of the fr/es/th glossaries below and of the
+  legal text (`privacy`, `gdpr`) before any path goes live; `common.json`
+  plural keys are `one`/`other` only (fr/es also have a CLDR `many` category
+  that only applies to 1,000,000+, so it is intentionally not provided).

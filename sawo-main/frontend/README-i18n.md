@@ -506,6 +506,14 @@ editing any locale:
     Saunaräume (sauna room), Eimer, Kelle, Steuerung, Zubehör, Ofenschutzgitter, Einbaukragen,
     Schützeinheit, Fühler (sensor); formal "Sie".
   - **fi:** kiuas/kiukaat, höyrynkehitin, saunahuone, kiulu, kauha; consistent formal-friendly tone.
+  - **fr:** poêle de sauna (heater), cabine de sauna (sauna room), générateur de vapeur, hammam
+    (steam room), commande(s) (control), seau, louche, grille de protection (heater guard), collerette
+    d'intégration, entretoise à pierres (stone spacer), sonde (sensor); "vous".
+  - **es:** estufa de sauna (heater), cabina de sauna, generador de vapor, baño de vapor (steam room),
+    control(es), cubo, cucharón, protector de estufa (heater guard), marco de integración, separador de
+    piedras, sensor; "usted".
+  - **th:** ฮีตเตอร์ซาวน่า (heater), ห้องซาวน่า, เครื่องกำเนิดไอน้ำ, ห้องอบไอน้ำ (steam room), ชุดควบคุม,
+    ถังน้ำ (pail), กระบวยตักน้ำ (ladle), ตะแกรงป้องกันฮีตเตอร์, กรอบติดตั้งฮีตเตอร์, ตัวคั่นหิน, เซนเซอร์.
   - **zh (Simplified):** 桑拿加热器 (heater; the catalog uses 加热器, never mix in 桑拿炉), 桑拿房,
     蒸汽发生器, 水桶, 勺子.
   - Brand/line/model names stay English (see PRODUCT-TRANSLATION-CONVENTIONS.md).

@@ -500,3 +500,38 @@ Position words on a brand: Corner コーナー, Round ラウンド, Wall ウォ�
 Table headers: Specification 仕様 / Detail 詳細, Heater Model ヒーター型番, Control 制御方式, Minimum Safety Distances 最小安全距離.
 Remaining English inside description tables (`Separate`, `Built-in`, the Innova/Saunova technical-detail labels) is
 translated at render time by `src/utils/specLabel.js` (`tableCells` / `specLabels` in `locales/<lang>/product.json`).
+
+## French / Spanish / Thai notes (fr, es, th — 2026-09-24 push)
+
+Everything above applies unless stated here. All three use one locale-parameterised dictionary engine,
+`src/Administrator/Local/scripts/fill-apply.mjs <locale>` (a copy of `fill-ja-apply.mjs` that takes the locale as its
+first argument and reads `fill-<locale>-data-*.mjs`), applied to freshly extracted packets:
+
+```
+node product-i18n.js pending fr > slugs.txt
+tail -n +2 slugs.txt | node product-i18n.js extract-many fr -
+FILL_SRC=<dir with pristine copies of the packets> node fill-apply.mjs fr --all   # prints strings still missing; done at 0
+tail -n +2 slugs.txt | node product-i18n.js apply-many fr -
+```
+
+Register the locale's `MATERIAL_WORD_DICTIONARY` entry in `product-i18n.js` and `MATERIAL_WORDS` in `fill-apply.mjs`
+(keep the two in sync). Material words: fr Cèdre/Tremble/Pruche/Aulne/Pin/Épicéa/Bouleau/Noir/Blanc/Gris/Argent/
+Naturel/Aluminium/Métal noir; es Cedro/Álamo/Tsuga/Aliso/Pino/Abeto/Abedul/Negro/Blanco/Gris/Plata/Natural/Aluminio/
+Metal negro; th ซีดาร์/แอสเพน/เฮมล็อก/แอลเดอร์/สน/สปรูซ/เบิร์ช/สีดำ/สีขาว/สีเทา/สีเงิน/สีธรรมชาติ/อะลูมิเนียม/โลหะสีดำ.
+
+- **Names are translated whole**, not token by token (French/Spanish put the descriptive word after the noun, so the
+  `nameTokens` composition used for de/ja cannot work). Position words after a brand: Corner Angle/Esquina/มุม,
+  Round Rond/Redondo/ทรงกลม, Wall Mural/Pared/ติดผนัง, Floor Sol/Suelo/ตั้งพื้น, Middle Centre/Centro/กลาง, Black
+  Noir/Negro/สีดำ, Red Rouge/Rojo/สีแดง, Fibercoated "Revêtu fibre"/"Revestido de fibra"/เคลือบไฟเบอร์. Brand and
+  line names (Cumulus, Nordex, Aries, Tower, Combi, Dragon, Signature, Kanto, Loisto, Siro, Usva, Puro, Halu, Lovi,
+  Steamshot, Cozy Tank, Kivistone, Innova, Saunova) and model codes stay English. `Traditional`, `Essential`,
+  `Signature`, `Dragon` collection names stay English.
+- **The article "The" before a bold product name** is a dictionary entry (`Le`/`La`/`El`/"" for th) with `bySlug`
+  overrides for non-heaters (button, stand, controls, steam door, Venturi pipe) where the gender differs; those
+  overrides also lowercase the bold name so it reads naturally after the article. Th drops the article.
+- **Numbers:** decimal comma and a space before units in fr/es prose (`0,80 m`, `4,5 – 9,0 kW`, `4 L`); th keeps the
+  decimal point and uses `มม.`/`กก.`/`ลิตร`/`ม.`. Spec-table **data** cells are never touched. `m3` in table headers
+  is normalised to `m³`.
+- **Source slips translated as intended** (same rule as de): `n18,0kW` → 18,0 kW; `137mm3` kept as written.
+- **Site chrome uses the same terms** (README-i18n.md "Writing standard"); `steam` = hammam / baño de vapor /
+  ห้องอบไอน้ำ for the room, vapeur / vapor / ไอน้ำ for the product group.
