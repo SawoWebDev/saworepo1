@@ -9,7 +9,7 @@
       "subtitle": "Koe puhtaan höyryterapian ylellisyys"
     },
     "intro": {
-      "text": "SAWOn höyrysaunajärjestelmät tuovat kostean lämmön terapeuttisen voiman mihin tahansa tilaan – pienistä kotihöyrysuihkuista suuriin kaupallisiin kylpylöihin. Kattava höyryvalikoimamme kattaa kaiken tarvittavan: ruostumattomasta teräksestä valmistetut höyrynkehittimet, jotka on suunniteltu vuosien luotettavaan käyttöön, intuitiiviset digitaaliset ohjaimet tarkkaan lämpötilan ja kosteuden säätöön sekä kattavan lisävarustevalikoiman asennuksen viimeistelyyn."
+      "text": "SAWOn höyrysaunajärjestelmät tuovat kostean lämmön terapeuttisen voiman mihin tahansa tilaan – pienistä kotihöyrysuihkuista suuriin kaupallisiin kylpylöihin. Höyryvalikoimamme kattaa kaiken tarvittavan: ruostumattomasta teräksestä valmistetut höyrynkehittimet, jotka on suunniteltu vuosien luotettavaan käyttöön, intuitiiviset digitaaliset ohjaimet tarkkaan lämpötilan ja kosteuden säätöön sekä kattavat lisävarusteet asennuksen viimeistelyyn."
     },
     "generatorsSection": {
       "title": "Höyrynkehittimet",
@@ -22,15 +22,15 @@
     "controlsSection": {
       "title": "Höyryohjaimet",
       "viewAll": "Katso kaikki ohjaimet",
-      "desc": "Yhdistä mikä tahansa SAWOn höyrynkehitin omaan ohjauspaneeliin, joka antaa tarkan hallinnan lämpötilaan, höyryn määrään ja istunnon kestoon. Yksinkertaisesta Steam STE -valitsimesta kosketusnäytölliseen Steam Stainless Touch -ohjaimeen – jokainen ohjain on suunniteltu yksinkertaiseen ja luotettavaan käyttöön.",
+      "desc": "Yhdistä mikä tahansa SAWOn höyrynkehitin sopivaan ohjauspaneeliin ja säädä lämpötilaa, höyryn määrää ja kylvyn kestoa tarkasti. Yksinkertaisesta Steam STE -valitsimesta kosketusnäytölliseen Steam Stainless Touch -ohjaimeen – jokainen ohjain on suunniteltu helppoon ja luotettavaan käyttöön.",
       "loading": "Ladataan ohjaimia...",
       "empty": "Höyryohjaimia ei ole vielä saatavilla.",
-      "fallbackDesc": "Tarkka höyryn ohjaus yksilöllistä saunakokemusta varten."
+      "fallbackDesc": "Tarkka höyrynhallinta juuri sinun kylpyhetkeesi."
     },
     "accessoriesSection": {
       "title": "Höyrylisävarusteet",
       "viewAll": "Katso kaikki lisävarusteet",
-      "desc": "Viimeistele höyryhuoneesi SAWOn lisävarustevalikoimalla – höyryovista ja höyrypäistä aromipumppuihin ja asennustarvikkeisiin – jokainen niistä on suunniteltu toimimaan saumattomasti kehittimiemme ja ohjaimiemme kanssa täysin viimeistellyn, ammattimaisen asennuksen aikaansaamiseksi.",
+      "desc": "Viimeistele höyryhuoneesi SAWOn lisävarustevalikoimalla – höyryovista ja höyrypäistä aromipumppuihin ja asennustarvikkeisiin. Jokainen tuote toimii saumattomasti kehittimiemme ja ohjaimiemme kanssa, joten asennuksesta tulee täydellinen ja ammattimainen.",
       "loading": "Ladataan lisävarusteita...",
       "empty": "Höyrylisävarusteita ei ole vielä saatavilla.",
       "fallbackDesc": "SAWO-höyrylisävaruste täydelliseen asennukseen."
@@ -43,7 +43,7 @@
   "generators": {
     "meta": {
       "title": "Höyrynkehittimet",
-      "description": "SAWOn höyrynkehittimet tarjoavat räätälöidyn höyryn ylellisyyttä edistyneistä kehittimistä mukautetuin asetuksin poikkeuksellisen kylpylämäisen kokemuksen saavuttamiseksi."
+      "description": "SAWOn höyrynkehittimet tuottavat juuri sinulle säädetyn höyryn: edistynyt tekniikka ja mukautettavat asetukset takaavat kylpylätasoisen kokemuksen."
     },
     "hero": {
       "title": "HÖYRYNKEHITTIMET"
@@ -72,7 +72,7 @@
     },
     "intro": {
       "heading": "Esittelyssä höyryohjaimemme",
-      "desc": "Koe tarkat höyryasetukset ja vaivaton käyttö Saunova- ja Innova-sarjan ohjaimilla yksilöllistä saunakokemusta varten."
+      "desc": "Koe tarkat höyryasetukset ja vaivaton käyttö Saunova- ja Innova-sarjoilla – saunakokemus juuri sinun mieltymystesi mukaan."
     },
     "loading": "Ladataan ohjaimia...",
     "empty": "Höyryohjaimia ei ole vielä saatavilla.",
@@ -88,7 +88,7 @@
   "accessories": {
     "meta": {
       "title": "Höyrylisävarusteet",
-      "description": "Premium-tason SAWO-höyrylisävarusteet, jotka on suunniteltu parantamaan toimivuutta ja mukavuutta tasaisen erinomaista höyrysaunakokemusta varten."
+      "description": "Premium-tason SAWO-höyrylisävarusteet, jotka parantavat toimivuutta ja mukavuutta ja tekevät höyrysaunakokemuksesta joka kerta erinomaisen."
     },
     "hero": {
       "title": "HÖYRYLISÄVARUSTEET",
@@ -96,7 +96,7 @@
     },
     "intro": {
       "heading": "Esittelyssä höyrylisävarusteemme",
-      "desc": "Paranna saunaasi premium-tason höyrylisävarusteillamme, jotka on suunniteltu optimoimaan mukavuutta, lisäämään toimivuutta ja kohottamaan rentoutumiskokemustasi."
+      "desc": "Paranna saunaasi premium-tason höyrylisävarusteillamme: ne lisäävät mukavuutta ja toimivuutta ja nostavat rentoutumiskokemuksesi uudelle tasolle."
     },
     "loading": "Ladataan lisävarusteita...",
     "empty": "Höyrylisävarusteita ei ole vielä saatavilla.",
