@@ -81,11 +81,11 @@
   "heatersCatalog": {
     "meta": {
       "title": "Saunaöfen",
-      "description": "Entdecken Sie den vollständigen SAWO Ofenkatalog: Tower-, Wandmontiert-, Stone-, Boden-, Combi- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
+      "description": "Entdecken Sie den vollständigen SAWO Ofenkatalog: Tower-, Wand-, Stone-, Boden-, Combi- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
     },
     "hero": {
       "title": "Saunaöfen",
-      "description": "Entdecken Sie unser komplettes Sortiment hochwertiger Saunaöfen für jede Saunagröße und jeden Stil. Durchstöbern Sie unsere sorgfältig zusammengestellte Tower-, Wandmontiert-, Stone-, Boden-, Combi- und Dragonfire-Serie."
+      "description": "Entdecken Sie unser komplettes Sortiment hochwertiger Saunaöfen für jede Saunagröße und jeden Stil. Stöbern Sie in unseren sorgfältig zusammengestellten Serien Tower, Wand, Stone, Boden, Combi und Dragonfire."
     },
     "loading": "Öfen werden geladen...",
     "sidebar": {
@@ -102,7 +102,7 @@
     },
     "cta": {
       "title": "Brauchen Sie Hilfe bei der Wahl des richtigen Ofens?",
-      "desc": "Unser Team hilft Ihnen, Leistung, Größe und Stil auf Ihre Sauna abzustimmen, oder Sie durchstöbern alle Spezifikationen in unserem Produktkatalog.",
+      "desc": "Unser Team hilft Ihnen, Leistung, Größe und Stil passend zu Ihrer Sauna zu wählen – oder Sie sehen sich alle technischen Daten in unserem Produktkatalog an.",
       "contactBtn": "KONTAKTIEREN SIE UNS",
       "downloadBtn": "KATALOG HERUNTERLADEN"
     }
