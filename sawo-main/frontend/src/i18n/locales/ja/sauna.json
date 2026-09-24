@@ -765,7 +765,8 @@
       "standard": "スタンダードサウナルーム",
       "glassfront": "ガラスフロントサウナルーム",
       "infrared": "赤外線サウナ",
-      "compact": "コンパクトサウナルーム"
+      "compact": "コンパクトサウナルーム",
+      "infraredSingle": "赤外線サウナ"
     },
     "roomDescriptions": {
       "standard": "SAWOクラシックサウナルームは、高品質な北欧産の木材と実用的なベンチレイアウトで、時代を超えるサウナ体験を提供します。",
@@ -800,6 +801,24 @@
         "small": "スモール",
         "medium": "ミディアム",
         "large": "ラージ"
+      },
+      "capacityValue_one": "{{range}}人",
+      "capacityValue_other": "{{range}}人",
+      "doorOptions": {
+        "right": "右側",
+        "left": "左側",
+        "middle": "中央",
+        "middleDouble": "中央(ダブル)",
+        "rightL": "右側(L字型)",
+        "leftL": "左側(L字型)",
+        "middleRightL": "中央右(L字型)",
+        "middleLeftL": "中央左(L字型)"
+      },
+      "woodTypes": {
+        "cedar": "シダー",
+        "aspen": "アスペン",
+        "pinaceae": "マツ科",
+        "hemlock": "ヘムロック"
       }
     },
     "woodMaterials": {

@@ -765,7 +765,8 @@
       "standard": "标准桑拿房",
       "glassfront": "玻璃前脸桑拿房",
       "infrared": "红外线桑拿房",
-      "compact": "紧凑型桑拿房"
+      "compact": "紧凑型桑拿房",
+      "infraredSingle": "红外线桑拿房"
     },
     "roomDescriptions": {
       "standard": "SAWO经典桑拿房采用优质北欧木材与实用的长椅布局，带来历久弥新的桑拿体验。",
@@ -800,6 +801,24 @@
         "small": "小型",
         "medium": "中型",
         "large": "大型"
+      },
+      "capacityValue_one": "{{range}} 人",
+      "capacityValue_other": "{{range}} 人",
+      "doorOptions": {
+        "right": "右侧",
+        "left": "左侧",
+        "middle": "中间",
+        "middleDouble": "中间(双排)",
+        "rightL": "右侧(L型)",
+        "leftL": "左侧(L型)",
+        "middleRightL": "中间偏右(L型)",
+        "middleLeftL": "中间偏左(L型)"
+      },
+      "woodTypes": {
+        "cedar": "雪松",
+        "aspen": "白杨木",
+        "pinaceae": "松科木材",
+        "hemlock": "铁杉"
       }
     },
     "woodMaterials": {

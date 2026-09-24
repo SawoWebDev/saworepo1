@@ -494,6 +494,8 @@ export const VARIANT_COLOR_DOT = {
 };
 
 function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant, hasVideo, showVideo, onSelectVideo }) {
+  const t = useLocaleT("product");
+  const tc = useLocaleT("common");
   const codes = variants.map(v => v.code).filter(Boolean);
   const colors = variants.map(v => v.color).filter(Boolean);
   const capacityRow = (product.spec_table?.rows || []).find(row =>
@@ -539,7 +541,7 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
           {hasVideo && (
             <button
               onClick={onSelectVideo}
-              title="Watch video"
+              title={tc("accessoryCard.watchVideo")}
               style={{
                 width: 26, height: 26, borderRadius: "50%", padding: 0, cursor: "pointer",
                 background: "#2c1a0e", display: "flex", alignItems: "center", justifyContent: "center",
@@ -555,13 +557,13 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
         </div>
       )}
       {codes.length > 0 && (
-        <div style={lineStyle}><span style={labelStyle}>Code</span><span style={valueStyle}>{codes.join(" | ")}</span></div>
+        <div style={lineStyle}><span style={labelStyle}>{t("specLabels.code")}</span><span style={valueStyle}>{codes.join(" | ")}</span></div>
       )}
       {capacity && (
-        <div style={lineStyle}><span style={labelStyle}>Capacity</span><span style={valueStyle}>{capacity}</span></div>
+        <div style={lineStyle}><span style={labelStyle}>{t("specLabels.capacity")}</span><span style={valueStyle}>{capacity}</span></div>
       )}
       {colors.length > 1 && (
-        <div style={lineStyle}><span style={labelStyle}>Option</span><span style={valueStyle}>{colors.join(" | ")}</span></div>
+        <div style={lineStyle}><span style={labelStyle}>{tc("accessoryCard.option")}</span><span style={valueStyle}>{colors.join(" | ")}</span></div>
       )}
     </div>
   );

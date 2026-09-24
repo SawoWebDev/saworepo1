@@ -765,7 +765,8 @@
       "standard": "Standard Sauna Room",
       "glassfront": "Glass Front Sauna Room",
       "infrared": "Infrared Saunas",
-      "compact": "Compact Sauna Room"
+      "compact": "Compact Sauna Room",
+      "infraredSingle": "Infrared Sauna"
     },
     "roomDescriptions": {
       "standard": "SAWO Classic Sauna Rooms offer a timeless sauna experience with high-quality Nordic wood and practical bench layouts.",
@@ -800,6 +801,24 @@
         "small": "Small",
         "medium": "Medium",
         "large": "Large"
+      },
+      "capacityValue_one": "{{range}} Person",
+      "capacityValue_other": "{{range}} People",
+      "doorOptions": {
+        "right": "Right Side",
+        "left": "Left Side",
+        "middle": "Middle",
+        "middleDouble": "Middle (Double)",
+        "rightL": "Right Side (L-Type)",
+        "leftL": "Left Side (L-Type)",
+        "middleRightL": "Middle Right (L-Type)",
+        "middleLeftL": "Middle Left (L-Type)"
+      },
+      "woodTypes": {
+        "cedar": "Cedar",
+        "aspen": "Aspen",
+        "pinaceae": "Pinaceae",
+        "hemlock": "Hemlock"
       }
     },
     "woodMaterials": {

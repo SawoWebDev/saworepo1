@@ -1,13 +1,18 @@
 import React from "react";
 import HeroWave from "./HeroWave";
 import { useHeroLoaded } from "../utils/useHeroLoaded";
+import { useLocaleT } from "../i18n/LocaleContext";
 
 // Shared category-page hero: full-bleed image + dark overlay + eyebrow/title/
 // description + HeroWave. This is the pattern HeatersCatalog.jsx ("/sauna-heaters")
 // established; pulled out so /products, /sauna/controls, /steam/generators, and
 // /steam/controls all render the exact same hero instead of four near-copies.
-export default function CategoryHero({ heroImg, eyebrow = "Premium Collection", title, description, children }) {
+export default function CategoryHero({ heroImg, eyebrow, title, description, children }) {
   const heroLoaded = useHeroLoaded(heroImg);
+  const tc = useLocaleT("common");
+  // The default eyebrow was a hardcoded English "Premium Collection" that
+  // showed on every locale for every page that didn't pass its own.
+  const eyebrowText = eyebrow ?? tc("premiumCollection");
 
   return (
     <div style={{
@@ -28,7 +33,7 @@ export default function CategoryHero({ heroImg, eyebrow = "Premium Collection", 
           textTransform: "uppercase", color: "#e8c8ab", margin: "0 0 12px",
           fontFamily: "'Montserrat', sans-serif",
         }}>
-          {eyebrow}
+          {eyebrowText}
         </p>
         <h1 style={{
           fontSize: "2.4rem", fontWeight: 700, color: "#ffffff",

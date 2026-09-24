@@ -765,7 +765,8 @@
       "standard": "ห้องซาวน่ามาตรฐาน",
       "glassfront": "ห้องซาวน่าหน้ากระจก",
       "infrared": "ซาวน่าอินฟราเรด",
-      "compact": "ห้องซาวน่ากะทัดรัด"
+      "compact": "ห้องซาวน่ากะทัดรัด",
+      "infraredSingle": "ซาวน่าอินฟราเรด"
     },
     "roomDescriptions": {
       "standard": "ห้องซาวน่า SAWO Classic ให้ประสบการณ์ซาวน่าไร้กาลเวลาด้วยไม้นอร์ดิกคุณภาพสูงและผังม้านั่งที่ใช้งานได้จริง",
@@ -800,6 +801,24 @@
         "small": "เล็ก",
         "medium": "กลาง",
         "large": "ใหญ่"
+      },
+      "capacityValue_one": "{{range}} คน",
+      "capacityValue_other": "{{range}} คน",
+      "doorOptions": {
+        "right": "ด้านขวา",
+        "left": "ด้านซ้าย",
+        "middle": "ตรงกลาง",
+        "middleDouble": "ตรงกลาง (คู่)",
+        "rightL": "ด้านขวา (ตัว L)",
+        "leftL": "ด้านซ้าย (ตัว L)",
+        "middleRightL": "กลางขวา (ตัว L)",
+        "middleLeftL": "กลางซ้าย (ตัว L)"
+      },
+      "woodTypes": {
+        "cedar": "ซีดาร์",
+        "aspen": "แอสเพน",
+        "pinaceae": "Pinaceae",
+        "hemlock": "เฮมล็อก"
       }
     },
     "woodMaterials": {

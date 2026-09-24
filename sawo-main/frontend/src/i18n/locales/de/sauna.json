@@ -1062,7 +1062,8 @@
       "standard": "Standard-Saunaraum",
       "glassfront": "Glasfront-Saunaraum",
       "infrared": "Infrarotsaunen",
-      "compact": "Kompakt-Saunaraum"
+      "compact": "Kompakt-Saunaraum",
+      "infraredSingle": "Infrarotsauna"
     },
     "roomDescriptions": {
       "standard": "Klassische SAWO Saunaräume bieten ein zeitloses Saunaerlebnis mit hochwertigem nordischem Holz und praktischen Bankanordnungen.",
@@ -1097,6 +1098,24 @@
         "small": "Klein",
         "medium": "Mittel",
         "large": "Groß"
+      },
+      "capacityValue_one": "{{range}} Person",
+      "capacityValue_other": "{{range}} Personen",
+      "doorOptions": {
+        "right": "Rechte Seite",
+        "left": "Linke Seite",
+        "middle": "Mitte",
+        "middleDouble": "Mitte (doppelt)",
+        "rightL": "Rechte Seite (L-förmig)",
+        "leftL": "Linke Seite (L-förmig)",
+        "middleRightL": "Mitte rechts (L-förmig)",
+        "middleLeftL": "Mitte links (L-förmig)"
+      },
+      "woodTypes": {
+        "cedar": "Zeder",
+        "aspen": "Espe",
+        "pinaceae": "Kiefer",
+        "hemlock": "Hemlock"
       }
     },
     "woodMaterials": {

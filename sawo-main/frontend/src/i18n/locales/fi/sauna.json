@@ -653,7 +653,8 @@
       "standard": "Standard-saunahuone",
       "glassfront": "Lasiseinäinen saunahuone",
       "infrared": "Infrapunasaunat",
-      "compact": "Compact-saunahuone"
+      "compact": "Compact-saunahuone",
+      "infraredSingle": "Infrapunasauna"
     },
     "roomDescriptions": {
       "standard": "SAWOn klassiset saunahuoneet tarjoavat ajattoman saunakokemuksen laadukkaalla pohjoismaisella puulla ja käytännöllisillä lauteratkaisuilla.",
@@ -688,6 +689,24 @@
         "small": "Pieni",
         "medium": "Keskikokoinen",
         "large": "Suuri"
+      },
+      "capacityValue_one": "{{range}} henkilö",
+      "capacityValue_other": "{{range}} henkilöä",
+      "doorOptions": {
+        "right": "Oikea puoli",
+        "left": "Vasen puoli",
+        "middle": "Keskellä",
+        "middleDouble": "Keskellä (kaksois)",
+        "rightL": "Oikea puoli (L-malli)",
+        "leftL": "Vasen puoli (L-malli)",
+        "middleRightL": "Keskellä oikea (L-malli)",
+        "middleLeftL": "Keskellä vasen (L-malli)"
+      },
+      "woodTypes": {
+        "cedar": "Setri",
+        "aspen": "Haapa",
+        "pinaceae": "Mänty",
+        "hemlock": "Hemlokki"
       }
     },
     "woodMaterials": {

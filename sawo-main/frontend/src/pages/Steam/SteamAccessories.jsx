@@ -25,7 +25,11 @@ function getImageUrl(product, field) {
 function stripHtml(html) {
   if (!html) return "";
   const div = document.createElement("div");
-  div.innerHTML = html;
+  // Block boundaries become a space first: textContent alone glues adjacent
+  // paragraphs together ("...experience.Our steam door..."), which defeated
+  // getFirstSentence's "punctuation followed by a space" check and left the
+  // card text cut off mid-way with an ellipsis.
+  div.innerHTML = html.replace(/<\/(p|div|li|h[1-6]|tr)>|<br\s*\/?>/gi, " $&");
   return div.textContent || div.innerText || "";
 }
 
@@ -237,11 +241,15 @@ const SteamAccessories = () => {
       .sa-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        /* every row is as tall as its tallest card, so all cards are one size */
+        grid-auto-rows: 1fr;
         gap: 24px;
-        align-items: start;
       }
+      /* the <Link> wrapping each card is the grid item — let the card fill it */
+      .sa-grid > a { display: block; height: 100%; }
       .sa-card {
         display: flex; flex-direction: column;
+        height: 100%;
         border-radius: 16px; overflow: hidden;
         background: #fff;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -265,16 +273,26 @@ const SteamAccessories = () => {
       .sa-card:hover .sa-img { transform: scale(1.08); }
       .sa-card-body {
         padding: 18px 18px 24px;
+        flex: 1;
       }
+      /* Title and description are clamped to a fixed number of lines (with
+         min-heights matching the clamp) so long or short text, in any
+         language, never changes a card's size. */
       .sa-card-title {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.95rem; font-weight: 700;
+        font-size: 0.95rem; font-weight: 700; line-height: 1.35;
         color: #AA8161; margin: 0 0 10px 0;
+        display: -webkit-box; -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+        min-height: calc(0.95rem * 1.35 * 2);
       }
       .sa-card-desc {
         font-family: 'Montserrat', sans-serif;
         font-size: 0.83rem; font-weight: 400;
         color: #666; line-height: 1.6; margin: 0;
+        display: -webkit-box; -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+        min-height: calc(0.83rem * 1.6 * 3);
       }
 
       /* ---- Responsive ---- */

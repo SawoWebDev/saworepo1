@@ -14,8 +14,22 @@ const ROOM_TITLE_KEYS = {
   "Standard Sauna Room": "standard",
   "Glass Front Sauna Room": "glassfront",
   "Infrared Saunas": "infrared",
+  "Infrared Sauna": "infraredSingle",
   "Compact Sauna Room": "compact",
 };
+// Door-side and wood option labels come from the same English data file, so
+// they get the same literal-to-key treatment.
+const DOOR_OPTION_KEYS = {
+  "Right Side": "right",
+  "Left Side": "left",
+  "Middle": "middle",
+  "Middle (Double)": "middleDouble",
+  "Right Side (L-Type)": "rightL",
+  "Left Side (L-Type)": "leftL",
+  "Middle Right (L-Type)": "middleRightL",
+  "Middle Left (L-Type)": "middleLeftL",
+};
+const WOOD_TYPE_KEYS = { Cedar: "cedar", Aspen: "aspen", Pinaceae: "pinaceae", Hemlock: "hemlock" };
 const BENCH_NAME_KEYS = {
   "Straight Bench": "straight",
   "L-Type Bench": "lType",
@@ -152,6 +166,27 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
     const key = BENCH_NAME_KEYS[name];
     return key ? t(`roomsPage.benchTypes.${key}`) : name;
   }, [t]);
+  // "1 Person" / "2 Person" / "1-3 People" / "6+ People" -> plural-aware key
+  // (the count is the upper bound, so "1" is singular and "1-3" is plural).
+  const trCapacity = useCallback((cap) => {
+    const m = /^(\d+)(?:-(\d+))?(\+)?\s+(?:Person|People)$/.exec(cap || "");
+    if (!m) return cap;
+    const count = Number(m[2] || m[1]);
+    const range = m[2] ? `${m[1]}–${m[2]}` : `${m[1]}${m[3] || ""}`;
+    return t("roomsPage.viewer.capacityValue", { count, range });
+  }, [t]);
+  const trDoor = useCallback((label) => {
+    const key = DOOR_OPTION_KEYS[label];
+    return key ? t(`roomsPage.viewer.doorOptions.${key}`) : label;
+  }, [t]);
+  const trWood = useCallback((name) => {
+    const key = WOOD_TYPE_KEYS[name];
+    return key ? t(`roomsPage.viewer.woodTypes.${key}`) : name;
+  }, [t]);
+  // Size dropdown labels embed both: "1310MS Cedar (1 Person)".
+  const trSizeLabel = useCallback((label) => label
+    .replace(/\((\d+ (?:Person|People))\)/, (_, cap) => `(${trCapacity(cap)})`)
+    .replace(/\b(Cedar|Aspen|Pinaceae|Hemlock)\b/, (w) => trWood(w)), [trCapacity, trWood]);
   const trDesc = useCallback((desc) => {
     const key = ROOM_DESC_KEYS[desc];
     return key ? t(`roomsPage.roomDescriptions.${key}`) : desc;
@@ -614,7 +649,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
             </div>
             <div className="spec-item">
               <div className="spec-label">{t("roomsPage.viewer.capacity")}</div>
-              <div className="spec-value">{currentSizeData ? currentSizeData.capacity : "-"}</div>
+              <div className="spec-value">{currentSizeData ? trCapacity(currentSizeData.capacity) : "-"}</div>
             </div>
           </div>
 
@@ -670,7 +705,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
                       disabled={hidden}
                       style={{ display: hidden ? "none" : "" }}
                     >
-                      {opt.label}
+                      {trSizeLabel(opt.label)}
                     </option>
                   );
                 })}
@@ -698,7 +733,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
               >
                 <option value="all">{t("roomsPage.viewer.showAll")}</option>
                 {cfg.doorOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  <option key={opt.value} value={opt.value}>{trDoor(opt.label)}</option>
                 ))}
               </select>
             </div>
@@ -707,7 +742,7 @@ const SaunaRoomViewer = ({ rooms = DEFAULT_ROOMS, showTabs = true }) => {
               <label>{t("roomsPage.viewer.woodType")}</label>
               <select disabled style={{ cursor: "not-allowed" }}>
                 {cfg.woodOptions.map((w, i) => (
-                  <option key={w} disabled={!cfg.woodEnabled[i]}>{w}</option>
+                  <option key={w} disabled={!cfg.woodEnabled[i]}>{trWood(w)}</option>
                 ))}
               </select>
             </div>

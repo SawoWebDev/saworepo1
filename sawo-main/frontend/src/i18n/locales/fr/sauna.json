@@ -765,7 +765,8 @@
       "standard": "Cabine de sauna standard",
       "glassfront": "Cabine de sauna à façade vitrée",
       "infrared": "Saunas infrarouges",
-      "compact": "Cabine de sauna compacte"
+      "compact": "Cabine de sauna compacte",
+      "infraredSingle": "Sauna infrarouge"
     },
     "roomDescriptions": {
       "standard": "Les cabines de sauna SAWO Classic offrent une expérience de sauna intemporelle, avec des bois nordiques de grande qualité et des agencements de bancs pratiques.",
@@ -800,6 +801,24 @@
         "small": "Petite",
         "medium": "Moyenne",
         "large": "Grande"
+      },
+      "capacityValue_one": "{{range}} personne",
+      "capacityValue_other": "{{range}} personnes",
+      "doorOptions": {
+        "right": "Côté droit",
+        "left": "Côté gauche",
+        "middle": "Milieu",
+        "middleDouble": "Milieu (double)",
+        "rightL": "Côté droit (en L)",
+        "leftL": "Côté gauche (en L)",
+        "middleRightL": "Milieu droit (en L)",
+        "middleLeftL": "Milieu gauche (en L)"
+      },
+      "woodTypes": {
+        "cedar": "Cèdre",
+        "aspen": "Tremble",
+        "pinaceae": "Pinaceae",
+        "hemlock": "Pruche"
       }
     },
     "woodMaterials": {
