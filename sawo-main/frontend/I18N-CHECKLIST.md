@@ -2256,3 +2256,23 @@ notfound, seo).
   descriptions look swapped in the English source (Innova card describes
   Saunova 2.0) — zh follows the source; the contact-page country list and
   Finnish job subtitles untouched; `home` untouched (still has half-width commas).
+
+## de / fi naturalness pass (2026-09-24)
+
+Read-and-fix pass over `src/i18n/locales/{de,fi}/` applied only through
+`inject.js`; `npm run i18n:manifest` unchanged. Covered: careers, news,
+sustainability, support (hub, FAQ answers, calculator, catalogue), sauna
+(heater/room/accessory descriptions and features), catalog, privacy. Earlier
+passes covered about/home/contact/infrared/steam and the shared namespaces.
+A `CI=true` build + prerender passed afterwards.
+
+- **de:** Title Case headings → German capitalization, Dampfgenerator →
+  Dampferzeuger, "Sitzung" → Saunagang, literal "Wandmontiert-" series names →
+  "Wand-", stiff "Konzipiert für…" openers rewritten.
+- **fi:** participle-opener calques ("Ilmentäen…, X-laude") rewritten as
+  finite sentences, `lasijulkisivu` → `lasiseinä` everywhere, `oviasennon
+  tunnistin` → `ovianturi`, haapa no longer called `havupuu`.
+- **Not yet read:** short labels/headings inside `sauna` (<150 chars) and the
+  long strings of `gdpr`/`sitemap`; still no native review of any de/fi path.
+- **Source issue (not fixed):** `sauna.controls.items.innova` and `.saunova`
+  English descriptions look swapped (already noted in the zh pass).
