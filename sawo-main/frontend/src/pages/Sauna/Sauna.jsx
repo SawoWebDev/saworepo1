@@ -802,8 +802,8 @@ const Sauna = () => {
       {/* CTA                   */}
       {/* ===================== */}
       <PageCTA
-        title="Need Help Choosing?"
-        description="From heaters and controls to rooms and accessories, our team can help you find the right sauna setup for your home or commercial space."
+        title={t("cta.title")}
+        description={t("cta.description")}
       />
 
       {/* ===================== */}
