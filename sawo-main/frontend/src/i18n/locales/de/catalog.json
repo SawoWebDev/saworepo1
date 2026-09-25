@@ -2,12 +2,12 @@
   "allProducts": {
     "meta": {
       "title": "Alle Produkte",
-      "description": "Entdecken Sie das komplette Produktsortiment von SAWO: Saunaöfen, Saunaräume und Zubehör, alles in einem durchsuchbaren Katalog."
+      "description": "Entdecken Sie das komplette Produktsortiment von SAWO: Saunaöfen, Saunakabinen und Zubehör, alles in einem durchsuchbaren Katalog."
     },
     "hero": {
       "eyebrow": "Komplettes Sortiment",
       "title": "Alle Produkte",
-      "description": "Entdecken Sie das komplette Produktsortiment von SAWO: Saunaöfen, Steuerungen, Dampferzeuger, Räume und Zubehör, alles in einem durchsuchbaren Katalog."
+      "description": "Entdecken Sie das komplette Produktsortiment von SAWO: Saunaöfen, Steuerungen, Dampferzeuger, Saunakabinen und Zubehör, alles in einem durchsuchbaren Katalog."
     },
     "loading": "Produkte werden geladen...",
     "sidebar": {
@@ -17,18 +17,18 @@
     },
     "tabs": {
       "heaters": "Saunaöfen",
-      "rooms": "Saunaräume",
+      "rooms": "Saunakabinen",
       "saunaControls": "Saunasteuerungen",
       "steam": "Dampf",
       "infrared": "Infrarot",
       "heaterAccessories": "Ofenzubehör",
-      "accessories": "Sauna-Zubehör"
+      "accessories": "Saunazubehör"
     },
     "heaterSections": {
-      "wallMounted": "Wandmontiert",
+      "wallMounted": "Wandofen",
       "tower": "Tower",
-      "stone": "Stone",
-      "floor": "Boden",
+      "stone": "Stein",
+      "floor": "Bodenofen",
       "combi": "Combi",
       "dragonfire": "Dragonfire"
     },
@@ -43,7 +43,7 @@
       "accessories": "Dampfzubehör"
     },
     "infraredSections": {
-      "rooms": "Saunaräume",
+      "rooms": "Infrarotkabinen",
       "panels": "Paneele",
       "controls": "Steuerungen"
     },
@@ -65,13 +65,13 @@
       "doorsHandles": "Türen & Griffe",
       "benches": "Bänke",
       "clothHangers": "Kleiderhaken & Ablagen",
-      "woodenFloorMats": "Bodenmattenfliesen",
+      "woodenFloorMats": "Holzbodenmatten",
       "kivistone": "Kivistone",
       "ventMisc": "Belüftung & Sonstiges"
     },
     "empty": {
       "heaters": "Keine Saunaöfen verfügbar",
-      "rooms": "Keine Saunaräume verfügbar",
+      "rooms": "Keine Saunakabinen verfügbar",
       "saunaControls": "Keine Saunasteuerungen verfügbar",
       "steam": "Keine Dampfprodukte verfügbar",
       "infrared": "Keine Infrarotprodukte verfügbar",
@@ -81,11 +81,11 @@
   "heatersCatalog": {
     "meta": {
       "title": "Saunaöfen",
-      "description": "Entdecken Sie den vollständigen SAWO Ofenkatalog: Tower-, Wand-, Stone-, Boden-, Combi- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
+      "description": "Entdecken Sie den vollständigen SAWO Ofenkatalog: Wandofen-, Tower-, Stein-, Bodenofen-, Combi- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
     },
     "hero": {
       "title": "Saunaöfen",
-      "description": "Entdecken Sie unser komplettes Sortiment hochwertiger Saunaöfen für jede Saunagröße und jeden Stil. Stöbern Sie in unseren sorgfältig zusammengestellten Serien Tower, Wand, Stone, Boden, Combi und Dragonfire."
+      "description": "Entdecken Sie unser komplettes Sortiment hochwertiger Saunaöfen für jede Saunagröße und jeden Stil. Stöbern Sie in unseren sorgfältig zusammengestellten Serien Wandofen, Tower, Stein, Bodenofen, Combi und Dragonfire."
     },
     "loading": "Öfen werden geladen...",
     "sidebar": {
@@ -93,10 +93,10 @@
       "series": "Serie"
     },
     "groups": {
-      "wallMounted": "Wandmontiert-Serie",
+      "wallMounted": "Wandofen-Serie",
       "tower": "Tower-Serie",
-      "stone": "Stone-Serie",
-      "floor": "Boden-Serie",
+      "stone": "Stein-Serie",
+      "floor": "Bodenofen-Serie",
       "combi": "Combi-Serie",
       "dragonfire": "Dragonfire-Serie"
     },
@@ -109,16 +109,16 @@
   },
   "accessoriesCatalog": {
     "meta": {
-      "title": "Sauna-Zubehör",
+      "title": "Saunazubehör",
       "description": "Entdecken Sie den vollständigen SAWO Zubehörkatalog: Eimer, Kellen, Thermometer, Bänke, Beleuchtung und mehr für jede Sauna."
     },
     "hero": {
       "eyebrow": "Premium-Kollektion",
-      "title": "Sauna-Zubehör",
-      "description": "Entdecken Sie unser komplettes Sortiment an hochwertigem Sauna-Zubehör, das Ihr Wellness-Erlebnis bereichert. Durchstöbern Sie unsere sorgfältig zusammengestellte Auswahl hochwertiger Produkte."
+      "title": "Saunazubehör",
+      "description": "Entdecken Sie unser komplettes Sortiment an hochwertigem Saunazubehör, das Ihr Wellness-Erlebnis bereichert. Durchstöbern Sie unsere sorgfältig zusammengestellte Auswahl hochwertiger Produkte."
     },
     "loading": "Zubehör wird geladen...",
-    "sidebarTitle": "Sauna-Zubehör",
+    "sidebarTitle": "Saunazubehör",
     "groups": {
       "pailsLadles": "Eimer & Kellen",
       "meters": "Thermometer & Kombigeräte",

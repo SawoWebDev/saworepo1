@@ -44,6 +44,8 @@
     <loc>https://www.sawo.com/sauna</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/sauna"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -52,102 +54,542 @@
     <loc>https://www.sawo.com/fi/sauna</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/sauna"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/sauna"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/sauna"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters"/>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters/wall-mounted</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/wall-mounted"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters/wall-mounted</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/wall-mounted"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters/wall-mounted</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/wall-mounted"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/wall-mounted"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters/tower</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/tower"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters/tower</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/tower"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters/tower</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/tower"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/tower"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters/stone</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/stone"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters/stone</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/stone"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters/stone</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/stone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/stone"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters/floor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/floor"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters/floor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/floor"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters/floor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/floor"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/floor"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters/combi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/combi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters/combi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/combi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters/combi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/combi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/combi"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/heaters/dragonfire</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/dragonfire"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/heaters/dragonfire</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/dragonfire"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/heaters/dragonfire</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/heaters/dragonfire"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/heaters/dragonfire"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/controls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/controls"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/controls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/controls"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/controls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/controls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/controls"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/accessory-sets</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/accessory-sets"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/accessory-sets</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/accessory-sets"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/accessory-sets</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/accessory-sets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/accessory-sets"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/pails-ladles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/pails-ladles"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/pails-ladles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/pails-ladles"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/pails-ladles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/pails-ladles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/pails-ladles"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/thermometers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/thermometers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/thermometers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/thermometers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/thermometers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/thermometers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/thermometers"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/clocks-sandtimers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/clocks-sandtimers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/clocks-sandtimers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/clocks-sandtimers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/clocks-sandtimers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/clocks-sandtimers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/clocks-sandtimers"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/lights-covers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/lights-covers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/lights-covers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/lights-covers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/lights-covers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/lights-covers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/lights-covers"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/headrests-backrests</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/headrests-backrests"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/headrests-backrests</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/headrests-backrests"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/headrests-backrests</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/headrests-backrests"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/headrests-backrests"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/doors-handles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/doors-handles"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/doors-handles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/doors-handles"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/doors-handles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/doors-handles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/doors-handles"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/benches-floor-tiles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/benches-floor-tiles"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/benches-floor-tiles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/benches-floor-tiles"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/benches-floor-tiles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/benches-floor-tiles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/benches-floor-tiles"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/kivistone</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/kivistone"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/kivistone</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/kivistone"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/kivistone</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/kivistone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/kivistone"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/accessories/ventilations-add-ons</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/ventilations-add-ons"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/accessories/ventilations-add-ons</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/ventilations-add-ons"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/accessories/ventilations-add-ons</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/accessories/ventilations-add-ons"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/accessories/ventilations-add-ons"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -155,6 +597,7 @@
     <loc>https://www.sawo.com/sauna/rooms</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -163,17 +606,71 @@
     <loc>https://www.sawo.com/zh/sauna/rooms</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/rooms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/rooms/interior-designs</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms/interior-designs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/rooms/interior-designs</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms/interior-designs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/rooms/interior-designs</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms/interior-designs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms/interior-designs"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna/rooms/wood-panels-timbers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms/wood-panels-timbers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna/rooms/wood-panels-timbers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms/wood-panels-timbers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna/rooms/wood-panels-timbers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna/rooms/wood-panels-timbers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna/rooms/wood-panels-timbers"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -181,6 +678,7 @@
     <loc>https://www.sawo.com/steam</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -189,6 +687,16 @@
     <loc>https://www.sawo.com/zh/steam</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam"/>
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/steam</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -197,6 +705,8 @@
     <loc>https://www.sawo.com/steam/generators</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/generators"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/generators"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/generators"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -205,97 +715,515 @@
     <loc>https://www.sawo.com/fi/steam/generators</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/generators"/>
     <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/generators"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/steam/generators</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/generators"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/steam/generators</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.sawo.com/fi/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/generators"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/generators"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/generators"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/steam/controls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/controls"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/steam/controls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/controls"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/steam/controls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/controls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/controls"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/steam/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/accessories"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/steam/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/accessories"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/steam/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/steam/accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/steam/accessories"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/infrared</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/infrared"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/infrared"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/infrared"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/infrared"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/infrared</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/infrared"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/infrared"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/infrared"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/infrared"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/infrared</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/infrared"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/infrared"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/infrared"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/infrared"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/support/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/faq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/support/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/faq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/support/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/faq"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/support/sauna-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/sauna-calculator"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/support/sauna-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/sauna-calculator"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/support/sauna-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/sauna-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/sauna-calculator"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/support/manuals</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/manuals"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/support/manuals</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/manuals"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/support/manuals</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/manuals"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/manuals"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/support/catalogue</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/catalogue"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/support/catalogue</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/catalogue"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/support/catalogue</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/support/catalogue"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/support/catalogue"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/contact"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/contact"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/contact"/>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about"/>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/about/news</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about/news"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about/news"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about/news"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about/news"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/about/news</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about/news"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about/news"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about/news"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about/news"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/about/news</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about/news"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about/news"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about/news"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about/news"/>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/about/sustainability</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about/sustainability"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/about/sustainability</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about/sustainability"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/about/sustainability</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/about/sustainability"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/about/sustainability"/>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/careers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/careers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/careers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/careers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/careers"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/careers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/careers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/careers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/careers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/careers"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/careers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/careers"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/careers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/careers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/careers"/>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/privacy-policy"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/privacy-policy"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/privacy-policy"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sitemap</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sitemap"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sitemap</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sitemap"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sitemap</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sitemap"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sitemap"/>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/products</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/products"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/products</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/products"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/products</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/products"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/products"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/products"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/products"/>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna-accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna-accessories"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna-accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna-accessories"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna-accessories</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna-accessories"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna-accessories"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/sauna-heaters</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna-heaters"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/zh/sauna-heaters</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna-heaters"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.sawo.com/de/sauna-heaters</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sawo.com/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.sawo.com/zh/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.sawo.com/de/sauna-heaters"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sawo.com/sauna-heaters"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1585,49 +2513,49 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/1-accent-stone-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/1-accent-stone-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/1-accent-stone-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/2-accent-stone-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/2-accent-stone-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/2-accent-stone-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/accent-stone-vertical-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/aroma-cup-50</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1669,7 +2597,7 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/aroma-spirit-cup</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1693,151 +2621,151 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/basic-curved-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/black-metal-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/black-metal-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-standard-7304sgd</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-standard-7314sgd</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-with-arc-handle</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/bronze-glass-reversible-sauna-door-with-metallic-handle</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/bronze-glass-sauna-door-finland</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/candle-holder-straight</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/candle-holder-tower-r131</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/candle-holder-tower-r132</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/candle-holder-tower-r133</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-wide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-with-vertical-wooden-handle-arc</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/clear-glass-reversible-sauna-door-with-vertical-wooden-handle-metal</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cooler-1-hole</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cooler-2-hole</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cooler-w-2-shot-glasses</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cooler-w-4-shot-glasses</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/curved-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/curved-square-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cut-corner-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cut-corner-square-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/cut-corner-vertical-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1861,25 +2789,25 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/display-stand-wall-1</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/display-stand-wall-2</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/display-stand-wall-3</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/door-lock-magnet-round-heavy-duty</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1933,37 +2861,37 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/halu-anti-theft-headrest</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/halu-wooden-headrest</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/himalayan-salt-wall-horizontal-tiles</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/himalayan-salt-wall-horizontal-tiles-large</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/himalayan-salt-wall-vertical-tiles</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/himalayan-salt-wall-vertical-tiles-large</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1999,31 +2927,31 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/kanto-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/loisto-clock-square</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/loisto-rounded-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/loisto-square-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/loisto-wooden-clock-round</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2035,25 +2963,25 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/luxury-aroma-cup-50</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/moisture-paper</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/octagon-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/octagon-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2065,7 +2993,7 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2089,25 +3017,25 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/rounded-rectangle-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sand-timer-15min</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sand-timer-kanto-15min</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sand-timer-tag-15min</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2143,31 +3071,31 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sauna-grille-622-d</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sauna-signage</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sauna-wood-oil-1l</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/sauna-wood-oil-4l</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/scent-warmer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2215,25 +3143,25 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/soap-holder</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/spa-stones-set</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/square-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/square-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2353,19 +3281,19 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/stone-plate-large</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/stone-plate-small</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/tower-set-3</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2383,43 +3311,43 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-cover-circle-640mbr</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-cover-circle-641d</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-louver-circle-631d</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-louver-circle-634d</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-louver-circle-with-black-option-638d</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-louver-circle-with-black-option-639d</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/ventilation-louver-square</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2461,67 +3389,67 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/water-drop-thermo-hygrometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/water-drop-thermometer</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wave-wooden-backrest</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wave-wooden-headrest</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wine-cooler-stone</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-arc-door-handle</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-backrest</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-backrest-slim</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-cover-for-381</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-cover-for-391</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-cover-for-392</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2551,37 +3479,37 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-door-handle</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-door-handle-big-round</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-door-handle-small-round</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-door-handle-with-magnetic-lock</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-door-with-bronze-glass-window</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-door-with-clear-glass-window</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2695,13 +3623,13 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-pail-28l</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-pail-40l</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2713,13 +3641,13 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-pail-clock</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-pail-clock-small</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2749,49 +3677,49 @@
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-reversible-sauna-door-7344sd</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-reversible-sauna-door-7734sd</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-sauna-door-with-window</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-straight-door-handle-with-metal-accent</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-stripe-sauna-door</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-stripe-sauna-door-wide</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-wide-bronze-window-sauna-door</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.sawo.com/accessories/wooden-wide-clear-window-sauna-door</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -29,12 +29,12 @@
       "tower": "塔式",
       "stone": "石材式",
       "floor": "落地式",
-      "combi": "多功能一体式",
+      "combi": "桑拿蒸汽两用式",
       "dragonfire": "龙焰系列"
     },
     "roomSections": {
       "standard": "标准型",
-      "glassFront": "玻璃前脸型",
+      "glassFront": "全景玻璃型",
       "compact": "紧凑型"
     },
     "steamSections": {
@@ -63,7 +63,7 @@
       "saunaLights": "桑拿灯具",
       "headrestBackrest": "头枕与靠背",
       "doorsHandles": "门与把手",
-      "benches": "长椅",
+      "benches": "长凳",
       "clothHangers": "挂钩与衣架",
       "woodenFloorMats": "木质地垫",
       "kivistone": "Kivistone",
@@ -81,11 +81,11 @@
   "heatersCatalog": {
     "meta": {
       "title": "桑拿加热器",
-      "description": "浏览SAWO加热器全系列目录：塔式、壁挂式、石材式、落地式、多功能一体式和龙焰系列，满足各种桑拿尺寸与风格需求。"
+      "description": "浏览SAWO加热器全系列目录：塔式、壁挂式、石材式、落地式、桑拿蒸汽两用式和龙焰系列，满足各种桑拿尺寸与风格需求。"
     },
     "hero": {
       "title": "桑拿加热器",
-      "description": "探索我们专为各种桑拿尺寸与风格设计的高端加热器全系列。浏览我们精心打造的塔式、壁挂式、石材式、落地式、多功能一体式和龙焰系列。"
+      "description": "探索我们专为各种桑拿尺寸与风格设计的高端加热器全系列。浏览我们精心打造的塔式、壁挂式、石材式、落地式、桑拿蒸汽两用式和龙焰系列。"
     },
     "loading": "加热器加载中...",
     "sidebar": {
@@ -97,7 +97,7 @@
       "tower": "塔式系列",
       "stone": "石材式系列",
       "floor": "落地式系列",
-      "combi": "多功能一体式系列",
+      "combi": "桑拿蒸汽两用式系列",
       "dragonfire": "龙焰系列"
     },
     "cta": {
@@ -110,7 +110,7 @@
   "accessoriesCatalog": {
     "meta": {
       "title": "桑拿配件",
-      "description": "浏览SAWO配件全系列目录：水桶、勺子、温度计、长椅、灯具等，满足每一间桑拿房的需求。"
+      "description": "浏览SAWO配件全系列目录：水桶、勺子、温度计、长凳、灯具等，满足每一间桑拿房的需求。"
     },
     "hero": {
       "eyebrow": "高端系列",
@@ -126,7 +126,7 @@
       "saunaLights": "桑拿灯具",
       "headrestBackrest": "头枕与靠背",
       "doorsHandles": "门与把手",
-      "benches": "长椅、挂钩与地垫",
+      "benches": "长凳、挂钩与地垫",
       "kivistone": "Kivistone",
       "ventMisc": "通风及其他配件",
       "accessorySets": "配件套装"

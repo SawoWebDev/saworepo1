@@ -15,7 +15,7 @@
   },
   "section1": {
     "heading": "Entdecken Sie unsere Saunawelt",
-    "carouselLabel": "SAWO Sauna-Produkt-Karussell",
+    "carouselLabel": "SAWO Saunaprodukte – Karussell",
     "items": {
       "heaters": {
         "title": "SAUNAÖFEN",
@@ -53,19 +53,19 @@
     "heading": "SAUNAÖFEN",
     "items": {
       "tower": {
-        "title": "TURM",
+        "title": "TOWER",
         "caption": "Höhe und Energieeffizienz in einem schlanken, eleganten Design. Gleichmäßige Wärme vom unteren bis zum oberen Bereich der Sauna für optimale Entspannung und Wohlbefinden.",
         "alt": "SAWO Tower Saunaöfen-Serie mit elegantem vertikalem Design"
       },
       "wallMounted": {
-        "title": "WANDMONTAGE",
+        "title": "WANDOFEN",
         "caption": "Platzsparende und energieeffiziente wandmontierte Saunaöfen, die gleichmäßige, kraftvolle Wärme erzeugen. Schlankes, modernes Design und überlegener Komfort für das ultimative Saunaerlebnis.",
         "alt": "SAWO Serie wandmontierter Saunaöfen für kompakte Saunakabinen"
       },
       "floor": {
-        "title": "STANDMODELL",
+        "title": "BODENOFEN",
         "caption": "Premium, äußerst leistungsstarke freistehende Öfen, die die unschlagbare Kombination aus Energieeffizienz und elegantem Design bieten. Ideal für den gewerblichen Einsatz.",
-        "alt": "SAWO Standofenserie für gewerbliche Saunen"
+        "alt": "SAWO Bodenofen-Serie für gewerbliche Saunen"
       },
       "combi": {
         "title": "COMBI",
@@ -79,7 +79,7 @@
       },
       "dragonfire": {
         "title": "DRAGONFIRE",
-        "caption": "Eine Mischung aus künstlerischem Flair und modernster Technologie, entworfen vom Industrie- und Innendesigner Stefan Lindfors.",
+        "caption": "Künstlerischer Anspruch trifft auf modernste Technologie – entworfen vom Industrie- und Interior-Designer Stefan Lindfors.",
         "alt": "SAWO Dragonfire-Saunaofenserie im Design von Stefan Lindfors"
       }
     }
@@ -92,7 +92,7 @@
     "steam": {
       "generators": {
         "title": "Dampferzeuger",
-        "caption": "Der Luxus maßgeschneiderten Dampfes aus fortschrittlichen Dampferzeuger für ein Spa-ähnliches Erlebnis. Individuelle Einstellungen und durchweg außergewöhnliche Leistung."
+        "caption": "Maßgeschneiderter Dampf aus fortschrittlichen Dampferzeugern – für ein Wellness-Erlebnis wie im Spa. Individuelle Einstellungen und durchweg außergewöhnliche Leistung."
       },
       "controls": {
         "title": "Dampfsteuerungen",
@@ -106,7 +106,7 @@
     "rooms": {
       "standard": {
         "title": "Standardsauna",
-        "caption": "Zeitloses Design und hochwertige Materialien. Klassisches Innensauna-Erlebnis für jedes Zuhause oder Wellnessbereich."
+        "caption": "Zeitloses Design und hochwertige Materialien. Klassisches Saunaerlebnis für jedes Zuhause und jeden Wellnessbereich."
       },
       "glassFront": {
         "title": "Glasfront-Sauna",
@@ -128,7 +128,7 @@
       },
       "controls": {
         "title": "Infrarotsteuerungen",
-        "caption": "Einfach zu bedienende Steuerungen, mit denen Sie Ihr Infrarot-Saunaerlebnis über komfortable Temperatur- und Zeiteinstellungen verwalten."
+        "caption": "Einfach zu bedienende Steuerungen, mit denen Sie Ihr Infrarot-Saunaerlebnis bequem über Temperatur- und Zeiteinstellungen steuern."
       }
     },
     "controls": {

@@ -4,7 +4,7 @@
     "steamRoom": "蒸汽房",
     "infraredSauna": "红外线桑拿",
     "followUs": "关注我们",
-    "support": "支持",
+    "support": "服务支持",
     "download": "下载",
     "technicalSupport": "技术支持",
     "offices": "办事处"
@@ -23,14 +23,14 @@
     "faq": "常见问题",
     "aboutUs": "关于我们",
     "contactUs": "联系我们",
-    "careers": "招聘信息",
+    "careers": "加入我们",
     "privacyPolicy": "隐私政策",
     "sitemap": "网站地图",
     "productCatalogue": "产品目录",
     "userManuals": "用户手册"
   },
   "technicalSupportIntro": "如需技术支持或售后服务，请联系：",
-  "whatsapp": "Whatsapp",
+  "whatsapp": "WhatsApp",
   "tel": "电话",
   "offices": {
     "global": "全球销售与咨询",

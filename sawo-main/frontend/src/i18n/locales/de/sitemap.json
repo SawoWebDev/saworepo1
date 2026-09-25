@@ -10,7 +10,7 @@
     "Steam Controls": "Dampfsteuerungen",
     "Infrared": "Infrarot",
     "Sauna Controls": "Saunasteuerungen",
-    "Sauna Accessories": "Sauna-Zubehör",
+    "Sauna Accessories": "Saunazubehör",
     "Sauna Heaters": "Saunaöfen",
     "Other Products": "Weitere Produkte"
   },
@@ -40,7 +40,7 @@
       "combi": "Kombi-Öfen",
       "dragonfire": "Dragonfire-Öfen",
       "controls": "Saunasteuerungen",
-      "accessories": "Sauna-Zubehör",
+      "accessories": "Saunazubehör",
       "accessorySets": "Zubehör-Sets",
       "pailsLadles": "Eimer & Kellen",
       "thermometers": "Thermometer & Kombigeräte",
@@ -73,7 +73,7 @@
       "heading": "Support & Ressourcen",
       "parent": "Support-Center",
       "faq": "Häufig gestellte Fragen",
-      "calculator": "Sauna-Rechner",
+      "calculator": "Saunarechner",
       "manuals": "Bedienungsanleitungen",
       "catalogue": "Produktkatalog"
     },

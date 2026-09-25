@@ -22,10 +22,10 @@
     "infrared": "Infrarot"
   },
   "items": {
-    "wallMounted": "Wandmontiert",
-    "tower": "Turm",
+    "wallMounted": "Wandofen",
+    "tower": "Tower",
     "stone": "Stein",
-    "floor": "Standmodell",
+    "floor": "Bodenofen",
     "combi": "Combi",
     "dragonfire": "Dragonfire",
     "saunaHeaters": "Saunaöfen",
@@ -39,7 +39,7 @@
     "steamAccessories": "Dampfzubehör",
     "infrared": "Infrarot",
     "faq": "Häufig gestellte Fragen",
-    "saunaCalculator": "Sauna-Rechner",
+    "saunaCalculator": "Saunarechner",
     "userManuals": "Bedienungsanleitungen",
     "productCatalogue": "Produktkatalog",
     "latestNews": "Aktuelles",

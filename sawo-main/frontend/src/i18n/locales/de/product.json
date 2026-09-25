@@ -9,7 +9,7 @@
     "includedInPackage": "Im Lieferumfang enthalten",
     "doorPositions": "Verfügbare Türpositionen",
     "floorPlan": "Grundriss",
-    "benchConfiguration": "Bankkonfiguration",
+    "benchConfiguration": "Bank-Konfiguration",
     "details": "Details",
     "description": "Beschreibung"
   },
@@ -20,17 +20,17 @@
     "description": "Dieses Produkt existiert nicht oder ist noch nicht veröffentlicht.",
     "browseProducts": "Produkte durchsuchen",
     "home": "Startseite",
-    "roomTitle": "Saunaraum nicht gefunden",
-    "roomDescription": "Dieser Saunaraum existiert nicht oder ist noch nicht veröffentlicht.",
-    "browseRooms": "Räume durchsuchen"
+    "roomTitle": "Saunakabine nicht gefunden",
+    "roomDescription": "Diese Saunakabine existiert nicht oder ist noch nicht veröffentlicht.",
+    "browseRooms": "Saunakabinen durchsuchen"
   },
   "related": {
     "youMightAlsoLike": "Das könnte Ihnen auch gefallen",
     "relatedProducts": "Ähnliche Produkte",
-    "relatedRooms": "Ähnliche Saunaräume",
-    "saunaAccessories": "Sauna-Zubehör",
+    "relatedRooms": "Ähnliche Saunakabinen",
+    "saunaAccessories": "Saunazubehör",
     "otherHeaters": "Weitere Saunaöfen",
-    "moreTypeRooms": "Weitere {{type}}-Räume"
+    "moreTypeRooms": "Weitere {{type}}-Saunakabinen"
   },
   "roomTypes": {
     "traditional": "Traditionell",
@@ -55,8 +55,8 @@
   },
   "modelCode": "Modell {{code}}",
   "skuCode": "SKU {{sku}}",
-  "roomDisplayName": "{{type}} Saunaraum {{code}}",
-  "seoFallbackDescription": "{{name}} von SAWO. Ein hochwertiger finnischer Saunaraum.",
+  "roomDisplayName": "Saunakabine {{type}} {{code}}",
+  "seoFallbackDescription": "{{name}} von SAWO. Eine hochwertige finnische Saunakabine.",
   "stats": {
     "capacity": "Kapazität",
     "floorSize": "Grundfläche",
@@ -74,7 +74,7 @@
     "clickToCollapse": "Zum Einklappen klicken"
   },
   "featureTabs": {
-    "tabFallback": "Tab {{number}}"
+    "tabFallback": "Reiter {{number}}"
   },
   "seoFallbackProductDescription": "{{name}} von SAWO. Hochwertige finnische Saunaausstattung.",
   "specLabels": {

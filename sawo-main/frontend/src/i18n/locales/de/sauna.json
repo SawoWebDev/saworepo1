@@ -100,7 +100,7 @@
       },
       "ventilations": {
         "title": "Belüftung & Zubehör",
-        "desc": "Entdecken Sie Ihr Saunaerlebnis mit unserem Sortiment an Belüftungslösungen und wichtigen Artikeln. Werten Sie Ihre Saunazeit mit den ergänzenden Artikeln von SAWO auf. Entdecken Sie noch heute unsere faszinierende Auswahl!"
+        "desc": "Optimieren Sie Ihr Saunaerlebnis mit unserem Sortiment an Belüftungslösungen und wichtigen Artikeln. Werten Sie Ihre Saunazeit mit den ergänzenden Artikeln von SAWO auf. Entdecken Sie noch heute unsere faszinierende Auswahl!"
       }
     },
     "viewAll": "ALLES ZUBEHÖR ANSEHEN"
@@ -108,7 +108,7 @@
   "heatersPage": {
     "meta": {
       "title": "Saunaöfen",
-      "description": "Entdecken Sie das vollständige finnische SAWO Ofensortiment: Tower-, Wandmontiert-, Boden-, Combi-, Stone- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
+      "description": "Entdecken Sie das vollständige finnische SAWO Ofensortiment: Tower-, Wandofen-, Bodenofen-, Combi-, Stein- und Dragonfire-Serie für jede Saunagröße und jeden Stil."
     },
     "hero": {
       "title": "SAUNAÖFEN",
@@ -212,7 +212,7 @@
       },
       "ventilations": {
         "title": "Belüftung & Zubehör",
-        "desc": "Entdecken Sie Ihr Saunaerlebnis mit unserem Sortiment an Belüftungslösungen & wichtigen Artikeln. Werten Sie Ihre Saunazeit mit den ergänzenden Artikeln von SAWO auf. Entdecken Sie noch heute unsere faszinierende Auswahl!"
+        "desc": "Optimieren Sie Ihr Saunaerlebnis mit unserem Sortiment an Belüftungslösungen & wichtigen Artikeln. Werten Sie Ihre Saunazeit mit den ergänzenden Artikeln von SAWO auf. Entdecken Sie noch heute unsere faszinierende Auswahl!"
       }
     },
     "viewAll": "ALLES ZUBEHÖR ANSEHEN"
@@ -692,12 +692,12 @@
   },
   "roomsPage": {
     "meta": {
-      "title": "Saunaräume",
-      "description": "Entdecken Sie SAWO Saunaräume: Standard-, Glasfront- und Kompakt-Designs für ein vollständiges, therapeutisches Saunaerlebnis."
+      "title": "Saunakabinen",
+      "description": "Entdecken Sie SAWO Saunakabinen: Standard-, Glasfront- und Kompakt-Designs für ein vollständiges, therapeutisches Saunaerlebnis."
     },
     "hero": {
       "title": "SAUNARÄUME",
-      "subtitle": "Maßgefertigte finnische Saunaräume für Komfort, Langlebigkeit und zeitloses Design.",
+      "subtitle": "Maßgefertigte finnische Saunakabinen für Komfort, Langlebigkeit und zeitloses Design.",
       "catalogueButton": "Produktkatalog"
     },
     "configurator": {
@@ -744,17 +744,17 @@
           "desc": "Ein großzügiger Saunaraum für 6 oder mehr Personen. Perfekt für größere Häuser, Wellnessbereiche oder gewerbliche Umgebungen, die ein erstklassiges Gruppenerlebnis suchen."
         },
         "r4": {
-          "name": "Kleiner Glasfront-Saunaraum - 1414RS",
+          "name": "Kleiner Glasfront-Saunakabine - 1414RS",
           "tag": "Klein",
           "desc": "Eine kompakte Sauna für 1–3 Personen mit vollständiger Glasfront, die natürliches Licht und visuelle Weite verstärkt. Ideal für moderne Interieurs, die ein helleres, offeneres Saunaerlebnis suchen."
         },
         "r5": {
-          "name": "Mittlerer Glasfront-Saunaraum - 1420RS",
+          "name": "Mittlerer Glasfront-Saunakabine - 1420RS",
           "tag": "Mittel",
           "desc": "Diese Glasfront-Sauna für 4–6 Personen verbindet geräumigen Komfort mit zeitgemäßer Eleganz. Die transparente Front schafft eine offene, luftige Atmosphäre und bietet dabei ein authentisches Saunaerlebnis."
         },
         "r6": {
-          "name": "Großer Glasfront-Saunaraum - 1922RS",
+          "name": "Großer Glasfront-Saunakabine - 1922RS",
           "tag": "Groß",
           "desc": "Eine Premium-Sauna für 6+ Personen mit einer beeindruckenden Vollglasfront für ein luxuriöses, offenes Raumgefühl. Perfekt für repräsentative Wellnessbereiche, die Design und Entspannung verbinden."
         }
@@ -795,7 +795,7 @@
         "a1": {
           "name": "Traditional Set",
           "tag": "Erhältlich in: Zeder",
-          "desc": "Die Wahl mit klarer, zeitloser und traditioneller Optik. Es bietet alle wichtigen Werkzeuge für die tägliche Saunanutzung."
+          "desc": "Die Wahl mit klarer, zeitloser und traditioneller Optik. Sie bietet alle wichtigen Werkzeuge für die tägliche Saunanutzung."
         },
         "a2": {
           "name": "Essential Set",
@@ -857,7 +857,7 @@
           "tab": "Raumgrößen",
           "title": "Raumgrößen",
           "paragraphs": [
-            "SAWO Saunaräume sind in drei Größenkategorien erhältlich, konzipiert für jeden Raum, vom kompakten Hausbadezimmer bis zum eigenen Wellnessraum."
+            "SAWO Saunakabinen sind in drei Größenkategorien erhältlich, konzipiert für jeden Raum, vom kompakten Hausbadezimmer bis zum eigenen Wellnessraum."
           ],
           "specs": [
             {
@@ -911,7 +911,7 @@
         {
           "title": "Ihr eigener privater Rückzugsort",
           "paragraphs": [
-            "Stellen Sie sich vor, Sie kommen nach einem langen Tag nach Hause und treten in Ihre eigene Sauna – die Wärme steigt, die Muskeln entspannen sich, die Welt draußen wird still. SAWO Saunaräume bringen dieses Erlebnis zu Ihnen nach Hause: von kompakten Räumen für 1–3 Personen bis zu großzügigen Räumen für 6 und mehr Personen. So gibt es für jeden Raum und jeden Haushalt die passende Lösung.",
+            "Stellen Sie sich vor, Sie kommen nach einem langen Tag nach Hause und treten in Ihre eigene Sauna – die Wärme steigt, die Muskeln entspannen sich, die Welt draußen wird still. SAWO Saunakabinen bringen dieses Erlebnis zu Ihnen nach Hause: von kompakten Räumen für 1–3 Personen bis zu großzügigen Räumen für 6 und mehr Personen. So gibt es für jeden Raum und jeden Haushalt die passende Lösung.",
             "Ob Rückzugsort für sich allein oder Platz zum Entspannen mit Familie und Freunden – unsere Räume machen diesen Luxus mühelos und dauerhaft verfügbar: ohne Fitnessstudio-Mitgliedschaft, ohne Voranmeldung, einfach pure finnische Wärme, wann immer Sie sie brauchen."
           ]
         },
@@ -991,7 +991,7 @@
       "panels": {
         "standard": {
           "descriptions": [
-            "Der SAWO Standard-Saunaraum bringt das authentische finnische Saunaerlebnis in Ihr Zuhause. Schlicht und elegant gestaltet, verbindet er traditionelle Handwerkskunst mit moderner Technik.",
+            "Der SAWO Standard-Saunakabine bringt das authentische finnische Saunaerlebnis in Ihr Zuhause. Schlicht und elegant gestaltet, verbindet er traditionelle Handwerkskunst mit moderner Technik.",
             "Jeder Raum ist präzise gefertigt, damit die Wärme optimal zirkuliert und die Energie effizient genutzt wird – für einen gleichmäßig angenehmen Saunagang, jedes Mal."
           ],
           "features": [
@@ -1003,7 +1003,7 @@
         },
         "glassfront": {
           "descriptions": [
-            "Der SAWO Glasfront-Saunaraum verbindet zeitgenössisches Design mit traditionellen Saunavorteilen. Mit einer beeindruckenden vollständigen Glasfront schafft diese moderne Sauna eine offene, luftige Atmosphäre bei gleichzeitig hervorragender Wärmespeicherung.",
+            "Der SAWO Glasfront-Saunakabine verbindet zeitgenössisches Design mit traditionellen Saunavorteilen. Mit einer beeindruckenden vollständigen Glasfront schafft diese moderne Sauna eine offene, luftige Atmosphäre bei gleichzeitig hervorragender Wärmespeicherung.",
             "Perfekt für alle, die sowohl Ästhetik als auch Funktionalität schätzen: Das Glasfront-Design bringt natürliches Licht in Ihren Saunabereich und schafft eine luxuriöse, spa-ähnliche Atmosphäre."
           ],
           "features": [
@@ -1029,7 +1029,7 @@
         },
         "compact": {
           "descriptions": [
-            "Der Kompakt-Saunaraum bietet mit seinen steckerfertigen Vorteilen sofortige Nutzung und Stabilität und spart Installationskosten und Ausfallzeit.",
+            "Der Kompakt-Saunakabine bietet mit seinen steckerfertigen Vorteilen sofortige Nutzung und Stabilität und spart Installationskosten und Ausfallzeit.",
             "Konzipiert für die Nutzung durch eine Person, ist diese platzsparende Sauna in zwei Größen erhältlich und aus hochwertiger Zeder gefertigt – die perfekte Lösung für kleinere Räume, ohne Kompromisse beim authentischen Saunaerlebnis."
           ],
           "features": [
@@ -1059,17 +1059,17 @@
       "description": "Unsere Sauna-Spezialisten begleiten Sie bei jedem Schritt. Von der Designberatung bis zur Unterstützung bei der Installation sind wir für Sie da – für ultimative Entspannung in Ihrem Zuhause."
     },
     "roomTitles": {
-      "standard": "Standard-Saunaraum",
-      "glassfront": "Glasfront-Saunaraum",
+      "standard": "Standard-Saunakabine",
+      "glassfront": "Glasfront-Saunakabine",
       "infrared": "Infrarotsaunen",
-      "compact": "Kompakt-Saunaraum",
+      "compact": "Kompakt-Saunakabine",
       "infraredSingle": "Infrarotsauna"
     },
     "roomDescriptions": {
-      "standard": "Klassische SAWO Saunaräume bieten ein zeitloses Saunaerlebnis mit hochwertigem nordischem Holz und praktischen Bankanordnungen.",
-      "glassfront": "SAWO Glasfront-Saunaräume bieten ein modernes Saunaerlebnis mit widerstandsfähigem Glas für beeindruckende Ausblicke, ohne auf Praktikabilität zu verzichten.",
+      "standard": "Klassische SAWO Saunakabinen bieten ein zeitloses Saunaerlebnis mit hochwertigem nordischem Holz und praktischen Bankanordnungen.",
+      "glassfront": "SAWO Glasfront-Saunakabinen bieten ein modernes Saunaerlebnis mit widerstandsfähigem Glas für beeindruckende Ausblicke, ohne auf Praktikabilität zu verzichten.",
       "infrared": "SAWO Infrarotsaunen bieten sanfte, therapeutische Wärme durch fortschrittliche Infrarottechnologie für ein entspannendes und belebendes Erlebnis.",
-      "compact": "SAWO Kompakt-Saunaräume sind eine stabile Plug-and-play-Lösung für urbane Räume und sofort einsatzbereit. Der verdeckte Ofen sorgt für Sicherheit und freie Sicht."
+      "compact": "SAWO Kompakt-Saunakabinen sind eine stabile Plug-and-play-Lösung für urbane Räume und sofort einsatzbereit. Der verdeckte Ofen sorgt für Sicherheit und freie Sicht."
     },
     "benchTypes": {
       "straight": "Gerade Bank",

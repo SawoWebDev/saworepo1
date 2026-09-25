@@ -1,7 +1,7 @@
 {
   "home": "首页",
   "products": "产品",
-  "support": "支持",
+  "support": "服务支持",
   "aboutUs": "关于我们",
   "contactUs": "联系我们",
   "search": "搜索",
@@ -26,7 +26,7 @@
     "tower": "塔式",
     "stone": "石材式",
     "floor": "落地式",
-    "combi": "多功能一体式",
+    "combi": "桑拿蒸汽两用式",
     "dragonfire": "龙焰",
     "saunaHeaters": "桑拿加热器",
     "saunaControls": "桑拿控制器",
@@ -44,7 +44,7 @@
     "productCatalogue": "产品目录",
     "latestNews": "最新动态",
     "sustainability": "可持续发展",
-    "careers": "招聘信息",
+    "careers": "加入我们",
     "infraredSaunaRooms": "红外线桑拿房",
     "infraredPanels": "红外线加热板",
     "infraredControls": "红外线控制器"

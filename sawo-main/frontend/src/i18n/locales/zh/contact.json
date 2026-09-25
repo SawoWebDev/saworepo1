@@ -17,7 +17,7 @@
     "3": "需求详情"
   },
   "submittingOverlay": {
-    "title": "正在发送……",
+    "title": "正在提交您的需求……",
     "sub": "这可能需要几秒钟，请不要关闭或刷新页面。"
   },
   "success": {
@@ -29,14 +29,14 @@
   "categories": {
     "technical": "技术支持",
     "customer": "客户支持",
-    "general": "一般咨询"
+    "general": "综合咨询"
   },
   "step2": {
     "heading": "个人信息",
     "firstName": "名字",
-    "firstNamePlaceholder": "John...",
+    "firstNamePlaceholder": "请输入名字...",
     "lastName": "姓氏",
-    "lastNamePlaceholder": "Doe...",
+    "lastNamePlaceholder": "请输入姓氏...",
     "email": "电子邮箱",
     "emailPlaceholder": "johndoe@gmail.com",
     "country": "国家",
@@ -57,7 +57,7 @@
     "selectOption": "请选择一个选项",
     "productCategory": "产品类别",
     "productName": "产品名称",
-    "productNamePlaceholder": "Nordex...",
+    "productNamePlaceholder": "例如：Nordex...",
     "productCode": "产品型号",
     "serialNumber": "序列号",
     "serialPlaceholder": "012345",
@@ -70,7 +70,7 @@
     "depth": "深度（米）",
     "height": "高度（米）",
     "addlInfo": "其他产品信息",
-    "addlInfoPlaceholder": "无法开机、其他...",
+    "addlInfoPlaceholder": "无法启动、其他...",
     "addlInfoPlaceholderGeneric": "其他产品信息...",
     "describeIssueInDetail": "请详细描述问题",
     "description": "描述",
@@ -114,7 +114,7 @@
   "issues": {
     "errorDisplayed": "显示错误信息",
     "blankDisplay": "屏幕空白或仅显示横线",
-    "notTurnOn": "无法开机",
+    "notTurnOn": "无法启动",
     "flashingLed": "LED指示灯闪烁",
     "notHeat": "加热器不加热",
     "other": "其他"

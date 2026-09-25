@@ -14,7 +14,7 @@
   "saunaCalculatorCTA": {
     "title": "Finden Sie Ihre Traumsauna",
     "subtitle": "Geben Sie die Maße Ihres Saunaraums ein – Breite, Höhe und Tiefe – und unser Rechner berechnet sofort Ihr Saunavolumen und empfiehlt die passende Ofenleistung in kW.",
-    "buttonLabel": "Sauna-Rechner"
+    "buttonLabel": "Saunarechner"
   },
   "catalogFilter": {
     "all": "Alle",
@@ -36,8 +36,8 @@
       "desc": "Verbessert die Durchblutung, reduziert die Arteriensteifigkeit und unterstützt einen gesunden Blutdruck"
     },
     "respiratoryRelief": {
-      "label": "Atemwegs-Linderung",
-      "desc": "Lindert verstopfte Nase, Nasennebenhöhlen und Brustkorb"
+      "label": "Freie Atemwege",
+      "desc": "Befreit verstopfte Nase, Nebenhöhlen und Brustkorb"
     },
     "muscleRecovery": {
       "label": "Muskelregeneration",
@@ -52,8 +52,8 @@
       "desc": "Senkt das Risiko von Herz-Kreislauf-Erkrankungen, einschließlich Schlaganfall, Bluthochdruck, Demenz und Alzheimer"
     },
     "skinDetox": {
-      "label": "Haut-Entgiftung",
-      "desc": "Öffnet die Poren, reduziert Mitesser, eliminiert Giftstoffe und verbessert die Haut"
+      "label": "Hautentgiftung",
+      "desc": "Öffnet die Poren, reduziert Mitesser, leitet Giftstoffe aus und verbessert das Hautbild"
     },
     "collagenBoost": {
       "label": "Kollagen-Boost",
@@ -64,16 +64,16 @@
       "desc": "Verbessert die Hautfeuchtigkeit, stabilisiert den pH-Wert und stärkt die natürliche Hautbarriere"
     },
     "immuneSupport": {
-      "label": "Immunsystem-Unterstützung",
+      "label": "Starke Abwehrkräfte",
       "desc": "Unterstützt die natürlichen Abwehrkräfte des Körpers und fördert die Genesung nach Krankheit"
     },
     "metabolismBoost": {
       "label": "Stoffwechsel-Boost",
-      "desc": "Stimuliert die Proteinreparatur, verbessert die Insulinsensitivität und steigert die Stoffwechselrate"
+      "desc": "Fördert die Proteinreparatur, verbessert die Insulinsensitivität und steigert die Stoffwechselrate"
     },
     "mentalWellness": {
       "label": "Mentales Wohlbefinden",
-      "desc": "Reduziert signifikant Depressionssymptome bei regelmäßiger Anwendung"
+      "desc": "Kann bei regelmäßiger Anwendung depressive Symptome deutlich lindern"
     }
   },
   "accessoryCard": {

@@ -2,7 +2,7 @@
   "hub": {
     "meta": {
       "title": "Support-Center",
-      "description": "Hilfe zu Ihren SAWO Produkten: FAQs, Sauna-Rechner, Bedienungsanleitungen und Produktkatalog – alles an einem Ort."
+      "description": "Hilfe zu Ihren SAWO Produkten: FAQs, Saunarechner, Bedienungsanleitungen und Produktkatalog – alles an einem Ort."
     },
     "hero": {
       "alt": "Support-Center",
@@ -18,7 +18,7 @@
         "link": "FAQ Durchsuchen"
       },
       "calculator": {
-        "title": "Sauna-Rechner",
+        "title": "Saunarechner",
         "desc": "Mit unserem interaktiven Tool berechnen Sie anhand der Raummaße, welche Ofengröße für Ihre Sauna die richtige ist.",
         "link": "Rechner Nutzen"
       },
@@ -172,7 +172,7 @@
   },
   "calculator": {
     "meta": {
-      "title": "Sauna-Rechner",
+      "title": "Saunarechner",
       "description": "Finden Sie den richtigen SAWO Ofen für Ihre Sauna mit unserem Rechner, der Raumgröße und -volumen mit der idealen Ofenleistung abgleicht."
     },
     "intro": {
@@ -311,7 +311,7 @@
       "steam": "Dampf",
       "infrared": "Infrarot",
       "heater-acc": "Ofenzubehör",
-      "accessories": "Sauna-Zubehör",
+      "accessories": "Saunazubehör",
       "rooms": "Saunaräume",
       "other": "Sonstiges"
     },
