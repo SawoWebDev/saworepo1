@@ -69,7 +69,13 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick, productName }) {
         cursor: items[idx]?.type === 'image' ? "zoom-in" : "default",
         width: "100%",
       }}
-        onClick={() => items[idx]?.type === 'image' && onImageClick([items[idx].url], 0)}
+        onClick={() => {
+          if (items[idx]?.type !== 'image') return;
+          // Hand the lightbox every image (not just the clicked one) so it
+          // can be navigated; videos aren't lightbox-able, so they're skipped.
+          const imgs = items.filter(it => it.type === 'image').map(it => it.url);
+          onImageClick(imgs, Math.max(0, imgs.indexOf(items[idx].url)));
+        }}
       >
         {items[idx]?.type === 'image' ? (
           <>

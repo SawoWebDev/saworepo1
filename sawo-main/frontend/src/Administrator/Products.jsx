@@ -21,6 +21,7 @@ import { STONE_FIXED_ORDER, groupStoneProducts } from "../utils/stoneGroups";
 import { DRAGONFIRE_FIXED_ORDER, groupDragonfireProducts } from "../utils/dragonfireGroups";
 import ScrollArea from "./ScrollArea";
 import Pagination from "./Pagination";
+import lightboxLogo from "./SAWO-logo.webp";
 
 const PRODUCTS_CACHE_KEY = "admin:products:live";
 const PRODUCTS_META_CACHE_KEY = "admin:products:live:meta";
@@ -2110,6 +2111,7 @@ function PreviewLightbox({ images, startIndex, onClose }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const dragStart = useRef(null);
+  const moved = useRef(false);
 
   const prev = useCallback(() => { setIdx(i => (i - 1 + images.length) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
   const next = useCallback(() => { setIdx(i => (i + 1) % images.length); setScale(1); setOffset({ x: 0, y: 0 }); }, [images.length]);
@@ -2125,21 +2127,48 @@ function PreviewLightbox({ images, startIndex, onClose }) {
   }, [onClose, prev, next]);
 
   const handleWheel = e => { e.preventDefault(); setScale(s => Math.min(Math.max(s - e.deltaY * 0.001, 1), 4)); };
-  const handleMouseDown = e => { if (scale <= 1) return; setDragging(true); dragStart.current = { x: e.clientX - offset.x, y: e.clientY - offset.y }; };
-  const handleMouseMove = e => { if (!dragging || !dragStart.current) return; setOffset({ x: e.clientX - dragStart.current.x, y: e.clientY - dragStart.current.y }); };
-  const handleMouseUp = () => setDragging(false);
+  // Press-and-hold to drag (pointer capture keeps the drag alive even if the
+  // cursor leaves the image, and release always ends it — no "sticky" image).
+  // `moved` lets the backdrop ignore the click that fires after a drag ends.
+  const handlePointerDown = e => {
+    if (e.button !== undefined && e.button !== 0) return;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    moved.current = false;
+    setDragging(true);
+    dragStart.current = { x: e.clientX - offset.x, y: e.clientY - offset.y, sx: e.clientX, sy: e.clientY };
+  };
+  const handlePointerMove = e => {
+    if (!dragging || !dragStart.current) return;
+    if (Math.abs(e.clientX - dragStart.current.sx) + Math.abs(e.clientY - dragStart.current.sy) > 3) moved.current = true;
+    setOffset({ x: e.clientX - dragStart.current.x, y: e.clientY - dragStart.current.y });
+  };
+  const handlePointerUp = e => {
+    e.currentTarget.releasePointerCapture?.(e.pointerId);
+    setDragging(false);
+    dragStart.current = null;
+  };
+  const closeFromBackdrop = e => {
+    e.stopPropagation();
+    if (moved.current) { moved.current = false; return; }
+    onClose();
+  };
 
   return (
-    <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 20000, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <button onClick={onClose} style={{ position: "absolute", top: 18, right: 18, background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    // stopPropagation: the lightbox is rendered inside the preview modal's
+    // overlay, and React synthetic clicks bubble through the component tree
+    // (not the DOM), so without it closing the lightbox also hit the
+    // overlay's onClose and dismissed the whole preview.
+    <div onClick={closeFromBackdrop} style={{ position: "fixed", inset: 0, zIndex: 20000, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <img src={lightboxLogo} alt="SAWO" draggable={false} style={{ position: "absolute", top: 16, left: 18, zIndex: 10, height: 64, width: "auto", pointerEvents: "none" }} />
+      <button onClick={e => { e.stopPropagation(); onClose(); }} style={{ position: "absolute", zIndex: 10, top: 18, right: 18, background: "rgba(255,255,255,0.12)", border: "none", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#fff", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <i className="fa-solid fa-xmark" />
       </button>
       {images.length > 1 && (
-        <div style={{ position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.12)", color: "#fff", padding: "4px 14px", borderRadius: 20, fontSize: "0.72rem", fontWeight: 600, fontFamily: "'Montserrat',sans-serif" }}>
+        <div style={{ position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)", zIndex: 10, pointerEvents: "none", background: "rgba(255,255,255,0.12)", color: "#fff", padding: "4px 14px", borderRadius: 20, fontSize: "0.72rem", fontWeight: 600, fontFamily: "'Montserrat',sans-serif" }}>
           {idx + 1} / {images.length}
         </div>
       )}
-      <div style={{ position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)", background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)", padding: "4px 14px", borderRadius: 20, fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", pointerEvents: "none" }}>
+      <div style={{ position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)", zIndex: 10, background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.6)", padding: "4px 14px", borderRadius: 20, fontSize: "0.65rem", fontFamily: "'Montserrat',sans-serif", pointerEvents: "none" }}>
         Scroll to zoom · Drag to pan · Esc to close
       </div>
       {images.length > 1 && (
@@ -2151,11 +2180,11 @@ function PreviewLightbox({ images, startIndex, onClose }) {
           ))}
         </>
       )}
-      <div onClick={e => e.stopPropagation()} onWheel={handleWheel} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} style={{ maxWidth: "88vw", maxHeight: "88vh", cursor: scale > 1 ? (dragging ? "grabbing" : "grab") : "default", userSelect: "none" }}>
-        <img src={images[idx]} alt="" style={{ maxWidth: "88vw", maxHeight: "88vh", objectFit: "contain", borderRadius: 10, transform: `scale(${scale}) translate(${offset.x / scale}px, ${offset.y / scale}px)`, transition: dragging ? "none" : "transform 0.15s ease", display: "block" }} />
+      <div onClick={e => e.stopPropagation()} onWheel={handleWheel} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} onPointerCancel={handlePointerUp} style={{ position: "relative", zIndex: 1, maxWidth: "88vw", maxHeight: "88vh", cursor: dragging ? "grabbing" : "grab", userSelect: "none", touchAction: "none" }}>
+        <img src={images[idx]} alt="" draggable={false} style={{ maxWidth: "88vw", maxHeight: "88vh", objectFit: "contain", borderRadius: 10, transform: `scale(${scale}) translate(${offset.x / scale}px, ${offset.y / scale}px)`, transition: dragging ? "none" : "transform 0.15s ease", display: "block" }} />
       </div>
       {images.length > 1 && (
-        <div style={{ position: "absolute", bottom: 52, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 6 }} onClick={e => e.stopPropagation()}>
+        <div style={{ position: "absolute", bottom: 52, left: "50%", transform: "translateX(-50%)", zIndex: 10, display: "flex", gap: 6 }} onClick={e => e.stopPropagation()}>
           {images.map((url, i) => (
             <button key={i} onClick={() => { setIdx(i); setScale(1); setOffset({ x: 0, y: 0 }); }} style={{ width: 44, height: 44, borderRadius: 6, overflow: "hidden", border: `2px solid ${i === idx ? "#a67853" : "rgba(255,255,255,0.25)"}`, background: "rgba(0,0,0,0.4)", cursor: "pointer", padding: 0 }}>
               <img src={url} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }} />
@@ -3451,6 +3480,14 @@ export default function Products({ currentUser }) {
   };
 
   const openEdit = async row => {
+    // Hard gate, not just a hidden button: the preview modal's Edit button,
+    // the ?edit= deep link, and Models/Taxonomy quick-preview all funnel
+    // through here, so a viewer (or a superadmin previewing as one) can't
+    // reach the edit form by any path.
+    if (!perms.can("products.edit")) {
+      add("You don't have permission to edit products.", "error");
+      return;
+    }
     // Open right away with a spinner instead of waiting on the fetch below —
     // otherwise there's a silent gap between the click and the modal
     // appearing where nothing on screen indicates anything happened.
@@ -3527,6 +3564,10 @@ export default function Products({ currentUser }) {
   }, []);
 
   const openDuplicate = async row => {
+    if (!perms.can("products.duplicate")) {
+      add("You don't have permission to duplicate products.", "error");
+      return;
+    }
     try {
       const data = await getProductByIdLive(row.id);
       if (!data) throw new Error("Product not found");
@@ -3586,6 +3627,9 @@ export default function Products({ currentUser }) {
   // ── Save ──────────────────────────────────────────────────────────────────
   const handleSave = async e => {
     e.preventDefault();
+    if (!perms.can(editing ? "products.edit" : "products.create")) {
+      return add("You don't have permission to save products.", "error");
+    }
     if (!form.name) return add("Product name is required.", "error");
     if (!form.slug) return add("Slug is required.", "error");
     setSaving(true);
@@ -3680,6 +3724,7 @@ export default function Products({ currentUser }) {
   // call the R2 API this file uses, so auto-purged rows leave their storage
   // files behind; only an admin-initiated "Delete Forever" cleans those up.
   const handleDelete = async () => {
+    if (!perms.can("products.delete")) return add("You don't have permission to delete products.", "error");
     const target = confirmDel;
     setConfirmDel(null);
     try {
@@ -3709,6 +3754,7 @@ export default function Products({ currentUser }) {
 
   // ── Bulk delete (soft — same as above, all at once) ────────────────────────
   const handleBulkDelete = async () => {
+    if (!perms.can("products.bulk_delete")) return add("You don't have permission to bulk delete products.", "error");
     const ids = Array.from(selected);
     setBulkConfirm(false);
     try {
@@ -4807,7 +4853,7 @@ export default function Products({ currentUser }) {
         <ProductPreviewModal
           product={previewProduct}
           onClose={() => setPreviewProduct(null)}
-          onEdit={() => { const p = previewProduct; setPreviewProduct(null); openEdit(p); }}
+          onEdit={perms.can("products.edit") ? () => { const p = previewProduct; setPreviewProduct(null); openEdit(p); } : undefined}
           liveUrl={productUrl(previewProduct)}
         />
       )}

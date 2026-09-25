@@ -1793,7 +1793,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
 }
-
+ 
 /* ── Toolbar filters row (Products/Sauna Rooms) ──────────────────────────
    Status select + sort select + view-mode toggle + search, right-aligned.
    Desktop layout unchanged from before; mobile behavior below turns this
