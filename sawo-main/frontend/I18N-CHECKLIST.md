@@ -2517,3 +2517,44 @@ back (titles untouched) in all 8 `sauna.json` locales (en, zh, de, fi, fr, es,
 th, ja) — each locale's own translated text was kept, only which key it sits
 under changed. Verified no hardcoded duplicate of this copy exists outside
 the i18n JSON files, and all 8 edited files parse as valid JSON.
+
+## Accessories page content update propagated (2026-09-29)
+
+Propagated commit `3c4a6c2` ("fix: update pails and ladles description to
+include hemlock; refine thermometer descriptions") from the English source
+into the other 7 locales. Two changes:
+- `accessories.items.pailsLadles.desc` **and**
+  `accessoriesPage.items.pailsLadles.desc` (both sections use the same
+  sentence in English): "pine" → "hemlock". Translated the single word in
+  place per locale rather than re-translating the whole sentence: zh 松木→铁杉,
+  de Kiefer→Hemlocktanne, fi männystä→hemlokista, fr le pin→la pruche
+  (gender-appropriate), es pino→tsuga (deliberately not "cicuta", which in
+  Spanish means the poison plant, not the hemlock tree), th สน→เฮมล็อค
+  (transliterated, no established native term), ja パイン→ヘムロック (existing
+  Japanese lumber-trade term for imported hemlock).
+- `accessoriesPage.items.thermometers.desc` **only** (the `accessories.`
+  hub-page copy of this key was untouched in the English source, so left
+  as-is in every locale): full sentence rewritten in English to a shorter
+  "Traditional thermometers and combination meters help you monitor your
+  sauna's temperature and humidity with ease." — translated fresh into all 7
+  locales, matching each locale's existing tone/conjunction convention for
+  this section (e.g. German's established "&"-in-prose style for
+  `accessoriesPage`, confirmed against its untouched neighboring keys in the
+  same block).
+- Applied via direct line-indexed edits (not the extract/inject pipeline,
+  since this was a same-key wording change, not new keys) after confirming
+  via dry-run that the two near-duplicate `pailsLadles`/`thermometers` blocks
+  (hub vs. dedicated accessories page) wouldn't cross-contaminate. Verified
+  with `npm run i18n:manifest` (all locales still `translated`, zero gaps)
+  and `CI=true npx react-scripts build` (clean).
+
+Same-day follow-up: `accessoriesPage.items.headrestsBackrests.desc` (dedicated
+Accessories page only — the `accessories.` hub-page copy of this key was
+untouched in English, so left as-is everywhere) was rewritten from generic
+"durable materials like wood, memory foam, or fabric" phrasing to name the
+same three woods as the pails/headrests fix above: "made from cedar, aspen,
+and hemlock." Translated fresh into all 7 locales (not just a word swap this
+time, since the sentence structure changed), reusing each locale's
+already-established terms for cedar/aspen/hemlock from the pailsLadles fix
+above for consistency, and German's "&"-in-prose convention for this
+section. Verified with `npm run i18n:manifest` and a clean production build.

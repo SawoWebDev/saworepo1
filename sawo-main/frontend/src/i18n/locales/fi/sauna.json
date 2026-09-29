@@ -68,7 +68,7 @@
       },
       "pailsLadles": {
         "title": "Kiulut ja kauhat",
-        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy 2–40 litran kiuluja perinteisestä setristä, haavasta tai männystä tai modernista ruostumattomasta teräksestä. Täydennä kokonaisuus kauhalla."
+        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy 2–40 litran kiuluja perinteisestä setristä, haavasta tai hemlokista tai modernista ruostumattomasta teräksestä. Täydennä kokonaisuus kauhalla."
       },
       "thermometers": {
         "title": "Lämpömittarit ja yhdistelmämittarit",
@@ -180,11 +180,11 @@
       },
       "pailsLadles": {
         "title": "Kiulut ja kauhat",
-        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy 2–40 litran kiuluja perinteisestä setristä, haavasta tai männystä tai modernista ruostumattomasta teräksestä. Täydennä kokonaisuus kauhalla."
+        "desc": "Kiulut ovat olennainen osa suomalaista saunaa. SAWOn valikoimasta löytyy 2–40 litran kiuluja perinteisestä setristä, haavasta tai hemlokista tai modernista ruostumattomasta teräksestä. Täydennä kokonaisuus kauhalla."
       },
       "thermometers": {
         "title": "Lämpömittarit ja yhdistelmämittarit",
-        "desc": "Perinteiset lämpö- ja kosteusmittarit kertovat, milloin sauna on valmis. Tutustu erilaisiin muotoihin ja tyyleihin. Tuo oleskelutilaan tunnelmaa puisilla kelloilla ja kokeile 15 minuutin tiimalasiamme seurusteluun tai saunan aloittelijoille."
+        "desc": "Perinteiset lämpömittarit ja yhdistelmämittarit auttavat sinua seuraamaan saunasi lämpötilaa ja kosteutta vaivattomasti."
       },
       "clocksSandtimers": {
         "title": "Kellot ja tiimalasit",
@@ -196,7 +196,7 @@
       },
       "headrestsBackrests": {
         "title": "Niska- ja selkätuet",
-        "desc": "Puiset niska- ja selkätuet sekä oleskelutilan selkänojat on valmistettu kestävistä materiaaleista, kuten puusta, muistivaahdosta tai kankaasta. Kosteutta kestävä verhoilu tuo mukavuutta ja kestävyyttä sekä saunaan että oleskelutilaan."
+        "desc": "Puiset niska- ja selkätuet, valmistettu setristä, haavasta ja hemlokista, tarjoavat mukavan ja kestävän tuen saunaan tai oleskelutilaan."
       },
       "doorsHandles": {
         "title": "Ovet ja kahvat",
