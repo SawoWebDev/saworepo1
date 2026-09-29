@@ -2693,3 +2693,28 @@ Verified: `npm run i18n:manifest` clean (zero gaps, all 8 locales), full
 production build clean, and a real Chromium screenshot of `/zh/3d-viewer`
 confirming both bugs above are fixed in the actual rendered page (not just
 the JSON source).
+
+## Catalog-wide dimension formatting: "x" → "×" + unit spacing (2026-09-29)
+
+Two source-content fixes, not translation work — both propagated across
+English + all 7 locales in `products`/`product_translations`:
+
+- **`moisture-paper`**: `short_description` and `spec_table` both said
+  "1200 × 77 × 77mm" — a paper roll doesn't have 3 dimensions, and this
+  already used "×" but was still wrong. Corrected to the real size,
+  "24000 × 1200 mm", in the English row and all 7 translation rows (`th`
+  needed a separate pass — its short_description uses "มม." not "mm", so the
+  first replace pattern didn't match it). Verified zero "77" left anywhere
+  for this product afterward.
+- **Catalog-wide lowercase "x" → "×" + spacing**: scanned every product's
+  `short_description`/`description`/`features`/`spec_table` (English and
+  all locales) for the `\d+\s*x\s*\d+` pattern before touching anything —
+  only 3 products actually had it, not a catalog-wide problem:
+  `saunova-2-0-contactor-unit` ("78 mm x W: 320 mm x H: 270 mm", "3x3kW"),
+  `innova-2-0-contactor-unit` ("320 mm x H: 270 mm x D: 78 mm", "3x5kW"),
+  `sauna-grille-622-d` ("140 x 280mm"). Same broken text was duplicated
+  byte-identical across all 7 translation rows for each product (these
+  particular DIMENSIONS/POWER table rows were never actually translated,
+  just copied through) — fixed in one pass per product covering the English
+  row + all locale rows. Re-ran the scan query afterward: zero remaining
+  matches anywhere in `products` or `product_translations`.

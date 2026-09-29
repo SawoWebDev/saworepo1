@@ -540,7 +540,7 @@ export default function SaunaRoomDisplay() {
                   {specImages.length > 0 && (
                     <>
                       <SectionLabel icon="fa-solid fa-vector-square" text={t("sections.floorPlan")} />
-                      <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 320 }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                         {specImages.map((url, i) => (
                           <div key={i} onClick={() => setLightbox({ images: specImages, index: i })} style={{ cursor: "zoom-in" }}>
                             <ImageWithLoader src={url} alt={t("sections.floorPlan")} style={{ width: "100%", objectFit: "contain", display: "block" }} />
