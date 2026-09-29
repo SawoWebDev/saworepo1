@@ -45,11 +45,11 @@
     "items": {
       "innova": {
         "title": "Serie Innova",
-        "desc": "La Saunova 2.0 se combina a la perfección con estufas de hasta 9 kW y cuenta con control inteligente de la temperatura, un sensor de banco preciso y una interfaz de usuario versátil, sin necesidad de un controlador de potencia independiente."
+        "desc": "Control versátil de la temperatura, la humedad, la ventilación y la iluminación del sauna, con Smart Controlling, sensor de puerta, temporizador de arranque programado y funciones opcionales de ventilador, regulador y Combi."
       },
       "saunova": {
         "title": "Serie Saunova",
-        "desc": "Control versátil de la temperatura, la humedad, la ventilación y la iluminación del sauna, con Smart Controlling, sensor de puerta, temporizador de arranque programado y funciones opcionales de ventilador, regulador y Combi."
+        "desc": "La Saunova 2.0 se combina a la perfección con estufas de hasta 9 kW y cuenta con control inteligente de la temperatura, un sensor de banco preciso y una interfaz de usuario versátil, sin necesidad de un controlador de potencia independiente."
       },
       "accessories": {
         "title": "Accesorios de control",

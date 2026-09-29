@@ -45,11 +45,11 @@
     "items": {
       "innova": {
         "title": "Innova Series",
-        "desc": "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface, no separate power controller needed."
+        "desc": "Versatile control for sauna temperature, humidity, ventilation, and lighting, featuring Smart Controlling, Door Sensor, Prerun Timer, and optional Fan, Dimmer, and Combi functions."
       },
       "saunova": {
         "title": "Saunova Series",
-        "desc": "Versatile control for sauna temperature, humidity, ventilation, and lighting, featuring Smart Controlling, Door Sensor, Prerun Timer, and optional Fan, Dimmer, and Combi functions."
+        "desc": "Saunova 2.0 seamlessly pairs with heaters up to 9 kW, featuring smart temperature control, a precise bench sensor, and a versatile user interface, no separate power controller needed."
       },
       "accessories": {
         "title": "Control Accessories",

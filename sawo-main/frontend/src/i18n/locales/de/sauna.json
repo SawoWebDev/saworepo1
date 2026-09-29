@@ -45,11 +45,11 @@
     "items": {
       "innova": {
         "title": "Innova-Serie",
-        "desc": "Saunova 2.0 lässt sich nahtlos mit Öfen bis 9 kW kombinieren und bietet intelligente Temperaturregelung, einen präzisen Bank-Sensor und eine vielseitige Benutzeroberfläche – kein separater Leistungsregler nötig."
+        "desc": "Vielseitige Steuerung für Saunatemperatur, Luftfeuchtigkeit, Belüftung und Beleuchtung mit intelligenter Steuerung, Türsensor, Vorlaufzeitgeber sowie optionalen Lüfter-, Dimmer- und Combi-Funktionen."
       },
       "saunova": {
         "title": "Saunova-Serie",
-        "desc": "Vielseitige Steuerung für Saunatemperatur, Luftfeuchtigkeit, Belüftung und Beleuchtung mit intelligenter Steuerung, Türsensor, Vorlaufzeitgeber sowie optionalen Lüfter-, Dimmer- und Combi-Funktionen."
+        "desc": "Saunova 2.0 lässt sich nahtlos mit Öfen bis 9 kW kombinieren und bietet intelligente Temperaturregelung, einen präzisen Bank-Sensor und eine vielseitige Benutzeroberfläche – kein separater Leistungsregler nötig."
       },
       "accessories": {
         "title": "Steuerungszubehör",
@@ -146,7 +146,7 @@
       },
       "stone": {
         "title": "Stein-Serie",
-        "caption": "Gefertigt aus finnischem Speckstein, verfügen die SAWO Stone-Öfen über außergewöhnliche Wärmespeicher- und Leiteigenschaften. Ihre sanfte Wärme sorgt für ein gleichbleibendes und langanhaltendes Saunaerlebnis."
+        "caption": "Gefertigt aus finnischem Speckstein, verfügen die SAWO Stein-Öfen über außergewöhnliche Wärmespeicher- und Leiteigenschaften. Ihre sanfte Wärme sorgt für ein gleichbleibendes und langanhaltendes Saunaerlebnis."
       }
     },
     "viewAll": "ALLE ÖFEN ANSEHEN",
@@ -280,14 +280,14 @@
       "description": "SAWO Stein-Serie Öfen kombinieren robusten Edelstahl mit wärmeleitendem finnischem Speckstein für effizientes Heizen und schnelles Trocknen nach der Nutzung."
     },
     "hero": {
-      "title": "SAUNA STONE-SERIE",
+      "title": "SAUNA STEIN-SERIE",
       "subtitle": "Effiziente, schlanke, wellnessorientierte Saunen.",
       "alt": "Sauna Stein-Serie",
       "exploreButton": "ÖFEN ENTDECKEN"
     },
     "intro": {
       "title": "Unsere Premium-Saunaöfen der Stein-Serie",
-      "desc": "Gönnen Sie sich moderne, energieeffiziente Saunen, konzipiert für Entspannung und Wohlbefinden, mit schlanker Ästhetik und außergewöhnlichem Komfort. Unsere Stone-Öfen bestehen vollständig aus Stein oder einer Kombination aus Edelstahl und Stein. Sie profitieren von der hervorragenden Wärmeleitung des finnischen Specksteins, der Ihr Saunaerlebnis verbessert und Ihren Saunaraum nach der Nutzung schneller trocknen lässt."
+      "desc": "Gönnen Sie sich moderne, energieeffiziente Saunen, konzipiert für Entspannung und Wohlbefinden, mit schlanker Ästhetik und außergewöhnlichem Komfort. Unsere Stein-Öfen bestehen vollständig aus Stein oder einer Kombination aus Edelstahl und Stein. Sie profitieren von der hervorragenden Wärmeleitung des finnischen Specksteins, der Ihr Saunaerlebnis verbessert und Ihren Saunaraum nach der Nutzung schneller trocknen lässt."
     },
     "why": {
       "eyebrow": "SAWO ÖFEN",
@@ -295,7 +295,7 @@
       "desc": "SAWO Öfen vereinen Langlebigkeit, Energieeffizienz und modernes Design. Sie arbeiten bei jedem Saunagang zuverlässig und gleichbleibend gut – für ein Saunaerlebnis auf höchstem Niveau.",
       "durable": "Robuste Konstruktion: Hochwertige Materialien sorgen für langanhaltende Leistung."
     },
-    "empty": "Keine Stone-Öfen verfügbar."
+    "empty": "Keine Stein-Öfen verfügbar."
   },
   "towerPage": {
     "meta": {
@@ -744,17 +744,17 @@
           "desc": "Ein großzügiger Saunaraum für 6 oder mehr Personen. Perfekt für größere Häuser, Wellnessbereiche oder gewerbliche Umgebungen, die ein erstklassiges Gruppenerlebnis suchen."
         },
         "r4": {
-          "name": "Kleiner Glasfront-Saunakabine - 1414RS",
+          "name": "Kleine Glasfront-Saunakabine - 1414RS",
           "tag": "Klein",
           "desc": "Eine kompakte Sauna für 1–3 Personen mit vollständiger Glasfront, die natürliches Licht und visuelle Weite verstärkt. Ideal für moderne Interieurs, die ein helleres, offeneres Saunaerlebnis suchen."
         },
         "r5": {
-          "name": "Mittlerer Glasfront-Saunakabine - 1420RS",
+          "name": "Mittlere Glasfront-Saunakabine - 1420RS",
           "tag": "Mittel",
           "desc": "Diese Glasfront-Sauna für 4–6 Personen verbindet geräumigen Komfort mit zeitgemäßer Eleganz. Die transparente Front schafft eine offene, luftige Atmosphäre und bietet dabei ein authentisches Saunaerlebnis."
         },
         "r6": {
-          "name": "Großer Glasfront-Saunakabine - 1922RS",
+          "name": "Große Glasfront-Saunakabine - 1922RS",
           "tag": "Groß",
           "desc": "Eine Premium-Sauna für 6+ Personen mit einer beeindruckenden Vollglasfront für ein luxuriöses, offenes Raumgefühl. Perfekt für repräsentative Wellnessbereiche, die Design und Entspannung verbinden."
         }
@@ -766,9 +766,9 @@
           "desc": "Der Taurus D revolutioniert den Standard-Saunaofen mit zwei oder mehr Leistungsoptionen in einem Ofen. Der Ofen ist für den industriellen Einsatz, Spas sowie öffentliche und private Pools konzipiert."
         },
         "h2": {
-          "name": "SAWO30 Round Ni2",
+          "name": "SAWO30 Rund Ni2",
           "tag": "Tower-Ofen",
-          "desc": "Der SAWO30 Round ist ein beeindruckender Ofen, der perfekt in der Mitte der Sauna platziert oder in Bänke eingebaut werden kann. Die große Steinmenge im hohen, schlanken Korpus sorgt für eine reichhaltige, dampfgesättigte Atmosphäre."
+          "desc": "Der SAWO30 Rund ist ein beeindruckender Ofen, der perfekt in der Mitte der Sauna platziert oder in Bänke eingebaut werden kann. Die große Steinmenge im hohen, schlanken Korpus sorgt für eine reichhaltige, dampfgesättigte Atmosphäre."
         },
         "h3": {
           "name": "Nordex Pro NS",
@@ -781,9 +781,9 @@
           "desc": "Der Krios Ni2 bietet mit seinem größeren Steinbehälter ein besonders sattes, feuchteres finnisches Saunaerlebnis. Das schlanke Edelstahlgehäuse mit dem typischen SAWO Muster verbindet Stil und Leistung."
         },
         "h5": {
-          "name": "Aries Round Black Ni2",
+          "name": "Aries Rund Schwarz Ni2",
           "tag": "Tower-Ofen",
-          "desc": "Der Aries Round hat die minimalistische Eleganz aller Tower-Öfen. Er ist hoch und platzsparend, verteilt die Wärme gleichmäßig und eignet sich ideal für die Aufstellung in der Saunamitte oder den Einbau in eine Bank."
+          "desc": "Der Aries Rund hat die minimalistische Eleganz aller Tower-Öfen. Er ist hoch und platzsparend, verteilt die Wärme gleichmäßig und eignet sich ideal für die Aufstellung in der Saunamitte oder den Einbau in eine Bank."
         },
         "h6": {
           "name": "Scandia NS",
@@ -991,7 +991,7 @@
       "panels": {
         "standard": {
           "descriptions": [
-            "Der SAWO Standard-Saunakabine bringt das authentische finnische Saunaerlebnis in Ihr Zuhause. Schlicht und elegant gestaltet, verbindet er traditionelle Handwerkskunst mit moderner Technik.",
+            "Die SAWO Standard-Saunakabine bringt das authentische finnische Saunaerlebnis in Ihr Zuhause. Schlicht und elegant gestaltet, verbindet sie traditionelle Handwerkskunst mit moderner Technik.",
             "Jeder Raum ist präzise gefertigt, damit die Wärme optimal zirkuliert und die Energie effizient genutzt wird – für einen gleichmäßig angenehmen Saunagang, jedes Mal."
           ],
           "features": [
@@ -1003,7 +1003,7 @@
         },
         "glassfront": {
           "descriptions": [
-            "Der SAWO Glasfront-Saunakabine verbindet zeitgenössisches Design mit traditionellen Saunavorteilen. Mit einer beeindruckenden vollständigen Glasfront schafft diese moderne Sauna eine offene, luftige Atmosphäre bei gleichzeitig hervorragender Wärmespeicherung.",
+            "Die SAWO Glasfront-Saunakabine verbindet zeitgenössisches Design mit traditionellen Saunavorteilen. Mit einer beeindruckenden vollständigen Glasfront schafft diese moderne Sauna eine offene, luftige Atmosphäre bei gleichzeitig hervorragender Wärmespeicherung.",
             "Perfekt für alle, die sowohl Ästhetik als auch Funktionalität schätzen: Das Glasfront-Design bringt natürliches Licht in Ihren Saunabereich und schafft eine luxuriöse, spa-ähnliche Atmosphäre."
           ],
           "features": [
@@ -1029,7 +1029,7 @@
         },
         "compact": {
           "descriptions": [
-            "Der Kompakt-Saunakabine bietet mit seinen steckerfertigen Vorteilen sofortige Nutzung und Stabilität und spart Installationskosten und Ausfallzeit.",
+            "Die Kompakt-Saunakabine bietet mit ihren steckerfertigen Vorteilen sofortige Nutzung und Stabilität und spart Installationskosten und Ausfallzeit.",
             "Konzipiert für die Nutzung durch eine Person, ist diese platzsparende Sauna in zwei Größen erhältlich und aus hochwertiger Zeder gefertigt – die perfekte Lösung für kleinere Räume, ohne Kompromisse beim authentischen Saunaerlebnis."
           ],
           "features": [

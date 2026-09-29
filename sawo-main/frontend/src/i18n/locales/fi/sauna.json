@@ -45,11 +45,11 @@
     "items": {
       "innova": {
         "title": "Innova-sarja",
-        "desc": "Saunova 2.0 toimii saumattomasti enintään 9 kW:n kiukaiden kanssa. Siinä on älykäs lämpötilansäätö, tarkka lauteanturi ja monipuolinen käyttöliittymä, eikä erillistä tehonohjainta tarvita."
+        "desc": "Monipuolinen ohjauskeskus saunan lämpötilan, kosteuden, ilmanvaihdon ja valaistuksen säätöön. Mukana älykäs ohjaus, ovianturi ja ennakkoajastin sekä lisävarusteina tuuletin-, himmennin- ja Combi-toiminnot."
       },
       "saunova": {
         "title": "Saunova-sarja",
-        "desc": "Monipuolinen ohjauskeskus saunan lämpötilan, kosteuden, ilmanvaihdon ja valaistuksen säätöön. Mukana älykäs ohjaus, ovianturi ja ennakkoajastin sekä lisävarusteina tuuletin-, himmennin- ja Combi-toiminnot."
+        "desc": "Saunova 2.0 toimii saumattomasti enintään 9 kW:n kiukaiden kanssa. Siinä on älykäs lämpötilansäätö, tarkka lauteanturi ja monipuolinen käyttöliittymä, eikä erillistä tehonohjainta tarvita."
       },
       "accessories": {
         "title": "Ohjauskeskusten lisävarusteet",
@@ -284,7 +284,7 @@
   "roomsPage": {
     "meta": {
       "title": "Saunahuoneet",
-      "description": "Tutustu SAWOn saunahuoneisiin: Standard-, Glass Front- ja Compact-mallit täydellistä, terapeuttista saunakokemusta varten."
+      "description": "Tutustu SAWOn saunahuoneisiin: Standard-, Lasiseinä- ja Compact-mallit täydellistä, terapeuttista saunakokemusta varten."
     },
     "hero": {
       "title": "SAUNAHUONEET",
@@ -357,9 +357,9 @@
           "desc": "Taurus D mullistaa perinteisen saunankiukaan tarjoamalla kaksi tai useampia tehovaihtoehtoja samassa kiukaassa. Kiuas on suunniteltu teolliseen käyttöön, kylpylöihin sekä julkisiin ja yksityisiin uima-altaisiin."
         },
         "h2": {
-          "name": "SAWO30 Round Ni2",
+          "name": "SAWO30 Pyöreä Ni2",
           "tag": "Tornikiuas",
-          "desc": "SAWO30 Round on upean näköinen kiuas, joka sopii täydellisesti saunan keskelle tai lauteisiin upotettavaksi. Korkean, tyylikkään rungon suuri kivimäärä luo rikkaan, löylyntäyteisen tunnelman."
+          "desc": "SAWO30 Pyöreä on upean näköinen kiuas, joka sopii täydellisesti saunan keskelle tai lauteisiin upotettavaksi. Korkean, tyylikkään rungon suuri kivimäärä luo rikkaan, löylyntäyteisen tunnelman."
         },
         "h3": {
           "name": "Nordex Pro NS",
@@ -372,9 +372,9 @@
           "desc": "Krios Ni2 tarjoaa rikkaamman ja kosteamman suomalaisen saunakokemuksen suuremman kivisäiliönsä ansiosta. Tyylikäs ruostumattomasta teräksestä valmistettu kotelo SAWOn tunnusomaisine kuvioineen yhdistää tyylin ja suorituskyvyn."
         },
         "h5": {
-          "name": "Aries Round Black Ni2",
+          "name": "Aries Pyöreä Musta Ni2",
           "tag": "Tornikiuas",
-          "desc": "Aries Round on yhtä minimalistisen tyylikäs kuin muutkin Tower-kiukaat. Korkea ja tilaa säästävä kiuas levittää lämmön tasaisesti ja sopii ihanteellisesti saunan keskelle tai lauteisiin upotettavaksi."
+          "desc": "Aries Pyöreä on yhtä minimalistisen tyylikäs kuin muutkin Tower-kiukaat. Korkea ja tilaa säästävä kiuas levittää lämmön tasaisesti ja sopii ihanteellisesti saunan keskelle tai lauteisiin upotettavaksi."
         },
         "h6": {
           "name": "Scandia NS",
@@ -384,12 +384,12 @@
       },
       "accessories": {
         "a1": {
-          "name": "Traditional Set",
+          "name": "Perinteinen",
           "tag": "Saatavilla: Setri",
           "desc": "Valinta, jossa on selkeä, ajaton ja perinteinen viimeistely. Se sisältää kaikki tarvittavat välineet päivittäiseen saunakäyttöön."
         },
         "a2": {
-          "name": "Essential Set",
+          "name": "Essential",
           "tag": "Saatavilla: Setri",
           "desc": "Essential-sarja vie mukavuuden ja tyylin uudelle tasolle tarjoamalla laajemman valikoiman saunatarvikkeita."
         },
@@ -594,7 +594,7 @@
         },
         "glassfront": {
           "descriptions": [
-            "SAWO Glass Front -saunahuone yhdistää nykyaikaisen muotoilun perinteisen saunan etuihin. Vaikuttava täyslasinen etupaneeli luo avaran ja ilmavan tunnelman säilyttäen samalla poikkeuksellisen hyvän lämmönpidon.",
+            "SAWO Lasiseinä -saunahuone yhdistää nykyaikaisen muotoilun perinteisen saunan etuihin. Vaikuttava täyslasinen etupaneeli luo avaran ja ilmavan tunnelman säilyttäen samalla poikkeuksellisen hyvän lämmönpidon.",
             "Täydellinen niille, jotka arvostavat sekä esteettisyyttä että toimivuutta – lasiseinä tuo luonnonvaloa saunatilaasi ja luo ylellisen, kylpylämäisen tunnelman."
           ],
           "features": [

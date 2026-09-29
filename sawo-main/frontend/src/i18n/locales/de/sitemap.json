@@ -19,13 +19,13 @@
     "mainPages": {
       "heading": "Hauptseiten",
       "home": "Startseite",
-      "about": "Über Uns",
+      "about": "Über uns",
       "contact": "Kontakt",
       "careers": "Karriere",
       "privacy": "Datenschutzerklärung"
     },
     "about": {
-      "heading": "Über Uns",
+      "heading": "Über uns",
       "news": "Neuigkeiten",
       "sustainability": "Nachhaltigkeit"
     },
@@ -33,11 +33,11 @@
       "heading": "Finnische Sauna",
       "products": "Sauna-Produkte",
       "heaters": "Saunaöfen",
-      "wallMounted": "Wandmontierte Öfen",
+      "wallMounted": "Wandofen-Serie",
       "tower": "Tower-Öfen",
-      "stone": "Stone-Öfen",
-      "floor": "Standöfen",
-      "combi": "Kombi-Öfen",
+      "stone": "Stein-Öfen",
+      "floor": "Bodenöfen",
+      "combi": "Combi-Öfen",
       "dragonfire": "Dragonfire-Öfen",
       "controls": "Saunasteuerungen",
       "accessories": "Saunazubehör",

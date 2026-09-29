@@ -45,11 +45,11 @@
     "items": {
       "innova": {
         "title": "Série Innova",
-        "desc": "La Saunova 2.0 s'associe parfaitement aux poêles jusqu'à 9 kW, avec une régulation intelligente de la température, une sonde de banc précise et une interface utilisateur polyvalente, sans contrôleur de puissance séparé."
+        "desc": "Une commande polyvalente pour la température, l'humidité, la ventilation et l'éclairage du sauna, avec Smart Controlling, détecteur d'ouverture de porte, minuterie de démarrage différé et fonctions ventilateur, variateur et Combi en option."
       },
       "saunova": {
         "title": "Série Saunova",
-        "desc": "Une commande polyvalente pour la température, l'humidité, la ventilation et l'éclairage du sauna, avec Smart Controlling, détecteur d'ouverture de porte, minuterie de démarrage différé et fonctions ventilateur, variateur et Combi en option."
+        "desc": "La Saunova 2.0 s'associe parfaitement aux poêles jusqu'à 9 kW, avec une régulation intelligente de la température, une sonde de banc précise et une interface utilisateur polyvalente, sans contrôleur de puissance séparé."
       },
       "accessories": {
         "title": "Accessoires de commande",

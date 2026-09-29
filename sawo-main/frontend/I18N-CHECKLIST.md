@@ -2287,6 +2287,181 @@ A `CI=true` build + prerender passed afterwards.
 - **Source issue (not fixed):** `sauna.controls.items.innova` and `.saunova`
   English descriptions look swapped (already noted in the zh pass).
 
+## ja naturalness pass (2026-09-28)
+
+First check of `ja` since it was completed back on 2026-09-01 alongside `de`
+— it had never been covered by any of the naturalness passes (zh/de/fi got
+theirs 2026-09-24/28, fr/es/th got theirs earlier today). Same scope as the
+fr/es/th pass: configurator hardcoded names, `home`/`gdpr`/`privacy`/
+`sitemap` full reads, `Wall-Mounted`/`Floor`/`Stones` cross-file terminology,
+automated English-leftover sweep across all namespaces, and a `sauna.json`
+"Glass Front" consistency check.
+
+- **Configurator hardcoded names — same bug as zh/fi/de**: `roomsPage.
+  configurator.heaters.h2`/`h5` showed "SAWO30 Round Ni2"/"Aries Round Black
+  Ni2" (untranslated) while the real DB rows say "SAWO30 ラウンド Ni2"/"Aries
+  ラウンド ブラック Ni2" — fixed both names and their inline description
+  mentions. `a1`–`a4` (トラディショナルセット/エッセンシャルセット/
+  シグネチャーセット/ドラゴンセット) already matched the katakana+セット
+  convention used consistently across all four — no change needed there.
+- **Two "All rights reserved" leftovers found and fixed**: `privacy.json`'s
+  `footer` and `footer.json`'s `copyright` both had the literal English
+  "All rights reserved." where every other locale (de "Alle Rechte
+  vorbehalten", fr "Tous droits réservés", es "Todos los derechos
+  reservados", zh "保留所有权利") translates it — fixed both to
+  "無断複写・転載を禁じます。".
+- **One mistranslation fixed**: `privacy.json`'s media/EXIF section said
+  "他のユーザーが...位置情報をダウンロードして取り出すことができます" (download
+  *location information*), garbling the English source ("other users can
+  download **images** and extract location information from them") into
+  something that doesn't quite parse — fixed to "画像をダウンロードし、そこから
+  位置情報を取り出す" (download the images, then extract location data from
+  them).
+- **Everything else clean**: `home.json`/`gdpr.json` read naturally with no
+  changes; `Wall-Mounted`/`Floor`/`Stones` series labels consistent across
+  `nav`/`support`/`sitemap`; `sitemap.json` reads fluently; automated sweep
+  for long English-word runs across every `ja` namespace found only one hit,
+  a legitimate proper noun (a Barcelona venue address in `news.json`); the
+  "ガラスフロント" terminology in `sauna.json` is fully consistent, no
+  leftover "Glass Front" fragments (the bug class that hit fi/de).
+- `npm run i18n:manifest` clean, `CI=true npx react-scripts build` passed.
+
+## fr / es / th naturalness pass (2026-09-28)
+
+First human read-through of fr/es/th since the 2026-09-24 push — these three
+never got the zh/de/fi treatment (straight from machine translation to
+"complete"). Checked: the configurator hardcoded-name bug class found in
+zh/fi/de, `home.json`, `gdpr.json`, `privacy.json` (all three languages, full
+read), `sitemap.json`/`support.json`/`nav.json` cross-file terminology
+consistency (`Wall-Mounted`/`Floor`/`Stones` series labels), and a manual
+read of large chunks of `fr/sauna.json` and `th/sauna.json`, plus automated
+sweeps (double-space and repeated-word regexes) across every namespace in
+all three languages.
+
+- **Configurator hardcoded names: not a bug here.** Unlike zh/fi/de (built
+  product-by-product over many sessions via `product-i18n.js` packets, which
+  is how `roomsPage.configurator`'s hardcoded `h2`/`h5`/`a1`/`a2` names drifted
+  from the DB), fr/es/th were built in one pass per language via the generic
+  `fill-apply.mjs` dictionary engine, and its output already matches the DB
+  in every case checked (`SAWO30 Rond/Redondo/ทรงกลม Ni2`, `Aries Rond
+  Noir/Redondo Negro/ทรงกลม สีดำ Ni2`, `Set Traditional`/`ชุด Traditional`
+  etc.). No changes needed.
+- **One real bug found and fixed**: `th/privacy.json`'s embedded-content
+  section said "เนื้อหาของเขา" (his/her content — a personal pronoun) where
+  the English source means "their content" referring back to "external
+  websites," not a person. Fixed to "เนื้อหาดังกล่าว" (that content).
+  Grepped the rest of `th/` for the same "ของเขา" misapplied-pronoun pattern
+  — no other occurrences, so this was isolated, not systemic.
+- **Everything else checked out clean**: `home.json`/`gdpr.json`/
+  `privacy.json` read fluently and idiomatically in all three languages (the
+  legal/privacy text in particular reads as professionally drafted, not
+  machine-translated, in fr and es); `Wall-Mounted`/`Floor`/`Stones` series
+  labels are consistent across `nav.json`/`catalog.json`/`sauna.json`/
+  `support.json`/`sitemap.json` in all three (sitemap's fuller descriptive
+  forms like fr "Poêles combinés" vs nav's bare "Combi" are an intentional
+  style difference, same pattern already established in de/zh/fi); no
+  double-space or repeated-word artifacts found anywhere; `th/sauna.json`'s
+  "หน้ากระจก" (glass-front) terminology is fully consistent with no leftover
+  English fragments, matching the same check that turned up real bugs in
+  fi/de.
+- **Not done**: a full line-by-line read of all 20 namespaces × 3 languages
+  (this pass prioritized the highest-exposure/highest-risk files: home,
+  gdpr, privacy, sauna, plus cross-file terminology checks) and native-
+  speaker review, still the real gate before fr/es/th can go live.
+  `npm run i18n:manifest` clean, `CI=true npx react-scripts build` passed.
+
+## zh / fi naturalness follow-up (2026-09-28)
+
+Resolved the open items from the 2026-09-24 zh and de/fi naturalness passes above.
+
+- **zh `home.json` re-checked**: the "49 half-width commas" noted on 2026-09-24 no
+  longer exist in the live file (only `hero.seoKeywords`'s 4 ASCII commas remain,
+  which is a comma-separated SEO keyword list, not prose — left as-is, matching
+  how the 184-country list and FAQ anchors were deliberately left alone elsewhere).
+  Read the whole file end-to-end: no stiff/公文腔 phrasing found, nothing to fix.
+- **zh terminology items resolved**: `support.json`'s `glassfront` label said
+  "玻璃幕墙桑拿房" (curtain-wall) while `product.json`/`catalog.json`/`sauna.json`
+  all use "全景玻璃" — fixed to "全景玻璃桑拿房" for consistency. `石材式` vs `石材`
+  confirmed intentional (式 for nav/filter/category labels, plain for descriptive
+  prose titles) — left as-is. `Combi` naming checked — no stray "多功能一体式"
+  found; `桑拿蒸汽两用式` is already used consistently everywhere.
+- **Configurator hardcoded names fixed (both zh and fi)** — `SaunaRoomData.jsx`'s
+  6 hardcoded heater cards and 4 accessory-set cards render literal `name` strings
+  from `sauna.json`'s `roomsPage.configurator.heaters`/`accessories`, independent
+  of the real `product_translations` DB rows for the same products. Two heaters
+  used position words the DB has already translated: `h2` "SAWO30 Round Ni2" →
+  zh "SAWO30 圆柱式 Ni2" / fi "SAWO30 Pyöreä Ni2"; `h5` "Aries Round Black Ni2" →
+  zh "Aries 圆柱式 黑色 Ni2" / fi "Aries Pyöreä Musta Ni2" (descriptions' inline
+  brand mentions updated to match). Two accessory sets had DB-translated names:
+  `a1` "Traditional Set" → zh "传统款" / fi "Perinteinen"; `a2` "Essential Set" →
+  zh "精选款" / fi "Essential" (fi desc adjusted to "精选款套装..." for zh, kept
+  as "Essential-sarja..." for fi since the fi DB name itself is plain "Essential").
+  `a3`/`a4` (Signature/Dragon) and `h1`/`h3`/`h4`/`h6` (Taurus D/Nordex Pro/Krios/
+  Scandia) checked against their DB packet names — all keep the brand name in
+  English in both zh and fi already, no change needed.
+- **fi read-through of `sauna.json` (all ~1,256 lines) and `gdpr.json`/
+  `sitemap.json` (both already natural, no changes)**: found two leftover
+  English fragments inside otherwise-Finnish sentences — `roomsPage.meta.
+  description` said "Standard-, Glass Front- ja Compact-mallit" while every
+  other reference to this room type on the page already uses "Lasiseinä(inen)"
+  (fixed to "Standard-, Lasiseinä- ja Compact-mallit"), and `roomDetails.panels.
+  glassfront.descriptions[0]` said "SAWO Glass Front -saunahuone..." instead of
+  "SAWO Lasiseinä -saunahuone..." (fixed to match `roomTitles.glassfront`/
+  `roomDescriptions.glassfront`'s established wording). Rest of the file
+  (heaters/accessories/rooms page copy, configurator UI strings, wood-material
+  and feature-tab sections) already reads as natural, finite Finnish — no
+  participle-calque or stiff phrasing left.
+- **Still open / out of scope for this pass**: the `sauna.controls.items.
+  innova`/`.saunova` swapped-description bug is in the **English source**, not
+  a translation defect — zh/de/fi all correctly mirror the (wrong) source, so
+  fixing it belongs to a source-content task, not a translation pass. No
+  native-speaker review has happened for any locale; `CI=true npx react-scripts
+  build` passed clean after all edits above.
+
+## de naturalness follow-up (2026-09-28)
+
+Closed the "not yet read" gap the 2026-09-24 de/fi pass left open — same
+treatment just given to fi above, applied to `sauna.json` (all ~1,255 lines,
+including the short labels/headings under 150 chars that were explicitly
+skipped), `gdpr.json`, and `sitemap.json`.
+
+- **`gdpr.json`**: already natural, no changes.
+- **Real grammar bugs found and fixed**: `Saunakabine` is feminine (die), but
+  four room-name/description strings used masculine articles or adjective
+  endings left over from when the noun was `Saunaraum` (masculine) —
+  `roomsPage.configurator.rooms.r4/r5/r6.name` ("Kleiner/Mittlerer/Großer
+  Glasfront-Saunakabine" → "Kleine/Mittlere/Große Glasfront-Saunakabine") and
+  three `roomDetails.panels.*.descriptions[0]` openers ("Der SAWO
+  Standard-/Glasfront-Saunakabine..." → "Die SAWO ...", including the
+  matching pronoun fix "verbindet er" → "verbindet sie"; "Der
+  Kompakt-Saunakabine bietet mit seinen..." → "Die Kompakt-Saunakabine bietet
+  mit ihren...").
+- **Stale "Stone"/"Wandmontiert" naming**: the 2026-09-24 pass's `Wandofen-
+  Serie`/`Bodenofen-Serie`/`Stein-Serie` renames only landed in the files it
+  touched — `support.json`'s `Translations`-tab `seriesLabels` (both
+  occurrences) and three spots in `sauna.json` (`heatersPage.items.stone`
+  caption, `stonePage.hero.title`/`intro.desc`/`empty`) still had
+  `Wandmontiert-Serie`/`Boden-Serie`/`Stone-Serie`/`Stone-Öfen` — all aligned
+  to the established `Wandofen-Serie`/`Bodenofen-Serie`/`Stein-Serie`/
+  `Stein-Öfen` wording. `sitemap.json`'s `groups.sauna.{wallMounted,stone,
+  floor,combi}` had its own independent drift (`Wandmontierte Öfen`/
+  `Stone-Öfen`/`Standöfen`/`Kombi-Öfen`) — realigned to `Wandofen-Serie`/
+  `Stein-Öfen`/`Bodenöfen`/`Combi-Öfen` to match nav/catalog. Also fixed
+  `sitemap.json`'s `groups.mainPages.about`/`groups.about.heading`: "Über
+  Uns" → "Über uns" (German capitalizes only nouns; every other file already
+  had this right).
+- **Configurator hardcoded names** (same class of bug as the zh/fi pass):
+  `sauna.json`'s `roomsPage.configurator.heaters.h2`/`h5` showed "SAWO30
+  Round Ni2"/"Aries Round Black Ni2" in the room-builder card while the real
+  `product_translations` DB rows already say "SAWO30 Rund Ni2"/"Aries Rund
+  Schwarz Ni2" — fixed both names and their inline description mentions.
+  `a1`–`a4` (Traditional/Essential/Signature/Dragon Set) checked against
+  their DB packet names — de keeps all four brand names in English there
+  too, so no mismatch, unlike zh/fi where "Traditional"/"Essential" are
+  actually translated in the DB.
+- `npm run i18n:manifest` shows no new gaps; `CI=true npx react-scripts
+  build` passed clean after all edits.
+
 ## fr / es / th push (2026-09-24)
 
 `fr`, `es` and `th` are now complete on both tracks; `npm run i18n:manifest`
@@ -2327,3 +2502,18 @@ the language switcher until someone enables it in the CMS.
   legal text (`privacy`, `gdpr`) before any path goes live; `common.json`
   plural keys are `one`/`other` only (fr/es also have a CLDR `many` category
   that only applies to 1,000,000+, so it is intentionally not provided).
+
+## Innova/Saunova source-content fix (2026-09-29)
+
+Fixed the `sauna.controls.items.innova`/`.saunova` swapped-description bug
+flagged as an open English-source issue in the zh (2026-09-24), de/fi
+(2026-09-24) and ja (2026-09-28) naturalness passes above. Confirmed via the
+actual product data (`saunova-2-0.zh.packet.json` features: bench sensor, 9kW
+max, no separate power controller; `innova-classic.zh.packet.json` features:
+Door Sensor, Prerun Timer, optional Fan/Dimmer/Combi) that the two `desc`
+strings were swapped between the two card keys — the `innova` card was
+describing the Saunova 2.0 product and vice versa. Swapped the `desc` values
+back (titles untouched) in all 8 `sauna.json` locales (en, zh, de, fi, fr, es,
+th, ja) — each locale's own translated text was kept, only which key it sits
+under changed. Verified no hardcoded duplicate of this copy exists outside
+the i18n JSON files, and all 8 edited files parse as valid JSON.
