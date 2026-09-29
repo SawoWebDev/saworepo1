@@ -5,7 +5,7 @@ import heroBg from "../../assets/About/Sustainability-hero.webp";
 import practicesBg from "../../assets/About/Sustainability.webp";
 import menuPaths from "../../menuPaths";
 import { Link } from "react-router-dom";
-import img_sustainability_image from "../../assets/sustainability-image.webp";
+import img_sustainability_image from "../../assets/pefc-sourcing-sustainable-wood.webp";
 import img_SAWO_Cumulus_Wall_NS from "../../assets/SAWO_Cumulus_Wall_NS.webp";
 import img_health_well_being from "../../assets/health-well-being.webp";
 import img_Wood_Pattern_Brown_03 from "../../assets/Wood-Pattern-Brown-03.webp";
