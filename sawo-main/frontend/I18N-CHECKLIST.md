@@ -2558,3 +2558,80 @@ time, since the sentence structure changed), reusing each locale's
 already-established terms for cedar/aspen/hemlock from the pailsLadles fix
 above for consistency, and German's "&"-in-prose convention for this
 section. Verified with `npm run i18n:manifest` and a clean production build.
+
+**Terminology correction (same day)**: caught two of my own translations
+drifting from the site's already-established wood-name dictionary
+(`sauna.json`'s own `woodMaterials`/`hemlock` key at line ~821, mirrored in
+`product.json`'s `colorNames` and `infrared.json`'s wood-swatch descriptions
+— the real source of truth, since it's used site-wide, not something I
+should have re-derived per string). Fixed: **de** "Hemlocktanne" →
+"Hemlock" (German keeps this one in English everywhere else — see
+`heater-guard-heaterking-round-w4.de.packet.json`'s
+`short_description` and `MATERIAL_WORD_DICTIONARY.de` in
+`product-i18n.js`); **th** "เฮมล็อค" → "เฮมล็อก" (wrong final consonant,
+didn't match the established transliteration). zh (铁杉), fi (Hemlokki/
+hemlokista), fr (Pruche/la pruche), es (Tsuga/tsuga), ja (ヘムロック) already
+matched on the first pass. Lesson for next time: check `sauna.json`'s own
+`woodMaterials` block and `product.json`'s `colorNames` for an existing term
+before translating a material name fresh.
+
+## Flagged source-content/naming fixes resolved (2026-09-29)
+
+Went back through the three "flagged-not-fixed" source-content bugs and the
+one open naming decision from earlier passes, using live Supabase queries
+(`sawo-react` project) rather than guessing. All three DB edits below are
+live immediately — this content is read straight from `products`/
+`product_translations`, not from JSON files, so no build/deploy step applies.
+
+- **`saunova-simple` dimension typo — fixed, English AND all 7 translations**:
+  `features` said "(D) 137mm3". The product's own `description` spec table
+  already states the correct value ("D: 147 mm"), so this wasn't even a
+  guess — just a stray digit and a bogus unit suffix. Fixed to "(D) 147mm" in
+  `products.features` (English). Checked `product_translations` and found
+  all 7 locales had faithfully translated the label but preserved the wrong
+  "137mm³"/"137mm3" number (correct call at the time, per the "don't
+  silently correct data" rule that applied before the English source itself
+  was fixed) — updated all 7 (`de`/`es`/`fr`/`th` via one `137 mm³`→`147 mm`
+  pass, `fi`/`zh` via `137mm3`→`147mm`, `ja` via `137mm³`→`147mm`, each
+  locale's own existing number format otherwise left untouched). Verified no
+  `137` remains anywhere in this product's `features` across all 8 rows.
+- **`minidragon-black-nb` garbled sentence — fixed**: `short_description` read
+  "...is boasts a sleek, compact design that fits seamlessly into suitable
+  for smaller sauna spaces, making it perfect for sauna room." Its three
+  sibling variants (`minidragon-black-ns`/`-red-nb`/`-red-ns`) all share one
+  clean, identical sentence ("Minidragon is the smallest design heater by
+  Stefan Lindfors...") — replaced `black-nb`'s text with that exact sibling
+  text for full within-line consistency. Note: the other 6 locales'
+  translations of `black-nb` were already independently smoothed into clean
+  (non-garbled) text during translation, just not verbatim-matching their
+  own siblings' translations — a cosmetic cross-product inconsistency, not a
+  bug, left as a possible future polish item.
+- **`innova-light-extension-module` — investigated, confirmed correct, NOT a
+  bug**: checked whether "Saunova" in its features/short_description
+  (product name says "Innova") is a copy-paste bug like the earlier
+  Innova/Saunova card-swap. User supplied the original reference copy
+  (title/description/feature bullets/closing line) — it matches the live DB
+  content word-for-word, including the "»"-bulleted feature formatting
+  typical of the legacy source. Confirmed: this is a real, if oddly-named,
+  product — an "Innova"-branded module whose internals are a Saunova
+  Contactor Unit, rated at the same 9kW threshold as the rest of the Saunova
+  line (not Innova's own 15kW line). Mixed branding is accurate to the
+  source, not an error. No change made.
+- **Nordex Floor naming — resolved, `fi` was the actual outlier**: the
+  2026-09-24 de push logged this as "zh translated, fi kept English —
+  revisit," but re-checking all 7 locales live showed `fi` is the *only*
+  locale still saying "Nordex Floor" — de (Boden), es (Suelo), fr (Sol), ja
+  (フロア), th (ตั้งพื้น), and zh (落地式) all already translate it. `fi`'s own
+  position-word convention, used consistently across dozens of other
+  products (Seinä=Wall, Kulma=Corner, Keski=Middle, Pyöreä=Round — e.g.
+  `heater-guard-nordex-wall` → "Kiuassuoja – Nordex Seinä"), supports adding
+  Lattia=Floor as a bare word the same way, not fused like
+  `krios-floor-ns`'s one-off "Lattiakiuas". Updated `nordex-floor-ns`/
+  `nordex-floor-black-ns`'s `fi` `name` and `short_description` ("Nordex
+  Floor" → "Nordex Lattia").
+- Local `product-i18n/` packet drafts for these slugs are now stale
+  reference copies (they still show the old English/old fi text) — harmless
+  since the live site reads the DB directly, not the packets, but the next
+  person to touch these products via the packet workflow should re-run
+  `extract` rather than trust the existing packet file's `_english_*`
+  fields.

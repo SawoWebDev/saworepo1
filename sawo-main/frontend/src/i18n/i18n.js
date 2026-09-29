@@ -114,7 +114,7 @@ export function isLocaleLoaded(locale) {
 
 // Fetches one non-English locale's catalogs — one HTTP request total, via
 // the "lazy-once" grouping above (still a same-origin build artifact, not a
-// runtime translation-API call) — and registers each namespace with
+// runtime translation-API call) — and registers each namespace with  
 // i18next via addResourceBundle. Safe to call repeatedly / from multiple
 // components mounting at once; the work only happens once per locale.
 // Resolves once i18n has the locale's resources, so callers know it's safe
