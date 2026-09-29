@@ -8,13 +8,56 @@
   font-family: 'Montserrat', sans-serif;
   background: #faf6f1;
   min-height: 100vh;
-  padding: 100px 24px 96px;
+  padding: 96px 0 96px;
 }
 
+/* ── Back navigation ─────────────────────────────────────────── */
+.tdv-nav {
+  padding: 0 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tdv-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #af8564;
+  transition: color 0.2s, transform 0.2s;
+}
+.tdv-back:hover { color: #1a1410; }
+.tdv-back:hover .tdv-back-arrow { transform: translateX(-3px); }
+
+.tdv-back-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(175, 133, 100, 0.3);
+  background: transparent;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+.tdv-back:hover .tdv-back-arrow {
+  border-color: rgba(175, 133, 100, 0.6);
+  background: rgba(175, 133, 100, 0.07);
+}
+
+.tdv-back-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
 .tdv-header {
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 48px;
+  margin: 32px auto 40px;
+  padding: 0 24px;
 }
 
 .tdv-eyebrow {
@@ -27,11 +70,17 @@
 }
 
 .tdv-title {
-  font-size: 38px;
-  font-weight: 400;
+  font-size: 42px;
+  font-weight: 300;
   color: #1a1410;
   margin: 0 0 14px;
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+.tdv-title em {
+  font-style: normal;
+  font-weight: 700;
+  color: #af8564;
 }
 
 .tdv-subtitle {
@@ -41,209 +90,356 @@
   margin: 0;
 }
 
-/* ── Room selector row ───────────────────────────────────────── */
-.tdv-selector {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 1000px;
+.tdv-rule {
+  max-width: 1200px;
   margin: 0 auto 32px;
+  padding: 0 48px;
+  border-top: 1px solid rgba(175, 133, 100, 0.15);
 }
 
+/* ── Room selector row ───────────────────────────────────────── */
+.tdv-selector-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px 28px;
+}
+
+.tdv-selector-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(175, 133, 100, 0.55);
+  margin-bottom: 14px;
+}
+
+.tdv-selector-wrap {
+  position: relative;
+}
+.tdv-selector-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #faf6f1);
+  pointer-events: none;
+}
+
+.tdv-selector {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tdv-selector::-webkit-scrollbar { display: none; }
+
 .tdv-selector-btn {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 3px;
   padding: 12px 22px;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1.5px solid #e3d5c4;
   background: #fff;
   cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
   font-family: inherit;
+  text-align: left;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .tdv-selector-btn:hover {
   border-color: #af8564;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(175, 133, 100, 0.12);
 }
 
 .tdv-selector-btn.is-active {
   border-color: #8b5e3c;
-  background: #fbf2e9;
+  background: #af8564;
+  box-shadow: 0 8px 28px rgba(175, 133, 100, 0.3);
+  transform: translateY(-2px);
 }
 
 .tdv-selector-model {
   font-size: 13px;
   font-weight: 700;
   color: #1a1410;
+  white-space: nowrap;
+  transition: color 0.2s;
 }
+.tdv-selector-btn.is-active .tdv-selector-model { color: #fff; }
 
 .tdv-selector-variant {
-  font-size: 11px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   color: #a67853;
+  white-space: nowrap;
+  transition: color 0.2s;
 }
+.tdv-selector-btn.is-active .tdv-selector-variant { color: rgba(255, 255, 255, 0.65); }
 
-/* ── Main viewer layout ──────────────────────────────────────── */
-.tdv-main {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 32px;
-  max-width: 1180px;
+/* ── Viewer area ──────────────────────────────────────────────── */
+.tdv-viewer-section {
+  max-width: 1200px;
   margin: 0 auto;
-  align-items: start;
+  padding: 0 48px;
 }
 
-@media (max-width: 900px) {
-  .tdv-main {
-    grid-template-columns: 1fr;
-  }
-}
-
-.tdv-frame {
+.tdv-frame-outer {
   position: relative;
-  aspect-ratio: 4/3;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(160deg, #f3e9dd, #ece0d0);
   border: 1px solid #e3d5c4;
-  box-shadow: 0 20px 50px rgba(139, 94, 60, 0.12);
-  transition: opacity 0.25s ease;
+  box-shadow: 0 24px 60px rgba(139, 94, 60, 0.14), 0 4px 16px rgba(26, 20, 16, 0.05);
+}
+
+/* Thin copper accent line at top of viewer */
+.tdv-frame-outer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, #af8564, #c9a882, #af8564);
+  z-index: 2;
+}
+
+.tdv-frame {
+  width: 100%;
+  aspect-ratio: 16 / 8;
 }
 
 .tdv-frame model-viewer {
   width: 100%;
   height: 100%;
-  --poster-color: transparent;
+  --poster-color: #f0e6d8;
+  --progress-bar-color: #af8564;
+  --progress-bar-height: 2px;
 }
 
-.tdv-loader {
+.tdv-loading-overlay {
   position: absolute;
   inset: 0;
-  display: none;
+  background: rgba(240, 230, 216, 0.9);
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(250, 246, 241, 0.75);
-  z-index: 2;
+  gap: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  border-radius: 16px;
 }
-
-.tdv-loader.is-visible {
-  display: flex;
-}
+.tdv-loading-overlay.is-visible { opacity: 1; pointer-events: auto; }
 
 .tdv-spinner {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(175, 133, 100, 0.2);
+  border-top-color: #af8564;
   border-radius: 50%;
-  border: 3px solid #e3d5c4;
-  border-top-color: #8b5e3c;
-  animation: tdv-spin 0.8s linear infinite;
+  animation: tdv-spin 0.75s linear infinite;
 }
-
 @keyframes tdv-spin {
   to { transform: rotate(360deg); }
 }
 
-.tdv-hint-bar {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  font-size: 12px;
-  color: #a67853;
+.tdv-loading-text {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #af8564;
 }
 
-.tdv-hint-bar span {
+/* Matches the room configurator's own .reset-btn (SaunaRooms.css) */
+.tdv-reset-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e3d5c4;
+  border-radius: 50%;
+  color: #af8564;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.tdv-reset-btn:hover {
+  background: #af8564;
+  color: #fff;
+  border-color: #af8564;
+  transform: rotate(-45deg);
+}
+
+/* ── Info bar — below the viewer ─────────────────────────────── */
+.tdv-info-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 22px 0 0;
+  transition: opacity 0.3s;
+}
+.tdv-info-bar.tdv-fading { opacity: 0; }
+
+.tdv-active-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1410;
+  letter-spacing: -0.2px;
+}
+
+.tdv-active-desc {
+  font-size: 13px;
+  color: #5a4a3a;
+  line-height: 1.7;
+  margin-top: 6px;
+  max-width: 520px;
+}
+
+.tdv-hints {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 6px;
+  flex-shrink: 0;
+}
+
+.tdv-hint {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: rgba(175, 133, 100, 0.6);
+  white-space: nowrap;
+}
+.tdv-hint-sep {
+  width: 1px;
+  height: 10px;
+  background: rgba(175, 133, 100, 0.2);
 }
 
-.tdv-hint-bar svg {
-  width: 14px;
-  height: 14px;
+/* ── Specs ────────────────────────────────────────────────────── */
+.tdv-specs-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 44px 48px 0;
 }
 
-/* ── Info panel ──────────────────────────────────────────────── */
-.tdv-info {
-  background: #fff;
-  border: 1px solid #e3d5c4;
-  border-radius: 16px;
-  padding: 24px;
-  transition: opacity 0.2s ease;
+.tdv-specs-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
 }
-
-.tdv-info.tdv-fading {
-  opacity: 0;
-}
-
-.tdv-info-name {
-  font-size: 18px;
+.tdv-specs-label {
+  font-size: 9px;
   font-weight: 700;
-  color: #1a1410;
-  margin: 0 0 8px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(175, 133, 100, 0.5);
+  white-space: nowrap;
+}
+.tdv-specs-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(175, 133, 100, 0.15);
 }
 
-.tdv-info-desc {
-  font-size: 13.5px;
-  color: #5a4a3a;
-  line-height: 1.6;
-  margin: 0 0 20px;
+.tdv-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  transition: opacity 0.3s;
 }
+.tdv-specs.tdv-fading { opacity: 0; }
 
 .tdv-spec {
-  padding: 12px 0;
-  border-top: 1px solid #f0e6d8;
+  background: #fff;
+  border: 1px solid rgba(175, 133, 100, 0.18);
+  border-radius: 12px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 14px rgba(139, 94, 60, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
-
-.tdv-spec:first-of-type {
-  border-top: none;
+.tdv-spec:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(139, 94, 60, 0.14);
+  border-color: rgba(175, 133, 100, 0.45);
 }
-
 .tdv-spec-label {
-  font-size: 10.5px;
-  letter-spacing: 1px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: #af8564;
-  font-weight: 700;
-  margin-bottom: 4px;
+  opacity: 0.8;
+  margin-bottom: 10px;
 }
-
 .tdv-spec-value {
-  font-size: 14px;
-  color: #1a1410;
+  font-size: 18px;
   font-weight: 600;
+  color: #1a1410;
+  letter-spacing: -0.3px;
+}
+.tdv-spec-note {
+  font-size: 10.5px;
+  color: #7a6655;
+  opacity: 0.65;
+  margin-top: 4px;
 }
 
+/* Matches the site's established brown CTA button (see LatestNews.jsx's
+   .ln-btn/.ln-btn-brown) — same padding, uppercase, radius and hover lift. */
 .tdv-view-room {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding: 12px 20px;
-  border-radius: 10px;
-  background: #8b5e3c;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 4px;
+  background-color: #af8564;
   color: #fff;
-  font-size: 13px;
-  font-weight: 700;
   text-decoration: none;
-  width: 100%;
-  justify-content: center;
-  box-sizing: border-box;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
 }
-
 .tdv-view-room:hover {
-  background: #714a2f;
+  background-color: #8b5e3c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(175, 133, 100, 0.3);
 }
 
 /* ── Empty / no-models state ─────────────────────────────────── */
 .tdv-empty {
   max-width: 480px;
-  margin: 0 auto;
+  margin: 24px auto 0;
   text-align: center;
   background: #fff;
   border: 1px solid #e3d5c4;
@@ -279,4 +475,29 @@
 
 .tdv-empty-link:hover {
   text-decoration: underline;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .tdv-title { font-size: 36px; }
+}
+
+@media (max-width: 768px) {
+  .tdv-nav { padding: 0 24px; }
+  .tdv-header { padding: 0 24px; margin-top: 24px; }
+  .tdv-rule { padding: 0 24px; }
+  .tdv-selector-section { padding: 0 24px 24px; }
+  .tdv-viewer-section { padding: 0 24px; }
+  .tdv-frame { aspect-ratio: 4 / 3; }
+  .tdv-info-bar { flex-direction: column; gap: 14px; }
+  .tdv-hints { display: none; }
+  .tdv-specs-section { padding: 36px 24px 0; }
+  .tdv-specs { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .tdv-spec { padding: 18px 18px 16px; }
+}
+
+@media (max-width: 480px) {
+  .tdv-title { font-size: 30px; }
+  .tdv-selector-btn { padding: 10px 16px; }
+  .tdv-active-name { font-size: 20px; }
 }

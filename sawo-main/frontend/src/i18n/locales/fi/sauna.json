@@ -577,7 +577,8 @@
         "standard": "Standard",
         "glassfront": "Lasiseinä",
         "infrared": "Infrapuna",
-        "compact": "Compact"
+        "compact": "Compact",
+        "traditional": "Perinteinen"
       },
       "panels": {
         "standard": {
@@ -637,10 +638,8 @@
       "label": "Interaktiivinen 3D-malli",
       "title": "Tutki jokaista yksityiskohtaa",
       "subtitle": "Pyöritä, zoomaa ja tarkastele saunaamme joka kulmasta jo ennen kuin se saapuu ovellesi.",
-      "launch": "Käynnistä 3D-katseluohjelma",
       "dragRotate": "Pyöritä vetämällä",
       "scrollZoom": "Zoomaa vierittämällä",
-      "doubleTapFocus": "Tarkenna kaksoisnapauttamalla",
       "openViewer": "Avaa 3D-katseluohjelma",
       "buildYourOwn": "Rakenna oma saunasi"
     },
@@ -1252,5 +1251,22 @@
   "cta": {
     "title": "Tarvitsetko apua valinnassa?",
     "description": "Lämmittimistä ja ohjaimista huoneisiin ja lisävarusteisiin – tiimimme auttaa löytämään kotiisi tai kaupalliseen tilaasi sopivan saunaratkaisun."
+  },
+  "threeDViewerPage": {
+    "meta": {
+      "title": "Interaktiivinen 3D-huonekatselin",
+      "description": "Pyöritä, zoomaa ja tutki SAWO-saunahuoneita interaktiivisessa 3D:ssä ennen kuin ne saapuvat kotiisi."
+    },
+    "title": "Tutustu",
+    "titleEm": "3D:ssä",
+    "selectModel": "Valitse malli",
+    "loadingModel": "Ladataan mallia",
+    "loading": "Ladataan…",
+    "dimensionsNote": "L × S × Ulkokorkeus",
+    "roomType": "Huonetyyppi",
+    "viewFullRoom": "Katso huoneen kaikki tiedot",
+    "emptyText": "Interaktiivisia 3D-malleja ei ole juuri nyt saatavilla — käy pian uudelleen tai selaa koko huonevalikoimaa alla.",
+    "emptyLink": "Selaa saunahuoneita →",
+    "specifications": "Tekniset tiedot"
   }
 }

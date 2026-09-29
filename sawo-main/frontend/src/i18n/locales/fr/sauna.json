@@ -689,7 +689,8 @@
         "standard": "Standard",
         "glassfront": "Façade vitrée",
         "infrared": "Infrarouge",
-        "compact": "Compacte"
+        "compact": "Compacte",
+        "traditional": "Traditionnel"
       },
       "panels": {
         "standard": {
@@ -749,10 +750,8 @@
       "label": "Modèle 3D interactif",
       "title": "Explorez chaque détail",
       "subtitle": "Faites pivoter, zoomez et inspectez chaque angle de notre sauna avant même qu'il n'arrive chez vous.",
-      "launch": "Lancer la visionneuse 3D",
       "dragRotate": "Faites glisser pour pivoter",
       "scrollZoom": "Faites défiler pour zoomer",
-      "doubleTapFocus": "Appuyez deux fois pour cadrer",
       "openViewer": "Ouvrir la visionneuse 3D",
       "buildYourOwn": "Composez le vôtre"
     },
@@ -1252,5 +1251,22 @@
   "cta": {
     "title": "Besoin d'aide pour choisir ?",
     "description": "Des poêles et commandes aux cabines et accessoires, notre équipe vous aide à trouver la solution de sauna adaptée à votre domicile ou à votre espace commercial."
+  },
+  "threeDViewerPage": {
+    "meta": {
+      "title": "Visualiseur 3D interactif de la pièce",
+      "description": "Faites pivoter, zoomez et inspectez les saunas SAWO en 3D interactive avant leur arrivée chez vous."
+    },
+    "title": "Explorez",
+    "titleEm": "en 3D",
+    "selectModel": "Choisir un modèle",
+    "loadingModel": "Chargement du modèle",
+    "loading": "Chargement…",
+    "dimensionsNote": "L × P × Hauteur ext.",
+    "roomType": "Type de pièce",
+    "viewFullRoom": "Voir tous les détails de la pièce",
+    "emptyText": "Aucun modèle 3D interactif n'est disponible pour le moment — revenez bientôt ou parcourez notre gamme complète de pièces ci-dessous.",
+    "emptyLink": "Parcourir les saunas →",
+    "specifications": "Caractéristiques"
   }
 }

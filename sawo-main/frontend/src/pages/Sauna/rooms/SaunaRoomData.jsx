@@ -741,7 +741,6 @@ const SRD_PANELS = [
 // same-domain URL (which would 404 once this app owns the whole site: the
 // old WordPress-hosted viewer at this path never actually got ported here).
 const S3T_VIEWER_URL  = "/3d-viewer";
-const S3T_MODEL_LABEL = "1414RS · Glass Front";
 
 const MATS_ITEMS = [
   {
@@ -1065,7 +1064,7 @@ export {
   SPD_SLIDES, SPD_STORY_SECTIONS, SPD_FEATURE_TEXT, SPD_PERF_CARDS,
   SPD_ACCORDION_ITEMS, SPD_SLIDE_DELAY, SPD_LOADER_TIMEOUT,
   SRD_PANELS,
-  S3T_VIEWER_URL, S3T_MODEL_LABEL,
+  S3T_VIEWER_URL,
   MATS_ITEMS,
   wrapIndex, CONFIGURATOR_STEPS,
 };

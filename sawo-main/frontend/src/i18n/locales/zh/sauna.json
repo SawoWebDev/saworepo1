@@ -689,7 +689,8 @@
         "standard": "标准型",
         "glassfront": "全景玻璃型",
         "infrared": "红外线型",
-        "compact": "紧凑型"
+        "compact": "紧凑型",
+        "traditional": "传统型"
       },
       "panels": {
         "standard": {
@@ -749,10 +750,8 @@
       "label": "互动3D模型",
       "title": "探索每一处细节",
       "subtitle": "在桑拿房送达之前，即可旋转、缩放并查看每一个角度。",
-      "launch": "启动3D查看器",
       "dragRotate": "拖动旋转",
       "scrollZoom": "滚动缩放",
-      "doubleTapFocus": "双击聚焦",
       "openViewer": "打开3D查看器",
       "buildYourOwn": "打造专属桑拿房"
     },
@@ -1252,5 +1251,22 @@
   "cta": {
     "title": "需要选购帮助吗？",
     "description": "从加热器、控制器到桑拿房和配件，我们的团队可以帮您找到适合您家庭或商业空间的桑拿方案。"
+  },
+  "threeDViewerPage": {
+    "meta": {
+      "title": "互动3D桑拿房浏览器",
+      "description": "以互动3D方式旋转、缩放并查看SAWO桑拿房，让您在收到实物前先睹为快。"
+    },
+    "title": "探索",
+    "titleEm": "3D世界",
+    "selectModel": "选择型号",
+    "loadingModel": "加载模型中",
+    "loading": "加载中…",
+    "dimensionsNote": "宽 × 深 × 外部高度",
+    "roomType": "房间类型",
+    "viewFullRoom": "查看完整房间详情",
+    "emptyText": "目前暂无可交互的3D模型——请稍后再来查看，或浏览下方完整的桑拿房系列。",
+    "emptyLink": "浏览桑拿房 →",
+    "specifications": "规格"
   }
 }

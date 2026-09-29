@@ -689,7 +689,8 @@
         "standard": "Standard",
         "glassfront": "Glass Front",
         "infrared": "Infrared",
-        "compact": "Compact"
+        "compact": "Compact",
+        "traditional": "Traditional"
       },
       "panels": {
         "standard": {
@@ -749,10 +750,8 @@
       "label": "Interactive 3D Model",
       "title": "Explore Every Detail",
       "subtitle": "Rotate, zoom, and inspect every angle of our sauna before it ever arrives at your door.",
-      "launch": "Launch 3D Viewer",
       "dragRotate": "Drag to Rotate",
       "scrollZoom": "Scroll to Zoom",
-      "doubleTapFocus": "Double-tap to Focus",
       "openViewer": "Open 3D Viewer",
       "buildYourOwn": "Build Your Own"
     },
@@ -1252,5 +1251,22 @@
   "cta": {
     "title": "Need Help Choosing?",
     "description": "From heaters and controls to rooms and accessories, our team can help you find the right sauna setup for your home or commercial space."
+  },
+  "threeDViewerPage": {
+    "meta": {
+      "title": "Interactive 3D Room Viewer",
+      "description": "Rotate, zoom, and inspect SAWO sauna rooms in interactive 3D before they arrive at your door."
+    },
+    "title": "Explore",
+    "titleEm": "in 3D",
+    "selectModel": "Select Model",
+    "loadingModel": "Loading Model",
+    "loading": "Loading…",
+    "dimensionsNote": "W × D × Ext. Height",
+    "roomType": "Room Type",
+    "viewFullRoom": "View Full Room Details",
+    "emptyText": "No interactive 3D models are available right now — check back soon, or browse the full room range below.",
+    "emptyLink": "Browse Sauna Rooms →",
+    "specifications": "Specifications"
   }
 }

@@ -2635,3 +2635,61 @@ live immediately — this content is read straight from `products`/
   person to touch these products via the packet workflow should re-run
   `extract` rather than trust the existing packet file's `_english_*`
   fields.
+
+## `/3d-viewer` page: i18n wired up + Sauna3DTeaser simplified (2026-09-29)
+
+The new `/3d-viewer` page (built this session, replacing the external
+WordPress-hosted GLB with a self-hosted one — see earlier entry) had zero
+i18n wiring — every string was hardcoded English. Wired it into `sauna.json`
+under a new `threeDViewerPage` key (meta title/description, header
+title/em/subtitle reused from `roomsPage.teaser3d.label`/`.subtitle` rather
+than duplicated, selectModel/loadingModel/loading/dimensionsNote/roomType/
+specifications/viewFullRoom/emptyText/emptyLink are new), translated fresh
+into all 7 locales. Reused already-established keys wherever they existed
+instead of inventing new ones: `roomsPage.viewer.capacity`/`.dimensions`/
+`.modelNumber`/`.reset` (matches `SaunaRoomViewer.jsx`'s own reset button
+exactly) and `roomsPage.teaser3d.dragRotate`/`.scrollZoom`.
+
+Also removed the teaser's "Double-tap to focus" hint (`roomsPage.teaser3d.
+doubleTapFocus`) and unused `.launch` key — dead weight now that the hint's
+gone from the real viewer page too (it never did anything).
+
+**Two real i18n bugs found via testing the actual rendered `zh` page** (not
+just checking the JSON — this class of bug only shows up live):
+1. Back-button label used `tNav("saunaRooms")`, but that key is nested under
+   `nav.json`'s `items.saunaRooms`, not top-level. Wrong path meant i18next
+   silently fell back to the raw key string ("saunaRooms"), which the
+   uppercase CSS then rendered as "SAUNAROOMS" — looked like real content
+   until checked in a non-English locale. Fixed to `tNav("items.saunaRooms")`.
+2. The room name ("Glass Front Sauna Room 1414") rendered in raw English on
+   every locale — this page never adopted the `roomDisplayName(t, room)`
+   helper that `DispSaunaRoom.jsx`/`Sitemap.jsx`/`AllProducts.jsx`/
+   `ProductCatalogue.jsx` already use for exactly this problem (`room.name`
+   is English-only in Supabase, no `room_translations` table). Copied the
+   same per-file helper pattern, which also surfaced that `product.json`'s
+   `roomTypes` dictionary (all 7 real `room_type` values, confirmed via
+   `select distinct room_type from sauna_rooms`) is the actual canonical
+   source for room-type words — more complete than `roomsPage.roomDetails.
+   pills` (only 4 of 7), which is what this page was using first. Added a
+   `traditional` entry to `roomDetails.pills` anyway while investigating
+   (harmless, that dictionary is used elsewhere for room-type badge pills
+   and was genuinely missing that one real value) but switched this page to
+   `product.json`'s `roomTypes` + `roomDisplayName` instead of extending the
+   incomplete one further.
+
+**Sauna3DTeaser.jsx simplified**: removed the fake mockup preview card (a
+static SVG box icon with orbit-ring/glow CSS animations styled to *look*
+like a live 3D preview but wasn't one) per explicit request — now just the
+eyebrow/title/subtitle plus the two existing CTAs ("Open 3D Viewer" /
+"Build Your Own"). Deleted the now-dead CSS (`.sawo-3d-card`, `.s3t-preview`,
+`.s3t-orbit*`, `.s3t-icon-*`, `.s3t-hover-*`, `.s3t-card-footer`, `.s3t-hints`,
+`.s3t-hint`, `.s3t-model-label`) and the now-unused `S3T_MODEL_LABEL`
+constant from `SaunaRoomData.jsx` (was a hardcoded "1414RS · Glass Front"
+string — accurate today only because there's exactly one 3D model; would
+have gone stale silently the moment a second one existed, unlike the real
+viewer page which is fully data-driven).
+
+Verified: `npm run i18n:manifest` clean (zero gaps, all 8 locales), full
+production build clean, and a real Chromium screenshot of `/zh/3d-viewer`
+confirming both bugs above are fixed in the actual rendered page (not just
+the JSON source).

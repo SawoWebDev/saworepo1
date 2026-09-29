@@ -689,7 +689,8 @@
         "standard": "スタンダード",
         "glassfront": "ガラスフロント",
         "infrared": "赤外線",
-        "compact": "コンパクト"
+        "compact": "コンパクト",
+        "traditional": "トラディショナル"
       },
       "panels": {
         "standard": {
@@ -749,10 +750,8 @@
       "label": "インタラクティブ3Dモデル",
       "title": "細部まで確かめよう",
       "subtitle": "お手元に届く前に、サウナをあらゆる角度から回転、拡大して確認できます。",
-      "launch": "3Dビューアーを起動",
       "dragRotate": "ドラッグで回転",
       "scrollZoom": "スクロールで拡大",
-      "doubleTapFocus": "ダブルタップでフォーカス",
       "openViewer": "3Dビューアーを開く",
       "buildYourOwn": "自分だけの構成をつくる"
     },
@@ -1252,5 +1251,22 @@
   "cta": {
     "title": "製品選びでお悩みですか？",
     "description": "ヒーターやコントロールからサウナルーム、アクセサリーまで、ご自宅や商業スペースに最適なサウナ構成選びをチームがお手伝いします。"
+  },
+  "threeDViewerPage": {
+    "meta": {
+      "title": "インタラクティブ3Dルームビューア",
+      "description": "SAWOのサウナルームをインタラクティブな3Dで回転・ズームしながら、届く前にじっくりご確認いただけます。"
+    },
+    "title": "探索する",
+    "titleEm": "3Dで",
+    "selectModel": "モデルを選択",
+    "loadingModel": "モデルを読み込み中",
+    "loading": "読み込み中…",
+    "dimensionsNote": "幅 × 奥行 × 外寸高さ",
+    "roomType": "ルームタイプ",
+    "viewFullRoom": "ルームの詳細をすべて見る",
+    "emptyText": "現在ご利用いただけるインタラクティブな3Dモデルはありません。近日中に再度ご確認いただくか、下記のルーム一覧をご覧ください。",
+    "emptyLink": "サウナルームを見る →",
+    "specifications": "仕様"
   }
 }

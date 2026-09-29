@@ -986,7 +986,8 @@
         "standard": "Standard",
         "glassfront": "Glasfront",
         "infrared": "Infrarot",
-        "compact": "Kompakt"
+        "compact": "Kompakt",
+        "traditional": "Traditionell"
       },
       "panels": {
         "standard": {
@@ -1046,10 +1047,8 @@
       "label": "Interaktives 3D-Modell",
       "title": "Entdecken Sie jedes Detail",
       "subtitle": "Drehen, zoomen und begutachten Sie jeden Winkel unserer Sauna, bevor sie bei Ihnen ankommt.",
-      "launch": "3D-Viewer starten",
       "dragRotate": "Ziehen zum Drehen",
       "scrollZoom": "Scrollen zum Zoomen",
-      "doubleTapFocus": "Doppeltippen zum Fokussieren",
       "openViewer": "3D-Viewer öffnen",
       "buildYourOwn": "Eigene Sauna gestalten"
     },
@@ -1252,5 +1251,22 @@
   "cta": {
     "title": "Brauchen Sie Hilfe bei der Auswahl?",
     "description": "Von Saunaöfen und Steuerungen bis zu Saunakabinen und Zubehör – unser Team hilft Ihnen, die passende Saunalösung für Ihr Zuhause oder Ihren gewerblichen Raum zu finden."
+  },
+  "threeDViewerPage": {
+    "meta": {
+      "title": "Interaktiver 3D-Saunaraum-Viewer",
+      "description": "Drehen, zoomen und begutachten Sie SAWO Saunaräume interaktiv in 3D, bevor sie bei Ihnen eintreffen."
+    },
+    "title": "Entdecken",
+    "titleEm": "in 3D",
+    "selectModel": "Modell auswählen",
+    "loadingModel": "Modell wird geladen",
+    "loading": "Wird geladen…",
+    "dimensionsNote": "B × T × Außenhöhe",
+    "roomType": "Raumtyp",
+    "viewFullRoom": "Vollständige Raumdetails ansehen",
+    "emptyText": "Derzeit sind keine interaktiven 3D-Modelle verfügbar — schauen Sie bald wieder vorbei oder durchstöbern Sie unser gesamtes Raumangebot unten.",
+    "emptyLink": "Saunaräume durchsuchen →",
+    "specifications": "Spezifikationen"
   }
 }
