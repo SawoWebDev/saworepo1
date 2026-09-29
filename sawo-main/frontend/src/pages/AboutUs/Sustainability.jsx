@@ -246,11 +246,14 @@ const Sustainability = () => {
         </div>
 
         {/* Image */}
-        <div className="hero-image w-full max-w-[450px] h-[450px] rounded-lg overflow-hidden shadow-lg mx-auto">
+        <div
+          className="hero-image w-full max-w-[520px] rounded-lg overflow-hidden shadow-lg mx-auto bg-white"
+          style={{ aspectRatio: "1365 / 876" }}
+        >
           <img
             src={img_sustainability_image}
             alt={t("commitment.imgAlt")}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </div>
 
