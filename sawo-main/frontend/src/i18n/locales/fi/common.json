@@ -83,5 +83,27 @@
     "code": "Koodi",
     "option": "Vaihtoehto"
   },
-  "premiumCollection": "Premium-valikoima"
+  "premiumCollection": "Premium-valikoima",
+  "circlesInfo": {
+    "f1": {
+      "title": "Helppo käyttö",
+      "description": "Säädä lämpötilaa ja aikaa helposti."
+    },
+    "f2": {
+      "title": "Tehokas lämmitys",
+      "description": "Nopea ja tasainen lämmönjako rentouttavaan saunakokemukseen."
+    },
+    "f3": {
+      "title": "Energiaa säästävä",
+      "description": "Kuluttaa vähemmän sähköä optimaalisen lämmön tuottamiseen."
+    },
+    "f4": {
+      "title": "Turvallisuus",
+      "description": "Ylikuumenemissuoja ja automaattinen virrankatkaisu turvalliseen käyttöön."
+    },
+    "f5": {
+      "title": "Kestävä rakenne",
+      "description": "Laadukkaat materiaalit takaavat pitkäikäisen suorituskyvyn."
+    }
+  }
 }

@@ -83,5 +83,27 @@
     "code": "Référence",
     "option": "Option"
   },
-  "premiumCollection": "Collection premium"
+  "premiumCollection": "Collection premium",
+  "circlesInfo": {
+    "f1": {
+      "title": "Commandes conviviales",
+      "description": "Réglez facilement la température et la durée."
+    },
+    "f2": {
+      "title": "Chauffage efficace",
+      "description": "Une diffusion de chaleur rapide et homogène pour une expérience de sauna relaxante."
+    },
+    "f3": {
+      "title": "Économe en énergie",
+      "description": "Consomme moins d'électricité pour une chaleur optimale."
+    },
+    "f4": {
+      "title": "Dispositifs de sécurité",
+      "description": "Protection contre la surchauffe et arrêt automatique pour une utilisation sûre."
+    },
+    "f5": {
+      "title": "Construction robuste",
+      "description": "Des matériaux de haute qualité garantissent des performances durables."
+    }
+  }
 }

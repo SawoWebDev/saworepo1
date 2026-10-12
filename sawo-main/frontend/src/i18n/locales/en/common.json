@@ -83,5 +83,27 @@
     "code": "Code",
     "option": "Option"
   },
-  "premiumCollection": "Premium Collection"
+  "premiumCollection": "Premium Collection",
+  "circlesInfo": {
+    "f1": {
+      "title": "User-Friendly Controls",
+      "description": "Easily adjust temperature and time settings."
+    },
+    "f2": {
+      "title": "Efficient Heating",
+      "description": "Quick and consistent heat distribution for a relaxing sauna experience."
+    },
+    "f3": {
+      "title": "Energy Efficient",
+      "description": "Consumes less power for optimal heat."
+    },
+    "f4": {
+      "title": "Safety Features",
+      "description": "Overheat protection and automatic shut-off for safe use."
+    },
+    "f5": {
+      "title": "Durable Construction",
+      "description": "High-quality materials ensure long-lasting performance."
+    }
+  }
 }

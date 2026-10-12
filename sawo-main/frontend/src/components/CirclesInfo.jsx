@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useLocaleT } from "../i18n/LocaleContext";
 
+// English fallback text lives in locales/en/common.json (circlesInfo.f1..f5);
+// icons/ids stay here since they aren't locale-dependent.
 const defaultFeatures = [
   { id: 1, title: "User-Friendly Controls",  description: "Easily adjust temperature and time settings.",                                        icon: "fa-sliders" },
   { id: 2, title: "Efficient Heating",        description: "Quick and consistent heat distribution for a relaxing sauna experience.",             icon: "fa-fire" },
@@ -55,7 +58,13 @@ function EnergyLine({ x1, y1, isActive }) {
   );
 }
 
-export default function CirclesInfo({ features = defaultFeatures, rotationSpeed = 22 }) {
+export default function CirclesInfo({ features: featuresProp, rotationSpeed = 22 }) {
+  const tc = useLocaleT("common");
+  const features = featuresProp || defaultFeatures.map((f) => ({
+    ...f,
+    title: tc(`circlesInfo.f${f.id}.title`, { defaultValue: f.title }),
+    description: tc(`circlesInfo.f${f.id}.description`, { defaultValue: f.description }),
+  }));
   const count = features.length;
   const angleRef = useRef(0);
   const [angleDeg, setAngleDeg] = useState(0);
@@ -208,6 +217,10 @@ export default function CirclesInfo({ features = defaultFeatures, rotationSpeed 
           text-transform: uppercase;
           margin-bottom: 0.45em;
           line-height: 1.25;
+          /* Translated titles (de/fi compounds) can be wider than the sphere,
+             which clips them — hyphenate per <html lang>, else force a wrap. */
+          hyphens: auto;
+          overflow-wrap: anywhere;
         }
         .ci-center-desc {
           position: relative;

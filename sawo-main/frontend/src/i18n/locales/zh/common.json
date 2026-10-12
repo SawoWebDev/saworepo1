@@ -83,5 +83,27 @@
     "code": "型号",
     "option": "选项"
   },
-  "premiumCollection": "高端系列"
+  "premiumCollection": "高端系列",
+  "circlesInfo": {
+    "f1": {
+      "title": "操作简便",
+      "description": "轻松调节温度和时间设置。"
+    },
+    "f2": {
+      "title": "高效加热",
+      "description": "快速均匀的热量分布，带来放松的桑拿体验。"
+    },
+    "f3": {
+      "title": "节能高效",
+      "description": "以更低能耗实现理想的加热效果。"
+    },
+    "f4": {
+      "title": "安全保护功能",
+      "description": "过热保护和自动断电，确保使用安全。"
+    },
+    "f5": {
+      "title": "坚固耐用",
+      "description": "优质材料确保持久稳定的性能。"
+    }
+  }
 }

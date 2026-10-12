@@ -83,5 +83,27 @@
     "code": "Code",
     "option": "Option"
   },
-  "premiumCollection": "Premium-Kollektion"
+  "premiumCollection": "Premium-Kollektion",
+  "circlesInfo": {
+    "f1": {
+      "title": "Einfache Bedienung",
+      "description": "Temperatur und Zeit einfach einstellen."
+    },
+    "f2": {
+      "title": "Effizientes Heizen",
+      "description": "Schnelle und gleichmäßige Wärmeverteilung für ein entspannendes Saunaerlebnis."
+    },
+    "f3": {
+      "title": "Stromsparend",
+      "description": "Verbraucht weniger Strom für optimale Wärme."
+    },
+    "f4": {
+      "title": "Sicherheit",
+      "description": "Überhitzungsschutz und automatische Abschaltung für sichere Nutzung."
+    },
+    "f5": {
+      "title": "Langlebige Bauweise",
+      "description": "Hochwertige Materialien sorgen für langanhaltende Leistung."
+    }
+  }
 }
