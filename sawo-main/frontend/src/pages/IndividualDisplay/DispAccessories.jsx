@@ -164,8 +164,10 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick, productName }) {
                 alt={productName || ""}
                 onError={() => setErr(e => ({ ...e, [idx]: true }))}
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
+                  // Pinned to the square box: height:100% does not resolve against an
+                  // aspect-ratio flex parent, so tall images rendered at natural height
+                  // and got clipped (e.g. Sauna Grille).
+                  position: "absolute", inset: 0,
                   objectFit: "contain",
                   padding: 0,
                   animation: "ppFadeIn 0.25s ease",
@@ -214,7 +216,7 @@ function Carousel({ images, thumbnail, videoUrl, onImageClick, productName }) {
                 <i className={`fa-solid ${icon}`} style={{ fontSize: "1.2rem", fontWeight: "bold" }} />
               </button>
             ))}
-            <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5 }}>
+            <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5, zIndex: 3 }}>
               {items.map((_, i) => (
                 <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
                   style={{ width: i === idx ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none", cursor: "pointer", transition: "all 0.22s", background: i === idx ? "#a67853" : "rgba(139,94,60,0.25)" }} />
@@ -984,7 +986,7 @@ export default function AccessoriesPage() {
                         alt={colorLabel(t, selectedVariant?.color) || selectedVariant?.code || product.name}
                         onError={() => setImageErrors(e => ({ ...e, [selectedVariant?.key || "__main__"]: true }))}
                         style={{
-                          maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+                          position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain",
                           animation: "ppFadeIn 0.25s ease",
                         }}
                       />
