@@ -2100,7 +2100,12 @@ body {
   overflow: visible;
   border-bottom: none;
 }
+/* Absolutely positioned so a tall image (e.g. Sauna Grille) can't stretch
+   the aspect-ratio box via the flex item's min-height:auto and throw the
+   whole row out of line. */
 .product-grid-thumb img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;

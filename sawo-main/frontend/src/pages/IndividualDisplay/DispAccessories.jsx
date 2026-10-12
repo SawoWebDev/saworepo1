@@ -662,21 +662,23 @@ function RelatedProducts({ currentSlug, categories, allProducts = [] }) {
                   e.currentTarget.style.background = "transparent";
                 }}
               >
-                <div style={{
-                  aspectRatio: "1/1",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  padding: 12,
-                  borderRadius: 8,
-                }}>
-                  {getImageUrl(p, 'thumbnail') ? (
-                    <ImageWithLoader
-                      src={getImageUrl(p, 'thumbnail')}
-                      alt={p.name}
-                      style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
-                    />
-                  ) : (
-                    <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "2rem" }} />
-                  )}
+                {/* Fixed square box; the image is pinned inside it absolutely so a
+                    tall thumbnail (e.g. Sauna Grille) can't stretch the card. */}
+                <div style={{ position: "relative", aspectRatio: "1/1", borderRadius: 8 }}>
+                  <div style={{
+                    position: "absolute", inset: 12,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}>
+                    {getImageUrl(p, 'thumbnail') ? (
+                      <ImageWithLoader
+                        src={getImageUrl(p, 'thumbnail')}
+                        alt={p.name}
+                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                      />
+                    ) : (
+                      <i className="fa-regular fa-image" style={{ color: "#d5b99a", fontSize: "2rem" }} />
+                    )}
+                  </div>
                 </div>
 
                 <p style={{
