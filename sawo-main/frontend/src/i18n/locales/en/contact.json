@@ -1,4 +1,5 @@
 {
+  "productInquirySubject": "Product Inquiry: {{name}}",
   "meta": {
     "title": "Contact Us | SAWO",
     "description": "Get in touch with SAWO: technical support, sales inquiries, and distributor contacts for our global network of representative offices."

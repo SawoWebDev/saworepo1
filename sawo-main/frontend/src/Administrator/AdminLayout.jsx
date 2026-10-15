@@ -7,6 +7,8 @@ import { getRoleCapabilityOverrides } from "../local-storage/rolePermissions";
 import { setPreviewRole, usePreviewRole } from "./previewRole";
 import PageHeader from "./PageHeader";
 import CmsSearch from "./CmsSearch.jsx";
+import { useTranslationsPending } from "./Translations/translationPending";
+import { useTranslationJobRunner } from "./Translations/translationJobs";
 import logo from "./SAWO-logo.webp";
 import "./admin.css";
 
@@ -25,7 +27,7 @@ const isNavActive = (pathname, to) => pathname === to || pathname.startsWith(`${
 const SECTION_ORDER = ["product", "site", "system"];
 const SECTION_LABELS = { product: "Product", site: "Site", system: "System" };
 
-function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, onClose, collapsed, onToggleCollapse, realRole, effectiveRole, isPreviewing, onChangePreview }) {
+function Sidebar({ session, dark, setDark, nav, badges = {}, handleLogout, location, open, onClose, collapsed, onToggleCollapse, realRole, effectiveRole, isPreviewing, onChangePreview }) {
   // `hidden` items (My Profile) are routable and get a PageHeader, but are
   // reached from the footer identity card instead of the nav list.
   const items = nav.filter((item) => !item.hidden);
@@ -42,10 +44,12 @@ function Sidebar({ session, dark, setDark, nav, handleLogout, location, open, on
 
   const renderLink = ({ to, label, icon }) => {
     const active = isNavActive(location.pathname, to);
+    const badge = badges[to];
     return (
-      <Link key={to} to={to} className={active ? "active" : ""} onClick={onClose} title={label}>
+      <Link key={to} to={to} className={active ? "active" : ""} onClick={onClose} title={badge ? `${label} — ${badge}` : label}>
         <i className={icon} />
         <span className="sidebar-nav-label">{label}</span>
+        {badge && <span className="sidebar-nav-dot" aria-label={badge} />}
       </Link>
     );
   };
@@ -192,6 +196,16 @@ export default function AdminLayout({ children }) {
     getRoleCapabilityOverrides().then(() => forceRerender((n) => n + 1));
   }, []);
 
+  // Red dot on "Translations" while any product has a missing/outdated
+  // translation. Only fetched for users who can open that page.
+  const navRole = session ? (session.user.role === "superadmin" && previewRole ? previewRole : session.user.role) : null;
+  const pendingTranslations = useTranslationsPending(
+    !!session && canEffective(session.user, navRole, "page.translations")
+  );
+  // Works through queued "Translate" jobs (Translations > Products) from
+  // any admin page, so a job keeps going while the admin navigates around.
+  useTranslationJobRunner(!!session && canEffective(session.user, navRole, "translations.apply"), session?.user);
+
   // Close drawer on route change
   useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
 
@@ -256,6 +270,7 @@ export default function AdminLayout({ children }) {
         dark={dark}
         setDark={setDark}
         nav={nav}
+        badges={pendingTranslations > 0 ? { "/admin/translations": `${pendingTranslations} product(s) need translation` } : {}}
         handleLogout={handleLogout}
         location={location}
         open={sidebarOpen}

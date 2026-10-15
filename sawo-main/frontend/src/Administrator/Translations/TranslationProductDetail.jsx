@@ -19,6 +19,7 @@ import {
 import { fieldStatusesForProduct, rollupStatus, FIELD_STATUS } from "../Local/translationStatus";
 import { PRODUCT_TRANSLATION_LOCALES } from "../../i18n/productTranslationLocales";
 import StatusIcon from "./StatusIcon";
+import { refreshPendingCount } from "./translationPending";
 
 // ─── UI primitives — copied from Products.jsx (Modal/Confirm/Btn/useToast
 // aren't exported from there; every prior admin page that needed them has
@@ -116,6 +117,7 @@ export default function TranslationProductDetail({ currentUser }) {
       await applyTranslationTask({ ...task, currentUser });
       addToast(`Applied ${task.items.length} field(s) for ${task.locale.toUpperCase()}.`, "success");
       await load();
+      refreshPendingCount().catch(() => {});
     } catch (err) {
       if (err.code === "SOURCE_CHANGED") {
         addToast(err.message, "warning");

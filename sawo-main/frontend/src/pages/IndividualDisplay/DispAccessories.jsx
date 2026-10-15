@@ -6,6 +6,7 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
+import ProductInquiryBanner from "../../components/ProductInquiryBanner";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 import { translateSpecLabel, translateHtmlTableCells } from "../../utils/specLabel";
@@ -859,12 +860,13 @@ export default function AccessoriesPage() {
         .pp-richtext table {
           width: 100%;
           min-width: max-content;
-          border-collapse: collapse;
+          border-collapse: separate;
+          border-spacing: 0;
           margin: 12px 0;
           font-family: 'Montserrat', sans-serif;
           font-size: 0.78rem;
           background-color: #fff;
-          border: 1px solid #d5b99a;
+          border: 1px solid #8b5e3c;
           border-radius: 10px;
           overflow: hidden;
         }
@@ -1243,7 +1245,7 @@ export default function AccessoriesPage() {
                   {/* min-width scales with column count so long multi-word
                       headers get room to wrap onto 2 lines instead of
                       squeezing every column down to unreadable widths. */}
-                  <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+                  <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #8b5e3c" }}>
                     <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                       <thead>
                         <tr style={{ background: "#8b5e3c" }}>
@@ -1278,6 +1280,8 @@ export default function AccessoriesPage() {
             </div>
           </>
         )}
+
+        <ProductInquiryBanner productName={product.name} />
 
         {/* ── SECTION 3: Related Products ────────────────────────────── */}
         <RelatedProducts currentSlug={slug} categories={product.categories} allProducts={productsData} />

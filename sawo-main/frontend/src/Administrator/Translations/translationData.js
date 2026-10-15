@@ -9,7 +9,6 @@ import {
   walkProseFields,
   getVariationGroups,
   computeSourceFieldHashes,
-  packetTouchedPaths,
   normalize,
 } from "../Local/scripts/product-i18n-fields.js";
 import { staleOrMissingPaths } from "../Local/translationStatus";
@@ -19,7 +18,7 @@ import { staleOrMissingPaths } from "../Local/translationStatus";
 // nothing extra (no images/spec_images — this mirrors the "don't pull the
 // heavy per-row payload" discipline supabaseReader.js already documents).
 const PRODUCT_COLUMNS =
-  "id, name, slug, short_description, description, type, features, spec_table, included_items, variations, variants, heating_element_groups, updated_at";
+  "id, name, slug, short_description, description, type, features, spec_table, included_items, variations, variants, heating_element_groups, created_at, updated_at";
 
 // ── bulk fetch ─────────────────────────────────────────────────────────────
 // PostgREST caps every response at the project's max-rows setting (1000 on
@@ -200,16 +199,32 @@ export async function applyTranslationTask({ productId, locale, items, expected_
     throw err;
   }
 
-  const structured = buildStructuredRow(product, items);
-
   const { data: existingRow } = await supabase
     .from("product_translations")
-    .select("source_field_hashes")
+    .select("*")
     .eq("product_id", productId)
     .eq("locale", locale)
     .maybeSingle();
 
-  const newHashes = computeSourceFieldHashes(product, packetTouchedPaths(fieldsFromItems(items)));
+  // Built on top of the EXISTING translated row, not English: a task only
+  // carries the stale/missing paths, and the array columns (features,
+  // variations, included_items, spec headers) are written whole — so every
+  // path this task didn't touch must keep its current translation instead
+  // of being reset to English.
+  const structured = buildStructuredRow(product, items, existingRow);
+
+  // Hash exactly the paths this task covered. (Previously this went through
+  // packetTouchedPaths(fieldsFromItems(items)), and fieldsFromItems only
+  // copied the four top-level fields — so edits to features, variations,
+  // spec headers or included items were never marked fresh and kept
+  // showing "needs update" after Apply.)
+  // Fields that are empty in English have nothing to translate but still
+  // need a freshness record, or the grid flags the product "needs update"
+  // forever (a brand-new product's null description, for example).
+  const emptyPaths = walkProseFields(product)
+    .filter((f) => f.value == null || String(f.value).trim() === "")
+    .map((f) => f.path);
+  const newHashes = computeSourceFieldHashes(product, [...touchedPaths, ...emptyPaths]);
   const row = {
     product_id: productId,
     locale,
@@ -239,21 +254,7 @@ export async function applyTranslationTask({ productId, locale, items, expected_
   return row;
 }
 
-// Reconstructs { name, short_description, ..., variations, included_items }
-// from a flat items[] list (path + translated value) — the inverse of
-// existingTranslationByPath, needed because product_translations stores
-// variations/included_items as structured JSONB, not flat paths.
-function fieldsFromItems(items) {
-  const fields = {};
-  for (const { path, translated } of items) {
-    if (path === "name" || path === "short_description" || path === "description" || path === "type") {
-      fields[path] = translated;
-    }
-  }
-  return fields;
-}
-
-function buildStructuredRow(product, items) {
+function buildStructuredRow(product, items, base = null) {
   const byPath = new Map(items.map((i) => [i.path, i.translated]));
   const row = {};
 
@@ -263,40 +264,51 @@ function buildStructuredRow(product, items) {
 
   const featureIndexes = [...byPath.keys()].filter((k) => /^features\[\d+\]$/.test(k));
   if (featureIndexes.length && Array.isArray(product.features)) {
-    row.features = product.features.map((orig, i) => (byPath.has(`features[${i}]`) ? byPath.get(`features[${i}]`) : orig));
+    const prev = Array.isArray(base?.features) ? base.features : [];
+    row.features = product.features.map((orig, i) => (byPath.has(`features[${i}]`) ? byPath.get(`features[${i}]`) : prev[i] ?? orig));
   }
 
   const specHeaderIndexes = [...byPath.keys()].filter((k) => /^spec_table_headers\[\d+\]$/.test(k));
   if (specHeaderIndexes.length && product.spec_table?.headers) {
+    const prev = Array.isArray(base?.spec_table?.headers) ? base.spec_table.headers : [];
     row.spec_table = {
       ...product.spec_table,
-      headers: product.spec_table.headers.map((orig, i) => (byPath.has(`spec_table_headers[${i}]`) ? byPath.get(`spec_table_headers[${i}]`) : orig)),
+      headers: product.spec_table.headers.map((orig, i) => (byPath.has(`spec_table_headers[${i}]`) ? byPath.get(`spec_table_headers[${i}]`) : prev[i] ?? orig)),
     };
   }
 
   const variationTouched = [...byPath.keys()].some((k) => k.startsWith("variations["));
   if (variationTouched) {
     const englishGroups = getVariationGroups(product);
+    const prevGroups = Array.isArray(base?.variations) ? base.variations : [];
     row.variations = englishGroups.map((group, i) => {
       const name = byPath.get(`variations[${i}].name`);
       const description = byPath.get(`variations[${i}].description`);
+      // Only the prose fields fall back to this group's existing
+      // translation (same index) — structure/images/rows stay English-sourced
+      // so a changed image or spec row isn't pinned to an old copy.
+      const prevG = prevGroups[i] || {};
       const merged = { ...group };
       if (name !== undefined) merged.name = name;
+      else if (prevG.name != null) merged.name = prevG.name;
       if (description !== undefined) merged.description = description;
+      else if (prevG.description != null) merged.description = prevG.description;
 
       const featureKeys = [...byPath.keys()].filter((k) => k.startsWith(`variations[${i}].features[`));
       if (featureKeys.length && Array.isArray(group.features)) {
+        const prevF = Array.isArray(prevGroups[i]?.features) ? prevGroups[i].features : [];
         merged.features = group.features.map((orig, fi) =>
-          byPath.has(`variations[${i}].features[${fi}]`) ? byPath.get(`variations[${i}].features[${fi}]`) : orig
+          byPath.has(`variations[${i}].features[${fi}]`) ? byPath.get(`variations[${i}].features[${fi}]`) : prevF[fi] ?? orig
         );
       }
 
       const headerKeys = [...byPath.keys()].filter((k) => k.startsWith(`variations[${i}].spec_table_headers[`));
       if (headerKeys.length && group.spec_table?.headers) {
+        const prevH = Array.isArray(prevGroups[i]?.spec_table?.headers) ? prevGroups[i].spec_table.headers : [];
         merged.spec_table = {
           ...group.spec_table,
           headers: group.spec_table.headers.map((orig, hi) =>
-            byPath.has(`variations[${i}].spec_table_headers[${hi}]`) ? byPath.get(`variations[${i}].spec_table_headers[${hi}]`) : orig
+            byPath.has(`variations[${i}].spec_table_headers[${hi}]`) ? byPath.get(`variations[${i}].spec_table_headers[${hi}]`) : prevH[hi] ?? orig
           ),
         };
       }
@@ -306,12 +318,16 @@ function buildStructuredRow(product, items) {
 
   const includedItemsTouched = [...byPath.keys()].some((k) => k.startsWith("included_items["));
   if (includedItemsTouched && Array.isArray(product.included_items)) {
+    const prevItems = Array.isArray(base?.included_items) ? base.included_items : [];
     row.included_items = product.included_items.map((item, i) => {
       const title = byPath.get(`included_items[${i}].title`);
       const note = byPath.get(`included_items[${i}].note`);
+      const prevI = prevItems[i] || {};
       const merged = { ...item };
       if (title !== undefined) merged.title = title;
+      else if (prevI.title != null) merged.title = prevI.title;
       if (note !== undefined) merged.note = note;
+      else if (prevI.note != null) merged.note = prevI.note;
       return merged;
     });
   }

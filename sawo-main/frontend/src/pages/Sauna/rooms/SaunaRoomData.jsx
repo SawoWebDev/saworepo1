@@ -493,8 +493,8 @@ const infraredBenchTypes = {
 // local assets — reference the WordPress media library directly, same as
 // SAUNA_ROOMS_HERO_IMG in SaunaRooms.jsx.
 const compactImageData = {
-  "1310MS": { bench: "1310MS", images: ["https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Actual-View-.webp"] },
-  "1313MS": { bench: "1313MS", images: ["https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Actual-View.webp"] },
+  "1310MS": { bench: "1310MS", images: ["https://www.sawo.com/wp-content/uploads/2026/10/New-Compact-Sauna-Room-1310MS-V3-PERSPECTIVE-VIEW-1-1.webp"] },
+  "1313MS": { bench: "1313MS", images: ["https://www.sawo.com/wp-content/uploads/2026/10/2P-New-Compact-Sauna-Room-1313MS-V3_PERSPECTIVE-VIEW-2RV.webp"] },
 };
 
 const compactSizeData = {
@@ -519,10 +519,9 @@ const SIDE_THUMBS = {
     { src: "https://www.sawo.com/wp-content/uploads/2026/07/4-0T0A6331-1.webp", alt: "View 4" },
   ],
   compact: [
-    { src: "https://www.sawo.com/wp-content/uploads/2026/07/1313MS_Compact-Sauna-Room.webp", alt: "Compact View 1" },
-    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5714_RV1-scaled.webp", alt: "Compact View 2" },
-    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5718-1-scaled.webp", alt: "Compact View 3" },
-    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5715-1-scaled.webp", alt: "Compact View 4", zoom: 1.4 },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5714_RV1-scaled.webp", alt: "Compact View 1" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5718-1-scaled.webp", alt: "Compact View 2" },
+    { src: "https://www.sawo.com/wp-content/uploads/2026/07/0T0A5715-1-scaled.webp", alt: "Compact View 3", zoom: 1.4 },
   ],
   infrared: [
     { src: img_0908_IR_SAUNA_ROOM, alt: "Infrared View 1" },
@@ -530,8 +529,6 @@ const SIDE_THUMBS = {
     { src: "https://www.sawo.com/wp-content/uploads/2026/07/0908-IR-SAUNA-ROOM_V3-scaled.webp", alt: "Infrared View 3" },
   ],
 };
-
-const COMPACT_VIDEO_SRC = "https://www.sawo.com/wp-content/uploads/2026/07/SR02-60001630-New-Compact-Sauna-Room-.mp4";
 
 const SFW_ITEMS = [
   {
@@ -996,8 +993,8 @@ const ROOM_CONFIGS = {
       { value: "1313MS", label: "1313MS Cedar (2 Person)" },
     ],
     doorOptions: [],
-    woodOptions: ["Cedar"],
-    woodEnabled: [true],
+    woodOptions: ["Cedar", "Hemlock"],
+    woodEnabled: [true, true],
     bestSellers: null,
   },
 };
@@ -1055,7 +1052,7 @@ export {
   glassFrontImageData, glassFrontSizeData, glassFrontBenchTypes, glassFrontSizeCategories,
   infraredImageData, infraredSizeData, infraredBenchTypes,
   compactImageData, compactSizeData, compactBenchTypes,
-  SIDE_THUMBS, COMPACT_VIDEO_SRC,
+  SIDE_THUMBS,
   ROOM_CONFIGS, HASH_MAP,
   SFW_ITEMS, SFW_AUTO_DELAY, SFW_RESUME_DELAY,
   IR_SFW_ITEMS,

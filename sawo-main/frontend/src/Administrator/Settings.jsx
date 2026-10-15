@@ -12,6 +12,7 @@ import { getDataSource, setDataSource as saveDataSource } from "../local-storage
 import { getCache, setCache, clearAllCache } from "./adminCache";
 import { getPerms } from "./permissions";
 import LanguageOrderList from "./LanguageOrderList";
+import AiTranslationSettings from "./AiTranslationSettings";
 import { PRODUCTS_STORAGE_KEY } from "./Local/useLocalProducts";
 import { LOCAL_ROOMS_STORAGE_KEY } from "./Local/useLocalSaunaRooms";
 
@@ -525,6 +526,10 @@ export default function Settings({ currentUser }) {
           </p>
         )}
       </div>
+      )}
+
+      {(currentUser?.role === "admin" || currentUser?.role === "superadmin") && (
+        <AiTranslationSettings currentUser={currentUser} toast={add} />
       )}
 
       <div className="card card-body break-inside-avoid mb-6">

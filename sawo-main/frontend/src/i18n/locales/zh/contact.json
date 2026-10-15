@@ -361,5 +361,6 @@
     "也门",
     "赞比亚",
     "津巴布韦"
-  ]
+  ],
+  "productInquirySubject": "产品咨询：{{name}}"
 }

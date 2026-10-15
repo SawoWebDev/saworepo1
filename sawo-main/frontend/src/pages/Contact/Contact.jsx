@@ -206,6 +206,18 @@ const Contact = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Pre-fill from a product page's "Inquire Now" button (ProductInquiryBanner):
+  // jump straight to the General Inquiry form with the product in the subject.
+  // No toast — that one is specific to the configurator's add-on flow above.
+  useEffect(() => {
+    const urlProduct = searchParams.get("product");
+    if (!urlProduct || searchParams.get("subject")) return;
+    setCategory("general");
+    setForm(prev => ({ ...prev, subject: t("productInquirySubject", { name: urlProduct }) }));
+    setStep(2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const setField = (name, value) => {
     bumpInteraction();
     setForm(prev => ({ ...prev, [name]: value }));
@@ -465,7 +477,9 @@ const Contact = () => {
           background-image: linear-gradient(rgba(18,12,7,0.72), rgba(18,12,7,0.72)), url('${woodBg}');
           background-size: cover;
           background-position: center;
-          padding: 160px 24px 100px;
+          /* Top padding clears the transparent fixed header; kept tight so
+             the whole form card fits on a ~1000px-tall desktop screen. */
+          padding: 124px 24px 80px;
         }
         .ct-form-section-title {
           font-family: 'Montserrat', sans-serif;
@@ -473,7 +487,7 @@ const Contact = () => {
           font-weight: 700;
           color: #ffffff;
           text-align: center;
-          margin: 0 0 18px;
+          margin: 0 0 12px;
         }
         .ct-form-section-desc {
           font-family: 'Montserrat', sans-serif;
@@ -482,8 +496,8 @@ const Contact = () => {
           color: rgba(255,255,255,0.92);
           text-align: center;
           line-height: 1.7;
-          max-width: 860px;
-          margin: 0 auto 48px;
+          max-width: 1140px;
+          margin: 0 auto 28px;
         }
 
         /* Form card */
@@ -493,7 +507,7 @@ const Contact = () => {
           background-color: #faf8f6;
           background-image: var(--ct-grain);
           border-radius: 10px;
-          padding: 45px 40px;
+          padding: 32px 40px;
           box-shadow:
             inset 0 1px 0 rgba(255,255,255,0.95),
             inset 0 -1px 0 rgba(120,90,66,0.09),
@@ -550,24 +564,24 @@ const Contact = () => {
           display: flex;
           justify-content: center;
           align-items: flex-start;
-          margin-bottom: 40px;
+          margin-bottom: 24px;
         }
         .ct-progress-step {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 12px;
+          gap: 8px;
         }
         .ct-step-circle {
-          width: 45px;
-          height: 45px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           background: #e0e0e0;
           display: flex;
           align-items: center;
           justify-content: center;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 14px;
           color: #999;
           transition: all 0.3s ease;
         }
@@ -579,7 +593,7 @@ const Contact = () => {
           width: 70px;
           height: 2px;
           background: #e0e0e0;
-          margin-top: 22px;
+          margin-top: 20px;
         }
         .ct-progress-line.filled { background: #af8564; }
 
@@ -640,10 +654,10 @@ const Contact = () => {
           font-size: 20px;
           font-weight: 600;
           color: #af8564;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           text-align: center;
         }
-        .ct-form-group { margin-bottom: 22px; }
+        .ct-form-group { margin-bottom: 18px; }
         .ct-form-row {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -759,13 +773,13 @@ const Contact = () => {
         }
 
         /* Buttons */
-        .ct-btn-group { display: flex; gap: 15px; margin-top: 32px; }
+        .ct-btn-group { display: flex; gap: 15px; margin-top: 24px; }
         .ct-btn {
           flex: 1;
-          padding: 14px 24px;
+          padding: 10px 20px;
           border: none;
           border-radius: 6px;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 600;
           font-family: 'Montserrat', sans-serif;
           cursor: pointer;

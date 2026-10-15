@@ -2451,12 +2451,13 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
         .pp-preview-richtext table {
           width: 100%;
           min-width: max-content;
-          border-collapse: collapse;
+          border-collapse: separate;
+          border-spacing: 0;
           margin: 12px 0;
           font-family: 'Montserrat', sans-serif;
           font-size: 0.8rem;
           background-color: #fff;
-          border: 1px solid #d5b99a;
+          border: 1px solid #8b5e3c;
           border-radius: 10px;
           overflow: hidden;
         }
@@ -2654,7 +2655,7 @@ function ProductPreviewModal({ product, onClose, onEdit, liveUrl }) {
             <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 32px" }} />
             <div style={{ padding: "20px 32px" }}>
               <PreviewSectionLabel text="Technical Data" />
-              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #8b5e3c" }}>
                 <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 160), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                   <thead>
                     <tr style={{ background: "#8b5e3c" }}>

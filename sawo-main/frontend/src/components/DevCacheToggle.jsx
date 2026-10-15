@@ -14,7 +14,10 @@ import { useState, useRef, useEffect } from "react";
 import { isDevCacheBypassed, setDevCacheBypass } from "../Administrator/Local/publicDataCache";
 import { setCache } from "../Administrator/adminCache";
 
+// Also gated on NODE_ENV so a production build (`npm run build`) never shows
+// the badge, even if it's previewed or served from localhost.
 const IS_LOCALHOST =
+  process.env.NODE_ENV !== "production" &&
   typeof window !== "undefined" &&
   ["localhost", "127.0.0.1"].includes(window.location.hostname);
 

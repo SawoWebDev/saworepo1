@@ -12,6 +12,8 @@ import { fetchAllProductsForTranslation, fetchAllTranslations, fetchAllPages } f
 import { buildStatusGrid, summarizeGrid, FIELD_STATUS } from "../Local/translationStatus";
 import { PRODUCT_TRANSLATION_LOCALES } from "../../i18n/productTranslationLocales";
 import TranslationProductsGrid from "./TranslationProductsGrid";
+import AiUsageTab from "./AiUsageTab";
+import { publishPendingCount, countPendingProducts } from "./translationPending";
 import ScrollArea from "../ScrollArea";
 import Pagination from "../Pagination";
 import { usePagination } from "../usePagination";
@@ -37,6 +39,7 @@ export default function Translations({ currentUser }) {
       const nextGrid = buildStatusGrid(products, translations);
       setGrid(nextGrid);
       setCache(CACHE_KEY, nextGrid);
+      publishPendingCount(countPendingProducts(nextGrid));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -47,6 +50,7 @@ export default function Translations({ currentUser }) {
   useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const summary = useMemo(() => summarizeGrid(grid), [grid]);
+  const pendingCount = useMemo(() => countPendingProducts(grid), [grid]);
 
   if (!perms.can("page.translations")) {
     return (
@@ -65,10 +69,16 @@ export default function Translations({ currentUser }) {
           </button>
           <button type="button" className={`tax-tab-btn${tab === "products" ? " active" : ""}`} onClick={() => setTab("products")}>
             <i className="fa-solid fa-box" /> Products
+            {pendingCount > 0 && <AttentionDot title={`${pendingCount} product(s) need translation`} />}
           </button>
           <button type="button" className={`tax-tab-btn${tab === "memory" ? " active" : ""}`} onClick={() => setTab("memory")}>
             <i className="fa-solid fa-database" /> Translation Memory
           </button>
+          {(currentUser?.role === "admin" || currentUser?.role === "superadmin") && (
+            <button type="button" className={`tax-tab-btn${tab === "usage" ? " active" : ""}`} onClick={() => setTab("usage")}>
+              <i className="fa-solid fa-chart-line" /> AI Usage
+            </button>
+          )}
         </div>
 
         <button type="button" className="btn btn-ghost btn-sm" onClick={load} disabled={loading}>
@@ -89,11 +99,34 @@ export default function Translations({ currentUser }) {
       ) : (
         <div className="cms-scroll-page">
           {tab === "overview" && <OverviewTab summary={summary} grid={grid} onGoToProducts={() => setTab("products")} />}
-          {tab === "products" && <TranslationProductsGrid grid={grid} />}
+          {tab === "products" && (
+            <TranslationProductsGrid
+              grid={grid}
+              currentUser={currentUser}
+              canTranslate={perms.can("translations.apply")}
+              onJobFinished={load}
+            />
+          )}
           {tab === "memory" && <TranslationMemoryTab />}
+          {tab === "usage" && <AiUsageTab />}
         </div>
       )}
     </div>
+  );
+}
+
+// Same red dot as the sidebar's Translations item — marks a tab that has
+// work waiting in it.
+function AttentionDot({ title }) {
+  return (
+    <span
+      title={title}
+      aria-label={title}
+      style={{
+        display: "inline-block", width: 8, height: 8, marginLeft: 6, borderRadius: "50%",
+        background: "#ef4444", boxShadow: "0 0 0 2px rgba(239,68,68,0.25)", verticalAlign: "middle",
+      }}
+    />
   );
 }
 

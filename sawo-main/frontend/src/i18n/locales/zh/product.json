@@ -119,5 +119,12 @@
     "metallicBrown": "金属棕",
     "pine": "松木",
     "red": "红色"
+  },
+  "inquire": {
+    "eyebrow": "对此产品感兴趣？",
+    "title": "咨询 {{name}}",
+    "body": "对价格、兼容性或供货情况有疑问？我们的团队会尽快回复您。",
+    "button": "立即咨询",
+    "titleGeneric": "咨询此产品"
   }
 }

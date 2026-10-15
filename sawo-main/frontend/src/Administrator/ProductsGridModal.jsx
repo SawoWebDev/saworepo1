@@ -99,12 +99,13 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
         .pgm-preview-richtext table {
           width: 100%;
           min-width: max-content;
-          border-collapse: collapse;
+          border-collapse: separate;
+          border-spacing: 0;
           margin: 12px 0;
           font-family: 'Montserrat', sans-serif;
           font-size: 0.8rem;
           background-color: #fff;
-          border: 1px solid #d5b99a;
+          border: 1px solid #8b5e3c;
           border-radius: 10px;
           overflow: hidden;
         }
@@ -253,7 +254,7 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
             <div style={{ height: 1, background: "linear-gradient(to right,transparent,#edddd0,transparent)", margin: "0 28px" }} />
             <div style={{ padding: "18px 28px" }}>
               <h4 style={{ fontFamily: "'Montserrat',sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#8b5e3c", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.07em" }}>Technical Data</h4>
-              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #d5b99a" }}>
+              <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #8b5e3c" }}>
                 <table style={{ width: "100%", minWidth: Math.max(360, specHeaders.length * 130), borderCollapse: "collapse", fontFamily: "'Montserrat',sans-serif", fontSize: "0.8rem" }}>
                   <thead>
                     <tr style={{ background: "#8b5e3c" }}>

@@ -256,6 +256,17 @@ body {
 }
 .sidebar-nav a.active::before { opacity: 1; }
 
+/* Attention dot (e.g. Translations: products still need translating). */
+.sidebar-nav-dot {
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239,68,68,0.25);
+}
+
 /* ── Sidebar nav section grouping ────────────────────────────────────────
    Divider + label above each of the three nav groups (Product/Site/System)
    — see permissions.js's `section` field and AdminLayout.jsx's Sidebar
@@ -498,6 +509,7 @@ body {
     padding: 0.45rem 0;
   }
   .admin-sidebar.sidebar-collapsed .sidebar-nav a::before { left: 1px; }
+  .admin-sidebar.sidebar-collapsed .sidebar-nav-dot { position: absolute; top: 6px; right: 8px; margin: 0; }
   .admin-sidebar.sidebar-collapsed .sidebar-footer { padding: 0.6rem 0.45rem 0.75rem; }
   .admin-sidebar.sidebar-collapsed .sidebar-footer-card { padding: 0.45rem; align-items: center; }
   .admin-sidebar.sidebar-collapsed .sidebar-footer-user { display: none; }

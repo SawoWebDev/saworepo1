@@ -6351,7 +6351,7 @@
     "slug": "compact-sauna-room-1310ms",
     "short_description": "SAWO Compact Sauna Room 1310MS - a plug-and-play, single-person cedar sauna built for smaller spaces.",
     "description": "The Compact Sauna Room's plug-and-play design offers instant, stable setup, saving on installation cost and downtime. Space-saving and crafted from premium cedar, it's the perfect solution for smaller spaces without compromising the authentic sauna experience.",
-    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Actual-View-.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/10/New-Compact-Sauna-Room-1310MS-V3-PERSPECTIVE-VIEW-1-1.webp",
     "sku": null,
     "room_type": "compact",
     "model_code": "1310MS",
@@ -6363,16 +6363,18 @@
     "capacity_min": 1,
     "capacity_max": 1,
     "wood_options": [
-      "Cedar"
+      "Cedar",
+      "Hemlock"
     ],
     "wood_options_enabled": [
+      true,
       true
     ],
     "configurations": {
       "1310MS": {
         "bench": "1310MS",
         "images": [
-          "https://www.sawo.com/wp-content/uploads/2026/05/1310MS-Actual-View-.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/10/New-Compact-Sauna-Room-1310MS-V3-PERSPECTIVE-VIEW-1-1.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",
@@ -6418,7 +6420,7 @@
     "slug": "compact-sauna-room-1313ms",
     "short_description": "SAWO Compact Sauna Room 1313MS - a plug-and-play, two-person cedar sauna built for smaller spaces.",
     "description": "The Compact Sauna Room's plug-and-play design offers instant, stable setup, saving on installation cost and downtime. Space-saving and crafted from premium cedar, it's the perfect solution for smaller spaces without compromising the authentic sauna experience.",
-    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Actual-View.webp",
+    "thumbnail": "https://www.sawo.com/wp-content/uploads/2026/10/2P-New-Compact-Sauna-Room-1313MS-V3_PERSPECTIVE-VIEW-2RV.webp",
     "sku": null,
     "room_type": "compact",
     "model_code": "1313MS",
@@ -6430,17 +6432,18 @@
     "capacity_min": 2,
     "capacity_max": 2,
     "wood_options": [
-      "Cedar"
+      "Cedar",
+      "Hemlock"
     ],
     "wood_options_enabled": [
+      true,
       true
     ],
     "configurations": {
       "1313MS": {
         "bench": "1313MS",
         "images": [
-          "https://www.sawo.com/wp-content/uploads/2026/05/1313MS-Actual-View.webp",
-          "https://www.sawo.com/wp-content/uploads/2026/07/1313MS_Compact-Sauna-Room.webp"
+          "https://www.sawo.com/wp-content/uploads/2026/10/2P-New-Compact-Sauna-Room-1313MS-V3_PERSPECTIVE-VIEW-2RV.webp"
         ],
         "bench_name": "Straight Bench",
         "bench_class": "straight",

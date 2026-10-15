@@ -119,5 +119,12 @@
     "metallicBrown": "Metallic Brown",
     "pine": "Pine",
     "red": "Red"
+  },
+  "inquire": {
+    "eyebrow": "Interested in this product?",
+    "title": "Inquire about {{name}}",
+    "body": "Have questions about pricing, compatibility or availability? Our team will get back to you.",
+    "button": "Inquire Now",
+    "titleGeneric": "Inquire about this product"
   }
 }
