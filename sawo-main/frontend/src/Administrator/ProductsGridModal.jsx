@@ -197,6 +197,7 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
                       const vImg = v.image || null;
                       const active = vImg && vImg === all[idx];
                       return (
+                        v.color ? (
                         <button key={i} type="button" title={v.color}
                           onClick={() => {
                             if (!vImg) return;
@@ -212,16 +213,28 @@ function QuickPreviewModal({ product, onClose, onEdit }) {
                             outline: active ? "2px solid #a67853" : "2px solid transparent",
                             outlineOffset: 2,
                           }} />
-                      );
+                      ) : (
+                        <button key={i} type="button" title={v.color || v.name}
+                          onClick={() => {
+                            if (!vImg) return;
+                            const target = all.indexOf(vImg);
+                            if (target !== -1) setIdx(target);
+                          }}
+                          style={{
+                            height: 24, borderRadius: 12, padding: "0 12px", border: "none", outline: "none",
+                            cursor: vImg ? "pointer" : "default", fontSize: "0.7rem", fontWeight: 600,
+                            background: active ? "#a67853" : "transparent", color: active ? "#fff" : "#8b5e3c",
+                          }}>{v.name}</button>
+                      )                      );
                     })}
                   </div>
                   <div style={{ display: "flex", gap: 10, fontSize: "0.72rem" }}>
-                    <span style={{ color: "#a67853", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", minWidth: 46 }}>Code</span>
+                    <span style={{ color: "#a67853", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", minWidth: 46 }}>Code:</span>
                     <span style={{ color: "#5a4030" }}>{variantColors.map(v => v.code).filter(Boolean).join(" | ")}</span>
                   </div>
                   <div style={{ display: "flex", gap: 10, fontSize: "0.72rem" }}>
-                    <span style={{ color: "#a67853", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", minWidth: 46 }}>Option</span>
-                    <span style={{ color: "#5a4030" }}>{variantColors.map(v => v.color).filter(Boolean).join(" | ")}</span>
+                    <span style={{ color: "#a67853", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", minWidth: 46 }}>Option:</span>
+                    <span style={{ color: "#5a4030" }}>{variantColors.map(v => v.color || v.name).filter(Boolean).join(" | ")}</span>
                   </div>
                 </div>
               )}
