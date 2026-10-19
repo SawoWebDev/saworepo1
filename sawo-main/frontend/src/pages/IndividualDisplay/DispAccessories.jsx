@@ -514,11 +514,18 @@ export const VARIANT_COLOR_DOT = {
   "green": "#4a6b4f",
 };
 
+// Label for one variation: its colour when it has one, otherwise its own name
+// (e.g. "250ml" / "4L" for size variations, which carry no colour).
+function variantLabel(t, v) {
+  return colorLabel(t, v?.color) || v?.name || v?.code || "";
+}
+
 function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant, hasVideo, showVideo, onSelectVideo }) {
   const t = useLocaleT("product");
   const tc = useLocaleT("common");
   const codes = variants.map(v => v.code).filter(Boolean);
-  const colors = variants.map(v => colorLabel(t, v.color)).filter(Boolean);
+  const colors = variants.map(v => variantLabel(t, v)).filter(Boolean);
+  const hasColorDots = variants.some(v => v.color);
   const capacityRow = (product.spec_table?.rows || []).find(row =>
     (Array.isArray(row) ? row[0] : row?.Specification) === "Capacity"
   );
@@ -531,6 +538,7 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
   const lineStyle = { display: "flex", gap: 10, fontFamily: "'Montserrat',sans-serif", fontSize: "0.82rem" };
   const labelStyle = { color: "#a67853", fontWeight: 700, textTransform: "uppercase", fontSize: "0.66rem", letterSpacing: "0.06em", minWidth: 74, paddingTop: 2 };
   const valueStyle = { color: "#5a4030", lineHeight: 1.5, fontWeight: 600 };
+  const selectedValueStyle = { color: "#fff", background: "#a67853", borderRadius: 4, padding: "1px 6px" };
 
   return (
     <div style={{
@@ -541,11 +549,11 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
     }}>
       {hasDots && (
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          {variants.map(v => (
+          {variants.map(v => hasColorDots ? (
             <button
               key={v.key}
               onClick={() => onSelectVariant(v)}
-              title={colorLabel(t, v.color)}
+              title={variantLabel(t, v)}
               style={{
                 width: 26, height: 26, borderRadius: "50%", padding: 0, cursor: "pointer",
                 background: VARIANT_COLOR_DOT[(v.color || "").toLowerCase()] || "#d5b99a",
@@ -555,6 +563,20 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
                 outlineOffset: 2,
               }}
             />
+          ) : (
+            // Size-style variations have no colour — show the size itself as a chip.
+            <button
+              key={v.key}
+              onClick={() => onSelectVariant(v)}
+              title={variantLabel(t, v)}
+              style={{
+                height: 30, borderRadius: 15, padding: "0 16px", cursor: "pointer",
+                fontFamily: "'Montserrat',sans-serif", fontSize: "0.76rem", fontWeight: 600,
+                transition: "all 0.18s", border: "none", outline: "none",
+                background: !showVideo && selectedVariant?.key === v.key ? "#a67853" : "transparent",
+                color: !showVideo && selectedVariant?.key === v.key ? "#fff" : "#8b5e3c",
+              }}
+            >{variantLabel(t, v)}</button>
           ))}
           {/* Video option — sits at the end of the color dots, same click
               pattern, so switching between colors and the video is one
@@ -578,13 +600,17 @@ function ProductInfoPanel({ product, variants, selectedVariant, onSelectVariant,
         </div>
       )}
       {codes.length > 0 && (
-        <div style={lineStyle}><span style={labelStyle}>{t("specLabels.code")}</span><span style={valueStyle}>{codes.join(" | ")}</span></div>
+        <div style={lineStyle}><span style={labelStyle}>{t("specLabels.code")}:</span><span style={valueStyle}>{variants.filter(v => v.code).map((v, i) => (
+          <React.Fragment key={v.key}>{i > 0 && " | "}<span style={selectedVariant?.key === v.key && !showVideo ? selectedValueStyle : undefined}>{v.code}</span></React.Fragment>
+        ))}</span></div>
       )}
       {capacity && (
-        <div style={lineStyle}><span style={labelStyle}>{t("specLabels.capacity")}</span><span style={valueStyle}>{capacity}</span></div>
+        <div style={lineStyle}><span style={labelStyle}>{t("specLabels.capacity")}:</span><span style={valueStyle}>{capacity}</span></div>
       )}
       {colors.length > 1 && (
-        <div style={lineStyle}><span style={labelStyle}>{tc("accessoryCard.option")}</span><span style={valueStyle}>{colors.join(" | ")}</span></div>
+        <div style={lineStyle}><span style={labelStyle}>{tc("accessoryCard.option")}:</span><span style={valueStyle}>{variants.filter(v => variantLabel(t, v)).map((v, i) => (
+          <React.Fragment key={v.key}>{i > 0 && " | "}<span style={selectedVariant?.key === v.key && !showVideo ? selectedValueStyle : undefined}>{variantLabel(t, v)}</span></React.Fragment>
+        ))}</span></div>
       )}
     </div>
   );
@@ -755,6 +781,24 @@ export default function AccessoriesPage() {
   const files        = getFilesArray(product);
   const images       = product ? getImagesArray(product, 'images') : [];
   const thumbnail    = product ? getImageUrl(product, 'thumbnail') : null;
+
+  // The grouped hero tile only earns its place when it differs from every
+  // variation image; for size-style products the thumbnail IS the first
+  // variation, so start on that one instead of showing it twice.
+  const heroDistinct = variants.length > 1 && !!thumbnail && !variants.some(v => v.image === thumbnail);
+  useEffect(() => {
+    if (variants.length > 1 && !heroDistinct) setSelectedVariant(variants[0]);
+  }, [variants, heroDistinct, slug]);
+
+  // Prev/next slots: hero (only when distinct) then each variation.
+  const slots = heroDistinct ? [null, ...variants] : variants;
+  const slotIdx = Math.max(0, slots.findIndex(v => (v?.key ?? null) === (selectedVariant?.key ?? null)));
+  const goSlot = (i) => {
+    const v = slots[(i + slots.length) % slots.length];
+    setSelectedVariant(v);
+    setImageErrors(e => ({ ...e, [v?.key || "__main__"]: false }));
+    setShowVideo(false);
+  };
   const specImages   = product ? getImagesArray(product, 'spec_images') : [];
   const videoUrl     = product?.resources?.video || null;
   const hasShortDesc = !!product?.short_description;
@@ -771,7 +815,7 @@ export default function AccessoriesPage() {
   // ProductInfoPanel above — don't repeat it as a whole separate
   // "Technical Data" table/section below when it's the only row.
   const capacityRow   = specRows.find(row => specCell(row, specHeaders[0], 0) === "Capacity");
-  const hasInfoPanel  = variants.some(v => v.code) || variants.filter(v => v.color).length > 1 || !!capacityRow || hasVideo;
+  const hasInfoPanel  = variants.some(v => v.code) || variants.filter(v => v.color || v.name).length > 1 || !!capacityRow || hasVideo;
   const visibleSpecRows = specRows.filter(row => !(hasInfoPanel && row === capacityRow));
   const hasVisibleSpecTable = specHeaders.length > 0 && visibleSpecRows.some(
     row => specHeaders.some((h, ci) => {
@@ -985,7 +1029,7 @@ export default function AccessoriesPage() {
                     ) : displayImage && !imageErrors[selectedVariant?.key || "__main__"] ? (
                       <ImageWithLoader
                         src={displayImage}
-                        alt={colorLabel(t, selectedVariant?.color) || selectedVariant?.code || product.name}
+                        alt={variantLabel(t, selectedVariant) || product.name}
                         onError={() => setImageErrors(e => ({ ...e, [selectedVariant?.key || "__main__"]: true }))}
                         style={{
                           position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain",
@@ -995,11 +1039,51 @@ export default function AccessoriesPage() {
                     ) : (
                       <i className="fa-regular fa-image" style={{ fontSize: "3.5rem", color: "#d5b99a" }} />
                     )}
+
+                    {/* Prev / next through the hero + variations (same look as the carousel arrows) */}
+                    {slots.length > 1 && (
+                      <>
+                        {[{ d: -1, side: "left", icon: "fa-chevron-left" }, { d: 1, side: "right", icon: "fa-chevron-right" }].map(({ d, side, icon }) => (
+                          <button key={side} aria-label={d < 0 ? "Previous" : "Next"}
+                            onClick={e => { e.stopPropagation(); goSlot(slotIdx + d); }}
+                            style={{
+                              position: "absolute", [side]: 10, top: "50%", transform: "translateY(-50%)",
+                              background: "transparent", border: "none", borderRadius: "50%", width: 34, height: 34,
+                              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                              color: "#a67853", zIndex: 10, transition: "all 0.2s",
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.color = "#8b5e3c"; e.currentTarget.style.transform = "translateY(-50%) scale(1.15)"; }}
+                            onMouseLeave={e => { e.currentTarget.style.color = "#a67853"; e.currentTarget.style.transform = "translateY(-50%)"; }}
+                          >
+                            <i className={`fa-solid ${icon}`} style={{ fontSize: "1.2rem" }} />
+                          </button>
+                        ))}
+                        <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 5, zIndex: 3 }}>
+                          {slots.map((_, i) => (
+                            <button key={i} aria-label={`Image ${i + 1}`} onClick={e => { e.stopPropagation(); goSlot(i); }}
+                              style={{ width: i === slotIdx ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none", cursor: "pointer", transition: "all 0.22s", background: i === slotIdx ? "#a67853" : "rgba(139,94,60,0.25)" }} />
+                          ))}
+                        </div>
+                        <span style={{
+                          position: "absolute", top: 10, right: 10, background: "rgba(44,26,14,0.55)", color: "#fff",
+                          fontSize: "0.65rem", fontWeight: 600, padding: "2px 8px", borderRadius: 20, zIndex: 3,
+                        }}>{slotIdx + 1} / {slots.length}</span>
+                      </>
+                    )}
+
+                    {/* Which option is on screen — e.g. "4L" for size variations */}
+                    {!showVideo && selectedVariant && variantLabel(t, selectedVariant) && (
+                      <span style={{
+                        position: "absolute", top: 10, left: 10, background: "#a67853", color: "#fff",
+                        fontSize: "0.8rem", fontWeight: 700, padding: "4px 12px", borderRadius: 20, zIndex: 3,
+                        boxShadow: "0 2px 6px rgba(90,64,48,0.25)",
+                      }}>{variantLabel(t, selectedVariant)}</span>
+                    )}
                   </div>
 
                   {/* Variant Swatch Buttons — grouped hero image first, then each color, then video (if any) — all one row, one shared "what's showing" state. */}
                   <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                    {variants.length > 1 && thumbnail && (
+                    {heroDistinct && (
                       <button
                         onClick={() => { setSelectedVariant(null); setImageErrors(e => ({ ...e, __main__: false })); setShowVideo(false); }}
                         title="All colors"
@@ -1037,7 +1121,7 @@ export default function AccessoriesPage() {
                           setImageErrors(e => ({ ...e, [variant.key]: false }));
                           setShowVideo(false);
                         }}
-                        title={colorLabel(t, variant.color) || variant.code}
+                        title={variantLabel(t, variant) || variant.code}
                         style={{
                           width: 60, height: 60, borderRadius: 8,
                           border: `2px solid ${!showVideo && selectedVariant?.key === variant.key ? "#a67853" : "#edddd0"}`,
@@ -1049,7 +1133,7 @@ export default function AccessoriesPage() {
                         {variant.image && !imageErrors[variant.key] ? (
                           <ImageWithLoader
                             src={variant.image}
-                            alt={colorLabel(t, variant.color) || variant.code}
+                            alt={variantLabel(t, variant) || variant.code}
                             onError={() => setImageErrors(e => ({ ...e, [variant.key]: true }))}
                             style={{
                               width: "100%", height: "100%", objectFit: "contain",
