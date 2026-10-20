@@ -1,0 +1,52 @@
+{
+  "slug": "aroma-oil-eucalyptus",
+  "productId": "2c9a8651-1e8c-42db-a8fe-8ad5869e0486",
+  "locale": "fi",
+  "instructions": "Replace every remaining ENGLISH string value below with its fi translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "Aromiöljy eukalyptus",
+    "short_description": "Tuo puhtaan, virkistävän eukalyptuksen tuoksun ja parantaa tuoksu- ja kosteushoitoa sekä saunassa että höyrysaunassa.",
+    "description": null,
+    "type": "Höyrytarvikkeet",
+    "spec_table_headers": [
+      "Koodi",
+      "Koko"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "250ml",
+        "name": "250ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "Ominaisuus",
+          "Tiedot"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "500ml",
+        "name": "500ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "Ominaisuus",
+          "Tiedot"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "4L",
+        "name": "4L",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "Ominaisuus",
+          "Tiedot"
+        ]
+      }
+    ]
+  }
+}

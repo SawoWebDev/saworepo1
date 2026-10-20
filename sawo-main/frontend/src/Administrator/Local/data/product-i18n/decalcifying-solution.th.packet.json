@@ -1,0 +1,89 @@
+{
+  "slug": "decalcifying-solution",
+  "productId": "1ed1908e-1c5f-4788-b8a5-10d901417a6e",
+  "locale": "th",
+  "instructions": "Replace every remaining ENGLISH string value below with its th translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Steam Accessories"
+    },
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "variations[0].spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[1].spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "variations[1].spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[2].spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "variations[2].spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "น้ำยาล้างตะกรัน",
+    "short_description": "น้ำยาพร้อมใช้ที่ออกแบบมาเพื่อละลายคราบตะกรันหินปูนภายในเครื่องกำเนิดไอน้ำ SAWO การใช้เป็นประจำช่วยฟื้นประสิทธิภาพการให้ความร้อน ปกป้องหัววัดน้ำ และยืดอายุการใช้งานของเครื่องทำไอน้ำ เหมาะสำหรับการบำรุงรักษาตามปกติทั้งในห้องอบไอน้ำที่บ้านและเชิงพาณิชย์",
+    "description": null,
+    "type": "อุปกรณ์เสริมสำหรับห้องอบไอน้ำ",
+    "spec_table_headers": [
+      "รหัส",
+      "ขนาด"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "250ml",
+        "name": "250ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "ข้อมูลจำเพาะ",
+          "รายละเอียด"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "500ml",
+        "name": "500ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "ข้อมูลจำเพาะ",
+          "รายละเอียด"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "4L",
+        "name": "4L",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "ข้อมูลจำเพาะ",
+          "รายละเอียด"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "decalcifying-solution",
+  "productId": "1ed1908e-1c5f-4788-b8a5-10d901417a6e",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Steam Accessories"
+    }
+  ],
+  "fields": {
+    "name": "除石灰液",
+    "short_description": "SAWOスチームジェネレーター内部の水垢（石灰スケール）を溶解するために開発された、すぐに使えるタイプの溶液です。定期的にお使いいただくことで加熱効率を回復させ、水位センサーを保護し、スチーム機器の寿命を最大限に延ばします。家庭用・業務用スチームルームの日常メンテナンスに最適です。",
+    "description": null,
+    "type": "スチームアクセサリー",
+    "spec_table_headers": [
+      "品番",
+      "容量"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "250ml",
+        "name": "250ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "仕様",
+          "詳細"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "500ml",
+        "name": "500ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "仕様",
+          "詳細"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "4L",
+        "name": "4L",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "仕様",
+          "詳細"
+        ]
+      }
+    ]
+  }
+}

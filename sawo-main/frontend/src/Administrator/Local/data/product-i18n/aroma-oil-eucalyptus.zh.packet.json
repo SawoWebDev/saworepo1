@@ -1,0 +1,52 @@
+{
+  "slug": "aroma-oil-eucalyptus",
+  "productId": "2c9a8651-1e8c-42db-a8fe-8ad5869e0486",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "桉树香氛精油",
+    "short_description": "散发清新怡人的桉树香气，提升桑拿房和蒸汽房中的香氛与湿润疗愈体验。",
+    "description": null,
+    "type": "蒸汽配件",
+    "spec_table_headers": [
+      "编码",
+      "容量"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "250ml",
+        "name": "250ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "规格",
+          "详情"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "500ml",
+        "name": "500ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "规格",
+          "详情"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "4L",
+        "name": "4L",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "规格",
+          "详情"
+        ]
+      }
+    ]
+  }
+}

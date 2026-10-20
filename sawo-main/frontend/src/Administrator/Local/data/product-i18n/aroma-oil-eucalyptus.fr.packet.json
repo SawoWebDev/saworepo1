@@ -1,0 +1,85 @@
+{
+  "slug": "aroma-oil-eucalyptus",
+  "productId": "2c9a8651-1e8c-42db-a8fe-8ad5869e0486",
+  "locale": "fr",
+  "instructions": "Replace every remaining ENGLISH string value below with its fr translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[0].spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "variations[0].spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[1].spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "variations[1].spec_table_headers[1]",
+      "source": "Detail"
+    },
+    {
+      "path": "variations[2].spec_table_headers[0]",
+      "source": "Specification"
+    },
+    {
+      "path": "variations[2].spec_table_headers[1]",
+      "source": "Detail"
+    }
+  ],
+  "fields": {
+    "name": "Huile aromatique parfum eucalyptus",
+    "short_description": "Diffuse un parfum d'eucalyptus pur et rafraîchissant, qui sublime la fragrance et la thérapie par l'humidité, aussi bien dans le sauna que dans le hammam.",
+    "description": null,
+    "type": "Accessoires vapeur",
+    "spec_table_headers": [
+      "Code",
+      "Taille"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "250ml",
+        "name": "250ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "Spécification",
+          "Détail"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "500ml",
+        "name": "500ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "Spécification",
+          "Détail"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "4L",
+        "name": "4L",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "Spécification",
+          "Détail"
+        ]
+      }
+    ]
+  }
+}

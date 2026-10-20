@@ -1,0 +1,52 @@
+{
+  "slug": "decalcifying-solution",
+  "productId": "1ed1908e-1c5f-4788-b8a5-10d901417a6e",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [],
+  "fields": {
+    "name": "除垢液",
+    "short_description": "即用型溶液，专为溶解 SAWO 蒸汽发生器内部的水垢而设计。定期使用可恢复加热效率、保护水位探头，并最大限度延长蒸汽设备的使用寿命。适用于家用和商用蒸汽房的日常维护。",
+    "description": null,
+    "type": "蒸汽配件",
+    "spec_table_headers": [
+      "编码",
+      "容量"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "250ml",
+        "name": "250ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "规格",
+          "详情"
+        ]
+      },
+      {
+        "index": 1,
+        "_english_name": "500ml",
+        "name": "500ml",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "规格",
+          "详情"
+        ]
+      },
+      {
+        "index": 2,
+        "_english_name": "4L",
+        "name": "4L",
+        "description": null,
+        "features": [],
+        "spec_table_headers": [
+          "规格",
+          "详情"
+        ]
+      }
+    ]
+  }
+}
