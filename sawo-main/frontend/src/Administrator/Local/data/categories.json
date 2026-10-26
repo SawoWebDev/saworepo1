@@ -100,5 +100,17 @@
     "name": "Stones",
     "slug": "stones",
     "description": null
+  },
+  {
+    "id": "b3239a10-ed79-4b2c-aee9-4b70928c8bd5",
+    "name": "Doors & Handles",
+    "slug": "doors-handles",
+    "description": null
+  },
+  {
+    "id": "060854d9-026d-4a29-a778-cf666958ebe2",
+    "name": "Ventilation & Miscellaneous",
+    "slug": "ventilation-miscellaneous",
+    "description": null
   }
 ]
