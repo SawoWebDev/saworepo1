@@ -2029,6 +2029,50 @@ export default function SaunaRooms({ currentUser }) {
     }
   };
 
+  // Images that live inside `configurations` (compact rooms etc.): the
+  // public viewer reads these, so the Media tab must expose them too.
+  // Nested bench/side entries ({ left: {images}, right: {images} }) included.
+  const configImageGroups = (() => {
+    const cfgs = form.configurations;
+    if (!cfgs || typeof cfgs !== "object") return [];
+    const out = [];
+    Object.entries(cfgs).forEach(([key, cfg]) => {
+      if (!cfg || typeof cfg !== "object") return;
+      if (Array.isArray(cfg.images) || cfg.panel_image) out.push({ path: [key], label: key, cfg });
+      Object.entries(cfg).forEach(([side, sub]) => {
+        if (sub && typeof sub === "object" && !Array.isArray(sub) && (Array.isArray(sub.images) || sub.panel_image))
+          out.push({ path: [key, side], label: `${key} / ${side}`, cfg: sub });
+      });
+    });
+    return out;
+  })();
+
+  const updateConfigEntry = (path, fn) => setForm(f => {
+    const next = JSON.parse(JSON.stringify(f.configurations));
+    let node = next;
+    path.slice(0, -1).forEach(k => { node = node[k]; });
+    const last = path[path.length - 1];
+    node[last] = fn(node[last]);
+    return { ...f, configurations: next };
+  });
+
+  const removeConfigImage = (path, index) =>
+    updateConfigEntry(path, c => ({ ...c, images: (c.images || []).filter((_, i) => i !== index) }));
+
+  const removeConfigPanelImage = path =>
+    updateConfigEntry(path, c => ({ ...c, panel_image: "" }));
+
+  const addConfigImages = async (path, files) => {
+    setUpImgs(true);
+    try {
+      const slug = effectiveSlug(form);
+      const urls = await Promise.all(files.map(f => uploadFileToR2(f, { entityPrefix: "sauna-rooms", slug, role: "gallery", currentUser })));
+      updateConfigEntry(path, c => ({ ...c, images: [...(c.images || []), ...urls] }));
+      add(`${urls.length} image(s) uploaded.`, "success");
+    } catch (err) { add(err.message, "error"); }
+    finally { setUpImgs(false); }
+  };
+
   const removeImageFile = (field, index) => {
     const url = form[field][index];
     if (url) Promise.allSettled([deleteStorageUrls([url]), trashMediaUrls([url], currentUser)]).catch(console.warn);
@@ -2716,6 +2760,23 @@ export default function SaunaRooms({ currentUser }) {
                   ) : (
                     <ImageUploader onUpload={uploadMoreImages} label="Add Gallery Images" multiple uploading={upImgs} />
                   )}
+
+                  {configImageGroups.map(g => (
+                    <React.Fragment key={g.path.join("/")}>
+                      <SectionLabel label={`Configuration Gallery — ${g.label}`} />
+                      {(g.cfg.images || []).length > 0 && (
+                        <ImageStrip images={g.cfg.images} onRemove={i => removeConfigImage(g.path, i)} />
+                      )}
+                      <AddMoreImagesButton label="Add Image" uploading={upImgs}
+                        onChange={e => e.target.files?.length && addConfigImages(g.path, Array.from(e.target.files))} />
+                      {g.cfg.panel_image && (
+                        <>
+                          <SectionLabel label={`Bench / Top View Diagram — ${g.label}`} />
+                          <ImageStrip images={[g.cfg.panel_image]} onRemove={() => removeConfigPanelImage(g.path)} />
+                        </>
+                      )}
+                    </React.Fragment>
+                  ))}
 
                   <SectionLabel label="Spec / Diagram Images" />
                   {form.spec_images.length > 0 ? (
