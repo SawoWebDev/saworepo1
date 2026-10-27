@@ -1,0 +1,36 @@
+{
+  "slug": "wooden-sandtimer-basic-65x340-551-bh",
+  "productId": "8a5d52ec-75cc-4e28-8522-5e0aca197820",
+  "locale": "ja",
+  "instructions": "Replace every remaining ENGLISH string value below with its ja translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Clocks & Timers"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Hemlock (551-BH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木製砂時計 ベーシック 65 x 340mm",
+    "short_description": null,
+    "description": null,
+    "type": "時計＆タイマー",
+    "spec_table_headers": [
+      "仕様",
+      "詳細"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Hemlock (551-BH)",
+        "name": "ヘムロック (551-BH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}

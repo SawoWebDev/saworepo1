@@ -1,0 +1,60 @@
+{
+  "slug": "wooden-sandtimer-basic-45x300-552-bd",
+  "productId": "2aa0a37f-9f3e-42ca-a5a2-71cc099d37e4",
+  "locale": "zh",
+  "instructions": "Replace every remaining ENGLISH string value below with its zh translation. Leave a field null/absent to skip it (falls back to English on the live site). Do NOT edit keys, array length/order, or the _english_* reference fields — apply matches variations/included_items by array index. See tmPrefilled for which values were auto-filled from translation memory (already translated, worth a quick sanity read, not a fresh translation).",
+  "tmPrefilled": [
+    {
+      "path": "type",
+      "source": "Clocks & Timers"
+    },
+    {
+      "path": "variations[0].name",
+      "source": "Cedar (552-BD)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[1].name",
+      "source": "Aspen (552-BA)",
+      "via": "material-dictionary"
+    },
+    {
+      "path": "variations[2].name",
+      "source": "Hemlock (552-BH)",
+      "via": "material-dictionary"
+    }
+  ],
+  "fields": {
+    "name": "木质基础款沙漏 45 x 300mm",
+    "short_description": null,
+    "description": null,
+    "type": "时钟与计时器",
+    "spec_table_headers": [
+      "规格",
+      "详情"
+    ],
+    "variations": [
+      {
+        "index": 0,
+        "_english_name": "Cedar (552-BD)",
+        "name": "雪松 (552-BD)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 1,
+        "_english_name": "Aspen (552-BA)",
+        "name": "白杨 (552-BA)",
+        "description": null,
+        "features": []
+      },
+      {
+        "index": 2,
+        "_english_name": "Hemlock (552-BH)",
+        "name": "铁杉 (552-BH)",
+        "description": null,
+        "features": []
+      }
+    ]
+  }
+}
