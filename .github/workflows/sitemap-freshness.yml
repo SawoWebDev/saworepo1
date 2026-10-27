@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       # generate-sitemap.js has zero npm dependencies (only Node's built-in
       # fs/path) and does zero network calls — it just reads local JSON
