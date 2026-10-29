@@ -6,11 +6,22 @@ import { useLocalProducts } from "../../Administrator/Local/useLocalProducts";
 import { ImageWithLoader } from "../../components/ImageWithLoader";
 import { Lightbox } from "../../components/Lightbox";
 import SEO from "../../components/SEO";
+import ProductJsonLd from "../../components/ProductJsonLd";
+
 import ProductInquiryBanner from "../../components/ProductInquiryBanner";
 import { isPubliclyVisible } from "../../local-storage/visibility";
 import { getVariationsArray } from "./DispAccessories";
 import { useLocale, useLocaleT, useLocalizedPath } from "../../i18n/LocaleContext";
 import { translateSpecLabel, translateHtmlTableCells } from "../../utils/specLabel";
+
+// Categories (exact, lowercase) that emit Product JSON-LD — only those the
+// audit (scripts/seo/jsonld-audit.mjs) shows complete. Still off: accessories
+// without spec tables (heater guard, collars, controls, steam accessories...).
+const JSONLD_CATEGORIES = [
+  "wall-mounted", "towers", "dragonfire", "floor",
+  "thermometers", "stones", "ladles", "pails", "pail shower", "benches",
+  "headrest & backrest", "sauna lights", "cloth hangers",
+];
 
 function localOrRemote(product, field) {
   return product?.[`local_${field}`] || product?.[field] || null;
@@ -1098,6 +1109,17 @@ export default function ProductPage() {
         path={localize(`/products/${product.slug}`)}
         image={product.og_image || thumbnail || undefined}
       />
+      {/* JSON-LD rollout is staged by category — see docs/seo/jsonld-rollout.md. */}
+      {(product.categories || []).some(c => JSONLD_CATEGORIES.includes(String(c).toLowerCase())) && (
+        <ProductJsonLd
+          product={product}
+          locale={locale}
+          path={localize(`/products/${product.slug}`)}
+          image={thumbnail || product.og_image}
+          images={images}
+          itemCode={itemCode}
+        />
+      )}
       <style>{`
         @keyframes ppFadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
 

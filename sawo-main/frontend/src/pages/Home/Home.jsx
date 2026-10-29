@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ChevronRight from "../../components/icons/ChevronRight";
 import SEO from "../../components/SEO";
+import SiteJsonLd from "../../components/SiteJsonLd";
 import Hero from "./Hero";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
@@ -31,6 +32,7 @@ const Home = () => {
         description={locale === "en" ? undefined : t("meta.description")}
         hreflangAlternates={{ en: "/", fi: "/fi", de: "/de", zh: "/zh" }}
       />
+      <SiteJsonLd />
       <Hero />
 
       {/* Section 1 */}
